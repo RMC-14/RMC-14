@@ -10,6 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -80,6 +81,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
             hive.Comp.CurrentQueen = null;
+            hive.Comp.AnnouncedQueenDeathCooldownOver = false;
+            hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
             Dirty(hive);
         }
     }
@@ -95,7 +98,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             if (!prototype.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
-            if (xeno.UnlockAt == default || xeno.Hidden)
+            if (xeno.UnlockAt == TimeSpan.Zero || prototype.HasComponent<XenoHiddenComponent>(_compFactory))
                 continue;
 
             ent.Comp.Unlocks.GetOrNew(xeno.UnlockAt).Add(prototype.ID);
@@ -345,7 +348,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                     continue;
 
                 var position = _transform.GetMoverCoordinates(uid);
-                larva = SpawnAtPosition(hive.Comp.BurrowedLarvaId, position);
+                larva = Spawn(hive.Comp.BurrowedLarvaId, position);
+                _transform.AttachToGridOrMap(larva.Value);
                 return true;
             }
 

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GameStates;
@@ -26,6 +26,7 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly SharedRMCWarpSystem _rmcWarp = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<AreaLabelComponent> _areaLabelQuery;
@@ -161,7 +162,7 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(grid, indices, out var area, out _))
             return false;
 
-        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortar))
+        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortarPlace))
             return false;
 
         return area.Value.Comp.WeatherEnabled;
@@ -172,7 +173,7 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(grid, indices, out var area, out _))
             return false;
 
-        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortar))
+        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortarPlace))
             return true;
 
         return !area.Value.Comp.WeatherEnabled;
@@ -194,7 +195,7 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
-        if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
+        if (IsRoofed(coordinates, r => !r.Comp.CanMortarFire))
             return false;
 
         return area.Value.Comp.MortarFire;
@@ -205,7 +206,7 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
-        if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
+        if (IsRoofed(coordinates, r => !r.Comp.CanMortarPlace))
             return false;
 
         return area.Value.Comp.MortarPlacement;
@@ -231,6 +232,9 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
+        if (IsRoofed(coordinates, r => !r.Comp.CanFulton))
+            return false;
+
         return area.Value.Comp.Fulton;
     }
 
@@ -239,7 +243,32 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
+        if (IsRoofed(coordinates, r => !r.Comp.CanLase))
+            return false;
+
         return area.Value.Comp.Lasing;
+    }
+
+    public bool CanMedevac(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanMedevac))
+            return false;
+
+        return area.Value.Comp.Medevac;
+    }
+
+    public bool CanParadrop(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanParadrop))
+            return false;
+
+        return area.Value.Comp.Paradropping;
     }
 
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
@@ -252,6 +281,25 @@ public sealed class AreaSystem : EntitySystem
 
             if (coordinates.TryDistance(EntityManager, uid.ToCoordinates(), out var distance) &&
                 distance <= roof.Range)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsRoofed(MapCoordinates mapCoordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
+    {
+        var roofs = EntityQueryEnumerator<RoofingEntityComponent>();
+        while (roofs.MoveNext(out var uid, out var roof))
+        {
+            if (!predicate((uid, roof)))
+                continue;
+
+            var distance = (mapCoordinates.Position - _transform.ToMapCoordinates(uid.ToCoordinates()).Position).Length();
+
+            if (distance <= roof.Range)
             {
                 return true;
             }
@@ -289,6 +337,9 @@ public sealed class AreaSystem : EntitySystem
     public bool CanSupplyDrop(MapCoordinates mapCoordinates)
     {
         if (!TryGetArea(mapCoordinates, out var area, out _))
+            return false;
+
+        if (IsRoofed(mapCoordinates, r => !r.Comp.CanSupplyDrop))
             return false;
 
         return area.Value.Comp.SupplyDrop;
@@ -331,7 +382,7 @@ public sealed class AreaSystem : EntitySystem
                     if (found)
                         continue;
 
-                    var tile = tileRef.GetContentTileDefinition(_tile);
+                    var tile = _turf.GetContentTileDefinition(tileRef);
                     if (tile.MinimapColor != default)
                     {
                         areaGrid.Colors[pos] = tile.MinimapColor;

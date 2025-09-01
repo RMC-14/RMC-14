@@ -24,6 +24,7 @@
   - type: Tag
     tags:
     - Radio
+  - type: ChatRepeatIgnoreSender # RMC14
 
 - type: entity
   name: security radio
@@ -33,6 +34,7 @@
   components:
   - type: RadioMicrophone
     broadcastChannel: Security
+    listenRange: 1
   - type: RadioSpeaker
     channels:
     - Security

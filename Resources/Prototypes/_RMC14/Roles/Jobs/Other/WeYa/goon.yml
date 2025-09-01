@@ -1,0 +1,101 @@
+# Corporate Bodyguard
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaGoon
+  name: rmc-job-name-pmc-bodyguard
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobWeYaGoon
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobWeYaGoon
+  icon: "RMCJobIconPMCGoonStandard"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Goon
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillFirearms: 1
+
+- type: playTimeTracker
+  id: RMCJobWeYaGoon
+
+- type: startingGear
+  id: RMCJobWeYaGoon
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressGoon
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
+    pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - RMCZipties
+    - RMCZipties
+    - RMCZipties
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    pocket1:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    outerClothing:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidWeYaGoon
+  name: weya corporate ghost role goon
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaGoon
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCWeYaGoon
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-bodyguard
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCWeYaGoon
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGoonStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_standard

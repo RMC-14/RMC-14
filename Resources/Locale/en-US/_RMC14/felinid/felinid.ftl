@@ -61,3 +61,19 @@ marking-FelinidTiger = Tiger tail
 marking-FelinidTiger-m_tail_tiger_primary = Primary
 marking-FelinidTiger-m_tail_tiger_secondary = Tip of tail
 marking-FelinidTiger-m_tail_tiger_tertiary = Stripes
+
+marking-FelinidCatSnout = Cat Snout
+marking-FelinidCatSnout-snout_cat = Primary
+marking-FelinidCatSnout-snout_cat_nose = Nose
+
+marking-FelinidFurMale = Fur
+marking-FelinidFurMale-fur_mas = Color
+marking-FelinidFurFemale = Fur
+marking-FelinidFurMale-fur_fem = Color
+
+marking-FelinidLeopard = Leopard tail
+marking-FelinidLeopard-m_tail_leopard_primary = Primary
+marking-FelinidLeopard-m_tail_leopard_tertiary = Spots
+
+marking-FelinidCatBig = Big Cat tail
+marking-FelinidCatBig-m_tail_catbig_primary = Primary

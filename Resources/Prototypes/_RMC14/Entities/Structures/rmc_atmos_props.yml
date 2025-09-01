@@ -7,7 +7,7 @@
   components:
   - type: Transform
   - type: Physics
-    bodyType: Dynamic  
+    bodyType: Dynamic
   - type: ItemToggle
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
@@ -20,8 +20,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: pscrubber_1 }
           False: { state: pscrubber_0 }
   - type: InteractionOutline
@@ -56,7 +56,7 @@
             collection: MetalBreak
         - !type:DoActsBehavior
           acts: ["Destruction"]
-  
+
 - type: entity
   id: RMCAirScrubberStationary
   parent: RMCAirScrubberPortable
@@ -64,17 +64,17 @@
   description: It's large and securely attached.
   components:
   - type: Physics
-    bodyType: Static 
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: scrubber_0
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scrubber_1 }
           False: { state: scrubber_0 }
-          
+
 # Pumps
 - type: entity
   id: RMCAirPumpPortable
@@ -88,8 +88,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: psiphon_1 }
           False: { state: psiphon_0 }
   - type: ItemToggleActiveSound
@@ -98,7 +98,7 @@
       params:
         volume: -5
         maxDistance: 5
-        
+
 - type: entity
   id: RMCAirPumpStationary
   parent: RMCAirPumpPortable
@@ -106,27 +106,28 @@
   description: It's large and securely attached.
   components:
   - type: Physics
-    bodyType: Static 
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: siphon_0
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: siphon_0 }
           False: { state: siphon_0 }
 
 # Heaters
 - type: entity
-  parent: BaseStructureDynamic
   id: RMCRadiator
   name: radiator
-  description: It's a radiator. It heats the room through convection with hot water.  
+  description: It's a radiator. It heats the room through convection with hot water.
   components:
   - type: Transform
   - type: Physics
-    bodyType: static  
+    bodyType: static
+    canCollide: false
+  - type: Clickable
   - type: ItemToggle
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
@@ -136,17 +137,6 @@
     sprite: _RMC14/Structures/atmos.rsi
     state: radiator
     noRot: true
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.3
-        density: 155
-        mask:
-        - MachineMask
-        layer:
-        - MobMask
   - type: InteractionOutline
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -172,7 +162,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: radiator-r
-  
+
 - type: entity
   id: RMCSpaceHeater
   parent: BaseStructureDynamic
@@ -181,7 +171,7 @@
   components:
   - type: Transform
   - type: Physics
-    bodyType: Dynamic  
+    bodyType: Dynamic
   - type: ItemToggle
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
@@ -194,8 +184,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: sheater1 }
           False: { state: sheater0 }
   - type: InteractionOutline
@@ -218,4 +208,4 @@
     castShadows: false
     radius: 1.5
     color: orange
-  - type: ItemTogglePointLight 
+  - type: ItemTogglePointLight

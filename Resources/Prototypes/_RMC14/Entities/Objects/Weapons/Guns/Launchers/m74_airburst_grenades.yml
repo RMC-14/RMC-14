@@ -104,6 +104,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+  - type: InheritAcid
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
@@ -144,7 +145,8 @@
     soundHit:
       path: /Audio/Effects/gen_hit.ogg
   - type: ClusterLimitHits
-    limit: 5
+    limit: 0
+    ignoreFirstHit: true
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: ContainerContainer
@@ -156,10 +158,9 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.15,-0.45,0.15,0.15"
-        hard: false
         mask:
-        - Impassable
-        - BulletImpassable
+        - ItemMask
+        restitution: 1
   - type: IgnorePredictionHide
 
 - type: entity
@@ -275,7 +276,7 @@
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
 
-#Payloads
+#Payload projectiles
 - type: entity
   parent: RMCBaseBullet
   id: RMCStarShellBullet
@@ -312,10 +313,28 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    stacks: 2
+    duration: 2
+  - type: Fixtures
+    fixtures:
+      projectile:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   parent: RMCBaseBullet
+  id: RMCBaseAirburstRound
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: PreventCollideWithDead
+
+- type: entity
+  parent: RMCBaseAirburstRound
   id: RMCHornetRound
   name: .22 Hornet Round
   categories: [ HideSpawnMenu ]
@@ -337,7 +356,7 @@
     amount: 25
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseAirburstRound
   id: RMCShrapnelJagged
   name: Jagged Shrapnel
   categories: [ HideSpawnMenu ]
@@ -367,7 +386,7 @@
       falloff: 33
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseAirburstRound
   id: RMCShrapnelIncendiary
   name: Flaming Shrapnel
   categories: [ HideSpawnMenu ]
@@ -445,6 +464,7 @@
     fillPrototype: RMCBatonSlugHIRR
     capacity: 1
     distance: 1
+  - type: InheritAcid
   - type: IgnoreArc
   - type: Fixtures
     fixtures:

@@ -27,6 +27,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCCannedDrink
 
 - type: entity
   parent: CMDrinkCanBase
@@ -81,6 +84,8 @@
         - ReagentId: FourteenLoko
           Quantity: 30
         maxVol: 50
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-thirteen-loko
 
 - type: entity
   parent: CMDrinkCanBase
@@ -236,6 +241,8 @@
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
   - type: Item
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-boda
 
 - type: entity
   parent: CMDrinkCanCola
@@ -269,7 +276,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
-  name: we-ya lite
+  name: We-Ya Lite
   description: Beer. You've dialed in your target. Time to fire for effect.
   components:
   - type: Sprite
@@ -287,7 +294,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanAle
-  name: we-ya IPA
+  name: We-Ya IPA
   description: Beer's misunderstood cousin.
   components:
   - type: Sprite
@@ -655,3 +662,6 @@
         - ReagentId: Water
           Quantity: 25
         maxVol: 50
+
+- type: Tag
+  id: RMCCannedDrink

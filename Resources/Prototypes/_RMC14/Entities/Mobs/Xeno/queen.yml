@@ -1,13 +1,18 @@
-﻿- type: entity
+- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoMobCollision
-  id: CMXenoQueen
+  id: RMCXenoQueenBase
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
@@ -129,6 +134,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -218,10 +224,10 @@
     liveUpdate: true
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenoqueen
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
@@ -242,15 +248,62 @@
   - type: XenoOmitNumber
   - type: RMCFireArmorDebuffModifier
     debuffModifier: 1.4
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can ignite the queen
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can bypass immunity
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
   - type: QueenEyeAction
   - type: StunFriendlyXenoOnStep
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-queen
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
+  - type: RMCTrackable
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: CMXenoQueen
+  #components:
+  # - type: XenoEvolution #can be enabled for events like april fools.
+  #   strains:
+  #   - RMCXenoQueenMaid
 
 - type: entity
   id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMaid
+  suffix: Cat Maid Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-maid-name
+    description: rmc-xeno-maid-description
+    popup: rmc-xeno-maid-popup
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
 
 - type: entity
   parent: StationAiHolo
@@ -263,7 +316,7 @@
     color: "#a800a8"
     sprite: _RMC14/Effects/xeno_eye.rsi
     layers:
-    - state: hologram
+    - state: hudeye1
   - type: Eye
     drawFov: false
   - type: QueenEye

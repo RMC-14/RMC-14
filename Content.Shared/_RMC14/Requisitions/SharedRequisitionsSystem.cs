@@ -1,11 +1,15 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Climbing.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.StepTrigger.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
+using System.Numerics;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsRailingMode;
 
 namespace Content.Shared._RMC14.Requisitions;
@@ -17,14 +21,20 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
 
     public int Starting { get; private set; }
     public int StartingDollarsPerMarine { get; private set; }
     public int PointsScale { get; private set; }
 
+
+    private MapId? _purchasesMap;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<MarineScaleChangedEvent>(OnMarineScaleChanged);
 
@@ -185,5 +195,27 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         account.Comp.Balance = startingPoints + scalePoints + perMarinePoints;
 
         Dirty(account);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _purchasesMap = null;
+    }
+
+    public void CreateSpecialDelivery(EntProtoId proto)
+    {
+        var map = EnsurePurchasesMap();
+        var delivery = Spawn(proto, new MapCoordinates(Vector2.Zero, map));
+        EnsureComp<RequisitionsCustomDeliveryComponent>(delivery);
+    }
+
+    private MapId EnsurePurchasesMap()
+    {
+        if (_purchasesMap != null)
+            return _purchasesMap.Value;
+
+        _map.CreateMap(out var map);
+        _purchasesMap = map;
+        return map;
     }
 }

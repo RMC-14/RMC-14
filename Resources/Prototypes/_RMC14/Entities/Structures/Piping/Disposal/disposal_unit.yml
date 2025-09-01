@@ -11,6 +11,8 @@
       map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
     - state: disposal
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: disposal-charging
+      map: [ "enum.DisposalUnitVisualLayers.BaseCharging" ]
     - state: disposal-flush
       map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: dispover-charge
@@ -47,9 +49,13 @@
   - type: DisposalUnit
   - type: ThrowInsertContainer
     containerId: disposals
-    probability: 0
+    probability: 1
   - type: RequireProjectileTarget
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    minimumStage: 2
+    unanchor: true

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Visor;
 using Content.Shared.Actions;
@@ -133,10 +133,10 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionActivate(Entity<NightVisionVisorComponent> ent, ref ActivateVisorEvent args)
     {
-        if (HasComp<ScopingComponent>(args.User))
+        if (args.User != null && HasComp<ScopingComponent>(args.User))
         {
             _popup.PopupClient("You cannot use the night vision optic while using optics.",
-                args.User,
+                args.User.Value,
                 args.User,
                 PopupType.SmallCaution);
             return;
@@ -156,9 +156,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
         AddComp(args.CycleableVisor, comp, true);
         Dirty(args.CycleableVisor, comp);
 
-        if (_inventory.InSlotWithFlags(args.CycleableVisor.Owner, comp.SlotFlags))
+        if (_inventory.InSlotWithFlags(args.CycleableVisor.Owner, comp.SlotFlags) && args.User != null)
         {
-            EnableNightVisionItem((args.CycleableVisor, comp), args.User);
+            EnableNightVisionItem((args.CycleableVisor, comp), args.User.Value);
             _audio.PlayLocal(ent.Comp.SoundOn, ent, args.User);
         }
     }

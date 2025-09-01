@@ -2,12 +2,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Ghost;
@@ -39,9 +43,9 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Nest;
 public sealed class XenoNestSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGhostSystem _ghost = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
@@ -87,6 +91,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
 
         SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
+        SubscribeLocalEvent<XenoNestableComponent, ShouldHandleVirtualItemInteractEvent>(OnNestableShouldHandle);
 
         SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
         SubscribeLocalEvent<XenoNestedComponent, ComponentRemove>(OnNestedRemove);
@@ -143,7 +148,16 @@ public sealed class XenoNestSystem : EntitySystem
             return;
 
         args.Handled = true;
-        TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
+        TryStartNesting(args.User, (args.Target.Value, surface), ent);
+    }
+
+    private void OnNestableShouldHandle(Entity<XenoNestableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Event.User) &&
+            HasComp<XenoNestSurfaceComponent>(args.Event.Target))
+        {
+            args.Handle = true;
+        }
     }
 
     private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
@@ -181,7 +195,7 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (args.DoAfter.Args.Target is not { } target ||
             TerminatingOrDeleted(target) ||
-            !CanNestPopup(args.DoAfter.Args.User, target, ent, out _))
+            !CanNestPopup(args.DoAfter.Args.User, target, ent, out _, allDirs: args.Event.AllDirs))
         {
             args.Cancel();
         }
@@ -189,11 +203,19 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Target is not { } victim)
             return;
 
-        if (args.Target is not { } victim ||
-            !CanNestPopup(args.User, victim, ent, out var direction))
+        if (args.Cancelled)
+        {
+            _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} stopped nesting {ToPrettyString(victim):victim} to surface {ToPrettyString(ent):surface}");
+            return;
+        }
+
+        if (args.Handled)
+            return;
+
+        if (!CanNestPopup(args.User, victim, ent, out var direction, allDirs: args.AllDirs))
         {
             return;
         }
@@ -209,14 +231,14 @@ public sealed class XenoNestSystem : EntitySystem
         var nestCoordinates = ent.Owner.ToCoordinates();
         var offset = direction switch
         {
-            Direction.South => new Vector2(0, -0.25f),
-            Direction.East => new Vector2(0.5f, 0),
-            Direction.North => new Vector2(0, 0.5f),
-            Direction.West => new Vector2(-0.5f, 0),
+            Direction.South => new Vector2(0, -0.52f),
+            Direction.East => new Vector2(0.52f, 0),
+            Direction.North => new Vector2(0, 0.52f),
+            Direction.West => new Vector2(-0.52f, 0),
             _ => Vector2.Zero,
         };
 
-        var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates);
+        var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates, rotation: direction.Value.ToAngle());
         _transform.SetCoordinates(nest, nestCoordinates.Offset(offset));
 
         _hive.SetSameHive(args.User, nest);
@@ -234,7 +256,7 @@ public sealed class XenoNestSystem : EntitySystem
         Dirty(victim, nestedComp);
 
         _transform.SetCoordinates(victim, nest.ToCoordinates());
-        _transform.SetLocalRotation(victim, direction.Value.ToAngle());
+        _transform.SetLocalRotation(victim, Angle.Zero);
 
         _standing.Stand(victim, force: true);
 
@@ -255,6 +277,8 @@ public sealed class XenoNestSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-observer", ("user", args.User), ("target", victim)), args.User, recipient);
             }
         }
+
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} nested {ToPrettyString(victim):victim} to surface {ToPrettyString(ent):surface}");
     }
 
     #region DragDrop
@@ -328,22 +352,25 @@ public sealed class XenoNestSystem : EntitySystem
         Dirty(ent, nested);
     }
 
-    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    public bool TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim, out DoAfterId? doAfterId, bool allDirs = false)
     {
-        if (!HasComp<XenoComponent>(user) || !HasComp<HandsComponent>(user) ||
-            !CanNestPopup(user, victim, surface, out _))
+        doAfterId = null;
+        if (!HasComp<XenoComponent>(user) ||
+            !HasComp<HandsComponent>(user) ||
+            !CanNestPopup(user, victim, surface, out _, allDirs: allDirs))
         {
-            return;
+            return false;
         }
 
-        var ev = new XenoNestDoAfterEvent();
+        var ev = new XenoNestDoAfterEvent { AllDirs = allDirs };
         var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
         {
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter, out doAfterId))
+            return true;
 
         // TODO RMC14 make a method to do this
         _popup.PopupClient(Loc.GetString("cm-xeno-nest-pin-self", ("target", victim)), user, user);
@@ -362,30 +389,41 @@ public sealed class XenoNestSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("cm-xeno-nest-pin-observer", ("user", user), ("target", victim)), user, recipient);
             }
         }
+
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(user):user} started nesting {ToPrettyString(victim):victim} to surface {ToPrettyString(surface):surface}");
+        return true;
+    }
+
+    public bool TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    {
+        return TryStartNesting(user, surface, victim, out _);
     }
 
     private bool CanBeNested(EntityUid user,
-        EntityUid victim,
+        EntityUid? victim,
         Entity<XenoNestSurfaceComponent?> surface,
         out List<Direction> directions,
-        bool silent = false)
+        bool silent = false,
+        bool allDirs = false)
     {
         directions = new List<Direction>();
-
-        if (!HasComp<XenoNestableComponent>(victim))
+        if (victim != null)
         {
-            if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victim)), surface, user);
+            if (!HasComp<XenoNestableComponent>(victim))
+            {
+                if (!silent)
+                    _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victim)), surface, user);
 
-            return false;
-        }
+                return false;
+            }
 
-        if (_mobState.IsDead(victim))
-        {
-            if (!silent)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-nest-failed-dead", ("target", victim)), surface, user);
+            if (_mobState.IsDead(victim.Value))
+            {
+                if (!silent)
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-nest-failed-dead", ("target", victim)), surface, user);
 
-            return false;
+                return false;
+            }
         }
 
         // Check cardinal face or two cardinals when diagonal
@@ -404,16 +442,16 @@ public sealed class XenoNestSystem : EntitySystem
 
         var flags = attemptedDirection.AsFlag();
         // If directions doesn't contain the direction and flag is set, add it.
-        if (!directions.Contains(Direction.South) && flags.HasFlag(DirectionFlag.South))
+        if (!directions.Contains(Direction.South) && (allDirs || flags.HasFlag(DirectionFlag.South)))
             directions.Add(Direction.South);
-        if (!directions.Contains(Direction.East) && flags.HasFlag(DirectionFlag.East))
+        if (!directions.Contains(Direction.East) && (allDirs || flags.HasFlag(DirectionFlag.East)))
             directions.Add(Direction.East);
-        if (!directions.Contains(Direction.North) && flags.HasFlag(DirectionFlag.North))
+        if (!directions.Contains(Direction.North) && (allDirs || flags.HasFlag(DirectionFlag.North)))
             directions.Add(Direction.North);
-        if (!directions.Contains(Direction.West) && flags.HasFlag(DirectionFlag.West))
+        if (!directions.Contains(Direction.West) && (allDirs || flags.HasFlag(DirectionFlag.West)))
             directions.Add(Direction.West);
 
-        if (!Resolve(surface, ref surface.Comp) || !IsNestSurfaceFromHiveWeeds((surface.Owner, surface.Comp), priorityDir))
+        if (!Resolve(surface, ref surface.Comp) || !IsNestSurfaceFromHiveWeeds((surface.Owner, surface.Comp), priorityDir, user))
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
@@ -424,22 +462,22 @@ public sealed class XenoNestSystem : EntitySystem
         return true;
     }
 
-
-    private bool CanNestPopup(EntityUid user,
-        EntityUid victim,
+    public bool CanNestPopup(EntityUid user,
+        EntityUid? victim,
         Entity<XenoNestSurfaceComponent> surface,
         [NotNullWhen(true)] out Direction? direction,
-        bool silent = false)
+        bool silent = false,
+        bool allDirs = false)
     {
         direction = null;
 
-        if (!CanBeNested(user, victim, (surface, surface.Comp), out var directions, silent))
+        if (!CanBeNested(user, victim, (surface, surface.Comp), out var directions, silent, allDirs))
             return false;
 
-        if (!_standing.IsDown(victim))
+        if (victim != null && !_standing.IsDown(victim.Value))
         {
             if (!silent)
-                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim, user, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-target-resisting", ("target", victim)), victim.Value, user, PopupType.MediumCaution);
 
             return false;
         }
@@ -449,7 +487,7 @@ public sealed class XenoNestSystem : EntitySystem
         string? response = null;
         foreach (var dir in directions)
         {
-            if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
+            if (_turf.GetTileRef(nestCoords.Offset(dir.ToVec())) is not { } tile ||
                 _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
                 response ??= Loc.GetString("cm-xeno-nest-failed-cant-there");
@@ -478,7 +516,7 @@ public sealed class XenoNestSystem : EntitySystem
         return true;
     }
 
-    private bool IsNestSurfaceFromHiveWeeds(Entity<XenoNestSurfaceComponent> nestSurface, Direction dir)
+    private bool IsNestSurfaceFromHiveWeeds(Entity<XenoNestSurfaceComponent> nestSurface, Direction dir, EntityUid user)
     {
         var (ent, comp) = nestSurface;
 
@@ -491,6 +529,9 @@ public sealed class XenoNestSystem : EntitySystem
                 return false;
             }
 
+            if (HasComp<XenoNestIgnoreWeedsUserComponent>(user))
+                return true;
+
             return _xenoWeeds.IsOnHiveWeeds((grid.Value, gridComp), ent.ToCoordinates());
         }
         // Check if the weeds in the direction of this is a hive weed. (Weed wall)
@@ -500,11 +541,15 @@ public sealed class XenoNestSystem : EntitySystem
 
             var underNestCooords = nestCoords.Offset(dir.ToVec());
 
-            if (_transform.GetGrid(underNestCooords) is not EntityUid gridEntity ||
+            if (_transform.GetGrid(underNestCooords) is not { } gridEntity ||
                 !TryComp<MapGridComponent>(gridEntity, out var gridComp))
             {
                 return false;
             }
+
+            if (HasComp<XenoNestIgnoreWeedsUserComponent>(user))
+                return true;
+
             return _xenoWeeds.IsOnHiveWeeds((gridEntity, gridComp), underNestCooords);
         }
 

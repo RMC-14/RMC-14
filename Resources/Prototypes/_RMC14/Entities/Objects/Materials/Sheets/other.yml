@@ -49,6 +49,14 @@
 
 - type: entity
   parent: CMSheetPhoron
+  id: CMSheetPhoron15
+  suffix: 15
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: CMSheetPhoron
   id: CMSheetPhoron25
   suffix: 25
   components:
@@ -198,6 +206,24 @@
   - type: Tag
     tags:
     - Sheet
+  - type: RMCConstructionItem
+    buildable:
+    # - RMCSandalsBuild
+    - RMCFloorTileWoodBuild
+    - RMCCampfireBuild
+    # wooden chair
+    - RMCWoodenBarricadeBuild
+    - RMCWoodenCrateBuild
+    # wooden door
+    # coffin
+    # baseball bat
+    # wooden cross
+    # wooden pole
+    # fishing pole
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: RMCPlankWood
@@ -206,6 +232,14 @@
   components:
   - type: Stack
     count: 10
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood25
+  suffix: 25
+  components:
+  - type: Stack
+    count: 25
 
 - type: entity
   parent: RMCPlankWood
@@ -226,7 +260,7 @@
 - type: entity
   parent: RMCPlankWood
   id: RMCPlankWood2
-  suffix: Single
+  suffix: 2
   components:
   - type: Stack
     count: 2

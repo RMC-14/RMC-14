@@ -73,7 +73,7 @@
           True: { visible: true }
           False: { visible: false }
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
+    network: RMCChemDispenserGround
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: RequiresSkill
@@ -202,6 +202,7 @@
       - CMKelotane
       - CMDylovene
       - CMDexalin
+      - CMDexalinPlus
       - CMInaprovaline
       - CMEpinephrine
       # TODO RMC-14 Peridaxon
@@ -215,4 +216,3 @@
   components:
   - type: RMCChemicalDispenser
     network: RMCChemStorageGround
-

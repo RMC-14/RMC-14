@@ -162,10 +162,10 @@ namespace Content.Client.UserInterface.Controls
             AddChild(IconLabel = new Label
             {
                 Text = "",
-                SetSize = new Vector2(1f, 1f),
-                HorizontalAlignment = HAlignment.Center,
+                HorizontalAlignment = HAlignment.Left,
                 VerticalAlignment = VAlignment.Center,
                 Visible = true,
+                Margin = new Thickness(10, 0, 0, 0),
             });
 
             AddChild(StorageButton = new TextureButton

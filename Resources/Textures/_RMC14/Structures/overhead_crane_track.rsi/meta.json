@@ -1,0 +1,48 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 PVE at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/structures/props/cargocrane_tracks.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "corner",
+      "directions": 4
+    },
+    {
+      "name": "vertical"
+    },
+    {
+      "name": "horizontal"
+    },
+    {
+      "name": "t-joint"
+    },
+    {
+      "name": "t-joint2"
+    },
+    {
+      "name": "t-joint3"
+    },
+    {
+      "name": "t-joint4"
+    },
+    {
+      "name": "vertical_endcap1"
+    },
+    {
+      "name": "vertical_endcap2"
+    },
+    {
+      "name": "horizontal_endcap1"
+    },
+    {
+      "name": "horizontal_endcap2"
+    },
+    {
+      "name": "cross"
+    }
+  ]
+}

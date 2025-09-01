@@ -1,0 +1,16 @@
+- type: entity
+  id: RMCHeadXeno
+  name: "xenonid head"
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: BodyPart
+    partType: Head
+    vital: true
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+  - type: Tag
+    tags:
+      - Head

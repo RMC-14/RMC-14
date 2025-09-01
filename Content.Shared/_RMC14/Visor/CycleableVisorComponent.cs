@@ -1,6 +1,7 @@
-﻿using Content.Shared.Tools;
+using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Visor;
 
@@ -22,4 +23,7 @@ public sealed partial class CycleableVisorComponent : Component
 
     [DataField, AutoNetworkedField]
     public int? CurrentVisor;
+
+    [DataField(required: true), AutoNetworkedField]
+    public SpriteSpecifier.Rsi OffIcon;
 }

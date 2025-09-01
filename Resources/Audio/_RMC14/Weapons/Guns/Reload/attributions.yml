@@ -132,3 +132,23 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/gun_mou_reload.ogg"
+
+- files: ["gun_m16_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_m16_reload.ogg"
+
+- files: ["gun_m16_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_m16_unload.ogg"
+
+- files: ["gun_44mag_open_chamber.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/db16154cb71e98060169230d7902d776d9b522f9/sound/weapons/gun_44mag_open_chamber.wav"
+
+- files: ["gun_44mag_speed_loader.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/db16154cb71e98060169230d7902d776d9b522f9/sound/weapons/gun_44mag_speed_loader.wav"

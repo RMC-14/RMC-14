@@ -228,10 +228,11 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnWeaponDamageFalloffRefreshModifiers(Entity<RMCWeaponDamageFalloffComponent> weapon, ref GunRefreshModifiersEvent args)
     {
-        var ev = new GetDamageFalloffEvent(weapon.Comp.FalloffMultiplier);
+        var ev = new GetDamageFalloffEvent(weapon.Comp.FalloffMultiplier, weapon.Comp.RangeFlat);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
         weapon.Comp.ModifiedFalloffMultiplier = FixedPoint2.Max(ev.FalloffMultiplier, 0);
+        weapon.Comp.RangeFlatModified = ev.Range;
 
         Dirty(weapon);
     }
@@ -243,7 +244,7 @@ public sealed class CMGunSystem : EntitySystem
             if (!TryComp(projectile, out RMCProjectileDamageFalloffComponent? falloffComponent))
                 continue;
 
-            _rmcProjectileSystem.SetProjectileFalloffWeaponMult((projectile, falloffComponent), weapon.Comp.ModifiedFalloffMultiplier);
+            _rmcProjectileSystem.SetProjectileFalloffWeaponMult((projectile, falloffComponent), weapon.Comp.ModifiedFalloffMultiplier, weapon.Comp.RangeFlatModified);
         }
     }
 
@@ -276,10 +277,11 @@ public sealed class CMGunSystem : EntitySystem
         if (TryComp(weapon.Owner, out WieldableComponent? wieldableComponent) && wieldableComponent.Wielded)
             baseMult = weapon.Comp.AccuracyMultiplier;
 
-        var ev = new GetWeaponAccuracyEvent(baseMult);
+        var ev = new GetWeaponAccuracyEvent(baseMult, weapon.Comp.RangeFlat);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
         weapon.Comp.ModifiedAccuracyMultiplier = Math.Max(0.1, (double) ev.AccuracyMultiplier);
+        weapon.Comp.RangeFlatModified = ev.Range;
 
         Dirty(weapon);
     }
@@ -306,6 +308,14 @@ public sealed class CMGunSystem : EntitySystem
 
             accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
             accuracyComponent.Accuracy += orderAccuracy;
+
+            var count = 0;
+            while (accuracyComponent.Thresholds.Count > count)
+            {
+                var threshold = accuracyComponent.Thresholds[count];
+                accuracyComponent.Thresholds[count] = threshold with { Range = threshold.Range + weapon.Comp.RangeFlatModified };
+                count++;
+            }
 
             if (orderAccuracyPerTile != 0)
                 accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -orderAccuracyPerTile, false));
@@ -620,8 +630,8 @@ public sealed class CMGunSystem : EntitySystem
         if (args.Handled ||
             !_container.TryGetContainer(gun.Owner, gun.Comp.ContainerID, out var container) ||
             container.ContainedEntities.Count <= 0 ||
-            !_hands.TryGetActiveHand(args.User, out var hand) ||
-            !hand.IsEmpty ||
+            _hands.GetActiveHand(args.User) is not { } hand ||
+            !_hands.HandIsEmpty(args.User, hand) ||
             !_hands.CanPickupToHand(args.User, container.ContainedEntities[0], hand))
         {
             return;
@@ -702,9 +712,9 @@ public sealed class CMGunSystem : EntitySystem
         if (!TryComp(user, out HandsComponent? handsComp))
             return false;
 
-        foreach (var hand in handsComp.Hands)
+        foreach (var hand in handsComp.Hands.Keys)
         {
-            if (hand.Value.HeldEntity is { } held &&
+            if (_hands.GetHeldItem(user, hand) is { } held &&
                 held != gun.Owner &&
                 TryComp(held, out GunDualWieldingComponent? dualWieldingComp) &&
                 dualWieldingComp.WeaponGroup == gun.Comp.WeaponGroup)
@@ -713,6 +723,7 @@ public sealed class CMGunSystem : EntitySystem
                 return true;
             }
         }
+
         return false;
     }
 
