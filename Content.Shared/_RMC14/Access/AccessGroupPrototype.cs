@@ -20,7 +20,7 @@ public sealed partial class AccessGroupPrototype : IInheritingPrototype
     ///     Denotes what faction this group belongs to.
     /// </summary>
     [DataField]
-    public EntProtoId<IFFFactionComponent> Faction = "null";
+    public EntProtoId<IFFFactionComponent> Faction = "FactionNone";
 
     /// <summary>
     ///     Denotes what group this group is listed under.

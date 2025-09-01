@@ -20,7 +20,7 @@ public sealed partial class AccessLevelPrototype : IInheritingPrototype
     ///     Denotes what faction this access belongs to.
     /// </summary>
     [DataField]
-    public EntProtoId<IFFFactionComponent> Faction = "null";
+    public EntProtoId<IFFFactionComponent> Faction = "FactionNone";
 
     /// <summary>
     ///     Denotes what access group this access belongs to.

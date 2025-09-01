@@ -9,7 +9,7 @@
   accessGroup: UNMC Hidden
   hidden: true
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseCommandJob
@@ -17,7 +17,7 @@
   faction: FactionMarine
   accessGroup: UNMC Command
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseAuxiliaryJob
@@ -25,7 +25,7 @@
   faction: FactionMarine
   accessGroup: UNMC Auxiliary
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseMiscellaneousJob
@@ -33,7 +33,7 @@
   faction: FactionMarine
   accessGroup: UNMC Miscellaneous
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseMPJob
@@ -41,7 +41,7 @@
   faction: FactionMarine
   accessGroup: UNMC Military Police
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseEngineeringJob
@@ -49,7 +49,7 @@
   faction: FactionMarine
   accessGroup: UNMC Engineering
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseRequisitionsJob
@@ -57,7 +57,7 @@
   faction: FactionMarine
   accessGroup: UNMC Requisitions
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseMedicalJob
@@ -65,7 +65,7 @@
   faction: FactionMarine
   accessGroup: UNMC Medical
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
 
 - type: accessGroup
   id: RMCBaseMarinesJob
@@ -73,4 +73,4 @@
   faction: FactionMarine
   accessGroup: UNMC Marines
   tags:
-  - Marine Default
+  - RMCMarineDefaultAccess
