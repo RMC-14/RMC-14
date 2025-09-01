@@ -164,7 +164,8 @@ public sealed class RMCActionsSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        if (!_interaction.InRangeUnobstructed(ent.Owner, target, ent.Comp.Range))
+        EntityUid userUid = args.User;
+        if (!_interaction.InRangeUnobstructed(ent.Owner, target, ent.Comp.Range, predicate: entity => entity == userUid))
             args.Cancelled = true;
     }
 
