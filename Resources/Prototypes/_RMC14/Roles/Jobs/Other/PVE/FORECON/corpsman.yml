@@ -35,6 +35,11 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-corpsman
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 
