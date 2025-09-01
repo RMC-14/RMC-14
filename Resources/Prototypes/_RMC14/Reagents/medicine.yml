@@ -577,16 +577,6 @@
           conditions:
             - !type:ReagentThreshold
               min: 5
-        - Toxin: -6
-        - Brute: -4.5
-        - Burn: -4.5
-      - !type:HealthChange
-        conditions:
-        - !type:Temperature
-          max: 170
-        damage:
-          types:
-            Cellular: -3
 
 # TODO add liver and brain damage
 - type: reagent

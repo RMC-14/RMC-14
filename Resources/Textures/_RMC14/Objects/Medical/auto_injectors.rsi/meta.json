@@ -34,10 +34,6 @@
       "name": "tricord0"
     },
     {
-<<<<<<< HEAD
-      "name": "tricord"
-    },
-    {
       "name": "tramadol1"
     },
     {
@@ -45,9 +41,9 @@
     },
     {
       "name": "tramadol"
-=======
+    },
+    {
       "name": "autoinjector_tag"
->>>>>>> master
     }
   ]
 }
