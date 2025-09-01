@@ -67,6 +67,6 @@ public sealed partial class IdCardComponent : Component
 
     //RMC14
     [DataField, AutoNetworkedField]
-    public EntityUid OriginalOwner;
+    public EntityUid? OriginalOwner;
     //RMC14
 }

@@ -101,8 +101,11 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         }
 
         idCard._jobTitle = "Civilian";
-        _rank.SetRank(idCard.OriginalOwner, "RMCRankCivilian");
-        _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner).EntityName} (Civilian)");
+        if (idCard.OriginalOwner != null)
+        {
+            _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
+            _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner.Value).EntityName} (Civilian)");
+        }
 
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.High,
