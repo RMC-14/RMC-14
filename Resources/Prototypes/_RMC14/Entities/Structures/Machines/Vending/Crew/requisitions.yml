@@ -680,6 +680,8 @@
       entries:
       - id: CMHandsBrown
         amount: 40
+      - id: RMCHandsGreyMarine
+        amount: 40
       - id: CMHandsBlackMarine
         amount: 40
     - name: Radio

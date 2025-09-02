@@ -45,6 +45,7 @@
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
+  - RMCGuideRoleSpec
   - RMCGuideMarineCommunications
   - RMCGuideCorporateLiaison
 
@@ -211,10 +212,50 @@
   name: "Who is in Command?"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpec
+  priority: 11
+  name: "Specialists"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpec.xml"
+  children:
+  - RMCGuideRoleSpecDemo
+  - RMCGuideRoleSpecGrenadier
+  - RMCGuideRoleSpecScout
+  - RMCGuideRoleSpecSniper
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpecDemo
+  priority: 1
+  name: "Demolitionist Specialist"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecDemo.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpecGrenadier
+  priority: 2
+  name: "Heavy Grenadier Specialist"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecGrenadier.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpecScout
+  priority: 3
+  name: "Scout Specialist"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecScout.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpecSniper
+  priority: 4
+  name: "Sniper Specialist"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
+
 - type: guideEntry # made by Gabrote42
   parent: RMC
   id: RMCGuideMarineCommunications
-  priority: 11
+  priority: 12
   name: "Marine Communications"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideMarineCommunications.xml"
   
@@ -223,7 +264,7 @@
   id: RMCGuideCorporateLiaison
   name: "Corporate Liaison"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCorporateLiaison.xml"
-  priority: 12
+  priority: 13
 
 # Xenonids
 - type: guideEntry
