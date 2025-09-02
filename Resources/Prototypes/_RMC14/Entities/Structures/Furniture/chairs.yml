@@ -239,7 +239,7 @@
   parent: CMSeatBase
   id: CMChairOfficeDark
   name: dark office chair
-  components:
+  components: # RMC14 Non-parity: Not rotatable
   - type: Sprite
     state: officechair_dark
   - type: Construction

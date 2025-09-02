@@ -237,6 +237,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCNewPlayerTimeJobHours =
         CVarDef.Create("rmc.new_player_time_job_hours", 10, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCBrandNewPlayerTimeJobHours =
+        CVarDef.Create("rmc.brand_new_player_time_job_hours", 1, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
         CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
@@ -465,6 +468,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCDeadChatEnabled =
         CVarDef.Create("rmc.dead_chat_enabled", true, CVar.SERVER | CVar.NOTIFY | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCDelayRoundEnd =
+        CVarDef.Create("rmc.delay_round_end", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> RMCLobbyStartPaused =
         CVarDef.Create("rmc.lobby_start_paused", false, CVar.REPLICATED | CVar.SERVER);
