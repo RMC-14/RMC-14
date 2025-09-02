@@ -16,5 +16,3 @@
     state: urn
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Misc/urn.rsi
-    state: urn
