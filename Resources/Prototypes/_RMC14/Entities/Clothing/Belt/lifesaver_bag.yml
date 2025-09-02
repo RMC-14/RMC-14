@@ -107,3 +107,82 @@
     - id: CMHealthAnalyzer
     # TODO RMC: imidazoline pills
     # TODO RMC: alkysine pills
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagMARSOC
+  name: M276D2 pattern medical bag
+  description: The M276D2 is a vastly improved version of the M276. Made of lightweight ultradurable materials, and outfitted with a myriad of internal pouches and compartments, it's near exclusively issued to Combat Livesavers within special forces units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/marsoc_medicbag.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/marsoc_medicbag.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,5 # 21 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Dropper
+      - GlassBeaker
+      - Bottle
+      - PillCanister
+      - Syringe
+      - CMSurgicalLine
+      - CMSynthGraft
+      - Brutepack
+      - CMBloodPack
+      - Gauze
+      - Ointment
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      #      - # TODO RMC14 splints
+      - CMAutoInjector
+      - CMRollerItem
+      - BodyBag
+      - RMCGlovesLatex
+      - SterileMask
+      - Hypospray
+      - CigPack
+      - RMCPenlight
+      - Flare
+      #      - # TODO RMC14 minitank (needs full implementation and a tag to fit it in here, but the item exists as CMMiniTank)
+      #      - # TODO RMC14 reagent analyzer
+      #      - # TODO RMC14 plant analyzer
+      components:
+      - Hypospray
+      - Defibrillator
+      - Pill
+      - RMCLighter
+
+- type: entity
+  parent: RMCBeltMedicBagMARSOC
+  id: RMCBeltMedicBagMARSOCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMEpinephrineAutoInjector
+    - id: RMCMedicAutoInjectorMeralyneBicaridine15
+      amount: 3
+    - id: RMCMedicAutoInjectorDermalineKelotane15
+      amount: 3
+    - id: RMCMedicAutoInjectorDylovene15
+    - id: RMCMedicAutoInjectorStimulant15
+      amount: 2
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMHealthAnalyzer
+    - id: CMStasisBagFolded
+    - id: CMRollerBedSpawnFolded
+    - id: CMBloodPackFull
+    - id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
+    - id: RMCMedicAutoInjectorDexalinPlusCS1

@@ -669,6 +669,19 @@
       amount: 5
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingMARSOCMedic
+  suffix: MARSOC, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterDylovene
+    - id: CMEpinephrineAutoInjector
+    - id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
+    - id: RMCMedicAutoInjectorMeralyneBicaridine15
+    - id: RMCMedicAutoInjectorDermalineKelotane15
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchRoyal
   suffix: Filled, Royal

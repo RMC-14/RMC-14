@@ -61,7 +61,10 @@ rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
 rmc-merabic-container-label-text = MB
+rmc-keloderm-container-label-text = KD
 rmc-russianred-container-label-text = Rr
+rmc-stimulant-container-label-text = ST
+rmc-fnplus-container-label-text = FN
 
 rmc-custom-container-label-text = {$customLabel}
 

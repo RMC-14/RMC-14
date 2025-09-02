@@ -9,6 +9,10 @@ rmc-ghost-name-marine-raider = Marine Raider (Friendly)
 rmc-job-name-marine-raider = Marine Raider
 rmc-job-prefix-marine-raider = Op.
 
+rmc-ghost-name-marine-raider-medic = Marine Raider Combat Lifesaver (Friendly)
+rmc-job-name-marine-raider-medic = Marine Raider Combat Lifesaver
+rmc-job-prefix-marine-raider-medic = CLS.
+
 rmc-ghost-name-marine-raider-leader = Marine Raider Team Leader (Friendly)
 rmc-job-name-marine-raider-leader = Marine Raider Team Leader
 rmc-job-prefix-marine-raider-leader = TL.

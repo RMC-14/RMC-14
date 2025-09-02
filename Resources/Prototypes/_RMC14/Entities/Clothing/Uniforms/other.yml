@@ -134,6 +134,13 @@
     startingWebbing: RMCWebbingBuckshot
 
 - type: entity
+  parent: RMCJumpsuitMarsoc
+  id: RMCJumpsuitMarsocWebbingMedic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingMARSOCMedic
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitFreelancer
   name: freelancer fatigues

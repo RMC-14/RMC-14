@@ -245,6 +245,24 @@
     labelTextLocId: rmc-epinephrine-container-label-text
 
 - type: entity
+  parent: CMEmergencyAutoInjector
+  id: CMStimulantAutoInjector
+  name: Stimulant autoinjector
+  description: An autoinjector loaded with a strong dose of stimulants, made to keep special forces marines mobile even in dire situations. Rarely seen outside of the UNMC's elite.
+  components:
+  - type: Hypospray
+    transferAmount: 30
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: Stimulants # TODO RMC14 replace with actual stims. injector for MARSOC so the best one.
+          Quantity: 30
+  - type: IconLabel
+    labelTextLocId: rmc-stimulant-container-label-text
+
+- type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjector15
   name: medic autoinjector (M-XL)
@@ -492,6 +510,91 @@
           Quantity: 90
 
 - type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorMeralyneBicaridine15
+  suffix: MeraBic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 45
+        - ReagentId: CMMeralyne
+          Quantity: 45
+  - type: IconLabel
+    labelTextLocId: rmc-merabic-container-label-text
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorDermalineKelotane15
+  suffix: KeloDerm
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMDermaline
+          Quantity: 45
+        - ReagentId: CMKelotane
+          Quantity: 45
+  - type: IconLabel
+    labelTextLocId: rmc-keloderm-container-label-text
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorDylovene15
+  suffix: Dylovene
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 90
+  - type: IconLabel
+    labelTextLocId: rmc-dylovene-container-label-text
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
+  suffix: FN+
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 44.7
+        - ReagentId: Nutriment
+          Quantity: 44.7
+        - ReagentId: CMDexalinPlus
+          Quantity: 0.6
+  - type: IconLabel
+    labelTextLocId: rmc-fnplus-container-label-text
+
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorStimulant15
+  name: stimulant autoinjector (M-XL)
+  suffix: stimulants
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: Stimulants # TODO RMC14 replace with actual RMC stims. Made for MARSOC so the best one.
+          Quantity: 90
+  - type: IconLabel
+    labelTextLocId: rmc-stimulant-container-label-text
+
+- type: entity
   parent: CMAutoInjectorBase
   id: RMCMedicAutoInjectorBase
   abstract: true
@@ -525,6 +628,40 @@
   - type: Hypospray
     transferAmount: 5
   - type: MedicallyUnskilledDoAfter
+
+- type: entity
+  parent: RMCMedicAutoInjectorCS5
+  id: RMCMedicAutoInjectorCS1
+  name: autoinjector (C-XXS)
+  components:
+  - type: Sprite
+    layers:
+    - state: autoinjector
+    - state: autoinjector1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: autoinjector_tag
+      color: "#A020F0"
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+  - type: Hypospray
+    transferAmount: 1
+
+- type: entity
+  parent: RMCMedicAutoInjectorCS1
+  id: RMCMedicAutoInjectorDexalinPlusCS1
+  suffix: Dex+
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 10
+  - type: IconLabel
+    labelTextLocId: rmc-dexalin-plus-container-label-text
 
 - type: entity
   parent: RMCMedicAutoInjectorCS5
