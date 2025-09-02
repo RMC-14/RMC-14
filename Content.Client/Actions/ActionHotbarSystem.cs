@@ -16,6 +16,7 @@ using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
 
 namespace Content.Client.Actions
@@ -371,13 +372,13 @@ namespace Content.Client.Actions
             if (loadedAssignments.Count == 0)
                 return;
 
-            // Check if we need gap removal (some actions are missing)
+            // Checking for gap removal
             var totalActionsInFile = foundActions.Count;
             var validActionsLoaded = loadedAssignments.Select(a => a.ActionId).Distinct().Count();
 
             if (totalActionsInFile > validActionsLoaded)
             {
-                // We have missing actions, need to compact
+                // Missing actions -> need to compact
                 var compactedAssignments = new List<ActionsSystem.SlotAssignment>();
                 var assignmentsByHotbar = loadedAssignments.GroupBy(x => x.Hotbar);
 
