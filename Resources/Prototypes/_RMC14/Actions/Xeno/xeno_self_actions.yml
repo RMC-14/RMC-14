@@ -307,8 +307,8 @@
 - type: entity
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
-  name: Throw Child
-  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  name: Carrier's Bond
+  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
