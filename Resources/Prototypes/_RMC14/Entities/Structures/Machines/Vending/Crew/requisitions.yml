@@ -390,8 +390,8 @@
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
         amount: 16 # TODO RMC14 6 once heavy is in
-      #- id: M4A3 HP Magazine (9mm)
-      #  amount: 2
+      - id: RMCMagazinePistolM1984HP
+        amount: 2
       - id: CMMagazineRifleM54CE2HT
         amount: 2
       - id: RMCBox458SOCOM
