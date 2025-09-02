@@ -141,9 +141,9 @@ public sealed class TacticalMapSettingsManager
         foreach (var setting in defaults)
         {
             _defaultRegistrations.Add(setting);
-            if (!_modifiedSettings.Contains(GetSettingKey(setting.Key, setting.PlanetId)))
+            if (!_modifiedSettings.Contains(GetSettingKey(setting.Key!, setting.PlanetId)))
             {
-                _currentSettings[GetSettingKey(setting.Key, setting.PlanetId)] = setting;
+                _currentSettings[GetSettingKey(setting.Key!, setting.PlanetId)] = setting;
             }
         }
     }
@@ -175,11 +175,26 @@ public sealed class TacticalMapSettingsManager
                     return;
                 }
 
-                var settings = _serialization.Read<TacticalMapSettingRegistration[]>(settingsNode, notNullableOverride: true);
+                TacticalMapSettingRegistration[]? settings = null;
+                try
+                {
+                    settings = _serialization.Read<TacticalMapSettingRegistration[]>(settingsNode, notNullableOverride: false);
+                }
+                catch (Exception parseEx)
+                {
+                    _logger.Error($"Failed to parse settings array: {parseEx}");
+                    return;
+                }
+
+                if (settings == null)
+                {
+                    _logger.Warning("Parsed settings array is null, skipping settings load");
+                    return;
+                }
 
                 foreach (var setting in settings)
                 {
-                    if (string.IsNullOrEmpty(setting.Key))
+                    if (setting.Key == null || string.IsNullOrEmpty(setting.Key))
                     {
                         _logger.Warning("Skipping setting with null/empty key");
                         continue;
@@ -210,23 +225,33 @@ public sealed class TacticalMapSettingsManager
                         _modifiedSettings.Add(settingKey);
                     }
                 }
-            }
 
-            if (!defaultRegistration && mapping.TryGet("unsetSettings", out var unsetNode))
-            {
-                if (unsetNode != null)
+                if (!defaultRegistration && mapping.TryGet("unsetSettings", out var unsetNode))
                 {
-                    var unsetSettings = _serialization.Read<string[]>(unsetNode, notNullableOverride: true);
-
-                    foreach (var settingKey in unsetSettings)
+                    if (unsetNode != null)
                     {
-                        if (string.IsNullOrEmpty(settingKey))
+                        try
                         {
-                            continue;
-                        }
+                            var unsetSettings = _serialization.Read<string[]>(unsetNode, notNullableOverride: false);
 
-                        _modifiedSettings.Add(settingKey);
-                        _currentSettings.Remove(settingKey);
+                            if (unsetSettings != null)
+                            {
+                                foreach (var settingKey in unsetSettings)
+                                {
+                                    if (string.IsNullOrEmpty(settingKey))
+                                    {
+                                        continue;
+                                    }
+
+                                    _modifiedSettings.Add(settingKey);
+                                    _currentSettings.Remove(settingKey);
+                                }
+                            }
+                        }
+                        catch (Exception unsetEx)
+                        {
+                            _logger.Error($"Failed to parse unsetSettings array: {unsetEx}");
+                        }
                     }
                 }
             }
@@ -263,7 +288,8 @@ public sealed class TacticalMapSettingsManager
 
             var modifiedSettings = _modifiedSettings
                 .Where(key => _currentSettings.ContainsKey(key))
-                .Select(key => _currentSettings[key]);
+                .Select(key => _currentSettings[key])
+                .Where(setting => setting.Key != null);
 
             foreach (var setting in modifiedSettings)
             {
@@ -292,8 +318,10 @@ public sealed class TacticalMapSettingsManager
         }
     }
 
-    private string FormatValueForYaml(object value)
+    private string FormatValueForYaml(object? value)
     {
+        if (value == null) return "null";
+
         return value switch
         {
             string str => "\"" + str.Replace("\"", "\\\"") + "\"",
@@ -345,6 +373,8 @@ public sealed class TacticalMapSettingsManager
             var globalSettings = _currentSettings.Where(kvp => !kvp.Key.Contains("_")).ToList();
             foreach (var (key, setting) in globalSettings)
             {
+                if (setting.Key == null) continue;
+
                 var mapSpecificKey = GetSettingKey(setting.Key, planetId);
                 var mapSpecificSetting = new TacticalMapSettingRegistration
                 {
@@ -522,7 +552,7 @@ public sealed class TacticalMapSettingsManager
         _currentSettings.Remove(settingKey);
 
         var defaultSetting = _defaultRegistrations.FirstOrDefault(r =>
-            r.Key == key &&
+            r.Key != null && r.Key == key &&
             ((r.PlanetId == null && planetId == null) ||
              (!string.IsNullOrEmpty(r.PlanetId) && !string.IsNullOrEmpty(planetId) && r.PlanetId == planetId)));
 
@@ -561,8 +591,8 @@ public sealed class TacticalMapSettingsManager
 [Serializable, DataDefinition]
 public partial struct TacticalMapSettingRegistration
 {
-    [DataField("Key")] public string Key { get; set; }
-    [DataField("Value")] public object Value { get; set; }
+    [DataField("Key")] public string? Key { get; set; }
+    [DataField("Value")] public object? Value { get; set; }
     [DataField("PlanetId")] public string? PlanetId { get; set; }
 }
 
