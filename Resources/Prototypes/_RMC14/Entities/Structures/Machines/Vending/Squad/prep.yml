@@ -106,11 +106,15 @@
         amount: 15
       - id: CMBootsBrown
         amount: 15
+      - id: CMBootsGrey
+        amount: 15
       - id: JumpsuitMarine
         amount: 15
       - id: CMHandsBrown
         amount: 15
       - id: CMHandsBlackMarine
+        amount: 15
+      - id: RMCHandsGreyMarine
         amount: 15
       - id: RMCHeadsetShip
         amount: 15
@@ -282,8 +286,8 @@
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
-#      - id: TODO UNMC Flair
-#        amount: 15
+      - id: RMCHelmetGarbUNMCFlair
+        amount: 15
       - id: RMCPatchFallingFalcons
         amount: 15
       - id: RMCPatchFallingFalconsAlt

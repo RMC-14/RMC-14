@@ -16,7 +16,7 @@
     soundHit:
       path: /Audio/_RMC14/Weapons/genhit3.ogg
   - type: Item
-    size: Large
+    size: Normal
     sprite: _RMC14/Objects/Weapons/Melee/baseball_bat.rsi
 
 - type: entity

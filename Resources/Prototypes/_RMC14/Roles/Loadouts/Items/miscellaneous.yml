@@ -1,0 +1,49 @@
+﻿# Miscellaneous
+- type: loadout
+  id: StraightRazorRMC
+  cost: 2
+  storage:
+    back:
+    - RMCStraightRazor
+
+- type: loadout
+  id: BootsJungleFilledRMC
+  cost: 2
+  storage:
+    back:
+    - CMBootsJungleFilled
+
+- type: loadout
+  id: BootsUrbanFilledRMC
+  cost: 2
+  storage:
+    back:
+    - CMBootsUrbanFilled
+
+- type: loadout
+  id: BootsBrownFilledRMC
+  cost: 2
+  storage:
+    back:
+    - CMBootsBrownFilled
+
+- type: loadout
+  id: BootsGreyFilledRMC
+  cost: 2
+  storage:
+    back:
+    - CMBootsGreyFilled
+
+- type: loadout
+  id: HandsGreyMarineRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHandsGreyMarine
+
+- type: loadout
+  id: HandsBrownMarineRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHandsBrownMarine

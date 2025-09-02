@@ -850,7 +850,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
 # Snow
 

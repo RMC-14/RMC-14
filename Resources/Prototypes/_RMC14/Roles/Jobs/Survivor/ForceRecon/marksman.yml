@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconMarksman
   name: rmc-job-name-forecon-marksman
-  playTimeTracker: RMCJobSurvivorMarksmanForecon
   startingGear: RMCGearForeconMarksman
   icon: "CMJobIconWeaponsSpecialist"
   requirements:
@@ -43,10 +42,6 @@
       prefix: rmc-job-prefix-forecon-marksman
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorMarksmanForecon
-  isHumanoid: true
 
 - type: startingGear
   parent: RMCGearForeconBase
