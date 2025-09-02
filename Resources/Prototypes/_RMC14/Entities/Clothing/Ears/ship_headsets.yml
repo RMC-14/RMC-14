@@ -519,6 +519,27 @@
     - SquadLeader
     - PrimaryLandingZone
 
+- type: entity
+  parent: RMCHeadsetShip
+  id: CMHeadsetChaplain
+  name: chaplain radio headset
+  description: A headset used members of the military chaplaincy. Useful if you're being called on to preform last rites.
+  components:
+  - type: Sprite
+    state: med_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyMedical
+  - type: GrantSquadLeaderTracker
+    defaultMode: AuxiliarySupportOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - AuxiliarySupportOfficer
+    - ChiefMedicalOfficer
+
 # Prisoner headset
 - type: entity
   parent: RMCHeadsetShip

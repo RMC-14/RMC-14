@@ -18,6 +18,7 @@
           CMPilotDropship: [ -1, -1 ]
           CMPilotGunship: [ -1, -1 ]
           CMIntelOfficer: [ -1, -1 ]
+          RMCMilitaryChaplain: [ -1, -1 ]
           CMCommandingOfficer: [ -1, -1 ]
           CMExecutiveOfficer: [ -1, -1 ]
           CMStaffOfficer: [ -1, -1 ]

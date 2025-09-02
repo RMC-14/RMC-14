@@ -23,3 +23,8 @@ cm-job-name-intel = Intelligence Officer
 cm-job-description-intel = Recover intelligence objects from groundside, process, and gain tech points to support the operation by OB warhead, dropship points or requisition supply.
 cm-job-prefix-intel = IO
 CMJobIntelOfficer = Intelligence Officer
+
+rmc-job-name-military-chaplain = Military Chaplain
+rmc-job-description-military-chaplain = Provide emotional, spiritual, and mental support for the marines. Don't try to convert them, and do not serve a command role. You are here to support the soldiers, not fight or make orders.
+rmc-job-prefix-military-chaplain = MilChap.
+RMCJobMilitaryChaplain = Military Chaplain

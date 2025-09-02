@@ -1,0 +1,20 @@
+﻿- type: entity
+  parent: BaseStorageItem
+  id: RMCUrn
+  name: urn
+  description: A small ceramic urn, usually used to store the ashes of the deceased who have been cremated.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,0,1
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/urn.rsi
+    state: urn
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Misc/urn.rsi
+    state: urn

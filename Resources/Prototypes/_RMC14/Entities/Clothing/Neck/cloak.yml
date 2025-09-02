@@ -7,3 +7,31 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Neck/generalformal.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: RMCStoleRed
+  name: red stole
+  description: A stole, commonly worn to show priestly authority, or at the very least being ordained.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Neck/redstole.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Neck/redstole.rsi
+  - type: Tag
+    tags:
+      - RMCStole
+
+- type: entity
+  parent: RMCStoleRed
+  id: RMCStoleWhite
+  name: white stole
+  description: A stole, commonly worn to show priestly authority, or at the very least being ordained. This one is commonly seen in Orthodox denominations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Neck/whitestole.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Neck/whitestole.rsi
+
+- type: Tag
+  id: RMCStole

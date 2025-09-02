@@ -1,0 +1,75 @@
+﻿- type: job
+  parent: CMJobSquadBase
+  id: RMCMilitaryChaplain
+  name: rmc-job-name-military-chaplain
+  description: rmc-job-description-military-chaplain
+  playTimeTracker: RMCJobMilitaryChaplain
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCorrespondent
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobLiaison
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: RMCJobMilitaryChaplain
+      time: 90000 # 25 hours
+    RMCRankCorporal: []
+  startingGear: RMCGearMilitaryChaplain
+  icon: "CMJobIconMilitaryChaplain"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-aso
+  accessGroups:
+  - MilitaryChaplain
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillFireman: 1
+        RMCSkillMedical: 1
+    - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-military-chaplain
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
+    - type: RMCTrackable
+  hidden: false #TODO RMC14
+
+- type: startingGear
+  id: RMCGearMilitaryChaplain
+  equipment:
+    jumpsuit: RMCJumpsuitChaplain
+    shoes: RMCShoesLaceup
+    id: CMDogtagChaplain
+    ears: CMHeadsetChaplain
+    back: CMSatchelMarine
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointMilitaryChaplain
+  name: military chaplain spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCMilitaryChaplain
+  - type: Sprite
+    state: mc_spawn
+
+- type: playTimeTracker
+  id: RMCJobMilitaryChaplain
+  isHumanoid: true

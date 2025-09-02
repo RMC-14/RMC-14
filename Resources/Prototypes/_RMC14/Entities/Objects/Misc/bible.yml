@@ -29,6 +29,7 @@
   - type: Tag
     tags:
     - Book
+    - RMCBible
 
 - type: entity
   parent: RMCBible
@@ -51,3 +52,36 @@
     contents:
     - id: CMGrenadeFrag
       amount: 3
+
+- type: entity
+  parent: RMCBible
+  id: RMCTorah
+  name: The Torah
+  description: A compilation of the Five Books of Moses, tied to the Jewish faith.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Bibles/torah.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBible
+  id: RMCQuran
+  name: The Holy Quran
+  description: A book significant to the Muslim faith, believed to be revelations from God.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Bibles/quran.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBible
+  id: RMCHolyBook
+  name: Personal Holy Book
+  description: A book belonging to your faith, whatever it may be.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Bibles/personal.rsi
+    state: icon
+
+- type: Tag
+  id: RMCBible
