@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverRSh9
   name: RSh-9 Assault Revolver
-  description: An old, unusual and bulky revolver that was quickly phased out by other more popular revolvers. Chambered in 9x39mm and prized by law enforcement for its immense stopping power.
+  description: An old, unusual and bulky revolver that was quickly phased out by other more popular revolvers. Chambered in 9x39mm and prized by law enforcement for its immense stopping power. Features a horrifically archaic break-action reloading mechanism due to the unique position of the barrel.
   components:
   - type: Tag
     tags:
@@ -11,9 +11,6 @@
     - RMCWeaponRevolverRSh9
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
   - type: Gun
@@ -55,13 +52,14 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.099
-      rmc-aslot-rail: 0.1573, 0.188
-      rmc-aslot-underbarrel: 0.375, -0.1825
+      rmc-aslot-barrel: 0.81, 0.169
+      rmc-aslot-rail: 0.1573, 0.253
+      rmc-aslot-underbarrel: 0.375, -0.2825
 
 - type: entity
   parent: BaseItem
   id: RMCSpeedLoaderRsh9
+  name: "Speed loader (9x39)"
   description: A six round load of 9x39 Armor Penetrating rounds, designed to defeat most modern body-armor.
   components:
   - type: Sprite
