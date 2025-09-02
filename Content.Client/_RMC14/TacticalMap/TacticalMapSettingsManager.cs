@@ -13,6 +13,7 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Utility;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -168,10 +169,28 @@ public sealed class TacticalMapSettingsManager
 
             if (mapping.TryGet("settings", out var settingsNode))
             {
+                if (settingsNode == null)
+                {
+                    _logger.Warning("Settings node is null, skipping settings load");
+                    return;
+                }
+
                 var settings = _serialization.Read<TacticalMapSettingRegistration[]>(settingsNode, notNullableOverride: true);
 
                 foreach (var setting in settings)
                 {
+                    if (string.IsNullOrEmpty(setting.Key))
+                    {
+                        _logger.Warning("Skipping setting with null/empty key");
+                        continue;
+                    }
+
+                    if (setting.Value == null)
+                    {
+                        _logger.Warning($"Skipping setting '{setting.Key}' with null value");
+                        continue;
+                    }
+
                     var settingKey = GetSettingKey(setting.Key, setting.PlanetId);
 
                     if (defaultRegistration)
@@ -195,18 +214,30 @@ public sealed class TacticalMapSettingsManager
 
             if (!defaultRegistration && mapping.TryGet("unsetSettings", out var unsetNode))
             {
-                var unsetSettings = _serialization.Read<string[]>(unsetNode, notNullableOverride: true);
-
-                foreach (var settingKey in unsetSettings)
+                if (unsetNode != null)
                 {
-                    _modifiedSettings.Add(settingKey);
-                    _currentSettings.Remove(settingKey);
+                    var unsetSettings = _serialization.Read<string[]>(unsetNode, notNullableOverride: true);
+
+                    foreach (var settingKey in unsetSettings)
+                    {
+                        if (string.IsNullOrEmpty(settingKey))
+                        {
+                            continue;
+                        }
+
+                        _modifiedSettings.Add(settingKey);
+                        _currentSettings.Remove(settingKey);
+                    }
                 }
             }
         }
         catch (Exception ex)
         {
             _logger.Error($"Failed to parse settings file {file}: {ex}");
+            if (!defaultRegistration)
+            {
+                _logger.Info("Continuing with default settings due to parse failure");
+            }
         }
     }
 
@@ -527,12 +558,12 @@ public sealed class TacticalMapSettingsManager
     }
 }
 
-[Serializable]
-public struct TacticalMapSettingRegistration
+[Serializable, DataDefinition]
+public partial struct TacticalMapSettingRegistration
 {
-    public string Key { get; set; }
-    public object Value { get; set; }
-    public string? PlanetId { get; set; }
+    [DataField("Key")] public string Key { get; set; }
+    [DataField("Value")] public object Value { get; set; }
+    [DataField("PlanetId")] public string? PlanetId { get; set; }
 }
 
 public struct TacticalMapSettings
