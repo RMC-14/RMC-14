@@ -99,7 +99,7 @@
 - type: entity
   parent: RMCChemDispenserBase
   id: RMCChemDispenserMedbay
-  suffix: Medbay
+  suffix: Medbay, DO NOT MAP OUTSIDE WARSHIPS
   components:
   - type: RMCChemicalDispenser
     network: RMCChemStorageMedbay
@@ -107,10 +107,18 @@
 - type: entity
   parent: RMCChemDispenserBase
   id: RMCChemDispenserResearch
-  suffix: Research
+  suffix: Research, DO NOT MAP OUTSIDE WARSHIPS
   components:
   - type: RMCChemicalDispenser
     network: RMCChemStorageResearch
+
+- type: entity
+  parent: RMCChemDispenserBase
+  id: RMCChemDispenserOCP
+  suffix: OCP
+  components:
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageOCP
 
 - type: entity
   abstract: true
@@ -164,6 +172,14 @@
   components:
   - type: RMCChemicalStorage
     network: RMCChemStorageResearch
+
+- type: entity
+  parent: RMCChemStorageBase
+  id: RMCChemStorageOCP
+  suffix: OCP
+  components:
+  - type: RMCChemicalStorage
+    network: RMCChemStorageOCP
 
 - type: entity
   parent: RMCChemDispenserBase
