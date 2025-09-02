@@ -87,7 +87,7 @@
     - id: CMEmergencyAutoInjector
       amount: 2
     - id: CMFireExtinguisherPortable
-    - id: Stimpack
+    - id: CMStimulantAutoInjector
       amount: 3
 
 - type: entity
