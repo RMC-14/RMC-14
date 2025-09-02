@@ -98,8 +98,8 @@
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCDogtagMarineRaider
-  name: Marine Raider's dogtags
+  id: RMCDogtagMarineRaiderMedic
+  name: Marine Raider Combat Lifesaver's dogtags
   components:
   - type: PresetIdCard
     job: CMMarineRaider
