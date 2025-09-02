@@ -106,5 +106,5 @@
 
 - type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaider ]
-  id: RMCDogtagMarineRaiderHidden
+  id: RMCDogtagMarineRaiderMedicHidden
   categories: [ HideSpawnMenu ]
