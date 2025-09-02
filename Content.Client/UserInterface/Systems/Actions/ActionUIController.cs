@@ -185,6 +185,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         EntityManager.EventBus.RaiseLocalEvent(action, ref ev);
         if (!ev.Handled)
         {
+            Log.Error($"Action {EntityManager.ToPrettyString(actionId)} did not handle ActionTargetAttemptEvent!");
             return false;
         }
 
@@ -475,6 +476,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         {
             if (uiAction != null && !currentActions.Contains(uiAction.Value))
             {
+                Log.Warning($"ActionUIController: UI contains stale action: {EntityManager.ToPrettyString(uiAction.Value)}");
                 return false;
             }
         }
@@ -486,6 +488,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     {
         if (_actionsSystem == null || _playerManager.LocalEntity is not { } user)
             return;
+
+        Log.Info("ActionUIController: Recovering action state from system");
 
         var currentActions = _actionsSystem.GetActions(user).ToList();
 
@@ -507,17 +511,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
         }
 
+        Log.Debug($"ActionUIController: Processing drag action for {EntityManager.ToPrettyString(action)}");
+
         EntityUid? swapAction = null;
         var currentlyHovered = UIManager.MouseGetControl(_input.MouseScreenPosition);
         if (currentlyHovered is ActionButton button)
         {
             swapAction = button.Action;
             SetAction(button, action, false);
+            Log.Debug($"ActionUIController: Swapping action to slot, displaced action: {(swapAction?.ToString() ?? "none")}");
         }
 
         if (dragged.Parent is ActionButtonContainer)
         {
             SetAction(dragged, swapAction, false);
+            Log.Debug($"ActionUIController: Set dragged button to: {(swapAction?.ToString() ?? "empty")}");
         }
 
         if (_actionsSystem != null)
@@ -530,6 +538,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             }
             else
             {
+                Log.Warning("ActionUIController: State validation failed after drag, attempting recovery");
                 RecoverActionState();
             }
         }
@@ -758,6 +767,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             }
         }
 
+        Log.Debug($"ActionUIController: Notifying position changes - {assignments.Count} assignments");
+
         if (_playerManager.LocalEntity is { } user)
         {
             var currentActions = _actionsSystem.GetActions(user).Select(a => a.Owner).ToHashSet();
@@ -765,6 +776,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
             if (validAssignments.Count != assignments.Count)
             {
+                Log.Warning($"ActionUIController: Filtered {assignments.Count} assignments down to {validAssignments.Count} valid ones");
                 assignments = validAssignments;
 
                 _actions.Clear();
