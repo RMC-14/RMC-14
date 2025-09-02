@@ -30,6 +30,7 @@
         RMCSkillPilot: 1
         RMCSkillSmartGun: 1
         RMCSkillPowerLoader: 1
+        RMCSkillJtac: 3
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rto
