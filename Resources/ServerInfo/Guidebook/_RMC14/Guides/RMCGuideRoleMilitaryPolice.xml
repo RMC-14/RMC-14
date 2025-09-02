@@ -15,7 +15,7 @@
   ## What do Military Police do?
 
 
-  Military police are the role that is entrusted in-game to enforce [textlink="Mlaw (Marine law)" link="RMCMarineLaw"] and [textlink="S.O.P. (Standard Operating Procedure)" link="RMCMarineSOP"]. This is typically done with the intent of enforcing server rules and roleplay standards in a way that can be immersive in character. [bold]The goal of being a MP is not to brig as many marines as you can.[/bold] That is frowned upon. The goal of MPs is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal.
+  Military police are the role that is entrusted in-game to enforce [textlink="Mlaw (Marine law)" link="RMCMarineLaw"] and [textlink="SOP (Standard Operating Procedure)" link="RMCMarineSOP"]. This is typically done with the intent of enforcing server rules and roleplay standards in a way that can be immersive in character. [bold]The goal of being a MP is not to brig as many marines as you can.[/bold] That is frowned upon. The goal of [color=#ff000d][bold]MP[/bold][/color]s is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal.
 
 
   <Box>
@@ -31,7 +31,7 @@
     <GuideEntityEmbed Entity="RMCGuidebookRoleCMP" Caption=""/>
   </Box>
   <Box>
-    [bold]The Chief of Military Police,[/bold] referred to as the C.M.P is the head of the Military police aboard the UNS Almayer. They are the second highest authority on the ship regarding [textlink="Marine Law" link="RMCMarineLaw"], second only to a whitelisted Commanding Officer. They are tasked with ensuring that Marine law and [textlink="S.O.P." link="RMCMarineSOP"] are enforced correctly, and that MPs are doing their jobs well. The C.M.P is typically a more experienced M.P so they can help answer questions and concerns. The Chief of Military police can rank from Second Lieutenant (O1), up to First Lieutenant (O2)
+    [color=#8B0000][bold]The Chief of Military Police[/bold][/color], referred to as the [color=#8B0000][bold]Chief MP[/bold][/color] is the head of the Military police aboard the UNS Almayer. They are the second highest authority on the ship regarding [textlink="Marine Law" link="RMCMarineLaw"], second only to a whitelisted [color=#00CBFE][bold]Commanding Officer[/bold][/color]. They are tasked with ensuring that Marine law and [textlink="SOP" link="RMCMarineSOP"] are enforced correctly, and that [color=#ff000d][bold]MP[/bold][/color]s are doing their jobs well. The [color=#8B0000][bold]Chief MP[/bold][/color] is typically a more experienced [color=#ff000d][bold]MP[/bold][/color] so they can help answer questions and concerns. [color=#8B0000][bold]The Chief of Military Police[/bold][/color] can rank from Second Lieutenant (O1), up to First Lieutenant (O2)
   </Box>
 
 
@@ -40,7 +40,7 @@
     <GuideEntityEmbed Entity="RMCGuidebookRoleMW" Caption=""/>
   </Box>
   <Box>
-    [bold]The Military Warden,[/bold] referred to as the M.W is the person responsible for managing the brig, sentencing prisoners, and doing most of the paperwork. They do the bookkeeping and desk work that keeps the brig functioning smoothly. Military Warden’s can rank from Sergeant (E5), up to Gunnery Sergeant (E7)
+    [bold]The Military Warden,[/bold] referred to as the [bold]Warden[/bold] is the person responsible for managing the brig, sentencing prisoners, and doing most of the paperwork. They do the bookkeeping and desk work that keeps the brig functioning smoothly. Military [bold]Warden[/bold]'s can rank from Sergeant (E5), up to Gunnery Sergeant (E7)
   </Box>
 
 
@@ -49,7 +49,7 @@
     <GuideEntityEmbed Entity="RMCGuidebookRoleMP" Caption=""/>
   </Box>
   <Box>
-    [bold]The Military Police[/bold], or MPs, are the majority of the department and do all the legal work. This includes arrests, searches, patrols, and anything else you are required to do. [bold]Listen to the M.W and C.M.P.[/bold] Standard members of the military police can rank from Corporal (E4), up to Staff Sergeant (E6)
+    [bold]The Military Police[/bold], or [color=#ff000d][bold]MP[/bold][/color]s, are the majority of the department and do all the legal work. This includes arrests, searches, patrols, and anything else you are required to do. [bold]Listen to the [bold]Warden[/bold] and [color=#8B0000][bold]Chief MP[/bold][/color].[/bold] Standard members of the military police can rank from Corporal (E4), up to Staff Sergeant (E6)
   </Box>
 
 
@@ -58,7 +58,7 @@
     [bold]Provost Marshal[/bold]
     <GuideEntityEmbed Entity="RMCGuidebookRolePvM" Caption=""/>
   </Box>
-  [bold]The Provost Marshall's Office,[/bold] often shortened to just “Provost", is the organization that ensures the law is interpreted correctly and writes the law itself. [bold]If you see a member of the Provost aboard the Almayer, give them the utmost respect.[/bold]
+  [color=#ffa500][bold]Provost Marshal Office,[/bold][/color] often shortened to just "Provost", is the organization that ensures the law is interpreted correctly and writes the law itself. [bold]If you see a member of the Provost aboard the Almayer, give them the utmost respect.[/bold]
 
 
   [bold]Note: Provost is only available by direct admin spawn due to them being the ultimate authority on in-character rule enforcement[/bold]
@@ -69,19 +69,19 @@
 
 
   <Box>
-    [color=green][bold] GREEN ALERT [/bold]
+    [color=lightgreen][bold] GREEN ALERT [/bold]
   </Box>
 
 
-  <Box>Green Alert is the normal operating state of the ship. [textlink="S.O.P." link="RMCMarineSOP"] applies, and non combatants have strict weapon restrictions. [bold]At this Alert level, you should focus on patrolling and just doing general security of the ship.[/bold] There are no known threats that need to be immediately addressed</Box>
+  <Box>Green Alert is the normal operating state of the ship. [textlink="SOP" link="RMCMarineSOP"] applies, and non combatants have strict weapon restrictions. [bold]At this Alert level, you should focus on patrolling and just doing general security of the ship.[/bold] There are no known threats that need to be immediately addressed</Box>
 
 
   <Box>
-    [color=blue][bold] BLUE ALERT [/bold]
+    [color=lightblue][bold] BLUE ALERT [/bold]
   </Box>
 
 
-  <Box>Blue alert is an elevated security level that implies a potential or unknown threat to the ship. This might include a death with no known cause, or the possibility of a mutiny. [bold]Weapon restrictions are slightly loosened on blue as outlined in [textlink="S.O.P." link="RMCMarineSOP"] Blue alert also authorizes the use of riot equipment and longarms for the Military Police[/bold]</Box>
+  <Box>Blue alert is an elevated security level that implies a potential or unknown threat to the ship. This might include a death with no known cause, or the possibility of a mutiny. [bold]Weapon restrictions are slightly loosened on blue as outlined in [textlink="SOP" link="RMCMarineSOP"]. Blue alert also authorizes the use of riot equipment and longarms for the Military Police[/bold]</Box>
 
 
   <Box>
@@ -89,17 +89,17 @@
   </Box>
 
 
-  <Box>Red alert is a very elevated security level that is intended to convey a serious and known threat to the ship. This includes any hostile boarding, active shooters, and more. [bold]Weapon restrictions on red alert are much looser as outlined in [textlink="S.O.P." link="RMCMarineSOP"] This also automatically opens all of the armories on the ship so that the crew may defend themselves with lethal force.[/bold]</Box>
+  <Box>Red alert is a very elevated security level that is intended to convey a serious and known threat to the ship. This includes any hostile boarding, active shooters, and more. [bold]Weapon restrictions on red alert are much looser as outlined in [textlink="SOP" link="RMCMarineSOP"]. This also automatically opens all of the armories on the ship so that the crew may defend themselves with lethal force.[/bold]</Box>
 
 
   ## M.P Equipment
-  Military police have a large assortment of specialized equipment provided to perform their duties. They are listed below, color coded to their alert restrictions for M.Ps.
+  Military police have a large assortment of specialized equipment provided to perform their duties. They are listed below, color coded to their alert restrictions for [color=#ff000d][bold]MP[/bold][/color]s.
 
 
   <Box>
     <GuideEntityEmbed Entity="RMCHandcuffs"/>
   </Box>
-  [bold]Handcuffs are a core tool for MPs which allow you to retrain somebody by clicking on them with the cuffs in your hand.[/bold] The do-after is canceled if they move, so make sure to stun non compliant marines first. While they are handcuffed, they cannot move when you are holding on to them.
+  [bold]Handcuffs are a core tool for [color=#ff000d][bold]MP[/bold][/color]s which allow you to retrain somebody by clicking on them with the cuffs in your hand.[/bold] The do-after is canceled if they move, so make sure to stun non compliant marines first. While they are handcuffed, they cannot move when you are holding on to them.
 
 
   <Box>
@@ -125,7 +125,7 @@
   </Box>
   The Flash Is a handheld device which can be used in two ways.
   - With harm mode active, you can click directly on somebody with it to flash them directly. This will apply a stun and knock them down
-  - You can also [keybind="ActivateItemInHand"] while holding it to produce a small radius flash that will disorient and slow down, but not stun. Cannot be recharged at a recharger, but it will slowly recharge uses over time.
+  - You can also press [keybind="ActivateItemInHand"] while holding it to produce a small radius flash that will disorient and slow down, but not stun. Cannot be recharged at a recharger, but it will slowly recharge uses over time.
 
 
   <Box>
@@ -137,7 +137,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCArmorVestMP"/>
   </Box>
-  A lightweight armor that MPs can elect to take from their equipment vendor. [bold]It Provides no slowdown effect and is very fast to run in, however it also provides very minimal protection and will not protect you at all against acid or biological threats in any way.[/bold]
+  A lightweight armor that [color=#ff000d][bold]MP[/bold][/color]s can elect to take from their equipment vendor. [bold]It Provides no slowdown effect and is very fast to run in, however it also provides very minimal protection and will not protect you at all against acid or biological threats in any way.[/bold]
 
 
   <Box>
@@ -149,7 +149,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCGrenadeFlashBang"/>
   </Box>
-  Flashbangs are a very effective tool for large areas or crowds. Once thrown they will detonate, stunning targets within a large radius for a very long time. [bold]M.Ps are also stunned by this, so make sure you either throw it around cover or move away from it once thrown.[/bold] They may be carried on green alert. But only for self defense or defense of others. Do not throw them needlessly!
+  Flashbangs are a very effective tool for large areas or crowds. Once thrown they will detonate, stunning targets within a large radius for a very long time. [bold][color=#ff000d][bold]MP[/bold][/color]s are also stunned by this, so make sure you either throw it around cover or move away from it once thrown.[/bold] They may be carried on green alert. But only for self defense or defense of others. Do not throw them needlessly!
 
 
   <Box>
@@ -200,7 +200,7 @@
   Use the following steps/checklist to help walk you through the process of arresting a suspect
 
 
-  -  Witness a crime, Recieve an arrest order from an officer, or receive a warrant from the C.M.P
+  -  Witness a crime, Recieve an arrest order from an officer, or receive a warrant from the [color=#8B0000][bold]Chief MP[/bold][/color]
   -  Locate the suspect and attempt to detain them. [bold](Use Less lethal tools when possible)[/bold]
   <Box>
     <GuideEntityEmbed Entity="CMStunbaton"/>
@@ -208,14 +208,14 @@
     <GuideEntityEmbed Entity="CMFlash"/>
   </Box>
   -  Bring the suspect to the brig, and place them in the holding cell by the large desk. [bold]THEY SHOULD REMAIN CUFFED![bold]
-  -  Inform the warden of what happened, as well as any other information they request. The warden may also ask you to do some paperwork.
+  -  Inform the [bold]Warden[/bold] of what happened, as well as any other information they request. The [bold]Warden[/bold] may also ask you to do some paperwork.
 
 
   ## Brigging Procedure
-  The following checklist is for the [bold]Military Warden[/bold] or an uninvoled officer if M.W. is not present once a suspect has been detained and brought in.
+  The following checklist is for the [bold]Military Warden[/bold] or an uninvoled officer if [bold]Warden[/bold]. is not present once a suspect has been detained and brought in.
 
 
-  -  Gather any information you need to sentence them from the arresting M.P
+  -  Gather any information you need to sentence them from the arresting [color=#ff000d][bold]MP[/bold][/color]
   -  Refer to [textlink="Marine Law" link="RMCMarineLaw"] and note the applicable charges.
   -  Inform the suspect of their charges as well as their total sentence.
   -  Strip them of all gear and contraband. Be meticulous. [bold]Do not miss IDs, Headsets[/bold], Webbing, Boots, coats, Ect.
@@ -240,11 +240,11 @@
 
 
   ## Survivor Rights
-  Survivors have rights in [textlink="S.O.P." link="RMCMarineSOP"], and it is our job to ensure we give them said rights. These include but are not limited to
+  Survivors have rights in [textlink="SOP" link="RMCMarineSOP"], and it is our job to ensure we give them said rights. These include but are not limited to
 
 
   - The right to construction tools and materials. [bold]This is not contraband.[/bold]
-  - The right to short blades, like knives. (See weapon restrictions in [textlink="S.O.P." link="RMCMarineSOP"])
+  - The right to short blades, like knives. (See weapon restrictions in [textlink="SOP" link="RMCMarineSOP"])
   - The right to leave at any time, [bold]assuming they are not already detained.[/bold]
   - [bold]The right to their confiscated belongings being secure, and not taken.[/bold]
 
