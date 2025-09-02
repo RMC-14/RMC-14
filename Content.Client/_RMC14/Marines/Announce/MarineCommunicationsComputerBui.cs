@@ -115,8 +115,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             computer.CanCreateEcho;
         _window.EchoSeparator.Visible = _window.EchoButton.Visible;
 
-        if (EntMan.TryGetComponent(Owner, out MarineControlComputerComponent? evaccomputer) &&
-            EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? commscomputer))
+        if (EntMan.TryGetComponent(Owner, out MarineControlComputerComponent? evaccomputer))
         {
             // TODO RMC14 estimated time until escape pod launch
             if (_confirmingEvacuation)
