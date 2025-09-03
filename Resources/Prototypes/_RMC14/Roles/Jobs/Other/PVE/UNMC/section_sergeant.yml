@@ -1,6 +1,6 @@
 - type: job
   parent: CMJobSquadBase
-  id: CMJobPVESectionSergeant
+  id: CMPVESectionSergeant
   name: cm-job-name-squad-leader
   description: cm-job-description-fireteam-leader
   playTimeTracker: CMJobPVERifleman
