@@ -12,7 +12,7 @@
         - type: StationNameSetup
           mapNameTemplate: 'UNS Endeavour'
         - type: StationJobs
-          availableJobs: {}
+          availableJobs:
             # Command
             CMPVEPlatoonCommander: [1, 1]
 
