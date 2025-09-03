@@ -367,7 +367,6 @@
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_alpha
-    canSupplyDrop: false
   - type: Tag
     tags:
     - RMCSquadSunRiders
