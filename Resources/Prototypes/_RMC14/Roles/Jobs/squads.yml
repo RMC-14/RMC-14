@@ -359,7 +359,7 @@
   name: Sun Riders
   components:
   - type: SquadTeam
-    color: "#828CFF"
+    color: "#4148c8"
     blacklistedSquadArmor:
     - Helmet
     - Armor
