@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/20/2025 13:02:54
+  time: 09/03/2025 00:23:57
   entityCount: 128
 maps: []
 grids:
@@ -109,6 +109,121 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        3,-8: RNMCAreaShuttleDrop1Midway
+        4,-8: RNMCAreaShuttleDrop1Midway
+        2,-8: RNMCAreaShuttleDrop1Midway
+        2,-7: RNMCAreaShuttleDrop1Midway
+        -4,-8: RNMCAreaShuttleDrop1Midway
+        -3,-8: RNMCAreaShuttleDrop1Midway
+        -2,-8: RNMCAreaShuttleDrop1Midway
+        -2,-7: RNMCAreaShuttleDrop1Midway
+        2,-4: RNMCAreaShuttleDrop1Midway
+        3,-6: RNMCAreaShuttleDrop1Midway
+        3,-5: RNMCAreaShuttleDrop1Midway
+        3,-4: RNMCAreaShuttleDrop1Midway
+        3,-3: RNMCAreaShuttleDrop1Midway
+        4,-6: RNMCAreaShuttleDrop1Midway
+        4,-5: RNMCAreaShuttleDrop1Midway
+        4,-4: RNMCAreaShuttleDrop1Midway
+        4,-3: RNMCAreaShuttleDrop1Midway
+        0,-4: RNMCAreaShuttleDrop1Midway
+        0,-3: RNMCAreaShuttleDrop1Midway
+        1,-6: RNMCAreaShuttleDrop1Midway
+        1,-5: RNMCAreaShuttleDrop1Midway
+        1,-4: RNMCAreaShuttleDrop1Midway
+        1,-3: RNMCAreaShuttleDrop1Midway
+        2,-6: RNMCAreaShuttleDrop1Midway
+        2,-3: RNMCAreaShuttleDrop1Midway
+        2,-5: RNMCAreaShuttleDrop1Midway
+        -2,-5: RNMCAreaShuttleDrop1Midway
+        -2,-4: RNMCAreaShuttleDrop1Midway
+        -2,-3: RNMCAreaShuttleDrop1Midway
+        -1,-6: RNMCAreaShuttleDrop1Midway
+        -1,-5: RNMCAreaShuttleDrop1Midway
+        -1,-4: RNMCAreaShuttleDrop1Midway
+        -1,-3: RNMCAreaShuttleDrop1Midway
+        0,-6: RNMCAreaShuttleDrop1Midway
+        0,-5: RNMCAreaShuttleDrop1Midway
+        -4,-5: RNMCAreaShuttleDrop1Midway
+        -4,-6: RNMCAreaShuttleDrop1Midway
+        -4,-4: RNMCAreaShuttleDrop1Midway
+        -4,-3: RNMCAreaShuttleDrop1Midway
+        -3,-6: RNMCAreaShuttleDrop1Midway
+        -3,-5: RNMCAreaShuttleDrop1Midway
+        -3,-4: RNMCAreaShuttleDrop1Midway
+        -3,-3: RNMCAreaShuttleDrop1Midway
+        -2,-6: RNMCAreaShuttleDrop1Midway
+        4,-2: RNMCAreaShuttleDrop1Midway
+        -4,-2: RNMCAreaShuttleDrop1Midway
+        -1,7: RNMCAreaShuttleDrop1Midway
+        0,7: RNMCAreaShuttleDrop1Midway
+        1,7: RNMCAreaShuttleDrop1Midway
+        1,6: RNMCAreaShuttleDrop1Midway
+        0,6: RNMCAreaShuttleDrop1Midway
+        -1,6: RNMCAreaShuttleDrop1Midway
+        -1,5: RNMCAreaShuttleDrop1Midway
+        0,5: RNMCAreaShuttleDrop1Midway
+        1,5: RNMCAreaShuttleDrop1Midway
+        3,4: RNMCAreaShuttleDrop1Midway
+        2,4: RNMCAreaShuttleDrop1Midway
+        1,4: RNMCAreaShuttleDrop1Midway
+        0,4: RNMCAreaShuttleDrop1Midway
+        -1,4: RNMCAreaShuttleDrop1Midway
+        -2,4: RNMCAreaShuttleDrop1Midway
+        -3,4: RNMCAreaShuttleDrop1Midway
+        4,0: RNMCAreaShuttleDrop1Midway
+        4,1: RNMCAreaShuttleDrop1Midway
+        4,2: RNMCAreaShuttleDrop1Midway
+        -2,-1: RNMCAreaShuttleDrop1Midway
+        -2,2: RNMCAreaShuttleDrop1Midway
+        -2,3: RNMCAreaShuttleDrop1Midway
+        -3,-2: RNMCAreaShuttleDrop1Midway
+        -3,-1: RNMCAreaShuttleDrop1Midway
+        -3,0: RNMCAreaShuttleDrop1Midway
+        -3,1: RNMCAreaShuttleDrop1Midway
+        -3,2: RNMCAreaShuttleDrop1Midway
+        -3,3: RNMCAreaShuttleDrop1Midway
+        -1,-2: RNMCAreaShuttleDrop1Midway
+        -2,1: RNMCAreaShuttleDrop1Midway
+        -1,-1: RNMCAreaShuttleDrop1Midway
+        -1,0: RNMCAreaShuttleDrop1Midway
+        -1,1: RNMCAreaShuttleDrop1Midway
+        -1,2: RNMCAreaShuttleDrop1Midway
+        -1,3: RNMCAreaShuttleDrop1Midway
+        -2,-2: RNMCAreaShuttleDrop1Midway
+        -2,0: RNMCAreaShuttleDrop1Midway
+        1,0: RNMCAreaShuttleDrop1Midway
+        1,1: RNMCAreaShuttleDrop1Midway
+        1,2: RNMCAreaShuttleDrop1Midway
+        1,3: RNMCAreaShuttleDrop1Midway
+        0,-2: RNMCAreaShuttleDrop1Midway
+        0,-1: RNMCAreaShuttleDrop1Midway
+        0,0: RNMCAreaShuttleDrop1Midway
+        0,1: RNMCAreaShuttleDrop1Midway
+        0,3: RNMCAreaShuttleDrop1Midway
+        3,3: RNMCAreaShuttleDrop1Midway
+        2,-2: RNMCAreaShuttleDrop1Midway
+        2,0: RNMCAreaShuttleDrop1Midway
+        0,2: RNMCAreaShuttleDrop1Midway
+        2,1: RNMCAreaShuttleDrop1Midway
+        2,2: RNMCAreaShuttleDrop1Midway
+        2,3: RNMCAreaShuttleDrop1Midway
+        1,-2: RNMCAreaShuttleDrop1Midway
+        1,-1: RNMCAreaShuttleDrop1Midway
+        3,-2: RNMCAreaShuttleDrop1Midway
+        3,-1: RNMCAreaShuttleDrop1Midway
+        3,0: RNMCAreaShuttleDrop1Midway
+        3,1: RNMCAreaShuttleDrop1Midway
+        3,2: RNMCAreaShuttleDrop1Midway
+        2,-1: RNMCAreaShuttleDrop1Midway
+        -4,0: RNMCAreaShuttleDrop1Midway
+        -4,1: RNMCAreaShuttleDrop1Midway
+        -4,2: RNMCAreaShuttleDrop1Midway
 - proto: CMLightFixtureSmallAlwaysPowered
   entities:
   - uid: 75
