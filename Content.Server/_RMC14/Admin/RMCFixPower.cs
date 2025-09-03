@@ -5,7 +5,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.Admin;
 
-[AdminCommand(AdminFlags.Admin), AdminCommand(AdminFlags.Debug)]
+[AdminCommand(AdminFlags.Debug)]
 public sealed class RMCFixPower : LocalizedEntityCommands
 {
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
