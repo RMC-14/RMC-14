@@ -1,0 +1,44 @@
+- type: job
+  parent: CMHospitalCorpsman
+  id: CMPVEHospitalCorpsman
+  playTimeTracker: CMJobPVEHospitalCorpsman
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hour
+  - !type:DepartmentTimeRequirement
+    department: RMCSquadPVE
+    time: 10800 # 3 hours
+  ranks:
+    RMCRankPrivate: []
+  spawnMenuRoleName: PVE Hospital Corpsman
+  supervisors: cm-job-supervisors-secserg
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
+        RMCSkillFirearms: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+
+- type: playTimeTracker
+  id: CMJobPVEHospitalCorpsman
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVECorpsman
+  name: PVE corpsman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVEHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn

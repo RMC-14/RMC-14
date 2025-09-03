@@ -1,0 +1,45 @@
+- type: job
+  parent: CMSmartGunOperator
+  id: CMPVESmartGunOperator
+  playTimeTracker: CMJobPVESmartGunOperator
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: RMCSquadPVE
+    time: 3600 # 1 hour
+  ranks:
+    RMCRankPrivate: []
+  spawnMenuRoleName: PVE Smart Gun Operator
+  supervisors: cm-job-supervisors-secserg
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillSmartGun: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+
+- type: playTimeTracker
+  id: CMJobPVESmartGunOperator
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVESmartGunOperator
+  name: PVE smart gun operator spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVESmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn
