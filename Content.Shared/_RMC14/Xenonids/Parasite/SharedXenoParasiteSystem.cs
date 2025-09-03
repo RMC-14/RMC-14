@@ -363,7 +363,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteLeapStopped(Entity<XenoParasiteComponent> ent, ref XenoLeapStoppedEvent args)
     {
-        RemComp<PreventCollideComponent>(ent);
+        RemCompDeferred<PreventCollideComponent>(ent);
 
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
