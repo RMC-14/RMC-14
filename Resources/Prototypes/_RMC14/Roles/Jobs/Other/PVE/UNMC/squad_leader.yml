@@ -50,10 +50,6 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tl
-    - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSunRiders
 
 - type: playTimeTracker
   id: CMJobPVESquadLeader
