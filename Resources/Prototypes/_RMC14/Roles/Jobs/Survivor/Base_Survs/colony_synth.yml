@@ -133,4 +133,5 @@
 
 - type: playTimeTracker
   id: RMCJobSyntheticColony
+  name: rmc-playtime-tracker-job-name-survivor-synth
   isHumanoid: true

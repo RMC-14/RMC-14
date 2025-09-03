@@ -96,6 +96,7 @@
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  name: rmc-playtime-tracker-job-name-survivor
   isHumanoid: true
 
 - type: entity

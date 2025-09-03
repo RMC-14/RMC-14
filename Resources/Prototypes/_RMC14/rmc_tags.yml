@@ -125,4 +125,8 @@
   id: RMCPinpointer
 
 - type: Tag
+  id: RMCSynthResetKey
+
+
+- type: Tag
   id: RMCXenoParasitePreparingLeap

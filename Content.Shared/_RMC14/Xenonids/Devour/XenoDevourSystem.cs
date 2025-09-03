@@ -3,7 +3,9 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
@@ -83,6 +85,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
         SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
+        SubscribeLocalEvent<XenoDevourComponent, VentEnterAttemptEvent>(OnXenoDevouredVentAttempt);
 
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
@@ -339,6 +342,23 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         args.Handled = true;
+    }
+
+    private void OnXenoDevouredVentAttempt(Entity<XenoDevourComponent> ent, ref VentEnterAttemptEvent args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.DevourContainerId, out var container))
+            return;
+
+        foreach (var devouredEnt in container.ContainedEntities)
+        {
+            if (HasComp<InfectStopOnDeathComponent>(devouredEnt))
+                continue;
+
+            _popup.PopupClient(Loc.GetString("rmc-vent-crawling-devoured"), ent, ent, PopupType.SmallCaution);
+
+            args.Cancel();
+            return;
+        }
     }
 
     private void OnUsableWhileDevouredGetMeleeDamage(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeDamageEvent args)

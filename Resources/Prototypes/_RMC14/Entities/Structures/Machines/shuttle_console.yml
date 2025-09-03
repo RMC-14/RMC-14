@@ -91,6 +91,7 @@
       enum.DropshipTerminalWeaponsUi.Key:
         type: DropshipWeaponsBui
   - type: DropshipTerminalWeapons
+  - type: TacticalMapComputer
   - type: RequiresSkill
     skills:
       RMCSkillPilot: 1
