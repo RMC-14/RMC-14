@@ -366,7 +366,7 @@
     radio: MarineAlpha
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-     state: background_alpha
+     state: background_delta
   - type: Tag
     tags:
     - RMCSquadSunRiders
