@@ -1,0 +1,15 @@
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RNMCAreaShuttleDrop1Huar
+  name: Dropship Huar
+  components:
+  - type: Sprite
+    state: shuttlered
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RNMCAreaShuttleDrop1Midway
+  name: Dropship Midway
+  components:
+  - type: Sprite
+    state: shuttle
