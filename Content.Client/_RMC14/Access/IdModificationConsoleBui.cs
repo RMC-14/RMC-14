@@ -11,28 +11,25 @@ namespace Content.Client._RMC14.Access;
 
 public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableBui
 {
-    private readonly HashSet<IdModificationConsoleAccessButton> _accessButtons = new();
-
-    private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = new();
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-
-    private readonly ContainerSystem _container;
-    private readonly HashSet<IdModificationConsoleAccessButton> _jobButtons = new();
-
-    private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    private readonly HashSet<IdModificationConsoleTabButton> tabs = new();
-    private string _currentAccessGroup = "";
-    private string _currentJobGroup = "";
-
-    private IdModificationConsoleWindow? _window;
-
-    private string currenttab = "";
-
+    private readonly ContainerSystem _container;
     public IdModificationConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _container = EntMan.System<ContainerSystem>();
     }
+
+    private IdModificationConsoleWindow? _window;
+
+    private readonly HashSet<IdModificationConsoleAccessButton> _accessButtons = [];
+    private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = [];
+    private string _currentAccessGroup = "";
+
+    private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
+    private readonly HashSet<IdModificationConsoleAccessButton> _jobButtons = new();
+    private string _currentJobGroup = "";
+
+    private readonly HashSet<IdModificationConsoleTabButton> tabs = new();
+    private string _currenttab = "";
 
     public void Refresh()
     {
@@ -72,7 +69,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
 
         foreach (var tab in tabs)
         {
-            if (tab.TabButton.Text != currenttab)
+            if (tab.TabButton.Text != _currenttab)
                 tab.TabButton.Disabled = false;
         }
 
@@ -85,7 +82,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.JobContainer.Visible = false;
             // _window.RanksContainer.Visible = false;
 
-            switch (currenttab)
+            switch (_currenttab)
             {
                 case "Access":
                     _window.AccessContainer.Visible = true;
@@ -142,7 +139,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.AccessGroups.RemoveAllChildren();
             _currentAccessGroup = "";
             _window.Accesses.RemoveAllChildren();
-            currenttab = "Access";
+            _currenttab = "Access";
             tab1.TabButton.Disabled = true;
 
             foreach (var button in _accessGroupButtons)
@@ -208,7 +205,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         tab2.TabButton.Text = "Jobs";
         tab2.TabButton.OnPressed += _ =>
         {
-            currenttab = "Jobs";
+            _currenttab = "Jobs";
             _currentJobGroup = "";
             tab2.TabButton.Disabled = true;
             Refresh();

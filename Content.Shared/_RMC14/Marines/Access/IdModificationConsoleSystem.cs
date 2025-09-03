@@ -47,10 +47,15 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             });
         SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        SubscribeLocalEvent<IdModificationConsoleComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<IdModificationConsoleComponent, InteractUsingEvent>(OnInteractHand);
 
         ReloadJobPrototypes();
         ReloadAccessPrototypes();
+    }
+
+    private void OnInteractHand(Entity<IdModificationConsoleComponent> ent, ref InteractUsingEvent args)
+    {
+        args.Handled = ContainerInHandler(ent, args.User);
     }
 
     private void OnJobChangeMsg(Entity<IdModificationConsoleComponent> ent,
@@ -163,7 +168,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             ContainerOutHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has ejected from {ent.Comp.PrivilegedIdSlot} from: {ent.Owner:entity}");
+                $"{ToPrettyString(args.Actor):player} has ejected from {ent.Comp.PrivilegedIdSlot} from: {ToPrettyString(ent.Owner):entity}");
         }
         else
         {
@@ -198,7 +203,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has granted all accesses for {args.AccessList} on {uid:entity}");
+                    $"{ToPrettyString(args.Actor):player} has granted all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
                 break;
             case "RevokeAll":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -211,7 +216,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has revoked all accesses for {args.AccessList} on {uid:entity}");
+                    $"{ToPrettyString(args.Actor):player} has revoked all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
                 break;
             case "GrantAllGroup":
                 foreach (var accessToAdd in ent.Comp.AccessList)
@@ -221,7 +226,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has granted all accesses on {uid:entity}");
+                    $"{ToPrettyString(args.Actor):player} has granted all accesses on {ToPrettyString(uid):entity}");
                 break;
             case "RevokeAllGroup":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -231,7 +236,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has revoked all accesses on {uid:entity}");
+                    $"{ToPrettyString(args.Actor):player} has revoked all accesses on {ToPrettyString(uid):entity}");
                 break;
         }
 
@@ -252,14 +257,14 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(args.Access);
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has granted {args.Access} to {uid:entity}");
+                $"{ToPrettyString(args.Actor):player} has granted {args.Access} to {ToPrettyString(uid):entity}");
         }
         else
         {
             access.Tags.Remove(args.Access);
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {uid:entity}");
+                $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
         }
     }
 
@@ -308,11 +313,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         }
 
         _accessGroup = dict.ToFrozenDictionary();
-    }
-
-    private void OnInteractHand(Entity<IdModificationConsoleComponent> ent, ref InteractHandEvent args)
-    {
-        args.Handled = ContainerInHandler(ent, args.User);
     }
 
     private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user)
