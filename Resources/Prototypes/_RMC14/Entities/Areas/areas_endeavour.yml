@@ -105,6 +105,11 @@
     state: ai
 
 - type: entity
+  parent: RMCAreaEndeavourAICore
+  id: RMCAreaEndeavourSyntheticStorage
+  name: Synthetic Storage
+
+- type: entity
   parent: RMCAreaEndeavour
   id: RMCAreaEndeavourOOB
   name: Out Of Bounds
