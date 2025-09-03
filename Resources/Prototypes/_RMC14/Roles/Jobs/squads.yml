@@ -363,6 +363,7 @@
     blacklistedSquadArmor:
     - Helmet
     - Armor
+    - Gloves
     radio: MarineAlpha
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
