@@ -156,29 +156,5 @@
       color: "#995e41"
   - type: Appearance
 
-- type: entity
-  parent: RMCMagazineShotgunMOU482Buckshot
-  id: RMCMagazineShotgunMOU482Breaching
-  name: MOU482 breaching magazine (12g)
-  description: A 12 gauge shotgun magazine fitting 16 breaching shells. The spring is specifically tuned for breaching slugs, no other shell will cycle.
-  components:
-  - type: BallisticAmmoProvider
-    mayTransfer: True
-    whitelist:
-      tags:
-      - RMCShellShotgunBreaching
-    proto: RMCShellShotgunBreaching
-    capacity: 16
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: ammo_band
-      color: "#5c5c5c"
-  - type: Appearance
-
 - type: Tag
   id: RMCMagazineShotgunMOU482

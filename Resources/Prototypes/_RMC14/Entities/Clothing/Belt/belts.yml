@@ -1307,7 +1307,7 @@
   parent: CMBeltBaseStorage
   id: RMCBeltMOU482
   name: M276D2 pattern MOU482 holster rig
-  description: The M276D2 is a improved version of the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the MOU482 tactical shotgun, allowing easier storage of the weapon. It features pouches for storing several magazines.
+  description: The M276D2 is a vastly improved version of the M276 standard load-bearing equipment. It is made with ultradurable lightweight materials, able to hold more weight while remaining comfortable. This version is for the MOU482 tactical shotgun, allowing easier storage of the weapon. It features several ammunition pouches for storing the shotguns large magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mou482.rsi
@@ -1343,6 +1343,21 @@
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
+
+- type: entity
+  parent: RMCBeltMOU482
+  id: RMCBeltMOU482Filled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineShotgunMOU482Buckshot
+      amount: 2
+    - id: RMCMagazineShotgunMOU482HeavyBuckshot
+    - id: RMCMagazineShotgunMOU482IncendiaryBuckshot
+    - id: RMCMagazineShotgunMOU482Slug
+    - id: RMCMagazineShotgunMOU482IncendiarySlug
+    - id: RMCWeaponShotgunMOU482
 
 - type: entity
   parent: CMBeltBaseStorage

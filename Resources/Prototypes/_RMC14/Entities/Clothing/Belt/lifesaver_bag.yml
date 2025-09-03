@@ -112,7 +112,7 @@
   parent: CMBeltMedicBag
   id: RMCBeltMedicBagMARSOC
   name: M276D2 pattern medical bag
-  description: The M276D2 is a vastly improved version of the M276. Made of lightweight ultradurable materials, and outfitted with a myriad of internal pouches and compartments, it's near exclusively issued to Combat Livesavers within special forces units.
+  description: The M276D2 is a vastly improved version of the M276 standard load-bearing equipment. Made of lightweight ultradurable materials, and outfitted with a myriad of internal pouches and compartments, the M276D2 medical bag is near exclusively issued to Combat Livesavers within special forces units.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/marsoc_medicbag.rsi

@@ -551,6 +551,45 @@
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentMOU482GrenadeLauncher
+  name: MOU482 integrated grenade launcher
+  description: A small, lightweight integrated grenade launcher for the MOU482 Tactical Shotgun. Only fits two grenades, but can fire them rapidly.
+  components:
+  - type: Sprite
+    layers:
+      - state: grenade-mou482
+        map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    capacity: 2
+  - type: ShootAtFixedPoint
+    maxFixedRange: 10
+  - type: RMCSelectiveFire
+    baseFireRate: 0.75
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-mou482-open }
+          False: { state: grenade-mou482 }
+  - type: AttachableToggleable
+    actionName: Switch to the MOU482 Integrated Grenade Launcher
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-mou482
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-mou482-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMK1GrenadeLauncher
+
+- type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentM203GrenadeLauncher
   name: M203 grenade launcher
   description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.

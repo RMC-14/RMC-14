@@ -2,8 +2,10 @@
   parent: [ CMBaseWeaponRifleNoDualWieldPenalty, RMCBaseAttachableHolder, RMCBaseWeaponMagazineVisuals ]
   name: MOU482 tactical shotgun
   id: RMCWeaponShotgunMOU482
-  description: An experimental shotgun model going through testing trials in the UNMC. Based on the original civilian and CMB version, the XM51 is a mag-fed, pump-action shotgun. It utilizes special 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells.
+  description: The M117 Tactical Shotgun, better known as the MOU482, is a semi-automatic 12 guage magazine fed shotgun. Deemed to expensive to be standard issue, use of the MOU482 is relegated to elite special forces units within the UNMC.
   components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-mou482
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou482.rsi
     layers:

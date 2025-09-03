@@ -77,7 +77,7 @@
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
-    belt: RMCWeaponShotgunXM38Filled
+    belt: RMCBeltMOU482Filled
     back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
