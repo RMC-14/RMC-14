@@ -65,7 +65,7 @@ rmc-job-description-recruit = Follow orders and learn from those above you. Get 
 rmc-job-prefix-recruit = RCT
 
 cm-job-name-section-sergeant = Section Sergeant
-cm-job-description-section-sergeant = Leader of one of a platoon's section. Give your section and squads objectives and follow orders from the Plat CO. Keep your section in one piece.
+cm-job-description-section-sergeant = Leader of one of the platoon's sections. Give your section and squads objectives and follow orders from the Plat CO. Keep your section in one piece.
 cm-job-prefix-section-sergeant = SctSgt
 CMPVESectionSergeant = Section Sergeant
 
