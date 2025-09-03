@@ -1305,6 +1305,47 @@
 
 - type: entity
   parent: CMBeltBaseStorage
+  id: RMCBeltMOU482
+  name: M276D2 pattern MOU482 holster rig
+  description: The M276D2 is a improved version of the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the MOU482 tactical shotgun, allowing easier storage of the weapon. It features pouches for storing several magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/mou482.rsi
+    layers:
+    - state: mou482
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: 0.25, 0
+      visible: false
+    - state: icon
+  - type: Clothing
+    slots:
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/mou482.rsi
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunMOU482
+      - RMCMagazineShotgunMOU482
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+
+- type: entity
+  parent: CMBeltBaseStorage
   id: RMCM300SOCOMBelt
   name: M300 pattern .458 SOCOM loading rig
   description: An ammunition belt designed to hold the large .458 SOCOM caliber bullets for the XM88 heavy rifle.

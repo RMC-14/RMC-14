@@ -29,3 +29,156 @@
 
 - type: Tag
   id: RMCMagazineShotgunXM51
+
+# yes, there are lots of types of shotgun shells.
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineShotgunMOU482Buckshot
+  name: MOU482 buckshot magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 buckshot shells. The spring is specifically tuned for buckshot, no other shell will cycle.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineShotgun
+    - RMCMagazineShotgunMOU482
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+    proto: CMShellShotgunBuckshot
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#b24c4c"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482HeavyBuckshot
+  name: MOU482 heavy buckshot magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 heavy buckshot shells. The spring is specifically tuned for heavy buckshot, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavyBuckshot
+    proto: RMCShellShotgunHeavyBuckshot
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#4f1717"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482IncendiaryBuckshot
+  name: MOU482 incendiary buckshot magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 incendiary buckshot shells. The spring is specifically tuned for incendiary buckshot, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunIncendiaryBuckshot
+    proto: CMShellShotgunIncendiaryBuckshot
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#ffaa25"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482Slug
+  name: MOU482 slug magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 slug shells. The spring is specifically tuned for slugs, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunSlugs
+    proto: CMShellShotgunSlugs
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#528b5a"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482IncendiarySlug
+  name: MOU482 incendiary slug magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 incendiary slug shells. The spring is specifically tuned for incendiary slugs, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunIncendiary
+    proto: CMShellShotgunIncendiary
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#995e41"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482Breaching
+  name: MOU482 breaching magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 breaching shells. The spring is specifically tuned for breaching slugs, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunBreaching
+    proto: RMCShellShotgunBreaching
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#5c5c5c"
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineShotgunMOU482
