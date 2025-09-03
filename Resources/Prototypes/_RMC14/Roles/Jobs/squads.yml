@@ -367,6 +367,7 @@
     minimapBackground:
      sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_alpha
+    group: Solar Devils
   - type: Tag
     tags:
     - RMCSquadSunRiders
