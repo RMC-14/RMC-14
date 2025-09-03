@@ -352,3 +352,25 @@
     - Armor
     - Gloves
     maxRoles: {}
+
+- type: entity
+  parent: SquadBase
+  id: SquadSunRiders
+  name: Sun Riders
+  components:
+  - type: SquadTeam
+    color: "#828CFF"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    radio: MarineAlpha
+    minimapBackground:
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     state: background_alpha
+    canSupplyDrop: false
+  - type: Tag
+    tags:
+    - RMCSquadSunRiders
+
+- type: Tag
+  id: RMCSquadSunRiders

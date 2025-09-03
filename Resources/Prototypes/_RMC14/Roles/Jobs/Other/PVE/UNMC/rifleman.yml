@@ -24,6 +24,10 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRiders
 
 - type: playTimeTracker
   id: CMJobPVERifleman

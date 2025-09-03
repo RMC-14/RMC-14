@@ -56,6 +56,10 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: leader
     - type: RMCTrackable
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRiders
 
 - type: playTimeTracker
   id: CMJobPVESectionSergeant
@@ -63,7 +67,7 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointPVESmartGunOperator
+  id: RMCSpawnPointPVESectionSergeant
   name: PVE section sergeant spawn point
   components:
   - type: SpawnPoint
