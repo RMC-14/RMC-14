@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Localization;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -17,18 +18,20 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
 
-        TabContainer.SetTabTitle(Window.Wrapper.MapTab, "Map");
+        TabContainer.SetTabTitle(Window.Wrapper.MapTab, Loc.GetString("ui-tactical-map-tab-map"));
         TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) &&
-            EntMan.TryGetComponent(user.Map, out AreaGridComponent? areaGrid))
+            user.Map != null &&
+            EntMan.TryGetComponent(user.Map.Value, out AreaGridComponent? areaGrid))
         {
             Window.Wrapper.UpdateTexture((user.Map.Value, areaGrid));
         }
 
         Refresh();
 
-        Window.Wrapper.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines));
+        Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
+        Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
     }
 
     public void Refresh()
@@ -39,13 +42,8 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
         Window.Wrapper.SetLineLimit(lineLimit);
         UpdateBlips();
-
-        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
-        if (user != null)
-        {
-            Window.Wrapper.LastUpdateAt = user.LastAnnounceAt;
-            Window.Wrapper.NextUpdateAt = user.NextAnnounceAt;
-        }
+        UpdateLabels();
+        UpdateTimestamps();
 
         Window.Wrapper.Map.Lines.Clear();
 
@@ -67,9 +65,10 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             Window.Wrapper.Canvas.Lines.AddRange(lines.XenoLines);
         }
 
+        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         if (user?.CanDraw ?? false)
         {
-            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, "Canvas");
+            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, Loc.GetString("ui-tactical-map-tab-canvas"));
             TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, true);
         }
         else
@@ -110,5 +109,39 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         }
 
         Window.Wrapper.UpdateBlips(blips);
+    }
+
+    private void UpdateLabels()
+    {
+        if (Window == null)
+            return;
+
+        var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
+        if (labels != null)
+        {
+            var allLabels = new Dictionary<Vector2i, string>();
+            foreach (var label in labels.MarineLabels)
+                allLabels[label.Key] = label.Value;
+            foreach (var label in labels.XenoLabels)
+                allLabels[label.Key] = label.Value;
+
+            Window.Wrapper.Map.UpdateTacticalLabels(allLabels);
+        }
+        else
+        {
+            Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+        }
+    }
+
+    private void UpdateTimestamps()
+    {
+        if (Window == null)
+            return;
+
+        if (!EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
+            return;
+
+        Window.Wrapper.LastUpdateAt = user.LastAnnounceAt;
+        Window.Wrapper.NextUpdateAt = user.NextAnnounceAt;
     }
 }

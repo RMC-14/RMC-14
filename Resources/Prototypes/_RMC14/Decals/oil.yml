@@ -1,0 +1,56 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalOilBase
+  tags: ["station", "markings"]
+
+# Oil
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor1
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor1
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor2
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor2
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor3
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor3
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor4
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor4
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor5
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor5
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor6
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor6
+
+- type: decal
+  parent: RMCDecalOilBase
+  id: RMCDecalOilFloor7
+  sprite:
+    sprite: _RMC14/Decals/oil_floor.rsi
+    state: mfloor7

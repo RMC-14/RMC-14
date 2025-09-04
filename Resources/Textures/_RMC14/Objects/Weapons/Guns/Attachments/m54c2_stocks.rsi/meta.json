@@ -8,16 +8,10 @@
   },
   "states": [
     {
-      "name": "m54c-solid"
-    },
-    {
       "name": "m54c-col"
     },
     {
       "name": "m54c-col-on"
-    },
-    {
-      "name": "m54c-solid_a"
     },
     {
       "name": "m54c-col_a"

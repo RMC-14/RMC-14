@@ -85,16 +85,13 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
         EntityUid? upgradeItem = null;
 
-        foreach (var hand in _hands.EnumerateHands(user))
+        foreach (var hand in _hands.EnumerateHeld(user))
         {
-            if (hand.HeldEntity == null)
+            if (!_upgradeItemQuery.HasComp(hand))
                 continue;
 
-            if (_upgradeItemQuery.HasComp(hand.HeldEntity))
-            {
-                upgradeItem = hand.HeldEntity;
-                break;
-            }
+            upgradeItem = hand;
+            break;
         }
 
         if (upgradeItem == null)
@@ -128,7 +125,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
         if (TryComp<DamageableComponent>(ent, out var damageComp))
             transferredDamage = damageComp.Damage;
 
-        var spawn = Spawn(upgradeComp.UpgradedEntity, coordinates, rotation: rotation);
+        var spawn = Spawn(upgradeComp.UpgradedEntity, coordinates, rotation: rotation.GetCardinalDir().ToAngle());
         _popup.PopupEntity(Loc.GetString(upgradeComp.UpgradedPopup), spawn, user);
 
         // transfer damage

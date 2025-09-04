@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBeltMedical
   id: CMBeltMedicBag
   name: M276 pattern lifesaver bag
@@ -21,7 +21,6 @@
       - Syringe
       - CMAutoInjector
       - Brutepack
-      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -44,6 +43,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+  - type: Tag
+    tags:
+    - RMCBeltMedical
 
 - type: entity
   parent: CMBeltMedicBag

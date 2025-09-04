@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
@@ -7,6 +8,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Lock;
+using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -23,6 +25,7 @@ namespace Content.Shared._RMC14.Storage;
 public sealed class RMCStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
@@ -42,12 +45,14 @@ public sealed class RMCStorageSystem : EntitySystem
     private readonly List<EntityUid> _toRemove = new();
     private readonly List<EntityUid> _toClose = new();
 
+    private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StorageComponent> _storageQuery;
 
     private readonly TimeSpan _stunStorage = TimeSpan.FromSeconds(4);
 
     public override void Initialize()
     {
+        _itemQuery = GetEntityQuery<ItemComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
 
         SubscribeLocalEvent<StorageComponent, CMStorageItemFillEvent>(OnStorageFillItem);
@@ -64,6 +69,10 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<MarineComponent, EntGotRemovedFromContainerMessage>(OnRemovedMarineFromContainer);
 
         SubscribeLocalEvent<StorageNestedOpenSkillRequiredComponent, StorageInteractAttemptEvent>(OnNestedSkillRequiredInteractAttempt);
+
+        SubscribeLocalEvent<SkyFallingComponent, StorageInteractAttemptEvent>(OnSkyFalling);
+        SubscribeLocalEvent<CrashLandingComponent, StorageInteractAttemptEvent>(OnCrashLanding);
+        SubscribeLocalEvent<ParaDroppingComponent, StorageInteractAttemptEvent>(OnParaDropping);
 
         SubscribeLocalEvent<RMCEntityStorageWhitelistComponent, ContainerIsInsertingAttemptEvent>(OnEntityStorageWhitelistAttempt);
 
@@ -206,6 +215,15 @@ public sealed class RMCStorageSystem : EntitySystem
 
         if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
             _stun.TryStun(ent, _stunStorage, true);
+
+        if (HasComp<SkyFallingComponent>(args.Container.Owner) || HasComp<CrashLandingComponent>(args.Container.Owner))
+        {
+            var ev = new AttemptCrashLandEvent();
+            RaiseLocalEvent(ent, ref ev);
+
+            if (!ev.Cancelled)
+                _crashLand.TryCrashLand(ent.Owner, true);
+        }
     }
 
     private void OnNestedSkillRequiredInteractAttempt(Entity<StorageNestedOpenSkillRequiredComponent> ent, ref StorageInteractAttemptEvent args)
@@ -258,6 +276,21 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
+    }
+
+    private void OnSkyFalling(Entity<SkyFallingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnParaDropping(Entity<ParaDroppingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnCrashLanding(Entity<CrashLandingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
@@ -315,7 +348,7 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
-    private bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
+    public bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
     {
         popup = default;
         if (user == null)
@@ -336,6 +369,27 @@ public sealed class RMCStorageSystem : EntitySystem
                 continue;
 
             popup = "rmc-storage-store-skill-unable";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            popup = Loc.GetString("cm-storage-unskilled");
             return false;
         }
 
@@ -407,6 +461,43 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
+    {
+        if (!CanEjectStoreSkill(storage, user, out popup))
+            return false;
+
+        return true;
+    }
+
+    public int EstimateFreeColumns(Entity<StorageComponent?> storage)
+    {
+        if (!Resolve(storage, ref storage.Comp, false))
+            return 0;
+
+        // Since RMC14 storage is simplified we can make assumptions about how
+        // items are laid out and not allocate 100 lists just to check this
+        var columns = 0;
+        foreach (var grid in storage.Comp.Grid)
+        {
+            columns += (grid.Width + 1) * (grid.Height + 1 / 2);
+        }
+
+        foreach (var (item, _) in storage.Comp.StoredItems)
+        {
+            if (!_itemQuery.TryComp(item, out var itemComp))
+                continue;
+
+            var shapes = _item.GetItemShape(storage, (item, itemComp));
+            if (shapes.Count == 0)
+                continue;
+
+            var shape = shapes[0];
+            columns -= shape.Width;
+        }
+
+        return columns;
     }
 
     public override void Update(float frameTime)

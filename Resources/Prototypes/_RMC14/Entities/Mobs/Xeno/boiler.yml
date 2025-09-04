@@ -10,6 +10,9 @@
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBoiler
   - type: GhostRole
     name: cm-job-name-xeno-boiler
   - type: Sprite
@@ -24,6 +27,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -144,9 +148,14 @@
     prefix: boiler
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: boiler
   - type: Flammable
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-boiler

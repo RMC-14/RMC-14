@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
@@ -28,24 +28,21 @@
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - RMCWeYaExecColony
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cl
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_goon
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: NpcFactionMember
       factions:
       - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMLiaison
       points: 40
     - type: RMCVendorUserRecharge
       maxPoints: 50
@@ -55,13 +52,14 @@
       prefix: cm-job-prefix-liaison
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
+    jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
@@ -75,6 +73,15 @@
     job_id: CMLiaison
   - type: Sprite
     state: cl_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleLiaisonYou
+  name: A Typical Weston-Yamada Liaison
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: corp_liaison
 
 - type: playTimeTracker
   id: CMJobLiaison

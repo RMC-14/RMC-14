@@ -67,3 +67,23 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/df78049c7a0490ba67af7112c8d7624049712b71/sound/handling/splint.ogg"
+
+- files: ["reset_key_boot_on.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d7ac8ccfb28b46621afbb2e2a7b1995c1f3477f1/sound/items/synth_reset_key/boot_on.ogg"
+
+- files: ["reset_key_powerup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d7ac8ccfb28b46621afbb2e2a7b1995c1f3477f1/sound/mecha/powerup.ogg"
+
+- files: ["reset_key_release.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d7ac8ccfb28b46621afbb2e2a7b1995c1f3477f1/sound/items/synth_reset_key/release.ogg"
+
+- files: ["reset_key_shortbeep.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d7ac8ccfb28b46621afbb2e2a7b1995c1f3477f1/sound/items/synth_reset_key/shortbeep.ogg"

@@ -30,7 +30,8 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
             if (xeno.Comp.RequiresKnockDown && !_standing.IsDown(entity))
                 return;
 
-            _slow.TrySlowdown(entity, xeno.Comp.SlowTime, ignoreDurationModifier: true);
+            var slow = xeno.Comp.HigherOnXenos ? _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowTime) : xeno.Comp.SlowTime;
+            _slow.TrySlowdown(entity, slow, ignoreDurationModifier: true);
 
             break;
         }

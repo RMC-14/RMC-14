@@ -1,17 +1,17 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Finesse;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Coordinates;
-using Robust.Shared.Timing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Actions;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
@@ -25,6 +25,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
 
     public override void Initialize()
@@ -39,7 +40,7 @@ public sealed class XenoImpaleSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -64,7 +65,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     private void Impale(DamageSpecifier damage, int aP, EntProtoId animation, SoundSpecifier sound, EntityUid target, EntityUid xeno)
     {
         //TODO RMC14 targets chest
-        var damageTaken = _damage.TryChangeDamage(target, damage, armorPiercing: aP, origin: xeno, tool: xeno);
+        var damageTaken = _damage.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, damage), armorPiercing: aP, origin: xeno, tool: xeno);
         if (damageTaken?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno);

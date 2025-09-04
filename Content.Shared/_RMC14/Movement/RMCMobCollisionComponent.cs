@@ -12,7 +12,7 @@ public sealed partial class RMCMobCollisionComponent : Component
     public string FixtureId = "rmc_mob_collision";
 
     [DataField, AutoNetworkedField]
-    public IPhysShape FixtureShape = new PhysShapeCircle(0.45f);
+    public IPhysShape FixtureShape = new PhysShapeCircle(0.4f);
 
     [DataField, AutoNetworkedField]
     public CollisionGroup FixtureLayer = CollisionGroup.MobCollision;

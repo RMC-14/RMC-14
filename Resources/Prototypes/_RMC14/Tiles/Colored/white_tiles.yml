@@ -1,0 +1,10 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorSteelPlanetWhiteBase
+  name: tiles-cm-default-white
+
+- type: tile
+  parent: RMCFloorSteelPlanetWhiteBase
+  id: RMCFloorSteelPlanetGrey0
+  sprite: /Textures/_RMC14/Tiles/floors/grey.png

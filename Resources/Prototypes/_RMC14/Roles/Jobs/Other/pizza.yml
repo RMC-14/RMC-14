@@ -15,8 +15,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Civilian
     - type: Skills
       skills:
+        RMCSkillEndurance: 0
+        RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pizza

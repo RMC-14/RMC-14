@@ -64,6 +64,10 @@
       "directions": 4
     },
     {
+      "name": "snow",
+      "directions": 4
+    },
+    {
       "name": "folding",
       "directions": 4
     },

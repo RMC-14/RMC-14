@@ -3,12 +3,6 @@
   id: CMXenoParasite
   name: cm-job-name-xeno-parasite
   playTimeTracker: CMJobXenoParasite
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: parasite
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoParasite

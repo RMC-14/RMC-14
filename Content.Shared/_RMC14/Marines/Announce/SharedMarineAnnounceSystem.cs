@@ -17,6 +17,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
@@ -111,7 +112,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > _characterLimit)
             text = text[.._characterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text);
+        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -156,18 +157,24 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceRadio(
         EntityUid sender,
         string message,
-        ProtoId<RadioChannelPrototype> channel
-        )
+        ProtoId<RadioChannelPrototype> channel)
     {
     }
 
-    public virtual void AnnounceARES(
+    public virtual void AnnounceARESStaging(
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null
-        )
+        LocId? announcement = null)
     {
+    }
+
+    public void AnnounceARES(
+        EntityUid? source,
+        string message,
+        SoundSpecifier? sound = null)
+    {
+        AnnounceARESStaging(source, message, sound, "rmc-announcement-ares-command");
     }
 
     public virtual void AnnounceSquad(
@@ -198,8 +205,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="sound">GlobalSound for announcement.</param>
     public virtual void AnnounceToMarines(
         string message,
-        SoundSpecifier? sound = null
-    )
+        SoundSpecifier? sound = null)
     {
     }
 
@@ -212,8 +218,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceHighCommand(
         string message,
         string? author = null,
-        SoundSpecifier? sound = null
-    )
+        SoundSpecifier? sound = null)
     {
     }
 
@@ -223,19 +228,20 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="sender">EntityUid of sender, for job and name params.</param>
     /// <param name="message">The content of the announcement.</param>
     /// <param name="author">The author of the message, Command by default.</param>
+    /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,
         string? author = null,
-        SoundSpecifier? sound = null
-    )
+        string? name = null,
+        SoundSpecifier? sound = null)
     {
         if (_net.IsClient)
             return;
 
         author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
-        var name = _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
+        name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
         // TODO RMC14 receivers
@@ -247,5 +253,22 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
         AnnounceToMarines(wrappedMessage);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
+    }
+
+    public string FormatHighCommand(string? author, string message)
+    {
+        author ??= Loc.GetString("rmc-announcement-author-highcommand");
+        return Loc.GetString("rmc-announcement-message", ("author", author), ("message", message));
+    }
+
+    public string FormatARESStaging(LocId? author, string message)
+    {
+        author ??= "rmc-announcement-ares-message";
+        return Loc.GetString(author, ("message", FormattedMessage.EscapeText(message)));
+    }
+
+    public string FormatARES(string message)
+    {
+        return FormatARESStaging("rmc-announcement-ares-command", message);
     }
 }

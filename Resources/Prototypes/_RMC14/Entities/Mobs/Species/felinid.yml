@@ -12,6 +12,8 @@
     - HeadTop
   - type: Sprite
     drawdepth: Mobs
+  - type: Wagging
+    action: ActionToggleFelinidWagging
   - type: Vocal
     sounds:
       Male: RMCMaleFelinid
@@ -19,6 +21,8 @@
       Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-felinid
 
 - type: entity
   parent: BaseSpeciesDummy

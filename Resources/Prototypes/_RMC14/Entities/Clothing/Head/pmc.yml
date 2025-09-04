@@ -47,6 +47,17 @@
 
 - type: entity
   parent: ArmorHelmetPMC
+  id: RMCArmorHelmetPMCTactical
+  name: tactical helmet
+  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. This configuration lacks the iconic ballistic mask popularized by Soldier of Fortune magazine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
   id: ArmorHelmetPMCCommando
   name: PMC M5X helmet
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.
@@ -62,6 +73,7 @@
         shader: unshaded
   - type: Corrodible
     isCorrodible: false
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetPMC
@@ -96,10 +108,19 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
 
 - type: entity
+  parent: ArmorHelmetPMCRiot
+  id: ArmorHelmetPMCRiotShield
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRC6RiotShield
+
+- type: entity
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCKutjevo
   name: kutjevo helmet
   description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil or even a photo of a loved one.
+  suffix: Kutjevo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo.rsi
@@ -111,6 +132,7 @@
   id: RMCArmorHelmetPMCKutjevoSecurity
   name: We-Ya corporate security helmet
   description: A basic skull-helm worn by corporate security assets. This variant comes with a wider brim to protect the user from the harsh climate of the desert.
+  suffix: Kutjevo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo_security.rsi
@@ -122,6 +144,7 @@
   id: RMCArmorHelmetPMCKutjevoMedical
   name: We-Ya corporate medic helmet
   description: A basic skull-helm worn by corporate security assets. This variant comes with a wider brim to protect the user from the harsh climate of the desert and has a medical cross across the front.
+  suffix: Kutjevo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo_medical.rsi
@@ -150,3 +173,38 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapWestonYamadaDark
+  name: Weston-Yamada cap
+  description: A dark cap enscribed with the Weston-Yamada 'Wings' logo, representing corporate justice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: ArmorHelmetPMCCorporate
+  id: RMCArmorHelmetPMCCorporateHybrisa
+  description: A basic skull-helm with a orange saftey vison fitted. Worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa.rsi
+
+- type: entity
+  parent: ArmorHelmetPMCCorporate
+  id: RMCArmorHelmetPMCCorporateLeadHybrisa
+  description: A basic skull-helm with a orange saftey vison fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_lead.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_lead.rsi

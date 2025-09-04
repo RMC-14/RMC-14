@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -12,7 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BuildRange = 1.9;
+    public FixedPoint2 BuildRange = 1.75;
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanBuild = new();
@@ -24,19 +25,25 @@ public sealed partial class XenoConstructionComponent : Component
     public TimeSpan BuildDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 OrderConstructionRange = 1.9;
+    public FixedPoint2 OrderConstructionRange = 1.75;
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanOrderConstruction = new();
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? OrderConstructionChoice;
+
+    [DataField, AutoNetworkedField]
+    public bool OrderConstructionTargeting;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ConfirmOrderConstructionAction;
 
     [DataField, AutoNetworkedField]
     public EntityCoordinates? OrderingConstructionAt;
 
     [DataField, AutoNetworkedField]
     public TimeSpan OrderConstructionDelay = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan OrderConstructionAddPlasmaDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")

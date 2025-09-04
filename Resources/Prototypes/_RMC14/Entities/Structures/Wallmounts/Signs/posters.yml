@@ -349,9 +349,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWalkman
-  name: "Walkman"
-  description: "This poster depicts a walkman and reads 'Don't Forget Your Walkman.'"
+  id: RMCPosterCassettePlayer
+  name: "Cassette Player"
+  description: "This poster depicts a cassette player and reads 'Don't Forget Your Cassette Player.'"
   components:
   - type: Sprite
     state: walkman

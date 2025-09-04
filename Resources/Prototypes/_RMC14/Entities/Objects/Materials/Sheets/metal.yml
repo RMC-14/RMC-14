@@ -35,6 +35,35 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionItem
+      buildable:
+      - RMCBarbedWireBuild
+      - RMCMetalBarricadeBuild
+      - RMCMetalBarricadeFoldableBuild
+      - RMCHandrailBuild
+      # - RMCDividerConstruction
+      # APC frame
+      # Fire alarm frame
+      - RMCDividerConstruction
+      - RMCFloorTileBuild
+      - RMCMetalRodBuild
+      - RMCWallGirderBuild
+      - RMCWindowFrameBuild
+      # Airlock assembly
+      # large airlock assembly
+      - RMCDividerConstruction
+      # Bed
+      # Chair
+      - RMCComfyChairList
+      # squad chairs
+      # office chairs
+      # stool
+      - RMCDividerConstruction
+      # computer frame
+      - RMCMachineFrameBuild
+      - RMCDividerConstruction
+      # metal baseball bat
+      - RMCDividerConstruction
     - type: RMCConstructionUpgradeItem
       whitelist:
         tags:
@@ -57,6 +86,10 @@
       layers:
         - state: metal_4
           map: ["base"]
+    - type: UserInterface
+      interfaces:
+        enum.RMCConstructionUiKey.Key:
+          type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetMetal
@@ -159,6 +192,15 @@
   description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is."
   suffix: Filled
   components:
+    - type: RMCConstructionItem
+      buildable:
+      - RMCPlasteelBarricadeFoldableBuild
+      - RMCPlasteelBarricadeBuild
+      - RMCDividerConstruction
+      - RMCReinforcedWindowFrameBuild
+      - RMCDividerConstruction
+      - RMCPlasteelRodBuild
+      - RMCMetalCrateBuild
     - type: Material
     - type: PhysicalComposition
       materialComposition:
@@ -180,6 +222,10 @@
     - type: Item
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
       heldPrefix: plasteel
+    - type: UserInterface
+      interfaces:
+        enum.RMCConstructionUiKey.Key:
+          type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetPlasteel

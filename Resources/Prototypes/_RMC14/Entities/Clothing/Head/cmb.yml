@@ -10,3 +10,4 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/cmb_helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: RMCEarProtection

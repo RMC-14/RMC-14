@@ -22,6 +22,7 @@
     state: shuttle
   - type: Area
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -33,6 +34,7 @@
     state: shuttle2
   - type: Area
     linkedLz: dropship_lz2
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaKutjevo
@@ -48,6 +50,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: true
@@ -66,6 +69,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     weatherEnabled: false
@@ -84,6 +88,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -314,6 +319,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -423,6 +429,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -442,6 +449,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -461,6 +469,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -481,6 +490,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#C19504E7'
@@ -500,6 +510,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -517,6 +528,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -534,6 +546,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -551,6 +564,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -568,6 +582,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -585,6 +600,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -602,6 +618,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
@@ -620,6 +637,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -637,6 +655,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -654,6 +673,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -671,6 +691,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -688,6 +709,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -705,6 +727,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#5A4501E7'
