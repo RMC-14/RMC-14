@@ -7,7 +7,7 @@
     department: RMCSquadPVE
     time: 3600 # 1 hour
   ranks:
-    RMCRankPrivate: []
+    RMCRankCorporal: []
   spawnMenuRoleName: PVE Smart Gun Operator
   supervisors: cm-job-supervisors-secserg
   startingGear: RMCGearPVESmartGunOperator

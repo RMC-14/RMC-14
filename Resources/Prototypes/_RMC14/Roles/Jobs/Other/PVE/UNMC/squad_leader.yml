@@ -9,7 +9,7 @@
     department: RMCSquadPVE
     time: 3600 # 1 hour
   ranks:
-    RMCRankCorporal: []
+    RMCRankSergeant: []
   spawnMenuRoleName: PVE Squad Leader
   startingGear: RMCGearPVESquadLeader
   dummyStartingGear: CMGearFireteamLeaderEquipped

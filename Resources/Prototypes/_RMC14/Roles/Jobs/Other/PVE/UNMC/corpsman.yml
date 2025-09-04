@@ -10,7 +10,7 @@
     department: RMCSquadPVE
     time: 10800 # 3 hours
   ranks:
-    RMCRankPrivate: []
+    RMCRankLanceCorporal: []
   spawnMenuRoleName: PVE Hospital Corpsman
   startingGear: RMCGearPVEHospitalCorpsman
   supervisors: cm-job-supervisors-secserg
