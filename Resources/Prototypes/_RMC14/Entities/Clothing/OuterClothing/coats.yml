@@ -752,6 +752,17 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingHolidayRobes
+  name: holiday priest
+  description: This is a nice holiday, my son.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+
 # Hybrisa
 
 - type: entity

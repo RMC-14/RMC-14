@@ -88,3 +88,16 @@
   parent: [ RMCIDCardStandardDogtagHidden, CMDogtagWeaponsSpecialist ]
   id: RMCDogtagWeaponsSpecialistHidden
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagChaplain
+  name: Chaplain's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCMilitaryChaplain
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagChaplain ]
+  id: RMCDogtagChaplainHidden
+  categories: [ HideSpawnMenu ]
