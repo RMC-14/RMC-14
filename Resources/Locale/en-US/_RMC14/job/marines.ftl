@@ -63,3 +63,22 @@ rmc-job-name-forecon-spotter = Recon Spotter
 rmc-job-name-recruit = Recruit
 rmc-job-description-recruit = Follow orders and learn from those above you. Get yelled at by an instructor. Graduate to become a marine.
 rmc-job-prefix-recruit = RCT
+
+rmc-job-name-pve-forecon-rifleman = Rifleman
+rmc-job-prefix-pve-forecon-rifleman = RFN
+
+rmc-job-name-pve-forecon-smartgunner = Smartgun Operator
+rmc-job-prefix-pve-forecon-smartgunner = SGO
+
+rmc-job-name-pve-forecon-corpsman = Corpsman
+rmc-job-prefix-pve-forecon-corpsman = HM
+
+rmc-job-name-pve-forecon-rto = Radio Telephone Operator
+rmc-job-description-pve-forecon-rto = You are the Radio Telephone Operator. Ensure communications between your squad and Company Command are well kept.
+rmc-job-prefix-pve-forecon-rto = RTO
+
+rmc-job-name-pve-forecon-assistant-lead = Assistant Squad Lead
+rmc-job-prefix-pve-forecon-assistant-lead = ASL
+
+rmc-job-name-pve-forecon-squad-lead = Squad Lead
+rmc-job-prefix-pve-forecon-squad-lead = SL

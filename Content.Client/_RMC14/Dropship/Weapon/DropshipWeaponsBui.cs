@@ -126,6 +126,10 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         var screen = first ? Window.ScreenOne : Window.ScreenTwo;
+
+        screen.Viewport.RemoveAllChildren();
+        screen.Viewport.Visible = false;
+
         static DropshipWeaponsButtonData ButtonAction(string suffix, Action<ButtonEventArgs> onPressed)
         {
             return new DropshipWeaponsButtonData($"rmc-dropship-weapons-{suffix}", onPressed);
@@ -230,8 +234,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
         screen.ScreenLabel.Margin = new Thickness();
         screen.ScreenLabel.Visible = true;
-
-        screen.Viewport.Visible = false;
 
         ClearNames(screen);
         switch (compScreen.State)
@@ -372,7 +374,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                         _embeddedTacMapWrapperScreen2 = currentWrapper;
                 }
 
-                screen.Viewport.RemoveAllChildren();
                 screen.Viewport.AddChild(currentWrapper);
                 screen.Viewport.Visible = true;
                 screen.BottomRow.SetData(exit);
