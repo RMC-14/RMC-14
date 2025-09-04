@@ -1,7 +1,7 @@
 - type: gameMap
   id: RoverLarge
   mapName: "RoverLarge"
-  mapPath: /Maps/_RMC14/roverlarge.yml
+  mapPath: /Maps/_RMC14/rover.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false

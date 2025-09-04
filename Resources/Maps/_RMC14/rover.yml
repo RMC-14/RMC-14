@@ -77,7 +77,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: StationNameHere
+      name: UNS Rover
     - type: Transform
     - type: Map
       mapPaused: True
