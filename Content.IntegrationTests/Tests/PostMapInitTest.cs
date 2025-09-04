@@ -92,7 +92,6 @@ namespace Content.IntegrationTests.Tests
             "OCP-583",
             "Haurchefant",
             "Breakwater_Strand",
-            "SorokyneRepaired",
             "UNSEndeavour",
         };
 
