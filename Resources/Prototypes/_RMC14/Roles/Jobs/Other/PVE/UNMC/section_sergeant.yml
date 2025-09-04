@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobSquadBase
   id: CMPVESectionSergeant
-  name: cm-job-name-squad-leader
-  description: cm-job-description-fireteam-leader
-  playTimeTracker: CMJobPVERifleman
+  name: cm-job-name-section-sergeant
+  description: cm-job-description-section-sergeant
+  playTimeTracker: CMJobPVESectionSergeant
   requirements:
   - !type:DepartmentTimeRequirement
     department: RMCSquadPVE
