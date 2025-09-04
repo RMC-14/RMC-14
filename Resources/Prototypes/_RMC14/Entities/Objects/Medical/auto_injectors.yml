@@ -247,7 +247,7 @@
 - type: entity
   parent: CMEmergencyAutoInjector
   id: CMStimulantAutoInjector
-  name: Stimulant autoinjector
+  name: stimulant autoinjector
   description: An autoinjector loaded with a strong dose of stimulants, made to keep special forces marines mobile even in dire situations. Rarely seen outside of the UNMC's elite.
   components:
   - type: Hypospray
