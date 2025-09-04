@@ -5,6 +5,10 @@
   description: rmc-job-description-military-chaplain
   playTimeTracker: RMCJobMilitaryChaplain
   requirements:
+    - !type:DepartmentTimeRequirement
+      department: CMSquad
+      time: 36000 # 10 hours
+  ranks:
     RMCRankLanceCorporal:
       - !type:RoleTimeRequirement
         role: RMCJobMilitaryChaplain
