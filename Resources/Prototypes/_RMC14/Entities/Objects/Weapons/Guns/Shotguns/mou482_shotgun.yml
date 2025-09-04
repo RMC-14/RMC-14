@@ -29,7 +29,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_xm51.ogg
+      collection: RMCXM38Shoot
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: RMCSelectiveFire
