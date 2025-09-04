@@ -65,12 +65,18 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentRailFlashlight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentMOU482GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentMOU482GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.8, 0.06
       rmc-aslot-rail: -0.15, 0.10
       rmc-aslot-stock: -0.65, -0.18
-      rmc-aslot-underbarrel: 0.5, -0.25
+      rmc-aslot-underbarrel: 0.41, -.44
   - type: GunDamageMultipliers
     multipliers:
       Breaching: 5

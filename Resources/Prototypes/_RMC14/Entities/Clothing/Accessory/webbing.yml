@@ -682,6 +682,17 @@
     - id: RMCMedicAutoInjectorDermalineKelotane15
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingMARSOCGrenades
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 4
+    - id: CMMRE
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchRoyal
   suffix: Filled, Royal

@@ -135,6 +135,13 @@
 
 - type: entity
   parent: RMCJumpsuitMarsoc
+  id: RMCJumpsuitMarsocWebbingGrenades
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingMARSOCGrenades
+
+- type: entity
+  parent: RMCJumpsuitMarsoc
   id: RMCJumpsuitMarsocWebbingMedic
   components:
   - type: WebbingClothing

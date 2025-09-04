@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/under.dmi, grenade-mk1_a.png grenade-mk1-open_a.png edited by Cephalopod222, flashgrip flashgrip-on flashgrip_a flashgrip_a-on by Sigma Draconis. laserlight resprite by VictorJob, flamethrower by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/under.dmi, grenade-mk1_a.png grenade-mk1-open_a.png edited by Cephalopod222, flashgrip flashgrip-on flashgrip_a flashgrip_a-on by Sigma Draconis. laserlight resprite by VictorJob, flamethrower by github noctyrnal, mou482 sprites by crazy1112345 (disc/github)",
   "size": {
     "x": 32,
     "y": 32
@@ -68,7 +68,13 @@
       "name": "grenade-mk1"
     },
     {
+      "name": "grenade-mou482"
+    },
+    {
       "name": "grenade-mk1-open"
+    },
+    {
+      "name": "grenade-mou482-open"
     },
     {
       "name": "grenade"
@@ -199,10 +205,16 @@
       "name": "grenade-mk1_a"
     },
     {
+      "name": "grenade-mou482_a"
+    },
+    {
       "name": "grenade_a"
     },
     {
       "name": "grenade-mk1-open_a"
+    },
+    {
+      "name": "grenade-mou482-open_a"
     },
     {
       "name": "grenade-open_a"
@@ -248,6 +260,9 @@
     },
     {
       "name": "grenade-mk1-on"
+    },
+    {
+      "name": "grenade-mou482-on"
     },
     {
       "name": "grenade-on"

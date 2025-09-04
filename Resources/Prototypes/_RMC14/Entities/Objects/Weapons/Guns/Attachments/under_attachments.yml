@@ -552,8 +552,9 @@
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentMOU482GrenadeLauncher
-  name: MOU482 integrated grenade launcher
+  name: MOU482 grenade launcher
   description: A small, lightweight integrated grenade launcher for the MOU482 Tactical Shotgun. Only fits two grenades, but can fire them rapidly.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -562,11 +563,14 @@
   - type: Item
     size: Normal
   - type: BallisticAmmoProvider
+    proto: CMGrenadeHighExplosive
     capacity: 2
   - type: ShootAtFixedPoint
     maxFixedRange: 10
   - type: RMCSelectiveFire
     baseFireRate: 0.75
+  - type: BreechLoaded
+    needOpenClose: false
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -574,7 +578,7 @@
           True: { state: grenade-mou482-open }
           False: { state: grenade-mou482 }
   - type: AttachableToggleable
-    actionName: Switch to the MOU482 Integrated Grenade Launcher
+    actionName: Switch to the MOU482 Grenade Launcher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mou482
@@ -586,7 +590,7 @@
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
-    - RMCAttachmentMK1GrenadeLauncher
+    - RMCAttachmentMOU482GrenadeLauncher
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
@@ -810,6 +814,9 @@
 
 - type: Tag
   id: RMCAttachmentMK1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentMOU482GrenadeLauncher
 
 - type: Tag
   id: RMCAttachmentM203GrenadeLauncher

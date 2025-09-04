@@ -39,7 +39,7 @@
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: hudsquad_soctl_a
+        state: hudsquad_soccmd
     - type: RMCPointing
   hidden: true
 
@@ -87,7 +87,7 @@
   id: RMCJobIconMarineRaiderOfficer
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_soctl
+    state: hudsquad_soccmd
 
 - type: entity
   parent: CMIDCardStandardDogtag
