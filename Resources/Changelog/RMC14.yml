@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the Warrior's fling ability stunning and slowing for too long.
-      It now stuns for 1 second instead of 2 seconds, and slows for 4 seconds instead
-      of 8 seconds.
-    type: Fix
-  - message: Fixed the Ravager's Clothesline ability applying the wrong effect, it
-      now dazes for 4 seconds instead of slowing for 8 seconds.
-    type: Fix
-  id: 1790
-  time: '2025-06-05T00:17:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6598
 - author: noctyrnal
   changes:
   - message: Added a white neckerchief to loadouts.
@@ -4510,5 +4498,13 @@
   id: 2290
   time: '2025-09-04T09:02:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7758
+- author: Spaghetti
+  changes:
+  - message: Fixed warrior lunge always slashing a target even if they were let go
+      early.
+    type: Fix
+  id: 2291
+  time: '2025-09-04T09:07:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7737
 Name: RMC14
 Order: -1
