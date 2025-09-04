@@ -578,110 +578,47 @@
             - !type:ReagentThreshold
               min: 5
 
-# TODO add liver and brain damage
 - type: reagent
   parent: [ CMReagentMedicine, CMTramadol ]
   id: CMParacetamol
   name: reagent-name-cmparacetamol
   desc: reagent-desc-cmparacetamol
   color: "#C855DC"
+  overdose: 60
+  criticalOverdose: 100
   metabolisms:
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:DecreasePain
-        strength: 20
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: SeeingRainbows # TODO change to hallucinations
-        component: SeeingRainbows
-        type: Add
-        time: 60
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        damage:
-          groups:
-            Airloss: 1.5
+      - !type:Painkilling
+        potency: 1
 
-# TODO add liver and brain damage
 - type: reagent
   parent: [ CMReagentMedicine, CMTricordrazine ]
   id: CMTramadol
   name: reagent-name-cmtramadol
   desc: reagent-desc-cmtramadol
   color: "#d7c7e0"
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:DecreasePain
-        strength: 50
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: SeeingRainbows # TODO change to hallucinations
-        component: SeeingRainbows
-        type: Add
-        time: 60
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 1.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Airloss: 1.5
+      - !type:Painkilling
+        potency: 2.5
 
-# TODO add liver and brain damage
 - type: reagent
   parent: [ CMReagentMedicine, CMTramadol ]
   id: CMOxycodone
   name: reagent-name-cmoxycodone
   desc: reagent-desc-cmoxycodone
   color: "#1cc282"
+  overdose: 20
+  criticalOverdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.05
       effects:
-      - !type:DecreasePain
-        strength: 80
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 20
-        key: SeeingRainbows # TODO change to hallucinations
-        component: SeeingRainbows
-        type: Add
-        time: 60
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 20
-        damage:
-          groups:
-            Toxin: 2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Airloss: 1.5
+      - !type:Painkilling
+        potency: 4
