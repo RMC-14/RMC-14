@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added a white neckerchief to loadouts.
-    type: Add
-  id: 1791
-  time: '2025-06-05T00:17:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6623
-- author: noctyrnal
-  changes:
-  - message: PMCs now have job spawners, for PvE.
-    type: Tweak
-  id: 1792
-  time: '2025-06-05T00:31:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6612
 - author: Whisper
   changes:
   - message: Chain of Command has been replaced with "Commander Succession".
@@ -4506,5 +4492,25 @@
   id: 2291
   time: '2025-09-04T09:07:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7737
+- author: J C Denton
+  changes:
+  - message: All planet maps with the exception of LV-759 and LV-522 use the newly
+      added cigarette vendors.
+    type: Tweak
+  id: 2292
+  time: '2025-09-04T09:08:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7740
+- author: SharkSnake98
+  changes:
+  - message: Added 5 new WeYa Orrery magazine issues
+    type: Add
+  - message: Gave WEYA Sequoia beer an Icon.
+    type: Add
+  - message: Changed the descriptions of a few magazines to make them lore-accurate
+      and avoid any issues.
+    type: Tweak
+  id: 2293
+  time: '2025-09-04T09:09:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7738
 Name: RMC14
 Order: -1
