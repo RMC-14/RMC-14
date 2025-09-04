@@ -25,6 +25,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+  hidden: true
 
 - type: playTimeTracker
   id: CMJobPVERifleman
