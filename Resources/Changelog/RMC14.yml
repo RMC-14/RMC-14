@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Chain of Command has been replaced with "Commander Succession".
-    type: Tweak
-  id: 1793
-  time: '2025-06-05T00:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6566
 - author: Vermidia
   changes:
   - message: Fix lifesaver bags being able to hold blood packs.
@@ -4512,5 +4505,12 @@
   id: 2293
   time: '2025-09-04T09:09:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7738
+- author: Ian321
+  changes:
+  - message: Admin only command "rmcrecalcualtepower" for fixing the power system.
+    type: Add
+  id: 2294
+  time: '2025-09-04T09:27:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7513
 Name: RMC14
 Order: -1
