@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton and noctyrnal
-  changes:
-  - message: Fixed Admin Fax having 451 Fahrenheit temperature and levitating rats.
-    type: Fix
-  id: 1789
-  time: '2025-06-05T00:14:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6576
 - author: Dygon
   changes:
   - message: Fixed the Warrior's fling ability stunning and slowing for too long.
@@ -4510,5 +4503,12 @@
   id: 2289
   time: '2025-09-04T08:59:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7777
+- author: BreakpointDebug1234
+  changes:
+  - message: Added X17 riot breaching charges to Riot Tech.
+    type: Add
+  id: 2290
+  time: '2025-09-04T09:02:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7758
 Name: RMC14
 Order: -1
