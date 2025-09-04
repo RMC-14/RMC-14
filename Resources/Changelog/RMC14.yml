@@ -1,88 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added APC status lights.
-    type: Add
-  - message: Fixed leaky roof on the Normandy.
-    type: Fix
-  id: 1784
-  time: '2025-06-01T10:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6580
-- author: Vermidia
-  changes:
-  - message: Fixed custom rifle bullets not having a maximum range of 24 (they no
-      longer do damage past that).
-    type: Fix
-  - message: Fixed custom rifle incind and impact bullets not having a minimum range
-      of 4 (they lose accuracy if too close or too far)
-    type: Fix
-  - message: Fixed custom rifle incind bullets just having different accuracy falloff
-      from the other custom rifle bullets.
-    type: Fix
-  id: 1785
-  time: '2025-06-01T10:32:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6606
-- author: Vermidia
-  changes:
-  - message: Fixed acid ball cooldown being 0 and applying before the doafter finished.
-    type: Fix
-  id: 1786
-  time: '2025-06-01T10:31:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6579
-- author: noctyrnal
-  changes:
-  - message: Hybrisa's LZ2 is now filled with fog which drops at 15 minutes.
-    type: Tweak
-  id: 1787
-  time: '2025-06-05T00:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6605
-- author: Vermidia
-  changes:
-  - message: Fixed req being able to order an SG kit.
-    type: Fix
-  id: 1788
-  time: '2025-06-05T00:14:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6620
-- author: J C Denton and noctyrnal
-  changes:
-  - message: Fixed Admin Fax having 451 Fahrenheit temperature and levitating rats.
-    type: Fix
-  id: 1789
-  time: '2025-06-05T00:14:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6576
-- author: Dygon
-  changes:
-  - message: Fixed the Warrior's fling ability stunning and slowing for too long.
-      It now stuns for 1 second instead of 2 seconds, and slows for 4 seconds instead
-      of 8 seconds.
-    type: Fix
-  - message: Fixed the Ravager's Clothesline ability applying the wrong effect, it
-      now dazes for 4 seconds instead of slowing for 8 seconds.
-    type: Fix
-  id: 1790
-  time: '2025-06-05T00:17:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6598
-- author: noctyrnal
-  changes:
-  - message: Added a white neckerchief to loadouts.
-    type: Add
-  id: 1791
-  time: '2025-06-05T00:17:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6623
-- author: noctyrnal
-  changes:
-  - message: PMCs now have job spawners, for PvE.
-    type: Tweak
-  id: 1792
-  time: '2025-06-05T00:31:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6612
-- author: Whisper
-  changes:
-  - message: Chain of Command has been replaced with "Commander Succession".
-    type: Tweak
-  id: 1793
-  time: '2025-06-05T00:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6566
 - author: Vermidia
   changes:
   - message: Fix lifesaver bags being able to hold blood packs.
@@ -4509,5 +4425,92 @@
   id: 2284
   time: '2025-08-30T10:02:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6741
+- author: Shromply
+  changes:
+  - message: Added FORECON PVE roles.
+    type: Add
+  - message: Added the FORECON PVE clothing vendor.
+    type: Add
+  id: 2285
+  time: '2025-09-04T08:47:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7755
+- author: x5tink
+  changes:
+  - message: Upgraded Burn and Trauma Kits for ERT's
+    type: Add
+  id: 2286
+  time: '2025-09-04T08:53:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7768
+- author: SharkSnake98
+  changes:
+  - message: Added the Holiday Priest Robes
+    type: Add
+  id: 2287
+  time: '2025-09-04T08:56:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7757
+- author: Spaghetti
+  changes:
+  - message: Gave C4 / Plastic Explosives a beeping noise
+    type: Add
+  id: 2288
+  time: '2025-09-04T08:58:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7754
+- author: x5tink
+  changes:
+  - message: Flap cap added to synth vendor.
+    type: Add
+  - message: Added document pouch to the SO vendor.
+    type: Add
+  - message: Fixed synth fultons not having 20 uses,
+    type: Fix
+  - message: fIX Syringe/surgical cases not fitting into medkits.
+    type: Fix
+  - message: Fix stray pixels on the potted plant sprite.
+    type: Fix
+  id: 2289
+  time: '2025-09-04T08:59:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7777
+- author: BreakpointDebug1234
+  changes:
+  - message: Added X17 riot breaching charges to Riot Tech.
+    type: Add
+  id: 2290
+  time: '2025-09-04T09:02:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7758
+- author: Spaghetti
+  changes:
+  - message: Fixed warrior lunge always slashing a target even if they were let go
+      early.
+    type: Fix
+  id: 2291
+  time: '2025-09-04T09:07:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7737
+- author: J C Denton
+  changes:
+  - message: All planet maps with the exception of LV-759 and LV-522 use the newly
+      added cigarette vendors.
+    type: Tweak
+  id: 2292
+  time: '2025-09-04T09:08:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7740
+- author: SharkSnake98
+  changes:
+  - message: Added 5 new WeYa Orrery magazine issues
+    type: Add
+  - message: Gave WEYA Sequoia beer an Icon.
+    type: Add
+  - message: Changed the descriptions of a few magazines to make them lore-accurate
+      and avoid any issues.
+    type: Tweak
+  id: 2293
+  time: '2025-09-04T09:09:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7738
+- author: Ian321
+  changes:
+  - message: Admin only command "rmcrecalcualtepower" for fixing the power system.
+    type: Add
+  id: 2294
+  time: '2025-09-04T09:27:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7513
 Name: RMC14
 Order: -1

@@ -16,8 +16,6 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitBO
-      - id: RMCHeadsetSEA
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
@@ -48,10 +46,6 @@
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
-    - name: Hat
-      choices: { CMHat: 1 }
-      entries:
-      - id: CMHeadCapDrill
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -88,10 +82,12 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
     - name: Books
+      takeAll: RMCBook
       entries:
       - id: RMCGuidebookLawMarine
       - id: RMCGuidebookSOP
     - name: Patches
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
