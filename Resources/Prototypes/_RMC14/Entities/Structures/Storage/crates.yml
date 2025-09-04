@@ -107,6 +107,10 @@
       types:
         Blunt: 0
     throwRange: 2
+  - type: CrashLandable
+  - type: ParaDroppable
+    dropScatter: 4
+  - type: AnimationPlayer
 
 - type: entity
   parent: RMCCrateBase

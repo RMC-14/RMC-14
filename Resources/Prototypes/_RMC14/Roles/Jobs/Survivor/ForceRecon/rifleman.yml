@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
-  playTimeTracker: RMCJobSurvivorRiflemanForecon
   icon: "RMCJobIconForeconRifleman"
   spawnMenuRoleName: FORECON Rifleman (Survivor)
   special:
@@ -23,7 +22,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -34,11 +33,8 @@
       prefix: cm-job-prefix-rifleman
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
+    - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorRiflemanForecon
-  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

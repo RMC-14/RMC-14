@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverSpearhead
   name: CMB Spearhead autorevolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .357 Magnum rounds.
@@ -29,7 +29,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
+      collection: RMCCMBSpearheadShoot
     soundEmpty:
       path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
   - type: RMCSelectiveFire
@@ -72,6 +72,24 @@
       rmc-aslot-rail: -0.14, 0.158
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.38, -0.24
+
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolverSpearheadCustom
+  name: Spearhead custom autorevolver
+  description: An automatic revolver chambered in .357, custom made of darker metal and with a wooden handle, clearly made for a person with taste in mind.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverSpearheadCustom
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
+#RMC14 TODO Unique action REVOLVER TRICK for Double accuracy.
+
 
 - type: entity
   parent: RMCWeaponRevolverSpearhead
@@ -229,6 +247,9 @@
 
 - type: Tag
   id: RMCWeaponRevolverSpearhead
+
+- type: Tag
+  id: RMCWeaponRevolverSpearheadCustom
 
 - type: Tag
   id: RMCSpeedLoader357

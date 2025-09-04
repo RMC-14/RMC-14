@@ -26,6 +26,7 @@
   parent: RMCPouchFirstAid
   id: RMCPouchFirstAidInjectors
   suffix: Injectors
+  description: Contains a variety of autoinjectors for quickly treating injuries.
   components:
   - type: StorageFill
     contents:
@@ -96,6 +97,19 @@
 - type: entity
   parent: RMCPouchFirstAidPMC
   id: RMCPouchFirstAidPMCFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    #- id: CMTramadolAutoInjector
+    - id: CMEmergencyAutoInjector
+
+- type: entity
+  parent: RMCPouchFirstAidPMC
+  id: RMCPouchFirstAidSPPArmyFill
+  name: first-aid pouch
   suffix: Filled
   components:
   - type: StorageFill

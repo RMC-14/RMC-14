@@ -47,7 +47,7 @@
   id: RMCAmbienceDanger
   files:
     - /Audio/_RMC14/Ambience/ambidanger.ogg
-    - /Audio/_RMC14/Ambience/ambidange2.ogg
+    - /Audio/_RMC14/Ambience/ambidanger2.ogg
 
 - type: soundCollection
   id: RMCAmbienceMaintenance

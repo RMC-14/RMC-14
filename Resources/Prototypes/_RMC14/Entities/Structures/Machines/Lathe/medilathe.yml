@@ -123,12 +123,9 @@
 - type: latheRecipePack
   id: RMCRecipesMedilathe
   recipes:
-  - CMBeaker
-  - CMBeakerLarge
-  #    - Drinking glass (625 glass)
   - CMSyringe
   - RMCDropper
-  #    - RMC Spray bottle (500 plastic)
+  #    - RMC Spray bottle (500 plastic)->(625)
   - RMCMedicAutoInjectorCustom5
   - RMCMedicAutoInjectorCustom15
   - RMCMedicAutoInjectorCustom30
@@ -146,7 +143,7 @@
   - CMBloodPack
   - RMCBeakerHighCapacity
   - CMBonesetter
-  #    - FixOVein (5000 Plastic)
+  #    - FixOVein (5000 Plastic)->(6250)
   - CMStasisBag
   - CMRollerBed
   - CMPillCanister

@@ -155,3 +155,64 @@
     sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
     state: cautery
   - type: CMSurgeryStepEmoteEffect
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryCutExoskeleton
+  name: Cut exoskeleton carapace
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: CMBoneSaw
+    add:
+    - type: RMCXenoOpen
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
+    state: saw
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryOpenExoskeleton
+  name: Pry exoskeleton open
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: CMRetractor
+    add:
+    - type: RMCXenoPryed
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
+    state: retractor
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgerySevereXenoConnections
+  name: Sever organ connections
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: CMScalpel
+    add:
+    - type: RMCXenoCut
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryRemoveXenoOrgan
+  name: Remove xenonid organ
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: CMHemostat
+    add:
+    - type: RMCXenoRemoved
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: RMCSurgeryStepXenoHeartEffect

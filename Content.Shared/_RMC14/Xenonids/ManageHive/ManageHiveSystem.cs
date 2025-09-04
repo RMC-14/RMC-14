@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Dataset;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
@@ -35,14 +36,7 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
-    private static readonly string[] JellyNames =
-    [
-        "Royal jelly of slaughter",
-        "Royal jelly of resilience",
-        "Royal jelly of sabotage",
-        "Royal jelly of proliferation",
-        "Royal jelly of rejuvenation",
-    ];
+    private LocalizedDatasetPrototype _jelliesDataset = default!;
 
     private int _jelliesPerQueen;
 
@@ -58,6 +52,7 @@ public sealed class ManageHiveSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveMessageEvent>(OnManageHiveDevolveMessage);
 
         Subs.CVar(_config, RMCCVars.RMCJelliesPerQueen, v => _jelliesPerQueen = v, true);
+        _jelliesDataset = _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJellies");
     }
 
     private void OnManageHiveAction(Entity<ManageHiveComponent> manage, ref ManageHiveActionEvent args)
@@ -65,16 +60,16 @@ public sealed class ManageHiveSystem : EntitySystem
         // TODO RMC14 other options
         var options = new List<DialogOption>
         {
-            new("De-evolve (500)", new ManageHiveDevolveEvent())
+            new(Loc.GetString("rmc-hivemanagement-deevolve"), new ManageHiveDevolveEvent())
         };
 
         if (TryComp(manage, out CommendationGiverComponent? giver) &&
             giver.Given < _jelliesPerQueen)
         {
-            options.Add(new DialogOption("Reward Jelly (500)", new ManageHiveJellyEvent()));
+            options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-reward"), new ManageHiveJellyEvent()));
         }
 
-        _dialog.OpenOptions(manage, "Hive Management", options, "Manage The Hive");
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-hive-management"), options, Loc.GetString("rmc-hivemanagement-manage-the-hive"));
     }
 
     private void OnManageHiveDevolve(Entity<ManageHiveComponent> manage, ref ManageHiveDevolveEvent args)
@@ -88,15 +83,21 @@ public sealed class ManageHiveSystem : EntitySystem
         var devolutions = watched.Comp.DevolvesTo;
         if (devolutions.Length == 1)
         {
-            var msg = $"Are you sure you want to deevolve {Name(watched)}";
-            if (Prototype(watched)?.Name is { } name)
-                msg += $" from {name}";
+            var name = Name(watched);
+            string? protoName = null;
+            if (Prototype(watched)?.Name is { } n)
+                protoName = n;
+            var hasFrom = protoName != null;
+            var hasTo = _prototype.TryIndex(devolutions[0], out var devolveProto);
+            string msg;
+            if (hasFrom && hasTo)
+                msg = Loc.GetString("rmc-hivemanagement-are-you-sure-deevolve-from-to", ("name", name), ("from", protoName ?? ""), ("to", devolveProto?.Name ?? ""));
+            else if (hasFrom)
+                msg = Loc.GetString("rmc-hivemanagement-are-you-sure-deevolve-from", ("name", name), ("from", protoName ?? ""));
+            else
+                msg = Loc.GetString("rmc-hivemanagement-are-you-sure-deevolve", ("name", name));
 
-            var devolves = devolutions[0];
-            if (_prototype.TryIndex(devolves, out var devolveProto))
-                msg += $" to {devolveProto.Name}?";
-
-            _dialog.OpenConfirmation(manage, "Deevolution", msg, new ManageHiveDevolveConfirmEvent(devolves));
+            _dialog.OpenConfirmation(manage, Loc.GetString("rmc-hivemanagement-deevolution"), msg, new ManageHiveDevolveConfirmEvent(devolutions[0]));
             return;
         }
 
@@ -110,7 +111,7 @@ public sealed class ManageHiveSystem : EntitySystem
             choices.Add(new DialogOption(name, new ManageHiveDevolveConfirmEvent(choice)));
         }
 
-        _dialog.OpenOptions(manage, "Choose a caste", choices);
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-choose-caste"), choices);
     }
 
     private void OnManageHiveJelly(Entity<ManageHiveComponent> ent, ref ManageHiveJellyEvent args)
@@ -130,7 +131,7 @@ public sealed class ManageHiveSystem : EntitySystem
             if (!playTimes.TryGetValue(ent.Comp.PlayTime, out var time) ||
                 time < ent.Comp.JellyRequiredTime)
             {
-                _popup.PopupCursor($"You don't have the time required to hand out jellies ({(int) ent.Comp.JellyRequiredTime.TotalHours} hours)", ent, PopupType.LargeCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-jelly-error-not-enough-playtime", ("requiredHours", (int) ent.Comp.JellyRequiredTime.TotalHours)), ent, PopupType.LargeCaution);
                 return;
             }
         }
@@ -154,7 +155,7 @@ public sealed class ManageHiveSystem : EntitySystem
             choices.Add(new DialogOption(Name(uid), new ManageHiveJellyXenoEvent(GetNetEntity(uid))));
         }
 
-        _dialog.OpenOptions(ent, "Jelly Recipient", choices, "Who do you want to award jelly to?");
+        _dialog.OpenOptions(ent, Loc.GetString("rmc-jelly-recipient"), choices, Loc.GetString("rmc-jelly-recipient-prompt"));
     }
 
     private void OnManageHiveJellyXeno(Entity<ManageHiveComponent> ent, ref ManageHiveJellyXenoEvent args)
@@ -163,12 +164,12 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        foreach (var jellyName in JellyNames)
+        foreach (var name in _jelliesDataset.Values)
         {
-            options.Add(new DialogOption(jellyName, new ManageHiveJellyNameEvent(args.Xeno, jellyName)));
+            options.Add(new DialogOption(Loc.GetString(name), new ManageHiveJellyNameEvent(args.Xeno, Loc.GetString(name))));
         }
 
-        _dialog.OpenOptions(ent, "Jelly Type", options, "What type of jelly do you want to award?");
+        _dialog.OpenOptions(ent, Loc.GetString("rmc-jelly-type"), options, Loc.GetString("rmc-jelly-type-prompt"));
     }
 
     private void OnManageHiveJellyType(Entity<ManageHiveComponent> ent, ref ManageHiveJellyNameEvent args)
@@ -177,7 +178,7 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         var ev = new ManageHiveJellyMessageEvent(args.Xeno, args.Name);
-        _dialog.OpenInput(ent, "What should the pheromone read?", ev, true, _commendation.CharacterLimit);
+        _dialog.OpenInput(ent, Loc.GetString("rmc-jelly-citation-prompt"), ev, true, _commendation.CharacterLimit);
     }
 
     private void OnManageHiveJellyMessage(Entity<ManageHiveComponent> ent, ref ManageHiveJellyMessageEvent args)
@@ -197,8 +198,8 @@ public sealed class ManageHiveSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.JellyPlasmaCost))
             return;
 
-        _commendation.GiveCommendation(ent.Owner, xeno.Value, args.Name, args.Message, CommendationType.Jelly);
-        _popup.PopupCursor("Jelly awarded", ent, PopupType.Large);
+        _commendation.GiveCommendation(ent.Owner, xeno.Value, Loc.GetString(args.Name), args.Message, CommendationType.Jelly);
+        _popup.PopupCursor(Loc.GetString("rmc-jelly-awarded"), ent, PopupType.Large);
     }
 
     private void OnManageHiveDevolveConfirm(Entity<ManageHiveComponent> manage, ref ManageHiveDevolveConfirmEvent args)
@@ -212,7 +213,7 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
         }
 
-        _dialog.OpenInput(manage, $"Provide a reason for deevolving {Name(watched)}", new ManageHiveDevolveMessageEvent(args.Choice));
+        _dialog.OpenInput(manage, Loc.GetString("rmc-hivemanagement-provide-reason", ("name", Name(watched))), new ManageHiveDevolveMessageEvent(args.Choice));
     }
 
     private void OnManageHiveDevolveMessage(Entity<ManageHiveComponent> manage, ref ManageHiveDevolveMessageEvent args)
@@ -235,7 +236,7 @@ public sealed class ManageHiveSystem : EntitySystem
 
         if (TryComp(devolution, out ActorComponent? watchedActor))
         {
-            var msg = $"The queen is deevolving you for the following reason: {args.Message}";
+            var msg = Loc.GetString("rmc-hivemanagement-queen-deevolving", ("reason", args.Message));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, msg, msg, default, false, watchedActor.PlayerSession.Channel);
             _popup.PopupEntity(msg, devolution, PopupType.LargeCaution);
         }
@@ -250,20 +251,20 @@ public sealed class ManageHiveSystem : EntitySystem
         if (!_xenoWatch.TryGetWatched(manage.Owner, out var watchedId) ||
             watchedId == manage.Owner)
         {
-            _popup.PopupEntity("You must overwatch the xeno you want to de-evolve.", manage, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-must-overwatch"), manage, manage, PopupType.MediumCaution);
             return false;
         }
 
         if (!TryComp(watchedId, out XenoDevolveComponent? devolve) ||
             devolve.DevolvesTo.Length == 0)
         {
-            _popup.PopupEntity($"{Name(watchedId)} can't be devolved!", watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-be-devolved", ("name", Name(watchedId))), watchedId, manage, PopupType.MediumCaution);
             return false;
         }
 
         if (!devolve.CanBeDevolvedByOther)
         {
-            _popup.PopupEntity("You cannot deevolve xenonids to larva.", watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-deevolve-larva"), watchedId, manage, PopupType.MediumCaution);
             return false;
         }
 
@@ -272,7 +273,7 @@ public sealed class ManageHiveSystem : EntitySystem
 
         if (!_hive.FromSameHive(manage.Owner, watchedId))
         {
-            _popup.PopupEntity("You cannot deevolve a member of another hive!", watchedId, manage, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-hivemanagement-cant-deevolve-other-hive"), watchedId, manage, PopupType.MediumCaution);
             return false;
         }
 
@@ -293,7 +294,7 @@ public sealed class ManageHiveSystem : EntitySystem
             Guid.Parse(receiver.LastPlayerId) == manage.Comp4.PlayerSession.UserId)
         {
             if (popup)
-                _popup.PopupCursor("You can't give a jelly to that xeno!", manage, PopupType.MediumCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-jelly-error-cant-give"), manage, PopupType.MediumCaution);
 
             return false;
         }
@@ -301,7 +302,7 @@ public sealed class ManageHiveSystem : EntitySystem
         if (manage.Comp2.Given >= _jelliesPerQueen)
         {
             if (popup)
-                _popup.PopupCursor("You can't give out any more jellies!", manage, PopupType.MediumCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-jelly-error-limit-reached", ("given", manage.Comp2.Given), ("limit", _jelliesPerQueen)), manage, PopupType.MediumCaution);
 
             return false;
         }

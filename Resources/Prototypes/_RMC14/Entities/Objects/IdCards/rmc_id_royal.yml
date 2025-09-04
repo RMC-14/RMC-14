@@ -14,3 +14,8 @@
   components:
   - type: ItemIFF
     faction: FactionRoyalMarines
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
+  id: RMCIDRoyalMarinesHidden
+  categories: [ HideSpawnMenu ]

@@ -1,0 +1,38 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCCoatRack
+  name: coat rack
+  description: Rack that holds coats.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/coatrack.rsi
+    state: coatrack0
+    noRot: true
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.03
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance

@@ -150,6 +150,78 @@
     },
     {
       "name": "omni_uad_sentry_handheld"
+    },
+    {
+      "name": "normal_uac_flamer",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_flamer_noammo",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_flamer_on",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_flamer_destroyed"
+    },
+    {
+      "name": "normal_uac_flamer_handheld"
+    },
+    {
+      "name": "mini_uac_flamer",
+      "directions": 4
+    },
+    {
+      "name": "mini_uac_flamer_noammo",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "mini_uac_flamer_on",
+      "directions": 4
+    },
+    {
+      "name": "mini_uac_flamer_destroyed"
+    },
+    {
+      "name": "mini_uac_flamer_handheld"
+    },
+    {
+      "name": "plasma_uac_flamer",
+      "directions": 4
+    },
+    {
+      "name": "plasma_uac_flamer_noammo",
+      "directions": 4
+    },
+    {
+      "name": "plasma_uac_flamer_on",
+      "directions": 4
+    },
+    {
+      "name": "plasma_uac_flamer_destroyed"
+    },
+    {
+      "name": "plasma_uac_flamer_handheld"
     }
   ]
 }

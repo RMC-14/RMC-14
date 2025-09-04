@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Actions;
 using Content.Shared.Weapons.Melee.Events;
@@ -6,8 +7,10 @@ namespace Content.Shared._RMC14.Xenonids.Cruelty;
 
 public sealed partial class XenoCrueltySystem : EntitySystem
 {
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,17 +33,16 @@ public sealed partial class XenoCrueltySystem : EntitySystem
         if (!hit)
             return;
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var (actionId, action) in _rmcActions.GetActionsWithEvent<XenoLeapActionEvent>(xeno))
         {
-            if ((action.BaseEvent is XenoLeapActionEvent)
-                && action.Cooldown != null)
-            {
-                var cooldownEnd = action.Cooldown.Value.End - xeno.Comp.CooldownReduction;
-                if (cooldownEnd < action.Cooldown.Value.Start)
-                    _actions.ClearCooldown(actionId);
-                else
-                    _actions.SetCooldown(actionId, action.Cooldown.Value.Start, cooldownEnd);
-            }
+            if (action.Cooldown == null)
+                continue;
+
+            var cooldownEnd = action.Cooldown.Value.End - xeno.Comp.CooldownReduction;
+            if (cooldownEnd < action.Cooldown.Value.Start)
+                _actions.ClearCooldown(actionId);
+            else
+                _actions.SetCooldown(actionId, action.Cooldown.Value.Start, cooldownEnd);
         }
     }
 }

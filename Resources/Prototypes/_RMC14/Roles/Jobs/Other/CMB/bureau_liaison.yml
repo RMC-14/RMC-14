@@ -8,7 +8,7 @@
   ranks:
     RMCRankICBCorporateLiaison: [ ]
   startingGear: RMCGearICBLiaison
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconICBLiaison"
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYaExecColony
@@ -23,7 +23,7 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
-  hasIcon: false
+    - type: RMCTrackable
   hidden: true
 
 - type: entity
@@ -75,3 +75,10 @@
 
 - type: playTimeTracker
   id: RMCJobICBLiaison
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconICBLiaison
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_icc

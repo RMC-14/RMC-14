@@ -3,7 +3,7 @@
   table: !type:AllSelector
     children:
     - id: CMBootsBlackFilled
-    - id: JumpsuitMarine
+    - id: RMCJumpsuitSunRiders
     - id: RMCHeadsetGoldenArrow
 
 - type: entityTable

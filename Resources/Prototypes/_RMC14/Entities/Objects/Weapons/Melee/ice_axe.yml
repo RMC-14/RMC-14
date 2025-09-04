@@ -1,0 +1,46 @@
+- type: entity
+  parent: [ RMCBaseMeleeWeapon, BaseKnife ]
+  id: RMCIceAxe
+  name: ice axe
+  description: For climbing, mostly. Makes for a good improvised weapon.
+  components:
+  - type: Clothing
+    slots:
+    - belt
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/ice_axe.rsi
+    state: icon_blue
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Slash: 25
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 18
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/ice_axe.rsi
+  - type: DisarmMalus
+    malus: 0.225
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 10
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: RMCIceAxe
+  id: RMCIceAxeRed
+  components:
+  - type: Sprite
+    state: icon_red
+
+- type: entity
+  parent: RMCIceAxe
+  id: RMCIceAxeGreen
+  components:
+  - type: Sprite
+    state: icon_green

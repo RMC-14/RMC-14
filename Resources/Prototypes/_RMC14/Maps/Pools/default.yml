@@ -1,0 +1,10 @@
+- type: gameMapPool
+  id: RMCDefaultMapPool
+  maps:
+  - Savannah
+  - Almayer
+
+- type: gameMapPool
+  id: RMCDefaultMapPoolAlmayer
+  maps:
+  - Almayer

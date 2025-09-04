@@ -7,6 +7,7 @@
     channels:
     - MarineCommand
     - MarineJTAC
+    - MarineRequisition
     defaultChannel: MarineCommand
   - type: Sprite
     state: sl_key
@@ -128,7 +129,7 @@
     - MarineJTAC
     - MarineIntel
     - MarineCommon
-    defaultChannel: MarineForecon
+    defaultChannel: MarineSOF
   - type: Sprite
     state: sl_key
 

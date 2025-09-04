@@ -87,6 +87,7 @@
     id: RMCTileFireGreen
     extinguishInstantly: false
     patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: 3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666
@@ -98,6 +99,32 @@
           Two: { state: green_2 }
           Three: { state: green_3 }
           Four: { state: green_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireBlue
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: PointLight
+    color: "#069420"
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 45
+  - type: TileFire
+    id: RMCTileFireBlue
+    extinguishInstantly: false
+    patExtinguishMultiplier: 2
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
 
 - type: entity
   parent: RMCTileFire
@@ -143,6 +170,7 @@
   - type: TileFire
     id: RMCTileFireOBAegis
     extinguishInstantly: false
+  - type: RMCFireImmunityBypass  # This component allows it to bypass fire immunity
   - type: GenericVisualizer
     visuals:
       enum.TileFireLayers.Base:
@@ -195,3 +223,13 @@
   - type: RMCIgniteOnCollide
     maxStacks: 60
     intensity: 60
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireMiniMike
+  components:
+  - type: TileFire
+    duration: 20
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 25
