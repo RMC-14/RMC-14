@@ -12,21 +12,10 @@
   - CMSmartGunOperator
   - CMHospitalCorpsman
   - CMCombatTech
-  departmentRadio: null
-  headOfDepartment: CMSquadLeader
-
-# Anti "PlatCO how defib" mechanism
-- type: department
-  parent: CMDepartmentBase
-  id: RMCSquadPVE
-  name: department-CMSquad
-  description: cm-department-Marine-description
-  color: "#DE3A3A"
-  roles:
   - CMPVERifleman
   - CMPVEHospitalCorpsman
   - CMPVESquadLeader
   - CMPVESmartGunOperator
   - CMPVESectionSergeant
   departmentRadio: null
-  headOfDepartment: CMPVESectionSergeant
+  headOfDepartment: CMSquadLeader

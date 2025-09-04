@@ -5,8 +5,8 @@
   description: cm-job-description-fireteam-leader
   playTimeTracker: CMJobPVESquadLeader
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: RMCSquadPVE
+  - !type:TotalJobsTimeRequirement
+    department: CMPVERifleman
     time: 3600 # 1 hour
   ranks:
     RMCRankSergeant: []

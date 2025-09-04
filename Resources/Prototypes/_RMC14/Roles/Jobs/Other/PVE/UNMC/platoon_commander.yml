@@ -5,8 +5,8 @@
   description: cm-job-description-platoon-commander
   playTimeTracker: CMJobPVEPlatoonCommander
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: RMCSquadPVE
+  - !type:TotalJobsTimeRequirement
+    department: CMPVERifleman
     time: 10800 # 3 hours
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer

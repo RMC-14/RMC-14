@@ -3,8 +3,8 @@
   id: CMPVESmartGunOperator
   playTimeTracker: CMJobPVESmartGunOperator
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: RMCSquadPVE
+  - !type:TotalJobsTimeRequirement
+    department: CMPVERifleman
     time: 3600 # 1 hour
   ranks:
     RMCRankCorporal: []
