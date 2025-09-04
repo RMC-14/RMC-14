@@ -2,10 +2,6 @@
   parent: CMSmartGunOperator
   id: CMPVESmartGunOperator
   playTimeTracker: CMJobPVESmartGunOperator
-  requirements:
-  - !type:TotalJobsTimeRequirement
-    role: CMPVERifleman
-    time: 3600 # 1 hour
   ranks:
     RMCRankCorporal: []
   spawnMenuRoleName: PVE Smart Gun Operator
