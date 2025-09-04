@@ -1,0 +1,686 @@
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedPMCDirector
+  suffix: PMC Director, Full Gear
+  components:
+  - type: Loadout
+    prototypes: [ RMCJobPMCDirector ]
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedCorporateSupervisor
+  suffix: Corporate Executive Supervisor, Full Gear
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorporateExecutiveSupervisor ]
+
+# Marines
+
+# !!!WARNING!!!
+# BRAIN DAMAGE AHEAD
+# !!!WARNING!!!
+
+# SL
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSL
+  suffix: Marine, Squad Leader
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSL
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSL
+  suffix: Marine, Squad Leader
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSquadLeaderEquippedM4 ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSLM4
+  suffix: Marine, Squad Leader, M4 armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSLM4
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSLM4
+  suffix: Marine, Squad Leader
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSquadLeaderEquippedM4 ]
+
+- type: startingGear
+  id: CMGearSquadLeaderEquippedM4
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    head: CMArmorHelmetM11
+    outerClothing: CMArmorM4
+    gloves: CMHandsBlackMarine
+    id: CMDogtagSquadLeader
+    ears: CMHeadsetAlphaLeader
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entityTable
+  id: RandomZombieSLTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCSpawnZombifiedSL
+    - id: RMCSpawnZombifiedSLM4
+
+- type: entity
+  id: RandomZombieSquadLeader
+  name: random zombified squad leader spawner
+  suffix: Zombies, Marine Squad Leader
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomZombieSLTable
+
+# Rifleman
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRifleman
+  suffix: Marine, Rifleman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRifleman
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRifleman
+  suffix: Marine, Rifleman
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquipped ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanNoHelmet
+  suffix: Marine, Rifleman, No Helmet
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanNoHelmet
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanNoHelmet
+  suffix: Marine, Rifleman, No Helmet
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedNoHelmet ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedNoHelmet
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCArmorM3MediumPadded
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanHeavyArmor
+  suffix: Marine, Rifleman, Heavy Armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanHeavyArmor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanHeavyArmor
+  suffix: Marine, Rifleman, Heavy Armor
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedHeavyArmor ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedHeavyArmor
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    outerClothing: RMCArmorM3HeavyRidged
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanHeavyArmorNoHelmet
+  suffix: Marine, Rifleman, Heavy Armor, No Helmet
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanHeavyArmorNoHelmet
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanHeavyArmorNoHelmet
+  suffix: Marine, Rifleman, Heavy Armor, No Helmet
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedHeavyArmorNoHelmet ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedHeavyArmorNoHelmet
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCArmorM3HeavyRidged
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanLightArmor
+  suffix: Marine, Rifleman, Light Armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanLightArmor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanLightArmor
+  suffix: Marine, Rifleman, Light Armor
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedLightArmor ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedLightArmor
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    outerClothing: RMCArmorM3LightSmooth
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanLightArmorNoHelmet
+  suffix: Marine, Rifleman, Light Armor, No Helmet
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanLightArmorNoHelmet
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanLightArmorNoHelmet
+  suffix: Marine, Rifleman, Light Armor, No Helmet
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedLightArmorNoHelmet ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedLightArmorNoHelmet
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCArmorM3LightSmooth
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanNoArmor
+  suffix: Marine, Rifleman, No Armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanNoArmor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanNoArmor
+  suffix: Marine, Rifleman, No Armor
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedNoArmor ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedNoArmor
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    suitstorage: WeaponRifleM54CMK1
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedRiflemanNoArmorNoHelmet
+  suffix: Marine, Rifleman, No Armor, No Helmet
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedRiflemanNoArmorNoHelmet
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedRiflemanNoArmorNoHelmet
+  suffix: Marine, Rifleman, No Armor, No Helmet
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquippedNoArmorNoHelmet ]
+
+- type: startingGear
+  id: CMGearRiflemanEquippedNoArmorNoHelmet
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazine
+
+- type: entityTable
+  id: RandomZombieRiflemanTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCSpawnZombifiedRifleman
+    - id: RMCSpawnZombifiedRiflemanNoHelmet
+    - id: RMCSpawnZombifiedRiflemanHeavyArmor
+    - id: RMCSpawnZombifiedRiflemanHeavyArmorNoHelmet
+    - id: RMCSpawnZombifiedRiflemanLightArmor
+    - id: RMCSpawnZombifiedRiflemanLightArmorNoHelmet
+    - id: RMCSpawnZombifiedRiflemanNoArmor
+    - id: RMCSpawnZombifiedRiflemanNoArmorNoHelmet
+    - id: RMCSpawnZombifiedRiflemanoArmor
+    - id: RMCSpawnZombifiedRiflemanNoArmorNoHelmet
+
+- type: entity
+  id: RandomZombieRifleman
+  name: random zombified rifleman spawner
+  suffix: Zombies, Marine Rifleman
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomZombieRiflemanTable
+
+# corpsman
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedCorpsman
+  suffix: Marine, Corpsman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedCorpsman
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedCorpsman
+  suffix: Marine, Corpsman
+  components:
+  - type: Loadout
+    prototypes: [ CMGearCorpsmanEquipped ]
+
+- type: startingGear
+  id: CMGearCorpsmanEquipped
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsLatexMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    outerClothing: RMCArmorVest
+    head: RMCArmorHelmetM10MedicWhite
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedCorpsmanDarkHelmet
+  suffix: Marine, Corpsman, Dark Helmet
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedCorpsmanDarkHelmet
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedCorpsmanDarkHelmet
+  suffix: Marine, Corpsman, Dark Helmet
+  components:
+  - type: Loadout
+    prototypes: [ CMGearCorpsmanEquippedDarkHelmet ]
+
+- type: startingGear
+  id: CMGearCorpsmanEquippedDarkHelmet
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsLatexMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    outerClothing: RMCArmorVest
+    head: RMCArmorHelmetM10Medic
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedCorpsmanDarkHelmetNoArmor
+  suffix: Marine, Corpsman, Dark Helmet, No Armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedCorpsmanDarkHelmetNoArmor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedCorpsmanDarkHelmetNoArmor
+  suffix: Marine, Corpsman, Dark Helmet, No Armor
+  components:
+  - type: Loadout
+    prototypes: [ CMGearCorpsmanEquippedDarkHelmetNoArmor ]
+
+- type: startingGear
+  id: CMGearCorpsmanEquippedDarkHelmetNoArmor
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsLatexMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    head: CMArmorHelmetM10Medic
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedCorpsmanNoArmor
+  suffix: Marine, Corpsman, No Armor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedCorpsmanNoArmor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedCorpsmanNoArmor
+  suffix: Marine, Corpsman, No Armor
+  components:
+  - type: Loadout
+    prototypes: [ CMGearCorpsmanEquippedWhiteNoArmor ]
+
+- type: startingGear
+  id: CMGearCorpsmanEquippedWhiteNoArmor
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsLatexMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha
+    belt: CMBeltMedicalFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    head: RMCArmorHelmetM10MedicWhite
+
+- type: entityTable
+  id: RandomZombieCorpsmanTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCSpawnZombifiedCorpsman
+    - id: RMCSpawnZombifiedCorpsmanDarkHelmet
+    - id: RMCSpawnZombifiedCorpsmanDarkHelmetNoArmor
+    - id: RMCSpawnZombifiedCorpsmanNoArmor
+
+- type: entity
+  id: RandomZombieCorpsman
+  name: random zombified corpsman spawner
+  suffix: Zombies, Marine Corpsman
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomZombieCorpsmanTable
+
+# specs
+
+# sadar
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSpecialistRPGSADARM5ATL # included every name of the rocket launcher for easier search
+  suffix: Marine, Specialist, RPG
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSpecialistRPGSADARM5ATL
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSpecialistRPGSADARM5ATL
+  suffix: Marine, Specialist, RPG
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSpecialistRPGSADARM5ATL ]
+
+- type: startingGear
+  id: CMGearSpecialistRPGSADARM5ATL
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsBlackMarine
+    id: CMDogtagWeaponsSpecialist
+    ears: CMHeadsetAlpha
+    belt: RMCBeltUtilityGeneral
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchGeneralLarge
+    suitstorage: RMCWeaponLauncherM5ATL
+    head: RMCArmorHelmetM3TDemo
+    outerClothing: RMCArmorM3TDemo
+
+# grenadier
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSpecialistGrenadier
+  suffix: Marine, Specialist, Grenadier
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSpecialistGrenadier
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSpecialistGrenadier
+  suffix: Marine, Specialist, Grenadier
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSpecialistGrenadier ]
+
+- type: startingGear
+  id: CMGearSpecialistGrenadier
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsM3G4
+    id: CMDogtagWeaponsSpecialist
+    ears: CMHeadsetAlpha
+    belt: RMCBeltGrenadeLargeFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchExplosive
+    suitstorage: WeaponLauncherM83
+    head: RMCArmorHelmetM3G4
+    outerClothing: RMCArmorM3G4
+
+# scout
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSpecialistScout
+  suffix: Marine, Specialist, Scout
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSpecialistScout
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSpecialistScout
+  suffix: Marine, Specialist, Scout
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSpecialistScout ]
+
+- type: startingGear
+  id: CMGearSpecialistScout
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: RMCScoutShoes
+    gloves: CMHandsBlackMarine
+    id: CMDogtagWeaponsSpecialist
+    ears: CMHeadsetAlpha
+    belt: CMBeltMarine
+    pocket1: RMCMagazineRifleM4SPRA19Incendiary
+    pocket2: RMCLaserDesignatorScout
+    suitstorage: WeaponRifleM4SPRCustom
+    head: RMCArmorHelmetM3Scout
+    outerClothing: RMCArmorM3Scout
+
+# sniper
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSpecialistSniper
+  suffix: Marine, Specialist, Sniper
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSpecialistSniper
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSpecialistSniper
+  suffix: Marine, Specialist, Sniper
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSpecialistSniper ]
+
+- type: startingGear
+  id: CMGearSpecialistSniper
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: RMCScoutShoes
+    gloves: CMHandsBlackMarine
+    id: CMDogtagWeaponsSpecialist
+    ears: CMHeadsetAlpha
+    belt: CMBeltMarine
+    pocket1: CMMagazineSniperM96S
+    pocket2: CMMagazineSniperM96S
+    suitstorage: CMM96SSniperRifle
+    head: CMArmorHelmetM45
+    outerClothing: CMArmorM45
+    back: CMBackpackSniper
+
+# antimaterial sniper
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSpecialistSniperAntimateriel
+  suffix: Marine, Specialist, Antimateriel Sniper
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSpecialistSniperAntimateriel
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCSpawnZombifiedSpecialistSniperAntimateriel
+  suffix: Marine, Specialist, Antimateriel Sniper
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSpecialistSniperAntimateriel ]
+
+- type: startingGear
+  id: CMGearSpecialistSniperAntimateriel
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: RMCScoutShoes
+    gloves: CMHandsBlackMarine
+    id: CMDogtagWeaponsSpecialist
+    ears: CMHeadsetAlpha
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCMagazineSniperXM43E1AntiMateriel
+    suitstorage: RMCXM43E1AntiMaterielRifle
+    head: CMArmorHelmetM45
+    outerClothing: CMArmorM45
+    back: CMBackpackSniper
+
+# smartgunner
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSmartgunner
+  suffix: Marine, Smartgunner
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSmartgunner
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSmartgunner
+  suffix: Marine, Smartgunner
+  components:
+  - type: Loadout
+    prototypes: [ CMGearSmartgunnerEquipped ]
+
+- type: startingGear
+  id: CMGearSmartgunnerEquipped
+  equipment:
+    jumpsuit: CMJumpsuitSurvivorMarine
+    shoes: CMBootsBlackFilled
+    outerClothing: CMArmorSmartGunCombatHarness
+    gloves: CMHandsBlackMarine
+    id: CMDogtagSmartGunOperator
+    ears: CMHeadsetAlpha
+    suitstorage: RMCSmartGun
+    belt: CMBeltMarine
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchGeneralLarge

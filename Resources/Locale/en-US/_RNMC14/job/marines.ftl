@@ -11,14 +11,14 @@ CMJobSectionSergeant = Section Sergeant
 
 # SOF
 
-rmc-job-name-marine-raider-smartgun-PVE = Marine Raider Smartgunner (PVE)
+rmc-job-name-marine-raider-smartgun-PVE = Marine Raider Smartgunner
 
-rmc-job-name-marine-raider-medspec-PVE = Marine Raider Medical Specialist (PVE)
+rmc-job-name-marine-raider-medspec-PVE = Marine Raider Medical Specialist
 cm-job-prefix-SOF-medspec = MEDSPC
 
-rmc-job-name-marine-raider-engispec-PVE = Marine Raider Engineering Specialist (PVE)
+rmc-job-name-marine-raider-engispec-PVE = Marine Raider Engineering Specialist
 cm-job-prefix-SOF-engispec = ENGSPC
 
-rmc-job-name-marine-raider-PVE = Marine Raider (PVE)
+rmc-job-name-marine-raider-PVE = Marine Raider
 
-rmc-job-name-marine-raider-leader-PVE = Marine Raider Team Leader (PVE)
+rmc-job-name-marine-raider-leader-PVE = Marine Raider Team Leader
