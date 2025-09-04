@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Hybrisa's LZ2 is now filled with fog which drops at 15 minutes.
-    type: Tweak
-  id: 1787
-  time: '2025-06-05T00:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6605
 - author: Vermidia
   changes:
   - message: Fixed req being able to order an SG kit.
@@ -4502,5 +4495,12 @@
   id: 2287
   time: '2025-09-04T08:56:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7757
+- author: Spaghetti
+  changes:
+  - message: Gave C4 / Plastic Explosives a beeping noise
+    type: Add
+  id: 2288
+  time: '2025-09-04T08:58:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7754
 Name: RMC14
 Order: -1
