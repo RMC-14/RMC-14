@@ -4,10 +4,6 @@
   name: cm-job-name-section-sergeant
   description: cm-job-description-section-sergeant
   playTimeTracker: CMJobPVESectionSergeant
-  requirements:
-  - !type:TotalJobsTimeRequirement
-    department: CMPVERifleman
-    time: 10800 # 3 hours
   ranks:
     RMCRankStaffSergeant: []
   spawnMenuRoleName: PVE Section Sergeant

@@ -4,10 +4,6 @@
   name: cm-job-name-squad-leader
   description: cm-job-description-fireteam-leader
   playTimeTracker: CMJobPVESquadLeader
-  requirements:
-  - !type:TotalJobsTimeRequirement
-    department: CMPVERifleman
-    time: 3600 # 1 hour
   ranks:
     RMCRankSergeant: []
   spawnMenuRoleName: PVE Squad Leader
