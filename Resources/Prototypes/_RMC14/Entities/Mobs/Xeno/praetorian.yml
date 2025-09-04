@@ -33,7 +33,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    - ActionXenoSpit
+    - ActionXenoSpitPraetorian
     - ActionXenoDash
     - ActionXenoAcidBall
     - ActionXenoSprayAcidPraetorian
@@ -65,8 +65,6 @@
         Brute: 48
   - type: Tackle
     chance: 0.45
-    stunMin: 2
-    stunMax: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -77,6 +75,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -96,11 +95,10 @@
     barricadeDamage:
       types:
         Heat: 5
-    doAfter: 0.5
     range: 7
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: SlowOnPull
     slowdowns:
@@ -118,18 +116,24 @@
         - XenoHeavy
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: FixedIdentity
+    name: cm-job-name-xeno-praetorian
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoPraetorianBase
   id: CMXenoPraetorian
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRolePraetorian
   - type: XenoSprayAcid
     barricadeDamage:
       types:
         Heat: 5
     acid: XenoAcidSprayAcidStacks
     plasmaCost: 80
-    doAfter: 0.5
   - type: XenoLeap
     plasmaCost: 40
     delay: 0
@@ -152,6 +156,9 @@
   id: RMCXenoPraetorianValkyrie
   suffix: Valkyrie
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleValkyrie
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/valkyrie_praetorian.rsi
   - type: Xeno
@@ -160,13 +167,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailFountain
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoTantrum
     - ActionXenoHighGallop
     - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-valkyrie-name
     description: rmc-xeno-valkyrie-description
@@ -211,8 +218,9 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
-    - type: RMCDazed
   - type: XenoHighGallop
+  - type: XenoHidden
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -231,12 +239,10 @@
     - ActionXenoDodge
     - ActionXenoTailTrip
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
-  - type: AcidTrap
   - type: CMArmor
     xenoArmor: 20
   - type: XenoClaws
@@ -248,12 +254,16 @@
       groups:
         Brute: 40
   - type: XenoTailTrip
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianVanguard
   suffix: Vanguard
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVanguard
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/vanguard_praetorian.rsi
   - type: MobThresholds
@@ -272,7 +282,6 @@
     - ActionXenoCleaveRoot
     - ActionXenoCleaveFling
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-vanguard-name
     description: rmc-xeno-vanguard-description
@@ -296,12 +305,16 @@
       groups:
         Brute: 40
   - type: XenoCleave
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianOppressor
   suffix: Oppressor
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleOppressor
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
   - type: Xeno
@@ -314,7 +327,6 @@
     - ActionXenoDislocate
     - ActionXenoTailLash
     - ActionXenoDevolve
-    hidden: true
   - type: MeleeWeapon
     damage:
       groups:
@@ -359,3 +371,4 @@
     damage:
       groups:
         Brute: 15
+  - type: XenoHidden

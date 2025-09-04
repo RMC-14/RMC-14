@@ -1,0 +1,48 @@
+- type: entity
+  parent: [ RMCBaseSlideMagazineVisualsBallistic, RMCBaseWeaponGrenadeLauncher ]
+  id: RMCWeaponLauncherM85A1
+  name: M85A1 grenade launcher
+  description: A heavy, low-angle, break-action 40mm grenade launcher. Archaic in core design, inferior to more modern semi automatic M92, M95 grenade launchers and M94 impact launcher, but doesn't require a magnetic armature or an advanced expertice to operate, not to mention near flawless reliability, extremely low cost and low weight due to mostly being made out of polymer materials.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_inhands.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_icon.rsi
+      state: base
+      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_inhands.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: RMCSelectiveFire
+    baseFireRate: 0.833
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
+    proto: RMCBatonSlugHIRR
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0, 0.093
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherM85A1
+
+- type: Tag
+  id: RMCWeaponLauncherM85A1

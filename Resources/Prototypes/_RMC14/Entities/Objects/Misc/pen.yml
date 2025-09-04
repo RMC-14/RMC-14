@@ -38,3 +38,5 @@
     state: fountain_pen
   - type: Item
     sprite: _RMC14/Objects/Misc/paper.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-fountain-pen

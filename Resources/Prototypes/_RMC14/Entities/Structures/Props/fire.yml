@@ -1,0 +1,22 @@
+- type: entity
+  id: RMCFireProp
+  name: fire
+  description: That isn't going out any time soon.
+  suffix: Prop
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+  - type: PointLight
+    radius: 5
+    color: "#bf6d02"
+  - type: Sprite
+    sprite: _RMC14/Effects/fire.rsi
+    noRot: true
+    drawdepth: WallTops
+    layers:
+    - map: [ "base" ]
+      state: dynamic_2
+      color: "#FF7700"
+  - type: Clickable
+  - type: DeleteOnExplosion

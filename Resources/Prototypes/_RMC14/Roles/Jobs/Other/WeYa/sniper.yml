@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Sniper Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -48,6 +49,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCSniper
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSniper
+  name: weya pmc sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCSniper
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCSniper
@@ -60,6 +72,10 @@
     job: RMCPMCSniper
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 

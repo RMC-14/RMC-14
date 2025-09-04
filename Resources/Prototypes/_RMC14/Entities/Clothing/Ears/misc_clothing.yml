@@ -1,0 +1,25 @@
+- type: entity
+  parent: Clothing
+  id: RMCEarMiscClothingBase
+  abstract: true
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - ears
+    sprite: Clothing/Ears/Headsets/base.rsi
+
+- type: entity
+  parent: RMCEarMiscClothingBase
+  id: RMCEarmuffs
+  name: earmuffs
+  description: Protects your hearing from loud noises, and quiet ones as well.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
+  - type: RMCEarProtection

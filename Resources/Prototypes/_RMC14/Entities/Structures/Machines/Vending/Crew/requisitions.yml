@@ -1,7 +1,6 @@
 # REQUISITIONS
 
 # ARMAMENTS VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoGuns
@@ -21,7 +20,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20
@@ -35,8 +34,8 @@
         amount: 50
       - id: RMCWeaponPistolM13
         amount: 50
-      #- id: CMWeaponFlareM82F
-      #  amount: 20
+      - id: RMCWeaponPistolM82F
+        amount: 20
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
@@ -57,7 +56,7 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         amount: 3
       - id: RMCXM51Case
         amount: 3
@@ -99,9 +98,17 @@
         amount: 2
       - id: CMWebbingBlack
         amount: 2
+      - id: RMCWebbingLegPouch
+        amount: 2
+      - id: RMCWebbingLegPouchBlack
+        amount: 2
       - id: CMWebbing
         amount: 5
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+        amount: 5
+      - id: RMCWebbingDropPouch
+        amount: 2
+      - id: RMCWebbingDropPouchBlack
         amount: 2
       - id: CMWebbingHolster
         amount: 2
@@ -127,8 +134,8 @@
         amount: 2
       - id: RMCBackpackRTO
         amount: 2
-      #- id: Parachute
-      #  amount: 20
+      - id: RMCParachute
+        amount: 20
       - id: RMCSatchelGrenadeSpec
         amount: 2
     - name: Belts
@@ -138,6 +145,8 @@
       - id: CMBeltMarine
         amount: 15
       - id: RMCBeltHolsterPistol
+        amount: 10
+      - id: RMCBeltHolsterM13
         amount: 10
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
@@ -188,7 +197,7 @@
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
-      - id: RMCPouchBayonet
+      - id: RMCPouchBayonetFill
         name: Bayonet Sheath (Full)
         amount: 2
       - id: RMCPouchGeneralMedium
@@ -312,7 +321,6 @@
         boxSlots: 3
 
 #AMMUNITION VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAmmo
@@ -362,6 +370,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
@@ -529,8 +539,8 @@
         name: rifle ammunition box (10x24mm AP) (M54C)
         box: CMMagazineRifleM54CAP
         boxSlots: 15 # 600 / 40
- #ATTACHMENTS VENDOR
 
+#ATTACHMENTS VENDOR
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
@@ -554,6 +564,8 @@
         amount: 7
       - id: RMCAttachmentSuppressor
         amount: 7
+      - id: RMCAttachmentShotgunChoke
+        amount: 5
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
@@ -596,7 +608,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
@@ -612,7 +624,6 @@
         amount: 5
 
 #UNIFORM VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
@@ -669,11 +680,13 @@
       entries:
       - id: CMHandsBrown
         amount: 40
+      - id: RMCHandsGreyMarine
+        amount: 40
       - id: CMHandsBlackMarine
         amount: 40
     - name: Radio
       entries:
-      - id: CMHeadset
+      - id: RMCHeadsetShip
         amount: 5
       - id: CMEncryptionKeyAlpha
         amount: 5
@@ -713,3 +726,26 @@
         amount: 30
       - id: RMCM5CameraGear
         amount: 3
+      - id: RMCPatchFallingFalcons
+        amount: 15
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+        amount: 15
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+        amount: 15
+      - id: RMCPatchUNMC
+        name: UNMC shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+        amount: 15
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+        amount: 10
+      - id: RMCGuidebookSOP
+        amount: 10

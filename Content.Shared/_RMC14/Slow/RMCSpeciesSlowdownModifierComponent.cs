@@ -1,3 +1,4 @@
+using Content.Shared.StatusEffect;
 using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Slow;
 
@@ -19,4 +20,7 @@ public sealed partial class RMCSpeciesSlowdownModifierComponent : Component
 
     [DataField]
     public float DurationMultiplier = 1.0f;
+
+    [DataField]
+    public string[] StatusesToUpdateOn = { "Stun", "KnockedDown", "Unconscious" };
 }

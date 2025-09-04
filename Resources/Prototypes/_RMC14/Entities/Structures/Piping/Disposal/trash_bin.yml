@@ -76,6 +76,8 @@
     - state: trashgreen
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
     - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.BaseCharging" ]
+    - state: trashgreen
       map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: trashgreen
       map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]

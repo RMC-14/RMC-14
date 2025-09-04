@@ -31,3 +31,43 @@
     contents:
       - id: RMCKitHonorGuard
       - id: RMCKitHonorGuard
+
+- type: entity
+  parent: CMLockerStaff
+  id: CMLockerStaffShotgunFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCArmorM3SO
+      - id: RMCArmorM3SO
+      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10SO
+      - id: CMBootsBlackFilled
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+      - id: CMHandsBlackMarine
+      - id: RMCHeadsetMarineCommand
+      - id: RMCScabbardShotgun
+      - id: RMCScabbardShotgun
+      - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCM276ShotgunShellLoadingRig
+
+- type: entity
+  parent: CMLockerStaff
+  id: CMLockerStaffRifleFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCArmorM3SO
+      - id: RMCArmorM3SO
+      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorHelmetM10SO
+      - id: CMBootsBlackFilled
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+      - id: CMHandsBlackMarine
+      - id: RMCHeadsetMarineCommand
+      - id: CMBeltMarine
+      - id: CMBeltMarine

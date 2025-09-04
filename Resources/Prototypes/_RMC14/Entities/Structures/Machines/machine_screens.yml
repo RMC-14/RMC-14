@@ -1,0 +1,124 @@
+﻿- type: entity
+  id: RMCMachineScreenBase
+  name: monitor
+  description: ""
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_computer_props.rsi
+    drawdepth: WallMountedItems
+    state: telescreen
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  parent: RMCMachineScreenBase
+  id: RMCMachineScreenBasePowered
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: multimonitormedium_off
+    - state: multimonitormedium_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCBlueMultiMonitorBig
+  components:
+  - type: Sprite
+    layers:
+    - state: bluemultimonitorbig_off
+    - state: bluemultimonitorbig_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCBlueMultiMonitorMedium
+  components:
+  - type: Sprite
+    layers:
+    - state: bluemultimonitormedium_off
+    - state: bluemultimonitormedium_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCBlueMultiMonitorSmall
+  components:
+  - type: Sprite
+    layers:
+    - state: bluemultimonitorsmall_off
+    - state: bluemultimonitorsmall_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCMultiMonitorBig
+  components:
+  - type: Sprite
+    layers:
+    - state: multimonitorbig_off
+    - state: multimonitorbig_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCMultiMonitorMedium
+  components:
+  - type: Sprite
+    layers:
+    - state: multimonitormedium_off
+    - state: multimonitormedium_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBasePowered
+  id: RMCMultiMonitorSmall
+  components:
+  - type: Sprite
+    layers:
+    - state: multimonitorsmall_off
+    - state: multimonitorsmall_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCMachineScreenBase
+  id: RMCTelescreen
+  components:
+  - type: Sprite
+    state: telescreen
+
+- type: entity
+  parent: RMCMachineScreenBase
+  id: RMCTelescreenBroken
+  suffix: broken
+  components:
+  - type: Sprite
+    state: telescreenb
+
+- type: entity
+  parent: RMCMachineScreenBase
+  id: RMCTelescreenBrokenSparks
+  suffix: sparks
+  components:
+  - type: Sprite
+    state: telescreenbspark

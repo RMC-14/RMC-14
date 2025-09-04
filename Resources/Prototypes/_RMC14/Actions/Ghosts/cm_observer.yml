@@ -3,7 +3,7 @@
   name: Toggle Marine Hud
   description: Toggle marine icons.
   components:
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     icon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
@@ -11,6 +11,7 @@
     iconOn:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_co
+  - type: InstantAction
     event: !type:ToggleMarineHudActionEvent
 
 - type: entity
@@ -18,7 +19,7 @@
   name: Toggle Xeno Hud
   description: Toggle xeno health and plasma bars.
   components:
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     icon:
       sprite: _RMC14/Interface/Alerts/xeno_health.rsi
@@ -26,6 +27,7 @@
     iconOn:
       sprite: _RMC14/Interface/Alerts/xeno_health.rsi
       state: health_full
+  - type: InstantAction
     event: !type:ToggleXenoHudActionEvent
 
 - type: entity
@@ -33,11 +35,12 @@
   name: Find Parasite
   description: Find Ghostrolable Parasites
   components:
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     icon:
       sprite: _RMC14/Actions/observer_actions.rsi
       state: find_parasite
+  - type: InstantAction
     event: !type:FindParasiteActionEvent
 
 - type: entity
@@ -45,10 +48,11 @@
   name: Join as Xeno
   description: Find burrowed larva to join as.
   components:
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     icon:
       sprite: _RMC14/Actions/observer_actions.rsi
       state: join_xeno
-    event: !type:JoinXenoActionEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:JoinXenoActionEvent

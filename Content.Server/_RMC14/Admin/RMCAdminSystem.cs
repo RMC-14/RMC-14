@@ -19,6 +19,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
+using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -41,6 +42,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConsoleHost _consoleHost = default!;
 
     public readonly Queue<(Guid Id, List<TacticalMapLine> Lines, string Actor, int Round)> LinesDrawn = new();
 
@@ -52,8 +54,42 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
         SubscribeLocalEvent<TacticalMapUpdatedEvent>(OnTacticalMapUpdated);
         SubscribeLocalEvent<SpawnAsJobDialogEvent>(OnSpawnAsJobDialog);
+        _consoleHost.AnyCommandExecuted += ConsoleHostOnAnyCommandExecuted;
 
         Subs.CVar(_config, RMCCVars.RMCTacticalMapAdminHistorySize, v => _tacticalMapAdminHistorySize = v, true);
+    }
+
+    public override void Shutdown()
+    {
+        _consoleHost.AnyCommandExecuted -= ConsoleHostOnAnyCommandExecuted;
+    }
+
+    private void ConsoleHostOnAnyCommandExecuted(IConsoleShell shell, string commandName, string argStr, string[] args)
+    {
+        if (shell.IsLocal)
+        {
+            _adminLog.Add(LogType.RMCAdminCommandLogging, LogImpact.Medium, $"Server issued a command: {commandName}");
+            return;
+        }
+
+        if (commandName.Contains("sudo"))
+        {
+            _adminLog.Add(LogType.RMCAdminCommandLogging, LogImpact.Medium, $"{shell.Player:player} issued a Sudo command with a command of {args[0]}.");
+            return;
+        }
+
+        var log = "";
+        foreach (var arg in args)
+        {
+            log += $" {arg}";
+        }
+
+        if (args.Length == 0)
+        {
+            log += " No arguments";
+        }
+
+        _adminLog.Add(LogType.RMCAdminCommandLogging, LogImpact.Medium, $"{shell.Player:player} issued command: {commandName} with arguments: {log}");
     }
 
     private void OnTacticalMapUpdated(ref TacticalMapUpdatedEvent ev)
@@ -69,13 +105,20 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     private void OnSpawnAsJobDialog(SpawnAsJobDialogEvent ev)
     {
         if (GetEntity(ev.User) is not { Valid: true } user ||
-            !_adminManager.IsAdmin(user))
+            GetEntity(ev.Target) is not { Valid: true } target)
         {
             return;
         }
 
-        if (GetEntity(ev.Target) is not { Valid: true } target ||
-            !TryComp(target, out ActorComponent? actor) ||
+        SpawnAsJob(user, target, ev.JobId);
+    }
+
+    public void SpawnAsJob(EntityUid user, EntityUid target, ProtoId<JobPrototype> job)
+    {
+        if (!_adminManager.IsAdmin(user))
+            return;
+
+        if (!TryComp(target, out ActorComponent? actor) ||
             !_transform.TryGetMapOrGridCoordinates(target, out var coords))
         {
             _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), user, user);
@@ -89,10 +132,10 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         var newMind = _mind.CreateMind(player.UserId, profile.Name);
         _mind.SetUserId(newMind, player.UserId);
         _playTimeTracking.PlayerRolesChanged(player);
-        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, ev.JobId, profile);
+        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, job, profile);
 
         _mind.TransferTo(newMind, mobUid);
-        _role.MindAddJobRole(newMind, jobPrototype: ev.JobId);
+        _role.MindAddJobRole(newMind, jobPrototype: job);
 
         var jobName = _job.MindTryGetJobName(newMind);
         _admin.UpdatePlayerList(player);
@@ -105,7 +148,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
             var spawnEv = new PlayerSpawnCompleteEvent(
                 mobUid.Value,
                 player,
-                ev.JobId,
+                job,
                 true,
                 true,
                 0,

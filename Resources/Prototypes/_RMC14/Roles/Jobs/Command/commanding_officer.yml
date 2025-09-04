@@ -50,16 +50,11 @@
   icon: "CMJobIconCommandingOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
+  marineAuthorityLevel: 15
   supervisors: cm-job-supervisors-marine-high-command
   whitelisted: true
   accessGroups:
   - ShipMasterAccess
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: co
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -86,6 +81,7 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMCommandingOfficer
       points: 120
     - type: RMCPointing
     - type: JobPrefix
@@ -95,11 +91,12 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: co
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearCommandingOfficer

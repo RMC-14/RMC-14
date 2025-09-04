@@ -6,6 +6,7 @@
   - CMAccessBrig
   - CMAccessArmory
   - CMAccessMedical
+  - CMAccessResearch
   - CMAccessCE
   - CMAccessEngineering
   - CMAccessMaint
@@ -30,6 +31,7 @@
   - CMAccessDropship
   - CMAccessPilot
   - CMAccessCrewman
+  - CMAccessMedical
 
 - type: accessGroup
   id: DropshipCrewChief
@@ -38,13 +40,13 @@
   - CMAccessCommand
   - CMAccessDropship
   - CMAccessPilot
+  - CMAccessMedical
 
 - type: accessGroup
   id: IntelOfficer
   tags:
   - CMAccessCommand
   - CMAccessDropship
-  - CMAccessPilot
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
   - CMAccessColonyEngineering

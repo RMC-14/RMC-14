@@ -45,5 +45,31 @@
     tags:
     - RMCDetector
 
+- type: entity
+  parent: RMCMotionDetector
+  id: RMCMotionDetectorCompact
+  name: M717 pocket motion detector
+  description: This prototype motion detector sacrifices versatility, having only the long-range mode, for size, being so small it can even fit in pockets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/compact_motion_detector.rsi
+    layers:
+    - state: detector
+    - state: detector_long_switch
+      map: [ "switch" ]
+    - state: detector_on_0
+      visible: false
+      map: [ "number" ]
+    state: detector
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - suitstorage
+    - belt
+    - pocket
+  - type: MotionDetector
+    canToggleRange: false
+
 - type: Tag
   id: RMCDetector

@@ -1,4 +1,5 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,10 +7,13 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
-  id: CMXenoCrusher
+  id: CMXenoCrusherBase
   name: Crusher
   description: A huge alien with an enormous armored crest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCrusher
   - type: GhostRole
     name: cm-job-name-xeno-crusher
   - type: Sprite
@@ -31,9 +35,7 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoCharge
     - ActionXenoStomp
-    - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
     hudOffset: -0.15,0.1
@@ -50,11 +52,6 @@
       types:
         Blunt: 65
     selfEffect: CMEffectSelfStomp
-  - type: XenoCharge
-    damage:
-      types:
-        Blunt: 60
-        Structural: 750
   - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400
@@ -73,8 +70,6 @@
     tailDamage:
       groups:
         Brute: 48
-  - type: CrusherShield
-  - type: XenoShield
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
@@ -97,16 +92,110 @@
         components:
         - XenoHeavy
   - type: XenoBrutalize
+    damage:
+      types:
+        Blunt: 16
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: crusher
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: crusher
   - type: StunOnExplosionReceived
     weak: false
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: TantrumSpeedBuff
+  - type: FixedIdentity
+    name: cm-job-name-xeno-crusher
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
+
+- type: entity
+  parent: CMXenoCrusherBase
+  id: RMCXenoCrusher
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoCharge
+    - ActionXenoStomp
+    - ActionXenoDefensiveShield
+    - ActionXenoDevolve
+  - type: CrusherShield
+  - type: XenoCharge
+    damage:
+      types:
+        Blunt: 60
+        Structural: 750
+  - type: XenoShield
+  - type: XenoEvolution
+    strains:
+    - RMCXenoCrusherCharger
+
+- type: entity
+  parent: CMXenoCrusherBase
+  id: RMCXenoCrusherCharger
+  suffix: Charger
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      780: Critical
+      880: Dead
+  - type: Xeno
+    ignorePheromones: Frenzy
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoToggleCharging
+    - ActionXenoStomp
+    - ActionXenoTumble
+    - ActionXenoRam
+    - ActionXenoDevolve
+  - type: CMArmor
+    xenoArmor: 20
+    frontalArmor: 30
+    sideArmor: 15
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 36
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.9
+    baseSprintSpeed: 3.4
+  - type: XenoStrain
+    name: rmc-xeno-charger-name
+    description: rmc-xeno-charger-description
+    popup: rmc-xeno-charger-popup
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: XenoTumble
+    damage:
+      types:
+        Blunt: 15
+  - type: XenoFling
+    paralyzeTime: 0
+    slowTime: 8
+  - type: XenoStomp # TODO RMC14 screen shake?
+    plasmaCost: 25
+    paralyzeUnderOnly: true
+    range: 3.95
+    damage:
+      types:
+        Blunt: 75
+  - type: XenoToggleCharging
+  - type: XenoHidden

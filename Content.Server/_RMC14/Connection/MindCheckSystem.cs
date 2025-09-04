@@ -1,11 +1,11 @@
 ﻿using Content.Server.Mind;
-using Content.Shared.Mind.Components;
 using Content.Shared._RMC14.Connection;
+using Content.Shared.Ghost;
+using Content.Shared.Mind.Components;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared.Ghost;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Connection;
@@ -78,10 +78,17 @@ public sealed class MindCheckSystem : EntitySystem
 
     private void CheckMind(Entity<MindCheckComponent> mind)
     {
-        if (!_mind.TryGetMind(mind.Owner, out var mindId, out var mindComp) || mindComp.UserId == null || mindComp.Session == null || mindComp.Session.Status == SessionStatus.Disconnected)
+        if (!_mind.TryGetMind(mind.Owner, out _, out var mindComp) ||
+            mindComp.UserId == null ||
+            !_player.TryGetSessionById(mindComp.UserId, out var session) ||
+            session.Status == SessionStatus.Disconnected)
+        {
             mind.Comp.ActiveMindOrGhost = false;
+        }
         else
+        {
             mind.Comp.ActiveMindOrGhost = true;
+        }
 
         mind.Comp.NextCheck = _timing.CurTime + mind.Comp.CheckEvery;
 

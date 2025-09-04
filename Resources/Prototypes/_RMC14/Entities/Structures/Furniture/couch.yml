@@ -24,3 +24,23 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/couch.rsi
     state: couch_end
+
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchLeftBar
+  suffix: Left
+  name: bar booth
+  description: An old wooden booth with red cushioning. There are stains in the cushions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/couch_bar.rsi
+    state: couch_left
+
+- type: entity
+  parent: RMCCouchLeftBar
+  id: RMCCouchRightBar
+  suffix: Right
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/couch_bar.rsi
+    state: couch_right

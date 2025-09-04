@@ -1,27 +1,12 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by cephalo222 on Discord, camouflaged variants recolored by MACMAN2003, This variant by Discord Merfarukier",
+  "copyright": "Sprites by github noctyrnal",
   "size": {
-    "x": 32,
+    "x": 64,
     "y": 32
   },
   "states": [
-    {
-      "name": "wielded-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "wielded-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "mag-0"
-    },
     {
       "name": "base"
     },
@@ -29,18 +14,57 @@
       "name": "bolt-open"
     },
     {
-      "name": "equipped-BACKPACK",
-      "directions": 4
+      "name": "icon"
     },
     {
-      "name": "Icon"
+      "name": "mag-0"
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
     },
     {
       "name": "inhand-left",
       "directions": 4
     },
     {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-color",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-color",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left-color",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right-color",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACK-color",
+      "directions": 4
+    },
+    {
       "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE-color",
       "directions": 4
     }
   ]

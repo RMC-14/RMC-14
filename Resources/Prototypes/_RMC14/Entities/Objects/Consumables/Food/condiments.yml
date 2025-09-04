@@ -190,6 +190,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Sauces/franks.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-red-hot-bottle
 
 - type: entity
   parent: RMCCondimentHotsauce

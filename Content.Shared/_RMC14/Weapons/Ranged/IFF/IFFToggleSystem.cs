@@ -1,15 +1,9 @@
-using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Popups;
 using Content.Shared.Actions;
+using Content.Shared.Popups;
 using Content.Shared.Toggleable;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Hands;
-using Content.Shared.Examine;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
@@ -30,15 +24,12 @@ public sealed class IFFToggleSystem : EntitySystem
 
     public void OnStartup(Entity<IFFToggleComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.ChangeStats)
-        {
-            if (TryComp<RMCSelectiveFireComponent>(ent, out var comp))
-            {
-                ent.Comp.BaseFireModes = comp.BaseFireModes;
-                ent.Comp.BaseModifiers = new Dictionary<SelectiveFire, SelectiveFireModifierSet>(comp.Modifiers);
-                SetStats(ent);
-            }
-        }
+        if (!ent.Comp.ChangeStats || !TryComp<RMCSelectiveFireComponent>(ent, out var comp))
+            return;
+
+        ent.Comp.BaseFireModes = comp.BaseFireModes;
+        ent.Comp.BaseModifiers = new Dictionary<SelectiveFire, SelectiveFireModifierSet>(comp.Modifiers);
+        SetStats(ent);
     }
 
     public void SetStats(Entity<IFFToggleComponent> ent)
@@ -65,30 +56,27 @@ public sealed class IFFToggleSystem : EntitySystem
                 ResetStats(ent);
         }
     }
+
     public void OnGetActions(Entity<IFFToggleComponent> ent, ref GetItemActionsEvent args)
     {
         if (!args.InHands)
             return;
-        args.AddAction(ref ent.Comp.Action, ent.Comp.ActionID);
 
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            Dirty(ent.Comp.Action.Value, action);
-            _actions.UpdateAction(ent.Comp.Action, action);
-        }
-        Dirty(ent);
+        args.AddAction(ref ent.Comp.Action, ent.Comp.ActionID);
     }
 
     public void OnActionToggle(Entity<IFFToggleComponent> ent, ref ToggleActionEvent args)
     {
         if (args.Action != ent.Comp.Action)
             return;
+
         if (ent.Comp.RequireIDLock && TryComp<GunIDLockComponent>(ent.Owner, out var comp) && comp.Locked && comp.User != args.Performer)
         {
             var popup = Loc.GetString("rmc-id-lock-unauthorized");
             _popup.PopupClient(popup, args.Performer, args.Performer, PopupType.SmallCaution);
             return;
         }
+
         if (ent.Comp.Enabled)
         {
             ent.Comp.Enabled = false;
@@ -102,14 +90,7 @@ public sealed class IFFToggleSystem : EntitySystem
             if (ent.Comp.ChangeStats)
                 ResetStats(ent);
 
-            if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-            {
-                action.Icon = ent.Comp.DisabledIcon;
-                Dirty(ent.Comp.Action.Value, action);
-                _actions.UpdateAction(ent.Comp.Action, action);
-            }
-            Dirty(ent);
-            return;
+            _actions.SetIcon(ent.Comp.Action.Value, ent.Comp.DisabledIcon);
         }
         else
         {
@@ -124,14 +105,9 @@ public sealed class IFFToggleSystem : EntitySystem
             if (ent.Comp.ChangeStats)
                 SetStats(ent);
 
-            if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-            {
-                action.Icon = ent.Comp.EnabledIcon;
-                Dirty(ent.Comp.Action.Value, action);
-                _actions.UpdateAction(ent.Comp.Action, action);
-            }
-            Dirty(ent);
-            return;
+            _actions.SetIcon(ent.Comp.Action.Value, ent.Comp.EnabledIcon);
         }
+
+        Dirty(ent);
     }
 }

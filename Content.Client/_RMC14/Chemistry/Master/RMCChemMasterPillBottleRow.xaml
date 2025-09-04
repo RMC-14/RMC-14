@@ -1,0 +1,24 @@
+<controls:RMCChemMasterPillBottleRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master">
+    <BoxContainer Orientation="Horizontal">
+        <CheckBox Name="FillBottleButton" Access="Public" ToggleMode="True"
+                Text="{Loc rmc-chem-master-pill-bottle-fill}" Margin="0 0 10 0" />
+        <Label Name="PillAmountLabel" Access="Public" Margin="0 0 10 0" />
+        <RichTextLabel Name="NameLabel" Access="Public" Margin="0 0 5 0"
+                       MinWidth="60" />
+        <BoxContainer Orientation="Horizontal" MinWidth="100" HorizontalExpand="True">
+            <Control HorizontalExpand="True">
+                <LineEdit Name="LabelInput" Access="Public" />
+            </Control>
+            <Control Margin="10 0">
+                <SpriteView Name="ColorView" Access="Public" Margin="-5" />
+            </Control>
+            <Button Name="ColorButton" Access="Public" StyleClasses="OpenBoth" />
+        </BoxContainer>
+        <Button Name="TransferButton" Access="Public" StyleClasses="OpenBoth"
+                Text="{Loc rmc-chem-master-pill-bottle-transfer}" />
+        <Button Name="EjectButton" Access="Public" StyleClasses="OpenBoth"
+                Text="{Loc rmc-chem-master-pill-bottle-eject}" />
+    </BoxContainer>
+</controls:RMCChemMasterPillBottleRow>

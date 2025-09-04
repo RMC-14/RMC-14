@@ -1,0 +1,31 @@
+﻿- type: entity
+  id: RMCWallMeterBase
+  name: meter
+  description: ""
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_computer_props.rsi
+    drawdepth: WallMountedItems
+    state: biggreenmeter1
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  parent: RMCWallMeterBase
+  id: RMCWallMeterGreen
+  components:
+  - type: Sprite
+    state: biggreenmeter1
+
+- type: entity
+  parent: RMCWallMeterBase
+  id: RMCWallMeterRed
+  components:
+  - type: Sprite
+    state: redmeter

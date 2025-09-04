@@ -99,10 +99,10 @@
           - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
-      rmc-aslot-rail: 0.09, 0.13
+      rmc-aslot-barrel: 0.8425, 0.001
+      rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-underbarrel: 0.349, -0.375
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: Tag

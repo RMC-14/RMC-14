@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: Provost Team Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -37,6 +38,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-team-leader
+    - type: RMCTrackable
   hidden: true
 
 - type: entity
@@ -62,6 +64,13 @@
     job: CMProvostTeamLeader
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadProvost
 

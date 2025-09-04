@@ -1,0 +1,54 @@
+<Document>
+
+  #So, you've ascended to the throne of the Hive!
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoQueen"/>
+  </Box>\n
+  - As the matriarch, your duty is to expand, defend, and lead. Without you, the Hive crumbles, but with you, it thrives.
+  - For intermediate players wishing to try out the commanding side of Xenonids, this will start with what should be done at the start.
+
+  #Now what?
+  First we must choose our hive location, this is not that all important and selecting where you spawn as your hive location will do. Once you have found a hive location follow the steps.
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
+    <GuideEntityEmbed Entity="HiveCoreXeno"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
+  </Box>\n
+
+  - Use your Order Construction ability to create a hive core and then fill it with your plasma.
+  - You can emit recovery pheromones to gain plasma to fill the hivecore, remember your pheromones are the strongest in the hive!
+  <Box>
+    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoGrowOvipositor"/>
+  </Box>\n
+
+  - Once filled, move on top of the new hive weeds emitted from the hivecore then grow your ovipositor.
+
+  Well done, you have successfully grown your ovipositor to allow for your children to gain evolution and thrive, now you can set hive leaders which will emit the same pheromones you are.
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoWatch"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoLeader"/>
+  </Box>\n
+
+  - Use the Watch xeno ability to find the xeno you wish to promote to leader.
+  - Once watching them, use the Choose leader ability to promote them to a leader, remember you can only have a max of 4.
+  - Now press a movement key to return back to normal view, and emit a pheromone for your leaders, recovery for now will do.
+
+  Now you have some time to relax until skyhosts (Shipside marines) land, with this you can draw a tactics map or enter your Queen eye.
+
+  ##Queen eye
+  This form is only usable while in ovi, during it, you ascend to a plane above, able to monitor and secrete resin anywhere your weeds are.
+
+  This can be used to scout enemy locations and build up the hive with resin.
+
+  ##What to do when skyhosts come
+  - War Queen
+
+  In the case that you must get up to help aid the battle, make sure to be ready to neurospit and screech at any moment. Fighting at the frontline as a Queen involves the use of your frenzy pheromones and neurospit to drag lone hosts. If there is a big group of hosts, and you can screech onto them, your biggest threat is the specialists so make sure to position around them.
+
+  Remember that Xenonids fight best in choked spaces and fortified ground, do not attempt to fight in open ground.
+
+  - Ovi Queen
+
+  This strategy is to stay on ovi for preferably the whole duration of the fight, while on ovi your hive leaders will be able to emit your pheromones the whole way through which are 4x as strong. You can also remotely heal your children to aid them in battle, and you will constantly give evolution and eggs.
+</Document>

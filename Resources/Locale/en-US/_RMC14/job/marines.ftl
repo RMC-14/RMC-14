@@ -35,5 +35,50 @@ cm-job-prefix-combat-tech = ComTech
 CMJobCombatTech = Combat Tech
 
 rmc-job-name-mortar-operator = Mortar Operator
+rmc-job-prefix-mortar-operator = MO
+
 rmc-job-name-loader = Loader
-rmc-job-name-spotter= Spotter
+rmc-job-prefix-loader = LDR
+
+rmc-job-name-spotter = Spotter
+rmc-job-prefix-spotter = SPTR
+
+rmc-job-name-weapons-specialist-demo = Demolitionist Specialist
+rmc-job-prefix-weapons-specialist-demo = DEMO
+
+rmc-job-name-weapons-specialist-grenadier = Grenadier Specialist
+rmc-job-prefix-weapons-specialist-grenadier = GRND
+
+rmc-job-name-weapons-specialist-sniper = Sniper Specialist
+rmc-job-prefix-weapons-specialist-sniper = SNPR
+
+rmc-job-name-weapons-specialist-anti-materiel-sniper = AMR Specialist
+rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
+
+rmc-job-name-weapons-specialist-scout = Scout Specialist
+rmc-job-prefix-weapons-specialist-scout = SCT
+
+rmc-job-name-forecon-spotter = Recon Spotter
+
+rmc-job-name-recruit = Recruit
+rmc-job-description-recruit = Follow orders and learn from those above you. Get yelled at by an instructor. Graduate to become a marine.
+rmc-job-prefix-recruit = RCT
+
+rmc-job-name-pve-forecon-rifleman = Rifleman
+rmc-job-prefix-pve-forecon-rifleman = RFN
+
+rmc-job-name-pve-forecon-smartgunner = Smartgun Operator
+rmc-job-prefix-pve-forecon-smartgunner = SGO
+
+rmc-job-name-pve-forecon-corpsman = Corpsman
+rmc-job-prefix-pve-forecon-corpsman = HM
+
+rmc-job-name-pve-forecon-rto = Radio Telephone Operator
+rmc-job-description-pve-forecon-rto = You are the Radio Telephone Operator. Ensure communications between your squad and Company Command are well kept.
+rmc-job-prefix-pve-forecon-rto = RTO
+
+rmc-job-name-pve-forecon-assistant-lead = Assistant Squad Lead
+rmc-job-prefix-pve-forecon-assistant-lead = ASL
+
+rmc-job-name-pve-forecon-squad-lead = Squad Lead
+rmc-job-prefix-pve-forecon-squad-lead = SL

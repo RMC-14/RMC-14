@@ -413,6 +413,12 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
     protected string GetPhoneName(Entity<RotaryPhoneComponent?> phone)
     {
         var name = Name(phone);
+        if (!Resolve(phone, ref phone.Comp, false))
+            return name;
+
+        if (!phone.Comp.TryGetHolderName)
+            return name;
+
         if (!TryGetPhoneBackpackHolder(phone, out var holder))
             return name;
 

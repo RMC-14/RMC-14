@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/syringe.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/syringe.dmi, autoinjector_tag by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -27,6 +27,9 @@
     },
     {
       "name": "autoinjector6"
+    },
+    {
+      "name": "autoinjector_tag"
     }
   ]
 }

@@ -16,6 +16,9 @@ public sealed partial class XenoTailSweepComponent : Component
     [DataField, AutoNetworkedField]
     public float Range = 1.5f;
 
+    [DataField, AutoNetworkedField]
+    public float KnockBackDistance = 1f;
+
     [DataField]
     public DamageSpecifier? Damage;
 

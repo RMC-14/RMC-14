@@ -1,0 +1,53 @@
+- type: entity
+  parent: RMCPrefilledSyringe
+  id: RMCSyringeInaprovaline
+  description: Contains inaprovaline - used to stabilize patients.
+  suffix: Inaprovaline, RMC14
+  components:
+  - type: Label
+    currentLabel: reagent-name-cminaprovaline
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMInaprovaline
+          Quantity: 15
+
+- type: entity
+  parent: RMCPrefilledSyringe
+  id: RMCSyringeDylovene
+  description: Contains anti-toxins.
+  suffix: Dylovene, RMC14
+  components:
+  - type: Label
+    currentLabel: reagent-name-cmdylovene
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 15
+
+- type: entity
+  parent: RMCPrefilledSyringe
+  id: RMCSyringeDrugs
+  description: Contains aggressive drugs meant for torture.
+  suffix: Drugs, RMC14
+  components:
+  - type: Label
+    currentLabel: drugs
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCSpaceDrugs
+          Quantity: 5
+        - ReagentId: RMCPsilocybin
+          Quantity: 5
+        - ReagentId: RMCMindbreakerToxin
+          Quantity: 5
+#TODO Spaceacillin, Vaccine, Chloralhydrate.
+#code/game/objects/items/reagent_containers/syringes.dm
