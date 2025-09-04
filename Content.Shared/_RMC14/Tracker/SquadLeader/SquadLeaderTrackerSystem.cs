@@ -415,6 +415,22 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_fireteamLeaderQuery.HasComp(member))
                 fireteam.Leader = marine;
+
+            if (_squadLeaderTrackerQuery.TryComp(member, out var tempTracker))
+            {
+                if (fireteam.Leader != null)
+                {
+                    if (TryGetEntity(fireteam?.Leader?.Id, out var fireteamLeaderUid))
+                    {
+                        if (fireteamLeaderUid != member)
+                        {
+                            ProtoId<TrackerModePrototype> mode = "FireteamLeader";
+                            SetTarget((member, tempTracker), fireteamLeaderUid);
+                            SetMode((member, tempTracker), mode);
+                        }
+                    }
+                }
+            }
         }
         else
         {
