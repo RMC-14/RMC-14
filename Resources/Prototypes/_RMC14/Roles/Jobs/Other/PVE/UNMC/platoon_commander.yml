@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobSquadBase
+  parent: CMStaffOfficer
   id: CMPVEPlatoonCommander
   name: cm-job-name-platoon-commander
   description: cm-job-description-platoon-commander
@@ -20,7 +20,7 @@
   supervisors: cm-job-supervisors-company-command
   marineAuthorityLevel: 14
   accessGroups:
-  - MarineMain
+  - ShipMasterAccess
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

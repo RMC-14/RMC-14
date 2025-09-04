@@ -11,3 +11,15 @@
   primary: false
   departmentRadio: MarineCommand
   headOfDepartment: CMCommandingOfficer
+
+- type: department
+  parent: CMDepartmentBase
+  id: CMCommandPVE
+  name: department-CMCommand
+  description: cm-department-Command-description
+  color: "#334E6D"
+  roles:
+  - CMPVEPlatoonCommander
+  primary: false
+  departmentRadio: MarineAlpha
+  headOfDepartment: CMPVEPlatoonCommander
