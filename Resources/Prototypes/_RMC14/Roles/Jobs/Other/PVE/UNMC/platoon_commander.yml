@@ -10,7 +10,7 @@
     time: 10800 # 3 hours
   ranks:
     RMCRankSecondLT: []
-  spawnMenuRoleName: PVE Platoon Commander
+  spawnMenuRoleName: Sun Rider Platoon Commander (PVE)
   startingGear: RMCGearPVEPlatoonCommander
   icon: "RMCJobIconPVEPlatoonCommander"
   joinNotifyCrew: false

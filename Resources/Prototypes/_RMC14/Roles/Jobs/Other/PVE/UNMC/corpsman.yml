@@ -8,7 +8,7 @@
     time: 10800 # 3 hours
   ranks:
     RMCRankLanceCorporal: []
-  spawnMenuRoleName: PVE Hospital Corpsman
+  spawnMenuRoleName: Sun Rider Hospital Corpsman (PVE)
   startingGear: RMCGearPVEHospitalCorpsman
   supervisors: cm-job-supervisors-secserg
   special:

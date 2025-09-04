@@ -4,7 +4,7 @@
   playTimeTracker: CMJobPVERifleman
   ranks:
     RMCRankPrivate: []
-  spawnMenuRoleName: PVE Rifleman
+  spawnMenuRoleName: Sun Rider Rifleman (PVE)
   supervisors: cm-job-supervisors-secserg
   startingGear: RMCGearPVERifleman
   special:

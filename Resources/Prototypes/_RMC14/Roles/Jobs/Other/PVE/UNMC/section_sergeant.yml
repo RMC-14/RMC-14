@@ -6,7 +6,7 @@
   playTimeTracker: CMJobPVESectionSergeant
   ranks:
     RMCRankStaffSergeant: []
-  spawnMenuRoleName: PVE Section Sergeant
+  spawnMenuRoleName: Sun Rider Section Sergeant (PVE)
   startingGear: RMCGearPVESectionSergeant
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
