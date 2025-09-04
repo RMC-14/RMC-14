@@ -6,7 +6,7 @@
     RMCRankPrivate: []
   spawnMenuRoleName: PVE Rifleman
   supervisors: cm-job-supervisors-secserg
-  startingGear: RMCDogtagPVERifleman
+  startingGear: RMCGearPVERifleman
   special:
   - !type:AddComponentSpecial
     components:

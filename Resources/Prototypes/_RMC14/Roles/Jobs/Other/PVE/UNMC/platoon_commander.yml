@@ -14,7 +14,7 @@
   ranks:
     RMCRankSecondLT: []
   spawnMenuRoleName: PVE Platoon Commander
-  startingGear: CMGearStaffOfficer
+  startingGear: RMCGearPVEPlatoonCommander
   icon: "RMCJobIconPVEPlatoonCommander"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-company-command
