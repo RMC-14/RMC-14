@@ -13,9 +13,9 @@
           mapNameTemplate: 'UNS Rover'
         - type: StationJobs
           availableJobs:
-          RMCFORECONPVESquadLead: [1, 1]
-          RMCFORECONPVEAssistantSL: [1, 1]
-          RMCFORECONPVERadioTelephoneOperator: [1, 1]
-          RMCFORECONPVECorpsman: [1, 1]
-          RMCFORECONPVESmartgunner: [1, 1]
-          RMCFORECONPVERifleman: [3, 3]
+            RMCFORECONPVESquadLead: [1, 1]
+            RMCFORECONPVEAssistantSL: [1, 1]
+            RMCFORECONPVERadioTelephoneOperator: [1, 1]
+            RMCFORECONPVECorpsman: [1, 1]
+            RMCFORECONPVESmartgunner: [1, 1]
+            RMCFORECONPVERifleman: [3, 3]
