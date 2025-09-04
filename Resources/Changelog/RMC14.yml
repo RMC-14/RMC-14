@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed custom rifle bullets not having a maximum range of 24 (they no
-      longer do damage past that).
-    type: Fix
-  - message: Fixed custom rifle incind and impact bullets not having a minimum range
-      of 4 (they lose accuracy if too close or too far)
-    type: Fix
-  - message: Fixed custom rifle incind bullets just having different accuracy falloff
-      from the other custom rifle bullets.
-    type: Fix
-  id: 1785
-  time: '2025-06-01T10:32:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6606
-- author: Vermidia
-  changes:
   - message: Fixed acid ball cooldown being 0 and applying before the doafter finished.
     type: Fix
   id: 1786
@@ -4509,5 +4495,12 @@
   id: 2285
   time: '2025-09-04T08:47:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7755
+- author: x5tink
+  changes:
+  - message: Upgraded Burn and Trauma Kits for ERT's
+    type: Add
+  id: 2286
+  time: '2025-09-04T08:53:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7768
 Name: RMC14
 Order: -1
