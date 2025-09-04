@@ -153,7 +153,7 @@
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchConstruction
-      #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
+      - id: RMCPouchDocument
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
