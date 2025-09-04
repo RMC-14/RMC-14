@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed req being able to order an SG kit.
-    type: Fix
-  id: 1788
-  time: '2025-06-05T00:14:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6620
 - author: J C Denton and noctyrnal
   changes:
   - message: Fixed Admin Fax having 451 Fahrenheit temperature and levitating rats.
@@ -4502,5 +4495,20 @@
   id: 2288
   time: '2025-09-04T08:58:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7754
+- author: x5tink
+  changes:
+  - message: Flap cap added to synth vendor.
+    type: Add
+  - message: Added document pouch to the SO vendor.
+    type: Add
+  - message: Fixed synth fultons not having 20 uses,
+    type: Fix
+  - message: fIX Syringe/surgical cases not fitting into medkits.
+    type: Fix
+  - message: Fix stray pixels on the potted plant sprite.
+    type: Fix
+  id: 2289
+  time: '2025-09-04T08:59:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7777
 Name: RMC14
 Order: -1
