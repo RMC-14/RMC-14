@@ -7,11 +7,11 @@
   requirements:
     RMCRankLanceCorporal:
       - !type:RoleTimeRequirement
-        role: CMJobMessTech
+        role: RMCJobMilitaryChaplain
         time: 252000 # 70 hours
     RMCRankPrivateFirstClass:
       - !type:RoleTimeRequirement
-        role: CMJobMessTech
+        role: RMCJobMilitaryChaplain
         time: 36000 # 10 hours
     RMCRankPrivate: []
   startingGear: RMCGearMilitaryChaplain
