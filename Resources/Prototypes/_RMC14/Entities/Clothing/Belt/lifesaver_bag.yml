@@ -141,7 +141,6 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
-      #      - # TODO RMC14 splints
       - CMAutoInjector
       - CMRollerItem
       - BodyBag
@@ -151,9 +150,8 @@
       - CigPack
       - RMCPenlight
       - Flare
-      #      - # TODO RMC14 minitank (needs full implementation and a tag to fit it in here, but the item exists as CMMiniTank)
-      #      - # TODO RMC14 reagent analyzer
-      #      - # TODO RMC14 plant analyzer
+      - CMUpgradedTraumaKit
+      - CMUpgradedBurnKit
       components:
       - Hypospray
       - Defibrillator
@@ -167,9 +165,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMTraumaKit10
-    - id: CMTraumaKit10
-    - id: CMBurnKit10
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
+      amount: 2
     - id: CMEpinephrineAutoInjector
     - id: RMCMedicAutoInjectorMeralyneBicaridine15
       amount: 3
