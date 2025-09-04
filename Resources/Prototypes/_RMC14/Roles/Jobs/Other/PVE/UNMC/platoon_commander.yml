@@ -14,7 +14,7 @@
   ranks:
     RMCRankSecondLT: []
   spawnMenuRoleName: PVE Platoon Commander
-  startingGear: CMGearExecutiveOfficer
+  startingGear: CMGearStaffOfficer
   icon: "RMCJobIconPVEPlatoonCommander"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-company-command
@@ -64,6 +64,17 @@
 - type: playTimeTracker
   id: CMJobPVEPlatoonCommander
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVEPlatoonCommander
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: RMCShoesLaceup
+    head: CMHeadCapOfficer
+    id: RMCIDCardPlatoonCommander
+    ears: RMCHeadsetGoldenArrow
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: jobIcon
   parent: CMJobIconBase

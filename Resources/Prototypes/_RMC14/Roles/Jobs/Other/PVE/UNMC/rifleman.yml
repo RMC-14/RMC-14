@@ -6,6 +6,7 @@
     RMCRankPrivate: []
   spawnMenuRoleName: PVE Rifleman
   supervisors: cm-job-supervisors-secserg
+  startingGear: RMCDogtagPVERifleman
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,6 +29,11 @@
 - type: playTimeTracker
   id: CMJobPVERifleman
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVERifleman
+  equipment:
+    id: RMCDogtagPVERifleman
 
 - type: entity
   parent: CMSpawnPointJobBase

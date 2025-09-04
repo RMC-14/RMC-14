@@ -11,7 +11,7 @@
   ranks:
     RMCRankStaffSergeant: []
   spawnMenuRoleName: PVE Section Sergeant
-  startingGear: CMGearSquadLeader
+  startingGear: RMCGearPVESectionSergeant
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
@@ -60,6 +60,11 @@
 - type: playTimeTracker
   id: CMJobPVESectionSergeant
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVESectionSergeant
+  equipment:
+    id: RMCDogtagPVESectionSergeant
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -10,6 +10,7 @@
     RMCRankPrivate: []
   spawnMenuRoleName: PVE Smart Gun Operator
   supervisors: cm-job-supervisors-secserg
+  startingGear: RMCGearPVESmartGunOperator
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,6 +34,11 @@
 - type: playTimeTracker
   id: CMJobPVESmartGunOperator
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVESmartGunOperator
+  equipment:
+    id: RMCDogtagPVESmartGunOperator
 
 - type: entity
   parent: CMSpawnPointJobBase

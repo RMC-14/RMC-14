@@ -11,7 +11,7 @@
   ranks:
     RMCRankCorporal: []
   spawnMenuRoleName: PVE Squad Leader
-  startingGear: CMGearFireteamLeader
+  startingGear: RMCGearPVESquadLeader
   dummyStartingGear: CMGearFireteamLeaderEquipped
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
@@ -54,6 +54,11 @@
 - type: playTimeTracker
   id: CMJobPVESquadLeader
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVESquadLeader
+  equipment:
+    id: RMCDogtagPVESquadLeader
 
 - type: entity
   parent: CMSpawnPointJobBase

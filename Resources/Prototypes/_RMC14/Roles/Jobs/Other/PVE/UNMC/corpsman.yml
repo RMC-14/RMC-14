@@ -12,6 +12,7 @@
   ranks:
     RMCRankPrivate: []
   spawnMenuRoleName: PVE Hospital Corpsman
+  startingGear: RMCGearPVEHospitalCorpsman
   supervisors: cm-job-supervisors-secserg
   special:
   - !type:AddComponentSpecial
@@ -32,6 +33,11 @@
 - type: playTimeTracker
   id: CMJobPVEHospitalCorpsman
   isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVEHospitalCorpsman
+  equipment:
+    id: RMCDogtagPVEHospitalCorpsman
 
 - type: entity
   parent: CMSpawnPointJobBase
