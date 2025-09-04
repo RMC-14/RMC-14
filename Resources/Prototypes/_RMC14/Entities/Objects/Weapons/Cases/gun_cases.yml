@@ -200,11 +200,11 @@
      - id: CMMagazinePistolM1984
        amount: 2
 
-# RSh9 Assault Revolver
+# Rhino Assault Revolver
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCGunCaseRevolverRSh9
-  name: RSh9 Assault Revolver case
+  id: RMCGunCaseRevolverRhino
+  name: "Chiakka 'Rhino' Assault Revolver case"
   description:
   components:
   - type: Storage
@@ -213,14 +213,14 @@
     - 0,0,15,1
     whitelist:
       tags:
-      - RMCWeaponRevolverRSh9
-      - RMCSpeedLoaderRsh9
+      - RMCWeaponRevolverRhino
+      - RMCSpeedLoaderRhino
       - RMCAttachmentRailFlashlight
   - type: StorageFill
     contents:
     - id: RMCAttachmentRailFlashlight
-    - id: RMCWeaponRevolverRSh9
-    - id: RMCSpeedLoaderRsh9
+    - id: RMCWeaponRevolverRhino
+    - id: RMCSpeedLoaderRhino
       amount: 6
 
 # HG-45 'Aguila' pistol

@@ -342,7 +342,7 @@
       - id: RMCSynthResetKey
         points: 10
       - id: RMCVisorWelding
-        points: 5 
+        points: 5
 
 # Commanding Officer #
 
@@ -893,7 +893,7 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCGunCaseRevolverRSh9
+      - id: RMCGunCaseRevolverRhino
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984

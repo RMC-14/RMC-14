@@ -1,27 +1,27 @@
 - type: entity
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
-  id: RMCWeaponRevolverRSh9
-  name: RSh-9 Assault Revolver
+  id: RMCWeaponRevolverRhino
+  name: "Chiakka 'Rhino' Assault Revolver"
   description: An old, unusual and bulky revolver that was quickly phased out by other more popular revolvers. Chambered in 9x39mm and prized by law enforcement for its immense stopping power. Features a horrifically archaic break-action reloading mechanism due to the unique position of the barrel.
   components:
   - type: Tag
     tags:
     - Sidearm
     - RMCRevolver
-    - RMCWeaponRevolverRSh9
+    - RMCWeaponRevolverRhino
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rhino.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rhino.rsi
   - type: Gun
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/rsh9_fire.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/rhino_fire.ogg
   - type: RevolverAmmoProvider
     whitelist:
       tags:
-      - RMCSpeedLoaderRsh9
-      - RMCCartridgeRevolverRsh9
-    proto: RMCCartridgeRevolverRsh9
+      - RMCSpeedLoaderRhino
+      - RMCCartridgeRevolverRhino
+    proto: RMCCartridgeRevolverRhino
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -58,7 +58,7 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCSpeedLoaderRsh9
+  id: RMCSpeedLoaderRhino
   name: "Speed loader (9x39)"
   description: A six round load of 9x39 Armor Penetrating rounds, designed to defeat most modern body-armor.
   components:
@@ -74,10 +74,10 @@
     steps: 6
     zeroVisible: false
   - type: BallisticAmmoProvider
-    proto: RMCCartridgeRevolverRsh9
+    proto: RMCCartridgeRevolverRhino
     whitelist:
       tags:
-      - RMCCartridgeRevolverRsh9
+      - RMCCartridgeRevolverRhino
     capacity: 6
   - type: Appearance
   - type: ContainerContainer
@@ -89,24 +89,24 @@
   - type: Tag
     tags:
     - RMCMagazineRevolver
-    - RMCSpeedLoaderRsh9
+    - RMCSpeedLoaderRhino
   - type: SpeedLoader
 
 - type: entity
-  id: RMCCartridgeRevolverRsh9
+  id: RMCCartridgeRevolverRhino
   name: cartridge (9x39)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRevolverRsh9
+    - RMCCartridgeRevolverRhino
   - type: CartridgeAmmo
-    proto: RMCBulletRsh9
+    proto: RMCBulletRhino
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletRsh9
+  id: RMCBulletRhino
   name: bullet (9x39)
   categories: [ HideSpawnMenu ]
   components:
@@ -120,10 +120,10 @@
     accuracy: 90
 
 - type: Tag
-  id: RMCSpeedLoaderRsh9
+  id: RMCSpeedLoaderRhino
 
 - type: Tag
-  id: RMCCartridgeRevolverRsh9
+  id: RMCCartridgeRevolverRhino
 
 - type: Tag
-  id: RMCWeaponRevolverRSh9
+  id: RMCWeaponRevolverRRhino
