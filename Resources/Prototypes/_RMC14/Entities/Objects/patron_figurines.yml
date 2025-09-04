@@ -37,17 +37,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronKillsTheMice
-  name: Kills-The-Mice figurine
-  description: It looks neat.
-  components:
-  - type: Sprite
-    state: Kills-The-Mice
-  - type: PatronFigurine
-    id: e04261e0-0248-49d5-9398-08f84d53e4c0
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFritzVohlkson
   name: Fritz Vohlkson figurine
   description: "A member of the Colony Liaison's security detail. A tacky reward given by We-Ya for 20 years of service."
@@ -1724,3 +1713,80 @@
       params:
         volume: 5
         maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSudie-Mim
+  name: Sudie-Mim figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: sudie-mim
+  - type: PatronFigurine
+    id: cf98bff9-9272-4676-a866-441ed5c51c47
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJazminLudwig
+  name: Jazmin Ludwig figurine
+  description: "Wait, this isn't Hawaii."
+  components:
+  - type: Sprite
+    state: jazmin_ludwig
+  - type: PatronFigurine
+    id: e04261e0-0248-49d5-9398-08f84d53e4c0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJakeFoster
+  name: Jake Foster figurine
+  description: "Hey bro!"
+  components:
+  - type: Sprite
+    state: jake_foster
+  - type: PatronFigurine
+    id: 77488777-2c27-422c-a328-fb6e55142096
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronForgeGrimes
+  name: Forge Grimes figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: forge_grimes
+  - type: PatronFigurine
+    id: 5b4f2f1b-2422-4b59-b8de-d9853d683332
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCoreyShaffer
+  name: Corey Shaffer figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: corey_shaffer
+  - type: PatronFigurine
+    id: bd795da7-fcbd-4ede-8327-962d346c03b1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCorlaBlitzDreams
+  name: Corla 'Blitz' Dreams figurine
+  description: "An arachnid that reeks of gunpowder, thermite and oddly enough...a bunny? Whoever this arachnid is, you can sense how reckless they are with explosives...and how big their heart is, too."
+  components:
+  - type: Sprite
+    state: corla_blitz_dreams
+  - type: PatronFigurine
+    id: e99b48ce-4185-4893-a0c4-4a8a49853aa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRedMachinaSwiftcleave
+  name: Red 'Machina' Swiftcleave figurine
+  description: "Not much can be said apart from this figure having some style to it. The Beret, the smart pistol having ivory colored engravings, a miniature plasma turret sits atop the left shoulder next to the light. But one thing that may catch your eye is the words, \"To a place where...\"written on the bottom of the stand."
+  components:
+  - type: Sprite
+    state: red_machina_swiftcleave
+  - type: PatronFigurine
+    id: dc3a5b1a-5fde-4ffe-9f33-07bc7cac7406

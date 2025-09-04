@@ -70,22 +70,11 @@ rmc-job-name-forecon-commander = Commander
 # LV-624 survs
 
 rmc-job-name-survivor-lv624-archeologist = Archeologist
-CMSurvivorLV624Archeologist = Archeologist
-
 rmc-job-name-survivor-lv624-cargo-technician = Cargo Technician
-CMSurvivorLV624CargoTechnician = Cargo Technician
-
 rmc-job-name-survivor-lv624-corporate-liaison = LV-624 Corporate Liaison
-CMSurvivorLV624CorporateLiaison = LV-624 Corportate Liaison
-
 rmc-job-name-survivor-lv624-security-guard = We-Ya Security Guard
-CMSurvivorLV624SecurityGuard = We-Ya Security Guard
-
 rmc-job-name-survivor-lv624-medical-technician = Emergency Medical Technician
-CMSurvivorLV624MedicalTechnician = Emergency Medical Technician
-
 rmc-job-name-survivor-lv624-engineer = Engineer
-CMSurvivorLV624Engineer = Engineer
 
 rmc-job-greeting-corporate-dome-cl = You are the last alive Executive of Lazarus Landing!
 
@@ -125,7 +114,7 @@ rmc-job-greeting-corporate-dome-goon-medic = You are a Corporate Security Medic!
 
   You are a Corporate Security Medic stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Medbay to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]	
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technician!
 
@@ -159,41 +148,29 @@ cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 # Hybrisa Prospera Survs
 
 rmc-job-name-survivor-hybrisa-civilian = Civilian
-CMJobSurvivorHybrisaCivilian = Civilian
 
 rmc-job-name-survivor-hybrisa-office-worker = Civilian - Office Worker
-CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
 
 rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
-CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
 
 rmc-job-name-survivor-material-reprocessing-technician = Civilian - Material Reprocessing Technician
-CMJobSurvivorHybrisaMaterialReprocessingTechnician = Civilian - Material Reprocessing Technician
 
 rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Protection Specialist
-CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialist
 rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
 
 rmc-job-name-survivor-grind-barista = Civilian - The Daily Grind Barista
-CMJobSurvivorHybrisaGrindBarista = Civilian - The Daily Grind Barista
 
 rmc-job-name-survivor-tmcc-miner = TMCC - Miner
-CMJobSurvivorHybrisaTMCCMiner = TMCC - Miner
 
 rmc-job-name-survivor-medical-doctor = Doctor
-CMJobSurvivorHybrisaMedicalDoctor = Doctor
 
 rmc-job-name-survivor-emt-paramedic = EMT - Paramedic
-CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
 
 rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
-CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 
 rmc-job-name-survivor-xenobiologist = Xenobiologist
-CMJobSurvivorHybrisaXenobiologist = Xenobiologist
 
 rmc-job-name-survivor-pizza-galaxy = Civilian - Pizza Galaxy Delivery Driver
-CMJobSurvivorHybrisaPizzaGalaxy = Civilian - Pizza Galaxy Delivery Driver
 
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 

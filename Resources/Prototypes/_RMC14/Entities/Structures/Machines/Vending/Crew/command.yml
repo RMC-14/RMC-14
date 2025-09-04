@@ -153,7 +153,7 @@
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchConstruction
-      #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
+      - id: RMCPouchDocument
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
@@ -287,11 +287,6 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Welding Visor
-    #   entries:
-    #   - id: RMCHelmetWeldingVisor
-    #     points: 5
-    #     recommended: true
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -318,8 +313,6 @@
         points: 15
     - name: Other Supplies
       entries:
-      - id: RMCVisorWelding
-        points: 5
       - id: CMHandsInsulated
         points: 3
       - id: CMHandsBlackInsulated
@@ -346,10 +339,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-      - id: RMCFlashlight
-        points: 1
       - id: RMCSynthResetKey
         points: 10
+      - id: RMCVisorWelding
+        points: 5 
 
 # Commanding Officer #
 
