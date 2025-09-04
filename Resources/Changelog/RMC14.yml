@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added APC status lights.
-    type: Add
-  - message: Fixed leaky roof on the Normandy.
-    type: Fix
-  id: 1784
-  time: '2025-06-01T10:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6580
 - author: Vermidia
   changes:
   - message: Fixed custom rifle bullets not having a maximum range of 24 (they no
@@ -4509,5 +4500,14 @@
   id: 2284
   time: '2025-08-30T10:02:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6741
+- author: Shromply
+  changes:
+  - message: Added FORECON PVE roles.
+    type: Add
+  - message: Added the FORECON PVE clothing vendor.
+    type: Add
+  id: 2285
+  time: '2025-09-04T08:47:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7755
 Name: RMC14
 Order: -1
