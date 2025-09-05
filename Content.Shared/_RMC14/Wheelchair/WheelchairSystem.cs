@@ -27,7 +27,7 @@ public sealed class WheelchairSystem : EntitySystem
         SubscribeLocalEvent<WheelchairComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<WheelchairComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<WheelchairComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<RingBellActionEvent>(OnRingBell);
+        SubscribeLocalEvent<ActiveWheelchairPilotComponent, RingBellActionEvent>(OnRingBell);
 
         SubscribeLocalEvent<ActiveWheelchairPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
         SubscribeLocalEvent<ActiveWheelchairPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
@@ -51,10 +51,10 @@ public sealed class WheelchairSystem : EntitySystem
 
         _mover.SetRelay(buckle, ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
-        
+
         if (HasComp<ActionsContainerComponent>(ent))
         {
-            _actions.AddAction(buckle, "ActionWheelchairBell");
+            _actions.AddAction(buckle, ent.Comp.BellAction);
         }
     }
 
@@ -65,19 +65,16 @@ public sealed class WheelchairSystem : EntitySystem
         RemCompDeferred<RelayInputMoverComponent>(buckle);
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
-        
-        if (HasComp<ActionsContainerComponent>(ent))
+
+        if (!HasComp<ActionsContainerComponent>(ent) || !TryComp<ActionsComponent>(buckle, out var actions))
+            return;
+
+        foreach (var actionId in actions.Actions.ToArray())
         {
-            if (TryComp<ActionsComponent>(buckle, out var actions))
+            if (TryComp<InstantActionComponent>(actionId, out var action) && action.Event is RingBellActionEvent)
             {
-                foreach (var actionId in actions.Actions.ToArray())
-                {
-                    if (TryComp<InstantActionComponent>(actionId, out var action) && action.Event is RingBellActionEvent)
-                    {
-                        _actions.RemoveAction(buckle, actionId);
-                        QueueDel(actionId);
-                    }
-                }
+                _actions.RemoveAction(buckle, actionId);
+                QueueDel(actionId);
             }
         }
     }
@@ -117,12 +114,12 @@ public sealed class WheelchairSystem : EntitySystem
         }
     }
 
-    private void OnRingBell(RingBellActionEvent args)
+    private void OnRingBell(Entity<ActiveWheelchairPilotComponent> ent, ref RingBellActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !TryComp(ent, out BuckleComponent? buckle) || !TryComp(buckle.BuckledTo, out WheelchairComponent? wheelchair))
             return;
-            
+
         args.Handled = true;
-        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Items/desk_bell_ring.ogg"), args.Performer, args.Performer);
+        _audio.PlayPredicted(wheelchair.BellSound, args.Performer, args.Performer);
     }
 }
