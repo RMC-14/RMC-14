@@ -5,8 +5,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Shared.Access;
-
-
 public sealed partial class AccessLevelPrototype : IInheritingPrototype
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<AccessLevelPrototype>))]
