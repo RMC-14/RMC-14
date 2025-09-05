@@ -3,8 +3,10 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Wieldable.Components;
 using Content.Shared._RMC14.Wieldable.Events;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -20,6 +22,7 @@ namespace Content.Shared._RMC14.Wieldable;
 public sealed class RMCWieldableSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -38,6 +41,7 @@ public sealed class RMCWieldableSystem : EntitySystem
         SubscribeLocalEvent<WieldableSpeedModifiersComponent, ItemUnwieldedEvent>(OnItemUnwielded);
         SubscribeLocalEvent<WieldableSpeedModifiersComponent, ItemWieldedEvent>(OnItemWielded);
         SubscribeLocalEvent<WieldableSpeedModifiersComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<WieldableSpeedModifiersComponent, ContainerGettingRemovedAttemptEvent>(OnItemWielded);
 
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
@@ -125,6 +129,24 @@ public sealed class RMCWieldableSystem : EntitySystem
     private void OnItemWielded(Entity<WieldableSpeedModifiersComponent> wieldable, ref ItemWieldedEvent args)
     {
         RefreshSpeedModifiers((wieldable.Owner, wieldable.Comp));
+    }
+    private void OnItemWielded(Entity<WieldableSpeedModifiersComponent> wieldable, ref ContainerGettingRemovedAttemptEvent args)
+    {
+        if (!args.Cancelled || !TryComp(wieldable.Owner, out TransformComponent? xform) ||
+            !xform.ParentUid.Valid ||
+            !TryComp(xform.ParentUid, out HandsComponent? hands))
+        {
+            return;
+        }
+        foreach (var name in hands.Hands.Keys)
+        {
+            if (hands.ActiveHandId == name)
+                continue;
+            if (name != null && wieldable.Owner.ToString() != name)
+            {
+                _wieldable.UnwieldAll(xform.ParentUid, force: true);
+            }
+        }
     }
 
     private void RefreshModifiersOnParent(EntityUid wieldableUid)
