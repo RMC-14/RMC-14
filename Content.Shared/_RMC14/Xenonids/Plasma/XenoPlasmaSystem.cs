@@ -55,7 +55,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
-    private EntityUid QueenRemotePlasmaTransferUid;
 
     public override void Initialize()
     {
@@ -124,8 +123,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         var msg = "We channel our plasma and transfer it to a sister.";
         _popup.PopupClient(msg, args.Target, ent, PopupType.Large);
 
-        if (_mobState.IsDead(args.Target) ||
-            _flammable.IsOnFire(args.Target))
+        if (_mobState.IsDead(args.Target))
             return;
 
         if (TryComp<XenoPlasmaComponent>(args.Target, out var plasmacomp))
@@ -160,13 +158,16 @@ public sealed class XenoPlasmaSystem : EntitySystem
     {
         if (args.Attached)
         {
-            EntityUid? uid = _actions.AddAction(ent, "ActionXenoRemotePlasmaTransfer");
-            if (uid.HasValue)
-                QueenRemotePlasmaTransferUid = uid.Value;
+            _actionContainer.EnsureAction(ent, ref ent.Comp.RemotePlasmaTransferAction, ent.Comp.RemotePlasmaTransferActionProtoId, ent.Comp.ActionsContainer);
+
+            if (ent.Comp.RemotePlasmaTransferAction is not { } actionId)
+                return;
+            _actions.GrantContainedAction(ent.Owner, ent.Owner, actionId);
         }
         else
         {
-            _actionContainer.RemoveAction(QueenRemotePlasmaTransferUid);
+            if (ent.Comp.RemotePlasmaTransferAction != null)
+                _actions.RemoveAction(ent.Comp.RemotePlasmaTransferAction.Value);
         }
     }
 
