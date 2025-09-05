@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
@@ -43,6 +44,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedGunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -272,9 +274,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
-    private void OnAcidProjectileHit(Entity<AcidProjectileComponent> ref ProjectileHitEvent args)
+    private void OnAcidProjectileHit(Entity<AcidProjectileComponent> projectile, ref ProjectileHitEvent args)
     {
-
+        args.Damage = _xeno.TryApplyXenoAcidDamageMultiplier(args.Target, args.Damage);
     }
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
