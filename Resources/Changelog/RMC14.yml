@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Added different job spawn menu names for FORECON and WeYA PMC operators.
-    type: Add
-  id: 1797
-  time: '2025-06-05T01:14:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6537
-- author: Dutch-VanDerLinde
-  changes:
   - message: Actually fixed FORECON commander not ignoring the max survivor limit.
     type: Fix
   id: 1798
@@ -4508,5 +4501,18 @@
   id: 2297
   time: '2025-09-05T09:37:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7780
+- author: to4no_fix
+  changes:
+  - message: Added a new feature to color the speaker's name in the color of the squad
+      the speaker belongs to! The feature setting is in the settings in the "Accessibility"
+      section. The feature helps to feel more part of the squad and keep the squad
+      together.
+    type: Add
+  - message: Fixed a bug with the lack of support for multi-colored names of xenomorphs,
+      now the names of xenomorphs can have different colors.
+    type: Fix
+  id: 2298
+  time: '2025-09-05T09:41:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6201
 Name: RMC14
 Order: -1
