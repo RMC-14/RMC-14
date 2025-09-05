@@ -38,6 +38,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
@@ -220,7 +221,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
                 evo = evoComp.Points;
             }
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo, leader));
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), _plasma.GetPlasmaPercentage(uid), evo, leader));
         }
 
 
@@ -252,22 +253,6 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         return percentage;
     }
 
-    private FixedPoint2 GetPlasmaPercentage(EntityUid uid)
-    {
-        FixedPoint2 maxplasma;
-        FixedPoint2 currentplasma;
-        FixedPoint2 percentage = 0;
-        if (TryComp<XenoPlasmaComponent>(uid, out var plasmaComponent))
-        {
-            maxplasma = plasmaComponent.MaxPlasma;
-            currentplasma = plasmaComponent.Plasma;
-            if (maxplasma == 0)
-                return percentage;
-            percentage = currentplasma / maxplasma;
-        }
-
-        return percentage;
-    }
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {

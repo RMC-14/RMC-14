@@ -146,9 +146,10 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         foreach (var (actionID,action) in _actions.GetActions(ent))
         {
-            if (action.BaseEvent is XenoRemoteTransferPlasmaActionEvent)
+            if (action.BaseEvent is XenoRemoteTransferPlasmaActionEvent && !_actions.IsCooldownActive(action, _timing.CurTime))
             {
                 _actions.PerformAction(ent,actionscomp, actionID,action,ev, _timing.CurTime);
+
             }
         }
     }
@@ -372,4 +373,21 @@ public sealed class XenoPlasmaSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
         return false;
     }
+
+    public FixedPoint2 GetPlasmaPercentage(Entity<XenoPlasmaComponent?> ent)
+    {
+        FixedPoint2 percentage = 0;
+        if (Resolve(ent, ref ent.Comp, false))
+        {
+            FixedPoint2 maxplasma;
+            FixedPoint2 currentplasma;
+            maxplasma = ent.Comp.MaxPlasma;
+            currentplasma = ent.Comp.Plasma;
+            if (maxplasma == 0)
+                return percentage;
+            percentage = currentplasma / maxplasma;
+        }
+        return percentage;
+    }
+
 }
