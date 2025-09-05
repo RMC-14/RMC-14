@@ -9,7 +9,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -109,7 +109,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -237,7 +237,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -708,7 +708,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
