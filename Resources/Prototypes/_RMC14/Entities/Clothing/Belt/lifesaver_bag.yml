@@ -150,8 +150,6 @@
       - CigPack
       - RMCPenlight
       - Flare
-      - CMUpgradedTraumaKit
-      - CMUpgradedBurnKit
       components:
       - Hypospray
       - Defibrillator
