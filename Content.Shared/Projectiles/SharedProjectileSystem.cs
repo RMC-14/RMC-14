@@ -57,6 +57,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         SubscribeLocalEvent<EmbeddableProjectileComponent, ComponentShutdown>(OnEmbeddableCompShutdown);
 
         SubscribeLocalEvent<EmbeddedContainerComponent, EntityTerminatingEvent>(OnEmbeddableTermination);
+        SubscribeLocalEvent<AcidProjectileComponent, ProjectileHitEvent>(OnAcidProjectileHit);
     }
 
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
@@ -269,6 +270,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             var ev = new ProjectileEmbedEvent(shooter, weapon, args.Target);
             RaiseLocalEvent(embeddable, ref ev);
         }
+    }
+
+    private void OnAcidProjectileHit(Entity<AcidProjectileComponent> ref ProjectileHitEvent args)
+    {
+
     }
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)

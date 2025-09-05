@@ -157,6 +157,18 @@
   - type: CartridgeAmmo
     proto: RMCBulletPistol9mmSquashHeadRubber
 
+- type: entity
+  id: RMCCartridgePistol9mmSquashHeadToxic
+  name: cartridge (9mm Squash-Head, Toxic)
+  parent: RMCCartridgePistol9mmSquashHead
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmSquashHeadToxic
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmSquashHeadToxic
+
 # Bullets
 
 - type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
@@ -200,13 +212,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
+    deleteOnCollide: false
     damage:
       types:
         Piercing: 45
-        Blunt: 45
-    penetrationThreshold: 500
-    penetrationDamageTypeRequirement:
-    - Blunt
+  - type: RMCPenetratingProjectile
 
 - type: entity
   parent: RMCBulletPistol9mmSquashHead
@@ -220,6 +230,17 @@
         Blunt: 2
   - type: RMCStaminaDamageOnCollide
     damage: 40
+
+- type: entity
+  parent: RMCBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHeadToxic
+  name: bullet (9mm Squash-Head, Toxic)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 10
 
 #Tags
 
