@@ -18,7 +18,7 @@ public sealed partial class AccessGroupPrototype : IInheritingPrototype
     ///     Denotes what faction this group belongs to.
     /// </summary>
     [DataField]
-    public EntProtoId<IFFFactionComponent>? Faction ;
+    public EntProtoId<IFFFactionComponent>? Faction;
 
     /// <summary>
     ///     Denotes what group this group is listed under.
