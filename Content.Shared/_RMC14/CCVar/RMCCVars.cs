@@ -477,4 +477,8 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCChatRepeatHistory =
         CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
 }
