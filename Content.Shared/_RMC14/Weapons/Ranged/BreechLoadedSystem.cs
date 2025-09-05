@@ -8,6 +8,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -18,6 +19,7 @@ public sealed class BreechLoadedSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -66,6 +68,16 @@ public sealed class BreechLoadedSystem : EntitySystem
 
         args.Handled = true;
 
+        var time = _timing.CurTime;
+        if (time < gun.Comp.LastToggledAt + gun.Comp.ToggleDelay)
+        {
+            var actionLocale = gun.Comp.Open ? Loc.GetString("rmc-breech-loaded-close") : Loc.GetString("rmc-breech-loaded-open");
+            var popup = Loc.GetString("rmc-breech-loaded-toggle-attempt-cooldown", ("action", actionLocale));
+            _popupSystem.PopupClient(popup, args.UserUid, args.UserUid, PopupType.Small);
+            return;
+        }
+
+        gun.Comp.LastToggledAt = _timing.CurTime;
         gun.Comp.Open = !gun.Comp.Open;
 
         if (!gun.Comp.Open)

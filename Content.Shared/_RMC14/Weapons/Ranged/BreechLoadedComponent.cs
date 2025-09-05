@@ -1,10 +1,12 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(BreechLoadedSystem))]
 public sealed partial class BreechLoadedComponent : Component
 {
@@ -28,6 +30,12 @@ public sealed partial class BreechLoadedComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ShowBreechOpen = true;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastToggledAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ToggleDelay = TimeSpan.FromSeconds(0);
 }
 
 [Serializable, NetSerializable]
