@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
@@ -9,13 +7,9 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Input;
-using Robust.Shared.Log;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -434,10 +428,14 @@ public sealed partial class TacticalMapControl : TextureRect
             return;
 
         SpriteSystem system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
-        SpriteSpecifier.Rsi backgroundRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
-        SpriteSpecifier.Rsi defibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable");
-        SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
-        SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "xenoleader");
+        TimeSpan curTime = IoCManager.Resolve<IGameTiming>().CurTime;
+        SpriteSpecifier.Rsi backgroundRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "background");
+        SpriteSpecifier.Rsi defibbableRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable");
+        SpriteSpecifier.Rsi defibbableRsi2 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable2");
+        SpriteSpecifier.Rsi defibbableRsi3 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable3");
+        SpriteSpecifier.Rsi defibbableRsi4 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable4");
+        SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "undefibbable");
+        SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "xenoleader");
         Texture background = system.Frame0(backgroundRsi);
 
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
@@ -446,7 +444,7 @@ public sealed partial class TacticalMapControl : TextureRect
         handle.DrawTextureRect(Texture, textureRect);
 
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
-        DrawBlips(handle, system, background, defibbableRsi, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale);
+        DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawLabels(handle, overlayScale, actualTopLeft);
@@ -479,8 +477,8 @@ public sealed partial class TacticalMapControl : TextureRect
     }
 
     private void DrawBlips(DrawingHandleScreen handle, SpriteSystem system, Texture background,
-        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi undefibbableRsi,
-        SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale)
+        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi defibbableRsi2, SpriteSpecifier.Rsi defibbableRsi3, SpriteSpecifier.Rsi defibbableRsi4,
+        SpriteSpecifier.Rsi undefibbableRsi, SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale, TimeSpan curTime)
     {
         if (_blips == null)
             return;
@@ -491,21 +489,23 @@ public sealed partial class TacticalMapControl : TextureRect
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
-            handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
-            handle.DrawTextureRect(system.Frame0(blip.Image), rect);
+            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
 
             if (blip.HiveLeader)
-                handle.DrawTextureRect(system.Frame0(hiveLeaderRsi), rect);
+                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect);
 
-            switch (blip.Status)
+            var defibTexture = blip.Status switch
             {
-                case TacticalMapBlipStatus.Defibabble:
-                    handle.DrawTextureRect(system.Frame0(defibbableRsi), rect);
-                    break;
-                case TacticalMapBlipStatus.Undefibabble:
-                    handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
-                    break;
-            }
+                TacticalMapBlipStatus.Defibabble => defibbableRsi,
+                TacticalMapBlipStatus.Defibabble2 => defibbableRsi2,
+                TacticalMapBlipStatus.Defibabble3 => defibbableRsi3,
+                TacticalMapBlipStatus.Defibabble4 => defibbableRsi4,
+                TacticalMapBlipStatus.Undefibabble => undefibbableRsi,
+                _ => null,
+            };
+            if (defibTexture != null)
+                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
         }
     }
 

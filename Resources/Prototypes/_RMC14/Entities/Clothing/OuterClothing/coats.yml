@@ -695,6 +695,39 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
 
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerBrown
+  name: brown windbreaker
+  description: A brown windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerGrey
+  name: grey windbreaker
+  description: A grey windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerExpedition
+  name: expedition windbreaker
+  description: A brown windbreaker with various patches tying it to one of the first explorations into this sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+
 
 # priest robes
 - type: entity
@@ -718,6 +751,17 @@
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingHolidayRobes
+  name: holiday priest
+  description: This is a nice holiday, my son.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
 
 # Hybrisa
 
@@ -817,7 +861,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
 # Snow
 
