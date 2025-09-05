@@ -541,7 +541,7 @@ public sealed partial class TacticalMapWrapper : Control
     {
         if (_currentLabelState == TacticalMapControl.LabelMode.None)
         {
-            SetLabelState(TacticalMapControl.LabelMode.Tactical);
+            SetLabelState(_lastActiveState);
         }
         else
         {
