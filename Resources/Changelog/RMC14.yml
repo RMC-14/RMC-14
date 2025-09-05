@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed unconscious not being it's own status effect. Various causes of
-      it now correctly treat it as such, and it can be shaken out of.
-    type: Fix
-  - message: Fix AP M5-ATL Rockets not causing unconsciousness
-    type: Fix
-  id: 1795
-  time: '2025-06-05T01:12:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6540
-- author: Vermidia
-  changes:
   - message: Fixed abduct's range being 1 too long (7 > 6)
     type: Fix
   id: 1796
@@ -4510,5 +4500,12 @@
   id: 2295
   time: '2025-09-05T09:11:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7794
+- author: Aurallianz
+  changes:
+  - message: Added ID Console
+    type: Add
+  id: 2296
+  time: '2025-09-05T09:27:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7752
 Name: RMC14
 Order: -1
