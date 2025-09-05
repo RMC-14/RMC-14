@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix lifesaver bags being able to hold blood packs.
-    type: Fix
-  - message: Fix medical storage rig not storing some items.
-    type: Fix
-  id: 1794
-  time: '2025-06-05T00:36:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6556
-- author: Vermidia
-  changes:
   - message: Fixed unconscious not being it's own status effect. Various causes of
       it now correctly treat it as such, and it can be shaken out of.
     type: Fix
@@ -4512,5 +4503,12 @@
   id: 2294
   time: '2025-09-04T09:27:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7513
+- author: blueDev2
+  changes:
+  - message: Hive clusters turn into only 1 pylon on weeding of the comms tower
+    type: Fix
+  id: 2295
+  time: '2025-09-05T09:11:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7794
 Name: RMC14
 Order: -1
