@@ -33,6 +33,13 @@
     tags:
     - RMCHeadset
   - type: RMCHeadset
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCHeadsetIconsUNMC
@@ -134,7 +141,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-      - CMEncryptionKeyRequisition
+      - RMCEncryptionKeyCargotech
   - type: GrantSquadLeaderTracker
     defaultMode: Quartermaster
     trackerModes:

@@ -116,6 +116,7 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    accessibleColor: "#09662b" # original color is too indistinguishable in most situations
     blacklistedSquadArmor:
     - Helmet
     - Armor
@@ -332,3 +333,23 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: clf_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadUnassigned
+  name: Unassigned
+  components:
+  - type: SquadTeam
+    color: "#000000"
+    radio: MarineCommon
+    accessLevels: [] # Get them assigned before gearing up.
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background
+    canSupplyDrop: false
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    maxRoles: {}

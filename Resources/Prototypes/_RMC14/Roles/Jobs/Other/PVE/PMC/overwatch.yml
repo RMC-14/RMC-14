@@ -33,6 +33,7 @@
         RMCSkillEndurance: 1
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+        RMCSkillPilot: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard

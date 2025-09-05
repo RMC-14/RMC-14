@@ -28,7 +28,25 @@
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
-
+    survivorJobScenarios:
+      asset_protection:  
+        CMSurvivor:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorCorporate:
+        - CMSurvivorLV624CorporateDomeCL: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorDoctor:
+        - CMSurvivorLV624CorporateDomeGoonMedic: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorEngineer:
+        - CMSurvivorLV624CorporateDomeGoonEngineer: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorSecurity:
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorScientist:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+    
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -125,7 +143,7 @@
       - CMSurvivorMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
-      - CMSurvivorICB: 2
+      - CMSurvivorVaraderoICB: 2
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
       CMSurvivorEngineer:
@@ -263,4 +281,13 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/hybrisa_greenshift.yml
     camouflage: Urban
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetSorokyneRepaired
+  name: LV-976 - Sorokyne Strata (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne_repaired.yml
+    camouflage: Jungle
     inRotation: false

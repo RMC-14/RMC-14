@@ -8,6 +8,9 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 18000 # 5 hours
   ranks:
     RMCRankCaptain: []
   weight: 5
@@ -44,7 +47,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       id: CMExecutiveOfficer
-      points: 120
+      points: 45
+      extraPoints:
+        Specialist: 120
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer

@@ -956,7 +956,18 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        LinkLarvaToVictim(victim, spawned);
+    }
 
+    public void InsertLarva(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
+        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
+        _container.InsertOrDrop(spawned, larvaContainer);
+        LinkLarvaToVictim(victim, spawned);
+    }
+
+    private void LinkLarvaToVictim(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
         if (HasComp<XenoComponent>(spawned))
             _hive.SetHive(spawned, victim.Comp.Hive);
 

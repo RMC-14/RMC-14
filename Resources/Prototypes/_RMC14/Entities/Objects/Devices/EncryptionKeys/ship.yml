@@ -13,6 +13,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Devices/encryption_keys.rsi
     state: cypherkey
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 
 # Common
@@ -363,6 +370,20 @@
   - type: EncryptionKey
     channels:
     - MarineRequisition
+    defaultChannel: MarineRequisition
+  - type: Sprite
+    state: req_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCargotech
+  name: cargo tech encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineRequisition
+    - MarineEngineer
+    - MarineCommand
     defaultChannel: MarineRequisition
   - type: Sprite
     state: req_key

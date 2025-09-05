@@ -6,7 +6,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/intel.rsi
   - type: CMAutomatedVendor
@@ -115,7 +115,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -209,7 +209,9 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -224,7 +226,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -239,7 +241,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:
