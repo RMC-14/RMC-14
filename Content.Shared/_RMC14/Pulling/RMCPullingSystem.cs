@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.MouseRotator;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -66,7 +67,7 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
         SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
 
-        SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed);
+        SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
