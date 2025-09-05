@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
+using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -64,6 +65,8 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
         SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
+
+        SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -247,6 +250,13 @@ public sealed class RMCPullingSystem : EntitySystem
 
         if (ent.Comp.NextAttack > _timing.CurTime)
             args.Cancelled = true;
+    }
+
+    private void OnDisarmed(Entity<XenoComponent> ent, ref DisarmedEvent args)
+    {
+        if (TryComp(args.Target, out XenoComponent? xeno))
+            args.PopupPrefix = "disarm-action-shove-";
+            args.Handled = true;
     }
 
     private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
