@@ -309,6 +309,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         _audio.PlayPredicted(vendor.Comp.Sound, vendor, args.Actor);
         _rmcAnimation.TryFlick(vendor.Owner, vendor.Comp.AnimationSprite, vendor.Comp.BaseSprite);
 
+        if (_net.IsClient)
+            return;
+
         var comp = vendor.Comp;
         var sections = comp.Sections.Count;
         var actor = args.Actor;
@@ -564,9 +567,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, jobPrefix);
         }
-
-        if (_net.IsClient)
-            return;
 
         var min = comp.MinOffset;
         var max = comp.MaxOffset;
