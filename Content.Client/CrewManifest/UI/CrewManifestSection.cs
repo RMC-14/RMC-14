@@ -4,7 +4,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using System.Numerics;
-using Content.Shared.Roles;
 
 namespace Content.Client.CrewManifest.UI;
 
@@ -13,7 +12,7 @@ public sealed class CrewManifestSection : BoxContainer
     public CrewManifestSection(
         IPrototypeManager prototypeManager,
         SpriteSystem spriteSystem,
-        DepartmentPrototype section,
+        string sectionName,
         List<CrewManifestEntry> entries)
     {
         Orientation = LayoutOrientation.Vertical;
@@ -22,13 +21,13 @@ public sealed class CrewManifestSection : BoxContainer
         AddChild(new Label()
         {
             StyleClasses = { "LabelBig" },
-            Text = Loc.GetString(section.Name)
+            Text = Loc.GetString(sectionName),
         });
 
         var gridContainer = new GridContainer()
         {
             HorizontalExpand = true,
-            Columns = 2
+            Columns = 2,
         };
 
         AddChild(gridContainer);

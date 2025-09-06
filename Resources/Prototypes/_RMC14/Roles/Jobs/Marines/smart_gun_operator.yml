@@ -30,6 +30,7 @@
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
   roleWeight: 1
+  displayWeight: 3
   special:
   - !type:AddComponentSpecial
     components:
