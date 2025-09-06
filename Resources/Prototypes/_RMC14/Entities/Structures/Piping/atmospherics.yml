@@ -37,6 +37,15 @@
   - type: VentEntrance
   - type: CollideOnAnchor
   - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      rmc_vent_container: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
   - type: Transform
     anchored: true
   - type: NodeContainer
@@ -47,7 +56,7 @@
         pipeDirection: Fourway
   - type: PipeAppearance
   - type: PipeColorVisuals
-
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMVentPump
@@ -67,3 +76,5 @@
     range: 5
     sound:
       path: /Audio/Ambience/Objects/gas_vent.ogg
+  - type: Weldable
+  - type: RMCMesonsNonviewable

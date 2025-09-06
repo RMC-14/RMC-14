@@ -1,0 +1,143 @@
+<Document>
+  #Dropship Operations Guide
+
+  ## Aerial Support & Deployment Platforms
+
+  Dropships are the backbone of UNMC tactical deployment and a critical source of battlefield firepower. The Almayer utilizes two advanced multi-role dropships: [color=#D2B48C]Alamo[/color] and [color=#808080]Normandy[/color].
+
+  [bold]Both the [color=#D2B48C]Alamo[/color] and [color=#808080]Normandy[/color] are engineered to perform essential troop transport and devastating Close Air Support (CAS) missions[/bold], adapting to the dynamic needs of any operation.
+
+  This guide will cover the general aspects of troop transport, attachment overview and then provide a more in-depth look at executing effective Close Air Support.
+
+
+
+  ## I. Troop Transport: Lifeline to the Front
+
+  Efficient troop transport is vital. While both dropships can ferry marines, the [color=#D2B48C]Alamo[/color] is often designated as the primary workhorse for shuttling squads and supplies between The Almayer and The Main LZ.
+
+  ### Optimizing Your Transport Runs:
+
+  -   [bold]LZ Management:[/bold] Ensure that you always select the [color=#4CAF50][bold]PRIMARY LZ[/bold][/color].
+  -   [bold]Departure Callouts:[/bold] Be sure to announce departure times on [color=#808080]common ship radio[/color] to reduce the chance of leaving any marine behind on ship.
+  -   [bold]Have the Pilot Fly:[/bold] Having [color=#FFFF00]Piloting Skill 2[/color] (standard for Dropship/Gunship Pilots and ASOs) [color=#ADD8E6]reduces dropship refuel time by 25%[/color]. [bold]This stacks with the Cooling System.[/bold]
+
+  ## II. Dropship Armaments & Engine Attachments
+
+  Understanding the available hardware is crucial before engaging in CAS. Both the [color=#D2B48C]Alamo[/color] and [color=#808080]Normandy[/color] can be outfitted with 4 weapon systems, 2 performance-enhancing engine attachments and 3 utility mounts.
+
+  ### A. Weapon Systems
+
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentGau21Cannon"/>
+  - [bold]Overview[/bold]: This is a powerful direct-fire cannon, offering versatility against a range of targets based on the ammunition selected.
+  - [bold]Firing Window[/bold]: Usable during [color=#00FF00]Transit AND Fly-by runs[/color].
+  - [bold]Ammunition Types & Characteristics[/bold]:
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoGAU"/>
+  [bold]General Description[/bold]: This round is designed for engaging [color=#FFA500]infantry, light vehicles, and unreinforced structures[/color]. It excels at area suppression and clearing out softer targets but is not intended for heavily armored threats. [color=#ADD8E6]Has a travel time of 10 seconds[/color]
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoGAUAP"/>
+  [bold]General Description[/bold]: A specialized armor-piercing sabot round engineered to defeat [color=#FF6347]heavily armored targets[/color]. It is less effective against infantry or unarmored targets. [color=#ADD8E6]Has a travel time of 6 seconds[/color]
+
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentLaserCannon"/>
+  - [bold]Overview[/bold]: An area denial weapon that projects a laser to create a field of intense, albeit short-lived fires.
+  - [bold]Firing Window[/bold]: Can be used during [color=#00FF00]Transit AND Fly-by runs[/color].
+  - [bold]Ammunition & Characteristics[/bold]:
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoLaserCannon"/>
+  The cannon randomly covers a [color=#FFA500]7x7 area with 16 total fires[/color]. These fires have a very short duration but are of very high intensity, making them ideal for flushing enemies or temporary area denial.
+  The ammunition is very cost-efficient, with a full reload providing 10 shots. It boasts the [color=#ADD8E6]fastest travel time of any CAS weapon (1 second)[/color] and has a minimal [color=#FFD700]1-tile inaccuracy[/color].
+
+     <GuideEntityEmbed Entity="RMCDropshipAttachmentGuidedMissileLauncher"/>
+  - [bold]Overview[/bold]: This system fires expensive, single-shot, high-impact guided rockets designed for taking out significant targets.
+  - [bold]Firing Window[/bold]: Can [color=#FF0000]ONLY be used during Fly-by CAS runs[/color]. It cannot be fired while the dropship is in normal transit.
+  - [bold]General Launcher Characteristics[/bold]: All missiles fired from this launcher have an inherent [color=#FFD700]3-tile inaccuracy[/color].
+  - [bold]Missile Options & Characteristics[/bold]:
+      <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoRocketWidowmaker"/>
+  This missile features a [color=#FF6347]large blast radius[/color]. Best used against large concentrations of enemies or widespread light targets. [color=#ADD8E6]Has a travel time of 3 seconds[/color]
+      <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoRocketKeeper"/>
+  This missile delivers its payload in a [color=#FF6347]small but highly concentrated blast radius[/color]. Designed for precision strikes against durable single targets. [color=#ADD8E6]Has a travel time of 2 seconds[/color]
+      <GuideEntityEmbed Entity="RMCDropshipAttachmentAmmoRocketNapalm"/>
+  This missile has a [color=#FF6347]large blast radius[/color] and creates an intense fire in a [color=#FFA500]7x7 area[/color] upon impact. Its primary use is for extreme area denial. [color=#ADD8E6]Has a travel time of 6 seconds[/color]
+
+  ### B. Engine Attachments
+  These modules are fitted to dedicated engine attachment points  to enhance dropship performance.
+      <GuideEntityEmbed Entity="RMCDropshipAttachmentFuelEnhancer"/>
+    [color=#ADD8E6]Reduces overall travel time[/color] AND [color=#ADD8E6]increases available fly-by time by 25%[/color]. Excellent for rapid response, quicker transport cycles, and extended CAS presence.
+      <GuideEntityEmbed Entity="RMCDropshipAttachmentCoolingSystem"/>
+    [color=#ADD8E6]Significantly reduces dropship refuel time by 50%[/color], decreasing downtime at The Almayer or LZ.
+  -   [bold]Stacking Note[/bold]: Both engine attachments can be equipped simultaneously, and their effects stack, but with diminishing returns. The Pilot skill bonus also stacks with the Cooling System.
+
+  ### C. Internal Utility Modules
+    Dropships feature [bold]3 utility point[/bold], located inside the dropship near the rear. These mounts can be fitted with specialized modules to enhance the dropship's support capabilities. Currently, two primary utility modules are available:
+
+       <GuideEntityEmbed Entity="RMCDropshipAttachmentFulton"/>
+    -   When this module is installed, the dropship gains the ability to [color=#ADD8E6]retrieve items or corpses that have been sent up from the ground via a fulton[/color]. The Pilot has to use their console to recover the fultonned items
+
+       <GuideEntityEmbed Entity="RMCDropshipAttachmentMedevac"/>
+    -   Equipping this module allows the dropship to [color=#00FF00]recover critically wounded or downed personnel on medevac stretcher directly from the battlefield[/color].
+    -   To recover personnel with the medevac system, the pilot must first select the medevac system from the weapons console and has to manually interact with the medevac to activate it. The medevac system also has a 20 second cooldown
+    -   [bold][color=#FF0000]Vital for casualty evacuation. Remember to tend to the recovered personnel and inform medical on their status, do not leave them unattended after landing at the Almayer.[/color][/bold]
+
+
+  ### D. Acquiring Armaments & Attachments (Dropship Fabricator)
+  All weapon systems, their respective ammunition, and engine attachments are not freely available. They must be acquired through a Dropship Part Fabricator found above the landing pads
+      <GuideEntityEmbed Entity="RMCDropshipFabricator"/>
+      <Box>uses a system of [color=#FFFF00]"Dropship Points"[/color] to print these items.</Box>
+  -   [bold]Replenishing Dropship Points[/bold]: There are two primary ways to obtain or replenish these crucial dropship points:
+
+  1. [bold]Passive Regeneration[/bold]: Dropship points regenerate passively over time, but at a [color=#FFA500]very slow rate[/color] (approximately 1 point every 3 seconds).
+  This method is often insufficient for rapid re-arming during active operations.
+
+  2. [bold]Command Intervention[/bold]: [color=#FFD700]The most effective and timely way to replenish spent dropship points is through Command intervention.[/color] Command staff can spend [color=#00FF00]"Intel Points"[/color] to purchase dropship points,
+  which are then credited to the dropship systems for immediate fabrication of armaments and attachments.
+
+  -    This system means that the dropship's loadout and re-arming capability are directly tied to the overall strategic resource management of the marine operation. Pilots must be judicious with their ordnance, and effective communication with Command regarding point status and needs is essential.
+
+   ## A. Accessing & Understanding the CAS Interface
+
+    Every aspect of a CAS run is controlled via the [bold]Weapons Controls Console[/bold].
+    -   [bold]Dual Monitors:[/bold] Once the console is open, you will see two monitors. Both monitors can display the same selection of windows and operate independently, allowing you to have two different informational or control windows open simultaneously (Target on one, Cams on the other)
+    -   [bold]Available Buttons:[/bold] The primary windows accessible on these monitors are: [bold]Equip[/bold], [bold]Target[/bold], and [bold]Cams[/bold].
+
+    ### B. Navigating the Weapon Control Buttons
+    1.  [bold]The "Equip"[/bold]
+    -  Provides a detailed overview of the dropship's current loadout.
+    -  It shows what kind of weapon systems are attached to the dropship's weapon slots and displays the type and remaining quantity of ammunition for each installed weapon.
+
+    2.  [bold]The "Cams"[/bold]
+    -   Provides a camera view centered on the selected target and its immediate surroundings.
+    -   When this window is active, it will display the visual feed from the area around the target currently selected.
+    <Box>[bold]Camera Control[/bold]:</Box>
+    -   Located [italic]between the two main monitor windows[/italic], you will find four directional arrows.
+    -   Using these arrows allows you to [color=#ADD8E6]slightly move the camera view around[/color] the selected target point. You can use the button in the center to reset the camera back to the target.
+    -   [color=#FFD700][bold]Important Note[/bold]: Moving the camera view in the "Cams" window [bold]does NOT change where the CAS strike will land[/bold]. The strike is always directed at the offset of the target selected in the "Target" window.
+
+    3.  [bold]The "Target"[/bold]
+    -   This is your primary interface for selecting targets and firing the dropship's weapon systems.
+    <Box>[bold]Firing Sequence - Step-by-Step:</Box>
+    -   [color=#FFA500][bold]Select Target[/bold][/color]:  You must choose a target. On the right side of the "Target" window, a list of available targets will be displayed. These targets are typically those designated by ground teams using [color=#FF0000]Laser Designators[/color] or [color=#00FF00]Signal Flares[/color]. Click on the desired target to select it.
+    -   [color=#FFA500][bold]Select "Strike"[/bold][/color]: Once a target is selected, press the "Strike" button within the window.
+    -   [color=#FFA500][bold]Select "Weapon"[/bold][/color]: This will bring up a list showing all equipped weapon systems.
+    -   [color=#FFA500][bold]Choose Your Weapon[/bold][/color]: Select the specific weapon system you intend to fire at the chosen target.
+    -   [color=#FF0000][bold]Select "Fire"[/bold][/color]: Confirm your selections by pressing the "Fire" button.
+    -   [bold]If the sequence was performed correctly, you should hear the distinct sound of the selected weapon firing.[/bold]
+
+    -   There is also the [bold]Target Offset[/bold], instead of firing directly on the laser or signal flare you can offset away from it.
+    -   This offset works off of the XY Coordinates system, for more information on how it works, scroll down on the mortar guide until the [textlink="Coordinate System (You can click here)" link="RMCGuideRoleMortar"]
+
+    <Box>[bold]Weapon Cooldowns & Rapid Fire:</Box>
+    -   Individual weapons have a [italic]short internal cooldown[/italic] before they can be fired again.
+    -   However, there is [bold]no hard delay between firing -different- guns[/bold]. This means once one weapon has fired (example GAU-21), you can immediately repeat the "Strike" -> "Weapon" (select a different GAU-21 or another weapon) -> "Fire" sequence to unleash another salvo with a different weapon system very quickly. This allows for potent combined-arms attacks.
+
+    ### C. CAS Operations: Best Practices & What NOT To Do
+
+    -   [bold]DO: Verify Target Designation[/bold]: Always ensure the target selected in your "Target" window is the correct one communicated by ground teams. Mistakes in target selection can be catastrophic.
+    -   [bold]DO: Monitor Ammo[/bold]: Regularly check your "Equip" window to keep track of remaining ammunition for each weapon system. Running dry is a bad look.
+    -   [bold]DO: Utilize Both Monitors Effectively[/bold]: For instance, keep "Target" open on one monitor for firing control and "Cams" or "Equip" open on the other for situational awareness or ammo checks.
+    -   [bold]DO: Practice Rapid Weapon Switching[/bold]: Get proficient with the "Strike -> Weapon -> Fire" sequence to quickly engage with multiple weapon systems if the situation demands it.
+    -   [color=#00FF00][bold]DO: Reset Your Target Offsets After Each Fire Mission[/bold][/color]: [bold]After completing a fire mission, ensure you reset any target offsets. You don't want to hit friendlies, do you?[/bold]
+
+    -   [color=#FF0000][bold]DON'T: Fire Without Positive Target ID[/bold][/color]: Never fire "blindly" at an unconfirmed target. Friendly fire in CAS is devastating.
+    -   [color=#FF0000][bold]DON'T: Assume the Camera View is Your Aimpoint[/bold][/color]: Remember the "Cams" window is for observation; your shots go where the selected target in the "Target" window is.
+    -   [color=#FF0000][bold]DON'T: Neglect Communication on "Danger Close" Scenarios[/bold][/color]: If ground teams call "Danger Close," be extra vigilant. Ensure your strike won't endanger them. If in doubt, hold fire.
+    -   [color=#FF0000][bold]DON'T: Waste Expensive Ordnance[/bold][/color]: Use the appropriate weapon for the target. Don't fire a costly AGM-99 'Napalm' missile at a single drone.
+
+
+</Document>
