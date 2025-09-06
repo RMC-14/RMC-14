@@ -1,24 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: "Added the M2100 \"Ng\xE1jhe\" machete and it's scabbard."
-    type: Add
-  - message: Added the (incomplete) absurdly sharp katana!
-    type: Add
-  - message: Added the katana scabbard!
-    type: Add
-  - message: Increased the M2132 machete's throw damage from 4 to 10.
-    type: Tweak
-  - message: the HEFA sword now looks like a proper HEFA sword.
-    type: Tweak
-  - message: "Added M5 bayonet\u2019s missing description. It now tells you it can\
-      \ be attached to the end of a rifle."
-    type: Fix
-  id: 1828
-  time: '2025-06-08T00:28:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6543
-- author: Arykh
-  changes:
   - message: Added the Syringe Case!
     type: Add
   id: 1829
@@ -4551,5 +4533,12 @@
   id: 2328
   time: '2025-09-06T13:21:15.485520+00:00'
   url: null
+- author: crazy1112345
+  changes:
+  - message: Fixed marines having SPP loadout guns.
+    type: Fix
+  id: 2329
+  time: '2025-09-06T21:37:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7808
 Name: RMC14
 Order: -1
