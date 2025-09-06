@@ -69,4 +69,4 @@
     cost: 50
   - type: CameraSignalGranter
     protoIds:
-    - RMCSurveillanceCameraLandingZone
+    - RMCMonitorCameraLandingZone

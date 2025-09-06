@@ -84,7 +84,7 @@
         type: RMCCameraBui
   - type: RMCCameraComputer
     protoIds:
-    - RMCSurveillanceCameraAlamo
+    - RMCMonitorCameraAlamo
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
 
@@ -97,7 +97,7 @@
   components:
   - type: RMCCameraComputer
     protoIds:
-    - RMCSurveillanceCameraNormandy
+    - RMCMonitorCameraNormandy
 
 - type: entity
   parent: CMComputerDropship

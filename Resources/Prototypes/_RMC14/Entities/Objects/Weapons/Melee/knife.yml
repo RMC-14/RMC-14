@@ -180,9 +180,6 @@
       types:
         Slash: 55
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 22
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
@@ -217,9 +214,6 @@
       types:
         Slash: 3
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 3
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
       path: /Audio/Weapons/genhit3.ogg

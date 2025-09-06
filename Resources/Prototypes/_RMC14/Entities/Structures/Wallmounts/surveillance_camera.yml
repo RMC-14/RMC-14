@@ -86,8 +86,8 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCSurveillanceCameraAlmayer
-    - RMCSurveillanceCameraAlamo
-    - RMCSurveillanceCameraNormandy
+    - RMCMonitorCameraAlamo
+    - RMCMonitorCameraNormandy
   - type: WallMount
     arc: 360
 
@@ -98,7 +98,7 @@
   suffix: "Alamo"
   components:
   - type: RMCCamera
-    id: RMCSurveillanceCameraAlamo
+    id: RMCMonitorCameraAlamo
 
 - type: entity
   parent: RMCSurveillanceCameraAlmayer
@@ -107,7 +107,7 @@
   suffix: "Normandy"
   components:
   - type: RMCCamera
-    id: RMCSurveillanceCameraNormandy
+    id: RMCMonitorCameraNormandy
 
 - type: entity
   parent: MarkerBase
@@ -124,7 +124,7 @@
     state: camera
     cycle: true
   - type: RMCCamera
-    id: RMCSurveillanceCameraLandingZone
+    id: RMCMonitorCameraLandingZone
   - type: RMCStaticZoomLevel
   - type: Eye
     zoom: 0.9, 0.9
