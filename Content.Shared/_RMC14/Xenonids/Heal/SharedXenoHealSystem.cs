@@ -147,7 +147,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         foreach (var (actionID,action) in _actions.GetActions(xeno))
         {
-            if (action.BaseEvent is XenoHealActionEvent)
+            if (action.BaseEvent is XenoHealActionEvent && !_actions.IsCooldownActive(action, _timing.CurTime))
             {
                 _actions.PerformAction(xeno,actionscomp, actionID,action,ev, _timing.CurTime);
             }
