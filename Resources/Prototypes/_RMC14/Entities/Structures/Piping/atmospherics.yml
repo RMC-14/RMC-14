@@ -1,66 +1,65 @@
 - type: entity
-  parent: GasUnaryBase
+  parent: BaseItem
   id: CMVentPump
   name: air vent
   description: Has a valve and pump attached to it.
   placement:
     mode: SnapgridCenter
   components:
+  - type: Item
+    size: Large
   - type: Sprite
     drawdepth: FloorTiles # TODO RMC14 draw over weeds, below traps
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
     layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
-          state: pipeHalf
-          map: [ "enum.PipeVisualLayers.Pipe" ]
-        - state: off
-          map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+    - state: pipeFourway
+      sprite: Structures/Piping/Atmospherics/pipe.rsi
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      visible: false
+    - state: on
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
   - type: Appearance
-  - type: PipeColorVisuals
-  - type: GenericVisualizer
-    visuals:
-      enum.VentPumpVisuals.State:
-        enabled:
-          Off: { state: off }
-          In: { state: in }
-          Out: { state: on }
-          Welded: { state: welded }
-  - type: DeviceNetwork
-    deviceNetId: AtmosDevices
-    receiveFrequencyId: AtmosMonitor
-    transmitFrequencyId: AtmosMonitor
-    prefix: device-address-prefix-vent
-    sendBroadcastAttemptEvent: true
-    examinableAddress: true
-  - type: AtmosDevice
-  - type: AtmosMonitor
-    temperatureThresholdId: stationTemperature
-    pressureThresholdId: stationPressure
-    gasThresholdPrototypes:
-      Oxygen: stationOxygen
-      Nitrogen: ignore
-      CarbonDioxide: stationCO2
-      Plasma: stationPlasma # everything below is usually bad
-      Tritium: danger
-      WaterVapor: stationWaterVapor
-      Ammonia: stationAmmonia
-      NitrousOxide: stationNO
-      Frezon: danger
-  - type: Tag
-    tags:
-      - GasVent
-      - Unstackable
-  - type: GasVentPump
   - type: AmbientSound
     enabled: true
     volume: -12
     range: 5
     sound:
       path: /Audio/Ambience/Objects/gas_vent.ogg
+  - type: Anchorable
+  - type: Physics
+    canCollide: false
+    bodyType: static
   - type: Weldable
+  - type: VentCrawlable
+    travelDirection: Fourway
+  - type: VentExit
+  - type: VentEntrance
+  - type: CollideOnAnchor
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      rmc_vent_container: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+  - type: Transform
+    anchored: true
+  - type: NodeContainer
+    nodes:
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: Fourway
+  - type: PipeAppearance
+  - type: PipeColorVisuals
+  - type: RMCMesonsNonviewable
 
 - type: entity
-  parent: GasUnaryBase
+  parent: CMVentPump
   id: CMVentScrubber
   name: air scrubber
   description: Has a valve and pump attached to it.
@@ -70,48 +69,7 @@
   - type: Sprite
     drawdepth: FloorObjects
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_scrubber.rsi
-    layers:
-      - sprite: Structures/Piping/Atmospherics/pipe.rsi
-        state: pipeHalf
-        map: [ "enum.PipeVisualLayers.Pipe" ]
-      - state: off
-        map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
   - type: Appearance
-  - type: PipeColorVisuals
-  - type: GenericVisualizer
-    visuals:
-      enum.ScrubberVisuals.State:
-        enabled:
-          Off: { state: off }
-          Scrub: { state: on }
-          Siphon: { state: in }
-          WideScrub: { state: on }
-          Welded: { state: welded }
-  - type: DeviceNetwork
-    deviceNetId: AtmosDevices
-    receiveFrequencyId: AtmosMonitor
-    transmitFrequencyId: AtmosMonitor
-    prefix: device-address-prefix-scrubber
-    examinableAddress: true
-  - type: AtmosMonitor
-    temperatureThresholdId: stationTemperature
-    pressureThresholdId: stationPressure
-    gasThresholdPrototypes:
-      Oxygen: stationOxygen
-      Nitrogen: ignore
-      CarbonDioxide: stationCO2
-      Plasma: stationPlasma # everything below is usually bad
-      Tritium: danger
-      WaterVapor: stationWaterVapor
-      Ammonia: stationAmmonia
-      NitrousOxide: stationNO
-      Frezon: danger
-  - type: Tag
-    tags:
-      - GasScrubber
-      - Unstackable
-  - type: AtmosDevice
-  - type: GasVentScrubber
   - type: AmbientSound
     enabled: true
     volume: -12
@@ -119,3 +77,4 @@
     sound:
       path: /Audio/Ambience/Objects/gas_vent.ogg
   - type: Weldable
+  - type: RMCMesonsNonviewable

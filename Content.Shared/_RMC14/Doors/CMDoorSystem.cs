@@ -11,9 +11,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
 using Content.Shared.Prying.Systems;
+using Content.Shared.Tools.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
@@ -23,15 +26,18 @@ namespace Content.Shared._RMC14.Doors;
 public sealed class CMDoorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
     [Dependency] private readonly SharedDoorSystem _doors = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -49,6 +55,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
 
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
+
+        SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -190,6 +198,25 @@ public sealed class CMDoorSystem : EntitySystem
         if (HasComp<XenoComponent>(args.User))
         {
             args.PryTimeModifier *= ent.Comp.XenoPodlockPryMultiplier;
+        }
+    }
+
+    private void OnDoorBoltStateChanged(Entity<LayerChangeOnWeldComponent> ent, ref DoorBoltsChangedEvent args)
+    {
+        if(!TryComp(ent, out FixturesComponent? fixtureComp) || !TryComp(ent, out DoorComponent? door))
+            return;
+
+        foreach (var fixture in fixtureComp.Fixtures)
+        {
+            switch (args.BoltsDown)
+            {
+                case true when fixture.Value.CollisionLayer == (int) ent.Comp.UnWeldedLayer && door.State == DoorState.Closed:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.WeldedLayer);
+                    break;
+                case false when fixture.Value.CollisionLayer == (int) ent.Comp.WeldedLayer:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.UnWeldedLayer);
+                    break;
+            }
         }
     }
 

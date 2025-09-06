@@ -1,4 +1,4 @@
-﻿<Document>
+<Document>
 
   Guide by frog6645 on Discord
 
@@ -82,7 +82,7 @@
   [bold]Corporate Survivor[/bold]
   <GuideEntityEmbed Entity="CMPen"/>
 
-  The [bold]Corporate Survivor[/bold] is a roleplay role. You are extremely similar to the civilian survivor, the only difference is your position. You can't roleplay if you're dead, however. Find a place to hold with the other survivors or if things go south, a place to hide. Fight side by side with the security survivor and earn your paycheck or get captured by a lesser drone after you abandon everybody to hide in a locker. [bold]Once you are rescued, find the Alamyer's Corporate Liaison and introduce yourself![/bold]
+  The [bold]Corporate Survivor[/bold] is a roleplay role. You are extremely similar to the civilian survivor, the only difference is your position. You can't roleplay if you're dead, however. Find a place to hold with the other survivors or if things go south, a place to hide. Fight side by side with the security survivor and earn your paycheck or get captured by a lesser drone after you abandon everybody to hide in a locker. [bold]Once you are rescued, find the Almayer's Corporate Liaison and introduce yourself![/bold]
 
   [bold]Civilian Survivor[/bold]
   <GuideEntityEmbed Entity="CMJumpsuitColonist"/>
@@ -141,7 +141,7 @@
 
   The M16 is a direct upgrade to the AR10. It sports a higher fire rate, accuracy, and a similar damage per bullet to the AR10, making it a reliable weapon. The M16 has very far falloff as well and responds well to attachments. This is one of the most reliable guns that you can come across as a survivor and typically when it is present, ammo for it is plentiful. Use the M16 as a brawling gun in the backline of your group or to shoot xenonids attacking your cades with the intention to put serious hurt out.
 
-  <GuideEntityEmbed Entity="WeaponRifleM54C"/> <GuideEntityEmbed Entity="WeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleM54C"/> <GuideEntityEmbed Entity="RMCWeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
 
   Highly standardized marine weapons. Ammo for these weapons is best conserved for bigger fights and the holding phase, however they are incredibly useful for brawling if used properly. The M4SPR allows full movement speed while wielded, the MK2 has high DPS, and the MK1 is like the MK2 but slighly better overall. Use these as you would as a marine but more conservatively. You cannot call requisitions for a supply drop... usually.
 
