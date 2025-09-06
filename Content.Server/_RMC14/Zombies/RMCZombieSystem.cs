@@ -56,6 +56,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
             };
             zombieComponent.PassiveHealingCritMultiplier = 1.5f;
             zombieComponent.ZombieMovementSpeedDebuff = 0.80f;
+        };
 
         var accentType = "RMCZombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
