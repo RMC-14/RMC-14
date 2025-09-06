@@ -74,7 +74,7 @@ public sealed class WheelchairSystem : EntitySystem
         {
             if (TryComp<InstantActionComponent>(actionId, out var action) && action.Event is RingBellActionEvent)
             {
-                _actions.RemoveAction(buckle, actionId);
+                _actions.RemoveAction(buckle.Owner, actionId);
                 QueueDel(actionId);
             }
         }
