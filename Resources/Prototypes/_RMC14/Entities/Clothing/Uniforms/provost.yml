@@ -10,6 +10,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCMPArmband
 
 - type: entity
   parent: CMJumpsuitProvost

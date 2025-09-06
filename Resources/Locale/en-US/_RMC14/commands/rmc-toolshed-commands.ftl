@@ -43,6 +43,8 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
 
+command-description-rmcresetahelprelay = Restarts the AHelp and MHelp relays.
+
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
 command-description-intel-spawnintel = Spawns intel on all initialized maps.
@@ -66,3 +68,11 @@ command-description-weedkiller = Runs weed killer on the current location's area
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
 
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
+
+command-description-forceplanetmap = Forces the next round to start with the specified planet.
+
+command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.
+
+command-description-hijack-trigger = Triggers hijack on the map that you are currently on.
+
+command-description-setoperationname = Changes the name of the operation for the upcoming round.

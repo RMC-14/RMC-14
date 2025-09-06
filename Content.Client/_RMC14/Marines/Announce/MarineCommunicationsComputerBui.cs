@@ -1,10 +1,10 @@
-﻿using Content.Shared._RMC14.Marines.Announce;
+﻿using Content.Client.UserInterface.Controls;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Marines.Announce;
@@ -14,6 +14,8 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 {
     [ViewVariables]
     private MarineCommunicationsComputerWindow? _window;
+
+    private bool _confirmingEvacuation;
 
     protected override void Open()
     {
@@ -45,6 +47,30 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             _window.EchoButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsEchoSquadMsg());
         }
 
+        if (EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? communicationsEvac) &&
+            communicationsEvac.CanInitiateEvac)
+        {
+            _window.EvacuationButton.OnPressed += _ =>
+            {
+                if (_confirmingEvacuation)
+                {
+                    SendPredictedMessage(new MarineControlComputerToggleEvacuationMsg());
+                    _confirmingEvacuation = false;
+                }
+                else
+                {
+                    _confirmingEvacuation = true;
+                }
+
+                OnStateUpdate();
+            };
+            _window.EvacuationButton.Visible = true;
+        }
+        else
+        {
+            _window.EvacuationButton.Visible = false;
+        }
+
         if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
             _window.OverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
         else
@@ -72,7 +98,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
             foreach (var zone in s.LandingZones)
             {
-                var button = new Button
+                var button = new ConfirmButton
                 {
                     Text = zone.Name,
                     StyleClasses = { "OpenBoth" },
@@ -88,5 +114,16 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
             computer.CanCreateEcho;
         _window.EchoSeparator.Visible = _window.EchoButton.Visible;
+
+        if (EntMan.TryGetComponent(Owner, out MarineControlComputerComponent? evaccomputer))
+        {
+            // TODO RMC14 estimated time until escape pod launch
+            if (_confirmingEvacuation)
+                _window.EvacuationButton.Text = "Confirm?";
+            else
+                _window.EvacuationButton.Text = evaccomputer.Evacuating ? "Cancel Evacuation" : "Initiate Evacuation";
+
+            _window.EvacuationButton.Disabled = !evaccomputer.CanEvacuate;
+        }
     }
 }

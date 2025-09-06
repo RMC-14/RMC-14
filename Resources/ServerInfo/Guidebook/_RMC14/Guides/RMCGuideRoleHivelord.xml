@@ -1,0 +1,26 @@
+<Document>
+  #Hivelord, Tier 2
+  <GuideEntityEmbed Entity="CMXenoHivelord"/>
+  ##Playing as a Hivelord
+  Being a superior drone, you are able to construct thick resin structures at a faster speed, beware of working on the frontlines as you are prone to dying to explosions and skyspit (close air support) so it may be a better idea to work on the backlines as Hivelords are also fast on resin by using their resin walker ability.
+
+  Hivelords are also great at tackling which makes them decent on the frontlines if any host enters their weeds.
+
+  ##Abilities:
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
+  - [bold]Choose Resin Structure[/bold]: Chooses what resin structure to make, to then be used by Secrete Resin.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoChooseResinStructure"/>
+  - [bold]Secrete Resin[/bold]: Secretes the chosen resin structure on any tile you click.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSecreteResin"/>
+  - [bold]Order Construction[/bold]: Orders the construction of a hive structure.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
+  - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, upgraded.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTransferPlasma"/>
+  - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependent on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
+  - [bold]Resin Walker[/bold]: Grants you increased speed when on resin, however will quickly drain your plasma.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoResinWalker"/>
+</Document>

@@ -85,7 +85,7 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                     _throwingSystem.TryThrow(contentUid, direction, component.Velocity);
 
                     // RMC14
-                    var throwContent = new GrenadeContentThrownEvent();
+                    var throwContent = new GrenadeContentThrownEvent(uid);
                     RaiseLocalEvent(contentUid, ref throwContent);
 
                     if (component.TriggerContents)

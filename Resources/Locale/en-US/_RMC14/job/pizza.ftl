@@ -1,3 +1,10 @@
-﻿CMPizzaDeliverer = Pizza Deliverer
-cm-job-description-pizza-deliverer = "Pizza Galaxy delivery boys (and girls) are trained pilots, whose shuttles are decked out with the latest in Faster-Than-Light travel, and navigation technology. 'That'll be... sixteen orders of cheesy fries, eight large double topping pizzas, nine bottles of Four Loko... hello? Is anyone on this ship? Your pizzas are getting cold.'"
-cm-job-prefix-pizza-deliverer = Pizza
+﻿rmc-ghost-role-information-pizza-rules = You are a [color=red][bold]Pizza Deliverer[/bold][/color]. You are not hostile to any faction.
+                                             You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
+                                             You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
+                                             You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
+
+rmc-ghost-role-information-pizza-description = Your job is to deliver your pizzas. You're PRETTY sure this is the right place...
+
+rmc-ghost-name-pizza = Pizza Deliverer (Neutral)
+rmc-job-name-pizza = Pizza Deliverer
+rmc-job-prefix-pizza = PIZZA

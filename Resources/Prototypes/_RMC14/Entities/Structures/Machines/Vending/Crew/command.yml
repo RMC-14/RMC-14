@@ -9,7 +9,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -30,7 +30,7 @@
       - id: CMJumpsuitOperations
         name: operations uniform
         recommended: true
-      - id: CMHandsBlackMarine
+      - id: CMHandsBlackInsulated
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
@@ -47,6 +47,18 @@
         recommended: true
       - id: CMHeadCapPeakedService
         recommended: true
+    - name: Patches
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
@@ -97,7 +109,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -133,7 +145,7 @@
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
@@ -141,7 +153,7 @@
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchConstruction
-      #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
+      - id: RMCPouchDocument
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
@@ -170,7 +182,10 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -181,8 +196,8 @@
       - id: RMCMaskRebreather
     - name: Other Supplies
       entries:
-      # - id: CMHelmetVisorMedical
-      #   points: 5
+      - id: RMCVisorWelding
+        points: 5
       - id: RMCAttachmentMagneticHarness
         points: 12
       - id: RMCBackpackRTO
@@ -222,7 +237,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -272,11 +287,6 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Welding Visor
-    #   entries:
-    #   - id: RMCHelmetWeldingVisor
-    #     points: 5
-    #     recommended: true
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -290,7 +300,7 @@
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
       - id: RMCAttachmentMiniFlamethrower
-        points: 15 
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -304,6 +314,8 @@
     - name: Other Supplies
       entries:
       - id: CMHandsInsulated
+        points: 3
+      - id: CMHandsBlackInsulated
         points: 3
       - id: RMCPouchMacheteFilled
         points: 5
@@ -327,7 +339,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-       #TODO Synthetic Reset Key
+      - id: RMCSynthResetKey
+        points: 10
+      - id: RMCVisorWelding
+        points: 5
 
 # Commanding Officer #
 
@@ -375,18 +390,28 @@
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
+      - id: RMCJumpsuitCOUniform
+      - id: RMCJumpsuitCOUniformGray
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
       - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+      - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
       - id: CMCoatCOBomber
-    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
-    #   entries:
-    # - name: Dress Headwear
+    - name: Dress
+      entries:
+      - id: CMCoatDressBluesGeneral
+      - id: CMCoatXOFormal
+      - id: RMCMarineUniformDressSenior
+      - id: CMHandsWhite
+      - id: RMCShoesLaceup
+    - name: Dress Headwear
+      entries:
+      - id: CMHeadDressBluesOfficer
     # - name: Dress Extras
 
 # Equipment Vend
@@ -413,7 +438,7 @@
     - name: Commanding Officer Essentials Kit
       takeAll: CMBundle
       entries:
-      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
@@ -421,12 +446,14 @@
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
+      - id: RMCSatchelMarineIntelChestrig
+      - id: RMCSatchelMarineIntelSatchel
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
-      - id: CMHandsInsulated
+      - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -435,9 +462,12 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-    #- id: CMTacticalWaistcoat # TODO Port Waistcoat
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
@@ -459,7 +489,7 @@
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
       - id: CMBeltUtilityCombat
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouch: 2 }
@@ -486,6 +516,19 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+    - name: Miscellaneous
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+
 
 # Weapon Vend
 - type: entity
@@ -506,7 +549,7 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: WeaponRifleM59A
+      - id: RMCWeaponRifleM59A
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
@@ -516,6 +559,11 @@
       entries:
       - id: RMCD50WinterWyvernBeltFilled
       - id: RMCMatebaBeltFilled
+    - name: Ceremonial Weapon
+      choices: { CMCeremonial: 1 }
+      entries:
+      - id: RMCScabbardCeremonialFilled
+        name: Commander's Ceremonial Sabre
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -526,7 +574,7 @@
         recommended: true
       - id: CMMagazineRifleM54CExt
         points: 20
-      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+      - id: CMMagazineRifleM54CAP
         points: 20
       - id: RMCMagazineSmartGun
         points: 20
@@ -536,9 +584,9 @@
         points: 15
       - id: RMCSpeedLoaderMatebaHIAP
         points: 20
-      - id: RMCMagazinePistolD50WinterWyvernHI
+      - id: RMCMagazinePistolHandcannonHI
         points: 15
-      - id: RMCMagazinePistolD50WinterWyvernHIAP
+      - id: RMCMagazinePistolHandcannonHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
@@ -550,9 +598,8 @@
         points: 20
     - name: Special Ammunition
       entries:
-      - id: RMCMagazineRifleM54CIncendiary
-        points: 65
-      #- id: M54C Rubber Magazine
+      - id: RMCMagazineRifleM54CRubber
+        points: 10
       - id: RMCBoxShotgunBeanbag
         points: 10
     - name: Explosives
@@ -562,6 +609,7 @@
       - id: CMPacketGrenadeFragFilled
         points: 15
       #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentS5RedDotSight
@@ -570,10 +618,15 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+    - name: Helmet Visors
       entries:
       - id: RMCVisorNightVision
         points: 10
+        recommended: true
+      - id: RMCVisorWelding
+        points: 5
+      - id: RMCVisorMedicalAdvanced
+        points: 5
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -605,6 +658,7 @@
   id: RMCVendorBundleXOFormal
   name: formal uniform
   description: Contains a peaked cap, formal uniform and jacket.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
@@ -620,6 +674,7 @@
   id: RMCVendorBundleXOShotgun
   name: M890 tactical shotgun
   description: Contains the M890 tactical shotgun and various shells.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
@@ -635,6 +690,7 @@
   id: RMCVendorBundleMilitaryPoliceApparelCMP
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -654,7 +710,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -728,7 +784,7 @@
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
     - name: Eyewear
       jobs:
       - CMExecutiveOfficer
@@ -740,10 +796,20 @@
       - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
-    # - name: Patches # TODO RMC14 Make Patches
-    #   entries:
-    #   - id: CMUNMCPatch
-    #   - id: CMFallingFalconsPatch
+    - name: Patches
+      jobs:
+      - CMExecutiveOfficer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMExecutiveOfficer
@@ -778,7 +844,10 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -808,13 +877,18 @@
       - id: CMJumpsuitWO
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10ChiefMP
     - name: Armor
-      jobs:
-      - CMChiefMP
-      takeAll: CMStandard
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3WO
-      - id: CMArmorHelmetM10ChiefMP
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
@@ -839,6 +913,20 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+    - name: Patches
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMChiefMP
@@ -871,8 +959,19 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -886,13 +985,11 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-     
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -901,6 +998,13 @@
       - id: CMJumpsuitChiefEngineer
         recommended: true
       - id: CMJumpsuitBO
+    - name: Gloves
+      jobs:
+      - CMChiefEngineer
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
       - CMChiefEngineer
@@ -939,7 +1043,20 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-       
+    - name: Patches
+      jobs:
+      - CMChiefEngineer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -987,9 +1104,12 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbingBrown
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1037,7 +1157,8 @@
       entries:
       - id: CMHeadsetEngineer
         amount: 15
-      # TODO 15 Synthetic Reset Key
+      - id: RMCSynthResetKey
+        amount: 15
     # ////////////////////////////////////
     # Quartermaster
     # ////////////////////////////////////
@@ -1046,11 +1167,17 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitQM
       - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
+    - name: Gloves
+      jobs:
+      - CMQuartermaster
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1083,6 +1210,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMQuartermaster
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMQuartermaster
@@ -1107,6 +1248,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
     - name: Spare Equipment
       jobs:
@@ -1122,7 +1265,7 @@
       - CMCMO
       takeAll: CMMedicalSet
       entries:
-      - id: CMVendorBundleCrewMedicalEssentialsNurse
+      - id: RMCVendorBundleCrewMedicalEssentialsDoctor
     - name: Standard Equipment
       jobs:
       - CMCMO
@@ -1212,6 +1355,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMCMO
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMCMO
@@ -1255,33 +1412,60 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Spare Equipment
-      jobs: 
+      jobs:
       - CMCMO
       entries:
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-        
-
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
-    - name: Standard Equipment
+    - name: Uniform
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: RMCJumpsuitASOBlack
+      - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
+      - id: RMCJumpsuitASOBlackAlt
+      - id: RMCJumpsuitASOOperations
+    - name: Outer Wear
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMSuit: 1 }
+      entries:
+      - id: CMCoatASO
+      - id: RMCCoatASOBlack
+      - id: RMCCoatASOWhite
+      - id: RMCCoatASOBlackAlt
+      - id: RMCCoatASOWhiteAlt
+    - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
-      - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
-      - id: CMCoatASO
+    - name: Gloves
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
       - id: CMSatchel
@@ -1304,15 +1488,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapASO
+      - id: RMCHeadCapPeakedASO
+      - id: RMCHeadBeretASO
       - id: RMCHeadBeret
-        recommended: true
       # TODO patrol and officer cap
       - id: RMCHeadCapFlippable
-        recommended: true
       - id: CMHeadCapPeakedService
-        recommended: true
       - id: CMHeadBeretTan
-        recommended: true  
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1321,6 +1504,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMAuxiliarySupportOfficer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1347,5 +1544,8 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster

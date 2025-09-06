@@ -46,6 +46,7 @@
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: RMCMagazineRifleXM40HEAP
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2

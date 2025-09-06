@@ -53,3 +53,7 @@
     graph: BarricadeWoodGraph
     node: nodeWood
   - type: Climbable
+  - type: XenoToggleChargingDamage
+    sound:
+      collection: WoodDestroy
+  - type: RMCMesonsNonviewable

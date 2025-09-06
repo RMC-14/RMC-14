@@ -1,6 +1,5 @@
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
 
@@ -62,12 +61,13 @@ namespace Content.Shared.Humanoid.Markings
             string species)
         {
             var speciesProto = _prototypeManager.Index<SpeciesPrototype>(species);
-            var onlyWhitelisted = _prototypeManager.Index(speciesProto.MarkingPoints).OnlyWhitelisted;
+            var markingPoints = _prototypeManager.Index(speciesProto.MarkingPoints);
             var res = new Dictionary<string, MarkingPrototype>();
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
-                if (onlyWhitelisted && marking.SpeciesRestrictions == null)
+                // RMC14
+                if ((markingPoints.OnlyWhitelisted || (markingPoints.Points.GetValueOrDefault(category)?.OnlyWhitelisted ?? false)) && marking.SpeciesRestrictions == null)
                 {
                     continue;
                 }

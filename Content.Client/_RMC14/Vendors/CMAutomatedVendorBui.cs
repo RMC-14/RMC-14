@@ -57,7 +57,13 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     foreach (var job in section.Jobs)
                     {
-                        validJob = _job.MindHasJobWithId(mindId, job.Id);
+                        if (!_job.MindHasJobWithId(mindId, job.Id))
+                            validJob = false;
+                        else
+                        {
+                            validJob = true;
+                            break;
+                        }
                     }
                 }
 

@@ -1,0 +1,56 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCBarricadeSnow
+  name: snow barricade
+  description: A mound of snow shaped into a sloped wall. Statistically better than thin air as cover.
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: snow
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.38"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+        - LowImpassable
+  - type: RotationDrawDepth
+    southDrawDepth: OverMobs
+  - type: Barricade
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: InteractionOutline
+  - type: NailgunRepairable
+    # cm13 max_health%: 1
+#    repairSnow: 75
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 19
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _RMC14/Structures/Walls/Barricades/snow_cracks.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/Footsteps/snowstep3.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Climbable
+  - type: XenoToggleChargingDamage
+    sound:
+      path: /Audio/Effects/Footsteps/snowstep3.ogg

@@ -7,6 +7,7 @@
   ranks:
     RMCRankMasterSergeant: [ ]
   startingGear: RMCGearSynthetic
+  dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   requireAdminNotify: true
   joinNotifyCrew: true
@@ -14,12 +15,7 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ShipMasterAccess
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: synth
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
+  - Synth
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -27,6 +23,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 5
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 4
         RMCSkillConstruction: 3
         RMCSkillFirearms: 2
@@ -44,7 +41,9 @@
         RMCSkillIntel: 2
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
-    - type: MarineOrders
+    - type: CMVendorUser
+      id: RMCJobSynthetic
+      points: 45
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -54,29 +53,80 @@
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
   hidden: true
 
 - type: startingGear
   id: RMCGearSynthetic
   equipment:
-    jumpsuit: RMCJumpsuitSynthetic
+    id: RMCIDCardSynth
+
+- type: startingGear
+  id: RMCGearSyntheticEquipped
+  equipment:
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
-#- type: entity
-#  parent: CMSpawnPointJobBase
-#  id: RMCSpawnPointSynth
-#  name: synthetic spawn point
-#  components:
-#  - type: SpawnPoint
-#    job_id: RMCJobSynthetic
-#  - type: Sprite
-#    state: syn_spawn
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynth
+  name: synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSynthetic
+  - type: Sprite
+    state: syn_spawn
 
 - type: playTimeTracker
   id: RMCJobSynthetic

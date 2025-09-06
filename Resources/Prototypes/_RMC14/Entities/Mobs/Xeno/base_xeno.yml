@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-xeno
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
@@ -66,12 +70,17 @@
       params:
         volume: -4
   - type: HealthExaminable
+    examineShowEmpty: false
     examinableTypes:
     - Blunt
     - Slash
     - Piercing
     - Heat
     - Shock
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 25
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
@@ -81,7 +90,7 @@
   - type: Climbing
   - type: Insulated
   - type: Input
-    context: "human"
+    context: "xenonid"
   - type: Clickable
   - type: InteractionOutline
   - type: InputMover
@@ -90,6 +99,7 @@
   - type: Emoting
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: DoAfter
   - type: Examiner
@@ -175,6 +185,7 @@
         density: 185
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - MobLayer
@@ -185,10 +196,16 @@
         density: 0
         layer:
         - BulletImpassable
+  - type: CMSurgeryTarget
+  - type: Body
+    prototype: Xenonid
   - type: Xeno
   - type: XenoRegen
+  - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
       enum.XenoDevolveUIKey.Key:
@@ -251,6 +268,9 @@
     - Muted
     - Dazed
     - Blinded
+    - Unconscious
+    - TemporaryBlindness
+    - Deaf
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -279,6 +299,7 @@
       components:
       - Xeno
       - Infectable
+      - Synth
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable
@@ -292,7 +313,7 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
-  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
+  - type: XenoAnnounceDeath
     message: cm-xeno-death
     color: "#459A62"
   - type: ExplosionResistance
@@ -309,6 +330,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
+    trackerModes:
+    - Queen
+    - HiveLeader
+    - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -321,10 +347,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
@@ -338,8 +364,8 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.87
-    superSlowMultiplier: 0.75
+    slowModifier: 0.75
+    superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
@@ -360,6 +386,15 @@
   - type: RMCObstacleSlamCauserImmune
   - type: RMCMobCollisionMass
   - type: XenoRankNames
+  - type: Blindable
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - Marine
+  - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true
@@ -400,6 +435,10 @@
       params:
         variation: 0.1
         volume: -5
+  - type: MeleeDamageMultiplier # 1.5x Damage against other xenos
+    whitelist:
+      components:
+      - Xeno
   - type: Tackle
   - type: XenoClaws
 
@@ -425,6 +464,14 @@
 #      task: CMXenoCompound
 
 - type: entity
+  abstract: true
+  id: RMCXenoVentCrawler
+  components:
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+  - type: RMCTrayCrawler
+
+- type: entity
   id: CMXenoDeveloped
   parent:
   - CMXenoBase
@@ -438,6 +485,7 @@
     tags:
     - DoorBumpOpener
   - type: Hands
+    examineShowEmpty: false
   - type: GiveHands
     hands:
     - name: Right Hand
@@ -452,6 +500,8 @@
   - type: FirePatter
     stacks: -5
   - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true

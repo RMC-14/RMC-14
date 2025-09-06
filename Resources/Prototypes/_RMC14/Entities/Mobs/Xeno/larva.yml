@@ -2,6 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoLarva
   name: Larva
   components:
@@ -39,6 +40,8 @@
     plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.25
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     requiresGranter: false
@@ -59,6 +62,7 @@
         mask:
         - SmallMobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - SmallMobLayer
   - type: Flammable
@@ -75,7 +79,7 @@
     size: Small
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: larva
   - type: Tag
     tags:
@@ -89,6 +93,10 @@
       3: rmc-xeno-elder-larva
       4: rmc-xeno-elder-larva
       5: rmc-xeno-elder-larva
+  - type: FixedIdentity
+    name: cm-job-name-xeno-larva
+  - type: VentCrawler
+    ventCrawlIcon: larva
 
 # For surgeries/failed incubations
 - type: entity

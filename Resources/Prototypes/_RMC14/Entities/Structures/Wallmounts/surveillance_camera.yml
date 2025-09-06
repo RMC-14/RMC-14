@@ -19,6 +19,8 @@
     needsPower: false # TODO RMC14 power
   - type: ExtensionCableReceiver
   - type: Eye
+    zoom: 0.5, 0.5
+  - type: RMCStaticZoomLevel
   - type: Damageable
     damageContainer: Inorganic
   - type: Sprite
@@ -73,6 +75,7 @@
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: security_cam
     layers: []
+    drawdepth: SmallObjects
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
@@ -81,6 +84,51 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCSurveillanceCameraAlmayer
+    protoIds:
+    - RMCSurveillanceCameraAlmayer
+    - RMCSurveillanceCameraAlamo
+    - RMCSurveillanceCameraNormandy
   - type: WallMount
     arc: 360
+
+- type: entity
+  parent: RMCSurveillanceCameraAlmayer
+  id: RMCMonitorCameraAlamo
+  description: It's used to monitor the dropship.
+  suffix: "Alamo"
+  components:
+  - type: RMCCamera
+    id: RMCSurveillanceCameraAlamo
+
+- type: entity
+  parent: RMCSurveillanceCameraAlmayer
+  id: RMCMonitorCameraNormandy
+  description: It's used to monitor the dropship.
+  suffix: "Normandy"
+  components:
+  - type: RMCCamera
+    id: RMCSurveillanceCameraNormandy
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMonitorCameraLandingZone
+  name: landing zone camera
+  suffix: "LZ Detector"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true
+    state: camera
+    cycle: true
+  - type: RMCCamera
+    id: RMCSurveillanceCameraLandingZone
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.9, 0.9
+    pvsScale: 1.5
+    drawFov: false
+  - type: FTLSmashImmune
+  - type: NoFTL

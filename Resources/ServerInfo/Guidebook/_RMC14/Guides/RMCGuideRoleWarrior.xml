@@ -1,0 +1,21 @@
+<Document>
+  #Warrior, Tier 2
+  <GuideEntityEmbed Entity="CMXenoWarrior"/>
+  ##Playing as a Warrior
+  Being very different from Defender, you now act as a primary attacker by staying on the frontline. Singling hosts out, use your Lunge to grab hosts and Fling them towards the hive. After this, you can tackle them to capture.
+
+  Beware that you have a smaller armor pool than Defender and will be easy to kill if dragging a target after lunging.
+
+  Using your environment is the key to kill hosts in groups, you can fling and punch them into walls to deal even more damage. If you want to fight a duo, then lunge one and fling the other. This lets you weaken them down slowly.
+
+  Reminder that the stun from lunge is as long as you keep a hold of them, if you let go of your drag it will cancel their stun prematurely. In other cases this stun is long enough to tackle them down after a lunge.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Your slashes and abilities have lifesteal, granting you health upon hit.
+  - [bold]Fling[/bold]: Fling a target backwards 3 tiles and damage them, will also stun for a bit.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFling"/>
+  - [bold]Lunge[/bold]: Lunge towards a target and grab them, dragging will leave you VERY vulnerable and slow you down so be sure to know when to stop dragging.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoLunge"/>
+  - [bold]Punch[/bold]: Punches the target, dealing a hefty amount of damage as well as knocking them back a tile.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPunch"/>
+</Document>

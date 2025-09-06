@@ -41,6 +41,7 @@
         density: 1000
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true
@@ -58,6 +59,13 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Glass
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40 # TODO RMC14 reduce window health to 100, check per window
+  - type: XenoCrusherChargable
+    instantDestroy: True
 
 - type: entity
   parent: CMBaseWindowIndestructible

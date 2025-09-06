@@ -1,11 +1,35 @@
 - type: entity
   parent: RMCMarineUniformBase
-  id: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCNoWebbing
   name: PMC fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCNoWebbing
+  id: RMCJumpsuitVeteranPMC
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMC
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCMedic
+  suffix: Webbing, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCMedic
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCGunner
+  suffix: Webbing, Gunner
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCGunner
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -15,6 +39,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMC
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
@@ -53,28 +79,37 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitVeteranPMCCorporate
   id: RMCJumpsuitVeteranPMCKutjevo
-  name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is more breathable for use in hot, dry environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/kutjevo.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitVeteranPMCCorporateLead
   id: RMCJumpsuitVeteranPMCKutjevoLead
-  name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is more breathable for use in hot, dry environments and has gold armbands denoting the team leader
+  suffix: Kutjevo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/kutjevo_lead.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCCorporate
+  id: RMCJumpsuitVeteranPMCHybrisa
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/hybrisa.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCCorporateLead
+  id: RMCJumpsuitVeteranPMCHybrisaLead
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/hybrisa_lead.rsi
 
 - type: entity
   parent: RMCMarineUniformBase

@@ -1,0 +1,47 @@
+﻿- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFBase
+  abstract: true
+  components:
+  - type: ItemIFF
+    faction: FactionSurvivor
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSoldier
+  name: clf soldier's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSoldier
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFEngineer
+  name: clf engineer's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFEngineer
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFMedic
+  name: clf medic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFMedic
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSpecialist
+  name: clf specialists's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSpecialist
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFCellCommander
+  name: clf cell commander's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFCellCommander

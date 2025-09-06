@@ -1,0 +1,78 @@
+﻿# Recreational
+- type: loadout
+  id: CassettePlayerRMC
+  cost: 2
+  storage:
+    back:
+    - RMCCassettePlayer
+
+- type: loadout
+  id: MagazineBootsN54RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineBootsN54
+
+- type: loadout
+  id: MagazineBootsN55RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineBootsN55
+
+- type: loadout
+  id: MagazineBootsN117RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineBootsN117
+
+- type: loadout
+  id: MagazineBootsN150RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineBootsN150
+
+- type: loadout
+  id: MagazineBootsN160RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineBootsN160
+
+- type: loadout
+  id: MagazineWeYaOrreryRMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineWeYaOrrery
+
+- type: loadout
+  id: MagazineWeYaOrreryN184RMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineWeYaOrreryN184
+
+- type: loadout
+  id: MagazineDirtyMagazineRMC
+  cost: 1
+  storage:
+    back:
+    - RMCMagazineDirtyMagazine
+
+- type: loadout
+  id: D20DiceRMC
+  cost: 1
+  storage:
+    back:
+    - d20Dice
+
+- type: loadout
+  id: D6DiceRMC
+  cost: 1
+  storage:
+    back:
+    - d6Dice
+

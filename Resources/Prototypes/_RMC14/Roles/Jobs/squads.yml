@@ -26,7 +26,7 @@
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_alpha
 
 - type: entity
@@ -41,7 +41,7 @@
     accessLevels:
     - CMAccessBravo
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_bravo
 
 - type: entity
@@ -56,7 +56,7 @@
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_charlie
 
 - type: entity
@@ -71,7 +71,7 @@
     accessLevels:
     - CMAccessDelta
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_delta
 
 - type: entity
@@ -88,7 +88,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_foxtrot
     canSupplyDrop: false
 
@@ -106,7 +106,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
 
 - type: entity
@@ -116,12 +116,13 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    accessibleColor: "#09662b" # original color is too indistinguishable in most situations
     blacklistedSquadArmor:
     - Helmet
     - Armor
     radio: MarineIntel
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_intel
     canSupplyDrop: false
     maxRoles:
@@ -152,9 +153,10 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: SPP
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_spp
     canSupplyDrop: false
     group: SPP
@@ -176,12 +178,178 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: WEYA
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_pmc
     canSupplyDrop: false
     group: WeYa
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: pmc_ld
+
+- type: entity
+  parent: SquadBase
+  id: SquadFreelancer
+  name: Freelancer
+  components:
+  - type: SquadTeam
+    color: "#4559F5"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: Colony
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_free
+    canSupplyDrop: false
+    group: Freelancer
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: free_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadRoyalMarines
+  name: Royal Marines
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Royal Marines
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_teamleader
+
+- type: entity
+  parent: SquadBase
+  id: SquadProvost
+  name: Provost
+  components:
+  - type: SquadTeam
+    color: "#990218"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: Provost
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Provost
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_pvl
+
+- type: entity
+  parent: SquadBase
+  id: SquadFORECON
+  name: Recon
+  components:
+  - type: SquadTeam
+    color: "#32CD32"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineSOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_forecon
+    canSupplyDrop: false
+    group: FORECON
+  - type: Tag
+    tags:
+    - RMCSquadFORECON
+
+- type: Tag
+  id: RMCSquadFORECON
+
+- type: entity
+  parent: SquadBase
+  id: SquadSOF
+  name: SOF
+  components:
+  - type: SquadTeam
+    color: "#400000"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    radio: MarineSOF
+    accessLevels: []
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_sof
+    group: SOF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_soctl
+
+- type: entity
+  parent: SquadBase
+  id: SquadCLF
+  name: CLF
+  components:
+  - type: SquadTeam
+    color: "#3aeb34"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: Colony
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: CLF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: clf_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadUnassigned
+  name: Unassigned
+  components:
+  - type: SquadTeam
+    color: "#000000"
+    radio: MarineCommon
+    accessLevels: [] # Get them assigned before gearing up.
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background
+    canSupplyDrop: false
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    maxRoles: {}

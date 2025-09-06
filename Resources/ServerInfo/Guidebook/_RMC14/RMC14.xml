@@ -3,7 +3,7 @@
 
   Welcome to RMC-14.
 
-  This is a MRP server inspired by CM13, in the new SS14 engine!
+  This is a MRP asymmetric game!
 
   The guidebook, roadmap and rules for the game can be found on the lobby screen, and at any point in the escape menu.
 
@@ -12,14 +12,16 @@
   Be sure to read the rules if you haven't already.
   - [textlink="The rules" link="RMCOverview"]
 
-  New to RMC-14, SS14, or have no CM13 experience? Be careful! A lot of mechanics and values are not the same as these games.
+  New to RMC-14, or SS14-style games? Be careful! A lot of mechanics and values are not the same as these games.
   - [textlink="New player guide!" link="RMCGuideNewPlayer"]
   - [textlink="Your first day as a rifleman!" link="RMCGuideRoleRifleman"]
   - [textlink="So you've just been born into the hive! Now what?" link="RMCGuideRoleDrone"]
 
   ## Have some experience? Check out these guidebook pages!
 
-  Anyone is free to add guides to this page, either through the discord or github.
+  Anyone is free to add guides to this page, either through the discord or GitHub.
+
+  Many of these guides are also accessible by examining the role or item they're related to!
 
   ### Marines
 
@@ -37,8 +39,10 @@
   ### Xenonids
 
   [bold]Roles[/bold]
-
+  - [textlink="Castes" link="RMCGuideXenonidRoles"]
 
   [bold]Structures[/bold]
+  - [textlink="Hive Structures" link="RMCGuideHiveStructures"]
+  - [textlink="Resin Holes" link="RMCGuideResinHoles"]
 
 </Document>

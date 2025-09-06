@@ -177,6 +177,17 @@
     needsPower: false # Intentional
 
 - type: entity
+  parent: RMCAIConsoleARES
+  id: RMCAIConsoleInterface
+  name: AI interface console
+  description: A large, bulky computer intended to allow the user to interface with the ship's AI.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aiconsoleinterface.rsi
+    state: console
+    offset: 0, -0.55
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCAIConsoleHERMES
   name: HERMES Maintenance Controller.

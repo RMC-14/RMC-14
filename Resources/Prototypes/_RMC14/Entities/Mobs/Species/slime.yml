@@ -28,3 +28,5 @@
         color: "#2cf274"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-slime

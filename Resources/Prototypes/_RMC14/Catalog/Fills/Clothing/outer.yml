@@ -1,0 +1,29 @@
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingForeconSurvivorFill
+  suffix: FORECON, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFlashlight
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCArmorUDEPForecon
+  id: RMCArmorUDEPForeconFilled
+  suffix: FORECON, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFlashlight
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerForeconFilled
+  suffix: FORECON, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFlashlight
+    - id: CMCrowbar

@@ -1,0 +1,163 @@
+- type: entity
+  parent: CMBaseWeaponSMG # TODO RMC14 UZI CAN JAM
+  name: UZI
+  id: RMCWeaponSMGUZI
+  description: Exported to over 90 countries, somehow this relic has managed to end up here. Couldn't be simpler to use.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/uzi.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/uzi.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_uzi.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilWielded: 0
+    recoilUnwielded: 1
+    scatterWielded: 10
+    scatterUnwielded: 16
+    baseFireRate: 4
+    burstScatterMult: 3
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 12
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 50
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.9
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGUZI
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGUZI
+          - RMCMagazineSMGUZIExt
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.065
+      rmc-aslot-rail: 0, 0.15
+      rmc-aslot-underbarrel: 0.3, -0.31
+  - type: GunDamageModifier
+    multiplier: 1.1
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGUZI
+  name: UZI magazine (9x21mm)
+  description: A 9x21mm magazine for the UZI. Seems pretty small, huh? Anything larger could cause feeding errors.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGUZI
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge9x21mmSMGUZI
+    proto: RMCCartridge9x21mmSMGUZI
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/uzi.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineSMGUZI
+  id: RMCMagazineSMGUZIExt
+  name: UZI Extended magazine (9x21mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 32
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/uziextended.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGUZIExt
+
+- type: entity
+  parent: CMCartridge9mmSMG
+  id: RMCCartridge9x21mmSMGUZI
+  description: A 9x21mmcartridge for the UZI submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge9x21mmSMGUZI
+  - type: CartridgeAmmo
+    proto: Bullet9x21mmUZI
+
+- type: entity
+  parent: Bullet10x20mm
+  id: Bullet9x21mmUZI
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: Tag
+  id: RMCMagazineSMGUZI
+
+- type: Tag
+  id: RMCCartridge9x21mmSMGUZI
+
+- type: Tag
+  id: RMCMagazineSMGUZIExt

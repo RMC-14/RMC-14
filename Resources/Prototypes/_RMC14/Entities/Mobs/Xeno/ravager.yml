@@ -6,10 +6,14 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
-  id: CMXenoRavager
+  id: RMCXenoRavagerBase
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
+  abstract: true
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRavager
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite
@@ -71,7 +75,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 0
+        Heat: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -82,6 +86,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -114,15 +119,24 @@
     prefix: ravager
   - type: RMCFireArmorDebuffModifier
     debuffModifier: 1.2
-  - type: PlasmaFrenzy
   - type: RMCImmuneToFireTileDamage
-  - type: TacticalMapIcon
-    icon:
-      sprite: _RMC14/Interface/map_blips.rsi
-      state: ravager
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: TantrumSpeedBuff
+  - type: XenoCruelty
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: ravager
+  - type: FixedIdentity
+    name: cm-job-name-xeno-ravager
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
+
+- type: entity
+  parent: RMCXenoRavagerBase
+  id: CMXenoRavager
+  components:
   - type: XenoShield
   - type: XenoLeap
     delay: 0
@@ -132,7 +146,6 @@
     plasmaCost: 25
     leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
     destroyObjects: true
-  - type: XenoCruelty
   - type: XenoEmpower
     damageIncreasePer:
       groups:
@@ -147,3 +160,78 @@
     damage:
       types:
         Slash: 40
+  - type: PlasmaFrenzy
+  - type: XenoEvolution
+    strains:
+    - RMCXenoRavagerBerserker
+
+- type: entity
+  parent: RMCXenoRavagerBase
+  id: RMCXenoRavagerBerserker
+  suffix: Berserker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoApprehend
+    - ActionXenoClothesline
+    - ActionXenoEviscerate
+    - ActionXenoDevolve
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
+  - type: CMArmor
+    xenoArmor: 30
+    explosionArmor: 80
+  - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
+  - type: XenoShield
+  - type: XenoStrain
+    name: rmc-xeno-berserker-name
+    description: rmc-xeno-berserker-description
+    popup: rmc-xeno-berserker-popup
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoCripplingStrike
+    activateText: rmc-xeno-apprehend-activate
+    deactivateText: rmc-xeno-apprehend-deactivate
+    expireText: rmc-xeno-apprehend-expire
+    auraColor: "#522020"
+    damageMult: 1
+    speed: 1.2
+  - type: XenoRage
+  - type: XenoEviscerate
+    damageAtRageLevels:
+    - groups:
+        Brute: 5
+    - groups:
+        Brute: 10
+    - groups:
+        Brute: 25
+    - groups:
+        Brute: 45
+    - groups:
+        Brute: 70
+    rangeAtRageLevels: [1.5, 1.5, 1.5, 2.5, 2.5]
+    windupReductionAtRageLevels: [0, 0.2, 0.4, 0.6, 1]
+  - type: XenoFling # TODO RMC14 target head
+    range: 2
+    enragedRange: 1
+    healAmount: 75
+    enragedHealAmount: 100
+    paralyzeTime: 0
+    slowTime: 0
+    dazeTime: 4
+    throwSpeed: 12
+    damage:
+      groups:
+        Brute: 20
+  - type: XenoHidden

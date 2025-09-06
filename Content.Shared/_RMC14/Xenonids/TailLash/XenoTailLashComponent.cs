@@ -23,7 +23,7 @@ public sealed partial class XenoTailLashComponent : Component
     public float Height = 2;
 
     [DataField, AutoNetworkedField]
-    public float FlingDistance = 2; //3 Tiles from start
+    public float FlingDistance = 3;
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunTime = TimeSpan.FromSeconds(1);

@@ -10,6 +10,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -121,7 +123,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             var shooterOrWeapon = EntityManager.EntityExists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
 
             _adminLogger.Add(LogType.BulletHit,
-                LogImpact.Medium,
+                HasComp<ActorComponent>(target) ? LogImpact.Medium : LogImpact.Low,
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooterOrWeapon):source} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
         }
 
@@ -407,7 +409,10 @@ public sealed class ImpactEffectEvent : EntityEventArgs
 /// Raised when an entity is just about to be hit with a projectile but can reflect it
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled);
+public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled) : IInventoryRelayEvent
+{
+    SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
 
 /// <summary>
 /// Raised when a projectile hits an entity

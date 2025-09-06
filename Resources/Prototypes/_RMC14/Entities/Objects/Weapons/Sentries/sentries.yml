@@ -1,133 +1,10 @@
-﻿- type: entity
-  parent: BaseItem
+- type: entity
   abstract: true
+  parent: RMCSentryPremade
   id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
   name: turret
   components:
-  - type: Corrodible
-    timeToApply: 4
-    structure: true
-  - type: Item
-    size: Normal
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Actions
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.25
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-      sentry:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.45
-        density: 20
-        layer:
-        - MidImpassable
-        - BulletImpassable
-        mask:
-        - MidImpassable
-        - BulletImpassable
-        hard: false
-  - type: CollisionWake
-    enabled: false
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    drawdepth: Mobs
-    noRot: true
-    layers:
-    - map: [ "base" ]
-      state: defense_base_off
-    - map: [ "sentry" ]
-      state: normal_uac_sentry_handheld
-  - type: Icon
-    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: normal_uac_sentry_handheld
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.SentryLayers.Layer:
-        base:
-          Item: { state: "", visible: false }
-          Off: { state: defense_base_off, visible: true }
-          On: { state: defense_base, visible: true }
-        sentry:
-          Item: { state: normal_uac_sentry_handheld }
-          Off: { state: normal_uac_sentry_noammo }
-          On: { state: normal_uac_sentry_on }
-  - type: CombatMode
-    toggleMouseRotator: false
-  - type: Gun
-    fireRate: 2.5
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
-  - type: MagazineAmmoProvider
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-  - type: HTN
-    rootTask:
-      task: RMCSentryCompound
-    blackboard:
-      SoundTargetInLOS: !type:SoundPathSpecifier
-        path: /Audio/Effects/double_beep.ogg
-      VisionRadius: !type:Single
-        6.0
-      AggroVisionRadius: !type:Single
-        6.0
-  - type: MouseRotator
-    angleTolerance: 5
-    rotationSpeed: 180
-    simple4DirMode: false
-  - type: NoRotateOnInteract
-  - type: NoRotateOnMove
-  - type: GunIFF
-    enabled: true
-    intrinsic: true
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: UserInterface
-    interfaces:
-      enum.SentryUiKey.Key:
-        type: SentryUpgradeBui
-  - type: HealthExaminable
-    locPrefix: sentry
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
-  - type: ShortExamine
   - type: Sentry
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-  - type: RMCRepairable
-  - type: RMCNameItemOnVend
-    item: Sentry
-  - type: RequireProjectileTarget
-  - type: RMCWeaponAccuracy
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -202,6 +79,16 @@
     - UNMC
   - type: UserIFF
     faction: FactionMarine
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 40
+  - type: Tag
+    tags:
+    - RMCSentry
+
+- type: Tag
+  id: RMCSentry
 
 - type: entity
   parent: RMCSentry
@@ -492,3 +379,168 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
+- type: entity
+  parent: RMCSentry
+  id: RMCSentryMiniFire
+  name: UN 45-FM mini sentry
+  description: The Mini Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UN 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
+  components:
+  - type: RMCFireProjectile
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "sentry" ]
+      state: mini_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: mini_uac_flamer_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        sentry:
+          Item: { state: mini_uac_flamer_handheld }
+          Off: { state: mini_uac_flamer_noammo }
+          On: { state: mini_uac_flamer_on }
+  - type: Gun
+    fireRate: 1
+    projectileSpeed: 20.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - BulletImpassable
+        hard: false
+  - type: Sentry
+    homingShots: false
+    deployDelay: 0.75
+    undeployDelay: 0.75
+    upgrades: null
+    startingMagazine: RMCMagazineSentryFire
+    magazineTag: RMCMagazineSentryFire
+
+- type: entity
+  parent: RMCBaseSentry
+  id: RMCSentryFire
+  name: UN 55-FA assault sentry flamer
+  description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
+  components:
+  - type: RMCFireProjectile
+  - type: Gun
+    fireRate: .33
+    projectileSpeed: 20.0
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: normal_uac_flamer_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: normal_uac_flamer_handheld }
+          Off: { state: normal_uac_flamer_noammo }
+          On: { state: normal_uac_flamer_on }
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: UserIFF
+    faction: FactionMarine
+  - type: Sentry
+    homingShots: false
+    upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
+    startingMagazine: RMCMagazineSentryFireBlue
+    magazineTag: RMCMagazineSentryFireBlue
+
+- type: entity
+  parent: RMCSentry
+  id: RMCSentrySniperFire
+  name: UN 60-FP plasma sentry
+  description: The Plasma Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the phosphorus that lingers doesn't.
+  components:
+  - type: RMCFireProjectile
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: plasma_uac_flamer_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: plasma_uac_flamer_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: plasma_uac_flamer_handheld }
+          Off: { state: plasma_uac_flamer_noammo }
+          On: { state: plasma_uac_flamer_on }
+  - type: Gun
+    fireRate: 0.14
+    projectileSpeed: 20.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: HTN
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        11.0
+      AggroVisionRadius: !type:Single
+        11.0
+  - type: Sentry
+    homingShots: false
+    deployDelay: 2
+    upgrades: null
+    startingMagazine: RMCMagazineSentryFireSmoke
+    magazineTag: RMCMagazineSentryFireSmoke
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4

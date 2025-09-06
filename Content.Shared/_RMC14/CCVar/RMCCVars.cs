@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._RMC14.CCVar;
 
 [CVarDefs]
-public sealed class RMCCVars : CVars
+public sealed partial class RMCCVars : CVars
 {
     public static readonly CVarDef<float> CMXenoDamageDealtMultiplier =
         CVarDef.Create("rmc.xeno_damage_dealt_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
@@ -14,30 +14,6 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> CMXenoSpeedMultiplier =
         CVarDef.Create("rmc.xeno_speed_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesArachnid =
-        CVarDef.Create("rmc.play_voicelines_arachnid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesDiona =
-        CVarDef.Create("rmc.play_voicelines_diona", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesDwarf =
-        CVarDef.Create("rmc.play_voicelines_dwarf", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesFelinid =
-        CVarDef.Create("rmc.play_voicelines_felinid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesHuman =
-        CVarDef.Create("rmc.play_voicelines_human", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesMoth =
-        CVarDef.Create("rmc.play_voicelines_moth", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesReptilian =
-        CVarDef.Create("rmc.play_voicelines_reptilian", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesSlime =
-        CVarDef.Create("rmc.play_voicelines_slime", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCAutoPunctuate =
         CVarDef.Create("rmc.auto_punctuate", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
@@ -135,9 +111,6 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
         CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<int> RMCTailStabMaxTargets =
-        CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
-
     public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
         CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 
@@ -152,9 +125,6 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCActiveInputMoverEnabled =
         CVarDef.Create("rmc.active_input_mover_enabled", true, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<string> RMCAdminFaxAreaMap =
-        CVarDef.Create("rmc.admin_fax_area_map", "Maps/_RMC14/admin_fax.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCBioscanInitialDelaySeconds =
         CVarDef.Create("rmc.bioscan_initial_delay_seconds", 300, CVar.REPLICATED | CVar.SERVER);
@@ -210,6 +180,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCTacticalMapUpdateEverySeconds =
         CVarDef.Create("rmc.tactical_map_update_every_seconds", 0.5f, CVar.SERVER | CVar.REPLICATED);
 
+    public static readonly CVarDef<float> RMCTacticalMapForceUpdateEverySeconds =
+        CVarDef.Create("rmc.tactical_map_force_update_every_seconds", 30.0f, CVar.SERVER | CVar.REPLICATED);
+
     public static readonly CVarDef<bool> RMCTacticalMapShowAreaLabels =
         CVarDef.Create("rmc.tactical_map_show_area_labels", true, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
@@ -264,6 +237,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<int> RMCNewPlayerTimeJobHours =
         CVarDef.Create("rmc.new_player_time_job_hours", 10, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCBrandNewPlayerTimeJobHours =
+        CVarDef.Create("rmc.brand_new_player_time_job_hours", 1, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
         CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
@@ -272,6 +248,12 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
         CVarDef.Create("rmc.late_joins_per_burrowed_larva", 7f, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTime =
+        CVarDef.Create("rmc.late_joins_burrowed_larva_death_time", 2.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes =
+        CVarDef.Create("rmc.late_joins_burrowed_larva_death_time_ignore_before_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlaytimeBronzeMedalTimeHours =
         CVarDef.Create("rmc.playtime_bronze_medal_time_hours", 10, CVar.REPLICATED | CVar.SERVER);
@@ -284,6 +266,18 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCPlaytimePlatinumMedalTimeHours =
         CVarDef.Create("rmc.playtime_platinum_medal_time_hours", 175, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeRubyMedalTimeHours =
+        CVarDef.Create("rmc.playtime_Ruby_medal_time_hours", 500, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeEmeraldMedalTimeHours =
+        CVarDef.Create("rmc.playtime_Emerald_medal_time_hours", 1000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeAmethystMedalTimeHours =
+        CVarDef.Create("rmc.playtime_Amethyst_medal_time_hours", 2000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimePrismaticMedalTimeHours =
+        CVarDef.Create("rmc.playtime_Prismatic_medal_time_hours", 5000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlaytimeXenoPrefixThreeTimeHours =
         CVarDef.Create("rmc.playtime_xeno_prefix_three_time_hours", 124, CVar.REPLICATED | CVar.SERVER);
@@ -445,4 +439,53 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCMovementBigXenosCancelMovement =
         CVarDef.Create("rmc.movement_big_xenos_cancel_movement", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCHijackShipWeight =
+        CVarDef.Create("rmc.hijack_ship_weight", 0.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCMinimumHijackBurrowed =
+    CVarDef.Create("rmc.hijack_minimum_burrowed", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDistressXenosMinimum =
+        CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> VolumeGainCassettes =
+        CVarDef.Create("rmc.volume_gain_cassettes", 0.33f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> VolumeGainHijackSong =
+        CVarDef.Create("rmc.volume_gain_hijack_song", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> HidePlayerIdentities =
+        CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCQueenBuildingBoost =
+    CVarDef.Create("rmc.queen_building_boost", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCQueenBuildingBoostDurationMinutes =
+        CVarDef.Create("rmc.queen_building_boost_duration_minutes", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCQueenBuildingBoostSpeedMultiplier =
+        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 0.65f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
+        CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAutomaticCommanderPromotion =
+        CVarDef.Create("rmc.automatic_commander_promotion", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDeadChatEnabled =
+        CVarDef.Create("rmc.dead_chat_enabled", true, CVar.SERVER | CVar.NOTIFY | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCDelayRoundEnd =
+        CVarDef.Create("rmc.delay_round_end", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCLobbyStartPaused =
+        CVarDef.Create("rmc.lobby_start_paused", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCChatRepeatHistory =
+        CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
 }

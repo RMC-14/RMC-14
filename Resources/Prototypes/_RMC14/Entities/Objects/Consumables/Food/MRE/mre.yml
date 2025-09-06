@@ -126,7 +126,7 @@
   - type: MREItem
 
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxMREEmpty
   name: box of MREs (x12)
   description: A box of MREs. Nutritious, but not delicious.
@@ -144,14 +144,14 @@
         - MRE
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#887b67"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#a69571"
-    - state: supply_box_food
+    - state: supply_box_small_food
       color: "#e0d5c2"
-    - state: supply_lid_closed
+    - state: supply_lid_small_closed
       map: [ "lid" ]
       color: "#887b67"
 

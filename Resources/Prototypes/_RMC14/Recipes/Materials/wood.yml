@@ -1,0 +1,41 @@
+# - type: rmcConstruction
+  # id: RMCSandalsBuild
+  # name: pair of wooden sandals
+  # prototype: TODO
+  # materialCost: 1
+
+- type: rmcConstruction
+  id: RMCFloorTileWoodBuild
+  name: wood floor tile
+  prototype: CMTileItemWood
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  amount: 4
+  stackAmounts:
+  - 20
+
+- type: rmcConstruction
+  id: RMCCampfireBuild
+  name: campfire
+  prototype: RMCCampfire
+  noRotate: true
+  doAfterTime: 1.5
+  materialCost: 5
+
+- type: rmcConstruction
+  id: RMCWoodenBarricadeBuild
+  name: wooden barricade
+  prototype: RMCBarricadeWood
+  doAfterTime: 2
+  materialCost: 5
+
+- type: rmcConstruction
+  id: RMCWoodenCrateBuild
+  name: wooden crate
+  prototype: RMCCrateWoodenBuildable
+  noRotate: true
+  doAfterTime: 2
+  materialCost: 5

@@ -19,6 +19,12 @@
     layers:
     - state: tube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#FFEFD2"
+    energy: 1
+    radius: 10
+    softness: 1
+    offset: "0, -0.5"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: tube-empty
@@ -36,6 +42,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
@@ -46,6 +53,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -81,6 +90,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -211,6 +222,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -246,6 +259,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -393,6 +408,8 @@
     layers:
     - state: bbulb1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightBulbBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bbulb-empty

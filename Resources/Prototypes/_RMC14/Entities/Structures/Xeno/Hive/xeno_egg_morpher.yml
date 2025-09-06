@@ -1,7 +1,7 @@
 - type: entity
   id: HiveEggMorpherXeno
   parent: BaseHiveStructure
-  name: Egg Morpher
+  name: egg morpher
   description: A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
   components:
   - type: Sprite
@@ -66,6 +66,12 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+  - type: XenoStructureMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: morpher
 
 - type: entity
   id: HiveEggMorpherXenoConstructionNode

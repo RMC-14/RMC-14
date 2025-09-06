@@ -8,6 +8,7 @@
     mode: SnapgridCenter
   components:
   - type: Transform
+    anchored: true
     noRot: true
   - type: Clickable
   - type: InteractionOutline
@@ -56,6 +57,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true
@@ -78,3 +80,4 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # - type: XenoCrusherChargable TODO knock over by crusher

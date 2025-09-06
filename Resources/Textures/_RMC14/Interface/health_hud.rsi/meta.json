@@ -48,6 +48,27 @@
     },
     {
       "name": "huddeadclose"
+    },
+    {
+      "name": "hudsynth"
+    },
+    {
+      "name": "hudsynthdnr",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "hudsynthdead",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
     }
   ]
 }

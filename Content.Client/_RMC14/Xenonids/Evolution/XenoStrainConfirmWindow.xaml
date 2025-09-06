@@ -1,0 +1,28 @@
+<cc:XenoStrainConfirmWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
+    xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+    Title="Strain Info"
+    MinSize="300 400">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8" Access="Public" >
+        <controls:Label
+            Name="NameLabel"
+            HorizontalAlignment="Center"
+            StyleClasses="LabelBig" Access="Public" />
+        <controls:TextureRect
+            Name="Sprite"
+            HorizontalAlignment="Center"
+            Stretch="KeepAspectCentered"
+            MinSize="128,128" Access="Public" />
+        <controls:RichTextLabel
+            Name="DescriptionLabel"
+            VerticalAlignment="Top"
+            Margin="0,8,0,0" Access="Public" />
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="16" Access="Public" >
+            <controls:Button
+                Name="ConfirmButton"
+                MinWidth="120"
+                Text="{Loc rmc-ui-xeno-strain-confirm}" Access="Public" />
+        </BoxContainer>
+    </BoxContainer>
+</cc:XenoStrainConfirmWindow>
