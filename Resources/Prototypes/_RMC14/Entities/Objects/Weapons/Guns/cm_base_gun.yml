@@ -11,10 +11,6 @@
   - type: RMCWeaponDamageFalloff
   - type: Clothing
     quickEquip: false
-  - type: GunSkilledRecoil
-    setRecoil: 0
-    skills:
-      RMCSkillFirearms: 1
   - type: UseDelay
     delay: 0
   - type: WieldDelay
@@ -36,6 +32,7 @@
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
     burstCooldown: 0
+    cameraRecoilScalar: 0
   - type: RMCWeaponAccuracy
   - type: GunSkilledAccuracy
   - type: Appearance

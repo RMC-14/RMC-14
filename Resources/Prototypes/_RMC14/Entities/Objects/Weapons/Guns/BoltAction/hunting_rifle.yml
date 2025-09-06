@@ -88,6 +88,9 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunRequiresWield
+  - type: RMCGunRecoil # Make sure base bolt action gets this if one is ever created
+    strength: 2
+    strengthUnwielded: 4
 
 - type: entity
   parent: CMMagazineRifleBase
