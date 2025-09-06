@@ -47,6 +47,7 @@
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
   - RMCGuideRoleSpec
+  - RMCGuideRoleCAS
   - RMCGuideMarineCommunications
   - RMCGuideCorporateLiaison
 
@@ -58,6 +59,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideCommunicationsTowers
+  - RMCGuideRoleMortar
 
 # cooking
 - type: guideEntry
@@ -222,8 +224,15 @@
 
 - type: guideEntry
   parent: RMC
+  id: RMCGuideRoleMortar
+  priority: 12
+  name: "Mortar"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
+
+- type: guideEntry
+  parent: RMC
   id: RMCGuideRoleSpec
-  priority: 11
+  priority: 13
   name: "Specialists"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpec.xml"
   children:
@@ -260,10 +269,17 @@
   name: "Sniper Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleCAS
+  priority: 14
+  name: "Dropships and CAS"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCAS.xml"
+
 - type: guideEntry # made by Gabrote42
   parent: RMC
   id: RMCGuideMarineCommunications
-  priority: 12
+  priority: 15
   name: "Marine Communications"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideMarineCommunications.xml"
 
@@ -272,48 +288,48 @@
   id: RMCGuideCorporateLiaison
   name: "Corporate Liaison"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCorporateLiaison.xml"
-  priority: 13
+  priority: 16
 
 # Xenonids
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleDefender
-  priority: 14
+  priority: 17
   name: "Defender Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleDefender.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleSentinel
-  priority: 15
+  priority: 18
   name: "Sentinel Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSentinel.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRunner
-  priority: 16
+  priority: 19
   name: "Runner Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleRunner.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleWarrior
-  priority: 17
+  priority: 20
   name: "Warrior Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleWarrior.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleSpitter
-  priority: 18
+  priority: 21
   name: "Spitter Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpitter.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleLurker
-  priority: 19
+  priority: 22
   name: "Lurker Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleLurker.xml"
   children:
@@ -322,21 +338,21 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleHivelord
-  priority: 20
+  priority: 23
   name: "Hivelord Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleHivelord.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleBurrower
-  priority: 21
+  priority: 24
   name: "Burrower Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleBurrower.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleCarrier
-  priority: 22
+  priority: 25
   name: "Carrier Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCarrier.xml"
   children:
@@ -345,14 +361,14 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleCrusher
-  priority: 23
+  priority: 26
   name: "Crusher Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCrusher.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRolePraetorian
-  priority: 24
+  priority: 27
   name: "Praetorian Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRolePraetorian.xml"
   children:
@@ -363,77 +379,77 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRavager
-  priority: 25
+  priority: 28
   name: "Ravager Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleRavager.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleBoiler
-  priority: 26
+  priority: 29
   name: "Boiler Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleBoiler.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleQueen
-  priority: 27
+  priority: 30
   name: "Queen Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleQueen.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideHiveStructures
-  priority: 28
+  priority: 31
   name: "Hive Structures Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideHiveStructures.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideResinHoles
-  priority: 29
+  priority: 32
   name: "Resin Holes Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideResinHoles.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleValkyrie
-  priority: 30
+  priority: 33
   name: "Valkyrie Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleValkyrie.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleOppressor
-  priority: 31
+  priority: 34
   name: "Oppressor Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleOppressor.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleVanguard
-  priority: 32
+  priority: 35
   name: "Vanguard Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleVanguard.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleEggsac
-  priority: 33
+  priority: 36
   name: "Eggsac Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleEggsac.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleVampire
-  priority: 34
+  priority: 37
   name: "Vampire Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleVampire.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleParasite
-  priority: 35
+  priority: 38
   name: "Parasite Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleParasite.xml"
 
@@ -443,7 +459,7 @@
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 36
+  priority: 39
   children:
   #  - RMCElements
   - RMCMedicine
