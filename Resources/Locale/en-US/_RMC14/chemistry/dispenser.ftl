@@ -18,7 +18,7 @@ rmc-chem-dispenser-energy-count = {$energy} energy
 
 
 
-rmc-chem-dispenser-energy = { $amount } energy
+rmc-chem-dispenser-energy-amount = { $amount } energy
 
 rmc-chem-dispenser-no-beaker = No beaker loaded!
 
