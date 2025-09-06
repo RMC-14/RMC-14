@@ -77,7 +77,7 @@ public sealed class BreechLoadedSystem : EntitySystem
             return;
         }
 
-        gun.Comp.LastToggledAt = _timing.CurTime;
+        gun.Comp.LastToggledAt = time;
         gun.Comp.Open = !gun.Comp.Open;
 
         if (!gun.Comp.Open)
