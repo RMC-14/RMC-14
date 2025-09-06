@@ -1,0 +1,56 @@
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleBicaridineMeralyne
+  name: bicaridine-meralyne bottle
+  description: A small bottle. Contains Bicaridine and Meralyne - Used to treat brute damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 70
+        - ReagentId: CMMeralyne
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMBicaridine: 70
+      CMMeralyne: 70
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleKelotaneDermaline
+  name: kelotane-dermaline bottle
+  description: A small bottle. Contains Kelotane and Dermaline - Used to treat burn damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 70
+        - ReagentId: CMDermaline
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMKelotane: 70
+      CMDermaline: 70
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleDexalinPlus
+  name: dexalin plus bottle
+  description: A small bottle. Contains Dexalin Plus - Used to rapidly treat airloss damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 140
+  - type: CMRefillableSolution
+    reagents:
+      CMDexalinPlus: 140

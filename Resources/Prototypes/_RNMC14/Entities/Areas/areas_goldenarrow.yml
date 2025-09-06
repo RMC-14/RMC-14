@@ -1,0 +1,40 @@
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGACryoCells
+  name: Cryo Cells
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGADorms
+  name: Dorms
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGAPrepHallway
+  name: Prep Hallway
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGAAssemblyRoom
+  name: Assembly Room
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGAPlatco
+  name: Platoon Commander's Rooms
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGAPlatoonPrep
+  name: Platoon Prep
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGASecSargeOffice
+  name: Section Sergeant's Office
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaGAPlatoonArmory
+  name: Platoon Armory

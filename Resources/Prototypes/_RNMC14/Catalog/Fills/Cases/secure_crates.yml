@@ -1,0 +1,54 @@
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseM54CMK1Mag
+  name: M54C MK1 magazine case (x20)
+  description: An ammunition case containing 20 M54C MK1 magazines.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMMagazineRifleM54CMK1
+      amount: 20
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedSandbags
+  name: sandbags supply crate (x100)
+  description: A supply crate containing two fifty stacks of empty sandbags.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSandbagEmpty50
+      amount: 2
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedMRE
+  name: MRE supply crate (x60)
+  description: A supply crate containing sixty units of MREs.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCBoxMRE
+      amount: 5
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseMaterials
+  name: materials crate
+  description: An ammunition case containing materials.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSheetPlasteel
+    - id: CMSheetMetal50
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseFlares
+  name: flares supply crate (x360)
+  description: An ammunition case containing flares.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCBoxPackFlare
+      amount: 4

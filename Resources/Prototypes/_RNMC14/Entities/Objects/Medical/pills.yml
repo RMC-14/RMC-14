@@ -1,0 +1,87 @@
+- type: entity
+  parent: CMPill
+  id: CMPillBicaridineMeralyne
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 10
+        - ReagentId: CMMeralyne
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillKelotaneDermaline
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 15
+        - ReagentId: CMDermaline
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillIronSugar
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 22.5
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 15
+        - ReagentId: RMCSugar
+          Quantity: 7.5
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillNitrogenWater
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Water
+          Quantity: 15
+        - ReagentId: RMCNitrogen
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: CMPillDexalinPlus
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]

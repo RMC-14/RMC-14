@@ -1,0 +1,104 @@
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterBicaridineMeralyne
+  name: bicaridine-meralyne pill bottle
+  suffix: Bicaridine-Meralyne, 16
+  components:
+  - type: Item
+    heldPrefix: 11
+  - type: Sprite
+    layers:
+    - state: pill_canister11
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillBicaridineMeralyne
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterKelotaneDermaline
+  name: kelotane-dermaline pill bottle
+  suffix: Kelotane-Dermaline, 16
+  components:
+  - type: Item
+    heldPrefix: 11
+  - type: Sprite
+    layers:
+    - state: pill_canister2
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillKelotaneDermaline
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterNitrogenWater # obsolete atm
+  name: nitrogen-water pill bottle
+  suffix: Nitrogen-Water, 16
+  components:
+  - type: Item
+    heldPrefix: 11
+  - type: Sprite
+    layers:
+    - state: pill_canister2
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillNitrogenWater
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterIron
+  name: iron pill bottle
+  suffix: Iron-Sugar, 16
+  components:
+  - type: Item
+    heldPrefix: 11
+  - type: Sprite
+    layers:
+    - state: pill_canister4
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillIronSugar
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterDexalinPlus
+  name: dexalin plus pill bottle
+  suffix: Dexalin+, 16
+  components:
+  - type: Item
+    heldPrefix: 11
+  - type: Sprite
+    layers:
+    - state: pill_canister1
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillDexalinPlus
+      amount: 16
