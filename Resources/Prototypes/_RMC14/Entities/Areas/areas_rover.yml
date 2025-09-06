@@ -1,0 +1,4 @@
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaRover
+  name: UNS Rover
