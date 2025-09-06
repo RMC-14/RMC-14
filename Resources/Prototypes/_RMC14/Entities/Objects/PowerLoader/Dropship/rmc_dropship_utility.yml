@@ -65,3 +65,20 @@
       state: fulton_system_deployed
   - type: RMCFulton
   - type: AnimationPlayer
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentParaDrop
+  name: HPU-1 paradrop deployment system
+  components:
+  - type: Sprite
+    layers:
+    - state: paradrop_system
+  - type: DropshipFabricatorPrintable
+    cost: 50
+  - type: DropshipUtility
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: paradrop_system_deployed
+  - type: RMCParaDrop

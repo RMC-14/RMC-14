@@ -22,6 +22,8 @@
   - type: Speech
     speechVerb: Plant
     allowedEmotes: ['Chirp']
+  - type: TypingIndicator
+    proto: diona
   - type: Vocal
     sounds:
       Male: RMCMaleDiona
@@ -29,3 +31,5 @@
       Unsexed: UnisexDiona
   - type: BodyEmotes
     soundsId: DionaBodyEmotes
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-diona

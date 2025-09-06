@@ -13,9 +13,11 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Site Director
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - WeYa
@@ -33,6 +35,7 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+    - type: MarineOrders
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
   hidden: true
@@ -71,6 +74,10 @@
     job: RMCPMCDirector
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Tackle;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
@@ -18,6 +19,7 @@ public sealed class StunShakeableSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStandingSystem _rmcStanding = default!;

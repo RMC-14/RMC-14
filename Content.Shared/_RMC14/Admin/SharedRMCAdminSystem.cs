@@ -29,7 +29,7 @@ public abstract class SharedRMCAdminSystem : EntitySystem
             Act = () =>
             {
                 OpenBui(player, args.Target);
-            }
+            },
         });
     }
 

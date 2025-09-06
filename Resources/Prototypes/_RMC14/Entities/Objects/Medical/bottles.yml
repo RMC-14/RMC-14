@@ -75,6 +75,8 @@
     - 30
     - 40
     - 60
+  - type: RMCSmartFridgeInsertable
+    category: Bottle
 
 - type: entity
   parent: CMBottleEmpty
@@ -190,3 +192,45 @@
       CMTricordrazine: 60
 
 # TODO RMC14 oxycodone, peridaxon, tramadol
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleAntiZed
+  suffix: DO NOT MAP
+  name: "'Pathogen' cure bottle"
+  description: The bottle has a biohazard symbol on the front, and has a label, designating its use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
+  components:
+  - type: Sprite
+    layers:
+    - state: bottle-1
+    - state: bottle-1-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: label-1
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCAntiZed: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleMindbreaker
+  name: mindbreaker bottle
+  description: A small bottle. Contains mindbreaker toxin - Fucks up anyone who takes it.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCMindbreakerToxin
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCMindbreakerToxin: 60

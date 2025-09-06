@@ -3,7 +3,7 @@
   table: !type:AllSelector
     children:
     - id: CMBootsBlackFilled
-    - id: JumpsuitMarine
+    - id: RMCJumpsuitSunRiders
     - id: RMCHeadsetGoldenArrow
 
 - type: entityTable
@@ -18,7 +18,7 @@
   id: RMCClosetGoldenArrowSGOFill
   table: !type:AllSelector
     children:
-    - id: RMCSmartGun
+    - id: RMCSmartGunUNMC
     - id: RMCPowerCellSmartgun
     - id: CMArmorSmartGunCombatHarness
     - id: RMCBeltSmartGunOperatorPistolFilled
@@ -27,3 +27,10 @@
     - id: RMCGlassesSmartGunSight
     - id: RMCWebbingClipOnPouch
     - id: RMCWebbingGrenade
+
+- type: entityTable
+  id: RMCClosetTSEPAFill
+  table: !type:AllSelector
+    children:
+    - id: RMCCoatTSEPAHighVis
+    - id: RMCCoatTSEPAHighVisVest

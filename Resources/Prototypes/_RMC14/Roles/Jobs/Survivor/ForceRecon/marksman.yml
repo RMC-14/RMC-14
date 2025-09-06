@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconMarksman
   name: rmc-job-name-forecon-marksman
-  playTimeTracker: RMCJobSurvivorMarksmanForecon
   startingGear: RMCGearForeconMarksman
   icon: "CMJobIconWeaponsSpecialist"
   requirements:
@@ -29,7 +28,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: spec
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -41,11 +40,8 @@
     - type: ScoutWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-marksman
+    - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorMarksmanForecon
-  isHumanoid: true
 
 - type: startingGear
   parent: RMCGearForeconBase

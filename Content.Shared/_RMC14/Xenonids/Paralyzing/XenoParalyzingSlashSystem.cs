@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Xenonids.Dodge;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Actions;
 using Content.Shared.Jittering;
 using Content.Shared.Popups;
@@ -9,7 +8,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Paralyzing;
 
@@ -37,7 +35,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -51,19 +49,17 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         Dirty(xeno, active);
 
         _popup.PopupClient(Loc.GetString("cm-xeno-paralyzing-slash-activate"), xeno, xeno);
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoParalyzingSlashActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
-                _actions.SetToggled(actionId, true);
+            _actions.SetToggled(action.AsNullable(), true);
         }
     }
 
     private void OnXenoParalyzingSlashRemoved(Entity<XenoActiveParalyzingSlashComponent> xeno, ref ComponentShutdown args)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoParalyzingSlashActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled(action.AsNullable(), false);
         }
     }
 
@@ -78,6 +74,13 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
                 HasComp<VictimBeingParalyzedComponent>(entity) ||
                 HasComp<XenoComponent>(entity))
             {
+                continue;
+            }
+
+            if (HasComp<SynthComponent>(entity))
+            {
+                var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", entity));
+                _popup.PopupEntity(immuneMsg, entity, entity, PopupType.SmallCaution);
                 continue;
             }
 

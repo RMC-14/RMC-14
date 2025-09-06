@@ -1,0 +1,103 @@
+- type: entity
+  parent: BaseItem
+  id: RMCBasePropCasing
+  abstract: true
+  name: spent casing
+  description: Empty and useless now.
+  suffix: Prop
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.05,0.10,0.05"
+        density: 20
+        mask:
+          - ItemMask
+        restitution: 0.3  # fite me
+        friction: 0.2
+  - type: Item
+    size: Tiny
+  - type: SpaceGarbage
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/spent_casing.rsi
+    drawdepth: Items
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing1
+  components:
+  - type: Sprite
+    state: cartridge_1
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing2
+  components:
+  - type: Sprite
+    state: cartridge_2
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing3
+  components:
+  - type: Sprite
+    state: cartridge_3
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing4
+  components:
+  - type: Sprite
+    state: cartridge_4
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing5
+  components:
+  - type: Sprite
+    state: cartridge_5
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing6
+  components:
+  - type: Sprite
+    state: cartridge_6
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing7
+  components:
+  - type: Sprite
+    state: cartridge_7
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing8
+  components:
+  - type: Sprite
+    state: cartridge_8
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing9
+  components:
+  - type: Sprite
+    state: cartridge_9
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing10
+  components:
+  - type: Sprite
+    state: cartridge_10
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing11
+  components:
+  - type: Sprite
+    state: cartridge_11
+

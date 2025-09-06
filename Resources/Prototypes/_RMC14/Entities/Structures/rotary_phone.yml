@@ -38,6 +38,13 @@
           Ear: { state: rotary_phone_ear }
   - type: WallMount
     arc: 360
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
   - type: RMCMesonsNonviewable
 
 - type: entity
@@ -74,3 +81,10 @@
     isCorrodible: false
   - type: BlockEntityStorage
   - type: Undisposable
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician

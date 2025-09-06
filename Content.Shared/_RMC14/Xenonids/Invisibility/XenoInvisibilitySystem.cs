@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
@@ -23,6 +24,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -125,13 +127,11 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
     private void StartCooldown(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
     {
-        foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoTurnInvisibleActionEvent>(xeno))
         {
-            if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
-            {
-                _actions.SetCooldown(actionId, cooldownTime);
-                _actions.SetToggled(actionId, toggledStatus);
-            }
+            var actionEnt = action.AsNullable();
+            _actions.SetCooldown(actionEnt, cooldownTime);
+            _actions.SetToggled(actionEnt, toggledStatus);
         }
     }
 

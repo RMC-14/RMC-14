@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
@@ -11,6 +12,7 @@ public sealed class XenoResinWalkerSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
@@ -41,10 +43,9 @@ public sealed class XenoResinWalkerSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoResinWalkerActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoResinWalkerActionEvent)
-                _actions.SetToggled(actionId, xeno.Comp.Active);
+            _actions.SetToggled((action, action), xeno.Comp.Active);
         }
     }
 

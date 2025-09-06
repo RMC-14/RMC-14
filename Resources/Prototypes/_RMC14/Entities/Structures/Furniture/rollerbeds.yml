@@ -71,6 +71,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Foldable
+    fitIntoEntityStorage: true
   - type: RMCStrapNoDrawDepthChange
 
 - type: entity
@@ -192,7 +194,7 @@
   - type: Tag
     tags:
     - CMRollerItem
-  - type: ReceiverXenoClaws 
+  - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
 
 - type: entity

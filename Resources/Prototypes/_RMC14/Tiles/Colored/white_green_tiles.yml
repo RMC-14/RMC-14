@@ -63,3 +63,43 @@
   parent: CMFloorSteelPlanetWhiteGreenBase
   id: CMFloorSteelPlanetWhiteGreenCorners3
   sprite: /Textures/_RMC14/Tiles/floors/whitegreencorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV1
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV2
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV3
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV4
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV5
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV6
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV7
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetWhiteGreenBase
+  id: CMFloorSteelPlanetWhiteGreenV8
+  sprite: /Textures/_RMC14/Tiles/floors/whitegreenv_8.png

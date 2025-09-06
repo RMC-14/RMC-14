@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/dropship/dropship_equipment.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lz_detector"
+    },
+    {
+      "name": "lz_detector_installed"
+    },
+    {
+      "name": "spotlights_off"
+    },
+    {
+      "name": "targeting_system"
+    },
+    {
+      "name": "targeting_system_installed"
+    },
+    {
+      "name": "spotlights_on"
+    },
+    {
+      "name": "spotlights"
+    }
+  ]
+}

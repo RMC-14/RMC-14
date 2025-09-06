@@ -1,0 +1,8 @@
+- type: accessLevel
+  id: CMAccessAegis
+  name: Aegis
+
+- type: accessGroup
+  id: CMAccessAegis
+  tags:
+    - CMAccessAegis

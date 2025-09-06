@@ -1,0 +1,38 @@
+# RMC Tile Migration
+
+# 2025-06-25
+- type: tileAlias
+  id: RCMPlanetIce0
+  target: RMCPlanetIce0
+
+- type: tileAlias
+  id: RCMPlanetIceComposite
+  target: RMCPlanetIceComposite
+
+- type: tileAlias
+  id: RCMPlanetIce1
+  target: RMCPlanetIce1
+
+- type: tileAlias
+  id: RCMPlanetIce2
+  target: RMCPlanetIce2
+
+- type: tileAlias
+  id: RCMPlanetSnow0
+  target: RMCPlanetSnow0
+
+- type: tileAlias
+  id: RCMPlanetSnow1
+  target: RMCPlanetSnow1
+
+- type: tileAlias
+  id: RCMPlanetSnow2
+  target: RMCPlanetSnow2
+
+- type: tileAlias
+  id: RCMPlanetSnow3
+  target: RMCPlanetSnow3
+
+- type: tileAlias
+  id: RCMPlanetSnow4
+  target: RMCPlanetSnow4

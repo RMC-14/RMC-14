@@ -14,8 +14,8 @@ using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry;
 
@@ -23,16 +23,18 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
 {
     [Dependency] protected readonly SharedContainerSystem _container = default!;
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected readonly HypospraySystem _hypospray = default!;
     [Dependency] protected readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] protected readonly SkillsSystem _skills = default!;
     [Dependency] protected readonly ItemSlotsSystem _slots = default!;
     [Dependency] protected readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected readonly UseDelaySystem _useDelay = default!;
     [Dependency] protected readonly SolutionTransferSystem _transfer = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCHyposprayComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
@@ -44,6 +46,8 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         SubscribeLocalEvent<RMCHyposprayComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RMCHyposprayComponent, InteractUsingEvent>(OnInteractUsing);
 
+        // RMC14
+        SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
     }
 
     private void OnExamine(Entity<RMCHyposprayComponent> ent, ref ExaminedEvent args)
@@ -165,7 +169,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-hypospray-swap-tacreload"), args.Used, args.User);
             }
 
-            _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, ent.Comp.TacticalReloadTime, new TacticalReloadHyposprayDoAfterEvent(), ent, args.Target, ent)
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, ent.Comp.TacticalReloadTime, new TacticalReloadHyposprayDoAfterEvent(), ent, args.Target, ent)
             {
                 BreakOnMove = true,
                 BreakOnWeightlessMove = false,
@@ -206,7 +210,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 BreakOnHandChange = true,
                 NeedHand = true
             };
-            _doafter.TryStartDoAfter(argsu);
+            _doAfter.TryStartDoAfter(argsu);
         }
     }
 
@@ -258,6 +262,14 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         UpdateAppearance(ent);
     }
 
+    private void OnHyposprayDoAfter(Entity<HyposprayComponent> ent, ref HyposprayDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+        _hypospray.TryDoInject(ent, target, args.User, false);
+    }
 
     protected void UpdateAppearance(Entity<RMCHyposprayComponent> ent)
     {
@@ -295,5 +307,30 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
             _appearance.SetData(ent, SolutionContainerVisuals.BaseOverride, reagent.ToString(), appearance);
 
         Dirty(ent, ent.Comp);
+    }
+
+    public bool DoAfter(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
+    {
+        if (!_hypospray.EligibleEntity(target, entity))
+            return false;
+
+        if (TryComp(entity, out UseDelayComponent? delayComp))
+        {
+            if (_useDelay.IsDelayed((entity, delayComp)))
+                return false;
+        }
+
+        var attemptEv = new AttemptHyposprayUseEvent(user, target, TimeSpan.Zero);
+        RaiseLocalEvent(entity, ref attemptEv);
+        var doAfter = new HyposprayDoAfterEvent();
+        var args = new DoAfterArgs(EntityManager, user, attemptEv.DoAfter, doAfter, entity, target, entity)
+        {
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+            NeedHand = true
+        };
+
+        _doAfter.TryStartDoAfter(args);
+        return true;
     }
 }

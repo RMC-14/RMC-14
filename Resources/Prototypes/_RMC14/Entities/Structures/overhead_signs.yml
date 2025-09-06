@@ -360,3 +360,11 @@
         map: [ "light" ]
   - type: PointLight
     color: "#00AAFF"
+
+- type: entity
+  parent: RMCOverheadSignNeonWeYaMart
+  id: RMCOverheadSignNeonWeYaMartOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: -0.07,0.45

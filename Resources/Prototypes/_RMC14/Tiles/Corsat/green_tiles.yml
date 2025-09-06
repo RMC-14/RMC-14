@@ -158,6 +158,11 @@
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenWhite6
   sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_6.png
+  
+- type: tile
+  parent: CMFloorCorsatGreenBase
+  id: CMFloorCorsatGreenWhite7
+  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_7.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
