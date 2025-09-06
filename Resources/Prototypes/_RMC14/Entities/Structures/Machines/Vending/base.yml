@@ -36,7 +36,7 @@
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
     - state: "base"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "rmc_flick_animation" ]
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:

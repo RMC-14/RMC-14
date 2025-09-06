@@ -69,14 +69,7 @@
       collection: XenoDeath
       params:
         volume: -4
-  - type: HealthExaminable
-    examineShowEmpty: false
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false

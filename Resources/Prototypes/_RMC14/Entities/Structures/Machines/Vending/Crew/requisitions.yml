@@ -1,18 +1,35 @@
 # REQUISITIONS
-
-# ARMAMENTS VENDOR
 - type: entity
+  abstract: true
   parent: ColMarTechBase
-  id: ColMarTechCargoGuns
-  name: ColMarTech automated armaments vendor
-  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  id: ColMarTechCargo
   components:
   - type: AccessReader
     access:
     - [ "CMAccessRequisitions" ]
+  - type: CMAutomatedVendor
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+
+# ARMAMENTS VENDOR
+- type: entity
+  parent: ColMarTechCargo
+  id: ColMarTechCargoGuns
+  name: ColMarTech automated armaments vendor
+  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+      state: vend
     sections:
     - name: Primary firearms
       entries:
@@ -322,17 +339,20 @@
 
 #AMMUNITION VENDOR
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechCargo
   id: ColMarTechCargoAmmo
   name: ColMarTech automated munition vendor
   description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
-  - type: AccessReader
-    access:
-    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+      state: vend
     sections:
     - name: Regular ammunition
       entries:
@@ -542,17 +562,20 @@
 
 #ATTACHMENTS VENDOR
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechCargo
   id: ColMarTechCargoAttachments
   name: Aegis Armaments attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
   components:
-  - type: AccessReader
-    access:
-    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+      state: vend
     sections:
     - name: Barrel
       entries:
