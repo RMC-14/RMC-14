@@ -76,6 +76,9 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+  - type: RMCGunRecoil
+    strength: 2
+    strengthUnwielded: 4
 
 - type: entity
   abstract: true

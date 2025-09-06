@@ -60,6 +60,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/rifle_mouse.rsi
       state: all
+  - type: RMCGunRecoil
+    strengthUnwielded: 4
 
 - type: entity
   abstract: true
