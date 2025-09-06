@@ -64,7 +64,7 @@ public sealed class WheelchairSystem : EntitySystem
         
         if (TryComp<ActiveWheelchairPilotComponent>(buckle, out var pilot) && pilot.BellActionEntity != null)
         {
-            _actions.RemoveAction(buckle, pilot.BellActionEntity.Value);
+            _actions.RemoveAction(buckle.Owner, pilot.BellActionEntity.Value);
         }
         
         RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
