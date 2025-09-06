@@ -40,8 +40,10 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 M1984 HP magazine
+        points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
+        points: 5
+      - id: RMCMagazinePistolM1984HP
         points: 5
       - id: CMMagazinePistolMK80
         points: 10
