@@ -39,6 +39,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly MobThresholdSystem _threshhold = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
@@ -220,37 +221,16 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             {
                 evo = evoComp.Points;
             }
+            if(!TryComp<DamageableComponent>(uid, out var damageableComp))
+                return;
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), _plasma.GetPlasmaPercentage(uid), evo, leader));
+            _threshhold.TryGetIncapPercentage(uid, damageableComp.TotalDamage, out var incap);
+
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID,(1-incap)??0 , _plasma.GetPlasmaPercentage(uid), evo, leader));
         }
 
 
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,xenocount,tier2Amount,tier3Amount,queen));
-    }
-
-    private FixedPoint2 GetHealthPercentage(EntityUid uid)
-    {
-        FixedPoint2? critical;
-        FixedPoint2 damage;
-        FixedPoint2 percentage = 0;
-
-        if (!TryComp<DamageableComponent>(uid, out var damageableComponent))
-            return -1;
-
-        if (!TryComp<MobThresholdsComponent>(uid, out var threshold))
-            return -1;
-
-        if (_threshold.TryGetIncapThreshold(uid, out critical))
-        {
-            FixedPoint2 critThreshold = critical?? 0;
-            if (critThreshold != 0)
-            {
-                damage = damageableComponent.TotalDamage;
-                percentage = (critThreshold - damage) / (critThreshold); // i want the value to be between 0 and 1
-            }
-        }
-
-        return percentage;
     }
 
 
