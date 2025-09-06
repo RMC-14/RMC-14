@@ -22,6 +22,7 @@ public sealed class RMCGunChamberSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -105,9 +106,20 @@ public sealed class RMCGunChamberSystem : EntitySystem
         if (take.Ammo.Count == 0)
             return;
 
+        foreach (var (ammoEntNullable, _) in take.Ammo)
+        {
+            if (ammoEntNullable is not { } ammoEnt)
+                continue;
+
+            _transform.SetCoordinates(ammoEnt, _transform.GetMoverCoordinates(ammoEnt));
+            if (IsClientSide(ammoEnt))
+                QueueDel(ammoEnt);
+        }
+
         ent.Comp.LastChamberedAt = time;
         Dirty(ent);
 
-        _audio.PlayPredicted(ent.Comp.Sound, ent, ent);
+        _audio.PlayPredicted(ent.Comp.Sound, ent, args.UserUid);
+        _gun.UpdateAmmoCount(ent);
     }
 }
