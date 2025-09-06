@@ -225,7 +225,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         }
 
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,xenocount,tier2Amount,tier3Amount,queen));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos,  hive.Comp.BurrowedLarva, hive.Comp.BurrowedLarvaSlotFactor, xenocount, tier2Amount, tier3Amount, queen));
     }
 
     private FixedPoint2 GetHealthPercentage(EntityUid uid)
