@@ -9,7 +9,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -48,6 +48,7 @@
       - id: CMHeadCapPeakedService
         recommended: true
     - name: Patches
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -109,7 +110,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -153,7 +154,7 @@
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchConstruction
-      #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
+      - id: RMCPouchDocument
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
@@ -185,6 +186,7 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -236,7 +238,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -286,11 +288,6 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Welding Visor
-    #   entries:
-    #   - id: RMCHelmetWeldingVisor
-    #     points: 5
-    #     recommended: true
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -317,8 +314,6 @@
         points: 15
     - name: Other Supplies
       entries:
-      - id: RMCVisorWelding
-        points: 5
       - id: CMHandsInsulated
         points: 3
       - id: CMHandsBlackInsulated
@@ -345,10 +340,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-      - id: RMCFlashlight
-        points: 1
       - id: RMCSynthResetKey
         points: 10
+      - id: RMCVisorWelding
+        points: 5
 
 # Commanding Officer #
 
@@ -396,6 +391,8 @@
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
+      - id: RMCJumpsuitCOUniform
+      - id: RMCJumpsuitCOUniformGray
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
@@ -469,7 +466,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
@@ -551,7 +550,7 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: WeaponRifleM59A
+      - id: RMCWeaponRifleM59A
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
@@ -712,7 +711,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -801,6 +800,7 @@
     - name: Patches
       jobs:
       - CMExecutiveOfficer
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -849,6 +849,7 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -878,13 +879,24 @@
       - id: CMJumpsuitWO
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+    - name: Helmet
+      jobs:
+      - CMChiefMP
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10ChiefMP
     - name: Armor
       jobs:
       - CMChiefMP
-      takeAll: CMStandard
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3WO
-      - id: CMArmorHelmetM10ChiefMP
+      - id: RMCArmorVestMP
+    - name: Hat
+      jobs:
+      - CMChiefMP
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
@@ -912,6 +924,7 @@
     - name: Patches
       jobs:
       - CMChiefMP
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -958,7 +971,16 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1033,6 +1055,7 @@
     - name: Patches
       jobs:
       - CMChiefEngineer
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -1096,6 +1119,7 @@
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1199,6 +1223,7 @@
     - name: Patches
       jobs:
       - CMQuartermaster
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -1344,6 +1369,7 @@
     - name: Patches
       jobs:
       - CMCMO
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -1402,6 +1428,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Spare Equipment
       jobs:
       - CMCMO
@@ -1492,6 +1519,7 @@
     - name: Patches
       jobs:
       - CMAuxiliarySupportOfficer
+      takeAll: RMCPatch
       entries:
       - id: RMCPatchFallingFalcons
       - id: RMCPatchFallingFalconsAlt
@@ -1532,4 +1560,5 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster

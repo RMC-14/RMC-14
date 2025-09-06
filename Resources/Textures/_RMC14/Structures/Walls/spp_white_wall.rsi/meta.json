@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/0afcb527e30cb9d24151005c28f095d704b24c83/icons/turf/walls/upp_grey.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "uppwall_interior"
+    },
+    {
+      "name": "uppwall_interior0",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior1",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior2",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior3",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior4",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior5",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior6",
+      "directions": 4
+    },
+    {
+      "name": "uppwall_interior7",
+      "directions": 4
+    }
+  ]
+}

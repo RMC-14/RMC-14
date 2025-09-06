@@ -122,8 +122,8 @@ privacy_policy_identifier = "rmc14"
 privacy_policy_version = "2025-04-12"
 
 [tips]
-dataset = "CM_Tips"
-login_dataset = "CM_Tips"
+dataset = "RMC_Tips"
+login_dataset = "RMC_Tips"
 
 [vote]
 preset_enabled = false

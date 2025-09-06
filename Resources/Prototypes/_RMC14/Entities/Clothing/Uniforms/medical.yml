@@ -18,6 +18,15 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/research.rsi
 
+- type: entity
+  parent: RMCMarineUniformBase
+  id: CMJumpsuitRD
+  name: research director's uniform
+  description: It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer is a Research Director.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/research_director.rsi
+
 # Scrubs
 - type: entity
   parent: RMCMarineUniformBase

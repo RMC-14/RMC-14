@@ -270,7 +270,7 @@
 
 # Military Police
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCBaseJacketButtonable, RMCBaseJacket]
   id: CMCoatMP
   name: military police service jacket
   description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
@@ -281,13 +281,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
   - type: CMArmor
     melee: 10
-  - type: Appearance
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: rmc-buttons-verb-fold
-    foldVerbText: rmc-buttons-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: jacket
 
 # Quartermaster
 - type: entity
@@ -510,7 +503,7 @@
 # Executive Officer
 
 - type: entity
-  parent: CMCoatCO
+  parent: [RMCBaseJacketButtonable, CMCoatCO]
   id: CMCoatXOFormal
   name: marine formal service jacket
   description: Smells like vanilla. Signifies prestige and power, if a little flashy.
@@ -521,13 +514,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
   - type: CMArmor
     melee: 10
-  - type: Appearance
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: rmc-buttons-verb-fold
-    foldVerbText: rmc-buttons-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: jacket
 
 - type: entity
   parent: RMCBaseJacket
@@ -542,7 +528,7 @@
     melee: 10
 
 - type: entity
-  parent: CMCoatOfficer
+  parent: [CMCoatOfficer, RMCBaseJacketButtonable]
   id: RMCCoatService
   name: marine service jacket
   description: A service jacket typically worn by officers of the UNMC.
@@ -554,12 +540,6 @@
   - type: CMArmor
     melee: 10
   - type: Appearance
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: rmc-buttons-verb-fold
-    foldVerbText: rmc-buttons-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: jacket
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
@@ -569,13 +549,11 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
 
 - type: entity
-  parent: RMCCoatService
+  parent: [RMCBaseJacketButtonableOpened, RMCCoatService]
   id: RMCCoatServiceFolded
-  components:
-  - type: Foldable
-    folded: true
-  - type: Clothing
-    equippedPrefix: jacket
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC.
+  suffix: Unbuttoned
 
 - type: entity
   parent: CMCoatOfficer
@@ -717,6 +695,39 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
 
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerBrown
+  name: brown windbreaker
+  description: A brown windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerGrey
+  name: grey windbreaker
+  description: A grey windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerExpedition
+  name: expedition windbreaker
+  description: A brown windbreaker with various patches tying it to one of the first explorations into this sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+
 
 # priest robes
 - type: entity
@@ -729,6 +740,28 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingNunRobes
+  name: nun robes
+  description: Maximum piety in this star system
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingHolidayRobes
+  name: holiday priest
+  description: This is a nice holiday, my son.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
 
 # Hybrisa
 
@@ -799,7 +832,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCCoatSanitation
   name: sanitation utility uniform
   description: A Sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
@@ -808,6 +841,27 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
+  id: RMCCoatParamedic
+  name: EMT - Paramedic utility fatigues
+  description: A set of EMT - Paramedic utility fatigues, this one is red.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+
+- type: entity
+  parent: RMCCoatParamedic
+  id: RMCCoatParamedicGreen
+  description: A set of EMT - Paramedic utility fatigues, this one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
 # Snow
 

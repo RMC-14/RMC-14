@@ -1,6 +1,8 @@
 ﻿<Document>
   ## Mutinies and riots require admin permission.
 
+  [bold]A mutiny is only valid when you are assigned the mutineer role. This will give the character a unique skull-helmet icon visible to everyone, and a message in the chat. Anyone without this icon may not participate as a mutineer.[/bold]
+
   [bold]General[/bold]
 
   - All players, including hostile forces, must obtain admin permission before engaging in riots, mutinies or similar activity.

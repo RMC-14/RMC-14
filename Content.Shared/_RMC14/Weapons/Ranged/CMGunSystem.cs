@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
@@ -141,6 +142,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GotUnequippedHandEvent>(OnDualWieldingUnequippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
         SubscribeLocalEvent<GunDualWieldingComponent, GetWeaponAccuracyEvent>(OnDualWieldingGetWeaponAccuracy);
+
+        SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
     }
 
     /// <summary>
@@ -228,10 +231,11 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnWeaponDamageFalloffRefreshModifiers(Entity<RMCWeaponDamageFalloffComponent> weapon, ref GunRefreshModifiersEvent args)
     {
-        var ev = new GetDamageFalloffEvent(weapon.Comp.FalloffMultiplier);
+        var ev = new GetDamageFalloffEvent(weapon.Comp.FalloffMultiplier, weapon.Comp.RangeFlat);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
         weapon.Comp.ModifiedFalloffMultiplier = FixedPoint2.Max(ev.FalloffMultiplier, 0);
+        weapon.Comp.RangeFlatModified = ev.Range;
 
         Dirty(weapon);
     }
@@ -243,7 +247,7 @@ public sealed class CMGunSystem : EntitySystem
             if (!TryComp(projectile, out RMCProjectileDamageFalloffComponent? falloffComponent))
                 continue;
 
-            _rmcProjectileSystem.SetProjectileFalloffWeaponMult((projectile, falloffComponent), weapon.Comp.ModifiedFalloffMultiplier);
+            _rmcProjectileSystem.SetProjectileFalloffWeaponMult((projectile, falloffComponent), weapon.Comp.ModifiedFalloffMultiplier, weapon.Comp.RangeFlatModified);
         }
     }
 
@@ -276,10 +280,11 @@ public sealed class CMGunSystem : EntitySystem
         if (TryComp(weapon.Owner, out WieldableComponent? wieldableComponent) && wieldableComponent.Wielded)
             baseMult = weapon.Comp.AccuracyMultiplier;
 
-        var ev = new GetWeaponAccuracyEvent(baseMult);
+        var ev = new GetWeaponAccuracyEvent(baseMult, weapon.Comp.RangeFlat);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
         weapon.Comp.ModifiedAccuracyMultiplier = Math.Max(0.1, (double) ev.AccuracyMultiplier);
+        weapon.Comp.RangeFlatModified = ev.Range;
 
         Dirty(weapon);
     }
@@ -306,6 +311,14 @@ public sealed class CMGunSystem : EntitySystem
 
             accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
             accuracyComponent.Accuracy += orderAccuracy;
+
+            var count = 0;
+            while (accuracyComponent.Thresholds.Count > count)
+            {
+                var threshold = accuracyComponent.Thresholds[count];
+                accuracyComponent.Thresholds[count] = threshold with { Range = threshold.Range + weapon.Comp.RangeFlatModified };
+                count++;
+            }
 
             if (orderAccuracyPerTile != 0)
                 accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -orderAccuracyPerTile, false));
@@ -693,6 +706,11 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.AccuracyMultiplier += gun.Comp.AccuracyAddMult;
+    }
+
+    private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)

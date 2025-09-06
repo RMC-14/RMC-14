@@ -67,6 +67,7 @@
   components:
   - type: Transform
     anchored: true
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMClosetBase
@@ -219,3 +220,13 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetGoldenArrowFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetPMCGear
+  suffix: PvE, PMC
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCGearFill

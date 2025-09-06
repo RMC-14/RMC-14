@@ -15,6 +15,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     /// </summary>
     public float ActualPotency => Potency * 0.5f;
 
+    // Halved again since chemicals tick every second in SS14, not every 2
     public float PotencyPerSecond => ActualPotency * 0.5f;
 
     public override void Effect(EntityEffectBaseArgs args)
@@ -24,15 +25,17 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
-        var quantity = reagentArgs.Quantity;
-        /// Halved again since chemicals tick every second in SS14, not every 2
         var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
 
-        if (reagent.Overdose != null && quantity >= reagent.Overdose)
+        var totalQuantity = FixedPoint2.Zero;
+        if (reagentArgs.Source != null)
+            totalQuantity = reagentArgs.Source.GetTotalPrototypeQuantity(reagent.ID);
+
+        if (reagent.Overdose != null && totalQuantity >= reagent.Overdose)
             TickOverdose(damageable, scaledPotency, reagentArgs);
 
-        if (reagent.CriticalOverdose != null && quantity >= reagent.CriticalOverdose)
+        if (reagent.CriticalOverdose != null && totalQuantity >= reagent.CriticalOverdose)
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
     }
 

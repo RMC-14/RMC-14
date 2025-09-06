@@ -4,9 +4,11 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -30,12 +32,14 @@ using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -68,14 +72,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly NameModifierSystem _name = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -83,6 +90,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
+    private const string SpotlightState = "spotlights_";
 
     public bool CasDebug { get; private set; }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
@@ -102,8 +110,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
 
-        SubscribeLocalEvent<ActiveFlareSignalComponent, ExaminedEvent>(OnActiveFlareExamined);
-
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIClosedEvent>(OnTerminalBUIClosed);
@@ -111,6 +117,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipTargetComponent, MapInitEvent>(OnDropshipTargetMapInit);
         SubscribeLocalEvent<DropshipTargetComponent, ComponentRemove>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
+        SubscribeLocalEvent<DropshipTargetComponent, ExaminedEvent>(OnActiveFlareExamined);
+
+        SubscribeLocalEvent<ActiveFlareSignalComponent, RefreshNameModifiersEvent>(OnRefreshNameModifier);
 
         SubscribeLocalEvent<DropshipTargetEyeComponent, ComponentRemove>(OnDropshipTargetEyeRemove);
         SubscribeLocalEvent<DropshipTargetEyeComponent, EntityTerminatingEvent>(OnDropshipTargetEyeRemove);
@@ -126,6 +135,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseMedevacMsg>(OnWeaponsChooseMedevacMsg);
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
                 subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
+                subs.Event<DropshipTerminalWeaponsChooseSpotlightMsg>(OnWeaponsChooseSpotlightMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -142,6 +152,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonNextMsg>(OnWeaponsFultonNext);
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
+                subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -250,9 +261,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         MakeDropshipTarget(ent, abbreviation);
+        _physics.SetBodyType(ent, BodyType.Static);
     }
 
-    private void OnActiveFlareExamined(Entity<ActiveFlareSignalComponent> ent, ref ExaminedEvent args)
+    private void OnActiveFlareExamined(Entity<DropshipTargetComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.Abbreviation is { } id)
             args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine-id", ("id", id)));
@@ -490,6 +502,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SetScreenUtility<RMCParaDropComponent>(ent, args.First, Paradrop);
     }
 
+    private void OnWeaponsChooseSpotlightMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseSpotlightMsg args)
+    {
+        SetScreenUtility<DropshipSpotlightComponent>(ent, args.First, Spotlight, args.Slot);
+    }
+
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
     {
         if (_net.IsClient)
@@ -580,15 +597,37 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
             return;
 
+        var ev = new DropshipWeaponShotEvent(
+            ammo.Comp.TargetSpread,
+            ammo.Comp.BulletSpread,
+            ammo.Comp.TravelTime,
+            ammo.Comp.RoundsPerShot,
+            ammo.Comp.ShotsPerVolley,
+            ammo.Comp.Damage,
+            ammo.Comp.ArmorPiercing,
+            ammo.Comp.SoundTravelTime,
+            ammo.Comp.SoundCockpit,
+            ammo.Comp.SoundMarker,
+            ammo.Comp.SoundGround,
+            ammo.Comp.SoundImpact,
+            ammo.Comp.ImpactEffects,
+            ammo.Comp.Explosion,
+            ammo.Comp.Implosion,
+            ammo.Comp.Fire,
+            ammo.Comp.SoundEveryShots
+        );
+        RaiseLocalEvent(dropship, ref ev);
+
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
+        _powerloader.SyncAppearance(Transform(weapon.Value).ParentUid);
         Dirty(ammo);
 
-        _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
+        _audio.PlayPvs(ev.SoundCockpit, weapon.Value);
         weaponComp.NextFireAt = time + weaponComp.FireDelay;
         Dirty(weapon.Value, weaponComp);
 
-        var spread = ammo.Comp.TargetSpread;
+        var spread = ev.Spread;
         var targetCoords = coordinates;
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
@@ -597,20 +636,21 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var inFlightComp = new AmmoInFlightComponent
         {
             Target = targetCoords,
-            MarkerAt = time + ammo.Comp.TravelTime,
-            ShotsLeft = ammo.Comp.RoundsPerShot,
-            ShotsPerVolley = ammo.Comp.ShotsPerVolley,
-            Damage = ammo.Comp.Damage,
-            ArmorPiercing = ammo.Comp.ArmorPiercing,
-            BulletSpread = ammo.Comp.BulletSpread,
-            SoundTravelTime = ammo.Comp.SoundTravelTime,
-            SoundMarker = ammo.Comp.SoundMarker,
-            SoundGround = ammo.Comp.SoundGround,
-            SoundImpact = ammo.Comp.SoundImpact,
-            ImpactEffect = ammo.Comp.ImpactEffect,
-            Explosion = ammo.Comp.Explosion,
-            Fire = ammo.Comp.Fire,
-            SoundEveryShots = ammo.Comp.SoundEveryShots,
+            MarkerAt = time + ev.TravelTime,
+            ShotsLeft = ev.RoundsPerShot,
+            ShotsPerVolley = ev.ShotsPerVolley,
+            Damage = ev.Damage,
+            ArmorPiercing = ev.ArmorPiercing,
+            BulletSpread = ev.BulletSpread,
+            SoundTravelTime = ev.SoundTravelTime,
+            SoundMarker = ev.SoundMarker,
+            SoundGround = ev.SoundGround,
+            SoundImpact = ev.SoundImpact,
+            ImpactEffects = ev.ImpactEffect,
+            Explosion = ev.Explosion,
+            Implosion = ammo.Comp.Implosion,
+            Fire = ev.Fire,
+            SoundEveryShots = ev.SoundEveryShots,
         };
 
         AddComp(inFlight, inFlightComp, true);
@@ -887,6 +927,34 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RefreshWeaponsUI(ent);
     }
 
+    private void OnWeaponsSpotlightSelect(Entity<DropshipTerminalWeaponsComponent> ent,
+        ref DropShipTerminalWeaponsSpotlightToggleMsg args)
+    {
+        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (!TryComp(selectedSystem, out DropshipSpotlightComponent? spotlight))
+            return;
+
+        var systemPoint = Transform(selectedSystem.Value).ParentUid;
+        _pointLight.SetEnabled(systemPoint, args.On);
+        _appearance.SetData(systemPoint, DropshipUtilityVisuals.State, args.On ? SpotlightState + "on" : SpotlightState + "off" );
+        spotlight.Enabled = args.On;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnRefreshNameModifier(Entity<ActiveFlareSignalComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        if (ent.Comp.Abbreviation == null)
+            return;
+
+        args.AddModifier(ent.Comp.Abbreviation);
+    }
+
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
     {
         RemovePvsActors(ent);
@@ -1032,6 +1100,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         AddComp(ent, target, true);
         Dirty(ent, target);
 
+        _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
         return true;
@@ -1125,8 +1194,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
-                if (flight.ImpactEffect != null)
-                    Spawn(flight.ImpactEffect, target, rotation: _random.NextAngle());
+                foreach (var effect in flight.ImpactEffects)
+                {
+                    Spawn(effect, target, rotation: _random.NextAngle());
+                }
 
                 if (flight.Damage != null)
                 {
@@ -1144,15 +1215,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                 }
 
-                if (flight.Explosion != null)
+                if (flight.Implosion != null)
                 {
-                    _rmcExplosion.QueueExplosion(target,
-                        flight.Explosion.Type,
-                        flight.Explosion.Total,
-                        flight.Explosion.Slope,
-                        flight.Explosion.Max,
-                        uid
-                    );
+                    _rmcImplosion.Implode(flight.Implosion, target);
                 }
 
                 if (flight.Fire != null)
@@ -1188,6 +1253,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                     else
                     {
+                        _rmcFlammable.SpawnFireLines(flight.Fire.Type,
+                            flight.Target,
+                            flight.Fire.CardinalRange,
+                            flight.Fire.OrdinalRange,
+                            flight.Fire.Intensity,
+                            flight.Fire.Duration);
+
                         for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
                         {
                             for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
@@ -1203,6 +1275,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 );
                             }
                         }
+                    }
+
+                    if (flight.Explosion != null)
+                    {
+                        _rmcExplosion.QueueExplosion(target,
+                            flight.Explosion.Type,
+                            flight.Explosion.Total,
+                            flight.Explosion.Slope,
+                            flight.Explosion.Max,
+                            uid,
+                            canCreateVacuum: false
+                        );
                     }
                 }
 
@@ -1309,7 +1393,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         AddComp(target, targetComp, true);
     }
 
-    private void SetScreenUtility<T>(Entity<DropshipTerminalWeaponsComponent> ent, bool first, DropshipTerminalWeaponsScreen state) where T : IComponent
+    private void SetScreenUtility<T>(Entity<DropshipTerminalWeaponsComponent> ent, bool first, DropshipTerminalWeaponsScreen state, NetEntity? selected = null) where T : IComponent
     {
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
@@ -1318,8 +1402,23 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         var hasUtility = false;
+        var hasElectronicSystem = false;
         foreach (var point in dropship.Comp.AttachmentPoints)
         {
+            if (TryComp(point, out DropshipElectronicSystemPointComponent? electronicSystemComp) &&
+                _container.TryGetContainer(point, electronicSystemComp.ContainerId, out var electronicSystemContainer) &&
+                electronicSystemContainer.ContainedEntities.Count > 0)
+            {
+                foreach (var contained in electronicSystemContainer.ContainedEntities)
+                {
+                    if (!HasComp<T>(contained))
+                        continue;
+
+                    hasElectronicSystem = true;
+                    break;
+                }
+            }
+
             if (!TryComp(point, out DropshipUtilityPointComponent? utilityComp) ||
                 !_container.TryGetContainer(point, utilityComp.UtilitySlotId, out var container) ||
                 container.ContainedEntities.Count == 0)
@@ -1337,13 +1436,36 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
-        if (!hasUtility)
+        if (!hasUtility && !hasElectronicSystem)
             return;
 
         ref var screen = ref first ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         screen.State = state;
+        ent.Comp.SelectedSystem = selected;
 
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
 }
+
+/// <summary>
+///     Raised on a dropship when it shoots any of it's weapons.
+/// </summary>
+[ByRefEvent]
+public record struct DropshipWeaponShotEvent(float Spread,
+    int BulletSpread,
+    TimeSpan TravelTime,
+    int RoundsPerShot,
+    int ShotsPerVolley,
+    DamageSpecifier? Damage,
+    int ArmorPiercing,
+    TimeSpan SoundTravelTime,
+    SoundSpecifier? SoundCockpit,
+    SoundSpecifier? SoundMarker,
+    SoundSpecifier? SoundGround,
+    SoundSpecifier? SoundImpact,
+    List<EntProtoId> ImpactEffect,
+    RMCExplosion? Explosion,
+    RMCImplosion? Implosion,
+    RMCFire? Fire,
+    int SoundEveryShots);

@@ -4,6 +4,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server.GameTicking.Events;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
@@ -21,6 +22,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Medical.Cryogenics;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -31,7 +33,7 @@ namespace Content.Server._RMC14.Roles;
 public sealed partial class MarineCommandOverrideSystem : EntitySystem
 {
     [Dependency] private readonly ARESSystem _ares = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -41,15 +43,16 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
     [Dependency] private readonly SquadSystem _squadSystem = default!;
 
-
     private static readonly ProtoId<JobPrototype> ExecutiveOfficerJob = "CMExecutiveOfficer";
     private static readonly ProtoId<RankPrototype> PrivateRank = "RMCRankPrivate";
     private static readonly ProtoId<DatasetPrototype> MarineRankHierarchy = "RMCMarineRankHierarchy";
     private static readonly ProtoId<DatasetPrototype> MarineSquadHierarchy = "RMCMarineSquadHierarchy";
     private static readonly ProtoId<AccessGroupPrototype> MarineMainAccess = "MarineMain";
-    private EntityUid _commander = default;
+
+    private bool _enabled;
+    private EntityUid _commander;
     private int _seniorAuthorityLevel;
-    private bool _accessesAdded = false;
+    private bool _accessesAdded;
     private TimeSpan? _adaptationTimerEndTime;
     private TimeSpan? _initialTimerEndTime;
 
@@ -60,6 +63,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
 
         _seniorAuthorityLevel = _prototypes.Index(ExecutiveOfficerJob).MarineAuthorityLevel;
+
+        Subs.CVar(_config, RMCCVars.RMCAutomaticCommanderPromotion, v => _enabled = v, true);
     }
 
     private void OnRoundStarted(RoundStartingEvent ev)
@@ -74,7 +79,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        base.Update(frameTime);
+        if (!_enabled)
+            return;
 
         if (_initialTimerEndTime != null && _gameTiming.CurTime >= _initialTimerEndTime.Value)
         {
@@ -99,7 +105,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     private void CheckForSeniorCommandPresence()
     {
         var ares = _ares.EnsureARES();
-        bool foundAny = false;
+        var foundAny = false;
 
         var query = EntityQueryEnumerator<MarineComponent, OriginalRoleComponent, MobStateComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out var _, out var originalRole, out var _, out var _))
@@ -110,7 +116,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
                 continue;
 
-            if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
+            if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out var jobProto))
                 continue;
 
             if (jobProto.MarineAuthorityLevel == 0)
@@ -127,7 +133,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         if (!foundAny) // there is no one 0_0
             return;
 
-        _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-senior-command-found"));
+        _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-senior-command-found"));
 
         _adaptationTimerEndTime = _gameTiming.CurTime + TimeSpan.FromMinutes(1);
     }
@@ -162,7 +168,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
                 continue;
 
-            if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
+            if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out var jobProto))
                 continue;
 
             if (jobProto.MarineAuthorityLevel == 0)
@@ -170,7 +176,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
             if (jobProto.MarineAuthorityLevel >= _seniorAuthorityLevel) // Senior command found
             {
-                _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
+                _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
                 return;
             }
 
@@ -192,7 +198,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
         if (candidates.Count == 0) // No candidates found
         {
-            _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+            _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
             return;
         }
 
@@ -206,7 +212,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
             if (highestRankCandidates == null) // All entities have invalid rank (in this case it is impossible) or an empty dataset was passed
             {
-                _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+                _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
                 return;
             }
 
@@ -237,18 +243,18 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { MarineMainAccess });
 
         TryComp<OriginalRoleComponent>(_commander, out var roleComp);
-        string jobName = string.Empty;
-        if (roleComp != null && roleComp.Job != null && _prototypes.TryIndex(roleComp.Job.Value, out JobPrototype? protoJob))
+        var jobName = string.Empty;
+        if (roleComp != null && roleComp.Job != null && _prototypes.TryIndex(roleComp.Job.Value, out var protoJob))
             jobName = protoJob.LocalizedName;
 
-        string announceText = Loc.GetString("rmc-marine-command-override-commander-chosen",
+        var announceText = Loc.GetString("rmc-marine-command-override-commander-chosen",
             ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName)),
             ("character", _rankSystem.GetSpeakerFullRankName(_commander) ?? Name(_commander)));
 
         if (_accessesAdded)
             announceText = $"{announceText}\n{Loc.GetString("rmc-marine-command-override-access-added")}";
 
-        _marineAnnounce.AnnounceARES(ares, announceText, null, null);
+        _marineAnnounce.AnnounceARESStaging(ares, announceText, null, null);
 
     }
 
@@ -260,7 +266,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         if (!TryComp<OriginalRoleComponent>(entity, out var originalRole) || originalRole.Job == null)
             return;
 
-        if (!_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? entityJob))
+        if (!_prototypes.TryIndex(originalRole.Job.Value, out var entityJob))
             return;
 
         if (candidates.Count == 0)
@@ -279,7 +285,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (!TryComp<OriginalRoleComponent>(existing, out var existingRole) || existingRole.Job == null)
                 continue;
 
-            if (!_prototypes.TryIndex(existingRole.Job.Value, out JobPrototype? existingJob))
+            if (!_prototypes.TryIndex(existingRole.Job.Value, out var existingJob))
                 continue;
 
             var level = existingJob.MarineAuthorityLevel;
@@ -305,11 +311,11 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     private bool HasValidIdTag(EntityUid entity, out EntityUid? idTag)
     {
         idTag = null;
-        var entityName = _entMan.GetComponent<MetaDataComponent>(entity).EntityName;
+        var entityName = MetaData(entity).EntityName;
 
         foreach (var item in _inventory.GetHandOrInventoryEntities(entity))
         {
-            if (!_entMan.TryGetComponent<IdCardComponent>(item, out var tag))
+            if (!TryComp<IdCardComponent>(item, out var tag))
                 continue;
 
             if (tag.FullName != entityName) // not the card owner
@@ -327,7 +333,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// </summary>
     private bool TryAddRequiredAccess(EntityUid idCard, HashSet<ProtoId<AccessGroupPrototype>> requiredGroups)
     {
-        if (!_entMan.TryGetComponent<AccessComponent>(idCard, out var accessComp))
+        if (!TryComp<AccessComponent>(idCard, out var accessComp))
             return false;
 
         var initialAccesses = new HashSet<ProtoId<AccessLevelPrototype>>(accessComp.Tags);
@@ -375,13 +381,13 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
         foreach (var entity in entities)
         {
-            if (!_entMan.TryGetComponent(entity, out OriginalRoleComponent? roleComp) || roleComp == null)
+            if (!TryComp(entity, out OriginalRoleComponent? roleComp) || roleComp == null)
                 continue;
 
-            if (roleComp.Job == null || !_prototypes.TryIndex<JobPrototype>(roleComp.Job.Value, out var job))
+            if (roleComp.Job == null || !_prototypes.TryIndex(roleComp.Job.Value, out var job))
                 continue;
 
-            if (!_entMan.TryGetComponent(entity, out MindComponent? mindComp) || mindComp == null)
+            if (!TryComp(entity, out MindComponent? mindComp) || mindComp == null)
                 continue;
 
             if (!TryComp<ActorComponent>(entity, out var actor) || actor.PlayerSession == null)

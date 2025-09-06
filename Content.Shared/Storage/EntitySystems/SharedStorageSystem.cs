@@ -1370,15 +1370,17 @@ public abstract class SharedStorageSystem : EntitySystem
         {
             for (var x = storageBounding.Left; x <= storageBounding.Right; x++)
             {
-                for (var angle = startAngle; angle <= Angle.FromDegrees(360 - startAngle); angle += Math.PI / 2f)
+                // RMC14
+                // for (var angle = startAngle; angle <= Angle.FromDegrees(360 - startAngle); angle += Math.PI / 2f)
+                // {
+                var location = new ItemStorageLocation(Angle.Zero, (x, y));
+                if (ItemFitsInGridLocation(itemEnt, storageEnt, location))
                 {
-                    var location = new ItemStorageLocation(angle, (x, y));
-                    if (ItemFitsInGridLocation(itemEnt, storageEnt, location))
-                    {
-                        storageLocation = location;
-                        return true;
-                    }
+                    storageLocation = location;
+                    return true;
                 }
+                // }
+                // RMC14
             }
         }
 
@@ -1561,7 +1563,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (!gridBounds.Contains(position))
             return false;
 
-        var itemShape = ItemSystem.GetAdjustedItemShape(itemEnt, rotation, position);
+        var itemShape = ItemSystem.GetAdjustedItemShape(storageEnt, itemEnt, rotation, position);
 
         foreach (var box in itemShape)
         {

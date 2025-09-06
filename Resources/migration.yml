@@ -409,14 +409,14 @@ CMMagazineRifleM41A: CMMagazineRifleM54C
 CMMagazineRifleM41AAP: CMMagazineRifleM54CAP
 CMMagazineRifleM41AExt: CMMagazineRifleM54CExt
 CMAttachmentM41ASolidStock: RMCAttachmentM54CStockSolid
-WeaponRifleM41A: WeaponRifleM54C
+# WeaponRifleM41A: WeaponRifleM54C
 CMCrateBoxMagazineRifleM41A: RMCCrateBoxMagazineRifleM54C
 CMCrateBoxMagazineRifleM41AAP: RMCCrateBoxMagazineRifleM54CAP
 CMCrateBoxMagazineRifleM41AExt: RMCCrateBoxMagazineRifleM54CExt
 #CMCrateM41A: RMCCrateM54C
 CMCrateM41AE2: RMCCrateM54CE2
 CMMagazineRifleM41AE2: CMMagazineRifleM54CE2
-WeaponRifleM41AE2: WeaponRifleM54CE2
+# WeaponRifleM41AE2: WeaponRifleM54CE2
 
 # 2024-06-23
 FloorTileItemReinforced: PartRodMetal1
@@ -1060,8 +1060,8 @@ WeldingFuelTankFull: RMCTankReagentFuel
 WaterTankFull: RMCTankReagentWater
 
 # 2024-12-24
-WeaponRifleM54CCamo: WeaponRifleM54C
-WeaponRifleM54CE2Camo: WeaponRifleM54CE2
+#WeaponRifleM54CCamo: WeaponRifleM54C
+#WeaponRifleM54CE2Camo: WeaponRifleM54CE2
 WeaponRifleM4SPRCamo: WeaponRifleM4SPR
 WeaponSMGM63Camo: WeaponSMGM63
 WeaponShotgunM42A2Camo: WeaponShotgunM42A2
@@ -1348,3 +1348,71 @@ RMCIDCardMarshal: RMCIDCardCMBMarshal
 
 # 2025-07-20
 RMCJumpsuitMarshal: RMCMarshalCMBUniform
+
+# 2025-07-23
+RMCM79Case: RMCM85A1Case
+CMWeaponLauncherM79: RMCWeaponLauncherM85A1
+RMCCrateM79: RMCCrateM85A1
+
+# 2025-07-30
+BoxBeaker: RMCBoxBeaker
+BoxPillCanister: RMCBoxPillCanister
+BoxSyringe: RMCBoxSyringe
+
+# 2025-08-01
+WeaponRifleSSG45: RMCWeaponRifleSSG45
+
+# 2025-08-06
+RMCSmartGun: RMCSmartGunUNMC
+
+# 2025-08-07
+RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
+
+# 2025-08-12
+GasPipeHalf: RMCGasPipeHalf
+GasPipeStraight: RMCGasPipeStraight
+GasPipeBend: RMCGasPipeBend
+GasPipeTJunction: RMCGasPipeTJunction
+GasPipeFourway: RMCGasPipeFourway
+
+# 2025-08-17
+WeaponRifleM54C: RMCWeaponRifleM54C
+WeaponRifleM54CE2: RMCWeaponRifleM54CE2
+WeaponRifleM54CMK1: RMCWeaponRifleM54CMK1
+WeaponRifleM54CMK1Unloaded: RMCWeaponRifleM54CMK1Unloaded
+WeaponRifleM54CMK1AP: RMCWeaponRifleM54CMK1AP
+WeaponRifleM54CStripped: RMCWeaponRifleM54CStripped
+WeaponRifleM59A: RMCWeaponRifleM59A
+
+# 2025-08-27
+RMCTray_empty: RMCTrayEmpty
+CMPosterArious: CMPosterPathos
+CMPosterPulseRifle: CMPosterAssaultRifle
+
+# 2025-08-30
+WallInvisible: RMCWallInvisibleBulletPassible
+PottedPlant1: CMPottedPlant1
+PottedPlant2: CMPottedPlant2
+PottedPlant3: CMPottedPlant3
+PottedPlant4: CMPottedPlant4
+PottedPlant5: CMPottedPlant5
+PottedPlant6: CMPottedPlant6
+PottedPlant7: CMPottedPlant7
+PottedPlant8: CMPottedPlant8
+PottedPlant10: CMPottedPlant10
+PottedPlant11: CMPottedPlant11
+PottedPlant12: CMPottedPlant12
+PottedPlant13: CMPottedPlant13
+PottedPlant14: CMPottedPlant14
+PottedPlant15: CMPottedPlant15
+PottedPlant16: CMPottedPlant16
+PottedPlant17: CMPottedPlant17
+PottedPlant18: CMPottedPlant18
+PottedPlant19: CMPottedPlant19
+PottedPlant20: CMPottedPlant20
+PottedPlant21: CMPottedPlant21
+PottedPlant22: CMPottedPlant22
+PottedPlant23: CMPottedPlant23
+PottedPlant24: CMPottedPlant24
+Grille: RMCGrille
+GrilleBroken: RMCGrilleBroken

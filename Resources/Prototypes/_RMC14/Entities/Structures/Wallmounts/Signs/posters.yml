@@ -115,8 +115,8 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterArious
-  name: "Arious Motion Tracker"
+  id: CMPosterPathos
+  name: "Pathos Motion Tracker"
   description: "It's an ad for a civilian brand motion tracker, less reliable than the M314, but about half of the weight."
   components:
   - type: Sprite
@@ -178,9 +178,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterPulseRifle
+  id: CMPosterAssaultRifle
   name: "assault rifle pinup"
-  description: "The Aegis Battlefield Armaments Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
+  description: "The AEGIS Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
   components:
   - type: Sprite
     state: assault_rifle

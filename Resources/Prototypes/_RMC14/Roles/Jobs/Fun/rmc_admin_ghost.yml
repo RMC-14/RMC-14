@@ -1,8 +1,9 @@
-﻿- type: entity
+- type: entity
   parent: AdminObserver
   id: RMCAdminObserver
   categories: [ HideSpawnMenu ]
   components:
+  - type: PropCaller
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
   - type: IntrinsicUI
@@ -25,3 +26,4 @@
     - ToolDebug
     - RMCTabletCO
     - RMCWelderAdmin
+    - CMMultitool

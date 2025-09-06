@@ -129,12 +129,14 @@
       amount: 3
 
 - type: entity
-  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
+  parent: CMArmorM3Medium
   id: RMCArmorSPPArmy
   name: 6B80 personal body armor
   description: An older SPP personal armor system that's since been replaced by the SPP Army Standard 6B90 body armor. It is still used by certain SPP Army units that the SPP doesn't expect to see much combat.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
   - type: RMCArmorSpeedTier
     speedTier: light
@@ -147,6 +149,9 @@
     #energy: 15 # CLOTHING_ARMOR_MEDIUMLOW
     #rad: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    #internal: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # SPP coats
 - type: entity

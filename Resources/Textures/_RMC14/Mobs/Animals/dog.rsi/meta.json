@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-4.0",
+  "copyright": "Made by Aleksh",
+  "size": {
+    "x": 48,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "dog",
+      "directions": 4
+    }
+  ]
+}

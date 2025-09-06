@@ -301,7 +301,8 @@ public sealed class FiremanCarrySystem : EntitySystem
                 target.Comp.BeingCarried = false;
                 Dirty(target);
 
-                _toReparent.Add((target, user));
+                if (user.Comp?.Carrying == target)
+                    _toReparent.Add((target, user));
             }
 
             _standing.Stand(target);

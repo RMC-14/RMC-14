@@ -2006,12 +2006,14 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await using var db = await GetDb();
             var marines = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .ToListAsync();
 
             var xenos = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .ToListAsync();
@@ -2093,11 +2095,19 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendations(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
         {
             await using var db = await GetDb();
             return  await db.DbContext.RMCCommendations
                 .Where(c => c.ReceiverId == player)
+                .ToListAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        {
+            await using var db = await GetDb();
+            return  await db.DbContext.RMCCommendations
+                .Where(c => c.GiverId == player)
                 .ToListAsync();
         }
 

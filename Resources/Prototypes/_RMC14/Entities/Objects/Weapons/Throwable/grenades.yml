@@ -109,9 +109,8 @@
     delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SpawnOnTerminate
-    spawn: RMCSmoke
-    projectileAdjust: false
+  - type: SpawnOnTrigger
+    proto: RMCSmoke
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
@@ -128,7 +127,7 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmoke
+  id: RMCSmokeExplosionProof
   components:
   - type: Transform
     anchored: true
@@ -148,6 +147,19 @@
   - type: EvenSmoke
     spawn: RMCSmoke
     range: 3
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmokeExplosionProofSmall
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmoke
+  components:
   - type: DeleteOnExplosion
 
 - type: entity

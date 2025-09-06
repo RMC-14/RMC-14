@@ -1,9 +1,12 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite
-  name: Parasite
+  - RMCXenoVentCrawler
+  id: CMXenoParasiteBase
+  name: Child
+  suffix: Parasite
   components:
   - type: GuideHelp
     guides:
@@ -38,8 +41,9 @@
     emoteSounds: Larva
     muteOnSpawn: true
   - type: XenoPlasma
-    maxPlasma: 10
-    plasmaRegenOnWeeds: 0.1
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
   - type: XenoHide
   - type: Fixtures
     fixtures:
@@ -57,6 +61,11 @@
   - type: XenoAnimateMovement
   - type: XenoLeap
     knockdownTime: 1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.75
+    damage:
+      types:
+        Heat: 5
   - type: XenoParasite
   - type: InfectOnPullAttempt
   - type: Item
@@ -90,8 +99,6 @@
     allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
-  - type: ParasiteAI
-  - type: SleepNPC
   - type: CanEscapeInventory
     baseResistTime: 1
   - type: HTN
@@ -102,7 +109,7 @@
         3.0
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: parasite
   - type: AddAccentClothing
     accent: ReplacementAccent
@@ -117,10 +124,18 @@
   - type: XenoRankNames #TODO change ranks based on total hugs done
     rankNames:
       0: rmc-xeno-young
-      1: rmc-xeno-young
       2: rmc-xeno-mature-parasite
       3: rmc-xeno-elder-parasite
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
+  - type: VentCrawler
+    ventCrawlIcon: parasite
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: CMXenoParasite
+  components:
+  - type: SleepNPC
+  - type: ParasiteAI

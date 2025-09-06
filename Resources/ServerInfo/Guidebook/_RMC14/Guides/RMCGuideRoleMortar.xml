@@ -1,0 +1,109 @@
+<Document>
+    # Mortar Operations: Quick Guide
+
+    The mortar is a powerful [italic]indirect fire support weapon[/italic], capable of launching explosive shells over obstacles and at long distances. Mastering it requires practice and good communication.
+    <GuideEntityEmbed Entity="RMCMortarKit"/>
+
+    ## Prerequisites for Operation
+    Ensure you meet these requirements before operating a mortar:
+
+    -[bold]Skill[/bold]: Minimum [color=#FFFF00]1 Engineering Skill[/color]. A pamphlet inside the mortar kit will give you it if your role doesn't have it.
+    -[bold]A Wrench[/bold]: To move the mortar around. Comes standard with the kit. The mortar is deployed by having it in your hand using the interact button [color=#FFA500][keybind="ActivateItemInHand"][/color]
+    -[bold]Targeting Aid and JTAC Key[/bold]:
+    <Box>
+        <GuideEntityEmbed Entity="RMCRangefinder"/>
+        <GuideEntityEmbed Entity="RMCLaserDesignator"/>
+    </Box>  <Box>
+    <GuideEntityEmbed Entity="CMEncryptionKeyJTAC" Caption="JTAC Key, essential for receiving coordinates from other marines"/>
+</Box>
+
+    ## The Shell Types
+
+    <Box HorizontalAlignment="Left">  <GuideEntityEmbed Entity="RMCMortarShellHE"/> </Box>
+
+    - Detonates with a powerful [color=#FFA500]explosion[/color] upon impact at the target coordinates.
+    - Knockbacks and stuns anything in its blast radious.
+    - The damage applied by the explosion, is marginal at best.
+    - HE shells best use is to stun hostiles and clear out enemy positions
+    - Primary use: [italic]Direct damage to hostiles and structures.[/italic]
+
+    <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellIncendiary"/> </Box>
+
+    - On impact creates a [color=#00FF00]large area of intense green fire[/color].
+    - This shell does not inflict any structure damage
+    - Effects on Xenonids:
+    - Reduces their armor.
+    - Inflicts continuous damage.
+    - Significantly slows their movement.
+    - Primary use: [italic]Area denial, blocking retreats, weakening tough targets.[/italic]
+
+
+    <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellFlare"/> </Box>
+
+    - [color=#ADD8E6]Non-damaging[/color]. Deploys a camera upon impact.
+    - Provides a [bold]19x19 tile view[/bold] of the target area.
+    - The immediate [bold]2x2 area of impact is illuminated[/bold].
+    - Camera feed lasts for approximately [italic]3 minutes[/italic].
+    - Primary use: [italic]Reconnaissance, target spotting, observing enemy movements safely.[/italic]
+
+    ## Operational Factors & Positioning
+    Understanding these is [bold]critical[/bold] to operating the mortar:
+    - [bold]Engagement Range[/bold]: The mortar can only engage targets between [color=#FFFF00]15 tiles (minimum)[/color] and [color=#FFFF00]65 tiles (maximum)[/color] from its deployed position.
+    Firing outside this window is impossible.
+    - [bold]Tactical Positioning and Vulnerability [/bold]: Due to its range, the mortar is typically deployed [italic]behind the main frontline[/italic].
+    This backline positioning makes the mortar operator [color=#ff0000]highly susceptible to enemy flanks[/color].
+    Always be aware of your surroundings, listen for enemy movements, and request security from squadmates if needed.
+
+    ## Coordinate System Example
+    Mortar targeting uses an XY coordinate system. Imagine a grid laid over the battlefield. Your spotter will give you coordinates like "(X) Longitude: 50, (Y) Latitude: -30, HE Shell"
+
+    Here's a simplified visual representation of an XY plane with a 1-meter (or 1-tile, in game terms) range from the origin 0:
+
+    <Box>+Y</Box>
+    <Box>(+1m)</Box>
+    <Box>▲</Box>
+    <Box>|</Box>
+    <Box>|</Box>
+    <Box>(-1m) -X ◀-  -  -  -  -  -  0  -  -  -  -  -  -▶ +X (+1m)</Box>
+    <Box>|</Box>
+    <Box>|</Box>
+    <Box>▼</Box>
+    <Box>(-1m)</Box>
+    <Box>-Y</Box>
+
+    - The 0 is the origin (0,0).
+    - +Y is North/Up, -Y is South/Down.
+    - +X is East/Right, -X is West/Left.
+    - You'll input the target's X and Y values into the mortar UI. Accurate coordinates are key.
+
+    #Mortar Usage & Interface
+
+    Mortar works via coordinates, but you can also change where the mortar fires with the offset as well.
+    When you want to use the mortar, first thing you need to do is get the coordinates of where you want to send the shells with a laser designator or a range finder.
+    Afterwards, simply input them in the interface and [color=#00FF00]set the coordinates[/color], and you are ready to fire.
+
+    After setting your coordinates simply just interact with the mortar with a shell in hand.
+
+    <Box>[color=#ff0000]Beware that the UI doesn't update in real time, so if you cancel the "Set Coordinates" action, it will show the new coordinates, but will fire on the previous one.[/color]</Box>
+    [bold]Offset[/bold] is for small adjustments to where the shells will land, and by small, up to 10 tiles in any direction you want. Use the example given above to correctly adjust your coordinates if need be.
+
+    - There are reasons to use offset instead of changing the coordinates, if you have good coordinates and a camera shell in the air, you will be able to use the offset to quickly adjust to the situation.
+    - Below we will cover the actual reason to use offsets and the reasoning behind it
+
+    #Mortar Offsets & Inaccuracies
+
+    The mortar has 2 inaccuracy parameters applied to it, one of which we can control.
+
+    -The first inaccuracy is about the distance. Further the target is, more inaccurate the mortar will be. Increasing by 1 every 20 tiles.
+
+    -The second one is actually simple. Whenever you fire a mortar shell, there is a %25 chance for your coordinates to land 1 tile above or below the intended target coordinates. There is no way to lessen this in any way.
+
+    <Box>Here is the important part about inaccuracies</Box>
+    The offsets applied are [bold]FIXED each time you set coordinates[/bold], If you set your coordinates to 100 100 the game will pick from +5 to -5 and give you a random offset from there.
+    Such as +3 and -2. You can treat it like your coordinates being 103 98 instead of 100 100 from now on.
+
+    <Box>[color=#ff0000]Until you actually press the [/color][color=#00FF00]"Set Coordinates"[/color][color=#ff0000] button again, you will always have that +3 and -2, and your mortar shots can be offset to be accurate based on that.[/color]</Box>
+    This is especially useful when using the camera shells. Once you set your coordinates and then fire a camera shell, it will land on exactly where the mortar is firing, meaning that you can use the offset interface to properly aim your shots while looking through the camera.
+
+</Document>
+

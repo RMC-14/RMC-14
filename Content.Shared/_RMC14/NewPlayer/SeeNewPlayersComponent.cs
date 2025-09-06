@@ -14,4 +14,7 @@ public sealed partial class SeeNewPlayersComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi ThreeLabel = new(new ResPath("_RMC14/Interface/new_player.rsi"), "new_player_marker_3");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi FourLabel = new(new ResPath("_RMC14/Interface/new_player.rsi"), "new_player_marker_4");
 }
