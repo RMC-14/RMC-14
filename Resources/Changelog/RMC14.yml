@@ -4226,8 +4226,8 @@
       section. The feature helps to feel more part of the squad and keep the squad
       together.
     type: Add
-  - message: Fixed a bug with the lack of support for multi-colored names of xenomorphs,
-      now the names of xenomorphs can have different colors.
+  - message: Fixed a bug with the lack of support for multi-colored names of xenonids,
+      now the names of xenonids can have different colors.
     type: Fix
   id: 2298
   time: '2025-09-05T09:41:30.0000000+00:00'
