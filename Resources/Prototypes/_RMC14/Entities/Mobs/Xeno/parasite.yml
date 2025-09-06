@@ -5,7 +5,8 @@
   - CMXenoFlammable
   - RMCXenoVentCrawler
   id: CMXenoParasiteBase
-  name: Parasite
+  name: Child
+  suffix: Parasite
   components:
   - type: GuideHelp
     guides:
@@ -60,6 +61,11 @@
   - type: XenoAnimateMovement
   - type: XenoLeap
     knockdownTime: 1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.75
+    damage:
+      types:
+        Heat: 5
   - type: XenoParasite
   - type: InfectOnPullAttempt
   - type: Item

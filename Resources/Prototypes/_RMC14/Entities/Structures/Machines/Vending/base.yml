@@ -57,6 +57,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true

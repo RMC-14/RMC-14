@@ -18,6 +18,7 @@
   - type: Anchorable
   - type: Clickable
   - type: SpriteFade
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMOverheadPipe
