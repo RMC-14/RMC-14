@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Timemaster99
-  changes:
-  - message: Clicking a pill canister within a medical belt now pops out a pill.
-    type: Tweak
-  id: 1824
-  time: '2025-06-07T03:38:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6588
 - author: Arykh
   changes:
   - message: The Golden Mateba now has rail and barrel attachments.
@@ -4563,5 +4556,12 @@
   id: 2324
   time: '2025-09-06T12:01:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7806
+- author: J C Denton
+  changes:
+  - message: Map-specific survivor jobs added to Fiorina Science Annex.
+    type: Add
+  id: 2325
+  time: '2025-09-06T12:04:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7437
 Name: RMC14
 Order: -1
