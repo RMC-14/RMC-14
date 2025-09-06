@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: Added the "Holy texts of the High Explosive Fragmenting Anti-personnel
-      hand grenade" bible.
-    type: Add
-  - message: You can now create water by mixing hydrogen and oxygen. (Very inefficient)
-    type: Add
-  id: 1819
-  time: '2025-06-07T03:25:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6487
-- author: Arykh
-  changes:
   - message: Added Lexorin!
     type: Add
   - message: Dexalin and Dexalin Plus can now remove Lexorin!
@@ -4511,5 +4501,14 @@
   id: 2319
   time: '2025-09-06T10:14:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7413
+- author: Dygon
+  changes:
+  - message: Fixed the plasma cost of new xeno constructs not scaling with how many
+      existing constructs there are in an area if they exceed a threshold of 40% of
+      the buildable tiles in an area.
+    type: Fix
+  id: 2320
+  time: '2025-09-06T11:14:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6288
 Name: RMC14
 Order: -1
