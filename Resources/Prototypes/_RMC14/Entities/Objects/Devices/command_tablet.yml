@@ -25,6 +25,7 @@
   - type: MarineCommunicationsComputer
     canCreateEcho: false
     canGiveMedals: true
+    canInitiateEvac: true
   - type: TacticalMapComputer
   - type: MarineControlComputer
   - type: Tag
