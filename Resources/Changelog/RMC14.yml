@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: RangerXVII
-  changes:
-  - message: Fixed a random space being in front of the weapon specialist prefixes.
-    type: Fix
-  id: 1806
-  time: '2025-06-07T02:27:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6546
 - author: DummeHytteOst
   changes:
   - message: Added a guidebook named "Xenonid Map Icons", it shows what each xenonid
@@ -4507,5 +4500,12 @@
   id: 2306
   time: '2025-09-06T08:18:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6998
+- author: noctyrnal
+  changes:
+  - message: You can now authorize evac and cancel evac via the Command Tablet.
+    type: Add
+  id: 2307
+  time: '2025-09-06T08:26:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7761
 Name: RMC14
 Order: -1
