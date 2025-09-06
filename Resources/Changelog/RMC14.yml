@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed pressurized canisters allowing transfer from non-reagent dispensers
-      and non-reagent tanks
-    type: Fix
-  - message: Fixed custom autoinjectors being refillable from bottles
-    type: Fix
-  - message: Added custom autoinjectors that work like the default autoinjectors (slow
-      without skill but don't need skill), printable from the medilathe
-    type: Add
-  - message: Changed custom autoinjector names to be consistent
-    type: Tweak
-  - message: Added colored stripes to autoinjectors based on volume, pressurized canisters
-      now have different fill sprites.
-    type: Add
-  - message: Canister Pouches now show when they have a tank (and what color reagent
-      is in it) and when they have an injector inserted.
-    type: Add
-  - message: You can now flush canisters in reagent container pouches.
-    type: Add
-  id: 1812
-  time: '2025-06-07T02:53:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6544
 - author: Ramiris
   changes:
   - message: Added tents!
@@ -4513,5 +4490,28 @@
   id: 2312
   time: '2025-09-06T08:44:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6321
+- author: Dygon
+  changes:
+  - message: The Dropship part fabricator can now print the AGM-227 'Banshee' for
+      300 points. It has a 6-second travel time and creates a medium-sized explosion,
+      along with a short-lived, star-shaped area of high-intensity fire.
+    type: Add
+  - message: The Dropship part fabricator can now print the AGM-184 'Harpoon II' for
+      200 points. It has a 5-second travel time and creates a medium-sized explosion
+      with relatively low damage.
+    type: Add
+  - message: The Dropship part fabricator can now print the BLU-200 'Dragon's Breath'
+      for 300 points. It has a 5-second travel time and creates an area of high-intensity
+      fire, along with a large non-damaging implosion that pulls entities toward its
+      epicenter.
+    type: Add
+  - message: Fixed the AGM-99 'Napalm' not creating 2 additional fire tiles towards
+      every cardinal direction.
+    type: Fix
+  - message: Fire created by the AGM-99 'Napalm' now deals less damage per second.
+    type: Fix
+  id: 2313
+  time: '2025-09-06T08:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7350
 Name: RMC14
 Order: -1
