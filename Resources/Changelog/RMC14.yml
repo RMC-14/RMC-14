@@ -4535,8 +4535,6 @@
   url: https://github.com/RMC-14/RMC-14/pull/7808
 - author: Ian321
   changes:
-  - message: Changing the job now also changes the title on the ID.
-    type: Tweak
   - message: The ID of ghost roles are now linked to their original owner.
     type: Fix
   - message: ID termination now also removes the target from the squad.

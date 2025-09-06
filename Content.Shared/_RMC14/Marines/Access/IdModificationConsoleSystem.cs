@@ -79,13 +79,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
-        if (accessGroupPrototype.Name is { } accessName && TryComp(uid, out IdCardComponent? idCard))
-        {
-            idCard._jobTitle = accessName;
-            Dirty(uid.Value, idCard);
-            _metaData.SetEntityName(uid.Value, $"{idCard.FullName} ({accessName})");
-        }
-
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
