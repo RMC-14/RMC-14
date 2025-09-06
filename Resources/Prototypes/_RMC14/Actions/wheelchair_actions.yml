@@ -4,8 +4,8 @@
   description: Ring the wheelchair bell
   components:
   - type: InstantAction
-    icon:
-      sprite: Objects/Misc/desk_bell.rsi
-      state: normal
     event: !type:RingBellActionEvent
-    useDelay: 0
+  icon:
+    sprite: Objects/Misc/desk_bell.rsi
+    state: normal
+  useDelay: 0
