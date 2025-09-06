@@ -101,3 +101,119 @@
       - id: CMSyringe
   - type: AccessReader
     access: [["CMAccessMARSOCMedspec"]]
+
+# Sun Riders Corpsman
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalGearPVE
+  name: ColMarTech squad medical gear rack
+  description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+  suffix: PVE
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_equipment.rsi
+    layers:
+    - state: alt
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsmanPVE
+    sections:
+    - name: Pill Bottles
+      entries:
+      - id: RMCPillCanisterBicaridineMeralyne
+        name: Bicaridine & Meralyne, 15\15 (16 pills)
+        points: 22
+        recommended: true
+      - id: RMCPillCanisterKelotaneDermaline
+        name: Kelotane & Dermaline, 15\15 (16 pills)
+        points: 22
+        recommended: true
+      - id: RMCPillCanisterNitrogenWater
+        name: Nitrogen & Water, 15\15 (16 pills)
+        points: 15
+      - id: RMCPillCanisterDexalinPlus
+        name: Dexalin+, 15 (16 pills)
+        points: 15
+      - id: RMCPillCanisterIron
+        name: Iron & Sugar, 15\7.5 (16 pills)
+        points: 15
+    - name: Liquid Bottles
+      entries:
+      - id: CMBottleBicaridineMeralyne
+        name: Bicaridine & Meralyne, 70\70
+        points: 15
+      - id: CMBottleKelotaneDermaline
+        name: Kelotane & Dermaline, 70\70
+        points: 15
+      - id: CMBottleDexalinPlus
+        name: Dexalin+, 140
+        points: 11
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMedicalEquipmentPVE
+  name: ColMarTech squad medical equipment rack
+  description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+  suffix: PVE
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsmanPVE
+    sections:
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarineMedic
+      - id: CMSatchelMarineMedic
+        recommended: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchVial
+      - id: RMCPouchMedkit
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingDropPouch
+      - id: CMWebbingHolster

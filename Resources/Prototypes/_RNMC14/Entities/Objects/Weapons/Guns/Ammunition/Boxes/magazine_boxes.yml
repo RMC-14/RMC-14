@@ -1,0 +1,181 @@
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleM54CMK1Empty
+  name: magazine box (M54C MK1 x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
+- type: entity
+  parent: RMCBoxMagazineRifleM54CMK1Empty
+  id: RMCBoxMagazineRifleM54CMK1
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CMK1
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
+# AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleM54CMK1APEmpty
+  name: magazine box (M54C MK1 AP x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#2fe900"
+    - state: rifle_box_54
+      color: "#2fe900"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleM54CMK1APEmpty
+  id: RMCBoxMagazineRifleM54CMK1AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CMK1AP
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1AP
+
+# HEAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleM54CMK1HEAPEmpty
+  name: magazine box (M54C MK1 HEAP x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#e99700"
+    - state: rifle_box_54
+      color: "#e99700"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1HEAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleM54CMK1HEAPEmpty
+  id: RMCBoxMagazineRifleM54CMK1HEAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleM54CMK1HEAP
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1HEAP
+
+# INCENDIARY
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleM54CMK1IncendiaryEmpty
+  name: magazine box (M54C MK1 Incendiary x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#db2121"
+    - state: rifle_box_54
+      color: "#db2121"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1Incendiary
+
+- type: entity
+  parent: RMCBoxMagazineRifleM54CMK1IncendiaryEmpty
+  id: RMCBoxMagazineRifleM54CMK1Incendiary
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleM54CMK1Incendiary
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1Incendiary
