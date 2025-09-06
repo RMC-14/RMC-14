@@ -58,14 +58,6 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
         foreach (var special in job.Special)
             special.AfterEquip(ent);
 
-        if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
-        {
-            if (_squad.TryGetSquadLeader(squad, out _))
-                RemComp<SquadLeaderComponent>(ent);
-
-            _squad.AssignSquad(ent, squad.Owner, jobProto);
-        }
-
         if (job.Ranks is { } ranks)
         {
             foreach (var rank in ranks)
@@ -76,6 +68,14 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
                     break;
                 }
             }
+        }
+
+        if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
+        {
+            if (_squad.TryGetSquadLeader(squad, out _))
+                RemComp<SquadLeaderComponent>(ent);
+
+            _squad.AssignSquad(ent, squad.Owner, jobProto);
         }
 
         if (HasComp<MarineComponent>(ent) &&

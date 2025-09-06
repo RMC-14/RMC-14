@@ -1013,6 +1013,29 @@
     - RMCAttachmentL83A2Stock
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentM54CE2Stock
+  name: M54CE2 solid stock
+  description: Intergrated into the M54CE2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+    state: stock
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/urban.rsi
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM54CE2Stock
+
+- type: entity
   parent: RMCAttachmentM54CStockCollapsible
   id: RMCAttachmentAK4047StockCollapsible
   name: AK-4047 folding stock
@@ -1127,3 +1150,6 @@
 
 - type: Tag
   id: RMCAttachmentMP5AltStockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM54CE2Stock

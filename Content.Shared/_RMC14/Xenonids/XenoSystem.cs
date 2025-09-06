@@ -122,6 +122,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
         SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
@@ -245,6 +246,12 @@ public sealed partial class XenoSystem : EntitySystem
                 args.Attack = new DisarmAttackEvent(args.Target, disarm.Coordinates);
                 break;
         }
+    }
+
+    private void OnHealAttempt(Entity<XenoComponent> ent, ref XenoHealAttemptEvent args)
+    {
+        if (_rmcFlammable.IsOnFire(ent.Owner))
+            args.Cancelled = true;
     }
 
     private void OnXenoOpenActivatableUIAttempt(Entity<XenoComponent> ent, ref UserOpenActivatableUIAttemptEvent args)
@@ -482,7 +489,7 @@ public sealed partial class XenoSystem : EntitySystem
     public int GetGroundXenosAlive()
     {
         var count = 0;
-        var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent,  TransformComponent>();
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent, TransformComponent>();
         while (xenos.MoveNext(out _, out _, out var mobState, out var xform))
         {
             if (mobState.CurrentState == MobState.Dead)

@@ -22,6 +22,7 @@ public enum DropshipTerminalWeaponsScreen
     Fulton,
     Paradrop,
     Spotlight,
+    TacMap,
 }
 
 [Serializable, NetSerializable]

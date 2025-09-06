@@ -23,8 +23,8 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     [DataField, AutoNetworkedField]
     public int MaxPlayers;
 
-    [DataField(required: true), AutoNetworkedField]
-    public string Announcement = string.Empty;
+    [DataField, AutoNetworkedField]
+    public string? Announcement;
 
     [DataField, AutoNetworkedField]
     public List<(ProtoId<JobPrototype> Job, int Amount)>? SurvivorJobs;
@@ -52,11 +52,20 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public bool SelectRandomSurvivorInsert = true;
 
     /// <summary>
+    /// List of survivor jobs that appear in a specific scenario. These have a higher priority than other job types.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>>? SurvivorJobScenarios;
+
+    /// <summary>
     /// List of nightmare scenarios that can occur, which are used for conditionally spawning map inserts.
     /// Only one scenario will be selected using cumulative probability.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<RMCNightmareScenario>? NightmareScenarios;
+
+    [DataField, AutoNetworkedField]
+    public bool InRotation = true;
 }
 
 [DataDefinition]

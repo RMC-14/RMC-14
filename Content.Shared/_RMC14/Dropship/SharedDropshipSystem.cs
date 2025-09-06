@@ -480,7 +480,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
-        _marineAnnounce.AnnounceARES(actor, message);
+        _marineAnnounce.AnnounceARESStaging(actor, message);
 
         return true;
     }

@@ -14,7 +14,6 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
-    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -80,6 +79,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
@@ -109,12 +109,20 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
-      - id: CMHeadsetCMP
+      - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10MP
     - name: Armor
-      takeAll: CMArmor
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3Warden
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadCapWarden
     - name: Handgun Case
       choices: { CMGunCase: 1 }

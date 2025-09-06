@@ -51,6 +51,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
     {
         // Reset for new round
         _scheduledEventTime = null;
+        _aegisScheduled = false;
         _scheduledMessage = string.Empty;
         _eventExecuted = false;
     }
@@ -138,6 +139,8 @@ public sealed class AegisLobbyEventSystem : EntitySystem
 
         _req.CreateSpecialDelivery("RMCCrateAegisLobby");
         Log.Info("AEGIS delivery created and should be sent shortly.");
+        //Unschedule after execution
+        _aegisScheduled = false;
     }
 
     public bool SendCICFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message, EntProtoId faxProto, string? sender = null)

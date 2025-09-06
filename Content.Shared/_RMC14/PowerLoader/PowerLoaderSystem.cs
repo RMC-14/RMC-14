@@ -427,7 +427,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
 
         InsertPoint(user, contained, slot);
-        SyncAppearance(ent);
+        SyncAppearance(ent.Owner);
     }
 
     private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
@@ -484,7 +484,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             SyncHands((user, user.Comp));
         }
 
-        SyncAppearance(ent);
+        SyncAppearance(ent.Owner);
     }
 
     private void OnDropshipDetach(Entity<DropshipUtilityPointComponent> ent, ref DropshipDetachDoAfterEvent args)
@@ -894,8 +894,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void SyncAppearance(Entity<DropshipWeaponPointComponent> point)
+    public void SyncAppearance(Entity<DropshipWeaponPointComponent?> point)
     {
+        if (!Resolve(point, ref point.Comp, logMissing: false))
+            return;
+
         if (!_container.TryGetContainer(point, point.Comp.WeaponContainerSlotId, out var weaponContainer) ||
             weaponContainer.ContainedEntities.Count == 0)
         {
@@ -904,15 +907,17 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        var hasAmmo = false;
         var hasRounds = false;
+        var maxRounds = 0;
+        var rounds = 0;
         if (_container.TryGetContainer(point, point.Comp.AmmoContainerSlotId, out var ammoContainer))
         {
             foreach (var contained in ammoContainer.ContainedEntities)
             {
                 if (TryComp(contained, out DropshipAmmoComponent? ammo))
                 {
-                    hasAmmo = true;
+                    rounds = ammo.Rounds;
+                    maxRounds = ammo.MaxRounds;
 
                     // TODO RMC14 partial reloads? or hide it anyways if below the threshold
                     if (ammo.Rounds >= ammo.RoundsPerShot)
@@ -927,9 +932,25 @@ public sealed class PowerLoaderSystem : EntitySystem
                 continue;
 
             SpriteSpecifier.Rsi? rsi;
-            if (hasAmmo && hasRounds)
+            if (rounds > 0 && hasRounds)
+            {
                 rsi = weapon.AmmoAttachedSprite;
-            else if (hasAmmo)
+
+                if (rsi != null &&
+                    weapon.AmmoAttachedSprite != null &&
+                    rounds != maxRounds)
+                {
+                    foreach (var ammoCount in weapon.AmmoSpriteThresholds)
+                    {
+                        if (ammoCount > rounds)
+                            continue;
+
+                        rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + ammoCount);
+                        break;
+                    }
+                }
+            }
+            else if (rounds > 0)
                 rsi = weapon.AmmoEmptyAttachedSprite;
             else
                 rsi = weapon.WeaponAttachedSprite;

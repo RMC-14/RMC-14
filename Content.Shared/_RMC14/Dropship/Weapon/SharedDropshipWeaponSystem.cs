@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -81,6 +82,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -615,6 +617,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
+        _powerloader.SyncAppearance(Transform(weapon.Value).ParentUid);
         Dirty(ammo);
 
         _audio.PlayPvs(ev.SoundCockpit, weapon.Value);
@@ -1187,8 +1190,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
-                if (flight.ImpactEffect != null)
-                    Spawn(flight.ImpactEffect, target, rotation: _random.NextAngle());
+                foreach (var effect in flight.ImpactEffects)
+                {
+                    Spawn(effect, target, rotation: _random.NextAngle());
+                }
 
                 if (flight.Damage != null)
                 {
@@ -1206,15 +1211,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                 }
 
-                if (flight.Explosion != null)
+                if (flight.Implosion != null)
                 {
-                    _rmcExplosion.QueueExplosion(target,
-                        flight.Explosion.Type,
-                        flight.Explosion.Total,
-                        flight.Explosion.Slope,
-                        flight.Explosion.Max,
-                        uid
-                    );
+                    _rmcImplosion.Implode(flight.Implosion, target);
                 }
 
                 if (flight.Fire != null)
@@ -1250,6 +1249,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                     else
                     {
+                        _rmcFlammable.SpawnFireLines(flight.Fire.Type,
+                            flight.Target,
+                            flight.Fire.CardinalRange,
+                            flight.Fire.OrdinalRange,
+                            flight.Fire.Intensity,
+                            flight.Fire.Duration);
+
                         for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
                         {
                             for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
@@ -1265,6 +1271,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 );
                             }
                         }
+                    }
+
+                    if (flight.Explosion != null)
+                    {
+                        _rmcExplosion.QueueExplosion(target,
+                            flight.Explosion.Type,
+                            flight.Explosion.Total,
+                            flight.Explosion.Slope,
+                            flight.Explosion.Max,
+                            uid,
+                            canCreateVacuum: false
+                        );
                     }
                 }
 

@@ -1,14 +1,18 @@
 ﻿using System.Text;
+using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.ParaDrop;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen;
@@ -25,8 +29,11 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
+    private readonly TacticalMapSystem _tacticalMapSystem;
 
     private EntityUid? _oldEye;
+    private TacticalMapWrapper? _embeddedTacMapWrapperScreen1;
+    private TacticalMapWrapper? _embeddedTacMapWrapperScreen2;
 
     protected override DropshipWeaponsWindow? Window { get; set; }
 
@@ -36,6 +43,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         _eyeLerping = EntMan.System<EyeLerpingSystem>();
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
+        _tacticalMapSystem = EntMan.System<TacticalMapSystem>();
     }
 
     protected override void Open()
@@ -87,6 +95,16 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         RefreshButtons();
+
+        if (_embeddedTacMapWrapperScreen1 != null && terminal?.ScreenOne.State == TacMap)
+        {
+            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen1);
+        }
+
+        if (_embeddedTacMapWrapperScreen2 != null && terminal?.ScreenTwo.State == TacMap)
+        {
+            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen2);
+        }
     }
 
     private void RefreshButtons()
@@ -109,6 +127,10 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         var screen = first ? Window.ScreenOne : Window.ScreenTwo;
+
+        screen.Viewport.RemoveAllChildren();
+        screen.Viewport.Visible = false;
+
         static DropshipWeaponsButtonData ButtonAction(string suffix, Action<ButtonEventArgs> onPressed)
         {
             return new DropshipWeaponsButtonData($"rmc-dropship-weapons-{suffix}", onPressed);
@@ -194,6 +216,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         var target = Button("target", Target);
         // var maps = Button("equip", DropshipTerminalWeaponsScreen.Maps);
         var cams = Button("cams", Cams);
+        var tacMap = Button("maps", TacMap);
         var fire = ButtonAction("fire", _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMsg(first)));
         var strike = Button("strike", Strike);
         // var vector = Loc.GetString("rmc-dropship-weapons-vector");
@@ -218,14 +241,11 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         screen.ScreenLabel.Margin = new Thickness();
         screen.ScreenLabel.Visible = true;
 
-        screen.Viewport.Visible = false;
-
         ClearNames(screen);
         switch (compScreen.State)
         {
             case Main:
-                // TODO RMC14 bottom two maps
-                screen.BottomRow.SetData(three: cams);
+                screen.BottomRow.SetData(two: tacMap, three: cams);
                 screen.TopRow.SetData(equip, four: target);
                 break;
             case Equip:
@@ -346,6 +366,28 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.Viewport.Visible = true;
                 screen.BottomRow.SetData(exit);
                 break;
+            case TacMap:
+                screen.ScreenLabel.Visible = false;
+
+                var currentWrapper = first ? _embeddedTacMapWrapperScreen1 : _embeddedTacMapWrapperScreen2;
+
+                if (currentWrapper == null)
+                {
+                    currentWrapper = new TacticalMapWrapper();
+                    SetupEmbeddedTacMap(currentWrapper);
+
+                    if (first)
+                        _embeddedTacMapWrapperScreen1 = currentWrapper;
+                    else
+                        _embeddedTacMapWrapperScreen2 = currentWrapper;
+                }
+
+                screen.Viewport.AddChild(currentWrapper);
+                screen.Viewport.Visible = true;
+                screen.BottomRow.SetData(exit);
+
+                RefreshEmbeddedTacMap(currentWrapper);
+                break;
             case Medevac:
             {
                 AddButtons(
@@ -424,6 +466,56 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         RefreshButtons();
+    }
+
+    private void SetupEmbeddedTacMap(TacticalMapWrapper wrapper)
+    {
+        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+            return;
+
+        TabContainer.SetTabTitle(wrapper.MapTab, Loc.GetString("rmc-dropship-weapons-maps"));
+        TabContainer.SetTabVisible(wrapper.MapTab, true);
+        TabContainer.SetTabVisible(wrapper.CanvasTab, false);
+
+        if (computer.Map != null && EntMan.TryGetComponent(computer.Map.Value, out AreaGridComponent? areaGrid))
+        {
+            wrapper.UpdateTexture((computer.Map.Value, areaGrid));
+        }
+
+        var lineLimit = _tacticalMapSystem.LineLimit;
+        wrapper.SetLineLimit(lineLimit);
+        wrapper.LastUpdateAt = computer.LastAnnounceAt;
+        wrapper.NextUpdateAt = computer.NextAnnounceAt;
+    }
+
+    private void RefreshEmbeddedTacMap(TacticalMapWrapper wrapper)
+    {
+        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+            return;
+
+        var blips = new TacticalMapBlip[computer.Blips.Count];
+        var i = 0;
+        foreach (var blip in computer.Blips.Values)
+        {
+            blips[i++] = blip;
+        }
+        wrapper.UpdateBlips(blips);
+
+        wrapper.Map.Lines.Clear();
+        var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
+        if (lines != null)
+        {
+            wrapper.Map.Lines.AddRange(lines.MarineLines);
+        }
+
+        var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
+        if (labels != null)
+        {
+            wrapper.UpdateTacticalLabels(labels.MarineLabels);
+        }
+
+        wrapper.LastUpdateAt = computer.LastAnnounceAt;
+        wrapper.NextUpdateAt = computer.NextAnnounceAt;
     }
 
     private void ClearNames(DropshipWeaponsScreen screen)
@@ -561,5 +653,22 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
         electronicSystem.TryGetValue(0, out electronicSystemOne);
         electronicSystem.TryGetValue(1, out electronicSystemTwo);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _embeddedTacMapWrapperScreen1?.Dispose();
+            _embeddedTacMapWrapperScreen1 = null;
+
+            _embeddedTacMapWrapperScreen2?.Dispose();
+            _embeddedTacMapWrapperScreen2 = null;
+
+            if (_oldEye != null)
+                _eyeLerping.RemoveEye(_oldEye.Value);
+        }
+
+        base.Dispose(disposing);
     }
 }
