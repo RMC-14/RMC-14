@@ -3,10 +3,11 @@
   name: Ring Bell
   description: Ring the wheelchair bell
   components:
+  - type: InstantAction
+    event: !type:RingBellActionEvent
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: Objects/Misc/desk_bell.rsi
       state: normal
-    event: !type:RingBellActionEvent
     useDelay: 0
