@@ -145,7 +145,7 @@ public sealed class TackleSystem : EntitySystem
         DoDisarmEffects(user, target);
 
         if (_net.IsClient)
-                return;
+            return;
 
         var doPopups = true;
 
