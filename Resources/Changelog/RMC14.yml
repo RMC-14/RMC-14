@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed hive clusters being able to be placed on unweedable surfaces, like
-      grass.
-    type: Fix
-  id: 1803
-  time: '2025-06-05T01:26:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6625
 - author: noctyrnal
   changes:
   - message: Added ash trays, mirrors, heavy cables, overhead cargo crane tracks and
@@ -4513,5 +4505,12 @@
   id: 2303
   time: '2025-09-06T07:52:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6939
+- author: shibechef
+  changes:
+  - message: The mou53 has a delay of 1.1 seconds for toggling it's breech.
+    type: Tweak
+  id: 2304
+  time: '2025-09-06T08:03:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7802
 Name: RMC14
 Order: -1
