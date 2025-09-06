@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added ash trays, mirrors, heavy cables, overhead cargo crane tracks and
-      fire extinguisher cabinets along with edge tiles for the Almayer.
-    type: Add
-  - message: Added Gun Racks for the M54C Mk1-2 / M42A2 and M35. These can be found
-      on the Golden Arrow.
-    type: Add
-  - message: Added a large map table, found on the Golden Arrow and potentially the
-      Almayer.
-    type: Add
-  id: 1804
-  time: '2025-06-05T01:29:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6627
 - author: SG6732
   changes:
   - message: Added new sprites for SPP weaponry. Type 71s for everyone!
@@ -4512,5 +4498,13 @@
   id: 2304
   time: '2025-09-06T08:03:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7802
+- author: noctyrnal
+  changes:
+  - message: Adds the UNMC officer uniform and the Commanding Officer's gray formal
+      uniform. Both can be found in the CO clothing vendor.
+    type: Add
+  id: 2305
+  time: '2025-09-06T08:04:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7803
 Name: RMC14
 Order: -1
