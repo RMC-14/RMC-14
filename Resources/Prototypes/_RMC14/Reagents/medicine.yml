@@ -295,11 +295,6 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-        time: 5
-      - !type:Paralyze
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
         key: Unconscious
         component: RMCUnconscious
         time: 20 #Yes, it's this much.
