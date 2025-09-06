@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: The Golden Mateba now has rail and barrel attachments.
-    type: Add
-  - message: The Mateba and it's variants now have burst fire.
-    type: Add
-  id: 1825
-  time: '2025-06-07T03:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6615
 - author: Dygon
   changes:
   - message: Resin traps now have weeds as part of their sprite, making them more
@@ -4563,5 +4554,13 @@
   id: 2325
   time: '2025-09-06T12:04:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7437
+- author: DrSmugleaf
+  changes:
+  - message: Fixed wooden barricades taking no damage from a charger crusher slamming
+      against them.
+    type: Fix
+  id: 2326
+  time: '2025-09-06T12:09:41.838484+00:00'
+  url: null
 Name: RMC14
 Order: -1
