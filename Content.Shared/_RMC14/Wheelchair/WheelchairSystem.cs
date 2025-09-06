@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Shared.Actions;
-
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Mobs;
