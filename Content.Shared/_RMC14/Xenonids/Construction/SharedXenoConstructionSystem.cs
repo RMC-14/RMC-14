@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
@@ -8,6 +9,7 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Eye;
@@ -18,6 +20,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
@@ -26,19 +29,26 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -77,6 +87,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -99,6 +113,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
+
+    private static readonly string ResinDoorCorpseAddCollisionTag = "ResinDoorCorpseCollisionDelay";
+
+    // Multiplier force to push out corpses
+    private const float ResinDoorCorpsePushForce = 20f;
+    private TimeSpan ResinDoorBufferDelay = TimeSpan.FromSeconds(0.5);
 
     public override void Initialize()
     {
@@ -142,6 +162,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
+
+        SubscribeLocalEvent<ResinDoorComponent, BeforeDoorClosedEvent>(OnXenoDoorBeforeClose);
+        SubscribeLocalEvent<ResinDoorComponent, DoorStateChangedEvent>(OnXenoDoorStateChange);
 
         SubscribeNetworkEvent<XenoOrderConstructionClickEvent>(OnXenoOrderConstructionClick);
         SubscribeNetworkEvent<XenoOrderConstructionCancelEvent>(OnXenoOrderConstructionCancel);
@@ -989,6 +1012,112 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
+    private void OnXenoDoorBeforeClose(Entity<ResinDoorComponent> resinDoor, ref BeforeDoorClosedEvent args)
+    {
+        if (args.Partial)
+        {
+            return;
+        }
+        if (!TryComp<DoorComponent>(resinDoor, out var doorComp))
+        {
+            return;
+        }
+
+        List<EntityUid> bodies = new();
+        foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
+        {
+            if (_mobState.IsDead(ent))
+            {
+                bodies.Add(ent);
+            }
+
+            // Set all bodies collision to "false" so the resin door will close
+            foreach (var body in bodies)
+            {
+                _physics.SetCanCollide(body, false);
+                //_useDelay.SetLength(body, doorComp.CloseTimeOne + doorComp.CloseTimeTwo + ResinDoorBufferDelay, ResinDoorCorpseAddCollisionTag);
+            }
+        }
+    }
+
+    private void OnXenoDoorStateChange(Entity<ResinDoorComponent> resinDoor, ref DoorStateChangedEvent args)
+    {
+        if (args.State != DoorState.Closed)
+        {
+            return;
+        }
+        if (_turf.GetTileRef(resinDoor.Owner.ToCoordinates()) is not { } doorTile ||
+            _transform.GetGrid(resinDoor.Owner) is not { } grid ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
+        {
+            return;
+        }
+        MapCoordinates resinDoorCoords = _transform.GetMapCoordinates(resinDoor);
+        var resinDoorIndices = _mapSystem.TileIndicesFor(grid, gridComp, resinDoorCoords);
+        Dictionary<Vector2, MapCoordinates> freeTiles = new();
+        List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
+        foreach (var dir in adjacentDirections)
+        {
+            Vector2i adjacentTileIndices = resinDoorIndices + dir;
+
+
+            var adjacentTile = _mapSystem.GetTileRef((grid, gridComp), adjacentTileIndices);
+            if (!_turf.IsTileBlocked(adjacentTile, CollisionGroup.MobMask))
+            {
+                freeTiles.Add(dir, _transform.ToMapCoordinates(_turf.GetTileCenter(adjacentTile)));
+            }
+        }
+
+        List<EntityUid> bodies = new();
+        foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
+        {
+            if (_mobState.IsDead(ent))
+            {
+                bodies.Add(ent);
+            }
+        }
+
+        // Set all bodies collision to "true"
+        // Apply velocity towards the nearest free tile
+        foreach (var body in bodies)
+        {
+            _physics.SetCanCollide(body, true);
+
+            MapCoordinates bodyCoords = _transform.GetMapCoordinates(body);
+
+            MapCoordinates? closestCoords = null;
+            float? closestFreeTileDistance = null;
+            foreach (var (dir, coords) in freeTiles)
+            {
+                float distance = (bodyCoords.Position - coords.Position).Length();
+                if (closestFreeTileDistance is null)
+                {
+                    closestFreeTileDistance = distance;
+                    closestCoords = coords;
+                    continue;
+                }
+
+                if (closestFreeTileDistance > distance)
+                {
+                    closestFreeTileDistance = distance;
+                    closestCoords = coords;
+                    continue;
+                }
+            }
+
+            if (closestCoords is null || !TryComp<PhysicsComponent>(body, out var bodyPhysicsComp))
+            {
+                continue;
+            }
+            var moveDir = (closestCoords.Value.Position - bodyCoords.Position).Normalized();
+            _physics.ApplyLinearImpulse(body, moveDir * bodyPhysicsComp.Mass * ResinDoorCorpsePushForce);
+            _door.TryOpen(resinDoor);
+        }
+    }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
@@ -1105,7 +1234,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (!HasComp<BarricadeComponent>(uid))
             {
-                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid))  &&
+                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid)) &&
                     !_tags.HasTag(uid.Value, PlatformTag) &&
                     !HasComp<DoorComponent>(uid) ||
                     TryComp(uid, out DoorComponent? door) &&
@@ -1417,4 +1546,5 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         RemCompDeferred<QueenBuildingBoostComponent>(queen);
     }
+
 }
