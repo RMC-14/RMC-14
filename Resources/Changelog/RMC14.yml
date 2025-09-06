@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: J C Denton and DeFFoL
-  changes:
-  - message: ERT Shuttles are now in the game, includes Generic, PMC, SPP and TSE
-      ones.
-    type: Add
-  id: 1814
-  time: '2025-06-07T03:06:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6632
 - author: Dutch-VanDerLinde
   changes:
   - message: Renamed FORECON squad to 'Recon', from Reconnaissance.
@@ -4520,5 +4512,15 @@
   id: 2314
   time: '2025-09-06T08:51:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7328
+- author: RavenCaat
+  changes:
+  - message: Added The Weapons L24 and the L24B for the Royal Marines and there respective
+      Ammunition.
+    type: Add
+  - message: Added The Weapon L83A3, L83A3F, L83A3M and there respective Ammunition
+    type: Add
+  id: 2315
+  time: '2025-09-06T09:06:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6774
 Name: RMC14
 Order: -1
