@@ -21,6 +21,8 @@ public sealed class WheelchairSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
+    
+    private readonly HashSet<EntityUid> _processingUnbuckle = new();
 
     public override void Initialize()
     {
@@ -62,15 +64,30 @@ public sealed class WheelchairSystem : EntitySystem
     {
         var buckle = args.Buckle;
         
-        if (TryComp<ActiveWheelchairPilotComponent>(buckle, out var pilot) && pilot.BellActionEntity != null)
-        {
-            _actions.RemoveAction(buckle.Owner, pilot.BellActionEntity.Value);
-        }
+        // Prevent recursion
+        if (_processingUnbuckle.Contains(buckle.Owner))
+            return;
+            
+        _processingUnbuckle.Add(buckle.Owner);
         
-        RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
-        RemCompDeferred<RelayInputMoverComponent>(buckle);
+        try
+        {
+            // Clean up bell action first
+            if (TryComp<ActiveWheelchairPilotComponent>(buckle, out var pilot) && pilot.BellActionEntity != null)
+            {
+                _actions.RemoveAction(buckle.Owner, pilot.BellActionEntity.Value);
+            }
+            
+            // Remove components
+            RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
+            RemCompDeferred<RelayInputMoverComponent>(buckle);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+            _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        }
+        finally
+        {
+            _processingUnbuckle.Remove(buckle.Owner);
+        }
     }
 
     private void OnActivePilotPreventCollide(Entity<ActiveWheelchairPilotComponent> ent, ref PreventCollideEvent args)
@@ -91,20 +108,32 @@ public sealed class WheelchairSystem : EntitySystem
 
     private void RemovePilot(Entity<ActiveWheelchairPilotComponent> active)
     {
-        _buckle.Unbuckle(active.Owner, null);
+        // Prevent recursion
+        if (_processingUnbuckle.Contains(active.Owner))
+            return;
+            
+        // Just remove the component - let the buckle system handle unbuckling
         RemCompDeferred<ActiveWheelchairPilotComponent>(active);
     }
 
     public override void Update(float frameTime)
     {
+        var toRemove = new List<Entity<ActiveWheelchairPilotComponent>>();
+        
         var pilots = EntityQueryEnumerator<ActiveWheelchairPilotComponent>();
         while (pilots.MoveNext(out var uid, out var active))
         {
-            if (!TryComp(uid, out BuckleComponent? buckle) ||
+            if (!TryComp(uid, out BuckleComponent? buckle) || 
+                buckle.BuckledTo == null ||
                 !HasComp<WheelchairComponent>(buckle.BuckledTo))
             {
-                RemovePilot((uid, active));
+                toRemove.Add((uid, active));
             }
+        }
+        
+        foreach (var pilot in toRemove)
+        {
+            RemCompDeferred<ActiveWheelchairPilotComponent>(pilot);
         }
     }
 
