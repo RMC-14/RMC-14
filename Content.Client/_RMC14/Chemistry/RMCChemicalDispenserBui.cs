@@ -114,7 +114,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
         var energy = dispenser.Energy;
         _window.EnergyBar.Value = energy.Float();
-        _window.EnergyLabel.Text = Loc.GetString("rmc-chem-dispenser-energy", ("amount", energy.Int()));
+        _window.EnergyLabel.Text = Loc.GetString("rmc-chem-dispenser-energy-amount", ("amount", energy.Int()));
 
         if (!_container.TryGetContainer(Owner, dispenser.ContainerSlotId, out var container) ||
             !container.ContainedEntities.TryFirstOrNull(out var contained))
