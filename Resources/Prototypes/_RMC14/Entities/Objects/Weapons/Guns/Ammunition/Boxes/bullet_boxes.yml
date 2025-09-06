@@ -14,6 +14,8 @@
       color: "#ff0000"
     - state: rifle_box_marking
       color: "#00ff00"
+    - state: rifle_box_generic
+      color: "#ffcb26"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
     - state: rifle_ammo_full_rounds_color
@@ -64,6 +66,8 @@
       color: "#7b8246"
     - state: rifle_box_marking
       color: "#7c4c1b"
+    - state: rifle_box_generic
+      color: "#ffcb26"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
     - state: rifle_ammo_full_rounds_color
@@ -96,6 +100,8 @@
       color: "#7b8246"
     - state: rifle_box_marking
       color: "#318b11"
+    - state: rifle_box_generic
+      color: "#ffcb26"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
     - state: rifle_ammo_full_rounds_color
@@ -128,6 +134,8 @@
       color: "#727e90"
     - state: rifle_box_marking
       color: "#7c4c1b"
+    - state: rifle_box_generic
+      color: "#ffcb26"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
     - state: rifle_ammo_full_rounds_color
@@ -160,6 +168,8 @@
       color: "#727e90"
     - state: rifle_box_marking
       color: "#318b11"
+    - state: rifle_box_generic
+      color: "#ffcb26"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
     - state: rifle_ammo_full_rounds_color
