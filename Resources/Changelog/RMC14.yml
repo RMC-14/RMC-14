@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: Fixed damage done from overdoses being too low.
-    type: Fix
-  - message: Fixed Tricordrazine's healing 0.5 asphyxiation instead of 0.25.
-    type: Fix
-  id: 1817
-  time: '2025-06-07T03:20:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6589
-- author: Arykh
-  changes:
   - message: Narcotics have been added! Mindbreaker Toxin, Space Drugs, and Psilocybin.
     type: Add
   - message: Antidepressants have been added! Methylphenidate, Citalopram, and Paroxetine.
@@ -4520,5 +4511,13 @@
   id: 2317
   time: '2025-09-06T09:16:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6856
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added meson functionality to the weapon specialist NVGs. Meson goggles
+      allow you to see a room's layout.
+    type: Add
+  id: 2318
+  time: '2025-09-06T09:22:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5387
 Name: RMC14
 Order: -1
