@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
@@ -19,13 +20,13 @@ public sealed partial class AcidBloodSplashComponent : Component
     public bool IsActivateSplashOnGib = true;
 
     [DataField]
-    public float CloseSplashRadius = (float)(1 / Math.Sqrt(Math.PI)); // a circle equal in area to a square with a side of 1 (single tile)
+    public float CloseSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(1);
 
     [DataField]
-    public float StandardSplashRadius = (float)(3 / Math.Sqrt(Math.PI)); // a circle equal in area to a square with a side of 3 (3x3 tiles)
+    public float StandardSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(3);
 
     [DataField]
-    public float GibSplashRadius = (float)(5 / Math.Sqrt(Math.PI)); // a circle equal in area to a square with a side of 5 (5x5 tiles)
+    public float GibSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(5);
 
     /// <summary>
     /// Probability of trigger acid splash after minimal damage check, may be increased
@@ -78,7 +79,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public TimeSpan NextSplashAvailable;
 
     [DataField]
-    public string BloodDecalSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
+    public EntProtoId BloodDecalSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
 
     [DataField]
     public SoundSpecifier AcidSplashSound = new SoundCollectionSpecifier("XenoAcidSizzle");
