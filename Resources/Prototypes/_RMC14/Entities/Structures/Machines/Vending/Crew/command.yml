@@ -903,7 +903,7 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCGunCaseRevolverRSh9
+      - id: RMCGunCaseRevolverRhino
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984

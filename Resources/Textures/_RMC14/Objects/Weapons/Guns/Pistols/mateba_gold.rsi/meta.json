@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/77c01da59725c0a9df11791d71243fb9a5736c25/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_righthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_righthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_lefthand_1.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/77c01da59725c0a9df11791d71243fb9a5736c25/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi, inhands by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
