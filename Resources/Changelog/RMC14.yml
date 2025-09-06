@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: Added Lexorin!
-    type: Add
-  - message: Dexalin and Dexalin Plus can now remove Lexorin!
-    type: Tweak
-  id: 1820
-  time: '2025-06-07T03:25:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6626
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Weed nodes will now have 5 health when they're first made and will get
-      11 health when they stop spreading.
-    type: Tweak
-  id: 1821
-  time: '2025-06-07T03:34:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6604
-- author: Arykh
-  changes:
   - message: Added Russian Red and Radiation First-Aid Kit.
     type: Add
   - message: Arithrazine's OD and passive damage was lower than intended.
@@ -4510,5 +4493,30 @@
   id: 2320
   time: '2025-09-06T11:14:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6288
+- author: Shromply
+  changes:
+  - message: Added CLF PVE roles.
+    type: Add
+  - message: Added CLF PVE clothing and utility racks.
+    type: Add
+  - message: Added the MAR50 locker for the CLF PVE gunner.
+    type: Add
+  id: 2321
+  time: '2025-09-06T11:25:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7710
+- author: noctyrnal
+  changes:
+  - message: Added the UNS Endeavour, a new shipmap for PVE to replace the Golden
+      Arrow.
+    type: Add
+  - message: PVE Sun Rider roles now have their correct skills.
+    type: Fix
+  - message: Fixed telecomms having a weird extra sprite ontop of the intended sprite.
+    type: Fix
+  - message: Overhead Pipes will now spritefade like other overhead props.
+    type: Add
+  id: 2322
+  time: '2025-09-06T11:24:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7773
 Name: RMC14
 Order: -1
