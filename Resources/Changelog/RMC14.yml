@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added Russian Red and Radiation First-Aid Kit.
-    type: Add
-  - message: Arithrazine's OD and passive damage was lower than intended.
-    type: Tweak
-  id: 1822
-  time: '2025-06-07T03:35:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6581
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed booze-o-mats and WEYA med vendors on the colony starting with full
@@ -4518,5 +4509,12 @@
   id: 2322
   time: '2025-09-06T11:24:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7773
+- author: Spaghetti
+  changes:
+  - message: Fixed AI Hermes console name.
+    type: Fix
+  id: 2323
+  time: '2025-09-06T11:57:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7793
 Name: RMC14
 Order: -1
