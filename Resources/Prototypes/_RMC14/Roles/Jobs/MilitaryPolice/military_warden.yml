@@ -81,3 +81,14 @@
 - type: playTimeTracker
   id: CMJobMilitaryWarden
   isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMW
+  name: Military Warden
+  description: Military Warden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: warden
