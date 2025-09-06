@@ -119,7 +119,7 @@
     contents:
     - id: CMHealthAnalyzer
     - id: CMTricordrazineAutoInjectorNoSkill
-#    - id: CMPainStopAutoInjectorNoSkill
+    - id: CMTramadolAutoInjectorNoSkill
     - id: CMInaprovalineAutoInjector
     - id: CMGauze10
     - id: CMOintment10
@@ -135,7 +135,7 @@
     - id: CMHealthAnalyzer
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
-    #    - id: CMPillCanisterTramadol # TODO RMC14
+    - id: CMPillCanisterTramadol
     - id: CMGauze10
     - id: CMBurnKit10
 #    - id: CMSplints5 # TODO RMC14
@@ -153,8 +153,8 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
-#    - id: CMOxycodoneAutoinjector # TODO RMC14
-#    - id: CMOxycodoneAutoinjector # TODO RMC14
+    - id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
 
 - type: entity
   parent: CMFirstAidKit
@@ -183,7 +183,8 @@
       amount: 2
     - id: CMKelotaneAutoInjector
       amount: 3
-#    - id: CMPainStopAutoInjectorNoSkill
+    - id: CMTramadolAutoInjectorNoSkill
+      amount: 1
 
 - type: entity
   parent: CMFirstAidKit

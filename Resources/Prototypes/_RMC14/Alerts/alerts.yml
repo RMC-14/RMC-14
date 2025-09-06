@@ -507,6 +507,27 @@
   clickEvent: !type:OpenTacMapAlertEvent
 
 - type: alert
+  id: HumanoidPainHealth
+  category: Health
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health0
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health1
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health2
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health3
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health4
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health5
+  minSeverity: 0
+  maxSeverity: 5
+  name: alerts-health-name
+  description: alerts-health-desc
+
+- type: alert
   id: RMCStamina
   category: Stamina
   icons:

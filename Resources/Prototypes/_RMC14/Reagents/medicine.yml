@@ -1,5 +1,4 @@
-﻿# TODO RMC14 other effects
-- type: reagent
+﻿- type: reagent
   parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   name: reagent-name-cmdylovene
@@ -14,7 +13,7 @@
       - !type:Antitoxic #TODO removes 0.125u toxin/s 0.13u?
         potency: 2
 
-# TODO RMC14 other effects
+# TODO add another alcohols to decrease
 - type: reagent
   parent: [ CMReagentMedicine, Ethylredoxrazine ]
   id: CMEthylredoxrazine
@@ -31,6 +30,40 @@
         key: Drunk
         time: 1.5
         type: Remove
+      - !type:GenericStatusEffect
+        key: Jitter
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: ForcedSleep
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Stutter
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: SlurredSpeech
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 1.5
+        type: Remove
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCEthanol
+          min: 0.75
+        reagent: RMCEthanol
+        amount: -0.75
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 0.75
+        reagent: Ethanol
+        amount: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -46,7 +79,7 @@
           groups:
             Toxin: 2.25
 
-# TODO RMC14 other effects
+# TODO RMC14 eye damage
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
@@ -173,8 +206,9 @@
       - !type:Oxygenating
         potency: 6
 
-# TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
+# TODO implement opiate receptor deficency
+# TODO CMEpinephrine should deal liver and brain damage over 20u
 - type: reagent
   parent: [ CMReagentMedicine, Epinephrine ]
   id: CMEpinephrine
@@ -188,6 +222,8 @@
     Medicine:
       metabolismRate: 0.2
       effects:
+      - !type:DecreasePain
+        strength: 15
       - !type:EqualHealthChange
         conditions:
         - !type:RecentlyDefibrillated
@@ -210,15 +246,23 @@
         damage:
           groups:
             Toxin: 0.38
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 10.5
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 20
         damage:
-          types:
-            Asphyxiation: 1.5
+          groups:
+            Airloss: 1.5
 
-# TODO RMC14 other effects (heart damage) (pain)
+# TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -232,6 +276,14 @@
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:GenericStatusEffect
+        key: PainAsphyxationDisabled
+        component: PainAsphyxationDisabled
+        time: 1
+        refresh: true
+        type: Add
+      - !type:DecreasePain
+        strength: 30
       - !type:HealthChange
         conditions:
         - !type:MobStateCondition
@@ -240,10 +292,6 @@
           types:
             Asphyxiation: -1
       - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-      - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 60
@@ -278,7 +326,6 @@
       - !type:Anticorrosive
         potency: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
   id: CMLeporazine
@@ -314,7 +361,6 @@
         type: Add
         refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Tricordrazine ]
   id: CMTricordrazine
@@ -351,9 +397,9 @@
       - !type:Neogenetic
         potency: 3
 
-# TODO RMC14 other effects
-# TODO RMC14 progressive eye healing
+# TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
+# TODO implement blindness and blurness separetly from eye damage
 - type: reagent
   parent: [ CMReagentMedicine, CMDylovene ]
   id: CMImidazoline
@@ -367,6 +413,7 @@
       metabolismRate: 0.1
       effects:
       - !type:ChemHealEyeDamage
+        probability: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -525,3 +572,48 @@
           conditions:
             - !type:ReagentThreshold
               min: 5
+
+- type: reagent
+  parent: [ CMReagentMedicine, CMTramadol ]
+  id: CMParacetamol
+  name: reagent-name-cmparacetamol
+  desc: reagent-desc-cmparacetamol
+  color: "#C855DC"
+  overdose: 60
+  criticalOverdose: 100
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:Painkilling
+        potency: 1
+
+- type: reagent
+  parent: [ CMReagentMedicine, CMTricordrazine ]
+  id: CMTramadol
+  name: reagent-name-cmtramadol
+  desc: reagent-desc-cmtramadol
+  color: "#d7c7e0"
+  overdose: 30
+  criticalOverdose: 50
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:Painkilling
+        potency: 2.5
+
+- type: reagent
+  parent: [ CMReagentMedicine, CMTramadol ]
+  id: CMOxycodone
+  name: reagent-name-cmoxycodone
+  desc: reagent-desc-cmoxycodone
+  color: "#1cc282"
+  overdose: 20
+  criticalOverdose: 30
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.05
+      effects:
+      - !type:Painkilling
+        potency: 4

@@ -140,10 +140,10 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
-#      - id: CMInjectorOxycodone
-#        points: 2
-#      - id: CMInjectorTramadol
-#        points: 1
+      - id: CMOxycodoneAutoInjector
+        points: 2
+      - id: CMTramadolAutoInjector
+        points: 1
       - id: CMTricordrazineAutoInjector
         points: 1
       - id: CMHealthAnalyzer

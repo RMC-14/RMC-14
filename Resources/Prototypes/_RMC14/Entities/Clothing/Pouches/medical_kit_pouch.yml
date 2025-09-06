@@ -147,7 +147,7 @@
     #    - id: CMSplints5 # TODO RMC14
     - id: CMTraumaKit10
     - id: CMBurnKit10
-    #    - id: CMOxycodoneAutoInjector # TODO RMC14
+    - id: CMOxycodoneAutoInjector
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMHealthAnalyzer

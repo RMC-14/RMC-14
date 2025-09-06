@@ -51,6 +51,7 @@
     allowed:
     - Stun
     - KnockedDown
+    - PainKnockOut
     - SlowedDown
     - Stutter
     - Electrocution
@@ -66,6 +67,7 @@
     - Flashed
     - Dazed
     - Blinded
+    - PainAsphyxationDisabled
     - Deaf
     - Unconscious
   - type: InteractionPopup
@@ -97,6 +99,125 @@
       Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
+  - type: SlowOnDamage # nullify from BaseMobSpecies
+    speedModifierThresholds:
+      0: 1
+  - type: Pain
+    painLevels:
+    - threshold: 0
+      levelEffects: []
+    - threshold: 20
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.79
+        sprintSpeedModifier: 0.67
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-mild-inner" ]
+        probability: 0.1
+    - threshold: 30
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.71
+        sprintSpeedModifier: 0.67
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-discomforting-inner" ]
+        probability: 0.1
+    - threshold: 40
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.57
+        sprintSpeedModifier: 0.42
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-moderate-inner" ]
+        probability: 0.1
+    - threshold: 60
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.5
+        sprintSpeedModifier: 0.35
+      - !type:TemporaryBlurryVision
+        blur: 2
+        time: 4
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 4
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-distressing-inner" ]
+        probability: 0.1
+      - !type:Emote
+        emote: PainGrimace
+        showInChat: true
+        probability: 0.033
+    - threshold: 75
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.45
+        sprintSpeedModifier: 0.31
+      - !type:TemporaryBlurryVision
+          blur: 2
+          time: 4
+      - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 4
+      - !type:GenericStatusEffect # substitution of do once in 13
+        key: PainKnockOut
+        component: PainKnockOut
+        probability: 0.01 # this is around 45% chance per minute 1-(1-0.01)^60
+        time: 6
+      - !type:HealthChange
+        damage:
+         types:
+            Asphyxiation: 0.1
+        conditions:
+        - !type:HasStatusEffect
+          key: PainAsphyxationDisabled
+          reversed: true
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-severe-inner" ]
+        probability: 0.1
+      - !type:Emote
+        emote: TroubleEyeOpen
+        showInChat: true
+        probability: 0.033
+    - threshold: 85
+      levelEffects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.45
+        sprintSpeedModifier: 0.31
+      - !type:GenericStatusEffect
+          key: Stutter
+          component: StutteringAccent
+          time: 4
+      - !type:GenericStatusEffect
+          key: PainKnockOut
+          component: PainKnockOut
+          time: 4
+      - !type:TemporaryBlurryVision
+          blur: 2
+          time: 4
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 0.5
+        conditions:
+        - !type:HasStatusEffect
+          key: PainAsphyxationDisabled
+          reversed: true
+      - !type:PopupMessage
+        type: Local
+        messages: [ "rmc-pain-horrible-inner" ]
+        probability: 0.1
+      - !type:Emote
+        emote: TroubleStanding
+        showInChat: true
+        probability: 0.033
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -228,6 +349,10 @@
       0: Alive
       150: Critical
       200: Dead
+    stateAlertDict:
+      Alive: HumanoidPainHealth
+      Critical: HumanCrit
+      Dead: HumanDead
   - type: MobStateActions
     actions:
       Critical:

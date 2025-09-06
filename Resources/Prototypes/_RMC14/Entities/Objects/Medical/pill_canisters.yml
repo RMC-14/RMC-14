@@ -279,4 +279,27 @@
   - type: IconLabel
     labelTextLocId: rmc-russianred-container-label-text
 
-# TODO RMC14 peridaxon, tramadol
+- type: entity
+  parent: CMPillCanister
+  id: CMPillCanisterTramadol
+  name: tramadol pill bottle
+  suffix: Tramadol, 16
+  components:
+  - type: Item
+    heldPrefix: 5 # TODO not sure this is correct
+  - type: Sprite
+    layers:
+    - state: pill_canister5
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CMPillTramadol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-tramadol-container-label-text
+
+# TODO RMC14 peridaxon
