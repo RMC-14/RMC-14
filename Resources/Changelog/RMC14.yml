@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: Narcotics have been added! Mindbreaker Toxin, Space Drugs, and Psilocybin.
-    type: Add
-  - message: Antidepressants have been added! Methylphenidate, Citalopram, and Paroxetine.
-    type: Add
-  - message: Dylovene can now remove Space Drugs and Mindbreaker Toxin.
-    type: Tweak
-  - message: Dylovene was missing it's damaging effects at the critical OD of 50u.
-    type: Tweak
-  - message: Dylovene can now treat patients that are high and seeing psychedelic
-      colors.
-    type: Tweak
-  id: 1818
-  time: '2025-06-07T03:21:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6567
-- author: Arykh
-  changes:
   - message: Added the "Holy texts of the High Explosive Fragmenting Anti-personnel
       hand grenade" bible.
     type: Add
@@ -4519,5 +4503,13 @@
   id: 2318
   time: '2025-09-06T09:22:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5387
+- author: N0lim
+  changes:
+  - message: Added acid blood to xeno. Damage and death causes it to spray. If you
+      are close enough, damage will be dealt depending on the type of xeno.
+    type: Add
+  id: 2319
+  time: '2025-09-06T10:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7413
 Name: RMC14
 Order: -1
