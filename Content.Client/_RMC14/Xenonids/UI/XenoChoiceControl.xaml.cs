@@ -60,7 +60,7 @@ public partial class XenoChoiceControl : Control
     public void SetHealth(float health)
     {
         Health.Value = health;
-        if (health < 0)
+        if (health <= 0)
             Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Red);
         else
             Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Gray);

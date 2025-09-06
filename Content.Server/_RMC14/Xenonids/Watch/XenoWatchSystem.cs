@@ -86,7 +86,10 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             if (TryComp<XenoComponent>(uid, out var comp))
             {
                 if (comp.Refresh)
-                    RaiseLocalEvent(uid, new WatchInfoUpdateEvent());
+                {
+                    var updateEvent = new WatchInfoUpdateEvent();
+                    RaiseLocalEvent(uid, ref updateEvent);
+                }
             }
         }
     }
