@@ -45,6 +45,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float LabelClickTolerance = 15f;
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly Font _font;
     private readonly Label? _tunnelInfoLabel;
@@ -72,6 +73,12 @@ public sealed partial class TacticalMapControl : TextureRect
     private Vector2i? _draggingLabel;
     private Vector2i? _labelDragStart;
     private Vector2? _currentDragPosition;
+
+    private TacticalMapSettingsManager? _settingsManager;
+    private EntityUid? _currentMapEntity;
+    private string? _currentMapName;
+
+    private Action<float, Vector2>? _viewUpdateCallback;
 
     public int LineLimit;
     public bool Drawing { get; set; }
@@ -112,6 +119,61 @@ public sealed partial class TacticalMapControl : TextureRect
         AddChild(_tunnelInfoLabel);
     }
 
+    public float GetCurrentZoomFactor()
+    {
+        return _zoomFactor;
+    }
+
+    public Vector2 GetCurrentPanOffset()
+    {
+        return _panOffset;
+    }
+
+    public void SetViewUpdateCallback(Action<float, Vector2> callback)
+    {
+        _viewUpdateCallback = callback;
+    }
+
+    private void NotifyViewChanged()
+    {
+        _viewUpdateCallback?.Invoke(_zoomFactor, _panOffset);
+    }
+
+    public void LoadViewSettings(float zoomFactor, Vector2 panOffset, EntityUid? mapEntity)
+    {
+        _currentMapEntity = mapEntity;
+        _zoomFactor = Math.Clamp(zoomFactor, MinZoom, MaxZoom);
+        _panOffset = panOffset;
+
+        ApplyViewSettings();
+        NotifyViewChanged();
+    }
+
+    public void SetCurrentMap(EntityUid? mapEntity)
+    {
+        _currentMapEntity = mapEntity;
+    }
+
+    public void SetCurrentMapName(string? mapName)
+    {
+        _currentMapName = mapName;
+    }
+
+    public void ApplyViewSettings()
+    {
+        if (Texture == null)
+            return;
+
+        Vector2 availableSize = new(PixelWidth, PixelHeight);
+        if (availableSize.X <= 0 || availableSize.Y <= 0)
+            return;
+
+        _zoomFactor = Math.Clamp(_zoomFactor, MinZoom, MaxZoom);
+
+        float maxPan = Math.Max(availableSize.X, availableSize.Y) * _zoomFactor * 0.5f;
+        _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
+    }
+
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
         if (grid.Comp.Colors.Count == 0)
@@ -138,6 +200,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
         Texture = Texture.LoadFromImage(image);
         _areaLabels = new Dictionary<Vector2i, string>(grid.Comp.Labels);
+
+        ApplyViewSettings();
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)
@@ -211,6 +275,7 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         _zoomFactor = 1.0f;
         _panOffset = Vector2.Zero;
+        NotifyViewChanged();
     }
 
     public Vector2i ConvertIndicesToLineCoordinates(Vector2i indices)
@@ -844,6 +909,7 @@ public sealed partial class TacticalMapControl : TextureRect
         _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
 
         _lastPanPosition = currentPixelPos;
+        NotifyViewChanged();
     }
 
     private void HandleDrawingMove(GUIMouseMoveEventArgs args)
@@ -913,6 +979,7 @@ public sealed partial class TacticalMapControl : TextureRect
             _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
         }
 
+        NotifyViewChanged();
         args.Handle();
     }
 
