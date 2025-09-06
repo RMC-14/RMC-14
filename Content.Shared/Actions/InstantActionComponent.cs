@@ -1,5 +1,7 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
+using Robust.Shared.Audio;
 
 namespace Content.Shared.Actions;
 
@@ -14,6 +16,16 @@ public sealed partial class InstantActionComponent : BaseActionComponent
     [DataField("event")]
     [NonSerialized]
     public InstantActionEvent? Event;
+
+    /// <summary>
+    ///     Icon representing this action in the UI.
+    /// </summary>
+    [DataField("icon")] public SpriteSpecifier? Icon;
+
+    /// <summary>
+    ///     Time interval between action uses.
+    /// </summary>
+    [DataField("useDelay")] public TimeSpan? UseDelay;
 }
 
 [Serializable, NetSerializable]
