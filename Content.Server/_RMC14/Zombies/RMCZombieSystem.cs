@@ -55,7 +55,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
                 }
             };
             zombieComponent.PassiveHealingCritMultiplier = 1.5f;
-            zombieComponent.ZombieMovementSpeedDebuff = 0.5f; // rnmc change - used to be 0.8
+            zombieComponent.ZombieMovementSpeedDebuff = 0.8f;
         };
 
         var accentType = "RMCZombie";
