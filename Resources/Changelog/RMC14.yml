@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed melee weapons not having 20 AP.
-    type: Fix
-  - message: Fixed the katana dealing less damage than intended.
-    type: Fix
-  id: 1811
-  time: '2025-06-07T02:54:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6551
 - author: Vermidia
   changes:
   - message: Fixed pressurized canisters allowing transfer from non-reagent dispensers
@@ -4512,5 +4503,15 @@
   id: 2311
   time: '2025-09-06T08:33:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7664
+- author: Vermidia
+  changes:
+  - message: Fixed attack rate and damage while devoured to be more accurate.
+    type: Fix
+  - message: You can no longer click in harm mode to attack while devoured. Instead
+      moving or clicking (out of harm mode) will attempt to attack the devourer.
+    type: Fix
+  id: 2312
+  time: '2025-09-06T08:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6321
 Name: RMC14
 Order: -1
