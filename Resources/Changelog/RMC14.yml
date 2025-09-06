@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Ramiris
-  changes:
-  - message: Added tents!
-    type: Add
-  - message: Allowed camo to be applied to 5 layers at once.
-    type: Tweak
-  id: 1813
-  time: '2025-06-07T02:56:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6559
 - author: J C Denton and DeFFoL
   changes:
   - message: ERT Shuttles are now in the game, includes Generic, PMC, SPP and TSE
@@ -4513,5 +4504,21 @@
   id: 2313
   time: '2025-09-06T08:47:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7350
+- author: Dygon
+  changes:
+  - message: The Dropship Part Fabricator can now print the AN/AAQ-178 Weapon Targeting
+      System, which can be installed in the dropship's electronic system slot. It
+      boosts weapon accuracy and reduces projectile travel time.
+    type: Add
+  - message: The Dropship Part Fabricator can now print the AN/AVD-60 LZ Detector.
+      Installing this device in the dropship enables pilots to watch the area around
+      the landing zones through the Dropship Camera Control Console.
+    type: Add
+  - message: The Dropship Part Fabricator can now print the AN/LEN-15 Spotlight, installing
+      this provides light around the dropship's cockpit.
+    type: Add
+  id: 2314
+  time: '2025-09-06T08:51:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7328
 Name: RMC14
 Order: -1
