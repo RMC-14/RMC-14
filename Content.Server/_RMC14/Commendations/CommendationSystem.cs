@@ -98,7 +98,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
 
         var commendation = new Commendation(giverName, receiverName, name, text, type, round);
         RoundCommendations.Add(commendation);
-        _commendation.CommendationAdded(new NetUserId(receiverId), commendation);
+        _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);
         _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
 
         try

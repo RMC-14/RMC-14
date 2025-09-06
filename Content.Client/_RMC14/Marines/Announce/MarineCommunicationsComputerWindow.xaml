@@ -29,6 +29,8 @@
             <cc:HSeparator Color="#4972A1" Margin="0 5" />
         </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
-        <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True" />
+        <Label Name="CharacterCount" Access="Public" />
+        <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True"
+                StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:MarineCommunicationsComputerWindow>

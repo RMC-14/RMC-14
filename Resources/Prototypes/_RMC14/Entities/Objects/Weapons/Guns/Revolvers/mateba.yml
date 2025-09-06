@@ -377,6 +377,14 @@
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
   parent: CMBulletBase

@@ -51,7 +51,7 @@ public abstract class SharedCMChatSystem : EntitySystem
     {
     }
 
-    public virtual void ChatMessageToOne(
+    public void ChatMessageToOne(
         string message,
         EntityUid target,
         ChatChannel channel = ChatChannel.Local,

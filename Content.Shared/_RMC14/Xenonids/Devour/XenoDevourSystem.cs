@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -102,8 +103,6 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, InteractUsingEvent>(OnXenoDevouredInteractWith);
         SubscribeLocalEvent<XenoDevourComponent, VentEnterAttemptEvent>(OnXenoDevouredVentAttempt);
 
-        SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
-        SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
     }
 
@@ -460,18 +459,6 @@ public sealed class XenoDevourSystem : EntitySystem
             args.Cancel();
             return;
         }
-    }
-
-    private void OnUsableWhileDevouredGetMeleeDamage(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeDamageEvent args)
-    {
-        if (ent.Comp.Damage != null && IsHeldByDevoured(ent))
-            args.Damage = new DamageSpecifier(ent.Comp.Damage);
-    }
-
-    private void OnUsableWhileDevouredGetMeleeAttackRate(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeAttackRateEvent args)
-    {
-        if (IsHeldByDevoured(ent))
-            args.Rate *= ent.Comp.AttackRateMultiplier;
     }
 
     private void OnUsableWhileDevouredGetArmorPiercing(Entity<UsableWhileDevouredComponent> ent, ref CMGetArmorPiercingEvent args)

@@ -518,10 +518,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
         if (_area.TryGetArea(GetCoordinates(args.Coordinates), out var area, out _) &&
             GetStructurePlasmaCost(args.StructureId) is { } baseCost)
         {
-            var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
             var cost = baseCost;
             if (area.Value.Comp.ResinConstructCount != 0 &&
                 !area.Value.Comp.Unweedable &&

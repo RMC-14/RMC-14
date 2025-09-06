@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
@@ -141,6 +142,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GotUnequippedHandEvent>(OnDualWieldingUnequippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
         SubscribeLocalEvent<GunDualWieldingComponent, GetWeaponAccuracyEvent>(OnDualWieldingGetWeaponAccuracy);
+
+        SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
     }
 
     /// <summary>
@@ -703,6 +706,11 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.AccuracyMultiplier += gun.Comp.AccuracyAddMult;
+    }
+
+    private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)

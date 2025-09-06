@@ -488,4 +488,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCChatSquadColorMode =
         CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
+        CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLagCompensationInteractionMarginTiles =
+        CVarDef.Create("rmc.lag_compensation_interaction_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
 }
