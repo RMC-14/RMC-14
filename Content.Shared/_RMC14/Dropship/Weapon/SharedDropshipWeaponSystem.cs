@@ -645,6 +645,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ev.SoundImpact,
             ImpactEffect = ev.ImpactEffect,
             Explosion = ev.Explosion,
+            Implosion = ammo.Comp.Implosion,
             Fire = ev.Fire,
             SoundEveryShots = ev.SoundEveryShots,
         };
