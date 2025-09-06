@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: ERT Shuttles now spawn on Thunderdrome map.
-    type: Tweak
-  id: 1830
-  time: '2025-06-08T01:57:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6645
 - author: Dutch-VanDerLinde
   changes:
   - message: Added fill visuals for shotgun shell pouch and loading rig.
@@ -4542,5 +4535,27 @@
   id: 2330
   time: '2025-09-06T21:38:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7810
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropping a fireman carry not dropping the person you are carrying.
+    type: Fix
+  - message: Fixed duplicating shells by manually chambering shotguns.
+    type: Fix
+  - message: Fixed showing ghosts the xeno version of the parasite name.
+    type: Fix
+  - message: Fixed the chatbox bouncing when a message is repeated.
+    type: Fix
+  - message: Fixed sequoia beers being free on the corporate liaison briefcase vendor.
+    type: Fix
+  - message: Fixed xeno roundstart corpses starting with their radios on.
+    type: Fix
+  - message: Fixed the new lizards screams not being mono and sounding like they are
+      playing from inside your skull.
+    type: Fix
+  - message: Removed mesons until it's fixed to not lag out your game.
+    type: Remove
+  id: 2331
+  time: '2025-09-06T23:06:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7814
 Name: RMC14
 Order: -1
