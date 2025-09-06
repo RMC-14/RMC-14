@@ -79,11 +79,11 @@
 
 - type: trackerMode
   id: SupervisorWeYaExecutive
-  job: CMCorporateExecutiveSupervisor
+  job: CMCorporateExecutiveSupervisorLegal
 
 - type: trackerMode
   id: SupervisorWeYaSpecialist
-  job: CMCorporateExecutiveSpecialist
+  job: CMCorporateExecutiveSpecialistLegal
 
 - type: trackerMode
   id: ProvostMarshal
