@@ -285,6 +285,7 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PatchPeaceRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -716,6 +717,7 @@
   - PatchWeYaRMCFury161
   - PatchTSERMC
   - PatchCECRMC
+  - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
   - HeadCowboyHatLightRMC
