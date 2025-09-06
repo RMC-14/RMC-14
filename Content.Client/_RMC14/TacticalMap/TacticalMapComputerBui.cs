@@ -6,7 +6,6 @@ using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -72,8 +71,9 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
                 Window.Wrapper.LoadMapSpecificSettings(settings, _currentMapName);
             }
         }
-        catch
+        catch (Exception ex)
         {
+            Logger.GetSawmill("tactical_map_settings").Error($"Failed to load tactical map settings for map '{_currentMapName}': {ex}");
         }
 
         Refresh();
@@ -105,8 +105,9 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
                 settingsManager.SaveSettings(currentSettings, _currentMapName);
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.GetSawmill("tactical_map_settings").Error($"Failed to save tactical map settings during disposal for map '{_currentMapName}': {ex}");
             }
         }
 

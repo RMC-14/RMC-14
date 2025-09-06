@@ -12,6 +12,8 @@ namespace Content.Client._RMC14.TacticalMap;
 [UsedImplicitly]
 public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
+    private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
+
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
     private string? _currentMapName;
@@ -57,8 +59,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
                 Window.Wrapper.LoadMapSpecificSettings(settings, _currentMapName);
             }
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.Error($"Failed to load tactical map user settings for map '{_currentMapName}': {ex}");
         }
 
         Refresh();
@@ -91,8 +94,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 
                 settingsManager.SaveSettings(currentSettings, _currentMapName);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.Error($"Failed to save tactical map user settings during disposal for map '{_currentMapName}': {ex}");
             }
         }
 
