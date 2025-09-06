@@ -52,7 +52,7 @@ public sealed class WheelchairSystem : EntitySystem
         _mover.SetRelay(buckle, ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        if (HasComp<ActionsContainerComponent>(ent))
+        if (HasComp<ActionContainerComponent>(ent))
         {
             _actions.AddAction(buckle, ent.Comp.BellAction);
         }
@@ -66,7 +66,7 @@ public sealed class WheelchairSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        if (!HasComp<ActionsContainerComponent>(ent) || !TryComp<ActionsComponent>(buckle, out var actions))
+        if (!HasComp<ActionContainerComponent>(ent) || !TryComp<ActionsComponent>(buckle, out var actions))
             return;
 
         foreach (var actionId in actions.Actions.ToArray())
