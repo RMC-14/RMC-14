@@ -29,9 +29,16 @@
         RMCSkillEngineer: 2
         RMCSkillEndurance: 1
         RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 - type: entity

@@ -17,6 +17,8 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
     private MarineAnnounceSystem? _marineAnnounce;
 
+    private bool _confirmingEvacuation;
+
     protected override void Open()
     {
         base.Open();
@@ -45,6 +47,30 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             computer.CanCreateEcho)
         {
             _window.EchoButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsEchoSquadMsg());
+        }
+
+        if (EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? communicationsEvac) &&
+            communicationsEvac.CanInitiateEvac)
+        {
+            _window.EvacuationButton.OnPressed += _ =>
+            {
+                if (_confirmingEvacuation)
+                {
+                    SendPredictedMessage(new MarineControlComputerToggleEvacuationMsg());
+                    _confirmingEvacuation = false;
+                }
+                else
+                {
+                    _confirmingEvacuation = true;
+                }
+
+                OnStateUpdate();
+            };
+            _window.EvacuationButton.Visible = true;
+        }
+        else
+        {
+            _window.EvacuationButton.Visible = false;
         }
 
         if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
@@ -93,6 +119,17 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
             computer.CanCreateEcho;
         _window.EchoSeparator.Visible = _window.EchoButton.Visible;
+
+        if (EntMan.TryGetComponent(Owner, out MarineControlComputerComponent? evaccomputer))
+        {
+            // TODO RMC14 estimated time until escape pod launch
+            if (_confirmingEvacuation)
+                _window.EvacuationButton.Text = "Confirm?";
+            else
+                _window.EvacuationButton.Text = evaccomputer.Evacuating ? "Cancel Evacuation" : "Initiate Evacuation";
+
+            _window.EvacuationButton.Disabled = !evaccomputer.CanEvacuate;
+        }
     }
 
     private void OnTextChanged(int textLength)

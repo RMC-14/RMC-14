@@ -56,3 +56,4 @@
   - type: XenoToggleChargingDamage
     sound:
       collection: WoodDestroy
+  - type: RMCMesonsNonviewable

@@ -70,6 +70,10 @@
       params:
         volume: -4
   - type: RMCHealthExaminable
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 25
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
@@ -382,6 +386,8 @@
       components:
       - Marine
   - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true

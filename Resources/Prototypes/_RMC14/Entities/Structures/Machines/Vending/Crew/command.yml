@@ -9,7 +9,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -110,7 +110,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -154,7 +154,7 @@
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchConstruction
-      #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
+      - id: RMCPouchDocument
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
@@ -238,7 +238,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -391,6 +391,8 @@
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
+      - id: RMCJumpsuitCOUniform
+      - id: RMCJumpsuitCOUniformGray
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
@@ -709,7 +711,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor

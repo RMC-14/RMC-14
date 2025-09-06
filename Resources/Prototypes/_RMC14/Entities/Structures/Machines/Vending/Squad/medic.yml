@@ -213,6 +213,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMHospitalCorpsman
+    - CMPVEHospitalCorpsman
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

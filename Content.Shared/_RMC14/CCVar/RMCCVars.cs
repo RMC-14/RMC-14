@@ -413,6 +413,13 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.overwatch_console_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
 
     /// <summary>
+    ///     If the amount of resin constructs divided by the amount of buildable tiles in an area is higher than this value, the
+    ///     plasma cost of new constructs in the area is increased.
+    /// </summary>
+    public static readonly CVarDef<float> RMCResinConstructionDensityCostIncreaseThreshold =
+        CVarDef.Create("rmc.resin_construction_density_cost_increase_threshold", 0.4f, CVar.REPLICATED | CVar.SERVER);
+
+    /// <summary>
     /// Whether this client uses alternate non-phobia inducing sprites
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
@@ -477,6 +484,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCChatRepeatHistory =
         CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);

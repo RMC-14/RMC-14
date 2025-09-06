@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Devour;
@@ -8,11 +8,8 @@ namespace Content.Shared._RMC14.Xenonids.Devour;
 public sealed partial class UsableWhileDevouredComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DamageSpecifier? Damage;
-
-    [DataField, AutoNetworkedField]
-    public float AttackRateMultiplier = 0.55f;
-
-    [DataField, AutoNetworkedField]
     public bool CanUnequip = false;
+
+    [DataField, AutoNetworkedField]
+    public float DamageMult = 0.625f;
 }
