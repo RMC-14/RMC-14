@@ -44,6 +44,7 @@
           Chambered: { state: obc_chambered }
   - type: RMCLoreExaminable
     content: rmc-lore-examniable-orbital-cannon
+  - type: RMCMesonsNonviewable
 
 - type: entity
   id: RMCOrbitalCannonFuel

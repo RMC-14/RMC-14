@@ -389,6 +389,8 @@
       components:
       - Marine
   - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true
