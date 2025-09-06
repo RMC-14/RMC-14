@@ -3,11 +3,12 @@
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHalcyonDynamicsLiaison
+  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
   spawnMenuRoleName: Halcyon Dynamics Liaison (Sorokyne Survivor)
+  icon: "RMCJobIconHalcyonExec"
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,7 +29,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -40,7 +41,7 @@
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
-    pocket2: RMCPouchDocument
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
   storage:
     back:
     - CMSheetMetal20
@@ -57,10 +58,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHalcyonDynamicsLiaison
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

@@ -156,6 +156,12 @@
   - type: Appearance
   - type: SolutionStorageFillable
     solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankFlamer
+
+- type: Tag
+  id: RMCTankFlamer
 
 - type: entity
   parent: RMCGunCaseBase

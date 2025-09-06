@@ -274,7 +274,8 @@ public sealed class XenoEggSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            RootEntity = true
         };
 
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);

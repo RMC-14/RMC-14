@@ -87,6 +87,7 @@
     id: RMCTileFireGreen
     extinguishInstantly: false
     patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: 3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666
@@ -222,3 +223,13 @@
   - type: RMCIgniteOnCollide
     maxStacks: 60
     intensity: 60
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireMiniMike
+  components:
+  - type: TileFire
+    duration: 20
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 25

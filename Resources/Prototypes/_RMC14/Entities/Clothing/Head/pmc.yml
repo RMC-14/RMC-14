@@ -47,6 +47,17 @@
 
 - type: entity
   parent: ArmorHelmetPMC
+  id: RMCArmorHelmetPMCTactical
+  name: tactical helmet
+  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. This configuration lacks the iconic ballistic mask popularized by Soldier of Fortune magazine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
   id: ArmorHelmetPMCCommando
   name: PMC M5X helmet
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.

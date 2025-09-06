@@ -30,6 +30,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 3
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -40,6 +41,8 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -48,10 +51,10 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: ce
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
 

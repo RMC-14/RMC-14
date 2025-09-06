@@ -3,7 +3,6 @@
   id: CMSurvivorLV624Engineer
   name: rmc-job-name-survivor-lv624-engineer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624Engineer
   startingGear: RMCGearSurvivorLV624Engineer
   spawnMenuRoleName: Engineer (LV624 Survivor)
   special:
@@ -27,6 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624Engineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
@@ -49,10 +49,6 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624Engineer
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

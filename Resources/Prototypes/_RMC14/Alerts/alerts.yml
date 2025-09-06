@@ -42,6 +42,12 @@
   description: Tracks a tunnel.
 
 - type: alert
+  parent: HiveTracker
+  id: HiveCoreTracker
+  name: Hive Core Tracker
+  description: Tracks the hive core.
+
+- type: alert
   id: ResinMarkerTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
@@ -453,6 +459,7 @@
   description: Tracks the Corporate Liaison.
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerPMCTeamLeader
   category: SquadTracker
   icons:
@@ -542,7 +549,7 @@
   description: Information of the area you are in.
   minSeverity: 0
   maxSeverity: 7
-  
+
 - type: alert
   id: RMCUnconscious
   icons:

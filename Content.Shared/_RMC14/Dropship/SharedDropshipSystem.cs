@@ -349,7 +349,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid? user,
         bool hijack = false,
         float? startupTime = null,
-        float? hyperspaceTime = null)
+        float? hyperspaceTime = null,
+        bool offset = false)
     {
         return false;
     }
@@ -465,7 +466,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
-        _marineAnnounce.AnnounceARES(actor, message);
+        _marineAnnounce.AnnounceARESStaging(actor, message);
 
         return true;
     }

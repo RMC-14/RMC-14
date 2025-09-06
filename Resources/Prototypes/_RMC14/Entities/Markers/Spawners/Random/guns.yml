@@ -293,9 +293,9 @@
     - RMCWeaponMar50LMG: RMCMagazineMar50LMG
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
-    - WeaponRifleM54C: CMMagazineRifleM54C
+    - RMCWeaponRifleM54C: CMMagazineRifleM54C
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
-    - CMWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
+    - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
 
 - type: entity
   parent: RMCSpawnerRandomGunSpecial

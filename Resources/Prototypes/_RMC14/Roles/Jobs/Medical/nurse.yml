@@ -26,6 +26,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 0
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
@@ -35,10 +36,10 @@
       prefix: cm-job-prefix-nurse
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: nurse
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
 
 - type: startingGear

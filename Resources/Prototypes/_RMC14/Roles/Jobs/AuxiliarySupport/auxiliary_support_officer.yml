@@ -42,6 +42,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -52,6 +53,7 @@
         RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPilot: 2
+        RMCSkillResearch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
@@ -64,10 +66,10 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: aso
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
 

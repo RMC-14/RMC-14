@@ -131,7 +131,7 @@
         points: 12
       - id: RMCCaseFlamer
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
@@ -300,7 +300,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
