@@ -160,9 +160,9 @@
   - type: DropshipAmmo
     travelTime: 2
     explosion:
-      total: 1500
-      slope: 40
-      max: 115
+      total: 905
+      slope: 15
+      max: 45
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
