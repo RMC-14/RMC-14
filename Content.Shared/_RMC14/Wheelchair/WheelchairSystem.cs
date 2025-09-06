@@ -47,36 +47,30 @@ public sealed class WheelchairSystem : EntitySystem
     private void OnStrapped(Entity<WheelchairComponent> ent, ref StrappedEvent args)
     {
         var buckle = args.Buckle;
-        EnsureComp<ActiveWheelchairPilotComponent>(buckle);
+        var pilot = EnsureComp<ActiveWheelchairPilotComponent>(buckle);
 
         _mover.SetRelay(buckle, ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        if (HasComp<ActionsContainerComponent>(ent))
+        if (ent.Comp.BellAction != null)
         {
-            _actions.AddAction(buckle, ent.Comp.BellAction);
+            pilot.BellActionEntity = _actions.AddAction(buckle, ent.Comp.BellAction);
         }
     }
 
     private void OnUnstrapped(Entity<WheelchairComponent> ent, ref UnstrappedEvent args)
     {
         var buckle = args.Buckle;
+        
+        if (TryComp<ActiveWheelchairPilotComponent>(buckle, out var pilot) && pilot.BellActionEntity != null)
+        {
+            _actions.RemoveAction(buckle, pilot.BellActionEntity.Value);
+        }
+        
         RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
         RemCompDeferred<RelayInputMoverComponent>(buckle);
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
-
-        if (!HasComp<ActionsContainerComponent>(ent) || !TryComp<ActionsComponent>(buckle, out var actions))
-            return;
-
-        foreach (var actionId in actions.Actions.ToArray())
-        {
-            if (TryComp<InstantActionComponent>(actionId, out var action) && action.Event is RingBellActionEvent)
-            {
-                _actions.RemoveAction(buckle.Owner, actionId);
-                QueueDel(actionId);
-            }
-        }
     }
 
     private void OnActivePilotPreventCollide(Entity<ActiveWheelchairPilotComponent> ent, ref PreventCollideEvent args)

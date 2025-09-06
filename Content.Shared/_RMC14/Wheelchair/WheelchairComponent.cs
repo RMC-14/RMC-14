@@ -12,7 +12,7 @@ public sealed partial class WheelchairComponent : Component
     public float SpeedMultiplier = 1.0f;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId BellAction = "ActionWheelchairBell";
+    public EntProtoId? BellAction;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier BellSound = new SoundPathSpecifier("/Audio/Items/desk_bell_ring.ogg");

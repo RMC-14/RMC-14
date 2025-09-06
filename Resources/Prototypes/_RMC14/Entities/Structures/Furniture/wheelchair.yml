@@ -83,6 +83,7 @@
   components:
   - type: Wheelchair
     speedMultiplier: 0.75
+    bellAction: ActionWheelchairBell
   - type: ContainerContainer
     containers:
       rmc-vehicle-pilot: !type:ContainerSlot
