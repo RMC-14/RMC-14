@@ -16,6 +16,9 @@
   name: dropship navigation computer
   description: A flight computer that can be used for autopilot or long-range flights.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Sprite
     state: console
   - type: DropshipNavigationComputer
@@ -70,6 +73,9 @@
   name: camera controls
   description: A computer to monitor cameras linked to the dropship.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Sprite
     state: consoleleft
 
@@ -79,6 +85,9 @@
   name: weapons controls
   description: A computer to manage equipment, weapons and simulations installed on the dropship.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Sprite
     state: consoleright
   - type: ActivatableUI
@@ -91,6 +100,7 @@
       enum.DropshipTerminalWeaponsUi.Key:
         type: DropshipWeaponsBui
   - type: DropshipTerminalWeapons
+  - type: TacticalMapComputer
   - type: RequiresSkill
     skills:
       RMCSkillPilot: 1

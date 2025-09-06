@@ -1365,6 +1365,13 @@ WeaponRifleSSG45: RMCWeaponRifleSSG45
 # 2025-08-07
 RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
 
+# 2025-08-12
+GasPipeHalf: RMCGasPipeHalf
+GasPipeStraight: RMCGasPipeStraight
+GasPipeBend: RMCGasPipeBend
+GasPipeTJunction: RMCGasPipeTJunction
+GasPipeFourway: RMCGasPipeFourway
+
 # 2025-08-17
 WeaponRifleM54C: RMCWeaponRifleM54C
 WeaponRifleM54CE2: RMCWeaponRifleM54CE2
@@ -1373,3 +1380,31 @@ WeaponRifleM54CMK1Unloaded: RMCWeaponRifleM54CMK1Unloaded
 WeaponRifleM54CMK1AP: RMCWeaponRifleM54CMK1AP
 WeaponRifleM54CStripped: RMCWeaponRifleM54CStripped
 WeaponRifleM59A: RMCWeaponRifleM59A
+
+# 2025-08-30
+WallInvisible: RMCWallInvisibleBulletPassible
+PottedPlant1: CMPottedPlant1
+PottedPlant2: CMPottedPlant2
+PottedPlant3: CMPottedPlant3
+PottedPlant4: CMPottedPlant4
+PottedPlant5: CMPottedPlant5
+PottedPlant6: CMPottedPlant6
+PottedPlant7: CMPottedPlant7
+PottedPlant8: CMPottedPlant8
+PottedPlant10: CMPottedPlant10
+PottedPlant11: CMPottedPlant11
+PottedPlant12: CMPottedPlant12
+PottedPlant13: CMPottedPlant13
+PottedPlant14: CMPottedPlant14
+PottedPlant15: CMPottedPlant15
+PottedPlant16: CMPottedPlant16
+PottedPlant17: CMPottedPlant17
+PottedPlant18: CMPottedPlant18
+PottedPlant19: CMPottedPlant19
+PottedPlant20: CMPottedPlant20
+PottedPlant21: CMPottedPlant21
+PottedPlant22: CMPottedPlant22
+PottedPlant23: CMPottedPlant23
+PottedPlant24: CMPottedPlant24
+Grille: RMCGrille
+GrilleBroken: RMCGrilleBroken
