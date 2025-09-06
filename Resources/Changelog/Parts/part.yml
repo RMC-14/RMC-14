@@ -1,0 +1,5 @@
+﻿author: DrSmugleaf
+changes:
+- type: Fix
+  message: Fixed wooden barricades taking no damage from a charger crusher slamming against them.
+
