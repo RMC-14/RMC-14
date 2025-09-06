@@ -67,31 +67,6 @@
   ## Security Alert Levels
   The ship has multiple alert levels, which can be changed in the C.I.C. They are as follows.
 
-
-  <Box>
-    [color=lightgreen][bold] GREEN ALERT [/bold]
-  </Box>
-
-
-  <Box>Green Alert is the normal operating state of the ship. [textlink="SOP" link="RMCMarineSOP"] applies, and non combatants have strict weapon restrictions. [bold]At this Alert level, you should focus on patrolling and just doing general security of the ship.[/bold] There are no known threats that need to be immediately addressed</Box>
-
-
-  <Box>
-    [color=lightblue][bold] BLUE ALERT [/bold]
-  </Box>
-
-
-  <Box>Blue alert is an elevated security level that implies a potential or unknown threat to the ship. This might include a death with no known cause, or the possibility of a mutiny. [bold]Weapon restrictions are slightly loosened on blue as outlined in [textlink="SOP" link="RMCMarineSOP"]. Blue alert also authorizes the use of riot equipment and longarms for the Military Police[/bold]</Box>
-
-
-  <Box>
-    [color=red][bold] RED ALERT [/bold]
-  </Box>
-
-
-  <Box>Red alert is a very elevated security level that is intended to convey a serious and known threat to the ship. This includes any hostile boarding, active shooters, and more. [bold]Weapon restrictions on red alert are much looser as outlined in [textlink="SOP" link="RMCMarineSOP"]. This also automatically opens all of the armories on the ship so that the crew may defend themselves with lethal force.[/bold]</Box>
-
-
   ## M.P Equipment
   Military police have a large assortment of specialized equipment provided to perform their duties. They are listed below, color coded to their alert restrictions for [color=#ff000d][bold]MP[/bold][/color]s.
 
