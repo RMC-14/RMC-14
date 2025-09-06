@@ -111,6 +111,7 @@
   - type: ParaDroppable
     dropScatter: 4
   - type: AnimationPlayer
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCCrateBase

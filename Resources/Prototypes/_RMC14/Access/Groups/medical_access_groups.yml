@@ -1,20 +1,36 @@
 ﻿- type: accessGroup
   id: CMCMO
+  parent: RMCBaseMedicalJob
+  name: Chief Medical Officer
   tags:
   - CMAccessCMO
   - CMAccessMedical
   - CMAccessResearch
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessChemistry
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand
 
 - type: accessGroup
   id: CMMedbay
+  parent: RMCBaseMedicalJob
+  name: Doctor
+  tags:
+  - CMAccessMedical
+  - CMAccessChemistry
+
+- type: accessGroup
+  id: Nurse
+  parent: RMCBaseMedicalJob
+  name: Nurse
   tags:
   - CMAccessMedical
   - CMAccessChemistry
 
 - type: accessGroup
   id: Researcher
+  parent: RMCBaseMedicalJob
+  name: Researcher
   tags:
   - CMAccessMedical
   - CMAccessResearch

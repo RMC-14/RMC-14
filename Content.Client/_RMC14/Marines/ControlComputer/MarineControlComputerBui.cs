@@ -21,6 +21,8 @@ public sealed class MarineControlComputerBui(EntityUid owner, Enum uiKey) : Boun
 
         _window.AlertButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerAlertLevelMsg());
 
+        _window.ShipAnnouncementButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerShipAnnouncementMsg());
+
         _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
 
         _window.EvacuationButton.OnPressed += _ =>
