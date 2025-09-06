@@ -17,7 +17,9 @@ using Robust.Client.Input;
 using Robust.Client.Placement;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Console;
 using Robust.Shared.Enums;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
@@ -27,6 +29,7 @@ using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using YamlDotNet.Core;
 using static System.StringComparison;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
@@ -50,6 +53,7 @@ public sealed class MappingState : GameplayStateBase
     [Dependency] private readonly IResourceCache _resources = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+
     private EntityMenuUIController _entityMenuController = default!;
 
     private DecalPlacementSystem _decal = default!;
@@ -68,6 +72,8 @@ public sealed class MappingState : GameplayStateBase
     private Control? _scrollTo;
     private bool _updatePlacement;
     private bool _updateEraseDecal;
+
+    private List<MapCoordinates> _measurementPoints = [];
 
     private MappingScreen Screen => (MappingScreen) UserInterfaceManager.ActiveScreen!;
     private MainViewport Viewport => UserInterfaceManager.ActiveScreen!.GetWidget<MainViewport>()!;
@@ -99,6 +105,7 @@ public sealed class MappingState : GameplayStateBase
         context.AddFunction(ContentKeyFunctions.MappingRemoveDecal);
         context.AddFunction(ContentKeyFunctions.MappingCancelEraseDecal);
         context.AddFunction(ContentKeyFunctions.MappingOpenContextMenu);
+        context.AddFunction(ContentKeyFunctions.MappingMeasure);
 
         Screen.DecalSystem = _decal;
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
@@ -114,6 +121,7 @@ public sealed class MappingState : GameplayStateBase
         Screen.EraseEntityButton.OnToggled += OnEraseEntityPressed;
         Screen.EraseDecalButton.OnToggled += OnEraseDecalPressed;
         _placement.PlacementChanged += OnPlacementChanged;
+        Screen.Measure.OnPressed += OnMeasurePressed;
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.MappingUnselect, new PointerInputCmdHandler(HandleMappingUnselect, outsidePrediction: true))
@@ -124,6 +132,7 @@ public sealed class MappingState : GameplayStateBase
             .Bind(ContentKeyFunctions.MappingRemoveDecal, new PointerInputCmdHandler(HandleEditorCancelPlace, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingCancelEraseDecal, new PointerInputCmdHandler(HandleCancelEraseDecal, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingOpenContextMenu, new PointerInputCmdHandler(HandleOpenContextMenu, outsidePrediction: true))
+            .Bind(ContentKeyFunctions.MappingMeasure, new PointerInputCmdHandler(HandleMeasure, outsidePrediction: true))
             .Register<MappingState>();
 
         _overlays.AddOverlay(new MappingOverlay(this));
@@ -168,6 +177,7 @@ public sealed class MappingState : GameplayStateBase
         Screen.Prototypes.CollapseToggled -= OnCollapseToggled;
         Screen.Pick.OnPressed -= OnPickPressed;
         Screen.Delete.OnPressed -= OnDeletePressed;
+        Screen.Measure.OnPressed -= OnMeasurePressed;
         Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
         Screen.EntityPlacementMode.OnItemSelected -= OnEntityPlacementSelected;
         Screen.EraseEntityButton.OnToggled -= OnEraseEntityPressed;
@@ -642,6 +652,14 @@ public sealed class MappingState : GameplayStateBase
             DisableDelete();
     }
 
+    private void OnMeasurePressed(ButtonEventArgs args)
+    {
+        if (args.Button.Pressed)
+            EnableMeasure();
+        else
+            DisableMeasure();
+    }
+
     private void OnEntityReplacePressed(ButtonToggledEventArgs args)
     {
         _placement.Replacement = args.Pressed;
@@ -733,6 +751,19 @@ public sealed class MappingState : GameplayStateBase
         DisableEraser();
     }
 
+    private void EnableMeasure()
+    {
+        Screen.UnPressActionsExcept(Screen.Measure);
+        State = CursorState.Measure;
+    }
+
+    private void DisableMeasure()
+    {
+        Screen.Measure.Pressed = false;
+        _measurementPoints.Clear();
+        State = CursorState.None;
+    }
+
     private bool HandleMappingUnselect(in PointerInputCmdArgs args)
     {
         if (Screen.Prototypes.Selected is not { Prototype.Prototype: DecalPrototype })
@@ -775,6 +806,52 @@ public sealed class MappingState : GameplayStateBase
     private bool HandleDisableDelete(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
     {
         DisableDelete();
+        return true;
+    }
+
+    private bool HandleMeasure(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
+    {
+        if (State != CursorState.Measure)
+            return false;
+
+        var worldPos = _transform.ToMapCoordinates(coords);
+
+        _measurementPoints.Add(worldPos);
+
+        if (_measurementPoints.Count != 2)
+            return true;
+
+        var pointA = _measurementPoints[0];
+        var pointB = _measurementPoints[1];
+
+        var distanceX = Math.Round(pointB.X - pointA.X);
+        var distanceY =  Math.Round(pointB.Y - pointA.Y);
+
+        switch (distanceX)
+        {
+            case > 0:
+                distanceX++;
+                break;
+            case < 0:
+                distanceX--;
+                break;
+        }
+        switch (distanceY)
+        {
+            case > 0:
+                distanceY++;
+                break;
+            case < 0:
+                distanceY--;
+                break;
+        }
+
+        var hypotenuse = Math.Round(Math.Sqrt((distanceX * distanceX) + (distanceY * distanceY)), 2);
+        var angle = Math.Round(Math.Atan(distanceY / distanceX),2);
+
+        _sawmill.Info($"({distanceX}, {distanceY}) distance (including the tiles) with a hypotenuse of {hypotenuse} and angle of {angle}.");
+        _measurementPoints.Clear();
+
         return true;
     }
 
@@ -931,6 +1008,7 @@ public sealed class MappingState : GameplayStateBase
     {
         None,
         Pick,
-        Delete
+        Delete,
+        Measure
     }
 }
