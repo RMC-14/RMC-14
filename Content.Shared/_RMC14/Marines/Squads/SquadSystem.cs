@@ -511,6 +511,36 @@ public sealed class SquadSystem : EntitySystem
         SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
+    public void RemoveSquad(EntityUid marine, ProtoId<JobPrototype>? job)
+    {
+        RemComp<SquadLeaderComponent>(marine);
+        if (!TryComp<SquadMemberComponent>(marine, out var member))
+            return;
+
+        var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
+        if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
+        {
+            oldSquad.Members.Remove(marine);
+
+            if (role != null)
+            {
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
+                }
+            }
+        }
+
+        RemComp<SquadMemberComponent>(marine);
+        if (oldSquadId != null && oldSquad != null)
+        {
+            var removeEv = new SquadMemberRemovedEvent((oldSquadId.Value, oldSquad), marine);
+            RaiseLocalEvent(marine, ref removeEv, true);
+        }
+    }
+
     public void UpdateSquadTitle(EntityUid marine)
     {
         if (TryComp<SquadNameOverrideComponent>(marine, out var overrideComp))

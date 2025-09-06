@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
@@ -25,6 +26,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
 
     private FrozenDictionary<string, AccessGroupPrototype> _accessGroup =
         FrozenDictionary<string, AccessGroupPrototype>.Empty;
@@ -77,6 +79,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        if (accessGroupPrototype.Name is { } accessName && TryComp(uid, out IdCardComponent? idCard))
+        {
+            idCard._jobTitle = accessName;
+            Dirty(uid.Value, idCard);
+            _metaData.SetEntityName(uid.Value, $"{idCard.FullName} ({accessName})");
+        }
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -106,10 +115,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         }
 
         idCard._jobTitle = "Civilian";
+        Dirty(uid.Value, idCard);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
-            _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner.Value).EntityName} (Civilian)");
+            _squad.RemoveSquad(idCard.OriginalOwner.Value, null);
+            _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
         }
 
         _adminLogger.Add(LogType.RMCIdModify,
