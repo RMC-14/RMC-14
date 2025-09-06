@@ -55,7 +55,7 @@
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN70
   name: Boots! Issue No.70.
-  description: The only official UNMC magazine, the headline reads “Marine 70, The Future of Warfare.” The article then goes on to detail the plans and implementation of Marine 70, a program designed to help modernize the UNMC for 2170.
+  description: The only official UNMC magazine, the headline reads “Marine 70, The Future of Warfare.” The article then goes on to detail the plans and implementation of Marine 70, a program designed to help modernize the UNMC for 2110.
 
 - type: entity
   parent: RMCMagazineBootsN160
