@@ -28,6 +28,7 @@ using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
+using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
@@ -135,6 +136,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
             before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)],
             after: [typeof(TackleSystem)]);
+        SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -346,19 +348,18 @@ public sealed partial class XenoSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_hive.FromSameHive(ent.Owner, args.User))
+        if (!CanTackleOtherXeno(args.User, ent, out var time))
             return;
 
-        if (!_hiveLeader.IsLeader(args.User, out var leader))
-            return;
+        _stun.TryParalyze(ent, time, true);
+    }
 
-        if (_hiveLeader.IsLeader(ent.Owner, out _))
-            return;
+    private void OnDisarmed(Entity<XenoComponent> ent, ref DisarmedEvent args)
+    {
+        if (CanTackleOtherXeno(args.Source, args.Target, out _))
+            args.PopupPrefix = "disarm-action-shove-";
 
-        if (HasComp<XenoEvolutionGranterComponent>(ent))
-            return;
-
-        _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
+        args.Handled = true;
     }
 
     private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
@@ -495,6 +496,25 @@ public sealed partial class XenoSystem : EntitySystem
         }
 
         return count;
+    }
+
+    public bool CanTackleOtherXeno(EntityUid sourceXeno, EntityUid targetXeno, out TimeSpan time)
+    {
+        time = TimeSpan.Zero;
+        if (!_hive.FromSameHive(targetXeno, sourceXeno))
+            return false;
+
+        if (!_hiveLeader.IsLeader(sourceXeno, out var leader))
+            return false;
+
+        if (_hiveLeader.IsLeader(targetXeno, out _))
+            return false;
+
+        if (HasComp<XenoEvolutionGranterComponent>(targetXeno))
+            return false;
+
+        time = leader.FriendlyStunTime;
+        return true;
     }
 
     public override void Update(float frameTime)
