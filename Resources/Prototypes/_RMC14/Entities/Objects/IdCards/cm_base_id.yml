@@ -131,6 +131,9 @@
           22: { state: "dogtag_22" }
           23: { state: "dogtag_23" }
           24: { state: "dogtag_24" }
+  - type: Clothing
+    slots:
+    - neck
 
 - type: entity
   id: RMCDogtagProp

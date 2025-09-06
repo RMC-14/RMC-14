@@ -47,9 +47,6 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 10
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet
@@ -65,6 +62,12 @@
       accuracyAddMult: -0.05
   - type: AttachablePrying
   - type: DeleteOnExplosion
+  - type: Tool
+    qualities:
+    - Cutting
+    speedModifier: 0.8
+    useSound:
+      path: /Audio/Items/wirecutter.ogg
 
 - type: entity
   name: M11 throwing knife
@@ -90,9 +93,6 @@
       types:
         Slash: 50
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 3
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
@@ -128,9 +128,6 @@
       types:
         Slash: 10
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 14
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
@@ -157,6 +154,8 @@
   - type: Item
     sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
     size: Large
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ceremonial-sabre
   - type: Tag
     tags:
     - RMCCeremonialSword
@@ -184,6 +183,68 @@
     damage:
       types:
         Slash: 22
+
+- type: entity
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
+  id: RMCStraightRazor
+  name: straight razor
+  description: The commandant's favorite weapon against marines who dare break the grooming standards.
+  components:
+  - type: Tag
+    tags:
+    - Knife
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/straight_razor.rsi
+    layers:
+    - state: razor-off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: razor}
+          False: {state: razor-off}
+  - type: Appearance
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/straight_razor.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 3
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 3
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 3
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/genhit3.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/genhit3.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/punchmiss.ogg
+      params:
+        variation: 0.125
+    activatedDamage:
+      types:
+        Slash: 15
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_RMC14/Weapons/flipblade.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Weapons/flipblade.ogg
+  - type: DisarmMalus
+    malus: 0.225
+  - type: DeleteOnExplosion
 
 - type: Tag
   id: RMCCeremonialSword

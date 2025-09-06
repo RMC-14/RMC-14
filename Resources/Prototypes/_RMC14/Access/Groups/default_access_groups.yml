@@ -1,0 +1,76 @@
+#base access groups
+#anything defined with protobaseaccess in the name will become a new "list" of accesses
+#all of their children will be listed inside them
+
+- type: accessGroup
+  id: RMCBaseHidden
+  name: protobaseaccess UNMC Hidden
+  faction: FactionMarine
+  accessGroup: UNMC Hidden
+  hidden: true
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseCommandJob
+  name: protobaseaccess UNMC Command
+  faction: FactionMarine
+  accessGroup: UNMC Command
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseAuxiliaryJob
+  name: protobaseaccess UNMC Auxiliary
+  faction: FactionMarine
+  accessGroup: UNMC Auxiliary
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseMiscellaneousJob
+  name: protobaseaccess UNMC Miscellaneous
+  faction: FactionMarine
+  accessGroup: UNMC Miscellaneous
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseMPJob
+  name: protobaseaccess UNMC Military Police
+  faction: FactionMarine
+  accessGroup: UNMC Military Police
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseEngineeringJob
+  name: protobaseaccess UNMC Engineering
+  faction: FactionMarine
+  accessGroup: UNMC Engineering
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseRequisitionsJob
+  name: protobaseaccess UNMC Requisitions
+  faction: FactionMarine
+  accessGroup: UNMC Requisitions
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseMedicalJob
+  name: protobaseaccess UNMC Medical
+  faction: FactionMarine
+  accessGroup: UNMC Medical
+  tags:
+  - RMCMarineDefaultAccess
+
+- type: accessGroup
+  id: RMCBaseMarinesJob
+  name: protobaseaccess UNMC Marines
+  faction: FactionMarine
+  accessGroup: UNMC Marines
+  tags:
+  - RMCMarineDefaultAccess

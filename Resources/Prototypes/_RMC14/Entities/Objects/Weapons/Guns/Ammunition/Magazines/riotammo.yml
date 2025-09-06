@@ -1,3 +1,5 @@
+## Rifle magazines
+
 - type: entity
   parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CRubber
@@ -17,7 +19,7 @@
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ceriot.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -48,7 +50,7 @@
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 25
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4sprriot.rsi
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -96,7 +98,7 @@
     proto: RMCCartridge10x20mmRubber
     capacity: 48
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63e.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63eriot.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -159,7 +161,7 @@
     proto: RMCCartridgePistol9mmRubber
     capacity: 12
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984riot.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -184,7 +186,7 @@
     proto: RMCCartridgePistol9mmRubber
     capacity: 19
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77riot.rsi
     layers:
     - state: base_ap
       map: ["enum.GunVisualLayers.Base"]

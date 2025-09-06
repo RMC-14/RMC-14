@@ -44,7 +44,7 @@
     - state: rifle_ammo_full_mags_color # "size"_ammo_full_color - Type Colour
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#8888ff"
-    - state: rifle_box_54 # "size"_box_"label" - Label Colour
+    - state: rifle_box_generic # "size"_box_"label" - Label Colour
       color: "#88ff88"
     - state: rifle_box_marking # "size"_box_marking - Type Colour
       color: "#8888ff"
@@ -776,6 +776,102 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleAK4047
     count: 10
+
+# SSG45
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleSSG45Empty
+  name: magazine box (SSG45 x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleSSG45Empty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#E7E7E7"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic
+      color: "#343636"
+    - state: rifle_box_marking
+      color: "#ffc000"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#E7E7E7"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#ffc000"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSSG45
+
+- type: entity
+  parent: RMCBoxMagazineRifleSSG45Empty
+  id: RMCBoxMagazineRifleSSG45
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleSSG45
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSSG45
+
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleSSG45APEmpty
+  name: magazine box (AP SSG45 x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleSSG45APEmpty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#E7E7E7"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_generic
+      color: "#343636"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#E7E7E7"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSSG45AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleSSG45APEmpty
+  id: RMCBoxMagazineRifleSSG45AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleSSG45AP
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleSSG45AP
 
 # -- SMG BOXES --
 

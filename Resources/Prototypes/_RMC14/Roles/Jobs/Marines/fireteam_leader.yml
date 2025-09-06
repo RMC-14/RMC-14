@@ -35,18 +35,20 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 3
     - type: CMVendorUser
+      id: CMFireteamLeader
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-fireteam-leader
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tl
 
 - type: startingGear

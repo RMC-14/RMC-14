@@ -3,7 +3,7 @@
   id: RMCSurvivorCommanderNewVaradero
   name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer
-  playTimeTracker: RMCJobSurvivorCommanderNewVaradero
+  playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankLieutenantColonel: []
   startingGear: RMCGearSurvivorCommanderNewVaradero
@@ -46,15 +46,15 @@
       - Civilian
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: xo
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCommanderNewVaradero
@@ -89,10 +89,6 @@
     job_id: RMCSurvivorCommanderNewVaradero
   - type: Sprite
     state: co_spawn
-
-- type: playTimeTracker
-  id: RMCJobSurvivorCommanderNewVaradero
-  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase

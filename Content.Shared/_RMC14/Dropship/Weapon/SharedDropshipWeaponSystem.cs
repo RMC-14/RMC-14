@@ -255,6 +255,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         MakeDropshipTarget(ent, abbreviation);
+        _physics.SetBodyType(ent, BodyType.Static);
     }
 
     private void OnActiveFlareExamined(Entity<DropshipTargetComponent> ent, ref ExaminedEvent args)
@@ -587,6 +588,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
+        _powerloader.SyncAppearance(Transform(weapon.Value).ParentUid);
         Dirty(ammo);
 
         _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
@@ -612,7 +614,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ammo.Comp.SoundMarker,
             SoundGround = ammo.Comp.SoundGround,
             SoundImpact = ammo.Comp.SoundImpact,
-            ImpactEffect = ammo.Comp.ImpactEffect,
+            ImpactEffects = ammo.Comp.ImpactEffects,
             Explosion = ammo.Comp.Explosion,
             Implosion = ammo.Comp.Implosion,
             Fire = ammo.Comp.Fire,
@@ -1140,8 +1142,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
-                if (flight.ImpactEffect != null)
-                    Spawn(flight.ImpactEffect, target, rotation: _random.NextAngle());
+                foreach (var effect in flight.ImpactEffects)
+                {
+                    Spawn(effect, target, rotation: _random.NextAngle());
+                }
 
                 if (flight.Damage != null)
                 {
