@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
@@ -31,6 +32,7 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -42,6 +44,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -53,14 +56,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
-    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -195,12 +199,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryComp<CMVendorUserComponent>(args.User, out var vendorUser) &&
             TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge))
         {
-            var ticks = (_gameTiming.CurTime - recharge.LastUpdate) / recharge.TimePerUpdate;
+            var ticks = (_timing.CurTime - recharge.LastUpdate) / recharge.TimePerUpdate;
             var points = (int)Math.Floor(ticks * recharge.PointsPerUpdate);
             if (points > 0)
             {
                 vendorUser.Points = Math.Min(recharge.MaxPoints, vendorUser.Points + points);
-                recharge.LastUpdate = _gameTiming.CurTime;
+                recharge.LastUpdate = _timing.CurTime;
                 DirtyEntity(args.User);
             }
         }
@@ -302,6 +306,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
+        _audio.PlayPredicted(vendor.Comp.Sound, vendor, args.Actor);
+        _rmcAnimation.TryFlick(vendor.Owner, vendor.Comp.AnimationSprite, vendor.Comp.BaseSprite);
+
         var comp = vendor.Comp;
         var sections = comp.Sections.Count;
         var actor = args.Actor;
@@ -414,10 +421,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             if (HasComp<RMCVendorSpecialistComponent>(vendor))
             {
                 var thisSpecVendor = Comp<RMCVendorSpecialistComponent>(vendor);
-                int vendCount = 0;
 
                 // If the vendor's own value is at or above the capacity, immediately return.
-                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount) && vendCount >= section.SharedSpecLimit)
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out var vendCount) && vendCount >= section.SharedSpecLimit)
                 {
                     // FIXME
                     ResetChoices();
@@ -428,7 +434,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 // Get every RMCVendorSpec
                 var specVendors = EntityQueryEnumerator<RMCVendorSpecialistComponent>();
                 // Used to verify newer vendors
-                int maxAmongVendors = 0;
+                var maxAmongVendors = 0;
 
                 if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
                     // So it doesn't matter what order the vendors are checked in
@@ -468,11 +474,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor.Owner, actor);
                     return;
                 }
-                else
-                {
-                    thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
-                }
 
+                thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
                 Dirty(vendor, thisSpecVendor);
             }
         }
