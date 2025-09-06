@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added a guidebook named "Xenonid Map Icons", it shows what each xenonid
-      icon represents, and goes over some of their colors.
-    type: Add
-  - message: Changed the Lurker's minimap blip, to match the icons of Runner and Ravager.
-    type: Tweak
-  id: 1807
-  time: '2025-06-07T02:28:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6582
 - author: Dutch-VanDerLinde
   changes:
   - message: Made all FORECON survivor icons visible to marines.
@@ -4507,5 +4497,15 @@
   id: 2307
   time: '2025-09-06T08:26:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7761
+- author: DummeHytteOst
+  changes:
+  - message: Parasite(s) should now correctly be translated into Child or Children
+      for xenonids, it will remain as parasite for non xenonids.
+    type: Fix
+  - message: renamed Carrier's "Throw parasite" ability to "Carrier's Bond".
+    type: Tweak
+  id: 2308
+  time: '2025-09-06T08:27:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7702
 Name: RMC14
 Order: -1
