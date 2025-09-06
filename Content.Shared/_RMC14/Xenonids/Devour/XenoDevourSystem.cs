@@ -1,14 +1,21 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Effects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -23,6 +30,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
@@ -45,6 +53,11 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entManager = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -72,8 +85,11 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, PickupAttemptEvent>(OnDevouredPickupAttempt);
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
-        SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
+        SubscribeLocalEvent<DevouredComponent, RMCCombatModeInteractOverrideUserEvent>(OnDevouredTryAttack);
         SubscribeLocalEvent<DevouredComponent, ShotAttemptedEvent>(OnDevouredShotAttempted);
+        SubscribeLocalEvent<DevouredComponent, MoveInputEvent>(OnDevouredMoveInput);
+
+        SubscribeLocalEvent<UsableWhileDevouredComponent, MeleeHitEvent>(UsuableByDevouredMeleeHit);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, ActivateInWorldEvent>(OnXenoActivate);
@@ -83,6 +99,8 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
         SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
+        SubscribeLocalEvent<XenoDevourComponent, InteractUsingEvent>(OnXenoDevouredInteractWith);
+        SubscribeLocalEvent<XenoDevourComponent, VentEnterAttemptEvent>(OnXenoDevouredVentAttempt);
 
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
@@ -168,8 +186,25 @@ public sealed class XenoDevourSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (!HasComp<UsableWhileDevouredComponent>(args.Target))
+        if (!HasComp<UsableWhileDevouredComponent>(args.Target) && (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
+            !HasComp<XenoDevourComponent>(container.Owner) || args.Target != container.Owner))
+        {
             args.Cancelled = true;
+            return;
+        }
+
+    }
+
+    private void OnXenoDevouredInteractWith(Entity<XenoDevourComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.DevourContainerId, out var container))
+            return;
+
+        if (!container.Contains(args.User) || !TryComp<DevouredComponent>(args.User, out var devoured))
+            return;
+
+        args.Handled = true;
+        DevouredHandleBreakout((args.User, devoured));
     }
 
     private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs
@@ -180,12 +215,6 @@ public sealed class XenoDevourSystem : EntitySystem
     private void OnUseAttempt(Entity<DevouredComponent> ent, ref UseAttemptEvent args)
     {
         if (!HasComp<UsableWhileDevouredComponent>(args.Used))
-            args.Cancel();
-    }
-
-    private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
-    {
-        if (!HasComp<UsableWhileDevouredComponent>(args.Weapon))
             args.Cancel();
     }
 
@@ -213,6 +242,80 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
             args.Cancel();
+    }
+
+    private void OnDevouredMoveInput(Entity<DevouredComponent> devoured, ref MoveInputEvent args)
+    {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        DevouredHandleBreakout(devoured);
+    }
+
+    private void OnDevouredTryAttack(Entity<DevouredComponent> devoured, ref RMCCombatModeInteractOverrideUserEvent args)
+    {
+        args.Handled = true;
+        args.CanInteract = true;
+    }
+
+    private void UsuableByDevouredMeleeHit(Entity<UsableWhileDevouredComponent> weapon, ref MeleeHitEvent args)
+    {
+        if (!TryComp<DevouredComponent>(args.User, out var devoured))
+            return;
+
+        args.Handled = true;
+        DevouredHandleBreakout((args.User, devoured));
+    }
+
+    private void DevouredHandleBreakout(Entity<DevouredComponent> devoured)
+    {
+        if (!_timing.IsFirstTimePredicted || _timing.CurTime < devoured.Comp.NextDevouredAttackTimeAllowed)
+            return;
+
+        if (HasComp<StunnedComponent>(devoured) || !_mobState.IsAlive(devoured))
+            return;
+
+        devoured.Comp.NextDevouredAttackTimeAllowed = _timing.CurTime + devoured.Comp.TimeBetweenStruggles;
+        Dirty(devoured);
+
+        //Sanity Check
+        if (!_container.TryGetContainingContainer((devoured, null), out var container) ||
+                !TryComp(container.Owner, out XenoDevourComponent? devour) ||
+                container.ID != devour.DevourContainerId)
+        {
+            return;
+        }
+
+        var weapon = _hands.GetActiveItem(devoured.Owner);
+
+        if (weapon == null || !TryComp<UsableWhileDevouredComponent>(weapon, out var usuable) ||
+            !TryComp<MeleeWeaponComponent>(weapon, out var melee))
+            return;
+
+        //Do all melee weapon logic with our stuff - note it does not take into account melee multipliers - it just uses the damage from the item directly
+        var weaponDamage = _meleeWeapon.GetDamage(weapon.Value, devoured) * usuable.DamageMult;
+
+        //Reset attack cooldown so we don't like, go crazy
+        melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
+        Dirty(weapon.Value, melee);
+
+        var damage = _damage.TryChangeDamage(container.Owner, weaponDamage, true, false, origin: devoured, tool: weapon);
+
+        _audio.PlayPredicted(melee.HitSound, container.Owner.ToCoordinates(), devoured);
+
+        if (!(damage?.GetTotal() > FixedPoint2.Zero))
+            return;
+
+        var filter = Filter.Pvs(container.Owner, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == devoured.Owner);
+        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { container.Owner }, filter);
+
+        //Logging
+        _adminLogger.Add(LogType.MeleeHit,
+                    LogImpact.Medium,
+                    $"{ToPrettyString(devoured):actor} attacked while devoured by {ToPrettyString(container.Owner):subject} with {weapon} and dealt {damage.GetTotal():damage} damage");
+
+        //TODO RMC14 Gib chance on very low health based on remaining health, maybe. It was removed but it's part of cap rework sooooo
+        //shrug
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
@@ -261,7 +364,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        var targetName = Identity.Name(xeno, EntityManager, xeno);
+        var targetName = Identity.Entity(target, EntityManager, xeno);
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
@@ -272,6 +375,7 @@ public sealed class XenoDevourSystem : EntitySystem
         var devoured = EnsureComp<DevouredComponent>(target);
         devoured.WarnAt = _timing.CurTime + xeno.Comp.WarnAfter;
         devoured.RegurgitateAt = _timing.CurTime + xeno.Comp.RegurgitateAfter;
+        devoured.NextDevouredAttackTimeAllowed = TimeSpan.Zero;
 
         _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", targetName)), xeno, xeno, PopupType.Medium);
         _popup.PopupEntity(Loc.GetString("cm-xeno-devour-target", ("user", xeno.Owner)), xeno, target, PopupType.MediumCaution);
@@ -282,7 +386,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", Identity.Entity(xeno, EntityManager)), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
         }
 
         var ev = new XenoDevouredEvent(target, xeno.Owner);
@@ -339,6 +443,23 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         args.Handled = true;
+    }
+
+    private void OnXenoDevouredVentAttempt(Entity<XenoDevourComponent> ent, ref VentEnterAttemptEvent args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.DevourContainerId, out var container))
+            return;
+
+        foreach (var devouredEnt in container.ContainedEntities)
+        {
+            if (HasComp<InfectStopOnDeathComponent>(devouredEnt))
+                continue;
+
+            _popup.PopupClient(Loc.GetString("rmc-vent-crawling-devoured"), ent, ent, PopupType.SmallCaution);
+
+            args.Cancel();
+            return;
+        }
     }
 
     private void OnUsableWhileDevouredGetMeleeDamage(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeDamageEvent args)

@@ -94,3 +94,10 @@
   cost: 2
   equipment:
     head: RMCHeadBeanieGray
+
+- type: loadout
+  id: UNMCHeadsetRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHeadUNMCHeadset

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: RMCContainerBase
   name: cargo container
@@ -25,10 +25,26 @@
   - type: Clickable
   - type: Occluder
     boundingBox: "-0.5,-0.5,0.5,1.5"
-  - type: DeleteOnExplosion
   - type: XenoToggleChargingDamage
     stageLoss: 4
     destroy: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ImmuneToUnarmed 
+  - type: ExplosionResistance
+    damageCoefficient: 2 # takes 2x explosion damage
+  - type: ProjectileDamageReceived
+    multiplier: 0.2 # takes 80% less projectile damage
+  - type: RMCWallExplosionDeletable
 
 # Large
 

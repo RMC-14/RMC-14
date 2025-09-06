@@ -7,6 +7,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
@@ -140,6 +141,8 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+  - type: VentCrawler
+    ventCrawlIcon: drone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -209,6 +212,8 @@
     fruitFeedingMultiplier: 0.5
   - type: XenoResinSurge
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: gardener
 
 - type: entity
   parent: CMXenoDroneBase
@@ -296,3 +301,5 @@
   - type: XenoAcid
   - type: XenoSalveVisuals
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: healer

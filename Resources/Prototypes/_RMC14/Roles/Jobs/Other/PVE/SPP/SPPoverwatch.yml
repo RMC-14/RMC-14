@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - SO
+  - Rifleman
   spawnMenuRoleName: SPP Platoon Commander (PVE)
   special:
   - !type:AddComponentSpecial
@@ -33,12 +34,20 @@
         RMCSkillEndurance: 1
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-overwatch
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 - type: entity
