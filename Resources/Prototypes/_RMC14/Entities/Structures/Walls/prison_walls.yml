@@ -13,6 +13,9 @@
     state: metal
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
 
 - type: entity
@@ -29,6 +32,9 @@
     state: rwall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -45,6 +51,9 @@
     state: hwall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -61,4 +70,7 @@
     state: bone_resin
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: bone_resin
