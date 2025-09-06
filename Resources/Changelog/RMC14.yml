@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the WEYA mug, accessible through the Liaison's Automated Storage
-      Briefcase.
-    type: Add
-  id: 1802
-  time: '2025-06-05T01:21:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6592
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed hive clusters being able to be placed on unweedable surfaces, like
@@ -4514,5 +4506,12 @@
   id: 2302
   time: '2025-09-06T01:43:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7760
+- author: yagwog
+  changes:
+  - message: Wheelchairs
+    type: Add
+  id: 2303
+  time: '2025-09-06T07:52:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6939
 Name: RMC14
 Order: -1
