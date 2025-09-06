@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Resin traps now have weeds as part of their sprite, making them more
-      visible and easier to target.
-    type: Tweak
-  - message: Xeno acid effects now have their hitbox reduced to match the size of
-      fire tiles, meaning you'll only get hit if a larger portion of your sprite clips
-      into the acid.
-    type: Tweak
-  - message: Acid traps no longer apply or reapply their paralyze effect when you
-      are already downed.
-    type: Fix
-  id: 1826
-  time: '2025-06-07T10:02:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6640
 - author: Vermidia
   changes:
   - message: Fixed light armors having better explosion protection than medium. Their
@@ -4559,5 +4544,12 @@
   id: 2326
   time: '2025-09-06T12:09:41.838484+00:00'
   url: null
+- author: MetalSage
+  changes:
+  - message: Fixed the amount of energy in the chemical dispenser
+    type: Add
+  id: 2327
+  time: '2025-09-06T12:56:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7747
 Name: RMC14
 Order: -1
