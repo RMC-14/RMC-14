@@ -11,6 +11,12 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared.Localizations;
+using Content.Shared._RMC14.Medal;
+using Content.Shared._RMC14.CCVar;
+using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
+using Robust.Client.GameObjects;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.RMCPlaytimeStats;
 
@@ -19,6 +25,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 {
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     
     private readonly Color _altColor = Color.FromHex("#292B38");
     private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
@@ -27,14 +34,111 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     private bool _useAltColor;
     private Button? _selectedButton;
 
+    private TimeSpan _bronzeTime;
+    private TimeSpan _silverTime;
+    private TimeSpan _goldTime;
+    private TimeSpan _platinumTime;
+    private TimeSpan _rubyTime;
+    private TimeSpan _emeraldTime;
+    private TimeSpan _amethystTime;
+    private TimeSpan _prismaticTime;
+
     public RMCPlaytimeStatsWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        PopulatePlaytimeHeader();
-        PopulatePlaytimeData();
+        LoadMedalTimes();
         PopulateDepartmentButtons();
+        ShowGeneralTab();
+    }
+
+    private void LoadMedalTimes()
+    {
+        _bronzeTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeBronzeMedalTimeHours));
+        _silverTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeSilverMedalTimeHours));
+        _goldTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeGoldMedalTimeHours));
+        _platinumTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimePlatinumMedalTimeHours));
+        _rubyTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeRubyMedalTimeHours));
+        _emeraldTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeEmeraldMedalTimeHours));
+        _amethystTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeAmethystMedalTimeHours));
+        _prismaticTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimePrismaticMedalTimeHours));
+    }
+
+    private RMCPlaytimeMedalType? GetMedalType(TimeSpan playtime)
+    {
+        if (playtime >= _prismaticTime)
+            return RMCPlaytimeMedalType.Prismatic;
+        else if (playtime >= _amethystTime)
+            return RMCPlaytimeMedalType.Amethyst;
+        else if (playtime >= _rubyTime)
+            return RMCPlaytimeMedalType.Ruby;
+        else if (playtime >= _emeraldTime)
+            return RMCPlaytimeMedalType.Emerald;
+        else if (playtime >= _platinumTime)
+            return RMCPlaytimeMedalType.Platinum;
+        else if (playtime >= _goldTime)
+            return RMCPlaytimeMedalType.Gold;
+        else if (playtime >= _silverTime)
+            return RMCPlaytimeMedalType.Silver;
+        else if (playtime >= _bronzeTime)
+            return RMCPlaytimeMedalType.Bronze;
+        
+        return null;
+    }
+
+    private IEnumerable<RMCPlaytimeMedalType> GetMedalTypesDescending(RMCPlaytimeMedalType start)
+    {
+        for (var type = start; type >= RMCPlaytimeMedalType.Bronze; type--)
+        {
+            yield return type;
+        }
+    }
+
+    private SpriteSpecifier.Rsi? GetMedalIcon(string? departmentId, TimeSpan playtime, string jobId)
+    {
+        if (!_prototypeManager.TryIndex<JobPrototype>(jobId, out var job) || job.Medals == null)
+            return null;
+
+        var medalType = GetMedalType(playtime);
+        if (medalType == null)
+            return null;
+
+        if (departmentId == "CMXeno")
+        {
+            var iconName = medalType switch
+            {
+                RMCPlaytimeMedalType.Bronze => "hudxenoupgrade2-ui",
+                RMCPlaytimeMedalType.Silver => "hudxenoupgrade3-ui",
+                RMCPlaytimeMedalType.Gold => "hudxenoupgrade4-ui",
+                _ => "hudxenoupgrade5-ui"
+            };
+
+            return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), iconName);
+        }
+
+        foreach (var type in GetMedalTypesDescending(medalType.Value))
+        {
+            if (job.Medals.TryGetValue(type, out var medalId) &&
+                _prototypeManager.TryIndex(medalId, out EntityPrototype? medalProto) &&
+                medalProto.TryGetComponent<SpriteComponent>(out var sprite))
+            {
+                foreach (var layer in sprite.AllLayers)
+                {
+                    var rsi = layer.Rsi ?? layer.ActualRsi ?? sprite.BaseRSI;
+                    if (rsi == null || !rsi.TryGetState(layer.RsiState, out var state))
+                        continue;
+
+                    var stateName = state.StateId.Name;
+                    if (string.IsNullOrEmpty(stateName))
+                        continue;
+
+                    return new SpriteSpecifier.Rsi(rsi.Path, stateName);
+                }
+            }
+        }
+
+        return null;
     }
 
     private void PopulateDepartmentButtons()
@@ -74,8 +178,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             Text = Loc.GetString("ui-playtime-general-tab"),
             HorizontalExpand = true,
             ToggleMode = true,
-            Pressed = true
+            Pressed = true,
+            Name = "GeneralTabButton"
         };
+
         generalButton.OnPressed += _ => ShowGeneralTab();
         DepartmentButtons.AddChild(generalButton);
         _selectedButton = generalButton;
@@ -93,34 +199,14 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                     Text = Loc.GetString(dept.Name),
                     HorizontalExpand = true,
                     ToggleMode = true,
-                    ToolTip = Loc.GetString(dept.Name)
+                    ToolTip = Loc.GetString(dept.Name),
+                    Name = dept.ID
                 };
                 
                 button.OnPressed += _ => ShowDepartmentTab(dept, roles);
                 DepartmentButtons.AddChild(button);
             }
         }
-    }
-
-    private void ShowGeneralTab()
-    {
-        if (_selectedButton != null)
-        {
-            _selectedButton.Pressed = false;
-        }
-
-        foreach (var child in DepartmentButtons.Children)
-        {
-            if (child is Button button && button.Text == Loc.GetString("ui-playtime-general-tab"))
-            {
-                button.Pressed = true;
-                _selectedButton = button;
-                break;
-            }
-        }
-
-        GeneralTab.Visible = true;
-        DepartmentContent.Visible = false;
     }
 
     private void ShowDepartmentTab(DepartmentPrototype dept, List<(JobPrototype Job, TimeSpan Time)> roles)
@@ -130,10 +216,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             _selectedButton.Pressed = false;
         }
 
-        var deptName = Loc.GetString(dept.Name);
         foreach (var child in DepartmentButtons.Children)
         {
-            if (child is Button button && button.Text == deptName)
+            if (child is Button button && button.Name == dept.ID)
             {
                 button.Pressed = true;
                 _selectedButton = button;
@@ -141,7 +226,6 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             }
         }
 
-        GeneralTab.Visible = false;
         DepartmentContent.RemoveAllChildren();
 
         var content = new BoxContainer
@@ -154,6 +238,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
         var deptTotalTime = roles.Sum(r => r.Time.Ticks);
         var deptTotalTimeSpan = new TimeSpan(deptTotalTime);
+        var deptName = Loc.GetString(dept.Name);
         var deptTotalLabel = new Label
         {
             Text = Loc.GetString("ui-playtime-department-total",
@@ -189,7 +274,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             var entry = new RMCPlaytimeStatsEntry(
                 Loc.GetString(job.Name),
                 playtime,
-                new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor));
+                new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
+                GetMedalIcon(dept.ID, playtime, job.ID));
+                
             rolesList.AddChild(entry);
             _useAltColor ^= true;
         }
@@ -200,39 +287,88 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         DepartmentContent.Visible = true;
     }
 
-    private void PopulatePlaytimeData()
+    private void ShowGeneralTab()
     {
-        var rolePlaytimes = _jobRequirementsManager.FetchPlaytimeByRoles();
-        var overallPlaytime = TimeSpan.Zero;
-        var hasAnyPlaytime = false;
-
-        RolesPlaytimeList.RemoveAllChildren();
-        PopulatePlaytimeHeader();
-
-        var rolesWithPlaytime = rolePlaytimes
-            .OrderBy(kvp => Loc.GetString(kvp.Key))
-            .ToList();
-
-        _useAltColor = false;
-        foreach (var rolePlaytime in rolesWithPlaytime)
+        if (_selectedButton != null)
         {
-            var role = rolePlaytime.Key;
-            var playtime = rolePlaytime.Value;
-            
-            overallPlaytime += playtime;
-            hasAnyPlaytime = true;
-            
+            _selectedButton.Pressed = false;
+        }
+
+        foreach (var child in DepartmentButtons.Children)
+        {
+            if (child is Button button && button.Name == "GeneralTabButton")
+            {
+                button.Pressed = true;
+                _selectedButton = button;
+                break;
+            }
+        }
+
+        DepartmentContent.RemoveAllChildren();
+        var rolePlaytimes = _jobRequirementsManager.FetchPlaytimeJobIdByRoles();
+
+        var content = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            VerticalExpand = true,
+            Margin = new Thickness(0, 5, 0, 0)
+        };
+
+        var totalTime = rolePlaytimes.Sum(r => r.Value.Ticks);
+        var overallLabel = new Label
+        {
+            Text = Loc.GetString("ui-playtime-overall", ("time", new TimeSpan(totalTime))),
+            Margin = new Thickness(0, 0, 0, 5)
+        };
+
+        content.AddChild(overallLabel);
+        content.AddChild(new HSeparator { Margin = new Thickness(0, 5, 0, 5) });
+
+        var scrollContainer = new ScrollContainer
+        {
+            HorizontalExpand = true,
+            VerticalExpand = true
+        };
+
+        var rolesList = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical
+        };
+
+        var header = new RMCPlaytimeStatsHeader();
+        header.OnHeaderClicked += (header, direction) =>
+            HeaderClicked(header, direction, rolesList);
+
+        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_altColor);
+
+        rolesList.AddChild(header);
+        rolesList.AddChild(new HSeparator());
+        _useAltColor = false;
+
+        foreach (var kvp in rolePlaytimes.OrderBy(r => Loc.GetString(r.Key)))
+        {
+            if (!_prototypeManager.TryIndex<JobPrototype>(kvp.Key, out var job))
+                continue;
+
+            var dept = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
+                .Where(d => d.Roles.Contains(job.ID))
+                .FirstOrDefault();
+
             var entry = new RMCPlaytimeStatsEntry(
-                Loc.GetString(role), 
-                playtime,
-                new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor));
-            RolesPlaytimeList.AddChild(entry);
+                job.LocalizedName,
+                kvp.Value,
+                new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
+                GetMedalIcon(dept?.ID, kvp.Value, kvp.Key));
+                
+            rolesList.AddChild(entry);
             _useAltColor ^= true;
         }
 
-        OverallPlaytimeLabel.Text = hasAnyPlaytime 
-            ? ContentLocalizationManager.FormatPlaytime(overallPlaytime)
-            : Loc.GetString("ui-playtime-no-data");
+        scrollContainer.AddChild(rolesList);
+        content.AddChild(scrollContainer);
+        DepartmentContent.AddChild(content);
+        DepartmentContent.Visible = true;
     }
 
     private void HeaderClicked(RMCPlaytimeStatsHeader.Header header, 
@@ -244,6 +380,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             case RMCPlaytimeStatsHeader.Header.Role:
                 SortByRole(direction, targetContainer);
                 break;
+
             case RMCPlaytimeStatsHeader.Header.Playtime:
                 SortByPlaytime(direction, targetContainer);
                 break;
@@ -256,7 +393,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         var entries = container.Children.OfType<RMCPlaytimeStatsEntry>().ToList();
 
         container.RemoveAllChildren();
-        if (header != null) container.AddChild(header);
+
+        if (header != null) 
+            container.AddChild(header);
+
         container.AddChild(new HSeparator());
 
         var sortedEntries = (direction == RMCPlaytimeStatsHeader.SortDirection.Ascending)
@@ -279,7 +419,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         var entries = container.Children.OfType<RMCPlaytimeStatsEntry>().ToList();
 
         container.RemoveAllChildren();
-        if (header != null) container.AddChild(header);
+
+        if (header != null)
+            container.AddChild(header);
+
         container.AddChild(new HSeparator());
 
         var sortedEntries = (direction == RMCPlaytimeStatsHeader.SortDirection.Ascending)
@@ -294,14 +437,5 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             container.AddChild(entry);
             _useAltColor ^= true;
         }
-    }
-
-    private void PopulatePlaytimeHeader()
-    {
-        var header = new RMCPlaytimeStatsHeader();
-        header.OnHeaderClicked += (header, direction) => 
-            HeaderClicked(header, direction, RolesPlaytimeList);
-        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_altColor);
-        RolesPlaytimeList.AddChild(header);
     }
 }

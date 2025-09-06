@@ -4,6 +4,13 @@
     <BoxContainer Orientation="Horizontal"
                   HorizontalExpand="True"
                   SeparationOverride="4">
+       <PanelContainer MinSize="48 0" MaxSize="48 0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+           <TextureRect Name="IconTexture"
+                        Visible="False"
+                        Stretch="KeepAspectCentered"
+                        SetSize="40 40"
+                        Margin="0"/>
+       </PanelContainer>
         <Label Name="RoleLabel"
                SizeFlagsStretchRatio="3"
                HorizontalExpand="True"

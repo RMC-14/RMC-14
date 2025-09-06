@@ -11,17 +11,6 @@
         </ScrollContainer>
         <customControls:HSeparator VerticalExpand="True" Margin="5,0,5,0" />
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5,0,0,0">
-            <BoxContainer Name="GeneralTab" Orientation="Vertical" Margin="0,5,0,0">
-                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                    <Label Text="{Loc ui-playtime-overall-base}" />
-                    <Label Name="OverallPlaytimeLabel" HorizontalAlignment="Right" Margin="5,0,0,0"/>
-                </BoxContainer>
-                <customControls:HSeparator Margin="0,5,0,5"/>
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Orientation="Vertical" Name="RolesPlaytimeList">
-                    </BoxContainer>
-                </ScrollContainer>
-            </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Name="DepartmentContent" />
         </BoxContainer>
     </BoxContainer>
