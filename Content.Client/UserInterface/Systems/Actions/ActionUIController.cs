@@ -92,7 +92,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
     private void OnScreenLoad()
     {
-       LoadGui();
+        LoadGui();
     }
 
     private void OnScreenUnload()
@@ -458,16 +458,60 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         }
 
         if (updateSlots)
+        {
             _container?.SetActionData(_actionsSystem, _actions.ToArray());
+            NotifyPositionChanges();
+        }
+    }
+
+    private bool ValidateActionState()
+    {
+        if (_actionsSystem == null || _playerManager.LocalEntity is not { } user)
+            return false;
+
+        var currentActions = _actionsSystem.GetActions(user).Select(a => a.Owner).ToHashSet();
+        var uiActions = _actions.Where(a => a != null).ToHashSet();
+
+        foreach (var uiAction in uiActions)
+        {
+            if (uiAction != null && !currentActions.Contains(uiAction.Value))
+            {
+                Log.Warning($"ActionUIController: UI contains stale action: {EntityManager.ToPrettyString(uiAction.Value)}");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void RecoverActionState()
+    {
+        if (_actionsSystem == null || _playerManager.LocalEntity is not { } user)
+            return;
+
+        Log.Info("ActionUIController: Recovering action state from system");
+
+        var currentActions = _actionsSystem.GetActions(user).ToList();
+
+        _actions.Clear();
+        foreach (var action in currentActions)
+        {
+            _actions.Add(action.Owner);
+        }
+
+        _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        NotifyPositionChanges();
     }
 
     private void DragAction()
     {
-        if (_menuDragHelper.Dragged is not {Action: {} action} dragged)
+        if (_menuDragHelper.Dragged is not { Action: { } action } dragged)
         {
             _menuDragHelper.EndDrag();
             return;
         }
+
+        Log.Debug($"ActionUIController: Processing drag action for {EntityManager.ToPrettyString(action)}");
 
         EntityUid? swapAction = null;
         var currentlyHovered = UIManager.MouseGetControl(_input.MouseScreenPosition);
@@ -475,13 +519,29 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         {
             swapAction = button.Action;
             SetAction(button, action, false);
+            Log.Debug($"ActionUIController: Swapping action to slot, displaced action: {(swapAction?.ToString() ?? "none")}");
         }
 
         if (dragged.Parent is ActionButtonContainer)
+        {
             SetAction(dragged, swapAction, false);
+            Log.Debug($"ActionUIController: Set dragged button to: {(swapAction?.ToString() ?? "empty")}");
+        }
 
         if (_actionsSystem != null)
+        {
             _container?.SetActionData(_actionsSystem, _actions.ToArray());
+
+            if (ValidateActionState())
+            {
+                NotifyPositionChanges();
+            }
+            else
+            {
+                Log.Warning("ActionUIController: State validation failed after drag, attempting recovery");
+                RecoverActionState();
+            }
+        }
 
         _menuDragHelper.EndDrag();
     }
@@ -693,6 +753,46 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         _container.ActionUnpressed += OnActionUnpressed;
     }
 
+    private void NotifyPositionChanges()
+    {
+        if (_actionsSystem == null)
+            return;
+
+        var assignments = new List<SlotAssignment>();
+        for (var i = 0; i < _actions.Count; i++)
+        {
+            if (_actions[i] is { } actionId)
+            {
+                assignments.Add(new SlotAssignment(0, (byte)i, actionId));
+            }
+        }
+
+        Log.Debug($"ActionUIController: Notifying position changes - {assignments.Count} assignments");
+
+        if (_playerManager.LocalEntity is { } user)
+        {
+            var currentActions = _actionsSystem.GetActions(user).Select(a => a.Owner).ToHashSet();
+            var validAssignments = assignments.Where(a => currentActions.Contains(a.ActionId)).ToList();
+
+            if (validAssignments.Count != assignments.Count)
+            {
+                Log.Warning($"ActionUIController: Filtered {assignments.Count} assignments down to {validAssignments.Count} valid ones");
+                assignments = validAssignments;
+
+                _actions.Clear();
+                foreach (var assignment in validAssignments.OrderBy(a => a.Slot))
+                {
+                    while (_actions.Count <= assignment.Slot)
+                        _actions.Add(null);
+                    _actions[assignment.Slot] = assignment.ActionId;
+                }
+                _container?.SetActionData(_actionsSystem, _actions.ToArray());
+            }
+        }
+
+        _actionsSystem.UpdateCurrentAssignments(assignments);
+    }
+
     private void ClearActions()
     {
         _container?.ClearActionData();
@@ -704,12 +804,20 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
 
         _actions.Clear();
-        foreach (var assign in assignments)
+
+        var sortedAssignments = assignments.OrderBy(a => a.Slot).ToList();
+
+        foreach (var assign in sortedAssignments)
         {
-            _actions.Add(assign.ActionId);
+            while (_actions.Count <= assign.Slot)
+            {
+                _actions.Add(null);
+            }
+            _actions[assign.Slot] = assign.ActionId;
         }
 
         _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        NotifyPositionChanges();
     }
 
     public void RemoveActionContainer()
@@ -736,7 +844,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     public override void FrameUpdate(FrameEventArgs args)
     {
         _menuDragHelper.Update(args.DeltaSeconds);
-        if (_window is {UpdateNeeded: true})
+        if (_window is { UpdateNeeded: true })
             SearchAndDisplay();
     }
 
@@ -771,6 +879,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             if (!_actions.Contains(action))
                 _actions.Add(action);
         }
+
+        NotifyPositionChanges();
     }
 
     /// <summary>
@@ -878,5 +988,18 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
         handOverlay.IconOverride = null;
         handOverlay.EntityOverride = null;
+    }
+
+    public List<SlotAssignment> GetCurrentAssignments()
+    {
+        var assignments = new List<SlotAssignment>();
+        for (var i = 0; i < _actions.Count; i++)
+        {
+            if (_actions[i] is { } actionId)
+            {
+                assignments.Add(new SlotAssignment(0, (byte)i, actionId));
+            }
+        }
+        return assignments;
     }
 }

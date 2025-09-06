@@ -1,18 +1,16 @@
-﻿using Content.Client.Actions;
+using Content.Client.Actions;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
 namespace Content.Client.Commands;
 
-// Disabled until sandoxing issues are resolved. In the meantime, if you want to create an acttions preset, just disable
-// sandboxing and uncomment this code (and the SaveActionAssignments() function).
-/*
 [AnyCommand]
 public sealed class SaveActionsCommand : IConsoleCommand
 {
     public string Command => "saveacts";
     public string Description => "Saves the current action toolbar assignments to a file";
     public string Help => $"Usage: {Command} <user resource path>";
+
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
@@ -31,7 +29,6 @@ public sealed class SaveActionsCommand : IConsoleCommand
         }
     }
 }
-*/
 
 [AnyCommand]
 public sealed class LoadActionsCommand : LocalizedCommands
@@ -57,6 +54,33 @@ public sealed class LoadActionsCommand : LocalizedCommands
         catch
         {
             shell.WriteError(LocalizationManager.GetString($"cmd-{Command}-error"));
+        }
+    }
+}
+
+[AnyCommand]
+public sealed class LoadActionPositionsCommand : IConsoleCommand
+{
+    public string Command => "loadactpos";
+    public string Description => "Loads only the positions of existing actions from a file";
+    public string Help => $"Usage: {Command} <user resource path>";
+
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        if (args.Length != 1)
+        {
+            shell.WriteLine(Help);
+            return;
+        }
+
+        try
+        {
+            EntitySystem.Get<ActionsSystem>().LoadActionPositions(args[0], true);
+            shell.WriteLine("Loaded action positions");
+        }
+        catch
+        {
+            shell.WriteLine("Failed to load action positions");
         }
     }
 }

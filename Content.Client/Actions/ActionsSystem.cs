@@ -27,13 +27,12 @@ namespace Content.Client.Actions
     [UsedImplicitly]
     public sealed class ActionsSystem : SharedActionsSystem
     {
-        public delegate void OnActionReplaced(EntityUid actionId);
-
         [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IResourceManager _resources = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
+        [Dependency] private readonly ActionHotbarSystem _hotbarSystem = default!;
 
         public event Action<EntityUid>? OnActionAdded;
         public event Action<EntityUid>? OnActionRemoved;
@@ -42,9 +41,13 @@ namespace Content.Client.Actions
         public event Action? UnlinkActions;
         public event Action? ClearAssignments;
         public event Action<List<SlotAssignment>>? AssignSlot;
+        public event Action<List<SlotAssignment>>? PositionsChanged;
 
         private readonly List<EntityUid> _removed = new();
         private readonly List<Entity<ActionComponent>> _added = new();
+
+        private List<Entity<ActionComponent>>? _cachedClientActions;
+        private bool _clientActionsCacheDirty = true;
 
         public static readonly EntProtoId MappingEntityAction = "BaseMappingEntityAction";
 
@@ -62,6 +65,20 @@ namespace Content.Client.Actions
             SubscribeLocalEvent<WorldTargetActionComponent, ActionTargetAttemptEvent>(OnWorldTargetAttempt);
         }
 
+        private void OnPositionsChanged(List<SlotAssignment> assignments)
+        {
+            PositionsChanged?.Invoke(assignments);
+        }
+
+        private void OnClearAssignments()
+        {
+            ClearAssignments?.Invoke();
+        }
+
+        private void OnAssignSlot(List<SlotAssignment> assignments)
+        {
+            AssignSlot?.Invoke(assignments);
+        }
 
         private void OnActionAutoHandleState(Entity<ActionComponent> ent, ref AfterAutoHandleStateEvent args)
         {
@@ -137,11 +154,17 @@ namespace Content.Client.Actions
             return priorityA - priorityB;
         }
 
+        private void InvalidateClientActionsCache()
+        {
+            _clientActionsCacheDirty = true;
+        }
+
         protected override void ActionAdded(Entity<ActionsComponent> performer, Entity<ActionComponent> action)
         {
             if (_playerManager.LocalEntity != performer.Owner)
                 return;
 
+            InvalidateClientActionsCache();
             OnActionAdded?.Invoke(action);
             ActionsUpdated?.Invoke();
         }
@@ -151,6 +174,7 @@ namespace Content.Client.Actions
             if (_playerManager.LocalEntity != performer.Owner)
                 return;
 
+            InvalidateClientActionsCache();
             OnActionRemoved?.Invoke(action);
             ActionsUpdated?.Invoke();
         }
@@ -160,21 +184,40 @@ namespace Content.Client.Actions
             if (_playerManager.LocalEntity is not { } user)
                 return Enumerable.Empty<Entity<ActionComponent>>();
 
-            return GetActions(user);
+            if (!_clientActionsCacheDirty && _cachedClientActions != null)
+                return _cachedClientActions;
+
+            var actions = GetActions(user).ToList();
+            _cachedClientActions = actions;
+            _clientActionsCacheDirty = false;
+            return actions;
         }
 
         private void OnPlayerAttached(EntityUid uid, ActionsComponent component, LocalPlayerAttachedEvent args)
         {
+            _hotbarSystem.PositionsChanged += OnPositionsChanged;
+            _hotbarSystem.ClearAssignments += OnClearAssignments;
+            _hotbarSystem.AssignSlot += OnAssignSlot;
+
+            _hotbarSystem.OnPlayerAttached();
+
             LinkAllActions(component);
         }
 
         private void OnPlayerDetached(EntityUid uid, ActionsComponent component, LocalPlayerDetachedEvent? args = null)
         {
+            _hotbarSystem.PositionsChanged -= OnPositionsChanged;
+            _hotbarSystem.ClearAssignments -= OnClearAssignments;
+            _hotbarSystem.AssignSlot -= OnAssignSlot;
+
+            _hotbarSystem.OnPlayerDetached();
+
             UnlinkAllActions();
         }
 
         public void UnlinkAllActions()
         {
+            InvalidateClientActionsCache();
             UnlinkActions?.Invoke();
         }
 
@@ -374,10 +417,44 @@ namespace Content.Client.Actions
             args.FoundTarget = true;
         }
 
+        public void UpdateCurrentAssignments(List<SlotAssignment> assignments)
+        {
+            _hotbarSystem.UpdateCurrentAssignments(assignments);
+        }
+
+        public void ManualSaveHotbar()
+        {
+            _hotbarSystem.ManualSaveHotbar();
+        }
+
+        public void ManualLoadHotbar()
+        {
+            _hotbarSystem.ManualLoadHotbar();
+        }
+
+        public void SetAutoSaveEnabled(bool enabled)
+        {
+            _hotbarSystem.SetAutoSaveEnabled(enabled);
+        }
+
+        public List<SlotAssignment> GetCurrentAssignments()
+        {
+            return _hotbarSystem.GetCurrentAssignments();
+        }
+
         public void SetAssignments(List<SlotAssignment> actions)
         {
-            ClearAssignments?.Invoke();
-            AssignSlot?.Invoke(actions);
+            _hotbarSystem.SetAssignments(actions);
+        }
+
+        public void SaveActionAssignments(string path)
+        {
+            _hotbarSystem.SaveActionAssignments(path);
+        }
+
+        public void LoadActionPositions(string path, bool userData = true)
+        {
+            _hotbarSystem.LoadActionPositions(path, userData);
         }
 
         public record struct SlotAssignment(byte Hotbar, byte Slot, EntityUid ActionId);
