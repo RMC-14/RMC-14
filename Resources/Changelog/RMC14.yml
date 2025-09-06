@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Made all FORECON survivor icons visible to marines.
-    type: Tweak
-  id: 1808
-  time: '2025-06-07T02:29:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6535
-- author: Dygon
-  changes:
-  - message: The M3-G4 Grenadier Armor now protects against front-facing leap attacks,
-      stunning the attacker.
-    type: Add
-  id: 1809
-  time: '2025-06-07T02:47:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6597
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the burrowed larva cooldown. You now need to be dead for atleast
-      2.5 minutes to take a burrowed larva.
-    type: Add
-  id: 1810
-  time: '2025-06-07T02:48:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6557
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed melee weapons not having 20 AP.
     type: Fix
   - message: Fixed the katana dealing less damage than intended.
@@ -4507,5 +4484,33 @@
   id: 2308
   time: '2025-09-06T08:27:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7702
+- author: Shromply
+  changes:
+  - message: Gave the SPP and PMC PVE roles powerloader skill.
+    type: Tweak
+  - message: Gave the SPP and PMC PVE roles smartgun skill.
+    type: Tweak
+  - message: Gave the SPP and PMC PVE roles the abillity to use special weapons.
+    type: Tweak
+  id: 2309
+  time: '2025-09-06T08:34:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7756
+- author: Binbagg
+  changes:
+  - message: Xenonid tunnels are now more visible
+    type: Tweak
+  id: 2310
+  time: '2025-09-06T08:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7741
+- author: blueDev2
+  changes:
+  - message: Fixed leaping parasites colliding with the resin door they start under.
+    type: Fix
+  - message: Fixed parasites not becoming visible over doors during leap doafters.
+      This makes them able to be hit by bullets and melee attacks.
+    type: Fix
+  id: 2311
+  time: '2025-09-06T08:33:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7664
 Name: RMC14
 Order: -1
