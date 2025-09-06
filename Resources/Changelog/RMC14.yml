@@ -4518,9 +4518,6 @@
     type: Fix
   - message: Fixed Kutjevo Refinery lacking landing zone turrets from some angles.
     type: Fix
-  - message: Fixed chemical dispensers on the Almayer having an unintentionally high
-      amount of maximum chemicals and recharge rate.
-    type: Fix
   - message: Fixed being able to print infinite patches as command roles.
     type: Fix
   - message: Fixed being able to get CMP armor, helmet, and beret as any command role.
