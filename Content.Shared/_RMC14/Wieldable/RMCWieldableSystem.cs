@@ -133,19 +133,15 @@ public sealed class RMCWieldableSystem : EntitySystem
     private void OnItemWielded(Entity<WieldableSpeedModifiersComponent> wieldable, ref ContainerGettingRemovedAttemptEvent args)
     {
         if (!args.Cancelled || !TryComp(wieldable.Owner, out TransformComponent? xform) ||
-            !xform.ParentUid.Valid ||
-            !TryComp(xform.ParentUid, out HandsComponent? hands))
+                !xform.ParentUid.Valid ||
+                !TryComp(xform.ParentUid, out HandsComponent? hands))
         {
             return;
         }
-        foreach (var name in hands.Hands.Keys)
+
+        if (TryComp(args.EntityUid, out UnremoveableComponent? unremoveable))
         {
-            if (hands.ActiveHandId == name)
-                continue;
-            if (name != null && wieldable.Owner.ToString() != name)
-            {
-                _wieldable.UnwieldAll(xform.ParentUid, force: true);
-            }
+            _wieldable.UnwieldAll(xform.ParentUid, force: true);
         }
     }
 
