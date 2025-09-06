@@ -39,6 +39,7 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorSecurity
   equipment:
     head: RMCArmorHelmetSecurity
@@ -50,7 +51,6 @@
     id: CMIDCardColonistSecurity
     back: CMSatchelSecuritySurvivorFill
     ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchMagazine
 
 - type: entity
