@@ -597,7 +597,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
             return;
 
-        var ev = new DropshipWeaponShotEvent(ammo.Comp.TargetSpread,
+        var ev = new DropshipWeaponShotEvent(
+            ammo.Comp.TargetSpread,
             ammo.Comp.BulletSpread,
             ammo.Comp.TravelTime,
             ammo.Comp.RoundsPerShot,
@@ -609,10 +610,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.SoundMarker,
             ammo.Comp.SoundGround,
             ammo.Comp.SoundImpact,
-            ammo.Comp.ImpactEffect,
+            ammo.Comp.ImpactEffects,
             ammo.Comp.Explosion,
+            ammo.Comp.Implosion,
             ammo.Comp.Fire,
-            ammo.Comp.SoundEveryShots);
+            ammo.Comp.SoundEveryShots
+        );
         RaiseLocalEvent(dropship, ref ev);
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
@@ -643,7 +646,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ev.SoundMarker,
             SoundGround = ev.SoundGround,
             SoundImpact = ev.SoundImpact,
-            ImpactEffect = ev.ImpactEffect,
+            ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
             Implosion = ammo.Comp.Implosion,
             Fire = ev.Fire,
@@ -1461,7 +1464,8 @@ public record struct DropshipWeaponShotEvent(float Spread,
     SoundSpecifier? SoundMarker,
     SoundSpecifier? SoundGround,
     SoundSpecifier? SoundImpact,
-    EntProtoId? ImpactEffect,
+    List<EntProtoId> ImpactEffect,
     RMCExplosion? Explosion,
+    RMCImplosion? Implosion,
     RMCFire? Fire,
     int SoundEveryShots);
