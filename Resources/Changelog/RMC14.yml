@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: AlexisMoonlight
-  changes:
-  - message: Added armylathe and casings for a future Ordnance Technician.
-    type: Add
-  id: 1816
-  time: '2025-06-07T03:10:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6569
 - author: Arykh
   changes:
   - message: Fixed damage done from overdoses being too low.
@@ -4520,5 +4513,12 @@
   id: 2316
   time: '2025-09-06T09:13:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7571
+- author: Vermidia
+  changes:
+  - message: Fixed the scout spec's custom battle rifle having burst.
+    type: Fix
+  id: 2317
+  time: '2025-09-06T09:16:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6856
 Name: RMC14
 Order: -1
