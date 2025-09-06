@@ -342,7 +342,7 @@
       - id: RMCSynthResetKey
         points: 10
       - id: RMCVisorWelding
-        points: 5 
+        points: 5
 
 # Commanding Officer #
 
@@ -390,6 +390,8 @@
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
+      - id: RMCJumpsuitCOUniform
+      - id: RMCJumpsuitCOUniformGray
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
