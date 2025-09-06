@@ -49,6 +49,15 @@ reagent-desc-cmclonexadone = Advanced cryogenic medicine made from cryoxadone. T
 reagent-name-rmcrussianred = Russian Red
 reagent-desc-rmcrussianred = An emergency radiation treatment. The list of potential side effects include retinal damage and unconsciousness.
 
+reagent-name-cmparacetamol = Paracetamol
+reagent-desc-cmparacetamol = Also known as Tylenol, this is a moderate long lasting painkiller that has been commonly available since 1950. Paracetamol is capable of both analgesic and antipyretic activity but no anti-inflammatory action. Overdosing on paracetamol is toxic, may induce hallucinations, and cause acute liver failure.
+
+reagent-name-cmtramadol = Tramadol
+reagent-desc-cmtramadol = Tramadol is a centrally acting analgesic and is considered to be a relatively safe. The analgesic potency is claimed to be about one tenth that of morphine. It is used to treat both acute and chronic pain of moderate to (moderately) severe intensity. Tramadol is generally considered as a medicinal drug with a low potential for dependence relative to morphine. Overdosing on tramadol is highly toxic.
+
+reagent-name-cmoxycodone = Oxycodone
+reagent-desc-cmoxycodone = Oxycodone is an opioid agonist with addiction potential similar to that of morphine. It is approved for the treatment of patients with moderate to severe pain who are expected to need continuous opioids for an extended period of time. Overdosing on oxycodone can cause hallucinations, brain damage and be highly toxic.
+
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = TI
 rmc-bicaridine-container-label-text = BI
@@ -57,11 +66,15 @@ rmc-dexalin-container-label-text = DX
 rmc-dylovene-container-label-text = DY
 rmc-inaprovaline-container-label-text = IN
 rmc-first-aid-container-label-text = FA
+rmc-pain-stop-container-label-text = PS
 rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
+rmc-paracetamol-container-label-text = PC
+rmc-tramadol-container-label-text = TR
+rmc-oxycodone-container-label-text = OX
 
 rmc-custom-container-label-text = {$customLabel}
 

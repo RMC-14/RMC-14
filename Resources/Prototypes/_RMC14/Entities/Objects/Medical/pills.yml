@@ -178,7 +178,43 @@
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-russianred
 
-# TODO RMC14 peridaxon, tramadol
+- type: entity
+  parent: CMPill
+  id: CMPillTramadol
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMTramadol
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-tramadol
+
+- type: entity
+  parent: CMPill
+  id: CMPillOxycodone
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMOxycodone
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill5
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: cm-pill-contents-oxycodone
+
+# TODO RMC14 peridaxon
 
 - type: entity
   parent: CMPill

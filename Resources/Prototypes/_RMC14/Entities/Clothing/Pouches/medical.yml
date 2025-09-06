@@ -40,7 +40,7 @@
     - id: CMBurnKit10
     - id: CMKelotaneAutoInjector
     - id: CMBicaridineAutoInjector
-    #- id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
     - id: CMEmergencyAutoInjector
     - id: CMEmergencyAutoInjector
 
@@ -65,9 +65,8 @@
       amount: 2
     - id: CMBurnKit10
       amount: 2
-    # todo rmc14 autoinjectors oxycodone x2
-#    - id: CMOxycodoneAutoInjector
-#      amount: 2
+    - id: CMOxycodoneAutoInjector
+      amount: 2
     - id: CMEmergencyAutoInjector
       amount: 1
 
@@ -226,13 +225,13 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: # todo rmc14 autoinjectors kelo x2, tramad x2, emerg
+    contents:
     - id: CMBicaridineAutoInjector
       amount: 2
     - id: CMKelotaneAutoInjector
       amount: 2
-#    - id: CMTramadolAutoInjector
-#      amount: 2
+    - id: CMTramadolAutoInjector
+      amount: 2
     - id: CMEmergencyAutoInjector
       amount: 1
 

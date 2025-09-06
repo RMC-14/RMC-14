@@ -69,19 +69,19 @@
   - type: Item
     sprite: null
   - type: Hypospray
-    transferAmount: 58 # TODO RMC14 77
+    transferAmount: 77
     injectSound: /Audio/_RMC14/Medical/air_release.ogg
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 58 # TODO RMC14 77
+        maxVol: 77
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 29
         - ReagentId: CMKelotane
           Quantity: 29
-#        - ReagentId: CMOxycodone # TODO RMC14 oxycodone
-#          Quantity: 19
+        - ReagentId: CMOxycodone
+          Quantity: 19
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -180,7 +180,56 @@
       CMDexalinPlus: 3
   - type: IconLabel
     labelTextLocId: rmc-dexalin-plus-container-label-text
-# TODO RMC14 tramadol
+
+- type: entity
+  parent: CMAutoInjector
+  id: CMTramadolAutoInjector
+  name: tramadol autoinjector
+  description: An auto-injector loaded with 3 uses of Tramadol, a weak but effective painkiller for normal wounds.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMTramadol
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMTramadol: 45
+  - type: IconLabel
+    labelTextLocId: rmc-tramadol-container-label-text
+
+- type: entity
+  parent: CMTramadolAutoInjector
+  id: CMTramadolAutoInjectorNoSkill
+  name: pain-stop autoinjector
+  description: An auto-injector loaded with a small amount of painkiller for marines to self-administer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/auto_injectors.rsi
+    layers:
+    - state: tramadol
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMTramadol
+          Quantity: 15
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: tramadol0
+    fillBaseName: tramadol
+    changeColor: false
+  - type: CMRefillableSolution
+    reagents:
+      CMTramadol: 15
+  - type: IconLabel
+    labelTextLocId: rmc-pain-stop-container-label-text
 
 - type: entity
   parent: CMAutoInjector
@@ -200,6 +249,7 @@
       CMBicaridine: 45
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
 - type: entity
   parent: CMAutoInjector
   id: CMInaprovalineAutoInjector
@@ -221,7 +271,27 @@
   - type: IconLabel
     labelTextLocId: rmc-inaprovaline-container-label-text
 
-# TODO RMC14 oxycodone
+- type: entity
+  parent: CMAutoInjector
+  id: CMOxycodoneAutoInjector
+  name: oxycodone autoinjector (EXTREME PAINKILLER)
+  description: An auto-injector loaded with 3 uses of Oxycodone, a powerful painkiller intended for life-threatening situations.
+  components:
+  - type: Hypospray
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMOxycodone
+          Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      CMOxycodone: 30
+  - type: IconLabel
+    labelTextLocId: rmc-oxycodone-container-label-text
+
 
 - type: entity
   parent: CMAutoInjector

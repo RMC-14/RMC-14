@@ -65,13 +65,13 @@
       - id: CMBottleBicaridine
       - id: CMBottleDexalin
       - id: CMBottleKelotane
-      # - id: CMBottleTramadol
+      - id: CMBottleTramadol
       - id: CMPillCanisterInaprovaline
       - id: CMPillCanisterDylovene
       - id: CMPillCanisterBicaridine
       - id: CMPillCanisterDexalin
       - id: CMPillCanisterKelotane
-      # - id: CMPillCanisterTramadol
+      - id: CMPillCanisterTramadol
       # - id: CMPillCanisterPeridaxon
 
 - type: entity
@@ -93,9 +93,9 @@
         amount: 2
       - id: CMPillCanisterKelotane
         amount: 2
-      # - id: CMPillCanisterTramadol
-      #  amount: 2
+      - id: CMPillCanisterTramadol
+        amount: 2
       # - id: CMPillCanisterPeridaxon
       #  amount: 2
 
-# TODO RMC14 peridaxon, tramadol
+# TODO RMC14 peridaxon

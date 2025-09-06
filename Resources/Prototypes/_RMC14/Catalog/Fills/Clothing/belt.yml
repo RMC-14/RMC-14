@@ -52,7 +52,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMPillCanisterTramadol
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
     - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
@@ -100,7 +102,8 @@
       amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
-    # TODO RMC14 oxycodone autoinjector
+    - id: CMOxycodoneAutoInjector
+      amount: 1
     - id: CMPillCanisterBicaridine
       amount: 1
     - id: CMPillCanisterDexalin
@@ -111,7 +114,9 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
-    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMPillCanisterTramadol
+      amount: 1
+    # TODO RMC14 perixadon pills, splint
 
 - type: entity
   parent: RMCBeltGrenade

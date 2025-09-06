@@ -191,7 +191,41 @@
     reagents:
       CMTricordrazine: 60
 
-# TODO RMC14 oxycodone, peridaxon, tramadol
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleTramadol
+  name: tramadol bottle
+  description: A small bottle. Contains tramadol - Used as a basic painkiller.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMTramadol
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMTramadol: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleOxycodone
+  name: oxycodone bottle
+  description: A small bottle. Contains oxycodone - Used as an Extreme Painkiller. ILLEGAL TO DISTRIBUTE.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMOxycodone
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMOxycodone: 60
+
+# TODO RMC14 peridaxon
 
 - type: entity
   parent: CMBottleFilled
