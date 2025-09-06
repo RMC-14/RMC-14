@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON CO icon not appearing.
-    type: Fix
-  id: 1801
-  time: '2025-06-05T01:18:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6526
 - author: SharkSnake98
   changes:
   - message: Added the WEYA mug, accessible through the Liaison's Automated Storage
@@ -4514,5 +4507,12 @@
   id: 2301
   time: '2025-09-06T01:41:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7792
+- author: Spaghetti-bit
+  changes:
+  - message: Fixed defenders being unable to tail slam while fortified.
+    type: Fix
+  id: 2302
+  time: '2025-09-06T01:43:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7760
 Name: RMC14
 Order: -1
