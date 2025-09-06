@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Pulling;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
@@ -144,9 +143,6 @@ public sealed class TackleSystem : EntitySystem
         args.Handled = true;
 
         DoDisarmEffects(user, target);
-
-        if (!TryComp(target, out XenoComponent? xeno))
-            return;
 
         if (_net.IsClient)
                 return;
