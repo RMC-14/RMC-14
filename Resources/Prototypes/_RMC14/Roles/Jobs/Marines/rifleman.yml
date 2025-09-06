@@ -52,7 +52,7 @@
     jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: RMCArmorM3MediumVariants
+    outerClothing: RMCArmorM3MediumSmooth
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha

@@ -1,0 +1,24 @@
+
+- type: gameMap
+  id: GoldenArrow
+  mapName: Golden Arrow
+  mapPath: /Maps/_RNMC14/goldenarrow.yml
+  minPlayers: 200 # enforce admin-only
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    GoldenArrow:
+      stationProto: StandardUNMCWarship
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'UNS Golden Arrow'
+      - type: StationJobs
+        availableJobs:
+          #Command
+          CMPlatoonCommanderPVE: [1, 1]
+
+          #Marines
+          CMSquadLeaderPVE: [2, 2]
+          CMSmartGunOperatorPVE: [2, 2]
+          CMHospitalCorpsmanPVE: [1, 1]
+          CMRiflemanPVE: [ 4, 4 ]
