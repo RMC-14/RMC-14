@@ -223,12 +223,12 @@
       accuracyAddMult: 0.05
       scatterFlat: -4
   - type: RMCLoreExaminable
-    content: A standard visible-band laser module designated as the AN/PEQ-42 Laser Sight. Can be mounted onto any firearm that has a lower rail large enough to accommodate it.
+    content: rmc-lore-examinable-laser-sight
 
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentMiniFlamethrower
-  name: mini flamethrower # TODO RMC14 intensity toggle
+  name: underbarrel flamethrower # TODO RMC14 intensity toggle
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
@@ -279,6 +279,10 @@
       state: flamethrower-on
   - type: AttachableVisuals
     offset: -0.125, 0.245
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -289,7 +293,7 @@
   - type: Sprite
     state: flamer_nozzle
   - type: RMCLoreExaminable
-    content: The Experimental Volatile-Exothermic-Sphere-Generator clip-on nozzle attachment for the M34 incinerator unit was specifically designed to allow marines to launch fireballs into enemy foxholes and bunkers. Despite the gel and resin coating, the flaming ball of naptha tears apart due the drag caused by launching it through the air, leading marines to use the attachment as a makeshift firework launcher during shore leave.
+    content: rmc-lore-examinable-xm-vesg-1-flamer-nozzle
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -358,6 +362,10 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: masterkey-on
   - type: AttachableVisuals
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -423,6 +431,10 @@
   - type: SolutionTransfer
     maxTransferAmount: 60
     transferAmount: 60
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -509,6 +521,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentU1GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
@@ -548,6 +564,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentMK1GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
@@ -555,10 +575,12 @@
   name: M203 grenade launcher
   description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
   components:
-  - type: Sprite # TODO: No IFF for this launcher
+  - type: Sprite
     layers:
       - state: grenade-m203
         map: [ "enum.BreechVisuals.Open" ]
+  - type: GunIFF
+    enabled: false
   - type: BallisticAmmoProvider
     capacity: 1
   - type: ShootAtFixedPoint
@@ -585,6 +607,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentM203GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase

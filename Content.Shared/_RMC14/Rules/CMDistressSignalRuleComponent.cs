@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Rules;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
@@ -122,6 +122,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>? SurvivorJobScenarios;
+
+    [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
 
     [DataField]
@@ -163,8 +166,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
 
+    public List<string> AuxiliaryMaps = new() {
+        "/Maps/_RMC14/OCP-583.yml",
+        "/Maps/_RMC14/admin_fax.yml"
+    };
+
     [DataField]
-    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivor";
+    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivorHost";
 
     [DataField]
     public TimeSpan XenoSurvivorCorpseBurstDelay = TimeSpan.FromSeconds(0);
@@ -202,6 +210,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public bool RequireXenoPlayers = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool QueenBoostRemoved;
+
+    [DataField]
+    public bool RecalculatedPower;
 }

@@ -5,6 +5,7 @@
 
 rmc-ghost-role-information-spp-friendly-description = Render assistance towards the UN Forces, Listen to your superior officers.
 rmc-ghost-role-information-spp-hostile-description = Eliminate the UN Forces to ensure the SPP presence in this sector is continued. Listen to your superior officers and take over the main UNS vessel at all costs.
+rmc-ghost-role-information-spp-pve-description = Follow any orders from command and carry them out to the best of your abillity. For the people!
 
 rmc-ghost-name-spp-hostile-leader = SPP Squad Leader (Hostile)
 rmc-ghost-name-spp-friendly-leader = SPP Squad Leader (Friendly)
@@ -35,3 +36,27 @@ rmc-ghost-name-spp-hostile-mp = SPP Military Police (Hostile)
 rmc-ghost-name-spp-friendly-mp = SPP Military Police (Friendly)
 rmc-job-name-spp-mp = Politsiya
 rmc-job-prefix-spp-mp = MP
+
+rmc-job-name-spp-gunner = Heavy Gunner
+rmc-job-prefix-spp-gunner = Hvy. Gnr.
+rmc-ghost-name-spp-gunner = SPP Heavy Gunner
+
+rmc-job-name-spp-rifleman-pve = Rifleman
+rmc-job-prefix-spp-rifleman-pve = RFN
+rmc-ghost-name-spp-rifleman-pve = SPP Rifleman
+
+rmc-job-name-spp-corpsman = Corpsman
+rmc-job-prefix-spp-corpsman = HM
+rmc-ghost-name-spp-corpsman = SPP Corpsman
+
+rmc-job-name-spp-overwatch = Platoon Commander
+rmc-job-prefix-spp-overwatch = PltCo.
+rmc-ghost-name-spp-overwatch = SPP PltCo.
+
+rmc-job-name-spp-sectionsergeant = Section Sergeant
+rmc-job-prefix-spp-sectionsergeant = Sec. Sarge
+rmc-ghost-name-spp-sectionsergeant = SPP Section Sergeant
+
+rmc-job-name-spp-squadlead = Squad Lead
+rmc-job-prefix-spp-squadlead = SL
+rmc-ghost-name-spp-squadlead = SPP Squad Lead

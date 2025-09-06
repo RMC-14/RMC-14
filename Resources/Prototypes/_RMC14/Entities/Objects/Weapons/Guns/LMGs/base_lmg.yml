@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder, RMCBaseWeaponGunMagazineProvider ]
   id: RMCBaseWeaponLMG
   components:
   - type: Gun

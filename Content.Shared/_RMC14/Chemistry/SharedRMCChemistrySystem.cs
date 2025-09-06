@@ -96,15 +96,19 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
                 args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
             }
-            var transferComp = EntityManager.GetComponent<RMCToggleableSolutionTransferComponent>(ent.Owner);
-            var directionText = transferComp.Direction switch
+
+            if (TryComp<RMCToggleableSolutionTransferComponent>(ent.Owner, out var transferComp))
             {
-                SolutionTransferDirection.Input => "Transfer mode: Drawing",
-                SolutionTransferDirection.Output => "Transfer mode: Dispensing",
-                _ => string.Empty,
-            };
-            if (!string.IsNullOrEmpty(directionText))
-                args.PushText(directionText);
+                var directionText = transferComp.Direction switch
+                {
+                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
+                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    _ => string.Empty,
+                };
+
+                if (!string.IsNullOrEmpty(directionText))
+                    args.PushText(directionText);
+            }
         }
     }
 

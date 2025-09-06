@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
@@ -155,9 +155,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return false;
         }
 
-        if (!_area.CanCAS(location) ||
-            !_area.CanFulton(location) ||
-            !_area.CanSupplyDrop(_transform.ToMapCoordinates(location)))
+        if (!_area.CanParadrop(location))
             return false;
 
         // don't spawn inside of solid objects
@@ -276,7 +274,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             var ev = new CrashLandedEvent(crashLanding.DoDamage);
             RaiseLocalEvent(uid, ref ev);
 
-            _audio.PlayPvs(crashLandable.CrashSound, uid);
+            if (_net.IsServer)
+                _audio.PlayPvs(crashLandable.CrashSound, uid);
+
             RemComp<CrashLandingComponent>(uid);
             Blocker.UpdateCanMove(uid);
         }

@@ -13,7 +13,7 @@ public sealed class MarineAnnounceCommand : IConsoleCommand
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var _marineAnnounce = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<MarineAnnounceSystem>();
+        var marineAnnounce = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<MarineAnnounceSystem>();
         if (args.Length == 0)
         {
             shell.WriteError("Not enough arguments! Need at least 1.");
@@ -22,12 +22,12 @@ public sealed class MarineAnnounceCommand : IConsoleCommand
 
         if (args.Length == 1)
         {
-            _marineAnnounce.AnnounceHighCommand(args[0]);
+            marineAnnounce.AnnounceHighCommand(args[0]);
         }
         else
         {
             var message = string.Join(' ', args[1..]);
-            _marineAnnounce.AnnounceHighCommand(message, args[0]);
+            marineAnnounce.AnnounceHighCommand(message, args[0]);
         }
         shell.WriteLine("Sent!");
     }

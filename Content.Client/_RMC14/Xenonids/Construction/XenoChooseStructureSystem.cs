@@ -53,8 +53,6 @@ public sealed class XenoChooseStructureSystem : EntitySystem
         {
             if (bui is XenoChooseStructureBui chooseUi)
                 chooseUi.Refresh();
-            else if (bui is XenoOrderConstructionBui orderUi)
-                orderUi.Refresh();
         }
     }
 }

@@ -21,7 +21,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_demo
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
@@ -32,7 +32,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_grenadier
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_grenadier
       #  points: 0
       #- id: PyroSet
@@ -53,7 +53,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_sniper
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_sniper
         linkedEntries:
         - RMCAntiMaterielEquipmentCase
@@ -66,7 +66,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_anti_materiel_sniper
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
@@ -239,8 +239,12 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

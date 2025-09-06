@@ -85,7 +85,7 @@
           Quantity: 30
         maxVol: 50
   - type: RMCLoreExaminable
-    content: A rarity among modern markets, Thirteen Loko is an all-Earth original. With a name coined by the general consensus that only the mildly insane willing to imbibe it, this energy drink has garnered a notorious reputation for itself and a sizeable cult following to match it. After a series of legal proceedings by Weston-Yamada, denatured cobra venom was removed from the recipe, much to the disappointment of the drink's consumers.
+    content: rmc-lore-examinable-thirteen-loko
 
 - type: entity
   parent: CMDrinkCanBase
@@ -242,7 +242,7 @@
   - type: Item
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
   - type: RMCLoreExaminable
-    content: Designed back in 2109, the advertising campaign for BODA started out as an attempt by the SPP to win the hearts and minds of colonists and settlers across the galaxy. Soon after, the ubiquitous cyan vendors and large supplies of the drink began to crop up in UN warehouses with seemingly no clear origin. Despite some concerns, after initial testing determined that the stored products were safe for consumption and surprisingly popular when blind-tested with focus groups, the strange surplus of BODA was authorized for usage within the UN-associated colonies. Subsequently, it enjoyed a relative popularity before falling into obscurity in the coming decades as supplies dwindled.
+    content: rmc-lore-examinable-boda
 
 - type: entity
   parent: CMDrinkCanCola
@@ -308,6 +308,96 @@
         - ReagentId: Ale
           Quantity: 30
         maxVol: 50
+
+- type: entity
+  parent: DrinkCanPack
+  id: RMCBeerPack
+  name: Sequoia beer pack
+  description: A pack of Sequoia beer cans.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+    layers:
+    - state: 6-pack-1
+      map: ["6-pack-1"]
+      visible: false
+    - state: 6-pack-2
+      map: ["6-pack-2"]
+      visible: false
+    - state: 6-pack-3
+      map: ["6-pack-3"]
+      visible: false
+    - state: 6-pack-4
+      map: ["6-pack-4"]
+      visible: false
+    - state: 6-pack-5
+      map: ["6-pack-5"]
+      visible: false
+    - state: 6-pack-6
+      map: ["6-pack-6"]
+      visible: false
+  - type: Item
+    size: Normal
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkCanSequoiaBeer
+      amount: 6
+  - type: Icon
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+    state: 6-pack-6
+  - type: Storage
+    grid:
+    - 0,0,11,1
+    whitelist:
+      tags:
+      - SequoiaBeer
+    hideStackVisualsWhenClosed: false
+  - type: ItemCounter
+    count:
+      tags: [SequoiaBeer]
+    composite: true
+    layerStates:
+    - 6-pack-1
+    - 6-pack-2
+    - 6-pack-3
+    - 6-pack-4
+    - 6-pack-5
+    - 6-pack-6
+  - type: Appearance
+  - type: DeleteOnContainerEmpty
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: RMCDrinkCanSequoiaBeer
+  name: Weston-Yamada sequoia beer
+  description: "Pretty good when you get past the fact that it tastes like piss. Canned by the Weston-Yamada Corporation."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon}
+          False: {state: icon}
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+  - type: Tag
+    tags:
+     - SequoiaBeer
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Beer
+          Quantity: 50
+        maxVol: 50
+
+- type: Tag
+  id: SequoiaBeer
 
 # BOBDA
 - type: entity

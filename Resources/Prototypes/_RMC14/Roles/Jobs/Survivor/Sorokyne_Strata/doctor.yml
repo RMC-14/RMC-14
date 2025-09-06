@@ -3,7 +3,9 @@
   id: CMJobSurvivorMoHDoctor
   name: rmc-job-name-survivor-moh-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorMoHDoctor
+  playTimeTracker: CMJobSurvivorDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMoHDoctor
   accessGroups:
   - ColonistMedical
@@ -22,7 +24,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMoHDoctor
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -30,6 +31,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -50,10 +52,6 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
-- type: playTimeTracker
-  id: CMJobSurvivorMoHDoctor
-  isHumanoid: true
-
 - type: entity
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMoHDoctor
@@ -68,6 +66,11 @@
       - [ RMCPouchFirstAidInjectors ]
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
     -
       - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
       - [ RMCTie ]

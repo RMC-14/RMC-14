@@ -185,6 +185,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
             TargetEffect = "RMCEffectHealBusy",
             MovementThreshold = 0.5f,
+            RootEntity = true
         });
     }
 
@@ -194,9 +195,6 @@ public sealed class DefibrillatorSystem : EntitySystem
     public void Zap(EntityUid uid, EntityUid target, EntityUid user, DefibrillatorComponent? component = null)
     {
         if (!Resolve(uid, ref component))
-            return;
-
-        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
             return;
 
         var selfEvent = new SelfBeforeDefibrillatorZapsEvent(user, uid, target);
@@ -218,6 +216,10 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         if (!TryComp<MobStateComponent>(target, out var mob) ||
             !TryComp<MobThresholdsComponent>(target, out var thresholds))
+            return;
+
+        // RMC14 to fix last charge not being usable
+        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
             return;
 
         _audio.PlayPvs(component.ZapSound, uid);

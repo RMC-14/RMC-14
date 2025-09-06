@@ -12,8 +12,14 @@
   startingGear: RMCGearForeconBase
   hasIcon: true
   greeting: rmc-job-greeting-forecon
-  playTimeTracker: RMCSurvivorForecon
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -29,7 +35,9 @@
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
 
 - type: playTimeTracker
-  id: RMCSurvivorForecon
+  id: RMCJobSurvivorMilitary
+  name: rmc-playtime-tracker-job-name-survivor-military
+  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
@@ -37,11 +45,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag
+    randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
     - [ RMCHeadBeanie ]
+    - [ RMCHeadDurag ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]

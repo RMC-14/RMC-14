@@ -1,0 +1,132 @@
+- type: entity
+  id: RMCBaseFoamedMetal
+  name: RMC base foamed metal
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Walls
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+        layer:
+        - WallLayer
+        mask:
+        - WallLayer
+  - type: Occluder
+  - type: Appearance
+  - type: SmoothEdge
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: Transform
+    anchored: true
+  - type: Airtight
+  - type: ReplaceFloorOnSpawn
+    replaceableTiles:
+    - Plating
+    - Lattice
+    - TrainLattice
+    replacementTiles:
+    - FloorMetalFoam
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: RMCMetalFoamWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 45
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Effects/meteorimpact.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Items/genhit.ogg
+
+- type: entity
+  parent: MetalFoam
+  id: RMCAluminiumMetalFoamEffect
+  name: aluminium metal foam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnDespawn
+    prototype: RMCFoamedAluminiumMetal
+
+- type: entity
+  parent: MetalFoam
+  id: RMCIronMetalFoamEffect
+  name: iron metal foam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnDespawn
+    prototype: RMCFoamedIronMetal
+
+- type: entity
+  parent: RMCBaseFoamedMetal
+  id: RMCFoamedAluminiumMetal
+  name: foamed aluminium metal
+  description: A lightweight foamed metal wall.
+  suffix: RMC
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    color: "#ffffffcc"
+    sprite: Effects/foam.rsi
+    layers:
+    - state: metal_foam
+      map: ["enum.FoamVisualLayers.Base"]
+    - map: [ "enum.EdgeLayer.South" ]
+      state: metal_foam-south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: metal_foam-east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: metal_foam-north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: metal_foam-west
+
+- type: entity
+  parent: RMCBaseFoamedMetal
+  id: RMCFoamedIronMetal
+  name: foamed iron metal
+  description: A slightly stronger lightweight foamed iron wall.
+  suffix: RMC
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    color: "#ffffffcc"
+    sprite: Effects/foam.rsi
+    layers:
+    - state: iron_foam
+      map: ["enum.FoamVisualLayers.Base"]
+    - map: [ "enum.EdgeLayer.South" ]
+      state: iron_foam-south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: iron_foam-east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: iron_foam-north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: iron_foam-west
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 70
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Effects/meteorimpact.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

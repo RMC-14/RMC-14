@@ -42,6 +42,8 @@
           Loaded: { state: obc_loaded }
           Unloaded: { state: obc_unloaded }
           Chambered: { state: obc_chambered }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examniable-orbital-cannon
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -123,14 +125,14 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadAegis
-  description: "An experimental phoron-based AEGIS Orbital Warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
-  name: AEGIS orbital warhead
+  description: "AEG-328-KRA, or KRAKEN, an experimental phoron-based orbital warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
+  name:  AEG-328-KRA
   components:
   - type: WarpPoint
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
-      state: aegis_ob_2
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: aegisob
   - type: TacticalMapTracked
   - type: XenoMapTracked
   - type: MarineMapTracked
@@ -143,6 +145,7 @@
     firstWarningRange: 60
     secondWarningRange: 55
     thirdWarningRange: 45
+    intelPointsAwarded: 5
   - type: PowerLoaderGrabbable
     virtualRight: RMCVirtualWarheadRightAegis
     virtualLeft: RMCVirtualWarheadLeftAegis

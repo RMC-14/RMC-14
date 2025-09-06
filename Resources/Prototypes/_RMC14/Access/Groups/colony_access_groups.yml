@@ -19,7 +19,7 @@
 - type: accessGroup
   id: ColonyCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessResearch
   - CMAccessMedical
   - CMAccessColonyPublic
@@ -34,7 +34,7 @@
 - type: accessGroup
   id: CMCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessPress
   - CMAccessMarinePrep
 
@@ -66,6 +66,17 @@
   - CMAccessColonyPublic
   - CMAccessColonyCommand
   - RMCAccessWeYa # TODO RMC14 weya colonial, weya exec
+
+- type: accessGroup
+  id: ColonistAllAccessNoArmory
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand
 
 - type: accessGroup
   id: ColonistTSEPA
