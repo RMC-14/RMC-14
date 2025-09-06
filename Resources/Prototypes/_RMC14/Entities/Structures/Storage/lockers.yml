@@ -453,6 +453,16 @@
   name: squad two support gunner locker
 
 - type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerHeavyGunnerCLF
+  name: heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetCLFSGOFill
+
+- type: entity
   parent: RMCCabinet
   id: RMCCabinetTSEPAInspector
   name: inspector's cabinet
