@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed there being an infinite amount of FORECON Commander slots.
-    type: Fix
-  id: 1800
-  time: '2025-06-05T01:19:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6521
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed FORECON CO icon not appearing.
     type: Fix
   id: 1801
@@ -4514,5 +4507,12 @@
   id: 2300
   time: '2025-09-06T01:38:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7800
+- author: Spaghetti
+  changes:
+  - message: Fixed warriors being able to heal through lifesteal while on fire.
+    type: Fix
+  id: 2301
+  time: '2025-09-06T01:41:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7792
 Name: RMC14
 Order: -1
