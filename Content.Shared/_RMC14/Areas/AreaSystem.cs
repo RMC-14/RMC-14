@@ -9,10 +9,12 @@ using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -26,13 +28,19 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedRMCWarpSystem _rmcWarp = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+
+    private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<AreaLabelComponent> _areaLabelQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
     private EntityQuery<MinimapColorComponent> _minimapColorQuery;
+    private EntityQuery<XenoConstructComponent> _xenoConstruct;
 
     private readonly List<EntityUid> _toRender = new();
 
@@ -40,10 +48,13 @@ public sealed class AreaSystem : EntitySystem
 
     public override void Initialize()
     {
+        _areaQuery = GetEntityQuery<AreaComponent>();
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
         _areaLabelQuery = GetEntityQuery<AreaLabelComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
         _minimapColorQuery = GetEntityQuery<MinimapColorComponent>();
+        _xenoConstruct = GetEntityQuery<XenoConstructComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
 
@@ -296,21 +307,6 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.SupplyDrop;
     }
 
-    private void AddBuildableTile(Entity<AreaGridComponent> grid, EntProtoId<AreaComponent> areaProto, EntityUid? anchored = null)
-    {
-        foreach (var (area, uid) in grid.Comp.AreaEntities)
-        {
-            if (areaProto != area || !TryComp(uid, out AreaComponent? areaComp))
-                continue;
-
-            if (HasComp<XenoConstructComponent>(anchored))
-                areaComp.ResinConstructCount++;
-
-            areaComp.BuildableTiles++;
-            Dirty(uid, areaComp);
-        }
-    }
-
     public override void Update(float frameTime)
     {
         try
@@ -324,8 +320,10 @@ public sealed class AreaSystem : EntitySystem
                 }
 
                 areaGrid.Colors.Clear();
+                Dirty(ent, areaGrid);
 
                 var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);
+                var areasOccupied = new Dictionary<EntProtoId<AreaComponent>, (int Resin, int Buildable)>();
                 while (tiles.MoveNext(out var tileRefNullable))
                 {
                     var tileRef = tileRefNullable.Value;
@@ -333,23 +331,42 @@ public sealed class AreaSystem : EntitySystem
                     var anchoredEnumerator = _map.GetAnchoredEntitiesEnumerator(ent, mapGrid, pos);
 
                     var found = false;
+                    var invincibleWall = false;
+                    var xenoConstruct = false;
                     while (anchoredEnumerator.MoveNext(out var anchored))
                     {
                         if (_minimapColorQuery.TryComp(anchored, out var minimapColor))
                         {
                             areaGrid.Colors[pos] = minimapColor.Color;
                             found = true;
-
-                            if (areaGrid.Areas.TryGetValue(pos, out var areaProto))
-                            {
-                                if (HasComp<DamageableComponent>(anchored))
-                                    AddBuildableTile((ent,areaGrid), areaProto, anchored);
-                            }
                         }
 
                         if (_areaLabelQuery.HasComp(anchored))
                             areaGrid.Labels[pos] = _rmcWarp.GetName(anchored.Value) ?? Name(anchored.Value);
+
+                        if (!invincibleWall && _tag.HasTag(anchored.Value, WallTag) && !_damageableQuery.HasComp(anchored.Value))
+                            invincibleWall = true;
+
+                        if (_xenoConstruct.HasComp(anchored))
+                            xenoConstruct = true;
                     }
+
+                    areaGrid.Areas.TryGetValue(pos, out var area);
+                    (int Resin, int Buildable)? areaOccupied = null;
+                    if (xenoConstruct)
+                    {
+                        areaOccupied ??= areasOccupied.GetOrNew(area);
+                        areaOccupied = (areaOccupied.Value.Resin + 1, areaOccupied.Value.Buildable);
+                    }
+
+                    if (!invincibleWall)
+                    {
+                        areaOccupied ??= areasOccupied.GetOrNew(area);
+                        areaOccupied = (areaOccupied.Value.Resin, areaOccupied.Value.Buildable + 1);
+                    }
+
+                    if (areaOccupied != null)
+                        areasOccupied[area] = areaOccupied.Value;
 
                     if (found)
                         continue;
@@ -361,21 +378,29 @@ public sealed class AreaSystem : EntitySystem
                         continue;
                     }
 
-                    if (areaGrid.Areas.TryGetValue(pos, out var area) &&
-                        area.TryGet(out var areaComp, _prototypes, _compFactory))
+                    if (areaGrid.Areas.TryGetValue(pos, out area) &&
+                        area.TryGet(out var areaComp, _prototypes, _compFactory) &&
+                        areaComp.MinimapColor != default)
                     {
-                        AddBuildableTile((ent, areaGrid), area);
-
-                        if (areaComp.MinimapColor != default)
-                        {
-                            areaGrid.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
-                            continue;
-                        }
+                        areaGrid.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
+                        continue;
                     }
+
                     areaGrid.Colors[pos] = Color.FromHex("#6c6767d8");
                 }
 
-                Dirty(ent, areaGrid);
+                foreach (var (areaProto, (resin, buildable)) in areasOccupied)
+                {
+                    if (!areaGrid.AreaEntities.TryGetValue(areaProto, out var area) ||
+                        !_areaQuery.TryComp(area, out var areaComp))
+                    {
+                        return;
+                    }
+
+                    areaComp.ResinConstructCount = resin;
+                    areaComp.BuildableTiles = buildable;
+                    Dirty(area, areaComp);
+                }
             }
         }
         finally

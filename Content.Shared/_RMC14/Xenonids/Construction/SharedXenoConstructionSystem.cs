@@ -142,7 +142,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
         SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnXenoConstructMapInit);
-        SubscribeLocalEvent<XenoConstructComponent, ComponentRemove>(OnXenoConstructRemoved);
+        SubscribeLocalEvent<XenoConstructComponent, EntityTerminatingEvent>(OnXenoConstructRemoved);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
@@ -379,7 +379,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
         if (_net.IsServer && args.Effect != null)
-            QueueDel(EntityManager.GetEntity(args.Effect));
+            QueueDel(GetEntity(args.Effect));
 
         if (args.Handled || args.Cancelled)
             return;
@@ -387,24 +387,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var coordinates = GetCoordinates(args.Coordinates);
         if (!coordinates.IsValid(EntityManager) ||
             !xeno.Comp.CanBuild.Contains(args.StructureId) ||
-            !CanSecreteOnTilePopup(xeno, args.StructureId, GetCoordinates(args.Coordinates), true, true) ||
-            !_area.TryGetArea(GetCoordinates(args.Coordinates), out var area, out _))
+            !CanSecreteOnTilePopup(xeno, args.StructureId, GetCoordinates(args.Coordinates), true, true))
         {
             return;
         }
 
-        if (GetStructurePlasmaCost(args.StructureId) is { } baseCost)
+        if (_area.TryGetArea(GetCoordinates(args.Coordinates), out var area, out _) &&
+            GetStructurePlasmaCost(args.StructureId) is { } baseCost)
         {
             var cost = baseCost;
-            if (area.Value.Comp.ResinConstructCount != 0 && !area.Value.Comp.Unweedable)
+            if (area.Value.Comp.ResinConstructCount != 0 &&
+                !area.Value.Comp.Unweedable &&
+                _prototype.TryIndex(args.StructureId, out var structure) &&
+                structure.TryGetComponent(out XenoConstructionPlasmaCostComponent? plasmaCost, _compFactory) &&
+                plasmaCost.ScalingCost)
             {
-                if(_prototype.TryIndex(args.StructureId, out var structure) &&
-                   structure.TryGetComponent(out XenoConstructionPlasmaCostComponent? plasmaCost, _compFactory) &&
-                   plasmaCost.ScalingCost)
-                    cost = GetDensityCost(area.Value, xeno, cost);
+                cost = GetDensityCost(area.Value, xeno, cost);
             }
 
-            if(!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+            if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
         }
 
@@ -839,15 +840,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         Dirty(area.Value);
     }
 
-    private void OnXenoConstructRemoved(Entity<XenoConstructComponent> ent, ref ComponentRemove args)
+    private void OnXenoConstructRemoved(Entity<XenoConstructComponent> ent, ref EntityTerminatingEvent args)
     {
-        if(!_area.TryGetArea(ent, out var area , out _))
+        if (!_area.TryGetArea(ent, out var area , out _))
             return;
 
         area.Value.Comp.ResinConstructCount--;
         Dirty(area.Value);
     }
-
 
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
@@ -1231,12 +1231,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private FixedPoint2 GetDensityCost(Entity<AreaComponent> area, Entity<XenoConstructionComponent> xeno, FixedPoint2 cost)
     {
-        var density = area.Comp.ResinConstructCount / area.Comp.BuildableTiles;
+        var density = (float) area.Comp.ResinConstructCount / area.Comp.BuildableTiles;
         if (density >= _densityThreshold)
             cost = Math.Ceiling(cost.Float() * (density + xeno.Comp.DensityConstructionCostModifier) * xeno.Comp.DensityConstructionCostMultiplier);
 
         // Don't make the cost higher than the max plasma.
-        if(TryComp(xeno, out XenoPlasmaComponent? plasma) && cost > plasma.MaxPlasma)
+        if (TryComp(xeno, out XenoPlasmaComponent? plasma) && cost > plasma.MaxPlasma)
             cost = plasma.MaxPlasma;
 
         return cost;
