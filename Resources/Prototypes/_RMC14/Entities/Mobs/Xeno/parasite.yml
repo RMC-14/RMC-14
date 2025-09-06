@@ -5,8 +5,7 @@
   - CMXenoFlammable
   - RMCXenoVentCrawler
   id: CMXenoParasiteBase
-  name: Child
-  suffix: Parasite
+  name: Parasite
   components:
   - type: GuideHelp
     guides:
@@ -129,7 +128,10 @@
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
-    name: cm-job-name-xeno-parasite
+    name: cm-job-name-xeno-parasite-xeno
+    whitelist:
+      components:
+      - Xeno
   - type: VentCrawler
     ventCrawlIcon: parasite
 

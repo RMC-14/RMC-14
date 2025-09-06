@@ -285,8 +285,10 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void StopCarry(Entity<CanFiremanCarryComponent?> user, Entity<FiremanCarriableComponent?>? targetNullable)
     {
+        EntityUid? carrying = null;
         if (Resolve(user, ref user.Comp, false))
         {
+            carrying = user.Comp.Carrying;
             user.Comp.Carrying = null;
             user.Comp.AggressiveGrab = false;
             Dirty(user);
@@ -301,7 +303,7 @@ public sealed class FiremanCarrySystem : EntitySystem
                 target.Comp.BeingCarried = false;
                 Dirty(target);
 
-                if (user.Comp?.Carrying == target)
+                if (carrying == target)
                     _toReparent.Add((target, user));
             }
 
