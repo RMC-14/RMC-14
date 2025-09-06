@@ -170,7 +170,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
         var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
-        SendMessage(msg);
+        SendPredictedMessage(msg);
     }
 
     private void OnSearchChanged(LineEditEventArgs args)
