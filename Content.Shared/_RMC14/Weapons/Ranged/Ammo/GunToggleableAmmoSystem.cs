@@ -88,12 +88,8 @@ public sealed class GunToggleableAmmoSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
 
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            action.Icon = setting.Icon;
-            Dirty(ent.Comp.Action.Value, action);
-            _actions.UpdateAction(ent.Comp.Action, action);
-        }
+        if (ent.Comp.Action is { } action)
+            _actions.SetIcon(action, setting.Icon);
 
         Dirty(ent);
         return true;

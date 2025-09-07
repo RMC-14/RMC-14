@@ -10,6 +10,7 @@
   - type: Construction
     graph: CMAirlock
     node: assembly
+  - type: Corrodible
   - type: Appearance
   - type: GenericVisualizer
     visuals:

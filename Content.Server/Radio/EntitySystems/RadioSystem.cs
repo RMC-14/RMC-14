@@ -3,6 +3,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
@@ -104,7 +105,7 @@ public sealed class RadioSystem : EntitySystem
 
         if (TryComp(messageSource, out JobPrefixComponent? prefix))
         {
-            var prefixText = (prefix.AdditionalPrefix != null ? $" {Loc.GetString(prefix.AdditionalPrefix.Value)}" : "") + Loc.GetString(prefix.Prefix);
+            var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
             if (TryComp(messageSource, out SquadMemberComponent? member) &&
                 TryComp(member.Squad, out SquadTeamComponent? team) &&
                 team.Radio != null &&
@@ -151,7 +152,8 @@ public sealed class RadioSystem : EntitySystem
             message,
             wrappedMessage,
             GetNetEntity(messageSource),
-            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key);
+            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
+            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
         var chatMsg = new MsgChatMessage { Message = chat };
         var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg);
 

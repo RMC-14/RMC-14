@@ -14,6 +14,14 @@
     drawdepth: FloorTiles
 
 - type: entity
+  parent: RMCStairs
+  id: RMCStairsOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0, 0.325
+
+- type: entity
   id: RMCStairsCorner
   parent: RMCStairs
   suffix: Corner
@@ -225,6 +233,22 @@
 
 - type: entity
   parent: RMCStairs
+  id: RMCAlmayerStairs
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: rampbottom
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairsTop
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: ramptop
+
+- type: entity
+  parent: RMCStairs
   id: RMCHybrisaStairsPerspective
   components:
   - type: Sprite
@@ -274,3 +298,46 @@
   - type: Sprite
     state: p_stair_solo_cap
     color: "#b29082"
+
+- type: entity
+  parent: RMCStairs
+  id: RMCSoroStairs
+  components:
+  - type: Sprite
+    color: "#6e6e6e"
+
+- type: entity
+  id: RMCSoroStairsCorner
+  parent: RMCStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: p_stair_full_corner
+    color: "#6e6e6e"
+
+- type: entity
+  id: RMCSoroStairsLeft
+  parent: RMCStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: p_stair_left_cap
+    color: "#6e6e6e"
+
+- type: entity
+  id: RMCSoroStairsRight
+  parent: RMCStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: p_stair_right_cap
+    color: "#6e6e6e"
+
+- type: entity
+  id: RMCSoroStairsSolo
+  parent: RMCStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: p_stair_solo_cap
+    color: "#6e6e6e"

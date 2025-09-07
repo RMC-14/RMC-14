@@ -31,6 +31,7 @@
   - type: MobMover
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: RotationVisuals
     defaultRotation: 0
@@ -97,15 +98,18 @@
       - ActionCritFakeDeath
       - ActionCritLastWords
   - type: Deathgasp
-  - type: HealthExaminable
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
-    - Cold
-    - Caustic
+#  - type: HealthExaminable # RMC14
+#    examinableTypes:
+#    - Blunt
+#    - Slash
+#    - Piercing
+#    - Heat
+#    - Shock
+#    - Cold
+#    - Caustic
+#    - Asphyxiation
+#    - Radiation
+  - type: RMCHealthExaminable # RMC14
   - type: DamageOnHighSpeedImpact
     damage:
       types:

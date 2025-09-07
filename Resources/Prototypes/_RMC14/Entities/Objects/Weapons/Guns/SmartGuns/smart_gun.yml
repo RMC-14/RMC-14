@@ -163,6 +163,17 @@
 
 - type: entity
   parent: RMCSmartGun
+  id: RMCSmartGunUNMC
+  name: ML66A smart gun
+  description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-smart-gun
+    factions:
+    - UNMC
+
+- type: entity
+  parent: RMCSmartGun
   id: RMCSmartGunWhiteOut
   name: ML79A smart gun
   description: The actual firearm in the 4-piece ML79A Smartgun System. If you have this, you're about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.
@@ -274,9 +285,6 @@
   id: RMCSmartGunCLF
   name: ML66B 'freedom' smart gun
   description: The actual firearm in the 4-piece ML66B Smartgun System. Essentially a heavy, mobile machinegun. This one has the CLF logo carved over the manufacturing stamp.
-  components:
-  - type: GunRequireEquipped
-    whitelist: { }
 
 - type: entity
   parent: RMCSmartGun

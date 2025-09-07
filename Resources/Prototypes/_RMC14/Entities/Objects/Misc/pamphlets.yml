@@ -80,7 +80,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_ass
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: spotter
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -91,11 +91,14 @@
   parent: CMPamphlet
   id: CMPamphletPowerloader
   name: powerloader instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to Caterpillar P-5000 Work Loader'.
-  suffix: NOT IMPLEMENTED
+  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'.
   components:
-  - type: Sprite
-    state: pamphlet_powerloader
+    - type: Sprite
+      state: pamphlet_powerloader
+    - type: SkillPamphlet
+      addSkills:
+        RMCSkillPowerLoader: 1
+      bypassLimit: true
 
 # gives police skill / bypasses limit
 - type: entity
@@ -151,9 +154,9 @@
     state: pamphlet_loader
   - type: SkillPamphlet
     addSkills:
-      RMCSkillEndurance: 1
+      RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -161,7 +164,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: loader
     bypassLimit: true
     jobWhitelists:
@@ -190,7 +193,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: mortar
     bypassLimit: true
     jobWhitelists:

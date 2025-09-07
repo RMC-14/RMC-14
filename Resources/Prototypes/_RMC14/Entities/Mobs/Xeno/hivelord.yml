@@ -88,10 +88,12 @@
     prefix: hivelord
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: hivelord
   - type: XenoInhands
     prefix: hivelord
+  - type: FixedIdentity
+    name: cm-job-name-xeno-hivelord
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -143,6 +145,8 @@
     - CMXenoHivelordResinWhisperer
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: CMXenoHivelordBase

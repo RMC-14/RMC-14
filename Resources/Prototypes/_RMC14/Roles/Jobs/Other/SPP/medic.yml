@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -20,6 +21,7 @@
       - SPP
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 1
@@ -64,6 +66,10 @@
     job: RMCSPPMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 
@@ -79,6 +85,7 @@
     job: RMCSPPMedic
     raffle:
       settings: short
+    requirements:
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 
@@ -93,12 +100,12 @@
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled
-    suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
+    suitstorage: RMCWeaponSMGType64
     id: RMCIDSPP
     belt: CMBeltMedicBagFilled
     back: RMCSatchelSPPMedic
     pocket1: RMCPouchMedkitFillSPP
-    pocket2: RMCPouchMagazineLargeMP5
+    pocket2: RMCPouchMagazineType64
 
 - type: playTimeTracker
   id: CMJobSPPMedic

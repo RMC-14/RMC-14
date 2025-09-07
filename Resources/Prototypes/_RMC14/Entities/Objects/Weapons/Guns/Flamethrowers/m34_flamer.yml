@@ -91,6 +91,14 @@
         enum.RMCIgniterVisuals.Ignited:
           True: { visible: true }
           False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
 
 - type: entity
   parent: RMCWeaponFlamer
@@ -148,6 +156,14 @@
     maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankFlamer
+
+- type: Tag
+  id: RMCTankFlamer
 
 - type: entity
   parent: RMCGunCaseBase

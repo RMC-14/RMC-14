@@ -27,7 +27,7 @@
       - RMCPenlight
       - CMAutoInjector
       - CMFireExtinguisherPortable
-      #      - TODO RMC14 syringe cases
+      - RMCSyringeCase
       - CMSurgicalLine
       - CMSynthGraft
       - PillPacket

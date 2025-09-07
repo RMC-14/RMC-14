@@ -16,7 +16,7 @@ public sealed partial class OrbitalCannonFiringComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid Squad;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan StartedAt;
 
     [DataField, AutoNetworkedField]
@@ -52,6 +52,20 @@ public sealed partial class OrbitalCannonFiringComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ImpactDelay = TimeSpan.FromSeconds(24);
 
+    public TimeSpan AegisBoomDelay => TimeSpan.FromSeconds(19.5);
+
+    [DataField, AutoNetworkedField]
+    public bool AegisBoomed;
+
     [DataField, AutoNetworkedField]
     public bool Impacted;
+
+    [DataField, AutoNetworkedField]
+    public int FirstWarningRange = 30;
+
+    [DataField, AutoNetworkedField]
+    public int SecondWarningRange = 25;
+
+    [DataField, AutoNetworkedField]
+    public int ThirdWarningRange = 15;
 }

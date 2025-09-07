@@ -31,6 +31,8 @@
     animation: WeaponArcClaw
   - type: Inventory
     speciesId: avali
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-avali
 
 - type: entity
   parent: BaseSpeciesDummy

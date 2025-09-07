@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFORECONPVERifleman
+  name: rmc-job-name-pve-forecon-rifleman
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobFORECONPVERifleman
+  ranks:
+   RMCRankLanceCorporal: []
+  startingGear: RMCJobFORECONPVERifleman
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - Rifleman
+  spawnMenuRoleName: FORECON Rifleman (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillPilot: 1
+        RMCSkillSmartGun: 1
+        RMCSkillPowerLoader: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pve-forecon-rifleman
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+
+- type: entity
+  id: RMCSpawnPointFORECONPVERifleman
+  name: forecon rifleman spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: marine_spawn
+  - type: SpawnPoint
+    job_id: RMCFORECONPVERifleman
+
+- type: startingGear
+  id: RMCJobFORECONPVERifleman
+  equipment:
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: CMJobFORECONPVERifleman

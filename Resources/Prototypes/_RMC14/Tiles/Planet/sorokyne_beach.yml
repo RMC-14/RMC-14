@@ -1,0 +1,72 @@
+# Sorokyne Strata Beach
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtNorth
+  name: coast north
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beach_0.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtEast
+  name: coast east
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beach_24.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtSouth
+  name: coast south
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beach_8.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtWest
+  name: coast west
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beach_16.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerNW
+  name: coast corner nw
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner_0.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerNE
+  name: coast corner ne
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner_8.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerSE
+  name: coast corner se
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner_16.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerSW
+  name: coast corner sw
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner_24.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerNW2
+  name: coast corner nw
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner2_0.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerNE2
+  name: coast corner ne
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner2_8.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerSW2
+  name: coast corner se
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner2_16.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetCoastDirtCornerSE2
+  name: coast corner sw
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_beach/beachcorner2_24.png

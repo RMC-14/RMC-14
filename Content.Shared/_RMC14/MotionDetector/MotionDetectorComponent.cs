@@ -19,6 +19,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
     public TimeSpan NextScanAt;
 
     [DataField, AutoNetworkedField]
+    public bool CanToggleRange = true;
+
+    [DataField, AutoNetworkedField]
     public bool Short;
 
     [DataField, AutoNetworkedField]

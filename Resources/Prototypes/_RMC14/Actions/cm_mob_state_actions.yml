@@ -3,11 +3,12 @@
   name: Ghost
   description: Become a Ghost.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     checkCanInteract: false
     checkConsciousness: false
     icon:
       sprite: Mobs/Ghosts/ghost_human.rsi
       state: icon
+  - type: InstantAction
     event: !type:CMGhostActionEvent

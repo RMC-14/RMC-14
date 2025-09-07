@@ -1,0 +1,247 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalBloodBase
+  tags: ["station", "markings"]
+
+# Blood
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor1
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor2
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor3
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor4
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor5
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor6
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor6
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor7
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor7
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail1
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail2
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail3
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail4
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail5
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail6
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_6
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail7
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_7
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodTrail8
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: tracks_8
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter1
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter2
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter3
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter4
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter5
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodSplatter6
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: splatter6
+
+# Xenonid Blood
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter1
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter2
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter3
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter4
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter5
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidSplatter6
+  sprite:
+    sprite: _RMC14/Decals/blood.rsi
+    state: xsplatter6
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor1
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor2
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor3
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor4
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor5
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor6
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor6
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodXenonidFloor7
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: xfloor7

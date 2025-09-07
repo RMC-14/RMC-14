@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder, RMCBaseWeaponGunMagazineProvider]
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -87,7 +87,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseMagazinePistol
+  parent: BaseItem
   id: CMBaseMagazinePistol
   description: A pistol magazine.
   components:
@@ -100,6 +100,23 @@
   - type: Clothing
     slots:
     - suitStorage
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgePistol
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   abstract: true
@@ -113,8 +130,7 @@
   abstract: true
   parent: RMCBaseBullet
   id: CMBulletBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
   - type: RMCProjectileDamageFalloff

@@ -92,6 +92,7 @@
 - type: entity
   parent: RMCBaseRockIndistructable
   id: RMCBaseRockDestructible
+  abstract: true
   components:
   - type: Damageable
     damageContainer: Inorganic
@@ -262,7 +263,7 @@
   components:
   - type: Sprite
     state: boulder2
-    
+
 - type: entity
   parent: RMCBoulder1
   id: RMCBoulder3

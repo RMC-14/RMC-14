@@ -902,6 +902,168 @@
       ]
     },
     {
+      "name": "trackon-northwest_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-north_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-northeast_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-east_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-southeast_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-south_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-southwest_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-west_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-direct_isl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-northwest_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-north_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-northeast_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-east_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-southeast_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-south_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-southwest_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-west_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
+      "name": "trackon-direct_fosl",
+      "delays": [
+          [
+              0.5,
+              0.5
+          ]
+      ]
+    },
+    {
       "name": "trackon-northwest_tl",
       "delays": [
         [

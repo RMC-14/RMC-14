@@ -49,8 +49,8 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
-    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -62,6 +62,7 @@
       state: body-overlay-2
       visible: false
     - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
@@ -107,3 +108,5 @@
       sprite: _RMC14/Effects/targeted.rsi
       state: sniper_lockon_intense_direction
       visible: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-moth

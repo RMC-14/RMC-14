@@ -127,7 +127,7 @@
         layer:
         - WallLayer
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: RMCReactorPoweredLight
   - type: PreventAttackLightOff
@@ -203,6 +203,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+  - type: Eye
 
 # Engineer Ship Light
 
@@ -267,4 +268,133 @@
     drawdepth: Mobs
   - type: Construction
     graph: RMCStreetlightBroken
+    node: start
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+
+# Traffic light
+
+- type: entity
+  parent: BaseStructure
+  id: RMCTrafficLightBase
+  name: traffic light
+  description: A traffic light.
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/trafficlights.rsi
+    offset: 0.65,0.8
+    layers:
+      - state: trafficlight
+      - state: trafficlight_on
+        visible: false
+        map: [ "light" ]
+    drawdepth: Mobs
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Construction
+    graph: RMCFloodlightBroken
+    node: completed
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+  - type: Repairable
+  - type: Corrodible # Repairable, not destructible.
+    isCorrodible: false
+  - type: Appearance
+  - type: ToggleableVisuals
+    spriteLayer: light
+  - type: RMCReactorPoweredLight
+  - type: PreventAttackLightOff
+  - type: RequireProjectileTarget
+
+- type: entity
+  parent: RMCTrafficLightBase
+  id: RMCTrafficLight
+  components:
+  - type: Construction
+    graph: RMCTrafficLightBroken
+    node: completed
+
+- type: entity
+  parent: RMCStreetlightBroken
+  id: RMCTrafficLightBroken
+  name: broken traffic light
+  description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/trafficlights.rsi
+    offset: 0.65,0.8
+    state: trafficlight_damaged
+    drawdepth: Mobs
+  - type: Construction
+    graph: RMCTrafficLightBroken
+    node: start
+
+- type: entity
+  parent: RMCTrafficLight
+  id: RMCTrafficLightAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    layers:
+      - state: trafficlight_alt
+      - state: trafficlight_alt_on
+        visible: false
+        map: [ "light" ]
+  - type: Construction
+    graph: RMCTrafficLightBrokenAlt
+    node: completed
+
+- type: entity
+  parent: RMCTrafficLightBroken
+  id: RMCTrafficLightBrokenAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/trafficlights.rsi
+    state: trafficlight_alt_damaged
+    drawdepth: Mobs
+  - type: Construction
+    graph: RMCTrafficLightBrokenAlt
     node: start

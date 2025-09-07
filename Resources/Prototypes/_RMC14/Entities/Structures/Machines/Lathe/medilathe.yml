@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseMachinePowered
   id: RMCMedilathe
   name: medilathe
@@ -123,16 +123,13 @@
 - type: latheRecipePack
   id: RMCRecipesMedilathe
   recipes:
-  - CMBeaker
-  - CMBeakerLarge
-  #    - Drinking glass (625 glass)
   - CMSyringe
   - RMCDropper
-  #    - RMC Spray bottle (500 plastic)
-  #    - Autoinjector (C-T) (300 Plastic)
-  #    - Autoinjector (C-S) (300 Plastic)
-  #    - Autoinjector (C-M) (300 Plastic)
-  #    - Autoinjector (C-L) (300 Plastic)
+  #    - RMC Spray bottle (500 plastic)->(625)
+  - RMCMedicAutoInjectorCustom5
+  - RMCMedicAutoInjectorCustom15
+  - RMCMedicAutoInjectorCustom30
+  - RMCMedicAutoInjectorCustom60
   - RMCMedicAutoInjectorEZ1
   - RMCMedicAutoInjectorEZ5
   - RMCMedicAutoInjectorEZ10
@@ -146,7 +143,7 @@
   - CMBloodPack
   - RMCBeakerHighCapacity
   - CMBonesetter
-  #    - FixOVein (5000 Plastic)
+  #    - FixOVein (5000 Plastic)->(6250)
   - CMStasisBag
   - CMRollerBed
   - CMPillCanister
@@ -155,8 +152,9 @@
   - CMToxinAidKit
   - CMAdvFirstAidKit
   - CMFirstAidO2Kit
-  #    - Radiation First Aid Kit (2000 Plastic)
-  #    - Syringe Case (1000 Plastic)
+  - RMCRadiationAidKit
+  - RMCSyringeCase
+  - CMSurgicalCase
   - RMCSurgicalTrayEmpty
   - RMCVialBox
   - RMCPouchReagentCanister
