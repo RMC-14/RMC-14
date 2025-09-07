@@ -1,9 +1,6 @@
 - type: soundCollection
   id: RMCReptilianScreams
   files:
-  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_1.ogg
-  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_2.ogg
-  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_3.ogg
   - /Audio/Voice/Reptilian/reptilian_scream.ogg
 
 - type: soundCollection

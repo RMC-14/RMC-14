@@ -13,7 +13,7 @@
       collection: RMCReptilianHisses
       params:
         variation: 0.125
-    Purr:
+    Growl:
       path: /Audio/_RMC14/Voice/Reptilian/lizard_purr.ogg
       params:
         variation: 0.125
