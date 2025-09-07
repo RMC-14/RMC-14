@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: FORECON Survivors Squad Leader, Marksman, Smart Gun Operator, and support
-      technician now require some extra playtime, compared to normal survivors.
-    type: Add
-  id: 1833
-  time: '2025-06-08T06:53:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6593
 - author: noctyrnal
   changes:
   - message: Added additional Xeno chat sanitization.
@@ -4542,5 +4534,13 @@
   id: 2333
   time: '2025-09-07T00:58:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7817
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed the most evil job on the Almayer having evil comms (Messtechs accidentally
+      had command channel access)
+    type: Fix
+  id: 2334
+  time: '2025-09-07T11:35:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7820
 Name: RMC14
 Order: -1
