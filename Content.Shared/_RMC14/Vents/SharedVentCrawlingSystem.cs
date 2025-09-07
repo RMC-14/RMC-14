@@ -52,7 +52,6 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
         SubscribeLocalEvent<VentCrawlableComponent, DestructionEventArgs>(OnVentDuctDestroyed);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
-        SubscribeLocalEvent<VentCrawlableComponent, EntityTerminatingEvent>(OnVentCrawlable);
 
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
@@ -112,21 +111,6 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
             return;
 
         _container.EmptyContainer(container, true);
-    }
-
-    private void OnVentCrawlable(Entity<VentCrawlableComponent> ent, ref EntityTerminatingEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(ent, out TransformComponent? transform) ||
-            TerminatingOrDeleted(transform.ParentUid) ||
-            !_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
-        {
-            return;
-        }
-
-        _container.EmptyContainer(container);
     }
 
     private bool TryGetVent(EntityUid vent, [NotNullWhen(true)] out VentCrawlableComponent? ventComp, [NotNullWhen(true)] out Container? container)
