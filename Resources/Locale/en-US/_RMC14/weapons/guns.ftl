@@ -9,6 +9,9 @@ rmc-breech-loaded-open-shoot-attempt = You need to close the breech first!
 rmc-breech-loaded-not-ready-to-shoot = You need to open and close the breech first!
 rmc-breech-loaded-closed-load-attempt = You need to open the breech first!
 rmc-breech-loaded-closed-extract-attempt = You need to open the breech first!
+rmc-breech-loaded-toggle-attempt-cooldown = You must wait before {$action} the chamber again!
+rmc-breech-loaded-open = opening
+rmc-breech-loaded-close = closing
 
 rmc-wield-use-delay = You need to wait {$seconds} seconds before wielding {THE($wieldable)}!
 rmc-shoot-use-delay = You need to wait {$seconds} seconds before shooting {THE($wieldable)}!
@@ -42,6 +45,7 @@ rmc-examine-text-iff = [color=cyan]This gun will ignore and shoot past friendlie
 rmc-examine-text-id-lock-no-user = [color=chartreuse]It's unregistered. Pick it up to register yourself as its owner.[/color]
 rmc-examine-text-id-lock = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse].[/color]
 rmc-examine-text-id-lock-unlocked = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse], but has its fire restrictions unlocked.[/color]
+rmc-examine-text-execute = [color=red]This gun can be used to execute people with the right skill![/color]
 
 rmc-gun-rack-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to rack before shooting.[/bold]
 rmc-gun-rack-first-with = You need to rack the gun with {$key} first!

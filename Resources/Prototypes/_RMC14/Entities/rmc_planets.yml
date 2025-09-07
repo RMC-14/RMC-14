@@ -28,7 +28,25 @@
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
-
+    survivorJobScenarios:
+      asset_protection:  
+        CMSurvivor:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorCorporate:
+        - CMSurvivorLV624CorporateDomeCL: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorDoctor:
+        - CMSurvivorLV624CorporateDomeGoonMedic: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorEngineer:
+        - CMSurvivorLV624CorporateDomeGoonEngineer: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorSecurity:
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorScientist:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+    
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -56,6 +74,23 @@
     camouflage: Urban
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorISR: -1
+      - CMSurvivorGangLeader: -1
+      CMSurvivorCorporate:
+      - CMSurvivorFiorinaCorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorFiorinaDoctor: 3
+      CMSurvivorEngineer:
+      - CMSurvivorFiorinaEngineer: 2
+      CMSurvivorSecurity:
+      - CMSurvivorPrisoner: 2
+      - CMSurvivorFiorinaPrisonGuard: 2
+      - CMSurvivorFiorinaRiotOfficer: 2
+      CMSurvivorScientist:
+      - CMSurvivorFiorinaResearcher: 2
 
 - type: entity
   id: RMCPlanetTrijent
@@ -263,4 +298,13 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/hybrisa_greenshift.yml
     camouflage: Urban
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetSorokyneRepaired
+  name: LV-976 - Sorokyne Strata (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne_repaired.yml
+    camouflage: Jungle
     inRotation: false

@@ -87,3 +87,15 @@
   - /Audio/_RMC14/Xeno/alien_echoroar_1.ogg
   - /Audio/_RMC14/Xeno/alien_echoroar_2.ogg
   - /Audio/_RMC14/Xeno/alien_echoroar_3.ogg
+
+- type: soundCollection
+  id: XenoVentCrawl
+  files:
+  - /Audio/_RMC14/Xeno/alien_ventcrawl1.ogg
+  - /Audio/_RMC14/Xeno/alien_ventcrawl2.ogg
+
+- type: soundCollection
+  id: XenoVentPass
+  files:
+  - /Audio/_RMC14/Xeno/alien_ventpass1.ogg
+  - /Audio/_RMC14/Xeno/alien_ventpass2.ogg

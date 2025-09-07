@@ -1,0 +1,37 @@
+- type: entity
+  parent: CMBaseStructure
+  id: RMCIDComputer
+  name: Identification Computer
+  description: Terminal for programming UNMC employee ID card access.
+  components:
+  - type: IdModificationConsole
+  - type: ActivatableUI
+    key: enum.IdModificationConsoleUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IdModificationConsoleUIKey.Key:
+        type: IdModificationConsoleBui
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      PrivilegedIdSlot: !type:ContainerSlot
+      TargetIdSlot: !type:ContainerSlot
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: engineering_terminal
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline

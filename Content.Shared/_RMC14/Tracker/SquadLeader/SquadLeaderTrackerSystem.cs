@@ -1,7 +1,9 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
+using Content.Shared._RMC14.Vendors;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Database;
@@ -64,6 +66,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerClickedEvent>(OnSquadLeaderTrackerClicked);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerChangeModeEvent>(OnSquadLeaderTrackerChangeMode);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, LeaderTrackerSelectTargetEvent>(OnLeaderTrackerSelectTargetEvent);
+        SubscribeLocalEvent<SquadLeaderTrackerComponent, GetMarineSquadNameEvent>(OnRoleChange, after: [typeof(SkillPamphletSystem), typeof(VendorRoleOverrideSystem)]);
 
         Subs.BuiEvents<SquadLeaderTrackerComponent>(SquadLeaderTrackerUI.Key,
             subs =>
@@ -98,6 +101,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netEnt = GetNetEntity(ev.Member);
         RemoveFireteamMember(ev.Squad.Comp.Fireteams, netEnt);
+        SyncFireteams(ev.Squad.AsNullable());
     }
 
     private void OnGotEquipped(Entity<GrantSquadLeaderTrackerComponent> ent, ref GotEquippedEvent args)
@@ -292,7 +296,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var netMember = GetNetEntity(marineId.Value);
         var job = _originalRoleQuery.CompOrNull(marineId.Value)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(marineId.Value) ?? Name(marineId.Value));
+        var iconOverride = CompOrNull<RMCVendorRoleOverrideComponent>(marineId)?.GiveIcon ?? CompOrNull<UsedSkillPamphletComponent>(marineId)?.Icon;
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(marineId.Value) ?? Name(marineId.Value), iconOverride);
         ref var fireteam = ref ent.Comp.Fireteams.Fireteams[member.Fireteam];
         fireteam ??= new SquadLeaderTrackerFireteam();
 
@@ -398,7 +403,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netMember = GetNetEntity(member);
         var job = _originalRoleQuery.CompOrNull(member)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(member) ?? Name(member));
+        var iconOverride = CompOrNull<RMCVendorRoleOverrideComponent>(member)?.GiveIcon ?? CompOrNull<UsedSkillPamphletComponent>(member)?.Icon;
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(member) ?? Name(member), iconOverride);
         if (_fireteamMemberQuery.TryComp(member, out var fireteamMember) &&
             fireteamMember.Fireteam >= 0 &&
             fireteamMember.Fireteam < fireteamData.Fireteams.Length)
@@ -435,8 +441,15 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         fireteamData.Unassigned.Remove(member);
 
-        if (TryGetEntity(member, out var memberId))
-            RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!TryGetEntity(member, out var memberId))
+            return;
+
+        RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!_squadLeaderTrackerQuery.TryComp(memberId, out var tracker))
+            return;
+
+        tracker.Fireteams = new();
+        Dirty(memberId.Value, tracker);
     }
 
     private void DemoteFireteamLeader(SquadLeaderTrackerFireteam? fireteam, EntityUid user)
@@ -486,13 +499,18 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnRoleChange(Entity<SquadLeaderTrackerComponent> ent, ref GetMarineSquadNameEvent _)
+    {
+        SyncMemberFireteams(ent.Owner);
+    }
+
     public bool TryFindTargets(ProtoId<TrackerModePrototype> mode, out List<DialogOption> options, out List<EntityUid> trackingOptions)
     {
         options = new List<DialogOption>();
         trackingOptions = new List<EntityUid>();
 
         _prototypeManager.TryIndex(mode, out var trackerMode);
-        if(trackerMode == null)
+        if (trackerMode == null)
             return false;
 
         // Try to find all entities that fit the selected role.
@@ -531,7 +549,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                 originalRole = original.Job;
 
             if (originalRole != trackerMode.Job &&
-                (mode != SquadLeaderMode||
+                (mode != SquadLeaderMode ||
                  !HasComp<SquadLeaderComponent>(trackableUid)))
                 continue;
 

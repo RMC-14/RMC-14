@@ -97,10 +97,12 @@
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
+    doAfterBreakOnMove: false
     ignoreRoof: true
     shakeAmount: 5
     requiredSkills:
       RMCSkillLeadership: 3
+  - type: RMCBattleExecute
 
 - type: entity
   parent: RMCWeaponRevolverMateba
@@ -375,6 +377,14 @@
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
   parent: CMBulletBase

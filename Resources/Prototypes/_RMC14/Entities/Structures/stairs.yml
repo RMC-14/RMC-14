@@ -233,6 +233,22 @@
 
 - type: entity
   parent: RMCStairs
+  id: RMCAlmayerStairs
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: rampbottom
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairsTop
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: ramptop
+
+- type: entity
+  parent: RMCStairs
   id: RMCHybrisaStairsPerspective
   components:
   - type: Sprite

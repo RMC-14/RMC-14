@@ -1,0 +1,62 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/53b8f7f634ef16422e463bd75eeaa16dccab25ab/icons/obj/structures/props/overhead_ducting.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "flammable_pipe_1"
+    },
+    {
+      "name": "flammable_pipe_2"
+    },
+    {
+      "name": "flammable_pipe_3"
+    },
+    {
+      "name": "flammable_pipe_4"
+    },
+    {
+      "name": "flammable_pipe_5"
+    },
+    {
+      "name": "flammable_pipe_6"
+    },
+    {
+      "name": "flammable_pipe_7"
+    },
+    {
+      "name": "flammable_pipe_8"
+    },
+    {
+      "name": "flammable_pipe_9"
+    },
+    {
+      "name": "flammable_pipe_10"
+    },
+    {
+      "name": "flammable_pipe_11"
+    },
+    {
+      "name": "flammable_pipe_12"
+    },
+    {
+      "name": "flammable_pipe_13"
+    },
+    {
+      "name": "flammable_pipe_14"
+    },
+    {
+      "name": "flammable_pipe_15"
+    },
+    {
+      "name": "flammable_pipe_16"
+    },
+    {
+      "name": "flammable_pipe_17"
+    }
+  ]
+}

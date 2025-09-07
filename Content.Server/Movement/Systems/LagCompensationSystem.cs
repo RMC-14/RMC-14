@@ -16,7 +16,7 @@ public sealed class LagCompensationSystem : EntitySystem
 
     // I figured 500 ping is max, so 1.5 is 750.
     // Max ping I've had is 350ms from aus to spain.
-    public static readonly TimeSpan BufferTime = TimeSpan.FromMilliseconds(750);
+    public TimeSpan BufferTime = TimeSpan.FromMilliseconds(750);
 
     public override void Initialize()
     {

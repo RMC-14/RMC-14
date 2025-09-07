@@ -308,39 +308,22 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var gridTransform = Transform(gridId);
         if (ent.Comp.MaxMobs is { } maxMobs)
         {
-            var mobs = 0;
+            var mobs = new HashSet<EntityUid>();
             var children = gridTransform.ChildEnumerator;
             while (children.MoveNext(out var uid))
             {
-                var mob = _mobStateQuery.HasComp(uid);
-                if (!mob)
+                if (_mobStateQuery.HasComp(uid))
                 {
-                    if (TryComp(uid, out ContainerManagerComponent? containerManager))
-                    {
-                        foreach (var container in _container.GetAllContainers(uid, containerManager))
-                        {
-                            if (container.ContainedEntities.Any(_mobStateQuery.HasComp))
-                            {
-                                mob = true;
-                                break;
-                            }
-                        }
-                    }
+                    mobs.Add(uid);
                 }
-
-                if (mob)
+                else if (TryComp(uid, out ContainerManagerComponent? containerManager))
                 {
-                    mobs++;
-
-                    if (mobs > maxMobs && ent.Comp.Mode != EvacuationComputerMode.Crashed)
+                    foreach (var container in _container.GetAllContainers(uid, containerManager))
                     {
-                        ent.Comp.Mode = EvacuationComputerMode.Crashed;
-                        _popup.PopupClient("The evacuation pod is overloaded with this many people inside!", ent, user, PopupType.LargeCaution);
-
-                        var time = _timing.CurTime;
-                        var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
-                        detonating.DetonateAt = time + ent.Comp.DetonateDelay;
-                        detonating.EjectAt = time + ent.Comp.EjectDelay;
+                        foreach (var mob in container.ContainedEntities.Where(_mobStateQuery.HasComp).ToList())
+                        {
+                            mobs.Add(mob);
+                        }
                     }
                 }
 
@@ -351,6 +334,18 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     Dirty(uid, evacuationDoor);
                     _door.TryClose(uid, door);
                 }
+            }
+
+            if (mobs.Count > maxMobs)
+            {
+                _popup.PopupPredicted("The evacuation pod is overloaded with this many people inside!", ent, null, PopupType.LargeCaution);
+                ent.Comp.Mode = EvacuationComputerMode.Crashed;
+                Dirty(ent);
+
+                var time = _timing.CurTime;
+                var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
+                detonating.DetonateAt = time + ent.Comp.DetonateDelay;
+                detonating.EjectAt = time + ent.Comp.EjectDelay;
             }
         }
 
@@ -691,7 +686,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                         var evacuationDoor = EnsureComp<EvacuationDoorComponent>(child);
                         evacuationDoor.Locked = false;
                         Dirty(child, evacuationDoor);
-                        _door.TryOpenAndBolt(child, door);
+
+                        // Bypass the checks in TryOpenAndBolt:
+                        _door.SetState(child, DoorState.Emagging, door);
                     }
                 }
             }
