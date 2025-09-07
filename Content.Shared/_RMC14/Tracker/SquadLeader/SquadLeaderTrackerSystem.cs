@@ -101,6 +101,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netEnt = GetNetEntity(ev.Member);
         RemoveFireteamMember(ev.Squad.Comp.Fireteams, netEnt);
+        SyncFireteams(ev.Squad.AsNullable());
     }
 
     private void OnGotEquipped(Entity<GrantSquadLeaderTrackerComponent> ent, ref GotEquippedEvent args)
@@ -440,8 +441,15 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         fireteamData.Unassigned.Remove(member);
 
-        if (TryGetEntity(member, out var memberId))
-            RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!TryGetEntity(member, out var memberId))
+            return;
+
+        RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!_squadLeaderTrackerQuery.TryComp(memberId, out var tracker))
+            return;
+
+        tracker.Fireteams = new();
+        Dirty(memberId.Value, tracker);
     }
 
     private void DemoteFireteamLeader(SquadLeaderTrackerFireteam? fireteam, EntityUid user)

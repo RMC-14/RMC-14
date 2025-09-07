@@ -120,10 +120,21 @@
       choices: { CMPrimary: 1 }
       entries:
       - id: RMCWeaponRifleM54CMK1
+    - name: Personal Secondary
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCGunCasePistolM1984
+      - id: RMCGunCasePistolM77
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
         points: 9
+      - id: RMCMagazinePistolM1984AP
+        points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: CMMagazinePistolM77AP
+        points: 5
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:

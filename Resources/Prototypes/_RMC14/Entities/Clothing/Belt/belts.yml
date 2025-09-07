@@ -1089,7 +1089,7 @@
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2170s.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi

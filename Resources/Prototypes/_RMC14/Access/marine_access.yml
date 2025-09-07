@@ -1,49 +1,61 @@
 ﻿# Squads
 - type: accessLevel
   id: CMAccessAlpha
+  parent: RMCBaseSquadAccess
   name: squad-alpha
 
 - type: accessLevel
   id: CMAccessBravo
+  parent: RMCBaseSquadAccess
   name: squad-bravo
 
 - type: accessLevel
   id: CMAccessCharlie
+  parent: RMCBaseSquadAccess
   name: squad-charlie
 
 - type: accessLevel
   id: CMAccessDelta
+  parent: RMCBaseSquadAccess
   name: squad-delta
 
 # Almayer
 - type: accessLevel
   id: CMAccessMarinePrep
-  name: cm-job-name-rifleman
+  parent: RMCBaseMarineAccess
+  name: Marine Prep
 
 - type: accessLevel
   id: CMAccessMedPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-hospital-corpsman
 
 - type: accessLevel
   id: CMAccessCombatTechPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-combat-tech
 
 - type: accessLevel
   id: CMAccessSquadLeaderPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-squad-leader
 
 - type: accessLevel
   id: CMAccessSpecPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-weapons-specialist
 
 - type: accessLevel
   id: CMAccessSmartPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-smart-gun-operator
 
 - type: accessLevel
   id: CMAccessFTLPrep
+  parent: RMCBaseMarineAccess
   name: cm-job-name-fireteam-leader
 
 - type: accessLevel
   id: CMAccessMarineRifleman
+  parent: RMCBaseMarineAccess
   name: cm-job-name-rifleman
