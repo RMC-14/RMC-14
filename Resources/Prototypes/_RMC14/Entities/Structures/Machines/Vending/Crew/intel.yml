@@ -6,7 +6,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/intel.rsi
   - type: CMAutomatedVendor
@@ -40,8 +40,10 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 M1984 HP magazine
+        points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
+        points: 5
+      - id: RMCMagazinePistolM1984HP
         points: 5
       - id: CMMagazinePistolMK80
         points: 10
@@ -115,7 +117,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -226,7 +228,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -274,7 +276,9 @@
       - id: CMMagazinePistolM1984
         amount: 20
       - id: RMCMagazinePistolM1984AP
-        amount: 20 # TODO RMC14 M1984 HP magazine
+        amount: 8
+      - id: RMCMagazinePistolM1984HP
+        amount: 8
       - id: CMMagazinePistolMK80
         amount: 20
     - name: Attachments

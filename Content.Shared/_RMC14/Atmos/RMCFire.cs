@@ -14,6 +14,12 @@ public sealed partial class RMCFire
     public int Range;
 
     [DataField]
+    public int CardinalRange;
+
+    [DataField]
+    public int OrdinalRange;
+
+    [DataField]
     public int? Intensity;
 
     [DataField]

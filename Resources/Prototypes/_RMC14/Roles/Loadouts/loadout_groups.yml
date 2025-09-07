@@ -80,6 +80,30 @@
   - HippieGlassesSunriseRMC
   - HippieGlassesSunsetRMC
 
+- type: loadoutGroup
+  id: EyewearRMCPVE
+  name: rmc-loadout-group-eyewear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - AviatorsRMC
+  - EyepatchRMC
+  - GlassesRPGRMC
+  - GlassesRPGRMCOld
+  - GlassesPrescriptionRMC
+  - HippieGlassesRMC
+  - GogglesRMC
+  - GogglesPrescriptionRMC
+  - GogglesBlackRMC
+  - GogglesOrangeRMC # TODO add prescription variants of all the goggles
+  - GogglesAdvancedRMC
+  - GogglesM1A1RMC
+  - PersonalShadesRMC
+  - SunglassesRMC # TODO prescription sunglasses
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
+
 # Masks
 - type: loadoutGroup
   id: MasksRMC
@@ -123,6 +147,27 @@
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
 
+- type: loadoutGroup
+  id: MasksRMCPVE
+  name: rmc-loadout-group-masks
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - BalaclavaRMC
+  - CoifRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+  - GasMaskRMC
+  - KeffiyehRMC
+  - KeffiyehBlackRMC
+  - KeffiyehBlueRMC
+  - KeffiyehGreenRMC
+  - KeffiyehWhiteRMC
+  - KeffiyehRedRMC
+
 # Headwear
 - type: loadoutGroup
   id: HeadwearRMC
@@ -148,6 +193,19 @@
   - HeadBeanieGrayRMC
   - UNMCHeadsetRMC
 
+- type: loadoutGroup
+  id: HeadwearRMCPVE
+  name: rmc-loadout-group-headwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - BrownHeadbandRMC
+  - GreenHeadbandRMC
+  - GrayHeadbandRMC
+  - RedHeadbandRMC
+  - TanHeadbandRMC
+  - UNMCHeadsetRMC
+
 # Helmet Garbs
 - type: loadoutGroup
   id: HelmetGarbsRMC
@@ -164,6 +222,36 @@
   - RaincoverUrbanRMC
   - RaincoverDesertRMC
   - RaincoverJungleRMC
+  - BuckshotSpentRMC
+  - FlechetteSpentRMC
+  - SlugSpentRMC
+  - CartridgeSpentRMC
+  - HelmetGasmaskRMC
+  - HelmetGasmaskDesertRMC
+  - HelmetGasmaskJungleRMC
+  - HelmetGasmaskUrbanRMC
+  - FeatherRMC
+  - FeatherRedRMC
+  - FeatherBlueRMC
+  - FeatherPurpleRMC
+  - FeatherYellowRMC
+  - GunOilRMC
+  - RosaryRMC
+  - PrescriptionRMC
+  - TrimmedWireRMC
+  - ChaplainPatchRMC
+  - PeaceFlairRMC
+  - IoFlairRMC
+  - TerraTekFlairRMC
+  - UNMCFlairRMC
+  - MovieTicketRMC
+
+- type: loadoutGroup
+  id: HelmetGarbsRMCPVE
+  name: rmc-loadout-group-helmet-garbs
+  minLimit: 0
+  maxLimit: 2
+  loadouts: # no CAG night vision sorry LARPers
   - BuckshotSpentRMC
   - FlechetteSpentRMC
   - SlugSpentRMC
@@ -267,6 +355,14 @@
   - CustomM44RMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
+
+# SPP Weapons
+- type: loadoutGroup
+  id: SPPWeaponsRMC
+  name: rmc-loadout-group-weapons
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
   - T73CaseRMC
   - ZHNK72CaseRMC
 
@@ -440,6 +536,7 @@
   maxLimit: 1
   loadouts:
   - CMPPeakedCapRMC
+
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC

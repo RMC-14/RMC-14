@@ -39,6 +39,7 @@
   - type: XenoCrusherChargable
     instantDestroy: true
     passOnDestroy: true
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: BaseStructure
