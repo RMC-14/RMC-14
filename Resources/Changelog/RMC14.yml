@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added fill visuals for shotgun shell pouch and loading rig.
-    type: Add
-  id: 1831
-  time: '2025-06-08T04:27:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6644
 - author: SurfinNinja1
   changes:
   - message: Mess Techs can now stack up an additional 6 kinds of sandwich(Plain,
@@ -4557,5 +4550,17 @@
   id: 2331
   time: '2025-09-06T23:06:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7814
+- author: Vermidia
+  changes:
+  - message: Fixed xenos sometimes getting stuck in pipes when ventcrawling
+    type: Fix
+  - message: Fixed xenos in acided pipes getting deleted. Applied this fix to lockers,
+      crates, and bodybags too.
+    type: Fix
+  - message: Fixed being unable to acid bodybags and stasisbags.
+    type: Fix
+  id: 2332
+  time: '2025-09-07T00:56:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7816
 Name: RMC14
 Order: -1
