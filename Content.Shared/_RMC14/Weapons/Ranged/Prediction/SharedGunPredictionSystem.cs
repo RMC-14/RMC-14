@@ -1,5 +1,9 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.CombatMode;
+using Content.Shared.Coordinates;
+using Content.Shared.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -24,9 +28,25 @@ public abstract class SharedGunPredictionSystem : EntitySystem
     {
         var user = session.AttachedEntity;
 
-        if (user == null ||
-            !_combatMode.IsInCombatMode(user) ||
-            !_gun.TryGetGun(user.Value, out var ent, out var gun))
+        var ent = new EntityUid();
+        var gun = new GunComponent();
+
+        if (user != null && _combatMode.IsInCombatMode(user))
+        {
+            if (_gun.TryGetGun(user.Value, out var inputent, out var inputgun) &&
+                inputent.Id == netGun.Id)
+            {
+                 ent = inputent;
+                 gun = inputgun;
+            }
+            else if (_gun.TryGetAkimboGun(user.Value, out var akimboent, out var akimbogun) &&
+                     akimboent.Id == netGun.Id )
+            {
+                 ent = akimboent;
+                 gun = akimbogun;
+            }
+        }
+        else
         {
             return null;
         }

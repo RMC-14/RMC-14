@@ -21,6 +21,7 @@ using Content.Shared.Effects;
 using Content.Shared.Examine;
 using Content.Shared.Gravity;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -203,6 +204,36 @@ public abstract partial class SharedGunSystem : EntitySystem
             return true;
         }
 
+        return false;
+    }
+
+    public bool TryGetAkimboGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
+    {
+
+        gunEntity = default;
+        gunComp = null;
+
+        if (!TryComp(entity, out HandsComponent? hands))
+            return false;
+
+        if (!_hands.EnumerateHands((entity, hands)).Skip(1).TryFirstOrDefault(out var other))
+            return false;
+
+        if (_hands.TryGetHeldItem(entity, other, out var held))
+        {
+            gunEntity = held.Value;
+        }
+        else
+        {
+            return false;
+        }
+
+
+        if (TryComp(held, out GunComponent? gun))
+        {
+            gunComp = gun;
+            return true;
+        }
         return false;
     }
 

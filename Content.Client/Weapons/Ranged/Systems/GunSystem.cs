@@ -176,12 +176,19 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
+        TryGetAkimboGun(entity, out var secondGunUid, out var secondGun);
+
         var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
         if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)
         {
             if (gun.ShotCounter != 0)
                 RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+
+            if (secondGun?.ShotCounter != 0){
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(secondGunUid) });
+            }
+
             return;
         }
 
@@ -194,6 +201,11 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             if (gun.ShotCounter != 0)
                 RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+
+            if (secondGun?.ShotCounter != 0)
+            {
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(secondGunUid) });
+            }
 
             return;
         }
@@ -222,6 +234,22 @@ public sealed partial class GunSystem : SharedGunSystem
             Gun = GetNetEntity(gunUid),
             Shot = projectiles?.Select(e => e.Id).ToList(),
         });
+
+        if (secondGun != null)
+        {
+
+            var secondProjectiles = _gunPrediction.ShootRequested(GetNetEntity(secondGunUid), GetNetCoordinates(coordinates), target, null, session);
+
+            RaisePredictiveEvent(new RequestShootEvent()
+            {
+                Target = target,
+                Coordinates = GetNetCoordinates(coordinates),
+                Gun = GetNetEntity(secondGunUid),
+                Shot = secondProjectiles?.Select(e => e.Id).ToList(),
+            });
+
+        }
+
     }
 
     protected override void Popup(string message, EntityUid? uid, EntityUid? user)
