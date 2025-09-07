@@ -73,6 +73,9 @@ public sealed class RMCGunChamberSystem : EntitySystem
 
     private void LoadChamber(Entity<RMCGunChamberComponent> gun, EntityUid magazine)
     {
+        if (TerminatingOrDeleted(gun))
+            return;
+
         if (!TryComp(gun, out TransformComponent? xform))
             return;
 

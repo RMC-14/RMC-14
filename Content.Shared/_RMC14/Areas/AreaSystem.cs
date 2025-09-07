@@ -445,13 +445,15 @@ public sealed class AreaSystem : EntitySystem
                     if (!areaGrid.AreaEntities.TryGetValue(areaProto, out var area) ||
                         !_areaQuery.TryComp(area, out var areaComp))
                     {
-                        return;
+                        continue;
                     }
 
                     areaComp.ResinConstructCount = resin;
                     areaComp.BuildableTiles = buildable;
                     Dirty(area, areaComp);
                 }
+
+                Dirty(ent, areaGrid);
             }
         }
         finally
