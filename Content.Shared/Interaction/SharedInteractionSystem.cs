@@ -917,7 +917,19 @@ namespace Content.Shared.Interaction
                 }
 
                 if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+                {
                     ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
+                    foreach (var ent in _lookup.GetEntitiesInRange(targetCoords, 0.2f))
+                    {
+                        if (!TryComp(ent, out TransformComponent? xform) ||
+                            !xform.Anchored)
+                        {
+                            continue;
+                        }
+
+                        ignored.Add(ent);
+                    }
+                }
             }
 
             Ignored combinedPredicate = e => e == target || (predicate?.Invoke(e) ?? false) || ignored.Contains(e);
