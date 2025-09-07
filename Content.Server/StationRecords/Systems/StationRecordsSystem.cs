@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
 using Content.Server.Forensics;
-using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Access.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
@@ -48,8 +47,6 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         base.Initialize();
 
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawn);
-        SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
-        SubscribeLocalEvent<SquadMemberRemovedEvent>(OnSquadMemberRemoved);
         SubscribeLocalEvent<EntityRenamedEvent>(OnRename);
     }
 
@@ -59,36 +56,6 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
             return;
 
         CreateGeneralRecord(args.Station, args.Mob, args.Profile, args.JobId, stationRecords);
-    }
-
-    private void OnSquadMemberAdded(ref SquadMemberAddedEvent ev)
-    {
-        if (!_idCard.TryFindIdCard(ev.Member, out var idCard))
-            return;
-        if (!TryComp(idCard, out StationRecordKeyStorageComponent? keyStorage)
-            || keyStorage.Key is not { } key)
-            return;
-        if (TryGetRecord<GeneralStationRecord>(key, out var generalRecord))
-        {
-            generalRecord.Squad = Name(ev.Squad);
-        }
-
-        Synchronize(key);
-    }
-
-    private void OnSquadMemberRemoved(ref SquadMemberRemovedEvent ev)
-    {
-        if (!_idCard.TryFindIdCard(ev.Member, out var idCard))
-            return;
-        if (!TryComp(idCard, out StationRecordKeyStorageComponent? keyStorage)
-            || keyStorage.Key is not { } key)
-            return;
-        if (TryGetRecord<GeneralStationRecord>(key, out var generalRecord))
-        {
-            generalRecord.Squad = null;
-        }
-
-        Synchronize(key);
     }
 
     private void OnRename(ref EntityRenamedEvent ev)
@@ -101,17 +68,19 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         if (HasComp<IdCardComponent>(ev.Uid) ||  HasComp<PdaComponent>(ev.Uid))
             return;
 
-        if (!_idCard.TryFindIdCard(ev.Uid, out var idCard))
-            return;
-        if (!TryComp(idCard, out StationRecordKeyStorageComponent? keyStorage)
-            || keyStorage.Key is not { } key)
-            return;
-        if (TryGetRecord<GeneralStationRecord>(key, out var generalRecord))
+        if (_idCard.TryFindIdCard(ev.Uid, out var idCard))
         {
-            generalRecord.Name = ev.NewName;
-        }
+            if (TryComp(idCard, out StationRecordKeyStorageComponent? keyStorage)
+                && keyStorage.Key is {} key)
+            {
+                if (TryGetRecord<GeneralStationRecord>(key, out var generalRecord))
+                {
+                    generalRecord.Name = ev.NewName;
+                }
 
-        Synchronize(key);
+                Synchronize(key);
+            }
+        }
     }
 
     private void CreateGeneralRecord(EntityUid station, EntityUid player, HumanoidCharacterProfile profile,
