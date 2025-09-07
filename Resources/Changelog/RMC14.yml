@@ -1,38 +1,4 @@
 ﻿Entries:
-- author: SurfinNinja1
-  changes:
-  - message: Mess Techs can now stack up an additional 6 kinds of sandwich(Plain,
-      Big Bite, Super Bite, Five Alarm, Mcguffin, Bacon Burger)
-    type: Add
-  - message: 18 new microwave recipes have been added.
-    type: Add
-  - message: 2 new reagents (Peanut Butter and Cherry Jelly) can be created.
-    type: Add
-  - message: 9 seeds added to MegaSeed Servitor
-    type: Add
-  - message: 5 new crops (White Beets, Peanuts, Sunflowers, Plump Mushrooms, and Grass)
-    type: Add
-  - message: added Chicken, Bacon, and White beet to the Galley Ingredient Vendor
-    type: Add
-  - message: Root Beer has been added to the soda dispenser
-    type: Add
-  - message: There is now a chemistry recipe for salt using RMC Chems
-    type: Add
-  - message: Tweaked Amasec and Beepsky Smash recipes to use RMC Iron
-    type: Tweak
-  - message: Updated 5 recipes to be more accurate
-    type: Tweak
-  - message: Updated grape plant name
-    type: Tweak
-  - message: Updated Fried Egg sprite
-    type: Tweak
-  - message: Changed 4 pizza recipes to produce RMC versions
-    type: Tweak
-  - message: Updated RMC pizza slice sprites to match their whole counterparts
-    type: Tweak
-  id: 1832
-  time: '2025-06-08T06:16:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6353
 - author: Dutch-VanDerLinde
   changes:
   - message: FORECON Survivors Squad Leader, Marksman, Smart Gun Operator, and support
@@ -4562,5 +4528,19 @@
   id: 2332
   time: '2025-09-07T00:56:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7816
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to access dropship engine points, and the alpha
+      overwatch console.
+    type: Fix
+  - message: Fixed the tactical map not working.
+    type: Fix
+  - message: Fixed not being able to build resin.
+    type: Fix
+  - message: Fixed xeno disarm popup.
+    type: Fix
+  id: 2333
+  time: '2025-09-07T00:58:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7817
 Name: RMC14
 Order: -1
