@@ -22,6 +22,39 @@ public sealed class CrewManifestListing : BoxContainer
 
     public void AddCrewManifestEntries(CrewManifestEntries entries)
     {
+        RMCAddCrewManifestEntries(entries);
+        return;
+        var entryDict = new Dictionary<DepartmentPrototype, List<CrewManifestEntry>>();
+
+        foreach (var entry in entries.Entries)
+        {
+            foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
+            {
+                // this is a little expensive, and could be better
+                if (department.Roles.Contains(entry.JobPrototype))
+                {
+                    entryDict.GetOrNew(department).Add(entry);
+                }
+            }
+        }
+
+        var entryList = new List<(DepartmentPrototype section, List<CrewManifestEntry> entries)>();
+
+        foreach (var (section, listing) in entryDict)
+        {
+            entryList.Add((section, listing));
+        }
+
+        entryList.Sort((a, b) => DepartmentUIComparer.Instance.Compare(a.section, b.section));
+
+        foreach (var item in entryList)
+        {
+            AddChild(new CrewManifestSection(_prototypeManager, _spriteSystem, item.section, item.entries));
+        }
+    }
+
+    public void RMCAddCrewManifestEntries(CrewManifestEntries entries)
+    {
         // server already sorts entries by job display weight > name
         // if we keep the order we don't need to do it ourselves!
         // we still need to group entries by department and split marines into squads though

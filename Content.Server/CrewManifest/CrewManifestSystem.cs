@@ -15,6 +15,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server.CrewManifest;
 
@@ -35,8 +36,6 @@ public sealed class CrewManifestSystem : EntitySystem
 
     private readonly Dictionary<EntityUid, Dictionary<ICommonSession, CrewManifestEui>> _openEuis = new();
 
-    private readonly HashSet<EntityUid> _queuedManifests = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(AfterGeneralRecordCreated);
@@ -47,21 +46,6 @@ public sealed class CrewManifestSystem : EntitySystem
 
         SubscribeLocalEvent<CrewManifestViewerComponent, BoundUIClosedEvent>(OnBoundUiClose);
         SubscribeLocalEvent<CrewManifestViewerComponent, CrewManifestOpenUiMessage>(OpenEuiFromBui);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        if (_queuedManifests.Count < 1)
-            return;
-
-        foreach (var queuedStation in _queuedManifests)
-        {
-            BuildCrewManifest(queuedStation);
-            UpdateEuis(queuedStation);
-        }
-        _queuedManifests.Clear();
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
@@ -89,24 +73,25 @@ public sealed class CrewManifestSystem : EntitySystem
         OpenEui(GetEntity(message.Id), sessionCast);
     }
 
-    private void QueueCrewManifestBuild(EntityUid station)
-    {
-        _queuedManifests.Add(station);
-    }
-
+    // Not a big fan of this one. Rebuilds the crew manifest every time
+    // somebody spawns in, meaning that at round start, it rebuilds the crew manifest
+    // wrt the amount of players readied up.
     private void AfterGeneralRecordCreated(AfterGeneralRecordCreatedEvent ev)
     {
-        QueueCrewManifestBuild(ev.Key.OriginStation);
+        BuildCrewManifest(ev.Key.OriginStation);
+        UpdateEuis(ev.Key.OriginStation);
     }
 
     private void OnRecordModified(RecordModifiedEvent ev)
     {
-        QueueCrewManifestBuild(ev.Key.OriginStation);
+        BuildCrewManifest(ev.Key.OriginStation);
+        UpdateEuis(ev.Key.OriginStation);
     }
 
     private void OnRecordRemoved(RecordRemovedEvent ev)
     {
-        QueueCrewManifestBuild(ev.Key.OriginStation);
+        BuildCrewManifest(ev.Key.OriginStation);
+        UpdateEuis(ev.Key.OriginStation);
     }
 
     private void OnBoundUiClose(EntityUid uid, CrewManifestViewerComponent component, BoundUIClosedEvent ev)
@@ -237,6 +222,40 @@ public sealed class CrewManifestSystem : EntitySystem
     /// <param name="station"></param>
     private void BuildCrewManifest(EntityUid station)
     {
+        _queuedManifests.Add(station);
+        return;
+        var iter = _recordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
+
+        var entries = new CrewManifestEntries();
+
+        var entriesSort = new List<(JobPrototype? job, CrewManifestEntry entry)>();
+        foreach (var recordObject in iter)
+        {
+            var record = recordObject.Item2;
+            var entry = new CrewManifestEntry(record.Name, record.JobTitle, record.JobIcon, record.JobPrototype);
+
+            _prototypeManager.TryIndex(record.JobPrototype, out JobPrototype? job);
+            entriesSort.Add((job, entry));
+        }
+
+        entriesSort.Sort((a, b) =>
+        {
+            var cmp = JobUIComparer.Instance.Compare(a.job, b.job);
+            if (cmp != 0)
+                return cmp;
+
+            return string.Compare(a.entry.Name, b.entry.Name, StringComparison.CurrentCultureIgnoreCase);
+        });
+
+        entries.Entries = entriesSort.Select(x => x.entry).ToArray();
+        _cachedEntries[station] = entries;
+    }
+
+
+    // RMC14
+    private readonly HashSet<EntityUid> _queuedManifests = new();
+    private void RMCBuildCrewManifest(EntityUid station)
+    {
         var iter = _recordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
 
         var entries = new CrewManifestEntries();
@@ -262,6 +281,20 @@ public sealed class CrewManifestSystem : EntitySystem
 
         entries.Entries = entriesSort.Select(x => x.entry).ToArray();
         _cachedEntries[station] = entries;
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_queuedManifests.Count < 1)
+            return;
+
+        foreach (var queuedStation in _queuedManifests)
+        {
+            RMCBuildCrewManifest(queuedStation);
+            UpdateEuis(queuedStation);
+        }
+        _queuedManifests.Clear();
     }
 }
 
