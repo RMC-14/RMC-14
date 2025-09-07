@@ -57,6 +57,7 @@
   - type: PipeAppearance
   - type: PipeColorVisuals
   - type: RMCMesonsNonviewable
+  - type: RMCContainerEmptyOnDestruction
 
 - type: entity
   parent: CMVentPump
