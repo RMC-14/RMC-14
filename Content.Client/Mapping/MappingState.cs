@@ -847,7 +847,7 @@ public sealed class MappingState : GameplayStateBase
         }
 
         var hypotenuse = Math.Round(Math.Sqrt((distanceX * distanceX) + (distanceY * distanceY)), 2);
-        var angle = Math.Round(Math.Atan(distanceY / distanceX),2);
+        var angle = Math.Round((Math.Atan(distanceY / distanceX)/(Math.PI*2))*360,2);
 
         _sawmill.Info($"({distanceX}, {distanceY}) distance (including the tiles) with a hypotenuse of {hypotenuse} and angle of {angle}.");
         _measurementPoints.Clear();
