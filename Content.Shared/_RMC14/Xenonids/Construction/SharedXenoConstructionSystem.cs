@@ -114,11 +114,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
 
-    private static readonly string ResinDoorCorpseAddCollisionTag = "ResinDoorCorpseCollisionDelay";
-
     // Multiplier force to push out corpses
     private const float ResinDoorCorpsePushForce = 20f;
-    private TimeSpan ResinDoorBufferDelay = TimeSpan.FromSeconds(0.5);
+
+    private static readonly List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
 
     public override void Initialize()
     {
@@ -1020,20 +1023,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             return;
         }
-
-        List<EntityUid> bodies = new();
+        var collidingBodies = resinDoor.Comp.CollidingBodies;
+        collidingBodies.Clear();
         foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
         {
             if (_mobState.IsDead(ent))
             {
-                bodies.Add(ent);
+                collidingBodies.Add(ent);
             }
 
             // Set all bodies collision to "false" so the resin door will close
-            foreach (var body in bodies)
+            foreach (var body in collidingBodies)
             {
                 _physics.SetCanCollide(body, false);
-                //_useDelay.SetLength(body, doorComp.CloseTimeOne + doorComp.CloseTimeTwo + ResinDoorBufferDelay, ResinDoorCorpseAddCollisionTag);
             }
         }
     }
@@ -1053,15 +1055,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         MapCoordinates resinDoorCoords = _transform.GetMapCoordinates(resinDoor);
         var resinDoorIndices = _mapSystem.TileIndicesFor(grid, gridComp, resinDoorCoords);
         Dictionary<Vector2, MapCoordinates> freeTiles = new();
-        List<Vector2i> adjacentDirections = new List<Vector2i>
-        {   new Vector2i(1,0),
-            new Vector2i(-1,0),
-            new Vector2i(0,1),
-            new Vector2i(0,-1)};
+
         foreach (var dir in adjacentDirections)
         {
             Vector2i adjacentTileIndices = resinDoorIndices + dir;
-
 
             var adjacentTile = _mapSystem.GetTileRef((grid, gridComp), adjacentTileIndices);
             if (!_turf.IsTileBlocked(adjacentTile, CollisionGroup.MobMask))
@@ -1070,18 +1067,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
-        List<EntityUid> bodies = new();
+        var collidingBodies = resinDoor.Comp.CollidingBodies;
+        collidingBodies.Clear();
         foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
         {
             if (_mobState.IsDead(ent))
             {
-                bodies.Add(ent);
+                collidingBodies.Add(ent);
             }
         }
 
         // Set all bodies collision to "true"
         // Apply velocity towards the nearest free tile
-        foreach (var body in bodies)
+        foreach (var body in collidingBodies)
         {
             _physics.SetCanCollide(body, true);
 
