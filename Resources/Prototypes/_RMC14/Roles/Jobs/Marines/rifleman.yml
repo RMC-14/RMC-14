@@ -32,6 +32,7 @@
         RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: CMVendorUser
+      id: CMRifleman
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix

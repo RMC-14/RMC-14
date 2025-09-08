@@ -41,6 +41,7 @@
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
     - type: CMVendorUser
+      id: CMSmartGunOperator
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix

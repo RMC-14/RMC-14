@@ -41,6 +41,7 @@
         RMCSkillFireman: 1
         RMCSkillJtac: 3
     - type: CMVendorUser
+      id: CMFireteamLeader
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix

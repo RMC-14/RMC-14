@@ -45,6 +45,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
     - type: CMVendorUser
+      id: CMWeaponsSpecialist
       points: 45
       extraPoints:
         Specialist: 120
