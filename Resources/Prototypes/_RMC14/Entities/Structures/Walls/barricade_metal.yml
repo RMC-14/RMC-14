@@ -76,6 +76,7 @@
     setDamage:
       types:
         Blunt: 150
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBarricadeUpgradeBase
@@ -347,6 +348,14 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrailAlt
+  id: RMCBarricadeHandrailAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
 
 - type: entity
   parent: RMCBarricadeHandrail

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/turf/floors/floors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "siding1"
+    },
+    {
+      "name": "siding2"
+    },
+    {
+      "name": "siding4"
+    },
+    {
+      "name": "siding8"
+    },
+    {
+      "name": "siding6"
+    },
+    {
+      "name": "siding5"
+    },
+    {
+      "name": "siding10"
+    },
+    {
+      "name": "siding9"
+    },
+    {
+      "name": "siding7"
+    },
+    {
+      "name": "siding11"
+    },
+    {
+      "name": "siding13"
+    },
+    {
+      "name": "siding14"
+    },
+    {
+      "name": "siding15"
+    }
+  ]
+}
