@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Added a new tunnel UI that shows you where each tunnel is on a map when
-      selected. The map on the new UI also lets you directly click on a tunnel to
-      select it.
-    type: Add
-  id: 1835
-  time: '2025-06-08T09:12:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6636
 - author: noctyrnal
   changes:
   - message: Added a new version of the "Golden Arrow" map for PVE.
@@ -4542,5 +4533,12 @@
   id: 2335
   time: '2025-09-08T08:20:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7839
+- author: Vermidia
+  changes:
+  - message: Fixed air vents getting covered by weeds.
+    type: Fix
+  id: 2336
+  time: '2025-09-08T11:49:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7823
 Name: RMC14
 Order: -1
