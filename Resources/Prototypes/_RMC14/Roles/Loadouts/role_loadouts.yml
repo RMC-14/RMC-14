@@ -905,3 +905,80 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+
+# PVE
+
+- type: roleLoadout
+  id: CMPVERifleman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: CMPVEHospitalCorpsman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: CMPVESmartGunOperator
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: CMPVESquadLeader
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: CMPVESectionSergeant
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: CMPVEPlatoonCommander
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins

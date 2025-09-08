@@ -508,6 +508,9 @@
     },
     {
       "name": "recruit_spawn"
+    },
+    {
+      "name": "clf_spawn"
     }
   ]
 }

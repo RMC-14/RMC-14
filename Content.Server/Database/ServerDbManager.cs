@@ -385,6 +385,8 @@ namespace Content.Server.Database
 
         Task<List<RMCCommendation>> GetCommendationsReceived(Guid player);
 
+        Task<List<RMCCommendation>> GetCommendationsGiven(Guid player);
+
         #endregion
 
         #region DB Notifications
@@ -1226,7 +1228,13 @@ namespace Content.Server.Database
         public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendations(player));
+            return RunDbCommand(() => _db.GetCommendationsReceived(player));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationsGiven(player));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

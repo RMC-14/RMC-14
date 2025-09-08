@@ -1,0 +1,7 @@
+<controls:IdModificationConsoleAccessButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Access">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <Button Name="AccessButton" Access="Public" Text="" StyleClasses="OpenBoth" HorizontalExpand="True" />
+    </BoxContainer>
+</controls:IdModificationConsoleAccessButton>

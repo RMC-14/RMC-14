@@ -59,6 +59,7 @@
       types:
         Blunt: 0
     throwRange: 2
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCTankReagentEmpty

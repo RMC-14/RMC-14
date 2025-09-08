@@ -486,6 +486,15 @@
         },
         {
             "name": "hc_trainee"
+        },
+        {
+            "name": "weya_goon_engi"
+        },
+        {
+            "name": "weya_goon_lead"
+        },
+        {
+            "name": "weya_goon_medic"
         }
     ]
 }

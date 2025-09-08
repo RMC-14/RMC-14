@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
@@ -73,7 +74,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<PowerLoaderComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
-        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity, after: [typeof(SharedHandsSystem)]);
+        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity, after: new[] { typeof(SharedHandsSystem) });
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserGrab);
         SubscribeLocalEvent<PowerLoaderComponent, DestructionEventArgs>(OnDestruction);
 
@@ -86,19 +87,23 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
         SubscribeLocalEvent<DropshipUtilityPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
         SubscribeLocalEvent<DropshipEnginePointComponent, ActivateInWorldEvent>(OnEngineActivateInWorld);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ActivateInWorldEvent>(OnEngineActivateInWorld);
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
         SubscribeLocalEvent<DropshipEnginePointComponent, DropshipDetachDoAfterEvent>(OnEngineDetach);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, DropshipDetachDoAfterEvent>(OnEngineDetach);
 
         // Attach events and doAfters
         SubscribeLocalEvent<DropshipWeaponPointComponent, GetAttachmentSlotEvent>(OnGetSlot);
         SubscribeLocalEvent<DropshipUtilityPointComponent, GetAttachmentSlotEvent>(OnGetSlot);
         SubscribeLocalEvent<DropshipEnginePointComponent, GetAttachmentSlotEvent>(OnGetSlot);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, GetAttachmentSlotEvent>(OnGetSlot);
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipEnginePointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
 
         SubscribeLocalEvent<DropshipFabricatorPrintableComponent, PowerLoaderInteractEvent>(OnDropshipPartPowerLoaderInteract);
 
@@ -252,6 +257,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -302,6 +308,11 @@ public sealed class PowerLoaderSystem : EntitySystem
     }
 
     private void OnEngineActivateInWorld(Entity<DropshipEnginePointComponent> ent, ref ActivateInWorldEvent args)
+    {
+        TryStartPointDetach(ent, ent.Comp.ContainerId, ref args);
+    }
+
+    private void OnEngineActivateInWorld(Entity<DropshipElectronicSystemPointComponent> ent, ref ActivateInWorldEvent args)
     {
         TryStartPointDetach(ent, ent.Comp.ContainerId, ref args);
     }
@@ -406,6 +417,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         TryGetSlot(ent, ent.Comp.ContainerId, ref args);
     }
 
+    private void OnGetSlot(Entity<DropshipElectronicSystemPointComponent> ent, ref GetAttachmentSlotEvent args)
+    {
+        TryGetSlot(ent, ent.Comp.ContainerId, ref args);
+    }
+
     private void OnDropshipAttach(Entity<DropshipWeaponPointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
@@ -428,6 +444,15 @@ public sealed class PowerLoaderSystem : EntitySystem
     }
 
     private void OnDropshipAttach(Entity<DropshipEnginePointComponent> ent, ref DropshipAttachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
+            return;
+
+        InsertPoint(user, contained, slot);
+        SyncAppearance(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnDropshipAttach(Entity<DropshipElectronicSystemPointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
             return;
@@ -475,6 +500,12 @@ public sealed class PowerLoaderSystem : EntitySystem
         SyncAppearance(ent, ent.Comp.ContainerId);
     }
 
+    private void OnEngineDetach(Entity<DropshipElectronicSystemPointComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        DetachPoint(ref args);
+        SyncAppearance(ent, ent.Comp.ContainerId);
+    }
+
     private void OnGrababbleShouldInteract(Entity<PowerLoaderGrabbableComponent> ent, ref CombatModeShouldHandInteractEvent args)
     {
         if (!HasComp<PowerLoaderComponent>(args.User))
@@ -516,6 +547,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2.5f,
         };
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
             loader.DoAfter = ev.DoAfter;
@@ -558,6 +590,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
@@ -635,7 +668,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         string slotId;
         string msg;
         if (HasComp<DropshipUtilityComponent>(used) ||
-            HasComp<DropshipEngineComponent>(used))
+            HasComp<DropshipEngineComponent>(used) ||
+            HasComp<DropshipElectronicSystemComponent>(used))
         {
             slotId = container;
             msg = Loc.GetString("rmc-power-loader-occupied");
@@ -991,6 +1025,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (slot.ContainedEntities.Count > 0)
             return;
 
+        var ev = new DropShipAttachmentInsertedEvent(contained);
+        RaiseLocalEvent(slot.Owner, ref ev);
+
         _container.Insert(contained, slot);
         SyncHands((user, user.Comp));
     }
@@ -1006,6 +1043,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -1037,6 +1075,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
             utilityComp.AttachmentPoint = null;
+
+        var ev = new DropShipAttachmentDetachedEvent(contained);
+        RaiseLocalEvent(slot.Owner, ref ev);
 
         _container.Remove(contained, slot);
 
@@ -1075,3 +1116,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct DropShipAttachmentInsertedEvent(EntityUid Inserted);
+
+[ByRefEvent]
+public record struct DropShipAttachmentDetachedEvent(EntityUid Detached);

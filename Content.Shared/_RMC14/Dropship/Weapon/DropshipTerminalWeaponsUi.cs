@@ -21,6 +21,8 @@ public enum DropshipTerminalWeaponsScreen
     Medevac,
     Fulton,
     Paradrop,
+    Spotlight,
+    TacMap,
 }
 
 [Serializable, NetSerializable]
@@ -53,6 +55,13 @@ public sealed class DropshipTerminalWeaponsChooseFultonMsg(bool first) : BoundUs
 public sealed class DropshipTerminalWeaponsChooseParaDropMsg(bool first) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseSpotlightMsg(bool first, NetEntity slot) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly NetEntity Slot = slot;
 }
 
 [Serializable, NetSerializable]
@@ -126,6 +135,12 @@ public sealed class DropshipTerminalWeaponsFultonSelectMsg(NetEntity target) : B
 
 [Serializable, NetSerializable]
 public sealed class DropShipTerminalWeaponsParaDropTargetSelectMsg(bool on) : BoundUserInterfaceMessage
+{
+    public readonly bool On = on;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool on) : BoundUserInterfaceMessage
 {
     public readonly bool On = on;
 }
