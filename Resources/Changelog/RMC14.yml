@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added additional Xeno chat sanitization.
-    type: Add
-  id: 1834
-  time: '2025-06-08T07:36:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6584
 - author: Vixting
   changes:
   - message: Added a new tunnel UI that shows you where each tunnel is on a map when
@@ -4542,5 +4535,12 @@
   id: 2334
   time: '2025-09-07T11:35:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7820
+- author: CyberTropic
+  changes:
+  - message: Fixed survivor variants not spawning.
+    type: Fix
+  id: 2335
+  time: '2025-09-08T08:20:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7839
 Name: RMC14
 Order: -1
