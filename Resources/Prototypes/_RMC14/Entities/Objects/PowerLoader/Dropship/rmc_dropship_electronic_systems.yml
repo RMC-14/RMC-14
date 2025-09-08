@@ -1,0 +1,72 @@
+- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentElectronicSystem
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_electronic_system_attachments.rsi
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 800
+  - type: PowerLoaderGrabbable
+    delay: 1
+  - type: DropshipElectronicSystem
+  - type: PowerLoaderAttachable
+    attachDelay: 7
+    attachableTypes:
+    - RMCDropshipElectronicSystemPoint
+  - type: PowerLoaderDetachable
+    detachDelay: 7
+
+- type: entity
+  parent: RMCDropshipAttachmentElectronicSystem
+  id: RMCDropshipTargetingSystem
+  name: AN/AAQ-178 weapon targeting system
+  description: A targeting system for dropships. It improves firing accuracy on laser targets. Fits on electronics attach points. You need a powerloader to lift this.
+  components:
+  - type: Sprite
+    layers:
+    - state: targeting_system
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_electronic_system_attachments.rsi
+      state: targeting_system_installed
+  - type: DropshipTargetingSystem
+
+- type: entity
+  parent: RMCDropshipAttachmentElectronicSystem
+  id: RMCDropShipSpotlight
+  name: AN/LEN-15 spotlight
+  description: A set of high-powered spotlights to illuminate large areas. Fits on electronics attach points of dropships. Moving this will require a powerloader.
+  components:
+  - type: Sprite
+    layers:
+    - state: spotlights
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_electronic_system_attachments.rsi
+      state: spotlights_off
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 50
+  - type: DropshipSpotlight
+
+- type: entity
+  parent: RMCDropshipAttachmentElectronicSystem
+  id: RMCDropShipLZDetector
+  name: AN/AVD-60 LZ detector.
+  description: An electronic device linked to the dropship's camera system that lets you observe your landing zone mid-flight
+  components:
+  - type: Sprite
+    layers:
+    - state: lz_detector
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_electronic_system_attachments.rsi
+      state: lz_detector_installed
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 50
+  - type: CameraSignalGranter
+    protoIds:
+    - RMCMonitorCameraLandingZone

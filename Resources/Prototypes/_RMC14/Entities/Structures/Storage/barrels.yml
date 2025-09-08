@@ -24,6 +24,7 @@
     offset: 1, 1
   - type: Clickable
   - type: DeleteOnExplosion
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBarrelPileBase
@@ -69,6 +70,7 @@
         sound:
           collection: MetalBreak
   - type: CrateOpenable
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBarrelBase

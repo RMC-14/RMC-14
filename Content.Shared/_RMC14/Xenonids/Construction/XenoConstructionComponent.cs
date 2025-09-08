@@ -53,4 +53,16 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanUpgrade;
+
+    /// <summary>
+    ///     If the density threshold is reached, this value is added to the density value before being multiplied.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DensityConstructionCostModifier = 0.35f;
+
+    /// <summary>
+    ///     The base build cost * (density + DensityConstructionModifier) gets multiplied by this value if the DensityThreshold is reached.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DensityConstructionCostMultiplier = 2f;
 }

@@ -206,31 +206,70 @@ cm-chatsan-word-sl = sl
 cm-chatsan-replacement-sl = tall leader
 
 cm-chatsan-word-commanding-officer = commanding officer
-cm-chatsan-replacement-commanding-officer = tall queen
+cm-chatsan-replacement-commanding-officer = tall empress
 
 cm-chatsan-word-comm-officer = comm officer
-cm-chatsan-replacement-comm-officer = tall queen
+cm-chatsan-replacement-comm-officer = tall empress
 
 cm-chatsan-word-co = co
-cm-chatsan-replacement-co = tall queen
+cm-chatsan-replacement-co = tall empress
 
 cm-chatsan-word-staff-officer = staff officer
-cm-chatsan-replacement-staff-officer = young tall queen
+cm-chatsan-replacement-staff-officer = tall watcher
+
+cm-chatsan-word-staff-officers = staff officers
+cm-chatsan-replacement-staff-officers = tall watchers
 
 cm-chatsan-word-xo = xo
-cm-chatsan-replacement-xo = young tall queen
+cm-chatsan-replacement-xo = tall queen
 
 cm-chatsan-word-executive-officer = executive officer
-cm-chatsan-replacement-executive-officer = young tall queen
+cm-chatsan-replacement-executive-officer = tall queen
 
 cm-chatsan-word-exec-officer = exec officer
-cm-chatsan-replacement-exec-officer = young tall queen
+cm-chatsan-replacement-exec-officer = tall queen
 
 cm-chatsan-word-senior-enlisted = senior enlisted
 cm-chatsan-replacement-senior-enlisted = young tall queen
 
 cm-chatsan-word-senior-enlisted-advisor = senior enlisted advisor
 cm-chatsan-replacement-senior-enlisted-advisor = young tall queen
+
+cm-chatsan-word-senior-enlisted-advisors = senior enlisted advisors
+cm-chatsan-replacement-senior-enlisted-advisors = young tall queens
+
+rmc-chatsan-word-auxiliary-support-officer = auxiliary support officer
+rmc-chatsan-replacement-auxiliary-support-officer = young tall queen
+
+rmc-chatsan-word-aux-support-officer = aux support officer
+rmc-chatsan-replacement-aux-support-officer = young tall queen
+
+rmc-chatsan-word-aso = aso
+rmc-chatsan-replacement-aso = young tall queen
+
+rmc-chatsan-word-honor-guard = honor guard
+rmc-chatsan-replacement-honor-guard = tall praetorian
+
+rmc-chatsan-word-honor-guards = honor guards
+rmc-chatsan-replacement-honor-guards = tall praetorians
+
+rmc-chatsan-word-brigadier = brigadier
+rmc-chatsan-replacement-brigadier = tall queen mother
+
+rmc-chatsan-word-major-general = major general
+rmc-chatsan-replacement-major-general = tall queen mother
+
+rmc-chatsan-word-lieutenant-general = lieutenant general
+rmc-chatsan-replacement-lieutenant-general = tall queen mother
+
+rmc-chatsan-word-lt-general = lt general
+rmc-chatsan-replacement-lt-general = tall queen mother
+
+rmc-chatsan-word-commandant = commandant
+rmc-chatsan-replacement-commandant = tall queen mother
+
+rmc-chatsan-word-high-command = high command
+rmc-chatsan-replacement-high-command = tall queen mother
 
 cm-chatsan-word-lz = lz
 cm-chatsan-replacement-lz = metal bird perch

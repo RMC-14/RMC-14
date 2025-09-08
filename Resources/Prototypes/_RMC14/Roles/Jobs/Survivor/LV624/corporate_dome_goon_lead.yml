@@ -1,17 +1,17 @@
 - type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624CorporateDomeGoonLead
-  name: rmc-job-name-pmc-corporate-goon-lead
+  name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoonLead
   spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
   startingGear: RMCGearSurvivorGoon
+  icon: "RMCJobIconPMCGoonLead"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
         RMCSkillMedical: 1
         RMCSkillEndurance: 2
         RMCSkillCqc: 1
@@ -19,6 +19,9 @@
         RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
         RMCSkillVehicles: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillLeadership: 1
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -27,6 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: MarineOrders
   greeting: rmc-job-greeting-corporate-dome-goon-lead
 
 - type: entity
@@ -43,11 +47,14 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
 
-- type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateDomeGoonLead
-  isHumanoid: true
-
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetLV624CorporateDomeGoonLead
   name: lv624 colonist preset
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGoonLead
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_lead

@@ -10,7 +10,7 @@ public enum RMCPlaytimeMedalType : byte
     Gold,
     Platinum,
     Ruby,
-    Emerald,
     Amethyst,
-    Prismatic
+    Emerald,
+    Prismatic,
 }

@@ -193,6 +193,8 @@ public sealed class XenoLungeSystem : EntitySystem
         {
             _statusEffects.TryRemoveStatusEffect(ent, effect);
         }
+
+        RemCompDeferred<XenoLungeStunnedComponent>(ent.Owner);
     }
 
     private void OnXenoLungeHitAttempt(Entity<RMCLungeProtectionComponent> ent, ref XenoLungeHitAttempt args)

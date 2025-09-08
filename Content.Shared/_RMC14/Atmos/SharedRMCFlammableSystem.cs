@@ -446,6 +446,28 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SpawnFires(spawn, center, range, chain, intensity, duration);
     }
 
+    public void SpawnFireLines(EntProtoId spawn, EntityCoordinates center, int cardinalRange, int ordinalRange, int? intensity = null, int? duration = null)
+    {
+        var chain = _onCollide.SpawnChain();
+        var spawned = new HashSet<EntityCoordinates>();
+        foreach (var direction in DirectionExtensions.AllDirections)
+        {
+            var range = _rmcMap.CardinalDirections.Contains(direction) ? cardinalRange : ordinalRange;
+            var nextRange = range;
+            var target = center.Offset(direction);
+            while (nextRange > 0)
+            {
+                if (!spawned.Add(target))
+                    continue;
+
+                nextRange = SpawnFire(target, spawn, chain, nextRange, intensity, duration, out var cont);
+                target = target.Offset(direction);
+                if (cont)
+                    break;
+            }
+        }
+    }
+
     public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration, out bool cont)
     {
         cont = false;
@@ -548,7 +570,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The entity creating the fire</param>
     /// <param name="target">The tile the fire is being spawned from</param>
-    /// <param name="direction">The direction the entity is facing</param>
     /// <param name="initialShot">If </param>
     /// <returns>Returns a list of potential targets for a fire to be spawned on</returns>
     private HashSet<EntityCoordinates> AddTarget(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates target, bool initialShot)

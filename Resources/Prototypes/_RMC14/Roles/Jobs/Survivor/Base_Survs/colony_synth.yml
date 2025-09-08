@@ -8,7 +8,6 @@
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
   icon: "RMCJobIconSynth"
-  requireAdminNotify: true
   joinNotifyCrew: true
   whitelisted: true
   supervisors: cm-job-supervisors-colonists

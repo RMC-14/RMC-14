@@ -1,0 +1,58 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorFiorinaResearcher
+  name: cm-job-name-survivor-fiorina-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorFiorinaResearcher
+  accessGroups:
+  - ColonistMedical
+  spawnMenuRoleName: Fiorina Researcher (Fiorina Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetScientist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorFiorinaResearcher
+  equipment:
+    jumpsuit: RMCJumpsuitLiaisonPinkWorkwear
+    head: ArmorHelmetPMCOfficer
+    outerClothing: RMCLabcoatScience
+    gloves: CMHandsLatex
+    mask: CMMaskSterile
+    eyes: RMCGlassesReagentHUDGlasses
+    back: RMCSatchelVirologyFill
+    shoes: RMCShoesLaceup
+    ears: RMCHeadsetDistressWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaResearcher
+  name: survivor fiorina researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFiorinaResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
