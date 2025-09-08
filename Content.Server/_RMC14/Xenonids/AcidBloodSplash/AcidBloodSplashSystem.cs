@@ -86,7 +86,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             if (_random.NextFloat() > hitProbability)
                 continue;
 
-            var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
+            _damageable.TryChangeDamage(target, comp.Damage, origin: uid, tool: uid);
             comp.NextSplashAvailable = _timing.CurTime + comp.SplashCooldown;
             i++;
 
