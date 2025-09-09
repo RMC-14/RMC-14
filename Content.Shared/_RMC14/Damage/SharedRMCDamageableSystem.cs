@@ -125,6 +125,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnActiveDamageOnPulledMobState);
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, XenoTargetDevouredAttemptEvent>(OnActiveDamageOnPulledDevoured);
 
+        SubscribeLocalEvent<DamageReceivedModifierWhenUnanchoredComponent, DamageModifyEvent>(
+            OnDamageReceivedModifierWhenUnanchoredModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
+            ]
+        );
+
         _bruteTypes.Clear();
         _burnTypes.Clear();
 
@@ -320,6 +329,21 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         args.Cancelled = true;
+    }
+
+    private void OnDamageReceivedModifierWhenUnanchoredModify(Entity<DamageReceivedModifierWhenUnanchoredComponent> ent, ref DamageModifyEvent args)
+    {
+        if (!TryComp(ent, out TransformComponent? xform) ||
+            xform.Anchored)
+        {
+            return;
+        }
+
+        var total = args.Damage.GetTotal();
+        if (total <= FixedPoint2.Zero)
+            return;
+
+        args.Damage *= ent.Comp.Multiplier;
     }
 
     public DamageSpecifier DistributeDamage(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
