@@ -572,3 +572,4 @@
   - type: UseDelay
     delay: 0.3
   - type: Climbable
+  - type: RMCOpenOnlyWhenUnanchored
