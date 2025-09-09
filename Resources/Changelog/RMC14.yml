@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added a new version of the "Golden Arrow" map for PVE.
-    type: Add
-  - message: Added multiple missing props found on the Golden Arrow.
-    type: Add
-  id: 1836
-  time: '2025-06-08T12:08:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6646
 - author: Dutch-VanDerLinde
   changes:
   - message: Added a 70 hour playtime reward for security survivors, senior officer
@@ -4540,5 +4531,12 @@
   id: 2336
   time: '2025-09-08T11:49:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7823
+- author: CyberTropic
+  changes:
+  - message: Fixed floodlights not turning on.
+    type: Fix
+  id: 2337
+  time: '2025-09-09T22:57:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7868
 Name: RMC14
 Order: -1
