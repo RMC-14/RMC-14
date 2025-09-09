@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed sentries not being able to be deployed if you have 0 skill.
-    type: Fix
-  id: 1842
-  time: '2025-06-08T12:33:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6524
 - author: noctyrnal
   changes:
   - message: The PVE version of Hybrisa has received a massive update, adding lots
@@ -4522,5 +4515,15 @@
   id: 2341
   time: '2025-09-09T23:19:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7424
+- author: N0lim
+  changes:
+  - message: Fixed stack overflow when two hiveless xeno damage each other with acid
+      blood
+    type: Fix
+  - message: Fixed wrong damage multiplier for acid blood splash in case xeno vs xeno
+    type: Fix
+  id: 2342
+  time: '2025-09-09T23:24:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7843
 Name: RMC14
 Order: -1
