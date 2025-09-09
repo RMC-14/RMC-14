@@ -144,7 +144,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/reagentjug.rsi
-    
     layers:
     - state: reagentjug
     - map: [ "enum.SolutionContainerLayers.Fill" ]
