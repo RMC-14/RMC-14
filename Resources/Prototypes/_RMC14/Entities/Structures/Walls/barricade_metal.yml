@@ -564,6 +564,7 @@
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
   - type: InteractedBlacklist
+    anchoredOnly: true
     blacklist:
       components:
       - Xeno
