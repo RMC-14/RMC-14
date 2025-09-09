@@ -37,7 +37,7 @@ public sealed record GeneralStationRecord
     public string JobPrototype = string.Empty;
 
     /// <summary>
-    ///     RCM - Squad of the marine that this station record represents, if applicable.
+    ///     RMC - Squad of the marine that this station record represents, if applicable.
     /// </summary>
     [DataField]
     public string? Squad;
