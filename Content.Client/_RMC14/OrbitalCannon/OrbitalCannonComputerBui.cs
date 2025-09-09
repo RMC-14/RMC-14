@@ -98,6 +98,7 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
         switch (computer.Status)
         {
             case OrbitalCannonStatus.Unloaded:
+
                 _window.TrayButtonOne.Text = Loc.GetString("rmc-ui-ob-load-tray");
                 _window.TrayButtonOne.Visible = true;
                 _window.TrayButtonOne.OnPressed += LoadTray;
