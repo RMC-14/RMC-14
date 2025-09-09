@@ -95,7 +95,7 @@
   - type: Damageable
     damageContainer: Inorganic
   - type: PointLight
-    enabled: false
+    enabled: true
     radius: 7
     netsync: false
     offset: "0,0.5"
