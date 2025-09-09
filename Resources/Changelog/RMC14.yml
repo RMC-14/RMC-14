@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed base crusher's charge not deleting or doing enough damage against
-      some objects.
-    type: Fix
-  - message: Fixed screech not stacking with existing stuns.
-    type: Fix
-  - message: Fixed ground acid stunning if you were downed.
-    type: Fix
-  id: 1841
-  time: '2025-06-08T12:31:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6568
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed sentries not being able to be deployed if you have 0 skill.
@@ -4527,5 +4515,12 @@
   id: 2340
   time: '2025-09-09T23:08:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7795
+- author: Vixting
+  changes:
+  - message: preserve tacmap state
+    type: Add
+  id: 2341
+  time: '2025-09-09T23:19:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7424
 Name: RMC14
 Order: -1
