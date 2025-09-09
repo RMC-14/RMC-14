@@ -12,3 +12,4 @@ cm-pill-contents-tricordrazine = A Tricordrazine pill. A weak general use medici
 rmc-pill-contents-meralyne-bicaridine = A Meralyne-Bicaridine pill. Rapidly heals brute damage.
 rmc-pill-contents-russianred = A Russian Red pill. A very dangerous radiation-countering substance.
 rmc-pill-contents-antized = A pill of some unique medicine. You believe it can treat necrotic infections.
+rmc-pill-contents-imidazoline = An imidazoline pill. Used to restore vision from non-congenital eye damage.

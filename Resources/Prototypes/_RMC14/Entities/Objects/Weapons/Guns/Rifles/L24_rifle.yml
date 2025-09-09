@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleL24
   name: L24 rifle
-  description: A rare sight, this rifle is seen most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M41A MK2, it has noticeably improved handling and vastly improved performance. This one is painted in The Royal Marines Commando purple-blue camouflage.
+  description: A rare sight, this rifle is seen most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in The Royal Marines Commando purple-blue camouflage.
   suffix: Filled
   components:
   - type: Sprite

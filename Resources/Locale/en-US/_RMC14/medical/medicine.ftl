@@ -62,6 +62,7 @@ rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
+rmc-imidazoline-container-label-text = Im
 
 rmc-custom-container-label-text = {$customLabel}
 
