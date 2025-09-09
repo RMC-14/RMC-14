@@ -139,7 +139,7 @@
 - type: entity
   parent: RMCBucketJanitorial
   id: RMCReagentJug
-  name: Reagent Jug
+  name: reagent jug
   description: A large jug made of non-reactive plastic, capable of carrying large amounts of diverse chemicals to wherever they are needed. Holds 500 units.
   components:
   - type: Sprite
