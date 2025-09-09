@@ -82,7 +82,7 @@
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalMarinesBreacher
+  id: RMCJobRoyalBreacher
 
 - type: jobIcon
   parent: CMJobIconBase
