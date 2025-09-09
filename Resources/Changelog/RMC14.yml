@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added a 70 hour playtime reward for security survivors, senior officer
-      rank.
-    type: Add
-  id: 1838
-  time: '2025-06-08T12:23:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6088
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Reworked the construction system. Press Z with a material inhand to open
-      the menu. The G menu for construction still works, with the added restrictions.
-    type: Add
-  - message: You will now be restricted to building objects one at a time, and only
-      on the tile you're currently on.
-    type: Tweak
-  - message: Added construction skill requirements for building some objects
-    type: Add
-  id: 1839
-  time: '2025-06-08T12:30:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6594
 - author: noctyrnal
   changes:
   - message: Added missing content for Hybrisa.
@@ -4538,5 +4517,19 @@
   id: 2337
   time: '2025-09-09T22:57:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7868
+- author: J C Denton
+  changes:
+  - message: Fixed armory lockers being destructible.
+    type: Fix
+  id: 2338
+  time: '2025-09-09T23:03:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7852
+- author: DimFlower
+  changes:
+  - message: Fixed 1984 Hollowpoint AP Values
+    type: Fix
+  id: 2339
+  time: '2025-09-09T23:03:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7854
 Name: RMC14
 Order: -1
