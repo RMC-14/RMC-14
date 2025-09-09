@@ -3,7 +3,7 @@
   id: CMSurvivorICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorICB
+  playTimeTracker: CMJobSurvivorCorporate
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (Survivor)
   icon: "RMCJobIconICBLiaison"
   ranks:
@@ -18,6 +18,8 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -27,7 +29,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-icb
-  useLoadoutOfJob: CMSurvivorCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
@@ -51,7 +53,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorICB
-  isHumanoid: true

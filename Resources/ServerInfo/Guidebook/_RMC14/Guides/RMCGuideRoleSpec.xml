@@ -1,0 +1,47 @@
+<Document>
+  ## Elite Assets of the UNMC
+  Squad Specialists are among the most powerful assets the UNMC deploys. From the outset, these operatives can dramatically influence the outcome of any battle.
+
+  While they have access to unique kits and potent squad-supporting weaponry, they are [bold]not[/bold] lone wolves or "rambos" and should operate as integral parts of the team.
+  Understanding each specialist's role is crucial to maximizing their impact on the marine war machine.
+
+  This page provides a general tips for new specialists, followed by brief introductions to each specific kit, leading to more detailed individual guides.
+
+  ## General Tips for All Specialists
+
+   <Box>[bold]Ammunition is Precious[/bold]: </Box>
+  - Most specialist ammunition is potent and expensive (in terms of requisition points or rarity). [color=#ffcc00]Conserve it.[/color]
+  - For many kits, consider requesting extra ammo from Requisitions early in the round to avoid running dry at critical moments.
+
+   <Box>[bold]Know Your Gear & Role[/bold]: </Box>
+  - Understand the strengths, weaknesses, and optimal use cases for your specific specialist kit and its weaponry. Don't use an anti-armor rocket on lone drones if your team needs them for a Crusher.
+  - Before deploying, be intimately familiar with every piece of equipment in your kit. Know how to switch ammo types quickly, the effective range of your weapons, and the blast radius or unique properties of your ordnance/abilities.
+
+   <Box>[bold]Situational Awareness is Key[/bold]: </Box>
+  - As a high-value target, you are prone to being [italic]targeted[/italic] by hostiles. Maintain constant vigilance, especially for flanks.
+  - Wearing standard marine armor instead of your specialist armor can sometimes reduce this, but at the cost of your specialized armor's benefits.
+
+   <Box>[bold]Stay Alive, You're a Force Multiplier[/bold]: </Box>
+  - While every marine's life is valuable, as a specialist, you bring unique capabilities that can turn the tide. Play smart, don't take unnecessary risks, and prioritize your survival to continue supporting your team. Your loss is often a greater blow to the squad's overall capability.
+
+
+  ## Available Specialist Kits
+  Click on a specialist's name for a detailed guide on their equipment, tactics, and unique capabilities.
+
+  - [bold][textlink="Heavy Grenadier Specialist" link="RMCGuideRoleGrenadierSpec"][/textlink][/bold] - "Michael Bay Fan"
+  - Wasters of explosive ordnance, Heavy Grenadiers use the multi-shot M83 grenade launcher to deliver a variety of grenades with precision, clearing paths and stunning grouped enemies. Their M3-G4 armor offers substantial protection.
+  <Box> <GuideEntityEmbed Entity="WeaponLauncherM83" Context=""/> <GuideEntityEmbed Entity="RMCArmorM3G4" Context=""/> <GuideEntityEmbed Entity="CMGrenadeFrag" Context=""/> <GuideEntityEmbed Entity="CMGrenadeHighExplosive" Context=""/> <GuideEntityEmbed Entity="RMCGrenadeIncendiary" Context=""/> </Box>
+
+  - [bold][textlink="Demolitionist Specialist" link="RMCGuideRoleDemoSpec"][/textlink][/bold] - "Anti-Everything"
+  - When something absolutely needs to be obliterated, the Demolitionist brings the M5 Anti-Tank Launcher. Capable of firing HE and AP rockets , they are the bane of heavy targets and fortified positions.
+  <Box> <GuideEntityEmbed Entity="RMCWeaponLauncherM5ATL" Context="" /> <GuideEntityEmbed Entity="RMCRocket84mm" Context=""/> <GuideEntityEmbed Entity="RMCRocket84mmAntiArmor" Context=""/> <GuideEntityEmbed Entity="RMCExplosivePlastic" Context=""/> </Box>
+
+  - [bold][textlink="Sniper Specialist" link="RMCGuideRoleSniperSpec"][/textlink][/bold] - "Long-Range Deterrent"
+  - Wielding the M96S sniper rifle or the XM43E1 anti-materiel sniper rifle , this specialist provides crucial long-range fire support, capable of slowing key targets and acting as a powerful psychological deterrent to Xenomorph advances. Comes with a spotter kit for rifleman.
+  <Box> <GuideEntityEmbed Entity="CMM96SSniperRifle" Context=""/> <GuideEntityEmbed Entity="RMCXM43E1AntiMaterielRifle" Context=""/> <GuideEntityEmbed Entity="RMCKitSpotter" Context=""/> </Box>
+
+  - [bold][textlink="Scout Specialist" link="RMCGuideRoleScoutSpec"][/textlink][/bold] - "Silent Hunter & Intel"
+  - Armed with the hard-hitting M4SPR custom battle rifle and an M68 Thermal Cloak, the Scout excels in reconnaissance, target designation with their Scout Designator, and surgical engagements.
+  <Box> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom" Context=""/> <GuideEntityEmbed Entity="RMCBackpackScout" Context=""/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout" Context=""/> </Box>
+
+</Document>

@@ -131,6 +131,22 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
 
+# CBRN
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCCBRNSuit
+  name: M3 MOPP Suit
+  description: M3 MOPP suits are specially designed and engineered to protect the wearer from unshielded exposure to any Chemical, Biological, Radiological, or Nuclear (CBRN) threats in the field. The suit has a recommended lifespan of twenty-four hours once contact with a toxic environment is made, but depending on the severity this can be shortened to eight hours or less.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/cbrnsuit.rsi
+  - type: CMArmor
+    bullet: 10
+    melee: 10
+    bio: 100
+    explosionArmor: 10
+
 # Sun Riders
 
 - type: entity
@@ -272,6 +288,28 @@
   name: white service uniform
   description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
 
+- type: entity
+  parent: CMJumpsuitCO
+  id: RMCJumpsuitCOUniform
+  name: UNMC officer uniform
+  description: The well-ironed utility uniform of a UNMC officer. Even looking at it the wrong way could result in being court-martialed. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/jumpsuit.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: RMCJumpsuitCOUniformGray
+  name: Commanding Officer's gray formal uniform
+  description: A well-ironed UNMC officer uniform  intended for parades or hot weather. Wear this with pride.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/grey_jumpsuit.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Executive officer
 
 - type: entity
@@ -319,7 +357,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal_alt.rsi
-    
+
 - type: entity
   parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOBlackAlt
