@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The PVE version of Hybrisa has received a massive update, adding lots
-      of missing content and fixing many issues with it.
-    type: Tweak
-  - message: Added the TSEPA Peaked Cap, Jacket, High-Vis Vest / Jacket and the TSEPA
-      Synthetic role. These are exclusive to PVE outside of admins.
-    type: Add
-  id: 1843
-  time: '2025-06-09T01:53:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6658
 - author: Utmanarn
   changes:
   - message: CPR time now depends medical skill.
@@ -4525,5 +4514,13 @@
   id: 2342
   time: '2025-09-09T23:24:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7843
+- author: 4310V343k
+  changes:
+  - message: Marines in the crew manifest are now split into squads and sorted based
+      on their role!
+    type: Add
+  id: 2343
+  time: '2025-09-09T23:33:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6563
 Name: RMC14
 Order: -1
