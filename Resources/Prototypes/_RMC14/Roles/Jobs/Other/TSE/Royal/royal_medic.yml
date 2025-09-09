@@ -7,8 +7,9 @@
   ranks:
     RMCRankTSECorporal: [ ]
   startingGear: RMCGearRoyalMedic
-  icon: RMCJobIconRoyalMedic
+  icon: "RMCJobIconRoyalMedic"
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
   spawnMenuRoleName: RCM Medical Technician
   special:
   - !type:AddComponentSpecial
@@ -33,7 +34,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-medic
-  hasIcon: false
   hidden: true
 
 - type: entity
@@ -61,7 +61,7 @@
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMHospitalCorpsman
+      role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
   

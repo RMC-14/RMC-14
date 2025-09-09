@@ -1480,7 +1480,7 @@
     contents:
     - id: RMCExplosiveBreachingCharge
       amount: 3
-    - id: RMCShellShotgun
+    - id: CMShellShotgunBuckshot
       amount: 3
     - id: CMPackFlare
 

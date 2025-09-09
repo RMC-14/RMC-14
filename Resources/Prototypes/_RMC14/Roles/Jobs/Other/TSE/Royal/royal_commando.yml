@@ -7,8 +7,9 @@
   ranks:
     RMCRankTSEMarine: [ ]
   startingGear: RMCGearRoyalCommando
-  icon: RMCJobIconRoyalCommando
+  icon: "RMCJobIconRoyalCommando"
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
   spawnMenuRoleName: RCM Rifleman
   special:
   - !type:AddComponentSpecial
@@ -32,7 +33,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-commando
-  hasIcon: false
   hidden: true
 
 - type: entity

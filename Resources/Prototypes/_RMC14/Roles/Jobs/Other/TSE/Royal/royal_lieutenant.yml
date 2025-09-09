@@ -7,8 +7,9 @@
   ranks:
     RMCRankTSELieutenant: [ ] # According to CM13 devs
   startingGear: RMCGearRoyalLieutenant # If you don't pronounce it "leftenant"
-  icon: RMCJobIconRoyalLieutenant # You should be banned for being LRP
+  icon: "RMCJobIconRoyalLieutenant" # You should be banned for being LRP
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-major
   spawnMenuRoleName: RCM Lieutenant # I echo the sentiment here
   special:
   - !type:AddComponentSpecial
@@ -40,7 +41,6 @@
     - type: CommandAccent
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
-  hasIcon: false
   hidden: true
 
 # This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality

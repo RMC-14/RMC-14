@@ -7,8 +7,9 @@
   ranks:
     RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearRoyalMarksman
-  icon: RMCJobIconRoyalMarksman
+  icon: "RMCJobIconRoyalMarinesMarksman"
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
   spawnMenuRoleName: RCM Marksman
   special:
   - !type:AddComponentSpecial
@@ -32,7 +33,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-marksman
-  hasIcon: false
   hidden: true
 
 - type: entity

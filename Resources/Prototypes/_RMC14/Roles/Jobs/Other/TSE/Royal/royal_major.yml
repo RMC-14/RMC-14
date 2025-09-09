@@ -7,7 +7,7 @@
   ranks:
     RMCRankTSEMajor: [ ] 
   startingGear: RMCGearRoyalMajor
-  icon: RMCJobIconRoyalMajor 
+  icon: "RMCJobIconRoyalMajor"
   joinNotifyCrew: false
   spawnMenuRoleName: RCM Major 
   special:
@@ -43,7 +43,6 @@
     - type: CommandAccent
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
-  hasIcon: false
   hidden: true
   
 - type: startingGear 
