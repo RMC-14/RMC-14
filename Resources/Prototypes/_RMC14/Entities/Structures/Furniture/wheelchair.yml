@@ -72,6 +72,7 @@
   name: wheelchair
   description: Helps those with injuries related to immobility to move freely
   components:
+  - type: RMCAllowStrapMovement
   - type: Wheelchair
     speedMultiplier: 0.75
 
@@ -81,6 +82,7 @@
   name: wheelchair with bell
   description: Helps those with injuries related to immobility to move freely. Has a bell attached.
   components:
+  - type: RMCAllowStrapMovement
   - type: Wheelchair
     speedMultiplier: 0.75
     bellAction: ActionWheelchairBell
