@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added missing content for Hybrisa.
-    type: Add
-  - message: The television can now be rotated.
-    type: Tweak
-  - message: The "ON" Phonebox now glows.
-    type: Tweak
-  id: 1840
-  time: '2025-06-08T12:29:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6553
 - author: Vermidia
   changes:
   - message: Fixed base crusher's charge not deleting or doing enough damage against
@@ -4531,5 +4520,12 @@
   id: 2339
   time: '2025-09-09T23:03:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7854
+- author: NotInButiN
+  changes:
+  - message: Fixed Overall category on RMC Playtime Stats
+    type: Fix
+  id: 2340
+  time: '2025-09-09T23:08:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7795
 Name: RMC14
 Order: -1
