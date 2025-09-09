@@ -22,6 +22,8 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared._RMC14.Storage.Containers;
+using Content.Shared.Hands;
+using Content.Shared.Item;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -57,6 +59,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentRemove>(OnVentCrawlingEnd);
+        SubscribeLocalEvent<VentCrawlingComponent, DropAttemptEvent>(OnVentCrawlingTryDrop);
+        SubscribeLocalEvent<VentCrawlingComponent, PickupAttemptEvent>(OnVentCrawlingTryPickup);
 
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
@@ -313,6 +317,16 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         {
             _actions.SetEnabled(action.AsNullable(), true);
         }
+    }
+
+    private void OnVentCrawlingTryDrop(Entity<VentCrawlingComponent> ent, ref DropAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnVentCrawlingTryPickup(Entity<VentCrawlingComponent> ent, ref PickupAttemptEvent args)
+    {
+        args.Cancel();
     }
 
     public override void Update(float frameTime)
