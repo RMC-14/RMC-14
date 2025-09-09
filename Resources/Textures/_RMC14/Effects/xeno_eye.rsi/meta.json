@@ -1,23 +1,26 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/mob/mob.dmi",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by Alekshhh",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "hologram",
-      "delays": [
-        [
-          6,
-          0.1,
-          0.1,
-          0.2,
-          0.1
-        ]
-      ]
+      "name": "hudeye1"
+    },
+    {
+      "name": "hudeye2"
+    },
+    {
+      "name": "hudeye3"
+    },
+    {
+      "name": "hudeye4"
+    },
+    {
+      "name": "hudeye5"
     }
   ]
 }

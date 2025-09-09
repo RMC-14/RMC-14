@@ -49,8 +49,6 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
-    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
     - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
@@ -64,6 +62,7 @@
       state: body-overlay-2
       visible: false
     - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]

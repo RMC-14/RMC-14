@@ -202,7 +202,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             }
 
             if (!any)
-                return;
+                continue;
 
             comp.Current = FixedPoint2.Min(comp.Max, comp.Current + comp.Recharge);
         }

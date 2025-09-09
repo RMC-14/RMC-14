@@ -58,6 +58,16 @@
     jumpsuit: CMJumpsuitXOFormal
 
 - type: loadout
+  id: MarineUniformRMC
+  equipment:
+    jumpsuit: JumpsuitMarine
+
+- type: loadout
+  id: CorpsmanUniformRMC
+  equipment:
+    jumpsuit: CMJumpsuitMarineMedic
+
+- type: loadout
   id: ComTechUniformRMC
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
@@ -71,6 +81,11 @@
   id: MPUniformRMC
   equipment:
     jumpsuit: CMJumpsuitMP
+
+- type: loadout
+  id: JumpsuitOperationsRMC
+  equipment:
+    jumpsuit: CMJumpsuitOperations
 
 - type: loadout
   id: DCCJumpsuitRMC
@@ -118,6 +133,61 @@
   equipment:
     jumpsuit: CMJumpsuitLiaisonCorporateFormal
 
+# Uniform Accessories
+- type: loadout
+  id: ScienceArmbandRMC
+  storage:
+    back:
+    - RMCScienceArmband
+
+- type: loadout
+  id: EngiArmbandRMC
+  storage:
+    back:
+    - RMCEngiArmband
+
+- type: loadout
+  id: MedArmbandRMC
+  storage:
+    back:
+    - RMCMedArmband
+
+- type: loadout
+  id: TieRMC
+  storage:
+    back:
+    - RMCTie
+    
+- type: loadout
+  id: TieGreenRMC
+  storage:
+    back:
+    - RMCTieGreen
+    
+- type: loadout
+  id: TieBlackRMC
+  storage:
+    back:
+    - RMCTieBlack
+
+- type: loadout
+  id: TieGoldRMC
+  storage:
+    back:
+    - RMCTieGold
+    
+- type: loadout
+  id: TieRedRMC
+  storage:
+    back:
+    - RMCTieRed
+
+- type: loadout
+  id: TiePurpleRMC
+  storage:
+    back:
+    - RMCTiePurple
+
 # Glasses
 - type: loadout
   id: GlassesSecurityRMC
@@ -127,49 +197,49 @@
 
 # Shoes
 - type: loadout
-  id: BootsBlackRMC
+  id: BootsBlackRMCSynth
   storage:
     back:
     - CMBootsBlack
 
 - type: loadout
-  id: ShoesBlackRMC
+  id: ShoesBlackRMCSynth
   storage:
     back:
     - RMCShoesBlack
 
 - type: loadout
-  id: ShoesBrownRMC
+  id: ShoesBrownRMCSynth
   storage:
     back:
     - RMCShoesBrown
 
 - type: loadout
-  id: ShoesRedRMC
+  id: ShoesRedRMCSynth
   storage:
     back:
     - RMCShoesRed
 
 - type: loadout
-  id: ShoesGreenRMC
+  id: ShoesGreenRMCSynth
   storage:
     back:
     - RMCShoesGreen
 
 - type: loadout
-  id: ShoesPurpleRMC
+  id: ShoesPurpleRMCSynth
   storage:
     back:
     - RMCShoesPurple
 
 - type: loadout
-  id: ShoeWhiteRMC
+  id: ShoeWhiteRMCSynth
   storage:
     back:
     - RMCShoesWhite
 
 - type: loadout
-  id: ShoeYellowRMC
+  id: ShoeYellowRMCSynth
   storage:
     back:
     - RMCShoesYellow
@@ -210,6 +280,42 @@
   storage:
     back:
     - ArmorHelmetM10
+
+- type: loadout
+  id: HardHatRMC
+  storage:
+    back:
+    - RMCHardHat
+    
+- type: loadout
+  id: HardHatOrangeRMC
+  storage:
+    back:
+    - RMCHardhatOrange
+    
+- type: loadout
+  id: HardHatWhiteRMC
+  storage:
+    back:
+    - RMCHardhatWhite
+    
+- type: loadout
+  id: HardHatBlueRMC
+  storage:
+    back:
+    - RMCHardhatBlue
+
+- type: loadout
+  id: HeadCapOfficerRMC
+  storage:
+    back:
+    - CMHeadCapOfficer
+
+- type: loadout
+  id: HeadCapCargoRMC
+  storage:
+    back:
+    - CMHeadCapCargo
 
 # Suits
 - type: loadout
@@ -289,6 +395,12 @@
   storage:
     back:
     - RMCJacketCorporateBlue
+
+- type: loadout
+  id: JacketWindbreakerRMC
+  storage:
+    back:
+    - RMCJacketWindbreaker
 
 # Backpacks
 - type: loadout

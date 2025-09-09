@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: RMCSuitRadiation
+  name: radiation suit
+  description: "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/radiation_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/radiation_suit.rsi
+  - type: CMArmor
+    bio: 30
+    #rad: 50
+  - type: ClothingSpeedModifier
+    walkModifier: .5
+    sprintModifier: .5

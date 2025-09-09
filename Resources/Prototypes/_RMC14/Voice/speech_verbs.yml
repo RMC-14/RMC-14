@@ -24,3 +24,12 @@
   - chat-speech-verb-feroxi-2
   - chat-speech-verb-feroxi-3
   - chat-speech-verb-feroxi-4
+
+- type: speechVerb
+  id: Megaphone
+  name: chat-speech-verb-name-megaphone
+  speechVerbStrings:
+  - chat-speech-verb-megaphone-1
+  - chat-speech-verb-megaphone-2
+  priority: 1000
+  bold: true

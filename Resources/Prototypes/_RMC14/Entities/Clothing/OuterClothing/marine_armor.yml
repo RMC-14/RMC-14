@@ -32,8 +32,7 @@
   id: RMCArmorM3MediumVariants
   name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
@@ -162,9 +161,9 @@
     explosionArmor: 35
   - type: RMCArmorSpeedTier
     speedTier: heavy
-  - type: ClothingSpeedModifier
-    walkModifier: 0.62
-    sprintModifier: 0.62
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LOWHEAVY
+    walkModifier: 0.64
+    sprintModifier: 0.64
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -175,13 +174,14 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m3-eod-pattern-heavy-armor
 
 - type: entity
   id: RMCArmorM3HeavyVariants
   name: M3-EOD pattern heavy armor
   description: A heavier version of the standard M3 pattern armor, the armor is primarily designed to withstand ballistic, explosive, and internal damage, with the drawback of increased bulk and thus reduced movement speed, alongside little additional protection from standard blunt force impacts and biological threats.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
@@ -379,6 +379,11 @@
     bullet: 25
     bio: 15
     explosionArmor: 40
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.62
+    sprintModifier: 0.62
   - type: Corrodible
     isCorrodible: false
   - type: RMCGrantLeapProtection
@@ -441,8 +446,7 @@
   id: RMCArmorM3LightVariants
   name: M3-L pattern light armor
   description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices durability for more speed.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
@@ -594,11 +598,11 @@
   - type: CMArmor
     melee: 15
     bullet: 30
-    bio: 15
+    bio: 5
     explosionArmor: 10
   - type: Storage
     grid:
-    - 0,0,1,1 # 2 slots
+    - 0,0,1,1 # 1 slots
   - type: RMCBulkyArmor
     isBulky: false
   - type: ItemCamouflage
@@ -680,7 +684,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by UNMC Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -695,6 +699,21 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  - type: FirewalkArmor
+    whitelist:
+      components:
+      - PyroWhitelist
+    addComponentsOnFirewalk:
+    - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    auraColor: "#03FCC6"
 
 # m45
 - type: entity
@@ -765,6 +784,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage
@@ -836,3 +857,5 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-armor-xm4-pattern-intel-armor

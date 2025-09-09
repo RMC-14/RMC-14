@@ -15,4 +15,5 @@ role-timer-engineer-survivor-roles = any engineer survivor roles
 role-timer-medical-survivor-roles = any medical survivor roles
 role-timer-corporate-survivor-roles = any corporate survivor roles
 role-timer-security-survivor-roles = any security survivor roles
+role-timer-security-scientist-roles = any researcher survivor roles
 role-timer-commander-survivor-roles = any commander survivor roles

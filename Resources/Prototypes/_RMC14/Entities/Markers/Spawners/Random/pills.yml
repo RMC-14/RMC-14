@@ -1,0 +1,67 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomPillBase
+  name: pill bottle loot spawner
+  description: This is a random pill bottle, for survivors.
+  suffix: Base
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_pills
+
+- type: entity
+  parent: RMCSpawnerRandomPillBase
+  id: RMCSpawnerRandomPillBottle
+  suffix: Guaranteed
+  components:
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCPillCanisterInaprovalineNoSkill
+    #- TODO RMC14 Mystery
+    #- TODO RMC14 Alkysine
+    #- TODO RMC14 Imidazoline
+    #- TODO RMC14 Tramadol
+    - RMCPillCanisterBicaridineNoSkill
+    - RMCPillCanisterKelotaneNoSkill
+    #- TODO RMC14 Peridaxon
+    #- TODO RMC14 Oxycodone packet
+
+- type: entity
+  parent: RMCSpawnerRandomPillBottle
+  id: RMCSpawnerRandomPillBottleLowChance
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_pills_20
+  - type: RandomSpawner
+    chance: 0.2
+
+- type: entity
+  parent: RMCSpawnerRandomPillBottle
+  id: RMCSpawnerRandomPillBottleMidChance
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_pills_50
+  - type: RandomSpawner
+    chance: 0.5
+
+- type: entity
+  parent: RMCSpawnerRandomPillBottle
+  id: RMCSpawnerRandomPillBottleHighChance
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_pills_80
+  - type: RandomSpawner
+    chance: 0.8

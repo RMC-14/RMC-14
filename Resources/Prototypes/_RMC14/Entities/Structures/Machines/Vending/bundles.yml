@@ -2,8 +2,7 @@
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -12,7 +11,7 @@
     bundle:
     - ArmorHelmetM10
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -20,14 +19,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleFireteamLeaderApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M12 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a M12 helmet, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarine
-    - CMHandsInsulated
+    - RMCJumpsuitMarinePatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -39,7 +37,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedic
+    - RMCJumpsuitMarineMedicPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -65,18 +63,18 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineer
-    - CMHandsInsulated
+    - RMCJumpsuitMarineEngineerPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -97,7 +95,7 @@
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - CMAPCElectronics
     - RMCNailgunTactical
 
 - type: entity
@@ -110,7 +108,7 @@
     bundle:
     - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -123,7 +121,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -161,7 +159,7 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -181,7 +179,7 @@
     - CMSynthGraft
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -197,4 +195,5 @@
     - RMCLaserDesignator
     - RMCWhistle
     - RMCWeaponTaser
-    #TODO RMC14 Megaphone, Paper Map.
+    - RMCMegaphone
+    #TODO RMC14 Paper Map.

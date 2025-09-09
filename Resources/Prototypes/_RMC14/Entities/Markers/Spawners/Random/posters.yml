@@ -5,7 +5,6 @@
   components:
   - type: Sprite
     layers:
-    - state: red
     - sprite: _RMC14/Structures/Wallmounts/posters.rsi
       state: random_anything
   - type: RandomSpawner
@@ -19,14 +18,14 @@
     - CMPosterBeth
     - CMPosterArt1
     - CMPostEat
-    - CMPosterArious
+    - CMPosterPathos
     - CMPosterSilicon2
     - CMPosterElectro
     - CMPosterSilicon
     - CMPosterMissJanuary
     - CMPosterF100
     - CMPosterRememberIo
-    - CMPosterPulseRifle
+    - CMPosterAssaultRifle
     - CMPosterMissJuly
     - CMPosterMissApril
     - CMPosterSuspicious

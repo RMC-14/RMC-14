@@ -112,3 +112,25 @@
   components:
   - type: Sprite
     color: "#64AA6E"
+
+# Strata
+- type: entity
+  parent: RMCGrassTallBase
+  id: RMCGrassTallStrata
+  components:
+  - type: Sprite
+    color: "#99d178"
+
+- type: entity
+  parent: RMCGrassTallSidesBase
+  id: RMCGrassTallSidesStrata
+  components:
+  - type: Sprite
+    color: "#99d178"
+
+- type: entity
+  parent: RMCGrassTallCornerBase
+  id: RMCGrassTallCornerStrata
+  components:
+  - type: Sprite
+    color: "#99d178"

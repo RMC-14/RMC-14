@@ -54,6 +54,7 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
+        startingItem: RMCMagazineRifleType71
   - type: GunDamageModifier
     multiplier: 0.8
   - type: AttachableHolder

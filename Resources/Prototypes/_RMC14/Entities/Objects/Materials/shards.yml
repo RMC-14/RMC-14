@@ -61,6 +61,16 @@
 
 - type: entity
   parent: CMShardBase
+  id: RMCShardIce
+  name: ice shard
+  description: A shard of ice. Could probably be used as ... a throwing weapon?
+  components:
+  - type: Tag
+    tags:
+      - Trash
+
+- type: entity
+  parent: CMShardBase
   id: CMShardPhoron
   name: phoron shard
   description: A shard of broken phoron glass. Considerably tougher than normal glass shards. Apparently not tough enough to be a window.

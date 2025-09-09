@@ -26,6 +26,7 @@
         RMCSkillFirearms: 0
         RMCSkillEndurance: 0
         RMCSkillVehicles: 1
+    - type: RMCTrackable
 
 - type: playTimeTracker
   id: RMCJobWeYaLawyer
@@ -34,7 +35,7 @@
   id: RMCJobWeYaLawyer
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMC
+    ears: RMCHeadsetDistressLawyerWeYa
     jumpsuit: CMJumpsuitLiaisonBlue
     # TODO RMC14 "neck: blue tie"
     outerClothing: RMCJacketCorporateBlue

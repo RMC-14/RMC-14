@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: Clothing
+  parent: [Clothing, RMCBaseUniformAccessoryItemJumpsuit]
   id: RMCUniformBase
   components:
   - type: Clothing
@@ -14,6 +14,8 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: Sprite
     state: null
     layers:
@@ -23,7 +25,6 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-  - type: PlaytimeMedalHolder
   - type: Food
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -56,6 +57,7 @@
     - name: rmc-jacket-verb
       prefix: jacket
       priority: 0
+      hideAccessories: true
     - name: rmc-sleeves-verb
       prefix: sleeves
       priority: 1

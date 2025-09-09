@@ -1,0 +1,18 @@
+# TODO: same as fire extinguisher make it use a base structure theres lots of copy paste
+- type: entity
+  parent: FireAxeCabinet
+  id: RMCFireAxeCabinet
+  suffix: RMC
+  components:
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: RMCFireAxeCabinet
+  id: RMCFireAxeCabinetFilled
+  suffix: RMC, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - RMCFireAxe

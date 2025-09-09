@@ -15,6 +15,7 @@
   id: RMCHeadsetColonyIcons
   name: colony headset
   description: A standard headset used by colonists.
+  suffix: With HUD Icons
   components:
   - type: ContainerFill
     containers:
@@ -33,8 +34,11 @@
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: cmb_headset
   - type: ContainerFill
     containers:
       key_slots:
@@ -42,10 +46,10 @@
 
 # For CMB and ICB survivors.
 - type: entity
-  parent: RMCHeadsetIconsCMB
+  parent: RMCHeadsetDistressBureau
   id: RMCHeadsetDistressBureauDamaged
   name: damaged bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
   components:
   - type: ContainerFill
     containers:
@@ -58,15 +62,19 @@
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
+  suffix: WeYa, Colony
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: we_ya_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyWEYA
+      - CMEncryptionKeyWEYAColony
 
 # For WeYa PMC
 - type: entity
-  parent: RMCHeadsetIconsWeYa
+  parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressPMC
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -76,8 +84,15 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmc
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -89,7 +104,7 @@
     radioTextIncrease: 2
 
 - type: entity
-  parent: RMCHeadsetIconsWeYa
+  parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressPMCDirector
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -103,6 +118,68 @@
   - type: GrantTacMapAlert
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
+
+# For WeYa lawyers
+- type: entity
+  parent: RMCHeadsetDistressWeYa
+  id: RMCHeadsetDistressGoon
+  name: We-Ya headset
+  description: A special headset used by corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderGoon
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - SupervisorWeYa
+    - CorporateLiaison
+    - LawyerWeYa
+    - LeaderGoon
+
+- type: entity
+  parent: RMCHeadsetDistressGoon
+  id: RMCHeadsetDistressGoonLeader
+  suffix: Leader
+  description:
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetDistressWeYa
+  id: RMCHeadsetDistressLawyerWeYa
+  name: We-Ya headset
+  description: A special headset used by corporate personnel.
+  suffix: Director
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderGoon
+    trackerModes:
+    - SupervisorWeYa
+    - LawyerWeYa
+    - LeaderGoon
 
 # For Duke's Dozen/Freelancer
 - type: entity
@@ -116,6 +193,10 @@
       key_slots:
       - RMCEncryptionKeyDukes
   - type: GrantMarineIcons
+  - type: GrantSquadLeaderTracker
+    defaultMode: FreelancerLeader
+    trackerModes:
+    - FreelancerLeader
 
 - type: entity
   parent: RMCHeadsetDistressDukes
@@ -124,19 +205,29 @@
   - type: RMCHeadset
     radioTextIncrease: 3
 
+# Survivor SOF/FORECON
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetForecon
-  name: Force Recon headset
-  description: A headset given to FORECON marines.
+  name: UNMC SOF headset
+  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  suffix: Survivor
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyFORECON
+      - CMEncryptionKeyColony
   - type: RMCHeadset
     channels:
-    - MarineForecon
+    - MarineSOF
+  - type: GrantSquadLeaderTracker
+    defaultMode: FORECONCommandingOfficer
+    trackerModes:
+    - FORECONCommandingOfficer
+    - SquadLeader
 
 #for UNMC personnel
 - type: entity
@@ -153,10 +244,11 @@
 
 # For MARSOC
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetForecon
   id: RMCHeadsetMARSOC
   name: UNMC SOF headset
   description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  suffix: ERT
   components:
   - type: ContainerFill
     containers:
@@ -165,4 +257,6 @@
   - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
-
+    defaultMode: MARSOCLeader
+    trackerModes:
+    - MARSOCLeader

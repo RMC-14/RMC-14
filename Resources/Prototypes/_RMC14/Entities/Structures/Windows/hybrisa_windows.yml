@@ -81,6 +81,10 @@
   - type: Construction
     graph: RMCWindowHybrisa
     node: windowHybrisa
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHybrisa
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -126,12 +130,16 @@
                 min: 1
                 max: 1
           - !type:ChangeConstructionNodeBehavior
-            node: windowFrameHybrisa
+            node: windowFrameHybrisaReinforced
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: Construction
-    graph: RMCWindowHybrisa
-    node: windowHybrisa
+    graph: RMCWindowHybrisaReinforced
+    node: windowHybrisaReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHybrisa
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindowIndestructible
@@ -139,6 +147,8 @@
   name: hull window
   description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
     state: strata_window0
@@ -186,6 +196,34 @@
     key: walls
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaMedicalReinforced
   - type: Construction
     graph: RMCWindowHybrisaMedicalReinforced
     node: windowHybrisaMedicalReinforced
@@ -226,6 +264,34 @@
     key: walls
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaEngiReinforced
   - type: Construction
     graph: RMCWindowHybrisaEngiReinforced
     node: windowHybrisaEngiReinforced
@@ -266,6 +332,34 @@
     key: walls
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaOfficeReinforced
   - type: Construction
     graph: RMCWindowHybrisaOfficeReinforced
     node: windowHybrisaOfficeReinforced
@@ -306,6 +400,34 @@
     key: walls
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePort
   - type: Construction
     graph: RMCWindowHybrisaSpacePort
     node: windowHybrisaSpacePort
@@ -344,6 +466,34 @@
     key: walls
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePortReinforced
   - type: Construction
     graph: RMCWindowHybrisaSpacePortReinforced
     node: windowHybrisaSpacePortReinforced
@@ -382,6 +532,34 @@
     key: walls
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePortCell
   - type: Construction
     graph: RMCWindowHybrisaSpacePortCell
     node: windowHybrisaSpacePortCell
@@ -422,6 +600,34 @@
     key: walls
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaResearchReinforced
   - type: Construction
     graph: RMCWindowHybrisaResearchReinforced
     node: windowHybrisaResearchReinforced

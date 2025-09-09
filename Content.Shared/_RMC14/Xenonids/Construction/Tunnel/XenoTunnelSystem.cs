@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
@@ -53,9 +54,11 @@ public sealed class XenoTunnelSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
@@ -114,6 +117,28 @@ public sealed class XenoTunnelSystem : EntitySystem
             {
                 subs.Event<NameTunnelMessage>(OnNameTunnel);
             });
+
+        Subs.BuiEvents<XenoTunnelComponent>(SelectDestinationTunnelUI.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(OnTunnelUIOpened);
+            subs.Event<BoundUIClosedEvent>(OnTunnelUIClosed);
+        });
+    }
+
+    private void OnTunnelUIOpened(Entity<XenoTunnelComponent> tunnel, ref BoundUIOpenedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        EnsureComp<TunnelUIUserComponent>(args.Actor);
+    }
+
+    private void OnTunnelUIClosed(Entity<XenoTunnelComponent> tunnel, ref BoundUIClosedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        RemCompDeferred<TunnelUIUserComponent>(args.Actor);
     }
 
     private void OnExamine(Entity<XenoTunnelComponent> xenoTunnel, ref ExaminedEvent args)
@@ -247,7 +272,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            DuplicateCondition = DuplicateConditions.SameTarget,
+            RootEntity = true
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), args.Performer, args.Performer);
@@ -258,14 +284,9 @@ public sealed class XenoTunnelSystem : EntitySystem
     {
         if (args.Cancelled)
         {
-            var actions = _action.GetActions(xenoBuilder.Owner);
-            foreach (var (action, comp) in actions)
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoDigTunnelActionEvent>(xenoBuilder.Owner))
             {
-                if (comp.BaseEvent is XenoDigTunnelActionEvent)
-                {
-                    _action.ClearCooldown(action);
-                    break;
-                }
+                _action.ClearCooldown((action, action));
             }
         }
 
@@ -286,7 +307,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            DuplicateCondition = DuplicateConditions.SameTarget,
+            RootEntity = true
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
@@ -297,14 +319,10 @@ public sealed class XenoTunnelSystem : EntitySystem
     {
         if (args.Cancelled)
         {
-            var actions = _action.GetActions(xenoBuilder.Owner);
-            foreach (var (action, comp) in actions)
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoDigTunnelActionEvent>(xenoBuilder.Owner))
             {
-                if (comp.BaseEvent is XenoDigTunnelActionEvent)
-                {
-                    _action.ClearCooldown(action);
-                    break;
-                }
+                _action.ClearCooldown((action, action));
+                break;
             }
         }
 
@@ -635,6 +653,7 @@ public sealed class XenoTunnelSystem : EntitySystem
                 NeedHand = true,
                 BreakOnDropItem = true,
                 BreakOnHandChange = true,
+                RootEntity = true
             };
 
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-fill"), args.User, args.User);
@@ -776,7 +795,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         }
 
         var tileRef = _map.GetTileRef(gridId, gridComp, coords);
-        if (!tileRef.GetContentTileDefinition().CanPlaceTunnel)
+        if (!_turf.GetContentTileDefinition(tileRef).CanPlaceTunnel)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
             return false;
@@ -797,9 +816,9 @@ public sealed class XenoTunnelSystem : EntitySystem
     private void SetEnabledStatusAllAbilities(EntityUid ent, bool newStatus)
     {
         var actions = _action.GetActions(ent);
-        foreach (var (_, actionComp) in actions)
+        foreach (var action in actions)
         {
-            actionComp.Enabled = newStatus;
+            _action.SetEnabled(action.AsNullable(), newStatus);
         }
     }
 

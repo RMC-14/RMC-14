@@ -1,0 +1,118 @@
+# combat technician
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedCombatTech
+  name: unassigned ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedCombatTech
+
+- type: randomHumanoidSettings
+  parent: [RMCCombatTech, RMCUnassignedBase]
+  id: RMCUnassignedCombatTech
+
+# fireteam leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedFireteamLeader
+  name: unassigned ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCFireteamLeader, RMCUnassignedBase]
+  id: RMCUnassignedFireteamLeader
+
+# hospital corpsman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedHospitalCorpsman
+  name: unassigned ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedHospitalCorpsman
+
+- type: randomHumanoidSettings
+  parent: [RMCHospitalCorpsman, RMCUnassignedBase]
+  id: RMCUnassignedHospitalCorpsman
+
+# rifleman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedRifleman
+  name: unassigned ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedRifleman
+
+- type: randomHumanoidSettings
+  parent: [RMCRifleman, RMCUnassignedBase]
+  id: RMCUnassignedRifleman
+
+# smart gun operator
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedSmartGunOperator
+  name: unassigned ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: [RMCSmartGunOperator, RMCUnassignedBase]
+  id: RMCUnassignedSmartGunOperator
+
+# squad leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedSquadLeader
+  name: unassigned ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedSquadLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCSquadLeader, RMCUnassignedBase]
+  id: RMCUnassignedSquadLeader
+
+# weapons specialist
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidUnassignedWeaponsSpecialist
+  name: unassigned ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCUnassignedWeaponsSpecialist
+
+- type: randomHumanoidSettings
+  parent: [RMCWeaponsSpecialist, RMCUnassignedBase]
+  id: RMCUnassignedWeaponsSpecialist

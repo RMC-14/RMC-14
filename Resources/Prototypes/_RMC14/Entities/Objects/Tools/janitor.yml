@@ -113,4 +113,11 @@
 
 - type: entity
   parent: SprayBottleSpaceCleaner
-  id: RMCSprayBottleSpaceCleaner # TODO RMC14
+  id: RMCSprayBottleSpaceCleaner
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi
