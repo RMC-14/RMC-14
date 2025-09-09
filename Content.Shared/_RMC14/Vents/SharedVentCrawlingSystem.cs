@@ -24,6 +24,7 @@ using Content.Shared.Examine;
 using Content.Shared._RMC14.Storage.Containers;
 using Content.Shared.Hands;
 using Content.Shared.Item;
+using Content.Shared.Interaction.Events;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -59,8 +60,9 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentRemove>(OnVentCrawlingEnd);
-        SubscribeLocalEvent<VentCrawlingComponent, DropAttemptEvent>(OnVentCrawlingTryDrop);
-        SubscribeLocalEvent<VentCrawlingComponent, PickupAttemptEvent>(OnVentCrawlingTryPickup);
+        SubscribeLocalEvent<VentCrawlingComponent, DropAttemptEvent>(OnVentCrawlingCancel);
+        SubscribeLocalEvent<VentCrawlingComponent, PickupAttemptEvent>(OnVentCrawlingCancel);
+        SubscribeLocalEvent<VentCrawlingComponent, UseAttemptEvent>(OnVentCrawlingCancel);
 
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
@@ -319,12 +321,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         }
     }
 
-    private void OnVentCrawlingTryDrop(Entity<VentCrawlingComponent> ent, ref DropAttemptEvent args)
-    {
-        args.Cancel();
-    }
-
-    private void OnVentCrawlingTryPickup(Entity<VentCrawlingComponent> ent, ref PickupAttemptEvent args)
+    private void OnVentCrawlingCancel<T>(Entity<VentCrawlingComponent> ent, ref T args) where T : CancellableEntityEventArgs
     {
         args.Cancel();
     }
