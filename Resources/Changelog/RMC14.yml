@@ -1,85 +1,4 @@
 ﻿Entries:
-- author: Utmanarn
-  changes:
-  - message: CPR time now depends medical skill.
-    type: Tweak
-  id: 1844
-  time: '2025-06-09T01:55:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6656
-- author: DrSmugleaf
-  changes:
-  - message: Ported the smart fridge and a new chem master UI. This also fixes many
-      bugs with the chem master interface. The chem master now lets you work on multiple
-      pill bottles at once and changes to its UI are not delayed by your ping. The
-      smart fridge stores pill bottles, pills, injectors, and other items containing
-      chemicals.
-    type: Add
-  - message: Added an admin-spawn variant of the synth vendor for colony synth.
-    type: Add
-  - message: Mapped in janitorial buckets to the Almayer. These hold 500 units and
-      can be used in the chemical dispenser and chem master. This also adds more preset
-      transfer settings for them, and a 240 unit setting for high capacity beakers
-      and the janitorial bucket.
-    type: Add
-  - message: Added hidden identities between marines and xenos. Marines can only see
-      a xeno's caste and number (Defender XX-565), but not their rank, prefix or suffix,
-      because apparently people do not understand that they shouldn't refer to PRO
-      in character. Xenos see a marine's gear and held items with a randomized appearance
-      for each marine depending on the character's species, but not their name nor
-      medals. The name they see instead depends on the species of the marine (tall
-      host, scaled host, etc).
-    type: Add
-  - message: Added admin logs for lobby messages and character descriptions, make
-      hive command admin perms instead of varedit perms, and added an admin verb to
-      randomize someone's name.
-    type: Add
-  - message: Added a command to erase someone's chat messages without banning them,
-      and one to force the next round to use a specific planet map.
-    type: Add
-  - message: Fixed moving near some containers on Hybrisa getting you stuck.
-    type: Fix
-  - message: Fixed error from being able to wear multiple cassettes at once.
-    type: Fix
-  - message: Fixed typo in the UNMC sniper uniform description.
-    type: Fix
-  - message: Fixed cassette players being too quiet, increased by 6 decibels.
-    type: Fix
-  - message: "Fixed force feeding including pills stopping when moving 0.01 tiles,\
-      \ instead of the default 0.3 tiles.\xE7"
-    type: Fix
-  - message: Fixed reagent tanks phasing through each other.
-    type: Fix
-  - message: Fixed TSEPA roles not being able to tune communications towers with TSE
-      comms.
-    type: Fix
-  - message: Fixed the chem master playing the eject sound twice.
-    type: Fix
-  - message: Fixed the tunnel rename UI not popping up when making a tunnel.
-    type: Fix
-  - message: Fixed Vampire Lurker Tail Jab being able to hit through walls.
-    type: Fix
-  - message: Fixed roller beds not fitting into crates.
-    type: Fix
-  - message: Fixed censor character nudity overlaying over armor and not working for
-      some species.
-    type: Fix
-  - message: Fixed not being able to barb multiple cades at the same time.
-    type: Fix
-  - message: Fixed PvE showing planet map votes until cancelled by an admin.
-    type: Fix
-  - message: Increased the maximum paper character length from 6 thousand to 10 thousand.
-    type: Tweak
-  - message: Icon labels on pill bottles and other items now show 3 characters, up
-      from 2.
-    type: Tweak
-  - message: Skill examine now repeats the word skill fewer times
-    type: Tweak
-  - message: Temporarily gave Forecon Commander ShipMasterAccess until the ID card
-      access console is added.
-    type: Tweak
-  id: 1845
-  time: '2025-06-09T12:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6667
 - author: stranthbackup
   changes:
   - message: Janitorial Bucket now shows in Autolathe Recipes.
@@ -4522,5 +4441,42 @@
   id: 2343
   time: '2025-09-09T23:33:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6563
+- author: yagwog
+  changes:
+  - message: Fixed wheelchair movement.
+    type: Fix
+  id: 2344
+  time: '2025-09-10T00:40:58.001958+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Started tracking total parasite infections per player, for a future date
+      when their rank is changed to account for total infections instead of play-time.
+    type: Add
+  - message: Fixed sniper rifles chambering a bullet when trying to use aimed shot.
+    type: Fix
+  - message: Fixed the XO only having 45 vendor points instead of 120.
+    type: Fix
+  - message: Fixed the winter wyvern not stunning marines in 1 hit.
+    type: Fix
+  - message: Fixed the scout specialist's thermal cloak having 21 slots of storage
+      instead of 15.
+    type: Fix
+  - message: Fixed explosions from dropship CAS weapons not working.
+    type: Fix
+  - message: Fixed girders being able to be moved, pulled, unanchored, and taking
+      too little damage.
+    type: Fix
+  - message: Unanchored folding barricades can now be lowered by xenos.
+    type: Tweak
+  - message: Unanchored barricades now take 3 times more damage.
+    type: Tweak
+  - message: Point blanks are now lag compensated (they take into account your ping
+      for distance calculations). This doesn't lag compensate projectile stun distance
+      checks, at least not yet.
+    type: Tweak
+  id: 2345
+  time: '2025-09-10T00:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7874
 Name: RMC14
 Order: -1
