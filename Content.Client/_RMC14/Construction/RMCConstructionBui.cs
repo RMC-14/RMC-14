@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
 using Content.Shared._RMC14.Construction;
@@ -149,7 +149,6 @@ public sealed class RMCConstructionBui : BoundUserInterface
         }
 
         _ghostSystem.StartPlacement(prototype, Owner);
-        Close();
     }
 
     private void AddListButton(RMCConstructionPrototype build)
