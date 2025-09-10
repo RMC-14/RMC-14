@@ -60,6 +60,7 @@ namespace Content.Server.Database
         public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
         public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
+        public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

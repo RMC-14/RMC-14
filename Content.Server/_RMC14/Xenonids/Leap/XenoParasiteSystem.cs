@@ -1,3 +1,4 @@
+using Content.Server.Database;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost;
 using Content.Server.Mind;
@@ -12,6 +13,7 @@ namespace Content.Server._RMC14.Xenonids.Leap;
 
 public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 {
+    [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -38,10 +40,13 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 
         var ghost = _ghostSystem.SpawnGhost((mind.Owner, mind.Comp), parasite);
 
-        if (ghost != null){
+        if (ghost != null)
+        {
             EnsureComp<InfectionSuccessComponent>(ghost.Value);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-bypass-time"), ghost.Value, ghost.Value, PopupType.Medium);
         }
+
+        _db.IncreaseInfects(actor.PlayerSession.UserId);
     }
 
     protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)
