@@ -19,7 +19,7 @@ namespace Content.Client._RMC14.TacticalMap;
 
 public sealed class TacticalMapSettingsManager
 {
-    private const string SettingsPath = "/tactical_map_settings.yml";
+    private const string SettingsPath = "/rmc_tactical_map_settings.yml";
 
     [Dependency] private readonly IResourceManager _resourceMan = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
@@ -109,7 +109,7 @@ public sealed class TacticalMapSettingsManager
             new TacticalMapSettingRegistration
             {
                 Key = "LabelMode",
-                Value = 1,
+                Value = (int) TacticalMapControl.LabelMode.Area,
                 PlanetId = null
             },
             new TacticalMapSettingRegistration
@@ -345,7 +345,7 @@ public sealed class TacticalMapSettingsManager
             LineThickness = GetSettingValue<float>("LineThickness", planetId, 2.0f),
             SelectedColorIndex = GetSettingValue<int>("SelectedColorIndex", planetId, 0),
             SettingsVisible = GetSettingValue<bool>("SettingsVisible", planetId, false),
-            LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, 1),
+            LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, (int) TacticalMapControl.LabelMode.Area),
             WindowSize = new Vector2(
                 GetSettingValue<float>("WindowWidth", planetId, 600.0f),
                 GetSettingValue<float>("WindowHeight", planetId, 600.0f)
@@ -596,7 +596,7 @@ public partial struct TacticalMapSettingRegistration
     [DataField("PlanetId")] public string? PlanetId { get; set; }
 }
 
-public struct TacticalMapSettings
+public struct TacticalMapSettings()
 {
     public float ZoomFactor;
     public Vector2 PanOffset;
@@ -604,7 +604,7 @@ public struct TacticalMapSettings
     public float LineThickness;
     public int SelectedColorIndex;
     public bool SettingsVisible;
-    public TacticalMapControl.LabelMode LabelMode;
+    public TacticalMapControl.LabelMode LabelMode = TacticalMapControl.LabelMode.Area;
     public Vector2 WindowSize;
     public Vector2 WindowPosition;
 }
