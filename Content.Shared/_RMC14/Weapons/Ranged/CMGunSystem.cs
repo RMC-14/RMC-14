@@ -449,25 +449,27 @@ public sealed class CMGunSystem : EntitySystem
             }
         }
 
-        var anyLagCompensated = args.FiredProjectiles.Any(HasComp<RMCProjectilePointBlankedComponent>);
-        var range = gun.Comp.Range;
-        if (_net.IsServer &&
-            _lagCompensatePointBlanks &&
-            anyLagCompensated)
-        {
-            range += _lagCompensatePointBlanksMarginTiles;
-        }
-
-        if (!_interaction.InRangeUnobstructed(gun.Owner, gunComp.Target.Value, range))
+        if (!_interaction.InRangeUnobstructed(gun.Owner, gunComp.Target.Value, gun.Comp.Range, lagCompensated: _lagCompensatePointBlanks))
             return;
 
+        var session = CompOrNull<ActorComponent>(user)?.PlayerSession;
         foreach (var projectile in args.FiredProjectiles)
         {
-            var projectileRange = HasComp<RMCProjectilePointBlankedComponent>(projectile) ? range : gun.Comp.Range;
+            var projectileRange = _net.IsServer && _lagCompensatePointBlanks && HasComp<RMCProjectilePointBlankedComponent>(projectile)
+                ? gun.Comp.Range + _lagCompensatePointBlanksMarginTiles
+                : gun.Comp.Range;
+
+            var projectilePosition = _transform.GetMoverCoordinates(projectile);
+            var targetPosition = _transform.GetMoverCoordinates(gunComp.Target.Value);
+            if (_net.IsServer && _lagCompensatePointBlanks)
+            {
+                projectilePosition = _rmcLagCompensation.GetCoordinates(projectile, session);
+                targetPosition = _rmcLagCompensation.GetCoordinates(gunComp.Target.Value, session);
+            }
 
             if (!TryComp(projectile, out ProjectileComponent? projectileComp) ||
                 !TryComp(projectile, out PhysicsComponent? physicsComp) ||
-                projectileRange < (_transform.GetMoverCoordinates(gunComp.Target.Value).Position - _transform.GetMoverCoordinates(projectile).Position).Length())
+                !_transform.InRange(projectilePosition, targetPosition, projectileRange))
             {
                 continue;
             }
