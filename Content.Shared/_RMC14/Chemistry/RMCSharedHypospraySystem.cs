@@ -23,6 +23,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
 {
     [Dependency] protected readonly SharedContainerSystem _container = default!;
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected readonly SharedInteractionSystem _interaction = default!;
     [Dependency] protected readonly HypospraySystem _hypospray = default!;
     [Dependency] protected readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
@@ -136,14 +137,22 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
 
     private void OnInteractAfter(Entity<RMCHyposprayComponent> ent, ref AfterInteractEvent args)
     {
-
-        if (args.Handled || !args.CanReach)
-            return;
-
-        if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
+        if (args.Handled)
             return;
 
         if (args.Target == null)
+            return;
+
+        var canReach = args.CanReach;
+
+        // Re-check with lag compensated positions
+        if (!canReach)
+        {
+            if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, lagCompensated: true))
+                return;
+        }
+
+        if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
             return;
 
         if (!TryComp<ItemSlotsComponent>(ent, out var slots))
@@ -157,6 +166,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-hypospray-fail-tacreload"), args.Used, args.User);
                 return;
             }
+
             //Tactical reload
             if (container.ContainedEntities.Count == 0)
             {
@@ -188,8 +198,6 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
             return;
         }
 
-        var vial = container.ContainedEntities[0];
-
         if (HasComp<InjectableSolutionComponent>(args.Target.Value) && (!ent.Comp.OnlyAffectsMobs || HasComp<MobStateComponent>(args.Target.Value)))
         {
             // Try to inject
@@ -208,7 +216,8 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
             {
                 BreakOnMove = true,
                 BreakOnHandChange = true,
-                NeedHand = true
+                NeedHand = true,
+                LagCompensated = true,
             };
             _doAfter.TryStartDoAfter(argsu);
         }

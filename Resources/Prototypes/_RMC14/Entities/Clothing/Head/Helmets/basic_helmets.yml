@@ -54,6 +54,12 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: IgnoreContentsSize
     items:
       components:

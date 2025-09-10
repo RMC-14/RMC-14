@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaTSEPAConstable
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement
@@ -45,6 +44,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -58,10 +58,6 @@
     back: RMCSatchelBlackFillSurvivorConstable
     ears: RMCHeadsetTSEPA
 
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaTSEPAConstable
-  isHumanoid: true
-
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCSurvivorPresetHybrisaConstable
@@ -73,7 +69,7 @@
     randomOutfits:
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
-    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubber ]
+    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubberTSEPA ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledConstable, RMCHandsCombat ]

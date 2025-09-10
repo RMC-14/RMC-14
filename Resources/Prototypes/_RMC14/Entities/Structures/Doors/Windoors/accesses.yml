@@ -46,7 +46,7 @@
   suffix: Command, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMWindoorSecure

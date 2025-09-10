@@ -96,8 +96,9 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
   - type: Storage
     grid:
-    - 0,0,20,1 # 21, Satchel but with backpack capacity
+    - 0,0,14,1 # 15 slots
   - type: ClothingRequireEquipped
+    autoUnequip: true
     whitelist:
       tags:
       - RMCScoutArmor
@@ -238,6 +239,17 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  id: CMSatchelSecuritySurvivorFillRiotOfficer
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCRC6RiotShield
+
+- type: entity
+  parent: CMSatchelSecurity
+  suffix: Provost
   id: CMSatchelSecurityFilledProvost
   components:
   - type: StorageFill
@@ -246,6 +258,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Dep Mar
   id: CMSatchelSecurityFilledProvostDeputyMarshal
   components:
   - type: StorageFill
@@ -254,6 +267,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Mar
   id: CMSatchelSecurityFilledProvostMarshal
   components:
   - type: StorageFill
@@ -261,9 +275,9 @@
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
     - id: RMCTabletCO
 
-
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost TL
   id: CMSatchelSecurityFilledProvostTeamLeader
   components:
   - type: StorageFill
@@ -273,12 +287,35 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Enf
   id: CMSatchelSecurityFilledProvostEnforcer
   components:
   - type: StorageFill
     contents:
     - id: RMCPacketGrenadeFlashBang
     - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelFilledFaxResponder
+  suffix: Fax Responder
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledFaxResponder
+  suffix: Fax Responder
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
 
 - type: entity
   parent: CMSatchel
@@ -551,6 +588,13 @@
           Ring: { state: ring }
           Ear: { state: ear }
   - type: Undisposable
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: CMSatchel

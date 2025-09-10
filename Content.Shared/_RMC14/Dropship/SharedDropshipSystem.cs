@@ -62,6 +62,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipEnginePointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipEnginePointComponent, ExaminedEvent>(OnEngineExamined);
 
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ExaminedEvent>(OnElectronicSystemExamined);
+
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
             {
@@ -89,7 +93,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
             if (HasComp<DropshipWeaponPointComponent>(uid) ||
                 HasComp<DropshipEnginePointComponent>(uid) ||
-                HasComp<DropshipUtilityPointComponent>(uid))
+                HasComp<DropshipUtilityPointComponent>(uid) ||
+                HasComp<DropshipElectronicSystemPointComponent>(uid))
             {
                 ent.Comp.AttachmentPoints.Add(uid);
             }
@@ -276,6 +281,15 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnElectronicSystemExamined(Entity<DropshipElectronicSystemPointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetAttachmentContained(ent, ent.Comp.ContainerId, out var attachment))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", attachment)));
+        }
+    }
+
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
         ref DropshipNavigationLaunchMsg args)
     {
@@ -349,7 +363,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid? user,
         bool hijack = false,
         float? startupTime = null,
-        float? hyperspaceTime = null)
+        float? hyperspaceTime = null,
+        bool offset = false)
     {
         return false;
     }
@@ -465,7 +480,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
-        _marineAnnounce.AnnounceARES(actor, message);
+        _marineAnnounce.AnnounceARESStaging(actor, message);
 
         return true;
     }

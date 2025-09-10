@@ -110,6 +110,17 @@
 
 - type: entity
   parent: RMCBaseJacket
+  id: RMCVestGrey
+  name: grey vest
+  description: A casual grey vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/grey_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/grey_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
   id: RMCWeYaFurCoat
   name: WeYa fur coat
   description: "An old, unmarked fur coat once issued to corporate liaisons stationed in harsh climates. It has clearly changed hands many times — the fabric is worn, it carries a distinct smell, and any manufacturer tags have long since faded. A faint corporate insignia remains, stitched above a yellowing label that simply reads: \"Dry clean only.\""
@@ -123,9 +134,71 @@
   parent: RMCBaseJacket
   id: RMCVestBrown
   name: brown vest
-  description: A casual tan vest.
+  description: A casual brown vest.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
+
+# fancy suit jackets
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCFancySuitJacketBlack
+  name: black fancy suit jacket
+  description: A snappy dress jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/black_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/black_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketBlue
+  name: blue fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/blue_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/blue_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketPurp
+  name: purple fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/purp_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/purp_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketRed
+  name: red fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/red_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/red_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketBrown
+  name: brown fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/brown_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/brown_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketLightBrown
+  name: light-brown fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
