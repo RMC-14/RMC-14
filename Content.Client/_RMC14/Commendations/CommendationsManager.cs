@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Commendations;
 using Robust.Shared.Network;
 
@@ -45,7 +45,7 @@ public sealed class CommendationsManager : IPostInjectInit
             var container = new CommendationContainer();
             container.Title.Text = Loc.GetString("rmc-medals-title", ("round", commendation.Round), ("name", commendation.Name));
             container.Description.Text = Loc.GetString("rmc-medals-description", ("receiver", commendation.Receiver), ("giver", commendation.Giver), ("text", commendation.Text));
-            window.Commendations.AddChild(container);
+            _window.Commendations.AddChild(container);
         }
     }
 
