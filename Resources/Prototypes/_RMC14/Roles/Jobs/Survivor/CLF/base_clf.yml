@@ -1,0 +1,79 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorCLFBase
+  name: rmc-job-name-clf-soldier
+  description: rmc-job-description-clf
+  ranks:
+    RMCRankCLFRebel: [ ]
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  startingGear: RMCGearCLFBase
+  hasIcon: true
+  greeting: rmc-job-greeting-clf
+  playTimeTracker: RMCJobSurvivorCLF
+  spawnMenuRoleName: CLF Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  hidden: true
+
+- type: startingGear
+  id: RMCGearCLFBase
+  equipment:
+    jumpsuit: RMCJumpsuitCLFSoldier
+    back: RMCSatchelMarineForeconSurvivorFill
+    shoes: RMCShoesJackbootsFilled
+    outerClothing: RMCOuterClothingExternalWebbingForeconSurvivorFill
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetForecon
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+
+- type: playTimeTracker
+  id: RMCJobSurvivorCLF
+  name: rmc-playtime-tracker-job-name-survivor-clf
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetCLFNoPrimary
+  name: forecon no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadCapFlippable ]
+    - [ RMCBoonieTan ]
+    - [ ArmorHelmetM10 ]
+    - [ RMCHeadBeanie ]
+    - [ RMCHeadDurag ]
+    randomGearOther:
+    -
+      - [ RMCCigarettePackLuckySloths ]
+    # todo walkman and casette
+    # todo deck of cards
+    randomWeapon:
+    - [ RMCM1984BeltFilled ]
+    - [ RMCM1984BeltFilled ]
+    - [ RMCM1984BeltFilled ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
+    - [ RMCMotionDetector ]
+
+- type: entity
+  parent: RMCSurvivorPresetCLFNoPrimary
+  id: RMCSurvivorPresetCLF
+  name: forecon survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetCLF
+  id: RMCSurvivorPresetCLFNoPistol
+  name: forecon survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - []

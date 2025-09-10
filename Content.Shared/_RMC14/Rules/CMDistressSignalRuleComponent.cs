@@ -93,7 +93,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     // TODO RMC14
     // [DataField]
-    // public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
+    // public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");`
 
     [DataField]
     public EntProtoId? LandingZoneGas = "RMCLandingZoneGas";
