@@ -118,7 +118,7 @@ public sealed class RadioSystem : EntitySystem
             {
                 if (TryComp(messageSource, out FireteamMemberComponent? fireteamMember) && fireteamMember.Fireteam >= 0)
                 {
-                    prefixText += $" FT-{fireteamMember.Fireteam + 1}" + (TryComp(messageSource, out FireteamLeaderComponent? fireteamLeader) ? "L" : "");
+                    prefixText += $" FT{fireteamMember.Fireteam + 1}" + (TryComp(messageSource, out FireteamLeaderComponent? fireteamLeader) ? " TL" : "");
                 }
                 name = $"({prefixText}) {name}";
             }
