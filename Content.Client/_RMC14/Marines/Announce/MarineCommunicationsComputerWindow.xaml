@@ -20,12 +20,17 @@
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <Button Name="EchoButton" Access="Public" Text="Designate Echo Squad" StyleClasses="OpenBoth" />
         <cc:HSeparator Name="EchoSeparator" Access="Public" Color="#4972A1" Margin="0 5" />
+        <Button Name="EvacuationButton" Access="Public" HorizontalExpand="True"
+                StyleClasses="OpenBoth" TextAlign="Left" />
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <BoxContainer Name="LandingZonesSection" Access="Public" Orientation="Vertical">
             <Label Text="{Loc rmc-groundside-operations-designate-primary-lz}" />
             <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Vertical" />
             <cc:HSeparator Color="#4972A1" Margin="0 5" />
         </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
-        <Button Name="Send" Access="Public" Text="{Loc rmc-groundside-operations-send}" HorizontalExpand="True" />
+        <Label Name="CharacterCount" Access="Public" />
+        <Button Name="Send" Access="Public" Text="{Loc rmc-groundside-operations-send}" HorizontalExpand="True"
+                StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:MarineCommunicationsComputerWindow>
