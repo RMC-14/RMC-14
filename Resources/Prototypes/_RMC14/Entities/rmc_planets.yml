@@ -10,7 +10,7 @@
     - scenarioName: fallen_ship
       scenarioProbability: 0.1
     - scenarioName: asset_protection
-      scenarioProbability: 0.9
+      scenarioProbability: 0.1
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
