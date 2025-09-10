@@ -10,7 +10,7 @@
     - scenarioName: fallen_ship
       scenarioProbability: 0.1
     - scenarioName: asset_protection
-      scenarioProbability: 0.1
+      scenarioProbability: 0.9
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
@@ -34,18 +34,14 @@
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
         - CMSurvivorLV624CorporateDomeCL: 1
-        - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorDoctor:
         - CMSurvivorLV624CorporateDomeGoonMedic: 1
-        - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorEngineer:
         - CMSurvivorLV624CorporateDomeGoonEngineer: 1
-        - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorSecurity:
         - CMSurvivorLV624CorporateDomeGoonLead: 1
-        - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorScientist:
-        - CMSurvivorLV624CorporateDomeGoon: -1
+        - CMSurvivor: 0
     
 - type: entity
   id: RMCPlanetSolaris
@@ -179,6 +175,20 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivorKutjevoChaplain: 1
+      - CMSurvivorKutjevoTrucker: -1
+      CMSurvivorCorporate:
+      - CMSurvivor: 0
+      CMSurvivorDoctor:
+      - CMSurvivorKutjevoDoctor: 1
+      CMSurvivorEngineer:
+      - CMSurvivorKutjevoEngineer: 1
+      CMSurvivorSecurity:
+      - CMSurvivorKutjevoCMBDeputy: 1
+      CMSurvivorScientist:
+      - CMSurvivor: 0
 
 - type: entity
   id: RMCPlanetChances
