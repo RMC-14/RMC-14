@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Added the Aegis OB, Aegis Secure Box, and Aegis keycard.
-    type: Add
-  id: 1848
-  time: '2025-06-09T20:23:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6668
 - author: noctyrnal
   changes:
   - message: Added CLF Engineer, Specialist and Medic roles.
@@ -4472,5 +4465,15 @@
   id: 2347
   time: '2025-09-10T01:13:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7876
+- author: Spaghetti
+  changes:
+  - message: Added fireteam prefixes to squad comms.
+    type: Add
+  - message: Marines assigned to fireteams with an already existing FTL will have
+      their tracker set to the FTL.
+    type: Tweak
+  id: 2348
+  time: '2025-09-10T01:15:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7788
 Name: RMC14
 Order: -1
