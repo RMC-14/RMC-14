@@ -195,4 +195,5 @@
     - RMCLaserDesignator
     - RMCWhistle
     - RMCWeaponTaser
-    #TODO RMC14 Megaphone, Paper Map.
+    - RMCMegaphone
+    #TODO RMC14 Paper Map.

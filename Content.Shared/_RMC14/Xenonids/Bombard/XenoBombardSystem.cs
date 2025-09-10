@@ -4,7 +4,7 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -54,7 +54,7 @@ public sealed class XenoBombardSystem : EntitySystem
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
         var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true, RootEntity = true };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
@@ -69,7 +69,8 @@ public sealed class XenoBombardSystem : EntitySystem
     private void OnBombardDoAfterAttempt(Entity<XenoBombardComponent> ent, ref DoAfterAttemptEvent<XenoBombardDoAfterEvent> args)
     {
         if (args.Event.Target is { } action &&
-            TryComp(action, out InstantActionComponent? actionComponent) &&
+            HasComp<InstantActionComponent>(action) &&
+            TryComp(action, out ActionComponent? actionComponent) &&
             !actionComponent.Enabled)
         {
             _rmcActions.EnableSharedCooldownEvents(action, ent);

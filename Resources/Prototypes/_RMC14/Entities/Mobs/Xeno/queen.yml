@@ -134,6 +134,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -223,10 +224,10 @@
     liveUpdate: true
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenoqueen
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
@@ -264,6 +265,9 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
+  - type: RMCTrackable
 
 - type: entity
   parent: RMCXenoQueenBase

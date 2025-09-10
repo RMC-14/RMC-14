@@ -28,7 +28,7 @@
     burstScatterMult: 1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:
@@ -45,11 +45,13 @@
     containerID: ballistic-ammo
     ejectSound:
       path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
+  - type: UseDelay
   - type: BreechLoaded
     openSound:
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
     closeSound:
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
+    toggleDelay: 1.1
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

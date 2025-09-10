@@ -1,6 +1,8 @@
 ﻿using System.Numerics;
+using Content.Server._RMC14.Rules;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
@@ -30,6 +32,7 @@ public sealed class MapInsertSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
 
     private MapId? _map;
     private int _index;
@@ -46,6 +49,28 @@ public sealed class MapInsertSystem : EntitySystem
     {
         _map = null;
         _index = 0;
+    }
+
+    public string SelectMapScenario(List<RMCNightmareScenario> scenarioList)
+    {
+        if (scenarioList.Count <= 0)
+        {
+            return string.Empty;
+        }
+
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+
+        foreach (var scenario in scenarioList)
+        {
+            cumulativeProbability += scenario.ScenarioProbability;
+            if (cumulativeProbability >= randomProbability)
+            {
+                return scenario.ScenarioName;
+            }
+        }
+
+        return string.Empty;
     }
 
     public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
@@ -66,12 +91,13 @@ public sealed class MapInsertSystem : EntitySystem
         foreach (var variation in ent.Comp.Variations)
         {
             cumulativeProbability += variation.Probability;
-            if (forceSpawn ||  cumulativeProbability >= randomProbability)
-            {
-                spawn = variation.Spawn;
-                spawnOffset = variation.Offset;
-                break;
-            }
+            if (!forceSpawn &&
+                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) ||
+                 cumulativeProbability < randomProbability))
+                continue;
+            spawn = variation.Spawn;
+            spawnOffset = variation.Offset;
+            break;
         }
 
         if (spawn == default)

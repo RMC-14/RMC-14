@@ -1,8 +1,0 @@
-- type: entity
-  parent: ClothingNeckBase
-  id: RMCHEFAArmband # TODO make this a uniform accessory when those are made
-  name: HEFA Order milita armband
-  description: Sworn to the shrapnel and the shards therein. So sayeth her command when the first detonation occured.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/hefa_armband.rsi

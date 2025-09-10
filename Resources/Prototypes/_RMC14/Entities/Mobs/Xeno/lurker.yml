@@ -6,6 +6,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: RMCXenoLurkerBase
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -87,12 +88,14 @@
     prefix: lurker
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-lurker
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent:
@@ -123,6 +126,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoLurkerVampire
+  - type: VentCrawler
+    ventCrawlIcon: lurker
 
 - type: entity
   parent: RMCXenoLurkerBase
@@ -195,3 +200,5 @@
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: vampire

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Humanoid;
+﻿using Content.Shared.DisplacementMap;
+using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
@@ -27,4 +28,5 @@ public interface IRMCHumanoidAppearance
     public HashSet<HumanoidVisualLayers> HideLayersOnEquip { get; set; }
     public ProtoId<MarkingPrototype>? UndergarmentTop { get; set; }
     public ProtoId<MarkingPrototype>? UndergarmentBottom { get; set; }
+    public Dictionary<HumanoidVisualLayers, DisplacementData> MarkingsDisplacement { get; set; }
 }

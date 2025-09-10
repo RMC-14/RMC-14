@@ -1,5 +1,7 @@
 ﻿using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
@@ -75,6 +77,13 @@ public abstract class SharedSynthSystem : EntitySystem
         if (TryComp<MobThresholdsComponent>(ent.Owner, out var thresholds))
             _mobThreshold.SetMobStateThreshold(ent.Owner, ent.Comp.CritThreshold, MobState.Critical, thresholds);
 
+        if (TryComp<RMCHealthIconsComponent>(ent.Owner, out var healthIcons))
+        {
+            healthIcons.Icons = ent.Comp.HealthIconOverrides;
+            Dirty(ent.Owner, healthIcons);
+        }
+
+        RemCompDeferred<RMCRevivableComponent>(ent.Owner);
         RemCompDeferred<SlowOnDamageComponent>(ent.Owner);
     }
 

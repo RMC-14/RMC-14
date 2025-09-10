@@ -1,5 +1,6 @@
 ﻿using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
+using JetBrains.Annotations;
 
 namespace Content.Shared._RMC14.UserInterface;
 
@@ -78,6 +79,25 @@ public sealed class RMCUserInterfaceSystem : EntitySystem
                 system.Log.Error($"Error refreshing {nameof(T)}\n{e}");
             }
         }));
+    }
+
+    public void TryBui<T>(Entity<UserInterfaceComponent?> ent, [RequireStaticDelegate] Action<T> action) where T : BoundUserInterface
+    {
+        try
+        {
+            if (!Resolve(ent, ref ent.Comp, false))
+                return;
+
+            foreach (var bui in ent.Comp.ClientOpenInterfaces.Values)
+            {
+                if (bui is T dialogUi)
+                    action(dialogUi);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error getting {nameof(T)}:\n{e}");
+        }
     }
 
     public override void Update(float frameTime)

@@ -1,16 +1,17 @@
-using Content.Shared.Chemistry.Reagent;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Fluids;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.Throwing;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Popups;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
-using Content.Shared.Fluids;
-using Content.Shared.Popups;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -63,7 +64,7 @@ public sealed partial class PressurizedSolutionSystem : EntitySystem
         // Check each reagent in the solution
         foreach (var reagent in solution.Contents)
         {
-            if (_prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto) && reagentProto != null)
+            if (_prototypeManager.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto) && reagentProto != null)
             {
                 // What portion of the solution is this reagent?
                 var proportion = (float) (reagent.Quantity / solution.Volume);

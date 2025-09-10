@@ -35,6 +35,7 @@
     - type: CommandAccent
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-inspector
+    - type: RMCTrackable
   hidden: true
 
 - type: startingGear

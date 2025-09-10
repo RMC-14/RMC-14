@@ -1,0 +1,273 @@
+## Mortar Shells
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMortarExplosionHE
+  name: he mortar explosion
+  suffix: Fires a mortar shell!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Explosive
+    explosionType: RMCMortar
+    maxIntensity: 30.1 # max 150 brute, 150 burn
+    intensitySlope: 5
+    totalIntensity: 800
+    canCreateVacuum: false
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: MortarShell
+  - type: ActivateMortarShellOnSpawn
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMortarExplosionIncendiary
+  name: incendiary mortar explosion
+  suffix: Fires a mortar shell!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Explosive
+    explosionType: RMCMortar
+    maxIntensity: 0
+    intensitySlope: 0
+    totalIntensity: 0
+    canCreateVacuum: false
+  - type: TileFireOnTrigger
+    spawn: RMCTileFireGreen
+    range: 5
+  - type: RMCScorchEffect
+  - type: MortarShell
+  - type: ActivateMortarShellOnSpawn
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMortarExplosionFlare
+  name: mortar flare/camera
+  suffix: Fires a mortar shell!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: MortarShell
+  - type: MortarCameraShell
+  - type: ActivateMortarShellOnSpawn
+
+## Dropship Weapons
+
+- type: entity
+  parent: MarkerBase
+  id: RMCDropshipGauBurst
+  name: dropship Multi-Purpose GAU burst
+  suffix: Fires a GAU burst!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: ActivateDropshipWeaponOnSpawn
+  - type: DropshipAmmo
+    rounds: 400
+    maxRounds: 400
+    roundsPerShot: 40
+    damage:
+      groups:
+        Brute: 105
+    armorPiercing: 10
+    weapon: RMCDropshipAttachmentGau21Cannon
+    soundCockpit: /Audio/_RMC14/Dropship/gau_incockpit.ogg
+    soundGround: /Audio/_RMC14/Dropship/gau.ogg
+    soundImpact:
+      path: /Audio/_RMC14/Dropship/gauimpact.ogg
+      params:
+        volume: -6
+    impactEffects:
+    - RMCEffectExplosionParticle
+
+- type: entity
+  parent: RMCDropshipGauBurst
+  id: RMCDropshipGauBurstAntiTank
+  name: dropship Anti-Tank GAU burst
+  suffix: Fires a GAU burst!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: DropshipAmmo
+    bulletSpread: 4
+    damage:
+      groups:
+        Brute: 80
+    armorPiercing: 40
+    travelTime: 6
+
+- type: entity
+  parent: MarkerBase
+  id: RMCDropshipLaserFire
+  name: dropship laser
+  suffix: Fires a laser!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: ActivateDropshipWeaponOnSpawn
+  - type: DropshipAmmo
+    rounds: 100
+    maxRounds: 100
+    roundsPerShot: 10
+    shotsPerVolley: 10
+    targetSpread: 1
+    bulletSpread: 0
+    travelTime: 1
+    weapon: RMCDropshipAttachmentLaserCannon
+    soundEveryShots: 1
+    soundCockpit: /Audio/Machines/phasein.ogg
+    soundMarker: /Audio/_RMC14/Binoculars/nightvision.ogg
+    soundImpact:
+      path: /Audio/_RMC14/Effects/laser_cannon.ogg
+      params:
+        volume: -6
+    fire:
+      type: RMCTileFireLaser
+      range: 3
+      total: 16
+
+- type: entity
+  parent: MarkerBase
+  id: RMCDropshipMissileExplosionBase
+  suffix: Fires a missle!
+  abstract: true
+  components:
+  - type: ActivateDropshipWeaponOnSpawn
+  - type: DropshipAmmo
+    rounds: 1
+    maxRounds: 1
+    roundsPerShot: 1
+    targetSpread: 3
+    bulletSpread: 0
+    travelTime: 6
+    weapon: RMCDropshipAttachmentGuidedMissileLauncher
+    soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionWidowmaker
+  name: AIM-224B 'Widowmaker' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 3
+    explosion:
+      total: 3000
+      slope: 5.5
+      max: 55
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionKeeper
+  name: GBU-67 'Keeper II' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 2
+    explosion:
+      total: 905
+      slope: 15
+      max: 45
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionNapalm
+  name: AGM-99 'Napalm' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 6
+    explosion:
+      total: 1780
+      slope: 7.2
+      max: 50
+    fire:
+      type: RMCTileFireNapalm
+      range: 3
+      cardinalRange: 5
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionHarpoon
+  name: AGM-184 'Harpoon II' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 5
+    explosion:
+      total: 1850
+      slope: 3.2
+      max: 32
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionThermobaric
+  name: BLU-200 'Dragon's Breath' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 5
+    implosion:
+      pullRange: 5.5
+      pullDistance: 3.5
+      pullSpeed: 15
+    fire:
+      type: RMCTileFireThermobaric
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
+
+- type: entity
+  parent: RMCDropshipMissileExplosionBase
+  id: RMCDropshipMissileExplosionBanshee
+  name: AGM-227 'Banshee' explosion
+  components:
+  - type: DropshipAmmo
+    travelTime: 6
+    explosion:
+      total: 2000
+      slope: 5.5
+      max: 40
+    fire:
+      type: RMCTileFireBanshee
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
+
+- type: entity
+  parent: MarkerBase
+  id: RMCDropshipMiniRocketExplosionBase
+  abstract: true
+  suffix: Fires a mini rocket!
+  components:
+  - type: ActivateDropshipWeaponOnSpawn
+  - type: DropshipAmmo
+    rounds: 6
+    maxRounds: 6
+    roundsPerShot: 1
+    bulletSpread: 0
+    travelTime: 8
+    weapon: RMCDropshipAttachmentRocketPod
+    soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+
+- type: entity
+  parent: RMCDropshipMiniRocketExplosionBase
+  id: RMCDropshipMiniRocketExplosionMiniMike
+  name: AGR-59 'Mini-Mike' explosion
+  components:
+  - type: DropshipAmmo
+    explosion:
+      total: 850
+      slope: 8
+      max: 40
+    impactEffects:
+    - RMCEffectExplosionParticle
+    - RMCSmokeExplosionProofSmall
+
+- type: entity
+  parent: RMCDropshipMiniRocketExplosionMiniMike
+  id: RMCDropshipMiniRocketExplosionMiniMikeIncindiary
+  name: AGR-59-I 'Mini-Mike' explosion
+  components:
+  - type: DropshipAmmo
+    fire:
+      type: RMCTileFireMiniMike
+      range: 1

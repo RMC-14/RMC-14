@@ -13,13 +13,25 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnUserOpenAction);
+        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLineLimit, v => LineLimit = v, true);
     }
 
-    protected virtual void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
+    private void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
     {
-        _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
+        if (TryGetTacticalMap(out var map))
+            UpdateUserData(ent, map);
+
+        ToggleMapUI(ent);
+    }
+
+    private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
+    {
+        if (TryGetTacticalMap(out var map))
+            UpdateUserData(ent, map);
+
+        ToggleMapUI(ent);
     }
 
     public bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
@@ -78,5 +90,16 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     public virtual void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
     {
+    }
+
+    private void ToggleMapUI(Entity<TacticalMapUserComponent> user)
+    {
+        if (_ui.IsUiOpen(user.Owner, TacticalMapUserUi.Key, user))
+        {
+            _ui.CloseUi(user.Owner, TacticalMapUserUi.Key, user);
+            return;
+        }
+
+        _ui.TryOpenUi(user.Owner, TacticalMapUserUi.Key, user);
     }
 }

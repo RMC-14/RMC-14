@@ -31,11 +31,15 @@
 # Royal
 - type: entity
   parent: JumpsuitMarine
-  id: JumpsuitMarineRoyal # TODO RMC14 sprite
+  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyal
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
 
 # Formal
 - type: entity
@@ -126,6 +130,31 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+
+# CBRN
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCCBRNSuit
+  name: M3 MOPP Suit
+  description: M3 MOPP suits are specially designed and engineered to protect the wearer from unshielded exposure to any Chemical, Biological, Radiological, or Nuclear (CBRN) threats in the field. The suit has a recommended lifespan of twenty-four hours once contact with a toxic environment is made, but depending on the severity this can be shortened to eight hours or less.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/cbrnsuit.rsi
+  - type: CMArmor
+    bullet: 10
+    melee: 10
+    bio: 100
+    explosionArmor: 10
+
+# Sun Riders
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSunRiders
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchSolarDevils ]
 
 # Supply
 
@@ -259,6 +288,28 @@
   name: white service uniform
   description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
 
+- type: entity
+  parent: CMJumpsuitCO
+  id: RMCJumpsuitCOUniform
+  name: UNMC officer uniform
+  description: The well-ironed utility uniform of a UNMC officer. Even looking at it the wrong way could result in being court-martialed. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/jumpsuit.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: RMCJumpsuitCOUniformGray
+  name: Commanding Officer's gray formal uniform
+  description: A well-ironed UNMC officer uniform  intended for parades or hot weather. Wear this with pride.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/grey_jumpsuit.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Executive officer
 
 - type: entity
@@ -278,7 +329,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOBlack
-  name: aso black uniform
+  name: auxiliary support officer black uniform
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black.
   components:
   - type: Sprite
@@ -288,40 +339,43 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOFormal
-  name: aso formal uniform
+  name: auxiliary support officer formal uniform
   description: A pearly white formal uniform used by Auxiliary Support Officers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal.rsi
   - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-    
+
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
+  id: RMCJumpsuitASOFormalAlt
+  name: auxiliary support officer formal uniform
+  suffix: Alternative
+  description: A pearly white formal uniform with black pants used by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal_alt.rsi
+
+- type: entity
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOBlackAlt
-  name: aso alternative black uniform
+  name: auxiliary support officer black uniform
+  suffix: Alternative
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black with green stripes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_black_alt.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-    
+
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOOperations
-  name: aso operations uniform
+  name: auxiliary support officer operations uniform
   description: An operations uniform typically used by Auxiliary Support Officers. This one has a dark blue camo pattern.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_operations.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 # Officer
 - type: entity

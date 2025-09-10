@@ -94,6 +94,47 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingLegPouch
+  name: leg pouch
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+    state: webbing
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Webbing/leg_pouch/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Webbing/leg_pouch/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Webbing/leg_pouch/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Webbing/leg_pouch/urban.rsi
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingLegPouchBlack
+  name: black leg pouch
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
+    state: webbing
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingBlackSmall
+  name: black webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+      state: equipped
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
@@ -119,9 +160,6 @@
       - CMSurgicalCase
       - RMCSyringeCase
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
-      state: equipped
     components:
     - type: Storage
       maxItemSize: Small
@@ -156,9 +194,6 @@
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
     state: webbing
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
-      state: equipped
     components:
     - type: Storage
       maxItemSize: Small
@@ -199,7 +234,6 @@
     whitelist:
       tags:
       - Sidearm
-      # TODO: Flare gun
       - CMMagazinePistol
       - RMCMagazineRevolver
   - type: FixedItemSizeStorage
@@ -223,9 +257,6 @@
       tags:
       - Sidearm
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
-      state: equipped
     components: # grrrr all the components need to be duplicated
     - type: Storage
       maxItemSize: Normal
@@ -234,7 +265,7 @@
       whitelist:
         tags:
         - Sidearm
-        # TODO: Flare gun
+        - RMCFlareGun
         - CMMagazinePistol
         - RMCMagazineRevolver
     - type: FixedItemSizeStorage
@@ -279,8 +310,46 @@
       - CMFirstAidKit
       - RMCBoxStorage
   - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchBlack
+  name: black drop pouch
+  description: A convenient pouch to carry loose items around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
+    state: drop_pouch_black
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
+      sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
       state: equipped
     components:
     - type: Storage
@@ -320,9 +389,6 @@
       - CMFirstAidKit
       - RMCBoxStorage
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
-      state: equipped
     components:
     - type: Storage
       maxItemSize: Normal
@@ -358,9 +424,6 @@
       tags:
       - Grenade
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
-      state: equipped
     components:
     - type: Storage
       maxItemSize: Normal
@@ -518,9 +581,6 @@
     worn: false
   - type: CMHolster
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_knife.rsi
-      state: equipped
     components:
     - type: Storage
       grid:
@@ -636,16 +696,13 @@
   name: surgical webbing vest
   description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
     state: webbing
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
-      state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -657,7 +714,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots
@@ -692,16 +749,13 @@
   name: surgical webbing vest
   description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
   - type: Webbing
-    playerSprite:
-      sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
-      state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -713,7 +767,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots

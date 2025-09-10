@@ -3,7 +3,7 @@
   id: CMJobSurvivorArmedPoliceOfficer
   name: rmc-job-name-survivor-armed-police-officer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorArmedPoliceOfficer
+  playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPStrsh:
     - !type:RoleTimeRequirement
@@ -35,7 +35,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetArmedPoliceOfficer
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -43,6 +42,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -51,11 +51,9 @@
     head: CMHeadCapSPPPeakedPolice
     eyes: CMGlassesSecurity
     jumpsuit: RMCJumpsuitSPPPaP
-    belt: RMCBeltHolsterPistolSPPT73
     outerClothing: RMCCoatPaP
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-    mask: RMCMaskGasSPP
     pocket2: RMCPouchMagazine
     id: RMCIDCardPaP
     back: RMCSatchelBlack
@@ -63,6 +61,7 @@
   storage:
     back:
     - CMSheetMetal20
+    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -71,18 +70,13 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorArmedPoliceOfficer
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetArmedPoliceOfficer
   name: people's armed police officer preset
+  categories: [ HideSpawnMenu ]

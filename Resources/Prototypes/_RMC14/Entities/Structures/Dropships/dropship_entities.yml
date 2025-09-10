@@ -24,6 +24,9 @@
   name: utility attach point
   description: An attachment point for utility systems
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
     layers:
@@ -53,6 +56,9 @@
   name: engine system attach point
   description: A place where heavy equipment can be installed with a powerloader.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Transform
     anchored: false
   - type: Sprite
@@ -80,6 +86,31 @@
   - type: Tag
     tags:
     - RMCDropshipEnginePoint
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
+  id: RMCElectronicSystemAttachPoint
+  categories: [ HideSpawnMenu ]
+  name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipElectronicSystemPoint
+  - type: DropshipPointVisuals
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags:
+    - RMCDropshipElectronicSystemPoint
 
 - type: Tag
   id: RMCDropshipEnginePoint
+
+- type: Tag
+  id: RMCDropshipElectronicSystemPoint

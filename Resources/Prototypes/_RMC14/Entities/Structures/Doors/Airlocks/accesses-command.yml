@@ -1,10 +1,19 @@
+# /obj/structure/machinery/door/airlock/almayer/secure/reinforced
+- type: entity
+  parent: CMAirlockSecure
+  id: CMAirlockSecureLockedCommand # TODO RMC14
+  suffix: Command, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessCommand"]]
+
 - type: entity
   parent: CMAirlockCommand
   id: CMAirlockCommandLocked
   suffix: Command, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMAirlockMaint
@@ -12,7 +21,7 @@
   suffix: Command, Locked, Maint
   components:
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
   - type: PaintableAirlock
     department: CMCommand
 

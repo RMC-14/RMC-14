@@ -164,11 +164,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnActionFruitChosen(Entity<XenoFruitChooseActionComponent> xeno, ref XenoFruitChosenEvent args)
     {
-        if (_actions.TryGetActionData(xeno, out var action) &&
+        if (_actions.GetAction(xeno.Owner) is { } action &&
             _prototype.TryIndex(args.Choice, out var fruit))
         {
-            action.Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), GetFruitSprite(fruit));
-            Dirty(xeno, action);
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), GetFruitSprite(fruit)));
         }
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-choose", ("fruit", args.Choice)), xeno, xeno);

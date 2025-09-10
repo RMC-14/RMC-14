@@ -29,8 +29,8 @@ public sealed class LinkAccountSystem : EntitySystem
     private TimeSpan _nextLobbyMessageTime;
     private TimeSpan _lobbyMessageInitialDelay;
     private (string Message, string User)? _nextLobbyMessage;
-    private string? _nextMarineShoutout;
-    private string? _nextXenoShoutout;
+    private RoundEndShoutout? _nextMarineShoutout;
+    private RoundEndShoutout? _nextXenoShoutout;
 
     public override void Initialize()
     {
@@ -77,16 +77,18 @@ public sealed class LinkAccountSystem : EntitySystem
 
     private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
     {
-        if (_nextMarineShoutout != null)
+        if (_nextMarineShoutout is { } nextMarine)
         {
             ev.AddLine("\n");
-            ev.AddLine(Loc.GetString("rmc-ui-shoutout-marine", ("name", _nextMarineShoutout)));
+            ev.AddLine(Loc.GetString("rmc-ui-shoutout-marine", ("name", nextMarine.Name)));
+            _adminLog.Add(LogType.RMCRoundEnd, $"Showing round end shoutout from {nextMarine.Author:player}: {nextMarine.Name:text}");
         }
 
-        if (_nextXenoShoutout != null)
+        if (_nextXenoShoutout is { } nextXeno)
         {
             ev.AddLine("\n");
-            ev.AddLine(Loc.GetString("rmc-ui-shoutout-xeno", ("name", _nextXenoShoutout)));
+            ev.AddLine(Loc.GetString("rmc-ui-shoutout-xeno", ("name", nextXeno.Name)));
+            _adminLog.Add(LogType.RMCRoundEnd, $"Showing round end shoutout from {nextXeno.Author:player}: {nextXeno.Name:text}");
         }
     }
 

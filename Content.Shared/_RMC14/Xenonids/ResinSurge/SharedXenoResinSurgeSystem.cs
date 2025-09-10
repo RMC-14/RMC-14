@@ -73,9 +73,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     {
         foreach (var action in _actions.GetActions(xeno))
         {
-            if (TryComp(action.Id, out XenoResinSurgeActionComponent? actionComp))
+            if (TryComp(action, out XenoResinSurgeActionComponent? actionComp))
             {
-                _actions.SetCooldown(action.Id, actionComp.SuccessCooldown * (cooldownMult ?? actionComp.FailCooldownMult));
+                _actions.SetCooldown(action.AsNullable(), actionComp.SuccessCooldown * (cooldownMult ?? actionComp.FailCooldownMult));
                 break;
             }
         }
@@ -85,9 +85,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     {
         foreach (var action in _actions.GetActions(xeno))
         {
-            if (TryComp(action.Id, out XenoResinSurgeActionComponent? actionComp))
+            if (TryComp(action, out XenoResinSurgeActionComponent? actionComp))
             {
-                _actions.SetCooldown(action.Id, cooldown ?? actionComp.SuccessCooldown);
+                _actions.SetCooldown(action.AsNullable(), cooldown ?? actionComp.SuccessCooldown);
                 break;
             }
         }
@@ -98,15 +98,12 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (args.Coords is not { } target)
-            return;
-
         // Check if target on grid
-        if (_transform.GetGrid(target) is not { } gridId ||
+        if (_transform.GetGrid(args.Target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_examine.InRangeUnOccluded(xeno.Owner, target, xeno.Comp.Range))
+        if (!_examine.InRangeUnOccluded(xeno.Owner, args.Target, xeno.Comp.Range))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-see-fail"), xeno, xeno);
             return;
@@ -114,9 +111,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
 
         args.Handled = true;
 
-
-
-        target = target.SnapToGrid(EntityManager, _map);
+        var target = args.Target.SnapToGrid(EntityManager, _map);
 
         // Check if user has enough plasma
         if (xeno.Comp.ResinDoafter != null || !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))

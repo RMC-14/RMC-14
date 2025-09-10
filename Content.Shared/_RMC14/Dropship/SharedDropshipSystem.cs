@@ -2,10 +2,13 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Thunderdome;
+using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -59,6 +62,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipEnginePointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipEnginePointComponent, ExaminedEvent>(OnEngineExamined);
 
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ExaminedEvent>(OnElectronicSystemExamined);
+
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
             {
@@ -86,7 +93,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
             if (HasComp<DropshipWeaponPointComponent>(uid) ||
                 HasComp<DropshipEnginePointComponent>(uid) ||
-                HasComp<DropshipUtilityPointComponent>(uid))
+                HasComp<DropshipUtilityPointComponent>(uid) ||
+                HasComp<DropshipElectronicSystemPointComponent>(uid))
             {
                 ent.Comp.AttachmentPoints.Add(uid);
             }
@@ -273,6 +281,15 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnElectronicSystemExamined(Entity<DropshipElectronicSystemPointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetAttachmentContained(ent, ent.Comp.ContainerId, out var attachment))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", attachment)));
+        }
+    }
+
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
         ref DropshipNavigationLaunchMsg args)
     {
@@ -346,7 +363,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid? user,
         bool hijack = false,
         float? startupTime = null,
-        float? hyperspaceTime = null)
+        float? hyperspaceTime = null,
+        bool offset = false)
     {
         return false;
     }
@@ -404,6 +422,25 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
+        var map = _transform.GetMap(user.Owner);
+
+        // Prevent shipside hijacks by immature queens.
+        if (HasComp<XenoMaturingComponent>(user) &&
+            !HasComp<RMCPlanetComponent>(map) ||
+            // Prevent double hijack.
+            TryComp(map, out EvacuationProgressComponent? evacuation) &&
+            evacuation.DropShipCrashed)
+        {
+            var msg = Loc.GetString("rmc-dropship-invalid-hijack");
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
         return true;
     }
 
@@ -439,10 +476,11 @@ public abstract class SharedDropshipSystem : EntitySystem
         _adminLog.Add(LogType.RMCPrimaryLZ, $"{ToPrettyString(actor):player} designated {ToPrettyString(lz):lz} as primary landing zone");
 
         EnsureComp<PrimaryLandingZoneComponent>(lz);
+        EnsureComp<RMCTrackableComponent>(lz);
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));
-        _marineAnnounce.AnnounceARES(actor, message);
+        _marineAnnounce.AnnounceARESStaging(actor, message);
 
         return true;
     }

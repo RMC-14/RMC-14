@@ -24,6 +24,7 @@
     - Decor
     - Poncho
     - Mask
+    - Utility
 
 - type: entity
   abstract: true
@@ -32,6 +33,7 @@
   components:
   - type: UniformAccessoryHolder
     allowedCategories:
+    - Tie
     - Patch
     - Medal
     - Armband
@@ -39,6 +41,7 @@
     - Decor
     - Poncho
     - Mask
+    - Utility
 
 - type: entity
   abstract: true

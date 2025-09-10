@@ -32,6 +32,7 @@
 
             <controls:TacticalMapWrapper Name="TacticalMapWrapper"
                                         Access="Public"
+                                        MinSize="600 600"
                                         Margin="0 4"/>
         </BoxContainer>
     </BoxContainer>

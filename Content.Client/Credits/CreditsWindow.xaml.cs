@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using System.Threading.Tasks;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client.Stylesheets;
 using Content.Shared.CCVar;
@@ -11,184 +12,391 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Serialization.Markdown;
+using Robust.Shared.Serialization.Markdown.Mapping;
+using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
-namespace Content.Client.Credits
-{
-    [GenerateTypedNameReferences]
-    public sealed partial class CreditsWindow : DefaultWindow
-    {
-        [Dependency] private readonly IEntityManager _entities = default!;
-        [Dependency] private readonly IResourceManager _resourceManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+namespace Content.Client.Credits;
 
-        private static readonly Dictionary<string, int> PatronTierPriority = new()
+[GenerateTypedNameReferences]
+public sealed partial class CreditsWindow : DefaultWindow
+{
+    [Dependency] private readonly IResourceManager _resourceManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
+
+    // RMC14
+    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+
+    // RMC14
+    private static readonly Dictionary<string, int> PatronTierPriority = new()
+    {
+        ["Praetorian"] = 1,
+        ["Hivelord"] = 2,
+        ["Rouny"] = 3,
+        ["Larva"] = 4,
+    };
+    // RMC14
+
+    private readonly List<FormattedMessage> _attributions = [];
+    private readonly ISawmill _sawmill = Logger.GetSawmill("Credits");
+
+    private const int AttributionsSourcesPerPage = 50;
+
+    public CreditsWindow()
+    {
+        IoCManager.InjectDependencies(this);
+        RobustXamlLoader.Load(this);
+
+        TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
+        TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
+        TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
+        TabContainer.SetTabTitle(AttributionsTab, Loc.GetString("credits-window-attributions-tab"));
+        TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));
+
+        _protoManager.PrototypesReloaded += _ =>
         {
-            ["Praetorian"] = 1,
-            ["Hivelord"] = 2,
-            ["Rouny"] = 3,
-            ["Larva"] = 4,
+            _attributions.Clear();
         };
 
-        public CreditsWindow()
-        {
-            IoCManager.InjectDependencies(this);
-            RobustXamlLoader.Load(this);
+        MasterTabContainer.OnTabChanged += OnTabChanged;
 
-            TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
-            TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
-            TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
-            TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));
+        PopulateContributors(Ss14ContributorsContainer);
+    }
 
+    /// <summary>
+    /// Only populates the tab when they are selected, which reduces lagspike when not looking at attributions.
+    /// </summary>
+    private void OnTabChanged(int tab)
+    {
+        if (tab == Ss14ContributorsTab.GetPositionInParent())
             PopulateContributors(Ss14ContributorsContainer);
+        else if (tab == PatronsTab.GetPositionInParent())
             PopulatePatrons(PatronsContainer);
+        else if (tab == LicensesTab.GetPositionInParent())
             PopulateLicenses(LicensesContainer);
+        else if (tab == AttributionsTab.GetPositionInParent())
+            PopulateAttributions(AttributionsContainer, 0);
+        else if (tab == OtherContainer.GetPositionInParent()) // RMC14
             PopulateOther(OtherContainer);
+    }
+
+    // RMC14
+    private void PopulateOther(BoxContainer otherContainer)
+    {
+        var text = _resourceManager.ContentFileReadAllText($"/Credits/_RMC14/Other.txt");
+        var label = new RichTextLabel();
+        label.SetMessage(text);
+
+        otherContainer.AddChild(label);
+    }
+
+    private async void PopulateAttributions(BoxContainer attributionsContainer, int count)
+    {
+        attributionsContainer.DisposeAllChildren();
+
+        if (_attributions.Count == 0)
+        {
+            var rsi = await CollectRSiAttributions();
+            var rga = await CollectRgaAttributions();
+
+            _attributions.AddRange(rsi);
+            _attributions.AddRange(rga);
         }
 
-        private void PopulateOther(BoxContainer otherContainer)
+        foreach (var message in _attributions.Skip(count).Take(AttributionsSourcesPerPage))
         {
-            var text = _resourceManager.ContentFileReadAllText($"/Credits/_RMC14/Other.txt");
-            var label = new RichTextLabel();
-            label.SetMessage(text);
-
-            otherContainer.AddChild(label);
+            var rich = new RichTextLabel();
+            rich.SetMessage(message);
+            attributionsContainer.AddChild(rich);
         }
 
-        private void PopulateLicenses(BoxContainer licensesContainer)
+        var container = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
+
+        var previousPageButton = new Button { Text = "Previous Page" };
+        previousPageButton.OnPressed +=
+            _ => PopulateAttributions(attributionsContainer, count - AttributionsSourcesPerPage);
+
+        var nextPageButton = new Button { Text = "Next Page" };
+        nextPageButton.OnPressed +=
+            _ => PopulateAttributions(attributionsContainer, count + AttributionsSourcesPerPage);
+
+        if (count - AttributionsSourcesPerPage >= 0)
+            container.AddChild(previousPageButton);
+        if (count + AttributionsSourcesPerPage < _attributions.Count)
+            container.AddChild(nextPageButton);
+
+        attributionsContainer.AddChild(container);
+    }
+
+    private Task<List<FormattedMessage>> CollectRSiAttributions()
+    {
+        return Task.Run(() =>
         {
-            foreach (var entry in CreditsManager.GetLicenses(_resourceManager).OrderBy(p => p.Name))
+            var rsiStreams = _resourceManager.ContentFindFiles("/Textures/")
+                .Where(p => p.ToString().EndsWith(".rsi/meta.json"));
+
+            var attrs = new List<FormattedMessage>();
+
+            foreach (var stream in rsiStreams)
             {
-                licensesContainer.AddChild(new Label {StyleClasses = {StyleBase.StyleClassLabelHeading}, Text = entry.Name});
-
-                // We split these line by line because otherwise
-                // the LGPL causes Clyde to go out of bounds in the rendering code.
-                foreach (var line in entry.License.Split("\n"))
+                try
                 {
-                    licensesContainer.AddChild(new Label {Text = line, FontColorOverride = new Color(200, 200, 200)});
+                    var m = new FormattedMessage();
+
+                    var yamlStream = _resourceManager.ContentFileReadYaml(stream);
+
+                    if (yamlStream.Documents[0].RootNode.ToDataNode() is not MappingDataNode map)
+                        throw new Exception("meta.json is not a mapping.");
+
+                    if (!map.TryGet("copyright", out var copyrightNode))
+                        throw new Exception("Missing the copyright field.");
+
+                    if (!map.TryGet("states", out var statesNode))
+                        throw new Exception("Missing the states field.");
+
+                    if (statesNode is not SequenceDataNode states)
+                        throw new Exception("Missing a list of states.");
+
+                    var copyright = copyrightNode.ToString();
+                    var files = states.Select(n => (MappingDataNode)n)
+                        .Select(n => n.Get("name") + ".png");
+
+                    m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-directory",
+                        ("directory", stream.Directory.ToString())));
+                    m.AddText("\n");
+                    m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-files",
+                        ("files", string.Join(", ", files))));
+                    m.AddText("\n");
+                    m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-copyright",
+                        ("copyright", copyright)));
+                    m.AddText("\n");
+
+                    attrs.Add(m);
+                }
+                catch (Exception e)
+                {
+                    var m = new FormattedMessage();
+                    m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-failed",
+                        ("file", stream.ToString())));
+                    m.AddText("\n");
+                    _sawmill.Error($"{stream.ToString()}\n{e}");
+                    attrs.Add(m);
                 }
             }
-        }
 
-        private void PopulatePatrons(BoxContainer patronsContainer)
+            return attrs;
+        });
+    }
+
+    private Task<List<FormattedMessage>> CollectRgaAttributions()
+    {
+        return Task.Run(() =>
         {
-            var patrons = LoadPatrons();
+            var rgaStreams = _resourceManager.ContentFindFiles("/")
+                .Where(p => p.Filename == "attributions.yml");
 
-            var linkPatreon = _cfg.GetCVar(CCVars.InfoLinksPatreon);
-            if (linkPatreon != "")
+            var attrs = new List<FormattedMessage>();
+
+            foreach (var stream in rgaStreams)
             {
-                Button patronButton;
-                patronsContainer.AddChild(patronButton = new Button
+                try
                 {
-                    Text = Loc.GetString("credits-window-become-patron-button"),
-                    HorizontalAlignment = HAlignment.Center
-                });
+                    var yamlStream = _resourceManager.ContentFileReadYaml(stream);
 
-                patronButton.OnPressed +=
-                    _ => IoCManager.Resolve<IUriOpener>().OpenUri(linkPatreon);
-            }
+                    if (yamlStream.Documents[0].RootNode.ToDataNode() is not SequenceDataNode sequence)
+                        throw new Exception("Attributions file is not a list of attributions.");
 
-            var first = true;
-            foreach (var tier in patrons.GroupBy(p => p.Tier).OrderBy(p => PatronTierPriority[p.Key]))
-            {
-                if (!first)
-                {
-                    patronsContainer.AddChild(new Control {MinSize = new Vector2(0, 10)});
+                    foreach (var attribution in sequence.Sequence)
+                    {
+                        var m = new FormattedMessage();
+
+                        if (attribution is not MappingDataNode map)
+                            throw new Exception("Attribution is not a mapping.");
+
+                        if (!map.TryGet("files", out var filesNode))
+                            throw new Exception("Attribution does not list files.");
+
+                        if (!map.TryGet("copyright", out var copyrightNode))
+                            throw new Exception("Attribution does not copyright.");
+
+                        if (!map.TryGet("license", out var licenseNode))
+                            throw new Exception("Attribution does not identify a license.");
+
+                        if (!map.TryGet("source", out var sourceNode))
+                            throw new Exception("Attribution does not identify a source.");
+
+                        var files = _serialization.Read<string[]>(filesNode, notNullableOverride: true);
+                        var copyright = copyrightNode.ToString();
+                        var license = licenseNode.ToString();
+                        var source = sourceNode.ToString();
+
+                        m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-directory",
+                            ("directory", stream.Directory.ToString())));
+                        m.AddText("\n");
+                        m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-files",
+                            ("files", string.Join(", ", files))));
+                        m.AddText("\n");
+                        m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-copyright",
+                            ("copyright", copyright)));
+                        m.AddText("\n");
+                        m.AddMarkupPermissive(
+                            _loc.GetString("credits-window-attributions-license", ("license", license)));
+                        m.AddText("\n");
+                        m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-source", ("source", source)));
+                        m.AddText("\n");
+
+                        attrs.Add(m);
+                    }
                 }
+                catch (Exception e)
+                {
+                    var m = new FormattedMessage();
+                    m.AddMarkupPermissive(_loc.GetString("credits-window-attributions-failed",
+                        ("file", stream.ToString())));
+                    m.AddText("\n");
+                    _sawmill.Error($"{stream.ToString()}\n{e}");
+                    attrs.Add(m);
+                }
+            }
 
-                first = false;
-                patronsContainer.AddChild(new Label {StyleClasses = {StyleBase.StyleClassLabelHeading}, Text = $"{tier.Key}"});
+            return attrs;
+        });
+    }
 
-                var msg = string.Join(", ", tier.OrderBy(p => p.Name).Select(p => p.Name));
+    private void PopulateLicenses(BoxContainer licensesContainer)
+    {
+        foreach (var entry in CreditsManager.GetLicenses(_resourceManager).OrderBy(p => p.Name))
+        {
+            licensesContainer.AddChild(new Label
+                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = entry.Name });
 
-                var label = new RichTextLabel();
-                label.SetMessage(msg);
-
-                patronsContainer.AddChild(label);
+            // We split these line by line because otherwise
+            // the LGPL causes Clyde to go out of bounds in the rendering code.
+            foreach (var line in entry.License.Split("\n"))
+            {
+                licensesContainer.AddChild(new Label { Text = line, FontColorOverride = new Color(200, 200, 200) });
             }
         }
+    }
 
-        private IEnumerable<PatronEntry> LoadPatrons()
+    private void PopulatePatrons(BoxContainer patronsContainer)
+    {
+        var patrons = LoadPatrons();
+
+        var linkPatreon = _cfg.GetCVar(CCVars.InfoLinksPatreon);
+        if (linkPatreon != "")
         {
-            return _linkAccount.GetPatrons().Select(p => new PatronEntry(p.Name, p.Tier));
-            var yamlStream = _resourceManager.ContentFileReadYaml(new ("/Credits/Patrons.yml"));
-            var sequence = (YamlSequenceNode) yamlStream.Documents[0].RootNode;
-
-            return sequence
-                .Cast<YamlMappingNode>()
-                .Select(m => new PatronEntry(m["Name"].AsString(), m["Tier"].AsString()));
-        }
-
-        private void PopulateContributors(BoxContainer ss14ContributorsContainer)
-        {
-            Button contributeButton;
-
-            ss14ContributorsContainer.AddChild(new BoxContainer
+            Button patronButton;
+            patronsContainer.AddChild(patronButton = new Button
             {
-                Orientation = LayoutOrientation.Horizontal,
+                Text = Loc.GetString("credits-window-become-patron-button"),
                 HorizontalAlignment = HAlignment.Center,
-                SeparationOverride = 20,
-                Children =
-                {
-                    new Label {Text = Loc.GetString("credits-window-contributor-encouragement-label") },
-                    (contributeButton = new Button {Text = Loc.GetString("credits-window-contribute-button")})
-                }
             });
 
-            var first = true;
-
-            void AddSection(string title, string path, bool markup = false)
-            {
-                if (!first)
-                {
-                    ss14ContributorsContainer.AddChild(new Control {MinSize = new Vector2(0, 10)});
-                }
-
-                first = false;
-                ss14ContributorsContainer.AddChild(new Label {StyleClasses = {StyleBase.StyleClassLabelHeading}, Text = title});
-
-                var label = new RichTextLabel();
-                var text = _resourceManager.ContentFileReadAllText($"/Credits/{path}");
-                if (markup)
-                {
-                    label.SetMessage(FormattedMessage.FromMarkupOrThrow(text.Trim()));
-                }
-                else
-                {
-                    label.SetMessage(text);
-                }
-
-                ss14ContributorsContainer.AddChild(label);
-            }
-
-            AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
-            AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt");
-            AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
-            AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
-            AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
-
-            var linkGithub = _cfg.GetCVar(CCVars.InfoLinksGithub);
-
-            contributeButton.OnPressed += _ =>
-                IoCManager.Resolve<IUriOpener>().OpenUri(linkGithub);
-
-            if (linkGithub == "")
-                contributeButton.Visible = false;
+            patronButton.OnPressed +=
+                _ => IoCManager.Resolve<IUriOpener>().OpenUri(linkPatreon);
         }
 
-        private sealed class PatronEntry
+        var first = true;
+        foreach (var tier in patrons.GroupBy(p => p.Tier).OrderBy(p => PatronTierPriority[p.Key]))
         {
-            public string Name { get; }
-            public string Tier { get; }
+            if (!first)
+                patronsContainer.AddChild(new Control { MinSize = new Vector2(0, 10) });
 
-            public PatronEntry(string name, string tier)
+            first = false;
+            patronsContainer.AddChild(new Label
+                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = $"{tier.Key}" });
+
+            var msg = string.Join(", ", tier.OrderBy(p => p.Name).Select(p => p.Name));
+
+            var label = new RichTextLabel();
+            label.SetMessage(msg);
+
+            patronsContainer.AddChild(label);
+        }
+    }
+
+    private IEnumerable<PatronEntry> LoadPatrons()
+    {
+        return _linkAccount.GetPatrons().Select(p => new PatronEntry(p.Name, p.Tier));
+        var yamlStream = _resourceManager.ContentFileReadYaml(new ResPath("/Credits/Patrons.yml"));
+        var sequence = (YamlSequenceNode) yamlStream.Documents[0].RootNode;
+
+        return sequence
+            .Cast<YamlMappingNode>()
+            .Select(m => new PatronEntry(m["Name"].AsString(), m["Tier"].AsString()));
+    }
+
+    private void PopulateContributors(BoxContainer ss14ContributorsContainer)
+    {
+        Button contributeButton;
+
+        ss14ContributorsContainer.AddChild(new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            HorizontalAlignment = HAlignment.Center,
+            SeparationOverride = 20,
+            Children =
             {
-                Name = name;
-                Tier = tier;
-            }
+                new Label { Text = Loc.GetString("credits-window-contributor-encouragement-label") },
+                (contributeButton = new Button { Text = Loc.GetString("credits-window-contribute-button") }),
+            },
+        });
+
+        var first = true;
+
+        void AddSection(string title, string path, bool markup = false)
+        {
+            if (!first)
+                ss14ContributorsContainer.AddChild(new Control { MinSize = new Vector2(0, 10) });
+
+            first = false;
+            ss14ContributorsContainer.AddChild(new Label
+                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = title });
+
+            var label = new RichTextLabel();
+            var text = _resourceManager.ContentFileReadAllText($"/Credits/{path}");
+            if (markup)
+                label.SetMessage(FormattedMessage.FromMarkupOrThrow(text.Trim()));
+            else
+                label.SetMessage(text);
+
+            ss14ContributorsContainer.AddChild(label);
+        }
+
+        AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
+        AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt");
+        AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
+        AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
+        AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
+
+        var linkGithub = _cfg.GetCVar(CCVars.InfoLinksGithub);
+
+        contributeButton.OnPressed += _ =>
+            IoCManager.Resolve<IUriOpener>().OpenUri(linkGithub);
+
+        if (linkGithub == "")
+            contributeButton.Visible = false;
+    }
+
+    private sealed class PatronEntry
+    {
+        public string Name { get; }
+        public string Tier { get; }
+
+        public PatronEntry(string name, string tier)
+        {
+            Name = name;
+            Tier = tier;
         }
     }
 }

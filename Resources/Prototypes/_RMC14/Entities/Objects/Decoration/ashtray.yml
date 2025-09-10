@@ -10,6 +10,7 @@
       - state: icon-0
         map: ["enum.StorageFillLayers.Fill"]
   - type: StorageFillVisualizer
+    fillBaseName: icon
     maxFillLevels: 2
 
 - type: entity
@@ -23,7 +24,7 @@
     layers:
       - state: icon-0
         map: ["enum.StorageFillLayers.Fill"]
-        
+
 - type: entity
   parent: RMCAshtray
   id: RMCAshtrayGlass

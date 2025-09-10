@@ -49,6 +49,14 @@
 
 - type: entity
   parent: CMSheetPhoron
+  id: CMSheetPhoron15
+  suffix: 15
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: CMSheetPhoron
   id: CMSheetPhoron25
   suffix: 25
   components:
@@ -224,6 +232,14 @@
   components:
   - type: Stack
     count: 10
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood25
+  suffix: 25
+  components:
+  - type: Stack
+    count: 25
 
 - type: entity
   parent: RMCPlankWood

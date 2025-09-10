@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
@@ -37,6 +38,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
@@ -51,7 +53,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
     private void OnXenoAbduct(Entity<XenoAbductComponent> xeno, ref XenoAbductActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         if (!_plasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.Cost))
@@ -59,7 +61,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
         CleanUpTiles(xeno);
 
-        var tiles = _line.DrawLine(xeno.Owner.ToCoordinates(), args.Coords.Value, TimeSpan.Zero, out _);
+        var tiles = _line.DrawLine(xeno.Owner.ToCoordinates(), args.Target, TimeSpan.Zero, out _);
 
         if (tiles.Count == 0)
         {
@@ -217,10 +219,9 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
     private void DoCooldown(Entity<XenoAbductComponent> xeno)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoAbductActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoAbductActionEvent)
-                _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
+            _actions.SetCooldown((action, action), xeno.Comp.Cooldown);
         }
     }
 }

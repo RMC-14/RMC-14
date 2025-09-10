@@ -92,16 +92,17 @@ public sealed class XenoDislocateSystem : EntitySystem
 
     private void RefreshCooldowns(Entity<XenoDislocateComponent> xeno)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _actions.GetActions(xeno))
         {
-            if ((action.BaseEvent is XenoAbductActionEvent || action.BaseEvent is XenoTailLashActionEvent)
-                && action.Cooldown != null)
+            var actionEvent = _actions.GetEvent(action);
+            if ((actionEvent is XenoAbductActionEvent || actionEvent is XenoTailLashActionEvent)
+                && action.Comp.Cooldown != null)
             {
-                var cooldownEnd = action.Cooldown.Value.End - xeno.Comp.CooldownReductionTime;
-                if (cooldownEnd < action.Cooldown.Value.Start)
-                    _actions.ClearCooldown(actionId);
+                var cooldownEnd = action.Comp.Cooldown.Value.End - xeno.Comp.CooldownReductionTime;
+                if (cooldownEnd < action.Comp.Cooldown.Value.Start)
+                    _actions.ClearCooldown(action.AsNullable());
                 else
-                    _actions.SetCooldown(actionId, action.Cooldown.Value.Start, cooldownEnd);
+                    _actions.SetCooldown(action.AsNullable(), action.Comp.Cooldown.Value.Start, cooldownEnd);
             }
         }
     }
