@@ -53,7 +53,7 @@ namespace Content.Client.Info
 
             var roadmapButton = new Button
             {
-                Text = Loc.GetString("rmc-roadmap-window-title"),
+                Text = Loc.GetString("cm-ui-roadmap"),
                 StyleClasses = { StyleBase.ButtonCaution }
             };
             roadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();

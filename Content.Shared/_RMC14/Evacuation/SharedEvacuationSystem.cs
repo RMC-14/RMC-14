@@ -237,7 +237,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             using (args.PushGroup(nameof(EvacuationComputerComponent)))
             {
-                args.PushMarkup(Loc.GetString("rmc-evacuation-computer-max-occupants", ("count", maxMobs)));
+                args.PushMarkup($"[color=red]This pod is only rated for a maximum of {maxMobs} occupants! Any more may cause it to crash and burn.[/color]");
             }
         }
     }
@@ -251,10 +251,10 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         var msg = ent.Comp.Mode switch
         {
-            EvacuationComputerMode.Disabled => Loc.GetString("rmc-evacuation-computer-not-ready"),
+            EvacuationComputerMode.Disabled => "Evacuation has not started.",
             EvacuationComputerMode.Ready => "",
-            EvacuationComputerMode.Travelling => Loc.GetString("rmc-evacuation-computer-launched"),
-            EvacuationComputerMode.Crashed => Loc.GetString("rmc-evacuation-computer-crashed"),
+            EvacuationComputerMode.Travelling => "The escape pod has already been launched!",
+            EvacuationComputerMode.Crashed => "This escape pod has crashed!",
             _ => throw new ArgumentOutOfRangeException(),
         };
 
@@ -269,15 +269,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             var progress = GetEvacuationProgress();
             if (progress < 25)
-                args.PushMarkup(Loc.GetString("rmc-evacuation-pump-no-fuel"));
+                args.PushMarkup("It looks like it barely has any fuel yet.");
             else if (progress < 50)
-                args.PushMarkup(Loc.GetString("rmc-evacuation-pump-some-fuel"));
+                args.PushMarkup("It looks like it has accumulated some fuel.");
             else if (progress < 75)
-                args.PushMarkup(Loc.GetString("rmc-evacuation-pump-half-fuel"));
+                args.PushMarkup("It looks like the fuel tank is a little over half full.");
             else if (progress < 100)
-                args.PushMarkup(Loc.GetString("rmc-evacuation-pump-almost-full"));
+                args.PushMarkup("It looks like the fuel tank is almost full.");
             else
-                args.PushMarkup(Loc.GetString("rmc-evacuation-pump-full"));
+                args.PushMarkup("It looks like the fuel tank is full.");
         }
     }
 
@@ -287,7 +287,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
             return;
 
         args.Cancel();
-        _popup.PopupClient(Loc.GetString("rmc-evacuation-lifeboat-not-authorized"), ent, args.User, PopupType.SmallCaution);
+        _popup.PopupClient("Evacuation has not been authorized.", ent, args.User, PopupType.SmallCaution);
     }
 
     private void OnEvacuationComputerLaunch(Entity<EvacuationComputerComponent> ent, ref EvacuationComputerLaunchBuiMsg args)
@@ -338,7 +338,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
             if (mobs.Count > maxMobs)
             {
-                _popup.PopupPredicted(Loc.GetString("rmc-evacuation-computer-overload"), ent, user, PopupType.LargeCaution);
+                _popup.PopupPredicted("The evacuation pod is overloaded with this many people inside!", ent, null, PopupType.LargeCaution);
                 ent.Comp.Mode = EvacuationComputerMode.Crashed;
                 Dirty(ent);
 
@@ -437,7 +437,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             _marineAnnounce.AnnounceARESStaging(
                 null,
-                Loc.GetString("rmc-evacuation-start-announcement"),
+                "Attention. Emergency. All personnel must evacuate immediately.",
                 startSound
             );
             var ev = new EvacuationEnabledEvent();
@@ -445,11 +445,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
         else
         {
-            _marineAnnounce.AnnounceARESStaging(
-                null,
-                Loc.GetString("rmc-evacuation-cancelled-announcement"),
-                cancelSound
-                );
+            _marineAnnounce.AnnounceARESStaging(null, "Evacuation has been cancelled.", cancelSound);
             var ev = new EvacuationDisabledEvent();
             RaiseLocalEvent(map.Value, ref ev, true);
         }
@@ -517,11 +513,12 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 foreach (var areaId in GetEvacuationAreas(uid.ToCoordinates()))
                 {
                     var powered = IsAreaPumpPowered(areaId);
-                    var line = Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered));
+                    var line = $"[{Name(areaId)}] - [{(powered ? "Online" : "Offline")}]";
                     areas.AppendLine(line);
                 }
 
-                areas.Append(Loc.GetString("rmc-evacuation-progress-announcement"));
+                areas.Append(
+                    "Due to low orbit, extra fuel is required for non-surface evacuations.\nMaintain fueling functionality for optimal evacuation conditions.");
                 _marineAnnounce.AnnounceARESStaging(null, areas.ToString());
             }
 
@@ -545,7 +542,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 if (progress.LastPower.TryGetValue(areaId, out var lastPower) &&
                     lastPower != powered)
                 {
-                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered)));
+                    _marineAnnounce.AnnounceARESStaging(null, $"{Name(areaId)} - [{(powered ? "Online" : "Offline")}]");
                 }
 
                 progress.LastPower[areaId] = powered;
@@ -579,19 +576,19 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
                 string MarinePercentageString(int percentage)
                 {
-                    var marineAnnounce = Loc.GetString("rmc-evacuation-goal-percents", ("percentage", percentage));
+                    var marineAnnounce = $"Emergency fuel replenishment is at {percentage} percent.";
                     if (offAreas.Length == 0)
-                        marineAnnounce += Loc.GetString("rmc-evacuation-all-areas-operational");
+                        marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += Loc.GetString("rmc-evacuation-restore-power-areas", ("areas", offAreas));
+                        marineAnnounce += $"To increase speed, restore power to the following areas: {offAreas}";
 
                     return marineAnnounce;
                 }
 
                 if (progress.Progress >= progress.Required)
                 {
-                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-goal-100-percent"));
-                    _xenoAnnounce.AnnounceAll(default, Loc.GetString("rmc-xeno-evacuation-goal-100-percent"));
+                    _marineAnnounce.AnnounceARESStaging(null, "Emergency fuel replenishment is at 100 percent. Safe utilization of lifeboats and pods is now possible.");
+                    _xenoAnnounce.AnnounceAll(default, "The talls have completed their goals!");
                     SetPumpAppearance(EvacuationPumpVisuals.Full);
                     var ev = new EvacuationProgressEvent(100);
                     RaiseLocalEvent(uid, ref ev, true);
@@ -600,9 +597,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 {
                     _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(75));
 
-                    var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-75-percent");
+                    var xenoAnnounce = "The talls are three quarters of the way towards their goals.";
                     if (onAreas.Length > 0)
-                        xenoAnnounce += Loc.GetString("rmc-xeno-evacuation-disable-areas", ("areas", onAreas));
+                        xenoAnnounce += $" Disable the following areas: {onAreas}";
 
                     _xenoAnnounce.AnnounceAll(default, xenoAnnounce);
                     SetPumpAppearance(EvacuationPumpVisuals.SeventyFive);
@@ -614,9 +611,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 {
                     _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(50));
 
-                    var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-50-percent");
+                    var xenoAnnounce = "The talls are half way towards their goals.";
                     if (onAreas.Length > 0)
-                        xenoAnnounce += Loc.GetString("rmc-xeno-evacuation-disable-areas", ("areas", onAreas));
+                        xenoAnnounce += $" Disable the following areas: {onAreas}";
 
                     _xenoAnnounce.AnnounceAll(default, xenoAnnounce);
                     SetPumpAppearance(EvacuationPumpVisuals.Fifty);
@@ -625,17 +622,17 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
                 else if (progress.Progress >= progress.Required * 0.25)
                 {
-                    var marineAnnounce = Loc.GetString("rmc-evacuation-goal-25-percent");
+                    var marineAnnounce = "Emergency fuel replenishment is at 25 percent. Lifeboat emergency early launch is now available.";
                     if (offAreas.Length == 0)
-                        marineAnnounce += Loc.GetString("rmc-evacuation-all-areas-operational");
+                        marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += Loc.GetString("rmc-evacuation-restore-power-areas", ("areas", offAreas));
+                        marineAnnounce += $" To increase speed, restore power to the following areas: {offAreas}";
 
                     _marineAnnounce.AnnounceARESStaging(null, marineAnnounce);
 
-                    var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-25-percent");
+                    var xenoAnnounce = "The talls are a quarter of the way towards their goals.";
                     if (onAreas.Length > 0)
-                        xenoAnnounce += Loc.GetString("rmc-xeno-evacuation-disable-areas", ("areas", onAreas));
+                        xenoAnnounce += $" Disable the following areas: {onAreas}";
 
                     _xenoAnnounce.AnnounceAll(default, xenoAnnounce);
 

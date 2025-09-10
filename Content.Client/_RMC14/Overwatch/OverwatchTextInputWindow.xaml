@@ -2,7 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Title="{Loc rmc-overwatch-squad-message-title}" MinSize="480 104">
+    Title="Squad Message" MinSize="480 104">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat
@@ -13,8 +13,8 @@
         <BoxContainer Orientation="Vertical" Margin="5">
             <LineEdit Name="MessageBox" Access="Public" Margin="0 0 0 5" />
             <BoxContainer Orientation="Horizontal">
-                <Button Name="OkButton" Access="Public" Text="{Loc rmc-overwatch-squad-message-ok}" HorizontalExpand="True" StyleClasses="OpenBoth" />
-                <Button Name="CancelButton" Access="Public" Text="{Loc rmc-overwatch-squad-message-cancel}" HorizontalExpand="True" StyleClasses="OpenBoth" />
+                <Button Name="OkButton" Access="Public" Text="Ok" HorizontalExpand="True" StyleClasses="OpenBoth" />
+                <Button Name="CancelButton" Access="Public" Text="Cancel" HorizontalExpand="True" StyleClasses="OpenBoth" />
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

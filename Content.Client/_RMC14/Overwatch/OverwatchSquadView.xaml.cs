@@ -31,9 +31,6 @@ public sealed partial class OverwatchSquadView : Control
     {
         RobustXamlLoader.Load(this);
 
-        TabContainer.SetTabTitle(SquadMonitor, Loc.GetString("rmc-overwatch-squad-view-squad-monitor-label"));
-        TabContainer.SetTabTitle(SupplyDrop, Loc.GetString("rmc-overwatch-squad-view-supply-drop-label"));
-        TabContainer.SetTabTitle(OrbitalBombardment, Loc.GetString("rmc-overwatch-squad-view-orbital-bombardment-label"));
         // Set up tab button event handlers
         SquadMonitorButton.OnPressed += OnSquadMonitorPressed;
         SupplyDropButton.OnPressed += OnSupplyDropPressed;
@@ -278,14 +275,14 @@ public sealed partial class OverwatchSquadView : Control
         base.FrameUpdate(args);
 
         CrateStatus.Text = HasCrate
-            ? Loc.GetString("rmc-overwatch-squad-view-status-has-crate")
-            : Loc.GetString("rmc-overwatch-squad-view-status-no-crate");
+            ? "[color=green][bold] \\[ CRATE LOADED \\][/bold][/color]"
+            : "[color=red][bold] \\[ NO CRATE LOADED \\][/bold][/color]";
 
         var time = IoCManager.Resolve<IGameTiming>().CurTime;
         var supplyTimeLeft = NextLaunchAt - time;
         if (supplyTimeLeft > TimeSpan.Zero)
         {
-            CrateStatus.Text = Loc.GetString("rmc-overwatch-squad-view-status-cooldown", ("seconds", (int)supplyTimeLeft.TotalSeconds));
+            CrateStatus.Text = $"[color=#D3B400][bold]\\ [ COOLDOWN - {(int)supplyTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
             LaunchButton.Disabled = true;
         }
         else
@@ -296,14 +293,14 @@ public sealed partial class OverwatchSquadView : Control
         var orbitalTimeLeft = NextOrbitalAt - time;
         if (orbitalTimeLeft > TimeSpan.Zero)
         {
-            OrbitalStatus.Text = Loc.GetString("rmc-overwatch-squad-view-status-cooldown", ("seconds", (int)orbitalTimeLeft.TotalSeconds));
+            OrbitalStatus.Text = $"[color=#D3B400][bold]\\ [ COOLDOWN - {(int)orbitalTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
             OrbitalFireButton.Disabled = true;
         }
         else
         {
             OrbitalStatus.Text = HasOrbital
-                ? Loc.GetString("rmc-overwatch-squad-view-status-ready")
-                : Loc.GetString("rmc-overwatch-squad-view-status-not-ready");
+                ? "[color=green][bold] \\[ READY \\][/bold][/color]"
+                : "[color=red][bold] \\[ NOT READY \\][/bold][/color]";
             OrbitalFireButton.Disabled = false;
         }
     }

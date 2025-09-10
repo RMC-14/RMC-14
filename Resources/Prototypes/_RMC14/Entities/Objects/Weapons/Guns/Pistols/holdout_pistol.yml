@@ -103,7 +103,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgePistol22mm
+    - CMCartridgePistol.22mm
   - type: CartridgeAmmo
     proto: CMBulletPistol22mm
 

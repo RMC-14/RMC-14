@@ -57,7 +57,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         {
             _window = this.CreateWindow<CMSurgeryWindow>();
             _window.OnClose += () => _system.OnRefresh -= RefreshUI;
-            _window.Title = Loc.GetString("rmc-surgery-window-title");
+            _window.Title = "Surgery";
 
             _window.PartsButton.OnPressed += _ =>
             {
@@ -220,7 +220,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
             var msg = new FormattedMessage();
             var surgeryName = _entities.GetComponent<MetaDataComponent>(requirement).EntityName;
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-surgery-step-invalid-requires-surgery", ("surgery", surgeryName)));
+            msg.AddMarkupOrThrow($"[bold]Requires: {surgeryName}[/bold]");
             label.Set(msg, null);
 
             _window.Steps.AddChild(label);
@@ -335,16 +335,16 @@ public sealed class CMSurgeryBui : BoundUserInterface
                     switch (reason)
                     {
                         case StepInvalidReason.MissingSkills:
-                            stepName.AddMarkupOrThrow(Loc.GetString("rmc-surgery-step-invalid-missing-skill"));
+                            stepName.AddMarkupOrThrow(" [color=red](Missing surgery skill)[/color]");
                             break;
                         case StepInvalidReason.NeedsOperatingTable:
-                            stepName.AddMarkupOrThrow(Loc.GetString("rmc-surgery-step-invalid-operating-table"));
+                            stepName.AddMarkupOrThrow(" [color=red](Needs operating table)[/color]");
                             break;
                         case StepInvalidReason.Armor:
-                            stepName.AddMarkupOrThrow(Loc.GetString("rmc-surgery-step-invalid-remove-armor"));
+                            stepName.AddMarkupOrThrow(" [color=red](Remove their armor!)[/color]");
                             break;
                         case StepInvalidReason.MissingTool:
-                            stepName.AddMarkupOrThrow(Loc.GetString("rmc-surgery-step-invalid-missing-tool"));
+                            stepName.AddMarkupOrThrow(" [color=red](Missing tool)[/color]");
                             break;
                     }
                 }
@@ -373,7 +373,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
         _window.DisabledPanel.Visible = true;
 
         var text = new FormattedMessage();
-        text.AddMarkupOrThrow(Loc.GetString("rmc-surgery-invalid-need-lying-down"));
+        text.AddMarkupOrThrow("[color=red][font size=16]They need to be lying down![/font][/color]");
         _window.DisabledLabel.SetMessage(text);
         _window.DisabledPanel.MouseFilter = MouseFilterMode.Stop;
     }
@@ -397,15 +397,15 @@ public sealed class CMSurgeryBui : BoundUserInterface
         if (_entities.TryGetComponent(_part, out MetaDataComponent? partMeta) &&
             _entities.TryGetComponent(_surgery?.Ent, out MetaDataComponent? surgeryMeta))
         {
-            _window.Title = Loc.GetString("rmc-surgery-part-surgery", ("part", partMeta.EntityName), ("surgery", surgeryMeta.EntityName));
+            _window.Title = $"Surgery - {partMeta.EntityName}, {surgeryMeta.EntityName}";
         }
         else if (partMeta != null)
         {
-            _window.Title = Loc.GetString("rmc-surgery-part", ("part", partMeta.EntityName));
+            _window.Title = $"Surgery - {partMeta.EntityName}";
         }
         else
         {
-            _window.Title = Loc.GetString("rmc-surgery");
+            _window.Title = "Surgery";
         }
     }
 
