@@ -291,6 +291,10 @@
   - type: ActivatableUI
     key: enum.OrbitalCannonComputerUI.Key
   - type: OrbitalCannonComputer
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSeatBase
