@@ -480,6 +480,13 @@ namespace Content.Server.Database
                 .HasForeignKey(r => r.ReceiverId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPlayerStats>()
+                .HasOne(s => s.Player)
+                .WithOne(p => p.Stats)
+                .HasForeignKey<RMCPlayerStats>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -719,6 +726,7 @@ namespace Content.Server.Database
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
+        public RMCPlayerStats Stats { get; set; } = default!;
     }
 
     [Table("whitelist")]

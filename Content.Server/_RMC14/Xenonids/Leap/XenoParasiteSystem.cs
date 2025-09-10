@@ -46,7 +46,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-bypass-time"), ghost.Value, ghost.Value, PopupType.Medium);
         }
 
-        _db.IncreaseInfects(actor.PlayerSession.UserId);
+        _db.IncreaseInfects(session.UserId);
     }
 
     protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)
