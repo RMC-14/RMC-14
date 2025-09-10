@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Added CLF Engineer, Specialist and Medic roles.
-    type: Add
-  - message: Added Earmuffs and IEDs, commonly used by the CLF.
-    type: Add
-  id: 1849
-  time: '2025-06-09T20:24:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6671
-- author: noctyrnal
-  changes:
   - message: Added the MARSOC Team Leader role for ERTs.
     type: Add
   - message: Added the missing MARSOC Balaclava, Headset and shells in their shotgun.
@@ -4475,5 +4466,14 @@
   id: 2348
   time: '2025-09-10T01:15:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7788
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the playtime tracker window duplicating some playtimes.
+    type: Fix
+  - message: Fixed the tactical map's default mode not showing area names.
+    type: Fix
+  id: 2349
+  time: '2025-09-10T01:41:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7877
 Name: RMC14
 Order: -1
