@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorTrucker
-  id: CMSurvivorKutjevoTrucker
-  name: cm-job-name-survivor-kutjevo-trucker
+  id: RMCSurvivorKutjevoTrucker
+  name: rmc-job-name-survivor-kutjevo-trucker
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoTrucker
   spawnMenuRoleName: Kutjevo Heavy Vehicle Operator (Kutjevo Survivor)
@@ -43,7 +43,7 @@
   name: kutjevo trucker spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorKutjevoTrucker
+    job_id: RMCSurvivorKutjevoTrucker
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

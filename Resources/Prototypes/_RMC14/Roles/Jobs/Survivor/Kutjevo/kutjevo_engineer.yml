@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorEngineer
-  id: CMSurvivorKutjevoEngineer
-  name: cm-job-name-survivor-kutjevo-engineer
+  id: RMCSurvivorKutjevoEngineer
+  name: rmc-job-name-survivor-kutjevo-engineer
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoEngineer
   spawnMenuRoleName: Kutjevo Engineer (Kutjevo Survivor)
@@ -43,7 +43,7 @@
   name: survivor kutjevo engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: RMCSurvivorKutjevoEngineer
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

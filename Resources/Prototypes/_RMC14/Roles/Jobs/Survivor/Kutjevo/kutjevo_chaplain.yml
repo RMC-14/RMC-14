@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMSurvivorPriest
-  id: CMSurvivorKutjevoChaplain
+  id: RMCSurvivorKutjevoChaplain
   name: rmc-job-name-survivor-kutjevo-chaplain
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorKutjevoChaplain
@@ -46,7 +46,7 @@
   name: survivor kutjevo chaplain spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorKutjevoChaplain
+    job_id: RMCSurvivorKutjevoChaplain
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

@@ -177,18 +177,19 @@
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
     survivorJobInserts:
       CMSurvivor:
-      - CMSurvivorKutjevoChaplain: 1
-      - CMSurvivorKutjevoTrucker: -1
+      - RMCSurvivorKutjevoChaplain: 1
+      - RMCSurvivorKutjevoTrucker: -1
       CMSurvivorCorporate:
-      - CMSurvivor: 0
+      - RMCSurvivorKutjevoCorporate: 2
       CMSurvivorDoctor:
-      - CMSurvivorKutjevoDoctor: 1
+      - RMCSurvivorKutjevoDoctor: 3
       CMSurvivorEngineer:
-      - CMSurvivorKutjevoEngineer: 1
+      - RMCSurvivorKutjevoEngineer: 4
       CMSurvivorSecurity:
-      - CMSurvivorKutjevoCMBDeputy: 1
+      - RMCSurvivorKutjevoCMBDeputy: 1
+      - RMCSurvivorKutjevoGoon: 1
       CMSurvivorScientist:
-      - CMSurvivor: 0
+      - RMCSurvivorKutjevoResearcher: 2
 
 - type: entity
   id: RMCPlanetChances

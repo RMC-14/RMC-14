@@ -1,12 +1,12 @@
 ﻿- type: job
   parent: CMSurvivorSecurity
-  id: RMCSurvivorKutjevoCMBDeputy
-  name: rmc-job-name-survivor-cmb-deputy
+  id: RMCSurvivorKutjevoGoon
+  name: rmc-job-name-survivor-kutjevo-goon
   description: cm-job-description-survivor
-  startingGear: RMCGearSurvivorKutjevoCMBDeputy
+  startingGear: RMCGearSurvivorKutjevoGoon
   hasIcon: true
-  icon: RMCJobIconBureauDeputy
-  spawnMenuRoleName: Kutjevo CMB Deputy (Kutjevo Survivor)
+  icon: RMCJobIconWeYaSec
+  spawnMenuRoleName: Kutjevo Security Guard (Kutjevo Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,37 +25,30 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Bureau
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetKutjevoCMBDeputy
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: deputy
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_cmb
+      preset: RMCGearSurvivorPresetKutjevoGoon
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorCMBDeputy
-  id: RMCGearSurvivorKutjevoCMBDeputy
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorKutjevoGoon
   equipment:
     eyes: RMCGogglesKutjevo
     head: RMCArmorHelmetPMCKutjevoSecurity
     mask: RMCMaskKutjevoRespirator
-    jumpsuit: RMCJumpsuitKutjevoDrysuit
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    ears: RMCHeadsetDistressWeYa
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorKutjevoCMBDeputy
-  name: kutjevo cmb deputy spawn point
+  id: RMCSpawnPointSurvivorKutjevoGoon
+  name: kutjevo goon spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorKutjevoCMBDeputy
+    job_id: RMCSurvivorKutjevoGoon
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -63,6 +56,6 @@
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetKutjevoCMBDeputy
+  id: RMCGearSurvivorPresetKutjevoGoon
   name: kutjevo goon colonist preset
   categories: [ HideSpawnMenu ]
