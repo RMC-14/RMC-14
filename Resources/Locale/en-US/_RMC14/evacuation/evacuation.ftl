@@ -19,11 +19,12 @@ rmc-evacuation-cancelled-announcement = Evacuation has been cancelled.
 rmc-evacuation-progress-announcement =
     Due to low orbit, extra fuel is required for non-surface evacuations.
     Maintain fueling functionality for optimal evacuation conditions.
-rmc-evacuation-area-status = {$area} - [{$powered ->
-  [0] Online
-  [1] Offline
+
+rmc-evacuation-area-status = {$area} - { $powered ->
+  [true] Online
+  [false] Offline
   *[other] {$powered}
-}]
+}
 
 rmc-evacuation-goal-percents = Emergency fuel replenishment is at {$percentage} percent.
 rmc-evacuation-goal-25-percent = Emergency fuel replenishment is at 25 percent. Lifeboat emergency early launch is now available.

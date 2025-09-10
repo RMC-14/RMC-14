@@ -7,7 +7,7 @@
         <RichTextLabel Text="{Loc rmc-chem-dispenser-status-title}" />
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Margin="0 5">
-            <Label Text="{Loc rmc-chem-dispenser-energy}" Margin="0 0 5 0" />
+            <Label Text="{Loc rmc-chem-dispenser-energy-label}" Margin="0 0 5 0" />
             <ProgressBar Name="EnergyBar" Access="Public" HorizontalExpand="True">
                 <Label Name="EnergyLabel" Access="Public" HorizontalAlignment="Right"
                        Margin="0 0 5 0" />
@@ -27,14 +27,14 @@
         </BoxContainer>
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
-            <Label Text="{Loc rmc-chem-dispenser-beaker}" MinWidth="100" />
-            <Label Name="BeakerStatus" Access="Public" Text="{Loc rmc-chem-dispenser-no-beaker}" />
+            <Label Text="{Loc rmc-chem-dispenser-beaker-label}" MinWidth="100" />
+            <Label Name="BeakerStatus" Access="Public" Text="{Loc rmc-chem-dispenser-no-beaker-label}" />
             <Control HorizontalExpand="True" />
             <Button Name="EjectBeakerButton" Access="Public" Text="{Loc rmc-chem-dispenser-eject-beaker}" StyleClasses="OpenBoth" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="{Loc rmc-chem-dispenser-contents}" MinWidth="100" VerticalAlignment="Top" />
-            <Label Name="ContentsNone" Access="Public" Text="{Loc rmc-chem-dispenser-none}" />
+            <Label Text="{Loc rmc-chem-dispenser-contents-label}" MinWidth="100" VerticalAlignment="Top" />
+            <Label Name="ContentsNone" Access="Public" Text="{Loc rmc-chem-dispenser-none-label}" />
             <BoxContainer Name="BeakerContents" Access="Public" Orientation="Vertical" />
         </BoxContainer>
     </BoxContainer>

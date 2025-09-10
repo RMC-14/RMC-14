@@ -114,12 +114,12 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
         var energy = dispenser.Energy;
         _window.EnergyBar.Value = energy.Float();
-        _window.EnergyLabel.Text = Loc.GetString("rmc-chem-dispenser-energy", ("amount", energy.Int()));
+        _window.EnergyLabel.Text = Loc.GetString("rmc-chem-dispenser-energy-amount", ("amount", energy.Int()));
 
         if (!_container.TryGetContainer(Owner, dispenser.ContainerSlotId, out var container) ||
             !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
-            _window.BeakerStatus.Text = Loc.GetString("rmc-chem-dispenser-no-beaker");
+            _window.BeakerStatus.Text = Loc.GetString("rmc-chem-dispenser-no-beaker-label");
             _window.EjectBeakerButton.Visible = false;
             _window.ContentsNone.Visible = true;
             _window.BeakerContents.Visible = false;

@@ -517,7 +517,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 foreach (var areaId in GetEvacuationAreas(uid.ToCoordinates()))
                 {
                     var powered = IsAreaPumpPowered(areaId);
-                    var line = Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered));
+                    var line = Loc.GetString("rmc-evacuation-area-status", ("area", areaId), ("powered", powered));
                     areas.AppendLine(line);
                 }
 
@@ -545,7 +545,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 if (progress.LastPower.TryGetValue(areaId, out var lastPower) &&
                     lastPower != powered)
                 {
-                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered)));
+                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-area-status", ("area", areaId), ("powered", powered)));
                 }
 
                 progress.LastPower[areaId] = powered;

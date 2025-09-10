@@ -232,10 +232,10 @@
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="rmc-overwatch-squad-view-longitude-label" />
+                                                    <Label Text="{Loc rmc-overwatch-squad-view-longitude-label}" />
                                                 </BoxContainer>
                                                 <BoxContainer Name="LatitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="rmc-overwatch-squad-view-latitude-label" />
+                                                    <Label Text="{Loc rmc-overwatch-squad-view-latitude-label}" />
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="CrateStatus" Access="Public"
