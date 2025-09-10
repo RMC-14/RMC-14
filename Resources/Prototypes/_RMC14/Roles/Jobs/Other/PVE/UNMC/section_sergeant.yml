@@ -12,7 +12,6 @@
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-platco
-  marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
   overwatchSortPriority: -6
