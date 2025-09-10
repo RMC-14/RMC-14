@@ -38,17 +38,6 @@
     minimapColor: '#a16027'
 
 - type: entity
-  parent: RMCAreaProtectionOne
-  id: RMCAreaPortNereidCargo
-  name: Port Nereid - AC-170 Cargo Depot
-  components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas_varadero.rsi
-    state: req0
-  - type: Area
-    minimapColor: '#a16027'
-
-- type: entity
   parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidMining
   name: Port Nereid - TMCC Mining Outpost
