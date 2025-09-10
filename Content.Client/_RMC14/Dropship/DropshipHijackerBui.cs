@@ -30,7 +30,7 @@ public sealed class DropshipHijackerBui(EntityUid owner, Enum uiKey) : BoundUser
         if (_window == null)
         {
             _window = this.CreateWindow<DropshipHijackerWindow>();
-            _window.Header.SetMarkup(Loc.GetString("rmc-dropship-navigation-hijack-select-place"));
+            _window.Header.SetMarkup("[bold]Where to 'land'?[/bold]");
         }
 
         _window.Destinations.DisposeAllChildren();
