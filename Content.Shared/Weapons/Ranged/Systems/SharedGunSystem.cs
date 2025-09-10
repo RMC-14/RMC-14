@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Random;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.ActionBlocker;
@@ -254,7 +255,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
     }
 
-    public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, List<int>? predictedProjectiles = null, ICommonSession? userSession = null)
+    public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, List<int>? predictedProjectiles = null, List<int>? predictedPointBlanks = null, ICommonSession? userSession = null)
     {
         if (gun.FireRateModified <= 0f ||
             !_actionBlockerSystem.CanAttack(user))
@@ -418,7 +419,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         var userImpulse = false;
         if (Timing.IsFirstTimePredicted)
         {
-            projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
+            projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, predictedPointBlanks, userSession);
         }
 
         var shotEv = new GunShotEvent(user, ev.Ammo, fromCoordinates, toCoordinates.Value);
@@ -470,6 +471,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityUid? user = null,
         bool throwItems = false,
         List<int>? predictedProjectiles = null,
+        List<int>? predictedPointBlanks = null,
         ICommonSession? userSession = null)
     {
         userImpulse = true;
@@ -523,6 +525,12 @@ public abstract partial class SharedGunSystem : EntitySystem
                 };
                 AddComp(projectile, comp, true);
                 Dirty(projectile, comp);
+            }
+
+            if (predictedPointBlanks != null &&
+                predictedPointBlanks.TryGetValue(index, out _))
+            {
+                EnsureComp<RMCProjectilePointBlankedComponent>(projectile);
             }
         }
 
@@ -963,7 +971,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Call this whenever the ammo count for a gun changes.
     /// </summary>
-    protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true, int artificialIncrease = 0) {}
+    public virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true, int artificialIncrease = 0) {}
 
     protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent)
     {
@@ -1005,7 +1013,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
     }
 
-    protected IShootable EnsureShootable(EntityUid uid)
+    public IShootable EnsureShootable(EntityUid uid) // RMC14
     {
         if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
             return cartridge;

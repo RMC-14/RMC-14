@@ -30,6 +30,7 @@
   overwatchShowName: true
   overwatchRoleName: Specialist
   roleWeight: 1
+  displayWeight: 4
   special:
   - !type:AddComponentSpecial
     components:
