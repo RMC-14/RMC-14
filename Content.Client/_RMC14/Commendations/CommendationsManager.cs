@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Commendations;
 using Robust.Shared.Network;
 
@@ -43,9 +43,9 @@ public sealed class CommendationsManager : IPostInjectInit
         foreach (var commendation in commendations)
         {
             var container = new CommendationContainer();
-            container.Title.Text = Loc.GetString("rmc-medals-title", ("round", commendation.Round), ("name", commendation.Name));
-            container.Description.Text = Loc.GetString("rmc-medals-description", ("receiver", commendation.Receiver), ("giver", commendation.Giver), ("text", commendation.Text));
-            _window.Commendations.AddChild(container);
+            container.Title.Text = $"[bold]Round {commendation.Round} - {commendation.Name}[/bold]";
+            container.Description.Text = $"Issued to [bold]{commendation.Receiver}[/bold] by [bold]{commendation.Giver}[/bold] for:\n{commendation.Text}";
+            window.Commendations.AddChild(container);
         }
     }
 

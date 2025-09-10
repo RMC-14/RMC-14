@@ -650,7 +650,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ev.SoundImpact,
             ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
-            Implosion = ammo.Comp.Implosion,
+            Implosion = ev.Implosion,
             Fire = ev.Fire,
             SoundEveryShots = ev.SoundEveryShots,
         };
@@ -1310,18 +1310,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                             }
                         }
                     }
+                }
 
-                    if (flight.Explosion != null)
-                    {
-                        _rmcExplosion.QueueExplosion(target,
-                            flight.Explosion.Type,
-                            flight.Explosion.Total,
-                            flight.Explosion.Slope,
-                            flight.Explosion.Max,
-                            uid,
-                            canCreateVacuum: false
-                        );
-                    }
+                if (flight.Explosion != null)
+                {
+                    _rmcExplosion.QueueExplosion(target,
+                        flight.Explosion.Type,
+                        flight.Explosion.Total,
+                        flight.Explosion.Slope,
+                        flight.Explosion.Max,
+                        uid,
+                        canCreateVacuum: false
+                    );
                 }
 
                 if (flight.SoundShotsLeft <= 0)
@@ -1486,7 +1486,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 ///     Raised on a dropship when it shoots any of it's weapons.
 /// </summary>
 [ByRefEvent]
-public record struct DropshipWeaponShotEvent(float Spread,
+public record struct DropshipWeaponShotEvent(
+    float Spread,
     int BulletSpread,
     TimeSpan TravelTime,
     int RoundsPerShot,
@@ -1502,4 +1503,5 @@ public record struct DropshipWeaponShotEvent(float Spread,
     RMCExplosion? Explosion,
     RMCImplosion? Implosion,
     RMCFire? Fire,
-    int SoundEveryShots);
+    int SoundEveryShots
+);

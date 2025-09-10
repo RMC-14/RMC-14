@@ -74,7 +74,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
             {
                 var dispenseButton = new Button
                 {
-                    Text = Loc.GetString("rmc-chem-dispenser-dispense-plus", ("amount", setting.Int())),
+                    Text = $"+ {setting.Int()}",
                     StyleClasses = { "OpenBoth" },
                     SetWidth = 45,
                     Margin = new Thickness(0, 0, 0, 3),
@@ -87,7 +87,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
                 var beakerButton = new Button
                 {
-                    Text = Loc.GetString("rmc-chem-dispenser-dispense-minus", ("amount", setting.Int())),
+                    Text = $"- {setting.Int()}",
                     StyleClasses = { "OpenBoth" },
                     SetWidth = 45,
                     Margin = new Thickness(0, 0, 0, 3),
@@ -114,12 +114,12 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
         var energy = dispenser.Energy;
         _window.EnergyBar.Value = energy.Float();
-        _window.EnergyLabel.Text = Loc.GetString("rmc-chem-dispenser-energy-amount", ("amount", energy.Int()));
+        _window.EnergyLabel.Text = $"{energy.Int()} energy";
 
         if (!_container.TryGetContainer(Owner, dispenser.ContainerSlotId, out var container) ||
             !container.ContainedEntities.TryFirstOrNull(out var contained))
         {
-            _window.BeakerStatus.Text = Loc.GetString("rmc-chem-dispenser-no-beaker");
+            _window.BeakerStatus.Text = "No beaker loaded!";
             _window.EjectBeakerButton.Visible = false;
             _window.ContentsNone.Visible = true;
             _window.BeakerContents.Visible = false;
@@ -159,16 +159,12 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
                     _window.BeakerContents.AddChild(new Label
                     {
-                        Text = Loc.GetString("rmc-chem-dispenser-reagent-entry",
-                            ("amount", reagent.Quantity),
-                            ("name", reagentName))
+                        Text = $"{reagent.Quantity} units of {reagentName}",
                     });
                 }
             }
 
-            _window.BeakerStatus.Text = Loc.GetString("rmc-chem-dispenser-beaker-status",
-                ("cur", units),
-                ("max", maxUnits));
+            _window.BeakerStatus.Text = $"{units}/{maxUnits} units";
         }
 
         foreach (var (button, amount) in _dispenseButtons)
