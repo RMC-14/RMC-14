@@ -109,7 +109,7 @@ public sealed class TacticalMapSettingsManager
             new TacticalMapSettingRegistration
             {
                 Key = "LabelMode",
-                Value = 1,
+                Value = (int) TacticalMapControl.LabelMode.Area,
                 PlanetId = null
             },
             new TacticalMapSettingRegistration
