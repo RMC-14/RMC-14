@@ -33,7 +33,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
         if (_mobState.IsDead(damageable))
         {
             var stage = _unrevivable.GetUnrevivableStage(damageable.Owner, 4);
-            if (_unrevivable.IsUnrevivable(damageable))
+            if (_unrevivable.IsUnrevivable(damageable) || HasComp<RMCHasSuicidedComponent>(damageable))
                 icon = RMCHealthIconTypes.Dead;
             else if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
                 icon = RMCHealthIconTypes.DeadDNR;

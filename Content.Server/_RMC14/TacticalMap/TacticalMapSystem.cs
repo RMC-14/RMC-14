@@ -836,8 +836,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_mobState.IsDead(ent))
         {
             var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent) ||
+                HasComp<RMCHasSuicidedComponent>(ent))
+            {
                 status = TacticalMapBlipStatus.Undefibabble;
+            }
             else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
             else if (stage == 2)
