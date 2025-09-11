@@ -19,12 +19,12 @@
 - type: startingGear
   id: RMCGearCLFBase
   equipment:
+    mask: RMCM5Bayonet # TODO RMC14
     jumpsuit: RMCJumpsuitCLFSoldier
     back: RMCSatchelMarineForeconSurvivorFill
     shoes: RMCShoesJackbootsFilled
-    outerClothing: RMCOuterClothingExternalWebbingForeconSurvivorFill
-    id: CMIDCardStandardDogtag
-    ears: RMCHeadsetForecon
+    id: RMCIDCardCLFSoldier
+    ears: RMCHeadsetDistressCLF
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
 
@@ -40,11 +40,12 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapFlippable ]
-    - [ RMCBoonieTan ]
-    - [ ArmorHelmetM10 ]
-    - [ RMCHeadBeanie ]
-    - [ RMCHeadDurag ]
+    - [ RMCCoatMilitia ]
+    - [ RMCCoatMilitiaVest ]
+    - [ RMCCoatMilitiaBrace ]
+    - [ RMCCoatMilitiaHauberk ]
+    - [ RMCArmorVest ]
+    # - [ ArmorBulletproof ] # todo
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
@@ -60,7 +61,7 @@
 - type: entity
   parent: RMCSurvivorPresetCLFNoPrimary
   id: RMCSurvivorPresetCLF
-  name: forecon survivor preset
+  name: clf survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
@@ -71,7 +72,7 @@
 - type: entity
   parent: RMCSurvivorPresetCLF
   id: RMCSurvivorPresetCLFNoPistol
-  name: forecon survivor preset
+  name: clf survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
