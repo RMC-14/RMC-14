@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Suicide;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusIcon;

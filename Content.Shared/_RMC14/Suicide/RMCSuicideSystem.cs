@@ -13,6 +13,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Rejuvenate;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
@@ -35,9 +36,14 @@ public sealed class RMCSuicideSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCSuicideComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<RMCSuicideComponent, GetVerbsEvent<Verb>>(OnSuicideGetVerbs);
         SubscribeLocalEvent<RMCSuicideComponent, RMCSuicideDoAfterEvent>(OnSuicideDoAfter);
         SubscribeLocalEvent<RMCHasSuicidedComponent, UpdateMobStateEvent>(OnHasSuicidedUpdateMobState);
+    }
+
+    {
+        RemCompDeferred<RMCHasSuicidedComponent>(ent);
     }
 
     private void OnSuicideGetVerbs(Entity<RMCSuicideComponent> ent, ref GetVerbsEvent<Verb> args)

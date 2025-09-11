@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Suicide;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
