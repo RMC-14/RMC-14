@@ -20,7 +20,7 @@
   <GuideEntityEmbed Entity="RMCBackpackRTO"/>
   - Cheap access to a whistle, grab it. 
   <GuideEntityEmbed Entity="RMCWhistle"/>
-  - A 25P cost pair of NVG optics, with a battery of 10 minutes. Rechargeable at any powered recharged, once screwed out of the helmet 
+  - A 25P cost pair of NVG optics, with a battery of 10 minutes. Rechargeable at any powered recharger, once screwed out of the helmet 
   <GuideEntityEmbed Entity="RMCVisorNightVision"/>
   - A Medical skill of 1, letting you use auto-injectors instantly.
   - Large pouches for days.
