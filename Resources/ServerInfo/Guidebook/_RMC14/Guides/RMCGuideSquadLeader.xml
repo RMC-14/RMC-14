@@ -1,11 +1,11 @@
 <Document>
   # Squad leading 101
   [italic]Guide written by UnicornOnLSD on GitHub [/italic]
-  
+
   <Box>
     [italic]"Alright, alpha, we’re pushing nort- wait, where is everyone? Is my squad only made of 5 people? Did they all get kidnapped? Where did everything go wrong?"[/italic]
   </Box>
-  
+
   You might have found yourself in that scenario, wanting to be a charismatic leader and either ending up as one of the first squad casualties or just as lost as every other member of your squad.
 
   This guide is here to teach YOU how to become the squad leader you've always dreamt to be.
@@ -14,13 +14,13 @@
 
   As a squad leader, you have access to a lot of limited, better gear and skills for free, contrary to the humble rifleman. Some of note are:
 
-  - A free B12 armor. Upmost robustness. 
+  - A free B12 armor. Upmost robustness.
   <GuideEntityEmbed Entity="CMArmorB12"/>
-  - Cheap access to an RTO pack, grab it. 
+  - Cheap access to an RTO pack, grab it.
   <GuideEntityEmbed Entity="RMCBackpackRTO"/>
-  - Cheap access to a whistle, grab it. 
+  - Cheap access to a whistle, grab it.
   <GuideEntityEmbed Entity="RMCWhistle"/>
-  - A 25P cost pair of NVG optics, with a battery of 10 minutes. Rechargeable at any powered recharger, once screwed out of the helmet 
+  - A 25P cost pair of NVG optics, with a battery of 10 minutes. Rechargeable at any powered recharger, once screwed out of the helmet
   <GuideEntityEmbed Entity="RMCVisorNightVision"/>
   - A Medical skill of 1, letting you use auto-injectors instantly.
   - Large pouches for days.
@@ -32,7 +32,7 @@
   - [bold]Issue order - Hold[/bold]: grants a small damage resistance bonus
 
   - [bold]Issue order - Focus[/bold]: grants a small accuracy bonus
-  
+
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookActionMove"/>
     <GuideEntityEmbed Entity="RMCGuidebookActionHold"/>
@@ -43,7 +43,7 @@
 
   Right, all is well, we are geared, what about the actual job, what do we do?
 
-  You're leading a squad of 20 crayon eating maggots that will do their best to ignore you. And thus, the crucial part of being a squad leader is to be heard. Once people listen to you and your orders, everything should go well, normally, would you know what you’re doing.
+  You're leading a squad of 20 crayon eating maggots that will do their best to ignore you. And thus, the crucial part of being a squad leader is to be heard. Once people listen to you and your orders, everything should go well, normally.
 
   Good thing is, because you're a leader, you talk BIG. and when I mean BIG. I MEAN IT. You can speak in [bold]ALL CAPS WITH !![/bold] to have better visibility when talking, along with having innately larger text when speaking.
 
@@ -80,7 +80,7 @@
   <Box>
     [italic]"I POINT, you KILL, BREACH and MOVE. CLEAR CHARLIE?!"[/italic]
   </Box>
-  
+
 
   If you never noticed, most "leadership" roles have a special pointing arrow. By base, it's green. As a Squad Leader, yours will be BIG and of the color of your squad.
 
@@ -109,7 +109,7 @@
   Along with this, as the squad leader, you're generally expected to know better how to call Orbital Bombardments. You spawn with a laser designator which when switched mode, can turn into rangefinder mode. Use it where you want the entire area to be flattened and share the coordinates.
 
   [bold]BE VERY CAUTIOUS WHEN ADJUSTING COORDINATES YOURSELF. [/bold]
-  
+
   ## Pushing? Backing? What, how and why.
 
   Those dirty 'nids are smart, but you're smarter. You want to know when it's the right time to go in and fuck shit up. Obviously you have your squad orders given by the CIC. Execute them at priority, but make sure it doesn't wipe your squad.
@@ -133,7 +133,7 @@
   [bold]You're here to lead your marines to victory, or peril together. Be humble and always seek to improve.[/bold]
 
 
-  
+
 
   Other very good sources on how to be a good squad leader:
 
