@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/10/2025 19:00:27
+  time: 09/11/2025 15:58:09
   entityCount: 621
 maps: []
 grids:
@@ -182,37 +182,1322 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        15,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        15,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        15,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        15,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        15,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        16,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        16,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        16,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        16,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        16,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,20: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,21: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,22: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,23: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,24: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        17,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        18,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        19,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        20,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        21,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        23,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        23,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        23,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        24,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        24,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        24,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        25,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        25,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        25,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        26,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        26,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        26,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        27,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        27,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        27,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        28,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        28,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        22,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        29,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        29,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        29,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        30,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        30,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        30,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        31,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        31,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        31,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        32,27: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        32,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        32,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        28,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        34,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        33,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        33,25: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        34,26: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+        28,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        28,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,6: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,7: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,8: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,9: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,10: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,11: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,12: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,13: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,14: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,15: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,16: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,17: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,18: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,19: RMCAreaKutjevoInteriorColonyCLFShuttle
+        35,20: RMCAreaKutjevoInteriorColonyCLFShuttle
+        29,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        34,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        33,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        32,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        31,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        30,21: RMCAreaKutjevoInteriorColonyCLFShuttle
+        0,10: RMCAreaKutjevoInteriorOob
+        0,9: RMCAreaKutjevoInteriorOob
+        0,8: RMCAreaKutjevoInteriorOob
+        0,7: RMCAreaKutjevoInteriorOob
+        0,6: RMCAreaKutjevoInteriorOob
+        0,5: RMCAreaKutjevoInteriorOob
+        0,4: RMCAreaKutjevoInteriorOob
+        0,3: RMCAreaKutjevoInteriorOob
+        0,2: RMCAreaKutjevoInteriorOob
+        0,1: RMCAreaKutjevoInteriorOob
+        0,0: RMCAreaKutjevoInteriorOob
+        1,10: RMCAreaKutjevoInteriorOob
+        1,9: RMCAreaKutjevoInteriorOob
+        1,8: RMCAreaKutjevoInteriorOob
+        1,7: RMCAreaKutjevoInteriorOob
+        1,6: RMCAreaKutjevoInteriorOob
+        1,5: RMCAreaKutjevoInteriorOob
+        1,4: RMCAreaKutjevoInteriorOob
+        1,3: RMCAreaKutjevoInteriorOob
+        1,1: RMCAreaKutjevoInteriorOob
+        1,0: RMCAreaKutjevoInteriorOob
+        2,10: RMCAreaKutjevoExteriorCLFLZ
+        2,9: RMCAreaKutjevoInteriorOob
+        2,8: RMCAreaKutjevoInteriorOob
+        2,7: RMCAreaKutjevoInteriorOob
+        2,6: RMCAreaKutjevoInteriorOob
+        2,5: RMCAreaKutjevoExteriorCLFLZ
+        2,4: RMCAreaKutjevoExteriorCLFLZ
+        2,3: RMCAreaKutjevoInteriorOob
+        2,2: RMCAreaKutjevoInteriorOob
+        2,1: RMCAreaKutjevoInteriorOob
+        2,0: RMCAreaKutjevoInteriorOob
+        3,10: RMCAreaKutjevoExteriorCLFLZ
+        3,9: RMCAreaKutjevoExteriorCLFLZ
+        3,8: RMCAreaKutjevoExteriorCLFLZ
+        3,7: RMCAreaKutjevoExteriorCLFLZ
+        3,6: RMCAreaKutjevoExteriorCLFLZ
+        3,5: RMCAreaKutjevoExteriorCLFLZ
+        3,4: RMCAreaKutjevoExteriorCLFLZ
+        3,3: RMCAreaKutjevoExteriorCLFLZ
+        3,2: RMCAreaKutjevoInteriorOob
+        3,1: RMCAreaKutjevoInteriorOob
+        3,0: RMCAreaKutjevoInteriorOob
+        1,2: RMCAreaKutjevoInteriorOob
+        4,10: RMCAreaKutjevoExteriorCLFLZ
+        4,9: RMCAreaKutjevoExteriorCLFLZ
+        4,8: RMCAreaKutjevoExteriorCLFLZ
+        4,7: RMCAreaKutjevoExteriorCLFLZ
+        4,6: RMCAreaKutjevoExteriorCLFLZ
+        4,5: RMCAreaKutjevoExteriorCLFLZ
+        4,4: RMCAreaKutjevoExteriorCLFLZ
+        4,3: RMCAreaKutjevoExteriorCLFLZ
+        4,2: RMCAreaKutjevoExteriorCLFLZ
+        4,1: RMCAreaKutjevoInteriorOob
+        4,0: RMCAreaKutjevoInteriorOob
+        5,10: RMCAreaKutjevoExteriorCLFLZ
+        5,9: RMCAreaKutjevoExteriorCLFLZ
+        5,8: RMCAreaKutjevoExteriorCLFLZ
+        5,7: RMCAreaKutjevoExteriorCLFLZ
+        5,6: RMCAreaKutjevoExteriorCLFLZ
+        5,5: RMCAreaKutjevoExteriorCLFLZ
+        5,4: RMCAreaKutjevoExteriorCLFLZ
+        5,3: RMCAreaKutjevoExteriorCLFLZ
+        5,2: RMCAreaKutjevoExteriorCLFLZ
+        5,0: RMCAreaKutjevoInteriorOob
+        6,10: RMCAreaKutjevoExteriorCLFLZ
+        6,9: RMCAreaKutjevoExteriorCLFLZ
+        6,8: RMCAreaKutjevoExteriorCLFLZ
+        6,7: RMCAreaKutjevoExteriorCLFLZ
+        5,1: RMCAreaKutjevoInteriorOob
+        6,5: RMCAreaKutjevoExteriorCLFLZ
+        6,4: RMCAreaKutjevoExteriorCLFLZ
+        6,3: RMCAreaKutjevoExteriorCLFLZ
+        6,2: RMCAreaKutjevoExteriorCLFLZ
+        6,1: RMCAreaKutjevoInteriorOob
+        6,6: RMCAreaKutjevoExteriorCLFLZ
+        6,0: RMCAreaKutjevoInteriorOob
+        7,10: RMCAreaKutjevoExteriorCLFLZ
+        7,9: RMCAreaKutjevoExteriorCLFLZ
+        7,8: RMCAreaKutjevoExteriorCLFLZ
+        7,7: RMCAreaKutjevoExteriorCLFLZ
+        7,6: RMCAreaKutjevoExteriorCLFLZ
+        7,5: RMCAreaKutjevoExteriorCLFLZ
+        7,4: RMCAreaKutjevoExteriorCLFLZ
+        7,3: RMCAreaKutjevoExteriorCLFLZ
+        7,2: RMCAreaKutjevoExteriorCLFLZ
+        7,1: RMCAreaKutjevoInteriorOob
+        7,0: RMCAreaKutjevoInteriorOob
+        8,10: RMCAreaKutjevoExteriorCLFLZ
+        8,9: RMCAreaKutjevoExteriorCLFLZ
+        8,8: RMCAreaKutjevoExteriorCLFLZ
+        8,7: RMCAreaKutjevoExteriorCLFLZ
+        8,6: RMCAreaKutjevoExteriorCLFLZ
+        8,4: RMCAreaKutjevoExteriorCLFLZ
+        8,3: RMCAreaKutjevoExteriorCLFLZ
+        8,2: RMCAreaKutjevoInteriorOob
+        8,1: RMCAreaKutjevoInteriorOob
+        8,0: RMCAreaKutjevoInteriorOob
+        9,10: RMCAreaKutjevoExteriorCLFLZ
+        9,9: RMCAreaKutjevoExteriorCLFLZ
+        8,5: RMCAreaKutjevoExteriorCLFLZ
+        9,7: RMCAreaKutjevoExteriorCLFLZ
+        9,6: RMCAreaKutjevoExteriorCLFLZ
+        9,5: RMCAreaKutjevoExteriorCLFLZ
+        9,4: RMCAreaKutjevoExteriorCLFLZ
+        9,3: RMCAreaKutjevoExteriorCLFLZ
+        9,2: RMCAreaKutjevoInteriorOob
+        9,1: RMCAreaKutjevoInteriorOob
+        9,0: RMCAreaKutjevoInteriorOob
+        10,10: RMCAreaKutjevoExteriorCLFLZ
+        10,9: RMCAreaKutjevoExteriorCLFLZ
+        10,8: RMCAreaKutjevoExteriorCLFLZ
+        10,7: RMCAreaKutjevoExteriorCLFLZ
+        10,6: RMCAreaKutjevoExteriorCLFLZ
+        10,5: RMCAreaKutjevoExteriorCLFLZ
+        10,4: RMCAreaKutjevoExteriorCLFLZ
+        10,3: RMCAreaKutjevoExteriorCLFLZ
+        10,2: RMCAreaKutjevoExteriorCLFLZ
+        10,1: RMCAreaKutjevoInteriorOob
+        10,0: RMCAreaKutjevoInteriorOob
+        11,10: RMCAreaKutjevoExteriorCLFLZ
+        11,9: RMCAreaKutjevoExteriorCLFLZ
+        11,8: RMCAreaKutjevoExteriorCLFLZ
+        11,7: RMCAreaKutjevoExteriorCLFLZ
+        11,6: RMCAreaKutjevoExteriorCLFLZ
+        11,5: RMCAreaKutjevoExteriorCLFLZ
+        11,4: RMCAreaKutjevoExteriorCLFLZ
+        11,3: RMCAreaKutjevoExteriorCLFLZ
+        11,2: RMCAreaKutjevoExteriorCLFLZ
+        11,1: RMCAreaKutjevoInteriorOob
+        11,0: RMCAreaKutjevoInteriorOob
+        12,10: RMCAreaKutjevoExteriorCLFLZ
+        12,9: RMCAreaKutjevoExteriorCLFLZ
+        12,8: RMCAreaKutjevoExteriorCLFLZ
+        12,7: RMCAreaKutjevoExteriorCLFLZ
+        9,8: RMCAreaKutjevoExteriorCLFLZ
+        12,6: RMCAreaKutjevoExteriorCLFLZ
+        12,5: RMCAreaKutjevoExteriorCLFLZ
+        12,4: RMCAreaKutjevoExteriorCLFLZ
+        12,3: RMCAreaKutjevoExteriorCLFLZ
+        12,2: RMCAreaKutjevoExteriorCLFLZ
+        12,1: RMCAreaKutjevoInteriorOob
+        12,0: RMCAreaKutjevoInteriorOob
+        13,10: RMCAreaKutjevoExteriorCLFLZ
+        13,9: RMCAreaKutjevoExteriorCLFLZ
+        13,8: RMCAreaKutjevoExteriorCLFLZ
+        13,7: RMCAreaKutjevoExteriorCLFLZ
+        13,6: RMCAreaKutjevoExteriorCLFLZ
+        13,5: RMCAreaKutjevoExteriorCLFLZ
+        13,4: RMCAreaKutjevoExteriorCLFLZ
+        13,3: RMCAreaKutjevoExteriorCLFLZ
+        13,2: RMCAreaKutjevoExteriorCLFLZ
+        13,1: RMCAreaKutjevoInteriorOob
+        13,0: RMCAreaKutjevoInteriorOob
+        14,10: RMCAreaKutjevoExteriorCLFLZ
+        14,9: RMCAreaKutjevoExteriorCLFLZ
+        14,8: RMCAreaKutjevoExteriorCLFLZ
+        14,7: RMCAreaKutjevoExteriorCLFLZ
+        14,6: RMCAreaKutjevoExteriorCLFLZ
+        14,5: RMCAreaKutjevoExteriorCLFLZ
+        14,4: RMCAreaKutjevoExteriorCLFLZ
+        14,3: RMCAreaKutjevoExteriorCLFLZ
+        14,2: RMCAreaKutjevoExteriorCLFLZ
+        14,1: RMCAreaKutjevoInteriorOob
+        14,0: RMCAreaKutjevoInteriorOob
+        15,10: RMCAreaKutjevoExteriorCLFLZ
+        15,9: RMCAreaKutjevoExteriorCLFLZ
+        15,8: RMCAreaKutjevoExteriorCLFLZ
+        15,7: RMCAreaKutjevoExteriorCLFLZ
+        15,6: RMCAreaKutjevoExteriorCLFLZ
+        15,5: RMCAreaKutjevoExteriorCLFLZ
+        15,4: RMCAreaKutjevoExteriorCLFLZ
+        15,3: RMCAreaKutjevoExteriorCLFLZ
+        15,2: RMCAreaKutjevoExteriorCLFLZ
+        15,1: RMCAreaKutjevoInteriorOob
+        15,0: RMCAreaKutjevoInteriorOob
+        16,10: RMCAreaKutjevoExteriorCLFLZ
+        16,9: RMCAreaKutjevoExteriorCLFLZ
+        16,8: RMCAreaKutjevoExteriorCLFLZ
+        16,7: RMCAreaKutjevoExteriorCLFLZ
+        16,6: RMCAreaKutjevoExteriorCLFLZ
+        16,5: RMCAreaKutjevoExteriorCLFLZ
+        16,4: RMCAreaKutjevoExteriorCLFLZ
+        16,3: RMCAreaKutjevoExteriorCLFLZ
+        16,2: RMCAreaKutjevoExteriorCLFLZ
+        16,1: RMCAreaKutjevoInteriorOob
+        16,0: RMCAreaKutjevoInteriorOob
+        17,10: RMCAreaKutjevoExteriorCLFLZ
+        17,9: RMCAreaKutjevoExteriorCLFLZ
+        17,8: RMCAreaKutjevoExteriorCLFLZ
+        17,7: RMCAreaKutjevoExteriorCLFLZ
+        17,6: RMCAreaKutjevoExteriorCLFLZ
+        17,5: RMCAreaKutjevoExteriorCLFLZ
+        17,4: RMCAreaKutjevoExteriorCLFLZ
+        17,3: RMCAreaKutjevoExteriorCLFLZ
+        17,2: RMCAreaKutjevoExteriorCLFLZ
+        17,1: RMCAreaKutjevoInteriorOob
+        17,0: RMCAreaKutjevoInteriorOob
+        18,10: RMCAreaKutjevoExteriorCLFLZ
+        18,9: RMCAreaKutjevoExteriorCLFLZ
+        18,8: RMCAreaKutjevoExteriorCLFLZ
+        18,7: RMCAreaKutjevoExteriorCLFLZ
+        18,6: RMCAreaKutjevoExteriorCLFLZ
+        18,5: RMCAreaKutjevoExteriorCLFLZ
+        18,4: RMCAreaKutjevoExteriorCLFLZ
+        18,3: RMCAreaKutjevoExteriorCLFLZ
+        18,2: RMCAreaKutjevoExteriorCLFLZ
+        18,1: RMCAreaKutjevoExteriorCLFLZ
+        18,0: RMCAreaKutjevoInteriorOob
+        19,10: RMCAreaKutjevoExteriorCLFLZ
+        19,9: RMCAreaKutjevoExteriorCLFLZ
+        19,8: RMCAreaKutjevoExteriorCLFLZ
+        19,7: RMCAreaKutjevoExteriorCLFLZ
+        19,6: RMCAreaKutjevoExteriorCLFLZ
+        19,5: RMCAreaKutjevoExteriorCLFLZ
+        19,4: RMCAreaKutjevoExteriorCLFLZ
+        19,3: RMCAreaKutjevoExteriorCLFLZ
+        19,2: RMCAreaKutjevoExteriorCLFLZ
+        19,1: RMCAreaKutjevoExteriorCLFLZ
+        19,0: RMCAreaKutjevoInteriorOob
+        20,10: RMCAreaKutjevoExteriorCLFLZ
+        20,9: RMCAreaKutjevoExteriorCLFLZ
+        20,8: RMCAreaKutjevoExteriorCLFLZ
+        20,7: RMCAreaKutjevoExteriorCLFLZ
+        20,6: RMCAreaKutjevoExteriorCLFLZ
+        20,5: RMCAreaKutjevoExteriorCLFLZ
+        20,4: RMCAreaKutjevoExteriorCLFLZ
+        20,3: RMCAreaKutjevoExteriorCLFLZ
+        20,2: RMCAreaKutjevoExteriorCLFLZ
+        20,1: RMCAreaKutjevoInteriorOob
+        20,0: RMCAreaKutjevoInteriorOob
+        21,10: RMCAreaKutjevoExteriorCLFLZ
+        21,9: RMCAreaKutjevoExteriorCLFLZ
+        21,8: RMCAreaKutjevoExteriorCLFLZ
+        21,7: RMCAreaKutjevoExteriorCLFLZ
+        21,6: RMCAreaKutjevoExteriorCLFLZ
+        21,5: RMCAreaKutjevoExteriorCLFLZ
+        21,4: RMCAreaKutjevoExteriorCLFLZ
+        21,3: RMCAreaKutjevoExteriorCLFLZ
+        21,2: RMCAreaKutjevoExteriorCLFLZ
+        21,1: RMCAreaKutjevoInteriorOob
+        21,0: RMCAreaKutjevoInteriorOob
+        22,10: RMCAreaKutjevoExteriorCLFLZ
+        22,9: RMCAreaKutjevoExteriorCLFLZ
+        22,8: RMCAreaKutjevoExteriorCLFLZ
+        22,7: RMCAreaKutjevoExteriorCLFLZ
+        22,6: RMCAreaKutjevoExteriorCLFLZ
+        22,5: RMCAreaKutjevoExteriorCLFLZ
+        22,4: RMCAreaKutjevoExteriorCLFLZ
+        22,3: RMCAreaKutjevoExteriorCLFLZ
+        22,2: RMCAreaKutjevoExteriorCLFLZ
+        22,1: RMCAreaKutjevoInteriorOob
+        22,0: RMCAreaKutjevoInteriorOob
+        23,10: RMCAreaKutjevoExteriorCLFLZ
+        23,9: RMCAreaKutjevoExteriorCLFLZ
+        23,8: RMCAreaKutjevoExteriorCLFLZ
+        23,7: RMCAreaKutjevoExteriorCLFLZ
+        23,6: RMCAreaKutjevoExteriorCLFLZ
+        23,5: RMCAreaKutjevoExteriorCLFLZ
+        23,4: RMCAreaKutjevoExteriorCLFLZ
+        23,3: RMCAreaKutjevoExteriorCLFLZ
+        23,2: RMCAreaKutjevoExteriorCLFLZ
+        23,1: RMCAreaKutjevoInteriorOob
+        23,0: RMCAreaKutjevoInteriorOob
+        24,10: RMCAreaKutjevoExteriorCLFLZ
+        24,9: RMCAreaKutjevoExteriorCLFLZ
+        24,8: RMCAreaKutjevoExteriorCLFLZ
+        24,7: RMCAreaKutjevoExteriorCLFLZ
+        24,6: RMCAreaKutjevoExteriorCLFLZ
+        24,5: RMCAreaKutjevoExteriorCLFLZ
+        24,4: RMCAreaKutjevoExteriorCLFLZ
+        24,3: RMCAreaKutjevoExteriorCLFLZ
+        24,2: RMCAreaKutjevoExteriorCLFLZ
+        24,1: RMCAreaKutjevoInteriorOob
+        24,0: RMCAreaKutjevoInteriorOob
+        25,10: RMCAreaKutjevoExteriorCLFLZ
+        25,9: RMCAreaKutjevoExteriorCLFLZ
+        25,8: RMCAreaKutjevoExteriorCLFLZ
+        25,7: RMCAreaKutjevoExteriorCLFLZ
+        25,6: RMCAreaKutjevoExteriorCLFLZ
+        25,5: RMCAreaKutjevoExteriorCLFLZ
+        25,4: RMCAreaKutjevoExteriorCLFLZ
+        25,3: RMCAreaKutjevoExteriorCLFLZ
+        25,2: RMCAreaKutjevoExteriorCLFLZ
+        25,1: RMCAreaKutjevoInteriorOob
+        25,0: RMCAreaKutjevoInteriorOob
+        26,10: RMCAreaKutjevoExteriorCLFLZ
+        26,9: RMCAreaKutjevoExteriorCLFLZ
+        26,8: RMCAreaKutjevoExteriorCLFLZ
+        26,7: RMCAreaKutjevoExteriorCLFLZ
+        26,6: RMCAreaKutjevoExteriorCLFLZ
+        26,5: RMCAreaKutjevoExteriorCLFLZ
+        26,4: RMCAreaKutjevoExteriorCLFLZ
+        26,3: RMCAreaKutjevoExteriorCLFLZ
+        26,2: RMCAreaKutjevoExteriorCLFLZ
+        26,1: RMCAreaKutjevoInteriorOob
+        26,0: RMCAreaKutjevoInteriorOob
+        27,10: RMCAreaKutjevoExteriorCLFLZ
+        27,9: RMCAreaKutjevoExteriorCLFLZ
+        27,8: RMCAreaKutjevoExteriorCLFLZ
+        27,7: RMCAreaKutjevoExteriorCLFLZ
+        27,6: RMCAreaKutjevoExteriorCLFLZ
+        27,5: RMCAreaKutjevoExteriorCLFLZ
+        27,4: RMCAreaKutjevoExteriorCLFLZ
+        27,3: RMCAreaKutjevoExteriorCLFLZ
+        27,2: RMCAreaKutjevoExteriorCLFLZ
+        27,1: RMCAreaKutjevoExteriorCLFLZ
+        27,0: RMCAreaKutjevoInteriorOob
+        28,5: RMCAreaKutjevoExteriorCLFLZ
+        28,4: RMCAreaKutjevoExteriorCLFLZ
+        28,3: RMCAreaKutjevoExteriorCLFLZ
+        28,2: RMCAreaKutjevoExteriorCLFLZ
+        28,1: RMCAreaKutjevoInteriorOob
+        28,0: RMCAreaKutjevoInteriorOob
+        29,5: RMCAreaKutjevoExteriorCLFLZ
+        29,4: RMCAreaKutjevoExteriorCLFLZ
+        29,3: RMCAreaKutjevoExteriorCLFLZ
+        29,2: RMCAreaKutjevoExteriorCLFLZ
+        29,1: RMCAreaKutjevoInteriorOob
+        29,0: RMCAreaKutjevoInteriorOob
+        30,5: RMCAreaKutjevoExteriorCLFLZ
+        30,4: RMCAreaKutjevoExteriorCLFLZ
+        30,3: RMCAreaKutjevoExteriorCLFLZ
+        30,2: RMCAreaKutjevoExteriorCLFLZ
+        30,1: RMCAreaKutjevoInteriorOob
+        30,0: RMCAreaKutjevoInteriorOob
+        31,5: RMCAreaKutjevoExteriorCLFLZ
+        31,4: RMCAreaKutjevoExteriorCLFLZ
+        31,3: RMCAreaKutjevoExteriorCLFLZ
+        31,2: RMCAreaKutjevoExteriorCLFLZ
+        31,1: RMCAreaKutjevoInteriorOob
+        31,0: RMCAreaKutjevoInteriorOob
+        32,5: RMCAreaKutjevoExteriorCLFLZ
+        32,4: RMCAreaKutjevoExteriorCLFLZ
+        32,3: RMCAreaKutjevoExteriorCLFLZ
+        32,2: RMCAreaKutjevoExteriorCLFLZ
+        32,1: RMCAreaKutjevoInteriorOob
+        32,0: RMCAreaKutjevoInteriorOob
+        33,5: RMCAreaKutjevoExteriorCLFLZ
+        33,4: RMCAreaKutjevoExteriorCLFLZ
+        33,3: RMCAreaKutjevoExteriorCLFLZ
+        33,2: RMCAreaKutjevoExteriorCLFLZ
+        33,1: RMCAreaKutjevoInteriorOob
+        33,0: RMCAreaKutjevoInteriorOob
+        34,5: RMCAreaKutjevoExteriorCLFLZ
+        34,4: RMCAreaKutjevoExteriorCLFLZ
+        34,3: RMCAreaKutjevoExteriorCLFLZ
+        34,2: RMCAreaKutjevoExteriorCLFLZ
+        34,1: RMCAreaKutjevoInteriorOob
+        34,0: RMCAreaKutjevoInteriorOob
+        35,5: RMCAreaKutjevoExteriorCLFLZ
+        35,4: RMCAreaKutjevoExteriorCLFLZ
+        35,3: RMCAreaKutjevoExteriorCLFLZ
+        35,2: RMCAreaKutjevoExteriorCLFLZ
+        35,1: RMCAreaKutjevoInteriorOob
+        35,0: RMCAreaKutjevoInteriorOob
+        36,10: RMCAreaKutjevoExteriorCLFLZ
+        36,9: RMCAreaKutjevoExteriorCLFLZ
+        36,8: RMCAreaKutjevoExteriorCLFLZ
+        36,7: RMCAreaKutjevoExteriorCLFLZ
+        36,6: RMCAreaKutjevoExteriorCLFLZ
+        36,5: RMCAreaKutjevoExteriorCLFLZ
+        36,4: RMCAreaKutjevoExteriorCLFLZ
+        36,3: RMCAreaKutjevoExteriorCLFLZ
+        36,2: RMCAreaKutjevoExteriorCLFLZ
+        36,1: RMCAreaKutjevoInteriorOob
+        36,0: RMCAreaKutjevoInteriorOob
+        37,10: RMCAreaKutjevoExteriorCLFLZ
+        37,9: RMCAreaKutjevoExteriorCLFLZ
+        37,8: RMCAreaKutjevoExteriorCLFLZ
+        37,7: RMCAreaKutjevoExteriorCLFLZ
+        37,6: RMCAreaKutjevoExteriorCLFLZ
+        37,5: RMCAreaKutjevoExteriorCLFLZ
+        37,4: RMCAreaKutjevoExteriorCLFLZ
+        37,3: RMCAreaKutjevoExteriorCLFLZ
+        37,2: RMCAreaKutjevoExteriorCLFLZ
+        37,1: RMCAreaKutjevoInteriorOob
+        37,0: RMCAreaKutjevoInteriorOob
+        38,10: RMCAreaKutjevoExteriorCLFLZ
+        38,9: RMCAreaKutjevoExteriorCLFLZ
+        38,8: RMCAreaKutjevoExteriorCLFLZ
+        38,7: RMCAreaKutjevoExteriorCLFLZ
+        38,6: RMCAreaKutjevoExteriorCLFLZ
+        38,5: RMCAreaKutjevoExteriorCLFLZ
+        38,4: RMCAreaKutjevoExteriorCLFLZ
+        38,3: RMCAreaKutjevoExteriorCLFLZ
+        38,2: RMCAreaKutjevoExteriorCLFLZ
+        38,1: RMCAreaKutjevoInteriorOob
+        38,0: RMCAreaKutjevoInteriorOob
+        39,10: RMCAreaKutjevoInteriorOob
+        39,9: RMCAreaKutjevoExteriorCLFLZ
+        39,8: RMCAreaKutjevoExteriorCLFLZ
+        39,7: RMCAreaKutjevoExteriorCLFLZ
+        39,6: RMCAreaKutjevoExteriorCLFLZ
+        39,5: RMCAreaKutjevoExteriorCLFLZ
+        39,4: RMCAreaKutjevoExteriorCLFLZ
+        39,3: RMCAreaKutjevoExteriorCLFLZ
+        39,2: RMCAreaKutjevoExteriorCLFLZ
+        39,1: RMCAreaKutjevoInteriorOob
+        39,0: RMCAreaKutjevoInteriorOob
+        39,12: RMCAreaKutjevoExteriorCLFLZ
+        39,13: RMCAreaKutjevoExteriorCLFLZ
+        39,14: RMCAreaKutjevoExteriorCLFLZ
+        39,15: RMCAreaKutjevoExteriorCLFLZ
+        39,16: RMCAreaKutjevoExteriorCLFLZ
+        39,17: RMCAreaKutjevoExteriorCLFLZ
+        39,18: RMCAreaKutjevoExteriorCLFLZ
+        39,19: RMCAreaKutjevoInteriorOob
+        39,20: RMCAreaKutjevoExteriorCLFLZ
+        39,21: RMCAreaKutjevoExteriorCLFLZ
+        39,22: RMCAreaKutjevoExteriorCLFLZ
+        39,23: RMCAreaKutjevoExteriorCLFLZ
+        39,24: RMCAreaKutjevoExteriorCLFLZ
+        39,25: RMCAreaKutjevoInteriorOob
+        39,11: RMCAreaKutjevoExteriorCLFLZ
+        39,26: RMCAreaKutjevoInteriorOob
+        39,27: RMCAreaKutjevoInteriorOob
+        39,28: RMCAreaKutjevoInteriorOob
+        39,29: RMCAreaKutjevoInteriorOob
+        39,30: RMCAreaKutjevoInteriorOob
+        39,31: RMCAreaKutjevoInteriorOob
+        38,31: RMCAreaKutjevoInteriorOob
+        38,30: RMCAreaKutjevoInteriorOob
+        38,29: RMCAreaKutjevoInteriorOob
+        38,28: RMCAreaKutjevoInteriorOob
+        38,27: RMCAreaKutjevoInteriorOob
+        38,25: RMCAreaKutjevoInteriorOob
+        37,30: RMCAreaKutjevoInteriorOob
+        37,31: RMCAreaKutjevoInteriorOob
+        37,29: RMCAreaKutjevoInteriorOob
+        37,28: RMCAreaKutjevoInteriorOob
+        37,27: RMCAreaKutjevoInteriorOob
+        37,26: RMCAreaKutjevoInteriorOob
+        37,25: RMCAreaKutjevoInteriorOob
+        36,31: RMCAreaKutjevoInteriorOob
+        36,30: RMCAreaKutjevoInteriorOob
+        36,29: RMCAreaKutjevoInteriorOob
+        36,28: RMCAreaKutjevoInteriorOob
+        36,27: RMCAreaKutjevoInteriorOob
+        36,26: RMCAreaKutjevoInteriorOob
+        36,25: RMCAreaKutjevoInteriorOob
+        35,31: RMCAreaKutjevoInteriorOob
+        35,30: RMCAreaKutjevoInteriorOob
+        35,29: RMCAreaKutjevoInteriorOob
+        35,28: RMCAreaKutjevoInteriorOob
+        35,27: RMCAreaKutjevoInteriorOob
+        35,26: RMCAreaKutjevoInteriorOob
+        35,25: RMCAreaKutjevoInteriorOob
+        38,26: RMCAreaKutjevoInteriorOob
+        33,27: RMCAreaKutjevoInteriorOob
+        33,28: RMCAreaKutjevoInteriorOob
+        33,29: RMCAreaKutjevoInteriorOob
+        33,30: RMCAreaKutjevoInteriorOob
+        33,31: RMCAreaKutjevoInteriorOob
+        34,27: RMCAreaKutjevoInteriorOob
+        34,28: RMCAreaKutjevoInteriorOob
+        34,29: RMCAreaKutjevoInteriorOob
+        34,30: RMCAreaKutjevoInteriorOob
+        34,31: RMCAreaKutjevoInteriorOob
+        32,28: RMCAreaKutjevoInteriorOob
+        32,29: RMCAreaKutjevoInteriorOob
+        32,30: RMCAreaKutjevoInteriorOob
+        32,31: RMCAreaKutjevoInteriorOob
+        31,28: RMCAreaKutjevoInteriorOob
+        31,29: RMCAreaKutjevoInteriorOob
+        31,30: RMCAreaKutjevoInteriorOob
+        31,31: RMCAreaKutjevoInteriorOob
+        30,28: RMCAreaKutjevoInteriorOob
+        30,29: RMCAreaKutjevoInteriorOob
+        30,30: RMCAreaKutjevoInteriorOob
+        30,31: RMCAreaKutjevoInteriorOob
+        29,28: RMCAreaKutjevoInteriorOob
+        29,29: RMCAreaKutjevoInteriorOob
+        29,30: RMCAreaKutjevoInteriorOob
+        29,31: RMCAreaKutjevoInteriorOob
+        28,28: RMCAreaKutjevoInteriorOob
+        28,29: RMCAreaKutjevoInteriorOob
+        28,30: RMCAreaKutjevoInteriorOob
+        28,31: RMCAreaKutjevoInteriorOob
+        27,28: RMCAreaKutjevoInteriorOob
+        27,29: RMCAreaKutjevoInteriorOob
+        27,30: RMCAreaKutjevoInteriorOob
+        27,31: RMCAreaKutjevoInteriorOob
+        26,28: RMCAreaKutjevoInteriorOob
+        26,29: RMCAreaKutjevoInteriorOob
+        26,30: RMCAreaKutjevoInteriorOob
+        25,28: RMCAreaKutjevoInteriorOob
+        25,30: RMCAreaKutjevoInteriorOob
+        25,29: RMCAreaKutjevoInteriorOob
+        25,31: RMCAreaKutjevoInteriorOob
+        24,28: RMCAreaKutjevoInteriorOob
+        24,29: RMCAreaKutjevoInteriorOob
+        24,30: RMCAreaKutjevoInteriorOob
+        24,31: RMCAreaKutjevoInteriorOob
+        23,28: RMCAreaKutjevoInteriorOob
+        23,29: RMCAreaKutjevoInteriorOob
+        23,30: RMCAreaKutjevoInteriorOob
+        23,31: RMCAreaKutjevoInteriorOob
+        22,28: RMCAreaKutjevoInteriorOob
+        22,29: RMCAreaKutjevoInteriorOob
+        22,30: RMCAreaKutjevoInteriorOob
+        22,31: RMCAreaKutjevoInteriorOob
+        21,28: RMCAreaKutjevoInteriorOob
+        21,29: RMCAreaKutjevoInteriorOob
+        21,30: RMCAreaKutjevoInteriorOob
+        21,31: RMCAreaKutjevoInteriorOob
+        20,28: RMCAreaKutjevoInteriorOob
+        20,29: RMCAreaKutjevoInteriorOob
+        20,30: RMCAreaKutjevoInteriorOob
+        20,31: RMCAreaKutjevoInteriorOob
+        19,28: RMCAreaKutjevoInteriorOob
+        19,29: RMCAreaKutjevoInteriorOob
+        19,30: RMCAreaKutjevoInteriorOob
+        19,31: RMCAreaKutjevoInteriorOob
+        18,28: RMCAreaKutjevoInteriorOob
+        18,29: RMCAreaKutjevoInteriorOob
+        18,30: RMCAreaKutjevoInteriorOob
+        18,31: RMCAreaKutjevoInteriorOob
+        17,28: RMCAreaKutjevoInteriorOob
+        17,29: RMCAreaKutjevoInteriorOob
+        17,30: RMCAreaKutjevoInteriorOob
+        17,31: RMCAreaKutjevoInteriorOob
+        16,28: RMCAreaKutjevoExteriorStonyfields
+        16,29: RMCAreaKutjevoExteriorStonyfields
+        16,30: RMCAreaKutjevoInteriorOob
+        16,31: RMCAreaKutjevoInteriorOob
+        26,31: RMCAreaKutjevoInteriorOob
+        1,11: RMCAreaKutjevoInteriorOob
+        2,11: RMCAreaKutjevoInteriorOob
+        2,12: RMCAreaKutjevoInteriorOob
+        2,13: RMCAreaKutjevoInteriorOob
+        2,14: RMCAreaKutjevoInteriorOob
+        0,31: RMCAreaKutjevoExteriorStonyfields
+        0,29: RMCAreaKutjevoExteriorStonyfields
+        0,28: RMCAreaKutjevoExteriorStonyfields
+        0,27: RMCAreaKutjevoExteriorStonyfields
+        0,26: RMCAreaKutjevoExteriorStonyfields
+        0,25: RMCAreaKutjevoExteriorStonyfields
+        0,30: RMCAreaKutjevoExteriorStonyfields
+        0,23: RMCAreaKutjevoExteriorStonyfields
+        0,22: RMCAreaKutjevoExteriorStonyfields
+        0,21: RMCAreaKutjevoExteriorStonyfields
+        0,20: RMCAreaKutjevoExteriorStonyfields
+        0,19: RMCAreaKutjevoExteriorStonyfields
+        0,18: RMCAreaKutjevoExteriorStonyfields
+        0,17: RMCAreaKutjevoExteriorStonyfields
+        0,16: RMCAreaKutjevoExteriorStonyfields
+        0,15: RMCAreaKutjevoExteriorStonyfields
+        0,24: RMCAreaKutjevoExteriorStonyfields
+        1,30: RMCAreaKutjevoExteriorStonyfields
+        1,29: RMCAreaKutjevoExteriorStonyfields
+        1,28: RMCAreaKutjevoExteriorStonyfields
+        1,27: RMCAreaKutjevoExteriorStonyfields
+        1,24: RMCAreaKutjevoExteriorStonyfields
+        1,25: RMCAreaKutjevoExteriorStonyfields
+        1,31: RMCAreaKutjevoExteriorStonyfields
+        1,26: RMCAreaKutjevoExteriorStonyfields
+        1,23: RMCAreaKutjevoExteriorStonyfields
+        1,20: RMCAreaKutjevoExteriorStonyfields
+        1,19: RMCAreaKutjevoExteriorStonyfields
+        1,18: RMCAreaKutjevoExteriorStonyfields
+        1,17: RMCAreaKutjevoExteriorStonyfields
+        1,16: RMCAreaKutjevoExteriorStonyfields
+        1,21: RMCAreaKutjevoExteriorStonyfields
+        2,31: RMCAreaKutjevoExteriorStonyfields
+        2,30: RMCAreaKutjevoExteriorStonyfields
+        2,29: RMCAreaKutjevoExteriorStonyfields
+        1,15: RMCAreaKutjevoExteriorStonyfields
+        2,28: RMCAreaKutjevoExteriorStonyfields
+        2,27: RMCAreaKutjevoExteriorStonyfields
+        2,26: RMCAreaKutjevoExteriorStonyfields
+        2,25: RMCAreaKutjevoExteriorStonyfields
+        2,24: RMCAreaKutjevoExteriorStonyfields
+        2,23: RMCAreaKutjevoExteriorStonyfields
+        2,22: RMCAreaKutjevoExteriorStonyfields
+        2,21: RMCAreaKutjevoExteriorStonyfields
+        2,20: RMCAreaKutjevoExteriorStonyfields
+        2,19: RMCAreaKutjevoExteriorStonyfields
+        2,18: RMCAreaKutjevoExteriorStonyfields
+        2,17: RMCAreaKutjevoExteriorStonyfields
+        2,16: RMCAreaKutjevoExteriorStonyfields
+        3,31: RMCAreaKutjevoExteriorStonyfields
+        3,30: RMCAreaKutjevoExteriorStonyfields
+        1,22: RMCAreaKutjevoExteriorStonyfields
+        3,28: RMCAreaKutjevoExteriorStonyfields
+        3,27: RMCAreaKutjevoExteriorStonyfields
+        3,29: RMCAreaKutjevoExteriorStonyfields
+        3,25: RMCAreaKutjevoExteriorStonyfields
+        2,15: RMCAreaKutjevoExteriorStonyfields
+        3,23: RMCAreaKutjevoExteriorStonyfields
+        3,22: RMCAreaKutjevoExteriorStonyfields
+        3,21: RMCAreaKutjevoExteriorStonyfields
+        3,20: RMCAreaKutjevoExteriorStonyfields
+        3,19: RMCAreaKutjevoExteriorStonyfields
+        3,18: RMCAreaKutjevoExteriorStonyfields
+        3,17: RMCAreaKutjevoExteriorStonyfields
+        3,16: RMCAreaKutjevoExteriorStonyfields
+        3,15: RMCAreaKutjevoExteriorStonyfields
+        4,31: RMCAreaKutjevoExteriorStonyfields
+        4,30: RMCAreaKutjevoExteriorStonyfields
+        4,29: RMCAreaKutjevoExteriorStonyfields
+        4,28: RMCAreaKutjevoExteriorStonyfields
+        4,27: RMCAreaKutjevoExteriorStonyfields
+        4,26: RMCAreaKutjevoExteriorStonyfields
+        4,25: RMCAreaKutjevoExteriorStonyfields
+        4,24: RMCAreaKutjevoExteriorStonyfields
+        4,23: RMCAreaKutjevoExteriorStonyfields
+        4,22: RMCAreaKutjevoExteriorStonyfields
+        4,21: RMCAreaKutjevoExteriorStonyfields
+        4,20: RMCAreaKutjevoExteriorStonyfields
+        4,19: RMCAreaKutjevoExteriorStonyfields
+        4,18: RMCAreaKutjevoExteriorStonyfields
+        3,26: RMCAreaKutjevoExteriorStonyfields
+        4,16: RMCAreaKutjevoExteriorStonyfields
+        4,15: RMCAreaKutjevoExteriorStonyfields
+        5,31: RMCAreaKutjevoExteriorStonyfields
+        5,30: RMCAreaKutjevoExteriorStonyfields
+        5,29: RMCAreaKutjevoExteriorStonyfields
+        5,28: RMCAreaKutjevoExteriorStonyfields
+        5,27: RMCAreaKutjevoExteriorStonyfields
+        5,26: RMCAreaKutjevoExteriorStonyfields
+        5,25: RMCAreaKutjevoExteriorStonyfields
+        5,24: RMCAreaKutjevoExteriorStonyfields
+        5,23: RMCAreaKutjevoExteriorStonyfields
+        5,22: RMCAreaKutjevoExteriorStonyfields
+        5,21: RMCAreaKutjevoExteriorStonyfields
+        5,20: RMCAreaKutjevoExteriorStonyfields
+        4,17: RMCAreaKutjevoExteriorStonyfields
+        5,19: RMCAreaKutjevoExteriorStonyfields
+        5,18: RMCAreaKutjevoExteriorStonyfields
+        5,17: RMCAreaKutjevoExteriorStonyfields
+        5,16: RMCAreaKutjevoExteriorStonyfields
+        5,15: RMCAreaKutjevoExteriorStonyfields
+        6,31: RMCAreaKutjevoExteriorStonyfields
+        6,30: RMCAreaKutjevoExteriorStonyfields
+        6,29: RMCAreaKutjevoExteriorStonyfields
+        6,28: RMCAreaKutjevoExteriorStonyfields
+        6,27: RMCAreaKutjevoExteriorStonyfields
+        6,26: RMCAreaKutjevoExteriorStonyfields
+        6,25: RMCAreaKutjevoExteriorStonyfields
+        6,24: RMCAreaKutjevoExteriorStonyfields
+        6,23: RMCAreaKutjevoExteriorStonyfields
+        6,22: RMCAreaKutjevoExteriorStonyfields
+        6,21: RMCAreaKutjevoExteriorStonyfields
+        6,20: RMCAreaKutjevoExteriorStonyfields
+        6,19: RMCAreaKutjevoExteriorStonyfields
+        6,18: RMCAreaKutjevoExteriorStonyfields
+        6,17: RMCAreaKutjevoExteriorStonyfields
+        6,16: RMCAreaKutjevoExteriorStonyfields
+        6,15: RMCAreaKutjevoExteriorStonyfields
+        3,24: RMCAreaKutjevoExteriorStonyfields
+        7,31: RMCAreaKutjevoExteriorStonyfields
+        7,30: RMCAreaKutjevoExteriorStonyfields
+        7,29: RMCAreaKutjevoExteriorStonyfields
+        7,28: RMCAreaKutjevoExteriorStonyfields
+        7,27: RMCAreaKutjevoExteriorStonyfields
+        7,26: RMCAreaKutjevoExteriorStonyfields
+        7,25: RMCAreaKutjevoExteriorStonyfields
+        7,24: RMCAreaKutjevoExteriorStonyfields
+        7,23: RMCAreaKutjevoExteriorStonyfields
+        7,22: RMCAreaKutjevoExteriorStonyfields
+        7,21: RMCAreaKutjevoExteriorStonyfields
+        7,20: RMCAreaKutjevoExteriorStonyfields
+        7,19: RMCAreaKutjevoExteriorStonyfields
+        7,18: RMCAreaKutjevoExteriorStonyfields
+        7,17: RMCAreaKutjevoExteriorStonyfields
+        7,16: RMCAreaKutjevoExteriorStonyfields
+        7,15: RMCAreaKutjevoExteriorStonyfields
+        8,31: RMCAreaKutjevoExteriorStonyfields
+        8,30: RMCAreaKutjevoExteriorStonyfields
+        8,29: RMCAreaKutjevoExteriorStonyfields
+        8,28: RMCAreaKutjevoExteriorStonyfields
+        8,27: RMCAreaKutjevoExteriorStonyfields
+        8,26: RMCAreaKutjevoExteriorStonyfields
+        8,25: RMCAreaKutjevoExteriorStonyfields
+        8,24: RMCAreaKutjevoExteriorStonyfields
+        8,23: RMCAreaKutjevoExteriorStonyfields
+        8,22: RMCAreaKutjevoExteriorStonyfields
+        8,21: RMCAreaKutjevoExteriorStonyfields
+        8,20: RMCAreaKutjevoExteriorStonyfields
+        8,19: RMCAreaKutjevoExteriorStonyfields
+        8,18: RMCAreaKutjevoExteriorStonyfields
+        8,17: RMCAreaKutjevoExteriorStonyfields
+        8,16: RMCAreaKutjevoExteriorStonyfields
+        8,15: RMCAreaKutjevoExteriorStonyfields
+        9,31: RMCAreaKutjevoExteriorStonyfields
+        9,30: RMCAreaKutjevoExteriorStonyfields
+        9,28: RMCAreaKutjevoExteriorStonyfields
+        9,27: RMCAreaKutjevoExteriorStonyfields
+        9,26: RMCAreaKutjevoExteriorStonyfields
+        9,25: RMCAreaKutjevoExteriorStonyfields
+        9,24: RMCAreaKutjevoExteriorStonyfields
+        9,29: RMCAreaKutjevoExteriorStonyfields
+        9,23: RMCAreaKutjevoExteriorStonyfields
+        9,22: RMCAreaKutjevoExteriorStonyfields
+        9,20: RMCAreaKutjevoExteriorStonyfields
+        9,19: RMCAreaKutjevoExteriorStonyfields
+        9,18: RMCAreaKutjevoExteriorStonyfields
+        9,17: RMCAreaKutjevoExteriorStonyfields
+        9,16: RMCAreaKutjevoExteriorStonyfields
+        9,21: RMCAreaKutjevoExteriorStonyfields
+        9,15: RMCAreaKutjevoExteriorStonyfields
+        10,31: RMCAreaKutjevoExteriorStonyfields
+        10,30: RMCAreaKutjevoExteriorStonyfields
+        10,27: RMCAreaKutjevoExteriorStonyfields
+        10,26: RMCAreaKutjevoExteriorStonyfields
+        10,25: RMCAreaKutjevoExteriorStonyfields
+        10,24: RMCAreaKutjevoExteriorStonyfields
+        10,23: RMCAreaKutjevoExteriorStonyfields
+        10,22: RMCAreaKutjevoExteriorStonyfields
+        10,21: RMCAreaKutjevoExteriorStonyfields
+        10,20: RMCAreaKutjevoExteriorStonyfields
+        10,19: RMCAreaKutjevoExteriorStonyfields
+        10,18: RMCAreaKutjevoExteriorStonyfields
+        10,17: RMCAreaKutjevoExteriorStonyfields
+        10,16: RMCAreaKutjevoExteriorStonyfields
+        10,15: RMCAreaKutjevoExteriorStonyfields
+        11,31: RMCAreaKutjevoExteriorStonyfields
+        11,30: RMCAreaKutjevoExteriorStonyfields
+        11,29: RMCAreaKutjevoExteriorStonyfields
+        11,28: RMCAreaKutjevoExteriorStonyfields
+        11,27: RMCAreaKutjevoExteriorStonyfields
+        11,26: RMCAreaKutjevoExteriorStonyfields
+        10,29: RMCAreaKutjevoExteriorStonyfields
+        11,24: RMCAreaKutjevoExteriorStonyfields
+        11,23: RMCAreaKutjevoExteriorStonyfields
+        11,22: RMCAreaKutjevoExteriorStonyfields
+        11,21: RMCAreaKutjevoExteriorStonyfields
+        11,20: RMCAreaKutjevoExteriorStonyfields
+        11,25: RMCAreaKutjevoExteriorStonyfields
+        11,18: RMCAreaKutjevoExteriorStonyfields
+        11,17: RMCAreaKutjevoExteriorStonyfields
+        11,16: RMCAreaKutjevoExteriorStonyfields
+        11,15: RMCAreaKutjevoExteriorStonyfields
+        12,31: RMCAreaKutjevoExteriorStonyfields
+        12,30: RMCAreaKutjevoExteriorStonyfields
+        12,29: RMCAreaKutjevoExteriorStonyfields
+        12,28: RMCAreaKutjevoExteriorStonyfields
+        12,27: RMCAreaKutjevoExteriorStonyfields
+        12,26: RMCAreaKutjevoExteriorStonyfields
+        12,25: RMCAreaKutjevoExteriorStonyfields
+        12,24: RMCAreaKutjevoExteriorStonyfields
+        12,23: RMCAreaKutjevoExteriorStonyfields
+        12,22: RMCAreaKutjevoExteriorStonyfields
+        12,21: RMCAreaKutjevoExteriorStonyfields
+        12,20: RMCAreaKutjevoExteriorStonyfields
+        12,19: RMCAreaKutjevoExteriorStonyfields
+        12,18: RMCAreaKutjevoExteriorStonyfields
+        12,17: RMCAreaKutjevoExteriorStonyfields
+        12,16: RMCAreaKutjevoExteriorStonyfields
+        12,15: RMCAreaKutjevoExteriorStonyfields
+        13,31: RMCAreaKutjevoExteriorStonyfields
+        13,30: RMCAreaKutjevoExteriorStonyfields
+        13,29: RMCAreaKutjevoExteriorStonyfields
+        13,28: RMCAreaKutjevoExteriorStonyfields
+        13,27: RMCAreaKutjevoExteriorStonyfields
+        13,26: RMCAreaKutjevoExteriorStonyfields
+        13,25: RMCAreaKutjevoExteriorStonyfields
+        13,24: RMCAreaKutjevoExteriorStonyfields
+        13,23: RMCAreaKutjevoExteriorStonyfields
+        13,22: RMCAreaKutjevoExteriorStonyfields
+        13,21: RMCAreaKutjevoExteriorStonyfields
+        13,20: RMCAreaKutjevoExteriorStonyfields
+        13,19: RMCAreaKutjevoExteriorStonyfields
+        13,18: RMCAreaKutjevoExteriorStonyfields
+        13,17: RMCAreaKutjevoExteriorStonyfields
+        13,16: RMCAreaKutjevoExteriorStonyfields
+        13,15: RMCAreaKutjevoExteriorStonyfields
+        14,31: RMCAreaKutjevoExteriorStonyfields
+        14,30: RMCAreaKutjevoExteriorStonyfields
+        14,29: RMCAreaKutjevoExteriorStonyfields
+        14,28: RMCAreaKutjevoExteriorStonyfields
+        14,27: RMCAreaKutjevoExteriorStonyfields
+        14,26: RMCAreaKutjevoExteriorStonyfields
+        14,25: RMCAreaKutjevoExteriorStonyfields
+        14,24: RMCAreaKutjevoExteriorStonyfields
+        14,23: RMCAreaKutjevoExteriorStonyfields
+        14,22: RMCAreaKutjevoExteriorStonyfields
+        14,21: RMCAreaKutjevoExteriorStonyfields
+        14,20: RMCAreaKutjevoExteriorStonyfields
+        14,19: RMCAreaKutjevoExteriorStonyfields
+        14,18: RMCAreaKutjevoExteriorStonyfields
+        14,17: RMCAreaKutjevoExteriorStonyfields
+        14,16: RMCAreaKutjevoExteriorStonyfields
+        14,15: RMCAreaKutjevoExteriorStonyfields
+        11,19: RMCAreaKutjevoExteriorStonyfields
+        10,28: RMCAreaKutjevoExteriorStonyfields
+        0,12: RMCAreaKutjevoExteriorStonyfields
+        0,13: RMCAreaKutjevoExteriorStonyfields
+        0,14: RMCAreaKutjevoExteriorStonyfields
+        0,11: RMCAreaKutjevoExteriorStonyfields
+        1,12: RMCAreaKutjevoExteriorStonyfields
+        1,14: RMCAreaKutjevoExteriorStonyfields
+        1,13: RMCAreaKutjevoExteriorStonyfields
+        15,31: RMCAreaKutjevoExteriorStonyfields
+        15,30: RMCAreaKutjevoExteriorStonyfields
+        15,29: RMCAreaKutjevoExteriorStonyfields
+        15,28: RMCAreaKutjevoExteriorStonyfields
+        15,27: RMCAreaKutjevoExteriorStonyfields
+        15,26: RMCAreaKutjevoExteriorStonyfields
+        15,25: RMCAreaKutjevoExteriorStonyfields
+        16,27: RMCAreaKutjevoExteriorStonyfields
+        16,26: RMCAreaKutjevoExteriorStonyfields
+        16,25: RMCAreaKutjevoExteriorStonyfields
+        3,14: RMCAreaKutjevoExteriorCLFLZ
+        3,13: RMCAreaKutjevoExteriorCLFLZ
+        3,12: RMCAreaKutjevoExteriorCLFLZ
+        3,11: RMCAreaKutjevoExteriorCLFLZ
+        4,14: RMCAreaKutjevoExteriorCLFLZ
+        4,13: RMCAreaKutjevoExteriorCLFLZ
+        4,12: RMCAreaKutjevoExteriorCLFLZ
+        4,11: RMCAreaKutjevoExteriorCLFLZ
+        5,14: RMCAreaKutjevoExteriorCLFLZ
+        5,13: RMCAreaKutjevoExteriorCLFLZ
+        5,12: RMCAreaKutjevoExteriorCLFLZ
+        5,11: RMCAreaKutjevoExteriorCLFLZ
+        6,14: RMCAreaKutjevoExteriorCLFLZ
+        6,13: RMCAreaKutjevoExteriorCLFLZ
+        6,12: RMCAreaKutjevoExteriorCLFLZ
+        6,11: RMCAreaKutjevoExteriorCLFLZ
+        7,14: RMCAreaKutjevoExteriorCLFLZ
+        7,13: RMCAreaKutjevoExteriorCLFLZ
+        7,12: RMCAreaKutjevoExteriorCLFLZ
+        7,11: RMCAreaKutjevoExteriorCLFLZ
+        8,14: RMCAreaKutjevoExteriorCLFLZ
+        8,13: RMCAreaKutjevoExteriorCLFLZ
+        8,12: RMCAreaKutjevoExteriorCLFLZ
+        8,11: RMCAreaKutjevoExteriorCLFLZ
+        9,14: RMCAreaKutjevoExteriorCLFLZ
+        9,13: RMCAreaKutjevoExteriorCLFLZ
+        9,11: RMCAreaKutjevoExteriorCLFLZ
+        10,14: RMCAreaKutjevoExteriorCLFLZ
+        10,13: RMCAreaKutjevoExteriorCLFLZ
+        10,12: RMCAreaKutjevoExteriorCLFLZ
+        10,11: RMCAreaKutjevoExteriorCLFLZ
+        11,14: RMCAreaKutjevoExteriorCLFLZ
+        11,13: RMCAreaKutjevoExteriorCLFLZ
+        11,12: RMCAreaKutjevoExteriorCLFLZ
+        11,11: RMCAreaKutjevoExteriorCLFLZ
+        9,12: RMCAreaKutjevoExteriorCLFLZ
+        12,11: RMCAreaKutjevoExteriorCLFLZ
+        12,12: RMCAreaKutjevoExteriorCLFLZ
+        12,13: RMCAreaKutjevoExteriorCLFLZ
+        12,14: RMCAreaKutjevoExteriorCLFLZ
+        13,11: RMCAreaKutjevoExteriorCLFLZ
+        13,12: RMCAreaKutjevoExteriorCLFLZ
+        13,13: RMCAreaKutjevoExteriorCLFLZ
+        13,14: RMCAreaKutjevoExteriorCLFLZ
+        14,11: RMCAreaKutjevoExteriorCLFLZ
+        14,12: RMCAreaKutjevoExteriorCLFLZ
+        14,13: RMCAreaKutjevoExteriorCLFLZ
+        14,14: RMCAreaKutjevoExteriorCLFLZ
+        15,11: RMCAreaKutjevoExteriorCLFLZ
+        15,12: RMCAreaKutjevoExteriorCLFLZ
+        15,13: RMCAreaKutjevoExteriorCLFLZ
+        15,14: RMCAreaKutjevoExteriorCLFLZ
+        16,11: RMCAreaKutjevoExteriorCLFLZ
+        16,12: RMCAreaKutjevoExteriorCLFLZ
+        16,13: RMCAreaKutjevoExteriorCLFLZ
+        16,14: RMCAreaKutjevoExteriorCLFLZ
+        17,11: RMCAreaKutjevoExteriorCLFLZ
+        17,12: RMCAreaKutjevoExteriorCLFLZ
+        17,13: RMCAreaKutjevoExteriorCLFLZ
+        17,14: RMCAreaKutjevoExteriorCLFLZ
+        18,11: RMCAreaKutjevoExteriorCLFLZ
+        18,12: RMCAreaKutjevoExteriorCLFLZ
+        18,13: RMCAreaKutjevoExteriorCLFLZ
+        18,14: RMCAreaKutjevoExteriorCLFLZ
+        19,11: RMCAreaKutjevoExteriorCLFLZ
+        19,12: RMCAreaKutjevoExteriorCLFLZ
+        19,13: RMCAreaKutjevoExteriorCLFLZ
+        19,14: RMCAreaKutjevoExteriorCLFLZ
+        20,11: RMCAreaKutjevoExteriorCLFLZ
+        20,12: RMCAreaKutjevoExteriorCLFLZ
+        20,13: RMCAreaKutjevoExteriorCLFLZ
+        20,14: RMCAreaKutjevoExteriorCLFLZ
+        21,11: RMCAreaKutjevoExteriorCLFLZ
+        21,12: RMCAreaKutjevoExteriorCLFLZ
+        21,13: RMCAreaKutjevoExteriorCLFLZ
+        21,14: RMCAreaKutjevoExteriorCLFLZ
+        22,11: RMCAreaKutjevoExteriorCLFLZ
+        22,12: RMCAreaKutjevoExteriorCLFLZ
+        22,13: RMCAreaKutjevoExteriorCLFLZ
+        22,14: RMCAreaKutjevoExteriorCLFLZ
+        23,11: RMCAreaKutjevoExteriorCLFLZ
+        23,12: RMCAreaKutjevoExteriorCLFLZ
+        23,13: RMCAreaKutjevoExteriorCLFLZ
+        23,14: RMCAreaKutjevoExteriorCLFLZ
+        24,11: RMCAreaKutjevoExteriorCLFLZ
+        24,12: RMCAreaKutjevoExteriorCLFLZ
+        24,13: RMCAreaKutjevoExteriorCLFLZ
+        24,14: RMCAreaKutjevoExteriorCLFLZ
+        25,11: RMCAreaKutjevoExteriorCLFLZ
+        25,12: RMCAreaKutjevoExteriorCLFLZ
+        25,13: RMCAreaKutjevoExteriorCLFLZ
+        25,14: RMCAreaKutjevoExteriorCLFLZ
+        26,11: RMCAreaKutjevoExteriorCLFLZ
+        26,12: RMCAreaKutjevoExteriorCLFLZ
+        26,13: RMCAreaKutjevoExteriorCLFLZ
+        26,14: RMCAreaKutjevoExteriorCLFLZ
+        27,11: RMCAreaKutjevoExteriorCLFLZ
+        27,12: RMCAreaKutjevoExteriorCLFLZ
+        27,13: RMCAreaKutjevoExteriorCLFLZ
+        27,14: RMCAreaKutjevoExteriorCLFLZ
+        15,19: RMCAreaKutjevoExteriorCLFLZ
+        15,18: RMCAreaKutjevoExteriorCLFLZ
+        15,17: RMCAreaKutjevoExteriorCLFLZ
+        15,16: RMCAreaKutjevoExteriorCLFLZ
+        15,15: RMCAreaKutjevoExteriorCLFLZ
+        16,19: RMCAreaKutjevoExteriorCLFLZ
+        16,18: RMCAreaKutjevoExteriorCLFLZ
+        16,17: RMCAreaKutjevoExteriorCLFLZ
+        16,16: RMCAreaKutjevoExteriorCLFLZ
+        16,15: RMCAreaKutjevoExteriorCLFLZ
+        17,19: RMCAreaKutjevoExteriorCLFLZ
+        17,18: RMCAreaKutjevoExteriorCLFLZ
+        17,17: RMCAreaKutjevoExteriorCLFLZ
+        17,16: RMCAreaKutjevoExteriorCLFLZ
+        17,15: RMCAreaKutjevoExteriorCLFLZ
+        18,19: RMCAreaKutjevoExteriorCLFLZ
+        18,18: RMCAreaKutjevoExteriorCLFLZ
+        18,17: RMCAreaKutjevoExteriorCLFLZ
+        18,16: RMCAreaKutjevoExteriorCLFLZ
+        18,15: RMCAreaKutjevoExteriorCLFLZ
+        19,19: RMCAreaKutjevoExteriorCLFLZ
+        19,18: RMCAreaKutjevoExteriorCLFLZ
+        19,17: RMCAreaKutjevoExteriorCLFLZ
+        19,16: RMCAreaKutjevoExteriorCLFLZ
+        19,15: RMCAreaKutjevoExteriorCLFLZ
+        20,19: RMCAreaKutjevoExteriorCLFLZ
+        20,18: RMCAreaKutjevoExteriorCLFLZ
+        20,17: RMCAreaKutjevoExteriorCLFLZ
+        20,16: RMCAreaKutjevoExteriorCLFLZ
+        20,15: RMCAreaKutjevoExteriorCLFLZ
+        21,19: RMCAreaKutjevoExteriorCLFLZ
+        21,18: RMCAreaKutjevoExteriorCLFLZ
+        21,17: RMCAreaKutjevoExteriorCLFLZ
+        21,16: RMCAreaKutjevoExteriorCLFLZ
+        21,15: RMCAreaKutjevoExteriorCLFLZ
+        22,19: RMCAreaKutjevoExteriorCLFLZ
+        22,18: RMCAreaKutjevoExteriorCLFLZ
+        22,17: RMCAreaKutjevoExteriorCLFLZ
+        22,16: RMCAreaKutjevoExteriorCLFLZ
+        22,15: RMCAreaKutjevoExteriorCLFLZ
+        23,19: RMCAreaKutjevoExteriorCLFLZ
+        23,18: RMCAreaKutjevoExteriorCLFLZ
+        23,17: RMCAreaKutjevoExteriorCLFLZ
+        23,16: RMCAreaKutjevoExteriorCLFLZ
+        23,15: RMCAreaKutjevoExteriorCLFLZ
+        24,19: RMCAreaKutjevoExteriorCLFLZ
+        24,18: RMCAreaKutjevoExteriorCLFLZ
+        24,17: RMCAreaKutjevoExteriorCLFLZ
+        24,16: RMCAreaKutjevoExteriorCLFLZ
+        24,15: RMCAreaKutjevoExteriorCLFLZ
+        25,19: RMCAreaKutjevoExteriorCLFLZ
+        25,18: RMCAreaKutjevoExteriorCLFLZ
+        25,17: RMCAreaKutjevoExteriorCLFLZ
+        25,16: RMCAreaKutjevoExteriorCLFLZ
+        25,15: RMCAreaKutjevoExteriorCLFLZ
+        26,19: RMCAreaKutjevoExteriorCLFLZ
+        26,18: RMCAreaKutjevoExteriorCLFLZ
+        26,17: RMCAreaKutjevoExteriorCLFLZ
+        26,16: RMCAreaKutjevoExteriorCLFLZ
+        26,15: RMCAreaKutjevoExteriorCLFLZ
+        27,19: RMCAreaKutjevoExteriorCLFLZ
+        27,18: RMCAreaKutjevoExteriorCLFLZ
+        27,17: RMCAreaKutjevoExteriorCLFLZ
+        27,16: RMCAreaKutjevoExteriorCLFLZ
+        27,15: RMCAreaKutjevoExteriorCLFLZ
+        23,23: RMCAreaKutjevoExteriorCLFLZ
+        23,22: RMCAreaKutjevoExteriorCLFLZ
+        23,21: RMCAreaKutjevoExteriorCLFLZ
+        23,20: RMCAreaKutjevoExteriorCLFLZ
+        24,24: RMCAreaKutjevoExteriorCLFLZ
+        24,23: RMCAreaKutjevoExteriorCLFLZ
+        24,22: RMCAreaKutjevoExteriorCLFLZ
+        24,21: RMCAreaKutjevoExteriorCLFLZ
+        24,20: RMCAreaKutjevoExteriorCLFLZ
+        25,24: RMCAreaKutjevoExteriorCLFLZ
+        25,23: RMCAreaKutjevoExteriorCLFLZ
+        25,22: RMCAreaKutjevoExteriorCLFLZ
+        25,21: RMCAreaKutjevoExteriorCLFLZ
+        25,20: RMCAreaKutjevoExteriorCLFLZ
+        26,24: RMCAreaKutjevoExteriorCLFLZ
+        26,23: RMCAreaKutjevoExteriorCLFLZ
+        26,22: RMCAreaKutjevoExteriorCLFLZ
+        26,21: RMCAreaKutjevoExteriorCLFLZ
+        26,20: RMCAreaKutjevoExteriorCLFLZ
+        27,24: RMCAreaKutjevoExteriorCLFLZ
+        27,23: RMCAreaKutjevoExteriorCLFLZ
+        27,22: RMCAreaKutjevoExteriorCLFLZ
+        27,21: RMCAreaKutjevoExteriorCLFLZ
+        27,20: RMCAreaKutjevoExteriorCLFLZ
+        23,24: RMCAreaKutjevoExteriorCLFLZ
+        28,21: RMCAreaKutjevoExteriorCLFLZ
+        28,22: RMCAreaKutjevoExteriorCLFLZ
+        28,24: RMCAreaKutjevoExteriorCLFLZ
+        28,23: RMCAreaKutjevoExteriorCLFLZ
+        29,24: RMCAreaKutjevoExteriorCLFLZ
+        29,22: RMCAreaKutjevoExteriorCLFLZ
+        30,24: RMCAreaKutjevoExteriorCLFLZ
+        30,23: RMCAreaKutjevoExteriorCLFLZ
+        30,22: RMCAreaKutjevoExteriorCLFLZ
+        31,24: RMCAreaKutjevoExteriorCLFLZ
+        31,23: RMCAreaKutjevoExteriorCLFLZ
+        31,22: RMCAreaKutjevoExteriorCLFLZ
+        32,24: RMCAreaKutjevoExteriorCLFLZ
+        32,23: RMCAreaKutjevoExteriorCLFLZ
+        32,22: RMCAreaKutjevoExteriorCLFLZ
+        33,24: RMCAreaKutjevoExteriorCLFLZ
+        33,23: RMCAreaKutjevoExteriorCLFLZ
+        34,24: RMCAreaKutjevoExteriorCLFLZ
+        34,23: RMCAreaKutjevoExteriorCLFLZ
+        34,22: RMCAreaKutjevoExteriorCLFLZ
+        35,23: RMCAreaKutjevoExteriorCLFLZ
+        35,24: RMCAreaKutjevoExteriorCLFLZ
+        35,22: RMCAreaKutjevoExteriorCLFLZ
+        36,24: RMCAreaKutjevoExteriorCLFLZ
+        36,22: RMCAreaKutjevoExteriorCLFLZ
+        37,24: RMCAreaKutjevoExteriorCLFLZ
+        37,23: RMCAreaKutjevoExteriorCLFLZ
+        37,22: RMCAreaKutjevoExteriorCLFLZ
+        38,24: RMCAreaKutjevoExteriorCLFLZ
+        38,23: RMCAreaKutjevoExteriorCLFLZ
+        38,22: RMCAreaKutjevoExteriorCLFLZ
+        36,23: RMCAreaKutjevoExteriorCLFLZ
+        29,23: RMCAreaKutjevoExteriorCLFLZ
+        33,22: RMCAreaKutjevoExteriorCLFLZ
+        36,21: RMCAreaKutjevoExteriorCLFLZ
+        37,21: RMCAreaKutjevoExteriorCLFLZ
+        38,21: RMCAreaKutjevoExteriorCLFLZ
+        35,21: RMCAreaKutjevoExteriorCLFLZ
+        36,20: RMCAreaKutjevoExteriorCLFLZ
+        37,20: RMCAreaKutjevoExteriorCLFLZ
+        38,20: RMCAreaKutjevoExteriorCLFLZ
+        36,19: RMCAreaKutjevoExteriorCLFLZ
+        36,18: RMCAreaKutjevoExteriorCLFLZ
+        36,17: RMCAreaKutjevoExteriorCLFLZ
+        36,16: RMCAreaKutjevoExteriorCLFLZ
+        36,15: RMCAreaKutjevoExteriorCLFLZ
+        36,14: RMCAreaKutjevoExteriorCLFLZ
+        36,13: RMCAreaKutjevoExteriorCLFLZ
+        36,12: RMCAreaKutjevoExteriorCLFLZ
+        36,11: RMCAreaKutjevoExteriorCLFLZ
+        37,19: RMCAreaKutjevoExteriorCLFLZ
+        37,18: RMCAreaKutjevoExteriorCLFLZ
+        37,17: RMCAreaKutjevoExteriorCLFLZ
+        37,16: RMCAreaKutjevoExteriorCLFLZ
+        37,15: RMCAreaKutjevoExteriorCLFLZ
+        37,14: RMCAreaKutjevoExteriorCLFLZ
+        37,13: RMCAreaKutjevoExteriorCLFLZ
+        37,11: RMCAreaKutjevoExteriorCLFLZ
+        38,19: RMCAreaKutjevoExteriorCLFLZ
+        38,18: RMCAreaKutjevoExteriorCLFLZ
+        38,17: RMCAreaKutjevoExteriorCLFLZ
+        38,16: RMCAreaKutjevoExteriorCLFLZ
+        38,15: RMCAreaKutjevoExteriorCLFLZ
+        38,14: RMCAreaKutjevoExteriorCLFLZ
+        38,13: RMCAreaKutjevoExteriorCLFLZ
+        38,12: RMCAreaKutjevoExteriorCLFLZ
+        38,11: RMCAreaKutjevoExteriorCLFLZ
+        37,12: RMCAreaKutjevoExteriorCLFLZ
 - proto: BarbedWire15
   entities:
-  - uid: 480
+  - uid: 2
     components:
     - type: Transform
       pos: 9.5,13.5
       parent: 1
 - proto: BonsaiTree04
   entities:
-  - uid: 414
+  - uid: 3
     components:
     - type: Transform
       pos: 16.5,11.5
       parent: 1
     - type: Fixtures
       fixtures: {}
-  - uid: 415
+  - uid: 4
     components:
     - type: Transform
       pos: 6.5,4.5
       parent: 1
     - type: Fixtures
       fixtures: {}
-  - uid: 416
+  - uid: 5
     components:
     - type: Transform
       pos: 23.5,20.5
       parent: 1
     - type: Fixtures
       fixtures: {}
-  - uid: 417
+  - uid: 6
     components:
     - type: Transform
       pos: 39.5,22.5
@@ -221,19 +1506,19 @@ entities:
       fixtures: {}
 - proto: CMAdvFirstAidKitFilled
   entities:
-  - uid: 585
+  - uid: 7
     components:
     - type: Transform
       pos: 22.5,16.5
       parent: 1
-  - uid: 586
+  - uid: 8
     components:
     - type: Transform
       pos: 22.502087,16.629093
       parent: 1
 - proto: CMAirlock
   entities:
-  - uid: 346
+  - uid: 9
     components:
     - type: MetaData
       name: Airlock
@@ -241,7 +1526,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 28.5,18.5
       parent: 1
-  - uid: 347
+  - uid: 10
     components:
     - type: MetaData
       name: Airlock
@@ -251,39 +1536,39 @@ entities:
       parent: 1
 - proto: CMAirlockMaint
   entities:
-  - uid: 344
+  - uid: 11
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,22.5
       parent: 1
-  - uid: 345
+  - uid: 12
     components:
     - type: Transform
       pos: 19.5,20.5
       parent: 1
 - proto: CMAnestheticTank
   entities:
-  - uid: 461
+  - uid: 13
     components:
     - type: Transform
       pos: 20.5,17.5
       parent: 1
 - proto: CMApcConstructed
   entities:
-  - uid: 455
+  - uid: 14
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 20.5,23.5
       parent: 1
-  - uid: 456
+  - uid: 15
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 20.5,19.5
       parent: 1
-  - uid: 457
+  - uid: 16
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -291,7 +1576,7 @@ entities:
       parent: 1
 - proto: CMBarricadeMetal
   entities:
-  - uid: 600
+  - uid: 17
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -299,13 +1584,13 @@ entities:
       parent: 1
 - proto: CMBarricadePlasteelDoor
   entities:
-  - uid: 601
+  - uid: 18
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 22.5,26.5
       parent: 1
-  - uid: 602
+  - uid: 19
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -313,91 +1598,91 @@ entities:
       parent: 1
 - proto: CMBarricadeSandbag
   entities:
-  - uid: 465
+  - uid: 20
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,19.5
       parent: 1
-  - uid: 466
+  - uid: 21
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,18.5
       parent: 1
-  - uid: 467
+  - uid: 22
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,17.5
       parent: 1
-  - uid: 468
+  - uid: 23
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,16.5
       parent: 1
-  - uid: 469
+  - uid: 24
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,15.5
       parent: 1
-  - uid: 470
+  - uid: 25
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4.5,13.5
       parent: 1
-  - uid: 471
+  - uid: 26
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,13.5
       parent: 1
-  - uid: 472
+  - uid: 27
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,13.5
       parent: 1
-  - uid: 473
+  - uid: 28
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,13.5
       parent: 1
-  - uid: 474
+  - uid: 29
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,13.5
       parent: 1
-  - uid: 475
+  - uid: 30
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 10.5,13.5
       parent: 1
-  - uid: 476
+  - uid: 31
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 11.5,13.5
       parent: 1
-  - uid: 477
+  - uid: 32
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 12.5,13.5
       parent: 1
-  - uid: 478
+  - uid: 33
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 13.5,13.5
       parent: 1
-  - uid: 479
+  - uid: 34
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -405,118 +1690,118 @@ entities:
       parent: 1
 - proto: CMBeltMedicalFilled
   entities:
-  - uid: 582
+  - uid: 35
     components:
     - type: Transform
       pos: 22.5,15.5
       parent: 1
-  - uid: 583
+  - uid: 36
     components:
     - type: Transform
       pos: 22.5,15.5
       parent: 1
 - proto: CMBeltSecurityMarshalFilled
   entities:
-  - uid: 385
+  - uid: 38
     components:
     - type: Transform
-      parent: 382
+      parent: 37
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: CMCatwalk
   entities:
-  - uid: 277
+  - uid: 41
     components:
     - type: Transform
       pos: 29.5,18.5
       parent: 1
-  - uid: 278
+  - uid: 42
     components:
     - type: Transform
       pos: 31.5,18.5
       parent: 1
-  - uid: 279
+  - uid: 43
     components:
     - type: Transform
       pos: 32.5,18.5
       parent: 1
-  - uid: 280
+  - uid: 44
     components:
     - type: Transform
       pos: 34.5,18.5
       parent: 1
-  - uid: 281
+  - uid: 45
     components:
     - type: Transform
       pos: 30.5,18.5
       parent: 1
-  - uid: 282
+  - uid: 46
     components:
     - type: Transform
       pos: 33.5,18.5
       parent: 1
-  - uid: 283
+  - uid: 47
     components:
     - type: Transform
       pos: 31.5,17.5
       parent: 1
-  - uid: 284
+  - uid: 48
     components:
     - type: Transform
       pos: 32.5,17.5
       parent: 1
-  - uid: 285
+  - uid: 49
     components:
     - type: Transform
       pos: 31.5,15.5
       parent: 1
-  - uid: 286
+  - uid: 50
     components:
     - type: Transform
       pos: 32.5,15.5
       parent: 1
-  - uid: 287
+  - uid: 51
     components:
     - type: Transform
       pos: 29.5,13.5
       parent: 1
-  - uid: 288
+  - uid: 52
     components:
     - type: Transform
       pos: 29.5,12.5
       parent: 1
-  - uid: 289
+  - uid: 53
     components:
     - type: Transform
       pos: 34.5,13.5
       parent: 1
-  - uid: 290
+  - uid: 54
     components:
     - type: Transform
       pos: 34.5,12.5
       parent: 1
 - proto: CMChair
   entities:
-  - uid: 485
+  - uid: 55
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 6.5,8.5
       parent: 1
-  - uid: 486
+  - uid: 56
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,7.5
       parent: 1
-  - uid: 487
+  - uid: 57
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,7.5
       parent: 1
-  - uid: 488
+  - uid: 58
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -524,7 +1809,7 @@ entities:
       parent: 1
 - proto: CMChairFolded
   entities:
-  - uid: 489
+  - uid: 59
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -532,13 +1817,13 @@ entities:
       parent: 1
 - proto: CMChairOfficeWhite
   entities:
-  - uid: 396
+  - uid: 60
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,21.5
       parent: 1
-  - uid: 397
+  - uid: 61
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -546,19 +1831,19 @@ entities:
       parent: 1
 - proto: CMClipboard
   entities:
-  - uid: 448
+  - uid: 62
     components:
     - type: Transform
       pos: 17.303434,23.572382
       parent: 1
-  - uid: 449
+  - uid: 63
     components:
     - type: Transform
       pos: 30.308805,20.60002
       parent: 1
 - proto: CMClosetBase
   entities:
-  - uid: 386
+  - uid: 64
     components:
     - type: Transform
       pos: 20.5,21.5
@@ -569,15 +1854,15 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 387
-          - 388
-          - 389
-          - 390
+          - 65
+          - 66
+          - 67
+          - 68
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-  - uid: 391
+  - uid: 69
     components:
     - type: Transform
       pos: 21.5,21.5
@@ -588,24 +1873,24 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 392
-          - 393
-          - 394
-          - 395
+          - 70
+          - 71
+          - 72
+          - 73
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: CMDoubleDoorPersonalSolid
   entities:
-  - uid: 348
+  - uid: 74
     components:
     - type: MetaData
       name: Airlock
     - type: Transform
       pos: 28.5,13.5
       parent: 1
-  - uid: 349
+  - uid: 75
     components:
     - type: MetaData
       name: Airlock
@@ -613,14 +1898,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: 28.5,12.5
       parent: 1
-  - uid: 350
+  - uid: 76
     components:
     - type: MetaData
       name: Airlock
     - type: Transform
       pos: 35.5,13.5
       parent: 1
-  - uid: 351
+  - uid: 77
     components:
     - type: MetaData
       name: Airlock
@@ -630,222 +1915,222 @@ entities:
       parent: 1
 - proto: CMDrinkCanBeerLite
   entities:
-  - uid: 490
+  - uid: 78
     components:
     - type: Transform
       pos: 7.3766336,9.279356
       parent: 1
-  - uid: 491
+  - uid: 79
     components:
     - type: Transform
       pos: 7.6422586,9.560606
       parent: 1
-  - uid: 492
+  - uid: 80
     components:
     - type: Transform
       pos: 7.8297586,9.357481
       parent: 1
 - proto: CMFax
   entities:
-  - uid: 413
+  - uid: 81
     components:
     - type: Transform
       pos: 33.5,20.5
       parent: 1
 - proto: CMFence
   entities:
-  - uid: 323
+  - uid: 82
     components:
     - type: Transform
       pos: 4.5,14.5
       parent: 1
-  - uid: 324
+  - uid: 83
     components:
     - type: Transform
       pos: 5.5,14.5
       parent: 1
-  - uid: 325
+  - uid: 84
     components:
     - type: Transform
       pos: 6.5,14.5
       parent: 1
-  - uid: 326
+  - uid: 85
     components:
     - type: Transform
       pos: 7.5,14.5
       parent: 1
-  - uid: 327
+  - uid: 86
     components:
     - type: Transform
       pos: 8.5,14.5
       parent: 1
-  - uid: 328
+  - uid: 87
     components:
     - type: Transform
       pos: 10.5,14.5
       parent: 1
-  - uid: 329
+  - uid: 88
     components:
     - type: Transform
       pos: 11.5,14.5
       parent: 1
-  - uid: 330
+  - uid: 89
     components:
     - type: Transform
       pos: 12.5,14.5
       parent: 1
-  - uid: 331
+  - uid: 90
     components:
     - type: Transform
       pos: 13.5,14.5
       parent: 1
-  - uid: 332
+  - uid: 91
     components:
     - type: Transform
       pos: 14.5,14.5
       parent: 1
-  - uid: 333
+  - uid: 92
     components:
     - type: Transform
       pos: 15.5,18.5
       parent: 1
-  - uid: 334
+  - uid: 93
     components:
     - type: Transform
       pos: 15.5,17.5
       parent: 1
-  - uid: 335
+  - uid: 94
     components:
     - type: Transform
       pos: 15.5,16.5
       parent: 1
-  - uid: 336
+  - uid: 95
     components:
     - type: Transform
       pos: 15.5,15.5
       parent: 1
-  - uid: 337
+  - uid: 96
     components:
     - type: Transform
       pos: 15.5,19.5
       parent: 1
 - proto: CMFirstAidKitFilled
   entities:
-  - uid: 584
+  - uid: 97
     components:
     - type: Transform
       pos: 22.5,15.5
       parent: 1
 - proto: CMLightFixture
   entities:
-  - uid: 424
+  - uid: 98
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,13.5
       parent: 1
-  - uid: 425
+  - uid: 99
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,13.5
       parent: 1
-  - uid: 426
+  - uid: 100
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 15.5,13.5
       parent: 1
-  - uid: 427
+  - uid: 101
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,14.5
       parent: 1
-  - uid: 428
+  - uid: 102
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,19.5
       parent: 1
-  - uid: 429
+  - uid: 103
     components:
     - type: Transform
       pos: 18.5,21.5
       parent: 1
-  - uid: 430
+  - uid: 104
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,23.5
       parent: 1
-  - uid: 431
+  - uid: 105
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 21.5,23.5
       parent: 1
-  - uid: 432
+  - uid: 106
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 17.5,27.5
       parent: 1
-  - uid: 433
+  - uid: 107
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,27.5
       parent: 1
-  - uid: 434
+  - uid: 108
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,27.5
       parent: 1
-  - uid: 435
+  - uid: 109
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,19.5
       parent: 1
-  - uid: 436
+  - uid: 110
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,15.5
       parent: 1
-  - uid: 437
+  - uid: 111
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,19.5
       parent: 1
-  - uid: 438
+  - uid: 112
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,15.5
       parent: 1
-  - uid: 439
+  - uid: 113
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 29.5,10.5
       parent: 1
-  - uid: 440
+  - uid: 114
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 30.5,7.5
       parent: 1
-  - uid: 441
+  - uid: 115
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,10.5
       parent: 1
-  - uid: 442
+  - uid: 116
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -853,103 +2138,103 @@ entities:
       parent: 1
 - proto: CMMaskGasMedical
   entities:
-  - uid: 462
+  - uid: 117
     components:
     - type: Transform
       pos: 20.5,17.5
       parent: 1
 - proto: CMOperatingTable
   entities:
-  - uid: 460
+  - uid: 118
     components:
     - type: Transform
       pos: 20.5,17.5
       parent: 1
 - proto: CMPaperBin30
   entities:
-  - uid: 450
+  - uid: 119
     components:
     - type: Transform
       pos: 30.76193,20.72502
       parent: 1
-  - uid: 451
+  - uid: 120
     components:
     - type: Transform
       pos: 17.74174,23.713129
       parent: 1
 - proto: CMPen
   entities:
-  - uid: 452
+  - uid: 121
     components:
     - type: Transform
       pos: 17.694864,23.635004
       parent: 1
-  - uid: 453
+  - uid: 122
     components:
     - type: Transform
       pos: 30.71049,20.619379
       parent: 1
 - proto: CMRack
   entities:
-  - uid: 374
+  - uid: 123
     components:
     - type: Transform
       pos: 15.5,7.5
       parent: 1
-  - uid: 375
+  - uid: 124
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
-  - uid: 376
+  - uid: 125
     components:
     - type: Transform
       pos: 18.5,5.5
       parent: 1
-  - uid: 377
+  - uid: 126
     components:
     - type: Transform
       pos: 20.5,7.5
       parent: 1
-  - uid: 378
+  - uid: 127
     components:
     - type: Transform
       pos: 21.5,7.5
       parent: 1
-  - uid: 379
+  - uid: 128
     components:
     - type: Transform
       pos: 21.5,5.5
       parent: 1
-  - uid: 380
+  - uid: 129
     components:
     - type: Transform
       pos: 16.5,23.5
       parent: 1
-  - uid: 381
+  - uid: 130
     components:
     - type: Transform
       pos: 20.5,23.5
       parent: 1
-  - uid: 463
+  - uid: 131
     components:
     - type: Transform
       pos: 22.5,15.5
       parent: 1
-  - uid: 464
+  - uid: 132
     components:
     - type: Transform
       pos: 22.5,16.5
       parent: 1
 - proto: CMSeatPilot
   entities:
-  - uid: 404
+  - uid: 133
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 31.5,19.5
       parent: 1
-  - uid: 405
+  - uid: 134
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -957,39 +2242,81 @@ entities:
       parent: 1
 - proto: CMSheetMetal40
   entities:
-  - uid: 580
+  - uid: 135
     components:
     - type: Transform
       pos: 19.5,7.5
       parent: 1
 - proto: CMSheetPlasteel40
   entities:
-  - uid: 579
+  - uid: 136
     components:
     - type: Transform
       pos: 15.5,5.5
       parent: 1
+- proto: CMSpawnPointSurvivorCLFSoldier
+  entities:
+  - uid: 137
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 17.5,6.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      pos: 21.5,8.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 24.5,26.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 30.5,10.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 18.5,22.5
+      parent: 1
 - proto: CMTable
   entities:
-  - uid: 368
+  - uid: 145
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,9.5
       parent: 1
-  - uid: 369
+  - uid: 146
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,9.5
       parent: 1
-  - uid: 370
+  - uid: 147
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,8.5
       parent: 1
-  - uid: 371
+  - uid: 148
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -997,154 +2324,154 @@ entities:
       parent: 1
 - proto: CMVendorElectronics
   entities:
-  - uid: 534
+  - uid: 149
     components:
     - type: Transform
       pos: 30.5,12.5
       parent: 1
 - proto: CMWebbing
   entities:
-  - uid: 531
+  - uid: 151
     components:
     - type: Transform
-      parent: 530
+      parent: 150
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 532
+  - uid: 152
     components:
     - type: Transform
-      parent: 530
+      parent: 150
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 533
+  - uid: 153
     components:
     - type: Transform
-      parent: 530
+      parent: 150
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentBarrelCharger
   entities:
-  - uid: 537
+  - uid: 155
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentExtendedBarrel
   entities:
-  - uid: 551
+  - uid: 162
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 552
+  - uid: 163
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentFlashlightGrip
   entities:
-  - uid: 548
+  - uid: 164
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 549
+  - uid: 165
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 550
+  - uid: 166
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentMiniFlamethrower
   entities:
-  - uid: 538
+  - uid: 156
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 556
+  - uid: 167
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentRecoilCompensator
   entities:
-  - uid: 553
+  - uid: 168
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 554
+  - uid: 169
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 555
+  - uid: 170
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCAttachmentVerticalGrip
   entities:
-  - uid: 539
+  - uid: 157
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 540
+  - uid: 158
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 557
+  - uid: 171
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 558
+  - uid: 172
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCBannerCLF
   entities:
-  - uid: 406
+  - uid: 176
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -1152,107 +2479,107 @@ entities:
       parent: 1
 - proto: RMCBarrelBlue
   entities:
-  - uid: 565
+  - uid: 177
     components:
     - type: Transform
       pos: 13.5,5.5
       parent: 1
 - proto: RMCBarrelGreen
   entities:
-  - uid: 502
+  - uid: 178
     components:
     - type: Transform
       pos: 13.5,8.5
       parent: 1
-  - uid: 503
+  - uid: 179
     components:
     - type: Transform
       pos: 13.5,7.5
       parent: 1
 - proto: RMCBarrelRed
   entities:
-  - uid: 499
+  - uid: 180
     components:
     - type: Transform
       pos: 6.5,2.5
       parent: 1
 - proto: RMCBarrelWhite
   entities:
-  - uid: 504
+  - uid: 181
     components:
     - type: Transform
       pos: 19.5,4.5
       parent: 1
 - proto: RMCBarrelYellow
   entities:
-  - uid: 497
+  - uid: 182
     components:
     - type: Transform
       pos: 7.5,2.5
       parent: 1
-  - uid: 498
+  - uid: 183
     components:
     - type: Transform
       pos: 7.5,3.5
       parent: 1
 - proto: RMCBoulder2
   entities:
-  - uid: 418
+  - uid: 184
     components:
     - type: Transform
       pos: 2.5,10.5
       parent: 1
-  - uid: 419
+  - uid: 185
     components:
     - type: Transform
       pos: 0.5,22.5
       parent: 1
-  - uid: 422
+  - uid: 186
     components:
     - type: Transform
       pos: 23.5,24.5
       parent: 1
 - proto: RMCBoulderWide
   entities:
-  - uid: 420
+  - uid: 187
     components:
     - type: Transform
       pos: 4.9491405,30.5
       parent: 1
-  - uid: 421
+  - uid: 188
     components:
     - type: Transform
       pos: 10.968807,25.5
       parent: 1
 - proto: RMCBoxMRE
   entities:
-  - uid: 495
+  - uid: 189
     components:
     - type: Transform
       pos: 7.5797586,8.685606
       parent: 1
 - proto: RMCBoxShotgunIncendiary
   entities:
-  - uid: 493
+  - uid: 190
     components:
     - type: Transform
       pos: 8.345384,9.357481
       parent: 1
-  - uid: 494
+  - uid: 191
     components:
     - type: Transform
       pos: 8.501634,9.591856
       parent: 1
 - proto: RMCColonyLiberationFrontCup
   entities:
-  - uid: 621
+  - uid: 192
     components:
     - type: Transform
       pos: 32.968674,20.576042
       parent: 1
 - proto: RMCCrateAmmo
   entities:
-  - uid: 535
+  - uid: 154
     components:
     - type: Transform
       pos: 31.5,14.5
@@ -1263,19 +2590,19 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 536
-          - 537
-          - 538
-          - 539
-          - 540
-          - 541
+          - 159
+          - 155
+          - 156
+          - 157
+          - 158
+          - 160
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCCrateAmmoAlt
   entities:
-  - uid: 542
+  - uid: 193
     components:
     - type: Transform
       pos: 30.5,14.5
@@ -1286,16 +2613,16 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 543
-          - 544
-          - 545
+          - 194
+          - 195
+          - 196
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCCrateAmmoAlt2
   entities:
-  - uid: 520
+  - uid: 197
     components:
     - type: Transform
       pos: 33.5,11.5
@@ -1306,21 +2633,21 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 521
-          - 522
-          - 523
-          - 524
-          - 525
-          - 526
-          - 527
-          - 528
+          - 198
+          - 199
+          - 200
+          - 201
+          - 202
+          - 203
+          - 204
+          - 205
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCCrateBase
   entities:
-  - uid: 530
+  - uid: 150
     components:
     - type: Transform
       pos: 32.5,12.5
@@ -1331,33 +2658,33 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 531
-          - 532
-          - 533
+          - 151
+          - 152
+          - 153
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-  - uid: 562
+  - uid: 206
     components:
     - type: Transform
       pos: 15.5,5.5
       parent: 1
-  - uid: 563
+  - uid: 207
     components:
     - type: Transform
       pos: 19.5,7.5
       parent: 1
 - proto: RMCCrateConstruction
   entities:
-  - uid: 561
+  - uid: 208
     components:
     - type: Transform
       pos: 31.5,13.5
       parent: 1
 - proto: RMCCrateFreezer
   entities:
-  - uid: 514
+  - uid: 209
     components:
     - type: Transform
       pos: 32.5,14.5
@@ -1368,18 +2695,18 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 515
-          - 516
-          - 517
-          - 518
-          - 519
+          - 210
+          - 211
+          - 212
+          - 213
+          - 214
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCCrateGreen
   entities:
-  - uid: 546
+  - uid: 161
     components:
     - type: Transform
       pos: 33.5,13.5
@@ -1390,348 +2717,348 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 547
-          - 548
-          - 549
-          - 550
-          - 551
-          - 552
-          - 553
-          - 554
-          - 555
-          - 556
-          - 557
-          - 558
-          - 559
-          - 560
+          - 173
+          - 164
+          - 165
+          - 166
+          - 162
+          - 163
+          - 168
+          - 169
+          - 170
+          - 167
+          - 171
+          - 172
+          - 174
+          - 175
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCCrateLarge
   entities:
-  - uid: 481
+  - uid: 215
     components:
     - type: Transform
       pos: 3.5,8.5
       parent: 1
-  - uid: 482
+  - uid: 216
     components:
     - type: Transform
       pos: 14.5,7.5
       parent: 1
-  - uid: 483
+  - uid: 217
     components:
     - type: Transform
       pos: 19.5,8.5
       parent: 1
-  - uid: 484
+  - uid: 218
     components:
     - type: Transform
       pos: 20.5,5.5
       parent: 1
 - proto: RMCCrateWoodenBuildable
   entities:
-  - uid: 529
+  - uid: 219
     components:
     - type: Transform
       pos: 31.5,12.5
       parent: 1
 - proto: RMCERTShuttleEngineLeft01
   entities:
-  - uid: 271
+  - uid: 220
     components:
     - type: Transform
       pos: 28.5,6.5
       parent: 1
 - proto: RMCERTShuttleEngineLeft02
   entities:
-  - uid: 270
+  - uid: 221
     components:
     - type: Transform
       pos: 28.5,7.5
       parent: 1
 - proto: RMCERTShuttleEngineLeft03
   entities:
-  - uid: 269
+  - uid: 222
     components:
     - type: Transform
       pos: 28.5,8.5
       parent: 1
 - proto: RMCERTShuttleEngineRight01
   entities:
-  - uid: 274
+  - uid: 223
     components:
     - type: Transform
       pos: 35.5,6.5
       parent: 1
 - proto: RMCERTShuttleEngineRight02
   entities:
-  - uid: 273
+  - uid: 224
     components:
     - type: Transform
       pos: 35.5,7.5
       parent: 1
 - proto: RMCERTShuttleEngineRight03
   entities:
-  - uid: 272
+  - uid: 225
     components:
     - type: Transform
       pos: 35.5,8.5
       parent: 1
 - proto: RMCERTShuttleWallStandard07
   entities:
-  - uid: 237
+  - uid: 226
     components:
     - type: Transform
       pos: 29.5,16.5
       parent: 1
-  - uid: 238
+  - uid: 227
     components:
     - type: Transform
       pos: 30.5,16.5
       parent: 1
-  - uid: 239
+  - uid: 228
     components:
     - type: Transform
       pos: 33.5,16.5
       parent: 1
-  - uid: 240
+  - uid: 229
     components:
     - type: Transform
       pos: 34.5,16.5
       parent: 1
 - proto: RMCERTShuttleWallStandard09
   entities:
-  - uid: 268
+  - uid: 230
     components:
     - type: Transform
       pos: 35.5,16.5
       parent: 1
 - proto: RMCERTShuttleWallStandard10
   entities:
-  - uid: 267
+  - uid: 231
     components:
     - type: Transform
       pos: 28.5,16.5
       parent: 1
 - proto: RMCERTShuttleWallStandard12
   entities:
-  - uid: 248
+  - uid: 232
     components:
     - type: Transform
       pos: 29.5,6.5
       parent: 1
 - proto: RMCERTShuttleWallStandard14
   entities:
-  - uid: 247
+  - uid: 233
     components:
     - type: Transform
       pos: 34.5,6.5
       parent: 1
 - proto: RMCERTShuttleWallStandard15
   entities:
-  - uid: 251
+  - uid: 234
     components:
     - type: Transform
       pos: 28.5,19.5
       parent: 1
-  - uid: 252
+  - uid: 235
     components:
     - type: Transform
       pos: 28.5,17.5
       parent: 1
-  - uid: 253
+  - uid: 236
     components:
     - type: Transform
       pos: 28.5,15.5
       parent: 1
-  - uid: 254
+  - uid: 237
     components:
     - type: Transform
       pos: 28.5,14.5
       parent: 1
-  - uid: 255
+  - uid: 238
     components:
     - type: Transform
       pos: 28.5,11.5
       parent: 1
-  - uid: 256
+  - uid: 239
     components:
     - type: Transform
       pos: 28.5,10.5
       parent: 1
-  - uid: 257
+  - uid: 240
     components:
     - type: Transform
       pos: 29.5,8.5
       parent: 1
-  - uid: 258
+  - uid: 241
     components:
     - type: Transform
       pos: 29.5,7.5
       parent: 1
 - proto: RMCERTShuttleWallStandard16
   entities:
-  - uid: 259
+  - uid: 242
     components:
     - type: Transform
       pos: 35.5,19.5
       parent: 1
-  - uid: 260
+  - uid: 243
     components:
     - type: Transform
       pos: 35.5,17.5
       parent: 1
-  - uid: 261
+  - uid: 244
     components:
     - type: Transform
       pos: 35.5,15.5
       parent: 1
-  - uid: 262
+  - uid: 245
     components:
     - type: Transform
       pos: 35.5,14.5
       parent: 1
-  - uid: 263
+  - uid: 246
     components:
     - type: Transform
       pos: 35.5,11.5
       parent: 1
-  - uid: 264
+  - uid: 247
     components:
     - type: Transform
       pos: 35.5,10.5
       parent: 1
-  - uid: 265
+  - uid: 248
     components:
     - type: Transform
       pos: 34.5,8.5
       parent: 1
-  - uid: 266
+  - uid: 249
     components:
     - type: Transform
       pos: 34.5,7.5
       parent: 1
 - proto: RMCERTShuttleWallStandard17
   entities:
-  - uid: 249
+  - uid: 250
     components:
     - type: Transform
       pos: 29.5,9.5
       parent: 1
 - proto: RMCERTShuttleWallStandard18
   entities:
-  - uid: 250
+  - uid: 251
     components:
     - type: Transform
       pos: 34.5,9.5
       parent: 1
 - proto: RMCERTShuttleWallStandard19
   entities:
-  - uid: 243
+  - uid: 252
     components:
     - type: Transform
       pos: 29.5,21.5
       parent: 1
-  - uid: 244
+  - uid: 253
     components:
     - type: Transform
       pos: 28.5,20.5
       parent: 1
 - proto: RMCERTShuttleWallStandard20
   entities:
-  - uid: 235
+  - uid: 254
     components:
     - type: Transform
       pos: 30.5,21.5
       parent: 1
-  - uid: 236
+  - uid: 255
     components:
     - type: Transform
       pos: 33.5,21.5
       parent: 1
 - proto: RMCERTShuttleWallStandard21
   entities:
-  - uid: 241
+  - uid: 256
     components:
     - type: Transform
       pos: 29.5,20.5
       parent: 1
 - proto: RMCERTShuttleWallStandard22
   entities:
-  - uid: 242
+  - uid: 257
     components:
     - type: Transform
       pos: 34.5,20.5
       parent: 1
 - proto: RMCERTShuttleWallStandard23
   entities:
-  - uid: 245
+  - uid: 258
     components:
     - type: Transform
       pos: 34.5,21.5
       parent: 1
-  - uid: 246
+  - uid: 259
     components:
     - type: Transform
       pos: 35.5,20.5
       parent: 1
 - proto: RMCERTShuttleWallStandard24
   entities:
-  - uid: 233
+  - uid: 260
     components:
     - type: Transform
       pos: 31.5,21.5
       parent: 1
-  - uid: 234
+  - uid: 261
     components:
     - type: Transform
       pos: 32.5,21.5
       parent: 1
 - proto: RMCERTShuttleWallStandardEngineLeft
   entities:
-  - uid: 275
+  - uid: 262
     components:
     - type: Transform
       pos: 28.5,9.5
       parent: 1
 - proto: RMCERTShuttleWallStandardEngineRight
   entities:
-  - uid: 276
+  - uid: 263
     components:
     - type: Transform
       pos: 35.5,9.5
       parent: 1
 - proto: RMCFoodPacketKeplerCrispsTrash
   entities:
-  - uid: 598
+  - uid: 264
     components:
     - type: Transform
       pos: 16.361887,22.19712
       parent: 1
 - proto: RMCFoodSnackKeplarFlamehotCrisps
   entities:
-  - uid: 599
+  - uid: 265
     components:
     - type: Transform
       pos: 16.705637,22.618996
       parent: 1
 - proto: RMCGrassTallCornerDesert
   entities:
-  - uid: 610
+  - uid: 266
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,5.5
       parent: 1
-  - uid: 611
+  - uid: 267
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4.5,4.5
       parent: 1
-  - uid: 612
+  - uid: 268
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -1739,39 +3066,39 @@ entities:
       parent: 1
 - proto: RMCGrassTallDesert
   entities:
-  - uid: 603
+  - uid: 269
     components:
     - type: Transform
       pos: 2.5,4.5
       parent: 1
-  - uid: 604
+  - uid: 270
     components:
     - type: Transform
       pos: 3.5,4.5
       parent: 1
-  - uid: 605
+  - uid: 271
     components:
     - type: Transform
       pos: 3.5,3.5
       parent: 1
-  - uid: 606
+  - uid: 272
     components:
     - type: Transform
       pos: 4.5,3.5
       parent: 1
-  - uid: 607
+  - uid: 273
     components:
     - type: Transform
       pos: 4.5,2.5
       parent: 1
 - proto: RMCGrassTallSidesDesert
   entities:
-  - uid: 608
+  - uid: 274
     components:
     - type: Transform
       pos: 2.5,5.5
       parent: 1
-  - uid: 609
+  - uid: 275
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -1779,30 +3106,30 @@ entities:
       parent: 1
 - proto: RMCHandcuffs
   entities:
-  - uid: 383
+  - uid: 39
     components:
     - type: Transform
-      parent: 382
+      parent: 37
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 384
+  - uid: 40
     components:
     - type: Transform
-      parent: 382
+      parent: 37
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCIdentificationComputer
   entities:
-  - uid: 410
+  - uid: 276
     components:
     - type: Transform
       pos: 19.5,23.5
       parent: 1
 - proto: RMCLockerPoliceSoro
   entities:
-  - uid: 382
+  - uid: 37
     components:
     - type: Transform
       pos: 21.5,23.5
@@ -1813,276 +3140,276 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 383
-          - 384
-          - 385
+          - 39
+          - 40
+          - 38
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
 - proto: RMCM5Bayonet
   entities:
-  - uid: 536
+  - uid: 159
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 541
+  - uid: 160
     components:
     - type: Transform
-      parent: 535
+      parent: 154
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 547
+  - uid: 173
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 559
+  - uid: 174
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 560
+  - uid: 175
     components:
     - type: Transform
-      parent: 546
+      parent: 161
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCMagazineMar50LMG
   entities:
-  - uid: 543
+  - uid: 194
     components:
     - type: Transform
-      parent: 542
+      parent: 193
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 544
+  - uid: 195
     components:
     - type: Transform
-      parent: 542
+      parent: 193
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 545
+  - uid: 196
     components:
     - type: Transform
-      parent: 542
+      parent: 193
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCMagazinePistolHandcannon
   entities:
-  - uid: 614
+  - uid: 277
     components:
     - type: Transform
       pos: 8.47354,8.5638075
       parent: 1
-  - uid: 615
+  - uid: 278
     components:
     - type: Transform
       pos: 8.47354,8.5638075
       parent: 1
-  - uid: 616
+  - uid: 279
     components:
     - type: Transform
       pos: 8.47354,8.5638075
       parent: 1
-  - uid: 617
+  - uid: 280
     components:
     - type: Transform
       pos: 8.47354,8.5638075
       parent: 1
 - proto: RMCMagazineRifleM16
   entities:
-  - uid: 521
+  - uid: 198
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 522
+  - uid: 199
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 523
+  - uid: 200
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 524
+  - uid: 201
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 525
+  - uid: 202
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 526
+  - uid: 203
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 527
+  - uid: 204
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 528
+  - uid: 205
     components:
     - type: Transform
-      parent: 520
+      parent: 197
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCMagazineRifleMAR40
   entities:
-  - uid: 515
+  - uid: 210
     components:
     - type: Transform
-      parent: 514
+      parent: 209
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 516
+  - uid: 211
     components:
     - type: Transform
-      parent: 514
+      parent: 209
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 517
+  - uid: 212
     components:
     - type: Transform
-      parent: 514
+      parent: 209
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 518
+  - uid: 213
     components:
     - type: Transform
-      parent: 514
+      parent: 209
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 519
+  - uid: 214
     components:
     - type: Transform
-      parent: 514
+      parent: 209
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 567
+  - uid: 281
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
-  - uid: 568
+  - uid: 282
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
-  - uid: 569
+  - uid: 283
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
-  - uid: 570
+  - uid: 284
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
-  - uid: 571
+  - uid: 285
     components:
     - type: Transform
       pos: 15.5,8.5
       parent: 1
 - proto: RMCMagazineSMGFP9000
   entities:
-  - uid: 387
+  - uid: 65
     components:
     - type: Transform
-      parent: 386
+      parent: 64
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 388
+  - uid: 66
     components:
     - type: Transform
-      parent: 386
+      parent: 64
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 389
+  - uid: 67
     components:
     - type: Transform
-      parent: 386
+      parent: 64
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 392
+  - uid: 70
     components:
     - type: Transform
-      parent: 391
+      parent: 69
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 393
+  - uid: 71
     components:
     - type: Transform
-      parent: 391
+      parent: 69
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 394
+  - uid: 72
     components:
     - type: Transform
-      parent: 391
+      parent: 69
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCMechPowerLoader
   entities:
-  - uid: 496
+  - uid: 286
     components:
     - type: Transform
       pos: 3.5641336,9.919981
       parent: 1
 - proto: RMCNanoMed
   entities:
-  - uid: 407
+  - uid: 287
     components:
     - type: Transform
       pos: 29.5,16.5
       parent: 1
 - proto: RMCPodDoorAlmayer
   entities:
-  - uid: 352
+  - uid: 288
     components:
     - type: MetaData
       name: Umbilical Airlock
@@ -2092,7 +3419,7 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: clf_umbilical_1
-  - uid: 353
+  - uid: 289
     components:
     - type: MetaData
       name: Umbilical Airlock
@@ -2102,7 +3429,7 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: clf_umbilical_1
-  - uid: 354
+  - uid: 290
     components:
     - type: MetaData
       name: Umbilical Airlock
@@ -2112,7 +3439,7 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: clf_umbilical_1
-  - uid: 355
+  - uid: 291
     components:
     - type: MetaData
       name: Umbilical Airlock
@@ -2124,39 +3451,39 @@ entities:
       id: clf_umbilical_1
 - proto: RMCPodDoorButtonBigRed
   entities:
-  - uid: 408
+  - uid: 292
     components:
     - type: MetaData
       name: Landing Zone Shutter Override
-    - type: RMCDoorButton
-      id: kutjevo_clf_lz
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,23.5
       parent: 1
+    - type: RMCDoorButton
+      id: kutjevo_clf_lz
     - type: Fixtures
       fixtures: {}
-  - uid: 409
+  - uid: 293
     components:
     - type: MetaData
       name: remote door-control
-    - type: RMCDoorButton
-      id: clf_umbilical_1
     - type: Transform
       pos: 30.5,16.5
       parent: 1
+    - type: RMCDoorButton
+      id: clf_umbilical_1
     - type: Fixtures
       fixtures: {}
 - proto: RMCPropCommunicationsConsole
   entities:
-  - uid: 412
+  - uid: 294
     components:
     - type: Transform
       pos: 31.5,20.5
       parent: 1
 - proto: RMCPropVehicleCargoCrane
   entities:
-  - uid: 372
+  - uid: 295
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2164,7 +3491,7 @@ entities:
       parent: 1
 - proto: RMCPropVehicleCargoCraneCargo
   entities:
-  - uid: 373
+  - uid: 296
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2172,37 +3499,37 @@ entities:
       parent: 1
 - proto: RMCSeatWhite
   entities:
-  - uid: 398
+  - uid: 297
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 29.5,19.5
       parent: 1
-  - uid: 399
+  - uid: 298
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,19.5
       parent: 1
-  - uid: 400
+  - uid: 299
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,17.5
       parent: 1
-  - uid: 401
+  - uid: 300
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 30.5,17.5
       parent: 1
-  - uid: 402
+  - uid: 301
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 33.5,17.5
       parent: 1
-  - uid: 403
+  - uid: 302
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -2210,58 +3537,58 @@ entities:
       parent: 1
 - proto: RMCSecureCase
   entities:
-  - uid: 512
+  - uid: 303
     components:
     - type: Transform
       pos: 30.5,11.5
       parent: 1
-  - uid: 513
+  - uid: 304
     components:
     - type: Transform
       pos: 32.5,13.5
       parent: 1
 - proto: RMCSecureCaseDouble
   entities:
-  - uid: 509
+  - uid: 305
     components:
     - type: Transform
       pos: 12.5,8.5
       parent: 1
-  - uid: 510
+  - uid: 306
     components:
     - type: Transform
       pos: 13.5,4.5
       parent: 1
-  - uid: 511
+  - uid: 307
     components:
     - type: Transform
       pos: 16.5,5.5
       parent: 1
 - proto: RMCSecureCaseStrapped
   entities:
-  - uid: 505
+  - uid: 308
     components:
     - type: Transform
       pos: 19.5,5.5
       parent: 1
-  - uid: 506
+  - uid: 309
     components:
     - type: Transform
       pos: 14.5,8.5
       parent: 1
-  - uid: 507
+  - uid: 310
     components:
     - type: Transform
       pos: 30.5,13.5
       parent: 1
-  - uid: 508
+  - uid: 311
     components:
     - type: Transform
       pos: 33.5,12.5
       parent: 1
 - proto: RMCSecurityCameraConsole
   entities:
-  - uid: 423
+  - uid: 312
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2269,7 +3596,7 @@ entities:
       parent: 1
 - proto: RMCShutterAlmayer
   entities:
-  - uid: 356
+  - uid: 313
     components:
     - type: MetaData
       name: Landing Zone Shutters
@@ -2279,7 +3606,7 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: kutjevo_clf_lz
-  - uid: 357
+  - uid: 314
     components:
     - type: MetaData
       name: Landing Zone Shutters
@@ -2289,7 +3616,7 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: kutjevo_clf_lz
-  - uid: 358
+  - uid: 315
     components:
     - type: MetaData
       name: Landing Zone Shutters
@@ -2301,158 +3628,116 @@ entities:
       id: kutjevo_clf_lz
 - proto: RMCSmallFloodlight
   entities:
-  - uid: 443
+  - uid: 316
     components:
     - type: Transform
       pos: 26.5,4.5
       parent: 1
-  - uid: 444
+  - uid: 317
     components:
     - type: Transform
       pos: 37.5,4.5
       parent: 1
-  - uid: 445
+  - uid: 318
     components:
     - type: Transform
       pos: 26.5,23.5
       parent: 1
-  - uid: 446
+  - uid: 319
     components:
     - type: Transform
       pos: 37.5,23.5
       parent: 1
 - proto: RMCSpawnerRandomToolbox
   entities:
-  - uid: 447
+  - uid: 320
     components:
     - type: Transform
       pos: 16.5,23.5
       parent: 1
-  - uid: 578
+  - uid: 321
     components:
     - type: Transform
       pos: 19.5,7.5
       parent: 1
 - proto: RMCSpawnerRandomTools
   entities:
-  - uid: 577
+  - uid: 322
     components:
     - type: Transform
       pos: 15.5,5.5
       parent: 1
-- proto: CMSpawnPointSurvivorCLFSoldier
-  entities:
-  - uid: 590
-    components:
-    - type: Transform
-      pos: 15.5,9.5
-      parent: 1
-  - uid: 591
-    components:
-    - type: Transform
-      pos: 17.5,6.5
-      parent: 1
-  - uid: 592
-    components:
-    - type: Transform
-      pos: 21.5,8.5
-      parent: 1
-  - uid: 593
-    components:
-    - type: Transform
-      pos: 7.5,10.5
-      parent: 1
-  - uid: 594
-    components:
-    - type: Transform
-      pos: 9.5,8.5
-      parent: 1
-  - uid: 595
-    components:
-    - type: Transform
-      pos: 24.5,26.5
-      parent: 1
-  - uid: 596
-    components:
-    - type: Transform
-      pos: 30.5,10.5
-      parent: 1
-  - uid: 597
-    components:
-    - type: Transform
-      pos: 18.5,22.5
-      parent: 1
 - proto: RMCStationAlertComputer
   entities:
-  - uid: 411
+  - uid: 323
     components:
     - type: Transform
       pos: 32.5,20.5
       parent: 1
 - proto: RMCSurgicalTray
   entities:
-  - uid: 581
+  - uid: 324
     components:
     - type: Transform
       pos: 21.5,17.5
       parent: 1
 - proto: RMCTablePrison
   entities:
-  - uid: 359
+  - uid: 325
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 17.5,23.5
       parent: 1
-  - uid: 360
+  - uid: 326
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 18.5,23.5
       parent: 1
-  - uid: 361
+  - uid: 327
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,23.5
       parent: 1
-  - uid: 362
+  - uid: 328
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 16.5,22.5
       parent: 1
-  - uid: 363
+  - uid: 329
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 16.5,21.5
       parent: 1
-  - uid: 364
+  - uid: 330
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 30.5,20.5
       parent: 1
-  - uid: 365
+  - uid: 331
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 31.5,20.5
       parent: 1
-  - uid: 366
+  - uid: 332
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 32.5,20.5
       parent: 1
-  - uid: 367
+  - uid: 333
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,20.5
       parent: 1
-  - uid: 459
+  - uid: 334
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2460,44 +3745,44 @@ entities:
       parent: 1
 - proto: RMCTankReagentFuel
   entities:
-  - uid: 500
+  - uid: 335
     components:
     - type: Transform
       pos: 12.5,2.5
       parent: 1
-  - uid: 501
+  - uid: 336
     components:
     - type: Transform
       pos: 13.5,2.5
       parent: 1
 - proto: RMCTentBodyStandard
   entities:
-  - uid: 458
+  - uid: 337
     components:
     - type: Transform
       pos: 21.5,17.5
       parent: 1
 - proto: RMCTurretGaussDumbCLF
   entities:
-  - uid: 454
+  - uid: 338
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,25.5
       parent: 1
-  - uid: 618
+  - uid: 339
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,12.5
       parent: 1
-  - uid: 619
+  - uid: 340
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 12.5,12.5
       parent: 1
-  - uid: 620
+  - uid: 341
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2505,1434 +3790,1434 @@ entities:
       parent: 1
 - proto: RMCVendorCigsElectro
   entities:
-  - uid: 564
+  - uid: 342
     components:
     - type: Transform
       pos: 14.5,5.5
       parent: 1
 - proto: RMCWallKutjevo
   entities:
-  - uid: 291
+  - uid: 343
     components:
     - type: Transform
       pos: 17.5,28.5
       parent: 1
-  - uid: 292
+  - uid: 344
     components:
     - type: Transform
       pos: 18.5,28.5
       parent: 1
-  - uid: 293
+  - uid: 345
     components:
     - type: Transform
       pos: 19.5,28.5
       parent: 1
-  - uid: 294
+  - uid: 346
     components:
     - type: Transform
       pos: 20.5,28.5
       parent: 1
-  - uid: 295
+  - uid: 347
     components:
     - type: Transform
       pos: 21.5,28.5
       parent: 1
-  - uid: 296
+  - uid: 348
     components:
     - type: Transform
       pos: 22.5,28.5
       parent: 1
-  - uid: 297
+  - uid: 349
     components:
     - type: Transform
       pos: 23.5,28.5
       parent: 1
-  - uid: 298
+  - uid: 350
     components:
     - type: Transform
       pos: 24.5,28.5
       parent: 1
-  - uid: 299
+  - uid: 351
     components:
     - type: Transform
       pos: 25.5,28.5
       parent: 1
-  - uid: 300
+  - uid: 352
     components:
     - type: Transform
       pos: 26.5,28.5
       parent: 1
-  - uid: 301
+  - uid: 353
     components:
     - type: Transform
       pos: 27.5,28.5
       parent: 1
-  - uid: 302
+  - uid: 354
     components:
     - type: Transform
       pos: 28.5,28.5
       parent: 1
-  - uid: 303
+  - uid: 355
     components:
     - type: Transform
       pos: 29.5,28.5
       parent: 1
-  - uid: 304
+  - uid: 356
     components:
     - type: Transform
       pos: 30.5,28.5
       parent: 1
-  - uid: 305
+  - uid: 357
     components:
     - type: Transform
       pos: 31.5,28.5
       parent: 1
-  - uid: 306
+  - uid: 358
     components:
     - type: Transform
       pos: 15.5,24.5
       parent: 1
-  - uid: 307
+  - uid: 359
     components:
     - type: Transform
       pos: 16.5,24.5
       parent: 1
-  - uid: 308
+  - uid: 360
     components:
     - type: Transform
       pos: 22.5,23.5
       parent: 1
-  - uid: 309
+  - uid: 361
     components:
     - type: Transform
       pos: 22.5,24.5
       parent: 1
-  - uid: 310
+  - uid: 362
     components:
     - type: Transform
       pos: 21.5,24.5
       parent: 1
-  - uid: 311
+  - uid: 363
     components:
     - type: Transform
       pos: 20.5,24.5
       parent: 1
-  - uid: 312
+  - uid: 364
     components:
     - type: Transform
       pos: 15.5,20.5
       parent: 1
-  - uid: 313
+  - uid: 365
     components:
     - type: Transform
       pos: 16.5,20.5
       parent: 1
-  - uid: 314
+  - uid: 366
     components:
     - type: Transform
       pos: 17.5,20.5
       parent: 1
-  - uid: 315
+  - uid: 367
     components:
     - type: Transform
       pos: 18.5,20.5
       parent: 1
-  - uid: 316
+  - uid: 368
     components:
     - type: Transform
       pos: 22.5,21.5
       parent: 1
-  - uid: 317
+  - uid: 369
     components:
     - type: Transform
       pos: 22.5,20.5
       parent: 1
-  - uid: 318
+  - uid: 370
     components:
     - type: Transform
       pos: 20.5,20.5
       parent: 1
-  - uid: 319
+  - uid: 371
     components:
     - type: Transform
       pos: 21.5,20.5
       parent: 1
-  - uid: 320
+  - uid: 372
     components:
     - type: Transform
       pos: 15.5,14.5
       parent: 1
-  - uid: 321
+  - uid: 373
     components:
     - type: Transform
       pos: 9.5,14.5
       parent: 1
-  - uid: 322
+  - uid: 374
     components:
     - type: Transform
       pos: 3.5,14.5
       parent: 1
 - proto: RMCWallKutjevoRock
   entities:
-  - uid: 2
+  - uid: 375
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 1
-  - uid: 3
+  - uid: 376
     components:
     - type: Transform
       pos: 0.5,2.5
       parent: 1
-  - uid: 4
+  - uid: 377
     components:
     - type: Transform
       pos: 0.5,3.5
       parent: 1
-  - uid: 5
+  - uid: 378
     components:
     - type: Transform
       pos: 0.5,4.5
       parent: 1
-  - uid: 6
+  - uid: 379
     components:
     - type: Transform
       pos: 0.5,5.5
       parent: 1
-  - uid: 7
+  - uid: 380
     components:
     - type: Transform
       pos: 0.5,6.5
       parent: 1
-  - uid: 8
+  - uid: 381
     components:
     - type: Transform
       pos: 0.5,7.5
       parent: 1
-  - uid: 9
+  - uid: 382
     components:
     - type: Transform
       pos: 0.5,8.5
       parent: 1
-  - uid: 10
+  - uid: 383
     components:
     - type: Transform
       pos: 0.5,9.5
       parent: 1
-  - uid: 11
+  - uid: 384
     components:
     - type: Transform
       pos: 0.5,10.5
       parent: 1
-  - uid: 12
+  - uid: 385
     components:
     - type: Transform
       pos: 1.5,0.5
       parent: 1
-  - uid: 13
+  - uid: 386
     components:
     - type: Transform
       pos: 1.5,1.5
       parent: 1
-  - uid: 14
+  - uid: 387
     components:
     - type: Transform
       pos: 1.5,2.5
       parent: 1
-  - uid: 15
+  - uid: 388
     components:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
-  - uid: 16
+  - uid: 389
     components:
     - type: Transform
       pos: 1.5,4.5
       parent: 1
-  - uid: 17
+  - uid: 390
     components:
     - type: Transform
       pos: 1.5,5.5
       parent: 1
-  - uid: 18
+  - uid: 391
     components:
     - type: Transform
       pos: 1.5,6.5
       parent: 1
-  - uid: 19
+  - uid: 392
     components:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-  - uid: 20
+  - uid: 393
     components:
     - type: Transform
       pos: 1.5,8.5
       parent: 1
-  - uid: 21
+  - uid: 394
     components:
     - type: Transform
       pos: 1.5,9.5
       parent: 1
-  - uid: 22
+  - uid: 395
     components:
     - type: Transform
       pos: 1.5,10.5
       parent: 1
-  - uid: 23
+  - uid: 396
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
-  - uid: 24
+  - uid: 397
     components:
     - type: Transform
       pos: 2.5,0.5
       parent: 1
-  - uid: 25
+  - uid: 398
     components:
     - type: Transform
       pos: 3.5,0.5
       parent: 1
-  - uid: 26
+  - uid: 399
     components:
     - type: Transform
       pos: 4.5,0.5
       parent: 1
-  - uid: 27
+  - uid: 400
     components:
     - type: Transform
       pos: 5.5,0.5
       parent: 1
-  - uid: 28
+  - uid: 401
     components:
     - type: Transform
       pos: 6.5,0.5
       parent: 1
-  - uid: 29
+  - uid: 402
     components:
     - type: Transform
       pos: 7.5,0.5
       parent: 1
-  - uid: 30
+  - uid: 403
     components:
     - type: Transform
       pos: 8.5,0.5
       parent: 1
-  - uid: 31
+  - uid: 404
     components:
     - type: Transform
       pos: 9.5,0.5
       parent: 1
-  - uid: 32
+  - uid: 405
     components:
     - type: Transform
       pos: 10.5,0.5
       parent: 1
-  - uid: 33
+  - uid: 406
     components:
     - type: Transform
       pos: 11.5,0.5
       parent: 1
-  - uid: 34
+  - uid: 407
     components:
     - type: Transform
       pos: 12.5,0.5
       parent: 1
-  - uid: 35
+  - uid: 408
     components:
     - type: Transform
       pos: 13.5,0.5
       parent: 1
-  - uid: 36
+  - uid: 409
     components:
     - type: Transform
       pos: 14.5,0.5
       parent: 1
-  - uid: 37
+  - uid: 410
     components:
     - type: Transform
       pos: 15.5,0.5
       parent: 1
-  - uid: 38
+  - uid: 411
     components:
     - type: Transform
       pos: 16.5,0.5
       parent: 1
-  - uid: 39
+  - uid: 412
     components:
     - type: Transform
       pos: 17.5,0.5
       parent: 1
-  - uid: 40
+  - uid: 413
     components:
     - type: Transform
       pos: 18.5,0.5
       parent: 1
-  - uid: 41
+  - uid: 414
     components:
     - type: Transform
       pos: 19.5,0.5
       parent: 1
-  - uid: 42
+  - uid: 415
     components:
     - type: Transform
       pos: 20.5,0.5
       parent: 1
-  - uid: 43
+  - uid: 416
     components:
     - type: Transform
       pos: 21.5,0.5
       parent: 1
-  - uid: 44
+  - uid: 417
     components:
     - type: Transform
       pos: 22.5,0.5
       parent: 1
-  - uid: 45
+  - uid: 418
     components:
     - type: Transform
       pos: 23.5,0.5
       parent: 1
-  - uid: 46
+  - uid: 419
     components:
     - type: Transform
       pos: 24.5,0.5
       parent: 1
-  - uid: 47
+  - uid: 420
     components:
     - type: Transform
       pos: 25.5,0.5
       parent: 1
-  - uid: 48
+  - uid: 421
     components:
     - type: Transform
       pos: 26.5,0.5
       parent: 1
-  - uid: 49
+  - uid: 422
     components:
     - type: Transform
       pos: 27.5,0.5
       parent: 1
-  - uid: 50
+  - uid: 423
     components:
     - type: Transform
       pos: 28.5,0.5
       parent: 1
-  - uid: 51
+  - uid: 424
     components:
     - type: Transform
       pos: 29.5,0.5
       parent: 1
-  - uid: 52
+  - uid: 425
     components:
     - type: Transform
       pos: 30.5,0.5
       parent: 1
-  - uid: 53
+  - uid: 426
     components:
     - type: Transform
       pos: 31.5,0.5
       parent: 1
-  - uid: 54
+  - uid: 427
     components:
     - type: Transform
       pos: 32.5,0.5
       parent: 1
-  - uid: 55
+  - uid: 428
     components:
     - type: Transform
       pos: 33.5,0.5
       parent: 1
-  - uid: 56
+  - uid: 429
     components:
     - type: Transform
       pos: 34.5,0.5
       parent: 1
-  - uid: 57
+  - uid: 430
     components:
     - type: Transform
       pos: 37.5,0.5
       parent: 1
-  - uid: 58
+  - uid: 431
     components:
     - type: Transform
       pos: 36.5,0.5
       parent: 1
-  - uid: 59
+  - uid: 432
     components:
     - type: Transform
       pos: 38.5,0.5
       parent: 1
-  - uid: 60
+  - uid: 433
     components:
     - type: Transform
       pos: 39.5,0.5
       parent: 1
-  - uid: 61
+  - uid: 434
     components:
     - type: Transform
       pos: 35.5,0.5
       parent: 1
-  - uid: 62
+  - uid: 435
     components:
     - type: Transform
       pos: 2.5,1.5
       parent: 1
-  - uid: 63
+  - uid: 436
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
-  - uid: 64
+  - uid: 437
     components:
     - type: Transform
       pos: 4.5,1.5
       parent: 1
-  - uid: 65
+  - uid: 438
     components:
     - type: Transform
       pos: 5.5,1.5
       parent: 1
-  - uid: 66
+  - uid: 439
     components:
     - type: Transform
       pos: 6.5,1.5
       parent: 1
-  - uid: 67
+  - uid: 440
     components:
     - type: Transform
       pos: 7.5,1.5
       parent: 1
-  - uid: 68
+  - uid: 441
     components:
     - type: Transform
       pos: 8.5,1.5
       parent: 1
-  - uid: 69
+  - uid: 442
     components:
     - type: Transform
       pos: 9.5,1.5
       parent: 1
-  - uid: 70
+  - uid: 443
     components:
     - type: Transform
       pos: 10.5,1.5
       parent: 1
-  - uid: 71
+  - uid: 444
     components:
     - type: Transform
       pos: 11.5,1.5
       parent: 1
-  - uid: 72
+  - uid: 445
     components:
     - type: Transform
       pos: 12.5,1.5
       parent: 1
-  - uid: 73
+  - uid: 446
     components:
     - type: Transform
       pos: 13.5,1.5
       parent: 1
-  - uid: 74
+  - uid: 447
     components:
     - type: Transform
       pos: 14.5,1.5
       parent: 1
-  - uid: 75
+  - uid: 448
     components:
     - type: Transform
       pos: 15.5,1.5
       parent: 1
-  - uid: 76
+  - uid: 449
     components:
     - type: Transform
       pos: 16.5,1.5
       parent: 1
-  - uid: 77
+  - uid: 450
     components:
     - type: Transform
       pos: 17.5,1.5
       parent: 1
-  - uid: 78
+  - uid: 451
     components:
     - type: Transform
       pos: 20.5,1.5
       parent: 1
-  - uid: 79
+  - uid: 452
     components:
     - type: Transform
       pos: 23.5,1.5
       parent: 1
-  - uid: 80
+  - uid: 453
     components:
     - type: Transform
       pos: 25.5,1.5
       parent: 1
-  - uid: 81
+  - uid: 454
     components:
     - type: Transform
       pos: 26.5,1.5
       parent: 1
-  - uid: 82
+  - uid: 455
     components:
     - type: Transform
       pos: 24.5,1.5
       parent: 1
-  - uid: 83
+  - uid: 456
     components:
     - type: Transform
       pos: 21.5,1.5
       parent: 1
-  - uid: 84
+  - uid: 457
     components:
     - type: Transform
       pos: 22.5,1.5
       parent: 1
-  - uid: 85
+  - uid: 458
     components:
     - type: Transform
       pos: 28.5,1.5
       parent: 1
-  - uid: 86
+  - uid: 459
     components:
     - type: Transform
       pos: 29.5,1.5
       parent: 1
-  - uid: 87
+  - uid: 460
     components:
     - type: Transform
       pos: 30.5,1.5
       parent: 1
-  - uid: 88
+  - uid: 461
     components:
     - type: Transform
       pos: 31.5,1.5
       parent: 1
-  - uid: 89
+  - uid: 462
     components:
     - type: Transform
       pos: 32.5,1.5
       parent: 1
-  - uid: 90
+  - uid: 463
     components:
     - type: Transform
       pos: 33.5,1.5
       parent: 1
-  - uid: 91
+  - uid: 464
     components:
     - type: Transform
       pos: 34.5,1.5
       parent: 1
-  - uid: 92
+  - uid: 465
     components:
     - type: Transform
       pos: 36.5,1.5
       parent: 1
-  - uid: 93
+  - uid: 466
     components:
     - type: Transform
       pos: 37.5,1.5
       parent: 1
-  - uid: 94
+  - uid: 467
     components:
     - type: Transform
       pos: 38.5,1.5
       parent: 1
-  - uid: 95
+  - uid: 468
     components:
     - type: Transform
       pos: 39.5,1.5
       parent: 1
-  - uid: 96
+  - uid: 469
     components:
     - type: Transform
       pos: 35.5,1.5
       parent: 1
-  - uid: 97
+  - uid: 470
     components:
     - type: Transform
       pos: 2.5,2.5
       parent: 1
-  - uid: 98
+  - uid: 471
     components:
     - type: Transform
       pos: 2.5,3.5
       parent: 1
-  - uid: 99
+  - uid: 472
     components:
     - type: Transform
       pos: 3.5,2.5
       parent: 1
-  - uid: 100
+  - uid: 473
     components:
     - type: Transform
       pos: 2.5,9.5
       parent: 1
-  - uid: 101
+  - uid: 474
     components:
     - type: Transform
       pos: 2.5,8.5
       parent: 1
-  - uid: 102
+  - uid: 475
     components:
     - type: Transform
       pos: 2.5,7.5
       parent: 1
-  - uid: 103
+  - uid: 476
     components:
     - type: Transform
       pos: 2.5,6.5
       parent: 1
-  - uid: 104
+  - uid: 477
     components:
     - type: Transform
       pos: 3.5,7.5
       parent: 1
-  - uid: 105
+  - uid: 478
     components:
     - type: Transform
       pos: 1.5,11.5
       parent: 1
-  - uid: 106
+  - uid: 479
     components:
     - type: Transform
       pos: 2.5,11.5
       parent: 1
-  - uid: 107
+  - uid: 480
     components:
     - type: Transform
       pos: 2.5,12.5
       parent: 1
-  - uid: 108
+  - uid: 481
     components:
     - type: Transform
       pos: 2.5,13.5
       parent: 1
-  - uid: 109
+  - uid: 482
     components:
     - type: Transform
       pos: 2.5,14.5
       parent: 1
-  - uid: 110
+  - uid: 483
     components:
     - type: Transform
       pos: 0.5,30.5
       parent: 1
-  - uid: 111
+  - uid: 484
     components:
     - type: Transform
       pos: 0.5,28.5
       parent: 1
-  - uid: 112
+  - uid: 485
     components:
     - type: Transform
       pos: 0.5,27.5
       parent: 1
-  - uid: 113
+  - uid: 486
     components:
     - type: Transform
       pos: 0.5,26.5
       parent: 1
-  - uid: 114
+  - uid: 487
     components:
     - type: Transform
       pos: 0.5,25.5
       parent: 1
-  - uid: 115
+  - uid: 488
     components:
     - type: Transform
       pos: 0.5,24.5
       parent: 1
-  - uid: 116
+  - uid: 489
     components:
     - type: Transform
       pos: 0.5,23.5
       parent: 1
-  - uid: 117
+  - uid: 490
     components:
     - type: Transform
       pos: 0.5,29.5
       parent: 1
-  - uid: 118
+  - uid: 491
     components:
     - type: Transform
       pos: 1.5,28.5
       parent: 1
-  - uid: 119
+  - uid: 492
     components:
     - type: Transform
       pos: 1.5,27.5
       parent: 1
-  - uid: 120
+  - uid: 493
     components:
     - type: Transform
       pos: 1.5,26.5
       parent: 1
-  - uid: 121
+  - uid: 494
     components:
     - type: Transform
       pos: 1.5,25.5
       parent: 1
-  - uid: 122
+  - uid: 495
     components:
     - type: Transform
       pos: 1.5,24.5
       parent: 1
-  - uid: 123
+  - uid: 496
     components:
     - type: Transform
       pos: 1.5,23.5
       parent: 1
-  - uid: 124
+  - uid: 497
     components:
     - type: Transform
       pos: 1.5,29.5
       parent: 1
-  - uid: 125
+  - uid: 498
     components:
     - type: Transform
       pos: 2.5,25.5
       parent: 1
-  - uid: 126
+  - uid: 499
     components:
     - type: Transform
       pos: 2.5,24.5
       parent: 1
-  - uid: 127
+  - uid: 500
     components:
     - type: Transform
       pos: 2.5,23.5
       parent: 1
-  - uid: 128
+  - uid: 501
     components:
     - type: Transform
       pos: 2.5,26.5
       parent: 1
-  - uid: 129
+  - uid: 502
     components:
     - type: Transform
       pos: 3.5,23.5
       parent: 1
-  - uid: 130
+  - uid: 503
     components:
     - type: Transform
       pos: 16.5,31.5
       parent: 1
-  - uid: 131
+  - uid: 504
     components:
     - type: Transform
       pos: 17.5,31.5
       parent: 1
-  - uid: 132
+  - uid: 505
     components:
     - type: Transform
       pos: 18.5,31.5
       parent: 1
-  - uid: 133
+  - uid: 506
     components:
     - type: Transform
       pos: 19.5,31.5
       parent: 1
-  - uid: 134
+  - uid: 507
     components:
     - type: Transform
       pos: 20.5,31.5
       parent: 1
-  - uid: 135
+  - uid: 508
     components:
     - type: Transform
       pos: 21.5,31.5
       parent: 1
-  - uid: 136
+  - uid: 509
     components:
     - type: Transform
       pos: 23.5,31.5
       parent: 1
-  - uid: 137
+  - uid: 510
     components:
     - type: Transform
       pos: 24.5,31.5
       parent: 1
-  - uid: 138
+  - uid: 511
     components:
     - type: Transform
       pos: 25.5,31.5
       parent: 1
-  - uid: 139
+  - uid: 512
     components:
     - type: Transform
       pos: 26.5,31.5
       parent: 1
-  - uid: 140
+  - uid: 513
     components:
     - type: Transform
       pos: 27.5,31.5
       parent: 1
-  - uid: 141
+  - uid: 514
     components:
     - type: Transform
       pos: 28.5,31.5
       parent: 1
-  - uid: 142
+  - uid: 515
     components:
     - type: Transform
       pos: 29.5,31.5
       parent: 1
-  - uid: 143
+  - uid: 516
     components:
     - type: Transform
       pos: 30.5,31.5
       parent: 1
-  - uid: 144
+  - uid: 517
     components:
     - type: Transform
       pos: 31.5,31.5
       parent: 1
-  - uid: 145
+  - uid: 518
     components:
     - type: Transform
       pos: 32.5,31.5
       parent: 1
-  - uid: 146
+  - uid: 519
     components:
     - type: Transform
       pos: 33.5,31.5
       parent: 1
-  - uid: 147
+  - uid: 520
     components:
     - type: Transform
       pos: 34.5,31.5
       parent: 1
-  - uid: 148
+  - uid: 521
     components:
     - type: Transform
       pos: 35.5,31.5
       parent: 1
-  - uid: 149
+  - uid: 522
     components:
     - type: Transform
       pos: 36.5,31.5
       parent: 1
-  - uid: 150
+  - uid: 523
     components:
     - type: Transform
       pos: 37.5,31.5
       parent: 1
-  - uid: 151
+  - uid: 524
     components:
     - type: Transform
       pos: 38.5,31.5
       parent: 1
-  - uid: 152
+  - uid: 525
     components:
     - type: Transform
       pos: 39.5,31.5
       parent: 1
-  - uid: 153
+  - uid: 526
     components:
     - type: Transform
       pos: 22.5,31.5
       parent: 1
-  - uid: 154
+  - uid: 527
     components:
     - type: Transform
       pos: 17.5,30.5
       parent: 1
-  - uid: 155
+  - uid: 528
     components:
     - type: Transform
       pos: 18.5,30.5
       parent: 1
-  - uid: 156
+  - uid: 529
     components:
     - type: Transform
       pos: 19.5,30.5
       parent: 1
-  - uid: 157
+  - uid: 530
     components:
     - type: Transform
       pos: 20.5,30.5
       parent: 1
-  - uid: 158
+  - uid: 531
     components:
     - type: Transform
       pos: 21.5,30.5
       parent: 1
-  - uid: 159
+  - uid: 532
     components:
     - type: Transform
       pos: 24.5,30.5
       parent: 1
-  - uid: 160
+  - uid: 533
     components:
     - type: Transform
       pos: 23.5,30.5
       parent: 1
-  - uid: 161
+  - uid: 534
     components:
     - type: Transform
       pos: 25.5,30.5
       parent: 1
-  - uid: 162
+  - uid: 535
     components:
     - type: Transform
       pos: 26.5,30.5
       parent: 1
-  - uid: 163
+  - uid: 536
     components:
     - type: Transform
       pos: 27.5,30.5
       parent: 1
-  - uid: 164
+  - uid: 537
     components:
     - type: Transform
       pos: 28.5,30.5
       parent: 1
-  - uid: 165
+  - uid: 538
     components:
     - type: Transform
       pos: 29.5,30.5
       parent: 1
-  - uid: 166
+  - uid: 539
     components:
     - type: Transform
       pos: 30.5,30.5
       parent: 1
-  - uid: 167
+  - uid: 540
     components:
     - type: Transform
       pos: 31.5,30.5
       parent: 1
-  - uid: 168
+  - uid: 541
     components:
     - type: Transform
       pos: 32.5,30.5
       parent: 1
-  - uid: 169
+  - uid: 542
     components:
     - type: Transform
       pos: 33.5,30.5
       parent: 1
-  - uid: 170
+  - uid: 543
     components:
     - type: Transform
       pos: 34.5,30.5
       parent: 1
-  - uid: 171
+  - uid: 544
     components:
     - type: Transform
       pos: 35.5,30.5
       parent: 1
-  - uid: 172
+  - uid: 545
     components:
     - type: Transform
       pos: 36.5,30.5
       parent: 1
-  - uid: 173
+  - uid: 546
     components:
     - type: Transform
       pos: 37.5,30.5
       parent: 1
-  - uid: 174
+  - uid: 547
     components:
     - type: Transform
       pos: 38.5,30.5
       parent: 1
-  - uid: 175
+  - uid: 548
     components:
     - type: Transform
       pos: 39.5,30.5
       parent: 1
-  - uid: 176
+  - uid: 549
     components:
     - type: Transform
       pos: 22.5,30.5
       parent: 1
-  - uid: 177
+  - uid: 550
     components:
     - type: Transform
       pos: 16.5,30.5
       parent: 1
-  - uid: 178
+  - uid: 551
     components:
     - type: Transform
       pos: 17.5,29.5
       parent: 1
-  - uid: 179
+  - uid: 552
     components:
     - type: Transform
       pos: 18.5,29.5
       parent: 1
-  - uid: 180
+  - uid: 553
     components:
     - type: Transform
       pos: 19.5,29.5
       parent: 1
-  - uid: 181
+  - uid: 554
     components:
     - type: Transform
       pos: 20.5,29.5
       parent: 1
-  - uid: 182
+  - uid: 555
     components:
     - type: Transform
       pos: 21.5,29.5
       parent: 1
-  - uid: 183
+  - uid: 556
     components:
     - type: Transform
       pos: 22.5,29.5
       parent: 1
-  - uid: 184
+  - uid: 557
     components:
     - type: Transform
       pos: 23.5,29.5
       parent: 1
-  - uid: 185
+  - uid: 558
     components:
     - type: Transform
       pos: 24.5,29.5
       parent: 1
-  - uid: 186
+  - uid: 559
     components:
     - type: Transform
       pos: 25.5,29.5
       parent: 1
-  - uid: 187
+  - uid: 560
     components:
     - type: Transform
       pos: 26.5,29.5
       parent: 1
-  - uid: 188
+  - uid: 561
     components:
     - type: Transform
       pos: 27.5,29.5
       parent: 1
-  - uid: 189
+  - uid: 562
     components:
     - type: Transform
       pos: 28.5,29.5
       parent: 1
-  - uid: 190
+  - uid: 563
     components:
     - type: Transform
       pos: 29.5,29.5
       parent: 1
-  - uid: 191
+  - uid: 564
     components:
     - type: Transform
       pos: 30.5,29.5
       parent: 1
-  - uid: 192
+  - uid: 565
     components:
     - type: Transform
       pos: 31.5,29.5
       parent: 1
-  - uid: 193
+  - uid: 566
     components:
     - type: Transform
       pos: 32.5,29.5
       parent: 1
-  - uid: 194
+  - uid: 567
     components:
     - type: Transform
       pos: 33.5,29.5
       parent: 1
-  - uid: 195
+  - uid: 568
     components:
     - type: Transform
       pos: 34.5,29.5
       parent: 1
-  - uid: 196
+  - uid: 569
     components:
     - type: Transform
       pos: 35.5,29.5
       parent: 1
-  - uid: 197
+  - uid: 570
     components:
     - type: Transform
       pos: 36.5,29.5
       parent: 1
-  - uid: 198
+  - uid: 571
     components:
     - type: Transform
       pos: 37.5,29.5
       parent: 1
-  - uid: 199
+  - uid: 572
     components:
     - type: Transform
       pos: 38.5,29.5
       parent: 1
-  - uid: 200
+  - uid: 573
     components:
     - type: Transform
       pos: 39.5,29.5
       parent: 1
-  - uid: 201
+  - uid: 574
     components:
     - type: Transform
       pos: 32.5,28.5
       parent: 1
-  - uid: 202
+  - uid: 575
     components:
     - type: Transform
       pos: 33.5,28.5
       parent: 1
-  - uid: 203
+  - uid: 576
     components:
     - type: Transform
       pos: 34.5,28.5
       parent: 1
-  - uid: 204
+  - uid: 577
     components:
     - type: Transform
       pos: 35.5,28.5
       parent: 1
-  - uid: 205
+  - uid: 578
     components:
     - type: Transform
       pos: 36.5,28.5
       parent: 1
-  - uid: 206
+  - uid: 579
     components:
     - type: Transform
       pos: 37.5,28.5
       parent: 1
-  - uid: 207
+  - uid: 580
     components:
     - type: Transform
       pos: 38.5,28.5
       parent: 1
-  - uid: 208
+  - uid: 581
     components:
     - type: Transform
       pos: 39.5,28.5
       parent: 1
-  - uid: 209
+  - uid: 582
     components:
     - type: Transform
       pos: 33.5,27.5
       parent: 1
-  - uid: 210
+  - uid: 583
     components:
     - type: Transform
       pos: 34.5,27.5
       parent: 1
-  - uid: 211
+  - uid: 584
     components:
     - type: Transform
       pos: 35.5,27.5
       parent: 1
-  - uid: 212
+  - uid: 585
     components:
     - type: Transform
       pos: 36.5,27.5
       parent: 1
-  - uid: 213
+  - uid: 586
     components:
     - type: Transform
       pos: 37.5,27.5
       parent: 1
-  - uid: 214
+  - uid: 587
     components:
     - type: Transform
       pos: 38.5,27.5
       parent: 1
-  - uid: 215
+  - uid: 588
     components:
     - type: Transform
       pos: 39.5,27.5
       parent: 1
-  - uid: 216
+  - uid: 589
     components:
     - type: Transform
       pos: 35.5,25.5
       parent: 1
-  - uid: 217
+  - uid: 590
     components:
     - type: Transform
       pos: 35.5,26.5
       parent: 1
-  - uid: 218
+  - uid: 591
     components:
     - type: Transform
       pos: 36.5,25.5
       parent: 1
-  - uid: 219
+  - uid: 592
     components:
     - type: Transform
       pos: 36.5,26.5
       parent: 1
-  - uid: 220
+  - uid: 593
     components:
     - type: Transform
       pos: 37.5,25.5
       parent: 1
-  - uid: 221
+  - uid: 594
     components:
     - type: Transform
       pos: 37.5,26.5
       parent: 1
-  - uid: 222
+  - uid: 595
     components:
     - type: Transform
       pos: 38.5,25.5
       parent: 1
-  - uid: 223
+  - uid: 596
     components:
     - type: Transform
       pos: 38.5,26.5
       parent: 1
-  - uid: 224
+  - uid: 597
     components:
     - type: Transform
       pos: 39.5,25.5
       parent: 1
-  - uid: 225
+  - uid: 598
     components:
     - type: Transform
       pos: 39.5,26.5
       parent: 1
-  - uid: 226
+  - uid: 599
     components:
     - type: Transform
       pos: 39.5,19.5
       parent: 1
-  - uid: 227
+  - uid: 600
     components:
     - type: Transform
       pos: 39.5,10.5
       parent: 1
-  - uid: 228
+  - uid: 601
     components:
     - type: Transform
       pos: 19.5,11.5
       parent: 1
-  - uid: 229
+  - uid: 602
     components:
     - type: Transform
       pos: 20.5,11.5
       parent: 1
-  - uid: 230
+  - uid: 603
     components:
     - type: Transform
       pos: 20.5,12.5
       parent: 1
-  - uid: 231
+  - uid: 604
     components:
     - type: Transform
       pos: 9.5,2.5
       parent: 1
-  - uid: 232
+  - uid: 605
     components:
     - type: Transform
       pos: 8.5,2.5
       parent: 1
 - proto: RMCWeaponMar50LMG
   entities:
-  - uid: 574
+  - uid: 606
     components:
     - type: Transform
       pos: 20.5,7.5
       parent: 1
 - proto: RMCWeaponPistolHandcannon
   entities:
-  - uid: 613
+  - uid: 607
     components:
     - type: Transform
       pos: 8.41104,8.6731825
       parent: 1
 - proto: RMCWeaponShotgunHG3712
   entities:
-  - uid: 587
+  - uid: 608
     components:
     - type: Transform
       pos: 21.571398,7.2846575
       parent: 1
-  - uid: 588
+  - uid: 609
     components:
     - type: Transform
       pos: 21.571398,7.5190325
       parent: 1
-  - uid: 589
+  - uid: 610
     components:
     - type: Transform
       pos: 21.602648,7.7534075
       parent: 1
 - proto: RMCWeaponSMGFP9000
   entities:
-  - uid: 390
+  - uid: 68
     components:
     - type: Transform
-      parent: 386
+      parent: 64
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 395
+  - uid: 73
     components:
     - type: Transform
-      parent: 391
+      parent: 69
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: RMCWindowKutjevoReinforced
   entities:
-  - uid: 338
+  - uid: 611
     components:
     - type: Transform
       pos: 15.5,23.5
       parent: 1
-  - uid: 339
+  - uid: 612
     components:
     - type: Transform
       pos: 15.5,21.5
       parent: 1
-  - uid: 340
+  - uid: 613
     components:
     - type: Transform
       pos: 15.5,22.5
       parent: 1
-  - uid: 341
+  - uid: 614
     components:
     - type: Transform
       pos: 17.5,24.5
       parent: 1
-  - uid: 342
+  - uid: 615
     components:
     - type: Transform
       pos: 18.5,24.5
       parent: 1
-  - uid: 343
+  - uid: 616
     components:
     - type: Transform
       pos: 19.5,24.5
       parent: 1
 - proto: WeaponRifleM16
   entities:
-  - uid: 575
+  - uid: 617
     components:
     - type: Transform
       pos: 21.611462,5.321265
       parent: 1
-  - uid: 576
+  - uid: 618
     components:
     - type: Transform
       pos: 21.642712,5.61814
       parent: 1
 - proto: WeaponRifleMAR40
   entities:
-  - uid: 566
+  - uid: 619
     components:
     - type: Transform
       pos: 15.5,7.5
       parent: 1
-  - uid: 572
+  - uid: 620
     components:
     - type: Transform
       pos: 18.404448,5.3032875
       parent: 1
-  - uid: 573
+  - uid: 621
     components:
     - type: Transform
       pos: 18.38101,5.6782875

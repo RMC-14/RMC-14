@@ -39,18 +39,26 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ RMCCoatMilitia ]
-    - [ RMCCoatMilitiaVest ]
-    - [ RMCCoatMilitiaBrace ]
-    - [ RMCCoatMilitiaHauberk ]
-    - [ RMCArmorVest ]
-    # - [ ArmorBulletproof ] # todo
     randomGearOther:
-    -
-      - [ RMCCigarettePackLuckySloths ]
-    # todo walkman and casette
-    # todo deck of cards
+    - # Rebel Suit
+      - [ RMCCoatMilitia ]
+      - [ RMCCoatMilitiaVest ]
+      - [ RMCCoatMilitiaBrace ]
+      - [ RMCCoatMilitiaHauberk ]
+      - [ RMCArmorVest ]
+      # - [ ArmorBulletproof ] # todo
+    - # Rebel helmet
+      # /obj/item/clothing/head/militia
+      - [ RMCHeadMilitiaBucket ]
+      # /obj/item/clothing/head/helmet
+      - [ RMCArmorHelmetSkullcap ]
+      # /obj/item/clothing/head/helmet/swat
+      - [ RMCHardHat]
+      - [ RMCHelmetWelding ]
+      # /obj/item/clothing/head/bandana,
+      - [ CMHeadBandRed ]
+      - [ CMHeadBandRebel ]
+      # /obj/item/clothing/head/headband/rambo,
     randomWeapon:
     - [ RMCM1984BeltFilled ]
     - [ RMCM1984BeltFilled ]
@@ -66,7 +74,12 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    - [ WeaponRifleMAR40, RMCMagazineRifleMAR40, RMCMagazineRifleMAR40, RMCMagazineRifleMAR40 ]
+    - [ WeaponSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5 ]
+    - [ RMCWeaponShotgunHG3712, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
+    - [ WeaponRifleM16, RMCMagazineRifleM16 , RMCMagazineRifleM16 , RMCMagazineRifleM16 ]
+    - [ WeaponSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15 ]
+    - [ RMCWeaponSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27 ]
     primaryWeaponChance: 1
 
 - type: entity
