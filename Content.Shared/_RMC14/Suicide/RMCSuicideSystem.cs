@@ -42,6 +42,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         SubscribeLocalEvent<RMCHasSuicidedComponent, UpdateMobStateEvent>(OnHasSuicidedUpdateMobState);
     }
 
+    private void OnRejuvenate(Entity<RMCSuicideComponent> ent, ref RejuvenateEvent args)
     {
         RemCompDeferred<RMCHasSuicidedComponent>(ent);
     }
