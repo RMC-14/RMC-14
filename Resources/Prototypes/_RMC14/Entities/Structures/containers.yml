@@ -944,6 +944,22 @@
   - type: Sprite
     state: whitewyright
 
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerAMSLeft
+  suffix: AMS, Left
+  components:
+  - type: Sprite
+    state: amsleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerAMSRight
+  suffix: AMS, Right
+  components:
+  - type: Sprite
+    state: amsright
+
 # Vertical
 
 - type: entity
