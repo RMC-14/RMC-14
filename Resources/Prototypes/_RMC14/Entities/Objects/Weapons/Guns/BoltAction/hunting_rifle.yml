@@ -139,7 +139,7 @@
   - type: CMArmorPiercing
     amount: 30
   - type: RMCStunOnHit
-    maxRange: 3
+    maxRange: 3.5
     losesEffectWithRange: true
     stunTime: 0
     superSlowTime: 0
