@@ -135,9 +135,15 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 42
   - type: CMArmorPiercing
     amount: 30
+  - type: RMCStunOnHit
+    maxRange: 3
+    losesEffectWithRange: true
+    stunTime: 0
+    superSlowTime: 0
+    slowTime: 0
 
 - type: Tag
   id: RMCMagazineRifleHunting
