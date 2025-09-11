@@ -134,6 +134,30 @@
     MangoCooler: 3
 
 - type: reaction
+  id: Sidecar
+  reactants:
+    Vodka:
+      amount: 1
+    LemonLime:
+      amount: 1
+    JuiceMango:
+      amount: 1
+  products:
+    MangoCooler: 3
+
+- type: reaction
+  id: Gunfire
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Tea:
+      amount: 4
+    Rum:
+      amount: 1
+  products:
+    Gunfire: 5
+
+- type: reaction
   id: CreateMeat
   impact: Low
   quantized: true

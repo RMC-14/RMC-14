@@ -170,3 +170,84 @@
     - state: bowl
     - state: mango-rice
 
+- type: entity
+  name: banh mi
+  parent: CMFoodBase
+  id: FoodBanhMi
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: banh-mi
+  - type: FlavorProfile
+    flavors:
+    - bread
+    - vegetables
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 60
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30
+  - type: SliceableFood
+    slice: FoodBanhMiHalf
+    count: 2
+
+
+- type: entity
+  name: banh mi half
+  parent: CMFoodBase
+  id: FoodBanhMiHalf
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: banh-mi-half
+  - type: FlavorProfile
+    flavors:
+    - bread
+    - vegetables
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  name: yorkshire pudding
+  parent: CMFoodBase
+  id: FoodYorkshirePudding
+  description: What a delightful pastry!
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    layers:
+    - state: yorkshire-pudding
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        yorkshire-pudding: ""
+        yorkshire-pudding-1: ""
+        yorkshire-pudding-2: ""
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Food
+    transferAmount: 5

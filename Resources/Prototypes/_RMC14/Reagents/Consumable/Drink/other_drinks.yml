@@ -42,3 +42,33 @@
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+- type: reagent
+  id: Sidecar
+  parent: BaseAlcohol
+  name: reagent-name-sidecar
+  desc: reagent-desc-sidecar
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#C19128"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/sidecar.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: Gunfire
+  parent: BaseAlcohol
+  name: reagent-name-gunfire
+  desc: reagent-desc-gunfire
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#F88F00"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/gunfire.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false

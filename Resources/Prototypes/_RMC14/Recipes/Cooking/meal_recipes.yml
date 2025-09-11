@@ -187,6 +187,18 @@
     FoodBowlBig: 1
     FoodMango: 1
 
+- type: microwaveMealRecipe
+  id: RecipeBanhMi
+  name: banh mi recipe
+  result: FoodBanhMi
+  time: 15
+  group: Dessert
+  reagents:
+    Mayo: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMango: 1
+
 #Cakes
 - type: microwaveMealRecipe
   id: RecipeRMCSuppermatter
