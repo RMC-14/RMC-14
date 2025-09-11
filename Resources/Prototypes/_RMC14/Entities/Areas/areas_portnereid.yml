@@ -36,6 +36,7 @@
     state: req0
   - type: Area
     minimapColor: '#a16027'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaPortNereidCargo
@@ -44,17 +45,19 @@
   components:
   - type: Sprite
     state: tunnels0
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionFour
-  id: RMCAreaPortNereidDeepsiteUAS4
-  name: Port Nereid - Deepsite UAS-4
+  id: RMCAreaPortNereidDeepsiteUAS1
+  name: Port Nereid - Deepsite UAS-1
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: colony_caves_0
   - type: Area
     minimapColor: '#491c75'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -66,6 +69,7 @@
     state: offices4
   - type: Area
     minimapColor: '#8c1b0e'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -77,6 +81,7 @@
     state: req4
   - type: Area
     minimapColor: '#bab714'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -87,7 +92,8 @@
     sprite: _RMC14/Areas/hybrisareas.rsi
     state: wyspaceport
   - type: Area
-    minimapColor: '#16a676'
+    minimapColor: '#0b7545'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -99,6 +105,7 @@
     state: wyspaceport
   - type: Area
     minimapColor: '#19666b'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -110,6 +117,7 @@
     state: req3
   - type: Area
     minimapColor: '#402116'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionThree
@@ -121,9 +129,10 @@
     state: colony_caves_1
   - type: Area
     minimapColor: '#5e5b2c'
+    weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionZero
+  parent: RMCAreaBase
   id: RMCAreaPortNereidCargoComms
   name: Port Nereid - Cargo Comms
   components:
@@ -134,7 +143,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaProtectionZero
+  parent: RMCAreaBase
   id: RMCAreaPortNereidSouthWestJungle
   name: Port Nereid - South West Jungle
   components:
@@ -145,7 +154,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaProtectionZero
+  parent: RMCAreaBase
   id: RMCAreaPortNereidSouthEastJungle
   name: Port Nereid - South East Jungle
   components:
@@ -165,6 +174,7 @@
     state: weymart
   - type: Area
     minimapColor: '#91BDCFE7'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -176,6 +186,7 @@
     state: offices2
   - type: Area
     minimapColor: '#418896'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -187,6 +198,7 @@
     state: offices1
   - type: Area
     minimapColor: '#418896'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -198,6 +210,7 @@
     state: medical
   - type: Area
     minimapColor: '#5c96a1'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -209,6 +222,7 @@
     state: botany
   - type: Area
     minimapColor: '#35ab50'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -220,6 +234,7 @@
     state: recycling
   - type: Area
     minimapColor: '#470f75'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -231,9 +246,10 @@
     state: comms1
   - type: Area
     minimapColor: '#67bfcf'
+    weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionZero
+  parent: RMCAreaBase
   id: RMCAreaPortNereidNorthWestJungle
   name: Port Nereid - North West Jungle
   components:
@@ -244,7 +260,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaProtectionZero
+  parent: RMCAreaBase
   id: RMCAreaPortNereidNorthEastJungle
   name: Port Nereid - North East Jungle
   components:
@@ -264,6 +280,7 @@
     state: caves_central
   - type: Area
     minimapColor: '#d1b228'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaReinforcedMetal
@@ -275,6 +292,7 @@
     state: caves_west
   - type: Area
     minimapColor: '#1f6699'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaReinforcedMetal
@@ -286,6 +304,43 @@
     state: caves_east
   - type: Area
     minimapColor: '#688008'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPortNereidRoadSystem
+  name: Port Nereid - Road System
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero2
+  - type: Area
+    minimapColor: '#434544'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPortNereidRoadSystem
+  name: Port Nereid - Road System
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: hall2
+  - type: Area
+    minimapColor: '#434544'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPortNereidPort
+  name: Port Nereid - Oceanside Port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: tunnels0
+  - type: Area
+    minimapColor: '#636664'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaVaraderoInteriorOob
@@ -308,3 +363,4 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: false
