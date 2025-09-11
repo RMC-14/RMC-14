@@ -68,6 +68,11 @@
   - type: Tackle
     min: 4
     max: 5
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 1.0
+    damage:
+      types:
+        Heat: 15
   - type: WhitelistPickup
     whitelist:
       components:

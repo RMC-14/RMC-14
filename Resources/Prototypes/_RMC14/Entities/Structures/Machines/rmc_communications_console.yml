@@ -37,7 +37,7 @@
     key: enum.MarineCommunicationsComputerUI.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessSeniorCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
@@ -70,7 +70,7 @@
     key: enum.MarineControlComputerUi.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessSeniorCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.MarineControlComputerUi.Key:
@@ -99,7 +99,7 @@
     key: enum.OverwatchConsoleUI.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.OverwatchConsoleUI.Key:
@@ -145,7 +145,7 @@
     key: enum.TacticalMapComputerUi.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.TacticalMapComputerUi.Key:
@@ -179,7 +179,7 @@
     key: enum.TacticalMapComputerUi.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.TacticalMapComputerUi.Key:
@@ -283,7 +283,7 @@
         type: LifeboatComputerBui
   - type: LifeboatComputer
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ] # replace Command with Senior access
+    access: [ [ "CMAccessDropship" ], [ "RMCAccessSeniorCommand" ] ]
   - type: ActivatableUIBlacklist
     blacklist:
       components:

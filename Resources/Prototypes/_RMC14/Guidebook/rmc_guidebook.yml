@@ -46,6 +46,7 @@
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
   - RMCGuideRoleSpec
+  - RMCGuideRoleCAS
   - RMCGuideMarineCommunications
   - RMCGuideCorporateLiaison
 
@@ -57,6 +58,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideCommunicationsTowers
+  - RMCGuideRoleMortar
 
 # cooking
 - type: guideEntry
@@ -214,8 +216,15 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideRoleSpec
+  id: RMCGuideRoleMortar
   priority: 11
+  name: "Mortar"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpec
+  priority: 12
   name: "Specialists"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpec.xml"
   children:
@@ -252,10 +261,17 @@
   name: "Sniper Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleCAS
+  priority: 13
+  name: "Dropships and CAS"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCAS.xml"
+
 - type: guideEntry # made by Gabrote42
   parent: RMC
   id: RMCGuideMarineCommunications
-  priority: 12
+  priority: 14
   name: "Marine Communications"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideMarineCommunications.xml"
 
@@ -264,7 +280,7 @@
   id: RMCGuideCorporateLiaison
   name: "Corporate Liaison"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCorporateLiaison.xml"
-  priority: 13
+  priority: 15
 
 - type: guideEntry # made by UnicornOnLSD (GitHub)
   parent: RMC

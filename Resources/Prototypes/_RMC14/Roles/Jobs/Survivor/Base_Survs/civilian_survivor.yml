@@ -44,6 +44,7 @@
   greeting: rmc-job-greeting-survivor
   hasIcon: false
   useLoadoutOfJob: CMSurvivor # for inheritance
+  basePlaytimeTracker: true
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack
@@ -148,10 +149,10 @@
         9: 16 # 4%
       CMPacketGrenadeHighExplosiveFilled:
         17: 26 # 5%
-      CMTraumaKit10:
-        27: 38 # 6% TODO upgraded trauma kit
-      CMBurnKit10:
-        39: 54 # 8% TODO upgraded ointment
+      CMUpgradedTraumaKit10:
+        27: 38 # 6%
+      CMUpgradedBurnKit10:
+        39: 54 # 8%
       RMCAttachmentSuppressor:
         55: 74 # 10% TODO Attachments box
       RMCPouchFirstAidERTFill:

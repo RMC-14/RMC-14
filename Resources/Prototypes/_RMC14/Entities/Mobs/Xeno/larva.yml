@@ -40,6 +40,8 @@
     plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.25
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     requiresGranter: false
