@@ -80,7 +80,7 @@
   - type: StorageFill
     contents:
     - id: CMArmorM3VLBallistics
-    - id: CMArmorHelmetM10Medic
+    - id: RMCArmorHelmetM10FieldDoctor
     - id: RMCPatchMedic
     - id: CMBootsBlack
     - id: CMMRE

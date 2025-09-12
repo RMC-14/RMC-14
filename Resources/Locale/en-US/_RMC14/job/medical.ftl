@@ -20,6 +20,6 @@ cm-job-prefix-researcher = Rsr
 CMJobResearcher = Researcher
 
 cm-job-name-field-doctor = Field Doctor
-cm-job-description-doctor = Keep planetside marines healthy in the field, oftentimes by surgery.
+cm-job-description-field-doctor = Keep planetside marines healthy in the field, oftentimes by surgery.
 cm-job-prefix-field-doctor = Fld Doc
 CMJobFieldDoctor = Field Doctor

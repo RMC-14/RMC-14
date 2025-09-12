@@ -27,6 +27,7 @@
         RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
+    - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-field-doctor
     - type: TacticalMapIcon
