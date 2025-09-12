@@ -21,6 +21,6 @@ public static class RMCMathExtensions
     /// <returns></returns>
     public static float CircleAreaFromSquareAbilityRange(float squareRadius)
     {
-        return (float)((squareRadius * 2 + 1) / Math.Sqrt(Math.PI));
+        return (float)(((squareRadius * 2) + 1) / Math.Sqrt(Math.PI));
     }
 }
