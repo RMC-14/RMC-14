@@ -71,3 +71,16 @@
       - id: RMCHeadsetMarineCommand
       - id: CMBeltMarine
       - id: CMBeltMarine
+
+- type: entity
+  parent: CMLockerBase
+  id: CMLockerFieldDoctor
+  suffix: Filled, Field Doctor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM3VLBallistics
+    - id: CMArmorHelmetM10Medic
+    - id: RMCPatchMedic
+    - id: CMBootsBlack
+    - id: CMMRE

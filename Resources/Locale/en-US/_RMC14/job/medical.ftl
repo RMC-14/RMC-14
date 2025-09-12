@@ -18,3 +18,8 @@ cm-job-name-researcher = Researcher
 cm-job-description-researcher = Conduct research on what is sent to you. Create and analyze new chemicals, tools and objects.
 cm-job-prefix-researcher = Rsr
 CMJobResearcher = Researcher
+
+cm-job-name-field-doctor = Field Doctor
+cm-job-description-doctor = Keep planetside marines healthy in the field, oftentimes by surgery.
+cm-job-prefix-field-doctor = Fld Doc
+CMJobFieldDoctor = Field Doctor

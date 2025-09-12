@@ -1,0 +1,61 @@
+﻿- type: job
+  parent: CMDoctor
+  id: CMFieldDoctor
+  name: cm-job-name-field-doctor
+  description: cm-job-description-field-doctor
+  playTimeTracker: CMJobFieldDoctor
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hour
+  ranks:
+    RMCRankSecondLT: []
+  startingGear: CMGearFieldDoctor
+  icon: "CMJobIconFieldDoctor"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cmo
+  accessGroups:
+  - CMMedbay
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 0
+        RMCSkillFireman: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: JobPrefix
+      prefix: cm-job-prefix-field-doctor
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: field_doctor
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_medical
+  hidden: true # TODO RMC14
+
+- type: startingGear
+  id: CMGearFieldDoctor
+  equipment:
+    back: CMSatchelMarine
+    jumpsuit: CMScrubsGreen
+    shoes: ClothingShoesColorWhite
+    id: CMIDCardDoctor
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointFieldDoctor
+  name: field doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMFieldDoctor
+  - type: Sprite
+    state: field_doc_spawn
+
+- type: playTimeTracker
+  id: CMJobFieldDoctor
+  isHumanoid: true
