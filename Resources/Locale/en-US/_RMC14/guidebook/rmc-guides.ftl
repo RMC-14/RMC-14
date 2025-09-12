@@ -22,4 +22,5 @@ rmc-guide-entry-rules-command-chain = Commander Succession
 rmc-guide-entry-rules-core = Core Rules
 rmc-guide-entry-rules-command = Command Rules
 rmc-guide-entry-rules-roleplay-standards = Roleplay Standards
+rmc-guide-entry-rules-community = Community Rules
 
