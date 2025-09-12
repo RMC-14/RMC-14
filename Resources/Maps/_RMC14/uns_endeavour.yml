@@ -108,7 +108,7 @@ entities:
       pos: 0.069660604,-0.453125
       parent: 1
     - type: BecomesStation
-      id: GoldenArrowLarge
+      id: UNSEndeavour
     - type: MapGrid
       chunks:
         0,0:
