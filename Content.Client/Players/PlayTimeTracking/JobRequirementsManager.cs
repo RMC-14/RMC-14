@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
 using Content.Shared.Localizations;
@@ -217,10 +218,22 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
     public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeJobIdByRoles()
     {
-        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>();
+        // RMC14
+        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>().ToArray();
+        var trackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+        var duplicateTrackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
 
         foreach (var job in jobsToMap)
         {
+            if (!trackers.Add(job.PlayTimeTracker))
+                duplicateTrackers.Add(job.PlayTimeTracker);
+        }
+
+        foreach (var job in jobsToMap)
+        {
+            if (duplicateTrackers.Contains(job.PlayTimeTracker) && !job.BasePlaytimeTracker)
+                continue;
+
             if (_roles.TryGetValue(job.PlayTimeTracker, out var locJobName))
             {
                 yield return new KeyValuePair<string, TimeSpan>(job.ID, locJobName);
