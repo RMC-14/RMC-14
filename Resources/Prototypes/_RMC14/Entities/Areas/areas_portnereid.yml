@@ -10,10 +10,19 @@
     linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
     weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
     landingZone: true
 
 - type: entity
-  parent: RMCAreaShuttleDrop2
+  parent: RMCAreaShuttleDrop1PortNereid
   id: RMCAreaShuttleDrop2PortNereid
   name: Port Nereid International Spaceport - LZ2
   components:
@@ -24,7 +33,6 @@
     linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
     weatherEnabled: false
-    landingZone: true
 
 - type: entity
   parent: RMCAreaProtectionOne
@@ -37,6 +45,15 @@
   - type: Area
     minimapColor: '#a16027'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaPortNereidCargo
@@ -58,6 +75,15 @@
   - type: Area
     minimapColor: '#491c75'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaProtectionTwo
@@ -70,9 +96,18 @@
   - type: Area
     minimapColor: '#8c1b0e'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent: RMCAreaProtectionOne
+  parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidEngineering
   name: Port Nereid - Engineering Bay
   components:
@@ -84,7 +119,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionOne
+  parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidSpaceport
   name: Port Nereid - Port Nereid International Spaceport
   components:
@@ -96,7 +131,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionOne
+  parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidHeavyHaulter
   name: Port Nereid - WEYA Hauler
   components:
@@ -108,7 +143,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionOne
+  parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidShack
   name: Port Nereid - Lakeside Shack
   components:
@@ -130,6 +165,14 @@
   - type: Area
     minimapColor: '#5e5b2c'
     weatherEnabled: false
+    lasing: false
+    mortar: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaBase
@@ -141,9 +184,18 @@
     state: comms2
   - type: Area
     weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidSouthWestJungle
   name: Port Nereid - South West Jungle
   components:
@@ -154,7 +206,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidSouthEastJungle
   name: Port Nereid - South East Jungle
   components:
@@ -165,7 +217,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidWeymart
   name: Port Nereid - Weymart
   components:
@@ -177,7 +229,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidHabitationEast
   name: Port Nereid - Eastern Habitation Complex
   components:
@@ -189,7 +241,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidHabitationWest
   name: Port Nereid - Western Habitation Complex
   components:
@@ -201,7 +253,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidMedical
   name: Port Nereid - Medical Clinic
   components:
@@ -213,7 +265,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidBotany
   name: Port Nereid - Botany Bay
   components:
@@ -225,7 +277,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionTwo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidDisposals
   name: Port Nereid - Disposals & Waste Processing
   components:
@@ -237,7 +289,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaProtectionOne
+  parent: RMCAreaPortNereidCargo
   id: RMCAreaPortNereidDam
   name: Port Nereid - River Dam
   components:
@@ -249,7 +301,7 @@
     weatherEnabled: false
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidNorthWestJungle
   name: Port Nereid - North West Jungle
   components:
@@ -260,7 +312,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidNorthEastJungle
   name: Port Nereid - North East Jungle
   components:
@@ -281,6 +333,15 @@
   - type: Area
     minimapColor: '#d1b228'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaReinforcedMetal
@@ -293,6 +354,15 @@
   - type: Area
     minimapColor: '#1f6699'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaReinforcedMetal
@@ -305,21 +375,18 @@
   - type: Area
     minimapColor: '#688008'
     weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
-  parent: RMCAreaBase
-  id: RMCAreaPortNereidRoadSystem
-  name: Port Nereid - Road System
-  components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas_varadero.rsi
-    state: varadero2
-  - type: Area
-    minimapColor: '#434544'
-    weatherEnabled: true
-
-- type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidRoadSystem
   name: Port Nereid - Road System
   components:
@@ -331,7 +398,7 @@
     weatherEnabled: true
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaPortNereidCargoComms
   id: RMCAreaPortNereidPort
   name: Port Nereid - Oceanside Port
   components:
