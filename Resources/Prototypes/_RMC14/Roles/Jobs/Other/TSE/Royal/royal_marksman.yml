@@ -71,7 +71,7 @@
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
-    id: RMCIDRoyalMarines
+    id: RMCIDRoyalMarinesMarksman
     belt: RMCL24BeltFilled
     back: RMCSatchelLightpackFilledRoyalMarksman # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledRoyalCommando

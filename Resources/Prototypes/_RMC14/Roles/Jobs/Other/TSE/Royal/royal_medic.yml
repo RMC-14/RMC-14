@@ -76,7 +76,7 @@
     gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
-    id: RMCIDRoyalMarines
+    id: RMCIDRoyalMarinesMedic
     belt: RMCBeltMedicBagRoyal
     back: RMCSatchelLightpackFilledRoyalMedic
     pocket1: RMCPouchReagentCanisterTricordrazineRevival

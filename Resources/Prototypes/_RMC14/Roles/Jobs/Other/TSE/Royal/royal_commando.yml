@@ -70,7 +70,7 @@
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: WeaponRifleL83A3
-    id: RMCIDRoyalMarines
+    id: RMCIDRoyalMarinesCommando
     belt: RMCL83A3BeltFilled
     back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledRoyalCommando
