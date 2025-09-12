@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -16,5 +17,5 @@ public sealed partial class XenoFuryComponent : Component
     public EntProtoId Effect = "RMCEffectHeal";
 
     [DataField, AutoNetworkedField]
-    public float Range = 3;
+    public float Range = RMCMathExtensions.CircleAreaFromSquareSide(3);
 }
