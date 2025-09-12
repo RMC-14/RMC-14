@@ -166,7 +166,8 @@
     minimapColor: '#5e5b2c'
     weatherEnabled: false
     lasing: false
-    mortar: false
+    mortarPlacement: false
+    mortarFire: false
     medevac: false
     paradropping: false
     CAS: false
