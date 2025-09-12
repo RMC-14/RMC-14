@@ -17,5 +17,5 @@ public sealed partial class XenoFuryComponent : Component
     public EntProtoId Effect = "RMCEffectHeal";
 
     [DataField, AutoNetworkedField]
-    public float Range = RMCMathExtensions.CircleAreaFromSquareSide(7); //Range (3 x 2) + 1
+    public float Range = RMCMathExtensions.CircleAreaFromSquareAbilityRange(3);
 }
