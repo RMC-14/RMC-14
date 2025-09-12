@@ -107,6 +107,8 @@
   - type: CartridgeAmmo
     proto: CMBulletPistol22mm
 
-
 - type: Tag
   id: RMCMagazinePistolHoldout
+
+- type: Tag
+  id: CMCartridgePistol.22mm

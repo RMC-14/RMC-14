@@ -1,195 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Added a new version of the "Golden Arrow" map for PVE.
-    type: Add
-  - message: Added multiple missing props found on the Golden Arrow.
-    type: Add
-  id: 1836
-  time: '2025-06-08T12:08:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6646
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added a 70 hour playtime reward for security survivors, senior officer
-      rank.
-    type: Add
-  id: 1838
-  time: '2025-06-08T12:23:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6088
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Reworked the construction system. Press Z with a material inhand to open
-      the menu. The G menu for construction still works, with the added restrictions.
-    type: Add
-  - message: You will now be restricted to building objects one at a time, and only
-      on the tile you're currently on.
-    type: Tweak
-  - message: Added construction skill requirements for building some objects
-    type: Add
-  id: 1839
-  time: '2025-06-08T12:30:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6594
-- author: noctyrnal
-  changes:
-  - message: Added missing content for Hybrisa.
-    type: Add
-  - message: The television can now be rotated.
-    type: Tweak
-  - message: The "ON" Phonebox now glows.
-    type: Tweak
-  id: 1840
-  time: '2025-06-08T12:29:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6553
-- author: Vermidia
-  changes:
-  - message: Fixed base crusher's charge not deleting or doing enough damage against
-      some objects.
-    type: Fix
-  - message: Fixed screech not stacking with existing stuns.
-    type: Fix
-  - message: Fixed ground acid stunning if you were downed.
-    type: Fix
-  id: 1841
-  time: '2025-06-08T12:31:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6568
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed sentries not being able to be deployed if you have 0 skill.
-    type: Fix
-  id: 1842
-  time: '2025-06-08T12:33:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6524
-- author: noctyrnal
-  changes:
-  - message: The PVE version of Hybrisa has received a massive update, adding lots
-      of missing content and fixing many issues with it.
-    type: Tweak
-  - message: Added the TSEPA Peaked Cap, Jacket, High-Vis Vest / Jacket and the TSEPA
-      Synthetic role. These are exclusive to PVE outside of admins.
-    type: Add
-  id: 1843
-  time: '2025-06-09T01:53:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6658
-- author: Utmanarn
-  changes:
-  - message: CPR time now depends medical skill.
-    type: Tweak
-  id: 1844
-  time: '2025-06-09T01:55:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6656
-- author: DrSmugleaf
-  changes:
-  - message: Ported the smart fridge and a new chem master UI. This also fixes many
-      bugs with the chem master interface. The chem master now lets you work on multiple
-      pill bottles at once and changes to its UI are not delayed by your ping. The
-      smart fridge stores pill bottles, pills, injectors, and other items containing
-      chemicals.
-    type: Add
-  - message: Added an admin-spawn variant of the synth vendor for colony synth.
-    type: Add
-  - message: Mapped in janitorial buckets to the Almayer. These hold 500 units and
-      can be used in the chemical dispenser and chem master. This also adds more preset
-      transfer settings for them, and a 240 unit setting for high capacity beakers
-      and the janitorial bucket.
-    type: Add
-  - message: Added hidden identities between marines and xenos. Marines can only see
-      a xeno's caste and number (Defender XX-565), but not their rank, prefix or suffix,
-      because apparently people do not understand that they shouldn't refer to PRO
-      in character. Xenos see a marine's gear and held items with a randomized appearance
-      for each marine depending on the character's species, but not their name nor
-      medals. The name they see instead depends on the species of the marine (tall
-      host, scaled host, etc).
-    type: Add
-  - message: Added admin logs for lobby messages and character descriptions, make
-      hive command admin perms instead of varedit perms, and added an admin verb to
-      randomize someone's name.
-    type: Add
-  - message: Added a command to erase someone's chat messages without banning them,
-      and one to force the next round to use a specific planet map.
-    type: Add
-  - message: Fixed moving near some containers on Hybrisa getting you stuck.
-    type: Fix
-  - message: Fixed error from being able to wear multiple cassettes at once.
-    type: Fix
-  - message: Fixed typo in the UNMC sniper uniform description.
-    type: Fix
-  - message: Fixed cassette players being too quiet, increased by 6 decibels.
-    type: Fix
-  - message: "Fixed force feeding including pills stopping when moving 0.01 tiles,\
-      \ instead of the default 0.3 tiles.\xE7"
-    type: Fix
-  - message: Fixed reagent tanks phasing through each other.
-    type: Fix
-  - message: Fixed TSEPA roles not being able to tune communications towers with TSE
-      comms.
-    type: Fix
-  - message: Fixed the chem master playing the eject sound twice.
-    type: Fix
-  - message: Fixed the tunnel rename UI not popping up when making a tunnel.
-    type: Fix
-  - message: Fixed Vampire Lurker Tail Jab being able to hit through walls.
-    type: Fix
-  - message: Fixed roller beds not fitting into crates.
-    type: Fix
-  - message: Fixed censor character nudity overlaying over armor and not working for
-      some species.
-    type: Fix
-  - message: Fixed not being able to barb multiple cades at the same time.
-    type: Fix
-  - message: Fixed PvE showing planet map votes until cancelled by an admin.
-    type: Fix
-  - message: Increased the maximum paper character length from 6 thousand to 10 thousand.
-    type: Tweak
-  - message: Icon labels on pill bottles and other items now show 3 characters, up
-      from 2.
-    type: Tweak
-  - message: Skill examine now repeats the word skill fewer times
-    type: Tweak
-  - message: Temporarily gave Forecon Commander ShipMasterAccess until the ID card
-      access console is added.
-    type: Tweak
-  id: 1845
-  time: '2025-06-09T12:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6667
-- author: stranthbackup
-  changes:
-  - message: Janitorial Bucket now shows in Autolathe Recipes.
-    type: Fix
-  - message: Mop Buckets and Janitorial buckets now fit into most storage items.
-    type: Fix
-  - message: Janitorial Buckets now exist in your hand, for everyone to see.
-    type: Fix
-  - message: Janitorial Carts start with a Janitorial Bucket and Mop now, as the UN
-      intended.
-    type: Fix
-  id: 1846
-  time: '2025-06-09T13:25:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6652
-- author: noctyrnal
-  changes:
-  - message: Added clearer names to most non-standard jobs in the "Spawn as Job" menu
-    type: Add
-  id: 1847
-  time: '2025-06-09T14:44:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6669
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Added the Aegis OB, Aegis Secure Box, and Aegis keycard.
-    type: Add
-  id: 1848
-  time: '2025-06-09T20:23:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6668
-- author: noctyrnal
-  changes:
-  - message: Added CLF Engineer, Specialist and Medic roles.
-    type: Add
-  - message: Added Earmuffs and IEDs, commonly used by the CLF.
-    type: Add
-  id: 1849
-  time: '2025-06-09T20:24:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6671
-- author: noctyrnal
-  changes:
   - message: Added the MARSOC Team Leader role for ERTs.
     type: Add
   - message: Added the missing MARSOC Balaclava, Headset and shells in their shotgun.
@@ -4540,5 +4351,129 @@
   id: 2336
   time: '2025-09-08T11:49:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7823
+- author: CyberTropic
+  changes:
+  - message: Fixed floodlights not turning on.
+    type: Fix
+  id: 2337
+  time: '2025-09-09T22:57:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7868
+- author: J C Denton
+  changes:
+  - message: Fixed armory lockers being destructible.
+    type: Fix
+  id: 2338
+  time: '2025-09-09T23:03:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7852
+- author: DimFlower
+  changes:
+  - message: Fixed 1984 Hollowpoint AP Values
+    type: Fix
+  id: 2339
+  time: '2025-09-09T23:03:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7854
+- author: NotInButiN
+  changes:
+  - message: Fixed Overall category on RMC Playtime Stats
+    type: Fix
+  id: 2340
+  time: '2025-09-09T23:08:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7795
+- author: Vixting
+  changes:
+  - message: preserve tacmap state
+    type: Add
+  id: 2341
+  time: '2025-09-09T23:19:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7424
+- author: N0lim
+  changes:
+  - message: Fixed stack overflow when two hiveless xeno damage each other with acid
+      blood
+    type: Fix
+  - message: Fixed wrong damage multiplier for acid blood splash in case xeno vs xeno
+    type: Fix
+  id: 2342
+  time: '2025-09-09T23:24:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7843
+- author: 4310V343k
+  changes:
+  - message: Marines in the crew manifest are now split into squads and sorted based
+      on their role!
+    type: Add
+  id: 2343
+  time: '2025-09-09T23:33:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6563
+- author: yagwog
+  changes:
+  - message: Fixed wheelchair movement.
+    type: Fix
+  id: 2344
+  time: '2025-09-10T00:40:58.001958+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Started tracking total parasite infections per player, for a future date
+      when their rank is changed to account for total infections instead of play-time.
+    type: Add
+  - message: Fixed sniper rifles chambering a bullet when trying to use aimed shot.
+    type: Fix
+  - message: Fixed the XO only having 45 vendor points instead of 120.
+    type: Fix
+  - message: Fixed the winter wyvern not stunning marines in 1 hit.
+    type: Fix
+  - message: Fixed the scout specialist's thermal cloak having 21 slots of storage
+      instead of 15.
+    type: Fix
+  - message: Fixed explosions from dropship CAS weapons not working.
+    type: Fix
+  - message: Fixed girders being able to be moved, pulled, unanchored, and taking
+      too little damage.
+    type: Fix
+  - message: Unanchored folding barricades can now be lowered by xenos.
+    type: Tweak
+  - message: Unanchored barricades now take 3 times more damage.
+    type: Tweak
+  - message: Point blanks are now lag compensated (they take into account your ping
+      for distance calculations). This doesn't lag compensate projectile stun distance
+      checks, at least not yet.
+    type: Tweak
+  id: 2345
+  time: '2025-09-10T00:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7874
+- author: noctyrnal
+  changes:
+  - message: Added a PVE version of the M34 Incinerator Unit, which fires ~6 times
+      faster.
+    type: Add
+  id: 2346
+  time: '2025-09-10T01:14:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7873
+- author: DrSmugleaf
+  changes:
+  - message: Fixed multiple UIs having broken titles, text, etc.
+    type: Fix
+  id: 2347
+  time: '2025-09-10T01:13:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7876
+- author: Spaghetti
+  changes:
+  - message: Added fireteam prefixes to squad comms.
+    type: Add
+  - message: Marines assigned to fireteams with an already existing FTL will have
+      their tracker set to the FTL.
+    type: Tweak
+  id: 2348
+  time: '2025-09-10T01:15:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7788
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the playtime tracker window duplicating some playtimes.
+    type: Fix
+  - message: Fixed the tactical map's default mode not showing area names.
+    type: Fix
+  id: 2349
+  time: '2025-09-10T01:41:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7877
 Name: RMC14
 Order: -1
