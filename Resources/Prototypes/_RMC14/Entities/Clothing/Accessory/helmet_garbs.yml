@@ -242,58 +242,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
-    state: icon
+    layers:
+    - state: base
+    - state: camo
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
-      state: helmet
-
-- type: entity
-  parent: RMCHelmetGarbGasmask
-  id: RMCHelmetGarbGasmaskDesert
-  name: Desert M5 integrated gasmask
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
-    state: icon
-  - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
-      state: helmet
-
-
-- type: entity
-  parent: RMCHelmetGarbGasmask
-  id: RMCHelmetGarbGasmaskJungle
-  name: Jungle M5 integrated gasmask
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
-    state: icon
-  - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
-      state: helmet
-
-- type: entity
-  parent: RMCHelmetGarbGasmask
-  id: RMCHelmetGarbGasmaskUrban
-  name: Urban M5 integrated gasmask
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
-    state: icon
-  - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
       state: helmet
 
 - type: entity
