@@ -170,6 +170,31 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM4A4Rubber
+  name: M4A4 rubber magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM4A4Rubber
+    - RMCMagazinePistolM4A4
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmRubber
+    proto: RMCCartridgePistol9mmRubber
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984riot.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseMagazinePistol
   id: RMCMagazinePistolM77Rubber
   name: M77 rubber magazine (9mm)
   components:
@@ -224,6 +249,9 @@
 
 - type: Tag
   id: RMCMagazinePistolM1984Rubber
+
+- type: Tag
+  id: RMCMagazinePistolM4A4Rubber
 
 - type: Tag
   id: RMCMagazinePistolM77Rubber

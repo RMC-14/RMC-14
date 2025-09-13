@@ -46,7 +46,7 @@
         amount: 25
       - id: RMCWeaponRevolverM44Empty
         amount: 25
-      - id: CMWeaponPistolM1984Empty
+      - id: RMCWeaponPistolM4A4Empty
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
@@ -58,7 +58,7 @@
         amount: 25
       - id: RMCSpeedLoaderM44
         amount: 20
-      - id: CMMagazinePistolM1984
+      - id: RMCMagazinePistolM4A4
         amount: 25
       - id: RMCMagazinePistolM13
         amount: 25

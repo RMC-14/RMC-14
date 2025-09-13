@@ -184,6 +184,31 @@
   iconColor: "#b2976e"
   objectType: Item
 
+# M4A4
+- type: construction
+  parent: RMC
+  name: Magazine Box (M4A4 Reg)
+  id: RMCBoxMagazinePistolM4A4
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM4A4Empty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M4A4 mags.
+  iconColor: "#b2976e"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M4A4 AP)
+  id: RMCBoxMagazinePistolM4A4AP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM4A4APEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M4A4 mags.
+  iconColor: "#b2976e"
+  objectType: Item
+
 # 88 mod 4 / 88m4
 - type: construction
   parent: RMC
@@ -598,6 +623,19 @@
         amount: 1
         doAfter: 0.25
 
+    # M4A4
+    - to: RMCBoxMagazinePistol4A4Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistol4A4APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M77AP
     - to: RMCBoxMagazinePistolM77APEmpty
       steps:
@@ -777,6 +815,13 @@
     entity: RMCBoxMagazinePistolM1984Empty
   - node: RMCBoxMagazinePistolM1984APEmpty
     entity: RMCBoxMagazinePistolM1984APEmpty
+
+  # M4A4
+  - node: RMCBoxMagazinePistolM4A4Empty
+    entity: RMCBoxMagazinePistolM4A4Empty
+
+  - node: RMCBoxMagazinePistolM4A4APEmpty
+    entity: RMCBoxMagazinePistolM4A4APEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty

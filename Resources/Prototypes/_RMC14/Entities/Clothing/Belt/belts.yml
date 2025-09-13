@@ -535,9 +535,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazinePistolM1984
+    - id: RMCMagazinePistolM4A4
       amount: 2
-    - id: CMWeaponPistolM1984
+    - id: RMCWeaponPistolM4A4
 
 - type: entity
   parent: CMBeltMarine
@@ -651,6 +651,9 @@
       state: m1984
       map: [ "m1984_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m4a4
+      map: [ "m4a4_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: mk80
       map: [ "mk80_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -725,6 +728,7 @@
     - holstered
     - _m77_fill
     - m1984_fill
+    - m4a4_fill
     - mk80_fill
     - b92fs_fill
     - mk45_fill
@@ -747,6 +751,10 @@
         whitelist:
           tags:
           - CMWeaponPistolM1984
+      m4a4_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM4A4
       mk80_fill:
         whitelist:
           tags:
@@ -1208,13 +1216,24 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
-  suffix: Filled
+  suffix: Filled, M1984
   components:
   - type: StorageFill
     contents:
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM4A4BeltFilled
+  suffix: Filled, M4A4
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolM4A4
+      amount: 6
+    - id: RMCWeaponPistolM4A4
 
 - type: entity
   parent: RMCBeltHolsterPistol

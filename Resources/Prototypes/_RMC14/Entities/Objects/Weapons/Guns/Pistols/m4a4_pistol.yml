@@ -1,17 +1,24 @@
 - type: entity
-  parent: RMCWeaponPistolM4A4
-  id: CMWeaponPistolM1984
-  name: M1984 service pistol
-  description: An M1984 Service Pistol, once the standard issue sidearm of the UNMC but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCWeaponPistolM4A4
+  name: M4A4 service pistol
+  description: An M4A4 service pistol, a standard issue sidearm of the UNMC, an updated edition of the previous 1984 model. Fires 9mm pistol rounds.
   components:
   - type: Tag
     tags:
     - Sidearm
-    - CMWeaponPistolM1984
+    - RMCWeaponPistolM4A4
+  - type: RMCSelectiveFire
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 10
+    burstScatterMult: 5
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m4a4.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m4a4.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -21,10 +28,10 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolM1984
-          - RMCMagazinePistolM1984AP
-          - RMCMagazinePistolM1984Rubber
-        startingItem: CMMagazinePistolM1984
+          - RMCMagazinePistolM4A4
+          - RMCMagazinePistolM4A4AP
+          - RMCMagazinePistolM4A4Rubber
+        startingItem: RMCMagazinePistolM4A4
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -45,10 +52,15 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.095
+      rmc-aslot-rail: -0.065, 0.175
+      rmc-aslot-underbarrel: 0.312, -0.347
 
 - type: entity
-  parent: CMWeaponPistolM1984
-  id: CMWeaponPistolM1984Empty
+  parent: RMCWeaponPistolM4A4
+  id: RMCWeaponPistolM4A4Empty
   suffix: Empty
   components:
   - type: ItemSlots
@@ -60,20 +72,20 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolM1984
-          - RMCMagazinePistolM1984AP
-          - RMCMagazinePistolM1984Rubber
+          - RMCMagazinePistolM4A4
+          - RMCMagazinePistolM4A4AP
+          - RMCMagazinePistolM4A4Rubber
 
 #9mm
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolM1984
-  name: M1984 magazine (9mm)
+  id: RMCMagazinePistolM4A4
+  name: M4A4 magazine (9mm)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolM1984
+    - RMCMagazinePistolM4A4
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -91,17 +103,42 @@
   - type: MagazineVisuals
     magState: mag
 
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol9mm
+  name: bullet (9mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: entity
+  id: CMCartridgePistol9mm
+  name: cartridge (9mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol9mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistol9mm
+
 #9mmAP
 - type: entity
-  parent: CMMagazinePistolM1984
-  id: RMCMagazinePistolM1984AP
-  name: M1984 AP magazine (9mm)
+  parent: RMCMagazinePistolM4A4
+  id: RMCMagazinePistolM4A4AP
+  name: M4A4 AP magazine (9mm)
   description: A pistol magazine. This one contains armor-piercing bullets, which have noticeably higher stopping power on well-armored targets, and noticeably less on unarmored or lightly-armored targets.
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - RMCMagazinePistolM1984AP
+    - RMCMagazinePistolM4A4AP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -121,9 +158,9 @@
 
 #9mm HP
 - type: entity
-  parent: CMMagazinePistolM1984
-  id: RMCMagazinePistolM1984HP
-  name: M1984 hollowpoint magazine (9mm)
+  parent: RMCMagazinePistolM4A4
+  id: RMCMagazinePistolM4A4HP
+  name: M4A4 hollowpoint magazine (9mm)
   description: A hollow-point 9mm pistol magazine for the M1984. These hollow-point bullets have noticeably higher stopping power on unarmored targets, and noticeably less on armored targets.
   components:
   - type: BallisticAmmoProvider
@@ -141,11 +178,36 @@
     - state: ammo_band
       color: "#BA5D00"
 
-- type: Tag
-  id: CMMagazinePistolM1984
+- type: entity
+  parent: CMCartridgePistol9mm
+  id: RMCCartridgePistol9mmHP
+  name: cartridge (9mm HP)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmHP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmHP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol9mmHP
+  name: bullet (9mm HP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55 # TODO RMC14 30 shrapneltPistol9mmHP
 
 - type: Tag
-  id: RMCMagazinePistolM1984AP
+  id: RMCCartridgePistol9mmHP
 
 - type: Tag
-  id: CMWeaponPistolM1984
+  id: RMCMagazinePistolM4A4
+
+- type: Tag
+  id: RMCMagazinePistolM4A4AP
+
+- type: Tag
+  id: RMCWeaponPistolM4A4

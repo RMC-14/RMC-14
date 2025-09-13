@@ -47,7 +47,7 @@
         amount: 50
       - id: RMCWeaponRevolverM44
         amount: 50
-      - id: CMWeaponPistolM1984
+      - id: RMCWeaponPistolM4A4
         amount: 50
       - id: RMCWeaponPistolM13
         amount: 50
@@ -372,7 +372,7 @@
         amount: 100
       - id: RMCSpeedLoaderM44
         amount: 80
-      - id: CMMagazinePistolM1984
+      - id: RMCMagazinePistolM4A4
         amount: 100
       - id: RMCMagazinePistolM13
         amount: 100
@@ -466,13 +466,13 @@
       - id: RMCBoxMagazineRifleM54CExt
         name: Magazine Box (Ext M54C x 8)
         box: CMMagazineRifleM54CExt
-      - id: RMCBoxMagazinePistolM1984
-        name: Magazine Box (M1984 x 16)
-        box: CMMagazinePistolM1984
-#      - name: Magazine Box (AP M1984 x 16)
-#        box: CMMagazinePistolM1984AP
-#      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazinePistolM4A4
+        name: Magazine Box (M4A4 x 16)
+        box: RMCMagazinePistolM4A4
+      - name: Magazine Box (AP M4A4 x 16)
+        box: RMCMagazinePistolM4A4AP
+      - name: Magazine Box (HP M4A4 x 16)
+        box: RMCMagazinePistolM4A4HP
       - id: RMCBoxMagazineRifleM4SPR
         name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
