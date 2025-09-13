@@ -7,8 +7,11 @@ namespace Content.Client._RMC14.Construction;
 [GenerateTypedNameReferences]
 public sealed partial class RMCConstructionWindow : DefaultWindow
 {
+    public event Action? ClearGhostsPressed;
+
     public RMCConstructionWindow()
     {
         RobustXamlLoader.Load(this);
+        ClearGhostsButton.OnPressed += _ => ClearGhostsPressed?.Invoke();
     }
 }
