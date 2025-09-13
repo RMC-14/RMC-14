@@ -101,7 +101,7 @@ public sealed class CrewManifestListing : BoxContainer
             AddChild(new CrewManifestSection(
                 _prototypeManager,
                 _spriteSystem,
-                Loc.GetString(department.Name),
+                department.Name,
                 depEntries));
         }
 
@@ -113,7 +113,7 @@ public sealed class CrewManifestListing : BoxContainer
             AddChild(new CrewManifestSection(
                 _prototypeManager,
                 _spriteSystem,
-                Loc.GetString(squad),
+                squad,
                 squadEntries));
         }
     }
