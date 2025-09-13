@@ -246,6 +246,10 @@
     - state: base
     - state: camo
       map: [ "enum.ItemCamouflageLayers.Layer" ]
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+      state: helmet
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
   - type: ItemCamouflage
@@ -255,10 +259,6 @@
       Snow: "#ddcbc9"
       Classic: "#c7e7d9"
       Urban: "#acb8c7"
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
-      state: helmet
 
 - type: entity
   parent: RMCHelmetGarbBase
