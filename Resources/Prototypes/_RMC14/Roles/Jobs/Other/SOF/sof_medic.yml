@@ -1,17 +1,17 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
-  id: CMMarineRaider
-  name: rmc-job-name-marine-raider
+  id: CMMarineRaiderMedic
+  name: rmc-job-name-marine-raider-medic
   description: "" # TODO RMC14
-  playTimeTracker: CMJobMarineRaider
+  playTimeTracker: CMJobMarineRaiderMedic
   ranks:
     RMCRankStaffSergeant: [ ]
-  startingGear: RMCGearMarineRaider
-  icon: RMCJobIconMarineRaider
+  startingGear: RMCGearMarineRaiderMedic
+  icon: RMCJobIconMarineRaiderMedic
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,8 +26,9 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillEndurance: 5
         RMCSkillJtac: 1
+        RMCSkillSurgery: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-marine-raider
+      prefix: rmc-job-prefix-marine-raider-medic
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -36,74 +37,74 @@
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidMarineRaider
-  name: DEATHSQUAD marine raider ghost role
+  id: RMCRandomHumanoidMarineRaiderMedic
+  name: DEATHSQUAD marine raider medic ghost role
   suffix: Role
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCMarineRaider
+    settings: RMCMarineRaiderMedic
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCMarineRaider
+  id: RMCMarineRaiderMedic
   components:
   - type: GhostRole
-    name: rmc-job-name-marine-raider
+    name: rmc-job-name-marine-raider-medic
     description: rmc-ghost-role-information-sof-description
     rules: rmc-ghost-role-information-sof-rules
     reregister: false
-    job: CMMarineRaider
+    job: CMMarineRaiderMedic
     raffle:
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobRifleman
+      role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSOF
 
 - type: startingGear
-  id: RMCGearMarineRaider
+  id: RMCGearMarineRaiderMedic
   equipment:
     head: RMCArmorHelmetMARSOC
     mask: RMCMaskBalaclavaMARSOC
     ears: RMCHeadsetMARSOC
-    jumpsuit: RMCJumpsuitMarsocWebbingGrenades
+    jumpsuit: RMCJumpsuitMarsocWebbingMedic
     outerClothing: RMCArmorMARSOCXM40
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
-    belt: RMCBeltMOU482Filled
+    belt: RMCBeltMedicBagMARSOCFilled
     back: RMCSatchelMARSOC
-    pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
+    pocket1: RMCDefibrillatorCompact
     pocket2: RMCPouchToolsSocMarineRaiderFill
   storage:
     back:
     - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
-  id: CMJobMarineRaider
+  id: CMJobMarineRaiderMedic
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconMarineRaider
+  id: RMCJobIconMarineRaiderMedic
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_soc
+    state: hudsquad_socmed
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCDogtagMarineRaider
-  name: Marine Raider's dogtags
+  id: RMCDogtagMarineRaiderMedic
+  name: Marine Raider Combat Lifesaver's dogtags
   components:
   - type: PresetIdCard
     job: CMMarineRaider
 
 - type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaider ]
-  id: RMCDogtagMarineRaiderHidden
+  id: RMCDogtagMarineRaiderMedicHidden
   categories: [ HideSpawnMenu ]
