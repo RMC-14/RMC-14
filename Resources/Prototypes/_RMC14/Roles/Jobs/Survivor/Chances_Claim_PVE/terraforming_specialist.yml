@@ -1,0 +1,76 @@
+﻿- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorChancesTerraformingSpecialist
+  name: rmc-job-name-survivor-terraforming-specialist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesTerraformingSpecialist
+  startingGear: RMCGearSurvivorChancesTerraformingSpecialist
+  spawnMenuRoleName: Terraforming Specialist (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorChancesTerraformingSpecialist
+  equipment:
+    eyes: RMCGlassesAviators
+    uniform: CMJumpsuitLiaisonBrown
+    outerClothing: RMCJacketCorporateBlack
+    gloves: CMHandsBrown
+    belt: CMClipboard
+  inhand:
+  - CMPenClicky
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesTerraformingSpecialist
+  name: terraforming specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesTerraformingSpecialist
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesTerraformingSpecialist
+  name: terraforming specialist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesTerraformingSpecialist
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesTerraformingSpecialist
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesTerraformingSpecialist

@@ -1,0 +1,71 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorChancesColonyMaintTech
+  name: rmc-job-name-survivor-colony-maint-tech
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesColonyMaintTech
+  startingGear: RMCGearSurvivorChancesColonyMaintTech
+  spawnMenuRoleName: Colony Maintenance Technician (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorChancesColonyMaintTech
+  equipment:
+    head: RMCHardhatOrange
+    outerClothing: RMCWEYARainCoat
+    jumpsuit: CMJumpsuitLiaisonBlue
+    pocket1: RMCPouchToolsFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesColonyMaintTech
+  name: colony maintenance technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesColonyMaintTech
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesColonyMaintTech
+  name: colony maintenance technician ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesColonyMaintTech
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesColonyMaintTech
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesColonyMaintTech
