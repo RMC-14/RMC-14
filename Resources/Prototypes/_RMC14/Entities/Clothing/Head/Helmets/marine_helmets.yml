@@ -34,6 +34,7 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/urban.rsi
+  - type: OverwatchCamera
 # TODO squad HUD visor should be security visor
 
 - type: entity
@@ -53,6 +54,7 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/urban.rsi
+  - type: OverwatchCamera
 
 - type: entity
   parent: ArmorHelmetM10

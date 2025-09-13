@@ -240,6 +240,7 @@
     trackerModes:
     - ChiefMilitaryPolice
     - MilitaryWarden
+    - FireteamLeader
 
 - type: entity
   parent: CMHeadsetMPO
@@ -256,6 +257,7 @@
     - ExecutiveOfficer
     - ChiefMilitaryPolice
     - MilitaryWarden
+    - FireteamLeader
 
 - type: entity
   parent: RMCHeadsetShip
@@ -301,6 +303,7 @@
     - ExecutiveOfficer
     - AuxiliarySupportOfficer
     - ChiefMilitaryPolice
+    - FireteamLeader
 
 - type: entity
   parent: RMCHeadsetShip
