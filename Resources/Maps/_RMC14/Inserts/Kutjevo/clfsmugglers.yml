@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/11/2025 15:58:09
-  entityCount: 621
+  time: 09/12/2025 14:51:15
+  entityCount: 626
 maps: []
 grids:
 - 1
@@ -1913,6 +1913,22 @@ entities:
       rot: 3.141592653589793 rad
       pos: 35.5,12.5
       parent: 1
+  - uid: 622
+    components:
+    - type: MetaData
+      name: Airlock
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 32.5,16.5
+      parent: 1
+  - uid: 623
+    components:
+    - type: MetaData
+      name: Airlock
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 31.5,16.5
+      parent: 1
 - proto: CMDrinkCanBeerLite
   entities:
   - uid: 78
@@ -2253,6 +2269,27 @@ entities:
     components:
     - type: Transform
       pos: 15.5,5.5
+      parent: 1
+- proto: CMSpawnPointSurvivorCLFEngineer
+  entities:
+  - uid: 624
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+- proto: CMSpawnPointSurvivorCLFLeader
+  entities:
+  - uid: 626
+    components:
+    - type: Transform
+      pos: 31.5,19.5
+      parent: 1
+- proto: CMSpawnPointSurvivorCLFMedic
+  entities:
+  - uid: 625
+    components:
+    - type: Transform
+      pos: 20.5,16.5
       parent: 1
 - proto: CMSpawnPointSurvivorCLFSoldier
   entities:

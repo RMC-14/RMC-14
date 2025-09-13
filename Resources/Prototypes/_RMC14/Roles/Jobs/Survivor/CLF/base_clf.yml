@@ -22,7 +22,6 @@
     mask: RMCM5Bayonet # TODO RMC14
     jumpsuit: RMCJumpsuitCLFSoldier
     back: RMCSatchelMarineForeconSurvivorFill
-    shoes: RMCShoesJackbootsFilled
     id: RMCIDCardCLFSoldier
     ears: RMCHeadsetDistressCLF
     pocket1: RMCPouchFirstAidInjectors
@@ -55,10 +54,22 @@
       # /obj/item/clothing/head/helmet/swat
       - [ RMCHardHat]
       - [ RMCHelmetWelding ]
-      # /obj/item/clothing/head/bandana,
+      # /obj/item/clothing/head/bandana
       - [ CMHeadBandRed ]
       - [ CMHeadBandRebel ]
-      # /obj/item/clothing/head/headband/rambo,
+      # /obj/item/clothing/head/headband/rambo
+    - # Rebel shoes
+      - [ RMCShoesBlack ]
+      - [ RMCShoesBrown ]
+      - [ RMCShoesLaceup ]
+      - [ RMCShoesLeather ]
+      - [ RMCShoesCombat ]
+      - [ CMBootsGrey ]
+    - # Rebel gloves
+      - [ RMCHandsBlack ]
+      - [ RMCHandsLeatherBlack ]
+      - [ RMCHandsCombat ]
+      - [ ClothingHandsGlovesLeather ] # todo rmc botanic leather gloves
     randomWeapon:
     - [ RMCM1984BeltFilled ]
     - [ RMCM1984BeltFilled ]
@@ -80,6 +91,23 @@
     - [ WeaponRifleM16, RMCMagazineRifleM16 , RMCMagazineRifleM16 , RMCMagazineRifleM16 ]
     - [ WeaponSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15 ]
     - [ RMCWeaponSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27 ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetCLFNoPrimary
+  id: RMCSurvivorPresetCLFSMG
+  name: clf survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCWeaponSMGType19, RMCMagazineSMGType19, RMCMagazineSMGType19, RMCMagazineSMGType19 ]
+    - [ RMCWeaponSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27 ]
+    - [ WeaponSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5 ]
+    - [ RMCWeaponSMGType64, RMCMagazineSMGType64, RMCMagazineSMGType64, RMCMagazineSMGType64 ]
+    - [ WeaponSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15 ]
+    - [ RMCWeaponSMGUZI, RMCMagazineSMGUZI, RMCMagazineSMGUZI, RMCMagazineSMGUZI ]
+    - [ RMCWeaponSMGFP9000, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000 ]
     primaryWeaponChance: 1
 
 - type: entity

@@ -200,11 +200,11 @@
         CMSurvivorCorporate:
         - CMSurvivor: 0
         CMSurvivorDoctor:
-        - CMSurvivor: 0
+        - RMCSurvivorCLFMedic: 1
         CMSurvivorEngineer:
-        - CMSurvivor: 0
+        - RMCSurvivorCLFEngineer: 1
         CMSurvivorSecurity:
-        - CMSurvivor: 0
+        - RMCSurvivorCLFLeader: 1 #TODO I think this should be the CO job
         CMSurvivorScientist:
         - CMSurvivor: 0
 

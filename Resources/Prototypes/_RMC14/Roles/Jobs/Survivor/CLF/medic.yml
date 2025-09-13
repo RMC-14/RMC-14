@@ -1,0 +1,61 @@
+- type: job
+  parent: RMCSurvivorCLFBase
+  id: RMCSurvivorCLFMedic
+  name: cm-job-name-clf-medic
+  icon: RMCJobIconCLFMedic
+  startingGear: RMCGearSurvivorCLFMedic
+  spawnMenuRoleName: CLF Medic (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-clf-medic
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCLFSMG
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorCLFMedic
+  equipment:
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFWebbing
+    id: RMCIDCardCLFMedic
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpack
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - RMCGrenadeIED
+    - CMAdvFirstAidKitFilled
+    - CMAdvFirstAidKitFilled
+    - CMPortableSurgicalBedSpawnFolded
+    - RMCPacketGrenadeSmokeFilled
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMCrowbar
+    belt:
+    - CMRollerBedSpawnFolded
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivorCLFMedic
+  name: clf medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorCLFMedic
+  - type: Sprite
+    state: clf_spawn

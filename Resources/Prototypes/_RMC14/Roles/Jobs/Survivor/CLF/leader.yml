@@ -1,0 +1,79 @@
+- type: job
+  parent: RMCSurvivorCLFBase
+  id: RMCSurvivorCLFLeader
+  name: cm-job-name-clf-commander
+  icon: RMCJobIconCLFCellCommander
+  startingGear: RMCGearSurvivorCLFLeader
+  spawnMenuRoleName: CLF Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 4
+        RMCSkillSmartGun: 1
+        RMCSkillExecution: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-clf-cell-commander
+  hidden: true
+
+
+- type: startingGear
+  id: RMCGearSurvivorCLFLeader
+  equipment:
+    head: RMCHeadBeretAgentIvan
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesSecurityBlue #TODO SensorMate HUD
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled # TODO RMC14
+    id: RMCIDCardCLFCellCommander # TODO RMC14
+    belt: CMBeltMarine # TODO RMC14
+    back: RMCSatchelLightpack
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+  inhand:
+    - WeaponRifleMAR40
+  storage:
+    back:
+    - RMCGrenadeIncendiary # TODO IED Incendiary
+    - RMCGrenadeIncendiary
+    - RMCExplosivePlastic
+    - RMCFlashlight
+    - CMScrewdriver
+    - CMMultitool
+    - CMWeaponPistolM1984 #TODO M1911
+    - CMMagazinePistolM1984
+    - CMMagazinePistolM1984
+    - CMFirstAidKitFilled
+    belt:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivorCLFLeader
+  name: clf leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorCLFLeader
+  - type: Sprite
+    state: clf_spawn
