@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/tree/master/icons/mob/humans/onmob/clothing/helmet_garb/visors.dmi, palette taken from Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/tree/master/icons/mob/humans/onmob/clothing/helmet_garb/helmet_covers.dmi, grayscaled by UnicornOnLSD (Git)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "camo"
+    },
+    {
+      "name": "helmet-color",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    }
+  ]
+}
