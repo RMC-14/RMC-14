@@ -3,6 +3,8 @@ using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids.Word;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -10,6 +12,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -250,6 +253,8 @@ namespace Content.Client.Chat.UI
                 if (message.SpeechStyleClass != null)
                     speechStyleClass = message.SpeechStyleClass;
                 else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
+                    speechStyleClass = "commanderSpeech";
+                else if (entityManager.HasComponent<XenoWordQueenComponent>(senderUid) || entityManager.HasComponent<InnateCommandSpeechComponent>(senderUid))
                     speechStyleClass = "commanderSpeech";
             }
 

@@ -1,0 +1,6 @@
+namespace Content.Shared._RMC14.Chat;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class InnateCommandSpeechComponent : Component
+{
+}
