@@ -21,6 +21,13 @@
     slots:
     - Mask
     - Suitstorage
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Mask/gas/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Mask/gas/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Mask/gas/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Mask/gas/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Mask/gas/urban.rsi
   - type: Item
     size: Small
   - type: Tag
