@@ -66,8 +66,8 @@
       - id: RMCMK80BeltFilled
         name: MK80 pistol
         recommended: true
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
         recommended: true
       - id: CMM77BeltFilled
         name: M77 pistol
@@ -751,8 +751,8 @@
       - id: RMCMK80BeltFilled
         name: MK80 pistol
         recommended: true
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
       - id: CMM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
@@ -907,7 +907,7 @@
       - id: RMCGunCaseRevolverRSh9
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
-      - id: RMCGunCasePistolM1984
+      - id: RMCGunCasePistolM4A4
     - name: Backpack
       jobs:
       - CMChiefMP
@@ -1098,8 +1098,8 @@
       - CMChiefEngineer
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
         recommended: true
       - id: CMM77BeltFilled
         name: M77 pistol
@@ -1204,8 +1204,8 @@
       - CMQuartermaster
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
         recommended: true
       - id: CMM77BeltFilled
         name: M77 pistol
@@ -1352,8 +1352,8 @@
       - CMCMO
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
       - id: CMM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
@@ -1487,8 +1487,8 @@
       - CMAuxiliarySupportOfficer
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCM1984BeltFilled
-        name: M1984 service pistol
+      - id: RMCM4A4BeltFilled
+        name: M4A4 service pistol
         recommended: true
       - id: CMM77BeltFilled
         name: M77 pistol

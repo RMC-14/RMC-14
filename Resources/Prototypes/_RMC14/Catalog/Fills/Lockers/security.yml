@@ -105,7 +105,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCM1984BeltFilled
+    - id: RMCM4A4BeltFilled
       amount: 4
-    - id: RMCBoxMagazinePistolM1984
+    - id: RMCBoxMagazinePistolM4A4
       amount: 1

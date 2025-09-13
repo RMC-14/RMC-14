@@ -200,6 +200,30 @@
      - id: CMMagazinePistolM1984
        amount: 2
 
+# M4A4 service pistol
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM4A4
+  name: M4A4 Service Pistol case
+  description: A gun case containing an M4A4 Service Pistol.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolM4A4
+      - RMCMagazinePistolM4A4
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponPistolM4A4
+    - id: RMCMagazinePistolM4A4
+      amount: 6
+
 # RSh9 Assault Revolver
 - type: entity
   parent: RMCGunCaseBase

@@ -1108,6 +1108,98 @@
   - type: CMItemSlots
     startingItem: RMCMagazinePistolM1984AP
 
+# M4A4 REG
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM4A4Empty
+  name: magazine box (M4A4 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM4A4Empty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#b2976e"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#b2976e"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM4A4
+
+- type: entity
+  parent: RMCBoxMagazinePistolM4A4Empty
+  id: RMCBoxMagazinePistolM4A4
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM4A4
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM4A4
+
+# M4A4 AP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM4A4APEmpty
+  name: magazine box (AP M4A4 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM4A4APEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#b2976e"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#b2976e"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM4A4
+
+- type: entity
+  parent: RMCBoxMagazinePistolM4A4APEmpty
+  id: RMCBoxMagazinePistolM4A4AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM4A4AP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM4A4AP
+
 # MK80 REG
 - type: entity
   parent: RMCBoxMagazinePistolBase

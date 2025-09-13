@@ -55,7 +55,7 @@
     ears: CMHeadsetRequisition
     pocket1: RMCPouchGeneralMedium
     pocket2: CMStampApproved
-    belt: RMCM1984BeltFilled
+    belt: RMCM4A4BeltFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -217,7 +217,7 @@
       entries:
       - id: RMCWeaponPistolM77
         amount: 2
-      - id: CMWeaponPistolM1984
+      - id: RMCWeaponPistolM4A4
         amount: 2
       - id: RMCWeaponPistolM82F
         amount: 1

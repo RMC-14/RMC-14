@@ -123,7 +123,7 @@
     - name: Personal Secondary
       choices: { CMSecondary: 1 }
       entries:
-      - id: RMCGunCasePistolM1984
+      - id: RMCGunCasePistolM4A4
       - id: RMCGunCasePistolM77
     - name: Ammunition
       entries:
