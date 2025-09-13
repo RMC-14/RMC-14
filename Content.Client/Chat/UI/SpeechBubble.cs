@@ -3,7 +3,6 @@ using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Chat;
-using Content.Shared._RMC14.Xenonids.Word;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
