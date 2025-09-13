@@ -8,6 +8,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/41a9b4198368b478eb611f74e810142d2761aa10/sound/weapons/gun_boomslang_fire.ogg"
 
+- files: ["gun_es4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_es4.ogg"
+
 - files: ["gun_m1984_1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
