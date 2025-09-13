@@ -1124,7 +1124,7 @@
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#ffc000"
-    - state: pistol_box_1984
+    - state: pistol_box_m4a4
       color: "#ffcb26"
     - state: pistol_box_marking
       color: "#7c4c1b"
@@ -1170,7 +1170,7 @@
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#ffc000"
-    - state: pistol_box_1984
+    - state: pistol_box_m4a4
       color: "#ffcb26"
     - state: pistol_box_marking
       color: "#7c4c1b"
@@ -1858,7 +1858,7 @@
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#727e90"
-    - state: pistol_box_1984
+    - state: pistol_box_m13
       color: "#ffcb26"
     - state: pistol_box_marking
       color: "#7c4c1b"
@@ -1904,7 +1904,7 @@
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#727e90"
-    - state: pistol_box_1984
+    - state: pistol_box_m13
       color: "#ffcb26"
     - state: pistol_box_marking
       color: "#ffcb26"
@@ -1950,7 +1950,7 @@
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#727e90"
-    - state: pistol_box_1984
+    - state: pistol_box_m13
       color: "#ffa126"
     - state: pistol_box_marking
       color: "#ffa126"
