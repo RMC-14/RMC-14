@@ -56,13 +56,15 @@
     supplyDrop: true
 
 - type: entity
-  parent: RMCAreaPortNereidCargo
+  parent: RMCAreaPortNereidSecurity
   id: RMCAreaPortNereidMining
   name: Port Nereid - TMCC Mining Outpost
   components:
   - type: Sprite
     state: tunnels0
     weatherEnabled: false
+  - type: Area
+    minimapColor: '#a16027'
 
 - type: entity
   parent: RMCAreaProtectionFour
