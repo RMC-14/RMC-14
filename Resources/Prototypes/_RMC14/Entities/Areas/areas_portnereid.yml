@@ -47,7 +47,7 @@
     weatherEnabled: false
     lasing: false
     mortarPlacement: false
-    mortarFire: false
+    mortarFire: true
     medevac: false
     paradropping: false
     CAS: true
