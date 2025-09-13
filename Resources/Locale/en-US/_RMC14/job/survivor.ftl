@@ -252,3 +252,19 @@ CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
 cm-job-prefix-survivor-riot-officer = UN RO
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
+
+# Kutjevo Refinery Survs
+
+rmc-job-name-survivor-kutjevo-chaplain = Kutjevo Chaplain
+
+rmc-job-name-survivor-kutjevo-corporate = Kutjevo Corporate Liaison
+
+rmc-job-name-survivor-kutjevo-doctor = Kutjevo Doctor
+
+rmc-job-name-survivor-kutjevo-engineer = Kutjevo Engineer
+
+rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
+
+rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
+
+rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator

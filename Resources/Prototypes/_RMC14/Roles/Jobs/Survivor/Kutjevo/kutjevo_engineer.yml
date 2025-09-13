@@ -1,0 +1,56 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorKutjevoEngineer
+  name: rmc-job-name-survivor-kutjevo-engineer
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoEngineer
+  spawnMenuRoleName: Kutjevo Engineer (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorKutjevoEngineer
+  equipment:
+    head: ArmorHelmetPMCKutjevo
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitKutjevoDrysuit
+    outerClothing: RMCHazardVestBlack
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoEngineer
+  name: survivor kutjevo engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoEngineer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetKutjevoEngineer
+  name: kutjevo engineer colonist preset
+  categories: [ HideSpawnMenu ]
