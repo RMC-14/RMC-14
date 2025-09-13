@@ -348,6 +348,8 @@
   - type: Clothing
     slots:
     - suitStorage
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSmartGun
 
 - type: entity
   parent: RMCMagazineSmartGun

@@ -3,7 +3,7 @@
   parent: BaseItem
   id: RMCBoxBulletsBase
   name: rifle ammunition box (???)
-  description: An unknown ammunition box. It comes with a leather strap allowing to wear it on the back.
+  description: An unknown ammunition box. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Item
     size: Huge
@@ -58,7 +58,7 @@
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifle
   name: rifle ammunition box (10x24mm)
-  description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
+  description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Sprite
     layers:
@@ -92,7 +92,7 @@
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifleAP
   name: rifle ammunition box (10x24mm AP)
-  description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
+  description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Sprite
     layers:
@@ -126,7 +126,7 @@
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsSMG
   name: SMG ammunition box (10x20mm)
-  description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
+  description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Sprite
     layers:
@@ -160,7 +160,7 @@
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsSMGAP
   name: SMG ammunition box (10x20mm AP)
-  description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
+  description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Sprite
     layers:
@@ -188,4 +188,35 @@
     node: RMCBoxBulletsSMGAPEmpty
   - type: BulletBox
     bulletType: RMCBoxBulletsSMGAP
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsSmartGun
+  name: smart gun ammunition box (10x30mm)
+  description: A 10x30mm ammunition box. Used to refill Smart Gun magazines. It comes with a leather strap allowing someone to wear it on their back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_box_marking
+      color: "#ffcb26"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSmartGun
+
+- type: entity
+  parent: RMCBoxBulletsSmartGun
+  id: RMCBoxBulletsSmartGunEmpty
+  suffix: Empty
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSmartGun
     amount: 0
