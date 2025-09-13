@@ -95,6 +95,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorOob
