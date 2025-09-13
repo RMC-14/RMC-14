@@ -79,7 +79,7 @@
     suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCMatebaBeltFilled # TODO RMC14
-    pocket1: RMCPouchSurvivalFill
+    pocket1: RMCPouchSurvivalFillFull
     pocket2: RMCPouchFirstAidInjectors
 
 - type: playTimeTracker

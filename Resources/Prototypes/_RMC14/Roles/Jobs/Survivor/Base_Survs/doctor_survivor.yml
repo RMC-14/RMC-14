@@ -32,6 +32,7 @@
   useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorDoctor
   equipment:
     mask: CMMaskSterile
@@ -42,7 +43,6 @@
     shoes: RMCShoesLaceup
     back: CMSatchelMedical
     id: CMIDCardColonistDoctor
-    pocket1: RMCPouchSurvivalFill
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -45,6 +45,7 @@
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorCorporate
   equipment:
     ears: RMCHeadsetDistressWeYa
@@ -53,7 +54,6 @@
     shoes: RMCShoesLaceup
     back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
     id: CMIDCardLiaisonColony
-    pocket1: RMCPouchSurvivalFill
     pocket2: CMClipboard # RMC14, replace with document pouch when fixed
 
 - type: entity
