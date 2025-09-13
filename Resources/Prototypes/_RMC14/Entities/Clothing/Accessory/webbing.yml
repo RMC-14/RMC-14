@@ -414,7 +414,7 @@
   description: A sturdy mess of synth-leather band designed to store a few grenades for ML66A weapon operators.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
     state: webbing
   - type: Storage
     maxItemSize: Normal
