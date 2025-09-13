@@ -5,6 +5,93 @@
   description: Terminal for programming UNMC employee ID card access.
   components:
   - type: IdModificationConsole
+    jobList:
+    - CMCE
+    - Synth
+    - WeaponSpec
+    - CMP
+    - HospitalCorpsman
+    - Rifleman
+    - CMCMO
+    - IntelOfficer
+    - CMCargoTech
+    - SmartGunOperator
+    - SO
+    - MessTech
+    - CO
+    - OT
+    - Researcher
+    - Nurse
+    - CMMedbay
+    - MarineMain
+    - FTL
+    - SEA
+    - MaintTech
+    - CombatTech
+    - Pilot
+    - DropshipCrewChief
+    - SquadLeader
+    - ASO
+    - QuarterMaster
+    - CMWarden
+    - RMCWeYaExec
+    - MP
+    jobGroups:
+    - RMCBaseEngineeringJob
+    - RMCBaseCommandJob
+    - RMCBaseMedicalJob
+    - RMCBaseMarinesJob
+    - RMCBaseAuxiliaryJob
+    - RMCBaseRequisitionsJob
+    - RMCBaseMPJob
+    - RMCBaseMiscellaneousJob
+    hiddenAccessList:
+    - RMCAccessSynth
+    - CMAccessPress
+    - CMAccessASO
+    - CMAccessCrewman
+    - CMAccessPilot
+    - CMAccessSEA
+    - CMAccessCO
+    - CMAccessCorp
+    accessList:
+    - CMAccessSpecPrep
+    - CMAccessKitchen
+    - RMCAccessDatabase
+    - CMAccessBrig
+    - CMAccessSmartPrep
+    - CMAccessOT
+    - CMAccessCMP
+    - CMAccessCombatTechPrep
+    - CMAccessDropship
+    - CMAccessSquadLeaderPrep
+    - CMAccessQM
+    - CMAccessChemistry
+    - CMAccessCharlie
+    - CMAccessBravo
+    - CMAccessEngineering
+    - RMCAccessSeniorCommand
+    - CMAccessMaint
+    - CMAccessDelta
+    - CMAccessFTLPrep
+    - CMAccessCMO
+    - CMAccessMedical
+    - CMAccessAlpha
+    - CMAccessMarineRifleman
+    - CMAccessArmory
+    - RMCAccessCommand
+    - CMAccessMedPrep
+    - CMAccessRequisitions
+    - CMAccessMarinePrep
+    - CMAccessResearch
+    - CMAccessCE
+    accessGroups:
+    - RMCBaseMarineAccess
+    - RMCBaseMPAccess
+    - RMCBaseSquadAccess
+    - RMCBaseMedicalAccess
+    - RMCBaseCommandAccess
+    - RMCBaseEngineeringAccess
   - type: ActivatableUI
     key: enum.IdModificationConsoleUIKey.Key
   - type: UserInterface
