@@ -241,13 +241,13 @@
   description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UN High Command.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
     layers:
     - state: base
     - state: camo
       map: [ "enum.ItemCamouflageLayers.Layer" ]
   - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
   - type: ItemCamouflage
     colors:
       Jungle: "#ccd08d"
@@ -257,7 +257,7 @@
       Urban: "#acb8c7"
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
       state: helmet
 
 - type: entity
