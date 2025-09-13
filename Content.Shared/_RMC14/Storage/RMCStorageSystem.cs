@@ -1,12 +1,16 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared._RMC14.Storage.Containers;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Lock;
+using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -23,6 +27,7 @@ namespace Content.Shared._RMC14.Storage;
 public sealed class RMCStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
@@ -67,9 +72,16 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageNestedOpenSkillRequiredComponent, StorageInteractAttemptEvent>(OnNestedSkillRequiredInteractAttempt);
 
+        SubscribeLocalEvent<SkyFallingComponent, StorageInteractAttemptEvent>(OnSkyFalling);
+        SubscribeLocalEvent<CrashLandingComponent, StorageInteractAttemptEvent>(OnCrashLanding);
+        SubscribeLocalEvent<ParaDroppingComponent, StorageInteractAttemptEvent>(OnParaDropping);
+
         SubscribeLocalEvent<RMCEntityStorageWhitelistComponent, ContainerIsInsertingAttemptEvent>(OnEntityStorageWhitelistAttempt);
 
         SubscribeLocalEvent<EntityStorageCloseOnMapInitComponent, MapInitEvent>(OnEntityStorageClose);
+
+        SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, DestructionEventArgs>(OnContainerEmptyDestroyed);
+        SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, EntityTerminatingEvent>(OnContainerEmptyDeleted);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -208,6 +220,15 @@ public sealed class RMCStorageSystem : EntitySystem
 
         if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
             _stun.TryStun(ent, _stunStorage, true);
+
+        if (HasComp<SkyFallingComponent>(args.Container.Owner) || HasComp<CrashLandingComponent>(args.Container.Owner))
+        {
+            var ev = new AttemptCrashLandEvent();
+            RaiseLocalEvent(ent, ref ev);
+
+            if (!ev.Cancelled)
+                _crashLand.TryCrashLand(ent.Owner, true);
+        }
     }
 
     private void OnNestedSkillRequiredInteractAttempt(Entity<StorageNestedOpenSkillRequiredComponent> ent, ref StorageInteractAttemptEvent args)
@@ -260,6 +281,21 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
+    }
+
+    private void OnSkyFalling(Entity<SkyFallingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnParaDropping(Entity<ParaDroppingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnCrashLanding(Entity<CrashLandingComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool TryCancel(EntityUid user, Entity<StorageSkillRequiredComponent> storage)
@@ -317,7 +353,7 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
-    private bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
+    public bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
     {
         popup = default;
         if (user == null)
@@ -438,6 +474,37 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    private void OnContainerEmptyDestroyed(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt, ref DestructionEventArgs args)
+    {
+        if (!containerEnt.Comp.OnDestruction)
+            return;
+
+        ContainerDestructionEmpty(containerEnt);
+    }
+
+    private void OnContainerEmptyDeleted(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt, ref EntityTerminatingEvent args)
+    {
+        if (!containerEnt.Comp.OnDelete)
+            return;
+
+        ContainerDestructionEmpty(containerEnt);
+    }
+
+    private void ContainerDestructionEmpty(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt)
+    {
+        var ev = new RMCContainerDestructionEmptyEvent();
+        RaiseLocalEvent(containerEnt, ref ev);
+
+        if (ev.Handled)
+            return;
+
+        var containers = _container.GetAllContainers(containerEnt);
+        foreach (var contain in containers)
+        {
+            _container.EmptyContainer(contain);
+        }
     }
 
     public int EstimateFreeColumns(Entity<StorageComponent?> storage)

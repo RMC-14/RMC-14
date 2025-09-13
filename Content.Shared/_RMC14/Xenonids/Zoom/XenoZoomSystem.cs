@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -11,8 +12,8 @@ public sealed class XenoZoomSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedContentEyeSystem _eye = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -41,22 +42,21 @@ public sealed class XenoZoomSystem : EntitySystem
 
         if (xeno.Comp.Enabled)
         {
-            _eye.SetMaxZoom(xeno, xeno.Comp.Zoom);
-            _eye.SetZoom(xeno, xeno.Comp.Zoom);
+            _contentEye.SetMaxZoom(xeno, xeno.Comp.Zoom);
+            _contentEye.SetZoom(xeno, xeno.Comp.Zoom);
             xeno.Comp.Offset = Transform(args.User).LocalRotation.GetCardinalDir().ToVec() * xeno.Comp.OffsetLength;
         }
         else
         {
-            _eye.ResetZoom(xeno);
+            _contentEye.ResetZoom(xeno);
             xeno.Comp.Offset = Vector2.Zero;
         }
 
         Dirty(xeno);
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoZoomActionEvent)
-                _actions.SetToggled(actionId, xeno.Comp.Enabled);
+            _actions.SetToggled((action, action), xeno.Comp.Enabled);
         }
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);

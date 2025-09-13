@@ -6,59 +6,13 @@
   desc: reagent-desc-cmdylovene
   color: "#3fc92a"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
-        damage:
-        - Toxin: -1
-        - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
-      - !type:GenericStatusEffect # TODO -5 hallucination/s
-        key: SeeingRainbows
-        component: SeeingRainbows
-        time: 5
-        type: Remove
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCMindbreakerToxin
-          min: 1
-        reagent: RMCMindbreakerToxin
-        amount: -2.5
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCSpaceDrugs
-          min: 1
-        reagent: RMCSpaceDrugs
-        amount: -2.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30 #TODO 0.5 eye damage/s
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 0.5
-            Burn: 0.5
-            Toxin: 1.5
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 5
-        refresh: true
-        type: Add
+      - !type:Antitoxic #TODO removes 0.125u toxin/s 0.13u?
+        potency: 2
 
 # TODO RMC14 other effects
 - type: reagent
@@ -68,6 +22,7 @@
   desc: reagent-desc-cmethylredoxrazine
   color: "#605048"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -99,11 +54,12 @@
   desc: reagent-desc-cmarithrazine
   color: "#3c8529"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -116,7 +72,7 @@
           min: 15 #TODO 0.25 eye damage/s at 15 OD
         damage:
           groups:
-            Brute: 1
+            Brute: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -131,11 +87,10 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
@@ -143,28 +98,13 @@
   desc: reagent-desc-cmbicaridine
   color: "#ed4847"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Brute: -0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Burn: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Burn: 2.5
-            Toxin: 1
+      - !type:Neogenetic
+        potency: 2
 
 # TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
@@ -177,24 +117,17 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -1.5
+        - Brute: -1
         - Burn: -1
         - Toxin: -1.5
-        - Airloss: -1
-      - !type:HealthChange
-        conditions:
-        - !type:Temperature
-          max: 170
-        damage:
-          types:
-            Cellular: -0.12
+        - Airloss: -0.5
+        - Genetic: -1
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
@@ -202,31 +135,14 @@
   desc: reagent-desc-cmdermaline
   color: "#e2972e"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Burn: -0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Burn: 0.75
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Burn: 3.75
-            Toxin: 3.75
+      - !type:Anticorrosive
+        potency: 3
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -234,37 +150,14 @@
   desc: reagent-desc-cmdexalin
   color: "#1f28a7"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Airloss: -1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCLexorin
-          min: 0.5
-        reagent: RMCLexorin
-        amount: -1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 1
-            Toxin: 2
+      - !type:Oxygenating
+        potency: 4
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -272,34 +165,13 @@
   desc: reagent-desc-cmdexalinplus
   color: "#5887D5"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:RemoveDamage
-        group: Airloss
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCLexorin
-          min: 0.5
-        reagent: RMCLexorin
-        amount: -1.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Brute: 1.5
-            Toxin: 3
+      - !type:Oxygenating
+        potency: 6
 
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
@@ -310,6 +182,7 @@
   desc: reagent-desc-cmepinephrine
   color: "#6bd43c"
   overdose: 10.5
+  criticalOverdose: 20
   worksOnTheDead: true
   metabolisms:
     Medicine:
@@ -345,7 +218,7 @@
           types:
             Asphyxiation: 1.5
 
-# TODO RMC14 other effects
+# TODO RMC14 other effects (heart damage) (pain)
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -354,6 +227,7 @@
   desc: reagent-desc-cminaprovaline
   color: "#fe33cb"
   overdose: 60
+  criticalOverdose: 100
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -373,28 +247,22 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-        key: Stun
-        component: Stunned
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #Yes, it's this much.
         type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        - !type:ReagentThreshold #0.25 heart damage/s
+          min: 100               #5% chance emote twitch, blink_r, shiver
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        key: Drunk
-        component: Drunk
-        time: 40
-        type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
@@ -402,29 +270,13 @@
   desc: reagent-desc-cmkelotane
   color: "#f5e123"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Burn: -0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 0.5
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2.5
-            Toxin: 2.5
+      - !type:Anticorrosive
+        potency: 2
 
 # TODO RMC14 other effects
 - type: reagent
@@ -434,37 +286,33 @@
   desc: reagent-desc-cmleporazine
   color: "#a03919"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
       - !type:StabilizeTemperature
         stable: 310
-        change: 60
+        change: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #Yes, it's this much.
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
+        refresh: false
 
 # TODO RMC14 other effects
 - type: reagent
@@ -474,44 +322,20 @@
   desc: reagent-desc-cmtricordrazine
   color: "#d87f2b"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
-        damage:
-        - Brute: -0.25
-        - Burn: -0.25
-        - Toxin: -0.5
-        - Airloss: -0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30 #TODO 0.25 eye damage/s
-        damage:
-          groups:
-            Brute: 0.25
-            Burn: 0.25
-            Toxin: 0.38
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 1.5
-            Burn: 1.25
-            Toxin: 2.25
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
-        type: Add
+      - !type:Neogenetic
+        potency: 1
+      - !type:Anticorrosive
+        potency: 1
+      - !type:Antitoxic
+        potency: 1
+      - !type:Oxygenating
+        potency: 1
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
@@ -519,28 +343,13 @@
   desc: reagent-desc-cmmeralyne
   color: "#b40000"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Brute: -0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Burn: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Burn: 3.75
-            Toxin: 1.5
+      - !type:Neogenetic
+        potency: 3
 
 # TODO RMC14 other effects
 # TODO RMC14 progressive eye healing
@@ -552,6 +361,7 @@
   desc: reagent-desc-cmimidazoline
   color: "#C8A5DC"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -575,7 +385,6 @@
             Toxin: 1.5
 
 # TODO RMC14 other effects
-# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
@@ -586,14 +395,15 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -3.75
         - Brute: -2.25
-        - Burn: -3
+        - Burn: -2.25
+        - Toxin: -3
+        - Genetic: -1.5
 
 # TODO RMC14 other effects
 - type: reagent
@@ -603,11 +413,12 @@
   desc: reagent-desc-rmcrussianred
   color: "#ce2727"
   overdose: 20
+  criticalOverdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.625u toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -635,11 +446,11 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
-# Antidepressants
+# Antidepressants/ADHD meds
 - type: reagent
   parent: CMReagentMedicine
   id: RMCMethylphenidate
@@ -686,9 +497,8 @@
         type: Local
         messages: [ "antidepressant-effect-rmcparoxetine" ]
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 1.5 #TODO max 30
         refresh: false
@@ -697,3 +507,21 @@
         emote: Laugh #TODO twitches, drools, moans.
         showInChat: true
         probability: 0.05
+
+# Zombie Cure
+- type: reagent
+  parent: [ CMReagent, AmbuzolPlus ]
+  id: RMCAntiZed
+  name: reagent-name-rmcantized
+  desc: reagent-desc-rmcantized
+  physicalDesc: reagent-physical-desc-crisp
+  flavor: medicine
+  color: "#5FB0C7"
+  metabolisms:
+    Medicine:
+      effects:
+        - !type:CureZombieInfection
+          innoculate: true
+          conditions:
+            - !type:ReagentThreshold
+              min: 5

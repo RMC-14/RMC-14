@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
@@ -7,17 +8,18 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 
 namespace Content.Shared._RMC14.Xenonids.Crest;
 
 public sealed class XenoCrestSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -66,10 +68,9 @@ public sealed class XenoCrestSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleCrestActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoToggleCrestActionEvent)
-                _actions.SetToggled(actionId, xeno.Comp.Lowered);
+            _actions.SetToggled(action.AsNullable(), xeno.Comp.Lowered);
         }
     }
 
@@ -87,7 +88,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Lowered && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
+        if (xeno.Comp.Lowered && xeno.Comp.ImmuneToStatuses.Contains(args.Effect.Id))
             args.Cancelled = true;
     }
 

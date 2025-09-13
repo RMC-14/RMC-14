@@ -1,0 +1,208 @@
+- type: tile
+  abstract: true
+  id: CMPlanetBase
+  isSubfloor: true
+  deconstructTools: [ ]
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+  indestructible: true
+  canDig: true
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetDirt
+  name: tiles-cm-dirt
+  sprite: /Textures/_RMC14/Tiles/planet/dirt.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetSand
+  name: tiles-cm-sand
+  sprite: /Textures/_RMC14/Tiles/planet/sand.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetWood
+  name: tiles-cm-wood
+  sprite: /Textures/_RMC14/Tiles/planet/wood/wood.png
+  footstepSounds:
+    collection: FootstepWood
+  canDig: false
+
+- type: tile
+  parent: CMPlanetWood
+  id: CMPlanetWoodDamaged
+  sprite: /Textures/_RMC14/Tiles/planet/wood/wood-broken.png
+  variants: 7
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetRunedSandstone
+  name: runed sandstone
+  sprite: /Textures/_RMC14/Tiles/planet/runed_sandstone/runedsandstone.png
+  footstepSounds:
+    collection: FootstepWood
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetGCircuit
+  name: gcircuit
+  sprite: /Textures/_RMC14/Tiles/planet/gcircuit/gcircuita.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetShuttleBlue
+  name: blue shuttle
+  sprite: /Textures/_RMC14/Tiles/planet/shuttle/floor.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetShuttleBlue
+  id: CMPlanetShuttleRed
+  name: red shuttle
+  sprite: /Textures/_RMC14/Tiles/planet/shuttle/floor4.png
+
+- type: tile
+  parent: CMPlanetShuttleBlue
+  id: CMPlanetShuttleDarkRed
+  name: dark red shuttle
+  sprite: /Textures/_RMC14/Tiles/planet/shuttle/floor6.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetCorsatSquare
+  name: corsat squares
+  sprite: /Textures/_RMC14/Tiles/planet/corsat/squares.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetCorsatSquareWood
+  name: corsat squares wood
+  sprite: /Textures/_RMC14/Tiles/planet/corsat/squareswood.png
+  footstepSounds:
+    collection: FootstepWood
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetCorsatPlate
+  name: corsat plate
+  sprite: /Textures/_RMC14/Tiles/planet/corsat/plate.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetPlasticFloor1
+  name: plastic tile
+  sprite: /Textures/_RMC14/Tiles/planet/interior/plasticfloor1.png
+  footstepSounds:
+    collection: FootstepFloor
+  canDig: false
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetSandWet
+  name: sand
+  sprite: /Textures/_RMC14/Tiles/varadero/layer1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    South: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    East: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    North: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    West: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetMultiTileDark
+  name: multi tile dark
+  sprite: /Textures/_RMC14/Tiles/varadero/grey_multi_tiles.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetShale
+  name: shale
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
+    South: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
+    East: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
+    North: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
+    West: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
+  weedsSpreadable: false
+  semiWeedable: true
+
+- type: tile
+  parent: RMCPlanetShale
+  id: RMCPlanetShaleAlt
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTatami
+  name: tatami flooring
+  sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetDirtBrownRoad
+  name: dirt road
+  sprite: /Textures/_RMC14/Tiles/planet/browndirt_road/browndirt_road.png
+
+- type: tile
+  parent: CMPlanetDirt
+  id: RMCPlanetDirtBrown
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert.png
+
+- type: tile
+  parent: RMCPlanetDirtBrown
+  id: RMCPlanetDirtBrownDug
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert_dug.png

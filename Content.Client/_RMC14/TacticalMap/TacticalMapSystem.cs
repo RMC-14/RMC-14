@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.TacticalMap;
+using Content.Client._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.TacticalMap;
 using Robust.Client.Player;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -14,6 +15,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapUserComponent, AfterAutoHandleStateEvent>(OnUserState);
         SubscribeLocalEvent<TacticalMapComputerComponent, AfterAutoHandleStateEvent>(OnComputerState);
         SubscribeLocalEvent<TacticalMapLinesComponent, AfterAutoHandleStateEvent>(OnLinesState);
+        SubscribeLocalEvent<TacticalMapLabelsComponent, AfterAutoHandleStateEvent>(OnLabelsState);
     }
 
     private void RefreshUser(EntityUid ent)
@@ -46,6 +48,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 if (bui is TacticalMapComputerBui computerBui)
                     computerBui.Refresh();
+                else if (bui is DropshipWeaponsBui weaponsBui)
+                    weaponsBui.Refresh();
             }
         }
         catch (Exception e)
@@ -66,6 +70,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     }
 
     private void OnLinesState(Entity<TacticalMapLinesComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(ent))
+            RefreshUser(ent);
+
+        if (HasComp<TacticalMapComputerComponent>(ent))
+            RefreshComputer(ent);
+    }
+
+    private void OnLabelsState(Entity<TacticalMapLabelsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (HasComp<TacticalMapUserComponent>(ent))
             RefreshUser(ent);

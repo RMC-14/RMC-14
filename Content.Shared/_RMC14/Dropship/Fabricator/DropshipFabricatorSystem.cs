@@ -1,13 +1,18 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared.Coordinates;
+using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship.Fabricator;
@@ -15,10 +20,12 @@ namespace Content.Shared._RMC14.Dropship.Fabricator;
 public sealed class DropshipFabricatorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -33,6 +40,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<DropshipFabricatorComponent, MapInitEvent>(OnFabricatorMapInit);
+        SubscribeLocalEvent<DropshipFabricatorComponent, DropshipFabricatoreRecycleDoafterEvent>(OnDropshipPartRecycled);
 
         Subs.BuiEvents<DropshipFabricatorComponent>(DropshipFabricatorUi.Key,
             subs =>
@@ -56,6 +64,29 @@ public sealed class DropshipFabricatorSystem : EntitySystem
     {
         if (_net.IsServer)
             ent.Comp.Account = EnsurePoints();
+    }
+
+    private void OnDropshipPartRecycled(Entity<DropshipFabricatorComponent> ent, ref DropshipFabricatoreRecycleDoafterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!TryComp(args.Used, out DropshipFabricatorPrintableComponent? printable) ||
+            !TryComp(ent.Comp.Account, out DropshipFabricatorPointsComponent? points))
+            return;
+
+        args.Handled = true;
+
+        var refund = printable.Cost;
+        if (TryComp(ent, out DropshipAmmoComponent? ammo))
+            refund *= ammo.Rounds / ammo.MaxRounds;
+
+        points.Points += (int)(refund * printable.RecycleMultiplier);
+        Dirty(ent.Comp.Account.Value, points);
+        Del(args.Used);
+
+        _audio.PlayPvs(ent.Comp.RecycleSound, ent);
+        _powerLoader.TrySyncHands(args.User);
     }
 
     private void OnPrintMsg(Entity<DropshipFabricatorComponent> ent, ref DropshipFabricatorPrintMsg args)
@@ -177,4 +208,9 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             SendUIStateAll(points.Points);
         }
     }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class DropshipFabricatoreRecycleDoafterEvent : SimpleDoAfterEvent
+{
 }

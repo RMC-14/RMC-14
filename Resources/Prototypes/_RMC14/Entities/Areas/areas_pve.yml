@@ -1,0 +1,101 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPVE
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_fiorina.rsi
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPVE
+  id: RMCAreaPVEOOB
+  name: Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPVE
+  id: RMCAreaPVEOutdoors
+  name: Outdoors
+  components:
+  - type: Sprite
+    state: base_icon
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#6C6767D8'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPVEOutdoors
+  id: RMCAreaPVELZ
+  name: Landing Zone
+  components:
+  - type: Sprite
+    state: base_icon
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
+    minimapColor: '#6C6767D8'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPVE
+  id: RMCAreaPVEIndoors
+  name: Indoors
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: base_ico
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#EBE5E5E3'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPVEIndoors
+  id: RMCAreaPVEShuttle
+  name: Shuttle
+  components:
+  - type: Area
+    alwaysPowered: true

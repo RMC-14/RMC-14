@@ -21,6 +21,7 @@ public sealed class LinkAccountSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -28,8 +29,8 @@ public sealed class LinkAccountSystem : EntitySystem
     private TimeSpan _nextLobbyMessageTime;
     private TimeSpan _lobbyMessageInitialDelay;
     private (string Message, string User)? _nextLobbyMessage;
-    private string? _nextMarineShoutout;
-    private string? _nextXenoShoutout;
+    private RoundEndShoutout? _nextMarineShoutout;
+    private RoundEndShoutout? _nextXenoShoutout;
 
     public override void Initialize()
     {
@@ -37,6 +38,8 @@ public sealed class LinkAccountSystem : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend, after: [typeof(CMDistressSignalRuleSystem)]);
 
         SubscribeLocalEvent<GhostColorComponent, PlayerAttachedEvent>(OnGhostColorPlayerAttached);
+
+        SubscribeLocalEvent<PatronCustomNameComponent, MapInitEvent>(OnPatronCustomNameMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageTimeSeconds, v => _timeBetweenLobbyMessages = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageInitialDelaySeconds, v => _lobbyMessageInitialDelay = TimeSpan.FromSeconds(v), true);
@@ -74,23 +77,25 @@ public sealed class LinkAccountSystem : EntitySystem
 
     private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
     {
-        if (_nextMarineShoutout != null)
+        if (_nextMarineShoutout is { } nextMarine)
         {
             ev.AddLine("\n");
-            ev.AddLine(Loc.GetString("rmc-ui-shoutout-marine", ("name", _nextMarineShoutout)));
+            ev.AddLine(Loc.GetString("rmc-ui-shoutout-marine", ("name", nextMarine.Name)));
+            _adminLog.Add(LogType.RMCRoundEnd, $"Showing round end shoutout from {nextMarine.Author:player}: {nextMarine.Name:text}");
         }
 
-        if (_nextXenoShoutout != null)
+        if (_nextXenoShoutout is { } nextXeno)
         {
             ev.AddLine("\n");
-            ev.AddLine(Loc.GetString("rmc-ui-shoutout-xeno", ("name", _nextXenoShoutout)));
+            ev.AddLine(Loc.GetString("rmc-ui-shoutout-xeno", ("name", nextXeno.Name)));
+            _adminLog.Add(LogType.RMCRoundEnd, $"Showing round end shoutout from {nextXeno.Author:player}: {nextXeno.Name:text}");
         }
     }
 
     private void OnGhostColorPlayerAttached(Entity<GhostColorComponent> ent, ref PlayerAttachedEvent args)
     {
         if (!TryComp(ent, out ActorComponent? actor) ||
-            _linkAccount.GetPatron(actor.PlayerSession.UserId) is not { } patron ||
+            _linkAccount.GetConnectedPatron(actor.PlayerSession.UserId) is not { } patron ||
             patron.Tier is not { GhostColor: true } ||
             patron.GhostColor is not { } color)
         {
@@ -100,6 +105,26 @@ public sealed class LinkAccountSystem : EntitySystem
 
         ent.Comp.Color = color;
         Dirty(ent);
+    }
+
+    private void OnPatronCustomNameMapInit(Entity<PatronCustomNameComponent> ent, ref MapInitEvent args)
+    {
+        if (!_linkAccount.TryGetPatron(ent.Comp.User, out var patron))
+            return;
+
+        if (ent.Comp.Tier is { } tier && patron.Tier != tier)
+            return;
+
+        if (ent.Comp.Name is { } name)
+            _metaData.SetEntityName(ent, name);
+
+        if (ent.Comp.Description is { } description)
+        {
+            if (TryComp(ent, out MetaDataComponent? metaData))
+                description = $"{metaData.EntityDescription}\n\n{description}";
+
+            _metaData.SetEntityDescription(ent, description);
+        }
     }
 
     private async void ReloadPatrons()

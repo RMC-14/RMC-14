@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license":"CC-BY-SA-3.0",
+  "copyright": "Taken from CM-13 https://github.com/cmss13-devs/cmss13/pull/8763",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pulse0"
+    }
+  ]
+}

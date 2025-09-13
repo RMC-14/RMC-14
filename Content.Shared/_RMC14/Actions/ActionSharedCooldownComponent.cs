@@ -13,6 +13,10 @@ public sealed partial class ActionSharedCooldownComponent : Component
     [DataField, AutoNetworkedField]
     public HashSet<EntProtoId> Ids = new();
 
+    // This action can't be used at the same time as the actions in this list.
+    [DataField, AutoNetworkedField]
+    public HashSet<EntProtoId> ActiveIds = new();
+
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown;
 

@@ -503,7 +503,6 @@
   - type: RMCEmptySolution
   - type: SolutionStorageFillable
     solution: pen
-    
 
 - type: entity
   parent: RMCMedicAutoInjectorBase
@@ -528,7 +527,7 @@
   - type: MedicallyUnskilledDoAfter
 
 - type: entity
-  parent: CMAutoInjector
+  parent: RMCMedicAutoInjectorCS5
   id: RMCMedicAutoInjectorCS15
   name: autoinjector (C-M)
   components:
@@ -548,7 +547,7 @@
     transferAmount: 15
 
 - type: entity
-  parent: CMAutoInjector
+  parent: RMCMedicAutoInjectorCS5
   id: RMCMedicAutoInjectorCS30
   name: autoinjector (C-XL)
   components:
@@ -568,7 +567,7 @@
     transferAmount: 30
 
 - type: entity
-  parent: CMAutoInjector
+  parent: RMCMedicAutoInjectorCS5
   id: RMCMedicAutoInjectorCS60
   name: autoinjector (C-XXL)
   components:

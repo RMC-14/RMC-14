@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c7cd98420e28cda17235f97b14c787bd57ac30f2/icons/effects/128x128.dmi",
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "anti_air_cannon"
+    },
+    {
+      "name": "anti_air_cannon_f"
+    }
+  ]
+}

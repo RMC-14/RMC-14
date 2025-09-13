@@ -109,9 +109,8 @@
     delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SpawnOnTerminate
-    spawn: RMCSmoke
-    projectileAdjust: false
+  - type: SpawnOnTrigger
+    proto: RMCSmoke
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
@@ -128,7 +127,7 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmoke
+  id: RMCSmokeExplosionProof
   components:
   - type: Transform
     anchored: true
@@ -148,6 +147,43 @@
   - type: EvenSmoke
     spawn: RMCSmoke
     range: 3
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmokeExplosionProofSmall
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmoke
+  components:
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: Smoke
+  id: RMCSmokeFireSentry
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
   - type: DeleteOnExplosion
 
 - type: entity
@@ -263,8 +299,8 @@
 
 - type: entity
   parent:
-  - CMGrenadeBase
   - RMCM40DPTags
+  - CMGrenadeBase
   id: RMCGrenadeIncendiary
   name: M40 HIDP incendiary grenade
   description: The M40 HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
@@ -315,6 +351,9 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
@@ -325,8 +364,7 @@
 
 - type: entity
   id: CMExplosionEffectGrenade
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Effects/grenade_explosion.rsi
@@ -344,8 +382,7 @@
 
 - type: entity
   id: CMExplosionEffectShrapnel1
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CollisionWake
   - type: Physics
@@ -372,8 +409,7 @@
 - type: entity
   parent: CMExplosionEffectShrapnel1
   id: CMExplosionEffectShrapnel2
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: shrapnel_bright2

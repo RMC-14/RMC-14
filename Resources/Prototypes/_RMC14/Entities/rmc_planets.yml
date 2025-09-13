@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCPlanetLV624
   name: LV-624
   components:
@@ -6,7 +6,47 @@
     map: /Maps/_RMC14/lv624.yml
     camouflage: Jungle
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
-
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.1
+    - scenarioName: asset_protection
+      scenarioProbability: 0.1
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorLV624CorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorLV624MedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorLV624Engineer: 2
+      - CMSurvivorLV624CargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorGoon: 2
+      - CMSurvivorCMBDeputy: 2
+      - CMSurvivorLV624SecurityGuard: 2
+      CMSurvivorScientist:
+      - CMSurvivorLV624Archeologist: 2
+    survivorJobScenarios:
+      asset_protection:  
+        CMSurvivor:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorCorporate:
+        - CMSurvivorLV624CorporateDomeCL: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorDoctor:
+        - CMSurvivorLV624CorporateDomeGoonMedic: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorEngineer:
+        - CMSurvivorLV624CorporateDomeGoonEngineer: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorSecurity:
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorScientist:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+    
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -31,9 +71,26 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
-    camouflage: Classic
+    camouflage: Urban
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorISR: -1
+      - CMSurvivorGangLeader: -1
+      CMSurvivorCorporate:
+      - CMSurvivorFiorinaCorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorFiorinaDoctor: 3
+      CMSurvivorEngineer:
+      - CMSurvivorFiorinaEngineer: 2
+      CMSurvivorSecurity:
+      - CMSurvivorPrisoner: 2
+      - CMSurvivorFiorinaPrisonGuard: 2
+      - CMSurvivorFiorinaRiotOfficer: 2
+      CMSurvivorScientist:
+      - CMSurvivorFiorinaResearcher: 2
 
 - type: entity
   id: RMCPlanetTrijent
@@ -44,6 +101,32 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    survivorJobs:
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivorTrijentTrucker: -1
+      - CMSurvivorMiner: -1
+      - CMSurvivorTrijentChaplain: 1
+      CMSurvivorCorporate:
+      - CMSurvivorICB: 1
+      - CMSurvivorTrijentCorporate: 1
+      CMSurvivorDoctor:
+      - CMSurvivorTrijentDoctor: 3
+      CMSurvivorEngineer:
+      - CMSurvivorTrijentEngiHydro: 2
+      - CMSurvivorTrijentDamTech: 2
+      CMSurvivorSecurity:
+      - CMSurvivorTrijentGoon: 1
+      - CMSurvivorCMBDeputy: 1
+      CMSurvivorScientist:
+      - CMSurvivorTrijentResearcher: 2
+
 
 - type: entity
   id: RMCPlanetVaradero
@@ -61,6 +144,32 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorCommanderNewVaradero: 1
+      CMSurvivor:
+      - CMSurvivorBeachBum: -1
+      - CMSurvivorMiner: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorVaraderoICB: 2
+      CMSurvivorDoctor:
+      - CMSurvivorMedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorTechnician: 2
+      - CMSurvivorCargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorUNPeacekeeper: 2
+      CMSurvivorScientist:
+      - RMCSurvivorNewVaraderoResearcher: 2
 
 - type: entity
   id: RMCPlanetKutjevo
@@ -77,8 +186,9 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
-    camouflage: Classic
+    camouflage: Urban
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    selectRandomSurvivorInsert: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - RMCSurvivorForeconBase: 7
@@ -98,6 +208,7 @@
       CMSurvivorDoctor: RMCSurvivorForeconBase
       CMSurvivorEngineer: RMCSurvivorForeconBase
       CMSurvivorSecurity: RMCSurvivorForeconBase
+      CMSurvivorScientist: RMCSurvivorForeconBase
 
 - type: entity
   id: RMCPlanetHybrisa
@@ -108,3 +219,92 @@
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
+    survivorJobInserts:
+      CMSurvivor:
+      - RMCSurvivorHybrisaCivilian: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
+      - RMCSurvivorHybrisaGrindBarista: 1
+      - RMCSurvivorHybrisaMaterialReprocessingTechnician: 1
+      - RMCSurvivorHybrisaOfficeWorker: 1
+      - RMCSurvivorHybrisaPizzaGalaxy: 1
+      - RMCSurvivorHybrisaWeyamartEmployee: 1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: 1
+      CMSurvivorCorporate:
+      - RMCSurvivorHybrisaCorporateLiaison: 2
+      - RMCSurvivorHybrisaCommercialPilot: 2
+      CMSurvivorDoctor:
+      - RMCSurvivorHybrisaMedicalDoctor: 3
+      - RMCSurvivorHybrisaEMTParamedic: 3
+      CMSurvivorEngineer:
+      - RMCSurvivorHybrisaConstructionWorker: 2
+      - RMCSurvivorHybrisaEngineer: 2
+      - RMCSurvivorHybrisaHeavyVehicleOperator: 2
+      CMSurvivorSecurity:
+      - RMCSurvivorHybrisaCorporateSecurity: 2
+      - RMCSurvivorHybrisaTSEPAConstable: 2
+      CMSurvivorScientist:
+      - RMCSurvivorHybrisaXenoarchaeologist: 2
+      - RMCSurvivorHybrisaXenobiologist: 2
+
+- type: entity
+  id: RMCPlanetSorokyne
+  name: LV-976 Sorokyne Strata
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne.yml
+    camouflage: Jungle
+    minPlayers: 130
+    announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMJobSurvivorSoroCivilian: -1
+      - CMJobSurvivorSoroMiner: -1
+      - CMJobSurvivorFireProtectionSpecialist: 1
+      CMSurvivorCorporate:
+      - CMJobSurvivorHalcyonDynamicsLiaison: 2
+      CMSurvivorDoctor:
+      - CMJobSurvivorMoHDoctor: 3
+      CMSurvivorEngineer:
+      - CMJobSurvivorInfrastructureEngineer: 2
+      - CMJobSurvivorReactorTechnician: 2
+      CMSurvivorSecurity:
+      - CMJobSurvivorArmedPoliceOfficer: 2
+      - CMJobSurvivorArmyReservist: 2
+      CMSurvivorScientist:
+      - CMJobSurvivorCECResearcher: 2
+
+- type: entity
+  id: RMCPlanetArcticValley
+  name: Arctic Valley
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/arctic_valley.yml
+    camouflage: Snow
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetCorsat
+  name: CORSAT
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/corsat.yml
+    camouflage: Classic
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetHybrisaRepaired
+  name: LV-759 Hybrisa Prospera (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/hybrisa_greenshift.yml
+    camouflage: Urban
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetSorokyneRepaired
+  name: LV-976 - Sorokyne Strata (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne_repaired.yml
+    camouflage: Jungle
+    inRotation: false

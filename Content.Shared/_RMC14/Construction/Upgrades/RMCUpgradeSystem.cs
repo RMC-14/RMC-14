@@ -85,16 +85,13 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
         EntityUid? upgradeItem = null;
 
-        foreach (var hand in _hands.EnumerateHands(user))
+        foreach (var hand in _hands.EnumerateHeld(user))
         {
-            if (hand.HeldEntity == null)
+            if (!_upgradeItemQuery.HasComp(hand))
                 continue;
 
-            if (_upgradeItemQuery.HasComp(hand.HeldEntity))
-            {
-                upgradeItem = hand.HeldEntity;
-                break;
-            }
+            upgradeItem = hand;
+            break;
         }
 
         if (upgradeItem == null)

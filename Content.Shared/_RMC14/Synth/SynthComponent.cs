@@ -1,7 +1,10 @@
-﻿using Content.Shared.Body.Organ;
+﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
+using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -51,6 +54,21 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Generation = "rmc-species-synth-generation-third";
 
+    [DataField, AutoNetworkedField]
+    public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<RMCHealthIconTypes, ProtoId<HealthIconPrototype>> HealthIconOverrides = new()
+    {
+        [RMCHealthIconTypes.Healthy] = "RMCHealthIconHealthySynth",
+        [RMCHealthIconTypes.DeadDefib] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadClose] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadAlmost] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadDNR] = "RMCHealthIconDeadDNRSynth",
+        [RMCHealthIconTypes.Dead] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.HCDead] = "RMCHealthIconDeadSynth",
+    };
+
     /// <summary>
     /// New brain organ to add when the synth is created.
     /// </summary>
@@ -68,6 +86,9 @@ public sealed partial class SynthComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 CritThreshold = FixedPoint2.New(199);
 
     /// <summary>
     /// The tool quality needed to repair the synth brute damage.

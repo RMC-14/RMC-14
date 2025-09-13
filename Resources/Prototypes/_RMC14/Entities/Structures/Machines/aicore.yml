@@ -190,7 +190,7 @@
 - type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCAIConsoleHERMES
-  name: HERMES Maintenance Controller.
+  name: HERMES Maintenance Controller
   description: A console built to facilitate Average Joes and their operation, allowing for simple allocation of resources.
   components:
   - type: Sprite

@@ -60,6 +60,8 @@
     items:
       tags:
       - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -290,7 +292,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCPillCanisterRussianRed
+    - id: RMCPillRussianRed
       amount: 4
     - id: CMBicaridineAutoInjector
       amount: 2
