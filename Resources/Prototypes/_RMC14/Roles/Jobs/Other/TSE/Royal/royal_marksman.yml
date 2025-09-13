@@ -1,16 +1,16 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
-  id: CMRoyalMarinesSGO
-  name: rmc-job-name-rcm-sgo
+  id: CMRoyalMarinesMarksman
+  name: rmc-job-name-rcm-marksman
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalSmartGunOperator
+  playTimeTracker: RMCJobRoyalMarksman
   ranks:
     RMCRankTSELanceCorporal: [ ]
-  startingGear: RMCGearRoyalSmartGunOperator
-  icon: RMCJobIconRoyalSmartGunOperator
+  startingGear: RMCGearRoyalMarksman
+  icon: "RMCJobIconRoyalMarinesMarksman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
-  spawnMenuRoleName: RCM Smart Gun Operator
+  spawnMenuRoleName: RCM Marksman
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,7 +21,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillFirearms: 2
+        RMCSkillFirearms: 2 
         RMCSkillPolice: 2
         RMCSkillFireman: 2
         RMCSkillConstruction: 1
@@ -30,64 +30,59 @@
         RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
-        RMCSkillSmartGun: 1
         RMCSkillVehicles: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-sgo
+      prefix: rmc-job-prefix-rcm-marksman
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidRoyalMarinesSGO
-  name: royal crown marines ghost role smart gun operator
+  id: RMCRandomHumanoidRoyalMarinesMarksman
+  name: royal crown marines ghost role marksman
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCRoyalMarinesSGO
+    settings: RMCRoyalMarinesMarksman
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCRoyalMarinesSGO
+  id: RMCRoyalMarinesMarksman
   components:
   - type: GhostRole
-    name: rmc-ghost-name-rcm-sgo
+    name: rmc-ghost-name-rcm-marksman
     description: rmc-ghost-role-information-rcm-description
     rules: rmc-ghost-role-information-rcm-rules
     reregister: false
-    job: CMRoyalMarinesSGO
+    job: CMRoyalMarinesMarksman
     raffle:
       settings: short
-    requirements:
-    - !type:RoleTimeRequirement
-      role: CMJobSmartGunOperator
-      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-
+  
 - type: startingGear
-  id: RMCGearRoyalSmartGunOperator
+  id: RMCGearRoyalMarksman
   equipment:
-    head: RMCHeadRoyalHelmetBallistic
-    eyes: RMCGlassesSmartGunSight
+    head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal # TOOD RMC14 royal marines commando uniform
-    outerClothing: RMCArmorRoyalHarnessFilled
+    mask: RMCMaskScarfTan
+    jumpsuit: RMCJumpsuitMarineRoyalMK80 # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
-    suitstorage: RMCSmartGunRoyal
-    id: RMCIDRoyalMarinesSGO
-    belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
-    back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
-    pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarinesMarksman
+    belt: RMCL24BeltFilled
+    back: RMCSatchelLightpackFilledRoyalMarksman # TODO RMC14 lightweight rmc backpack
+    pocket1: RMCPouchGeneralLargeFilledRoyalCommando
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalSmartGunOperator
+  id: RMCJobRoyalMarksman
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalSmartGunOperator
+  id: RMCJobIconRoyalMarinesMarksman
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_smart_gun_operator
+    state: rmc_marksman
