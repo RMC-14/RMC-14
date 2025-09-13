@@ -7,6 +7,7 @@
     layers:
       Snout: Mask
     hideOnToggle: true
+  - type: Appearance
 
 - type: entity
   parent: CMBaseMask
@@ -16,18 +17,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
+    layers:
+    - state: base
+    - state: camo
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
     slots:
     - Mask
     - Suitstorage
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Mask/gas/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/Mask/gas/desert.rsi
-      Snow: _RMC14/Objects/Clothing/Mask/gas/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Mask/gas/classic.rsi
-      Urban: _RMC14/Objects/Clothing/Mask/gas/urban.rsi
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
   - type: Item
     size: Small
   - type: Tag
