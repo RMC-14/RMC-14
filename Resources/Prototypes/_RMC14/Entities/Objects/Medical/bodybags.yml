@@ -145,6 +145,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
+    drawdepth: Mobs
     layers:
     - state: bodybag_closed
       map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
@@ -160,6 +161,8 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
+  - type: EntityStorageVisuals
+    stateDoorOpen: bodybag_open
   - type: EntityStorageLayingDownOverride
     enabled: false
   - type: CMStasisBag
