@@ -858,7 +858,7 @@
       - CMExecutiveOfficer
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretXO # TODO: Port Officer Beret
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
       - id: CMHeadCapOfficer

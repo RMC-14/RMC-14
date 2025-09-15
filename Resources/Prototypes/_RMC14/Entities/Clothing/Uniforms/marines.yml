@@ -398,22 +398,6 @@
       Classic: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/woodland.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/snow.rsi
 
-- type: entity
-  parent: RMCJumpsuitXOWoodland
-  id: RMCJumpsuitXODesert
-  name: DESERT XO DEBUG
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/desert.rsi
-
-- type: entity
-  parent: RMCJumpsuitXOWoodland
-  id: RMCJumpsuitXOSnow
-  name: Snow XO DEBUG
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/snow.rsi
-
 # Officer
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
