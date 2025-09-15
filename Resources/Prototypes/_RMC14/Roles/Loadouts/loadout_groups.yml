@@ -502,6 +502,16 @@
   - RMCPinAutism
   - RMCPinAutismGold
 
+# Executive Officer
+- type: loadoutGroup
+  id: ExecutiveOfficerRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - XOBlackBeretRMC
+  - XOGreenBeretRMC
+
 # Commanding Officer
 - type: loadoutGroup
   id: CommandingOfficerRoleSpecificRMC

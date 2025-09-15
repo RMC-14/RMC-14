@@ -1,0 +1,24 @@
+# Executive Officer
+- type: loadout
+  id: XOBlackBeretRMC
+  cost: 3 # same price as headwear
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 630000 # 175 hrs
+  equipment:
+    head: RMCHeadBeretXOBlack 
+
+- type: loadout
+  id: XOGreenBeretRMC
+  cost: 3
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 252000 # 70 hrs
+  equipment:
+    head: RMCHeadBeretXOGreen

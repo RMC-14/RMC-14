@@ -741,6 +741,7 @@
       entries:
       - id: CMJumpsuitBO
       - id: CMJumpsuitOperations
+      - id: RMCJumpsuitXOWoodland
       - id: RMCVendorBundleXOFormal
     - name: Personal Weapon
       jobs:

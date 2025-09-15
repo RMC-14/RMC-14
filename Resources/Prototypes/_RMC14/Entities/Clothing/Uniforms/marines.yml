@@ -377,6 +377,43 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_operations.rsi
 
+# XO
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitXOWoodland
+  name: executive officer operations uniform
+  description: Experimental digital-pattern uniform, given to Executive Officers of the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/woodland.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/woodland.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/woodland.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/snow.rsi
+
+- type: entity
+  parent: RMCJumpsuitXOWoodland
+  id: RMCJumpsuitXODesert
+  name: DESERT XO DEBUG
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/desert.rsi
+
+- type: entity
+  parent: RMCJumpsuitXOWoodland
+  id: RMCJumpsuitXOSnow
+  name: Snow XO DEBUG
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/XO/camo_operations/snow.rsi
+
 # Officer
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
