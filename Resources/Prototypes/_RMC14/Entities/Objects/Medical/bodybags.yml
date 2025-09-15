@@ -103,11 +103,6 @@
     fitIntoEntityStorage: true
   - type: CrashLandable
   - type: AnimationPlayer
-  - type: RMCContainerEmptyOnDestruction
-  - type: Corrodible
-    timeToApply: 4
-    structure: true
-  - type: RMCContainerEmptyOnDestruction
   - type: Corrodible
     timeToApply: 4
     structure: true
@@ -170,15 +165,6 @@
     blacklist:
       components:
       - Xeno
-  - type: Buckle
-    buckleDelay: 0
-    clickUnbuckle: false
-  - type: BuckleWhitelist
-    whitelist:
-      components:
-      - MedevacStretcher
-      tags:
-      - CMRollerItem
   - type: HolocardContainer
 
 # Folded stasis bag
