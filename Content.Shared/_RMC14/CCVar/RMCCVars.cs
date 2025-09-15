@@ -97,7 +97,10 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.dropship_hijack_initial_delay_minutes", 40, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
-        CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 10f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLandingZonePrimaryReminderMinutes =
+        CVarDef.Create("rmc.landing_zone_primary_reminder_minutes", 8f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCLandingZoneMiasmaEnabled =
         CVarDef.Create("rmc.landing_zone_miasma_enabled", false, CVar.REPLICATED | CVar.SERVER);
