@@ -207,7 +207,7 @@
     tags:
     - Trash
 
-# V2 thermal tarp - accepts all mob states
+# V2 thermal tarp
 - type: entity
   parent: CMBaseStorageBag
   id: RMCThermalTarpV2
