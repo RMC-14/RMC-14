@@ -27,6 +27,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared._RMC14.Xenonids.Construction;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -49,6 +51,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+
+    //RMC14
+    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
 
     public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
 
@@ -566,6 +571,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
         _doorIntersecting.Clear();
         _entityLookup.GetLocalEntitiesIntersecting(xform.GridUid.Value, tileRef.GridIndices, _doorIntersecting, gridComp: mapGridComp, flags: (LookupFlags.All & ~LookupFlags.Sensors));
 
+        //RMC14
+        var isResinDoor = HasComp<ResinDoorComponent>(uid);
+
         // TODO SLOTH fix electro's code.
         // ReSharper disable once InconsistentNaming
 
@@ -575,6 +583,10 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 continue;
 
             if (!otherPhysics.Comp.CanCollide)
+                continue;
+
+            //RMC14
+            if (isResinDoor && _xenoConstruct.IsResinDoorCollidable(otherPhysics))
                 continue;
 
             //TODO: Make only shutters ignore these objects upon colliding instead of all airlocks

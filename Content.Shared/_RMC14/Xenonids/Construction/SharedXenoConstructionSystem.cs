@@ -120,7 +120,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private float _densityThreshold;
 
     // Multiplier force to push out corpses
-    private const float ResinDoorCorpsePushForce = 20f;
+    private const float ResinDoorCorpsePushForce = 10f;
 
     private static readonly List<Vector2i> adjacentDirections = new List<Vector2i>
         {   new Vector2i(1,0),
@@ -171,7 +171,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
-        SubscribeLocalEvent<ResinDoorComponent, BeforeDoorClosedEvent>(OnXenoDoorBeforeClose);
         SubscribeLocalEvent<ResinDoorComponent, DoorStateChangedEvent>(OnXenoDoorStateChange);
 
         SubscribeNetworkEvent<XenoOrderConstructionClickEvent>(OnXenoOrderConstructionClick);
@@ -1054,34 +1053,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         area.Value.Comp.ResinConstructCount--;
         Dirty(area.Value);
     }
-
-    private void OnXenoDoorBeforeClose(Entity<ResinDoorComponent> resinDoor, ref BeforeDoorClosedEvent args)
-    {
-        if (args.Partial)
-        {
-            return;
-        }
-        if (!TryComp<DoorComponent>(resinDoor, out var doorComp))
-        {
-            return;
-        }
-        var collidingBodies = resinDoor.Comp.CollidingBodies;
-        collidingBodies.Clear();
-        foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
-        {
-            if (_mobState.IsDead(ent))
-            {
-                collidingBodies.Add(ent);
-            }
-
-            // Set all bodies collision to "false" so the resin door will close
-            foreach (var body in collidingBodies)
-            {
-                _physics.SetCanCollide(body, false);
-            }
-        }
-    }
-
     private void OnXenoDoorStateChange(Entity<ResinDoorComponent> resinDoor, ref DoorStateChangedEvent args)
     {
         if (args.State != DoorState.Closed)
@@ -1119,12 +1090,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
-        // Set all bodies collision to "true"
         // Apply velocity towards the nearest free tile
         foreach (var body in collidingBodies)
         {
-            _physics.SetCanCollide(body, true);
-
             MapCoordinates bodyCoords = _transform.GetMapCoordinates(body);
 
             MapCoordinates? closestCoords = null;
@@ -1521,6 +1489,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
+    public bool IsResinDoorCollidable(EntityUid collidingBody)
+    {
+        return _mobState.IsDead(collidingBody);
+    }
     public bool CanPlaceXenoStructure(EntityUid user, EntityCoordinates coords, [NotNullWhen(false)] out string? popupType, bool needsWeeds = true)
     {
         popupType = null;
