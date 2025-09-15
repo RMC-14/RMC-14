@@ -12,7 +12,7 @@
     head: RMCHeadBeretXOBlack 
 
 - type: loadout
-  id: XOGreenBeretRMC
+  id: XOOceanBeretRMC
   cost: 3
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -21,4 +21,4 @@
       role: CMJobExecutiveOfficer
       time: 252000 # 70 hrs
   equipment:
-    head: RMCHeadBeretXOGreen
+    head: RMCHeadBeretXOOcean

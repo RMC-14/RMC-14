@@ -218,23 +218,31 @@
   parent: CMHeadBeret
   id: RMCHeadBeretXO
   name: XO's beret
-  description: A light-blue beret with Captain insignia on it.
+  description: A beret with Captain insignia on it.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_tan.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_tan.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_tan.rsi
 
 - type: entity
   parent: CMHeadBeret
-  id: RMCHeadBeretXOGreen
+  id: RMCHeadBeretXOOcean
   name: XO's ocean-wave beret
   description: A light-green beret with Captain insignia on it. Filled with pride, its colour symbolizes ocean waves.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_ocean.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_ocean.rsi
 
 - type: entity
   parent: CMHeadBeret

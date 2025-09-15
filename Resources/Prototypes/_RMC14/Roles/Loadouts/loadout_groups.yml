@@ -510,7 +510,7 @@
   maxLimit: 1
   loadouts:
   - XOBlackBeretRMC
-  - XOGreenBeretRMC
+  - XOOceanBeretRMC
 
 # Commanding Officer
 - type: loadoutGroup
