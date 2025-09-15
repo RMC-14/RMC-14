@@ -26,7 +26,7 @@
       - id: CMMRE
     - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Armour
@@ -87,6 +87,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
@@ -116,7 +118,7 @@
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
       - id: RMCAttachmentM63Stock
         points: 10
@@ -174,7 +176,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor

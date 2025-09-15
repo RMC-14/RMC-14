@@ -6,6 +6,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.UniformAccessories;
@@ -17,6 +18,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -37,6 +39,9 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
 
         if (ent.Comp.StartingAccessories is not { } startingAccessories)
+            return;
+
+        if (_net.IsClient)
             return;
 
         foreach (var startingEntId in startingAccessories)

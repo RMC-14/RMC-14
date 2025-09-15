@@ -35,7 +35,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: engi
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad

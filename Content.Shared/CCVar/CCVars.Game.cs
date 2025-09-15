@@ -220,7 +220,7 @@ public sealed partial class CCVars
     /// Whether clients which cannot be checked due to a rate limit will be denied
     /// </summary>
     public static readonly CVarDef<bool> GameIPIntelRejectRateLimited =
-        CVarDef.Create("game.ipintel_reject_ratelimited", false, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_reject_ratelimited", true, CVar.SERVERONLY);
 
     /// <summary>
     /// Whether clients which cannot be checked due to an error of some form will be denied
@@ -263,7 +263,7 @@ public sealed partial class CCVars
     /// Maximum amount of requests per Day. For free you get 500.
     /// </summary>
     public static readonly CVarDef<int> GameIPIntelMaxDay =
-        CVarDef.Create("game.ipintel_request_limit_daily", 500, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_request_limit_daily", 2000, CVar.SERVERONLY);
 
     /// <summary>
     /// Amount of seconds to add to the exponential backoff with every failed request.

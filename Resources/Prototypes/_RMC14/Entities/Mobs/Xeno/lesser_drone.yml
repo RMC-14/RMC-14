@@ -91,7 +91,7 @@
     prefix: lesser
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lesser_drone
   - type: AcidTrap
     trapLevel: 1

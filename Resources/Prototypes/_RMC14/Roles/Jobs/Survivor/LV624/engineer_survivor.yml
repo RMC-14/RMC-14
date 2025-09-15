@@ -1,0 +1,60 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorLV624Engineer
+  name: rmc-job-name-survivor-lv624-engineer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624Engineer
+  startingGear: RMCGearSurvivorLV624Engineer
+  spawnMenuRoleName: Engineer (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624Engineer
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorLV624Engineer
+  equipment:
+    head: RMCHardhatOrange
+    outerClothing: RMCHazardVest
+    jumpsuit: RMCJumpsuitDispatcherUniform
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624Engineer
+  name: survivor icb spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624Engineer
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetLV624Engineer
+  name: LV624Engineer colonist preset

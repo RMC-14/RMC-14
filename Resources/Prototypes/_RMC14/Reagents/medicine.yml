@@ -497,9 +497,8 @@
         type: Local
         messages: [ "antidepressant-effect-rmcparoxetine" ]
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbowsStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 1.5 #TODO max 30
         refresh: false
@@ -510,7 +509,6 @@
         probability: 0.05
 
 # Zombie Cure
-
 - type: reagent
   parent: [ CMReagent, AmbuzolPlus ]
   id: RMCAntiZed

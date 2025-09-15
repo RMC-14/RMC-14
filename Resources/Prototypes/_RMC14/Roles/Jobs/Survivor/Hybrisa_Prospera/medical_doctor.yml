@@ -1,0 +1,66 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: RMCSurvivorHybrisaMedicalDoctor
+  name: rmc-job-name-survivor-medical-doctor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaMedicalDoctor
+  startingGear: RMCGearSurvivorHybrisaMedicalDoctor
+  spawnMenuRoleName: Medical Doctor (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaMedicalDoctor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaMedicalDoctor
+  equipment:
+    gloves: CMHandsLatex
+    shoes: RMCShoesWhite
+    pocket2: RMCPouchMedkit
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaMedicalDoctor
+  name: medical doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaMedicalDoctor
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetHybrisaMedicalDoctor
+  name: medical doctor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
+    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
+    - [ CMScrubsGreen, RMCLabcoat ]
+    - [ CMScrubsGreen, RMCLabcoat ]
+    - [ RMCJumpsuitDoctor, RMCBeltMedicalDefibAnalyzerFilled, RMCHazardVestEMT ]

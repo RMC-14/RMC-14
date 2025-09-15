@@ -107,7 +107,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
-            _throw.TryThrow(heldEntity, target, user: xeno, compensateFriction: true);
+            _throw.TryThrow(heldEntity, target, user: xeno);
 
             // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
             // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)

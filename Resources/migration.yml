@@ -1330,3 +1330,37 @@ ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
 RMCGlassesBiMexYellow: RMCGlassesTriMaxYellow
 RMCGlassesBiMexBronze: RMCGlassesTriMaxBronze
 RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
+
+# 2025-07-12
+FoamedIronMetal: RMCFoamedIronMetal
+FoamedAluminiumMetal: RMCFoamedAluminiumMetal
+TimerTrigger: RMCTimerTrigger
+
+# 2025-07-15
+Ashtray: RMCAshtray
+
+# 2025-07-19
+FlippoEngravedLighter: RMCZippoGold
+
+# 2025-07-17
+RMCIDCardDeputy: RMCIDCardCMBDeputy
+RMCIDCardMarshal: RMCIDCardCMBMarshal
+
+# 2025-07-20
+RMCJumpsuitMarshal: RMCMarshalCMBUniform
+
+# 2025-07-23
+RMCM79Case: RMCM85A1Case
+CMWeaponLauncherM79: RMCWeaponLauncherM85A1
+RMCCrateM79: RMCCrateM85A1
+
+# 2025-07-30
+BoxBeaker: RMCBoxBeaker
+BoxPillCanister: RMCBoxPillCanister
+BoxSyringe: RMCBoxSyringe
+
+# 2025-08-01
+WeaponRifleSSG45: RMCWeaponRifleSSG45
+
+# 2025-08-07
+RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock

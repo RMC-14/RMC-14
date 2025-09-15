@@ -311,7 +311,7 @@ public abstract class AlertsSystem : EntitySystem
         return _typeToAlert.TryGetValue(alertType, out alert);
     }
 
-    private bool TryGetAlert(ProtoId<AlertPrototype> alertType, EntityUid? player, out AlertPrototype? alert)
+    private bool TryGetAlert(ProtoId<AlertPrototype> alertType, EntityUid? player, out AlertPrototype? alert, bool activate = true)
     {
         alert = null;
         if (player is null || !HasComp<AlertsComponent>(player))
@@ -330,6 +330,9 @@ public abstract class AlertsSystem : EntitySystem
             Log.Warning("Unrecognized encoded alert {0}", alert);
             return false;
         }
+
+        if (!activate)
+            return true;
 
         if (ActivateAlert(player.Value, alert) && _timing.IsFirstTimePredicted)
         {
@@ -352,7 +355,7 @@ public abstract class AlertsSystem : EntitySystem
     private void HandleClickAlertAlt(ClickAlertAltEvent msg, EntitySessionEventArgs args)
     {
         var player = args.SenderSession.AttachedEntity;
-        if(!TryGetAlert(msg.Type, player, out var alert) || alert == null || player == null)
+        if(!TryGetAlert(msg.Type, player, out var alert, false) || alert == null || player == null)
             return;
 
         ActivateAlertAlt(player.Value, alert);

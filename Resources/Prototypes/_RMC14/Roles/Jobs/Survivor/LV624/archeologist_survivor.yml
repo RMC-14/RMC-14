@@ -1,0 +1,64 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorLV624Archeologist
+  name: rmc-job-name-survivor-lv624-archeologist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624Archeologist
+  startingGear: RMCGearSurvivorLV624Archeologist
+  spawnMenuRoleName: Archeologist (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624Archeologist
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorLV624Archeologist
+  equipment:
+    head: RMCBoonie
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: CMUtilityVest
+    shoes: RMCShoesLaceupBrown
+    eyes: RMCGlassesAviators
+  inhand:
+    - RMCShovel
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624Archeologist
+  name: survivor lv624 archeologist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624Archeologist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCGearSurvivorPresetLV624Archeologist
+  name: lv624 archeologist colonist preset # TODO RMC14 random research notes

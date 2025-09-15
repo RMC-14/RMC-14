@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: ActionTogglePropCalling
+  parent: BaseToggleAction
+  name: Toggle Prop Calling
+  description: Join or leave the prop calling list.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon: { sprite: _RMC14/Interface/Alerts/xeno_health.rsi, state: health_0 }
+    iconOn: { sprite: _RMC14/Interface/Alerts/xeno_health.rsi, state: health_full }
+
+- type: entity
+  id: ActionCallProps
+  parent: BaseMentalAction
+  name: Call Props
+  description: Calls over all entities who have signed up for prop calling.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Interface/Alerts/xeno_health.rsi
+      state: health_full
+  - type: InstantAction
+    event: !type:CallOverPropsEvent

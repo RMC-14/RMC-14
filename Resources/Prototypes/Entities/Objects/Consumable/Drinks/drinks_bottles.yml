@@ -853,8 +853,6 @@
   suffix: For Drinks, Full
   description: Some people put this in their coffee...
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -872,8 +870,6 @@
   name: Smite jug
   description: A dual citrus sensation.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -908,8 +904,6 @@
   name: ice jug
   description: Stubborn water. Pretty cool.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -927,8 +921,6 @@
   name: coconut water jug
   description: It's on the inside of the coconut that counts.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -946,8 +938,6 @@
   name: coffee jug
   description: Wake up juice, of the heated kind.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -965,8 +955,6 @@
   name: tea jug
   description: The drink of choice for the Bri'ish and hipsters.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -984,8 +972,6 @@
   name: green tea jug
   description: It's like tea... but green! great for settling the stomach.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -1003,8 +989,6 @@
   name: iced tea jug
   description: For when the regular tea is too hot for you. Boohoo.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -1022,8 +1006,6 @@
   name: Dr. Gibb jug
   description: 42 different flavours... in a jug!
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -1041,8 +1023,6 @@
   name: root beer jug
   description: This drink makes Australians giggle.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -1060,8 +1040,6 @@
   name: watermelon juice jug
   description: May include leftover seeds.
   components:
-  - type: Item
-    size: Large
   - type: SolutionContainerManager
     solutions:
       drink:

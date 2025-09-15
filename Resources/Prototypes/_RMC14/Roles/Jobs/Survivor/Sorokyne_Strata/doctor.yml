@@ -4,6 +4,8 @@
   name: rmc-job-name-survivor-moh-doctor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorMoHDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMoHDoctor
   accessGroups:
   - ColonistMedical
@@ -22,7 +24,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMoHDoctor
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -30,17 +31,14 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorMoHDoctor
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
-  storage:
-    back:
-    - CMSheetMetal20
-    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -73,11 +71,18 @@
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
     -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+    -
       - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
       - [ RMCTie ]
       - [ RMCTieGreen ]
       - [ RMCTiePurple ]
       - [ RMCTieRed ]
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
     randomStartingGear:
       back:
       - CMSatchel

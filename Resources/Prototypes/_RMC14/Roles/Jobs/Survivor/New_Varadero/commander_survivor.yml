@@ -46,13 +46,14 @@
       - Civilian
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: xo
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
 
 - type: startingGear
@@ -92,20 +93,6 @@
 - type: playTimeTracker
   id: RMCJobSurvivorCommanderNewVaradero
   isHumanoid: true
-
-- type: entity
-  id: RMCSurvivorPresetNoGun
-  name: no gun colonist preset
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SurvivorPreset
-    randomGear:
-    - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
-    - [ WeaponNailgun ]
-    - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
-    - [ CMAdvFirstAidKitFilled ]
 
 - type: jobIcon
   parent: CMJobIconBase

@@ -139,7 +139,7 @@
       visible: false
   - type: PowerCellDraw
     enabled: false
-    useRate: 500 # change to 1000 when defib power drawing is fixed
+    useRate: 1000
   - type: RMCPowerUsageDisplay
   - type: RequiresSkill
     skills:

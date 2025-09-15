@@ -184,6 +184,10 @@ public abstract partial class SharedBuckleSystem
 
     private void OnBuckleUpdateCanMove(EntityUid uid, BuckleComponent component, UpdateCanMoveEvent args)
     {
+        // RMC14
+        if (HasComp<RMCAllowStrapMovementComponent>(component.BuckledTo))
+            return;
+
         if (component.Buckled)
             args.Cancel();
     }
@@ -241,6 +245,11 @@ public abstract partial class SharedBuckleSystem
         strapComp = null;
         if (!Resolve(strapUid, ref strapComp, false))
             return false;
+
+        // RMC14
+        if (!strapComp.Enabled)
+            return false;
+        // RMC14
 
         // Does it pass the Whitelist
         if (_whitelistSystem.IsWhitelistFail(strapComp.Whitelist, buckleUid) ||

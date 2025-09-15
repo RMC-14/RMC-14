@@ -348,7 +348,7 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
-    private bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
+    public bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
     {
         popup = default;
         if (user == null)

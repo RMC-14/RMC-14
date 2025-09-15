@@ -7,7 +7,7 @@
   randomRotation: false
   stations:
     OCP-583:
-      stationProto: NanotrasenCentralCommand
+      stationProto: UNMCHighCommand
       components:
         - type: StationNameSetup
           mapNameTemplate: 'OCP-583'

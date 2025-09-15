@@ -85,7 +85,7 @@
           Quantity: 30
         maxVol: 50
   - type: RMCLoreExaminable
-    content: A rarity among modern markets, Thirteen Loko is an all-Earth original. With a name coined by the general consensus that only the mildly insane willing to imbibe it, this energy drink has garnered a notorious reputation for itself and a sizeable cult following to match it. After a series of legal proceedings by Weston-Yamada, denatured cobra venom was removed from the recipe, much to the disappointment of the drink's consumers.
+    content: rmc-lore-examinable-thirteen-loko
 
 - type: entity
   parent: CMDrinkCanBase
@@ -242,7 +242,7 @@
   - type: Item
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
   - type: RMCLoreExaminable
-    content: Designed back in 2109, the advertising campaign for BODA started out as an attempt by the SPP to win the hearts and minds of colonists and settlers across the galaxy. Soon after, the ubiquitous cyan vendors and large supplies of the drink began to crop up in UN warehouses with seemingly no clear origin. Despite some concerns, after initial testing determined that the stored products were safe for consumption and surprisingly popular when blind-tested with focus groups, the strange surplus of BODA was authorized for usage within the UN-associated colonies. Subsequently, it enjoyed a relative popularity before falling into obscurity in the coming decades as supplies dwindled.
+    content: rmc-lore-examinable-boda
 
 - type: entity
   parent: CMDrinkCanCola

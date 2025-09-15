@@ -21,7 +21,6 @@
         RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -30,6 +29,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetUNPeacekeeper
+  useLoadoutOfJob: CMSurvivorSecurity
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity

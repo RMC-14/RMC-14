@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
@@ -51,15 +51,14 @@
       prefix: cm-job-prefix-liaison
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
-    - type: RMCRibbon
     - type: RMCTrackable
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
+    jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
@@ -73,6 +72,15 @@
     job_id: CMLiaison
   - type: Sprite
     state: cl_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleLiaisonYou
+  name: A Typical Weston-Yamada Liaison
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: corp_liaison
 
 - type: playTimeTracker
   id: CMJobLiaison

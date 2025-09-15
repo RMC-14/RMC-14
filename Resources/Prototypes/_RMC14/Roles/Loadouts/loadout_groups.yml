@@ -53,6 +53,7 @@
   - GlassesRPGRMC
   - GlassesRPGRMCOld
   - GlassesPrescriptionRMC
+  - HippieGlassesRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
   - GogglesBlackRMC
@@ -71,6 +72,13 @@
   - GogglesPolarizedBlueRMC
   - GogglesPolarizedOrangeRMC
   - GogglesM1A1BlueRMC
+  - HippieGlassesBloodredRMC
+  - HippieGlassesGreenRMC
+  - HippieGlassesMidnightRMC
+  - HippieGlassesNightblueRMC
+  - HippieGlassesPinkRMC
+  - HippieGlassesSunriseRMC
+  - HippieGlassesSunsetRMC
 
 # Masks
 - type: loadoutGroup
@@ -134,6 +142,10 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
+  - HeadBeanieRMC
+  - HeadBeanieTanRMC
+  - HeadBeanieGreenRMC
+  - HeadBeanieGrayRMC
 
 # Helmet Garbs
 - type: loadoutGroup
@@ -364,6 +376,15 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Corporate Liaison
+- type: loadoutGroup
+  id: LiaisonRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - DrinkCanAleRMC
+
 # Chief MP
 - type: loadoutGroup
   id: ChiefMPRoleSpecificRMC
@@ -441,14 +462,14 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - BootsBlackRMC
-  - ShoesBlackRMC
-  - ShoesBrownRMC
-  - ShoesGreenRMC
-  - ShoesPurpleRMC
-  - ShoesRedRMC
-  - ShoeWhiteRMC
-  - ShoeYellowRMC
+  - BootsBlackRMCSynth
+  - ShoesBlackRMCSynth
+  - ShoesBrownRMCSynth
+  - ShoesGreenRMCSynth
+  - ShoesPurpleRMCSynth
+  - ShoesRedRMCSynth
+  - ShoeWhiteRMCSynth
+  - ShoeYellowRMCSynth
 
 - type: loadoutGroup
   id: SynthHeadwearRMC
@@ -493,7 +514,7 @@
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
   - JacketWindbreakerRMC
-  
+
 - type: loadoutGroup
   id: SynthUniformAccessoriesRMC
   name: rmc-loadout-group-synthetic-accessories
@@ -545,3 +566,41 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+
+# Civilian
+- type: loadoutGroup
+  id: CivilianOnlyRMC
+  name: rmc-loadout-group-civilian
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PatchWeYaRMC
+  - PatchWeYaRMCSquare
+  - PatchWeYaRMCBlack
+  - PatchWeYaRMCFury161
+  - PatchTSERMC
+  - PatchCECRMC
+  # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
+  # TODO Halcyon Dynamics patch
+  - HeadCowboyHatLightRMC
+  - HeadCowboyHatDarkRMC
+  - HeadBandRebelRMC
+  # BiMex tactical shades TODO
+  - ShoesBlackRMC
+  - ShoesBrownRMC
+  - ShoesBlueRMC
+  - ShoesGreenRMC
+  - ShoesYellowRMC
+  - ShoesRedRMC
+  - ShoesPurpleRMC
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkGreyRMC
+  - PlushieSharkBlueRMC
+  - PlushieSharkPinkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC

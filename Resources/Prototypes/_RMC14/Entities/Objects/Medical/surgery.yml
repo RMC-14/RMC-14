@@ -384,7 +384,7 @@
     state: bone-gel
   - type: CMBoneGel
   - type: RMCLoreExaminable
-    content: Bone gel is a biological synthetic bone-analogue with the consistency of clay. It is capable of fixing hairline fractures and complex fractures alike. Bone gel should not be used to fix missing bone, as it does not replace the body's bone marrow. Overuse in a short period may cause acute immunodeficiency or anemia.
+    content: rmc-lore-examinable-bottle-of-bone-gel
 
 - type: entity
   parent: CMBoneGel

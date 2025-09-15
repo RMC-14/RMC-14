@@ -193,10 +193,6 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (ev.FoundTarget ? !target.Repeat : target.DeselectOnMiss)
             StopTargeting();
 
-        // RMC14
-        if (!ev.FoundTarget)
-            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(actionId))); // RMC14
-
         return true;
     }
 

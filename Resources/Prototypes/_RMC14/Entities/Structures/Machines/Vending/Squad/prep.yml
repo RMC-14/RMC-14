@@ -112,7 +112,7 @@
         amount: 15
       - id: CMHandsBlackMarine
         amount: 15
-      - id: CMHeadset
+      - id: RMCHeadsetShip
         amount: 15
       - id: ArmorHelmetM10
         amount: 15
@@ -121,6 +121,10 @@
       - id: CMWebbingBrown
         amount: 1
       - id: CMWebbingBlack
+        amount: 1
+      - id: RMCWebbingLegPouch
+        amount: 1
+      - id: RMCWebbingLegPouchBlack
         amount: 1
       - id: CMWebbing
         amount: 2
@@ -306,14 +310,6 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechSurplus
-  id: RMCColMarTechSurplusPVE
-  suffix: PVE
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
-
-- type: entity
   parent: ColMarTechBase
   id: ColMarTechMunitions
   name: ColMarTech automated munition squad vendor
@@ -461,14 +457,6 @@
         amount: 2
 
 - type: entity
-  parent: ColMarTechUtilities
-  id: RMCColMarTechUtilitiesPVE
-  suffix: PVE
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
-
-- type: entity
   parent: ColMarTechBase
   id: CMVendorAttachments
   name: Aegis Armaments squad attachments vendor
@@ -534,7 +522,7 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2

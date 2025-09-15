@@ -22,3 +22,4 @@ rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a b
 rmc-xeno-tracker-target-Queen = Queen
 rmc-xeno-tracker-target-HiveLeader = Hive Leader
 rmc-xeno-tracker-target-Tunnel = Tunnel
+rmc-xeno-tracker-target-HiveCore = Hive Core

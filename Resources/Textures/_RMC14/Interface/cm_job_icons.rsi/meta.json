@@ -269,6 +269,9 @@
             "name": "pmc_spec"
         },
         {
+            "name": "weya_sec"
+        },
+        {
             "name": "upp_med"
         },
         {
@@ -432,6 +435,54 @@
         },
         {
             "name": "hudsquad_syn_forecon"
+        },
+        {
+            "name": "weya_goon_standard"
+        },
+        {
+            "name": "hudsquad_liaison"
+        },
+        {
+            "name": "weya_jrexec"
+        },
+        {
+            "name": "weya_seniorexec"
+        },
+        {
+            "name": "weya_execspec"
+        },
+        {
+            "name": "weya_execsuper"
+        },
+        {
+            "name": "weya_assman"
+        },
+        {
+            "name": "weya_divman"
+        },
+        {
+            "name": "weya_chiefman"
+        },
+        {
+            "name": "weya_director"
+        },
+        {
+            "name": "weya_depdirector"
+        },
+        {
+            "name": "hc_exec"
+        },
+        {
+            "name": "hc_execspec"
+        },
+        {
+            "name": "hc_jrexec"
+        },
+        {
+            "name": "hc_srexec"
+        },
+        {
+            "name": "hc_trainee"
         }
     ]
 }

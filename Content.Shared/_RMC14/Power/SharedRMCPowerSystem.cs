@@ -51,6 +51,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     protected readonly HashSet<EntityUid> ToUpdate = new();
     private readonly Dictionary<MapId, List<EntityUid>> _reactorPoweredLights = new();
     private readonly HashSet<MapId> _reactorsUpdated = new();
+    private bool _recalculate;
 
     private EntityQuery<RMCApcComponent> _apcQuery;
     private EntityQuery<AppearanceComponent> _appearanceQuery;
@@ -803,8 +804,41 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             _appearance.SetData(receiver, PowerDeviceVisuals.Powered, ev.Powered, appearance);
     }
 
+    public void RecalculatePower()
+    {
+        _recalculate = true;
+    }
+
     public override void Update(float frameTime)
     {
+        if (_recalculate)
+        {
+            _recalculate = false;
+            var apcQuery = EntityQueryEnumerator<RMCApcComponent>();
+            while (apcQuery.MoveNext(out var uid, out _))
+            {
+                ToUpdate.Add(uid);
+            }
+
+            var receiverQuery = EntityQueryEnumerator<RMCPowerReceiverComponent>();
+            while (receiverQuery.MoveNext(out var uid, out _))
+            {
+                ToUpdate.Add(uid);
+            }
+
+            var reactorQuery = EntityQueryEnumerator<RMCFusionReactorComponent>();
+            while (reactorQuery.MoveNext(out var uid, out _))
+            {
+                _reactorsUpdated.Add(Transform(uid).MapID);
+            }
+
+            var lightQuery = EntityQueryEnumerator<RMCReactorPoweredLightComponent>();
+            while (lightQuery.MoveNext(out var uid, out var comp))
+            {
+                _reactorPoweredLights.GetOrNew(Transform(uid).MapID).Add(uid);
+            }
+        }
+
         if (_net.IsClient)
         {
             ToUpdate.Clear();
