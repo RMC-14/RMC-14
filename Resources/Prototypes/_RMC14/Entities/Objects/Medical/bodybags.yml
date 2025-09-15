@@ -103,6 +103,14 @@
     fitIntoEntityStorage: true
   - type: CrashLandable
   - type: AnimationPlayer
+  - type: RMCContainerEmptyOnDestruction
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: RMCContainerEmptyOnDestruction
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
 
 # Body bag
 - type: entity
@@ -159,6 +167,15 @@
     blacklist:
       components:
       - Xeno
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      components:
+      - MedevacStretcher
+      tags:
+      - CMRollerItem
   - type: HolocardContainer
 
 # Folded stasis bag
@@ -170,7 +187,7 @@
   - type: Foldable
     folded: true
 
-# Used stasis bag (trash)
+# Used stasis bag
 - type: entity
   parent: BaseItem
   id: RMCStasisBagUsed
@@ -187,7 +204,7 @@
     tags:
     - Trash
 
-# V2 thermal tarp
+# V2 thermal tarp - accepts all mob states
 - type: entity
   parent: CMBaseStorageBag
   id: RMCThermalTarpV2
