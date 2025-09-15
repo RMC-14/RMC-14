@@ -35,7 +35,7 @@
         sound:
           collection: MetalBreak
   - type: ReceiverXenoClaws
-    minimumClawStrength: VerySharp
+    minimumClawStrength: Sharp
     maxHealth: 125
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
@@ -87,7 +87,7 @@
         sound:
           collection: MetalBreak
   - type: ReceiverXenoClaws
-    minimumClawStrength: VerySharp
+    minimumClawStrength: Sharp
     maxHealth: 500
   - type: StaticPrice
     price: 66
