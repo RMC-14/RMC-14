@@ -93,7 +93,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
