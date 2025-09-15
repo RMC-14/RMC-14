@@ -9,16 +9,16 @@
     UNSEndeavour:
       stationProto: StandardUNMCWarship
       components:
-      - type: StationNameSetup
-        mapNameTemplate: 'UNS Endeavour'
-      - type: StationJobs
-        availableJobs:
-          # Command
-          CMPVEPlatoonCommander: [1, 1]
+        - type: StationNameSetup
+          mapNameTemplate: 'UNS Endeavour'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            CMPVEPlatoonCommander: [1, 1]
 
-          # Marines
-          CMPVESectionSergeant: [1, 1]
-          CMPVESquadLeader: [2, 2]
-          CMPVESmartGunOperator: [2, 2]
-          CMPVEHospitalCorpsman: [2, 2]
-          CMPVERifleman: [ 14, 14 ]
+            # Marines
+            CMPVESectionSergeant: [1, 1]
+            CMPVESquadLeader: [2, 2]
+            CMPVESmartGunOperator: [2, 2]
+            CMPVEHospitalCorpsman: [2, 2]
+            CMPVERifleman: [ 14, 14 ]
