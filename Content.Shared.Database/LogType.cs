@@ -464,6 +464,20 @@ public enum LogType
     /// Logs related to botany, such as planting and harvesting crops
     /// </summary>
     Botany = 100,
+    /// <summary>
+    /// Artifact node got activated.
+    /// </summary>
+    ArtifactNode = 101,
+
+    /// <summary>
+    /// Damaging grid collision has occurred.
+    /// </summary>
+    ShuttleImpact = 102,
+
+    /// <summary>
+    /// Events relating to midi playback.
+    /// </summary>
+    Instrument = 103,
 
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
@@ -501,4 +515,7 @@ public enum LogType
     RMCLobbyMessage = RMCMarineAnnounce + 33,
     RMCChemMaster = RMCMarineAnnounce + 34,
     RMCCharacterDescription = RMCMarineAnnounce + 35,
+    RMCXenoNest = RMCMarineAnnounce + 36,
+    RMCVend = RMCMarineAnnounce + 37,
+    RMCRoundEnd = RMCMarineAnnounce + 38,
 }

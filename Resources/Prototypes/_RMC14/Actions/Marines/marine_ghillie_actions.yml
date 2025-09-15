@@ -4,11 +4,13 @@
   name: Prepare Position
   description: Use the ghillie suit and the nearby environment to become near invisible.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: prepare_position
     useDelay: 8
     priority: -9
     itemIconStyle: NoItem
+  - type: InstantAction
     event: !type:GhillieSuitPreparePositionActionEvent
+  - type: ActionBlockIfDevoured

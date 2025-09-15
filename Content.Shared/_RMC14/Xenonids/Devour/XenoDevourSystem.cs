@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
@@ -53,6 +54,8 @@ public sealed class XenoDevourSystem : EntitySystem
         _devouredQuery = GetEntityQuery<DevouredComponent>();
         _xenoDevourQuery = GetEntityQuery<XenoDevourComponent>();
 
+        SubscribeLocalEvent<ActionBlockIfDevouredComponent, RMCActionUseAttemptEvent>(OnDevouredActionUseAttempt);
+
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
@@ -84,6 +87,19 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
+    }
+
+    private void OnDevouredActionUseAttempt(Entity<ActionBlockIfDevouredComponent> ent, ref RMCActionUseAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var user = args.User;
+        if (HasComp<DevouredComponent>(user))
+        {
+            args.Cancelled = true;
+            _popup.PopupClient(Loc.GetString("comp-climbable-cant-interact"), user, user, PopupType.SmallCaution);
+        }
     }
 
     private void OnDevourableShouldHandle(Entity<DevourableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)

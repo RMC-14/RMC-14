@@ -28,7 +28,7 @@
     burstScatterMult: 1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:
@@ -76,6 +76,7 @@
           - RMCAttachmentAngledGrip
           - RMCAttachmentVerticalGrip
           - RMCAttachmentLaserSight
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.8, 0.06

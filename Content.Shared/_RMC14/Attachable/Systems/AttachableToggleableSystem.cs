@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Fluids;
@@ -123,13 +124,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         if (attachable.Comp.Action == null ||
-            !TryComp(attachable.Comp.Action, out InstantActionComponent? actionComponent))
+            !TryComp(attachable.Comp.Action, out ActionComponent? actionComponent))
         {
             return;
         }
 
         _actionsSystem.SetToggled(attachable.Comp.Action, attachable.Comp.Active);
-        actionComponent.Enabled = attachable.Comp.Attached;
+        _actionsSystem.SetEnabled((attachable.Comp.Action.Value, actionComponent), attachable.Comp.Attached);
     }
 
     private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable, ref AttachableAlteredEvent args)
@@ -772,13 +773,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
         _metaDataSystem.SetEntityName(actionId, ent.Comp.ActionName);
         _metaDataSystem.SetEntityDescription(actionId, ent.Comp.ActionDesc);
 
-        if (_actionsSystem.TryGetActionData(actionId, out var action))
+        if (_actionsSystem.GetAction(actionId) is { } action)
         {
-            action.Icon = ent.Comp.Icon;
-            action.IconOn = ent.Comp.IconActive;
-            action.Enabled = ent.Comp.Attached;
-            action.UseDelay = ent.Comp.UseDelay;
-            Dirty(actionId, action);
+            var actionEnt = action.AsNullable();
+            _actionsSystem.SetIcon(actionEnt, ent.Comp.Icon);
+            _actionsSystem.SetIconOn(actionEnt, ent.Comp.IconActive);
+            _actionsSystem.SetEnabled(actionEnt, ent.Comp.Attached);
+            _actionsSystem.SetUseDelay(actionEnt, ent.Comp.UseDelay);
         }
 
         Dirty(ent);
@@ -809,8 +810,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (ent.Comp.Action is not { } action)
             return;
 
-        if (!TryComp(action, out InstantActionComponent? actionComponent) || actionComponent.AttachedEntity != user)
+        if (!HasComp<InstantActionComponent>(action) ||
+            !TryComp(action, out ActionComponent? actionComponent) ||
+            actionComponent.AttachedEntity != user)
+        {
             return;
+        }
 
         _actionsSystem.RemoveProvidedAction(user, ent, action);
     }

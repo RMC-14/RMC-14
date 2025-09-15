@@ -20,6 +20,7 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -28,7 +29,6 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -228,8 +228,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     /// <param name="user">The entity doing the attack</param>
     /// <param name="attack">The <see cref="AttackEvent"/></param>
     /// <param name="newAttack">The new <see cref="AttackEvent"/></param>
-    /// <returns>True if the attack event has been modified and remains valid.</returns>
-    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack)
+    /// <param name="range">The range of the attack</param>
+    /// <returns>True if the attack hasn't been modified, or if it is modified and still valid</returns>
+    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack, float range = 1.5f)
     {
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
         var userPosition = _transform.GetMoverCoordinates(user).Position;
@@ -237,7 +238,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
                 (targetPosition -
                  userPosition).ToWorldAngle(),
                 0,
-                1.5f,
+                range,
                 _transform.GetMapId(user),
                 user)
             .ToList());
@@ -245,21 +246,30 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         var meleeEv = new MeleeAttackAttemptEvent(GetNetEntity(target),
             attack,
             attack.Coordinates,
-            entities);
+            entities,
+            GetNetEntity(weapon));
         RaiseLocalEvent(user, ref meleeEv);
 
         newAttack = meleeEv.Attack;
 
-        // The attack hasn't been modified..
+        // The attack hasn't been modified.
         if (attack == newAttack)
-            return false;
+            return true;
 
         // The new target is the weapon being used for the attack.
-        if (GetEntity(meleeEv.Weapon) == target)
+        if (meleeEv.Weapon == meleeEv.Target)
             return false;
 
-        // The new target is unable to be attacked.
-        if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, true))
+        var disarm = false;
+        switch (newAttack)
+        {
+            case DisarmAttackEvent:
+                disarm = true ;
+                break;
+        }
+
+        // The new target is unable to be attacked by the user.
+        if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, disarm))
             return false;
 
         return true;

@@ -59,10 +59,10 @@ cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
-cm-chatsan-replacement-synth = fake hosts
+cm-chatsan-replacement-synth = fake host
 
 cm-chatsan-word-synthetic = synthetic
-cm-chatsan-replacement-synthetic = fake hosts
+cm-chatsan-replacement-synthetic = fake host
 
 cm-chatsan-word-synths = synths
 cm-chatsan-replacement-synths = fake hosts
@@ -184,7 +184,7 @@ cm-chatsan-replacement-engineer = tall builder
 cm-chatsan-word-comtech = comtech
 cm-chatsan-replacement-comtech = tall builder
 
-cm-chatsan-word-combat-technitian = combat technician
+cm-chatsan-word-combat-technician = combat technician
 cm-chatsan-replacement-combat-technician = tall builder
 
 cm-chatsan-word-corpsman = corpsman
@@ -550,11 +550,11 @@ cm-chatsan-word-paras = paras
 cm-chatsan-word-parasites = parasites
 cm-chatsan-replacement-parasites = children
 
-cm-chatsan-word-baricade = baricade
+cm-chatsan-word-barricade = barricade
 cm-chatsan-word-cade = cade
-cm-chatsan-word-baricades = baricades
+cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
-cm-chatsan-replacement-baricades = metal resin
+cm-chatsan-replacement-barricades = metal resin
 
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
@@ -680,13 +680,11 @@ cm-chatsan-word-light-bulbs = light bulbs
 cm-chatsan-word-lightbulbs = lightbulbs
 cm-chatsan-replacement-light-bulbs = glow orbs
 
-cm-chatsan-word-case = case
 cm-chatsan-word-crate = crate
-cm-chatsan-replacement-case = containment box
+cm-chatsan-replacement-crate = containment box
 
-cm-chatsan-word-cases = cases
 cm-chatsan-word-crates = crates
-cm-chatsan-replacement-cases = containment boxes
+cm-chatsan-replacement-crates = containment boxes
 
 cm-chatsan-word-gunshot = gunshot
 cm-chatsan-replacement-gunshot = spit burst

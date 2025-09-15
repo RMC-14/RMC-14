@@ -1,0 +1,146 @@
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCZombifiedCorpse
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      chemicals:
+        maxVol: 250
+        reagents:
+        - ReagentId: RMCBlackGoo
+          Quantity: 250
+
+# Colonist
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedColonist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+
+- type: entity
+  id: RMCSpawnZombifiedColonist
+  name: zombie spawner
+  suffix: Colonist
+  components:
+  - type: Sprite
+    sprite: Interface/Misc/job_icons.rsi
+    state: Zombie
+  - type: CorpseSpawner
+    spawn: RMCZombifiedColonist
+
+# Civilian
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedChef
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseChef ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedChef
+  suffix: Chef
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedChef
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedDoctor
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDoctor ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedDoctor
+  suffix: Doctor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedDoctor
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedEngineer
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseEngineer ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedEngineer
+  suffix: Engineer
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedEngineer
+
+# Security
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedSecurity
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSecurity ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedSecurity
+  suffix: Security
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedSecurity
+
+# WeYa
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedGoon
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoon ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedLiaison
+  suffix: Liaison
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedLiaison
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedLiaison
+  components:
+  - type: Loadout
+    prototypes:
+    - RMCGearCorpseLiaison
+    - RMCGearCorpseLiaisonBlue
+    - RMCGearCorpseLiaisonBrown
+    - RMCGearCorpseLiaisonWhite
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedWeYaGoon
+  suffix: WeYa Goon
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedGoon
+
+- type: randomHumanoidSettings
+  parent: RMCZombifiedCorpse
+  id: RMCZombifiedWeYaPMC
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaPMCStandard ]
+
+- type: entity
+  parent: RMCSpawnZombifiedColonist
+  id: RMCSpawnZombifiedWeYaPMC
+  suffix: WeYa PMC
+  components:
+  - type: CorpseSpawner
+    spawn: RMCZombifiedWeYaPMC

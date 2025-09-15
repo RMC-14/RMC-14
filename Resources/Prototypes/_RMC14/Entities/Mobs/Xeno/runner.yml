@@ -41,6 +41,7 @@
         - HighImpassable
         - LowImpassable
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -106,7 +107,7 @@
     prefix: runner
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
@@ -117,6 +118,8 @@
     minimumSpeedModifier: 0.1
   - type: FixedIdentity
     name: cm-job-name-xeno-runner
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoRunnerBase

@@ -44,6 +44,7 @@ rmc-xeno-gardener-description = You trade your choice of resin secretions, corro
   You gain the ability to:
   - Plant up to six potent resin fruits for your sisters at the cost of a bit of your health for each fruit you shape.
   - Plant hardier weeds.
+  - Pick and feed others fruits 2x as fast.
   Your Resin Surge allows you to:
   - Create patches of sticky resin.
   - Temporarily reinforce structures with your plasma.

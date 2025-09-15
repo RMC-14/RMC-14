@@ -12,6 +12,15 @@
     fiberMaterial: fibers-leather
     fiberColor: fibers-black
   - type: FingerprintMask
+  - type: SquadArmor
+    layer: Gloves
+    slot: GLOVES
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Hands/glove_overlays.rsi
+      state: std-gloves
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Hands/glove_overlays.rsi
+      state: std-gloves
 
 - type: entity
   parent: CMHandsBlackMarine

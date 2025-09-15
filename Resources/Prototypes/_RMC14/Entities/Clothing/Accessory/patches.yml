@@ -1,0 +1,575 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCPatchBase
+  name: patch
+  description: An abstract patch.
+  components:
+  - type: UniformAccessory
+    category: Patch
+    limit: 4
+    hiddenByJacketRolling: true
+
+# UN
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchUnitedNations
+  name: United Nations patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the United Nations, an economic and political giant in both the Sol system and throughout the offworld colonies, the military might of the UN is unparalleled..
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchUnitedNations
+  id: RMCPatchUnitedNationsSquare
+  suffix: Square
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch_square.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch_square.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch_square.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchUNMC
+  name: UNMC patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the United Nations Marine Corps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchFallingFalcons
+  name: UNMC Falling Falcons patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the Falling Falcons, the 2nd battalion of the 4th brigade of the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsLarge
+  suffix: Large
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsAlpha
+  suffix: Alpha
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsBravo
+  suffix: Bravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsCharlie
+  suffix: Charlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsDelta
+  suffix: Delta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsEcho
+  suffix: Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsFoxtrot
+  suffix: Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsSquad
+  suffix: Squad, DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_squad_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: helmet
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCPatchFallingFalconsAlpha
+      SquadBravo: RMCPatchFallingFalconsBravo
+      SquadCharlie: RMCPatchFallingFalconsCharlie
+      SquadDelta: RMCPatchFallingFalconsDelta
+      SquadEcho: RMCPatchFallingFalconsEcho
+      SquadFoxtrot: RMCPatchFallingFalconsFoxtrot
+
+# FORECON
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchFORECON
+  name: UNMC Force Reconnaissance patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the UNS Hanyut, UNMC FORECON.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
+      state: helmet
+
+# SOLAR DEVILS
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSolarDevils
+  name: UNMC Solar Devils patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 3rd Battalion 'Solar Devils', part of the UNMC 2nd Division, 1st Regiment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+      state: helmet
+
+# WEYA
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchWeYa
+  name: Weston-Yamada patch
+  description: A fire-resistant white shoulder patch featuring the Weston-Yamada logo. A symbol of loyalty to the corporation, or perhaps ironic mockery, depending on your viewpoint.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchWeYa
+  id: RMCPatchWeYaBlack
+  description: A fire-resistant black shoulder patch featuring the Weston-Yamada logo. A symbol of loyalty to the corporation, or perhaps ironic mockery, depending on your viewpoint.
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_black.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_black.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchWeYaBlack
+  id: RMCPatchWeYaBlackSquare
+  suffix: Black, Square
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_square.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_square.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchWeYaFury161
+  name: Weston-Yamada Fury '161' patch
+  description: A fire-resistant shoulder patch. Was worn by workers and then later prisoners on the Fiorina 'Fury' 161 facility, a rare relic, after the facility went dark in 2079.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+      state: helmet
+
+# SPP
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPP
+  name: SPP patch
+  description: An old fire-resistant shoulder patch, worn by the men and women of the Socialists Progressive Peoples Armed Vanguard.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPPVDV
+  name: SPP Airborne Reconnaissance patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 173rd Airborne Reconnaissance Platoon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPPNaval
+  name: SPP Naval Infantry patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the SPP Naval Infantry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPP
+  id: RMCPatchSPPAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPPVDV
+  id: RMCPatchSPPVDVAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPPNaval
+  id: RMCPatchSPPNavalAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPPCEC
+  name: CEC patch
+  description: An old, worn and faded fire-resistant circular patch with a gold star on a split orange and red background. Once worn by members of the Cosmos Exploration Corps (CEC), a division of the SPP dedicated to exploration, resource assessment, and establishing colonies on new worlds. The patch serves as a reminder of the CEC's daring missions aboard aging starships, a symbol of perseverance in the face of adversity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/cec_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/cec_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/cec_patch.rsi
+      state: helmet
+
+# TSE
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSEMarines
+  name: TSE Royal Crown Marines patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the royal crown marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSE
+  name: Three Suns Empire patch
+  description: A fire-resistant shoulder patch, worn by the men and women loyal to the Three Suns Empire, An older style symbol of the TSE.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+      state: helmet
+
+# CLF
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchCLF
+  name: CLF patch
+  description: "A circular, fire-resistant patch with a white border. The design features three white stars and a tricolor background: green, black, and red, symbolizing the Colonial Liberation Front's fight for independence and unity. This patch is worn by CLF fighters as a badge of defiance against corporate and governmental oppression, representing their struggle for a free and self-determined colonial future. Though feared and reviled by some, it remains a powerful symbol of resistance and revolution."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_patch.rsi
+      state: helmet
+
+# Misc
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchFreelancer
+  name: Freelancer's Guild patch
+  description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary of the Freelancers, a well-equipped group for hire across the outer colonies, known for their professionalism and neutrality. This patch is a personal memento from the wearer’s time with the group, representing a life spent navigating the dangerous world of mercenary contracts."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFreelancer
+  id: RMCPatchFreelancerAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchMedic
+  name: Field Medic patch
+  description: A circular patch featuring a blue cross on a white background with a bold blue outline. Universally recognized as a symbol of aid and neutrality, it is worn by medics across the colonies. Whether a sign of true medical expertise, a keepsake, or merely a decoration, its presence offers a glimmer of hope in dire times.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
+      state: helmet

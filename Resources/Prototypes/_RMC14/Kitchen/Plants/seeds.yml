@@ -174,3 +174,39 @@
       Min: 1
       Max: 25
       PotencyDivisor: 25
+
+- type: entity
+  parent: SeedBase
+  name: packet of mango seeds
+  id: MangoSeeds
+  components:
+    - type: Seed
+      seedId: mango
+    - type: Sprite
+      sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+
+- type: seed
+  id: mango
+  name: seeds-mango-name
+  noun: seeds-noun-seeds
+  displayName: seeds-mango-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/mango.rsi
+  packetPrototype: MangoSeeds
+  productPrototypes:
+    - FoodMango
+  harvestRepeat: Repeat
+  lifespan: 55
+  maturation: 6
+  production: 6
+  yield: 3
+  potency: 10
+  idealLight: 8
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25

@@ -9,6 +9,7 @@
   hostile:
   - UNMC
   - SPP
+  - Halcyon
   - WeYa
   - Civilian
   - CLF
@@ -20,6 +21,7 @@
   - UNMC
   - RMCXeno
   - SPP
+  - Halcyon
   - WeYa
   - Civilian
   - CLF
@@ -27,6 +29,11 @@
 
 - type: npcFaction
   id: SPP
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Halcyon
   hostile:
   - RMCXeno
 

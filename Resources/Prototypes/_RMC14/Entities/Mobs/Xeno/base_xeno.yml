@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-xeno
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
@@ -91,6 +95,7 @@
   - type: Emoting
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: DoAfter
   - type: Examiner
@@ -176,6 +181,7 @@
         density: 185
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - MobLayer
@@ -186,11 +192,16 @@
         density: 0
         layer:
         - BulletImpassable
+  - type: CMSurgeryTarget
+  - type: Body
+    prototype: Xenonid
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
       enum.XenoDevolveUIKey.Key:
@@ -315,6 +326,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
+    trackerModes:
+    - Queen
+    - HiveLeader
+    - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -327,10 +343,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
@@ -372,6 +388,7 @@
     whitelist:
       components:
       - Marine
+  - type: EmoteCooldown
 
 - type: entity
   abstract: true
@@ -470,6 +487,7 @@
     stacks: -5
   - type: RMCHandEmotes
   - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true

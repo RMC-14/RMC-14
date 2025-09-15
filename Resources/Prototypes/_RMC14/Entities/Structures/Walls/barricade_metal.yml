@@ -27,7 +27,6 @@
         - FullTileMask
         layer:
         - TableLayer
-        - LowImpassable
         - BarricadeImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
@@ -35,6 +34,11 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
+  - type: DirectionalAttackBlocker
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
+  - type: RMCLungeProtection
   - type: InteractionOutline
   - type: RMCDropshipBlocked
   - type: GenericVisualizer

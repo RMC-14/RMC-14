@@ -8,9 +8,6 @@
   targetNode: airlock
   category: construction-category-cm-structures
   description: It opens, it closes, and maybe crushes you.
-  icon:
-    sprite: _RMC14/Structures/Doors/airlock_assemblies.rsi
-    state: as_3
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -26,9 +23,6 @@
   targetNode: glassAirlock
   category: construction-category-cm-structures
   description: It opens, it closes, and maybe crushes you.
-  icon:
-    sprite: _RMC14/Structures/Doors/airlock_assemblies.rsi
-    state: as_g3
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -49,9 +43,6 @@
   conditions:
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
-  icon:
-    sprite: _RMC14/Structures/Windows/directional.rsi
-    state: window
   objectType: Structure
   placementMode: SnapgridCenter
 
@@ -68,9 +59,6 @@
   conditions:
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
-  icon:
-    sprite: _RMC14/Structures/Windows/directional.rsi
-    state: rwindow
   objectType: Structure
   placementMode: SnapgridCenter
 
@@ -84,9 +72,6 @@
   targetNode: windoor
   category: construction-category-cm-structures
   description: It opens, it closes, and you can see through it!
-  icon:
-    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi
-    state: windoor_assembly01
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
@@ -102,9 +87,6 @@
   targetNode: windoorSecure
   category: construction-category-cm-structures
   description: It opens, it closes, and you can see through it! This one looks tough.
-  icon:
-    sprite: _RMC14/Structures/Doors/windoor_assemblies.rsi
-    state: secure_assembly01
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
@@ -124,9 +106,6 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: metal
   conditions:
     - !type:TileNotBlocked
     - !type:TileBarricadeClear
@@ -144,9 +123,6 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: plasteel
   conditions:
     - !type:TileNotBlocked
     - !type:TileBarricadeClear
@@ -164,9 +140,6 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: wooden
   conditions:
     - !type:TileNotBlocked
     - !type:TileBarricadeClear
@@ -184,9 +157,6 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: folding_metal
   conditions:
     - !type:TileNotBlocked
     - !type:TileBarricadeClear
@@ -204,9 +174,6 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: folding_plasteel
   conditions:
     - !type:TileNotBlocked
     - !type:TileBarricadeClear
@@ -226,9 +193,6 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
-    state: tube0
   conditions:
     - !type:TileNotBlocked
 
@@ -245,8 +209,5 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Wallmounts/Lighting/light_bulb.rsi
-    state: bulb0
   conditions:
     - !type:TileNotBlocked

@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Spawners.Components;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
@@ -86,7 +87,10 @@ public sealed partial class StorageSystem
                     reason += $", {reasons}";
             }
 
-            Log.Error($"Tried to StorageFill {ToPrettyString(ent)} inside {ToPrettyString(uid)} but can't. reason: {reason}");
+            // RMC14
+            if (CMPrototypeExtensions.FilterCM)
+                Log.Error($"Tried to StorageFill {ToPrettyString(ent)} inside {ToPrettyString(uid)} but can't. reason: {reason}");
+
             ClearCantFillReasons();
             Del(ent);
         }

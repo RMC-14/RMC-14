@@ -7,15 +7,6 @@
   - type: AccessReader
     access: [["CMAccessColonyPublic"]]
 
-# /obj/structure/machinery/door/airlock/almayer/secure/reinforced
-- type: entity
-  parent: CMAirlockSecure
-  id: CMAirlockSecureLockedCommand # TODO RMC14
-  suffix: Command, Locked
-  components:
-  - type: AccessReader
-    access: [["CMAccessCommand"]]
-
 # /obj/structure/machinery/door/airlock/command/colony
 - type: entity
   parent: CMAirlockCommand

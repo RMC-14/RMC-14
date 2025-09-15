@@ -14,6 +14,7 @@
   dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
+  marineAuthorityLevel: 7
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer
@@ -48,7 +49,7 @@
     - type: SquadArmorWearer
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: io
     - type: SquadNameOverride
       name: cm-job-name-intel

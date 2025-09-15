@@ -1,0 +1,42 @@
+﻿- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorTrijentResearcher
+  name: cm-job-name-survivor-trijent-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorTrijentResearcher
+  startingGear: RMCGearSurvivorTrijentResearcher
+  spawnMenuRoleName: Trijent Dam Researcher (Trijent Survivor)
+  accessGroups:
+  - ColonistMedical
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorTrijentResearcher
+  equipment:
+    head: RMCHeadBeretPurple
+    jumpsuit: CMJumpsuitRD
+    outerClothing: RMCLabcoatScience
+    shoes: RMCShoesLaceupBrown
+    back: RMCSatchelChemistryFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentResearcher
+  name: survivor trijent researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorTrijentResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: RMCJobSurvivorTrijentResearcher
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCSurvivorPresetTrijentResearcher
+  name: trijent researcher colonist preset # TODO RMC14 random research notes
+  categories: [ HideSpawnMenu ]

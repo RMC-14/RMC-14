@@ -128,10 +128,27 @@
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
+    
+- type: entity
+  parent: RMCPodDoorHybrisaRed
+  id: RMCPodDoorHybrisaRedOpen
+  suffix: Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
 
 - type: entity
   parent: RMCPodDoorIndestructible
   id: RMCPodDoorAlmayerIndestructible
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
@@ -143,6 +160,7 @@
   id: RMCPodDoorAlmayerContainmentIndestructible
   name: cell wall
   description: A metal wall used to separate rooms and make up the ship.
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/containment.rsi
@@ -152,6 +170,7 @@
 - type: entity
   parent: RMCPodDoorIndestructible
   id: RMCPodDoorHybrisaIndestructible
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
@@ -161,6 +180,7 @@
 - type: entity
   parent: RMCPodDoorIndestructible
   id: RMCPodDoorHybrisaIndestructibleUltra
+  suffix: Indestructible
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi # the sprites on these are a little fucked but ive spent 2 weeks porting this fucking map and im not wasting time fixing an animated sprite that is 1 tile too long someone else do this please im going mad
@@ -221,3 +241,19 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/white_ai_door.rsi
+
+- type: entity
+  parent: RMCPodDoorAIWhite
+  id: RMCPodDoorAIWhiteOpen
+  suffix: Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false

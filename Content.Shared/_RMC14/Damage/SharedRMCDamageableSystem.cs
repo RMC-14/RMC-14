@@ -7,10 +7,10 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
-using Content.Shared._RMC14.Xenonids.ForTheHive;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -322,7 +322,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    public DamageSpecifier DistributeDamage(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
         equal ??= new DamageSpecifier();
         if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
@@ -371,11 +371,19 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return equal;
     }
 
+    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    {
+        if (amount > FixedPoint2.Zero)
+            amount = -amount;
+
+        return DistributeDamage(damageable, groupId, amount, equal);
+    }
+
     public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
-            equal = DistributeHealing(damageable, group.ID, amount, equal);
+            equal = DistributeDamage(damageable, group.ID, amount, equal);
         }
 
         return equal ?? new DamageSpecifier();
@@ -392,7 +400,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 break;
             }
 
-            equal = DistributeHealing(damageable, group.ID, left, equal);
+            equal = DistributeDamage(damageable, group.ID, left, equal);
             amount = left;
         }
 

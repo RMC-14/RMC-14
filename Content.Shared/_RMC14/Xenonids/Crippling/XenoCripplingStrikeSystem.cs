@@ -59,6 +59,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         active.DeactivateText = xeno.Comp.DeactivateText;
         active.ExpireText = xeno.Comp.ExpireText;
         active.Speed = xeno.Comp.Speed;
+        active.RemoveOnHit = xeno.Comp.RemoveOnHit;
+        active.PreventTackle = xeno.Comp.PreventTackle;
 
         Dirty(xeno, active);
 
@@ -102,7 +104,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             break;
         }
 
-        RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
+        if (xeno.Comp.RemoveOnHit)
+            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
     }
 
     private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -127,6 +130,9 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
     private void OnActiveCripplingStrikeMeleeAttempt(Entity<XenoActiveCripplingStrikeComponent> ent, ref MeleeAttackAttemptEvent args)
     {
+        if (!ent.Comp.PreventTackle)
+            return;
+
         var netAttacker = GetNetEntity(ent);
         switch (args.Attack)
         {

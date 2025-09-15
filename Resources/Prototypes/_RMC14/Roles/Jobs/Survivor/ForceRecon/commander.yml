@@ -39,15 +39,16 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-co
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: co
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -56,6 +57,8 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: SpotterWhitelist
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
 
 - type: startingGear

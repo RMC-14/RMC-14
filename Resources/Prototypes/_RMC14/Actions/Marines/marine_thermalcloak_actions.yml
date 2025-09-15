@@ -4,10 +4,12 @@
   name: Toggle Cloak
   description: Enable or Disable your Thermal Cloak
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
       state: icon
-    event: !type:ThermalCloakTurnInvisibleActionEvent
     useDelay: 0.5
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:ThermalCloakTurnInvisibleActionEvent
+  - type: ActionBlockIfDevoured

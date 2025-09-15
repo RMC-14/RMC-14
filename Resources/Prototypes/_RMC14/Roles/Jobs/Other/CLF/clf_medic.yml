@@ -33,7 +33,7 @@
   suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFMedic
@@ -60,7 +60,6 @@
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: RMCJumpsuitCLFWebbing
-    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown

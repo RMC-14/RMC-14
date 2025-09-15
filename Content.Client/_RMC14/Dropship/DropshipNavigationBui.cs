@@ -63,9 +63,11 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.CancelButton.Button.OnPressed += _ =>
         {
-            SetCancelLaunchDisabled(true);
+            SetLaunchDisabled(true);
+            SetCancelDisabled(true);
             _selected = null;
             ResetDestinationButtons();
+            CancelFlyby();
         };
 
         _window.LaunchButton.Button.OnPressed += _ =>
@@ -73,7 +75,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             if (_selected != null)
                 SendPredictedMessage(new DropshipNavigationLaunchMsg(_selected.Value));
 
-            SetCancelLaunchDisabled(true);
+            SetLaunchDisabled(true);
             _selected = null;
             ResetDestinationButtons();
         };
@@ -114,7 +116,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             button.Button.OnPressed += _ =>
             {
                 button.Text = $"> {name}";
-                SetCancelLaunchDisabled(false);
+                SetLaunchDisabled(false);
+                SetCancelDisabled(false);
                 onPressed();
                 ResetDestinationButtons();
             };
@@ -146,9 +149,13 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.DestinationsContainer.Visible = false;
         _window.ProgressBarContainer.Visible = true;
-        _window.CancelButton.Visible = false;
         _window.LaunchButton.Visible = false;
         _window.ProgressBar.Margin = new Thickness(0, 5, 0, 0);
+
+        if (travelling.Destination == travelling.DepartureLocation)
+            _window.CancelButton.Visible = true;
+        else
+            _window.CancelButton.Visible = false;
 
         var time = Math.Ceiling((travelling.Time.End - _timing.CurTime).TotalSeconds);
         if (time < 0.01)
@@ -168,16 +175,19 @@ public sealed class DropshipNavigationBui : BoundUserInterface
                 SetFlightHeader($"In flight: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until destination: T-{time}s"));
                 _window.LockdownButton.Disabled = true;
+                SetCancelDisabled(false);
                 break;
             case FTLState.Arriving:
                 SetFlightHeader($"Final Approach: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until landing: T-{time}s"));
                 _window.LockdownButton.Disabled = true;
+                SetCancelDisabled(true);
                 break;
             case FTLState.Cooldown:
                 SetFlightHeader("Refueling in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
                 _window.LockdownButton.Disabled = false;
+                SetCancelDisabled(true);
                 break;
             default:
                 return;
@@ -199,13 +209,19 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window?.DoorHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
     }
 
-    private void SetCancelLaunchDisabled(bool disabled)
+    private void SetLaunchDisabled(bool disabled)
     {
         if (_window == null)
             return;
 
-        _window.CancelButton.Button.Disabled = disabled;
         _window.LaunchButton.Button.Disabled = disabled;
+    }
+
+    private void SetCancelDisabled(bool disabled)
+    {
+        if (_window == null)
+            return;
+        _window.CancelButton.Button.Disabled = disabled;
     }
 
     private void ResetDestinationButtons()
@@ -223,6 +239,14 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
             button.Text = name;
         }
+    }
+
+    private void CancelFlyby()
+    {
+        if (_window == null)
+            return;
+
+        SendPredictedMessage(new DropshipNavigationCancelMsg());
     }
 
     public void Update()

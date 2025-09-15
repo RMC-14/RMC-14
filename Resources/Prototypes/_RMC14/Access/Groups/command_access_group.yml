@@ -81,6 +81,13 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
 
+- type: accessGroup
+  id: SO
+  tags:
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMedical
+
 # Corp access, probably not needed
 - type: accessGroup
   id: Corp

@@ -9,7 +9,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: Coffee
+        - ReagentId: RMCCoffee
           Quantity: 30
   - type: Drink
   - type: Sprite

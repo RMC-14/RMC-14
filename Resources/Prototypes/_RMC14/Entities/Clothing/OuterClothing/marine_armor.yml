@@ -161,9 +161,9 @@
     explosionArmor: 35
   - type: RMCArmorSpeedTier
     speedTier: heavy
-  - type: ClothingSpeedModifier
-    walkModifier: 0.62
-    sprintModifier: 0.62
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LOWHEAVY
+    walkModifier: 0.64
+    sprintModifier: 0.64
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -174,6 +174,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m3-eod-pattern-heavy-armor
 
 - type: entity
   id: RMCArmorM3HeavyVariants
@@ -377,6 +379,11 @@
     bullet: 25
     bio: 15
     explosionArmor: 40
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.62
+    sprintModifier: 0.62
   - type: Corrodible
     isCorrodible: false
   - type: RMCGrantLeapProtection
@@ -591,11 +598,11 @@
   - type: CMArmor
     melee: 15
     bullet: 30
-    bio: 15
+    bio: 5
     explosionArmor: 10
   - type: Storage
     grid:
-    - 0,0,1,1 # 2 slots
+    - 0,0,1,1 # 1 slots
   - type: RMCBulkyArmor
     isBulky: false
   - type: ItemCamouflage
@@ -762,6 +769,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage
@@ -833,3 +842,5 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-armor-xm4-pattern-intel-armor

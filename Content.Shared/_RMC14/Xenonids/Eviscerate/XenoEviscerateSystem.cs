@@ -61,6 +61,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
         {
             BreakOnMove = true,
             Hidden = true,
+            MovementThreshold = 0.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

@@ -1,0 +1,68 @@
+﻿- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorHybrisaCommercialPilot
+  name: rmc-job-name-survivor-commercial-pilot
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaCommercialPilot
+  spawnMenuRoleName: Commercial Pilot (Hybrisa Survivor)
+  startingGear: RMCGearSurvivorHybrisaCommercialPilot
+  hasIcon: false
+  accessGroups:
+  - ColonistCorporate
+  access:
+  - RMCAccessWeYaFlight
+  - CMAccessColonyLogistics
+  ranks:
+    RMCRankWeYaPilotOfficer: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillPilot: 2
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaCommercialPilot
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: MarineOrders
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaCommercialPilot
+  equipment:
+    head: RMCHeadWeYaPilotCap
+    ears: RMCHeadsetDistressWeYa
+    back: RMCSatchelBlack
+    id: CMIDCardGold
+    shoes: RMCShoesLaceup
+    jumpsuit: RMCJumpsuitLiaisonPilot
+    outerClothing: RMCCoatWeYaPilot
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaCommercialPilot
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCSurvivorPresetHybrisaCommercialPilot
+  name: hybrisa corporate liaison preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCGlassesAviators ]
+    - [ RMCGlassesAviatorsSilver ]
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCBinoculars ]

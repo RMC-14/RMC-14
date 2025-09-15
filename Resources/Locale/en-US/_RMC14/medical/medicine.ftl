@@ -78,3 +78,6 @@ reagent-desc-rmcparoxetine = Very powerful antidepressant used to treat: major d
 antidepressant-effect-rmcmethylphenidate = Your mind feels focused and undivided.
 antidepressant-effect-rmccitalopram = Your mind feels stable... a little stable.
 antidepressant-effect-rmcparoxetine = Your mind feels much more stable.
+
+reagent-name-rmcantized = AntiZed
+reagent-desc-rmcantized = A chemical designed for use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".

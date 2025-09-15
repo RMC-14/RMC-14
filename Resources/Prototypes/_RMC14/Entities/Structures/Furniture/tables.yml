@@ -234,6 +234,16 @@
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/prison.rsi
 
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonSoro
+  suffix: Prison, Blue
+  components:
+  - type: Sprite
+    color: "#98A3AB"
+  - type: Icon
+    color: "#98A3AB"
+
 # Hunter
 - type: entity
   parent: CMTable

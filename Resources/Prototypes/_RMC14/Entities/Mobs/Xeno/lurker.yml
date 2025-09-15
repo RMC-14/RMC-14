@@ -87,12 +87,14 @@
     prefix: lurker
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-lurker
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent:
@@ -114,6 +116,8 @@
     unrootOnMelee: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+    removeOnHit: true
+    preventTackle: true
   - type: XenoTailStab
     tailDamage:
       groups:
@@ -162,7 +166,6 @@
         Brute: 40
   - type: XenoTailJab
     attackEffect: RMCEffectTailHit
-    throwRange: 0.5
     damage:
       groups:
         Brute: 50

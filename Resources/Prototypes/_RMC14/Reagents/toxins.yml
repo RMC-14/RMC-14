@@ -69,13 +69,13 @@
   desc: reagent-desc-rmcmindbreakertoxin
   color: "#B31008"
   unknown: true
+  toxin: true
   metabolisms:
     Poison:
       metabolismRate: 0.05
       effects: #TODO Hallucinations +2 max 40.
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 2 #TODO max 40
         refresh: false
@@ -95,3 +95,21 @@
         type: Add
         time: 10
         refresh: false
+
+- type: reagent
+  parent: [ CMReagent, Romerol ]
+  id: RMCBlackGoo
+  name: reagent-name-rmcblackgoo
+  desc: reagent-desc-rmcblackgoo
+  physicalDesc: reagent-physical-desc-unidentifiable
+  flavor: bitter
+  color: "#0a0b0d"
+  worksOnTheDead: true
+  unknown: true
+  metabolisms:
+    Medicine:
+      effects:
+        - !type:CauseZombieInfection
+          conditions:
+            - !type:ReagentThreshold
+              min: 5

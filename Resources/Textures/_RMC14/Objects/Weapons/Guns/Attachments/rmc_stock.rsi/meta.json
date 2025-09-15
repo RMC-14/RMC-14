@@ -26,9 +26,6 @@
       "name": "m54c-col_a-on"
     },
     {
-      "name": "ssg45_stock"
-    },
-    {
       "name": "l83a2_a"
     },
     {
@@ -38,10 +35,13 @@
       "name": "ak4047_stock-on"
     },
     {
-      "name": "ak4047_stock_a"
+      "name": "smartgun_harness"
     },
     {
-      "name": "ak4047_stock_a-on"
+      "name": "smartgun_harness_a"
+    },
+    {
+      "name": "smartgun_harness_a-on"
     }
   ]
 }

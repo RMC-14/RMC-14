@@ -37,7 +37,7 @@
     - type: RMCPointing
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: leader
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -48,6 +48,7 @@
       prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker

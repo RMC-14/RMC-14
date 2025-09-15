@@ -36,12 +36,13 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly RottingSystem _rotting = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private readonly RottingSystem _rotting = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
@@ -195,9 +196,6 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
-            return;
-
         var selfEvent = new SelfBeforeDefibrillatorZapsEvent(user, uid, target);
         RaiseLocalEvent(user, selfEvent);
 
@@ -217,6 +215,10 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         if (!TryComp<MobStateComponent>(target, out var mob) ||
             !TryComp<MobThresholdsComponent>(target, out var thresholds))
+            return;
+
+        // RMC14 to fix last charge not being usable
+        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
             return;
 
         _audio.PlayPvs(component.ZapSound, uid);
@@ -248,7 +250,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 {
                     foreach (var (group, amount) in component.CMZapDamage)
                     {
-                        heal = _rmcDamageable.DistributeHealing(target, group, amount, heal);
+                        heal = _rmcDamageable.DistributeDamage(target, group, amount, heal);
                     }
                 }
 
@@ -264,13 +266,13 @@ public sealed class DefibrillatorSystem : EntitySystem
             }
 
             if (_mind.TryGetMind(target, out _, out var mind) &&
-                mind.Session is { } playerSession)
+                _player.TryGetSessionById(mind.UserId, out var playerSession))
             {
                 session = playerSession;
                 // notify them they're being revived.
                 if (mind.CurrentEntity != target)
                 {
-                    _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind), session);
+                    _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _player), session);
                 }
             }
             else

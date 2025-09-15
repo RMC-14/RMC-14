@@ -5,6 +5,7 @@ using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared.ParaDrop;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
@@ -201,6 +202,10 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(false)));
         var cancel = ButtonAction("cancel", _ => SendPredictedMessage(new DropshipTerminalWeaponsCancelMsg(first)));
         var weapon = Button("weapon", StrikeWeapon);
+        var paraDropTarget = ButtonAction("lock",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(true)));
+        var paraDropUnTarget = ButtonAction("clear",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(false)));
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
@@ -367,6 +372,34 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.RightRow.SetData(one: previous, five: next);
                 break;
             }
+            case Paradrop:
+            {
+                string? targetId = null;
+                if (terminal.Target != null &&
+                     _system.TryGetGridDropship(Owner, out var dropship) &&
+                     EntMan.TryGetComponent(dropship, out ActiveParaDropComponent? activeParaDrop) &&
+                    _weaponSystem.TryGetNetEntity(activeParaDrop.DropTarget, out var netTarget)
+                    )
+                {
+                    foreach (var potentialTarget in terminal.Targets)
+                    {
+                        if (potentialTarget.Id != netTarget)
+                            continue;
+
+                        targetId = potentialTarget.Name;
+                        break;
+                    }
+                }
+
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-paradrop-target-screen-text",
+                    ("hasTarget", targetId == null
+                    ? Loc.GetString("rmc-dropship-paradrop-target-screen-target-none")
+                    : Loc.GetString("rmc-dropship-paradrop-target-screen-target-targeting",("dropTarget", targetId))));
+                screen.BottomRow.SetData(exit);
+                screen.LeftRow.SetData(targetId == null ? paraDropTarget : paraDropUnTarget);
+                screen.TopRow.SetData(equip);
+                break;
+            }
             default:
                 screen.BottomRow.SetData(exit);
                 break;
@@ -416,13 +449,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 var utilityMount = utilityContainer.ContainedEntities[0];
                 if (EntMan.HasComponent<MedevacComponent>(utilityMount))
                 {
-                    text = "Medeva";
+                    text = "Medevac";
                     msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
                 }
                 else if (EntMan.HasComponent<RMCFultonComponent>(utilityMount))
                 {
                     text = "Fulton";
                     msg = new DropshipTerminalWeaponsChooseFultonMsg(first);
+                }
+                else if (EntMan.HasComponent<RMCParaDropComponent>(utilityMount))
+                {
+                    text = "PDS";
+                    msg = new DropshipTerminalWeaponsChooseParaDropMsg(first);
                 }
                 else
                 {

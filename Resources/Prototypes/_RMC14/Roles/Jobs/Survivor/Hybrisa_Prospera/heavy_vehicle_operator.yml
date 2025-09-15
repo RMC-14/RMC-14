@@ -1,0 +1,64 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorHybrisaHeavyVehicleOperator
+  name: rmc-job-name-survivor-heavy-vehicle-operator
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaHeavyVehicleOperator
+  startingGear: RMCGearSurvivorHybrisaHeavyVehicleOperator
+  spawnMenuRoleName: Heavy Vehicle Operator (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaHeavyVehicleOperator
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaHeavyVehicleOperator # TODO wheels inhand
+  equipment:
+    pocket2: RMCPouchToolsFill
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaHeavyVehicleOperator
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetHybrisaHeavyVehicleOperator
+  name: hybrisa vehicle operator colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomStartingGear:
+      shoes:
+      - RMCShoesJackboots
+      - CMBootsBrown
+      - RMCBootsCorporate
+      back:
+      - CMSatchelEngineer
+      - RMCSatchelLightpack
+    randomOutfits:
+    - [ RMCJumpsuitLiaisonGreenWorkwearBrownWebbing, CMHandsBrown, RMCVestTan, RMCHeadBeanieTan ]
+    - [ CMJumpsuitColonist, RMCCoatBomberGrey, RMCHeadBeanieGray ]
+    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCHandsVeteranInsulated, RMCVestBrown, RMCHeadCapTruckerRed ]
+    - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue, RMCGlassesAviatorsSilver ]
+    - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomberKhaki, RMCSunglassesBig, RMCCassettePlayer ]
+    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapFerret, RMCHandsCombat ]
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, CMBeltUtilityFilled ]

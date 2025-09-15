@@ -24,6 +24,7 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-inspector
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

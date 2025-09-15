@@ -148,6 +148,14 @@
   - type: XenoCrusherChargable
 
 - type: entity
+  parent: CMWindoor
+  id: RMCWindoorSoro
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#98A3AB"
+
+- type: entity
   parent: CMBaseWindoor
   id: CMWindoorSecure
   name: secure glass door

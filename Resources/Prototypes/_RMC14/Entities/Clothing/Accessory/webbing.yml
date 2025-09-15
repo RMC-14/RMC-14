@@ -1,0 +1,744 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: CMWebbingBase
+  name: webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing.rsi
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,5,1 # 3 slots
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: StoreAfterFailedInteract
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbing
+  name: webbing
+  description: A sturdy mess of synthcotton belts and buckles, ready to share your burden.
+  components:
+  - type: Sprite
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,5,1 # 3 slots
+    - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - CMMagazineSmg
+        - CMMagazinePistol
+        - CMMagazineRifle
+        - CMMagazineSniper
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingLegPouch
+  name: leg pouch
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+    state: webbing
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Webbing/leg_pouch/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Webbing/leg_pouch/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Webbing/leg_pouch/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Webbing/leg_pouch/urban.rsi
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingLegPouchBlack
+  name: black leg pouch
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
+    state: webbing
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingBlack
+  name: black webbing vest
+  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+    blacklist:
+      tags:
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1 # 5 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBlack
+  id: CMWebbingBrown
+  name: brown webbing vest
+  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
+    state: webbing
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1 # 5 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingHolster
+  name: shoulder holster
+  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
+    state: holster
+  - type: Storage # Can hold sidearm plus two magazines
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - Sidearm
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+  - type: FixedItemSizeStorage
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-ammo-webbing
+      count: 2
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Sidearm
+  - type: Webbing
+    components: # grrrr all the components need to be duplicated
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,5,1 #3 slots
+      whitelist:
+        tags:
+        - Sidearm
+        - RMCFlareGun
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: LimitedStorage
+      limits:
+      - popup: rmc-storage-limit-one-gun
+        whitelist:
+          tags:
+          - Sidearm
+      - popup: rmc-storage-limit-max-ammo-webbing
+        count: 2
+        whitelist:
+          tags:
+          - CMMagazinePistol
+          - RMCMagazineRevolver
+    - type: CMHolster
+      whitelist:
+        tags:
+        - Sidearm
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingDropPouch
+  name: drop pouch
+  description: A convenient pouch to carry loose items around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingClipOnPouch
+  name: clip-on pouch
+  description: A clip on synth-leather pouch designed to house a small collection of items for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingGrenade
+  name: clip-on grenade band
+  description: A sturdy mess of synth-leather band designed to store a few grenades for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    whitelist:
+      tags:
+      - Grenade
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      whitelist:
+        tags:
+        - Grenade
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbing
+  id: RMCToolWebbingSmall
+  name: small tool webbing
+  description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage. This is the small low-budget version.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,11,1 #6 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - PowerCell
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      components:
+      - Welder
+      - PowerCell
+      - EntrenchingTool
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,11,1 #6 slots
+      whitelist:
+        tags:
+        - Crowbar
+        - Screwdriver
+        - Wirecutter
+        - Wrench
+        - CableCoil
+        - Multitool
+        - PowerCell
+        - RMCNailgunCompact
+        - RMCNailgunTactical
+        components:
+        - Welder
+        - PowerCell
+        - EntrenchingTool
+    - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        components:
+        - EntrenchingTool
+        - LightReplacer
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: CMMultitool
+
+- type: entity
+  parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallERT
+  suffix: Filled
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1 # 7 slots
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,1 # 7 slots
+    - type: FixedItemSizeStorage
+    - type: StoreAfterFailedInteract
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCToolWebbingSmallERT
+  id: RMCToolWebbingSmallERTFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingHEFA
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingKnives
+  name: M272 pattern knife vest
+  description: An older generation M272 pattern knife vest once employed by the UNMC. Can hold up to 5 knives. It is made of synthcotton.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_knife.rsi
+    state: webbing
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+        - Knife
+        - ThrowingKnife
+  - type: FixedItemSizeStorage
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: CMHolster
+  - type: Webbing
+    components:
+    - type: Storage
+      grid:
+      - 0,0,9,1 # 5 slots
+      whitelist:
+        tags:
+          - Knife
+          - ThrowingKnife
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: CMHolster
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingKnives
+  id: CMWebbingKnivesFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMM11Knife
+        amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMC
+  suffix: PMC, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGauze10
+    - id: CMGauze10
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCEngineer
+  suffix: PMC, Engineer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCRangefinder
+    - id: RMCGrenadeBlastM12
+    - id: RMCTelescopicBaton
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCMedic
+  suffix: PMC, Medic, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: CMCrowbar # TODO RMC14: tactical prybar
+    - id: RMCGrenadeBlastM12
+    - id: RMCExplosivePlastic
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCGunner
+  suffix: PMC, Gunner, Filled
+  components:
+  - type: StorageFill
+    contents:
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCGrenadeBlastM12
+    - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingBuckshot
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCHeadRoyalBeret
+      - id: CMMRE # TODO RMC14 TSE ORP ration
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingPouchForecon
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMarineFlask
+      # - id: RMCFacepaint # TODO FACEPAINT
+      - id: CMMRE
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingSurgicalGreen
+  name: surgical webbing vest
+  description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  suffix: Medical, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
+    state: webbing
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingSurgicalBlue
+  name: surgical webbing vest
+  description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  suffix: Medical, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
+    state: webbing
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+

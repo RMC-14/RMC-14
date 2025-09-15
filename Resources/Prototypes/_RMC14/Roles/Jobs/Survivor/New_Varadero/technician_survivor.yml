@@ -19,7 +19,6 @@
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -28,6 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTechnician
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
@@ -40,7 +40,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorTechnician
-  name: survivor icb spawn point
+  name: survivor engineering technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -57,3 +57,4 @@
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetTechnician
   name: technician colonist preset
+  categories: [ HideSpawnMenu ]

@@ -1,0 +1,61 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorHybrisaOfficeWorker
+  name: rmc-job-name-survivor-hybrisa-office-worker
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaOfficeWorker
+  startingGear: RMCGearSurvivorHybrisaOfficeWorker
+  spawnMenuRoleName: Civilian - Office Worker (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaOfficeWorker
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaOfficeWorker
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaOfficeWorker
+  name: hybrisa office worker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaOfficeWorker
+  isHumanoid: true
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCGearSurvivorPresetHybrisaOfficeWorker
+  name: hybrisa office worker preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJacketCorporateBrown, RMCJumpsuitLiaisonStowaway, RMCShoesLaceupBrown, CMSatchel]
+    - [ RMCJacketCorporateBlack, RMCJumsuitWhiteService, RMCShoesLaceup, RMCSatchelBlack]
+    - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonSuspenders, RMCShoesLaceup, RMCSatchelBlue]
+    - [ RMCJacketCorporateBrown, CMJumpsuitLiaison, RMCShoesLaceupBrown, CMSatchel]
+    - [ RMCCoatWaistcoat, RMCJumsuitWhiteService, RMCShoesLaceup, CMSatchel]
+    - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonBlazer, RMCShoesLaceup, RMCSatchelBlue]

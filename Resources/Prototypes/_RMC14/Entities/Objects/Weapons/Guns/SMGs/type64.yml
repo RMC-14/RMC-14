@@ -90,6 +90,8 @@
     tags:
     - RMCWeaponSMG
     - RMCWeaponSMGType64
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-type-64-submachine-gun
 
 - type: entity
   parent: CMMagazineRifleBase

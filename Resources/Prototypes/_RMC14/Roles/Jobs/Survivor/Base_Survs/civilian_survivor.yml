@@ -1,0 +1,200 @@
+- type: job
+  parent: RMCJobRibbonBase
+  id: CMSurvivor
+  name: cm-job-name-survivor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearSurvivor
+  dummyStartingGear: RMCGearSurvivorEquipped
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilianOutfits
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  greeting: rmc-job-greeting-survivor
+  hasIcon: false
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorBaseNoBackpack
+  equipment:
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorBase
+  equipment:
+    back: RMCSatchelCivilianFill
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivor
+  # equipment:
+    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
+    # shoes: RMCShoesBlack
+
+- type: startingGear
+  parent: RMCGearSurvivor
+  id: RMCGearSurvivorEquipped
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    shoes: RMCShoesBlack
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivor
+  name: survivor spawn point
+  suffix: Job Spawn, Main
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSurvivor
+  name: Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivor
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetNoGun
+  name: no gun colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ RMCWelderIndustrial ]
+    - [ CMAdvFirstAidKitFilled ]
+
+- type: entity
+  parent: RMCSurvivorPresetNoGun
+  id: RMCSurvivorPresetCivilian
+  name: civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
+    - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
+    - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
+    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
+    - [ RMCWeaponRevolver38Magnum, RMCSpeedLoader38 ]
+    primaryWeapons:
+    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
+    - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineAR10, WeaponRifleAR10 ]
+    primaryWeaponChance: 0.6
+
+- type: entity
+  id: RMCSurvivorPresetCivilianRareItem
+  name: civilian colonist preset with rare item
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    rareItems:
+      RMCMotionDetectorCompact:
+        1: 4 # 2%
+      RMCDefibrillatorCompact:
+        5: 8 # 2%
+      RMCTankFlamerImprovised:
+        9: 16 # 4%
+      CMPacketGrenadeHighExplosiveFilled:
+        17: 26 # 5%
+      CMTraumaKit10:
+        27: 38 # 6% TODO upgraded trauma kit
+      CMBurnKit10:
+        39: 54 # 8% TODO upgraded ointment
+      RMCAttachmentSuppressor:
+        55: 74 # 10% TODO Attachments box
+      RMCPouchFirstAidERTFill:
+        75: 104 # 15%
+      CMPacketGrenadeFragOldFilled:
+        105: 144 # 20%
+      RMCPowerCellHyper:
+        145: 194 # 25%
+      RMCAttachmentFlashlightGrip:
+        195: 254  # 30%
+      CMSheetMetal30:
+        255: 324 # 35%
+      RMCBinocularsCiv:
+        325: 444 # 45%
+    rareItemCoefficent: 444
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCSurvivorPresetCivilianOutfits
+  name: civilian colonist preset with random outfits
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # todo different backpacks
+    - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
+    - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
+    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
+    - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
+    - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorCivilian
+  name: civilian colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorCivilian
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorCivilian
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivor

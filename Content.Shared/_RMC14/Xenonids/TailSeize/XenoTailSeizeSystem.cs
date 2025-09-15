@@ -88,7 +88,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
 
     private void OnTailSeizeAction(Entity<XenoTailSeizeComponent> xeno, ref XenoTailSeizeActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         if (!_actionBlocker.CanAttack(xeno))
@@ -103,7 +103,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
             Dirty(xeno, melee);
         }
 
-        _projectile.TryShoot(xeno, args.Coords.Value, 0, xeno.Comp.Projectile, null, 1, Angle.Zero, xeno.Comp.Speed, target: args.Entity);
+        _projectile.TryShoot(xeno, args.Target, 0, xeno.Comp.Projectile, null, 1, Angle.Zero, xeno.Comp.Speed, target: args.Entity);
 
         var attackEv = new MeleeAttackEvent(xeno);
         RaiseLocalEvent(xeno, ref attackEv);

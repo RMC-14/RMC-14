@@ -93,3 +93,11 @@
   components:
   - type: Sprite
     state: cartridge_10
+
+- type: entity
+  parent: RMCBasePropCasing
+  id: RMCBasePropCasing11
+  components:
+  - type: Sprite
+    state: cartridge_11
+

@@ -98,9 +98,9 @@ public sealed class RMCStandingSystem : EntitySystem
         if (!_standing.IsDown(drop))
             return;
 
-        foreach (var hand in _hands.EnumerateHands(drop))
+        foreach (var held in _hands.EnumerateHeld(drop.Owner))
         {
-            _hands.TryDrop(drop, hand);
+            _hands.TryDrop(drop.Owner, held);
         }
     }
 

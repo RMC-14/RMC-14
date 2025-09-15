@@ -135,7 +135,7 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    DrinkHotCoffee: 25
+    RMCCoffeeCupFilled: 25
     DrinkTeacup: 25
     DrinkHotCoco: 25
 
@@ -299,6 +299,12 @@
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadset: 6
+    # Tape Recorder 3
+    # Tape 5
+    # Clue Scanner 3
+    # Camera 8
+    # Camera Film 8
+    RMCWhistle: 5
 
 - type: entity
   parent: CMVendor
@@ -385,8 +391,8 @@
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
-    HydroponicsToolSpade: 3
-    HydroponicsToolHatchet: 3
+    RMCToolSpade: 3
+    RMCToolHatchet: 3
     HydroponicsToolScythe: 3
 
 
@@ -441,6 +447,7 @@
     GarlicSeeds: 3
     OnionSeeds: 3
     OnionRedSeeds: 3
+    MangoSeeds: 3
 
 
 # Dinnerware
@@ -643,6 +650,10 @@
       - id: ReagentContainerOliveoil
         amount: 12
       - id: FoodCondimentBottleVinegar
+        amount: 12
+      - id: ReagentContainerCornmeal
+        amount: 12
+      - id: ReagentContainerMayo
         amount: 12
 
 # PVE

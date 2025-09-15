@@ -249,7 +249,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         if (!HasWebbing((clothing, clothing), out var webbing))
             return;
 
-        _container.TryRemoveFromContainer(webbing);
+        _container.TryRemoveFromContainer(webbing.Owner);
         _hands.TryPickupAnyHand(user, webbing);
 
         EntityManager.AddComponents(webbing, webbing.Comp.Components);

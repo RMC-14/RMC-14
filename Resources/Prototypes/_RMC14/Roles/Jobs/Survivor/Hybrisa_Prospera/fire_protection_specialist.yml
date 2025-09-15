@@ -1,0 +1,64 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorHybrisaFireProtectionSpecialist
+  name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaFireProtectionSpecialist
+  startingGear: RMCGearSurvivorHybrisaFireProtectionSpecialist
+  spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaFireProtectionSpecialist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-fire-protection-specialist-hybrisa
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaFireProtectionSpecialist
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist
+  name: hybrisa fire protection specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaFireProtectionSpecialist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetHybrisaFireProtectionSpecialist
+  name: hybrisa fire protection specialist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
+    - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
+
+

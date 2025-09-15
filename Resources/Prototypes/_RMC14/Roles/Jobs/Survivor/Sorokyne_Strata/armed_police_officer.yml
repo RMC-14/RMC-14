@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorArmedPoliceOfficer
+  name: rmc-job-name-survivor-armed-police-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorArmedPoliceOfficer
+  ranks:
+    RMCRankSPPStrsh:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankSPPSMlts:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
+    RMCRankSPPMlts: []
+  startingGear: RMCGearSurvivorArmedPoliceOfficer
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: People's Armed Police Officer (Sorokyne Survivor)
+  useLoadoutOfJob: CMSurvivorSecurity
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetArmedPoliceOfficer
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorArmedPoliceOfficer
+  equipment:
+    head: CMHeadCapSPPPeakedPolice
+    eyes: CMGlassesSecurity
+    jumpsuit: RMCJumpsuitSPPPaP
+    outerClothing: RMCCoatPaP
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    pocket2: RMCPouchMagazine
+    id: RMCIDCardPaP
+    back: RMCSatchelBlack
+    ears: RMCHeadsetSPPPaP
+  storage:
+    back:
+    - CMSheetMetal20
+    - RMCMaskGasSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorArmedPoliceOfficer
+  name: people's armed police officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorArmedPoliceOfficer
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetArmedPoliceOfficer
+  name: people's armed police officer preset
+  categories: [ HideSpawnMenu ]

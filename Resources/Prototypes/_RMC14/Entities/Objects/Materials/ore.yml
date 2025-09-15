@@ -272,6 +272,8 @@
         canReact: false
   - type: Item
     heldPrefix: uranium
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-pitchblende
 
 - type: entity
   parent: RMCUraniumOre

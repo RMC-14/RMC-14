@@ -1,0 +1,63 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorHybrisaWeyamartEmployee
+  name: rmc-job-name-survivor-hybrisa-weyamart-employee
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaWeyamartEmployee
+  startingGear: RMCGearSurvivorHybrisaWeyamartEmployee
+  spawnMenuRoleName: Civilian - Weyamart Employee (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaWeyamartEmployee
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaWeyamartEmployee
+  equipment:
+    head: RMCHeadCapWeyamart
+    jumpsuit: RMCJumpsuitWeyamart
+    outerClothing: RMCHazardVestWeyamart
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaWeyamartEmployee
+  name: hybrisa weyamart employee spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaWeyamartEmployee
+  isHumanoid: true
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCGearSurvivorPresetHybrisaWeyamartEmployee
+  name: hybrisa weyamart employee preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    rareItems:
+      RMCExplosivePlastic:
+        45: 50 # 10%
+    rareItemCoefficent: 50

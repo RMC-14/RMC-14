@@ -1,0 +1,60 @@
+﻿- type: job
+  parent: CMSurvivorPriest
+  id: CMSurvivorTrijentChaplain
+  name: rmc-job-name-survivor-trijent-chaplain
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrijentChaplain
+  startingGear: RMCGearSurvivorTrijentChaplain
+  spawnMenuRoleName: Trijent Chaplain (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentChaplain
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorEquipped
+  id: RMCGearSurvivorTrijentChaplain
+  equipment:
+    head: RMCHeadNunHood
+    jumpsuit: RMCJumpsuitChaplain
+    outerClothing: RMCClothingNunRobes
+    back: CMSatchelFillSurvivorPriest
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentChaplain
+  name: survivor trijent chaplain spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrijentChaplain
+  isHumanoid: true
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCGearSurvivorPresetTrijentChaplain
+  name: trijent chaplain preset
+  categories: [ HideSpawnMenu ]

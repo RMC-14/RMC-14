@@ -1,0 +1,79 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorHybrisaTSEPAConstable
+  name: rmc-job-name-tsepa-constable
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaTSEPAConstable
+  ranks:
+    RMCRankTSEPASergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity # TODO allow jobs to support multiple playtime trackers
+      time: 630000 # 175 hours
+    RMCRankTSEPASeniorConstable:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
+    RMCRankTSEPAConstable: []
+  startingGear: RMCGearSurvivorHybrisaTSEPAConstable
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  - ColonistTSEPA
+  spawnMenuRoleName: TSEPA Constable (Hybrisa Survivor)
+  icon: "RMCJobIconTSEPAConstable"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaConstable
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - TSE
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaTSEPAConstable
+  equipment:
+    eyes: RMCGlassesSecurityBlue
+    jumpsuit: RMCJumpsuitTSEPA
+    belt: RMCBeltHolsterPistolTSEFilledL54
+    shoes: RMCShoesLaceup
+    id: RMCIDCardTSEPA
+    back: RMCSatchelBlackFillSurvivorConstable
+    ears: RMCHeadsetTSEPA
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaTSEPAConstable
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCSurvivorPresetHybrisaConstable
+  name: constable colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons: [ ]
+    randomOutfits:
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
+    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubber ]
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledConstable, RMCHandsCombat ]
