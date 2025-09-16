@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: ChemMaster Label text field now has a flexible scaling Width
-    type: Tweak
-  id: 1854
-  time: '2025-06-10T01:15:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6681
 - author: DrSmugleaf
   changes:
   - message: Fixed obstacle slamming popups showing someone's true identity.
@@ -4467,5 +4460,12 @@
   id: 2353
   time: '2025-09-16T02:01:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7905
+- author: Vermidia
+  changes:
+  - message: Fixed valk's heal on slash area being slightly too small.
+    type: Fix
+  id: 2354
+  time: '2025-09-16T02:03:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7893
 Name: RMC14
 Order: -1
