@@ -8,6 +8,14 @@
   },
   "states": [
     {
+      "name": "equipped-HELMET-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vulpkanin",
+      "directions": 4
+    },
+    {
       "name": "equipped-HELMET",
       "directions": 4
     },
