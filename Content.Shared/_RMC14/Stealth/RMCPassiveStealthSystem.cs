@@ -23,7 +23,6 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, StorageAfterOpenEvent>(OnStorageAfterOpen);
-        SubscribeLocalEvent<RMCPassiveStealthComponent, StorageAfterCloseEvent>(OnStorageAfterClose);
         SubscribeLocalEvent<RMCPassiveStealthComponent, FoldedEvent>(OnFolded);
         SubscribeLocalEvent<RMCPassiveStealthComponent, ActivateInWorldEvent>(OnToggle);
     }
@@ -53,21 +52,6 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         Dirty(ent.Owner, ent.Comp);
     }
 
-    private void OnStorageAfterClose(Entity<RMCPassiveStealthComponent> ent, ref StorageAfterCloseEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (ent.Comp.Enabled == null)
-            return;
-
-        if (!TryComp<FoldableComponent>(ent.Owner, out var fold) || !fold.IsFolded)
-        {
-            ent.Comp.Enabled = true;
-            ent.Comp.ToggleTime = _timing.CurTime;
-            Dirty(ent.Owner, ent.Comp);
-        }
-    }
 
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
     {
