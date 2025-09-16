@@ -77,21 +77,14 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (ent.Comp.Enabled == null)
             return;
 
-        if (args.IsFolded)
+        if (!args.IsFolded)
         {
+            _entityStorage.OpenStorage(ent.Owner);
             ent.Comp.Enabled = false;
-            ent.Comp.ToggleTime = _timing.CurTime;
-            Dirty(ent.Owner, ent.Comp);
+            return;
         }
-        else
-        {
-            if (!_entityStorage.IsOpen(ent.Owner))
-            {
-                ent.Comp.Enabled = true;
-                ent.Comp.ToggleTime = _timing.CurTime;
-                Dirty(ent.Owner, ent.Comp);
-            }
-        }
+        ent.Comp.Enabled = false;
+        RemCompDeferred<EntityActiveInvisibleComponent>(ent.Owner);
     }
 
     private void OnToggle(Entity<RMCPassiveStealthComponent> ent, ref ActivateInWorldEvent args)
