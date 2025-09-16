@@ -8,11 +8,17 @@
   },
   "states": [
     {
-      "name": "equipped-HELMET",
+      "name": "icon"
+    },
+    {
+      "name": "equipped-BACKPACK",
       "directions": 4
     },
     {
-      "name": "icon"
+      "name": "open"
+    },
+    {
+      "name": "closed"
     }
   ]
 }

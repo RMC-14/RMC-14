@@ -680,6 +680,15 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_black.rsi
 
 - type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelPMC
+  name: PMC combat backpack
+  description: A Weston-Yamada field tested backpack, featuring multiple pouches and compartments for ease of access, preventing slowdown from operatives in the field.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
+
+- type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelLightpackWelder
   name: lightweight technician welderpack

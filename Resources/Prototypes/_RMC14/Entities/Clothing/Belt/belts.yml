@@ -833,6 +833,12 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolPMC
+  name: M301 pistol holster rig
+  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
   name: M276 pattern general revolver holster rig
@@ -1219,7 +1225,18 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: CMM77BeltFilled
-  suffix: Filled
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilled
+  suffix: Filled, M77
   components:
   - type: StorageFill
     contents:
