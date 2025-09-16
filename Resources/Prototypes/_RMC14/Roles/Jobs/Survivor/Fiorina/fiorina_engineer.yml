@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorFiorinaEngineer
-  name: rmc-job-name-survivor-fiorina-engineer
+  name: cm-job-name-survivor-fiorina-engineer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorFiorinaEngineer

@@ -103,6 +103,7 @@
     fitIntoEntityStorage: true
   - type: CrashLandable
   - type: AnimationPlayer
+  - type: RMCContainerEmptyOnDestruction
   - type: Corrodible
     timeToApply: 4
     structure: true
