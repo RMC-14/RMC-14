@@ -90,7 +90,7 @@
     back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponSMGM63B2
   storage:
     back:
@@ -173,7 +173,7 @@
     back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponRifleSSG45
   storage:
     back:
@@ -254,7 +254,7 @@
     back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponRifleM54C2
   storage:
     back:

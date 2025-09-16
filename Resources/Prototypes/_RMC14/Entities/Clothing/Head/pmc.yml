@@ -55,6 +55,12 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
 
 - type: entity
   parent: ArmorHelmetPMC
