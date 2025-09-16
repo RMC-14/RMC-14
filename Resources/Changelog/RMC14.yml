@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Praetorian acid ball nto having a coooldown, for real this time.
-    type: Fix
-  - message: Fixed some tackle popups showing someone's real name.
-    type: Fix
-  id: 1851
-  time: '2025-06-09T23:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6679
-- author: SurfinNinja1
-  changes:
-  - message: Fixed Onigiri recipe
-    type: Fix
-  id: 1852
-  time: '2025-06-09T23:00:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6676
 - author: Vixting
   changes:
   - message: Fixed not being able to draw vertical lines on the tactical map.
@@ -4469,5 +4453,19 @@
   id: 2350
   time: '2025-09-13T11:13:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7719
+- author: J C Denton
+  changes:
+  - message: Fixed being able to build on water.
+    type: Fix
+  id: 2351
+  time: '2025-09-16T01:28:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7916
+- author: Tunguso4ka
+  changes:
+  - message: Fixed Sorokyne Weedkiller not targeting Parts Storage building.
+    type: Fix
+  id: 2352
+  time: '2025-09-16T01:29:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7925
 Name: RMC14
 Order: -1
