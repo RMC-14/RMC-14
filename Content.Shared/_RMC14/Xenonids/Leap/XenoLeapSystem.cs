@@ -473,6 +473,7 @@ public sealed class XenoLeapSystem : EntitySystem
         if (leapEv.Cancelled)
         {
             xeno.Comp.KnockedDown = true;
+            StopLeap(xeno);
             Dirty(xeno);
             return true;
         }

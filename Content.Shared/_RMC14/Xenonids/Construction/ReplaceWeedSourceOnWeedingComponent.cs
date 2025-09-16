@@ -24,4 +24,6 @@ public sealed partial class ReplaceWeedSourceOnWeedingComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<EntProtoId, EntProtoId> ReplacementPairs;
+
+    public bool HasReplaced = false;
 }
