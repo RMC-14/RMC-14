@@ -260,7 +260,7 @@
 - type: entity
   parent: RMCDrinkAlcoholBase
   id: RMCDrinkAlcoholSake
-  name: Pure Platinum Sake
+  name: weston-yamada Sake
   description: Sake made with ancient techniques passed down for thousands of years. Fermented in Iowa by the Weston-Yamada Corporation.
   components:
   - type: Sprite

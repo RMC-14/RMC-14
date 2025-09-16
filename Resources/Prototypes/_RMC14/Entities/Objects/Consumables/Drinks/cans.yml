@@ -276,7 +276,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
-  name: Alder Lite
+  name: We-Ya Lite
   description: Beer. You've dialed in your target. Time to fire for effect. Canned by the Weston-Yamada Corporation
   components:
   - type: Sprite
@@ -294,7 +294,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanAle
-  name: Larch IPA
+  name: We-Ya IPA
   description: Beer's misunderstood cousin. Canned by the Weston-Yamada Corporation.
   components:
   - type: Sprite
