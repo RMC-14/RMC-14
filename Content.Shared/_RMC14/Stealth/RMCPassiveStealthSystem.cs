@@ -23,7 +23,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, StorageAfterOpenEvent>(OnStorageAfterOpen);
-        SubscribeLocalEvent<RMCPassiveStealthComponent, FoldedEvent>(OnFolded);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, FoldedEvent>(OnFolded, after:[typeof(SharedEntityStorageSystem)]);
         SubscribeLocalEvent<RMCPassiveStealthComponent, ActivateInWorldEvent>(OnToggle);
     }
 
