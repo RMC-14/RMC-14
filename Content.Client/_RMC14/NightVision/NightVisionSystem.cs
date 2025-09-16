@@ -1,10 +1,11 @@
-﻿using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Examine;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.NightVision;
@@ -84,6 +85,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     {
         _overlay.RemoveOverlay<NightVisionOverlay>();
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
+        _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
         _light.DrawLighting = true;
         SetMesons(false);
         SetMesonSprites(false);
@@ -96,6 +98,8 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
         if (ent.Comp.Green)
             _overlay.AddOverlay(new NightVisionFilterOverlay());
+
+        _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
 
         _light.DrawLighting = true;
         SetMesons(ent.Comp.Mesons);
@@ -149,5 +153,21 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
             return;
 
         SetMesonSprites(nightVision.Mesons);
+    }
+}
+
+public sealed class HalfNightVisionBrightnessOverlay : Overlay
+{
+    public override OverlaySpace Space => OverlaySpace.BeforeLighting;
+
+    protected override void Draw(in OverlayDrawArgs args)
+    {
+        if (args.DrawingHandle is not DrawingHandleWorld worldHandle)
+            return;
+
+        var worldBounds = args.WorldAABB;
+        var brightnessColor = new Color(0.35f, 0.35f, 0.35f, 1.0f);
+
+        worldHandle.DrawRect(worldBounds, brightnessColor);
     }
 }
