@@ -242,7 +242,7 @@ public sealed class MortarSystem : SharedMortarSystem
                 {
                     // Get the coordinates of the laser target entity
                     var targetCoordinates = _transform.GetMoverCoordinates(laserDesignator.Target.Value);
-                    TryUpdateLaserTarget((mortarUid, mortar), targetCoordinates);
+                    TryUpdateLaserTarget((mortarUid, mortar), targetCoordinates, true, (mortar.LaserTargetDelay != TimeSpan.Zero));
                 }
             }
         }
