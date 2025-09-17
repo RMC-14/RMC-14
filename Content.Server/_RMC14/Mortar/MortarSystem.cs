@@ -47,6 +47,12 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
+        if (mortar.Comp.IsTargeting)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-targeting", ("mortar", mortar)), user, user, SmallCaution);
+            return false;
+        }
+
         var time = _timing.CurTime;
         if (time < mortar.Comp.LastFiredAt + mortar.Comp.FireDelay)
         {
@@ -117,37 +123,40 @@ public sealed class MortarSystem : SharedMortarSystem
         return true;
     }
 
-    private bool ValidateTargetCoordinates(Entity<MortarComponent> mortar, Entity<MortarShellComponent> shell, MapCoordinates coordinates, MapCoordinates mortarCoordinates, EntityUid user, out TimeSpan travelTime)
+    protected override bool ValidateTargetCoordinates(Entity<MortarComponent> mortar, Entity<MortarShellComponent>? shell, MapCoordinates coordinates, MapCoordinates mortarCoordinates, EntityUid? user, out TimeSpan travelTime)
     {
         travelTime = default;
 
         // Check if target is on planet or in space
         if (_rmcPlanet.IsOnPlanet(coordinates))
         {
-            travelTime = shell.Comp.TravelDelay;
+            travelTime = shell?.Comp.TravelDelay ?? default;
         }
         else
         {
             if (!_dropship.AnyHijacked())
             {
-                _popup.PopupEntity(Loc.GetString("rmc-mortar-bad-idea"), user, user, SmallCaution);
+                if (user != null)
+                    _popup.PopupEntity(Loc.GetString("rmc-mortar-bad-idea"), user.Value, user.Value, SmallCaution);
                 return false;
             }
 
-            travelTime = shell.Comp.WarshipTravelDelay;
+            travelTime = shell?.Comp.WarshipTravelDelay ?? default;
         }
 
         // Check range
         var distance = (mortarCoordinates.Position - coordinates.Position).Length();
         if (distance < mortar.Comp.MinimumRange)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-close"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-close"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
         if (distance > mortar.Comp.MaximumRange)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-far"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-far"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
@@ -155,26 +164,30 @@ public sealed class MortarSystem : SharedMortarSystem
         if (!_rmcMap.TryGetTileDef(coordinates, out var def) ||
             def.ID == ContentTileDefinition.SpaceID)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
         // Check area validity
         if (!_area.TryGetArea(coordinates, out var area, out _))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
         if (area.Value.Comp.LandingZone)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-is-lz"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-is-lz"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
         if (!_area.CanMortarFire(_transform.ToCoordinates(coordinates)))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-covered"), user, user, SmallCaution);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-target-covered"), user.Value, user.Value, SmallCaution);
             return false;
         }
 
@@ -211,15 +224,16 @@ public sealed class MortarSystem : SharedMortarSystem
     {
         base.Update(frameTime);
 
-        // Update mortar targets based on active laser designators
         var laserQuery = EntityQueryEnumerator<ActiveLaserDesignatorComponent>();
+
+        // Update mortar targets based on active laser designators
         while (laserQuery.MoveNext(out var laserUid, out var laserDesignator))
         {
             if (laserDesignator.Target == null)
                 continue;
 
-            var mortarQuery = EntityQueryEnumerator<MortarComponent>();
-            while (mortarQuery.MoveNext(out var mortarUid, out var mortar))
+            var mortarQueryPerLaser = EntityQueryEnumerator<MortarComponent>();
+            while (mortarQueryPerLaser.MoveNext(out var mortarUid, out var mortar))
             {
                 if (mortar.LinkedLaserDesignator == laserUid &&
                     mortar.LaserTargetCoordinates == null &&
@@ -228,11 +242,26 @@ public sealed class MortarSystem : SharedMortarSystem
                 {
                     // Get the coordinates of the laser target entity
                     var targetCoordinates = _transform.GetMoverCoordinates(laserDesignator.Target.Value);
-                    if (TryUpdateLaserTarget((mortarUid, mortar), targetCoordinates))
-                    {
-                        _chat.TrySendInGameICMessage(mortarUid, Loc.GetString("rmc-mortar-beeping"), InGameICChatType.Emote, false, ignoreActionBlocker: true);
-                    }
+                    TryUpdateLaserTarget((mortarUid, mortar), targetCoordinates);
                 }
+            }
+        }
+
+        var mortarQueryForAnnounce = EntityQueryEnumerator<MortarComponent>();
+        while (mortarQueryForAnnounce.MoveNext(out var mortarUid, out var mortar))
+        {
+            if (mortar.NeedAnnouncement)
+            {
+                bool validCoordinates = false;
+
+                if (mortar.LaserTargetCoordinates != null)
+                    validCoordinates = ValidateTargetCoordinates((mortarUid, mortar), null, _transform.ToMapCoordinates(mortar.LaserTargetCoordinates.Value), _transform.GetMapCoordinates(mortarUid), null, out _);
+
+                LocId message = validCoordinates ? "rmc-mortar-beeping" : "rmc-mortar-beeping-warning";
+
+                _chat.TrySendInGameICMessage(mortarUid, Loc.GetString(message), InGameICChatType.Emote, false, ignoreActionBlocker: true);
+                mortar.NeedAnnouncement = false;
+                Dirty(mortarUid, mortar);
             }
         }
     }

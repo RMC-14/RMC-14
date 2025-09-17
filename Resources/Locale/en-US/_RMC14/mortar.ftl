@@ -80,3 +80,5 @@ rmc-mortar-toggle-mode-hint = [color=cyan]Alt + Click mortar to switch targeting
 rmc-mortar-dial-coordinates = {CAPITALIZE(THE($mortar))} is set to laser targeting mode, switch to coordinate targeting in order to dial coordinates!
 
 rmc-mortar-beeping = beeping!
+rmc-mortar-beeping-warning = beeping warningly!
+rmc-mortar-targeting = {CAPITALIZE(THE($mortar))} is still targeting.

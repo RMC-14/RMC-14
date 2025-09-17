@@ -99,10 +99,10 @@ public sealed partial class MortarComponent : Component
     public bool LaserTargetingMode = false;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? LinkedLaserDesignator;
+    public EntityUid? LinkedLaserDesignator = null;
 
     [DataField, AutoNetworkedField]
-    public EntityCoordinates? LaserTargetCoordinates;
+    public EntityCoordinates? LaserTargetCoordinates = null;
 
     [DataField, AutoNetworkedField]
     public bool IsLinking = false;
@@ -112,4 +112,16 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? LaserTargetWarningSound = new SoundPathSpecifier("/Audio/Misc/cryo_warning.ogg");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LaserTargetDelay = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public bool IsTargeting = false;
+
+    [DataField, AutoNetworkedField]
+    public bool NeedAnnouncement = false;
 }

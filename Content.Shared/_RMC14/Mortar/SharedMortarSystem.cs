@@ -79,6 +79,8 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
         SubscribeLocalEvent<MortarComponent, LinkMortarLaserDesignatorDoAfterEvent>(OnMortarLinkLaserDesignatorDoAfter);
         SubscribeLocalEvent<MortarComponent, GetVerbsEvent<AlternativeVerb>>(OnGetMortarVerbs);
+        SubscribeLocalEvent<MortarComponent, MortarLaserTargetUpdateDoAfterEvent>(OnMortarLaserTargetUpdateDoAfter);
+        SubscribeLocalEvent<MortarComponent, DoAfterAttemptEvent<MortarLaserTargetUpdateDoAfterEvent>>(OnMortarLaserTargetUpdateAttempt);
 
         SubscribeLocalEvent<MortarCameraShellComponent, MortarShellLandEvent>(OnMortarCameraShellLand);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, ComponentShutdown>(OnActiveLaserDesignatorShutdown);
@@ -490,6 +492,19 @@ public abstract class SharedMortarSystem : EntitySystem
         return false;
     }
 
+    protected virtual bool ValidateTargetCoordinates(
+        Entity<MortarComponent> mortar,
+        Entity<MortarShellComponent>? shell,
+        MapCoordinates coordinates,
+        MapCoordinates mortarCoordinates,
+        EntityUid? user,
+        out TimeSpan travelTime)
+    {
+        travelTime = default;
+        return false;
+    }
+
+
     public void PopupWarning(MapCoordinates coordinates, float range, LocId warning, LocId warningAbove, bool chat = false)
     {
         foreach (var session in _player.NetworkedSessions)
@@ -651,7 +666,7 @@ public abstract class SharedMortarSystem : EntitySystem
         }
     }
 
-    public bool TryUpdateLaserTarget(Entity<MortarComponent> mortar, EntityCoordinates coordinates, bool playSound = true)
+    public bool TryUpdateLaserTarget(Entity<MortarComponent> mortar, EntityCoordinates coordinates, bool playSound = true, bool laserTargetDelay = true)
     {
         // Only update if coordinates have actually changed
         if (mortar.Comp.LaserTargetCoordinates == coordinates || coordinates == EntityCoordinates.Invalid)
@@ -660,13 +675,57 @@ public abstract class SharedMortarSystem : EntitySystem
         if (!mortar.Comp.LaserTargetingMode || mortar.Comp.LinkedLaserDesignator == null)
             return false;
 
-        mortar.Comp.LaserTargetCoordinates = coordinates;
-        Dirty(mortar);
+        if (laserTargetDelay)
+        {
+            // Create DoAfter for deferred update. This will also show players a clear progress bar.
+            // The mortar literally does something before it's ready to fire,
+            // so it'll be clear to the player that this isn't a bug but a delay due to some action.
+            // Additionally, this makes it easier to check during this delay.
+            var ev = new MortarLaserTargetUpdateDoAfterEvent(GetNetCoordinates(coordinates));
+            var doAfter = new DoAfterArgs(EntityManager, mortar, mortar.Comp.LaserTargetDelay, ev, mortar)
+            {
+                NeedHand = false,
+                BreakOnMove = true, // The mortar must not move.
+                BreakOnHandChange = false,
+                BreakOnDamage = false,
+                RequireCanInteract = false, // Mortar is not a player
+                AttemptFrequency = AttemptFrequency.EveryTick,
+            };
 
-        if (playSound)
-            _audio.PlayPvs(mortar.Comp.LaserTargetSound, mortar);
+            if (_doAfter.TryStartDoAfter(doAfter))
+            {
+                mortar.Comp.IsTargeting = true;
+                Dirty(mortar);
+                return true;
+            }
+        }
+        else
+        {
+            // Update immediately
+            mortar.Comp.LaserTargetCoordinates = coordinates;
+            mortar.Comp.NeedAnnouncement = true;
+            Dirty(mortar);
 
+            if (playSound)
+            {
+                var sound = mortar.Comp.LaserTargetSound;
+                if (mortar.Comp.LaserTargetCoordinates != null)
+                {
+                    bool validCoordinates = ValidateTargetCoordinates(mortar, null, _transform.ToMapCoordinates(mortar.Comp.LaserTargetCoordinates.Value), _transform.GetMapCoordinates(mortar), null, out _);
+                    sound = validCoordinates ? mortar.Comp.LaserTargetSound : mortar.Comp.LaserTargetWarningSound;
+                }
+                _audio.PlayPvs(sound, mortar);
+           }
+        }
         return true;
+    }
+
+    private void OnMortarLaserTargetUpdateAttempt(Entity<MortarComponent> mortar, ref DoAfterAttemptEvent<MortarLaserTargetUpdateDoAfterEvent> args)
+    {
+        // Cancel if linked designator lost ActiveLaserDesignatorComponent
+        var linked = mortar.Comp.LinkedLaserDesignator;
+        if (linked == null || !HasComp<ActiveLaserDesignatorComponent>(linked.Value) || mortar.Comp.Deployed == false)
+            args.Cancel();
     }
 
     private void OnGetMortarVerbs(Entity<MortarComponent> mortar, ref GetVerbsEvent<AlternativeVerb> args)
@@ -694,6 +753,36 @@ public abstract class SharedMortarSystem : EntitySystem
         };
 
         args.Verbs.Add(toggleModeVerb);
+    }
+
+    private void OnMortarLaserTargetUpdateDoAfter(Entity<MortarComponent> mortar, ref MortarLaserTargetUpdateDoAfterEvent args)
+    {
+        if (args.Cancelled)
+        {
+            mortar.Comp.IsTargeting = false;
+            mortar.Comp.NeedAnnouncement = true;
+            Dirty(mortar);
+
+            _audio.PlayPvs(mortar.Comp.LaserTargetWarningSound, mortar);
+            return;
+        }
+
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        bool validCoordinates = ValidateTargetCoordinates(mortar, null, _transform.ToMapCoordinates(args.TargetCoordinates), _transform.GetMapCoordinates(mortar), null, out _);
+        var sound = validCoordinates ? mortar.Comp.LaserTargetSound : mortar.Comp.LaserTargetWarningSound;
+
+        mortar.Comp.LaserTargetCoordinates = GetCoordinates(args.TargetCoordinates);
+        mortar.Comp.IsTargeting = false;
+        mortar.Comp.NeedAnnouncement = true;
+        Dirty(mortar);
+
+        _audio.PlayPvs(sound, mortar);
+
+
     }
 
     private void OnActiveLaserDesignatorShutdown(Entity<ActiveLaserDesignatorComponent> laserDesignator, ref ComponentShutdown args)
