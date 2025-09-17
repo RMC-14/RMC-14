@@ -5,14 +5,14 @@
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -100,11 +100,11 @@
       rmc-aslot-underbarrel: 0.35, -0.343
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi # RNMC-14, resprited.
+      Desert: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
+      Snow: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
+      Classic: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi # RNMC-14, resprited.
+      Urban: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi # RNMC-14, resprited.
   - type: Tag
     tags:
     - RMCWeaponRifleM54CMK2
