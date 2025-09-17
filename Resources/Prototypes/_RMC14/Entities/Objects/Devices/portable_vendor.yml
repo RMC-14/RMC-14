@@ -93,7 +93,7 @@
         points: 15
     - name: Ammo
       entries:
-      - id: RMCMagazinePistolES4
+      - id: RMCMagazinePistolPK7
         points: 10
     - name: Radio keys
       entries:
