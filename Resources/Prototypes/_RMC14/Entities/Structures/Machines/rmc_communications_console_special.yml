@@ -70,7 +70,7 @@
     canOrbitalBombardment: false
     group: Military Police
   - type: AccessReader
-    access: [ [ "CMAccessArmory" ] ]
+    access: [["CMAccessArmory"], ["CMAccessCMP"], ["RMCAccessSeniorCommand"], ["CMAccessHighCommand"]] # No dedicated warden access this is why armory is used
   - type: RequiresSkill
     skills:
       RMCSkillOverwatch: 0 # In case Warden or CMP OW skill gets removed for some reason or there is an acting Warden/CMP
