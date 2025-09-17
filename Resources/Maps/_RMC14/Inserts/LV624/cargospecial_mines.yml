@@ -124,7 +124,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: WeaponRifleM54CE2
+- proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 10
     components:

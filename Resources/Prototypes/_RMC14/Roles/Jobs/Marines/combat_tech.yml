@@ -29,6 +29,7 @@
   overwatchSortPriority: -1
   overwatchRoleName: Combat Technicians
   roleWeight: 1
+  displayWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,6 +43,7 @@
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMCombatTech
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix

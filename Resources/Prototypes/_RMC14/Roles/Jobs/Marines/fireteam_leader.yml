@@ -29,6 +29,7 @@
   overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   roleWeight: 1
+  displayWeight: 5
   special:
   - !type:AddComponentSpecial
     components:
@@ -41,6 +42,7 @@
         RMCSkillFireman: 1
         RMCSkillJtac: 3
     - type: CMVendorUser
+      id: CMFireteamLeader
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix

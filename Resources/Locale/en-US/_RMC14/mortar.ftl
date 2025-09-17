@@ -31,6 +31,8 @@ rmc-mortar-shell-impact-warning = A SHELL IS ABOUT TO IMPACT TO YOUR {$direction
 rmc-mortar-shell-impact-warning-above = A SHELL IS ABOUT TO IMPACT RIGHT ABOVE YOU
 
 rmc-mortar-interface = Mortar Interface
+rmc-mortar-target-title = Target Coordinates
+rmc-mortar-offset-title = Target Offset
 
 rmc-mortar-target-x = Target X:
 rmc-mortar-target-y = Target Y:

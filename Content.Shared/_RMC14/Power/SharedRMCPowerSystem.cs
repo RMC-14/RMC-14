@@ -847,25 +847,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        if (_reactorPoweredLights.Count > 0)
-        {
-            try
-            {
-                foreach (var (map, lights) in _reactorPoweredLights)
-                {
-                    var powered = AnyReactorsOn(map);
-                    foreach (var light in lights)
-                    {
-                        _pointLight.SetEnabled(light, powered);
-                    }
-                }
-            }
-            finally
-            {
-                _reactorPoweredLights.Clear();
-            }
-        }
-
         try
         {
             foreach (var map in _reactorsUpdated)

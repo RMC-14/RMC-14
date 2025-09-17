@@ -23,6 +23,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -45,6 +46,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -67,6 +69,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -89,6 +92,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -111,6 +115,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Command
 - type: roleLoadout
@@ -136,6 +141,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -158,6 +164,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -180,6 +187,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Engineering
 - type: roleLoadout
@@ -203,6 +211,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -225,6 +234,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -247,6 +257,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Squad Roles
 - type: roleLoadout
@@ -270,6 +281,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -292,6 +304,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -314,6 +327,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -336,6 +350,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -358,6 +373,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -380,6 +396,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -402,6 +419,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Medical
 - type: roleLoadout
@@ -425,6 +443,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -447,6 +466,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMNurse
@@ -469,6 +489,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -491,6 +512,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Military Police
 - type: roleLoadout
@@ -515,6 +537,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -537,6 +560,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -559,6 +583,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Other
 - type: roleLoadout
@@ -581,6 +606,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -604,6 +630,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -627,6 +654,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -649,6 +677,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobRMCJobSynthetic
@@ -668,6 +697,7 @@
   - PlushiesRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Requsitions
 - type: roleLoadout
@@ -691,6 +721,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -713,6 +744,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
 
 # Survivors
 # They don't have access to some loadout categories
@@ -730,6 +762,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -746,6 +779,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -762,6 +796,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -778,6 +813,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -794,6 +830,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -810,6 +847,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -826,6 +864,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
   - CivilianOnlyRMC
 
 - type: roleLoadout
@@ -842,3 +881,81 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - MiscellaneousRMC
+
+# PVE
+
+- type: roleLoadout
+  id: JobCMPVERifleman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEHospitalCorpsman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESmartGunOperator
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESquadLeader
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESectionSergeant
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEPlatoonCommander
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
