@@ -235,7 +235,7 @@ public sealed class MortarSystem : SharedMortarSystem
             var mortarQueryPerLaser = EntityQueryEnumerator<MortarComponent>();
             while (mortarQueryPerLaser.MoveNext(out var mortarUid, out var mortar))
             {
-                if (mortar.LinkedLaserDesignator == laserUid &&
+                if (!mortar.IsTargeting && mortar.LinkedLaserDesignator == laserUid &&
                     mortar.LaserTargetCoordinates == null &&
                     mortar.LaserTargetingMode &&
                     HasComp<LaserDesignatorTargetComponent>(laserDesignator.Target.Value))

@@ -629,7 +629,7 @@ public abstract class SharedMortarSystem : EntitySystem
         _popup.PopupPredicted(selfMsg, othersMsg, user, user);
 
         if (playSound)
-            _audio.PlayPvs(mortar.Comp.ToggleSound, mortar);
+            _audio.PlayPredicted(mortar.Comp.ToggleSound, mortar, user);
         return true;
     }
 
@@ -677,10 +677,15 @@ public abstract class SharedMortarSystem : EntitySystem
 
         if (laserTargetDelay)
         {
+            if (mortar.Comp.IsTargeting)
+                return false;
+
             // Create DoAfter for deferred update. This will also show players a clear progress bar.
             // The mortar literally does something before it's ready to fire,
             // so it'll be clear to the player that this isn't a bug but a delay due to some action.
             // Additionally, this makes it easier to check during this delay.
+            EnsureComp<DoAfterComponent>(mortar);
+
             var ev = new MortarLaserTargetUpdateDoAfterEvent(GetNetCoordinates(coordinates));
             var doAfter = new DoAfterArgs(EntityManager, mortar, mortar.Comp.LaserTargetDelay, ev, mortar)
             {
@@ -794,7 +799,10 @@ public abstract class SharedMortarSystem : EntitySystem
             if (mortar.LinkedLaserDesignator == laserDesignator.Owner)
             {
                 mortar.LaserTargetCoordinates = null;
+                mortar.NeedAnnouncement = true; // We notify players that the target has been lost.
                 Dirty(mortarUid, mortar);
+
+                _audio.PlayPredicted(mortar.LaserTargetWarningSound, mortarUid, null);
             }
         }
     }
@@ -808,7 +816,11 @@ public abstract class SharedMortarSystem : EntitySystem
             if (mortar.LinkedLaserDesignator == rangefinder.Owner)
             {
                 mortar.LinkedLaserDesignator = null;
+                mortar.LaserTargetCoordinates = null;
+                mortar.NeedAnnouncement = true; // We notify players that the binding has been forcibly reset.
                 Dirty(mortarUid, mortar);
+
+                _audio.PlayPredicted(mortar.LaserTargetWarningSound, mortarUid, null);
             }
         }
     }
