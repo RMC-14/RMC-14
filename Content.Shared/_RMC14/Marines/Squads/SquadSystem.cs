@@ -609,7 +609,7 @@ public sealed class SquadSystem : EntitySystem
         return member.Comp.Squad is { } memberSquad && memberSquad == squad;
     }
 
-    public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user, SpriteSpecifier.Rsi icon)
+    public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user, bool hasLeaderIcon, SpriteSpecifier.Rsi icon)
     {
         if (HasComp<SquadLeaderComponent>(toPromote))
             return;
@@ -641,7 +641,7 @@ public sealed class SquadSystem : EntitySystem
                         _encryptionKey.UpdateChannels(headset, holder);
                 }
 
-                if (TryComp(uid, out MarineComponent? otherMarine) &&
+                if (hasLeaderIcon == true && TryComp(uid, out MarineComponent? otherMarine) &&
                     Equals(otherMarine.Icon, leader.Icon))
                 {
                     _marine.ClearIcon((uid, otherMarine));
@@ -660,7 +660,15 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
-        newLeader.Icon = icon;
+        if (hasLeaderIcon == true)
+        {
+            newLeader.Icon = icon;
+        }
+        else if (TryComp(toPromote.Owner, out MarineComponent? marine) && marine.Icon != null)
+        {
+            newLeader.Icon = (SpriteSpecifier.Rsi)marine.Icon;
+        }
+
         if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
         {
             orders.Intrinsic = false;
