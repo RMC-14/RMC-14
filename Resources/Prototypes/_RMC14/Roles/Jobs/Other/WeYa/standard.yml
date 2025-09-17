@@ -164,7 +164,7 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
+    outerClothing: RMCArmorM4PMCNoLight
     gloves: RMCHandsVeteran
     head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
@@ -245,7 +245,7 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
+    outerClothing: RMCArmorM4PMCNoLight
     gloves: RMCHandsVeteran
     head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
