@@ -223,14 +223,14 @@
   suffix: White, No UGL
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: AttachableHolder
