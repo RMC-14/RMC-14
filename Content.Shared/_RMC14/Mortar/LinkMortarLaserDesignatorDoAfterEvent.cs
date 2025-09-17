@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Mortar;
 
 [Serializable, NetSerializable]
-public sealed partial class LinkMortarLaserDesignatorDoAfterEvent : DoAfterEvent
+public sealed partial class LinkMortarLaserDesignatorDoAfterEvent : SimpleDoAfterEvent
 {
     public NetEntity LaserDesignator;
 
@@ -13,6 +13,4 @@ public sealed partial class LinkMortarLaserDesignatorDoAfterEvent : DoAfterEvent
     {
         LaserDesignator = laserDesignator;
     }
-
-    public override DoAfterEvent Clone() => this;
 }
