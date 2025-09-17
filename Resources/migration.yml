@@ -1362,6 +1362,9 @@ BoxSyringe: RMCBoxSyringe
 # 2025-08-01
 WeaponRifleSSG45: RMCWeaponRifleSSG45
 
+# 2025-08-06
+RMCSmartGun: RMCSmartGunUNMC
+
 # 2025-08-07
 RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
 
@@ -1380,6 +1383,11 @@ WeaponRifleM54CMK1Unloaded: RMCWeaponRifleM54CMK1Unloaded
 WeaponRifleM54CMK1AP: RMCWeaponRifleM54CMK1AP
 WeaponRifleM54CStripped: RMCWeaponRifleM54CStripped
 WeaponRifleM59A: RMCWeaponRifleM59A
+
+# 2025-08-27
+RMCTray_empty: RMCTrayEmpty
+CMPosterArious: CMPosterPathos
+CMPosterPulseRifle: CMPosterAssaultRifle
 
 # 2025-08-30
 WallInvisible: RMCWallInvisibleBulletPassible

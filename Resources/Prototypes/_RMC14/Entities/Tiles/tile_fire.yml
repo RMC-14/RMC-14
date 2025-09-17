@@ -222,7 +222,59 @@
     duration: 30
   - type: RMCIgniteOnCollide
     maxStacks: 60
-    intensity: 60
+    intensity: 30
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireBanshee
+  components:
+  - type: Sprite
+    color: "#00b8ff"
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: TileFire
+    duration: 15
+  - type: RMCIgniteOnCollide
+    maxStacks: 15
+    intensity: 50
+    duration: 15
+  - type: PointLight
+    color: "#00b8ff"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireThermobaric
+  components:
+  - type: Sprite
+    color: White
+    layers:
+    - map: [ "base" ]
+      state: red_4
+  - type: TileFire
+    duration: 25
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 50
+    duration: 25
+  - type: PointLight
+    color: "#c96500"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_2 }
+          Three: { state: red_3 }
+          Four: { state: red_4 }
 
 - type: entity
   parent: RMCTileFireLaser

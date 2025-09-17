@@ -1566,17 +1566,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethGrimm
-  name: Seth Grimm figurine
-  description: "You can be a Queen or a parasite, but everyone dances with the Grim Reaper."
-  components:
-  - type: Sprite
-    state: seth_grimm
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneTaylor
   name: Anne Taylor figurine
   description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
@@ -1713,6 +1702,17 @@
       params:
         volume: 5
         maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethXi
+  name: Seth Xi figurine
+  description: "As you look upon the figurine, the distant clash of blades reaches your ears, followed by a faint echo—a voice, singing of bloodshed, and of a man in the mirror. Strange."
+  components:
+  - type: Sprite
+    state: seth_xi
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
 
 - type: entity
   parent: RMCBaseFigurinePatron

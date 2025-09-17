@@ -6,6 +6,7 @@ using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CombatMode;
 using Content.Shared.Weapons.Ranged.Events;
@@ -213,7 +214,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
         Log.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");
 
-        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session);
+        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, null, session);
 
         RaisePredictiveEvent(new RequestShootEvent()
         {
@@ -221,6 +222,7 @@ public sealed partial class GunSystem : SharedGunSystem
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gunUid),
             Shot = projectiles?.Select(e => e.Id).ToList(),
+            PointBlanked = projectiles?.Where(HasComp<RMCProjectilePointBlankedComponent>).Select(e => e.Id).ToList(),
         });
     }
 
