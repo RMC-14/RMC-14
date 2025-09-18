@@ -179,3 +179,45 @@
       whitelist:
         tags:
         - RMCMagazineRifleM54CMK1Incendiary
+
+# Start of RNMC-14 modifications
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RNMCBoxBulletElephantEmpty
+  name: bullet box (50x .600 Nitro Express)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box
+      color: "#696969"
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#696969"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#696969"
+  - type: CMItemSlots
+    count: 15
+    slot:
+      whitelist:
+        tags:
+        - RNMCBulletElephant
+
+- type: entity
+  parent: RNMCBoxBulletElephantEmpty
+  id: RNMCBoxBulletElephant
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RNMCBulletElephant
+    count: 15
+    slot:
+      whitelist:
+        tags:
+        - RNMCBulletElephant
+# End of RNMC-14 modifications

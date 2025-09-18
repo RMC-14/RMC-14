@@ -1,0 +1,95 @@
+- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: RNMCF99BehemothSniperRifle
+  name: F-99 «Behemoth»
+  description: A formidable weapon designed for large individuals. Accepts cartridges of the largest and heaviest caliber in order to neutralize them. It is used in situations where you know for sure that the enemy is strong. The reloading of weapons and their rate of fire are extremely slow.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Weapons/Guns/Snipers/f99behemoth/f99behemoth_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RNMC14/Objects/Weapons/Guns/Snipers/f99behemoth/f99behemoth_icon.rsi
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RNMC14/Objects/Weapons/Guns/Snipers/f99behemoth/f99behemoth_inhands.rsi
+  - type: Tag
+    tags:
+    - RNMCF99BehemothSniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper_heavy.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.185
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 2.2
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RNMCBulletElephant
+      - RNMCBulletElephantEXP
+    proto: RNMCBulletElephant
+    capacity: 1
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AimedShot
+    aimDuration: 1.5
+    aimedShotCooldown: 4
+  - type: RMCFocusedShooting
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: RNMCBulletElephant
+  name: cartridge (15,2×76 mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RNMCBulletElephant
+  - type: CartridgeAmmo
+    proto: RNMCBulletSniperElephant15,2×76mm
+
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: RNMCBulletSniperElephant15,2×76mm
+  name: .600 Nitro Express (15,2×76 mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: true
+    damage:
+      types:
+        Piercing: 225
+        Structural: 1275
+  - type: CMArmorPiercing
+    amount: 65
+  - type: RMCStunOnHit
+    maxRange: 3
+    stunTime: 0.8
+  - type: RMCPenetratingProjectile
+  - type: RMCStoppingPower
+  - type: AimedShotEffect
+    extraHits: 0.65
+
+- type: Tag
+  id: RNMCF99BehemothSniperRifle
+
+- type: Tag
+  id: RNMCBulletElephant

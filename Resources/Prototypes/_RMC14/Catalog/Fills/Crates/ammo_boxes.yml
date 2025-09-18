@@ -48,3 +48,15 @@
   - type: StorageFill
     contents:
     - id: RMCBoxBullets458
+
+# Start of RNMC-14 modifications
+- type: entity
+  parent: RMCCrateAmmo
+  id: RNMCCrateF99BehemothAmmo
+  name: F-99 "«Behemoth»" Ammo Crate (x1)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RNMCBoxBulletElephant
+      amount: 1
+# End of RNMC-14 modifications

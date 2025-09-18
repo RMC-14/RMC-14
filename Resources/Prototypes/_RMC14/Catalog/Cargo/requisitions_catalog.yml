@@ -343,8 +343,10 @@
         crate: RMCCrateMagazineM4SPRCustomImpact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
-#      - cost: 4000
-
+      # Start of RNMC-14 modifications
+      - cost: 3500
+        crate: RNMCCrateF99BehemothAmmo
+      # End of RNMC-14 modifications
 
 
 #        Black Market Orders
