@@ -115,6 +115,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMASRSConsole
@@ -202,6 +203,7 @@
   - type: RequisitionsRailing
     mode: Raised
   - type: CargoSellBlacklist
+  - type: RMCMesonsNonviewable
 
 - type: entity
   id: CMGear

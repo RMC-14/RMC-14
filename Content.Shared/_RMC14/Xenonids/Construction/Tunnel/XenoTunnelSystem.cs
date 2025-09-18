@@ -127,11 +127,17 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnTunnelUIOpened(Entity<XenoTunnelComponent> tunnel, ref BoundUIOpenedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         EnsureComp<TunnelUIUserComponent>(args.Actor);
     }
 
     private void OnTunnelUIClosed(Entity<XenoTunnelComponent> tunnel, ref BoundUIClosedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         RemCompDeferred<TunnelUIUserComponent>(args.Actor);
     }
 
@@ -266,7 +272,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            DuplicateCondition = DuplicateConditions.SameTarget,
+            RootEntity = true
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), args.Performer, args.Performer);
@@ -300,7 +307,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            DuplicateCondition = DuplicateConditions.SameTarget,
+            RootEntity = true
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
@@ -645,6 +653,7 @@ public sealed class XenoTunnelSystem : EntitySystem
                 NeedHand = true,
                 BreakOnDropItem = true,
                 BreakOnHandChange = true,
+                RootEntity = true
             };
 
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-fill"), args.User, args.User);

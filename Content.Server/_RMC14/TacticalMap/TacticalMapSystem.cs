@@ -2,10 +2,14 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
+using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -19,6 +23,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
+using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
@@ -35,6 +40,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -45,6 +51,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<MarineMapTrackedComponent> _marineMapTrackedQuery;
@@ -64,8 +71,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private readonly Dictionary<Vector2i, string> _emptyLabels = new();
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
+    private TimeSpan _forceMapUpdateEvery;
+    private TimeSpan _nextForceMapUpdate = TimeSpan.FromSeconds(30);
 
-public override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -111,6 +120,10 @@ public override void Initialize()
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
 
+        SubscribeLocalEvent<UnrevivableComponent, MapInitEvent>(OnUnrevivableMapInit);
+        SubscribeLocalEvent<UnrevivableComponent, ComponentRemove>(OnUnrevivablRemove);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MapInitEvent>(OnLiveUpdateOnOviMapInit);
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MobStateChangedEvent>(OnLiveUpdateOnOviStateChanged);
 
@@ -126,6 +139,7 @@ public override void Initialize()
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
             {
+                subs.Event<BoundUIOpenedEvent>(OnComputerBUIOpened);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
             });
 
@@ -137,6 +151,11 @@ public override void Initialize()
         Subs.CVar(_config,
             RMCCVars.RMCTacticalMapUpdateEverySeconds,
             v => _mapUpdateEvery = TimeSpan.FromSeconds(v),
+            true);
+
+        Subs.CVar(_config,
+            RMCCVars.RMCTacticalMapForceUpdateEverySeconds,
+            v => _forceMapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
     }
 
@@ -257,7 +276,7 @@ public override void Initialize()
             else
                 ent.Comp.Color = squad.Color;
         }
-        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+        else if (ent.Comp.Background != null)
             UpdateIcon(ent);
     }
 
@@ -295,6 +314,23 @@ public override void Initialize()
             UpdateTracked((ent, active));
     }
 
+    private void OnUnrevivableMapInit(Entity<UnrevivableComponent> ent, ref MapInitEvent args)
+    {
+        if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+            UpdateTracked((ent, active));
+    }
+
+    private void OnUnrevivablRemove(Entity<UnrevivableComponent> ent, ref ComponentRemove args)
+    {
+        if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+            UpdateTracked((ent, active));
+    }
+
+    private void OnRoundStart(RoundStartingEvent ev)
+    {
+        _nextForceMapUpdate = TimeSpan.FromSeconds(30);
+    }
+
     private void OnLiveUpdateOnOviMapInit(Entity<TacticalMapLiveUpdateOnOviComponent> ent, ref MapInitEvent args)
     {
         if (!ent.Comp.Enabled ||
@@ -316,6 +352,26 @@ public override void Initialize()
     private void OnUserBUIOpened(Entity<TacticalMapUserComponent> ent, ref BoundUIOpenedEvent args)
     {
         EnsureComp<ActiveTacticalMapUserComponent>(ent);
+        UpdateTacticalMapState(ent);
+    }
+
+    private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        UpdateTacticalMapComputerState(ent);
+    }
+
+    private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
+    }
+
+    private void UpdateTacticalMapComputerState(Entity<TacticalMapComputerComponent> computer)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
     }
 
     private void OnUserBUIClosed(Entity<TacticalMapUserComponent> ent, ref BoundUIClosedEvent args)
@@ -509,6 +565,47 @@ public override void Initialize()
         Delete
     }
 
+        private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
+    {
+        var user = args.Actor;
+        HandleQueenEyeMove(user, args.Position);
+    }
+
+    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
+    {
+        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
+            queenEyeComp.Eye == null)
+            return;
+
+        var eye = queenEyeComp.Eye.Value;
+
+        if (!TryGetTacticalMap(out var map) ||
+            !TryComp<MapGridComponent>(map.Owner, out var grid))
+            return;
+
+        var queenTransform = Transform(user);
+        var eyeTransform = Transform(eye);
+        var mapTransform = Transform(map.Owner);
+
+        if (queenTransform.MapID != mapTransform.MapID)
+            return;
+
+        var tileCoords = new Vector2(position.X, position.Y);
+        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+
+        _transform.SetWorldPosition(eye, worldPos.Position);
+    }
+
+    public void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
+        UpdateMapData((computer, computer.Comp));
+        UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
+    }
+
     private void UpdateIndividualLabel(Vector2i position, string text, bool marine, bool xeno, EntityUid user, LabelOperation operation)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
@@ -603,37 +700,6 @@ public override void Initialize()
         }
 
         return false;
-    }
-
-    private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
-    {
-        var user = args.Actor;
-        HandleQueenEyeMove(user, args.Position);
-    }
-
-    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
-    {
-        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
-            queenEyeComp.Eye == null)
-            return;
-
-        var eye = queenEyeComp.Eye.Value;
-
-        if (!TryGetTacticalMap(out var map) ||
-            !TryComp<MapGridComponent>(map.Owner, out var grid))
-            return;
-
-        var queenTransform = Transform(user);
-        var eyeTransform = Transform(eye);
-        var mapTransform = Transform(map.Owner);
-
-        if (queenTransform.MapID != mapTransform.MapID)
-            return;
-
-        var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
-
-        _transform.SetWorldPosition(eye, worldPos.Position);
     }
 
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)
@@ -767,10 +833,20 @@ public override void Initialize()
         }
 
         var status = TacticalMapBlipStatus.Alive;
-        if (_rottingQuery.HasComp(ent))
-            status = TacticalMapBlipStatus.Undefibabble;
-        else if (_mobState.IsDead(ent))
-            status = TacticalMapBlipStatus.Defibabble;
+        if (_mobState.IsDead(ent))
+        {
+            var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
+            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+                status = TacticalMapBlipStatus.Undefibabble;
+            else if (stage <= 1)
+                status = TacticalMapBlipStatus.Defibabble;
+            else if (stage == 2)
+                status = TacticalMapBlipStatus.Defibabble2;
+            else if (stage == 3)
+                status = TacticalMapBlipStatus.Defibabble3;
+            else if (stage == 4)
+                status = TacticalMapBlipStatus.Defibabble4;
+        }
 
         var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
         if (_marineMapTrackedQuery.HasComp(ent))
@@ -891,7 +967,7 @@ public override void Initialize()
                     }
                 }
 
-                _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
+                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
@@ -965,6 +1041,20 @@ public override void Initialize()
             _toInit.Clear();
         }
 
+        var time = _timing.CurTime;
+        if (time > _nextForceMapUpdate)
+        {
+            _nextForceMapUpdate = time + _forceMapUpdateEvery;
+            var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent>();
+            while (tracked.MoveNext(out var ent, out var comp))
+            {
+                if (comp == null)
+                    continue;
+
+                _toUpdate.Add((ent, comp));
+            }
+        }
+
         try
         {
             foreach (var update in _toUpdate)
@@ -980,7 +1070,6 @@ public override void Initialize()
             _toUpdate.Clear();
         }
 
-        var time = _timing.CurTime;
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
         while (maps.MoveNext(out var map))
         {
@@ -1009,6 +1098,15 @@ public override void Initialize()
             while (tunnelUsers.MoveNext(out var tunnelUserId, out _, out var tunnelUserComp))
             {
                 UpdateUserData((tunnelUserId, tunnelUserComp), map);
+            }
+
+            var dropshipWeapons = EntityQueryEnumerator<TacticalMapComputerComponent, DropshipTerminalWeaponsComponent>();
+            while (dropshipWeapons.MoveNext(out var weaponsId, out var weaponsComputer, out var weapons))
+            {
+                if (!_ui.IsUiOpen(weaponsId, DropshipTerminalWeaponsUi.Key))
+                    continue;
+
+                UpdateMapData((weaponsId, weaponsComputer), map);
             }
         }
     }

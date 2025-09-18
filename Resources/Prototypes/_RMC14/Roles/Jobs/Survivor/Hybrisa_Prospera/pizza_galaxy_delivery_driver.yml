@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaPizzaGalaxy
   name: rmc-job-name-survivor-pizza-galaxy
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaPizzaGalaxy
   startingGear: RMCGearSurvivorHybrisaPizzaGalaxy
   spawnMenuRoleName: Civilian - Pizza Galaxy Delivery Driver (Hybrisa Survivor)
   special:
@@ -24,6 +23,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -40,10 +40,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaPizzaGalaxy
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
