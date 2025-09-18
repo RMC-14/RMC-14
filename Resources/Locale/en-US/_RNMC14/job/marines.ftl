@@ -9,6 +9,9 @@ cm-job-description-section-sergeant = You are responsible for the men and women 
 cm-job-prefix-section-sergeant = SCTSGT
 CMJobSectionSergeant = Section Sergeant
 
+rmc-job-name-weapons-specialist-hunter = Hunter
+rmc-job-prefix-weapons-specialist-hunter = HNTR
+
 # SOF
 
 rmc-job-name-marine-raider-smartgun-PVE = Marine Raider Smartgunner
