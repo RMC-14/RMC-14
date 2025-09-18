@@ -188,9 +188,10 @@
 
 - type: entity
   parent: RMCSmartGunNoCamo
-  id: RMCSmartGunWhiteOut
+  id: RMCSmartGunPMC
   name: ML79A smart gun
   description: The actual firearm in the 4-piece ML79A Smartgun System. If you have this, you're about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.
+  suffix: PMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
@@ -202,17 +203,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
-  - type: RMCSelectiveFire
-    recoilWielded: 3
-    scatterWielded: 10
-    baseFireRate: 10
-    burstScatterMult: 1
-    modifiers:
-      FullAuto:
-        maxScatterModifier: 0
-        useBurstScatterMult: true
-        unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 80
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -249,6 +239,25 @@
       icon:
         sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
         state: ammo_swap_ap
+
+- type: entity
+  parent: RMCSmartGunPMC
+  id: RMCSmartGunWhiteOut
+  name: "ML79A 'Breaker' smart gun"
+  description: The actual firearm in the 4-piece ML79A Smartgun System, modified for extra power. If you have this, you're about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.
+  suffix: Whiteout
+  components:
+  - type: RMCSelectiveFire
+    recoilWielded: 3
+    scatterWielded: 10
+    baseFireRate: 10
+    burstScatterMult: 1
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 0
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 80
 
 - type: entity
   parent: RMCSmartGunNoCamo
