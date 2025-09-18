@@ -18,7 +18,7 @@
 - type: entity
   parent: RMCMapInsertBase
   id: RMCMapInsertShivaPanicRoomHold
-  name: Panic Room Hold
+  name: Panic Room Hold # No needed survivor variants
   suffix: Insert Shiva
   components:
   - type: MapInsert

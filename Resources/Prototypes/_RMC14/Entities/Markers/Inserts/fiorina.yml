@@ -13,7 +13,7 @@
 - type: entity
   parent: RMCMapInsertFiorinaBase
   id: RMCMapInsertFiorinaPodholder
-  name: Podholder
+  name: Podholder # Not mapped
   suffix: Insert Fiorina
   components:
   - type: MapInsert
