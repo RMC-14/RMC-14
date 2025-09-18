@@ -79,7 +79,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
 
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCSniper
   name: M4 pattern PMC sniper armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
