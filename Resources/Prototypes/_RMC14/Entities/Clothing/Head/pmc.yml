@@ -43,17 +43,6 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCSniper
-  name: PMC sniper helmet
-  description: A helmet worn by PMC Marksmen.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/PMC/sniper.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/PMC/sniper.rsi
-
-- type: entity
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCGunner
   name: PMC gun operator helmet
