@@ -33,6 +33,7 @@
     OB: true
     supplyDrop: true
     paradropping: true
+    unoviableTimer: 25m  # 25 minutes - SS13 default behavior
   - type: PlacementReplacement
     key: rmc_areas
 

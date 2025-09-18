@@ -526,6 +526,7 @@
     mortarFire: false
     medevac: false
     paradropping: false
+    unoviableTimer: null  # Lambda caves are exempt from unoviable timer
     OB: true
     supplyDrop: false
     minimapColor: '#812DA2EE'
@@ -578,6 +579,7 @@
     mortarFire: false
     medevac: false
     paradropping: false
+    unoviableTimer: null  # Natural cave areas are exempt from unoviable timer
     OB: true
     supplyDrop: false
     weatherEnabled: false
@@ -774,6 +776,8 @@
   components:
   - type: Sprite
     state: bluenew
+  - type: Area
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2Caves
@@ -831,6 +835,8 @@
   components:
   - type: Sprite
     state: eta_storage
+  - type: Area
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2CavesEta
@@ -839,6 +845,8 @@
   components:
   - type: Sprite
     state: eta_research
+  - type: Area
+    unoviableTimer: null  # Eta Research is exempt - suitable for xenomorph hive
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1360,6 +1368,7 @@
     OB: true
     supplyDrop: false
     weatherEnabled: false
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1369,6 +1378,7 @@
   - type: Sprite
     state: caves_research
   - type: Area
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
     CAS: false
     fulton: false
     lasing: false
@@ -1399,6 +1409,7 @@
     OB: true
     supplyDrop: false
     weatherEnabled: false
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1418,6 +1429,7 @@
     OB: true
     supplyDrop: false
     weatherEnabled: false
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1437,6 +1449,7 @@
     OB: true
     supplyDrop: false
     weatherEnabled: false
+    unoviableTimer: null  # Natural cave - exempt from unoviable timer
 
 - type: entity
   parent: RMCAreaBigredv2

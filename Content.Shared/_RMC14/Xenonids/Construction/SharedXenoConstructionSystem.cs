@@ -1281,12 +1281,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
 
-            if (choiceProto.ID == XenoHiveCoreNodeId && _hive.GetHive(xeno.Owner) is { } hive && hive.Comp.NewCoreAt > _timing.CurTime)
+            if (choiceProto.ID == XenoHiveCoreNodeId)
             {
-                if (_net.IsServer)
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                // Check unoviable timer first
+                if (_transform.GetGrid(target) is { } hiveCoreGridId &&
+                    TryComp(hiveCoreGridId, out MapGridComponent? hiveCoreGrid))
+                {
+                    var hiveCoreTile = _mapSystem.TileIndicesFor(hiveCoreGridId, hiveCoreGrid, target);
+                    if (!_area.CanPlaceHiveCorePopup((hiveCoreGridId, hiveCoreGrid, null), hiveCoreTile, xeno))
+                        return false;
+                }
 
-                return false;
+                // Check hive core cooldown
+                if (_hive.GetHive(xeno.Owner) is { } hive && hive.Comp.NewCoreAt > _timing.CurTime)
+                {
+                    if (_net.IsServer)
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+
+                    return false;
+                }
             }
         }
 

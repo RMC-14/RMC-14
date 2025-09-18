@@ -485,6 +485,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#390192EE'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaLv759Indoors
@@ -504,6 +505,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -1041,6 +1043,7 @@
   components:
   - type: Area
     minimapColor: '#A54B01EE'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
