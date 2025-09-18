@@ -203,8 +203,7 @@
     - spawn: "/Maps/_RMC14/Inserts/Solaris/clfmining.yml"
       probability: 1
       nightmareScenario: clfmining
-    clearEntities: true
-    clearDecals: true
+    replaceAreas: false
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -217,5 +216,4 @@
     - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-offices.yml"
       probability: 1
       nightmareScenario: crashlanding_offices
-    clearEntities: true
-    clearDecals: true
+    replaceAreas: false
