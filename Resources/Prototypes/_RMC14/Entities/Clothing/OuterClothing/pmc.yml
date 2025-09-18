@@ -28,7 +28,7 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]
+  parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
   id: CMArmorM4PMC
   suffix: Suitlamp
 
