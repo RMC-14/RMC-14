@@ -112,7 +112,7 @@
     - 0,0,5,1 # 3 slots
 
 - type: entity
-  parent: CMArmorSmartGunCombatHarness
+  parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
   description: A modification of the standard M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
@@ -123,8 +123,19 @@
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
-  - type: ItemCamouflage
-    camouflageVariations: { }
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor
 
 - type: entity
   parent: CMArmorM4PMCSmartGunHarness
@@ -170,7 +181,7 @@
 
 # TODO RMC14: Do we not have something for fire resistance?
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: RMCArmorM4PMCEngineer
   name: M4 pattern engineer PMC armor
   description: A modification of the standard M3 armor. Designed for high elemental protection, like shock, fire and fragments, lacks in terms of kevlar for bullet protection.

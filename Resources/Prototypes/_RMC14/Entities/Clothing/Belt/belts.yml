@@ -110,6 +110,19 @@
           - RMCCartridge458SOCOM
 
 - type: entity
+  parent: CMBeltMarine
+  id: RMCBeltPMC
+  name: M305 pattern ammo load rig
+  description: The M305 is the standard load-bearing equipment of Weston-Yamada PMCs. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -1204,6 +1217,17 @@
   parent: RMCBeltHolsterPistol
   id: RMCMK80BeltFilled
   suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
   components:
   - type: StorageFill
     contents:
