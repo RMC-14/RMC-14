@@ -3,7 +3,7 @@
   parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
   id: RMCArmorHelmetPMCTactical
   name: tactical helmet
-  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. This configuration lacks the iconic ballistic mask popularized by Soldier of Fortune magazine.
+  description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. Features a ballistic mask and integrated display connected to the visor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
