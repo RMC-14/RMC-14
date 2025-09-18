@@ -102,20 +102,18 @@ public sealed partial class AreaComponent : Component
     /// If null, no restriction applies. If set, hive cores cannot be built
     /// for this duration after round start.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan? UnoviableTimer;
 
     /// <summary>
     /// Whether the unoviable timer is currently active and blocking hive core construction.
-    /// Server-side only, no need for networking.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool UnoviableTimerActive;
 
     /// <summary>
     /// When the unoviable timer was started (round time).
-    /// Server-side only, no need for networking.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan? UnoviableTimerStartTime;
 }
