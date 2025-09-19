@@ -32,6 +32,7 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
 
+    private List<EntityUid> _toDelete = [];
 
     public override void Initialize()
     {
@@ -117,7 +118,6 @@ public sealed class RMCDeploySystem : EntitySystem
                 RaiseNetworkEvent(showEvent, user);
             }
         }
-
     }
 
     /// <summary>
@@ -173,7 +173,7 @@ public sealed class RMCDeploySystem : EntitySystem
             return;
 
         // Ensure the original entity has a ContainerManagerComponent
-        EntityManager.EnsureComponent<ContainerManagerComponent>(ent.Owner);
+        EnsureComp<ContainerManagerComponent>(ent.Owner);
 
         // Check if the original entity has a container with previously deployed entities
         if (_container.TryGetContainer(ent.Owner, "storage", out var originalStorage) && originalStorage.ContainedEntities.Count > 0)
@@ -245,7 +245,7 @@ public sealed class RMCDeploySystem : EntitySystem
             var container = _container.EnsureContainer<Container>(storageEntity.Value, "storage");
             if (!_container.Insert(ent.Owner, container))
             {
-                Logger.GetSawmill("entity").Error($"Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
+                Log.Error($"Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
             }
         }
     }
@@ -263,8 +263,8 @@ public sealed class RMCDeploySystem : EntitySystem
         foreach (var (setup, i) in ent.Comp.DeploySetups.Select((s, idx) => (s, idx)))
         {
             var spawnPos = areaCenter + setup.Offset;
-            Logger.GetSawmill("entity").Debug($"RMCDeploySystem: Spawning entity {setup.Prototype} at position {spawnPos}");
-            var spawned = EntityManager.SpawnEntity(setup.Prototype, new MapCoordinates(spawnPos, _xform.GetMapId(user)));
+            Log.Debug($"RMCDeploySystem: Spawning entity {setup.Prototype} at position {spawnPos}");
+            var spawned = Spawn(setup.Prototype, new MapCoordinates(spawnPos, _xform.GetMapId(user)));
 
             _xform.SetWorldPosition(spawned, spawnPos);
             _xform.SetWorldRotation(spawned, Angle.FromDegrees(setup.Angle));
@@ -279,7 +279,7 @@ public sealed class RMCDeploySystem : EntitySystem
             }
 
             // Add RMCDeployedEntityComponent for tracking
-            var childComp = EntityManager.EnsureComponent<RMCDeployedEntityComponent>(spawned);
+            var childComp = EnsureComp<RMCDeployedEntityComponent>(spawned);
             childComp.OriginalEntity = ent.Owner;
             childComp.SetupIndex = i;
             Dirty(spawned, childComp);
@@ -293,11 +293,11 @@ public sealed class RMCDeploySystem : EntitySystem
         {
             var container = _container.EnsureContainer<Container>(storageEntity.Value, "storage");
             if (!_container.Insert(ent.Owner, container))
-                Logger.GetSawmill("entity").Error($"RMCDeploySystem: Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
+                Log.Error($"RMCDeploySystem: Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
         }
         else
         {
-            Logger.GetSawmill("entity").Error("RMCDeploySystem: Original entity with StorageOriginalEntity not found for placement");
+            Log.Error("RMCDeploySystem: Original entity with StorageOriginalEntity not found for placement");
         }
     }
 
@@ -390,10 +390,10 @@ public sealed class RMCDeploySystem : EntitySystem
         Dirty(ent.Owner, ent.Comp);
 
         // Try to get the original entity
-        if (!EntityManager.EntityExists(ent.Comp.OriginalEntity))
+        if (!Exists(ent.Comp.OriginalEntity))
             return;
 
-        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? origComp))
+        if (!TryComp<RMCDeployableComponent>(ent.Comp.OriginalEntity, out var origComp))
             return;
 
         if (origComp is not null)
@@ -403,8 +403,8 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.Mode == RMCDeploySetupMode.ReactiveParental)
             {
                 // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
-                var toDelete = new List<EntityUid>();
-                var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
+                _toDelete.Clear();
+                var enumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
                 while (enumerator.MoveNext(out var entity, out var childComp))
                 {
                     if (childComp.OriginalEntity != ent.Comp.OriginalEntity)
@@ -413,9 +413,9 @@ public sealed class RMCDeploySystem : EntitySystem
                         continue;
                     var mode = origComp.DeploySetups[childComp.SetupIndex].Mode;
                     if (mode == RMCDeploySetupMode.ReactiveParental || mode == RMCDeploySetupMode.Reactive)
-                        toDelete.Add(entity);
+                        _toDelete.Add(entity);
                 }
-                foreach (var entity in toDelete)
+                foreach (var entity in _toDelete)
                 {
                     _destructible.DestroyEntity(entity);
                 }
@@ -436,7 +436,7 @@ public sealed class RMCDeploySystem : EntitySystem
             RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ent.Comp.CurrentDeployUser.Value);
 
         var toDelete = new List<EntityUid>();
-        var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
+        var enumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
         while (enumerator.MoveNext(out var entity, out var childComp))
         {
             if (childComp.OriginalEntity != ent.Owner)
@@ -478,7 +478,7 @@ public sealed class RMCDeploySystem : EntitySystem
         args.Handled = true;
 
         // Check if this entity is from a ReactiveParentalSetup
-        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
+        if (!TryComp<RMCDeployableComponent>(ent.Comp.OriginalEntity, out var deployable))
             return;
         var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
         if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
@@ -489,13 +489,13 @@ public sealed class RMCDeploySystem : EntitySystem
             return;
 
         // Check if the used item is the required tool
-        if (!EntityManager.TryGetComponent(args.Used, out MetaDataComponent? usedMeta) ||
+        if (!TryComp(args.Used, out MetaDataComponent? usedMeta) ||
             usedMeta.EntityPrototype == null ||
             usedMeta.EntityPrototype.ID != deployable.CollapseToolPrototype.Value)
             return;
 
         // If the tool has ItemToggleComponent, it must be activated (e.g., shovel)
-        if (EntityManager.TryGetComponent(args.Used, out ItemToggleComponent? toggle) && !toggle.Activated)
+        if (TryComp(args.Used, out ItemToggleComponent? toggle) && !toggle.Activated)
             return;
 
         var doAfter = new DoAfterArgs(_entMan, args.User, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), ent.Owner)
@@ -529,18 +529,18 @@ public sealed class RMCDeploySystem : EntitySystem
         var user = ev.Args.User;
 
         // Get the original entity
-        if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? deployable))
+        if (!TryComp(comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
 
         // 1. Find the ReactiveParental entity whose storage contains the original entity
         EntityUid? reactiveParentalWithOriginal = null;
-        var reactiveParentalEnumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
+        var reactiveParentalEnumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
         while (reactiveParentalEnumerator.MoveNext(out var reactiveParentalUid, out var reactiveParentalComp))
         {
             if (reactiveParentalComp.OriginalEntity != comp.OriginalEntity)
                 continue;
             // Check if this is a ReactiveParentalSetup
-            if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? origDeployable))
+            if (!TryComp(comp.OriginalEntity, out RMCDeployableComponent? origDeployable))
                 continue;
             var setup = origDeployable.DeploySetups[reactiveParentalComp.SetupIndex];
             if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
@@ -566,7 +566,7 @@ public sealed class RMCDeploySystem : EntitySystem
 
             // 2. Move all child deployed entities (except NeverRedeployableSetup) to the storage container of the original entity
             var origStorage = _container.EnsureContainer<Container>(comp.OriginalEntity, "storage");
-            var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
+            var enumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
             while (enumerator.MoveNext(out var childUid, out var childComp))
             {
                 if (childComp.OriginalEntity != comp.OriginalEntity)
@@ -602,7 +602,7 @@ public sealed class RMCDeploySystem : EntitySystem
     /// </summary>
     private void OnDeployedExamined(Entity<RMCDeployedEntityComponent> ent, ref ExaminedEvent args)
     {
-        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
+        if (!TryComp(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
         if (ent.Comp.SetupIndex >= deployable.DeploySetups.Count)
             return;
