@@ -11,8 +11,12 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
+using Robust.Shared.IoC;
+using Robust.Shared.Localization;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -24,6 +28,7 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
@@ -34,6 +39,9 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+
+    private TimeSpan _unoviableTimerDuration = TimeSpan.FromMinutes(25);
+    private bool _areaSystemEnabled = true;
 
     private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<AreaGridComponent> _areaGridQuery;
@@ -60,6 +68,8 @@ public sealed class AreaSystem : EntitySystem
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCHiveSpreadEarlyMinutes, v => _earlySpreadHiveTime = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCUnoviableTimerMinutes, v => _unoviableTimerDuration = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCAreaSystemEnabled, v => _areaSystemEnabled = v, true);
     }
 
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
@@ -84,6 +94,87 @@ public sealed class AreaSystem : EntitySystem
     public void ReplaceArea(AreaGridComponent areaGrid, Vector2i position, EntProtoId<AreaComponent> area)
     {
         areaGrid.Areas[position] = area;
+    }
+
+    private void UpdateUnoviableTimers()
+    {
+        if (!_areaSystemEnabled)
+            return;
+            
+        var currentTime = _gameTicker.RoundDuration();
+        var areas = EntityQueryEnumerator<AreaComponent>();
+        
+        while (areas.MoveNext(out var uid, out var area))
+        {
+            if (area.UnoviableTimer.HasValue && !area.UnoviableTimerStartTime.HasValue)
+            {
+                area.UnoviableTimerActive = true;
+                area.UnoviableTimerStartTime = TimeSpan.Zero;
+                Dirty(uid, area);
+            }
+            
+            if (area.UnoviableTimerActive && 
+                area.UnoviableTimer.HasValue && 
+                area.UnoviableTimerStartTime.HasValue)
+            {
+                var elapsed = currentTime - area.UnoviableTimerStartTime.Value;
+                if (elapsed >= _unoviableTimerDuration)
+                {
+                    area.UnoviableTimerActive = false;
+                    Dirty(uid, area);
+                }
+            }
+        }
+    }
+
+    public bool IsUnoviableForHiveCore(Entity<AreaComponent> area)
+    {
+        if (!_areaSystemEnabled)
+            return false;
+            
+        var areaComp = area.Comp;
+        
+        if (!areaComp.UnoviableTimer.HasValue)
+            return false;
+            
+        if (!areaComp.UnoviableTimerStartTime.HasValue)
+            return true;
+        
+        return areaComp.UnoviableTimerActive;
+    }
+
+    public bool CanPlaceHiveCorePopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user)
+    {
+        if (!TryGetArea(grid, indices, out var area, out var areaPrototype))
+            return true;
+
+        if (IsUnoviableForHiveCore(area.Value))
+        {
+            if (user != null && _net.IsServer)
+            {
+                var areaComp = area.Value.Comp;
+                var remainingTime = TimeSpan.Zero;
+                
+                if (areaComp.UnoviableTimerActive && areaComp.UnoviableTimerStartTime.HasValue)
+                {
+                    var elapsedTime = _gameTicker.RoundDuration() - areaComp.UnoviableTimerStartTime.Value;
+                    remainingTime = _unoviableTimerDuration - elapsedTime;
+                    if (remainingTime < TimeSpan.Zero)
+                        remainingTime = TimeSpan.Zero;
+                }
+
+                var message = remainingTime > TimeSpan.Zero
+                    ? Loc.GetString("rmc-xeno-construction-unoviable-timer-remaining", ("time", $"{remainingTime:mm\\:ss}"))
+                    : Loc.GetString("rmc-xeno-construction-unoviable-timer");
+                
+                _popup.PopupEntity(message, user.Value, user.Value, PopupType.MediumCaution);
+            }
+
+            return false;
+        }
+
+        // Call the normal resin validation as well
+        return CanResinPopup(grid, indices, user);
     }
 
     public bool TryGetArea(
@@ -360,6 +451,8 @@ public sealed class AreaSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        UpdateUnoviableTimers();
+        
         try
         {
             foreach (var ent in _toRender)
