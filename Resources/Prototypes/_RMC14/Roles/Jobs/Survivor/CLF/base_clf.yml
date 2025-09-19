@@ -1,8 +1,8 @@
 - type: job
   parent: CMSurvivor
   id: RMCSurvivorCLFBase
-  name: rmc-job-name-clf-soldier
-  description: rmc-job-description-clf
+  name: rmc-job-name-clf-survivor-soldier
+  description: rmc-job-description-clf-survivor
   ranks:
     RMCRankCLFRebel: [ ]
   accessGroups:
@@ -10,7 +10,7 @@
   joinNotifyCrew: false
   startingGear: RMCGearCLFBase
   hasIcon: true
-  greeting: rmc-job-greeting-clf
+  greeting: rmc-job-greeting-clf-survivor
   playTimeTracker: RMCJobSurvivorCLF
   spawnMenuRoleName: CLF Survivor (Base)
   useLoadoutOfJob: CMSurvivor
@@ -34,7 +34,7 @@
 
 - type: entity
   id: RMCSurvivorPresetCLFNoPrimary
-  name: forecon no primary survivor preset
+  name: clf no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
@@ -70,12 +70,6 @@
       - [ RMCHandsLeatherBlack ]
       - [ RMCHandsCombat ]
       - [ ClothingHandsGlovesLeather ] # todo rmc botanic leather gloves
-    randomWeapon:
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
-    - [ RMCHolsterSMGPouchFilledExtended ]
-    - [ RMCMotionDetector ]
 
 - type: entity
   parent: RMCSurvivorPresetCLFNoPrimary

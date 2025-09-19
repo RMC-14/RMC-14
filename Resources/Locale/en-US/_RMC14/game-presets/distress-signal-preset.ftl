@@ -25,3 +25,6 @@ cm-distress-signal-jellies = Royal Jelly Awards:
 rmc-distress-signal-got-medal = {$receiver} is awarded the {$award}: '{$awardDescription}'
 
 rmc-distress-signal-got-jelly = {$receiver} is awarded the {$award}: '{$awardDescription}' by {$giver}
+
+rmc-roles-antag-hostile-survivor-antagonist-name = Hostile Survivor
+rmc-roles-antag-hostile-survivor-objective = As a member of the CLF, liberate the colony from the UNMC.

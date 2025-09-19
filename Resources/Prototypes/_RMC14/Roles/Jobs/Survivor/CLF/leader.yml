@@ -1,10 +1,11 @@
 - type: job
   parent: RMCSurvivorCLFBase
   id: RMCSurvivorCLFLeader
-  name: cm-job-name-clf-commander
+  name: rmc-job-name-clf-survivor-commander
   icon: RMCJobIconCLFCellCommander
   startingGear: RMCGearSurvivorCLFLeader
   spawnMenuRoleName: CLF Leader (Survivor)
+  antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial
     components:

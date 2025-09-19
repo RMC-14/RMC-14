@@ -1,9 +1,10 @@
 - type: job
   parent: RMCSurvivorCLFBase
   id: RMCSurvivorCLFSoldier
-  name: cm-job-name-clf-soldier
+  name: rmc-job-name-clf-survivor-soldier
   icon: RMCJobIconCLFSoldier
   spawnMenuRoleName: CLF Soldier (Survivor)
+  antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial
     components:

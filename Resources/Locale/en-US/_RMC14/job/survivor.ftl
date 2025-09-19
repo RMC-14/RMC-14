@@ -268,3 +268,21 @@ rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
 rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# CLF SURVIVORS
+
+rmc-job-name-clf-survivor-soldier = CLF Survivor
+
+rmc-job-name-clf-survivor-medic = CLF Survivor Medic
+
+rmc-job-name-clf-survivor-engineer = CLF Survivor Engineer
+
+rmc-job-name-clf-survivor-commander = CLF Survivor Leader
+
+rmc-job-greeting-clf-survivor = You are a CLF member running a smuggling operation!
+
+  You are NOT aware of the xenonid threat.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#ce1e1e][font size=16]HOSTILE to the UNMC![/font][/color][/bold]

@@ -1,10 +1,11 @@
 - type: job
   parent: RMCSurvivorCLFBase
   id: RMCSurvivorCLFMedic
-  name: cm-job-name-clf-medic
+  name: rmc-job-name-clf-survivor-medic
   icon: RMCJobIconCLFMedic
   startingGear: RMCGearSurvivorCLFMedic
   spawnMenuRoleName: CLF Medic (Survivor)
+  antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial
     components:

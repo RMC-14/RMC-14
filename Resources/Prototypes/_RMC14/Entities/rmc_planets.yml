@@ -177,7 +177,7 @@
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."    
     nightmareScenarios:
     - scenarioName: clfsmugglers
-      scenarioProbability: 0.9
+      scenarioProbability: 1
     survivorJobInserts:
       CMSurvivor:
       - RMCSurvivorKutjevoChaplain: 1

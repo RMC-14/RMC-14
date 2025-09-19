@@ -1,10 +1,11 @@
 - type: job
   parent: RMCSurvivorCLFBase
   id: RMCSurvivorCLFEngineer
-  name: cm-job-name-clf-engineer
+  name: rmc-job-name-clf-survivor-engineer
   icon: RMCJobIconCLFEngineer
   startingGear: RMCGearSurvivorCLFEngineer
   spawnMenuRoleName: CLF Engineer (Survivor)
+  antagRole: RMCHostileSurvivor
   special:
   - !type:AddComponentSpecial
     components:
@@ -37,6 +38,7 @@
     jumpsuit: RMCJumpsuitCLFWebbing
     outerClothing: RMCCoatMilitia
     gloves: CMHandsInsulated
+    shoes: RMCShoesCombat
     id: RMCIDCardCLFEngineer
     belt: CMBeltUtilityFilled
     back: RMCSatchelLightpackWelder
@@ -53,6 +55,16 @@
     - RMCGrenadeMolotov
     - CMMRE
     - RMCFlashlight
+
+
+- type: entity
+  id: RMCSurvivorPresetCLFEngineer
+  name: forecon no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    - # Engineer has fixed equipment but random weapon
 
 - type: entity
   parent: CMSpawnPointJobBase
