@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed obstacle slamming popups showing someone's true identity.
-    type: Fix
-  - message: Fixed popup spam when making tunnels.
-    type: Fix
-  - message: Fixed xenonids being able to examine character descriptions.
-    type: Fix
-  - message: Fixed needing to open the tactical map manually before it shows in the
-      tunnel UI.
-    type: Fix
-  id: 1855
-  time: '2025-06-10T01:30:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6682
-- author: DrSmugleaf
-  changes:
   - message: Fixed Queen sometimes not getting plasma regen while on weeds and in
       ovi.
     type: Fix
@@ -4467,5 +4453,12 @@
   id: 2354
   time: '2025-09-16T02:03:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7893
+- author: J C Denton
+  changes:
+  - message: Fixed incorrect locale of colonist corpses' jobs.
+    type: Fix
+  id: 2355
+  time: '2025-09-19T01:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7895
 Name: RMC14
 Order: -1
