@@ -29,7 +29,7 @@
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
     survivorJobScenarios:
-      asset_protection:  
+      asset_protection:
         CMSurvivor:
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
@@ -46,7 +46,7 @@
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorScientist:
         - CMSurvivorLV624CorporateDomeGoon: -1
-    
+
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -272,6 +272,24 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
+#    survivorJobScenarios:
+#      clfcamp:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
 
 - type: entity
   id: RMCPlanetArcticValley
