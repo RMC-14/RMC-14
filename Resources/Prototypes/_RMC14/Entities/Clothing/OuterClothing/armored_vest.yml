@@ -82,6 +82,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: RMCNameItemOnVend
     item: Armor
 
