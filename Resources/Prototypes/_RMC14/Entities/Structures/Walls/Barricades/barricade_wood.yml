@@ -22,7 +22,7 @@
         - FullTileMask
         layer:
         - TableLayer
-        - LowImpassable
+        - BarricadeImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -59,4 +59,10 @@
     damage:
       types:
         Blunt: 22
+    destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true
   - type: RMCMesonsNonviewable
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
