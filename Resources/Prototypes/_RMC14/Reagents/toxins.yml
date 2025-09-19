@@ -1,4 +1,4 @@
-- type: reagent
+﻿- type: reagent
   parent: CMReagent
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
@@ -168,3 +168,29 @@
           types:
             Asphyxiation: 15
 
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCyanide
+  name: rmc-reagent-name-cyanide
+  desc: rmc-reagent-desc-cyanide
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#CF3600"
+  overdose: 30
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Airloss: 8
+      - !type:Emote
+        emote: Gasp
+        probability: 0.1
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        component: Drowsiness
+        time: 4
+        type: Add
+        refresh: false
