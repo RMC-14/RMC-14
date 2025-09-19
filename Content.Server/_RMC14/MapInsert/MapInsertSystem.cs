@@ -102,7 +102,7 @@ public sealed class MapInsertSystem : EntitySystem
         coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
-        // _mergeOfset is needed to make sure the grid isn't overlapping the destination, otherwise causes issues
+        // _mergeOfset is needed to make sure the grid isn't overlapping the destination, otherwise merge causes issues
         if (!_mapLoader.TryLoadGrid(xform.MapID, spawn, out var grid, offset: coordinatesi + new Vector2(_mergeOffset)))
             return;
         var insertGrid = grid.Value;
