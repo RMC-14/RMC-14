@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tag;
+using Content.Shared.Mobs;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -62,4 +63,10 @@ public sealed partial class EntityWhitelist
     // RMC14
     [DataField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
+
+    /// <summary>
+    ///     Mob states that are allowed in the whitelist.
+    /// </summary>
+    [DataField]
+    public List<MobState>? MobStates;
 }

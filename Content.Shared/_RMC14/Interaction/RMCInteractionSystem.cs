@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
