@@ -36,6 +36,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaStrata
@@ -977,6 +978,7 @@
   - type: Sprite
     state: marshwater
   - type: Area
+    alwaysPowered: true
     CAS: false
     fulton: false
     lasing: false

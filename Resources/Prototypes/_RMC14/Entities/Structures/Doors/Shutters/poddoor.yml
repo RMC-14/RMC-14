@@ -22,7 +22,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: false
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -70,7 +70,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: false
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -99,7 +99,7 @@
   description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
   components:
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: true
   - type: XenoCrusherChargable
     instantDestroy: true
 
@@ -129,7 +129,7 @@
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
-    
+
 - type: entity
   parent: RMCPodDoorHybrisaRed
   id: RMCPodDoorHybrisaRedOpen

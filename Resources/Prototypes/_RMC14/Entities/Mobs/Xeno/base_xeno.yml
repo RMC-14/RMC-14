@@ -396,8 +396,7 @@
   - type: Prying
     pryPowered: true
     speedModifier: 2.7
-    useSound:
-      path: /Audio/Items/crowbar.ogg
+    useSound: null
 
 - type: entity
   abstract: true
