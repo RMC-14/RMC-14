@@ -155,6 +155,7 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, MapInitEvent>(OnRetrieveMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, ContainerGettingInsertedAttemptEvent>(OnHandPickUp);
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, PullAttemptEvent>(OnIntelPullAttempt);
+        SubscribeLocalEvent<ActiveIntelCorpseComponent, PullAttemptEvent>(OnIntelCorpsePullAttempt);
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
@@ -273,6 +274,21 @@ public sealed class IntelSystem : EntitySystem
         {
             args.Cancelled = true;
             _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
+        }
+    }
+
+    private void OnIntelCorpsePullAttempt(Entity<ActiveIntelCorpseComponent> ent, ref PullAttemptEvent args)
+    {
+        var user = args.PullerUid;
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
+        {
+            args.Cancelled = true;
+
+            var msg = HasComp<XenoComponent>(ent)
+                ? Loc.GetString("rmc-intel-survivor-xeno-pull", ("thing", Name(ent)))
+                : Loc.GetString("rmc-intel-survivor-corpse-pull", ("thing", Name(ent)));
+
+            _popup.PopupClient(msg, ent, user);
         }
     }
 

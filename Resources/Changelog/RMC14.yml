@@ -1,47 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the MARSOC Team Leader role for ERTs.
-    type: Add
-  - message: Added the missing MARSOC Balaclava, Headset and shells in their shotgun.
-    type: Add
-  - message: MARSOC now correctly start in their squads with fixed icons.
-    type: Tweak
-  - message: Most Ghost Roles now have playtime requirements.
-    type: Tweak
-  id: 1850
-  time: '2025-06-09T20:25:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6673
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Praetorian acid ball nto having a coooldown, for real this time.
-    type: Fix
-  - message: Fixed some tackle popups showing someone's real name.
-    type: Fix
-  id: 1851
-  time: '2025-06-09T23:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6679
-- author: SurfinNinja1
-  changes:
-  - message: Fixed Onigiri recipe
-    type: Fix
-  id: 1852
-  time: '2025-06-09T23:00:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6676
-- author: Vixting
-  changes:
-  - message: Fixed not being able to draw vertical lines on the tactical map.
-    type: Fix
-  id: 1853
-  time: '2025-06-10T00:04:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6680
-- author: x5tink
-  changes:
-  - message: ChemMaster Label text field now has a flexible scaling Width
-    type: Tweak
-  id: 1854
-  time: '2025-06-10T01:15:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6681
 - author: DrSmugleaf
   changes:
   - message: Fixed obstacle slamming popups showing someone's true identity.
@@ -4475,5 +4432,40 @@
   id: 2349
   time: '2025-09-10T01:41:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7877
+- author: UnicornOnLSD
+  changes:
+  - message: Added "Squad Leading 101" guidebook entry.
+    type: Add
+  id: 2350
+  time: '2025-09-13T11:13:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7719
+- author: J C Denton
+  changes:
+  - message: Fixed being able to build on water.
+    type: Fix
+  id: 2351
+  time: '2025-09-16T01:28:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7916
+- author: Tunguso4ka
+  changes:
+  - message: Fixed Sorokyne Weedkiller not targeting Parts Storage building.
+    type: Fix
+  id: 2352
+  time: '2025-09-16T01:29:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7925
+- author: noctyrnal
+  changes:
+  - message: Changed the M54CE2 magazine sprites.
+    type: Tweak
+  id: 2353
+  time: '2025-09-16T02:01:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7905
+- author: Vermidia
+  changes:
+  - message: Fixed valk's heal on slash area being slightly too small.
+    type: Fix
+  id: 2354
+  time: '2025-09-16T02:03:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7893
 Name: RMC14
 Order: -1
