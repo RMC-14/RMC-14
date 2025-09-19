@@ -47,6 +47,7 @@
         CMSurvivorScientist:
         - CMSurvivorLV624CorporateDomeGoon: -1
     
+
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -55,6 +56,49 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    nightmareScenarios:
+    - scenarioName: clfmining
+      scenarioProbability: 0.1
+    - scenarioName: crashlanding_offices
+      scenarioProbability: 0.2
+#    survivorJobScenarios:
+#      clfmining:  
+#        CMSurvivor:
+#        - : 1
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+#      crashlanding_offices:
+#        CMSurvivor:
+#        - : 1
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+
 
 - type: entity
   id: RMCPlanetShiva
