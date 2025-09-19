@@ -61,7 +61,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
@@ -73,6 +73,7 @@ public sealed class XenoSpitSystem : EntitySystem
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<XenoSpitComponent, XenoSpitActionEvent>(OnXenoSpitAction);
+
         SubscribeLocalEvent<XenoSlowingSpitComponent, XenoSlowingSpitActionEvent>(OnXenoSlowingSpitAction);
         SubscribeLocalEvent<XenoScatteredSpitComponent, XenoScatteredSpitActionEvent>(OnXenoScatteredSpitAction);
         SubscribeLocalEvent<XenoChargeSpitComponent, XenoChargeSpitActionEvent>(OnXenoChargeSpitAction);
@@ -218,13 +219,11 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSlowingSpitHit(Entity<XenoSlowingSpitProjectileComponent> spit, ref ProjectileHitEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
+        if (_hive.FromSameHive(spit.Owner, target) ||
+            HasComp<XenoComponent>(target))
         {
-            QueueDel(spit);
+            PredictedQueueDel(spit.Owner);
             return;
         }
 
@@ -234,6 +233,18 @@ public sealed class XenoSpitSystem : EntitySystem
             _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
             return;
         }
+
+        var filter = Filter.Pvs(target);
+        if (TryComp(spit, out XenoProjectileShotComponent? shot) &&
+            shot.Shooter is { } shooter)
+        {
+            filter = filter.RemovePlayer(shooter);
+        }
+
+        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
+
+        if (_net.IsClient)
+            return;
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
@@ -253,8 +264,6 @@ public sealed class XenoSpitSystem : EntitySystem
 
         if (!resisted)
             _stun.TryParalyze(target, spit.Comp.Paralyze, true);
-
-        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target));
     }
 
     private void OnXenoAcidBallAction(Entity<XenoAcidBallComponent> ent, ref XenoAcidBallActionEvent args)

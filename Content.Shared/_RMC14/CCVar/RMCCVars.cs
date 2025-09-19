@@ -492,12 +492,15 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLagCompensationInteractionMarginTiles =
-        CVarDef.Create("rmc.lag_compensation_interaction_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
+        CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> RMCLagCompensationPointBlanks =
-        CVarDef.Create("rmc.lag_compensation_point_blanks", true, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<int> RMCLagCompensationMaxBufferSize =
+        CVarDef.Create("rmc.lag_compensation_max_buffer_size", 5, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLagCompensationPointBlanksMarginTiles =
-        CVarDef.Create("rmc.lag_compensation_point_blanks_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<int> RMCLagCompensationDefaultBufferSize =
+        CVarDef.Create("rmc.lag_compensation_default_buffer_size", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCLagCompensationOffsetBuffer =
+        CVarDef.Create("rmc.lag_compensation_offset_buffer", true, CVar.REPLICATED | CVar.SERVER);
 }

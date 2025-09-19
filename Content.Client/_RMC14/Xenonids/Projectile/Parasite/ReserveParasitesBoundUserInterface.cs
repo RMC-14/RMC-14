@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._RMC14.Xenonids.Projectiles.Parasite;
+namespace Content.Client._RMC14.Xenonids.Projectile.Parasite;
 
 [UsedImplicitly]
 public sealed class ReserveParasitesBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)

@@ -148,7 +148,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         // Re-check with lag compensated positions
         if (!canReach)
         {
-            if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, lagCompensated: true))
+            if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value))
                 return;
         }
 
