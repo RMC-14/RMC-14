@@ -147,6 +147,7 @@
   id: JobCMExecutiveOfficer
   points: 7
   groups:
+  - ExecutiveOfficerRoleSpecificRMC
   - MarineLeatherBackpack
   - HeadwearRMC
   - EyewearRMC
