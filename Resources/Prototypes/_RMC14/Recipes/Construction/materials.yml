@@ -8,6 +8,7 @@
   category: construction-category-cm-materials
   description: Create barbed wire to decorate your barricades.
   objectType: Item
+  rmcPrototype: RMCBarbedWireBuild
 
 - type: construction
   parent: RMC
