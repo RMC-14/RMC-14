@@ -53,3 +53,34 @@ rmc-mortar-view-camera = View
 
 rmc-mortar-camera-title = Mortar Camera Interface
 rmc-mortar-camera-name = Para-Cam ({$x}):({$y})
+
+# Targeting mode
+rmc-mortar-toggle-mode = Toggle Targeting Mode
+rmc-mortar-toggle-mode-message = Switch between coordinate and laser targeting modes
+
+rmc-mortar-coordinates-mode-switched-self = You switch {THE($mortar)} to coordinates targeting mode.
+rmc-mortar-laser-mode-switched-self = You switch {THE($mortar)} to laser targeting mode.
+
+rmc-mortar-coordinates-mode-switched-others = {$user} switches {THE($mortar)} to coordinates targeting mode.
+rmc-mortar-laser-mode-switched-others = {$user} switches {THE($mortar)} to laser targeting mode.
+
+rmc-mortar-linking-start = You start linking {THE($laserDesignator)} to {THE($mortar)}.
+rmc-mortar-laser-linked-self = You successfully link {THE($laserDesignator)} to {THE($mortar)}.
+rmc-mortar-laser-linked-others = {$user} successfully links {THE($laserDesignator)} to {THE($mortar)}.
+rmc-mortar-already-linking = {CAPITALIZE(THE($mortar))} is already being linked to a laser designator.
+
+rmc-mortar-no-laser-target = {CAPITALIZE(THE($mortar))} has no laser target to fire at!
+rmc-mortar-no-laser-designator = {CAPITALIZE(THE($mortar))} has no linked laser designator!
+
+rmc-mortar-in-coordinates-mode = {CAPITALIZE(THE($mortar))} is currently set to coordinates targeting mode.
+rmc-mortar-in-laser-mode = {CAPITALIZE(THE($mortar))} is currently set to laser targeting mode.
+
+rmc-mortar-laser-aimed = {CAPITALIZE(THE($mortar))} is aimed on target and ready to fire!
+
+rmc-mortar-toggle-mode-hint = [color=cyan]Alt + Click mortar to switch targeting modes.[/color]
+
+rmc-mortar-dial-coordinates = {CAPITALIZE(THE($mortar))} is set to laser targeting mode, switch to coordinate targeting in order to dial coordinates!
+
+rmc-mortar-beeping = beeping!
+rmc-mortar-beeping-warning = beeping warningly!
+rmc-mortar-targeting = {CAPITALIZE(THE($mortar))} is still targeting.
