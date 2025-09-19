@@ -403,7 +403,7 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.Mode == RMCDeploySetupMode.ReactiveParental)
             {
                 // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
-                _toDelete.Clear();
+                var toDelete = new List<EntityUid>();
                 var enumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
                 while (enumerator.MoveNext(out var entity, out var childComp))
                 {
@@ -413,9 +413,9 @@ public sealed class RMCDeploySystem : EntitySystem
                         continue;
                     var mode = origComp.DeploySetups[childComp.SetupIndex].Mode;
                     if (mode == RMCDeploySetupMode.ReactiveParental || mode == RMCDeploySetupMode.Reactive)
-                        _toDelete.Add(entity);
+                        toDelete.Add(entity);
                 }
-                foreach (var entity in _toDelete)
+                foreach (var entity in toDelete)
                 {
                     _destructible.DestroyEntity(entity);
                 }
@@ -435,7 +435,7 @@ public sealed class RMCDeploySystem : EntitySystem
         if (ent.Comp.CurrentDeployUser != null)
             RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ent.Comp.CurrentDeployUser.Value);
 
-        var toDelete = new List<EntityUid>();
+        _toDelete.Clear();
         var enumerator = EntityQueryEnumerator<RMCDeployedEntityComponent>();
         while (enumerator.MoveNext(out var entity, out var childComp))
         {
@@ -458,10 +458,10 @@ public sealed class RMCDeploySystem : EntitySystem
 
                 childComp.InShutdown = true;
                 Dirty(entity, childComp);
-                toDelete.Add(entity);
+                _toDelete.Add(entity);
             }
         }
-        foreach (var entity in toDelete)
+        foreach (var entity in _toDelete)
         {
             _destructible.DestroyEntity(entity);
         }
