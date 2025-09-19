@@ -29,7 +29,7 @@
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
     survivorJobScenarios:
-      asset_protection:  
+      asset_protection:
         CMSurvivor:
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
@@ -42,7 +42,7 @@
         - CMSurvivorLV624CorporateDomeGoonLead: 1
         CMSurvivorScientist:
         - CMSurvivor: 0
-    
+
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -174,10 +174,10 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
-    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."    
+    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
     nightmareScenarios:
     - scenarioName: clfsmugglers
-      scenarioProbability: 1
+      scenarioProbability: 0.1
     survivorJobInserts:
       CMSurvivor:
       - RMCSurvivorKutjevoChaplain: 1
@@ -194,7 +194,9 @@
       CMSurvivorScientist:
       - RMCSurvivorKutjevoResearcher: 2
     survivorJobScenarios:
-      clfsmugglers:  
+      clfsmugglers:
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorCLFLeader: 1
         CMSurvivor:
         - RMCSurvivorCLFSoldier: -1
         CMSurvivorCorporate:
@@ -204,7 +206,7 @@
         CMSurvivorEngineer:
         - RMCSurvivorCLFEngineer: 1
         CMSurvivorSecurity:
-        - RMCSurvivorCLFLeader: 1 #TODO I think this should be the CO job
+        - CMSurvivor: 0
         CMSurvivorScientist:
         - CMSurvivor: 0
 
