@@ -103,7 +103,7 @@ public sealed partial class AnchorableSystem : EntitySystem
     {
         if (component.Flags == AnchorableFlags.None)
         {
-            args.PushText("It cannot be anchored nor unanchored.");
+            args.PushMarkup(Loc.GetString("rmc-construction-non-anchorable"));
             return;
         }
 
