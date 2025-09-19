@@ -507,14 +507,14 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
 
         _mentorWindow.ClaimButton.Visible = _mentorWindow.SelectedPlayer != default;
-        _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-claim");
+        _mentorWindow.ClaimButton.Text = "Claim";
 
         _claims.TryGetValue(destination, out var claims);
         if (claims != null &&
             _player.LocalSession != null &&
             claims.Contains(_player.LocalSession.Name))
         {
-            _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-unclaim");
+            _mentorWindow.ClaimButton.Text = "Unclaim";
         }
 
         if (_mentorWindow.SelectedPlayer != destination)
@@ -526,6 +526,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
         }
 
-        _mentorWindow.ClaimIndicator.Text = Loc.GetString("rmc-mentor-claimed", ("claims", string.Join(", ", claims)));
+        _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
     }
 }
