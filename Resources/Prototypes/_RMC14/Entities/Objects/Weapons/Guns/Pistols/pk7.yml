@@ -1,0 +1,113 @@
+﻿- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolPK7
+  name: PK-7 electrostatic pistol
+  description: A Weston-Yamada manufactured less-than-lethal pistol. Originally manufactured in the 2080s, the ES-4 electrostatic pistol fires electrically-charged bullets with high accuracy, though its cost and constant need for cleaning makes it a rare sight.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolPK7
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es4.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    recoilUnwielded: 3
+    scatterWielded: 4
+    scatterUnwielded: 4
+    baseFireRate: 4
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/pk7.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/pk7.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+  - type: ItemSlots
+    slots:
+     gun_magazine:
+       name: Magazine
+       insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+       ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+       priority: 2
+       whitelist:
+         tags:
+          - RMCMagazinePistolPK7
+       startingItem: RMCMagazinePistolPK7
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+           - RMCAttachmentRailFlashlight
+           - RMCAttachmentS5RedDotSight
+           - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+           - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.1, 0.22
+      rmc-aslot-underbarrel: 0.3, -0.2
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolPK7
+  name: PK-7 electrostatic magazine (9mm)
+  description: Holds 19 rounds of specialized Conductive 9mm. Electrostatic propulsion in the PK-7 functions by propelling an cV9mm round, at a proportionally slower velocity to maintain a higher kinetic energy transfer rate. All this turns a penetrative round into a less-than-lethal round.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolPK7
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmElectrostatic
+    proto: RMCCartridgePistol9mmElectrostatic
+    capacity: 19
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pk7.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#DF963F"
+
+- type: entity
+  id: RMCCartridgePistol9mmElectrostatic
+  name: electrostatic cartridge (9mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmElectrostatic
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmElectrostatic
+
+- type: entity
+  parent: RMCProjectileTaser
+  id: RMCBulletPistol9mmElectrostatic
+  name: electrostatic bullet (9mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+  - type: RMCStaminaDamageOnCollide
+    damage: 30
+
+- type: Tag
+  id: RMCWeaponPistolPK7
+
+- type: Tag
+  id: RMCMagazinePistolPK7
+
+- type: Tag
+  id: RMCCartridgePistol9mmElectrostatic

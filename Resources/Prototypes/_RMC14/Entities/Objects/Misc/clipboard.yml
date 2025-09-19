@@ -15,12 +15,12 @@
       visible: false
     - state: clipboard_over
   - type: Item
-    sprite:  _RMC14/Objects/Misc/clipboard.rsi
+    sprite: _RMC14/Objects/Misc/clipboard.rsi
     size: Small
   - type: Clothing
     slots: [belt]
     quickEquip: false
-    sprite:  _RMC14/Objects/Misc/clipboard.rsi
+    sprite: _RMC14/Objects/Misc/clipboard.rsi
   - type: ItemMapper
     mapLayers:
       clipboard_paper:
