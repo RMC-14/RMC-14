@@ -29,6 +29,7 @@ rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
 rmc-playtime-tracker-job-name-survivor-military = Military Survivor
 rmc-playtime-tracker-job-name-survivor-co = Survivor CO
 rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
+rmc-playtime-tracker-job-name-survivor-clf = CLF Survivor
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
@@ -271,13 +272,17 @@ rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
 
 # CLF SURVIVORS
 
-rmc-job-name-clf-survivor-soldier = CLF Survivor
+rmc-job-name-clf-survivor-soldier = CLF Survivor 
+rmc-job-prefix-clf-survivor-soldier = CLF GRL
 
 rmc-job-name-clf-survivor-medic = CLF Survivor Medic
+rmc-job-prefix-clf-survivor-medic = CLF MED
 
 rmc-job-name-clf-survivor-engineer = CLF Survivor Engineer
+rmc-job-prefix-clf-survivor-engineer = CLF TECH
 
 rmc-job-name-clf-survivor-commander = CLF Survivor Leader
+rmc-job-prefix-clf-survivor-commander = CLF LDR
 
 rmc-job-greeting-clf-survivor = You are a CLF member running a smuggling operation!
 

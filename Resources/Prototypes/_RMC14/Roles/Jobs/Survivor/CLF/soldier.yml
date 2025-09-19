@@ -24,7 +24,7 @@
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
     - type: JobPrefix
-      prefix: cm-job-prefix-clf-soldier
+      prefix: rmc-job-prefix-clf-survivor-soldier
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCLF
   hidden: true

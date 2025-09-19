@@ -23,7 +23,7 @@
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
     - type: JobPrefix
-      prefix: cm-job-prefix-clf-engineer
+      prefix: rmc-job-prefix-clf-survivor-engineer
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCLF
   hidden: true
