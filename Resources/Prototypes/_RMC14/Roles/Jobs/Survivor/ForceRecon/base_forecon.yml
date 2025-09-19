@@ -57,9 +57,9 @@
     # todo walkman and casette
     # todo deck of cards
     randomWeapon:
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
+    - [ RMCM4A4BeltFilled ]
+    - [ RMCM4A4BeltFilled ]
+    - [ RMCM4A4BeltFilled ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
 
