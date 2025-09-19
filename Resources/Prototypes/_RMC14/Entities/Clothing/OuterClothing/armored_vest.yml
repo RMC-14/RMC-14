@@ -85,6 +85,9 @@
       - RMCSyringeCase
   - type: RMCNameItemOnVend
     item: Armor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 # mild melee armor
 - type: entity
