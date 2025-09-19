@@ -392,7 +392,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     };
 
                     promoteButton.OnPressed += _ =>
-                        SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id, squad.LeaderIcon));
+                        SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id, squad.HasLeaderIcon, squad.LeaderIcon));
 
                     var hide = CreatePanel(50);
                     hideButton.Margin = margin;
