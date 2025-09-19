@@ -22,7 +22,7 @@
         amount: 3
       - id: WeaponSMGM63
         amount: 3
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary ammunition
       entries:

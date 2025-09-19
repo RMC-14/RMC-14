@@ -306,13 +306,13 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     private void OnVendorDestruction(Entity<CMAutomatedVendorComponent> vendor, ref DestructionEventArgs args)
     {
         if (vendor.Comp.EjectContentsOnDestruction)
-            EjectAllVendorContents(vendor.Owner, vendor.Comp);
+            EjectAllVendorContents(vendor);
     }
 
-    private void EjectAllVendorContents(EntityUid uid, CMAutomatedVendorComponent component)
+    private void EjectAllVendorContents(Entity<CMAutomatedVendorComponent> vendor)
     {
         // Get all available items with their quantity
-        var inventory = GetAvailableInventoryWithAmounts(component);
+        var inventory = GetAvailableInventoryWithAmounts(vendor.Comp);
 
         foreach (var (itemId, amount) in inventory)
         {
@@ -320,7 +320,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             for (int i = 0; i < amount; i++)
             {
                 // Create item near the vendor
-                var coords = Transform(uid).Coordinates;
+                var coords = Transform(vendor).Coordinates;
                 var spawnedItem = Spawn(itemId, coords);
 
                 // Throw in a random direction with a random force
