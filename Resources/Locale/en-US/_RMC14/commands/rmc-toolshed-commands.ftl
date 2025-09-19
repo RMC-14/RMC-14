@@ -77,5 +77,5 @@ command-description-hijack-trigger = Triggers hijack on the map that you are cur
 
 command-description-setoperationname = Changes the name of the operation for the upcoming round.
 
-command-description-animationtest-setlayerstate = Pls DrSmugLeaf
-command-description-animationtest-flick = I dunno what they do
+command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
+command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.
