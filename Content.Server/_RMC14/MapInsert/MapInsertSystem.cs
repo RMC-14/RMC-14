@@ -14,6 +14,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
@@ -36,20 +37,10 @@ public sealed class MapInsertSystem : EntitySystem
 
     private MapId? _map;
     private int _index;
+    private float _mergeOffset = 999f;
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
     private readonly HashSet<EntityUid> _immuneEnts = new();
-
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-    }
-
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
-    {
-        _map = null;
-        _index = 0;
-    }
 
     public string SelectMapScenario(List<RMCNightmareScenario> scenarioList)
     {
@@ -106,19 +97,6 @@ public sealed class MapInsertSystem : EntitySystem
             return;
         }
 
-        if (_map == null)
-        {
-            _mapSystem.CreateMap(out var mapId);
-            _map = mapId;
-        }
-
-        var offset = new Vector2(_index * 50, _index * 50);
-        _index++;
-
-        if (!_mapLoader.TryLoadGrid(_map.Value, spawn, out var grid, offset: offset))
-            return;
-
-        var insertGrid = grid.Value;
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
         if (mainGrid == null)
@@ -126,6 +104,11 @@ public sealed class MapInsertSystem : EntitySystem
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
+
+        if (!_mapLoader.TryLoadGrid(xform.MapID, spawn, out var grid, offset: coordinatesi + new Vector2(_mergeOffset)))
+            return;
+
+        var insertGrid = grid.Value;
 
         //Replace areas
         if (ent.Comp.ReplaceAreas)
@@ -147,12 +130,10 @@ public sealed class MapInsertSystem : EntitySystem
         }
 
         // Clear all entities on map in insert area
-        _transform.SetMapCoordinates(insertGrid, coordinates);
         MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
 
         // Merge grids
         // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
-        _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
 
         //Decals not handled in Merge(), so do it here
         if (!TryComp(insertGrid, out DecalGridComponent? insertDecalGrid))
@@ -162,11 +143,16 @@ public sealed class MapInsertSystem : EntitySystem
         {
             foreach (var (decalUid, decal) in chunk.Decals)
             {
-                _decals.SetDecalPosition(insertGrid, decalUid, new(mainGrid.Value, decal.Coordinates + coordinatesi));
+                _decals.SetDecalPosition(insertGrid, decalUid, new EntityCoordinates(mainGrid.Value, decal.Coordinates + coordinatesi));
             }
         }
 
-        _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+        // Need delay to allow physics to settle, otherwise entities get pushed around
+        Timer.Spawn(TimeSpan.FromMilliseconds(50),
+            () =>
+            {
+                _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+            });
 
         QueueDel(ent);
     }
@@ -191,6 +177,7 @@ public sealed class MapInsertSystem : EntitySystem
             var aabb = fixture.Shape.ComputeAABB(transform, 0);
 
             aabb = aabb.Enlarged(-0.05f);
+            aabb = aabb.Translated(new Vector2(-_mergeOffset));
             _lookupEnts.Clear();
             _immuneEnts.Clear();
             // TODO: Ideally we'd query first BEFORE moving grid but needs adjustments above.
