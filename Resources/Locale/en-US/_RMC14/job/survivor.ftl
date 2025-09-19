@@ -29,6 +29,7 @@ rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
 rmc-playtime-tracker-job-name-survivor-military = Military Survivor
 rmc-playtime-tracker-job-name-survivor-co = Survivor CO
 rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
+rmc-playtime-tracker-job-name-survivor-clf = CLF Survivor
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
@@ -252,3 +253,41 @@ CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
 cm-job-prefix-survivor-riot-officer = UN RO
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
+
+# Kutjevo Refinery Survs
+
+rmc-job-name-survivor-kutjevo-chaplain = Kutjevo Chaplain
+
+rmc-job-name-survivor-kutjevo-corporate = Kutjevo Corporate Liaison
+
+rmc-job-name-survivor-kutjevo-doctor = Kutjevo Doctor
+
+rmc-job-name-survivor-kutjevo-engineer = Kutjevo Engineer
+
+rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
+
+rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
+
+rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# CLF SURVIVORS
+
+rmc-job-name-clf-survivor-soldier = CLF Guerilla
+rmc-job-prefix-clf-survivor-soldier = CLF GRL
+
+rmc-job-name-clf-survivor-medic = CLF Field Medic
+rmc-job-prefix-clf-survivor-medic = CLF MED
+
+rmc-job-name-clf-survivor-engineer = CLF Field Technician
+rmc-job-prefix-clf-survivor-engineer = CLF TECH
+
+rmc-job-name-clf-survivor-commander = CLF Cell Leader
+rmc-job-prefix-clf-survivor-commander = CLF LDR
+
+rmc-job-greeting-clf-survivor = You are a CLF member running a smuggling operation!
+
+  You are NOT aware of the xenonid threat.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#ce1e1e][font size=16]HOSTILE to the UNMC![/font][/color][/bold]
