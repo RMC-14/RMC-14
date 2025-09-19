@@ -446,16 +446,6 @@
     upgrades: null
     startingMagazine: RMCMagazineSentryFire
     magazineTag: RMCMagazineSentryFire
-    
-- type: entity
-  parent: RMCTurretGaussDumb
-  id: RMCTurretGaussDumbCLF
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CLF
-  - type: UserIFF
-    faction: FactionCLF
 
 - type: entity
   parent: RMCBaseSentry
