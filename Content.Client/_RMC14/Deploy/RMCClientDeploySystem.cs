@@ -9,31 +9,33 @@ namespace Content.Client._RMC14.Deploy;
 /// <summary>
 /// Client-side system for handling deploy area overlays and related network events during deployment.
 /// </summary>
-public sealed class RCMClientlDeploySystem : EntitySystem
+public sealed class RMCClientDeploySystem : EntitySystem
 {
-    private RMCDeployAreaOverlay? _overlay;
+    [Dependency] private readonly IOverlayManager _overlayManager = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeNetworkEvent<RMCShowDeployAreaEvent>(OnShowDeployArea);
         SubscribeNetworkEvent<RMCHideDeployAreaEvent>(OnHideDeployArea);
-
-        _overlay = new RMCDeployAreaOverlay();
-        IoCManager.Resolve<IOverlayManager>().AddOverlay(_overlay);
+        SubscribeLocalEvent<RMCDeployableComponent, ComponentShutdown>(OnDeployableShutdown);
     }
 
     private void OnShowDeployArea(RMCShowDeployAreaEvent ev)
     {
-        if (_overlay == null) return;
-        _overlay.Box = ev.Box;
-        _overlay.Color = ev.Color;
-        _overlay.Visible = true;
+        var overlay = new RMCDeployAreaOverlay();
+        overlay.Box = ev.Box;
+        overlay.Color = ev.Color;
+        _overlayManager.AddOverlay(overlay);
     }
 
     private void OnHideDeployArea(RMCHideDeployAreaEvent ev)
     {
-        if (_overlay == null) return;
-        _overlay.Visible = false;
+        _overlayManager.RemoveOverlay<RMCDeployAreaOverlay>();
+    }
+
+    private void OnDeployableShutdown(Entity<RMCDeployableComponent> entity, ref ComponentShutdown args)
+    {
+        _overlayManager.RemoveOverlay<RMCDeployAreaOverlay>();
     }
 }

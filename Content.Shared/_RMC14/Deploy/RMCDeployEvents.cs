@@ -17,7 +17,7 @@ public sealed class RMCShowDeployAreaEvent(Box2 box, Color color) : EntityEventA
 /// Event to hide the deploy area highlight/overlay from the client.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class RMCHideDeployAreaEvent : EntityEventArgs { }
+public sealed class RMCHideDeployAreaEvent : EntityEventArgs;
 
 /// <summary>
 /// DoAfter event for the deploy process, contains the area being deployed to.
@@ -37,7 +37,4 @@ public sealed partial class RMCDeployDoAfterEvent : DoAfterEvent
 /// DoAfter event for the collapse (packing up) process of a deployed entity.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class RMCParentalCollapseDoAfterEvent : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => new RMCParentalCollapseDoAfterEvent();
-}
+public sealed partial class RMCParentalCollapseDoAfterEvent : SimpleDoAfterEvent;
