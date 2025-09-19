@@ -1,8 +1,5 @@
 using Content.Shared._RMC14.Deploy;
 using Robust.Client.Graphics;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
-using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Deploy;
 
@@ -18,7 +15,6 @@ public sealed class RMCClientDeploySystem : EntitySystem
         base.Initialize();
         SubscribeNetworkEvent<RMCShowDeployAreaEvent>(OnShowDeployArea);
         SubscribeNetworkEvent<RMCHideDeployAreaEvent>(OnHideDeployArea);
-        SubscribeLocalEvent<RMCDeployableComponent, ComponentShutdown>(OnDeployableShutdown);
     }
 
     private void OnShowDeployArea(RMCShowDeployAreaEvent ev)
@@ -30,11 +26,6 @@ public sealed class RMCClientDeploySystem : EntitySystem
     }
 
     private void OnHideDeployArea(RMCHideDeployAreaEvent ev)
-    {
-        _overlayManager.RemoveOverlay<RMCDeployAreaOverlay>();
-    }
-
-    private void OnDeployableShutdown(Entity<RMCDeployableComponent> entity, ref ComponentShutdown args)
     {
         _overlayManager.RemoveOverlay<RMCDeployAreaOverlay>();
     }

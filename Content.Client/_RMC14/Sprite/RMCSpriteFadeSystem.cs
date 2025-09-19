@@ -48,24 +48,24 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
         _fadingQuery = GetEntityQuery<RMCFadingSpriteComponent>();
         _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
-        SubscribeLocalEvent<RMCFadingSpriteComponent, ComponentShutdown>(OnFadingShutdown);
+        SubscribeLocalEvent<RMCFadingSpriteComponent, ComponentRemove>(OnFadingRemove);
     }
 
-    private void OnFadingShutdown(EntityUid uid, RMCFadingSpriteComponent component, ComponentShutdown args)
+    private void OnFadingRemove(Entity<RMCFadingSpriteComponent> entity, ref ComponentRemove args)
     {
-        if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
+        if (MetaData(entity).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(entity, out var sprite))
             return;
 
         // Restore original sprite alpha
-        _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
+        _sprite.SetColor((entity, sprite), sprite.Color.WithAlpha(entity.Comp.OriginalAlpha));
 
         // Restore original layer alphas
-        foreach (var (layerKey, originalAlpha) in component.OriginalLayerAlphas)
+        foreach (var (layerKey, originalAlpha) in entity.Comp.OriginalLayerAlphas)
         {
-            if (_sprite.LayerMapTryGet((uid, sprite), layerKey, out var layerIndex, true))
+            if (_sprite.LayerMapTryGet((entity, sprite), layerKey, out var layerIndex, true))
             {
                 var layer = sprite[layerIndex];
-                _sprite.LayerSetColor((uid, sprite), layerIndex, layer.Color.WithAlpha(originalAlpha));
+                _sprite.LayerSetColor((entity, sprite), layerIndex, layer.Color.WithAlpha(originalAlpha));
             }
         }
     }
@@ -97,7 +97,6 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 {
                     if (ent == player || !_fadeQuery.HasComponent(ent) || !_spriteQuery.TryGetComponent(ent, out var sprite) || sprite.DrawDepth < playerSprite.DrawDepth)
                         continue;
-
 
 
                     if (excludeBB && _fixturesQuery.TryComp(ent, out var body))
