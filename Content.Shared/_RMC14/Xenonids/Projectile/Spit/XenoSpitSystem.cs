@@ -24,6 +24,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -99,6 +100,7 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<UserAcidedComponent, ComponentRemove>(OnUserAcidedRemove);
         SubscribeLocalEvent<UserAcidedComponent, ShowFireAlertEvent>(OnUserAcidedShowFireAlert);
         SubscribeLocalEvent<UserAcidedComponent, VaporHitEvent>(OnUserAcidedVaporHit);
+        SubscribeLocalEvent<UserAcidedComponent, MobStateChangedEvent>(OnUserAcidedMobStateChanged);
 
         SubscribeLocalEvent<InventoryComponent, HitBySlowingSpitEvent>(_inventory.RelayEvent);
 
@@ -383,14 +385,23 @@ public sealed class XenoSpitSystem : EntitySystem
                 continue;
 
             if (--ent.Comp.ResistsNeeded <= 0)
+            {
                 RemCompDeferred<UserAcidedComponent>(ent);
+            }
             else
             {
                 ent.Comp.AllowVaporHitAfter = _timing.CurTime + ent.Comp.ExtinguishGracePeriod;
                 Dirty(ent);
             }
+
             break;
         }
+    }
+
+    private void OnUserAcidedMobStateChanged(Entity<UserAcidedComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+            RemCompDeferred<UserAcidedComponent>(ent);
     }
 
     public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
