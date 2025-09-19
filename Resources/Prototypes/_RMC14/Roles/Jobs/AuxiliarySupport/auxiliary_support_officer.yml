@@ -20,6 +20,9 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobIntelOfficer
+    time: 18000 # 5 hours
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
@@ -32,7 +35,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 13
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ASO
   roleWeight: 0.25
