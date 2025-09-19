@@ -17,5 +17,5 @@
     - id: RNMCF99BehemothSniperRifle
     - id: RMCBinoculars
   - type: CMChangeUserOnVend
-  addComponents:
-  - type: SniperWhitelist
+    addComponents:
+    - type: SniperWhitelist

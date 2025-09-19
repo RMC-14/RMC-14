@@ -29,15 +29,14 @@
     scatterWielded: 0
     baseFireRate: 0.185
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 2.2
+    accuracyMultiplier: 2.5
   - type: WieldDelay
-    baseDelay: 1.2
+    baseDelay: 1
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
       tags:
       - RNMCBulletElephant
-      - RNMCBulletElephantEXP
     proto: RNMCBulletElephant
     capacity: 1
   - type: GunUserWhitelist
@@ -50,9 +49,19 @@
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: AimedShot
-    aimDuration: 1.5
-    aimedShotCooldown: 4
+    aimDuration: 2
+    aimedShotCooldown: 5
   - type: RMCFocusedShooting
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: true
+    openSound:
+      path: "/Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg"
+    closeSound:
+      path: "/Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg"
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
 
 - type: entity
   parent: CMCartridgeSniper10x28mm
@@ -76,13 +85,13 @@
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 225
+        Piercing: 230
         Structural: 1275
   - type: CMArmorPiercing
     amount: 65
   - type: RMCStunOnHit
     maxRange: 3
-    stunTime: 0.8
+    stunTime: 0.5
   - type: RMCPenetratingProjectile
   - type: RMCStoppingPower
   - type: AimedShotEffect
