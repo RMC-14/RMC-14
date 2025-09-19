@@ -492,6 +492,36 @@
           Quantity: 90
 
 - type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorMeraBic15
+  suffix: MeraBic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 45
+        - ReagentId: CMBicaridine
+          Quantity: 45
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorKeloDerma15
+  suffix: KeloDerma
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 45
+        - ReagentId: CMDermaline
+          Quantity: 45
+
+- type: entity
   parent: CMAutoInjectorBase
   id: RMCMedicAutoInjectorBase
   abstract: true
