@@ -38,7 +38,7 @@ public sealed partial class MortarComponent : Component
     public Vector2i Dial;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FireDelay = TimeSpan.FromSeconds(9);
+    public TimeSpan FireDelay = TimeSpan.FromSeconds(0);
 
     [DataField, AutoNetworkedField]
     public int TilesPerOffset = 20;
