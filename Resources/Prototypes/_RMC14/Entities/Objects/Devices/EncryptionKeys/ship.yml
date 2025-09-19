@@ -377,7 +377,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCargotech
-  name: cargo tech encryption key
+  name: req tech encryption key
   components:
   - type: EncryptionKey
     channels:
