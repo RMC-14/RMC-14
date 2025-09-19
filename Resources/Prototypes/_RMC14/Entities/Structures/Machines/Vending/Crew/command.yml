@@ -981,7 +981,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
