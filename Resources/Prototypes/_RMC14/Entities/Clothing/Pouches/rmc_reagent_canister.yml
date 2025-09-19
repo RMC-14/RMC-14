@@ -124,3 +124,39 @@
           tags:
           - PressurizedCanister
         insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterMeraBic
+  suffix: MeraBic
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorMeraBic15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterMeraBic
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterKeloDerma
+  suffix: KeloDerma
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorKeloDerma15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterMeraBic
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
