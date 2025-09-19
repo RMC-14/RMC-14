@@ -69,11 +69,13 @@
   id: RMCRankWeYaLegalSpecialist
   name: Legal Specialist
   prefix: Legal Spc.
+  paygrade: WYC5
 
 - type: rank
   id: RMCRankWeYaLegalSupervisor
   name: Legal Supervisor
   prefix: Legal Spvsr.
+  paygrade: WYC6
 
 # Pilots
 - type: rank
