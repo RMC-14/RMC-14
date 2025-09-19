@@ -108,6 +108,8 @@ public sealed class RMCDeploySystem : EntitySystem
             // Sending an event to display the deployment area on the client
             if (_netManager.IsServer)
             {
+                ent.Comp.CurrentDeployUser = user;
+                Dirty(ent);
                 var showEvent = new RMCShowDeployAreaEvent(
                     area,
                     Color.Blue
@@ -128,6 +130,8 @@ public sealed class RMCDeploySystem : EntitySystem
 
         if (ev.Cancelled || ev.Handled)
         {
+            ent.Comp.CurrentDeployUser = null;
+            Dirty(ent);
             RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ev.Args.User);
             return;
         }
@@ -155,6 +159,8 @@ public sealed class RMCDeploySystem : EntitySystem
         // Perform deployment
         DeploySetups(ent, areaCenter, user);
 
+        ent.Comp.CurrentDeployUser = null;
+        Dirty(ent);
         RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ev.Args.User);
     }
 
@@ -421,13 +427,13 @@ public sealed class RMCDeploySystem : EntitySystem
     /// Called when a original entity is being deleted or its component is removed.
     /// Handles cleanup and possible deletion of related entities.
     /// </summary>
-    /// <remarks>
-    /// The method is mainly needed in the rare event when someone decided to remove a component from the original entity.
-    /// </remarks>
     private void OnDeployableShutdown(Entity<RMCDeployableComponent> ent, ref ComponentShutdown args)
     {
         if (_netManager.IsClient)
             return;
+
+        if (ent.Comp.CurrentDeployUser != null)
+            RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ent.Comp.CurrentDeployUser.Value);
 
         var toDelete = new List<EntityUid>();
         var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();

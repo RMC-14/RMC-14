@@ -59,6 +59,12 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     [DataField, AutoNetworkedField]
     public EntProtoId? CollapseToolPrototype;
 
+    /// <summary>
+    /// The current person deploying this entity (regardless of success).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? CurrentDeployUser;
+
 
     void ISerializationHooks.AfterDeserialization()
     {
