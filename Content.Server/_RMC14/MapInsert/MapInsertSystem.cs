@@ -27,7 +27,6 @@ public sealed class MapInsertSystem : EntitySystem
     [Dependency] private readonly GridFixtureSystem _fixture = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -35,8 +34,6 @@ public sealed class MapInsertSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
 
-    private MapId? _map;
-    private int _index;
     private float _mergeOffset = 999f;
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
@@ -105,9 +102,9 @@ public sealed class MapInsertSystem : EntitySystem
         coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
+        // _mergeOfset is needed to make sure the grid isn't overlapping the destination, otherwise causes issues
         if (!_mapLoader.TryLoadGrid(xform.MapID, spawn, out var grid, offset: coordinatesi + new Vector2(_mergeOffset)))
             return;
-
         var insertGrid = grid.Value;
 
         //Replace areas
@@ -131,9 +128,6 @@ public sealed class MapInsertSystem : EntitySystem
 
         // Clear all entities on map in insert area
         MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
-
-        // Merge grids
-        // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
 
         //Decals not handled in Merge(), so do it here
         if (!TryComp(insertGrid, out DecalGridComponent? insertDecalGrid))
