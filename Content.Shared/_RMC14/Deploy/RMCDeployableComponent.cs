@@ -3,6 +3,7 @@ using Robust.Shared.Physics.Collision.Shapes;
 using System.Numerics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -65,6 +66,17 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     [DataField, AutoNetworkedField]
     public EntityUid? CurrentDeployUser;
 
+    /// <summary>
+    /// Sound played after a successful deployment.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? DeploySound = new SoundPathSpecifier("/Audio/Items/shovel_dig.ogg");
+
+    /// <summary>
+    /// Sound played after a successful collapse.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? CollapseSound = new SoundPathSpecifier("/Audio/Items/shovel_dig.ogg");
 
     void ISerializationHooks.AfterDeserialization()
     {

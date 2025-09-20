@@ -17,10 +17,10 @@ using Robust.Shared.Prototypes;
 using Content.Shared.Destructible;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Buckle;
-using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Spray;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -39,6 +39,7 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private List<EntityUid> _toDelete = [];
 
@@ -173,6 +174,9 @@ public sealed class RMCDeploySystem : EntitySystem
 
         // Perform deployment
         DeploySetups(ent, areaCenter, user);
+
+        if (ent.Comp.DeploySound != null)
+            _audio.PlayPvs(ent.Comp.DeploySound, user);
 
         ent.Comp.CurrentDeployUser = null;
         Dirty(ent);
@@ -615,6 +619,9 @@ public sealed class RMCDeploySystem : EntitySystem
                 // Add to the storage container of the original entity
                 _container.Insert(childUid, origStorage);
             }
+
+            if (deployable.CollapseSound != null)
+                _audio.PlayPvs(deployable.CollapseSound, user);
         }
     }
 
