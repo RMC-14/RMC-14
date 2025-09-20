@@ -15,6 +15,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Strip;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Fireman;
@@ -53,6 +54,8 @@ public sealed class FiremanCarrySystem : EntitySystem
         SubscribeLocalEvent<CanFiremanCarryComponent, PullSlowdownAttemptEvent>(OnCarrierPullSlowdownAttempt);
         SubscribeLocalEvent<CanFiremanCarryComponent, MobStateChangedEvent>(OnCarrierMobStateChanged);
         SubscribeLocalEvent<CanFiremanCarryComponent, RMCPullToggleEvent>(OnCarrierPullToggle);
+
+        SubscribeLocalEvent<BeingFiremanCarriedComponent, PreventCollideEvent>(OnBeingCarriedPreventCollide);
     }
 
     private void OnCarriableCanDrag(Entity<FiremanCarriableComponent> ent, ref CanDragEvent args)
@@ -118,6 +121,8 @@ public sealed class FiremanCarrySystem : EntitySystem
         ent.Comp.BeingCarried = true;
         Dirty(ent);
 
+        EnsureComp<BeingFiremanCarriedComponent>(ent);
+
         carrier.Carrying = ent;
         Dirty(user, carrier);
 
@@ -179,14 +184,15 @@ public sealed class FiremanCarrySystem : EntitySystem
         args.Handled = true;
 
         ent.Comp.BeingCarried = false;
+        RemCompDeferred<BeingFiremanCarriedComponent>(ent);
 
-        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller))
-        {
-            StopCarry(puller, (ent, ent));
-            var selfMsg = Loc.GetString("rmc-pull-break-finish-self", ("puller", puller));
-            var othersMsg = Loc.GetString("rmc-pull-break-finish-others", ("puller", puller), ("pulled", ent));
-            _popup.PopupPredicted(selfMsg, othersMsg, ent, ent, PopupType.MediumCaution);
-        }
+        if (!_rmcPulling.IsBeingPulled(ent.Owner, out var puller))
+            return;
+
+        StopCarry(puller, (ent, ent));
+        var selfMsg = Loc.GetString("rmc-pull-break-finish-self", ("puller", puller));
+        var othersMsg = Loc.GetString("rmc-pull-break-finish-others", ("puller", puller), ("pulled", ent));
+        _popup.PopupPredicted(selfMsg, othersMsg, ent, ent, PopupType.MediumCaution);
     }
 
     private void OnCarriablePullStarted(Entity<FiremanCarriableComponent> ent, ref PullStartedMessage args)
@@ -271,6 +277,11 @@ public sealed class FiremanCarrySystem : EntitySystem
         }
     }
 
+    private void OnBeingCarriedPreventCollide(Entity<BeingFiremanCarriedComponent> ent, ref PreventCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
     private void StopPull(Entity<CanFiremanCarryComponent> ent, EntityUid target)
     {
         if (_timing.ApplyingState)
@@ -296,20 +307,22 @@ public sealed class FiremanCarrySystem : EntitySystem
             _rmcSprite.SetRenderOrder(user, 0);
         }
 
-        if (targetNullable is { } target)
+        if (targetNullable is not { } target)
+            return;
+
+        if (Resolve(target, ref target.Comp, false))
         {
-            if (Resolve(target, ref target.Comp, false))
-            {
-                target.Comp.BeingCarried = false;
-                Dirty(target);
+            target.Comp.BeingCarried = false;
+            Dirty(target);
 
-                if (carrying == target)
-                    _toReparent.Add((target, user));
-            }
+            RemCompDeferred<BeingFiremanCarriedComponent>(target);
 
-            _standing.Stand(target);
-            _actionBlocker.UpdateCanMove(target);
+            if (carrying == target)
+                _toReparent.Add((target, user));
         }
+
+        _standing.Stand(target);
+        _actionBlocker.UpdateCanMove(target);
     }
 
     private bool IsBeingAggressivelyGrabbed(EntityUid target)
