@@ -101,15 +101,18 @@ public sealed class SkillPamphletSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
 
             var usedSkillComp = EnsureComp<UsedSkillPamphletComponent>(args.User);
-            usedSkillComp.Icon = ent.Comp.GiveIcon;
-            usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
+            if (ent.Comp.GiveIcon != null)
+                usedSkillComp.Icon = ent.Comp.GiveIcon;
+            if (ent.Comp.GiveJobTitle != null)
+                usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
             if (!ent.Comp.BypassLimit)
                 usedSkillComp.Used = true;
 
             Dirty(args.User, usedSkillComp);
 
             var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(args.User);
-            mapBlip.Icon = ent.Comp.GiveMapBlip;
+            if (ent.Comp.GiveMapBlip != null)
+                mapBlip.Icon = ent.Comp.GiveMapBlip;
             Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
