@@ -1,0 +1,25 @@
+- type: entity # RNMC-14 - Replacement for missing RMC-14 entity prototype. Remove when upstream arrives and make sure to replace paths to RMC-14 paths.
+  parent: RMCAttachableBase
+  id: RNMCAttachmentM54CE2Stock
+  name: M54CE2 solid stock
+  description: Intergrated into the M54CE2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+    state: stock
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/jungle.rsi
+      Desert: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+      Snow: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/snow.rsi
+      Classic: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/classic.rsi
+      Urban: _RNMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/urban.rsi
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RNMCAttachmentM54CE2Stock
+
+- type: Tag # RNMC-14 - Replacement for missing RMC-14 tag prototype. Remove when upstream arrives and make sure to replace paths to RMC-14 paths.
+  id: RNMCAttachmentM54CE2Stock
