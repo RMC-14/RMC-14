@@ -411,19 +411,19 @@ public sealed partial class XenoSystem : EntitySystem
 
         FixedPoint2 multiplier;
         if (_mobState.IsCritical(xeno))
-            multiplier = xeno.Comp.RestHealMultiplier; // TODO RMC14
+            multiplier = xeno.Comp.CritHealMultiplier;
         else if (_standing.IsDown(xeno) || HasComp<XenoRestingComponent>(xeno))
             multiplier = xeno.Comp.RestHealMultiplier;
         else
             multiplier = xeno.Comp.StandHealingMultiplier;
 
         var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
-        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0);
+        var recovery = CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0;
         if (!CanHeal(xeno))
             recovery = FixedPoint2.Zero;
 
         var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
-        return (passiveHeal + recoveryHeal) * multiplier / 2; // TODO RMC14 add Strain based multiplier for Gardener Drone
+        return (passiveHeal + recoveryHeal) * multiplier / 2;
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
