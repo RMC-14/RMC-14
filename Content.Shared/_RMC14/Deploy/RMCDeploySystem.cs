@@ -15,6 +15,12 @@ using Content.Shared.Foldable;
 using Content.Shared.Examine;
 using Robust.Shared.Prototypes;
 using Content.Shared.Destructible;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Spray;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -29,8 +35,10 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
 
     private List<EntityUid> _toDelete = [];
 
@@ -70,6 +78,13 @@ public sealed class RMCDeploySystem : EntitySystem
     {
         var uid = ent.Owner;
         var comp = ent.Comp;
+
+        if (HasAnyAcid(uid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-deploy-popup-acid", ("entity", ent)), uid, user, PopupType.SmallCaution);
+            return;
+        }
+
         // Get the grid and the grid component
         var gridUid = _xform.GetGrid(user);
         if (!TryComp<MapGridComponent>(gridUid, out var grid))
@@ -98,7 +113,7 @@ public sealed class RMCDeploySystem : EntitySystem
             BreakOnDamage = true,
             BreakOnHandChange = true,
             NeedHand = true,
-            AttemptFrequency = comp.AreaBlockedCheck ? AttemptFrequency.EveryTick : AttemptFrequency.Never
+            AttemptFrequency = AttemptFrequency.EveryTick
         };
 
         var started = _doAfter.TryStartDoAfter(doAfter);
@@ -310,6 +325,14 @@ public sealed class RMCDeploySystem : EntitySystem
         var uid = ent.Owner;
         var user = args.Event.User;
         var area = args.Event.Area;
+
+        if (HasAnyAcid(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-deploy-popup-acid", ("entity", ent)), user, user, PopupType.SmallCaution);
+            args.Cancel();
+            return;
+        }
+
         if (comp.AreaBlockedCheck && IsAreaBlocked(area, uid, user, ent))
         {
             _popup.PopupEntity(Loc.GetString("rmc-deploy-popup-blocked"), user, user, PopupType.SmallCaution);
@@ -579,6 +602,12 @@ public sealed class RMCDeploySystem : EntitySystem
                 if (childUid == comp.OriginalEntity)
                     continue;
 
+                // Prevents abuse when folding entities in cabinets, etc.
+                EmptyEntityStorage(childUid);
+
+                // Unbuckle all entities strapped to the child entity
+                TryUnbuckleAll(childUid);
+
                 // Fold the entity if it has FoldableComponent (otherwise it won't fit in the container)
                 if (TryComp<FoldableComponent>(childUid, out var foldableComp))
                     _foldable.SetFolded(childUid, foldableComp, true);
@@ -587,6 +616,35 @@ public sealed class RMCDeploySystem : EntitySystem
                 _container.Insert(childUid, origStorage);
             }
         }
+    }
+
+    private void EmptyEntityStorage(EntityUid uid)
+    {
+        if (!TryComp<SharedEntityStorageComponent>(uid, out var storage))
+            return;
+
+        _entityStorage.EmptyContents(uid, storage);
+    }
+
+    /// <summary>
+    /// Method for preventing players from getting caught in a collapsed entity.
+    /// </summary>
+    private void TryUnbuckleAll(EntityUid entity)
+    {
+        if (!TryComp<StrapComponent>(entity, out var strap) || strap.BuckledEntities.Count == 0)
+            return;
+
+        foreach (var buckled in strap.BuckledEntities.ToArray())
+        {
+            _buckle.Unbuckle((buckled, CompOrNull<BuckleComponent>(buckled)), null);
+        }
+    }
+
+    private bool HasAnyAcid(EntityUid uid)
+    {
+        return HasComp<TimedCorrodingComponent>(uid)
+               || HasComp<DamageableCorrodingComponent>(uid)
+               || HasComp<SprayAcidedComponent>(uid);
     }
 
     /// <summary>
