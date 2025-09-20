@@ -603,7 +603,7 @@ public sealed class RMCDeploySystem : EntitySystem
                     continue;
 
                 // Prevents abuse when folding entities in cabinets, etc.
-                EmptyEntityStorage(childUid);
+                _entityStorage.EmptyContents(childUid);
 
                 // Unbuckle all entities strapped to the child entity
                 TryUnbuckleAll(childUid);
@@ -616,14 +616,6 @@ public sealed class RMCDeploySystem : EntitySystem
                 _container.Insert(childUid, origStorage);
             }
         }
-    }
-
-    private void EmptyEntityStorage(EntityUid uid)
-    {
-        if (!TryComp<SharedEntityStorageComponent>(uid, out var storage))
-            return;
-
-        _entityStorage.EmptyContents(uid, storage);
     }
 
     /// <summary>
