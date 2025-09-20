@@ -38,7 +38,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;

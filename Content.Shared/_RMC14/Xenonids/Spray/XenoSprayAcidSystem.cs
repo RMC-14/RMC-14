@@ -31,7 +31,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;

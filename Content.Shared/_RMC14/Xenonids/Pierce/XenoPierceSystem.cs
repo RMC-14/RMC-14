@@ -29,7 +29,7 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
