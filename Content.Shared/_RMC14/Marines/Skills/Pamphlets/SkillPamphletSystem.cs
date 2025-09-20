@@ -114,21 +114,21 @@ public sealed class SkillPamphletSystem : EntitySystem
 
             _squads.UpdateSquadTitle(args.User);
 
+            if (ent.Comp.GivePrefix != null)
+            {
+                var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
+                if (ent.Comp.IsAppendPrefix)
+                    jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
+                else
+                    jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
+
+                Dirty(args.User, jobPrefix);
+            }
+
             if (!_net.IsClient)
                 QueueDel(ent);
 
             return;
-        }
-
-        if (ent.Comp.GivePrefix != null)
-        {
-            var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
-            if (ent.Comp.IsAppendPrefix)
-                jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
-            else
-                jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
-
-            Dirty(args.User, jobPrefix);
         }
 
         _popup.PopupClient(Loc.GetString("rmc-pamphlets-already-know"), ent, args.User);
