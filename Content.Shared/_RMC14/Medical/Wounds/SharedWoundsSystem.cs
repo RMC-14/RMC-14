@@ -374,7 +374,6 @@ public abstract class SharedWoundsSystem : EntitySystem
         var ev = new TreatWoundDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {
-            BreakOnDamage = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
             NeedHand = true,
