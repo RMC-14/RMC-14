@@ -54,7 +54,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCCommando
   name: PMC M5X helmet
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.
@@ -63,14 +63,11 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET
-      - state: equipped-HELMET-Layer
-        shader: unshaded
   - type: Corrodible
     isCorrodible: false
   - type: RMCEarProtection
+  - type: PointLight
+    color: "#e41c1f"
 
 - type: entity
   parent: ArmorHelmetPMC
