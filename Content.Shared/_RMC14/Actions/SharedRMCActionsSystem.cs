@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
-public sealed class RMCActionsSystem : EntitySystem
+public abstract class SharedRMCActionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -17,6 +17,8 @@ public sealed class RMCActionsSystem : EntitySystem
     {
         _actionSharedCooldownQuery = GetEntityQuery<ActionSharedCooldownComponent>();
 
+        SubscribeAllEvent<RMCMissedTargetActionEvent>(OnMissedTargetAction);
+
         SubscribeLocalEvent<ActionSharedCooldownComponent, ActionPerformedEvent>(OnSharedCooldownPerformed);
 
         SubscribeLocalEvent<ActionCooldownComponent, RMCActionUseEvent>(OnCooldownUse);
@@ -24,8 +26,16 @@ public sealed class RMCActionsSystem : EntitySystem
         SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
 
         SubscribeLocalEvent<ActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+    }
 
-        SubscribeAllEvent<RMCMissedTargetActionEvent>(OnMissedTargetAction);
+    private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
+    {
+        var action = GetEntity(args.Action);
+
+        if (!TryComp(action, out RMCCooldownOnMissComponent? cooldown))
+            return;
+
+        _actions.SetIfBiggerCooldown(action, cooldown.MissCooldown);
     }
 
     private void OnSharedCooldownPerformed(Entity<ActionSharedCooldownComponent> ent, ref ActionPerformedEvent args)
@@ -146,16 +156,6 @@ public sealed class RMCActionsSystem : EntitySystem
         _actions.SetIfBiggerCooldown(ent.Owner, ent.Comp.Cooldown);
     }
 
-    private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
-    {
-        var action = GetEntity(args.Action);
-
-        if (!TryComp(action, out RMCCooldownOnMissComponent? cooldown))
-            return;
-
-        _actions.SetIfBiggerCooldown(action, cooldown.MissCooldown);
-    }
-
     private void OnInRangeUnobstructedUseAttempt(Entity<ActionInRangeUnobstructedComponent> ent, ref RMCActionUseAttemptEvent args)
     {
         if (args.Cancelled)
@@ -224,6 +224,15 @@ public sealed class RMCActionsSystem : EntitySystem
         {
             if (_actions.GetEvent(action) is T)
                 yield return action;
+        }
+    }
+
+    public IEnumerable<Entity<ActionComponent, T>> GetActionsWithComp<T>(EntityUid user) where T : IComponent
+    {
+        foreach (var action in _actions.GetActions(user))
+        {
+            if (TryComp(action, out T? comp))
+                yield return (action, action, comp);
         }
     }
 }

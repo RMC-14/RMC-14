@@ -73,7 +73,7 @@ public sealed class XenoAidSystem : EntitySystem
         switch (args.aidType)
         {
             case XenoAidMode.Healing:
-                {
+            {
                 if (!_interaction.InRangeUnobstructed(xeno.Owner, target))
                     return;
 
