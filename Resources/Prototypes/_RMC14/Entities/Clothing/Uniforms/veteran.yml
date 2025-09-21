@@ -58,6 +58,9 @@
   id: RMCJumpsuitVeteranPMCCommando
   name: PMC commando uniform
   description: An armored uniform worn by We-Ya elite commandos. It is well protected while remaining light and comfortable.
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCWhiteout
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]

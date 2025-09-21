@@ -157,9 +157,13 @@
     sprintModifier: 0.666
   - type: Corrodible
     isCorrodible: false
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGunirradiated
 
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCCommando
   name: M5X exoskeleton armor
   description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk.

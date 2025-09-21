@@ -337,20 +337,30 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
+        bool immuneToAP = false;
+        if (TryComp<CMArmorComponent>(ent, out var armorComp))
+        {
+            immuneToAP = armorComp.ImmuneToAP;
+        }
+
         if (HasComp<XenoComponent>(ent))
         {
             ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
-            ev.XenoArmor -= armorPiercing;
+            if (!immuneToAP)
+                ev.XenoArmor -= armorPiercing;
         }
         else
         {
             ev.Melee = (int)(ev.Melee * ev.ArmorModifier);
-            ev.Melee -= armorPiercing;
+            if (!immuneToAP)
+                ev.Melee -= armorPiercing;
 
             ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
-            ev.Bullet -= armorPiercing;
+            if (!immuneToAP)
+                ev.Bullet -= armorPiercing;
 
-            ev.Bio -= armorPiercing;
+            if (!immuneToAP)
+                ev.Bio -= armorPiercing;
         }
 
         if (args.Origin is { } origin)
@@ -556,6 +566,12 @@ public sealed class CMArmorSystem : EntitySystem
                 ("text", text),
                 ("value", value)
             ));
+        }
+
+        if (armorComponent.ImmuneToAP)
+        {
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-examine-armor-piercing-immune"));
         }
 
         return msg;

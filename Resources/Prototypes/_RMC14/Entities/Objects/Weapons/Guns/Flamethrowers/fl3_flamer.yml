@@ -10,6 +10,10 @@
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/fl3.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/fl3.rsi
+    slots:
+    - suitStorage
+    - Back
+    - Belt
   - type: Gun
     soundGunshot:
       collection: RMCFlamerFL3Shoot

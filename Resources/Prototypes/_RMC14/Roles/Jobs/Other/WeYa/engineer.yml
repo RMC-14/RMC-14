@@ -32,7 +32,6 @@
         RMCSkillJtac: 2
         RMCSkillCqc: 1
         RMCSkillPowerLoader: 2
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
   hidden: true
