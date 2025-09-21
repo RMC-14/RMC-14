@@ -70,8 +70,8 @@
   - type: RMCStunOnHit
     maxRange: 6.5
     stunTime: 1
-    superSlowTime: 2
-    slowTime: 6
+    superSlowTime: 1
+    slowTime: 3
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:
