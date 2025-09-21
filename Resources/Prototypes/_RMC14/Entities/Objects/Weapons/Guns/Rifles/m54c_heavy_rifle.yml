@@ -102,7 +102,7 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125
-      rmc-aslot-rail: 0.125, 0.185
+      rmc-aslot-rail: 0.1, 0.185 # RNMC-14
       rmc-aslot-stock: -1, 0 # RNMC-14 - Repositioned to fit stock sprite.
       rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
