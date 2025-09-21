@@ -145,6 +145,45 @@
   materialCost: 2
   restrictedTags: [RMCSeat]
 
+# Squad Chairs
+- type: rmcConstruction
+  id: RMCSquadChairList
+  name: squad chairs
+  prototype: CMChairComfy
+  listed:
+  - RMCComfyChairAlphaBuild
+  - RMCComfyChairBravoBuild
+  - RMCComfyChairCharlieBuild
+  - RMCComfyChairDeltaBuild
+
+- type: rmcConstruction
+  id: RMCComfyChairAlphaBuild
+  name: alpha comfy chair
+  prototype: CMChairComfyAlpha
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairBravoBuild
+  name: bravo comfy chair
+  prototype: CMChairComfyBravo
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairCharlieBuild
+  name: charlie comfy chair
+  prototype: CMChairComfyCharlie
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairDeltaBuild
+  name: delta comfy chair
+  prototype: CMChairComfyDelta
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
 - type: rmcConstruction
   id: RMCMachineFrameBuild
   name: machine frame
