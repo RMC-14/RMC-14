@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/stanalbatross/cmss13/blob/5ec0341de46da68affb18da066c94297ae627e04/icons/obj/items/weapons/guns/attachments.dmi and modified by Merrokitsune for RNMC-14, using sprites taken from RMC-14 at https://github.com/RMC-14/RMC-14/tree/933f4d3367047e041c9b9d7f178b4d58450b5970/Resources/Textures/_RMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m54c-col"
+    },
+    {
+      "name": "m54c-col-on"
+    },
+    {
+      "name": "m54c-col_a"
+    },
+    {
+      "name": "m54c-col_a-on"
+    }
+  ]
+}
