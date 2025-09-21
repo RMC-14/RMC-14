@@ -37,6 +37,13 @@ namespace Content.Shared.Movement.Components
 
         public MoveButtons HeldMoveButtons = MoveButtons.None;
 
+        // RMC smited!
+        /// <summary>
+        /// Change the movement to linear movement.
+        /// </summary>
+        [ViewVariables(VVAccess.ReadWrite)]
+        public bool LinearMovement = false;
+
         /// <summary>
         /// Does our input indicate actual movement, and not just modifiers?
         /// </summary>

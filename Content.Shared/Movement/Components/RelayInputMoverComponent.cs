@@ -8,7 +8,7 @@ namespace Content.Shared.Movement.Components;
 /// Raises the engine movement inputs for a particular entity onto the designated entity
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedMoverController), typeof(SharedLinearMoverController))] // RMC change
+[Access(typeof(SharedMoverController))] // RMC change
 public sealed partial class RelayInputMoverComponent : Component
 {
     [DataField, AutoNetworkedField]

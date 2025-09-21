@@ -94,7 +94,10 @@ public sealed class MoverController : SharedMoverController
 
         foreach (var mover in _movers)
         {
-            HandleMobMovement(mover, frameTime);
+            if (!mover.Comp.LinearMovement)
+                HandleMobMovement(mover, frameTime);
+            else
+                HandleLinearMovement(mover, frameTime);
         }
 
         HandleShuttleMovement(frameTime);
