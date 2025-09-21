@@ -130,7 +130,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -143,11 +143,11 @@
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Desert: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Snow: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Classic: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Urban: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi # RNMC-14, resprited to use new RMC-14 sprites.
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifle
 
@@ -164,7 +164,7 @@
     proto: CMCartridgeRifle10x24mmHT
     capacity: 200
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -210,7 +210,7 @@
     proto: CMCartridgeRifle10x24mmAP
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
