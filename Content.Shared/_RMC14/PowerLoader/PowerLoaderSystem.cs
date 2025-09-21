@@ -27,6 +27,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -111,6 +112,14 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, StunnedEvent>(OnActivePilotStunned);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, MobStateChangedEvent>(OnActivePilotMobStateChanged);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, EntRemovedFromContainerMessage>(OnWeaponPointContainerChanged);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, EntRemovedFromContainerMessage>(OnUtilityPointContainerChanged);
+        SubscribeLocalEvent<DropshipEnginePointComponent, EntRemovedFromContainerMessage>(OnEnginePointContainerChanged);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntRemovedFromContainerMessage>(OnElectronicPointContainerChanged);
+
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, CatchAttemptEvent>(OnPowerLoaderPilotCatchAttempt);
+        SubscribeLocalEvent<PowerLoaderComponent, CatchAttemptEvent>(OnPowerLoaderCatchAttempt);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -1114,6 +1123,39 @@ public sealed class PowerLoaderSystem : EntitySystem
                 RemovePilot((uid, active));
             }
         }
+    }
+
+    private void OnWeaponPointContainerChanged(Entity<DropshipWeaponPointComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        SyncAppearance(ent.Owner);
+    }
+
+    private void OnUtilityPointContainerChanged(Entity<DropshipUtilityPointComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID == ent.Comp.UtilitySlotId)
+            SyncAppearance(ent, ent.Comp.UtilitySlotId);
+    }
+
+    private void OnEnginePointContainerChanged(Entity<DropshipEnginePointComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID == ent.Comp.ContainerId)
+            SyncAppearance(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnElectronicPointContainerChanged(Entity<DropshipElectronicSystemPointComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID == ent.Comp.ContainerId)
+            SyncAppearance(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnPowerLoaderCatchAttempt(Entity<PowerLoaderComponent> loader, ref CatchAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnPowerLoaderPilotCatchAttempt(Entity<ActivePowerLoaderPilotComponent> pilot, ref CatchAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 }
 
