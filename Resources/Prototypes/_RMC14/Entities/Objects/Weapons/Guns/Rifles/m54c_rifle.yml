@@ -259,7 +259,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -285,7 +285,7 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -314,7 +314,7 @@
       - RMCCartridgeRifle10x24mmIncendiary
     proto: RMCCartridgeRifle10x24mmIncendiary
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -341,7 +341,7 @@
       - RMCCartridgeRifle10x24mmHEAP
     proto: RMCCartridgeRifle10x24mmHEAP
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -377,7 +377,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 60
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi # RNMC-14, resprited to use new RMC-14 sprites (that we modified).
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

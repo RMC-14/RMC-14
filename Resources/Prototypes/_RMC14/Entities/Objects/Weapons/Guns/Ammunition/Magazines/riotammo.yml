@@ -17,7 +17,7 @@
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 40
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ceriot.rsi # RNMC-14, resprited.
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ceriot.rsi # RNMC-14, resprited to use new RMC-14 sprites (that we modified).
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
