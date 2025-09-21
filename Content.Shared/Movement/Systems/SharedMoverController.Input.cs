@@ -515,7 +515,7 @@ namespace Content.Shared.Movement.Systems
         }
 
         // Start RMC
-        public (Vector2 Walking, Vector2 Sprinting) GetLinearVelocityInput(LinearInputMoverComponent mover)
+        public (Vector2 Walking, Vector2 Sprinting) GetLinearVelocityInput(InputMoverComponent mover)
         {
             if (!Timing.InSimulation)
             {
