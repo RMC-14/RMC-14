@@ -8,8 +8,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Strap
-    enabled: false
   - type: Physics
     bodyType: Static
   - type: Sprite
