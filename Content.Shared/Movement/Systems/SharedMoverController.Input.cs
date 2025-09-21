@@ -1,4 +1,4 @@
-using System.Numerics;
+using Content.Shared._RMC14.Movement;
 using Content.Shared.Alert;
 using Content.Shared.CCVar;
 using Content.Shared.Follower.Components;
@@ -14,6 +14,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Movement.Systems
 {
@@ -512,6 +513,68 @@ namespace Content.Shared.Movement.Systems
         {
             return (buttons & flag) == flag;
         }
+
+        // Start RMC
+        public (Vector2 Walking, Vector2 Sprinting) GetLinearVelocityInput(LinearInputMoverComponent mover)
+        {
+            if (!Timing.InSimulation)
+            {
+                // Outside of simulation we'll be running client predicted movement per-frame.
+                // So return a full-length vector as if it's a full tick.
+                // Physics system will have the correct time step anyways.
+                var immediateDir = DirLinearVecForButtons(mover.HeldMoveButtons);
+                return mover.Sprinting ? (Vector2.Zero, immediateDir) : (immediateDir, Vector2.Zero);
+            }
+
+            Vector2 walk;
+            Vector2 sprint;
+            float remainingFraction;
+
+            if (Timing.CurTick > mover.LastInputTick)
+            {
+                walk = Vector2.Zero;
+                sprint = Vector2.Zero;
+                remainingFraction = 1;
+            }
+            else
+            {
+                walk = mover.CurTickWalkMovement;
+                sprint = mover.CurTickSprintMovement;
+                remainingFraction = (ushort.MaxValue - mover.LastInputSubTick) / (float)ushort.MaxValue;
+            }
+
+            var curDir = DirLinearVecForButtons(mover.HeldMoveButtons) * remainingFraction;
+
+            if (mover.Sprinting)
+            {
+                sprint += curDir;
+            }
+            else
+            {
+                walk += curDir;
+            }
+
+            // Logger.Info($"{curDir}{walk}{sprint}");
+            return (walk, sprint);
+        }
+
+        public Vector2 DirLinearVecForButtons(MoveButtons buttons)
+        {
+            // key directions are in screen coordinates
+            // _moveDir is in world coordinates
+            // if the camera is moved, this needs to be changed
+
+            int y = 0;
+
+            y -= HasFlag(buttons, MoveButtons.Down) ? 1 : 0;
+            y += HasFlag(buttons, MoveButtons.Up) ? 1 : 0;
+
+            var vec = new Vector2(0, y);
+
+            return vec;
+        }
+
+        // End RMC
 
         private sealed class CameraRotateInputCmdHandler : InputCmdHandler
         {
