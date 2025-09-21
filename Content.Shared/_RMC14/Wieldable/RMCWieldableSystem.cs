@@ -98,8 +98,6 @@ public sealed class RMCWieldableSystem : EntitySystem
                     walkSpeed = wieldable.Comp.Heavy;
                     sprintSpeed = wieldable.Comp.Heavy;
                     break;
-                default:
-                    break;
             }
         }
 
@@ -114,6 +112,7 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         wieldable.Comp.ModifiedWalk = ev.Walk > 0 ? ev.Walk : 0;
         wieldable.Comp.ModifiedSprint = ev.Sprint > 0 ? ev.Sprint : 0;
+        Dirty(wieldable);
 
         RefreshModifiersOnParent(wieldable.Owner);
     }

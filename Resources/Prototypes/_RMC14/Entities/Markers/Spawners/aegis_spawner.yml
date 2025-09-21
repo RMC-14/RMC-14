@@ -1,8 +1,7 @@
 - type: entity
-  abstract: true
   parent: MarkerBase
-  id: RMCAegisSpawnerBase
-  name: AEGIS spawner
+  id: RMCAegisSpawner
+  name: AEGIS crate spawner
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
@@ -10,12 +9,4 @@
     - state: x
     - sprite: _RMC14/Objects/secure_box.rsi
       state: aegis_crate
-  - type: AegisSpawner  
-    spawn: RMCAegisBox
-
-- type: entity
-  parent: RMCAegisSpawnerBase
-  id: RMCAegisSpawner
-  name: AEGIS crate spawner
-  components:
   - type: AegisSpawner

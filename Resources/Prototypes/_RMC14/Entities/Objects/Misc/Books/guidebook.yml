@@ -1,0 +1,51 @@
+# LAWS
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookLawMarine
+  name: marine law
+  description: "Usually being the favorite read of any member of the Military Police of the UNMC, it's whole meaning is to work as the scales for the sword of justice that brandishes onboard the vessels of the United Nations Marine Corps, so peace and order can be maintained. It's nicknames may include but are not limited to: Devil's Red Book, Bible of All Sinners, THE Book, ML, Red Brick, Provost's Torture Manual, Provost's Red Devil's Torture Bible of All Sinners."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/marine_law.rsi
+  - type: GuideHelp
+    guides:
+    - RMCMarineLaw
+
+- type: entity
+  parent: RMCGuidebookLawMarine
+  id: RMCGuidebookLawMarineProvost
+  name: "marine law: limited provost edition"
+  suffix: Guidebook, Admeme
+  components:
+  - type: RMCStaminaDamageOnHit
+    damage: 100
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 1
+  - type: StunOnHit
+    whitelist:
+      components:
+      - Marine
+  - type: StaminaDamageOnHit
+    damage: 35
+    sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnCollide
+    damage: 35
+    sound: /Audio/Weapons/egloves.ogg
+  - type: LandAtCursor
+  - type: UseDelay
+  - type: DisarmMalus
+    malus: 0.225
+
+# SOP
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookSOP
+  name: standard operating procedure
+  description: One of the most important books onboard any United Nations Marine Corps vessel, or at least that's how you are supposed to feel about it. The book carries within it's pages the UNMC guidelines and procedures regarding all kinds of situations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/SOP.rsi
+  - type: GuideHelp
+    guides:
+    - RMCMarineSOP

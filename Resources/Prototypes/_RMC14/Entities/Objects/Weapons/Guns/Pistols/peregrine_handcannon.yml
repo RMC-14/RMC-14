@@ -118,6 +118,7 @@
     tags:
     - Sidearm
     - RMCWeaponPistolHandcannonGold
+  - type: RMCBattleExecute
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
@@ -136,6 +137,7 @@
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
+    doAfterBreakOnMove: false
     ignoreRoof: true
     shakeAmount: 5
     requiredSkills:
@@ -286,23 +288,22 @@
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 70
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
-  parent: CMBulletBase
+  parent: RMCBulletPistolHandcannonHI
   id: RMCBulletPistolHandcannonHIAP
   name: bullet (High Impact Armor Piercing .50)
   components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 45
   - type: CMArmorPiercing
     amount: 50
-  - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
-  - type: RMCProjectileAccuracy
-    accuracy: 70
 
 - type: Tag
   id: RMCWeaponPistolHandcannon

@@ -23,6 +23,10 @@ rmc-emote-howl = howls.
 rmc-emote-name-gnash = Gnash
 rmc-emote-gnash = gnashes.
 
+rmc-emote-name-r-rattle = Rattle Tail
+
+rmc-emote-r-rattle = rattles {POSS-ADJ($entity)} tail.
+
 rmc-emote-name-xeno-roar = Roar
 rmc-emote-name-xeno-tail-swipe = Tail Swipe
 rmc-emote-name-xeno-help = Call for Help

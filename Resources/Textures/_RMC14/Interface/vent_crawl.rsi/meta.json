@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by Vermidia",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "drone"
+    },
+    {
+      "name": "spitter"
+    },
+    {
+      "name": "unknown"
+    },
+    {
+      "name": "vampire"
+    },
+    {
+      "name": "acider"
+    },
+    {
+      "name": "burrower"
+    },
+    {
+      "name": "gardener"
+    },
+    {
+      "name": "healer"
+    },
+    {
+      "name": "larva"
+    },
+    {
+      "name": "lesser"
+    },
+    {
+      "name": "lurker"
+    },
+    {
+      "name": "parasite"
+    },
+    {
+      "name": "runner"
+    },
+    {
+      "name": "sentinel"
+    }
+  ]
+}

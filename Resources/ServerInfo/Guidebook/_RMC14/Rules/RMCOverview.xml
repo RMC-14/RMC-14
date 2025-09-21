@@ -8,13 +8,13 @@
   ## Recent Changes
   Read the relevant sections for the entire text.
 
-  - [textlink="(Survivors Roleplay)" link ="RMCSurvivorRoleplay"] Survivors must accept requests/invitations to board the Almayer for the first time, but are not required to stay after they arrive.
-  - (Roleplay, Survivor/Marines) Survivors must not be hostile in any way to marines. Marines must not antagonize survivors.
-  - [textlink="(Third-Party SOP)" link ="RMCMarineSOPNONModThirdparty"] Most if not all recovered personnel may not become MPs.
-  - [textlink="(Rules)" link ="RMCKindness"] Avoid taking equipment from and/or cryosleeping afk players or players that are dead, but revivable.
-  - [textlink="(Department SOP)" link ="RMCMarineSOPDepartment"] Added "Dropships and Gunships" section.
-  - [textlink="(Marine Roleplay)" link ="RMCMarineRoleplayStandards"] Synthetic/Cyborg characters are not permitted outside the existing role.
-  - [textlink="(Marine Roleplay)" link ="RMCMarineRoleplayStandards"] Do not disrupt the start of the round.
+  - (Current Page) Added Community Rules. These are the same community rules on the Discord.
+  - [textlink="(Non-Mod Department SOP)" link="RMCMarineSOPNONModDepartment"] Access Modification.
+  - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] Clarification: Don't share in-game information with anyone playing, neither in-character or any ooc/external means.
+  - [textlink="(Core Rule 5)" link="RMCKindness"] Be kind to new players, teach them.
+  - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] External communities should not be promoted or advertised.
+  - [textlink="(Marine Law Appeals)" link="RMCMarineLawAppeals"] Clarified who can be delegated to for appeal processing to mean just an uninvolved MP or Officer in all cases.
+  - (Mutinies) Clarified when a mutiny begins, and when someone can participate.
 
   ## Admin Decisions Are Final.
   - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
@@ -22,6 +22,8 @@
   - Do not argue with the staff. You may file an appeal if you feel the decision to be incorrect, not ignore it.
 
   ## Important notes
+
+  ### VPNs
 
   Heavily avoid using a VPN or any similar program to connect or while connected to RMC. You are putting your account at risk, which may result in your account being permanently banned.
   If you have a legitimate reason to use a VPN, you must attempt at least once to connect to the server without a VPN before requesting an exemption for it.
@@ -32,22 +34,33 @@
 
   - [bold]These rules are not the same as other servers, should be read in their entirety.[/bold]
   - [textlink="Ban Types and Durations" link="RMCBanTypes"]
+  - This game has friendly fire mechanics. Avoid shooting your team.
 
   ## Zero Tolerance Rules
   You are liable to be banned without warning for breaking these rules.
   - [textlink="Click here to read the zero tolerance rules." link="RMCZeroTolerance"]
 
-  ## Core Rules
+  ## Core Game Rules
   These are the general rules of RMC14. Click them for more information.
   - [textlink="1. This is a English server, please only use English." link="RMCLanguage"]
   - [textlink="2. Do not use multiple accounts, or alt accounts, and do not share accounts." link="RMCMultikey"]
   - [textlink="3. Follow the rules of escalation against non-hostiles." link="RMCRulesEscalation"]
   - [textlink="4. Don't use information gained from outside your character's knowledge." link="RMCMetaknowledge"]
-  - [textlink="5. Don't antagonize your team, don't harass players." link="RMCKindness"]
+  - [textlink="5. Don't antagonize or harass players." link="RMCKindness"]
   - [textlink="6. Don't quit a command level role without notice." link="RMCCommandRoles"]
   - [textlink="7. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
   - 8. Don't disconnect if you do not get the role/kit you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
+
+  ## Community Rules (All OOC channels)
+
+  - Per the hub rules of SS14, do not speak negatively of other SS14 servers, their community, or staff.
+
+  - Be civil. No harassment/bullying or offensive/abusive/hate speech content that would make the game a hostile space. Avoid political topics.
+
+  - Please do not start heated discussions, including balance issues or roleplay issues, as it is rarely productive with lack of context and information. Missing and new features/fixes and rules can be suggested in the features forum.
+
+  - Do not discuss, complain, or comment about anyone's bans/notes including your own. If you've been banned or disagree with an action, the person involved must make an appeal in our appeals forum where a ruling can be made. It is otherwise assumed that the action is valid and there is no issue.
 
   ## Command and Military Police
   These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).\n[italic]Command roles are defined as; all heads, cic staff, mp, and squad leaders.[/italic]

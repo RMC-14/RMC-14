@@ -16,6 +16,8 @@
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
     closeSound:
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/doublebarrel.rsi
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:

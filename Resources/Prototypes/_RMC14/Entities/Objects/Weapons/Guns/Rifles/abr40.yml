@@ -187,8 +187,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleABR40
-    proto: RMCCartridgeRifleABR40
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
     capacity: 12
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/abr40.rsi
@@ -198,25 +198,11 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
-
-- type: entity
-  parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleABR40
-  name: Cartridge (10x24mm)
-  description: A 10x24mm rifle cartridge
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCCartridgeRifleABR40
-  - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
 
 - type: Tag
   id: RMCWeaponRifleABR40Tactical
 
 - type: Tag
   id: RMCMagazineRifleABR40
-
-- type: Tag
-  id: RMCCartridgeRifleABR40

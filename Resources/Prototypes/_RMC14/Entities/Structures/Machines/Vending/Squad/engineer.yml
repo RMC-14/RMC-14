@@ -109,8 +109,8 @@
       #   points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 3
+      - id: RMCMagazinePistolM1984HP
+        points: 3
       - id: RMCMagazinePistolM1984AP
         points: 3
       - id: CMMagazinePistolMK80
@@ -300,7 +300,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)

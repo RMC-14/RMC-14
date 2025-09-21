@@ -1,19 +1,8 @@
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Content.Server._RMC14.Marines;
-using Content.Server._RMC14.Xenonids;
 using Content.Server._RMC14.Spawners;
 using Content.Shared._RMC14.AegisEvent;
-using Content.Shared._RMC14.Requisitions.Components;
-using Robust.Shared.Map;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Maths;
-using Content.Server.Fax;
-using Content.Shared.Fax.Components;
-using Content.Shared.Paper;
-using Robust.Shared.Localization;
-using Content.Server.GameTicking.Events;
-using Robust.Shared.Timing;
+using Content.Shared._RMC14.Requisitions;
 
 namespace Content.Server.Administration.Commands;
 
@@ -21,61 +10,29 @@ namespace Content.Server.Administration.Commands;
 public sealed class AegisEventCommand : IConsoleCommand
 {
     public string Command => "aegis:normal";
-    public string Description => "Sends announcements for both sides, sends the fax to CiC and then aegis keycard and powerloader pamphlet through ASRS. You still need to spawn the crate yourself.";
+    public string Description => "Starts an AEGIS event immediately. Sends a fax to CIC and an AEGIS keycard and powerloader pamphlet will arrive through ASRS. You still need to spawn the crate yourself.";
     public string Help => $"Usage: {Command} [optional message]";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var systemManager = IoCManager.Resolve<IEntitySystemManager>();
         var entityManager = IoCManager.Resolve<IEntityManager>();
+        var reqSystem = systemManager.GetEntitySystem<SharedRequisitionsSystem>();
+        var aegisSystem = systemManager.GetEntitySystem<AegisLobbyEventSystem>();
         var message = args.Length > 0 ? string.Join(" ", args) : "AEGIS event has been initiated.";
 
         // Announce to both marines and xenos
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
-        // Send fax to Marine High Command
-        SendAegisFax(systemManager, entityManager, message);
+        // Send fax to CIC
+        aegisSystem.SendCICFax(systemManager, entityManager, message, "RMCPaperAegisInfoFax", "UNS Oberon");
 
         // Spawn and send the Aegis ID card
-        var idItem = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
-        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(idItem);
+        reqSystem.CreateSpecialDelivery("RMCIDCardAegis");
 
         // Spawn and send the Powerloader pamphlet
-        var pamphletItem = entityManager.SpawnEntity("CMPamphletPowerloader", MapCoordinates.Nullspace);
-        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
+        reqSystem.CreateSpecialDelivery("CMPamphletPowerloader");
 
         shell.WriteLine("Aegis event announced to marines and xenos, fax sent to CiC, and items sent through ASRS.");
-    }
-
-    private void SendAegisFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message)
-    {
-        var faxSystem = systemManager.GetEntitySystem<FaxSystem>();
-
-        var faxQuery = entityManager.EntityQueryEnumerator<FaxMachineComponent>();
-        while (faxQuery.MoveNext(out var faxEnt, out var faxComp))
-        {
-            if (faxComp.FaxName == "CIC")
-            {
-                var aegisPaper = entityManager.SpawnEntity("CMPaperAegisInfoFax", MapCoordinates.Nullspace);
-
-                if (entityManager.TryGetComponent<PaperComponent>(aegisPaper, out var paperComp) &&
-                    entityManager.TryGetComponent<MetaDataComponent>(aegisPaper, out var metaComp))
-                {
-                    var printout = new FaxPrintout(
-                        paperComp.Content,
-                        metaComp.EntityName,
-                        null, // No label
-                        "CMPaperAegisInfoFax",
-                        paperComp.StampState,
-                        paperComp.StampedBy
-                    );
-
-                    faxSystem.Receive(faxEnt, printout, null, faxComp);
-                }
-
-                entityManager.DeleteEntity(aegisPaper);
-                break;
-            }
-        }
     }
 }
 

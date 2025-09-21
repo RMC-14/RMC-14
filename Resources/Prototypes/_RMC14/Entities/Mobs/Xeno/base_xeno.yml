@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-xeno
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
@@ -65,14 +69,11 @@
       collection: XenoDeath
       params:
         volume: -4
-  - type: HealthExaminable
-    examineShowEmpty: false
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 25
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
@@ -322,11 +323,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
-    mode: Queen
     trackerModes:
     - Queen
     - HiveLeader
     - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -339,10 +340,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
@@ -385,6 +386,8 @@
       components:
       - Marine
   - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true
@@ -452,6 +455,14 @@
 #  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
+
+- type: entity
+  abstract: true
+  id: RMCXenoVentCrawler
+  components:
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+  - type: RMCTrayCrawler
 
 - type: entity
   id: CMXenoDeveloped

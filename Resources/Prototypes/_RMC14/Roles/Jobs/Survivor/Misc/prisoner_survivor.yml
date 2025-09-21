@@ -1,0 +1,63 @@
+# Used in Fiorina Science Annex
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorPrisoner
+  name: cm-job-name-survivor-prisoner
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorPrisoner
+  spawnMenuRoleName: Prisoner (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPrisoner
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorPrisoner
+  equipment:
+    jumpsuit: RMCJumpsuitOrange
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesOrange
+    pocket2: RMCPouchGeneralMedium
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorPrisoner
+  name: survivor prisoner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorPrisoner
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetPrisoner
+  name: prisoner survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ ArmorHelmetRiot ]
+    - [ RMCArmorVestCivilian ]

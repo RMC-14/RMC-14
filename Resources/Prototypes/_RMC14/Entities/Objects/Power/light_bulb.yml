@@ -89,6 +89,14 @@
     color: "#D2E3EC"
 
 - type: entity
+  parent: CMLightBulb
+  id: RMCLightBulbRed
+  suffix: Red
+  components:
+  - type: LightBulb
+    color: "#C02526"
+
+- type: entity
   parent: CMLightBulbBase
   id: CMLightBulbBroken
   name: light bulb
