@@ -55,7 +55,7 @@
       # Bed
       # Chair
       - RMCComfyChairList
-      # squad chairs
+      - RMCSquadChairList
       # office chairs
       # stool
       - RMCDividerConstruction
