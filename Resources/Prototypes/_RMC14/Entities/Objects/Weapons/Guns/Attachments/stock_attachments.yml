@@ -524,16 +524,16 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
     state: m54c-col
   - type: AttachableToggleable
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
       state: m54c-col
     iconActive:
-      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
 

@@ -5,14 +5,14 @@
   description: A modified version M54C assault rifle MK2, re-engineered for better weight, handling and accuracy. Fires precise two-round bursts. Given only to elite units.
   components:
   - type: Sprite
-    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c2.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c2.rsi # RNMC-14 - Resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c2.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c2.rsi # RNMC-14 - Resprited.
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
