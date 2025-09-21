@@ -39,7 +39,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
 
-    private const EntProtoId RemoveableAcidOnVaporHit = "XenoAcidWeak";
+    private static readonly EntProtoId RemovableAcidOnVaporHit = "XenoAcidWeak";
 
     public override void Initialize()
     {
@@ -281,7 +281,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     // TODO RMC14 Weapon Damage System
     private void OnVaporHit(Entity<TimedCorrodingComponent> ent, ref VaporHitEvent args)
     {
-        if (ent.AcidPrototype != RemoveableAcidOnVaporHit)
+        if (ent.Comp.AcidPrototype != RemovableAcidOnVaporHit)
             return;
 
         RemoveAcid(ent.Owner);
