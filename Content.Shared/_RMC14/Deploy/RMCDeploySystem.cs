@@ -481,7 +481,7 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.Mode == RMCDeploySetupMode.ReactiveParental || setup.Mode == RMCDeploySetupMode.Reactive)
             {
                 if (childComp.InShutdown)
-                    return;
+                    continue;
 
                 childComp.InShutdown = true;
                 Dirty(entity, childComp);
