@@ -129,7 +129,7 @@ public sealed class XenoLungeSystem : EntitySystem
         if (target == null || _pulling.IsPulling(ent))
             return;
 
-        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value))
+        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value, lagCompensate: false))
             ApplyLungeHitEffects(ent, target.Value);
     }
 
