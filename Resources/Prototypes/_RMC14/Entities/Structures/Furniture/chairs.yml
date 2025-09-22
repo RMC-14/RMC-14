@@ -99,6 +99,8 @@
   name: stool
   description: Apply butt.
   components:
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     state: stool
   - type: Construction
