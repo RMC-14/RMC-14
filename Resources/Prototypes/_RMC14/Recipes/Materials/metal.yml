@@ -222,14 +222,6 @@
   materialCost: 5
   restrictedTags: [RMCSeat]
 
-# Stool
-- type: rmcConstruction
-  id: RMCStoolBuild
-  name: stool
-  prototype: RMCStool
-  materialCost: 1
-  restrictedTags: [RMCSeat]
-
 - type: rmcConstruction
   id: RMCMachineFrameBuild
   name: machine frame
