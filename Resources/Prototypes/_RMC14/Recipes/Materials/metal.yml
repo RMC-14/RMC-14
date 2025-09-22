@@ -204,6 +204,7 @@
 - type: rmcConstruction
   id: RMCOfficeChairList
   name: office chairs (5 metal sheets) #material cost written manually since the lists won't show costs
+  prototype: CMChairOfficeDark
   listed:
   - RMCOfficeChairDarkBuild
   - RMCOfficeChairWhiteBuild
