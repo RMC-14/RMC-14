@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Parasites now infect prone targets faster if they went on manually
-    type: Add
-  id: 1859
-  time: '2025-06-10T06:19:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6683
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added more soul to Big Red (Solaris Ridge)
     type: Tweak
   id: 1860
@@ -4458,5 +4451,12 @@
   id: 2358
   time: '2025-09-22T13:29:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7871
+- author: CatAndHats
+  changes:
+  - message: AN/AVD-60 LZ Detector name fixed
+    type: Fix
+  id: 2359
+  time: '2025-09-22T13:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7971
 Name: RMC14
 Order: -1
