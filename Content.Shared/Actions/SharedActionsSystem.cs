@@ -36,9 +36,7 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
 
     // RMC14
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;

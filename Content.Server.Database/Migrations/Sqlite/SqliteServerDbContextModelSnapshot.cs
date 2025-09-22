@@ -1283,6 +1283,30 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("rmc_patron_tiers", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("rmc_player_action_order_id");
+
+                    b.PrimitiveCollection<string>("Actions")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("actions");
+
+                    b.HasKey("PlayerId", "Id")
+                        .HasName("PK_rmc_player_action_order");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("rmc_player_action_order", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -2258,6 +2282,19 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Patron");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("ActionOrder")
+                        .HasForeignKey("Content.Server.Database.RMCPlayerActionOrder", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_action_order_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2531,6 +2568,9 @@ namespace Content.Server.Database.Migrations.Sqlite
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
+                    b.Navigation("ActionOrder")
+                        .IsRequired();
+
                     b.Navigation("AdminLogs");
 
                     b.Navigation("AdminMessagesCreated");

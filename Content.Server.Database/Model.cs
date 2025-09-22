@@ -61,6 +61,7 @@ namespace Content.Server.Database
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
         public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
+        public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -487,6 +488,13 @@ namespace Content.Server.Database
                 .HasForeignKey<RMCPlayerStats>(p => p.PlayerId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPlayerActionOrder>()
+                .HasOne(a => a.Player)
+                .WithOne(p => p.ActionOrder)
+                .HasForeignKey<RMCPlayerActionOrder>(a => a.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -727,6 +735,7 @@ namespace Content.Server.Database
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
+        public RMCPlayerActionOrder ActionOrder { get; set; } = default!;
     }
 
     [Table("whitelist")]

@@ -1344,6 +1344,30 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_patron_tiers", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("rmc_player_action_order_id");
+
+                    b.PrimitiveCollection<List<string>>("Actions")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("actions");
+
+                    b.HasKey("PlayerId", "Id")
+                        .HasName("PK_rmc_player_action_order");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("rmc_player_action_order", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -2341,6 +2365,19 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Patron");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("ActionOrder")
+                        .HasForeignKey("Content.Server.Database.RMCPlayerActionOrder", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_action_order_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2614,6 +2651,9 @@ namespace Content.Server.Database.Migrations.Postgres
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
+                    b.Navigation("ActionOrder")
+                        .IsRequired();
+
                     b.Navigation("AdminLogs");
 
                     b.Navigation("AdminMessagesCreated");

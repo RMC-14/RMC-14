@@ -236,3 +236,19 @@ public sealed class RMCPlayerStats
 
     public int ParasiteInfects { get; set; }
 }
+
+[Table("rmc_player_action_order")]
+[PrimaryKey(nameof(PlayerId), nameof(Id))]
+public sealed class RMCPlayerActionOrder
+{
+    [Key]
+    [ForeignKey("Player")]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    [Key]
+    public string Id { get; set; } = default!;
+
+    public List<string> Actions { get; set; } = default!;
+}

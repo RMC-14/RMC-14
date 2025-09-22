@@ -164,6 +164,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRavagerBerserker
+  - type: RMCActionOrder
+    id: CMXenoRavager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -235,3 +237,5 @@
       groups:
         Brute: 20
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoRavagerBerserker

@@ -141,3 +141,5 @@
   components:
   - type: SleepNPC
   - type: ParasiteAI
+  - type: RMCActionOrder
+    id: CMXenoParasite

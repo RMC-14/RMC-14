@@ -389,6 +389,10 @@ namespace Content.Server.Database
 
         Task IncreaseInfects(Guid player);
 
+        Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
+
+        Task SetActionOrder(Guid player, string id, List<string> actions);
+
         #endregion
 
         #region DB Notifications
@@ -1243,6 +1247,18 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.IncreaseInfects(player));
+        }
+
+        public Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetActionOrder(player));
+        }
+
+        public Task SetActionOrder(Guid player, string id, List<string> actions)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetActionOrder(player, id, actions));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

@@ -2126,6 +2126,33 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task<Dictionary<string, List<string>>?> GetActionOrder(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerActionOrder
+                .Where(a => a.PlayerId == player)
+                .ToDictionaryAsync(a => a.Id, a => a.Actions);
+        }
+
+        public async Task SetActionOrder(Guid player, string id, List<string> actions)
+        {
+            await using var db = await GetDb();
+            var order = await db.DbContext.RMCPlayerActionOrder
+                .FirstOrDefaultAsync(a => a.PlayerId == player && a.Id == id);
+
+            order ??= db.DbContext.RMCPlayerActionOrder
+                .Add(new RMCPlayerActionOrder
+                {
+                    PlayerId = player,
+                    Id = id,
+                })
+                .Entity;
+
+            order.Actions = new List<string>(actions);
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
         #endregion
 
         public abstract Task SendNotification(DatabaseNotification notification);

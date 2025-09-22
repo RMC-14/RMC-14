@@ -111,3 +111,5 @@
     name: cm-job-name-xeno-lesser-drone
   - type: VentCrawler
     ventCrawlIcon: lesser
+  - type: RMCActionOrder
+    id: CMXenoLesserDrone
