@@ -39,8 +39,6 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
 
-    private static readonly EntProtoId RemovableAcidOnVaporHit = "XenoAcidWeak";
-
     public override void Initialize()
     {
         base.Initialize();
