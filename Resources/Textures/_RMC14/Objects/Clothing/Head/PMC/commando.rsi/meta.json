@@ -8,42 +8,18 @@
   },
   "states": [
     {
-      "name": "equipped-HELMET-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "equipped-HELMET-vulpkanin",
-      "directions": 4
-    },
-    {
-      "name": "equipped-HELMET-feroxi",
-      "directions": 4
+      "name": "icon"
     },
     {
       "name": "equipped-HELMET",
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-vulpkanin",
-      "directions": 4
-    },
-    {
-      "name": "on-equipped-HELMET-feroxi",
-      "directions": 4
+      "name": "icon-flash"
     },
     {
       "name": "on-equipped-HELMET",
       "directions": 4
-    },
-    {
-      "name": "icon"
-    },
-    {
-      "name": "icon-flash"
     }
   ]
 }
