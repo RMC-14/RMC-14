@@ -143,14 +143,9 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         if (args.Target == null)
             return;
 
-        var canReach = args.CanReach;
-
-        // Re-check with lag compensated positions
-        if (!canReach)
-        {
-            if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value))
-                return;
-        }
+        Log.Info(Get<SharedTransformSystem>().GetMoverCoordinates(args.Target.Value).ToString());
+        if (!args.CanReach)
+            return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
             return;

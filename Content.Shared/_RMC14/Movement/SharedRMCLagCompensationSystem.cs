@@ -28,7 +28,14 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
         _actorQuery = GetEntityQuery<ActorComponent>();
 
+        SubscribeNetworkEvent<RMCSetLastRealTickEvent>(OnSetLastRealTick);
+
         Subs.CVar(_config, RMCCVars.RMCLagCompensationMarginTiles, v => MarginTiles = v, true);
+    }
+
+    private void OnSetLastRealTick(RMCSetLastRealTickEvent msg, EntitySessionEventArgs args)
+    {
+        SetLastRealTick(args.SenderSession.UserId, msg.Tick - 1);
     }
 
     public virtual (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid,

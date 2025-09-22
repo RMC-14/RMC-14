@@ -258,6 +258,7 @@ namespace Content.Shared.Interaction
 
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            RaiseNetworkEvent(new RMCSetLastRealTickEvent(_gameTiming.LastRealTick));
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
                 Log.Info($"TryPullObject input validation failed");
@@ -308,6 +309,7 @@ namespace Content.Shared.Interaction
 
         public bool HandleAltUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            RaiseNetworkEvent(new RMCSetLastRealTickEvent(_gameTiming.LastRealTick));
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
@@ -322,6 +324,7 @@ namespace Content.Shared.Interaction
 
         public bool HandleUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            RaiseNetworkEvent(new RMCSetLastRealTickEvent(_gameTiming.LastRealTick));
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
@@ -694,7 +697,8 @@ namespace Content.Shared.Interaction
             Ignored? predicate = null,
             bool popup = false,
             bool overlapCheck = true,
-            EntityUid? user = null)
+            EntityUid? user = null,
+            bool lagCompensate = true)
         {
             if (!Resolve(other, ref other.Comp))
                 return false;
@@ -705,7 +709,7 @@ namespace Content.Shared.Interaction
             // RMC14
             var otherCoordinates = other.Comp.Coordinates;
             var otherAngle = other.Comp.LocalRotation;
-            if (TryComp(user ?? origin, out ActorComponent? originActor))
+            if (lagCompensate && TryComp(user ?? origin, out ActorComponent? originActor))
                 (otherCoordinates, otherAngle) = _rmcLagCompensation.GetCoordinatesAngle(other, originActor.PlayerSession);
             // RMC14
 
@@ -1138,6 +1142,7 @@ namespace Content.Shared.Interaction
         #region ActivateItemInWorld
         private bool HandleActivateItemInWorld(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            RaiseNetworkEvent(new RMCSetLastRealTickEvent(_gameTiming.LastRealTick));
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
                 Log.Info($"ActivateItemInWorld input validation failed");
