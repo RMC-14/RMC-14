@@ -65,7 +65,6 @@
         reagents:
         - ReagentId: RMCNapalmUT
           Quantity: 300
-    solution: rmc_flamer_tank
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: flametank_strip
