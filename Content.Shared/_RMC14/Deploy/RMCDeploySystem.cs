@@ -224,7 +224,7 @@ public sealed class RMCDeploySystem : EntitySystem
                 continue;
 
             var setupIndex = deployedComp.SetupIndex;
-            if (setupIndex >= ent.Comp.DeploySetups.Count)
+            if (setupIndex < 0 || setupIndex >= ent.Comp.DeploySetups.Count)
                 continue;
 
             var setup = ent.Comp.DeploySetups[setupIndex];
@@ -598,6 +598,8 @@ public sealed class RMCDeploySystem : EntitySystem
             {
                 if (childComp.OriginalEntity != comp.OriginalEntity)
                     continue;
+                if (childComp.SetupIndex < 0 || childComp.SetupIndex >= deployable.DeploySetups.Count)
+                    continue;
                 // Skip setups marked as NeverRedeployableSetup
                 var childSetup = deployable.DeploySetups[childComp.SetupIndex];
                 if (childSetup.NeverRedeployableSetup)
@@ -661,7 +663,7 @@ public sealed class RMCDeploySystem : EntitySystem
     {
         if (!TryComp(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
-        if (ent.Comp.SetupIndex >= deployable.DeploySetups.Count)
+        if (ent.Comp.SetupIndex < 0 || ent.Comp.SetupIndex >= deployable.DeploySetups.Count)
             return;
         var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
         if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
