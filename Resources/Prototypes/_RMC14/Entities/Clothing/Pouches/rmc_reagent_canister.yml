@@ -145,17 +145,17 @@
 
 - type: entity
   parent: RMCPouchReagentCanister
-  id: RMCPouchReagentCanisterKeloDerma
-  suffix: KeloDerma
+  id: RMCPouchReagentCanisterKeloDerm
+  suffix: KeloDerm
   components:
   - type: StorageFill
     contents:
-    - id: RMCMedicAutoInjectorKeloDerma15
+    - id: RMCMedicAutoInjectorKeloDerm15
   - type: ItemSlots
     slots:
       pressurized_reagent_canister:
         name: Canister
-        startingItem: RMCPressurizedCanisterMeraBic
+        startingItem: RMCPressurizedCanisterKeloDerm
         whitelist:
           tags:
           - PressurizedCanister

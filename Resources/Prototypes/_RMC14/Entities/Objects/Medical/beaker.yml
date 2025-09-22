@@ -403,8 +403,8 @@
 
 - type: entity
   parent: RMCPressurizedCanister
-  id: RMCPressurizedCanisterKeloDerma
-  suffix: KeloDerma
+  id: RMCPressurizedCanisterKeloDerm
+  suffix: KeloDerm
   components:
   - type: SolutionContainerManager
     solutions:

@@ -508,8 +508,8 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
-  id: RMCMedicAutoInjectorKeloDerma15
-  suffix: KeloDerma
+  id: RMCMedicAutoInjectorKeloDerm15
+  suffix: KeloDerm
   components:
   - type: SolutionContainerManager
     solutions:

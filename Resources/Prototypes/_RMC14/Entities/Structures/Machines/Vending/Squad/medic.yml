@@ -363,7 +363,7 @@
       - id: RMCPouchReagentCanisterMeraBic
         name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
         recommended: true
-      - id: RMCPouchReagentCanisterKeloDerma
+      - id: RMCPouchReagentCanisterKeloDerm
         name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
         recommended: true
       - id: RMCPouchReagentCanisterTricordrazineRevival

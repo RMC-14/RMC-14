@@ -288,7 +288,7 @@
     - id: RMCPillKelotaneDermaline
       amount: 16
   - type: IconLabel
-    labelTextLocId: rmc-keloderma-container-label-text
+    labelTextLocId: rmc-keloderm-container-label-text
 
 - type: entity
   parent: RMCPillCanisterKelotaneDermalineNoSkill
