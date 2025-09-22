@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponLMG
   id: RMCWeaponMachinegunGsh
   name: GSh-7.62 rotary machinegun
-  description: A gas-operated rotary machine gun used by UPP Weapon Specialists. Its enormous volume of fire and ammunition capacity allows the suppression of large concentrations of enemy forces.
+  description: A gas-operated rotary machine gun used by SPP Weapon Specialists. Its enormous volume of fire and ammunition capacity allows the suppression of large concentrations of enemy forces.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/LMGs/GSh.rsi
