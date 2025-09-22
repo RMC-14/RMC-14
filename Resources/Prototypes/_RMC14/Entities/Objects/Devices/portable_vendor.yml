@@ -90,6 +90,12 @@
       entries: []
       #- id: Hollow cane
       #  points: 15
+    - name: Wearables
+      entries:
+      - id: RMCPatchWeYaBlack
+        points: 5
+      - id: RMCShoesWeYaStompers
+        points: 50
     - name: Ammo
       entries: []
       #- id: ES-4 stun mag
