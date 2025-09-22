@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -12,13 +13,18 @@ using Robust.Shared.Configuration;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -230,6 +236,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
+
+            _entityStorage.EmptyContents(uid);
+
+            if (TryComp(uid, out StorageComponent? storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities.ToArray())
+                {
+                    if (!TryComp(contained, out CorrodibleComponent? corrodible) ||
+                        !corrodible.IsCorrodible)
+                    {
+                        _container.Remove(contained, storage.Container);
+                    }
+                }
+            }
 
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
