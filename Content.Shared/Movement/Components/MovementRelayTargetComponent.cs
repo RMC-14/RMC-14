@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.Movement.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedMoverController))] // RMC change
+[Access(typeof(SharedMoverController))]
 public sealed partial class MovementRelayTargetComponent : Component
 {
     /// <summary>

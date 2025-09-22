@@ -106,7 +106,7 @@ public sealed class MoverController : SharedMoverController
         }
 
         // Server-side should just be handled on its own so we'll just do this shizznit
-        if (!mover.LinearMovement)
+        if (!mover.LinearMovement) // RMC change!
             HandleMobMovement((player, mover), frameTime);
         else
             HandleLinearMovement((player, mover), frameTime);

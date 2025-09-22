@@ -94,7 +94,7 @@ public sealed class MoverController : SharedMoverController
 
         foreach (var mover in _movers)
         {
-            if (!mover.Comp.LinearMovement)
+            if (!mover.Comp.LinearMovement) // RMC change!
                 HandleMobMovement(mover, frameTime);
             else
                 HandleLinearMovement(mover, frameTime);
