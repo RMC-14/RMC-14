@@ -887,7 +887,7 @@
 
 - type: roleLoadout
   id: JobCMPVERifleman
-  points: 7
+  points: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -900,7 +900,7 @@
 
 - type: roleLoadout
   id: JobCMPVEHospitalCorpsman
-  points: 7
+  points:: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -913,7 +913,7 @@
 
 - type: roleLoadout
   id: JobCMPVESmartGunOperator
-  points: 7
+  points:: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -926,7 +926,7 @@
 
 - type: roleLoadout
   id: JobCMPVESquadLeader
-  points: 7
+  points:: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -939,7 +939,7 @@
 
 - type: roleLoadout
   id: JobCMPVESectionSergeant
-  points: 7
+  points:: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -952,10 +952,12 @@
 
 - type: roleLoadout
   id: JobCMPVEPlatoonCommander
-  points: 7
+  points:: 20 # Because small loadout limits
   groups:
   - MarineBackpack
   - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
