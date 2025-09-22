@@ -117,7 +117,7 @@
 # Comfy Chairs
 - type: rmcConstruction
   id: RMCComfyChairList
-  name: comfy chairs
+  name: comfy chairs (2 metal sheets) #material cost written manually since the lists won't show costs
   prototype: CMChairComfy
   listed:
   - RMCComfyChairBeigeBuild
@@ -164,7 +164,7 @@
 # Squad Chairs
 - type: rmcConstruction
   id: RMCSquadChairList
-  name: squad chairs
+  name: squad chairs (2 metal sheets) #material cost written manually since the lists won't show costs
   prototype: CMChairComfy
   listed:
   - RMCComfyChairAlphaBuild
@@ -205,6 +205,7 @@
   id: RMCOfficeChairList
   name: office chairs
   prototype: CMChairComfy
+  materialCost: 5
   listed:
   - RMCOfficeChairDarkBuild
   - RMCOfficeChairLightBuild
