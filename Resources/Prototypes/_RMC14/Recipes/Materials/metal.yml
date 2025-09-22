@@ -98,6 +98,22 @@
   skill: RMCSkillConstruction
   requiredSkillLevel: 2
 
+# Bed
+- type: rmcConstruction
+  id: RMCBedBuild
+  name: bed
+  prototype: CMBed
+  noRotate: true
+  materialCost: 2
+
+# Foldable Chair
+- type: rmcConstruction
+  id: RMCChairBuild
+  name: chair
+  prototype: CMChair
+  materialCost: 1
+  restrictedTags: [RMCSeat]
+
 # Comfy Chairs
 - type: rmcConstruction
   id: RMCComfyChairList
@@ -182,6 +198,37 @@
   name: delta squad chair
   prototype: CMChairComfyDelta
   materialCost: 2
+  restrictedTags: [RMCSeat]
+
+# Office Chairs
+- type: rmcConstruction
+  id: RMCOfficeChairList
+  name: office chairs
+  prototype: CMChairComfy
+  listed:
+  - RMCOfficeChairDarkBuild
+  - RMCOfficeChairLightBuild
+
+- type: rmcConstruction
+  id: RMCOfficeChairDarkBuild
+  name: dark office chair
+  prototype: CMChairOfficeDark
+  materialCost: 5
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCOfficeChairLightBuild
+  name: light office chair
+  prototype: CMChairOfficeLight
+  materialCost: 5
+  restrictedTags: [RMCSeat]
+
+# Stool
+- type: rmcConstruction
+  id: RMCStoolBuild
+  name: stool
+  prototype: RMCStool
+  materialCost: 1
   restrictedTags: [RMCSeat]
 
 - type: rmcConstruction
