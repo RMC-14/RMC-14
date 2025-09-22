@@ -331,6 +331,8 @@
     jobs:
     - CMHospitalCorpsman
     - CMPVEHospitalCorpsman
+    - CMPMCCorpsmanPVE
+    - RMCSPPCorpsmanPVE
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
