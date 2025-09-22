@@ -52,12 +52,12 @@
       # Airlock assembly
       # large airlock assembly
       - RMCDividerConstruction
-      # Bed
-      # Chair
+      - RMCBedBuild
+      - RMCChairBuild
       - RMCComfyChairList
       - RMCSquadChairList
-      # office chairs
-      # stool
+      - RMCOfficeChairList
+      - RMCStoolBuild
       - RMCDividerConstruction
       # computer frame
       - RMCMachineFrameBuild
