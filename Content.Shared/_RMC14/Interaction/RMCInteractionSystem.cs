@@ -62,7 +62,7 @@ public sealed class RMCInteractionSystem : EntitySystem
         if (!_whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Target))
             return;
 
-        if (!_transform.InRange(args.User, args.Target, SharedInteractionSystem.InteractionRange))
+        if (!_transform.InRange(args.User, args.Target, ent.Comp.Range))
             return;
 
         args.InRange = true;
