@@ -70,6 +70,17 @@
     color: "#e41c1f"
 
 - type: entity
+  parent: ArmorHelmetPMCCommando
+  id: RMCArmorHelmetPMCCommandoAlt
+  suffix: Alt
+  description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor. This one has had a skull scratched into the visor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando_alt.rsi
+
+- type: entity
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCCorporate
   name: We-Ya corporate security helmet
