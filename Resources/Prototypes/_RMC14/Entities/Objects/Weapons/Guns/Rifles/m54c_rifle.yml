@@ -5,14 +5,14 @@
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -94,17 +94,17 @@
           - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-barrel: 0.8425, 0.001 # RNMC-14.
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-underbarrel: 0.349, -0.375 # RNMC-14.
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi # RNMC-14, resprited.
+      Desert: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi # RNMC-14, resprited.
+      Snow: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
+      Classic: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi # RNMC-14, resprited.
+      Urban: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi # RNMC-14, resprited.
   - type: Tag
     tags:
     - RMCWeaponRifleM54CMK2
@@ -223,14 +223,14 @@
   suffix: White, No UGL
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi # RNMC-14, resprited.
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: AttachableHolder
@@ -259,7 +259,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -285,7 +285,7 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -314,7 +314,7 @@
       - RMCCartridgeRifle10x24mmIncendiary
     proto: RMCCartridgeRifle10x24mmIncendiary
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -341,7 +341,7 @@
       - RMCCartridgeRifle10x24mmHEAP
     proto: RMCCartridgeRifle10x24mmHEAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -377,7 +377,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 60
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi # RNMC-14, resprited to use new RMC-14 sprites (that we modified).
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

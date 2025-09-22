@@ -5,14 +5,14 @@
   description: An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi # RNMC-14, resprited.
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -96,8 +96,8 @@
           - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
-      rmc-aslot-rail: 0.1, 0.16
+      rmc-aslot-barrel: 0.8425, 0.001 # RNMC-14.
+      rmc-aslot-rail: -0.02, 0.16 # RNMC-14
       rmc-aslot-stock: -0.78, 0.0325
       rmc-aslot-underbarrel: 0.28, -0.343
   - type: Tag
@@ -158,7 +158,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 95
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -184,7 +184,7 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -211,7 +211,7 @@
       - RMCCartridgeRifle10x24mmIncendiary
     proto: RMCCartridgeRifle10x24mmIncendiary
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -238,7 +238,7 @@
       - RMCCartridgeRifle10x24mmHEAP
     proto: RMCCartridgeRifle10x24mmHEAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

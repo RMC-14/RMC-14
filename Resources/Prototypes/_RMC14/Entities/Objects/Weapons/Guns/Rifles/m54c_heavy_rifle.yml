@@ -5,14 +5,14 @@
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi # RNMC-14, resprited.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi # RNMC-14, resprited.
   - type: Tag
     tags:
     - WeaponRifleM54CE2
@@ -82,6 +82,14 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
+      # Start of RNMC-14 modifications.
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RNMCAttachmentM54CE2Stock # RNMC-14 - Replace with RMC prototypes when upstream arrives.
+        whitelist:
+          tags:
+          - RNMCAttachmentM54CE2Stock # RNMC-14 - Replace with RMC prototypes when upstream arrives.
+      # End of RNMC-14 modifications.
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -94,16 +102,16 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125
-      rmc-aslot-rail: 0.125, 0.185
-      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-rail: 0.1, 0.185 # RNMC-14
+      rmc-aslot-stock: -1, 0 # RNMC-14 - Repositioned to fit stock sprite.
       rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi # RNMC-14, resprited.
+      Desert: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi # RNMC-14, resprited.
+      Snow: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi # RNMC-14, resprited.
+      Classic: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/classic.rsi # RNMC-14, resprited.
+      Urban: _RNMC14/Objects/Weapons/Guns/Rifles/m54ce2/urban.rsi # RNMC-14, resprited.
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -122,7 +130,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -135,11 +143,11 @@
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Desert: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Snow: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Classic: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi # RNMC-14, resprited to use new RMC-14 sprites.
+      Urban: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi # RNMC-14, resprited to use new RMC-14 sprites.
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifle
 
@@ -156,7 +164,7 @@
     proto: CMCartridgeRifle10x24mmHT
     capacity: 200
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -202,7 +210,7 @@
     proto: CMCartridgeRifle10x24mmAP
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi # RNMC-14, resprited to use new RMC-14 sprites.
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]

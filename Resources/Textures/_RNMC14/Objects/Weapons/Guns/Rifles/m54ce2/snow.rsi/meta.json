@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at github.com/Blundir/cmss13/blob/3a2f64c634c22114f0a654e0b27a7555c05b95b2/icons/obj/items/weapons/guns/guns_by_map/snow/back.dmi, github.com/Blundir/cmss13/blob/3a2f64c634c22114f0a654e0b27a7555c05b95b2/icons/obj/items/weapons/guns/guns_by_map/snow/guns_lefthand.dmi, https://github.com/Blundir/cmss13/blob/3a2f64c634c22114f0a654e0b27a7555c05b95b2/icons/obj/items/weapons/guns/guns_by_map/snow/guns_obj.dmi, github.com/Blundir/cmss13/blob/3a2f64c634c22114f0a654e0b27a7555c05b95b2/icons/obj/items/weapons/guns/guns_by_map/snow/back.dmi, https://github.com/Blundir/cmss13/blob/3a2f64c634c22114f0a654e0b27a7555c05b95b2/icons/obj/items/weapons/guns/guns_by_map/snow/guns_righthand.dmi; and modified by Merrokitsune, using parts taken from RMC-14 at https://github.com/RMC-14/RMC-14/tree/fabd0d3a52ca00b4fda28fcea6773cbda90f114c/Resources/Textures/_RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi and https://github.com/RMC-14/RMC-14/blob/fc1fee99931e1042329bd30dbb6444b78f101bea/Resources/Textures/_RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi/equipped-SUITSTORAGE.png.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "mag-0"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    }
+  ]
+}

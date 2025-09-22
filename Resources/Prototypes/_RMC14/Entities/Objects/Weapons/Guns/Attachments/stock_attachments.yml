@@ -381,7 +381,7 @@
   description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
     state: m54c-solid
   - type: Tag
     tags:
@@ -417,11 +417,11 @@
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi # RNMC-14 - resprited.
+      Desert: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
+      Snow: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi # RNMC-14 - resprited.
+      Classic: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi # RNMC-14 - resprited.
+      Urban: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi # RNMC-14 - resprited.
 
 - type: entity
   parent: RMCAttachmentM54CStockSolid
@@ -448,7 +448,7 @@
   description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
     state: m54c-col
   - type: Tag
     tags:
@@ -458,10 +458,10 @@
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
       state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
   - type: AttachableSizeMods
@@ -500,11 +500,11 @@
       scatterFlat: 6
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+      Jungle: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi # RNMC-14 - resprited.
+      Desert: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi # RNMC-14 - resprited.
+      Snow: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi # RNMC-14 - resprited.
+      Classic: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi # RNMC-14 - resprited.
+      Urban: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi # RNMC-14 - resprited.
 
 - type: entity
   parent: RMCAttachmentM54CStockCollapsible
@@ -524,16 +524,16 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
     state: m54c-col
   - type: AttachableToggleable
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
       state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54c2_stocks.rsi # RNMC-14 - Resprited.
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
 
@@ -546,16 +546,16 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi # RNMC-14 - resprited.
     state: m54c-col
   - type: AttachableToggleable
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi # RNMC-14 - resprited.
       state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      sprite: _RNMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi # RNMC-14 - resprited.
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
 
