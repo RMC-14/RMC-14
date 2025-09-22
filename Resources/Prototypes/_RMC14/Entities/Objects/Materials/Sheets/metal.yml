@@ -57,7 +57,7 @@
       - RMCComfyChairList
       - RMCSquadChairList
       - RMCOfficeChairList
-      - RMCStoolBuild
+      # Stool
       - RMCDividerConstruction
       # computer frame
       - RMCMachineFrameBuild
