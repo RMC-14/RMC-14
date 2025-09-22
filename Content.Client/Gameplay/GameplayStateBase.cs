@@ -21,7 +21,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using YamlDotNet.Serialization.TypeInspectors;
-using Content.Shared._RMC14.Interaction;
+using Content.Client._RMC14.Interaction;
 
 namespace Content.Client.Gameplay
 {
@@ -145,34 +145,12 @@ namespace Content.Client.Gameplay
             var clickQuery = _entityManager.GetEntityQuery<ClickableComponent>();
             var clickables = _entityManager.System<ClickableSystem>();
 
-            // RMC14: We get a local player
-            var localEntity = _playerManager.LocalEntity;
-            var transformQuery = _entityManager.GetEntityQuery<TransformComponent>();
-            var spriteSystem = _entitySystemManager.GetEntitySystem<SpriteSystem>();
-            var spriteQuery = _entityManager.GetEntityQuery<SpriteComponent>();
-            var transformSystem = _entitySystemManager.GetEntitySystem<SharedTransformSystem>();
-
             foreach (var entity in entities)
             {
                 // RMC14: Filter by InteractionTransparencyComponent (if not ignored)
-                if (!ignoreInteractionTransparency && _entityManager.HasComponent<InteractionTransparencyComponent>(entity.Uid) && localEntity != null)
-                {
-                    if (transformQuery.TryGetComponent(entity.Uid, out var entXform) &&
-                        transformQuery.TryGetComponent(localEntity.Value, out var playerXform) &&
-                        spriteQuery.TryGetComponent(entity.Uid, out var sprite))
-                    {
-                        // RMC14: Get the world position and rotation of the sprite
-                        var (spritePos, spriteRot) = transformSystem.GetWorldPositionRotation(entXform);
-                        // RMC14: Get the sprite's BoundingBox
-                        var spriteBox = spriteSystem.CalculateBounds((entity.Uid, sprite), spritePos, spriteRot, eye.Rotation);
-                        // RMC14: Check if the player's position is inside the BoundingBox
-                        if (spriteBox.Contains(transformSystem.GetMapCoordinates(playerXform).Position))
-                        {
-                            // RMC14: Skipping this object for this client
-                            continue;
-                        }
-                    }
-                }
+                if (!ignoreInteractionTransparency && _entitySystemManager.GetEntitySystem<RMCClientInteractionSystem>().IsInteractionTransparency(entity.Uid, _playerManager.LocalEntity, eye))
+                    continue;
+
                 if (clickQuery.TryGetComponent(entity.Uid, out var component) &&
                     clickables.CheckClick((entity.Uid, component, entity.Component, entity.Transform), coordinates.Position, eye, excludeFaded, out var drawDepthClicked, out var renderOrder, out var bottom))
                 {
