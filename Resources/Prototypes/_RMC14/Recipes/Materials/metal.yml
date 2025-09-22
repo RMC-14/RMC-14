@@ -204,11 +204,9 @@
 - type: rmcConstruction
   id: RMCOfficeChairList
   name: office chairs
-  prototype: CMChairComfy
-  materialCost: 5
   listed:
   - RMCOfficeChairDarkBuild
-  - RMCOfficeChairLightBuild
+  - RMCOfficeChairWhiteBuild
 
 - type: rmcConstruction
   id: RMCOfficeChairDarkBuild
@@ -218,9 +216,9 @@
   restrictedTags: [RMCSeat]
 
 - type: rmcConstruction
-  id: RMCOfficeChairLightBuild
-  name: light office chair
-  prototype: CMChairOfficeLight
+  id: RMCOfficeChairWhiteBuild
+  name: white office chair
+  prototype: CMChairOfficeWhite
   materialCost: 5
   restrictedTags: [RMCSeat]
 
