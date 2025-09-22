@@ -70,6 +70,19 @@
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
+      # Start of RNMC-14 modifications
+      - id: RNMCHunterEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-hunter
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-hunter
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RNMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_hunter
+        giveMapBlip:
+          sprite: /Textures/_RNMC14/Interface/map_blips.rsi
+          state: spec_hunter
+      # End of RNMC-14 modifications
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact

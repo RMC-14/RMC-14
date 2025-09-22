@@ -14,7 +14,10 @@
             "name": "hudsquad_soc_engineer"
         },
         {
-      "name": "hudsquad_soc_rifleman"
+            "name": "hudsquad_soc_rifleman"
+        },
+        {
+            "name": "hudsquad_spec_hunter"
         }
     ]
 }

@@ -1,0 +1,21 @@
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RNMCHunterEquipmentCase
+  name: high caliber equipment case
+  description: "A large case containing your very own high-caliber F-99 «Behemoth» sniper rifle, M45 ghillie armor and helmet, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: CMArmorM3Medium
+    - id: RNMCBoxBulletElephant
+      amount: 1
+    - id: CMBackpackSniper
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RNMCF99BehemothSniperRifle
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist

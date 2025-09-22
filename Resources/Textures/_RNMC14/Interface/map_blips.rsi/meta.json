@@ -20,7 +20,10 @@
             "name": "sof_sl"
         },
         {
-      "name": "sof_rifleman"
+            "name": "sof_rifleman"
+        },
+        {
+            "name": "spec_hunter"
         }
     ]
 }
