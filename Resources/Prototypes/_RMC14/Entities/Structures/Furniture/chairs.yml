@@ -98,11 +98,7 @@
   id: RMCStool
   name: stool
   description: Apply butt.
-  placement:
-    mode: SnapgridCenter
   components:
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     state: stool
   - type: Construction
