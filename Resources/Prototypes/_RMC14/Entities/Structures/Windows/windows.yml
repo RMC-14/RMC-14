@@ -87,6 +87,44 @@
     mode: CardinalFlags
 
 - type: entity
+  parent: CMBaseWindowIndestructible
+  id: RMCWindowReinforcedAIHull
+  name: hull window
+  description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/ai_rwindow.rsi
+    state: ai_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/ai_rwindow.rsi
+    state: ai_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: ai_rwindow
+    mode: CardinalFlags
+
+- type: entity
+  parent: CMBaseWindowIndestructible
+  id: RMCWindowReinforcedAIHullBlack
+  name: hull window
+  description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/ai_window_black.rsi
+    state: alm_ai_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/ai_window_black.rsi
+    state: alm_ai_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: alm_ai_rwindow
+    mode: CardinalFlags
+
+- type: entity
   parent: CMBaseWindow
   id: CMWindowReinforcedAlmayer
   name: reinforced window
