@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.PowerLoader.Events;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -120,6 +121,8 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, CatchAttemptEvent>(OnPowerLoaderPilotCatchAttempt);
         SubscribeLocalEvent<PowerLoaderComponent, CatchAttemptEvent>(OnPowerLoaderCatchAttempt);
+
+        SubscribeLocalEvent<PowerLoaderComponent, BeforeMeltedEvent>(PowerLoaderBeforeMelted);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -1156,6 +1159,23 @@ public sealed class PowerLoaderSystem : EntitySystem
     private void OnPowerLoaderPilotCatchAttempt(Entity<ActivePowerLoaderPilotComponent> pilot, ref CatchAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void PowerLoaderBeforeMelted(Entity<PowerLoaderComponent> loader, ref BeforeMeltedEvent args)
+    {
+        var held = _hands.EnumerateHeld(loader.Owner).ToList();
+        foreach (var item in held)
+        {
+            _hands.TryDrop(loader.Owner, item);
+        }
+
+        if (TryComp(loader, out StrapComponent? strap))
+        {
+            foreach (var buckled in strap.BuckledEntities.ToArray())
+            {
+                _buckle.Unbuckle(buckled, null);
+            }
+        }
     }
 }
 

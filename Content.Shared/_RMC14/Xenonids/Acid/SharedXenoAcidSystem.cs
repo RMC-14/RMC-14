@@ -52,8 +52,6 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<InheritAcidComponent, AmmoShotEvent>(OnAmmoShot);
         SubscribeLocalEvent<InheritAcidComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
 
-        SubscribeLocalEvent<TimedCorrodingComponent, VaporHitEvent>(OnVaporHit);
-
         Subs.CVar(_config,
             RMCCVars.RMCCorrosiveAcidTickDelaySeconds,
             obj =>
@@ -262,6 +260,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
             if (time > damageableCorrodingComponent.AcidExpiresAt)
             {
+                var ev = new BeforeMeltedEvent();
+                RaiseLocalEvent(uid, ref ev);
+
                 QueueDel(damageableCorrodingComponent.Acid);
                 RemCompDeferred<DamageableCorrodingComponent>(uid);
             }
@@ -273,18 +274,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
 
+            var ev = new BeforeMeltedEvent();
+            RaiseLocalEvent(uid, ref ev);
+
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
         }
-    }
-
-    // TODO RMC14 Weapon Damage System
-    private void OnVaporHit(Entity<TimedCorrodingComponent> ent, ref VaporHitEvent args)
-    {
-        if (ent.Comp.AcidPrototype != RemovableAcidOnVaporHit)
-            return;
-
-        RemoveAcid(ent.Owner);
     }
 
     public bool IsMelted(EntityUid uid)
