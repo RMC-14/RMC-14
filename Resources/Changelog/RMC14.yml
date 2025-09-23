@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added new sprites for the OW console's south and north face.
-    type: Add
-  - message: Changed the Fax Responder map to be more 'appealing' visually.
-    type: Tweak
-  id: 1863
-  time: '2025-06-19T13:58:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6759
 - author: Dutch-VanDerLinde
   changes:
   - message: FIxed CLF headset not having a CLF HUD
@@ -4460,5 +4451,12 @@
   id: 2362
   time: '2025-09-23T20:28:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7983
+- author: Arykh
+  changes:
+  - message: Some health HUD icons have been rotated for visual clarity.
+    type: Tweak
+  id: 2363
+  time: '2025-09-23T20:30:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7959
 Name: RMC14
 Order: -1
