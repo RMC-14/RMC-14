@@ -78,10 +78,12 @@
 - type: entity
   parent: RMCTankReagentWater
   id: RMCTankReagentWaterLocked
-  suffix: Water
+  suffix: Water, Locked
   components:
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Anchorable
     flags: None
 
