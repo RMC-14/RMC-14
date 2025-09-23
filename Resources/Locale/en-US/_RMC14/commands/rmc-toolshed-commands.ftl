@@ -76,3 +76,6 @@ command-description-rmcresetahelptracking = Resets all data about tracked AHelp 
 command-description-hijack-trigger = Triggers hijack on the map that you are currently on.
 
 command-description-setoperationname = Changes the name of the operation for the upcoming round.
+
+command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
+command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.

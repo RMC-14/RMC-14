@@ -1,77 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed obstacle slamming popups showing someone's true identity.
-    type: Fix
-  - message: Fixed popup spam when making tunnels.
-    type: Fix
-  - message: Fixed xenonids being able to examine character descriptions.
-    type: Fix
-  - message: Fixed needing to open the tactical map manually before it shows in the
-      tunnel UI.
-    type: Fix
-  id: 1855
-  time: '2025-06-10T01:30:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6682
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Queen sometimes not getting plasma regen while on weeds and in
-      ovi.
-    type: Fix
-  - message: Fixed to disposal on the chem master not deleting chems.
-    type: Fix
-  - message: Fixed forceplanetmap command autocomplete.
-    type: Fix
-  id: 1856
-  time: '2025-06-10T04:56:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6687
-- author: Vermidia
-  changes:
-  - message: Fixed normal crusher charge not deleting doors, racks, or lockers.
-    type: Fix
-  id: 1857
-  time: '2025-06-10T06:18:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6685
-- author: Vermidia
-  changes:
-  - message: Fixed xeno stun indicator not going away when unconscious goes away.
-    type: Fix
-  id: 1858
-  time: '2025-06-10T06:18:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6686
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Parasites now infect prone targets faster if they went on manually
-    type: Add
-  id: 1859
-  time: '2025-06-10T06:19:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6683
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added more soul to Big Red (Solaris Ridge)
-    type: Tweak
-  id: 1860
-  time: '2025-06-18T02:47:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6720
-- author: noctyrnal
-  changes:
-  - message: Added the NP92 Pistol, NPZ92 Pistol, Type-73 Pistol, Type-74 Pistol,
-      ZHNK-72 Revolver, Type-88 Marksman Rifle, Type-64 SMG and QYJ-72 LMG for the
-      SPP.
-    type: Add
-  - message: Added the HE and Incend rockets for the HJRA-12
-    type: Add
-  - message: The HJRA-12 now has different sprites.
-    type: Tweak
-  - message: Adds shell boxes for the heavy shotgun shells used by the Type-23 shotgun.
-    type: Add
-  - message: Magazines no longer wrongly display as contraband.
-    type: Fix
-  - message: SPP now spawn with the correct weapons.
-    type: Fix
-  id: 1861
-  time: '2025-06-18T11:40:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6729
 - author: crazy1112345
   changes:
   - message: Added New Varadero survivors! This includes the Beach Bum, Miner, Priest,
@@ -4467,5 +4394,69 @@
   id: 2354
   time: '2025-09-16T02:03:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7893
+- author: J C Denton
+  changes:
+  - message: Fixed incorrect locale of colonist corpses' jobs.
+    type: Fix
+  id: 2355
+  time: '2025-09-19T01:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7895
+- author: Aurallianz
+  changes:
+  - message: Dispensing Requisitions items while manning the line now places those
+      items on the table automatically.
+    type: Add
+  id: 2356
+  time: '2025-09-22T13:27:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7970
+- author: CyberTropic
+  changes:
+  - message: Fixed objects drifting weirdly on map inserts sometimes.
+    type: Fix
+  id: 2357
+  time: '2025-09-22T13:29:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7952
+- author: noctyrnal
+  changes:
+  - message: Added a smart gun ammunition box for PVE.
+    type: Add
+  - message: Adjusted the ammunition box descriptions.
+    type: Tweak
+  id: 2358
+  time: '2025-09-22T13:29:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7871
+- author: CatAndHats
+  changes:
+  - message: AN/AVD-60 LZ Detector name fixed
+    type: Fix
+  id: 2359
+  time: '2025-09-22T13:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7971
+- author: SharkSnake98
+  changes:
+  - message: Added the PK-7 Electrostatic Pistol, hollow cane, cyanide, and cyanide
+      pill for the Corporate Liaison.
+    type: Add
+  - message: Gave the WEYA Fax Responder the dark cap instead of the PMC helmet
+    type: Tweak
+  - message: Added the Hollow Cane, PK-7 Magazine, and Cyanide to the WeYa Automated
+      Storage Briefcase
+    type: Tweak
+  id: 2360
+  time: '2025-09-23T04:55:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7041
+- author: noctyrnal
+  changes:
+  - message: Corpsmen on PVE now get pre-made Meralyne-Bicaridine and Kelotane-Dermaline
+      instead of regular Bicardirdine and Dermaline to make their lives easier.
+    type: Tweak
+  - message: Corpsmen on PVE now get tricordazine pill canisters in their vendors
+      too.
+    type: Add
+  - message: Adjusted PVE Corpsmen's vendor contents to remove unwanted content.
+    type: Tweak
+  id: 2361
+  time: '2025-09-23T12:22:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7954
 Name: RMC14
 Order: -1
