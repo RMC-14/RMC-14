@@ -93,6 +93,14 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         _lastRealTicks[session] = tick;
     }
 
+    public void SendLastRealTick()
+    {
+        if (_net.IsClient)
+            return;
+
+        RaiseNetworkEvent(new RMCSetLastRealTickEvent(GetLastRealTick(null)));
+    }
+
     public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, MapCoordinates targetCoordinates)
     {
         if (!Resolve(target, ref target.Comp, false) ||
