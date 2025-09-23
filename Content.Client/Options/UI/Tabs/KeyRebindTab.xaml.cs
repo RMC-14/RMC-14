@@ -165,9 +165,12 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterTertiary);
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
+            AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
+            AddButton(CMKeyFunctions.RMCRest);
 
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
+            AddButton(CMKeyFunctions.RMCXenoRest);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
@@ -199,6 +202,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
+            AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
             AddButton(ContentKeyFunctions.SaveItemLocation);
@@ -282,6 +286,51 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.ShowDebugMonitors);
             AddButton(EngineKeyFunctions.HideUI);
             AddButton(ContentKeyFunctions.InspectEntity);
+
+            AddHeader("ui-options-header-text-cursor");
+            AddButton(EngineKeyFunctions.TextCursorLeft);
+            AddButton(EngineKeyFunctions.TextCursorRight);
+            AddButton(EngineKeyFunctions.TextCursorUp);
+            AddButton(EngineKeyFunctions.TextCursorDown);
+            AddButton(EngineKeyFunctions.TextCursorWordLeft);
+            AddButton(EngineKeyFunctions.TextCursorWordRight);
+            AddButton(EngineKeyFunctions.TextCursorBegin);
+            AddButton(EngineKeyFunctions.TextCursorEnd);
+
+            AddHeader("ui-options-header-text-cursor-select");
+            AddButton(EngineKeyFunctions.TextCursorSelect);
+            AddButton(EngineKeyFunctions.TextCursorSelectLeft);
+            AddButton(EngineKeyFunctions.TextCursorSelectRight);
+            AddButton(EngineKeyFunctions.TextCursorSelectUp);
+            AddButton(EngineKeyFunctions.TextCursorSelectDown);
+            AddButton(EngineKeyFunctions.TextCursorSelectWordLeft);
+            AddButton(EngineKeyFunctions.TextCursorSelectWordRight);
+            AddButton(EngineKeyFunctions.TextCursorSelectBegin);
+            AddButton(EngineKeyFunctions.TextCursorSelectEnd);
+
+            AddHeader("ui-options-header-text-edit");
+            AddButton(EngineKeyFunctions.TextBackspace);
+            AddButton(EngineKeyFunctions.TextDelete);
+            AddButton(EngineKeyFunctions.TextWordBackspace);
+            AddButton(EngineKeyFunctions.TextWordDelete);
+            AddButton(EngineKeyFunctions.TextNewline);
+            AddButton(EngineKeyFunctions.TextSubmit);
+            AddButton(EngineKeyFunctions.MultilineTextSubmit);
+            AddButton(EngineKeyFunctions.TextSelectAll);
+            AddButton(EngineKeyFunctions.TextCopy);
+            AddButton(EngineKeyFunctions.TextCut);
+            AddButton(EngineKeyFunctions.TextPaste);
+
+            AddHeader("ui-options-header-text-chat");
+            AddButton(EngineKeyFunctions.TextHistoryPrev);
+            AddButton(EngineKeyFunctions.TextHistoryNext);
+            AddButton(EngineKeyFunctions.TextReleaseFocus);
+            AddButton(EngineKeyFunctions.TextScrollToBottom);
+
+            AddHeader("ui-options-header-text-other");
+            AddButton(EngineKeyFunctions.TextTabComplete);
+            AddButton(EngineKeyFunctions.TextCompleteNext);
+            AddButton(EngineKeyFunctions.TextCompletePrev);
 
             foreach (var control in _keyControls.Values)
             {

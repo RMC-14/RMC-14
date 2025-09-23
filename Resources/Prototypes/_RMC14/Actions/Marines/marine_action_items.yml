@@ -4,12 +4,13 @@
   name: Toggle Optics
   description: Scope in or out with your optics.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/scope_actions.rsi
       state: sniperscope
-    event: !type:ToggleActionEvent
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ActionMarineBase
@@ -17,12 +18,13 @@
   name: Cycle Zoom Level
   description: Change the level of magnification of your optics.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/scope_actions.rsi
       state: sniperscope
-    event: !type:ScopeCycleZoomLevelEvent
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:ScopeCycleZoomLevelEvent
   - type: Tag
     tags:
     - RMCActionCycleZoomLevel
@@ -33,15 +35,16 @@
   name: Toggle the M42 scout sight
   description: Allows you to see even in complete darkness.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
       state: icon
     iconOn:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
       state: icon_on
-    event: !type:ToggleActionEvent
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ActionMarineToggleable
@@ -49,10 +52,11 @@
   name: Toggle ID lock
   description: Toggles the ID lock on the gun, allowing anyone to use it.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/id_lock_actions.rsi
       state: id_lock_locked
+  - type: InstantAction
     event: !type:ToggleActionEvent
 
 - type: entity
@@ -61,10 +65,11 @@
   name: Toggle IFF
   description: Toggles the IFF on the gun.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/iff_toggle_actions.rsi
       state: iff_toggle_on
+  - type: InstantAction
     event: !type:ToggleActionEvent
 
 - type: entity
@@ -73,10 +78,11 @@
   name: Toggle Attachable
   description: Toggle an attachable. If you're seeing this, someone forgot to set the description properly.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/scope_actions.rsi
       state: sniperscope
+  - type: InstantAction
     event: !type:AttachableToggleActionEvent
 
 - type: entity
@@ -85,13 +91,14 @@
   name: Whistle
   description: Blow the whistle.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Objects/Devices/whistle.rsi
       state: whistle
-    event: !type:SoundActionEvent
     useDelay: 10
+  - type: InstantAction
+    event: !type:SoundActionEvent
 
 - type: entity
   parent: ActionMarineBase
@@ -99,13 +106,14 @@
   name: Use Phone
   description: Used to call another phone.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Objects/phone.rsi
       state: rpb_phone
-    event: !type:RMCTelephoneActionEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:RMCTelephoneActionEvent
 
 - type: Tag
   id: RMCActionCycleZoomLevel
@@ -116,8 +124,20 @@
   name: Toggle Medical HUD
   description: Toggle the optical matrix of the medical HUD.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: BigItem
+  - type: InstantAction
+    event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleSechud
+  name: Toggle Security HUD
+  description: Toggle the optical matrix of the security HUD.
+  components:
+  - type: Action
+    itemIconStyle: BigItem
+  - type: InstantAction
     event: !type:ToggleActionEvent
 
 - type: entity
@@ -126,8 +146,9 @@
   name: Toggle the welding goggles
   description: Change the positions of the welding goggles on your forehead.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: BigItem
+  - type: InstantAction
     event: !type:ToggleActionEvent
 
 - type: entity
@@ -136,10 +157,54 @@
   name: Cycle helmet HUD
   description: Cycles the currently active visor.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
       state: sight_up
-    event: !type:CycleVisorActionEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:CycleVisorActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionSpotTarget
+  description: Hover your mouse over a target and press the unique action key to start spotting.
+  name: Spot Target
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: spotter_target
+  - type: InstantAction
+    event: !type:SpotTargetActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleLaser
+  name: Toggle Laser
+  description: Toggles your laser on or off
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_toggle_laser_on
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:GunToggleLaserActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionAimedShot
+  name: Aimed Shot
+  description: While in combat mode and hovering your mouse over a target, press the unique action key to begin aiming.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_aim
+  - type: InstantAction
+    event: !type:AimedShotActionEvent

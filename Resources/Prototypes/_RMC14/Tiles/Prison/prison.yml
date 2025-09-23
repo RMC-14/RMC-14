@@ -36,18 +36,20 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.2
+  friction: 1
   heatCapacity: 10000
 
 - type: tile
   parent: CMFloorPlatingPrison
   id: CMFloorPlatingPrisonScorched
   sprite: /Textures/_RMC14/Tiles/prison/panelscorched.png
+  friction: 1
 
 - type: tile
   parent: CMFloorPlatingPrison
   id: CMFloorPlatingPrisonDamaged
   sprite: /Textures/_RMC14/Tiles/prison/platingdmg.png
+  friction: 1
   variants: 3
   placementVariants:
   - 1.0
@@ -90,3 +92,23 @@
   name: tiles-cm-white-sterile
   sprite: /Textures/_RMC14/Tiles/prison/sterile_white.png
 
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonRampNorth
+  name: ramp
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_north.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampSouth
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_south.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampEast
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_east.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampWest
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_west.png

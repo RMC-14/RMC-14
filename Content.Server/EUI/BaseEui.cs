@@ -107,14 +107,21 @@ namespace Content.Server.EUI
         {
             _isStateDirty = false;
 
-            var state = GetNewState();
+            try
+            {
+                var state = GetNewState();
 
-            var netMgr = IoCManager.Resolve<IServerNetManager>();
-            var msg = new MsgEuiState();
-            msg.Id = Id;
-            msg.State = state;
+                var netMgr = IoCManager.Resolve<IServerNetManager>();
+                var msg = new MsgEuiState();
+                msg.Id = Id;
+                msg.State = state;
 
-            netMgr.ServerSendMessage(msg, Player.Channel);
+                netMgr.ServerSendMessage(msg, Player.Channel);
+            }
+            catch (Exception e)
+            {
+                Logger.Error($"Error updating EUI {GetType()}:\n{e}");
+            }
         }
 
         internal void Initialize(EuiManager manager, ICommonSession player, uint id)

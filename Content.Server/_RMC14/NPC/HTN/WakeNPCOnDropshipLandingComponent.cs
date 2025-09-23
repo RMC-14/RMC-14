@@ -2,4 +2,14 @@
 
 [RegisterComponent]
 [Access(typeof(RMCNPCSystem))]
-public sealed partial class WakeNPCOnDropshipLandingComponent : Component;
+public sealed partial class WakeNPCOnDropshipLandingComponent : Component
+{
+    [DataField]
+    public bool FirstOnly = true;
+
+    [DataField]
+    public bool Attempted;
+
+    [DataField]
+    public int Range = 30;
+}

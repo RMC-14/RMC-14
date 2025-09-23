@@ -1,9 +1,10 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoVentCrawler
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
@@ -32,15 +33,15 @@
     - ActionXenoTailStab
     - ActionXenoAcidWeak
     - ActionXenoPheromones
-    - ActionXenoPlantWeeds # TODO RMC14 only near other weeds for lesser drones
+    - ActionLesserDronePlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    # evasion: 10
     tier: 0
     hudOffset: -0.15,-0.03
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+    muteOnSpawn: true
   - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
@@ -51,6 +52,7 @@
     - DoorXenoResin
   - type: XenoDevour
   - type: XenoPheromones
+    pheroSuffix: weak
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
@@ -66,6 +68,11 @@
   - type: Tackle
     min: 4
     max: 5
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 1.0
+    damage:
+      types:
+        Heat: 15
   - type: WhitelistPickup
     whitelist:
       components:
@@ -86,11 +93,11 @@
   - type: XenoHiveCoreRole
   - type: RMCSize
     size: VerySmallXeno
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: drone
+  - type: RMCXenoDamageVisuals
+    prefix: lesser
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lesser_drone
   - type: AcidTrap
     trapLevel: 1
@@ -100,3 +107,7 @@
     evasion: 10
   - type: XenoInhands
     prefix: lesser
+  - type: FixedIdentity
+    name: cm-job-name-xeno-lesser-drone
+  - type: VentCrawler
+    ventCrawlIcon: lesser

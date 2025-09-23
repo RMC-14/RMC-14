@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: RMCKeycardDevice
+  name: keycard authentication device
+  description: This device is used to trigger station functions, which require multiple swipes of an ID card to authenticate.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/monitors.rsi
+    state: auth_off # TODO RMC14 auth_on when on
+    drawdepth: WallMountedItems
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: KeycardDevice
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui

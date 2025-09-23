@@ -21,8 +21,6 @@
         density: 500
         mask:
         - TabletopMachineMask
-        layer:
-        - BulletImpassable
   - type: ContainerContainer
     containers:
       charger_slot: !type:ContainerSlot

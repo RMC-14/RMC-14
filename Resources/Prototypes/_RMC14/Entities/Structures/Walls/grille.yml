@@ -85,6 +85,17 @@
     - type: AnimationPlayer
     - type: DamageMultiplierFlags
       flags: Breaching
+    - type: XenoToggleChargingDamage
+      stageLoss: 1
+      damage:
+        types:
+          Blunt: 40
+    - type: XenoCrusherChargable
+      setDamage:
+        types:
+          Blunt: 80
+      destroyDamage: 100
+      passOnDestroy: true
 
 - type: entity
   id: RMCGrilleBroken
@@ -120,3 +131,40 @@
               node: start
             - !type:DoActsBehavior
               acts: ["Destruction"]
+
+- type: entity
+  id: RMCGrilleElectrified
+  parent: RMCGrille
+  name: electrified grille
+  description: A dark reinforced mesh grille with warning stripes, equipped with Tesla-like coils to regulate high voltage current. It is highly electrified and dangerous when powered.
+  components:
+    - type: Sprite
+      drawdepth: Walls
+      sprite: _RMC14/Structures/Walls/electric_grille.rsi
+      layers:
+        - state: grille
+    - type: Icon
+      sprite: _RMC14/Structures/Walls/electric_grille.rsi
+      state: grille
+    - type: Construction
+      graph: RMCGrilleElectrified
+      node: GrilleElectrified
+      deconstructionTarget: start
+
+- type: entity
+  id: RMCGrilleElectrifiedBroken
+  parent: RMCGrilleBroken
+  name: broken electrified grille
+  description: A dark reinforced mesh grille with warning stripes, equipped with Tesla-like coils to regulate high voltage current. It is highly electrified and dangerous when powered. It has seen better days.
+  components:
+    - type: Sprite
+      drawdepth: Walls
+      sprite: _RMC14/Structures/Walls/electric_grille.rsi
+      state: brokengrille
+    - type: Icon
+      sprite: _RMC14/Structures/Walls/electric_grille.rsi
+      state: brokengrille
+    - type: Construction
+      graph: RMCGrilleElectrified
+      node: grilleBrokenElectrified
+      deconstructionTarget: start

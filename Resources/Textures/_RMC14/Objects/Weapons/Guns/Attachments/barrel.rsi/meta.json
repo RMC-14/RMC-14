@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/barrel.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob",
   "size": {
     "x": 32,
     "y": 32
@@ -24,9 +24,11 @@
       "delays": [
         [
           0.2,
-          0.1,
-          0.1,
-          0.1
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
         ]
       ]
     },
@@ -55,10 +57,10 @@
       "name": "hbarrel_a",
       "delays": [
         [
-          0.2,
-          0.1,
-          0.1,
-          0.1
+          0.3,
+          0.3,
+          0.3,
+          0.3
         ]
       ]
     },
@@ -99,10 +101,19 @@
       "name": "mar50barrel"
     },
     {
+      "name": "mar50barrel_a"
+    },
+    {
       "name": "mateba_short"
     },
     {
       "name": "mateba_short_a"
+    },
+    {
+      "name": "amateba_short"
+    },
+    {
+      "name": "amateba_short_a"
     },
     {
       "name": "mateba_medium"
@@ -111,10 +122,22 @@
       "name": "mateba_medium_a"
     },
     {
+      "name": "amateba_medium"
+    },
+    {
+      "name": "amateba_medium_a"
+    },
+    {
       "name": "mateba_long"
     },
     {
       "name": "mateba_long_a"
+    },
+    {
+      "name": "amateba_long"
+    },
+    {
+      "name": "amateba_long_a"
     },
     {
       "name": "m40sd_suppressor"
@@ -205,6 +228,15 @@
     },
     {
       "name": "pmc_sniperbarrel"
+    },
+    {
+      "name": "npz92_suppressor"
+    },
+    {
+      "name": "choke"
+    },
+    {
+      "name": "choke_a"
     }
   ]
 }

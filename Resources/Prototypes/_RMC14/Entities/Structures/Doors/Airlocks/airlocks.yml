@@ -20,7 +20,31 @@
 
 - type: entity
   parent: CMAirlock
+  id: CMAirlockShuttle
+  suffix: Shuttle
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Docking
+  - type: DockingSignalControl
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CMAirlock
   id: CMAirlockCommand
+  name: command airlock
   suffix: Command
   components:
   - type: Sprite
@@ -31,6 +55,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockEngineer
+  name: engineering airlock
   suffix: Engineering
   components:
   - type: Sprite
@@ -41,6 +66,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockMedical
+  name: medical airlock
   suffix: Medical
   components:
   - type: Sprite
@@ -51,6 +77,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockSecurity
+  name: security airlock
   suffix: Security
   components:
   - type: Sprite
@@ -61,7 +88,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockMaint
-  name: maintenance
+  name: maintenance hatch
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/maint_door.rsi
@@ -107,6 +134,38 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/prison_door.rsi
 
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockHybrisa
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockHybrisaPersonal
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRusted
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRustedWhite
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_white_door.rsi
+
 # Glass
 - type: entity
   parent: CMAirlock
@@ -143,6 +202,7 @@
 - type: entity
   parent: CMAirlockGlass
   id: CMAirlockGlassEngineer
+  name: engineering airlock
   suffix: Engineer
   components:
   - type: Sprite
@@ -153,6 +213,7 @@
 - type: entity
   parent: CMAirlockGlass
   id: CMAirlockGlassMedical
+  name: medical airlock
   suffix: Medical
   components:
   - type: Sprite
@@ -163,12 +224,27 @@
 - type: entity
   parent: CMAirlockGlass
   id: CMAirlockGlassSecurity
+  name: security airlock
   suffix: Security
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/sec_door_glass.rsi
   - type: PaintableAirlock
     department: CMMilitaryPolice
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassHybrisaPersonal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door_glass.rsi
 
 # Prep
 - type: entity

@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingHeadEyeBaseFlippable
+  id: RMCEyepatchWhite
+  name: eyepatch
+  description: Yarr.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Misc/eyepatch.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Misc/eyepatch.rsi
+  - type: EyeProtection
+    protectionTime: 5
+
+- type: entity
+  parent: [RMCEyepatchWhite, ClothingHeadEyeBaseFlipped]
+  id: RMCEyepatchWhiteFlipped
+  suffix: flipped

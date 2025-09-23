@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
@@ -93,6 +93,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
         {
             BreakOnMove = true,
             DistanceThreshold = xeno.Comp.Range,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -155,7 +156,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
         if (!TryComp(target, out PhysicsComponent? physics))
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, action.Value))
+        if (!_rmcActions.TryUseAction(xeno, action.Value, target))
             return;
 
         _rmcPulling.TryStopAllPullsFromAndOn(target);

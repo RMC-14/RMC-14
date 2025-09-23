@@ -10,7 +10,7 @@ public sealed class RMCWaterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<(EntityUid Id, TimeSpan SpreadAt)> _makeActive = new();

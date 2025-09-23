@@ -1,0 +1,290 @@
+# Rocks
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHybrisaRock
+  name: rock wall
+  description: Massive columns comprised of anicent sedimentary rocks loom before you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock
+  - type: IconSmooth
+    key: walls
+    base: rock
+
+- type: entity
+  parent: RMCWallHybrisaRock
+  id: RMCWallHybrisaRockBorder
+  suffix: border
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock_border
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock_border
+  - type: IconSmooth
+    key: walls
+    base: rock_border
+
+- type: entity
+  parent: RMCWallHybrisaRock
+  id: RMCWallHybrisaRockTimed
+  suffix: TIMED
+  components:
+  - type: TimedDespawn
+    lifetime: 2400
+
+# Engineer Ship
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallEngineer
+  name: strange metal wall
+  description: Nigh indestructible walls that make up the hull of an unknown ancient ship, looks like nothing you can do will penetrate the hull.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_engineership.rsi
+    state: metal
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_engineership.rsi
+    state: metal
+  - type: IconSmooth
+    key: walls
+    base: metal
+
+# Colony
+
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallHybrisa
+  name: bare metal walls
+  description: A thick and chunky metal wall. The surface is barren and imposing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall.rsi
+    state: strata_bare_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_bare_outpost_
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallHybrisaReinforced
+  name: ribbed metal walls
+  description: A thick and chunky metal wall covered in jagged ribs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHybrisaHull
+  name: ribbed metal walls
+  suffix: hull
+  description: A thick and chunky metal wall that is, just by virtue of its placement and imposing presence, entirely indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_hull
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
+
+# Medical
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaMedical
+  suffix: medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_medical.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_medical.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaMedicalReinforced
+  suffix: medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaMedicalHull
+  suffix: medical, hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_hull
+
+# Engineering
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaEngi
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_engineering.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_engineering.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaEngiReinforced
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaEngiHull
+  suffix: engineering, hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_hull
+
+# Office
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaOffice
+  suffix: office
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_office.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_office.rsi
+    state: strata_bare_outpost_
+
+# Space Port
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaSpacePort
+  name: metal wall
+  description: A huge chunk of metal used to separate rooms.
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport.rsi
+    state: metal
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport.rsi
+    state: metal
+  - type: IconSmooth
+    key: walls
+    base: metal
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaSpacePortReinforced
+  suffix: space port
+  name: reinforced metal wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: IconSmooth
+    key: walls
+    base: rwall
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaSpacePortHull
+  suffix: space port, hull
+  name: heavy reinforced wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: hwall
+  - type: IconSmooth
+    key: walls
+    base: rwall
+
+# Research
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaResearch
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_research.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_research.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaResearchReinforced
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaResearchHull
+  suffix: research, hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_hull

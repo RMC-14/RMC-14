@@ -1,0 +1,70 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaERT
+  name: ERT station
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    powerNet: ert
+    avoidBioscan: true
+
+# Fax Responder Outpost
+
+- type: entity
+  parent: RMCAreaERT
+  id: RMCAreaERTFax
+  name: Sector Comms Relay
+  suffix: Fax Responder Outpost, Interior
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    powerNet: fax
+    avoidBioscan: true
+
+- type: entity
+  parent: RMCAreaERT
+  id: RMCAreaERTFaxExterior
+  name: Sector Comms Relay
+  suffix: Fax Responder Outpost, Exterior
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    powerNet: faxexterior
+    avoidBioscan: true
+
+# Shuttles
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaShuttleNS #Not Sulaco
+  name: Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaShuttleNS
+  id: RMCAreaShuttleERT
+  name: ERT Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: lifeboat

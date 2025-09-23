@@ -15,6 +15,9 @@ public sealed partial class ItemCamouflageComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<string, Dictionary<CamouflageType, string>>? Layers;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<CamouflageType, Robust.Shared.Maths.Color>? Colors;
 }
 
 [Serializable, NetSerializable]

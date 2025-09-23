@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/contain.dmi, modified by troytroy40 on GitHub",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/contain.dmi and https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/containers/containersextended.dmi, modified by troytroy40 and noctyrnal on GitHub",
   "size": {
     "x": 32,
     "y": 64
@@ -33,6 +33,300 @@
     },
     {
       "name": "bluecontainermiddle"
+    },
+    {
+      "name": "tartarus_l"
+    },
+    {
+      "name": "tartarus_r"
+    },
+    {
+      "name": "tanleft"
+    },
+    {
+      "name": "tanright"
+    },
+    {
+      "name": "blueleft"
+    },
+    {
+      "name": "blueright"
+    },
+    {
+      "name": "greenleft"
+    },
+    {
+      "name": "greenright"
+    },
+    {
+      "name": "redleft"
+    },
+    {
+      "name": "redright"
+    },
+    {
+      "name": "blackwyleft"
+    },
+    {
+      "name": "blackwyright"
+    },
+    {
+      "name": "greywyleft"
+    },
+    {
+      "name": "greywyright"
+    },
+    {
+      "name": "lightgreywyleft"
+    },
+    {
+      "name": "lightgreywyright"
+    },
+    {
+      "name": "whitewyleft"
+    },
+    {
+      "name": "whitewyright"
+    },
+    {
+      "name": "fujincontainerleft"
+    },
+    {
+      "name": "fujincontainermiddle"
+    },
+    {
+      "name": "apocraphycontainerleft"
+    },
+    {
+      "name": "apocraphycontainermiddle"
+    },
+    {
+      "name": "pathoscontainerleft"
+    },
+    {
+      "name": "pathoscontainermiddle"
+    },
+    {
+      "name": "weyacontainerleft"
+    },
+    {
+      "name": "weyacontainermiddle"
+    },
+    {
+      "name": "weyacontainerright"
+    },
+    {
+      "name": "weyaaltcontainerleft"
+    },
+    {
+      "name": "weyaaltcontainermiddle"
+    },
+    {
+      "name": "weyaaltcontainerright"
+    },
+    {
+      "name": "trijentcontainerleft"
+    },
+    {
+      "name": "trijentcontainermiddle"
+    },
+    {
+      "name": "trijentcontainerright"
+    },
+    {
+      "name": "trijentaltcontainerleft"
+    },
+    {
+      "name": "trijentaltcontainermiddle"
+    },
+    {
+      "name": "trijentaltcontainerright"
+    },
+    {
+      "name": "ferretcontainerleft"
+    },
+    {
+      "name": "ferretcontainermiddle"
+    },
+    {
+      "name": "ferretcontainerright"
+    },
+    {
+      "name": "novariscontainerleft"
+    },
+    {
+      "name": "novariscontainermiddle"
+    },
+    {
+      "name": "novariscontainerright"
+    },
+    {
+      "name": "aiccontainermiddle"
+    },
+    {
+      "name": "sppcontainerleft"
+    },
+    {
+      "name": "sppcontainermiddle"
+    },
+    {
+      "name": "sppcontainerright"
+    },
+    {
+      "name": "sppaltcontainerleft"
+    },
+    {
+      "name": "sppaltcontainermiddle"
+    },
+    {
+      "name": "sppaltcontainerright"
+    },
+    {
+      "name": "mspcontainerleft"
+    },
+    {
+      "name": "mspcontainermiddle"
+    },
+    {
+      "name": "mspcontainerright"
+    },
+    {
+      "name": "unmccontainerleft"
+    },
+    {
+      "name": "unmccontainermiddle"
+    },
+    {
+      "name": "unmccontainerright"
+    },
+    {
+      "name": "aegiscontainerleft"
+    },
+    {
+      "name": "aegiscontainermiddle"
+    },
+    {
+      "name": "aegiscontainerright"
+    },
+    {
+      "name": "spp1left"
+    },
+    {
+      "name": "spp1right"
+    },
+    {
+      "name": "spp2left"
+    },
+    {
+      "name": "spp2right"
+    },
+    {
+      "name": "spp3left"
+    },
+    {
+      "name": "spp3right"
+    },
+    {
+      "name": "spp4left"
+    },
+    {
+      "name": "spp4right"
+    },
+    {
+      "name": "spp5left"
+    },
+    {
+      "name": "spp5right"
+    },
+    {
+      "name": "spp6left"
+    },
+    {
+      "name": "spp6right"
+    },
+    {
+      "name": "spp7left"
+    },
+    {
+      "name": "spp7right"
+    },
+    {
+      "name": "spp8left"
+    },
+    {
+      "name": "spp8right"
+    },
+    {
+      "name": "spp9left"
+    },
+    {
+      "name": "spp9right"
+    },
+    {
+      "name": "spp10left"
+    },
+    {
+      "name": "spp10right"
+    },
+    {
+      "name": "spp11left"
+    },
+    {
+      "name": "spp11right"
+    },
+    {
+      "name": "spp12left"
+    },
+    {
+      "name": "spp12right"
+    },
+    {
+      "name": "spp13left"
+    },
+    {
+      "name": "spp13right"
+    },
+    {
+      "name": "spp14left"
+    },
+    {
+      "name": "spp14right"
+    },
+    {
+      "name": "spp15left"
+    },
+    {
+      "name": "spp15right"
+    },
+    {
+      "name": "spp16left"
+    },
+    {
+      "name": "spp16right"
+    },
+    {
+      "name": "spp17left"
+    },
+    {
+      "name": "spp17right"
+    },
+    {
+      "name": "spp18left"
+    },
+    {
+      "name": "spp18right"
+    },
+    {
+      "name": "spp19left"
+    },
+    {
+      "name": "spp19right"
+    },
+    {
+      "name": "spp20left"
+    },
+    {
+      "name": "spp20right"
     }
   ]
 }

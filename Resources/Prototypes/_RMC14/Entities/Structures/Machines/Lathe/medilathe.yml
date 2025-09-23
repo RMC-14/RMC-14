@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseMachinePowered
   id: RMCMedilathe
   name: medilathe
@@ -43,45 +43,8 @@
     unlitIdleState: medilathe_u
     unlitRunningState: medilathe_n_u
     producingSound: /Audio/_RMC14/Machines/print.ogg
-    staticRecipes:
-    - CMBeaker
-    - CMBeakerLarge
-#    - Drinking glass (625 glass)
-    - CMSyringe
-    - RMCDropper
-#    - RMC Spray bottle (500 plastic)
-#    - Autoinjector (C-T) (300 Plastic)
-#    - Autoinjector (C-S) (300 Plastic)
-#    - Autoinjector (C-M) (300 Plastic)
-#    - Autoinjector (C-L) (300 Plastic)
-    - RMCMedicAutoInjectorEZ1
-    - RMCMedicAutoInjectorEZ5
-    - RMCMedicAutoInjectorEZ10
-    - RMCMedicAutoInjectorEZ15
-    - RMCMedicAutoInjectorEZ30
-    - RMCMedicAutoInjectorEZ45
-    - RMCMedicAutoInjectorEZ60
-    - RMCMedicAutoInjector15
-    - RMCMedicAutoInjector30
-    - CMHypospray
-    - CMBloodPack
-    - RMCBeakerHighCapacity
-    - CMBonesetter
-#    - FixOVein (5000 Plastic)
-    - CMStasisBag
-    - CMRollerBed
-    - CMPillCanister
-    - CMFirstAidKit
-    - CMBurnAidKit
-    - CMToxinAidKit
-    - CMAdvFirstAidKit
-    - CMFirstAidO2Kit
-#    - Radiation First Aid Kit (2000 Plastic)
-#    - Syringe Case (1000 Plastic)
-    - RMCSurgicalTrayEmpty
-    - RMCVialBox
-    - RMCPouchReagentCanister
-    - RMCPressurizedCanister
+    staticPacks:
+    - RMCRecipesMedilathe
   - type: MaterialStorage
     storage:
       CMGlass: 533
@@ -120,8 +83,7 @@
       components:
       - Xeno
   - type: Anchorable
-    flags:
-    - None
+    flags: None
 
 - type: entity
   parent: RMCMedilathe
@@ -157,3 +119,43 @@
     runningState: medilathe_n_f
     unlitIdleState: medilathe_u_f
     unlitRunningState: medilathe_n_u_f
+
+- type: latheRecipePack
+  id: RMCRecipesMedilathe
+  recipes:
+  - CMSyringe
+  - RMCDropper
+  #    - RMC Spray bottle (500 plastic)->(625)
+  - RMCMedicAutoInjectorCustom5
+  - RMCMedicAutoInjectorCustom15
+  - RMCMedicAutoInjectorCustom30
+  - RMCMedicAutoInjectorCustom60
+  - RMCMedicAutoInjectorEZ1
+  - RMCMedicAutoInjectorEZ5
+  - RMCMedicAutoInjectorEZ10
+  - RMCMedicAutoInjectorEZ15
+  - RMCMedicAutoInjectorEZ30
+  - RMCMedicAutoInjectorEZ45
+  - RMCMedicAutoInjectorEZ60
+  - RMCMedicAutoInjector15
+  - RMCMedicAutoInjector30
+  - CMHypospray
+  - CMBloodPack
+  - RMCBeakerHighCapacity
+  - CMBonesetter
+  #    - FixOVein (5000 Plastic)->(6250)
+  - CMStasisBag
+  - CMRollerBed
+  - CMPillCanister
+  - CMFirstAidKit
+  - CMBurnAidKit
+  - CMToxinAidKit
+  - CMAdvFirstAidKit
+  - CMFirstAidO2Kit
+  - RMCRadiationAidKit
+  - RMCSyringeCase
+  - CMSurgicalCase
+  - RMCSurgicalTrayEmpty
+  - RMCVialBox
+  - RMCPouchReagentCanister
+  - RMCPressurizedCanister

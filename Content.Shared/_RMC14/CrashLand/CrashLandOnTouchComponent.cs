@@ -1,5 +1,7 @@
-﻿namespace Content.Shared._RMC14.CrashLand;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
-[Access(typeof(CrashLandSystem))]
+namespace Content.Shared._RMC14.CrashLand;
+
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedCrashLandSystem))]
 public sealed partial class CrashLandOnTouchComponent : Component;

@@ -65,6 +65,14 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         var angleMin = segmentAngle * thrownCount;
                         var angleMax = segmentAngle * (thrownCount + 1);
                         angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+
+                        // RMC14
+                        var scatterGrenadeContents = new ScatterGrenadeContentsEvent(totalCount, thrownCount, angle);
+                        RaiseLocalEvent(uid, ref scatterGrenadeContents);
+
+                        if (scatterGrenadeContents.Handled)
+                            angle = scatterGrenadeContents.Angle;
+
                         thrownCount++;
                     }
 
@@ -75,6 +83,10 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         direction *= component.Distance;
 
                     _throwingSystem.TryThrow(contentUid, direction, component.Velocity);
+
+                    // RMC14
+                    var throwContent = new GrenadeContentThrownEvent(uid);
+                    RaiseLocalEvent(contentUid, ref throwContent);
 
                     if (component.TriggerContents)
                     {

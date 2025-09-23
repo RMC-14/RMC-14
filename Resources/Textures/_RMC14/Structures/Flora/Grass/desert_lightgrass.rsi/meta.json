@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/structures/props/natural/vegetation/dam.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lightgrass_1"
+    },
+    {
+      "name": "lightgrass_2"
+    },
+    {
+      "name": "lightgrass_3"
+    },
+    {
+      "name": "lightgrass_4"
+    },
+    {
+      "name": "lightgrass_5"
+    },
+    {
+      "name": "lightgrass_6"
+    },
+    {
+      "name": "lightgrass_7"
+    },
+    {
+      "name": "lightgrass_8"
+    },
+    {
+      "name": "lightgrass_9"
+    },
+    {
+      "name": "lightgrass_10"
+    },
+    {
+      "name": "lightgrass_11"
+    },
+    {
+      "name": "lightgrass_12"
+    }
+  ]
+}

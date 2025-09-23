@@ -1,7 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -27,13 +27,22 @@ public sealed partial class RangefinderComponent : Component
     public Vector2i? LastTarget;
 
     [DataField, AutoNetworkedField]
+    public MapCoordinates? LastCoords;
+
+    [DataField, AutoNetworkedField]
+    public string TargetUseDelay = "rangefinder_mode";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan TargetDelay = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
     public string SwitchModeUseDelay = "rangefinder_mode";
 
     [DataField, AutoNetworkedField]
     public TimeSpan SwitchModeDelay = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
-    public DoAfter.DoAfter? DoAfter;
+    public Shared.DoAfter.DoAfter? DoAfter;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(10);
@@ -61,6 +70,9 @@ public sealed partial class RangefinderComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
+
+    [DataField, AutoNetworkedField]
+    public float BreakRange = 0.5f;
 }
 
 [Serializable, NetSerializable]
@@ -74,4 +86,5 @@ public enum RangefinderMode
 {
     Rangefinder,
     Designator,
+    Spotter,
 }

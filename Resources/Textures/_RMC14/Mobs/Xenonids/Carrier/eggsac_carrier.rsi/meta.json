@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "carrier_rest_2"
+    },
+    {
+      "name": "carrier_rest_3"
+    },
+    {
+      "name": "carrier_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "carrier_downed_0"
+    },
+    {
+      "name": "carrier_downed_1"
+    },
+    {
+      "name": "carrier_downed_2"
+    },
+    {
+      "name": "carrier_downed_3"
+    },
+    {
+      "name": "carrier_rest_0"
+    },
+    {
+      "name": "carrier_rest_1"
+    },
+    {
+      "name": "carrier_parasite_right",
+      "directions": 4
+    },
+    {
+      "name": "carrier_egg_left",
+      "directions": 4
+    },
+    {
+      "name": "carrier_egg_right",
+      "directions": 4
+    },
+    {
+      "name": "carrier_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "eggsac_1_active",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          0.15
+        ],
+        [
+          1,
+          0.15
+        ],
+        [
+          1,
+          0.15
+        ],
+        [
+          1,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_1_downed"
+    },
+    {
+      "name": "eggsac_1_downed_active",
+      "delays": [
+        [
+          1,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_1_rest"
+    },
+    {
+      "name": "eggsac_1_rest_active",
+      "delays": [
+        [
+          1,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_2",
+      "directions": 4
+    },
+    {
+      "name": "eggsac_2_active",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ],
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ],
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ],
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_2_downed"
+    },
+    {
+      "name": "eggsac_2_downed_active",
+      "delays": [
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_2_rest"
+    },
+    {
+      "name": "eggsac_2_rest_active",
+      "delays": [
+        [
+          1,
+          0.1,
+          0.25,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_3",
+      "directions": 4
+    },
+    {
+      "name": "eggsac_3_active",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ],
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ],
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ],
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_3_downed"
+    },
+    {
+      "name": "eggsac_3_downed_active",
+      "delays": [
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_3_rest"
+    },
+    {
+      "name": "eggsac_3_rest_active",
+      "delays": [
+        [
+          1,
+          0.05,
+          0.05,
+          0.25,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "eggsac_0",
+      "directions": 4
+    },
+    {
+      "name": "eggsac_0_active",
+      "directions": 4
+    },
+    {
+      "name": "eggsac_0_downed"
+    },
+    {
+      "name": "eggsac_0_downed_active"
+    },
+    {
+      "name": "eggsac_0_rest"
+    },
+    {
+      "name": "eggsac_0_rest_active"
+    },
+    {
+      "name": "eggsac_1",
+      "directions": 4
+    }
+  ]
+}

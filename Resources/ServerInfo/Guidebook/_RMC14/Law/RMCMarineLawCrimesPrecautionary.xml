@@ -1,0 +1,54 @@
+﻿<Document>
+  # Precautionary Charges
+  - These are used to confine people indefinitely.
+  <Table Columns="2">
+    <ColorBox>
+      <Box>
+        Charge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Description
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Insanity
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Declared only by the CMO or a synthetic, acting in such a manner which makes the offender not sound clear of mind. The subject, once cleared to be of sound mind, may be released from this particular charge.
+        \nIn the absence of a CMO or Synthetic, the [color=#008000][bold]Commander[/bold][/color] or [color=#8B0000][bold]Chief MP[/bold][/color] can appoint an officer of the medical department to perform an evaluation in their stead.
+        \nAn exception to this is in cases of verified suicide or attempted suicide, and the subject may appeal, or appeal to any medical personnel.
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Prisoner of War
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Being a hostile member of a legitimate and recognised faction. (For example, CLF and SPP)
+        \nPrisoners of war cannot be executed. See [textlink="Third-Parties" link="RMCMarineSOPNONModThirdparty"] for more information and exceptions.
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Discretionary Detainment
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        A discretionary charge used by [color=#00CBFE][bold]Commanding Officer[/bold][/color] to detain personnel for any reason - for the safety and benefit of the operation or security.
+        \nThis is only appealable to the [color=#00CBFE][bold]Commanding Officer[/bold][/color], or the [color=#ffa500][bold]Provost Marshal Office[/bold][/color], and may be lifted at any time by the [color=#00CBFE][bold]Commanding Officer[/bold][/color].
+      </Box>
+    </ColorBox>
+
+  </Table>
+</Document>

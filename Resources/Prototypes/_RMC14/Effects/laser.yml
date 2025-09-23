@@ -1,0 +1,41 @@
+- type: entity
+  name: M96S laser
+  id: RMCM96SLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    drawdepth: Effects
+    state: "laser_beam"
+  - type: Beam
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  name: AMR laser
+  id: RMCAMRLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    drawdepth: Effects
+    state: "laser_beam_intense"
+  - type: Beam
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  name: spotting laser
+  id: RMCSpottingLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    drawdepth: Effects
+    state: "laser_beam_spotter"
+  - type: Beam
+  - type: Tag
+    tags:
+    - HideContextMenu

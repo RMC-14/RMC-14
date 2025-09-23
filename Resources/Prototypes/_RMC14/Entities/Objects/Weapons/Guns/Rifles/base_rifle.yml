@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
-  id: CMBaseWeaponRifleNoDualWieldPenalty
+  id: RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider
   components:
   - type: Gun
     shotsPerBurst: 3
@@ -52,13 +52,7 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
-  - type: MagazineAmmoProvider
-    autoEject: true
   - type: RMCAmmoEject
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
@@ -68,8 +62,9 @@
       state: all
 
 - type: entity
-  parent: CMBaseWeaponRifleNoDualWieldPenalty
-  id: CMBaseWeaponRifle
+  abstract: true
+  parent: RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider
+  id: RMCBaseWeaponRifleNoMagazineProvider
   components:
   - type: GunDualWielding
     weaponGroup: Rifle
@@ -80,10 +75,38 @@
   - type: GunGroupPenalty
 
 - type: entity
-  parent: BaseMagazineRifle
+  abstract: true
+  parent: [RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider, RMCBaseWeaponGunMagazineProvider]
+  id: CMBaseWeaponRifleNoDualWieldPenalty
+
+- type: entity
+  abstract: true
+  parent: [RMCBaseWeaponRifleNoMagazineProvider, RMCBaseWeaponGunMagazineProvider]
+  id: CMBaseWeaponRifle
+
+- type: entity
+  abstract: true
+  id: RMCBaseWeaponMagazineVisuals
+  components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+- type: entity
+  parent: BaseItem
   id: CMMagazineRifleBase
   abstract: true
   components:
+  - type: Tag
+    tags:
+      - MagazineRifle
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeRifle
+    capacity: 25
   - type: Item
     size: Normal
   - type: MagazineVisuals
@@ -91,6 +114,16 @@
     steps: 2
     zeroVisible: false
     zeroOnlyOnEmpty: true
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
   - type: Clothing
     slots:

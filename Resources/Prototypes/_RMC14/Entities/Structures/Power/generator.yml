@@ -1,6 +1,6 @@
 ﻿- type: entity
-  id: RMCGeneratorFusion
-  name: S-52 fusion reactor
+  id: RMCGeneratorFusionFake
+  name: permanently destroyed S-52 fusion reactor
   placement:
     mode: SnapgridCenter
   components:
@@ -19,14 +19,22 @@
         layer:
         - AirlockLayer
         - LowImpassable
-  - type: Clickable
-  - type: InteractionOutline
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Power/fusion_reactor.rsi
     layers:
     - state: "off"
       map: [ "base" ]
+  - type: Clickable
+
+- type: entity
+  parent: RMCGeneratorFusionFake
+  id: RMCGeneratorFusion
+  name: S-52 fusion reactor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
   - type: Appearance
   - type: Corrodible
     isCorrodible: false
@@ -51,6 +59,7 @@
           Hundred: { state: "on-100" }
           Overloaded: { state: "overloaded" }
   - type: BlockXenoConstruction
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCGeneratorFusion
@@ -61,6 +70,7 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+  - type: IntelPowerObjective
 
 - type: entity
   parent: BaseItem
@@ -74,3 +84,65 @@
   - type: Item
     size: Normal
   - type: RMCFusionCell
+
+- type: entity
+  abstract: true
+  id: RMCPortableGeneratorBase # TODO RMC14 - Functionality
+  parent: [ BaseMachine, SmallConstructibleMachine, StructureWheeled]
+  components:
+    - type: Transform
+      anchored: False
+    - type: Physics
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.40,-0.40,0.40,0.40"
+          density: 155
+          mask:
+            - MachineMask
+          layer:
+            - MachineLayer
+    - type: Appearance
+    - type: Sprite
+      sprite: _RMC14/Structures/Power/generators.rsi
+      noRot: true
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+
+- type: entity
+  parent: RMCPortableGeneratorBase
+  id: RMCPortableGenerator
+  name: "P.A.C.M.A.N.-type Portable Generator"
+  description: A portable generator for emergency backup power.
+  components:
+    - type: Sprite
+      state: portgen0
+
+- type: entity
+  parent: RMCPortableGeneratorBase
+  id: RMCPortableGenerator2
+  name: "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
+  description: A portable generator for emergency backup power.
+  components:
+    - type: Sprite
+      state: portgen1

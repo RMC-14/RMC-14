@@ -21,6 +21,9 @@ public sealed partial class CCVars
     public static readonly CVarDef<bool> AdminSoundsEnabled =
         CVarDef.Create("audio.admin_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    public static readonly CVarDef<bool> BwoinkSoundEnabled =
+        CVarDef.Create("audio.bwoink_sound_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
     public static readonly CVarDef<string> AdminChatSoundPath =
         CVarDef.Create("audio.admin_chat_sound_path",
             "/Audio/Items/pop.ogg",
@@ -30,5 +33,5 @@ public sealed partial class CCVars
         CVarDef.Create("audio.admin_chat_sound_volume", -5f, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
     public static readonly CVarDef<string> AHelpSound =
-        CVarDef.Create("audio.ahelp_sound", "/Audio/Effects/adminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("audio.ahelp_sound", "/Audio/_RMC14/Effects/Admin/adminhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
 }

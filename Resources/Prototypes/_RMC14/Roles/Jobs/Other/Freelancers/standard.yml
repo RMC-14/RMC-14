@@ -1,0 +1,118 @@
+# Freelancer Rifleman
+- type: job
+  parent: CMJobBase
+  id: CMFreelancerRifleman
+  name: rmc-job-name-freelancer-standard
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: RMCJobFreelancerStandard
+  ranks:
+    RMCRankFLFreelancer: []
+  startingGear: RMCGearFreelancerStandard
+  icon: RMCJobIconFreelancerStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Freelancer Conscript
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-standard
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerStandardHostile
+  name: freelancer ghost role rifleman
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerStandard
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerStandardFriendly
+  name: freelancer ghost role rifleman
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerStandardFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCFreelancerStandard
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-hostile-standard
+    description: rmc-ghost-role-information-freelancer-hostile-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerRifleman
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCFreelancerStandardFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-friendly-standard
+    description: rmc-ghost-role-information-freelancer-friendly-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerRifleman
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: startingGear
+  id: RMCGearFreelancerStandard
+  equipment:
+    back: RMCSatchelLightpackFreelancerStandard
+    belt: RMCMAR40BeltFilled
+    suitstorage: WeaponRifleMAR40
+    gloves: RMCHandsVeteranPMC
+    jumpsuit: RMCJumpsuitFreelancer
+    outerClothing: CMArmorFreelancer
+    shoes: RMCBootsSPPFilled
+    id: RMCIDCardFreelancer
+    ears: RMCHeadsetDistressDukes
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEDP
+
+- type: playTimeTracker
+  id: RMCJobFreelancerStandard
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconFreelancerStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: free_rfn

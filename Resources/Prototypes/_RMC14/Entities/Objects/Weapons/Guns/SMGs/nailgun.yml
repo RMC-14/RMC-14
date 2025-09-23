@@ -10,8 +10,12 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
+    - state: mag-4
       map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun.rsi
   - type: Item
@@ -60,9 +64,16 @@
   - type: GunDamageModifier
     multiplier: 1.2
   - type: Nailgun
+  - type: GunGroupPenalty
+    angleIncrease: 0
+    recoil: 0
+    damageMultiplier: 1
+  - type: Tag
+    tags:
+    - RMCWeaponSMGNailgun
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGNailgun
   name: "nailgun magazine (7x45mm)"
   description: "A large magazine of oversized plasteel nails. Unfortunately, the production cost of those nail makes them ill-affordable for most military projects, and only some specific construction projects requires them."
@@ -83,15 +94,15 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-6
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 7
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
-  
+
 - type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridge7x45mm
@@ -102,11 +113,12 @@
     - Cartridge
     - RMCCartridge7x45mm
   - type: CartridgeAmmo
-    proto: Nail7x45mm
+    proto: RMCNail7x45mm
 
 - type: entity
   parent: RMCBaseBullet
-  id: Nail7x45mm
+  id: RMCNail7x45mm
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -126,6 +138,9 @@
     thresholds:
     - range: 5
       falloff: 10
+
+- type: Tag
+  id: RMCWeaponSMGNailgun
 
 - type: Tag
   id: RMCMagazineSMGNailgun

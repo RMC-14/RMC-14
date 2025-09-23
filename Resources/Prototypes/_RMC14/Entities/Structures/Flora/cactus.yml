@@ -1,0 +1,30 @@
+- type: entity
+  parent: RMCBasePlant
+  id: RMCCactus
+  name: cactus
+  description: It's a small, spiky cactus.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/cactus.rsi
+    state: cactus_3
+
+- type: entity
+  parent: RMCCactus
+  id: RMCCactus1
+  components:
+  - type: Sprite
+    state: cactus_4
+
+- type: entity
+  parent: RMCCactus
+  id: RMCCactus2
+  components:
+  - type: Sprite
+    state: cactus_7
+
+- type: entity
+  parent: RMCCactus
+  id: RMCCactus3
+  components:
+  - type: Sprite
+    state: cactus_8

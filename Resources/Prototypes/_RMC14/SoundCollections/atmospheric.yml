@@ -1,0 +1,5 @@
+- type: soundCollection
+  id: RMCThunder
+  files:
+    - /Audio/_RMC14/Effects/thunderclap1.ogg
+    - /Audio/_RMC14/Effects/thunderclap2.ogg

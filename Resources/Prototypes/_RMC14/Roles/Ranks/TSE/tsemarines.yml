@@ -1,0 +1,205 @@
+- type: rank
+  id: RMCRankTSEMarine
+  name: Marine
+  prefix: Mne.
+  paygrade: E1
+
+- type: rank
+  id: RMCRankTSELanceCorporal
+  name: Lance Corporal
+  prefix: LCpl.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankTSECorporal
+  name: Corporal
+  prefix: Cpl.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankTSESergeant
+  name: Sergeant
+  prefix: Sgt.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankTSEColourSergeant
+  name: Colour Sergeant
+  prefix: CSgt.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankTSEWarrantOfficer1
+  name: Warrant Officer Class 1
+  prefix: WO1.
+  paygrade: E6
+
+- type: rank
+  id: RMCRankTSEWarrantOfficer2
+  name: Warrant Officer Class 2
+  prefix: WO2.
+  paygrade: E7
+
+- type: rank
+  id: RMCRankTSESecondLieutenant
+  name: Second Lieutenant
+  prefix: 2nd LT
+  paygrade: O1
+
+- type: rank
+  id: RMCRankTSELieutenant
+  name: Lieutenant
+  prefix: Lt.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankTSECaptain
+  name: Captain
+  prefix: Capt.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankTSEMajor
+  name: Major
+  prefix: Maj.
+  paygrade: O4
+
+- type: rank
+  id: RMCRankTSELieutenantColonel
+  name: Lieutenant Colonel
+  prefix: Lt.Col.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankTSEColonel
+  name: Colonel
+  prefix: Col.
+  paygrade: O6
+
+- type: rank
+  id: RMCRankTSEBrigadier
+  name: Brigadier
+  prefix: Brig.
+  paygrade: O7
+
+- type: rank
+  id: RMCRankTSEMajorGeneral
+  name: Major General
+  prefix: Maj Gen.
+  paygrade: O8
+
+- type: rank
+  id: RMCRankTSELieutenantGeneral
+  name: Lieutenant General
+  prefix: Lt Gen.
+  paygrade: O9
+
+- type: rank
+  id: RMCRankTSEGeneral
+  name: General
+  prefix: Gen.
+  paygrade: O10
+
+# The below ranks are for the JAPANESE TSE marines. What does that mean? Why do they have two sets of ranks? Why does this exist? Why must we suffer like this?
+
+- type: rank
+  id: RMCRankIASFNitoRikushi
+  name: Nito Rikushi
+  prefix: Nt-Shi.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankIASFIttoRikushi
+  name: Itto Rikushi
+  prefix: It-Shi.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankIASFRikushicho
+  name: Rikushicho
+  prefix: Shi.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankIASFSantoRikuso
+  name: Santo Rikuso
+  prefix: St-Rik.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankIASFNitoRikuso
+  name: Nito Rikuso
+  prefix: Nt-Rik.
+  paygrade: E6
+
+- type: rank
+  id: RMCRankIASFIttoRikuso
+  name: Itto Rikuso
+  prefix: It-Rik.
+  paygrade: E7
+
+- type: rank
+  id: RMCRankIASFRikusocho
+  name: Rikusocho
+  prefix: Rik.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankIASFSantoKaii
+  name: Santo Kaii
+  prefix: St-Wei.
+  paygrade: O1
+
+- type: rank
+  id: RMCRankIASFNitoKaii
+  name: Nito Kaii
+  prefix: Nt-Wei.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankIASFIttoKaii
+  name: Itto Kaii
+  prefix: It-Wei.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankIASFSantoKaisa
+  name: Santo Kaisa
+  prefix: St-Sa.
+  paygrade: O4
+
+- type: rank
+  id: RMCRankIASFNitoKaisa
+  name: Nito Kaisa
+  prefix: Nt-Sa.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankIASFIttoKaisa
+  name: Itto Kaisa
+  prefix: It-Sa.
+  paygrade: O6
+
+- type: rank
+  id: RMCRankIASFKaishoHo
+  name: Kaisho-ho
+  prefix: It-Sho.
+  paygrade: O7
+
+- type: rank
+  id: RMCRankIASFKaisho
+  name: Kaisho
+  prefix: Sho.
+  paygrade: O8
+
+- type: rank
+  id: RMCRankIASFBakuryochotarusho
+  name: Bakuryōchō-taru-shō
+  prefix: Bt-Sho.
+  paygrade: O9
+
+- type: rank
+  id: RMCRankTSEEmpress
+  name: Empress
+  prefix: HRM.
+# This needs to be changed to allow it to change dynamically for genders

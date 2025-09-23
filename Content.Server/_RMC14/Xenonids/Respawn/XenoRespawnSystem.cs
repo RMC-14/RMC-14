@@ -3,20 +3,15 @@ using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Shared._RMC14.Xenonids.ForTheHive;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Respawn;
 using Content.Shared.Mind;
+using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Server._RMC14.Xenonids.Respawn;
 
@@ -70,6 +65,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
             if (time < respawn.RespawnAt)
                 continue;
 
+            ActorComponent? actor;
             if (respawn.RespawnAtCorpse)
             {
                 if (respawn.CorpseLocation == null)
@@ -81,7 +77,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
                 var spawn = SpawnAtPosition(respawn.Larva, respawn.CorpseLocation.Value);
                 _hive.SetHive(spawn, respawn.Hive);
 
-                if (!TryComp(ghost, out ActorComponent? actor))
+                if (!TryComp(ghost, out actor))
                     continue;
 
                 var session = actor.PlayerSession;
@@ -91,8 +87,8 @@ public sealed partial class XenoRespawnSystem : EntitySystem
 
                 _mind.TransferTo(mindId, spawn);
 
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-self"), spawn, spawn, Shared.Popups.PopupType.MediumCaution);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-others"), spawn, Filter.PvsExcept(spawn), true, Shared.Popups.PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-self"), spawn, spawn, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-others"), spawn, Filter.PvsExcept(spawn), true, PopupType.MediumCaution);
 
                 _audio.PlayPvs(respawn.CorpseSound, _transform.GetMoverCoordinates(spawn));
 
@@ -103,10 +99,14 @@ public sealed partial class XenoRespawnSystem : EntitySystem
             if (respawn.Hive == null || !TryComp<HiveComponent>(respawn.Hive, out var hiveComp))
                 continue;
 
-            _hive.IncreaseBurrowedLarva((respawn.Hive.Value, hiveComp), 1);
-            _hive.JoinBurrowedLarva((respawn.Hive.Value, hiveComp), ghost);
 
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-fail"), ghost, ghost, Shared.Popups.PopupType.Large);
+            if (TryComp(ghost, out actor))
+            {
+                _hive.IncreaseBurrowedLarva((respawn.Hive.Value, hiveComp), 1);
+                _hive.JoinBurrowedLarva((respawn.Hive.Value, hiveComp), actor.PlayerSession);
+            }
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-fail"), ghost, ghost, PopupType.Large);
             RemCompDeferred<XenoRespawnComponent>(ghost);
         }
     }

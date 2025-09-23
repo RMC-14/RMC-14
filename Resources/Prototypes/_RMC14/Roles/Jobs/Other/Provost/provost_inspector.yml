@@ -1,0 +1,79 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostInspector
+  name: rmc-job-name-corp-provost-inspector
+  description: rmc-ghost-role-information-provost-description
+  playTimeTracker: CMJobProvostInspector
+  ranks:
+    RMCRankProvostInspector: []
+  startingGear: RMCGearProvostInspector
+  icon: RMCJobIconProvostInspector
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-inspector
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidProvostInspector
+  name: provost ghost role inspector
+  suffix: Spawner, Player, Friendly, Medium Law Understanding
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostInspector
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostInspector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-inspector
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostInspector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearProvostInspector
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetProvost
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCProvostJacketFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostInspector
+    belt: CMBeltSecurityMPFilled
+    back: CMSatchelSecurityFilledProvost
+    #    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostInspector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostInspector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvi2

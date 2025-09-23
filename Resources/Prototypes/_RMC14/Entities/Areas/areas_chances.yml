@@ -12,7 +12,7 @@
 - type: entity
   parent: RMCAreaLv522
   id: RMCAreaLv522Indoors
-  name: Chance's Claim - Outdoors
+  name: Chance's Claim - Indoors
   components:
   - type: Sprite
     state: cliff_blocked
@@ -23,8 +23,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522
@@ -40,6 +42,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -57,17 +60,19 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522Oob
   id: RMCAreaLv522OobWYVault
-  name: LV522 - Weyland Secure Vault
+  name: LV522 - WEYA Secure Vault
   components:
   - type: Sprite
     state: blue
@@ -82,7 +87,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -95,8 +100,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -110,9 +117,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1Tunnel
@@ -126,9 +134,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     landingZone: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -138,6 +148,9 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -157,7 +170,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522LandingZone2
@@ -170,8 +183,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -181,6 +196,9 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle2
+  - type: Area
+    linkedLz: dropship_lz2
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZone2
@@ -204,8 +222,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -221,8 +241,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -238,8 +260,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -265,6 +289,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -290,6 +315,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -307,6 +333,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -317,6 +344,8 @@
   components:
   - type: Sprite
     state: west
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -325,6 +354,8 @@
   components:
   - type: Sprite
     state: east
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -334,7 +365,7 @@
   - type: Sprite
     state: south
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -344,7 +375,7 @@
   - type: Sprite
     state: southeast
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -354,7 +385,7 @@
   - type: Sprite
     state: southwest
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -403,6 +434,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -413,6 +446,7 @@
     state: engine_smes
   - type: Area
     minimapColor: '#C19504E7'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -438,9 +472,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -449,6 +484,8 @@
   components:
   - type: Sprite
     state: blue
+  - type: Area
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -457,6 +494,8 @@
   components:
   - type: Sprite
     state: blue
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522Indoors
@@ -472,6 +511,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -504,6 +544,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -526,6 +567,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -548,6 +590,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -572,6 +615,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -596,6 +640,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -618,6 +663,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -632,6 +678,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -654,6 +701,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -679,6 +727,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -696,6 +745,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -713,6 +763,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -759,6 +810,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -776,6 +828,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -793,8 +846,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsBBlock
@@ -817,8 +872,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsBBlock
@@ -842,9 +899,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522Indoors
@@ -853,6 +911,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsCBlock
@@ -870,7 +930,7 @@
   - type: Sprite
     state: yellow
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsCBlock
@@ -902,6 +962,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -983,9 +1044,11 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     minimapColor: '#C19504E7'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522Atmos
@@ -1001,6 +1064,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -1026,6 +1090,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1043,6 +1108,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1057,6 +1123,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1074,6 +1141,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1091,6 +1159,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1116,6 +1185,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1133,6 +1203,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1150,6 +1221,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1167,6 +1239,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1184,6 +1257,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1201,6 +1275,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -1218,5 +1293,6 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false

@@ -3,7 +3,7 @@
   parent: ActionMarineBase
   id: ActionMarineToggleable
   components:
-  - type: InstantAction
+  - type: Action
     backgroundOn:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: template_on_big
@@ -15,13 +15,14 @@
   name: Toggle Ammo Type
   description: Switch the ammo type fired by this gun.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: ammo_swap_normal
-    event: !type:GunToggleAmmoActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GunToggleAmmoActionEvent
 
 - type: entity
   parent: ActionMarineToggleable
@@ -29,13 +30,14 @@
   name: Toggle Recoil Compensation
   description: Removes all recoil when firing this gun.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: recoil_compensation
-    event: !type:GunToggleRecoilActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GunToggleRecoilActionEvent
 
 - type: entity
   parent: ActionMarineToggleable
@@ -43,13 +45,14 @@
   name: Toggle Auto Fire
   description: Makes the gun automatically shoot a single shot towards a target every couple seconds.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: autofire
-    event: !type:GunToggleableAutoFireActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GunToggleableAutoFireActionEvent
 
 - type: entity
   parent: ActionMarineToggleable
@@ -57,13 +60,14 @@
   name: Toggle Far Sight
   description: Lets you see slightly farther away.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: far_sight
-    event: !type:FarSightActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:FarSightActionEvent
 
 - type: entity
   parent: ActionMarineToggleable
@@ -71,10 +75,11 @@
   name: Toggle Motion Detector
   description: Periodically pings any unknown movement near you.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: motion_detector
-    event: !type:GunToggleableMotionDetectorActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:ToggleableMotionDetectorActionEvent

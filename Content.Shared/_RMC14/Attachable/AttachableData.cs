@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Weapons.Ranged.Components;
@@ -7,12 +8,25 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Attachable;
 
-[DataRecord, Serializable, NetSerializable]
-public record struct AttachableSlot(
-    bool Locked,
-    EntityWhitelist Whitelist,
-    ProtoId<EntityPrototype>? StartingAttachable
-);
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct AttachableSlot()
+{
+    [DataField]
+    public bool Locked;
+
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField]
+    public EntProtoId<AttachableComponent>? StartingAttachable;
+
+    [DataField]
+    public List<EntProtoId<AttachableComponent>>? Random;
+
+    [DataField]
+    public float RandomChance = 1f;
+}
 
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableModifierConditions(
@@ -41,7 +55,8 @@ public record struct AttachableWeaponRangedModifierSet(
     float RecoilFlat, // How much the camera shakes when you shoot.
     double ScatterFlat, // Scatter in degrees. This is how far bullets go from where you aim. Conversion to RMC: CM_SCATTER * 2
     float FireDelayFlat, // The delay between each shot. Conversion to RMC: CM_FIRE_DELAY / 10
-    float ProjectileSpeedFlat // How fast the projectiles move. Conversion to RMC: CM_PROJECTILE_SPEED * 10
+    float ProjectileSpeedFlat, // How fast the projectiles move. Conversion to RMC: CM_PROJECTILE_SPEED * 10
+    float RangeFlat // The distance in tiles at which the damage of the projectiles starts to drop off. Conversion to RMC: projectile_max_range_mod
 );
 
 [DataRecord, Serializable, NetSerializable]

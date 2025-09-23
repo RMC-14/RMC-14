@@ -1,14 +1,40 @@
 - type: Tag
+  id: CMRollerItem
+
+- type: Tag
   id: CMRollerBed
 
 - type: entity
-  parent: RollerBed
+  id: RMCRollerBedDestruction
+  abstract: true
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ReceiverXenoClaws
+    minimumClawStrength: Normal
+    hitsToDestroy: 1
+  - type: Construction
+    graph: RMCRollerBed
+    node: Metal
+
+- type: entity
+  parent: [ RMCRollerBedDestruction, RollerBed ]
   id: CMRollerBed
   name: roller bed
   description: A collapsed roller bed that can be carried around.
   components:
   - type: Tag
     tags:
+    - CMRollerItem
     - CMRollerBed
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
@@ -45,6 +71,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Foldable
+    fitIntoEntityStorage: true
+  - type: RMCStrapNoDrawDepthChange
 
 - type: entity
   parent: CMRollerBed
@@ -75,6 +104,8 @@
       map: [ "buckledLayer" ]
       visible: false
   - type: Appearance
+  - type: ReceiverXenoClaws
+    minimumClawStrength: ImpossiblySharp
 
 - type: entity
   parent: CMPortableSurgicalBed
@@ -88,7 +119,7 @@
 
 # Copied most of RollerBed prototype except for pullable
 - type: entity
-  parent: [ BaseDeployFoldable ]
+  parent: [ RMCRollerBedDestruction, BaseDeployFoldable ]
   id: RMCMedevacStretcher
   name: medevac stretcher
   description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
@@ -162,7 +193,9 @@
   - type: MedevacStretcher
   - type: Tag
     tags:
-    - CMRollerBed
+    - CMRollerItem
+  - type: ReceiverXenoClaws
+    minimumClawStrength: ImpossiblySharp
 
 - type: entity
   parent: RMCMedevacStretcher
@@ -174,3 +207,107 @@
   - type: Strap
     enabled: false
 # TODO RMC14 medevac stretcher
+
+# Hospital Bed
+
+- type: entity
+  parent: CMRollerBed
+  id: RMCRollerBedHospital
+  name: hospital roller bed
+  description: A basic cushioned leather board resting on a small frame. Not very comfortable at all, but allows the patient to rest lying down while moved to another location rapidly. Not great for surgery, but better than nothing.
+  components:
+  - type: Sprite
+    layers:
+    - state: bigroller_down
+      map: [ "unfoldedLayer" ]
+    - state: surgical_folded
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: bigroller_up
+      map: [ "buckledLayer" ]
+      visible: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalBlood
+  components:
+  - type: Sprite
+    layers:
+    - state: bigrollerblood_down
+      map: [ "unfoldedLayer" ]
+    - state: surgical_folded
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: bigrollerblood_up
+      map: [ "buckledLayer" ]
+      visible: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalBloodFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalSheet
+  components:
+  - type: Sprite
+    layers:
+    - state: bigrollerhospitalsheet_down
+      map: [ "unfoldedLayer" ]
+    - state: surgical_folded
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: bigrollerhospitalsheet_up
+      map: [ "buckledLayer" ]
+      visible: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalSheetFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalSheet2
+  components:
+  - type: Sprite
+    layers:
+    - state: bigrollerhospitalsheet2_down
+      map: [ "unfoldedLayer" ]
+    - state: surgical_folded
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: bigrollerhospitalsheet2_up
+      map: [ "buckledLayer" ]
+      visible: false
+
+- type: entity
+  parent: RMCRollerBedHospital
+  id: RMCRollerBedHospitalSheet2Folded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false

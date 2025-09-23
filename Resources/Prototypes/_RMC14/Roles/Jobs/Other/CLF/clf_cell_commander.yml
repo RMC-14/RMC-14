@@ -1,0 +1,93 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCLFCellCommander
+  name: rmc-clf-cell-commander
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: CMJobCLFCellCommander
+  ranks:
+    RMCRankCLFRebelCommander: [ ]
+  startingGear: RMCGearCLFCellCommander
+  icon: RMCJobIconCLFCellCommander
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 4
+        RMCSkillSmartGun: 1
+        RMCSkillExecution: 1
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-cell-commander
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: clf_cellcom
+    - type: RMCPointing
+    - type: MarineOrders
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFCellCommander
+  name: clf ghost role cell commander
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFCellCommander
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFCellCommander
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-cell-commander
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFCellCommander
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadCLF
+
+- type: startingGear
+  id: RMCGearCLFCellCommander
+  equipment:
+    head: RMCArmorHelmetMercenaryMiner
+    ears: RMCHeadsetDistressCLF
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitiaHarness
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled # TODO RMC14
+    suitstorage: RMCSmartGunCLF
+    id: RMCIDCardCLFCellCommander # TODO RMC14
+    belt: RMCMatebaBeltFilled # TODO RMC14
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+
+- type: playTimeTracker
+  id: CMJobCLFCellCommander
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFCellCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_cellcom

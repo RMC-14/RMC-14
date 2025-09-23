@@ -1,52 +1,33 @@
-using Content.Client.Players;
 using Content.Shared._RMC14.NightVision;
-using Content.Shared._RMC14.Stealth;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Client._RMC14.Xenonids.Burrow;
 
 public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<XenoBurrowComponent, AfterAutoHandleStateEvent>(OnBurrowChange);
-    }
-
-    private void OnBurrowChange(EntityUid ent, XenoBurrowComponent comp, ref AfterAutoHandleStateEvent args)
+    public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var localEntity = _player.LocalEntity;
-        var isXeno = HasComp<XenoComponent>(localEntity);
-        if (TryComp(ent, out SpriteComponent? spriteComp))
-        {
-            spriteComp.Visible = !comp.Active || isXeno;
-        }
 
-        if (TryComp(ent, out RMCNightVisionVisibleComponent? nightVisionVisibleComp))
+        var burrowQuery = EntityQueryEnumerator<XenoBurrowComponent, SpriteComponent, RMCNightVisionVisibleComponent>();
+
+        while (burrowQuery.MoveNext(out var xeno, out var burrowed, out var sprite, out var nightVision))
         {
-            if (comp.Active && !isXeno)
-            {
-                nightVisionVisibleComp.Transparency = 1f;
-            }
+            if (localEntity != xeno)
+                sprite.Visible = !burrowed.Active;
             else
-            {
-                nightVisionVisibleComp.Transparency = null;
-            }
-        }
+                sprite.Color = burrowed.Active ? Color.White.WithAlpha(0.4f) : Color.White;
 
+            if (burrowed.Active)
+                nightVision.Transparency = 0.4f;
+            else
+                nightVision.Transparency = null;
+        }
     }
 }

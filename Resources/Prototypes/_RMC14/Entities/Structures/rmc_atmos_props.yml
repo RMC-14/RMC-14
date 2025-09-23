@@ -1,0 +1,211 @@
+﻿# Scrubbers
+- type: entity
+  id: RMCAirScrubberPortable
+  parent: BaseStructureDynamic
+  name: portable air scrubber
+  description: It scrubs, portably!
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Dynamic
+  - type: ItemToggle
+    soundActivate: /Audio/_RMC14/Machines/click.ogg
+    soundDeactivate: /Audio/_RMC14/Machines/click.ogg
+  - type: UseDelay
+    delay: 2
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: pscrubber_0
+    noRot: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: pscrubber_1 }
+          False: { state: pscrubber_0 }
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Ambience/Objects/portable_scrubber.ogg
+      params:
+        volume: -5
+        maxDistance: 5
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+
+- type: entity
+  id: RMCAirScrubberStationary
+  parent: RMCAirScrubberPortable
+  name: stationary air scrubber
+  description: It's large and securely attached.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: scrubber_0
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: scrubber_1 }
+          False: { state: scrubber_0 }
+
+# Pumps
+- type: entity
+  id: RMCAirPumpPortable
+  parent: RMCAirScrubberPortable
+  name: portable air pump
+  description: A movable pump that can move air around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: psiphon_0
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: psiphon_1 }
+          False: { state: psiphon_0 }
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Ambience/Objects/gas_pump.ogg
+      params:
+        volume: -5
+        maxDistance: 5
+
+- type: entity
+  id: RMCAirPumpStationary
+  parent: RMCAirPumpPortable
+  name: stationary air pump
+  description: It's large and securely attached.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: siphon_0
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: siphon_0 }
+          False: { state: siphon_0 }
+
+# Heaters
+- type: entity
+  id: RMCRadiator
+  name: radiator
+  description: It's a radiator. It heats the room through convection with hot water.
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: static
+    canCollide: false
+  - type: Clickable
+  - type: ItemToggle
+    soundActivate: /Audio/_RMC14/Machines/click.ogg
+    soundDeactivate: /Audio/_RMC14/Machines/click.ogg
+  - type: UseDelay
+    delay: 2
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: radiator
+    noRot: true
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+
+- type: entity
+  id: RMCRadiatorRed
+  parent: RMCRadiator
+  name: radiator
+  description: It's a radiator. It heats the room through convection with hot water. This one has a red handle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: radiator-r
+
+- type: entity
+  id: RMCSpaceHeater
+  parent: BaseStructureDynamic
+  name: space heater
+  description: It's an electric space heater. It heats the room through radiation with electricity.
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Dynamic
+  - type: ItemToggle
+    soundActivate: /Audio/_RMC14/Machines/click.ogg
+    soundDeactivate: /Audio/_RMC14/Machines/click.ogg
+  - type: UseDelay
+    delay: 2
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: sheater0
+    noRot: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: sheater1 }
+          False: { state: sheater0 }
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+    color: orange
+  - type: ItemTogglePointLight

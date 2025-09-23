@@ -1,7 +1,6 @@
 ﻿- type: entity
   parent: MarkerBase
-  id: RMCCrashLandBarrier
-  name: crash land on touch barrier
+  id: RMCBarrierBase
   components:
   - type: Sprite
     layers:
@@ -21,4 +20,17 @@
         layer:
         - MobMask
         - MobLayer
+
+- type: entity
+  parent: RMCBarrierBase
+  id: RMCCrashLandBarrier
+  name: crash land on touch barrier
+  components:
   - type: CrashLandOnTouch
+
+- type: entity
+  parent: RMCBarrierBase
+  id: RMCDeleteCrashLandBarrier
+  name: delete crash landable on touch barrier
+  components:
+  - type: DeleteCrashLandableOnTouch

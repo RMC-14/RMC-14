@@ -1,0 +1,155 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/wall_decorations/32x64_hybrisabillboards.dmi",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "billboard_bigger_1"
+    },
+    {
+      "name": "billboard_bigger_2"
+    },
+    {
+      "name": "billboard_bigger_3"
+    },
+    {
+      "name": "billboard_bigger_4"
+    },
+    {
+      "name": "billboard_bigger_5"
+    },
+    {
+      "name": "billboard_bigger_6"
+    },
+    {
+      "name": "billboard_bigger_7"
+    },
+    {
+      "name": "billboard_bigger_8"
+    },
+    {
+      "name": "billboard1_a"
+    },
+    {
+      "name": "billboard1_b"
+    },
+    {
+      "name": "billboard1_c"
+    },
+    {
+      "name": "billboard1_d"
+    },
+    {
+      "name": "billboard1_e"
+    },
+    {
+      "name": "billboard1_f"
+    },
+    {
+      "name": "billboard1_g"
+    },
+    {
+      "name": "billboard1_h"
+    },
+    {
+      "name": "billboard2_a"
+    },
+    {
+      "name": "billboard2_b"
+    },
+    {
+      "name": "billboard2_c"
+    },
+    {
+      "name": "billboard2_d"
+    },
+    {
+      "name": "billboard2_e"
+    },
+    {
+      "name": "billboard2_f"
+    },
+    {
+      "name": "billboard2_g"
+    },
+    {
+      "name": "billboard2_h"
+    },
+    {
+      "name": "billboard3_a"
+    },
+    {
+      "name": "billboard3_b"
+    },
+    {
+      "name": "billboard3_c"
+    },
+    {
+      "name": "billboard3_d"
+    },
+    {
+      "name": "billboard3_e"
+    },
+    {
+      "name": "billboard3_f"
+    },
+    {
+      "name": "billboard3_g"
+    },
+    {
+      "name": "billboard3_h"
+    },
+    {
+      "name": "billboard4_a"
+    },
+    {
+      "name": "billboard4_b"
+    },
+    {
+      "name": "billboard4_c"
+    },
+    {
+      "name": "billboard4_d"
+    },
+    {
+      "name": "billboard4_e"
+    },
+    {
+      "name": "billboard4_f"
+    },
+    {
+      "name": "billboard4_g"
+    },
+    {
+      "name": "billboard4_h"
+    },
+    {
+      "name": "billboard5_a"
+    },
+    {
+      "name": "billboard5_b"
+    },
+    {
+      "name": "billboard5_c"
+    },
+    {
+      "name": "billboard5_d"
+    },
+    {
+      "name": "billboard5_e"
+    },
+    {
+      "name": "billboard5_f"
+    },
+    {
+      "name": "billboard5_g"
+    },
+    {
+      "name": "billboard5_h"
+    }
+  ]
+}

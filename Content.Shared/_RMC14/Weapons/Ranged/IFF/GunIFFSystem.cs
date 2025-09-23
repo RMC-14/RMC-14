@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
@@ -12,6 +13,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 public sealed class GunIFFSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
@@ -47,11 +49,8 @@ public sealed class GunIFFSystem : EntitySystem
         if (args.Faction != null)
             return;
 
-        foreach (var (_, hand) in ent.Comp.Hands)
+        foreach (var held in _hands.EnumerateHeld((ent, ent)))
         {
-            if (hand.HeldEntity is not { } held)
-                continue;
-
             RaiseLocalEvent(held, ref args);
             if (args.Faction != null)
                 break;
@@ -94,6 +93,9 @@ public sealed class GunIFFSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    /// <summary>
+    ///     Gets the UserIFF faction of the user.
+    /// </summary>
     public bool TryGetUserFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction)
     {
         faction = default;
@@ -105,6 +107,25 @@ public sealed class GunIFFSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    ///     Gets the IFFFaction of the user. Includes the UserIFFComponent and any items on the given slot flags that have the ItemIFFComponent.
+    /// </summary>
+    public bool TryGetFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction, SlotFlags slots = SlotFlags.IDCARD)
+    {
+        faction = default;
+        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
+            return false;
+
+        var ev = new GetIFFFactionEvent(null, slots);
+        RaiseLocalEvent(user, ref ev);
+
+        if (ev.Faction is not { } newFaction)
+            return false;
+
+        faction = newFaction;
+        return true;
+    }
+
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
     {
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
@@ -113,6 +134,11 @@ public sealed class GunIFFSystem : EntitySystem
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(user, ref ev);
         return ev.Faction == faction;
+    }
+
+    public void SetIdFaction(Entity<ItemIFFComponent> card, EntProtoId<IFFFactionComponent> faction)
+    {
+        card.Comp.Faction = faction;
     }
 
     public void SetUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
@@ -138,7 +164,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             owner = gun;
         }
-        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        else if (_container.TryGetOuterContainer(gun, Transform(gun), out var container))
         {
             owner = container.Owner;
         }
@@ -165,5 +191,12 @@ public sealed class GunIFFSystem : EntitySystem
             iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
+    }
+
+    public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
+    {
+        var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
+        projectileIFFComponent.Faction = faction;
+        projectileIFFComponent.Enabled = enabled;
     }
 }

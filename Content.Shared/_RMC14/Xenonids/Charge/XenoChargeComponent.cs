@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -21,13 +21,16 @@ public sealed partial class XenoChargeComponent : Component
     public float Range = 8;
 
     [DataField, AutoNetworkedField]
+    public float SlowRange = 1.5f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SlowTime = TimeSpan.FromSeconds(3.5);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan StunTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ChargeDelay = TimeSpan.FromSeconds(1.2);
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "CMEffectStomp";
 
     // TODO RMC14 extra sound on impact
     [DataField, AutoNetworkedField]

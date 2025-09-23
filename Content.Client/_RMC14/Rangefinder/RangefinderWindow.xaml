@@ -9,6 +9,8 @@
         <RichTextLabel Name="Longitude" Access="Public" HorizontalAlignment="Center"
                        VerticalAlignment="Center" Margin="0 20 0 0" />
         <RichTextLabel Name="Latitude" Access="Public" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="0 20 0 20" />
+                       VerticalAlignment="Center" Margin="0 20 0 5" />
+        <userInterface:BlueHorizontalSeparator Margin="0 5" />
+        <BoxContainer Name="BottomContainer" Access="Public" Orientation="Vertical" Margin="5 0" />
     </BoxContainer>
 </controls:RangefinderWindow>

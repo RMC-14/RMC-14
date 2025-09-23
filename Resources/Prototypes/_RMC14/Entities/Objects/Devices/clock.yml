@@ -26,3 +26,4 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
+    canCollide: false

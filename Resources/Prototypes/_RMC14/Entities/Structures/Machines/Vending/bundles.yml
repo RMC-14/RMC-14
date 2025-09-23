@@ -1,9 +1,8 @@
-﻿- type: entity
+- type: entity
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -12,7 +11,7 @@
     bundle:
     - ArmorHelmetM10
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -20,14 +19,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleFireteamLeaderApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M12 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a M12 helmet, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarine
-    - CMHandsInsulated
+    - RMCJumpsuitMarinePatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -38,9 +36,8 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedic
+    - RMCJumpsuitMarineMedicPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -66,19 +63,18 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M10 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Tech # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineer
-    - CMHandsInsulated
+    - RMCJumpsuitMarineEngineerPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -92,14 +88,14 @@
     state: icon
   - type: CMVendorBundle
     bundle:
-#      - # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - CMAPCElectronics
     - RMCNailgunTactical
 
 - type: entity
@@ -112,7 +108,7 @@
     bundle:
     - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -125,7 +121,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -162,4 +158,42 @@
     - CMSynthGraft
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
-#   - Syringe case # TODO RMC14 syringe cases
+    - RMCSyringeCase
+    - RMCStethoscope
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewMedicalEssentialsDoctor
+  name: essential medical set
+  description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - RMCFlashlightPen
+    - RMCSyringeCase
+    - RMCStethoscope
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCommandingOfficerEssentialsBundle
+  name: Commanding Officer Essentials kit
+  description: Contains a laser designator, whistle, and a disabler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCLaserDesignator
+    - RMCWhistle
+    - RMCWeaponTaser
+    - RMCMegaphone
+    #TODO RMC14 Paper Map.

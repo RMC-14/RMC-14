@@ -4,11 +4,11 @@ using System.Text;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
-using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Doors;
@@ -16,24 +16,31 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Prying.Components;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Evacuation;
 
 public abstract class SharedEvacuationSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -41,17 +48,16 @@ public abstract class SharedEvacuationSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedHyperSleepChamberSystem _hyperSleep = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<AreaComponent> _areaQuery;
@@ -77,6 +83,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorOpenedEvent>(OnEvacuationDoorBeforeOpened);
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorClosedEvent>(OnEvacuationDoorBeforeClosed);
+        SubscribeLocalEvent<EvacuationDoorComponent, BeforePryEvent>(OnEvacuationDoorBeforePry);
 
         SubscribeLocalEvent<EvacuationComputerComponent, ExaminedEvent>(OnEvacuationComputerExamined);
         SubscribeLocalEvent<EvacuationComputerComponent, ActivatableUIOpenAttemptEvent>(OnEvacuationComputerUIOpenAttempt);
@@ -100,7 +107,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
     {
-        EnsureComp<EvacuationProgressComponent>(ev.Map);
+        var evacuationProgress = EnsureComp<EvacuationProgressComponent>(ev.Map);
+        evacuationProgress.DropShipCrashed = true;
 
         var doors = EntityQueryEnumerator<EvacuationDoorComponent>();
         while (doors.MoveNext(out var uid, out var door))
@@ -169,20 +177,25 @@ public abstract class SharedEvacuationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (!_config.GetCVar(CCVars.GridFill))
+            return;
+
         if (_map == null)
         {
             _mapSystem.CreateMap(out var mapId);
             _map = mapId;
         }
 
-        var matrix = Matrix3x2.CreateTranslation(_index * 50, _index * 50);
+        var offset = new Vector2(_index * 50, _index * 50);
         _index++;
 
-        _rmcMap.TryLoad(_map.Value, spawn.ToString(), out var grids, matrix);
-        if (grids == null || grids.Count == 0)
+        if (!_mapSystem.MapExists(_map) ||
+            !_mapLoader.TryLoadGrid(_map.Value, spawn, out var result, offset: offset))
+        {
             return;
+        }
 
-        var grid = grids[0];
+        var grid = result.Value;
         var xform = Transform(ent);
         var coordinates = _transform.GetMapCoordinates(ent, xform);
         coordinates = coordinates.Offset(ent.Comp.Offset);
@@ -210,6 +223,12 @@ public abstract class SharedEvacuationSystem : EntitySystem
     {
         if (ent.Comp.Locked)
             args.PerformCollisionCheck = false;
+    }
+
+    private void OnEvacuationDoorBeforePry(Entity<EvacuationDoorComponent> ent, ref BeforePryEvent args)
+    {
+        if (ent.Comp.Locked)
+            args.Cancelled = true;
     }
 
     private void OnEvacuationComputerExamined(Entity<EvacuationComputerComponent> ent, ref ExaminedEvent args)
@@ -289,39 +308,22 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var gridTransform = Transform(gridId);
         if (ent.Comp.MaxMobs is { } maxMobs)
         {
-            var mobs = 0;
+            var mobs = new HashSet<EntityUid>();
             var children = gridTransform.ChildEnumerator;
             while (children.MoveNext(out var uid))
             {
-                var mob = _mobStateQuery.HasComp(uid);
-                if (!mob)
+                if (_mobStateQuery.HasComp(uid))
                 {
-                    if (TryComp(uid, out ContainerManagerComponent? containerManager))
-                    {
-                        foreach (var container in _container.GetAllContainers(uid, containerManager))
-                        {
-                            if (container.ContainedEntities.Any(_mobStateQuery.HasComp))
-                            {
-                                mob = true;
-                                break;
-                            }
-                        }
-                    }
+                    mobs.Add(uid);
                 }
-
-                if (mob)
+                else if (TryComp(uid, out ContainerManagerComponent? containerManager))
                 {
-                    mobs++;
-
-                    if (mobs > maxMobs && ent.Comp.Mode != EvacuationComputerMode.Crashed)
+                    foreach (var container in _container.GetAllContainers(uid, containerManager))
                     {
-                        ent.Comp.Mode = EvacuationComputerMode.Crashed;
-                        _popup.PopupClient("The evacuation pod is overloaded with this many people inside!", ent, user, PopupType.LargeCaution);
-
-                        var time = _timing.CurTime;
-                        var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
-                        detonating.DetonateAt = time + ent.Comp.DetonateDelay;
-                        detonating.EjectAt = time + ent.Comp.EjectDelay;
+                        foreach (var mob in container.ContainedEntities.Where(_mobStateQuery.HasComp).ToList())
+                        {
+                            mobs.Add(mob);
+                        }
                     }
                 }
 
@@ -333,12 +335,25 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     _door.TryClose(uid, door);
                 }
             }
+
+            if (mobs.Count > maxMobs)
+            {
+                _popup.PopupPredicted("The evacuation pod is overloaded with this many people inside!", ent, null, PopupType.LargeCaution);
+                ent.Comp.Mode = EvacuationComputerMode.Crashed;
+                Dirty(ent);
+
+                var time = _timing.CurTime;
+                var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
+                detonating.DetonateAt = time + ent.Comp.DetonateDelay;
+                detonating.EjectAt = time + ent.Comp.EjectDelay;
+            }
         }
+
+        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
 
         if (ent.Comp.Mode == EvacuationComputerMode.Crashed)
             return;
 
-        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
         ent.Comp.Mode = EvacuationComputerMode.Travelling;
         Dirty(ent);
 
@@ -378,6 +393,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
     }
 
+    private void SetPumpAmbience()
+    {
+        var pumps = EntityQueryEnumerator<EvacuationPumpComponent>();
+        while (pumps.MoveNext(out var uid, out var pump))
+        {
+            _ambientSound.SetSound(uid, pump.ActiveSound);
+        }
+    }
+
     private IEnumerable<EntityUid> GetEvacuationAreas(EntityCoordinates coordinates)
     {
         if (!_area.TryGetAllAreas(coordinates, out var areaGrid))
@@ -400,32 +424,30 @@ public abstract class SharedEvacuationSystem : EntitySystem
         return _rmcPower.IsAreaPowered(area, RMCPowerChannel.Equipment);
     }
 
-    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound)
+    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound, EntityUid? map)
     {
-        var query = EntityQueryEnumerator<EvacuationProgressComponent>();
-        while (query.MoveNext(out var uid, out var progress))
+        DebugTools.Assert(map != null);
+
+        var progress = EnsureComp<EvacuationProgressComponent>(map.Value);
+
+        progress.Enabled = !progress.Enabled;
+        Dirty(map.Value, progress);
+
+        if (progress.Enabled)
         {
-            progress.Enabled = !progress.Enabled;
-            Dirty(uid, progress);
-
-            if (progress.Enabled)
-            {
-                _marineAnnounce.AnnounceARES(
-                    null,
-                    "Attention. Emergency. All personnel must evacuate immediately.",
-                    startSound
-                );
-                var ev = new EvacuationEnabledEvent();
-                RaiseLocalEvent(uid, ref ev, true);
-            }
-            else
-            {
-                _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
-                var ev = new EvacuationDisabledEvent();
-                RaiseLocalEvent(uid, ref ev, true);
-            }
-
-            break;
+            _marineAnnounce.AnnounceARESStaging(
+                null,
+                "Attention. Emergency. All personnel must evacuate immediately.",
+                startSound
+            );
+            var ev = new EvacuationEnabledEvent();
+            RaiseLocalEvent(map.Value, ref ev, true);
+        }
+        else
+        {
+            _marineAnnounce.AnnounceARESStaging(null, "Evacuation has been cancelled.", cancelSound);
+            var ev = new EvacuationDisabledEvent();
+            RaiseLocalEvent(map.Value, ref ev, true);
         }
     }
 
@@ -477,10 +499,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<EvacuationProgressComponent>();
         while (query.MoveNext(out var uid, out var progress))
         {
+            //Only start fueling once the dropship has crashed into the Almayer
+            if (!progress.DropShipCrashed)
+                return;
+
             if (!progress.StartAnnounced)
             {
                 progress.StartAnnounced = true;
                 SetPumpAppearance(EvacuationPumpVisuals.Empty);
+                SetPumpAmbience();
 
                 var areas = new StringBuilder();
                 foreach (var areaId in GetEvacuationAreas(uid.ToCoordinates()))
@@ -492,7 +519,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
                 areas.Append(
                     "Due to low orbit, extra fuel is required for non-surface evacuations.\nMaintain fueling functionality for optimal evacuation conditions.");
-                _marineAnnounce.AnnounceARES(null, areas.ToString());
+                _marineAnnounce.AnnounceARESStaging(null, areas.ToString());
             }
 
             if (progress.NextUpdate > time)
@@ -515,7 +542,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 if (progress.LastPower.TryGetValue(areaId, out var lastPower) &&
                     lastPower != powered)
                 {
-                    _marineAnnounce.AnnounceARES(null, $"{Name(areaId)} - [{(powered ? "Online" : "Offline")}]");
+                    _marineAnnounce.AnnounceARESStaging(null, $"{Name(areaId)} - [{(powered ? "Online" : "Offline")}]");
                 }
 
                 progress.LastPower[areaId] = powered;
@@ -560,7 +587,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
                 if (progress.Progress >= progress.Required)
                 {
-                    _marineAnnounce.AnnounceARES(null, "Emergency fuel replenishment is at 100 percent. Safe utilization of lifeboats and pods is now possible.");
+                    _marineAnnounce.AnnounceARESStaging(null, "Emergency fuel replenishment is at 100 percent. Safe utilization of lifeboats and pods is now possible.");
                     _xenoAnnounce.AnnounceAll(default, "The talls have completed their goals!");
                     SetPumpAppearance(EvacuationPumpVisuals.Full);
                     var ev = new EvacuationProgressEvent(100);
@@ -568,7 +595,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
                 else if (progress.Progress >= progress.Required * 0.75)
                 {
-                    _marineAnnounce.AnnounceARES(null, MarinePercentageString(75));
+                    _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(75));
 
                     var xenoAnnounce = "The talls are three quarters of the way towards their goals.";
                     if (onAreas.Length > 0)
@@ -582,7 +609,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
                 else if (progress.Progress >= progress.Required * 0.5)
                 {
-                    _marineAnnounce.AnnounceARES(null, MarinePercentageString(50));
+                    _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(50));
 
                     var xenoAnnounce = "The talls are half way towards their goals.";
                     if (onAreas.Length > 0)
@@ -599,9 +626,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     if (offAreas.Length == 0)
                         marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += $"To increase speed, restore power to the following areas: {offAreas}";
+                        marineAnnounce += $" To increase speed, restore power to the following areas: {offAreas}";
 
-                    _marineAnnounce.AnnounceARES(null, marineAnnounce);
+                    _marineAnnounce.AnnounceARESStaging(null, marineAnnounce);
 
                     var xenoAnnounce = "The talls are a quarter of the way towards their goals.";
                     if (onAreas.Length > 0)
@@ -626,12 +653,21 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<DetonatingEvacuationComputerComponent>();
         while (query.MoveNext(out var uid, out var detonating))
         {
+            if (Transform(uid).GridUid is not { } grid)
+                continue;
+
+            if (!TryComp(grid, out MapGridComponent? gridComp))
+                continue;
+
+            var gridTransform = Transform(grid);
+
             if (!detonating.Detonated && time >= detonating.DetonateAt)
             {
                 detonating.Detonated = true;
                 Dirty(uid, detonating);
 
-                _rmcExplosion.TriggerExplosive(uid, delete: false);
+                var coordinates = _transform.ToMapCoordinates(gridTransform.Coordinates);
+                _rmcExplosion.QueueExplosion(coordinates, "RMC", 40, 5, 25, uid, canCreateVacuum: false);
             }
 
             if (!detonating.Ejected && time >= detonating.EjectAt)
@@ -639,20 +675,20 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 detonating.Ejected = true;
                 Dirty(uid, detonating);
 
-                if (Transform(uid).GridUid is { } grid)
-                {
-                    var children = Transform(grid).ChildEnumerator;
-                    while (children.MoveNext(out var child))
-                    {
-                        _hyperSleep.EjectChamber(child);
+                var children = gridTransform.ChildEnumerator;
 
-                        if (_doorQuery.TryComp(uid, out var door))
-                        {
-                            var evacuationDoor = EnsureComp<EvacuationDoorComponent>(uid);
-                            evacuationDoor.Locked = true;
-                            Dirty(uid, evacuationDoor);
-                            _door.TryClose(uid, door);
-                        }
+                while (children.MoveNext(out var child))
+                {
+                    _hyperSleep.EjectChamber(child);
+
+                    if (_doorQuery.TryComp(child, out var door))
+                    {
+                        var evacuationDoor = EnsureComp<EvacuationDoorComponent>(child);
+                        evacuationDoor.Locked = false;
+                        Dirty(child, evacuationDoor);
+
+                        // Bypass the checks in TryOpenAndBolt:
+                        _door.SetState(child, DoorState.Emagging, door);
                     }
                 }
             }

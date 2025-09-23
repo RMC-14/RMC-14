@@ -41,7 +41,7 @@
   - type: Appearance
   - type: PointLight
     enabled: false
-    color: "#FA644B"
+    color: "#FFCCCC"
     radius: 1
     energy: 5.0
     netsync: false
@@ -58,6 +58,11 @@
         startValue: 7.0
         endValue: 1.0
   - type: RMCNightVisionVisibleOnIgnite
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareBullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlare
 
 - type: entity
   parent: CMFlare
@@ -74,18 +79,18 @@
     - map: [ "enum.ExpendableLightVisualLayers.Base" ]
       state: flare
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: flare_flame
       color: "#A7FFA7"
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
   - type: PointLight
-    color: "#64FA4B"
+    color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
@@ -101,11 +106,59 @@
       maxDuration: 150
       startValue: 7.0
       endValue: 1.0
+  - type: CartridgeAmmo
+    proto: RMCFlareCASBullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareCAS
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: CMFlare
+  id: RMCStarShellAsh
+  name: burning star shell ash
+  description: Bright burning ash from a Star Shell 40mm. Don't touch, or it'll burn ya'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash-on
+      color: "#A7FFA7"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: starshell_ash
+  - type: PointLight
+    color: "#FFCCCC"
+    energy: 1.5
+  - type: ExpendableLight
+    pickupWhileOn: false
+    glowDuration: 375
+    fadeOutDuration: 30
+    spentName: expendable-light-starshell-ash-empty-name
+    spentDesc: expendable-light-starshell-ash-empty-desc
+    iconStateSpent: starshell_ash-empty
+    loopedSound: null
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 375
+      startValue: 7.0
+      endValue: 1.0
+
+- type: entity
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareEmpty
-  name: box of M94 flare packs
+  name: box of M94 flare packs (x10)
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
   - type: Construction
@@ -121,27 +174,19 @@
         tags:
         - CMFlarePack
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: supply_crate
-    - state: magaz_flares
+    - state: supply_box
+      color: "#646a3c"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m94
-    - state: supply_crate_lid
+      color: "#867872"
+    - state: supply_box_flare
+      color: "#646a3c"
+    - state: supply_box_flare_colour
+      color: "#f0c16f"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flares, visible: false }
-          Low: { state: magaz_flares_1, visible: true }
-          Medium: { state: magaz_flares_2, visible: true }
-          High: { state: magaz_flares_3, visible: true }
-          Full: { state: magaz_flares, visible: true }
+      color: "#646a3c"
 
 - type: entity
   parent: RMCBoxPackFlareEmpty
@@ -152,9 +197,9 @@
     startingItem: CMPackFlare
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareCASEmpty
-  name: box of M89-S flare packs
+  name: box of M89-S flare packs (x10)
   description: A box of M89 signal flare packs, to mark up the way.
   components:
   - type: Construction
@@ -170,27 +215,19 @@
         tags:
         - RMCPackFlareCAS
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: supply_crate
-    - state: magaz_flares_signal
+    - state: supply_box
+      color: "#646a3c"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m89
-    - state: supply_crate_lid
+      color: "#867872"
+    - state: supply_box_flare
+      color: "#646a3c"
+    - state: supply_box_flare_colour
+      color: "#f06f6f"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flares_signal, visible: false }
-          Low: { state: magaz_flares_signal_1, visible: true }
-          Medium: { state: magaz_flares_signal_2, visible: true }
-          High: { state: magaz_flares_signal_3, visible: true }
-          Full: { state: magaz_flares_signal, visible: true }
+      color: "#646a3c"
 
 - type: entity
   parent: RMCBoxPackFlareCASEmpty
@@ -274,6 +311,102 @@
       whitelist:
         tags:
         - RMCFlareCAS
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCFlareBullet
+  name: flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare
+  - type: GunIFF
+    enabled: true
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 2.5
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ScatteringGrenade
+    directHitTrigger: true
+    fillPrototype: CMFlare
+    capacity: 1
+    delayBeforeTriggerContents: 0
+    distance: 0
+    toggleContents: true
+  - type: PointLight
+    enabled: true
+    color: "#FFCCCC"
+    radius: 2.0
+    energy: 7.0
+  - type: IgniteOnProjectileHit
+    duration: 3
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: IgnorePredictionHide
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareCASBullet
+  name: signal flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare_signal
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareCAS
+  - type: PointLight
+    enabled: true
+    color: "#A7FFA7"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  id: RMCAirFlare
+  name: air flare
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#FFCCCC"
+    radius: 8.0
+    energy: 0.6
+  - type: TimedDespawn
+    lifetime: 300
+
+- type: entity
+  id: RMCAirFlareCAS
+  name: air signal flare
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#A7FFA7"
+    radius: 8.0
+    energy: 0.6
+  - type: FlareSignal
+  - type: TimedDespawn
+    lifetime: 300
 
 - type: Tag
   id: RMCFlare

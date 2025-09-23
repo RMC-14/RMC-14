@@ -2,13 +2,12 @@
   parent: SpaceCash
   id: RMCSpaceCash
   name: dollars
-  description: Ten US Government minted hundred-dollar bills. Every single damn one of them has Ben Fucking Franklin on them. The court of Bens sit impatiently, as if each one thought they alone belonged to you. This coven of angry Bens have all since learned about your relations with the other Bens, and they want answers.
+  description: Ten hundred-dollar bills, minted by the United Nations Treasury. Each are adorned with the face of a long-forgotten diplomat of a once-powerful planet. These bills are more than mere currency, they feel alive, as though they carry the weight of ancient history and the judgments of those who once controlled vast empires. The faces on each bill seem to watch you with silent intensity, as if each one believes it alone should be in your possession..
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/spacecash.rsi
-    state: spacecash1
     layers:
-    - state: spacecash1
+    - state: spacecash
       map: ["base"]
   - type: Item
     size: Tiny
@@ -16,19 +15,22 @@
   - type: Tag
     tags:
     - Holdout
+    - RMCSpaceCash
   - type: Stack
     stackType: Dollar
     count: 1
     baseLayer: base
     layerStates:
-    - spacecash1
-    - spacecash10
-    - spacecash20
-    - spacecash50
-    - spacecash100
-    - spacecash200
-    - spacecash500
-    - spacecash1000
+    - spacecash
+    - spacecash_10
+    - spacecash_20
+    - spacecash_50
+    - spacecash_100
+    - spacecash_200
+    - spacecash_500
+    - spacecash_1000
+  - type: StackLayerThreshold
+    thresholds: [10, 20, 50, 100, 200, 500, 1000]
   - type: PhysicalComposition
     materialComposition:
       Dollar: 1
@@ -38,30 +40,34 @@
   parent: RMCSpaceCash
   id: RMCSpaceCash1
   name: 1 dollar bill
-  description: A single US Government minted one dollar bill. It has a picture of George Washington printed on it. Makes most people of English origin cry, but isn't worth very much. Could probably get you half a hot-dog in some systems.
+  description: A single one-dollar bill, minted by the United Nations Treasury. Its design features the image of a long-forgotten figure from a bygone era, a leader whose legacy now means little to the galactic populace. While it holds sentimental value for those from certain worlds, its actual worth is minimal. In most systems, it might fetch you half a hot-dog or a similar low-value snack.
 
 - type: material
   id: Dollar
   name: 1 dollar bill
   unit: materials-unit-bill
   stackEntity: RMCSpaceCash1
-  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
   price: 1
 
 - type: stack
   id: Dollar
   name: 1 dollar bill
-  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
   spawn: RMCSpaceCash1
 
-# TODO RMC14 make different bills
+- type: Tag
+  id: RMCSpaceCash
 
 - type: entity
   parent: RMCSpaceCash1
   id: RMCSpaceCash10
   suffix: 10
   components:
+  - type: Sprite
+    state: spacecash_10
   - type: Stack
+    stackType: Dollar
     count: 10
 
 - type: entity
@@ -69,6 +75,8 @@
   id: RMCSpaceCash20
   suffix: 20
   components:
+  - type: Sprite
+    state: spacecash_20
   - type: Stack
     count: 20
 
@@ -77,6 +85,8 @@
   id: RMCSpaceCash50
   suffix: 50
   components:
+  - type: Sprite
+    state: spacecash_50
   - type: Stack
     count: 50
 
@@ -85,6 +95,8 @@
   id: RMCSpaceCash100
   suffix: 100
   components:
+  - type: Sprite
+    state: spacecash_100
   - type: Stack
     count: 100
 
@@ -93,6 +105,8 @@
   id: RMCSpaceCash200
   suffix: 200
   components:
+  - type: Sprite
+    state: spacecash_200
   - type: Stack
     count: 200
 
@@ -101,6 +115,8 @@
   id: RMCSpaceCash500
   suffix: 500
   components:
+  - type: Sprite
+    state: spacecash_500
   - type: Stack
     count: 500
 
@@ -109,5 +125,8 @@
   id: RMCSpaceCash1000
   suffix: 1000
   components:
+  - type: Sprite
+    state: spacecash_1000
   - type: Stack
+    stackType: Dollar
     count: 1000

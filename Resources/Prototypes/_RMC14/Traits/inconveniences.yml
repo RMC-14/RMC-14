@@ -1,7 +1,38 @@
 - type: trait
-  id: CMSnoring
+  id: Snoring
   name: trait-snoring-name
   description: trait-snoring-desc
-  category: RMCInconveniences
+  category: Quirks
   components:
-    - type: Snoring
+  - type: Snoring
+
+- type: trait
+  id: LightweightDrunk
+  name: trait-lightweight-name
+  description: trait-lightweight-desc
+  category: Quirks
+  components:
+  - type: LightweightDrunk
+    boozeStrengthMultiplier: 2
+
+- type: trait
+  id: SocialAnxiety
+  name: trait-socialanxiety-name
+  description: trait-socialanxiety-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: StutteringAccent
+    matchRandomProb: 0.1
+    fourRandomProb: 0
+    threeRandomProb: 0
+    cutRandomProb: 0
+
+- type: trait
+  id: FrontalLisp
+  name: trait-frontal-lisp-name
+  description: trait-frontal-lisp-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: FrontalLisp

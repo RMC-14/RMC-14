@@ -1,12 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Client.Lobby;
+using System.Linq;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
+using Content.Shared.Localizations;
 using Content.Shared.Players;
 using Content.Shared.Players.JobWhitelist;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -163,15 +165,78 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         return _roles.TryGetValue("Overall", out var overallPlaytime) ? overallPlaytime : TimeSpan.Zero;
     }
 
+    /// <summary>
+    /// Fetches an IEnumerable of the playtimes this client has, each section being a string and a Timespan.
+    /// The string is either the PlaytimeTracker's name or a list of the jobs that use that tracker.
+    /// </summary>
+    /// <returns>An IEnumerable of the playtimes this client has.</returns>
     public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeByRoles()
     {
+        var jobSystem = _entManager.System<SharedJobSystem>();
+
+        var validTrackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>(); // For trackers that don't have a Job, like Overall
         var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>();
 
         foreach (var job in jobsToMap)
         {
+            if (job.PlayTimeTracker is not { } trackerProtoId)
+                continue;
+
+            validTrackers.Add(trackerProtoId);
+        }
+
+        foreach (var trackerProtoId in validTrackers)
+        {
+            var nameList = new List<string>();
+            var trackerProto = _prototypes.Index(trackerProtoId);
+
+            if (!trackerProto.ShowInStatsMenu)
+                continue;
+
+            var jobs = jobSystem.GetJobPrototypes(trackerProtoId);
+
+            if (trackerProto.Name is not { } trackerName)
+            {
+                foreach (var jobProtoId in jobs)
+                {
+                    var jobProto = _prototypes.Index(jobProtoId);
+                    nameList.Add(jobProto.LocalizedName);
+                }
+            }
+            else
+            {
+                nameList.Add(Loc.GetString(trackerName));
+            }
+
+            if (_roles.TryGetValue(trackerProtoId, out var playtime))
+            {
+                var names = ContentLocalizationManager.FormatList(nameList);
+                yield return new KeyValuePair<string, TimeSpan>(names, playtime);
+            }
+        }
+    }
+
+    public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeJobIdByRoles()
+    {
+        // RMC14
+        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>().ToArray();
+        var trackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+        var duplicateTrackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+
+        foreach (var job in jobsToMap)
+        {
+            if (!trackers.Add(job.PlayTimeTracker))
+                duplicateTrackers.Add(job.PlayTimeTracker);
+        }
+
+        foreach (var job in jobsToMap)
+        {
+            if (duplicateTrackers.Contains(job.PlayTimeTracker) && !job.BasePlaytimeTracker)
+                continue;
+
             if (_roles.TryGetValue(job.PlayTimeTracker, out var locJobName))
             {
-                yield return new KeyValuePair<string, TimeSpan>(job.Name, locJobName);
+                yield return new KeyValuePair<string, TimeSpan>(job.ID, locJobName);
             }
         }
     }

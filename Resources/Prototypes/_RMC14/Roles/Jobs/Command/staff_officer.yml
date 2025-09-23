@@ -7,34 +7,34 @@
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobSquadLeader
-    time: 3600 # 1 hours
+    time: 18000 # 5 hours
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
   - !type:AgeRequirement
     requiredAge: 25
   ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobStaffOfficer
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 12
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: so
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
+  - SO
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
@@ -46,20 +46,31 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMStaffOfficer
       points: 45
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-staff-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: so
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearStaffOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapOfficer
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
     pocket1: RMCPouchGeneralLarge
@@ -75,11 +86,18 @@
   - type: SpawnPoint
     job_id: CMStaffOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: staff_officer
+    state: so_spawn
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSO
+  name: A Staff Officer
+  description: A Staff Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: staff_officer

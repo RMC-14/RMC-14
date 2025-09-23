@@ -1,0 +1,73 @@
+﻿- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchMedical
+  name: medical pouch
+  description: It can carry small medical supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/medical.rsi
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,7,1 #4 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Dropper
+      - Pill
+      - Bottle
+      - Syringe
+      - PillCanister
+      - CMTraumaKit
+      - CMBurnKit
+      - CMOintment
+      - Brutepack
+      - CMBloodPack
+      #      - TODO RMC14 splint
+      - RMCPenlight
+      - CMAutoInjector
+      - CMFireExtinguisherPortable
+      - RMCSyringeCase
+      - CMSurgicalLine
+      - CMSynthGraft
+      - PillPacket
+      - Hypospray
+      components:
+      - Hypospray
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCPouchMedical
+  id: RMCPouchMedicalFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+      # splint
+    - id: CMBurnKit10
+    - id: CMTraumaKit10
+
+- type: entity
+  parent: RMCPouchMedical
+  id: RMCPouchMedicalPills
+  suffix: Pills
+  components:
+  - type: StorageFill
+    contents:
+    # TODO RMC14 pill bottle tramadol
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterDexalin
+
+- type: entity
+  parent: RMCPouchMedical
+  id: RMCPouchMedicalERT
+  suffix: ERT
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMHealthAnalyzer
+    - id: CMHyposprayFilledTricord

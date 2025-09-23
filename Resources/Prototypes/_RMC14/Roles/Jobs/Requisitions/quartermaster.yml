@@ -24,16 +24,11 @@
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
-  - CMQM
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cargo
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
+  - QuarterMaster
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -41,6 +36,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 1
@@ -49,10 +45,20 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      id: CMQuartermaster
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-quartermaster
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cargo
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearQuartermaster
@@ -76,11 +82,18 @@
   - type: SpawnPoint
     job_id: CMQuartermaster
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: quartermaster
+    state: ro_spawn
 
 - type: playTimeTracker
   id: CMJobQuartermaster
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleQM
+  name: The QM
+  description: The Quartermaster.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: quartermaster

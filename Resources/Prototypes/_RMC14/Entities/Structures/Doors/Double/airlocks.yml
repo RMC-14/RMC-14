@@ -98,6 +98,40 @@
 
 - type: entity
   parent: CMDoubleDoorBase
+  id: RMCDoubleDoorGlassHybrisa
+  suffix: Hybrisa, Glass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorSolidHybrisa
+  suffix: Hybrisa, Solid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_solid.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorHybrisaMecical
+  suffix: Hybrisa, Solid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_medical.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorHybrisaGlassMecical
+  suffix: Hybrisa, Glass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_medical_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
   id: CMDoubleDoorGenericSolid
   suffix: Generic, Solid
   components:

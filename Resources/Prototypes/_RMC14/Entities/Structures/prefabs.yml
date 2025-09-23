@@ -1,8 +1,10 @@
-﻿- type: entity
+﻿# Prefabs
+
+- type: entity
   abstract: true
   id: RMCPrefabBase
   name: prefabricated structure
-  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
   placement:
     mode: SnapgridCenter
   components:
@@ -22,16 +24,14 @@
   - type: Sprite
     sprite: _RMC14/Structures/prefabs.rsi
     offset: 0.5, 0.5
-  - type: Clickable
   - type: Occluder
     boundingBox: "-0.5,-0.5,1.5,1.9"
-  - type: DeleteOnExplosion
 
 - type: entity
   abstract: true
   id: RMCPrefabBaseTop
   name: prefabricated structure
-  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
   placement:
     mode: SnapgridCenter
   components:
@@ -51,8 +51,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/prefabs.rsi
     offset: 0.5, 0.5
-  - type: Clickable
-  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCPrefabBase
@@ -133,3 +131,262 @@
   components:
   - type: Sprite
     state: white_trim
+
+- type: entity
+  abstract: true
+  id: RMCPrefab32BaseTop
+  name: prefabricated structure
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.1"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/prefab_tileset.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/prefab_tileset.rsi
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallPrefabOrange
+  name: prefabricated structure
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/prefab_tileset.rsi
+    state: fab_1
+  - type: Icon
+    sprite: _RMC14/Structures/prefab_tileset.rsi
+    state: fab_1
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange2
+  components:
+  - type: Sprite
+    state: fab_2
+  - type: Icon
+    state: fab_2
+
+- type: entity
+  parent: RMCPrefab32BaseTop
+  id: RMCWallPrefabOrange3
+  components:
+  - type: Sprite
+    state: fab_3
+  - type: Icon
+    state: fab_3
+
+- type: entity
+  parent: RMCPrefab32BaseTop
+  id: RMCWallPrefabOrange4
+  components:
+  - type: Sprite
+    state: fab_4
+  - type: Icon
+    state: fab_4
+
+- type: entity
+  parent: RMCPrefab32BaseTop
+  id: RMCWallPrefabOrange5
+  components:
+  - type: Sprite
+    state: fab_5
+  - type: Icon
+    state: fab_5
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange6
+  components:
+  - type: Sprite
+    state: fab_6
+  - type: Icon
+    state: fab_6
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange7
+  components:
+  - type: Sprite
+    state: fab_7
+  - type: Icon
+    state: fab_7
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange8
+  components:
+  - type: Sprite
+    state: fab_8
+  - type: Icon
+    state: fab_8
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange9
+  components:
+  - type: Sprite
+    state: fab_9
+  - type: Icon
+    state: fab_9
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange10
+  components:
+  - type: Sprite
+    state: fab_10
+  - type: Icon
+    state: fab_10
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange11
+  components:
+  - type: Sprite
+    state: fab_11
+  - type: Icon
+    state: fab_11
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange12
+  components:
+  - type: Sprite
+    state: fab_12
+  - type: Icon
+    state: fab_12
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange13
+  components:
+  - type: Sprite
+    state: fab_13
+  - type: Icon
+    state: fab_13
+
+- type: entity
+  parent: RMCWallPrefabOrange
+  id: RMCWallPrefabOrange14
+  components:
+  - type: Sprite
+    state: fab_14
+  - type: Icon
+    state: fab_14
+
+# Greebles
+
+- type: entity
+  abstract: true
+  id: RMCPrefabGreebleBase
+  name: prefabricated structure
+  description: Windsocks, Air-Con units, solarpanels, oh my!
+  suffix: Greeble
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/prefab_greebles.rsi
+    drawdepth: Overdoors
+  - type: Appearance
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble1
+  components:
+  - type: Sprite
+    state: antenna1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble2
+  components:
+  - type: Sprite
+    state: antenna2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble3
+  components:
+  - type: Sprite
+    state: flagpole
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble4
+  components:
+  - type: Sprite
+    state: smokestack
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble5
+  components:
+  - type: Sprite
+    state: solarpanel1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble6
+  components:
+  - type: Sprite
+    state: solarpanel2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble7
+  components:
+  - type: Sprite
+    state: vent1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble8
+  components:
+  - type: Sprite
+    state: vent2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble9
+  components:
+  - type: Sprite
+    state: vent3
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble10
+  components:
+  - type: Sprite
+    state: vent4
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble11
+  components:
+  - type: Sprite
+    state: vent5
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble12
+  components:
+  - type: Sprite
+    state: windsock

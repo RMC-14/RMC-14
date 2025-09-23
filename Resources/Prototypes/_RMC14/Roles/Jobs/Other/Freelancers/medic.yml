@@ -1,0 +1,121 @@
+# Freelancer Medic
+- type: job
+  parent: CMJobBase
+  id: CMFreelancerMedic
+  name: rmc-job-name-freelancer-medic
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: RMCJobFreelancerMedic
+  ranks:
+    RMCRankFLMedic: []
+  startingGear: RMCGearFreelancerMedic
+  icon: RMCJobIconFreelancerMedic
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Freelancer Medic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerMedicHostile
+  name: freelancer ghost role medic
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerMedic
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerMedicFriendly
+  name: freelancer ghost role medic
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerMedicFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCFreelancerMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-hostile-medic
+    description: rmc-ghost-role-information-freelancer-hostile-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCFreelancerMedicFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-friendly-medic
+    description: rmc-ghost-role-information-freelancer-friendly-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: startingGear
+  id: RMCGearFreelancerMedic
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses
+    back: RMCSatchelLightpackFreelancerMedic
+    belt: CMBeltMedicBagFilled
+    suitstorage: WeaponRifleMAR40
+    pocket1: RMCPouchMedicalERT
+    pocket2: RMCPouchMagazineLargeMAR40
+    gloves: RMCHandsVeteranPMC
+    jumpsuit: RMCJumpsuitFreelancer # TODO RMC14 add surg vest
+    outerClothing: CMArmorFreelancer
+    shoes: RMCBootsSPPFilled
+    id: RMCIDCardFreelancer
+    ears: RMCHeadsetDistressDukes
+
+- type: playTimeTracker
+  id: RMCJobFreelancerMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconFreelancerMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: free_med

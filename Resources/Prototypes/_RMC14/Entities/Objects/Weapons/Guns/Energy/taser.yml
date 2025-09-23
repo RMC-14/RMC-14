@@ -20,11 +20,11 @@
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: Wieldable
   - type: Battery
-    maxCharge: 10000
-    startingCharge: 10000
+    maxCharge: 800
+    startingCharge: 800
   - type: ProjectileBatteryAmmoProvider
     proto: RMCProjectileTaser
-    fireCost: 625
+    fireCost: 50
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -37,3 +37,21 @@
   - type: GunPointBlank
   - type: GunDualWielding
     weaponGroup: Handgun
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillPolice: 2
+  - type: AltFireMelee
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/taser_hit.ogg
+  - type: Stunbaton
+    energyPerUse: 50
+  - type: RMCStaminaDamageOnHit
+    damage: 100
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 2

@@ -22,6 +22,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPointLightSystem _light = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -32,7 +33,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [ViewVariables]
     private float _powerLoadMultiplier;
 
-    private EntityQuery<ApcPowerReceiverComponent> _apcPowerReceiverQuery;
     private EntityQuery<RMCApcComponent> _apcQuery;
     private EntityQuery<AppearanceComponent> _appearanceQuery;
     private EntityQuery<RMCAreaPowerComponent> _areaPowerQuery;
@@ -45,14 +45,12 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
 
-        _apcPowerReceiverQuery = GetEntityQuery<ApcPowerReceiverComponent>();
         _apcQuery = GetEntityQuery<RMCApcComponent>();
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _areaPowerQuery = GetEntityQuery<RMCAreaPowerComponent>();
         _batteryQuery = GetEntityQuery<BatteryComponent>();
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
-        SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ReceiverOnMapInit);
         SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
@@ -76,20 +74,23 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         ToUpdate.Add(ent);
     }
 
-    private void ReceiverOnMapInit(Entity<ApcPowerReceiverComponent> ent, ref MapInitEvent args)
+    protected override void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.NeedsPower)
-        {
-            ent.Comp.Powered = true;
+        if (!TryComp(ent, out ApcPowerReceiverComponent? receiver))
+            return;
 
-            Dirty(ent, ent.Comp);
+        if (receiver.NeedsPower)
+            return;
 
-            var ev = new PowerChangedEvent(true, 0);
-            RaiseLocalEvent(ent, ref ev);
+        receiver.Powered = true;
 
-            if (_appearanceQuery.TryComp(ent, out var appearance))
-                _appearance.SetData(ent, PowerDeviceVisuals.Powered, true, appearance);
-        }
+        Dirty(ent, ent.Comp);
+
+        var ev = new PowerChangedEvent(true, 0);
+        RaiseLocalEvent(ent, ref ev);
+
+        if (_appearanceQuery.TryComp(ent, out var appearance))
+            _appearance.SetData(ent, PowerDeviceVisuals.Powered, true, appearance);
     }
 
     protected override void PowerUpdated(Entity<RMCAreaPowerComponent> area, RMCPowerChannel channel, bool on)
@@ -100,22 +101,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         var ev = new PowerChangedEvent(on, 0);
         foreach (var receiver in receivers)
         {
-            if (!_apcPowerReceiverQuery.TryComp(receiver, out var receiverComp))
-                continue;
-
-            if (receiverComp.Powered == on)
-                continue;
-
-            if (!receiverComp.NeedsPower)
-                continue;
-
-            receiverComp.Powered = on;
-            Dirty(receiver, receiverComp);
-
-            RaiseLocalEvent(receiver, ref ev);
-
-            if (_appearanceQuery.TryComp(receiver, out var appearance))
-                _appearance.SetData(receiver, PowerDeviceVisuals.Powered, on, appearance);
+            UpdateReceiverPower(receiver, ref ev);
         }
     }
 
@@ -258,7 +244,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
                     var drawn = wattsPer;
                     drawn -= totalLoad;
-                    if (drawn < 0)
+                    if (drawn <= 0)
                     {
                         apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                         _battery.UseCharge(battery, -drawn, battery);
@@ -298,6 +284,16 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                         UpdateApcChannel(apc, area, RMCPowerChannel.Environment, false);
                         break;
                 }
+
+                _appearance.SetData(apc, RMCApcVisualsLayers.Power, apcComp.ChargeStatus);
+                _light.SetColor(apc,
+                    apcComp.ChargeStatus switch
+                    {
+                        RMCApcChargeStatus.FullCharge => Color.FromHex("#64C864"),
+                        RMCApcChargeStatus.Charging => Color.FromHex("#6496FA"),
+                        RMCApcChargeStatus.NotCharging => Color.FromHex("#ff3b3b"),
+                        _ => Color.White,
+                    });
 
                 Dirty(apc, apcComp);
             }

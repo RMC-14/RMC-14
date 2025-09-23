@@ -35,3 +35,5 @@
   - type: BuckleClimbable
   - type: Corrodible
     isCorrodible: false
+  - type: RMCStrapNoDrawDepthChange
+  - type: RMCMesonsNonviewable

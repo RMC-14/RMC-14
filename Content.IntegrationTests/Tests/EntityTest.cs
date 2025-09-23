@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Robust.Shared;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Configuration;
@@ -9,11 +10,13 @@ using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
     [TestOf(typeof(EntityUid))]
+    [NonParallelizable] // RMC14: We have some many entities that this causes a OOM.
     public sealed class EntityTest
     {
         private static readonly ProtoId<EntityCategoryPrototype> SpawnerCategory = "Spawner";
@@ -32,50 +35,63 @@ namespace Content.IntegrationTests.Tests
             var prototypeMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entityMan.System<SharedMapSystem>();
 
+            List<string> protoIds = null;
             await server.WaitPost(() =>
             {
-                var protoIds = prototypeMan
+                protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
                     .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
+                    .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
                     .Select(p => p.ID)
                     .ToList();
-
-                foreach (var protoId in protoIds)
-                {
-                    mapSystem.CreateMap(out var mapId);
-                    var grid = mapManager.CreateGridEntity(mapId);
-                    // TODO: Fix this better in engine.
-                    mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
-                    var coord = new EntityCoordinates(grid.Owner, 0, 0);
-                    entityMan.SpawnEntity(protoId, coord);
-                }
             });
 
-            await server.WaitRunTicks(15);
-
-            await server.WaitPost(() =>
+            for (var i = 0; i < protoIds.Count; i += 100)
             {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
+                var max = i + 100;
+                if (max >= protoIds.Count)
+                    max = protoIds.Count;
+
+                var chunk = protoIds[i..max];
+                await server.WaitPost(() =>
                 {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
+                    foreach (var spawn in chunk)
                     {
-                        yield return (uid, meta);
+                        mapSystem.CreateMap(out var mapId);
+                        var grid = mapManager.CreateGridEntity(mapId);
+                        // TODO: Fix this better in engine.
+                        mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
+                        var coord = new EntityCoordinates(grid.Owner, 0, 0);
+                        entityMan.SpawnEntity(spawn, coord);
                     }
-                }
+                });
 
-                var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
+                await server.WaitPost(() =>
                 {
-                    if (!meta.EntityDeleted)
-                        entityMan.DeleteEntity(uid);
-                }
+                    static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
+                        where TComp : Component
+                    {
+                        var query = entityMan.AllEntityQueryEnumerator<TComp>();
+                        while (query.MoveNext(out var uid, out var meta))
+                        {
+                            yield return (uid, meta);
+                        }
+                    }
 
-                Assert.That(entityMan.EntityCount, Is.Zero);
-            });
+                    var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
+                    foreach (var (uid, meta) in entityMetas)
+                    {
+                        if (!meta.EntityDeleted)
+                            entityMan.DeleteEntity(uid);
+                    }
+
+                    Assert.That(entityMan.EntityCount, Is.Zero);
+                });
+
+                GC.Collect();
+            }
 
             await pair.CleanReturnAsync();
         }
@@ -83,7 +99,7 @@ namespace Content.IntegrationTests.Tests
         [Test]
         public async Task SpawnAndDeleteAllEntitiesInTheSameSpot()
         {
-            // TODO RMC14 this breaks because a meteor breaks a draw that drops a paper which traverses grids and trips a debug assert for container remove destination
+            // TODO RMC14 this breaks because a meteor breaks a drawer that drops a paper which traverses grids and trips a debug assert for container remove destination
             return;
             // This test dirties the pair as it simply deletes ALL entities when done. Overhead of restarting the round
             // is minimal relative to the rest of the test.
@@ -103,6 +119,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
                     .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
+                    .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
                     .Select(p => p.ID)
                     .ToList();
                 foreach (var protoId in protoIds)
@@ -166,47 +183,59 @@ namespace Content.IntegrationTests.Tests
                 .Select(p => p.ID)
                 .ToList();
 
-            await server.WaitPost(() =>
+            const int chunkSize = 100;
+            for (var i = 0; i < protoIds.Count; i += chunkSize)
             {
-                foreach (var protoId in protoIds)
+                var max = i + chunkSize;
+                if (max >= protoIds.Count)
+                    max = protoIds.Count;
+                var chunk = protoIds[i..max];
+
+                await server.WaitPost(() =>
                 {
-                    mapSys.CreateMap(out var mapId);
-                    var grid = mapManager.CreateGridEntity(mapId);
-                    var ent = sEntMan.SpawnEntity(protoId, new EntityCoordinates(grid.Owner, 0.5f, 0.5f));
-                    foreach (var (_, component) in sEntMan.GetNetComponents(ent))
+                    foreach (var protoId in chunk)
                     {
-                        sEntMan.Dirty(ent, component);
+                        mapSys.CreateMap(out var mapId);
+                        var grid = mapManager.CreateGridEntity(mapId);
+                        var ent = sEntMan.SpawnEntity(protoId, new EntityCoordinates(grid.Owner, 0.5f, 0.5f));
+                        foreach (var (_, component) in sEntMan.GetNetComponents(ent))
+                        {
+                            sEntMan.Dirty(ent, component);
+                        }
                     }
-                }
-            });
+                });
 
-            await pair.RunTicksSync(15);
+                await pair.RunTicksSync(15);
 
-            // Make sure the client actually received the entities
-            // 500 is completely arbitrary. Note that the client & sever entity counts aren't expected to match.
-            Assert.That(client.ResolveDependency<IEntityManager>().EntityCount, Is.GreaterThan(500));
+                // Make sure the client actually received the entities
+                // 500 is completely arbitrary. Note that the client & sever entity counts aren't expected to match.
+                if (chunk.Count >= chunkSize)
+                    Assert.That(client.ResolveDependency<IEntityManager>().EntityCount, Is.GreaterThan(50));
 
-            await server.WaitPost(() =>
-            {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
+                await server.WaitPost(() =>
                 {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
+                    static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
+                        where TComp : Component
                     {
-                        yield return (uid, meta);
+                        var query = entityMan.AllEntityQueryEnumerator<TComp>();
+                        while (query.MoveNext(out var uid, out var meta))
+                        {
+                            yield return (uid, meta);
+                        }
                     }
-                }
 
-                var entityMetas = Query<MetaDataComponent>(sEntMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
-                {
-                    if (!meta.EntityDeleted)
-                        sEntMan.DeleteEntity(uid);
-                }
+                    var entityMetas = Query<MetaDataComponent>(sEntMan).ToList();
+                    foreach (var (uid, meta) in entityMetas)
+                    {
+                        if (!meta.EntityDeleted)
+                            sEntMan.DeleteEntity(uid);
+                    }
 
-                Assert.That(sEntMan.EntityCount, Is.Zero);
-            });
+                    Assert.That(sEntMan.EntityCount, Is.Zero);
+                });
+
+                GC.Collect();
+            }
 
             await pair.CleanReturnAsync();
         }
@@ -255,6 +284,10 @@ namespace Content.IntegrationTests.Tests
                 "GridSpawner",
                 "CorpseSpawner",
                 "ItemCamouflage",
+                // RMC14
+                "ActivateDropshipWeaponOnSpawn",
+                "AmbientSound",
+                // RMC14
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
@@ -282,68 +315,101 @@ namespace Content.IntegrationTests.Tests
 
             // We consider only non-audio entities, as some entities will just play sounds when they spawn.
             int Count(IEntityManager ent) =>  ent.EntityCount - ent.Count<AudioComponent>();
+            IEnumerable<EntityUid> Entities(IEntityManager entMan) => entMan.GetEntities().Where(e => !entMan.HasComponent<AudioComponent>(e));
 
-            foreach (var protoId in protoIds)
+            await Assert.MultipleAsync(async () =>
             {
-                // TODO fix ninja
-                // Currently ninja fails to equip their own loadout.
-                if (protoId == "MobHumanSpaceNinja")
-                    continue;
-
-                var count = Count(server.EntMan);
-                var clientCount = Count(client.EntMan);
-                EntityUid uid = default;
-                await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
-                await pair.RunTicksSync(3);
-
-                // If the entity deleted itself, check that it didn't spawn other entities
-                if (!server.EntMan.EntityExists(uid))
+                foreach (var protoId in protoIds)
                 {
-                    if (Count(server.EntMan) != count)
+                    var count = Count(server.EntMan);
+                    var clientCount = Count(client.EntMan);
+                    var serverEntities = new HashSet<EntityUid>(Entities(server.EntMan));
+                    var clientEntities = new HashSet<EntityUid>(Entities(client.EntMan));
+                    EntityUid uid = default;
+                    await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
+                    await pair.RunTicksSync(3);
+
+                    // If the entity deleted itself, check that it didn't spawn other entities
+                    if (!server.EntMan.EntityExists(uid))
                     {
-                        Assert.Fail($"Server prototype {protoId} failed on deleting itself");
+                        Assert.That(Count(server.EntMan), Is.EqualTo(count), $"Server prototype {protoId} failed on deleting itself\n" +
+                            BuildDiffString(serverEntities, Entities(server.EntMan), server.EntMan));
+                        Assert.That(Count(client.EntMan), Is.EqualTo(clientCount), $"Client prototype {protoId} failed on deleting itself\n" +
+                            $"Expected {clientCount} and found {client.EntMan.EntityCount}.\n" +
+                            $"Server count was {count}.\n" +
+                            BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
+                        continue;
                     }
 
-                    if (Count(client.EntMan) != clientCount)
-                    {
-                        Assert.Fail($"Client prototype {protoId} failed on deleting itself\n" +
-                                    $"Expected {clientCount} and found {Count(client.EntMan)}.\n" +
-                                    $"Server was {count}.");
-                    }
-                    continue;
-                }
+                    // Check that the number of entities has increased.
+                    Assert.That(Count(server.EntMan), Is.GreaterThan(count), $"Server prototype {protoId} failed on spawning as entity count didn't increase\n" +
+                        BuildDiffString(serverEntities, Entities(server.EntMan), server.EntMan));
+                    Assert.That(Count(client.EntMan), Is.GreaterThan(clientCount), $"Client prototype {protoId} failed on spawning as entity count didn't increase\n" +
+                        $"Expected at least {clientCount} and found {client.EntMan.EntityCount}. " +
+                        $"Server count was {count}.\n" +
+                        BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
 
-                // Check that the number of entities has increased.
-                if (Count(server.EntMan) <= count)
-                {
-                    Assert.Fail($"Server prototype {protoId} failed on spawning as entity count didn't increase");
-                }
+                    await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
+                    await pair.RunTicksSync(3);
 
-                if (Count(client.EntMan) <= clientCount)
-                {
-                    Assert.Fail($"Client prototype {protoId} failed on spawning as entity count didn't increase" +
-                                $"Expected at least {clientCount} and found {Count(client.EntMan)}. " +
-                                $"Server was {count}");
+                    // Check that the number of entities has gone back to the original value.
+                    Assert.That(Count(server.EntMan), Is.EqualTo(count), $"Server prototype {protoId} failed on deletion: count didn't reset properly\n" +
+                        BuildDiffString(serverEntities, Entities(server.EntMan), server.EntMan));
+                    Assert.That(Count(client.EntMan), Is.EqualTo(clientCount), $"Client prototype {protoId} failed on deletion: count didn't reset properly:\n" +
+                        $"Expected {clientCount} and found {Count(client.EntMan)}.\n" +
+                        $"Server count was {count}.\n" +
+                        BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
                 }
-
-                await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
-                await pair.RunTicksSync(3);
-
-                // Check that the number of entities has gone back to the original value.
-                if (Count(server.EntMan) != count)
-                {
-                    Assert.Fail($"Server prototype {protoId} failed on deletion count didn't reset properly");
-                }
-
-                if (Count(client.EntMan) != clientCount)
-                {
-                    Assert.Fail($"Client prototype {protoId} failed on deletion count didn't reset properly:\n" +
-                                $"Expected {clientCount} and found {Count(client.EntMan)}.\n" +
-                                $"Server was {count}.");
-                }
-            }
+            });
 
             await pair.CleanReturnAsync();
+        }
+
+        private static string BuildDiffString(IEnumerable<EntityUid> oldEnts, IEnumerable<EntityUid> newEnts, IEntityManager entMan)
+        {
+            var sb = new StringBuilder();
+            var addedEnts = newEnts.Except(oldEnts);
+            var removedEnts = oldEnts.Except(newEnts);
+            if (addedEnts.Any())
+                sb.AppendLine("Listing new entities:");
+            foreach (var addedEnt in addedEnts)
+            {
+                sb.AppendLine(entMan.ToPrettyString(addedEnt));
+            }
+            if (removedEnts.Any())
+                sb.AppendLine("Listing removed entities:");
+            foreach (var removedEnt in removedEnts)
+            {
+                sb.AppendLine("\t" + entMan.ToPrettyString(removedEnt));
+            }
+            return sb.ToString();
+        }
+
+        private static bool HasRequiredDataField(Component component)
+        {
+            foreach (var field in component.GetType().GetFields())
+            {
+                foreach (var attribute in field.GetCustomAttributes(true))
+                {
+                    if (attribute is not DataFieldAttribute dataField)
+                        continue;
+
+                    if (dataField.Required)
+                        return true;
+                }
+            }
+            foreach (var property in component.GetType().GetProperties())
+            {
+                foreach (var attribute in property.GetCustomAttributes(true))
+                {
+                    if (attribute is not DataFieldAttribute dataField)
+                        continue;
+
+                    if (dataField.Required)
+                        return true;
+                }
+            }
+            return false;
         }
 
         [Test]
@@ -356,6 +422,7 @@ namespace Content.IntegrationTests.Tests
                 "DebugExceptionInitialize",
                 "DebugExceptionStartup",
                 "GridFill",
+                "RoomFill",
                 "Map", // We aren't testing a map entity in this test
                 "MapGrid",
                 "Broadphase",
@@ -369,9 +436,6 @@ namespace Content.IntegrationTests.Tests
                 "ActivatableUI", // Requires enum key
             };
 
-            // TODO TESTS
-            // auto ignore any components that have a "required" data field.
-
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
             var entityManager = server.ResolveDependency<IEntityManager>();
@@ -379,7 +443,7 @@ namespace Content.IntegrationTests.Tests
             var logmill = server.ResolveDependency<ILogManager>().GetSawmill("EntityTest");
 
             await pair.CreateTestMap();
-            await server.WaitRunTicks(5);
+            await server.WaitRunTicks(15);
             var testLocation = pair.TestMap.GridCoords;
 
             await server.WaitAssertion(() =>
@@ -389,8 +453,11 @@ namespace Content.IntegrationTests.Tests
 
                     foreach (var type in componentFactory.AllRegisteredTypes)
                     {
-                        var component = (Component) componentFactory.GetComponent(type);
+                        var component = (Component)componentFactory.GetComponent(type);
                         var name = componentFactory.GetComponentName(type);
+
+                        if (HasRequiredDataField(component))
+                            continue;
 
                         // If this component is ignored
                         if (skipComponents.Contains(name))

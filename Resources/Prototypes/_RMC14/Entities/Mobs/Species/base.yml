@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - Opaque
@@ -24,13 +25,14 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 0
         restitution: 0.0
         layer:
         - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
+  - type: RMCStamina
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
@@ -51,7 +53,6 @@
     - KnockedDown
     - SlowedDown
     - Stutter
-    - SeeingRainbows
     - Electrocution
     - ForcedSleep
     - TemporaryBlindness
@@ -63,6 +64,14 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
+    - Blinded
+    - Deaf
+    - Unconscious
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: rmc-patting-success-generic
+    messagePerceivedByOthers: rmc-patting-success-generic-others
   - type: Blindable
   - type: Tag
     tags:
@@ -107,6 +116,8 @@
     damage:
       types:
         Heat: 1
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -114,7 +125,7 @@
   - type: MeleeWeapon
     soundHit:
       collection: Punch
-    angle: 30
+    angle: 0
     animation: WeaponArcFist
     attackRate: 1
     damage:
@@ -134,6 +145,7 @@
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
         interactionRange: 0
+        requireInputValidation: false
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
@@ -143,9 +155,10 @@
         type: SquadInfoBui
       enum.DialogUiKey.Key:
         type: DialogBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
-  - type: Tackle
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -153,8 +166,6 @@
   - type: ShortExamine
   - type: MaxDamage
     max: 719 # TODO RMC14 this should be per part and smaller
-  - type: Perishable
-    rotAfter: 300
   - type: AtmosExposed
   - type: Temperature
     heatDamageThreshold: 325
@@ -208,6 +219,10 @@
       whitelist:
         tags:
         - BodyBag
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - RequisitionsCrate #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -247,6 +262,39 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+      enum.HookedVisuals.Hooked:
+        hooked:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
@@ -270,11 +318,76 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
+    stacks: -10
     blacklist:
       components:
       - Xeno
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 2
+    superSlowModifier: 4
+  - type: RMCHandEmotes
+  - type: RMCBuckleDrawDepth
+  - type: RMCObstacleSlamming
+  - type: AllowPullWhileDeadAndInfected
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
+      tags:
+      - RMCDropshipEnginePoint
+    range: 2
+  - type: RMCArmorModifier
+    meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune
+  - type: MobCollision
+  - type: RMCMobCollision
+  - type: RMCRest
+  - type: RMCMeleeDamageSkill
+  - type: RMCStripTimeSkill
+  - type: RMCDisarm
+  - type: RMCDisarmable
+  - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
+  - type: RMCStopDropRollVisuals
+  - type: XenoToggleChargingDamage
+    damage:
+      types:
+        Blunt: 0.25 # TODO RMC14 to the chest only
+    armorPiercingDamage:
+      types:
+        Blunt: 1
+    armorPiercing: 13
+    defaultMultiplier: 5
+    stageMultipliers:
+      8: 8
+  - type: XenoToggleChargingKnockback
+  - type: XenoToggleChargingParalyze
+  - type: RMCMobStateDrawDepth
+    drawDepths:
+      Dead: DeadMobs
+  - type: IVDripTarget
+  - type: FixedIdentity
+    name: rmc-host
+    whitelist:
+      components:
+      - Xeno
+  - type: HiddenAppearance
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCHealthIcons
+  - type: RMCMesonsNonviewable
+    xenoVisible: true

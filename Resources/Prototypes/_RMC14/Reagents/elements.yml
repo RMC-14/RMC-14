@@ -1,5 +1,6 @@
 # todo rmc14 these should have their effects checked for 13 values
 - type: reagent
+  parent: RMCReagentElement
   id: RMCAluminum
   name: reagent-name-rmc-aluminum
   group: Elements
@@ -15,8 +16,8 @@
       - !type:ChemVomit
         probability: 0
 
-
 - type: reagent
+  parent: RMCReagentElement
   id: RMCCarbon
   name: reagent-name-carbon
   group: Elements
@@ -33,6 +34,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCChlorine
   name: reagent-name-chlorine
   group: Elements
@@ -65,6 +67,7 @@
             Brute: 2.5
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCCopper
   name: reagent-name-copper
   group: Elements
@@ -80,6 +83,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCFluorine
   name: reagent-name-fluorine
   group: Elements
@@ -114,6 +118,7 @@
             Toxin: 2.5
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCGold
   name: reagent-name-gold
   group: Elements
@@ -129,6 +134,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCHydrogen
   name: reagent-name-hydrogen
   group: Elements
@@ -144,6 +150,7 @@
         probability: 0
 
 - type: reagent #TODO if over blood limit take limb damage, oxy damage, move slower
+  parent: RMCReagentElement
   id: RMCIron
   name: reagent-name-iron
   group: Elements
@@ -172,7 +179,7 @@
           min: 30
         damage:
           groups:
-            Toxin: 1.5
+            Toxin: 0.75
       - !type:SatiateHunger
         conditions:
         - !type:ReagentThreshold
@@ -180,6 +187,7 @@
         factor: -75
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCLithium
   name: reagent-name-lithium
   group: Elements
@@ -205,6 +213,7 @@
 #TODO brain damage on OD and COD
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCMercury
   name: reagent-name-mercury
   group: Elements
@@ -226,6 +235,7 @@
 #Each diff property
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCPotassium
   name: reagent-name-potassium
   group: Elements
@@ -242,6 +252,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCPhosphorus
   name: reagent-name-phosphorus
   group: Elements
@@ -258,10 +269,10 @@
         probability: 0
 
 - type: reagent
+  parent: [RMCReagentElement, Uranium]
   id: RMCRadium
   name: reagent-name-radium
   group: Elements
-  parent: Uranium
   desc: reagent-desc-radium
   physicalDesc: reagent-physical-desc-glowing
   flavor: metallic
@@ -292,6 +303,7 @@
 #TODO causes internal bleeding, OD organ damage, critical causes even more
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSilicon
   name: reagent-name-silicon
   group: Elements
@@ -308,6 +320,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSilver
   name: reagent-name-silver
   group: Elements
@@ -324,6 +337,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSulfur
   name: reagent-name-sulfur
   group: Elements
@@ -340,6 +354,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSodium
   name: reagent-name-sodium
   group: Elements
@@ -356,6 +371,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCUranium
   name: reagent-name-uranium
   group: Elements
@@ -388,6 +404,7 @@
             Brute: 2
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCOxygen
   name: reagent-name-oxygen
   desc: reagent-desc-oxygen
@@ -403,6 +420,7 @@
         probability: 0
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCNitrogen
   name: reagent-name-nitrogen
   desc: reagent-desc-nitrogen
@@ -418,11 +436,12 @@
         probability: 0
 
 - type: reagent
+  parent: [RMCReagentElement, BaseAlcohol]
   id: RMCEthanol
   name: reagent-name-ethanol
-  parent: BaseAlcohol
   desc: reagent-desc-ethanol
-  slippery: true
+  slipData:
+    requiredSlipSpeed: 3.5
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
   color: "#404030"
@@ -470,6 +489,7 @@
         probability: 0.25 #TODO Liver damage
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSugar #Candy and grains
   name: reagent-name-sugar
   group: Foods
@@ -492,6 +512,7 @@
   metamorphicChangeColor: false
 
 - type: reagent
+  parent: RMCReagentElement
   id: RMCSulphuricAcid
   name: reagent-name-rmc-sulphuric-acid
   group: Toxins

@@ -1,14 +1,19 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBurrower
   - type: GhostRole
     name: cm-job-name-xeno-burrower
   - type: Sprite
@@ -51,7 +56,7 @@
     plasmaRegenOnWeeds: 4.5
   - type: XenoAcid
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 40
   - type: XenoDevour
   - type: XenoStomp
@@ -60,7 +65,10 @@
     range: 4
     plasmaCost: 100
     paralyzeTime: 2
+    slowBigInsteadOfStun: true
+    slows: false
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+    debuffsHurtXenosMore: false
   - type: XenoBurrow
   - type: MeleeWeapon
     damage:
@@ -98,7 +106,7 @@
     prefix: burrower
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: burrower
   - type: AcidTrap #Do 2 CM code they make level 3 traps at a level 2 cost
     trapLevel: 3
@@ -106,3 +114,14 @@
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-burrower
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
+  - type: VentCrawler
+    ventCrawlIcon: burrower

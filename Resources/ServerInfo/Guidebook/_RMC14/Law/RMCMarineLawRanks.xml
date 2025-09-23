@@ -1,0 +1,48 @@
+﻿<Document>
+  # Ranks
+
+  ## Officer
+  Brigadier General\nPrefix: BGen\nPaygrade: O7
+
+  Colonel\nPrefix: Col\nPaygrade: O6
+
+  Lieutenant Colonel\nPrefix: LtCol\nPaygrade: O5
+
+  Major\nPrefix: Maj\nPaygrade: O4
+
+  Captain\nPrefix: Capt\nPaygrade: O3
+
+  First Lieutenant\nPrefix: 1stLt\nPaygrade: O2
+
+  Second Lieutenant\nPrefix: 2ndLt\nPaygrade: O1
+
+  Chief Warrant Officer\nPrefix: WarOff.\nPaygrade: O0-2
+
+  Warrant Officer\nPrefix: WarOff.\nPaygrade: O0-1
+
+
+  ## Enlisted
+
+  Sergeant Major\nPrefix: SgtMaj\nPaygrade: E9E
+
+  Master Gunnery Sergeant\nPrefix: MGySgt\nPaygrade: E9
+
+  First Sergeant\nPrefix: 1Sgt\nPaygrade: E8E
+
+  Master Sergeant\nPrefix: MSgt\nPaygrade: E8
+
+  Gunnery Sergeant\nPrefix: GySgt\nPaygrade: E7
+
+  Staff Sergeant\nPrefix: SSgt\nPaygrade: E6
+
+  Sergeant\nPrefix: Sgt\nPaygrade: E5
+
+  Corporal\nPrefix: Cpl\nPaygrade: E4
+
+  Lance Corporal\nPrefix: LCpl\nPaygrade: E3
+
+  Private First Class\nPrefix: PFC\nPaygrade: E2
+
+  Private\nPrefix: PVT\nPaygrade: E1
+
+</Document>

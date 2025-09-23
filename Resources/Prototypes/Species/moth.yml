@@ -8,18 +8,18 @@
   markingLimits: MobMothMarkingLimits
   dollPrototype: MobMothDummy
   skinColoration: Hues
-  maleFirstNames: names_moth_first_male
-  femaleFirstNames: names_moth_first_female
-  lastNames: names_moth_last
+  maleFirstNames: NamesMothFirstMale
+  femaleFirstNames: NamesMothFirstFemale
+  lastNames: NamesMothLast
 
 - type: speciesBaseSprites
   id: MobMothSprites
   sprites:
     Head: MobMothHead
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobMothTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -66,17 +66,17 @@
     Head:
       points: 1
       required: false
-    Chest:
-      points: 1
-      required: false
-    Underwear:
-      points: 1
-      required: true
-      defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
+    UndergarmentBottom:
+      points: 1
+      required: true
+      defaultMarkings: [ RMCUnderwearBoxersBlue ]
+    Chest:
+      points: 2
+      required: false
     Legs:
       points: 2
       required: false

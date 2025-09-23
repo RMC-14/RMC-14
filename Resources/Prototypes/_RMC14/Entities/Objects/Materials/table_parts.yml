@@ -12,6 +12,10 @@
   - type: Construction
     graph: RMCTablePart
     node: Metal
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 200
   - type: Tag
     tags:
     - RMCTablePartMetal
@@ -45,7 +49,11 @@
       - RMCTablePartReinforced
       - RMCTablePartMetalReinforced
   - type: Construction
-    node: MetalReinforced  
+    node: MetalReinforced
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 400
 
 - type: Tag
   id: RMCTablePartReinforced
@@ -61,7 +69,7 @@
   - type: Tag
     tags:
       - RMCTablePartWood
-      - RMCTablePartWoodPart 
+      - RMCTablePartWoodPart
   - type: Construction
     node: Wood
 

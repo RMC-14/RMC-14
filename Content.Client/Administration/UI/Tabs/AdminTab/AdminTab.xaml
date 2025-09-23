@@ -16,10 +16,12 @@
             <cc:UICommandButton Command="callshuttle" Text="{Loc admin-player-actions-window-shuttle}" WindowType="{x:Type at:AdminShuttleWindow}"/>
             <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}"/>
             <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}"/>
+            <cc:CommandButton Command="achatwindow" Text="{Loc admin-player-actions-window-admin-chat}"/>
         </GridContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 10" />
         <GridContainer Columns="3">
-            <cc:CommandButton Command="rmcadminui" Text="{Loc rmc-ui-admin }" />
+            <cc:CommandButton Command="rmcadminui" Text="{Loc rmc-ui-admin}" />
+            <cc:CommandButton Command="> rmcrejuvenate:marineplayersinrange 7" Text="{Loc rmc-ui-rejuvenate-nearby-marines}" />
         </GridContainer>
     </BoxContainer>
 </Control>

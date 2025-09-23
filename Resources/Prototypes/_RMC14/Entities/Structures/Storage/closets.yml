@@ -1,12 +1,13 @@
 # Base
 - type: entity
   parent: ClosetBase
-  id: CMClosetBase
+  id: CMClosetBaseUnanchored
   name: closet
   description: It's a basic storage unit.
+  suffix: Unanchored
   components:
-  - type: Transform
-    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/standard.rsi
     layers:
@@ -17,6 +18,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      map: [ "enum.PaperLabelVisuals.Layer" ]
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: base
@@ -29,6 +34,7 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: RMCContainerEmptyOnDestruction
   - type: Anchorable
     flags:
     - None
@@ -48,6 +54,21 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: EntityStorageCloseOnMapInit
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40
+
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: CMClosetBase
+  suffix: Anchored
+  components:
+  - type: Transform
+    anchored: true
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMClosetBase
@@ -188,3 +209,25 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
 
+# PVE
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetGoldenArrowGear
+  name: personal locker
+  description: An immobile storage unit.
+  suffix: PvE, Sun Riders
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetPMCGear
+  suffix: PvE, PMC
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCGearFill

@@ -25,4 +25,7 @@ public sealed partial class PowerLoaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId VirtualLeft = "RMCVirtualPowerLoaderLeft";
+
+    [DataField, AutoNetworkedField]
+    public Shared.DoAfter.DoAfter? DoAfter;
 }

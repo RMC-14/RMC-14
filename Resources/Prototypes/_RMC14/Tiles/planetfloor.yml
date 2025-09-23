@@ -140,4 +140,9 @@
   id: CMFloorSteelRechargeFloor
   name: mech recharge floor
   sprite: /Textures/_RMC14/Tiles/floors/recharge_floor.png
-  
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorCarpet
+  name: carpet
+  sprite: /Textures/_RMC14/Tiles/floors/carpet_singular.png

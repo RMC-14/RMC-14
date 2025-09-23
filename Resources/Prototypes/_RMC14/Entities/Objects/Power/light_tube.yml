@@ -7,50 +7,36 @@
     sprite:  _RMC14/Objects/Power/light_tube.rsi
   - type: LightBulb
     bulb: Tube
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 5
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:DoActsBehavior
-        acts: [ "Breakage" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+    lightEnergy: 1
+    lightRadius: 10
+    lightSoftness: 1
+    PowerUse: 25
 
 - type: entity
   parent: CMLightTubeBase
   id: CMLightTube
   name: light tube
   description: A replacement light tube.
+  suffix: Warm
   components:
   - type: LightBulb
-    color: "#FFE4CE" # 5000K color temp
-    lightEnergy: 0.8
-    lightRadius: 10
-    lightSoftness: 1
-    PowerUse: 25
+    color: "#FFEFD2"
+
+- type: entity
+  parent: CMLightTube
+  id: RMCLightTubeBlue
+  suffix: Blue
+  components:
+  - type: LightBulb
+    color: "#D2E3EC"
+
+- type: entity
+  parent: CMLightTube
+  id: RMCLightTubeWarm
+  suffix: Orange
+  components:
+  - type: LightBulb
+    color: "#FA8E2A"
 
 - type: entity
   parent: CMLightTubeBase

@@ -13,6 +13,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
@@ -43,7 +44,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private StaffHelpWindow? _staffHelpWindow;
     private MentorHelpWindow? _mentorHelpWindow;
     private MentorWindow? _mentorWindow;
-    private string? _mHelpSound;
+    private SoundSpecifier? _mHelpSound;
     private bool _unread;
     private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;
 
@@ -64,7 +65,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorClaimMsg>(OnMentorClaim);
         _net.RegisterNetMessage<MentorUnclaimMsg>(OnMentorUnclaim);
 
-        _config.OnValueChanged(RMCCVars.RMCMentorHelpSound, v => _mHelpSound = v, true);
+        _config.OnValueChanged(RMCCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
     }
 
     private void OnMentorStatus(MentorStatusMsg msg)
@@ -97,8 +98,15 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         var other = false;
         foreach (var message in msg.Messages)
         {
-            if (message.Author != null && message.Author != _player.LocalUser)
+            if (!message.Create && !_messages.ContainsKey(message.Destination))
+                continue;
+
+            if (message.Create &&
+                message.Author != null &&
+                message.Author != _player.LocalUser)
+            {
                 other = true;
+            }
 
             if (IsMentor &&
                 _mentorWindow is not { IsOpen: true })

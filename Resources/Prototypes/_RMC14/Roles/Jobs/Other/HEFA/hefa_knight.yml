@@ -1,0 +1,74 @@
+﻿# HEFA Shrapnelsworn
+
+- type: job
+  parent: CMHEFAShrapnelsworn
+  id: CMHEFAShrapnelswornMelee
+  name: rmc-job-name-hefa-shrapnelsworn
+  playTimeTracker: CMJobHEFAShrapnelswornMelee
+  startingGear: RMCGearHEFAShrapnelswornMelee
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: JobPrefix
+      prefix: rmc-job-prefix-hefa-shrapnelsworn
+
+- type: randomHumanoidSettings
+  parent: RMCHEFAShrapnelsworn
+  id: RMCHEFAShrapnelswornMelee
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-hostile-shrapnelsworn
+    job: CMHEFAShrapnelswornMelee
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+
+- type: randomHumanoidSettings
+  parent: RMCHEFAShrapnelswornFriendly
+  id: RMCHEFAShrapnelswornMeleeFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-friendly-shrapnelsworn
+    job: CMHEFAShrapnelswornMelee
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+
+- type: entity
+  parent: RMCRandomHumanoidHEFAShrapnelswornHostile
+  id: RMCRandomHumanoidHEFAShrapnelswornMeleeHostile
+  name: hefa ghost role shrapnelsworn
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornMelee
+
+- type: entity
+  parent: RMCRandomHumanoidHEFAShrapnelswornFriendly
+  id: RMCRandomHumanoidHEFAShrapnelswornMeleeFriendly
+  name: hefa ghost role shrapnelsworn
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornMeleeFriendly
+
+- type: startingGear
+  id: RMCGearHEFAShrapnelswornMelee
+  equipment:
+    head: RMCArmorHelmetHEFA
+    jumpsuit: RMCJumpsuitHEFA
+    outerClothing: RMCArmorMercenaryHEFA
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    id: RMCIDCardHEFAShrapnelsworn
+    belt: RMCBeltGrenadeHEFA
+    back: RMCSatchelHEFAFill
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEFA
+  inhand:
+  - RMCSwordHEFA
+
+- type: playTimeTracker
+  id: CMJobHEFAShrapnelswornMelee

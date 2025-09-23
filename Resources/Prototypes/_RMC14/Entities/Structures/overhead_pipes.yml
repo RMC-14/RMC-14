@@ -17,3 +17,194 @@
     state: intact-scrubbers
   - type: Anchorable
   - type: Clickable
+  - type: SpriteFade
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: CMOverheadPipe
+  id: RMCOverheadPipeCorner
+  suffix: Corner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers_corners
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers_corners
+
+- type: entity
+  parent: CMOverheadPipe
+  id: RMCOverheadPipeCap
+  suffix: Cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: cap
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: cap
+
+- type: entity
+  parent: CMOverheadPipe
+  id: RMCOverheadFuelLine1
+  name: dense fuel line
+  description: Likely to be incredibly flammable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_fuel.rsi
+    state: flammable_pipe_1
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_fuel.rsi
+    state: flammable_pipe_1
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine1Offset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0.319, 0
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine2
+  components:
+  - type: Sprite
+    state: flammable_pipe_2
+  - type: Icon
+    state: flammable_pipe_2
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine3
+  components:
+  - type: Sprite
+    state: flammable_pipe_3
+  - type: Icon
+    state: flammable_pipe_3
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine4
+  components:
+  - type: Sprite
+    state: flammable_pipe_4
+  - type: Icon
+    state: flammable_pipe_4
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine5
+  components:
+  - type: Sprite
+    state: flammable_pipe_5
+  - type: Icon
+    state: flammable_pipe_5
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine6
+  components:
+  - type: Sprite
+    state: flammable_pipe_6
+  - type: Icon
+    state: flammable_pipe_6
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine7
+  components:
+  - type: Sprite
+    state: flammable_pipe_7
+  - type: Icon
+    state: flammable_pipe_7
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine8
+  components:
+  - type: Sprite
+    state: flammable_pipe_8
+  - type: Icon
+    state: flammable_pipe_8
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine9
+  components:
+  - type: Sprite
+    state: flammable_pipe_9
+  - type: Icon
+    state: flammable_pipe_9
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine10
+  components:
+  - type: Sprite
+    state: flammable_pipe_10
+  - type: Icon
+    state: flammable_pipe_10
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine11
+  components:
+  - type: Sprite
+    state: flammable_pipe_11
+  - type: Icon
+    state: flammable_pipe_11
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine12
+  components:
+  - type: Sprite
+    state: flammable_pipe_12
+  - type: Icon
+    state: flammable_pipe_12
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine13
+  components:
+  - type: Sprite
+    state: flammable_pipe_13
+  - type: Icon
+    state: flammable_pipe_13
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine14
+  components:
+  - type: Sprite
+    state: flammable_pipe_14
+  - type: Icon
+    state: flammable_pipe_14
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine15
+  components:
+  - type: Sprite
+    state: flammable_pipe_15
+  - type: Icon
+    state: flammable_pipe_15
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine16
+  components:
+  - type: Sprite
+    state: flammable_pipe_16
+  - type: Icon
+    state: flammable_pipe_16
+
+- type: entity
+  parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine17
+  components:
+  - type: Sprite
+    state: flammable_pipe_17
+  - type: Icon
+    state: flammable_pipe_17

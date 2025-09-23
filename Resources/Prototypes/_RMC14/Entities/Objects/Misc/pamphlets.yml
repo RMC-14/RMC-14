@@ -65,21 +65,40 @@
   id: CMPamphletSpotter
   name: spotter instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
-  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     state: pamphlet_spotter
+  - type: SkillPamphlet
+    addComps:
+    - type: SpotterWhitelist
+    addSkills:
+      RMCSkillJtac: 1
+    giveJobTitle: rmc-job-name-spotter
+    givePrefix: rmc-job-prefix-spotter
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_ass
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: spotter
+    jobWhitelists:
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMRifleman
 
 # gives powerloader skill / bypasses limit
 - type: entity
   parent: CMPamphlet
   id: CMPamphletPowerloader
   name: powerloader instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to Caterpillar P-5000 Work Loader'.
-  suffix: NOT IMPLEMENTED
+  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'.
   components:
-  - type: Sprite
-    state: pamphlet_powerloader
+    - type: Sprite
+      state: pamphlet_powerloader
+    - type: SkillPamphlet
+      addSkills:
+        RMCSkillPowerLoader: 1
+      bypassLimit: true
 
 # gives police skill / bypasses limit
 - type: entity
@@ -121,8 +140,65 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillIntel: 1
+    addComps:
+      - type: ViewIntelObjectives
     bypassLimit: true
 
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletLoader
+  name: loader instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a rocket on it.
+  components:
+  - type: Sprite
+    state: pamphlet_loader
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+    skillCap:
+      RMCSkillEngineer: 1
+    giveJobTitle: rmc-job-name-loader
+    givePrefix: rmc-job-prefix-loader
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_load
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: loader
+    bypassLimit: true
+    jobWhitelists:
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMRifleman
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletMortarOperator
+  name: mortar operator instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a mortar on it.
+  components:
+  - type: Sprite
+    state: pamphlet_mortar
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+      RMCSkillJtac: 2
+    skillCap:
+      RMCSkillEngineer: 1
+      RMCSkillJtac: 2
+    giveJobTitle: rmc-job-name-mortar-operator
+    givePrefix: rmc-job-prefix-mortar-operator
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_mortar
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: mortar
+    bypassLimit: true
+    jobWhitelists:
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMRifleman
 
 # LANGUAGE / bypasses limit
 

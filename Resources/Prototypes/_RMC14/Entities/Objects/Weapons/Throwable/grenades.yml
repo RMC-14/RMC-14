@@ -46,9 +46,11 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
   - type: RMCStunOnTrigger
-    range: 7
-  - type: FlashOnTrigger
-    range: 7
+    filters:
+    - paralyze: 2.5
+      whitelist:
+        skills:
+          RMCSkillPolice: 2
   - type: SoundOnTrigger
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
@@ -64,6 +66,9 @@
     - RMCGrenadeRiot
     - Grenade
     - RMCGrenadeFlashBang
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
 
 - type: entity
   parent:
@@ -85,6 +90,12 @@
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeHEDP
 
 - type: entity
   parent:
@@ -98,9 +109,8 @@
     delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SpawnOnTerminate
-    spawn: RMCSmoke
-    projectileAdjust: false
+  - type: SpawnOnTrigger
+    proto: RMCSmoke
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
@@ -112,11 +122,12 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
+    - RMCGrenadeRiot
   - type: Ammo
 
 - type: entity
   parent: Smoke
-  id: RMCSmoke
+  id: RMCSmokeExplosionProof
   components:
   - type: Transform
     anchored: true
@@ -136,6 +147,43 @@
   - type: EvenSmoke
     spawn: RMCSmoke
     range: 3
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmokeExplosionProofSmall
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmoke
+  components:
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: Smoke
+  id: RMCSmokeFireSentry
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
   - type: DeleteOnExplosion
 
 - type: entity
@@ -154,6 +202,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -163,6 +212,12 @@
     maxShrapnel: 0
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeHEFA
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -180,6 +235,38 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48 #same as HEFA
+    directHit: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+  - type: Ammo
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+
+- type: entity
+  parent: CMGrenadeFragOld
+  id: RMCGrenadeBlastM12
+  name: M12 blast grenade
+  description: A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 8
+    totalIntensity: 280
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 1 #same as HEFA
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -190,7 +277,6 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
   - type: RMCScorchEffect
 
 - type: entity
@@ -213,8 +299,8 @@
 
 - type: entity
   parent:
-  - CMGrenadeBase
   - RMCM40DPTags
+  - CMGrenadeBase
   id: RMCGrenadeIncendiary
   name: M40 HIDP incendiary grenade
   description: The M40 HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
@@ -226,6 +312,8 @@
   - type: CMVocalizeTrigger
   - type: TileFireOnTrigger
     spawn: RMCTileFireGreen
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
 
 - type: entity
   parent: RMCGrenadeIncendiary
@@ -247,9 +335,36 @@
     - Grenade
 
 - type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenadeIED
+  name: improvised explosive device
+  description: An improvised chemical explosive grenade. Designed to kill through fragmentation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/ied.rsi
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 8
+    totalIntensity: 280
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: CMExplosionEffect
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - RMCGrenadeIED
+
+- type: entity
   id: CMExplosionEffectGrenade
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Effects/grenade_explosion.rsi
@@ -267,8 +382,7 @@
 
 - type: entity
   id: CMExplosionEffectShrapnel1
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CollisionWake
   - type: Physics
@@ -295,11 +409,16 @@
 - type: entity
   parent: CMExplosionEffectShrapnel1
   id: CMExplosionEffectShrapnel2
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: shrapnel_bright2
+
+- type: Tag
+  id: RMCGrenadeHEDP
+
+- type: Tag
+  id: RMCGrenadeHEFA
 
 - type: Tag
   id: RMCGrenadeM40
@@ -312,3 +431,6 @@
 
 - type: Tag
   id: RMCGrenadeFlashBang
+
+- type: Tag
+  id: RMCGrenadeIED

@@ -1,0 +1,71 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaBrownBase
+  name: tiles-cm-default-brown
+
+- type: tile
+  parent: RMCFloorHybrisaBrownBase
+  id: RMCFloorHybrisaBrown
+  name: brown metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloorfull1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown5
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown6
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_6.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown7
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_7.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrown8
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloor_8.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrownCorner1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloorcorner_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrownCorner2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloorcorner_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrownCorner3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloorcorner_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBrown
+  id: RMCFloorHybrisaBrownCorner4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/zbrownfloorcorner_4.png

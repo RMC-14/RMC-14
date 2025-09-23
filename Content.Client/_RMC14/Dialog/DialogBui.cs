@@ -13,6 +13,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RMCDialogWindow>();
         Refresh();
     }
@@ -77,6 +78,8 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             container = new RMCDialogInputContainer();
             container.MessageLineEdit.OnTextEntered += args => SendPredictedMessage(new DialogInputBuiMsg(args.Text));
+            container.MessageLineEdit.OnTextChanged += args => OnInputTextChanged(container, args.Text.Length, s.CharacterLimit);
+            container.MessageTextEdit.OnTextChanged += args => OnInputTextChanged(container, (int) Rope.CalcTotalLength(args.TextRope), s.CharacterLimit);
             container.CancelButton.OnPressed += _ => Close();
             container.OkButton.OnPressed += _ =>
             {
@@ -88,12 +91,22 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             _window.Container = container;
             _window.AddChild(_window.Container);
+            OnInputTextChanged(container, 0, s.CharacterLimit);
         }
 
         _window.Title = string.Empty;
         container.MessageLabel.Text = s.Message.Text;
         container.MessageLineEdit.Visible = !s.LargeInput;
         container.MessageTextEdit.Visible = s.LargeInput;
+
+        // Activate input field if AutoFocus is enabled
+        if (s.AutoFocus)
+        {
+            if (!s.LargeInput)
+                container.MessageLineEdit.GrabKeyboardFocus();
+            else
+                container.MessageTextEdit.GrabKeyboardFocus();
+        }
     }
 
     private void UpdateConfirm(DialogComponent s)
@@ -143,5 +156,11 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         }
 
         _window?.OpenCentered();
+    }
+
+    private void OnInputTextChanged(RMCDialogInputContainer container, int textLength, int max)
+    {
+        container.CharacterCount.Text = $"{textLength} / {max}";
+        container.OkButton.Disabled = textLength > max;
     }
 }

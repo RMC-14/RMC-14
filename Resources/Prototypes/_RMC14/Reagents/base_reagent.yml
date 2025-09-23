@@ -8,3 +8,9 @@
   parent: CMReagent
   id: CMReagentMedicine
   group: Medicine
+
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: RMCReagentElement
+  group: Elements

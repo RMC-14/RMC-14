@@ -4,8 +4,11 @@
   name: TC-3T static telecommunications tower
   description: A static heavy-duty TC-3T telecommunications tower. Used to set up subspace communications lines between planetary and extra-planetary locations. Will need to have extra communication frequencies programmed into it by multitool.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideCommunicationsTowers
   - type: Transform
-    anchored: false
+    anchored: true
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
@@ -25,6 +28,9 @@
     layers:
     - state: static1_broken
       map: [ "base" ]
+    - state: resin_idle
+      map: [ "resin" ]
+      visible: false
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: null
@@ -57,14 +63,22 @@
           Broken: { state: static1_broken }
           Off: { state: static1_off }
           On: { state: static1 }
+      enum.WeededEntityLayers.Layer:
+        resin:
+          True: {visible: true}
+          False: {visible: false}
   - type: MaxDamage
     max: 500
   - type: MarineMapTracked
   - type: XenoMapTracked
   - type: TacticalMapTracked
+  - type: ActiveTacticalMapTracked
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: supply
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: supply
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
@@ -73,10 +87,38 @@
     channel: Equipment
   - type: Corrodible
     isCorrodible: false
+  - type: XenoWeedable
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCCommunicationsTower
+  id: RMCCommunicationsTowerOn
+  suffix: "On, UNMC, Colony, WeYa"
+  components:
+  - type: CommunicationsTower
+    state: On
+    channels:
+    - Colony
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+    #    - TODO RMC14 sentry
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+    - CMB
 
 - type: entity
   abstract: true
@@ -110,3 +152,34 @@
     state: comms_landmark_2
   - type: CommunicationsTowerSpawner
     group: RMCSpawnerCommunicationsTowerTwo
+
+- type: entity
+  parent: BaseStructure
+  id: RMCCommunicationsTowerProp
+  name: destroyed comms tower
+  description: An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 200
+        mask:
+        - MobLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/communications_tower_alt.rsi
+    offset: 0, 1
+    state: comm_tower_destroyed
+  - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

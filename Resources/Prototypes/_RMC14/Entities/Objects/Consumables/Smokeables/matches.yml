@@ -14,7 +14,7 @@
     - state: matchbox
     - state: matchbox-0
       map: ["enum.StorageFillLayers.Fill"]
-      visible: false   
+      visible: false
   - type: Item
     sprite: Objects/Tools/matches.rsi
     heldPrefix: matchbox
@@ -46,6 +46,10 @@
     blacklist:
       components:
       - Xeno
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/matches/matches.rsi
+      state: helmet
 
 - type: entity
   name: match box

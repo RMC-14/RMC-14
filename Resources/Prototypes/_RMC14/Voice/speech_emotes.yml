@@ -29,7 +29,7 @@
     components:
     - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/species_emotes.rsi/meow.png
   chatMessages: ["rmc-emote-meow"]
   chatTriggers:
     - meow
@@ -52,7 +52,7 @@
     components:
     - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/species_emotes.rsi/mew.png
   chatMessages: ["rmc-emote-mew"]
   chatTriggers:
     - mew
@@ -93,7 +93,7 @@
     components:
     - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/species_emotes.rsi/purr.png
   chatMessages: ["rmc-emote-purr"]
   chatTriggers:
     - purr
@@ -108,6 +108,7 @@
   name: rmc-emote-name-bark
   category: Vocal
   available: false
+  icon: _RMC14/Actions/species_emotes.rsi/bark.png
   whitelist:
     components:
     - Vocal
@@ -131,6 +132,7 @@
   name: rmc-emote-name-snarl
   category: Vocal
   available: false
+  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
   whitelist:
     components:
     - Vocal
@@ -154,6 +156,7 @@
   name: rmc-emote-name-whine
   category: Vocal
   available: false
+  icon: _RMC14/Actions/species_emotes.rsi/whine.png
   whitelist:
     components:
     - Vocal
@@ -172,7 +175,140 @@
     - whined!
     - whining.
 
+- type: emote
+  id: Gnash
+  name: rmc-emote-name-gnash
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/gnash.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-gnash"]
+  chatTriggers:
+    - gnash
+    - gnashes
+    - gnashes.
+    - gnashes!
+    - gnash.
+    - gnash!
+    - gnashes teeth
+    - gnashes their teeth
+    - gnashes her teeth
+    - gnashes his teeth
+    - gnashes its teeth
 
+# Skrell
+- type: emote
+  id: RMCSkrellAnger
+  name: rmc-emote-name-anger
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/skrellanger.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-anger"]
+  chatTriggers:
+    - anger
+    - anger.
+    - anger!
+    - angers
+    - angers.
+    - angers!
 
+- type: emote
+  id: RMCSkrellPeep
+  name: rmc-emote-name-peep
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/peep.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-peep"]
+  chatTriggers:
+    - peep
+    - peep.
+    - peep!
+    - peeps
+    - peeps.
+    - peeps!
 
+- type: emote
+  id: RMCSkrellTrill
+  name: rmc-emote-name-trill
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/trill.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-trill"]
+  chatTriggers:
+    - trill
+    - trill.
+    - trill!
+    - trills
+    - trills.
+    - trills!
 
+- type: emote
+  id: RMCSkrellWarble
+  name: rmc-emote-name-warble
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/warble.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-warble"]
+  chatTriggers:
+    - warble
+    - warble.
+    - warble!
+    - warbles
+    - warbles.
+    - warbles!
+
+# Reptilian
+
+- type: emote
+  id: RMCReptileRattle
+  name: rmc-emote-name-r-rattle
+  category: Hands
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-r-rattle"]
+  chatTriggers:
+    - rattle
+    - rattles
+    - rattling
+    - rattled
+    - rattle tail
+    - rattles tail
+    - rattles their tail
+    - rattles her tail
+    - rattles his tail
+    - rattles its tail

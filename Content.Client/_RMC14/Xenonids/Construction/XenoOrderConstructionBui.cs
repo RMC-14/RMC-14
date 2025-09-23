@@ -2,6 +2,8 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -13,6 +15,8 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
     private readonly SpriteSystem _sprite;
 
+    private readonly Dictionary<EntProtoId, XenoChoiceControl> _buttons = new();
+
     [ViewVariables]
     private XenoChooseStructureWindow? _window;
 
@@ -23,10 +27,11 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new XenoChooseStructureWindow();
-        _window.OnClose += Close;
+        base.Open();
 
+        _window = this.CreateWindow<XenoChooseStructureWindow>();
         _window.Title = Loc.GetString("cm-xeno-order-construction");
+        _buttons.Clear();
 
         if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
         {
@@ -36,25 +41,19 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
                     continue;
 
                 var control = new XenoChoiceControl();
+                control.Button.ToggleMode = false;
+
                 control.Set(structure.Name, _sprite.Frame0(structure));
 
                 control.Button.OnPressed += _ =>
                 {
                     SendPredictedMessage(new XenoOrderConstructionBuiMsg(structureId));
+                    Close();
                 };
 
                 _window.StructureContainer.AddChild(control);
+                _buttons.Add(structureId, control);
             }
         }
-
-        _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Dispose();
     }
 }

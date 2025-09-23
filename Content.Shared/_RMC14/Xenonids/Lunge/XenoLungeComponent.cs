@@ -1,9 +1,6 @@
-﻿using System.Numerics;
-using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
-using Robust.Shared.Audio;
+using System.Numerics;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Xenonids.Lunge;
 
@@ -18,8 +15,11 @@ public sealed partial class XenoLungeComponent : Component
     public TimeSpan StunTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "CMEffectGrab";
+    public Vector2? Charge;
 
     [DataField, AutoNetworkedField]
-    public Vector2? Charge;
+    public EntityUid? Target;
+
+    [DataField, AutoNetworkedField]
+    public MapCoordinates? Origin;
 }

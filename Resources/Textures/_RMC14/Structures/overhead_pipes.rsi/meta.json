@@ -54,6 +54,10 @@
     {
       "name": "cap",
       "directions": 4
+    },
+    {
+      "name": "intact-scrubbers_corners",
+      "directions": 4
     }
   ]
 }

@@ -15,12 +15,11 @@
     state: health
   - type: ActivatableUI
     key: enum.HealthScannerUIKey.Key
-    inHandsOnly: true
-    requireActiveHand: false
+    inHandsOnly: false
   - type: UserInterface
     interfaces:
       enum.HealthScannerUIKey.Key:
-        type: HealthScannerBoundUserInterface
+        type: HealthScannerBui
   - type: HealthScanner
     sound:
       path: "/Audio/_RMC14/Medical/healthanalyzer.ogg"

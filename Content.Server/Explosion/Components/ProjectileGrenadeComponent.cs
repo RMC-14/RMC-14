@@ -4,15 +4,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Explosion.Components;
 /// <summary>
-/// Grenades that, when triggered, explode into projectiles
+///     Grenades that, when triggered, explode into projectiles
 /// </summary>
-[RegisterComponent, Access(typeof(ProjectileGrenadeSystem))]
+[RegisterComponent, Access(typeof(ProjectileGrenadeSystem), typeof(RMCProjectileGrenadeSystem))]
 public sealed partial class ProjectileGrenadeComponent : Component
 {
     public Container Container = default!;
 
     /// <summary>
-    /// The kind of projectile that the prototype is filled with.
+    ///     The kind of projectile that the prototype is filled with.
     /// </summary>
     [DataField]
     public EntProtoId? FillPrototype;
@@ -35,14 +35,20 @@ public sealed partial class ProjectileGrenadeComponent : Component
     public bool RandomAngle = false;
 
     /// <summary>
-    /// The minimum speed the projectiles may come out at
+    ///     The minimum speed the projectiles may come out at
     /// </summary>
     [DataField]
     public float MinVelocity = 2f;
 
     /// <summary>
-    /// The maximum speed the projectiles may come out at
+    ///     The maximum speed the projectiles may come out at
     /// </summary>
     [DataField]
     public float MaxVelocity = 6f;
+
+    /// <summary>
+    ///     The amount of payload projectiles that should hit on a direct hit.
+    /// </summary>
+    [DataField]
+    public int DirectHitProjectiles = 5;
 }

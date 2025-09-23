@@ -1,0 +1,111 @@
+﻿<Document>
+  # Variable Crimes
+  - These crimes can vary in severity and have scaling punishments.
+  <Table Columns="4">
+    <ColorBox>
+      <Box>
+        Charge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Description
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Minor
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Major
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Damage to UNMC Property
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Damaging the ship or making any unauthorized modifications to it as outlined in Standard Operating Procedure.\nMaterials for repairs should be taken from maintenance storages.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Breaking a window, damaging a wall, etc.\n[bold]Return the ship to it's exact previous state, or serve 7.5 minutes if not possible.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Breaking the law in a major manner includes breaking /dismantling walls or several windows.\n[bold]10 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Insubordination
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"].
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failing to follow an order which is not personally directed.\n\nOR\n\nDisrespecting someone of a higher rank or position.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failing to follow an order personally directed at a person in question using either their name or clearly communicating its meant for them.\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Interference
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Interfering in a legal arrest being performed.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Interfering without ill intent, such as blocking the way or helping someone up.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Interfering with ill intent or in a clear way to hinder the arrest being performed.\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Unauthorized use of Listening Devices
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        The use of listening devices in violation of Standard Operating Procedures.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Illegally placing a listening device in a public area such as the gym.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Illegally placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\n[italic]If the listening device is also tied to a foreign government or terror organisation this is additionally considered Subterfuge[/italic].\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+  </Table>
+</Document>

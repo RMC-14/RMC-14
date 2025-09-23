@@ -53,6 +53,9 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: RMCWindowDirectional
+    node: windowDirectional
 
 - type: entity
   id: CMWindowReinforcedDirectional
@@ -93,6 +96,9 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: RMCWindowDirectional
+    node: windowReinforcedDirectional
 
 - type: entity
   id: CMWindowTintedDirectional
@@ -105,6 +111,22 @@
   - type: Icon
     sprite: _RMC14/Structures/Windows/directional.rsi
     state: twindow
+
+- type: entity
+  id: RMCWindowTintedDirectionalBlue
+  parent: CMWindowTintedDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
+
+- type: entity
+  id: RMCWindowDirectionalBlue
+  parent: CMWindowDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
 
 - type: entity
   id: CMWindowUltraDirectional

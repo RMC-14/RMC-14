@@ -1,0 +1,88 @@
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallSandstone
+  name: sandstone wall
+  description: A wall with sandstone plating.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+    color: "#c6a480"
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallSandstoneTemple
+  name: sandstone temple wall
+  description: A heavy wall of sandstone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+    color: "#b29082"
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallSandstoneTempleRuned
+  name: runed sandstone temple wall
+  description: A heavy wall of sandstone, with elegant carvings and runes inscribed upon its face.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/runedstone.rsi
+    state: runedstone
+    color: "#b29082"
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/runedstone.rsi
+    state: runedstone
+  - type: IconSmooth
+    key: walls
+    base: runedstone
+
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallUranium
+  name: uranium wall
+  description: A wall with uranium plating. This is probably a bad idea.
+  components:
+  - type: SpriteColor
+    color: '#1b4506'
+
+- type: entity
+  parent: CMBaseWall
+  id: RMCWallGold
+  name: gold wall
+  description:  A wall with gold plating. Swag!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Tag
+    tags:
+    - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150

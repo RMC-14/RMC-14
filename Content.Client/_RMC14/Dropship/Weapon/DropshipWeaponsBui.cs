@@ -1,10 +1,18 @@
 ﻿using System.Text;
+using Content.Client._RMC14.TacticalMap;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.ElectronicSystem;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.ParaDrop;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen;
@@ -15,16 +23,19 @@ using MedevacComponent = Content.Shared._RMC14.Dropship.Utility.Components.Medev
 namespace Content.Client._RMC14.Dropship.Weapon;
 
 [UsedImplicitly]
-public sealed class DropshipWeaponsBui : BoundUserInterface
+public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 {
-    private DropshipWeaponsWindow? _window;
-
     private readonly ContainerSystem _container;
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
+    private readonly TacticalMapSystem _tacticalMapSystem;
 
     private EntityUid? _oldEye;
+    private TacticalMapWrapper? _embeddedTacMapWrapperScreen1;
+    private TacticalMapWrapper? _embeddedTacMapWrapperScreen2;
+
+    protected override DropshipWeaponsWindow? Window { get; set; }
 
     public DropshipWeaponsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -32,50 +43,49 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         _eyeLerping = EntMan.System<EyeLerpingSystem>();
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
+        _tacticalMapSystem = EntMan.System<TacticalMapSystem>();
     }
 
     protected override void Open()
     {
-        _window = new DropshipWeaponsWindow();
-        _window.OnClose += Close;
+        base.Open();
+        Window = this.CreatePopOutableWindow<DropshipWeaponsWindow>();
 
-        _window.OffsetUpButton.Text = "^";
-        _window.OffsetUpButton.OnPressed += _ =>
+        Window.OffsetUpButton.Text = "^";
+        Window.OffsetUpButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.North));
 
-        _window.OffsetLeftButton.Text = "<";
-        _window.OffsetLeftButton.OnPressed += _ =>
+        Window.OffsetLeftButton.Text = "<";
+        Window.OffsetLeftButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.West));
 
-        _window.OffsetRightButton.Text = ">";
-        _window.OffsetRightButton.OnPressed += _ =>
+        Window.OffsetRightButton.Text = ">";
+        Window.OffsetRightButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.East));
 
-        _window.OffsetDownButton.Text = "v";
-        _window.OffsetDownButton.OnPressed += _ =>
+        Window.OffsetDownButton.Text = "v";
+        Window.OffsetDownButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.South));
 
-        _window.ResetOffsetButton.OnPressed += _ =>
+        Window.ResetOffsetButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsResetOffsetMsg());
 
-        _window.ScreenOne.TopRow.Refresh();
-        _window.ScreenOne.LeftRow.Refresh();
-        _window.ScreenOne.RightRow.Refresh();
-        _window.ScreenOne.BottomRow.Refresh();
+        Window.ScreenOne.TopRow.Refresh();
+        Window.ScreenOne.LeftRow.Refresh();
+        Window.ScreenOne.RightRow.Refresh();
+        Window.ScreenOne.BottomRow.Refresh();
 
-        _window.ScreenTwo.TopRow.Refresh();
-        _window.ScreenTwo.LeftRow.Refresh();
-        _window.ScreenTwo.RightRow.Refresh();
-        _window.ScreenTwo.BottomRow.Refresh();
+        Window.ScreenTwo.TopRow.Refresh();
+        Window.ScreenTwo.LeftRow.Refresh();
+        Window.ScreenTwo.RightRow.Refresh();
+        Window.ScreenTwo.BottomRow.Refresh();
 
         Refresh();
-
-        _window.OpenCentered();
     }
 
     public void Refresh()
     {
-        if (_window is not { Disposed: false })
+        if (Window == null)
             return;
 
         if (EntMan.TryGetComponent(Owner, out DropshipTerminalWeaponsComponent? terminal))
@@ -85,14 +95,24 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         }
 
         RefreshButtons();
+
+        if (_embeddedTacMapWrapperScreen1 != null && terminal?.ScreenOne.State == TacMap)
+        {
+            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen1);
+        }
+
+        if (_embeddedTacMapWrapperScreen2 != null && terminal?.ScreenTwo.State == TacMap)
+        {
+            RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen2);
+        }
     }
 
     private void RefreshButtons()
     {
-        if (_window is not { Disposed: false })
+        if (Window == null)
             return;
 
-        foreach (var button in _window.GetControlOfType<DropshipWeaponsButton>())
+        foreach (var button in Window.Panel.GetControlOfType<DropshipWeaponsButton>())
         {
             button.Refresh();
         }
@@ -100,13 +120,17 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
 
     private void SetScreen(bool first, Screen compScreen)
     {
-        if (_window is not { Disposed: false } ||
+        if (Window == null ||
             !EntMan.TryGetComponent(Owner, out DropshipTerminalWeaponsComponent? terminal))
         {
             return;
         }
 
-        var screen = first ? _window.ScreenOne : _window.ScreenTwo;
+        var screen = first ? Window.ScreenOne : Window.ScreenTwo;
+
+        screen.Viewport.RemoveAllChildren();
+        screen.Viewport.Visible = false;
+
         static DropshipWeaponsButtonData ButtonAction(string suffix, Action<ButtonEventArgs> onPressed)
         {
             return new DropshipWeaponsButtonData($"rmc-dropship-weapons-{suffix}", onPressed);
@@ -130,15 +154,20 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 ("yOffset", terminal.Offset.Y));
         }
 
-        void AddTargets(
+        void AddButtons(
+            Func<NetEntity, BoundUserInterfaceMessage> selectMsg,
+            BoundUserInterfaceMessage previousMsg,
+            BoundUserInterfaceMessage nextMsg,
+            DropshipWeaponsButtonRow row,
+            List<TargetEnt> targets,
+            int page,
             out DropshipWeaponsButtonData? previous,
             out DropshipWeaponsButtonData? next)
         {
             previous = default;
             next = default;
 
-            var firstTarget = terminal.TargetsPage * 5;
-            var targets = terminal.Targets;
+            var firstTarget = page * 5;
             if (targets.Count <= 5)
                 firstTarget = 0;
             else if (firstTarget > targets.Count - 5)
@@ -149,58 +178,36 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 if (!targets.TryGetValue(index, out var target))
                     return null;
 
-                var msg = new DropshipTerminalWeaponsTargetsSelectMsg(target.Id);
+                var msg = selectMsg(target.Id);
                 return new DropshipWeaponsButtonData(target.Name, _ => SendPredictedMessage(msg));
             }
 
             if (firstTarget > 0)
-                previous = ButtonAction("previous", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsPreviousMsg()));
+                previous = ButtonAction("previous", _ => SendPredictedMessage(previousMsg));
 
             if (firstTarget + 4 < targets.Count - 1)
-                next = ButtonAction("next", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsNextMsg()));
+                next = ButtonAction("next", _ => SendPredictedMessage(nextMsg));
 
             var one = GetTargetData(firstTarget);
             var two = GetTargetData(firstTarget + 1);
             var three = GetTargetData(firstTarget + 2);
             var four = GetTargetData(firstTarget + 3);
             var five = GetTargetData(firstTarget + 4);
-            screen.RightRow.SetData(one, two, three, four, five);
+            row.SetData(one, two, three, four, five);
         }
 
-        void AddMedevacs(
-            out DropshipWeaponsButtonData? previous,
-            out DropshipWeaponsButtonData? next)
+        void AddTargets(out DropshipWeaponsButtonData? previous, out DropshipWeaponsButtonData? next)
         {
-            var firstTarget = terminal.MedevacsPage * 5;
-            var targets = terminal.Medevacs;
-            if (targets.Count <= 5)
-                firstTarget = 0;
-            else if (firstTarget > targets.Count - 5)
-                firstTarget = targets.Count - 5;
-
-            DropshipWeaponsButtonData? GetTargetData(int index)
-            {
-                if (!targets.TryGetValue(index, out var target))
-                    return null;
-
-                var msg = new DropshipTerminalWeaponsMedevacSelectMsg(target.Id);
-                return new DropshipWeaponsButtonData(target.Name, _ => SendPredictedMessage(msg));
-            }
-
-            previous = default;
-            if (firstTarget > 0)
-                previous = ButtonAction("previous", _ => SendPredictedMessage(new DropshipTerminalWeaponsMedevacPreviousMsg()));
-
-            next = default;
-            if (firstTarget + 4 < targets.Count - 1)
-                next = ButtonAction("next", _ => SendPredictedMessage(new DropshipTerminalWeaponsMedevacNextMsg()));
-
-            var one = GetTargetData(firstTarget);
-            var two = GetTargetData(firstTarget + 1);
-            var three = GetTargetData(firstTarget + 2);
-            var four = GetTargetData(firstTarget + 3);
-            var five = GetTargetData(firstTarget + 4);
-            screen.LeftRow.SetData(one, two, three, four, five);
+            AddButtons(
+                id => new DropshipTerminalWeaponsTargetsSelectMsg(id),
+                new DropshipTerminalWeaponsTargetsPreviousMsg(),
+                new DropshipTerminalWeaponsTargetsNextMsg(),
+                screen.RightRow,
+                terminal.Targets,
+                terminal.TargetsPage,
+                out previous,
+                out next
+            );
         }
 
         var equip = Button("equip", Equip);
@@ -209,6 +216,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         var target = Button("target", Target);
         // var maps = Button("equip", DropshipTerminalWeaponsScreen.Maps);
         var cams = Button("cams", Cams);
+        var tacMap = Button("maps", TacMap);
         var fire = ButtonAction("fire", _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMsg(first)));
         var strike = Button("strike", Strike);
         // var vector = Loc.GetString("rmc-dropship-weapons-vector");
@@ -218,20 +226,26 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
             _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(false)));
         var cancel = ButtonAction("cancel", _ => SendPredictedMessage(new DropshipTerminalWeaponsCancelMsg(first)));
         var weapon = Button("weapon", StrikeWeapon);
+        var paraDropTarget = ButtonAction("lock",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(true)));
+        var paraDropUnTarget = ButtonAction("clear",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(false)));
+        var spotlightToggleOn = ButtonAction("enable",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(true)));
+        var spotlightToggleOff = ButtonAction("disable",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(false)));
+
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
         screen.ScreenLabel.Margin = new Thickness();
         screen.ScreenLabel.Visible = true;
 
-        screen.Viewport.Visible = false;
-
         ClearNames(screen);
         switch (compScreen.State)
         {
             case Main:
-                // TODO RMC14 bottom two maps
-                screen.BottomRow.SetData(three: cams);
+                screen.BottomRow.SetData(two: tacMap, three: cams);
                 screen.TopRow.SetData(equip, four: target);
                 break;
             case Equip:
@@ -245,10 +259,12 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                     out var four,
                     out var utilityOne,
                     out var utilityTwo,
-                    out var utilityThree
+                    out var utilityThree,
+                    out var electronicSystemOne,
+                    out var electronicSystemTwo
                 );
                 screen.LeftRow.SetData(one, two, utilityOne, utilityTwo, utilityThree);
-                screen.RightRow.SetData(three, four);
+                screen.RightRow.SetData(three, four, electronicSystemOne, electronicSystemTwo);
 
                 var text = new StringBuilder();
                 void AddWeaponEntry(DropshipWeaponsButtonData? data)
@@ -300,7 +316,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 AddTargets(out var previous, out var next);
                 screen.BottomRow.SetData(exit, five: next);
                 screen.TopRow.SetData(fire, five: previous);
-                TryGetWeapons(first, out var one, out var two, out var three, out var four, out _, out _, out _);
+                TryGetWeapons(first, out var one, out var two, out var three, out var four, out _, out _, out _, out _, out _);
                 screen.LeftRow.SetData(cancel, one, two, three, four);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
@@ -350,12 +366,98 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 screen.Viewport.Visible = true;
                 screen.BottomRow.SetData(exit);
                 break;
+            case TacMap:
+                screen.ScreenLabel.Visible = false;
+
+                var currentWrapper = first ? _embeddedTacMapWrapperScreen1 : _embeddedTacMapWrapperScreen2;
+
+                if (currentWrapper == null)
+                {
+                    currentWrapper = new TacticalMapWrapper();
+                    SetupEmbeddedTacMap(currentWrapper);
+
+                    if (first)
+                        _embeddedTacMapWrapperScreen1 = currentWrapper;
+                    else
+                        _embeddedTacMapWrapperScreen2 = currentWrapper;
+                }
+
+                screen.Viewport.AddChild(currentWrapper);
+                screen.Viewport.Visible = true;
+                screen.BottomRow.SetData(exit);
+
+                RefreshEmbeddedTacMap(currentWrapper);
+                break;
             case Medevac:
             {
-                AddMedevacs(out var previous, out var next);
+                AddButtons(
+                    id => new DropshipTerminalWeaponsMedevacSelectMsg(id),
+                    new DropshipTerminalWeaponsMedevacPreviousMsg(),
+                    new DropshipTerminalWeaponsMedevacNextMsg(),
+                    screen.LeftRow,
+                    terminal.Medevacs,
+                    terminal.MedevacsPage,
+                    out var previous,
+                    out var next
+                );
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
+                break;
+            }
+            case Fulton:
+            {
+                AddButtons(
+                    id => new DropshipTerminalWeaponsFultonSelectMsg(id),
+                    new DropshipTerminalWeaponsFultonPreviousMsg(),
+                    new DropshipTerminalWeaponsFultonNextMsg(),
+                    screen.LeftRow,
+                    terminal.Fultons,
+                    terminal.FultonsPage,
+                    out var previous,
+                    out var next
+                );
+                screen.TopRow.SetData(equip);
+                screen.BottomRow.SetData(exit);
+                screen.RightRow.SetData(one: previous, five: next);
+                break;
+            }
+            case Paradrop:
+            {
+                string? targetId = null;
+                if (terminal.Target != null &&
+                     _system.TryGetGridDropship(Owner, out var dropship) &&
+                     EntMan.TryGetComponent(dropship, out ActiveParaDropComponent? activeParaDrop) &&
+                    _weaponSystem.TryGetNetEntity(activeParaDrop.DropTarget, out var netTarget)
+                    )
+                {
+                    foreach (var potentialTarget in terminal.Targets)
+                    {
+                        if (potentialTarget.Id != netTarget)
+                            continue;
+
+                        targetId = potentialTarget.Name;
+                        break;
+                    }
+                }
+
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-paradrop-target-screen-text",
+                    ("hasTarget", targetId == null
+                    ? Loc.GetString("rmc-dropship-paradrop-target-screen-target-none")
+                    : Loc.GetString("rmc-dropship-paradrop-target-screen-target-targeting",("dropTarget", targetId))));
+                screen.BottomRow.SetData(exit);
+                screen.LeftRow.SetData(targetId == null ? paraDropTarget : paraDropUnTarget);
+                screen.TopRow.SetData(equip);
+                break;
+            }
+            case Spotlight:
+            {
+                screen.TopRow.SetData(equip);
+                screen.BottomRow.SetData(exit);
+                if (!EntMan.TryGetComponent(EntMan.GetEntity(terminal.SelectedSystem), out DropshipSpotlightComponent? spotlight))
+                    break;
+
+                screen.LeftRow.SetData(!spotlight.Enabled ? spotlightToggleOn : spotlightToggleOff);
                 break;
             }
             default:
@@ -364,6 +466,56 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         }
 
         RefreshButtons();
+    }
+
+    private void SetupEmbeddedTacMap(TacticalMapWrapper wrapper)
+    {
+        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+            return;
+
+        TabContainer.SetTabTitle(wrapper.MapTab, Loc.GetString("rmc-dropship-weapons-maps"));
+        TabContainer.SetTabVisible(wrapper.MapTab, true);
+        TabContainer.SetTabVisible(wrapper.CanvasTab, false);
+
+        if (computer.Map != null && EntMan.TryGetComponent(computer.Map.Value, out AreaGridComponent? areaGrid))
+        {
+            wrapper.UpdateTexture((computer.Map.Value, areaGrid));
+        }
+
+        var lineLimit = _tacticalMapSystem.LineLimit;
+        wrapper.SetLineLimit(lineLimit);
+        wrapper.LastUpdateAt = computer.LastAnnounceAt;
+        wrapper.NextUpdateAt = computer.NextAnnounceAt;
+    }
+
+    private void RefreshEmbeddedTacMap(TacticalMapWrapper wrapper)
+    {
+        if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+            return;
+
+        var blips = new TacticalMapBlip[computer.Blips.Count];
+        var i = 0;
+        foreach (var blip in computer.Blips.Values)
+        {
+            blips[i++] = blip;
+        }
+        wrapper.UpdateBlips(blips);
+
+        wrapper.Map.Lines.Clear();
+        var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
+        if (lines != null)
+        {
+            wrapper.Map.Lines.AddRange(lines.MarineLines);
+        }
+
+        var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
+        if (labels != null)
+        {
+            wrapper.UpdateTacticalLabels(labels.MarineLabels);
+        }
+
+        wrapper.LastUpdateAt = computer.LastAnnounceAt;
+        wrapper.NextUpdateAt = computer.NextAnnounceAt;
     }
 
     private void ClearNames(DropshipWeaponsScreen screen)
@@ -382,7 +534,9 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         out DropshipWeaponsButtonData? four,
         out DropshipWeaponsButtonData? utilityOne,
         out DropshipWeaponsButtonData? utilityTwo,
-        out DropshipWeaponsButtonData? utilityThree)
+        out DropshipWeaponsButtonData? utilityThree,
+        out DropshipWeaponsButtonData? electronicSystemOne,
+        out DropshipWeaponsButtonData? electronicSystemTwo)
     {
         one = default;
         two = default;
@@ -391,29 +545,76 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         utilityOne = default;
         utilityTwo = default;
         utilityThree = default;
+        electronicSystemOne = default;
+        electronicSystemTwo = default;
         if (!_system.TryGetGridDropship(Owner, out var dropship))
             return;
 
         var weapons = new List<DropshipWeaponsButtonData?>();
         var utility = new List<DropshipWeaponsButtonData?>();
+        var electronicSystem = new List<DropshipWeaponsButtonData?>();
         foreach (var pointId in dropship.Comp.AttachmentPoints)
         {
             if (EntMan.TryGetComponent(pointId, out DropshipUtilityPointComponent? utilityComp) &&
                 _container.TryGetContainer(pointId, utilityComp.UtilitySlotId, out var utilityContainer) &&
                 utilityContainer.ContainedEntities.Count > 0)
             {
+                string text;
+                BoundUserInterfaceMessage msg;
                 var utilityMount = utilityContainer.ContainedEntities[0];
-                if (!EntMan.HasComponent<MedevacComponent>(utilityMount))
+                if (EntMan.HasComponent<MedevacComponent>(utilityMount))
+                {
+                    text = "Medevac";
+                    msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
+                }
+                else if (EntMan.HasComponent<RMCFultonComponent>(utilityMount))
+                {
+                    text = "Fulton";
+                    msg = new DropshipTerminalWeaponsChooseFultonMsg(first);
+                }
+                else if (EntMan.HasComponent<RMCParaDropComponent>(utilityMount))
+                {
+                    text = "PDS";
+                    msg = new DropshipTerminalWeaponsChooseParaDropMsg(first);
+                }
+                else
+                {
                     continue;
+                }
 
                 var netEnt = EntMan.GetNetEntity(utilityMount);
-                var msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
                 var data = new DropshipWeaponsButtonData(
-                    "Medeva",
+                    text,
                     _ => SendPredictedMessage(msg),
                     netEnt
                 );
                 utility.Add(data);
+            }
+
+            if (EntMan.TryGetComponent(pointId, out DropshipElectronicSystemPointComponent? electronicSystemComp) &&
+                _container.TryGetContainer(pointId, electronicSystemComp.ContainerId, out var electronicSystemContainer) &&
+                electronicSystemContainer.ContainedEntities.Count > 0)
+            {
+                string text;
+                BoundUserInterfaceMessage msg;
+                var electronicSystemMount = electronicSystemContainer.ContainedEntities[0];
+                if (EntMan.HasComponent<DropshipSpotlightComponent>(electronicSystemMount))
+                {
+                    text = "Spotlight";
+                    msg = new DropshipTerminalWeaponsChooseSpotlightMsg(first, EntMan.GetNetEntity(electronicSystemMount));
+                }
+                else
+                {
+                    continue;
+                }
+
+                var netEnt = EntMan.GetNetEntity(electronicSystemMount);
+                var data = new DropshipWeaponsButtonData(
+                    text,
+                    _ => SendPredictedMessage(msg),
+                    netEnt
+                );
+                electronicSystem.Add(data);
             }
 
             if (!EntMan.TryGetComponent(pointId, out DropshipWeaponPointComponent? pointComp))
@@ -449,13 +650,25 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);
         utility.TryGetValue(2, out utilityThree);
+
+        electronicSystem.TryGetValue(0, out electronicSystemOne);
+        electronicSystem.TryGetValue(1, out electronicSystemTwo);
     }
 
     protected override void Dispose(bool disposing)
     {
-        base.Dispose(disposing);
-
         if (disposing)
-            _window?.Dispose();
+        {
+            _embeddedTacMapWrapperScreen1?.Dispose();
+            _embeddedTacMapWrapperScreen1 = null;
+
+            _embeddedTacMapWrapperScreen2?.Dispose();
+            _embeddedTacMapWrapperScreen2 = null;
+
+            if (_oldEye != null)
+                _eyeLerping.RemoveEye(_oldEye.Value);
+        }
+
+        base.Dispose(disposing);
     }
 }

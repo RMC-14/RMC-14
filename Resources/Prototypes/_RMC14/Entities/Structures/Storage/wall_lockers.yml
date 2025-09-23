@@ -1,8 +1,8 @@
 - type: entity
+  parent: CMLockerBase
   id: CMLockerCMDCabinet
   name: command tablet cabinet
   suffix: Empty
-  parent: CMLockerBase
   description: A bulletproof cabinet containing the command tablet for usage by a Commander.
   # description: A bulletproof cabinet containing the command tablet for usage by the CO and XO. Opens only to them and department heads. (Parity desc, once Senior access is implemented)
   components:
@@ -12,19 +12,27 @@
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Wallmounts/cmdcabinet.rsi
   - type: EntityStorage
+    capacity: 3 # for storing a tablet and headset, as well as for one more additional thing if needed
     isCollidableWhenOpen: true
     enteringOffset: 0, -0.6
     enteringRange: 0.03
     whitelist:
       tags:
       - CommandTablet
+      - RMCHeadset
+  - type: RMCEntityStorageWhitelist
+    whitelist:
+      tags:
+      - CommandTablet
+      - RMCHeadset
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessSeniorCommand"]]
+  - type: RMCMesonsNonviewable
 
 - type: entity
+  parent: CMLockerCMDCabinet
   id: CMLockerCMDCabinetFilled
   suffix: Filled
-  parent: CMLockerCMDCabinet
   components:
   - type: EntityTableContainerFill
     containers:
@@ -38,4 +46,4 @@
   table: !type:AllSelector
     children:
     - id: RMCTabletCO
-
+    - id: RMCHeadsetMarineCommand

@@ -8,6 +8,8 @@
     state: paper_bin0
     drawdepth: SmallObjects
     noRot: true
+  - type: Item
+    size: Normal
   - type: ItemMapper
     sprite: _RMC14/Objects/Misc/paper.rsi
     mapLayers:
@@ -22,6 +24,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMPaperBin

@@ -1,0 +1,134 @@
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletHeavyShotgunBuckshot
+  name: Heavy buckshot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: buckshot
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 75
+  - type: CMArmorPiercing
+    amount: 5
+  - type: ProjectileSpread
+    proto: RMCPelletHeavyShotgunBuckshot
+    count: 4
+    spread: 20
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 3
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
+  - type: RMCProjectileAccuracy
+    thresholds:
+    - range: 3
+      falloff: 10
+  - type: RMCStunOnHit
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletHeavyShotgunSlug
+  name: Heavy slug
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: beanbag
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 90
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 8
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCStunOnHit
+    maxRange: 8
+    stunTime: 1.25
+    superSlowTime: 2
+    slowTime: 5
+    knockBackSpeed: 7
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 7
+      falloff: 10
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletHeavyShotgunBeanbag
+  name: Heavy beanbag slug
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: beanbag
+      shader: unshaded
+  - type: Projectile
+    damage: {}
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
+  - type: RMCStaminaDamageOnCollide
+    damage: 100
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletHeavyShotgunFlechette
+  name: Heavy flechette shell
+  components:
+  - type: CMArmorPiercing
+    amount: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: ProjectileSpread
+    proto: RMCPelletHeavyShotgunFlechette
+    count: 3
+    spread: 15
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
+
+- type: entity
+  parent: RMCPelletHeavyShotgunBuckshot
+  id: RMCPelletHeavyShotgunIncendiaryBuckshot
+  name: dragon's breath buckshot shell
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: ProjectileSpread
+    proto: RMCPelletHeavyShotgunIncendiaryBuckshot
+    count: 3
+    spread: 20
+  - type: IgniteOnProjectileHit

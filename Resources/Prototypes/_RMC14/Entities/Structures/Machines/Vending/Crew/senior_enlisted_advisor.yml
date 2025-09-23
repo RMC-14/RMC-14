@@ -10,12 +10,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitBO
-      - id: RMCHeadsetSEA
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
@@ -24,6 +24,7 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -45,12 +46,19 @@
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: ArmorHelmetM10
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3VLBallistics
       - id: RMCArmorM3LightPadded
       - id: RMCArmorM3MediumVariants
+    - name: Jacket
+      choices: { CMCoat: 1 }
+      entries:
       - id: RMCCoatService
     - name: Eyewear
       choices: { CMEyewear: 1 }
@@ -66,15 +74,32 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
-    - name: Headwear
-      choices: { CMHeadwear: 1 }
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+    - name: Books
+      takeAll: RMCBook
       entries:
-      - id: CMHeadCapDrill
-      - id: ArmorHelmetM10
-
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
+    - name: Patches
+      takeAll: RMCPatch
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+      - id: RMCPatchSEA
 
 - type: entity
   parent: ColMarTechBase
@@ -88,15 +113,28 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Personal Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54CMK1
+      - id: RMCWeaponRifleM54CMK1
+    - name: Personal Secondary
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCGunCasePistolM1984
+      - id: RMCGunCasePistolM77
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
         points: 9
+      - id: RMCMagazinePistolM1984AP
+        points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: CMMagazinePistolM77AP
+        points: 5
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:

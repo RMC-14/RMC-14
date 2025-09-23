@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fe0134eee0c220b5b4a896689630fa9e14d92f55/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fe0134eee0c220b5b4a896689630fa9e14d92f55/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi, improvised variant by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -41,13 +41,22 @@
       "name": "flametank_custom"
     },
     {
-      "name": "flametank_custom_strip"
+      "name": "flametank_custom_strip1"
+    },
+    {
+      "name": "flametank_custom_strip2"
     },
     {
       "name": "flametank_large_custom"
     },
     {
-      "name": "flametank_large_custom_strip"
+      "name": "flametank_large_custom_strip1"
+    },
+    {
+      "name": "flametank_large_custom_strip2"
+    },
+    {
+      "name": "flametank_improvised"
     }
   ]
 }

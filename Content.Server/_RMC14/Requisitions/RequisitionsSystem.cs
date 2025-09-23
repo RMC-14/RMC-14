@@ -365,8 +365,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var account = GetAccount();
         var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
-        var bureaucraticRewards = 0;
-        var logisticRecycleRewards = 0;
+        var rewards = 0;
         foreach (var entity in entities)
         {
             if (entity == elevator.Comp.Audio)
@@ -375,22 +374,21 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (HasComp<CargoSellBlacklistComponent>(entity))
                 continue;
 
-            bureaucraticRewards += SubmitInvoices(entity);
+            rewards += SubmitInvoices(entity);
 
             if (TryComp(entity, out RequisitionsCrateComponent? crate))
             {
-                logisticRecycleRewards += crate.Reward;
+                rewards += crate.Reward;
                 soldAny = true;
             }
 
             QueueDel(entity);
         }
 
-        if (bureaucraticRewards > 0)
-            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", bureaucraticRewards)));
+        if (rewards > 0)
+            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", rewards)));
 
-        account.Comp.Balance += bureaucraticRewards;
-        account.Comp.Balance += logisticRecycleRewards;
+        account.Comp.Balance += rewards;
 
         if (soldAny)
             Dirty(account);

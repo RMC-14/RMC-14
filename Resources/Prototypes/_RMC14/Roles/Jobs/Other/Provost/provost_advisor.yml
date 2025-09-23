@@ -1,0 +1,80 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostAdvisor
+  name: rmc-job-name-corp-provost-advisor
+  description: rmc-ghost-role-information-provost-description
+  playTimeTracker: CMJobProvostAdvisor
+  ranks:
+    RMCRankProvostAdvisor: []
+  startingGear: RMCGearProvostAdvisor
+  icon: RMCJobIconProvostAdvisor
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-advisor
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidProvostAdvisor
+  name: provost ghost role advisor
+  suffix: Spawner, Player, Friendly, Low Law Understanding
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostAdvisor
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostAdvisor
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-advisor
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostAdvisor
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearProvostAdvisor
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetProvost
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCProvostJacketFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostAdvisor
+    belt: CMBeltSecurityMPFilled
+    back: CMSatchelSecurityFilledProvost
+#    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostAdvisor
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostAdvisor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pva

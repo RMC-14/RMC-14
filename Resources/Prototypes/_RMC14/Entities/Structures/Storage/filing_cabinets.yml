@@ -28,7 +28,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.18,-0.48,0.18,0.48"
+          bounds: "-0.18,-0.25,0.18,0"
         density: 200
         mask:
         - MachineMask
@@ -56,6 +56,7 @@
     blacklist:
       components:
       - Xeno
+  - type: IntelContainer
 
 - type: entity
   parent: CMFilingCabinetBase
@@ -118,7 +119,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.22,-0.42,0.22,0.34"
+          bounds: "-0.22,-0.26,0.22,0"
         density: 210
         mask:
         - MachineMask

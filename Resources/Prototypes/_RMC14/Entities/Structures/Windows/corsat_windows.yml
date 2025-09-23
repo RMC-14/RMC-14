@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameCorsatReinforced
   components:
@@ -66,3 +66,88 @@
   - type: Construction
     graph: RMCWindowCorsatReinforced
     node: windowCorsatReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColonyReinforced
+    sound:
+      collection: WindowShatter
+      
+- type: entity
+  parent: RMCWindowCorsatReinforced 
+  id: RMCWindowCorsatReinforcedSecurity
+  description: A red tinted glass window with a special rod matrix inside a wall frame. It looks very strong.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sec.rsi
+    state: paddedsec_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sec.rsi
+    state: paddedsec_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: paddedsec_rwindow
+    mode: CardinalFlags
+    
+- type: entity
+  parent: RMCWindowCorsatReinforced 
+  id: RMCWindowCorsatReinforcedResearch
+  description: A purple tinted glass window with a special rod matrix inside a wall frame. It looks quite strong. Might take some good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sci.rsi
+    state: paddedresearch_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sci.rsi
+    state: paddedresearch_rwindow0  
+  - type: IconSmooth
+    key: walls
+    base: paddedresearch_rwindow
+    mode: CardinalFlags
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowCorsatHull
+  name: hull window
+  description: A glass window with a special rod matrix inside a wall frame. This one has an automatic shutter system to prevent any atmospheric breach.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow.rsi
+    state: padded_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow.rsi
+    state: padded_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: padded_rwindow
+    mode: CardinalFlags
+    
+- type: entity
+  parent: RMCWindowCorsatHull
+  id: RMCWindowCorsatHullResearch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sci.rsi
+    state: paddedresearch_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sci.rsi
+    state: paddedresearch_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: paddedresearch_rwindow
+    mode: CardinalFlags
+    
+- type: entity
+  parent: RMCWindowCorsatHull
+  id: RMCWindowCorsatHullSec
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sec.rsi
+    state: paddedsec_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_sec.rsi
+    state: paddedsec_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: paddedsec_rwindow
+    mode: CardinalFlags

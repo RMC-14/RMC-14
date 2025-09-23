@@ -1,9 +1,11 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
@@ -15,6 +17,7 @@ using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -25,13 +28,14 @@ namespace Content.Shared._RMC14.Marines.Skills;
 public sealed class SkillsSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
-    private static readonly EntProtoId<SkillDefinitionComponent> _meleeSkill = "RMCSkillMeleeWeapons";
+    private static readonly EntProtoId<SkillDefinitionComponent> MeleeSkill = "RMCSkillMeleeWeapons";
 
     public ImmutableArray<EntProtoId<SkillDefinitionComponent>> Skills { get; private set; }
 
@@ -39,6 +43,7 @@ public sealed class SkillsSystem : EntitySystem
         ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>>.Empty;
 
     private EntityQuery<SkillsComponent> _skillsQuery;
+    private SortedSet<(string, int)> _skillsSorted = new(Comparer<(string, int)>.Create((a, b) => string.Compare(a.Item1, b.Item1, StringComparison.Ordinal)));
 
     public override void Initialize()
     {
@@ -47,15 +52,17 @@ public sealed class SkillsSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<GetMeleeDamageEvent>(OnGetMeleeDamage);
 
+        SubscribeLocalEvent<SkillsComponent, GetVerbsEvent<ExamineVerb>>(OnSkillsVerbExamine);
+
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
-        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
         SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<ItemToggleRequiresSkillComponent, ItemToggleActivateAttemptEvent>(OnItemToggleRequiresSkill);
         SubscribeLocalEvent<ItemToggleDeactivateUnskilledComponent, GotEquippedEvent>(OnItemToggleDeactivateUnskilled);
@@ -78,11 +85,51 @@ public sealed class SkillsSystem : EntitySystem
         if (args.User == args.Weapon)
             return;
 
-        var skill = GetSkill(args.User, _meleeSkill);
+        var skill = GetSkill(args.User, MeleeSkill);
         if (skill <= 0)
             return;
 
-        args.Damage *= 1 + 0.25 * skill;
+        args.Damage = ApplyMeleeSkillModifier(args.User, args.Damage);
+    }
+
+    private void OnSkillsVerbExamine(Entity<SkillsComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        _skillsSorted.Clear();
+        foreach (var (id, value) in ent.Comp.Skills)
+        {
+            if (!_prototypes.TryIndex(id, out var proto))
+                continue;
+
+            _skillsSorted.Add((proto.Name, value));
+        }
+
+        var msg = new FormattedMessage();
+        if (_skillsSorted.Count == 0)
+        {
+            msg.AddMarkupPermissive(Loc.GetString("rmc-skills-examine-none", ("target", ent)));
+        }
+        else
+        {
+            foreach (var (name, level) in _skillsSorted)
+            {
+                if (level == 0)
+                    continue;
+
+                msg.AddMarkupPermissive(Loc.GetString("rmc-skills-examine-skill", ("name", name), ("level", level)));
+                msg.PushNewline();
+            }
+        }
+
+        _examine.AddDetailedExamineVerb(args,
+            ent,
+            msg,
+            Loc.GetString("rmc-skills-examine", ("target", ent)),
+            "/Textures/Interface/students-cap.svg.192dpi.png",
+            Loc.GetString("rmc-skills-examine", ("target", ent))
+        );
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -232,7 +279,7 @@ public sealed class SkillsSystem : EntitySystem
         for (var i = 0; i < foundReagents.Count; i++)
         {
             var reagent = foundReagents[i];
-            var reagentLocalizedName = _prototypes.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+            var reagentLocalizedName = _prototypes.IndexReagent<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
             var reagentQuantity = reagent.Quantity;
             fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
             if (i > reagentCount)
@@ -276,11 +323,12 @@ public sealed class SkillsSystem : EntitySystem
                 continue;
 
             var id = prototype.ID;
+            var name = prototype.Name.Replace(" ", string.Empty);
             skillsArray.Add(id);
-            if (!skillsDict.TryAdd(prototype.Name, id))
+            if (!skillsDict.TryAdd(name, id))
             {
-                var old = skillsDict.GetValueOrDefault(prototype.Name).Id;
-                var msg = $"Duplicate skill name found: {prototype.Name}, old: {old}, new: {id}";
+                var old = skillsDict.GetValueOrDefault(name).Id;
+                var msg = $"Duplicate skill name found: {name}, old: {old}, new: {id}";
 
                 Log.Error(msg);
                 DebugTools.Assert(msg);
@@ -390,11 +438,11 @@ public sealed class SkillsSystem : EntitySystem
                 ent.Comp.Skills.TryGetValue(requiredSkill, out var level) &&
                 level >= requiredLevel)
             {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public bool HasAnySkills(Entity<SkillsComponent?> ent, List<Skill> anyRequired)
@@ -538,5 +586,11 @@ public sealed class SkillsSystem : EntitySystem
             multiplier = definitionComp.DelayMultipliers[^1];
 
         return multiplier;
+    }
+
+    public DamageSpecifier ApplyMeleeSkillModifier(EntityUid user, DamageSpecifier damage)
+    {
+        var skill = GetSkill(user, MeleeSkill);
+        return damage * (1 + 0.25 * skill);
     }
 }

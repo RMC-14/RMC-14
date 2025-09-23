@@ -1,6 +1,6 @@
 ﻿- type: entity
-  parent: CMWeaponPistolBase
-  id: CMWeaponPistolMK80
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCMK80
   name: MK80 pistol
   description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UN and TSE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
   components:
@@ -119,6 +119,7 @@
   parent: CMBulletBase
   id: RCMBulletPistol9mmSquashHead
   name: bullet (9mm Squash-Head)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

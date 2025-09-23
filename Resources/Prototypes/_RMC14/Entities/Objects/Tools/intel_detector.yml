@@ -1,0 +1,29 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCIntelDetector
+  name: data detector
+  description: A device that detects objects that may be useful for intel gathering.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/intel_detector.rsi
+    layers:
+    - state: datadetector
+      map: [ "base" ]
+    state: detector
+  - type: Item
+    size: Normal
+  - type: Clothing
+    slots:
+    - suitstorage
+    - belt
+  - type: IntelDetector
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.IntelDetectorLayer.State:
+        base:
+          True: { state: datadetector_on_0 }
+          False: { state: datadetector }
+  - type: Tag
+    tags:
+    - RMCDetector

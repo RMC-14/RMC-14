@@ -19,6 +19,8 @@
     grindableSolutionName: food
   - type: InjectableSolution
     solution: food
+  - type: DrawableSolution
+    solution: food
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -193,9 +195,8 @@
 # Empty Tray
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseItem
-  id: RMCTray_empty
+  id: RMCTrayEmpty
   name: empty tray
   description: Finished with its tour of duty.
   components:

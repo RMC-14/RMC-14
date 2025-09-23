@@ -1,14 +1,18 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBoiler
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBoiler
   - type: GhostRole
     name: cm-job-name-xeno-boiler
   - type: Sprite
@@ -23,6 +27,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -69,7 +74,7 @@
     plasmaRegenOnWeeds: 7
   - type: XenoAcid
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
     explosionArmor: 20
   - type: XenoDevour
   - type: XenoZoom
@@ -100,6 +105,8 @@
     chance: 0.25
     stunMin: 3
     stunMax: 4
+  - type: AcidBloodSplash
+    isActivateSplashOnGib: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -126,7 +133,7 @@
     size: Big
   - type: XenoDeathcloud
   - type: NeurotoxinInjector
-    neuroPerSecond: 16
+    neuroPerSecond: 20
     injectInContact: false
     affectsDead: false
     affectsInfectedNested: false
@@ -143,9 +150,14 @@
     prefix: boiler
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: boiler
   - type: Flammable
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-boiler

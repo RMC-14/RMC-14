@@ -1,0 +1,36 @@
+# Camera Gear
+- type: entity
+  parent: Clothing
+  id: RMCM5CameraGear
+  name: M5 Camera Gear
+  description: A camera and associated headgear designed to allow marine commanders to see what their troops can see. A more robust version of this equipment is integrated into all standard UNMC combat helmets. Can be worn over the ear or head.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    slots:
+    - EARS
+    - HEAD
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RipOffOnInfection
+  - type: OverwatchCamera
+
+- type: entity
+  parent: RMCM5CameraGear
+  id: RMCCameraGearPMC
+  name: Mk3 TOCU headcam
+  description: A modification & ruggedisation of the camera gear fielded by the RCM, the Tactical Overwatch Camera Unit is used by Weston Yamada PMC forces that forgo a typical protective head-cover, allowing their handler to remain aware of the operatives current status.

@@ -15,3 +15,68 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 1
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 1
+
+- type: entity
+  parent: RMCHandcuffs
+  id: RMCZipties
+  name: zipties
+  description: Tough single-use plastic zipties, ideal for restraining rowdy prisoners.
+  suffix: RMC
+  components:
+  - type: UseDelay
+    delay: 4
+  - type: Handcuff
+    breakoutTime: 60
+    cuffedRSI: Objects/Misc/cablecuffs.rsi
+    bodyIconState: body-overlay
+    breakOnRemove: true
+    startCuffSound:
+      path: /Audio/Items/Handcuffs/ziptie_start.ogg
+    endCuffSound:
+      path: /Audio/Items/Handcuffs/ziptie_end.ogg
+    startUncuffSound:
+      path: /Audio/Items/Handcuffs/rope_start.ogg
+    endUncuffSound:
+      path: /Audio/Items/Handcuffs/rope_breakout.ogg
+    startBreakoutSound:
+      path: /Audio/Items/Handcuffs/rope_takeoff.ogg
+  - type: Sprite
+    sprite: Objects/Misc/zipties.rsi
+    state: cuff
+
+# TODO RMC14 this should inherit from a RMC box prototype which contains the box sprites, then be filled
+- type: entity
+  name: ziptie box
+  parent: BaseItem
+  id: RMCBoxZiptie
+  description: A box full of zipties.
+  suffix: RMC
+  components:
+  - type: Item
+    sprite: Objects/Storage/boxes.rsi
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    layers:
+    - state: box_security
+    - state: ziptie
+  - type: ItemSlots
+  - type: CMItemSlots
+    startingItem: RMCZipties
+    count: 10
+    slot:
+      name: Zipties
+      whitelist:
+        tags:
+        - Handcuffs
+  - type: Tag
+    tags:
+    - RMCBoxZipties
+
+- type: Tag
+  id: RMCBoxZipties

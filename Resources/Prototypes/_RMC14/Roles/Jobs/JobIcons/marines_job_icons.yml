@@ -39,3 +39,17 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_spec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconMortarOperator
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_mortar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconLoader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_load

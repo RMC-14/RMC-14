@@ -1,0 +1,68 @@
+# Whisper
+- type: rank
+  id: RMCRankProvostSectorMarshal
+  name: Sector Marshal
+  prefix: PvSM.
+  paygrade: O9
+
+# Any admin with high law understanding
+- type: rank
+  id: RMCRankProvostSeniorMarshal
+  name: Senior Marshal
+  prefix: PvSnM.
+  paygrade: O8
+
+# Any admin with low law understanding, or wanting a lower rank
+- type: rank
+  id: RMCRankProvostMarshal
+  name: Marshal
+  prefix: PvM.
+  paygrade: O7
+
+# Any whitelisted CO
+- type: rank
+  id: RMCRankProvostDeputyMarshal
+  name: Deputy Marshal
+  prefix: PvDM.
+  paygrade: O6
+
+# Fax responder
+- type: rank
+  id: RMCRankProvostCommunicationsOfficer
+  name: Communications Officer
+  prefix: ComOff.
+
+# Any player with high law understanding
+- type: rank
+  id: RMCRankProvostChiefInspector
+  name: Chief Inspector
+  prefix: PvCI.
+  paygrade: CI
+
+# Any player with medium-low law understanding
+- type: rank
+  id: RMCRankProvostInspector
+  name: Provost Inspector
+  prefix: PvI.
+  paygrade: I
+
+# Any player with low law understanding, with guidance
+- type: rank
+  id: RMCRankProvostAdvisor
+  name: Sergeant Major
+  prefix: SgtMaj.
+  paygrade: E9E
+
+# Any player with given objective, possible team leader
+- type: rank
+  id: RMCRankProvostProvostTeamLeader
+  name: Master Sergeant
+  prefix: MSgt.
+  paygrade: E8
+
+# Any player with given objective, squad member
+- type: rank
+  id: RMCRankProvostProvostEnforcer
+  name: Staff Sergeant
+  prefix: SSgt.
+  paygrade: E6

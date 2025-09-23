@@ -2,3 +2,32 @@
   id: RMCWeYa
   tags:
   - RMCAccessWeYa
+
+
+- type: accessGroup
+  id: RMCWeYaExec
+  parent: RMCBaseMiscellaneousJob
+  name: Corporate Liaison
+  tags:
+  - RMCAccessWeYa
+  - RMCAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+
+- type: accessGroup
+  id: RMCWeYaExecColony
+  tags:
+  - RMCAccessWeYa
+  - RMCAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - RMCAccessWeYaFlight
+  - CMAccessColonyCommand

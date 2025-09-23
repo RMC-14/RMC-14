@@ -1,0 +1,465 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7a0eff3793efe08e10ed0299c8c69b93d93b2c3/icons/obj/structures/machinery/monitors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cameracase"
+    },
+    {
+      "name": "editor_icon"
+    },
+    {
+      "name": "fire0",
+      "directions": 4
+    },
+    {
+      "name": "fireblue",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "firered",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.7
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.7
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.7
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "fire1",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "firep",
+      "directions": 4
+    },
+    {
+      "name": "firex",
+      "directions": 4
+    },
+    {
+      "name": "overlay_green",
+      "directions": 4
+    },
+    {
+      "name": "overlay_blue",
+      "directions": 4
+    },
+    {
+      "name": "overlay_red",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "overlay_delta",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "pipeterm",
+      "directions": 4
+    },
+    {
+      "name": "pipeterm_f",
+      "directions": 4
+    },
+    {
+      "name": "auth_off"
+    },
+    {
+      "name": "auth_on",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "fire_b2",
+      "directions": 4
+    },
+    {
+      "name": "fire_b1",
+      "directions": 4
+    },
+    {
+      "name": "fire_b0",
+      "directions": 4
+    },
+    {
+      "name": "fire_bitem"
+    },
+    {
+      "name": "alarm0",
+      "directions": 4
+    },
+    {
+      "name": "alarm1",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "alarmp",
+      "directions": 4
+    },
+    {
+      "name": "alarmx",
+      "directions": 4
+    },
+    {
+      "name": "alarm2",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "alarm_b2",
+      "directions": 4
+    },
+    {
+      "name": "alarm_b1",
+      "directions": 4
+    },
+    {
+      "name": "alarm_bitem"
+    },
+    {
+      "name": "camera",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          0.8,
+          0.6,
+          0.8,
+          1
+        ],
+        [
+          1,
+          0.8,
+          0.6,
+          0.8,
+          1
+        ],
+        [
+          1,
+          0.8,
+          0.6,
+          0.8,
+          1
+        ],
+        [
+          1,
+          0.8,
+          0.6,
+          0.8,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "camera1",
+      "directions": 8
+    },
+    {
+      "name": "autocam_editor",
+      "directions": 4
+    },
+    {
+      "name": "cameraemp",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xraycam",
+      "directions": 8,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "xraycamemp",
+      "directions": 8,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xraycam1",
+      "directions": 8
+    }
+  ]
+}

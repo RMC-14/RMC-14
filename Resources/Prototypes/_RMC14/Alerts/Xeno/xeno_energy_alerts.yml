@@ -1,5 +1,6 @@
 - type: alert
   id: XenoEnergyBase #used by default
+  category: Energy
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
     state: power_display_full
@@ -48,13 +49,13 @@
   parent: XenoEnergyBase
   id: XenoEnergyAcider
   name: Acid reserves
-  description: Your stored acid. Used by different abilities
+  description: Your stored acid. Used by different abilities. You can only passively generate up to 400.
 
 - type: alert
   parent: XenoEnergyBase
-  id: XenoEnergyWarden
-  name: Health reserves
-  description: Your stored health. Used by different abilities.
+  id: XenoEnergyValkyrie
+  name: Fury
+  description: Your built-up rage. Used by different abilities.
 
 - type: alert
   parent: XenoEnergyBase

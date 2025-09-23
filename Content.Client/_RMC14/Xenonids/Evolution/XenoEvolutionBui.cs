@@ -1,4 +1,5 @@
-﻿using Content.Client._RMC14.Xenonids.UI;
+﻿using System.Linq;
+using Content.Client._RMC14.Xenonids.UI;
 using Content.Client.Message;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Strain;
@@ -21,6 +22,9 @@ public sealed class XenoEvolutionBui : BoundUserInterface
     [ViewVariables]
     private XenoEvolutionWindow? _window;
 
+    private readonly Dictionary<EntProtoId, XenoChoiceControl> _evolutionControls = new();
+    private readonly Dictionary<EntProtoId, XenoChoiceControl> _strainControls = new();
+
     public XenoEvolutionBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
@@ -28,7 +32,9 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<XenoEvolutionWindow>();
+        _window.OvipositorNeededLabel.Visible = false;
 
         if (EntMan.TryGetComponent(Owner, out XenoEvolutionComponent? xeno))
         {
@@ -39,7 +45,6 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         }
 
         _window.StrainsLabel.Visible = _window.StrainsContainer.ChildCount > 0;
-
         Refresh();
     }
 
@@ -53,16 +58,24 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         if (!_prototype.TryIndex(evolutionId, out var evolution))
             return;
 
-        var control = new XenoChoiceControl();
-        control.Set(evolution.Name, _sprite.Frame0(evolution));
-
-        control.Button.OnPressed += _ =>
+        if (!_evolutionControls.TryGetValue(evolutionId, out var control))
         {
-            SendPredictedMessage(new XenoEvolveBuiMsg(evolutionId));
-            Close();
-        };
+            control = new XenoChoiceControl();
+            control.Set(evolution.Name, _sprite.Frame0(evolution));
+            control.Button.Disabled = false;
 
-        _window?.EvolutionsContainer.AddChild(control);
+            control.Button.OnPressed += _ =>
+            {
+                SendPredictedMessage(new XenoEvolveBuiMsg(evolutionId));
+                Close();
+            };
+
+            _evolutionControls[evolutionId] = control;
+            _window?.EvolutionsContainer.AddChild(control);
+        }
+
+        control.Visible = true;
+        control.Button.Disabled = false;
     }
 
     private void AddStrain(EntProtoId strainId)
@@ -73,28 +86,43 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         if (!_prototype.TryIndex(strainId, out var strain))
             return;
 
-        var control = new XenoChoiceControl();
-        var name = strain.Name;
-        if (strain.TryGetComponent(out XenoStrainComponent? strainComp, _compFactory))
+        if (!_strainControls.TryGetValue(strainId, out var control))
         {
-            name = $"{Loc.GetString(strainComp.Name)} {name}";
+            control = new XenoChoiceControl();
 
-            if (strainComp.Description is { } description)
+            var name = strain.Name;
+            string? description = null;
+
+            if (strain.TryGetComponent(out XenoStrainComponent? strainComp))
             {
-                control.Button.ToolTip = Loc.GetString(description);
-                control.Button.TooltipDelay = 0.1f;
+                name = $"{Loc.GetString(strainComp.Name)} {name}";
+                description = strainComp.Description;
             }
+
+            control.Set(name, _sprite.Frame0(strain));
+            control.Button.Disabled = false;
+
+            control.Button.OnPressed += _ =>
+            {
+                var confirmWindow = new XenoStrainConfirmWindow();
+                confirmWindow.SetInfo(name, _sprite.Frame0(strain), description);
+
+                confirmWindow.OnConfirm += () =>
+                {
+                    SendPredictedMessage(new XenoStrainBuiMsg(strainId));
+                    confirmWindow.Close();
+                    Close();
+                };
+
+                confirmWindow.OpenCentered();
+            };
+
+            _strainControls[strainId] = control;
+            _window.StrainsContainer.AddChild(control);
         }
 
-        control.Set(name, _sprite.Frame0(strain));
-
-        control.Button.OnPressed += _ =>
-        {
-            SendPredictedMessage(new XenoStrainBuiMsg(strainId));
-            Close();
-        };
-
-        _window.StrainsContainer.AddChild(control);
+        control.Visible = true;
+        control.Button.Disabled = false;
     }
 
     public void Refresh()
@@ -107,32 +135,37 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
         _window.PointsLabel.Visible = xeno.Max > FixedPoint2.Zero;
 
-        _window.EvolutionsContainer.DisposeAllChildren();
+        foreach (var control in _evolutionControls.Values)
+            control.Visible = false;
+
         foreach (var evolutionId in xeno.EvolvesToWithoutPoints)
-        {
             AddEvolution(evolutionId);
-        }
 
         if (xeno.Points >= xeno.Max)
         {
             foreach (var evolutionId in xeno.EvolvesTo)
-            {
                 AddEvolution(evolutionId);
-            }
         }
 
-        _window.Separator.Visible = _window.EvolutionsContainer.ChildCount > 0 && _window.StrainsContainer.ChildCount > 0;
+        _window.Separator.Visible = _window.EvolutionsContainer.Children.Any(child => child.Visible) &&
+                                    _window.StrainsContainer.Children.Any(child => child.Visible);
 
         var lackingOvipositor = State is XenoEvolveBuiState { LackingOvipositor: true };
         var points = xeno.Points;
-        _window.PointsLabel.Text = $"Evolution points: {(int) Math.Floor(points.Double())} / {xeno.Max}";
-        if (lackingOvipositor)
+
+        _window.PointsLabel.Text = Loc.GetString("rmc-xeno-ui-evolution-points",
+            ("points", (int)Math.Floor(points.Double())),
+            ("maxPoints", xeno.Max));
+
+        if (lackingOvipositor && xeno.Max > FixedPoint2.Zero)
         {
-            // TODO RMC14 for some reason this doesn't properly wrap text
-            _window.OvipositorNeededLabel.SetMarkupPermissive("[bold][color=red]The Queen must be in their\novipositor for you to gain points![/color][/bold]");
-            _window.OvipositorNeededLabel.Visible = xeno.Max > FixedPoint2.Zero;
+            if (!_window.OvipositorNeededLabel.Visible)
+            {
+                _window.OvipositorNeededLabel.SetMarkupPermissive(Loc.GetString("rmc-xeno-ui-ovi-needed-label"));
+                _window.OvipositorNeededLabel.Visible = true;
+            }
         }
-        else
+        else if (_window.OvipositorNeededLabel.Visible)
         {
             _window.OvipositorNeededLabel.Visible = false;
         }

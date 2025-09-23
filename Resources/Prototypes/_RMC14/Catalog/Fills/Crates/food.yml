@@ -11,7 +11,7 @@
 - type: entity
   id: RMCCrateFoodMRE
   parent: RMCCratePlastic
-  name: Marine MRE crate
+  name: UNMC MRE crate
   components:
   - type: StorageFill
     contents:

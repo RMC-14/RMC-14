@@ -33,8 +33,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
-      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "jumpsuit" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -63,6 +63,23 @@
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
+      - map: [ "acided" ]
+      - map: [ "hooked" ]
+        sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+        state: hooked
+        visible: false
+      - map: [ "focused" ]
+        sprite: _RMC14/Interface/xeno_hud.rsi
+        state: hudeye
+        visible: false
+      - map: [ "targetedDirection" ]
+        sprite: _RMC14/Effects/targeted.rsi
+        state: sniper_lockon_direction
+        visible: false
+      - map: [ "targetedDirectionIntense" ]
+        sprite: _RMC14/Effects/targeted.rsi
+        state: sniper_lockon_intense_direction
+        visible: false
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
@@ -74,6 +91,8 @@
       Unsexed: RMCMaleRodentia
   - type: Inventory
     speciesId: rodentia
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rodentia
 
 - type: entity
   save: false

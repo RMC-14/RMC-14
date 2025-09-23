@@ -16,6 +16,10 @@
     - state: icon
       map: ["foldedLayer"]
       visible: false
+  - type: Clothing
+    slots:
+      - mask
+      - neck
 
 - type: entity
   parent: RMCBaseScarfMask
@@ -26,9 +30,9 @@
   - type: Foldable
     folded: true
   - type: Clothing
-    equippedPrefix: down
+    equippedPrefix: flipped
   - type: Item
-    heldPrefix: down
+    heldPrefix: flipped
   - type: Sprite
     layers:
     - state: icon
@@ -232,6 +236,16 @@
 # Torn Scarf
 - type: entity
   parent: ClothingMaskBaseButcherable
+  id: RMCMaskTornScarfBase
+  abstract: true
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - neck
+
+- type: entity
+  parent: RMCMaskTornScarfBase
   id: RMCMaskTornScarfBlack
   name: tactical scarf
   description: A tactical scarf used to keep warm in the cold.
@@ -290,3 +304,209 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
+
+# Smock
+
+- type: entity
+  parent: RMCMaskTornScarfBase
+  id: RMCMaskSmockBlack
+  name: tactical smock
+  description: A tactical smock used to keep warm in the cold, and provide increased camouflage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi
+
+- type: entity
+  parent: RMCMaskSmockBlack
+  id: RMCMaskSmockCamo
+  suffix: camo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Smock/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Mask/Smock/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Mask/Smock/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Mask/Smock/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Mask/Smock/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Mask/Smock/urban.rsi
+
+# Neckerchief - No flipped icons for these because I cant get it to work thanks yaml code
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCMaskNeckerchiefAlpha
+  name: neckerchief
+  description: A simple cloth worn around the neck, adjustable between a loose fit or a more tightly secured style.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefAlpha]
+  id: RMCMaskNeckerchiefAlphaDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefBravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/bravo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/bravo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefBravo]
+  id: RMCMaskNeckerchiefBravoDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefCharlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/charlie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/charlie.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefCharlie]
+  id: RMCMaskNeckerchiefCharlieDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefDelta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/delta.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/delta.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefDelta]
+  id: RMCMaskNeckerchiefDeltaDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefEcho
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/echo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/echo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefEcho]
+  id: RMCMaskNeckerchiefEchoDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefFoxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/foxtrot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/foxtrot.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefFoxtrot]
+  id: RMCMaskNeckerchiefFoxtrotDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/tan.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefTan]
+  id: RMCMaskNeckerchiefTanDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/black.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefBlack]
+  id: RMCMaskNeckerchiefBlackDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefGray
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/gray.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefGray]
+  id: RMCMaskNeckerchiefGrayDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/green.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefGreen]
+  id: RMCMaskNeckerchiefGreenDown
+  name: neckerchief
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefSquad
+  name: UNMC squad neckerchief
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/squad.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCMaskNeckerchiefAlpha
+      SquadBravo: RMCMaskNeckerchiefBravo
+      SquadCharlie: RMCMaskNeckerchiefCharlie
+      SquadDelta: RMCMaskNeckerchiefDelta
+      SquadEcho: RMCMaskNeckerchiefEcho
+      SquadFoxtrot: RMCMaskNeckerchiefFoxtrot
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefWhite]
+  id: RMCMaskNeckerchiefWhiteDown
+  name: neckerchief

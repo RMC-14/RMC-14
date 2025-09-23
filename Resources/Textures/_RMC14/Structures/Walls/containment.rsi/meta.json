@@ -1,0 +1,48 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "containment_wall_south"
+        },
+        {
+            "name": "containment_wall_w"
+        },
+        {
+            "name": "containment_wall_e"
+        },
+        {
+            "name": "containment_wall_n"
+        },
+        {
+            "name": "containment_wall_connect_e"
+        },
+        {
+            "name": "containment_wall_connect_w"
+        },
+        {
+            "name": "containment_wall_connect_e2"
+        },
+        {
+            "name": "containment_wall_connect_w2"
+        },
+        {
+            "name": "containment_wall_connect_s1"
+        },
+        {
+            "name": "containment_wall_connect_s2"
+        },
+        {
+            "name": "containment_wall_connect3"
+        },
+        {
+            "name": "containment_wall_corner",
+            "directions": 4
+        }
+    ]
+}

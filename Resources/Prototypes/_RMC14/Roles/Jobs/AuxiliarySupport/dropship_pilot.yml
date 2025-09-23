@@ -7,29 +7,33 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
-    time: 7200 # 2 hours
+    time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 20
   ranks:
-    RMCRankSecondLT: []
+    RMCRankSecondLT:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotDropship
+      time: 252000 # 70 hours
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotDropship
+      time: 90000 # 25 hours
+    RMCRankWarrantOfficer: []
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
+  marineAuthorityLevel: 8
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 1
@@ -42,10 +46,19 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMPilotDropship
       points: 45
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-dropship-pilot
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotDropship
@@ -63,10 +76,7 @@
   - type: SpawnPoint
     job_id: CMPilotDropship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotDropship

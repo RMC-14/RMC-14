@@ -11,11 +11,15 @@
                 <Label Text="{Loc 'character-setup-gui-character-setup-label'}"
                        Margin="8 0 0 0" VAlign="Center"
                        StyleClasses="LabelHeadingBigger" />
-                <Button Name="CommendationsButton" HorizontalExpand="True"
-                        Text="Medals and Jellies"
+                <Button Name="CommendationsReceivedButton" HorizontalExpand="True"
+                        Text="Medals and Jellies Received"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
-                <Button Name="StatsButton" HorizontalExpand="True"
+                <Button Name="CommendationsGivenButton"
+                        Text="Medals and Jellies Given"
+                        StyleClasses="ButtonBig"
+                        HorizontalAlignment="Right" />
+                <Button Name="StatsButton"
                         Text="{Loc 'character-setup-gui-character-setup-stats-button'}"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />

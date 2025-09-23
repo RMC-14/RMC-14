@@ -4,6 +4,7 @@
 # i guess you could just specify the prefix ('mobster') and count and let the system fill it
 - type: accent
   id: mobster
+  replacementChance: 0.2
   wordReplacements:
     accent-mobster-words-1: accent-mobster-words-replace-1
     accent-mobster-words-2: accent-mobster-words-replace-2
@@ -162,7 +163,7 @@
     accent-dwarf-words-81: accent-dwarf-words-replace-81
     accent-dwarf-words-82: accent-dwarf-words-replace-82
     accent-dwarf-words-83: accent-dwarf-words-replace-83
-    accent-dwarf-words-84: accent-dwarf-words-replace-84
+    #accent-dwarf-words-84: accent-dwarf-words-replace-84 #Stops 'OW' from being replaced.
     accent-dwarf-words-85: accent-dwarf-words-replace-85
     accent-dwarf-words-86: accent-dwarf-words-replace-86
     accent-dwarf-words-87: accent-dwarf-words-replace-87
@@ -224,12 +225,13 @@
     accent-dwarf-words-143: accent-dwarf-words-replace-143
     accent-dwarf-words-144: accent-dwarf-words-replace-144
     accent-dwarf-words-145: accent-dwarf-words-replace-145
-    accent-dwarf-words-146: accent-dwarf-words-replace-146
+    #accent-dwarf-words-146: accent-dwarf-words-replace-146 # Stops 'Officer' from being replaced
     accent-dwarf-words-147: accent-dwarf-words-replace-147
     accent-dwarf-words-148: accent-dwarf-words-replace-148
 
 - type: accent
   id: pirate
+  replacementChance: 0.2
   wordReplacements:
     accent-pirate-replaced-1: accent-pirate-replacement-1
     accent-pirate-replaced-2: accent-pirate-replacement-2
@@ -266,6 +268,7 @@
 
 - type: accent
   id: cowboy
+  replacementChance: 0.2
   wordReplacements:
     accent-cowboy-words-1: accent-cowboy-replacement-1
     accent-cowboy-words-2: accent-cowboy-replacement-2

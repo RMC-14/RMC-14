@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/obj/items/clothing/belts/belts_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/mob/humans/onmob/clothing/belts/belts_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/mob/humans/onmob/inhands/items_by_map/snow_lefthand.dmi and https://github.com/cmss13-devs/cmss13/blob/2f79406346e8f4209edc19c37cbd6f8dca8897d4/icons/mob/humans/onmob/inhands/items_by_map/snow_righthand.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "icon-front"
+        },
+        {
+            "name": "half"
+        },
+        {
+            "name": "full"
+        },
+        {
+            "name": "equipped-BELT",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        }
+    ]
+}

@@ -22,9 +22,9 @@
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobHumanTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     Eyes: MobHumanoidEyes
     HeadTop: MobHumanoidAnyMarking
     LArm: MobHumanLArm
@@ -57,17 +57,17 @@
     HeadTop:
       points: 1
       required: false
-    Chest:
-      points: 1
-      required: false
-    Underwear:
-      points: 1
-      required: true
-      defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
+    UndergarmentBottom:
+      points: 1
+      required: true
+      defaultMarkings: [ RMCUnderwearBoxersBlue ]
+    Chest:
+      points: 2
+      required: false
     Legs:
       points: 2
       required: false

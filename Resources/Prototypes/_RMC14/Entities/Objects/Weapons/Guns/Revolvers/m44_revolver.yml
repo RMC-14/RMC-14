@@ -1,9 +1,14 @@
 ﻿- type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverM44
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverM44
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: Clothing
@@ -12,7 +17,9 @@
     whitelist:
       tags:
       - RMCSpeedLoaderM44
+      - RMCSpeedLoader44Marksman
       - RMCCartridgeRevolver44
+      - RMCCartridgeRevolver44Marksman
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
@@ -54,11 +61,20 @@
 
 - type: entity
   parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverM44Marksman
+  suffix: Marksman
+  components:
+  - type: RevolverAmmoProvider
+    proto: RMCCartridgeRevolver44Marksman
+
+- type: entity
+  parent: RMCWeaponRevolverM44
   id: RMCWeaponRevolverM44Empty
   suffix: Empty
   components:
   - type: RevolverAmmoProvider
     proto: null
+    chambers: [ null, null, null, null, null, null, null ]
 
 - type: entity
   id: RMCBaseSpeedLoader44
@@ -112,6 +128,10 @@
   name: "M44 marksman speed loader (.44)"
   description: A revolver speed loader filled with Marksman ammo.
   components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Marksman
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
     layers:
@@ -154,6 +174,7 @@
   parent: CMBulletBase
   id: CMBulletRevolver44
   name: bullet (.44)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -168,6 +189,7 @@
   parent: CMBulletBase
   id: RMCBulletRevolver44Marksman
   name: bullet (.44 Marksman)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -188,3 +210,6 @@
 
 - type: Tag
   id: RMCSpeedLoaderM44
+
+- type: Tag
+  id: RMCSpeedLoader44Marksman

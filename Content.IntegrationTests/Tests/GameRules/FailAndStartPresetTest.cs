@@ -9,6 +9,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("Nukeops is not enabled in RMC14")]
 public sealed class FailAndStartPresetTest
 {
     [TestPrototypes]
@@ -73,8 +74,8 @@ public sealed class FailAndStartPresetTest
         server.System<TestRuleSystem>().Run = true;
 
         Assert.That(server.CfgMan.GetCVar(CCVars.GridFill), Is.False);
-        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyFallbackEnabled), Is.False);
-        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyDefaultPreset), Is.EqualTo("CMDistressSignal"));
+        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyFallbackEnabled), Is.True);
+        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyDefaultPreset), Is.EqualTo("secret"));
         server.CfgMan.SetCVar(CCVars.GridFill, true);
         server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, false);
         server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "TestPreset");
@@ -85,7 +86,7 @@ public sealed class FailAndStartPresetTest
         Assert.That(ticker.PlayerGameStatuses[client.User!.Value], Is.EqualTo(PlayerGameStatus.NotReadyToPlay));
 
         // Try to start nukeops without readying up
-        await pair.WaitCommand("setgamepreset TestPresetTenPlayers");
+        await pair.WaitCommand("setgamepreset TestPresetTenPlayers 9999");
         await pair.WaitCommand("startround");
         await pair.RunTicksSync(10);
 
@@ -99,7 +100,7 @@ public sealed class FailAndStartPresetTest
         // Ready up and start nukeops
         await pair.WaitClientCommand("toggleready True");
         Assert.That(ticker.PlayerGameStatuses[client.User!.Value], Is.EqualTo(PlayerGameStatus.ReadyToPlay));
-        await pair.WaitCommand("setgamepreset TestPreset");
+        await pair.WaitCommand("setgamepreset TestPreset 9999");
         await pair.WaitCommand("startround");
         await pair.RunTicksSync(10);
 
@@ -112,8 +113,8 @@ public sealed class FailAndStartPresetTest
 
         ticker.SetGamePreset((GamePresetPrototype?) null);
         server.CfgMan.SetCVar(CCVars.GridFill, false);
-        server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, false);
-        server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "CMDistressSignal");
+        server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, true);
+        server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "secret");
         server.System<TestRuleSystem>().Run = false;
         await pair.CleanReturnAsync();
     }

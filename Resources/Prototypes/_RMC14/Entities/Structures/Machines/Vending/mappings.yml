@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMVendorHeadsetSquad
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -9,11 +8,12 @@
       SquadBravo: CMHeadsetBravo
       SquadCharlie: CMHeadsetCharlie
       SquadDelta: CMHeadsetDelta
+      SquadEcho: CMHeadsetEcho
+      SquadFoxtrot: CMHeadsetFoxtrot
 
 - type: entity
   id: CMVendorHeadsetSquadLeader
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -21,11 +21,12 @@
       SquadBravo: CMHeadsetBravoLeader
       SquadCharlie: CMHeadsetCharlieLeader
       SquadDelta: CMHeadsetDeltaLeader
+      SquadEcho: CMHeadsetEchoLeader
+      SquadFoxtrot: CMHeadsetFoxtrotLeader
 
 - type: entity
   id: CMVendorHeadsetSquadFTL
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -33,11 +34,12 @@
       SquadBravo: CMHeadsetBravoTeamLeader
       SquadCharlie: CMHeadsetCharlieTeamLeader
       SquadDelta: CMHeadsetDeltaTeamLeader
+      SquadEcho: CMHeadsetEchoTeamLeader
+      SquadFoxtrot: CMHeadsetFoxtrotTeamLeader
 
 - type: entity
   id: CMVendorHeadsetSquadComTech
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -45,11 +47,12 @@
       SquadBravo: CMHeadsetBravoEngineer
       SquadCharlie: CMHeadsetCharlieEngineer
       SquadDelta: CMHeadsetDeltaEngineer
+      SquadEcho: CMHeadsetEchoEngineer
+      SquadFoxtrot: CMHeadsetFoxtrotEngineer
 
 - type: entity
   id: CMVendorHeadsetSquadCorpsman
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -57,3 +60,5 @@
       SquadBravo: CMHeadsetBravoMedic
       SquadCharlie: CMHeadsetCharlieMedic
       SquadDelta: CMHeadsetDeltaMedic
+      SquadEcho: CMHeadsetEchoMedic
+      SquadFoxtrot: CMHeadsetFoxtrotMedic

@@ -9,6 +9,7 @@
     state: shiva
   - type: Area
     buildSpecial: true
+    powerNet: ground
     minimapColor: '#6C6767D8'
 
 - type: entity
@@ -20,8 +21,9 @@
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -32,8 +34,9 @@
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle2
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -63,6 +66,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -78,8 +82,10 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -95,12 +101,14 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
-    unweedable: false
+    unweedable: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShivaInteriorOob
@@ -109,11 +117,6 @@
   components:
   - type: Sprite
     state: shiva
-  - type: Area
-    resinAllowed: false
-    avoidBioscan: false
-    noTunnel: true
-    unweedable: false
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -123,8 +126,6 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
-  - type: Area
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaShivaExteriorTelecomm
@@ -133,6 +134,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaShivaExteriorTelecomm
@@ -141,6 +143,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaExteriorTelecomm
@@ -149,6 +152,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -158,8 +162,6 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
-  - type: Area
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaShivaInteriorTelecomm
@@ -179,6 +181,12 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz1
+
+- type: entity
+  abstract: true
+  parent: RMCAreaShiva
+  id: RMCAreaShivaCaves
 
 - type: entity
   parent: RMCAreaShivaInteriorTelecomm
@@ -187,11 +195,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
-
-- type: entity
-  abstract: true
-  parent: RMCAreaShiva
-  id: RMCAreaShivaCaves
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaCaves
@@ -201,8 +205,6 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
-  - type: Area
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaShivaCavesTelecomm
@@ -211,6 +213,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -220,7 +223,7 @@
   - type: Sprite
     state: landing_valley
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
     landingZone: true
     minimapColor: '#EBE5E5E3'
 
@@ -232,7 +235,7 @@
   - type: Sprite
     state: lz2_fortress
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
     landingZone: true
     minimapColor: '#EBE5E5E3'
 
@@ -243,6 +246,14 @@
   components:
   - type: Sprite
     state: junkyard1
+
+- type: entity
+  parent: RMCAreaShivaExterior
+  id: RMCAreaShivaExteriorSouthwestValley
+  name: Shiva's Snowball - Southwest Valley
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -291,6 +302,8 @@
   components:
   - type: Sprite
     state: junkyard3
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -316,6 +329,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -344,6 +358,7 @@
     state: caves3
   - type: Area
     minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaInteriorCaves
@@ -352,6 +367,8 @@
   components:
   - type: Sprite
     state: bar3
+  - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaInteriorCaves
@@ -385,6 +402,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -454,8 +472,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -464,6 +484,8 @@
   components:
   - type: Sprite
     state: hangars0
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -488,6 +510,8 @@
   components:
   - type: Sprite
     state: hangars1
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaShivaInteriorWarehouse
@@ -538,6 +562,7 @@
     state: bar1
   - type: Area
     landingZone: true
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaShivaInterior

@@ -1,4 +1,4 @@
-﻿using Content.Server.Administration.Logs;
+using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Chat;
@@ -18,9 +18,22 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null)
+    public override void Announce(EntityUid source, Filter filter, string message, string wrapped, SoundSpecifier? sound = null, PopupType? popup = null, bool needsQueen = false)
     {
-        base.Announce(source, filter, message, wrapped, sound, popup);
+        base.Announce(source, filter, message, wrapped, sound, popup, needsQueen);
+
+        if (needsQueen)
+        {
+            if (Hive.GetHive(source) is { } sourceHive)
+            {
+                if (!Hive.HasHiveQueen(sourceHive))
+                    return;
+            }
+            else
+            {
+                return;
+            }
+        }
 
         filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
 
@@ -30,13 +43,13 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
         _audio.PlayGlobal(sound, filter, true);
 
-        if (popup != null)
+        if (popup == null)
+            return;
+
+        foreach (var session in filter.Recipients)
         {
-            foreach (var session in filter.Recipients)
-            {
-                if (session.AttachedEntity is { } recipient)
-                    _popup.PopupEntity(message, recipient, recipient, popup.Value);
-            }
+            if (session.AttachedEntity is { } recipient)
+                _popup.PopupEntity(message, recipient, recipient, popup.Value);
         }
     }
 }

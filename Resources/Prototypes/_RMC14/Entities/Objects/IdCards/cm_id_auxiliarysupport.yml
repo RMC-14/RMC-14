@@ -31,7 +31,7 @@
     job: CMDropshipCrewChief
 
 - type: entity
-  parent: CMIDCardBase
+  parent: CMIDCardSilver
   id: CMIDCardIntelOfficer
   name: intel officer's ID card
   components:

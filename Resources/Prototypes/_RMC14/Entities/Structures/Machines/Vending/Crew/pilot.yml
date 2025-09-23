@@ -21,10 +21,14 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
-      - id: CMHandsInsulated
       - id: CMArmorHelmetM30
       - id: CMSatchel
       - id: CMMRE
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Armour
       choices: { CMArmour: 1 }
       entries:
@@ -34,7 +38,7 @@
       choices: { CMSidearm: 1 }
       entries:
       - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
@@ -48,8 +52,9 @@
         recommended: true
       - id: RMCBeltHolsterSMGPouch
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouches: 2 }
@@ -82,8 +87,12 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Glasses
       choices: { CMGlasses: 1 }
@@ -111,7 +120,7 @@
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
       - id: RMCAttachmentM63Stock
         points: 10
@@ -169,7 +178,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -186,7 +195,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:
@@ -204,14 +213,16 @@
         amount: 24
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 4
       - id: RMCWeaponRevolverM44
         amount: 4
       - id: CMWeaponPistolM1984
         amount: 4
-    #- id: CMWeaponM82F # TODO RMC14 Flare Gun
-    #  amount: 4
+      - id: RMCWeaponPistolM13
+        amount: 4
+      - id: RMCWeaponPistolM82F
+        amount: 4
     - name: Sidearm Ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -220,12 +231,16 @@
         amount: 20
       - id: CMMagazinePistolM1984
         amount: 20
-      #- id: CMMagazinePistolM1984AP # TODO RMC14 Pistol AP varieties
-      # amount: 14
+      - id: RMCMagazinePistolM1984AP
+        amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14
       - id: CMMagazinePistolMK80
         amount: 16
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
+      - id: RMCMagazinePistolM13Drum
+        amount: 15 #Drums aren't fully implemented -- supposed to have high jam chance and slow to reload...
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight

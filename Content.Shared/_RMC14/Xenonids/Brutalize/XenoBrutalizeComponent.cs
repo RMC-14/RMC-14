@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -12,7 +13,7 @@ public sealed partial class XenoBrutalizeComponent : Component
     public int? MaxTargets;
 
     [DataField, AutoNetworkedField]
-    public float AOEDamageMult = 0.4f;
+    public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "RMCEffectExtraSlash";
@@ -25,10 +26,4 @@ public sealed partial class XenoBrutalizeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan AddtionalCooldownReductions = TimeSpan.FromSeconds(0.5);
-
-    [DataField, AutoNetworkedField]
-    public string CummulativeCooldownAction = "ActionXenoCharge";
-
-    [DataField, AutoNetworkedField]
-    public string BaseCooldownAction = "ActionXenoDefensiveShield";
 }

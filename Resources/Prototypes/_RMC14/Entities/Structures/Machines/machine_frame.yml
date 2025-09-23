@@ -77,3 +77,14 @@
             max: 3
       - !type:DoActsBehavior
         acts: ["Destruction"]
+
+- type: entity
+  parent: CMMachineFrameUnfinished
+  id: RMCComputerFrameUnfinished
+  name: computer frame
+  suffix: RMC14, Unfinished
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: 0

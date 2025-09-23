@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMJobBase
   id: CMExecutiveOfficer
   name: cm-job-name-executive-officer
@@ -7,6 +7,9 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMCommand
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
     time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 35
@@ -17,15 +20,10 @@
   icon: "CMJobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
+  marineAuthorityLevel: 14
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: xo
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -50,17 +48,30 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: CMVendorUser
-      points: 120
+      id: CMExecutiveOfficer
+      points: 45
+      extraPoints:
+        Specialist: 120
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapPeakedService
     outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
@@ -78,11 +89,18 @@
   - type: SpawnPoint
     job_id: CMExecutiveOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: executive_officer
+    state: xo_spawn
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleXO
+  name: The Executive Officer
+  description: The Executive Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: executive_officer

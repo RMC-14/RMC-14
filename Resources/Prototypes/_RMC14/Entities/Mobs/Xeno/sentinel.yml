@@ -1,14 +1,19 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSentinel
   - type: GhostRole
     name: cm-job-name-xeno-sentinel
   - type: Sprite
@@ -51,9 +56,12 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 200
     evolvesTo:
     - CMXenoSpitter
+    evolvesToWithoutPoints:
+    - CMXenoQueen
   - type: XenoAcid
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
@@ -76,9 +84,17 @@
     prefix: sentinel
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: sentinel
   - type: AcidTrap
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-sentinel
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
+  - type: VentCrawler
+    ventCrawlIcon: sentinel

@@ -2,8 +2,7 @@
   abstract: true
   parent: CMBulletBase
   id: CMPelletShotgunBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -31,7 +30,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunBuckshot
     count: 4
-    spread: 20
+    spread: 15
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 4
@@ -120,7 +119,7 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 45
   - type: RMCProjectileAccuracy
     accuracy: 100
@@ -144,7 +143,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
     count: 4
-    spread: 15
+    spread: 6
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12
@@ -161,7 +160,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunIncendiaryBuckshot
     count: 4
-    spread: 20
+    spread: 15
   - type: IgniteOnProjectileHit
 
 - type: entity
@@ -183,4 +182,4 @@
   - type: ProjectileSpread
     proto: RMCPelletShotgunBreaching
     count: 4
-    spread: 16
+    spread: 8

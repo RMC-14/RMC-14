@@ -1,0 +1,14 @@
+﻿- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardHEFAShrapnelsworn
+  name: HEFA ID card
+  components:
+  - type: PresetIdCard
+    job: CMHEFAShrapnelsworn
+
+- type: entity
+  parent: RMCIDCardHEFAShrapnelsworn
+  id: RMCIDCardHEFAShrapnelswornMelee
+  components:
+  - type: PresetIdCard
+    job: CMHEFAShrapnelswornMelee

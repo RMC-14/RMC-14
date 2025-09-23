@@ -10,7 +10,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
   - type: CMArmor
-    armor: 30 # CLOTHING_ARMOR_HIGH
+    melee: 30 # CLOTHING_ARMOR_HIGH
+    bullet: 30
     bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: RMCArmorSpeedTier
@@ -22,18 +23,31 @@
     grid:
     - 0,0,7,1 # 4 slots
     maxItemSize: Small
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCArmorMARSOC
+  id: RMCArmorMARSOCXM40
+  suffix: XM40 HEAP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleXM40HEAP
+      amount: 4
 
 # Iron Bear
 - type: entity
   parent: CMArmorM4PMC
   id: CMArmorIronBear
-  name: H1 Iron Bears vest
+  name: H1 iron bears vest
   description: A protective vest worn by Iron Bears mercenaries.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/bear.rsi
   - type: CMArmor
-    armor: 25
+    melee: 20
+    bullet: 25
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -50,7 +64,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Dutch/vest.rsi
   - type: CMArmor
-    armor: 32 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_HIGHPLUS (bullets); intermediate value until more damage types implemented
+    melee: 30 # CLOTHING_ARMOR_HIGH
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS
     bio: 20
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -74,7 +89,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Dutch/bandolier.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
@@ -93,7 +108,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/freelancer.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -117,12 +133,14 @@
   name: colonial militia hauberk
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops.
   components:
+  - type: AllowSuitStorage
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
   - type: CMArmor
-    armor: 18 # CLOTHING_ARMOR_MEDIUM (melee); CLOTHING_ARMOR_MEDIUMLOW (bullets)
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
     speedTier: light
@@ -186,6 +204,7 @@
   parent: RMCCoatMilitia
   id: RMCCoatMilitiaHarness
   name: colonial militia harness
+  suffix: smart gun harness
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
   components:
   - type: SmartGunArmor
@@ -201,7 +220,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/heavy.rsi
   - type: CMArmor
-    armor: 40 # CLOTHING_ARMOR_VERYHIGH
+    melee: 40 # CLOTHING_ARMOR_VERYHIGH
+    bullet: 40
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
@@ -221,7 +241,8 @@
   description: A set of grey, heavy ceramic armor with dark blue highlights. It has been modified with extra ceramic plates placed in its storage pouch, and seems intended to support an extremely heavy weapon.
   components:
   - type: CMArmor
-    armor: 52 # CLOTHING_ARMOR_ULTRAHIGH (melee); CLOTHING_ARMOR_ULTRAHIGHPLUS (bullet)
+    melee: 50 # CLOTHING_ARMOR_ULTRAHIGH
+    bullet: 55 # CLOTHING_ARMOR_ULTRAHIGHPLUS
     bio: 20
     explosionArmor: 35 # CLOTHING_ARMOR_HIGHPLUS
   - type: Storage
@@ -256,15 +277,18 @@
 - type: entity
   parent: RMCArmorM3G4
   id: RMCArmorMercenaryHEFA
-  name: HEFA Knight armor
+  name: HEFA knight armor
   description: A thick piece of armor adorning a HEFA. Usually seen on a HEFA knight.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/hefa.rsi
   - type: CMArmor
-    armor: 40 # CLOTHING_ARMOR_VERYHIGH
+    melee: 40 # CLOTHING_ARMOR_VERYHIGH
+    bullet: 40
     bio: 15
     explosionArmor: 70 # CLOTHING_ARMOR_GIGAHIGH
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Riot armor
 - type: entity
@@ -274,16 +298,17 @@
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/un-m1_body_armor.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
     speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.725
-    sprintModifier: 0.725
+    walkModifier: 0.897
+    sprintModifier: 0.897
 
 - type: entity
   parent: RMCArmorPMCRiot
@@ -292,7 +317,10 @@
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. The UN-1MS modification is Synthetic programming compliant, sacrificing protection for speed and carrying capacity.
   components:
   - type: CMArmor
-    armor: 0
+    melee: 0
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: RMCArmorSpeedTier
     speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
@@ -312,7 +340,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/cbrn.rsi
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 10 # CLOTHING_ARMOR_LOW
   - type: RMCArmorSpeedTier
@@ -320,6 +349,8 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
     walkModifier: 0.62
     sprintModifier: 0.62
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCArmorCBRN
@@ -327,6 +358,7 @@
   name: CBRN M3-M advanced armor
   components:
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    melee: 30 # CLOTHING_ARMOR_HIGH
+    bullet: 25
     explosionArmor: 50 # CLOTHING_ARMOR_ULTRAHIGH
     bio: 75 # CLOTHING_ARMOR_GIGAHIGHPLUS

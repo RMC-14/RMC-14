@@ -1,9 +1,10 @@
 - type: entity
   abstract: true
-  parent: ClothingUniformBase
+  parent: [Clothing, RMCBaseUniformAccessoryItemJumpsuit]
   id: RMCUniformBase
   components:
   - type: Clothing
+    slots: [innerclothing]
     equipSound:
       path: /Audio/_RMC14/Handling/clothing_on.ogg
     unequipSound:
@@ -13,6 +14,8 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: Sprite
     state: null
     layers:
@@ -22,7 +25,15 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-  - type: PlaytimeMedalHolder
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 30
 
 - type: entity
   abstract: true
@@ -35,6 +46,23 @@
     foldVerbText: rmc-jacket-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
+
+- type: entity
+  abstract: true
+  parent: RMCUniformBase
+  id: RMCAlternateFoldableUniformBase
+  components:
+  - type: RMCClothingFoldable
+    types:
+    - name: rmc-jacket-verb
+      prefix: jacket
+      priority: 0
+      hideAccessories: true
+    - name: rmc-sleeves-verb
+      prefix: sleeves
+      priority: 1
+      blacklistedPrefix: jacket
+      blacklistPopup: rmc-sleeves-cannot
 
 - type: entity
   abstract: true
@@ -52,4 +80,5 @@
   id: RMCMarineUniformBase
   components:
   - type: CMArmor
-    armor: 10
+    bullet: 10
+    melee: 10

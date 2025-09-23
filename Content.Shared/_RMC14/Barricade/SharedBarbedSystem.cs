@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction.Upgrades;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -13,6 +14,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 
@@ -21,6 +23,7 @@ namespace Content.Shared._RMC14.Barricade;
 public abstract class SharedBarbedSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
@@ -45,49 +48,64 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
         SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
         SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
+        SubscribeLocalEvent<BarbedComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt, after: new[] { typeof(XenoLeapSystem) });
     }
 
-    public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
+    private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
     {
-        if (!component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
+        if (!barbed.Comp.IsBarbed)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.User, barbed.Comp.ThornsDamage, origin: barbed, tool: barbed);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), barbed, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnInteractUsing(Entity<BarbedComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var ev = new BarbedDoAfterEvent();
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, ev, uid, used: args.Used)
+            var barbDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.WireTime, ev, ent, ent, used: args.Used)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true,
                 AttemptFrequency = AttemptFrequency.EveryTick,
                 CancelDuplicate = false,
-                DuplicateCondition = DuplicateConditions.None
+                DuplicateCondition = DuplicateConditions.SameTarget,
             };
-            if (_doAfterSystem.TryStartDoAfter(doAfterEventArgs))
+
+            if (_doAfterSystem.TryStartDoAfter(barbDoAfter))
             {
-                _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User);
+                args.Handled = true;
+                _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), ent, args.User);
             }
+
             return;
         }
 
-        if (component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
+        if (ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User);
+            args.Handled = true;
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), ent, args.User);
             return;
         }
 
-        if (component.IsBarbed && TryComp<ToolComponent>(args.Used, out var tool))
+        if (!ent.Comp.IsBarbed || !TryComp<ToolComponent>(args.Used, out var tool))
+            return;
+
+        if (!_toolSystem.HasQuality(args.Used, ent.Comp.RemoveQuality, tool))
+            return;
+
+        args.Handled = true;
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), ent, args.User);
+        var cutDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.CutTime, new CutBarbedDoAfterEvent(), ent, used: args.Used)
         {
-            if (_toolSystem.HasQuality(args.Used, component.RemoveQuality, tool))
-            {
-                _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User);
-                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
-                {
-                    BreakOnMove = true,
-                    BreakOnDamage = true,
-                    NeedHand = true,
-                };
-                _doAfterSystem.TryStartDoAfter(wirecutterDoAfterEventArgs);
-            }
-        }
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+        };
+        _doAfterSystem.TryStartDoAfter(cutDoAfter);
     }
 
     private void OnDoAfterAttempt(Entity<BarbedComponent> barbed, ref DoAfterAttemptEvent<BarbedDoAfterEvent> args)
@@ -113,12 +131,9 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         barbed.Comp.IsBarbed = true;
         Dirty(barbed);
+        UpdateBarricade(barbed, true);
 
-        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
-            _physics.AddCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
-
-        UpdateAppearance(barbed);
-
+        _audio.PlayPredicted(barbed.Comp.BarbSound, barbed.Owner, args.User);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
     }
 
@@ -129,35 +144,23 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         args.Handled = true;
 
+        barbed.Comp.IsBarbed = false;
+        Dirty(barbed);
+        UpdateBarricade(barbed, true);
+
+        _audio.PlayPredicted(barbed.Comp.CutSound, barbed.Owner, args.User);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
+
         if (_netManager.IsClient)
             return;
 
         var coordinates = _transform.GetMoverCoordinates(barbed);
         EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
-
-        barbed.Comp.IsBarbed = false;
-        Dirty(barbed);
-
-        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
-            _physics.RemoveCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
-
-        UpdateAppearance(barbed);
-
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
-    }
-
-    private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
-    {
-        if (barbed.Comp.IsBarbed)
-        {
-            _damageableSystem.TryChangeDamage(args.User, barbed.Comp.ThornsDamage, origin: barbed, tool: barbed);
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), barbed, args.User, PopupType.SmallCaution);
-        }
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
     {
-        UpdateAppearance(barbed);
+        UpdateBarricade(barbed);
     }
 
     private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
@@ -181,10 +184,18 @@ public abstract class SharedBarbedSystem : EntitySystem
         newComp.IsBarbed = barbed.Comp.IsBarbed;
 
         Dirty(args.New, newComp);
-        UpdateAppearance((args.New, newComp));
+        UpdateBarricade((args.New, newComp), true);
     }
 
-    protected void UpdateAppearance(Entity<BarbedComponent> barbed)
+    private void OnXenoLeapHitAttempt(Entity<BarbedComponent> ent, ref XenoLeapHitAttempt args)
+    {
+        if (!ent.Comp.IsBarbed)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.Leaper, ent.Comp.ThornsDamage, origin: ent, tool: ent);
+    }
+
+    protected void UpdateBarricade(Entity<BarbedComponent> barbed, bool updateBarbed = false)
     {
         var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
 
@@ -195,6 +206,24 @@ public abstract class SharedBarbedSystem : EntitySystem
             _ => BarbedWireVisuals.UnWired,
         };
 
+        if (updateBarbed)
+        {
+            var ev = new BarbedStateChangedEvent();
+            RaiseLocalEvent(barbed, ref ev);
+        }
+
+        // Set fixtures
+        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
+        {
+            if (barbed.Comp.IsBarbed)
+                _physics.AddCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int)CollisionGroup.BarbedBarricade);
+            else
+                _physics.RemoveCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int)CollisionGroup.BarbedBarricade);
+        }
+
         _appearance.SetData(barbed, BarbedWireVisualLayers.Wire, visual);
     }
 }
+
+[ByRefEvent]
+public record struct BarbedStateChangedEvent;

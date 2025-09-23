@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Mobs.Components;
@@ -104,6 +105,9 @@ public sealed class BioscanSystem : EntitySystem
             if (!_mobState.IsAlive(uid, mobState))
                 continue;
 
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                continue;
+
             alive++;
             var bioscanBlocked = _area.BioscanBlocked(uid, out var name);
             var mapId = xform.MapID;
@@ -183,7 +187,7 @@ public sealed class BioscanSystem : EntitySystem
             ("onPlanet", alivePlanet)
         );
 
-        _marineAnnounce.AnnounceARES(null, message, bioscan.Comp.MarineSound, "rmc-bioscan-ares-announcement");
+        _marineAnnounce.AnnounceARESStaging(null, message, bioscan.Comp.MarineSound, "rmc-bioscan-ares-announcement");
         Dirty(bioscan);
     }
 

@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-xeno
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
@@ -65,13 +69,11 @@
       collection: XenoDeath
       params:
         volume: -4
-  - type: HealthExaminable
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
+  - type: RMCHealthExaminable
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 25
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
@@ -81,7 +83,7 @@
   - type: Climbing
   - type: Insulated
   - type: Input
-    context: "human"
+    context: "xenonid"
   - type: Clickable
   - type: InteractionOutline
   - type: InputMover
@@ -90,11 +92,13 @@
   - type: Emoting
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: DoAfter
   - type: Examiner
   - type: Eye
   - type: ContentEye
+  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -120,6 +124,49 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true}
+          False: { visible: false}
+  - type: Spottable
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -131,6 +178,7 @@
         density: 185
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - MobLayer
@@ -138,12 +186,19 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 0
         layer:
         - BulletImpassable
+  - type: CMSurgeryTarget
+  - type: Body
+    prototype: Xenonid
   - type: Xeno
+  - type: XenoRegen
+  - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
       enum.XenoDevolveUIKey.Key:
@@ -203,6 +258,12 @@
     - Stun
     - KnockedDown
     - SlowedDown
+    - Muted
+    - Dazed
+    - Blinded
+    - Unconscious
+    - TemporaryBlindness
+    - Deaf
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -231,6 +292,7 @@
       components:
       - Xeno
       - Infectable
+      - Synth
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable
@@ -244,7 +306,7 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
-  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
+  - type: XenoAnnounceDeath
     message: cm-xeno-death
     color: "#459A62"
   - type: ExplosionResistance
@@ -261,6 +323,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
+    trackerModes:
+    - Queen
+    - HiveLeader
+    - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -273,10 +340,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
@@ -287,20 +354,45 @@
   - type: MobGibbedByExplosionType
   - type: TileFirePatter
   - type: CanBeFirePatted
-  - type: FirePatter
-    blacklist:
-      components:
-      - Marine
   - type: BlockIdExamine
   - type: NoStunOnExit
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 0.75
+    superSlowModifier: 1.5
+    durationMultiplier: 0.666
+  - type: RMCCanBeFultoned
+  - type: CMArmor
+  - type: CriticalGraceTime
+  - type: RMCObstacleSlamming
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
+  - type: RMCBuckleDrawDepth
+    buckleDepth: Mobs
+  - type: RMCBuckleOffset
+    offset: 0, 0.5
+  - type: RMCArmorModifier
+  - type: RMCObstacleSlamCauserImmune
+  - type: RMCMobCollisionMass
+  - type: XenoRankNames
+  - type: Blindable
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - Marine
+  - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true
   id: CMXenoPrying
   components:
-  - type: Tool
-    qualities:
-    - Prying
   - type: Prying
     pryPowered: true
     speedModifier: 2.7
@@ -324,13 +416,22 @@
     autoAttack: true
     widePrimary: true
     altDisarm: true
-    angle: 60
+    angle: 0
     soundHit:
       collection: RCMXenoClaw
     animation: RMCWeaponArcXenoClaw
     damage:
       groups:
         Brute: 12
+    soundSwing:
+      path: /Audio/_RMC14/Weapons/alien_claw_swipe.ogg
+      params:
+        variation: 0.1
+        volume: -5
+  - type: MeleeDamageMultiplier # 1.5x Damage against other xenos
+    whitelist:
+      components:
+      - Xeno
   - type: Tackle
   - type: XenoClaws
 
@@ -356,6 +457,14 @@
 #      task: CMXenoCompound
 
 - type: entity
+  abstract: true
+  id: RMCXenoVentCrawler
+  components:
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+  - type: RMCTrayCrawler
+
+- type: entity
   id: CMXenoDeveloped
   parent:
   - CMXenoBase
@@ -369,6 +478,7 @@
     tags:
     - DoorBumpOpener
   - type: Hands
+    examineShowEmpty: false
   - type: GiveHands
     hands:
     - name: Right Hand
@@ -380,6 +490,11 @@
       components:
       - XenoFruit
   - type: ParalyzeOnPullAttempt
+  - type: FirePatter
+    stacks: -5
+  - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true
@@ -389,6 +504,7 @@
     tailDamage:
       groups:
         Brute: 30
+    tailRange: 2.5
 
 - type: entity
   abstract: true
@@ -413,6 +529,14 @@
   components:
   - type: Speech
     speechSounds: Xenonid
+
+- type: entity
+  abstract: true
+  id: RMCXenoMobCollision
+  components:
+  - type: MobCollision
+    minimumSpeedModifier: 0.25
+  - type: RMCMobCollision
 
 - type: speechVerb
   id: Xeno

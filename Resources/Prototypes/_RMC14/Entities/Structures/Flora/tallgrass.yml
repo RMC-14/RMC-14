@@ -1,0 +1,136 @@
+- type: entity
+  abstract: true
+  parent: CMBaseStructure
+  id: RMCGrassTallBase
+  name: tallgrass
+  suffix: Centre
+  components:
+  # make this slashable by only machete
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/tallgrass.rsi
+    state: tallgrass
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  abstract: true
+  parent: RMCGrassTallBase
+  id: RMCGrassTallSidesBase
+  suffix: Sides
+  components:
+  - type: Sprite
+    state: tallgrass_sides
+
+- type: entity
+  abstract: true
+  parent: RMCGrassTallBase
+  id: RMCGrassTallCornerBase
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: tallgrass_corner
+
+# Desert
+- type: entity
+  parent: RMCGrassTallBase
+  id: RMCGrassTallDesert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi #different sprite instead of color: "desert" because parity
+
+- type: entity
+  parent: RMCGrassTallSidesBase
+  id: RMCGrassTallSidesDesert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
+
+- type: entity
+  parent: RMCGrassTallCornerBase
+  id: RMCGrassTallCornerDesert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
+
+# Ice
+- type: entity
+  parent: RMCGrassTallBase
+  id: RMCGrassTallIce
+  components:
+  - type: Sprite
+    color: "#C7EDDE"
+
+- type: entity
+  parent: RMCGrassTallSidesBase
+  id: RMCGrassTallSidesIce
+  components:
+  - type: Sprite
+    color: "#C7EDDE"
+
+- type: entity
+  parent: RMCGrassTallCornerBase
+  id: RMCGrassTallCornerIce
+  components:
+  - type: Sprite
+    color: "#C7EDDE"
+
+# Jungle
+- type: entity
+  parent: RMCGrassTallBase
+  id: RMCGrassTallJungle
+  components:
+  - type: Sprite
+    color: "#64AA6E"
+
+- type: entity
+  parent: RMCGrassTallSidesBase
+  id: RMCGrassTallSidesJungle
+  components:
+  - type: Sprite
+    color: "#64AA6E"
+
+- type: entity
+  parent: RMCGrassTallCornerBase
+  id: RMCGrassTallCornerJungle
+  components:
+  - type: Sprite
+    color: "#64AA6E"
+
+# Strata
+- type: entity
+  parent: RMCGrassTallBase
+  id: RMCGrassTallStrata
+  components:
+  - type: Sprite
+    color: "#99d178"
+
+- type: entity
+  parent: RMCGrassTallSidesBase
+  id: RMCGrassTallSidesStrata
+  components:
+  - type: Sprite
+    color: "#99d178"
+
+- type: entity
+  parent: RMCGrassTallCornerBase
+  id: RMCGrassTallCornerStrata
+  components:
+  - type: Sprite
+    color: "#99d178"

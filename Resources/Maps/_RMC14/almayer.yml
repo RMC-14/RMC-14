@@ -142,9 +142,7 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: Almayer
@@ -1681,14 +1679,6 @@ entities:
         - 0
         - 0
         - 0
-- proto: ActionBibleSummon
-  entities:
-  - uid: 7387
-    components:
-    - type: Transform
-      parent: 7386
-    - type: InstantAction
-      container: 7386
 - proto: ArmorHelmetM10
   entities:
   - uid: 7631
@@ -1705,20 +1695,6 @@ entities:
     - type: Transform
       pos: 36.41064,-25.533577
       parent: 1
-    - type: Summonable
-      summonActionEntity: 7387
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 7387
-    - type: ActionsContainer
 - proto: BikeHorn
   entities:
   - uid: 925
@@ -7953,7 +7929,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -28.5,0.5
       parent: 1
-- proto: CMHandcuffs
+- proto: RMCHandcuffs
   entities:
   - uid: 7853
     components:

@@ -1,0 +1,89 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostDeputyMarshal
+  name: rmc-job-name-corp-provost-deputy-marshal
+  description: rmc-ghost-role-information-provost-description
+  playTimeTracker: CMJobProvostDeputyMarshal
+  ranks:
+    RMCRankProvostDeputyMarshal: []
+  startingGear: RMCGearProvostDeputyMarshal
+  icon: RMCJobIconProvostMarshal
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 2
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-deputy-marshal
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidProvostDeputyMarshal
+  name: provost ghost role deputy marshal
+  suffix: Spawner, Player, Friendly, Whitelisted COs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostDeputyMarshal
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostDeputyMarshal
+  components:
+  - type: GhostRole
+    name: rmc-job-name-corp-provost-deputy-marshal
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostDeputyMarshal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearProvostDeputyMarshal
+  equipment:
+    head: RMCArmorCapProvost
+    eyes: CMGlassesSecurity
+    ears: CMHeadsetHighCommand
+    jumpsuit: CMJumpsuitProvostMarshal
+    outerClothing: RMCProvostCoatMarshalFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostDeputyMarshal
+    belt: RMCMatebaBeltLuxuriousFilled
+    back: CMSatchelSecurityFilledProvostDeputyMarshal
+#    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostDeputyMarshal

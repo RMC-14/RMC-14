@@ -1,0 +1,50 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowSolarisReinforced
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameSolarisReinforced
+    entity: RMCWindowFrameSolarisReinforced
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowSolarisReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowSolarisReinforced
+    entity: CMWindowSolarisReinforced
+    edges:
+    - to: windowFrameSolarisReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing

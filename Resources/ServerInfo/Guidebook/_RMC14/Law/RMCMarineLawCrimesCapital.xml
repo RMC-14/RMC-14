@@ -1,0 +1,89 @@
+﻿<Document>
+  # Capital Crimes
+  - These crimes are extreme severity.
+  - All of these crimes may be punished by [bold]Permanent confinement and demotion, or execution and ID termination.[/bold]
+  <Table Columns="2">
+    <ColorBox>
+      <Box>
+        Charge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Description
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Jailbreak/Escape
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To escape, assist in an escape, attempt escape, or be willfully and knowingly broken out from a cell.
+      </Box>
+    </ColorBox>
+
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Attempted Murder
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Attempting to murder a person but failing to do so. If the evidence shows that the arrested person was clearly trying to kill someone with ill intent but failed in the action itself.
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Murder/Unauthorized Execution
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Killing someone with malicious intent. This includes Synthetic units. The charge applies even if the victim is later revived. Executions are only authorized as outlined in the Execution Procedure.
+        \nThis also includes refusing or preventing to revive anyone not executed by the execution procedure.
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Sedition
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To engage in actions or refuse to follow orders as to overthrow or usurp the legitimate command structure.
+        Creating a massive threat to the ship without the knowledge and approval of the [color=#008000][bold]Commander[/bold][/color] falls under sedition.
+        A [color=#90EE90][bold]Duty Officer[/bold][/color] is unable to approve actions that fall under this condition.
+        Proclaiming allegiance to, or acting on behalf of, the supposed CLF is an act of sedition against the UN.
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Desertion
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Refusing to carry out the duties essential to one’s post or abandoning post unauthorized, without intent to return. (Retreating from the planet when the FOB is breached is not Desertion, refusing to return when ordered is).
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Crimes against Sapience
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To engage in actions that violate sapient life rights or otherwise are heinous acts against sapient life. Examples are torture, cannibalism and forced infection of any kind.
+      </Box>
+    </ColorBox>
+
+  </Table>
+</Document>

@@ -221,6 +221,7 @@ public abstract partial class SharedCMSurgerySystem
         {
             BreakOnMove = true,
             TargetEffect = "RMCEffectHealBusy",
+            MovementThreshold = 0.5f,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

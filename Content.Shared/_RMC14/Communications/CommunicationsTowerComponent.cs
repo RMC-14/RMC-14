@@ -1,4 +1,5 @@
-﻿using Content.Shared.Radio;
+﻿using Content.Shared.FixedPoint;
+using Content.Shared.Radio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -14,6 +15,9 @@ public sealed partial class CommunicationsTowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<RadioChannelPrototype>> Channels = new() {new ProtoId<RadioChannelPrototype>("Colony")};
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 TechPoints = FixedPoint2.New(0.7);
 }
 
 [Serializable, NetSerializable]

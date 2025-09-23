@@ -8,6 +8,9 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
@@ -17,22 +20,17 @@
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobChiefMP
-      time: 36000 # 10 hours
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 11
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cmp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -56,13 +54,20 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-mp
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmp
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefMP
   equipment:
     jumpsuit: CMJumpsuitWO
     shoes: CMBootsBlackFilled
-    head: CMHeadBeretWO
+    head: CMHeadBeretCMP
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
@@ -80,11 +85,18 @@
   - type: SpawnPoint
     job_id: CMChiefMP
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_military_police
+    state: cmp_spawn
 
 - type: playTimeTracker
   id: CMJobChiefMP
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMP
+  name: The Chief MP
+  description: The Chief of Military Police.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_military_police

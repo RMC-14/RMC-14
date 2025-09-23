@@ -26,6 +26,11 @@
 
 - type: tile
   parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentCornerVar1West
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_corner_variant_1_2.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
   id: RMCFloorResearchContainmentEntranceWest
   sprite: /Textures/_RMC14/Tiles/almayer/containment_entrance_3.png
 

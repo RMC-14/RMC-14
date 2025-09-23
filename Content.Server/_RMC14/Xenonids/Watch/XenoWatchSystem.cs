@@ -12,7 +12,7 @@ using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Xenonids.Watch;
 
-public sealed class XenoWatchSystem : SharedWatchXenoSystem
+public sealed class XenoWatchSystem : SharedXenoWatchSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -149,6 +149,9 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         RemoveWatcher(watcher);
         EnsureComp<XenoWatchingComponent>(watcher).Watching = toWatch;
         EnsureComp<XenoWatchedComponent>(toWatch).Watching.Add(watcher);
+
+        var ev = new XenoWatchEvent();
+        RaiseLocalEvent(watcher, ref ev);
     }
 
     protected override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)

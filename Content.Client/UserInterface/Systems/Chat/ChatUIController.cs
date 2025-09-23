@@ -17,6 +17,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -38,14 +39,16 @@ using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
+
 namespace Content.Client.UserInterface.Systems.Chat;
 
-public sealed class ChatUIController : UIController
+public sealed partial class ChatUIController : UIController
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IChatManager _manager = default!;
@@ -69,8 +72,7 @@ public sealed class ChatUIController : UIController
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
-    [ValidatePrototypeId<ColorPalettePrototype>]
-    private const string ChatNamePalette = "ChatNames";
+    private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
     private bool _chatNameColorsEnabled;
 
@@ -181,6 +183,9 @@ public sealed class ChatUIController : UIController
     public event Action<ChatChannel, int?>? UnreadMessageCountsUpdated;
     public event Action<ChatMessage>? MessageAdded;
 
+    private readonly List<MsgDeleteChatMessagesBy> _deleteMessages = new();
+    private int? _deletingHistoryIndex;
+
     public override void Initialize()
     {
         _sawmill = Logger.GetSawmill("chat");
@@ -243,7 +248,7 @@ public sealed class ChatUIController : UIController
         gameplayStateLoad.OnScreenLoad += OnScreenLoad;
         gameplayStateLoad.OnScreenUnload += OnScreenUnload;
 
-        var nameColors = _prototypeManager.Index<ColorPalettePrototype>(ChatNamePalette).Colors.Values.ToArray();
+        var nameColors = _prototypeManager.Index(ChatNamePalette).Colors.Values.ToArray();
         _chatNameColors = new string[nameColors.Length];
         for (var i = 0; i < nameColors.Length; i++)
         {
@@ -252,6 +257,8 @@ public sealed class ChatUIController : UIController
 
         _config.OnValueChanged(CCVars.ChatWindowOpacity, OnChatWindowOpacityChanged);
         _config.OnValueChanged(CCVars.AccessibilityColorblindFriendly, v => _colorBlindMode = v, true);
+
+        InitializeHighlights();
 
         var colors = new List<(string Color, string ColorblindColor)>();
         foreach (var channel in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
@@ -447,6 +454,8 @@ public sealed class ChatUIController : UIController
     private void OnAttachedChanged(EntityUid uid)
     {
         UpdateChannelPermissions();
+
+        UpdateAutoFillHighlights();
     }
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
@@ -488,8 +497,9 @@ public sealed class ChatUIController : UIController
 
         if (existing.Count > SpeechBubbleCap)
         {
-            // Get the oldest to start fading fast.
-            var last = existing[0];
+            // Get the next speech bubble to fade
+            // Any speech bubbles before it are already fading
+            var last = existing[^(SpeechBubbleCap + 1)];
             last.FadeNow();
         }
     }
@@ -502,7 +512,7 @@ public sealed class ChatUIController : UIController
     private void EnqueueSpeechBubble(EntityUid entity, ChatMessage message, SpeechBubble.SpeechType speechType)
     {
         // Don't enqueue speech bubbles for other maps. TODO: Support multiple viewports/maps?
-        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentMap)
+        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentEye.Position.MapId)
             return;
 
         if (!_queuedSpeechBubbles.TryGetValue(entity, out var queueData))
@@ -614,6 +624,41 @@ public sealed class ChatUIController : UIController
     public override void FrameUpdate(FrameEventArgs delta)
     {
         UpdateQueuedSpeechBubbles(delta);
+
+        try
+        {
+            var time = _timing.CurTime;
+            if (_deletingHistoryIndex != null)
+            {
+                for (var i = _deletingHistoryIndex.Value; i >= 0; i--)
+                {
+                    if (i >= History.Count)
+                        continue;
+
+                    // This will delete messages from an entity even if different players were the author.
+                    // Usages of the erase admin verb should be rare enough that this does not matter.
+                    // Otherwise the client would need to know that one entity has multiple author players,
+                    // or the server would need to track when and which entities a player sent messages as.
+                    var (_, h) = History[i];
+                    if (_deleteMessages.Any(msg => h.SenderKey == msg.Key || msg.Entities.Contains(h.SenderEntity)))
+                        History.RemoveAt(i);
+
+                    if (_timing.CurTime > time + TimeSpan.FromMilliseconds(8.33))
+                    {
+                        _deletingHistoryIndex = i;
+                        return;
+                    }
+                }
+
+                _deleteMessages.Clear();
+                _deletingHistoryIndex = null;
+                Repopulate();
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error($"Error deleting chat history:\n{e}");
+        }
     }
 
     private void UpdateQueuedSpeechBubbles(FrameEventArgs delta)
@@ -776,7 +821,7 @@ public sealed class ChatUIController : UIController
         {
             var locWarning = Loc.GetString("chat-manager-max-message-length",
                 ("maxMessageLength", MaxMessageLength));
-            box.AddLine(locWarning, Color.Orange);
+            box.AddLine(locWarning, Color.Orange, default, locWarning, ChatChannel.Server, true);
             return;
         }
 
@@ -855,9 +900,22 @@ public sealed class ChatUIController : UIController
         // color the name unless it's something like "the old man"
         if ((msg.Channel == ChatChannel.Local || msg.Channel == ChatChannel.Whisper) && _chatNameColorsEnabled)
         {
-            var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
-            if (grammar != null && grammar.ProperNoun == true)
-                msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+            // RMC14 - this allows xenos to have coloured names, but does not give coloured names to
+            // entities without a player
+            // This will likely have a merge conflict if upstream fixes the bug where the wrong grammar
+            // component is read.
+            if (_ent.GetComponentOrNull<ActorComponent>(_ent.GetEntity(msg.SenderEntity)) != null)
+            {
+                // RMC14: color changes depending on the squad it is in, otherwise the default color is used.
+                string? squadColor = _ent.System<SharedCMChatSystem>().ColorizeSpeakerNameBySquadOrNull(msg);
+                msg.WrappedMessage = squadColor != null ? squadColor : SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+            }
+        }
+
+        // Color any words chosen by the client.
+        foreach (var highlight in _highlights)
+        {
+            msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, highlight, "color", _highlightsColor);
         }
 
         // Color any codewords for minds that have roles that use them
@@ -925,12 +983,8 @@ public sealed class ChatUIController : UIController
 
     public void OnDeleteChatMessagesBy(MsgDeleteChatMessagesBy msg)
     {
-        // This will delete messages from an entity even if different players were the author.
-        // Usages of the erase admin verb should be rare enough that this does not matter.
-        // Otherwise the client would need to know that one entity has multiple author players,
-        // or the server would need to track when and which entities a player sent messages as.
-        History.RemoveAll(h => h.Msg.SenderKey == msg.Key || msg.Entities.Contains(h.Msg.SenderEntity));
-        Repopulate();
+        _deleteMessages.Add(msg);
+        _deletingHistoryIndex = History.Count - 1;
     }
 
     public void RegisterChat(ChatBox chat)
@@ -951,6 +1005,11 @@ public sealed class ChatUIController : UIController
     public void NotifyChatTextChange()
     {
         _typingIndicator?.ClientChangedChatText();
+    }
+
+    public void NotifyChatFocus(bool isFocused)
+    {
+        _typingIndicator?.ClientChangedChatFocus(isFocused);
     }
 
     public void Repopulate()

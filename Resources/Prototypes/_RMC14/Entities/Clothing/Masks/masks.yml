@@ -4,8 +4,8 @@
   abstract: true
   components:
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
     hideOnToggle: true
 
 - type: entity
@@ -27,6 +27,23 @@
     tags:
     - GasMask
 
+- type: entity
+  parent: CMMaskGas
+  id: RMCMaskGasSPP
+  name: ShMB/4 gasmask
+  description: The standard issue gasmask utilized by the SPP Vanguard Collective and many SPP civilian organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+
 - type: Tag
   id: GasMask
 
@@ -42,6 +59,12 @@
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
   - type: Item
     storedRotation: -90
+  - type: Tag
+    tags:
+    - SterileMask
+
+- type: Tag
+  id: SterileMask
 
 - type: entity # TODO RMC14 this needs a lizard sprite
   parent: ClothingMaskGas
@@ -69,6 +92,21 @@
   - type: Item
     size: Small
 
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskKutjevoRespirator
+  name: kutjevo respirator
+  description: A respirator worn on the face that filters out harmful air particles often present in the air of Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/kutjevo_respirator.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/kutjevo_respirator.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+
 # Coifs
 - type: entity
   parent: [ClothingMaskBase, BaseFoldable]
@@ -85,6 +123,11 @@
       map: ["foldedLayer"]
       visible: false
   - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
   - type: IdentityBlocker
@@ -172,6 +215,23 @@
 
 - type: entity
   parent: RMCMaskBalaclava
+  id: RMCMaskBalaclavaPMC
+  name: M8 pattern armored balaclava
+  description: An armored balaclava designed to conceal both the identity of the operator and act as an air-filter.
+  components:
+  - type: CMArmor
+    melee: 10
+    bio: 30
+    explosionArmor: 10
+
+- type: entity
+  parent: RMCMaskBalaclavaPMC
+  id: RMCMaskBalaclavaMARSOC
+  name: SOF armored balaclava
+  description: Designed for maximum protection -- and badassery. Provides protection against facial attacks, filters toxins, and conceals the wearer's identity.
+
+- type: entity
+  parent: RMCMaskBalaclava
   id: RMCMaskBalaclavaSkullBlue
   name: skull balaclava
   description: The face of your nightmares. Or at least that's how you imagined it'd be. Additionally protects against the cold.
@@ -191,3 +251,101 @@
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
+
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskSWAT
+  name: SWAT mask
+  description: A close-fitting tactical mask that can be connected to an air supply.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swat_mask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swat_mask.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
+  id: RMCVisorSWAT
+  name: TC2 CMB riot shield
+  description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet-down
+
+
+# Keffiyehs
+
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskKeffiyeh
+  name: keffiyeh
+  description: A traditional headscarf worn for protection from the elements and to conceal the face. Typically made of cotton, it can provide shade from the sun, guard against dust, and serve as camouflage in arid environments. Often worn by soldiers and civilians alike in desert and hostile regions, the keffiyeh has become a symbol of cultural identity and resilience.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh.rsi
+  - type: FoldableClothing
+    foldedHideLayers: [ ]
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_black.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_blue.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_green.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_white.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi

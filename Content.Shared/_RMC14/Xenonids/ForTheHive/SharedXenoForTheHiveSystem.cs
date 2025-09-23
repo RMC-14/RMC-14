@@ -1,25 +1,27 @@
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Vents;
+using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Chat;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
+using Content.Shared.Damage;
+using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
-using Content.Shared.Damage;
-using Content.Shared._RMC14.Xenonids.Acid;
-using Robust.Shared.Map.Components;
-using Content.Shared.Interaction;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Robust.Shared.Map;
-using Content.Shared.Movement.Systems;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
@@ -58,6 +60,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         SubscribeLocalEvent<ActiveForTheHiveComponent, ComponentRemove>(OnForTheHiveGone);
 
         SubscribeLocalEvent<ActiveForTheHiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+        SubscribeLocalEvent<ActiveForTheHiveComponent, VentEnterAttemptEvent>(OnVentCrawlAttempt);
     }
 
 
@@ -172,8 +175,8 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     if (!TryComp<XenoEnergyComponent>(xeno, out var acid))
                         return;
 
-                    var acidRange = acid.Current / active.AcidRangeRatio;
-                    var burnRange = acid.Current / active.BurnRangeRatio;
+                    var acidRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.AcidRangeRatio) * 2 + 1, 2) / Math.PI);
+                    var burnRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.BurnRangeRatio) * 2 + 1, 2) / Math.PI);
 
                     var maxBurnDamage = acid.Current / active.BurnDamageRatio;
 
@@ -216,7 +219,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno);
+                        _damage.TryChangeDamage(mob, _xeno.TryApplyXenoAcidDamageMultiplier(mob, active.BaseDamage * damage), true, origin: xeno, tool: xeno);
 
                     }
 
@@ -235,14 +238,14 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     }
 
                     //TODO CM gibs the runner
-                    _damage.TryChangeDamage(xeno, active.BaseDamage * 5000, true);
-                    _audio.PlayPvs(active.KaboomSound, xeno);
-                    RemCompDeferred<ActiveForTheHiveComponent>(xeno);
-
                     if (GetHiveCore(xeno, out var core))
                         ForTheHiveRespawn(xeno, active.CoreSpawnTime);
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
+
+                    _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
+                    QueueDel(xeno);
+                    RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }
         }
@@ -269,5 +272,11 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
     {
+    }
+
+    private void OnVentCrawlAttempt(Entity<ActiveForTheHiveComponent> xeno, ref VentEnterAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("rmc-vent-crawling-primed"), xeno, PopupType.SmallCaution);
+        args.Cancel();
     }
 }

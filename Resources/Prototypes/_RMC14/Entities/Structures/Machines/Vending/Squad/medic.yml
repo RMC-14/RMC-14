@@ -23,10 +23,10 @@
       entries:
       - id: CMBurnKit10
         points: 2
-#        recommended: true
+        recommended: true
       - id: CMTraumaKit10
         points: 2
-#        recommended: true
+        recommended: true
     #    CMMedicalSplints: 1P
 #        recommended: true
       - id: CMBloodPackFull # TODO RMC14 O-
@@ -36,7 +36,7 @@
       entries:
       - id: CMAdvFirstAidKitFilled
         points: 12
-#        recommended: true
+        recommended: true
       - id: CMFirstAidKitFilled
         points: 5
       - id: CMBurnAidKitFilled
@@ -45,8 +45,8 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-#      - id: #    CMRadiationFirstaidKit # TODO RMC14
-#        points: 6
+      - id: RMCRadiationAidKitFilled
+        points: 6
     - name: Pill Bottles
       entries:
       - id: CMPillCanisterBicaridine
@@ -103,14 +103,19 @@
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
-    #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
-    #    CMM20MineBoxx4mines: 20P
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
+        points: 6
+      - id: CMMagazineRifleM4SPRExt
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -122,8 +127,18 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      - id: RMCMagazinePistolM1984HP
+        points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -136,9 +151,9 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     - name: Clothing Items
       entries:
@@ -147,7 +162,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #    CMWeldingGoggles: 3P
+      - id: RMCWeldingGoggles
+        points: 3
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable
@@ -165,8 +181,9 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #    CMWeldingVisor: 5P
+      entries:
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletEngineer
@@ -196,6 +213,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMHospitalCorpsman
+    - CMPVEHospitalCorpsman
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -208,6 +226,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestMedic
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -215,6 +234,12 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -225,9 +250,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: m276 lifesaver bag (full)
+        name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
-        name: m276 medical storage rig (full)
+        name: M276 medical storage rig (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -273,8 +298,12 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
@@ -283,3 +312,82 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+
+# PVE
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechMedicalEquipmentPVE
+  name: ColMarTech squad medical equipment rack
+  description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+  suffix: PVE
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsman
+    - CMPVEHospitalCorpsman
+    - CMPMCCorpsmanPVE
+    - RMCSPPCorpsmanPVE
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCHandsLatexMarine
+        name: combat sterile gloves
+      - id: CMMaskSterile
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarineMedic
+      - id: CMSatchelMarineMedic
+        recommended: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#       recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchVialFill
+        name: vial pouch (Full)
+      - id: RMCPouchMedical
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)

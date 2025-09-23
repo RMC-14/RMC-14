@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFramePrison
   components:
@@ -63,6 +63,10 @@
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrison
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFramePrison
+    sound:
+      collection: WindowShatter
 
 
 - type: entity
@@ -132,9 +136,13 @@
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrisonReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFramePrison
+    sound:
+      collection: WindowShatter
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: RMCWindowPrisonHull
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one has an automatic shutter system to prevent any atmospheric breach.

@@ -33,4 +33,4 @@
         type: HealthAnalyzerBoundUserInterface
       # RMC addition: RMC health scanner.
       enum.HealthScannerUIKey.Key:
-        type: HealthScannerBoundUserInterface
+        type: HealthScannerBui

@@ -1,0 +1,26 @@
+﻿rmc-guide-entry-rmc = RMC14 Guide
+rmc-guide-entry-rules = Rules
+rmc-guide-entry-rules-ban-types = Ban Types and Durations
+rmc-guide-entry-rules-zero-tolerance = Zero Tolerance
+rmc-guide-entry-rules-language = Server Language
+rmc-guide-entry-rules-multikey = Multiple Accounts
+rmc-guide-entry-rules-escalation = Combat Escalation
+rmc-guide-entry-rules-metaknowledge = Use Character Knowledge
+rmc-guide-entry-rules-kindness = Be Nice
+rmc-guide-entry-rules-mutinies = Mutinies, Riots
+rmc-guide-entry-rules-command-roles = Disconnection
+rmc-guide-entry-rules-marine-law = Marine Law
+rmc-guide-entry-rules-higher-standards = Higher Standards
+rmc-guide-entry-rules-general-roleplay-standards = General Roleplay
+rmc-guide-entry-rules-marine-character-names = Character Names
+rmc-guide-entry-rules-marine-roleplay-standards = Marine Roleplay
+rmc-guide-entry-rules-command-roleplay = Command Roleplay
+rmc-guide-entry-rules-xeno-roleplay = Xenonid Roleplay
+rmc-guide-entry-rules-survivor-roleplay = Survivor Roleplay
+rmc-guide-entry-rules-hostile-faction-roleplay = Hostile Factions
+rmc-guide-entry-rules-command-chain = Commander Succession
+rmc-guide-entry-rules-core = Core Rules
+rmc-guide-entry-rules-command = Command Rules
+rmc-guide-entry-rules-roleplay-standards = Roleplay Standards
+rmc-guide-entry-rules-community = Community Rules
+

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ BaseItem, RMCPowerCellSlotUnremovableSuper ]
   id: RMCVisorNightVision
   name: night vision optic
@@ -13,4 +13,141 @@
     enabled: false
     drawRate: 33
   - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: nvg_sight_right
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: nvg_sight_down
   - type: NightVisionVisor
+  - type: ToggleVisor
+    ignoreRedundancy: true
+  - type: ComponentToggler
+    components:
+    - type: PointLight
+      enabled: true
+      radius: 1.1
+      softness: 1
+      color: "#008000"
+
+- type: entity
+  parent: BaseItem
+  id: RMCVisorMedical
+  name: basic medical optic
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids health status.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+    state: med_sight
+  - type: Item
+    size: Tiny
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: med_sight_right
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: med_sight_down
+  - type: ToggleVisor
+  - type: ComponentToggler
+    components:
+    - type: ShowHealthBars
+      damageContainers:
+      - Biological
+    - type: HolocardScanner
+    - type: ShowHealthIcons
+      damageContainers:
+      - Biological
+
+- type: entity
+  parent: RMCVisorMedical
+  id: RMCVisorMedicalAdvanced
+  name: advanced medical optic
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids health status and research notes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+    state: med_adv_sight
+  - type: Visor
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: med_adv_sight_down
+    skillsRequired:
+      all:
+        RMCSkillMedical: 2
+# TODO RMC14 view publications action
+
+- type: entity
+  parent: RMCVisorMedicalAdvanced
+  id: RMCVisorMedicalAdvancedIntegrated
+  suffix: Integrated
+  components:
+  - type: UnremovableVisor
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: med_sight_left
+
+- type: entity
+  parent: BaseItem
+  id: RMCVisorWelding
+  name: welding visor
+  description: An insertable visor HUD into a standard UNMC helmet. This type protects the eyes from welders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+    state: sight_empty
+  - type: Item
+    size: Tiny
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: weld_visor
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: blank_hud_sight_down
+  - type: ToggleVisor
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+
+- type: entity
+  parent: RMCVisorWelding
+  id: RMCVisorWeldingIntegrated
+  suffix: Integrated
+  components:
+  - type: UnremovableVisor
+
+- type: entity
+  parent: BaseItem
+  id: RMCVisorSquad
+  name: squad optic
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display of marine squads.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+    state: hud_sight
+  - type: Item
+    size: Tiny
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: hud_sight_right
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: hud_sight_down
+  - type: ToggleVisor
+  - type: ComponentToggler
+    components:
+    - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCVisorSquad
+  id: RMCVisorSquadIntegrated
+  suffix: Integrated
+  components:
+  - type: UnremovableVisor
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: hud_sight_left

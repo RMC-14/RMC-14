@@ -3,7 +3,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Timing;
 
-
 namespace Content.Shared._RMC14.TacticalMap;
 
 public sealed class TacMapMarineAlertSystem : EntitySystem
@@ -40,6 +39,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
         if (!_inv.TryGetInventoryEntity<GrantTacMapAlertComponent>(args.Equipee, out _))
             RemCompDeferred<TacMapMarineAlertComponent>(args.Equipee);
     }
+
     private void OnMapInit(Entity<TacMapMarineAlertComponent> ent, ref MapInitEvent args)
     {
         _alerts.ShowAlert(ent, ent.Comp.Alert);

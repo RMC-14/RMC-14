@@ -1,0 +1,59 @@
+﻿<Document>
+
+  #So you've just been born into the hive!
+  #Now what?
+
+  - Rejoice! We've just joined our hive as a larva. We can't do very much right now, but our potential is limitless!
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoLarva"/>
+  </Box>\n
+  - It's time to get to work! As soon as we can, we should try to evolve. This will require us to gain some age by waiting however.
+  - For beginners, becoming a drone is recommended. Drones are responsible for building the hive defenses.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoEvolve"/>
+    <GuideEntityEmbed Entity="CMXenoDrone"/>
+  </Box>\n
+
+  - Here are a few of the things we can construct!
+
+  <Box>
+    <GuideEntityEmbed Entity="WallXenoResin"/>
+    <GuideEntityEmbed Entity="WallXenoMembrane"/>
+    <GuideEntityEmbed Entity="DoorXenoResin"/>
+  </Box>\n
+
+  - Another important job of the Drone is to plant weeds.
+  - Weeds allow us to rest to regain our health and energy!
+  - We can also only construct the hive on weeds.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRest"/>
+  <Box>
+    <GuideEntityEmbed Entity="XenoWeeds"/>
+    <GuideEntityEmbed Entity="XenoWeedsSource"/>
+    <GuideEntityEmbed Entity="XenoWeeds"/>
+  </Box>\n
+
+  - Our final goal is to protect the Queen and plant her eggs so our hive may grow!
+  - Eggs can be placed on hive weeds, and contain parasites.
+  - Parasites can be extracted from the eggs, but be wary that parasites have short lifespans away from the weeds!
+
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoQueen"/>
+    <GuideEntityEmbed Entity="XenoEgg"/>
+    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+    <GuideEntityEmbed Entity="CMXenoParasite"/>
+  </Box>\n
+
+  - We can also devour captures and transport them to the hive for nesting!
+  - Find a tall and tackle them by right clicking on them with harm mode enabled.
+  - Once they are restrained, click and drag their sprite into yours to start devouring them, remember to keep tackling after!
+  - After devouring, walk to the closest hive to infect them on a egg, then to nest them do the same motion onto a wall.
+
+  - When a parasite is placed on a living host, a new larva will be born! Rejoice!
+  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall supported by hive weeds as soon as possible.
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
+    <GuideEntityEmbed Entity="CMXenoLarva"/>
+  </Box>\n
+
+</Document>

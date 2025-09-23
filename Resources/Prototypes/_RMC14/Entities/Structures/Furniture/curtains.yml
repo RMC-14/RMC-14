@@ -4,6 +4,8 @@
   name: curtain
   abstract: true
   components:
+  - type: InteractionOutline
+  - type: Clickable
   - type: Destructible
     thresholds:
     - trigger:
@@ -21,6 +23,7 @@
 - type: entity
   parent: RMCCurtainBase
   id: RMCCurtainGreen
+  suffix: Green
   components:
   - type: Sprite
     snapCardinals: true
@@ -28,6 +31,14 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainGreen
+  id: RMCCurtainBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    color: "#222222"
 
 - type: entity
   parent: RMCCurtainBase
@@ -41,6 +52,18 @@
     - state: closed
       color: "#B8F5E3"
       map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainMedical
+  id: RMCCurtainMedicalOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
 
 - type: entity
   parent: RMCCurtainBase
@@ -77,3 +100,171 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+
+# Colourable
+
+- type: entity
+  parent: RMCCurtainBase
+  id: RMCCurtainColourableTransparent
+  name: blinds
+  components:
+  - type: Sprite
+    snapCardinals: true
+    sprite: _RMC14/Structures/Furniture/Curtains/colorable_transparent.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Occluder
+    enabled: false
+  - type: Door
+    occludes: false
+
+- type: entity
+  parent: RMCCurtainColourableTransparent
+  id: RMCCurtainColourableTransparentOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
+
+- type: entity
+  parent: RMCCurtainColourableTransparent
+  id: RMCCurtainColourableTransparentAlt
+  name: blinds
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Curtains/colorable_transparent_alt.rsi
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpen
+  id: RMCCurtainColourableTransparentOpenAlt
+  suffix: Open
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Curtains/colorable_transparent_alt.rsi
+
+# Black
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    color: "#5a5a5a"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentBlackOpen
+  suffix: Black, Open
+  components:
+  - type: Sprite
+    color: "#5a5a5a"
+
+# Brown
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentBeige
+  suffix: Beige
+  components:
+  - type: Sprite
+    color: "#b3aa9b"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentBeigeOpen
+  suffix: Beige, Open
+  components:
+  - type: Sprite
+    color: "#b3aa9b"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    color: "#887362"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentBrownOpen
+  suffix: Brown, Open
+  components:
+  - type: Sprite
+    color: "#887362"
+
+# Blue
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentDesatBlue
+  suffix: Desat Blue
+  components:
+  - type: Sprite
+    color: "#788685"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentDesatBlueOpen
+  suffix: Desat Blue, Open
+  components:
+  - type: Sprite
+    color: "#788685"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#687d89"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentBlueOpen
+  suffix: Blue, Open
+  components:
+  - type: Sprite
+    color: "#687d89"
+
+# Green
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentGreen
+  suffix: Green
+  components:
+  - type: Sprite
+    color: "#8bafa4"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentGreenOpen
+  suffix: Green, Open
+  components:
+  - type: Sprite
+    color: "#8bafa4"
+
+# Red
+
+- type: entity
+  parent: RMCCurtainColourableTransparentAlt
+  id: RMCCurtainTransparentRed
+  suffix: Red
+  components:
+  - type: Sprite
+    color: "#8a6161"
+
+- type: entity
+  parent: RMCCurtainColourableTransparentOpenAlt
+  id: RMCCurtainTransparentRedOpen
+  suffix: Red, Open
+  components:
+  - type: Sprite
+    color: "#8a6161"

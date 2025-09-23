@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -15,8 +15,5 @@ public sealed partial class XenoMeleeSlowComponent : Component
     public bool RequiresKnockDown = false;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.66);
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "RMCEffectLurkerSlow";
+    public bool HigherOnXenos = false;
 }

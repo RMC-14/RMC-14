@@ -12,6 +12,9 @@
   - type: Spray
     transferAmount: 5
     sprayedPrototype: RMCExtinguisherSpray
+    vaporAmount: 3
+    sprayDistance: 5
+    sprayVelocity: 5
   - type: SolutionContainerManager
     solutions:
       spray:
@@ -22,14 +25,14 @@
   - type: Sprite
     sprite: _RMC14/Objects/fire_extinguisher.rsi
     layers:
-    - state: fire_extinguisher
-      map: [ "enum.ToggleVisuals.Layer" ]
+    - state: fire_extinguisher0
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
-          True: { state: fire_extinguisher } # TODO RMC14
-          False: { state: fire_extinguisher }
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: fire_extinguisher1 } # TODO RMC14
+          False: { state: fire_extinguisher0 }
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -60,13 +63,13 @@
     sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
     layers:
     - state: minife1
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
-          True: { state: minife0 } # TODO RMC14
-          False: { state: minife1 }
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: minife1 } # TODO RMC14
+          False: { state: minife0 }
   - type: Tag
     tags:
     - CMFireExtinguisherPortable

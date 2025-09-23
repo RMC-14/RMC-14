@@ -112,6 +112,7 @@ public class AreaImporter
                 const string isResinAllowed = "is_resin_allowed =";
                 const string resinConstructionAllowed = "resin_construction_allowed =";
                 const string landingZone = "is_landing_zone =";
+                const string linkedLz = "linked_lz =";
                 if (TryExtract(name, out var result))
                 {
                     areaName = result.Replace("\\improper", "").Replace("\"", "").Trim();
@@ -286,6 +287,11 @@ public class AreaImporter
                 {
                     isDefault = false;
                     area.Add((nameof(AreaComponent.LandingZone), result.ToLowerInvariant()));
+                }
+                else if (TryExtract(linkedLz, out result))
+                {
+                    isDefault = false;
+                    area.Add((nameof(AreaComponent.LinkedLz), result.ToLowerInvariant()));
                 }
             }
 

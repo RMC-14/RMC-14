@@ -1,6 +1,3 @@
-- type: Tag
-  id: RMCExplosiveBreachingCharge
-
 - type: entity
   parent: BaseItem
   id: RMCExplosiveBreachingCharge
@@ -40,7 +37,71 @@
         base:
           Primed: { state: active }
           Unprimed: { state: icon }
-  - type: RMCExplosiveDeleteWalls
+  - type: RMCExplosiveDelete
   - type: Tag
     tags:
     - RMCExplosiveBreachingCharge
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
+
+- type: entity
+  parent: RMCExplosiveBreachingCharge
+  id: RMCExplosiveBreachingChargeRubber
+  name: X17 riot charge
+  description: An explosive device used to break into areas while protecting the user from the blast. Unlike the standard breaching charge, the X17 deploys a cone spray of rubber pellets to incapacitate rather than kill.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge_rubber.rsi
+    state: icon
+    layers:
+    - state: icon
+      map: ["base"]
+  # TODO Shrapnel volume 20
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 1
+
+# TSEPA variant
+- type: entity
+  parent: RMCExplosiveBreachingChargeRubber
+  id: RMCExplosiveBreachingChargeRubberTSEPA
+  name: TSEPA X17 riot charge
+  components:
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 0
+      RMCSkillEngineer: 1
+
+- type: entity
+  parent: RMCExplosiveBreachingCharge
+  id: RMCExplosivePlastic
+  name: plastic explosives
+  description: Used to put holes in specific areas without too much extra hole.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+  - type: Explosive
+    totalIntensity: 350
+    intensitySlope: 6
+    maxIntensity: 20
+  - type: Sticky
+    stickDelay: 5
+    whitelist:
+      components:
+      - RMCWallExplosionDeletable
+      - XenoTunnel
+  - type: RMCExplosiveDelete
+    delay: 10
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 4
+    initialBeepDelay: 0
+    beepInterval: 0.5
+    whitelist:
+      components:
+      - XenoTunnel
+
+- type: Tag
+  id: RMCExplosiveBreachingCharge

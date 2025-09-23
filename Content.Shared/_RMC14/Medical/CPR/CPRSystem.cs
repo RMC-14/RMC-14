@@ -1,18 +1,19 @@
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CPR;
@@ -22,12 +23,14 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+
+    public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
 
     // TODO RMC14 move this to a component
     [ValidatePrototypeId<DamageTypePrototype>]
@@ -75,9 +78,7 @@ public sealed class CPRSystem : EntitySystem
 
         args.Handled = true;
 
-        // TODO RMC14 make this not use rotting
-        if (_net.IsServer)
-            _rotting.ReduceAccumulator(target, TimeSpan.FromSeconds(7));
+        _unrevivable.AddRevivableTime(target, TimeSpan.FromSeconds(7));
 
         if (!TryComp(target, out DamageableComponent? damageable) ||
             !damageable.Damage.DamageDict.TryGetValue(HealType, out damage))
@@ -96,7 +97,7 @@ public sealed class CPRSystem : EntitySystem
 
         // TODO RMC14 move this value to a component
         var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", 7));
-        _popups.PopupEntity(selfPopup, target, performer);
+        _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
 
         var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", target));
         var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
@@ -131,11 +132,11 @@ public sealed class CPRSystem : EntitySystem
                 return;
 
             var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", target));
-            _popups.PopupEntity(selfPopup, target, performer, PopupType.SmallCaution);
+            _popups.PopupEntity(selfPopup, target, performer, PopupType.MediumCaution);
 
             var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", target));
             var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.SmallCaution);
+            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.MediumCaution);
         }
     }
 
@@ -144,8 +145,11 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
+        if (_mobState.IsAlive(ent) ||
+            (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
+        {
             args.Cancelled = true;
+        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
@@ -178,10 +182,12 @@ public sealed class CPRSystem : EntitySystem
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
-        EnsureComp<ReceivingCPRComponent>(target);
+        var cprComp = EnsureComp<ReceivingCPRComponent>(target);
 
-        // TODO RMC14 less time for skilled doctors
-        var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
+        // If the performer has skills in medical their CPR time will be reduced.
+        var delay = TimeSpan.FromSeconds(cprComp.CPRPerformingTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
+
+        var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), performer, target)
         {
             BreakOnMove = true,
             NeedHand = true,
@@ -195,11 +201,11 @@ public sealed class CPRSystem : EntitySystem
             return true;
 
         var selfPopup = Loc.GetString("cm-cpr-self-start-perform", ("target", target));
-        _popups.PopupEntity(selfPopup, target, performer);
+        _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
 
         var othersPopup = Loc.GetString("cm-cpr-other-start-perform", ("performer", performer), ("target", target));
         var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-        _popups.PopupEntity(othersPopup, performer, othersFilter, true);
+        _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.Medium);
 
         return true;
     }

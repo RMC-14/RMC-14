@@ -1,0 +1,62 @@
+﻿- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchExplosive
+  name: explosive pouch
+  description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 #6 slots
+    whitelist:
+      tags:
+      - Grenade
+      - RMCExplosiveBreachingCharge
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledPlasticExplosives
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+      amount: 6
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHEFA
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 4
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHEDP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 6
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledSPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragOld
+      amount: 4
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledC4SPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+      amount: 4

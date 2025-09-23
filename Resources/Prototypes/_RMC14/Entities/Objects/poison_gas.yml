@@ -39,4 +39,22 @@
       whitelist:
         components:
         - Xeno
-  - type: DeleteOnLanding
+  - type: DeleteOnDropshipLaunchFromWarship
+
+- type: entity
+  id: RMCGasWeedKiller
+  name: C10-W weedkiller
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke
+    color: "#c2aac799"
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: TimedDespawn
+    lifetime: 1.5

@@ -1,0 +1,5 @@
+﻿<controls:RMCSmartFridgeSection
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.SmartFridge">
+    <BoxContainer Name="Container" Access="Public" Orientation="Vertical" />
+</controls:RMCSmartFridgeSection>

@@ -1,0 +1,64 @@
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingExternalWebbing
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - Gun
+      - Stunbaton
+      - CrewMonitoringConsole
+      tags:
+      #TODO any analyzer - plant etc
+      - Radio
+      - Crowbar
+      - Handcuffs
+      - Binoculars
+      - Knife
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+      - Flashlight
+      - DiscreteHealthAnalyzer
+      - Pen
+      - RMCMacheteScabbard
+      - RMCScabbardKatana
+      - RMCDetector
+
+- type: entity
+  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingExternalWebbing]
+  id: RMCOuterClothingExternalWebbing
+  name: external webbing
+  description: Designed to be worn over a jumpsuit rather than clipped on.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_brown.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_black.rsi

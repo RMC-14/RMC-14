@@ -1,0 +1,87 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCLFSoldier
+  name: rmc-clf-soldier
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: CMJobCLFSoldier
+  ranks:
+    RMCRankCLFRebel: [ ]
+  startingGear: RMCGearCLFSoldier
+  icon: RMCJobIconCLFSoldier
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-soldier
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFSoldier
+  name: clf ghost role soldier
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFSoldier
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFSoldier
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-soldier
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFSoldier
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadCLF
+
+- type: startingGear
+  id: RMCGearCLFSoldier
+  equipment:
+    head: RMCHeadMilitiaHood
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressCLF
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitiaVest
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFSoldier
+    belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
+    back: RMCWeaponShotgunHG3712
+    pocket1: RMCFlashlight
+    pocket2: RMCPouchFirstAidInjectors
+  inhand:
+  - RMCWeaponSMGP90
+  - RMCMagazineSMGP90
+
+- type: playTimeTracker
+  id: CMJobCLFSoldier
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSoldier
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_mil

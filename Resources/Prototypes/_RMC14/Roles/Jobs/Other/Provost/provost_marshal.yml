@@ -1,0 +1,85 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostMarshal
+  name: rmc-job-name-corp-provost-marshal
+  description: rmc-ghost-role-information-provost-description
+  playTimeTracker: CMJobProvostMarshal
+  ranks:
+    RMCRankProvostMarshal: []
+  startingGear: RMCGearProvostMarshal
+  icon: RMCJobIconProvostMarshal
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 2
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-marshal
+    - type: RMCTrackable
+  hidden: true
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostMarshal
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-marshal
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostMarshal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearProvostMarshal
+  equipment:
+    head: RMCArmorCapProvost
+    eyes: CMGlassesSecurity
+    ears: CMHeadsetHighCommand
+    jumpsuit: CMJumpsuitProvostMarshal
+    outerClothing: RMCProvostCoatMarshalFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostMarshal
+    belt: RMCMatebaBeltLuxuriousFilled
+    back: CMSatchelSecurityFilledProvostMarshal
+    #    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostMarshal
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostMarshal
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvtml

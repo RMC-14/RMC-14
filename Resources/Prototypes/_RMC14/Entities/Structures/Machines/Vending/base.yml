@@ -8,6 +8,7 @@
     mode: SnapgridCenter
   components:
   - type: Transform
+    anchored: true
     noRot: true
   - type: Clickable
   - type: InteractionOutline
@@ -18,7 +19,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
+          bounds: "-0.45,-0.45,0.45,0.45"
         density: 200
         mask:
         - MachineMask
@@ -35,7 +36,7 @@
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
     - state: "base"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "rmc_flick_animation" ]
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:
@@ -56,6 +57,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true
@@ -67,4 +69,15 @@
   - type: Anchorable
   - type: Pullable
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
+  - type: Damageable
+    damageContainer: StructuralMarine
+  - type: Destructible # TODO RMC14 some of these should just be knocked over with a do after by xenos
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  # - type: XenoCrusherChargable TODO knock over by crusher

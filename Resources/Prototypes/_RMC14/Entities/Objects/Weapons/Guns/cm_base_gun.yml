@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
@@ -43,10 +43,12 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
       state: all
+  - type: InteractionActivateOnClick
 
 - type: entity
   parent: BaseBullet
   id: RMCBaseBullet
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -54,4 +56,48 @@
     - state: bullet
       shader: unshaded
   - type: BulletholeGenerator
+  - type: RMCBullet
   - type: RMCProjectileAccuracy
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Bullets/bullet_impact1.ogg
+
+- type: entity
+  abstract: true
+  id: RMCBaseWeaponGunMagazineProvider
+  components:
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+      params:
+        variation: 0.2
+  - type: RMCGunChamber
+
+- type: entity
+  abstract: true
+  id: RMCBaseSlideMagazineVisuals
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: RMCMagazineVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCMagazineVisuals.SlideOpen:
+        enum.RMCMagazineVisuals.SlideOpen:
+          True: { state: bolt-open }
+          False: { state: base }
+
+- type: entity
+  abstract: true
+  parent: RMCBaseSlideMagazineVisuals
+  id: RMCBaseSlideMagazineVisualsBallistic
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]

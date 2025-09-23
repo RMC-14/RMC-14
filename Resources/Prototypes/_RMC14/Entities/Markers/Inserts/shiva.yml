@@ -1,0 +1,16 @@
+﻿# Shiva
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertShivaSouthCaves
+  name: LZ2 South Caves
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/builtup_lz2-south-caves.yml"
+      probability: 0.30
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/destroyed_lz2-south-caves.yml"
+      probability: 0.20
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true

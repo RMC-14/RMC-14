@@ -22,38 +22,39 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: nurse
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 0
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
+        RMCSkillFireman: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-nurse
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: nurse
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearNurse
   equipment:
-    jumpsuit: RMCScrubsLightBlue
-    neck: RMCNurseArmband
-    shoes: ClothingShoesColorWhite
+    jumpsuit: RMCScrubsLightBlueArmband
+    shoes: RMCShoesWhite
     id: CMIDCardNurse
 
 - type: startingGear
   id: CMGearNurseEquipped
   equipment:
-    jumpsuit: RMCScrubsLightBlue
-    neck: RMCNurseArmband
+    jumpsuit: RMCScrubsLightBlueArmband
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgOrange
@@ -69,10 +70,7 @@
   - type: SpawnPoint
     job_id: CMNurse
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: nurse
+    state: nur_spawn
 
 - type: playTimeTracker
   id: CMJobNurse

@@ -1,0 +1,197 @@
+﻿- type: radioChannel
+  id: SPP
+  name: chat-radio-spp
+  keycode: "y"
+  frequency: 1251
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPCommand
+  name: chat-radio-spp-command
+  keycode: "="
+  frequency: 1252
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPEngi
+  name: chat-radio-spp-engi
+  keycode: "s"
+  frequency: 1253
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPMed
+  name: chat-radio-spp-med
+  keycode: "i"
+  frequency: 1254
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPCCT
+  name: chat-radio-spp-cct
+  keycode: "x"
+  frequency: 1255
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: Halcyon
+  name: chat-radio-halcyon
+  keycode: "#"
+  frequency: 2125
+  color: "#F46D29"
+  longRange: true
+  tower: true
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeySPP
+  name: SPP radio encryption key
+  components:
+  - type: Sprite
+    state: upp_key
+  - type: EncryptionKey
+    channels:
+    - SPP
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPCommand
+  name: SPP command radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPCommand
+    - SPPEngi
+    - SPPMed
+    - SPPCCT
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPEngineer
+  name: SPP engineering radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPEngi
+    - SPPCCT
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPMedic
+  name: SPP medic radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPEngi
+    - SPPMed
+    defaultChannel: SPP
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyHalcyon
+  name: Halcyon radio encryption key
+  components:
+  - type: Sprite
+    state: upp_key
+  - type: EncryptionKey
+    channels:
+    - Halcyon
+    defaultChannel: Halcyon
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetSPPAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderSpp
+    trackerModes:
+    - LeaderSpp
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPP
+  name: SPP headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPPCommand
+  name: SPP-CMD headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPCommand
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPPEngineer
+  name: SPP-CCT headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPEngineer
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPPMedic
+  name: SPP-MED headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPMedic
+
+- type: entity
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetDistressSPP
+  name: SPP colony headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetSPPPaP
+  name: SPP PaP headset
+  description: A special headset used by the People's Armed Police of the SPP.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: Sprite
+    state: sec_headset
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetDistressHalcyon
+  name: halcyon corporate headset
+  description: A headset commonly worn by Halcyon Dynamics corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+      - RMCEncryptionKeyHalcyon

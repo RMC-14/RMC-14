@@ -1,28 +1,93 @@
 # GENERAL
-
 - type: entity
   parent: ColMarTechBaseAnchorable
-  id: CMVendorWalkman
+  id: CMVendorCassettes
   name: Rec-Vend
-  description: Contains We-Ya approved recreational items, like Walkmans and Cards.
+  description: Contains We-Ya approved recreational items, like Cassette Players and Cards.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/cassette_player.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    hackable: true
     sections:
-    - name: WalkMan
-      entries: []
+    - name: Cassettes
+      entries:
+      - id: RMCCassettePlayer
+        amount: 50
+      - id: RMCCassetteTapeWigWoo1
+        amount: 10
+      - id: RMCCassetteTapeMendax
+        amount: 10
+      - id: RMCCassetteTapeNighty
+        amount: 10
+      - id: RMCCassetteTapeGoodShowOldChap
+        amount: 10
+      - id: RMCCassetteTapeRedQwesta
+        amount: 10
+      - id: RMCCassetteTapeBolgarich
+        amount: 10
+      - id: RMCCassetteTapeQwertyquerty
+        amount: 10
+      - id: RMCCassetteTapePigeonBeans
+        amount: 10
+      - id: RMCCassetteTapeCustom
+        amount: 20
     - name: Cards
       entries: []
-    #TODO RMC14 Walkman and music
     - name: Other
-      entries: 
+      entries:
       - id: CMPaper
         amount: 15
       - id: CMPen
         amount: 10
       - id: d20Dice
+        amount: 10
+    - name: Magazines
+      entries:
+      - id: RMCMagazineBootsN160
+        amount: 10
+      - id: RMCMagazineBootsN07
+        amount: 10
+      - id: RMCMagazineBootsN45
+        amount: 10
+      - id: RMCMagazineBootsN54
+        amount: 10
+      - id: RMCMagazineBootsN55
+        amount: 10
+      - id: RMCMagazineBootsN58
+        amount: 10
+      - id: RMCMagazineBootsN70
+        amount: 10
+      - id: RMCMagazineBootsN113
+        amount: 10
+      - id: RMCMagazineBootsN117
+        amount: 10
+      - id: RMCMagazineBootsN120
+        amount: 10
+      - id: RMCMagazineBootsN125
+        amount: 10
+      - id: RMCMagazineBootsN131
+        amount: 10
+      - id: RMCMagazineBootsN150
+        amount: 10
+      - id: RMCMagazineBootsN189
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN34
+        amount: 10
+      - id: RMCMagazineWeYaOrrery
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN175
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN184
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN202
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN217
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN220
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN258
         amount: 10

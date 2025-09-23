@@ -1,9 +1,12 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -13,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Standard;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -35,6 +39,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
 public sealed class XenoSpitSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
@@ -55,6 +60,9 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -86,8 +94,6 @@ public sealed class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, ProjectileHitEvent>(OnShieldOnHit, after: [typeof(CMClusterGrenadeSystem)]);
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, CMClusterSpawnedEvent>(OnShieldOnHitClusterSpawned);
 
-        SubscribeLocalEvent<SlowedBySpitComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
-
         SubscribeLocalEvent<UserAcidedComponent, MapInitEvent>(OnUserAcidedMapInit);
         SubscribeLocalEvent<UserAcidedComponent, ComponentRemove>(OnUserAcidedRemove);
         SubscribeLocalEvent<UserAcidedComponent, ShowFireAlertEvent>(OnUserAcidedShowFireAlert);
@@ -114,7 +120,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnActiveChargingSpitGetArmor(Entity<XenoActiveChargingSpitComponent> ent, ref CMGetArmorEvent args)
     {
-        args.Armor += ent.Comp.Armor;
+        args.XenoArmor += ent.Comp.Armor;
     }
 
     private void OnActiveChargingSpitRefreshSpeed(Entity<XenoActiveChargingSpitComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -129,7 +135,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSpitAction(Entity<XenoSpitComponent> xeno, ref XenoSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
@@ -137,7 +143,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             ev.Id,
             xeno.Comp.Sound,
@@ -153,12 +159,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -171,12 +177,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -190,6 +196,9 @@ public sealed class XenoSpitSystem : EntitySystem
     private void OnXenoChargeSpitAction(Entity<XenoChargeSpitComponent> xeno, ref XenoChargeSpitActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -213,18 +222,25 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target))
+        if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
         {
             QueueDel(spit);
             return;
         }
 
+        if (HasComp<SynthComponent>(target))
+        {
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
+            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
+            return;
+        }
+
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
-            var slow = EnsureComp<SlowedBySpitComponent>(target);
-            slow.ExpiresAt = _timing.CurTime + spit.Comp.Slow;
-            slow.SuperSlow = spit.Comp.SuperSlow;
-            _movementSpeed.RefreshMovementSpeedModifiers(target);
+            if (spit.Comp.SuperSlow)
+                _slow.TrySuperSlowdown(target, spit.Comp.Slow);
+            else
+                _slow.TrySlowdown(target, spit.Comp.Slow);
         }
 
         var resisted = false;
@@ -246,9 +262,8 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
         var ev = new XenoAcidBallDoAfterEvent(GetNetCoordinates(args.Target));
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent);
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true, RootEntity = true };
         _doAfter.TryStartDoAfter(doAfter);
     }
 
@@ -277,8 +292,15 @@ public sealed class XenoSpitSystem : EntitySystem
             distance
         );
 
-        if (args.Handled)
-            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-ball-shoot-self"), ent, ent);
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoAcidBallActionEvent>(ent))
+        {
+            _actions.SetCooldown(action.AsNullable(), ent.Comp.Cooldown);
+        }
+
+        if (!args.Handled)
+            return;
+
+        _popup.PopupClient(Loc.GetString("rmc-xeno-acid-ball-shoot-self"), ent, ent);
     }
 
     private void OnApplyAcidStacksProjectileHit(Entity<ApplyAcidStacksComponent> ent, ref ProjectileHitEvent args)
@@ -302,6 +324,9 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
         }
 
+        if (!_xeno.CanAbilityAttackTarget(shooter, args.Target))
+            return;
+
         _xenoShield.ApplyShield(shooter, ent.Comp.Shield, ent.Comp.Amount, addShield: true, maxShield: ent.Comp.Max.Double());
     }
 
@@ -318,12 +343,6 @@ public sealed class XenoSpitSystem : EntitySystem
                 Dirty(spawned, projectile);
             }
         }
-    }
-
-    private void OnSlowedBySpitRefreshMovement(Entity<SlowedBySpitComponent> slowed, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        if (slowed.Comp.ExpiresAt > _timing.CurTime)
-            args.ModifySpeed( slowed.Comp.SuperSlow ? slowed.Comp.SuperMultiplier : slowed.Comp.Multiplier, slowed.Comp.Multiplier);
     }
 
     private void OnUserAcidedMapInit(Entity<UserAcidedComponent> ent, ref MapInitEvent args)
@@ -345,18 +364,27 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnUserAcidedVaporHit(Entity<UserAcidedComponent> ent, ref VaporHitEvent args)
     {
+        if (ent.Comp.AllowVaporHitAfter > _timing.CurTime)
+            return;
+
         var solEnt = args.Solution;
         foreach (var (_, solution) in _solution.EnumerateSolutions((solEnt, solEnt)))
         {
             if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
                 continue;
 
-            RemCompDeferred<UserAcidedComponent>(ent);
+            if (--ent.Comp.ResistsNeeded <= 0)
+                RemCompDeferred<UserAcidedComponent>(ent);
+            else
+            {
+                ent.Comp.AllowVaporHitAfter = _timing.CurTime + ent.Comp.ExtinguishGracePeriod;
+                Dirty(ent);
+            }
             break;
         }
     }
 
-    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze)
+    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
     {
         if (!Resolve(acided, ref acided.Comp, false))
             return;
@@ -377,7 +405,10 @@ public sealed class XenoSpitSystem : EntitySystem
         }
 
         if (paralyze != default)
+        {
             _stun.TryParalyze(acided.Owner, paralyze, true);
+            acided.Comp.ResistsNeeded = resists;
+        }
 
         Dirty(acided);
         UpdateAppearance((acided, acided.Comp));
@@ -397,9 +428,14 @@ public sealed class XenoSpitSystem : EntitySystem
         if (!_actionBlocker.CanInteract(player, null))
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
         _stun.TryParalyze(player.Owner, player.Comp.ResistDuration, true);
-        RemCompDeferred<UserAcidedComponent>(player);
+        if (--player.Comp.ResistsNeeded <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
+            RemCompDeferred<UserAcidedComponent>(player);
+        }
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist-partial"), player, player);
     }
 
     private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)
@@ -451,15 +487,6 @@ public sealed class XenoSpitSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
-        var slowedQuery = EntityQueryEnumerator<SlowedBySpitComponent>();
-        while (slowedQuery.MoveNext(out var uid, out var slowed))
-        {
-            if (slowed.ExpiresAt > time)
-                continue;
-
-            RemCompDeferred<SlowedBySpitComponent>(uid);
-            _movementSpeed.RefreshMovementSpeedModifiers(uid);
-        }
 
         var chargingQuery = EntityQueryEnumerator<XenoActiveChargingSpitComponent>();
         while (chargingQuery.MoveNext(out var uid, out var charging))

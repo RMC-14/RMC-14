@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Alert;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
@@ -8,8 +9,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -23,14 +22,9 @@ public sealed class ThirstSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string ThirstIconOverhydratedId = "ThirstIconOverhydrated";
-
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string ThirstIconThirstyId = "ThirstIconThirsty";
-
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string ThirstIconParchedId = "ThirstIconParched";
+    private static readonly ProtoId<SatiationIconPrototype> ThirstIconOverhydratedId = "ThirstIconOverhydrated";
+    private static readonly ProtoId<SatiationIconPrototype> ThirstIconThirstyId = "ThirstIconThirsty";
+    private static readonly ProtoId<SatiationIconPrototype> ThirstIconParchedId = "ThirstIconParched";
 
     public override void Initialize()
     {
@@ -49,6 +43,8 @@ public sealed class ThirstSystem : EntitySystem
             component.CurrentThirst = _random.Next(
                 (int) component.ThirstThresholds[ThirstThreshold.Thirsty] + 10,
                 (int) component.ThirstThresholds[ThirstThreshold.Okay] - 1);
+
+            DirtyField(uid, component, nameof(ThirstComponent.CurrentThirst));
         }
         component.NextUpdateTime = _timing.CurTime;
         component.CurrentThirstThreshold = GetThirstThreshold(component, component.CurrentThirst);
@@ -56,12 +52,15 @@ public sealed class ThirstSystem : EntitySystem
         // TODO: Check all thresholds make sense and throw if they don't.
         UpdateEffects(uid, component);
 
+        DirtyFields(uid, component, null, nameof(ThirstComponent.NextUpdateTime), nameof(ThirstComponent.CurrentThirstThreshold), nameof(ThirstComponent.LastThirstThreshold));
+
         TryComp(uid, out MovementSpeedModifierComponent? moveMod);
             _movement.RefreshMovementSpeedModifiers(uid, moveMod);
     }
 
     private void OnRefreshMovespeed(EntityUid uid, ThirstComponent component, RefreshMovementSpeedModifiersEvent args)
     {
+        return; // RMC14 no thirst in 13, so no slowdown from it here
         // TODO: This should really be taken care of somewhere else
         if (_jetpack.IsUserFlying(uid))
             return;
@@ -103,7 +102,7 @@ public sealed class ThirstSystem : EntitySystem
             component.ThirstThresholds[ThirstThreshold.OverHydrated]
         );
 
-        EntityManager.DirtyField(uid, component, nameof(ThirstComponent.CurrentThirst));
+        DirtyField(uid, component, nameof(ThirstComponent.CurrentThirst));
     }
 
     private bool IsMovementThreshold(ThirstThreshold threshold)
@@ -163,6 +162,9 @@ public sealed class ThirstSystem : EntitySystem
         {
             _alerts.ClearAlertCategory(uid, component.ThirstyCategory);
         }
+
+        DirtyField(uid, component, nameof(ThirstComponent.LastThirstThreshold));
+        DirtyField(uid, component, nameof(ThirstComponent.ActualDecayRate));
 
         switch (component.CurrentThirstThreshold)
         {

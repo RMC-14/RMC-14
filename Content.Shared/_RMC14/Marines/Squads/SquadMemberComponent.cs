@@ -15,4 +15,13 @@ public sealed partial class SquadMemberComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public Color BackgroundColor;
+
+    /// <summary>
+    ///     More accessible color option <see cref = "BackgroundColor" /> if it is not visible enough in certain situations.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Color? AccessibleBackgroundColor;
+
+    [DataField, AutoNetworkedField]
+    public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 }

@@ -1,19 +1,20 @@
 using Content.Server.DoAfter;
 using Content.Server.Nutrition.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Nutrition;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Nutrition;
+using Content.Shared.Nutrition.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Content.Shared.Destructible;
+using Robust.Shared.Random;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
@@ -40,6 +41,15 @@ public sealed class SliceableFoodSystem : EntitySystem
         if (args.Handled)
             return;
 
+        // RMC14
+#pragma warning disable RA0002
+        if (!CompOrNull<UtensilComponent>(args.Used)?.Types.HasFlag(UtensilType.Knife) ?? true)
+#pragma warning restore RA0002
+            return;
+
+        if (!TryComp<UtensilComponent>(args.Used, out var utensil) || (utensil.Types & UtensilType.Knife) == 0)
+            return;
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             args.User,
             entity.Comp.SliceTime,
@@ -52,7 +62,7 @@ public sealed class SliceableFoodSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
         };
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        args.Handled = _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
     private void OnSlicedoAfter(Entity<SliceableFoodComponent> entity, ref SliceFoodDoAfterEvent args)
@@ -139,6 +149,9 @@ public sealed class SliceableFoodSystem : EntitySystem
         RaiseLocalEvent(uid, ev);
         if (ev.Cancelled)
             return;
+
+        var dev = new DestructionEventArgs();
+        RaiseLocalEvent(uid, dev);
 
         // Locate the sliced food and spawn its trash
         foreach (var trash in foodComp.Trash)

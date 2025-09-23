@@ -18,7 +18,14 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
+    equipSound:
+      collection: storageRustle
+    unequipSound:
+      collection: RMCEquipArmor
     quickEquip: false
     slots:
     - back
@@ -58,6 +65,8 @@
       skills:
         all:
           RMCSkillMedical: 2
+  - type: RMCStorageEjectHand
+  - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMPersonalStorageBase
@@ -116,7 +125,7 @@
   parent: CMBackpack
   id: CMBackpackMarine
   name: lightweight IMP backpack
-  description: The standard-issue pack of the Marine forces. Designed to lug gear into the battlefield.
+  description: The standard-issue pack of the UNMC forces. Designed to lug gear into the battlefield.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
@@ -131,8 +140,8 @@
 - type: entity
   parent: CMBackpackMarine
   id: CMBackpackMarineMedic
-  name: Marine corpsman backpack
-  description: A standard-issue backpack worn by Marine medics.
+  name: UNMC corpsman backpack
+  description: A standard-issue backpack worn by UNMC medics.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
@@ -147,8 +156,8 @@
 - type: entity
   parent: CMBackpackMarine
   id: CMBackpackMarineTech
-  name: Marine technician backpack
-  description: A standard-issue backpack worn by Marine technicians.
+  name: UNMC technician backpack
+  description: A standard-issue backpack worn by UNMC technicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
@@ -164,7 +173,7 @@
 - type: entity
   parent: CMBackpack
   id: CMBackpackMortar
-  name: Marine mortar shell backpack
+  name: UNMC mortar shell backpack
   description: A backpack specifically designed to hold ammunition for the M402 mortar.
   components:
   - type: Sprite
@@ -172,7 +181,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,15,1
+    - 0,0,11,3
     whitelist:
       components:
       - MortarShell
@@ -188,8 +197,8 @@
 - type: entity
   parent: CMBackpack
   id: CMBackpackWelder
-  name: Marine technician welderpack
-  description: A specialized backpack worn by Marine technicians. It carries a fueltank for quick welder refueling and use.
+  name: UNMC technician welderpack
+  description: A specialized backpack worn by UNMC technicians. It carries a fueltank for quick welder refueling and use.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
@@ -219,6 +228,14 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    sourceWhitelist:
+      components:
+      - Welder
+    targetWhitelist:
+      tags:
+      - RMCTankFuel
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
@@ -231,7 +248,7 @@
   parent: CMBackpack
   id: RMCBackpackAmmo
   name: IMP ammo rack
-  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to Marine ingenuity. Helps you lug around extra rounds or supplies.
+  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to UNMC ingenuity. Helps you lug around extra rounds or supplies.
   components:
   - type: Item
     size: Huge
@@ -256,7 +273,25 @@
     whitelist:
       tags:
       - RMCAmmoBox
+      components:
+      - EmptySandbag
+      - FullSandbag
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
 
+- type: entity
+  parent: CMBackpackWelder
+  id: RMCBackpackWelderPMC
+  name: pmc technician welderpack
+  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/welder.rsi
+    layers:
+    - state: icon
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: ItemCamouflage
+    camouflageVariations: {}

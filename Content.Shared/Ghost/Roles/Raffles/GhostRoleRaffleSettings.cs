@@ -1,4 +1,4 @@
-﻿namespace Content.Server.Ghost.Roles.Raffles;
+﻿namespace Content.Shared.Ghost.Roles.Raffles;
 
 /// <summary>
 /// Defines settings for a ghost role raffle.
@@ -27,4 +27,10 @@ public sealed partial class GhostRoleRaffleSettings
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField(required: true)]
     public uint MaxDuration { get; set; }
+
+    /// <summary>
+    /// How many seconds the round needs to be going on before the raffle can be finished.
+    /// </summary>
+    [DataField]
+    public float RoundTimeRequirement;
 }

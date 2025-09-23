@@ -1,8 +1,5 @@
-﻿using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
@@ -14,7 +11,7 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
     public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.75);
+    public bool NextSlashBuffed = true;
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
@@ -23,5 +20,20 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
     public float DamageMult = 1.2f;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "RMCEffectCripple";
+    public LocId HitText = "cm-xeno-crippling-strike-hit";
+
+    [DataField, AutoNetworkedField]
+    public LocId? DeactivateText;
+
+    [DataField, AutoNetworkedField]
+    public LocId ExpireText = "cm-xeno-crippling-strike-expire";
+
+    [DataField, AutoNetworkedField]
+    public float? Speed;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoveOnHit;
+
+    [DataField, AutoNetworkedField]
+    public bool PreventTackle;
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/obj/janitor.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/obj/janitor.dmi and https://github.com/cmss13-devs/cmss13/pull/7021/files#diff-f2c1dd5b4ac180c4cbb19cbb27bbb07377f5033020a53c2ad9134440256dd980, Originally made by TheManWithNoHands on github",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,10 @@
   "states": [
     {
       "name": "cone"
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
     }
   ]
 }

@@ -10,13 +10,19 @@ rmc-xeno-construction-remote-construct = We focus our plasma into the weeds belo
 rmc-xeno-construction-remote-open-door = We focus our connection to the resin and remotely open the resin door.
 rmc-xeno-construction-remote-close-door = We focus our connection to the resin and remotely close the resin door.
 
+rmc-xeno-construction-no-map = The ground isn't solid.
 rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
+rmc-xeno-construction-blocked = We can't make this here.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
+rmc-xeno-construction-blocked-structure = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
+rmc-xeno-construction-dead-body = The body is in the way!
+
+rmc-xeno-construction-structure-destroyed = A {$structureName} has been {$destructionVerb} at {$location}!
+rmc-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$structureName} traps at {$location} has been {$destructionVerb}!
 
 cm-xeno-construction-resin-hole-burned-down = We sense one of our Hive's {$type} traps at {$location} has been burnt!
-cm-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$type} traps at {$location} has been destroyed!
 rmc-xeno-construction-resin-hole-activate = We sense one of our Hive's {$type} traps at {$location} has been triggered!
 rmc-xeno-construction-resin-hole-no-acid = We can't secrete any acid into the resin hole!
 rmc-xeno-construction-resin-hole-good-acid = It already has good acid in.
@@ -29,8 +35,8 @@ rmc-xeno-construction-resin-hole-finished-acid = {$xeno} pressurises the resin t
 rmc-xeno-construction-resin-hole-finished-acid-self = We pressurise the resin trap with acid!
 rmc-xeno-construction-resin-hole-finished-gas = {$xeno} presurises the resin trap with gas!
 rmc-xeno-construction-resin-hole-finished-gas-self = We pressurise the resin trap with gas!
-rmc-xeno-construction-resin-hole-filling-parasite = We start placing the parasite into the resin trap.
-rmc-xeno-construction-resin-hole-finished-parasite = We place a parasite in the resin trap.
+rmc-xeno-construction-resin-hole-filling-parasite = We start placing the child into the resin trap.
+rmc-xeno-construction-resin-hole-finished-parasite = We place a child in the resin trap.
 rmc-xeno-construction-resin-hole-enter-parasite = {CAPITALIZE($parasite)} crawls into the resin trap.
 
 rmc-xeno-construction-resin-hole-uproot = We start uprooting the node so we can put the resin hole in its place...
@@ -41,7 +47,7 @@ rmc-xeno-construction-resin-hole-gas = It's filled with pressurised gas.
 rmc-xeno-construction-resin-hole-acid = It's filled with pressurised acid.
 
 rmc-xeno-construction-resin-hole-empty-name = empty
-rmc-xeno-construction-resin-hole-parasite-name = parasite
+rmc-xeno-construction-resin-hole-parasite-name = child
 rmc-xeno-construction-resin-hole-gas-name = gas
 rmc-xeno-construction-resin-hole-acid-name = acid
 
@@ -68,6 +74,30 @@ rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
+rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
+
+rmc-xeno-order-construction-structure-designated =  Hive: A new {$construct} construction has been designated at {$area}!
+rmc-xeno-order-construction-limited-structure-designated = We designate a new {$construct} construction. ({$remainCount}/{$maxCount} remaining)
+
+rmc-xeno-construction-repair-structure-start-attempt = We begin adding the plasma to the {$struct} to repair it.
+rmc-xeno-construction-repair-structure-success = We have successfully repaired the {$struct}.
+rmc-xeno-construction-repair-structure-no-damage-failure = The {$struct} is in good condition, you don't need to repair it.
+rmc-xeno-construction-repair-structure-insufficient-plasma-warn = The {$struct} requires {$remainingPlasma} more plasma to repair it.
+
+rmc-xeno-construction-egg-morpher-no-parasites = There are no children in the egg morpher!
+rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
+rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
+
+rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
+
+rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} children.
+
+rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
+rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
+
+rmc-xeno-construction-no-map-structure = The ground isn't solid.
+rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!

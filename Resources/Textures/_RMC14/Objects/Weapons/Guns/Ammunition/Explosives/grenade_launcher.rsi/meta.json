@@ -1,0 +1,174 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c4bd5fb6834149adf299a152a0c838c723c102b9/icons/obj/items/weapons/grenade.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "grenade_m74_airburst_f"
+        },
+        {
+            "name": "grenade_m74_airburst_f_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "grenade_m74_airburst_i"
+        },
+        {
+            "name": "grenade_m74_airburst_i_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "grenade_m74_airburst_s"
+        },
+        {
+            "name": "grenade_m74_airburst_s_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ],
+                [
+                    0.1,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "grenade_hornet"
+        },
+        {
+            "name": "grenade_hornet_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "grenade_starshell"
+        },
+        {
+            "name": "grenade_starshell_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "baton_slug",
+            "directions": 4
+        },
+        {
+            "name": "baton_slug_active",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

@@ -24,10 +24,6 @@
       "directions": 4
     },
     {
-      "name": "c_tanga",
-      "directions": 4
-    },
-    {
       "name": "j_boxers",
       "directions": 4
     },
@@ -41,10 +37,6 @@
     },
     {
       "name": "j_satin",
-      "directions": 4
-    },
-    {
-      "name": "j_tanga",
       "directions": 4
     },
     {
@@ -64,10 +56,6 @@
       "directions": 4
     },
     {
-      "name": "s_tanga",
-      "directions": 4
-    },
-    {
       "name": "d_boxers",
       "directions": 4
     },
@@ -84,7 +72,39 @@
       "directions": 4
     },
     {
-      "name": "d_tanga",
+      "name": "urban_boxers",
+      "directions": 4
+    },
+    {
+      "name": "urban_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "urban_briefs",
+      "directions": 4
+    },
+    {
+      "name": "urban_satin",
+      "directions": 4
+    },
+    {
+      "name": "urban_tanga",
+      "directions": 4
+    },
+    {
+      "name": "desert_tanga",
+      "directions": 4
+    },
+    {
+      "name": "snow_tanga",
+      "directions": 4
+    },
+    {
+      "name": "classic_tanga",
+      "directions": 4
+    },
+    {
+      "name": "jungle_tanga",
       "directions": 4
     }
   ]

@@ -1,20 +1,15 @@
-# Royal marines hats
+# Royal Crown Marines hats
 - type: entity
-  parent: CMHeadBeret
+  parent: RMCHeadBeanie
   id: RMCHeadRoyalBeanie
   name: royal marine beanie
   description: A standard military beanie.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
 
 - type: entity
   parent: RMCHeadRoyalBeanie
   id: RMCHeadRoyalTurban
   name: royal marine turban
-  description: A standard military turban found in the royal marines. Considered a rare item, these kind of turbans are prized by collectors.
+  description: A standard military turban found in the Royal Crown Marines. Considered a rare item, these kind of turbans are prized by collectors.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/turban.rsi
@@ -25,7 +20,7 @@
   parent: CMHeadBeret
   id: RMCHeadRoyalBeret
   name: royal marine beret
-  description: A green beret belonging to the royal marines commando.
+  description: A green beret belonging to the Royal Crown Marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/beret.rsi
@@ -36,7 +31,7 @@
   parent: RMCHeadRoyalBeret
   id: RMCHeadRoyalBeretLead
   name: royal marine leader beret
-  description: A green beret belonging to the royal marines commando.
+  description: A green beret belonging to the Royal Crown Marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/beret_tl.rsi
@@ -48,7 +43,7 @@
   parent: ArmorHelmetPMC
   id: RMCHeadRoyalHelmet
   name: royal L5A2 ballistic helmet
-  description: A High-cut ballistic helmet. Designed to be used by Royal Marines Commando as part of the kestrel armour system.
+  description: A High-cut ballistic helmet. Designed to be used by Royal Crown Marines as part of the kestrel armour system.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
@@ -59,7 +54,7 @@
   parent: ArmorHelmetPMC
   id: RMCHeadRoyalHelmetBallistic
   name: royal L5A3 ballistic helmet
-  description: A High-cut ballistic helmet featuring an attached mandible. Designed to be used by Royal Marines Commando as part of the kestrel armour system.
+  description: A High-cut ballistic helmet featuring an attached mandible. Designed to be used by Royal Crown Marines as part of the kestrel armour system.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi

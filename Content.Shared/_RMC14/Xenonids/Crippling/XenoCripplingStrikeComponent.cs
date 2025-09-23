@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
@@ -12,14 +12,32 @@ public sealed partial class XenoCripplingStrikeComponent : Component
     public float DamageMult = 1.2f;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 20;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan ActiveDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.33);
+    public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
+    public Color? AuraColor;
+
+    [DataField, AutoNetworkedField]
+    public LocId ActivateText = "cm-xeno-crippling-strike-activate";
+
+    [DataField, AutoNetworkedField]
+    public LocId HitText = "cm-xeno-crippling-strike-hit";
+
+    [DataField, AutoNetworkedField]
+    public LocId? DeactivateText;
+
+    [DataField, AutoNetworkedField]
+    public LocId ExpireText = "cm-xeno-crippling-strike-expire";
+
+    [DataField, AutoNetworkedField]
+    public float? Speed;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoveOnHit;
+
+    [DataField, AutoNetworkedField]
+    public bool PreventTackle;
 }

@@ -11,10 +11,17 @@
     state: big_arrow
 
 - type: entity
-  parent: PointingArrow
+  parent: RMCPointingArrowBig
   id: RMCPointingArrowBigQueen
   save: false
   components:
   - type: Sprite
-    sprite: _RMC14/Effects/pointing.rsi
     state: big_arrow_queen
+
+- type: entity
+  parent: RMCPointingArrowBig
+  id: RMCPointingArrowSquad
+  save: false
+  components:
+  - type: Sprite
+    state: big_arrow_grey

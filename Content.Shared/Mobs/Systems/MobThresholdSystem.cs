@@ -1,10 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Events;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -377,9 +380,15 @@ public sealed class MobThresholdSystem : EntitySystem
         if (!threshold.TriggersAlerts)
             return;
 
-        if (!threshold.StateAlertDict.TryGetValue(currentMobState, out var currentAlert))
+        var hasIncap = TryGetIncapThreshold(target, out var healthMax, threshold);
+        var state = currentMobState;
+
+        if (hasIncap && HasComp<InCriticalGraceComponent>(target) && damageable.TotalDamage > healthMax)
+            state = MobState.Critical;
+
+        if (!threshold.StateAlertDict.TryGetValue(state, out var currentAlert))
         {
-            Log.Error($"No alert alert for mob state {currentMobState} for entity {ToPrettyString(target)}");
+            Log.Error($"No alert alert for mob state {state} for entity {ToPrettyString(target)}");
             return;
         }
 
@@ -391,7 +400,7 @@ public sealed class MobThresholdSystem : EntitySystem
 
         string? healthMessage = null;
 
-        if (threshold.DisplayDamageInAlert && TryGetIncapThreshold(target, out var healthMax, threshold))
+        if (threshold.DisplayDamageInAlert && hasIncap && healthMax != null)
         {
             int healthCurrent = (int)healthMax - (int)damageable.TotalDamage;
             healthMessage = healthCurrent + " / " + healthMax;
@@ -400,6 +409,16 @@ public sealed class MobThresholdSystem : EntitySystem
         if (alertPrototype.SupportsSeverity)
         {
             var severity = _alerts.GetMinSeverity(currentAlert);
+
+            var ev = new BeforeAlertSeverityCheckEvent(currentAlert, severity);
+            RaiseLocalEvent(target, ev);
+
+            if (ev.CancelUpdate)
+            {
+                _alerts.ShowAlert(target, ev.CurrentAlert, ev.Severity);
+                return;
+            }
+
             if (TryGetNextState(target, currentMobState, out var nextState, threshold) &&
                 TryGetPercentageForState(target, nextState.Value, damageable.TotalDamage, out var percentage))
             {

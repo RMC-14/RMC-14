@@ -1,0 +1,13 @@
+- type: emoteSounds
+  id: RMCUnisexFeroxi
+  sounds:
+    Gnash:
+      collection: FeroxiGnashes
+
+- type: emoteSounds
+  parent: [RMCUnisexFeroxi, RMCMaleHuman]
+  id: RMCMaleFeroxi
+
+- type: emoteSounds
+  parent: [RMCUnisexFeroxi, RMCFemaleHuman]
+  id: RMCFemaleFeroxi

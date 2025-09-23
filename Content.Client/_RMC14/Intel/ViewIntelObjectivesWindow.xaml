@@ -1,0 +1,112 @@
+﻿<controls:ViewIntelObjectivesWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Intel"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-ui-intel-title}"
+    MinSize="620 570">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#141414" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BackgroundColor="#252525"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="0 0 0 2" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="6 4">
+                    <RichTextLabel 
+                        Text="{Loc rmc-ui-intel-header}" 
+                        HorizontalAlignment="Center"
+                        StyleClasses="LabelTitle" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="8">
+                    <BoxContainer Orientation="Horizontal">
+                        <RichTextLabel Text="{Loc rmc-ui-intel-tech-points}" />
+                        <Control HorizontalExpand="True" />
+                        <RichTextLabel Text="{Loc rmc-ui-intel-tier}" />
+                    </BoxContainer>
+                    <ui:BlueHorizontalSeparator />
+                    <BoxContainer Orientation="Horizontal">
+                        <RichTextLabel Name="CurrentPointsLabel" Access="Public" />
+                        <Control HorizontalExpand="True" />
+                        <RichTextLabel Name="CurrentTierLabel" Access="Public" />
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="8">
+                    <BoxContainer Orientation="Horizontal">
+                        <RichTextLabel Text="{Loc rmc-ui-intel-objectives}" />
+                        <Control HorizontalExpand="True" />
+                        <Label Name="TotalPointsLabel" Access="Public" />
+                    </BoxContainer>
+                    <ui:BlueHorizontalSeparator />
+                    <BoxContainer Orientation="Vertical" Margin="4 0" SeparationOverride="3">
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-documents}" MinWidth="220" />
+                            <Label Name="DocumentsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" Visible="False">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-upload-data}" MinWidth="220" />
+                            <Label Name="UploadDataLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-retrieve-items}" MinWidth="220" />
+                            <Label Name="RetrieveItemsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-rescue-survivors}" MinWidth="220" />
+                            <Label Name="RescueSurvivorsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-recover-corpses}" MinWidth="220" />
+                            <Label Name="RecoverCorpsesLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-colony-comms}" MinWidth="220" />
+                            <Label Name="ColonyCommunicationsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-colony-power}" MinWidth="220" />
+                            <Label Name="ColonyPowerLabel" Access="Public" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="8">
+                    <RichTextLabel Text="{Loc rmc-ui-intel-clues}" />
+                    <ui:BlueHorizontalSeparator />
+                    <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" />
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:ViewIntelObjectivesWindow>

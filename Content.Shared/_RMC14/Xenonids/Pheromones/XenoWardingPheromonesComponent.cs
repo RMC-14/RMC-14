@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,8 +15,8 @@ public sealed partial class XenoWardingPheromonesComponent : Component
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones_hud.rsi"), "warding");
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Multiplier;
+    public ProtoId<DamageGroupPrototype> CritDamageGroup = "Brute";
 
     [DataField, AutoNetworkedField]
-    public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Bloodloss", "Asphyxiation" };
+    public FixedPoint2 Multiplier;
 }

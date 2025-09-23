@@ -20,12 +20,13 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      choices: { CMHandheldDefense: 1 }
+      takeOne: CMHandheldDefense
       entries:
-    #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
+      - id: RMCTesla
+      - id: RMCSentryFire
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
       entries:
@@ -35,8 +36,8 @@
       entries:
     #- id: CMAirlockCircuitBoard
     #  points: 2
-    #- id: CMAPCCircuitBoard
-    #  points: 2
+      - id: CMAPCElectronics
+        points: 2
       - id: CMEntrenchingTool
         points: 2
       - id: RMCPowerCellHigh
@@ -49,8 +50,8 @@
         name: plasteel x10
         points: 7
         recommended: true
-    #- id: CMPlasticExplosive
-    #  points: 3
+      - id: RMCExplosivePlastic
+        points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
         recommended: true
@@ -72,14 +73,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGMFragAirburstPacket3
-    #  points: 18
-    #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  points: 18
-    #- id: CMM74AGMSmokeAirburstPacket3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacket3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 18
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 18
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBox4
     #  points: 18
     #- id: CMM40MFHSMetalFoamGrenade
@@ -87,6 +88,8 @@
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
+        points: 6
+      - id: CMMagazineRifleM4SPRExt
         points: 6
       - id: CMMagazineSMGM63AP
         points: 6
@@ -98,8 +101,18 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #   points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      - id: RMCMagazinePistolM1984HP
+        points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -112,14 +125,14 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM240IncineratorUnit
-    #  points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 24
+      - id: RMCCaseFlamer
+        points: 12
+      - id: RMCM85A1Case
+        points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
     - name: Clothing Items
@@ -132,8 +145,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 4
+      - id: RMCPouchFuelTank
+        points: 4
     #- id: CMSlingPouch
     #  points: 6
       - id: RMCPouchGeneralLarge
@@ -144,14 +157,16 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
         points: 8
       - id: RMCWhistle
         points: 3
+      - id: RMCSynthResetKey
+        points: 10
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -161,9 +176,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 12
+      entries:
+      - id: RMCVisorMedical
+        points: 12
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
@@ -198,6 +215,16 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Tech
+      - id: RMCArmorHelmetM10Welding
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
@@ -229,9 +256,8 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
-      - id: CMBeltMortar
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
         # mandatory: true, TODO allow vendors to mark entries as mandatory
@@ -264,14 +290,19 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         name: Tools pouch (Full)
+      - id: RMCPouchEngineerKit
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
@@ -299,6 +330,9 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    hackable: true
     jobs:
     - CMCombatTech
     sections:
@@ -309,7 +343,7 @@
         amount: 4
       - id: RMCCableCoil
         amount: 4
-      - id: ClothingEyesGlassesMeson # TODO RMC14 welding goggles
+      - id: RMCWeldingGoggles
         amount: 2
       - id: RMCEngineerKit
         amount: 2
@@ -329,3 +363,11 @@
         amount: 4
       - id: CMWelderSmall
         amount: 2
+      - id: CMLightReplacer
+        amount: 4
+    # - name: Utility
+    #   entries:
+    #   - id: Sentry Gun Network Laptop
+    #     amount: 4
+    #   - id: Sentry Gun Network Encryption KEy
+    #     amount: 4

@@ -1,0 +1,38 @@
+- type: entity
+  parent: RMCBaseRockDestructible
+  id: RMCBoulderLarge
+  name: boulder
+  description: A large rock. It's not cooking anything.
+  placement:
+    mode: SnapgridBorder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/large_boulder.rsi
+    state: boulder_large1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCBoulderLarge
+  id: RMCBoulderLarge1
+  components:
+  - type: Sprite
+    state: boulder_large2
+
+- type: entity
+  parent: RMCBoulderLarge
+  id: RMCBoulderWide
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/wide_boulder.rsi
+    state: boulder1

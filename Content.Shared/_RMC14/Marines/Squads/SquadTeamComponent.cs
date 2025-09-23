@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared.Access;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,15 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField(required: true)]
     public Color Color;
+
+    /// <summary>
+    ///     More accessible color option <see cref = "Color" /> if it is not visible enough in certain situations.
+    /// </summary>
+    [DataField]
+    public Color? AccessibleColor;
+
+    [DataField(required: true)]
+    public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true)]
     public SpriteSpecifier Background;
@@ -40,6 +50,15 @@ public sealed partial class SquadTeamComponent : Component
     public bool CanSupplyDrop = true;
 
     [DataField]
+    public List<SquadArmorLayers> BlacklistedSquadArmor = new();
+
+    [DataField]
     [Access(typeof(SquadLeaderTrackerSystem))]
     public FireteamData Fireteams = new();
+
+    [DataField]
+    public string Group = "UNMC";
+
+    [DataField]
+    public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
 }

@@ -1,0 +1,10 @@
+﻿- type: entity
+  name: M83 grenade launcher
+  parent: WeaponLauncherM83
+  id: WeaponLauncherM83HEFA
+  description: A heavy, 10-shot grenade launcher used by the HEFA Knights.
+  suffix: HEFA Knight
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CMGrenadeFrag

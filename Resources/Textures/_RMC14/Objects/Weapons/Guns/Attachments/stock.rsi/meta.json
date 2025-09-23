@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/stock.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/stock.dmi, all m42a2 wooden stock camo types edited by SG6732",
   "size": {
     "x": 32,
     "y": 32
@@ -62,9 +62,6 @@
       "name": "riflestock"
     },
     {
-      "name": "m79-stock"
-    },
-    {
       "name": "r4t-stock"
     },
     {
@@ -111,9 +108,6 @@
     },
     {
       "name": "riflestock_a"
-    },
-    {
-      "name": "m79-stock_a"
     },
     {
       "name": "44stock-on"
@@ -179,6 +173,9 @@
       "name": "tactical_stock"
     },
     {
+      "name": "tactical_stock_a"
+    },
+    {
       "name": "m44r_stock"
     },
     {
@@ -231,6 +228,18 @@
     },
     {
       "name": "tactical_stock_221"
+    },
+    {
+      "name": "mp5_stock"
+    },
+    {
+      "name": "mp5_stock-on"
+    },
+    {
+      "name": "mp5_stock_a"
+    },
+    {
+      "name": "mp5_stock_a-on"
     }
   ]
 }

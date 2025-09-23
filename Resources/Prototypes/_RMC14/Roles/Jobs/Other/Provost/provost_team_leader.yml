@@ -1,0 +1,102 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostTeamLeader
+  name: rmc-job-name-corp-provost-team-leader
+  description: rmc-ghost-role-information-provost-squad-description
+  playTimeTracker: CMJobProvostTeamLeader
+  ranks:
+    RMCRankProvostProvostTeamLeader: []
+  startingGear: RMCGearProvostTeamLeader
+  icon: RMCJobIconProvostTeamLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: Provost Team Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillMedical: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillIntel: 1
+        RMCSkillFirearms: 1
+    - type: MarineOrders
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_pvl
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-team-leader
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidProvostTeamLeader
+  name: provost ghost role team leader
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostTeamLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostTeamLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-team-leader
+    description: rmc-ghost-role-information-provost-squad-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostTeamLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadProvost
+
+- type: startingGear
+  id: RMCGearProvostTeamLeader
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetHighCommandProvostLead
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCArmorProvostSeniorFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponShotgunM890
+    id: RMCIDCardProvostTeamLeader
+    belt: RMCMK80BeltFilled
+    back: CMSatchelSecurityFilledProvostEnforcer
+    pocket1: RMCPouchShotgunLargeBeanbag
+    pocket2: RMCPouchShotgunLargeSlugs # TODO RMC14 big tear gas grenade box, riot shield
+
+- type: playTimeTracker
+  id: CMJobProvostTeamLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostTeamLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvl

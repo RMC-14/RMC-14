@@ -27,6 +27,7 @@
         heavy_6: ""
   - type: Appearance
   - type: Clickable
+  - type: InteractionOutline
   - type: Transform
     anchored: true
   - type: Physics

@@ -5,6 +5,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideCommunicationsTowers
   - type: Transform
     anchored: true
   - type: Physics
@@ -43,5 +46,15 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: sensor_tower
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCSensorTower
+  id: RMCSensorTowerOn
+  suffix: "On, No break chance"
+  components:
+  - type: SensorTower
+    state: On
+    breakChance: 0

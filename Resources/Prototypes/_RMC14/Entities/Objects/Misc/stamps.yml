@@ -20,32 +20,40 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampCO
-  name: CO's rubber stamp
-  components:
-  - type: Sprite
-    state: stamp-cap
-  - type: Stamp
-    stampedName: stamp-component-stamped-name-cm-co
-    stampedColor: "#e38e4f"
-    stampState: "paper_stamp-cap"
-
-- type: entity
-  parent: CMStampBase
-  id: CMStampASO
-  name: ASO's rubber stamp
+  id: CMStampXO
+  name: executive officer's rubber stamp
   components:
   - type: Sprite
     state: stamp-hop
   - type: Stamp
-    stampedName: stamp-component-stamped-name-cm-aso
+    stampedName: stamp-component-stamped-name-cm-xo
     stampedColor: "#3681bb"
+    stampState: "paper_stamp-cap"
+
+- type: entity
+  parent: CMStampXO
+  id: CMStampCO
+  name: commanding officer's rubber stamp
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-co
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampASO
+  name: auxiliary support officer's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-ce
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-aso
+    stampedColor: "#b0901b"
     stampState: "paper_stamp-hop"
 
 - type: entity
   parent: CMStampBase
   id: CMStampCMP
-  name: CMP's rubber stamp
+  name: Chief MP's rubber stamp
   components:
   - type: Sprite
     state: stamp-hos
@@ -56,8 +64,20 @@
 
 - type: entity
   parent: CMStampBase
+  id: CMStampMW
+  name: Military Warden's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-mw
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-mw
+    stampedColor: "#ac0316"
+    stampState: "paper_stamp-mw"
+
+- type: entity
+  parent: CMStampBase
   id: CMStampCMO
-  name: CMO's rubber stamp
+  name: chief medical officer's rubber stamp
   components:
   - type: Sprite
     state: stamp-cmo
@@ -69,7 +89,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampQM
-  name: QM's rubber stamp
+  name: quartermaster's rubber stamp
   components:
   - type: Sprite
     state: stamp-ro
@@ -79,16 +99,27 @@
     stampState: "paper_stamp-ro"
 
 - type: entity
-  parent: CMStampBase
+  parent: CMStampASO
   id: CMStampCE
-  name: CE's rubber stamp
+  name: chief engineer's rubber stamp
   components:
   - type: Sprite
     state: stamp-ce
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-ce
-    stampedColor: "#b0901b"
     stampState: "paper_stamp-ce"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampLiaison
+  name: corporate liaison rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-we_ya
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-cl
+    stampedColor: "#996600"
+    stampState: "paper_stamp-we_ya"
 
 # Simple
 
@@ -119,21 +150,19 @@
 # Admin Only
 
 - type: entity
-  parent: CMStampBase
+  parent: CMStampLiaison
   id: CMStampWeYa
-  name: WEYA rubber stamp
+  name: Weston-Yamada rubber stamp
+  suffix: Admin
   components:
-  - type: Sprite
-    state: stamp-we_ya
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-we-ya
-    stampedColor: "#996600"
-    stampState: "paper_stamp-we_ya"
 
 - type: entity
   parent: CMStampBase
   id: CMStampMarine
-  name: Marine rubber stamp
+  name: marine rubber stamp
+  suffix: Admin, UNMC
   components:
   - type: Sprite
     state: stamp-marine
@@ -145,7 +174,8 @@
 - type: entity
   parent: CMStampBase
   id: CMStampCMB
-  name: CMB rubber stamp
+  name: colony marshal bureau rubber stamp
+  suffix: Admin, CMB
   components:
   - type: Sprite
     state: stamp-cmb
@@ -153,3 +183,68 @@
     stampedName: stamp-component-stamped-name-cm-cmb
     stampedColor: "#b0901b"
     stampState: "paper_stamp-cmb"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampProvost
+  name: provost rubber stamp
+  suffix: Admin, Provost
+  components:
+  - type: Sprite
+    state: stamp-provost # update sprite
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-provost
+    stampedColor: "#cb0000"
+    stampState: "paper_stamp-provost"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampCLF
+  name: colony liberation front rubber stamp
+  suffix: Admin, CLF
+  components:
+  - type: Sprite
+    state: stamp-clf
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-clf
+    stampedColor: "#6B6B6B"
+    stampState: "paper_stamp-clf"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampSPP
+  name: socialist progressive peoples rubber stamp
+  suffix: Admin, SPP
+  components:
+  - type: Sprite
+    state: stamp-spp
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-spp
+    stampedColor: "#A70707"
+    stampState: "paper_stamp-spp"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampTSE
+  name: three suns empire rubber stamp
+  suffix: Admin, TSE
+  components:
+  - type: Sprite
+    state: stamp-tse
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-tse
+    stampedColor: "#BE601B"
+    stampState: "paper_stamp-tse"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampFreePress
+  name: free press rubber stamp
+  suffix: Admin, Press
+  components:
+  - type: Sprite
+    state: stamp-free-press
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-free-press
+    stampedColor: "#1e5bd2"
+    stampState: "paper_stamp-free-press"

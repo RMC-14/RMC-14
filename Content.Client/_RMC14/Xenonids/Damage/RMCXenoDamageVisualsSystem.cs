@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Damage;
@@ -24,19 +25,19 @@ public sealed class RMCXenoDamageVisualsSystem : VisualizerSystem<RMCXenoDamageV
         sprite.LayerSetVisible(layer, true);
 
         var state = component.States - level + 1;
-        if (AppearanceSystem.TryGetData(uid, RMCDamageVisuals.Downed, out bool downed) && downed)
+        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
         {
             sprite.LayerSetState(layer, $"{component.Prefix}_downed_{state}");
             return;
         }
 
-        if (AppearanceSystem.TryGetData(uid, RMCDamageVisuals.Fortified, out bool fortified) && fortified)
+        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Fortified, out bool fortified) && fortified)
         {
             sprite.LayerSetState(layer, $"{component.Prefix}_fortify_{state}");
             return;
         }
 
-        if (AppearanceSystem.TryGetData(uid, RMCDamageVisuals.Resting, out bool resting) && resting)
+        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
         {
             sprite.LayerSetState(layer, $"{component.Prefix}_rest_{state}");
             return;

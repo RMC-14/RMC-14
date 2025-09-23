@@ -1,0 +1,29 @@
+- type: rank
+  id: RMCRankVAIMercenary
+  name: VAI Mercenary
+  prefix: Merc.
+
+- type: rank
+  id: RMCRankVAIMedicalSpecialist
+  name: VAI Medical Specialist
+  prefix: Med.
+
+- type: rank
+  id: RMCRankVAIMachinegunner
+  name: VAI Machinegunner
+  prefix: MG.
+
+- type: rank
+  id: RMCRankVAIEngineeringSpecialist
+  name: VAI Engineering Specialist
+  prefix: Eng.
+
+- type: rank
+  id: RMCRankVAISynthetic
+  name: VAI Synthetic
+  prefix: Syn.
+
+- type: rank
+  id: RMCRankVAITeamLeader
+  name: VAI Team Leader
+  prefix: TL.

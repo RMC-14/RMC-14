@@ -7,6 +7,16 @@
   - "RMCAdminFax"
   - "AdminPDA"
   - "AdminHypo"
+  - "RMCPillAntiZed"
+  - "RMCBottleAntiZed"
+  - "RMCBlackGooGlassFull"
+  - "RMCBlackGooGlassAntiZedFull"
+  - "RMCPlushieAlec"
+  - "RMCPlushieNyx"
+  - "RMCPlushieXippy"
+  - "RMCPlushieProvost"
+  - "RMCPlushieCrow"
+  - "RMCPlushieMotivationalMoth"
 
 - id: "AllowApprovedDeniedStamps" # These two stamps specifically are not a problem and should be left untouched.
   type: "Whitelist"
@@ -18,7 +28,16 @@
   type: "Whitelist"
   on_paths:
   - "admin_fax.yml"
+  - "admin_fax_old.yml"
   - "dev_map.yml"
   entityMatchers:
   - ".*"
+
+- id: "AllowStampsOnWarshipMaps"
+  type: "Whitelist"
+  on_paths:
+  - "almayer.yml"
+  - "savannah.yml"
+  entityMatchers:
+  - "CMStamp.*" # All stamps.
 

@@ -61,7 +61,7 @@
       - WetFloorSign
 
 - type: entity
-  parent: BaseItem
+  parent: ClothingHeadBase
   id: CMWarningCone
   name: warning cone
   description: This cone is trying to warn you of something!
@@ -72,6 +72,8 @@
   - type: Item
     sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
     size: Small
+  - type: Clothing
+    sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 50
@@ -111,4 +113,11 @@
 
 - type: entity
   parent: SprayBottleSpaceCleaner
-  id: RMCSprayBottleSpaceCleaner # TODO RMC14
+  id: RMCSprayBottleSpaceCleaner
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi

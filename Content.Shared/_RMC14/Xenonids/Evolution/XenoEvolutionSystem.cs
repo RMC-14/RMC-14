@@ -3,10 +3,12 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -23,6 +25,8 @@ using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -55,10 +59,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private readonly IMapManager _map = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
     private TimeSpan _evolveSameCasteCooldown;
+    private TimeSpan _earlyEvoBoostBefore;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -100,6 +107,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -170,7 +178,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var ev = new XenoEvolutionDoAfterEvent(args.Choice);
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno)
+        {
+            BreakOnRest = false,
+        };
 
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
@@ -357,6 +368,28 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
 
             return false;
+        }
+
+
+        if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
+        {
+            var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+            if (_transform.GetGrid(coordinates) is not { } gridUid ||
+                !TryComp(gridUid, out MapGridComponent? grid))
+            {
+                return false;
+            }
+
+            if (!_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates) && comp.RestrictTime > _gameTicker.RoundDuration())
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-xeno-evolution-failed-early-weeds"),
+                    xeno,
+                    xeno,
+                    PopupType.MediumCaution
+                );
+                return false;
+            }
         }
 
         prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory);
@@ -706,8 +739,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 _audio.PlayEntity(comp.EvolutionReadySound, uid, uid);
                 continue;
             }
-
-            var gain = evoOverride ?? comp.PointsPerSecond + evoBonus;
+            var points = (_earlyEvoBoostBefore > _gameTicker.RoundDuration()) ? comp.EarlyPointsPerSecond : comp.PointsPerSecond;
+            var gain = evoOverride ?? points + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
                 if (needsOvipositor && comp.RequiresGranter && !hasGranter)

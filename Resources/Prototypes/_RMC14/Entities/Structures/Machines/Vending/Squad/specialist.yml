@@ -1,33 +1,75 @@
 # SPECIALIST
-
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSWSGear
-  name: ColMarTech squad weapons specialist gear rack
-  description: An automated gear rack for Squad Weapons Specialists.
+  abstract: true
+  id: RMCVendorWeaponsSpecialistGearBase
   components:
-  - type: RMCVendorSpecialist
-  - type: AccessReader
-    access:
-    - [ "CMAccessSpecPrep" ]
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
     jobs:
     - CMWeaponsSpecialist
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-demo
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-demo
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_demo
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-grenadier
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_grenadier
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_grenadier
       #  points: 0
       #- id: PyroSet
       #  points: 0
+      # Don't forget to give Pyro his own role name and icons
       - id: RMCScoutSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-scout
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-scout
+        isAppendPrefix: true
+        # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-sniper
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_sniper
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_sniper
+        linkedEntries:
+        - RMCAntiMaterielEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-anti-materiel-sniper
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-anti-materiel-sniper
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_anti_materiel_sniper
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_anti_materiel_sniper
+        linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -38,11 +80,13 @@
         points: 40
     - name: Extra Sniper Ammunition
       entries:
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
-#        points: 40
+      - id: CMMagazineSniperM96SFlak
+        points: 40
       - id: CMMagazineSniperM96SIncendiary
         points: 40
       - id: CMMagazineSniperM96S
+        points: 40
+      - id: RMCMagazineSniperXM43E1AntiMateriel
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:
@@ -70,14 +114,17 @@
         name: M40 HIDP Incendiary Grenades (x6)
         points: 40
         spawn: 6
-    #- id: M40HPDPWhitePhosphorusGrenadesx6
-    #  points: 40
-    #- id: M74AGMFFragmentationGrenadesx6
-    #  points: 40
-    #- id: M74AGMIIncendiaryGrenadesx6
-    #  points: 40
-    #- id: M74AGMSSmokeGrenadesx6
-    #  points: 20
+      #- id: M40HPDPWhitePhosphorusGrenadesx6
+      #  points: 40
+      - id: RMC40MMGrenadeM74AGMF
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMI
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMS
+        points: 20
+        spawn: 6
     - name: Extra Flamethrower Tanks
       entries: [ ]
     #- id: LargeIncineratorTank
@@ -86,6 +133,44 @@
     #  points: 40
     #- id: LargeIncineratorTankX BlueFlame
     #  points: 40
+
+- type: entity
+  parent: [ColMarTechBase, RMCVendorWeaponsSpecialistGearBase]
+  id: ColMarTechSWSGear
+  name: ColMarTech squad weapons specialist gear rack
+  description: An automated gear rack for Squad Weapons Specialists.
+  components:
+  - type: RMCVendorSpecialist
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
+
+- type: entity
+  parent: [BaseItem, RMCVendorWeaponsSpecialistGearBase]
+  id: RMCKitWeaponsSpecialist
+  name: specialist kit
+  description: A paper box. Open it and get a specialist kit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: CMAutomatedVendor
+    jobs:
+    - CMWeaponsSpecialist
 
 - type: entity
   parent: ColMarTechBase
@@ -120,10 +205,11 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -153,8 +239,12 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
@@ -164,14 +254,24 @@
       - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -186,8 +286,10 @@
         points: 15
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #- id: CMWeldingGoggles
+      - id: RMCPouchFuelTank
+        points: 5
+      - id: RMCWeldingGoggles
+        points: 3
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
@@ -199,12 +301,12 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 10
-    #- id: CMFultonDeviceStack
-    #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
     - name: Binoculars
@@ -214,9 +316,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #- id: CMWeldingVisor
+      entries:
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC

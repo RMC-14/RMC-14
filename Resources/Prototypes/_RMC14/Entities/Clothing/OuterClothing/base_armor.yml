@@ -1,6 +1,6 @@
 # base
 - type: entity
-  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor ]
+  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseArmor
   abstract: true
   components:
@@ -15,11 +15,17 @@
     blacklist:
       components:
       - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
-  - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true
@@ -31,6 +37,7 @@
       - RMCLighter
       - Bible
       - Gun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -39,16 +46,17 @@
       - Knife
       - RMCG8Pouch
       - RMCMacheteScabbard
+      - RMCScabbardKatana
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
+      - RMCM82FHolster
       - RMCSmartPistolHolster
       - RMCSMGHolster
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
-      - RMCMotionDetector
+      - RMCDetector
       - RMCMatebaHolster
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -82,6 +90,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -92,9 +101,8 @@
       - RMCG8Pouch
       - Crowbar
       - RMCMacheteScabbard
-      #TODO katana scabbard
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCScabbardKatana
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -103,16 +111,20 @@
   - type: AllowSuitStorage
     whitelist:
       components:
-      - BallisticAmmoProvider #Note should get all maganizes
       - SmartGun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
       - Knife
       - RMCG8Pouch
       #TODO mines
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCDetector
+      #Note should get all magazines and ignore guns
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
 
 - type: entity
   abstract: true
@@ -126,6 +138,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -142,9 +155,8 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
-      #TODO Ceremonial Sword
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCCeremonialSword
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -158,6 +170,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -166,8 +179,7 @@
       - Grenade
       - Flashlight
       - Machete
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCDetector
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
@@ -187,11 +199,13 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
+  - type: FixedItemSizeStorage
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: IgnoreContentsSize
     items:
       tags:
@@ -220,6 +234,7 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
+  - type: RMCStorageEjectHand
 
 - type: entity
   parent: RMCBaseMarineArmor
@@ -245,7 +260,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
@@ -254,18 +270,25 @@
   - type: RMCSuitLight
   - type: PointLight
     enabled: false
-    radius: 4
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
     softness: 5
     autoRot: true
     netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
   - type: HandheldLight
     addPrefix: true
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
     turnOffSound:
-      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

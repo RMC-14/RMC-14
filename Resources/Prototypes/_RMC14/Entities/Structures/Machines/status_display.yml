@@ -1,0 +1,95 @@
+﻿- type: entity
+  id: RMCStatusDisplay
+  name: status display
+  description: A monitor depicting the ship's current status. It flickers every so often.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: frame
+    - map: [ "screen" ]
+      state: bluealert
+      visible: false
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.HourTens" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.HourOnes" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.Separator" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.MinuteTens" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.MinuteOnes" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCAlertLevelsVisuals.Alert:
+        screen:
+          Green: { visible: false }
+          Blue: { state: bluealert, visible: true }
+          Red: { state: redalert, visible: true }
+          Delta: { state: evac, visible: true }
+        enum.RMCAlertLevelDisplayVisualLayers.HourTens:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.HourOnes:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.Separator:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.MinuteTens:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.MinuteOnes:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+  - type: RMCAlertLevelDisplay
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  id: RMCStatusDisplayProp
+  name: status display
+  description: A monitor depicting the ship's current status. It flickers every so often.
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    drawdepth: WallMountedItems
+    state: frame
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  id: RMCStatusDisplayLarge
+  name: large status display
+  description: A large wall mounted monitor. It doesnt seem to work properly.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display_large.rsi
+    drawdepth: WallMountedItems
+    state: frame
+    offset: 0.5, 0.0
+  - type: Appearance
+  - type: WallMount
+    arc: 360

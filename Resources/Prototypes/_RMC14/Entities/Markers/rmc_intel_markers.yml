@@ -1,0 +1,48 @@
+﻿- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: RMCSpawnerIntelBase
+  name: intel spawner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+
+- type: entity
+  parent: RMCSpawnerIntelBase
+  id: RMCSpawnerIntelClose
+  name: objective landmark close
+  components:
+  - type: Sprite
+    state: intel_close
+  - type: IntelSpawner
+    intelType: Close
+
+- type: entity
+  parent: RMCSpawnerIntelBase
+  id: RMCSpawnerIntelMedium
+  name: objective landmark medium
+  components:
+  - type: Sprite
+    state: intel_medium
+  - type: IntelSpawner
+    intelType: Medium
+
+- type: entity
+  parent: RMCSpawnerIntelBase
+  id: RMCSpawnerIntelFar
+  name: objective landmark far
+  components:
+  - type: Sprite
+    state: intel_far
+  - type: IntelSpawner
+    intelType: Far
+
+- type: entity
+  parent: RMCSpawnerIntelBase
+  id: RMCSpawnerIntelScience
+  name: objective landmark science
+  components:
+  - type: Sprite
+    state: intel_sci
+  - type: IntelSpawner
+    intelType: Science

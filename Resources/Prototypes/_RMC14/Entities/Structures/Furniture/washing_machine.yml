@@ -14,13 +14,13 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        density: 190
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 155
         mask:
         - MachineMask
         layer:
-        - MachineLayer
+        - MobMask
   - type: Clickable
   - type: InteractionOutline
   - type: Damageable
@@ -63,6 +63,7 @@
         enum.OpenableVisuals.Layer:
           True: { state: washing_machine_open }
           False: { state: washing_machine_closed }
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMWashingMachine

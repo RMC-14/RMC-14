@@ -1,23 +1,48 @@
 ﻿<Document>
-  #RMC-14 Guidebook
+  # RMC-14 Guidebook
 
   Welcome to RMC-14.
 
-  This is a MRP server inspired by CM13, in the new SS14 engine!
+  This is a MRP asymmetric game!
 
   The guidebook, roadmap and rules for the game can be found on the lobby screen, and at any point in the escape menu.
 
   Click any of the tabs on the left to learn about RMC14 and it's unique content.
 
   Be sure to read the rules if you haven't already.
-  - [textlink="The rules" link="CMOverview"]
+  - [textlink="The rules" link="RMCOverview"]
 
-  New to RMC-14 or have no CM13 experience? Be careful! A lot of mechanics and values are not the same as SS14.
-  (It's recomended to read the guidebook and learn basic controls from another server if this is your first time in SS14.)
+  New to RMC-14, or SS14-style games? Be careful! A lot of mechanics and values are not the same as these games.
   - [textlink="New player guide!" link="RMCGuideNewPlayer"]
+  - [textlink="Your first day as a rifleman!" link="RMCGuideRoleRifleman"]
+  - [textlink="So you've just been born into the hive! Now what?" link="RMCGuideRoleDrone"]
 
-  Have some experience? Check out these guidebook pages!
+  ## Have some experience? Check out these guidebook pages!
+
+  Anyone is free to add guides to this page, either through the discord or GitHub.
+
+  Many of these guides are also accessible by examining the role or item they're related to!
+
+  ### Marines
+
+  [bold]Roles[/bold]
   - [textlink="Medical" link="RMCMedical"]
-  - [textlink="Medicines" link="CMMedicine"]
   - [textlink="Requisitions" link="RMCRequisitions"]
+  - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
+  - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
+  - [textlink="Survivor" link="RMCSurvivor"]
+  - [textlink="Smart Gun Operator" link="RMCGuideRoleSGO"]
+
+  [bold]Structures[/bold]
+  - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
+
+  ### Xenonids
+
+  [bold]Roles[/bold]
+  - [textlink="Castes" link="RMCGuideXenonidRoles"]
+
+  [bold]Structures[/bold]
+  - [textlink="Hive Structures" link="RMCGuideHiveStructures"]
+  - [textlink="Resin Holes" link="RMCGuideResinHoles"]
+
 </Document>

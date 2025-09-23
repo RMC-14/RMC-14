@@ -17,3 +17,18 @@
   id: RMCNightVision
   kind: source
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
+
+- type: shader
+  id: RMCBlurryVisionX
+  kind: source
+  path: "/Textures/_RMC14/Shaders/blurryx.swsl"
+
+- type: shader
+  id: RMCAuraOutline
+  kind: source
+  path: "/Textures/Shaders/outline.swsl"
+  params:
+    outline_color: "#000000FF"
+    light_boost: 4.0
+    light_gamma: 1.0
+    light_whitepoint: 1.0

@@ -31,7 +31,7 @@ public sealed class DialogSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         if (option.Event != null)
-            RaiseLocalEvent(ent, ref option.Event);
+            RaiseLocalEvent(ent, ref option.Event, true);
     }
 
     private void OnDialogInput(Entity<DialogComponent> ent, ref DialogInputBuiMsg args)
@@ -82,21 +82,24 @@ public sealed class DialogSystem : EntitySystem
         OpenOptions(actor, actor, title, options, message);
     }
 
-    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false)
+    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
         dialog.Message = new DialogOption(message, ev);
         dialog.InputEvent = ev;
         dialog.LargeInput = largeInput;
+        dialog.CharacterLimit = characterLimit;
+        dialog.AutoFocus = autoFocus;
+
         Dirty(target, dialog);
 
         _ui.TryOpenUi(target, DialogUiKey.Key, actor);
     }
 
-    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false)
+    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
     {
-        OpenInput(actor, actor, message, ev, largeInput);
+        OpenInput(actor, actor, message, ev, largeInput, characterLimit, autoFocus);
     }
 
     public void OpenConfirmation(EntityUid target, EntityUid actor, string title, string message, object ev)

@@ -55,6 +55,6 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
             return;
 
         if (weapon.WidePrimary)
-                _melee.ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
+            _melee.ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
     }
 }

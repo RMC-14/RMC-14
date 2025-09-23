@@ -14,29 +14,34 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
-    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
-    - name: Police Set (Mandatory)
-      takeAll: CMPoliceSet
-      entries:
-      - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
       - id: CMHeadsetMPO
       - id: CMBootsBlackFilled
+      - id: CMGlassesSecurity
+      - id: CMBeltSecurityMPFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10MP
     - name: Armor
-      takeAll: CMArmor
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM2MP
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadBeretRed
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
-#     - id: Combat Revolver Gun case
-#     - id: M1984 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -70,8 +75,15 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
 
 # WARDEN
 - type: entity
@@ -90,26 +102,34 @@
     - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
-      takeAll: CMPoliceSet
+      takeAll: RMCMPSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
-      - id: CMHeadsetCMP
+      - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10MP
     - name: Armor
-      takeAll: CMArmor
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3Warden
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadCapWarden
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
-#     - id: Combat Revolver Gun case
-#     - id: M1984 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -143,5 +163,11 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP

@@ -1,0 +1,77 @@
+﻿- type: entity
+  parent: RMCNanoMed
+  id: RMCVendorLifeboatMedical
+  name: lifeboat medical cabinet
+  description: A wall-mounted cabinet containing medical supplies vital to survival. While better equipped, it can only refill basic supplies.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Lifeboat/lifeboat_gadgets.rsi
+    layers:
+    - state: "medcab"
+  - type: CMSolutionRefiller
+    current: 500
+    max: 500
+  - type: CMAutomatedVendor
+    hackable: false
+    sections:
+    - name: Autoinjectors
+      entries:
+      # - id: CMPainStopAutoinjector
+      #   amount: 8
+      - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 8
+    - name: Devices
+      entries:
+      - id: CMHealthAnalyzer
+        amount: 8
+    - name: Field Supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 8
+      - id: CMTraumaKit10
+        amount: 8
+      - id: CMOintment10
+        amount: 8
+      - id: CMGauze10
+        amount: 8
+      # - id: CMMedicalSplints5
+      #   amount: 8
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCVendorLifeboatWall
+  name: lifeboat wall cabinet
+  description: A wall-mounted emergency cabinet containing survival supplies.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Lifeboat/lifeboat_gadgets.rsi
+    layers:
+    - state: "supplycab"
+  - type: CMAutomatedVendor
+    hackable: false
+    sections:
+    - name: Food and beverage
+      entries:
+       - id: CMMRE
+         amount: 25
+       - id: CMDrinkWEYAWaterBottle30
+         amount: 25
+    - name: Utility
+      entries:
+      - id: CMPackFlare
+        amount: 5
+      - id: RMCM5Bayonet
+        amount: 8
+      - id: RMCRadioHandheldAlmayer
+        amount: 5
+#      - id: # deck of playing cards
+#        amount: 5
+    - name: Clothing
+      entries:
+      - id: CMMaskGas
+        amount: 15
+      - id: CMMaskCoif
+        amount: 15

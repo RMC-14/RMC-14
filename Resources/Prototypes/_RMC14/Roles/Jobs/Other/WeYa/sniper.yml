@@ -1,0 +1,126 @@
+# Sniper
+- type: job
+  parent: CMJobBase
+  id: RMCPMCSniper
+  name: rmc-job-name-pmc-sniper
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCSniper
+  ranks:
+    RMCRankWeYaWeaponSpecialist: []
+  startingGear: RMCJobPMCSniper
+  icon: RMCJobIconPMCSniper
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Sniper Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 1
+    - type: SniperWhitelist
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-sniper
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCSniper
+  name: weya pmc ghost role sniper
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCSniper
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSniper
+  name: weya pmc sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCSniper
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCSniper
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-sniper
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCSniper
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCSniper
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMCSniper
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCSniper
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    shoes: RMCBootsPMCFilled
+    eyes: CMGlassesM42ScoutSight
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: RMCBeltHolsterSMGFilledSMGM63B2
+    suitstorage: RMCXM43E1AntiMaterielRifle # TODO RMC14: PMC re-sprite
+    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCExplosivePlastic
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMEmergencyAutoInjector
+    outerClothing:
+    - RMCMagazineSniperXM43E1AntiMateriel
+    - RMCMagazineSniperXM43E1AntiMateriel
+    pocket1:
+    - RMCMagazineSniperXM43E1AntiMateriel
+    - RMCMagazineSniperXM43E1AntiMateriel
+    - RMCMagazineSniperXM43E1AntiMateriel
+    - RMCMagazineSniperXM43E1AntiMateriel
+
+- type: playTimeTracker
+  id: RMCJobPMCSniper
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCSniper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_spec

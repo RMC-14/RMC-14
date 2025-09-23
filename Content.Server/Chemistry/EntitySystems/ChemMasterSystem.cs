@@ -1,11 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._RMC14.IconLabel;
 using Content.Server.Chemistry.Components;
-using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -14,6 +11,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Storage;
 using JetBrains.Annotations;
 using Robust.Server.Audio;
@@ -41,11 +39,7 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
-        // RMC - Add Icon labels to custom chemical containers
-        [Dependency] private readonly RMCIconLabelSystem _rmcIconLabel = default!;
-
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string PillPrototypeId = "CMPill";
+        private static readonly EntProtoId PillPrototypeId = "CMPill";
 
         public override void Initialize()
         {
@@ -58,6 +52,7 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
 
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterSetModeMessage>(OnSetModeMessage);
+            SubscribeLocalEvent<ChemMasterComponent, ChemMasterSortingTypeCycleMessage>(OnCycleSortingTypeMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterSetPillTypeMessage>(OnSetPillTypeMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterReagentAmountButtonMessage>(OnReagentButtonMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterCreatePillsMessage>(OnCreatePillsMessage);
@@ -81,7 +76,7 @@ namespace Content.Server.Chemistry.EntitySystems
             var bufferCurrentVolume = bufferSolution.Volume;
 
             var state = new ChemMasterBoundUserInterfaceState(
-                chemMaster.Mode, BuildInputContainerInfo(inputContainer), BuildOutputContainerInfo(outputContainer),
+                chemMaster.Mode, chemMaster.SortingType, BuildInputContainerInfo(inputContainer), BuildOutputContainerInfo(outputContainer),
                 bufferReagents, bufferCurrentVolume, chemMaster.PillType, chemMaster.PillDosageLimit, updateLabel);
 
             _userInterfaceSystem.SetUiState(owner, ChemMasterUiKey.Key, state);
@@ -94,6 +89,15 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             chemMaster.Comp.Mode = message.ChemMasterMode;
+            UpdateUiState(chemMaster);
+            ClickSound(chemMaster);
+        }
+
+        private void OnCycleSortingTypeMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterSortingTypeCycleMessage message)
+        {
+            chemMaster.Comp.SortingType++;
+            if (chemMaster.Comp.SortingType > ChemMasterSortingType.Latest)
+                chemMaster.Comp.SortingType = ChemMasterSortingType.None;
             UpdateUiState(chemMaster);
             ClickSound(chemMaster);
         }
@@ -150,6 +154,7 @@ namespace Content.Server.Chemistry.EntitySystems
             else // Container to buffer
             {
                 amount = FixedPoint2.Min(amount, containerSolution.GetReagentQuantity(id));
+                amount = FixedPoint2.Min(amount, bufferSolution.AvailableVolume);
                 _solutionContainerSystem.RemoveReagent(containerSoln.Value, id, amount);
                 bufferSolution.AddReagent(id, amount);
             }
@@ -212,13 +217,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
             _labelSystem.Label(container, message.Label);
 
-            /// RMC - Add Icon Label Text to custom pill bottle
-            if (TryComp(container, out IconLabelComponent? iconLabel))
-            {
-                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
-            }
-
-            for (var i = 0; i < number; i++)
+            for (var i = 0; i < message.Number; i++)
             {
                 var item = Spawn(PillPrototypeId, Transform(container).Coordinates);
                 _storageSystem.Insert(container, item, out _, user: user, storage);
@@ -265,13 +264,6 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             _labelSystem.Label(container, message.Label);
-
-            /// RMC - Add Icon Label Text to custom chemical bottle
-            if (TryComp(container, out IconLabelComponent? iconLabel))
-            {
-                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
-            }
-
             _solutionContainerSystem.TryAddSolution(soln.Value, withdrawal);
 
             // Log bottle creation by a user

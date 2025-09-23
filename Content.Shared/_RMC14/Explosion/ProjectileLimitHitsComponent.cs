@@ -3,11 +3,13 @@
 namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMClusterGrenadeSystem))]
 public sealed partial class ProjectileLimitHitsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Id;
+    public List<EntityUid> IgnoredEntities = new ();
+
+    [DataField, AutoNetworkedField]
+    public EntityUid OriginEntity;
 
     [DataField, AutoNetworkedField]
     public int Limit = 1;

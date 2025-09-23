@@ -199,7 +199,7 @@
   - type: Sprite
     layers:
     - state: scalpel_laser
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: MeleeWeapon
     damage:
       types:
@@ -215,8 +215,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_on }
           False: { state: scalpel_laser }
 
@@ -230,11 +230,11 @@
   - type: Sprite
     layers:
     - state: scalpel_laser_2
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_2_on }
           False: { state: scalpel_laser_2 }
 
@@ -248,11 +248,11 @@
   - type: Sprite
     layers:
     - state: scalpel_laser_3
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_3_on }
           False: { state: scalpel_laser_3 }
 
@@ -383,3 +383,10 @@
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
   - type: CMBoneGel
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bottle-of-bone-gel
+
+- type: entity
+  parent: CMBoneGel
+  id: RMCBoneGelEmpty
+  suffix: Empty # TODO RMC14

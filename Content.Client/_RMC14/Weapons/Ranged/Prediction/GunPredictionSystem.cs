@@ -3,7 +3,6 @@ using Content.Client.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 using Robust.Client.Player;
@@ -17,8 +16,7 @@ namespace Content.Client._RMC14.Weapons.Ranged.Prediction;
 
 public sealed class GunPredictionSystem : SharedGunPredictionSystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -59,12 +57,11 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnAfterSolve(ref PhysicsUpdateAfterSolveEvent ev)
     {
+        if (_timing.IsFirstTimePredicted)
+            return;
         var query = EntityQueryEnumerator<PredictedProjectileClientComponent>();
         while (query.MoveNext(out var uid, out var predicted))
         {
-            if (_timing.IsFirstTimePredicted)
-                continue;
-
             if (predicted.Coordinates is { } coordinates)
                 _transform.SetCoordinates(uid, coordinates);
 
@@ -74,10 +71,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnShootRequest(RequestShootEvent ev, EntitySessionEventArgs args)
     {
-        if (_timing.IsFirstTimePredicted)
-            return;
-
-        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, args.SenderSession);
+        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, null, args.SenderSession);
     }
 
     private void OnClientProjectileUpdateIsPredicted(Entity<PredictedProjectileClientComponent> ent, ref UpdateIsPredictedEvent args)

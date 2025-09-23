@@ -1,45 +1,165 @@
 - type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverMateba
   name: Mateba autorevolver custom
   description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
   - type: Gun
+    shotsPerBurst: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMateba
+  - type: Corrodible
+    isCorrodible: false
   - type: RevolverAmmoProvider
     whitelist:
       tags:
       - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCCartridgeRevolverMatebaHE
+      - RMCCartridgeRevolverMatebaHIAP
+      - RMCCartridgeRevolverMatebaHighImpact
       - RMCCartridgeRevolverMateba
-    proto: RMCCartridgeRevolverMateba
+    proto: RMCCartridgeRevolverMatebaHighImpact
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
   - type: GunDamageModifier
     multiplier: 1.5
   - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 4
+    recoilUnwielded: 4
     baseFireRate: 1.111
     scatterWielded: 8
+    scatterUnwielded: 20
+    burstScatterMult: 5
+    burstFireRateMultiplier: 3 #This + 0.1332 = perfect
+    modifiers:
+      Burst:
+        fireDelay: 0.1332 #0.2664
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.1
     accuracyMultiplierUnwielded: 0.75
   - type: Appearance
   - type: AttachableHolder
     slots:
-      rmc-aslot-barrel:
+      rmc-bslot-barrel:
         startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
-          - RMCAttachmentRecoilCompensator
           - RMCAttachmentMatebaStandard
+          - RMCAttachmentMatebaMarksman
+          - RMCAttachmentMatebaSnubNose
+      rmc-aslot-barrel:
+       whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-bslot-barrel: 0.215, 0.19
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Pistols/mateba/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Pistols/mateba/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Pistols/mateba/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Pistols/mateba/urban.rsi
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
+  - type: RMCBattleExecute
+
+- type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMatebaGold
+  name: golden Mateba autorevolver custom
+  description: Boasting a gold-plated frame and grips made of a critically-endangered rosewood tree, this heavily-customized Mateba revolver's pretentious design rivals only the power of its wielder. Fit for a king. Or a general.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        startingAttachable: RMCAttachmentMatebaStandardGolden
+        whitelist:
+          tags:
+          - RMCAttachmentMatebaStandardGolden
+          - RMCAttachmentMatebaMarksmanGolden
+          - RMCAttachmentMatebaSnubNoseGolden
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-bslot-barrel: 0.215, 0.19
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMatebaSpecial
+  name: Mateba autorevolver special
+  description: An old, heavily modified version of the Mateba Autorevolver. It sports a smooth wooden grip, and a much larger barrel to it's unmodified counterpart. It's clear that this weapon has been cared for over a long period of time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:
@@ -52,16 +172,11 @@
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Pistols/mateba/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Pistols/mateba/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Pistols/mateba/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Pistols/mateba/urban.rsi
+    camouflageVariations: {}
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
-  name: "Mateba speed loader (.454)"
+  name: "Mateba speed loader (.454)" #Base
   parent: BaseItem
   abstract: true
   components:
@@ -84,8 +199,9 @@
         ents: []
 
 - type: entity
-  parent: RMCBaseSpeedLoaderMateba
+  parent: RMCBaseSpeedLoaderMateba #Normal Loader
   id: RMCSpeedLoaderMateba
+  name: "Mateba speed loader (.454)"
   description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. Packs a devastating punch. This standard-variant is optimized for anti-armor.
   components:
   - type: Sprite
@@ -105,7 +221,84 @@
   - type: Appearance
 
 - type: entity
-  id: RMCCartridgeRevolverMateba
+  parent: RMCBaseSpeedLoaderMateba
+  id: RMCSpeedLoaderMatebaHighImpact #High impact
+  name: High Impact Mateba speed loader (.454).
+  description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. Packs a devastating punch. This high impact variant is optimized for anti-personnel. Don't point at anything you don't want to destroy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#63DAFF"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverMatebaHighImpact
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  parent: RMCBaseSpeedLoaderMateba
+  id: RMCSpeedLoaderMatebaHIAP #High impact Armor Piercing
+  name: High Impact Armor-Piercing Mateba speed loader (.454).
+  description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. Packs a devastating punch. This armor-piercing variant is optimized against armored targets at the cost of lower overall damage. Don't point at anything you don't want to destroy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#30C223"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverMatebaHIAP
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  parent: RMCBaseSpeedLoaderMateba
+  id: RMCSpeedLoaderMatebaHE #High Explosive (Brig gen+ people only like commander of the marine corps)
+  name: Mateba explosive speed loader (.454).
+  description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. There's an impact charge built into the bullet tip. Firing this at anything will result in a powerful explosion. Use with EXTREME caution.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#1E22BD"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverMatebaHE
+    capacity: 6
+  - type: Appearance
+
+#//////////////////////////////////////////////////////////////////////////////////////////
+
+- type: entity
+  id: RMCCartridgeRevolverMateba #Normal
   name: cartridge (.454)
   parent: CMCartridgePistolBase
   components:
@@ -117,9 +310,46 @@
     proto: RMCBulletMateba
 
 - type: entity
-  parent: CMBulletBase
+  id: RMCCartridgeRevolverMatebaHighImpact #High impact
+  name: cartridge (.454) HighImpact
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverMatebaHighImpact
+  - type: CartridgeAmmo
+    proto: RMCBulletMatebaHighImpact
+
+- type: entity
+  id: RMCCartridgeRevolverMatebaHIAP #High impact Armor Piercing
+  name: cartridge (.454) HIAP
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverMatebaHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletMatebaHighImpactArmorPiercing
+
+- type: entity
+  id: RMCCartridgeRevolverMatebaHE #High Explosive
+  name: cartridge (.454) HE
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverMatebaHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletMatebaHighExplosive
+
+- type: entity
+  parent: CMBulletBase #Base bullet
   id: RMCBulletMateba
   name: bullet (.454)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -127,14 +357,149 @@
         Piercing: 60
   - type: CMArmorPiercing
     amount: 20
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletMatebaHighImpact #High impact
+  name: bullet (.454) High Impact
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
+
+- type: entity
+  parent: RMCBulletMatebaHighImpact
+  id: RMCBulletMatebaHighImpactArmorPiercing #HIAP
+  name: bullet (.454) HIAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletMatebaHighExplosive #Explosive
+  name: bullet (.454) HIAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 100
+  - type: CMArmorPiercing
+    amount: 50
   - type: RMCStunOnHit
     maxRange: 4.5
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
 
+- type: entity
+  parent: BaseStorageItem
+  id: RMCMatebaCustomizationCase
+  name: mateba customization kit case
+  description: A wooden case used for storing the tools and parts needed to customize a Mateba revolver. Comes with three barrel lengths and the necessary key to swap them out.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    layers:
+    - state: matebacase
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    state: matebacase
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCAttachmentMatebaStandard
+      - RMCAttachmentMatebaMarksman
+      - RMCAttachmentMatebaSnubNose
+  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentMatebaStandard
+    - id: RMCAttachmentMatebaMarksman
+    - id: RMCAttachmentMatebaSnubNose
+
+
+- type: entity
+  parent: RMCMatebaCustomizationCase
+  id: RMCMatebaCustomizationCaseLuxury
+  name: luxurious mateba customization kit case
+  description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    layers:
+    - state: c_matebacase
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    state: c_matebacase
+  - type: FixedItemSizeStorage
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCAttachmentMatebaStandardGolden
+      - RMCAttachmentMatebaMarksmanGolden
+      - RMCAttachmentMatebaSnubNoseGolden
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentMatebaStandardGolden
+    - id: RMCAttachmentMatebaMarksmanGolden
+    - id: RMCAttachmentMatebaSnubNoseGolden
+
+
 - type: Tag
   id: RMCSpeedLoaderMateba
 
 - type: Tag
+  id: RMCSpeedLoaderMatebaHighImpact
+
+- type: Tag
+  id: RMCSpeedLoaderMatebaHIAP
+
+- type: Tag
+  id: RMCSpeedLoaderMatebaHE
+
+- type: Tag
   id: RMCCartridgeRevolverMateba
+
+- type: Tag
+  id: RMCCartridgeRevolverMatebaHighImpact
+
+- type: Tag
+  id: RMCCartridgeRevolverMatebaHIAP
+
+- type: Tag
+  id: RMCCartridgeRevolverMatebaHE
+
+- type: Tag
+  id: RMCMateba

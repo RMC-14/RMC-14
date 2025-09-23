@@ -1,14 +1,25 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -16,6 +27,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -25,6 +37,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
@@ -32,43 +45,97 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
+    private readonly HashSet<EntityUid> _intersecting = new();
 
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private EntityQuery<ResinSlowdownModifierComponent> _slowResinQuery;
+    private EntityQuery<ResinSpeedupModifierComponent> _fastResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
+    private EntityQuery<HiveMemberComponent> _hiveQuery;
 
     public override void Initialize()
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _slowResinQuery = GetEntityQuery<ResinSlowdownModifierComponent>();
+        _fastResinQuery = GetEntityQuery<ResinSpeedupModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
+        _hiveQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
-        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
+        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
         SubscribeLocalEvent<XenoWeedsComponent, EntityTerminatingEvent>(OnWeedsTerminating);
+        SubscribeLocalEvent<XenoWeedsComponent, MapInitEvent>(OnWeedsMapInit);
+        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, ExaminedEvent>(OnWeedsExamined);
+
+        SubscribeLocalEvent<XenoWallWeedsComponent, ComponentRemove>(OnWallWeedsRemove);
+        SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsRemove);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
         SubscribeLocalEvent<AffectableByWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
-
-        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
-        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
+        SubscribeLocalEvent<AffectableByWeedsComponent, XenoOvipositorChangedEvent>(WeedsOvipositorChanged);
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
 
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, StartCollideEvent>(OnResinSlowdownStartCollide);
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, EndCollideEvent>(OnResinSlowdownEndCollide);
+
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, StartCollideEvent>(OnResinSpeedupStartCollide);
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, EndCollideEvent>(OnResinSpeedupEndCollide);
+
+        SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
+
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+    }
+
+    private void OnWeedsExamined(Entity<XenoWeedsComponent> weeds, ref ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (weeds.Comp.FruitGrowthMultiplier == 1.0f)
+            return;
+
+        using (args.PushGroup(nameof(XenoWeedsComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-xeno-fruit-weed-boost", ("percent", (int)(weeds.Comp.FruitGrowthMultiplier * 100))));
+        }
+
+    }
+
+    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
+    {
+        if (_net.IsServer && !args.Anchored)
+            QueueDel(weeds);
+    }
+
+    private void OnModifierShutdown<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
+    {
+        if (!TryComp(ent, out PhysicsComponent? phys))
+            return;
+
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void OnWeedsTerminating(Entity<XenoWeedsComponent> ent, ref EntityTerminatingEvent args)
@@ -79,6 +146,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             {
                 weeds.Spread.Remove(ent);
                 Dirty(ent.Comp.Source.Value, weeds);
+            }
+
+            foreach (var weededEntity in ent.Comp.LocalWeeded)
+            {
+                _appearance.SetData(weededEntity, WeededEntityLayers.Layer, false);
             }
 
             return;
@@ -101,20 +173,39 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         ent.Comp.Spread.Clear();
+        Dirty(ent);
     }
 
-    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
+    private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
     {
-        if (_net.IsServer && !args.Anchored)
-            QueueDel(weeds);
+        foreach (var intersecting in _physics.GetEntitiesIntersectingBody(ent, (int) CollisionGroup.MobLayer))
+        {
+            if (_affectedQuery.TryComp(intersecting, out var affected) && !affected.OnXenoWeeds)
+                _toUpdate.Add(intersecting);
+        }
     }
 
-    private void OnWeedsShutdown(Entity<XenoWeedsComponent> ent, ref ComponentShutdown args)
+    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
     {
-        if (!TryComp(ent, out PhysicsComponent? phys))
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnWallWeedsRemove<T>(Entity<XenoWallWeedsComponent> ent, ref T args)
+    {
+        if (!TryComp(ent.Comp.Weeds, out XenoWeedsComponent? weeds))
             return;
 
-        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
+        weeds.Spread.Remove(ent);
+        Dirty(ent.Comp.Weeds.Value, weeds);
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -133,44 +224,156 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(ent, out var physicsComponent))
             return;
 
-        var speed = 0.0f;
+        var speedWeeds = 0.0f;
+        var speedResin = 0.0f;
         var isXeno = _xenoQuery.HasComp(ent);
+        //Checks hive for applying slows now
+        //Weed speedup only effects xenos, but slowdown does not hurt hive mems
+        //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems
+        _hiveQuery.TryComp(ent, out var hive);
 
-        var any = false;
-        var entries = 0;
-        foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
+        var anyWeeds = false;
+        var anySlowResin = false;
+        var anyFastResin = false;
+        var friendlyWeeds = false;
+        var entriesResin = 0;
+        var entriesWeeds = 0;
+
+        _intersecting.Clear();
+        _physics.GetContactingEntities((ent, physicsComponent), _intersecting);
+
+        if (TryComp(ent, out TransformComponent? transform) &&
+            transform.Anchored)
         {
+            var anchoredQuery = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
+            while (anchoredQuery.MoveNext(out var anchored))
+            {
+                _intersecting.Add(anchored);
+            }
+        }
+
+        foreach (var contacting in _intersecting)
+        {
+            if (_slowResinQuery.TryComp(contacting, out var slowResin))
+            {
+                if (hive == null || !_hive.IsMember(contacting, hive.Hive))
+                {
+                    if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
+                        speedResin += slowResin.OutsiderSpeedModifierArmor;
+                    else
+                        speedResin += slowResin.OutsiderSpeedModifier;
+
+                    entriesResin++;
+                }
+                anySlowResin = true;
+                continue;
+            }
+
+            if (_fastResinQuery.TryComp(contacting, out var fastResin))
+            {
+                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                {
+                    speedResin += fastResin.HiveSpeedModifier;
+                    entriesResin++;
+                }
+                anyFastResin = true;
+                continue;
+            }
+
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
-            speed += isXeno ? weeds.SpeedMultiplierXeno : weeds.SpeedMultiplierOutsider;
-            any = true;
-            entries++;
+            anyWeeds = true;
+
+            if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+            {
+                speedWeeds += weeds.SpeedMultiplierXeno;
+                friendlyWeeds = true;
+                entriesWeeds++;
+            }
+            else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
+            {
+                if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
+                    speedWeeds += weeds.SpeedMultiplierOutsiderArmor;
+                else
+                    speedWeeds += weeds.SpeedMultiplierOutsider;
+
+                entriesWeeds++;
+            }
         }
 
-        if (!any &&
+        if (!anyWeeds &&
             Transform(ent).Anchored &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(ent.Owner.ToCoordinates()))
         {
-            any = true;
+            anyWeeds = true;
         }
+        //Resin + Weed Speedups stack, but resin + weed slowdowns do not
+        var finalSpeed = 1.0f;
+        if (entriesWeeds > 0)
+            speedWeeds /= entriesWeeds;
 
-        if (entries > 0)
-        {
-            speed /= entries;
-            args.ModifySpeed(speed, speed);
-        }
+        if (entriesResin > 0)
+            speedResin /= entriesResin;
 
-        ent.Comp.OnXenoWeeds = any;
+        //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
+        if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
+            finalSpeed = speedWeeds * speedResin;
+        else if (entriesResin > 0)
+            finalSpeed = speedResin;
+        else if (entriesWeeds > 0)
+            finalSpeed = speedWeeds;
+
+        args.ModifySpeed(finalSpeed, finalSpeed);
+
+        ent.Comp.OnXenoWeeds = anyWeeds;
+        ent.Comp.OnFriendlyWeeds = friendlyWeeds;
+        ent.Comp.OnXenoSlowResin = anySlowResin;
+        ent.Comp.OnXenoFastResin = anyFastResin;
         Dirty(ent);
+    }
+
+    private void WeedsOvipositorChanged(Entity<AffectableByWeedsComponent> ent, ref XenoOvipositorChangedEvent args)
+    {
+        if (_affectedQuery.TryComp(ent, out var affected) && !affected.OnXenoSlowResin)
+            _toUpdate.Add(ent);
+    }
+
+    public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
+    {
+        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
+        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
+        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
+
+        foreach (var anchored in enumerable)
+        {
+            if (TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
+    {
+        var weed = GetWeedsOnFloor(grid, coordinates, sourceOnly);
+        if (!TryComp(weed, out XenoWeedsComponent? weedComp))
+        {
+            return false;
+        }
+
+        // Some structures produce hive weed and act like a hive weed source, but they themselves are not hiveweeds.
+        // For the purposes of this function, those structures are hive weed sources.
+        return _prototype.TryIndex(weedComp.Spawns, out var spawns) &&
+               spawns.HasComponent<HiveWeedsComponent>();
     }
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
-        return (GetWeedsOnFloor(grid, coordinates, sourceOnly) is EntityUid);
+        return GetWeedsOnFloor(grid, coordinates, sourceOnly) != null;
     }
 
-    public EntityUid? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
+    public Entity<XenoWeedsComponent>? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
@@ -181,7 +384,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 continue;
 
             if (!sourceOnly || weeds.IsSource)
-                return anchored;
+                return (anchored.Value, weeds);
         }
 
         return null;
@@ -212,17 +415,55 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return IsOnWeeds((gridUid, grid), coordinates);
     }
 
-    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
+    public bool IsOnFriendlyWeeds(Entity<TransformComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp))
+            return false;
+
+        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
+
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        var weeds = GetWeedsOnFloor((gridUid, grid), coordinates);
+        if (weeds == null)
+            return false;
+
+        if (!_hive.FromSameHive(entity.Owner, weeds.Value.Owner))
+            return false;
+
+        return true;
+
+    }
+
+    private void OnResinSlowdownStartCollide(Entity<ResinSlowdownModifierComponent> ent, ref StartCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoSlowResin)
             _toUpdate.Add(other);
     }
 
-    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    private void OnResinSlowdownEndCollide(Entity<ResinSlowdownModifierComponent> ent, ref EndCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoSlowResin)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinSpeedupStartCollide(Entity<ResinSpeedupModifierComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoFastResin)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinSpeedupEndCollide(Entity<ResinSpeedupModifierComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoFastResin)
             _toUpdate.Add(other);
     }
 
@@ -232,7 +473,44 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool CanPlaceWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
+    private void OnWeedOver(Entity<ReplaceWeedSourceOnWeedingComponent> weedSource, ref AfterEntityWeedingEvent args)
+    {
+        var (ent, comp) = weedSource;
+        var weededEntity = _entities.GetEntity(args.CoveredEntity);
+
+        if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
+            Prototype(weededEntity) is not { } weededEntityProto ||
+            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId) ||
+            TerminatingOrDeleted(weedSource) ||
+            comp.HasReplaced)
+        {
+            return;
+        }
+
+        var newWeedSource = SpawnAtPosition(replacementId, weedSource.Owner.ToCoordinates());
+        if (!TryComp(newWeedSource, out XenoWeedsComponent? newWeedSourceComp))
+        {
+            QueueDel(newWeedSource);
+            return;
+        }
+
+        _hive.SetSameHive(ent, newWeedSource);
+
+        var curWeeds = weedComp.Spread;
+        foreach (var curWeed in curWeeds)
+        {
+            var curWeedComp = EnsureComp<XenoWeedsComponent>(curWeed);
+            curWeedComp.Range = newWeedSourceComp.Range;
+            curWeedComp.Source = newWeedSource;
+            newWeedSourceComp.Spread.Add(curWeed);
+        }
+        curWeeds.Clear();
+        RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
+        comp.HasReplaced = true;
+        QueueDel(ent);
+    }
+
+    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
     {
         void GenericPopup()
         {
@@ -276,7 +554,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var mobId in _toUpdate)
             {
-                _movementSpeed.RefreshMovementSpeedModifiers(mobId);
+                UpdateQueued(mobId);
             }
         }
         finally
@@ -323,5 +601,58 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, damage.Damage, damageable: damageable);
             }
         }
+    }
+
+    public bool CanPlaceWeedsPopup(EntityUid xeno,
+        Entity<MapGridComponent> grid,
+        EntityCoordinates coordinates,
+        bool limitDistance)
+    {
+        if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, out var oldWeeds))
+        {
+            if (oldWeeds.Comp.IsSource)
+            {
+                _popup.PopupClient("There's a pod here already!", oldWeeds, xeno, PopupType.SmallCaution);
+                return false;
+            }
+
+            if (oldWeeds.Comp.BlockOtherWeeds)
+            {
+                _popup.PopupClient("These weeds are too strong to plant a node on!",
+                    oldWeeds,
+                    xeno,
+                    PopupType.SmallCaution);
+                return false;
+            }
+        }
+
+        if (limitDistance && !HasWeedsNearby(grid, coordinates))
+        {
+            _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
+                xeno,
+                xeno,
+                PopupType.SmallCaution);
+            return false;
+        }
+
+        var entities = _mapSystem.GetAnchoredEntities(grid, coordinates.ToVector2i(EntityManager, _map, _transform));
+        {
+            foreach (var entity in entities)
+            {
+                if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
+                    HasComp<BarricadeComponent>(entity))
+                    continue;
+
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void UpdateQueued(EntityUid update)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(update);
     }
 }

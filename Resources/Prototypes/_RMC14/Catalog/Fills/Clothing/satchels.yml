@@ -5,9 +5,13 @@
   components:
   - type: StorageFill
     contents:
+    - id: RMCWeaponPistolHoldout
     - id: CMCrowbar
-    - id: DrinkDrGibbCan
-    - id: DrinkFourteenLokoCan
+    - id: RMCBoxPizzaVegetable
+    - id: RMCBoxPizzaMushroom
+    - id: RMCBoxPizzaMeat
+    - id: CMDrinkCanDrGibb
+    # ThirteenLoko
   - type: IgnoreContentsSize
     items:
       tags:
@@ -21,3 +25,81 @@
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelHEFAFill
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 6
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorFill
+  suffix: FORECON, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCSatchelMarineLogisticsBig
+  id: RMCSatchelMarineLogisticsBigForeconSurvivorFill
+  suffix: FORECON Support Tech, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: CMDefibrillator
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorCommanderFill
+  suffix: FORECON CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCLaserDesignator
+    - id: RMCDrinkAlcoholDavenport
+    - id: RMCZippoGold
+    - id: CMTarbackCigar
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorSmartgunOperatorFill
+  suffix: FORECON CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackSurvivorFill
+  suffix: Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCMagazineSMGP90
+      amount: 2
+
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackBartenderSynthFill
+  suffix: Bartender Synth, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkAlcoholGrenadine
+    - id: RMCDrinkAlcoholCognac
+    - id: RMCDrinkAlcoholTequila
+    - id: RMCDrinkAlcoholRum
+    - id: RMCBaseballBat

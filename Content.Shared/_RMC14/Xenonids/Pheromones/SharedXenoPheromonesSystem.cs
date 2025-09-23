@@ -1,6 +1,12 @@
-﻿using System.Linq;
+using System.Linq;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Stab;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -14,6 +20,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -33,6 +40,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
 
@@ -55,19 +67,18 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
 
-        // TODO RMC14 reduce crit damage
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
             after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentRemove>(OnWardingRemove);
-        SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageModifyEvent>(OnWardingDamageModify);
+        SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageStateCritBeforeDamageEvent>(OnWardingDamageCritModify);
+        SubscribeLocalEvent<XenoWardingPheromonesComponent, GetCriticalGraceTimeEvent>(OnWardingGetGraceTime);
 
-        // TODO RMC14 stack slash damage
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentRemove>(OnFrenzyRemove);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RMCGetTailStabBonusDamageEvent>(OnFrenzyGetTailStabDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStartedMessage>(OnFrenzyPullStarted, after: [typeof(RMCPullingSystem)] );
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
-
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
@@ -92,16 +103,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)
     {
-        if (!Enum.IsDefined(typeof(XenoPheromones), args.Pheromones) ||
+        if (!Enum.IsDefined(args.Pheromones) ||
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
         {
             return;
         }
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoPheromonesActionEvent)
-                _actions.SetToggled(actionId, true);
+            _actions.SetToggled(action.AsNullable(), true);
         }
 
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
@@ -130,18 +140,22 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (args.Component.CurrentState == MobState.Dead ||
             args.State != MobState.Dead ||
             !_damageableQuery.TryGetComponent(warding, out var damageable) ||
-            !_mobThreshold.TryGetDeadThreshold(warding, out var threshold))
+            !_mobThreshold.TryGetDeadThreshold(warding, out var threshold) ||
+            !_mobState.HasState(warding, MobState.Critical))
         {
             return;
         }
 
-        // TODO RMC14 crit grace period
-        // TODO RMC14 20
-        var wardingThreshold = threshold.Value + (1 + 40 * warding.Comp.Multiplier);
+        var wardingThreshold = threshold.Value + (1 + 20 * warding.Comp.Multiplier);
         if (damageable.TotalDamage >= wardingThreshold)
             return;
 
         args.State = MobState.Critical;
+    }
+
+    private void OnWardingGetGraceTime(Entity<XenoWardingPheromonesComponent> warding, ref GetCriticalGraceTimeEvent args)
+    {
+        args.Time += TimeSpan.FromSeconds(1) * Math.Max(warding.Comp.Multiplier.Int() - 1, 0);
     }
 
     private void OnWardingRemove(Entity<XenoWardingPheromonesComponent> ent, ref ComponentRemove args)
@@ -150,16 +164,18 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             _mobThreshold.VerifyThresholds(ent, thresholds);
     }
 
-    private void OnWardingDamageModify(Entity<XenoWardingPheromonesComponent> warding, ref DamageModifyEvent args)
+    private void OnWardingDamageCritModify(Entity<XenoWardingPheromonesComponent> warding, ref DamageStateCritBeforeDamageEvent args)
     {
-        var damage = args.Damage.DamageDict;
-        var multiplier = FixedPoint2.Max(1 - 0.25 * warding.Comp.Multiplier, 0);
+        if (_rmcFlammable.IsOnFire(warding.Owner))
+            return;
 
-        foreach (var type in warding.Comp.DamageTypes)
+        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(warding.Owner)))
         {
-            if (args.Damage.DamageDict.TryGetValue(type, out var amount))
-                damage[type] = amount * multiplier;
+            var damageReduct = _rmcDamageable.DistributeDamage(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
+            args.Damage -= damageReduct;
         }
+        else
+            args.Damage = -_rmcDamageable.DistributeDamage(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.5f);
     }
 
     private void OnFrenzyRemove(Entity<XenoFrenzyPheromonesComponent> ent, ref ComponentRemove args)
@@ -169,10 +185,13 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnFrenzyGetMeleeDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref GetMeleeDamageEvent args)
     {
-        args.Modifiers.Add(new DamageModifierSet
-        {
-            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key.ToString(), _ => frenzy.Comp.AttackDamageModifier)
-        });
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier);
+    }
+
+    private void OnFrenzyGetTailStabDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RMCGetTailStabBonusDamageEvent args)
+    {
+        //1.2 = tailstab attack mult
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * 1.2);
     }
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
@@ -204,10 +223,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (!Resolve(xeno, ref xeno.Comp, false))
             return;
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoPheromonesActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled(action.AsNullable(), false);
         }
 
         if (!HasComp<XenoActivePheromonesComponent>(xeno))
@@ -242,6 +260,32 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    private bool KeepWarding(EntityUid ent, XenoWardingPheromonesComponent warding, FixedPoint2 newWardMult)
+    {
+        if ((!_mobThreshold.TryGetIncapThreshold(ent, out var critThres) ||
+             !_damageableQuery.TryGetComponent(ent, out var damageable)))
+            return false;
+
+        if (damageable.TotalDamage < critThres)
+            return false;
+
+        if (newWardMult > warding.Multiplier)
+            return false;
+
+        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnFriendlyWeeds(ent))
+            return false;
+
+        return true;
+    }
+
+    public string? GetPheroSuffix(Entity<XenoPheromonesComponent?> xeno)
+    {
+        if (!Resolve(xeno, ref xeno.Comp, false))
+            return null;
+
+        return xeno.Comp.PheroSuffix;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -265,6 +309,10 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var wardingQuery = EntityQueryEnumerator<XenoWardingPheromonesComponent>();
         while (wardingQuery.MoveNext(out var uid, out var warding))
         {
+            //Don't clear if we would die
+            if (!_mobState.IsDead(uid) && KeepWarding(uid, warding, 0))
+                continue;
+
             oldWarding.Add(uid);
             warding.Multiplier = 0;
         }
@@ -334,6 +382,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Recovery)
+                            continue;
+
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
@@ -346,6 +397,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Warding)
+                            continue;
+
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
@@ -356,6 +410,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in active.Receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Frenzy)
                             continue;
 
                         oldFrenzy.Remove(receiver);
@@ -415,6 +472,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
             var (_, _, pheromones, xform) = Pheromones[index];
             receivers.Receivers.Clear();
+            // TODO RMC14 make this use a component that gets added when alive, removed when dead, and respects ignored pheromones
             Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers.Receivers);
         }
     }

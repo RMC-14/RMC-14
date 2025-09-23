@@ -35,8 +35,8 @@
       components:
       - Xeno
   - type: DisassembleOnAltVerb
-    prototype: RMCInflatableWallFolded1
-    doAfter: 3
+    prototypeToSpawn: RMCInflatableWallFolded1
+    disassembleTime: 3
   - type: Airtight
   - type: Transform
     anchored: true
@@ -83,8 +83,8 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: DisassembleOnAltVerb
-    prototype: RMCInflatableDoorFolded1
-    doAfter: 3
+    prototypeToSpawn: RMCInflatableDoorFolded1
+    disassembleTime: 3
   - type: Occluder
     enabled: false
 

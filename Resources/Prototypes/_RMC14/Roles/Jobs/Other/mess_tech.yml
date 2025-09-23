@@ -5,20 +5,27 @@
   description: cm-job-description-messtech
   playTimeTracker: CMJobMessTech
   requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 7200 # 2 hours
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   - !type:AgeRequirement
     requiredAge: 20
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-aso
+  supervisors: cm-job-supervisors-qm
   accessGroups:
   - MessTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mst
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -27,12 +34,18 @@
       skills:
         RMCSkillConstruction: 1
         RMCSkillDomestics: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
+    - type: CMVendorUser
+      id: CMMessTech
     - type: JobPrefix
       prefix: cm-job-prefix-messtech
-  hidden: true # TODO RMC14
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mst
 
 - type: startingGear
   id: CMGearMessTech
@@ -55,10 +68,7 @@
   - type: SpawnPoint
     job_id: CMMessTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: mess_tech
+    state: chef_spawn
 
 - type: playTimeTracker
   id: CMJobMessTech

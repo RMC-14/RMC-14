@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Mobs;
 using Content.Shared.StatusEffect;
@@ -17,10 +17,6 @@ public sealed class XenoSalveSystem : EntitySystem
     {
         SubscribeLocalEvent<RecentlySalvedComponent, ComponentStartup>(OnSalveAdded);
         SubscribeLocalEvent<RecentlySalvedComponent, ComponentShutdown>(OnSalveRemoved);
-        SubscribeLocalEvent<XenoSalveVisualsComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoSalveVisualsComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<XenoSalveVisualsComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<XenoSalveVisualsComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnSalveAdded(Entity<RecentlySalvedComponent> xeno, ref ComponentStartup args)
@@ -37,39 +33,6 @@ public sealed class XenoSalveSystem : EntitySystem
             return;
 
         _appearance.SetData(xeno, XenoHealerVisuals.Gooped, false);
-    }
-
-    private void OnMobStateChanged(Entity<XenoSalveVisualsComponent> xeno, ref MobStateChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoHealerVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsRest(Entity<XenoSalveVisualsComponent> xeno, ref XenoRestEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoHealerVisuals.Resting, args.Resting);
-    }
-
-    private void OnVisualsKnockedDown(Entity<XenoSalveVisualsComponent> xeno, ref KnockedDownEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoHealerVisuals.Downed, true);
-    }
-
-    private void OnVisualsStatusEffectEnded(Entity<XenoSalveVisualsComponent> xeno, ref StatusEffectEndedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (args.Key == "KnockedDown")
-            _appearance.SetData(xeno, XenoHealerVisuals.Downed, false);
     }
 
     public override void Update(float frameTime)

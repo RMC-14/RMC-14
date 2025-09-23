@@ -11,8 +11,8 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          !type:PhysShapeCircle
+          radius: 0.45
         density: 60
         mask:
         - MachineMask

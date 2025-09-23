@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCBaseWeaponGrenadeLauncher
@@ -13,12 +13,15 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     resetOnHandSelected: false
+  - type: GunIFF
+    enabled: true
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     recoilWielded: 2
   - type: ShootAtFixedPoint
     shootArcProj: true
+    maxFixedRange: 7
   - type: OnShootTriggerAmmoTimer
     delay: 1
     beepInterval: 2
@@ -65,3 +68,4 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: GunIgnorePrediction

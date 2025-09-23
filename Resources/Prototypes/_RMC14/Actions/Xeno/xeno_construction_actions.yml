@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMGuidebookActionXenoBase
   abstract: true
   components:
@@ -11,13 +11,14 @@
   name: Plant Weeds (75) # TODO RMC14 proper plasma costs
   description: Plant a weed node that will spread more weeds.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: plant_weeds
-    event: !type:XenoPlantWeedsActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:XenoPlantWeedsActionEvent
 
 - type: entity
   id: ActionXenoChooseStructure
@@ -25,13 +26,23 @@
   name: Choose Resin Structure
   description: "Choose a structure to secrete with the 'Secrete Resin' action."
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: place_resin
+  - type: InstantAction
     event: !type:XenoChooseStructureActionEvent
   - type: XenoChooseConstructionAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoChooseResinStructure
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_resin
 
 - type: entity
   id: ActionXenoSecreteStructure
@@ -39,20 +50,31 @@
   name: Secrete Resin
   description: "Builds the structure chosen with the 'Choose Resin Structure' action."
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: secrete_resin
-    event: !type:XenoSecreteStructureActionEvent
+  - type: TargetAction
     deselectOnMiss: false
-    range: 20
+    range: 0
     repeat: true
     checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoSecreteStructureActionEvent
   - type: XenoConstructionAction
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: true
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSecreteResin
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: secrete_resin
 
 - type: entity
   id: ActionXenoCoerceResin
@@ -60,20 +82,23 @@
   name: Coerce Resin
   description: "Builds the structure chosen with the 'Choose Resin Structure' action. You may also build within line of sight if you are on weeds."
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: secrete_resin
-    event: !type:XenoSecreteStructureActionEvent
+  - type: TargetAction
     deselectOnMiss: false
     range: 0
     repeat: true
     checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoSecreteStructureActionEvent
   - type: XenoConstructionAction
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: false
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -81,17 +106,24 @@
   name: Order Construction
   description: Starts construction of an important hive structure.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: morph_resin
+  - type: InstantAction
     event: !type:XenoOrderConstructionActionEvent
-    deselectOnMiss: false
-    range: 20
-  - type: XenoConstructionAction
-    checkStructureSelected: false
-    checkWeeds: false
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoOrderConstruction
+  name: Order Construction
+  description: Starts construction of an important hive structure.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: morph_resin
 
 - type: entity
   id: ActionXenoResinHole
@@ -99,13 +131,23 @@
   name: Plant Resin Hole (200)
   description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: place_trap
-    event: !type:XenoPlaceResinHoleActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:XenoPlaceResinHoleActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPlantResinHole
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_trap
 
 # For gardener drone
 - type: entity
@@ -114,11 +156,12 @@
   name: Change Fruit
   description: Choose a fruit to be planted with 'Plant Resin Fruit' action.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gardener_plant_pick
+  - type: InstantAction
     event: !type:XenoFruitChooseActionEvent
   - type: XenoFruitChooseAction
 
@@ -128,13 +171,14 @@
   name: Plant Resin Fruit (100)
   description: Plant chosen resin fruit on weeds at the cost of health and plasma. Xenos can pick these fruits once they're mature, you can also pick a plant early to get rid of it. Xenos can use them in hand or eat them on the ground to gain their effects. They can also be used on other xenos to feed them. You can only have 6 fruits planted and picked at a time.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gardener_plant
-    event: !type:XenoFruitPlantActionEvent
     useDelay: 5
+  - type: InstantAction
+    event: !type:XenoFruitPlantActionEvent
 
 - type: entity
   id: ActionXenoPlantWeedsHardy
@@ -142,16 +186,16 @@
   name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
   description: Plant a weed node that will spread hardier weeds, which grow fruit 25% faster, have slightly more health, and can be spread on some surfaces where normal weeds won't grow.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: plant_gardener_weeds
+    useDelay: 120
+  - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
       prototype: XenoHardyWeedsSource
-      useOnSemiWeedable: true
-    useDelay: 120
 
 # For healer drone
 - type: entity
@@ -170,11 +214,62 @@
   name: Dig Tunnel (200)
   description: Dig a tunnel for speedy transportation across the hive.
   components:
-  - type: InstantAction
-    event: !type:XenoDigTunnelActionEvent
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: build_tunnel
     useDelay: 300
+  - type: InstantAction
+    event: !type:XenoDigTunnelActionEvent
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDigTunnel
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: build_tunnel
+
+# For lesser drone
+- type: entity
+  id: ActionLesserDronePlantWeeds
+  parent: ActionXenoBase
+  name: Plant Weeds (75) # TODO RMC14 proper plasma costs
+  description: Plant a weed node that will spread more weeds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_weeds
+    useDelay: 1
+  - type: InstantAction
+    event: !type:XenoPlantWeedsActionEvent
+      limitDistance: true
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPlantWeeds
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: plant_weeds
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoExpandWeeds
+  name: Expand Weeds (50) # TODO RMC14 proper plasma costs
+  description: Expand existing weeds or turn a weed tile into a node.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_weeds
+    useDelay: 0.5
+  - type: TargetAction
+  - type: WorldTargetAction
+    event: !type:XenoExpandWeedsActionEvent
+  - type: XenoActionPlasma
+    cost: 50

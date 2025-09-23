@@ -2,6 +2,7 @@ using Content.Shared.Emoting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Robust.Shared.Serialization;
 
@@ -37,25 +38,68 @@ namespace Content.Shared.Ghost
                 args.Cancel();
         }
 
+        /// <summary>
+        /// Sets the ghost's time of death.
+        /// </summary>
+        public void SetTimeOfDeath(Entity<GhostComponent?> entity, TimeSpan value)
+        {
+            if (!Resolve(entity, ref entity.Comp))
+                return;
+
+            if (entity.Comp.TimeOfDeath == value)
+                return;
+
+            entity.Comp.TimeOfDeath = value;
+            Dirty(entity);
+        }
+
+        [Obsolete("Use the Entity<GhostComponent?> overload")]
         public void SetTimeOfDeath(EntityUid uid, TimeSpan value, GhostComponent? component)
         {
-            if (!Resolve(uid, ref component))
-                return;
-
-            component.TimeOfDeath = value;
+            SetTimeOfDeath((uid, component), value);
         }
 
+        /// <summary>
+        /// Sets whether or not the ghost player is allowed to return to their original body.
+        /// </summary>
+        public void SetCanReturnToBody(Entity<GhostComponent?> entity, bool value)
+        {
+            if (!Resolve(entity, ref entity.Comp))
+                return;
+
+            if (entity.Comp.CanReturnToBody == value)
+                return;
+
+            entity.Comp.CanReturnToBody = value;
+            Dirty(entity);
+        }
+
+        [Obsolete("Use the Entity<GhostComponent?> overload")]
         public void SetCanReturnToBody(EntityUid uid, bool value, GhostComponent? component = null)
         {
-            if (!Resolve(uid, ref component))
-                return;
-
-            component.CanReturnToBody = value;
+            SetCanReturnToBody((uid, component), value);
         }
 
+        [Obsolete("Use the Entity<GhostComponent?> overload")]
         public void SetCanReturnToBody(GhostComponent component, bool value)
         {
-            component.CanReturnToBody = value;
+            SetCanReturnToBody((component.Owner, component), value);
+        }
+
+
+        /// <summary>
+        /// Sets whether the ghost is allowed to interact with other entities.
+        /// </summary>
+        public void SetCanGhostInteract(Entity<GhostComponent?> entity, bool value)
+        {
+            if (!Resolve(entity, ref entity.Comp))
+                return;
+
+            if (entity.Comp.CanGhostInteract == value)
+                return;
+
+            entity.Comp.CanGhostInteract = value;
+            Dirty(entity);
         }
     }
 
@@ -157,5 +201,12 @@ namespace Content.Shared.Ghost
         {
             AvailableGhostRoles = availableGhostRoleCount;
         }
+    }
+
+    public sealed class GhostAttemptHandleEvent(MindComponent mind, bool canReturnGlobal) : HandledEntityEventArgs
+    {
+        public MindComponent Mind { get; } = mind;
+        public bool CanReturnGlobal { get; } = canReturnGlobal;
+        public bool Result { get; set; }
     }
 }

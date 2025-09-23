@@ -14,6 +14,10 @@
   - !type:AgeRequirement
     requiredAge: 20
   ranks:
+    RMCRankWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 630000 # 175 hours
     RMCRankStaffSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
@@ -21,7 +25,7 @@
     RMCRankSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
-      time: 270000 # 10 hours
+      time: 90000 # 25 hours
     RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
@@ -29,18 +33,13 @@
   supervisors: cm-job-supervisors-po
   accessGroups:
   - DropshipCrewChief
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: dcc
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -52,10 +51,18 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMDropshipCrewChief
       points: 45
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-dcc
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: dcc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: false
 
 - type: startingGear
@@ -74,10 +81,7 @@
   - type: SpawnPoint
     job_id: CMDropshipCrewChief
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: dropship_crew_chief
+    state: dcc_spawn
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief

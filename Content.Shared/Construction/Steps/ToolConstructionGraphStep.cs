@@ -1,3 +1,4 @@
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Tools;
 using Robust.Shared.Prototypes;
@@ -14,6 +15,9 @@ namespace Content.Shared.Construction.Steps
         [DataField("fuel")] public float Fuel { get; private set; } = 10;
 
         [DataField("examine")] public string ExamineOverride { get; private set; } = string.Empty;
+
+        // RMC14
+        [DataField] public DuplicateConditions DuplicateConditions { get; private set; }
 
         public override void DoExamine(ExaminedEvent examinedEvent)
         {

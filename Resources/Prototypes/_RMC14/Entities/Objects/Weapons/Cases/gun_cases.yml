@@ -1,6 +1,8 @@
+# pistols
+# SU6 smart pistol
 - type: entity
-  parent: RMCBaseGunCase
-  id: RMCSmartPistolCase
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolSmart
   name: SU-6 smart pistol case
   description: A gun case containing the SU-6 smart pistol. Comes with a full belt holster.
   components:
@@ -17,76 +19,27 @@
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
 
+# MK80
 - type: entity
-  parent: RMCBaseGunCase
-  id: RMCCaseXM88
-  name: XM88 heavy rifle case
-  description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
-  components:
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,11,1
-    whitelist:
-      components:
-      - Gun
-      tags:
-      - RMCAttachmentXM88Stock
-      - RMCAttachmentXS-9
-      - RMCBox458SOCOM
-      - RMCBox458SOCOM
-      - RMCBeltSOCOM
-  - type: StorageFill
-    contents:
-    - id: WeaponRifleXM88
-    - id: RMCAttachmentXM88Stock
-    - id: RMCAttachmentXS-9
-    - id: RMCBox458SOCOM
-    - id: RMCBox458SOCOM
-    - id: RMCM300SOCOMBelt
-
-- type: entity
-  parent: RMCBaseGunCase
-  id: RMCMK80Case
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolMK80
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.
   components:
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,3,1
+    - 0,0,5,1
     whitelist:
       tags:
       - RMCMK80
       - CMMagazinePistolMK80
   - type: StorageFill
     contents:
-    - id: CMWeaponPistolMK80
+    - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
-
-- type: entity
-  parent: RMCBaseGunCase
-  id: RMCM54CE2Case
-  name: M54CE2 heavy assault rifle case
-  description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
-  components:
-  - type: Storage
-    maxItemSize: Ginormous
-    grid:
-    - 0,0,7,1
-    whitelist:
-      tags:
-      - WeaponRifleM54CE2
-      - CMMagazineRifleM54CE2
-      - RMCAttachmentRailFlashlight
-      - RMCAttachmentBipod
-  - type: StorageFill
-    contents:
-    - id: WeaponRifleM54CE2
-    - id: CMMagazineRifleM54CE2
-    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
-
+# D18
 - type: entity
   parent: BaseStorageItem
   id: RMCD18Case
@@ -116,8 +69,364 @@
     - id: RMCWeaponPistolD18
     - id: RMCMagazinePistolD18
 
+# M77
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM77
+  name: M77 Combat Pistol case
+  description: A gun case containing a M77 Combat Pistol. Comes with a rail flashlight and 6 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolM77
+      - CMMagazinePistolM77AP
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponPistolM77
+    - id: CMMagazinePistolM77AP
+      amount: 6
+
+# M44 combat revolver (Marksman)
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM44
+  name: M44 Combat Revolver case
+  description: A gun case containing an M44 Combat Revolver loaded with marksman ammo.
+  components:
+  - type: Item
+    size: Small
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRevolverM44
+      - RMCSpeedLoader44Marksman
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponRevolverM44Marksman
+    - id: RMCSpeedLoader44Marksman
+      amount: 6
+
+# Custom M44 combat revolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM44Custom
+  name: Custom M44 combat revolver case
+  description: A case containing a loaded custom M44 combat revolver and two speedloaders for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+       tags:
+       - RMCWeaponRevolverM44
+       - RMCSpeedLoaderM44
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverM44Custom
+      - id: RMCSpeedLoaderM44
+        amount: 2
+
+# M1984 service pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1984
+  name: M1984 Service Pistol case
+  description: A gun case containing an M1984 Service Pistol.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: CMWeaponPistolM1984
+    - id: CMMagazinePistolM1984
+      amount: 6
+
+# Custom M1984 service pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1984Custom
+  name: Custom M1984 service pistol case
+  description: A case containing a loaded custom M1984 service pistol and two magazines for it.
+  components:
+   - type: Sprite
+     noRot: false
+     sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+     layers:
+     - state: closed
+   - type: Icon
+     sprite: _RMC14/Objects/Storage/D18case.rsi
+     state: closed
+   - type: Storage
+     maxItemSize: Huge
+     grid:
+     - 0,0,5,1
+     whitelist:
+      tags:
+       - CMWeaponPistolM1984
+       - CMMagazinePistolM1984
+   - type: StorageFill
+     contents:
+     - id: CMWeaponPistolM1984Custom
+     - id: CMMagazinePistolM1984
+       amount: 2
+
+# RSh9 Assault Revolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRevolverRSh9
+  name: RSh9 Assault Revolver case
+  description:
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRevolverRSh9
+      - RMCSpeedLoaderRsh9
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponRevolverRSh9
+    - id: RMCSpeedLoaderRsh9
+      amount: 6
+
+# HG-45 'Aguila' pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolHG45Aguila
+  name: HG-45 'Aguila' pistol case
+  description: A case containing a loaded HG-45 'Aguila' and two magazines for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+       tags:
+       - RMCMK45
+       - RMCMagazinePistolMK45
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolHG45Aguila
+      - id: RMCMagazinePistolMK45
+        amount: 2
+
+# HG-45 'Marina' pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolHG45Marina
+  name: HG-45 'Marina' pistol case
+  description: A case containing a loaded HG-45 'Marina' and two magazines for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+       tags:
+       - RMCMK45
+       - RMCMagazinePistolMK45
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolHG45Marina
+      - id: RMCMagazinePistolMK45
+        amount: 2
+
+# T73
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolT73
+  name: Type 73 pistol case
+  description: A case containing a loaded Type 73 and two magazines for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+       tags:
+       - RMCWeaponPistolT73
+       - RMCMagazinePistolT73
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolT73
+      - id: RMCMagazinePistolT73
+        amount: 2
+
+# ZHNK72
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolZHNK72
+  name: ZHNK-72 revolver case
+  description: A case containing a loaded ZHNK-72 and two speedloaders for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+       tags:
+       - RMCWeaponRevolverZHNK72
+       - RMCSpeedLoaderZHNK72
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverZHNK72
+      - id: RMCSpeedLoaderZHNK72
+        amount: 2
+
+# rifles
+# M54C
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRifleM54C
+  name: M54C assault rifle MK2 case
+  description: A gun case containing the M54C assault rifle MK2.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK2
+      - CMMagazineRifleM54C
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+
+# M54CE2
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRifleM54CE2
+  name: M54CE2 heavy assault rifle case
+  description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CE2
+      - CMMagazineRifleM54CE2
+      - RMCAttachmentRailFlashlight
+      - RMCAttachmentBipod
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleM54CE2
+    - id: CMMagazineRifleM54CE2
+    - id: CMMagazineRifleM54CE2HT
+
+# XM88
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCCaseXM88
+  name: XM88 heavy rifle case
+  description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+    whitelist:
+      components:
+      - Gun
+      tags:
+      - RMCAttachmentXM88Stock
+      - RMCAttachmentXS-9
+      - RMCBox458SOCOM
+      - RMCBox458SOCOM
+      - RMCBeltSOCOM
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleXM88
+    - id: RMCAttachmentXM88Stock
+    - id: RMCAttachmentXS-9
+    - id: RMCBox458SOCOM
+    - id: RMCBox458SOCOM
+    - id: RMCM300SOCOMBelt
+
+# Shotguns
+# XM51
+- type: entity
+  parent: RMCGunCaseBase
   id: RMCXM51Case
   name: XM51 breaching scattergun case
   description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
@@ -125,7 +434,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,9,1
+    - 0,0,13,1
     whitelist:
       tags:
       - RMCAttachmentXM51Stock
@@ -142,9 +451,17 @@
     - id: RMCBoxShotgunBreaching
       amount: 2
     - id: RMCBeltXM51
+  - type: RemoveOnlyStorage
+    whitelist:
+      tags:
+      - RMCAttachmentXM51Stock
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCXM51Holster
 
+# MOU53
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCMOU53Case
   name: MOU53 shotgun case
   description: A gun case containing the MOU53 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
@@ -163,7 +480,7 @@
     - id: RMCAttachmentMOU53Stock
 
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCM54CMK1Case
   name: M54C assault rifle MK1 case
   description: A gun case containing the M54C assault rifle MK1. It can only use proprietary MK1 magazines.
@@ -178,12 +495,12 @@
       - CMMagazineRifleM54CMK1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CMK1
+    - id: RMCWeaponRifleM54CMK1
     - id: CMMagazineRifleM54CMK1
     - id: CMMagazineRifleM54CMK1
 
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCM54CMK1CaseAP
   name: M54C assault rifle MK1 AP case
   description: A gun case containing the M54C assault rifle MK1 loaded with AP rounds. It can only use proprietary MK1 magazines.
@@ -198,6 +515,99 @@
       - CMMagazineRifleM54CMK1AP
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CMK1AP
+    - id: RMCWeaponRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM54CMK2Case
+  name: M54C assault rifle MK2 case
+  description: A gun case containing the M54C assault rifle MK2.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK2
+      - CMMagazineRifleM54C
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM42A2ShotgunCase
+  name: M42A2 pump shotgun case
+  description: A gun case containing the M42A2 pump shotgun.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,3,1 # 4 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunM42A2
+      - RMCHandful
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunM42A2
+    # Group 1
+    - id: CMShellShotgunBuckshot # Spawn 3 handfuls of shells, each group being random
+      prob: 0.25
+      orGroup: ShellOne
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellOne
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellOne
+    # Group 2
+    - id: CMShellShotgunBuckshot
+      prob: 0.25
+      orGroup: ShellTwo
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellTwo
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellTwo
+    # Group 3
+    - id: CMShellShotgunBuckshot
+      prob: 0.25
+      orGroup: ShellThree
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellThree
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellThree
+
+# Launchers
+# M85A1
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM85A1Case
+  name: M85A1 grenade launcher case
+  description: A gun case containing the M85A1 grenade launcher. Comes with three different grenade packets
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponLauncherM85A1
+      - RMCPacketGrenade
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponLauncherM85A1
+    - id: RMCPacketGrenadeM74AGMSStarShellFilled
+    - id: RMCPacketGrenadeM74AGMSHornetFilled
+    - id: RMCPacketGrenadeBatonSlugHIRRFilled

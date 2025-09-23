@@ -7,7 +7,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 36000 # 10 hours
+    time: 72000 # 20 hours
   - !type:AgeRequirement
     requiredAge: 27
   ranks:
@@ -24,15 +24,10 @@
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false
+  marineAuthorityLevel: 3
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - MP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -46,6 +41,11 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: cm-job-prefix-militarypolice
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -70,10 +70,7 @@
   - type: SpawnPoint
     job_id: CMMilitaryPolice
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: military_police
+    state: mp_spawn
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice

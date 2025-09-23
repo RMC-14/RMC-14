@@ -1,65 +1,275 @@
 - type: marking
   id: RMCUnderwearBoxers
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_boxers
 
 - type: marking
   id: RMCUnderwearBoxersBlue
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: d_boxers
 
 - type: marking
-  id: RMCUnderwearLowriders
-  bodyPart: Underwear
-  markingCategory: Underwear
+  id: RMCUnderwearBoxersJungle
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: j_boxers
+
+- type: marking
+  id: RMCUnderwearBoxersSnow
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: s_boxers
+
+- type: marking
+  id: RMCUnderwearBoxersUrban
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_boxers
+
+- type: marking
+  id: RMCUnderwearLowriders
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_lowriders
 
 - type: marking
-  id: RMCUnderwearBriefs
-  bodyPart: Underwear
-  markingCategory: Underwear
+  id: RMCUnderwearLowridersDesert
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: d_lowriders
+
+- type: marking
+  id: RMCUnderwearLowridersJungle
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: j_lowriders
+
+- type: marking
+  id: RMCUnderwearLowridersSnow
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: s_lowriders
+
+- type: marking
+  id: RMCUnderwearLowridersUrban
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_lowriders
+
+- type: marking
+  id: RMCUnderwearBriefs
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_briefs
 
 - type: marking
-  id: RMCUnderwearSatin
-  bodyPart: Underwear
-  markingCategory: Underwear
+  id: RMCUnderwearBriefsDesert
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: d_briefs
+
+- type: marking
+  id: RMCUnderwearBriefsJungle
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: j_briefs
+
+- type: marking
+  id: RMCUnderwearBriefsSnow
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: s_briefs
+
+- type: marking
+  id: RMCUnderwearBriefsUrban
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_briefs
+
+- type: marking
+  id: RMCUnderwearSatin
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_satin
 
 - type: marking
-  id: RMCUnderwearTanga
-  bodyPart: Underwear
-  markingCategory: Underwear
+  id: RMCUnderwearSatinDesert
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
-    state: c_tanga
+    state: d_satin
+
+- type: marking
+  id: RMCUnderwearSatinJungle
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: j_satin
+
+- type: marking
+  id: RMCUnderwearSatinSnow
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: s_satin
+
+- type: marking
+  id: RMCUnderwearSatinUrban
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_satin
+
+# tanga
+- type: marking
+  id: RMCUnderwearTanga
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: classic_tanga
+
+- type: marking
+  id: RMCUnderwearTangaDesert
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: desert_tanga
+
+- type: marking
+  id: RMCUnderwearTangaJungle
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: jungle_tanga
+
+- type: marking
+  id: RMCUnderwearTangaSnow
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: snow_tanga
+
+- type: marking
+  id: RMCUnderwearTangaUrban
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_tanga

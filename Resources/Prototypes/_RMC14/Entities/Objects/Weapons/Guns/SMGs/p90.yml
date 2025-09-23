@@ -1,0 +1,158 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: FN P90 submachinegun
+  id: RMCWeaponSMGP90
+  description: The FN P90 submachine gun. An archaic design, but still widely used by corporate and mercenary groups, sometimes seen in the hands of civilian populations. This weapon only accepts 5.7×28mm rounds.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0.1
+    recoilUnwielded: 1
+    scatterWielded: 14
+    scatterUnwielded: 16
+    baseFireRate: 10
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.0980
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.9
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGP90
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGP90
+  - type: AttachableHolder
+    randomAttachmentChance: 0.1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.84, -0.02
+      rmc-aslot-rail: 0.2, 0.219
+  - type: GunDamageModifier
+    multiplier: 1.2
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGP90
+  name: "FN P90 magazine (5.7×28mm)"
+  description: "A 5.7×28mm magazine for the FN P90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGP90
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge57x28mm
+    proto: RMCCartridge57x28mm
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/p90.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge57x28mm
+  name: cartridge (57×28mm SMG)
+  description: A 5.7×28mm magazine for the FN P90.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge57x28mm
+  - type: CartridgeAmmo
+    proto: RMCBullet57x28mm
+
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet57x28mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 26
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 8
+      falloff: 5
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: Tag
+  id: RMCMagazineSMGP90
+
+- type: Tag
+  id: RMCCartridge57x28mm

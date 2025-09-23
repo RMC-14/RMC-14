@@ -5,7 +5,9 @@ using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
 using Content.Shared.Stacks;
+using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -22,7 +24,6 @@ public abstract partial class SharedGunSystem
 
     // RMC14
     [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected virtual void InitializeBallistic()
     {
@@ -119,6 +120,13 @@ public abstract partial class SharedGunSystem
         if (GetBallisticShots(component) >= component.Capacity)
             return false;
 
+        //RMC14
+        if (TryComp(ammo, out ExpendableLightComponent? light))
+        {
+            if (light.CurrentState != ExpendableLightState.BrandNew)
+                return false;
+        }
+
         TimeSpan insertDelayConverted;
 
         if (insertDelay > 0)
@@ -153,6 +161,14 @@ public abstract partial class SharedGunSystem
             Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var targetComponent) ||
             targetComponent.Whitelist == null)
+        {
+            return;
+        }
+
+        // RMC14
+        if (Containers.TryGetContainingContainer((args.Target.Value, null), out var container) &&
+            container.Owner != args.User &&
+            HasComp<StorageComponent>(container.Owner))
         {
             return;
         }
@@ -293,7 +309,7 @@ public abstract partial class SharedGunSystem
     {
         if (TryComp(used, out StackComponent? stack))
         {
-            var coordinates = _transform.GetMoverCoordinates(used);
+            var coordinates = TransformSystem.GetMoverCoordinates(used);
             var split = _rmcStack.Split((used, stack), 1, coordinates);
             if (split != null)
                 used = split.Value;

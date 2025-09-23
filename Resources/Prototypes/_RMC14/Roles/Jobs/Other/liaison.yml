@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
@@ -28,43 +28,40 @@
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
-  access:
-  - RMCAccessWeYa
-  - CMAccessCommand
-  - CMAccessResearch
-  - CMAccessMedical
-  - CMAccessMedPrep
-  - CMAccessColonyPublic
-  - CMAccessColonyResearch
-  - CMAccessColonyEngineering
-  - CMAccessColonyLogistics
-  - CMAccessColonyBrig
-  - CMAccessColonyMedbay
-#  - TODO RMC14 WeYa flight
-  - CMAccessColonyCommand
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cl
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
+  accessGroups:
+  - RMCWeYaExecColony
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
-      points: 50
+      id: CMLiaison
+      points: 40
+    - type: RMCVendorUserRecharge
+      maxPoints: 50
+      pointsPerUpdate: 1
+      timePerUpdate: 40 # 1 / (0.05 / 2)
     - type: JobPrefix
       prefix: cm-job-prefix-liaison
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cl
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
+    jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
@@ -77,10 +74,16 @@
   - type: SpawnPoint
     job_id: CMLiaison
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: corp_liaison
+    state: cl_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleLiaisonYou
+  name: A Typical Weston-Yamada Liaison
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: corp_liaison
 
 - type: playTimeTracker
   id: CMJobLiaison

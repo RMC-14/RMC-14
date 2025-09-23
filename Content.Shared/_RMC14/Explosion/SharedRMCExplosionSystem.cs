@@ -1,14 +1,22 @@
-using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Deafness;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
+using Content.Shared.Flash.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
+using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,16 +27,21 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
+    private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
+    private static readonly ProtoId<StatusEffectPrototype> BlindKey = "Blinded";
 
     private readonly HashSet<Entity<RMCWallExplosionDeletableComponent>> _walls = new();
 
@@ -36,7 +49,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     {
         SubscribeLocalEvent<CMExplosionEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
 
-        SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
+        SubscribeLocalEvent<RMCExplosiveDeleteComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
 
         SubscribeLocalEvent<ExplosionRandomResistanceComponent, GetExplosionResistanceEvent>(OnExplosionRandomResistanceGet);
 
@@ -52,7 +65,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         DoEffect(ent);
     }
 
-    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteWallsComponent> ent, ref CMExplosiveTriggeredEvent args)
+    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
         _walls.Clear();
         _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _walls);
@@ -60,6 +73,14 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         foreach (var wall in _walls)
         {
             QueueDel(wall);
+        }
+
+        if (ent.Comp.Whitelist != null &&
+            HasComp<StickyComponent>(ent) &&
+            Transform(ent).ParentUid is { Valid: true } parent &&
+            _entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, parent))
+        {
+            QueueDel(parent);
         }
     }
 
@@ -89,6 +110,44 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
+
+        // TODO RMC14 size-based throw ranges and speeds
+        var pos = _transform.GetWorldPosition(ent);
+        var dir = pos - args.Epicenter.Position;
+
+        // Humanoid calcuations
+        if (size == RMCSizes.Humanoid)
+        {
+            var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(ent, ref ev); // TODO RMC14 limb damage
+
+            var bombArmorMult = (100 - ev.ExplosionArmor) * 0.01;
+            var severity = factor * 5;
+
+            _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
+            _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
+
+            var knockBackDistance = (float) Math.Clamp(severity / 5 / dir.Length(), 0.5, Math.Max(severity / 10, 0.5));
+
+            if (!HasComp<XenoNestedComponent>(ent))
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance, knockBackDistance, knockBackSpeed: (float) severity);
+
+            var knockdownValue = severity * 0.1;
+            var knockoutValue = damage.Double() * 0.1;
+
+            var knockdownMinusArmor = Math.Max(knockdownValue * bombArmorMult, 1);
+            var knockdownTime = TimeSpan.FromSeconds(knockdownMinusArmor);
+            _stun.TryParalyze(ent, knockdownTime, false);
+
+            var knockoutMinusArmor = Math.Max(knockoutValue * bombArmorMult * 0.5, 0.5);
+            var knockoutTime = TimeSpan.FromSeconds(knockoutMinusArmor);
+            _sizeStun.TryKnockOut(ent, knockoutTime, false);
+
+            _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
+            return;
+        }
+
         if (factor > 0 && ent.Comp.Weak)
         {
             var stunTime = TimeSpan.FromSeconds(factor / 2.5);
@@ -96,17 +155,14 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _stun.TryKnockdown(ent, stunTime, true);
 
             if (size < RMCSizes.Big)
-                _sizeStun.Superslow(ent, TimeSpan.FromSeconds(factor), TimeSpan.FromSeconds(factor / 2));
+            {
+                _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor));
+                _slow.TrySuperSlowdown(ent, TimeSpan.FromSeconds(factor / 2));
+            }
             else
-                _stun.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3), true);
+                _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            var pos = _transform.GetWorldPosition(ent);
-            var dir = pos - args.Epicenter.Position;
-            if (dir.IsLengthZero())
-                dir = _random.NextVector2();
-
-            dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
-            _throwing.TryThrow(ent, dir, 5);
+            _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: 5, ignoreSize: true);
         }
         else if (factor > 10)
         {
@@ -115,9 +171,12 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _stun.TryStun(ent, stunTime, true);
             _stun.TryKnockdown(ent, stunTime, true);
             if (size < RMCSizes.Big)
-                _sizeStun.Superslow(ent, TimeSpan.FromSeconds(factor), TimeSpan.FromSeconds(factor / 2));
+            {
+                _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor));
+                _slow.TrySuperSlowdown(ent, TimeSpan.FromSeconds(factor / 2));
+            }
             else
-                _stun.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3), true);
+                _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
         }
     }
 
@@ -135,7 +194,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     private void OnMobGibbedByExplosionReceived(Entity<MobGibbedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
     {
-        if (args.Explosion != ent.Comp.Explosion)
+        if (Array.IndexOf(ent.Comp.Explosions, args.Explosion) == -1)
             return;
 
         var total = FixedPoint2.Zero;
