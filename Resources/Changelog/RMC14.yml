@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: crazy1112345
-  changes:
-  - message: Added New Varadero survivors! This includes the Beach Bum, Miner, Priest,
-      Cargo Technician, Engineering Technician, UN Peacekeeper, ICB Liaison, Medical
-      Technician, and the vacationing Lt. Colonel Commander.
-    type: Add
-  id: 1862
-  time: '2025-06-18T13:03:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6585
 - author: noctyrnal
   changes:
   - message: Added new sprites for the OW console's south and north face.
@@ -4458,5 +4449,16 @@
   id: 2361
   time: '2025-09-23T12:22:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7954
+- author: noctyrnal
+  changes:
+  - message: Added a new visor helmet garb for PVE - the old m1 multi-spectrum visor.
+    type: Add
+  - message: Fixed the PVE Platoon Commander having less loadout groups than intended.
+    type: Fix
+  - message: Increased the loadout points for PVE jobs to 20 instead of 7.
+    type: Add
+  id: 2362
+  time: '2025-09-23T20:28:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7983
 Name: RMC14
 Order: -1
