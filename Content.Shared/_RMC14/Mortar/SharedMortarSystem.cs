@@ -484,9 +484,11 @@ public abstract class SharedMortarSystem : EntitySystem
         if (!TryComp(explosion, out MortarShellComponent? shell))
             return;
 
-        var time = _timing.CurTime;
-
         var coords = _transform.GetMapCoordinates(explosion);
+        if (coords.MapId == MapId.Nullspace)
+            return;
+
+        var time = _timing.CurTime;
 
         var active = new ActiveMortarShellComponent
         {
