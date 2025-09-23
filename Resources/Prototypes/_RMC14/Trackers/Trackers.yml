@@ -44,8 +44,16 @@
   job: CMSquadLeader
 
 - type: trackerMode
+  id: SectionSergeant
+  job: CMPVESectionSergeant
+
+- type: trackerMode
   id: FireteamLeader
   job: CMFireteamLeader
+
+- type: trackerMode
+  id: PVESquadLeader
+  job: CMPVESquadLeader
 
 - type: trackerMode
   id: Rifleman
