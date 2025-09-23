@@ -123,7 +123,7 @@ public partial class ChatBox : UIWidget
         formatted.Pop();
 
         // RMC14
-        if (_entManager.System<CMChatSystem>().TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender))
+        if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
             return;
 
         Contents.AddMessage(formatted);

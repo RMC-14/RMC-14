@@ -34,13 +34,13 @@
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN54
   name: Boots! Issue No.54.
-  description: The only official UNMC magazine, the headline reads 'ARMAT strikes back against litigants in M41A-MK2 self cleaning case'.
+  description: The only official UNMC magazine, the headline reads 'Aegis strikes back against litigants in M54C-MK2 self cleaning case'.
 
 - type: entity
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN55
   name: Boots! Issue No.55.
-  description: The only official UNMC magazine, the headline reads 'TEN tips to keep your UD4 cockpit both safer and more relaxing'.
+  description: The only official UNMC magazine, the headline reads 'TEN tips to keep your UD-4 cockpit both safer and more relaxing'.
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -55,7 +55,7 @@
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN70
   name: Boots! Issue No.70.
-  description: The only official UNMC magazine, the headline reads “Marine 70, The Future of Warfare.” The article then goes on to detail the plans and implementation of Marine 70, a program designed to help modernize the UNMC for 2170.
+  description: The only official UNMC magazine, the headline reads “Marine 70, The Future of Warfare.” The article then goes on to detail the plans and implementation of Marine 70, a program designed to help modernize the UNMC for 2110.
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -123,6 +123,15 @@
 
 - type: entity
   parent: RMCMagazineWeYaOrrery
+  id: RMCMagazineWeYaOrreryN34
+  name: WeYa Orrery Issue No.34.
+  description: "A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a well-dressed executive looking over a colonial bay, with the headline 'New, Refined: Fashion for your workplace'"
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-orrery-34
+
+- type: entity
+  parent: RMCMagazineWeYaOrrery
   id: RMCMagazineWeYaOrreryN175
   name: WeYa Orrery Issue No.175.
   description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a massive orbital shipyard constructing a ship, with the headline 'The Making of a Dreadnaught'
@@ -139,16 +148,39 @@
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-orrery-184
 
-# Other
 - type: entity
-  parent: BaseItem
-  id: RMCMagazineDirtyMagazine
-  name: dirty magazine
-  description: Waaweeweewaa.
+  parent: RMCMagazineWeYaOrrery
+  id: RMCMagazineWeYaOrreryN202
+  name: WeYa Orrery Issue No.202.
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a couple of friendly-looking synthetics standing against a white wall, with the headline 'Generation 3s, Defining the Future'
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Wallmounts/posters.rsi
-    state: miss_april
-  - type: Item
-    size: Small
-    sprite: _RMC14/Structures/Wallmounts/posters.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-orrery-202
+
+- type: entity
+  parent: RMCMagazineWeYaOrrery
+  id: RMCMagazineWeYaOrreryN217
+  name: WeYa Orrery Issue No.217.
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a brown-haired man proudly facing the camera, carrying a PMC assault rifle. Behind him is a large hanger containing a dropship, with the headline 'SilverGuard; To Work and Protect'
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-orrery-217
+
+- type: entity
+  parent: RMCMagazineWeYaOrrery
+  id: RMCMagazineWeYaOrreryN220
+  name: WeYa Orrery Issue No.220.
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a large cargo hauler flying above a planet, with the headline 'Tempering the Chain'
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-orrery-220
+
+- type: entity
+  parent: RMCMagazineWeYaOrrery
+  id: RMCMagazineWeYaOrreryN258
+  name: WeYa Orrery Issue No.258.
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a colony surrounded by trees on the shore of an ocean, massive mountains towering over it, with the headline 'The Creation of a Home'
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-orrery-258
+

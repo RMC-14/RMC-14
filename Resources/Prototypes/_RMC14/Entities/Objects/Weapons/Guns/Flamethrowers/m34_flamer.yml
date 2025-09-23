@@ -94,6 +94,16 @@
   - type: Tag
     tags:
     - RMCWeaponIncineratorM34
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerPVE
+  suffix: PVE
+  components:
+  - type: Gun
+    fireRate: 2
 
 - type: Tag
   id: RMCWeaponIncineratorM34

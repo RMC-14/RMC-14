@@ -24,8 +24,8 @@
         crate: RMCCrateBoxMagazineRifleM54CAP
       - cost: 3000
         crate: RMCCrateBoxMagazineRifleM54CExt
-#      - cost: 2000
-#        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 2000
+        crate: RMCCrateMagazineRifleM54CE2
       - cost: 3000
         crate: RMCCrateMagazineRifleM54CE2HT
       - cost: 2000
@@ -84,8 +84,8 @@
         crate: RMCCrateAttachmentSmartScope
       - cost: 2000
         crate: RMCCrateAttachmentRailFlashlight
-#      - cost: 3000
-#        crate: RMCCrateAttachmentRedDot
+      - cost: 3000
+        crate: RMCCrateAttachmentRedDot
       - cost: 3000
         crate: RMCCrateAttachmentTelescopicScope
       - cost: 3000
@@ -106,10 +106,10 @@
         crate: RMCCrateAttachmentBipod
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelShotgun
-#      - cost: 3000
-#        crate: RMCCrateAttachmentUnderbarrelExtinguisher
-#      - cost: 3000
-#        crate: RMCCrateAttachmentUnderbarrelFlamer
+      - cost: 3000
+        crate: RMCCrateAttachmentUnderbarrelExtinguisher
+      - cost: 3000
+        crate: RMCCrateAttachmentUnderbarrelFlamer
       - cost: 3000
         crate: RMCCrateAttachmentBurstfire
       - cost: 6000
@@ -279,6 +279,8 @@
         crate: RMCCrateRestrictedEquipmentArmorM4
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorB12
+      - cost: 2000
+        crate: RMCCrateRestrictedEquipmentIntelSupportKit
     - name: Supplies
       entries:
       - cost: 2000
@@ -341,7 +343,6 @@
         crate: RMCCrateMagazineM4SPRCustomImpact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
-#      - cost: 4000
 
 
 
