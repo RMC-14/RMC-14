@@ -16,7 +16,6 @@
   roleWeight: 0.25
   icon: "RMCJobIconReconSynthetic"
   whitelisted: true
-  requireAdminNotify: true
   special:
   - !type:AddComponentSpecial
     components:
