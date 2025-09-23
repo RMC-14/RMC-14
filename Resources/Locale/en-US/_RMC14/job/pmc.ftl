@@ -73,5 +73,8 @@ rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
 rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
+rmc-job-prefix-pmc-pve-team-leader = TL
 rmc-job-name-pmc-pve-force-leader = Force Leader
+rmc-job-prefix-pmc-pve-force-leader = FL
 rmc-job-name-pmc-pve-force-command = Force Command
+rmc-job-prefix-pmc-pve-force-command = FCO

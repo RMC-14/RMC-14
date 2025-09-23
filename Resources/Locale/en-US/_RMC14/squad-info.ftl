@@ -31,6 +31,8 @@ rmc-squad-info-FireteamLeader = Fireteam Leader
 rmc-squad-info-Rifleman = Rifleman
 
 rmc-squad-info-DirectorPmc = Director
+rmc-squad-info-LeaderPmcPVE = Force Leader
+rmc-squad-info-TeamLeaderPmcPVE = Team Leader
 rmc-squad-info-LeaderPmc = Team Leader
 rmc-squad-info-CorporateLiaison = Corporate Liaison
 
