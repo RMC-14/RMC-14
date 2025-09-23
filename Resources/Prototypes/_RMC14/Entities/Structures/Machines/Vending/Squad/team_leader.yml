@@ -83,6 +83,8 @@
         points: 30
     - name: Clothing Items
       entries:
+      - id: RMCBackpackRTO
+        points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 5
