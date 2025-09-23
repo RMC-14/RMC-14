@@ -43,6 +43,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
+    mesons: true
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -67,6 +68,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
+    mesons: true
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -585,6 +587,12 @@
     - MASK
     - EYES
 
+- type: entity
+  parent: RMCSunglasses
+  id: RMCPrescriptionSunglasses
+  name: prescription sunglasses
+  description: A mixture of coolness and the inherent nerdiness of a prescription. Somehow manages to conceal both.
+
 # Identical to upstream ones, sans the name and description
 - type: entity
   parent: ClothingEyesEyepatch
@@ -741,15 +749,88 @@
     - MASK
     - EYES
 
+# Hippie Glasses
+
 - type: entity
   parent: RMCHipsterGlasses
   id: RMCHippieGlasses
   name: rounded prescription glasses
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+
+- type: entity
+  parent: RMCHippieGlasses
+  id: RMCHippieGlassesBloodred
+  name: StarTex-Sightwear bloodred rounded shades
+  description: Colorful, rounded shades from StarTex-Sightware, embraced by free spirits and those who march to the beat of their own drum. These vibrant, retro-inspired shades offer adequate protection against flashes while adding a touch of laid-back, bohemian style to any look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesGreen
+  name: StarTex-Sightwear green rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesMidnight
+  name: StarTex-Sightwear midnight rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesNightblue
+  name: StarTex-Sightwear nightblue rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesPink
+  name: StarTex-Sightwear pink rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesSunrise
+  name: StarTex-Sightwear sunrise rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+
+- type: entity
+  parent: RMCHippieGlassesBloodred
+  id: RMCHippieGlassesSunset
+  name: StarTex-Sightwear sunset rounded shades
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
 
 - type: entity
   parent: ClothingEyesBase
@@ -831,6 +912,22 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
+    slots:
+    - MASK
+    - EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGlassesMonocle
+  name: monocle
+  description: Such a dapper eyepiece!
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/monocle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/monocle.rsi
     slots:
     - MASK
     - EYES

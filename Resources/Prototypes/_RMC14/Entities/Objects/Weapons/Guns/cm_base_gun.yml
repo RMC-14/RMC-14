@@ -72,6 +72,7 @@
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
       params:
         variation: 0.2
+  - type: RMCGunChamber
 
 - type: entity
   abstract: true

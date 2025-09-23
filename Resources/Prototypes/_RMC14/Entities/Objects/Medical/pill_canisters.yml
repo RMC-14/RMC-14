@@ -1,4 +1,4 @@
-﻿# TODO RMC14 text labels on the bottom right
+# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
   id: RMCPillCanisterNoSkill
@@ -126,6 +126,38 @@
       RMCSkillMedical: 2
 
 - type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterMeralyneBicaridineNoSkill
+  name: meralyne-bicaridine pill bottle
+  suffix: Meralyne-Bicaridine, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 2
+  - type: Sprite
+    layers:
+    - state: pill_canister11
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillMeralyneBicaridine
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-merabic-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterMeralyneBicaridineNoSkill
+  id: RMCPillCanisterMeralyneBicaridine
+  suffix: Meralyne-Bicaridine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
   parent: CMPillCanister
   id: CMPillCanisterDexalin
   name: dexalin pill bottle
@@ -174,6 +206,7 @@
 - type: entity
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterInaprovalineNoSkill
+  name: inaprovaline pill bottle
   suffix: Inaprovaline, 16, No Skill
   components:
   - type: Item
@@ -229,6 +262,38 @@
   parent: RMCPillCanisterKelotaneNoSkill
   id: CMPillCanisterKelotane
   suffix: Kelotane, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterKelotaneDermalineNoSkill
+  name: kelotane-dermaline pill bottle
+  suffix: Kelotane-Dermaline, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 2
+  - type: Sprite
+    layers:
+    - state: pill_canister2
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillKelotaneDermaline
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-keloderm-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterKelotaneDermalineNoSkill
+  id: CMPillCanisterKelotaneDermaline
+  suffix: Kelotane-Dermaline, 16
   components:
   - type: StorageSkillRequired
     skills:

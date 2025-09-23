@@ -145,8 +145,11 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent) || _unrevivable.IsUnrevivable(ent))
+        if (_mobState.IsAlive(ent) ||
+            (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
+        {
             args.Cancelled = true;
+        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
