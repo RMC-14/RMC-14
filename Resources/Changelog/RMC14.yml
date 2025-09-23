@@ -1,30 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added more soul to Big Red (Solaris Ridge)
-    type: Tweak
-  id: 1860
-  time: '2025-06-18T02:47:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6720
-- author: noctyrnal
-  changes:
-  - message: Added the NP92 Pistol, NPZ92 Pistol, Type-73 Pistol, Type-74 Pistol,
-      ZHNK-72 Revolver, Type-88 Marksman Rifle, Type-64 SMG and QYJ-72 LMG for the
-      SPP.
-    type: Add
-  - message: Added the HE and Incend rockets for the HJRA-12
-    type: Add
-  - message: The HJRA-12 now has different sprites.
-    type: Tweak
-  - message: Adds shell boxes for the heavy shotgun shells used by the Type-23 shotgun.
-    type: Add
-  - message: Magazines no longer wrongly display as contraband.
-    type: Fix
-  - message: SPP now spawn with the correct weapons.
-    type: Fix
-  id: 1861
-  time: '2025-06-18T11:40:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6729
 - author: crazy1112345
   changes:
   - message: Added New Varadero survivors! This includes the Beach Bum, Miner, Priest,
@@ -4458,5 +4432,31 @@
   id: 2359
   time: '2025-09-22T13:43:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7971
+- author: SharkSnake98
+  changes:
+  - message: Added the PK-7 Electrostatic Pistol, hollow cane, cyanide, and cyanide
+      pill for the Corporate Liaison.
+    type: Add
+  - message: Gave the WEYA Fax Responder the dark cap instead of the PMC helmet
+    type: Tweak
+  - message: Added the Hollow Cane, PK-7 Magazine, and Cyanide to the WeYa Automated
+      Storage Briefcase
+    type: Tweak
+  id: 2360
+  time: '2025-09-23T04:55:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7041
+- author: noctyrnal
+  changes:
+  - message: Corpsmen on PVE now get pre-made Meralyne-Bicaridine and Kelotane-Dermaline
+      instead of regular Bicardirdine and Dermaline to make their lives easier.
+    type: Tweak
+  - message: Corpsmen on PVE now get tricordazine pill canisters in their vendors
+      too.
+    type: Add
+  - message: Adjusted PVE Corpsmen's vendor contents to remove unwanted content.
+    type: Tweak
+  id: 2361
+  time: '2025-09-23T12:22:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7954
 Name: RMC14
 Order: -1

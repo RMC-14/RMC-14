@@ -41,8 +41,9 @@
       #  points: 30
       #- id: /obj/item/reagent_container/hypospray/autoinjector/ultrazine/liaison
       #  points: 25
-      #- id: /obj/item/reagent_container/pill/cyanide
-      #  points: 20
+      - id: RMCPillCyanide
+        name: cyanide pill
+        points: 20
       #- id: /obj/item/trash/ceramic_plate
       #  points: 10
       - id: RMCSpaceCash1000 # TODO RMC14 counterfiet
@@ -87,13 +88,14 @@
       - id: CMClipboard
         points: 1
     - name: Misc
-      entries: []
-      #- id: Hollow cane
-      #  points: 15
+      entries:
+      - id: RMCHollowCane
+        name: hollow cane
+        points: 15
     - name: Ammo
-      entries: []
-      #- id: ES-4 stun mag
-      #  points: 10
+      entries:
+      - id: RMCMagazinePistolPK7
+        points: 10
     - name: Radio keys
       entries:
       - id: CMEncryptionKeyAlpha
