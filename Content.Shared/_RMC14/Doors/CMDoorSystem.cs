@@ -50,6 +50,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
 
         SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
+
+        SubscribeLocalEvent<RMCOpenOnlyWhenUnanchoredComponent, BeforeDoorClosedEvent>(OnOpenOnlyWhenUnanchoredBeforeClosed);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -183,6 +185,17 @@ public sealed class CMDoorSystem : EntitySystem
                     break;
             }
         }
+    }
+
+    private void OnOpenOnlyWhenUnanchoredBeforeClosed(Entity<RMCOpenOnlyWhenUnanchoredComponent> ent, ref BeforeDoorClosedEvent args)
+    {
+        if (TryComp(ent, out TransformComponent? xform) &&
+            xform.Anchored)
+        {
+            return;
+        }
+
+        args.Cancel();
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)

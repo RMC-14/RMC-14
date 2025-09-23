@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Commendations;
 using Robust.Shared.Network;
 

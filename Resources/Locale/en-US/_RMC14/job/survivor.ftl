@@ -241,6 +241,9 @@ CMSurvivorFiorinaCorporateLiaison = Fiorina Corporate Liaison
 cm-job-name-survivor-fiorina-doctor = Fiorina Doctor
 CMSurvivorFiorinaDoctor = Fiorina Doctor
 
+cm-job-name-survivor-fiorina-engineer = Fiorina Engineer
+CMSurvivorFiorinaEngineer = Fiorina Engineer
+
 cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
 CMSurvivorFiorinaResearcher = Fiorina Researcher
 
