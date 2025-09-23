@@ -510,12 +510,6 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
                 }
             }
 
-            if (choiceProto.TryGetComponent<HiveConstructionRequiresHiveCoreComponent>(out _, _compFactory))
-            {
-                if (_hive.GetHive(xeno.Owner) is not { } hiveEnt || !_hive.HasHiveCore(hiveEnt))
-                    return false;
-            }
-
             if (choiceProto.TryGetComponent<HiveConstructionRequiresHiveWeedsComponent>(out _, _compFactory) &&
                 !_xenoWeeds.IsOnHiveWeeds((gridId, grid), target))
                 return false;

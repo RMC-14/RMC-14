@@ -107,7 +107,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
-            _throw.TryThrow(heldEntity, target, user: xeno, compensateFriction: true);
+            _throw.TryThrow(heldEntity, target, user: xeno);
 
             // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
             // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
@@ -324,8 +324,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
 
         _hive.SetSameHive(xeno.Owner, para.Value);
+        _rmcObstacleSlamming.MakeImmune(para.Value);
         _transform.DropNextTo(para.Value, xeno.Owner);
         // Small throw
+
         _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
 
         return para;

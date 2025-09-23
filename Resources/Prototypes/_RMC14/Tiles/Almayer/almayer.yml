@@ -1,15 +1,4 @@
 - type: tile
-  abstract: true
-  id: CMTileBase
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: CMTileItemSteel
-  heatCapacity: 10000
-
-- type: tile
   parent: CMTileBase
   id: CMFloorSteel
   name: tiles-cm-default
@@ -45,6 +34,7 @@
   blockAnchoring: true
   blockConstruction: true
   weedsSpreadable: false
+  friction: 1
 
 - type: tile
   parent: CMFloorSteel

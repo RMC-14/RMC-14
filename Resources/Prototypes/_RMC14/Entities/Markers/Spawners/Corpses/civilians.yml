@@ -40,6 +40,14 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseScientistAegis
+  name: Corpse Spawner - Aegis Scientist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientistAegis
+
+- type: entity
+  parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseMiner
   name: Corpse Spawner - Shaft Miner
   components:

@@ -3,7 +3,9 @@
   id: CMJobSurvivorCECResearcher
   name: rmc-job-name-survivor-cec-researcher
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCECResearcher
+  playTimeTracker: CMJobSurvivorScientist
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorCECResearcher
   accessGroups:
   - ColonistMedical
@@ -13,7 +15,10 @@
     components:
     - type: Skills
       skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
         RMCSkillFireman: 1
+        RMCSkillFirearms: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
         RMCSkillResearch: 1
@@ -27,7 +32,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorScientist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -49,10 +54,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorCECResearcher
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetScientist
@@ -82,3 +83,4 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
+    tryEquipRandomOtherGear: false

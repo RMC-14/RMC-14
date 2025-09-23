@@ -61,8 +61,8 @@
       #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
       - id: RMCMagazinePistolM1984AP
         points: 5
       - id: CMMagazinePistolMK80
@@ -75,7 +75,7 @@
         points: 10
       - id: RMCGunCasePistolSmart
         points: 15
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 30
     - name: Armors
       entries:
@@ -222,10 +222,14 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

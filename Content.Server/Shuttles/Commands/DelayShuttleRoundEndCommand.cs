@@ -8,7 +8,10 @@ namespace Content.Server.Shuttles.Commands;
 /// <summary>
 /// Delays the round from ending via the shuttle call. Can still be ended via other means.
 /// </summary>
-[AdminCommand(AdminFlags.Fun)]
+// RMC14
+// "Disabled" because it does nothing and IK for a fact someones gonna run this accidentally.
+[AdminCommand(AdminFlags.Host)]
+// RMC14
 public sealed class DelayRoundEndCommand : LocalizedEntityCommands
 {
     [Dependency] private readonly EmergencyShuttleSystem _shuttleSystem = default!;

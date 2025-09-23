@@ -155,7 +155,8 @@
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      - RMCCircuitboard
+      - RMCSynthResetKey
       components:
       - Welder
       - PowerCell
@@ -198,7 +199,9 @@
       - RodMetal1
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #     - # TODO circuit board, stock parts
+      - RMCCircuitboard
+      - RMCSynthResetKey
+      # TODO stock parts
       components:
       - Welder
       - PowerCell
@@ -264,7 +267,8 @@
       - RMCShellShotgun
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      - RMCSynthResetKey
+      #      - # TODO analyzer
       components:
       - Welder
       - PowerCell
@@ -659,6 +663,12 @@
       state: highpower
       map: [ "mk45_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: tt
+      map: [ "t73_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: l54
+      map: [ "l54_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: deagle
       map: [ "handcannon_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -718,7 +728,9 @@
     - mk80_fill
     - b92fs_fill
     - mk45_fill
+    - t73_fill
     - m13_fill
+    - l54_fill
     - handcannon_fill
     - g_handcannon_fill
     - co_handcannon_fill
@@ -751,6 +763,14 @@
         whitelist:
           tags:
           - RMCWeaponPistolM13
+      t73_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolT73
+      l54_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolL54
       handcannon_fill:
         whitelist:
           tags:
@@ -799,10 +819,24 @@
     - id: RMCWeaponPistolT73
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolTSE
+  name: pistol belt
+  description: A dark brown leather pistol belt commonly issued to TSEPA officers. Although designed for the L54 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
+  suffix: TSE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_tsepa.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_tsepa.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
   name: M276 pattern general revolver holster rig
-  description: he M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
@@ -1055,7 +1089,7 @@
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2170s.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
@@ -1316,7 +1350,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazinePistolHandcannon
+    - id: RMCMagazinePistolHandcannonHI
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2

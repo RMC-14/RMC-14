@@ -2,6 +2,8 @@
   id: RMCAegisBox
   name: AEGIS Secure Crate
   description: A secure storage crate for transportation of AEGIS equipment. Seems sturdy enough to withstand any blows outside of an orbital strike. It is locked and requires an AEGIS ID card to open.
+  placement:
+    mode: SnapgridCenter
   components:
     - type: WarpPoint
       follow: true
@@ -14,7 +16,6 @@
       speed: 90
     - type: Sprite
       sprite: _RMC14/Objects/secure_box.rsi
-      noRot: true
       layers:
         - state: aegis_crate
           map: ["enum.AegisCrateVisualLayers.Base"]
@@ -22,7 +23,7 @@
       openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: aegiscrate
     - type: TacticalMapTracked
     - type: XenoMapTracked
@@ -36,7 +37,7 @@
         fix1:
           shape:
             !type:PhysShapeAabb
-            bounds: "-0.49,-0.49,0.49,0.49"   # 1x1 tile, centered
+            bounds: "-0.49,-0.49,0.49,0.49"
           density: 100
           mask:
             - CrateMask
@@ -44,10 +45,11 @@
             - MachineLayer
     - type: AccessReader
       access: [["CMAccessAegis"]]
-    - type: Lock
     - type: AnimationPlayer
     - type: Appearance
     - type: Corrodible
       isCorrodible: False
     - type: DestroyedByExplosionType
       explosion: RMCOBXenoTunnel
+    - type: Transform
+      anchored: true
