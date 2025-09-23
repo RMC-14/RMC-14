@@ -494,13 +494,16 @@ public sealed class RMCStorageSystem : EntitySystem
 
     private void ContainerDestructionEmpty(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt)
     {
+        if (!TryComp(containerEnt, out TransformComponent? transform) || TerminatingOrDeleted(transform.GridUid) || !Exists(containerEnt) || !TryComp(containerEnt, out ContainerManagerComponent? containerManager))
+            return;
+
         var ev = new RMCContainerDestructionEmptyEvent();
         RaiseLocalEvent(containerEnt, ref ev);
 
         if (ev.Handled)
             return;
 
-        var containers = _container.GetAllContainers(containerEnt);
+        var containers = _container.GetAllContainers(containerEnt, containerManager);
         foreach (var contain in containers)
         {
             _container.EmptyContainer(contain);
