@@ -9,7 +9,6 @@
   startingGear: RMCGearSynthetic
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
-  requireAdminNotify: true
   joinNotifyCrew: true
   whitelisted: true
   supervisors: cm-job-supervisors-co

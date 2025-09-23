@@ -1,0 +1,24 @@
+# Sorokyne
+- type: entity
+  abstract: true
+  parent: RMCMapInsertBase
+  id: RMCMapInsertSorokyneBase
+  suffix: Insert Sorokyne
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+# Standalones
+- type: entity
+  parent: RMCMapInsertSorokyneBase
+  id: RMCMapInsertSorokyneMedbay
+  name: CLF Camp
+  suffix: Insert Sorokyne
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/clfcamp.yml"
+      probability: 0.5
+      nightmareScenario: clfcamp

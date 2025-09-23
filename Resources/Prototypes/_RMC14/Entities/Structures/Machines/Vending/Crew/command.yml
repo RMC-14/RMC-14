@@ -244,6 +244,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMExecutiveOfficer
+    pointsType: Specialist
     sections:
     - name: Captain's Primary
       takeOne: CMPrimary
