@@ -7,9 +7,11 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.IoC;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -69,19 +71,21 @@ namespace Content.Client.Chat.UI
 
         public static SpeechBubble CreateSpeechBubble(SpeechType type, ChatMessage message, EntityUid senderEntity)
         {
+            var fontColor = message.MessageColorOverride;
+
             switch (type)
             {
                 case SpeechType.Emote:
-                    return new TextSpeechBubble(message, senderEntity, "emoteBox");
+                    return new TextSpeechBubble(message, senderEntity, "emoteBox", fontColor);
 
                 case SpeechType.Say:
-                    return new FancyTextSpeechBubble(message, senderEntity, "sayBox");
+                    return new FancyTextSpeechBubble(message, senderEntity, "sayBox", fontColor);
 
                 case SpeechType.Whisper:
-                    return new FancyTextSpeechBubble(message, senderEntity, "whisperBox");
+                    return new FancyTextSpeechBubble(message, senderEntity, "whisperBox", fontColor);
 
                 case SpeechType.Looc:
-                    return new TextSpeechBubble(message, senderEntity, "emoteBox", Color.FromHex("#48d1cc"));
+                    return new TextSpeechBubble(message, senderEntity, "emoteBox", fontColor ?? Color.FromHex("#48d1cc"));
 
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -200,9 +204,9 @@ namespace Content.Client.Chat.UI
 
         protected FormattedMessage ExtractAndFormatSpeechSubstring(ChatMessage message, string tag, Color? fontColor = null)
         {
-            return FormatSpeech(SharedChatSystem.GetStringInsideTag(message, tag), fontColor);
+            var content = SharedChatSystem.GetStringInsideTag(message, tag);
+            return FormatSpeech(content, fontColor);
         }
-
     }
 
     public sealed class TextSpeechBubble : SpeechBubble
@@ -245,7 +249,7 @@ namespace Content.Client.Chat.UI
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var senderUid = entityManager.GetEntity(message.SenderEntity);
 
-            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
+            if (speechStyleClass == "sayBox")
             {
                 if (message.SpeechStyleClass != null)
                     speechStyleClass = message.SpeechStyleClass;
@@ -255,18 +259,32 @@ namespace Content.Client.Chat.UI
 
             if (!ConfigManager.GetCVar(CCVars.ChatEnableFancyBubbles))
             {
+                var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+                if (!string.IsNullOrEmpty(message.LanguageIcon))
+                {
+                    var iconTexture = new TextureRect
+                    {
+                        Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(message.LanguageIcon),
+                        TextureScale = Vector2.One * 0.5f,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(0, 0, 4, 0)
+                    };
+                    container.AddChild(iconTexture);
+                }
+
                 var label = new RichTextLabel
                 {
                     MaxWidth = SpeechMaxWidth,
-                    StyleClasses = { "bubbleContent" }, //RMC14 The simplified bubble does not have any styles of its own and in order to apply styles to it we mark it in the same way as a regular bubble but it's a dummy, just a marker. damned.
+                    StyleClasses = { "bubbleContent" },
                 };
 
                 label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
+                container.AddChild(label);
 
                 var unfanciedPanel = new PanelContainer
                 {
                     StyleClasses = { "speechBox", speechStyleClass },
-                    Children = { label },
+                    Children = { container },
                     ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
                 };
                 return unfanciedPanel;
@@ -285,9 +303,25 @@ namespace Content.Client.Chat.UI
                 Margin = new Thickness(2, 6, 2, 2),
                 StyleClasses = { "bubbleContent" },
             };
-
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
+
+            var headerContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+
+            if (!string.IsNullOrEmpty(message.LanguageIcon))
+            {
+                var headerIconTexture = new TextureRect
+                {
+                    Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(message.LanguageIcon),
+                    TextureScale = Vector2.One * 0.4f,
+                    VerticalAlignment = VAlignment.Center,
+                    Margin = new Thickness(0, 0, 4, 0)
+                };
+                headerContainer.AddChild(headerIconTexture);
+            }
+
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
+            headerContainer.AddChild(bubbleHeader);
+
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
@@ -304,7 +338,7 @@ namespace Content.Client.Chat.UI
             var headerPanel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
-                Children = { bubbleHeader },
+                Children = { headerContainer },
                 ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top

@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids;
@@ -39,9 +40,11 @@ public abstract class SharedChatSystem : EntitySystem
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     /// <summary>
-    /// Cache of the keycodes for faster lookup.
+    /// Cache of the prefix+keycode combinations for faster lookup.
+    /// Key format: "prefix:keycode" (e.g., ":m", "!m")
     /// </summary>
-    public FrozenDictionary<char, RadioChannelPrototype> _keyCodes = default!;
+    public FrozenDictionary<string, RadioChannelPrototype> _channelLookup = default!;
+    public FrozenSet<char> _validPrefixes = default!;
 
     public override void Initialize()
     {
@@ -59,8 +62,18 @@ public abstract class SharedChatSystem : EntitySystem
 
     private void CacheRadios()
     {
-        _keyCodes = _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>()
-            .ToFrozenDictionary(x => x.KeyCode);
+        var channelDict = new Dictionary<string, RadioChannelPrototype>();
+        var prefixSet = new HashSet<char>();
+
+        foreach (var radioChannel in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
+        {
+            var key = $"{radioChannel.RadioPrefix}{radioChannel.KeyCode}";
+            channelDict[key] = radioChannel;
+            prefixSet.Add(radioChannel.RadioPrefix);
+        }
+
+        _channelLookup = channelDict.ToFrozenDictionary();
+        _validPrefixes = prefixSet.ToFrozenSet();
     }
 
     /// <summary>
@@ -106,10 +119,11 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length <= 2)
             return;
 
-        if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
+        if (!_validPrefixes.Contains(input[0]))
             return;
 
-        if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
+        var lookupKey = input[..2];
+        if (!_channelLookup.ContainsKey(lookupKey))
             return;
 
         prefix = input[..2];
@@ -133,84 +147,121 @@ public abstract class SharedChatSystem : EntitySystem
         out RadioChannelPrototype? channel,
         bool quiet = false)
     {
+        Log.Info($"TryProccessRadioMessage called: source={source}, input='{input}', quiet={quiet}");
+
         output = input.Trim();
         channel = null;
 
         if (input.Length == 0)
+        {
             return false;
+        }
 
-        // TODO RMC14 replace all of this with something else when chat code isnt a joke
         if (input.StartsWith(RadioCommonPrefix))
         {
+            Log.Info($"Input starts with RadioCommonPrefix '{RadioCommonPrefix}'");
             output = SanitizeMessageCapital(input[1..].TrimStart());
             channel = HasComp<XenoComponent>(source)
                 ? _prototypeManager.Index<RadioChannelPrototype>(HivemindChannel)
                 : _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
 
-            if (channel.ID == HivemindChannel &&
+            Log.Info($"Selected channel: {channel?.ID} (HasXenoComponent: {HasComp<XenoComponent>(source)})");
+
+            if (channel?.ID == HivemindChannel.Id &&
                 !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
             {
+                Log.Info("Hivemind channel blocked - no living queen");
                 if (!quiet)
                     _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), source, source, PopupType.LargeCaution);
-
                 output = SanitizeMessageCapital(input[1..].TrimStart());
                 return false;
             }
 
+            Log.Info($"Returning true with channel: {channel?.ID}, output: '{output}'");
             return true;
         }
 
-        if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
+        if (!_validPrefixes.Contains(input[0]))
+        {
+            Log.Info($"Input prefix '{input[0]}' not in valid prefixes: [{string.Join(", ", _validPrefixes)}]");
             return false;
+        }
 
         if (input.Length < 2 || char.IsWhiteSpace(input[1]))
         {
+            Log.Info($"Input too short or whitespace at position 1: length={input.Length}, char='{(input.Length > 1 ? input[1] : "N/A")}'");
             output = SanitizeMessageCapital(input[1..].TrimStart());
             if (HasComp<XenoComponent>(source))
+            {
+                Log.Info("Has XenoComponent, returning false");
                 return false;
-
+            }
             if (!quiet)
                 _popup.PopupEntity(Loc.GetString("chat-manager-no-radio-key"), source, source);
             return true;
         }
 
+        var prefix = input[0];
         var channelKey = input[1];
-        channelKey = char.ToLower(channelKey);
+        var lookupKey = $"{prefix}{char.ToLower(channelKey)}";
         output = SanitizeMessageCapital(input[2..].TrimStart());
 
-        if (channelKey == DefaultChannelKey)
+        Log.Info($"Processing radio message: prefix='{prefix}', channelKey='{channelKey}', lookupKey='{lookupKey}', output='{output}'");
+
+        // Try to find the channel using the composite key
+        if (_channelLookup.TryGetValue(lookupKey, out channel))
         {
+            Log.Info($"Found matching channel: {channel.ID}");
+        }
+        else if (channelKey == DefaultChannelKey || char.ToLower(channelKey) == DefaultChannelKey)
+        {
+            // Only if no specific channel was found AND it's the default key, try default channel
+            Log.Info($"No specific channel found and channelKey is DefaultChannelKey '{DefaultChannelKey}', trying default channel event");
             var ev = new GetDefaultRadioChannelEvent();
             RaiseLocalEvent(source, ev);
+
+            Log.Info($"GetDefaultRadioChannelEvent returned: {ev.Channel}");
 
             if (ev.Channel == HivemindChannel.Id &&
                 !_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
             {
+                Log.Info("Default channel is Hivemind but no living queen, blocking");
                 if (!quiet)
                     _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), source, source, PopupType.LargeCaution);
-
                 output = SanitizeMessageCapital(input[1..].TrimStart());
                 return false;
             }
 
             if (ev.Channel != null)
-                _prototypeManager.TryIndex(ev.Channel, out channel);
+            {
+                var success = _prototypeManager.TryIndex(ev.Channel, out channel);
+                Log.Info($"TryIndex for channel '{ev.Channel}': success={success}, channel={channel?.ID}");
+            }
+
+            Log.Info($"Returning true with default channel: {channel?.ID}");
             return true;
         }
 
-        if (!_keyCodes.TryGetValue(channelKey, out channel) && !quiet)
+        if (channel == null && !quiet)
         {
+            Log.Info($"No channel found for key '{lookupKey}', showing popup");
             var msg = Loc.GetString("chat-manager-no-such-channel", ("key", channelKey));
             _popup.PopupEntity(msg, source, source);
         }
 
+        Log.Info($"Raising ChatGetPrefixEvent with channel: {channel?.ID}");
         var prefixEv = new ChatGetPrefixEvent(channel);
         RaiseLocalEvent(source, ref prefixEv);
         channel = prefixEv.Channel;
+        Log.Info($"ChatGetPrefixEvent result: {channel?.ID}");
 
         if (HasComp<XenoComponent>(source) && channel == null)
+        {
+            Log.Info("Has XenoComponent but no channel, returning false");
             return false;
+        }
 
+        Log.Info($"Final result: channel={channel?.ID}, returning true");
         return true;
     }
 
@@ -218,14 +269,12 @@ public abstract class SharedChatSystem : EntitySystem
     {
         if (string.IsNullOrEmpty(message))
             return message;
-        // Capitalize first letter
         message = OopsConcat(char.ToUpper(message[0]).ToString(), message.Remove(0, 1));
         return message;
     }
 
     private static string OopsConcat(string a, string b)
     {
-        // This exists to prevent Roslyn being clever and compiling something that fails sandbox checks.
         return a + b;
     }
 
@@ -241,8 +290,6 @@ public abstract class SharedChatSystem : EntitySystem
             index = message.IndexOf(theWordI, index + 1)
         )
         {
-            // Stops the code If It's tryIng to capItalIze the letter I In the mIddle of words
-            // Repeating the code twice is the simplest option
             if (index + 1 < message.Length && char.IsLetter(message[index + 1]))
                 continue;
             if (index - 1 >= 0 && char.IsLetter(message[index - 1]))
@@ -266,7 +313,6 @@ public abstract class SharedChatSystem : EntitySystem
             trimmed = $"{message[..maxLength]}...";
         }
 
-        // No more than max newlines, other replaced to spaces
         if (maxNewlines > 0)
         {
             var chars = trimmed.ToCharArray();
@@ -293,7 +339,7 @@ public abstract class SharedChatSystem : EntitySystem
         var rawmsg = message.WrappedMessage;
         var tagStart = rawmsg.IndexOf($"[{outerTag}]");
         var tagEnd = rawmsg.IndexOf($"[/{outerTag}]");
-        if (tagStart < 0 || tagEnd < 0) //If the outer tag is not found, the injection is not performed
+        if (tagStart < 0 || tagEnd < 0)
             return rawmsg;
         tagStart += outerTag.Length + 2;
 
@@ -305,10 +351,6 @@ public abstract class SharedChatSystem : EntitySystem
         return rawmsg;
     }
 
-    /// <summary>
-    /// Injects a tag around all found instances of a specific string in a ChatMessage.
-    /// Excludes strings inside other tags and brackets.
-    /// </summary>
     public static string InjectTagAroundString(ChatMessage message, string targetString, string tag, string? tagParameter)
     {
         var rawmsg = message.WrappedMessage;

@@ -1,0 +1,189 @@
+- type: language
+  id: English
+  name: "English"
+  description: "The standard galactic English language."
+  isVisibleLanguage: true
+  chatPrefix: null
+  textColor: null
+  typefaceId: Default
+  textSize: 14
+  boldTypefaceId: null
+  showLanguageName: false
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/GB.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 150
+  obfuscationMethod:
+    !type:ReplacementObfuscation
+    replacement: ["<??>"]
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Xeno
+  name: "Xenomorph"
+  description: "The alien language of the Xenomorphs."
+  isVisibleLanguage: true
+  chatPrefix: 'x'
+  textColor: null
+  typefaceId: AnimalSilence
+  textSize: 16
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 80
+  obfuscationMethod:
+    !type:XenoObfuscation
+    xenoSounds: ["hss", "sss", "tss", "chk", "krr", "hrr", "skr", "tsk", "rrk", "hsk", "ssk"]
+    garbleChars: ['~', '?', '*', '#', '¿', '§']
+    intensityMultiplier: 1.0
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: French
+  name: "French"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  chatPrefix: 'f'
+  textColor: "#4169e1"
+  typefaceId: DefaultItalic
+  textSize: 14
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/FR.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["le", "de", "un", "ce", "ne", "se", "que", "qui", "son", "une"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Japanese
+  name: "Japanese"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  chatPrefix: 'j'
+  textColor: null
+  typefaceId: NotoSansDisplay
+  textSize: 14
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/JP.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no"]
+    minSyllables: 2
+    maxSyllables: 5
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Russian
+  name: "Russian"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  chatPrefix: 'r'
+  textColor: "#ffd700"
+  typefaceId: DefaultBold
+  textSize: 14
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/RU.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 130
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["да", "нет", "что", "как", "где", "кто", "все", "это", "был", "она"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: German
+  name: "German"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  chatPrefix: 'g'
+  textColor: "#ffa500"
+  typefaceId: DefaultBold
+  textSize: 15
+  boldTypefaceId: DefaultBoldItalic
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/DE.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 125
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["der", "die", "das", "ein", "ist", "und", "mit", "von", "auf", "für"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}

@@ -1,4 +1,3 @@
-using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
@@ -9,6 +8,8 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Language.Systems;
+using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -23,6 +24,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Server.Administration.Logs;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -39,6 +41,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!; // RMC14
     [Dependency] private readonly IChatManager _chatManager = default!; // RMC14
+    [Dependency] private readonly SharedLanguageSystem _languageSystem = default!; // RMC14
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -53,7 +56,7 @@ public sealed class RadioSystem : EntitySystem
             Variation = 0.1f,
             MaxDistance = 3.75f,
         },
-    }; // RMC14
+    };
 
     public override void Initialize()
     {
@@ -82,9 +85,9 @@ public sealed class RadioSystem : EntitySystem
     /// <summary>
     /// Send radio message to all active radio listeners
     /// </summary>
-    public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, LanguagePrototype? language = null, bool escapeMarkup = true)
     {
-        SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, escapeMarkup: escapeMarkup);
+        SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, language, escapeMarkup);
     }
 
     /// <summary>
@@ -92,11 +95,22 @@ public sealed class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, LanguagePrototype? language = null, bool escapeMarkup = true)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
             return;
+
+        // RMC14
+        var currentLanguage = language?.ID ?? _languageSystem.GetCurrentLanguage(messageSource);
+
+        if (language != null && !language.CanUseRadio)
+            return;
+
+        var languageColor = _languageSystem.GetLanguageColor(currentLanguage);
+        var showLanguageName = _languageSystem.DoesLanguageShowName(currentLanguage);
+        var languageIcon = showLanguageName ? _languageSystem.GetLanguageIcon(currentLanguage) : null;
+        // RMC14
 
         var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
         RaiseLocalEvent(messageSource, evt);
@@ -136,6 +150,7 @@ public sealed class RadioSystem : EntitySystem
 
         // RMC14 increase font size
         var radioFontSize = speech.FontSize;
+        var radioFontId = language?.TypefaceId ?? speech.FontId; // RMC14
         if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
             TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
         {
@@ -144,23 +159,12 @@ public sealed class RadioSystem : EntitySystem
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),
-            ("fontType", speech.FontId),
+            ("fontType", radioFontId), // RMC14
             ("fontSize", radioFontSize), // RMC14
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", name),
             ("message", content));
-
-        // most radios are relayed to chat, so lets parse the chat message beforehand
-        var chat = new ChatMessage(
-            ChatChannel.Radio,
-            message,
-            wrappedMessage,
-            GetNetEntity(messageSource),
-            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
-        var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg);
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -197,6 +201,58 @@ public sealed class RadioSystem : EntitySystem
                 continue;
 
             // send the message
+            //RMC - because we cant send the same msg to everyone - tho i think there is better way
+            string actualMessage = message;
+            string actualWrappedMessage = wrappedMessage;
+            Color? actualColorOverride = languageColor;
+            string? actualLanguageIcon = languageIcon;
+
+            EntityUid? listenerEntity = null;
+            if (TryComp<IntrinsicRadioReceiverComponent>(receiver, out var intrinsicReceiver))
+            {
+                listenerEntity = receiver;
+            }
+            else
+            {
+                var query = EntityQueryEnumerator<WearingHeadsetComponent>();
+                while (query.MoveNext(out var wearer, out var wearing))
+                {
+                    if (wearing.Headset == receiver)
+                    {
+                        listenerEntity = wearer;
+                        break;
+                    }
+                }
+            }
+
+            if (listenerEntity.HasValue && !_languageSystem.CanUnderstand(listenerEntity.Value, currentLanguage))
+            {
+                var obfuscatedMessage = _languageSystem.ObfuscateMessage(message, currentLanguage);
+                actualMessage = obfuscatedMessage;
+
+                actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+                    ("color", channel.Color),
+                    ("fontType", radioFontId),
+                    ("fontSize", radioFontSize),
+                    ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                    ("channel", $"\\[{channel.LocalizedName}\\]"),
+                    ("name", name),
+                    ("message", escapeMarkup ? FormattedMessage.EscapeText(obfuscatedMessage) : obfuscatedMessage));
+            }
+
+            var chat = new ChatMessage(
+                ChatChannel.Radio,
+                actualMessage,
+                actualWrappedMessage,
+                GetNetEntity(messageSource),
+                _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
+                colorOverride: actualColorOverride,
+                languageIcon: actualLanguageIcon,
+                repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
+
+            var chatMsg = new MsgChatMessage { Message = chat };
+            var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg);
+            //RMC
             RaiseLocalEvent(receiver, ref ev);
         }
 
@@ -209,11 +265,21 @@ public sealed class RadioSystem : EntitySystem
         }
 
         if (name != Name(messageSource))
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName} in {currentLanguage}: {message}");
         else
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName} in {currentLanguage}: {message}");
 
-        _replay.RecordServerMessage(chat);
+        var replayChat = new ChatMessage(
+            ChatChannel.Radio,
+            message,
+            wrappedMessage,
+            GetNetEntity(messageSource),
+            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
+            colorOverride: languageColor,
+            languageIcon: languageIcon,
+            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
+        _replay.RecordServerMessage(replayChat);
+
         _messages.Remove(message);
     }
 

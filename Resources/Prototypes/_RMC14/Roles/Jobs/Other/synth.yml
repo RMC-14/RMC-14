@@ -19,6 +19,27 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      currentLanguage: English
+      defaultLanguage: English
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: Skills
       skills:
         RMCSkillCqc: 5

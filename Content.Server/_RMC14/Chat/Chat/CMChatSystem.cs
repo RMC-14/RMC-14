@@ -1,5 +1,7 @@
-﻿using System.Text.RegularExpressions;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
+using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
@@ -8,6 +10,8 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Radio;
+using Content.Shared.Radio.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -23,58 +27,19 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
     private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
-    private static readonly Regex PrefixesRegex = new(@"^:(\w)+");
 
     private readonly List<ICommonSession> _toRemove = new();
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MarineComponent, ChatMessageAfterGetRecipients>(OnMarineAfterGetRecipients);
-        SubscribeLocalEvent<XenoComponent, ChatMessageAfterGetRecipients>(OnXenoAfterGetRecipients);
     }
 
-    private void OnMarineAfterGetRecipients(Entity<MarineComponent> ent, ref ChatMessageAfterGetRecipients args)
-    {
-        _toRemove.Clear();
-
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
-                continue;
-
-            if (HasComp<XenoComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
-        }
-    }
-
-    private void OnXenoAfterGetRecipients(Entity<XenoComponent> ent, ref ChatMessageAfterGetRecipients args)
-    {
-        _toRemove.Clear();
-
-        foreach (var (session, data) in args.Recipients)
-        {
-            if (data.Observer)
-                continue;
-
-            if (!HasComp<XenoComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
-        }
-    }
 
     public override string SanitizeMessageReplaceWords(EntityUid source, string msg)
     {
@@ -141,26 +106,49 @@ public sealed class CMChatSystem : SharedCMChatSystem
         );
     }
 
+    private bool IsValidRadioPrefix(EntityUid source, string prefixPart)
+    {
+        if (prefixPart.Length != 2)
+            return false;
+
+        var radioQuery = GetEntityQuery<ActiveRadioComponent>();
+        if (!radioQuery.HasComponent(source))
+            return false;
+
+        var hasRadio = radioQuery.GetComponent(source);
+        var allChannels = _proto.EnumeratePrototypes<RadioChannelPrototype>();
+
+        var prefix = prefixPart[0];
+        var keycode = char.ToLowerInvariant(prefixPart[1]);
+
+        foreach (var ch in allChannels)
+        {
+            if (!hasRadio.Channels.Contains(ch.ID))
+                continue;
+
+            if (ch.RadioPrefix == prefix && ch.KeyCode == keycode)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public List<string>? TryMultiBroadcast(EntityUid source, string message)
     {
-        if (!message.StartsWith(SharedChatSystem.RadioChannelPrefix))
+        if (string.IsNullOrEmpty(message) || message.Length < 2)
             return null;
-
-        if (message.Length < 3)
-            return null;
-
-        if (!_chatSystem._keyCodes.ContainsKey(char.ToLowerInvariant(message[1])) ||
-            !_chatSystem._keyCodes.ContainsKey(char.ToLowerInvariant(message[2])))
-        {
-            return null;
-        }
 
         if (!HasComp<InventoryComponent>(source))
             return null;
 
-        var matches = PrefixesRegex.Matches(message);
-        if (matches.Count == 0)
+        var radioQuery = GetEntityQuery<ActiveRadioComponent>();
+        if (!radioQuery.HasComponent(source))
             return null;
+
+        var hasRadio = radioQuery.GetComponent(source);
+        var allChannels = _proto.EnumeratePrototypes<RadioChannelPrototype>();
 
         var time = _timing.CurTime;
         Entity<HeadsetMultiBroadcastComponent>? headset = null;
@@ -181,25 +169,54 @@ public sealed class CMChatSystem : SharedCMChatSystem
             return null;
 
         var messages = new List<string>();
-        var replace = new List<string>();
-        var captures = matches[0].Groups[1].Captures;
-        var count = Math.Min(captures.Count, headset.Value.Comp.Maximum);
-        for (var i = 0; i < count; i++)
-        {
-            replace.Add(captures[i].Value);
-        }
+        var validPrefixes = new List<string>();
 
-        for (var i = 0; i < replace.Count; i++)
+        var i = 0;
+        while (i + 1 < message.Length)
         {
-            var subMsg = message;
-            for (var j = 0; j < replace.Count; j++)
+            var prefix = message[i];
+            var keycode = char.ToLowerInvariant(message[i + 1]);
+            var found = false;
+
+            foreach (var ch in allChannels)
             {
-                if (i == j)
+                if (!hasRadio.Channels.Contains(ch.ID))
                     continue;
 
-                subMsg = subMsg.Remove(subMsg.IndexOf(replace[j], StringComparison.Ordinal), 1);
+                if (ch.RadioPrefix == prefix && ch.KeyCode == keycode)
+                {
+                    validPrefixes.Add(message.Substring(i, 2));
+                    i += 2;
+                    found = true;
+                    break;
+                }
             }
 
+            if (!found)
+                i++;
+        }
+
+        if (validPrefixes.Count < 2)
+            return null;
+
+        var count = Math.Min(validPrefixes.Count, headset.Value.Comp.Maximum);
+        validPrefixes = validPrefixes.Take(count).ToList();
+
+        for (var idx = 0; idx < validPrefixes.Count; idx++)
+        {
+            var subMsg = message;
+            for (var j = 0; j < validPrefixes.Count; j++)
+            {
+                if (idx == j)
+                    continue;
+
+                var toRemove = validPrefixes[j];
+                var index = subMsg.IndexOf(toRemove, StringComparison.Ordinal);
+                if (index >= 0)
+                {
+                    subMsg = subMsg.Remove(index, toRemove.Length);
+                }
+            }
             messages.Add(subMsg);
         }
 
