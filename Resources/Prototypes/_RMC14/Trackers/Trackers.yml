@@ -68,6 +68,7 @@
 - type: trackerMode
   id: TeamLeaderPmcPVE
   job: CMPMCTeamLeadPVE
+  alert: SquadTrackerPMCTeamLeader
 
 - type: trackerMode
   id: CorporateLiaison
