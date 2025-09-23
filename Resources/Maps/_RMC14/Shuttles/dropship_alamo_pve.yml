@@ -30,7 +30,7 @@ entities:
     - type: MetaData
       name: Alamo
     - type: Transform
-      pos: -0.625,-0.421875
+      pos: 0,0
       parent: invalid
     - type: MapGrid
       chunks:
