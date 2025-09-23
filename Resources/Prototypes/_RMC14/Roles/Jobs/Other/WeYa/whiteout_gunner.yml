@@ -3,7 +3,6 @@
   id: RMCPMCWhiteoutGunner
   name: rmc-job-name-pmc-whiteout-gunner
   startingGear: RMCPMCWhiteoutGunner
-  icon: RMCJobIconPMCWhiteoutGunner
   spawnMenuRoleName: WEYA Whiteout Combat Gunner Unit
 
 - type: entity
@@ -59,10 +58,3 @@
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconPMCWhiteoutGunner
-  icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: pmc_gun
