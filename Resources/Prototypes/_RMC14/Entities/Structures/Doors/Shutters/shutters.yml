@@ -25,7 +25,7 @@
         mask:
         - FullTileMask
         layer:
-        - AirlockLayer
+        - WallLayer
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
@@ -73,6 +73,7 @@
     activeLoad: 20
     channel: Environment
   - type: RMCOpenOnAlertLevel
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCShutterBaseIndestructible

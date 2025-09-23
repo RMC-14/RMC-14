@@ -1,7 +1,9 @@
-﻿using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared._RMC14.Storage.Containers;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -77,6 +79,9 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<RMCEntityStorageWhitelistComponent, ContainerIsInsertingAttemptEvent>(OnEntityStorageWhitelistAttempt);
 
         SubscribeLocalEvent<EntityStorageCloseOnMapInitComponent, MapInitEvent>(OnEntityStorageClose);
+
+        SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, DestructionEventArgs>(OnContainerEmptyDestroyed);
+        SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, EntityTerminatingEvent>(OnContainerEmptyDeleted);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -348,7 +353,7 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
-    private bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
+    public bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
     {
         popup = default;
         if (user == null)
@@ -469,6 +474,40 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    private void OnContainerEmptyDestroyed(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt, ref DestructionEventArgs args)
+    {
+        if (!containerEnt.Comp.OnDestruction)
+            return;
+
+        ContainerDestructionEmpty(containerEnt);
+    }
+
+    private void OnContainerEmptyDeleted(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt, ref EntityTerminatingEvent args)
+    {
+        if (!containerEnt.Comp.OnDelete)
+            return;
+
+        ContainerDestructionEmpty(containerEnt);
+    }
+
+    private void ContainerDestructionEmpty(Entity<RMCContainerEmptyOnDestructionComponent> containerEnt)
+    {
+        if (!TryComp(containerEnt, out TransformComponent? transform) || TerminatingOrDeleted(transform.GridUid) || !Exists(containerEnt) || !TryComp(containerEnt, out ContainerManagerComponent? containerManager))
+            return;
+
+        var ev = new RMCContainerDestructionEmptyEvent();
+        RaiseLocalEvent(containerEnt, ref ev);
+
+        if (ev.Handled)
+            return;
+
+        var containers = _container.GetAllContainers(containerEnt, containerManager);
+        foreach (var contain in containers)
+        {
+            _container.EmptyContainer(contain);
+        }
     }
 
     public int EstimateFreeColumns(Entity<StorageComponent?> storage)

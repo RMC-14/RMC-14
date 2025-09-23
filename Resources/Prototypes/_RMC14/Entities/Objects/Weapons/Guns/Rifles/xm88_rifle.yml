@@ -104,7 +104,7 @@
       gun_chamber: !type:ContainerSlot
       ballistic-ammo: !type:Container
   - type: RMCLoreExaminable
-    content: Originally developed by AEGIS Battlefield Armaments for the government of the state of Greater Brazil for use against mechanized infantry. The platform features an onboard computerized targeting system, sensor array, and an electronic autoloader; these features work in tandem to reduce and render inert armor on the users target with successive hits. The Almayer was issued a small amount of XM88s while preparing for Operation Swamp Hopper with the UNS Nan-Shan. # Mention Favela Wars lore analogue here
+    content: rmc-lore-examinable-xm-88-heavy-rifle # Mention Favela Wars lore analogue here
 
 - type: entity
   parent: BulletRifle10x24mm

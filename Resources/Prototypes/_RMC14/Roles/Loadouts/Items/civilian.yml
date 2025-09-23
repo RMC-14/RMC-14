@@ -84,80 +84,21 @@
   equipment:
     shoes: RMCShoesPurple
 
-# Plushies
+# Hats
 - type: loadout
-  id: PlushieFarwaRMC
+  id: HeadCowboyHatLightRMC
   cost: 2
-  storage:
-    back:
-    - CMPlushieFarwa
+  equipment:
+    head: RMCHeadCowboyHatLight
 
 - type: loadout
-  id: PlushieBarricadeRMC
+  id: HeadCowboyHatDarkRMC
   cost: 2
-  storage:
-    back:
-    - CMPlushieBarricade
+  equipment:
+    head: RMCHeadCowboyHatDark
 
 - type: loadout
-  id: PlushieBeeRMC
+  id: HeadBandRebelRMC
   cost: 2
-  storage:
-    back:
-    - CMPlushieBee
-
-- type: loadout
-  id: PlushieSharkGreyRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieSharkGrey
-
-- type: loadout
-  id: PlushieSharkBlueRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieSharkBlue
-
-- type: loadout
-  id: PlushieSharkPinkRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieSharkPink
-
-- type: loadout
-  id: PlushieMothRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieMoth
-
-- type: loadout
-  id: PlushieRockRMC
-  cost: 2
-  storage:
-    back:
-    - CMPlushieRock
-
-- type: loadout
-  id: PlushieTherapyRMC
-  cost: 2
-  storage:
-    back:
-    - CMPlushieTherapy
-
-- type: loadout
-  id: PlushieGnarpGnarpRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieGnarpGnarp
-
-- type: loadout
-  id: PlushieGnarpGnarpAltRMC
-  cost: 2
-  storage:
-    back:
-    - RMCPlushieGnarpGnarpAlt
+  equipment:
+    head: CMHeadBandRebel

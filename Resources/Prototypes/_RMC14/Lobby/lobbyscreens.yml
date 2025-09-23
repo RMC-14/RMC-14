@@ -53,3 +53,7 @@
 - type: lobbyBackground
   id: Evac
   background: /Textures/_RMC14/Lobby/Evac.png
+
+- type: lobbyBackground
+  id: Intelligence
+  background: /Textures/_RMC14/Lobby/Intelligence.png

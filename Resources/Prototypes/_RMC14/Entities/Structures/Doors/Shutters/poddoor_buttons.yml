@@ -36,6 +36,7 @@
     idleLoad: 2
     activeLoad: 4
     channel: Environment
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCPodDoorButton
@@ -112,6 +113,14 @@
   components:
   - type: RMCDoorButton
     id: cl_quarter_windows
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonSPP
+  suffix: Locked, SPP
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSPPGeneral" ] ]
 
 - type: entity
   parent: RMCPodDoorButton

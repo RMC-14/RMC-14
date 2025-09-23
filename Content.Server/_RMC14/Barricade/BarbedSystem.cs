@@ -21,7 +21,7 @@ public sealed class BarbedSystem : SharedBarbedSystem
     {
         var newComp = EnsureComp<BarbedComponent>(args.New);
         newComp.IsBarbed = comp.IsBarbed;
-        base.UpdateBarricade((args.New, newComp));
+        UpdateBarricade((args.New, newComp), true);
     }
 
     private void OnBarbedStateChanged(Entity<BarbedComponent>ent, ref BarbedStateChangedEvent args)

@@ -1,7 +1,7 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK2
-  id: WeaponRifleM54C
+  id: RMCWeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
@@ -17,6 +17,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m54c-mk2
   - type: Gun
     selectedMode: FullAuto
     availableModes:
@@ -94,10 +96,10 @@
           - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-barrel: 0.8425, 0.001
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-underbarrel: 0.349, -0.375
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi
@@ -110,9 +112,9 @@
     - RMCWeaponRifleM54CMK2
 
 - type: entity
-  parent: WeaponRifleM54C
-  id: WeaponRifleM54CStripped
-  suffix: Stripped
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CStripped
+  suffix: Stripped, Filled
   components:
   - type: ItemSlots
     slots:
@@ -165,6 +167,82 @@
           - RMCAttachmentVerticalGrip
           - RMCAttachmentExtinguisher
           - RMCAttachmentFlamer
+
+- type: entity
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+
+- type: entity
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CFilled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+
+- type: entity
+  parent: RMCWeaponRifleM54CSemiStripped
+  id: RMCWeaponRifleM54CWhite
+  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+  suffix: White, No UGL
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsibleWhite
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -220,7 +298,7 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
   - type: RMCLoreExaminable
-    content: Unlike standard HEAP magazines, these reserve bullets do not have depleted uranium tips. Instead, these rounds trade off some of their bullet package for a lighter weight, reducing damage but increasing penetration capabilities and muzzle velocity.
+    content: rmc-lore-examinable-m54c-ap-magazine
 
 - type: entity
   parent: CMMagazineRifleM54C

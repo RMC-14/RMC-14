@@ -3,7 +3,7 @@
   id: CMJobIconLiaison
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudWE-YA
+    state: hudsquad_liaison
 
 - type: jobIcon
   parent: CMJobIconBase
@@ -15,6 +15,13 @@
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconReconSynthetic
-  icon: 
+  icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_syn_forecon
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonExec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hc_exec

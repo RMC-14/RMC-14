@@ -12,12 +12,14 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  - RMCWeYa
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -36,7 +38,7 @@
   id: RMCGearProvostResponder
   equipment:
     head: RMCHeadBeretProvost
-    eyes: CMGlassesSecurity
+    eyes: CMGlassesSecurity # TODO: replace with sec hud
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
     outerClothing: RMCProvostCommandJacket
@@ -44,9 +46,11 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
     belt: CMClipboard
-    back: CMSatchelSecurity
+    back: CMSatchelSecurityFilledFaxResponder
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
+  inhand:
+    - CMStampProvost
 
 - type: entity
   parent: CMIDCardGold

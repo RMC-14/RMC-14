@@ -59,6 +59,7 @@
           Hundred: { state: "on-100" }
           Overloaded: { state: "overloaded" }
   - type: BlockXenoConstruction
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCGeneratorFusion

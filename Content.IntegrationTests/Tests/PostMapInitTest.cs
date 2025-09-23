@@ -90,6 +90,10 @@ namespace Content.IntegrationTests.Tests
             "RMCAdminFax",
             "GoldenArrowLarge",
             "OCP-583",
+            "Haurchefant",
+            "Breakwater_Strand",
+            "UNSEndeavour",
+            "Berkley",
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";

@@ -26,7 +26,7 @@
     - RMCDecalBloodFloor5
     - RMCDecalBloodFloor6
     - RMCDecalBloodFloor7
-    
+
 - type: entity
   parent: RMCDecalSpawnerBase
   id: RMCDecalSpawnerXenoSplatters
@@ -41,7 +41,7 @@
     - RMCDecalBloodXenonidSplatter4
     - RMCDecalBloodXenonidSplatter5
     - RMCDecalBloodXenonidSplatter6
-    
+
 - type: entity
   parent: RMCDecalSpawnerBase
   id: RMCDecalSpawnerOilSplatters
@@ -57,3 +57,14 @@
     - RMCDecalOilFloor5
     - RMCDecalOilFloor6
     - RMCDecalOilFloor7
+
+- type: entity
+  parent: RMCDecalSpawnerXenoSplatters
+  id: RMCDecalSpawnerAcidBloodSplash
+  name: xeno acid splash spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    radius: 0.7
+    prob: 0.5
+    maxDecalsPerTile: 4

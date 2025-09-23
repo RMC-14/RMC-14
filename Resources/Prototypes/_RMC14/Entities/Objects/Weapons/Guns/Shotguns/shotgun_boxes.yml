@@ -87,7 +87,7 @@
     layers:
     - state: smallshell_box
       color: "#578e75"
-    - state: shell_box_slugs
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -116,9 +116,9 @@
     layers:
     - state: smallshell_box
       color: "#c6cdd3"
-    - state: smallshell_box_marking
+    - state: shell_box_buckshot
       color: "#ffcb26"
-    - state: shell_box_incendiary
+    - state: smallshell_box_marking
       color: "#b8533d"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -147,7 +147,7 @@
     layers:
     - state: smallshell_box
       color: "#5786be"
-    - state: shell_box_beanbag
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -176,7 +176,7 @@
     layers:
     - state: smallshell_box
       color: "#6551a0"
-    - state: shell_box_flechette
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -205,9 +205,9 @@
     layers:
     - state: smallshell_box
       color: "#c6cdd3"
-    - state: smallshell_box_marking
+    - state: shell_box_buckshot
       color: "#e49331"
-    - state: shell_box_incendiary
+    - state: smallshell_box_marking
       color: "#b8533d"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -236,7 +236,7 @@
     layers:
     - state: smallshell_box
       color: "#595959"
-    - state: shell_box_breaching
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -258,6 +258,7 @@
   id: RMCBoxShotgunBuckshot8g
   name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+  suffix: 8 Gauge
   components:
   - type: Storage
     whitelist:
@@ -302,9 +303,9 @@
       color: "#681a1a"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#681a1a"
       map: [ "full" ]
     - state: smallshell_empty
@@ -329,11 +330,11 @@
     layers:
     - state: smallshell_box
       color: "#1e4c1e"
-    - state: shell_box_slugs
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#1e4c1e"
       map: [ "full" ]
     - state: smallshell_empty
@@ -358,11 +359,11 @@
     layers:
     - state: smallshell_box
       color: "#162f41"
-    - state: shell_box_beanbag
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#162f41"
       map: [ "full" ]
     - state: smallshell_empty
@@ -387,11 +388,11 @@
     layers:
     - state: smallshell_box
       color: "#4b1c68"
-    - state: shell_box_flechette
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#4b1c68"
       map: [ "full" ]
     - state: smallshell_empty
@@ -416,11 +417,11 @@
     layers:
     - state: smallshell_box
       color: "#757575"
-    - state: shell_box_incendiary
+    - state: shell_box_buckshot
       color: "#ab4008"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#ab4008"
       map: [ "full" ]
     - state: smallshell_empty

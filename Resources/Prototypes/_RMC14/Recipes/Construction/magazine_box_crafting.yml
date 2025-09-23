@@ -285,6 +285,20 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+# M34 Incinerator
+
+- type: construction
+  parent: RMC
+  name: Flamer Tank Box (UT-Napthal Fuel)
+  id: RMCBoxFlamerTankEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxFlamerTankEmpty
+  category: construction-category-cm-box-magazine
+  description: A flamer tank box that can contain UT-Napthal fuel tanks.
+  iconColor: "#3d3832"
+  objectType: Item
+
 # Nailgun
 - type: construction
   parent: RMC
@@ -487,6 +501,19 @@
         amount: 1
         doAfter: 0.25
 
+    # SSG45
+    - to: RMCBoxMagazineRifleSSG45Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazineRifleSSG45APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M63
     - to: RMCBoxMagazineSMGM63Empty
       steps:
@@ -604,6 +631,13 @@
         amount: 1
         doAfter: 0.25
 
+    # M34 Incinerator
+    - to: RMCBoxFlamerTankEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # Nailgun
     - to: RMCBoxMagazineSMGNailgunEmpty
       steps:
@@ -696,6 +730,12 @@
   - node: RMCBoxBulletsRifleAPEmpty
     entity: RMCBoxBulletsRifleAPEmpty
 
+  # SSG45
+  - node: RMCBoxMagazineRifleSSG45Empty
+    entity: RMCBoxMagazineRifleSSG45Empty
+  - node: RMCBoxMagazineRifleSSG45APEmpty
+    entity: RMCBoxMagazineRifleSSG45APEmpty
+
   #AK4047
   - node: RMCBoxMagazineRifleAK4047Empty
     entity: RMCBoxMagazineRifleAK4047Empty
@@ -763,6 +803,10 @@
   # XM88
   - node: RMCBoxBullets458Empty
     entity: RMCBoxBullets458Empty
+
+  # M34 Incinerator
+  - node: RMCBoxFlamerTankEmpty
+    entity: RMCBoxFlamerTankEmpty
 
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty
