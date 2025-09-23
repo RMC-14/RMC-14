@@ -53,7 +53,7 @@
       - id: RMCHardhatOrange
         name: orange hard hat
       - id: RMCHelmetWelding
-      # /obj/item/clothing/head/cmcap/flap
+      - id: CMHeadFlapCap
 #    - name: Suit
 #      choices: { CMSuit: 1 }
 #      entries:
@@ -287,7 +287,7 @@
       - id: RMCFlashlight
         points: 1
         recommended: true
-      - id: RMCFulton
+      - id: RMCFulton20
         points: 5
       - id: RMCMotionDetector
         points: 5

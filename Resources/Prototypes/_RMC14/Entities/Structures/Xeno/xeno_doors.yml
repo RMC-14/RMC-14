@@ -48,6 +48,7 @@
     noAirWhenFullyAirBlocked: false
   - type: RadiationBlocker
     resistance: 3
+  - type: RMCMesonsNonviewable
   - type: Occluder
   - type: Damageable
     damageContainer: StructuralXeno
@@ -75,6 +76,7 @@
     closingSpriteState: closed_unlit
   - type: XenoConstructionPlasmaCost
     plasma: 120
+    scalingCost: true
   - type: XenoStructureUpgradeable
     to: DoorXenoResinThick
     cost: 25
@@ -139,5 +141,6 @@
         Slash: 900
   - type: XenoConstructionPlasmaCost
     plasma: 145
+    scalingCost: true
   - type: XenoStructureUpgradeable
     to: null

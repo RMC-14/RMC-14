@@ -1,0 +1,62 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerShuttle
+  name: shuttle spawner
+  suffix: Generic
+  description: Defines a location to spawn a shuttle in.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_response_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerShuttle
+  id: RMCSpawnerPVEAlamo
+  suffix: PVE Alamo
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/dropship_alamo_pve.yml"
+
+- type: entity
+  parent: RMCSpawnerShuttle
+  id: RMCSpawnerPVENormandy
+  suffix: PVE Normandy
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/dropship_normandy_pve.yml"
+
+- type: entity
+  parent: RMCSpawnerShuttle
+  id: RMCSpawnerERTShuttle
+  suffix: ERT Generic
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_response_shuttle.yml"
+    offset: -0.5,-0.5
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleWeYa
+  suffix: ERT PMC
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleSPP
+  suffix: ERT SPP
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_spp_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleTSE
+  suffix: ERT TSE
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_tse_shuttle.yml"

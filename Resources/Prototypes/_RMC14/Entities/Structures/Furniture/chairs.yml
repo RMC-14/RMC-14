@@ -17,6 +17,7 @@
   - type: Tag
     tags:
     - RMCSeat
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: [ CMSeatBase, ChairFolding ]

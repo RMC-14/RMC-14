@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f74929c306a5d2ec5832abcdc695aea1b0786664/icons/turf/walls/almayer.dmi",
+  "copyright": "Taken from cmss13 and cmss13-pve at https://github.com/cmss13-devs/cmss13/blob/f74929c306a5d2ec5832abcdc695aea1b0786664/icons/turf/walls/almayer.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/f74929c306a5d2ec5832abcdc695aea1b0786664/icons/turf/walls/almayer.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -47,6 +47,38 @@
     {
       "name": "wall7",
       "directions": 4
+    },
+    {
+      "name": "almayer_deco_wall0",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "almayer_deco_wall1"
+    },
+    {
+      "name": "almayer_deco_wall2"
+    },
+    {
+      "name": "almayer_deco_wall3",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "almayer_elevator"
+    },
+    {
+      "name": "almayer_friegt"
     }
   ]
 }
