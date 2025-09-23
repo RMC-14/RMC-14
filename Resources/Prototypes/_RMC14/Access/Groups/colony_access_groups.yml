@@ -17,9 +17,15 @@
   - CMAccessColonyPublic
 
 - type: accessGroup
+  id: ColonistObserver
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyCommand
+
+- type: accessGroup
   id: ColonyCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessResearch
   - CMAccessMedical
   - CMAccessColonyPublic
@@ -34,7 +40,7 @@
 - type: accessGroup
   id: CMCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessPress
   - CMAccessMarinePrep
 

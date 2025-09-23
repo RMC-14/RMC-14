@@ -1,6 +1,9 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -8,6 +11,8 @@ namespace Content.Shared._RMC14.Chat;
 
 public abstract class SharedCMChatSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SquadSystem _squadSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MarineComponent, ChatGetPrefixEvent>(OnMarineGetPrefix);
@@ -46,7 +51,7 @@ public abstract class SharedCMChatSystem : EntitySystem
     {
     }
 
-    public virtual void ChatMessageToOne(
+    public void ChatMessageToOne(
         string message,
         EntityUid target,
         ChatChannel channel = ChatChannel.Local,
@@ -87,5 +92,26 @@ public abstract class SharedCMChatSystem : EntitySystem
         float audioVolume = 0,
         NetUserId? author = null)
     {
+    }
+
+    public string? ColorizeSpeakerNameBySquadOrNull(ChatMessage msg)
+    {
+        var colorMode = _config.GetCVar(RMCCVars.RMCChatSquadColorMode);
+        Color? squadColor = null;
+
+        if (colorMode == true && _squadSystem.TryGetSquadMemberColor(GetEntity(msg.SenderEntity), out var color, accessible: true))
+            squadColor = color;
+
+        if (squadColor != null)
+        {
+            msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(
+                msg,
+                outerTag: "Name",
+                innerTag: "color",
+                tagParameter: squadColor.Value.ToHex());
+            return msg.WrappedMessage;
+        }
+
+        return null;
     }
 }

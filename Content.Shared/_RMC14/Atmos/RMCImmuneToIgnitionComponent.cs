@@ -18,4 +18,16 @@ public sealed partial class RMCImmuneToIgnitionComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityWhitelist? BypassWhitelist;
+
+    /// <summary>
+    /// How much fire intensity this entity can resist before being ignited.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int IntensityResistance = 80;
+
+    /// <summary>
+    /// Toggle this false if you want direct flamer hits to still ignite the entity.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ImmuneToDirectHits = true;
 }

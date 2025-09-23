@@ -294,7 +294,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/apron_daily_grind.rsi
 
 - type: entity
-  parent: [ClothingOuterBase, RMCAllowSuitStorageClothingExternalWebbing]
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCOuterEngineeringUtilityOversuit
   name: Weston-Yamada engineer utility oversuit
   description: A Weston-Yamada engineer utility uniform. Used as a general purpose utility oversuit by Weston-Yamada colony engineers.

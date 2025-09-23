@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.0
+  engineVersion: 264.0.1
   forkId: ""
   forkVersion: ""
-  time: 07/20/2025 21:13:49
-  entityCount: 17334
+  time: 08/30/2025 13:41:09
+  entityCount: 17336
 maps:
 - 1
 grids:
@@ -50922,73 +50922,6 @@ entities:
     components:
     - type: Transform
       pos: 100.5,123.5
-      parent: 1
-- proto: CMVendorCigs
-  entities:
-  - uid: 2625
-    components:
-    - type: Transform
-      pos: 3.5,129.5
-      parent: 1
-  - uid: 2626
-    components:
-    - type: Transform
-      pos: 112.5,53.5
-      parent: 1
-  - uid: 2627
-    components:
-    - type: Transform
-      pos: 106.5,122.5
-      parent: 1
-  - uid: 2628
-    components:
-    - type: Transform
-      pos: 126.5,149.5
-      parent: 1
-  - uid: 2629
-    components:
-    - type: Transform
-      pos: 111.5,69.5
-      parent: 1
-  - uid: 2630
-    components:
-    - type: Transform
-      pos: 120.5,74.5
-      parent: 1
-  - uid: 2631
-    components:
-    - type: Transform
-      pos: 120.5,83.5
-      parent: 1
-  - uid: 2632
-    components:
-    - type: Transform
-      pos: 52.5,54.5
-      parent: 1
-  - uid: 2633
-    components:
-    - type: Transform
-      pos: 161.5,39.5
-      parent: 1
-  - uid: 2634
-    components:
-    - type: Transform
-      pos: 164.5,37.5
-      parent: 1
-  - uid: 2635
-    components:
-    - type: Transform
-      pos: 138.5,158.5
-      parent: 1
-  - uid: 2636
-    components:
-    - type: Transform
-      pos: 134.5,58.5
-      parent: 1
-  - uid: 2637
-    components:
-    - type: Transform
-      pos: 163.5,150.5
       parent: 1
 - proto: CMVendorCoffee
   entities:
@@ -116691,6 +116624,18 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 107.5,76.5
       parent: 1
+- proto: RMCMonitorCameraLandingZone
+  entities:
+  - uid: 17335
+    components:
+    - type: Transform
+      pos: 23.5,32.5
+      parent: 1
+  - uid: 17336
+    components:
+    - type: Transform
+      pos: 22.5,139.5
+      parent: 1
 - proto: RMCMotionDetector
   entities:
   - uid: 14871
@@ -127503,6 +127448,75 @@ entities:
     - type: Transform
       pos: 66.5,49.5
       parent: 1
+- proto: RMCVendorCigsElectro
+  entities:
+  - uid: 2625
+    components:
+    - type: Transform
+      pos: 163.5,150.5
+      parent: 1
+  - uid: 2627
+    components:
+    - type: Transform
+      pos: 138.5,158.5
+      parent: 1
+  - uid: 2628
+    components:
+    - type: Transform
+      pos: 164.5,37.5
+      parent: 1
+  - uid: 2629
+    components:
+    - type: Transform
+      pos: 161.5,39.5
+      parent: 1
+  - uid: 2631
+    components:
+    - type: Transform
+      pos: 120.5,83.5
+      parent: 1
+  - uid: 2632
+    components:
+    - type: Transform
+      pos: 120.5,74.5
+      parent: 1
+- proto: RMCVendorCigsWeYa
+  entities:
+  - uid: 2626
+    components:
+    - type: Transform
+      pos: 134.5,58.5
+      parent: 1
+  - uid: 2630
+    components:
+    - type: Transform
+      pos: 52.5,54.5
+      parent: 1
+  - uid: 2633
+    components:
+    - type: Transform
+      pos: 111.5,69.5
+      parent: 1
+  - uid: 2634
+    components:
+    - type: Transform
+      pos: 126.5,149.5
+      parent: 1
+  - uid: 2635
+    components:
+    - type: Transform
+      pos: 106.5,122.5
+      parent: 1
+  - uid: 2636
+    components:
+    - type: Transform
+      pos: 112.5,53.5
+      parent: 1
+  - uid: 2637
+    components:
+    - type: Transform
+      pos: 3.5,129.5
+      parent: 1
 - proto: RMCVialBoxFull
   entities:
   - uid: 16716
@@ -128956,6 +128970,83 @@ entities:
     - type: Transform
       pos: 86.5,94.5
       parent: 1
+- proto: RMCWeaponRifleM54C
+  entities:
+  - uid: 270
+    components:
+    - type: Transform
+      parent: 264
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 277
+    components:
+    - type: Transform
+      parent: 271
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 284
+    components:
+    - type: Transform
+      parent: 278
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 415
+    components:
+    - type: Transform
+      parent: 410
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 421
+    components:
+    - type: Transform
+      parent: 416
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: RMCWeaponRifleM54CE2
+  entities:
+  - uid: 17132
+    components:
+    - type: Transform
+      pos: 114.5,70.5
+      parent: 1
+- proto: RMCWeaponRifleM54CMK1
+  entities:
+  - uid: 387
+    components:
+    - type: Transform
+      parent: 382
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 393
+    components:
+    - type: Transform
+      parent: 388
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 17133
+    components:
+    - type: Transform
+      pos: 161.5,46.5
+      parent: 1
+  - uid: 17134
+    components:
+    - type: Transform
+      pos: 166.5,35.5
+      parent: 1
+- proto: RMCWeaponRifleM54CStripped
+  entities:
+  - uid: 17135
+    components:
+    - type: Transform
+      pos: 53.5,21.5
+      parent: 1
 - proto: RMCWeaponShotgunHG3712
   entities:
   - uid: 16985
@@ -129724,83 +129815,6 @@ entities:
     components:
     - type: Transform
       pos: 172.5,99.5
-      parent: 1
-- proto: WeaponRifleM54C
-  entities:
-  - uid: 270
-    components:
-    - type: Transform
-      parent: 264
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 277
-    components:
-    - type: Transform
-      parent: 271
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 284
-    components:
-    - type: Transform
-      parent: 278
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 415
-    components:
-    - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 421
-    components:
-    - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: WeaponRifleM54CE2
-  entities:
-  - uid: 17132
-    components:
-    - type: Transform
-      pos: 114.5,70.5
-      parent: 1
-- proto: WeaponRifleM54CMK1
-  entities:
-  - uid: 387
-    components:
-    - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 393
-    components:
-    - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 17133
-    components:
-    - type: Transform
-      pos: 161.5,46.5
-      parent: 1
-  - uid: 17134
-    components:
-    - type: Transform
-      pos: 166.5,35.5
-      parent: 1
-- proto: WeaponRifleM54CStripped
-  entities:
-  - uid: 17135
-    components:
-    - type: Transform
-      pos: 53.5,21.5
       parent: 1
 - proto: WeaponShotgunM357
   entities:

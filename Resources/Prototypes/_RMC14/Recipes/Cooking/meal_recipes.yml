@@ -157,3 +157,16 @@
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
+
+#Cakes
+- type: microwaveMealRecipe
+  id: RecipeRMCSuppermatter
+  name: suppermatter recipe
+  result: FoodCakeSuppermatter
+  time: 30
+  solids:
+    FoodCakeBatter: 2
+  reagents:
+    Sugar: 30
+    RMCNitrogen: 10
+    RMCPhoron: 10

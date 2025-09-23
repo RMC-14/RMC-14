@@ -1,0 +1,47 @@
+- type: job
+  parent: CMRifleman
+  id: CMPVERifleman
+  playTimeTracker: CMJobPVERifleman
+  ranks:
+    RMCRankPrivate: []
+  spawnMenuRoleName: Sun Rider Rifleman (PVE)
+  supervisors: cm-job-supervisors-secserg
+  startingGear: RMCGearPVERifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVERifleman
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVERifleman
+  equipment:
+    id: RMCDogtagPVERifleman
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVERifleman
+  name: PVE rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVERifleman
+  - type: Sprite
+    state: marine_spawn
