@@ -161,6 +161,7 @@
     items:
       tags:
       - RMCMagazineSmartGunirradiated
+      - RMCMagazineSmartGun
 
 - type: entity
   parent: RMCArmorM4PMCNoLight
