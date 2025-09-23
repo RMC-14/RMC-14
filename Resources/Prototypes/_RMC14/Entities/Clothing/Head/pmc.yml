@@ -1,5 +1,18 @@
 # PMC headgear
 - type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetPMC
+  name: PMC tactical cap
+  description: A protective cap made from flexible kevlar. Standard issue for most security forms in the place of a helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
   parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
   id: RMCArmorHelmetPMCTactical
   name: tactical helmet
@@ -18,19 +31,6 @@
     - FacialHair
   - type: PointLight
     color: "#73e6f5"
-
-- type: entity
-  parent: ArmorHelmetM10
-  id: ArmorHelmetPMC
-  name: PMC tactical cap
-  description: A protective cap made from flexible kevlar. Standard issue for most security forms in the place of a helmet.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: ArmorHelmetPMC
