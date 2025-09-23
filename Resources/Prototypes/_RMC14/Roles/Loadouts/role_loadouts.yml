@@ -886,7 +886,7 @@
 # PVE
 
 - type: roleLoadout
-  id: CMPVERifleman
+  id: JobCMPVERifleman
   points: 7
   groups:
   - MarineBackpack
@@ -899,7 +899,7 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVEHospitalCorpsman
+  id: JobCMPVEHospitalCorpsman
   points: 7
   groups:
   - MarineBackpack
@@ -912,7 +912,7 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESmartGunOperator
+  id: JobCMPVESmartGunOperator
   points: 7
   groups:
   - MarineBackpack
@@ -925,7 +925,7 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESquadLeader
+  id: JobCMPVESquadLeader
   points: 7
   groups:
   - MarineBackpack
@@ -938,7 +938,7 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESectionSergeant
+  id: JobCMPVESectionSergeant
   points: 7
   groups:
   - MarineBackpack
@@ -951,7 +951,7 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVEPlatoonCommander
+  id: JobCMPVEPlatoonCommander
   points: 7
   groups:
   - MarineBackpack
