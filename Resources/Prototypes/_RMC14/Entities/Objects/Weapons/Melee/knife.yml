@@ -215,9 +215,6 @@
       types:
         Slash: 40
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 20
         
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
