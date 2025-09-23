@@ -3,7 +3,7 @@
   id: CMJobSurvivorReactorTechnician
   name: rmc-job-name-survivor-reactor-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorReactorTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorReactorTechnician
   accessGroups:
   - ColonistEngi
@@ -30,7 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -54,10 +54,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorReactorTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

@@ -481,7 +481,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
             Prototype(weededEntity) is not { } weededEntityProto ||
             !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId) ||
-            TerminatingOrDeleted(weedSource))
+            TerminatingOrDeleted(weedSource) ||
+            comp.HasReplaced)
         {
             return;
         }
@@ -505,6 +506,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
         curWeeds.Clear();
         RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
+        comp.HasReplaced = true;
         QueueDel(ent);
     }
 

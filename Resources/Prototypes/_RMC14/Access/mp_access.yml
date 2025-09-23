@@ -1,8 +1,10 @@
 ﻿- type: accessLevel
   id: CMAccessBrig
+  parent: RMCBaseMPAccess
   name: id-card-access-level-brig
 
 - type: accessLevel
   id: CMAccessArmory
+  parent: RMCBaseMPAccess
   name: id-card-access-level-armory
 

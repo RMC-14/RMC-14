@@ -30,27 +30,19 @@ public sealed class CMHealthIconsSystem : EntitySystem
         if (!TryComp<RMCHealthIconsComponent>(damageable, out var iconsComp))
             return icons;
 
-        if (_unrevivable.IsUnrevivable(damageable))
-        {
-            icon = RMCHealthIconTypes.Dead;
-            if (iconsComp.Icons.TryGetValue(icon, out var deadIcon))
-                icons.Add(_prototype.Index(deadIcon));
-
-            return icons;
-        }
-
         if (_mobState.IsDead(damageable))
         {
             var stage = _unrevivable.GetUnrevivableStage(damageable.Owner, 4);
-            if (stage <= 1)
+            if (_unrevivable.IsUnrevivable(damageable))
+                icon = RMCHealthIconTypes.Dead;
+            else if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
+                icon = RMCHealthIconTypes.DeadDNR;
+            else if (stage <= 1)
                 icon = RMCHealthIconTypes.DeadDefib;
             else if (stage == 2)
                 icon = RMCHealthIconTypes.DeadClose;
             else if (stage == 3)
                 icon = RMCHealthIconTypes.DeadAlmost;
-
-            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
-                icon = RMCHealthIconTypes.DeadDNR;
         }
 
         if (iconsComp.Icons.TryGetValue(icon, out var iconToUse))

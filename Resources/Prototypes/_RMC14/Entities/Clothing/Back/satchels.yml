@@ -96,8 +96,9 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
   - type: Storage
     grid:
-    - 0,0,20,1 # 21, Satchel but with backpack capacity
+    - 0,0,14,1 # 15 slots
   - type: ClothingRequireEquipped
+    autoUnequip: true
     whitelist:
       tags:
       - RMCScoutArmor
@@ -235,6 +236,16 @@
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecuritySurvivorFillRiotOfficer
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCRC6RiotShield
 
 - type: entity
   parent: CMSatchelSecurity
@@ -577,6 +588,13 @@
           Ring: { state: ring }
           Ear: { state: ear }
   - type: Undisposable
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: CMSatchel

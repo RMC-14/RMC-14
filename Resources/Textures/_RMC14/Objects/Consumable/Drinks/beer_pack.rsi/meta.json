@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0e5b77c99f162aa1462823e996ba8e0d52656448/icons/obj/items/drinkcans.dmi, edited by SharkSnake98",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "6-pack-1"
+    },
+	  {
+      "name": "6-pack-2"
+    },
+    {
+      "name": "6-pack-3"
+    },
+    {
+      "name": "6-pack-4"
+    },
+    {
+      "name": "6-pack-5"
+    },
+    {
+      "name": "6-pack-6"
+    },
+    {
+      "name": "crushed"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    }
+  ]
+}

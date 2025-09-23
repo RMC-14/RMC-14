@@ -1,31 +1,51 @@
 ﻿<controls:TechControlConsoleOptionWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Intel"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
-    <BoxContainer Orientation="Vertical">
-        <BoxContainer Orientation="Horizontal">
-            <RichTextLabel Text="[bold]Information[/bold]" />
-            <Control HorizontalExpand="True" />
-            <Label Name="CurrentPointsLabel" Access="Public" />
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#1A1A1A" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="6">
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="0 0 0 1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-tech-information-header}" />
+                    <Control HorizontalExpand="True" />
+                    <Label Name="CurrentPointsLabel" Access="Public" />
+                </BoxContainer>
+            </PanelContainer>
+            <ui:BlueHorizontalSeparator Margin="0 0 0 6"/>
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+                <RichTextLabel Text="{Loc rmc-ui-tech-name-label}" MinWidth="110" />
+                <Label Name="NameLabel" Access="Public" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+                <RichTextLabel Text="{Loc rmc-ui-tech-description-label}" MinWidth="110" />
+                <Label Name="DescriptionLabel" Access="Public" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
+                <RichTextLabel Text="{Loc rmc-ui-tech-cost-label}" MinWidth="110" />
+                <Label Name="CostLabel" Access="Public" />
+            </BoxContainer>
+            <BoxContainer Name="StatisticsContainer" Access="Public" Orientation="Horizontal" Margin="0 6 0 0">
+                <RichTextLabel Text="{Loc rmc-ui-tech-statistics-label}" MinWidth="110" />
+                <BoxContainer Name="Statistics" Access="Public" Orientation="Vertical" />
+            </BoxContainer>
+            <Button Name="PurchaseButton"
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Margin="0 15 0 0"
+                    StyleClasses="OpenBoth" />
         </BoxContainer>
-        <ui:BlueHorizontalSeparator />
-        <BoxContainer Orientation="Horizontal">
-            <RichTextLabel Text="[color=#5B88B0]Name:[/color]" MinWidth="110" />
-            <Label Name="NameLabel" Access="Public" />
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
-            <RichTextLabel Text="[color=#5B88B0]Description:[/color]" MinWidth="110" />
-            <Label Name="DescriptionLabel" Access="Public" />
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
-            <RichTextLabel Text="[color=#5B88B0]Cost:[/color]" MinWidth="110" />
-            <Label Name="CostLabel" Access="Public" />
-        </BoxContainer>
-        <BoxContainer Name="StatisticsContainer" Access="Public" Orientation="Horizontal">
-            <RichTextLabel Text="[color=#5B88B0]Statistics:[/color]" MinWidth="110" />
-            <BoxContainer Name="Statistics" Access="Public" Orientation="Vertical" />
-        </BoxContainer>
-        <Button Name="PurchaseButton" Access="Public" Text="Purchase"
-                HorizontalExpand="True" StyleClasses="OpenBoth" Margin="0 15 0 0" />
-    </BoxContainer>
+    </PanelContainer>
 </controls:TechControlConsoleOptionWindow>

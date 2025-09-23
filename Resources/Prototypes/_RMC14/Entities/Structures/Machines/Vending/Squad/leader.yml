@@ -31,11 +31,6 @@
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
-    - name: Armors
-      entries:
-      - id: RMCArmorM4Zipties
-        name: leader M4 pattern marine armor (zipties)
-        points: 16
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
@@ -179,8 +174,8 @@
       #  points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 3
+      - id: RMCMagazinePistolM1984HP
+        points: 3
       - id: RMCMagazinePistolM1984AP
         points: 3
       - id: CMMagazinePistolMK80
@@ -233,10 +228,16 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: RMCArmorB12Zipties
-        name: leader B12 pattern marine armor (zipties)
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+    - name: Armor
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorB12Zipties
+        name: leader B12 pattern marine armor (zipties)
+        recommended: true
+      - id: RMCArmorM4Zipties
+        name: leader M4 pattern marine armor (zipties)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -293,7 +294,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
@@ -349,7 +352,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54C
+    - id: RMCWeaponRifleM54C
     - id: RMCAttachmentAngledGrip
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel

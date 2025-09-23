@@ -1,23 +1,23 @@
 {
-    "version": 1,
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2155fd8d51bc8325da1f98b90f9c6f9062b0790f/icons/obj/items/weapons/guns/ammo_by_faction/USCM/pistols.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mag-1"
     },
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi",
-    "states": [
-        {
-            "name": "base"
-        },
-        {
-            "name": "base_ap"
-        },
-        {
-            "name": "mag-1"
-        },
-                {
-            "name": "base_ap-1"
-        }
-    ]
+    {
+      "name": "base"
+    },
+    {
+      "name": "ammo_band"
+    },
+    {
+      "name": "ammo_band_empty"
+    }
+  ]
 }

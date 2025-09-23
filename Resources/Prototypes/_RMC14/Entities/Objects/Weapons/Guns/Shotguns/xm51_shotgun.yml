@@ -105,6 +105,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+  - type: RMCGunChamber
+    enabled: false
 
 - type: Tag
   id: RMCWeaponShotgunXM51
