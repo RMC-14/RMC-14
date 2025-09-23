@@ -31,10 +31,12 @@
     sound:
       collection: ToySqueak
       params:
-        volume: -4
+        volume: -8
   - type: UseDelay
   - type: Clothing
     slots: [mask]
   - type: Tag
     tags:
     - PetWearable
+  - type: TileFrictionModifier
+    modifier: 0.5  
