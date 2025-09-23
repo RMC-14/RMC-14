@@ -999,29 +999,20 @@
     - RMCDropshipWeaponPoint
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall85]
+  parent: CMAlamoWall85
   id: CMNormandyWall85
-  name: electronic system attach point
-  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
-    state: "85"
-  - type: Icon
-    state: "85"
 
 - type: entity
-  parent: [CMNormandyWall85, CMAlamoWall85Flipped]
+  parent: CMAlamoWall85Flipped
   id: CMNormandyWall85Flipped
   suffix: 85, Flipped
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
-    layers:
-    - state: "85_flipped"
-    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0.5
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall86]

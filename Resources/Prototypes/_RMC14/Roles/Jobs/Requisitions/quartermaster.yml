@@ -26,7 +26,7 @@
   marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
-  - CMQM
+  - QuarterMaster
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

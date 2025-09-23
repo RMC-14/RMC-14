@@ -31,6 +31,14 @@
     color: "#D2E3EC"
 
 - type: entity
+  parent: CMLightTube
+  id: RMCLightTubeWarm
+  suffix: Orange
+  components:
+  - type: LightBulb
+    color: "#FA8E2A"
+
+- type: entity
   parent: CMLightTubeBase
   id: CMLightTubeBroken
   name: light tube

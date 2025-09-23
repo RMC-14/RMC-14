@@ -44,6 +44,7 @@
   greeting: rmc-job-greeting-survivor
   hasIcon: false
   useLoadoutOfJob: CMSurvivor # for inheritance
+  basePlaytimeTracker: true
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack

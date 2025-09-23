@@ -32,8 +32,23 @@ rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
+cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
+cm-job-prefix-survivor-icb = ICB Rep.
+
+cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
+CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
+
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+# misc survs
+
+cm-job-name-survivor-prisoner = Prisoner
+CMSurvivorPrisoner = Prisoner
+
+cm-job-name-survivor-gang-leader = Gang Leader
+CMSurvivorGangLeader = Gang Leader
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -140,9 +155,6 @@ cm-job-name-survivor-technician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
 
-cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
-cm-job-prefix-survivor-icb = ICB
-
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
 # Hybrisa Prospera Survs
@@ -219,3 +231,24 @@ cm-job-name-survivor-trijent-engi-hydro = Hydro Electric Engineer
 cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
+CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Fiorina Science Annex Survs
+
+cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison
+CMSurvivorFiorinaCorporateLiaison = Fiorina Corporate Liaison
+
+cm-job-name-survivor-fiorina-doctor = Fiorina Doctor
+CMSurvivorFiorinaDoctor = Fiorina Doctor
+
+cm-job-name-survivor-fiorina-engineer = Fiorina Engineer
+CMSurvivorFiorinaEngineer = Fiorina Engineer
+
+cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
+CMSurvivorFiorinaResearcher = Fiorina Researcher
+
+cm-job-name-survivor-riot-officer = United Nations Riot Officer
+CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
+cm-job-prefix-survivor-riot-officer = UN RO
+
+CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
