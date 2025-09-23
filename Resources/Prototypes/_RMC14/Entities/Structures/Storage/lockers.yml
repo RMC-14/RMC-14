@@ -152,6 +152,8 @@
   name: red alert gun cabinet
   components:
   - type: RMCUnlockOnAlertLevel
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMLockerBase

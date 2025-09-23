@@ -2098,7 +2098,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
         {
             await using var db = await GetDb();
-            return  await db.DbContext.RMCCommendations
+            return await db.DbContext.RMCCommendations
                 .Where(c => c.ReceiverId == player)
                 .ToListAsync();
         }
@@ -2106,9 +2106,24 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
         {
             await using var db = await GetDb();
-            return  await db.DbContext.RMCCommendations
+            return await db.DbContext.RMCCommendations
                 .Where(c => c.GiverId == player)
                 .ToListAsync();
+        }
+
+        public async Task IncreaseInfects(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.RMCPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.RMCPlayerStats
+                .Add(new RMCPlayerStats { PlayerId = player })
+                .Entity;
+
+            stats.ParasiteInfects++;
+
+            await db.DbContext.SaveChangesAsync();
         }
 
         #endregion

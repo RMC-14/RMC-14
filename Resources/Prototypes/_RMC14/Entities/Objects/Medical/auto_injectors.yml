@@ -511,7 +511,7 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
-  id: RMCMedicAutoInjectorMeralyneBicaridine15
+  id: RMCMedicAutoInjectorMeraBic15
   suffix: MeraBic
   components:
   - type: SolutionContainerManager
@@ -528,7 +528,7 @@
 
 - type: entity
   parent: RMCMedicAutoInjector15
-  id: RMCMedicAutoInjectorDermalineKelotane15
+  id: RMCMedicAutoInjectorKeloDerm15
   suffix: KeloDerm
   components:
   - type: SolutionContainerManager
