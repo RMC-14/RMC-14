@@ -46,6 +46,7 @@
 - type: trackerMode
   id: SectionSergeant
   job: CMPVESectionSergeant
+  alert: SquadTrackerSunRiders
 
 - type: trackerMode
   id: FireteamLeader
@@ -54,6 +55,7 @@
 - type: trackerMode
   id: PVESquadLeader
   job: CMPVESquadLeader
+  alert: SquadTrackerSunRiders
 
 - type: trackerMode
   id: Rifleman

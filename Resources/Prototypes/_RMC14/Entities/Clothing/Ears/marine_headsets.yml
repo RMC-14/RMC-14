@@ -478,7 +478,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantSquadLeaderTracker
-    defaultMode: SquadLeader
+    defaultMode: SectionSergeant
     trackerModes:
     - SectionSergeant
     - PVESquadLeader
