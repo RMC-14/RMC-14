@@ -76,6 +76,17 @@
     access: [["CMAccessColonyCommand"]]
 
 - type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeLiaison
+  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, explosion resistant, and assistant resistant."
+  suffix: Corporate Liaison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["RMCAccessWeYa"]]
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
