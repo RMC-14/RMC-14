@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -319,7 +320,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (validateEv.Invalid)
             return;
 
-        if (!_rmcActions.CanUseActionPopup(user, actionEnt))
+        if (!_rmcActions.CanUseActionPopup(user, actionEnt, GetEntity(ev.EntityTarget)))
             return;
 
         // All checks passed. Perform the action!
@@ -364,7 +365,10 @@ public abstract class SharedActionsSystem : EntitySystem
             _rotateToFace.TryFaceCoordinates(user, targetWorldPos);
 
         if (!ValidateEntityTarget(user, target, ent))
+        {
+            args.Invalid = true;
             return;
+        }
 
         _adminLogger.Add(LogType.Action,
             $"{ToPrettyString(user):user} is performing the {Name(ent):action} action (provided by {ToPrettyString(args.Provider):provider}) targeted at {ToPrettyString(target):target}.");
@@ -437,7 +441,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (targetAction.CheckCanAccess)
         {
             // RMC14
-            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range) ||
+            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
                    // if not just checking pure range, let stored entities be targeted by actions
                    // if it's out of range it probably isn't stored anyway...
                    _interaction.CanAccessViaStorage(user, target);

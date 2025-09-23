@@ -265,6 +265,10 @@
     range: 1.5
   - type: EntityTargetAction
     event: !type:XenoSacrificeHealActionEvent
+      componentsRemove:
+      - type: RMCSlowdown
+      - type: RMCSuperSlowdown
+      - type: RMCRooted
 
 - type: entity
   parent: ActionXenoBase

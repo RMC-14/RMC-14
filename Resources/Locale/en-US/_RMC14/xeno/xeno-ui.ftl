@@ -1,8 +1,8 @@
-﻿rmc-xeno-words-of-the-queen-header = The words of the Queen reverberate in our head...
+rmc-xeno-words-of-the-queen-header = The words of the Queen reverberate in our head...
 
-xeno-ui-reserve-parasites-title = Reserve Parasites
+xeno-ui-reserve-parasites-title = Reserve Children
 xeno-ui-reserve-parasites-apply-button-text = Apply
-xeno-reserve-parasites-verb = Reserve Parasites
+xeno-reserve-parasites-verb = Reserve Children
 
 xeno-ui-find-parasite-title = Find Parasite
 xeno-ui-find-parasite-spawn-button = Take Parasite
@@ -22,3 +22,8 @@ rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a b
 rmc-xeno-tracker-target-Queen = Queen
 rmc-xeno-tracker-target-HiveLeader = Hive Leader
 rmc-xeno-tracker-target-Tunnel = Tunnel
+rmc-xeno-tracker-target-HiveCore = Hive Core
+
+rmc-xeno-ui-ovi-needed-label = [bold][color=red]The Queen must be in their\novipositor for you to gain points![/color][/bold]
+rmc-xeno-ui-evolution-points = Evolution points: { $points } / { $maxPoints }
+rmc-ui-xeno-strain-confirm = Confirm

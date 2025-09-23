@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: CMBasePaper
@@ -150,7 +150,7 @@
 
 - type: entity
   parent: CMPaper
-  id: CMPaperAegisInfoFax
+  id: RMCPaperAegisInfoFax
   name: High Command Transmission
   components:
     - type: Paper
@@ -198,55 +198,26 @@
         [color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy is a violation of federal law and will result in prosecution.[/color][/italic]
 
 - type: entity
-  parent: CMPaperAegisInfoFax
-  id: CMPaperAegisLobbyInfoFax
+  parent: RMCPaperAegisInfoFax
+  id: RMCPaperAegisLobbyInfoFax
   components: 
     - type: Paper
-      content: /
-    
-        [color=#383838]█[/color][color=#ffffff]░░[/color][color=#8c0000]█ [color=#383838]█▄[/color] █ [/color][head=3]United Nations Marine Corps[/head]
-        [color=#8c0000]▀▄▄[color=#383838]▀[/color] █[/color] [color=#383838]▀█[/color] [color=#AAAAAA]Marine High Command| [italic]UNS Oberon[/color][/italic]   [color=#dfc189]✯  ✯[/color]
-
-        [color=#383838]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
-        [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
-
-        [head=2][color=goldenrod]High Command Transmission[/color][/head]
-
-        [bold]To:[/bold] [italic]UNS Almayer Command Staff[/italic]
-        [bold]From:[/bold] [bold]The Office of General Carvain [/bold]| [bolditalic][color=#cb0000]UNS Oberon[/color][/bolditalic]
-        [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
-        Almayer Command,
-        Your mission today is of great importance. As relayed via your announcement frequency, the UNS Amast, which was transporting a experimental phoron-based weapon of Aegis Armaments manufacture, suddenly and unexpectedly landed in your operational area. Any attempts to hail the Amast, or the colony, has been met with radio silence. Second company, you are the closest marines able to respond to this situation, and so we call on you.
-
-        We require you to recover the experimental weapon from the suspected landing site of the Amast at all costs. Should this weapon fall into enemy hands, it could give away decades of top secret weapons research, cutting down the UNMC's technological advantage over our potential enemies by a significant amount. Additionally, you should endeavor to ensure the colony, and its residents, are safe. For all intensive purposes, ignoring the recovery of the weapon, treat this mission as though it where a standard distress call.
-
-        Radio transponders from the secure crate the weapon is transported in indicate it remains squarely in your operational area, with no signs of movement. Its exact position has been marked on your tactical map. Unfortunately, it is not as simple as just retrieving the crate. The crate is far too heavy to move with any tools at your disposal, and thus you will need to unlock it to transport the weapon itself.
-
-        To do this, you will require a encrypted key card likely in the possession of the head scientist of the Amast at the time of the crash. We have instructed your ARES instance to tune a advanced radio signal pinpointing device to the specialized frequency of the identification card to help you locate and secure it. The pinpointer should arrive via your ASRS lift shortly.
-
-        Due to the extreme weight of the weapon, it requires a power assisted loading exosuit to be moved once the crate is unlocked. We have also instructed your ASRS to supply you with a power loading manual to train any one of your marines to operate a power loader.
-
-        The crate the weapon resides in is extremely durable, and should stand up to anything you, or any other threats in the operating area, throw at it short of a orbital bombardment. Ensure the weapon is either used, or remains in one piece, its destruction is not a acceptable outcome.
-
-        Once the cargo is recovered, you are permitted to utilize the experimental weapon at will for the purposes of data collection on its effectiveness for Aegis. To this end, a software update has been remotely installed to your orbital bombardment cannon console to allow for use of the experimental weapon, with the cannon as its delivery method. 
-
-        Aegis Armaments has also assured us that the UNMC will be deservedly compensated upon recovery of the weapon and the key card, as well as for any usage data we may acquire. We have decided a portion of this compensation will be allocated to the Almayer in the form of additional tech points. We will provide these tech points upon recovery of the weapon and key card, as well as upon usage of the device. ARES will handle relaying any data in regards to its effectiveness to us, however should you have any comments or concerns, please include them in your standard after action reports.
-
-        You are to use extreme caution should you choose to utilize this weapon, it is far more powerful than any other armament used on the Almayer prior. A transport ship better equipped to handle such a weapon will arrive within a week after your operation commences, if use of the weapon is not needed.
-
-        Good luck Falling Falcons, we are counting on you. Semper Fi, and god bless the UN.
-
-        Signed,
-        [color=#dfc189][bolditalic]General Alexander Carvain [color=black]|[/color] [color=#cb0000]UNS Oberon[/color][/bolditalic][/color] 
-        [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
-        [color=#AAAAAA][italic][bullet]This document supersedes any and all prior oral or written agreements or understandings concerning the subject matter contained in this document.
-        [bullet]By reading this document, you acknowledge that you have read and understood its contents, which require your military obligation to maintain absolute adherence to the UNMC Code of Military Conduct.
-        [bullet]You understand that any breach may result in severe disciplinary action, including but not limited to a Court Martial.
-        [bullet]All orders or directives set forth within this document must be followed and carried out to the best of the recipients ability.
-        [bullet]Failure to follow directives contained in this document will result in but not limited to charges brought against you.
-        [bullet]This document shall be binding upon the above mentioned and their respective heirs, administrators, personal representatives, executors, successors and assigns.  
-        [bullet]Authenticity of this document and its contents is verified by means of an appropriately affixed stamp.
-        [color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy is a violation of federal law and will result in prosecution.[/color][/italic]
+      content: |
+          [color=#383838]█[/color][color=#ffffff]░░[/color][color=#8c0000]█ [color=#383838]█▄[/color] █ [/color][head=3]United Nations Marine Corps[/head] 
+          [color=#8c0000]▀▄▄[color=#383838]▀[/color] █[/color] [color=#383838]▀█[/color] [color=#AAAAAA]Marine High Command| [italic]UNS Oberon[/color][/italic]   [color=#dfc189]✯  ✯[/color]
+          [color=#383838]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color] [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+          [head=2][color=goldenrod]High Command Transmission[/color][/head]
+          [bold]To:[/bold] [italic]UNS Almayer Command Staff[/italic] [bold]From:[/bold] [bold]The Office of General Carvain [/bold]| [bolditalic][color=#cb0000]UNS Oberon[/color][/bolditalic] [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color] Almayer Command, Your mission today is of great importance. As relayed via your announcement frequency, the UNS Amast, which was transporting a experimental phoron-based weapon of Aegis Armaments manufacture, suddenly and unexpectedly landed in your operational area. Any attempts to hail the Amast, or the colony, has been met with radio silence. Second company, you are the closest marines able to respond to this situation, and so we call on you.
+          We require you to recover the experimental weapon from the suspected landing site of the Amast at all costs. Should this weapon fall into enemy hands, it could give away decades of top secret weapons research, cutting down the UNMC's technological advantage over our potential enemies by a significant amount. Additionally, you should endeavor to ensure the colony, and its residents, are safe. For all intensive purposes, ignoring the recovery of the weapon, treat this mission as though it where a standard distress call.
+          Radio transponders from the secure crate the weapon is transported in indicate it remains squarely in your operational area, with no signs of movement. Its exact position has been marked on your tactical map. Unfortunately, it is not as simple as just retrieving the crate. The crate is far too heavy to move with any tools at your disposal, and thus you will need to unlock it to transport the weapon itself.
+          To do this, you will require a encrypted key card likely in the possession of the head scientist of the Amast at the time of the crash. We have instructed your ARES instance to tune a advanced radio signal pinpointing device to the specialized frequency of the identification card to help you locate and secure it. The pinpointer should arrive via your ASRS lift shortly.
+          Due to the extreme weight of the weapon, it requires a power assisted loading exosuit to be moved once the crate is unlocked. We have also instructed your ASRS to supply you with a power loading manual to train any one of your marines to operate a power loader.
+          The crate the weapon resides in is extremely durable, and should stand up to anything you, or any other threats in the operating area, throw at it short of a orbital bombardment. Ensure the weapon is either used, or remains in one piece, its destruction is not a acceptable outcome.
+          Once the cargo is recovered, you are permitted to utilize the experimental weapon at will for the purposes of data collection on its effectiveness for Aegis. To this end, a software update has been remotely installed to your orbital bombardment cannon console to allow for use of the experimental weapon, with the cannon as its delivery method.
+          Aegis Armaments has also assured us that the UNMC will be deservedly compensated upon recovery of the weapon and the key card, as well as for any usage data we may acquire. We have decided a portion of this compensation will be allocated to the Almayer in the form of additional tech points. We will provide these tech points upon recovery of the weapon and key card, as well as upon usage of the device. ARES will handle relaying any data in regards to its effectiveness to us, however should you have any comments or concerns, please include them in your standard after action reports.
+          You are to use extreme caution should you choose to utilize this weapon, it is far more powerful than any other armament used on the Almayer prior. A transport ship better equipped to handle such a weapon will arrive within a week after your operation commences, if use of the weapon is not needed.
+          Good luck Falling Falcons, we are counting on you. Semper Fi, and god bless the UN.
+          Signed, [color=#dfc189][bolditalic]General Alexander Carvain [color=black]|[/color] [color=#cb0000]UNS Oberon[/color][/bolditalic][/color] [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color] [color=#AAAAAA][italic][bullet]This document supersedes any and all prior oral or written agreements or understandings concerning the subject matter contained in this document. [bullet]By reading this document, you acknowledge that you have read and understood its contents, which require your military obligation to maintain absolute adherence to the UNMC Code of Military Conduct. [bullet]You understand that any breach may result in severe disciplinary action, including but not limited to a Court Martial. [bullet]All orders or directives set forth within this document must be followed and carried out to the best of the recipients ability. [bullet]Failure to follow directives contained in this document will result in but not limited to charges brought against you. [bullet]This document shall be binding upon the above mentioned and their respective heirs, administrators, personal representatives, executors, successors and assigns. [bullet]Authenticity of this document and its contents is verified by means of an appropriately affixed stamp. [color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy is a violation of federal law and will result in prosecution.[/color][/italic]
 
 - type: entity
   parent: CMBasePaper

@@ -62,6 +62,17 @@
     skills:
       RMCSkillPolice: 1
 
+# TSEPA variant
+- type: entity
+  parent: RMCExplosiveBreachingChargeRubber
+  id: RMCExplosiveBreachingChargeRubberTSEPA
+  name: TSEPA X17 riot charge
+  components:
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 0
+      RMCSkillEngineer: 1
+
 - type: entity
   parent: RMCExplosiveBreachingCharge
   id: RMCExplosivePlastic
@@ -82,6 +93,12 @@
       - XenoTunnel
   - type: RMCExplosiveDelete
     delay: 10
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 4
+    initialBeepDelay: 0
+    beepInterval: 0.5
     whitelist:
       components:
       - XenoTunnel

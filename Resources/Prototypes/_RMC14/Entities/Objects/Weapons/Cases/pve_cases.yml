@@ -49,11 +49,11 @@
       tags:
       - RMCWeaponShotgunM42A2
       - RMCHandful
-      - RMCAttachmentM42A2WoodenStock
+      - RMCAttachmentM42A2CollapsibleStock
   - type: StorageFill
     contents:
     - id: RMCWeaponShotgunM42A2Filled
-    - id: RMCAttachmentM42A2WoodenStock
+    - id: RMCAttachmentM42A2CollapsibleStock
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
