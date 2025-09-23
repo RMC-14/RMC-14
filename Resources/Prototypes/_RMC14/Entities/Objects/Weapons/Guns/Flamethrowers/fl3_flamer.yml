@@ -61,7 +61,7 @@
   parent: RMCTankFlamer
   id: RMCTankFlamerFL3
   name: FW3 heavy incinerator tank
-  description: A heavy, high capacity tank utilized by the Flammenwerfer 3 Heavy Incineration Unit. This one has a yellow, heat-resistant Weston-Yamada logo on it.
+  description: A heavy, high capacity tank utilized by the Flammenwerfer 3 Heavy Incineration Unit. This one has a blue, heat-resistant Weston-Yamada logo on it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/fl3.rsi
