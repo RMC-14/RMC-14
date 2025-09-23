@@ -136,7 +136,7 @@
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
-  - type: RandomMetadata
+  - type: RandomMetadata # These should probably default to human only purely because these are combat synths with a non-traditional appearance
     nameSegments:
     - RMCNamesGreek
     - RMCNamesNumbers
