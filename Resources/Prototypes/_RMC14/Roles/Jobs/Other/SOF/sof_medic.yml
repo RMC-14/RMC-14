@@ -22,11 +22,11 @@
         RMCSkillEngineer: 2
         RMCSkillConstruction: 2
         RMCSkillFirearms: 2
-        RMCSkillMedical: 2
+        RMCSkillMedical: 3
         RMCSkillMeleeWeapons: 1
         RMCSkillEndurance: 5
         RMCSkillJtac: 1
-        RMCSkillSurgery: 1
+        RMCSkillSurgery: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-marine-raider-medic
     - type: DemoSpecWhitelist
