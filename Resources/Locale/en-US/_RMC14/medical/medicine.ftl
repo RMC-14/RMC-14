@@ -60,6 +60,7 @@ rmc-first-aid-container-label-text = FA
 rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
+rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
 

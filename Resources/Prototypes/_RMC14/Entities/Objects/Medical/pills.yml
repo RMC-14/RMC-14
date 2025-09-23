@@ -178,6 +178,48 @@
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-russianred
 
+- type: entity
+  parent: CMPill
+  id: RMCPillMeralyneBicaridine
+  suffix: MeraBic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 7.5
+        - ReagentId: CMMeralyne
+          Quantity: 7.5
+  - type: Sprite
+    layers:
+    - state: pill4
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-meralyne-bicaridine
+
+- type: entity
+  parent: CMPill
+  id: RMCPillKelotaneDermaline
+  suffix: KeloDerm
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 7.5
+        - ReagentId: CMDermaline
+          Quantity: 7.5
+  - type: Sprite
+    layers:
+    - state: pill7
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-kelotane-dermaline
+
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity

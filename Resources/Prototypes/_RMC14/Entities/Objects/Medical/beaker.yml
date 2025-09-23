@@ -386,6 +386,36 @@
         - ReagentId: CMTricordrazine
           Quantity: 480
 
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterMeraBic
+  suffix: MeraBic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 240
+        - ReagentId: CMBicaridine
+          Quantity: 240
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterKeloDerm
+  suffix: KeloDerm
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 240
+        - ReagentId: CMDermaline
+          Quantity: 240
+
 - type: Tag
   id: PressurizedCanister
 
