@@ -199,7 +199,7 @@
     proto: RMCBulletPistol9mmHP
 
 - type: entity
-  parent: CMBulletPistol9mm
+  parent: CMBulletBase
   id: RMCBulletPistol9mmHP
   name: bullet (9mm HP)
   components:

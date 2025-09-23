@@ -338,7 +338,6 @@
   - MagazineBootsN160RMC
   - MagazineWeYaOrreryRMC
   - MagazineWeYaOrreryN184RMC
-  - MagazineDirtyMagazineRMC
   - D20DiceRMC
   - D6DiceRMC
 
@@ -355,6 +354,14 @@
   - CustomM44RMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
+
+# SPP Weapons
+- type: loadoutGroup
+  id: SPPWeaponsRMC
+  name: rmc-loadout-group-weapons
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
   - T73CaseRMC
   - ZHNK72CaseRMC
 

@@ -127,6 +127,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipAmmoComponent, ExaminedEvent>(OnAmmoExamined);
         SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
 
+        SubscribeLocalEvent<ActivateDropshipWeaponOnSpawnComponent, MapInitEvent>(OnDropshipWeaponOnSpawnFire);
+
         Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
             subs =>
             {
@@ -648,7 +650,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ev.SoundImpact,
             ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
-            Implosion = ammo.Comp.Implosion,
+            Implosion = ev.Implosion,
             Fire = ev.Fire,
             SoundEveryShots = ev.SoundEveryShots,
         };
@@ -659,6 +661,38 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             QueueDel(ammo);
 
         _adminLog.Add(LogType.RMCDropshipWeapon, $"{ToPrettyString(args.Actor)} fired {ToPrettyString(weapon)} at {ToPrettyString(target)}");
+    }
+
+    private void OnDropshipWeaponOnSpawnFire(Entity<ActivateDropshipWeaponOnSpawnComponent> active, ref MapInitEvent args)
+    {
+        if (_net.IsClient || !TryComp<DropshipAmmoComponent>(active, out var ammo))
+            return;
+
+        var time = _timing.CurTime;
+
+        var inFlight = Spawn(null, MapCoordinates.Nullspace);
+        var inFlightComp = new AmmoInFlightComponent
+        {
+            Target = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager),
+            MarkerAt = time + ammo.TravelTime,
+            ShotsLeft = ammo.RoundsPerShot,
+            ShotsPerVolley = ammo.ShotsPerVolley,
+            Damage = ammo.Damage,
+            ArmorPiercing = ammo.ArmorPiercing,
+            BulletSpread = ammo.BulletSpread,
+            SoundTravelTime = ammo.SoundTravelTime,
+            SoundMarker = ammo.SoundMarker,
+            SoundGround = ammo.SoundGround,
+            SoundImpact = ammo.SoundImpact,
+            ImpactEffects = ammo.ImpactEffects,
+            Explosion = ammo.Explosion,
+            Implosion = ammo.Implosion,
+            Fire = ammo.Fire,
+            SoundEveryShots = ammo.SoundEveryShots,
+        };
+
+        AddComp(inFlight, inFlightComp, true);
+        QueueDel(active);
     }
 
     private void OnWeaponsNightVisionMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsNightVisionMsg args)
@@ -1276,18 +1310,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                             }
                         }
                     }
+                }
 
-                    if (flight.Explosion != null)
-                    {
-                        _rmcExplosion.QueueExplosion(target,
-                            flight.Explosion.Type,
-                            flight.Explosion.Total,
-                            flight.Explosion.Slope,
-                            flight.Explosion.Max,
-                            uid,
-                            canCreateVacuum: false
-                        );
-                    }
+                if (flight.Explosion != null)
+                {
+                    _rmcExplosion.QueueExplosion(target,
+                        flight.Explosion.Type,
+                        flight.Explosion.Total,
+                        flight.Explosion.Slope,
+                        flight.Explosion.Max,
+                        uid,
+                        canCreateVacuum: false
+                    );
                 }
 
                 if (flight.SoundShotsLeft <= 0)
@@ -1452,7 +1486,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 ///     Raised on a dropship when it shoots any of it's weapons.
 /// </summary>
 [ByRefEvent]
-public record struct DropshipWeaponShotEvent(float Spread,
+public record struct DropshipWeaponShotEvent(
+    float Spread,
     int BulletSpread,
     TimeSpan TravelTime,
     int RoundsPerShot,
@@ -1468,4 +1503,5 @@ public record struct DropshipWeaponShotEvent(float Spread,
     RMCExplosion? Explosion,
     RMCImplosion? Implosion,
     RMCFire? Fire,
-    int SoundEveryShots);
+    int SoundEveryShots
+);
