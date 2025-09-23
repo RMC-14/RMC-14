@@ -475,3 +475,5 @@
     containers:
       key_slots:
       - RMCEncryptionKeySunRiders
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
