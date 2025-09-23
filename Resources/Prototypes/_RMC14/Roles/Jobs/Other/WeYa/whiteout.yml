@@ -122,6 +122,9 @@
   parent: RMCEventHumanoid
   id: RMCPMCWhiteout
   components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+    hair: HairBald # TODO RMC14 - This should probably make the species human too, and make them have no facial hair.
   - type: GhostRole
     name: rmc-ghost-name-pmc-whiteout
     description: rmc-ghost-role-information-pmc-whiteout-description
@@ -136,11 +139,6 @@
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
-  - type: RandomMetadata # These should probably default to human only purely because these are combat synths with a non-traditional appearance
-    nameSegments:
-    - RMCNamesGreek
-    - RMCNamesNumbers
-    nameFormat: name-format-ert
 
 - type: startingGear
   id: RMCJobPMCWhiteout

@@ -15,6 +15,7 @@
     - HeadTop
     - HeadSide
     - Snout
+    - FacialHair
   - type: PointLight
     color: "#73e6f5"
 
