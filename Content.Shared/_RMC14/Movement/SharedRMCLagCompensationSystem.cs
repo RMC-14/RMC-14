@@ -135,4 +135,10 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
         return false;
     }
+
+    public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, ICommonSession session)
+    {
+        var coordinates = _transform.ToMapCoordinates(GetCoordinates(target, session));
+        return Collides(target, projectile, coordinates);
+    }
 }
