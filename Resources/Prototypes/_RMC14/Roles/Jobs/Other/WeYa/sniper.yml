@@ -32,7 +32,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
-    - type: SquadArmorWearer
+    - type: SniperWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-sniper
   hidden: true
