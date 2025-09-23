@@ -5,11 +5,24 @@
   description: A heavy industrial incineration unit produced by the Weston Corporation and later by Weston-Yamada. Often found among foliage cleaning missions on frontier colonies, it usually isn't seen in combat, but is devastating when actually used.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/fl3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: strip
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      color: "#DD9B00"
+      map: ["enum.RMCFlamerVisualLayers.Strip"]
+    - state: lit
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      map: ["enum.RMCIgniterVisuals.Ignited"]
   - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/fl3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/fl3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
     slots:
     - suitStorage
     - Back
