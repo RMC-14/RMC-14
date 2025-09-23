@@ -340,11 +340,15 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             storage.RechargeAt = time + storage.RechargeEvery;
             Dirty(storageId, storage);
 
+            var storageTransform = Transform(storageId);
+            
             _dispensers.Clear();
             var dispensers = EntityQueryEnumerator<RMCChemicalDispenserComponent>();
             while (dispensers.MoveNext(out var dispenserId, out var dispenser))
             {
-                if (dispenser.Network == storage.Network)
+                var dispenserTransform = Transform(dispenserId);
+
+                if (dispenser.Network == storage.Network && storageTransform.GridUid == dispenserTransform.GridUid)
                     _dispensers.Add((dispenserId, dispenser));
             }
 

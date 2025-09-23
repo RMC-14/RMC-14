@@ -13,3 +13,6 @@ cm-job-supervisors-sl = the acting Squad Leader
 cm-job-supervisors-staff = Server Staff
 cm-job-supervisors-nobody = nobody, you are on your own
 cm-job-supervisors-colonists = the sapient colonists
+cm-job-supervisors-secserg = the Section Sergeant
+cm-job-supervisors-platco = the Platoon Commander
+cm-job-supervisors-company-command = Company Command

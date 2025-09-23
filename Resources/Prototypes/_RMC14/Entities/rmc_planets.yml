@@ -29,7 +29,7 @@
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
     survivorJobScenarios:
-      asset_protection:  
+      asset_protection:
         CMSurvivor:
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
@@ -46,7 +46,7 @@
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorScientist:
         - CMSurvivorLV624CorporateDomeGoon: -1
-    
+
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -74,6 +74,23 @@
     camouflage: Urban
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorISR: -1
+      - CMSurvivorGangLeader: -1
+      CMSurvivorCorporate:
+      - CMSurvivorFiorinaCorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorFiorinaDoctor: 3
+      CMSurvivorEngineer:
+      - CMSurvivorFiorinaEngineer: 2
+      CMSurvivorSecurity:
+      - CMSurvivorPrisoner: 2
+      - CMSurvivorFiorinaPrisonGuard: 2
+      - CMSurvivorFiorinaRiotOfficer: 2
+      CMSurvivorScientist:
+      - CMSurvivorFiorinaResearcher: 2
 
 - type: entity
   id: RMCPlanetTrijent
@@ -255,6 +272,24 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
+#    survivorJobScenarios:
+#      clfcamp:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
 
 - type: entity
   id: RMCPlanetArcticValley

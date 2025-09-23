@@ -101,6 +101,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netEnt = GetNetEntity(ev.Member);
         RemoveFireteamMember(ev.Squad.Comp.Fireteams, netEnt);
+        SyncFireteams(ev.Squad.AsNullable());
     }
 
     private void OnGotEquipped(Entity<GrantSquadLeaderTrackerComponent> ent, ref GotEquippedEvent args)
@@ -415,6 +416,22 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_fireteamLeaderQuery.HasComp(member))
                 fireteam.Leader = marine;
+
+            if (_squadLeaderTrackerQuery.TryComp(member, out var tempTracker))
+            {
+                if (fireteam.Leader != null)
+                {
+                    if (TryGetEntity(fireteam?.Leader?.Id, out var fireteamLeaderUid))
+                    {
+                        if (fireteamLeaderUid != member)
+                        {
+                            ProtoId<TrackerModePrototype> mode = "FireteamLeader";
+                            SetTarget((member, tempTracker), fireteamLeaderUid);
+                            SetMode((member, tempTracker), mode);
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -440,8 +457,15 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         fireteamData.Unassigned.Remove(member);
 
-        if (TryGetEntity(member, out var memberId))
-            RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!TryGetEntity(member, out var memberId))
+            return;
+
+        RemComp<FireteamMemberComponent>(memberId.Value);
+        if (!_squadLeaderTrackerQuery.TryComp(memberId, out var tracker))
+            return;
+
+        tracker.Fireteams = new();
+        Dirty(memberId.Value, tracker);
     }
 
     private void DemoteFireteamLeader(SquadLeaderTrackerFireteam? fireteam, EntityUid user)

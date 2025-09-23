@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Throwing;
 using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
@@ -160,10 +161,20 @@ namespace Content.Shared.ActionBlocker
             return !ev.Cancelled;
         }
 
-        public bool CanDrop(EntityUid uid)
+        public bool CanDrop(EntityUid uid, EntityUid? held = null)
         {
             var ev = new DropAttemptEvent();
             RaiseLocalEvent(uid, ev);
+
+            // RMC14
+            if (held != null)
+            {
+                var rmcEv = new RMCItemDropAttemptEvent();
+                RaiseLocalEvent(held.Value, ref rmcEv);
+                if (rmcEv.Cancelled)
+                    return false;
+            }
+            // RMC14
 
             return !ev.Cancelled;
         }

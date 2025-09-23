@@ -17,7 +17,7 @@
     </Box>
     <Box Orientation="Vertical">
       <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
-      <GuideEntityEmbed Entity="RMCParasiteMapIcon"/>
+      <GuideEntityEmbed Entity="RMCParasiteMapIcon" Caption="Child / Parasite"/>
     </Box>
     <Box Orientation="Vertical">
       <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
