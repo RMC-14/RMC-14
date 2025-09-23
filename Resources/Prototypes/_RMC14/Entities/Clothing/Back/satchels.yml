@@ -762,7 +762,7 @@
 - type: entity
   parent: CMSatchelMarineMedic
   id: RMCSatchelPMCMedic
-  description: pmc medic combat pack
+  name: pmc medic combat pack
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
