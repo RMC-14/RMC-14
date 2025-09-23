@@ -16,6 +16,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -89,10 +90,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
 
-        Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
-        {
-            subs.Event<CMVendorVendBuiMsg>(OnVendBui);
-        });
+        Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key,
+            subs =>
+            {
+                subs.Event<CMVendorVendBuiMsg>(OnVendBui);
+            });
     }
 
     private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
@@ -115,7 +117,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                         continue;
                     }
 
-                    var newMax = (int) Math.Round(ev.New * multiplier);
+                    var newMax = (int)Math.Round(ev.New * multiplier);
                     var toAdd = newMax - max;
                     if (toAdd <= 0)
                         continue;
@@ -401,6 +403,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+
         if (section.TakeOne is { } takeOne)
         {
             user = EnsureComp<CMVendorUserComponent>(actor);
@@ -476,7 +479,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 var thisSpecVendor = Comp<RMCVendorSpecialistComponent>(vendor);
 
                 // If the vendor's own value is at or above the capacity, immediately return.
-                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out var vendCount) && vendCount >= section.SharedSpecLimit)
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out var vendCount) &&
+                    vendCount >= section.SharedSpecLimit)
                 {
                     // FIXME
                     ResetChoices();
@@ -516,6 +520,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     }
                     else // Does not exist on the currently checked vendor
                         specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
+
                     Dirty(vendorId, specVendorComponent);
                 }
 
@@ -537,7 +542,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             if (user == null)
             {
-                Log.Error($"{ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
+                Log.Error(
+                    $"{ToPrettyString(actor)} tried to buy {entry.Id} for {entry.Points} points without having points.");
                 return;
             }
 
@@ -546,7 +552,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 : user.ExtraPoints?.GetValueOrDefault(vendor.Comp.PointsType) ?? 0;
             if (userPoints < entry.Points)
             {
-                Log.Error($"{ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
+                Log.Error(
+                    $"{ToPrettyString(actor)} with {user.Points} tried to buy {entry.Id} for {entry.Points} points without having enough points.");
                 return;
             }
 
@@ -664,7 +671,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        var spawn = SpawnNextToOrDrop(toVend, vendor);
+        if (TryComp(vendor, out RMCRequisitionsVendorComponent? vendorComponent) && vendorComponent.Enabled &&
+            _rmcMap.HasAnchoredEntityEnumerator<RMCRequisitionsChairComponent>(player.ToCoordinates(),
+                out var requisitionsChair))
+        {
+            var itemPlacementOffset = requisitionsChair.Comp.OffsetItem;
+            var finalPlacementCoordinates = requisitionsChair.Owner.ToCoordinates().Offset(itemPlacementOffset);
+            var spawn = SpawnAtPosition(toVend, finalPlacementCoordinates);
+
+            AfterVend(spawn, player, vendor, offset, true);
+        }
+        else
+        {
+            var spawn = SpawnNextToOrDrop(toVend, vendor);
+            AfterVend(spawn, player, vendor, offset);
+        }
+    }
+
+    private void AfterVend(EntityUid spawn, EntityUid player, EntityUid vendor, Vector2 offset, bool vended = false)
+    {
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
         while (anchored.MoveNext(out var uid))
@@ -678,14 +703,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         mount.Arc = Angle.FromDegrees(360);
         Dirty(spawn, mount);
 
-        var grabbed = Grab(player, spawn);
-        if (!grabbed && TryComp(spawn, out TransformComponent? xform))
-            _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
+        if (!vended)
+        {
+            var grabbed = Grab(player, spawn);
+            if (!grabbed && TryComp(spawn, out TransformComponent? xform))
+                _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
+        }
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);
         RaiseLocalEvent(player, ref ev);
 
-        _adminLog.Add(LogType.RMCVend, $"{ToPrettyString(player)} vended {ToPrettyString(spawn)} from vendor {ToPrettyString(vendor)}");
+        _adminLog.Add(LogType.RMCVend,
+            $"{ToPrettyString(player)} vended {ToPrettyString(spawn)} from vendor {ToPrettyString(vendor)}");
     }
 
     private bool Grab(EntityUid player, EntityUid item)
