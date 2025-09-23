@@ -184,16 +184,3 @@
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-orrery-258
 
-# Other
-- type: entity
-  parent: BaseItem
-  id: RMCMagazineDirtyMagazine
-  name: dirty magazine
-  description: Waaweeweewaa.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Wallmounts/posters.rsi
-    state: miss_april
-  - type: Item
-    size: Small
-    sprite: _RMC14/Structures/Wallmounts/posters.rsi

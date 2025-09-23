@@ -363,9 +363,7 @@ public sealed partial class XenoSystem : EntitySystem
 
     private void OnDisarmed(Entity<XenoComponent> ent, ref DisarmedEvent args)
     {
-        if (CanTackleOtherXeno(args.Source, args.Target, out _))
-            args.PopupPrefix = "disarm-action-shove-";
-
+        args.PopupPrefix = "disarm-action-shove-";
         args.Handled = true;
     }
 
