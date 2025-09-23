@@ -1,0 +1,92 @@
+- type: job
+  parent: CMStaffOfficer
+  id: CMPVEPlatoonCommander
+  name: cm-job-name-platoon-commander
+  description: cm-job-description-platoon-commander
+  playTimeTracker: CMJobPVEPlatoonCommander
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 10800 # 3 hours
+  ranks:
+    RMCRankSecondLT: []
+  spawnMenuRoleName: Sun Rider Platoon Commander (PVE)
+  startingGear: RMCGearPVEPlatoonCommander
+  icon: "RMCJobIconPVEPlatoonCommander"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-company-command
+  marineAuthorityLevel: 14
+  accessGroups:
+  - ShipMasterAccess
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 2 # Surgery 1 -> 2 until we get autodoc
+        RMCSkillVehicles: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-platoon-commander
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co_wo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVEPlatoonCommander
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVEPlatoonCommander
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: RMCShoesLaceup
+    head: CMHeadCapOfficer
+    id: RMCIDCardPlatoonCommander
+    ears: RMCHeadsetGoldenArrow
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPVEPlatoonCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_wo_co
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVEPlatoonCommander
+  name: PVE platoon commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVEPlatoonCommander
+  - type: Sprite
+    state: xo_spawn

@@ -94,6 +94,8 @@
   - type: Tag
     tags:
     - RMCWeaponIncineratorM34
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
 
 - type: Tag
   id: RMCWeaponIncineratorM34

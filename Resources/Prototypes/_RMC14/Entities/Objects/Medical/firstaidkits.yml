@@ -60,6 +60,8 @@
     items:
       tags:
       - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: InteractedBlacklist
     blacklist:
       components:
