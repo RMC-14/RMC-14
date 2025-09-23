@@ -678,8 +678,8 @@
     - id: CMPillCanisterDylovene
     - id: CMEpinephrineAutoInjector
     - id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
-    - id: RMCMedicAutoInjectorMeralyneBicaridine15
-    - id: RMCMedicAutoInjectorDermalineKelotane15
+    - id: RMCMedicAutoInjectorMeraBic15
+    - id: RMCMedicAutoInjectorKeloDerm15
 
 - type: entity
   parent: CMWebbingBlack

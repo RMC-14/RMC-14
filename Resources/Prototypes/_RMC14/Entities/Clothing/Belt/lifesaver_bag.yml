@@ -163,13 +163,13 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMUpgradedTraumaKit10
     - id: CMUpgradedBurnKit10
+    - id: CMUpgradedTraumaKit10
       amount: 2
     - id: CMEpinephrineAutoInjector
-    - id: RMCMedicAutoInjectorMeralyneBicaridine15
+    - id: RMCMedicAutoInjectorMeraBic15
       amount: 3
-    - id: RMCMedicAutoInjectorDermalineKelotane15
+    - id: RMCMedicAutoInjectorKeloDerm15
       amount: 3
     - id: RMCMedicAutoInjectorDylovene15
     - id: RMCMedicAutoInjectorStimulant15
