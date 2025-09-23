@@ -26,7 +26,7 @@
       path: /Audio/Effects/Footsteps/bounce.ogg
   - type: Item
     size: Small
-    sprite: Objects/Fun/Balls/tennisball.rsi
+    sprite: Objects/Fun/Balls/redtennisball.rsi
   - type: EmitSoundOnUse
     sound:
       collection: ToySqueak
