@@ -147,6 +147,7 @@
           - CMMagazineRifleM4SPRAP
           - CMMagazineRifleM4SPRExt
           - RMCMagazineRifleM5SPRHVP
+          - RMCMagazineRifleM5SPRHVHIP
   - type: Tag
     tags:
     - RMCWeaponRifleM5SPR
@@ -321,6 +322,44 @@
   - type: RMCPenetratingProjectile
     rangeLossPerHit: 1
 
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleM5SPRHVHIP
+  name: cartridge (HVHI-Piercing)
+  description: A high-velocity HVHI-Piercing cartridge. Fits in M5SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM5SPRHVHIP
+  - type: CartridgeAmmo
+    proto: BulletRifleM5SPRHVHIP
+
+- type: entity
+  parent: BulletRifleM5SPRHVP
+  id: BulletRifleM5SPRHVHIP
+  components:
+  - type: RMCStunOnHit
+    maxRange: 32
+    losesEffectWithRange: true
+    stunTime: 1
+    superSlowTime: 4
+    slowTime: 10
+
+- type: entity
+  parent: RMCMagazineRifleM5SPRHVP
+  id: RMCMagazineRifleM5SPRHVHIP
+  name: "M5SPR HVHI-Piercing magazine (10x24mm)"
+  description: "A magazine of HVHI-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM5SPRHVHIP
+    proto: RMCCartridgeRifleM5SPRHVHIP
+    capacity: 25
+
 - type: Tag
   id: CMMagazineRifleM4SPR
 
@@ -341,3 +380,9 @@
 
 - type: Tag
   id: RMCWeaponRifleM5SPR
+
+- type: Tag
+  id: RMCMagazineRifleM5SPRHVHIP
+
+- type: Tag
+  id: RMCCartridgeRifleM5SPRHVHIP

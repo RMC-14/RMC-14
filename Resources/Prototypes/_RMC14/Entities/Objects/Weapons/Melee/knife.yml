@@ -47,9 +47,6 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 10
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet
@@ -96,9 +93,6 @@
       types:
         Slash: 50
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 3
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
@@ -134,9 +128,6 @@
       types:
         Slash: 10
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 14
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
@@ -163,6 +154,8 @@
   - type: Item
     sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
     size: Large
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ceremonial-sabre
   - type: Tag
     tags:
     - RMCCeremonialSword
@@ -187,9 +180,6 @@
       types:
         Slash: 55
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 22
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
@@ -224,9 +214,6 @@
       types:
         Slash: 3
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 3
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
       path: /Audio/Weapons/genhit3.ogg

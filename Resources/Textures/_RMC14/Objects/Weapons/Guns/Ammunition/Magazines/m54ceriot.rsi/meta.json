@@ -1,17 +1,17 @@
 {
-    "version": 2,
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 2,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by Cephalopod222, modified by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
     },
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Created by Cephalopod222 and modified by BreakpointDebug1234",
-    "states": [
-        {
-            "name": "base"
-        },
-        {
-            "name": "mag-1"
-        }
-    ]
+    {
+      "name": "mag-1"
+    }
+  ]
 }

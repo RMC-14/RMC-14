@@ -23,7 +23,7 @@ department-CMMedbay = Medbay
 cm-department-Medical-description = Treat all patients that come into medbay. Transfer injured marines from the hanger to medbay.
 
 # auxiliary support
-department-CMAuxiliarySupport = Auxiliary Combat Support
+department-CMAuxiliarySupport = Auxiliary
 cm-department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
 
 # other

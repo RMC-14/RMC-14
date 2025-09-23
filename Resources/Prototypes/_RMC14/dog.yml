@@ -1,0 +1,31 @@
+﻿- type: entity
+  id: RMCDogLizard
+  name: dog
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Animals/dog.rsi
+    state: dog
+    noRot: true
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: InteractionOutline
+  - type: Clickable
+  - type: HTN
+    rootTask:
+      task: MouseCompound
+  - type: InputMover
+  - type: MobMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 5

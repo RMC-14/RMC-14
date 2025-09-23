@@ -122,6 +122,7 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    accessibleColor: "#09662b" # original color is too indistinguishable in most situations
     blacklistedSquadArmor:
     - Helmet
     - Armor
@@ -358,3 +359,25 @@
     - Armor
     - Gloves
     maxRoles: {}
+
+- type: entity
+  parent: SquadBase
+  id: SquadSunRiders
+  name: Sun Riders
+  components:
+  - type: SquadTeam
+    color: "#4148c8"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    - Gloves
+    radio: MarineAlpha
+    minimapBackground:
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
+     state: background_delta
+  - type: Tag
+    tags:
+    - RMCSquadSunRiders
+
+- type: Tag
+  id: RMCSquadSunRiders

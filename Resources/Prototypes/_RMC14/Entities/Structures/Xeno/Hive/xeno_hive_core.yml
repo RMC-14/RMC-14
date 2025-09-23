@@ -1,6 +1,6 @@
 - type: entity
-  id: HiveCoreXeno
   parent: BaseHiveStructure
+  id: HiveCoreXeno
   name: hive core
   description: A giant pulsating mound of mass. It looks very much alive.
   components:
@@ -84,6 +84,8 @@
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
   - type: RMCTrackable
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   id: HiveCoreXenoConstructionNode
@@ -119,6 +121,8 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 
 - type: entity
@@ -178,5 +182,5 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: pylon
