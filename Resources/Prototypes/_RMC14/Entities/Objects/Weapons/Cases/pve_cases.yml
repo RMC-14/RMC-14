@@ -160,6 +160,36 @@
           tags:
           - RMCWeaponSMGType64
 
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseType88
+  name: Type 88 DMR case
+  description: A heavy case for storing a Type 88 Designated Marksman Rifle, the standard-issue DMR of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/type_88.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCType88SniperRifle
+      - RMCMagazineSniperType88
+  - type: StorageFill
+    contents:
+    - id: RMCType88SniperRifle
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCType88SniperRifle
 
 # Sentry
 
