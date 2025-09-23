@@ -1,8 +1,13 @@
 # Cave
 
+- type: tile
+  abstract: true
+  parent: CMPlanetBase
+  id: CMPlanetSolarisBase
+  suffix: Solaris
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetSolarisBase
   id: CMPlanetMarsCave
   name: tiles-cm-rock
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_cave_1.png
@@ -118,12 +123,10 @@
   id: CMPlanetMarsCave22
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_cave_23.png
 
-
 # Dirt
 
-
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetSolarisBase
   id: CMPlanetMarsDirt
   name: tiles-cm-dirt
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_dirt_1.png
@@ -193,12 +196,10 @@
   id: CMPlanetMarsDirt13
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_dirt_14.png
 
-
 # Sand
 
-
 - type: tile
-  parent: CMPlanetBase
+  parent: CMPlanetSolarisBase
   id: CMPlanetMarsSand
   name: tiles-cm-sand
   weedsSpreadable: false # TODO RMC14, semi spreadable

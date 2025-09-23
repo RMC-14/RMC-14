@@ -1,6 +1,3 @@
-# TODO Recreational
-# TODO Miscellaneous
-
 # Auxiliary Support
 - type: roleLoadout
   id: JobCMAuxiliarySupportOfficer
@@ -909,8 +906,8 @@
 # PVE
 
 - type: roleLoadout
-  id: CMPVERifleman
-  points: 7
+  id: JobCMPVERifleman
+  points: 20
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -922,8 +919,8 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVEHospitalCorpsman
-  points: 7
+  id: JobCMPVEHospitalCorpsman
+  points: 20
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -935,8 +932,8 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESmartGunOperator
-  points: 7
+  id: JobCMPVESmartGunOperator
+  points: 20
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -948,8 +945,8 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESquadLeader
-  points: 7
+  id: JobCMPVESquadLeader
+  points: 20
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -961,8 +958,8 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVESectionSergeant
-  points: 7
+  id: JobCMPVESectionSergeant
+  points: 20
   groups:
   - MarineBackpack
   - HeadwearRMCPVE
@@ -974,11 +971,13 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: CMPVEPlatoonCommander
-  points: 7
+  id: JobCMPVEPlatoonCommander
+  points: 20
   groups:
   - MarineBackpack
   - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
