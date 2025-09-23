@@ -284,6 +284,10 @@ namespace Content.IntegrationTests.Tests
                 "GridSpawner",
                 "CorpseSpawner",
                 "ItemCamouflage",
+                // RMC14
+                "ActivateDropshipWeaponOnSpawn",
+                "AmbientSound",
+                // RMC14
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
