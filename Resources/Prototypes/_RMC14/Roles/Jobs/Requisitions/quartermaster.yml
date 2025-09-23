@@ -26,7 +26,7 @@
   marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
-  - CMQM
+  - QuarterMaster
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -44,10 +44,9 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: CMVendorUser
+      id: CMQuartermaster
       points: 45
     - type: MarineOrders
-    - type: CMVendorUser
-      id: CMQuartermaster
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-quartermaster

@@ -52,6 +52,12 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public bool SelectRandomSurvivorInsert = true;
 
     /// <summary>
+    /// List of survivor jobs that appear in a specific scenario. These have a higher priority than other job types.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>>? SurvivorJobScenarios;
+
+    /// <summary>
     /// List of nightmare scenarios that can occur, which are used for conditionally spawning map inserts.
     /// Only one scenario will be selected using cumulative probability.
     /// </summary>

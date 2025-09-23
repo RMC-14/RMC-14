@@ -20,7 +20,6 @@ namespace Content.Server._RMC14.Weapons.Ranged.Prediction;
 public sealed class GunPredictionSystem : SharedGunPredictionSystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -76,7 +75,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnShootRequest(RequestShootEvent ev, EntitySessionEventArgs args)
     {
-        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, ev.Shot, args.SenderSession);
+        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, ev.Shot, ev.PointBlanked, args.SenderSession);
     }
 
     private void OnPredictedMapInit(Entity<PredictedProjectileServerComponent> ent, ref MapInitEvent args)

@@ -9,8 +9,8 @@
     Gold: RMCMedalGoldService
     Platinum: RMCMedalPlatinumService
     Ruby: RMCMedalRubyService
-    Emerald: RMCMedalEmeraldService
     Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
     Prismatic: RMCMedalPrismaticService
 
 - type: job

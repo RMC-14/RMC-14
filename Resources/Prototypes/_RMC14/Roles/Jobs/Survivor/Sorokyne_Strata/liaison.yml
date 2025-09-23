@@ -3,7 +3,7 @@
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHalcyonDynamicsLiaison
+  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
@@ -29,7 +29,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -58,10 +58,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHalcyonDynamicsLiaison
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

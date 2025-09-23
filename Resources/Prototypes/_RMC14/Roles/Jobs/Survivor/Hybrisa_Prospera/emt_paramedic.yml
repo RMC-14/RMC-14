@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaEMTParamedic
   name: rmc-job-name-survivor-emt-paramedic
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaEMTParamedic
   startingGear: RMCGearSurvivorHybrisaEMTParamedic
   spawnMenuRoleName: EMT Paramedic (Hybrisa Survivor)
   special:
@@ -27,6 +26,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -46,10 +46,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaEMTParamedic
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor

@@ -77,11 +77,24 @@
     cm-chatsan-word-comm-officer: cm-chatsan-replacement-comm-officer
     cm-chatsan-word-co: cm-chatsan-replacement-co
     cm-chatsan-word-staff-officer: cm-chatsan-replacement-staff-officer
+    cm-chatsan-word-staff-officers: cm-chatsan-replacement-staff-officers
     cm-chatsan-word-xo: cm-chatsan-replacement-xo
     cm-chatsan-word-executive-officer: cm-chatsan-replacement-executive-officer
     cm-chatsan-word-exec-officer: cm-chatsan-replacement-exec-officer
     cm-chatsan-word-senior-enlisted: cm-chatsan-replacement-senior-enlisted
     cm-chatsan-word-senior-enlisted-advisor: cm-chatsan-replacement-senior-enlisted-advisor
+    cm-chatsan-word-senior-enlisted-advisors: cm-chatsan-replacement-senior-enlisted-advisors
+    rmc-chatsan-word-auxiliary-support-officer: rmc-chatsan-replacement-auxiliary-support-officer
+    rmc-chatsan-word-aux-support-officer: rmc-chatsan-replacement-aux-support-officer
+    rmc-chatsan-word-aso: rmc-chatsan-replacement-aso
+    rmc-chatsan-word-honor-guard: rmc-chatsan-replacement-honor-guard
+    rmc-chatsan-word-honor-guards: rmc-chatsan-replacement-honor-guards
+    rmc-chatsan-word-brigadier: rmc-chatsan-replacement-brigadier
+    rmc-chatsan-word-major-general: rmc-chatsan-replacement-major-general
+    rmc-chatsan-word-lieutenant-general: rmc-chatsan-replacement-lieutenant-general
+    rmc-chatsan-word-lt-general: rmc-chatsan-replacement-lt-general
+    rmc-chatsan-word-commandant: rmc-chatsan-replacement-commandant
+    rmc-chatsan-word-high-command: rmc-chatsan-replacement-high-command
     cm-chatsan-word-lz: cm-chatsan-replacement-lz
     cm-chatsan-word-shoot: cm-chatsan-replacement-shoot
     cm-chatsan-word-felinid: cm-chatsan-replacement-felinid
