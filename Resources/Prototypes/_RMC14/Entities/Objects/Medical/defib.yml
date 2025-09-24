@@ -176,3 +176,6 @@
     size: Small
     sprite: _RMC14/Objects/Devices/reset_key.rsi
     heldPrefix: null
+  - type: Tag
+    tags:
+    - RMCSynthResetKey

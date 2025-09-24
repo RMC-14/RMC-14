@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaCorporateSecurity
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaCorporateSecurity
   startingGear: RMCGearSurvivorHybrisaCorporateSecurity
   accessGroups:
   - ColonistAllAccessNoArmory
@@ -35,6 +34,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -46,10 +46,6 @@
     ears: RMCHeadsetDistressWeYa
     gloves: RMCHandsVeteran
     belt: RMCBeltSecurityWeYaFilled
-
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaCorporateSecurity
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

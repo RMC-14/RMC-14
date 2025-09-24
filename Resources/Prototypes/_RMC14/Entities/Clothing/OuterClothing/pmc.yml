@@ -1,13 +1,20 @@
 # PMC armors
 - type: entity
-  parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorPMC]
-  id: CMArmorM4PMC
+  parent: [RMCBaseMarineArmor, RMCAllowSuitStorageClothingArmorPMC]
+  id: RMCArmorM4PMCNoLight
   name: M4 pattern PMC armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
+  suffix: No Suitlamp
   components:
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/pmc.rsi
   - type: CMArmor
+    melee: 20
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
@@ -19,6 +26,11 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+
+- type: entity
+  parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
+  id: CMArmorM4PMC
+  suffix: Suitlamp
 
 - type: entity
   parent: CMArmorM4PMC
@@ -67,7 +79,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
 
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCSniper
   name: M4 pattern PMC sniper armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
@@ -122,8 +134,19 @@
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
-  - type: ItemCamouflage
-    camouflageVariations: { }
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor
 
 - type: entity
   parent: CMArmorM4PMCSmartGunHarness
@@ -145,9 +168,14 @@
     sprintModifier: 0.666
   - type: Corrodible
     isCorrodible: false
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGunirradiated
+      - RMCMagazineSmartGun
 
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCCommando
   name: M5X exoskeleton armor
   description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk.
@@ -169,7 +197,7 @@
 
 # TODO RMC14: Do we not have something for fire resistance?
 - type: entity
-  parent: CMArmorM4PMC
+  parent: RMCArmorM4PMCNoLight
   id: RMCArmorM4PMCEngineer
   name: M4 pattern engineer PMC armor
   description: A modification of the standard M3 armor. Designed for high elemental protection, like shock, fire and fragments, lacks in terms of kevlar for bullet protection.

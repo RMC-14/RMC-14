@@ -214,12 +214,12 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         {
             if (args.DistanceThreshold != null)
             {
-                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value))
+                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value, lagCompensated: args.LagCompensated))
                     return true;
             }
             else
             {
-                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value))
+                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, lagCompensated: args.LagCompensated))
                     return true;
             }
         }

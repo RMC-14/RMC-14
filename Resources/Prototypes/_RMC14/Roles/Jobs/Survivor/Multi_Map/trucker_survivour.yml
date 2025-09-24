@@ -3,7 +3,6 @@
   id: CMSurvivorTrucker
   name: cm-job-name-survivor-trucker
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrucker
   startingGear: RMCGearSurvivorTrucker
   special:
   - !type:AddComponentSpecial
@@ -25,6 +24,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorTrucker
@@ -49,10 +49,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrucker
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

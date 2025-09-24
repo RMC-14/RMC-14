@@ -25,6 +25,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Movement;
 
 namespace Content.Shared.Buckle;
 
@@ -37,6 +39,7 @@ public abstract partial class SharedBuckleSystem
 
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
 
     private void InitializeBuckle()
     {
@@ -248,6 +251,11 @@ public abstract partial class SharedBuckleSystem
         // RMC14
         if (!strapComp.Enabled)
             return false;
+
+        if (!_rmcMovement.CanClimbOver(user, buckleUid, strapUid, false))
+        {
+            return false;
+        }
         // RMC14
 
         // Does it pass the Whitelist
@@ -496,7 +504,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
-        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
+        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle) || TryComp(buckle, out RMCRestComponent? rest) && rest.Resting == true)
             _standing.Down(buckle, playSound: false, changeCollision: true);
         else
             _standing.Stand(buckle);
