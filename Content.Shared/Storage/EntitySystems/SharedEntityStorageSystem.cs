@@ -355,6 +355,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (containerAttemptEvent.Cancelled)
             return false;
 
+        //RMC
         if (TryComp<InsertBlacklistComponent>(container, out var blacklist))
         {
             if (blacklist.Blacklist != null && _whitelistSystem.IsValid(blacklist.Blacklist, toInsert))
@@ -363,6 +364,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             if (blacklist.Whitelist != null && !_whitelistSystem.IsValid(blacklist.Whitelist, toInsert))
                 return false;
         }
+        //RMC
 
         // Consult the whitelist. The whitelist ignores the default assumption about how entity storage works.
         if (component.Whitelist != null)
@@ -442,7 +444,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return !ev.Cancelled;
     }
 
-    public bool AddToContents(EntityUid toAdd, EntityUid container, SharedEntityStorageComponent? component = null, EntityUid? user = null)
+    public bool AddToContents(EntityUid toAdd, EntityUid container, SharedEntityStorageComponent? component = null,
+    EntityUid? user = null) //RMC
     {
         if (!ResolveStorage(container, ref component))
             return false;
@@ -450,6 +453,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (toAdd == container)
             return false;
 
+        //RMC
         if (!CanInsert(toAdd, container, component))
         {
             if (TryComp<InsertBlacklistComponent>(container, out var blacklist) &&
@@ -460,6 +464,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             }
             return false;
         }
+        //RMC
 
         return Insert(toAdd, container, component);
     }

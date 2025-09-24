@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseDeployFoldable
-  id: CMBaseStorageBag
+  id: RMCBaseStorageBag
   abstract: true
   name: storage bag
   description: A foldable storage container.
@@ -110,7 +110,7 @@
 
 # Body bag
 - type: entity
-  parent: CMBaseStorageBag
+  parent: RMCBaseStorageBag
   id: CMBodyBag
   name: body bag
   description: A folded bag designed for the storage and transportation of cadavers.
@@ -134,7 +134,7 @@
 
 # Stasis bag
 - type: entity
-  parent: CMBaseStorageBag
+  parent: RMCBaseStorageBag
   id: CMStasisBag
   name: stasis bag
   description: A folded, reusable bag designed to prevent additional damage to an occupant.
@@ -196,7 +196,7 @@
 
 # V2 thermal tarp
 - type: entity
-  parent: CMBaseStorageBag
+  parent: RMCBaseStorageBag
   id: RMCThermalTarpV2
   name: V2 reactive thermal tarp
   description: A tarp carried by some UNMC infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
@@ -241,7 +241,7 @@
 
 # V3 thermal tarp
 - type: entity
-  parent: CMBaseStorageBag
+  parent: RMCBaseStorageBag
   id: RMCThermalTarp
   name: V3 reactive thermal tarp
   description: A more compact and improved version of the V2 thermal tarp, intended primarily for the transportation of deceased or wounded marines. It has improved cloaking technology than earlier models, allowing it to cloak to a greater degree and faster, but can only be used with special training.

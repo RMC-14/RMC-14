@@ -1,22 +1,25 @@
-﻿using Content.Shared.Mobs;
+using Content.Shared._RMC14.Interaction;
+using Content.Shared.Mobs;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Shared.Storage.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(RMCInteractionSystem))]
 public sealed partial class InsertBlacklistComponent : Component
 {
-    [DataField("whitelist")]
+    [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
 
-    [DataField("blacklist")]
+    [DataField]
     public EntityWhitelist? Blacklist;
-    
-    [DataField("blacklistedMobStates")]
+
+    [DataField]
     public HashSet<MobState>? BlacklistedMobStates = null;
 
-    [DataField("whitelistedMobStates")]
+    [DataField]
     public HashSet<MobState>? WhitelistedMobStates = null;
 }
