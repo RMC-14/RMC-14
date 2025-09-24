@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Fixed syringe cases not fitting into the 3-slot and 5-slot webbings.
-    type: Fix
-  id: 1875
-  time: '2025-06-22T02:43:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6775
 - author: Whisper
   changes:
   - message: Decreased the minimum range required for mortars by 10 tiles in exchange
@@ -4468,5 +4461,20 @@
   id: 2374
   time: '2025-09-24T09:24:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7469
+- author: to4no_fix
+  changes:
+  - message: 'Added a second targeting mode to the mortar: laser targeting mode. Switch
+      the mortar to laser targeting mode through a right-click option, link your laser
+      designator (only one can be linked at a time), and then designate a target with
+      it. In this mode, the mortar will automatically target the laser mark, signaling
+      you with a beep (its description will also change). After that, you only need
+      to load a shell. This targeting method completely removes shell deviation: the
+      shell will land exactly on target.'
+    type: Add
+  - message: Replaced one rangefinder in the mortar kit with a laser designator.
+    type: Tweak
+  id: 2375
+  time: '2025-09-24T09:25:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7611
 Name: RMC14
 Order: -1
