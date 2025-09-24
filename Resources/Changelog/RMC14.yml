@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: FIxed CLF headset not having a CLF HUD
-    type: Fix
-  id: 1864
-  time: '2025-06-19T13:59:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6782
 - author: noctyrnal
   changes:
   - message: Provost Enforcers and Provost Team Leaders now require 5 hours of MP
@@ -4458,5 +4451,13 @@
   id: 2363
   time: '2025-09-23T20:30:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7959
+- author: CatAndHats
+  changes:
+  - message: Fixed Supply headsets not having Command and Engineering channels tuned
+      out by default.
+    type: Fix
+  id: 2364
+  time: '2025-09-24T08:15:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7960
 Name: RMC14
 Order: -1
