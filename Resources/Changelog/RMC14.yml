@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Added surgical case to the medilathe.
-    type: Add
-  id: 1871
-  time: '2025-06-22T02:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6732
 - author: crazy1112345
   changes:
   - message: Fixed LACN mention in lucky strike mini pack description.
@@ -4469,5 +4462,12 @@
   id: 2370
   time: '2025-09-24T08:33:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7894
+- author: CyberTropic
+  changes:
+  - message: Added Kutjevo survivor variants.
+    type: Add
+  id: 2371
+  time: '2025-09-24T08:35:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7885
 Name: RMC14
 Order: -1
