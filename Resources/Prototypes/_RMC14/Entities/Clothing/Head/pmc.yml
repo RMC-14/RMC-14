@@ -23,7 +23,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
   - type: HideLayerClothing
-    slots:
+    layers:
     - Hair
     - HeadTop
     - HeadSide
