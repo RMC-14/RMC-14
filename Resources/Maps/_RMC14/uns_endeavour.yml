@@ -1,3 +1,5 @@
+# This file is a duplicate of the Golden Arrow (Large). The actual Endeavour map file is currently considered private content by RMC14.
+# This file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
 meta:
   format: 7
   category: Map
