@@ -11,10 +11,10 @@ namespace Content.Shared._RMC14.Mobs;
 
 public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly ISharedAdminManager _adminManager = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
