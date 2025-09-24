@@ -260,12 +260,16 @@
       700: Critical
       800: Dead
   - type: CMArmor
-    xenoArmor: 35
+    xenoArmor: 30
     explosionArmor: 90
   - type: XenoStrain
     name: rmc-xeno-hedgehog-name
     description: rmc-xeno-hedgehog-description
     popup: rmc-xeno-hedgehog-popup
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
   - type: XenoShard
     shards: 0
     maxShards: 300

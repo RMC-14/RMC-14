@@ -20,6 +20,7 @@ public sealed class XenoShardSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     private float _nextShardGrowth = 0f;
 
@@ -67,6 +68,7 @@ public sealed class XenoShardSystem : EntitySystem
         if (ent.Comp.Shards != oldShards)
         {
             Dirty(ent);
+            _armor.UpdateArmorValue(ent.Owner);
         }
     }
 
@@ -77,6 +79,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         ent.Comp.Shards -= amount;
         Dirty(ent);
+        _armor.UpdateArmorValue(ent.Owner);
         return true;
     }
 
@@ -85,9 +88,9 @@ public sealed class XenoShardSystem : EntitySystem
         if (ent.Comp.ShardsPerArmorBonus <= 0)
             return;
             
-        // Base armor is 30, bonus armor is calculated from shards
+        // Base armor is 30, bonus armor is 2.5 per 50 shards
         var bonusArmor = (ent.Comp.Shards / ent.Comp.ShardsPerArmorBonus) * 2.5f;
-        args.XenoArmor = 30 + (int)bonusArmor;
+        args.XenoArmor = (int)(30 + bonusArmor);
     }
 
     private void OnFireSpikes(Entity<XenoFireSpikesComponent> ent, ref ActionXenoFireSpikesEvent args)
@@ -135,6 +138,7 @@ public sealed class XenoShardSystem : EntitySystem
         // Consume all shards
         shards.Shards = 0;
         Dirty(ent, shards);
+        _armor.UpdateArmorValue(ent.Owner);
         
         var xform = Transform(ent);
         
