@@ -22,8 +22,17 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/helmet.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-feroxi:
+      - state: equipped-HELMET-feroxi
+      head-reptilian:
+      - state: equipped-HELMET-reptilian
+      head-vulpkanin:
+      - state: equipped-HELMET-vulpkanin
   - type: HideLayerClothing
-    layers:
+    slots:
     - Hair
     - HeadTop
     - HeadSide
