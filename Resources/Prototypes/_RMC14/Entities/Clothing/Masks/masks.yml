@@ -40,7 +40,7 @@
     - GasMask
 
 - type: entity
-  parent: CMMaskGas
+  parent: CMBaseMask
   id: RMCMaskGasSPP
   name: ShMB/4 gasmask
   description: The standard issue gasmask utilized by the SPP Vanguard Collective and many SPP civilian organizations.
@@ -55,6 +55,11 @@
     - HeadTop
     - HeadSide
     - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
 
 - type: Tag
   id: GasMask
