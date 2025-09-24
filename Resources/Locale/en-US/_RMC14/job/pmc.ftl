@@ -4,7 +4,14 @@ rmc-ghost-role-information-pmc-rules = You are a [color=orange][bold]PMC member[
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
+rmc-ghost-role-information-pmc-whiteout-rules = You are a [color=orange][bold]PMC Whiteout Operative[/bold][/color]. Follow admin instructions.
+                                             You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
+                                             You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
+                                             You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
+
 rmc-ghost-role-information-pmc-description = Ensure no damage is incurred against Weston-Yamada. Make sure the Corporate Liaison is safe. Deny the Weston-Yamada's involvement and do not trust the UNMC forces. Only fire if fired upon, or ordered to.
+
+rmc-ghost-role-information-pmc-whiteout-description = Listen to your superiors. Follow orders.
 
 rmc-ghost-name-pmc-standard = We-Ya PMC Operator (Neutral)
 rmc-job-name-pmc-standard = Operator
@@ -78,6 +85,14 @@ rmc-job-prefix-pmc-pve-team-leader = TL
 rmc-job-name-pmc-pve-force-leader = Force Leader
 rmc-job-prefix-pmc-pve-force-leader = FL
 rmc-job-name-pmc-pve-force-command = Force Command
+
+rmc-ghost-name-pmc-whiteout = We-Ya PMC Whiteout Combat Unit (!DEATHSQUAD!)
+rmc-job-name-pmc-whiteout = Whiteout Team Combat Unit
+
+rmc-ghost-name-pmc-whiteout-gunner = We-Ya PMC Whiteout Combat Gunner Unit (!DEATHSQUAD!)
+rmc-job-name-pmc-whiteout-gunner = Whiteout Team Combat Gunner Unit
+
+rmc-job-prefix-pmc-whiteout = WO
 rmc-job-prefix-pmc-pve-force-command = FCO
 
 # Executives

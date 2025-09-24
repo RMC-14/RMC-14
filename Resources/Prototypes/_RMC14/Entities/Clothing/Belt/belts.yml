@@ -110,6 +110,19 @@
           - RMCCartridge458SOCOM
 
 - type: entity
+  parent: CMBeltMarine
+  id: RMCBeltPMC
+  name: M305 pattern ammo load rig
+  description: The M305 is the standard load-bearing equipment of Weston-Yamada PMCs. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -857,6 +870,12 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolPMC
+  name: M301 pistol holster rig
+  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
   name: M276 pattern general revolver holster rig
@@ -1245,6 +1264,17 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
@@ -1258,7 +1288,18 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: CMM77BeltFilled
-  suffix: Filled
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilled
+  suffix: Filled, M77
   components:
   - type: StorageFill
     contents:
