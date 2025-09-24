@@ -60,3 +60,8 @@
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
   - CMAccessColonyEngineering
+
+- type: accessGroup
+  id: MilitaryChaplain
+  tags:
+  - CMAccessMedical
