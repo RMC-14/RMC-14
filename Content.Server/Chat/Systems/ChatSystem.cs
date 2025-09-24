@@ -17,7 +17,6 @@ using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language;
-using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
@@ -337,7 +336,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     /// <summary>
-    /// RMC14 - Language-aware speak method that processes messages based on speaker's and listeners' language abilities
+    /// RMC14 - Language-aware speak method that processes messages based on speakers and listeners language abilities
     /// </summary>
     private void SendEntitySpeakWithLanguage(
         EntityUid source,
