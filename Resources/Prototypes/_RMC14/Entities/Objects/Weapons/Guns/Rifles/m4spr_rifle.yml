@@ -201,7 +201,7 @@
   - type: RMCSelectiveFire
     recoilUnwielded: 1
     scatterWielded: 4
-    baseFireRate: 3.3
+    baseFireRate: 2.8
   - type: ItemSlots
     slots:
       gun_magazine:
