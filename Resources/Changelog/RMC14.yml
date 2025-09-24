@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed barricade collision breaking when upgrading a barricade
-    type: Fix
-  id: 1867
-  time: '2025-06-19T14:03:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6691
 - author: Arykh
   changes:
   - message: Fixed custom autoinjectors not working properly.
@@ -4463,5 +4456,12 @@
   id: 2366
   time: '2025-09-24T08:21:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7990
+- author: Aurallianz
+  changes:
+  - message: admins can drag ghosts to entities to "possess them"
+    type: Add
+  id: 2367
+  time: '2025-09-24T08:24:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7987
 Name: RMC14
 Order: -1
