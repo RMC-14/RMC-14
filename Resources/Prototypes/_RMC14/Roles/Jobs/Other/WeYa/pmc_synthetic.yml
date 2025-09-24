@@ -103,7 +103,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCSynth
     outerClothing: RMCArmorM4PMCSynthFilled
     shoes: RMCBootsPMCFilled
-    id: RMCIDCardPMC
+    id: CMIDCardPMC
     pocket1: RMCPouchToolsSocFilledSynthetic
     pocket2: RMCPouchConstructionFillLowGrade
     
