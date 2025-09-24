@@ -69,3 +69,10 @@
   - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower1.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower2.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower3.ogg
+
+- type: soundCollection
+  id: RMCFlamerFL3Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower3.ogg

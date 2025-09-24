@@ -13,3 +13,9 @@ public sealed class TacticalMapBuiState(string mapName) : BoundUserInterfaceStat
 {
     public readonly string MapName = mapName;
 }
+
+[Serializable, NetSerializable]
+public sealed class TacticalMapBuiState(string mapName) : BoundUserInterfaceState
+{
+    public readonly string MapName = mapName;
+}
