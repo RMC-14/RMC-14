@@ -166,6 +166,13 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public bool BreakOnRest = true;
+
+    /// <summary>
+    ///     RMC14
+    ///     Whether or not to use the position compensated by lag for the target, with the user as the reference.
+    /// </summary>
+    [DataField]
+    public bool LagCompensated;
     #endregion
 
     #region Duplicates
@@ -291,6 +298,7 @@ public sealed partial class DoAfterArgs
         DuplicateCondition = other.DuplicateCondition;
         ForceVisible = other.ForceVisible;
         BreakOnRest = other.BreakOnRest;
+        LagCompensated = other.LagCompensated;
 
         //RMC
         RootEntity = other.RootEntity;

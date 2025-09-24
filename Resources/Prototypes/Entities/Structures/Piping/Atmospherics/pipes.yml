@@ -65,6 +65,7 @@
     bodyType: static
   - type: StaticPrice
     price: 30
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true

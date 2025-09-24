@@ -14,6 +14,7 @@
     state: medlink_green_clamped # TODO RMC14 change states dynamically
     drawdepth: FloorObjects
   - type: CMMedicalSupplyLink
+  - type: RMCMesonsNonviewable
 
 
 - type: entity
@@ -149,6 +150,98 @@
   components:
   - type: AccessReader
     access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMVendorMedical
+  id: RMCVendorMedicalPVE
+  suffix: PVE
+  components:
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
+    sections:
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 6
+      - id: CMTraumaKit10
+        amount: 6
+      - id: CMOintment10
+        amount: 6
+      - id: CMGauze10
+        amount: 6
+#      - id: CMSplints10 # TODO RMC14
+#        amount: 6
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        amount: 3
+      - id: CMDexalinPlusAutoInjector
+        amount: 3
+      - id: CMEpinephrineAutoInjector
+        amount: 3
+      - id: CMInaprovalineAutoInjector
+        amount: 3
+      - id: CMKelotaneAutoInjector
+        amount: 3
+#      - id: CMOxycodoneAutoinjector # TODO RMC14
+#        amount: 3
+#      - id: CMTramadolAutoinjector # TODO RMC14
+#        amount: 3
+      - id: CMTricordrazineAutoInjector
+        amount: 3
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 3
+      - id: CMBottleDylovene
+        amount: 3
+      - id: CMBottleDexalin
+        amount: 3
+      - id: CMBottleInaprovaline
+        amount: 3
+      - id: CMBottleKelotane
+        amount: 3
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 3
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 3
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        amount: 2
+      - id: CMPillCanisterKelotaneDermaline
+        amount: 2
+      - id: CMPillCanisterTricordrazine
+        amount: 2
+      - id: CMPillCanisterDexalin
+        amount: 2
+      - id: CMPillCanisterDylovene
+        amount: 2
+      - id: CMPillCanisterInaprovaline
+        amount: 2
+#      - id: CMPillCanisterPeridaxon # TODO RMC14
+#        amount: 2
+#      - id: CMPillCanisterTramadol # TODO RMC14
+#        amount: 2
+    - name: Medical utilities
+      entries:
+      - id: CMSurgicalLine
+        amount: 2
+      - id: CMSynthGraft
+        amount: 2
+      - id: CMHyposprayFilledTricord
+        amount: 2
+      - id: CMHealthAnalyzer
+        amount: 5
+      - id: CMBeltMedical
+        amount: 2
+      - id: RMCGlassesMedicalHUDGlasses
+        amount: 3
+      - id: CMStasisBagFolded
+        amount: 2
+      - id: CMSyringe
+        amount: 7
 
 - type: entity
   parent: CMVendorMedical

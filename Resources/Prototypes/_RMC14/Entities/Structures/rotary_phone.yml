@@ -45,6 +45,7 @@
     - RMCGuideCommunicationsTowers
     - RMCGuideRoleCombatTechnician
     - RMCGuideRoleMaintenanceTechnician
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCRotaryPhone

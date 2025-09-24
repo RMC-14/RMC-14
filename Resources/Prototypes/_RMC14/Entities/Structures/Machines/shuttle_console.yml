@@ -66,18 +66,38 @@
 #      enum.DropshipTerminalUiKey.Key:
 #        type: DropshipTerminalBui
 
-# TODO RMC14 alamo and normandy specific names for each
 - type: entity
   parent: CMComputerDropship
   id: CMComputerDropshipCamerasAlamo
   name: camera controls
   description: A computer to monitor cameras linked to the dropship.
+  suffix: Alamo
   components:
   - type: GuideHelp
     guides:
     - RMCGuideRoleCAS
   - type: Sprite
     state: consoleleft
+  - type: UserInterface
+    interfaces:
+      enum.RMCCameraUiKey.Key:
+        type: RMCCameraBui
+  - type: RMCCameraComputer
+    protoIds:
+    - RMCMonitorCameraAlamo
+  - type: ActivatableUI
+    key: enum.RMCCameraUiKey.Key
+
+- type: entity
+  parent: CMComputerDropshipCamerasAlamo
+  id: RMCComputerDropshipCamerasNormandy
+  name: camera controls
+  description: A computer to monitor cameras linked to the dropship.
+  suffix: Normandy
+  components:
+  - type: RMCCameraComputer
+    protoIds:
+    - RMCMonitorCameraNormandy
 
 - type: entity
   parent: CMComputerDropship

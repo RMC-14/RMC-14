@@ -152,6 +152,8 @@
   name: red alert gun cabinet
   components:
   - type: RMCUnlockOnAlertLevel
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMLockerBase
@@ -451,6 +453,16 @@
   parent: RMCLockerSmartGunOperatorPMCOne
   id: RMCLockerSmartGunOperatorPMCTwo
   name: squad two support gunner locker
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerHeavyGunnerCLF
+  name: heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetCLFSGOFill
 
 - type: entity
   parent: RMCCabinet
