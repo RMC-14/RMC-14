@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Provost Enforcers and Provost Team Leaders now require 5 hours of MP
-      playtime.
-    type: Fix
-  id: 1865
-  time: '2025-06-19T14:00:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6783
-- author: Arcticular1
-  changes:
-  - message: Filled the contents of staff officer lockers
-    type: Tweak
-  - message: Added white gloves to CO vendor
-    type: Add
-  id: 1866
-  time: '2025-06-19T14:01:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6778
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed barricade collision breaking when upgrading a barricade
@@ -4459,5 +4442,26 @@
   id: 2364
   time: '2025-09-24T08:15:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7960
+- author: SharkSnake98
+  changes:
+  - message: Added 6 WEYA Corporate roles and changed the names of the original Executive
+      Spec/Supervisor to contain "legal"
+    type: Add
+  - message: Added the Manager's uniform, coat, hat, and WEYA holster.
+    type: Add
+  - message: Gave the Legal Spec/Supervisors the correct Paygrade relevant to their
+      rank
+    type: Add
+  id: 2365
+  time: '2025-09-24T08:20:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7489
+- author: noctyrnal
+  changes:
+  - message: Fixed Squad Trackers, Fireteam Assignment and Tacmap Icons for PVE PMCs
+      and Sun Riders.
+    type: Fix
+  id: 2366
+  time: '2025-09-24T08:21:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7990
 Name: RMC14
 Order: -1
