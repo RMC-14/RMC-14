@@ -67,10 +67,3 @@
     Blunt: 0.5
     Slash: 0.5
     Piercing: 0.5
-
-- type: damageModifierSet
-  id: RMCGirder
-  coefficients:
-    Blunt: 0.5
-    Slash: 0.5
-    Piercing: 0.5

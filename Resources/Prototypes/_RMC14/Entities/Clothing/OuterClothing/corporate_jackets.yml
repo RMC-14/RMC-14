@@ -216,17 +216,3 @@
   - type: CMArmor
     melee: 10
     bullet: 10
-
-- type: entity
-  parent: RMCBaseJacket
-  id: RMCJacketCorporateManager
-  name: manager's outfit
-  description: A jacket that belongs to someone very important. It is made of insulating material and offers minor protection from all forms of damage.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_manager.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_manager.rsi
-  - type: CMArmor
-    melee: 10
-    bullet: 10
