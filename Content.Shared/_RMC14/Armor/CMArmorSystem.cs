@@ -347,14 +347,11 @@ var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.
         else
         {
             ev.Melee = (int)(ev.Melee * ev.ArmorModifier);
+            ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
+
             if (!immuneToAP)
                 ev.Melee -= armorPiercing;
-
-            ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
-            if (!immuneToAP)
                 ev.Bullet -= armorPiercing;
-
-            if (!immuneToAP)
                 ev.Bio -= armorPiercing;
         }
 
