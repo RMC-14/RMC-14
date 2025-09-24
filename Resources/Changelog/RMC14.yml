@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed bayonet pouch coming out empty when vended from surplus uniform
-      and req armaments vendors.
-    type: Fix
-  id: 1869
-  time: '2025-06-19T14:08:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6755
-- author: Arykh
-  changes:
-  - message: Fixed radiation first aid kits containing Russian Red pill bottles instead
-      of pills.
-    type: Fix
-  id: 1870
-  time: '2025-06-19T14:09:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6760
 - author: x5tink
   changes:
   - message: Added surgical case to the medilathe.
@@ -4471,5 +4455,19 @@
   id: 2368
   time: '2025-09-24T08:30:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7982
+- author: CyberTropic
+  changes:
+  - message: Fixed some Inserts having Unknown Areas.
+    type: Fix
+  id: 2369
+  time: '2025-09-24T08:33:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7891
+- author: PursuitInAshes
+  changes:
+  - message: Increased the max length of subtle messages.
+    type: Tweak
+  id: 2370
+  time: '2025-09-24T08:33:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7894
 Name: RMC14
 Order: -1
