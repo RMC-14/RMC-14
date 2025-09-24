@@ -1,6 +1,5 @@
-using Content.Shared._RMC14.Interaction;
-using Content.Shared.Mobs;
 using Content.Shared.Whitelist;
+using Content.Shared.Mobs;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Interaction;
