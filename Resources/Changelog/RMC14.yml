@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Arykh
   changes:
-  - message: Fixed custom autoinjectors not working properly.
-    type: Fix
-  id: 1868
-  time: '2025-06-19T14:07:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6733
-- author: Arykh
-  changes:
   - message: Fixed bayonet pouch coming out empty when vended from surplus uniform
       and req armaments vendors.
     type: Fix
@@ -4463,5 +4456,20 @@
   id: 2367
   time: '2025-09-24T08:24:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7987
+- author: noctyrnal
+  changes:
+  - message: Visually "overhauled" PMCs, giving them consistent and up to date equipment,
+      along with some new toys for the 'Whiteout' Combat Units.
+    type: Add
+  - message: Implemented basic whiteout jobs.
+    type: Add
+  - message: PMC Smart Gun Operators no longer have the Whiteout SG, instead getting
+      their own weaker version.
+    type: Tweak
+  - message: Resprited the scout sight's worn sprite.
+    type: Add
+  id: 2368
+  time: '2025-09-24T08:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7982
 Name: RMC14
 Order: -1
