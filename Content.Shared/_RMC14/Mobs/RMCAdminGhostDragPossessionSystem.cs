@@ -70,7 +70,7 @@ public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 
         _mind.ControlMob(possessor, toPossess);
 
-        _adminLog.Add(LogType.RMCIdModify,
+        _adminLog.Add(LogType.RMCAdminCommandLogging,
             LogImpact.High,
             $"{ToPrettyString(actor):player} has forced {ToPrettyString(possessor):entity} to possess {ToPrettyString(toPossess):player}");
     }
