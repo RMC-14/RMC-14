@@ -1,11 +1,9 @@
 using Content.Shared._RMC14.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.Manager.Attributes;
 
-namespace Content.Shared.Storage.Components;
+namespace Content.Shared._RMC14.Interaction;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCInteractionSystem))]
