@@ -38,6 +38,7 @@
         RMCSkillIntel: 1
         RMCSkillPilot: 2
         RMCSkillFirearms: 1
+    - type: SquadLeader
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

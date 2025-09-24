@@ -192,6 +192,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/tan_coif.rsi
 
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskCoifPMC
+  name: M8 pattern armored coif
+  description: An armored coif designed to conceal both the identity of the operator and act as an air-filter.
+  components:
+  - type: CMArmor
+    melee: 10
+    bio: 30
+    explosionArmor: 10
+
 # Balaclavas
 - type: entity
   parent: CMBaseMask
@@ -226,18 +237,7 @@
     sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
 
 - type: entity
-  parent: RMCMaskBalaclava
-  id: RMCMaskBalaclavaPMC
-  name: M8 pattern armored balaclava
-  description: An armored balaclava designed to conceal both the identity of the operator and act as an air-filter.
-  components:
-  - type: CMArmor
-    melee: 10
-    bio: 30
-    explosionArmor: 10
-
-- type: entity
-  parent: RMCMaskBalaclavaPMC
+  parent: RMCMaskCoifPMC
   id: RMCMaskBalaclavaMARSOC
   name: SOF armored balaclava
   description: Designed for maximum protection -- and badassery. Provides protection against facial attacks, filters toxins, and conceals the wearer's identity.
