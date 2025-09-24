@@ -95,6 +95,24 @@
         "x": 128,
         "y": 128
       }
+    },
+    {
+      "name": "hedgehog_2_crit"
+    },
+    {
+      "name": "hedgehog_2_resting"
+    },
+    {
+      "name": "hedgehog_3_crit"
+    },
+    {
+      "name": "hedgehog_3_resting"
+    },
+    {
+      "name": "hedgehog_4_crit"
+    },
+    {
+      "name": "hedgehog_4_resting"
     }
   ]
 }
