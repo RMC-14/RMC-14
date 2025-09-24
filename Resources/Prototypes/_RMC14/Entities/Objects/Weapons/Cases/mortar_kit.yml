@@ -21,11 +21,12 @@
       components:
       - Mortar
       - SkillPamphlet
-      - FixedItemSizeStorage
       - MortarShell
       - Rangefinder
       tags:
       - Wrench
+      - CMBackpackMortar
+      - CMBeltMortar
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
