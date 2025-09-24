@@ -442,7 +442,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         scenarioSuccess = true;
                         break;
                     }
-                    //If there are no scenario jobs left, fall through to insert jobs
+
+                    if (!scenarioSuccess)
+                    {
+                        stop = true;
+                        return null; // All scenario slots are filled, do not allow job
+                    }
                 }
 
                 // select an insert in order, reducing the slot of that insert

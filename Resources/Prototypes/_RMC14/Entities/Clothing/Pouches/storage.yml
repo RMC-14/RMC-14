@@ -208,6 +208,14 @@
     - id: RMCMagazineRifleMAR40
       amount: 4
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargePMC
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag_pmc.rsi
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
