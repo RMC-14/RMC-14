@@ -165,8 +165,15 @@
     blacklist:
       components:
       - Xeno
-    whitelistedMobStates:
-    - Dead
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      components:
+      - MedevacStretcher
+      tags:
+      - CMRollerItem
   - type: HolocardContainer
 
 # Folded stasis bag
