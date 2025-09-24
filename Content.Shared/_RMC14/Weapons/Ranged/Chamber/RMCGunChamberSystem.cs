@@ -40,6 +40,9 @@ public sealed class RMCGunChamberSystem : EntitySystem
 
     private void OnEntRemovedFromContainer(Entity<RMCGunChamberComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         if (args.Container.ID != SharedGunSystem.MagazineSlot)
             return;
 
@@ -48,6 +51,9 @@ public sealed class RMCGunChamberSystem : EntitySystem
 
     private void OnTakeAmmo(Entity<RMCGunChamberComponent> ent, ref TakeAmmoEvent args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var chamber))
             return;
 
@@ -67,6 +73,9 @@ public sealed class RMCGunChamberSystem : EntitySystem
 
     private void LoadChamber(Entity<RMCGunChamberComponent> gun, EntityUid magazine)
     {
+        if (TerminatingOrDeleted(gun))
+            return;
+
         if (!TryComp(gun, out TransformComponent? xform))
             return;
 
@@ -88,6 +97,9 @@ public sealed class RMCGunChamberSystem : EntitySystem
 
     private void OnUniqueAction(Entity<RMCGunChamberComponent> ent, ref UniqueActionEvent args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         if (args.Handled)
             return;
 

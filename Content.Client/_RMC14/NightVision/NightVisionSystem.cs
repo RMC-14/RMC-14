@@ -73,6 +73,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void SetMesons(bool on)
     {
+        return; // TODO RMC14 make this not lag horribly
         if (_player.LocalEntity == null)
             return;
 
@@ -114,6 +115,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void SetMesonSprites(bool mesons)
     {
+        return; // TODO RMC14 make this not lag horribly
         if (_player.LocalEntity == null)
             return;
 

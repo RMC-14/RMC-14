@@ -24,6 +24,7 @@
   - Rifleman
   hasIcon: false
   roleWeight: 1
+  displayWeight: 0
   special:
   - !type:AddComponentSpecial
     components:

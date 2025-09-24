@@ -34,6 +34,7 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: RMCContainerEmptyOnDestruction
   - type: Anchorable
     flags:
     - None
