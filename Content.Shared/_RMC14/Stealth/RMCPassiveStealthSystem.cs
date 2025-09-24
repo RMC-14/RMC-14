@@ -51,8 +51,6 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         ent.Comp.ToggleTime = _timing.CurTime;
         Dirty(ent.Owner, ent.Comp);
     }
-
-
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
     {
         if (_timing.ApplyingState)
