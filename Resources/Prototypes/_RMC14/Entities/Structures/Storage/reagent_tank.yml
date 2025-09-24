@@ -94,8 +94,8 @@
   - type: Explosive
     explosionType: RMC
     totalIntensity: 120
-    IntensitySlope: 6.0
-    MaxIntensity: 450.0
+    intensitySlope: 6.0
+    maxIntensity: 450.0
   - type: ReagentTank
     tankType: Fuel
   - type: Destructible
