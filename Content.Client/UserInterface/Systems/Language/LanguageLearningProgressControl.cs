@@ -311,27 +311,66 @@ public sealed class LanguageLearningProgressControl : Control
         if (_learnedWords == null || _learnedWords.Count == 0)
             return;
 
-        var allWords = _learnedWords
-            .OrderByDescending(kvp => kvp.Value)
-            .ThenBy(kvp => kvp.Key)
-            .Select(kvp => (kvp.Key, kvp.Value))
-            .ToList();
-
         if (string.IsNullOrWhiteSpace(_searchFilter))
         {
-            _filteredWords = allWords;
+            _filteredWords = _learnedWords
+                .OrderByDescending(kvp => kvp.Value)
+                .ThenBy(kvp => kvp.Key)
+                .Select(kvp => (kvp.Key, kvp.Value))
+                .ToList();
         }
         else
         {
             var searchTerms = _searchFilter.ToLowerInvariant()
                 .Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
-            _filteredWords = allWords.Where(tuple =>
-                searchTerms.Any(term => tuple.Key.ToLowerInvariant().Contains(term))
-            ).ToList();
+            _filteredWords = _learnedWords
+                .Where(kvp => searchTerms.Any(term => kvp.Key.ToLowerInvariant().Contains(term)))
+                .Select(kvp => new
+                {
+                    Word = kvp.Key,
+                    Comprehension = kvp.Value,
+                    Relevance = CalculateSearchRelevance(kvp.Key, searchTerms)
+                })
+                .OrderByDescending(item => item.Relevance)
+                .ThenByDescending(item => item.Comprehension)
+                .ThenBy(item => item.Word)
+                .Select(item => (item.Word, item.Comprehension))
+                .ToList();
         }
 
         BuildWordsDisplay();
+    }
+
+    private int CalculateSearchRelevance(string word, string[] searchTerms)
+    {
+        var wordLower = word.ToLowerInvariant();
+        var relevance = 0;
+
+        foreach (var term in searchTerms)
+        {
+            if (wordLower == term)
+            {
+                relevance += 1000;
+            }
+            else if (wordLower.StartsWith(term))
+            {
+                relevance += 500;
+            }
+            else if (wordLower.EndsWith(term))
+            {
+                relevance += 300;
+            }
+            else if (wordLower.Contains(term))
+            {
+                relevance += 100;
+
+                if (word.Length <= 10)
+                    relevance += 50;
+            }
+        }
+
+        return relevance;
     }
 
     private int CalculateWordsPerRow()
@@ -360,21 +399,17 @@ public sealed class LanguageLearningProgressControl : Control
 
     private void OnExpandButtonPressed()
     {
-        Logger.Info($"Expand button pressed for {_prototype.ID}");
         SetExpanded(!_wordsExpanded);
     }
 
     private void BuildWordsContainer()
     {
-        Logger.Info($"BuildWordsContainer called for {_prototype.ID}");
 
         if (_wordsContainer == null || _learnedWords == null || _learnedWords.Count == 0)
         {
-            Logger.Info($"BuildWordsContainer early return: container null={_wordsContainer == null}, learnedWords null={_learnedWords == null}, count={_learnedWords?.Count ?? -1}");
             return;
         }
 
-        Logger.Info($"Building words container with {_learnedWords.Count} words");
 
         if (_filteredWords == null)
         {
@@ -439,8 +474,6 @@ public sealed class LanguageLearningProgressControl : Control
         {
             _wordsContainer.AddChild(currentRow);
         }
-
-        Logger.Info($"Finished building words display with {_filteredWords.Count} word entries using {wordsPerRow} words per row");
     }
 
     private Control CreateWordChip(string word, float comprehension)
