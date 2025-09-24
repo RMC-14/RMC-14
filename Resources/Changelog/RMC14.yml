@@ -1,110 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: FIxed CLF headset not having a CLF HUD
-    type: Fix
-  id: 1864
-  time: '2025-06-19T13:59:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6782
-- author: noctyrnal
-  changes:
-  - message: Provost Enforcers and Provost Team Leaders now require 5 hours of MP
-      playtime.
-    type: Fix
-  id: 1865
-  time: '2025-06-19T14:00:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6783
-- author: Arcticular1
-  changes:
-  - message: Filled the contents of staff officer lockers
-    type: Tweak
-  - message: Added white gloves to CO vendor
-    type: Add
-  id: 1866
-  time: '2025-06-19T14:01:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6778
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed barricade collision breaking when upgrading a barricade
-    type: Fix
-  id: 1867
-  time: '2025-06-19T14:03:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6691
-- author: Arykh
-  changes:
-  - message: Fixed custom autoinjectors not working properly.
-    type: Fix
-  id: 1868
-  time: '2025-06-19T14:07:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6733
-- author: Arykh
-  changes:
-  - message: Fixed bayonet pouch coming out empty when vended from surplus uniform
-      and req armaments vendors.
-    type: Fix
-  id: 1869
-  time: '2025-06-19T14:08:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6755
-- author: Arykh
-  changes:
-  - message: Fixed radiation first aid kits containing Russian Red pill bottles instead
-      of pills.
-    type: Fix
-  id: 1870
-  time: '2025-06-19T14:09:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6760
-- author: x5tink
-  changes:
-  - message: Added surgical case to the medilathe.
-    type: Add
-  id: 1871
-  time: '2025-06-22T02:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6732
-- author: crazy1112345
-  changes:
-  - message: Fixed LACN mention in lucky strike mini pack description.
-    type: Fix
-  id: 1872
-  time: '2025-06-22T02:41:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6766
-- author: Dygon
-  changes:
-  - message: Improperly folding the bipod attachment now applies a weaker slowdown
-      effect.
-    type: Fix
-  - message: The bipod attachment now correctly applies it's scatter reduction effect
-      when toggled.
-    type: Fix
-  id: 1873
-  time: '2025-06-22T02:41:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6747
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed synths being affected by xeno neurotoxin spit and slashes
-    type: Fix
-  - message: Fixed synths having a crit threshold
-    type: Fix
-  id: 1874
-  time: '2025-06-22T02:42:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6758
-- author: x5tink
-  changes:
-  - message: Fixed syringe cases not fitting into the 3-slot and 5-slot webbings.
-    type: Fix
-  id: 1875
-  time: '2025-06-22T02:43:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6775
-- author: Whisper
-  changes:
-  - message: Decreased the minimum range required for mortars by 10 tiles in exchange
-      for the maximum range reduction of 10 tiles. You will be able to shoot it closer
-      but not as far by the same amount.
-    type: Tweak
-  id: 1876
-  time: '2025-06-22T05:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6793
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed corporate colonist headset having UNMC faction HUD.
     type: Fix
   id: 1877
@@ -4458,5 +4354,125 @@
   id: 2363
   time: '2025-09-23T20:30:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7959
+- author: CatAndHats
+  changes:
+  - message: Fixed Supply headsets not having Command and Engineering channels tuned
+      out by default.
+    type: Fix
+  id: 2364
+  time: '2025-09-24T08:15:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7960
+- author: SharkSnake98
+  changes:
+  - message: Added 6 WEYA Corporate roles and changed the names of the original Executive
+      Spec/Supervisor to contain "legal"
+    type: Add
+  - message: Added the Manager's uniform, coat, hat, and WEYA holster.
+    type: Add
+  - message: Gave the Legal Spec/Supervisors the correct Paygrade relevant to their
+      rank
+    type: Add
+  id: 2365
+  time: '2025-09-24T08:20:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7489
+- author: noctyrnal
+  changes:
+  - message: Fixed Squad Trackers, Fireteam Assignment and Tacmap Icons for PVE PMCs
+      and Sun Riders.
+    type: Fix
+  id: 2366
+  time: '2025-09-24T08:21:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7990
+- author: Aurallianz
+  changes:
+  - message: admins can drag ghosts to entities to "possess them"
+    type: Add
+  id: 2367
+  time: '2025-09-24T08:24:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7987
+- author: noctyrnal
+  changes:
+  - message: Visually "overhauled" PMCs, giving them consistent and up to date equipment,
+      along with some new toys for the 'Whiteout' Combat Units.
+    type: Add
+  - message: Implemented basic whiteout jobs.
+    type: Add
+  - message: PMC Smart Gun Operators no longer have the Whiteout SG, instead getting
+      their own weaker version.
+    type: Tweak
+  - message: Resprited the scout sight's worn sprite.
+    type: Add
+  id: 2368
+  time: '2025-09-24T08:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7982
+- author: CyberTropic
+  changes:
+  - message: Fixed some Inserts having Unknown Areas.
+    type: Fix
+  id: 2369
+  time: '2025-09-24T08:33:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7891
+- author: PursuitInAshes
+  changes:
+  - message: Increased the max length of subtle messages.
+    type: Tweak
+  id: 2370
+  time: '2025-09-24T08:33:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7894
+- author: CyberTropic
+  changes:
+  - message: Added Kutjevo survivor variants.
+    type: Add
+  id: 2371
+  time: '2025-09-24T08:35:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7885
+- author: blueDev2
+  changes:
+  - message: You can no longer hop over a barbed barricade by climbing or buckling
+      to an entity past it
+    type: Fix
+  id: 2372
+  time: '2025-09-24T08:52:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7931
+- author: Vermidia
+  changes:
+  - message: Fixed mortar kit being able to have items reinserted into it.
+    type: Fix
+  - message: Mortar kit now has 1 rangefinder and 1 laser designator, instead of 2
+      rangefinders
+    type: Fix
+  id: 2373
+  time: '2025-09-24T09:23:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6326
+- author: Max_Power
+  changes:
+  - message: Fixed the mortar tube having a cooldown before allowing you to fire another
+      shell.
+    type: Fix
+  id: 2374
+  time: '2025-09-24T09:24:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7469
+- author: to4no_fix
+  changes:
+  - message: 'Added a second targeting mode to the mortar: laser targeting mode. Switch
+      the mortar to laser targeting mode through a right-click option, link your laser
+      designator (only one can be linked at a time), and then designate a target with
+      it. In this mode, the mortar will automatically target the laser mark, signaling
+      you with a beep (its description will also change). After that, you only need
+      to load a shell. This targeting method completely removes shell deviation: the
+      shell will land exactly on target.'
+    type: Add
+  - message: Replaced one rangefinder in the mortar kit with a laser designator.
+    type: Tweak
+  id: 2375
+  time: '2025-09-24T09:25:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7611
+- author: Vixting
+  changes:
+  - message: Thermal tarps breaking on movement eject
+    type: Fix
+  id: 2376
+  time: '2025-09-24T09:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7932
 Name: RMC14
 Order: -1
