@@ -119,9 +119,8 @@
     blacklist:
       components:
       - Xeno
-    whitelist:
-      mobStates:
-      - Dead
+    whitelistedMobStates:
+    - Dead
 
 # Folded body bag
 - type: entity
@@ -166,6 +165,8 @@
     blacklist:
       components:
       - Xeno
+    whitelistedMobStates:
+    - Dead
   - type: HolocardContainer
 
 # Folded stasis bag

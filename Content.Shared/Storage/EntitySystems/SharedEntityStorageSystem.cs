@@ -17,8 +17,6 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
 using Content.Shared.Whitelist;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -47,7 +45,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     [Dependency] private   readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public const string ContainerName = "entity_storage";
 
@@ -355,17 +352,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (containerAttemptEvent.Cancelled)
             return false;
 
-        //RMC
-        if (TryComp<InsertBlacklistComponent>(container, out var blacklist))
-        {
-            if (blacklist.Blacklist != null && _whitelistSystem.IsValid(blacklist.Blacklist, toInsert))
-                return false;
-
-            if (blacklist.Whitelist != null && !_whitelistSystem.IsValid(blacklist.Whitelist, toInsert))
-                return false;
-        }
-        //RMC
-
         // Consult the whitelist. The whitelist ignores the default assumption about how entity storage works.
         if (component.Whitelist != null)
             return _whitelistSystem.IsValid(component.Whitelist, toInsert);
@@ -444,27 +430,13 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return !ev.Cancelled;
     }
 
-    public bool AddToContents(EntityUid toAdd, EntityUid container, SharedEntityStorageComponent? component = null,
-    EntityUid? user = null) //RMC
+    public bool AddToContents(EntityUid toAdd, EntityUid container, SharedEntityStorageComponent? component = null)
     {
         if (!ResolveStorage(container, ref component))
             return false;
 
         if (toAdd == container)
             return false;
-
-        //RMC
-        if (!CanInsert(toAdd, container, component))
-        {
-            if (TryComp<InsertBlacklistComponent>(container, out var blacklist) &&
-                TryComp<MobStateComponent>(toAdd, out var mobState) &&
-                blacklist.Whitelist?.MobStates != null &&
-                !blacklist.Whitelist.MobStates.Contains(mobState.CurrentState))
-            {
-            }
-            return false;
-        }
-        //RMC
 
         return Insert(toAdd, container, component);
     }

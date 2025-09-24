@@ -96,16 +96,6 @@ public sealed class EntityWhitelistSystem : EntitySystem
             return list.RequireAll ? _skills.HasAllSkills(uid, list.Skills) : _skills.HasAnySkills(uid, list.Skills);
         }
 
-        if (list.MobStates != null && _mobStateQuery.TryComp(uid, out var mobStateComp))
-        {
-            if (list.MobStates.Contains(mobStateComp.CurrentState))
-            {
-                if (!list.RequireAll)
-                    return true;
-            }
-            else if (list.RequireAll)
-                return false;
-        }
         // RMC14
 
         return list.RequireAll;

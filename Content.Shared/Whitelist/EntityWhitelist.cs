@@ -63,10 +63,4 @@ public sealed partial class EntityWhitelist
     // RMC14
     [DataField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
-
-    /// <summary>
-    ///     Mob states that are allowed in the whitelist.
-    /// </summary>
-    [DataField]
-    public List<MobState>? MobStates;
 }
