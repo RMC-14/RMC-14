@@ -337,12 +337,7 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
-        bool immuneToAP = false;
-        if (TryComp<CMArmorComponent>(ent, out var armorComp))
-        {
-            immuneToAP = armorComp.ImmuneToAP;
-        }
-
+var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.ImmuneToAP;
         if (HasComp<XenoComponent>(ent))
         {
             ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
