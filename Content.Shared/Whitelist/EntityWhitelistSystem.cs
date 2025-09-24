@@ -2,8 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tag;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared.Whitelist;
 
@@ -12,17 +10,14 @@ public sealed class EntityWhitelistSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
-    private EntityQuery<MobStateComponent> _mobStateQuery;
 
     // RMC14
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         _itemQuery = GetEntityQuery<ItemComponent>();
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
     }
 
     /// <inheritdoc cref="IsValid(Content.Shared.Whitelist.EntityWhitelist,Robust.Shared.GameObjects.EntityUid)"/>
@@ -95,7 +90,6 @@ public sealed class EntityWhitelistSystem : EntitySystem
         {
             return list.RequireAll ? _skills.HasAllSkills(uid, list.Skills) : _skills.HasAnySkills(uid, list.Skills);
         }
-
         // RMC14
 
         return list.RequireAll;
