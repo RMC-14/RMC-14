@@ -13,7 +13,7 @@ public sealed partial class XenoShardComponent : Component
     public int MaxShards = 300;
 
     [DataField, AutoNetworkedField]
-    public float ArmorPerShard = 0.05f;
+    public float ArmorPerShard = 2.5f;
 
     [DataField, AutoNetworkedField]
     public int ShardsPerArmorBonus = 50;

@@ -285,7 +285,6 @@
     tailDamage:
       groups:
         Brute: 48
-  - type: XenoShard
   - type: XenoSpikeShield
     spikeDamage:
       groups:

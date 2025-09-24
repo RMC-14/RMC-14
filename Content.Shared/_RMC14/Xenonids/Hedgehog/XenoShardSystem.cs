@@ -9,6 +9,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
+using Robust.Shared.GameStates;
+using Content.Shared.Appearance;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -21,6 +23,7 @@ public sealed class XenoShardSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private float _nextShardGrowth = 0f;
 
@@ -69,6 +72,7 @@ public sealed class XenoShardSystem : EntitySystem
         {
             Dirty(ent);
             _armor.UpdateArmorValue(ent.Owner);
+            UpdateHedgehogSprite(ent);
         }
     }
 
@@ -80,6 +84,7 @@ public sealed class XenoShardSystem : EntitySystem
         ent.Comp.Shards -= amount;
         Dirty(ent);
         _armor.UpdateArmorValue(ent.Owner);
+        UpdateHedgehogSprite((ent.Owner, ent.Comp));
         return true;
     }
 
@@ -88,9 +93,9 @@ public sealed class XenoShardSystem : EntitySystem
         if (ent.Comp.ShardsPerArmorBonus <= 0)
             return;
             
-        // Base armor is 30, bonus armor is 2.5 per 50 shards
-        var bonusArmor = (ent.Comp.Shards / ent.Comp.ShardsPerArmorBonus) * 2.5f;
-        args.XenoArmor = (int)(30 + bonusArmor);
+        // Bonus armor is 2.5 per 50 shards
+        var bonusArmor = (ent.Comp.Shards / ent.Comp.ShardsPerArmorBonus) * ent.Comp.ArmorPerShard;
+        args.XenoArmor += (int)bonusArmor;
     }
 
     private void OnFireSpikes(Entity<XenoFireSpikesComponent> ent, ref ActionXenoFireSpikesEvent args)
@@ -139,6 +144,7 @@ public sealed class XenoShardSystem : EntitySystem
         shards.Shards = 0;
         Dirty(ent, shards);
         _armor.UpdateArmorValue(ent.Owner);
+        UpdateHedgehogSprite((ent.Owner, shards));
         
         var xform = Transform(ent);
         
@@ -203,5 +209,32 @@ public sealed class XenoShardSystem : EntitySystem
             // Apply spike damage to nearby entities
             _damageable.TryChangeDamage(nearby, ent.Comp.SpikeDamage, true);
         }
+    }
+
+    private void UpdateHedgehogSprite(Entity<XenoShardComponent> ent)
+    {
+        // Determine sprite level based on shard count
+        // 0-99: level 1, 100-199: level 2, 200-299: level 3, 300: level 4
+        var level = ent.Comp.Shards switch
+        {
+            < 100 => 1,
+            < 200 => 2,
+            < 300 => 3,
+            _ => 4
+        };
+
+        // Use appearance system to update sprite
+        _appearance.SetData(ent, XenoShardVisuals.Level, level);
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<XenoShardComponent> ent, ref MapInitEvent args)
+    {
+        UpdateHedgehogSprite(ent);
     }
 }
