@@ -192,6 +192,22 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
 
 - type: entity
+  parent: ArmorHelmetPMC
+  id: RMCHeadCapManager
+  name: manager's hat
+  description: Belongs to someone very important. Has minor protection to all damage types.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/manager.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/manager.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 10
+    bio: 15
+    explosionArmor: 10
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: RMCHeadCapWestonYamadaDark
   name: Weston-Yamada cap
