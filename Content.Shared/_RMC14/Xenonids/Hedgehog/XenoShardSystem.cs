@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
 using Robust.Shared.GameStates;
-using Content.Shared.Appearance;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -31,6 +31,7 @@ public sealed class XenoShardSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoShardComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<XenoShardComponent, CMGetArmorEvent>(OnShardGetArmor);
+        SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
         
         SubscribeLocalEvent<XenoFireSpikesComponent, ActionXenoFireSpikesEvent>(OnFireSpikes);
         SubscribeLocalEvent<XenoSpikeShedComponent, ActionXenoSpikeShedEvent>(OnSpikeShed);
@@ -225,12 +226,6 @@ public sealed class XenoShardSystem : EntitySystem
 
         // Use appearance system to update sprite
         _appearance.SetData(ent, XenoShardVisuals.Level, level);
-    }
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnMapInit(Entity<XenoShardComponent> ent, ref MapInitEvent args)

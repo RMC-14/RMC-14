@@ -273,6 +273,7 @@
   - type: XenoShard
     shards: 0
     maxShards: 300
+  - type: Appearance
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.8
     baseSprintSpeed: 3.2
