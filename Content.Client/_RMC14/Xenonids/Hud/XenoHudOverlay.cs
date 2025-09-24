@@ -9,6 +9,8 @@ using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Robust.Shared.Graphics;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.Damage;
@@ -55,6 +57,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoEnergyComponent> _xenoEnergyQuery;
     private readonly EntityQuery<XenoMaturingComponent> _xenoMaturingQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
+    private readonly EntityQuery<XenoShardComponent> _xenoShardQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
@@ -88,6 +91,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoEnergyQuery = _entity.GetEntityQuery<XenoEnergyComponent>();
         _xenoMaturingQuery = _entity.GetEntityQuery<XenoMaturingComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
+        _xenoShardQuery = _entity.GetEntityQuery<XenoShardComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
@@ -556,6 +560,37 @@ public sealed class XenoHudOverlay : Overlay
     private void UpdatePlasma(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
         var (uid, xeno, sprite) = ent;
+        
+        // Check for shard system first (hedgehog ravager)
+        if (_xenoShardQuery.TryComp(uid, out var shardComp))
+        {
+            var shards = shardComp.Shards;
+            var maxShards = shardComp.MaxShards;
+            var shardLevel = ContentHelpers.RoundToLevels(shards, maxShards, 11);
+            var shardName = shardLevel > 0 ? $"{shardLevel * 10}" : "0";
+            var shardState = $"plasma{shardName}"; // Reuse plasma sprites for shards
+            var shardIcon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), shardState);
+            var shardTexture = _sprite.GetFrame(shardIcon, _timing.CurTime);
+
+            var shardBounds = sprite.Bounds;
+            var shardYOffset = (shardBounds.Height + sprite.Offset.Y) / 2f - (float) shardTexture.Height / EyeManager.PixelsPerMeter * shardBounds.Height + xeno.HudOffset.Y;
+            var shardXOffset = (shardBounds.Width + sprite.Offset.X) / 2f - (float) shardTexture.Width / EyeManager.PixelsPerMeter * shardBounds.Width + xeno.HudOffset.X;
+
+            var shardPosition = new Vector2(shardXOffset, shardYOffset);
+            handle.DrawTexture(shardTexture, shardPosition);
+            
+            // Draw shard count text
+            var font = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 10);
+            var shardText = $"{shards}/{maxShards}";
+            var textBounds = font.GetStringMetrics(shardText, 1f).Bounds;
+            var textYOffset = shardYOffset - textBounds.Height / EyeManager.PixelsPerMeter - 0.1f;
+            var textXOffset = shardXOffset + (shardTexture.Width / EyeManager.PixelsPerMeter - textBounds.Width / EyeManager.PixelsPerMeter) / 2f;
+            var textPosition = new Vector2(textXOffset, textYOffset);
+            handle.DrawString(font, textPosition, shardText, Color.White);
+            return;
+        }
+        
+        // Default plasma system
         if (!_xenoPlasmaQuery.TryComp(uid, out var comp) ||
             comp.MaxPlasma == 0)
         {
@@ -576,6 +611,15 @@ public sealed class XenoHudOverlay : Overlay
 
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
+        
+        // Draw plasma count text
+        var font = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Bold.ttf", 10);
+        var plasmaText = $"{plasma}/{max}";
+        var textBounds = font.GetStringMetrics(plasmaText, 1f).Bounds;
+        var textYOffset = yOffset - textBounds.Height / EyeManager.PixelsPerMeter - 0.1f;
+        var textXOffset = xOffset + (texture.Width / EyeManager.PixelsPerMeter - textBounds.Width / EyeManager.PixelsPerMeter) / 2f;
+        var textPosition = new Vector2(textXOffset, textYOffset);
+        handle.DrawString(font, textPosition, plasmaText, Color.White);
     }
 
     private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
