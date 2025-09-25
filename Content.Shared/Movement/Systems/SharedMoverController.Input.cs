@@ -439,8 +439,10 @@ namespace Content.Shared.Movement.Systems
                 var fraction = (subTick - entity.Comp.LastInputSubTick) / (float) ushort.MaxValue;
 
                 ref var lastMoveAmount = ref entity.Comp.Sprinting ? ref entity.Comp.CurTickSprintMovement : ref entity.Comp.CurTickWalkMovement;
-
-                lastMoveAmount += DirVecForButtons(entity.Comp.HeldMoveButtons) * fraction;
+                if (!entity.Comp.LinearMovement) // RMC change!
+                    lastMoveAmount += DirVecForButtons(entity.Comp.HeldMoveButtons) * fraction;
+                else
+                    lastMoveAmount += DirLinearVecForButtons(entity.Comp.HeldMoveButtons) * fraction;
 
                 entity.Comp.LastInputSubTick = subTick;
             }

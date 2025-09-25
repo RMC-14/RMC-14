@@ -454,7 +454,7 @@ public abstract partial class SharedMoverController : VirtualController
         ContentTileDefinition? tileDef = null;
 
         var touching = false;
-        // Whether we use tilefriction or not || RMC doesn't use the gravity system but maybe someone likes this.
+        // Whether we use tilefriction or not || RMC doesn't use the gravity system but maybe someone would like to use this.
         if (weightless || inAirHelpless)
         {
             // Find the speed we should be moving at and make sure we're not trying to move faster than that
