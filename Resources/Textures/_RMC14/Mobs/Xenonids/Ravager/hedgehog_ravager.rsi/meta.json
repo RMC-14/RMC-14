@@ -97,10 +97,10 @@
       }
     },
     {
-      "name": "hedgehog_1_crit"
+      "name": "Hedgehog_1_crit"
     },
     {
-      "name": "hedgehog_1_resting"
+      "name": "Hedgehog_1_resting"
     },
     {
       "name": "hedgehog_2_crit"
@@ -112,13 +112,13 @@
       "name": "hedgehog_3_crit"
     },
     {
-      "name": "hedgehog_3_resting"
+      "name": "Hedgehog_3_resting"
     },
     {
       "name": "hedgehog_4_crit"
     },
     {
-      "name": "hedgehog_4_resting"
+      "name": "Hedgehog_4_resting"
     }
   ]
 }
