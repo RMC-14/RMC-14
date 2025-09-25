@@ -13,11 +13,6 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
     [Dependency] private readonly XenoShardSystem _shard = default!;
 
 
-    public override void Initialize()
-    {
-        // TODO: Subscribe to damage events when XenoShieldDamageEvent is available
-    }
-
     public bool TryActivateShield(Entity<XenoSpikeShieldComponent, XenoShardComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp2, false))
@@ -37,8 +32,6 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
         Dirty(ent.Owner, ent.Comp1);
         return true;
     }
-
-    // TODO: Implement OnShieldDamage when XenoShieldDamageEvent is available
 
     public override void Update(float frameTime)
     {

@@ -248,18 +248,6 @@ public sealed class XenoShardSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(ent, movement);
         }
         
-        // Fire visual spikes in 3x3 area
-        _xenoProjectile.TryShoot(
-            ent.Owner,
-            new EntityCoordinates(ent, Vector2.UnitX * 1.5f),
-            FixedPoint2.Zero,
-            "XenoHedgehogSpikeProjectile",
-            null,
-            7, // 7 spikes like CM13 shrapnel_amount
-            new Angle(2 * Math.PI), // Full circle
-            15f,
-            fixedDistance: 1.5f
-        );
         
         // Give overshield with very high HP so it blocks all damage but still triggers spike firing
         _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, FixedPoint2.New(9999), shield.ShieldDuration);
