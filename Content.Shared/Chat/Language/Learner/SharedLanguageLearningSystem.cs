@@ -44,21 +44,16 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         if (!comp.LearnableLanguages.Contains(language))
             return _languageSystem.ObfuscateMessage(message, language);
 
-        var comprehension = CalculateOverallComprehension(comp, language);
-
-        if (comprehension >= 0.8f)
-            return message;
-
-        if (comprehension >= 0.4f)
-            return ProcessMessageWordByWord(message, language, comp);
-
-        return _languageSystem.ObfuscateMessage(message, language);
+        return ProcessMessageWordByWord(message, language, comp);
     }
 
     public string ProcessMessageWordByWord(string message, ProtoId<LanguagePrototype> language, LanguageLearningComponent learningComp)
     {
-        if (!learningComp.LearnedWords.TryGetValue(language, out var learnedWords))
-            return _languageSystem.ObfuscateMessage(message, language);
+        var overallComprehension = CalculateOverallComprehension(learningComp, language);
+        var defaultComprehension = GetDefaultWordComprehension(language);
+        var thresholds = GetComprehensionThresholds(language);
+
+        learningComp.LearnedWords.TryGetValue(language, out var learnedWords);
 
         var result = new StringBuilder(message.Length);
         var lastIndex = 0;
@@ -70,15 +65,26 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
 
             var word = match.Value;
             var wordLower = word.ToLower();
-            var wordComprehension = learnedWords.GetValueOrDefault(wordLower, 0f);
 
-            if (wordComprehension >= 0.6f)
+            var wordComprehension = 0f;
+            if (learnedWords?.ContainsKey(wordLower) == true)
+            {
+                wordComprehension = learnedWords[wordLower];
+            }
+            else
+            {
+                wordComprehension = Math.Max(overallComprehension, defaultComprehension);
+            }
+
+            var effectiveComprehension = Math.Max(wordComprehension, overallComprehension);
+
+            if (effectiveComprehension >= thresholds.Clear)
             {
                 result.Append(word);
             }
-            else if (wordComprehension >= 0.2f)
+            else if (effectiveComprehension >= thresholds.Partial)
             {
-                result.Append(LightlyGarbleWord(word, wordComprehension));
+                result.Append(LightlyGarbleWord(word, effectiveComprehension));
             }
             else
             {
@@ -175,5 +181,19 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             return new Dictionary<string, float>();
 
         return new Dictionary<string, float>(words);
+    }
+
+    public float GetDefaultWordComprehension(ProtoId<LanguagePrototype> language)
+    {
+        if (_prototypeManager.TryIndex(language, out var languageProto))
+            return languageProto.DefaultWordComprehension;
+        return 0.0f;
+    }
+
+    public (float Clear, float Partial) GetComprehensionThresholds(ProtoId<LanguagePrototype> language)
+    {
+        if (_prototypeManager.TryIndex(language, out var languageProto))
+            return (languageProto.ClearComprehensionThreshold, languageProto.PartialComprehensionThreshold);
+        return (0.6f, 0.2f);
     }
 }
