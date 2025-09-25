@@ -29,4 +29,10 @@ public sealed partial class XenoSpikeShieldComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Active = false;
+    
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastProcTime = TimeSpan.Zero;
+    
+    [DataField, AutoNetworkedField]
+    public float AccumulatedDamage = 0f;
 }

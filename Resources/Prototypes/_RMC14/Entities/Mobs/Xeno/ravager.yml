@@ -257,11 +257,11 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      650: Critical
+      750: Dead
   - type: CMArmor
     xenoArmor: 30
-    explosionArmor: 90
+    explosionArmor: 80
   - type: XenoStrain
     name: rmc-xeno-hedgehog-name
     description: rmc-xeno-hedgehog-description
@@ -281,11 +281,14 @@
     attackRate: 0.9
     damage:
       groups:
-        Brute: 40
+        Brute: 35
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
+  - type: XenoClaws
+    clawType: VerySharp
+    clawStrength: 3
   - type: XenoSpikeShield
     spikeDamage:
       groups:

@@ -1,29 +1,30 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Movement.Components;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
-using Robust.Shared.GameStates;
-using Robust.Shared.GameObjects;
+using Content.Shared.Popups;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 public sealed class XenoShardSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private readonly XenoShieldSystem _xenoShield = default!;
 
     private float _nextShardGrowth = 0f;
 
@@ -36,7 +37,8 @@ public sealed class XenoShardSystem : EntitySystem
         SubscribeLocalEvent<XenoFireSpikesComponent, ActionXenoFireSpikesEvent>(OnFireSpikes);
         SubscribeLocalEvent<XenoSpikeShedComponent, ActionXenoSpikeShedEvent>(OnSpikeShed);
         SubscribeLocalEvent<XenoSpikeShieldComponent, ActionXenoSpikeShieldEvent>(OnSpikeShield);
-        SubscribeLocalEvent<XenoSpikeShieldComponent, DamageChangedEvent>(OnSpikeShieldDamaged);
+        
+        SubscribeLocalEvent<XenoSpikeShieldComponent, RemovedShieldEvent>(OnShieldRemoved);
     }
 
     public override void Update(float frameTime)
@@ -49,9 +51,29 @@ public sealed class XenoShardSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoShardComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // Check if cooldown just ended
+            if (comp.SpikeShedCooldownEnd <= _timing.CurTime && comp.SpikeShedCooldownEnd > TimeSpan.Zero && !comp.SpikeShedCooldownMessageShown)
+            {
+                comp.SpikeShedCooldownEnd = TimeSpan.Zero;
+                comp.SpikeShedCooldownMessageShown = false;
+                _popup.PopupPredicted("You feel your ability to gather shards return!", uid, uid);
+                Dirty(uid, comp);
+            }
+            
             if (comp.Shards < comp.MaxShards)
             {
                 AddShards((uid, comp), (int)comp.ShardGrowthRate);
+            }
+        }
+        
+        // Handle spike shield expiration
+        var shieldQuery = EntityQueryEnumerator<XenoSpikeShieldComponent>();
+        while (shieldQuery.MoveNext(out var uid, out var shield))
+        {
+            if (shield.Active && shield.ShieldExpireAt <= _timing.CurTime)
+            {
+                shield.Active = false;
+                Dirty(uid, shield);
             }
         }
     }
@@ -66,6 +88,10 @@ public sealed class XenoShardSystem : EntitySystem
 
     public void AddShards(Entity<XenoShardComponent> ent, int amount)
     {
+        // Check if on spike shed cooldown
+        if (ent.Comp.SpikeShedCooldownEnd > _timing.CurTime)
+            return;
+            
         var oldShards = ent.Comp.Shards;
         ent.Comp.Shards = Math.Min(ent.Comp.Shards + amount, ent.Comp.MaxShards);
         
@@ -103,32 +129,39 @@ public sealed class XenoShardSystem : EntitySystem
     {
         if (!TryComp<XenoShardComponent>(ent, out var shards))
             return;
-
-        if (!TryConsumeShards((ent, shards), ent.Comp.ShardCost))
+            
+        // Check cooldown
+        if (ent.Comp.CooldownExpireAt > _timing.CurTime)
             return;
 
-        var xform = Transform(ent);
-        var worldPos = _transform.GetWorldPosition(xform);
-        var direction = (_transform.ToMapCoordinates(args.Target).Position - worldPos).Normalized();
-        var angle = direction.ToAngle();
-        
-        // Fire 8 spikes in a cone
-        for (int i = 0; i < ent.Comp.SpikeCount; i++)
+        // Check shard cost with popup
+        if (shards.Shards < ent.Comp.ShardCost)
         {
-            var spread = (i - ent.Comp.SpikeCount / 2f) * 0.2f; // 0.2 radian spread per spike
-            var spikeAngle = angle + new Angle(spread);
-            var spikeDirection = spikeAngle.ToVec();
-            
-            // Spawn spike projectile at proper offset from ravager center
-            var spawnOffset = spikeDirection * 1.5f; // Spawn further from center
-            var spike = Spawn("XenoSpikeProjectile", _transform.ToMapCoordinates(new EntityCoordinates(ent, spawnOffset)));
-            if (TryComp<PhysicsComponent>(spike, out var physics))
-            {
-                _physics.SetLinearVelocity(spike, spikeDirection * 15f, body: physics);
-            }
+            var needed = ent.Comp.ShardCost - shards.Shards;
+            _popup.PopupPredicted($"Not enough shards! We need {needed} more!", ent, ent);
+            return;
         }
         
-        args.Handled = true;
+        // Consume shards
+        TryConsumeShards((ent, shards), ent.Comp.ShardCost);
+            
+        // Set cooldown
+        ent.Comp.CooldownExpireAt = _timing.CurTime + ent.Comp.Cooldown;
+        Dirty(ent, ent.Comp);
+
+        // Use exact bone chips implementation with 8 shots and 45-degree deviation
+        args.Handled = _xenoProjectile.TryShoot(
+            ent,
+            args.Target,
+            FixedPoint2.Zero,
+            "XenoHedgehogSpikeProjectile",
+            null,
+            8, // 8 projectiles
+            new Angle(Math.PI / 4), // 45 degrees
+            20f,
+            fixedDistance: 4.0f, // Exactly 4 tiles
+            target: args.Entity
+        );
     }
 
     private void OnSpikeShed(Entity<XenoSpikeShedComponent> ent, ref ActionXenoSpikeShedEvent args)
@@ -139,30 +172,36 @@ public sealed class XenoShardSystem : EntitySystem
         if (shards.Shards < 50)
             return;
 
-        var spikeCount = shards.Shards / 10; // 1 spike per 10 shards
-        
+        // Check if on cooldown
+        if (shards.SpikeShedCooldownEnd > _timing.CurTime)
+            return;
+
         // Consume all shards
         shards.Shards = 0;
+        
+        // Set 30 second cooldown
+        shards.SpikeShedCooldownEnd = _timing.CurTime + TimeSpan.FromSeconds(30);
+        shards.SpikeShedCooldownMessageShown = true;
+        
         Dirty(ent, shards);
         _armor.UpdateArmorValue(ent.Owner);
         UpdateHedgehogSprite((ent.Owner, shards));
         
-        var xform = Transform(ent);
+        // Show popup
+        _popup.PopupPredicted("You have shed your spikes and cannot gain any more for 30 seconds!", ent, ent);
         
-        // Fire spikes in all directions
-        for (int i = 0; i < spikeCount; i++)
-        {
-            var angle = new Angle(2 * Math.PI * i / spikeCount);
-            var direction = angle.ToVec();
-            
-            // Spawn spike projectile at proper offset from ravager center
-            var spawnOffset = direction * 1.5f; // Spawn further from center
-            var spike = Spawn("XenoSpikeProjectile", _transform.ToMapCoordinates(new EntityCoordinates(ent, spawnOffset)));
-            if (TryComp<PhysicsComponent>(spike, out var physics))
-            {
-                _physics.SetLinearVelocity(spike, direction * 20f, body: physics);
-            }
-        }
+        // Fire projectiles in all directions (40 like CM13 shrapnel_amount)
+        _xenoProjectile.TryShoot(
+            ent.Owner,
+            new EntityCoordinates(ent, Vector2.UnitX * 4f),
+            FixedPoint2.Zero,
+            "XenoHedgehogSpikeProjectile",
+            null,
+            40, // 40 projectiles like CM13
+            new Angle(2 * Math.PI), // Full circle
+            20f,
+            fixedDistance: 4f
+        );
         
         // Apply speed boost (remove armor bonus, gain speed)
         if (TryComp<MovementSpeedModifierComponent>(ent, out var movement))
@@ -175,53 +214,82 @@ public sealed class XenoShardSystem : EntitySystem
 
     private void OnSpikeShield(Entity<XenoSpikeShieldComponent> ent, ref ActionXenoSpikeShieldEvent args)
     {
-        if (!TryComp<XenoSpikeShieldComponent>(ent, out var shield))
+        if (!TryComp<XenoSpikeShieldComponent>(ent, out var shield) || !TryComp<XenoShardComponent>(ent, out var shards))
             return;
             
-        shield.Active = !shield.Active;
+        // Check cooldown
+        if (shield.CooldownExpireAt > _timing.CurTime)
+            return;
+            
+        // Check shard cost with popup
+        if (shards.Shards < shield.ShardCost)
+        {
+            var needed = shield.ShardCost - shards.Shards;
+            _popup.PopupPredicted($"Not enough shards! We need {needed} more!", ent, ent);
+            return;
+        }
+        
+        // Consume shards
+        TryConsumeShards((ent, shards), shield.ShardCost);
+        
+        // Set cooldown FIRST (11.5 seconds total: 9 + 2.5 buffer)
+        shield.CooldownExpireAt = _timing.CurTime + TimeSpan.FromSeconds(11.5);
+        
+        // Activate shield
+        shield.Active = true;
+        shield.ShieldExpireAt = _timing.CurTime + shield.ShieldDuration;
+        
         Dirty(ent, shield);
         
-        // Refresh armor when shield state changes
-        if (TryComp<CMArmorComponent>(ent, out var armor))
+        // Refresh all systems to ensure proper updates
+        _armor.UpdateArmorValue(ent.Owner);
+        if (TryComp<MovementSpeedModifierComponent>(ent, out var movement))
         {
-            // Armor will be recalculated through the CMGetArmorEvent
+            _movementSpeed.RefreshMovementSpeedModifiers(ent, movement);
         }
+        
+        // Fire visual spikes in 3x3 area
+        _xenoProjectile.TryShoot(
+            ent.Owner,
+            new EntityCoordinates(ent, Vector2.UnitX * 1.5f),
+            FixedPoint2.Zero,
+            "XenoHedgehogSpikeProjectile",
+            null,
+            7, // 7 spikes like CM13 shrapnel_amount
+            new Angle(2 * Math.PI), // Full circle
+            15f,
+            fixedDistance: 1.5f
+        );
+        
+        // Give overshield with very high HP so it blocks all damage but still triggers spike firing
+        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, FixedPoint2.New(9999), shield.ShieldDuration);
+        
+        // Show CM13-style messages
+        var selfMsg = "We ruffle our bone-shard quills, forming a defensive shell!";
+        var othersMsg = $"{ent} ruffles its bone-shard quills, forming a defensive shell!";
+        _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
+        _aura.GiveAura(ent, Color.Blue, shield.ShieldDuration, 2);
         
         args.Handled = true;
     }
 
-    private void OnSpikeShieldDamaged(Entity<XenoSpikeShieldComponent> ent, ref DamageChangedEvent args)
-    {
-        if (!ent.Comp.Active || args.DamageDelta == null || args.DamageDelta.GetTotal() <= 0)
-            return;
-
-        // Find nearby attackers and damage them
-        var xform = Transform(ent);
-        var nearbyEntities = _lookup.GetEntitiesInRange(ent, ent.Comp.SpikeRadius);
-        
-        foreach (var nearby in nearbyEntities)
-        {
-            if (nearby == ent.Owner)
-                continue;
-                
-            if (!TryComp<DamageableComponent>(nearby, out var damageable))
-                continue;
-                
-            // Apply spike damage to nearby entities
-            _damageable.TryChangeDamage(nearby, ent.Comp.SpikeDamage, true);
-        }
-    }
 
     private void UpdateHedgehogSprite(Entity<XenoShardComponent> ent)
     {
+        // Throttle sprite updates to prevent flickering
+        if (_timing.CurTime - ent.Comp.LastSpriteUpdate < TimeSpan.FromMilliseconds(100))
+            return;
+            
+        ent.Comp.LastSpriteUpdate = _timing.CurTime;
+        
         // Determine sprite level based on shard count
         // 0-99: level 1, 100-199: level 2, 200-299: level 3, 300: level 4
         var level = ent.Comp.Shards switch
         {
-            < 100 => 1,
-            < 200 => 2,
-            < 300 => 3,
-            _ => 4
+            < 100 => XenoShardLevel.Level1,
+            < 200 => XenoShardLevel.Level2,
+            < 300 => XenoShardLevel.Level3,
+            _ => XenoShardLevel.Level4
         };
 
         // Use appearance system to update sprite
@@ -232,4 +300,17 @@ public sealed class XenoShardSystem : EntitySystem
     {
         UpdateHedgehogSprite(ent);
     }
+    
+    private void OnShieldRemoved(Entity<XenoSpikeShieldComponent> ent, ref RemovedShieldEvent args)
+    {
+        if (args.Type != XenoShieldSystem.ShieldType.Hedgehog)
+            return;
+            
+        ent.Comp.Active = false;
+        Dirty(ent, ent.Comp);
+    }
+    
+
+    
+
 }

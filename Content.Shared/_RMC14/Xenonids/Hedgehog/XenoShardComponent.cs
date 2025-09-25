@@ -28,4 +28,13 @@ public sealed partial class XenoShardComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SpeedModifier = 0.45f; // shard_lock_speed_mod
+    
+    [DataField, AutoNetworkedField]
+    public TimeSpan SpikeShedCooldownEnd = TimeSpan.Zero;
+    
+    [DataField, AutoNetworkedField]
+    public bool SpikeShedCooldownMessageShown = false;
+    
+    [DataField]
+    public TimeSpan LastSpriteUpdate = TimeSpan.Zero;
 }

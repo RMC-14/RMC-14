@@ -44,6 +44,6 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: rav_shard_shield
-    useDelay: 1
+    useDelay: 11.5
   - type: InstantAction
     event: !type:ActionXenoSpikeShieldEvent
