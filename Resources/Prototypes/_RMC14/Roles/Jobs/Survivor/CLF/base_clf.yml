@@ -21,7 +21,7 @@
   equipment:
     mask: RMCM5Bayonet # TODO RMC14
     jumpsuit: RMCJumpsuitCLFSoldier
-    back: RMCSatchelMarineForeconSurvivorFill
+    back: RMCSatchelLightpack5Slot
     id: RMCIDCardCLFSoldier
     ears: RMCHeadsetDistressCLF
     pocket1: RMCPouchFirstAidInjectors

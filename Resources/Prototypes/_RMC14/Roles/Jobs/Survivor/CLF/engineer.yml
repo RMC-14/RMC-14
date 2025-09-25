@@ -59,7 +59,7 @@
 
 - type: entity
   id: RMCSurvivorPresetCLFEngineer
-  name: forecon no primary survivor preset
+  name: clf no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
