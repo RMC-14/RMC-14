@@ -60,11 +60,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
     clothingVisuals:
       head:
       - state: equipped-HELMET
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
