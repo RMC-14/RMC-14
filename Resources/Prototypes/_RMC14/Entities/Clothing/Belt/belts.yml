@@ -110,6 +110,19 @@
           - RMCCartridge458SOCOM
 
 - type: entity
+  parent: CMBeltMarine
+  id: RMCBeltPMC
+  name: M305 pattern ammo load rig
+  description: The M305 is the standard load-bearing equipment of Weston-Yamada PMCs. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -155,7 +168,8 @@
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      - RMCCircuitboard
+      - RMCSynthResetKey
       components:
       - Welder
       - PowerCell
@@ -198,7 +212,9 @@
       - RodMetal1
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #     - # TODO circuit board, stock parts
+      - RMCCircuitboard
+      - RMCSynthResetKey
+      # TODO stock parts
       components:
       - Welder
       - PowerCell
@@ -264,7 +280,8 @@
       - RMCShellShotgun
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      - RMCSynthResetKey
+      #      - # TODO analyzer
       components:
       - Welder
       - PowerCell
@@ -792,6 +809,30 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolWeYa
+  name: WY-TM892 pattern general pistol holster rig
+  description: The WY-TM892 is the standard load-bearing equipment of the W-Y security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaMK80Fill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolSPP
   name: Type 47-S pistol holster rig
   description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
@@ -827,6 +868,12 @@
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_tsepa.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolPMC
+  name: M301 pistol holster rig
+  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
 
 - type: entity
   parent: CMBeltMarine
@@ -1085,7 +1132,7 @@
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2170s.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
@@ -1167,6 +1214,21 @@
     - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledWEYA
+  suffix: Filled, WEYA Director
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 1
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHE
+      amount: 2
+    - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
   suffix: Filled
@@ -1202,6 +1264,17 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
@@ -1215,7 +1288,18 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: CMM77BeltFilled
-  suffix: Filled
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilled
+  suffix: Filled, M77
   components:
   - type: StorageFill
     contents:
@@ -1351,6 +1435,19 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonWinterWyvern
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: GoldHandcannonBeltFilled
+  suffix: Filled, Gold Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonGold
 
 - type: entity
   parent: CMBeltMarine

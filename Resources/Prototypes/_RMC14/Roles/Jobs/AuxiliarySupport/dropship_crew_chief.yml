@@ -49,6 +49,7 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMDropshipCrewChief
       points: 45
     - type: RMCPointing
     - type: JobPrefix

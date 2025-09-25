@@ -1,0 +1,66 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFORECONPVECorpsman
+  name: rmc-job-name-pve-forecon-corpsman
+  description: cm-job-description-corpsman
+  playTimeTracker: CMJobFORECONPVECorpsman
+  ranks:
+   RMCRankSergeant: []
+  startingGear: RMCJobFORECONPVECorpsman
+  icon: "CMJobIconHospitalCorpsman"
+  joinNotifyCrew: false
+  accessGroups:
+  - HospitalCorpsman
+  spawnMenuRoleName: FORECON Corpsman (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillPilot: 1
+        RMCSkillSmartGun: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillPowerLoader: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pve-forecon-corpsman
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+
+- type: entity
+  id: RMCSpawnPointFORECONPVECorpsman
+  name: forecon corpsman spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: marine_spawn
+  - type: SpawnPoint
+    job_id: RMCFORECONPVECorpsman
+
+- type: startingGear
+  id: RMCJobFORECONPVECorpsman
+  equipment:
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: CMJobFORECONPVECorpsman

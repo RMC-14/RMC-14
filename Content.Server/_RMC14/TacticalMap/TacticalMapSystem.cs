@@ -2,9 +2,11 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
@@ -38,6 +40,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -71,7 +74,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private TimeSpan _forceMapUpdateEvery;
     private TimeSpan _nextForceMapUpdate = TimeSpan.FromSeconds(30);
 
-public override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -136,6 +139,7 @@ public override void Initialize()
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
             {
+                subs.Event<BoundUIOpenedEvent>(OnComputerBUIOpened);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
             });
 
@@ -272,7 +276,7 @@ public override void Initialize()
             else
                 ent.Comp.Color = squad.Color;
         }
-        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+        else if (ent.Comp.Background != null)
             UpdateIcon(ent);
     }
 
@@ -348,6 +352,26 @@ public override void Initialize()
     private void OnUserBUIOpened(Entity<TacticalMapUserComponent> ent, ref BoundUIOpenedEvent args)
     {
         EnsureComp<ActiveTacticalMapUserComponent>(ent);
+        UpdateTacticalMapState(ent);
+    }
+
+    private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        UpdateTacticalMapComputerState(ent);
+    }
+
+    private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
+    }
+
+    private void UpdateTacticalMapComputerState(Entity<TacticalMapComputerComponent> computer)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
     }
 
     private void OnUserBUIClosed(Entity<TacticalMapUserComponent> ent, ref BoundUIClosedEvent args)
@@ -541,6 +565,47 @@ public override void Initialize()
         Delete
     }
 
+        private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
+    {
+        var user = args.Actor;
+        HandleQueenEyeMove(user, args.Position);
+    }
+
+    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
+    {
+        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
+            queenEyeComp.Eye == null)
+            return;
+
+        var eye = queenEyeComp.Eye.Value;
+
+        if (!TryGetTacticalMap(out var map) ||
+            !TryComp<MapGridComponent>(map.Owner, out var grid))
+            return;
+
+        var queenTransform = Transform(user);
+        var eyeTransform = Transform(eye);
+        var mapTransform = Transform(map.Owner);
+
+        if (queenTransform.MapID != mapTransform.MapID)
+            return;
+
+        var tileCoords = new Vector2(position.X, position.Y);
+        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+
+        _transform.SetWorldPosition(eye, worldPos.Position);
+    }
+
+    public void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
+        UpdateMapData((computer, computer.Comp));
+        UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
+    }
+
     private void UpdateIndividualLabel(Vector2i position, string text, bool marine, bool xeno, EntityUid user, LabelOperation operation)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
@@ -635,37 +700,6 @@ public override void Initialize()
         }
 
         return false;
-    }
-
-    private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
-    {
-        var user = args.Actor;
-        HandleQueenEyeMove(user, args.Position);
-    }
-
-    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
-    {
-        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
-            queenEyeComp.Eye == null)
-            return;
-
-        var eye = queenEyeComp.Eye.Value;
-
-        if (!TryGetTacticalMap(out var map) ||
-            !TryComp<MapGridComponent>(map.Owner, out var grid))
-            return;
-
-        var queenTransform = Transform(user);
-        var eyeTransform = Transform(eye);
-        var mapTransform = Transform(map.Owner);
-
-        if (queenTransform.MapID != mapTransform.MapID)
-            return;
-
-        var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
-
-        _transform.SetWorldPosition(eye, worldPos.Position);
     }
 
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)
@@ -933,7 +967,7 @@ public override void Initialize()
                     }
                 }
 
-                _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
+                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
@@ -1064,6 +1098,15 @@ public override void Initialize()
             while (tunnelUsers.MoveNext(out var tunnelUserId, out _, out var tunnelUserComp))
             {
                 UpdateUserData((tunnelUserId, tunnelUserComp), map);
+            }
+
+            var dropshipWeapons = EntityQueryEnumerator<TacticalMapComputerComponent, DropshipTerminalWeaponsComponent>();
+            while (dropshipWeapons.MoveNext(out var weaponsId, out var weaponsComputer, out var weapons))
+            {
+                if (!_ui.IsUiOpen(weaponsId, DropshipTerminalWeaponsUi.Key))
+                    continue;
+
+                UpdateMapData((weaponsId, weaponsComputer), map);
             }
         }
     }
