@@ -17,6 +17,8 @@ jobs:
       run: git submodule update --init
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5
+    - name: Install PYYaml because the author decided to break it
+      run: pip install "pyyaml==6.0.2"
     - uses: PaulRitter/yaml-schema-validator@v1
       with:
         schema: .github/Schemas/rga.yml
