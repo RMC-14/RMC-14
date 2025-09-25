@@ -1,0 +1,83 @@
+# Language menu ui
+language-menu-title = Language Menu
+language-menu-known-tab = Known Languages
+language-menu-learning-tab = Learning Languages
+
+# Language names
+language-English-name = English
+language-Xeno-name = Xenomorph
+language-Binary-name = Binary
+language-Spanish-name = Spanish
+language-French-name = French
+language-Japanese-name = Japanese
+language-Russian-name = Russian
+language-German-name = German
+language-Predator-name = Yautja
+
+# Language descr
+language-English-description = Earth language.
+language-Xeno-description = The alien language of the Xenomorphs.
+language-Binary-description = The language of synthetic beings.
+language-Spanish-description = Earth language.
+language-French-description = Earth language.
+language-Japanese-description = Earth language.
+language-Russian-description = Earth language.
+language-German-description = Earth language.
+language-Predator-description = The ancient language of the Predator species.
+
+# language names
+chat-language-Common-name = Common
+chat-language-Xeno-name = Xenomorph
+chat-language-Binary-name = Binary
+chat-language-Spanish-name = Spanish
+chat-language-French-name = French
+chat-language-Japanese-name = Japanese
+chat-language-Russian-name = Russian
+chat-language-German-name = German
+chat-language-Predator-name = Yautja
+
+# language selection
+chat-language-cannot-speak = You cannot speak {$language}.
+chat-language-switched = You are now speaking {$language}.
+
+# Game hud
+game-hud-open-language-menu-button-tooltip = Open Language Menu (Change Speaking Language)
+
+# Language progress
+language-learning-overall-progress = Overall: {$progress}
+language-learning-word-count = Words: {$count}
+language-learning-average-comprehension = Avg: {$average}
+language-learning-no-words = No words learned yet.
+language-learning-search-placeholder = Search words...
+
+# Language errors
+chat-manager-no-radio-key = No radio key specified.
+chat-manager-no-such-channel = No such radio channel: {$key}
+rmc-no-queen-hivemind-chat = There is no Queen to guide the hive mind.
+
+# Language prefix
+language-prefix-help = Use #{$prefix} before your message to speak in {$language}.
+language-prefix-example = Example: #{$prefix}hello world
+
+# Speech Transformation Messages
+language-obfuscated-warning = You don't fully understand this language.
+language-learning-progress-gained = You're getting better at understanding {$language}.
+
+# Debug
+language-admin-set = Set {$target}'s current language to {$language}.
+language-admin-add = Added {$language} to {$target}'s known languages.
+language-admin-remove = Removed {$language} from {$target}'s known languages.
+language-debug-current = Current language: {$language}
+language-debug-known = Known languages: {$languages}
+language-debug-understood = Understood languages: {$languages}
+
+# Language alt text
+language-icon-alt-Common = Common language flag
+language-icon-alt-Xeno = Xenomorph symbol
+language-icon-alt-Binary = Binary code symbol
+language-icon-alt-Spanish = Spanish flag
+language-icon-alt-French = French flag
+language-icon-alt-Japanese = Japanese flag
+language-icon-alt-Russian = Russian flag
+language-icon-alt-German = German flag
+language-icon-alt-Predator = Predator symbol
