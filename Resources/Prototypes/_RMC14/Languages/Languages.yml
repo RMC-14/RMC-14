@@ -35,7 +35,7 @@
   isVisibleLanguage: true
   chatPrefix: 'x'
   textColor: null
-  typefaceId: AnimalSilence
+  typefaceId: null
   textSize: 16
   boldTypefaceId: null
   showLanguageName: true
