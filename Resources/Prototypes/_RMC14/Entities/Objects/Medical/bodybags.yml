@@ -25,6 +25,10 @@
     state: bodybag_closed
   - type: EntityStorageVisuals
     stateDoorOpen: bodybag_open
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: HealthScannableContainer
   - type: Tag
     tags:
@@ -161,10 +165,6 @@
   - type: EntityStorageLayingDownOverride
     enabled: false
   - type: CMStasisBag
-  - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
   - type: Buckle
     buckleDelay: 0
     clickUnbuckle: false
@@ -210,6 +210,7 @@
   description: A tarp carried by some UNMC infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
     layers:
     - state: reactivetarp_closed
       map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
@@ -222,6 +223,7 @@
       sprite: _RMC14/Objects/Medical/bodybags.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
     state: reactivetarp_closed
   - type: RMCPassiveStealth
     toggleable: true
@@ -233,10 +235,6 @@
       - Marine
   - type: EntityStorageVisuals
     stateDoorOpen: reactivetarp_open
-  - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 # Folded V2 thermal tarp
 - type: entity
@@ -255,6 +253,7 @@
   description: A more compact and improved version of the V2 thermal tarp, intended primarily for the transportation of deceased or wounded marines. It has improved cloaking technology than earlier models, allowing it to cloak to a greater degree and faster, but can only be used with special training.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
     layers:
     - state: scouttarp_closed
       map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
@@ -267,6 +266,7 @@
       sprite: _RMC14/Objects/Medical/bodybags.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
     state: scouttarp_closed
   - type: RMCPassiveStealth
     toggleable: true
@@ -278,10 +278,6 @@
       - ScoutWhitelist
   - type: EntityStorageVisuals
     stateDoorOpen: scouttarp_open
-  - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 # Folded V3 thermal tarp
 - type: entity
