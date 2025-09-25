@@ -120,9 +120,6 @@
   description: A folded bag designed for the storage and transportation of cadavers.
   components:
   - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
     whitelistedMobStates:
     - Dead
 
