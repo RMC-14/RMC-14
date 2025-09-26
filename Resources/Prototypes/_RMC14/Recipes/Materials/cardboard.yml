@@ -18,12 +18,16 @@
   name: pizza box
   prototype: RMCBoxPizza
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
 
 - type: rmcConstruction
-  id: RMCBoxPizzaGalaxy
+  id: RMCPizzaGalaxyBoxBuild
   name: pizza galaxy box
   prototype: RMCBoxPizzaGalaxy
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
 
 # folders
 - type: rmcConstruction
