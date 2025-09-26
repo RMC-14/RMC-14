@@ -11,7 +11,7 @@
   table: !type:AllSelector
     children:
     - id: ArmorHelmetPMCOfficer
-    - id: RMCJumpsuitVeteranPMCLeader
+    - id: CMArmorM4PMCLeader
     - id: RMCLaserDesignator
     - id: RMCWhistle
 

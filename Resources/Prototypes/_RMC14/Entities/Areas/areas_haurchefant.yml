@@ -52,8 +52,18 @@
 
 - type: entity
   parent: RMCAreaHF
+  id: RMCAreaHFOffice
+  name: Office
+
+- type: entity
+  parent: RMCAreaHF
   id: RMCAreaHFEngineering
   name: Engineering
+
+- type: entity
+  parent: RMCAreaHFEngineering
+  id: RMCAreaHFSyntheticCloset
+  name: Synthetic Closet
 
 - type: entity
   parent: RMCAreaHF
