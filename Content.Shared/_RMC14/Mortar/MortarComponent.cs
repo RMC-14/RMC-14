@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -38,7 +39,7 @@ public sealed partial class MortarComponent : Component
     public Vector2i Dial;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FireDelay = TimeSpan.FromSeconds(9);
+    public TimeSpan FireDelay = TimeSpan.FromSeconds(0);
 
     [DataField, AutoNetworkedField]
     public int TilesPerOffset = 20;
@@ -90,4 +91,37 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public int[] FireRandomOffset = new[] { -1, 0, 0, 1 };
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LaserLinkDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public bool LaserTargetingMode = false;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? LinkedLaserDesignator = null;
+
+    [DataField, AutoNetworkedField]
+    public EntityCoordinates? LaserTargetCoordinates = null;
+
+    [DataField, AutoNetworkedField]
+    public bool IsLinking = false;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? LaserTargetSound = new SoundPathSpecifier("/Audio/_RMC14/Binoculars/binoctarget.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? LaserTargetWarningSound = new SoundPathSpecifier("/Audio/Misc/cryo_warning.ogg");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LaserTargetDelay = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public bool IsTargeting = false;
+
+    [DataField, AutoNetworkedField]
+    public bool NeedAnnouncement = false;
 }

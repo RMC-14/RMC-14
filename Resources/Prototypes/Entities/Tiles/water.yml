@@ -6,11 +6,6 @@
     mode: SnapgridCenter
     snap:
     - Wall
-  # RMC14 Start
-  blockAnchoring: true
-  blockConstruction: true
-  weedsSpreadable: false
-  # RMC14 End
   components:
   - type: FloorOccluder
   - type: Transform
