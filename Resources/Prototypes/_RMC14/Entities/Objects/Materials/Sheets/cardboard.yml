@@ -31,10 +31,10 @@
     # mouse traps box
     # cardborg suit
     # cardborg helmet
-    # pizza box
+    - RMCPizzaBoxList
     # dartboard
-    # - RMCDividerConstruction
-    # folders
+    - RMCDividerConstruction
+    - RMCFolderList
     # - RMCDividerConstruction
     # empty ammo boxes
   - type: Material
