@@ -4,6 +4,15 @@
   isDivider: true
   prototype: Error
 
+# donut box
+- type: rmcConstruction
+  id: RMCDonutBoxBuild
+  name: donut box
+  prototype: RMCBoxDonut
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
 # pizza boxes
 - type: rmcConstruction
   id: RMCPizzaBoxList
