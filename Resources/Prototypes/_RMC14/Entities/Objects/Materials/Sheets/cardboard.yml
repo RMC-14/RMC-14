@@ -41,6 +41,7 @@
     - RMCEmptySMGMagazineBoxesList
     - RMCEmptyPistolMagazineBoxesList
     - RMCEmptyShotgunShellBoxesList
+    - RMCDividerConstruction
     - RMCEmptySupplyBoxesList
   - type: Material
   - type: PhysicalComposition
