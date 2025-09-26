@@ -13,7 +13,6 @@
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false
   marineAuthorityLevel: 1
-  supervisors: cm-job-supervisors-secserg
   accessGroups:
   - SmartGunOperator
   special:
