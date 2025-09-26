@@ -56,7 +56,7 @@ public sealed class XenoShardSystem : EntitySystem
             {
                 comp.SpikeShedCooldownEnd = TimeSpan.Zero;
                 comp.SpikeShedCooldownMessageShown = false;
-                _popup.PopupPredicted("You feel your ability to gather shards return!", uid, uid);
+                _popup.PopupEntity("You feel your ability to gather shards return!", uid, uid);
                 Dirty(uid, comp);
             }
             
@@ -138,7 +138,7 @@ public sealed class XenoShardSystem : EntitySystem
         if (shards.Shards < ent.Comp.ShardCost)
         {
             var needed = ent.Comp.ShardCost - shards.Shards;
-            _popup.PopupPredicted($"Not enough shards! We need {needed} more!", ent, ent);
+            _popup.PopupEntity($"Not enough shards! We need {needed} more!", ent, ent);
             return;
         }
         
@@ -188,7 +188,7 @@ public sealed class XenoShardSystem : EntitySystem
         UpdateHedgehogSprite((ent.Owner, shards));
         
         // Show popup
-        _popup.PopupPredicted("You have shed your spikes and cannot gain any more for 30 seconds!", ent, ent);
+        _popup.PopupEntity("You have shed your spikes and cannot gain any more for 30 seconds!", ent, ent);
         
         // Fire projectiles in all directions (40 like CM13 shrapnel_amount)
         _xenoProjectile.TryShoot(
@@ -225,7 +225,7 @@ public sealed class XenoShardSystem : EntitySystem
         if (shards.Shards < shield.ShardCost)
         {
             var needed = shield.ShardCost - shards.Shards;
-            _popup.PopupPredicted($"Not enough shards! We need {needed} more!", ent, ent);
+            _popup.PopupEntity($"Not enough shards! We need {needed} more!", ent, ent);
             return;
         }
         
