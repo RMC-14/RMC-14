@@ -150,11 +150,12 @@
   - RMCBoxBullets458EmptyBuild
   - RMCBoxMagazineRifleM16EmptyBuild
   - RMCBoxMagazineRifleAK4047EmptyBuild
+  - RMCBoxMagazineRifleSSG45EmptyBuild
   - RMCBoxMagazineRifleSSG45APEmptyBuild
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CEmptyBuild
-  name: empty M54C magazine box (reg)
+  name: empty M54C magazine box (Reg x 10)
   prototype: RMCBoxMagazineRifleM54CEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -162,7 +163,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CAPEmptyBuild
-  name: empty M54C magazine box (ap)
+  name: empty M54C magazine box (AP x 10)
   prototype: RMCBoxMagazineRifleM54CAPEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -170,7 +171,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CExtEmptyBuild
-  name: empty M54C magazine box (ext)
+  name: empty M54C magazine box (Ext x 10)
   prototype: RMCBoxMagazineRifleM54CExtEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -178,7 +179,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPREmptyBuild
-  name: empty M4SPR magazine box (reg)
+  name: empty M4SPR magazine box (Reg x 16)
   prototype: RMCBoxMagazineRifleM4SPREmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -186,7 +187,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
-  name: empty M4SPR magazine box (ap)
+  name: empty M4SPR magazine box (AP x 16)
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -194,7 +195,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
-  name: empty M4SPR magazine box (ext)
+  name: empty M4SPR magazine box (Ext x 12)
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -202,7 +203,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBullets458EmptyBuild
-  name: empty .458 SOCOM bundle box
+  name: empty .458 SOCOM bundle box (Reg x 297)
   prototype: RMCBoxBullets458Empty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -210,7 +211,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM16EmptyBuild
-  name: empty m16 magazine box
+  name: empty m16 magazine box (Reg x 12)
   prototype: RMCBoxMagazineRifleM16Empty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -218,7 +219,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleAK4047EmptyBuild
-  name: empty AK4047 magazine box
+  name: empty AK4047 magazine box (Reg x 10)
   prototype: RMCBoxMagazineRifleAK4047Empty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -226,8 +227,16 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleSSG45EmptyBuild
-  name: empty SSG45 magazine box
+  name: empty SSG45 magazine box (Reg x 10)
   prototype: RMCBoxMagazineRifleSSG45Empty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleSSG45APEmptyBuild
+  name: empty SSG45 magazine box (AP x 10)
+  prototype: RMCBoxMagazineRifleSSG45APEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
