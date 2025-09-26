@@ -27,6 +27,7 @@
   id: RMCPizzaBoxBuild
   name: pizza box
   prototype: RMCBoxPizza
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -35,6 +36,7 @@
   id: RMCPizzaGalaxyBoxBuild
   name: pizza galaxy box
   prototype: RMCBoxPizzaGalaxy
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -45,48 +47,53 @@
   name: folders (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
   prototype: CMFolderBase
   listed:
-  - RMCFolderBlueBuild
-  - RMCFolderBlackBuild
-  - RMCFolderRedBuild
-  - RMCFolderWhiteBuild
-  - RMCFolderYellowBuild
+  - RMCFolderBlueEmptyBuild
+  - RMCFolderBlackEmptyBuild
+  - RMCFolderRedEmptyBuild
+  - RMCFolderWhiteEmptyBuild
+  - RMCFolderYellowEmptyBuild
 
 - type: rmcConstruction
-  id: RMCFolderBlueBuild
+  id: RMCFolderBlueEmptyBuild
   name: blue folder
-  prototype: CMFolderBlue
+  prototype: CMFolderBlueEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
 
 - type: rmcConstruction
-  id: RMCFolderBlackBuild
+  id: RMCFolderBlackEmptyBuild
   name: black folder
-  prototype: CMFolderBlack
+  prototype: CMFolderBlackEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
   
 - type: rmcConstruction
-  id: RMCFolderRedBuild
+  id: RMCFolderRedEmptyBuild
   name: red folder
-  prototype: CMFolderRed
+  prototype: CMFolderRedEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
   
 - type: rmcConstruction
-  id: RMCFolderWhiteBuild
+  id: RMCFolderWhiteEmptyBuild
   name: white folder
-  prototype: CMFolderWhite
+  prototype: CMFolderWhiteEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
   
 - type: rmcConstruction
-  id: RMCFolderYellowBuild
+  id: RMCFolderYellowEmptyBuild
   name: yellow folder
-  prototype: CMFolderYellow
+  prototype: CMFolderYellowEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -106,6 +113,7 @@
   id: RMCBoxBulletsRifleEmptyBuild
   name: empty rifle ammo box (10x24mm)
   prototype: RMCBoxBulletsRifleEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -114,6 +122,7 @@
   id: RMCBoxBulletsRifleAPEmptyBuild
   name: empty rifle ammo box (10x24mm AP)
   prototype: RMCBoxBulletsRifleAPEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -122,6 +131,7 @@
   id: RMCBoxBulletsSMGEmptyBuild
   name: empty smg ammo box (10x20mm)
   prototype: RMCBoxBulletsSMGEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -130,6 +140,7 @@
   id: RMCBoxBulletsSMGAPEmptyBuild
   name: empty smg ammo box (10x20mm AP)
   prototype: RMCBoxBulletsSMGAPEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -157,6 +168,7 @@
   id: RMCBoxMagazineRifleM54CEmptyBuild
   name: empty M54C magazine box
   prototype: RMCBoxMagazineRifleM54CEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -165,6 +177,7 @@
   id: RMCBoxMagazineRifleM54CAPEmptyBuild
   name: empty M54C magazine box (AP)
   prototype: RMCBoxMagazineRifleM54CAPEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -173,6 +186,7 @@
   id: RMCBoxMagazineRifleM54CExtEmptyBuild
   name: empty M54C magazine box (Ext)
   prototype: RMCBoxMagazineRifleM54CExtEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -181,6 +195,7 @@
   id: RMCBoxMagazineRifleM4SPREmptyBuild
   name: empty M4SPR magazine box
   prototype: RMCBoxMagazineRifleM4SPREmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -189,6 +204,7 @@
   id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
   name: empty M4SPR magazine box (AP)
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -197,6 +213,7 @@
   id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
   name: empty M4SPR magazine box (Ext)
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -205,6 +222,7 @@
   id: RMCBoxBullets458EmptyBuild
   name: empty .458 SOCOM bundle box
   prototype: RMCBoxBullets458Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -213,6 +231,7 @@
   id: RMCBoxMagazineRifleM16EmptyBuild
   name: empty m16 magazine box
   prototype: RMCBoxMagazineRifleM16Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -221,6 +240,7 @@
   id: RMCBoxMagazineRifleSSG45EmptyBuild
   name: empty SSG45 magazine box
   prototype: RMCBoxMagazineRifleSSG45Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -229,6 +249,7 @@
   id: RMCBoxMagazineRifleSSG45APEmptyBuild
   name: empty SSG45 magazine box (AP)
   prototype: RMCBoxMagazineRifleSSG45APEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -247,6 +268,7 @@
   id: RMCBoxMagazineSMGM63EmptyBuild
   name: empty M63 magazine box
   prototype: RMCBoxMagazineSMGM63Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -255,6 +277,7 @@
   id: RMCBoxMagazineSMGM63APEmptyBuild
   name: empty M63 magazine box (AP)
   prototype: RMCBoxMagazineSMGM63APEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -263,6 +286,7 @@
   id: RMCBoxMagazineSMGM63ExtEmptyBuild
   name: empty M63 magazine box (Ext)
   prototype: RMCBoxMagazineSMGM63ExtEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -293,6 +317,7 @@
   id: RMCBoxMagazinePistolM1984EmptyBuild
   name: empty M1984 magazine box
   prototype: RMCBoxMagazinePistolM1984Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -301,6 +326,7 @@
   id: RMCBoxMagazinePistolM1984APEmptyBuild
   name: empty M1984 magazine box (AP)
   prototype: RMCBoxMagazinePistolM1984APEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -309,6 +335,7 @@
   id: RMCBoxMagazinePistolMK80EmptyBuild
   name: empty MK80 magazine box
   prototype: RMCBoxMagazinePistolMK80Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -317,6 +344,7 @@
   id: RMCBoxMagazinePistolSU6EmptyBuild
   name: empty SU-6 magazine box
   prototype: RMCBoxMagazinePistolSU6Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -325,6 +353,7 @@
   id: RMCBoxMagazinePistolM77APEmptyBuild
   name: empty M77 magazine box (AP)
   prototype: RMCBoxMagazinePistolM77APEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -333,6 +362,7 @@
   id: RMCBoxMagazineRevolverM44EmptyBuild
   name: empty M44 speedloader box
   prototype: RMCBoxMagazineRevolverM44Empty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -341,6 +371,7 @@
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
   name: empty M44 speedloader box (Marksman)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -364,6 +395,7 @@
   id: RMCBoxShellsBuckshotEmptyBuild
   name: empty buckshot shell box
   prototype: RMCBoxShellsBuckshotEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -372,6 +404,7 @@
   id: RMCBoxShellsSlugsEmptyBuild
   name: empty slug shell box
   prototype: RMCBoxShellsSlugsEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -380,6 +413,7 @@
   id: RMCBoxShellsFlechetteEmptyBuild
   name: empty flechette shell box
   prototype: RMCBoxShellsFlechetteEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -388,6 +422,7 @@
   id: RMCBoxShellsBreachingEmptyBuild
   name: empty breaching shell box
   prototype: RMCBoxShellsBreachingEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -396,6 +431,7 @@
   id: RMCBoxShellsBeanbagEmptyBuild
   name: empty beanbag shell box
   prototype: RMCBoxShellsBeanbagEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -404,6 +440,7 @@
   id: RMCBoxShellsIncendiaryEmptyBuild
   name: empty incendiary shell box
   prototype: RMCBoxShellsIncendiaryEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -412,6 +449,7 @@
   id: RMCBoxShellsIncendiaryBuckshotEmptyBuild
   name: empty incendiary buckshot shell box
   prototype: RMCBoxShellsIncendiaryBuckshotEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -436,6 +474,7 @@
   id: RMCBoxPackFlareEmptyBuild
   name: empty M94 flare pack box
   prototype: RMCBoxPackFlareEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -444,6 +483,7 @@
   id: RMCBoxPackFlareCASEmptyBuild
   name: empty M89-S flare pack box
   prototype: RMCBoxPackFlareCASEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -452,6 +492,7 @@
   id: RMCBoxFlamerTankEmptyBuild
   name: empty UT-Napthal fuel tank box
   prototype: RMCBoxFlamerTankEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -460,6 +501,7 @@
   id: RMCBoxFlashlightsEmptyBuild
   name: empty flashlight box
   prototype: RMCBoxFlashlightsEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -468,6 +510,7 @@
   id: RMCBoxMREEmptyBuild
   name: empty MRE box
   prototype: RMCBoxMREEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -476,6 +519,7 @@
   id: RMCBoxMagazineSMGNailgunEmptyBuild
   name: empty nailgun nail box
   prototype: RMCBoxMagazineSMGNailgunEmpty
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -484,6 +528,7 @@
   id: RMCBoxMagazinePowerCellsHighBuild
   name: empty high-capacity powercell box
   prototype: RMCBoxMagazinePowerCellsHigh
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
