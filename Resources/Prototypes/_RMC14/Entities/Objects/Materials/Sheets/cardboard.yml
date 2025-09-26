@@ -37,7 +37,9 @@
     - RMCFolderList
     - RMCDividerConstruction
     - RMCEmptyAmmoBoxesList
-    # empty magazine boxes
+    - RMCEmptyRifleMagazineBoxesList
+    - RMCEmptySMGMagazineBoxesList
+    - RMCEmptySidearmMagazineBoxesList
     - RMCEmptyShotgunShellBoxesList
     - RMCEmptySupplyBoxesList
   - type: Material
