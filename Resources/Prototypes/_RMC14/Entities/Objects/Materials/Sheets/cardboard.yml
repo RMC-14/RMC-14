@@ -18,7 +18,7 @@
 - type: entity
   parent: SheetOtherBase
   id: RMCSheetCardboard
-  name: cardboard
+  name: cardboard sheets
   suffix: Full, RMC
   components:
   - type: RMCConstructionItem
