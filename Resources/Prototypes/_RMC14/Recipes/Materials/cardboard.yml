@@ -191,7 +191,7 @@
 - type: rmcConstruction
   id: RMCBoxShellsIncendiaryEmptyBuild
   name: empty incendiary shell box
-  prototype: RMCBoxShellsIncendiaryEmptyEmpty
+  prototype: RMCBoxShellsIncendiaryEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
