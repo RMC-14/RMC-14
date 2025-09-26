@@ -35,8 +35,11 @@
     # dartboard
     - RMCDividerConstruction
     - RMCFolderList
-    # - RMCDividerConstruction
-    # empty ammo boxes
+    - RMCDividerConstruction
+    - RMCEmptyAmmoBoxesList
+    # empty magazine boxes
+    # empty shotgun shell boxes
+    # empty utility boxes
   - type: Material
   - type: PhysicalComposition
     materialComposition:
