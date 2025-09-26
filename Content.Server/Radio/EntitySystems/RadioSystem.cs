@@ -107,9 +107,9 @@ public sealed class RadioSystem : EntitySystem
         if (language != null && !language.CanUseRadio)
             return;
 
-        var languageColor = _languageSystem.GetLanguageColor(currentLanguage);
-        var showLanguageName = _languageSystem.DoesLanguageShowName(currentLanguage);
-        var languageIcon = showLanguageName ? _languageSystem.GetLanguageIcon(currentLanguage) : null;
+        Color? languageColor = language?.TextColor;
+        bool showLanguageName = language?.ShowLanguageName ?? false;
+        string? languageIcon = showLanguageName ? language?.LanguageIcon : null;
         // RMC14
 
         var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);

@@ -47,6 +47,9 @@ public sealed partial class LanguagePrototype : IPrototype
     public bool NeedsSpeech { get; set; } = true;
 
     [DataField]
+    public bool NeedsLOS { get; set; } = false;
+
+    [DataField]
     public ObfuscationMethod ObfuscationMethod = ObfuscationMethod.Default;
 
     [DataField]

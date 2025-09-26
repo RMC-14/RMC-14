@@ -138,34 +138,4 @@ public class SharedLanguageSystem : EntitySystem
         var random = new System.Random(seed);
         return random.Next(min, max + 1);
     }
-
-    public Color? GetLanguageColor(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) ? languageProto.TextColor : null;
-    }
-
-    public string? GetLanguageTypeface(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) ? languageProto.TypefaceId : null;
-    }
-
-    public int? GetLanguageTextSize(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) ? languageProto.TextSize : null;
-    }
-
-    public string? GetLanguageBoldTypeface(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) ? languageProto.BoldTypefaceId : null;
-    }
-
-    public bool DoesLanguageShowName(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) && languageProto.ShowLanguageName;
-    }
-
-    public string? GetLanguageIcon(ProtoId<LanguagePrototype> language)
-    {
-        return _prototypeManager.TryIndex(language, out var languageProto) ? languageProto.LanguageIcon : null;
-    }
 }
