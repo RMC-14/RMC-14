@@ -4,6 +4,27 @@
   isDivider: true
   prototype: Error
 
+# pizza boxes
+- type: rmcConstruction
+  id: RMCPizzaBoxList
+  name: pizza boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: RMCBoxPizza
+  listed:
+  - RMCPizzaBoxBuild
+  - RMCPizzaGalaxyBoxBuild
+
+- type: rmcConstruction
+  id: RMCPizzaBoxBuild
+  name: pizza box
+  prototype: RMCBoxPizza
+  materialCost: 1
+
+- type: rmcConstruction
+  id: RMCBoxPizzaGalaxy
+  name: pizza galaxy box
+  prototype: RMCBoxPizzaGalaxy
+  materialCost: 1
+
 # folders
 - type: rmcConstruction
   id: RMCFolderList
