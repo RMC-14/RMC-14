@@ -447,6 +447,7 @@ public abstract partial class SharedMoverController : VirtualController
         float friction;
         float accel;
         Vector2 wishDir;
+        float wishRot;
         var velocity = physicsComponent.LinearVelocity;
         var angVelocity = physicsComponent.AngularVelocity;
 
@@ -460,8 +461,10 @@ public abstract partial class SharedMoverController : VirtualController
             // Find the speed we should be moving at and make sure we're not trying to move faster than that
             var walkSpeed = moveSpeedComponent?.WeightlessWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.WeightlessSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
+            float rotationSpeed = moveSpeedComponent?.WeightlessRotationSpeed ?? MovementSpeedModifierComponent.DefaultBaseRotationSpeed;
 
-            wishDir = AssertValidLinearWish(mover, walkSpeed, sprintSpeed);
+            wishDir = AssertValidLinearWish(entity, walkSpeed, sprintSpeed);
+            wishRot = AssertValidRotationWish(mover, rotationSpeed);
 
             var ev = new CanWeightlessMoveEvent(uid);
             RaiseLocalEvent(uid, ref ev, true);
@@ -498,8 +501,10 @@ public abstract partial class SharedMoverController : VirtualController
 
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
+            float rotationSpeed = moveSpeedComponent?.CurrentRotationSpeed ?? MovementSpeedModifierComponent.DefaultBaseRotationSpeed;
 
-            wishDir = AssertValidLinearWish(mover, walkSpeed, sprintSpeed);
+            wishDir = AssertValidLinearWish(entity, walkSpeed, sprintSpeed);
+            wishRot = AssertValidRotationWish(mover, rotationSpeed);
 
             if (wishDir != Vector2.Zero)
             {
@@ -526,6 +531,9 @@ public abstract partial class SharedMoverController : VirtualController
 
         if (!weightless || touching)
             Accelerate(ref velocity, in wishDir, accel, frameTime);
+
+        if (!weightless || touching)
+            Rotate(ref angVelocity, in wishRot, accel, frameTime);
 
         SetWishDir((uid, mover), wishDir);
 
@@ -568,18 +576,47 @@ public abstract partial class SharedMoverController : VirtualController
         }
     }
 
-    private Vector2 AssertValidLinearWish(InputMoverComponent mover, float walkSpeed, float sprintSpeed)
+    private Vector2 AssertValidLinearWish(Entity<InputMoverComponent> entity, float walkSpeed, float sprintSpeed)
     {
-        var (walkDir, sprintDir) = GetLinearVelocityInput(mover);
+        if (!XformQuery.TryComp(entity, out var xForm))
+            return Vector2.Zero;
+
+        var (walkDir, sprintDir) = GetLinearVelocityInput(entity.Comp, xForm.LocalRotation);
 
         var total = walkDir * walkSpeed + sprintDir * sprintSpeed;
 
-        var parentRotation = GetParentGridAngle(mover);
+        var parentRotation = GetParentGridAngle(entity);
         var wishDir = _relativeMovement ? parentRotation.RotateVec(total) : total;
 
         DebugTools.Assert(MathHelper.CloseToPercent(total.Length(), wishDir.Length()));
 
         return wishDir;
+    }
+
+    private float AssertValidRotationWish(InputMoverComponent mover,float rotationSpeed)
+    {
+        var rotSide = GetAngularVelocityInput(mover);
+
+        var total = rotSide * rotationSpeed;
+
+        return total;
+    }
+
+    /// <summary>
+    /// Adjusts the current angular velocity to the target velocity based on the specified acceleration.
+    /// </summary>
+    public static void Rotate(ref float currentVelocity, in float velocity, float accel, float frameTime)
+    {
+        var wishRot = velocity;
+        var wishSpeed = MathF.Abs(velocity);
+
+        var currentSpeed = currentVelocity * wishRot;
+        var addSpeed = wishSpeed - currentSpeed;
+
+        var accelSpeed = accel * frameTime * wishSpeed;
+        accelSpeed = MathF.Min(accelSpeed, addSpeed);
+
+        currentVelocity = wishRot * accelSpeed;
     }
 
     // End RMC

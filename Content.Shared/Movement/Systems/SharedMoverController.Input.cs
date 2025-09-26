@@ -9,6 +9,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -442,7 +443,10 @@ namespace Content.Shared.Movement.Systems
                 if (!entity.Comp.LinearMovement) // RMC change!
                     lastMoveAmount += DirVecForButtons(entity.Comp.HeldMoveButtons) * fraction;
                 else
-                    lastMoveAmount += DirLinearVecForButtons(entity.Comp.HeldMoveButtons) * fraction;
+                {
+                    if (XformQuery.TryComp(entity, out var xForm))
+                        lastMoveAmount += DirLinearVecForButtons(entity.Comp.HeldMoveButtons, xForm.LocalRotation) * fraction;
+                }
 
                 entity.Comp.LastInputSubTick = subTick;
             }
@@ -516,14 +520,14 @@ namespace Content.Shared.Movement.Systems
         }
 
         // Start RMC
-        public (Vector2 Walking, Vector2 Sprinting) GetLinearVelocityInput(InputMoverComponent mover)
+        public (Vector2 Walking, Vector2 Sprinting) GetLinearVelocityInput(InputMoverComponent mover, Angle localRotation)
         {
             if (!Timing.InSimulation)
             {
                 // Outside of simulation we'll be running client predicted movement per-frame.
                 // So return a full-length vector as if it's a full tick.
                 // Physics system will have the correct time step anyways.
-                var immediateDir = DirLinearVecForButtons(mover.HeldMoveButtons);
+                var immediateDir = DirLinearVecForButtons(mover.HeldMoveButtons, localRotation);
                 return mover.Sprinting ? (Vector2.Zero, immediateDir) : (immediateDir, Vector2.Zero);
             }
 
@@ -544,7 +548,7 @@ namespace Content.Shared.Movement.Systems
                 remainingFraction = (ushort.MaxValue - mover.LastInputSubTick) / (float)ushort.MaxValue;
             }
 
-            var curDir = DirLinearVecForButtons(mover.HeldMoveButtons) * remainingFraction;
+            var curDir = DirLinearVecForButtons(mover.HeldMoveButtons, localRotation) * remainingFraction;
 
             if (mover.Sprinting)
             {
@@ -559,20 +563,71 @@ namespace Content.Shared.Movement.Systems
             return (walk, sprint);
         }
 
-        public Vector2 DirLinearVecForButtons(MoveButtons buttons)
+        public float GetAngularVelocityInput(InputMoverComponent mover)
         {
-            // key directions are in screen coordinates
-            // _moveDir is in world coordinates
-            // if the camera is moved, this needs to be changed
+            if (!Timing.InSimulation)
+            {
+                // Outside of simulation we'll be running client predicted movement per-frame.
+                // So return a full-length vector as if it's a full tick.
+                // Physics system will have the correct time step anyways.
+                int immediateDir = DirXAxisForButtons(mover.HeldMoveButtons);
+                return immediateDir;
+            }
 
-            int y = 0;
+            float rotationVel = 0;
+            float remainingFraction;
 
-            y -= HasFlag(buttons, MoveButtons.Down) ? 1 : 0;
-            y += HasFlag(buttons, MoveButtons.Up) ? 1 : 0;
+            if (Timing.CurTick > mover.LastInputTick)
+            {
+                rotationVel = 0;
+                remainingFraction = 1;
+            }
+            else
+            {
+                //rotationVel = mover.CurTickRotationMovement; // TODO RMC: Implement the amout of rotation for the current tick.
+                //remainingFraction = (ushort.MaxValue - mover.LastInputSubTick) / (float)ushort.MaxValue;
 
-            var vec = new Vector2(0, y);
+                remainingFraction = 1; // TEMP TO REMOVE!
+            }
+
+            float curRot = DirXAxisForButtons(mover.HeldMoveButtons) * remainingFraction;
+
+            rotationVel += curRot;
+
+            return rotationVel;
+        }
+
+        public Vector2 DirLinearVecForButtons(MoveButtons buttons, Angle localRotation)
+        {
+            // The key directions are in screen coordinates but translated to the character facing.
+
+            int move = 0;
+
+            move -= HasFlag(buttons, MoveButtons.Down) ? 1 : 0;
+            move += HasFlag(buttons, MoveButtons.Up) ? 1 : 0;
+
+            var rotation = localRotation.ToVec();
+
+            var vec = new Vector2(move, move);
+
+            vec *= rotation; // TODO RMC: Fix. This causes the player to SPIIIIIN out of control for some reason...
 
             return vec;
+        }
+
+        /// <summary>
+        /// Get the X axis input buttons.
+        /// </summary>
+        /// <param name="buttons"></param>
+        /// <returns></returns>
+        public int DirXAxisForButtons(MoveButtons buttons)
+        {
+            int x = 0;
+
+            x -= HasFlag(buttons, MoveButtons.Left) ? 1 : 0;
+            x += HasFlag(buttons, MoveButtons.Right) ? 1 : 0;
+
+            return x;
         }
 
         // End RMC
