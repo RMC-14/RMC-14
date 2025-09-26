@@ -132,6 +132,77 @@
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
+  
+# empty shotgun shell boxes
+- type: rmcConstruction
+  id: RMCEmptyShotgunShellBoxesList
+  name: empty shotgun shell boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: RMCBoxMagazineShellBase
+  listed:
+  - RMCBoxShellsBuckshotEmptyBuild
+  - RMCBoxShellsSlugsEmptyBuild
+  - RMCBoxShellsFlechetteEmptyBuild
+  - RMCBoxShellsBreachingEmptyBuild
+  - RMCDividerConstruction
+  - RMCBoxShellsBeanbagEmptyBuild
+  - RMCBoxShellsIncendiaryEmptyBuild
+  - RMCBoxShellsIncendiaryBuckshotEmptyBuild
+
+- type: rmcConstruction
+  id: RMCBoxShellsBuckshotEmptyBuild
+  name: empty buckshot shell box
+  prototype: RMCBoxShellsBuckshotEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsSlugsEmptyBuild
+  name: empty slug shell box
+  prototype: RMCBoxShellsSlugsEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsFlechetteEmptyBuild
+  name: empty flechette shell box
+  prototype: RMCBoxShellsFlechetteEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsBreachingEmptyBuild
+  name: empty breaching shell box
+  prototype: RMCBoxShellsBreachingEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsBeanbagEmptyBuild
+  name: empty beanbag shell box
+  prototype: RMCBoxShellsBeanbagEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsIncendiaryEmptyBuild
+  name: empty incendiary shell box
+  prototype: RMCBoxShellsIncendiaryEmptyEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxShellsIncendiaryBuckshotEmptyBuild
+  name: empty incendiary buckshot shell box
+  prototype: RMCBoxShellsIncendiaryBuckshotEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
 
 # empty supply boxes
 - type: rmcConstruction
