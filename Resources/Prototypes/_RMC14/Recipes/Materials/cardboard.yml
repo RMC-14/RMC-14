@@ -17,7 +17,7 @@
 # pizza boxes
 - type: rmcConstruction
   id: RMCPizzaBoxList
-  name: pizza boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: pizza boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxPizza
   listed:
   - RMCPizzaBoxBuild
@@ -44,7 +44,7 @@
 # folders
 - type: rmcConstruction
   id: RMCFolderList
-  name: folders (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: folders (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
   prototype: CMFolderBase
   listed:
   - RMCFolderBlueEmptyBuild
@@ -101,7 +101,7 @@
 # empty ammunition boxes
 - type: rmcConstruction
   id: RMCEmptyAmmoBoxesList
-  name: empty ammunition boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty ammunition boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxBulletsBase
   listed:
   - RMCBoxBulletsRifleEmptyBuild
@@ -148,7 +148,7 @@
 # empty rifle magazine boxes
 - type: rmcConstruction
   id: RMCEmptyRifleMagazineBoxesList
-  name: empty rifle magazine boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty rifle magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineRifleBase
   listed:
   - RMCBoxMagazineRifleM54CEmptyBuild
@@ -257,7 +257,7 @@
 # empty smg magazine boxes
 - type: rmcConstruction
   id: RMCEmptySMGMagazineBoxesList
-  name: empty SMG magazine boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty SMG magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineSMGBase
   listed:
   - RMCBoxMagazineSMGM63EmptyBuild
@@ -305,7 +305,7 @@
 # empty pistol magazine boxes
 - type: rmcConstruction
   id: RMCEmptyPistolMagazineBoxesList
-  name: empty pistol magazine boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty pistol magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazinePistolBase
   listed:
   - RMCBoxMagazinePistolM1984EmptyBuild
@@ -390,7 +390,7 @@
 # empty shotgun shell boxes
 - type: rmcConstruction
   id: RMCEmptyShotgunShellBoxesList
-  name: empty shotgun shell boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty shotgun shell boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineShellBase
   listed:
   - RMCBoxShellsBuckshotEmptyBuild
@@ -468,7 +468,7 @@
 # empty supply boxes
 - type: rmcConstruction
   id: RMCEmptySupplyBoxesList
-  name: empty supply boxes (1 cardboard sheets) # cost named manually since lists won't name costs otherwise
+  name: empty supply boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineSupplyBase
   listed:
   - RMCBoxPackFlareEmptyBuild
