@@ -38,7 +38,7 @@
     - RMCDividerConstruction
     - RMCEmptyAmmoBoxesList
     # empty magazine boxes
-    # empty shotgun shell boxes
+    - RMCEmptyShotgunShellBoxesList
     - RMCEmptySupplyBoxesList
   - type: Material
   - type: PhysicalComposition
