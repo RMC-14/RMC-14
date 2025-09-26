@@ -1,0 +1,47 @@
+- type: rmcConstruction
+  id: RMCDividerConstruction
+  name: divider
+  isDivider: true
+  prototype: Error
+
+# folders
+- type: rmcConstruction
+  id: RMCFolderList
+  name: folders (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: CMFolderBase
+  listed:
+  - RMCFolderBlueBuild
+  - RMCFolderBlackBuild
+  - RMCFolderRedBuild
+  - RMCFolderWhiteBuild
+  - RMCFolderYellowBuild
+
+- type: rmcConstruction
+  id: RMCFolderBlueBuild
+  name: blue folder
+  prototype: CMFolderBlue
+  materialCost: 1
+
+- type: rmcConstruction
+  id: RMCFolderBlackBuild
+  name: black folder
+  prototype: CMFolderBlack
+  materialCost: 1
+  
+- type: rmcConstruction
+  id: RMCFolderRedBuild
+  name: red folder
+  prototype: CMFolderRed
+  materialCost: 1
+  
+- type: rmcConstruction
+  id: RMCFolderWhiteBuild
+  name: white folder
+  prototype: CMFolderWhite
+  materialCost: 1
+  
+- type: rmcConstruction
+  id: RMCFolderYellowBuild
+  name: yellow folder
+  prototype: CMFolderYellow
+  materialCost: 1
