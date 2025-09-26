@@ -39,6 +39,7 @@
   overwatchShowName: true
   overwatchRoleName: Squad Leader
   roleWeight: 1
+  displayWeight: 6
   special:
   - !type:AddComponentSpecial
     components:
@@ -164,3 +165,30 @@
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader
       time: 1
+
+- type: entity
+  id: RMCGuidebookActionMove
+  name: Move order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: move
+    
+- type: entity
+  id: RMCGuidebookActionHold
+  name: Hold order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: hold
+
+- type: entity
+  id: RMCGuidebookActionFocus
+  name: Focus order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: focus

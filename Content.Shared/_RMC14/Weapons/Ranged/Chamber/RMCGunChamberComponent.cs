@@ -12,6 +12,9 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Chamber;
 public sealed partial class RMCGunChamberComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+
+    [DataField, AutoNetworkedField]
     public string ContainerId = "rmc_gun_chamber";
 
     [DataField, AutoNetworkedField]
