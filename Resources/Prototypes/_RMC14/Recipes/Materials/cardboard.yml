@@ -263,6 +263,8 @@
   - RMCBoxMagazineSMGM63EmptyBuild
   - RMCBoxMagazineSMGM63APEmptyBuild
   - RMCBoxMagazineSMGM63ExtEmptyBuild
+  - RMCDividerConstruction
+  - RMCBoxMagazineSMGNailgunEmptyBuild
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGM63EmptyBuild
@@ -286,6 +288,15 @@
   id: RMCBoxMagazineSMGM63ExtEmptyBuild
   name: empty M63 magazine box (Ext)
   prototype: RMCBoxMagazineSMGM63ExtEmpty
+  noRotate: true
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineSMGNailgunEmptyBuild
+  name: empty nailgun magazine box
+  prototype: RMCBoxMagazineSMGNailgunEmpty
   noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -467,7 +478,6 @@
   - RMCDividerConstruction
   - RMCBoxFlashlightsEmptyBuild
   - RMCBoxMREEmptyBuild
-  - RMCBoxMagazineSMGNailgunEmptyBuild
   - RMCBoxMagazinePowerCellsHighBuild
 
 - type: rmcConstruction
@@ -510,15 +520,6 @@
   id: RMCBoxMREEmptyBuild
   name: empty MRE box
   prototype: RMCBoxMREEmpty
-  noRotate: true
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-
-- type: rmcConstruction
-  id: RMCBoxMagazineSMGNailgunEmptyBuild
-  name: empty nailgun nail box
-  prototype: RMCBoxMagazineSMGNailgunEmpty
   noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
