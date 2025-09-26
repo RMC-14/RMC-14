@@ -387,6 +387,33 @@
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
 
+- type: rmcConstruction
+  id: RMCBoxMagazinePistolM13EmptyBuild
+  name: M13 magazine box
+  prototype: RMCBoxMagazinePistolM13Empty
+  noRotate: true
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazinePistolM13ExtEmptyBuild
+  name: M13 magazine box (Ext)
+  prototype: RMCBoxMagazinePistolM13ExtEmpty
+  noRotate: true
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazinePistolM13DrumEmptyBuild
+  name: M13 magazine box (Drum)
+  prototype: RMCBoxMagazinePistolM13DrumEmpty
+  noRotate: true
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
 # empty shotgun shell boxes
 - type: rmcConstruction
   id: RMCEmptyShotgunShellBoxesList
@@ -527,7 +554,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePowerCellsHighBuild
-  name: high-capacity powercell box
+  name: high-capacity power cell box
   prototype: RMCBoxMagazinePowerCellsHigh
   noRotate: true
   materialCost: 1
