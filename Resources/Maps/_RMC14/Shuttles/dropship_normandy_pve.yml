@@ -30,7 +30,7 @@ entities:
     - type: MetaData
       name: Normandy
     - type: Transform
-      pos: -0.625,-0.421875
+      pos: 0,0
       parent: invalid
     - type: MapGrid
       chunks:
