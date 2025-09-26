@@ -55,7 +55,7 @@
   - type: Tag
     tags:
     - Sheet
-  - type: UserInterfact
+  - type: UserInterface
     interfaces:
       enum.RMCConstructionUiKey.Key:
         type: RMCConstructionBui
