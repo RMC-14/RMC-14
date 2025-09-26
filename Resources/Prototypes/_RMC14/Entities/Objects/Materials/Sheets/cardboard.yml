@@ -39,7 +39,7 @@
     - RMCEmptyAmmoBoxesList
     - RMCEmptyRifleMagazineBoxesList
     - RMCEmptySMGMagazineBoxesList
-    - RMCEmptySidearmMagazineBoxesList
+    - RMCEmptyPistolMagazineBoxesList
     - RMCEmptyShotgunShellBoxesList
     - RMCEmptySupplyBoxesList
   - type: Material
