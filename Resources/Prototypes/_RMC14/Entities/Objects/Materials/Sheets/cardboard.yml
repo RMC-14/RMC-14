@@ -39,7 +39,7 @@
     - RMCEmptyAmmoBoxesList
     # empty magazine boxes
     # empty shotgun shell boxes
-    # empty utility boxes
+    - RMCEmptyUtilityBoxesList
   - type: Material
   - type: PhysicalComposition
     materialComposition:
