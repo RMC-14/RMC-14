@@ -322,7 +322,7 @@
   - RMCDividerConstruction
   - RMCBoxMagazinePistolM13EmptyBuild
   - RMCBoxMagazinePistolM13ExtEmptyBuild
-  - RMCBoxMagazinePistolM13DrumEmpty
+  - RMCBoxMagazinePistolM13DrumEmptyBuild
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolM1984EmptyBuild
