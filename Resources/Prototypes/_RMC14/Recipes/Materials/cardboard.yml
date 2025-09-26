@@ -132,3 +132,64 @@
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
+
+# empty supply boxes
+- type: rmcConstruction
+  id: RMCEmptySupplyBoxesList
+  name: empty supply boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: RMCBoxMagazineSupplyBase
+  listed:
+  - RMCBoxPackFlareEmptyBuild
+  - RMCBoxPackFlareCASEmptyBuild
+  - RMCBoxFlashlightsEmptyBuild
+  - RMCBoxMREEmptyBuild
+  - RMCBoxMagazineSMGNailgunEmptyBuild
+  - RMCBoxMagazinePowerCellsHighBuild
+
+- type: rmcConstruction
+  id: RMCBoxPackFlareEmptyBuild
+  name: empty supply box (M94 flare packs x 10)
+  prototype: RMCBoxPackFlareEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxPackFlareCASEmptyBuild
+  name: empty supply box (M89-S flare packs x 10)
+  prototype: RMCBoxPackFlareCASEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxFlashlightsEmptyBuild
+  name: empty supply box (Flashlights x 8)
+  prototype: RMCBoxFlashlightsEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMREEmptyBuild
+  name: empty supply box (MRE x 12)
+  prototype: RMCBoxMREEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineSMGNailgunEmptyBuild
+  name: empty supply box (Nailgun x 10)
+  prototype: RMCBoxMagazineSMGNailgunEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazinePowerCellsHighBuild
+  name: empty supply box (High-Cap Powercell x 8)
+  prototype: RMCBoxMagazinePowerCellsHigh
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
