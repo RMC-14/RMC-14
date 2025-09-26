@@ -55,27 +55,80 @@
   name: blue folder
   prototype: CMFolderBlue
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
 
 - type: rmcConstruction
   id: RMCFolderBlackBuild
   name: black folder
   prototype: CMFolderBlack
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
   
 - type: rmcConstruction
   id: RMCFolderRedBuild
   name: red folder
   prototype: CMFolderRed
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
   
 - type: rmcConstruction
   id: RMCFolderWhiteBuild
   name: white folder
   prototype: CMFolderWhite
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
   
 - type: rmcConstruction
   id: RMCFolderYellowBuild
   name: yellow folder
   prototype: CMFolderYellow
   materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  
+# empty ammunition boxes
+- type: rmcConstruction
+  id: RMCEmptyAmmoBoxesList
+  name: empty ammunition boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: RMCBoxBulletsBase
+  listed:
+  - RMCBoxBulletsRifleEmptyBuild
+  - RMCBoxBulletsRifleAPEmptyBuild
+  - RMCBoxBulletsSMGEmptyBuild
+  - RMCBoxBulletsSMGAPEmptyBuild
+
+- type: rmcConstruction
+  id: RMCBoxBulletsRifleEmptyBuild
+  name: empty rifle ammo box (10x24mm)
+  prototype: RMCBoxBulletsRifleEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxBulletsRifleAPEmptyBuild
+  name: empty rifle ammo box (10x24mm AP)
+  prototype: RMCBoxBulletsRifleAPEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxBulletsSMGEmptyBuild
+  name: empty smg ammo box (10x20mm)
+  prototype: RMCBoxBulletsSMGEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxBulletsSMGAPEmptyBuild
+  name: empty smg ammo box (10x20mm AP)
+  prototype: RMCBoxBulletsSMGAPEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
