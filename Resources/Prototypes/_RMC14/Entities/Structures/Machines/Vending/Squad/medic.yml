@@ -399,6 +399,7 @@
   description: An automated rack hooked up to a colossal storage of corporate medic standard-issue equipment.
   suffix: PVE, PMC
   components:
+  - type: CMAutomatedVendor
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

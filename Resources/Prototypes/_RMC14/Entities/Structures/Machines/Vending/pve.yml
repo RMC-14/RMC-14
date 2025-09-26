@@ -288,6 +288,7 @@
       entries:
       - id: RMCArmorHelmetPMCTactical
         amount: 15
+        name: tactical helmet (Helmet Light)
       - id: RMCArmorM4PMCNoLight
         name: M4 pattern PMC armor (No Suitlight)
         amount: 15

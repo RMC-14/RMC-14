@@ -52,6 +52,11 @@
 
 - type: entity
   parent: RMCAreaHF
+  id: RMCAreaHFEngineering
+  name: Engineering
+
+- type: entity
+  parent: RMCAreaHF
   id: RMCAreaHFDisposals
   name: Disposals
   components:
