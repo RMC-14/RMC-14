@@ -9,8 +9,7 @@
   id: RMCDonutBoxBuild
   name: donut box
   prototype: RMCBoxDonutEmpty
-  doAfterTime: 0
-  doAfterTimeMin: 0
+  noRotate: true
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
