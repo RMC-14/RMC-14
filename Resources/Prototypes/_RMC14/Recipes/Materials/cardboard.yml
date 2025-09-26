@@ -101,7 +101,7 @@
 # empty ammunition boxes
 - type: rmcConstruction
   id: RMCEmptyAmmoBoxesList
-  name: empty ammunition boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: ammunition boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxBulletsBase
   listed:
   - RMCBoxBulletsRifleEmptyBuild
@@ -111,7 +111,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBulletsRifleEmptyBuild
-  name: empty rifle ammo box (10x24mm)
+  name: rifle ammunition box (10x24mm)
   prototype: RMCBoxBulletsRifleEmpty
   noRotate: true
   materialCost: 1
@@ -120,7 +120,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBulletsRifleAPEmptyBuild
-  name: empty rifle ammo box (10x24mm AP)
+  name: rifle ammunition box (10x24mm AP)
   prototype: RMCBoxBulletsRifleAPEmpty
   noRotate: true
   materialCost: 1
@@ -129,7 +129,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBulletsSMGEmptyBuild
-  name: empty smg ammo box (10x20mm)
+  name: smg ammunition box (10x20mm)
   prototype: RMCBoxBulletsSMGEmpty
   noRotate: true
   materialCost: 1
@@ -138,7 +138,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBulletsSMGAPEmptyBuild
-  name: empty smg ammo box (10x20mm AP)
+  name: smg ammunition box (10x20mm AP)
   prototype: RMCBoxBulletsSMGAPEmpty
   noRotate: true
   materialCost: 1
@@ -148,7 +148,7 @@
 # empty rifle magazine boxes
 - type: rmcConstruction
   id: RMCEmptyRifleMagazineBoxesList
-  name: empty rifle magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rifle magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineRifleBase
   listed:
   - RMCBoxMagazineRifleM54CEmptyBuild
@@ -166,7 +166,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CEmptyBuild
-  name: empty M54C magazine box
+  name: M54C magazine box
   prototype: RMCBoxMagazineRifleM54CEmpty
   noRotate: true
   materialCost: 1
@@ -175,7 +175,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CAPEmptyBuild
-  name: empty M54C magazine box (AP)
+  name: M54C magazine box (AP)
   prototype: RMCBoxMagazineRifleM54CAPEmpty
   noRotate: true
   materialCost: 1
@@ -184,7 +184,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CExtEmptyBuild
-  name: empty M54C magazine box (Ext)
+  name: M54C magazine box (Ext)
   prototype: RMCBoxMagazineRifleM54CExtEmpty
   noRotate: true
   materialCost: 1
@@ -193,7 +193,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPREmptyBuild
-  name: empty M4SPR magazine box
+  name: M4SPR magazine box
   prototype: RMCBoxMagazineRifleM4SPREmpty
   noRotate: true
   materialCost: 1
@@ -202,7 +202,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
-  name: empty M4SPR magazine box (AP)
+  name: M4SPR magazine box (AP)
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
   noRotate: true
   materialCost: 1
@@ -211,7 +211,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
-  name: empty M4SPR magazine box (Ext)
+  name: M4SPR magazine box (Ext)
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
   noRotate: true
   materialCost: 1
@@ -220,7 +220,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBullets458EmptyBuild
-  name: empty .458 SOCOM bundle box
+  name: .458 SOCOM bullet bundle box
   prototype: RMCBoxBullets458Empty
   noRotate: true
   materialCost: 1
@@ -229,7 +229,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM16EmptyBuild
-  name: empty M16 magazine box
+  name: M16 magazine box
   prototype: RMCBoxMagazineRifleM16Empty
   noRotate: true
   materialCost: 1
@@ -238,7 +238,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleSSG45EmptyBuild
-  name: empty SSG45 magazine box
+  name: SSG45 magazine box
   prototype: RMCBoxMagazineRifleSSG45Empty
   noRotate: true
   materialCost: 1
@@ -247,7 +247,7 @@
   
 - type: rmcConstruction
   id: RMCBoxMagazineRifleSSG45APEmptyBuild
-  name: empty SSG45 magazine box (AP)
+  name: SSG45 magazine box (AP)
   prototype: RMCBoxMagazineRifleSSG45APEmpty
   noRotate: true
   materialCost: 1
@@ -257,7 +257,7 @@
 # empty smg magazine boxes
 - type: rmcConstruction
   id: RMCEmptySMGMagazineBoxesList
-  name: empty SMG magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: SMG magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineSMGBase
   listed:
   - RMCBoxMagazineSMGM63EmptyBuild
@@ -268,7 +268,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGM63EmptyBuild
-  name: empty M63 magazine box
+  name: M63 magazine box
   prototype: RMCBoxMagazineSMGM63Empty
   noRotate: true
   materialCost: 1
@@ -277,7 +277,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGM63APEmptyBuild
-  name: empty M63 magazine box (AP)
+  name: M63 magazine box (AP)
   prototype: RMCBoxMagazineSMGM63APEmpty
   noRotate: true
   materialCost: 1
@@ -286,7 +286,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGM63ExtEmptyBuild
-  name: empty M63 magazine box (Ext)
+  name: M63 magazine box (Ext)
   prototype: RMCBoxMagazineSMGM63ExtEmpty
   noRotate: true
   materialCost: 1
@@ -295,7 +295,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGNailgunEmptyBuild
-  name: empty nailgun magazine box
+  name: nailgun magazine box
   prototype: RMCBoxMagazineSMGNailgunEmpty
   noRotate: true
   materialCost: 1
@@ -305,7 +305,7 @@
 # empty pistol magazine boxes
 - type: rmcConstruction
   id: RMCEmptyPistolMagazineBoxesList
-  name: empty pistol magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: pistol magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazinePistolBase
   listed:
   - RMCBoxMagazinePistolM1984EmptyBuild
@@ -326,7 +326,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolM1984EmptyBuild
-  name: empty M1984 magazine box
+  name: M1984 magazine box
   prototype: RMCBoxMagazinePistolM1984Empty
   noRotate: true
   materialCost: 1
@@ -335,7 +335,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolM1984APEmptyBuild
-  name: empty M1984 magazine box (AP)
+  name: M1984 magazine box (AP)
   prototype: RMCBoxMagazinePistolM1984APEmpty
   noRotate: true
   materialCost: 1
@@ -344,7 +344,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolMK80EmptyBuild
-  name: empty MK80 magazine box
+  name: MK80 magazine box
   prototype: RMCBoxMagazinePistolMK80Empty
   noRotate: true
   materialCost: 1
@@ -353,7 +353,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolSU6EmptyBuild
-  name: empty SU-6 magazine box
+  name: SU-6 magazine box
   prototype: RMCBoxMagazinePistolSU6Empty
   noRotate: true
   materialCost: 1
@@ -362,7 +362,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePistolM77APEmptyBuild
-  name: empty M77 magazine box (AP)
+  name: M77 magazine box (AP)
   prototype: RMCBoxMagazinePistolM77APEmpty
   noRotate: true
   materialCost: 1
@@ -371,7 +371,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRevolverM44EmptyBuild
-  name: empty M44 speedloader box
+  name: M44 speedloader box
   prototype: RMCBoxMagazineRevolverM44Empty
   noRotate: true
   materialCost: 1
@@ -380,7 +380,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
-  name: empty M44 speedloader box (Marks.)
+  name: M44 speedloader box (Marksman)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
   noRotate: true
   materialCost: 1
@@ -390,7 +390,7 @@
 # empty shotgun shell boxes
 - type: rmcConstruction
   id: RMCEmptyShotgunShellBoxesList
-  name: empty shotgun shell boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: shotgun shell boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineShellBase
   listed:
   - RMCBoxShellsBuckshotEmptyBuild
@@ -404,7 +404,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsBuckshotEmptyBuild
-  name: empty buckshot shell box
+  name: buckshot shell box
   prototype: RMCBoxShellsBuckshotEmpty
   noRotate: true
   materialCost: 1
@@ -413,7 +413,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsSlugsEmptyBuild
-  name: empty slug shell box
+  name: slug shell box
   prototype: RMCBoxShellsSlugsEmpty
   noRotate: true
   materialCost: 1
@@ -422,7 +422,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsFlechetteEmptyBuild
-  name: empty flechette shell box
+  name: flechette shell box
   prototype: RMCBoxShellsFlechetteEmpty
   noRotate: true
   materialCost: 1
@@ -431,7 +431,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsBreachingEmptyBuild
-  name: empty breaching shell box
+  name: breaching shell box
   prototype: RMCBoxShellsBreachingEmpty
   noRotate: true
   materialCost: 1
@@ -440,7 +440,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsBeanbagEmptyBuild
-  name: empty beanbag shell box
+  name: beanbag shell box
   prototype: RMCBoxShellsBeanbagEmpty
   noRotate: true
   materialCost: 1
@@ -449,7 +449,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsIncendiaryEmptyBuild
-  name: empty incendiary shell box
+  name: incendiary shell box
   prototype: RMCBoxShellsIncendiaryEmpty
   noRotate: true
   materialCost: 1
@@ -458,7 +458,7 @@
 
 - type: rmcConstruction
   id: RMCBoxShellsIncendiaryBuckshotEmptyBuild
-  name: empty incendiary buckshot shell box
+  name: incendiary buckshot shell box
   prototype: RMCBoxShellsIncendiaryBuckshotEmpty
   noRotate: true
   materialCost: 1
@@ -468,7 +468,7 @@
 # empty supply boxes
 - type: rmcConstruction
   id: RMCEmptySupplyBoxesList
-  name: empty supply boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: supply boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineSupplyBase
   listed:
   - RMCBoxPackFlareEmptyBuild
@@ -482,7 +482,7 @@
 
 - type: rmcConstruction
   id: RMCBoxPackFlareEmptyBuild
-  name: empty M94 flare pack box
+  name: M94 flare pack box
   prototype: RMCBoxPackFlareEmpty
   noRotate: true
   materialCost: 1
@@ -491,7 +491,7 @@
 
 - type: rmcConstruction
   id: RMCBoxPackFlareCASEmptyBuild
-  name: empty M89-S flare pack box
+  name: M89-S flare pack box
   prototype: RMCBoxPackFlareCASEmpty
   noRotate: true
   materialCost: 1
@@ -500,7 +500,7 @@
 
 - type: rmcConstruction
   id: RMCBoxFlamerTankEmptyBuild
-  name: empty UT-Napthal fuel tank box
+  name: UT-Napthal fuel tank box
   prototype: RMCBoxFlamerTankEmpty
   noRotate: true
   materialCost: 1
@@ -509,7 +509,7 @@
 
 - type: rmcConstruction
   id: RMCBoxFlashlightsEmptyBuild
-  name: empty flashlight box
+  name: flashlight box
   prototype: RMCBoxFlashlightsEmpty
   noRotate: true
   materialCost: 1
@@ -518,7 +518,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMREEmptyBuild
-  name: empty MRE box
+  name: MRE box
   prototype: RMCBoxMREEmpty
   noRotate: true
   materialCost: 1
@@ -527,7 +527,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePowerCellsHighBuild
-  name: empty high-capacity powercell box
+  name: high-capacity powercell box
   prototype: RMCBoxMagazinePowerCellsHigh
   noRotate: true
   materialCost: 1
