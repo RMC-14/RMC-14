@@ -353,13 +353,53 @@ public sealed class LanguageLearningProgressControl : Control
     {
         var searchTerms = GetSearchTerms(_searchFilter);
 
-        _filteredWords = _data.LearnedWords
-            .Select(kvp => new WordEntry(kvp.Key, kvp.Value, CalculateSearchRelevance(kvp.Key, searchTerms)))
-            .Where(entry => string.IsNullOrWhiteSpace(_searchFilter) || entry.Relevance > 0)
+        if (searchTerms.Length == 0)
+        {
+            _filteredWords = _data.LearnedWords
+                .Select(kvp => new WordEntry(kvp.Key, kvp.Value, 1))
+                .OrderByDescending(entry => entry.Comprehension)
+                .ThenBy(entry => entry.Word)
+                .ToList();
+            return;
+        }
+
+        var exactMatches = new List<WordEntry>();
+        var otherMatches = new List<WordEntry>();
+
+        // find words that exactly match search terms in order
+        for (var i = 0; i < searchTerms.Length; i++)
+        {
+            var term = searchTerms[i];
+            if (_data.LearnedWords.TryGetValue(term, out var comprehension))
+            {
+                exactMatches.Add(new WordEntry(term, comprehension, 1000 + (searchTerms.Length - i)));
+            }
+        }
+
+        // find other matching words
+        foreach (var kvp in _data.LearnedWords)
+        {
+            var word = kvp.Key;
+
+            // skip if already added as exact match
+            if (searchTerms.Contains(word.ToLowerInvariant()))
+                continue;
+
+            var relevance = CalculateSearchRelevance(word, searchTerms);
+            if (relevance > 0)
+            {
+                otherMatches.Add(new WordEntry(word, kvp.Value, relevance));
+            }
+        }
+
+        // sort other matches by relevance, then comprehension
+        otherMatches = otherMatches
             .OrderByDescending(entry => entry.Relevance)
             .ThenByDescending(entry => entry.Comprehension)
             .ThenBy(entry => entry.Word)
             .ToList();
+
+        _filteredWords = exactMatches.Concat(otherMatches).ToList();
     }
 
     private static string[] GetSearchTerms(string searchFilter)
