@@ -5,170 +5,162 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
-using Robust.Shared.Log;
 using Robust.Shared.Maths;
 
 namespace Content.Client.UserInterface.Systems.Language;
 
 public sealed class LanguageLearningProgressControl : Control
 {
-    private LanguagePrototype _prototype;
-    private float _overallProgress;
-    private int _wordCount;
-    private float _avgWordComprehension;
-    private Dictionary<string, float>? _learnedWords;
+    private const int DefaultWordsPerRow = 4;
+    private const float EstimatedChipWidth = 90f;
+    private const int MaxWordsPerRow = 10;
+    private const int MinWordsPerRow = 2;
+    private const int WordsPanelHeight = 180;
+    private const int SearchBoxHeight = 24;
+    private const int ExpandButtonSize = 24;
+    private const int IconSize = 32;
+
+    private static readonly Color[] ComprehensionColors =
+    {
+        Color.DarkRed,    // < 0.2
+        Color.Red,        // 0.2-0.4
+        Color.Orange,     // 0.4-0.6
+        Color.Yellow,     // 0.6-0.8
+        Color.LightGreen  // >= 0.8
+    };
+
+    private static readonly Color[] ComprehensionBackgroundColors =
+    {
+        Color.FromHex("#1F1B1B"), // < 0.2
+        Color.FromHex("#2F1B1B"), // 0.2-0.4
+        Color.FromHex("#2F251B"), // 0.4-0.6
+        Color.FromHex("#2F2F1B"), // 0.6-0.8
+        Color.FromHex("#1B2F1B")  // >= 0.8
+    };
+
+    private readonly LanguageProgressData _data;
+    private readonly StyleBox _headerStyle;
+    private readonly StyleBox _wordsStyle;
 
     private BoxContainer? _wordsContainer;
     private Button? _expandButton;
-    private bool _wordsExpanded = false;
     private Label? _statsLabel;
     private ProgressBar? _progressBar;
-    private PanelContainer? _headerPanel;
     private PanelContainer? _wordsPanel;
     private LineEdit? _searchBox;
+
+    private bool _wordsExpanded = false;
     private string _searchFilter = "";
-    private List<(string word, float comprehension)>? _filteredWords;
+    private List<WordEntry>? _filteredWords;
 
-    private readonly StyleBoxFlat _headerStyle = new()
-    {
-        BackgroundColor = Color.FromHex("#1B1B1E"),
-        BorderColor = Color.FromHex("#404040"),
-        BorderThickness = new Thickness(1),
-        ContentMarginTopOverride = 8,
-        ContentMarginBottomOverride = 8,
-        ContentMarginLeftOverride = 8,
-        ContentMarginRightOverride = 8
-    };
-
-    private readonly StyleBoxFlat _wordsStyle = new()
-    {
-        BackgroundColor = Color.FromHex("#2A2A2E"),
-        BorderColor = Color.FromHex("#404040"),
-        BorderThickness = new Thickness(1, 0, 1, 1),
-        ContentMarginTopOverride = 8,
-        ContentMarginBottomOverride = 8,
-        ContentMarginLeftOverride = 8,
-        ContentMarginRightOverride = 8
-    };
-
-    public string LanguageId { get; private set; }
-
+    public string LanguageId => _data.Prototype.ID;
     public event Action<string, bool>? OnExpansionChanged;
 
-    public LanguageLearningProgressControl(LanguagePrototype prototype, float overallProgress, int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords, string languageId)
+    public LanguageLearningProgressControl(LanguagePrototype prototype, float overallProgress,
+        int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
     {
-        _prototype = prototype;
-        _overallProgress = overallProgress;
-        _wordCount = wordCount;
-        _avgWordComprehension = avgWordComprehension;
-        _learnedWords = learnedWords;
-        LanguageId = languageId;
-
-        Logger.Info($"Creating LanguageLearningProgressControl for {prototype.ID}: wordCount={wordCount}, learnedWords count={learnedWords?.Count ?? -1}");
+        _data = new LanguageProgressData(prototype, overallProgress, wordCount, avgWordComprehension, learnedWords);
+        _headerStyle = CreateHeaderStyle();
+        _wordsStyle = CreateWordsStyle();
 
         HorizontalExpand = true;
         BuildUI();
+        UpdateDisplayedData();
     }
 
-    public void UpdateData(LanguagePrototype prototype, float overallProgress, int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
+    public void UpdateData(LanguagePrototype prototype, float overallProgress,
+        int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
     {
-        _prototype = prototype;
-        _overallProgress = overallProgress;
-        _wordCount = wordCount;
-        _avgWordComprehension = avgWordComprehension;
-        _learnedWords = learnedWords;
-
+        _data.Update(prototype, overallProgress, wordCount, avgWordComprehension, learnedWords);
         _filteredWords = null;
+        _searchFilter = "";
 
         UpdateDisplayedData();
 
+        if (_searchBox != null)
+            _searchBox.Text = "";
+
         if (_wordsExpanded && _wordsContainer != null)
-        {
-            BuildWordsContainer();
-        }
+            RebuildWordsDisplay();
+    }
+
+    public void SetExpanded(bool expanded)
+    {
+        if (_wordsExpanded == expanded)
+            return;
+
+        _wordsExpanded = expanded;
+        UpdateExpansionState();
+        OnExpansionChanged?.Invoke(LanguageId, _wordsExpanded);
+    }
+
+    public void SetThemeColor(Color themeColor)
+    {
+        var hsv = Color.ToHsv(themeColor);
+        var darkerTheme = Color.FromHsv(hsv with { Z = hsv.Z * 0.8f });
+
+        if (_headerStyle is StyleBoxFlat headerFlat)
+            headerFlat.BackgroundColor = themeColor;
+
+        if (_wordsStyle is StyleBoxFlat wordsFlat)
+            wordsFlat.BackgroundColor = darkerTheme;
+    }
+
+    protected override void Resized()
+    {
+        base.Resized();
+
+        if (_wordsExpanded && _filteredWords?.Count > 0)
+            BuildWordsDisplay();
     }
 
     private void UpdateDisplayedData()
     {
-        if (_statsLabel != null)
-        {
-            var progressText = $"Overall: {_overallProgress:P1} | Words: {_wordCount} | Avg: {_avgWordComprehension:P1}";
-            _statsLabel.Text = progressText;
-        }
-
-        if (_progressBar != null)
-        {
-            _progressBar.Value = _overallProgress;
-        }
-
+        UpdateStatsLabel();
+        UpdateProgressBar();
         UpdateExpandButtonVisibility();
+    }
+
+    private void UpdateStatsLabel()
+    {
+        if (_statsLabel == null) return;
+
+        _statsLabel.Text = $"Overall: {_data.OverallProgress:P1} | Words: {_data.WordCount} | Avg: {_data.AvgWordComprehension:P1}";
+    }
+
+    private void UpdateProgressBar()
+    {
+        if (_progressBar == null) return;
+
+        _progressBar.Value = _data.OverallProgress;
     }
 
     private void UpdateExpandButtonVisibility()
     {
-        var shouldShowButton = _learnedWords != null && _learnedWords.Count > 0;
+        var shouldShowButton = _data.HasLearnedWords;
 
         if (_expandButton != null)
         {
             _expandButton.Visible = shouldShowButton;
         }
-        else if (shouldShowButton && _headerPanel != null)
+        else if (shouldShowButton)
         {
-            CreateExpandButton();
+            CreateAndAddExpandButton();
         }
     }
 
-    private void CreateExpandButton()
+    private void UpdateExpansionState()
     {
-        if (_expandButton != null) return;
-
-        _expandButton = new Button
-        {
-            Text = "►",
-            SetWidth = 24,
-            SetHeight = 24,
-            VerticalAlignment = Control.VAlignment.Center,
-            ToggleMode = false
-        };
-
-        _expandButton.OnPressed += args => OnExpandButtonPressed();
-
-        if (_headerPanel?.Children.FirstOrDefault() is BoxContainer headerBox)
-        {
-            headerBox.AddChild(_expandButton);
-        }
-    }
-
-    public void SetExpanded(bool expanded)
-    {
-        Logger.Info($"SetExpanded called for {_prototype.ID}: expanded={expanded}, current={_wordsExpanded}");
-
-        if (_wordsExpanded == expanded)
-            return;
-
-        _wordsExpanded = expanded;
-
         if (_wordsPanel != null)
         {
             _wordsPanel.Visible = _wordsExpanded;
 
-            if (_wordsExpanded && _learnedWords != null && _learnedWords.Count > 0)
-            {
-                if (_searchBox != null && !string.IsNullOrEmpty(_searchBox.Text))
-                {
-                    _searchBox.Text = "";
-                    _searchFilter = "";
-                }
-                BuildWordsContainer();
-            }
+            if (_wordsExpanded && _data.HasLearnedWords)
+                RebuildWordsDisplay();
         }
 
         if (_expandButton != null)
-        {
             _expandButton.Text = _wordsExpanded ? "▼" : "►";
-        }
-
-        OnExpansionChanged?.Invoke(LanguageId, _wordsExpanded);
     }
 
     private void BuildUI()
@@ -179,7 +171,15 @@ public sealed class LanguageLearningProgressControl : Control
             HorizontalExpand = true
         };
 
-        _headerPanel = new PanelContainer
+        mainContainer.AddChild(CreateHeaderPanel());
+        mainContainer.AddChild(CreateWordsPanel());
+
+        AddChild(mainContainer);
+    }
+
+    private Control CreateHeaderPanel()
+    {
+        var headerPanel = new PanelContainer
         {
             HorizontalExpand = true,
             PanelOverride = _headerStyle
@@ -191,50 +191,61 @@ public sealed class LanguageLearningProgressControl : Control
             HorizontalExpand = true
         };
 
+        headerBox.AddChild(CreateLanguageIcon());
+        headerBox.AddChild(CreateInfoContainer());
+
+        headerPanel.AddChild(headerBox);
+        return headerPanel;
+    }
+
+    private Control CreateLanguageIcon()
+    {
         var icon = new TextureRect
         {
-            SetWidth = 32,
-            SetHeight = 32,
+            SetWidth = IconSize,
+            SetHeight = IconSize,
             Stretch = TextureRect.StretchMode.KeepAspectCentered,
             Margin = new Thickness(0, 0, 8, 0)
         };
 
-        if (!string.IsNullOrEmpty(_prototype.LanguageIcon))
-        {
-            var resourceCache = IoCManager.Resolve<IResourceCache>();
-            if (resourceCache.TryGetResource<TextureResource>(_prototype.LanguageIcon, out var texture))
-            {
-                icon.Texture = texture;
-            }
-        }
+        LoadLanguageIcon(icon);
+        return icon;
+    }
 
-        headerBox.AddChild(icon);
+    private void LoadLanguageIcon(TextureRect icon)
+    {
+        if (string.IsNullOrEmpty(_data.Prototype.LanguageIcon))
+            return;
 
+        var resourceCache = IoCManager.Resolve<IResourceCache>();
+        if (resourceCache.TryGetResource<TextureResource>(_data.Prototype.LanguageIcon, out var texture))
+            icon.Texture = texture;
+    }
+
+    private Control CreateInfoContainer()
+    {
         var infoContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
-            VerticalAlignment = Control.VAlignment.Center
+            VerticalAlignment = VAlignment.Center
         };
 
         var nameLabel = new Label
         {
-            Text = _prototype.LocalizedName,
-            FontColorOverride = _prototype.TextColor ?? Color.White,
+            Text = _data.Prototype.LocalizedName,
+            FontColorOverride = _data.Prototype.TextColor ?? Color.White,
             StyleClasses = { "LabelHeading" }
         };
 
-        var progressText = $"Overall: {_overallProgress:P1} | Words: {_wordCount} | Avg: {_avgWordComprehension:P1}";
         _statsLabel = new Label
         {
-            Text = progressText,
             FontColorOverride = Color.LightGray,
             StyleClasses = { "LabelSubText" }
         };
 
         _progressBar = new ProgressBar
         {
-            Value = _overallProgress,
             HorizontalExpand = true,
             SetHeight = 8,
             Margin = new Thickness(0, 2, 0, 0)
@@ -243,15 +254,16 @@ public sealed class LanguageLearningProgressControl : Control
         infoContainer.AddChild(nameLabel);
         infoContainer.AddChild(_statsLabel);
         infoContainer.AddChild(_progressBar);
-        headerBox.AddChild(infoContainer);
 
-        _headerPanel.AddChild(headerBox);
-        mainContainer.AddChild(_headerPanel);
+        return infoContainer;
+    }
 
+    private Control CreateWordsPanel()
+    {
         _wordsPanel = new PanelContainer
         {
             HorizontalExpand = true,
-            SetHeight = 180,
+            SetHeight = WordsPanelHeight,
             PanelOverride = _wordsStyle,
             Visible = false
         };
@@ -268,7 +280,7 @@ public sealed class LanguageLearningProgressControl : Control
         {
             HorizontalExpand = true,
             PlaceHolder = "Search words...",
-            SetHeight = 24,
+            SetHeight = SearchBoxHeight,
             Margin = new Thickness(6, 4, 6, 2)
         };
         _searchBox.OnTextChanged += OnSearchTextChanged;
@@ -294,130 +306,90 @@ public sealed class LanguageLearningProgressControl : Control
         wordsMainContainer.AddChild(_searchBox);
         wordsMainContainer.AddChild(scrollContainer);
         _wordsPanel.AddChild(wordsMainContainer);
-        mainContainer.AddChild(_wordsPanel);
 
-        AddChild(mainContainer);
-        Logger.Info($"UI building complete for {_prototype.ID}");
+        return _wordsPanel;
+    }
+
+    private void CreateAndAddExpandButton()
+    {
+        _expandButton = new Button
+        {
+            Text = "►",
+            SetWidth = ExpandButtonSize,
+            SetHeight = ExpandButtonSize,
+            VerticalAlignment = VAlignment.Center,
+            ToggleMode = false
+        };
+
+        _expandButton.OnPressed += _ => SetExpanded(!_wordsExpanded);
+
+        // Add to header container
+        if (Children.FirstOrDefault()?.Children.FirstOrDefault()?.Children.FirstOrDefault() is BoxContainer headerBox)
+            headerBox.AddChild(_expandButton);
     }
 
     private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
     {
         _searchFilter = args.Text.Trim();
+        FilterAndDisplayWords();
+    }
+
+    private void RebuildWordsDisplay()
+    {
+        _filteredWords = null;
+        FilterAndDisplayWords();
+    }
+
+    private void FilterAndDisplayWords()
+    {
+        if (!_data.HasLearnedWords)
+            return;
+
         FilterWords();
+        BuildWordsDisplay();
     }
 
     private void FilterWords()
     {
-        if (_learnedWords == null || _learnedWords.Count == 0)
-            return;
+        var searchTerms = GetSearchTerms(_searchFilter);
 
-        if (string.IsNullOrWhiteSpace(_searchFilter))
-        {
-            _filteredWords = _learnedWords
-                .OrderByDescending(kvp => kvp.Value)
-                .ThenBy(kvp => kvp.Key)
-                .Select(kvp => (kvp.Key, kvp.Value))
-                .ToList();
-        }
-        else
-        {
-            var searchTerms = _searchFilter.ToLowerInvariant()
-                .Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-
-            _filteredWords = _learnedWords
-                .Where(kvp => searchTerms.Any(term => kvp.Key.ToLowerInvariant().Contains(term)))
-                .Select(kvp => new
-                {
-                    Word = kvp.Key,
-                    Comprehension = kvp.Value,
-                    Relevance = CalculateSearchRelevance(kvp.Key, searchTerms)
-                })
-                .OrderByDescending(item => item.Relevance)
-                .ThenByDescending(item => item.Comprehension)
-                .ThenBy(item => item.Word)
-                .Select(item => (item.Word, item.Comprehension))
-                .ToList();
-        }
-
-        BuildWordsDisplay();
+        _filteredWords = _data.LearnedWords
+            .Select(kvp => new WordEntry(kvp.Key, kvp.Value, CalculateSearchRelevance(kvp.Key, searchTerms)))
+            .Where(entry => string.IsNullOrWhiteSpace(_searchFilter) || entry.Relevance > 0)
+            .OrderByDescending(entry => entry.Relevance)
+            .ThenByDescending(entry => entry.Comprehension)
+            .ThenBy(entry => entry.Word)
+            .ToList();
     }
 
-    private int CalculateSearchRelevance(string word, string[] searchTerms)
+    private static string[] GetSearchTerms(string searchFilter)
     {
+        return string.IsNullOrWhiteSpace(searchFilter)
+            ? Array.Empty<string>()
+            : searchFilter.ToLowerInvariant().Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    private static int CalculateSearchRelevance(string word, string[] searchTerms)
+    {
+        if (searchTerms.Length == 0)
+            return 1;
+
         var wordLower = word.ToLowerInvariant();
         var relevance = 0;
 
         foreach (var term in searchTerms)
         {
-            if (wordLower == term)
+            relevance += wordLower switch
             {
-                relevance += 1000;
-            }
-            else if (wordLower.StartsWith(term))
-            {
-                relevance += 500;
-            }
-            else if (wordLower.EndsWith(term))
-            {
-                relevance += 300;
-            }
-            else if (wordLower.Contains(term))
-            {
-                relevance += 100;
-
-                if (word.Length <= 10)
-                    relevance += 50;
-            }
+                var w when w == term => 1000,
+                var w when w.StartsWith(term) => 500,
+                var w when w.EndsWith(term) => 300,
+                var w when w.Contains(term) => 100 + (word.Length <= 10 ? 50 : 0),
+                _ => 0
+            };
         }
 
         return relevance;
-    }
-
-    private int CalculateWordsPerRow()
-    {
-        var containerWidth = _wordsContainer?.Size.X ?? _wordsPanel?.Size.X ?? 300f;
-
-        if (containerWidth <= 0)
-            containerWidth = 300f;
-
-        var availableWidth = Math.Max(containerWidth - 16, 150);
-        var estimatedChipWidth = 90f;
-        var wordsPerRow = Math.Max(1, (int)(availableWidth / estimatedChipWidth));
-
-        return Math.Clamp(wordsPerRow, 2, 10);
-    }
-
-    protected override void Resized()
-    {
-        base.Resized();
-
-        if (_wordsExpanded && _filteredWords != null && _filteredWords.Count > 0)
-        {
-            BuildWordsDisplay();
-        }
-    }
-
-    private void OnExpandButtonPressed()
-    {
-        SetExpanded(!_wordsExpanded);
-    }
-
-    private void BuildWordsContainer()
-    {
-
-        if (_wordsContainer == null || _learnedWords == null || _learnedWords.Count == 0)
-        {
-            return;
-        }
-
-
-        if (_filteredWords == null)
-        {
-            FilterWords();
-            return;
-        }
-
-        BuildWordsDisplay();
     }
 
     private void BuildWordsDisplay()
@@ -429,61 +401,79 @@ public sealed class LanguageLearningProgressControl : Control
 
         if (_filteredWords.Count == 0)
         {
-            var noResultsLabel = new Label
-            {
-                Text = "No words found matching your search.",
-                FontColorOverride = Color.Gray,
-                StyleClasses = { "LabelSubText" },
-                Margin = new Thickness(0, 4, 0, 0)
-            };
-            _wordsContainer.AddChild(noResultsLabel);
+            ShowNoResultsMessage();
             return;
         }
 
-        var wordsPerRow = CalculateWordsPerRow();
+        CreateWordChips();
+    }
 
-        var currentRow = new BoxContainer
+    private void ShowNoResultsMessage()
+    {
+        var noResultsLabel = new Label
+        {
+            Text = "No words found matching your search.",
+            FontColorOverride = Color.Gray,
+            StyleClasses = { "LabelSubText" },
+            Margin = new Thickness(0, 4, 0, 0)
+        };
+        _wordsContainer!.AddChild(noResultsLabel);
+    }
+
+    private void CreateWordChips()
+    {
+        var wordsPerRow = CalculateWordsPerRow();
+        var currentRow = CreateNewRow();
+        var wordsInCurrentRow = 0;
+
+        foreach (var entry in _filteredWords!)
+        {
+            if (wordsInCurrentRow >= wordsPerRow)
+            {
+                _wordsContainer!.AddChild(currentRow);
+                currentRow = CreateNewRow();
+                wordsInCurrentRow = 0;
+            }
+
+            currentRow.AddChild(CreateWordChip(entry.Word, entry.Comprehension));
+            wordsInCurrentRow++;
+        }
+
+        if (wordsInCurrentRow > 0)
+            _wordsContainer!.AddChild(currentRow);
+    }
+
+    private static BoxContainer CreateNewRow()
+    {
+        return new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
             HorizontalExpand = true,
             SeparationOverride = 2
         };
-
-        int wordsInCurrentRow = 0;
-
-        foreach (var (word, comprehension) in _filteredWords)
-        {
-            var wordChip = CreateWordChip(word, comprehension);
-            currentRow.AddChild(wordChip);
-            wordsInCurrentRow++;
-
-            if (wordsInCurrentRow >= wordsPerRow)
-            {
-                _wordsContainer.AddChild(currentRow);
-                currentRow = new BoxContainer
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                    HorizontalExpand = true,
-                    SeparationOverride = 2
-                };
-                wordsInCurrentRow = 0;
-            }
-        }
-
-        if (wordsInCurrentRow > 0)
-        {
-            _wordsContainer.AddChild(currentRow);
-        }
     }
 
-    private Control CreateWordChip(string word, float comprehension)
+    private int CalculateWordsPerRow()
     {
+        var containerWidth = _wordsContainer?.Size.X ?? _wordsPanel?.Size.X ?? 300f;
+        if (containerWidth <= 0) containerWidth = 300f;
+
+        var availableWidth = Math.Max(containerWidth - 16, 150);
+        var wordsPerRow = Math.Max(1, (int)(availableWidth / EstimatedChipWidth));
+
+        return Math.Clamp(wordsPerRow, MinWordsPerRow, MaxWordsPerRow);
+    }
+
+    private static Control CreateWordChip(string word, float comprehension)
+    {
+        var colorIndex = GetComprehensionColorIndex(comprehension);
+
         var wordChip = new PanelContainer
         {
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = GetComprehensionBackgroundColor(comprehension),
-                BorderColor = GetComprehensionColor(comprehension),
+                BackgroundColor = ComprehensionBackgroundColors[colorIndex],
+                BorderColor = ComprehensionColors[colorIndex],
                 BorderThickness = new Thickness(1),
                 ContentMarginTopOverride = 1,
                 ContentMarginBottomOverride = 1,
@@ -501,7 +491,7 @@ public sealed class LanguageLearningProgressControl : Control
         var wordLabel = new Label
         {
             Text = word,
-            FontColorOverride = GetComprehensionColor(comprehension),
+            FontColorOverride = ComprehensionColors[colorIndex],
             VerticalAlignment = Control.VAlignment.Center,
             Margin = new Thickness(0, 0, 2, 0)
         };
@@ -509,7 +499,7 @@ public sealed class LanguageLearningProgressControl : Control
         var comprehensionLabel = new Label
         {
             Text = comprehension.ToString("P0"),
-            FontColorOverride = GetComprehensionColor(comprehension),
+            FontColorOverride = ComprehensionColors[colorIndex],
             VerticalAlignment = Control.VAlignment.Center,
             StyleClasses = { "LabelSubText" }
         };
@@ -521,30 +511,84 @@ public sealed class LanguageLearningProgressControl : Control
         return wordChip;
     }
 
-    private Color GetComprehensionColor(float comprehension)
+    private static int GetComprehensionColorIndex(float comprehension)
     {
-        if (comprehension >= 0.8f) return Color.LightGreen;
-        if (comprehension >= 0.6f) return Color.Yellow;
-        if (comprehension >= 0.4f) return Color.Orange;
-        if (comprehension >= 0.2f) return Color.Red;
-        return Color.DarkRed;
+        return comprehension switch
+        {
+            >= 0.8f => 4,
+            >= 0.6f => 3,
+            >= 0.4f => 2,
+            >= 0.2f => 1,
+            _ => 0
+        };
     }
 
-    private Color GetComprehensionBackgroundColor(float comprehension)
+    private static StyleBox CreateHeaderStyle()
     {
-        if (comprehension >= 0.8f) return Color.FromHex("#1B2F1B");
-        if (comprehension >= 0.6f) return Color.FromHex("#2F2F1B");
-        if (comprehension >= 0.4f) return Color.FromHex("#2F251B");
-        if (comprehension >= 0.2f) return Color.FromHex("#2F1B1B");
-        return Color.FromHex("#1F1B1B");
+        return new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#1B1B1E"),
+            BorderColor = Color.FromHex("#404040"),
+            BorderThickness = new Thickness(1),
+            ContentMarginTopOverride = 8,
+            ContentMarginBottomOverride = 8,
+            ContentMarginLeftOverride = 8,
+            ContentMarginRightOverride = 8
+        };
     }
 
-    public void SetThemeColor(Color themeColor)
+    private static StyleBox CreateWordsStyle()
     {
-        var hsv = Color.ToHsv(themeColor);
-        var darkerTheme = Color.FromHsv(hsv with { Z = hsv.Z * 0.8f });
+        return new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#2A2A2E"),
+            BorderColor = Color.FromHex("#404040"),
+            BorderThickness = new Thickness(1, 0, 1, 1),
+            ContentMarginTopOverride = 8,
+            ContentMarginBottomOverride = 8,
+            ContentMarginLeftOverride = 8,
+            ContentMarginRightOverride = 8
+        };
+    }
 
-        _headerStyle.BackgroundColor = themeColor;
-        _wordsStyle.BackgroundColor = darkerTheme;
+    private readonly struct WordEntry
+    {
+        public readonly string Word;
+        public readonly float Comprehension;
+        public readonly int Relevance;
+
+        public WordEntry(string word, float comprehension, int relevance)
+        {
+            Word = word;
+            Comprehension = comprehension;
+            Relevance = relevance;
+        }
+    }
+
+    private sealed class LanguageProgressData
+    {
+        public LanguagePrototype Prototype { get; private set; }
+        public float OverallProgress { get; private set; }
+        public int WordCount { get; private set; }
+        public float AvgWordComprehension { get; private set; }
+        public Dictionary<string, float> LearnedWords { get; private set; }
+
+        public bool HasLearnedWords => LearnedWords.Count > 0;
+
+        public LanguageProgressData(LanguagePrototype prototype, float overallProgress,
+            int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
+        {
+            Update(prototype, overallProgress, wordCount, avgWordComprehension, learnedWords);
+        }
+
+        public void Update(LanguagePrototype prototype, float overallProgress,
+            int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
+        {
+            Prototype = prototype;
+            OverallProgress = overallProgress;
+            WordCount = wordCount;
+            AvgWordComprehension = avgWordComprehension;
+            LearnedWords = learnedWords ?? new Dictionary<string, float>();
+        }
     }
 }

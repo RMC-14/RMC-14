@@ -249,7 +249,7 @@ namespace Content.Client.Chat.UI
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var senderUid = entityManager.GetEntity(message.SenderEntity);
 
-            if (speechStyleClass == "sayBox")
+            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
             {
                 if (message.SpeechStyleClass != null)
                     speechStyleClass = message.SpeechStyleClass;
