@@ -229,7 +229,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM16EmptyBuild
-  name: empty m16 magazine box
+  name: empty M16 magazine box
   prototype: RMCBoxMagazineRifleM16Empty
   noRotate: true
   materialCost: 1
@@ -369,7 +369,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
-  name: empty M44 speedloader box (Marksman)
+  name: empty M44 speedloader box (Marks.)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
   noRotate: true
   materialCost: 1
