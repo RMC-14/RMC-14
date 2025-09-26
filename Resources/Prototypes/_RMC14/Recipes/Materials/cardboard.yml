@@ -8,7 +8,7 @@
 - type: rmcConstruction
   id: RMCDonutBoxBuild
   name: donut box
-  prototype: RMCBoxDonut
+  prototype: RMCBoxDonutEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
