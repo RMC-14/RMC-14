@@ -132,6 +132,105 @@
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
+
+# empty rifle magazine boxes
+- type: rmcConstruction
+  id: RMCEmptyRifleMagazineBoxesList
+  name: empty shotgun shell boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  prototype: RMCBoxMagazineRifleBase
+  listed:
+  - RMCBoxMagazineRifleM54CEmptyBuild
+  - RMCBoxMagazineRifleM54CAPEmptyBuild
+  - RMCBoxMagazineRifleM54CExtEmptyBuild
+  - RMCDividerConstruction
+  - RMCBoxMagazineRifleM4SPREmptyBuild
+  - RMCBoxMagazineRifleM4SPRAPEmptyBuild
+  - RMCBoxMagazineRifleM4SPRExtEmptyBuild
+  - RMCDividerConstruction
+  - RMCBoxBullets458EmptyBuild
+  - RMCBoxMagazineRifleM16EmptyBuild
+  - RMCBoxMagazineRifleAK4047EmptyBuild
+  - RMCBoxMagazineRifleSSG45APEmptyBuild
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM54CEmptyBuild
+  name: empty M54C magazine box (reg)
+  prototype: RMCBoxMagazineRifleM54CEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM54CAPEmptyBuild
+  name: empty M54C magazine box (ap)
+  prototype: RMCBoxMagazineRifleM54CAPEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM54CExtEmptyBuild
+  name: empty M54C magazine box (ext)
+  prototype: RMCBoxMagazineRifleM54CExtEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM4SPREmptyBuild
+  name: empty M4SPR magazine box (reg)
+  prototype: RMCBoxMagazineRifleM4SPREmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
+  name: empty M4SPR magazine box (ap)
+  prototype: RMCBoxMagazineRifleM4SPRAPEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
+  name: empty M4SPR magazine box (ext)
+  prototype: RMCBoxMagazineRifleM4SPRExtEmpty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxBullets458EmptyBuild
+  name: empty .458 SOCOM bundle box
+  prototype: RMCBoxBullets458Empty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleM16EmptyBuild
+  name: empty m16 magazine box
+  prototype: RMCBoxMagazineRifleM16Empty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleAK4047EmptyBuild
+  name: empty AK4047 magazine box
+  prototype: RMCBoxMagazineRifleAK4047Empty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+- type: rmcConstruction
+  id: RMCBoxMagazineRifleSSG45EmptyBuild
+  name: empty SSG45 magazine box
+  prototype: RMCBoxMagazineRifleSSG45Empty
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
   
 # empty shotgun shell boxes
 - type: rmcConstruction
