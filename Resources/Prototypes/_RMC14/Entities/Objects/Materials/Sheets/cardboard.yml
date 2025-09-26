@@ -1,4 +1,5 @@
 # Cardboard
+
 - type: material
   id: RMCSheetCardboard
   stackEntity: RMCSheetCardboard
@@ -20,6 +21,22 @@
   name: cardboard
   suffix: Full, RMC
   components:
+  - type: RMCConstructionItem
+    buildable:
+    # box
+    # donut box
+    # egg box
+    # light tubes box
+    # light bulbs box
+    # mouse traps box
+    # cardborg suit
+    # cardborg helmet
+    # pizza box
+    # dartboard
+    # - RMCDividerConstruction
+    # folders
+    # - RMCDividerConstruction
+    # empty ammo boxes
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -38,6 +55,10 @@
   - type: Tag
     tags:
     - Sheet
+  - type: UserInterfact
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: RMCSheetCardboard
