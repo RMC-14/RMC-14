@@ -10,8 +10,8 @@
   name: donut box
   prototype: RMCBoxDonutEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -30,8 +30,8 @@
   name: pizza box
   prototype: RMCBoxPizza
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -41,8 +41,8 @@
   name: Pizza Galaxy pizza box
   prototype: RMCBoxPizzaGalaxy
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -64,8 +64,8 @@
   name: blue folder
   prototype: CMFolderBlueEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -75,8 +75,8 @@
   name: black folder
   prototype: CMFolderBlackEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -86,8 +86,8 @@
   name: red folder
   prototype: CMFolderRedEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -97,8 +97,8 @@
   name: white folder
   prototype: CMFolderWhiteEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -108,8 +108,8 @@
   name: yellow folder
   prototype: CMFolderYellowEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -130,8 +130,8 @@
   name: rifle ammunition box (10x24mm)
   prototype: RMCBoxBulletsRifleEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -141,8 +141,8 @@
   name: rifle ammunition box (10x24mm AP)
   prototype: RMCBoxBulletsRifleAPEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -152,8 +152,8 @@
   name: SMG ammunition box (10x20mm)
   prototype: RMCBoxBulletsSMGEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -163,8 +163,8 @@
   name: SMG ammunition box (10x20mm AP)
   prototype: RMCBoxBulletsSMGAPEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -193,8 +193,8 @@
   name: M54C magazine box
   prototype: RMCBoxMagazineRifleM54CEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -204,8 +204,8 @@
   name: M54C magazine box (AP)
   prototype: RMCBoxMagazineRifleM54CAPEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -215,8 +215,8 @@
   name: M54C magazine box (Ext)
   prototype: RMCBoxMagazineRifleM54CExtEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -226,8 +226,8 @@
   name: M4SPR magazine box
   prototype: RMCBoxMagazineRifleM4SPREmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -237,8 +237,8 @@
   name: M4SPR magazine box (AP)
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -248,8 +248,8 @@
   name: M4SPR magazine box (Ext)
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -259,8 +259,8 @@
   name: .458 SOCOM bullet bundle box
   prototype: RMCBoxBullets458Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -270,8 +270,8 @@
   name: M16 magazine box
   prototype: RMCBoxMagazineRifleM16Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -281,8 +281,8 @@
   name: SSG45 magazine box
   prototype: RMCBoxMagazineRifleSSG45Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -292,8 +292,8 @@
   name: SSG45 magazine box (AP)
   prototype: RMCBoxMagazineRifleSSG45APEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -315,8 +315,8 @@
   name: M63 magazine box
   prototype: RMCBoxMagazineSMGM63Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -326,8 +326,8 @@
   name: M63 magazine box (AP)
   prototype: RMCBoxMagazineSMGM63APEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -337,8 +337,8 @@
   name: M63 magazine box (Ext)
   prototype: RMCBoxMagazineSMGM63ExtEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -348,8 +348,8 @@
   name: nailgun magazine box
   prototype: RMCBoxMagazineSMGNailgunEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -381,8 +381,8 @@
   name: M1984 magazine box
   prototype: RMCBoxMagazinePistolM1984Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -392,8 +392,8 @@
   name: M1984 magazine box (AP)
   prototype: RMCBoxMagazinePistolM1984APEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -403,8 +403,8 @@
   name: MK80 magazine box
   prototype: RMCBoxMagazinePistolMK80Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -414,8 +414,8 @@
   name: SU-6 magazine box
   prototype: RMCBoxMagazinePistolSU6Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -425,8 +425,8 @@
   name: M77 magazine box (AP)
   prototype: RMCBoxMagazinePistolM77APEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -436,8 +436,8 @@
   name: M44 speedloader box
   prototype: RMCBoxMagazineRevolverM44Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -447,8 +447,8 @@
   name: M44 speedloader box (Marksman)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -458,8 +458,8 @@
   name: M13 magazine box
   prototype: RMCBoxMagazinePistolM13Empty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -469,8 +469,8 @@
   name: M13 magazine box (Ext)
   prototype: RMCBoxMagazinePistolM13ExtEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -480,8 +480,8 @@
   name: M13 magazine box (Drum)
   prototype: RMCBoxMagazinePistolM13DrumEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -506,8 +506,8 @@
   name: buckshot shell box
   prototype: RMCBoxShellsBuckshotEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -517,8 +517,8 @@
   name: slug shell box
   prototype: RMCBoxShellsSlugsEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -528,8 +528,8 @@
   name: flechette shell box
   prototype: RMCBoxShellsFlechetteEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -539,8 +539,8 @@
   name: breaching shell box
   prototype: RMCBoxShellsBreachingEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -550,8 +550,8 @@
   name: beanbag shell box
   prototype: RMCBoxShellsBeanbagEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -561,8 +561,8 @@
   name: incendiary shell box
   prototype: RMCBoxShellsIncendiaryEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -572,8 +572,8 @@
   name: incendiary buckshot shell box
   prototype: RMCBoxShellsIncendiaryBuckshotEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -598,8 +598,8 @@
   name: M94 flare packs box
   prototype: RMCBoxPackFlareEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -609,8 +609,8 @@
   name: M89-S flare packs box
   prototype: RMCBoxPackFlareCASEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -620,8 +620,8 @@
   name: UT-Napthal fuel tanks box
   prototype: RMCBoxFlamerTankEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -631,8 +631,8 @@
   name: flashlights box
   prototype: RMCBoxFlashlightsEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -642,8 +642,8 @@
   name: MREs box
   prototype: RMCBoxMREEmpty
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -653,8 +653,8 @@
   name: high-capacity power cells box
   prototype: RMCBoxMagazinePowerCellsHigh
   noRotate: true
-  doAfterTime: 1
-  doAfterTimeMin: 1
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
