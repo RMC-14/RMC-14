@@ -136,7 +136,7 @@
 # empty rifle magazine boxes
 - type: rmcConstruction
   id: RMCEmptyRifleMagazineBoxesList
-  name: empty shotgun shell boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  name: empty rifle magazine boxes (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
   prototype: RMCBoxMagazineRifleBase
   listed:
   - RMCBoxMagazineRifleM54CEmptyBuild
@@ -155,7 +155,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM54CEmptyBuild
-  name: empty M54C magazine box (Reg x 10)
+  name: empty M54C magazine box (x 10)
   prototype: RMCBoxMagazineRifleM54CEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -179,7 +179,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleM4SPREmptyBuild
-  name: empty M4SPR magazine box (Reg x 16)
+  name: empty M4SPR magazine box (x 16)
   prototype: RMCBoxMagazineRifleM4SPREmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -203,7 +203,7 @@
 
 - type: rmcConstruction
   id: RMCBoxBullets458EmptyBuild
-  name: empty .458 SOCOM bundle box (Reg x 297)
+  name: empty .458 SOCOM bundle box (x 297)
   prototype: RMCBoxBullets458Empty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -219,7 +219,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleAK4047EmptyBuild
-  name: empty AK4047 magazine box (Reg x 10)
+  name: empty AK4047 magazine box (x 10)
   prototype: RMCBoxMagazineRifleAK4047Empty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -227,7 +227,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineRifleSSG45EmptyBuild
-  name: empty SSG45 magazine box (Reg x 10)
+  name: empty SSG45 magazine box (x 10)
   prototype: RMCBoxMagazineRifleSSG45Empty
   materialCost: 1
   ignoreBuildRestrictions: true
