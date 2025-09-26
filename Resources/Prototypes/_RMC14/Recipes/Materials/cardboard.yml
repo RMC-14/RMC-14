@@ -9,6 +9,8 @@
   id: RMCDonutBoxBuild
   name: donut box
   prototype: RMCBoxDonutEmpty
+  doAfterTime: 0
+  doAfterTimeMin: 0
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
@@ -473,7 +475,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazineSMGNailgunEmptyBuild
-  name: empty Nailgun nail box
+  name: empty nailgun nail box
   prototype: RMCBoxMagazineSMGNailgunEmpty
   materialCost: 1
   ignoreBuildRestrictions: true
@@ -481,7 +483,7 @@
 
 - type: rmcConstruction
   id: RMCBoxMagazinePowerCellsHighBuild
-  name: empty High-Capacity Powercell box
+  name: empty high-capacity powercell box
   prototype: RMCBoxMagazinePowerCellsHigh
   materialCost: 1
   ignoreBuildRestrictions: true
