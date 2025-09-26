@@ -104,6 +104,8 @@
   name: bed
   prototype: CMBed
   noRotate: true
+  doAfterTime: 0.5
+  doAfterTimeMin: 0.5
   materialCost: 2
 
 # Foldable Chair
