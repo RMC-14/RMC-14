@@ -34,7 +34,7 @@
 
 - type: rmcConstruction
   id: RMCPizzaGalaxyBoxBuild
-  name: pizza galaxy box
+  name: Pizza Galaxy pizza box
   prototype: RMCBoxPizzaGalaxy
   noRotate: true
   materialCost: 1
@@ -44,7 +44,7 @@
 # folders
 - type: rmcConstruction
   id: RMCFolderList
-  name: folders (1 cardboard sheet) # cost named manually since lists won't name costs otherwise
+  name: folders (1 cardboard) # cost named manually since lists won't name costs otherwise
   prototype: CMFolderBase
   listed:
   - RMCFolderBlueEmptyBuild
