@@ -24,7 +24,7 @@
   - type: RMCConstructionItem
     buildable:
     # box
-    # donut box
+    - RMCDonutBoxBuild
     # egg box
     # light tubes box
     # light bulbs box
