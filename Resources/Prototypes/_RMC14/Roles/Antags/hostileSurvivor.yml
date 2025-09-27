@@ -1,0 +1,7 @@
+- type: antag
+  id: RMCHostileSurvivor
+  name: rmc-roles-antag-hostile-survivor-antagonist-name
+  antagonist: true
+  setPreference: true
+  objective: rmc-roles-antag-hostile-surivor-objective
+  isCM: true

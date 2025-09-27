@@ -1,0 +1,115 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorCLFBase
+  name: rmc-job-name-clf-survivor-soldier
+  description: rmc-job-description-clf-survivor
+  ranks:
+    RMCRankCLFRebel: [ ]
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  startingGear: RMCGearCLFBase
+  hasIcon: true
+  greeting: rmc-job-greeting-clf-survivor
+  playTimeTracker: RMCJobSurvivorCLF
+  spawnMenuRoleName: CLF Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  hidden: true
+
+- type: startingGear
+  id: RMCGearCLFBase
+  equipment:
+    mask: RMCM5Bayonet # TODO RMC14
+    jumpsuit: RMCJumpsuitCLFSoldier
+    back: RMCSatchelLightpack5Slot
+    id: RMCIDCardCLFSoldier
+    ears: RMCHeadsetDistressCLF
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+
+- type: playTimeTracker
+  id: RMCJobSurvivorCLF
+  name: rmc-playtime-tracker-job-name-survivor-clf
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetCLFNoPrimary
+  name: clf no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    - # Rebel Suit
+      - [ RMCCoatMilitia ]
+      - [ RMCCoatMilitiaVest ]
+      - [ RMCCoatMilitiaBrace ]
+      - [ RMCCoatMilitiaHauberk ]
+      - [ RMCArmorVest ]
+      # - [ ArmorBulletproof ] # todo
+    - # Rebel helmet
+      # /obj/item/clothing/head/militia
+      - [ RMCHeadMilitiaBucket ]
+      # /obj/item/clothing/head/helmet
+      - [ RMCArmorHelmetSkullcap ]
+      # /obj/item/clothing/head/helmet/swat
+      - [ RMCHardHat]
+      - [ RMCHelmetWelding ]
+      # /obj/item/clothing/head/bandana
+      - [ CMHeadBandRed ]
+      - [ CMHeadBandRebel ]
+      # /obj/item/clothing/head/headband/rambo
+    - # Rebel shoes
+      - [ RMCShoesBlack ]
+      - [ RMCShoesBrown ]
+      - [ RMCShoesLaceup ]
+      - [ RMCShoesLeather ]
+      - [ RMCShoesCombat ]
+      - [ CMBootsGrey ]
+    - # Rebel gloves
+      - [ RMCHandsBlack ]
+      - [ RMCHandsLeatherBlack ]
+      - [ RMCHandsCombat ]
+      - [ ClothingHandsGlovesLeather ] # todo rmc botanic leather gloves
+
+- type: entity
+  parent: RMCSurvivorPresetCLFNoPrimary
+  id: RMCSurvivorPresetCLF
+  name: clf survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ WeaponRifleMAR40, RMCMagazineRifleMAR40, RMCMagazineRifleMAR40, RMCMagazineRifleMAR40 ]
+    - [ WeaponSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5 ]
+    - [ RMCWeaponShotgunHG3712, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
+    - [ WeaponRifleM16, RMCMagazineRifleM16 , RMCMagazineRifleM16 , RMCMagazineRifleM16 ]
+    - [ WeaponSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15 ]
+    - [ RMCWeaponSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27 ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetCLFNoPrimary
+  id: RMCSurvivorPresetCLFSMG
+  name: clf survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCWeaponSMGType19, RMCMagazineSMGType19, RMCMagazineSMGType19, RMCMagazineSMGType19 ]
+    - [ RMCWeaponSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27, RMCMagazineSMGMP27 ]
+    - [ WeaponSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5, CMMagazineSMGMP5 ]
+    - [ RMCWeaponSMGType64, RMCMagazineSMGType64, RMCMagazineSMGType64, RMCMagazineSMGType64 ]
+    - [ WeaponSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15, RMCMagazineSMGMAC15 ]
+    - [ RMCWeaponSMGUZI, RMCMagazineSMGUZI, RMCMagazineSMGUZI, RMCMagazineSMGUZI ]
+    - [ RMCWeaponSMGFP9000, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000 ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetCLF
+  id: RMCSurvivorPresetCLFNoPistol
+  name: clf survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - []
