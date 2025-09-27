@@ -141,3 +141,24 @@
   components:
   - type: SleepNPC
   - type: ParasiteAI
+  - type: XenoEvolution
+    strains:
+    - RMCXenoParasiteWatcher
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: RMCXenoParasiteWatcher
+  suffix: Watcher
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoLeap
+    - ActionXenoParasiteVision
+  - type: XenoStrain
+    name: rmc-xeno-watcher-name
+    description: rmc-xeno-watcher-description
+    popup: rmc-xeno-watcher-popup
+  - type: XenoParasiteVision
+  - type: XenoHidden
