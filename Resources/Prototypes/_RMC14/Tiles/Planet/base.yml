@@ -135,7 +135,7 @@
   - 1.0
   - 1.0
   - 1.0
-  edgeSpritePriority: 0
+  edgeSpritePriority: 1
   edgeSprites:
     SouthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
     NorthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
