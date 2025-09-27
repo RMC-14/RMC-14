@@ -61,6 +61,17 @@
 
 - type: entity
   parent: BarbedWireBase
+  id: BarbedWire20
+  suffix: "20"
+  components:
+  - type: Sprite
+    state: barbed_wire_3
+  - type: Stack
+    stackType: BarbedWire
+    count: 20
+
+- type: entity
+  parent: BarbedWireBase
   id: BarbedWire1
   suffix: Single
   components:
@@ -72,3 +83,4 @@
   - type: Construction
     graph: BarbedWireGraph
     node: nodeBarbedWire
+

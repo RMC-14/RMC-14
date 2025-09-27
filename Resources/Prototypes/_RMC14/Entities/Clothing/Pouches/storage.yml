@@ -84,6 +84,20 @@
       components:
       - Welder
 
+- type: entity
+  parent: RMCPouchSurvivalSynth
+  id: RMCPouchSurvivalSynthFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFlashlight
+    - id: CMCrowbarRed
+    - id: Welder
+    - id: RMCCableCoil
+    - id: RadioHandheld
+    - id: RMCM5Bayonet
+
 # Command Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
@@ -539,6 +553,37 @@
   - type: Storage
     grid:
     - 0,0,15,1 #8 slots
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: CMWelder
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+      amount: 2
 
 # Sling Pouch
 - type: entity
