@@ -1,0 +1,124 @@
+# TODO RMC14: It will be more useful when the mechanics of manual replenishment of vending machines will be implemented
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechFOBSupplies
+  name: ColMarTech Automated FOB Supplies Vendor
+  description: An automated restockable storage vendor for use in organizing FOB supplies.
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor # intentionally without access
+    hackable: false
+    ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
+    sections:
+    - name: Primary firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        amount: 2
+      - id: WeaponShotgunM42A2
+        amount: 3
+      - id: WeaponSMGM63
+        amount: 3
+      - id: RMCWeaponRifleM54C
+        amount: 4
+    - name: Primary ammunition
+      entries:
+      - id: RMCBoxShotgunFlechette
+        amount: 0
+      - id: RMCBoxShotgunBuckshot
+        amount: 0
+      - id: RMCBoxShotgunSlugs
+        amount: 0
+      - id: CMMagazineRifleM4SPR
+        amount: 0
+      - id: CMMagazineSMGM63
+        amount: 0
+      - id: CMMagazineRifleM54C
+        amount: 0
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77Empty
+        amount: 2
+      - id: RMCWeaponRevolverM44Empty
+        amount: 2
+      - id: CMWeaponPistolM1984Empty
+        amount: 3
+    - name: Sidearm ammunition
+      entries:
+      - id: CMMagazinePistolM77AP
+        amount: 0
+      - id: RMCSpeedLoaderM44
+        amount: 0
+      - id: CMMagazinePistolM1984
+        amount: 0
+      - id: RMCMagazinePistolM13
+        amount: 0
+    - name: Explosives
+      entries:
+      - id: CMGrenadeFragOld
+        amount: 0
+      - id: CMGrenadeHighExplosive
+        amount: 0
+      - id: RMCGrenadeIncendiary
+        amount: 0
+      - id: CMGrenadeSmoke
+        amount: 1
+      - id: RMC40MMGrenadeM74AGMF
+        amount: 0
+      - id: RMC40MMGrenadeM74AGMI
+        amount: 0
+      - id: RMC40MMGrenadeM74AGMS
+        amount: 0
+    - name: Ammunition boxes
+      entries:
+      - id: RMCBoxShellsBuckshot
+        amount: 0
+      - id: RMCBoxShellsFlechette
+        amount: 0
+      - id: RMCBoxShellsSlugs
+        amount: 0
+      - id: RMCBoxMagazineRifleM4SPR
+        amount: 0
+      - id: RMCBoxMagazineRifleM4SPRAP
+        amount: 0
+      - id: RMCBoxMagazineSMGM63
+        amount: 0
+      - id: RMCBoxMagazineSMGM63AP
+        amount: 0
+    - name: Building materials
+      entries:
+      - id: RMCSheetCardboard1
+        amount: 10
+      - id: BarbedWire1
+        amount: 0
+      - id: CMSheetMetal1
+        amount: 0
+      - id: CMSheetPlasteel1
+        amount: 0
+      - id: CMSandbagEmpty10
+        amount: 0
+      - id: CMSandbagFull5
+        amount: 0
+    - name: Armor
+      entries:
+      - id: ArmorHelmetM10
+        amount: 0
+      - id: RMCArmorM3MediumCarrier
+        amount: 0
+    - name: Miscellaneous
+      entries:
+      - id: RMCBoxMRE
+        amount: 2
+      - id: RMCBoxPackFlare
+        amount: 2
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: RMCM5Bayonet
+        amount: 5
+      - id: RMCPackFlareCAS
+        amount: 0
+      - id: CMPackFlare
+        amount: 1
