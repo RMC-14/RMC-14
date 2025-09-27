@@ -1,9 +1,3 @@
-- type: rmcConstruction
-  id: RMCDividerConstruction
-  name: divider
-  isDivider: true
-  prototype: Error
-
 # donut box
 - type: rmcConstruction
   id: RMCDonutBoxBuild
