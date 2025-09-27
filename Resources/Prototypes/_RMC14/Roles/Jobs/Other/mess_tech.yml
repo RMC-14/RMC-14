@@ -18,6 +18,8 @@
       role: CMJobMessTech
       time: 36000 # 10 hours
     RMCRankPrivate: []
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false

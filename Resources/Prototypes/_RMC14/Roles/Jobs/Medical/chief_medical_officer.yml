@@ -11,6 +11,8 @@
   - !type:RoleTimeRequirement
     role: CMJobDoctor
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   ranks:
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
