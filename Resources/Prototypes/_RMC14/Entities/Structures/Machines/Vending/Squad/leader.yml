@@ -20,7 +20,7 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
       - id: RMCKitRifleM4SPR
         recommended: true
