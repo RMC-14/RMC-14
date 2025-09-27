@@ -23,7 +23,9 @@
       takeOne: RMCSquadKit
       entries:
       - id: RMCKitRifleM4SPR
+        recommended: true
       - id: RMCKitCM54C
+        recommended: true
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
@@ -31,6 +33,7 @@
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
+        recommended: true
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
