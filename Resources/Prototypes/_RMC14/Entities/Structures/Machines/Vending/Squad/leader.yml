@@ -382,7 +382,7 @@
 - type: entity
   parent: RMCKitBase
   id: RMCKitPyroMini
-  name: m34 pyrotechnician support kit
+  name: M34 pyrotechnician support kit
   description: Contains a M34 Incinerator Unit, a G4-1 Fuel Tank, 3 incinerator tanks, and a portable fire extinguisher.
   components:
   - type: Storage
