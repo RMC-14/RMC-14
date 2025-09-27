@@ -1,7 +1,7 @@
 - type: gameMap
   id: GoldenArrowLarge
   mapName: "GoldenArrowLarge"
-  mapPath: /Maps/_RMC14/golden_arrow_large.yml
+  mapPath: /Maps/_RMC14/PVE/golden_arrow_large.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
