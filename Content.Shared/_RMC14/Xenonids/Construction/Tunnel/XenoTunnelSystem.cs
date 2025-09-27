@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -730,8 +731,11 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
     {
-        // Don't disable abilities for resin whisperers to prevent tunnel UI issues
-        if (!HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
+        if (HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
+        {
+            DisableAllExceptResinWhispererAbilities(tunneledXeno.Owner);
+        }
+        else
         {
             DisableAllAbilities(tunneledXeno.Owner);
         }
@@ -739,11 +743,7 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnOutTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentRemove args)
     {
-        // Only re-enable abilities if they were disabled (i.e., not for resin whisperers)
-        if (!HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
-        {
-            EnableAllAbilities(tunneledXeno.Owner);
-        }
+        EnableAllAbilities(tunneledXeno.Owner);
     }
 
     private void OnTryDropInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref DropAttemptEvent args)
@@ -828,6 +828,19 @@ public sealed class XenoTunnelSystem : EntitySystem
         foreach (var action in actions)
         {
             _action.SetEnabled(action.AsNullable(), newStatus);
+        }
+    }
+
+    private void DisableAllExceptResinWhispererAbilities(EntityUid ent)
+    {
+        var actions = _action.GetActions(ent);
+        foreach (var action in actions)
+        {
+            var actionName = Name(action);
+            if (!actionName.Contains("resin", StringComparison.OrdinalIgnoreCase))
+            {
+                _action.SetEnabled(action.AsNullable(), false);
+            }
         }
     }
 
