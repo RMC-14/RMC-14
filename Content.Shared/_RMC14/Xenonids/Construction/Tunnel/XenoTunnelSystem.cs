@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -729,12 +730,20 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
     {
-        DisableAllAbilities(tunneledXeno.Owner);
+        // Don't disable abilities for resin whisperers to prevent tunnel UI issues
+        if (!HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
+        {
+            DisableAllAbilities(tunneledXeno.Owner);
+        }
     }
 
     private void OnOutTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentRemove args)
     {
-        EnableAllAbilities(tunneledXeno.Owner);
+        // Only re-enable abilities if they were disabled (i.e., not for resin whisperers)
+        if (!HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
+        {
+            EnableAllAbilities(tunneledXeno.Owner);
+        }
     }
 
     private void OnTryDropInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref DropAttemptEvent args)
