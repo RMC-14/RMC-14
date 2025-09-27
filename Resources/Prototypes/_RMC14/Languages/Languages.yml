@@ -6,7 +6,7 @@
   chatPrefix: null
   textColor: null
   typefaceId: Default
-  textSize: 14
+  textSize: null
   boldTypefaceId: null
   showLanguageName: false
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/GB.png"
@@ -36,7 +36,7 @@
   chatPrefix: 'x'
   textColor: null
   typefaceId: null
-  textSize: 16
+  textSize: null
   boldTypefaceId: null
   showLanguageName: true
   languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
@@ -68,7 +68,7 @@
   chatPrefix: 'f'
   textColor: "#4169e1"
   typefaceId: DefaultItalic
-  textSize: 14
+  textSize: null
   boldTypefaceId: null
   showLanguageName: true
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/FR.png"
@@ -100,7 +100,7 @@
   chatPrefix: 'j'
   textColor: null
   typefaceId: NotoSansDisplay
-  textSize: 14
+  textSize: null
   boldTypefaceId: null
   showLanguageName: true
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/JP.png"
@@ -132,7 +132,7 @@
   chatPrefix: 'r'
   textColor: "#ffd700"
   typefaceId: DefaultBold
-  textSize: 14
+  textSize: null
   boldTypefaceId: null
   showLanguageName: true
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/RU.png"
@@ -164,7 +164,7 @@
   chatPrefix: 'g'
   textColor: "#ffa500"
   typefaceId: DefaultBold
-  textSize: 15
+  textSize: null
   boldTypefaceId: DefaultBoldItalic
   showLanguageName: true
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/DE.png"
@@ -187,3 +187,25 @@
     chatTypeOverride: null
     speechVerbOverrides: null
     messageWrapOverrides: {}
+
+- type: language
+  id: SignLanguage
+  name: "Sign Language"
+  description: "A visual language using hand gestures and body movements."
+  isVisibleLanguage: true
+  chatPrefix: 's'
+  textColor: "#87ceeb"
+  typefaceId: DefaultItalic
+  textSize: null
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/hands.rsi/sign_language.png"
+  canUseRadio: false
+  needsSpeech: false
+  needsLOS: true
+  expectedVocabularySize: 100
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["*waves*", "*gestures*", "*points*", "*nods*", "*shakes head*", "*thumbs up*", "*claps*", "*motions*", "*indicates*", "*signals*"]
+    minSyllables: 1
+    maxSyllables: 2

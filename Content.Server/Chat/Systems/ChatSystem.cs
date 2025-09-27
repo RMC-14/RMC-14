@@ -339,25 +339,38 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// RMC14 - Language-aware speak method that processes messages based on speakers and listeners language abilities
     /// </summary>
     private void SendEntitySpeakWithLanguage(
-        EntityUid source,
-        string originalMessage,
-        ChatTransmitRange range,
-        string? nameOverride,
-        bool hideLog,
-        bool ignoreActionBlocker,
-        string language)
+            EntityUid source,
+            string originalMessage,
+            ChatTransmitRange range,
+            string? nameOverride,
+            bool hideLog,
+            bool ignoreActionBlocker,
+            ProtoId<LanguagePrototype> language)
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
         var message = TransformSpeech(source, originalMessage);
-
         if (message.Length == 0)
             return;
 
-        // Process what the speaker can actually say based on their language abilities
-        var speakerProcessedMessage = _languageSystem.ObfuscateMessageForSpeaker(source, message, language);
+        // Get the language prototype using the prototype manager
+        LanguagePrototype? languagePrototype = null;
+        if (!_prototypeManager.TryIndex(language, out languagePrototype))
+        {
+            // Fallback to common language if the specified language doesn't exist
+            language = SharedLanguageSystem.CommonLanguage;
+            _prototypeManager.TryIndex(language, out languagePrototype);
+        }
 
+        var needsLOS = languagePrototype?.NeedsLOS ?? false;
+        var needsSpeech = languagePrototype?.NeedsSpeech ?? true;
+
+        // Check if this language can be spoken by entities that can't speak
+        if (needsSpeech && !_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
+            return;
+
+        var speakerProcessedMessage = _languageSystem.ObfuscateMessageForSpeaker(source, message, language);
         var speech = GetSpeechVerb(source, speakerProcessedMessage);
 
         // get the entity's apparent name (if no override provided).
@@ -378,36 +391,32 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         name = FormattedMessage.EscapeText(name);
 
-        // RMC14 - Get language-specific formatting properties
-        var languageColor = _languageSystem.GetLanguageColor(language);
-        var languageTypeface = _languageSystem.GetLanguageTypeface(language);
-        var languageSize = _languageSystem.GetLanguageTextSize(language);
-        var showLanguageName = _languageSystem.DoesLanguageShowName(language);
-        var languageIcon = _languageSystem.GetLanguageIcon(language);
+        var languageColor = languagePrototype?.TextColor;
+        var languageTypeface = languagePrototype?.TypefaceId;
+        var languageSize = languagePrototype?.TextSize;
+        var showLanguageName = languagePrototype?.ShowLanguageName ?? false;
+        var languageIcon = languagePrototype?.LanguageIcon;
 
-        // Use language properties or fall back to speech verb defaults
         var typefaceToUse = languageTypeface ?? speech.FontId;
         var sizeToUse = languageSize ?? speech.FontSize;
 
-        // RMC14 - Add language indicator if configured to show
         string languageIndicator = "";
-        if (showLanguageName && _prototypeManager.TryIndex<LanguagePrototype>(language, out var langProto))
+        if (showLanguageName && languagePrototype != null)
         {
             if (string.IsNullOrEmpty(languageIcon))
             {
-                languageIndicator = $" ({langProto.LocalizedName})";
+                languageIndicator = $" ({languagePrototype.LocalizedName})";
             }
         }
 
-        // Create base wrapped message template
         var wrappedMessageTemplate = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
             ("entityName", name + languageIndicator),
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("fontType", typefaceToUse),
             ("fontSize", sizeToUse),
-            ("message", "{0}")); // Placeholder for actual message
+            ("message", "{0}"));
 
-        SendInVoiceRangeWithLanguage(ChatChannel.Local, speakerProcessedMessage, wrappedMessageTemplate, source, range, language, languageColor, languageIcon);
+        SendInVoiceRangeWithLanguage(ChatChannel.Local, speakerProcessedMessage, wrappedMessageTemplate, source, range, language, languageColor, languageIcon, needsLOS: needsLOS);
 
         var ev = new EntitySpokeEvent(source, speakerProcessedMessage, null, null, language);
         RaiseLocalEvent(source, ev, true);
@@ -433,7 +442,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string? nameOverride,
         bool hideLog,
         bool ignoreActionBlocker,
-        string language,
+        ProtoId<LanguagePrototype> language,
         bool ignoreXenos = false)
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
@@ -443,7 +452,21 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (message.Length == 0)
             return;
 
-        // Process what the speaker can actually say
+        // Get the language prototype using the prototype manager
+        LanguagePrototype? languagePrototype = null;
+        if (!_prototypeManager.TryIndex(language, out languagePrototype))
+        {
+            // Fallback to common language if the specified language doesn't exist
+            language = SharedLanguageSystem.CommonLanguage;
+            _prototypeManager.TryIndex(language, out languagePrototype);
+        }
+
+        var needsLOS = languagePrototype?.NeedsLOS ?? false;
+        var needsSpeech = languagePrototype?.NeedsSpeech ?? true;
+
+        if (needsSpeech && !_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
+            return;
+
         var speakerMessage = _languageSystem.ObfuscateMessageForSpeaker(source, message, language);
 
         // get the entity's name by visual identity (if no override provided).
@@ -462,10 +485,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         name = FormattedMessage.EscapeText(name);
 
-        // RMC14 - Get language properties for whisper
-        var languageColor = _languageSystem.GetLanguageColor(language);
-        var showLanguageName = _languageSystem.DoesLanguageShowName(language);
-        var languageIcon = showLanguageName ? _languageSystem.GetLanguageIcon(language) : null;
+        var languageColor = languagePrototype?.TextColor;
+        var showLanguageName = languagePrototype?.ShowLanguageName ?? false;
+        var languageIcon = showLanguageName ? languagePrototype?.LanguageIcon : null;
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
         {
@@ -475,16 +497,19 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            // RMC14 - Process the speaker's message for this specific listener
+            // Check LOS if the language requires it
+            if (needsLOS && !data.Observer && listener != source && !data.HasLOS)
+            {
+                continue;
+            }
+
             string listenerMessage;
             if (listener == source)
             {
-                // Speaker always hears what they said
                 listenerMessage = speakerMessage;
             }
             else
             {
-                // Process based on listener's understanding
                 listenerMessage = _languageSystem.ObfuscateMessageForListener(listener, speakerMessage, language);
             }
 
@@ -535,7 +560,17 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// RMC14 - Language-aware method for sending messages to players in voice range
     /// Processes each message based on the listener's language understanding
     /// </summary>
-    private void SendInVoiceRangeWithLanguage(ChatChannel channel, string speakerMessage, string wrappedMessageTemplate, EntityUid source, ChatTransmitRange range, string language, Color? languageColor, string? languageIcon = null, NetUserId? author = null)
+    private void SendInVoiceRangeWithLanguage(
+        ChatChannel channel,
+        string speakerMessage,
+        string wrappedMessageTemplate,
+        EntityUid source,
+        ChatTransmitRange range,
+        ProtoId<LanguagePrototype> language,
+        Color? languageColor,
+        string? languageIcon = null,
+        NetUserId? author = null,
+        bool needsLOS = false)
     {
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
@@ -548,20 +583,22 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
 
-            // RMC14 - Process the speaker message for this specific listener
+            // Check LOS if the language requires it
+            if (needsLOS && !data.Observer && listener != source && !data.HasLOS)
+            {
+                continue;
+            }
+
             string listenerMessage;
             if (listener == source)
             {
-                // Speaker always hears what they said
                 listenerMessage = speakerMessage;
             }
             else
             {
-                // Process based on listener understanding
                 listenerMessage = _languageSystem.ObfuscateMessageForListener(listener, speakerMessage, language);
             }
 
-            // Create the final wrapped message with the listener-specific processed message
             var finalWrappedMessage = string.Format(wrappedMessageTemplate, FormattedMessage.EscapeText(listenerMessage));
 
             var ev = new ChatMessageOverrideInVoiceRangeEvent(session, channel, source, listenerMessage, finalWrappedMessage, entHideChat);
@@ -574,7 +611,6 @@ public sealed partial class ChatSystem : SharedChatSystem
             _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, ev.EntHideChat, session.Channel, colorOverride: languageColor, author: author, languageIcon: languageIcon);
         }
 
-        // For replay, use the speakers version
         var replayWrappedMessage = string.Format(wrappedMessageTemplate, FormattedMessage.EscapeText(speakerMessage));
         _replay.RecordServerMessage(new ChatMessage(channel, speakerMessage, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), colorOverride: languageColor, speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source), languageIcon: languageIcon));
     }
@@ -1026,12 +1062,16 @@ public sealed partial class ChatSystem : SharedChatSystem
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
             {
-                recipients.Add(player, new ICChatRecipientData(distance, observer));
+                var hasLOS = observer || _examineSystem.InRangeUnOccluded(source, playerEntity, voiceGetRange);
+                recipients.Add(player, new ICChatRecipientData(distance, observer, HasLOS: hasLOS));
                 continue;
             }
 
             if (observer)
-                recipients.Add(player, new ICChatRecipientData(-1, true));
+            {
+                var hasLOS = _examineSystem.InRangeUnOccluded(source, playerEntity, voiceGetRange);
+                recipients.Add(player, new ICChatRecipientData(-1, true, HasLOS: hasLOS));
+            }
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
@@ -1051,7 +1091,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return recipients;
     }
 
-    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null)
+    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null, bool HasLOS = true)
     {
     }
 
