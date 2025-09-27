@@ -96,4 +96,24 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ResinConstructCount;
+
+    /// <summary>
+    /// Timer duration for preventing hive core construction in this area.
+    /// If null, no restriction applies. If set, hive cores cannot be built
+    /// for this duration after round start.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? UnoviableTimer;
+
+    /// <summary>
+    /// Whether the unoviable timer is currently active and blocking hive core construction.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool UnoviableTimerActive;
+
+    /// <summary>
+    /// When the unoviable timer was started (round time).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? UnoviableTimerStartTime;
 }
