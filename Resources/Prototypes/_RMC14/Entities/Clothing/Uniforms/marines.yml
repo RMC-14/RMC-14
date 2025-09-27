@@ -41,6 +41,42 @@
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalMK80 # TODO RMC14 sprite
+  suffix: Filled, Royal, MK80
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCShoulderHolsterMK80
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalMedic # TODO RMC14 sprite
+  suffix: Filled, Royal, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalBlue
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalTeamlead # TODO RMC14 sprite
+  suffix: Filled, Royal, Teamlead
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
