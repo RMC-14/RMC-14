@@ -70,6 +70,7 @@
     enabled: false
   - type: ActiveInputMover
   - type: GhostColor
+  - type: RMCGhostAppearance
   # RMC - FindParasite Event
   - type: FindParasite
   - type: JoinXeno
