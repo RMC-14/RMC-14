@@ -8,6 +8,11 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Content.Shared._RMC14.Xenonids.Projectile;
+using Robust.Shared.Map;
+using System.Numerics;
+using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -73,7 +78,30 @@ public sealed partial class XenoShieldSystem : EntitySystem
         else
         {
             if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
+            {
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
+                
+                // Fire hedgehog spikes when shield is hit
+                if (ent.Comp.Shield == ShieldType.Hedgehog && TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) && spikeShield.Active)
+                {
+                    var xenoProjectile = EntityManager.System<XenoProjectileSystem>();
+                    var popup = EntityManager.System<SharedPopupSystem>();
+                    
+                    xenoProjectile.TryShoot(
+                        ent.Owner,
+                        new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
+                        FixedPoint2.Zero,
+                        "XenoHedgehogShieldSpikeProjectile",
+                        null,
+                        9, // 9 spikes like CM13
+                        new Angle(2 * Math.PI), // Full circle
+                        15f
+                    );
+                    
+                    popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
+                }
+            }
+            
             args.Damage.ClampMax(0);
         }
 
