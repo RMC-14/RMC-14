@@ -168,12 +168,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
 
-# Cargotech
+# ReqTech / RT
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
-  name: cargo technician uniform
-  description: A standard-issue cargo tech uniform.
+  name: requisitions technician uniform
+  description: A standard-issue req tech uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi

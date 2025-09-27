@@ -9,7 +9,7 @@
 - type: entity
   parent: CMIDCardBase
   id: CMIDCardCargoTech
-  name: cargo tech's ID card
+  name: req tech's ID card
   components:
   - type: PresetIdCard
     job: CMCargoTech
