@@ -26,14 +26,14 @@
         recommended: true
       - id: RMCKitCM54C
         recommended: true
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
-        recommended: true
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
