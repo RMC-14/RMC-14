@@ -733,7 +733,7 @@ public sealed class XenoTunnelSystem : EntitySystem
     {
         if (HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
         {
-            DisableAllExceptResinWhispererAbilities(tunneledXeno.Owner);
+            DisableSpecificAbilities(tunneledXeno.Owner);
         }
         else
         {
@@ -831,18 +831,20 @@ public sealed class XenoTunnelSystem : EntitySystem
         }
     }
 
-    private void DisableAllExceptResinWhispererAbilities(EntityUid ent)
+    private void DisableSpecificAbilities(EntityUid ent)
     {
         var actions = _action.GetActions(ent);
         foreach (var action in actions)
         {
-            var actionName = Name(action);
-            if (!actionName.Contains("resin", StringComparison.OrdinalIgnoreCase))
+            var actionName = Name(action).ToLower();
+            if (actionName.Contains("rest") || actionName.Contains("regurgitate"))
             {
                 _action.SetEnabled(action.AsNullable(), false);
             }
         }
     }
+
+
 
     private bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string? name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
