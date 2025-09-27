@@ -142,3 +142,14 @@
     - !type:RoleTimeRequirement
       role: CMJobSmartGunOperator
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSGO
+  name: Smart Gun Operator
+  description: Smart Gun Operator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: smart_gun_operator

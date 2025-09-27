@@ -166,6 +166,17 @@
       role: CMJobSquadLeader
       time: 1
 
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSL
+  name: The Squad Leader
+  description: The Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: squad_leader
+
 - type: entity
   id: RMCGuidebookActionMove
   name: Move order
