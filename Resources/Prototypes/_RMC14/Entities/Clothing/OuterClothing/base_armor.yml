@@ -316,3 +316,33 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCBasePMCArmorLight
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: pmc-lamp-off
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: pmc-lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    equippedPrefix: off
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: pmc-lamp-off
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: pmc-lamp-on
+  - type: PointLight
+    color: "#73e6f5"
