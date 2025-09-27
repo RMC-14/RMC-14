@@ -417,8 +417,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeyCorrespondent
 
 - type: entity
   parent: RMCHeadsetShip

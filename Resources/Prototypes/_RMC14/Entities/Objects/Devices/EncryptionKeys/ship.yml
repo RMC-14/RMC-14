@@ -430,6 +430,30 @@
   - type: Sprite
     state: cap_key
 
+# Combat Correspondent
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCorrespondent
+  name: correspondent radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommon
+  - type: Sprite
+    state: cap_key
+
 # Dropship and gunship pilots
 - type: entity
   parent: CMEncryptionKey
