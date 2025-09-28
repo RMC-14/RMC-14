@@ -14,7 +14,7 @@ public sealed partial class RMCCameraWindow : RMCPopOutWindow
     public RMCCameraWindow()
     {
         RobustXamlLoader.Load(this);
-        Viewport.ViewportSize = new Vector2i(600, 600);
+        Viewport.ViewportSize = new Vector2i(1200, 1200);
         Viewport.Eye = new FixedEye();
     }
 }

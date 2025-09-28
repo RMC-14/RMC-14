@@ -1,0 +1,52 @@
+- type: job
+  parent: CMHospitalCorpsman
+  id: CMPVEHospitalCorpsman
+  playTimeTracker: CMJobPVEHospitalCorpsman
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
+  ranks:
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: Sun Rider Hospital Corpsman (PVE)
+  startingGear: RMCGearPVEHospitalCorpsman
+  supervisors: cm-job-supervisors-secserg
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
+        RMCSkillFirearms: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVEHospitalCorpsman
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVEHospitalCorpsman
+  equipment:
+    id: RMCDogtagPVEHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVECorpsman
+  name: PVE corpsman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVEHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn

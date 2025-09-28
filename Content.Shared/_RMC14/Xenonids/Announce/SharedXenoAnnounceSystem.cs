@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -45,7 +46,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="source"></param>
     /// <param name="filter"></param>
@@ -104,5 +105,16 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             popup,
             needsQueen
         );
+    }
+
+    public void AnnounceQueenMother(string message)
+    {
+        var sound = new BioscanComponent().XenoSound;
+        AnnounceAll(default, FormatQueenMother(message), sound);
+    }
+
+    public string FormatQueenMother(string message)
+    {
+        return $"\n[bold][color=#7575F3][font size=24]Queen Mother Psychic Directive[/font][/color][/bold]\n\n[color=red][font size=14]{message}[/font][/color]\n\n";
     }
 }

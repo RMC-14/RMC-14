@@ -17,7 +17,7 @@
     </Box>
     <Box Orientation="Vertical">
       <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
-      <GuideEntityEmbed Entity="RMCParasiteMapIcon"/>
+      <GuideEntityEmbed Entity="RMCParasiteMapIcon" Caption="Child / Parasite"/>
     </Box>
     <Box Orientation="Vertical">
       <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
@@ -116,12 +116,16 @@
   </Box>
   <Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="XenoTunnel" Caption="" Margin="0 50 0 0"/>
-      <GuideEntityEmbed Entity="RMCTunnelMapIcon" Margin="0 38 0 0"/>
+      <GuideEntityEmbed Entity="XenoTunnel" Caption="" Margin="30 50 0 0"/>
+      <GuideEntityEmbed Entity="RMCTunnelMapIcon" Margin="30 38 0 0"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption=""/>
-      <GuideEntityEmbed Entity="RMCRecovNodeMapIcon"/>
+      <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption="" Margin="35 20 0 0"/>
+      <GuideEntityEmbed Entity="RMCRecovNodeMapIcon" Margin="35 4 0 0"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HivePylonXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCPylonMapIcon"/>
     </Box>
   </Box>
 </Document>

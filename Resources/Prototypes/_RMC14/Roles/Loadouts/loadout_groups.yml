@@ -80,6 +80,30 @@
   - HippieGlassesSunriseRMC
   - HippieGlassesSunsetRMC
 
+- type: loadoutGroup
+  id: EyewearRMCPVE
+  name: rmc-loadout-group-eyewear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - AviatorsRMC
+  - EyepatchRMC
+  - GlassesRPGRMC
+  - GlassesRPGRMCOld
+  - GlassesPrescriptionRMC
+  - HippieGlassesRMC
+  - GogglesRMC
+  - GogglesPrescriptionRMC
+  - GogglesBlackRMC
+  - GogglesOrangeRMC # TODO add prescription variants of all the goggles
+  - GogglesAdvancedRMC
+  - GogglesM1A1RMC
+  - PersonalShadesRMC
+  - SunglassesRMC # TODO prescription sunglasses
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
+
 # Masks
 - type: loadoutGroup
   id: MasksRMC
@@ -123,6 +147,27 @@
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
 
+- type: loadoutGroup
+  id: MasksRMCPVE
+  name: rmc-loadout-group-masks
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - BalaclavaRMC
+  - CoifRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+  - GasMaskRMC
+  - KeffiyehRMC
+  - KeffiyehBlackRMC
+  - KeffiyehBlueRMC
+  - KeffiyehGreenRMC
+  - KeffiyehWhiteRMC
+  - KeffiyehRedRMC
+
 # Headwear
 - type: loadoutGroup
   id: HeadwearRMC
@@ -146,6 +191,20 @@
   - HeadBeanieTanRMC
   - HeadBeanieGreenRMC
   - HeadBeanieGrayRMC
+  - UNMCHeadsetRMC
+
+- type: loadoutGroup
+  id: HeadwearRMCPVE
+  name: rmc-loadout-group-headwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - BrownHeadbandRMC
+  - GreenHeadbandRMC
+  - GrayHeadbandRMC
+  - RedHeadbandRMC
+  - TanHeadbandRMC
+  - UNMCHeadsetRMC
 
 # Helmet Garbs
 - type: loadoutGroup
@@ -180,6 +239,43 @@
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
+  - ChaplainPatchRMC
+  - PeaceFlairRMC
+  - IoFlairRMC
+  - TerraTekFlairRMC
+  - UNMCFlairRMC
+  - MovieTicketRMC
+
+- type: loadoutGroup
+  id: HelmetGarbsRMCPVE
+  name: rmc-loadout-group-helmet-garbs
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - FakeNVGPVERMC
+  - BuckshotSpentRMC
+  - FlechetteSpentRMC
+  - SlugSpentRMC
+  - CartridgeSpentRMC
+  - HelmetGasmaskRMC
+  - HelmetGasmaskDesertRMC
+  - HelmetGasmaskJungleRMC
+  - HelmetGasmaskUrbanRMC
+  - FeatherRMC
+  - FeatherRedRMC
+  - FeatherBlueRMC
+  - FeatherPurpleRMC
+  - FeatherYellowRMC
+  - GunOilRMC
+  - RosaryRMC
+  - PrescriptionRMC
+  - TrimmedWireRMC
+  - ChaplainPatchRMC
+  - PeaceFlairRMC
+  - IoFlairRMC
+  - TerraTekFlairRMC
+  - UNMCFlairRMC
+  - MovieTicketRMC
 
 # Accessories
 - type: loadoutGroup
@@ -228,23 +324,47 @@
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
 
-# Weapons
+# Recreational
 - type: loadoutGroup
   id: RecreationalRMC
   name: rmc-loadout-group-recreational
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 7
   loadouts:
   - CassettePlayerRMC
+  - MagazineBootsN54RMC
+  - MagazineBootsN55RMC
+  - MagazineBootsN117RMC
+  - MagazineBootsN150RMC
+  - MagazineBootsN160RMC
+  - MagazineWeYaOrreryRMC
+  - MagazineWeYaOrreryN184RMC
+  - D20DiceRMC
+  - D6DiceRMC
+
 
 # Weapons
 - type: loadoutGroup
   id: WeaponsRMC
   name: rmc-loadout-group-weapons
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 7
   loadouts:
   - HoldoutPistolRMC
+  - CustomM1984RMC
+  - CustomM44RMC
+  - HG45AguilaCaseRMC
+  - HG45MarinaCaseRMC
+
+# SPP Weapons
+- type: loadoutGroup
+  id: SPPWeaponsRMC
+  name: rmc-loadout-group-weapons
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - T73CaseRMC
+  - ZHNK72CaseRMC
 
 # Canned Drinks
 - type: loadoutGroup
@@ -266,6 +386,7 @@
   - BodaPlyusRMC
   - AleIpaRMC
   - LiteBeerRMC
+  - SequoiaBeerRMC
   - ThirteenLokoRMC
 
 # Flasks
@@ -286,6 +407,12 @@
   maxLimit: 11
   loadouts:
   - LuckySlothsPackRMC
+  - ArcturianAcePackRMC
+  - LadyFingersPackRMC
+  - EmeraldGreensPackRMC
+  - ElectroGoldsPackRMC
+  - TurquoiseSolRedsPackRMC
+  - YellowSolRedsPackRMC
   - WeYaGoldPackRMC
   - ExecutiveSelectPackRMC
   - TarbackTubeRMC
@@ -295,6 +422,22 @@
   - ZippoExecRMC
   - ZippoGoldRMC
   - MatchboxRMC
+
+# Miscellaneous
+- type: loadoutGroup
+  id: MiscellaneousRMC
+  name: rmc-loadout-group-miscellaneous
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - StraightRazorRMC
+  - BootsJungleFilledRMC
+  - BootsUrbanFilledRMC
+  - BootsBrownFilledRMC
+  - BootsGreyFilledRMC
+  - HandsBrownMarineRMC
+  - HandsGreyMarineRMC
+
 
 # Food (sweets)
 - type: loadoutGroup
@@ -393,6 +536,7 @@
   maxLimit: 1
   loadouts:
   - CMPPeakedCapRMC
+
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC

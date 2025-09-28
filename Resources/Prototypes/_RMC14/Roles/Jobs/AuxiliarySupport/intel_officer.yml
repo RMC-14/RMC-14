@@ -36,6 +36,7 @@
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
     - type: CMVendorUser
+      id: CMIntelOfficer
       points: 45
     - type: MarineOrders
     - type: RMCPointing

@@ -7210,7 +7210,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.808915,-3.4607978
       parent: 2
-- proto: WeaponRifleM54C
+- proto: RMCWeaponRifleM54C
   entities:
   - uid: 1323
     components:
@@ -7222,7 +7222,7 @@ entities:
     - type: Transform
       pos: -3.5531578,1.2044238
       parent: 2
-- proto: WeaponRifleM54CE2
+- proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 1325
     components:
