@@ -19,6 +19,7 @@
   sprites:
     Head: MobFeroxiHead
     Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobFeroxiTorso
     UndergarmentTop: MobHumanoidAnyMarking
@@ -40,6 +41,9 @@
   id: MobFeroxiMarkingLimits
   points:
     Hair:
+      points: 1
+      required: false
+    FacialHair:
       points: 1
       required: false
     Head:
