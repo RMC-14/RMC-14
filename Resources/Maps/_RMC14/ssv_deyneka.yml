@@ -74,6 +74,7 @@ entities:
     - type: Map
       mapPaused: True
     - type: GridTree
+    - type: Almayer
     - type: OccluderTree
     - type: MapGrid
       chunks:
