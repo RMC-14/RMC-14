@@ -72,6 +72,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
 
 - type: startingGear
   id: CMGearASO
