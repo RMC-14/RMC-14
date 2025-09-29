@@ -1,14 +1,11 @@
 - type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverMateba
   name: Mateba autorevolver custom
   description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
   - type: Gun
@@ -87,6 +84,7 @@
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
@@ -99,10 +97,12 @@
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
+    doAfterBreakOnMove: false
     ignoreRoof: true
     shakeAmount: 5
     requiredSkills:
       RMCSkillLeadership: 3
+  - type: RMCBattleExecute
 
 - type: entity
   parent: RMCWeaponRevolverMateba
@@ -112,9 +112,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
   - type: AttachableHolder
@@ -139,6 +136,7 @@
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
@@ -152,9 +150,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
   - type: RMCWeaponAccuracy
@@ -382,9 +377,17 @@
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
-  parent: CMBulletBase
+  parent: RMCBulletMatebaHighImpact
   id: RMCBulletMatebaHighImpactArmorPiercing #HIAP
   name: bullet (.454) HIAP
   categories: [ HideSpawnMenu ]
@@ -395,11 +398,6 @@
         Piercing: 45
   - type: CMArmorPiercing
     amount: 50
-  - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
-  - type: RMCProjectileAccuracy
-    accuracy: 90
 
 - type: entity
   parent: CMBulletBase

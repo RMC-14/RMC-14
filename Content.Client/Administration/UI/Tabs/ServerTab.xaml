@@ -4,10 +4,16 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Margin="4"
     MinSize="50 50">
-    <GridContainer
-        Columns="4" >
-        <controls:ConfirmButton Name="ServerShutdownButton" Text="{Loc server-shutdown}" />
-        <cc:CommandButton Name="SetOocButton" Command="setooc" Text="{Loc server-ooc-toggle}" ToggleMode="True" />
-        <cc:CommandButton Name="SetLoocButton" Command="setlooc" Text="{Loc server-looc-toggle}" ToggleMode="True" />
-    </GridContainer>
+    <BoxContainer Orientation="Vertical">
+        <GridContainer
+            Columns="4" >
+            <controls:ConfirmButton Name="ServerShutdownButton" Text="{Loc server-shutdown}" />
+            <cc:CommandButton Name="SetOocButton" Command="setooc" Text="{Loc server-ooc-toggle}" ToggleMode="True" />
+            <cc:CommandButton Name="SetLoocButton" Command="setlooc" Text="{Loc server-looc-toggle}" ToggleMode="True" />
+        </GridContainer>
+        <cc:HSeparator Color="#4972A1" Margin="0 10" />
+        <GridContainer Columns="3">
+            <cc:CommandButton Command="setdchat" Text="{Loc rmc-ui-toggle-dchat}" />
+        </GridContainer>
+    </BoxContainer>
 </Control>

@@ -124,6 +124,11 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: BypassSkillChecks
   - type: SeeNewPlayers
+  - type: TacticalMapUser
+    marines: true
+    xenos: true
+    liveUpdate: true
+  
 
 - type: entity
   abstract: true

@@ -77,6 +77,12 @@
   paygrade: PMC-TL
 
 - type: rank
+  id: RMCRankWeYaForceLeader
+  name: Force Leader
+  prefix: FL.
+  paygrade: PMC-FL
+
+- type: rank
   id: RMCRankWeYaEliteTeamLeader
   name: Elite Team Leader
   prefix: ETML.
@@ -87,3 +93,9 @@
   name: PMC Site Director
   prefix: Director
   paygrade: PMC-DIR
+
+- type: rank
+  id: RMCRankWeYaForceCommand
+  name: PMC Force Command
+  prefix: FCO.
+  paygrade: PMC-FCO

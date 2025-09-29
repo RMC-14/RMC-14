@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSniper
   name: rmc-job-name-forecon-sniper
-  playTimeTracker: RMCJobSurvivorSniperForecon
   startingGear: RMCGearForeconSniper
   icon: "RMCJobIconForeconSniper"
   spawnMenuRoleName: FORECON Sniper (Survivor)
@@ -25,7 +24,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: spec_sniper
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -45,10 +44,6 @@
   equipment:
     outerClothing: RMCArmorUDEPForeconFilled
     # todo sniper facepaint
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSniperForecon
-  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

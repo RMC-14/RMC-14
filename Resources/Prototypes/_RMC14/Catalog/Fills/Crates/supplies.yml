@@ -80,3 +80,17 @@
 
 # /datum/supply_packs/presents
 # /datum/supply_packs/wrapping_supplies
+
+# AEGIS Lobby Event Crate
+- type: entity
+  parent: RMCCrateSupply
+  id: RMCCrateAegisLobby
+  name: AEGIS tracking equipment crate (x3 pinpointers, x1 pamphlet)
+  description: A supply crate containing AEGIS ID tracking equipment and documentation.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPinpointerAegisID
+      amount: 3
+    - id: CMPamphletPowerloader
+      amount: 1

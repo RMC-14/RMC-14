@@ -1,3 +1,6 @@
+- type: Tag
+  id: RMCHeadset
+
 - type: entity
   parent: Clothing
   id: CMHeadset
@@ -26,7 +29,17 @@
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
   - type: HeadsetMultiBroadcast
+  - type: Tag
+    tags:
+    - RMCHeadset
   - type: RMCHeadset
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCHeadsetIconsUNMC
@@ -128,7 +141,11 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-      - CMEncryptionKeyRequisition
+      - RMCEncryptionKeyCargotech
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineEngineer
+    - MarineCommand
   - type: GrantSquadLeaderTracker
     defaultMode: Quartermaster
     trackerModes:
@@ -139,6 +156,12 @@
   id: CMHeadsetChef
   name: kitchen radio headset
   description: Used by the onboard kitchen staff, filled with background noise of sizzling pots.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyRequisition
 
 - type: entity
   parent: RMCHeadsetShip

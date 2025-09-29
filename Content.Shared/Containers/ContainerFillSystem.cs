@@ -78,7 +78,19 @@ public sealed class ContainerFillSystem : EntitySystem
             var spawns = _entityTable.GetSpawns(table);
             foreach (var proto in spawns)
             {
-                var spawn = Spawn(proto, coords);
+                // RMC14
+                EntityUid spawn;
+                try
+                {
+                    spawn = Spawn(proto, coords);
+                }
+                catch(Exception e)
+                {
+                    Log.Error($"Error spawning {proto} at {coords}:\n{e}");
+                    continue;
+                }
+                // RMC14
+
                 if (storage != null && TryComp(spawn, out ItemComponent? item))
                 {
                     var ev = new CMStorageItemFillEvent((spawn, item), storage);

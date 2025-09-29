@@ -29,6 +29,7 @@ using Robust.Server.Audio;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using IgniteOnCollideComponent = Content.Server.Atmos.Components.IgniteOnCollideComponent;
 
@@ -278,6 +279,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             Resist(ent, ent);
             _xenoSpit.Resist(ent.Owner);
+            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner));
             args.Handled = true;
         }
 

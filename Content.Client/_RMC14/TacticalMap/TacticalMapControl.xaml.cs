@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
@@ -9,13 +7,9 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Input;
-using Robust.Shared.Log;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -51,6 +45,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float LabelClickTolerance = 15f;
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly Font _font;
     private readonly Label? _tunnelInfoLabel;
@@ -79,10 +74,16 @@ public sealed partial class TacticalMapControl : TextureRect
     private Vector2i? _labelDragStart;
     private Vector2? _currentDragPosition;
 
+    private TacticalMapSettingsManager? _settingsManager;
+    private EntityUid? _currentMapEntity;
+    private string? _currentMapName;
+
+    private Action<float, Vector2>? _viewUpdateCallback;
+
     public int LineLimit;
     public bool Drawing { get; set; }
     public bool IsCanvas { get; set; } = false;
-    public LabelMode CurrentLabelMode { get; set; } = LabelMode.Tactical;
+    public LabelMode CurrentLabelMode { get; set; } = LabelMode.Area;
     public bool StraightLineMode { get; set; } = false;
     public bool LabelEditMode { get; set; } = false;
     public Color Color;
@@ -118,6 +119,61 @@ public sealed partial class TacticalMapControl : TextureRect
         AddChild(_tunnelInfoLabel);
     }
 
+    public float GetCurrentZoomFactor()
+    {
+        return _zoomFactor;
+    }
+
+    public Vector2 GetCurrentPanOffset()
+    {
+        return _panOffset;
+    }
+
+    public void SetViewUpdateCallback(Action<float, Vector2> callback)
+    {
+        _viewUpdateCallback = callback;
+    }
+
+    private void NotifyViewChanged()
+    {
+        _viewUpdateCallback?.Invoke(_zoomFactor, _panOffset);
+    }
+
+    public void LoadViewSettings(float zoomFactor, Vector2 panOffset, EntityUid? mapEntity)
+    {
+        _currentMapEntity = mapEntity;
+        _zoomFactor = Math.Clamp(zoomFactor, MinZoom, MaxZoom);
+        _panOffset = panOffset;
+
+        ApplyViewSettings();
+        NotifyViewChanged();
+    }
+
+    public void SetCurrentMap(EntityUid? mapEntity)
+    {
+        _currentMapEntity = mapEntity;
+    }
+
+    public void SetCurrentMapName(string? mapName)
+    {
+        _currentMapName = mapName;
+    }
+
+    public void ApplyViewSettings()
+    {
+        if (Texture == null)
+            return;
+
+        Vector2 availableSize = new(PixelWidth, PixelHeight);
+        if (availableSize.X <= 0 || availableSize.Y <= 0)
+            return;
+
+        _zoomFactor = Math.Clamp(_zoomFactor, MinZoom, MaxZoom);
+
+        float maxPan = Math.Max(availableSize.X, availableSize.Y) * _zoomFactor * 0.5f;
+        _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
+    }
+
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
         if (grid.Comp.Colors.Count == 0)
@@ -144,6 +200,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
         Texture = Texture.LoadFromImage(image);
         _areaLabels = new Dictionary<Vector2i, string>(grid.Comp.Labels);
+
+        ApplyViewSettings();
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)
@@ -217,6 +275,7 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         _zoomFactor = 1.0f;
         _panOffset = Vector2.Zero;
+        NotifyViewChanged();
     }
 
     public Vector2i ConvertIndicesToLineCoordinates(Vector2i indices)
@@ -434,10 +493,14 @@ public sealed partial class TacticalMapControl : TextureRect
             return;
 
         SpriteSystem system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
-        SpriteSpecifier.Rsi backgroundRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
-        SpriteSpecifier.Rsi defibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable");
-        SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
-        SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "xenoleader");
+        TimeSpan curTime = IoCManager.Resolve<IGameTiming>().CurTime;
+        SpriteSpecifier.Rsi backgroundRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "background");
+        SpriteSpecifier.Rsi defibbableRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable");
+        SpriteSpecifier.Rsi defibbableRsi2 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable2");
+        SpriteSpecifier.Rsi defibbableRsi3 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable3");
+        SpriteSpecifier.Rsi defibbableRsi4 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable4");
+        SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "undefibbable");
+        SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "xenoleader");
         Texture background = system.Frame0(backgroundRsi);
 
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
@@ -446,7 +509,7 @@ public sealed partial class TacticalMapControl : TextureRect
         handle.DrawTextureRect(Texture, textureRect);
 
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
-        DrawBlips(handle, system, background, defibbableRsi, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale);
+        DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawLabels(handle, overlayScale, actualTopLeft);
@@ -479,8 +542,8 @@ public sealed partial class TacticalMapControl : TextureRect
     }
 
     private void DrawBlips(DrawingHandleScreen handle, SpriteSystem system, Texture background,
-        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi undefibbableRsi,
-        SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale)
+        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi defibbableRsi2, SpriteSpecifier.Rsi defibbableRsi3, SpriteSpecifier.Rsi defibbableRsi4,
+        SpriteSpecifier.Rsi undefibbableRsi, SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale, TimeSpan curTime)
     {
         if (_blips == null)
             return;
@@ -491,21 +554,23 @@ public sealed partial class TacticalMapControl : TextureRect
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
-            handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
-            handle.DrawTextureRect(system.Frame0(blip.Image), rect);
+            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
 
             if (blip.HiveLeader)
-                handle.DrawTextureRect(system.Frame0(hiveLeaderRsi), rect);
+                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect);
 
-            switch (blip.Status)
+            var defibTexture = blip.Status switch
             {
-                case TacticalMapBlipStatus.Defibabble:
-                    handle.DrawTextureRect(system.Frame0(defibbableRsi), rect);
-                    break;
-                case TacticalMapBlipStatus.Undefibabble:
-                    handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
-                    break;
-            }
+                TacticalMapBlipStatus.Defibabble => defibbableRsi,
+                TacticalMapBlipStatus.Defibabble2 => defibbableRsi2,
+                TacticalMapBlipStatus.Defibabble3 => defibbableRsi3,
+                TacticalMapBlipStatus.Defibabble4 => defibbableRsi4,
+                TacticalMapBlipStatus.Undefibabble => undefibbableRsi,
+                _ => null,
+            };
+            if (defibTexture != null)
+                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
         }
     }
 
@@ -844,6 +909,7 @@ public sealed partial class TacticalMapControl : TextureRect
         _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
 
         _lastPanPosition = currentPixelPos;
+        NotifyViewChanged();
     }
 
     private void HandleDrawingMove(GUIMouseMoveEventArgs args)
@@ -913,6 +979,7 @@ public sealed partial class TacticalMapControl : TextureRect
             _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
         }
 
+        NotifyViewChanged();
         args.Handle();
     }
 

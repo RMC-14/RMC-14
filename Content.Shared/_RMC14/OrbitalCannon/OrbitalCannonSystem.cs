@@ -5,6 +5,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.GameStates;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -42,6 +43,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMortarSystem _mortar = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -528,12 +530,20 @@ public sealed class OrbitalCannonSystem : EntitySystem
             firing.FirstWarningRange = warheadComp.FirstWarningRange;
             firing.SecondWarningRange = warheadComp.SecondWarningRange;
             firing.ThirdWarningRange = warheadComp.ThirdWarningRange;
+
+            // Award intel points for specific warhead types
+            if (warheadComp.IntelPointsAwarded > 0 && _net.IsServer)
+            {
+                _intel.AddPoints(warheadComp.IntelPointsAwarded);
+            }
         }
 
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
-        _adminLog.Add(LogType.RMCOrbitalBombardment, $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}");
+
+        var logMessage = $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}";
+        _adminLog.Add(LogType.RMCOrbitalBombardment, $"{logMessage}");
 
         var ev = new OrbitalCannonLaunchEvent(cannon.Comp.FireCooldown + firing.ImpactDelay);
         RaiseLocalEvent(ref ev);

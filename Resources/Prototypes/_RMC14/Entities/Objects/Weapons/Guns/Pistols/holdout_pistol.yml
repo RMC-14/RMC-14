@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolHoldout
   name: holdout pistol
   description: A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.
@@ -71,7 +71,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol.22mm
+      - CMCartridgePistol22mm
     proto: CMCartridgePistol22mm
     capacity: 5
   - type: Sprite
@@ -103,10 +103,9 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgePistol.22mm
+    - CMCartridgePistol22mm
   - type: CartridgeAmmo
     proto: CMBulletPistol22mm
-
 
 - type: Tag
   id: RMCMagazinePistolHoldout

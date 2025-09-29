@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
@@ -334,8 +335,14 @@ namespace Content.Client.Actions
 
         private void OnEntityTargetAttempt(Entity<EntityTargetActionComponent> ent, ref ActionTargetAttemptEvent args)
         {
-            if (args.Handled || args.Input.EntityUid is not { Valid: true } entity)
+            if (args.Handled)
                 return;
+
+            if (args.Input.EntityUid is not { Valid: true } entity)
+            {
+                EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(ent))); // RMC14
+                return;
+            }
 
             // let world target component handle it
             var (uid, comp) = ent;

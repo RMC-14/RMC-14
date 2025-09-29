@@ -83,7 +83,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#b2bdc4"
     - state: supply_box_flashlight
-      color: "#e0d5c2"
+      color: "#887b67"
     - state: supply_lid_closed
       map: [ "lid" ]
       color: "#887b67"

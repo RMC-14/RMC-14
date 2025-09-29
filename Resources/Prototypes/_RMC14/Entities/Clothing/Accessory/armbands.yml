@@ -125,6 +125,12 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/mp_armband.rsi
       state: armband
 
+- type: entity
+  parent: RMCMPArmband
+  id: RMCSecurityArmband
+  name: Officer armband
+  description: An armband worn by Colony law enforcement officers.
+
 # Nurse
 - type: entity
   parent: RMCArmbandBase

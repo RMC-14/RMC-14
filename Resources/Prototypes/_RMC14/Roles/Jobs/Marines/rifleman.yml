@@ -8,6 +8,7 @@
   dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   ranks:
     RMCRankLanceCorporal:
@@ -23,6 +24,7 @@
   - Rifleman
   hasIcon: false
   roleWeight: 1
+  displayWeight: 0
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,13 +33,14 @@
         RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: CMVendorUser
+      id: CMRifleman
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
 
 - type: startingGear

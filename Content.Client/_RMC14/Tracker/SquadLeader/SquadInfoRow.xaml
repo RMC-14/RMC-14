@@ -5,7 +5,10 @@
     Orientation="Horizontal" HorizontalExpand="True">
     <PanelContainer HorizontalExpand="True" MinWidth="64">
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+            <graphics:StyleBoxFlat 
+                BorderColor="#2A2A2A" 
+                BorderThickness="0 0 1 0" 
+                BackgroundColor="#1A1A1A" />
         </PanelContainer.PanelOverride>
         <BoxContainer Orientation="Horizontal">
             <Control HorizontalExpand="True" />
@@ -18,23 +21,27 @@
     </PanelContainer>
     <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="9">
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+            <graphics:StyleBoxFlat 
+                BorderColor="#2A2A2A" 
+                BorderThickness="0 0 1 0" 
+                BackgroundColor="#1A1A1A" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="9"
-                      Margin="2">
-            <Control HorizontalExpand="True" />
+        <BoxContainer Orientation="Horizontal" Margin="4 2">
             <RichTextLabel Name="NameLabel" Access="Public" />
-            <Control HorizontalExpand="True" />
         </BoxContainer>
     </PanelContainer>
-    <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="3">
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
-        </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="3">
-            <Control HorizontalExpand="True" />
-            <BoxContainer Name="ActionsContainer" Access="Public" Orientation="Horizontal" />
-            <Control HorizontalExpand="True" />
-        </BoxContainer>
-    </PanelContainer>
+<PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="3">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat 
+            BackgroundColor="#1A1A1A" />
+    </PanelContainer.PanelOverride>
+    <BoxContainer Name="ActionsContainer" 
+                 Access="Public" 
+                 Orientation="Horizontal" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Center"
+                 Margin="4 0">
+        <Control HorizontalExpand="True" />
+    </BoxContainer>
+</PanelContainer>
 </controls:SquadInfoRow>

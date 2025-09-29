@@ -148,7 +148,7 @@
     suffix: false
   - type: IgnorePredictionHide
   - type: RMCLoreExaminable
-    content: This incendiary rocket uses an experimental chemical designated 'R-189' by the SPP. It is designed to melt through fortifications and bunkers but is most commonly used in an anti-personnel role due to over-issuing and the tempeartures after use in its intended role leaving behind a cloud of super-heated air, preventing troops' advance.
+    content: rmc-lore-examinable-hjra-12-extreme-intensity-incendiary-rocket
 
 - type: entity
   parent: RMCProjectileRocket84mmAntiArmor

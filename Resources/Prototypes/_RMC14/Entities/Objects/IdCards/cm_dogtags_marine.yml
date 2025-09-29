@@ -88,3 +88,70 @@
   parent: [ RMCIDCardStandardDogtagHidden, CMDogtagWeaponsSpecialist ]
   id: RMCDogtagWeaponsSpecialistHidden
   categories: [ HideSpawnMenu ]
+
+# PVE
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagPVEHospitalCorpsman
+  name: Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMPVEHospitalCorpsman
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagPVEHospitalCorpsman ]
+  id: RMCDogtagPVEHospitalCorpsmanHidden
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagPVERifleman
+  name: Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMPVERifleman
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagPVERifleman ]
+  id: RMCDogtagPVERiflemanHidden
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagPVESmartGunOperator
+  name: Smart Gun Operator's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMPVESmartGunOperator
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagPVESmartGunOperator ]
+  id: RMCDogtagPVESmartGunOperatorHidden
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagPVESquadLeader
+  name: Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMPVESquadLeader
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagPVESquadLeader ]
+  id: RMCDogtagPVESquadLeaderHidden
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagPVESectionSergeant
+  name: Section Sergeant's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMPVESectionSergeant
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagPVESectionSergeant ]
+  id: RMCDogtagPVESSectionSergeantHidden
+  categories: [ HideSpawnMenu ]
