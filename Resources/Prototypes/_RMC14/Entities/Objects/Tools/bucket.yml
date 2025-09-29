@@ -135,3 +135,41 @@
     - 240
     - 300
     - 500
+
+- type: entity
+  parent: RMCBucketJanitorial
+  id: RMCReagentJug
+  name: reagent jug
+  description: A large jug made of non-reactive plastic, capable of carrying large amounts of diverse chemicals to wherever they are needed. Holds 500 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/reagentjug.rsi
+    layers:
+    - state: reagentjug
+    - map: [ "enum.SolutionContainerLayers.Fill" ]
+      state: reagentjug-1
+      visible: false
+    - state: lid_reagentjug
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Medical/reagentjug.rsi
+    size: Normal
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: reagentjug-
+    inHandsMaxFillLevels: 5
+    inHandsFillBaseName: -fill-
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
