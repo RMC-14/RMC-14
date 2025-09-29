@@ -20,11 +20,12 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      takeOne: CMHandheldDefense
+      choices:  { CMHandheldDefense : 1 }
       entries:
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
+        recommended: true
       - id: RMCTesla
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
