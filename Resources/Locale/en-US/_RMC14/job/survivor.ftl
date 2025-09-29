@@ -273,16 +273,16 @@ rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
 # CLF SURVIVORS
 
 rmc-job-name-clf-survivor-soldier = CLF Guerilla
-rmc-job-prefix-clf-survivor-soldier = CLF GRL
+rmc-job-prefix-clf-survivor-soldier = GRL
 
 rmc-job-name-clf-survivor-medic = CLF Field Medic
-rmc-job-prefix-clf-survivor-medic = CLF MED
+rmc-job-prefix-clf-survivor-medic = MED
 
 rmc-job-name-clf-survivor-engineer = CLF Field Technician
-rmc-job-prefix-clf-survivor-engineer = CLF TECH
+rmc-job-prefix-clf-survivor-engineer = TECH
 
 rmc-job-name-clf-survivor-commander = CLF Cell Leader
-rmc-job-prefix-clf-survivor-commander = CLF LDR
+rmc-job-prefix-clf-survivor-commander = LDR
 
 rmc-job-greeting-clf-survivor = You are a CLF member running a smuggling operation!
 
