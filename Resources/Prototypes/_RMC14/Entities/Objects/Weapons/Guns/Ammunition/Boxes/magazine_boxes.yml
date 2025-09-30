@@ -879,9 +879,6 @@
   id: RMCBoxMagazineRifleType71Empty
   name: magazine box (Type 71 x 10)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleType71Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -969,15 +966,12 @@
         tags:
         - RMCMagazineRifleType71AP
 
-# Type99
+# Type 88
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleType88Empty
   name: magazine box (Type 88 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleType88Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -1538,9 +1532,6 @@
   id: RMCBoxMagazinePistolType73Empty
   name: magazine box (Type 73 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolType73Empty
   - type: Sprite
     layers:
     - state: pistol_box
@@ -1584,9 +1575,6 @@
   id: RMCBoxMagazinePistolTypeNP92Empty
   name: magazine box (NP92 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolTypeNP92Empty
   - type: Sprite
     layers:
     - state: pistol_box

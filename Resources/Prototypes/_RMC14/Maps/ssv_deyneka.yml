@@ -6,7 +6,7 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    UNSEndeavour:
+    SSVDeyneka:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
@@ -20,5 +20,5 @@
             RMCSPPSectionLeadPVE: [1, 1]
             RMCSPPSquadLeadPVE: [2, 2]
             RMCSPPHeavyGunnerPVE: [2, 2]
-            RMCSPPCorpsmanPVE: [2, 2]
-            RMCSPPRiflemanPVE: [ 14, 14 ]
+            RMCSPPCorpsmanPVE: [4, 4]
+            RMCSPPRiflemanPVE: [ 20, 20 ]
