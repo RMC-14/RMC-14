@@ -6,8 +6,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: ArmorHelmetM10
-    - id: CMArmorM3Medium
+    - id: RNMCHeadHunter
+    - id: RNMCArmorHunterLight
+    - id: RNMCBeltHunter
     - id: RNMCBoxBulletElephant
       amount: 1
     - id: CMBackpackSniper

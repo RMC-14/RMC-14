@@ -180,7 +180,6 @@
         tags:
         - RMCMagazineRifleM54CMK1Incendiary
 
-# Start of RNMC-14 modifications
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RNMCBoxBulletElephantEmpty
@@ -202,7 +201,7 @@
       map: [ "lid" ]
       color: "#696969"
   - type: CMItemSlots
-    count: 15
+    count: 20
     slot:
       whitelist:
         tags:
@@ -215,9 +214,8 @@
   components:
   - type: CMItemSlots
     startingItem: RNMCBulletElephant
-    count: 15
+    count: 20
     slot:
       whitelist:
         tags:
         - RNMCBulletElephant
-# End of RNMC-14 modifications

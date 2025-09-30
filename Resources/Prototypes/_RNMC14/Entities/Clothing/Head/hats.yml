@@ -1,0 +1,20 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RNMCHeadHunter
+  name: hunter's hat
+  description: A brutal hat. Made just for show-offs. Does not protect a head from bullet.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Head/Hats/hunter.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Head/Hats/hunter.rsi
+  - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
