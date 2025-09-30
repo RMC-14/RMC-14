@@ -43,6 +43,15 @@
     whitelist:
       components:
       - SniperWhitelist
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.0100, 0.100
   - type: GunRequiresWield
   - type: Corrodible
     isCorrodible: false
@@ -90,8 +99,8 @@
   - type: CMArmorPiercing
     amount: 65
   - type: RMCStunOnHit
-    maxRange: 3
-    stunTime: 0.5
+    maxRange: 4
+    stunTime: 0.6
   - type: RMCPenetratingProjectile
   - type: RMCStoppingPower
   - type: AimedShotEffect

@@ -1,0 +1,17 @@
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RNMCBeltHunter
+  name: hunter rig
+  description: A hunting rig made specifically for storing high-caliber cartridges and no more.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Belt/hunter.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Belt/hunter.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,19,1
+    whitelist:
+      tags:
+      - RNMCBulletElephant

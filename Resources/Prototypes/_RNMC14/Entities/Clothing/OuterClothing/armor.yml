@@ -1,0 +1,21 @@
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RNMCArmorHunterLight
+  name: hunter's jacket
+  description: An ordinary jacket designed for different types of climate. It is equipped with armored plates inside, protecting the user from damage.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/OuterClothing/Armor/hunter.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 15
+    explosionArmor: 10
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.800
+    sprintModifier: 0.800
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
