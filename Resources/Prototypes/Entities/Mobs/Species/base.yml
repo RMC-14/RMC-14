@@ -239,6 +239,7 @@
     - AnomalyHost
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
+  - type: RMCMobCollision
 
 - type: entity
   save: false
