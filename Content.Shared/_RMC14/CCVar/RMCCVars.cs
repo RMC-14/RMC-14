@@ -319,6 +319,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<int> RMCRecommendationMaxLength =
+        CVarDef.Create("rmc.commendation_max_length", 500, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
     /// <summary>
     /// Whether the no EORG popup is enabled.
     /// </summary>

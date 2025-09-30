@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Commendations;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedCommendationSystem))]
+[Access(typeof(SharedAwardRecommendationSystem), typeof(SharedCommendationSystem))]
 public sealed partial class RMCAwardRecommendationComponent : Component
 {
     /// <summary>
