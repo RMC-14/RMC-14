@@ -103,7 +103,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
         var start = xeno.Owner.ToCoordinates();
         var end = GetCoordinates(args.Coordinates);
-        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, out var blocker);
+        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, xeno.Comp.Range, out var blocker);
         var active = EnsureComp<ActiveAcidSprayingComponent>(xeno);
         active.Blocker = blocker;
         active.Acid = xeno.Comp.Acid;

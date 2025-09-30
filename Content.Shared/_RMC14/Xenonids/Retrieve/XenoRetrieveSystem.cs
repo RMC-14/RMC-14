@@ -109,7 +109,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
 
             xeno.Comp.Visuals.Clear();
 
-            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero, out _))
+            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero, xeno.Comp.Range, out _))
             {
                 xeno.Comp.Visuals.Add(Spawn(xeno.Comp.Visual, tile.Coordinates));
             }

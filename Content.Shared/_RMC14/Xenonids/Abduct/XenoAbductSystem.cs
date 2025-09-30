@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -61,8 +62,8 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
         CleanUpTiles(xeno);
 
-        var tiles = _line.DrawLine(xeno.Owner.ToCoordinates(), args.Target, TimeSpan.Zero, out _);
-
+        var range = CompOrNull<TargetActionComponent>(args.Action)?.Range;
+        var tiles = _line.DrawLine(xeno.Owner.ToCoordinates(), args.Target, TimeSpan.Zero, range, out _);
         if (tiles.Count == 0)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-abduct-no-room"), xeno, PopupType.SmallCaution);
@@ -214,7 +215,6 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
         xeno.Comp.Tiles.Clear();
         Dirty(xeno);
-
     }
 
     private void DoCooldown(Entity<XenoAbductComponent> xeno)

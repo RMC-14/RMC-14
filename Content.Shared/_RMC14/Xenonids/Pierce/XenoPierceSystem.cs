@@ -53,9 +53,7 @@ public sealed class XenoPierceSystem : EntitySystem
             return;
 
         var target = args.Target;
-
         var xenoCoords = _transform.GetMoverCoordinates(xeno);
-
         if (!args.Target.TryDistance(EntityManager, xenoCoords, out var dis))
             return;
 
@@ -66,7 +64,7 @@ public sealed class XenoPierceSystem : EntitySystem
             target = xenoCoords.WithPosition(xenoCoords.Position + newTile);
         }
 
-        var tiles = _line.DrawLine(xenoCoords, target, TimeSpan.Zero, out _);
+        var tiles = _line.DrawLine(xenoCoords, target, TimeSpan.Zero, xeno.Comp.Range.Float(), out _);
 
         if (tiles.Count == 0)
             return;
