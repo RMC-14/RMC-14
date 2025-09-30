@@ -706,6 +706,11 @@ namespace Content.Shared.Interaction
             var ev = new InRangeOverrideEvent(origin, other);
             RaiseLocalEvent(origin, ref ev);
 
+            if (ev.Handled)
+            {
+                return ev.InRange;
+            }
+
             // RMC14
             var otherCoordinates = other.Comp.Coordinates;
             var otherAngle = other.Comp.LocalRotation;
