@@ -41,6 +41,7 @@ public sealed class DeployableItemSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
     private static readonly ProtoId<TagPrototype> StairsTag = "RMCStairs";
+    private static readonly ProtoId<TagPrototype> CarpetTag = "Carpet";
 
     public override void Initialize()
     {
@@ -141,7 +142,7 @@ public sealed class DeployableItemSystem : EntitySystem
         if (!args.CanReach)
             return;
 
-        if (args.Target != null && !_tag.HasAnyTag(args.Target.Value, CatwalkTag, StairsTag))
+        if (args.Target != null && !_tag.HasAnyTag(args.Target.Value, CatwalkTag, StairsTag, CarpetTag))
             return;
 
         args.Handled = true;
