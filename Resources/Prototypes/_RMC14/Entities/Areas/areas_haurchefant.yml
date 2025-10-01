@@ -66,6 +66,11 @@
   name: Synthetic Closet
 
 - type: entity
+  parent: RMCAreaHFEngineering
+  id: RMCAreaHFAICore
+  name: AI Core
+
+- type: entity
   parent: RMCAreaHF
   id: RMCAreaHFDisposals
   name: Disposals
