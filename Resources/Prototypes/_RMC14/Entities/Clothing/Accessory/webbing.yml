@@ -660,6 +660,16 @@
 
 - type: entity
   parent: CMWebbingBlack
+  id: RMCWebbingPMCWhiteout
+  suffix: PMC, Whiteout, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeBlastM12
+      amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
   id: RMCWebbingBuckshot
   suffix: Buckshot, Filled
   components:

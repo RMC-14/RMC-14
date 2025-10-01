@@ -31,7 +31,6 @@
         RMCSkillSmartGun: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
   hidden: true
@@ -84,11 +83,11 @@
     ears: RMCHeadsetDistressPMC
     jumpsuit: RMCJumpsuitVeteranPMCGunner
     outerClothing: CMArmorM4PMCSmartGunHarness
-    gloves: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteran
     head: ArmorHelmetPMCGunner
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
-    suitstorage: RMCSmartGunWhiteOut
+    mask: RMCMaskCoifPMC
+    suitstorage: RMCSmartGunPMC
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchDrumPMCFill
     belt: RMCBeltSmartGunOperatorPistolPMCFilled
