@@ -96,7 +96,7 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
   - type: Storage
     grid:
-    - 0,0,20,1 # 21, Satchel but with backpack capacity
+    - 0,0,14,1 # 15 slots
   - type: ClothingRequireEquipped
     autoUnequip: true
     whitelist:
