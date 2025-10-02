@@ -1301,9 +1301,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.HasKey("PlayerId", "Id")
                         .HasName("PK_rmc_player_action_order");
 
-                    b.HasIndex("PlayerId")
-                        .IsUnique();
-
                     b.ToTable("rmc_player_action_order", (string)null);
                 });
 
@@ -2285,9 +2282,9 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
-                        .WithOne("ActionOrder")
-                        .HasForeignKey("Content.Server.Database.RMCPlayerActionOrder", "PlayerId")
-                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .WithMany("ActionOrder")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_rmc_player_action_order_player_player_id");
@@ -2568,8 +2565,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
-                    b.Navigation("ActionOrder")
-                        .IsRequired();
+                    b.Navigation("ActionOrder");
 
                     b.Navigation("AdminLogs");
 

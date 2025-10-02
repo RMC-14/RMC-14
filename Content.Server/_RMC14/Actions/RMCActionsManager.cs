@@ -22,6 +22,7 @@ public sealed class RMCActionsManager : IPostInjectInit
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
+        // TODO RMC14 read the migration.yml file to map old ids to new ones if necessary, otherwise ordering data is lost
         var orders = await _db.GetAllActionOrders(player.UserId);
         orders ??= new Dictionary<string, List<string>>();
 

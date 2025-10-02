@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Content.Server.Database.Migrations.Sqlite
+namespace Content.Server.Database.Migrations.Postgres
 {
     /// <inheritdoc />
     public partial class RMCPlayerActionOrder : Migration
@@ -15,9 +16,9 @@ namespace Content.Server.Database.Migrations.Sqlite
                 name: "rmc_player_action_order",
                 columns: table => new
                 {
-                    player_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    rmc_player_action_order_id = table.Column<string>(type: "TEXT", nullable: false),
-                    actions = table.Column<string>(type: "TEXT", nullable: false)
+                    player_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    rmc_player_action_order_id = table.Column<string>(type: "text", nullable: false),
+                    actions = table.Column<List<string>>(type: "text[]", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,12 +30,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_rmc_player_action_order_player_id",
-                table: "rmc_player_action_order",
-                column: "player_id",
-                unique: true);
         }
 
         /// <inheritdoc />

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Client.Actions;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -29,6 +30,40 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         RaiseNetworkEvent(ev);
     }
 
+    private void SortDefault(EntityUid player)
+    {
+        if (!TryComp(player, out XenoComponent? xeno))
+            return;
+
+        foreach (var (_, actionId) in xeno.Actions)
+        {
+            if (!actionId.IsValid())
+                return;
+        }
+
+        _sortEnt = player;
+
+        var actions = new List<Entity<ActionComponent>>();
+        foreach (var action in _actions.GetActions(player))
+        {
+            actions.Add(action);
+        }
+
+        var xenoActions = xeno.Actions.Values.ToList();
+        actions.Sort((a, b) =>
+        {
+            var aXeno = xenoActions.FindIndex(e => e == a.Owner);
+            var bXeno = xenoActions.FindIndex(e => e == b.Owner);
+            if (aXeno != -1 && bXeno != -1)
+                return aXeno - bXeno;
+
+            return ActionsSystem.ActionComparer((a, a), (b, b));
+        });
+
+        var assignments = actions.Select((t, i) => new ActionsSystem.SlotAssignment(0, (byte) i, t)).ToList();
+        _actions.SetAssignments(assignments);
+    }
+
     public override void Update(float frameTime)
     {
         if (_player.LocalEntity is not { } player)
@@ -40,8 +75,9 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         _sortEnt = null;
 
         if (!TryComp(player, out RMCActionOrderComponent? orderComp) ||
-            orderComp.Order is not { } order)
+            orderComp.Order is not { Length: > 0 } order)
         {
+            SortDefault(player);
             return;
         }
 

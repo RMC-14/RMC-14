@@ -491,9 +491,9 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<RMCPlayerActionOrder>()
                 .HasOne(a => a.Player)
-                .WithOne(p => p.ActionOrder)
-                .HasForeignKey<RMCPlayerActionOrder>(a => a.PlayerId)
-                .HasPrincipalKey<Player>(p => p.UserId)
+                .WithMany(p => p.ActionOrder)
+                .HasForeignKey(a => a.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 
@@ -735,7 +735,7 @@ namespace Content.Server.Database
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
-        public RMCPlayerActionOrder ActionOrder { get; set; } = default!;
+        public List<RMCPlayerActionOrder> ActionOrder { get; set; } = default!;
     }
 
     [Table("whitelist")]
