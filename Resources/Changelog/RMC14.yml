@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed corporate colonist headset having UNMC faction HUD.
-    type: Fix
-  id: 1877
-  time: '2025-06-22T05:26:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6718
-- author: monomethylhydrazine
-  changes:
-  - message: added M1984 AP mags to dropship crew weapon vendors.
-    type: Add
-  id: 1878
-  time: '2025-06-22T05:28:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6719
 - author: Vermidia
   changes:
   - message: Fixed vanguard cleave abilities not being weaker without shield.
@@ -4474,5 +4460,21 @@
   id: 2376
   time: '2025-09-24T09:30:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7932
+- author: BreakpointDebug1234
+  changes:
+  - message: Updated visuals for SGO guide
+    type: Tweak
+  - message: Military Police guide by WithinElysium
+    type: Add
+  id: 2377
+  time: '2025-10-02T17:27:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7750
+- author: CatAndHats
+  changes:
+  - message: Squad Leader vendor m34 pyrotechnician support kit now has a description
+    type: Fix
+  id: 2378
+  time: '2025-10-02T17:30:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8011
 Name: RMC14
 Order: -1
