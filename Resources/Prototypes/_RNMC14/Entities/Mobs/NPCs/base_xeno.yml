@@ -6,6 +6,7 @@
   description: Remains of something alien. Yuck.
   components:
   - type: Transform
+    anchored: true
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -52,6 +53,7 @@
   description: Remains of something big and alien. Yuck.
   components:
   - type: Transform
+    anchored: true
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -60,7 +62,7 @@
     layers:
     - state: gib
   - type: TimedDespawn #do this shit by hand because of fucking course.
-    lifetime: 0.9
+    lifetime: 0.8
   - type: SpawnOnDespawn
     prototype: RNMCXenoGibbedLarge
   - type: Fixtures

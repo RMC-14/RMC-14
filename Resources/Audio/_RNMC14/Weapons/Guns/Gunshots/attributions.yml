@@ -1,0 +1,19 @@
+- files: ["gun_smartgun1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13-pve"
+  source: "https://github.com/cmss13-devs/cmss13-pve/blob/master/sound/weapons/gun_smartgun1.ogg"
+
+- files: ["gun_smartgun2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13-pve"
+  source: "https://github.com/cmss13-devs/cmss13-pve/blob/master/sound/weapons/gun_smartgun2.ogg"
+
+- files: ["gun_smartgun3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13-pve"
+  source: "https://github.com/cmss13-devs/cmss13-pve/blob/master/sound/weapons/gun_smartgun3.ogg"
+
+- files: ["gun_smartgun4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13-pve"
+  source: "https://github.com/cmss13-devs/cmss13-pve/blob/master/sound/weapons/gun_smartgun4.ogg"

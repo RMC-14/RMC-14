@@ -6,21 +6,4 @@
     map: /Maps/_RnMC14/jungle.yml
     camouflage: Jungle
     announcement: "All systems online. Location below: LV-624. No nearby colonies detected."
-    survivorJobInserts:
-      CMSurvivor:
-      - CMSurvivor: 0
-      - CMSurvivorPriest: 0
-      CMSurvivorCorporate:
-      - CMSurvivorLV624CorporateLiaison: 0
-      CMSurvivorDoctor:
-      - CMSurvivorLV624MedicalTechnician: 0
-      CMSurvivorEngineer:
-      - CMSurvivorLV624Engineer: 0
-      - CMSurvivorLV624CargoTechnician: 0
-      CMSurvivorSecurity:
-      - CMSurvivorGoon: 0
-      - CMSurvivorCMBDeputy: 0
-      - CMSurvivorLV624SecurityGuard: 0
-      CMSurvivorScientist:
-      - CMSurvivorLV624Archeologist: 0
     minPlayers: 1337 # admin only

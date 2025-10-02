@@ -126,7 +126,7 @@
       gun:
         whitelist:
           tags:
-          - RMCSentry
+          - RMCSentryPVE
 
 # Misc
 

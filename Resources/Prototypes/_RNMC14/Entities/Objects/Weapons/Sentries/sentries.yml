@@ -22,5 +22,17 @@
     - RMCSentry
   - type: Gun
     fireRate: 8
-    soundGunshot:
-      collection: CMM54CShoot
+    soundGunshot: /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun1.ogg
+  - type: HTN
+    rootTask:
+      task: RMCSentryCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/_RNMC14/Effects/twobeep.ogg
+      VisionRadius: !type:Single
+        6.0
+      AggroVisionRadius: !type:Single
+        6.0
+
+- type: Tag
+  id: RMCSentryPVE
