@@ -41,6 +41,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: ViewIntelObjectives
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
   hidden: true
@@ -50,7 +51,7 @@
   equipment:
     head: RMCHeadRoyalBeretLead
     eyes: RMCGlassesMedicalHUDGlasses
-    ears: RMCHeadsetRoyalMarine
+    ears: RMCHeadsetRoyalMarineOfficer
     jumpsuit: RMCJumpsuitMarineRoyalTeamlead # TOOD RMC14 royal marines commando uniform
     outerClothing: RMCArmorRoyalPaddedFilledCO
     gloves: RMCHandsVeteranRoyalMarine

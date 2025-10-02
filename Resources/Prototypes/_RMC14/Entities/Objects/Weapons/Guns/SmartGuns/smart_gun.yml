@@ -290,7 +290,7 @@
   parent: RMCSmartGun
   id: RMCSmartGunRoyal
   name: ML66C 'royal' smart gun
-  description: The actual firearm in the 2-piece ML66C Smart Gun System. This Variant is used by the Three Sun Empires Royal Marines Commando units. You may toggle firing restrictions by using a special action.
+  description: The actual firearm in the 2-piece ML66C Smart Gun System. This variant is used by the Three Sun Empires Royal Marines Commando units. You may toggle firing restrictions by using a special action.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_royal.rsi
