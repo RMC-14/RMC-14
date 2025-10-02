@@ -2,7 +2,7 @@
   parent: RMCHeadsetIconsTSE
   id: RMCHeadsetRoyalMarine
   name: royal marine headset
-  description: A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets.
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
   components:
   - type: Sprite
     state: vai_headset
@@ -19,7 +19,7 @@
   parent: RMCHeadsetIconsTSE
   id: RMCHeadsetRoyalMarineLeader
   name: royal marine leader's headset
-  description: A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets. 
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
   components:
   - type: Sprite
     state: vai_headset
@@ -37,7 +37,7 @@
   parent: RMCHeadsetIconsTSE
   id: RMCHeadsetRoyalMarineOfficer
   name: royal marine officer's headset
-  description: A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
   components:
   - type: Sprite
     state: vai_headset
