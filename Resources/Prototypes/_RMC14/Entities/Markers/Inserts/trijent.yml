@@ -1,0 +1,68 @@
+﻿# Trijent
+- type: entity
+  abstract: true
+  parent: RMCMapInsertBase
+  id: RMCMapInsertTrijentBase
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+# Standalones
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentGreenBridge
+  name: Green River New Bridge
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
+      probability: 0.1
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentPurpleBridge
+  name: Purple River New Bridge
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
+      probability: 0.1
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCaveInEngineering
+  name: Cave in Engineering
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
+      probability: 0.1
+
+# Sprinkles
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentTempleIntact
+  name: Temple Intact
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/temple_intact.yml"
+      probability: 0.1
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentShipGone
+  name: Ship Gone
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/ship_gone.yml"
+      probability: 0.15

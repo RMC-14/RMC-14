@@ -1,0 +1,69 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMPVESquadLeader
+  name: cm-job-name-squad-leader
+  description: cm-job-description-fireteam-leader
+  playTimeTracker: CMJobPVESquadLeader
+  ranks:
+    RMCRankSergeant: []
+  spawnMenuRoleName: Sun Rider Squad Leader (PVE)
+  startingGear: RMCGearPVESquadLeader
+  dummyStartingGear: CMGearFireteamLeaderEquipped
+  icon: "CMJobIconFireteamLeader"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-secserg
+  marineAuthorityLevel: 1
+  accessGroups:
+  - FTL
+  overwatchSortPriority: -5
+  overwatchRoleName: Squad Leaders
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillPilot: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tl
+    - type: RMCTrackable
+  hidden: true
+
+- type: playTimeTracker
+  id: CMJobPVESquadLeader
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearPVESquadLeader
+  equipment:
+    id: RMCDogtagPVESquadLeader
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVESquadLeader
+  name: PVE squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPVESquadLeader
+  - type: Sprite
+    state: tl_spawn

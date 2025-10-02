@@ -12,6 +12,8 @@ using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Wieldable.Components;
+using Content.Shared.Damage.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -149,12 +151,20 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     //Same as stamina code minus eveents
     private void OnStaminaOnHit(Entity<RMCStaminaDamageOnHitComponent> ent, ref MeleeHitEvent args)
     {
+        if (ent.Comp.RequiresWield && TryComp<WieldableComponent>(ent.Owner, out var wieldable) && !wieldable.Wielded)
+            return;
+
         if (!args.IsHit ||
             !args.HitEntities.Any() ||
             ent.Comp.Damage <= 0f)
         {
             return;
         }
+
+        var ev = new StaminaDamageOnHitAttemptEvent();
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
+        return;
 
         var stamQuery = GetEntityQuery<RMCStaminaComponent>();
         var toHit = new List<(EntityUid Entity, RMCStaminaComponent Component)>();

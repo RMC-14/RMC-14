@@ -20,8 +20,10 @@
         !type:DamageTrigger
         damage: 3000
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        - !type:ChangeConstructionNodeBehavior
+          node: girder
+        - !type:DoActsBehavior
+          acts: ["Breakage"]
   - type: IconSmooth
     key: walls
     base: metal
@@ -44,6 +46,81 @@
   - type: IconSmooth
     key: walls
     base: wall
+
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallAlmayerDeco1
+  name: wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerDeco2
+  components:
+  - type: Sprite
+    state: almayer_deco_wall1
+  - type: Icon
+    state: almayer_deco_wall1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerDeco3
+  components:
+  - type: Sprite
+    state: almayer_deco_wall2
+  - type: Icon
+    state: almayer_deco_wall2
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerDeco4
+  components:
+  - type: Sprite
+    state: almayer_deco_wall3
+  - type: Icon
+    state: almayer_deco_wall3
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerDecoElevator
+  components:
+  - type: Sprite
+    state: almayer_elevator
+  - type: Icon
+    state: almayer_elevator
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerDeco1
+  id: RMCWallAlmayerDecoFreight
+  components:
+  - type: Sprite
+    state: almayer_friegt
+  - type: Icon
+    state: almayer_friegt
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
 
 - type: entity
   parent: CMWallMetal
@@ -140,6 +217,81 @@
 
 - type: entity
   parent: CMWallReinforced
+  id: RMCWallAlmayerReinforcedDeco1
+  name: reinforced hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedDeco1
+  id: RMCWallAlmayerReinforcedDeco2
+  components:
+  - type: Sprite
+    state: almayer_deco_wall1
+  - type: Icon
+    state: almayer_deco_wall1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedDeco1
+  id: RMCWallAlmayerReinforcedDeco3
+  components:
+  - type: Sprite
+    state: almayer_deco_wall2
+  - type: Icon
+    state: almayer_deco_wall2
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedDeco1
+  id: RMCWallAlmayerReinforcedDeco4
+  components:
+  - type: Sprite
+    state: almayer_deco_wall3
+  - type: Icon
+    state: almayer_deco_wall3
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedDeco1
+  id: RMCWallAlmayerReinforcedDecoElevator
+  components:
+  - type: Sprite
+    state: almayer_elevator
+  - type: Icon
+    state: almayer_elevator
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedDeco1
+  id: RMCWallAlmayerReinforcedDecoFreight
+  components:
+  - type: Sprite
+    state: almayer_friegt
+  - type: Icon
+    state: almayer_friegt
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: CMWallReinforced
   id: CMWallReinforcedAlmayerWhite
   name: reinforced hull
   description: A reinforced metal wall used to separate rooms and make up the ship.
@@ -200,6 +352,81 @@
   - type: IconSmooth
     key: walls
     base: wall
+
+- type: entity
+  parent: CMWallReinforcedHeavyAlmayer
+  id: RMCWallAlmayerReinforcedHeavyDeco1
+  name: heavy reinforced hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_black.rsi
+    state: almayer_deco_wall0
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyDeco2
+  components:
+  - type: Sprite
+    state: almayer_deco_wall1
+  - type: Icon
+    state: almayer_deco_wall1
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyDeco3
+  components:
+  - type: Sprite
+    state: almayer_deco_wall2
+  - type: Icon
+    state: almayer_deco_wall2
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyDeco4
+  components:
+  - type: Sprite
+    state: almayer_deco_wall3
+  - type: Icon
+    state: almayer_deco_wall3
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyDecoElevator
+  components:
+  - type: Sprite
+    state: almayer_elevator
+  - type: Icon
+    state: almayer_elevator
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: RMCWallAlmayerReinforcedHeavyDeco1
+  id: RMCWallAlmayerReinforcedHeavyDecoFreight
+  components:
+  - type: Sprite
+    state: almayer_friegt
+  - type: Icon
+    state: almayer_friegt
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
 
 - type: entity
   parent: CMWallReinforcedHeavy
@@ -591,10 +818,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/elevator.rsi
-    state: wall_freight
+    state: wall_research
   - type: Icon
     sprite: _RMC14/Structures/Walls/elevator.rsi
-    state: wall_freight
+    state: wall_research
 
 - type: entity
   parent: RMCWallElevatorNoConnect1

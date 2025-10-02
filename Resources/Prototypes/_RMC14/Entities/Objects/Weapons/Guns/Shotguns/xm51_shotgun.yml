@@ -77,6 +77,7 @@
           - RMCAttachmentAngledGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentFlashlightGrip
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -104,6 +105,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+  - type: RMCGunChamber
+    enabled: false
 
 - type: Tag
   id: RMCWeaponShotgunXM51

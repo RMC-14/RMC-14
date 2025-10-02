@@ -22,10 +22,11 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
-      - id: RMCTesla
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
+      - id: RMCTesla
+      - id: RMCSentryFire
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
       entries:
@@ -108,8 +109,8 @@
       #   points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 3
+      - id: RMCMagazinePistolM1984HP
+        points: 3
       - id: RMCMagazinePistolM1984AP
         points: 3
       - id: CMMagazinePistolMK80
@@ -130,7 +131,7 @@
         points: 12
       - id: RMCCaseFlamer
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
@@ -214,9 +215,9 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
@@ -255,7 +256,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -296,8 +297,12 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)

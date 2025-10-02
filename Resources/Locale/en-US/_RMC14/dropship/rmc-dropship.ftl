@@ -1,5 +1,6 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
+rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
 
 rmc-dropship-weapons-title = Weapons Console
 
@@ -39,6 +40,10 @@ rmc-dropship-weapons-maps = MAPS
 rmc-dropship-weapons-cams = CAMS
 rmc-dropship-weapons-cancel = CANCEL
 rmc-dropship-weapons-exit = EXIT
+rmc-dropship-weapons-lock = LOCK
+rmc-dropship-weapons-clear = CLEAR
+rmc-dropship-weapons-enable = ENABLE
+rmc-dropship-weapons-disable = DISABLE
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -83,3 +88,15 @@ rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait
 
 rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
 rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+
+rmc-dropship-paradrop-target-screen-text = HPU-1 Paradrop Deployment System
+    {$hasTarget}
+
+rmc-dropship-paradrop-target-screen-target-none = No locked target found.
+    Paradropping not available.
+
+rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
+    Paradropping available.
+
+rmc-dropship-paradrop-lock-no-target = No target selected.
+rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.

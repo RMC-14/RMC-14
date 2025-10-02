@@ -45,8 +45,8 @@ public sealed class TackleSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TackleableComponent, CMDisarmEvent>(OnDisarmed, before: [typeof(SharedHandsSystem), typeof(StaminaSystem)]);
-        SubscribeLocalEvent<RMCDisarmableComponent, CMDisarmEvent>(OnDisarmed, before: [typeof(SharedHandsSystem), typeof(StaminaSystem)]);
+        SubscribeLocalEvent<TackleableComponent, CMDisarmEvent>(OnDisarmed, before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)]);
+        SubscribeLocalEvent<RMCDisarmableComponent, CMDisarmEvent>(OnDisarmed, before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)]);
 
         SubscribeLocalEvent<TackledRecentlyByComponent, ComponentRemove>(OnByRemove);
         SubscribeLocalEvent<TackledRecentlyByComponent, EntityTerminatingEvent>(OnByRemove);
@@ -153,7 +153,7 @@ public sealed class TackleSystem : EntitySystem
         {
             var fired = false;
 
-            foreach (var item in _hands.EnumerateHeld(target))
+            foreach (var item in _hands.EnumerateHeld(target.Owner))
             {
                 if (fired)
                     break;

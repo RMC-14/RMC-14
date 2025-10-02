@@ -3,7 +3,7 @@
   id: CMJobSurvivorArmyReservist
   name: rmc-job-name-survivor-army-reservist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorArmyReservist
+  playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPStrsh:
     - !type:RoleTimeRequirement
@@ -35,7 +35,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetArmyReservist
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -45,6 +44,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-army-reservist
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -67,20 +67,14 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorArmyReservist
-  name: people's armed police officer spawn point
+  name: army reservist spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+    job_id: CMJobSurvivorArmyReservist
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorArmyReservist
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   id: RMCGearSurvivorPresetArmyReservist

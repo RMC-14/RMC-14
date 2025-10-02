@@ -3,7 +3,7 @@
   id: CMJobSurvivorFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFireProtectionSpecialist
+  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Sorokyne Survivor)
   special:
@@ -18,7 +18,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetFireProtectionSpecialist
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -28,6 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-fire-protection-specialist
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -39,7 +39,6 @@
     back: RMCSatchelLightpack
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
-    mask: RMCMaskGasSPP
     ears: RMCHeadsetDistressSPP
   storage:
     back:
@@ -53,21 +52,16 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorFireProtectionSpecialist
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetFireProtectionSpecialist
   name: fire protection specialist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomOutfits:

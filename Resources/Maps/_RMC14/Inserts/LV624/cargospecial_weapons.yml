@@ -166,7 +166,7 @@ entities:
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot {}
-- proto: WeaponShotgunM42A2
+- proto: WeaponShotgunM42A1
   entities:
   - uid: 17
     components:

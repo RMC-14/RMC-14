@@ -222,11 +222,13 @@
         unwieldedOnly: true
       accuracyAddMult: 0.05
       scatterFlat: -4
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-laser-sight
 
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentMiniFlamethrower
-  name: mini flamethrower # TODO RMC14 intensity toggle
+  name: underbarrel flamethrower # TODO RMC14 intensity toggle
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
@@ -253,6 +255,8 @@
         - ReagentId: RMCNapalmUT
           Quantity: 40
   - type: RMCFlamerAmmoProvider
+    maxIntensity: 10
+    maxDuration: 10
   - type: RMCFlamerTank
   - type: AttachableToggleable
     userOnly: true
@@ -275,6 +279,10 @@
       state: flamethrower-on
   - type: AttachableVisuals
     offset: -0.125, 0.245
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -284,6 +292,8 @@
   components:
   - type: Sprite
     state: flamer_nozzle
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-xm-vesg-1-flamer-nozzle
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -352,6 +362,10 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: masterkey-on
   - type: AttachableVisuals
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -417,6 +431,10 @@
   - type: SolutionTransfer
     maxTransferAmount: 60
     transferAmount: 60
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -503,6 +521,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentU1GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
@@ -542,6 +564,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentMK1GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCAttachmentU1GrenadeLauncher
@@ -549,10 +575,12 @@
   name: M203 grenade launcher
   description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
   components:
-  - type: Sprite # TODO: No IFF for this launcher
+  - type: Sprite
     layers:
       - state: grenade-m203
         map: [ "enum.BreechVisuals.Open" ]
+  - type: GunIFF
+    enabled: false
   - type: BallisticAmmoProvider
     capacity: 1
   - type: ShootAtFixedPoint
@@ -579,6 +607,10 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentM203GrenadeLauncher
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -617,7 +649,8 @@
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: PointLight
     enabled: false

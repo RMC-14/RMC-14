@@ -1,27 +1,26 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Damage;
+using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
-using Content.Shared.Coordinates;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 using Robust.Shared.Player;
-using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Xenonids.Paralyzing;
-using System;
-using Content.Shared.Actions;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Shields;
 
 public sealed partial class CrusherShieldSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoShieldSystem _shield = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -43,7 +42,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
 
         args.Handled = true;
 
-        var shield = EnsureComp<XenoShieldComponent>(xeno);
+        EnsureComp<XenoShieldComponent>(xeno);
         _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Crusher, xeno.Comp.Amount);
         ApplyEffects(xeno);
 
@@ -53,10 +52,9 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-activate", ("user", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-activate-self", ("user", xeno)), xeno, xeno, PopupType.Medium);
         SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDefensiveShieldActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoDefensiveShieldActionEvent)
-                _actions.SetToggled(actionId, true);
+            _actions.SetToggled((action, action), true);
         }
     }
 
@@ -77,10 +75,9 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         if (args.Type == XenoShieldSystem.ShieldType.Crusher)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-defensive-shield-end"), ent, ent, PopupType.MediumCaution);
-            foreach (var (actionId, action) in _actions.GetActions(ent))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoDefensiveShieldActionEvent>(ent))
             {
-                if (action.BaseEvent is XenoDefensiveShieldActionEvent)
-                    _actions.SetToggled(actionId, false);
+                _actions.SetToggled(action.Owner, false);
             }
         }
     }

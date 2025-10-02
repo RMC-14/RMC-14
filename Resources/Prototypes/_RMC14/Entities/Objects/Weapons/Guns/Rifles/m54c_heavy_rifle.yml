@@ -1,7 +1,7 @@
 ﻿- type: entity
   name: M54CE2 heavy assault rifle
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleM54CE2
+  id: RMCWeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
@@ -15,7 +15,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
   - type: Tag
     tags:
-    - WeaponRifleM54CE2
+    - RMCWeaponRifleM54CE2
   - type: Gun
     shotsPerBurst: 5
     selectedMode: FullAuto
@@ -82,19 +82,26 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CE2Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM54CE2Stock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125
       rmc-aslot-rail: 0.125, 0.185
-      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-stock: -1, 0
       rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
     camouflageVariations:
@@ -211,7 +218,7 @@
       color: "#1F951F"
 
 - type: Tag
-  id: WeaponRifleM54CE2
+  id: RMCWeaponRifleM54CE2
 
 - type: Tag
   id: CMMagazineRifleM54CE2

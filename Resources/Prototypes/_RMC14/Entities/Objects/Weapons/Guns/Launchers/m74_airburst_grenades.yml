@@ -313,10 +313,28 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    intensity: 2
+    duration: 2
+  - type: Fixtures
+    fixtures:
+      projectile:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   parent: RMCBaseBullet
+  id: RMCBaseAirburstRound
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+  - type: PreventCollideWithDead
+
+- type: entity
+  parent: RMCBaseAirburstRound
   id: RMCHornetRound
   name: .22 Hornet Round
   categories: [ HideSpawnMenu ]
@@ -338,7 +356,7 @@
     amount: 25
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseAirburstRound
   id: RMCShrapnelJagged
   name: Jagged Shrapnel
   categories: [ HideSpawnMenu ]
@@ -368,7 +386,7 @@
       falloff: 33
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseAirburstRound
   id: RMCShrapnelIncendiary
   name: Flaming Shrapnel
   categories: [ HideSpawnMenu ]

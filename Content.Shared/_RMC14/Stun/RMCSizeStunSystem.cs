@@ -118,20 +118,6 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
             return;
 
-
-        // Multiply daze duration based on the size of the target
-        var dazeMultiplier = 1.0;
-        if(TryComp(args.Target, out RMCSizeComponent? targetSize))
-        {
-            if (targetSize.Size >= RMCSizes.Big)
-                dazeMultiplier = DazedMultiplierBigXeno;
-            else if (targetSize.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, targetSize)))
-                dazeMultiplier = DazedMultiplierSmallXeno;
-        }
-
-        //Try to daze before the big size check, because big xenos can still be dazed.
-        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
-
         if (!TryComp<RMCSizeComponent>(args.Target, out var size))
             return;
 
@@ -139,6 +125,16 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        // Multiply daze duration based on the size of the target
+        var dazeMultiplier = 1.0;
+        if (size.Size >= RMCSizes.Big)
+            dazeMultiplier = DazedMultiplierBigXeno;
+        else if (size.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, size)))
+            dazeMultiplier = DazedMultiplierSmallXeno;
+
+        //Try to daze before the big size check, because big xenos can still be dazed.
+        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
 
         //Stun part
         if (IsXenoSized((args.Target, size)))
@@ -184,10 +180,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// </summary>
     public void KnockBack(EntityUid target, MapCoordinates? knockedBackFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big && !ignoreSize)
+        if ((!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big) && !ignoreSize)
             return;
 
-        if(knockedBackFrom == null)
+        if (knockedBackFrom == null)
             return;
 
         //TODO Camera Shake
@@ -336,7 +332,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousUpdate(Entity<RMCUnconsciousComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         //Readd comps just in case they were removed by a status
@@ -349,7 +345,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         args.Cancel();
@@ -363,5 +359,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private void OnKnockOutCollideThrowHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
         TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
+    }
+
+    public bool IsKnockedOut(EntityUid uid)
+    {
+        return _status.HasStatusEffect(uid, KnockedOut);
     }
 }

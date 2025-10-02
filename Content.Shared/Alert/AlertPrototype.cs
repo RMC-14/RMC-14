@@ -76,11 +76,24 @@ public sealed partial class AlertPrototype : IPrototype
     public bool SupportsSeverity => MaxSeverity != -1;
 
     /// <summary>
+    /// If true, this alert is being handled by the client and will not be overwritten when handling server -> client states.
+    /// </summary>
+    [DataField]
+    public bool ClientHandled = false;
+
+    /// <summary>
     /// Event raised on the user when they click on this alert.
     /// Can be null.
     /// </summary>
     [DataField]
     public BaseAlertEvent? ClickEvent;
+
+    /// <summary>
+    /// Event raised on the user when they hold alt and click on this alert.
+    /// Can be null.
+    /// </summary>
+    [DataField]
+    public BaseAlertEvent? AltClickEvent;
 
     /// <param name="severity">severity level, if supported by this alert</param>
     /// <returns>the icon path to the texture for the provided severity level</returns>

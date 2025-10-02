@@ -9,7 +9,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -372,15 +371,16 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
-    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
+    public bool CanBuildAt(EntityCoordinates coordinates, string? prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
     {
         popup = default;
         if (_transform.GetGrid(coordinates) is not { } gridId)
             return true;
 
-        if (!coordinates.TryGetTileRef(out var turf))
+        if (!_turf.TryGetTileRef(coordinates, out var turf))
             return false;
 
+        prototypeName ??= Loc.GetString("rmc-construction-name");
         if (HasComp<DropshipComponent>(gridId))
         {
             popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));

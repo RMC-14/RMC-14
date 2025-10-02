@@ -749,6 +749,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("admin_ooc_color");
 
+                    b.PrimitiveCollection<string>("ConstructionFavorites")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("construction_favorites");
+
                     b.Property<int>("SelectedCharacterSlot")
                         .HasColumnType("INTEGER")
                         .HasColumnName("selected_character_slot");
@@ -1276,6 +1281,22 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsUnique();
 
                     b.ToTable("rmc_patron_tiers", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<int>("ParasiteInfects")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("parasite_infects");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_rmc_player_stats");
+
+                    b.ToTable("rmc_player_stats", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCRoleTimerExclude", b =>
@@ -2265,6 +2286,19 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Patron");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("Stats")
+                        .HasForeignKey("Content.Server.Database.RMCPlayerStats", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_stats_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCRoleTimerExclude", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2586,6 +2620,9 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Patron");
 
                     b.Navigation("RoleTimerExcludes");
+
+                    b.Navigation("Stats")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Content.Server.Database.Preference", b =>

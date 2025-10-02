@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Sigma Draconis",
+  "size": {
+    "x": 32,
+    "y": 32
+  },  "states": [
+    {
+      "name": "roof0",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof1",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof2",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof3",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof3b",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof4",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roof4b",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "roofnull",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    }
+  ]
+}

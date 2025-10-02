@@ -139,7 +139,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public bool IsTileBlocked(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
     {
-        if (!coordinates.TryGetTileRef(out var turf, EntityManager, _mapManager))
+        if (!_turf.TryGetTileRef(coordinates, out var turf))
             return false;
 
         return _turf.IsTileBlocked(turf.Value, group);

@@ -64,10 +64,12 @@ cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
 rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
 
 # Leap
+cm-xeno-leap-blocked = We cannot do that while squeezing and scuttling!
 cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds
 cm-xeno-weeds-source-already-here = There is already a resin node here!
+rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
@@ -155,11 +157,11 @@ cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding:
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
 
 # Throw Parasite
-cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
-cm-xeno-throw-parasite-too-many-parasites = We can't carry more parasites!
-cm-xeno-throw-parasite-stash-parasite = We store the parasite for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
-cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
-rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
+cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
+cm-xeno-throw-parasite-too-many-parasites = We can't carry more children!
+cm-xeno-throw-parasite-stash-parasite = We store the child for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+cm-xeno-throw-parasite-unstash-parasite = We grab a child from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} children.
 rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
    [one] role
    *[other] roles
@@ -203,7 +205,7 @@ rmc-xeno-heal-sisters = We must target one of our sisters!
 rmc-xeno-resin-surge-shield-self = We surge the resin around {THE($target)}, making it temporarily nigh unbreakable!
 rmc-xeno-resin-surge-shield-others = {CAPITALIZE(THE($xeno))} surges the resin around {THE($target)}, making it temporarily nigh unbreakable!
 rmc-xeno-resin-surge-shield-fail = We haplessly try to surge resin around {THE($target)}, but it's already reinforced. It'll take a moment for us to recover.
-rmc-xeno-resin-surge-fruit = We surge the resin around {THE($target)}, speeding its growth somewhat!
+rmc-xeno-resin-surge-fruit = We pour all energy into {THE($target)}'s growth, bringing it to swift maturity!
 rmc-xeno-resin-surge-fruit-fail = {CAPITALIZE(THE($target))} is already mature. The resin surge does nothing.
 rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
@@ -374,3 +376,10 @@ rmc-xeno-eviscerate-windup-small = {$xeno} begins digging in for a strike!
 
 # Fling
 rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
+
+# Gut
+rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
+rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+
+rmc-gut-finish-self = We tear this pathetic host in half!!
+rmc-gut-finish-others = {$user} tears {$target} in half!!

@@ -34,8 +34,10 @@
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     # TODO 3 KT-42 automag
     - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
-    # TODO S&W revolver
+    - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     # TODO desert eagle
+    # TODO S&W revolver
+    - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
 - type: entity
@@ -103,7 +105,7 @@
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - WeaponRifleAR10: RMCMagazineRifleAR10
-    # TODO /obj/item/weapon/gun/rifle/l42a/abr40
+    - RMCWeaponRifleABR40: RMCMagazineRifleABR40
     - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
 
 - type: entity
@@ -166,7 +168,7 @@
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
     # TODO 3 R4T rifle
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
-    # TODO m3717 pump shotgun
+    - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
 
 - type: entity
   parent: RMCSpawnerRandomGunShotgun
@@ -224,12 +226,16 @@
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
-    # TODO 4 mp27 SMG
-    # TODO 1 PPS43
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGType19: RMCMagazineSMGType19
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
-    # TODO 2 UZI
-    # TODO 1 FP9000
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
+    - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
 - type: entity
   parent: RMCSpawnerRandomGunSMG
@@ -286,13 +292,13 @@
     prototypes:
     - RMCWeaponMar50LMG: RMCMagazineMar50LMG
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
-    # TODO Disposable rocket launcher SADAR
-    - WeaponRifleM54C: CMMagazineRifleM54C
+    - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
+    - RMCWeaponRifleM54C: CMMagazineRifleM54C
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
-    - CMWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
+    - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialLow
   suffix: Low Chance
   components:
@@ -304,7 +310,7 @@
     chanceToSpawn: 0.2
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialMed
   suffix: Medium Chance
   components:
@@ -316,7 +322,7 @@
     chanceToSpawn: 0.5
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialHigh
   suffix: High Chance
   components:
@@ -326,6 +332,47 @@
     - state: loot_special_80
   - type: GunSpawner
     chanceToSpawn: 0.8
+
+# Attachments
+
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomAttachment
+  name: random attachment
+  description: This is a random attachment
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_attachment
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentSuppressor
+    - RMCAttachmentSuppressor
+    - RMCAttachmentBurstFireAssembly
+    - RMCAttachmentBurstFireAssembly
+    - RMCAttachmentRecoilCompensator
+    - RMCAttachmentRecoilCompensator
+    - RMCAttachmentB8SmartScope
+    - RMCAttachmentBarrelCharger
+    - RMCAttachmentS42xTelescopicMiniscope
 
 # This exists so we can spawn in a random shotgun shell box for shotguns
 - type: entity
@@ -375,3 +422,29 @@
     - CMPacketGrenadeFragOldFilled
     - RMCPacketGrenadeM74AGMFFilled
     - RMCPacketGrenadeM74AGMIFilled
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomRockets
+  name: random rockets spawner
+  description: This is a random rocket.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry
+  - type: RandomSpawner
+    offset: 0
+    chance: 1
+    prototypes:
+    - RMCRocket84mm
+    - RMCRocket84mmAntiArmor
+
+- type: entity
+  parent: RMCSpawnerRandomRockets
+  id: RMCSpawnerRandomRocketsDisposable
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    chance: 0 # disposable rocket don't spawn with any

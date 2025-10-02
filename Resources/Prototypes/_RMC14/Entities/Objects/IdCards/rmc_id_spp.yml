@@ -20,6 +20,7 @@
 - type: entity
   parent: CMIDCardStandardDogtag
   id: RMCIDSPP
+  name: SPP dog tag
   description: A soldier dog tag.
   components:
   - type: ItemIFF
@@ -34,7 +35,7 @@
   parent: CMIDCardLanyard
   id: RMCIDCardPaP
   name: PaP identification holo-badge
-  description: A standard-issue holo-badge for personnel within the UPP's People's Armed Police. It displays the officer's rank and affiliation.
+  description: A standard-issue holo-badge for personnel within the SPP's People's Armed Police. It displays the officer's rank and affiliation.
   components:
   - type: PresetIdCard
     job: CMSurvivor
@@ -46,6 +47,7 @@
   id: RMCIDCardHalcyon
   name: corporate holo-badge
   description: A corporate holo-badge. It's a unique Corporate orange and black.
+  suffix: Halcyon
   components:
   - type: ItemIFF
     faction: FactionHalcyon

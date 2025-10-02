@@ -53,3 +53,21 @@
   - type: CMSurgeryLarvaCondition
   - type: CMSurgeryPartCondition
     part: Torso
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryAlienHeartRemoval
+  name: Experimental Harvesting Surgery
+  description: Harvest the heart of an deceased alien.
+  components:
+  - type: CMSurgery
+    priority: -1
+    steps:
+    - RMCSurgeryCutExoskeleton
+    - RMCSurgeryOpenExoskeleton
+    - RMCSurgerySevereXenoConnections
+    - RMCSurgeryRemoveXenoOrgan
+  - type: RMCSurgeryDeadCondition
+  - type: RMCSurgeryXenoHeartCondition
+  - type: CMSurgeryPartCondition
+    part: Head

@@ -17,6 +17,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetWeaponAccuracyEvent>>(OnRangedModsGetWeaponAccuracy);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunGetAmmoSpreadEvent>>(OnRangedModsGetScatterFlat);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
 
@@ -72,6 +73,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         if (modSet.DamageFalloffAddMult != 0)
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage-falloff",
                 ("colour", modifierExamineColour), ("sign", modSet.DamageFalloffAddMult > 0 ? '+' : ""), ("falloff", modSet.DamageFalloffAddMult)));
+
+        if (modSet.RangeFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-range",
+                ("colour", modifierExamineColour), ("sign", modSet.RangeFlat > 0 ? '+' : ""), ("falloff", modSet.RangeFlat)));
 
         return result;
     }
@@ -145,6 +150,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.FalloffMultiplier += modSet.DamageFalloffAddMult;
+            args.Args.Range += modSet.RangeFlat;
         }
     }
 
@@ -167,6 +173,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.AccuracyMultiplier += modSet.AccuracyAddMult;
+            args.Args.Range += modSet.RangeFlat;
         }
     }
 
@@ -178,6 +185,19 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.BurstScatterMult += modSet.BurstScatterAddMult;
+        }
+    }
+
+    private void OnRangedModsGetScatterFlat(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunGetAmmoSpreadEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.Spread += Angle.FromDegrees(modSet.ScatterFlat) / 2;
+            if (args.Args.Spread < 0)
+                args.Args.Spread = 0;
         }
     }
 }

@@ -1,0 +1,29 @@
+- type: entityTable
+  id: RMCClosetPMCGearFill
+  table: !type:AllSelector
+    children:
+    - id: CMBootsBlackFilled
+    - id: RMCJumpsuitVeteranPMCNoWebbing
+    - id: RMCHeadsetDistressPMC
+
+- type: entityTable
+  id: RMCClosetPMCSLFill
+  table: !type:AllSelector
+    children:
+    - id: ArmorHelmetPMCOfficer
+    - id: RMCJumpsuitVeteranPMCLeader
+    - id: RMCLaserDesignator
+    - id: RMCWhistle
+
+- type: entityTable
+  id: RMCClosetPMCSGOFill
+  table: !type:AllSelector
+    children:
+    - id: ArmorHelmetPMCGunner
+    - id: RMCSmartGunPVE
+    - id: RMCPowerCellSmartgun
+    - id: CMArmorM4PMCSmartGunHarness
+    - id: RMCBeltSmartGunOperatorPistolFilled
+    - id: RMCMagazineSmartGun
+    - id: RMCMagazineSmartGun
+    - id: RMCGlassesSmartGunSight

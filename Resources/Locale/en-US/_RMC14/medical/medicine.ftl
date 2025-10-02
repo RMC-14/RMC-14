@@ -60,6 +60,7 @@ rmc-first-aid-container-label-text = FA
 rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
+rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
 
@@ -78,3 +79,6 @@ reagent-desc-rmcparoxetine = Very powerful antidepressant used to treat: major d
 antidepressant-effect-rmcmethylphenidate = Your mind feels focused and undivided.
 antidepressant-effect-rmccitalopram = Your mind feels stable... a little stable.
 antidepressant-effect-rmcparoxetine = Your mind feels much more stable.
+
+reagent-name-rmcantized = AntiZed
+reagent-desc-rmcantized = A chemical designed for use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".

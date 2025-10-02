@@ -40,9 +40,9 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM42A2WoodenStock
-  name: M42A2 wooden stock
-  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
+  id: RMCAttachmentM42A1WoodenStock
+  name: M42A1 wooden stock
+  description: A non-standard heavy wooden stock for the M42A1 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
     state: d_stock
@@ -51,7 +51,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM42A2WoodenStock
+    - RMCAttachmentM42A1WoodenStock
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -82,6 +82,79 @@
       Classic: c_stock
       Urban: u_stock
 
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM42A2CollapsibleStock
+  name: M42A2 collapsible stock
+  description: A wire stock for the M42A2, used to help with recoil control.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+    state: stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM42A2CollapsibleStock
+  - type: Appearance
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+      state: stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+      state: stock-on
+    actionName: Toggle M42A2 Collapsible Stock
+  - type: AttachableSizeMods
+    modifiers:
+      - size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.2
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.2
+      recoilFlat: -2
+      scatterFlat: -3
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 3
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/urban.rsi
+    states:
+      Jungle: stock
+      Desert: stock
+      Snow: stock
+      Classic: stock
+      Urban: stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -511,6 +584,28 @@
     actionName: Toggle M54C Folding Stock
 
 - type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleWhite
+  suffix: White Camo
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle. Painted in a lovely corporate white camo.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
@@ -572,23 +667,6 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM79Stock
-  name: M79 hardened polykevlon stock
-  description: Helps to mitigate the recoil of launching a 40mm grenade. Fits only to the M79.
-  components:
-  - type: Sprite
-    state: m79-stock
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentM79Stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: AttachableWieldDelayMods
-    modifiers: []
-
-- type: entity
-  parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
   name: submachinegun stock
   description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
@@ -644,6 +722,63 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smgstockcol-on
+    actionName: Toggle Submachinegun Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.024
+      sprint: -0.043
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentMP5AltStockCollapsible
+  name: MP5A5 folding stock
+  description: MP5A5 folding stock for Alternate MP5
+  components:
+  - type: Sprite
+    state: mp5_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMP5AltStockCollapsible
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock-on
     actionName: Toggle Submachinegun Folding Stock
   - type: AttachableSizeMods
     modifiers:
@@ -863,22 +998,6 @@
 
 - type: entity
   parent: RMCAttachableBase
-  id: RMCAttachmentSSG45Stock
-  name: SSG45 solid stock
-  description: Intergrated into the SSG45. You shouldn't have this.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
-    state: ssg45_stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentSSG45Stock
-
-- type: entity
-  parent: RMCAttachableBase
   id: RMCAttachmentL83A2Stock
   name: L83A2 solid stock
   description: Intergrated into the L83A2. You shouldn't have this.
@@ -894,11 +1013,86 @@
     - RMCAttachmentL83A2Stock
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentM54CE2Stock
+  name: M54CE2 solid stock
+  description: Intergrated into the M54CE2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+    state: stock
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54ce2_stocks/urban.rsi
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM54CE2Stock
+
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL24Stock
+  name: L24 solid stock
+  description: Intergrated into the L24. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: L24
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL24Stock
+
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL24BStock
+  name: L24B solid stock
+  description: Intergrated into the L24B. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: L24B
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL24BStock
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL83A3Stock
+  name: L83A3 solid stock
+  description: Integrated into the L83A3. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: L83A3
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL83A3Stock
+
+- type: entity
   parent: RMCAttachmentM54CStockCollapsible
   id: RMCAttachmentAK4047StockCollapsible
   name: AK-4047 folding stock
   description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
   components:
+  - type: AttachableVisuals
+    suffix: ""
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Sprite
@@ -920,6 +1114,7 @@
     - RMCAttachmentStock
     - RMCAttachmentAK4047StockCollapsible
 
+
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
@@ -930,7 +1125,10 @@
   id: RMCAttachmentM890Stock
 
 - type: Tag
-  id: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A1WoodenStock
+
+- type: Tag
+  id: RMCAttachmentM42A2CollapsibleStock
 
 - type: Tag
   id: RMCXM51StockBurst
@@ -958,9 +1156,6 @@
 
 - type: Tag
   id: RMCAttachmentM16StockCollapsible
-
-- type: Tag
-  id: RMCAttachmentM79Stock
 
 - type: Tag
   id: RMCAttachmentM63Stock
@@ -999,10 +1194,22 @@
   id: RMCAttachmentType71Stock
 
 - type: Tag
-  id: RMCAttachmentSSG45Stock
-
-- type: Tag
   id: RMCAttachmentL83A2Stock
 
 - type: Tag
+  id: RMCAttachmentL83A3Stock
+
+- type: Tag
+  id: RMCAttachmentL24Stock
+
+- type: Tag
+  id: RMCAttachmentL24BStock
+
+- type: Tag
   id: RMCAttachmentAK4047StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentMP5AltStockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM54CE2Stock

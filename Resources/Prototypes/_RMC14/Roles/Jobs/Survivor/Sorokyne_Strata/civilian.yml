@@ -3,7 +3,7 @@
   id: CMJobSurvivorSoroCivilian
   name: rmc-job-name-survivor-soro-civilian
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorSoroCivilian
+  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorSoroCivilian
   spawnMenuRoleName: Civilian (Sorokyne Survivor)
   special:
@@ -20,7 +20,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetSoroCivilian
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -28,12 +27,12 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorSoroCivilian
   equipment:
-    mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
 
@@ -44,21 +43,16 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorSoroCivilian
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetSoroCivilian
   name: sorokyne civilian preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomStartingGear:
@@ -109,3 +103,7 @@
       - RMCShoesJackboots
       - RMCBootsSPPBlackFilled
       - RMCBootsSPPFilled
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
+    tryEquipRandomOtherGear: false
