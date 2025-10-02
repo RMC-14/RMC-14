@@ -21,7 +21,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
         public Dictionary<EntProtoId, MinMax> Spawn = new();
 
         [DataField("offset")]
-        public float Offset { get; set; } = 0.5f;
+        public float Offset = 0.5f;
 
         [DataField("transferForensics")]
         public bool DoTransferForensics;
