@@ -57,3 +57,7 @@
 - type: lobbyBackground
   id: Intelligence
   background: /Textures/_RMC14/Lobby/Intelligence.png
+
+- type: lobbyBackground
+  id: WEYALobby
+  background: /Textures/_RMC14/Lobby/WEYALobby.png
