@@ -150,12 +150,12 @@ public sealed class SentrySystem : EntitySystem
             {
                 foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
                 {
-                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
-                    {
-                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
-                        _popup.PopupClient(ret, sentry, user);
-                        return;
-                    }
+                    // if (sentry != defense && defense.Comp.Mode == SentryMode.On)
+                    // {
+                    //     var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));          // rnmc edit - this is a.s.s
+                    //     _popup.PopupClient(ret, sentry, user);
+                    //     return;
+                    // }
                 }
                 mode = SentryMode.On;
                 var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));

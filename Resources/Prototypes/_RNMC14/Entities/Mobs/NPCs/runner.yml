@@ -3,13 +3,13 @@
   id: CMXenoRunnerNPC
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
-  suffix: AI, Original
+  suffix: AI
   components:
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      300: Dead
+      100: Critical
+      150: Dead
   - type: HTN
     rootTask:
       task: CMXenoCompound
@@ -24,39 +24,16 @@
         30
   - type: Xeno
     role: CMXenoRunnerNPC
-
-- type: entity
-  parent: CMXenoRunnerNPC
-  id: CMXenoRunnerNPCWeak
-  suffix: AI, Weak
-  components:
-  - type: MobThresholds
+  - type: Destructible
     thresholds:
-      0: Alive
-      150: Dead
-      100: Critical
-
-- type: entity
-  parent: CMXenoRunnerNPC
-  id: CMXenoRunnerNPCStrong
-  suffix: AI, Strong. You're evil if you use this.
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      600: Dead
-      500: Critical
-
-- type: entity
-  parent: CMXenoRunnerNPC
-  id: CMXenoRunnerNPCOverpowered
-  suffix: AI, OVERPOWERED
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      9001: Dead # it's over 9000
-      9000: Critical
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 15.55
-    baseSprintSpeed: 20
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCXenoGib:
+            min: 1
+            max: 1

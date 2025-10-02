@@ -119,7 +119,7 @@
       - RMCMagazineSentry
   - type: StorageFill
     contents:
-    - id: RMCSentry
+    - id: RMCSentryPVE
     - id: RMCMagazineSentry
   - type: ItemMapper
     mapLayers:

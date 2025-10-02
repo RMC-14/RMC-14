@@ -19,25 +19,25 @@
         30
       AggroVisionRadius: !type:Single
         30
-
-- type: entity
-  parent: CMXenoDefenderNPC
-  id: CMXenoDefenderNPCWeak
-  suffix: AI, Weak
-  components:
   - type: MobThresholds
     thresholds:
       0: Alive
-      300: Critical
-      400: Dead
-
-- type: entity
-  parent: CMXenoDefenderNPC
-  id: CMXenoDefenderNPCStrong
-  suffix: AI, Strong
-  components:
-  - type: MobThresholds
+      350: Critical
+      450: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: Destructible
     thresholds:
-      0: Alive
-      800: Critical
-      900: Dead
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCXenoGib:
+            min: 1
+            max: 1

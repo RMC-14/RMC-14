@@ -3,7 +3,7 @@
   id: CMXenoDroneNPC
   name: Drone
   description: An alien drone.
-  suffix: AI, Original
+  suffix: AI
   components:
   - type: HTN
     rootTask:
@@ -20,40 +20,24 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      400: Critical
-      450: Dead
+      200: Critical
+      250: Dead
   - type: Xeno
     role: CMXenoDroneNPC
-
-- type: entity
-  parent: CMXenoDroneNPC
-  id: CMXenoDroneNPCWeak
-  suffix: AI, Weak
-  components:
-  - type: MobThresholds
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: Destructible
     thresholds:
-      0: Alive
-      200: Critical
-      300: Dead
-
-- type: entity
-  parent: CMXenoDroneNPC
-  id: CMXenoDroneNPCStrong
-  suffix: AI, Strong
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      700: Critical
-      800: Dead
-
-- type: entity
-  parent: CMXenoDroneNPC
-  id: CMXenoDroneNPCInvincible
-  suffix: AI, 10K HP
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      700: Critical
-      800: Dead
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCXenoGib:
+            min: 1
+            max: 1

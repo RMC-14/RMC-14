@@ -1,13 +1,8 @@
 - type: entity
   parent: RMCXenoCrusher
   id: CMXenoCrusherNPC
-  suffix: AI, Original
+  suffix: AI
   components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      600: Critical
-      800: Dead
   - type: Xeno
     role: CMXenoCrusherNPC
   - type: HTN
@@ -22,39 +17,11 @@
         30
       AggroVisionRadius: !type:Single
         30
-
-- type: entity
-  parent: CMXenoCrusherNPC
-  id: CMXenoCrusherNPCWeak
-  suffix: AI, Weak
-  components:
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      700: Dead
-
-- type: entity
-  parent: CMXenoCrusherNPC
-  id: CMXenoCrusherNPCStrong
-  suffix: AI, Strong
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      1500: Critical
-      1600: Dead
-
-- type: entity
-  parent: CMXenoCrusherNPC
-  id: CMXenoCrusherNPCBossfight
-  suffix: AI, !!!BOSS FIGHT!!!
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      2500: Critical
-      2600: Dead
+      1000: Critical
+      1100: Dead
   - type: Tag
     tags:
     - FootstepSound
@@ -63,3 +30,16 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCXenoGibLarge:
+            min: 1
+            max: 1

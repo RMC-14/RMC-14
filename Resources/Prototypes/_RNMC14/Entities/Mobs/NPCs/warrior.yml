@@ -1,7 +1,7 @@
 - type: entity
   parent: CMXenoWarrior
   id: CMXenoWarriorNPC
-  suffix: AI, Original
+  suffix: AI
   components:
   - type: MobThresholds
     thresholds:
@@ -24,25 +24,20 @@
         30
   - type: Xeno
     role: CMXenoWarriorNPC
-
-- type: entity
-  parent: CMXenoWarriorNPC
-  id: CMXenoWarriorNPCWeak
-  suffix: AI, Weak
-  components:
-  - type: MobThresholds
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: Destructible
     thresholds:
-      0: Alive
-      300: Critical
-      400: Dead
-
-- type: entity
-  parent: CMXenoWarriorNPC
-  id: CMXenoWarriorNPCStrong
-  suffix: AI, Strong
-  components:
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      600: Critical
-      700: Dead
+    - trigger:
+        !type:DamageTrigger
+        damage: 550
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCXenoGib:
+            min: 1
+            max: 1
