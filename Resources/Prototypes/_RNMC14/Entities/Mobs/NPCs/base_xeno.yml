@@ -6,10 +6,9 @@
   description: Remains of something alien. Yuck.
   components:
   - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: true
+    canCollide: false
   - type: Sprite
     sprite: _RNMC14/Effects/xenogib.rsi
     layers:
@@ -32,7 +31,7 @@
   - type: Transform
   - type: Physics
     bodyType: Static
-    canCollide: true
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -53,10 +52,9 @@
   description: Remains of something big and alien. Yuck.
   components:
   - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: true
+    canCollide: false
   - type: Sprite
     sprite: _RNMC14/Effects/largexenogib.rsi
     layers:
@@ -79,7 +77,7 @@
   - type: Transform
   - type: Physics
     bodyType: Static
-    canCollide: true
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:

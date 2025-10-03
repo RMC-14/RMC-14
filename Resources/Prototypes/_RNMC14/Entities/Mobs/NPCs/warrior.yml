@@ -27,7 +27,7 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 40
+        Brute: 50
   - type: Destructible
     thresholds:
     - trigger:

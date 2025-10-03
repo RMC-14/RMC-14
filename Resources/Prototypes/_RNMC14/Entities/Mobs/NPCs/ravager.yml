@@ -34,7 +34,7 @@
     attackRate: 1.05
     damage:
       groups:
-        Brute: 50
+        Brute: 55
   - type: Destructible
     thresholds:
     - trigger:
