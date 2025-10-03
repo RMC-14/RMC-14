@@ -22,8 +22,8 @@
 - type: entity
   parent: RMCSignRequisitions
   id: RMCSignRequisitionsCreed
-  name: QMC creed plaque
-  description: The short version of the Quartermaster Creed made by the UN Quartermaster Corps, this on is purely decorative and ceremonial version which is much shorter and doesn't include more modern edits.
+  name: LOC creed plaque
+  description: The short version of the Logistics Officer Creed made by the UN Logistics Officer Corps, this on is purely decorative and ceremonial version which is much shorter and doesn't include more modern edits.
   components:
   - type: Sprite
     state: rocreed
