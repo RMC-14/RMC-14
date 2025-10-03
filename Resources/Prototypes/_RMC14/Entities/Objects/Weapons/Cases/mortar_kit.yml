@@ -18,6 +18,7 @@
       components:
       - Mortar
       - SkillPamphlet
+      - FixedItemSizeStorage
       - MortarShell
       - Rangefinder
       tags:
