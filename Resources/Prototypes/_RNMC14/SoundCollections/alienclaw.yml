@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: RNMCSmartgunShoot
+  files:
+    - /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun1.ogg
+    - /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun2.ogg
+    - /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun3.ogg
+    - /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun4.ogg

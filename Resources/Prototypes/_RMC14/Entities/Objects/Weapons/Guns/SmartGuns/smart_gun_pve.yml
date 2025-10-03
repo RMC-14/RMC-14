@@ -63,7 +63,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+      collection: RNMCSmartgunShoot
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
@@ -71,7 +71,7 @@
     - FullAuto
     recoilWielded: 3
     scatterWielded: 10
-    baseFireRate: 5
+    baseFireRate: 7 # rnmc change - used to be 5
     burstScatterMult: 4
     modifiers:
       FullAuto:

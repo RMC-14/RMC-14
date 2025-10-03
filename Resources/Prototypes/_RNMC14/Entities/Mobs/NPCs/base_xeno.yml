@@ -1,0 +1,91 @@
+# small
+
+- type: entity
+  id: RNMCXenoGib
+  name: remains
+  description: Remains of something alien. Yuck.
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RNMC14/Effects/xenogib.rsi
+    layers:
+    - state: gib
+  - type: TimedDespawn #do this shit by hand because of fucking course.
+    lifetime: 0.8
+  - type: SpawnOnDespawn
+    prototype: RNMCXenoGibbed
+  - type: Fixtures
+
+- type: entity
+  id: RNMCXenoGibbed
+  name: remains
+  description: Remains of something alien. Yuck.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Effects/xenogib.rsi
+    layers:
+    - state: icon
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - GhostImpassable
+
+# big
+
+- type: entity
+  id: RNMCXenoGibLarge
+  name: remains
+  description: Remains of something big and alien. Yuck.
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RNMC14/Effects/largexenogib.rsi
+    layers:
+    - state: gib
+  - type: TimedDespawn #do this shit by hand because of fucking course.
+    lifetime: 0.8
+  - type: SpawnOnDespawn
+    prototype: RNMCXenoGibbedLarge
+  - type: Fixtures
+
+- type: entity
+  id: RNMCXenoGibbedLarge
+  name: remains
+  description: Remains of something big and alien. Yuck.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Effects/largexenogib.rsi
+    layers:
+    - state: icon
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - GhostImpassable
