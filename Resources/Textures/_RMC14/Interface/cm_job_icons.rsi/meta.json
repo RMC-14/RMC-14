@@ -272,10 +272,7 @@
             "name": "pmc_spec"
         },
         {
-            "name": "wo_op"
             "name": "pmc_tl"
-        },
-        {
         },
         {
             "name": "wo_op"
