@@ -170,19 +170,12 @@
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/snow-urban.rsi
 
 # Specific
-
-- type: Tag
-  id: CMBackpackMortar
-
 - type: entity
   parent: CMBackpack
   id: CMBackpackMortar
   name: UNMC mortar shell backpack
   description: A backpack specifically designed to hold ammunition for the M402 mortar.
   components:
-  - type: Tag
-    tags:
-    - CMBackpackMortar
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
   - type: Storage
