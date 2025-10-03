@@ -1826,3 +1826,14 @@
     state: silas_alatus
   - type: PatronFigurine
     id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronThrukiaLongbow
+  name: Thrukia Longbow figurine
+  description: "A message carved beneath it reads: \"Take this with you to your struggles and victory is assured! No matter how much you hate yourself, the stars will still forgive you.\""
+  components:
+  - type: Sprite
+    state: thrukia_longbow
+  - type: PatronFigurine
+    id: a27d57bb-e7f4-48df-8f70-764d3e482ca1
