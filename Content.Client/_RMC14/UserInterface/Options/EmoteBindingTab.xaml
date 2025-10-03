@@ -8,33 +8,38 @@
     xmlns:s="clr-namespace:Content.Client.Stylesheets"
     VerticalExpand="True">
     <BoxContainer Orientation="Vertical">
-        <ScrollContainer VerticalExpand="True" Margin="8 8 8 8" >
-            <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-header'}"
+        <ScrollContainer VerticalExpand="True"
+                         HorizontalExpand="True"
+                         HScrollEnabled="False"
+                         Margin="8 8 8 8" >
+            <BoxContainer Orientation="Vertical">
+                <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-header'}"
                    FontColorOverride="{x:Static s:StyleNano.NanoGold}"
-                   StyleClasses="LabelKeyText"/>
-            <cc:HSeparator Margin="0 5" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote1" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote2" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote3" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote4" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote4'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote5" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote5'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote6" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote6'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote7" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote7'}" />
-            <ui:OptionDropDown Name="DropDownHumanoidEmote8" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote8'}" />
+                   StyleClasses="LabelKeyText" />
+                <cc:HSeparator Margin="0 5" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote1" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote2" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote3" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote4" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote4'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote5" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote5'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote6" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote6'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote7" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote7'}" />
+                <ui:OptionDropDown Name="DropDownHumanoidEmote8" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote8'}" />
 
-            <Label Text="{Loc 'rmc-ui-emote-binding-xeno-header'}"
-                   FontColorOverride="{x:Static s:StyleNano.NanoGold}"
-                   StyleClasses="LabelKeyText"
-                   Margin="4 0 0 0"/>
-            <cc:HSeparator Margin="0 5" />
-            <ui:OptionDropDown Name="DropDownXenoEmote1" Title="{Loc 'rmc-ui-emote-binding-xeno-emote1'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote2" Title="{Loc 'rmc-ui-emote-binding-xeno-emote2'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote3" Title="{Loc 'rmc-ui-emote-binding-xeno-emote3'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote4" Title="{Loc 'rmc-ui-emote-binding-xeno-emote4'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote5" Title="{Loc 'rmc-ui-emote-binding-xeno-emote5'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote6" Title="{Loc 'rmc-ui-emote-binding-xeno-emote6'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote7" Title="{Loc 'rmc-ui-emote-binding-xeno-emote7'}" />
-            <ui:OptionDropDown Name="DropDownXenoEmote8" Title="{Loc 'rmc-ui-emote-binding-xeno-emote8'}" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-xeno-header'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"
+                       Margin="0 2 0 0"/>
+                <cc:HSeparator Margin="0 5" />
+                <ui:OptionDropDown Name="DropDownXenoEmote1" Title="{Loc 'rmc-ui-emote-binding-xeno-emote1'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote2" Title="{Loc 'rmc-ui-emote-binding-xeno-emote2'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote3" Title="{Loc 'rmc-ui-emote-binding-xeno-emote3'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote4" Title="{Loc 'rmc-ui-emote-binding-xeno-emote4'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote5" Title="{Loc 'rmc-ui-emote-binding-xeno-emote5'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote6" Title="{Loc 'rmc-ui-emote-binding-xeno-emote6'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote7" Title="{Loc 'rmc-ui-emote-binding-xeno-emote7'}" />
+                <ui:OptionDropDown Name="DropDownXenoEmote8" Title="{Loc 'rmc-ui-emote-binding-xeno-emote8'}" />
+            </BoxContainer>
         </ScrollContainer>
         <ctrls:StripeBack HasBottomEdge="False" HasMargins="False">
             <BoxContainer Orientation="Horizontal" Margin="8 8">
