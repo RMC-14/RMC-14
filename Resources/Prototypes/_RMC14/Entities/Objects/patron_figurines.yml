@@ -1790,3 +1790,17 @@
     state: red_machina_swiftcleave
   - type: PatronFigurine
     id: dc3a5b1a-5fde-4ffe-9f33-07bc7cac7406
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMinjiFailsafeKilgrim
+  name: Minji 'Failsafe' Kilgrim figurine
+  description: "Some stray cat usually found roaming in medbay. The figure itself smells strongly of various chemicals, small singe marks litter it as if it's been through an explosion or two.
+
+
+    If you didn't look closer, you'd mistake the bow and bell decorating her tail for a bee..."
+  components:
+  - type: Sprite
+    state: minji_failsafe_kilgrim
+  - type: PatronFigurine
+    id: fbecf0e4-fe0c-41fc-a136-12804f260378
