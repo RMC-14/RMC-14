@@ -397,9 +397,6 @@
   name: M276 pattern mortar operator belt
   description: An M276 load-bearing rig configured to carry ammunition for the M402 mortar, along with a sidearm.
   components:
-  - type: Tag
-    tags:
-    - CMBeltMortar
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
     layers:
