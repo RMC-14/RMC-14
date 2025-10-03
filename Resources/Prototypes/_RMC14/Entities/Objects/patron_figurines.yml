@@ -1655,17 +1655,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSilasAlatus
-  name: Silas Alatus figurine
-  #description: ""
-  components:
-  - type: Sprite
-    state: silas_alatus
-  - type: PatronFigurine
-    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKasuni
   name: Kasuni figurine
   description: "Kasuni is fix, will be ok soon."
@@ -1826,3 +1815,14 @@
     state: hazel_skyfall_singh
   - type: PatronFigurine
     id: 20f158bf-cf14-4375-9059-3c75a3188e34
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasAlatus
+  name: Silas Alatus figurine
+  description: "Silas is a dark green moth person, standing at 5' 11\" tall. His antennae are nearly always pointed behind him at all times, and his wings are a darker green with grey pattern. He has grey-blueish eyes, though he is missing his left eye, which has been covered by a dark colored eyepad. He is seen with some form of sidearm on his person at all times, usually a revolver of some sort."
+  components:
+  - type: Sprite
+    state: silas_alatus
+  - type: PatronFigurine
+    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
