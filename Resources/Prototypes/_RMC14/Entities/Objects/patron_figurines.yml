@@ -1815,3 +1815,14 @@
     state: john_rook_weller
   - type: PatronFigurine
     id: 2d7cddb1-242a-4ada-825e-e8e94ffa5517
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHazelSkyfallSingh
+  name: Hazel 'Skyfall' Singh figurine
+  description: "¡We'll be fine! ¡I've esurvived much worse!"
+  components:
+  - type: Sprite
+    state: hazel_skyfall_singh
+  - type: PatronFigurine
+    id: 20f158bf-cf14-4375-9059-3c75a3188e34
