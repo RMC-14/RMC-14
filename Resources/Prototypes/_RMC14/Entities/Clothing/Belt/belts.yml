@@ -388,9 +388,6 @@
     tags:
     - RMCBeltMedical
 
-- type: Tag
-  id: CMBeltMortar
-
 - type: entity
   parent: CMBeltBaseStorage
   id: CMBeltMortar
