@@ -34,33 +34,10 @@
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-          types:
-            Asphyxiation: 4
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 2.5
-            Toxin: 2
-          types:
-            Asphyxiation: 10
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 11.25
-            Toxin: 4
+      - !type:Hypoxemic
+        potency: 8
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: [ CMReagent, MindbreakerToxin ]

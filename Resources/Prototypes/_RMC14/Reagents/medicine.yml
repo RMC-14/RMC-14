@@ -11,7 +11,9 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:Antitoxic #TODO removes 0.125u toxin/s 0.13u?
+      - !type:Antitoxic
+        potency: 2
+      - !type:Antihallucinogenic
         potency: 2
 
 # TODO RMC14 other effects
@@ -59,37 +61,10 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s?
-        damage:
-        - Toxin: -0.5
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15 #TODO 0.25 eye damage/s at 15 OD
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Brute: 1.25
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Antitoxic
+        potency: 1
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
@@ -418,37 +393,10 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.625u toxin/s?
-        damage:
-        - Toxin: -0.5
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 20 #TODO 0.25 eye damage/s at 20 OD
-        damage:
-          groups:
-            Brute: 1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 2.5
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Antitoxic
+        potency: 1
+      - !type:Biocidic
+        potency: 2
 
 # Antidepressants/ADHD meds
 - type: reagent
