@@ -1842,7 +1842,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRoxanneFloppyEarsDreams
   name: Roxanne 'Floppy Ears' Dreams figurine
-  description: ""
+  description: "Tiny bun! Tiny bun with sharp teeth... and a big gun..."
   components:
   - type: Sprite
     state: roxanne_floppy_ears_dreams
