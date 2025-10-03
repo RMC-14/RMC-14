@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed Combat Technician Engineering skill being 1 level too low (2 >
-      3).
-    type: Tweak
-  id: 1880
-  time: '2025-06-22T06:02:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6754
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed FORECON rifleman not having medical skill of 1
@@ -4477,5 +4469,12 @@
   id: 2379
   time: '2025-10-03T21:10:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8009
+- author: AutoOtter
+  changes:
+  - message: New lobby screen! Will our moth heroes survive? (no.)
+    type: Add
+  id: 2380
+  time: '2025-10-03T21:13:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7984
 Name: RMC14
 Order: -1
