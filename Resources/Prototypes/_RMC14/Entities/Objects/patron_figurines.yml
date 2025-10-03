@@ -1837,3 +1837,14 @@
     state: thrukia_longbow
   - type: PatronFigurine
     id: a27d57bb-e7f4-48df-8f70-764d3e482ca1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRoxanneFloppyEarsDreams
+  name: Roxanne 'Floppy Ears' Dreams figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: roxanne_floppy_ears_dreams
+  - type: PatronFigurine
+    id: e83e290d-6405-4988-924f-1746a58ca83a
