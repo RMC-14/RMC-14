@@ -81,7 +81,7 @@
       - !type:Neogenetic
         potency: 2
 
-# TODO RMC14 other effects (remove toxic reagents)
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Cryoxadone ]
   id: CMCryoxadone
@@ -92,7 +92,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
+      - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
@@ -370,7 +370,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
+      - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
