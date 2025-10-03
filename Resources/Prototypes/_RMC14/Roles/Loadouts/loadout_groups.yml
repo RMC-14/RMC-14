@@ -251,7 +251,8 @@
   name: rmc-loadout-group-helmet-garbs
   minLimit: 0
   maxLimit: 2
-  loadouts: # no CAG night vision sorry LARPers
+  loadouts:
+  - FakeNVGPVERMC
   - BuckshotSpentRMC
   - FlechetteSpentRMC
   - SlugSpentRMC

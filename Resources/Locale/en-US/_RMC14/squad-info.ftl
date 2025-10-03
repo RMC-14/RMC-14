@@ -26,11 +26,15 @@ rmc-squad-info-ChiefMedicalOfficer = Chief Medical Officer
 rmc-squad-info-SeniorEnlistedAdvisor = Senior Enlisted Advisor
 rmc-squad-info-Quartermaster = Logistics Officer
 rmc-squad-info-MilitaryWarden = Military Warden
+rmc-squad-info-SectionSergeant = Section Sergeant
+rmc-squad-info-PVESquadLeader = Squad Leader
 rmc-squad-info-SquadLeader = Squad Leader
 rmc-squad-info-FireteamLeader = Fireteam Leader
 rmc-squad-info-Rifleman = Rifleman
 
 rmc-squad-info-DirectorPmc = Director
+rmc-squad-info-LeaderPmcPVE = Force Leader
+rmc-squad-info-TeamLeaderPmcPVE = Team Leader
 rmc-squad-info-LeaderPmc = Team Leader
 rmc-squad-info-CorporateLiaison = Corporate Liaison
 
