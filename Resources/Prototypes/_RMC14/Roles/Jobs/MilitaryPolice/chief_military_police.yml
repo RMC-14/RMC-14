@@ -101,6 +101,7 @@
   id: CMJobChiefMP
   isHumanoid: true
 
+# Guidebook
 - type: entity
   parent: CMGuidebookRole
   id: RMCGuidebookRoleCMP
