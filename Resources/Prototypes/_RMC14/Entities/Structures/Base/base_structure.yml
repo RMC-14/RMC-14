@@ -113,6 +113,7 @@
   - type: Tag
     tags:
     - Wall
+  - type: Clickable
 
 - type: entity
   abstract: true
