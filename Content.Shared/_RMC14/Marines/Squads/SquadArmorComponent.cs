@@ -28,4 +28,5 @@ public enum SquadArmorLayers
     Helmet,
     Goggles,
     Armor,
+    Gloves,
 }

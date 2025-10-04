@@ -23,7 +23,7 @@ public sealed class XenoToggleSpitSystem : EntitySystem
 
         xeno.Comp.UseAcid = !xeno.Comp.UseAcid;
 
-        _actions.SetToggled(args.Action, xeno.Comp.UseAcid);
+        _actions.SetToggled(args.Action.AsNullable(), xeno.Comp.UseAcid);
 
         var proto = xeno.Comp.UseAcid ? xeno.Comp.AcidProto : xeno.Comp.NeuroProto;
         var cost = xeno.Comp.UseAcid ? xeno.Comp.AcidCost : xeno.Comp.NeuroCost;

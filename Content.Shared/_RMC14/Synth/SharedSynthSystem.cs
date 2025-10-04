@@ -1,13 +1,20 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Systems;
@@ -28,6 +35,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
@@ -59,6 +67,24 @@ public abstract class SharedSynthSystem : EntitySystem
 
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
+
+        if (TryComp<FixedIdentityComponent>(ent.Owner, out var fixedIdentity))
+        {
+            fixedIdentity.Name = ent.Comp.FixedIdentityReplacement;
+            Dirty(ent.Owner, fixedIdentity);
+        }
+
+        if (TryComp<MobThresholdsComponent>(ent.Owner, out var thresholds))
+            _mobThreshold.SetMobStateThreshold(ent.Owner, ent.Comp.CritThreshold, MobState.Critical, thresholds);
+
+        if (TryComp<RMCHealthIconsComponent>(ent.Owner, out var healthIcons))
+        {
+            healthIcons.Icons = ent.Comp.HealthIconOverrides;
+            Dirty(ent.Owner, healthIcons);
+        }
+
+        RemCompDeferred<RMCRevivableComponent>(ent.Owner);
+        RemCompDeferred<SlowOnDamageComponent>(ent.Owner);
     }
 
     private void OnMeleeAttempted(Entity<SynthComponent> ent, ref AttackAttemptEvent args)

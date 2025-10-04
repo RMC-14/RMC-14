@@ -19,6 +19,7 @@ public sealed partial class MarineComponent : Component
         { "SPP", new SpriteSpecifier.Rsi(new ("/Textures/_RMC14/Interface/faction_icons.rsi"), "spp") },
         { "WeYa", new SpriteSpecifier.Rsi(new ("/Textures/_RMC14/Interface/faction_icons.rsi"), "weya") },
         { "RoyalMarines", new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/faction_icons.rsi"), "tse") },
+        { "TSE", new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/faction_icons.rsi"), "tse") },
         { "CLF", new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/faction_icons.rsi"), "clf") },
     };
 }

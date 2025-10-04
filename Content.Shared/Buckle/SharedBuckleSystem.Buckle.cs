@@ -25,6 +25,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Movement;
 
 namespace Content.Shared.Buckle;
 
@@ -37,6 +39,7 @@ public abstract partial class SharedBuckleSystem
 
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
 
     private void InitializeBuckle()
     {
@@ -183,6 +186,10 @@ public abstract partial class SharedBuckleSystem
 
     private void OnBuckleUpdateCanMove(EntityUid uid, BuckleComponent component, UpdateCanMoveEvent args)
     {
+        // RMC14
+        if (HasComp<RMCAllowStrapMovementComponent>(component.BuckledTo))
+            return;
+
         if (component.Buckled)
             args.Cancel();
     }
@@ -240,6 +247,16 @@ public abstract partial class SharedBuckleSystem
         strapComp = null;
         if (!Resolve(strapUid, ref strapComp, false))
             return false;
+
+        // RMC14
+        if (!strapComp.Enabled)
+            return false;
+
+        if (!_rmcMovement.CanClimbOver(user, buckleUid, strapUid, false))
+        {
+            return false;
+        }
+        // RMC14
 
         // Does it pass the Whitelist
         if (_whitelistSystem.IsWhitelistFail(strapComp.Whitelist, buckleUid) ||
@@ -456,9 +473,9 @@ public abstract partial class SharedBuckleSystem
     private void Unbuckle(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap, EntityUid? user)
     {
         if (user == buckle.Owner)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled themselves from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled themselves from {ToPrettyString(strap):strap}");
         else if (user != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled {buckle} from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled {ToPrettyString(buckle):target} from {ToPrettyString(strap):strap}");
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
@@ -467,7 +484,7 @@ public abstract partial class SharedBuckleSystem
         var buckleXform = Transform(buckle);
         var oldBuckledXform = Transform(strap);
 
-        if (buckleXform.ParentUid == strap.Owner && !Terminating(buckleXform.ParentUid))
+        if (buckleXform.ParentUid == strap.Owner && !Terminating(oldBuckledXform.ParentUid))
         {
             _transform.PlaceNextTo((buckle, buckleXform), (strap.Owner, oldBuckledXform));
             buckleXform.ActivelyLerping = false;
@@ -487,7 +504,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
-        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
+        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle) || TryComp(buckle, out RMCRestComponent? rest) && rest.Resting == true)
             _standing.Down(buckle, playSound: false, changeCollision: true);
         else
             _standing.Stand(buckle);
@@ -526,8 +543,14 @@ public abstract partial class SharedBuckleSystem
         if (_gameTiming.CurTime < buckle.Comp.BuckleTime + buckle.Comp.Delay)
             return false;
 
-        if (user != null && !_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
-            return false;
+        if (user != null)
+        {
+            if (!_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
+                return false;
+
+            if (user.Value != buckle.Owner && !ActionBlocker.CanComplexInteract(user.Value))
+                return false;
+        }
 
         var unbuckleAttempt = new UnbuckleAttemptEvent(strap, buckle!, user, popup);
         RaiseLocalEvent(buckle, ref unbuckleAttempt);

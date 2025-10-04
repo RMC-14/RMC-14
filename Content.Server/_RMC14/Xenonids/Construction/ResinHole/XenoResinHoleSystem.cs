@@ -449,7 +449,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 {
                     var coords = _transform.GetMoverCoordinates(resinHole).Offset(new Vector2(i, j));
 
-                    var tuff = TurfHelpers.GetTileRef(coords);
+                    var tuff = _turf.GetTileRef(coords);
                     if (tuff != null && !_turf.IsTileBlocked(tuff.Value, FullTileMask))
                     {
                         var acid = SpawnAtPosition(trapEntityProto, coords);

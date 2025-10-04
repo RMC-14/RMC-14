@@ -1,0 +1,102 @@
+- type: entity
+  parent: WeaponRifleMAR40
+  id: RMCWeaponRifleMAR30
+  name: MAR-30 battle carbine
+  description: A cheap, reliable carbine chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar30.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar30.rsi
+  - type: Gun
+    burstCooldown: 0.1665
+    shotsPerBurst: 3
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 3
+    scatterUnwielded: 14
+    baseFireRate: 2.9
+    modifiers:
+      Burst:
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+      FullAuto:
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplierUnwielded: 0.8
+  - type: WieldDelay
+    baseDelay: 0.4
+  - type: WieldableSpeedModifiers # SLOWDOWN_ADS_QUICK
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: GunDamageModifier
+    multiplier: 0.9
+  - type: AttachableHolder
+    randomAttachmentChance: 0.38
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+        random:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet # Replace with SPP Bayonet when that is added
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS84xTelescopicScope
+        random:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlamer
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+        random:
+          - RMCAttachmentLaserSight
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: -0.23, 0.091
+      rmc-aslot-underbarrel: 0.35, -0.3

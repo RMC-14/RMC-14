@@ -49,6 +49,7 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
                 if (TryComp<IdCardComponent>(item, out var card))
                 {
                     card.FullName = metaData.EntityName;
+                    card.OriginalOwner = ent.Owner;
                     _meta.SetEntityName(item, $"{metaData.EntityName} ({job.LocalizedName})");
                 }
             }
@@ -57,14 +58,6 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
         AddComp(ent, new OriginalRoleComponent() { Job = jobProto });
         foreach (var special in job.Special)
             special.AfterEquip(ent);
-
-        if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
-        {
-            if (_squad.TryGetSquadLeader(squad, out _))
-                RemComp<SquadLeaderComponent>(ent);
-
-            _squad.AssignSquad(ent, squad.Owner, jobProto);
-        }
 
         if (job.Ranks is { } ranks)
         {
@@ -76,6 +69,14 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
                     break;
                 }
             }
+        }
+
+        if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
+        {
+            if (_squad.TryGetSquadLeader(squad, out _))
+                RemComp<SquadLeaderComponent>(ent);
+
+            _squad.AssignSquad(ent, squad.Owner, jobProto);
         }
 
         if (HasComp<MarineComponent>(ent) &&

@@ -12,6 +12,10 @@
     group: CMJobsMedical
     time: 3600 # 1 hours
   ranks:
+    RMCRankWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 630000 # 175 hours
     RMCRankStaffSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
@@ -19,7 +23,7 @@
     RMCRankSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
-      time: 36000 # 10 hours
+      time: 90000 # 25 hours
     RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
@@ -33,6 +37,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -44,16 +49,17 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMDropshipCrewChief
       points: 45
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-dcc
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: dcc
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
   hidden: false
 

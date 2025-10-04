@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder, RMCBaseWeaponGunMagazineProvider]
   abstract: true
   id: CMWeaponPistolBase
   components:
@@ -130,8 +130,7 @@
   abstract: true
   parent: RMCBaseBullet
   id: CMBulletBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
   - type: RMCProjectileDamageFalloff

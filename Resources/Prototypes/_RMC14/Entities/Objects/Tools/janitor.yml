@@ -66,6 +66,9 @@
   name: warning cone
   description: This cone is trying to warn you of something!
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
     state: cone
@@ -113,4 +116,11 @@
 
 - type: entity
   parent: SprayBottleSpaceCleaner
-  id: RMCSprayBottleSpaceCleaner # TODO RMC14
+  id: RMCSprayBottleSpaceCleaner
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi

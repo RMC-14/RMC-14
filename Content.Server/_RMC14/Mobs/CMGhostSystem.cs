@@ -3,6 +3,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared.Overlays;
+using Content.Shared._RMC14.PropCalling;
 
 namespace Content.Server._RMC14.Mobs
 {
@@ -39,6 +40,7 @@ namespace Content.Server._RMC14.Mobs
             bars.DamageContainers.Add("Biological");
             EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
+            EnsureComp<PropCallingComponent>(uid);
         }
 
         private void OnMarineHudAction(EntityUid uid, CMGhostComponent comp, ToggleMarineHudActionEvent args)

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/classic/back.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/classic/guns_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/classic/guns_obj.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/classic/guns_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/classic/suit_slot.dmi",
+  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/46424f2212e4d0cbb5527d12b8e84fa21909c8af/icons/obj/items/weapons/guns/guns_by_map/classic/back.dmi, https://github.com/cmss13-devs/cmss13/blob/46424f2212e4d0cbb5527d12b8e84fa21909c8af/icons/obj/items/weapons/guns/guns_by_map/classic/guns_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/46424f2212e4d0cbb5527d12b8e84fa21909c8af/icons/obj/items/weapons/guns/guns_by_map/classic/guns_obj.dmi, https://github.com/cmss13-devs/cmss13/blob/46424f2212e4d0cbb5527d12b8e84fa21909c8af/icons/obj/items/weapons/guns/guns_by_map/classic/guns_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/46424f2212e4d0cbb5527d12b8e84fa21909c8af/icons/obj/items/weapons/guns/guns_by_map/classic/suit_slot.dmi",
   "size": {
     "x": 32,
     "y": 32

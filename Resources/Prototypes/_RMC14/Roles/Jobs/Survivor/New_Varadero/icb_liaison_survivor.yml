@@ -1,13 +1,13 @@
 - type: job
-  parent: CMSurvivorCorporate
-  id: CMSurvivorICB
+  parent: CMSurvivorICB
+  id: CMSurvivorVaraderoICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorICB
-  spawnMenuRoleName: Interstellar Commerce Buero Liaison (NV Survivor)
+  playTimeTracker: CMJobSurvivorCorporate
+  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
+  startingGear: RMCGearSurvivorVaraderoICB
   ranks:
     RMCRankICBCorporateLiaison: []
-  startingGear: RMCGearSurvivorICB
   special:
   - !type:AddComponentSpecial
     components:
@@ -18,49 +18,41 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetICB
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-icb
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorCorporate
-  id: RMCGearSurvivorICB
+  parent: RMCGearSurvivorICB
+  id: RMCGearSurvivorVaraderoICB
   equipment:
-    ears: RMCHeadsetDistressBureauDamaged
     jumpsuit: CMJumpsuitLiaisonBlack
-    head: RMCHardhatWhite
-    outerClothing: RMCHazardVestBlack
     eyes: RMCSunglasses
   inhand:
   - CMClipboard
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorICB
+  id: RMCSpawnPointSurvivorVaraderoICB
   name: survivor icb spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorICB
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetICB
   name: icb colonist preset
+  categories: [ HideSpawnMenu ]

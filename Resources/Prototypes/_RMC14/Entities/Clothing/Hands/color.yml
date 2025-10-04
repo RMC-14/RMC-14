@@ -12,9 +12,17 @@
     fiberColor: fibers-black
 
 - type: entity
+  parent: RMCHandsBlack
+  id: RMCHandsCombat
+  name: combat gloves
+  description: These tactical gloves are somewhat fire and impact resistant.
+  components:
+  - type: Insulated
+
+- type: entity
   parent: CMHandsBlackMarine
   id: CMHandsInsulated
-  name: marine insulated gloves
+  name: insulated gloves
   description: These gloves will protect the wearer from electric shocks.
   components:
   - type: Sprite
@@ -86,3 +94,29 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
+
+- type: entity
+  parent: CMHandsInsulated
+  id: CMHandsBlackInsulated
+  name: black insulated gloves
+  description: These gloves will protect the wearer from electric shocks. Now in black.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_black.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-black
+
+- type: entity
+  parent: RMCHandsBlack
+  id: RMCHandsLeatherBlack
+  name: black leather gloves
+  description: Supple, black leather gloves crafted from the finest leather. Stylish, durable, and ready for work or play.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/leather_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/leather_black.rsi

@@ -10,7 +10,6 @@ using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -26,7 +25,6 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
@@ -35,7 +33,6 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly RMCDazedSystem _dazed = default!;
 
     public override void Initialize()
     {
@@ -92,9 +89,6 @@ public sealed class XenoFlingSystem : EntitySystem
         }
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(targetId);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * throwRange;
 
         _rmcMelee.DoLunge(xeno, targetId);
         _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
@@ -108,9 +102,8 @@ public sealed class XenoFlingSystem : EntitySystem
         if (daze)
             _daze.TryDaze(targetId, xeno.Comp.DazeTime);
 
-        _dazed.TryDaze(targetId, xeno.Comp.DazeTime, true);
-        _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
-
+        _daze.TryDaze(targetId, xeno.Comp.DazeTime, true);
+        _size.KnockBack(targetId, origin, throwRange, throwRange, xeno.Comp.ThrowSpeed);
         SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
     }
 }

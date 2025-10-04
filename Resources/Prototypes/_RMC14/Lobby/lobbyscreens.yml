@@ -1,4 +1,4 @@
-﻿- type: lobbyBackground
+- type: lobbyBackground
   id: Pyro
   background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
 
@@ -53,3 +53,16 @@
 - type: lobbyBackground
   id: Evac
   background: /Textures/_RMC14/Lobby/Evac.png
+
+- type: lobbyBackground
+  id: Intelligence
+  background: /Textures/_RMC14/Lobby/Intelligence.png
+
+- type: lobbyBackground
+  id: LiquorCabinetsLastStand
+  background: /Textures/_RMC14/Lobby/LiquorCabinetsLastStand.png
+  
+- type: lobbyBackground
+  id: APushTooFar
+  background: /Textures/_RMC14/Lobby/APushTooFar.png
+

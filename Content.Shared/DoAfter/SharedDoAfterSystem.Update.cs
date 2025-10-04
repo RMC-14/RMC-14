@@ -214,12 +214,12 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         {
             if (args.DistanceThreshold != null)
             {
-                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value))
+                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value, lagCompensated: args.LagCompensated))
                     return true;
             }
             else
             {
-                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value))
+                if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, lagCompensated: args.LagCompensated))
                     return true;
             }
         }
@@ -258,7 +258,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                     return true;
 
             // If the user changes which hand is active at all, interrupt the do-after
-            if (args.BreakOnHandChange && hands.ActiveHand?.Name != doAfter.InitialHand)
+            if (args.BreakOnHandChange && hands.ActiveHandId != doAfter.InitialHand)
                 return true;
         }
 

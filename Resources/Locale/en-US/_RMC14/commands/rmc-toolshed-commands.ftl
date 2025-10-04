@@ -43,6 +43,8 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
 
+command-description-rmcresetahelprelay = Restarts the AHelp and MHelp relays.
+
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
 command-description-intel-spawnintel = Spawns intel on all initialized maps.
@@ -72,3 +74,8 @@ command-description-forceplanetmap = Forces the next round to start with the spe
 command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.
 
 command-description-hijack-trigger = Triggers hijack on the map that you are currently on.
+
+command-description-setoperationname = Changes the name of the operation for the upcoming round.
+
+command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
+command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.

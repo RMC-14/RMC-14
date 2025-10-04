@@ -17,7 +17,6 @@
     sprite: _RMC14/Objects/tents.rsi
     offset: 1,0
     drawdepth: OverMobs
-    noRot: true
     layers:
     - state: standard_frame
     - state: standard_canvas
@@ -91,7 +90,6 @@
     sprite: _RMC14/Objects/tents.rsi
     drawdepth: Overdoors
     offset: 1,0
-    noRot: true
     layers:
     - state: standard_roof
       map: [ "enum.ItemCamouflageLayers.Layer" ]

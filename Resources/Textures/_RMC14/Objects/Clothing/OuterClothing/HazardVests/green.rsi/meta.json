@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f0608f2f329e00fb29096d0bb3a7a4c25c5d08a6/icons/mob/humans/onmob/clothing/suits/vests_aprons.dmi, https://github.com/cmss13-devs/cmss13/blob/f0608f2f329e00fb29096d0bb3a7a4c25c5d08a6/icons/obj/items/clothing/suits/vests_aprons.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    }
+  ]
+}
