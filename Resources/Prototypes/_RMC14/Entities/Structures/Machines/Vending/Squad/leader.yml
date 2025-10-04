@@ -20,17 +20,20 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
       - id: RMCKitRifleM4SPR
+        recommended: true
       - id: RMCKitCM54C
+        recommended: true
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
