@@ -142,3 +142,7 @@ rmc-xeno-charger-description = In exchange for:
     - You gain an ability to tumble to pass through enemies.
     - You gain an ability to forcefully move enemies via ramming into them.
 rmc-xeno-charger-popup = Nothing stops this hive. This one will become both the immovable object and the unstoppable force.
+
+rmc-xeno-watcher-name = Watcher
+rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
+rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.

@@ -1,0 +1,14 @@
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoParasiteVision
+  name: Toggle Enhanced Vision
+  description: Toggle far sight.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: toggle_long_range
+    useDelay: 1
+  - type: InstantAction
+    event: !type:ActionXenoParasiteVisionEvent
