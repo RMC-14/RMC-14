@@ -162,6 +162,8 @@
 - type: reaction
   id: Laughter
   reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuiceBanana:
       amount: 1
     Sugar:
