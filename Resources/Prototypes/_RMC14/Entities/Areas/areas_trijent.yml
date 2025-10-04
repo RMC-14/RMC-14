@@ -36,6 +36,7 @@
     state: purple
   - type: Area
     minimapColor: '#812DA2EE'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaDesertDamInteriorLabNortheast
@@ -810,7 +811,8 @@
   components:
   - type: Sprite
     state: garage
-
+  - type: Area
+    unoviableTimer: null
 - type: entity
   parent: RMCAreaDesertDamBuildingMedical
   id: RMCAreaDesertDamBuildingMedicalEmergencyRoom
@@ -1748,6 +1750,8 @@
   components:
   - type: Sprite
     state: valley_south_excv
+  - type: Area 
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
