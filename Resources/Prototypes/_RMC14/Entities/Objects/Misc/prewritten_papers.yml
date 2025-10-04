@@ -454,7 +454,7 @@
 - type: entity
   parent: CMPaper
   id: RMCPaperP701
-  name: P-701 equipment requisition
+  name: P-701 brigging checklist
   components:
   - type: Paper
     contentSize: 20000
@@ -462,48 +462,60 @@
       [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-701[/color]
       [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
       [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
-                       [head=1]Equipment Requisition Form[/head]
-      [bold]Requesting Officer:[/bold] [form]
+           [head=1]Brigging Checklist[/head]
+       
+      [head=2][bold]Processing Personnel[/bold][/head]
+      [bold]Name:[/bold] [form]
       [bold]Rank:[/bold] [form]
-      [bold]Department/Squad:[/bold] [form]
-      [bold]Date:[/bold] [form]
+      [bold]Position:[/bold] [form]
+       [head=3]
+      Order of checks[/head]
+      [italic]1. Prisoner is not a member of a protected group who has been arrested without proper authorization. [check] 
       
-      [bold]Equipment Requested:[/bold]
-      [table]
-      [bold]Item[/bold] | [bold]Quantity[/bold] | [bold]Purpose[/bold]
-      [form] | [form] | [form]
-      [form] | [form] | [form]
-      [form] | [form] | [form]
-      [form] | [form] | [form]
-      [/table]
+      2. Speak with the Arresting MP to determine what the prisoner did leading to their arrest. [check] 
       
-      [bold]Justification:[/bold]
-      [form]
+      3. Determine what crimes have been committed. [check] 
       
-      [bold]Priority Level:[/bold]
-      [ [check] ] Routine
-      [ [check] ] Urgent
-      [ [check] ] Emergency
+      4. Calculate the prisoners sentence. [check]
+       
+      5. Inform the prisoner of the crimes they are being charged with, their sentence, and their right to an appeal. [check] 
       
+      6. Grab the prisoner and drag them to a locker, strip them of all their belongings. [check]
+      
+      7. Dress the prisoner in an orange prison uniform and communications earpiece. [check] 
+      
+      8. Take the prisoner into a free cell closing the windoor behind you and ensure they're unrestrained. [check] 
+      
+      9. Open the locker and search their belongings for contraband or stolen materials. [check] 
+      
+      10. Fill out a P-403 and P-409 form detailing the arrest, charges, and notable events. Fax the P-409 form to the Provost Marshal's Office. [check] 
+      [/italic]
+      
+      [bold]Items Confiscated:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+       
+      [bold]Additional Requests:[/bold]
+      [bullet] [form]
+       
+      [bold]Notes:[/bold] [form]
       [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
-      [bold]Requesting Officer Signature:[/bold]
-      [color=#134975][italic][signature][/italic][/color]
+      Processed by,
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [bolditalic][form][/bolditalic]
+       
+      Approved by, 
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [bolditalic][form][/bolditalic]
       
-      [bold]Approval Section:[/bold]
-      [ [check] ] Approved
-      [ [check] ] Denied
-      [ [check] ] Pending Review
-      
-      [bold]Approving Officer:[/bold] [form]
-      [bold]Signature:[/bold] [color=#134975][italic][signature][/italic][/color]
-      [bold]Date:[/bold] [form]
-      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [color=#AAAAAA]===================================================[/color]
       [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
 
 - type: entity
   parent: CMPaper
   id: RMCPaperP702
-  name: P-702 personnel transfer request
+  name: P-702 processing checklist
   components:
   - type: Paper
     contentSize: 20000
@@ -511,45 +523,61 @@
       [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-702[/color]
       [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
       [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
-                     [head=1]Personnel Transfer Request[/head]
-      [bold]Personnel Information:[/bold]
+           [head=1]Processing Checklist[/head]
+      
+      [head=2][bold]Processing Personnel[/bold][/head]
       [bold]Name:[/bold] [form]
-      [bold]Current Rank:[/bold] [form]
-      [bold]Current Position:[/bold] [form]
-      [bold]Current Department/Squad:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Position:[/bold] [form]
       
-      [bold]Transfer Details:[/bold]
-      [bold]Requested Position:[/bold] [form]
-      [bold]Requested Department/Squad:[/bold] [form]
-      [bold]Effective Date:[/bold] [form]
+      [head=3]Order of checks[/head]
+      1. Build a connection to the visitors. Be polite and show consideration. If they trust you the process will go much smoother. [check]
       
-      [bold]Type of Transfer:[/bold]
-      [ [check] ] Voluntary
-      [ [check] ] Administrative
-      [ [check] ] Disciplinary
-      [ [check] ] Medical
+      2. Offer the visitors the choice to leave the ship. Allow those who take this option to board the dropship at this point. [check]
       
-      [bold]Reason for Transfer:[/bold]
-      [form]
+      3. Take the visitors who remain to a secure area for processing. The panic room Is a good location for this, as Brig gives them the impression they are in trouble. [check]
       
-      [bold]Qualifications/Training:[/bold]
-      [form]
+      4. Have the visitors line up, and place all containers on the floor Infront of them. (Bags, Pouches, Belts, Coats, Webbings, Etc.)  [check]
+      
+      5. Search through the items, placing them in a separate pile as you do to avoid mix-ups. Remove Contraband and place it off to the side. [check]
+      
+      6. Have the visitors retrieve their items that they may keep. [check]
+      
+      7. Offer them medical care, and answer any questions they have before dismissing them. [check]
+      
+      [italic][bold][color=red]By signing below I, as Processing Personnel, Confirm that all of the above steps have been completed to the best of my ability in accordance with S.O.P.[/italic][/bold][color=black]
+      [Signature]
+      
+      [bold]Names of processed individuals:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Items Confiscated:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Notes:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      Processed by,
+      [color=#1b67a5][italic][signature][/italic][/color]
+      
+      Approved by, 
+      [color=#1b67a5][italic][signature][/italic][/color]
       
       [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
-      [bold]Personnel Signature:[/bold]
-      [color=#134975][italic][signature][/italic][/color]
-      [bold]Date:[/bold] [form]
+      [head=2]Colonist Survivor Rights and Policies[/head]
       
-      [bold]Current Supervisor Approval:[/bold]
-      [ [check] ] Approved
-      [ [check] ] Denied
-      [bold]Signature:[/bold] [color=#134975][italic][signature][/italic][/color]
-      [bold]Date:[/bold] [form]
+      [bullet] Survivors may keep all tools and materials, unless used to commit a crime.
+      [bullet] Survivors may keep short blades such as pocket knives.
+      [bullet] Survivors may redeploy at any time they wish, receiving all confiscated items back before hand.
+      [bullet] Survivors can be Evicted by the CMP or Commander, should they commit a major crime.
+      [bullet] Survivors may NOT retain weapons, armor or munitions aboard the vessel.
       
-      [bold]Receiving Department Approval:[/bold]
-      [ [check] ] Approved
-      [ [check] ] Denied
-      [bold]Signature:[/bold] [color=#134975][italic][signature][/italic][/color]
-      [bold]Date:[/bold] [form]
-      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [color=#AAAAAA]===================================================[/color]
       [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
