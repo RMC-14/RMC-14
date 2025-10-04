@@ -1,7 +1,7 @@
 - type: gameMap
   id: UNSEndeavour
   mapName: "UNS Endeavour"
-  mapPath: /Maps/_RMC14/uns_endeavour.yml
+  mapPath: /Maps/_RMC14/PVE/uns_endeavour.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false

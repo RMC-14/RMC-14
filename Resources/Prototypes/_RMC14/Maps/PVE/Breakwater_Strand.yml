@@ -1,7 +1,7 @@
 ﻿- type: gameMap
   id: Breakwater_Strand
   mapName: "Breakwater_Strand"
-  mapPath: /Maps/_RMC14/Breakwater_Strand.yml
+  mapPath: /Maps/_RMC14/PVE/Breakwater_Strand.yml
   minPlayers: 10
   maxRandomOffset: 0
   randomRotation: false

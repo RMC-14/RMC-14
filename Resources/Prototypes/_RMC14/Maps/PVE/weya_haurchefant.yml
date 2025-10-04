@@ -1,7 +1,7 @@
 - type: gameMap
   id: Haurchefant
   mapName: "UNCSS Haurchefant"
-  mapPath: /Maps/_RMC14/weya_haurchefant.yml
+  mapPath: /Maps/_RMC14/PVE/weya_haurchefant.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
