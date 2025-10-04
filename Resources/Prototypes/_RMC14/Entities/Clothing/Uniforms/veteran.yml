@@ -127,3 +127,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/director.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCSynth
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen

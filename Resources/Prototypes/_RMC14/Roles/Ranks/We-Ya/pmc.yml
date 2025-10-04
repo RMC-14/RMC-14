@@ -95,7 +95,14 @@
   paygrade: PMC-DIR
 
 - type: rank
+  id: RMCRankPMCSynthetic
+  name: PMC Support Synthetic
+  prefix: SYN.
+  paygrade: PMC-SYN
+
+- type: rank
   id: RMCRankWeYaForceCommand
   name: PMC Force Command
   prefix: FCO.
   paygrade: PMC-FCO
+
