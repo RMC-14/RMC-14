@@ -1,14 +1,14 @@
 - type: entity
   parent: BaseItem
-  id: RMCQuartermasterGuideBook
-  name: Quartermaster symbol
-  description: The Quartermasters symbol
+  id: RMClogisticsofficerGuideBook
+  name: logistics Officers symbol
+  description: The Logistics Officers sumbol
   suffix: (GuideBookEntity)
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: Quartermaster
+    state: logistics officer
 
 - type: entity
   parent: BaseItem
