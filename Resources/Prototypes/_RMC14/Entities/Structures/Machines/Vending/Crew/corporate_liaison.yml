@@ -178,8 +178,6 @@
         amount: 1
       - id: RMCHeadCowboyHatDark
         amount: 1
-      #  BlackBeret
-      #  WhiteBeret
     - name: Glasses
       entries:
       - id: RMCGlassesMarineRpg #Placeholder
