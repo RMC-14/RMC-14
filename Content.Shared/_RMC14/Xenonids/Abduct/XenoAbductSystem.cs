@@ -13,6 +13,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -22,27 +23,28 @@ namespace Content.Shared._RMC14.Xenonids.Abduct;
 
 public sealed partial class XenoAbductSystem : EntitySystem
 {
-    [Dependency] private readonly LineSystem _line = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly XenoHookSystem _hook = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly XenoHookSystem _hook = default!;
+    [Dependency] private readonly LineSystem _line = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private readonly HashSet<EntityUid> _abductEnts = new();
 
@@ -133,10 +135,14 @@ public sealed partial class XenoAbductSystem : EntitySystem
                 //Can't grab if:
                 //Not human, not harmable
                 //Dead, Incapacitated, or big
-                //Incapacitated includes dead, crit, or stunned looks like
-                if (HasComp<StunnedComponent>(ent) || !_xeno.CanAbilityAttackTarget(xeno, ent) || _mob.IsCritical(ent) ||
-                    (_size.TryGetSize(ent, out var targetSize) && targetSize >= RMCSizes.Big))
+                //Incapacitated includes dead and crit
+                if (HasComp<StunnedComponent>(ent) ||
+                    !_xeno.CanAbilityAttackTarget(xeno, ent) ||
+                    _mob.IsCritical(ent) ||
+                    _size.TryGetSize(ent, out var targetSize) && targetSize >= RMCSizes.Big)
+                {
                     continue;
+                }
 
                 if (!targets.Contains(ent))
                     targets.Add(ent);
