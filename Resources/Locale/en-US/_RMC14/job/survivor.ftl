@@ -284,7 +284,7 @@ rmc-job-prefix-clf-survivor-engineer = TECH
 rmc-job-name-clf-survivor-commander = CLF Cell Leader
 rmc-job-prefix-clf-survivor-commander = LDR
 
-rmc-job-greeting-clf-survivor = You are a CLF member running a smuggling operation!
+rmc-job-greeting-clf-survivor = You're a CLF member arriving for a scheduled meeting with sympathetic colonists, but everything is eerily quiet.
 
   You are NOT aware of the xenonid threat.
 

@@ -4,4 +4,5 @@
   antagonist: true
   setPreference: true
   objective: rmc-roles-antag-hostile-surivor-objective
+  guides: [ RMCSurvivor ]
   isCM: true
