@@ -90,7 +90,9 @@ public sealed class CPRSystem : EntitySystem
         var healSpecifier = new DamageSpecifier();
         healSpecifier.DamageDict.Add(HealType, heal);
         _damageable.TryChangeDamage(target, healSpecifier, true);
-        EnsureComp<CPRReceivedComponent>(target).Last = _timing.CurTime;
+
+        var received = EnsureComp<CPRReceivedComponent>(target);
+        received.Last = _timing.CurTime;
 
         if (_net.IsClient)
             return;
@@ -124,7 +126,8 @@ public sealed class CPRSystem : EntitySystem
         var performer = args.Performer;
 
         // TODO RMC14 move this value to a component
-        if (ent.Comp.Last > _timing.CurTime - TimeSpan.FromSeconds(7))
+        if (_mobState.IsDead(ent) &&
+            ent.Comp.Last > _timing.CurTime - TimeSpan.FromSeconds(7))
         {
             args.Cancelled = true;
 
