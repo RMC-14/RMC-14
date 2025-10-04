@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Medical.Unrevivable;
+﻿using System.Linq;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -7,12 +8,15 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Rejuvenate;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Suicide;
 
@@ -28,12 +32,19 @@ public sealed class RMCSuicideSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCSuicideComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<RMCSuicideComponent, GetVerbsEvent<Verb>>(OnSuicideGetVerbs);
         SubscribeLocalEvent<RMCSuicideComponent, RMCSuicideDoAfterEvent>(OnSuicideDoAfter);
         SubscribeLocalEvent<RMCHasSuicidedComponent, UpdateMobStateEvent>(OnHasSuicidedUpdateMobState);
+    }
+
+    private void OnRejuvenate(Entity<RMCSuicideComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<RMCHasSuicidedComponent>(ent);
     }
 
     private void OnSuicideGetVerbs(Entity<RMCSuicideComponent> ent, ref GetVerbsEvent<Verb> args)
@@ -120,6 +131,24 @@ public sealed class RMCSuicideSystem : EntitySystem
             return;
         }
 
+        var firstBullet = ev.Ammo.FirstOrDefault();
+        if (firstBullet.Entity == null || !TryComp<CartridgeAmmoComponent>(firstBullet.Entity.Value, out var cartridge))
+            return;
+
+        if (!_proto.TryIndex(cartridge.Prototype, out var bulletProto))
+            return;
+
+        if (!bulletProto.TryGetComponent<ProjectileComponent>(out var projectile))
+            return;
+
+        if (projectile.Damage.GetTotal() == 0)
+        {
+            QueueDel(firstBullet.Entity.Value);
+            _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} attempted suicide but ammo does no damage.");
+            _audio.PlayPredicted(gun.SoundGunshot, held, ent);
+            return;
+        }
+
         foreach (var (bullet, _) in ev.Ammo)
         {
             QueueDel(bullet);
@@ -128,7 +157,6 @@ public sealed class RMCSuicideSystem : EntitySystem
         _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} suicided.");
         _damageable.TryChangeDamage(user, ent.Comp.Damage, true);
         _mobState.ChangeMobState(user, MobState.Dead);
-        _unrevivable.MakeUnrevivable(user);
         _audio.PlayPredicted(gun.SoundGunshot, held, ent);
         EnsureComp<RMCHasSuicidedComponent>(user);
     }
