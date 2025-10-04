@@ -40,7 +40,7 @@
   parent: ActionCritSuccumb # for use delay
   id: ActionCritLastWords
   name: Say Something
-  description: Whisper something to your comrades. Does not kill you, but damages you slightly.
+  description: Whisper something to your comrades. Does not kill you.
   components:
   - type: Action
     icon:
