@@ -134,7 +134,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
             {
                 //Can't grab if:
                 //Not human, not harmable
-                //Dead, Incapacitated, or big
+                //Dead, Incapacitated, stunned, or big
                 //Incapacitated includes dead and crit
                 if (HasComp<StunnedComponent>(ent) ||
                     !_xeno.CanAbilityAttackTarget(xeno, ent) ||
