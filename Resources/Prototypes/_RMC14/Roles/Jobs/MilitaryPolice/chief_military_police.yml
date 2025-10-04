@@ -48,16 +48,28 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_cmp
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-mp
     - type: ViewIntelObjectives
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMP
+    - type: SquadArmorWearer
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
     - type: RMCTrackable
 
 - type: startingGear

@@ -82,9 +82,10 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target, SpriteSpecifier.Rsi icon) : BoundUserInterfaceMessage
+public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target, bool hasLeaderIcon, SpriteSpecifier.Rsi icon) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
+    public readonly bool HasLeaderIcon = hasLeaderIcon;
     public readonly SpriteSpecifier.Rsi Icon = icon;
 }
 
@@ -153,7 +154,7 @@ public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUse
 }
 
 [Serializable, NetSerializable]
-public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, SpriteSpecifier.Rsi LeaderIcon);
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, bool HasLeaderIcon, SpriteSpecifier.Rsi LeaderIcon);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(
