@@ -61,4 +61,11 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     [ViewVariables]
     [AutoNetworkedField]
     public string? DefaultChannel;
+
+    /// <summary>
+    ///     Combined set of radio channels provided by all contained keys that are ReadOnly.
+    /// </summary>
+    [ViewVariables]
+    [AutoNetworkedField]
+    public HashSet<string> ReadOnlyChannels = new();
 }

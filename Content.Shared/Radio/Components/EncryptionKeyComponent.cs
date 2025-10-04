@@ -19,4 +19,10 @@ public sealed partial class EncryptionKeyComponent : Component
     /// </summary>
     [DataField("defaultChannel", customTypeSerializer: typeof(PrototypeIdSerializer<RadioChannelPrototype>))]
     public string? DefaultChannel;
+
+    /// <summary>
+    ///     A list of radio channels that are ReadOnly, you must still include the channel in the channels list.
+    /// </summary>
+    [DataField("readOnlyChannels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
+    public HashSet<string> ReadOnlyChannels = new();
 }
