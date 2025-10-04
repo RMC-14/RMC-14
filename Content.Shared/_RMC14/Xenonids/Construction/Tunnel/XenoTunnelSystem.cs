@@ -9,8 +9,10 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -729,7 +731,14 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
     {
-        DisableAllAbilities(tunneledXeno.Owner);
+        if (HasComp<ResinWhispererComponent>(tunneledXeno.Owner))
+        {
+            DisableSpecificAbilities(tunneledXeno.Owner);
+        }
+        else
+        {
+            DisableAllAbilities(tunneledXeno.Owner);
+        }
     }
 
     private void OnOutTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentRemove args)
@@ -821,6 +830,21 @@ public sealed class XenoTunnelSystem : EntitySystem
             _action.SetEnabled(action.AsNullable(), newStatus);
         }
     }
+
+    private void DisableSpecificAbilities(EntityUid ent)
+    {
+        var actions = _action.GetActions(ent);
+        foreach (var action in actions)
+        {
+            var actionName = Name(action).ToLower();
+            if (actionName.Contains("rest") || actionName.Contains("regurgitate"))
+            {
+                _action.SetEnabled(action.AsNullable(), false);
+            }
+        }
+    }
+
+
 
     private bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string? name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
