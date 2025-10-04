@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration;
 using Content.Server.Database;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.Admin.ChatBans;
 using Content.Shared.Database;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -24,7 +25,7 @@ public sealed class RMCChatBansManager : IPostInjectInit
     private const int Ipv6_CIDR = 64;
 
     private ISawmill _sawmill = default!;
-    private readonly Dictionary<NetUserId, List<(ChatType Type, DateTime? ExpiresAt)>> _bans = new();
+    private readonly Dictionary<NetUserId, List<ChatBan>> _bans = new();
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
@@ -36,10 +37,15 @@ public sealed class RMCChatBansManager : IPostInjectInit
         _bans.Remove(player.UserId);
     }
 
+    private ChatBan ConvertBan(RMCChatBans b)
+    {
+        return new ChatBan(b.Id, b.Type, b.BannedAt, b.ExpiresAt, b.UnbannedAt, b.UnbanningAdmin?.LastSeenUserName, b.Reason);
+    }
+
     private async Task ReloadBans(NetUserId player)
     {
         var bans = await _db.GetActiveChatBans(player);
-        _bans[player] = bans.Select(b => (b.Type, b.ExpiresAt)).ToList();
+        _bans[player] = bans.Select(ConvertBan).ToList();
     }
 
     public async void AddChatBan(
@@ -74,11 +80,11 @@ public sealed class RMCChatBansManager : IPostInjectInit
         }
     }
 
-    public async void PardonChatBan(int ban, NetUserId? admin)
+    public async void TryPardonChatBan(int ban, NetUserId? admin)
     {
         try
         {
-            var target = await _db.PardonChatBan(ban, admin);
+            var target = await _db.TryPardonChatBan(ban, admin);
             if (target != null)
                 await ReloadBans(new NetUserId(target.Value));
         }
@@ -93,16 +99,22 @@ public sealed class RMCChatBansManager : IPostInjectInit
         if (!_bans.TryGetValue(player, out var bans))
             return false;
 
-        foreach (var (banType, banExpiresAt) in bans)
+        foreach (var ban in bans)
         {
-            if (banType != type)
+            if (ban.Type != type)
                 continue;
 
-            if (banExpiresAt > DateTimeOffset.UtcNow.UtcDateTime)
+            if (ban.ExpiresAt > DateTimeOffset.UtcNow.UtcDateTime)
                 return true;
         }
 
         return false;
+    }
+
+    public async Task<List<ChatBan>> GetAllChatBans(NetUserId player)
+    {
+        var bans = await _db.GetAllChatBans(player);
+        return bans.Select(ConvertBan).ToList();
     }
 
     public void PostInject()

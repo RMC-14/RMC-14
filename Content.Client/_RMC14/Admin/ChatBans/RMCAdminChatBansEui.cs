@@ -1,12 +1,15 @@
 ﻿using Content.Client.Eui;
-using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Admin.ChatBans;
 using Content.Shared.Database;
 using Content.Shared.Eui;
+using JetBrains.Annotations;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Admin;
+namespace Content.Client._RMC14.Admin.ChatBans;
 
-public sealed class RMCAdminChatBanEui : BaseEui
+[UsedImplicitly]
+public sealed class RMCAdminChatBansEui : BaseEui
 {
     private RMCAdminChatBanWindow? _window;
 
@@ -14,6 +17,7 @@ public sealed class RMCAdminChatBanEui : BaseEui
     {
         base.Opened();
         _window = new RMCAdminChatBanWindow();
+        _window.ReasonEdit.Placeholder = new Rope.Leaf(Loc.GetString("rmc-chat-bans-reason-placeholder"));
         _window.SubmitButton.OnPressed += _ =>
         {
             var type = ChatType.None;

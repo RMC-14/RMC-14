@@ -404,9 +404,11 @@ namespace Content.Server.Database
             string reason
         );
 
+        Task<List<RMCChatBans>> GetAllChatBans(Guid player);
+
         Task<List<RMCChatBans>> GetActiveChatBans(Guid player);
 
-        Task<Guid?> PardonChatBan(int id, Guid? admin);
+        Task<Guid?> TryPardonChatBan(int id, Guid? admin);
 
         #endregion
 
@@ -1290,16 +1292,22 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.AddChatBan(round, target, addressRange, hwid, duration, type, admin, reason));
         }
 
+        public Task<List<RMCChatBans>> GetAllChatBans(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllChatBans(player));
+        }
+
         public Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetActiveChatBans(player));
         }
 
-        public Task<Guid?> PardonChatBan(int id, Guid? admin)
+        public Task<Guid?> TryPardonChatBan(int id, Guid? admin)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.PardonChatBan(id, admin));
+            return RunDbCommand(() => _db.TryPardonChatBan(id, admin));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

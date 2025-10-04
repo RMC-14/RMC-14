@@ -2175,20 +2175,30 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task<List<RMCChatBans>> GetAllChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
+                .Where(c => c.PlayerId == player)
+                .ToListAsync();
+        }
+
         public async Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
         {
             await using var db = await GetDb();
             return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
                 .Where(c => c.PlayerId == player)
                 .Where(c => c.UnbannedAt == null && (c.ExpiresAt == null || c.ExpiresAt.Value > DateTime.UtcNow))
                 .ToListAsync();
         }
 
-        public async Task<Guid?> PardonChatBan(int id, Guid? admin)
+        public async Task<Guid?> TryPardonChatBan(int id, Guid? admin)
         {
             await using var db = await GetDb();
             var ban = await db.DbContext.RMCPlayerChatBans.FirstOrDefaultAsync(c => c.Id == id);
-            if (ban == null)
+            if (ban == null || ban.UnbanningAdminId != null)
                 return null;
 
             ban.UnbanningAdminId = admin;

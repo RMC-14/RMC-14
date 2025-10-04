@@ -3,13 +3,14 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Admin.ChatBans;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
 
-namespace Content.Server._RMC14.Admin;
+namespace Content.Server._RMC14.Admin.ChatBans;
 
-public sealed class RMCAdminChatBanEui : BaseEui
+public sealed class RMCAdminChatBansEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IChatManager _chat = default!;
@@ -17,7 +18,7 @@ public sealed class RMCAdminChatBanEui : BaseEui
     [Dependency] private readonly IPlayerLocator _playerLocator = default!;
     [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
 
-    public RMCAdminChatBanEui()
+    public RMCAdminChatBansEui()
     {
         IoCManager.InjectDependencies(this);
     }
@@ -42,7 +43,7 @@ public sealed class RMCAdminChatBanEui : BaseEui
 
                     if (add.Type == ChatType.None)
                     {
-                        var response = new RMCAdminChatBanAddErrorMsg(Loc.GetString("rmc-chat-bans-no-player-found", ("player", add.Target)));
+                        var response = new RMCAdminChatBanAddErrorMsg(Loc.GetString("rmc-chat-bans-no-player-found", ("target", add.Target)));
                         SendMessage(response);
                         break;
                     }
@@ -50,7 +51,7 @@ public sealed class RMCAdminChatBanEui : BaseEui
                     var data = await _playerLocator.LookupIdByNameOrIdAsync(add.Target);
                     if (data == null)
                     {
-                        var response = new RMCAdminChatBanAddErrorMsg(Loc.GetString("rmc-chat-bans-no-type-specified", ("player", add.Target)));
+                        var response = new RMCAdminChatBanAddErrorMsg(Loc.GetString("rmc-chat-bans-no-type-specified"));
                         SendMessage(response);
                         break;
                     }

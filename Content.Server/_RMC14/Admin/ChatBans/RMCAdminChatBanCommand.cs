@@ -3,7 +3,7 @@ using Content.Server.EUI;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
-namespace Content.Server._RMC14.Admin;
+namespace Content.Server._RMC14.Admin.ChatBans;
 
 [AdminCommand(AdminFlags.Ban)]
 public sealed class RMCAdminChatBanCommand : LocalizedCommands
@@ -17,6 +17,6 @@ public sealed class RMCAdminChatBanCommand : LocalizedCommands
         if (shell.Player == null)
             return;
 
-        _eui.OpenEui(new RMCAdminChatBanEui(), shell.Player);
+        _eui.OpenEui(new RMCAdminChatBansEui(), shell.Player);
     }
 }

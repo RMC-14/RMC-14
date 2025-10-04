@@ -1,8 +1,8 @@
 ﻿<controls:RMCAdminChatBanWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.ChatBans"
     Title="{Loc rmc-chat-bans-add-title}"
-    MinSize="425 300">
+    MinSize="550 300">
     <BoxContainer Orientation="Vertical" SeparationOverride="5">
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc rmc-chat-bans-player}" MinWidth="90" />
@@ -10,11 +10,11 @@
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc rmc-chat-bans-type}" MinWidth="90" />
-            <CheckButton Name="DeadButton" Access="Public" Text="{Loc rmc-chat-dead}"
+            <CheckButton Name="DeadButton" Access="Public" Text="{Loc rmc-chat-bans-dead}"
                          StyleClasses="OpenBoth" ToggleMode="True" />
-            <CheckButton Name="LoocButton" Access="Public" Text="{Loc rmc-chat-looc}"
+            <CheckButton Name="LoocButton" Access="Public" Text="{Loc rmc-chat-bans-looc}"
                          StyleClasses="OpenBoth" ToggleMode="True" />
-            <CheckButton Name="OocButton" Access="Public" Text="{Loc rmc-chat-ooc}"
+            <CheckButton Name="OocButton" Access="Public" Text="{Loc rmc-chat-bans-ooc}"
                          StyleClasses="OpenBoth" ToggleMode="True" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">

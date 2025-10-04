@@ -4,7 +4,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using TerraFX.Interop.Xlib;
 
-namespace Content.Client._RMC14.Admin;
+namespace Content.Client._RMC14.Admin.ChatBans;
 
 [GenerateTypedNameReferences]
 public sealed partial class RMCAdminChatBanWindow : DefaultWindow
@@ -24,8 +24,14 @@ public sealed partial class RMCAdminChatBanWindow : DefaultWindow
         TimeOption.AddItem(Loc.GetString("ban-panel-months"), (int) Multipliers.Months);
         TimeOption.AddItem(Loc.GetString("ban-panel-years"), (int) Multipliers.Years);
         TimeOption.AddItem(Loc.GetString("ban-panel-permanent"), (int) Multipliers.Permanent);
+
+        TimeOption.OnItemSelected += args =>
+        {
+            TimeOption.SelectId(args.Id);
+            OnMultiplierChanged();
+        };
+
         TimeOption.SelectId((int) Multipliers.Minutes);
-        OnMultiplierChanged();
     }
 
     private void OnTimeChanged(LineEdit.LineEditEventArgs args)
@@ -64,11 +70,23 @@ public sealed partial class RMCAdminChatBanWindow : DefaultWindow
 
     private void UpdateExpiresLabel()
     {
-        double.TryParse(TimeEdit.Text, out var time);
+        if (!double.TryParse(TimeEdit.Text, out var time))
+            time = 0;
+
         var minutes = (uint) (time * Multiplier);
-        ExpiresLabel.Text = minutes == 0
-            ? $"{Loc.GetString("admin-note-editor-expiry-label")} {Loc.GetString("server-ban-string-never")}"
-            : $"{Loc.GetString("admin-note-editor-expiry-label")} {DateTime.Now + TimeSpan.FromMinutes(minutes):yyyy/MM/dd HH:mm:ss}";
+
+        try
+        {
+            ExpiresLabel.Text = minutes == 0
+                ? $"{Loc.GetString("admin-note-editor-expiry-label")} {Loc.GetString("server-ban-string-never")}"
+                : $"{Loc.GetString("admin-note-editor-expiry-label")} {DateTime.Now + TimeSpan.FromMinutes(minutes):yyyy/MM/dd HH:mm:ss}";
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            ExpiresLabel.Text = Loc.GetString("generic-error");
+            TimeEdit.ModulateSelfOverride = Color.Red;
+            SubmitButton.Disabled = true;
+        }
     }
 
     private enum Multipliers
