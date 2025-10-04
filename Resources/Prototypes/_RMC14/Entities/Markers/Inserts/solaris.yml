@@ -1,4 +1,4 @@
-﻿# Solaris
+# Solaris
 - type: entity
   abstract: true
   parent: RMCMapInsertBase
@@ -191,3 +191,29 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/vault_v2.yml"
       probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisCLFMining
+  name: CLF Mining
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/clfmining.yml"
+      probability: 1
+      nightmareScenario: clfmining
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisCrashlandingOffices
+  name: Crashlanding Offices
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-offices.yml"
+      probability: 1
+      nightmareScenario: crashlanding_offices
+    replaceAreas: false
