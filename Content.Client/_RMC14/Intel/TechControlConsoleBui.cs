@@ -33,9 +33,19 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
         _window.Options.DisposeAllChildren();
         for (var i = console.Tree.Options.Count - 1; i >= 0; i--)
         {
-            _window.Options.AddChild(new RichTextLabel { 
-                Text = Loc.GetString("rmc-ui-tech-tier-header", ("tier", i)) 
+            var header = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+            header.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("rmc-ui-tech-tier-header", ("tier", i)),
             });
+
+            if (i == console.Tree.Options.Count - 1)
+            {
+                header.AddChild(new Control { HorizontalExpand = true });
+                header.AddChild(new RichTextLabel { Text = Loc.GetString("rmc-ui-tech-points", ("points", console.Tree.Points)) });
+            }
+
+            _window.Options.AddChild(header);
             _window.Options.AddChild(new BlueHorizontalSeparator());
 
             var optionContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
@@ -87,7 +97,8 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
             _optionWindow = null;
         }
 
-        _optionWindow = this.CreateWindow<TechControlConsoleOptionWindow>();
+        _optionWindow = new TechControlConsoleOptionWindow();
+        _optionWindow.OpenCentered();
         _optionWindow.OnClose += () => _optionWindow = null;
         _optionWindow.Title = option.Name;
         _optionWindow.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-tech-points-value", ("value", points.Double().ToString("F1")));
@@ -112,7 +123,7 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
             hasStats = true;
             _optionWindow.Statistics.AddChild(new Label
             {
-                Text = Loc.GetString("rmc-ui-tech-incremental-price", ("increase", option.Increase))
+                Text = Loc.GetString("rmc-ui-tech-incremental-price", ("increase", option.Increase)),
             });
         }
 
