@@ -44,6 +44,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mp
+    - type: MutinyImmune
 
 - type: startingGear
   id: CMGearMilitaryPolice
