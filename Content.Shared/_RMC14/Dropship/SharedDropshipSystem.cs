@@ -534,8 +534,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         return true;
     }
-
-    private bool TryGetAttachmentContained(
+    // wtf why was it private
+    public bool TryGetAttachmentContained(
         EntityUid point,
         string containerId,
         out EntityUid contained)

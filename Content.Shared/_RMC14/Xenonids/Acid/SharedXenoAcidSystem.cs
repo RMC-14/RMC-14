@@ -1,4 +1,11 @@
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -9,15 +16,13 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
-using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Xenonids.Energy;
-using Content.Shared.Explosion.EntitySystems;
-using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -28,6 +33,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -74,15 +81,36 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
+        var target = args.Target;
+        string containerId = target switch
+        {
+            var e when TryComp<DropshipWeaponPointComponent>(e, out var weapon) => weapon.WeaponContainerSlotId,
+            var e when TryComp<DropshipUtilityPointComponent>(e, out var utility) => utility.UtilitySlotId,
+            var e when TryComp<DropshipElectronicSystemPointComponent>(e, out var electronic) => electronic.ContainerId,
+            var e when TryComp<DropshipEnginePointComponent>(e, out var engine) => engine.ContainerId,
+            _ => string.Empty
+        };
+        
+        if (!string.IsNullOrEmpty(containerId))
+        {
+            if (_dropship.TryGetAttachmentContained(target, containerId, out var containedEntity))
+                target = containedEntity;
+            else
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-acid-not-corrodible", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+                return;
+            }
+        }
+
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target, out var time, out var _))
+            !CheckCorrodiblePopups(xeno, target, out var time, out var _))
         {
             return;
         }
 
         args.Handled = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, time * args.ApplyTimeMultiplier, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, time * args.ApplyTimeMultiplier, new XenoCorrosiveAcidDoAfterEvent(args), xeno, target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
@@ -182,7 +210,17 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var acid = SpawnAttachedTo(acidId, target.ToCoordinates());
+        EntityUid acid;
+        if (HasComp<VisiblyAcidOutsideContainerComponent>(target) && 
+            _container.TryGetContainingContainer(target, out var container))
+        {
+            acid = SpawnAttachedTo(acidId, container.Owner.ToCoordinates());
+        }
+        else
+        {
+            acid = SpawnAttachedTo(acidId, target.ToCoordinates());
+        }
+
 
         if (!inherit)
             time += _timing.CurTime;
@@ -220,6 +258,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
             if (time > damageableCorrodingComponent.AcidExpiresAt)
             {
+                var ev = new BeforeMeltedEvent();
+                RaiseLocalEvent(uid, ref ev);
+
                 QueueDel(damageableCorrodingComponent.Acid);
                 RemCompDeferred<DamageableCorrodingComponent>(uid);
             }
@@ -231,8 +272,33 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
 
+            var ev = new BeforeMeltedEvent();
+            RaiseLocalEvent(uid, ref ev);
+
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
         }
     }
+
+    public bool IsMelted(EntityUid uid)
+    {
+        return HasComp<TimedCorrodingComponent>(uid) || HasComp<DamageableCorrodingComponent>(uid);
+    }
+
+    public void RemoveAcid(EntityUid uid)
+    {
+        if (TryComp<TimedCorrodingComponent>(uid, out var timed))
+        {
+            QueueDel(timed.Acid);
+            RemCompDeferred<TimedCorrodingComponent>(uid);
+        }
+
+        if (TryComp<DamageableCorrodingComponent>(uid, out var damageable))
+        {
+            QueueDel(damageable.Acid);
+            RemCompDeferred<DamageableCorrodingComponent>(uid);
+        }
+    }
+
+
 }
