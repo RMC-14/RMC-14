@@ -1416,3 +1416,8 @@ PottedPlant23: CMPottedPlant23
 PottedPlant24: CMPottedPlant24
 Grille: RMCGrille
 GrilleBroken: RMCGrilleBroken
+
+# 2025-09-28
+DeskBell: RMCDeskBell
+SignNoSmoking: CMPosterNoSmoking
+SignSmoking: CMPosterNoSmoking2
