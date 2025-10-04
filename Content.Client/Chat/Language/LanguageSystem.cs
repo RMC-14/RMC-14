@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Language.Systems;
 using Robust.Client.Player;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Log;
 using System.Linq;
 
 namespace Content.Client._RMC14.Language.Systems;
@@ -43,8 +42,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (args.Current is not LanguageLearningComponent.State state)
             return;
 
-        ent.Comp.LearnableLanguages = new HashSet<ProtoId<LanguagePrototype>>(state.LearnableLanguages);
-        ent.Comp.LanguageProgress = new Dictionary<ProtoId<LanguagePrototype>, float>(state.LanguageProgress);
+        ent.Comp.LearnableLanguages = state.LearnableLanguages.ToHashSet();
+        ent.Comp.LanguageProgress = new(state.LanguageProgress);
         ent.Comp.LearnedWords = state.LearnedWords.ToDictionary(
             kvp => kvp.Key,
             kvp => new Dictionary<string, float>(kvp.Value)
@@ -72,7 +71,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     public void RequestSetLanguage(ProtoId<LanguagePrototype> language)
     {
-        if (GetLocalSpeaker()?.CurrentLanguage?.Equals(language) == true)
+        if (GetLocalSpeaker()?.CurrentLanguage == language)
             return;
 
         RaiseNetworkEvent(new LanguagesSetMessage(language));
@@ -80,22 +79,17 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     public float GetLanguageProgress(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
-        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        return learningComp?.LanguageProgress.GetValueOrDefault(language, 0f) ?? 0f;
+        return CompOrNull<LanguageLearningComponent>(entity)?.LanguageProgress.GetValueOrDefault(language, 0f) ?? 0f;
     }
 
     public Dictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
         var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        if (learningComp?.LearnedWords.TryGetValue(language, out var words) == true)
-            return words;
-
-        return new Dictionary<string, float>();
+        return learningComp?.LearnedWords.GetValueOrDefault(language, new()) ?? new();
     }
 
     public HashSet<ProtoId<LanguagePrototype>> GetLearnableLanguages(EntityUid entity)
     {
-        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        return learningComp?.LearnableLanguages ?? new HashSet<ProtoId<LanguagePrototype>>();
+        return CompOrNull<LanguageLearningComponent>(entity)?.LearnableLanguages ?? new();
     }
 }
