@@ -10,7 +10,7 @@
   icon: RMCJobIconPMCDirector
   joinNotifyCrew: false
   accessGroups:
-  - Colony
+  - MarineMain
   - RMCWeYa
   spawnMenuRoleName: WEYA PMC Force Command (PVE)
   special:
@@ -71,6 +71,12 @@
   id: RMCJobPMCForceCommandPVE
   equipment:
     id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbing
+    shoes: RMCBootsPMC
+    head: ArmorHelmetPMC
+    ears: RMCHeadsetDistressPMCPVE
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: playTimeTracker
   id: CMJobPMCForceCommandPVE

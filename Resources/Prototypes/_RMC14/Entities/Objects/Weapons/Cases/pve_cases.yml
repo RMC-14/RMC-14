@@ -99,6 +99,35 @@
           tags:
           - RMCWeaponRifleM5SPR
 
+- type: entity
+  parent: RMCPVECaseM5SPR
+  id: RMCPVECaseM5SPR2
+  name: M5SPR2 battle rifle case
+  description: A large case for storing an M5SPR2, a modified We-Ya PMC battle rifle equipped with HV-P Rounds.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCWeaponRifleM5SPR2
+      - CMMagazineRifleM4SPR
+      - CMMagazineRifleM4SPRAP
+      - CMMagazineRifleM4SPRExt
+      - RMCMagazineRifleM5SPRHVP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM5SPR2
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponRifleM5SPR2
+
 # Sentry
 
 - type: entity
@@ -127,6 +156,28 @@
         whitelist:
           tags:
           - RMCSentry
+
+- type: entity
+  parent: RMCPVECaseSentry
+  id: RMCPVECaseSentryPMC
+  name: We-Ya 512-M mini sentry case
+  description: A gun case containing the We-Ya 512-M mini sentry and a spare drum.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCSentryWeYa
+      - RMCMagazineSentry
+  - type: StorageFill
+    contents:
+    - id: RMCSentryMiniWeYa
+    - id: RMCMagazineSentry
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCSentryWeYa
 
 # Misc
 

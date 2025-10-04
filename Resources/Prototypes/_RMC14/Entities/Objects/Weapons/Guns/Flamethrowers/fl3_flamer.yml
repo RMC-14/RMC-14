@@ -52,6 +52,15 @@
 
 - type: entity
   parent: RMCWeaponFL3Flamer
+  id: RMCWeaponFL3FlamerPVE
+  suffix: PVE
+  components:
+  - type: RMCMagneticItem
+  - type: Gun
+    fireRate: 2
+
+- type: entity
+  parent: RMCWeaponFL3Flamer
   id: RMCWeaponFL3FlamerWhiteout
   suffix: Whiteout
   components:

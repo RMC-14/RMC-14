@@ -105,6 +105,8 @@
     containers:
       key_slots:
       - CMEncryptionKeyWEYA
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
     defaultMode: LeaderPmcPVE

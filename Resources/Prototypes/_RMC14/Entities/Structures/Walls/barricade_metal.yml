@@ -383,6 +383,14 @@
       node: nodeHandrail
 
 - type: entity
+  parent: RMCBarricadeHandrailStrata
+  id: RMCBarricadeHandrailStrataAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
+- type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHandrailKutjevo
   components:
