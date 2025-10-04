@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at https://github.com/Bubberstation/Bubberstation/blob/0d743182f9414baf8c6d497ddd98b181b1eb390e/modular_skyrat/master_files/icons/mob/sprite_accessory/tails.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_tail_snakestripealt_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_snakestripealt_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_waggingtail_snakestripealt_primary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_waggingtail_snakestripealt_secondary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_waggingtail_snakedual_primary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_waggingtail_snakedual_secondary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_tail_snakedual_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_snakedual_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_waggingtail_snakestripe_primary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_waggingtail_snakestripe_secondary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_tail_snakestripe_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_snakestripe_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_waggingtail_snakeunder_primary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_waggingtail_snakeunder_secondary",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "m_tail_snakeunder_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_snakeunder_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_snaketail",
+      "directions": 4
+    },
+    {
+      "name": "m_waggingtail_snaketail",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}
