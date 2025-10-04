@@ -168,14 +168,6 @@
       entries:
       - id: RMCHeadCapWestonYamadaDark
         amount: 1
-      - id: RMCHeadCivilianTanBeret
-        amount: 1
-      - id: RMCHeadCivilianWhiteBeret
-        amount: 1
-      - id: RMCHeadCivilianBlackBeret
-        amount: 1
-      - id: RMCHeadCivilianBrownBeret
-        amount: 1
       - id: RMCHeadFedoraTan
         amount: 1
       - id: RMCHeadFedoraBrown
