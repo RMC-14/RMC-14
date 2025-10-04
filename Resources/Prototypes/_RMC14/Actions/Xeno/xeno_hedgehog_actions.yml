@@ -1,0 +1,49 @@
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFireSpikes
+  name: Fire Spikes (75)
+  description: Launch 8 small shards of spikes in the direction you click.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_spike
+    useDelay: 10
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ActionXenoFireSpikesEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShed
+  name: Spike Shed (All)
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_shard_shed
+    useDelay: 30
+  - type: InstantAction
+    event: !type:ActionXenoSpikeShedEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShield
+  name: Spike Shield (150)
+  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds. 
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_shard_shield
+    useDelay: 11.5
+  - type: InstantAction
+    event: !type:ActionXenoSpikeShieldEvent
