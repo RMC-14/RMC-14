@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
-using Content.Shared.Atmos.Rotting;
+using Content.Shared._RMC14.ShakeStun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -45,7 +45,7 @@ public sealed class CPRSystem : EntitySystem
         // TODO RMC14 use skills
         // TODO RMC14 something more generic than "marine"
         SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand,
-            before: [typeof(InteractionPopupSystem)]);
+            before: [typeof(InteractionPopupSystem), typeof(StunShakeableSystem)]);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
 
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);
