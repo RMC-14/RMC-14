@@ -6,4 +6,4 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record TechWarheadEvent(EntProtoId<OrbitalCannonWarheadComponent> Warhead);
+public sealed record TechLogisticsDeliveryEvent(EntProtoId Object);
