@@ -16,6 +16,7 @@
         type: SupplyDropComputerBui
   - type: SupplyDropComputer
     squad: SquadEcho
+    cooldown: 300
   - type: ActivatableUIBlacklist
     blacklist:
       components:
