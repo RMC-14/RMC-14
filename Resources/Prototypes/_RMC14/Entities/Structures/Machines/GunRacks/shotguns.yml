@@ -53,3 +53,47 @@
       - WeaponShotgunM42A2
       item_2:
       - WeaponShotgunM42A2
+
+- type: entity
+  parent: RMCGunRackM42A2Empty
+  id: RMCGunRackType23Empty
+  name: Type 23 gun rack
+  suffix: Type 23, Empty
+  description: Some off-branded gun rack. Per SOF and SPPA regulations, weapons should be stored in secure safes and only given out when necessary. Of course, most (but not all!) units overlook this regulation, only storing their firearms in safes when inspection arrives.
+  components:
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: Type 23
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
+      item_2:
+        name: M42A2
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
+
+- type: entity
+  parent: RMCGunRackType23Empty
+  id: RMCGunRackType23Filled
+  suffix: Type 23, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponShotgunType23
+      item_2:
+      - RMCWeaponShotgunType23
