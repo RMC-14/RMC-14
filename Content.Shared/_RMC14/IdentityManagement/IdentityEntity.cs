@@ -18,4 +18,9 @@ public readonly record struct IdentityEntity(EntityUid Entity, string Name) : IL
     }
 
     public object Value => Entity;
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }
