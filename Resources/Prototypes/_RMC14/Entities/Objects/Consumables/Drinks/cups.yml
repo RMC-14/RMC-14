@@ -136,3 +136,26 @@
         sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
         state: icon-3
         visible: false
+
+# FUN
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCCupProtag
+  name: grumpy mug
+  description: Protag mug with Protag's mug. Its actually soft on touch.
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/protag_cup.rsi
+        state: icon
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Cognac
+          Quantity: 30
