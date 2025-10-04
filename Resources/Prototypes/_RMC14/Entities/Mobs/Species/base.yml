@@ -228,6 +228,7 @@
     actions:
       Critical:
       - CMActionGhost
+      - ActionCritLastWords # not really last words since its supposed to damage you slightly, but, yknow
       Dead:
       - CMActionGhost
   - type: Destructible

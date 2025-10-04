@@ -45,6 +45,13 @@
         sprite: _RNMC14/Interface/map_blips.rsi
         state: sof_corpsman
     - type: Sleeping
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        200: Critical
+        350: Dead
+    - type: Perishable
+      rotAfter: 0
 
 - type: playTimeTracker
   id: CMJobSOFMedspecPVE

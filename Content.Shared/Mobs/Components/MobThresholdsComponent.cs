@@ -50,7 +50,7 @@ public sealed partial class MobThresholdsComponent : Component
     /// <summary>
     /// Whether or not the exact health is displayed in the Alert for the entity.
     /// </summary>
-    /// 
+    ///
     [DataField("displayDamageInAlert")]
     public bool DisplayDamageInAlert = false;
 }
