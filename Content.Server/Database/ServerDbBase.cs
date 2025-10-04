@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.IP;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -2151,6 +2152,49 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             order.Actions = new List<string>(actions);
 
             await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task AddChatBan(int? round, NetUserId target, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, TimeSpan? duration, ChatType type, NetUserId admin, string reason)
+        {
+            await using var db = await GetDb();
+
+            var time = DateTimeOffset.UtcNow.UtcDateTime;
+            db.DbContext.RMCPlayerChatBans.Add(new RMCChatBans
+            {
+                RoundId = round,
+                PlayerId = target,
+                Address = addressRange.ToNpgsqlInet(),
+                HWId = hwid,
+                Type = type,
+                BanningAdminId = admin,
+                Reason = reason,
+                BannedAt = time,
+                ExpiresAt = duration == null ? null : time.Add(duration.Value),
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Where(c => c.PlayerId == player)
+                .Where(c => c.UnbannedAt == null && (c.ExpiresAt == null || c.ExpiresAt.Value > DateTime.UtcNow))
+                .ToListAsync();
+        }
+
+        public async Task<Guid?> PardonChatBan(int id, Guid? admin)
+        {
+            await using var db = await GetDb();
+            var ban = await db.DbContext.RMCPlayerChatBans.FirstOrDefaultAsync(c => c.Id == id);
+            if (ban == null)
+                return null;
+
+            ban.UnbanningAdminId = admin;
+            ban.UnbannedAt = DateTimeOffset.UtcNow.UtcDateTime;
+            await db.DbContext.SaveChangesAsync();
+            return ban.PlayerId;
         }
 
         #endregion

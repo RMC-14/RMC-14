@@ -393,6 +393,21 @@ namespace Content.Server.Database
 
         Task SetActionOrder(Guid player, string id, List<string> actions);
 
+        Task AddChatBan(
+            int? round,
+            NetUserId target,
+            (IPAddress, int)? addressRange,
+            ImmutableTypedHwid? hwid,
+            TimeSpan? duration,
+            ChatType type,
+            NetUserId admin,
+            string reason
+        );
+
+        Task<List<RMCChatBans>> GetActiveChatBans(Guid player);
+
+        Task<Guid?> PardonChatBan(int id, Guid? admin);
+
         #endregion
 
         #region DB Notifications
@@ -1259,6 +1274,32 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SetActionOrder(player, id, actions));
+        }
+
+        public Task AddChatBan(
+            int? round,
+            NetUserId target,
+            (IPAddress, int)? addressRange,
+            ImmutableTypedHwid? hwid,
+            TimeSpan? duration,
+            ChatType type,
+            NetUserId admin,
+            string reason)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddChatBan(round, target, addressRange, hwid, duration, type, admin, reason));
+        }
+
+        public Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetActiveChatBans(player));
+        }
+
+        public Task<Guid?> PardonChatBan(int id, Guid? admin)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.PardonChatBan(id, admin));
         }
 
         // Wrapper functions to run DB commands from the thread pool.
