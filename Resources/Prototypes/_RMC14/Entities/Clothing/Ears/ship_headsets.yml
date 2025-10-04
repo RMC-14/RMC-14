@@ -132,8 +132,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetRequisition
-  name: supply radio headset
-  description: Used by the lowly Cargo Technicians of the Marine, light weight and portable.
+  name: requisitions radio headset
+  description: Used by the Requisitions Technicians, lightweight and portable.
   components:
   - type: Sprite
     state: req_headset
