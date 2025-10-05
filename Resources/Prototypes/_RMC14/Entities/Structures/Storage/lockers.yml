@@ -78,7 +78,7 @@
 - type: entity
   parent: RMCLockerSecureSafe
   id: RMCLockerSecureSafeLiaison
-  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, explosion resistant, and assistant resistant."
+  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
   suffix: Corporate Liaison
   components:
   - type: Sprite
