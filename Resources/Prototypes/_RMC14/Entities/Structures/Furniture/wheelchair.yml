@@ -1,0 +1,93 @@
+- type: entity
+  abstract: true
+  id: RMCWheelchairBase
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    drawdepth: Objects
+    noRot: true
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
+    layers:
+    - state: wheelchair
+  - type: MobMover
+  - type: Puller
+    needsHands: false
+  - type: Pullable
+  - type: InputMover
+  - type: InteractionOutline
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.0
+    baseSprintSpeed: 1.5
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Physics
+    bodyType: KinematicController
+  - type: Clickable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 500
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RotationVisuals.RotationState:
+        enum.RotationVisualLayers.Layer:
+          North: { state: wheelchair, drawdepth: Mobs }
+          South: { state: wheelchair, drawdepth: Mobs }
+          East: { state: wheelchair, drawdepth: Objects }
+          West: { state: wheelchair, drawdepth: Objects }
+  - type: ContainerContainer
+    containers:
+      rmc-vehicle-pilot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Strap
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCWheelchairBase
+  id: RMCWheelchair
+  name: wheelchair
+  description: Helps those with injuries related to immobility to move freely
+  components:
+  - type: RMCAllowStrapMovement
+  - type: Wheelchair
+    speedMultiplier: 0.75
+
+- type: entity
+  parent: RMCWheelchairBase
+  id: RMCWheelchairBell
+  name: wheelchair with bell
+  description: Helps those with injuries related to immobility to move freely. Has a bell attached.
+  components:
+  - type: RMCAllowStrapMovement
+  - type: Wheelchair
+    speedMultiplier: 0.75
+    bellAction: ActionWheelchairBell
+  - type: ContainerContainer
+    containers:
+      rmc-vehicle-pilot: !type:ContainerSlot
+      actions: !type:Container
+  - type: ActionsContainer

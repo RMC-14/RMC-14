@@ -520,4 +520,5 @@ public enum LogType
     RMCRoundEnd = RMCMarineAnnounce + 38,
     RMCExecution =  RMCMarineAnnounce + 39,
     RMCAdminCommandLogging = RMCMarineAnnounce + 40,
+    RMCIdModify = RMCMarineAnnounce + 41,
 }

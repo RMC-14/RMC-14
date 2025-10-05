@@ -32,6 +32,7 @@
   overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
   roleWeight: 1
+  displayWeight: 2
   special:
   - !type:AddComponentSpecial
     components:
@@ -145,3 +146,14 @@
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleHM
+  name: Hospital Corpsman
+  description: Hospital Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hospital_corpsman

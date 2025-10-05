@@ -34,12 +34,25 @@
         RMCSkillJtac: 4
         RMCSkillExecution: 1
         RMCSkillPilot: 1
-    - type: SquadArmorWearer
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-pmc-standard
+      prefix: rmc-job-prefix-pmc-pve-force-command
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sd
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

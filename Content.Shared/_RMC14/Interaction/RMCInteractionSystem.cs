@@ -1,7 +1,10 @@
-﻿using Content.Shared.Hands.Components;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light.Components;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
@@ -34,6 +37,12 @@ public sealed class RMCInteractionSystem : EntitySystem
         if (args.Cancelled || ent.Comp.Blacklist == null)
             return;
 
+        if (!TryComp(ent, out TransformComponent? xform))
+            return;
+
+        if (ent.Comp.AnchoredOnly && !xform.Anchored)
+            return;
+
         if (TryComp(ent, out HandheldLightComponent? handheldLight) && handheldLight.Activated)
             return;
 
@@ -43,11 +52,25 @@ public sealed class RMCInteractionSystem : EntitySystem
 
     private void OnInsertBlacklistContainerIsInsertingAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
-        if (args.Cancelled || ent.Comp.Blacklist is not { } blacklist)
+        if (args.Cancelled)
             return;
 
-        if (_whitelist.IsValid(blacklist, args.EntityUid))
+        var comp = ent.Comp;
+
+        // Check blacklist
+        if (comp.Blacklist != null && _whitelist.IsValid(comp.Blacklist, args.EntityUid) ||
+            comp.BlacklistedMobStates != null && TryComp<MobStateComponent>(args.EntityUid, out var blacklistedMobState) && comp.BlacklistedMobStates.Contains(blacklistedMobState.CurrentState))
+        {
             args.Cancel();
+            return;
+        }
+
+        // Check whitelist
+        if (comp.Whitelist != null && !_whitelist.IsValid(comp.Whitelist, args.EntityUid) ||
+            comp.WhitelistedMobStates != null && TryComp<MobStateComponent>(args.EntityUid, out var whitelistedMobState) && !comp.WhitelistedMobStates.Contains(whitelistedMobState.CurrentState))
+        {
+            args.Cancel();
+        }
     }
 
     private void OnInRangeOverride(Entity<IgnoreInteractionRangeComponent> ent, ref InRangeOverrideEvent args)

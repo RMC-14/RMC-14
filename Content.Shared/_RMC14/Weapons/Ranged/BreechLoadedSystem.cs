@@ -3,6 +3,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -18,6 +19,7 @@ public sealed class BreechLoadedSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -66,6 +68,14 @@ public sealed class BreechLoadedSystem : EntitySystem
 
         args.Handled = true;
 
+        if (TryComp<UseDelayComponent>(gun, out var useDelay) && _useDelay.IsDelayed((gun, useDelay), gun.Comp.DelayId))
+        {
+            var actionLocale = gun.Comp.Open ? Loc.GetString("rmc-breech-loaded-close") : Loc.GetString("rmc-breech-loaded-open");
+            var popup = Loc.GetString("rmc-breech-loaded-toggle-attempt-cooldown", ("action", actionLocale));
+            _popupSystem.PopupClient(popup, args.UserUid, args.UserUid, PopupType.Small);
+            return;
+        }
+
         gun.Comp.Open = !gun.Comp.Open;
 
         if (!gun.Comp.Open)
@@ -73,6 +83,12 @@ public sealed class BreechLoadedSystem : EntitySystem
 
         if (gun.Comp.ShowBreechOpen && TryComp(gun.Owner, out AppearanceComponent? appearanceComponent))
             _appearanceSystem.SetData(gun, BreechVisuals.Open, gun.Comp.Open, appearanceComponent);
+
+        if (useDelay != null)
+        {
+            _useDelay.SetLength((gun, useDelay), gun.Comp.ToggleDelay, gun.Comp.DelayId);
+            _useDelay.TryResetDelay((gun, useDelay), id: gun.Comp.DelayId);
+        }
 
         Dirty(gun);
         var sound = gun.Comp.Open ? gun.Comp.OpenSound : gun.Comp.CloseSound;
