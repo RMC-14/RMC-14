@@ -34,7 +34,13 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
             return;
 
         var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();
-        emoteSystem.TryEmoteWithChat(args.TargetEntity, GaspEmote, ignoreActionBlocker: true);
+        emoteSystem.TryEmoteWithChat(
+            args.TargetEntity,
+            GaspEmote,
+            hideLog: true,
+            ignoreActionBlocker: true,
+            forceEmote: true
+        );
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
