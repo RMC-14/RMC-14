@@ -1,10 +1,8 @@
-using Content.Shared._RMC14.Emote;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
@@ -13,8 +11,6 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
-
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
