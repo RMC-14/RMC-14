@@ -166,6 +166,42 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+#    survivorJobScenarios:
+#      clf_pods:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+#    survivorJobScenarios:
+#      spp_bar:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
 
 
 - type: entity
