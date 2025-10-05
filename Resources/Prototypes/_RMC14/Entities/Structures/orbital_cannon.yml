@@ -118,7 +118,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadCluster
-  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in heavily-walled areas, and causes multiple explosions in a vaguely rectangular shape."
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in cramped heavily-fortified areas, and causes multiple explosions in a vaguely rectangular shape."
   name: cluster orbital warhead
   components:
   - type: Sprite
