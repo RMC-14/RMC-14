@@ -13,7 +13,7 @@ highlights-staff-officer = Staff Officer, "SO", Combat Information Center, "CIC"
 
 # Requisitions
 highlights-quartermaster = Quartermaster, "QM", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
-highlights-cargo-technician = Cargo Technician, Cargo Tech, "CT" Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
+highlights-cargo-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo, Cargo Technician, Cargo Tech, "CT"
 
 # Engineering
 highlights-chief-engineer = Chief Engineer, "CE", Engineering, Engineer, "Engi", Command, "OB", "OT"

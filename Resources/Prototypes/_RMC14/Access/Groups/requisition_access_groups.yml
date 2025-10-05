@@ -16,7 +16,7 @@
 - type: accessGroup
   id: CMCargoTech
   parent: RMCBaseRequisitionsJob
-  name: Cargo Technician
+  name: Requisitions Technician
   tags:
   - CMAccessRequisitions
 
