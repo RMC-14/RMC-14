@@ -83,7 +83,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_medical
-    - type: RMCAllowSuitStorage
     - type: RMCTrackable
 
 - type: startingGear
