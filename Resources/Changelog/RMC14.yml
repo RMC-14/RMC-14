@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed Warriors being able to tackle targets that are stunned by their
-      own lunge effect.
-    type: Fix
-  id: 1913
-  time: '2025-06-28T02:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6715
-- author: Dygon
-  changes:
   - message: Fix lurker and praetorian tackles applying a stun that was up to twice
       as long as intended.
     type: Fix
@@ -4504,5 +4496,17 @@
   id: 2413
   time: '2025-10-05T08:06:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7900
+- author: SharkSnake98
+  changes:
+  - message: Added 3 New Liaison Uniforms, 2 New Liaison Jackets, and 2 New Patches
+    type: Add
+  - message: Added the 2 new patches to the Civilian and Uniform Accessory loadout
+      menus respectively.
+    type: Add
+  - message: Added all new Liaison items to the CL wardrobe
+    type: Add
+  id: 2414
+  time: '2025-10-05T08:13:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7481
 Name: RMC14
 Order: -1
