@@ -20,6 +20,8 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 3600 # 1 hour
+  - !type:AgeRequirement
+    requiredAge: 27
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement

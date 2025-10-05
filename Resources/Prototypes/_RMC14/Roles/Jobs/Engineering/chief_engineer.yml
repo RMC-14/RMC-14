@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 72000 # 20 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   ranks:
     RMCRankFirstLT:
     - !type:RoleTimeRequirement

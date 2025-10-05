@@ -35,6 +35,8 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 30
   ranks:
     RMCRankColonel:
     - !type:RoleTimeRequirement
