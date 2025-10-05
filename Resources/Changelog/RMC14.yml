@@ -1,74 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed vanguard cleave abilities not being weaker without shield.
-    type: Fix
-  id: 1879
-  time: '2025-06-22T05:29:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6711
-- author: Dygon
-  changes:
-  - message: Fixed Combat Technician Engineering skill being 1 level too low (2 >
-      3).
-    type: Tweak
-  id: 1880
-  time: '2025-06-22T06:02:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6754
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON rifleman not having medical skill of 1
-    type: Fix
-  id: 1881
-  time: '2025-06-25T04:01:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6694
-- author: crazy1112345
-  changes:
-  - message: Fixed faction assignment for fax responders and CLF roles.
-    type: Fix
-  id: 1882
-  time: '2025-06-25T04:03:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6541
-- author: TornadoTechnology
-  changes:
-  - message: Fixed bullets hitting tesla coils when not being targeted directly, same
-      as sentries.
-    type: Fix
-  id: 1883
-  time: '2025-06-25T04:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6690
-- author: t0wnshark
-  changes:
-  - message: You can now roll the sleeves of the synthetic support jumpsuit and take
-      the jacket off.
-    type: Add
-  id: 1884
-  time: '2025-06-25T04:07:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6705
-- author: t0wnshark
-  changes:
-  - message: Added green and blue surgical webbings. These hold the same items as
-      a surgical tray but can be equipped as a webbing.
-    type: Add
-  - message: Added surgical webbings to synthetic gear vendor.
-    type: Add
-  id: 1885
-  time: '2025-06-25T04:06:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6672
-- author: x5tink
-  changes:
-  - message: Pills are now created with the correct colour selected
-    type: Fix
-  id: 1886
-  time: '2025-06-25T04:11:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6721
-- author: Dygon
-  changes:
-  - message: Fixed the success chance on high tackle streaks being too high, and the
-      tackle chance on low tackle streaks being too low.
-    type: Fix
-  id: 1887
-  time: '2025-06-25T04:19:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6734
 - author: noctyrnal
   changes:
   - message: Added "Vessel Map" Monitors, which will display a zoomable map of the
@@ -4476,5 +4406,82 @@
   id: 2378
   time: '2025-10-02T17:30:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8011
+- author: Monotheonist
+  changes:
+  - message: Added a new lobby screen, entitled "A Push Too Far." Watch out for Ravagers,
+      guys!
+    type: Add
+  id: 2379
+  time: '2025-10-03T21:10:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8009
+- author: AutoOtter
+  changes:
+  - message: New lobby screen! Will our moth heroes survive? (no.)
+    type: Add
+  id: 2380
+  time: '2025-10-03T21:13:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7984
+- author: DummeHytteOst
+  changes:
+  - message: onigiri now gives a bowl back when eaten.
+    type: Fix
+  id: 2381
+  time: '2025-10-05T01:55:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8035
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new shuttles, two for ERT and two for PvE/Admin events
+    type: Add
+  - message: Added spawners for the new shuttles
+    type: Add
+  id: 2382
+  time: '2025-10-05T02:04:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7533
+- author: SharkSnake98
+  changes:
+  - message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
+    type: Add
+  - message: Added cases for a bunch of SPP guns and turrets, as well as ammo boxes
+      for the mainline SPP guns, and the SPP Shotgun rack.
+    type: Add
+  - message: Fixed the SPP Squad Leader using the name and sprite of the PMC Team
+      Lead
+    type: Fix
+  id: 2383
+  time: '2025-10-05T02:05:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7951
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed being able to store underbarrel attachment guns in the ammo load
+      rig.
+    type: Fix
+  id: 2384
+  time: '2025-10-05T02:09:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7930
+- author: blueisdumb
+  changes:
+  - message: Added new tails
+    type: Add
+  - message: Slightly changed Leopard tail and the wag animation
+    type: Tweak
+  - message: Fixed dragon wings marking displaying incorrect name
+    type: Fix
+  id: 2385
+  time: '2025-10-05T02:11:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8016
+- author: Monotheonist
+  changes:
+  - message: Changed around some beret icons (most notably the tan and green berets.)
+    type: Tweak
+  id: 2386
+  time: '2025-10-05T02:15:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8014
+- author: CatAndHats
+  changes:
+  - message: Renamed Cargo Technician to Requisitions Technician.
+    type: Tweak
+  id: 2387
+  time: '2025-10-05T02:23:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7958
 Name: RMC14
 Order: -1
