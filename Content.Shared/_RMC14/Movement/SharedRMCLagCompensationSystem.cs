@@ -1,9 +1,11 @@
 ﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared.Coordinates;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -13,6 +15,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -45,6 +48,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         if (!Resolve(uid, ref xform))
             return (EntityCoordinates.Invalid, Angle.Zero);
 
+        // Log.Debug($"Coordinates: {xform.Coordinates}, Angle: {xform.LocalRotation}");
         return (xform.Coordinates, xform.LocalRotation);
     }
 
@@ -62,7 +66,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         return coordinates;
     }
 
-    public virtual EntityCoordinates GetCoordinates(EntityUid uid,
+    public EntityCoordinates GetCoordinates(EntityUid uid,
         EntityUid? session,
         TransformComponent? xform = null)
     {
@@ -72,12 +76,17 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         return GetCoordinates(uid, actor.PlayerSession, xform);
     }
 
-    public bool IsWithinMargin(Entity<TransformComponent?> one, Entity<TransformComponent?> two, ICommonSession? session, float range)
+    public bool IsWithinMargin(Entity<TransformComponent?> sessionEnt, Entity<TransformComponent?> lagCompensatedTarget, ICommonSession? session, float range)
     {
+        var targetCoords = GetCoordinates(lagCompensatedTarget, session);
         if (_net.IsServer)
-            range += MarginTiles;
+        {
+            var targetCurrentCoords = lagCompensatedTarget.Owner.ToCoordinates();
+            if (!_transform.InRange(targetCoords, targetCurrentCoords, 0.01f))
+                range += MarginTiles;
+        }
 
-        return _transform.InRange(GetCoordinates(one, session), GetCoordinates(two, session), range);
+        return _transform.InRange(sessionEnt.Owner.ToCoordinates(), targetCoords, range);
     }
 
     public virtual GameTick GetLastRealTick(NetUserId? session)
@@ -126,6 +135,11 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
             }
         }
 
+        if (bounds.Contains(projectilePosition))
+            return true;
+
+        var projectileVelocity = _physics.GetLinearVelocity(projectile, projectile.Comp.LocalCenter);
+        projectilePosition = projectileCoordinates.Position + projectileVelocity / _timing.TickRate / 1.5f;
         if (bounds.Contains(projectilePosition))
             return true;
 
