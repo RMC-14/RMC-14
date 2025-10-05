@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Emote;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
@@ -32,13 +33,8 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
         if (!random.Prob(0.1f))
             return;
 
-        var emoteEffect = new Content.Shared.EntityEffects.Effects.Emote
-        {
-            EmoteId = GaspEmote.Id, ShowInChat = true, Force = false,
-        };
-
-        var emoteArgs = new EntityEffectBaseArgs(args.TargetEntity, args.EntityManager);
-        emoteEffect.Effect(emoteArgs);
+        var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();
+        emoteSystem.TryEmoteWithChat(args.TargetEntity, GaspEmote, ignoreActionBlocker: true);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
