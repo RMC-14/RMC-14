@@ -101,7 +101,7 @@ public sealed class XenoZoomSystem : EntitySystem
         if (TryComp(ent, out EyeComponent? eye))
             _contentEye.UpdateEyeOffset((ent.Owner, eye));
 
-        foreach (var action in _rmcActions.GetActionsWithEvent<ActionXenoParasiteVisionEvent>(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(ent))
         {
             _actions.SetToggled((action, action), ent.Comp.Enabled);
         }
