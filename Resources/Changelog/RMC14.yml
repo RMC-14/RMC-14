@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed Queen Acid Spit and Spitter Charged Spit range being 1 tile too
-      long (6 > 5).
-    type: Fix
-  id: 1917
-  time: '2025-07-03T02:18:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6873
 - author: Timemaster99
   changes:
   - message: Fixed belts not layering above armor and jackets for some mobs
@@ -4494,5 +4486,182 @@
   id: 2417
   time: '2025-10-05T11:46:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7996
+- author: DrSmugleaf
+  changes:
+  - message: Made xeno projectiles predicted and lag compensated, meaning they account
+      for your ping and happen immediately on your screen.
+    type: Add
+  - message: Made most interactions and actions, including all warrior abilities and
+      runner/lurker leaps, lag compensated, meaning they account for your ping.
+    type: Add
+  - message: Action order is now preserved for marines and between spawns of the same
+      xeno caste. If you reorder your actions one way as that caste, that ordering
+      will stay the next time you become it. Unassigned actions are appended to the
+      end. Each different caste and strain will keep their ordering separately. Default
+      ordering is used otherwise.
+    type: Add
+  - message: Added a command to disable and enable a player's prediction before banning
+      them for spreading misinformation.
+    type: Add
+  - message: Added admin logs to rotary phones.
+    type: Add
+  - message: Added Dead/LOOC/OOC chat bans for admins.
+    type: Add
+  - message: Fixed not being able to hear sounds happening around you while watching
+      someone else in overwatch.
+    type: Fix
+  - message: Fixed sentinel spits making an acid sound on hit.
+    type: Fix
+  - message: Fixed tactical map updates not being announced if the sensor tower is
+      on.
+    type: Fix
+  - message: Fixed turning invisible if you rest while running towards a door and
+      holding something in your off-hand, reported by Verification.
+    type: Fix
+  - message: Fixed the tactical map window starting big and then shrinking immediately.
+    type: Fix
+  - message: Fixed xenos not being able to melee chairs.
+    type: Fix
+  - message: Fixed Queen being ignited by incendiary ammo.
+    type: Fix
+  - message: Fixed dying not removing acid on you.
+    type: Fix
+  - message: Fixed being able to print infinite Marine Law and SOP books from the
+      vendor.
+    type: Fix
+  - message: Fixed syringe cases not fitting into armor vests, armor, external webbing,
+      jackets, and hazard vests.
+    type: Fix
+  - message: Fixed armor vests not protecting contents from explosions.
+    type: Fix
+  - message: Fixed being able to send empty squad announcements through the overwatch
+      console.
+    type: Fix
+  - message: Fixed some windows on the Almayer not deconstructing when hijack lands.
+    type: Fix
+  - message: Fixed not being able to wear a single 120 shell box on your backpack
+      slot.
+    type: Fix
+  - message: Fixed xenos healing 3 times faster than intended while in crit.
+    type: Fix
+  - message: Fixed parasites not being stunned through walls by Queen screech.
+    type: Fix
+  - message: Fixed vaulting while fireman carrying offsetting who you are carrying.
+    type: Fix
+  - message: Fixed Patron figurines taking up the dedicated helmet slots instead of
+      those dedicated for vanity items.
+    type: Fix
+  - message: Fixed Warrior abilities not showing interaction outlines while targeting.
+    type: Fix
+  - message: Fixed surgical line and synth graft being interrupted by damage.
+    type: Fix
+  - message: Fixed upstream tips showing on the login screen.
+    type: Fix
+  - message: Fixed megaphone speak sound being heard by others from distances greater
+      than 1.5 tiles.
+    type: Fix
+  - message: Fixed being able to pull move someone while fireman carrying them.
+    type: Fix
+  - message: Fixed transferring bullets between magazines being slower than intended.
+      It now transfers 20 bullets in the same amount of time as before.
+    type: Fix
+  - message: Fixed upstream knives not being deleted by explosions.
+    type: Fix
+  - message: Fixed shotgun slugs slowing for too long (6 > 3 seconds) and superslowing
+      for too long (2 > 1 seconds).
+    type: Fix
+  - message: Fixed ammo stuns applying to marines, and some stun/slow times being
+      incorrect.
+    type: Fix
+  - message: Fixed not being able to sit on couches.
+    type: Fix
+  - message: Fixed some items spawning outside of crates instead of inside.
+    type: Fix
+  - message: Fixed not being able to place roller beds on catwalks, stairs, grates,
+      and carpet.
+    type: Fix
+  - message: Fixed not being able to press Z to deploy a roller bed.
+    type: Fix
+  - message: Fixed pulling someone on a roller bed pulling them off instead of pulling
+      the roller bed, and transfer pulls when buckling onto roller beds.
+    type: Fix
+  - message: Fixed not being able to put magazine on stairs.
+    type: Fix
+  - message: Fixed the common encryption key not being intrinsic in all ship headsets.
+    type: Fix
+  - message: Fixed some interactions that ignore range not using the correct range,
+      such as the overwatch console and attaching weapons to dropship points with
+      the powerl oader.
+    type: Fix
+  - message: Fixed fireman carry and pointing popups not using the player's correct
+      identity.
+    type: Fix
+  - message: Fixed aciding crates and closets deleting things inside them, and deleting
+      a storage item deleting non-corrodible items inside them instead of dropping
+      them onto the ground.
+    type: Fix
+  - message: Fixed Carriers being able to pick up dead parasites.
+    type: Fix
+  - message: Fixed fortified defenders blocking the Queen's movement.
+    type: Fix
+  - message: Fixed squad max hospital corpsmen and combat technicians not being set
+      depending on pop, alongside the total count.
+    type: Fix
+  - message: Fixed resin whisperer hivelords not being able to open doors by just
+      left clicking.
+    type: Fix
+  - message: Fixed ghosts not being able to left click ladders to go through them.
+    type: Fix
+  - message: Fixed flamers, Oppressor Praetorian abduct, Vanguard Praetorian pierce,
+      Valkyrie Praetorian retrieve, and spray acid sometimes getting an extra tile
+      of range.
+    type: Fix
+  - message: Fixed non-MP roles being able to strip multiple items at the same time.
+    type: Fix
+  - message: Fixed not being able to CPR stunned dead marines.
+    type: Fix
+  - message: Fixed tile fire layering under tall grass.
+    type: Fix
+  - message: Fixed nettle soup healing marines.
+    type: Fix
+  - message: Fixed CPRing crit marines having a cooldown.
+    type: Fix
+  - message: Fixed closing a tech tree option on the tech tree console closing both
+      windows.
+    type: Fix
+  - message: Fixed a bug with aggressively grabbing someone that is fireman carrying
+      someone else.
+    type: Fix
+  - message: Fixed tactical smock neck worn sprite being incorrect.
+    type: Fix
+  - message: Fixed epinephrine healing running after the defibrillator revival check.
+    type: Fix
+  - message: Fixed defib, surgical line, and synth graft use times not scaling with
+      medical skill, and surgical line/synth graft not being slower when used on yourself.
+    type: Fix
+  - message: Fixed some base survivor role playtimes not showing up.
+    type: Fix
+  - message: Fixed being able to put resin holes and structures on couches.
+    type: Fix
+  - message: Fixed hypospray injections not happening instantly on your screen, with
+      the required skill.
+    type: Fix
+  - message: Fixed sentinel, spitter, and praetorian spits inheriting your velocity
+      instead of shooting at a constant speed.
+    type: Fix
+  - message: Fixed Queen footsteps being too quiet.
+    type: Fix
+  - message: Made lag compensation a lot more consistent.
+    type: Tweak
+  - message: Added current points to the main tech tree console window.
+    type: Tweak
+  - message: Made loose bullet boxes deployable, and able to be picked up with left
+      click.
+    type: Tweak
+  - message: Updated the roadmap.
+    type: Tweak
+  id: 2418
+  time: '2025-10-05T12:09:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8050
 Name: RMC14
 Order: -1
