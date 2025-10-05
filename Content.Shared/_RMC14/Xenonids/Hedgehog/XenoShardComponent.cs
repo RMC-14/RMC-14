@@ -37,4 +37,7 @@ public sealed partial class XenoShardComponent : Component
     
     [DataField]
     public TimeSpan LastSpriteUpdate = TimeSpan.Zero;
+    
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextShardGrowth = TimeSpan.Zero;
 }

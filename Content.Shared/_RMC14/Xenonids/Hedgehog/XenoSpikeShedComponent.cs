@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -29,4 +30,10 @@ public sealed partial class XenoSpikeShedComponent : Component
 
     [DataField, AutoNetworkedField]
     public float ShedRadius = 4f;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Projectile = "XenoHedgehogSpikeProjectile";
+
+    [DataField, AutoNetworkedField]
+    public int ProjectileCount = 40;
 }

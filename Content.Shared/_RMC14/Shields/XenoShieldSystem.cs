@@ -21,8 +21,11 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
+    private static readonly EntProtoId HedgehogSpikeProjectile = "XenoHedgehogShieldSpikeProjectile";
     public enum ShieldType
     {
         Generic,
@@ -84,21 +87,18 @@ public sealed partial class XenoShieldSystem : EntitySystem
                 // Fire hedgehog spikes when shield is hit
                 if (ent.Comp.Shield == ShieldType.Hedgehog && TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) && spikeShield.Active)
                 {
-                    var xenoProjectile = EntityManager.System<XenoProjectileSystem>();
-                    var popup = EntityManager.System<SharedPopupSystem>();
-                    
-                    xenoProjectile.TryShoot(
+                    _xenoProjectile.TryShoot(
                         ent.Owner,
                         new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
                         FixedPoint2.Zero,
-                        "XenoHedgehogShieldSpikeProjectile",
+                        HedgehogSpikeProjectile,
                         null,
                         9, // 9 spikes like CM13
                         new Angle(2 * Math.PI), // Full circle
                         15f
                     );
                     
-                    popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
+                    _popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
                 }
             }
             

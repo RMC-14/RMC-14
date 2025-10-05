@@ -11,8 +11,6 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoShardSystem _shard = default!;
-
-
     public bool TryActivateShield(Entity<XenoSpikeShieldComponent, XenoShardComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp2, false))
