@@ -58,12 +58,11 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnAfterSolve(ref PhysicsUpdateAfterSolveEvent ev)
     {
+        if (_timing.IsFirstTimePredicted)
+            return;
         var query = EntityQueryEnumerator<PredictedProjectileClientComponent>();
         while (query.MoveNext(out var uid, out var predicted))
         {
-            if (_timing.IsFirstTimePredicted)
-                continue;
-
             if (predicted.Coordinates is { } coordinates)
                 _transform.SetCoordinates(uid, coordinates);
 

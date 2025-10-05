@@ -2,18 +2,28 @@ using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Intel;
 
 [UsedImplicitly]
-public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class TechControlConsoleBui : BoundUserInterface
 {
+    [Dependency] private readonly IEntityManager _entities = default!;
+
     private TechControlConsoleWindow? _window;
     private TechControlConsoleOptionWindow? _optionWindow;
+
+    private readonly SharedGameTicker _ticker;
+    public TechControlConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _ticker = _entities.System<SharedGameTicker>();
+    }
 
     protected override void Open()
     {
@@ -131,7 +141,8 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
 
         var canPurchase = points >= option.CurrentCost &&
                           currentTier >= tier &&
-                          (!option.Purchased || option.Repurchasable);
+                          (!option.Purchased || option.Repurchasable) &&
+                          option.TimeLock  < _ticker.RoundDuration();
 
         _optionWindow.PurchaseButton.Text = Loc.GetString("rmc-ui-tech-purchase-button");
         _optionWindow.PurchaseButton.Disabled = !canPurchase;

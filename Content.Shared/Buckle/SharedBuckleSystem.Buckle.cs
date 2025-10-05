@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Movement;
 
 namespace Content.Shared.Buckle;
 
@@ -38,6 +39,7 @@ public abstract partial class SharedBuckleSystem
 
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
 
     private void InitializeBuckle()
     {
@@ -249,6 +251,11 @@ public abstract partial class SharedBuckleSystem
         // RMC14
         if (!strapComp.Enabled)
             return false;
+
+        if (!_rmcMovement.CanClimbOver(user, buckleUid, strapUid, false))
+        {
+            return false;
+        }
         // RMC14
 
         // Does it pass the Whitelist

@@ -71,6 +71,12 @@
   paygrade: PMC-ELG
 
 - type: rank
+  id: RMCRankWeYaPMCSynthetic
+  name: Synthetic
+  prefix: SYN.
+  paygrade: PMC-SYN
+
+- type: rank
   id: RMCRankWeYaTeamLeader
   name: Team Leader
   prefix: TML.

@@ -283,11 +283,11 @@
   - type: CMArmor
     melee: 10
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
-  name: quartermaster jacket
+  name: Logistics Officer jacket
   description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
   components:
   - type: Sprite
