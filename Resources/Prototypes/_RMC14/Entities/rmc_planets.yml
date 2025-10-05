@@ -382,12 +382,13 @@
 #        CMSurvivorScientist:
 #        - : -1
 
+# PVE Maps Below
 - type: entity
   id: RMCPlanetArcticValley
   name: Arctic Valley
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/arctic_valley.yml
+    map: /Maps/_RMC14/PVE/arctic_valley.yml
     camouflage: Snow
     inRotation: false
 
@@ -396,7 +397,7 @@
   name: CORSAT
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/corsat.yml
+    map: /Maps/_RMC14/PVE/corsat.yml
     camouflage: Classic
     inRotation: false
 
@@ -405,7 +406,7 @@
   name: LV-759 Hybrisa Prospera (Repaired)
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/hybrisa_greenshift.yml
+    map: /Maps/_RMC14/PVE/hybrisa_greenshift.yml
     camouflage: Urban
     inRotation: false
 
@@ -414,6 +415,6 @@
   name: LV-976 - Sorokyne Strata (Repaired)
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/sorokyne_repaired.yml
+    map: /Maps/_RMC14/PVE/sorokyne_repaired.yml
     camouflage: Jungle
     inRotation: false
