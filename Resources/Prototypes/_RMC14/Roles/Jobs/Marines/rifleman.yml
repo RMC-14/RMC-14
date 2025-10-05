@@ -142,3 +142,20 @@
     - !type:RoleTimeRequirement
       role: CMJobRifleman
       time: 1
+
+## Guidebook downed marine
+- type: entity
+  id: RMCGuidebookCorpseMarine
+  parent: MobHuman
+  name: Wounded marine
+  categories: [ DoNotMap, HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquipped ]
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43

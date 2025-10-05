@@ -154,3 +154,7 @@ rmc-xeno-hedgehog-description = You lose:
   - Spike Shield: Temporary shield that damages nearby enemies when hit (150 shards, 2s duration, 11s cooldown).
   - Spike Shed: Launch all shards in all directions for massive damage, gain speed boost but lose shard generation for 30s (min 50 shards, 30s cooldown).
 rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them come and be pierced by your defenses.
+
+rmc-xeno-watcher-name = Watcher
+rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
+rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.
