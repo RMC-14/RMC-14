@@ -1162,6 +1162,7 @@ namespace Content.Client.Lobby.UI
                     {
                         rankOptions.Visible = false;
                     }
+                    // RMC14
 
                     _jobPriorities.Add((job.ID, selector));
                     _rankPriorities.Add((job.ID, rankOptions));
