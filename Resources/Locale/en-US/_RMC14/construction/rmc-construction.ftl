@@ -17,3 +17,5 @@ rmc-construction-entry = {$name} ({$amount} {$material})
 
 rmc-construction-build-here = Build Here
 rmc-construction-name = construction
+
+rmc-construction-non-anchorable =  It cannot be anchored nor unanchored.
