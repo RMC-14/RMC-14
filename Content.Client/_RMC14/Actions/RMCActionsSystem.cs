@@ -15,6 +15,18 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
 
     private EntityUid? _sortEnt;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeNetworkEvent<RMCActionOrderLoadedEvent>(OnActionOrderLoaded);
+    }
+
+    private void OnActionOrderLoaded(RMCActionOrderLoadedEvent ev)
+    {
+        // Re-trigger reordering
+        _sortEnt = null;
+    }
+
     public void ActionsChanged(List<EntityUid?> actions)
     {
         var actionPrototypes = new List<EntProtoId>();
@@ -26,7 +38,7 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
             actionPrototypes.Add(proto);
         }
 
-        var ev = new RMCActionOrderEvent(actionPrototypes);
+        var ev = new RMCActionOrderChangeEvent(actionPrototypes);
         RaiseNetworkEvent(ev);
     }
 

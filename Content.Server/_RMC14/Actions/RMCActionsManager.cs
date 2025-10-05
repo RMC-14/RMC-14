@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Robust.Shared.Asynchronous;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -16,6 +17,9 @@ public sealed class RMCActionsManager : IPostInjectInit
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private readonly ITaskManager _task = default!;
+
+    public event Action<ICommonSession, Dictionary<EntProtoId, ImmutableArray<EntProtoId>>?>? OnLoaded;
 
     private ISawmill _log = null!;
     private readonly Dictionary<NetUserId, Dictionary<EntProtoId, ImmutableArray<EntProtoId>>> _actionOrders = new();
@@ -30,6 +34,8 @@ public sealed class RMCActionsManager : IPostInjectInit
             kvp => new EntProtoId(kvp.Key),
             kvp => kvp.Value.Select(s => new EntProtoId(s)).ToImmutableArray()
         );
+
+        _task.RunOnMainThread(() => OnLoaded?.Invoke(player, _actionOrders.GetValueOrDefault(player.UserId)));
     }
 
     private void ClientDisconnected(ICommonSession player)

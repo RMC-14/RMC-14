@@ -1,5 +1,8 @@
-﻿using Content.Server.Actions;
+﻿using System.Collections.Immutable;
+using System.Linq;
+using Content.Server.Actions;
 using Content.Shared._RMC14.Actions;
+using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -18,12 +21,20 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<RMCActionOrderEvent>(OnActionOrder);
+        _manager.OnLoaded += OnLoaded;
+
+        SubscribeNetworkEvent<RMCActionOrderChangeEvent>(OnActionOrder);
 
         SubscribeLocalEvent<RMCActionOrderComponent, PlayerAttachedEvent>(OnOrderAttached);
     }
 
-    private void OnActionOrder(RMCActionOrderEvent msg, EntitySessionEventArgs args)
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _manager.OnLoaded -= OnLoaded;
+    }
+
+    private void OnActionOrder(RMCActionOrderChangeEvent msg, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } ent)
             return;
@@ -57,6 +68,24 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
     {
         ent.Comp.Order = _manager.GetOrder(args.Player.UserId, ent.Comp.Id);
         Dirty(ent);
+    }
+
+    private void OnLoaded(ICommonSession user, Dictionary<EntProtoId, ImmutableArray<EntProtoId>>? allActions)
+    {
+        if (user.Status != SessionStatus.Connected && user.Status != SessionStatus.InGame)
+            return;
+
+        if (!TryComp(user.AttachedEntity, out RMCActionOrderComponent? order) ||
+            allActions == null ||
+            !allActions.TryGetValue(order.Id, out var actions))
+        {
+            return;
+        }
+
+        order.Order = actions;
+        Dirty(user.AttachedEntity.Value, order);
+        var ev = new RMCActionOrderLoadedEvent(actions.ToList());
+        RaiseNetworkEvent(ev, user);
     }
 
     public override void Update(float frameTime)
