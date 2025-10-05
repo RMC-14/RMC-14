@@ -1423,3 +1423,8 @@ RMCTentRoofStandard: null
 RMCTentRoofExtended: null
 RMCTentBodyStandard: RMCTentUNMCStandard
 RMCTentBodyExtended: RMCTentUNMCExtended
+
+# 2025-09-28
+DeskBell: RMCDeskBell
+SignNoSmoking: CMPosterNoSmoking
+SignSmoking: CMPosterNoSmoking2
