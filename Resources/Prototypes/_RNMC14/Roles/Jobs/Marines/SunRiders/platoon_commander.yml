@@ -56,6 +56,13 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: platco
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        200: Critical
+        350: Dead
+    - type: Perishable
+      rotAfter: 0
 
 - type: startingGear
   id: CMGearPlatco
