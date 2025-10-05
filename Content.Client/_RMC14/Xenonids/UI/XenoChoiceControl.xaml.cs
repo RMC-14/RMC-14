@@ -26,10 +26,10 @@ public partial class XenoChoiceControl : Control
 
         PlasmaButton.ModulateSelfOverride = PlasmaColor;
         HealButton.ModulateSelfOverride = HealColor;
-        PlasmaButton.OnMouseEntered += OnHovered;
-        PlasmaButton.OnMouseExited += OnStopHovering;
-        HealButton.OnMouseEntered += OnHovered;
-        HealButton.OnMouseExited += OnStopHovering;
+        PlasmaButton.OnMouseEntered += OnPlasmaHovered;
+        PlasmaButton.OnMouseExited += OnPlasmaButtonStopHovering;
+        HealButton.OnMouseEntered += OnHealHovered;
+        HealButton.OnMouseExited += OnHealButtonStopHovering;
     }
 
     public void Set(string name, Texture? texture)
@@ -81,30 +81,32 @@ public partial class XenoChoiceControl : Control
     }
 
 
-    public void OnHovered(GUIMouseHoverEventArgs args)
+    public void OnPlasmaHovered(GUIMouseHoverEventArgs args)
     {
         if (args.SourceControl is not Button button)
             return;
-
-            button.ModulateSelfOverride = (button.Name) switch
-            {
-                ("HealButton") => HealHighlightColor,
-                ("PlasmaButton") => PlasmaHighlightColor,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+        button.ModulateSelfOverride = PlasmaHighlightColor;
     }
 
-    public void OnStopHovering(GUIMouseHoverEventArgs args)
+    public void OnHealHovered(GUIMouseHoverEventArgs args)
     {
         if (args.SourceControl is not Button button)
             return;
+        button.ModulateSelfOverride = HealHighlightColor;
+    }
 
-        button.ModulateSelfOverride = (button.Name) switch
-        {
-            ("HealButton") => HealColor,
-            ("PlasmaButton") => PlasmaColor,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+    public void OnHealButtonStopHovering(GUIMouseHoverEventArgs args)
+    {
+        if (args.SourceControl is not Button button)
+            return;
+        button.ModulateSelfOverride = HealColor;
+    }
+
+    public void OnPlasmaButtonStopHovering(GUIMouseHoverEventArgs args)
+    {
+        if (args.SourceControl is not Button button)
+            return;
+        button.ModulateSelfOverride = PlasmaColor;
     }
 
 }

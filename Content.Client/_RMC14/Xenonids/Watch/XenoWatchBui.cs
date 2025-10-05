@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using Content.Client._RMC14.Xenonids.UI;
+using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -95,7 +96,7 @@ public sealed class XenoWatchBui : BoundUserInterface
                 xenobutton.Name = xeno.Name.Replace(" ", "");
                 xenobutton.ToggleMode = true;
                 xenobutton.ModulateSelfOverride = Color.Purple;
-                xenobutton.AddStyleClass("ButtonSquare");
+                xenobutton.AddStyleClass(StyleBase.ButtonSquare);
 
                 xenobutton.OnToggled += OnButtonToggled;
                 xenocontrol.XenoButton.AddChild(xenobutton);
