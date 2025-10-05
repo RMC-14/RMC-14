@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added "Vessel Map" Monitors, which will display a zoomable map of the
-      ship with names.
-    type: Add
-  id: 1888
-  time: '2025-06-25T04:21:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6791
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Staff Officers spawning with a regular cap instead of an officer
@@ -4483,5 +4475,15 @@
   id: 2387
   time: '2025-10-05T02:23:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7958
+- author: Whisper
+  changes:
+  - message: Added the Logistics Officer, who replaces the former Quartermaster.
+    type: Add
+  - message: Removed ASO's authority in the requisitions department. The head of requisitions
+      is now an officer.
+    type: Remove
+  id: 2388
+  time: '2025-10-05T02:40:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7929
 Name: RMC14
 Order: -1
