@@ -10,6 +10,13 @@
     itemIconStyle: NoItem
 
 - type: entity
+  id: RMCGuidebookActionSmartGunBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+
+- type: entity
   parent: ActionMarineBase
   id: RMCActionToggleAmmo
   name: Toggle Ammo Type
@@ -83,3 +90,20 @@
     itemIconStyle: NoItem
   - type: InstantAction
     event: !type:ToggleableMotionDetectorActionEvent
+
+# Guidebook
+- type: entity
+  parent: RMCGuidebookActionSmartGunBase
+  id: RMCGuidebookActionIFF
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: iff_toggle_on
+
+- type: entity
+  parent: RMCGuidebookActionSmartGunBase
+  id: RMCGuidebookActionMotionDetector
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: motion_detector

@@ -377,7 +377,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCargotech
-  name: cargo tech encryption key
+  name: req tech encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -388,7 +388,7 @@
   - type: Sprite
     state: req_key
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: CMEncryptionKeyRequisition
   id: RMCEncryptionKeyQuartermaster

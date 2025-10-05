@@ -442,6 +442,7 @@
 - type: entity
   parent: CMLightFixtureSmall
   id: RMCLightFixtureSmallRed
+  suffix: Red
   components:
   - type: Sprite
     color: "#C02526"
