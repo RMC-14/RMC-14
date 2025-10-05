@@ -93,7 +93,7 @@ public sealed class XenoLungeSystem : EntitySystem
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
 
-        //Handle close-range or same-tile lunges
+        // Handle close-range or same-tile lunges
         foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
         {
             if (ent != args.Target)
@@ -135,7 +135,6 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
     {
-        // TODO RMC14 lag compensation
         if (_mobState.IsDead(targetId))
             return false;
 
