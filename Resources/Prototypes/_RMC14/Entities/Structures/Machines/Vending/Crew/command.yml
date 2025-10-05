@@ -981,7 +981,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1171,15 +1173,13 @@
       - id: RMCSynthResetKey
         amount: 15
     # ////////////////////////////////////
-    # Quartermaster
+    # Logistics Officer
     # ////////////////////////////////////
     - name: Standard Equipment
       jobs:
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitQM
-      - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
@@ -1187,15 +1187,12 @@
       - CMQuartermaster
       choices: { CMHands: 1 }
       entries:
-      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapQuartermaster
-        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
@@ -1220,7 +1217,6 @@
       entries:
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
-      - id: CMBootsBlackFilled
     - name: Patches
       jobs:
       - CMQuartermaster

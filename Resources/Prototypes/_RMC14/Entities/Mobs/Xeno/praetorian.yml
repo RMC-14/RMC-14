@@ -150,6 +150,8 @@
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianValkyrie
   - type: AcidTrap
+  - type: RMCActionOrder
+    id: CMXenoPraetorian
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -221,6 +223,8 @@
   - type: XenoHighGallop
   - type: XenoHidden
   - type: AcidTrap
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianValkyrie
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -255,6 +259,8 @@
         Brute: 40
   - type: XenoTailTrip
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianDancer
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -306,6 +312,8 @@
         Brute: 40
   - type: XenoCleave
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianVanguard
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -372,3 +380,5 @@
       groups:
         Brute: 15
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianOppressor

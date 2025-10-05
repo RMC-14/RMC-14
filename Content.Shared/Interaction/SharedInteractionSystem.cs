@@ -99,7 +99,7 @@ namespace Content.Shared.Interaction
 
         public delegate bool Ignored(EntityUid entity);
 
-        [Dependency] private readonly SharedRMCLagCompensationSystem _lagCompensation = default!;
+        [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
         [Dependency] private readonly INetManager _net = default!;
 
         public override void Initialize()
@@ -258,6 +258,7 @@ namespace Content.Shared.Interaction
 
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            _rmcLagCompensation.SendLastRealTick();
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
                 Log.Info($"TryPullObject input validation failed");
@@ -308,6 +309,7 @@ namespace Content.Shared.Interaction
 
         public bool HandleAltUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            _rmcLagCompensation.SendLastRealTick();
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
@@ -322,6 +324,7 @@ namespace Content.Shared.Interaction
 
         public bool HandleUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            _rmcLagCompensation.SendLastRealTick();
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
@@ -694,7 +697,8 @@ namespace Content.Shared.Interaction
             Ignored? predicate = null,
             bool popup = false,
             bool overlapCheck = true,
-            bool lagCompensated = false)
+            EntityUid? user = null,
+            bool lagCompensate = true)
         {
             if (!Resolve(other, ref other.Comp))
                 return false;
@@ -702,11 +706,16 @@ namespace Content.Shared.Interaction
             var ev = new InRangeOverrideEvent(origin, other);
             RaiseLocalEvent(origin, ref ev);
 
+            if (ev.Handled)
+            {
+                return ev.InRange;
+            }
+
             // RMC14
             var otherCoordinates = other.Comp.Coordinates;
             var otherAngle = other.Comp.LocalRotation;
-            if (lagCompensated && TryComp(origin, out ActorComponent? originActor))
-                (otherCoordinates, otherAngle) = _lagCompensation.GetCoordinatesAngle(other, originActor.PlayerSession);
+            if (lagCompensate && TryComp(user ?? origin, out ActorComponent? originActor))
+                (otherCoordinates, otherAngle) = _rmcLagCompensation.GetCoordinatesAngle(other, originActor.PlayerSession);
             // RMC14
 
             return InRangeUnobstructed(origin,
@@ -717,8 +726,7 @@ namespace Content.Shared.Interaction
                 collisionMask,
                 predicate,
                 popup,
-                overlapCheck,
-                lagCompensated: lagCompensated);
+                overlapCheck);
         }
 
         /// <summary>
@@ -758,11 +766,10 @@ namespace Content.Shared.Interaction
             CollisionGroup collisionMask = InRangeUnobstructedMask,
             Ignored? predicate = null,
             bool popup = false,
-            bool overlapCheck = true,
-            bool lagCompensated = false)
+            bool overlapCheck = true)
         {
-            if (lagCompensated && _net.IsServer)
-                range += _lagCompensation.InteractionMarginTiles;
+            if (_net.IsServer)
+                range += _rmcLagCompensation.MarginTiles;
 
             Ignored combinedPredicate = e => e == origin.Owner || (predicate?.Invoke(e) ?? false);
             var inRange = true;
@@ -816,12 +823,7 @@ namespace Content.Shared.Interaction
                 // Out of range so don't raycast.
                 else if (distance > range)
                 {
-                    if (lagCompensated)
-                    {
-                        originPos = _transform.GetMapCoordinates(origin, xform: origin.Comp);
-                    }
-                    else
-                        inRange = false;
+                    originPos = _transform.GetMapCoordinates(origin, xform: origin.Comp); // RMC14
                 }
                 else
                 {
@@ -1145,6 +1147,7 @@ namespace Content.Shared.Interaction
         #region ActivateItemInWorld
         private bool HandleActivateItemInWorld(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
+            _rmcLagCompensation.SendLastRealTick();
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
                 Log.Info($"ActivateItemInWorld input validation failed");
@@ -1325,7 +1328,7 @@ namespace Content.Shared.Interaction
             if (!Resolve(target, ref target.Comp))
                 return false;
 
-            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate, lagCompensated: lagCompensated);
+            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate);
         }
 
         /// <summary>
