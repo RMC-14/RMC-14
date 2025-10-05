@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed close Queen scream stacking with far queen scream effects.
-    type: Fix
-  id: 1897
-  time: '2025-06-26T11:06:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6707
 - author: Arykh
   changes:
   - message: Cryoxadone and Clonexadone can now heal CloneLoss(Genetic).
@@ -4477,5 +4470,13 @@
   id: 2396
   time: '2025-10-05T03:30:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7690
+- author: Aurallianz
+  changes:
+  - message: Fixed Requisitions Echo supply drop console cooldown being too high (500
+      seconds > 300 seconds).
+    type: Fix
+  id: 2397
+  time: '2025-10-05T03:35:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8001
 Name: RMC14
 Order: -1
