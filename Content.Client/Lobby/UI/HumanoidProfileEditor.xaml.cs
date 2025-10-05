@@ -1120,6 +1120,7 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
+                    // RMC14
                     var rankOptions = new OptionButton()
                     {
                         Name = Loc.GetString("rank-options-button"),
