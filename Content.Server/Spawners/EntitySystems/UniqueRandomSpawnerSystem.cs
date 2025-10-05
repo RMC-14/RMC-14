@@ -55,12 +55,13 @@ namespace Content.Server.Spawners.EntitySystems
                 return;
 
             // Initialize the pool for this group if it doesn't exist
-            if (!_remainingPrototypes.ContainsKey(component.SpawnerGroup))
+            var groupKey = component.SpawnerGroup.Id;
+            if (!_remainingPrototypes.ContainsKey(groupKey))
             {
-                _remainingPrototypes[component.SpawnerGroup] = new List<EntProtoId>(component.Prototypes);
+                _remainingPrototypes[groupKey] = new List<EntProtoId>(component.Prototypes);
             }
 
-            var pool = _remainingPrototypes[component.SpawnerGroup];
+            var pool = _remainingPrototypes[groupKey];
             
             if (pool.Count == 0)
             {

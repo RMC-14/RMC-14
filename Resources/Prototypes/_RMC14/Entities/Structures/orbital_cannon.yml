@@ -162,7 +162,7 @@
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
   - type: UniqueRandomSpawner
-    spawnerGroup: "orbital_cannon_warheads"
+    spawnerGroup: RMCOrbitalCannonWarheadSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster

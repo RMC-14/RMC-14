@@ -5,6 +5,7 @@ namespace Content.Server.Spawners.Components
     /// <summary>
     /// A spawner that randomly selects from a list of prototypes without spawning duplicates.
     /// All spawners with the same group will share a pool and avoid duplicates.
+    /// Inherits the Prototypes field (List&lt;EntProtoId&gt;) from ConditionalSpawnerComponent.
     /// </summary>
     [RegisterComponent, EntityCategory("Spawner")]
     public sealed partial class UniqueRandomSpawnerComponent : ConditionalSpawnerComponent
@@ -15,7 +16,7 @@ namespace Content.Server.Spawners.Components
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField(required: true)]
-        public string SpawnerGroup { get; set; } = string.Empty;
+        public EntProtoId SpawnerGroup { get; set; } = string.Empty;
 
         /// <summary>
         /// Whether to delete the spawner after spawning
