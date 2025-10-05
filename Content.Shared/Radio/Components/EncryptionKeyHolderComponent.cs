@@ -3,6 +3,7 @@ using Content.Shared.Tools;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Radio.Components;
@@ -67,5 +68,5 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     /// </summary>
     [ViewVariables]
     [AutoNetworkedField]
-    public HashSet<string> ReadOnlyChannels = new();
+    public HashSet<ProtoId<RadioChannelPrototype>> ReadOnlyChannels = new();
 }

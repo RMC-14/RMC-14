@@ -228,7 +228,6 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
     public void UpdateAppearance(Entity<CommunicationsTowerComponent> tower)
     {
-
         _appearance.SetData(tower, CommunicationsTowerLayers.Layer, tower.Comp.State);
     }
 

@@ -566,6 +566,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         var grid = _transform.GetGrid(entity);
         return HasComp<DropshipComponent>(grid);
     }
+
     public bool IsOnDropship(EntityCoordinates coordinates)
     {
         var grid = _transform.GetGrid(coordinates);
