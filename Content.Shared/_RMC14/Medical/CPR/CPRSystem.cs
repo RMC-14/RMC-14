@@ -126,21 +126,23 @@ public sealed class CPRSystem : EntitySystem
         var performer = args.Performer;
 
         // TODO RMC14 move this value to a component
-        if (_mobState.IsDead(ent) &&
-            ent.Comp.Last > _timing.CurTime - TimeSpan.FromSeconds(7))
+        if (!_mobState.IsDead(ent) ||
+            ent.Comp.Last <= _timing.CurTime - TimeSpan.FromSeconds(7))
         {
-            args.Cancelled = true;
-
-            if (_net.IsClient)
-                return;
-
-            var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", target));
-            _popups.PopupEntity(selfPopup, target, performer, PopupType.MediumCaution);
-
-            var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", target));
-            var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.MediumCaution);
+            return;
         }
+
+        args.Cancelled = true;
+
+        if (_net.IsClient)
+            return;
+
+        var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", target));
+        _popups.PopupEntity(selfPopup, target, performer, PopupType.MediumCaution);
+
+        var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", target));
+        var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
+        _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.MediumCaution);
     }
 
     private void OnMobStateCPRAttempt(Entity<MobStateComponent> ent, ref ReceiveCPRAttemptEvent args)
