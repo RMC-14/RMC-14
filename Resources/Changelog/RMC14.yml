@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added "Vessel Map" Monitors, which will display a zoomable map of the
-      ship with names.
-    type: Add
-  id: 1888
-  time: '2025-06-25T04:21:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6791
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Staff Officers spawning with a regular cap instead of an officer
-      cap.
-    type: Fix
-  id: 1889
-  time: '2025-06-25T04:26:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6740
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the MAR-30 battle carbine, a carbine of the MAR-40 rifle. Security
-      survivors have a chance to spawn with this weapon.
-    type: Add
-  - message: Fixed MAR-40 burst firerate being too slow
-    type: Fix
-  - message: Fixed burst cooldown for MAR-40 being 0
-    type: Fix
-  id: 1890
-  time: '2025-06-25T04:28:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6743
 - author: Dutch-VanDerLinde
   changes:
   - message: Added the industrial welder to survivor gear.
@@ -4483,5 +4455,29 @@
   id: 2387
   time: '2025-10-05T02:23:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7958
+- author: Whisper
+  changes:
+  - message: Added the Logistics Officer, who replaces the former Quartermaster.
+    type: Add
+  - message: Removed ASO's authority in the requisitions department. The head of requisitions
+      is now an officer.
+    type: Remove
+  id: 2388
+  time: '2025-10-05T02:40:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7929
+- author: leon-krol
+  changes:
+  - message: Updated the Requisitions guide.
+    type: Tweak
+  id: 2389
+  time: '2025-10-05T02:44:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6806
+- author: yagwog
+  changes:
+  - message: Added pre-mapped-in standardized MP forms.
+    type: Add
+  id: 2390
+  time: '2025-10-05T02:53:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8044
 Name: RMC14
 Order: -1
