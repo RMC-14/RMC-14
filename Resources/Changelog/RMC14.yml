@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON rifleman not having medical skill of 1
-    type: Fix
-  id: 1881
-  time: '2025-06-25T04:01:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6694
 - author: crazy1112345
   changes:
   - message: Fixed faction assignment for fax responders and CLF roles.
@@ -4476,5 +4469,12 @@
   id: 2380
   time: '2025-10-03T21:13:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7984
+- author: DummeHytteOst
+  changes:
+  - message: onigiri now gives a bowl back when eaten.
+    type: Fix
+  id: 2381
+  time: '2025-10-05T01:55:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8035
 Name: RMC14
 Order: -1
