@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: t0wnshark
   changes:
-  - message: You can now roll the sleeves of the synthetic support jumpsuit and take
-      the jacket off.
-    type: Add
-  id: 1884
-  time: '2025-06-25T04:07:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6705
-- author: t0wnshark
-  changes:
   - message: Added green and blue surgical webbings. These hold the same items as
       a surgical tray but can be equipped as a webbing.
     type: Add
@@ -4483,5 +4475,13 @@
   id: 2383
   time: '2025-10-05T02:05:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7951
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed being able to store underbarrel attachment guns in the ammo load
+      rig.
+    type: Fix
+  id: 2384
+  time: '2025-10-05T02:09:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7930
 Name: RMC14
 Order: -1
