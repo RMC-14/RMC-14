@@ -12,7 +12,7 @@ highlights-executive-officer = Executive Officer, "XO", Captain, "Cap", Combat I
 highlights-staff-officer = Staff Officer, "SO", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, Phone, "TECH REPORT", "SL", Commander
 
 # Requisitions
-highlights-quartermaster = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
+highlights-quartermaster = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo, Quartermaster, "QM"
 highlights-cargo-technician = Cargo Technician, Cargo Tech, "CT" Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
 
 # Engineering
