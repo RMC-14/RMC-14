@@ -171,11 +171,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(warding.Owner)))
         {
-            var damageReduct = _rmcDamageable.DistributeDamage(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
+            var damageReduct = _rmcDamageable.DistributeDamageCached(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
             args.Damage -= damageReduct;
         }
         else
-            args.Damage = -_rmcDamageable.DistributeDamage(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.5f);
+            args.Damage = -_rmcDamageable.DistributeDamageCached(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.5f);
     }
 
     private void OnFrenzyRemove(Entity<XenoFrenzyPheromonesComponent> ent, ref ComponentRemove args)
