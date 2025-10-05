@@ -46,6 +46,7 @@ public sealed class DeployableItemSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DeployableItemComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<DeployableItemComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<DeployableItemComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<DeployableItemComponent, CanDragEvent>(OnCanDrag);
         SubscribeLocalEvent<DeployableItemComponent, CanDropDraggedEvent>(OnCanDropDragged);
@@ -147,6 +148,21 @@ public sealed class DeployableItemSystem : EntitySystem
 
         args.Handled = true;
         Deploy(ent, args.User, args.ClickLocation);
+    }
+
+    private void OnInteractHand(Entity<DeployableItemComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!ent.Comp.LeftClickPickup)
+            return;
+
+        if (ent.Comp.Position == DeployableItemPosition.None)
+            return;
+
+        args.Handled = true;
+        Pickup(ent, args.User);
     }
 
     private void OnUseInHand(Entity<DeployableItemComponent> ent, ref UseInHandEvent args)
