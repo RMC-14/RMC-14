@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed some Asphalt tiles being pryable.
-    type: Fix
-  id: 1911
-  time: '2025-06-27T06:09:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6809
 - author: x5tink
   changes:
   - message: Pill0 intergration  test bugfix
@@ -4497,5 +4490,18 @@
   id: 2411
   time: '2025-10-05T07:53:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7232
+- author: noctyrnal
+  changes:
+  - message: Podlocks can now be pried open when unpowered.
+    type: Fix
+  - message: Xenonids now take 4 seconds to pry open podlocks and shutters.
+    type: Fix
+  - message: Xenonids now have a unique sound when prying open things.
+    type: Fix
+  - message: Xenonids cannot pry doors closed anymore.
+    type: Fix
+  id: 2412
+  time: '2025-10-05T07:56:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6959
 Name: RMC14
 Order: -1
