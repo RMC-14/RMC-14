@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -833,18 +834,16 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void DisableSpecificAbilities(EntityUid ent)
     {
-        var actions = _action.GetActions(ent);
-        foreach (var action in actions)
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoRestActionEvent>(ent))
         {
-            var actionName = Name(action).ToLower();
-            if (actionName.Contains("rest") || actionName.Contains("regurgitate"))
-            {
-                _action.SetEnabled(action.AsNullable(), false);
-            }
+            _action.SetEnabled((action, action), false);
+        }
+        
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoRegurgitateActionEvent>(ent))
+        {
+            _action.SetEnabled((action, action), false);
         }
     }
-
-
 
     private bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string? name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
