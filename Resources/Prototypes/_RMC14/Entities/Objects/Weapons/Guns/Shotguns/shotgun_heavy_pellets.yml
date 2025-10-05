@@ -73,7 +73,8 @@
       superSlowTime: 2
       knockBackSpeed: 7
     - whitelist: # TODO RMC14 stamina damage targeted at part
-        minMobSize: VerySmallXeno
+        components:
+        - Marine
       maxRange: 7.5
       slowTime: 2
       superSlowTime: 1
