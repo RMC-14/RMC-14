@@ -391,3 +391,5 @@
   - type: RMCHealthIcons
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: RMCActionOrder
+    id: RMCBaseMobSpeciesOrganic
