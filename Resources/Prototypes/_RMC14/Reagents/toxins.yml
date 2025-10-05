@@ -39,9 +39,6 @@
         potency: 8
       - !type:Biocidic
         potency: 1
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
 
 - type: reagent
   parent: [ CMReagent, MindbreakerToxin ]

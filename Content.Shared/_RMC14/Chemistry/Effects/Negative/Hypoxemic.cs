@@ -2,7 +2,9 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
@@ -11,6 +13,7 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
+    private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -24,7 +27,18 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
         var damage = new DamageSpecifier();
         damage.DamageDict[AsphyxiationType] = potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
-        // Gasp emote 10% chance
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (!random.Prob(0.1f))
+            return;
+
+        var emoteEffect = new Content.Shared.EntityEffects.Effects.Emote
+        {
+            EmoteId = GaspEmote.Id, ShowInChat = true, Force = false,
+        };
+
+        var emoteArgs = new EntityEffectBaseArgs(args.TargetEntity, args.EntityManager);
+        emoteEffect.Effect(emoteArgs);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
