@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the AK-4047 Assault Rifle for SPP colonists.
-    type: Add
-  - message: Added all the missing Cargo Containers.
-    type: Add
-  id: 1908
-  time: '2025-06-27T06:01:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6794
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed biosuits not having 100 biohazard protection
@@ -4474,5 +4465,15 @@
   id: 2407
   time: '2025-10-05T05:02:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7579
+- author: NotInButIn
+  changes:
+  - message: Fixed the ability to upgrade barricades in acid
+    type: Fix
+  - message: Fixed the ability to melt the mount for dropship modules; now the module
+      inside melts
+    type: Fix
+  id: 2408
+  time: '2025-10-05T06:26:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7968
 Name: RMC14
 Order: -1
