@@ -1,3 +1,4 @@
+
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
@@ -35,48 +36,40 @@ namespace Content.Server.Spawners.EntitySystems
             _remainingPrototypes.Clear();
         }
 
-        private void OnMapInit(EntityUid uid, UniqueRandomSpawnerComponent component, MapInitEvent args)
+        private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, MapInitEvent args)
         {
-            Spawn(uid, component);
+            Spawn(ent);
             
-            if (component.DeleteSpawnerAfterSpawn)
+            if (ent.Comp.DeleteSpawnerAfterSpawn)
                 QueueDel(uid);
         }
 
-        private void Spawn(EntityUid uid, UniqueRandomSpawnerComponent component)
+        private void Spawn(Entity<UniqueRandomSpawnerComponent> ent)
         {
-            if (component.Prototypes.Count == 0)
+            if (ent.Comp.Prototypes.Count == 0)
             {
-                Log.Warning($"Prototype list in UniqueRandomSpawnerComponent is empty! Entity: {ToPrettyString(uid)}");
+                Log.Warning($"Prototype list in UniqueRandomSpawnerComponent is empty! Entity: {ToPrettyString(ent)}");
                 return;
             }
-
-            if (Deleted(uid))
+            if (Deleted(ent))
                 return;
-
             // Initialize the pool for this group if it doesn't exist
-            var groupKey = component.SpawnerGroup.Id;
-            if (!_remainingPrototypes.ContainsKey(groupKey))
+            if (!_remainingPrototypes.ContainsKey(ent.Comp.SpawnerGroup))
             {
-                _remainingPrototypes[groupKey] = new List<EntProtoId>(component.Prototypes);
+                _remainingPrototypes[ent.Comp.SpawnerGroup] = new List<EntProtoId>(ent.Comp.Prototypes);
             }
-
-            var pool = _remainingPrototypes[groupKey];
+            var pool = _remainingPrototypes[ent.Comp.SpawnerGroup];
             
             if (pool.Count == 0)
             {
-                Log.Warning($"No more unique prototypes available for group {component.SpawnerGroup}. Entity: {ToPrettyString(uid)}");
+                Log.Warning($"No more unique prototypes available for group {ent.Comp.SpawnerGroup}. Entity: {ToPrettyString(ent)}");
                 return;
             }
-
             // Pick a random prototype from the remaining pool
             var selectedProto = _robustRandom.Pick(pool);
             
             // Remove it from the pool so it won't be picked again
             pool.Remove(selectedProto);
-
             // Spawn the entity
-            Spawn(selectedProto, Transform(uid).Coordinates);
+            Spawn(selectedProto, Transform(ent).Coordinates);
         }
-    }
-}
