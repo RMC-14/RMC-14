@@ -47,7 +47,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
             });
-        SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<IdModificationConsoleComponent, MapInitEvent>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<IdModificationConsoleComponent, InteractUsingEvent>(OnInteractHand);
 
@@ -377,7 +377,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         return contained != null;
     }
 
-    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref ComponentInit args)
+    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref MapInitEvent args)
     {
         UpdateAccessList(ent);
     }

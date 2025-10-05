@@ -253,6 +253,22 @@ cm-job-prefix-survivor-riot-officer = UN RO
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
 
+# Kutjevo Refinery Survs
+
+rmc-job-name-survivor-kutjevo-chaplain = Kutjevo Chaplain
+
+rmc-job-name-survivor-kutjevo-corporate = Kutjevo Corporate Liaison
+
+rmc-job-name-survivor-kutjevo-doctor = Kutjevo Doctor
+
+rmc-job-name-survivor-kutjevo-engineer = Kutjevo Engineer
+
+rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
+
+rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
+
+rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
 # Chance's Colonists
 
 rmc-job-greeting-chances-colonist = You are a colonist living on LV-522. You are tasked by your employer, the Weston-Yamada Corporation, to preform your expected duties.

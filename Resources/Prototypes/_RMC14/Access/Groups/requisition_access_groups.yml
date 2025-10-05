@@ -1,7 +1,7 @@
 ﻿- type: accessGroup
   id: QuarterMaster
   parent: RMCBaseRequisitionsJob
-  name: Quartermaster
+  name: Logistics Officer
   tags:
   - CMAccessRequisitions
   - CMAccessQM
@@ -16,7 +16,7 @@
 - type: accessGroup
   id: CMCargoTech
   parent: RMCBaseRequisitionsJob
-  name: Cargo Technician
+  name: Requisitions Technician
   tags:
   - CMAccessRequisitions
 

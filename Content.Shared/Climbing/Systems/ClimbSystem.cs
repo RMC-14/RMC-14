@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Components;
@@ -41,6 +42,8 @@ public sealed partial class ClimbSystem : VirtualController
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
+    //RMC14
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
 
     private const string ClimbingFixtureName = "climb";
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable | CollisionGroup.BarricadeImpassable); // RMC14
@@ -219,9 +222,9 @@ public sealed partial class ClimbSystem : VirtualController
         if (climbing.IsClimbing)
             return true;
 
-        var ev = new AttemptClimbEvent(user, entityToMove, climbable);
-        RaiseLocalEvent(climbable, ref ev);
-        if (ev.Cancelled)
+        //RMC14
+        var canClimb = _rmcMovement.CanClimbOver(user, entityToMove, climbable);
+        if (!canClimb)
             return false;
 
         var args = new DoAfterArgs(EntityManager, user, comp.ClimbDelay, new ClimbDoAfterEvent(),

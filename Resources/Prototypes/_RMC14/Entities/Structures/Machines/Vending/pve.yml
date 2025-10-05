@@ -268,7 +268,7 @@
       - id: CMHandsBlackMarine
         name: Combat Gloves
         amount: 15
-      - id: RMCHeadsetDistressPMC
+      - id: RMCHeadsetDistressPMCPVE
         name: PMC Radio Headset
         amount: 15
       - id: RMCCameraGearPMC
