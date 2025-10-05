@@ -111,7 +111,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
-    camouflage: Urban
+    camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     survivorJobInserts:
@@ -277,7 +277,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
-    camouflage: Urban
+    camouflage: Classic
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     selectRandomSurvivorInsert: false
     survivorJobs:

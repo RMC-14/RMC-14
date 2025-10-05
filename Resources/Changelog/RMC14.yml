@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fix lurker and praetorian tackles applying a stun that was up to twice
-      as long as intended.
-    type: Fix
-  id: 1914
-  time: '2025-06-30T07:46:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6870
-- author: noctyrnal
-  changes:
-  - message: Added Calendars. These display the current date, and any in-universe
-      holidays that occur on the current date.
-    type: Add
-  - message: Added the Improvised Flamethrower. A replacement for the M34 Incinerator
-      on most planet maps, it cannot take any attachments but a rail flashlight and
-      cannot transfer fuel to the M34 and vice versa.
-    type: Add
-  - message: LV has received a large update.
-    type: Tweak
-  - message: Updated the sprites for hydroponic tools, portable generators, computer
-      frames, ores and the nuke disk.
-    type: Tweak
-  - message: Updated the survivor spawn icon.
-    type: Tweak
-  id: 1915
-  time: '2025-07-01T01:26:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6855
 - author: J C Denton
   changes:
   - message: 'Fiorina updated. Including, but not limited to: Medilathe, Armory equipment,
@@ -4508,5 +4481,20 @@
   id: 2414
   time: '2025-10-05T08:13:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7481
+- author: monomethylhydrazine
+  changes:
+  - message: increased intel officer unlock requirements to 10 hours of squad time
+      and 1 hour each of combat technician and FTL playtime
+    type: Tweak
+  id: 2415
+  time: '2025-10-05T08:30:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6796
+- author: Max_Power
+  changes:
+  - message: Chance's Claim and Fiorina Science Annex now use 'Classic' camo again.
+    type: Tweak
+  id: 2416
+  time: '2025-10-05T08:31:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7436
 Name: RMC14
 Order: -1
