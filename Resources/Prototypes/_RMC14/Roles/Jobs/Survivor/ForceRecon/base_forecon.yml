@@ -15,6 +15,7 @@
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
   useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
   medals:
     Bronze: RMCMedalBronzeService
     Silver: RMCMedalSilverService
