@@ -963,7 +963,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 {
                     foreach (var blip in map.XenoBlips)
                     {
-                        map.LastUpdateMarineBlips.Add(blip.Key, blip.Value);
+                        map.LastUpdateMarineBlips.TryAdd(blip.Key, blip.Value);
                     }
                 }
 

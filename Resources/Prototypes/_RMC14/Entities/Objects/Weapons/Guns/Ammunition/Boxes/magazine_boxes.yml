@@ -258,6 +258,10 @@
           Medium: { state: shell_ammo_medium_color, visible: true }
           High: { state: shell_ammo_high_color, visible: true }
           Full: { state: shell_ammo_full_color, visible: true }
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
 
 # Supply Base
 - type: entity
