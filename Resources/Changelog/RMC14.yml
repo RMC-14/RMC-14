@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TornadoTechnology
-  changes:
-  - message: Fixed bullets hitting tesla coils when not being targeted directly, same
-      as sentries.
-    type: Fix
-  id: 1883
-  time: '2025-06-25T04:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6690
 - author: t0wnshark
   changes:
   - message: You can now roll the sleeves of the synthetic support jumpsuit and take
@@ -4478,5 +4470,18 @@
   id: 2382
   time: '2025-10-05T02:04:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7533
+- author: SharkSnake98
+  changes:
+  - message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
+    type: Add
+  - message: Added cases for a bunch of SPP guns and turrets, as well as ammo boxes
+      for the mainline SPP guns, and the SPP Shotgun rack.
+    type: Add
+  - message: Fixed the SPP Squad Leader using the name and sprite of the PMC Team
+      Lead
+    type: Fix
+  id: 2383
+  time: '2025-10-05T02:05:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7951
 Name: RMC14
 Order: -1
