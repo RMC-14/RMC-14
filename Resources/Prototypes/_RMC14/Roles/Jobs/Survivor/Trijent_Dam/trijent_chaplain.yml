@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentChaplain
   name: rmc-job-name-survivor-trijent-chaplain
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrijentChaplain
   startingGear: RMCGearSurvivorTrijentChaplain
   spawnMenuRoleName: Trijent Chaplain (Trijent Survivor)
   special:
@@ -26,6 +25,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorEquipped
@@ -48,10 +48,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrijentChaplain
-  isHumanoid: true
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]

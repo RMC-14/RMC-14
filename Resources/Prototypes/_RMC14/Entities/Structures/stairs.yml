@@ -14,6 +14,14 @@
     drawdepth: FloorTiles
 
 - type: entity
+  parent: RMCStairs
+  id: RMCStairsOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0, 0.325
+
+- type: entity
   id: RMCStairsCorner
   parent: RMCStairs
   suffix: Corner
@@ -222,6 +230,22 @@
   - type: Sprite
     state: rampbottom
     color: "#a6aeab"
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairs
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: rampbottom
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairsTop
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: ramptop
 
 - type: entity
   parent: RMCStairs

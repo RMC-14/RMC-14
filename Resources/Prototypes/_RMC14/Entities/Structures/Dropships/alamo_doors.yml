@@ -13,6 +13,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/alamo.rsi
+  - type: RemoveComponents
+    components:
+    - type: DoorBolt
 
 - type: entity
   parent: RMCDropshipDoorAftBase

@@ -14,7 +14,7 @@
   dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
-  marineAuthorityLevel: 7
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer
@@ -36,6 +36,7 @@
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
     - type: CMVendorUser
+      id: CMIntelOfficer
       points: 45
     - type: MarineOrders
     - type: RMCPointing
@@ -49,7 +50,7 @@
     - type: SquadArmorWearer
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: io
     - type: SquadNameOverride
       name: cm-job-name-intel

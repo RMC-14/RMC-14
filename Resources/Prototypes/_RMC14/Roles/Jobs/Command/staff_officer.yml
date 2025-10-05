@@ -23,7 +23,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 12
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - SO
   roleWeight: 0.25
@@ -48,6 +48,7 @@
         RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMStaffOfficer
       points: 45
     - type: RMCPointing
     - type: JobPrefix
@@ -56,10 +57,10 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: so
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
 
 - type: startingGear

@@ -7,6 +7,7 @@ using Content.Server.Interaction;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Labels.Components;
@@ -366,7 +367,8 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
             message,
             wrappedMessage,
             GetNetEntity(messageSource),
-            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key);
+            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
+            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source));
 
         var chatMsg = new MsgChatMessage { Message = chat };
 

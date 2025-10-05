@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -145,6 +145,7 @@
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
         interactionRange: 0
+        requireInputValidation: false
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
@@ -388,3 +389,5 @@
       components:
       - Xeno
   - type: RMCHealthIcons
+  - type: RMCMesonsNonviewable
+    xenoVisible: true

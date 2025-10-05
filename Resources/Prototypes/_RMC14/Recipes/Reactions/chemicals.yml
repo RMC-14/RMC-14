@@ -72,6 +72,8 @@
       amount: 0.5
     RMCSugar:
       amount: 0.5
+    RMCBlackGoo: # TODO RMC14 remove this once smoke works correctly
+      amount: 0.5
   effects:
     - !type:AreaReactionEffect
       duration: 10

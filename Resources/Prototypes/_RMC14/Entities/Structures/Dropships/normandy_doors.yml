@@ -37,3 +37,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
+  - type: RemoveComponents
+    components:
+    - type: DoorBolt

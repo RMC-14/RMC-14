@@ -17,6 +17,8 @@
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: RMCArmorVest
@@ -80,6 +82,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+  - type: RMCNameItemOnVend
+    item: Armor
 
 # mild melee armor
 - type: entity

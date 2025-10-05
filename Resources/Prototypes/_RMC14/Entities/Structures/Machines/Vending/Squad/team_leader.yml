@@ -61,8 +61,8 @@
       #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
       - id: RMCMagazinePistolM1984AP
         points: 5
       - id: CMMagazinePistolMK80
@@ -84,7 +84,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -230,7 +229,9 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
@@ -243,7 +244,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator and two packs of signal flares.
+  description: Contains a laser designator, two packs of signal flares and a Radio Telephone pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -252,6 +253,7 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator
