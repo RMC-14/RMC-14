@@ -132,6 +132,19 @@
     pack: CMVendorCoffee
     ejectState: eject-unshaded
 
+- type: entity
+  parent: CMVendorCoffee
+  id: CMVendorCoffeeLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
@@ -388,6 +401,7 @@
     RMCCigarettePackArcturianAce: 10
     #BalajiImperialCigPack: 10
     RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
+    RMCShioRoyalsTube: 10
     RMCMatchboxFull: 5
     CMExecutiveSelectMatchbook: 10
     #BalajiImperialMatchbook: 10
@@ -598,7 +612,7 @@
     RiceSeeds: 3
     # LibertyMycelium: 1 #Contraband
     # MessaTearSeeds: 1 #Contraband
-    AmbrosiaVulgarisSeeds: 1 #Contraband
+    # AmbrosiaVulgarisSeeds: 1 #Contraband
     NettleSeeds: 1 #Contraband
     LingzhiSeeds: 1 #ReishiMycelium #Contraband
     # WaterFlower: 1 #Premium
@@ -814,6 +828,20 @@
         amount: 12
       - id: ReagentContainerMayo
         amount: 12
+
+- type: entity
+  parent: CMVendorIngredients
+  id: CMVendorIngredientsLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 
 # PVE
 

@@ -1,6 +1,8 @@
 - type: job
-  parent: CMHospitalCorpsman
+  parent: CMJobSquadBase
   id: CMPVEHospitalCorpsman
+  name: cm-job-name-hospital-corpsman
+  description: cm-job-description-hospital-corpsman
   playTimeTracker: CMJobPVEHospitalCorpsman
   requirements:
   - !type:TotalJobsTimeRequirement
@@ -10,7 +12,13 @@
     RMCRankLanceCorporal: []
   spawnMenuRoleName: Sun Rider Hospital Corpsman (PVE)
   startingGear: RMCGearPVEHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
+  icon: "CMJobIconHospitalCorpsman"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-secserg
+  accessGroups:
+  - HospitalCorpsman
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,6 +34,12 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: cm-job-prefix-hospital-corpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
   hidden: true
 
 - type: playTimeTracker

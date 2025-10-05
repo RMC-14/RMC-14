@@ -36,6 +36,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaStrata
@@ -578,6 +579,9 @@
   parent: RMCAreaStrataInteriorCheckpoints
   id: RMCAreaStrataInteriorCheckpointsSouth
   name: Landing Zone South Security Checkpoint
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints
@@ -594,6 +598,8 @@
   components:
   - type: Sprite
     state: outpost_engi_1
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -972,6 +978,7 @@
   - type: Sprite
     state: marshwater
   - type: Area
+    alwaysPowered: true
     CAS: false
     fulton: false
     lasing: false

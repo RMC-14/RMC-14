@@ -71,7 +71,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol.22mm
+      - CMCartridgePistol22mm
     proto: CMCartridgePistol22mm
     capacity: 5
   - type: Sprite
@@ -109,6 +109,3 @@
 
 - type: Tag
   id: RMCMagazinePistolHoldout
-
-- type: Tag
-  id: CMCartridgePistol.22mm
