@@ -1,8 +1,8 @@
 ﻿# requisitions
-cm-job-name-quartermaster = Quartermaster
-cm-job-description-quartermaster = Your job is to dispense supplies to the marines, including weapon attachments.
-cm-job-prefix-quartermaster = QM
-CMJobQuartermaster = Quartermaster
+cm-job-name-quartermaster = Logistics Officer
+cm-job-description-quartermaster = Your job is to manage the logistics of the ship, including requisitions and food.
+cm-job-prefix-quartermaster = LO
+CMJobQuartermaster = Logistics Officer
 
 cm-job-name-cargotech = Requisitions Technician
 cm-job-description-cargotech = Your job is to dispense supplies to the marines, including weapon attachments.

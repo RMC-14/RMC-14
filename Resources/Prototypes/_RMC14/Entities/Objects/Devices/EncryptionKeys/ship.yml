@@ -388,7 +388,7 @@
   - type: Sprite
     state: req_key
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: CMEncryptionKeyRequisition
   id: RMCEncryptionKeyQuartermaster

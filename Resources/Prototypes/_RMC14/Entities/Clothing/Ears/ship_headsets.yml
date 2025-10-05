@@ -202,8 +202,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetQM
-  name: quartermaster radio headset
-  description: A headset used by the quartermaster for controlling their slave(s).
+  name: Logistics Officer radio headset
+  description: A headset used by the Logistics Officer.
   components:
   - type: Sprite
     state: ro_headset

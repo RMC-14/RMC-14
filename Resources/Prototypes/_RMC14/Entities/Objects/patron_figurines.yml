@@ -847,7 +847,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronXalos-Of-Europa
   name: Xalos-Of-Europa figurine
-  description: "Wait, what's the QM doing out of Req!?"
+  description: "Wait, what's the LO doing out of Req!?"
   components:
   - type: Sprite
     state: xalos-of-europa
