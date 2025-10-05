@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added more soul to LV-624 Lazarus Landing
-    type: Tweak
-  - message: Added various new item/loot spawners for mapping and admins.
-    type: Add
-  id: 1899
-  time: '2025-06-27T05:39:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6823
 - author: Vermidia
   changes:
   - message: Fixed Neurotoxin not blinding
@@ -4470,5 +4461,14 @@
   id: 2398
   time: '2025-10-05T03:38:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7909
+- author: Gabrote42
+  changes:
+  - message: Xenonids can no longer interact with the Orbital Bombardment Console.
+    type: Fix
+  - message: HE, Incendiary and Cluster Orbital Warheads now have descriptions.
+    type: Tweak
+  id: 2399
+  time: '2025-10-05T03:46:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7887
 Name: RMC14
 Order: -1
