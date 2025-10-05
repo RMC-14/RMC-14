@@ -4462,5 +4462,14 @@
   id: 2408
   time: '2025-10-05T06:26:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7968
+- author: SharkSnake98
+  changes:
+  - message: Added the CL safe and it's filled variant.
+    type: Add
+  - message: Added the SMART WeYa Synthetic Reset Key
+    type: Add
+  id: 2409
+  time: '2025-10-05T06:40:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7991
 Name: RMC14
 Order: -1
