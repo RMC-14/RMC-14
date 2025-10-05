@@ -495,29 +495,3 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetTSEPAFill
-
-# SPP
-- type: entity
-  parent: RMCLockerSquadLeader
-  id: RMCLockerSquadLeaderSPP
-  name: section lead locker
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: RMCClosetSPPSLFill
-
-- type: entity
-  parent: RMCLockerSmartGunOperatorOne
-  id: RMCLockerSmartGunOperatorSPPOne
-  name: squad one heavy gunner locker
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:NestedSelector
-        tableId: RMCClosetSPPSGOFill
-
-- type: entity
-  parent: RMCLockerSmartGunOperatorSPPOne
-  id: RMCLockerSmartGunOperatorSPPTwo
-  name: squad two heavy gunner locker
