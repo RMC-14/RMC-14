@@ -121,7 +121,7 @@
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP
-    - type: ItemMapper
+  - type: ItemMapper
     mapLayers:
       gun:
         whitelist:
