@@ -24,7 +24,7 @@
         - XenoProjectileImpassable
   - type: Projectile
     impactEffect: XenoProjectileImpactEffect
-    damage: {}
+    damage: { }
   - type: XenoProjectile
   - type: ProjectileMaxRange
     max: 7
@@ -40,7 +40,7 @@
       path: /Audio/_RMC14/Xeno/acid_impact1.ogg
 
 - type: entity
-  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
   id: XenoSpitProjectile
   name: spit
   categories: [ HideSpawnMenu ]
@@ -93,7 +93,7 @@
 
 - type: entity
   id: XenoSlowingSpitProjectile
-  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  parent: XenoBaseProjectile
   name: slowing spit
   categories: [ HideSpawnMenu ]
   components:
@@ -112,7 +112,7 @@
 
 - type: entity
   id: XenoQueenNeuroSpitProjectile
-  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
   name: neurotoxic spit
   categories: [ HideSpawnMenu ]
   components:
@@ -134,7 +134,7 @@
 
 - type: entity
   id: XenoScatteredSpitProjectile
-  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  parent: XenoBaseProjectile
   name: scattered spit
   categories: [ HideSpawnMenu ]
   components:
@@ -260,14 +260,14 @@
     affectsDead: false
     affectsInfectedNested: false
     toxinDamage:
-        groups:
-          Toxin: 2
+      groups:
+        Toxin: 2
     oxygenDamage:
-        types:
-          Asphyxiation: 150
+      types:
+        Asphyxiation: 150
     coughDamage:
-        groups:
-          Brute: 5
+      groups:
+        Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
 
@@ -378,7 +378,7 @@
       shader: unshaded
   - type: Projectile
     deleteOnCollide: false
-    damage: {}
+    damage: { }
   - type: TriggerOnFixedDistanceStop
     delay: 1
   - type: ProjectileGrenade

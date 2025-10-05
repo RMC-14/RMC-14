@@ -85,7 +85,9 @@
       takeAll: RMCBook
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     - name: Patches
       takeAll: RMCPatch
       entries:

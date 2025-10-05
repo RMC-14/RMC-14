@@ -164,6 +164,9 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRavagerBerserker
+    - RMCXenoRavagerHedgehog
+  - type: RMCActionOrder
+    id: CMXenoRavager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -235,3 +238,75 @@
       groups:
         Brute: 20
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoRavagerBerserker
+
+- type: entity
+  parent: RMCXenoRavagerBase
+  id: RMCXenoRavagerHedgehog
+  suffix: Hedgehog
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoFireSpikes
+    - ActionXenoSpikeShield
+    - ActionXenoSpikeShed
+    - ActionXenoDevolve
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: CMArmor
+    xenoArmor: 30
+    explosionArmor: 80
+  - type: XenoStrain
+    name: rmc-xeno-hedgehog-name
+    description: rmc-xeno-hedgehog-description
+    popup: rmc-xeno-hedgehog-popup
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoShard
+    shards: 0
+    maxShards: 300
+  - type: Appearance
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 3.2
+  - type: MeleeWeapon
+    attackRate: 0.9
+    damage:
+      groups:
+        Brute: 35
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: XenoSpikeShield
+    spikeDamage:
+      groups:
+        Brute: 15
+  - type: XenoFireSpikes
+    spikeDamage:
+      groups:
+        Brute: 5
+    moveDamage:
+      groups:
+        Brute: 10
+  - type: XenoSpikeShed
+    shardDamage:
+      groups:
+        Brute: 20
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoRavagerHedgehog

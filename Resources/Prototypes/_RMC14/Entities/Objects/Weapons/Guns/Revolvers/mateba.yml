@@ -373,8 +373,11 @@
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
   - type: RMCDebilitate
@@ -387,7 +390,7 @@
     knockdown: 4
 
 - type: entity
-  parent: CMBulletBase
+  parent: RMCBulletMatebaHighImpact
   id: RMCBulletMatebaHighImpactArmorPiercing #HIAP
   name: bullet (.454) HIAP
   categories: [ HideSpawnMenu ]
@@ -398,11 +401,6 @@
         Piercing: 45
   - type: CMArmorPiercing
     amount: 50
-  - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
-  - type: RMCProjectileAccuracy
-    accuracy: 90
 
 - type: entity
   parent: CMBulletBase
@@ -417,8 +415,11 @@
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
 

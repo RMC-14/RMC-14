@@ -27,13 +27,13 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var cmDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var healing = cmDamageable.DistributeHealing(args.TargetEntity, BurnGroup, potency);
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency);
 
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
         if (ActualPotency > 2)
         {
-            healing = cmDamageable.DistributeHealing(args.TargetEntity, BurnGroup, potency * 0.5f);
+            healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency * 0.5f);
             damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
         }
     }

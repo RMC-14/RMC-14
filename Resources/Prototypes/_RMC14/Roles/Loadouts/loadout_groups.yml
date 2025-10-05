@@ -251,7 +251,8 @@
   name: rmc-loadout-group-helmet-garbs
   minLimit: 0
   maxLimit: 2
-  loadouts: # no CAG night vision sorry LARPers
+  loadouts:
+  - FakeNVGPVERMC
   - BuckshotSpentRMC
   - FlechetteSpentRMC
   - SlugSpentRMC
@@ -285,6 +286,7 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PatchPeaceRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -338,7 +340,6 @@
   - MagazineBootsN160RMC
   - MagazineWeYaOrreryRMC
   - MagazineWeYaOrreryN184RMC
-  - MagazineDirtyMagazineRMC
   - D20DiceRMC
   - D6DiceRMC
 
@@ -417,6 +418,8 @@
   - ExecutiveSelectPackRMC
   - TarbackTubeRMC
   - TarbacksCaseRMC
+  - ShioRoyalsTubeRMC
+  - ShioRoyalsCaseRMC
   - PremiumCigarRMC
   - ZippoRMC
   - ZippoExecRMC
@@ -724,6 +727,7 @@
   - PatchWeYaRMCFury161
   - PatchTSERMC
   - PatchCECRMC
+  - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
   - HeadCowboyHatLightRMC

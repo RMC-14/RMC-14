@@ -15,8 +15,6 @@
   marineAuthorityLevel: 1
   accessGroups:
   - FTL
-  overwatchSortPriority: -5
-  overwatchRoleName: Squad Leaders
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -46,6 +44,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tl
+    - type: RMCTrackable
   hidden: true
 
 - type: playTimeTracker

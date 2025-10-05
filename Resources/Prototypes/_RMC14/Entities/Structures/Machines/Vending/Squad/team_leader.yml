@@ -84,7 +84,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -245,7 +244,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator and two packs of signal flares.
+  description: Contains a laser designator, two packs of signal flares and a Radio Telephone pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -254,6 +253,7 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator
