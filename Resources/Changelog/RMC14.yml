@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the success chance on high tackle streaks being too high, and the
-      tackle chance on low tackle streaks being too low.
-    type: Fix
-  id: 1887
-  time: '2025-06-25T04:19:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6734
 - author: noctyrnal
   changes:
   - message: Added "Vessel Map" Monitors, which will display a zoomable map of the
@@ -4484,5 +4476,12 @@
   id: 2386
   time: '2025-10-05T02:15:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8014
+- author: CatAndHats
+  changes:
+  - message: Renamed Cargo Technician to Requisitions Technician.
+    type: Tweak
+  id: 2387
+  time: '2025-10-05T02:23:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7958
 Name: RMC14
 Order: -1
