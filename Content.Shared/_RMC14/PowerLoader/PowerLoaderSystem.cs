@@ -120,7 +120,6 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntRemovedFromContainerMessage>(OnElectronicPointContainerChanged);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, CatchAttemptEvent>(OnPowerLoaderPilotCatchAttempt);
-        SubscribeLocalEvent<PowerLoaderComponent, CatchAttemptEvent>(OnPowerLoaderCatchAttempt);
 
         SubscribeLocalEvent<PowerLoaderComponent, BeforeMeltedEvent>(PowerLoaderBeforeMelted);
     }
@@ -1149,11 +1148,6 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         if (args.Container.ID == ent.Comp.ContainerId)
             SyncAppearance(ent, ent.Comp.ContainerId);
-    }
-
-    private void OnPowerLoaderCatchAttempt(Entity<PowerLoaderComponent> loader, ref CatchAttemptEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnPowerLoaderPilotCatchAttempt(Entity<ActivePowerLoaderPilotComponent> pilot, ref CatchAttemptEvent args)
