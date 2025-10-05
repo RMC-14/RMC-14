@@ -226,7 +226,7 @@
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseSentry
   name: UN 571-C Sentry Gun case
-  description: A gun case containing the UN 571-C sentry unit and a spare drum.
+  description: A gun case containing the UA 571-C sentry unit and a spare drum.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi

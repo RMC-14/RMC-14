@@ -1548,6 +1548,50 @@
       amount: 5
 
 - type: entity
+  parent: CMBeltMarine
+  id: RMCL24BeltFilled
+  suffix: Filled, L24
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL83A3BeltFilled
+  suffix: Filled, L83A3
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3
+      amount: 5
+
+- type: entity
+  parent: RMCBeltUtilityGeneral
+  id: RMCBeltUtiliyGeneralFilledRoyal
+  suffix: Filled, Royal Breacher
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolFilledL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
+
+- type: entity
   parent: RMCBeltSmartGunOperatorPistol
   id: RMCBeltSmartGunOperatorPistolPMC
   name: WY-TM410 pattern smargunner sidearm rig

@@ -1694,17 +1694,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethXi
-  name: Seth Xi figurine
-  description: "As you look upon the figurine, the distant clash of blades reaches your ears, followed by a faint echo—a voice, singing of bloodshed, and of a man in the mirror. Strange."
-  components:
-  - type: Sprite
-    state: seth_xi
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSudie-Mim
   name: Sudie-Mim figurine
   #description: ""
@@ -1848,3 +1837,25 @@
     state: roxanne_floppy_ears_dreams
   - type: PatronFigurine
     id: e83e290d-6405-4988-924f-1746a58ca83a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGallaginGCAddictCaitman
+  name: Gallagin 'GC Addict' Caitman figurine
+  description: "Smells of medicine and gunpowder."
+  components:
+  - type: Sprite
+    state: gallagin_gc_addict_caitman
+  - type: PatronFigurine
+    id: c97364e1-a409-44e4-bd09-323ef8a38121
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZethXi
+  name: Zeth Xi figurine
+  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  components:
+  - type: Sprite
+    state: zeth_xi
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
