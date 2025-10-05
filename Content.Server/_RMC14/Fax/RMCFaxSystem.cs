@@ -34,16 +34,16 @@ public sealed class RMCFaxSystem : EntitySystem
         }
         else
         {
-            CopyMultiple(uid, component, args);
+            CopyMultiple((uid, component), args);
         }
     }
 
-    private void CopyMultiple(EntityUid uid, FaxMachineComponent component, RMCFaxCopyMultipleMessage args)
+    private void CopyMultiple(Entity<FaxMachineComponent> ent, RMCFaxCopyMultipleMessage args)
     {
-        if (component.SendTimeoutRemaining > 0)
+        if (ent.Comp.SendTimeoutRemaining > 0)
             return;
 
-        var sendEntity = component.PaperSlot.Item;
+        var sendEntity = ent.Comp.PaperSlot.Item;
         if (sendEntity == null)
             return;
 
@@ -57,24 +57,22 @@ public sealed class RMCFaxSystem : EntitySystem
         var printout = new FaxPrintout(paper.Content,
                                        nameMod?.BaseName ?? metadata.EntityName,
                                        labelComponent?.CurrentLabel,
-                                       metadata.EntityPrototype?.ID ?? component.PrintPaperId,
+                                       metadata.EntityPrototype?.ID ?? ent.Comp.PrintPaperId,
                                        paper.StampState,
                                        paper.StampedBy,
                                        paper.EditingDisabled);
 
         for (int i = 0; i < args.Copies; i++)
         {
-            component.PrintingQueue.Enqueue(printout);
+            ent.Comp.PrintingQueue.Enqueue(printout);
         }
-        component.SendTimeoutRemaining += component.SendTimeout;
+        ent.Comp.SendTimeoutRemaining += ent.Comp.SendTimeout;
 
-        var updateMethod = typeof(FaxSystem).GetMethod("UpdateUserInterface", 
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        updateMethod?.Invoke(_faxSystem, new object[] { uid, component });
+        _faxSystem.UpdateUserInterface(ent, ent.Comp);
 
         _adminLogger.Add(LogType.Action,
             LogImpact.Low,
-            $"User added copy x{args.Copies} job to \"{component.FaxName}\" {ToPrettyString(uid):tool} " +
+            $"User added copy x{args.Copies} job to \"{ent.Comp.FaxName}\" {ToPrettyString(ent):tool} " +
             $"of {ToPrettyString(sendEntity):subject}: {printout.Content}");
     }
 

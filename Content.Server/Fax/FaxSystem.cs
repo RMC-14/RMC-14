@@ -366,7 +366,7 @@ public sealed class FaxSystem : EntitySystem
         else
             _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Normal);
     }
-    private void UpdateUserInterface(EntityUid uid, FaxMachineComponent? component = null)
+    public void UpdateUserInterface(EntityUid uid, FaxMachineComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
