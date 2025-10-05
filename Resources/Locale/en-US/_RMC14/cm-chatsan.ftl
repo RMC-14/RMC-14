@@ -184,7 +184,7 @@ cm-chatsan-replacement-engineer = tall builder
 cm-chatsan-word-comtech = comtech
 cm-chatsan-replacement-comtech = tall builder
 
-cm-chatsan-word-combat-technitian = combat technician
+cm-chatsan-word-combat-technician = combat technician
 cm-chatsan-replacement-combat-technician = tall builder
 
 cm-chatsan-word-corpsman = corpsman
@@ -550,11 +550,11 @@ cm-chatsan-word-paras = paras
 cm-chatsan-word-parasites = parasites
 cm-chatsan-replacement-parasites = children
 
-cm-chatsan-word-baricade = baricade
+cm-chatsan-word-barricade = barricade
 cm-chatsan-word-cade = cade
-cm-chatsan-word-baricades = baricades
+cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
-cm-chatsan-replacement-baricades = metal resin
+cm-chatsan-replacement-barricades = metal resin
 
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
@@ -654,12 +654,6 @@ cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
 cm-chatsan-replacement-disk = memory wheel
 
-cm-chatsan-word-canteen = canteen
-cm-chatsan-replacement-canteen = liquid carrier
-
-cm-chatsan-word-canteens = canteens
-cm-chatsan-replacement-canteens = liquid carriers
-
 cm-chatsan-word-flashlight = flashlight
 cm-chatsan-replacement-flashlight = glow tube
 
@@ -680,13 +674,11 @@ cm-chatsan-word-light-bulbs = light bulbs
 cm-chatsan-word-lightbulbs = lightbulbs
 cm-chatsan-replacement-light-bulbs = glow orbs
 
-cm-chatsan-word-case = case
 cm-chatsan-word-crate = crate
-cm-chatsan-replacement-case = containment box
+cm-chatsan-replacement-crate = containment box
 
-cm-chatsan-word-cases = cases
 cm-chatsan-word-crates = crates
-cm-chatsan-replacement-cases = containment boxes
+cm-chatsan-replacement-crates = containment boxes
 
 cm-chatsan-word-gunshot = gunshot
 cm-chatsan-replacement-gunshot = spit burst
@@ -705,3 +697,39 @@ cm-chatsan-replacement-folder = sheet holder
 
 cm-chatsan-word-folders = folders
 cm-chatsan-replacement-folders = sheet holders
+
+cm-chatsan-word-zerker = zerker
+cm-chatsan-word-replacement-zerker = berserker
+
+cm-chatsan-word-zerkers = zerkers
+cm-chatsan-word-replacement-zerkers = berserkers
+
+cm-chatsan-word-rav = rav
+cm-chatsan-word-replacement-rav = ravager
+
+cm-chatsan-word-ravs = ravs
+cm-chatsan-word-replacement-ravs = ravagers
+
+cm-chatsan-word-prae = prae
+cm-chatsan-word-replacement-prae = praetorian
+
+cm-chatsan-word-praes = praes
+cm-chatsan-word-replacement-praes = praetorians
+
+cm-chatsan-word-hivey = hivey
+cm-chatsan-word-replacement-hivey = hivelord
+
+cm-chatsan-word-hiveys = hiveys
+cm-chatsan-word-replacement-hiveys = hivelords
+
+cm-chatsan-word-cap = cap
+cm-chatsan-word-replacement-cap = capture
+
+cm-chatsan-word-caps = caps
+cm-chatsan-word-replacement-caps = captures
+
+cm-chatsan-word-capped = capped
+cm-chatsan-word-replacement-capped = captured
+
+cm-chatsan-word-phero = phero
+cm-chatsan-word-replacement-phero = pheromone

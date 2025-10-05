@@ -15,6 +15,7 @@
   icon: "CMJobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
+  marineAuthorityLevel: 14
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
@@ -42,7 +43,10 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: CMVendorUser
-      points: 120
+      id: CMExecutiveOfficer
+      points: 45
+      extraPoints:
+        Specialist: 120
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer
@@ -50,10 +54,10 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: xo
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCAllowSuitStorage
     - type: RMCTrackable

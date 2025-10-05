@@ -8,7 +8,7 @@ namespace Content.Shared.RMCLoreExaminable;
 public sealed partial class RMCLoreExaminableComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public string Content = string.Empty;
+    public LocId Content = string.Empty;
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<NpcFactionPrototype>>? Factions;

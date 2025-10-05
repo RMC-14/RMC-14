@@ -325,7 +325,7 @@
   id: RMCContainerSPPLeft
   suffix: SPP, Left
   name: SPP Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from the Socailists Progressive Peoples, as indicated by the massive symbol on the side."
+  description: "A huge industrial shipping container.\nThis one is from the Socialist Progressive Peoples, as indicated by the massive symbol on the side."
   components:
   - type: Sprite
     state: sppcontainerleft

@@ -25,7 +25,8 @@
     explosionArmor: 0
   - type: CMHardArmor
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       head:
@@ -120,3 +121,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi
+
+- type: entity
+  parent: RMCHardhatRed
+  id: RMCHardhatRedTMCC
+  name: tartarus-mining hard hat

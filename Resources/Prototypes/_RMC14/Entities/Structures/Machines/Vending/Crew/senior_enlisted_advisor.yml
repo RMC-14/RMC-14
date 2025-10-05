@@ -80,9 +80,17 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
 
 - type: entity
   parent: ColMarTechBase
@@ -102,7 +110,7 @@
     - name: Personal Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54CMK1
+      - id: RMCWeaponRifleM54CMK1
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1

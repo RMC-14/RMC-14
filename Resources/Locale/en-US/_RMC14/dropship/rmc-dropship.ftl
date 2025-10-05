@@ -1,5 +1,6 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
+rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
 
 rmc-dropship-weapons-title = Weapons Console
 

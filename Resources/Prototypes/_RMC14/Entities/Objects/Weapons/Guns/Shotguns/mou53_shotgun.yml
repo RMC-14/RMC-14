@@ -28,7 +28,7 @@
     burstScatterMult: 1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:

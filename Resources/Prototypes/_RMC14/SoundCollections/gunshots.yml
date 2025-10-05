@@ -5,3 +5,10 @@
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_2.ogg
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_3.ogg
     - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_4.ogg
+
+- type: soundCollection
+  id: RMCCMBSpearheadShoot
+  files:
+    - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
+    - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_2.ogg
+    - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_rattle.ogg

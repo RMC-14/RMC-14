@@ -42,6 +42,7 @@ rmc-examine-text-iff = [color=cyan]This gun will ignore and shoot past friendlie
 rmc-examine-text-id-lock-no-user = [color=chartreuse]It's unregistered. Pick it up to register yourself as its owner.[/color]
 rmc-examine-text-id-lock = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse].[/color]
 rmc-examine-text-id-lock-unlocked = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse], but has its fire restrictions unlocked.[/color]
+rmc-examine-text-execute = [color=red]This gun can be used to execute people with the right skill![/color]
 
 rmc-gun-rack-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to rack before shooting.[/bold]
 rmc-gun-rack-first-with = You need to rack the gun with {$key} first!
@@ -60,6 +61,10 @@ rmc-gun-stacks-reset = The {$weapon} beeps as it loses its targeting data, and r
 rmc-gun-shoot-air-self = YOU FIRE YOUR { CAPITALIZE($weapon) } INTO THE AIR!
 rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($weapon)) } INTO THE AIR!
 rmc-gun-shoot-air-blocked = The roof above you is too dense.
+rmc-gun-shoot-air-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default){$harm ->
+    [true] {" while in harm mode"}
+    *[false] {""}
+    } to fire into the air.[/bold]
 
 rmc-flare-gun-examine = The last signal flare fired has the designation: [color=#ad3b98][bold]{$id}[/bold][/color]
 

@@ -136,20 +136,10 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         if (args.burrowed)
         {
-            foreach (var entity in _rmcActions.GetActionsWithEvent<XenoBurrowActionEvent>(burrower))
-            {
-                _action.SetEnabled((entity, entity), false);
-            }
-
             _transform.AnchorEntity(burrower);
         }
         else
         {
-            foreach (var action in _action.GetActions(burrower))
-            {
-                _action.SetEnabled((action, action), true);
-            }
-
             _transform.Unanchor(burrower);
             if (TryComp(burrower, out PhysicsComponent? body))
             {

@@ -364,18 +364,27 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnUserAcidedVaporHit(Entity<UserAcidedComponent> ent, ref VaporHitEvent args)
     {
+        if (ent.Comp.AllowVaporHitAfter > _timing.CurTime)
+            return;
+
         var solEnt = args.Solution;
         foreach (var (_, solution) in _solution.EnumerateSolutions((solEnt, solEnt)))
         {
             if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
                 continue;
 
-            RemCompDeferred<UserAcidedComponent>(ent);
+            if (--ent.Comp.ResistsNeeded <= 0)
+                RemCompDeferred<UserAcidedComponent>(ent);
+            else
+            {
+                ent.Comp.AllowVaporHitAfter = _timing.CurTime + ent.Comp.ExtinguishGracePeriod;
+                Dirty(ent);
+            }
             break;
         }
     }
 
-    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze)
+    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
     {
         if (!Resolve(acided, ref acided.Comp, false))
             return;
@@ -396,7 +405,10 @@ public sealed class XenoSpitSystem : EntitySystem
         }
 
         if (paralyze != default)
+        {
             _stun.TryParalyze(acided.Owner, paralyze, true);
+            acided.Comp.ResistsNeeded = resists;
+        }
 
         Dirty(acided);
         UpdateAppearance((acided, acided.Comp));
@@ -416,9 +428,14 @@ public sealed class XenoSpitSystem : EntitySystem
         if (!_actionBlocker.CanInteract(player, null))
             return;
 
-        _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
         _stun.TryParalyze(player.Owner, player.Comp.ResistDuration, true);
-        RemCompDeferred<UserAcidedComponent>(player);
+        if (--player.Comp.ResistsNeeded <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
+            RemCompDeferred<UserAcidedComponent>(player);
+        }
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist-partial"), player, player);
     }
 
     private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)

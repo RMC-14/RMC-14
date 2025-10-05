@@ -22,7 +22,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ] ]
+    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -55,7 +55,7 @@
 #  - type: ActivatableUI
 #    key: enum.DropshipNavigationUiKey.Key
 #  - type: AccessReader
-#    access: [["CMAccessPilot"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO RMC14 make xeno queen just swipe
+#    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO RMC14 make xeno queen just swipe
 #  - type: ActivatableUIRequiresAccess
   - type: DropshipTerminal
 #  - type: UserInterface
@@ -84,7 +84,7 @@
   - type: ActivatableUI
     key: enum.DropshipTerminalWeaponsUi.Key
   - type: AccessReader
-    access: [ [ "CMAccessPilot" ], [ "CMAccessSquadLeaderPrep" ] ]
+    access: [ [ "CMAccessPilot" ], [ "CMAccessSquadLeaderPrep" ], [ "RMCAccessWeYaFlight" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -94,6 +94,53 @@
   - type: RequiresSkill
     skills:
       RMCSkillPilot: 1
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCComputerDropshipNavigationSmall
+  name: dropship navigation computer
+  description: A flight computer that can be used for autopilot or long-range flights.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+    layers: [ ]
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+  - type: DropshipNavigationComputer
+  - type: ActivatableUI
+    key: enum.DropshipNavigationUiKey.Key
+  - type: AccessReader
+    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.DropshipNavigationUiKey.Key:
+        type: DropshipNavigationBui
+      enum.DropshipHijackerUiKey.Key:
+        type: DropshipHijackerBui
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#FFEFD2"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
 
 - type: entity
   parent: MarkerBase

@@ -180,10 +180,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// </summary>
     public void KnockBack(EntityUid target, MapCoordinates? knockedBackFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big && !ignoreSize)
+        if ((!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big) && !ignoreSize)
             return;
 
-        if(knockedBackFrom == null)
+        if (knockedBackFrom == null)
             return;
 
         //TODO Camera Shake
@@ -332,7 +332,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousUpdate(Entity<RMCUnconsciousComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         //Readd comps just in case they were removed by a status
@@ -345,7 +345,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         args.Cancel();
@@ -359,5 +359,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private void OnKnockOutCollideThrowHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
         TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
+    }
+
+    public bool IsKnockedOut(EntityUid uid)
+    {
+        return _status.HasStatusEffect(uid, KnockedOut);
     }
 }

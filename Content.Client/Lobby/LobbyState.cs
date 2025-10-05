@@ -229,7 +229,7 @@ namespace Content.Client.Lobby
             var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
             if (minutesToday > 60)
             {
-                Lobby!.PlaytimeComment.Visible = true;
+                Lobby!.PlaytimeComment.Visible = false; // RMC14
 
                 var hoursToday = Math.Round(minutesToday / 60f, 1);
 

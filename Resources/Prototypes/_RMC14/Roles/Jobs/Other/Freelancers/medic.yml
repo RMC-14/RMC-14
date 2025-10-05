@@ -24,10 +24,11 @@
       skills:
         RMCSkillFireman: 1
         RMCSkillConstruction: 2
-        RMCSkillEngineer: 1
+        RMCSkillEngineer: 2
         RMCSkillEndurance: 2
         RMCSkillMedical: 2
         RMCSkillSurgery: 2
+        RMCSkillFirearms: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-freelancer-medic
@@ -97,7 +98,11 @@
   id: RMCGearFreelancerMedic
   equipment:
     eyes: RMCGlassesMedicalHUDGlasses
-    back: RMCSatchelLightpack
+    back: RMCSatchelLightpackFreelancerMedic
+    belt: CMBeltMedicBagFilled
+    suitstorage: WeaponRifleMAR40
+    pocket1: RMCPouchMedicalERT
+    pocket2: RMCPouchMagazineLargeMAR40
     gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitFreelancer # TODO RMC14 add surg vest
     outerClothing: CMArmorFreelancer

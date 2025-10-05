@@ -205,7 +205,6 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
     - type: Broadphase
     - type: OccluderTree

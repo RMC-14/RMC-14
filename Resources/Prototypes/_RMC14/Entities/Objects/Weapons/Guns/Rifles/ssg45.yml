@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleSSG45NoLock
   name: SSG-45 Assault Rifle
-  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. The primary rifle of the Weston-Yamada PMCs.
   suffix: No ID Lock
   components:
   - type: Sprite
@@ -92,12 +92,6 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentSSG45Stock
-        whitelist:
-          tags:
-          - RMCAttachmentSSG45Stock
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentMiniFlamethrower
         whitelist:
@@ -113,16 +107,17 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.875, 0.095
-      rmc-aslot-rail: 0.095, 0.25
-      rmc-aslot-stock: -0.41, 0.06
-      rmc-aslot-underbarrel: 0.345, -0.245
+      rmc-aslot-rail: 0.185, 0.25
+      rmc-aslot-underbarrel: 0.32, -0.27
   - type: Tag
     tags:
     - RMCWeaponRifleSSG45
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ssg45
 
 - type: entity
   parent: RMCWeaponRifleSSG45NoLock
-  id: WeaponRifleSSG45
+  id: RMCWeaponRifleSSG45
   suffix: Has ID Lock
   components:
   - type: GunIDLock
@@ -150,12 +145,6 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentSSG45Stock
-        whitelist:
-          tags:
-          - RMCAttachmentSSG45Stock
       rmc-aslot-underbarrel:
         startingAttachable: null
         whitelist:

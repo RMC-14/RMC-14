@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSupportTech
   name: rmc-job-name-forecon-support-tech
-  playTimeTracker: RMCJobSurvivorSupportTechForecon
   startingGear: RMCGearForeconSupportTech
   icon: "CMJobIconCombatTech"
   requirements:
@@ -35,7 +34,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: engi
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -49,10 +48,6 @@
     - type: RMCAllowSuitStorage
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSupportTechForecon
-  isHumanoid: true
 
 - type: startingGear
   parent: RMCGearForeconBase

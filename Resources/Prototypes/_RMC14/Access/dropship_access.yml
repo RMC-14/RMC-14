@@ -1,14 +1,14 @@
-﻿# basic access to the doors
+﻿# dropship doors and nav computers
 - type: accessLevel
   id: CMAccessDropship
   name: cm-access-dropship
 
-# pilot seat access
+# pilot vendor access
 - type: accessLevel
   id: CMAccessPilot
   name: cm-job-name-pilot
 
-# engines, etc
+# vehicle crewman and corresponding machines' access
 - type: accessLevel
   id: CMAccessCrewman
   name: cm-job-name-dcc

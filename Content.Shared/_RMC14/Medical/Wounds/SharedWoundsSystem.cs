@@ -381,6 +381,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             CancelDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             TargetEffect = "RMCEffectHealBusy",
+            MovementThreshold = 0.5f,
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);

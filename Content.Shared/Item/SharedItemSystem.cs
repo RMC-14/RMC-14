@@ -227,21 +227,15 @@ public abstract class SharedItemSystem : EntitySystem
     public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<StorageComponent?> storage, Entity<ItemComponent?> entity, Angle rotation, Vector2i position)
     {
         if (!Resolve(entity, ref entity.Comp))
-            return [];
+            return new Box2i[] { };
 
-        var adjustedShapes = new List<Box2i>();
-        GetAdjustedItemShape(adjustedShapes, entity, rotation, position, storage);
-        return adjustedShapes;
-    }
-
-    public void GetAdjustedItemShape(List<Box2i> adjustedShapes, Entity<ItemComponent?> entity, Angle rotation, Vector2i position, Entity<StorageComponent?> storage)
-    {
         var shapes = GetItemShape(storage, entity);
         var boundingShape = shapes.GetBoundingBox();
         var boundingCenter = ((Box2) boundingShape).Center;
         var matty = Matrix3Helpers.CreateTransform(boundingCenter, rotation);
         var drift = boundingShape.BottomLeft - matty.TransformBox(boundingShape).BottomLeft;
 
+        var adjustedShapes = new List<Box2i>();
         foreach (var shape in shapes)
         {
             var transformed = matty.TransformBox(shape).Translated(drift);
@@ -250,6 +244,8 @@ public abstract class SharedItemSystem : EntitySystem
 
             adjustedShapes.Add(translated);
         }
+
+        return adjustedShapes;
     }
 
     /// <summary>

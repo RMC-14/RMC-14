@@ -15,6 +15,12 @@
     blacklist:
       components:
       - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
@@ -105,7 +111,6 @@
   - type: AllowSuitStorage
     whitelist:
       components:
-      - BallisticAmmoProvider #Note should get all maganizes
       - SmartGun
       - CassettePlayer
       tags:
@@ -115,6 +120,11 @@
       - RMCG8Pouch
       #TODO mines
       - RMCDetector
+      #Note should get all magazines and ignore guns
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - CMMagazineSniper
 
 - type: entity
   abstract: true
@@ -189,11 +199,13 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
+  - type: FixedItemSizeStorage
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: IgnoreContentsSize
     items:
       tags:
@@ -248,7 +260,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
@@ -272,7 +285,7 @@
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
     turnOffSound:
-      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
   - type: NoHandsInteractionBlocked

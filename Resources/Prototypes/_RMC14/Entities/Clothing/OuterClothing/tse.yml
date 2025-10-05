@@ -1,4 +1,20 @@
 - type: entity
+  parent: RMCArmorVest
+  id: RMCArmorVestTSEPA
+  name: TSEPA armored vest
+  description: An TSEPA armored vest that protects against some damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/tsepa_police_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/tsepa_police_vest.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 10
+
+- type: entity
   parent: RMCBaseMarineArmorLight
   id: RMCArmourM4TSEPA
   name: M4 pattern light TSEPA armour

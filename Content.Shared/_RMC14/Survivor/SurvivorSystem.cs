@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -18,6 +19,7 @@ public sealed class SurvivorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -50,7 +52,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomOutfits);
             foreach (var item in gear)
             {
-                Equip(mob, item, false);
+                Equip(mob, item);
             }
         }
 
@@ -69,7 +71,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomWeapon);
             foreach (var item in gear)
             {
-                Equip(mob, item);
+                Equip(mob, item, tryEquip: false);
             }
         }
 
@@ -78,7 +80,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomGear);
             foreach (var item in gear)
             {
-                Equip(mob, item, tryInHand: true);
+                Equip(mob, item, tryInHand: true, tryEquip: false);
             }
         }
 
@@ -92,7 +94,7 @@ public sealed class SurvivorSystem : EntitySystem
                 var gear = _random.Pick(other);
                 foreach (var item in gear)
                 {
-                    Equip(mob, item);
+                    Equip(mob, item, tryEquip: comp.TryEquipRandomOtherGear);
                 }
             }
         }
@@ -112,46 +114,58 @@ public sealed class SurvivorSystem : EntitySystem
         }
     }
 
-    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, string? slotName = null)
+    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, bool tryEquip = true, string? slotName = null)
     {
         if (_net.IsClient)
             return;
 
         var coordinates = _transform.GetMoverCoordinates(mob);
         var spawn = Spawn(toSpawn, coordinates);
-        var slots = _inventory.GetSlotEnumerator(mob);
-        while (slots.MoveNext(out var slot))
+
+        if (tryEquip)
         {
-            if (slotName != null && slot.ID != slotName)
-                continue;
-
-            if (slot.ContainedEntity != null)
-                continue;
-
-            if (tryStorage)
+            var slots = _inventory.GetSlotEnumerator(mob);
+            while (slots.MoveNext(out var slot))
             {
-                var backs = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK);
-                while (backs.MoveNext(out var back))
-                {
-                    if (back.ContainedEntity is not { } backpack ||
-                        !TryComp(backpack, out StorageComponent? storage))
-                    {
-                        continue;
-                    }
+                if (slotName != null && slot.ID != slotName)
+                    continue;
 
-                    if (_storage.Insert(backpack, spawn, out _, storageComp: storage))
-                        return;
-                }
+                if (slot.ContainedEntity != null)
+                    continue;
+
+                if (_inventory.TryEquip(mob, spawn, slot.ID, true))
+                    return;
             }
-
-            if (_inventory.TryEquip(mob, spawn, slot.ID, true))
-                return;
         }
+
+        if (tryStorage && TryInsertItemInStorage(mob, spawn))
+            return;
 
         if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
             return;
 
         Log.Warning($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(mob)}");
         QueueDel(spawn);
+    }
+
+    public bool TryInsertItemInStorage(EntityUid mob, EntityUid toInsert)
+    {
+        var slots = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } storageItem ||
+                !TryComp(storageItem, out StorageComponent? storage))
+            {
+                continue;
+            }
+
+            if (!_rmcStorage.CanInsertStoreSkill(storageItem, toInsert, mob, out _))
+                return false;
+
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
+                return true;
+        }
+
+        return false;
     }
 }

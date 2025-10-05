@@ -3,11 +3,21 @@
   parent: Coffee
   color: "#704435"
 
+- type: reagent
+  id: RMCTea
+  parent: Tea
+  color: "#8a5a3a"
+
+- type: reagent
+  id: RMCHotCocoa
+  parent: HotCocoa
+  color: "#664300"
+
 - type: entity
   parent: DrinkBaseMug
   id: RMCCoffeeCup
   name: coffee mug
-  description: A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
+  description: A ceramic coffee mug. Practically guaranteed to fall and spill scalding-hot drink onto your brand-new shirt. Ouch.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -56,7 +66,7 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
+      - sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi
         state: base
       - map: ["enum.SolutionContainerLayers.Fill"]
         sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi

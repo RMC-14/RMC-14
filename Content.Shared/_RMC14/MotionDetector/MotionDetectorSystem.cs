@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -43,6 +44,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         _detectorQuery = GetEntityQuery<MotionDetectorComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
 
+        SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
@@ -60,22 +62,17 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<MotionDetectorTrackedComponent, MoveEvent>(OnMotionDetectorTracked);
     }
 
+    private void OnXenoInfect(XenoParasiteInfectEvent ev)
+    {
+        DisableDetectorsOnMob(ev.Target);
+    }
+
     private void OnMobStateChanged(MobStateChangedEvent ev)
     {
         if (ev.NewMobState != MobState.Dead)
             return;
 
-        foreach (var held in _hands.EnumerateHeld(ev.Target))
-        {
-            DisableMotionDetectors(held);
-        }
-
-        var slots = _inventory.GetSlotEnumerator(ev.Target);
-        while (slots.MoveNext(out var slot))
-        {
-            if (slot.ContainedEntity is { } contained)
-                DisableMotionDetectors(contained);
-        }
+        DisableDetectorsOnMob(ev.Target);
     }
 
     private void OnMotionDetectorUseInHand(Entity<MotionDetectorComponent> ent, ref UseInHandEvent args)
@@ -230,6 +227,21 @@ public sealed class MotionDetectorSystem : EntitySystem
         }
     }
 
+    private void DisableDetectorsOnMob(EntityUid uid)
+    {
+        foreach (var held in _hands.EnumerateHeld(uid))
+        {
+            DisableMotionDetectors(held);
+        }
+
+        var slots = _inventory.GetSlotEnumerator(uid);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is { } contained)
+                DisableMotionDetectors(contained);
+        }
+    }
+
     private TimeSpan GetRefreshRate(Entity<MotionDetectorComponent> ent)
     {
         return ent.Comp.Short ? ent.Comp.ShortRefresh : ent.Comp.LongRefresh;
@@ -306,6 +318,9 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
+                if (tracked.Owner == Transform(uid).ParentUid) // User of the MD isn't tracked
+                    continue;
+
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 

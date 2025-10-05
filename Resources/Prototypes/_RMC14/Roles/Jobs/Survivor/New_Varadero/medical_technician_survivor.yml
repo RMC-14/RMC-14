@@ -3,7 +3,7 @@
   id: CMSurvivorMedicalTechnician
   name: cm-job-name-survivor-medical-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorMedicalTechnician
+  playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
   spawnMenuRoleName: Medical Technician (NV Survivor)
   special:
@@ -18,7 +18,6 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -27,6 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMedicalTechnician
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorDoctor
@@ -46,10 +46,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorMedicalTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor

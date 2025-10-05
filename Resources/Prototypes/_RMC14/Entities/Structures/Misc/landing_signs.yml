@@ -129,3 +129,12 @@
   components:
   - type: Sprite
     state: hybrisamining_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCChancesClaimLandingSign
+  name: Chance's Claim landing sign
+  description: A large sign that reads 'Chance's Claim', with information regarding the colony written in the corner. Most of the sign is damaged from the constant wind and rain, although the writing and corporate-coloured accents seem to have been repainted.
+  components:
+  - type: Sprite
+    state: chances_claim

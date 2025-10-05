@@ -3,7 +3,7 @@
   id: CMJobSurvivorArmedPoliceOfficer
   name: rmc-job-name-survivor-armed-police-officer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorArmedPoliceOfficer
+  playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPStrsh:
     - !type:RoleTimeRequirement
@@ -35,7 +35,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetArmedPoliceOfficer
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -43,6 +42,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -74,10 +74,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorArmedPoliceOfficer
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

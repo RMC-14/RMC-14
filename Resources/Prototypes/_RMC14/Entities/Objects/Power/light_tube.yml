@@ -7,19 +7,28 @@
     sprite:  _RMC14/Objects/Power/light_tube.rsi
   - type: LightBulb
     bulb: Tube
+    lightEnergy: 1
+    lightRadius: 10
+    lightSoftness: 1
+    PowerUse: 25
 
 - type: entity
   parent: CMLightTubeBase
   id: CMLightTube
   name: light tube
   description: A replacement light tube.
+  suffix: Warm
   components:
   - type: LightBulb
-    color: "#FFE4CE" # 5000K color temp
-    lightEnergy: 0.8
-    lightRadius: 10
-    lightSoftness: 1
-    PowerUse: 25
+    color: "#FFEFD2"
+
+- type: entity
+  parent: CMLightTube
+  id: RMCLightTubeBlue
+  suffix: Blue
+  components:
+  - type: LightBulb
+    color: "#D2E3EC"
 
 - type: entity
   parent: CMLightTubeBase
