@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crazy1112345
-  changes:
-  - message: Fixed faction assignment for fax responders and CLF roles.
-    type: Fix
-  id: 1882
-  time: '2025-06-25T04:03:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6541
 - author: TornadoTechnology
   changes:
   - message: Fixed bullets hitting tesla coils when not being targeted directly, same
@@ -4476,5 +4469,14 @@
   id: 2381
   time: '2025-10-05T01:55:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8035
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new shuttles, two for ERT and two for PvE/Admin events
+    type: Add
+  - message: Added spawners for the new shuttles
+    type: Add
+  id: 2382
+  time: '2025-10-05T02:04:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7533
 Name: RMC14
 Order: -1
