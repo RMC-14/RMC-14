@@ -838,6 +838,18 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
 
 - type: entity
+  parent: RMCSatchelTSEPA
+  id: RMCSatchelCorporateSynthetic
+  suffix: Filled, Corporate Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFirstAidKitFilled
+    - id: CMPenClicky
+    - id: CMClipboard
+    - id: CMPaper
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelMARSOC
   name: UNMC SOF combat pack
