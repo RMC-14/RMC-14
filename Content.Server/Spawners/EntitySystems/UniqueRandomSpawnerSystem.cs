@@ -36,12 +36,12 @@ namespace Content.Server.Spawners.EntitySystems
             _remainingPrototypes.Clear();
         }
 
-        private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, MapInitEvent args)
+        private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, ref MapInitEvent args)
         {
             Spawn(ent);
             
             if (ent.Comp.DeleteSpawnerAfterSpawn)
-                QueueDel(uid);
+                QueueDel(ent);
         }
 
         private void Spawn(Entity<UniqueRandomSpawnerComponent> ent)
