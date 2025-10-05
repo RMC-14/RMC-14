@@ -41,6 +41,9 @@
       #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+    blacklist:
+      tags:
+      - RMCAttachmentUnderbarrel
   - type: IgnoreContentsSize
     items:
       tags:
