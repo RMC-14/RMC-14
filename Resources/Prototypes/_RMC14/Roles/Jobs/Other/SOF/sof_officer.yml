@@ -1,109 +1,103 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
-  id: CMMarineRaider
-  name: rmc-job-name-marine-raider
-  description: "" # TODO RMC14
-  playTimeTracker: CMJobMarineRaider
+  id: CMMarineRaiderOfficer
+  name: rmc-job-name-marine-raider-officer
+  description: rmc-ghost-role-information-sof-description
+  playTimeTracker: CMJobMarineRaiderOfficer
   ranks:
-    RMCRankStaffSergeant: [ ]
-  startingGear: RMCGearMarineRaider
+    RMCRankCaptain: [ ]
+  startingGear: RMCGearMarineRaiderOfficer
   icon: RMCJobIconMarineRaider
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider Platoon Leader (Admin)
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillCqc: 5
-        RMCSkillFireman: 2
+        RMCSkillFireman: 5
         RMCSkillEngineer: 2
         RMCSkillConstruction: 2
         RMCSkillFirearms: 2
+        RMCSkillLeadership: 1
         RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillEndurance: 5
         RMCSkillJtac: 1
+        RMCSkillSurgery: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-marine-raider
+      prefix: rmc-job-prefix-marine-raider-officer
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: MarineOrders
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_soccmd
+    - type: RMCPointing
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidMarineRaider
-  name: DEATHSQUAD marine raider ghost role
+  id: RMCRandomHumanoidMarineRaiderOfficer
+  name: DEATHSQUAD marine raider officer ghost role
   suffix: Role
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCMarineRaider
+    settings: RMCMarineRaiderOfficer
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCMarineRaider
+  id: RMCMarineRaiderOfficer
   components:
   - type: GhostRole
-    name: rmc-job-name-marine-raider
+    name: rmc-job-name-marine-raider-officer
     description: rmc-ghost-role-information-sof-description
     rules: rmc-ghost-role-information-sof-rules
     reregister: false
-    job: CMMarineRaider
+    job: CMMarineRaiderOfficer
     raffle:
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobRifleman
+      role: CMJobSquadLeader
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSOF
 
 - type: startingGear
-  id: RMCGearMarineRaider
+  parent: RMCGearMarineRaiderLeader
+  id: RMCGearMarineRaiderOfficer
   equipment:
-    head: RMCArmorHelmetMARSOC
-    mask: RMCMaskBalaclavaMARSOC
-    ears: RMCHeadsetMARSOC
-    jumpsuit: RMCJumpsuitMarsocWebbingGrenades
-    outerClothing: RMCArmorMARSOCXM40
-    gloves: CMHandsBlackMarine
-    shoes: CMBootsBlackFilled
-    suitstorage: RMCWeaponRifleXM40
-    id: RMCDogtagMarineRaider
-    belt: RMCBeltMOU482Filled
-    back: RMCSatchelMARSOC
-    pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
-    pocket2: RMCPouchToolsSocMarineRaiderFill
-  storage:
-    back:
-    - RMCVisorNightVision # TODO RMC14
+    id: RMCDogtagMarineRaiderOfficer
 
 - type: playTimeTracker
-  id: CMJobMarineRaider
+  id: CMJobMarineRaiderOfficer
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconMarineRaider
+  id: RMCJobIconMarineRaiderOfficer
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_soc
+    state: hudsquad_soccmd
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCDogtagMarineRaider
-  name: Marine Raider's dogtags
+  id: RMCDogtagMarineRaiderOfficer
+  name: Marine Raider Platoon Leader's dogtags
   components:
   - type: PresetIdCard
-    job: CMMarineRaider
+    job: CMMarineRaiderOfficer
 
 - type: entity
-  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaider ]
-  id: RMCDogtagMarineRaiderHidden
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaiderLeader ]
+  id: RMCDogtagMarineRaiderOfficerHidden
   categories: [ HideSpawnMenu ]
