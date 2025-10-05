@@ -80,3 +80,7 @@
     slots: [belt]
     quickEquip: false
     sprite: _RMC14/Objects/Misc/weya_clipboard.rsi
+  - type: StorageFill
+    contents:
+    - id: CMPaper
+      amount: 4
