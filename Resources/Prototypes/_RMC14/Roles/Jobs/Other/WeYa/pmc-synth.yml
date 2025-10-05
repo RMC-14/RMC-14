@@ -1,0 +1,150 @@
+- type: job
+  parent: CMJobBase
+  id: RMCPMCSynthetic
+  name: rmc-job-name-pmc-synth
+  description: rmc-job-description-pmc-synth
+  playTimeTracker: RMCJobPMCSynthetic
+  supervisors: cm-job-supervisors-we-ya
+  ranks: 
+    RMCRankPMCSynthetic : [ ]
+  accessGroups: # TODO RMC14 verify parity access groups with PMC synthetic, i can't find the actual file that stores this
+  - Colony
+  - RMCWeYa
+  - Synth
+  startingGear: RMCJobGearPMCSynthetic
+  spawnMenuRoleName: WEYA PMC Support Synthetic
+  roleWeight: 0.25
+  icon: "RMCJobIconPMCSynthetic"
+  whitelisted: true
+  requireAdminNotify: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-synth
+    - type: TacticalMapIcon
+      icon: 
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: pmc_syn
+    - type: GhostRoleApplySpecial
+      squad: SquadPMC
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
+  hidden: true
+
+- type: startingGear
+  id: RMCJobGearPMCSynthetic
+  equipment: 
+    id: RMCIDCardSynth
+    back: RMCPMCSynthSmartpackFilled
+    jumpsuit: RMCJumpsuitVeteranPMCSynth
+    shoes: RMCBootsPMCFilled
+    ears: RMCHeadsetDistressPMCLeader
+    outerClothing: CMArmorM4PMCSynth
+    hands: CMHandsBlackInsulated
+    belt: RMCBeltMedicBagPMCFilled
+    eyes: RMCGlassesExperimentalMeson
+    head: ArmorHelmetPMCOfficer
+    pocket1: RMCPouchToolsSocFill
+    pocket2:  RMCPouchConstructionFillHighGrade # TODO RMC14 port the fancy construction pouch from CM
+    # TODO RMC14 maintenance jack
+  storage:
+    outerClothing: 
+    - RMCMagazineSMGNailgun
+    - RMCMagazineSMGNailgun
+    - RMCTelescopicBaton
+    
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointPMCSynth
+  name: weya pmc synthetic spawn point
+  components: 
+  - type: SpawnPoint
+    job_id: RMCPMCSynthetic
+  - type: Sprite
+    state: syn_spawn
+    
+- type: playTimeTracker
+  id: RMCJobPMCSynthetic
+  isHumanoid: true
+  
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_syn
