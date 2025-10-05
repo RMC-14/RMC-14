@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The AEGIS OB for the Admin AEGIS event has received new sprites.
-    type: Tweak
-  id: 1893
-  time: '2025-06-25T04:30:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6703
-- author: noctyrnal
-  changes:
-  - message: Changed CLF loadouts to use unique armor.
-    type: Tweak
-  - message: CLF Soldiers now spawn with a P90 instead of an M63.
-    type: Tweak
-  - message: You can now reload the MAR-50 Drum magazine with MAR Magazines.
-    type: Fix
-  id: 1894
-  time: '2025-06-25T04:32:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6781
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed security colonist corpse not spawning with an armor vest and helmet
@@ -4483,5 +4465,20 @@
   id: 2392
   time: '2025-10-05T03:23:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8012
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the Custom barrel shotgun having an incorrect list of attachment
+      whitelists.
+    type: Fix
+  id: 2393
+  time: '2025-10-05T03:25:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8006
+- author: CatAndHats
+  changes:
+  - message: Fixed SOP and MLAW minor spelling errors.
+    type: Fix
+  id: 2394
+  time: '2025-10-05T03:25:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8017
 Name: RMC14
 Order: -1
