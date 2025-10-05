@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Pill0 intergration  test bugfix
-    type: Fix
-  id: 1912
-  time: '2025-06-28T01:30:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6850
 - author: Dygon
   changes:
   - message: Fixed Warriors being able to tackle targets that are stunned by their
@@ -4503,5 +4496,13 @@
   id: 2412
   time: '2025-10-05T07:56:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6959
+- author: BramvanZijp
+  changes:
+  - message: The Xeno Queen, XO, CO, and Survivor Commanders now get the bold chat
+      font that SLs and HLs have.
+    type: Add
+  id: 2413
+  time: '2025-10-05T08:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7900
 Name: RMC14
 Order: -1
