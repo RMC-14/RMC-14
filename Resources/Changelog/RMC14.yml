@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: t0wnshark
-  changes:
-  - message: Added green and blue surgical webbings. These hold the same items as
-      a surgical tray but can be equipped as a webbing.
-    type: Add
-  - message: Added surgical webbings to synthetic gear vendor.
-    type: Add
-  id: 1885
-  time: '2025-06-25T04:06:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6672
 - author: x5tink
   changes:
   - message: Pills are now created with the correct colour selected
@@ -4483,5 +4473,16 @@
   id: 2384
   time: '2025-10-05T02:09:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7930
+- author: blueisdumb
+  changes:
+  - message: Added new tails
+    type: Add
+  - message: Slightly changed Leopard tail and the wag animation
+    type: Tweak
+  - message: Fixed dragon wings marking displaying incorrect name
+    type: Fix
+  id: 2385
+  time: '2025-10-05T02:11:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8016
 Name: RMC14
 Order: -1
