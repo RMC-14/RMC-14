@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added the smokables loadout category.
-    type: Add
-  id: 1907
-  time: '2025-06-27T06:00:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6825
 - author: noctyrnal
   changes:
   - message: Added the AK-4047 Assault Rifle for SPP colonists.
@@ -4471,5 +4464,15 @@
   id: 2406
   time: '2025-10-05T04:12:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7899
+- author: monomethylhydrazine
+  changes:
+  - message: Added the Corporate Synthetic, a generic We-Ya noncombatant synth role.
+    type: Add
+  - message: Added the PMC Support Synthetic, a kitted-out technician and medic for
+      We-Ya PMC teams.
+    type: Add
+  id: 2407
+  time: '2025-10-05T05:02:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7579
 Name: RMC14
 Order: -1
