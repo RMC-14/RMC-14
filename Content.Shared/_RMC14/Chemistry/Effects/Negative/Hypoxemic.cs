@@ -28,12 +28,7 @@ public sealed partial class Hypoxemic : RMCChemicalEffect
         var damage = new DamageSpecifier();
         damage.DamageDict[AsphyxiationType] = potency * 2f;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
-
-        var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(0.1f))
-            return;
-
-        _emote.TryEmoteWithChat(args.TargetEntity, "gasp");
+        // Gasp emote 10% chance
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
