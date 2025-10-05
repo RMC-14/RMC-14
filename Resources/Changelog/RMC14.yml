@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed biosuits not having 100 biohazard protection
-    type: Fix
-  id: 1909
-  time: '2025-06-27T05:59:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6762
-- author: noctyrnal
-  changes:
-  - message: You can now hide your dogtags.
-    type: Add
-  id: 1910
-  time: '2025-06-27T06:08:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6773
-- author: J C Denton
-  changes:
-  - message: Fixed some Asphalt tiles being pryable.
-    type: Fix
-  id: 1911
-  time: '2025-06-27T06:09:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6809
-- author: x5tink
-  changes:
-  - message: Pill0 intergration  test bugfix
-    type: Fix
-  id: 1912
-  time: '2025-06-28T01:30:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6850
-- author: Dygon
-  changes:
-  - message: Fixed Warriors being able to tackle targets that are stunned by their
-      own lunge effect.
-    type: Fix
-  id: 1913
-  time: '2025-06-28T02:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6715
 - author: Dygon
   changes:
   - message: Fix lurker and praetorian tackles applying a stun that was up to twice
@@ -4471,5 +4435,78 @@
   id: 2409
   time: '2025-10-05T06:40:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7991
+- author: Aurallianz
+  changes:
+  - message: Added the ability to have headsets that read a comms channel, but are
+      not able to talk through it.
+    type: Add
+  id: 2410
+  time: '2025-10-05T06:48:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8043
+- author: to4no_fix
+  changes:
+  - message: "Ported UNMC tents! Added Standard Tent, Command Tent (unfolds Overwatch\
+      \ console, phone, 2 tables and chairs), Medical Tent (unfolds ColMarTech MarineMed,\
+      \ IV and roller bed, in the future will give a bonus to the speed of operations\
+      \ and pain reduction), Requisitions Tent (unfolds 2 tables, chair, phone, ASRS\
+      \ console and ColMarTech Automated FOB Supplies Vendor primarily for manual\
+      \ filling and storage, which will be possible in the future), Mess Tent (unfolds\
+      \ 3 tables, phone, microwave and other inventory necessary for you to be able\
+      \ to cook anything), Military Police Tent (unfolds 2 tables, chair, telephone,\
+      \ 2 closets, detention cell and camera console)! You can unfold them on the\
+      \ planet in an empty space using in your hand or fold them using the entrenching\
+      \ tool. Be careful with tents, as they are very fragile and a small pressure\
+      \ or grenade explosion is enough to break not only the tent, but also some of\
+      \ the equipment that was deployed with the tent! Tents can be found in these\
+      \ locations in Almayer: Command Tent \u2014 CIC armory; Medical Tent \u2014\
+      \ Medical Block storage (northeast of the first floor Medical Block); Requisitions\
+      \ tent \u2014 Requisition storage (southeast of Requisition); Mess tent \u2014\
+      \ Technical corridor south of the mess technicals rooms; Military Police Tent\
+      \ \u2014 Military Police armory; Standard and Extended Tents \u2014 squad bedrooms.\
+      \ Tents will simplify the organization of bases and increase their convenience."
+    type: Add
+  - message: The tents are now one piece and can be destroyed.
+    type: Tweak
+  - message: ColMarTech Automated FOB Supplies Vendor and ColMarTech MarineMed now
+      eject all contents when destroyed.
+    type: Add
+  - message: Added strong reinforced window.
+    type: Add
+  id: 2411
+  time: '2025-10-05T07:53:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7232
+- author: noctyrnal
+  changes:
+  - message: Podlocks can now be pried open when unpowered.
+    type: Fix
+  - message: Xenonids now take 4 seconds to pry open podlocks and shutters.
+    type: Fix
+  - message: Xenonids now have a unique sound when prying open things.
+    type: Fix
+  - message: Xenonids cannot pry doors closed anymore.
+    type: Fix
+  id: 2412
+  time: '2025-10-05T07:56:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6959
+- author: BramvanZijp
+  changes:
+  - message: The Xeno Queen, XO, CO, and Survivor Commanders now get the bold chat
+      font that SLs and HLs have.
+    type: Add
+  id: 2413
+  time: '2025-10-05T08:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7900
+- author: SharkSnake98
+  changes:
+  - message: Added 3 New Liaison Uniforms, 2 New Liaison Jackets, and 2 New Patches
+    type: Add
+  - message: Added the 2 new patches to the Civilian and Uniform Accessory loadout
+      menus respectively.
+    type: Add
+  - message: Added all new Liaison items to the CL wardrobe
+    type: Add
+  id: 2414
+  time: '2025-10-05T08:13:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7481
 Name: RMC14
 Order: -1

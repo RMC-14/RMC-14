@@ -107,6 +107,7 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: InnateCommandSpeech
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp
