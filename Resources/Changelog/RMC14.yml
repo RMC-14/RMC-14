@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Neurotoxin not blinding
-    type: Fix
-  - message: Fixed Neurotoxin not causing hallucinations
-    type: Fix
-  id: 1900
-  time: '2025-06-27T05:40:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6724
-- author: noctyrnal
-  changes:
-  - message: Xenonid tunnels have received new sprites.
-    type: Tweak
-  id: 1901
-  time: '2025-06-27T05:41:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6812
 - author: t0wnshark
   changes:
   - message: fixed typo in the names of flower vases
@@ -4470,5 +4454,21 @@
   id: 2399
   time: '2025-10-05T03:46:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7887
+- author: Whisper
+  changes:
+  - message: Following up on consistent issues and reports of bad faith usage, roleplaying
+      chemicals and drugs have been disabled, until they can be better designed to
+      fit RMC.
+    type: Remove
+  id: 2400
+  time: '2025-10-05T03:48:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7928
+- author: noctyrnal
+  changes:
+  - message: FTLs now get an RTO for free with their essential bundle.
+    type: Add
+  id: 2401
+  time: '2025-10-05T03:49:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7100
 Name: RMC14
 Order: -1
