@@ -1,5 +1,6 @@
-using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -7,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
@@ -30,6 +32,9 @@ public sealed class XenoStompSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -39,7 +44,7 @@ public sealed class XenoStompSystem : EntitySystem
         SubscribeLocalEvent<XenoStompComponent, XenoStompDoAfterEvent>(OnXenoStompDoAfter);
     }
 
-    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
+    private readonly HashSet<Entity<MobStateComponent>> _receivers = new();
 
     private void OnXenoStompAction(Entity<XenoStompComponent> xeno, ref XenoStompActionEvent args)
     {
@@ -72,10 +77,9 @@ public sealed class XenoStompSystem : EntitySystem
         args.Handled = true;
         if (args.Cancelled)
         {
-            foreach (var action in _actions.GetActions(xeno))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoStompActionEvent>(xeno))
             {
-                if (action.Comp.BaseEvent is XenoStompActionEvent)
-                    _actions.ClearCooldown(action.Id);
+                _actions.ClearCooldown(action.AsNullable());
             }
 
             return;
@@ -95,10 +99,16 @@ public sealed class XenoStompSystem : EntitySystem
 
         foreach (var receiver in _receivers)
         {
-            if (_mobState.IsDead(receiver))
+            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
+            if (xeno.Comp.SlowBigInsteadOfStun && _size.TryGetSize(receiver, out var size) && size >= RMCSizes.Big)
+                _slow.TrySlowdown(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
+            else if (!xeno.Comp.ParalyzeUnderOnly)
+                _stun.TryParalyze(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
+
             if (xeno.Comp.Slows)
                 _slow.TrySuperSlowdown(receiver, xeno.Comp.SlowTime, true);
 
@@ -107,12 +117,16 @@ public sealed class XenoStompSystem : EntitySystem
                 if (!_standing.IsDown(receiver))
                     continue;
 
-                var damage = _damageable.TryChangeDamage(receiver, xeno.Comp.Damage, origin: xeno, tool: xeno);
+                var damage = _damageable.TryChangeDamage(receiver, _xeno.TryApplyXenoSlashDamageMultiplier(receiver, xeno.Comp.Damage), origin: xeno, tool: xeno);
                 if (damage?.GetTotal() > FixedPoint2.Zero)
                 {
                     var filter = Filter.Pvs(receiver, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
                     _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { receiver }, filter);
                 }
+
+                if (xeno.Comp.ParalyzeUnderOnly && _size.TryGetSize(receiver, out size) && size < RMCSizes.Big)
+                    _stun.TryParalyze(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
             }
         }
 

@@ -1,4 +1,4 @@
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;

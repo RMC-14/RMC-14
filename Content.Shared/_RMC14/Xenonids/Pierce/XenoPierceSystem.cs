@@ -46,7 +46,7 @@ public sealed class XenoPierceSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         if (_transform.GetGrid(args.Target) is not { } gridId || !HasComp<MapGridComponent>(gridId))
@@ -109,7 +109,7 @@ public sealed class XenoPierceSystem : EntitySystem
 
                 hits++;
 
-                var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
+                var change = _damage.TryChangeDamage(ent, _xeno.TryApplyXenoSlashDamageMultiplier(ent, xeno.Comp.Damage), origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
                 {

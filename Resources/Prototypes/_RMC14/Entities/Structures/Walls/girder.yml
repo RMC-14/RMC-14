@@ -1,8 +1,27 @@
 - type: entity
-  parent: Girder
+  parent: BaseStructure
   id: CMGirder
   name: girder
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - GlassAirlockLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: StaticPrice
+    price: 30
   - type: Sprite
     sprite: _RMC14/Structures/Walls/girder.rsi
     state: girder
@@ -12,6 +31,8 @@
   - type: Construction
     graph: CMGirder
     node: girder
+  - type: Damageable
+    damageModifierSet: RMCGirder
   - type: Destructible
     thresholds:
     - trigger:
@@ -42,6 +63,7 @@
     damage:
       types:
         Blunt: 40
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: CMGirder
@@ -84,3 +106,16 @@
           collection: MetalBreak
   - type: StaticPrice
     price: 66
+
+- type: entity
+  parent: CMGirder
+  id: RMCGirderDisplaced # TODO RMC14 : Requires crowbarring to be used as a girder
+  name: displaced
+  suffix: Girder
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    state: displaced
+  - type: Icon
+    state: displaced

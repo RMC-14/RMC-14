@@ -6,7 +6,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/intel.rsi
   - type: CMAutomatedVendor
@@ -40,8 +40,10 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 M1984 HP magazine
+        points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
+        points: 5
+      - id: RMCMagazinePistolM1984HP
         points: 5
       - id: CMMagazinePistolMK80
         points: 10
@@ -115,7 +117,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -125,9 +127,13 @@
     - name: Standard Equipment
       takeAll: RMCIntelEquipment
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetIntel
       - id: CMMRE
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Armor
       takeOne: CMArmor
       entries:
@@ -144,6 +150,8 @@
       - id: CMSatchelMarineIntel
         recommended: true
       - id: RMCSatchelMarineIntelChestrig
+        recommended: true
+      - id: RMCSatchelMarineIntelSatchel
         recommended: true
       - id: RMCBackpackRTO
     - name: Helmet
@@ -199,9 +207,13 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -216,7 +228,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "RMCAccessCommand" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -231,7 +243,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:
@@ -264,7 +276,9 @@
       - id: CMMagazinePistolM1984
         amount: 20
       - id: RMCMagazinePistolM1984AP
-        amount: 20 # TODO RMC14 M1984 HP magazine
+        amount: 8
+      - id: RMCMagazinePistolM1984HP
+        amount: 8
       - id: CMMagazinePistolMK80
         amount: 20
     - name: Attachments

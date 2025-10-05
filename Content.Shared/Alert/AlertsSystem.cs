@@ -8,14 +8,14 @@ namespace Content.Shared.Alert;
 
 public abstract class AlertsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private FrozenDictionary<ProtoId<AlertPrototype>, AlertPrototype> _typeToAlert = default!;
 
     public IReadOnlyDictionary<AlertKey, AlertState>? GetActiveAlerts(EntityUid euid)
     {
-        return EntityManager.TryGetComponent(euid, out AlertsComponent? comp)
+        return TryComp(euid, out AlertsComponent? comp)
             ? comp.Alerts
             : null;
     }
@@ -38,7 +38,7 @@ public abstract class AlertsSystem : EntitySystem
 
     public bool IsShowingAlert(EntityUid euid, ProtoId<AlertPrototype> alertType)
     {
-        if (!EntityManager.TryGetComponent(euid, out AlertsComponent? alertsComponent))
+        if (!TryComp(euid, out AlertsComponent? alertsComponent))
             return false;
 
         if (TryGet(alertType, out var alert))
@@ -53,13 +53,13 @@ public abstract class AlertsSystem : EntitySystem
     /// <returns>true iff an alert of the indicated alert category is currently showing</returns>
     public bool IsShowingAlertCategory(EntityUid euid, ProtoId<AlertCategoryPrototype> alertCategory)
     {
-        return EntityManager.TryGetComponent(euid, out AlertsComponent? alertsComponent)
+        return TryComp(euid, out AlertsComponent? alertsComponent)
                && alertsComponent.Alerts.ContainsKey(AlertKey.ForCategory(alertCategory));
     }
 
     public bool TryGetAlertState(EntityUid euid, AlertKey key, out AlertState alertState)
     {
-        if (EntityManager.TryGetComponent(euid, out AlertsComponent? alertsComponent))
+        if (TryComp(euid, out AlertsComponent? alertsComponent))
             return alertsComponent.Alerts.TryGetValue(key, out alertState);
 
         alertState = default;
@@ -157,7 +157,7 @@ public abstract class AlertsSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (!EntityManager.TryGetComponent(euid, out AlertsComponent? alertsComponent))
+        if (!TryComp(euid, out AlertsComponent? alertsComponent))
             return;
 
         if (TryGet(alertType, out var alert))
@@ -198,6 +198,7 @@ public abstract class AlertsSystem : EntitySystem
         SubscribeLocalEvent<AlertAutoRemoveComponent, EntityUnpausedEvent>(OnAutoRemoveUnPaused);
 
         SubscribeAllEvent<ClickAlertEvent>(HandleClickAlert);
+        SubscribeAllEvent<ClickAlertAltEvent>(HandleClickAlertAlt);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(HandlePrototypesReloaded);
         LoadPrototypes();
     }
@@ -310,27 +311,54 @@ public abstract class AlertsSystem : EntitySystem
         return _typeToAlert.TryGetValue(alertType, out alert);
     }
 
-    private void HandleClickAlert(ClickAlertEvent msg, EntitySessionEventArgs args)
+    private bool TryGetAlert(ProtoId<AlertPrototype> alertType, EntityUid? player, out AlertPrototype? alert, bool activate = true)
     {
-        var player = args.SenderSession.AttachedEntity;
-        if (player is null || !EntityManager.HasComponent<AlertsComponent>(player))
-            return;
+        alert = null;
+        if (player is null || !HasComp<AlertsComponent>(player))
+            return false;
 
-        if (!IsShowingAlert(player.Value, msg.Type))
+        if (!IsShowingAlert(player.Value, alertType))
         {
             Log.Debug("User {0} attempted to" +
                                    " click alert {1} which is not currently showing for them",
-                EntityManager.GetComponent<MetaDataComponent>(player.Value).EntityName, msg.Type);
-            return;
+                Comp<MetaDataComponent>(player.Value).EntityName, alertType);
+            return false;
         }
 
-        if (!TryGet(msg.Type, out var alert))
+        if (!TryGet(alertType, out alert))
         {
-            Log.Warning("Unrecognized encoded alert {0}", msg.Type);
-            return;
+            Log.Warning("Unrecognized encoded alert {0}", alert);
+            return false;
         }
 
-        ActivateAlert(player.Value, alert);
+        if (!activate)
+            return true;
+
+        if (ActivateAlert(player.Value, alert) && _timing.IsFirstTimePredicted)
+        {
+            HandledAlert();
+        }
+
+        return true;
+    }
+
+    protected virtual void HandledAlert()
+    {
+
+    }
+
+    private void HandleClickAlert(ClickAlertEvent ev, EntitySessionEventArgs args)
+    {
+        TryGetAlert(ev.Type, args.SenderSession?.AttachedEntity, out _);
+    }
+
+    private void HandleClickAlertAlt(ClickAlertAltEvent msg, EntitySessionEventArgs args)
+    {
+        var player = args.SenderSession.AttachedEntity;
+        if(!TryGetAlert(msg.Type, player, out var alert, false) || alert == null || player == null)
+            return;
+
+        ActivateAlertAlt(player.Value, alert);
     }
 
     public bool ActivateAlert(EntityUid user, AlertPrototype alert)
@@ -344,6 +372,19 @@ public abstract class AlertsSystem : EntitySystem
 
         RaiseLocalEvent(user, (object) clickEvent, true);
         return clickEvent.Handled;
+    }
+
+    public bool ActivateAlertAlt(EntityUid user, AlertPrototype alert)
+    {
+        if (alert.AltClickEvent is not { } altClickEvent)
+            return false;
+
+        altClickEvent.Handled = false;
+        altClickEvent.User = user;
+        altClickEvent.AlertId = alert.ID;
+
+        RaiseLocalEvent(user, (object) altClickEvent, true);
+        return altClickEvent.Handled;
     }
 
     private void OnPlayerAttached(EntityUid uid, AlertsComponent component, PlayerAttachedEvent args)

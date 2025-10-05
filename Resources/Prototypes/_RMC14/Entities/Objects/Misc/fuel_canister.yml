@@ -1,0 +1,30 @@
+- type: entity
+  parent: BaseItem
+  id: RMCFuelCan
+  name: fuel can
+  description: A jerry can. In space! Or maybe a colony.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/fuel_can.rsi
+      state: can_1
+
+- type: entity
+  parent: RMCFuelCan
+  id: RMCFuelCan2
+  components:
+    - type: Sprite
+      state: can_2
+
+- type: entity
+  parent: RMCFuelCan
+  id: RMCFuelCan3
+  components:
+    - type: Sprite
+      state: can_3
+
+- type: entity
+  parent: RMCFuelCan
+  id: RMCFuelCan4
+  components:
+    - type: Sprite
+      state: can_4

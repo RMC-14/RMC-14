@@ -24,7 +24,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-
 namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
@@ -393,8 +392,7 @@ public sealed class RMCPullingSystem : EntitySystem
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
         _audio.PlayPredicted(_pullSound, pulled, puller);
 
-        if (_net.IsClient) // TODO replace with PredictedSpawnAttachedTo when robust toolbox is updated
-            SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
+        PredictedSpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
     private bool CanPullDead(EntityUid puller, EntityUid pulled)

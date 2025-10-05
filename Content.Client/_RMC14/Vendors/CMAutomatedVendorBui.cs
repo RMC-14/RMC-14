@@ -51,27 +51,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
-
-                var validJob = true;
-                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
-                {
-                    foreach (var job in section.Jobs)
-                    {
-                        validJob = _job.MindHasJobWithId(mindId, job.Id);
-                    }
-                }
-
-                var validHoliday = section.Holidays.Count == 0;
-                foreach (var holiday in section.Holidays)
-                {
-                    if (_rmcHoliday.IsActiveHoliday(holiday))
-                        validHoliday = true;
-                }
-
-                var uiSection = new CMAutomatedVendorSection();
+                var uiSection = new CMAutomatedVendorSection { Section = section };
                 uiSection.Label.SetMessage(GetSectionName(user, section));
 
-                if (!validJob || !validHoliday)
+                if (!IsSectionValid(section))
                     uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
@@ -157,10 +140,37 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         Refresh();
     }
 
+    private bool IsSectionValid(CMVendorSection section)
+    {
+        var validJob = true;
+        if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                {
+                    validJob = true;
+                    break;
+                }
+            }
+        }
+
+        var validHoliday = section.Holidays.Count == 0;
+        foreach (var holiday in section.Holidays)
+        {
+            if (_rmcHoliday.IsActiveHoliday(holiday))
+                validHoliday = true;
+        }
+
+        return validJob && validHoliday;
+    }
+
     private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
         var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
-        SendMessage(msg);
+        SendPredictedMessage(msg);
     }
 
     private void OnSearchChanged(LineEditEventArgs args)
@@ -188,7 +198,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     any = true;
             }
 
-            section.Visible = any;
+            section.Visible = any && (section.Section == null || IsSectionValid(section.Section));
         }
     }
 

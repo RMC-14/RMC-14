@@ -1,0 +1,178 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCType88SniperRifle
+  name: Type 88 designated marksman rifle
+  description: The standard issue DMR of the SPP, the Type 88 is sought after by competitive shooters and terrorists alike for its high degree of accuracy. Typically loaded with armor-piercing 7.62x54mmR rounds in a 12 round magazine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/type88/type88_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/type88/type88_icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/type88/type88_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/type88/type88_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/type88/type88_inhands.rsi
+  - type: Tag
+    tags:
+    - RMCType88SniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type88.ogg
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    scatterWielded: 3
+    baseFireRate: 1.6675
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperType88
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperType88
+  - type: GunRequiresWield
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
+      state: all
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCType88IntegratedScope
+        whitelist:
+          tags:
+          - RMCType88IntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.80, 0.06
+      rmc-aslot-underbarrel: 0.31875, -0.243
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: RMCMagazineSniperType88
+  name: "Type 88 marksman magazine (7.62x54mmR)"
+  description: A magazine of type 88 marksman ammo.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperType88
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniperType88
+    proto: RMCCartridgeSniperType88
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type88.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeSniperType88
+  name: cartridge (7.62x54mmR)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniperType88
+  - type: CartridgeAmmo
+    proto: RMCBulletSniperType88
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletSniperType88
+  name: bullet (7.62x54mmR)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 80
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
+
+- type: Tag
+  id: RMCType88SniperRifle
+
+- type: Tag
+  id: RMCMagazineSniperType88
+
+- type: Tag
+  id: RMCCartridgeSniperType88

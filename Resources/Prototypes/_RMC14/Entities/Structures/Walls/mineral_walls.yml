@@ -14,7 +14,7 @@
   - type: IconSmooth
     key: walls
     base: stone
- 
+
 - type: entity
   parent: RMCWallSandstone
   id: RMCWallSandstoneTemple
@@ -48,3 +48,41 @@
   - type: IconSmooth
     key: walls
     base: runedstone
+
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallUranium
+  name: uranium wall
+  description: A wall with uranium plating. This is probably a bad idea.
+  components:
+  - type: SpriteColor
+    color: '#1b4506'
+
+- type: entity
+  parent: CMBaseWall
+  id: RMCWallGold
+  name: gold wall
+  description:  A wall with gold plating. Swag!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Tag
+    tags:
+    - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150

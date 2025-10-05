@@ -182,3 +182,35 @@
   products:
     CMClonexadone: 2
     RMCPhoron: 5
+
+- type: reaction
+  id: RMCMethylphenidate
+  reactants:
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCHydrogen:
+      amount: 1
+  products:
+    RMCMethylphenidate: 3
+
+- type: reaction
+  id: RMCCitalopram
+  reactants:
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+  products:
+    RMCCitalopram: 3
+
+- type: reaction
+  id: RMCParoxetine
+  reactants:
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+    CMInaprovaline:
+      amount: 1
+  products:
+    RMCParoxetine: 3

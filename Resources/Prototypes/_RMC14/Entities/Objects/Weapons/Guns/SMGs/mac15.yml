@@ -84,7 +84,7 @@
     multiplier: 0.9
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGMAC15
   name: MAC-15 magazine (9mm)
   description: A 9mm magazine for the MAC-15.

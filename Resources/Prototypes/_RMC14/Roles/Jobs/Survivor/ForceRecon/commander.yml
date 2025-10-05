@@ -3,14 +3,17 @@
   id: RMCSurvivorForeconCommander
   name: rmc-job-name-forecon-commander
   description: cm-job-description-commanding-officer
-  playTimeTracker: RMCJobSurvivorCommanderForecon
+  playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankMajor: []
+  accessGroups:
+  - ColonistEngi
+  - ShipMasterAccess # TODO RMC14 here until we have the id console
   startingGear: RMCGearForeconCommander
+  spawnMenuRoleName: FORECON Commander (Survivor)
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
   icon: "RMCJobIconForeconCommander"
-  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,15 +39,16 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-co
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: co
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -53,7 +57,9 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: SpotterWhitelist
   hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   parent: RMCGearForeconBase
@@ -67,16 +73,12 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconCommander
-  name: commanding officer spawn point
+  name: FORECON Commander spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorForeconCommander
   - type: Sprite
     state: co_spawn
-
-- type: playTimeTracker
-  id: RMCJobSurvivorCommanderForecon
-  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase

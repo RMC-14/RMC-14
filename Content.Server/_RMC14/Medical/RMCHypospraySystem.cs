@@ -9,11 +9,10 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Forensics;
-using Content.Shared.Interaction;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
 using Content.Shared.Timing;
 using Robust.Server.Audio;
-
 
 namespace Content.Server._RMC14.Medical;
 
@@ -22,6 +21,7 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,7 +30,6 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         SubscribeLocalEvent<RMCHyposprayComponent, HyposprayDoAfterEvent>(OnHypoInject);
         SubscribeLocalEvent<RMCHyposprayComponent, RefilledSolutionEvent>(OnRefilled);
     }
-
 
     private void OnRefilled(Entity<RMCHyposprayComponent> ent, ref RefilledSolutionEvent args)
     {

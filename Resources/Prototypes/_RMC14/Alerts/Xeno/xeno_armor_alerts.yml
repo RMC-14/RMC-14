@@ -1,5 +1,6 @@
 ﻿- type: alert
   id: XenoArmor
+  category: Armor
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
     state: armor_max

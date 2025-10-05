@@ -145,6 +145,28 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_green.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretASO
+  name: ASO beret
+  description: A black beret worn by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/beret_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/beret_aso.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretPurple
+  name: purple beret
+  description: A stylish, if purple, beret.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -249,6 +271,34 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCYellowCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: Clothing/Head/Soft/yellowsoft.rsi
+      Desert: Clothing/Head/Soft/yellowsoft.rsi
+      Snow: Clothing/Head/Soft/yellowsoft.rsi
+      Classic: Clothing/Head/Soft/yellowsoft.rsi
+      Urban: Clothing/Head/Soft/yellowsoft.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -319,6 +369,25 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapASO
+  name: UNMC ASO cap
+  description: A hat usually worn by ASOs in the UNMC. Provides no protection, but makes you look better when sorting papers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+
+- type: entity
   parent: CMHeadCap
   id: CMHeadCapPeakedFormal
   name: marine peaked cap
@@ -339,6 +408,28 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapPeakedASO
+  name: ASO peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapPeakedCMP
+  name: chief mp peaked cap
+  description: A peaked cap given to experienced CMP. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -369,6 +460,55 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/flapcap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapCorrespondent
+  name: combat correspondent cap
+  description: A faithful cap for any terrain war correspondents may find themselves in.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
+
+# soft caps
+
+- type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadBlueSoftCap
+  name: blue cap
+  description: It's a baseball hat in a tasteless blue color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+
+- type: entity
+  parent: RMCHeadBlueSoftCap
+  id: RMCHeadYellowSoftCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
 
 # surgical caps
 - type: entity
@@ -545,3 +685,325 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+
+# beanies
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeanie
+  name: beanie
+  description: A standard military beanie, often worn by non-combat military personnel and support crews, though it is not uncommon to see combat personnel who no longer care about self-preservation wearing one of these as well. Popular due to being comfortable and snug.
+  suffix: Black, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieTan
+  name: tan beanie
+  suffix: Tan, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieGray
+  name: gray beanie
+  suffix: Gray, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieGreen
+  name: green beanie
+  suffix: Green, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/green.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieCargo
+  name: cargo beanie
+  suffix: Cargo, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/cargo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/cargo.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieTSE
+  name: royal marine beanie
+  description: A standard military beanie.
+  suffix: TSE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tse.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tse.rsi
+
+# Radiation Suit
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadRadiationHood
+  name: radiation hood
+  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadWeYaPilotCap
+  name: Weston-Yamada Pilot cap
+  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civillian Pilots, akin to old Earth formal Pilots-wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 15
+
+# Durag
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadDurag
+  name: durag
+  description: An improvised head wrap made out of a standard issue neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: RMCHeadDurag
+  id: RMCHeadDuragBlack
+  description: An improvised head wrap made out of a black neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+
+# Civilian
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapGrey
+  name: grey cap
+  description: It's a baseball hat in a tasteful grey color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapFerret
+  name: ferret heavy industries trucker hat
+  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2080.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapTruckerRed
+  name: red trucker hat
+  description: It's a red trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapTruckerRed
+  id: RMCHeadCapTruckerBlue
+  name: blue trucker hat
+  description: It's a blue trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/blue_trucker_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/blue_trucker_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapWeyamart
+  name: orange cap
+  description: It's a baseball style cap in the 'Weyamart' orange color, with the 'Weyamart' logo on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapPatrol
+  name: patrol cap
+  description: A casual cap issued as part of the non-combat uniform. While it only protects from the sun, it's much more comfortable than a helmet.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapPizzaGalaxy
+  name: Pizza-Galaxy red cap
+  description: It's a baseball style cap in a red color, with the 'Pizza-Galaxy' logo on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapCargo
+  name: cargo cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap_old.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap_old.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadCowboyHatLight
+  name: light cowboy hat
+  description: A finely made cowboy hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
+
+- type: entity
+  parent: RMCHeadCowboyHatLight
+  id: RMCHeadCowboyHatDark
+  name: dark cowboy hat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+
+# Chaplain
+
+- type: entity
+  parent: ClothingHeadHatHoodNunHood
+  id: RMCHeadNunHood
+  name: nun hood
+  description: Maximum piety in this star system
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hoods/nun.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hoods/nun.rsi
+
+# Misc Caps
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi

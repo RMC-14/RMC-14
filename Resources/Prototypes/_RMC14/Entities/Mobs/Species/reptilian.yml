@@ -18,9 +18,9 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
-    allowedEmotes: ['Thump']
+    allowedEmotes: ['Thump', 'Hiss', 'Purr', 'RMCReptileRattle']
   - type: BodyEmotes
-    soundsId: ReptilianBodyEmotes
+    soundsId: RMCReptilianBodyEmotes
   - type: TypingIndicator
     proto: lizard
   - type: Vocal
@@ -35,3 +35,5 @@
     animation: WeaponArcClaw
   - type: Inventory
     speciesId: reptilian
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-reptilian

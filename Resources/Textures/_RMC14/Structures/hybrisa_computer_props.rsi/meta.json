@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/hybrisa/computers.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mapping_comp",
+      "delays": [
+        [
+          1.5,
+          1.5,
+          1.5,
+          1.5
+        ]
+      ]
+    },
+    {
+      "name": "mapping_comp_off"
+    },
+    {
+      "name": "mps",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "mps_off"
+    },
+    {
+      "name": "sensor_comp1",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp1_off"
+    },
+    {
+      "name": "sensor_comp3",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp3_off"
+    },
+    {
+      "name": "sensor_comp2",
+      "delays": [
+        [
+          1,
+          0.4,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp2_off"
+    },
+    {
+      "name": "blackmapping_comp",
+      "delays": [
+        [
+          1.5,
+          1.5,
+          1.5,
+          1.5
+        ]
+      ]
+    },
+    {
+      "name": "blackmapping_comp_off"
+    },
+    {
+      "name": "blackmps",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "blackmps_off"
+    },
+    {
+      "name": "blacksensor_comp1",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "blacksensor_comp1_off"
+    },
+    {
+      "name": "blacksensor_comp3",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "blacksensor_comp3_off"
+    },
+    {
+      "name": "blacksensor_comp2",
+      "delays": [
+        [
+          1,
+          0.4,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "blacksensor_comp2_off"
+    },
+    {
+      "name": "zcomputermachine",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "zcomputermachine_off"
+    },
+    {
+      "name": "redmeter",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          10
+        ]
+      ]
+    },
+    {
+      "name": "biggreenmeter1",
+      "delays": [
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          10
+        ]
+      ]
+    },
+    {
+      "name": "telescreen"
+    },
+    {
+      "name": "telescreenb"
+    },
+    {
+      "name": "telescreenbspark",
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          4
+        ]
+      ]
+    },
+    {
+      "name": "multimonitorsmall_off",
+      "directions": 4
+    },
+    {
+      "name": "multimonitorsmall_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "multimonitorbig_off",
+      "directions": 4
+    },
+    {
+      "name": "multimonitorbig_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "multimonitormedium_off",
+      "directions": 4
+    },
+    {
+      "name": "multimonitormedium_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bluemultimonitorsmall_off",
+      "directions": 4
+    },
+    {
+      "name": "bluemultimonitorsmall_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bluemultimonitorbig_off",
+      "directions": 4
+    },
+    {
+      "name": "bluemultimonitorbig_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bluemultimonitormedium_off",
+      "directions": 4
+    },
+    {
+      "name": "bluemultimonitormedium_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

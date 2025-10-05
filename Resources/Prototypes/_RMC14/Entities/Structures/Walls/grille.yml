@@ -90,6 +90,12 @@
       damage:
         types:
           Blunt: 40
+    - type: XenoCrusherChargable
+      setDamage:
+        types:
+          Blunt: 80
+      destroyDamage: 100
+      passOnDestroy: true
 
 - type: entity
   id: RMCGrilleBroken

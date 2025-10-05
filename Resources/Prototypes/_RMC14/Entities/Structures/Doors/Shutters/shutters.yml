@@ -25,7 +25,7 @@
         mask:
         - FullTileMask
         layer:
-        - AirlockLayer
+        - WallLayer
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
@@ -73,6 +73,7 @@
     activeLoad: 20
     channel: Environment
   - type: RMCOpenOnAlertLevel
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCShutterBaseIndestructible
@@ -88,6 +89,8 @@
     stageLoss: 2
     destroy: true
     minimumStage: 4
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: RMCShutterBase

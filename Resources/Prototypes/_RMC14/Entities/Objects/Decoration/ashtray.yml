@@ -1,0 +1,38 @@
+- type: entity
+  parent: Ashtray
+  id: RMCAshtray
+  name: plastic ashtray
+  description: Cheap platic ashtray.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/ashtray.rsi
+    layers:
+      - state: icon-0
+        map: ["enum.StorageFillLayers.Fill"]
+  - type: StorageFillVisualizer
+    fillBaseName: icon
+    maxFillLevels: 2
+
+- type: entity
+  parent: RMCAshtray
+  id: RMCAshtrayBronze
+  name: bronze ashtray
+  description: Massive bronze ashtray.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/ashtray-br.rsi
+    layers:
+      - state: icon-0
+        map: ["enum.StorageFillLayers.Fill"]
+
+- type: entity
+  parent: RMCAshtray
+  id: RMCAshtrayGlass
+  name: glass ashtray
+  description: Glass ashtray. Looks fragile.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/ashtray-gl.rsi
+    layers:
+      - state: icon-0
+        map: ["enum.StorageFillLayers.Fill"]

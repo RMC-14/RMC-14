@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Tackle;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
@@ -18,6 +19,7 @@ public sealed class StunShakeableSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStandingSystem _rmcStanding = default!;
@@ -26,8 +28,7 @@ public sealed class StunShakeableSystem : EntitySystem
 
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";
-    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
-    private static readonly ProtoId<StatusEffectPrototype> TemporaryBlindness = "TemporaryBlindness";
+    private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
 
     public override void Initialize()
     {
@@ -44,6 +45,7 @@ public sealed class StunShakeableSystem : EntitySystem
         var rest = CompOrNull<RMCRestComponent>(target);
         if (!_statusEffects.HasStatusEffect(target, Stun) &&
             !_statusEffects.HasStatusEffect(target, KnockedDown) &&
+            !_statusEffects.HasStatusEffect(target, Unconscious) &&
             !HasComp<TackledRecentlyByComponent>(target) &&
             (rest == null || !rest.Resting))
         {
@@ -68,18 +70,9 @@ public sealed class StunShakeableSystem : EntitySystem
 
         _rmcStanding.SetRest(target, false);
 
-        // Only remove muted & blindness if they're at the same timer
-        // Simulating how in CM-13 you can wake up unconscious people (knockedout - knocked down, stunned, blinded, deafened, and muted)
-        if (_statusEffects.TryGetTime(target, Muted, out var timeMute) &&
-            _statusEffects.TryGetTime(target, TemporaryBlindness, out var timeBlind) &&
-            timeMute == timeBlind)
-        {
-            _statusEffects.TryRemoveTime(target, Muted, ent.Comp.DurationRemoved);
-            _statusEffects.TryRemoveTime(target, TemporaryBlindness, ent.Comp.DurationRemoved);
-        }
-
         _statusEffects.TryRemoveTime(target, Stun, ent.Comp.DurationRemoved);
         _statusEffects.TryRemoveTime(target, KnockedDown, ent.Comp.DurationRemoved);
+        _statusEffects.TryRemoveTime(target, Unconscious, ent.Comp.DurationRemoved);
         RemCompDeferred<TackledRecentlyByComponent>(target);
 
         var userPopup = Loc.GetString("rmc-shake-awake-user", ("target", target));
