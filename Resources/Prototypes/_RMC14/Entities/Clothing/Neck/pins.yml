@@ -49,7 +49,7 @@
   - type: UniformAccessory
     playerSprite:
       sprite: Clothing/Neck/Misc/pins.rsi
-      state: ace-equipped-NECK
+      state: asex-equipped-NECK
 
 - type: entity
   parent: [ClothingNeckBisexualPin, RMCPridePinBase ]
