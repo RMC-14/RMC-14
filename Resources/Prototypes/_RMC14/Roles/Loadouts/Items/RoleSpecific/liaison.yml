@@ -26,7 +26,7 @@
     - RMCWeYaThermos
 
 - type: loadout
-  id: RMCHeadBeretWeYa
+  id: RMCJacketWindbreakerWEYA
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -35,4 +35,4 @@
       role: CMJobLiaison
       time: 630000 # 175 hours
   equipment:
-    head: RMCHeadBeretWeYa
+    outerClothing: RMCJacketWindbreakerWEYA

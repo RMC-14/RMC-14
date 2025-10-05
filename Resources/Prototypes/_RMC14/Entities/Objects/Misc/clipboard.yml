@@ -80,37 +80,3 @@
     slots: [belt]
     quickEquip: false
     sprite: _RMC14/Objects/Misc/weya_clipboard.rsi
-  - type: ItemMapper
-    mapLayers:
-      clipboard_paper:
-        whitelist:
-          tags:
-          - Document
-      clipboard_pen:
-        whitelist:
-          tags:
-          - Write
-  - type: ItemSlots
-    slots:
-      pen_slot:
-        name: clipboard-slot-component-slot-name-pen
-        whitelist:
-          tags:
-          - Write
-        insertOnInteract: true
-  - type: StorageFill
-    contents:
-    - id: CMPaper
-      prob: 0.5
-    - id: CMPaper
-      prob: 0.4
-    - id: CMPaper
-      prob: 0.3
-    - id: CMPaper
-      prob: 0.2
-    - id: CMPaper
-      prob: 0.2
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno

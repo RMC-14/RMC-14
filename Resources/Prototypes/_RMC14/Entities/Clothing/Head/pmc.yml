@@ -213,7 +213,7 @@
   parent: CMHeadBeret
   id: RMCHeadBeretWeYa
   name: Weston-Yamada beret
-  description: Show off your megacorp pride with this stylish beret! Given to high-ranking employees during promotional events.
+  description: Show off your megacorp pride with this stylish beret!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/weya_beret.rsi
