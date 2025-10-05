@@ -10,26 +10,31 @@ namespace Content.Server._RMC14.Admin;
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class MobStateCommand : ToolshedCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-
-    [CommandImplementation("is")]
+    [CommandImplementation]
     public EntityUid? Is(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid ent,
-        [CommandArgument] MobState targetState)
+        [CommandArgument] MobState targetState,
+        [CommandInverted] bool inverted)
     {
-        if (!_entityManager.TryGetComponent<MobStateComponent>(ent, out var mobStateComponent))
-            return null;
+        var query = GetEntityQuery<MobStateComponent>();
 
-        return mobStateComponent.CurrentState == targetState ? ent : null;
+        if (query.TryComp(ent, out var comp))
+        {
+            var matches = comp.CurrentState == targetState;
+            return inverted ? (matches ? null : ent) : (matches ? ent : null);
+        }
+
+        return inverted ? ent : null;
     }
 
-    [CommandImplementation("is")]
+    [CommandImplementation]
     public IEnumerable<EntityUid> Is(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> ents,
-        [CommandArgument] MobState targetState)
+        [CommandArgument] MobState targetState,
+        [CommandInverted] bool inverted)
     {
-        return ents.Select(ent => Is(ctx, ent, targetState)).OfType<EntityUid>();
+        return ents.Select(ent => Is(ctx, ent, targetState, inverted)).OfType<EntityUid>();
     }
 }
