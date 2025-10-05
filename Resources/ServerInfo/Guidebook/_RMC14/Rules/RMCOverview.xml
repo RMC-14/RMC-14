@@ -8,13 +8,14 @@
   ## Recent Changes
   Read the relevant sections for the entire text.
 
+  - (General) The Auxiliary Support Officer no longer has authority in requisitions.
+  - (General) The Quartermaster has been replaced with the Logistics Officer. All Officer mentions also apply to this new role.
+  - [textlink="(Core Rules)" link="RMCKindness"] Split in character crimes into its own section, allowing for more clarity. More information and guidelines have been added.
   - (Current Page) Added Community Rules. These are the same community rules on the Discord.
   - [textlink="(Non-Mod Department SOP)" link="RMCMarineSOPNONModDepartment"] Access Modification.
   - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] Clarification: Don't share in-game information with anyone playing, neither in-character or any ooc/external means.
   - [textlink="(Core Rule 5)" link="RMCKindness"] Be kind to new players, teach them.
   - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] External communities should not be promoted or advertised.
-  - [textlink="(Marine Law Appeals)" link="RMCMarineLawAppeals"] Clarified who can be delegated to for appeal processing to mean just an uninvolved MP or Officer in all cases.
-  - (Mutinies) Clarified when a mutiny begins, and when someone can participate.
 
   ## Admin Decisions Are Final.
   - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
@@ -49,8 +50,10 @@
   - [textlink="5. Don't antagonize or harass players." link="RMCKindness"]
   - [textlink="6. Don't quit a command level role without notice." link="RMCCommandRoles"]
   - [textlink="7. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
-  - 8. Don't disconnect if you do not get the role/kit you want, be considerate.
+  - 8. Don't quit if you do not get the role/kit/squad you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
+
+  8. (Additional notes) By opting for certain roles, you are opting into the possibility of supporting any given squad, regardless of personal preference. You are directly affecting the gameplay of others by quitting. Please do not opt into roles you do not feel comfortable playing, so they remain open and obtainable by other players at the start of the round.
 
   ## Community Rules (All OOC channels)
 
@@ -60,10 +63,10 @@
 
   - Please do not start heated discussions, including balance issues or roleplay issues, as it is rarely productive with lack of context and information. Missing and new features/fixes and rules can be suggested in the features forum.
 
-  - Do not discuss, complain, or comment about anyone's bans/notes including your own. If you've been banned or disagree with an action, the person involved must make an appeal in our appeals forum where a ruling can be made. It is otherwise assumed that the action is valid and there is no issue.
+  - Do not discuss, complain, or comment about anyone's admin/moderator bans/notes/actions including your own. If you've been banned or disagree with an action, the person involved must make an appeal in our appeals forum where a ruling can be made. It is otherwise assumed that the action is valid and there is no issue.
 
   ## Command and Military Police
-  These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).\n[italic]Command roles are defined as; all heads, cic staff, mp, and squad leaders.[/italic]
+  These rules also apply to any individual who is a MP/Command role (unless they are a member of a hostile force).\n[italic]Command roles are defined as; all heads, cic staff, MP, and squad leaders.[/italic]
   - [textlink="1. Command and MP must follow Marine Law." link="RMCMarineLaw"]
   - [textlink="2. Command and MP are held to a higher standard of play." link="RMCHigherStandards"]
   - [textlink="3. MP should try to remain non-lethal and effect arrests, except in specific special circumstances." link="RMCLethalForce"]

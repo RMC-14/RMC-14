@@ -154,6 +154,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -163,6 +164,7 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     landingZone: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaVaraderoExteriorLz1Console

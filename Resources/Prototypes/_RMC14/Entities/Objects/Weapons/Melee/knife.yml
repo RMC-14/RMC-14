@@ -71,7 +71,7 @@
 
 - type: entity
   name: M11 throwing knife
-  parent: [ RMCBaseMeleeWeapon, BaseKnife]
+  parent: [ RMCBaseMeleeWeapon, BaseKnife ]
   id: CMM11Knife
   description: A military knife designed to be thrown at the enemy.
   components:
@@ -104,7 +104,7 @@
   - type: DeleteOnExplosion
 
 - type: entity
-  parent: [ RMCBaseMeleeWeapon, BaseKnife]
+  parent: [ RMCBaseMeleeWeapon, BaseKnife ]
   id: CMM2132Machete
   name: M2132 machete
   description: Latest issue of the Marine Machete.
@@ -182,7 +182,7 @@
   - type: UsableWhileDevoured
 
 - type: entity
-  parent: [ RMCBaseMeleeWeapon, BaseKnife]
+  parent: [ RMCBaseMeleeWeapon, BaseKnife ]
   id: RMCStraightRazor
   name: straight razor
   description: The commandant's favorite weapon against marines who dare break the grooming standards.
@@ -199,8 +199,8 @@
     visuals:
       enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
-          True: {state: razor}
-          False: {state: razor-off}
+          True: { state: razor }
+          False: { state: razor-off }
   - type: Appearance
   - type: Item
     size: Small

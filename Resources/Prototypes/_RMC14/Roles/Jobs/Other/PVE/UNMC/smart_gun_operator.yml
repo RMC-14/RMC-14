@@ -1,12 +1,20 @@
 - type: job
-  parent: CMSmartGunOperator
+  parent: CMJobSquadBase
   id: CMPVESmartGunOperator
+  name: cm-job-name-smart-gun-operator
+  description: cm-job-description-smart-gun-operator
   playTimeTracker: CMJobPVESmartGunOperator
   ranks:
     RMCRankCorporal: []
   spawnMenuRoleName: Sun Rider Smart Gun Operator (PVE)
   supervisors: cm-job-supervisors-secserg
   startingGear: RMCGearPVESmartGunOperator
+  dummyStartingGear: CMGearSmartGunOperatorEquipped
+  icon: "CMJobIconSmartGunOperator"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 1
+  accessGroups:
+  - SmartGunOperator
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,6 +34,12 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: smartgunner
+    - type: JobPrefix
+      prefix: cm-job-prefix-gun-operator
   hidden: true
 
 - type: playTimeTracker

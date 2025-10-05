@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, hudsquad_syn_forecon by Sigma Draconis, freelancer icons provost team lead icon tse icons and pve icons by github noctynral. rmc_adjutant made by crazy1112345 (discord), based on staff_officer, hudsquad_nv_co modified by Dutch-VanDerLinde, hudsquad_spec_sniper taken from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites edited by github noctyrnal",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, hudsquad_syn_forecon by Sigma Draconis, freelancer icons provost team lead icon tse icons and pve icons by github noctynral. rmc_adjutant made by crazy1112345 (discord), based on staff_officer, hudsquad_nv_co modified by Dutch-VanDerLinde, hudsquad_spec_sniper taken from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites + pmc tl edited by github noctyrnal, CT+RO modified by Whisper",
   "size": {
     "x": 16,
     "y": 16
@@ -266,7 +266,13 @@
             "name": "pmc_sg"
         },
         {
+            "name": "pmc_tl"
+        },
+        {
             "name": "pmc_spec"
+        },
+        {
+            "name": "wo_op"
         },
         {
             "name": "weya_sec"
@@ -369,6 +375,9 @@
         },
         {
             "name": "rmc_marksman"
+        },
+        {
+            "name": "rmc_medic"
         },
         {
             "name": "rmc_rifleman"

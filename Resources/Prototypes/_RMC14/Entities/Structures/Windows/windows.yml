@@ -87,6 +87,14 @@
     mode: CardinalFlags
 
 - type: entity
+  parent: CMWindowReinforcedAlmayerHull
+  id: RMCWindowReinforcedAlmayerHullHijackBustable
+  suffix: Hijack Bustable
+  components:
+  - type: RMCReplaceOnHijackLand # TODO RMC14 also spawn glass
+    id: RMCWindowFrameAlmayer
+
+- type: entity
   parent: CMBaseWindow
   id: CMWindowReinforcedAlmayer
   name: reinforced window

@@ -151,7 +151,7 @@ namespace Content.Server.Popups
             if (recipient != null)
             {
                 // RMC14 Check if popups should be shown to nearby players.
-                if(!_rmcPopup.ShouldPopup(recipient.Value))
+                if (!_rmcPopup.ShouldPopup(recipient.Value))
                     return;
 
                 // Don't send to recipient, since they predicted it locally

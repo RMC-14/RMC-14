@@ -1,6 +1,6 @@
 # auxiliary support
 cm-job-name-aso = Auxiliary Support Officer
-cm-job-description-aso = Coordinate the support and auxiliary departments of the operation.
+cm-job-description-aso = Coordinate the intelligence department, and assist the Executive Officer.
 cm-job-prefix-aso = ASO
 CMJobAuxiliarySupportOfficer = Auxiliary Support Officer
 
