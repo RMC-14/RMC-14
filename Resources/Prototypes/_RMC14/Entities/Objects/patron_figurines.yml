@@ -1848,3 +1848,14 @@
     state: roxanne_floppy_ears_dreams
   - type: PatronFigurine
     id: e83e290d-6405-4988-924f-1746a58ca83a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGallaginGCAddictCaitman
+  name: Gallagin 'GC Addict' Caitman figurine
+  description: "Smells of medicine and gunpowder."
+  components:
+  - type: Sprite
+    state: gallagin_gc_addict_caitman
+  - type: PatronFigurine
+    id: c97364e1-a409-44e4-bd09-323ef8a38121
