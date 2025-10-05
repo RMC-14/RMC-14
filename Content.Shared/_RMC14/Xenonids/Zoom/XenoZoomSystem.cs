@@ -16,7 +16,7 @@ public sealed class XenoZoomSystem : EntitySystem
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {

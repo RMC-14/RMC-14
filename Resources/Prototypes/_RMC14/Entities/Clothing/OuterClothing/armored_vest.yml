@@ -59,7 +59,7 @@
     explosionArmor: 0
   - type: Item
     size: Huge
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: cm-defib-take-off-armor
     showOnExamine: false
   - type: InteractedBlacklist
@@ -82,8 +82,12 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: RMCNameItemOnVend
     item: Armor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
 # mild melee armor
 - type: entity

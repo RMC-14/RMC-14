@@ -83,7 +83,9 @@
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
 
 # WARDEN
 - type: entity
@@ -170,4 +172,6 @@
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10

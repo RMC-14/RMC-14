@@ -22,7 +22,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCGibSystem _rmcGib = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;

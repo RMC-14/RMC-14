@@ -240,7 +240,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     {
         if (ent.Comp.Delete)
         {
-            if (_net.IsServer)
+            if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
         }
         else
@@ -252,9 +252,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
         var maxQuery = EntityQueryEnumerator<ProjectileMaxRangeComponent>();
         while (maxQuery.MoveNext(out var uid, out var comp))
         {

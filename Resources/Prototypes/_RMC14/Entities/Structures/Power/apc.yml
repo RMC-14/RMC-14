@@ -194,6 +194,7 @@
   - type: ContainerContainer
     containers:
       rmc_apc_power_cell: !type:ContainerSlot
+  - type: SpriteSetRenderOrder
 
 # APCs in use
 - type: entity

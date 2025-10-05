@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
