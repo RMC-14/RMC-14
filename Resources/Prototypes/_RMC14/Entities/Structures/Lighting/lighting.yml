@@ -76,6 +76,9 @@
 - type: entity
   parent: [RMCLightFixtureAlwaysPoweredOffset, RMCLightFixtureBlueAlwaysPowered]
   id: RMCLightFixtureBlueAlwaysPoweredOffset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
@@ -96,8 +99,12 @@
       Burned: ptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureAlwaysPoweredOffset, RMCLightFixtureDoubleAlwaysPowered]
+  parent: [RMCLightFixtureDoubleAlwaysPowered, RMCLightFixtureAlwaysPoweredOffset]
   id: RMCLightFixtureDoubleAlwaysPoweredOffset
+  suffix: Always powered
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: RMCLightFixtureDoubleAlwaysPowered
@@ -119,8 +126,12 @@
       Burned: bptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureAlwaysPoweredOffset, RMCLightFixtureBlueDoubleAlwaysPowered]
+  parent: [RMCLightFixtureBlueDoubleAlwaysPowered, RMCLightFixtureAlwaysPoweredOffset]
   id: RMCLightFixtureBlueDoubleAlwaysPoweredOffset
+  suffix: Always powered
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 # Light Tube, Empty
 - type: entity
@@ -155,9 +166,12 @@
     - Toggle
 
 - type: entity
-  parent: [RMCLightFixtureAlwaysPoweredOffset, CMLightFixtureEmpty]
+  parent: [CMLightFixtureEmpty, RMCLightFixtureAlwaysPoweredOffset]
   id: RMCLightFixtureEmptyOffset
   suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: CMLightFixtureEmpty
@@ -177,8 +191,12 @@
       Burned: btube-burned
 
 - type: entity
-  parent: [RMCLightFixtureEmptyOffset, RMCLightFixtureBlueEmpty]
+  parent: [RMCLightFixtureBlueEmpty, RMCLightFixtureEmptyOffset]
   id: RMCLightFixtureBlueEmptyOffset
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: CMLightFixtureEmpty
@@ -199,8 +217,12 @@
       Burned: ptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureEmptyOffset, RMCLightFixtureDoubleEmpty]
+  parent: [RMCLightFixtureDoubleEmpty, RMCLightFixtureEmptyOffset]
   id: RMCLightFixtureDoubleEmptyOffset
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: RMCLightFixtureDoubleEmpty
@@ -220,8 +242,12 @@
       Burned: bptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureEmptyOffset, RMCLightFixtureBlueDoubleEmpty]
+  parent: [RMCLightFixtureBlueDoubleEmpty, RMCLightFixtureEmptyOffset]
   id: RMCLightFixtureBlueDoubleEmptyOffset
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 # Light Tube
 - type: entity
@@ -253,9 +279,12 @@
     - Toggle
 
 - type: entity
-  parent: [RMCLightFixtureAlwaysPoweredOffset, CMLightFixture]
+  parent: [CMLightFixture, RMCLightFixtureAlwaysPoweredOffset]
   id: RMCLightFixtureOffset
   suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: CMLightFixture
@@ -277,8 +306,12 @@
       Burned: btube-burned
 
 - type: entity
-  parent: [RMCLightFixtureOffset, RMCLightFixtureBlue]
+  parent: [RMCLightFixtureBlue, RMCLightFixtureOffset]
   id: RMCLightFixtureBlueOffset
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: CMLightFixture
@@ -299,8 +332,12 @@
       Burned: ptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureOffset, RMCLightFixtureDouble]
+  parent: [RMCLightFixtureDouble, RMCLightFixtureOffset]
   id: RMCLightFixtureDoubleOffset
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: RMCLightFixtureDouble
@@ -322,20 +359,28 @@
       Burned: bptube-burned
 
 - type: entity
-  parent: [RMCLightFixtureOffset, RMCLightFixtureBlueDouble]
+  parent: [RMCLightFixtureBlueDouble, RMCLightFixtureOffset]
   id: RMCLightFixtureBlueDoubleOffset
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 - type: entity
   parent: RMCLightFixtureDouble
   id: RMCLightFixtureWarmDouble
-  suffix: Warm
+  suffix: Warm, DO NOT MAP
   components:
   - type: PoweredLight
     hasLampOnSpawn: RMCLightTubeWarm
 
 - type: entity
-  parent: [RMCLightFixtureOffset, RMCLightFixtureWarmDouble]
+  parent: [RMCLightFixtureWarmDouble, RMCLightFixtureOffset]
   id: RMCLightFixtureWarmDoubleOffset
+  suffix: Warm
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
 # Light Bulbs
 
@@ -344,7 +389,7 @@
   parent: CMLightFixtureAlwaysPowered
   id: CMLightFixtureSmallAlwaysPowered
   description: A small lighting fixture that is fitted with a bright fluorescent light bulb. Looking at it for too long makes your eyes go watery.
-  suffix: Always powered
+  suffix: Always powered, DO NOT MAP
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/Lighting/light_bulb.rsi
@@ -373,7 +418,7 @@
   - type: RMCBreakLightOnAttack
 
 - type: entity
-  parent: [RMCLightFixtureAlwaysPoweredOffset, CMLightFixtureSmallAlwaysPowered]
+  parent: [CMLightFixtureSmallAlwaysPowered, RMCLightFixtureAlwaysPoweredOffset]
   id: RMCLightFixtureSmallAlwaysPoweredOffset
   suffix: Always powered
   components:
@@ -404,7 +449,7 @@
       Burned: bbulb-burned
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, RMCLightFixtureSmallBlueAlwaysPowered]
+  parent: [RMCLightFixtureSmallBlueAlwaysPowered, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: RMCLightFixtureSmallBlueAlwaysPoweredOffset
 
 - type: entity
@@ -417,8 +462,12 @@
     color: "#C02526"
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, RMCLightFixtureSmallRedAlwaysPowered]
+  parent: [RMCLightFixtureSmallRedAlwaysPowered, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: RMCLightFixtureSmallRedAlwaysPoweredOffset
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
 
 # Light Bulb, Empty
 - type: entity
@@ -454,8 +503,12 @@
     - Toggle
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, CMLightFixtureSmallEmpty]
+  parent: [CMLightFixtureSmallEmpty, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: CMLightFixtureSmallEmptyOffset
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
 
 - type: entity
   parent: CMLightFixtureSmallEmpty
@@ -475,14 +528,18 @@
       Burned: bbulb-burned
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, RMCLightFixtureSmallBlueEmpty]
+  parent: [RMCLightFixtureSmallBlueEmpty, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: RMCLightFixtureSmallBlueEmptyOffset
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
 
 # Light Bulb
 - type: entity
   parent: CMLightFixtureSmallEmpty
   id: CMLightFixtureSmall
-  suffix: ""
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: bulb1
@@ -508,8 +565,12 @@
     - Toggle
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, CMLightFixtureSmall]
+  parent: [CMLightFixtureSmall, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: CMLightFixtureSmallOffset
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
 
 - type: entity
   parent: CMLightFixtureSmall
@@ -531,13 +592,17 @@
       Burned: bbulb-burned
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, RMCLightFixtureSmallBlue]
+  parent: [RMCLightFixtureSmallBlue, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: RMCLightFixtureSmallBlueOffset
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
 
 - type: entity
   parent: CMLightFixtureSmall
   id: RMCLightFixtureSmallRed
-  suffix: Red
+  suffix: Red, DO NOT MAP
   components:
   - type: Sprite
     color: "#C02526"
@@ -545,5 +610,9 @@
     hasLampOnSpawn: RMCLightBulbRed
 
 - type: entity
-  parent: [RMCLightFixtureSmallAlwaysPoweredOffset, RMCLightFixtureSmallRed]
+  parent: [RMCLightFixtureSmallRed, RMCLightFixtureSmallAlwaysPoweredOffset]
   id: RMCLightFixtureSmallRedOffset
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_bulb.rsi
