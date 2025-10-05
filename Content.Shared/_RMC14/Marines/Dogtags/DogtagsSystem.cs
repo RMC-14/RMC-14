@@ -133,7 +133,7 @@ public sealed class DogtagsSystem : EntitySystem
 
         if (_rotting.IsRotten(wearer) ||
             _unrevivableSystem.IsUnrevivable(wearer) ||
-            HasComp<CMDefibrillatorBlockedComponent>(wearer) ||
+            HasComp<RMCDefibrillatorBlockedComponent>(wearer) ||
             _skills.HasSkill(taker, Skill, SkillRequired) || HasComp<RMCHasSuicidedComponent>(wearer))
         {
             return true;

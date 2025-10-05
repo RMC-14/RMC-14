@@ -23,7 +23,6 @@
         components:
         - RMCFlask
         - CMScalpel
-        - Figurine
         - CassettePlayer
         - CassetteTape
         tags:
@@ -93,6 +92,7 @@
   - type: Appearance
   - type: HelmetAccessoryHolder
     isHat: false
+
 - type: entity
   parent: RMCHelmetBase
   id: RMCMarineHelmetBase
@@ -123,6 +123,78 @@
   - type: IntegratedVisors
     visorsToAdd:
     - RMCVisorSquadIntegrated
+
+- type: entity
+  parent: RMCMarineHelmetBase
+  id: RMCMarineHelmetWithLightBase
+  abstract: true
+  components:
+  - type: Item
+    heldPrefix: off
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      map: [ "light" ]
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: RMCSuitLight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
+    softness: 5
+    autoRot: true
+    netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
 
 - type: entity
   id: RMCFoldableHelmetBase

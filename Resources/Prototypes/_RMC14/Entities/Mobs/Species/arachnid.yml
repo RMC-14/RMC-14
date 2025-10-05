@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist C.M McWeb
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobArachnid
   suffix: RMC14
   components:

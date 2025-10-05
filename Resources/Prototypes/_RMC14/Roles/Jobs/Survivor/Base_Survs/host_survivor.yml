@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivor
   id: CMSurvivorHost
-  name: cm-job-name-survivor-host
+  name: cm-job-name-survivor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHost
   startingGear: RMCGearHostSurvivorBase

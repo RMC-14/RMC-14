@@ -121,7 +121,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
             if (_mob.IsDead(target) && (_entities.HasComponent<VictimBurstComponent>(target) ||
                 _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target) ||
-                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) ||
+                _entities.HasComponent<RMCDefibrillatorBlockedComponent>(target) ||
                 _entities.HasComponent<RMCHasSuicidedComponent>(target)))
             {
                 isPermaDead = true;

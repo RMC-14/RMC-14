@@ -13,6 +13,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -188,7 +189,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var cade in _lookup.GetEntitiesInRange<BarricadeComponent>(origin, acidRange))
                     {
-                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
                         if (HasComp<DamageableCorrodingComponent>(cade))
@@ -205,13 +206,13 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             continue;
 
                         //Do the acid check here
-                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                         {
                             if (active.MobAcid is { } add)
                                 EntityManager.AddComponents(mob, add);
                         }
 
-                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
                         if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(mob), out var distance))
@@ -228,10 +229,10 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var turf in _map.GetTilesIntersecting(gridId, grid, Box2.CenteredAround(origin.Position, new(acidRange * 2, acidRange * 2)), false))
                     {
-                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (_turf.IsTileBlocked(turf, Physics.CollisionGroup.Impassable))
+                        if (_turf.IsTileBlocked(turf, CollisionGroup.Impassable))
                             continue;
 
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));

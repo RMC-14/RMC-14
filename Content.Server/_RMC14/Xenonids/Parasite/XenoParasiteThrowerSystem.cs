@@ -20,7 +20,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
+public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly HandsSystem _hands = default!;

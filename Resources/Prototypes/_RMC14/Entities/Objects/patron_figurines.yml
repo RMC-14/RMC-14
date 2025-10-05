@@ -847,7 +847,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronXalos-Of-Europa
   name: Xalos-Of-Europa figurine
-  description: "Wait, what's the QM doing out of Req!?"
+  description: "Wait, what's the LO doing out of Req!?"
   components:
   - type: Sprite
     state: xalos-of-europa
@@ -1655,17 +1655,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSilasAlatus
-  name: Silas Alatus figurine
-  #description: ""
-  components:
-  - type: Sprite
-    state: silas_alatus
-  - type: PatronFigurine
-    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKasuni
   name: Kasuni figurine
   description: "Kasuni is fix, will be ok soon."
@@ -1702,17 +1691,6 @@
       params:
         volume: 5
         maxDistance: 1
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethXi
-  name: Seth Xi figurine
-  description: "As you look upon the figurine, the distant clash of blades reaches your ears, followed by a faint echo—a voice, singing of bloodshed, and of a man in the mirror. Strange."
-  components:
-  - type: Sprite
-    state: seth_xi
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1790,3 +1768,94 @@
     state: red_machina_swiftcleave
   - type: PatronFigurine
     id: dc3a5b1a-5fde-4ffe-9f33-07bc7cac7406
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMinjiFailsafeKilgrim
+  name: Minji 'Failsafe' Kilgrim figurine
+  description: "Some stray cat usually found roaming in medbay. The figure itself smells strongly of various chemicals, small singe marks litter it as if it's been through an explosion or two.
+
+
+    If you didn't look closer, you'd mistake the bow and bell decorating her tail for a bee..."
+  components:
+  - type: Sprite
+    state: minji_failsafe_kilgrim
+  - type: PatronFigurine
+    id: fbecf0e4-fe0c-41fc-a136-12804f260378
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJohnrookWeller
+  name: John 'rook' Weller figurine
+  description: "Mother and Father forgive me, Sisters and Brothers bless me, Daughter and Sons treasure me, I ask for safety, I plead for salvation, I pray for clarity, please, rid my soul of this nightmare."
+  components:
+  - type: Sprite
+    state: john_rook_weller
+  - type: PatronFigurine
+    id: 2d7cddb1-242a-4ada-825e-e8e94ffa5517
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHazelSkyfallSingh
+  name: Hazel 'Skyfall' Singh figurine
+  description: "¡We'll be fine! ¡I've esurvived much worse!"
+  components:
+  - type: Sprite
+    state: hazel_skyfall_singh
+  - type: PatronFigurine
+    id: 20f158bf-cf14-4375-9059-3c75a3188e34
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasAlatus
+  name: Silas Alatus figurine
+  description: "Silas is a dark green moth person, standing at 5' 11\" tall. His antennae are nearly always pointed behind him at all times, and his wings are a darker green with grey pattern. He has grey-blueish eyes, though he is missing his left eye, which has been covered by a dark colored eyepad. He is seen with some form of sidearm on his person at all times, usually a revolver of some sort."
+  components:
+  - type: Sprite
+    state: silas_alatus
+  - type: PatronFigurine
+    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronThrukiaLongbow
+  name: Thrukia Longbow figurine
+  description: "A message carved beneath it reads: \"Take this with you to your struggles and victory is assured! No matter how much you hate yourself, the stars will still forgive you.\""
+  components:
+  - type: Sprite
+    state: thrukia_longbow
+  - type: PatronFigurine
+    id: a27d57bb-e7f4-48df-8f70-764d3e482ca1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRoxanneFloppyEarsDreams
+  name: Roxanne 'Floppy Ears' Dreams figurine
+  description: "Tiny bun! Tiny bun with sharp teeth... and a big gun..."
+  components:
+  - type: Sprite
+    state: roxanne_floppy_ears_dreams
+  - type: PatronFigurine
+    id: e83e290d-6405-4988-924f-1746a58ca83a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGallaginGCAddictCaitman
+  name: Gallagin 'GC Addict' Caitman figurine
+  description: "Smells of medicine and gunpowder."
+  components:
+  - type: Sprite
+    state: gallagin_gc_addict_caitman
+  - type: PatronFigurine
+    id: c97364e1-a409-44e4-bd09-323ef8a38121
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZethXi
+  name: Zeth Xi figurine
+  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  components:
+  - type: Sprite
+    state: zeth_xi
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
