@@ -1,16 +1,16 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
-  id: CMRoyalMarinesSGO
-  name: rmc-job-name-rcm-sgo
+  id: CMRoyalMarinesBreacher
+  name: rmc-job-name-rcm-breacher
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalSmartGunOperator
+  playTimeTracker: RMCJobRoyalBreacher
   ranks:
     RMCRankTSELanceCorporal: [ ]
-  startingGear: RMCGearRoyalSmartGunOperator
-  icon: RMCJobIconRoyalSmartGunOperator
+  startingGear: RMCGearRoyalBreacher
+  icon: "RMCJobIconRoyalBreacher"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
-  spawnMenuRoleName: RCM Smart Gun Operator
+  spawnMenuRoleName: RCM Breacher
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,73 +21,72 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillFirearms: 2
+        RMCSkillFirearms: 1 
         RMCSkillPolice: 2
         RMCSkillFireman: 2
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
         RMCSkillEndurance: 3
         RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
-        RMCSkillSmartGun: 1
         RMCSkillVehicles: 1
+        RMCSkillPowerLoader: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-sgo
+      prefix: rmc-job-prefix-rcm-breacher
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidRoyalMarinesSGO
-  name: royal crown marines ghost role smart gun operator
+  id: RMCRandomHumanoidRoyalMarinesBreacher
+  name: royal crown marines ghost role breacher
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCRoyalMarinesSGO
+    settings: RMCRoyalMarinesBreacher
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCRoyalMarinesSGO
+  id: RMCRoyalMarinesBreacher
   components:
   - type: GhostRole
-    name: rmc-ghost-name-rcm-sgo
+    name: rmc-ghost-name-rcm-breacher
     description: rmc-ghost-role-information-rcm-description
     rules: rmc-ghost-role-information-rcm-rules
     reregister: false
-    job: CMRoyalMarinesSGO
+    job: CMRoyalMarinesBreacher
     raffle:
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobSmartGunOperator
+      role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-
+  
 - type: startingGear
-  id: RMCGearRoyalSmartGunOperator
+  id: RMCGearRoyalBreacher
   equipment:
-    head: RMCHeadRoyalHelmetBallistic
-    eyes: RMCGlassesSmartGunSight
+    head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
     jumpsuit: RMCJumpsuitMarineRoyal # TOOD RMC14 royal marines commando uniform
-    outerClothing: RMCArmorRoyalHarnessFilled
+    outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
-    suitstorage: RMCSmartGunRoyal
-    id: RMCIDRoyalMarinesSGO
-    belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
-    back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
-    pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
+    suitstorage: RMCWeaponRifleL24B
+    id: RMCIDRoyalMarinesBreacher
+    belt: RMCBeltUtiliyGeneralFilledRoyal
+    # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
+    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalSmartGunOperator
+  id: RMCJobRoyalBreacher
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalSmartGunOperator
+  id: RMCJobIconRoyalBreacher
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_smart_gun_operator
+    state: rmc_breacher
