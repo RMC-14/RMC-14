@@ -367,7 +367,7 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                     control.Visible = false;
 
-                    if (ShownXenos.TryGetValue(control.Button.Name ?? "", out var xeno))
+                    if (ShownXenos.TryGetValue(control.Button.Name ?? String.Empty, out var xeno))
                     {
                         control.Visible = xeno;
                     }
