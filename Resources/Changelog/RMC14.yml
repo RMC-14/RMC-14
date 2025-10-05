@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: t0wnshark
-  changes:
-  - message: Added black insulated gloves.
-    type: Add
-  id: 1892
-  time: '2025-06-25T04:29:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6706
 - author: noctyrnal
   changes:
   - message: The AEGIS OB for the Admin AEGIS event has received new sprites.
@@ -4481,5 +4474,14 @@
   id: 2391
   time: '2025-10-05T03:00:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7864
+- author: yagwog
+  changes:
+  - message: Added Parasite Watcher strain.
+    type: Add
+  - message: Fixed being able to use runner and boiler zoom while resting.
+    type: Fix
+  id: 2392
+  time: '2025-10-05T03:23:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8012
 Name: RMC14
 Order: -1
