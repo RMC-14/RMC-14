@@ -101,34 +101,37 @@ public sealed class SkillPamphletSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
 
             var usedSkillComp = EnsureComp<UsedSkillPamphletComponent>(args.User);
-            usedSkillComp.Icon = ent.Comp.GiveIcon;
-            usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
+            if (ent.Comp.GiveIcon != null)
+                usedSkillComp.Icon = ent.Comp.GiveIcon;
+            if (ent.Comp.GiveJobTitle != null)
+                usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
             if (!ent.Comp.BypassLimit)
                 usedSkillComp.Used = true;
 
             Dirty(args.User, usedSkillComp);
 
             var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(args.User);
-            mapBlip.Icon = ent.Comp.GiveMapBlip;
+            if (ent.Comp.GiveMapBlip != null)
+                mapBlip.Icon = ent.Comp.GiveMapBlip;
             Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
+
+            if (ent.Comp.GivePrefix != null)
+            {
+                var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
+                if (ent.Comp.IsAppendPrefix)
+                    jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
+                else
+                    jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
+
+                Dirty(args.User, jobPrefix);
+            }
 
             if (!_net.IsClient)
                 QueueDel(ent);
 
             return;
-        }
-
-        if (ent.Comp.GivePrefix != null)
-        {
-            var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
-            if (ent.Comp.IsAppendPrefix)
-                jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
-            else
-                jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
-
-            Dirty(args.User, jobPrefix);
         }
 
         _popup.PopupClient(Loc.GetString("rmc-pamphlets-already-know"), ent, args.User);

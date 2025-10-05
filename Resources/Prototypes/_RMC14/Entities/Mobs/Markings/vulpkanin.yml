@@ -220,6 +220,68 @@
     - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
       state: patch
 
+- type: marking
+  id: VulpSnoutShort
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanid_FRONT_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanid_FRONT_secondary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanid_FRONT_tertiary
+
+- type: marking
+  id: VulpSnoutShortAlt1
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt_FRONT_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt_FRONT_secondary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt_FRONT_tertiary
+
+- type: marking
+  id: VulpSnoutShortAlt2
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt2_FRONT_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt2_FRONT_secondary
+
+- type: marking
+  id: VulpSnoutShortAlt3
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt3_FRONT_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt3_FRONT_secondary
+    - sprite: _RMC14/Mobs/Vulpkanin/short_snout.rsi
+      state: m_snout_fscanidalt3_FRONT_tertiary
+  
+- type: marking
+  id: VulpSnoutWolf
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/wolf_snout.rsi
+      state: m_snout_fwolf_FRONT_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/wolf_snout.rsi
+      state: m_snout_fwolf_FRONT_secondary
+
+
 # Head Markings (Head)
 - type: marking
   id: VulpHeadTiger
@@ -381,6 +443,26 @@
       state: fluffy
 
 - type: marking
+  id: VulpTailFox3
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/fox3_tail.rsi
+      state: m_tail_fox3_
+
+- type: marking
+  id: VulpTailFox4
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/fox4_tail.rsi
+      state: m_tail_fox4_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/fox4_tail.rsi
+      state: m_tail_fox4_secondary
+
+- type: marking
   id: VulpTailDalmation #These will need locale
   bodyPart: Tail
   markingCategory: Tail
@@ -408,6 +490,17 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/straight_tail.rsi
       state: m_tail_straighttail_primary
+
+- type: marking
+  id: VulpTailLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/long_tail.rsi
+      state: long
+    - sprite: _RMC14/Mobs/Vulpkanin/long_tail.rsi
+      state: long-tip
 
 # Body Markings (Chest)
 - type: marking
