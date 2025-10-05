@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Pills are now created with the correct colour selected
-    type: Fix
-  id: 1886
-  time: '2025-06-25T04:11:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6721
 - author: Dygon
   changes:
   - message: Fixed the success chance on high tackle streaks being too high, and the
@@ -4484,5 +4477,12 @@
   id: 2385
   time: '2025-10-05T02:11:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8016
+- author: Monotheonist
+  changes:
+  - message: Changed around some beret icons (most notably the tan and green berets.)
+    type: Tweak
+  id: 2386
+  time: '2025-10-05T02:15:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8014
 Name: RMC14
 Order: -1
