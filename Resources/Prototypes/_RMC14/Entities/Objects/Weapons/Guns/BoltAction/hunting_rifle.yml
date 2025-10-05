@@ -139,11 +139,14 @@
   - type: CMArmorPiercing
     amount: 30
   - type: RMCStunOnHit
-    maxRange: 3.5
-    losesEffectWithRange: true
-    stunTime: 0
-    superSlowTime: 0
-    slowTime: 0
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 3.5
+      losesEffectWithRange: true
+      stunTime: 0
+      superSlowTime: 0
+      slowTime: 0
 
 - type: Tag
   id: RMCMagazineRifleHunting

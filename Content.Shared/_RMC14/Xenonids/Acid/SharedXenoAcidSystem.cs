@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
@@ -12,6 +13,8 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -22,19 +25,20 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -90,7 +94,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             var e when TryComp<DropshipEnginePointComponent>(e, out var engine) => engine.ContainerId,
             _ => string.Empty
         };
-        
+
         if (!string.IsNullOrEmpty(containerId))
         {
             if (_dropship.TryGetAttachmentContained(target, containerId, out var containedEntity))
@@ -211,7 +215,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return;
 
         EntityUid acid;
-        if (HasComp<VisiblyAcidOutsideContainerComponent>(target) && 
+        if (HasComp<VisiblyAcidOutsideContainerComponent>(target) &&
             _container.TryGetContainingContainer(target, out var container))
         {
             acid = SpawnAttachedTo(acidId, container.Owner.ToCoordinates());
@@ -274,6 +278,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
+
+            _entityStorage.EmptyContents(uid);
+
+            if (TryComp(uid, out StorageComponent? storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities.ToArray())
+                {
+                    if (!TryComp(contained, out CorrodibleComponent? corrodible) ||
+                        !corrodible.IsCorrodible)
+                    {
+                        _container.Remove(contained, storage.Container);
+                    }
+                }
+            }
 
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);

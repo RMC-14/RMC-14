@@ -31,9 +31,9 @@ public sealed partial class Oxygenating : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var cmDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var amount = ActualPotency >= 3 ? 99999 : potency;
-        var healing = cmDamageable.DistributeHealing(args.TargetEntity, AirlossGroup, amount);
+        var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, AirlossGroup, amount);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();

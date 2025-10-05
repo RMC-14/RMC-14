@@ -144,6 +144,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoParasiteWatcher
+  - type: RMCActionOrder
+    id: CMXenoParasite
 
 - type: entity
   parent: CMXenoParasiteBase
@@ -165,3 +167,5 @@
     blockLeaps: true
     speed: 0
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoParasiteWatcher

@@ -158,26 +158,12 @@
   color: "#6bd43c"
   overdose: 10.5
   criticalOverdose: 20
-  worksOnTheDead: true
   metabolisms:
     Medicine:
       metabolismRate: 0.2
       effects:
-      - !type:EqualHealthChange
-        conditions:
-        - !type:RecentlyDefibrillated
-        damage:
-        - Brute: -20
-        - Burn: -20
-        - Toxin: -20
-      - !type:AdjustReagent
-        conditions:
-        - !type:RecentlyDefibrillated
-        reagent: CMEpinephrine
-        amount: -1
-      - !type:RemoveRecentDefibrillation
-        conditions:
-        - !type:RecentlyDefibrillated
+      - !type:Electrogenetic
+        potency: 2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
