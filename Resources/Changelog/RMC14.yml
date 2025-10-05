@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Cryoxadone and Clonexadone can now heal CloneLoss(Genetic).
-    type: Tweak
-  - message: Inaprovaline and Leporazine's overdose now knocks patients unconscious
-      instead of a stun and knockdown.
-    type: Tweak
-  - message: Fixed Cryoxadone healing too much Brute and Airloss, and not enough Genetic
-      damage.
-    type: Fix
-  - message: Fixed Clonexadone healing too much Burn and Toxin, and not healing Genetic.
-    type: Fix
-  - message: Fixed SpaceDrugs and Psilocybin not making you see psychedelic colors
-      because it was too weak.
-    type: Fix
-  id: 1898
-  time: '2025-06-26T11:37:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6723
 - author: Dutch-VanDerLinde
   changes:
   - message: Added more soul to LV-624 Lazarus Landing
@@ -4478,5 +4460,15 @@
   id: 2397
   time: '2025-10-05T03:35:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8001
+- author: SharkSnake98
+  changes:
+  - message: Added Shio Royal Cigars, cigar box, and cigar tube
+    type: Add
+  - message: Added Shio Royals to the WEYA cigarette machine, WEYA Automated Storage
+      Briefcase, and loadout cigarette options
+    type: Add
+  id: 2398
+  time: '2025-10-05T03:38:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7909
 Name: RMC14
 Order: -1
