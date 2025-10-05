@@ -494,13 +494,4 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<int> RMCLagCompensationMaxBufferSize =
-        CVarDef.Create("rmc.lag_compensation_max_buffer_size", 5, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<int> RMCLagCompensationDefaultBufferSize =
-        CVarDef.Create("rmc.lag_compensation_default_buffer_size", 4, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<bool> RMCLagCompensationOffsetBuffer =
-        CVarDef.Create("rmc.lag_compensation_offset_buffer", true, CVar.REPLICATED | CVar.SERVER);
 }
