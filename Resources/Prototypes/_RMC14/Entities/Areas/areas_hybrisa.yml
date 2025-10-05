@@ -67,6 +67,7 @@
     unweedable: false
     minimapColor: '#3A3A3AFF'
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759
@@ -112,6 +113,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Bunker
@@ -200,6 +202,7 @@
     supplyDrop: true
     landingZone: true
     linkedLz: dropship_lz1
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Outdoors
@@ -403,6 +406,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
@@ -1203,6 +1207,7 @@
     state: wydropship
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
@@ -1213,6 +1218,7 @@
     state: wydropship
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Indoors
@@ -2564,6 +2570,7 @@
     state: wylab
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
