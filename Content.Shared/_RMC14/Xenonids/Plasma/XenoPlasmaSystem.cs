@@ -55,8 +55,11 @@ public sealed class XenoPlasmaSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
+    private Dictionary<EntityUid, EntityUid?> RemotePlasmaTransferAction = null!;
+    private Dictionary<EntityUid, ActionsContainerComponent?> ActionsContainer = null!;
 
-    public override void Initialize()
+
+public override void Initialize()
     {
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
 
@@ -68,9 +71,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
         SubscribeLocalEvent<XenoPlasmaComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoRemoteTransferPlasmaActionEvent>(OnXenoRemoteTransferPlasmaAction);
-
-        SubscribeLocalEvent<XenoRemoteTransferPlasmaComponent,XenoOvipositorChangedEvent>(OnQueenOvipositorChanged);
-
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseAttemptEvent>(OnXenoActionEnergyUseAttempt);
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseEvent>(OnXenoActionEnergyUse);
 
@@ -154,23 +154,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
         }
     }
 
-
-    private void OnQueenOvipositorChanged(Entity<XenoRemoteTransferPlasmaComponent> ent, ref XenoOvipositorChangedEvent args)
-    {
-        if (args.Attached)
-        {
-            _actionContainer.EnsureAction(ent, ref ent.Comp.RemotePlasmaTransferAction, ent.Comp.RemotePlasmaTransferActionProtoId, ent.Comp.ActionsContainer);
-
-            if (ent.Comp.RemotePlasmaTransferAction is not { } actionId)
-                return;
-            _actions.GrantContainedAction(ent.Owner, ent.Owner, actionId);
-        }
-        else
-        {
-            if (ent.Comp.RemotePlasmaTransferAction != null)
-                _actions.RemoveAction(ent.Comp.RemotePlasmaTransferAction.Value);
-        }
-    }
 
     private void OnXenoTransferPlasmaAction(Entity<XenoPlasmaComponent> xeno, ref XenoTransferPlasmaActionEvent args)
     {
