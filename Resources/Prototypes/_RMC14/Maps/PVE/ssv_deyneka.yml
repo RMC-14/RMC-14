@@ -1,7 +1,7 @@
 ﻿- type: gameMap
   id: SSVDeyneka
   mapName: "SSV Deyneka"
-  mapPath: /Maps/_RMC14/ssv_deyneka.yml
+  mapPath: /Maps/_RMC14/PVE/ssv_deyneka.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
