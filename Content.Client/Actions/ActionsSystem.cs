@@ -52,7 +52,6 @@ namespace Content.Client.Actions
         // RMC14
         [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
-
         public override void Initialize()
         {
             base.Initialize();

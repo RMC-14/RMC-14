@@ -57,43 +57,6 @@ namespace Content.Client.Changelog
 
         private void UpdateChangelogs(List<Changelog> changelogs)
         {
-            var entries = changelogs[0].Entries.Where(e => e.Id >= 2349);
-            var entryTypes = new Dictionary<ChangelogLineType, List<(string Change, string Author)>>();
-            foreach (var changelogChange in entries)
-            {
-                foreach (var change in changelogChange.Changes)
-                {
-                    entryTypes.GetOrNew(change.Type).Add((change.Message, changelogChange.Author));
-                }
-            }
-
-            var s = new StringBuilder();
-            s.AppendLine("# General Changes\n");
-            var types = new[] { ChangelogLineType.Add, ChangelogLineType.Remove, ChangelogLineType.Tweak };
-            foreach (var type in types)
-            {
-                if (!entryTypes.TryGetValue(type, out var changes))
-                    continue;
-
-                foreach (var change in changes)
-                {
-                    var text = change.Change;
-                    text = text.EndsWith('.') ? text[..^1] : text;
-                    s.AppendLine($"- {text}, by {change.Author}.".ToString());
-                }
-            }
-
-            s.AppendLine();
-            s.AppendLine("# Fixes\n");
-            if (entryTypes.TryGetValue(ChangelogLineType.Fix, out var fixes))
-            {
-                foreach (var fix in fixes)
-                {
-                    var text = fix.Change;
-                    text = text.EndsWith('.') ? text[..^1] : text;
-                    s.AppendLine($"- {text}, by {fix.Author}.".ToString());
-                }
-            }
             if (changelogs.Count == 0)
             {
                 return;
