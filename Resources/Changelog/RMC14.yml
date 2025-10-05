@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed biosuits not having 100 biohazard protection
-    type: Fix
-  id: 1909
-  time: '2025-06-27T05:59:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6762
 - author: noctyrnal
   changes:
   - message: You can now hide your dogtags.
@@ -4471,5 +4464,13 @@
   id: 2409
   time: '2025-10-05T06:40:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7991
+- author: Aurallianz
+  changes:
+  - message: Added the ability to have headsets that read a comms channel, but are
+      not able to talk through it.
+    type: Add
+  id: 2410
+  time: '2025-10-05T06:48:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8043
 Name: RMC14
 Order: -1
