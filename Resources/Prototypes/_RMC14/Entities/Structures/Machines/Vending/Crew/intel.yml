@@ -210,6 +210,7 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch

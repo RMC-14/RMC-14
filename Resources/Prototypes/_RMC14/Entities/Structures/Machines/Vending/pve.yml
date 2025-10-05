@@ -767,6 +767,8 @@
         amount: 5
       - id: CMWebbingHolster
         amount: 5
+      - id: CMWebbingHolsterBlack
+        amount: 5
     - name: Armor #todo m3-r armor
       entries:
       - id: ArmorHelmetM10

@@ -189,6 +189,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -471,6 +472,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -853,6 +855,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
     - name: Hats
       jobs:
       - CMExecutiveOfficer
@@ -974,6 +977,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
     - name: Books
@@ -1121,6 +1125,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
@@ -1559,3 +1564,4 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbingHolsterBlack
