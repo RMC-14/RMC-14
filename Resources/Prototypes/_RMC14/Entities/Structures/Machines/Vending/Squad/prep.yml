@@ -140,7 +140,7 @@
         amount: 1
       - id: CMWebbingHolster
         amount: 1
-      - id: CMWebbingHolsterBlack
+      - id: RMCWebbingHolsterBlack
         amount: 1
     - name: Armor
       entries:

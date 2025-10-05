@@ -89,7 +89,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMWebbingHolsterBlack
+      - id: RMCWebbingHolsterBlack
         amount: 4
 
 - type: entity

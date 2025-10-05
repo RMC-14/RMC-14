@@ -294,7 +294,7 @@
 
 - type: entity
   parent: CMWebbingHolster
-  id: CMWebbingHolsterBlack
+  id: RMCWebbingHolsterBlack
   name: black shoulder holster
   description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
   components:

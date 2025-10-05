@@ -304,7 +304,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
-      - id: CMWebbingHolsterBlack
+      - id: RMCWebbingHolsterBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     - name: Mask
