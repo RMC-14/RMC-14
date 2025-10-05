@@ -33,11 +33,11 @@ public sealed partial class Antitoxic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var cmDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var healing = cmDamageable.DistributeHealing(args.TargetEntity, ToxinGroup, potency * 2f);
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, ToxinGroup, potency * 2f);
 
         // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        healing = cmDamageable.DistributeHealing(args.TargetEntity, GeneticGroup, potency * 2f, healing);
+        healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, GeneticGroup, potency * 2f, healing);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();

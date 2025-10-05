@@ -32,6 +32,17 @@
     startingWebbing: RMCWebbingPMCGunner
 
 - type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCSynth
+  suffix: Webbing, Synthetic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitVeteranPMCEngineer
   name: PMC engineer fatigues

@@ -536,6 +536,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (message.Length > 200)
             message = message[..200];
 
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
             Prototype(squad.Value) is not { } squadProto)
         {

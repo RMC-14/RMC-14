@@ -409,3 +409,30 @@
   components:
   - type: Sprite
     state: falling_falcons
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterNoSmoking
+  name: NO SMOKING
+  description: "A warning sign which reads 'NO SMOKING'."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/decals.rsi
+    state: nosmoking
+
+- type: entity
+  parent: CMPosterNoSmoking
+  id: CMPosterNoSmoking2
+  components:
+  - type: Sprite
+    state: nosmoking2
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterUNMC
+  name: UNMC Poster
+  description: "An old recruitment poster for the UNMC. Looking at it floods you with a mixture of pride and sincere regret."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/decals.rsi
+    state: prop3

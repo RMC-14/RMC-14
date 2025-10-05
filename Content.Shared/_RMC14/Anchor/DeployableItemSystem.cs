@@ -1,9 +1,11 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Inventory;
-using Content.Shared.ActionBlocker;
+using Content.Shared.ActionBlocker; using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
+using Content.Shared.Foldable;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -13,6 +15,7 @@ using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -23,7 +26,9 @@ namespace Content.Shared._RMC14.Anchor;
 public sealed class DeployableItemSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
@@ -35,16 +40,21 @@ public sealed class DeployableItemSystem : EntitySystem
     private readonly HashSet<Entity<DeployableItemComponent>> _deployables = new();
 
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> StairsTag = "RMCStairs";
+    private static readonly ProtoId<TagPrototype> CarpetTag = "Carpet";
 
     public override void Initialize()
     {
         SubscribeLocalEvent<DeployableItemComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<DeployableItemComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<DeployableItemComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<DeployableItemComponent, CanDragEvent>(OnCanDrag);
         SubscribeLocalEvent<DeployableItemComponent, CanDropDraggedEvent>(OnCanDropDragged);
         SubscribeLocalEvent<DeployableItemComponent, DragDropDraggedEvent>(OnDragDropDragged);
         SubscribeLocalEvent<DeployableItemComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<DeployableItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerbs);
+
+        SubscribeLocalEvent<DeployFoldableComponent, UseInHandEvent>(OnFoldableUseInHand);
 
         SubscribeLocalEvent<HandsComponent, CanDropTargetEvent>(OnCanDropTarget);
     }
@@ -133,17 +143,63 @@ public sealed class DeployableItemSystem : EntitySystem
         if (!args.CanReach)
             return;
 
-        if (args.Target != null && !_tag.HasTag(args.Target.Value, CatwalkTag))
+        if (args.Target != null && !_tag.HasAnyTag(args.Target.Value, CatwalkTag, StairsTag, CarpetTag))
             return;
 
         args.Handled = true;
         Deploy(ent, args.User, args.ClickLocation);
     }
 
+    private void OnInteractHand(Entity<DeployableItemComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!ent.Comp.LeftClickPickup)
+            return;
+
+        if (ent.Comp.Position == DeployableItemPosition.None)
+            return;
+
+        args.Handled = true;
+        Pickup(ent, args.User);
+    }
+
     private void OnUseInHand(Entity<DeployableItemComponent> ent, ref UseInHandEvent args)
     {
         args.Handled = true;
         Deploy(ent, args.User, _transform.GetMoverCoordinates(ent));
+    }
+
+    private void OnFoldableUseInHand(Entity<DeployFoldableComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<FoldableComponent>(ent, out var foldable))
+            return;
+
+        var coordinates = _transform.GetMoverCoordinates(args.User);
+        if (!TryComp(ent.Owner, out PhysicsComponent? anchorBody) ||
+            !_anchorable.TileFree(coordinates, anchorBody))
+        {
+            _popup.PopupPredicted(Loc.GetString("foldable-deploy-fail", ("object", ent)), ent, args.User);
+            return;
+        }
+
+        if (!TryComp(args.User, out HandsComponent? hands) ||
+            !_hands.TryDrop((args.User, hands), ent, targetDropLocation: coordinates))
+        {
+            return;
+        }
+
+        if (!_foldable.TrySetFolded(ent, foldable, false))
+        {
+            _hands.TryPickup(args.User, ent, handsComp: hands);
+            return;
+        }
+
+        args.Handled = true;
     }
 
     private void Deploy(Entity<DeployableItemComponent> ent, EntityUid user, EntityCoordinates location)
