@@ -73,3 +73,5 @@ namespace Content.Server.Spawners.EntitySystems
             // Spawn the entity
             Spawn(selectedProto, Transform(ent).Coordinates);
         }
+    }
+}
