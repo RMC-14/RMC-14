@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xenos that hibernate when the queen launches the hijack shuttle
-      not being able to instantly become a burrowed larva
-    type: Fix
-  id: 1906
-  time: '2025-06-27T05:54:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6840
 - author: Shromply
   changes:
   - message: Added the smokables loadout category.
@@ -4472,5 +4464,12 @@
   id: 2405
   time: '2025-10-05T04:09:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7933
+- author: UnicornOnLSD
+  changes:
+  - message: Added gas mask camo variants & fixed the inhands
+    type: Add
+  id: 2406
+  time: '2025-10-05T04:12:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7899
 Name: RMC14
 Order: -1
