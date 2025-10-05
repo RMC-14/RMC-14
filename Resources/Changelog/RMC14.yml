@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed security colonist corpse not spawning with an armor vest and helmet
-    type: Fix
-  - message: Corporate colonist corpse now spawns with random outfits
-    type: Tweak
-  id: 1895
-  time: '2025-06-25T04:38:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6746
-- author: Vermidia
-  changes:
-  - message: Fixed fire immune xenos taking damage when crossing fire tiles
-    type: Fix
-  - message: Fixed fire tiles doing more damage on cross than intended
-    type: Fix
-  id: 1896
-  time: '2025-06-25T09:48:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6800
 - author: Vermidia
   changes:
   - message: Fixed close Queen scream stacking with far queen scream effects.
@@ -4480,5 +4462,20 @@
   id: 2394
   time: '2025-10-05T03:25:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8017
+- author: CatAndHats
+  changes:
+  - message: Added Bed, Foldable Chair, Squad Chairs, and Office Chairs to the RMC
+      Construction menu
+    type: Add
+  id: 2395
+  time: '2025-10-05T03:29:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7972
+- author: crazy1112345
+  changes:
+  - message: The D18 Hummingbird no longer mentions CLF in its description.
+    type: Tweak
+  id: 2396
+  time: '2025-10-05T03:30:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7690
 Name: RMC14
 Order: -1
