@@ -42,6 +42,7 @@
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMLiaison
       points: 40
     - type: RMCVendorUserRecharge
       maxPoints: 50

@@ -38,7 +38,7 @@
    - Meet your new best friend, the [bold]M54C Assault Rifle MK2[/bold]. Take some extra magazines and put them in your belt or pouches, and don't forget to load the gun.
    - Now you might be tempted to take your new buddy for a spin and get to know eachother a little better. Head to the firing range if you want to practice your aim.
    -If you are not in the firing range you [color=red]do not[/color] discharge your weapon!
-    <GuideEntityEmbed Entity="WeaponRifleM54C"/>
+    <GuideEntityEmbed Entity="RMCWeaponRifleM54C"/>
    - Make sure you have some standard and armor-piercing (AP) magazines. AP will punch through tougher targets, and that includes marines so WATCH. YOUR. FIRE.
   <Box>
   <GuideEntityEmbed Entity="CMMagazineRifleM54C"/>

@@ -3,6 +3,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoParasiteBase
   name: Parasite
   components:
@@ -39,8 +40,9 @@
     emoteSounds: Larva
     muteOnSpawn: true
   - type: XenoPlasma
-    maxPlasma: 10
-    plasmaRegenOnWeeds: 0.1
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
   - type: XenoHide
   - type: Fixtures
     fixtures:
@@ -58,6 +60,11 @@
   - type: XenoAnimateMovement
   - type: XenoLeap
     knockdownTime: 1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.75
+    damage:
+      types:
+        Heat: 5
   - type: XenoParasite
   - type: InfectOnPullAttempt
   - type: Item
@@ -121,7 +128,12 @@
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
-    name: cm-job-name-xeno-parasite
+    name: cm-job-name-xeno-parasite-xeno
+    whitelist:
+      components:
+      - Xeno
+  - type: VentCrawler
+    ventCrawlIcon: parasite
 
 - type: entity
   parent: CMXenoParasiteBase

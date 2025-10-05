@@ -1,4 +1,5 @@
-﻿using Content.Shared.Hands.Components;
+﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light.Components;
@@ -32,6 +33,12 @@ public sealed class RMCInteractionSystem : EntitySystem
     private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist == null)
+            return;
+
+        if (!TryComp(ent, out TransformComponent? xform))
+            return;
+
+        if (ent.Comp.AnchoredOnly && !xform.Anchored)
             return;
 
         if (TryComp(ent, out HandheldLightComponent? handheldLight) && handheldLight.Activated)

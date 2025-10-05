@@ -64,6 +64,8 @@
       entries:
       - id: RMCDrinkAlcoholSake
         points: 5
+      - id: RMCDrinkCanSequoiaBeer
+        points: 5
       - id: CMDrinkCanAle
         points: 5
       - id: CMDrinkCanBeerLite
