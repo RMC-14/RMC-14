@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed Staff Officers spawning with a regular cap instead of an officer
-      cap.
-    type: Fix
-  id: 1889
-  time: '2025-06-25T04:26:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6740
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added the MAR-30 battle carbine, a carbine of the MAR-40 rifle. Security
       survivors have a chance to spawn with this weapon.
     type: Add
@@ -4485,5 +4477,12 @@
   id: 2388
   time: '2025-10-05T02:40:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7929
+- author: leon-krol
+  changes:
+  - message: Updated the Requisitions guide.
+    type: Tweak
+  id: 2389
+  time: '2025-10-05T02:44:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6806
 Name: RMC14
 Order: -1
