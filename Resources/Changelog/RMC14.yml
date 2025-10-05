@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: You can now hide your dogtags.
-    type: Add
-  id: 1910
-  time: '2025-06-27T06:08:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6773
 - author: J C Denton
   changes:
   - message: Fixed some Asphalt tiles being pryable.
@@ -4472,5 +4465,37 @@
   id: 2410
   time: '2025-10-05T06:48:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8043
+- author: to4no_fix
+  changes:
+  - message: "Ported UNMC tents! Added Standard Tent, Command Tent (unfolds Overwatch\
+      \ console, phone, 2 tables and chairs), Medical Tent (unfolds ColMarTech MarineMed,\
+      \ IV and roller bed, in the future will give a bonus to the speed of operations\
+      \ and pain reduction), Requisitions Tent (unfolds 2 tables, chair, phone, ASRS\
+      \ console and ColMarTech Automated FOB Supplies Vendor primarily for manual\
+      \ filling and storage, which will be possible in the future), Mess Tent (unfolds\
+      \ 3 tables, phone, microwave and other inventory necessary for you to be able\
+      \ to cook anything), Military Police Tent (unfolds 2 tables, chair, telephone,\
+      \ 2 closets, detention cell and camera console)! You can unfold them on the\
+      \ planet in an empty space using in your hand or fold them using the entrenching\
+      \ tool. Be careful with tents, as they are very fragile and a small pressure\
+      \ or grenade explosion is enough to break not only the tent, but also some of\
+      \ the equipment that was deployed with the tent! Tents can be found in these\
+      \ locations in Almayer: Command Tent \u2014 CIC armory; Medical Tent \u2014\
+      \ Medical Block storage (northeast of the first floor Medical Block); Requisitions\
+      \ tent \u2014 Requisition storage (southeast of Requisition); Mess tent \u2014\
+      \ Technical corridor south of the mess technicals rooms; Military Police Tent\
+      \ \u2014 Military Police armory; Standard and Extended Tents \u2014 squad bedrooms.\
+      \ Tents will simplify the organization of bases and increase their convenience."
+    type: Add
+  - message: The tents are now one piece and can be destroyed.
+    type: Tweak
+  - message: ColMarTech Automated FOB Supplies Vendor and ColMarTech MarineMed now
+      eject all contents when destroyed.
+    type: Add
+  - message: Added strong reinforced window.
+    type: Add
+  id: 2411
+  time: '2025-10-05T07:53:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7232
 Name: RMC14
 Order: -1
