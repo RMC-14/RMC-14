@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostChiefInspector
   icon: RMCJobIconProvostChiefInspector
   joinNotifyCrew: false
+  supervisors: rmc-job-name-corp-provost-marshal
   accessGroups:
   - ShipMasterAccess
   special:
@@ -60,7 +61,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform
     outerClothing: RMCProvostCommandJacketFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: CMHandsBlack
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostChiefInspector
     belt: RMCM1984BeltFilled

@@ -33,3 +33,7 @@ rmc-job-prefix-provost-marshal = PvM
 rmc-ghost-name-corp-provost-team-leader = Provost Team Leader (Friendly)
 rmc-job-name-corp-provost-team-leader = Team Leader
 rmc-job-prefix-provost-team-leader = PvTML
+
+rmc-ghost-name-corp-provost-sector-marshal = Provost Sector Marshal (Friendly)
+rmc-job-name-corp-provost-sector-marshal = Provost Sector Marshal
+rmc-job-prefix-provost-sector-marshal = PvSM

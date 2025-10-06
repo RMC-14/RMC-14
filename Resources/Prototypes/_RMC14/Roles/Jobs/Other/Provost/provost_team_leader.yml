@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostTeamLeader
   icon: RMCJobIconProvostTeamLeader
   joinNotifyCrew: false
+  supervisors: rmc-job-name-corp-provost-marshal
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: Provost Team Leader
@@ -82,14 +83,15 @@
     ears: RMCHeadsetHighCommandProvostLead
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCArmorProvostSeniorFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: CMHandsBlack
     shoes: CMBootsBlackFilled
     suitstorage: WeaponShotgunM890
     id: RMCIDCardProvostTeamLeader
     belt: RMCMK80BeltFilled
     back: CMSatchelSecurityFilledProvostEnforcer
     pocket1: RMCPouchShotgunLargeBeanbag
-    pocket2: RMCPouchShotgunLargeSlugs # TODO RMC14 big tear gas grenade box, riot shield
+    pocket2: RMCPouchShotgunLargeSlugs
+    # TODO RMC14 big tear gas grenade box, riot shield (in hand)
 
 - type: playTimeTracker
   id: CMJobProvostTeamLeader

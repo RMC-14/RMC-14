@@ -90,3 +90,10 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
+
+#TODO RMC14 add fire resistance
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CMHandsBlack
+  name: black gloves
+  description: "These gloves are fire-resistant."

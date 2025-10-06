@@ -42,7 +42,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
     outerClothing: RMCProvostCommandJacket
-    gloves: CMHandsBlackMarine
+    gloves: CMHandsBlack
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
     belt: CMClipboard
