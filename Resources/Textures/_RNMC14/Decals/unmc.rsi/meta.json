@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-NC-3.0",
-  "copyright": "Logo and Sprite made by Merrokitsune for RNMC-14.",
+  "copyright": "Logo and Sprite made by Merrokitsune for RNMC-14 using palette taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5e81a4fe2c8a740e965315c5414d340ea76c4ad0/icons/turf/faction_flags.dmi.",
   "size": {
     "x": 32,
     "y": 32

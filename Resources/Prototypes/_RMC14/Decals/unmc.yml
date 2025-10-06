@@ -4,7 +4,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc1
 
 - type: decal
@@ -13,7 +13,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc2
 
 - type: decal
@@ -22,7 +22,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc3
 
 - type: decal
@@ -31,7 +31,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc4
 
 - type: decal
@@ -40,7 +40,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc5
 
 - type: decal
@@ -49,7 +49,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc6
 
 - type: decal
@@ -58,7 +58,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc7
 
 - type: decal
@@ -67,7 +67,7 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc8
 
 - type: decal
@@ -76,5 +76,5 @@
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Don't ask why it's like that.
+    sprite: _RNMC14/Decals/unmc.rsi # RNMC-14 - Sprites changed.
     state: unmc9
