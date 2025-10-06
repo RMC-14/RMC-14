@@ -1,6 +1,6 @@
 - type: entity
   parent: RMCSpawnerERTShuttle
-  id: RMCSpawnerShuttleSPP
+  id: RNMCSpawnerShuttleSPP
   suffix: SPP, Platoon
   components:
   - type: GridSpawner
@@ -8,7 +8,7 @@
 
 - type: entity
   parent: RMCSpawnerERTShuttle
-  id: RMCSpawnerShuttleGoldenArrow
+  id: RNMCSpawnerShuttleGoldenArrow
   suffix: UNMC, Platoon
   components:
   - type: GridSpawner
