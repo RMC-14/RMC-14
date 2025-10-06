@@ -309,26 +309,4 @@ public sealed class XenoProjectileSystem : EntitySystem
         RaiseLocalEvent(xeno, ammoShotEvent);
         return true;
     }
-
-    public override void Update(float frameTime)
-    {
-        // Clean up invalid projectile references to prevent networking errors
-        var query = EntityQueryEnumerator<XenoProjectileShooterComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            var toRemove = new List<EntityUid>();
-            foreach (var shot in comp.Shot)
-            {
-                if (Deleted(shot) || TerminatingOrDeleted(shot))
-                    toRemove.Add(shot);
-            }
-            
-            if (toRemove.Count > 0)
-            {
-                foreach (var shot in toRemove)
-                    comp.Shot.Remove(shot);
-                Dirty(uid, comp);
-            }
-        }
-    }
 }
