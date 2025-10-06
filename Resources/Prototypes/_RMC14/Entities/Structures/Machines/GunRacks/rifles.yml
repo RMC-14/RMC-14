@@ -294,6 +294,91 @@
       item_5:
       - RMCWeaponRifleSSG45Stripped
 
+# M54C/2
+
+- type: entity
+  parent: RMCGunRackM54CEmpty
+  id: RMCGunRackM54C2Empty
+  name: M54C/2 gun rack
+  suffix: M54C/2, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, Weston-Yamada comissioned racks with fixed slots which only fit M54C/2 rifles. Some say they were cheaper, and some say the main reason was operators' ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c2_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_2:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_3:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_4:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_5:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+
+- type: entity
+  parent: RMCGunRackM54C2Empty
+  id: RMCGunRackM54C2Filled
+  suffix: M54C/2, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleM54C2
+      item_2:
+      - RMCWeaponRifleM54C2
+      item_3:
+      - RMCWeaponRifleM54C2
+      item_4:
+      - RMCWeaponRifleM54C2
+      item_5:
+      - RMCWeaponRifleM54C2
+
+
 # Type 71
 
 - type: entity
