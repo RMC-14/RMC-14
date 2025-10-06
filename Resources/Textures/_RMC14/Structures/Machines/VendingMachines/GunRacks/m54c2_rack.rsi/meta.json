@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Empty sprite taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/gun_racks.dmi, filled state sprites by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "empty"
+    },
+    {
+      "name": "fill_1"
+    },
+    {
+      "name": "fill_2"
+    },
+    {
+      "name": "fill_3"
+    },
+    {
+      "name": "fill_4"
+    },
+    {
+      "name": "fill_5"
+    }
+  ]
+}
