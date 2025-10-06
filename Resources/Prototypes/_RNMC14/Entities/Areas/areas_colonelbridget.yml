@@ -9,7 +9,7 @@
     state: base_icon
   - type: Area
     buildSpecial: true
-    powerNet: ground
+    powerNet: bridget
     minimapColor: '#91BDCFE7'
     CAS: false
     fulton: false

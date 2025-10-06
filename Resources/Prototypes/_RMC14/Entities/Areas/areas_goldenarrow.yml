@@ -8,7 +8,7 @@
     state: base_icon
   - type: Area
     buildSpecial: true
-    powerNet: ground
+    powerNet: goldenarrow
     minimapColor: '#91BDCFE7'
     CAS: false
     fulton: false
