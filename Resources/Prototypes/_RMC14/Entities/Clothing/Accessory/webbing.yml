@@ -585,6 +585,10 @@
   id: RMCWebbingCLFMAR50
   suffix: Filled
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineMar50LMG
   - type: StorageFill
     contents:
     - id: RMCMagazineMar50LMG
