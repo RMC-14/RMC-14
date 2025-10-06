@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The XM51 can now do a two shot burst when the stock is attached.
-    type: Add
-  id: 1930
-  time: '2025-07-05T04:04:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6864
 - author: J C Denton
   changes:
   - message: Fixed SOs having XO-level access, they now have less doors to open.
@@ -4674,5 +4667,14 @@
   id: 2430
   time: '2025-10-06T10:00:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8051
+- author: x5tink
+  changes:
+  - message: Added the black shoulder holster.
+    type: Add
+  - message: Shoulder holsters has storage method switches now.
+    type: Tweak
+  id: 2431
+  time: '2025-10-06T10:20:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8053
 Name: RMC14
 Order: -1
