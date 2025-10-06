@@ -67,7 +67,7 @@
     location: Cockpit
 
 - type: entity
-  parent: CMAkademiaDoorCockpit
+  parent: RNMCAkademiaDoorCockpit
   id: RNMCAkademiaDoorPort
   suffix: Port
   components:
