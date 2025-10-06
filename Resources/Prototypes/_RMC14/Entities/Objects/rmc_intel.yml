@@ -319,20 +319,20 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
-      -
-        - name: Nuclear Device
-          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
-          cost: 5
-          timeLock: 3m
-          events:
-          - !type:TechLogisticsDeliveryEvent
-            object: RMCNuke
-          - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: The deployment of Nuclear Ordnance have been authorized and will be delivered to the Requisitions Department, via ASRS.
-          icon:
-            sprite: _RMC14/Interface/tech_tree.rsi
-            state: nuke
+#      -
+#        - name: Nuclear Device
+#          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
+#          cost: 5
+#          timeLock: 3m
+#          events:
+#          - !type:TechLogisticsDeliveryEvent
+#            object: RMCNuke
+#          - !type:TechAnnounceEvent
+#            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+#            message: The deployment of Nuclear Ordnance have been authorized and will be delivered to the Requisitions Department, via ASRS.
+#          icon:
+#            sprite: _RMC14/Interface/tech_tree.rsi
+#            state: nuke
 - type: Tag
   id: RMCIntelItem
 
