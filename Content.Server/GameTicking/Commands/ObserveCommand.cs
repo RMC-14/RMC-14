@@ -25,7 +25,7 @@ namespace Content.Server.GameTicking.Commands
 
             var ticker = _e.System<GameTicker>();
 
-            if (ticker.RunLevel == GameRunLevel.PreRoundLobby)
+            if (ticker.RunLevel == GameRunLevel.PreRoundLobby && !_adminManager.IsAdmin(player))
             {
                 shell.WriteError("Wait until the round starts.");
                 return;
