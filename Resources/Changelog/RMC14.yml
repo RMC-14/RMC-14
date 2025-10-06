@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Lurker tackles now convert into a light attack when Crippling Strike
-      is active.
-    type: Fix
-  id: 1925
-  time: '2025-07-03T09:11:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6871
 - author: J C Denton
   changes:
   - message: Fixed Shiva's Snowball north LZ shutter buttons not working.
@@ -4666,5 +4658,19 @@
   id: 2425
   time: '2025-10-06T07:49:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6833
+- author: SharkSnake98
+  changes:
+  - message: Added a WeYa Clipboard, WeYa Thermos, and WEYA Windbreaker unlocked in
+      the CL loadout at Executive, Senior Executive, & Executive Specialist respectively.
+      Also added a WEYA beret
+    type: Add
+  - message: Changed the WEYA Pen to use a custom sprite, instead of the normal pen
+      sprite
+    type: Tweak
+  - message: Changed the Dark Weston-Yamada cap's sprite
+    type: Tweak
+  id: 2426
+  time: '2025-10-06T07:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7937
 Name: RMC14
 Order: -1
