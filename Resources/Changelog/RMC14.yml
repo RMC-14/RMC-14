@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Timemaster99
-  changes:
-  - message: Fixed belts not layering above armor and jackets for some mobs
-    type: Fix
-  id: 1918
-  time: '2025-07-03T02:21:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6888
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the M54CE2 HAR not having full auto without a bipod
@@ -4663,5 +4656,12 @@
   id: 2418
   time: '2025-10-05T12:09:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8050
+- author: noctyrnal
+  changes:
+  - message: The PMC PVE Shipmap, the UNCSS Haurchefant has recieved a large update.
+    type: Add
+  id: 2419
+  time: '2025-10-06T05:05:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8031
 Name: RMC14
 Order: -1
