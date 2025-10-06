@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Headbutt ability now will activate 0.5 tiles further away.
-    type: Tweak
-  id: 1929
-  time: '2025-07-05T03:59:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6916
 - author: noctyrnal
   changes:
   - message: The XM51 can now do a two shot burst when the stock is attached.
@@ -4672,5 +4665,14 @@
   id: 2429
   time: '2025-10-06T08:24:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8059
+- author: DummeHytteOst
+  changes:
+  - message: Fixed disposal units taking less damage than intended.
+    type: Fix
+  - message: Fixed trash bins being indestructible.
+    type: Fix
+  id: 2430
+  time: '2025-10-06T10:00:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8051
 Name: RMC14
 Order: -1
