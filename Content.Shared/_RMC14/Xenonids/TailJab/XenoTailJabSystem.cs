@@ -9,10 +9,11 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 
 namespace Content.Shared._RMC14.Xenonids.TailJab;
 
@@ -23,14 +24,17 @@ public sealed class XenoTailJabSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _flash = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
     [Dependency] private readonly XenoRotateSystem _rotate = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+
+    private const string WindowBonusDamageType = "Structural";
+    private const int WindowDamageBonus = 100;
 
     public override void Initialize()
     {
@@ -57,6 +61,9 @@ public sealed class XenoTailJabSystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
         damage += ev.Damage;
 
+        if (HasComp<DestroyOnXenoPierceScissorComponent>(target))
+            damage.DamageDict.TryAdd(WindowBonusDamageType, WindowDamageBonus);
+
         var damageTaken = _damage.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, damage), origin: xeno, tool: xeno);
         if (damageTaken?.GetTotal() > FixedPoint2.Zero)
         {
@@ -68,10 +75,8 @@ public sealed class XenoTailJabSystem : EntitySystem
         _rmcSlow.TrySlowdown(target, xeno.Comp.SlowdownTime);
         _rmcObstacleSlamming.ApplyBonuses(target, xeno.Comp.WallSlamStunTime, xeno.Comp.WallSlamSlowdownTime);
 
-        var origin = _transform.GetMoverCoordinates(xeno);
-        var targetCoords = _transform.GetMoverCoordinates(target);
-        var diff = (targetCoords.Position - origin.Position).Normalized() * xeno.Comp.ThrowRange;
-        _throwing.TryThrow(target, diff, 5, animated: false); // throw slightly for wall slam behaviour
+        var origin = _transform.GetMapCoordinates(xeno);
+        _size.KnockBack(target, origin, xeno.Comp.ThrowRange, xeno.Comp.ThrowRange); // throw slightly for wall slam behaviour
 
         var direction = _transform.GetWorldRotation(xeno).GetDir();
         var angle = direction.ToAngle() - Angle.FromDegrees(180);

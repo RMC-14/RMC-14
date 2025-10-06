@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Tackle;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
@@ -30,14 +31,21 @@ public sealed class StunShakeableSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<StunShakeableComponent, InteractHandEvent>(OnStunShakeableInteractHand);
+        SubscribeLocalEvent<StunShakeableComponent, InteractHandEvent>(OnStunShakeableInteractHand,
+            before: [typeof(InteractionPopupSystem)]);
     }
 
     private void OnStunShakeableInteractHand(Entity<StunShakeableComponent> ent, ref InteractHandEvent args)
     {
-        var user = args.User;
-        if (user == args.Target || !TryComp(user, out StunShakeableUserComponent? shakeableUser))
+        if (args.Handled)
             return;
+
+        var user = args.User;
+        if (user == args.Target ||
+            !TryComp(user, out StunShakeableUserComponent? shakeableUser))
+        {
+            return;
+        }
 
         var target = args.Target;
         var rest = CompOrNull<RMCRestComponent>(target);

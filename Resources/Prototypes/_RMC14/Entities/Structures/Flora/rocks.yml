@@ -1,0 +1,102 @@
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBaseRockNonCollide
+  abstract: true
+  name: rocks
+  description: A solidified collection of local minerals. When melted, becomes a substance best known as lava.
+  suffix: RMCBaseRockNonCollide
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/rocks.rsi
+
+- type: entity
+  parent: RMCBaseRockNonCollide
+  id: RMCBaseRockNonCollideStrata
+  abstract: true
+  components:
+  - type: SpriteColor
+    color: '#9D7766FF'
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable1
+  components:
+  - type: Sprite
+    state: rock_1
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable2
+  components:
+  - type: Sprite
+    state: rock_2
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable3
+  components:
+  - type: Sprite
+    state: rock_3
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable4
+  components:
+  - type: Sprite
+    state: rock_4
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable5
+  components:
+  - type: Sprite
+    state: rock_5
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable6
+  components:
+  - type: Sprite
+    state: rock_6
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable7
+  components:
+  - type: Sprite
+    state: rock_7
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable8
+  components:
+  - type: Sprite
+    state: rock_8
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable9
+  components:
+  - type: Sprite
+    state: rock_9
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable10
+  components:
+  - type: Sprite
+    state: rock_10
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable11
+  components:
+  - type: Sprite
+    state: rock_11
+
+- type: entity
+  parent: RMCBaseRockNonCollideStrata
+  id: RMCRockColourable12
+  components:
+  - type: Sprite
+    state: rock_12

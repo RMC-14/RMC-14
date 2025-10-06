@@ -12,6 +12,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -24,9 +27,6 @@
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
-    - type: NpcFactionMember
-      factions:
-      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-soldier
   hidden: true
@@ -37,7 +37,7 @@
   suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFSoldier
@@ -55,26 +55,29 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFSoldier
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHeadMilitiaHood
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
-    jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    jumpsuit: RMCJumpsuitCLFWebbing
+    outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
     back: RMCWeaponShotgunHG3712
     pocket1: RMCFlashlight
-    pocket2: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidERTFill
   inhand:
-  - WeaponSMGM63 # TODO RMC14
-  - CMMagazineSMGM63 # TODO RMC14
+  - WeaponRifleMAR40
+  storage:
+    outerClothing:
+    - RMCMagazineRifleMAR40
+    - CMCrowbar
 
 - type: playTimeTracker
   id: CMJobCLFSoldier

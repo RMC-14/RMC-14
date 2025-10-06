@@ -1,0 +1,82 @@
+- type: job
+  parent: CMJobBase
+  id: CMPMCForceCommandPVE
+  name: rmc-job-name-pmc-pve-force-command
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: CMJobPMCForceCommandPVE
+  ranks:
+    RMCRankWeYaForceCommand: []
+  startingGear: RMCJobPMCForceCommandPVE
+  icon: RMCJobIconPMCDirector
+  joinNotifyCrew: false
+  accessGroups:
+  - MarineMain
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Force Command (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillCqc: 1
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 4
+        RMCSkillExecution: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-pve-force-command
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sd
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCForceCommandPVE
+  name: weya pmc force command spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: CMPMCForceCommandPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobPMCForceCommandPVE
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbing
+    shoes: RMCBootsPMC
+    head: ArmorHelmetPMC
+    ears: RMCHeadsetDistressPMCPVE
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+
+- type: playTimeTracker
+  id: CMJobPMCForceCommandPVE

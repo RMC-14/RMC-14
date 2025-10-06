@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,6 +6,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
@@ -104,10 +105,16 @@
     prefix: spitter
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: spitter
   - type: AcidTrap
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-spitter
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
+  - type: VentCrawler
+    ventCrawlIcon: spitter
+  - type: RMCActionOrder
+    id: CMXenoSpitter

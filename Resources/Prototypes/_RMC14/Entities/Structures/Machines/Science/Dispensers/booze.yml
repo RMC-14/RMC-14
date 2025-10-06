@@ -8,11 +8,27 @@
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
     state: booze_dispenser
     snapCardinals: true
-  - type: ReagentDispenser
-    storageWhitelist:
-      tags:
-      - DrinkBottle
-    pack: CMDispenserBoozeInventory
+  - type: StorageFill
+    contents:
+    # Water
+    - id: DrinkIceJug
+    - id: DrinkSodaWaterBottleFull
+    - id: DrinkSugarJug
+    - id: DrinkTonicWaterBottleFull
+    - id: DrinkBeerGrowler
+    # Kahlua
+    - id: DrinkWhiskeyBottleFull
+    # Sake
+    - id: DrinkWineBottleFull
+    - id: DrinkVodkaBottleFull
+    - id: DrinkGinBottleFull
+    - id: DrinkRumBottleFull
+    - id: DrinkVermouthBottleFull
+    - id: DrinkCognacBottleFull
+    - id: DrinkAleBottleFullGrowler
+    - id: DrinkMeadJug
+    # Thirteen loko
+    - id: DrinkTequilaBottleFull
   - type: Machine
     board: CMCircuitboardDispenserBooze
   - type: InteractedBlacklist
@@ -22,33 +38,10 @@
   - type: ApcPowerReceiver
     needsPower: false
 
-- type: reagentDispenserInventory
-  id: CMDispenserBoozeInventory
-  inventory:
-  # Water
-  - DrinkIceJug
-  - DrinkSodaWaterBottleFull
-  - DrinkSugarJug
-  - DrinkTonicWaterBottleFull
-  - DrinkBeerGrowler
-  # Kahlua
-  - DrinkWhiskeyBottleFull
-  # Sake
-  - DrinkWineBottleFull
-  - DrinkVodkaBottleFull
-  - DrinkGinBottleFull
-  - DrinkRumBottleFull
-  - DrinkVermouthBottleFull
-  - DrinkCognacBottleFull
-  - DrinkAleBottleFullGrowler
-  - DrinkMeadJug
-  # Thirteen loko
-  - DrinkTequilaBottleFull
-
 - type: entity
   parent: CMDispenserBooze
   id: CMDispenserBoozeEmpty
   suffix: Empty
   components:
-  - type: ReagentDispenser
-    pack: EmptyInventory
+  - type: StorageFill
+    contents: []

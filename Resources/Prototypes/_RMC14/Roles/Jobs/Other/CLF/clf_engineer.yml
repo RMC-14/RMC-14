@@ -14,6 +14,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
@@ -35,7 +36,7 @@
   suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFEngineer
@@ -53,6 +54,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFEngineer
@@ -61,16 +63,15 @@
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
   #  eyes: RMCMesonGoggles TODO RMC14
-    jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    jumpsuit: RMCJumpsuitCLFWebbingBuckshot
+    outerClothing: RMCCoatMilitia
     gloves: CMHandsInsulated
     shoes: RMCShoesBrown
     id: RMCIDCardCLFEngineer
     belt: CMBeltUtilityFilled
     back: RMCSatchelLightpackWelder
     pocket1: RMCPouchConstructionFillLowGrade
-    pocket2: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidERTFill
   inhand:
   - WeaponShotgunM357Sawn # TODO RMC14 - Make randomized
   - CMShellShotgunBuckshot # TODO RMC14 - Make randomized
@@ -83,6 +84,11 @@
     - RMCGrenadeMolotov
     - CMMRE
     - RMCFlashlight
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    outerClothing:
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
 
 - type: playTimeTracker
   id: RMCJobCLFEngineer

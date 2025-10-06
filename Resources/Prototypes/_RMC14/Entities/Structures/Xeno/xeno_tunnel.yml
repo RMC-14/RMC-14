@@ -10,6 +10,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
     state: hole
+    noRot: true
   - type: InteractionOutline
   - type: Clickable
   - type: RMCNightVisionVisible
@@ -17,12 +18,14 @@
     transparency: 0.2
   - type: DestroyedByExplosionType
     explosion: RMCOBXenoTunnel
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
   - type: XenoTunnel
   - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenotunnel
   - type: TacticalMapAlwaysVisible
     visibleToXenos: true
@@ -36,6 +39,7 @@
         type: NameTunnelBui
   - type: DeletedByWeedKiller
   - type: XenoFriendly
+  - type: RMCTrackable
 
 - type: entity
   parent: XenoTunnel
@@ -51,6 +55,7 @@
   parent: XenoTunnelMaint
   id: XenoTunnelMaintNoXenoDesc
   description: An entrance to a maintenance tunnel. Pieces of debris keep you from getting a closer look.
+  suffix: No Xeno Desc
 
 - type: entity
   parent: XenoTunnelMaint

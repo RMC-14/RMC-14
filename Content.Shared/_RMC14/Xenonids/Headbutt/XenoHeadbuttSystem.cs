@@ -1,10 +1,11 @@
+using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Fortify;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -15,6 +16,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -25,13 +27,14 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
@@ -83,7 +86,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, 10);
+        _throwing.TryThrow(xeno, diff);
     }
 
     private void OnXenoHeadbuttHit(Entity<XenoHeadbuttComponent> xeno, ref ThrowDoHitEvent args)
@@ -124,18 +127,24 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         }
 
         var range = xeno.Comp.ThrowForce +
-           ((TryComp<XenoCrestComponent>(xeno, out var crest2) && crest2.Lowered) || (TryComp<XenoFortifyComponent>(xeno, out var fort) && fort.Fortified) ?
-           xeno.Comp.CrestFortifiedThrowAdd : 0);
+           ((TryComp<XenoCrestComponent>(xeno, out var crest2) && crest2.Lowered) || (TryComp<XenoFortifyComponent>(xeno, out var fort) && fort.Fortified) ? xeno.Comp.CrestFortifiedThrowAdd : 0);
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
-        var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Target);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * range;
+        StopHeadbutt(xeno);
 
-        _throwing.TryThrow(targetId, diff, 10);
+        var origin = _transform.GetMapCoordinates(xeno);
+        _sizeStun.KnockBack(targetId, origin, range, range, 10, true );
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+    }
+
+    private void StopHeadbutt(EntityUid xeno)
+    {
+        if (_physicsQuery.TryGetComponent(xeno, out var physics))
+        {
+            _physics.SetLinearVelocity(xeno, Vector2.Zero, body: physics);
+            _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
+        }
     }
 }

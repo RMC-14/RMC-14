@@ -17,7 +17,7 @@
   - type: StorageFill
     contents:
     - id: RMCGlassesSmartGunSight
-    - id: RMCSmartGun
+    - id: RMCSmartGunUNMC
     - id: RMCPowerCellSmartgun
     - id: CMArmorSmartGunCombatHarness
     - id: RMCMagazineSmartGun
@@ -34,7 +34,7 @@
   - type: StorageFill
     contents:
     - id: RMCGlassesSmartGunSight
-    - id: RMCSmartGun
+    - id: RMCSmartGunUNMC
     - id: RMCPowerCellSmartgun
     - id: CMArmorSmartGunCombatHarness
     - id: CMBeltSmartGunOperatorFilled

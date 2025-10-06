@@ -1,8 +1,8 @@
 - type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: CMWeaponPistolM1984
   name: M1984 service pistol
-  description: An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
+  description: An M1984 Service Pistol, once the standard issue sidearm of the UNMC but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
   components:
   - type: Tag
     tags:
@@ -102,6 +102,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
 
 - type: Tag
   id: CMMagazinePistolM1984
@@ -110,6 +112,7 @@
   parent: CMBulletBase
   id: CMBulletPistol9mm
   name: bullet (9mm)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -146,7 +149,64 @@
       tags:
       - CMCartridgePistol9mmAP
     proto: CMCartridgePistolM77AP
-  # Todo AP magazine sprite
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: MagazineVisuals
+    magState: mag
 
 - type: Tag
   id: RMCMagazinePistolM1984AP
+
+#9mm HP
+- type: entity
+  parent: CMMagazinePistolM1984
+  id: RMCMagazinePistolM1984HP
+  name: M1984 hollowpoint magazine (9mm)
+  description: A hollow-point 9mm pistol magazine for the M1984. These hollow-point bullets have noticeably higher stopping power on unarmored targets, and noticeably less on armored targets.
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmHP
+    proto: RMCCartridgePistol9mmHP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#BA5D00"
+
+- type: entity
+  parent: CMCartridgePistol9mm
+  id: RMCCartridgePistol9mmHP
+  name: cartridge (9mm HP)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmHP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmHP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol9mmHP
+  name: bullet (9mm HP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55 # TODO RMC14 30 shrapneltPistol9mmHP
+
+- type: Tag
+  id: RMCCartridgePistol9mmHP

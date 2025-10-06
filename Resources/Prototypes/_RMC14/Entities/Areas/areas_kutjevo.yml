@@ -50,6 +50,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: true
@@ -68,6 +69,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     weatherEnabled: false
@@ -86,12 +88,14 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorOob
@@ -316,6 +320,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -425,6 +430,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -444,6 +450,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -463,6 +470,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -483,6 +491,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#C19504E7'
@@ -502,6 +511,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -519,6 +529,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -536,6 +547,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -553,6 +565,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -570,6 +583,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -587,6 +601,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -604,6 +619,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
@@ -622,6 +638,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -639,6 +656,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -656,6 +674,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -673,6 +692,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -690,13 +710,14 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInteriorColonySouth
   id: RMCAreaKutjevoInteriorColonySouthPower2
-  name: Kutjevo - South Colony Treatment Plant
+  name: Kutjevo - South Colony Treatment Plant - North
   components:
   - type: Sprite
     state: colony_caves_3
@@ -707,6 +728,26 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorColonySouth
+  id: RMCAreaKutjevoInteriorColonySouthPower2South
+  name: Kutjevo - South Colony Treatment Plant - South
+  components:
+  - type: Sprite
+    state: colony_caves_3
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#5A4501E7'

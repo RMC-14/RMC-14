@@ -47,16 +47,22 @@
 
   [bold]Officer[/bold]
   - A person who is a Commissioned Officer. These rights cannot be transferred.
+  - A person who is a Warrant Officer. These rights cannot be transferred.
 
   \n
 
   [bold]Department heads[/bold]
-  - A person who is responsible for an entire department, which includes the [bold]Chief Engineer[/bold], [bold]Chief Medical Officer[/bold], [bold]Auxiliary Support Officer[/bold], [bold]Quartermaster[/bold], [color=#8B0000][bold]Chief MP[/bold][/color].
+  - A person who is responsible for an entire department, which includes the [bold]Chief Engineer[/bold], [bold]Chief Medical Officer[/bold], [bold]Auxiliary Support Officer[/bold], [bold]Logistics Officer[/bold], [color=#8B0000][bold]Chief MP[/bold][/color].
 
   \n
 
   [bold]CIC Personnel[/bold]
   - Standard personnel whose main duties are within CIC. This includes the [color=#00CBFE][bold]Commanding Officer[/bold][/color], [bold]Executive Officer[/bold], and [bold]Staff Officers[/bold].
+
+  \n
+
+  [bold]Flight Crew[/bold]
+  - Designated Pilots and Dropship Crew Chiefs.
 
   \n
 
@@ -78,6 +84,7 @@
   - Riot shotguns with beanbag rounds.
   - Riot shields and armor.
   - Riot grenade launchers.
+  - Rubber bullets.
 
   \n
 

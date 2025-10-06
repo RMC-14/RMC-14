@@ -37,6 +37,7 @@
     - replay_stop
     - replay_load
     - saveconfig
+    - chatwindow
 
 - Flags: DEBUG
   Commands:
@@ -74,15 +75,21 @@
     - showautofire
     - showareas
     - dumpentities
+    - showaccessreaders
 
 - Flags: MAPPING
   Commands:
     - mapping
     - toggleautosave
     - toggledecals
+    - showaccessreaders
 
 - Flags: QUERY
   Commands:
     - uploadfile
     - loadprototype
     - uploadfolder
+
+- Flags: ADMINCHAT
+  Commands:
+    - achatwindow

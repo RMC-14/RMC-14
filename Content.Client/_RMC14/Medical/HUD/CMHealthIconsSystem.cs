@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Connection;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Atmos.Rotting;
+using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusIcon;
@@ -12,63 +13,41 @@ public sealed class CMHealthIconsSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
-    private static readonly ProtoId<HealthIconPrototype> Healthy = "CMHealthIconHealthy";
-    private static readonly ProtoId<HealthIconPrototype> DeadDefib = "CMHealthIconDeadDefib";
-    private static readonly ProtoId<HealthIconPrototype> DeadClose = "CMHealthIconDeadClose";
-    private static readonly ProtoId<HealthIconPrototype> DeadAlmost = "CMHealthIconDeadAlmost";
-    private static readonly ProtoId<HealthIconPrototype> DeadDNR = "CMHealthIconDeadDNR";
-    private static readonly ProtoId<HealthIconPrototype> Dead = "CMHealthIconDead";
-    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconHCDead";
+    private static readonly ProtoId<HealthIconPrototype> BaseDeadIcon = "CMHealthIconDead";
 
     public StatusIconData GetDeadIcon()
     {
-        return _prototype.Index<HealthIconPrototype>(Dead);
+        return _prototype.Index<HealthIconPrototype>(BaseDeadIcon);
     }
 
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
     {
         var icons = new List<StatusIconData>();
+        var icon = RMCHealthIconTypes.Healthy;
 
-        if (HasComp<XenoComponent>(damageable))
+        if (!TryComp<RMCHealthIconsComponent>(damageable, out var iconsComp))
             return icons;
-
-        if (_mobState.IsAlive(damageable) ||
-            _mobState.IsCritical(damageable) ||
-            !_mobState.IsDead(damageable))
-        {
-            icons.Add(_prototype.Index(Healthy));
-            return icons;
-        }
 
         if (_mobState.IsDead(damageable))
         {
-            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
-            {
-                icons.Add(_prototype.Index(DeadDNR));
-                return icons;
-            }
+            var stage = _unrevivable.GetUnrevivableStage(damageable.Owner, 4);
+            if (_unrevivable.IsUnrevivable(damageable))
+                icon = RMCHealthIconTypes.Dead;
+            else if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
+                icon = RMCHealthIconTypes.DeadDNR;
+            else if (stage <= 1)
+                icon = RMCHealthIconTypes.DeadDefib;
+            else if (stage == 2)
+                icon = RMCHealthIconTypes.DeadClose;
+            else if (stage == 3)
+                icon = RMCHealthIconTypes.DeadAlmost;
         }
 
-        // TODO RMC14 don't use perishable
-        if (!TryComp(damageable, out PerishableComponent? perishable) ||
-            perishable.Stage <= 1)
-        {
-            icons.Add(_prototype.Index(DeadDefib));
-            return icons;
-        }
-        else if (perishable.Stage == 2)
-        {
-            icons.Add(_prototype.Index(DeadClose));
-            return icons;
-        }
-        else if (perishable.Stage == 3)
-        {
-            icons.Add(_prototype.Index(DeadAlmost));
-            return icons;
-        }
+        if (iconsComp.Icons.TryGetValue(icon, out var iconToUse))
+            icons.Add(_prototype.Index(iconToUse));
 
-        icons.Add(GetDeadIcon());
         return icons;
     }
 }

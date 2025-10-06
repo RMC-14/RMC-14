@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -23,6 +24,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedXenoAcidSystem _xenoAcid = default!;
 
     private readonly Dictionary<EntProtoId, RMCConstructionUpgradeComponent> _upgradePrototypes = new();
     private EntityQuery<RMCConstructionUpgradeItemComponent> _upgradeItemQuery;
@@ -67,6 +69,15 @@ public sealed class RMCUpgradeSystem : EntitySystem
             return;
         }
 
+        if (_xenoAcid.IsMelted(ent))
+        {
+            var failPopup = Loc.GetString("rmc-construction-melted");
+            _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
+
+            args.Handled = true;
+            return;
+        }
+
         if (ent.Comp.Upgrades != null)
         {
             _ui.OpenUi(ent.Owner, RMCConstructionUpgradeUiKey.Key, user);
@@ -85,16 +96,13 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
         EntityUid? upgradeItem = null;
 
-        foreach (var hand in _hands.EnumerateHands(user))
+        foreach (var hand in _hands.EnumerateHeld(user))
         {
-            if (hand.HeldEntity == null)
+            if (!_upgradeItemQuery.HasComp(hand))
                 continue;
 
-            if (_upgradeItemQuery.HasComp(hand.HeldEntity))
-            {
-                upgradeItem = hand.HeldEntity;
-                break;
-            }
+            upgradeItem = hand;
+            break;
         }
 
         if (upgradeItem == null)

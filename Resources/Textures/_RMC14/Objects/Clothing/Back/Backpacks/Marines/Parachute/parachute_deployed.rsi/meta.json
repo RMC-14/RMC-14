@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9092037df766dbf782056ad537a27b5df53a4d72/icons/obj/structures/droppod_64x64.dmi, https://github.com/cmss13-devs/cmss13/blob/9092037df766dbf782056ad537a27b5df53a4d72/icons/obj/structures/droppod_32x64.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "cables"
+    },
+    {
+      "name": "chute_animated",
+      "delays": [
+        [
+          0.5,
+          0.3,
+          0.2,
+          0.3,
+          0.2,
+          0.3,
+          0.5,
+          0.5
+        ]
+      ]
+    }
+  ]
+}

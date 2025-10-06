@@ -13,6 +13,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Devices/encryption_keys.rsi
     state: cypherkey
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 
 # Common
@@ -367,7 +374,21 @@
   - type: Sprite
     state: req_key
 
-# Quartermaster
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCargotech
+  name: req tech encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineRequisition
+    - MarineEngineer
+    - MarineCommand
+    defaultChannel: MarineRequisition
+  - type: Sprite
+    state: req_key
+
+# Logistics Officer
 - type: entity
   parent: CMEncryptionKeyRequisition
   id: RMCEncryptionKeyQuartermaster
@@ -405,7 +426,40 @@
     - MarineJTAC
     - MarineIntel
     - WEYA
+    readOnlyChannels:
+    - MarineCommand
+    - MarineJTAC
+    - MarineIntel
     defaultChannel: WEYA
+  - type: Sprite
+    state: cap_key
+    
+# Combat Correspondent
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCorrespondent
+  name: correspondent radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    readOnlyChannels:
+    - MarineCommand
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommon
   - type: Sprite
     state: cap_key
 
@@ -438,6 +492,7 @@
     - MarineCommand
     - MarineEngineer
     - MarineJTAC
+    - MarineRequisition
     - MarineMedical
     - MarineAlpha
     - MarineBravo

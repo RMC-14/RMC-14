@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 
@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.AcidShroud;
 public sealed class XenoAcidShroudSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
@@ -37,8 +37,9 @@ public sealed class XenoAcidShroudSystem : EntitySystem
     private void OnAcidShroudDoAfterAttempt(Entity<XenoAcidShroudComponent> ent, ref DoAfterAttemptEvent<XenoAcidShroudDoAfterEvent> args)
     {
         if (args.Event.Target is { } action &&
-            TryComp(action, out InstantActionComponent? actionComponent) &&
-            !actionComponent.Enabled)
+            HasComp<InstantActionComponent>(action) &&
+            TryComp(action, out ActionComponent? actionComp) &&
+            !actionComp.Enabled)
         {
             _rmcActions.EnableSharedCooldownEvents(action, ent);
             args.Cancel();

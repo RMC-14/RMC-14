@@ -1,7 +1,7 @@
 - type: marking
   id: RMCUnderwearBoxers
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -11,8 +11,8 @@
 
 - type: marking
   id: RMCUnderwearBoxersBlue
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -22,8 +22,8 @@
 
 - type: marking
   id: RMCUnderwearBoxersJungle
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -33,8 +33,8 @@
 
 - type: marking
   id: RMCUnderwearBoxersSnow
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -44,8 +44,8 @@
 
 - type: marking
   id: RMCUnderwearBoxersUrban
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -55,8 +55,8 @@
 
 - type: marking
   id: RMCUnderwearLowriders
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -66,8 +66,8 @@
 
 - type: marking
   id: RMCUnderwearLowridersDesert
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -77,8 +77,8 @@
 
 - type: marking
   id: RMCUnderwearLowridersJungle
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -88,8 +88,8 @@
 
 - type: marking
   id: RMCUnderwearLowridersSnow
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -99,8 +99,8 @@
 
 - type: marking
   id: RMCUnderwearLowridersUrban
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -110,8 +110,8 @@
 
 - type: marking
   id: RMCUnderwearBriefs
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -121,8 +121,8 @@
 
 - type: marking
   id: RMCUnderwearBriefsDesert
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -132,8 +132,8 @@
 
 - type: marking
   id: RMCUnderwearBriefsJungle
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -143,8 +143,8 @@
 
 - type: marking
   id: RMCUnderwearBriefsSnow
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -154,8 +154,8 @@
 
 - type: marking
   id: RMCUnderwearBriefsUrban
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -165,8 +165,8 @@
 
 - type: marking
   id: RMCUnderwearSatin
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -176,8 +176,8 @@
 
 - type: marking
   id: RMCUnderwearSatinDesert
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -187,8 +187,8 @@
 
 - type: marking
   id: RMCUnderwearSatinJungle
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -198,8 +198,8 @@
 
 - type: marking
   id: RMCUnderwearSatinSnow
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -209,8 +209,8 @@
 
 - type: marking
   id: RMCUnderwearSatinUrban
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -221,8 +221,8 @@
 # tanga
 - type: marking
   id: RMCUnderwearTanga
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -232,8 +232,8 @@
 
 - type: marking
   id: RMCUnderwearTangaDesert
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -243,8 +243,8 @@
 
 - type: marking
   id: RMCUnderwearTangaJungle
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -254,8 +254,8 @@
 
 - type: marking
   id: RMCUnderwearTangaSnow
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]
@@ -265,8 +265,8 @@
 
 - type: marking
   id: RMCUnderwearTangaUrban
-  bodyPart: Underwear
-  markingCategory: Underwear
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia, Feroxi, Skrell]

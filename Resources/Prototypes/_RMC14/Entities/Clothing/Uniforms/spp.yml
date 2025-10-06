@@ -9,6 +9,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPP
 
 - type: entity
   parent: CMJumpsuitSPP
@@ -67,6 +70,31 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
 
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPPaP
+  name: PaP service uniform
+  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPArmy
+  name: SPP army fatigues
+  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
+
+- type: entity
+  parent: RMCJumpsuitSPPArmy
+  id: RMCJumpsuitSPPArmyAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
+
 # Civilians
 - type: entity
   parent: RMCMarineUniformBase
@@ -103,6 +131,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/civ4.rsi
+
+- type: entity
+  parent: CMJumpsuitSPPCiv1
+  id: RMCJumpsuitSPPCiv5
+  name: "Chǎnyè Combine mining overalls"
+  description: "A durable, olive-green jumpsuit worn beneath a sleeveless, puffy orange work vest—standard issue for Chǎnyè Combine laborers. The vest's faded fabric is lined with reinforced padding, offering minimal protection against workplace hazards. A red star insignia is stamped on the back, marking its wearer as part of the Combine’s industrial workforce. Stiff, uncomfortable, and mass-produced, but better than nothing in the unforgiving conditions of deep-space labor."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/civ5.rsi
 
 - type: entity
   parent: CMJumpsuitSPPCiv1

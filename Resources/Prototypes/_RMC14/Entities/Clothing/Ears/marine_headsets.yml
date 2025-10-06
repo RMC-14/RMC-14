@@ -3,6 +3,14 @@
   id: RMCHeadsetMarine
   components:
   - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+    - FireteamLeader
+    - SeniorEnlistedAdvisor
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: HeadsetAutoSquad
 
 # Alpha
 - type: entity
@@ -13,11 +21,6 @@
   components:
   - type: Sprite
     state: alpha_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyAlpha
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -28,11 +31,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -43,8 +52,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -58,9 +65,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -71,9 +76,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 
 # Bravo
@@ -85,11 +88,6 @@
   components:
   - type: Sprite
     state: bravo_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyBravo
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetBravo
@@ -100,11 +98,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetBravo
@@ -115,8 +119,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -130,9 +132,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetBravo
@@ -143,9 +143,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 
 # Charlie
@@ -157,11 +155,6 @@
   components:
   - type: Sprite
     state: charlie_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyCharlie
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -172,11 +165,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -187,8 +186,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -202,9 +199,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -215,9 +210,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 
 # Delta
@@ -229,11 +222,6 @@
   components:
   - type: Sprite
     state: delta_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyDelta
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetDelta
@@ -244,11 +232,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetDelta
@@ -259,8 +253,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -274,9 +266,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetDelta
@@ -287,9 +277,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 
 # Echo
@@ -301,11 +289,6 @@
   components:
   - type: Sprite
     state: echo_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyEcho
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetEcho
@@ -316,8 +299,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -331,11 +312,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetEcho
@@ -346,9 +333,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetEcho
@@ -359,9 +344,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 
 # Foxtrot
@@ -373,11 +356,6 @@
   components:
   - type: Sprite
     state: cryo_headset
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyFoxtrot
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -388,8 +366,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
-      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -403,11 +379,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -418,9 +400,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyEngineer
-      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -431,14 +411,12 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
-      - CMEncryptionKeyCommon
 
 # PVE
 
 - type: entity
-  parent: RMCHeadsetMarine
+  parent: RMCHeadsetShip
   id: RMCHeadsetGoldenArrow
   name: sun riders radio headset
   description: This is used by the UNMC Sun Riders Platoon.
@@ -449,3 +427,13 @@
     containers:
       key_slots:
       - RMCEncryptionKeySunRiders
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantSquadLeaderTracker
+    defaultMode: SectionSergeant
+    trackerModes:
+    - SectionSergeant
+    - PVESquadLeader
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: HeadsetAutoSquad

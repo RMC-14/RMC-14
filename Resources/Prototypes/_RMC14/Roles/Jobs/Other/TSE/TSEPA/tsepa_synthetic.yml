@@ -6,7 +6,7 @@
   description: rmc-job-description-tsepa-synth
   playTimeTracker: RMCJobTSEPASynthetic
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankTSEPAConstable: [ ]
   startingGear: RMCGearTSEPASynthetic
   icon: "RMCJobIconTSEPASynth"
   joinNotifyCrew: false
@@ -35,6 +35,9 @@
         RMCSkillJtac: 1
         RMCSkillIntel: 1
         RMCSkillDomestics: 2
+    - type: NpcFactionMember
+      factions:
+      - TSE
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -44,7 +47,7 @@
       prefix: rmc-job-prefix-tsepa-synth
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: MeleeWeapon
       soundHit:

@@ -33,7 +33,6 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
     - type: SniperWhitelist
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-sniper
   hidden: true
@@ -87,14 +86,14 @@
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMCSniper
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCSniper
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    head: RMCArmorHelmetPMCTactical
+    mask: RMCMaskCoifPMC
     shoes: RMCBootsPMCFilled
     eyes: CMGlassesM42ScoutSight
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelPMC
     belt: RMCBeltHolsterSMGFilledSMGM63B2
     suitstorage: RMCXM43E1AntiMaterielRifle # TODO RMC14: PMC re-sprite
-    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket1: RMCPouchMagazineLargePMC
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:

@@ -222,7 +222,8 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         var para = Spawn(resinHole.Comp.TrapPrototype);
         _hive.SetSameHive(resinHole.Owner, para);
 
-        if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
+        if (!_rmcHands.IsPickupByAllowed(para, args.User) ||
+            !_hands.TryPickupAnyHand(args.User, para))
         {
             QueueDel(para);
             return;
@@ -449,7 +450,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 {
                     var coords = _transform.GetMoverCoordinates(resinHole).Offset(new Vector2(i, j));
 
-                    var tuff = TurfHelpers.GetTileRef(coords);
+                    var tuff = _turf.GetTileRef(coords);
                     if (tuff != null && !_turf.IsTileBlocked(tuff.Value, FullTileMask))
                     {
                         var acid = SpawnAtPosition(trapEntityProto, coords);

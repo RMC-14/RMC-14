@@ -3,8 +3,11 @@
   id: RMCMortarKit
   name: M402 mortar portable kit
   suffix: Classic
-  description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first.
+  description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Uses an advanced targeting computer, which can toggle between coordinate and laser targeting. Needs to be set down first.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar/classic.rsi
     layers:
@@ -60,7 +63,8 @@
   - type: ActivatableUI
     key: enum.MortarUiKey.Key
   - type: RMCCameraComputer
-    id: RMCMortarKit
+    protoIds:
+    - RMCMortarKit
     title: rmc-mortar-camera-title
   - type: Appearance
   - type: GenericVisualizer
@@ -195,7 +199,9 @@
   - type: Transform
     anchored: true
   - type: Eye
+    zoom: 0.5, 0.5
     drawFov: false
+  - type: RMCStaticZoomLevel
   - type: RMCCamera
     id: RMCMortarKit
   - type: MortarCamera

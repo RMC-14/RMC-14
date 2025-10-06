@@ -1,0 +1,88 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolKT42
+  name: KT-42 automag
+  description: The KT-42 Automag is an archaic but reliable design, going back many decades. There have been many versions and variations, but the 42 is by far the most common. You can't go wrong with this handcannon.
+  components:
+  - type: RMCSelectiveFire
+    scatterWielded: 5
+    scatterUnwielded: 6
+    baseFireRate: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/kt42.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/kt42.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolKT42
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazinePistolKT42
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolKT42
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 0.95
+    accuracyMultiplierUnwielded: 0.9
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.783, 0.0945
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-underbarrel: 0.432, -0.25
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolKT42
+  name: KT-42 magazine (.44)
+  description: A .44 pistol magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolKT42
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/kt42.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: Tag
+  id: RMCMagazinePistolKT42
+
+- type: Tag
+  id: RMCWeaponPistolKT42

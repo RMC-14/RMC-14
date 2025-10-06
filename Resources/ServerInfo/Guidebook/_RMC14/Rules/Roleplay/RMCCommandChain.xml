@@ -17,13 +17,13 @@
   - Chief MP
   - Chief Medical Officer
   - Chief Engineer
-  - Pilot Officer
+  - Logistics Officer
+  - Pilots
   - Intelligence Officer
-  - Quartermaster
   - Senior Enlisted Advisor
   - Warden
   - Military Police
-  - Squad Leader (Starts at Alpha and goes through the squads)
-  - Ranking military personnel (Any squad role, starting at Alpha and through the squads.)
+  - The most senior Squad Leader by rank, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
+  - The most senior squad personnel by rank, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
 
 </Document>

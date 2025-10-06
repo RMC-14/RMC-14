@@ -7,6 +7,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
@@ -72,7 +73,7 @@
     prefix: drone
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: drone
   - type: XenoConstruction
     buildDelay: 2
@@ -98,6 +99,8 @@
     value: 0.1
   - type: FixedIdentity
     name: cm-job-name-xeno-drone
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDroneBase
@@ -138,6 +141,10 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+  - type: VentCrawler
+    ventCrawlIcon: drone
+  - type: RMCActionOrder
+    id: CMXenoDrone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -203,8 +210,14 @@
     - XenoFruitSpore
     - XenoFruitUnstable
     maxFruitAllowed: 6
+    fruitPickingMultiplier: 0.5
+    fruitFeedingMultiplier: 0.5
   - type: XenoResinSurge
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: gardener
+  - type: RMCActionOrder
+    id: CMXenoDroneGardener
 
 - type: entity
   parent: CMXenoDroneBase
@@ -292,3 +305,7 @@
   - type: XenoAcid
   - type: XenoSalveVisuals
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: healer
+  - type: RMCActionOrder
+    id: CMXenoDroneHealer

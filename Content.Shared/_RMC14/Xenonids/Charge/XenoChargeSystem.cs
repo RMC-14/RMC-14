@@ -1,9 +1,11 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -51,6 +53,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
@@ -67,6 +70,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
@@ -250,7 +254,7 @@ public sealed class XenoChargeSystem : EntitySystem
         var perpendicular = _random.Prob(0.5f) ? perpendiculars.First : perpendiculars.Second;
         var diff = perpendicular.ToVec().Normalized();
 
-        _throwing.TryThrow(ent, diff, 10);
+        _throwing.TryThrow(ent, diff, compensateFriction: true);
         IncrementStages(args.Charger, -1);
 
         if (_net.IsServer)
@@ -416,12 +420,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(targetId);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * range;
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
+        _sizeStun.KnockBack(targetId, origin, 2, 2, knockBackSpeed: 10);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
@@ -484,10 +485,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        foreach (var action in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleChargingActionEvent>(ent))
         {
-            if (action.Comp.BaseEvent is XenoToggleChargingActionEvent)
-                _actions.SetToggled(action.Id, true);
+            _actions.SetToggled((action, action), true);
         }
     }
 
@@ -495,10 +495,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        foreach (var action in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleChargingActionEvent>(ent))
         {
-            if (action.Comp.BaseEvent is XenoToggleChargingActionEvent)
-                _actions.SetToggled(action.Id, false);
+            _actions.SetToggled((action, action), false);
         }
     }
 
@@ -667,7 +666,6 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         if (_xenoToggleChargingQuery.TryComp(ent, out var charging))
             ent.Comp.Stage = Math.Min(charging.MaxStage, ent.Comp.Stage);
 
-        Log.Warning(ent.Comp.Stage.ToString());
         Dirty(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
