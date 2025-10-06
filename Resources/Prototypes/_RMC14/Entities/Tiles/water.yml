@@ -79,6 +79,14 @@
     sprite: _RMC14/Tiles/planet/sorokyne/sorokyne_water.rsi
 
 - type: entity
+  parent: RMCRiverSorokyne
+  id: RMCRiverSwamp
+  name: swamp
+  components:
+  - type: Sprite
+    color: "#89a18e"
+
+- type: entity
   parent: CMFloorShallowWaterEntity
   id: RMCFloorShallowWaterEntityRed
   suffix: Red

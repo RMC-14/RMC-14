@@ -1,0 +1,62 @@
+- type: entity
+  id: RMCPropEdgeGrass1
+  suffix: Fake Edge
+  name: grass edge
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_outercorner_0
+    drawdepth: FloorObjects
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass2
+  components:
+  - type: Sprite
+    state: grass_outercorner_1
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass3
+  components:
+  - type: Sprite
+    state: grass_outercorner_2
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass4
+  components:
+  - type: Sprite
+    state: grass_outercorner_3
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass5
+  components:
+  - type: Sprite
+    state: grass_innercorner_4
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass6
+  components:
+  - type: Sprite
+    state: grass_innercorner_5
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass7
+  components:
+  - type: Sprite
+    state: grass_innercorner_6
+
+- type: entity
+  parent: RMCPropEdgeGrass1
+  id: RMCPropEdgeGrass8
+  components:
+  - type: Sprite
+    state: grass_innercorner_7

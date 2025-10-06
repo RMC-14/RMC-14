@@ -175,3 +175,60 @@
   sprite:
     sprite: _RMC14/Decals/strata.rsi
     state: soro_mud_8
+
+# Grass
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass1
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_outercorner_0
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_outercorner_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_outercorner_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_outercorner_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass5
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_innercorner_4
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass6
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_innercorner_5
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass7
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_innercorner_6
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrass8
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grass_innercorner_7

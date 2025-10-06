@@ -386,3 +386,15 @@
   - type: Icon
     sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
     state: lattice6_d
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeGrate
+  suffix: Grate
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: solidgrate1
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: solidgrate1

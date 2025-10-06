@@ -78,6 +78,30 @@
     },
     {
       "name": "soro_mud_8"
+    },
+    {
+      "name": "grass_outercorner_0"
+    },
+    {
+      "name": "grass_outercorner_1"
+    },
+    {
+      "name": "grass_outercorner_2"
+    },
+    {
+      "name": "grass_outercorner_3"
+    },
+    {
+      "name": "grass_innercorner_4"
+    },
+    {
+      "name": "grass_innercorner_5"
+    },
+    {
+      "name": "grass_innercorner_6"
+    },
+    {
+      "name": "grass_innercorner_7"
     }
   ]
 }
