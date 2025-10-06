@@ -571,6 +571,26 @@
       amount: 3
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFMAR
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 3
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFBuckshot
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
   name: M272 pattern knife vest
