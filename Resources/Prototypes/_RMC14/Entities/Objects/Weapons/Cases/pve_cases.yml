@@ -122,7 +122,12 @@
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
-
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
 - type: entity
   parent: RMCPVECaseM5SPR
   id: RMCPVECaseM5SPR2
