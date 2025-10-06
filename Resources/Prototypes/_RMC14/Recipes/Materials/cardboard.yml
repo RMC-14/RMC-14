@@ -1,14 +1,20 @@
-# donut box
+# default
 - type: rmcConstruction
-  id: RMCDonutBoxBuild
-  name: donut box
-  prototype: RMCBoxDonutEmpty
+  id: RMCDefaultCardboardStates
   noRotate: true
   doAfterTime: 0.2
   doAfterTimeMin: 0.2
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
+
+
+# donut box
+- type: rmcConstruction
+  parent: RMCDefaultCardboardStates
+  id: RMCDonutBoxBuild
+  name: donut box
+  prototype: RMCBoxDonutEmpty
 
 # pizza boxes
 - type: rmcConstruction
