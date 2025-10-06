@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/ravager.dmi",
+  "copyright": "Sprites by @muichiro__toki",
   "size": {
     "x": 64,
     "y": 64
@@ -9,47 +9,20 @@
   "states": [
     {
       "name": "alive",
-      "directions": 4
-    },
-    {
-      "name": "sleeping"
-    },
-    {
-      "name": "crit"
+      "directions": 4,
+      "size": {
+        "x": 128,
+        "y": 128
+      }
     },
     {
       "name": "dead"
     },
     {
-      "name": "ravager_walk_3",
-      "directions": 4
+      "name": "crit"
     },
     {
-      "name": "ravager_dissection"
-    },
-    {
-      "name": "ravager_downed_0"
-    },
-    {
-      "name": "ravager_downed_1"
-    },
-    {
-      "name": "ravager_downed_2"
-    },
-    {
-      "name": "ravager_downed_3"
-    },
-    {
-      "name": "ravager_rest_0"
-    },
-    {
-      "name": "ravager_rest_1"
-    },
-    {
-      "name": "ravager_rest_2"
-    },
-    {
-      "name": "ravager_rest_3"
+      "name": "sleeping"
     },
     {
       "name": "ravager_walk_0",
@@ -62,6 +35,90 @@
     {
       "name": "ravager_walk_2",
       "directions": 4
+    },
+    {
+      "name": "ravager_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "ravager_downed_3"
+    },
+    {
+      "name": "ravager_downed_0"
+    },
+    {
+      "name": "ravager_downed_1"
+    },
+    {
+      "name": "ravager_downed_2"
+    },
+    {
+      "name": "ravager_rest_3"
+    },
+    {
+      "name": "ravager_rest_0"
+    },
+    {
+      "name": "ravager_rest_1"
+    },
+    {
+      "name": "ravager_rest_2"
+    },
+    {
+      "name": "hedgehog_1",
+      "directions": 4,
+      "size": {
+        "x": 128,
+        "y": 128
+      }
+    },
+    {
+      "name": "hedgehog_2",
+      "directions": 4,
+      "size": {
+        "x": 128,
+        "y": 128
+      }
+    },
+    {
+      "name": "hedgehog_3",
+      "directions": 4,
+      "size": {
+        "x": 128,
+        "y": 128
+      }
+    },
+    {
+      "name": "hedgehog_4",
+      "directions": 4,
+      "size": {
+        "x": 128,
+        "y": 128
+      }
+    },
+    {
+      "name": "Hedgehog_1_crit"
+    },
+    {
+      "name": "Hedgehog_1_resting"
+    },
+    {
+      "name": "hedgehog_2_crit"
+    },
+    {
+      "name": "hedgehog_2_resting"
+    },
+    {
+      "name": "hedgehog_3_crit"
+    },
+    {
+      "name": "hedgehog_3_resting"
+    },
+    {
+      "name": "hedgehog_4_crit"
+    },
+    {
+      "name": "hedgehog_4_resting"
     }
   ]
 }

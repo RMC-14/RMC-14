@@ -1,0 +1,76 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorChancesCivilian
+  name: rmc-job-name-survivor-chances-civilian
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesCivilian
+  startingGear: RMCGearSurvivorChancesCivilian
+  spawnMenuRoleName: Catering Technician (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetChancesCivilian
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorChancesCivilian
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesCivilian
+  name: chances civilian spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesCivilian
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesCivilian
+  name: chances catering technician ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesCivilian
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesCivilian
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesCivilian
+
+- type: entity
+  id: RMCGearSurvivorPresetChancesCivilian
+  name: chances catering technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadBeanie, RMCBrownWEYACoat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMSatchel ]
+    - [ RMCWEYARainCoat, RMCJumpsuitCivilianGreen, RMCShoesBlue, CMHandsBrown, RMCMaskRebreather, RMCSatchelNorm ]
+    - [ RMCVestTan, RMCJumpsuitCivilianBlue, RMCShoesLaceup, CMHandsBrown, RMCGlassesTriMaxBlackFake ]
