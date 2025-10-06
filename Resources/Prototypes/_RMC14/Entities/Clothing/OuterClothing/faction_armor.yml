@@ -151,6 +151,10 @@
     grid:
     - 0,0,3,1 # 2 slots
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineMar50LMG
 
 - type: entity
   parent: RMCCoatMilitia
