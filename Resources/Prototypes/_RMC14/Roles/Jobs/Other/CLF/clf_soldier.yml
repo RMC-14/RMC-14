@@ -63,7 +63,7 @@
     head: RMCHeadMilitiaHood
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
-    jumpsuit: RMCJumpsuitCLFSoldier
+    jumpsuit: RMCJumpsuitCLFWebbing
     outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
@@ -71,10 +71,13 @@
     belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
     back: RMCWeaponShotgunHG3712
     pocket1: RMCFlashlight
-    pocket2: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidERTFill
   inhand:
-  - RMCWeaponSMGP90
-  - RMCMagazineSMGP90
+  - WeaponRifleMAR40
+  storage:
+    outerClothing:
+    - RMCMagazineRifleMAR40
+    - CMCrowbar
 
 - type: playTimeTracker
   id: CMJobCLFSoldier
