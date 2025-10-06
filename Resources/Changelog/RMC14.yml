@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed autolathe's starting glass being too high.
-    type: Fix
-  - message: Fixed various lathe recipe costs being incorrect, specially the medilathe's
-      recipes with half of them being cheaper than intended.
-    type: Fix
-  id: 1932
-  time: '2025-07-05T06:13:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6749
 - author: Tunguso4ka
   changes:
   - message: New distress signal map Sorokyne Strata added.
@@ -4671,5 +4661,12 @@
   id: 2432
   time: '2025-10-06T10:25:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7986
+- author: CatAndHats
+  changes:
+  - message: Combat Technician chat prefix changed from "ComTech" to "CT"
+    type: Tweak
+  id: 2433
+  time: '2025-10-06T10:28:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7961
 Name: RMC14
 Order: -1
