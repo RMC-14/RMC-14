@@ -1,0 +1,72 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorChancesVehicleRepairman
+  name: rmc-job-name-survivor-vehicle-repairman
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesVehicleRepairman
+  startingGear: RMCGearSurvivorChancesVehicleRepairman
+  spawnMenuRoleName: Vehicle Repairman (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorChancesVehicleRepairman
+  equipment:
+    head: RMCHeadCapFlippable
+    jumpsuit: CMJumpsuitMaintTech
+    outerClothing: RMCOuterClothingExternalWebbing
+    shoes: RMCShoesBlack
+    eyes: RMCGlassesAviatorsSilver
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesVehicleRepairman
+  name: vehicle repairman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesVehicleRepairman
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesVehicleRepairman
+  name: vehicle repairman ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesVehicleRepairman
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesVehicleRepairman
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesVehicleRepairman

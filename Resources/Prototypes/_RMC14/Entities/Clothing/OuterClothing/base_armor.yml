@@ -8,7 +8,7 @@
     state: icon # default state used by most inheritors
   - type: Item
     size: Huge
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: cm-defib-take-off-armor
     showOnExamine: false
   - type: InteractedBlacklist
@@ -218,6 +218,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: RMCNameItemOnVend
