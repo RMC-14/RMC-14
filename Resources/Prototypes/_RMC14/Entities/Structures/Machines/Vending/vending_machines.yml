@@ -132,13 +132,25 @@
     pack: CMVendorCoffee
     ejectState: eject-unshaded
 
+- type: entity
+  parent: CMVendorCoffee
+  id: CMVendorCoffeeLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    RMCCoffeeCupFilled: 25 # ?
-    DrinkHotCoffee: 25 # $1.5
-    DrinkTeacup: 25 # $3
-    DrinkHotCoco: 25 # $15
+    RMCDrinkCoffee: 25 # ?
+    RMCDrinkTea: 25 # $1.5
+    RMCDrinkHotCocoa: 25
     #IceCup #Contraband
 
 - type: entity
@@ -153,8 +165,8 @@
 - type: vendingMachineInventory
   id: RMCVendorCoffeeSimple
   startingInventory:
-    DrinkHotCoffee: 40
-    DrinkHotCoco: 25 #Contraband
+    RMCDrinkCoffee: 40
+    RMCDrinkHotCocoa: 25 #Contraband
 
 
 # Snack
@@ -302,6 +314,12 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
+    RMCCigarettePackArcturianAce: 50
+    RMCCigarettePackLadyFingers: 50
+    RMCCigarettePackEmeraldGreens: 50
+    RMCCigarettePackElectroGolds: 50
+    RMCCigarettePackSolRedsTurquoise: 25
+    RMCCigarettePackSolRedsYellow: 25
     RMCTarbackTube: 20
     RMCMatchboxFull: 15
     RMCLighter: 25
@@ -318,13 +336,13 @@
 - type: vendingMachineInventory
   id: RMCVendorCigsFree
   startingInventory:
-    #ElectroGoldCigPack: 99
+    RMCCigarettePackElectroGolds: 99
     RMCCigarettePackLuckySloths: 99
     #TradingCardCigPack: 99
-    #LadyFingerCigPack: 99
+    RMCCigarettePackLadyFingers: 99
     RMCCigarettePackWeYaGold: 99
-    #EmeraldGreenCigPack: 99
-    #ArcturianAceCigPack: 99
+    RMCCigarettePackEmeraldGreens: 99
+    RMCCigarettePackArcturianAce: 99
     RMCCigarettePackExecutiveSelect: 99
     RMCCigarCase: 99
     RMCTarbackTube: 99
@@ -351,11 +369,11 @@
 - type: vendingMachineInventory
   id: RMCVendorCigsElectro
   startingInventory:
-    #ElectroGoldCigPack: 20
+    RMCCigarettePackElectroGolds: 20
     RMCCigarettePackLuckySloths: 20
-    #LadyFingerCigPack: 20
-    #SpiritCigPack: 10
-    #SpiritYellowCigPack: 10
+    RMCCigarettePackLadyFingers: 20
+    RMCCigarettePackSolRedsTurquoise: 10
+    RMCCigarettePackSolRedsYellow: 10
     RMCTarbackTube: 10
     RMCMatchboxFull: 5
     CMElectroMatchbook: 5
@@ -379,10 +397,11 @@
   id: RMCVendorCigsWeYa
   startingInventory:
     RMCCigarettePackWeYaGold: 15
-    #EmeraldGreenCigPack: 30
-    #ArcturianAceCigPack: 10
+    RMCCigarettePackEmeraldGreens: 30
+    RMCCigarettePackArcturianAce: 10
     #BalajiImperialCigPack: 10
     RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
+    RMCShioRoyalsTube: 10
     RMCMatchboxFull: 5
     CMExecutiveSelectMatchbook: 10
     #BalajiImperialMatchbook: 10
@@ -475,7 +494,7 @@
     RMCMagazineRifleM54CRubber: 40
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
-    RMCExplosiveBreachingCharge: 6 #Replace with Riot Breaching Charges
+    RMCExplosiveBreachingChargeRubber: 6
     RMCSunglasses: 2 #Contraband - inherited from SecTech
     RMCBoxDonut: 2 #Contraband
 
@@ -593,14 +612,14 @@
     RiceSeeds: 3
     # LibertyMycelium: 1 #Contraband
     # MessaTearSeeds: 1 #Contraband
-    AmbrosiaVulgarisSeeds: 1 #Contraband
+    # AmbrosiaVulgarisSeeds: 1 #Contraband
     NettleSeeds: 1 #Contraband
     LingzhiSeeds: 1 #ReishiMycelium #Contraband
     # WaterFlower: 1 #Premium
     GarlicSeeds: 3
     OnionSeeds: 3
     OnionRedSeeds: 3
-    MangoSeeds: 3
+    RMCMangoSeeds: 3
 
 
 # Dinnerware
@@ -809,6 +828,20 @@
         amount: 12
       - id: ReagentContainerMayo
         amount: 12
+
+- type: entity
+  parent: CMVendorIngredients
+  id: CMVendorIngredientsLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 
 # PVE
 

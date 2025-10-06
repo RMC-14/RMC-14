@@ -281,6 +281,22 @@
     {
       "name": "strata_rock_platform_broken",
       "directions": 4
+    },
+    {
+      "name": "platform_sm",
+      "directions": 4
+    },
+    {
+      "name": "platform_sm_deco",
+      "directions": 4
+    },
+    {
+      "name": "platform_sm_stair",
+      "directions": 4
+    },
+    {
+      "name": "platform_sm_stair_alt",
+      "directions": 4
     }
   ]
 }

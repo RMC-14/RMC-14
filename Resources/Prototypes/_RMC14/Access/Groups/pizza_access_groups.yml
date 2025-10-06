@@ -1,7 +1,7 @@
 ﻿- type: accessGroup
   id: CMPizzaDeliverer
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessRequisitions
   - CMAccessColonyPublic
   - CMAccessColonyLogistics

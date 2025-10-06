@@ -69,15 +69,12 @@
       collection: XenoDeath
       params:
         volume: -4
-  - type: HealthExaminable
-    examineShowEmpty: false
-    examinableTypes:
-    - Blunt
-    - Slash
-    - Piercing
-    - Heat
-    - Shock
-  - type: CMDefibrillatorBlocked
+  - type: RMCHealthExaminable
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 25
+  - type: RMCDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
   - type: MovementSpeedModifier
@@ -389,6 +386,8 @@
       components:
       - Marine
   - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   abstract: true
@@ -397,8 +396,7 @@
   - type: Prying
     pryPowered: true
     speedModifier: 2.7
-    useSound:
-      path: /Audio/Items/crowbar.ogg
+    useSound: null
 
 - type: entity
   abstract: true
@@ -456,6 +454,14 @@
 #  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
+
+- type: entity
+  abstract: true
+  id: RMCXenoVentCrawler
+  components:
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+  - type: RMCTrayCrawler
 
 - type: entity
   id: CMXenoDeveloped

@@ -35,12 +35,11 @@
     RMCRankGunnerySergeant: []
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
-  requireAdminNotify: true
   joinNotifyCrew: true
   latejoinArrivalSound:
     path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
   marineAuthorityLevel: 5
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   whitelisted: true
   accessGroups:
   - MarineMain

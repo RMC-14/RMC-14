@@ -825,15 +825,15 @@
   physicalDesc: reagent-physical-desc-soothing
   flavor: medicine
   color: "#fcf7f9"
-  metabolisms:
-    Medicine:
-      effects:
-      - !type:EvenHealthChange
-        damage:
-          Burn: -2
-          Toxin: -2
-          Airloss: -2
-          Brute: -2
+#  metabolisms: # RMC14, easier than tracking down all current and future sources of omnizine
+#    Medicine:
+#      effects:
+#      - !type:EvenHealthChange
+#        damage:
+#          Burn: -2
+#          Toxin: -2
+#          Airloss: -2
+#          Brute: -2
 
 - type: reagent
   id: Ultravasculine

@@ -3,7 +3,6 @@
   id: CMSurvivorLV624SecurityGuard
   name: rmc-job-name-survivor-lv624-security-guard
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624SecurityGuard
   startingGear: RMCGearSurvivorLV624SecurityGuard
   spawnMenuRoleName: Security Guard (LV624 Survivor)
   special:
@@ -30,6 +29,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624SecurityGuard
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
@@ -54,10 +54,6 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624SecurityGuard
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

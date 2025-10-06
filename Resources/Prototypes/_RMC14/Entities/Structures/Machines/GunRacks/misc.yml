@@ -52,6 +52,6 @@
   - type: ContainerFill
     containers:
       item_1:
-      - RMCWeaponFlamer
+      - RMCWeaponFlamerPVE
       item_2:
-      - RMCWeaponFlamer
+      - RMCWeaponFlamerPVE

@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -282,11 +283,11 @@
   - type: CMArmor
     melee: 10
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
-  name: quartermaster jacket
+  name: Logistics Officer jacket
   description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
   components:
   - type: Sprite
@@ -752,6 +753,17 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingHolidayRobes
+  name: holiday priest
+  description: This is a nice holiday, my son.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+
 # Hybrisa
 
 - type: entity
@@ -850,7 +862,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
 # Snow
 

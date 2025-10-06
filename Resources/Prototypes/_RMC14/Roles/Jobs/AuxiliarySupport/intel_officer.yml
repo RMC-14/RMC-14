@@ -7,14 +7,20 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 3600 # 1 hour
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
-  marineAuthorityLevel: 7
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer

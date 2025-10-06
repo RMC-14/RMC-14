@@ -2,6 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoLarva
   name: Larva
   components:
@@ -39,6 +40,8 @@
     plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 0.25
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     requiresGranter: false
@@ -92,6 +95,10 @@
       5: rmc-xeno-elder-larva
   - type: FixedIdentity
     name: cm-job-name-xeno-larva
+  - type: VentCrawler
+    ventCrawlIcon: larva
+  - type: RMCActionOrder
+    id: CMXenoLarva
 
 # For surgeries/failed incubations
 - type: entity

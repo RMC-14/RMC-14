@@ -76,6 +76,8 @@
     setDamage:
       types:
         Blunt: 150
+  - type: RMCMesonsNonviewable
+  - type: DamageReceivedModifierWhenUnanchored
 
 - type: entity
   parent: RMCBarricadeUpgradeBase
@@ -349,6 +351,14 @@
       node: nodeHandrail
 
 - type: entity
+  parent: RMCBarricadeHandrailAlt
+  id: RMCBarricadeHandrailAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
+- type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHandrailMed
   components:
@@ -555,9 +565,11 @@
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
   - type: InteractedBlacklist
+    anchoredOnly: true
     blacklist:
       components:
       - Xeno
   - type: UseDelay
     delay: 0.3
   - type: Climbable
+  - type: RMCOpenOnlyWhenUnanchored

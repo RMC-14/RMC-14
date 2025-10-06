@@ -1,4 +1,4 @@
-﻿
+
 - type: entity
   parent: RMCFoodDonut
   id: RMCFoodDonutJellyFrosted
@@ -113,6 +113,8 @@
     state: onigiri
   - type: Food
     transferAmount: 3
+    trash:
+    - FoodBowlBig
   - type: SolutionContainerManager
     solutions:
       food:

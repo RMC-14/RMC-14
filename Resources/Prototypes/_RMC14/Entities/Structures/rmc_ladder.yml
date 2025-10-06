@@ -20,6 +20,8 @@
     key: ladders
   - type: Ladder
   - type: BlockXenoConstruction
+  - type: RMCMesonsNonviewable
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: RMCLadder

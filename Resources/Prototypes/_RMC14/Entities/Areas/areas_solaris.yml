@@ -634,6 +634,7 @@
     unweedable: true
     buildSpecial: false
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1446,6 +1447,7 @@
     state: tcomsatcham
   - type: Area
     minimapColor: '#EBE5E5E3'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaBigredv2Landing
