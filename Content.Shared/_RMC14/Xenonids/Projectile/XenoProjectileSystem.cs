@@ -142,7 +142,6 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!TryComp(ent, out XenoProjectileShotComponent? shot))
             return;
 
-        Log.Info(_timing.CurTick.ToString());
         var ev = new XenoProjectilePredictedHitEvent(
             shot.Id,
             GetNetEntity(args.OtherEntity),
@@ -216,7 +215,8 @@ public sealed class XenoProjectileSystem : EntitySystem
         float speed,
         float? stopAtDistance = null,
         EntityUid? target = null,
-        bool predicted = true)
+        bool predicted = true,
+        int? projectileHitLimit = null)
     {
         if (!predicted && _net.IsClient)
             return false;
@@ -281,6 +281,14 @@ public sealed class XenoProjectileSystem : EntitySystem
                 var targeted = EnsureComp<TargetedProjectileComponent>(projectile);
                 targeted.Target = target.Value;
                 Dirty(projectile, targeted);
+            }
+
+            if (projectileHitLimit != null)
+            {
+                var limitHits = EnsureComp<ProjectileLimitHitsComponent>(projectile);
+                limitHits.Limit = projectileHitLimit.Value;
+                limitHits.OriginEntity = xeno;
+                Dirty(projectile, limitHits);
             }
 
             shooter ??= EnsureComp<XenoProjectileShooterComponent>(xeno);

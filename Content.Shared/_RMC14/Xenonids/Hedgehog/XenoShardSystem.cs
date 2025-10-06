@@ -176,7 +176,8 @@ public sealed class XenoShardSystem : EntitySystem
             ent.Comp.ProjectileCount,
             new Angle(Math.PI / 4), // 45 degrees
             20f,
-            target: args.Entity
+            target: args.Entity,
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
     }
 
@@ -216,7 +217,8 @@ public sealed class XenoShardSystem : EntitySystem
             null,
             ent.Comp.ProjectileCount,
             new Angle(2 * Math.PI), // Full circle
-            20f
+            20f,
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
 
         // Apply speed boost (remove armor bonus, gain speed)
@@ -313,23 +315,23 @@ public sealed class XenoShardSystem : EntitySystem
         // Reset shard cooldown
         ent.Comp.SpikeShedCooldownEnd = TimeSpan.Zero;
         ent.Comp.SpikeShedCooldownMessageShown = false;
-        
+
         // Set shards to 150
         ent.Comp.Shards = 150;
-        
+
         // Reset ability cooldowns
         if (TryComp<XenoFireSpikesComponent>(ent, out var fireSpikes))
         {
             fireSpikes.CooldownExpireAt = TimeSpan.Zero;
             Dirty(ent, fireSpikes);
         }
-        
+
         if (TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield))
         {
             spikeShield.CooldownExpireAt = TimeSpan.Zero;
             Dirty(ent, spikeShield);
         }
-        
+
         Dirty(ent);
         _armor.UpdateArmorValue(ent.Owner);
         UpdateHedgehogSprite(ent);
