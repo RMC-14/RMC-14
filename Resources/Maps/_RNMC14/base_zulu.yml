@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/22/2025 08:35:48
+  time: 10/06/2025 10:06:20
   entityCount: 1061
 maps:
 - 1
@@ -115,6 +115,7 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      enabled: True
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1200
       weatherEvents:
@@ -2147,36 +2148,36 @@ entities:
       parent: 1
 - proto: CMSpawnPointEngispecSOF
   entities:
-  - uid: 113
+  - uid: 109
     components:
     - type: Transform
       pos: 9.5,11.5
       parent: 1
 - proto: CMSpawnPointMedspecSOF
   entities:
-  - uid: 114
+  - uid: 110
     components:
     - type: Transform
       pos: 8.5,11.5
       parent: 1
 - proto: CMSpawnPointRiflemanSOF
   entities:
-  - uid: 109
+  - uid: 111
     components:
     - type: Transform
       pos: -0.5,11.5
       parent: 1
-  - uid: 110
+  - uid: 112
     components:
     - type: Transform
       pos: -1.5,11.5
       parent: 1
-  - uid: 111
+  - uid: 113
     components:
     - type: Transform
       pos: -1.5,10.5
       parent: 1
-  - uid: 112
+  - uid: 114
     components:
     - type: Transform
       pos: -1.5,9.5
@@ -4796,7 +4797,7 @@ entities:
       pos: 0.5,11.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -8205.625
+      secondsUntilStateChange: -8224.206
       state: Opening
   - uid: 611
     components:
@@ -4805,7 +4806,7 @@ entities:
       pos: 7.5,11.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -8206.525
+      secondsUntilStateChange: -8225.106
       state: Opening
 - proto: RMCD18Case
   entities:
