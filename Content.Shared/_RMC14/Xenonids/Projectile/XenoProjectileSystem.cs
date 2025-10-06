@@ -124,9 +124,6 @@ public sealed class XenoProjectileSystem : EntitySystem
 
     private void OnShotRemove<T>(Entity<XenoProjectileShotComponent> ent, ref T args)
     {
-        if (_timing.ApplyingState)
-            return;
-            
         if (ent.Comp.ShooterEnt is not { } shooter)
             return;
 
