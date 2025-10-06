@@ -4500,13 +4500,13 @@
   - message: Fixed pulling someone on a roller bed pulling them off instead of pulling
       the roller bed, and transfer pulls when buckling onto roller beds.
     type: Fix
-  - message: Fixed not being able to put magazine on stairs.
+  - message: Fixed not being able to put magazine boxes on stairs.
     type: Fix
   - message: Fixed the common encryption key not being intrinsic in all ship headsets.
     type: Fix
   - message: Fixed some interactions that ignore range not using the correct range,
       such as the overwatch console and attaching weapons to dropship points with
-      the powerl oader.
+      the power loader.
     type: Fix
   - message: Fixed fireman carry and pointing popups not using the player's correct
       identity.
