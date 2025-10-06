@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/20/2025 14:56:26
-  entityCount: 2540
+  time: 10/06/2025 09:08:39
+  entityCount: 2552
 maps:
 - 1
 grids:
@@ -7106,7 +7106,7 @@ entities:
       pos: 15.5,71.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -14421.504
+      secondsUntilStateChange: -14500.854
       state: Opening
 - proto: RMCCurtainTransparentGreenOpen
   entities:
@@ -11948,6 +11948,13 @@ entities:
     components:
     - type: Transform
       pos: 2.5,37.5
+      parent: 1
+- proto: RMCSpawnerShuttleSPP
+  entities:
+  - uid: 2537
+    components:
+    - type: Transform
+      pos: 1.5,75.5
       parent: 1
 - proto: RMCSprayBottleSpaceCleaner
   entities:
@@ -17690,10 +17697,65 @@ entities:
       parent: 1
 - proto: SpawnPointLatejoin
   entities:
-  - uid: 2537
+  - uid: 2541
     components:
     - type: Transform
-      pos: 0.5,3.5
+      pos: -1.5,3.5
+      parent: 1
+  - uid: 2542
+    components:
+    - type: Transform
+      pos: -2.5,2.5
+      parent: 1
+  - uid: 2543
+    components:
+    - type: Transform
+      pos: -3.5,1.5
+      parent: 1
+  - uid: 2544
+    components:
+    - type: Transform
+      pos: -3.5,0.5
+      parent: 1
+  - uid: 2545
+    components:
+    - type: Transform
+      pos: -2.5,-0.5
+      parent: 1
+  - uid: 2546
+    components:
+    - type: Transform
+      pos: -1.5,-1.5
+      parent: 1
+  - uid: 2547
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 1
+  - uid: 2548
+    components:
+    - type: Transform
+      pos: 3.5,-0.5
+      parent: 1
+  - uid: 2549
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 2550
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 2551
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 2552
+    components:
+    - type: Transform
+      pos: 2.5,3.5
       parent: 1
 - proto: SpawnPointObserver
   entities:

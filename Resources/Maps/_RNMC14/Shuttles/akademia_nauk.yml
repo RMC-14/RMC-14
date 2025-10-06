@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/14/2025 16:42:15
-  entityCount: 144
+  time: 10/06/2025 08:36:56
+  entityCount: 142
 maps: []
 grids:
 - 1
@@ -63,7 +63,6 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
-        enabled: true
     - type: DecalGrid
       chunkCollection:
         version: 2
@@ -143,24 +142,46 @@ entities:
         params:
           volume: -1
         path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
-- proto: CMAirlockSecure
+- proto: CMAkademiaDoorAft
   entities:
-  - uid: 2
+  - uid: 3
     components:
     - type: Transform
       pos: 0.5,-8.5
       parent: 1
-  - uid: 3
+- proto: CMAkademiaDoorCockpit
+  entities:
+  - uid: 2
     components:
     - type: Transform
       pos: 0.5,5.5
       parent: 1
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
-    - type: Door
-      secondsUntilStateChange: -439.4716
-      state: Opening
+- proto: CMAkademiaDoorPort
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -3.5,2.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -3.5,3.5
+      parent: 1
 - proto: CMComputerDropshipCamerasAlamo
   entities:
   - uid: 4
@@ -182,55 +203,31 @@ entities:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-- proto: CMDoubleDoorAlmayerSolid
-  entities:
-  - uid: 7
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,2.5
-      parent: 1
-  - uid: 8
-    components:
-    - type: Transform
-      pos: -3.5,3.5
-      parent: 1
-  - uid: 9
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,2.5
-      parent: 1
-  - uid: 10
-    components:
-    - type: Transform
-      pos: 4.5,3.5
-      parent: 1
-- proto: CMLightFixture
+- proto: CMLightFixtureAlwaysPowered
   entities:
   - uid: 11
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -1.5,-0.5
+      pos: -0.5,6.5
       parent: 1
   - uid: 12
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 2.5,-0.5
+      pos: 1.5,6.5
       parent: 1
   - uid: 13
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,6.5
+      rot: -1.5707963267948966 rad
+      pos: -1.5,-0.5
       parent: 1
   - uid: 14
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,6.5
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-0.5
       parent: 1
   - uid: 15
     components:
@@ -619,303 +616,291 @@ entities:
     - type: Transform
       pos: -1.5,-8.5
       parent: 1
-- proto: RMCERTShuttleWallSPP02
-  entities:
-  - uid: 82
-    components:
-    - type: Transform
-      pos: -0.5,-8.5
-      parent: 1
-  - uid: 83
-    components:
-    - type: Transform
-      pos: 1.5,-8.5
-      parent: 1
 - proto: RMCERTShuttleWallSPP03
   entities:
-  - uid: 84
+  - uid: 82
     components:
     - type: Transform
       pos: 2.5,-8.5
       parent: 1
 - proto: RMCERTShuttleWallSPP04
   entities:
-  - uid: 85
+  - uid: 83
     components:
     - type: Transform
       pos: -1.5,-7.5
       parent: 1
-  - uid: 86
+  - uid: 84
     components:
     - type: Transform
       pos: -1.5,-6.5
       parent: 1
-  - uid: 87
+  - uid: 85
     components:
     - type: Transform
       pos: -2.5,-4.5
       parent: 1
-  - uid: 88
+  - uid: 86
     components:
     - type: Transform
       pos: -2.5,-2.5
       parent: 1
-  - uid: 89
+  - uid: 87
     components:
     - type: Transform
       pos: -2.5,-1.5
       parent: 1
-  - uid: 90
+  - uid: 88
     components:
     - type: Transform
       pos: -2.5,-0.5
       parent: 1
-  - uid: 91
+  - uid: 89
     components:
     - type: Transform
       pos: -2.5,0.5
       parent: 1
-  - uid: 92
+  - uid: 90
     components:
     - type: Transform
       pos: -2.5,-3.5
       parent: 1
-  - uid: 93
+  - uid: 91
     components:
     - type: Transform
       pos: -1.5,6.5
       parent: 1
 - proto: RMCERTShuttleWallSPP05
   entities:
-  - uid: 94
+  - uid: 92
     components:
     - type: Transform
       pos: 2.5,-7.5
       parent: 1
-  - uid: 95
+  - uid: 93
     components:
     - type: Transform
       pos: 2.5,-6.5
       parent: 1
-  - uid: 96
+  - uid: 94
     components:
     - type: Transform
       pos: 3.5,-4.5
       parent: 1
-  - uid: 97
+  - uid: 95
     components:
     - type: Transform
       pos: 3.5,-3.5
       parent: 1
-  - uid: 98
+  - uid: 96
     components:
     - type: Transform
       pos: 3.5,-2.5
       parent: 1
-  - uid: 99
+  - uid: 97
     components:
     - type: Transform
       pos: 3.5,-1.5
       parent: 1
-  - uid: 100
+  - uid: 98
     components:
     - type: Transform
       pos: 3.5,-0.5
       parent: 1
-  - uid: 101
+  - uid: 99
     components:
     - type: Transform
       pos: 3.5,0.5
       parent: 1
-  - uid: 102
+  - uid: 100
     components:
     - type: Transform
       pos: 2.5,6.5
       parent: 1
-  - uid: 103
+  - uid: 101
     components:
     - type: Transform
       pos: 2.5,7.5
       parent: 1
 - proto: RMCERTShuttleWallSPP06
   entities:
-  - uid: 104
+  - uid: 102
     components:
     - type: Transform
       pos: -1.5,-5.5
       parent: 1
-  - uid: 105
+  - uid: 103
     components:
     - type: Transform
       pos: -2.5,1.5
       parent: 1
 - proto: RMCERTShuttleWallSPP07
   entities:
-  - uid: 106
+  - uid: 104
     components:
     - type: Transform
       pos: 2.5,-5.5
       parent: 1
-  - uid: 107
+  - uid: 105
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
 - proto: RMCERTShuttleWallSPP08
   entities:
-  - uid: 108
+  - uid: 106
     components:
     - type: Transform
       pos: -1.5,7.5
       parent: 1
 - proto: RMCERTShuttleWallSPP09
   entities:
-  - uid: 109
+  - uid: 107
     components:
     - type: Transform
       pos: -2.5,5.5
       parent: 1
-  - uid: 110
+  - uid: 108
     components:
     - type: Transform
       pos: -3.5,4.5
       parent: 1
-  - uid: 111
+  - uid: 109
     components:
     - type: Transform
       pos: -1.5,8.5
       parent: 1
 - proto: RMCERTShuttleWallSPP10
   entities:
-  - uid: 112
+  - uid: 110
     components:
     - type: Transform
       pos: 1.5,8.5
       parent: 1
-  - uid: 113
+  - uid: 111
     components:
     - type: Transform
       pos: -0.5,8.5
       parent: 1
-  - uid: 114
+  - uid: 112
     components:
     - type: Transform
       pos: -1.5,5.5
       parent: 1
-  - uid: 115
+  - uid: 113
     components:
     - type: Transform
       pos: 2.5,5.5
       parent: 1
 - proto: RMCERTShuttleWallSPP11
   entities:
-  - uid: 116
+  - uid: 114
     components:
     - type: Transform
       pos: -2.5,4.5
       parent: 1
 - proto: RMCERTShuttleWallSPP12
   entities:
-  - uid: 117
+  - uid: 115
     components:
     - type: Transform
       pos: 3.5,4.5
       parent: 1
 - proto: RMCERTShuttleWallSPP13
   entities:
-  - uid: 118
+  - uid: 116
     components:
     - type: Transform
       pos: 2.5,8.5
       parent: 1
-  - uid: 119
+  - uid: 117
     components:
     - type: Transform
       pos: 3.5,5.5
       parent: 1
-  - uid: 120
+  - uid: 118
     components:
     - type: Transform
       pos: 4.5,4.5
       parent: 1
 - proto: RMCERTShuttleWallSPP14
   entities:
-  - uid: 121
+  - uid: 119
     components:
     - type: Transform
       pos: 0.5,8.5
       parent: 1
-  - uid: 122
+  - uid: 120
     components:
     - type: Transform
       pos: -0.5,5.5
       parent: 1
-  - uid: 123
+  - uid: 121
     components:
     - type: Transform
       pos: 1.5,5.5
       parent: 1
 - proto: RMCERTShuttleWallSPPEngineLeft
   entities:
-  - uid: 124
+  - uid: 122
     components:
     - type: Transform
       pos: -2.5,-5.5
       parent: 1
-  - uid: 125
+  - uid: 123
     components:
     - type: Transform
       pos: -3.5,1.5
       parent: 1
-  - uid: 126
+  - uid: 124
     components:
     - type: Transform
       pos: -3.5,-3.5
       parent: 1
 - proto: RMCERTShuttleWallSPPEngineRight
   entities:
-  - uid: 127
+  - uid: 125
     components:
     - type: Transform
       pos: 3.5,-5.5
       parent: 1
-  - uid: 128
+  - uid: 126
     components:
     - type: Transform
       pos: 4.5,1.5
       parent: 1
-  - uid: 129
+  - uid: 127
     components:
     - type: Transform
       pos: 4.5,-3.5
       parent: 1
 - proto: RMCNanoMed
   entities:
-  - uid: 130
+  - uid: 128
     components:
     - type: Transform
       pos: -2.5,-1.5
       parent: 1
-  - uid: 131
+  - uid: 129
     components:
     - type: Transform
       pos: 3.5,-1.5
       parent: 1
 - proto: RMCPlatformHybrisaEdge
   entities:
-  - uid: 132
+  - uid: 130
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-4.5
       parent: 1
-  - uid: 133
+  - uid: 131
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -0.5,-4.5
       parent: 1
-  - uid: 134
+  - uid: 132
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -923,19 +908,19 @@ entities:
       parent: 1
 - proto: RMCStairsSolo
   entities:
-  - uid: 135
+  - uid: 133
     components:
     - type: Transform
       pos: -1.5,-4.5
       parent: 1
-  - uid: 136
+  - uid: 134
     components:
     - type: Transform
       pos: 2.5,-4.5
       parent: 1
 - proto: RMCUtilityAttachmentPoint
   entities:
-  - uid: 137
+  - uid: 135
     components:
     - type: Transform
       pos: 0.5,-3.5
@@ -943,39 +928,39 @@ entities:
     - type: ContainerContainer
       containers:
         rmc_dropship_utility_point_container_slot: !type:ContainerSlot {}
-  - uid: 138
+  - uid: 136
     components:
     - type: Transform
       pos: 0.5,-5.5
       parent: 1
-  - uid: 139
+  - uid: 137
     components:
     - type: Transform
       pos: -1.5,3.5
       parent: 1
-  - uid: 140
+  - uid: 138
     components:
     - type: Transform
       pos: 2.5,3.5
       parent: 1
 - proto: RMCWallSPPReinforced
   entities:
-  - uid: 141
+  - uid: 139
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 1
-  - uid: 142
+  - uid: 140
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
-  - uid: 143
+  - uid: 141
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-  - uid: 144
+  - uid: 142
     components:
     - type: Transform
       pos: 0.5,-0.5
