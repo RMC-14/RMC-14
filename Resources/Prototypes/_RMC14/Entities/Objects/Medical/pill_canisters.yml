@@ -343,4 +343,27 @@
   - type: IconLabel
     labelTextLocId: rmc-russianred-container-label-text
 
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterImidazoline
+  name: imidazoline pill bottle
+  suffix: Imidazoline, 16
+  components:
+  - type: Item
+    heldPrefix: 7
+  - type: Sprite
+    layers:
+    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillImidazoline
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-imidazoline-container-label-text
+
 # TODO RMC14 peridaxon, tramadol

@@ -1,0 +1,92 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorOperationsSupervisor
+  name: rmc-job-name-survivor-operations-supervisor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorOperationsSupervisor
+  icon: "CMJobIconLiaison"
+  hasIcon: true
+  greeting: rmc-job-greeting-chances-colonist
+  ranks:
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 630000 # 175 hours
+    RMCRankWeYaSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 90000 # 25 hours
+    RMCRankWeYaJuniorExecutive: []
+  startingGear: RMCGearSurvivorOperationsSupervisor
+  spawnMenuRoleName: Operations Supervisor (Chances Colonist)
+  accessGroups:
+  - ColonistCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorOperationsSupervisor
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitLiaisonGreyWorkwear
+    shoes: RMCShoesLaceupBrown
+    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    head: RMCHeadCapWestonYamadaDark
+    belt: CMClipboard
+    id: CMIDCardLiaisonColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: CMFolderBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorOperationsSupervisor
+  name:  spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorOperationsSupervisor
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorOperationsSupervisor
+  name: chances operations supervisor ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorOperationsSupervisor
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorOperationsSupervisor
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorOperationsSupervisor
