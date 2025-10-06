@@ -1,5 +1,6 @@
 # default
-- id: RMCDefaultCardboardStates
+- type: entity 
+  id: RMCDefaultCardboardStates
   noRotate: true
   doAfterTime: 0.2
   doAfterTimeMin: 0.2
