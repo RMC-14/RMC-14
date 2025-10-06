@@ -16,7 +16,7 @@ namespace Content.Server.Spawners.Components
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField(required: true)]
-        public EntProtoId SpawnerGroup { get; set; } = string.Empty;
+        public EntProtoId SpawnerGroup { get; set; } = default;
 
         /// <summary>
         /// Whether to delete the spawner after spawning

@@ -21,7 +21,7 @@ namespace Content.Server.Spawners.EntitySystems
         /// Key: spawner group identifier
         /// Value: list of prototypes that haven't been spawned yet
         /// </summary>
-        private Dictionary<string, List<EntProtoId>> _remainingPrototypes = new();
+        private Dictionary<EntProtoId, List<EntProtoId>> _remainingPrototypes = new();
 
         public override void Initialize()
         {
@@ -36,12 +36,12 @@ namespace Content.Server.Spawners.EntitySystems
             _remainingPrototypes.Clear();
         }
 
-        private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, MapInitEvent args)
+        private void OnMapInit(Entity<UniqueRandomSpawnerComponent> ent, ref MapInitEvent args)
         {
             Spawn(ent);
             
             if (ent.Comp.DeleteSpawnerAfterSpawn)
-                QueueDel(uid);
+                QueueDel(ent);
         }
 
         private void Spawn(Entity<UniqueRandomSpawnerComponent> ent)
@@ -62,8 +62,8 @@ namespace Content.Server.Spawners.EntitySystems
             
             if (pool.Count == 0)
             {
-                Log.Warning($"No more unique prototypes available for group {ent.Comp.SpawnerGroup}. Entity: {ToPrettyString(ent)}");
-                return;
+                Log.Warning($"No more unique prototypes available for group {ent.Comp.SpawnerGroup}. Resetting pool. Entity: {ToPrettyString(ent)}");
+                pool.AddRange(ent.Comp.Prototypes);
             }
             // Pick a random prototype from the remaining pool
             var selectedProto = _robustRandom.Pick(pool);
