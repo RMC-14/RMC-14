@@ -1,61 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the M54CE2 HAR not having full auto without a bipod
-    type: Fix
-  - message: Fixed the M54CE2 HAR spawning with a bipod attached
-    type: Fix
-  id: 1919
-  time: '2025-07-03T02:21:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6886
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Praetorian spray acid having a delay before being used.
-    type: Fix
-  id: 1920
-  time: '2025-07-03T02:21:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6885
-- author: Vermidia
-  changes:
-  - message: Fixed all xeno spit abilities (except praetorian's)'s cooldown being
-      0.5 seconds too short.
-    type: Fix
-  id: 1921
-  time: '2025-07-03T02:22:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6876
-- author: Dygon
-  changes:
-  - message: Green fire now reduces the armor of fortified defenders and the queen.
-    type: Fix
-  id: 1922
-  time: '2025-07-03T02:26:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6841
-- author: Dygon
-  changes:
-  - message: Fix some knockback effects knocking you back too far.
-    type: Fix
-  - message: Fix the Defender's Tail sweep, Valkyrie's Dislocate, Warrior's Punch
-      and Oppressor's Tail Seize abilities slamming you into obstacles while they
-      shouldn't.
-    type: Fix
-  id: 1923
-  time: '2025-07-03T02:27:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6808
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed being able to point while unconscious
-    type: Fix
-  id: 1924
-  time: '2025-07-03T09:10:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6859
-- author: Dygon
-  changes:
-  - message: Lurker tackles now convert into a light attack when Crippling Strike
-      is active.
-    type: Fix
-  id: 1925
-  time: '2025-07-03T09:11:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6871
 - author: J C Denton
   changes:
   - message: Fixed Shiva's Snowball north LZ shutter buttons not working.
@@ -4663,5 +4606,71 @@
   id: 2419
   time: '2025-10-06T05:05:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8031
+- author: noctyrnal
+  changes:
+  - message: Fixed the FORECON CO and Riflemen not spawning on Chances Claim.
+    type: Fix
+  id: 2420
+  time: '2025-10-06T07:20:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8058
+- author: Arykh
+  changes:
+  - message: Added Antihallucinogenic, Biocidic, and Hypoxemic chemical properties.
+    type: Add
+  id: 2421
+  time: '2025-10-06T07:22:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8037
+- author: SharkSnake98
+  changes:
+  - message: Added 14 Colonist jobs
+    type: Add
+  - message: Added 3 Variants of the "Catering Technician" job
+    type: Add
+  - message: Added WEYA Coat and rainjacket, as well as a blue-grey administrative
+      uniform
+    type: Add
+  - message: Added the ACS-930 Atmospheric Composition Scanner, an RMC14 version of
+      the gas analyzer.
+    type: Add
+  id: 2422
+  time: '2025-10-06T07:45:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7201
+- author: noctyrnal
+  changes:
+  - message: You can now wear pride pins on your uniform and armor.
+    type: Add
+  - message: Added pride pins to the Rec-Vend.
+    type: Add
+  id: 2423
+  time: '2025-10-06T07:45:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8052
+- author: SharkSnake98
+  changes:
+  - message: Added the WEYA Lobby screen
+    type: Add
+  id: 2424
+  time: '2025-10-06T07:47:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8034
+- author: noctyrnal
+  changes:
+  - message: Lights will now offset into walls.
+    type: Tweak
+  id: 2425
+  time: '2025-10-06T07:49:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6833
+- author: SharkSnake98
+  changes:
+  - message: Added a WeYa Clipboard, WeYa Thermos, and WEYA Windbreaker unlocked in
+      the CL loadout at Executive, Senior Executive, & Executive Specialist respectively.
+      Also added a WEYA beret
+    type: Add
+  - message: Changed the WEYA Pen to use a custom sprite, instead of the normal pen
+      sprite
+    type: Tweak
+  - message: Changed the Dark Weston-Yamada cap's sprite
+    type: Tweak
+  id: 2426
+  time: '2025-10-06T07:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7937
 Name: RMC14
 Order: -1
