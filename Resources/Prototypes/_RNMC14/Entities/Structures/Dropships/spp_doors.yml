@@ -1,6 +1,6 @@
 - type: entity
   parent: CMAlamoDoor
-  id: CMAkademiaDoorAft
+  id: RNMCAkademiaDoorAft
   name: akademia nauk crew hatch
   suffix: Aft
   components:
@@ -39,7 +39,7 @@
 
 - type: entity
   parent: CMAlamoCockpit
-  id: CMAkademiaDoorCockpit
+  id: RNMCAkademiaDoorCockpit
   name: akademia nauk crew hatch
   suffix: Cockpit
   components:
@@ -68,7 +68,7 @@
 
 - type: entity
   parent: CMAkademiaDoorCockpit
-  id: CMAkademiaDoorPort
+  id: RNMCAkademiaDoorPort
   suffix: Port
   components:
   - type: Door
