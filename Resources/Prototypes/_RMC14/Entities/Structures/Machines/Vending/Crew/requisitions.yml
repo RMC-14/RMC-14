@@ -18,11 +18,12 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoGuns
-  name: ColMarTech automated armaments vendor
-  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ASRS automated armaments vendor
+  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Requisitions Technicians.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
@@ -341,11 +342,12 @@
 - type: entity
   parent: ColMarTechCargo
   id: ColMarTechCargoAmmo
-  name: ColMarTech automated munition vendor
-  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ASRS automated munition vendor
+  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Requisitions Technicians.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
@@ -565,10 +567,11 @@
   parent: ColMarTechCargo
   id: ColMarTechCargoAttachments
   name: Aegis Armaments attachments vendor
-  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
+  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Requisitions Technicians.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
@@ -650,8 +653,8 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
-  name: ColMarTech surplus uniform vendor
-  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ASRS surplus uniform vendor
+  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Requisitions Technicians.
   suffix: Requisitions
   components:
   - type: AccessReader

@@ -82,3 +82,58 @@
     blacklist:
       components:
       - Xeno
+
+# Shio Royals
+- type: entity
+  parent: CMTarbackCigar
+  id: RMCShioCigar
+  name: shio royals cigar
+  description: "Shio Royals, produced by Weston-Yamada. It seems to imply waves and the sea, somehow. Rolled in Japan."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/shio_royals.rsi
+    state: unlit-icon
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/shio_royals.rsi
+    heldPrefix: unlit
+
+- type: entity
+  parent: RMCShioCigar
+  id: RMCShioCigarSpent
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+    - Cigar
+    - Trash
+    - Burnt
+
+- type: entity
+  parent: RMCTarbackTube
+  id: RMCShioRoyalsTube
+  name: shio royals tube
+  description: A single Shio Royals cigar in a silver protective metal tube. Despite claims from both Weston-Yamada and rival cigar companies, these cigars are completely middle-of-the-road. Rolled in Japan.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/shio_royals_tube.rsi
+    state: shioroyalstube_empty
+    layers:
+    - state: shioroyalstube_empty
+      map: ["openLayer", "emptyLayer"]
+    - state: shioroyalstube
+      map: ["closedLayer"]
+      visible: false
+  - type: StorageFill
+    contents:
+    - id: RMCShioCigar
+
+

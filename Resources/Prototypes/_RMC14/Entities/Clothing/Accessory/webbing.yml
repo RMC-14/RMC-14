@@ -329,6 +329,17 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCShoulderHolsterMK80
+  suffix: MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchBlack
   name: black drop pouch
@@ -560,6 +571,40 @@
       amount: 3
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFMAR
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 3
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCLFMAR50
+  suffix: Filled
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineMar50LMG
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
+      amount: 5
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFBuckshot
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
   name: M272 pattern knife vest
@@ -660,6 +705,16 @@
 
 - type: entity
   parent: CMWebbingBlack
+  id: RMCWebbingPMCWhiteout
+  suffix: PMC, Whiteout, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeBlastM12
+      amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
   id: RMCWebbingBuckshot
   suffix: Buckshot, Filled
   components:
@@ -677,6 +732,17 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
+      - id: CMMRE # TODO RMC14 TSE ORP ration
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchRoyalTeamlead
+  suffix: Filled, Royal Team Leader
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCHeadRoyalHelmetBallistic
       - id: CMMRE # TODO RMC14 TSE ORP ration
 
 - type: entity

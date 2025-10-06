@@ -231,3 +231,13 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetPMCGearFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetSPPGear
+  suffix: PvE, SPP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPGearFill

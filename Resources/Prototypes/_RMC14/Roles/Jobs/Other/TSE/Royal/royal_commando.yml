@@ -1,0 +1,87 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesCommando
+  name: rmc-job-name-rcm-commando
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalCommando
+  ranks:
+    RMCRankTSEMarine: [ ]
+  startingGear: RMCGearRoyalCommando
+  icon: "RMCJobIconRoyalCommando"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Rifleman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1 # While parity commando has firearms 2, they also have the reworked 3 level
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-commando
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidRoyalMarinesCommando
+  name: royal crown marines ghost role rifleman
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalMarinesCommando
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesCommando
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rcm-commando
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
+    reregister: false
+    job: CMRoyalMarinesCommando
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+  
+- type: startingGear
+  id: RMCGearRoyalCommando
+  equipment:
+    head: RMCHeadRoyalHelmet
+    ears: RMCHeadsetRoyalMarine
+    jumpsuit: RMCJumpsuitMarineRoyalMK80 # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalLightFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: WeaponRifleL83A3
+    id: RMCIDRoyalMarinesCommando
+    belt: RMCL83A3BeltFilled
+    back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack
+    pocket1: RMCPouchGeneralLargeFilledRoyalCommando
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalCommando
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalCommando
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_rifleman

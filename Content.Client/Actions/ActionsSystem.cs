@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Content.Client._RMC14.Movement;
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -47,6 +48,9 @@ namespace Content.Client.Actions
         private readonly List<Entity<ActionComponent>> _added = new();
 
         public static readonly EntProtoId MappingEntityAction = "BaseMappingEntityAction";
+
+        // RMC14
+        [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
         public override void Initialize()
         {
@@ -211,7 +215,7 @@ namespace Content.Client.Actions
             }
             else
             {
-                var request = new RequestPerformActionEvent(GetNetEntity(action));
+                var request = new RequestPerformActionEvent(GetNetEntity(action), _rmcLagCompensation.GetLastRealTick(null));
                 RaisePredictiveEvent(request);
             }
         }
@@ -328,7 +332,7 @@ namespace Content.Client.Actions
                 PerformAction((user, user.Comp), (uid, action));
             }
             else
-                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords)));
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null)));
 
             args.FoundTarget = true;
         }
@@ -368,7 +372,7 @@ namespace Content.Client.Actions
             }
             else
             {
-                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity)));
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity), _rmcLagCompensation.GetLastRealTick(null)));
             }
 
             args.FoundTarget = true;
