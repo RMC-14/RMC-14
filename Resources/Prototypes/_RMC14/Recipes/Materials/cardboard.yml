@@ -1,20 +1,15 @@
-# default
-- type: localizedDataset 
-  id: RMCDefaultCardboardStates
-  values:
-    noRotate: true
-    doAfterTime: 0.2
-    doAfterTimeMin: 0.2
-    materialCost: 1
-    ignoreBuildRestrictions: true
-    restrictedCollisionGroup: null
 
 # donut box
 - type: rmcConstruction
-  parent: RMCDefaultCardboardStates
   id: RMCDonutBoxBuild
   name: donut box
   prototype: RMCBoxDonutEmpty
+  noRotate: true
+  doAfterTime: 0.2
+  doAfterTimeMin: 0.2
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
 
 # pizza boxes
 - type: rmcConstruction
