@@ -556,13 +556,14 @@
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingCLFMAR
+
 - type: entity
   parent: RMCJumpsuitCLFSoldier
   id: RMCJumpsuitCLFWebbingMAR50
   suffix: Webbing, MAR50
   components:
   - type: WebbingClothing
-    startingWebbing: RMCMagazineMar50LMG
+    startingWebbing: RMCWebbingCLFMAR50
 
 - type: entity
   parent: RMCJumpsuitCLFSoldier

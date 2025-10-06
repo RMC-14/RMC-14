@@ -581,6 +581,16 @@
       amount: 3
 
 - type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCLFMAR50
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
+      amount: 5
+
+- type: entity
   parent: CMWebbing
   id: RMCWebbingCLFBuckshot
   suffix: Filled
