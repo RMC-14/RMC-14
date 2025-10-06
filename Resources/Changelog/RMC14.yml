@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed SOs having XO-level access, they now have less doors to open.
-    type: Fix
-  - message: Fixed IOs having Pilot access and Cockpit with Nav. computer having one,
-      both now have Dropship access.
-    type: Fix
-  - message: Fixed Chief Engineer not having Dropship access.
-    type: Tweak
-  id: 1931
-  time: '2025-07-05T04:19:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6670
 - author: Arykh
   changes:
   - message: Fixed autolathe's starting glass being too high.
@@ -4676,5 +4664,12 @@
   id: 2431
   time: '2025-10-06T10:20:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8053
+- author: CatAndHats
+  changes:
+  - message: Correspondents now have the Command, JTAC, and Intel channels as read-only.
+    type: Tweak
+  id: 2432
+  time: '2025-10-06T10:25:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7986
 Name: RMC14
 Order: -1
