@@ -1,0 +1,80 @@
+- type: decal
+  id: RNMCDecalUNMCTiled1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc1
+
+- type: decal
+  id: RNMCDecalUNMCTiled2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc2
+
+- type: decal
+  id: RNMCDecalUNMCTiled3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc3
+
+- type: decal
+  id: RNMCDecalUNMCTiled4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc4
+
+- type: decal
+  id: RNMCDecalUNMCTiled5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc5
+
+- type: decal
+  id: RNMCDecalUNMCTiled6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc6
+
+- type: decal
+  id: RNMCDecalUNMCTiled7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc7
+
+- type: decal
+  id: RNMCDecalUNMCTiled8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc8
+
+- type: decal
+  id: RNMCDecalUNMCTiled9
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RNMC14/Decals/unmc_tiled.rsi
+    state: unmc9
