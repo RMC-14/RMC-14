@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Solaris has received a large update.
-    type: Add
-  - message: Xenonids can no longer inspect calendars.
-    type: Tweak
-  - message: Space cleaner now uses the correct sprite.
-    type: Fix
-  id: 1927
-  time: '2025-07-04T23:18:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6900
-- author: noctyrnal
-  changes:
   - message: Squad Leaders now start with the requisition channel by default.
     type: Add
   id: 1928
@@ -4675,5 +4664,13 @@
   id: 2427
   time: '2025-10-06T08:00:29.048192+00:00'
   url: null
+- author: DoguhanOzgurAkca
+  changes:
+  - message: The starting orbital bombardment warheads can no longer be two of the
+      same type.
+    type: Tweak
+  id: 2428
+  time: '2025-10-06T08:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8042
 Name: RMC14
 Order: -1
