@@ -11950,7 +11950,7 @@ entities:
     - type: Transform
       pos: 2.5,37.5
       parent: 1
-- proto: RMCSpawnerShuttleSPP
+- proto: RNMCSpawnerShuttleSPP
   entities:
   - uid: 1502
     components:

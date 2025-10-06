@@ -143,21 +143,21 @@ entities:
         params:
           volume: -1
         path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
-- proto: CMAkademiaDoorAft
+- proto: RNMCAkademiaDoorAft
   entities:
   - uid: 2
     components:
     - type: Transform
       pos: 0.5,-8.5
       parent: 1
-- proto: CMAkademiaDoorCockpit
+- proto: RNMCAkademiaDoorCockpit
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: 0.5,5.5
       parent: 1
-- proto: CMAkademiaDoorPort
+- proto: RNMCAkademiaDoorPort
   entities:
   - uid: 4
     components:
