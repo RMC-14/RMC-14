@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Praetorian spray acid having a delay before being used.
-    type: Fix
-  id: 1920
-  time: '2025-07-03T02:21:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6885
 - author: Vermidia
   changes:
   - message: Fixed all xeno spit abilities (except praetorian's)'s cooldown being
@@ -4661,5 +4654,12 @@
   id: 2420
   time: '2025-10-06T07:20:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8058
+- author: Arykh
+  changes:
+  - message: Added Antihallucinogenic, Biocidic, and Hypoxemic chemical properties.
+    type: Add
+  id: 2421
+  time: '2025-10-06T07:22:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8037
 Name: RMC14
 Order: -1
