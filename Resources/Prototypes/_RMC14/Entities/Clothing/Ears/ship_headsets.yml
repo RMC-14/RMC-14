@@ -402,7 +402,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeyCorrespondent
 
 - type: entity
   parent: RMCHeadsetShip
