@@ -215,8 +215,12 @@ public sealed class XenoProjectileSystem : EntitySystem
         Angle deviation,
         float speed,
         float? stopAtDistance = null,
-        EntityUid? target = null)
+        EntityUid? target = null,
+        bool predicted = true)
     {
+        if (!predicted && _net.IsClient)
+            return false;
+
         var origin = _transform.GetMapCoordinates(xeno);
         var targetMap = _transform.ToMapCoordinates(targetCoords);
         if (origin.MapId != targetMap.MapId ||
@@ -283,11 +287,14 @@ public sealed class XenoProjectileSystem : EntitySystem
             shooter.Shot.Add(projectile);
             Dirty(xeno, shooter);
 
-            var shot = EnsureComp<XenoProjectileShotComponent>(projectile);
-            shot.Id = shooter.NextId++;
-            shot.Shooter = shooterPlayer;
-            shot.ShooterEnt = xeno;
-            Dirty(projectile, shot);
+            if (predicted)
+            {
+                var shot = EnsureComp<XenoProjectileShotComponent>(projectile);
+                shot.Id = shooter.NextId++;
+                shot.Shooter = shooterPlayer;
+                shot.ShooterEnt = xeno;
+                Dirty(projectile, shot);
+            }
 
             if (_net.IsServer)
                 continue;

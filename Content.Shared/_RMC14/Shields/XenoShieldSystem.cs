@@ -83,7 +83,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
             if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
             {
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
-                
+
                 // Fire hedgehog spikes when shield is hit
                 if (ent.Comp.Shield == ShieldType.Hedgehog && TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) && spikeShield.Active)
                 {
@@ -95,13 +95,14 @@ public sealed partial class XenoShieldSystem : EntitySystem
                         null,
                         9, // 9 spikes like CM13
                         new Angle(2 * Math.PI), // Full circle
-                        15f
+                        15f,
+                        predicted: false
                     );
-                    
+
                     _popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
                 }
             }
-            
+
             args.Damage.ClampMax(0);
         }
 
