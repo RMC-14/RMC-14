@@ -189,6 +189,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -471,6 +472,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -853,6 +855,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Hats
       jobs:
       - CMExecutiveOfficer
@@ -974,6 +977,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
     - name: Books
@@ -981,7 +985,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1119,6 +1125,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
@@ -1171,15 +1178,13 @@
       - id: RMCSynthResetKey
         amount: 15
     # ////////////////////////////////////
-    # Quartermaster
+    # Logistics Officer
     # ////////////////////////////////////
     - name: Standard Equipment
       jobs:
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitQM
-      - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
@@ -1187,15 +1192,12 @@
       - CMQuartermaster
       choices: { CMHands: 1 }
       entries:
-      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapQuartermaster
-        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
@@ -1220,7 +1222,6 @@
       entries:
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
-      - id: CMBootsBlackFilled
     - name: Patches
       jobs:
       - CMQuartermaster
@@ -1563,3 +1564,4 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack

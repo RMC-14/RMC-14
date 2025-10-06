@@ -88,6 +88,12 @@
         amount: 1
       - id: RMCJumpsuitLiaisonGreenWorkwear
         amount: 1
+      - id: RMCJumpsuitLiaisonCargoShorts
+        amount: 1
+      - id: RMCJumpsuitLiaisonLegalUniform
+        amount: 1
+      - id: RMCJumpsuitLiaisonDisco
+        amount: 1
     - name: Coat
       entries:
       - id: RMCJacketCorporateBlack
@@ -99,6 +105,10 @@
       - id: RMCJacketCorporateBlue
         amount: 1
       - id: RMCJacketCorporateFormal
+        amount: 1
+      - id: RMCCorporateLogisticsJacket
+        amount: 1
+      - id: RMCCorporateDutyJacket
         amount: 1
       - id: RMCFancySuitJacketBlack
         amount: 1
@@ -138,6 +148,10 @@
         amount: 1
       - id: RMCCoatBomberBlack
         amount: 1
+      - id: RMCBrownWEYACoat
+        amount: 1
+      - id: RMCWEYARainCoat
+        amount: 1
 #      - id: LiaisonsWinterCoat
 #        amount:
       - id: RMCCoatHoboBrown
@@ -168,14 +182,6 @@
       entries:
       - id: RMCHeadCapWestonYamadaDark
         amount: 1
-      - id: RMCHeadCivilianTanBeret
-        amount: 1
-      - id: RMCHeadCivilianWhiteBeret
-        amount: 1
-      - id: RMCHeadCivilianBlackBeret
-        amount: 1
-      - id: RMCHeadCivilianBrownBeret
-        amount: 1
       - id: RMCHeadFedoraTan
         amount: 1
       - id: RMCHeadFedoraBrown
@@ -186,8 +192,6 @@
         amount: 1
       - id: RMCHeadCowboyHatDark
         amount: 1
-      #  BlackBeret
-      #  WhiteBeret
     - name: Glasses
       entries:
       - id: RMCGlassesMarineRpg #Placeholder

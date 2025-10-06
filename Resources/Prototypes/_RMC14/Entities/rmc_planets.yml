@@ -43,6 +43,7 @@
         CMSurvivorScientist:
         - CMSurvivor: 0
 
+
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -51,6 +52,49 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    nightmareScenarios:
+    - scenarioName: clfmining
+      scenarioProbability: 0.1
+    - scenarioName: crashlanding_offices
+      scenarioProbability: 0.2
+#    survivorJobScenarios:
+#      clfmining:
+#        CMSurvivor:
+#        - : 1
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+#      crashlanding_offices:
+#        CMSurvivor:
+#        - : 1
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+
 
 - type: entity
   id: RMCPlanetShiva
@@ -67,7 +111,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
-    camouflage: Urban
+    camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     survivorJobInserts:
@@ -122,6 +166,42 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+#    survivorJobScenarios:
+#      clf_pods:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
+#    survivorJobScenarios:
+#      spp_bar:
+#        CMSurvivor:
+#        - : -1
+#        CMSurvivorCorporate:
+#        - : 1
+#        - : -1
+#        CMSurvivorDoctor:
+#        - : 1
+#        - : -1
+#        CMSurvivorEngineer:
+#        - : 1
+#        - : -1
+#        CMSurvivorSecurity:
+#        - : 1
+#        - : -1
+#        CMSurvivorScientist:
+#        - : -1
 
 
 - type: entity
@@ -214,7 +294,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
-    camouflage: Urban
+    camouflage: Classic
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     selectRandomSurvivorInsert: false
     survivorJobs:
@@ -319,12 +399,13 @@
 #        CMSurvivorScientist:
 #        - : -1
 
+# PVE Maps Below
 - type: entity
   id: RMCPlanetArcticValley
   name: Arctic Valley
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/arctic_valley.yml
+    map: /Maps/_RMC14/PVE/arctic_valley.yml
     camouflage: Snow
     inRotation: false
 
@@ -333,7 +414,7 @@
   name: CORSAT
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/corsat.yml
+    map: /Maps/_RMC14/PVE/corsat.yml
     camouflage: Classic
     inRotation: false
 
@@ -342,7 +423,7 @@
   name: LV-759 Hybrisa Prospera (Repaired)
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/hybrisa_greenshift.yml
+    map: /Maps/_RMC14/PVE/hybrisa_greenshift.yml
     camouflage: Urban
     inRotation: false
 
@@ -351,6 +432,6 @@
   name: LV-976 - Sorokyne Strata (Repaired)
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/sorokyne_repaired.yml
+    map: /Maps/_RMC14/PVE/sorokyne_repaired.yml
     camouflage: Jungle
     inRotation: false
