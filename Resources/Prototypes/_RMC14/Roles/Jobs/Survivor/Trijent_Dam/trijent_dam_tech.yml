@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentDamTech
   name: cm-job-name-survivor-trijent-dam-tech
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrijentDamTech
   startingGear: RMCGearSurvivorTrijentDamTech
   spawnMenuRoleName: Dam Maintenance Technician (Trijent Survivor)
   special:
@@ -27,6 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTrijentDamTech
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
@@ -47,10 +47,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrijentDamTech
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

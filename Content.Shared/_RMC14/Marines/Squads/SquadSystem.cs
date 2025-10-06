@@ -464,6 +464,7 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        member.AccessibleBackgroundColor = team.Comp.AccessibleColor;
         member.BlacklistedSquadArmor = team.Comp.BlacklistedSquadArmor;
         Dirty(marine, member);
 
@@ -508,6 +509,36 @@ public sealed class SquadSystem : EntitySystem
 
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
+    }
+
+    public void RemoveSquad(EntityUid marine, ProtoId<JobPrototype>? job)
+    {
+        RemComp<SquadLeaderComponent>(marine);
+        if (!TryComp<SquadMemberComponent>(marine, out var member))
+            return;
+
+        var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
+        if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
+        {
+            oldSquad.Members.Remove(marine);
+
+            if (role != null)
+            {
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
+                }
+            }
+        }
+
+        RemComp<SquadMemberComponent>(marine);
+        if (oldSquadId != null && oldSquad != null)
+        {
+            var removeEv = new SquadMemberRemovedEvent((oldSquadId.Value, oldSquad), marine);
+            RaiseLocalEvent(marine, ref removeEv, true);
+        }
     }
 
     public void UpdateSquadTitle(EntityUid marine)
@@ -817,5 +848,19 @@ public sealed class SquadSystem : EntitySystem
         }
 
         _membersToUpdate.Clear();
+    }
+
+    public bool TryGetSquadMemberColor(EntityUid entity, out Color color, bool accessible = false)
+    {
+        color = default;
+
+        if (!TryComp(entity, out SquadMemberComponent? comp))
+            return false;
+
+        color = accessible && comp.AccessibleBackgroundColor != null
+            ? comp.AccessibleBackgroundColor.Value
+            : comp.BackgroundColor;
+
+        return true;
     }
 }

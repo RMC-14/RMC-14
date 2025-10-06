@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoVentCrawler
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
@@ -67,6 +68,11 @@
   - type: Tackle
     min: 4
     max: 5
+  - type: AcidBloodSplash
+    baseGibSplashProbability: 1.0
+    damage:
+      types:
+        Heat: 15
   - type: WhitelistPickup
     whitelist:
       components:
@@ -103,3 +109,5 @@
     prefix: lesser
   - type: FixedIdentity
     name: cm-job-name-xeno-lesser-drone
+  - type: VentCrawler
+    ventCrawlIcon: lesser

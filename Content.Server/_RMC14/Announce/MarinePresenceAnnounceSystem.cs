@@ -37,7 +37,7 @@ namespace Content.Server._RMC14.Announce
             {
                 if (jobPrototype.JoinNotifyCrew)
                 {
-                    _marineAnnounce.AnnounceARES(ares,
+                    _marineAnnounce.AnnounceARESStaging(ares,
                         Loc.GetString("rmc-latejoin-arrival-announcement-special",
                         ("character", fullRankName)),
                         jobPrototype.LatejoinArrivalSound,

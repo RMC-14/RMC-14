@@ -31,10 +31,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
-    public readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
-    public readonly SoundSpecifier AresAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/AI/announce.ogg");
-
     public override void Initialize()
     {
         base.Initialize();
@@ -72,8 +68,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
     private void OnMarineCommunicationsDesignatePrimaryLZMsg(
         Entity<MarineCommunicationsComputerComponent> computer,
-        ref MarineCommunicationsDesignatePrimaryLZMsg args
-        )
+        ref MarineCommunicationsDesignatePrimaryLZMsg args)
     {
         var user = args.Actor;
         if (!TryGetEntity(args.LZ, out var lz))
@@ -102,23 +97,21 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
-    /// <summary>
-    /// Dispatches already wrapped announcement to Marines.
-    /// </summary>
-    /// <param name="message">The content of the announcement.</param>
-    /// <param name="sound">GlobalSound for announcement.</param>
     public override void AnnounceToMarines(
         string message,
-        SoundSpecifier? sound = null
-        )
+        SoundSpecifier? sound = null,
+        Filter? filter = null,
+        bool excludeSurvivors = true)
     {
-        var filter = Filter.Empty()
+        filter ??= Filter.Empty()
             .AddWhereAttachedEntity(e =>
                 HasComp<MarineComponent>(e) ||
                 HasComp<GhostComponent>(e)
             );
 
-        filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+        // TODO RMC14
+        if (excludeSurvivors)
+            filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -127,20 +120,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     public override void AnnounceHighCommand(
         string message,
         string? author = null,
-        SoundSpecifier? sound = null
-        )
+        SoundSpecifier? sound = null)
     {
-        author ??= Loc.GetString("rmc-announcement-author-highcommand");
-        var wrappedMessage = Loc.GetString("rmc-announcement-message", ("author", author), ("message", message));
-
+        var wrappedMessage = FormatHighCommand(author, message);
         AnnounceToMarines(wrappedMessage);
     }
 
     public override void AnnounceRadio(
         EntityUid sender,
         string message,
-        ProtoId<RadioChannelPrototype> channel
-        )
+        ProtoId<RadioChannelPrototype> channel)
     {
         base.AnnounceRadio(sender, message, channel);
 
@@ -148,17 +137,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _radio.SendRadioMessage(sender, message, channel, sender);
     }
 
-    public override void AnnounceARES(
+    public override void AnnounceARESStaging(
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null
-        )
+        LocId? announcement = null)
     {
-        base.AnnounceARES(source, message, sound, announcement);
+        base.AnnounceARESStaging(source, message, sound, announcement);
 
-        announcement ??= "rmc-announcement-ares-message";
-        message = Loc.GetString(announcement, ("message", FormattedMessage.EscapeText(message)));
+        message = FormatARESStaging(announcement, message);
 
         AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
