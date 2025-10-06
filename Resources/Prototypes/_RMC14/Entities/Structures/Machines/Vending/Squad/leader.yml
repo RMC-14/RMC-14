@@ -22,12 +22,10 @@
     - name: Squad Kit (for yourself or your squad)
       choices: { RMCKitBase: 1 }
       entries:
-      - id: RMCKitRifleM4SPR
-        recommended: true
-      - id: RMCKitCM54C
-        recommended: true
       - id: RMCKitEngineering
         recommended: true
+      - id: RMCKitRifleM4SPR
+      - id: RMCKitCM54C
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
