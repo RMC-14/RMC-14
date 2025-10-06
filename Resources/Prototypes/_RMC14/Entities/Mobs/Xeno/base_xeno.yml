@@ -74,7 +74,7 @@
     damage:
       types:
         Heat: 25
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: defibrillator-xeno
     showOnExamine: false
   - type: MovementSpeedModifier
