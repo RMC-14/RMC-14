@@ -130,6 +130,8 @@
         amount: 2
       - id: CMWebbingHolster
         amount: 2
+      - id: RMCWebbingHolsterBlack
+        amount: 2
       - id: CMWebbingKnivesFilled
         amount: 1
       - id: RMCOuterClothingExternalWebbing

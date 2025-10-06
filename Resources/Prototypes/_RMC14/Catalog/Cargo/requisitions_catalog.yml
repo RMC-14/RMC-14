@@ -139,6 +139,8 @@
       - cost: 3000
         crate: RMCCrateClothingWebbingHolster
       - cost: 2000
+        crate: RMCCrateClothingWebbingHolsterBlack
+      - cost: 2000
         crate: RMCCrateClothingDropPouch
       - cost: 3000
         crate: RMCCrateClothingDropPouchBlack
