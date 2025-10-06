@@ -1,0 +1,17 @@
+# calliope desert bus
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RNMCWallRockDesertBus
+  name: rock wall
+  suffix: calliope desert bus
+  description: A rough wall of hardened rock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/cave.rsi
+    color: "#535963"
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/cave.rsi
+    state: cavewall
+  - type: IconSmooth
+    key: walls
+    base: cavewall
