@@ -10,8 +10,6 @@ using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
 using Content.Shared.Popups;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Audio;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
@@ -27,8 +25,6 @@ public sealed class XenoShardSystem : EntitySystem
     [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
     [Dependency] private readonly XenoShieldSystem _xenoShield = default!;
     [Dependency] private readonly INetManager _net = default!;
-
-
 
     public override void Initialize()
     {
@@ -46,7 +42,7 @@ public sealed class XenoShardSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var currentTime = _timing.CurTime;
-        
+
         var query = EntityQueryEnumerator<XenoShardComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -162,7 +158,6 @@ public sealed class XenoShardSystem : EntitySystem
             ent.Comp.ProjectileCount,
             new Angle(Math.PI / 4), // 45 degrees
             20f,
-            fixedDistance: 4.0f, // Exactly 4 tiles
             target: args.Entity
         );
     }
@@ -203,8 +198,7 @@ public sealed class XenoShardSystem : EntitySystem
             null,
             ent.Comp.ProjectileCount,
             new Angle(2 * Math.PI), // Full circle
-            20f,
-            fixedDistance: ent.Comp.ShedRadius
+            20f
         );
 
         // Apply speed boost (remove armor bonus, gain speed)
@@ -265,6 +259,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         args.Handled = true;
     }
+
     private void UpdateHedgehogSprite(Entity<XenoShardComponent> ent)
     {
         // Determine sprite level based on shard count
@@ -294,5 +289,4 @@ public sealed class XenoShardSystem : EntitySystem
         ent.Comp.Active = false;
         Dirty(ent, ent.Comp);
     }
-    
 }

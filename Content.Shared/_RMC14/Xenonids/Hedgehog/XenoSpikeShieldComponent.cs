@@ -4,6 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoShardSystem), typeof(XenoSpikeShieldSystem))]
 public sealed partial class XenoSpikeShieldComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -29,10 +30,10 @@ public sealed partial class XenoSpikeShieldComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Active = false;
-    
+
     [DataField, AutoNetworkedField]
     public TimeSpan LastProcTime = TimeSpan.Zero;
-    
+
     [DataField, AutoNetworkedField]
     public float AccumulatedDamage = 0f;
 }

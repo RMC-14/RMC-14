@@ -214,7 +214,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         int shots,
         Angle deviation,
         float speed,
-        float? fixedDistance = null,
+        float? stopAtDistance = null,
         EntityUid? target = null)
     {
         var origin = _transform.GetMapCoordinates(xeno);
@@ -265,10 +265,10 @@ public sealed class XenoProjectileSystem : EntitySystem
 
             _hive.SetSameHive(xeno, projectile);
 
-            if (fixedDistance != null)
+            if (stopAtDistance != null)
             {
                 var fixedDistanceComp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
-                fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(fixedDistance.Value / speed);
+                fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(stopAtDistance.Value / speed);
                 Dirty(projectile, fixedDistanceComp);
             }
 

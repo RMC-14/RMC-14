@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoShardSystem), typeof(XenoSpikeShieldSystem))]
 public sealed partial class XenoSpikeShedComponent : Component
 {
     [DataField, AutoNetworkedField]

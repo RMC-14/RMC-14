@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoShardSystem))]
 public sealed partial class XenoFireSpikesComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -18,9 +19,6 @@ public sealed partial class XenoFireSpikesComponent : Component
 
     [DataField, AutoNetworkedField]
     public int SpikeCount = 8;
-
-    [DataField, AutoNetworkedField]
-    public float Range = 7f;
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier SpikeDamage = new();
