@@ -5,7 +5,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Anticorrosive : RMCChemicalEffect
 {
