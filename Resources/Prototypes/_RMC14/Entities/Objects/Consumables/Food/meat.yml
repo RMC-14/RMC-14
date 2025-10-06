@@ -28,7 +28,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
-    state: rawfish
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -67,7 +66,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
-    state: grilledfish
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -106,7 +104,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
-    state: fishandchips
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -141,7 +138,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
-    state: fishsushiroll
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
