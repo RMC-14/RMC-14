@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fix some knockback effects knocking you back too far.
-    type: Fix
-  - message: Fix the Defender's Tail sweep, Valkyrie's Dislocate, Warrior's Punch
-      and Oppressor's Tail Seize abilities slamming you into obstacles while they
-      shouldn't.
-    type: Fix
-  id: 1923
-  time: '2025-07-03T02:27:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6808
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed being able to point while unconscious
@@ -4670,5 +4659,12 @@
   id: 2423
   time: '2025-10-06T07:45:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8052
+- author: SharkSnake98
+  changes:
+  - message: Added the WEYA Lobby screen
+    type: Add
+  id: 2424
+  time: '2025-10-06T07:47:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8034
 Name: RMC14
 Order: -1
