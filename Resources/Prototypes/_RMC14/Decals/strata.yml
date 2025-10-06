@@ -181,6 +181,7 @@
 - type: decal
   parent: RMCDecalStrataBase
   id: RMCDecalStrataGrass1
+  sprite:
     sprite: _RMC14/Decals/strata.rsi
     state: grass_outercorner_0
 
