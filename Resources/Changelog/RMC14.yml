@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed Shiva's Snowball north LZ shutter buttons not working.
-    type: Fix
-  - message: Fixed many Shiva's Snowball buckshot spawners using generic ones instead
-      of colony-specific.
-    type: Fix
-  id: 1926
-  time: '2025-07-04T22:59:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6898
 - author: noctyrnal
   changes:
   - message: Solaris has received a large update.
@@ -4672,5 +4662,18 @@
   id: 2426
   time: '2025-10-06T07:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7937
+- author: SharkSnake98
+  changes:
+  - message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
+    type: Add
+  - message: Added cases for a bunch of SPP guns and turrets, as well as ammo boxes
+      for the mainline SPP guns, and the SPP Shotgun rack.
+    type: Add
+  - message: Fixed the SPP Squad Leader using the name and sprite of the PMC Team
+      Lead
+    type: Fix
+  id: 2427
+  time: '2025-10-06T08:00:29.048192+00:00'
+  url: null
 Name: RMC14
 Order: -1

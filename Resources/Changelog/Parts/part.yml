@@ -1,8 +1,0 @@
-author: SharkSnake98
-changes:
-  - type: Add
-    message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
-  - type: Add
-    message: Added cases for a bunch of SPP guns and turrets, as well as ammo boxes for the mainline SPP guns, and the SPP Shotgun rack.
-  - type: Fix
-    message: Fixed the SPP Squad Leader using the name and sprite of the PMC Team Lead
