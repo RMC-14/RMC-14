@@ -19,6 +19,7 @@ rmc-ui-emote-binding-xeno-emote7 = Xenonid Emote 7
 rmc-ui-emote-binding-xeno-emote8 = Xenonid Emote 8
 
 rmc-ui-options-tab-emote-bindings = Emote Bindings
-rmc-ui-emote-binding-explain = Select the Emote (above) to use when pressing the respective key set in the Controls tab.
+rmc-ui-emote-binding-footer = Select the Emote (above) to use when pressing the respective key set in the Controls tab.
+rmc-ui-emote-binding-humanoid-explain = Any emotes with an asterisk (*) are limited to certain Humanoid species.
 rmc-ui-emote-binding-reset-all = Reset All
 rmc-ui-emote-binding-none = None

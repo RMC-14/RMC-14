@@ -17,6 +17,7 @@
                    FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                    StyleClasses="LabelKeyText" />
                 <cc:HSeparator Margin="0 5" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-explain'}" StyleClasses="LabelSubText" />
                 <ui:OptionDropDown Name="DropDownHumanoidEmote1" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
                 <ui:OptionDropDown Name="DropDownHumanoidEmote2" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
                 <ui:OptionDropDown Name="DropDownHumanoidEmote3" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
@@ -42,9 +43,9 @@
             </BoxContainer>
         </ScrollContainer>
         <ctrls:StripeBack HasBottomEdge="False" HasMargins="False">
-            <BoxContainer Orientation="Horizontal" Margin="8 8">
-                <Control MinSize="8 0" />
-                <Label Text="{Loc 'rmc-ui-emote-binding-explain'}" StyleClasses="LabelSubText" />
+            <BoxContainer Orientation="Horizontal" Margin="4 4">
+                <Control MinSize="4 0" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-footer'}" StyleClasses="LabelSubText" />
                 <Button Name="ResetAllButton"
                         Text="{Loc 'rmc-ui-emote-binding-reset-all'}"
                         HorizontalExpand="True"
