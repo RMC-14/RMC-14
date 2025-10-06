@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed all xeno spit abilities (except praetorian's)'s cooldown being
-      0.5 seconds too short.
-    type: Fix
-  id: 1921
-  time: '2025-07-03T02:22:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6876
-- author: Dygon
-  changes:
-  - message: Green fire now reduces the armor of fortified defenders and the queen.
-    type: Fix
-  id: 1922
-  time: '2025-07-03T02:26:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6841
 - author: Dygon
   changes:
   - message: Fix some knockback effects knocking you back too far.
@@ -4661,5 +4646,29 @@
   id: 2421
   time: '2025-10-06T07:22:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8037
+- author: SharkSnake98
+  changes:
+  - message: Added 14 Colonist jobs
+    type: Add
+  - message: Added 3 Variants of the "Catering Technician" job
+    type: Add
+  - message: Added WEYA Coat and rainjacket, as well as a blue-grey administrative
+      uniform
+    type: Add
+  - message: Added the ACS-930 Atmospheric Composition Scanner, an RMC14 version of
+      the gas analyzer.
+    type: Add
+  id: 2422
+  time: '2025-10-06T07:45:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7201
+- author: noctyrnal
+  changes:
+  - message: You can now wear pride pins on your uniform and armor.
+    type: Add
+  - message: Added pride pins to the Rec-Vend.
+    type: Add
+  id: 2423
+  time: '2025-10-06T07:45:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8052
 Name: RMC14
 Order: -1
