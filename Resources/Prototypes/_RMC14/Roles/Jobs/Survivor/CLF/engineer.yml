@@ -1,0 +1,77 @@
+- type: job
+  parent: RMCSurvivorCLFBase
+  id: RMCSurvivorCLFEngineer
+  name: rmc-job-name-clf-survivor-engineer
+  icon: RMCJobIconCLFEngineer
+  startingGear: RMCGearSurvivorCLFEngineer
+  spawnMenuRoleName: CLF Engineer (Survivor)
+  antagRole: RMCHostileSurvivor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-survivor-engineer
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCLF
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorCLFEngineer
+  equipment:
+    head: RMCHelmetWelding
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressCLF
+  #  eyes: RMCMesonGoggles TODO RMC14
+    jumpsuit: RMCJumpsuitCLFWebbing
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsInsulated
+    shoes: RMCShoesCombat
+    id: RMCIDCardCLFEngineer
+    belt: CMBeltUtilityFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - CMSheetMetal50
+    - CMSheetPlasteel30
+    - RMCExplosivePlastic
+    - RMCGrenadeMolotov
+    - CMMRE
+    - RMCFlashlight
+
+
+- type: entity
+  id: RMCSurvivorPresetCLFEngineer
+  name: clf no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    - # Engineer has fixed equipment but random weapon
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivorCLFEngineer
+  name: clf engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorCLFEngineer
+  - type: Sprite
+    state: clf_spawn
