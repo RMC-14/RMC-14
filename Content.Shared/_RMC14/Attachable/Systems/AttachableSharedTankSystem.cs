@@ -44,17 +44,8 @@ public sealed class AttachableSharedTankSystem : EntitySystem
     {
         if(!TryComp(nozzle.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
-        //if(!TryComp(nozzle.Comp.Holder, out ItemSlotsComponent? guh))
-        //    return;
-        //var tankEntity = guh.Slots["gun_magazine"].Item;
-        //return;
-        //if (! (tankEntity != null))
-        //    return;
-        //args.Ammo.Add((ent, fuelTank));
-        Entity<RMCFlamerAmmoProviderComponent> wrapper = (nozzle.Comp.Holder, fuelTank);
 
-        //(EntityUid lhs, RMCFlamerAmmoProviderComponent rhs) tuple = (tankEntity.Value, fuelTank);
-        //Entity<RMCFlamerAmmoProviderComponent> wrapper = tuple;
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (nozzle.Comp.Holder, fuelTank);
         if (!_flamer.TryGetTankSolution(wrapper, out var solutionEnt)) // Flipped TryGetTankSolution from private to public fn
             return;
         var volume = solutionEnt.Value.Comp.Solution.Volume;
@@ -68,9 +59,6 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         solutionEnt.Value.Comp.Solution.RemoveSolution(nozzle.Comp.CostPer);
         _solution.UpdateChemicals(solutionEnt.Value);
 
-
-        //if (!TryComp(nozzle, out BallisticAmmoProviderComponent? nozzelGel))
-        //    return;
         EntProtoId fireKind = "";
         switch (reagent){
             case "RMCNapalmUT":
@@ -91,26 +79,13 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         var ball = Spawn(fireKind, fromCoordinates);
         var ballComp = EnsureComp<AmmoComponent>(ball);
 
-
-        //Dirty(ball, ballComp);
         _gun.Shoot(nozzle, gun, ball, fromCoordinates, toCoordinates, out var userImpulse, user, false); // I don't want to reimpl projectile stuffs
     }
     private void OnTakeAmmo(Entity<RMCAttachableSharedTankComponent> ent, ref TakeAmmoEvent args)
     {
         if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
-        //if(!TryComp(ent.Comp.Holder, out ItemSlotsComponent? guh))
-        //    return;
-        //var tankEntity = guh.Slots["gun_magazine"].Item;
-        //return;
-        //if (! (tankEntity != null))
-        //    return;
         args.Ammo.Add((ent, ent.Comp));
-        //(EntityUid lhs, RMCFlamerAmmoProviderComponent rhs) tuple = (tankEntity.Value, fuelTank);
-        //Entity<RMCFlamerAmmoProviderComponent> wrapper = tuple;
-        //if (!_flamer.TryGetTankSolution(wrapper, out var solutionEnt)) // Flipped TryGetTankSolution from private to public fn
-        //    return;
-        args.Shots = 1;
     }
 
     private void InitTankShare(Entity<RMCAttachableSharedTankComponent> ent, ref AttachableAlteredEvent args)
