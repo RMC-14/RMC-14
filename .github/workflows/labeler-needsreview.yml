@@ -53,16 +53,16 @@ jobs:
       id: membership
       with:
         username: ${{ matrix.user }}
-        team: process.env.TARGET_TEAM
+        team: env.TARGET_TEAM
         GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
 
     - name: Mark if changes requested by team
       if: steps.membership.outputs.isTeamMember == 'true'
-      run: echo "changes_by_team=true" >> $GITHUB_ENV
+      run: echo "changes_by_team=true" >> $GITHUB_OUTPUT
 
   add_label:
     needs: check_changes_requested
-    if: env.changes_by_team == 'false'
+    if: needs.check_changes_requested.outputs.changes_by_team == 'false'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
