@@ -62,7 +62,7 @@ jobs:
 
   add_label_approved:
     needs: check_approved
-    if: env.approved_by_team == 'true'
+    if: process.env.approved_by_team == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -95,7 +95,7 @@ jobs:
 
   add_label_changes:
     needs: check_changes_requested
-    if: env.changes_by_team == 'true'
+    if: process.env.changes_by_team == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
