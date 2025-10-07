@@ -51,6 +51,42 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Attachable;
+
+using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
+using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Interaction;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Fluids;
+using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Shared.Temperature;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -93,6 +129,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
+    [Dependency] private readonly AttachableSharedTankSystem _sharedTank = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -718,6 +755,10 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                    break;
+                case RMCAttachableSharedTankComponent flamer:
+                    if (ent != null)
+                        _sharedTank.ShootNozzle((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
                 case RMCFlamerAmmoProviderComponent flamer:
                     if (ent != null)

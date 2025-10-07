@@ -286,14 +286,76 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: CMAttachmentXMVESG1FlamerNozzle
+  id: RMCAttachmentXMVESG1FlamerNozzle
   name: XM-VESG-1 flamer nozzle
   description: A special nozzle designed to alter flamethrowers to be used in a more offense orientated manner. As the inside of the nozzle is coated in a special gel and resin substance that takes the fuel that passes through and hardens it. Upon exiting the barrel, a cluster of burning gel is projected instead of a stream of burning naphtha.
   components:
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentFlamerNozzle
+    - RMCAttachmentXMVESG1FlamerNozzle
   - type: Sprite
     state: flamer_nozzle
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-xm-vesg-1-flamer-nozzle
+  - type: RMCAttachableSharedTank #Draw fuel from the main gun tank
+  - type: Item
+    size: Normal
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    projectileSpeed: 20.0
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      params:
+        volume: -2
+    actionName: Switch to the VESG nozzle.
+    actionDesc: Switch to using the VESG nozzle.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamer_nozzle_a
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamer_nozzle_a_1
+  - type: AttachableVisuals
+    offset: -0.125, 0.245
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+
+- type: entity
+  parent: RMCBulletSentryFireProjectile
+  id: RMCBulletFireVesgGreen
+  name: flaming ball
+  description: Huh? You shouldn't be able to see this...
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCTileFireGreen
+
+- type: entity
+  parent: RMCBulletSentryFireProjectile
+  id: RMCBulletFireVesgBlue
+  name: flaming ball
+  description: Huh? You shouldn't be able to see this...
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCTileFireBlue
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -813,3 +875,15 @@
 
 - type: Tag
   id: RMCAttachmentExtinguisher
+
+- type: Tag
+  id: RMCAttachmentFlamerNozzle
+
+- type: Tag
+  id: RMCAttachmentXMVESG1FlamerNozzle
+
+- type: Tag
+  id: RMCBulletFireVesgBlue
+
+- type: Tag
+  id: RMCBulletFireVesgGreen

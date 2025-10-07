@@ -622,8 +622,8 @@
         amount: 10
       - id: RMCAttachmentMiniFlamethrower
         amount: 5
-      #- id: RMCAttachmentXMVESG1FlamerNozzle
-      #  amount: 5
+      - id: RMCAttachmentXMVESG1FlamerNozzle
+        amount: 5
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 5
       - id: RMCAttachmentUnderbarrelExtinguisher
