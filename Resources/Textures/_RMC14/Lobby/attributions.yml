@@ -1,7 +1,12 @@
 - files: ["PyrotechnicianXeno.png"]
-  license: "CC-BY-SA-3.0"
+  license: "CC-BY-SA-4.0"
   copyright: "Cleansing Fire by JirroZ https://www.instagram.com/jirroreal/, modified by DrSmugleaf"
   source: "https://www.instagram.com/p/C1ooB5lgU5n/?img_index=1"
+
+- files: ["Judgement_Day.png"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Judgment Day by JirroZ https://www.instagram.com/jirroreal/"
+  source: "https://www.instagram.com/jirroreal/"
 
 - files: ["from_fobbiton_with_love.png"]
   license: "CC-BY-SA-4.0"
@@ -62,7 +67,6 @@
   license: "CC-BY-NC-4.0"
   copyright: "Made by Monotheonist (Bluesky, Newgrounds, Discord)"
   source: "https://www.newgrounds.com/art/view/monotheonist/a-push-too-far"
-
 
 - files: ["WEYALobby.png"]
   license: "CC-BY-4.0"

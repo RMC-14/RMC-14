@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -35,5 +36,14 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public TimeSpan LastProcTime = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
-    public float AccumulatedDamage = 0f;
+    public float AccumulatedDamage;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Projectile = "XenoHedgehogShieldSpikeProjectile";
+
+    [DataField, AutoNetworkedField]
+    public int ProjectileCount = 9;
+
+    [DataField, AutoNetworkedField]
+    public int? ProjectileHitLimit = 6;
 }

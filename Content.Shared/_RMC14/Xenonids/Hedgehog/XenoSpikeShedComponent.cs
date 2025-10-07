@@ -37,4 +37,7 @@ public sealed partial class XenoSpikeShedComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 40;
+
+    [DataField, AutoNetworkedField]
+    public int? ProjectileHitLimit = 6;
 }

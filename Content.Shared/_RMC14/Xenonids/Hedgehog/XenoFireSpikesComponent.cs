@@ -34,4 +34,7 @@ public sealed partial class XenoFireSpikesComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 8;
+
+    [DataField, AutoNetworkedField]
+    public int? ProjectileHitLimit = 6;
 }

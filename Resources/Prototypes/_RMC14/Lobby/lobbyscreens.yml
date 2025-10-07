@@ -70,3 +70,7 @@
 - type: lobbyBackground
   id: WEYALobby
   background: /Textures/_RMC14/Lobby/WEYALobby.png
+
+- type: lobbyBackground
+  id: JudgmentDay
+  background: /Textures/_RMC14/Lobby/Judgment_Day.png
