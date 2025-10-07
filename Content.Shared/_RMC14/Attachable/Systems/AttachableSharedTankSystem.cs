@@ -109,24 +109,16 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void GetAmmoCount(Entity<RMCAttachableSharedTankComponent> ent, ref GetAmmoCountEvent args)
     {
-        args.Count = 100;
-        args.Capacity = 100;
-        /*if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
+        //args.Count = 100;
+        //args.Capacity = 100;
+        if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
-        if(!TryComp(ent.Comp.Holder, out ItemSlotsComponent? guh))
-            return;
-        var tankEntity = guh.Slots["gun_magazine"].Item;
-        //return;
-        if (! (tankEntity != null))
-            return;
-        //args.Ammo.Add((ent, fuelTank));
-        (EntityUid lhs, RMCFlamerAmmoProviderComponent rhs) tuple = (tankEntity.Value, fuelTank);
-        Entity<RMCFlamerAmmoProviderComponent> wrapper = tuple;
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (ent.Comp.Holder, fuelTank);
         if (!_flamer.TryGetTankSolution(wrapper, out var solutionEnt)) // Flipped TryGetTankSolution from private to public fn
             return;
         var solution = solutionEnt.Value.Comp.Solution;
         args.Count = solution.Volume.Int();
-        args.Capacity = solution.MaxVolume.Int();*/
+        args.Capacity = solution.MaxVolume.Int();
         return;
     } 
 
