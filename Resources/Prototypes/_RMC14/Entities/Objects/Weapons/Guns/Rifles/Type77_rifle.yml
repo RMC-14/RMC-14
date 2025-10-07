@@ -5,14 +5,14 @@
   description: The SPP equivalent to the M54C Rifle, the Type 77 is a cheap and reliable substitute. As such, the weapon often winds up in the hands of mercenaries and insurgents. While not as accurate as the M54, the Type 77 is sturdier than the UNMC weapon. An Type 77 still works after being thrown off a cliff and left underwater for a month.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/Type77.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/Type77.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -162,7 +162,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Type77.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -188,7 +188,7 @@
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Type77.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -215,7 +215,7 @@
       - RMCCartridgeRifle10x24mmIncendiary
     proto: RMCCartridgeRifle10x24mmIncendiary
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Type77.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -242,7 +242,7 @@
       - RMCCartridgeRifle10x24mmHEAP
     proto: RMCCartridgeRifle10x24mmHEAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ak4047.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Type77.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
