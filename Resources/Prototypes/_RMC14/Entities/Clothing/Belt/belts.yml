@@ -1828,7 +1828,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleType77
       amount: 2
 
 - type: Tag

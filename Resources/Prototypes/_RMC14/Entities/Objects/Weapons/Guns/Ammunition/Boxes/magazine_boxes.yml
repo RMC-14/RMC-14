@@ -884,12 +884,12 @@
 
 - type: entity
   parent: RMCBoxMagazineRifleBase
-  id: RMCBoxMagazineRifleAK4047Empty
-  name: magazine box (AK-4047 x 10)
+  id: RMCBoxMagazineRifleType77Empty
+  name: magazine box (Type 77 x 10)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleAK4047Empty
+    node: RMCBoxMagazineRifleType77Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -914,15 +914,15 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazineRifleAK4047
+        - RMCMagazineRifleType77
 
 - type: entity
-  parent: RMCBoxMagazineRifleAK4047Empty
-  id: RMCBoxMagazineRifleAK4047
+  parent: RMCBoxMagazineRifleType77Empty
+  id: RMCBoxMagazineRifleType77
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazineRifleAK4047
+    startingItem: RMCMagazineRifleType77
     count: 10
 
 # SSG45

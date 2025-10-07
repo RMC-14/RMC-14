@@ -494,8 +494,8 @@
         amount: 1
         doAfter: 0.25
 
-    # AK4047
-    - to: RMCBoxMagazineRifleAK4047Empty
+    # Type77
+    - to: RMCBoxMagazineRifleType77Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -736,9 +736,9 @@
   - node: RMCBoxMagazineRifleSSG45APEmpty
     entity: RMCBoxMagazineRifleSSG45APEmpty
 
-  #AK4047
-  - node: RMCBoxMagazineRifleAK4047Empty
-    entity: RMCBoxMagazineRifleAK4047Empty
+  #Type77
+  - node: RMCBoxMagazineRifleType77Empty
+    entity: RMCBoxMagazineRifleType77Empty
 
   # M63
   - node: RMCBoxMagazineSMGM63Empty

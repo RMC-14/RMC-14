@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  name: AK-4047 assault rifle
-  id: RMCWeaponRifleAK4047
-  description: The SPP equivalent to the M54C Rifle, the AK-4047 is a cheap and reliable substitute. As such, the weapon often winds up in the hands of mercenaries and insurgents. While not as accurate as the M54, the AK-4047 is sturdier than the UNMC weapon. An AK-4047 still works after being thrown off a cliff and left underwater for a month.
+  name: Type 77 assault rifle
+  id: RMCWeaponRifleType77
+  description: The SPP equivalent to the M54C Rifle, the Type 77 is a cheap and reliable substitute. As such, the weapon often winds up in the hands of mercenaries and insurgents. While not as accurate as the M54, the Type 77 is sturdier than the UNMC weapon. An Type 77 still works after being thrown off a cliff and left underwater for a month.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ak4047.rsi
@@ -24,7 +24,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: RMCAK4047Shoot
+      collection: RMCType77Shoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -42,16 +42,16 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleAK4047
+        startingItem: RMCMagazineRifleType77
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleAK4047
-          - RMCMagazineRifleAK4047AP
-          - RMCMagazineRifleAK4047Incendiary
-          - RMCMagazineRifleAK4047HEAP
+          - RMCMagazineRifleType77
+          - RMCMagazineRifleType77AP
+          - RMCMagazineRifleType77Incendiary
+          - RMCMagazineRifleType77HEAP
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -73,10 +73,10 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentAK4047StockCollapsible
+        startingAttachable: RMCAttachmentType77StockCollapsible
         whitelist:
           tags:
-          - RMCAttachmentAK4047StockCollapsible
+          - RMCAttachmentType77StockCollapsible
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -98,11 +98,11 @@
       rmc-aslot-underbarrel: 0.3, -0.283
   - type: Tag
     tags:
-    - RMCWeaponRifleAK4047
+    - RMCWeaponRifleType77
 
 - type: entity
-  parent: RMCWeaponRifleAK4047
-  id: RMCWeaponRifleAK4047Tactical
+  parent: RMCWeaponRifleType77
+  id: RMCWeaponRifleType77Tactical
   suffix: Tactical
   components:
   - type: AttachableHolder
@@ -126,10 +126,10 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentAK4047StockCollapsible
+        startingAttachable: RMCAttachmentType77StockCollapsible
         whitelist:
           tags:
-          - RMCAttachmentAK4047StockCollapsible
+          - RMCAttachmentType77StockCollapsible
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentVerticalGrip
         whitelist:
@@ -147,13 +147,13 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleAK4047
-  name: "AK4047 magazine (10x24mm)"
+  id: RMCMagazineRifleType77
+  name: "Type77 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleType77
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -173,15 +173,15 @@
     bulletType: RMCBoxBulletsRifle
 
 - type: entity
-  parent: RMCMagazineRifleAK4047
-  id: RMCMagazineRifleAK4047AP
-  name: "AK4047 AP magazine (10x24mm)"
+  parent: RMCMagazineRifleType77
+  id: RMCMagazineRifleType77AP
+  name: "Type77 AP magazine (10x24mm)"
   suffix: AP
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleAK4047AP
+    - RMCMagazineRifleType77AP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -200,15 +200,15 @@
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
-  parent: RMCMagazineRifleAK4047
-  id: RMCMagazineRifleAK4047Incendiary
-  name: "AK4047 Incendiary magazine (10x24mm)"
+  parent: RMCMagazineRifleType77
+  id: RMCMagazineRifleType77Incendiary
+  name: "Type77 Incendiary magazine (10x24mm)"
   suffix: Incendiary
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleAK4047Incendiary
+    - RMCMagazineRifleType77Incendiary
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -227,15 +227,15 @@
 #    bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
-  parent: RMCMagazineRifleAK4047
-  id: RMCMagazineRifleAK4047HEAP
-  name: "AK4047 HEAP magazine (10x24mm)"
+  parent: RMCMagazineRifleType77
+  id: RMCMagazineRifleType77HEAP
+  name: "Type77 HEAP magazine (10x24mm)"
   suffix: HEAP
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleAK4047HEAP
+    - RMCMagazineRifleType77HEAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -254,16 +254,16 @@
 #    bulletType: RMCBoxBulletsRifleAP
 
 - type: Tag
-  id: RMCWeaponRifleAK4047
+  id: RMCWeaponRifleType77
 
 - type: Tag
-  id: RMCMagazineRifleAK4047
+  id: RMCMagazineRifleType77
 
 - type: Tag
-  id: RMCMagazineRifleAK4047AP
+  id: RMCMagazineRifleType77AP
 
 - type: Tag
-  id: RMCMagazineRifleAK4047Incendiary
+  id: RMCMagazineRifleType77Incendiary
 
 - type: Tag
-  id: RMCMagazineRifleAK4047HEAP
+  id: RMCMagazineRifleType77HEAP
