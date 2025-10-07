@@ -28,5 +28,5 @@ public sealed partial class RMCAttachableSharedTankComponent : Component, IShoot
     public bool Enabled; // This should be the same value of the flamer's Igniter
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 CostPer = FixedPoint2.New(1);
+    public FixedPoint2 CostPer = FixedPoint2.New(3);
 }
