@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.Kitchen;
 
 namespace Content.Client.Guidebook.Controls;
 

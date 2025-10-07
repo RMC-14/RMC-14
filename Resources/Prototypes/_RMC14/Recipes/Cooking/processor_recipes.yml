@@ -1,6 +1,0 @@
-- type: ProcessorRecipe
-  id: RecipeMeatball
-  name: meatball recipe
-  result: FoodMeatMeatball
-  solids:
-    FoodMeatCutlet: 1

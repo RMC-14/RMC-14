@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Kitchen;
 using Content.Shared.Kitchen;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
