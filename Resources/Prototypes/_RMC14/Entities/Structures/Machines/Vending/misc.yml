@@ -17,55 +17,55 @@
     - name: Primary firearms
       entries:
       - id: WeaponRifleM4SPR
-        amount: 2
+        amount: 5
       - id: WeaponShotgunM42A2
-        amount: 3
+        amount: 5
       - id: WeaponSMGM63
-        amount: 3
+        amount: 5
       - id: RMCWeaponRifleM54C
-        amount: 4
+        amount: 5
     - name: Primary ammunition
       entries:
       - id: RMCBoxShotgunFlechette
-        amount: 0
+        amount: 4
       - id: RMCBoxShotgunBuckshot
-        amount: 0
+        amount: 10
       - id: RMCBoxShotgunSlugs
-        amount: 0
+        amount: 10
       - id: CMMagazineRifleM4SPR
-        amount: 0
+        amount: 15
       - id: CMMagazineSMGM63
-        amount: 0
+        amount: 20
       - id: CMMagazineRifleM54C
-        amount: 0
+        amount: 20
     - name: Sidearms
       entries:
       - id: RMCWeaponPistolM77Empty
-        amount: 2
+        amount: 4
       - id: RMCWeaponRevolverM44Empty
-        amount: 2
+        amount: 4
       - id: CMWeaponPistolM1984Empty
-        amount: 3
+        amount: 4
     - name: Sidearm ammunition
       entries:
       - id: CMMagazinePistolM77AP
-        amount: 0
+        amount: 15
       - id: RMCSpeedLoaderM44
-        amount: 0
+        amount: 10
       - id: CMMagazinePistolM1984
-        amount: 0
+        amount: 15
       - id: RMCMagazinePistolM13
-        amount: 0
+        amount: 15
     - name: Explosives
       entries:
       - id: CMGrenadeFragOld
-        amount: 0
-      - id: CMGrenadeHighExplosive
-        amount: 0
-      - id: RMCGrenadeIncendiary
-        amount: 0
-      - id: CMGrenadeSmoke
         amount: 1
+      - id: CMGrenadeHighExplosive
+        amount: 2
+      - id: RMCGrenadeIncendiary
+        amount: 2
+      - id: CMGrenadeSmoke
+        amount: 3
       - id: RMC40MMGrenadeM74AGMF
         amount: 0
       - id: RMC40MMGrenadeM74AGMI
@@ -105,17 +105,17 @@
     - name: Armor
       entries:
       - id: ArmorHelmetM10
-        amount: 0
+        amount: 3
       - id: RMCArmorM3MediumCarrier
-        amount: 0
+        amount: 3
     - name: Miscellaneous
       entries:
       - id: RMCBoxMRE
         amount: 2
       - id: RMCBoxPackFlare
-        amount: 2
+        amount: 5
       - id: CMEntrenchingTool
-        amount: 2
+        amount: 3
       - id: RMCM5Bayonet
         amount: 5
       - id: RMCPackFlareCAS
