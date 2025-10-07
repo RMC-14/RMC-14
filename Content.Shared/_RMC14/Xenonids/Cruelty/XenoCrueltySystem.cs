@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Cruelty;
 public sealed partial class XenoCrueltySystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()

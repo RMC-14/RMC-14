@@ -105,5 +105,31 @@
     # TODO RMC: tramadol pills
     # TODO RMC: splint nano
     - id: CMHealthAnalyzer
-    # TODO RMC: imidazoline pills
+    - id: RMCPillCanisterImidazoline # you're welcome, whoever was here last. fly high, mercenary
     # TODO RMC: alkysine pills
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterTramadol
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterPeridaxon
+    - id: CMPillCanisterDexalin
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMUpgradedTraumaKit10
+      amount: 3
+    - id: CMUpgradedBurnKit10
+      amount: 3
+    # - id: RMCSplint
+    - id: CMDexalinPlusAutoInjector
+    - id: CMHealthAnalyzer

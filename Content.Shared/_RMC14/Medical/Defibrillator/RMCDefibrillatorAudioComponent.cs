@@ -3,7 +3,7 @@
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMDefibrillatorSystem))]
+[Access(typeof(RMCDefibrillatorSystem))]
 public sealed partial class RMCDefibrillatorAudioComponent : Component
 {
     [DataField, AutoNetworkedField]

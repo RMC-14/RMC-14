@@ -14,3 +14,17 @@
     clearEntities: true
     clearDecals: true
     replaceAreas: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertShivaPanicRoomHold
+  name: Panic Room Hold # No needed survivor variants
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/panic_room_hold.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false

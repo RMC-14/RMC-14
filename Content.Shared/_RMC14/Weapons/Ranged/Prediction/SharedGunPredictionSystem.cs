@@ -20,7 +20,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCGunPrediction, v => GunPrediction = v, true);
     }
 
-    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, List<int>? predictedPointBlanks, ICommonSession session)
+    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session)
     {
         var user = session.AttachedEntity;
 
@@ -38,6 +38,6 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.ShootCoordinates = GetCoordinates(coordinates);
         gun.Target = GetEntity(target);
 #pragma warning restore RA0002
-        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, predictedPointBlanks, session);
+        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session);
     }
 }

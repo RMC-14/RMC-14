@@ -1,0 +1,172 @@
+<Document>
+  <Box>
+    [color=goldenrod][head=2]MILITARY POLICE GUIDEBOOK[/head][/color]
+  </Box>
+  <Box>
+    [color=white]✧✧✦✧✧[/color]
+  </Box>
+  <Box>
+    [bolditalic][head=2]As Written by The Provost Marshall Office Police Academy  [/bolditalic]
+  </Box>
+  <Box>
+    [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+  </Box>
+
+  ## What do Military Police do?
+
+
+  Military police are the role that is entrusted in-game to enforce [textlink="Mlaw (Marine law)" link="RMCMarineLaw"] and [textlink="SOP (Standard Operating Procedure)" link="RMCMarineSOP"]. This is typically done with the intent of enforcing server rules and roleplay standards in a way that can be immersive in character. [bold]The goal of being a MP is not to brig as many marines as you can.[/bold] That is frowned upon. The goal of [color=#ff000d][bold]MP[/bold][/color]s is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookLawMarine"/>
+    <GuideEntityEmbed Entity="RMCGuidebookSOP"/>
+  </Box>
+
+  ## The various members of the Military Police on the Almayer
+
+
+  <Box Orientation="Vertical">
+    [bold]Chief of Military Police[/bold]
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCMP" Caption=""/>
+  </Box>
+  <Box>
+    [color=#8B0000][bold]The Chief of Military Police[/bold][/color], referred to as the [color=#8B0000][bold]Chief MP[/bold][/color] is the head of the Military police aboard the UNS Almayer. They are the second highest authority on the ship regarding [textlink="Marine Law" link="RMCMarineLaw"], second only to a whitelisted [color=#00CBFE][bold]Commanding Officer[/bold][/color]. They are tasked with ensuring that Marine law and [textlink="SOP" link="RMCMarineSOP"] are enforced correctly, and that [color=#ff000d][bold]MP[/bold][/color]s are doing their jobs well. The [color=#8B0000][bold]Chief MP[/bold][/color] is typically a more experienced [color=#ff000d][bold]MP[/bold][/color] so they can help answer questions and concerns. [color=#8B0000][bold]The Chief of Military Police[/bold][/color] can rank from Second Lieutenant (O1), up to First Lieutenant (O2)
+  </Box>
+
+
+  <Box Orientation="Vertical">
+    [bold]Military Warden[/bold]
+    <GuideEntityEmbed Entity="RMCGuidebookRoleMW" Caption=""/>
+  </Box>
+  <Box>
+    [bold]The Military Warden,[/bold] referred to as the [bold]Warden[/bold] is the person responsible for managing the brig, sentencing prisoners, and doing most of the paperwork. They do the bookkeeping and desk work that keeps the brig functioning smoothly. Military [bold]Warden[/bold]'s can rank from Sergeant (E5), up to Gunnery Sergeant (E7)
+  </Box>
+
+
+  <Box Orientation="Vertical">
+    [bold]Military Police[/bold]
+    <GuideEntityEmbed Entity="RMCGuidebookRoleMP" Caption=""/>
+  </Box>
+  <Box>
+    [bold]The Military Police[/bold], or [color=#ff000d][bold]MP[/bold][/color]s, are the majority of the department and do all the legal work. This includes arrests, searches, patrols, and anything else you are required to do. [bold]Listen to the [bold]Warden[/bold] and [color=#8B0000][bold]Chief MP[/bold][/color].[/bold] Standard members of the military police can rank from Corporal (E4), up to Staff Sergeant (E6)
+  </Box>
+
+
+  ## Who do MPs answer to? It's Provost!
+  <Box Orientation="Vertical">
+    [bold]Provost Marshal[/bold]
+    <GuideEntityEmbed Entity="RMCGuidebookRolePvM" Caption=""/>
+  </Box>
+  [color=#ffa500][bold]Provost Marshal Office,[/bold][/color] often shortened to just "Provost", is the organization that ensures the law is interpreted correctly and writes the law itself. [bold]If you see a member of the Provost aboard the Almayer, give them the utmost respect.[/bold]
+
+
+  [bold]Note: Provost is only available by direct admin spawn due to them being the ultimate authority on in-character rule enforcement[/bold]
+
+
+  ## Security Alert Levels
+  The ship has multiple alert levels, which can be changed in the C.I.C. They are as follows.
+
+  ## M.P Equipment
+  Military police have a large assortment of specialized equipment provided to perform their duties. They are listed below, color coded to their alert restrictions for [color=#ff000d][bold]MP[/bold][/color]s.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCHandcuffs"/>
+  </Box>
+  [bold]Handcuffs are a core tool for [color=#ff000d][bold]MP[/bold][/color]s which allow you to retrain somebody by clicking on them with the cuffs in your hand.[/bold] The do-after is canceled if they move, so make sure to stun non compliant marines first. While they are handcuffed, they cannot move when you are holding on to them.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCZipties"/>
+  </Box>
+  Zip-Ties work identically to handcuffs, [bold]except when you remove them from somebody, they break and become unusable.[/bold] This is useful if you do not want to worry about leaving handcuffs laying around. [bold]One time use, so zip and forget![/bold]
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CMStunbaton"/>
+  </Box>
+  [bold]The Stun baton is a short range Melee stun implement which will stun a marine with a single hit.[/bold] It must be activated (by pressing [keybind="ActivateItemInHand"]) to stun someone. You can tell when its on by inspecting it, or looking for the sprite to be lit up. Can be charged by inserting it into a recharger.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCWeaponTaser"/>
+  </Box>
+  The Disabler is a Sidearm style stun tool that fires electric bolts. With consecutive hits it will stun a target from range and allow you to close the distance. Be aware the stun is slightly shorter than the baton, so you may need to stun them again once you reach them depending on the distance. Can be charged at a recharger. [bold]The Disabler can also be used as a stun buton by meleeing the suspect.[/bold]
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CMFlash"/>
+  </Box>
+  The Flash Is a handheld device which can be used in two ways.
+  - With harm mode active, you can click directly on somebody with it to flash them directly. This will apply a stun and knock them down
+  - You can also press [keybind="ActivateItemInHand"] while holding it to produce a small radius flash that will disorient and slow down, but not stun. Cannot be recharged at a recharger, but it will slowly recharge uses over time.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CMArmorM2MP"/>
+  </Box>
+  The standard Armor for the Military Police. It is adequately armored and lighter than its standard marine counterpart. [bold]It has very well rounded protection, and does decent in all categories though it is not the best in any of them.[/bold]
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCArmorVestMP"/>
+  </Box>
+  A lightweight armor that [color=#ff000d][bold]MP[/bold][/color]s can elect to take from their equipment vendor. [bold]It Provides no slowdown effect and is very fast to run in, however it also provides very minimal protection and will not protect you at all against acid or biological threats in any way.[/bold]
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CMArmorRiot"/>
+  </Box>
+  [bold]This heavy and bulky armor will take some heavy punishment from conventional threats like knives, bullets, and the like. In exchange you will be slowed down quite a lot while wearing it.[/bold] Do note that It is not helpful against acid or biological threats in any way whatsoever. (A total of 6 sets can be found in the brig armory)
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGrenadeFlashBang"/>
+  </Box>
+  Flashbangs are a very effective tool for large areas or crowds. Once thrown they will detonate, stunning targets within a large radius for a very long time. [bold][color=#ff000d][bold]MP[/bold][/color]s are also stunned by this, so make sure you either throw it around cover or move away from it once thrown.[/bold] They may be carried on green alert. But only for self defense or defense of others. Do not throw them needlessly!
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCVendorSecArmory"/>
+  </Box>
+  Rubber Rounds are [bold]Less-Lethal bullets[/bold] which can be fired from most standard issue weapons. After a certain number of shots on target, they will be stunned for a short duration. Be very careful to keep track of your ammo types! Useful for Prisoners of War, and other non marines who might be resistant to the disabler.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCBoxShotgunBeanbag"/>
+  </Box>
+  Bean Bag shells are an effective riot control tool that can stun targets in a few shots. They are fired specifically out of the Riot Shotgun found in the armory. Useful for Prisoners of War, and other non marines who might be resistant to the disabler.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCWeaponShotgunM890Riot"/>
+  </Box>
+  The tactical riot shotgun is an eight (8) shot semi automatic shotgun found in the brig armory. It is capable of firing the bean bag shells found in armory, but cannot load standard shells like buckshot or slugs.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCWeaponLauncherM81"/>
+  </Box>
+  The riot grenade launcher is a single shot launcher capable of loading Non lethal grenades (like the flashbang) into its breach, though is not capable of loading other grenades like HEDP or HIDP. [bold]Use [keybind="CMUniqueAction"] to open the breach while holding it then insert the grenade and close the breach. Note it has to be wielded to fire.[/bold] A total of 2 can be found in the brig armory
+
+
+  <Box>
+    <GuideEntityEmbed Entity="WeaponShotgunM890"/>
+  </Box>
+  The tactical shotgun is a semi automatic lethal firearm found in the brig armory. It cannot load bean bag rounds, but CAN load buckshot, flechette, and slugs. The underslung grenade launcher can load standard HEDP, HIDP, and HEFA (a total of 9 can be found in the brig armory)
+
+
+  <Box>
+    <GuideEntityEmbed Entity="WeaponRifleM4SPR"/>
+  </Box>
+  Two M4SPR lockers can be found in the brig armory, containing lethal ammunition and M4SPRs. These are identical to the standard issue rifles that the marines can obtain. Lethal ammo is found in the locker, as well as Rubber ammunition in the Riot-Tech. A total of 8 rifles can be found in the brig armory.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="WeaponSMGM63"/>
+  </Box>
+  Two M63 lockers can be found in the brig armory, containing lethal ammunition and 4x  M63s. These are identical to the standard issue SMGs that the marines can obtain. Lethal ammo is found in the locker, as well as Rubber ammunition in the Riot-Tech. A total of 8 SMGs can be found in the brig armory.
+
+  ### Guide made by WithinElysium
+</Document>

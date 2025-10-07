@@ -14,13 +14,14 @@
     components:
     - type: Skills
       skills:
+        RMCSkillFirearms: 2
         RMCSkillMedical: 1
         RMCSkillCqc: 1
         RMCSkillEngineer: 1
         RMCSkillLeadership: 1
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
+        RMCSkillJtac: 2
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -67,8 +68,8 @@
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
-    jumpsuit: RMCJumpsuitCLFSoldier
-    outerClothing: RMCCoatMilitiaHauberk
+    jumpsuit: RMCJumpsuitCLFWebbingMAR50
+    outerClothing: RMCCoatMilitia
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSpecialist
@@ -76,9 +77,8 @@
     back: RMCSatchelLightpack
     suitstorage: RMCWeaponMar50LMG
     pocket1: RMCPouchExplosiveFilledC4SPP
-    pocket2: RMCPouchFirstAidERT
+    pocket2: RMCPouchFirstAidERTFill
   inhand:
-  - RMCWeaponLauncherDisposable
   - RMCEarmuffs
   storage:
     back:
@@ -89,6 +89,15 @@
     - RMCRangefinder
     - RMCGrenadeIED
     - RMCGrenadeIED
+    - RMCWeaponLauncherDisposableFolded
+    - RMCMagazineMar50LMG
+    - RMCMagazineMar50LMG
+    outerClothing:
+    - RMCMagazineMar50LMG
+    - RMCMagazineMar50LMG
+    pocket1:
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
 
 - type: playTimeTracker
   id: RMCJobCLFSpecialist

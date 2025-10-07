@@ -46,6 +46,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
 
 - type: entity
   parent: RMCOuterClothingExternalWebbing

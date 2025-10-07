@@ -286,6 +286,7 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PatchPeaceRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -417,6 +418,8 @@
   - ExecutiveSelectPackRMC
   - TarbackTubeRMC
   - TarbacksCaseRMC
+  - ShioRoyalsTubeRMC
+  - ShioRoyalsCaseRMC
   - PremiumCigarRMC
   - ZippoRMC
   - ZippoExecRMC
@@ -524,9 +527,11 @@
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 3
   loadouts:
-  - DrinkCanAleRMC
+  - RMCWeYaClipboard
+  - RMCWeYaThermos
+  - RMCJacketWindbreakerWEYA
 
 # Chief MP
 - type: loadoutGroup
@@ -724,6 +729,7 @@
   - PatchWeYaRMCFury161
   - PatchTSERMC
   - PatchCECRMC
+  - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
   - HeadCowboyHatLightRMC

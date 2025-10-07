@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: RMCMobFeroxi
   name: Urist C.M McFeroxi
   suffix: RMC14

@@ -388,6 +388,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ea919a8798253f334169819f21e913a3601e831e/sound/voice/alien_echoroar_3.ogg"
 
+- files: ["alien_doorpry1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2b0d2f79b470515c893f2a1d9364896023246efa/sound/effects/alien_doorpry1.ogg"
+
+- files: ["alien_doorpry2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2b0d2f79b470515c893f2a1d9364896023246efa/sound/effects/alien_doorpry2.ogg"
+
 - files: ["alien_ventcrawl1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

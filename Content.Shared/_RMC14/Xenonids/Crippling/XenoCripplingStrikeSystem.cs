@@ -20,7 +20,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 

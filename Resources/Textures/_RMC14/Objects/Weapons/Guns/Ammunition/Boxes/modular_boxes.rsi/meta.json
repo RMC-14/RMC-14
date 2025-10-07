@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris and github noctyrnal",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on GitHub and github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -35,7 +35,13 @@
       "name": "rifle_box_54"
     },
     {
+      "name": "rifle_box_42"
+    },
+    {
       "name": "rifle_box_71"
+    },
+    {
+        "name": "rifle_box_88"
     },
     {
       "name": "rifle_box_generic"
@@ -99,6 +105,9 @@
     },
     {
       "name": "smg_box_63"
+    },
+    {
+      "name": "smg_box_64"
     },
     {
       "name": "pistol_box_11"
@@ -179,7 +188,13 @@
       "name": "pistol_box_77"
     },
     {
+      "name": "pistol_box_73"
+    },
+    {
       "name": "pistol_box_44"
+    },
+    {
+      "name": "pistol_box_92"
     },
     {
       "name": "shell_lid_marking"

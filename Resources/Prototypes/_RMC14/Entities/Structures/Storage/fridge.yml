@@ -2,6 +2,8 @@
   parent: CMLockerBase
   id: CMLockerFridge
   name: fridge
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi

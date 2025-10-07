@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSyntheticColony
   ranks:
     RMCRankMasterSergeant: []
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups: # TODO RMC14 verify parity access groups with FORECON synthetic, i can't find the actual file that stores this
   - ColonistEngi
   - ShipMasterAccess # TODO RMC14 here until we have the id console

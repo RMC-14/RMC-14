@@ -1,0 +1,77 @@
+﻿- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorChancesEnvironmentalResearcher
+  name: rmc-job-name-survivor-environmental-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesEnvironmentalResearcher
+  startingGear: RMCGearSurvivorChancesEnvironmentalResearcher
+  spawnMenuRoleName: Environmental Researcher (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorChancesEnvironmentalResearcher
+  equipment:
+    head: RMCHeadCapFlippable
+    shoes: RMCShoesJackboots
+    mask: RMCMaskRebreather
+    uniform: CMJumpsuitResearch
+    outerClothing: RMCLabcoatScience
+    gloves: RMCHandsBlack
+  inhand:
+  - RMCAtmosScanner
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesEnvironmentalResearcher
+  name: enviromental researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesEnvironmentalResearcher
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesEnvironmentalResearcher
+  name: chances environmental researcher ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesEnvironmentalResearcher
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesEnvironmentalResearcher
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesEnvironmentalResearcher

@@ -1,5 +1,5 @@
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCNoWebbing
   name: PMC fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit.
@@ -30,6 +30,17 @@
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCGunner
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCSynth
+  suffix: Webbing, Synthetic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
 
 - type: entity
   parent: RMCMarineUniformBase

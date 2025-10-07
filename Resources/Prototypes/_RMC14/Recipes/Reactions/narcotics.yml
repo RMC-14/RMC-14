@@ -1,6 +1,8 @@
 - type: reaction
   id: RMCMindbreakerToxin
   reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     RMCSilicon:
       amount: 1
     RMCHydrogen:
@@ -13,6 +15,8 @@
 - type: reaction
   id: RMCSpaceDrugs
   reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     RMCMercury:
       amount: 1
     RMCSugar:

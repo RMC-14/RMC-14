@@ -1,0 +1,71 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorChancesAtmosProcessTech
+  name: rmc-job-name-survivor-atmos-process-tech
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesAtmosProcessTech
+  startingGear: RMCGearSurvivorChancesAtmosProcessTech
+  spawnMenuRoleName: Atmospheric Processing Reactor Technician (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorChancesAtmosProcessTech
+  equipment:
+    head: RMCHardHat
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: RMCBrownWEYACoat
+    pocket1: RMCPouchToolsFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesAtmosProcessTech
+  name: atmospheric processing reactor technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesAtmosProcessTech
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesAtmosProcessTech
+  name: atmospheric processing reactor technician ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesAtmosProcessTech
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesAtmosProcessTech
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesAtmosProcessTech

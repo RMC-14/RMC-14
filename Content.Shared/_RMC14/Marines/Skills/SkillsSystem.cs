@@ -573,17 +573,18 @@ public sealed class SkillsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition)
+    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition, float[]? multipliers = null)
     {
         if (!definition.TryGet(out var definitionComp, _prototypes, _compFactory))
             return 1f;
 
-        if (definitionComp.DelayMultipliers.Length == 0)
+        multipliers ??= definitionComp.DelayMultipliers;
+        if (multipliers.Length == 0)
             return 1f;
 
         var skill = GetSkill(user, definition);
-        if (!definitionComp.DelayMultipliers.TryGetValue(skill, out var multiplier))
-            multiplier = definitionComp.DelayMultipliers[^1];
+        if (!multipliers.TryGetValue(skill, out var multiplier))
+            multiplier = multipliers[^1];
 
         return multiplier;
     }

@@ -26,7 +26,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 11
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - CMP
   roleWeight: 0.25
@@ -89,6 +89,7 @@
   id: CMJobChiefMP
   isHumanoid: true
 
+# Guidebook
 - type: entity
   parent: CMGuidebookRole
   id: RMCGuidebookRoleCMP

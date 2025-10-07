@@ -158,6 +158,8 @@
     - RMCXenoRunnerAcider
   - type: VentCrawler
     ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: CMXenoRunner
 
 - type: entity
   parent: CMXenoRunnerBase
@@ -265,3 +267,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: RMCXenoRunnerAcider

@@ -1026,6 +1026,85 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("profile_role_loadout", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCChatBans", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("rmc_chat_bans_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<NpgsqlInet?>("Address")
+                        .HasColumnType("inet")
+                        .HasColumnName("address");
+
+                    b.Property<DateTime>("BannedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("banned_at");
+
+                    b.Property<Guid?>("BanningAdminId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("banning_admin_id");
+
+                    b.Property<DateTime?>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expires_at");
+
+                    b.Property<DateTime?>("LastEditedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_edited_at");
+
+                    b.Property<Guid?>("LastEditedById")
+                        .HasColumnType("uuid")
+                        .HasColumnName("last_edited_by_id");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("reason");
+
+                    b.Property<int?>("RoundId")
+                        .HasColumnType("integer")
+                        .HasColumnName("round_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime?>("UnbannedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("unbanned_at");
+
+                    b.Property<Guid?>("UnbanningAdminId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unbanning_admin_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_rmc_chat_bans");
+
+                    b.HasIndex("Address")
+                        .HasDatabaseName("IX_rmc_chat_bans_address");
+
+                    b.HasIndex("BanningAdminId");
+
+                    b.HasIndex("LastEditedById");
+
+                    b.HasIndex("PlayerId")
+                        .HasDatabaseName("IX_rmc_chat_bans_player_id");
+
+                    b.HasIndex("RoundId")
+                        .HasDatabaseName("IX_rmc_chat_bans_round_id");
+
+                    b.HasIndex("UnbanningAdminId");
+
+                    b.ToTable("rmc_chat_bans", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCCommendation", b =>
                 {
                     b.Property<int>("Id")
@@ -1342,6 +1421,27 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsUnique();
 
                     b.ToTable("rmc_patron_tiers", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("rmc_player_action_order_id");
+
+                    b.PrimitiveCollection<List<string>>("Actions")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("actions");
+
+                    b.HasKey("PlayerId", "Id")
+                        .HasName("PK_rmc_player_action_order");
+
+                    b.ToTable("rmc_player_action_order", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
@@ -2182,6 +2282,81 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCChatBans", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "BanningAdmin")
+                        .WithMany("AdminChatBansCreated")
+                        .HasForeignKey("BanningAdminId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_chat_bans_player_banning_admin_id1");
+
+                    b.HasOne("Content.Server.Database.Player", "LastEditedBy")
+                        .WithMany("AdminChatBansLastEdited")
+                        .HasForeignKey("LastEditedById")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_chat_bans_player_last_edited_by_id1");
+
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("ChatBans")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_chat_bans_player_player_id");
+
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithMany()
+                        .HasForeignKey("RoundId")
+                        .HasConstraintName("FK_rmc_chat_bans_round_round_id");
+
+                    b.HasOne("Content.Server.Database.Player", "UnbanningAdmin")
+                        .WithMany("AdminChatBansPardoned")
+                        .HasForeignKey("UnbanningAdminId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_chat_bans_player_unbanning_admin_id1");
+
+                    b.OwnsOne("Content.Server.Database.TypedHwid", "HWId", b1 =>
+                        {
+                            b1.Property<int>("RMCChatBansId")
+                                .HasColumnType("integer")
+                                .HasColumnName("rmc_chat_bans_id");
+
+                            b1.Property<byte[]>("Hwid")
+                                .IsRequired()
+                                .HasColumnType("bytea")
+                                .HasColumnName("hwid");
+
+                            b1.Property<int>("Type")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasDefaultValue(0)
+                                .HasColumnName("hwid_type");
+
+                            b1.HasKey("RMCChatBansId");
+
+                            b1.ToTable("rmc_chat_bans");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RMCChatBansId")
+                                .HasConstraintName("FK_rmc_chat_bans_rmc_chat_bans_rmc_chat_bans_id");
+                        });
+
+                    b.Navigation("BanningAdmin");
+
+                    b.Navigation("HWId");
+
+                    b.Navigation("LastEditedBy");
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Round");
+
+                    b.Navigation("UnbanningAdmin");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCCommendation", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Giver")
@@ -2339,6 +2514,19 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasConstraintName("FK_rmc_patron_round_end_xeno_shoutouts_rmc_patrons_patron_id");
 
                     b.Navigation("Patron");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCPlayerActionOrder", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("ActionOrder")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_player_action_order_player_player_id");
+
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCPlayerStats", b =>
@@ -2614,6 +2802,14 @@ namespace Content.Server.Database.Migrations.Postgres
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
+                    b.Navigation("ActionOrder");
+
+                    b.Navigation("AdminChatBansCreated");
+
+                    b.Navigation("AdminChatBansLastEdited");
+
+                    b.Navigation("AdminChatBansPardoned");
+
                     b.Navigation("AdminLogs");
 
                     b.Navigation("AdminMessagesCreated");
@@ -2647,6 +2843,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("AdminWatchlistsLastEdited");
 
                     b.Navigation("AdminWatchlistsReceived");
+
+                    b.Navigation("ChatBans");
 
                     b.Navigation("CommendationsGiven");
 

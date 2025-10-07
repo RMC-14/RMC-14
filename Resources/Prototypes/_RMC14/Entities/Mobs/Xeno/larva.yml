@@ -97,6 +97,8 @@
     name: cm-job-name-xeno-larva
   - type: VentCrawler
     ventCrawlIcon: larva
+  - type: RMCActionOrder
+    id: CMXenoLarva
 
 # For surgeries/failed incubations
 - type: entity

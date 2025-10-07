@@ -12,6 +12,12 @@
     sprite: _RMC14/Structures/stairs.rsi
     state: p_stair_full
     drawdepth: FloorTiles
+  - type: Tag
+    tags:
+    - RMCStairs
+
+- type: Tag
+  id: RMCStairs
 
 - type: entity
   parent: RMCStairs

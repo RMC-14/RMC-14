@@ -52,6 +52,26 @@
 
 - type: entity
   parent: RMCAreaHF
+  id: RMCAreaHFOffice
+  name: Office
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFEngineering
+  name: Engineering
+
+- type: entity
+  parent: RMCAreaHFEngineering
+  id: RMCAreaHFSyntheticCloset
+  name: Synthetic Closet
+
+- type: entity
+  parent: RMCAreaHFEngineering
+  id: RMCAreaHFAICore
+  name: AI Core
+
+- type: entity
+  parent: RMCAreaHF
   id: RMCAreaHFDisposals
   name: Disposals
   components:
@@ -99,6 +119,11 @@
   components:
   - type: Sprite
     state: lz
+
+- type: entity
+  parent: RMCAreaHFHangar
+  id: RMCAreaHFHangar2
+  name: Lower Hangar
 
 - type: entity
   parent: RMCAreaHF

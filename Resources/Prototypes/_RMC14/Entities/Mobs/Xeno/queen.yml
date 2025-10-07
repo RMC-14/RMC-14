@@ -107,6 +107,7 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: InnateCommandSpeech
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp
@@ -167,7 +168,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -6
+        volume: 0
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -272,7 +273,9 @@
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
-  #components:
+  components:
+  - type: RMCActionOrder
+    id: CMXenoQueen
   # - type: XenoEvolution #can be enabled for events like april fools.
   #   strains:
   #   - RMCXenoQueenMaid

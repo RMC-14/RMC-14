@@ -1,0 +1,92 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesBreacher
+  name: rmc-job-name-rcm-breacher
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalBreacher
+  ranks:
+    RMCRankTSELanceCorporal: [ ]
+  startingGear: RMCGearRoyalBreacher
+  icon: "RMCJobIconRoyalBreacher"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Breacher
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1 
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+        RMCSkillPowerLoader: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-breacher
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidRoyalMarinesBreacher
+  name: royal crown marines ghost role breacher
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalMarinesBreacher
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesBreacher
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rcm-breacher
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
+    reregister: false
+    job: CMRoyalMarinesBreacher
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+  
+- type: startingGear
+  id: RMCGearRoyalBreacher
+  equipment:
+    head: RMCHeadRoyalHelmet
+    ears: RMCHeadsetRoyalMarine
+    jumpsuit: RMCJumpsuitMarineRoyal # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalPointmanFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24B
+    id: RMCIDRoyalMarinesBreacher
+    belt: RMCBeltUtiliyGeneralFilledRoyal
+    # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
+    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalBreacher
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalBreacher
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_breacher

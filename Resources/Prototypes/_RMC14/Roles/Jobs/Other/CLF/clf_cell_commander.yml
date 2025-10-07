@@ -78,9 +78,13 @@
     shoes: CMBootsBlackFilled # TODO RMC14
     suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
-    belt: RMCMatebaBeltFilled # TODO RMC14
+    belt: RMCBeltSmartGunOperatorPistolCLF
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidInjectors
+  storage:
+    outerClothing:
+    - RMCSpeedLoaderMatebaHighImpact
+    - RMCSpeedLoaderMatebaHighImpact
 
 - type: playTimeTracker
   id: CMJobCLFCellCommander

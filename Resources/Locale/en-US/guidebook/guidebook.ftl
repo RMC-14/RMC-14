@@ -1,6 +1,9 @@
 guidebook-window-title = Guidebook
 guidebook-placeholder-text = Select an entry.
-guidebook-placeholder-text-2 = If you're new, head over to "New? Start here!"
+
+# Modified for RMC14
+guidebook-placeholder-text-2 = If you're new, head over to "New Player Guide"
+
 guidebook-filter-placeholder-text = Filter items
 
 guidebook-parser-error = Parser Error

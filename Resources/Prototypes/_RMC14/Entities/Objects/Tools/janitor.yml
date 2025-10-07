@@ -66,6 +66,9 @@
   name: warning cone
   description: This cone is trying to warn you of something!
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
     state: cone

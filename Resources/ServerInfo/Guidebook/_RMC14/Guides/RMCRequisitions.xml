@@ -1,58 +1,150 @@
 <Document>
-  #Requisitions
+#Requisitions
 
-  Rise and shine! The Corps have been activated and they need you to keep them in fighting shape. Without additional supply, Marines will be about as menacing as your average paper pusher, so punch in your card and get to work!
+[bold]Attention, Requisitions Technician.[/bold]
 
-  Make your way to the front desk and hit the red button to raise the shutters. Soon, Marines will line up to request various items they were unable to obtain from their barracks. Majority of these requests will be fulfilled using the preloaded Vendors.
+Commence operations: activate the console, raise the shutters, and assume your post. You are the primary logistical link in the Marine Corps supply network. It is your duty to ensure the timely distribution of all materiel, ranging from standard-issue ammunition to high-yield explosives.
 
-  <Box>
-    <GuideEntityEmbed Entity="ColMarTechCargoGuns"/>
-  </Box>
+[bold]Be advised[/bold]: a Marine without supplies and operating on an empty magazine is a compromised asset and a threat to operational effectiveness. Maintain supply integrity at all times.
 
-  - [bold]Armaments Attachments[/bold]: Contains attachments for Marines to improve their weapons.
-  - [bold]Automated Armaments[/bold]: Contains additional Weapons, Explosives, Webbings, Bags and Belts, Pouches, and utility gear.
-  - [bold]Automated Munition[/bold]: Contains regular, armour piercing, and extended magazines for the various Marine weapons and pistols. Also contains the special Smart Gun Ammo.
-  - [bold]Surplus Uniform[/bold]: Contains spare uniforms, helmets, armour, and radio encryption keys.
-  - The [bold]Autolathe[/bold] can produce additional medical gear, engineering tools, and some furniture.
+##The Line
+Welcome to the Line Technician post. This is the backbone of Requisitions — basic, standard, and essential grunt work. Your job is simple: hit the button, raise the shutter, and get to work. It’s rush hour, and the Marines are gearing up for deployment. They don’t like delays — and they don’t wait.
 
-  If something is missing from these vendors or crafting machines, there is a good chance you’ll need to acquire it from below deck.
+Marines will come to you requesting a wide range of supplies. Stay sharp and don’t get overwhelmed by their demands. Always verify that the Marine is wearing standard-issue armor before approving any order.
 
-  ##Acquisitions
+You are authorized to deny any request that is excessive, unreasonable, or intended for a single Marine without proper justification. Maintain discipline and uphold supply protocol.
+<Box>
+ <GuideEntityEmbed Entity="RMCTheLineGuideBook" Caption="The Line"/>
+</Box>
+You, Technician, are in control. Take your seat and get comfortable — but stay alert. You command the shutters using the orange control button. Maintain order and efficiency at all times.
+<Box>
+ <GuideEntityEmbed Entity="ColMarTechCargoAttachments" Caption="attachements vendor"/>
+ <GuideEntityEmbed Entity="ColMarTechCargoGuns" Caption="armaments vendor"/>
+</Box>
+<Box>
+ <GuideEntityEmbed Entity="ColMarTechCargoAmmo" Caption="munitions vendor"/>
+ <GuideEntityEmbed Entity="ColMarTechCargoUniform" Caption="surplus vendor"/>
+</Box>
+You have four supply vendors at your disposal: [bold]Attachments, Armaments, Munitions, and Surplus[/bold]. Use them wisely to equip our forces. Precision, speed, and discipline are expected.
 
-  This responsibility is often managed by the Quartermaster or Auxiliary Support Officer, your direct superiors, but inexpensive orders are often left for the Cargo Techs. If you’re ever unsure about a purchase, contact them across the Requisitions radio frequency.
+From left to right you have the attachments, armaments, and munitions vendor. The surplus vendor can be found just south of you in storage.
 
-  Acquisitions is handled using the ASRS console.
+- Attachments vendor: This vendor has all the attachments a Marine could need. Give them anything they ask if it comes from this vendor.
+- Armaments vendor: This vendor contains armaments like guns, grenades, but also belts, pouches, and backpacks. Give Marines from this vendor anything within reason.
+- Munitions vendor: This vendor contains ammunition—everything from standard issue to AP and even ML66A drums. Give Marines anything within reason.
+- Surplus vendor: This vendor contains headset keys, uniform, armor, and helmets. Give Marines anything they ask from this vendor.
 
-  <Box>
-    <GuideEntityEmbed Entity="CMASRSConsole"/>
-  </Box>
+##ASRS Terminal
+The ASRS terminal is one of your most critical tools in Requisitions. It enables you to order non-standard and specialized equipment that is rarely available aboard the Almayer. However, exercise caution — you are working within a limited budget. Do not allocate all your resources to a single request.
 
-  Everything Marines will need can be found here. To order items, first lower the loading platform using the console, and then order the desired crates of supply one at a time. There is no confirmation signal, you touch it you buy it! Items are categorized by function, and the ones you’ll most frequently visit are:
+[bold]Remember[/bold]: you are responsible for supplying every Marine. Prioritize efficiency, balance, and strategic foresight in every Decision.
 
-  - [bold]Ammo[/bold]: Ammunition for the regular Marine guns and pistols, as well as Sentry and Smart Gun supplies.
-  - [bold]Engineering[/bold]: Building materials and Electrical components.
-  - [bold]Explosives[/bold]: Grenades and Breaching charges.
-  - [bold]Gear[/bold]: Binoculars and Flare packs.
-  - [bold]Mortar[/bold]: Mortars and their munitions.
-  - [bold]Weapon Specialist Ammo[/bold]: Ammunition for the highly specialised Marine weapons.
+<Box>
+ <GuideEntityEmbed Entity="CMASRSConsole" Caption="ASRS Console"/> 
+</Box>
 
-  If you’re unsure of the category an item is in, make use of the search feature to find it quickly.
+However, Technician, always consult your [color=#FFA500]Logistics Officer[/color] before placing any orders — or, in their absence, the most senior member of the Requisitions staff. Maintaining oversight of purchases, inventory, and budget is essential to the effective operation of the department.
 
-  After the orders have been placed, raise the loading platform to acquire all the crates of gear and equipment purchased. Open all the crates and offload the gear onto various racks but keep the crates on the loading pit!
+[bold]Remember[/bold]: communication is critical. Monitor your radio traffic, maintain situational awareness, and ensure you know which squad has requested which supplies.
 
-  When the supplies are offloaded, remove the invoice from each crate and stamp it with your green approved stamp, then reattach the invoice back to its crate. When the loading platform is lowered again, you’ll receive a small rebate for properly processing the order and recycling the crate.
+[color=#FF0000][bold]WARNING!!![bold][/color] There is [color=#FF0000][bold]NO[/bold][/color] confirmation when ordering any items so be careful and make sure to [bold]READ[/bold] and [bold]MAKE SURE[/bold] what you are ordering to not order the wrong supplies that will just go to waste and to not waste budget.
 
-  Keep the loading platform lowered to make the next order slightly faster, and then remove all nearby tripping hazards.
+The ASRS terminal is simple yet effective:
+<Box>
+ <GuideEntityEmbed Entity="RMCASRSinterfaceGuideBook" Caption="ASRS interface"/>
+</Box>
+- Platform position: This can be Lowered or Raised. Supplies can be ordered no matter the position of the platform—even in transit. However, crates will only appear if the platform changes from Lowered to Raised.
+- Supply budget: This shows the current budget. It will automatically decrease and increase.
+- Order items: This allows you to order all the items and supplies. Be careful navigating it. If you are lost remember to use the search bar!
 
-  ##Post Deployment
+The ASRS terminal contains many, many, many items—most that are redundant or straight up useless. There is only a key selection of items that you will be ordering on a standard basis:
+- Weapon Specialist Ammunition: This is highly specialized ammunition used only by a select few Marines. It’s also quite expensive.
+- Non-standard Ammunition: This is usually ammunition that is highly effective against high-value targets but also expensive, like 10x24mm AP ammo, mortar shells, or ML66A drums for smartgun operators.
+- High Explosives: The M40 Grenades HIDP and HEDP variants are expensive but can be a game changer. Make sure to supply them to the Marines if possible.
+- Engineering materials: Usually metal, plasteel, or batteries. It is [bold]HEAVILY[/bold] recommended that you do not order these unless absolutely necessary.
 
-  Once the Marine’s orders are fulfilled and the waiting lines are empty, the job is not over. You’ll need to continue acquiring supply and loading it onto the Dropships to ferry it directly to the Marines in the AO. Keep an ear out on radio communications to find out what’s required and make damn sure the empty crates are returned to be refilled!
+[bold]Remember[/bold] to always ask other departments for materials and supplies before ordering. Like Engineering—they can supply you with metal and batteries without you having to spend any budget. How convenient!
 
-  To save money, make sure to use up the supply in the preloaded Vendors before acquiring more. Items often requested in bulk, such as regular ammunition and flares, can be looted from the Squad Barracks Vendors and ferried to Marines free of charge.
+##The Pit
+Stay sharp, Technician. Watch your step—you don't want to end up as just another name on the list. Clear all hazards immediately, and keep away from the railing. This is [bold]The Pit[/bold].
 
-  There are plenty of free supplies in various locations aboard the Almayer, as well as numerous ways to efficiently load and transport these items. To discover the secrets of the trade, try talking to your direct superiors or the resident mentor, the Senior Enlisted Advisor.
+Any items ordered via the ASRS terminal or ARES dispatch will be delivered here. Crates can be sold and invoices returned at this station.
 
-  <Box>
-    <GuideEntityEmbed Entity="CMGuidebookRoleSEA"/>
-  </Box>
+[bold]Stamp everything. No exceptions.[/bold]
+<Box>
+ <GuideEntityEmbed Entity="RMCPitRasedGuideBook" Caption="Pit (raised)"/>
+ <GuideEntityEmbed Entity="RMCPitLowerdGuideBook" Caption="Pit (lowered)"/>
+ </Box>
+Stay alert near The Pit. Once it’s lowered, it becomes the biggest hazard in your entire work zone. Sleep on the job, and you might not wake up.
+
+As previously stated, crates are delivered with invoices. Remove them. Stamp them. Get your payout. Everyone likes free money—but this isn’t charity. The invoice doesn’t need to be attached to the crate to be processed. Loose is fine. Just [bold]don’t[/bold] lose it.
+<Box>
+ <GuideEntityEmbed Entity="RMCInvoiceBlankGuideBook" Caption="A blank invoice worth nothing"/>
+ <GuideEntityEmbed Entity="RMCStampGuideBook" Caption="A approval stamp "/>
+ <GuideEntityEmbed Entity="RMCInvoiceApprovedBook" Caption="A approved invoice"/>
+ </Box>
+Listen up, Technician. Crates are one of your most vital resources—don’t forget it. They can be sold for a fixed amount, but more importantly, they’re used for supply drops. Always keep a healthy stock.
+
+Show some respect to Engineering, they can route crates to you from around the Almayer if you ask properly. Maintain good relations.
+
+Wooden crates can be crafted from lumber, but remember this: they hold no resale value. Their only purpose is for supply drops. Use them accordingly.
+<Box>
+ <GuideEntityEmbed Entity="RMCCrateBase" Caption="Metal Crate"/>
+</Box>
+##Supply Drops
+Now Technician, morning rush is done. But we are not. It’s time to pack supplies to be sent groundside—Marines run out of bullets fast and we have to supply. Make four crates and place them each on their respective squad drop pads.
+<Box>
+ <GuideEntityEmbed Entity="RMCSupplyDropPadsGuideBook" Caption="Supply pads"/> 
+</Box>
+You’ve got five drop pads, Technician. But listen close—you’ll be using four of them on the regular.
+
+From left to right, they go alphabetically: [color=#FF0000][bold]Alpha[/bold][/color], [color=#FFEF00][bold]Bravo[/bold][/color], [color=#800080][bold]Charlie[/bold][/color], [color=#000080][bold]Delta[/bold][/color]. These are your bread and butter—the standard squad pads. Know them. Use them. Pack them right.
+
+The fifth pad is [color=#32CD32][bold]Echo[/bold][/color]. That one’s different. It’s reserved for emergency drops only—priority resupplies, critical gear, last-minute saves. Don’t touch it unless you’re told.
+
+Misusing Echo is a good way to Displease the marines and CIC fast. Get to work and keep the squads supplied.
+
+CIC controls the four squad crates. Only they can greenlight a drop planetside. Your job is to pack them tight and seal them. If the crate’s open, it’s going nowhere.
+
+Echo Pad’s a different story. That one falls under Requisitions control—your control. You’ll launch it from the console just above the pad. But heads up: Echo drops need exact coordinates—longitude and latitude. A Marine groundside will feed you those numbers. No coords, no drop. Don’t improvise.
+
+[bold]Get it packed. Get it sealed. Get it done.[/bold]
+
+Marines can request all kinds of supplies—but some must always be packed, no matter what. These are your standard loadouts, the bare minimum to keep the squads combat-effective and breathing.
+
+- Ammunition: The bullets a marine needs to stay in the fight. Examples: M54C Regular, M4SPR Regular, Buckshot Shotgun Shells, ML66A Smartgun Drum, et cetera.
+- Medical: The first aid to keep a marine going on the field. Examples: Gauze, Ointment, Pressurized Canisters, Defibrilators, et cetera.
+- Utility: The tools and equipment marines need to stay effective. Examples: M-94 Flare Pack, M-89S Signal Flare Pack, Motion Detector, Laser Designator, Rangefinder, et cetera.
+- Miscellaneous: Anything else a marine requests that isn't mentioned above. Examples: Helmets, Attachments, MREs, et cetera. 
+
+##Basic Packing
+Line’s secured. Crates are packed. Supplies running low. Time to move, Techie. Cardboard’s in South Storage—same location as the surplus vendor. Retrieve it and start fabricating ammo boxes.
+
+Requisitions are tapped. Vendors are dry. Time to relocate to the Squad Preparation Room—that’s your new ammo-packing station. Listen up, Techie: Marine ammo vendors are off-limits. You’ll need the [color=#FFA500]Logistics Officer[/color] to issue all packing supplies. Proceed accordingly.
+<Box>
+ <GuideEntityEmbed Entity="ColMarTechEquipment" Caption="Weapons rack"/>
+</Box>
+Now the ammunition is dispensed—let’s get to packing, Technician. Let’s make a box. Press ([color=yellow][keybind="g"][/color]) to open the build menu and use the search bar to find the boxes you will craft. There are three basic boxes you will pack: M54C, SPR, and M63. Press ([color=yellow][keybind="z"][/color]) to place it down, open it, and ([color=yellow][keybind="alt left click"][/color]) to pick it up. Now simply ([color=yellow][keybind="left click"][/color]) on the boxes with a magazine in hand to pack.
+<Box>
+ <GuideEntityEmbed Entity="RMCBoxMagazineRifleM54C" Caption="M54C regular"/>
+ <GuideEntityEmbed Entity="RMCBoxMagazineRifleM4SPR" Caption="M4SPR regular"/>
+ <GuideEntityEmbed Entity="RMCBoxMagazineSMGM63" Caption="M63 regular"/>
+</Box>
+Maintain a steady stock of standard-issue ammunition at all times. No excuses, no budget wasted. Regular supplies are mission-critical. Ensure reserves are full and ready for deployment to Marines groundside. Remember this, Technician: you’re a vital asset to Requisitions. Keep those crates stacked high and constant.
+
+##Requisition Technician
+Requisition Technician, you're the backbone of Requisitions—never forget it. Underestimate your role, and the whole system starts to break down. Without you, logistics grinds to a halt. Stay sharp. Stay essential.
+<Box>
+ <GuideEntityEmbed Entity="RMCCargotechGuideBook" Caption="Requisition Technician symbol"/> 
+</Box>
+Requisitons Technician you answer directly to the [color=#FFA500]Logistics Officer[/color]. Their orders are your mission. Execute swiftly, and Requisitions stays stocked and operational. You begin at rank E1—the foundation. Earn your stripes through discipline and drive. Push forward to E2, then E3. Stay focused. Stay relentless. Stay the course, Techie.
+
+Marines may outrank you on paper, but rank doesn’t equal authority in Requisitions. You hold the power to approve or deny their requests. Only the [color=#FFA500]Logistics Officer[/color] or the [color=#008000]Commander[/color] can override your call. Do not be intimidated. Do not be pressured. Stand firm, Technician. Hold the line.
+
+##Logistics Officer
+The [color=#FFA500]Logistics Officer[/color] top of the chain in Requisitions. Your direct superior. They command every facet of logistics, supply, and cargo operations. No crate moves without their say-so. They authorize and deny. Everything they deem necessary. Their word stands—within reason. Only the [color=#008000]Commander[/color] of the Almayer holds authority over them. Not even a higher-ranking officer can override the [color=#FFA500]Logistics Officer[/color] command in matters of Requisitons. Know the hierarchy. Respect the chain.
+<Box>
+ <GuideEntityEmbed Entity="RMClogisticsofficerGuideBook" Caption="logistics Officer Symbol"/> 
+</Box>
+The [color=#FFA500]Logistics Officer[/color] enters at O1. With grit and performance, they climb to O2. They bear the weight of Requisitions and command its full operational power.The [color=#FFA500]Logistics Officer[/color] reports to the [color=#008000]Commander[/color]. Only the [color=#008000]Commander[/color] of the Almayer may issue them orders. But remeber the [color=#FFA500]Logistics Officer[/color] [bold]only[/bold] has direct authority within Requisitions.
 </Document>

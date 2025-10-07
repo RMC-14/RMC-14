@@ -64,7 +64,7 @@ namespace Content.Client.Atmos.UI
                 return;
 
             var canisterLabel = Identity.Name(Owner, EntMan);
-            var tankLabel = component.GasTankSlot.Item != null ? Identity.Name(component.GasTankSlot.Item.Value, EntMan) : null;
+            var tankLabel = component.GasTankSlot.Item != null ? Identity.Name(component.GasTankSlot.Item.Value, EntMan).Name : null;
 
             _window.SetCanisterLabel(canisterLabel);
             _window.SetCanisterPressure(cast.CanisterPressure);

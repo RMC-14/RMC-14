@@ -39,7 +39,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly DamageableSystem _damagable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
