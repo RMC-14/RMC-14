@@ -273,7 +273,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         // Show CM13-style messages
         var selfMsg = "We ruffle our bone-shard quills, forming a defensive shell!";
-        var othersMsg = $"{ent} ruffles its bone-shard quills, forming a defensive shell!";
+        var othersMsg = "The hedgehog ruffles its bone-shard quills, forming a defensive shell!";
         _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
         _aura.GiveAura(ent, Color.Blue, shield.ShieldDuration, 2);
 
