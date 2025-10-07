@@ -84,7 +84,7 @@
   name: swamp
   components:
   - type: Sprite
-    color: "#89a18e"
+    color: "#778c7c"
 
 - type: entity
   parent: CMFloorShallowWaterEntity

@@ -37,6 +37,20 @@
     state: strata_metalplatform_stair_alt
 
 - type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrata2Stair
+  components:
+  - type: Sprite
+    state: strata_metalplatform2_stair
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrata2StairAlt
+  components:
+  - type: Sprite
+    state: strata_metalplatform2_stair_alt
+
+- type: entity
   parent: RMCPlatformCornerSmall
   id: RMCPlatformStrataCornerSmall
   name: raised metal corner

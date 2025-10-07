@@ -64,6 +64,14 @@
       "directions": 4
     },
     {
+      "name": "strata_metalplatform2_stair",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform2_stair_alt",
+      "directions": 4
+    },
+    {
       "name": "strata_metalplatform3",
       "directions": 4
     },
