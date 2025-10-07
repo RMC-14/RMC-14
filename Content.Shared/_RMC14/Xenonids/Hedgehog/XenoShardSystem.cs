@@ -6,6 +6,7 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
@@ -43,6 +44,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         SubscribeLocalEvent<XenoSpikeShieldComponent, RemovedShieldEvent>(OnShieldRemoved);
         SubscribeLocalEvent<XenoShardComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<XenoShardComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
     }
 
     public override void Update(float frameTime)
@@ -335,5 +337,14 @@ public sealed class XenoShardSystem : EntitySystem
         Dirty(ent);
         _armor.UpdateArmorValue(ent.Owner);
         UpdateHedgehogSprite(ent);
+    }
+
+    private void OnRefreshMovementSpeed(Entity<XenoShardComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        // Apply speed boost when on spike shed cooldown (no shards)
+        if (ent.Comp.SpikeShedCooldownEnd > _timing.CurTime)
+        {
+            args.ModifySpeed(1.0f + ent.Comp.SpeedModifier, 1.0f + ent.Comp.SpeedModifier);
+        }
     }
 }
