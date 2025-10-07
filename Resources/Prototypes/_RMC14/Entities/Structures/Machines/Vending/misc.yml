@@ -35,9 +35,9 @@
       - id: CMMagazineRifleM4SPR
         amount: 15
       - id: CMMagazineSMGM63
-        amount: 20
+        amount: 25
       - id: CMMagazineRifleM54C
-        amount: 20
+        amount: 25
     - name: Sidearms
       entries:
       - id: RMCWeaponPistolM77Empty
@@ -59,11 +59,11 @@
     - name: Explosives
       entries:
       - id: CMGrenadeFragOld
-        amount: 1
+        amount: 3
       - id: CMGrenadeHighExplosive
-        amount: 2
+        amount: 3
       - id: RMCGrenadeIncendiary
-        amount: 2
+        amount: 3
       - id: CMGrenadeSmoke
         amount: 3
       - id: RMC40MMGrenadeM74AGMF
