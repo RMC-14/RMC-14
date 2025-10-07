@@ -32,5 +32,8 @@ rmc-job-prefix-rcm-teamlead = RCM TL
 rmc-job-name-rcm-lieutenant = Royal Marines Lieutenant
 rmc-job-prefix-rcm-lieutenant = RCM LT
 
+rmc-job-name-rcm-captain = Royal Marines Captain
+rmc-job-prefix-rcm-captain = RCM CAPT
+
 rmc-job-name-rcm-major = Royal Marines Major
 rmc-job-prefix-rcm-major = RCM MAJ

@@ -392,7 +392,10 @@
             "name": "rmc_lieutenant"
         },
         {
-            "name": "rmc_commander"
+            "name": "rmc_captain"
+        },
+        {
+            "name": "rmc_major"
         },
         {
             "name": "hudsquad_vo"

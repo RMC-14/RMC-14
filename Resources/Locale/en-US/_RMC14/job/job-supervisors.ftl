@@ -18,5 +18,6 @@ cm-job-supervisors-secserg = the Section Sergeant
 cm-job-supervisors-platco = the Platoon Commander
 cm-job-supervisors-company-command = Company Command
 cm-job-supervisors-royal-tl = the Team Leader
-cm-job-supervisors-royal-officer = the Lieutenant
+cm-job-supervisors-royal-lieutenant = the Lieutenant
+cm-job-supervisors-royal-captain = the Captain
 cm-job-supervisors-royal-major = the Major
