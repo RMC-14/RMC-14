@@ -192,12 +192,14 @@
   name: banh mi recipe
   result: FoodBanhMi
   time: 15
-  group: Dessert
+  group: Savory
   reagents:
-    Mayo: 10
+    Mayo: 5
   solids:
-    FoodBowlBig: 1
-    FoodMango: 1
+    FoodBaguette: 1
+    FoodCarrot: 1
+    FoodMeat: 1
+    FoodCabbage: 1
 
 #Cakes
 - type: microwaveMealRecipe

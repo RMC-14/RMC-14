@@ -1,7 +1,7 @@
 ﻿{
     "version": 1,
     "license": "CC-BY-SA-4.0",
-    "copyright": "peanut butter cookie sprite by Crow/noctrn., PB&J and onigiri sprites by SurfinNinja",
+    "copyright": "peanut butter cookie sprite by Crow/noctrn., other sprites by SurfinNinja",
     "size": {
         "x": 32,
         "y": 32
@@ -24,6 +24,12 @@
         },
         {
             "name": "banh-mi-half"
+        },
+        {
+            "name": "chicken-parm-hero"
+        },
+        {
+            "name": "chicken-parm-half"
         },
         {
             "name": "yorkshire-pudding"

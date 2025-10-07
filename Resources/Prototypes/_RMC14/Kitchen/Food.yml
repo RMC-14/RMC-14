@@ -174,7 +174,7 @@
   name: banh mi
   parent: CMFoodBase
   id: FoodBanhMi
-  description: It's a grand gesture that isn't the least bit grand.
+  description: Banh Mi, for Banh You
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -202,7 +202,7 @@
   name: banh mi half
   parent: CMFoodBase
   id: FoodBanhMiHalf
-  description: It's a grand gesture that isn't the least bit grand.
+  description: That's a symphony in a sandwich!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -211,6 +211,61 @@
     flavors:
     - bread
     - vegetables
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+
+- type: entity
+  name: chicken parm hero
+  parent: CMFoodBase
+  id: FoodChickenParmHero
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: chicken-parm-hero
+  - type: FlavorProfile
+    flavors:
+    - tomato
+    - bread
+    - cheesy
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 60
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30
+  - type: SliceableFood
+    slice: FoodChickenParmHalf
+    count: 2
+
+
+- type: entity
+  name: chicken parm half
+  parent: CMFoodBase
+  id: FoodChickenParmHalf
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: chicken-parm-half
+  - type: FlavorProfile
+    flavors:
+    - bread
+    - tomato
+    - cheesy
     - meaty
   - type: Food
     transferAmount: 5
