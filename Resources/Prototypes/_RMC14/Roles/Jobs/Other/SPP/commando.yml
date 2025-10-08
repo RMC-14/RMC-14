@@ -1,17 +1,17 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCSPPCommandoLeader
-  name: rmc-job-name-spp-commando-leader
+  id: RMCSPPCommando
+  name: rmc-job-name-spp-commando
   description: rmc-ghost-role-information-deathsquad-description
-  playTimeTracker: CMJobSPPCommmandoLeader
+  playTimeTracker: CMJobSPPCommmando
   ranks:
     RMCRankSPPSerzhant: []
-  startingGear: RMCGearSPPCommandoLeader
-  icon: "RMCJobIconSPPCommandoLeader"
+  startingGear: RMCGearSPPCommando
+  icon: "RMCJobIconSPPCommando"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: SPP Commando Leader (!DEATHSQUAD!)
+  spawnMenuRoleName: SPP Commando (!DEATHSQUAD!)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,8 +26,7 @@
         RMCSkillEngineer: 2
         RMCSkillFirearms: 2
         RMCSkillFireman: 2
-        RMCSkillJtac: 2
-        RMCSkillLeadership: 1
+        RMCSkillJtac: 1
         RMCSkillMedical: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 1
@@ -39,30 +38,30 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: rmc-job-prefix-spp-commando-leader
+      prefix: rmc-job-prefix-spp-commando
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidSPPCommandoLeader
-  name: DEATHSQUAD spp ghost role commando leader
+  id: RMCRandomHumanoidSPPCommando
+  name: DEATHSQUAD spp ghost role commando
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: spp_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCSPPCommandoLeader
+    settings: RMCSPPCommando
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCSPPCommandoLeader
+  id: RMCSPPCommando
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-commando-leader
+    name: rmc-ghost-name-spp-commando
     description: rmc-ghost-role-information-deathsquad-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
-    job: RMCSPPCommandoLeader
+    job: RMCSPPCommando
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader
@@ -73,7 +72,7 @@
     squad: SquadSPP
 
 - type: startingGear
-  id: RMCGearSPPCommandoLeader
+  id: RMCGearSPPCommando
   equipment:
     head: CMHeadCapSPPBeret
     ears: RMCHeadsetSPPCommando
@@ -89,17 +88,14 @@
     belt: RMCBeltHolsterPistolSPPNPZ92
     back: RMCBackpackSPPCommando
     pocket1: RMCPouchMagazineLarge
-    pocket2: RMCPouchExplosiveFilledPlasticExplosives
+    pocket2: RMCPouchFirstAidERTFill
   storage:
     back:
     - CMMRE
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
-    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMCrowbar
-    - RMCRangefinder
     - RMCHandcuffs
     - RMCHandcuffs
-    - RMCBoxZiptie
     outerClothing:
     - RMCMagazineRifleType71AP
     - RMCMagazineRifleType71AP
@@ -110,11 +106,11 @@
     - RMCMagazineRifleType71AP
 
 - type: playTimeTracker
-  id: CMJobSPPCommmandoLeader
+  id: CMJobSPPCommmando
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSPPCommandoLeader
+  id: RMCJobIconSPPCommando
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_comsl
+    state: upp_com
