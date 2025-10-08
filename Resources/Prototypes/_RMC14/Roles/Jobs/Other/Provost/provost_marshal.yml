@@ -9,7 +9,7 @@
   startingGear: RMCGearProvostMarshal
   icon: RMCJobIconProvostMarshal
   joinNotifyCrew: false
-  cm-job-supervisors-provost-sector-marshal
+  supervisors: cm-job-supervisors-provost-sector-marshal
   accessGroups:
   - ShipMasterAccess
   special:
