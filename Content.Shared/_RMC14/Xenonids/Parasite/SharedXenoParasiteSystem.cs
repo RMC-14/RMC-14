@@ -598,11 +598,21 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
 
-        if (_net.IsServer && TryComp<ActorComponent>(parasite, out var actor))
+        if (_net.IsServer)
         {
-            var tracking = EnsureComp<ParasiteInfectionTrackingComponent>(victim);
-            tracking.OriginalParasiteUserId = actor.PlayerSession.UserId;
-            Dirty(victim, tracking);
+            if (TryComp<ActorComponent>(parasite, out var parasiteActor))
+            {
+                var tracking = EnsureComp<ParasiteInfectionTrackingComponent>(victim);
+                tracking.OriginalParasiteUserId = parasiteActor.PlayerSession.UserId;
+                Dirty(victim, tracking);
+            }
+
+            if (TryComp<ActorComponent>(victim, out var victimActor))
+            {
+                var infected = EnsureComp<VictimInfectedComponent>(victim);
+                infected.VictimUserId = victimActor.PlayerSession.UserId;
+                Dirty(victim, infected);
+            }
         }
 
         RemCompDeferred<ParasiteAIComponent>(parasite);
@@ -1061,18 +1071,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
 
-        NetUserId? victimUserId = null;
-        if (_net.IsServer && TryComp<ActorComponent>(victim.Owner, out var victimActor))
-        {
-            victimUserId = victimActor.PlayerSession.UserId;
-        }
-
         var readyEv = new LarvaReadyToBurstEvent(victim.Owner, spawned);
         RaiseLocalEvent(ref readyEv);
 
-        if (_net.IsServer && (victim.Comp.OriginalParasiteUserId != null || victimUserId != null))
+        if (_net.IsServer && (victim.Comp.OriginalParasiteUserId != null || victim.Comp.VictimUserId != null))
         {
-            var priorityEv = new AssignLarvaPriorityEvent(spawned, victim.Comp.OriginalParasiteUserId, victimUserId);
+            var priorityEv = new AssignLarvaPriorityEvent(spawned, victim.Comp.OriginalParasiteUserId, victim.Comp.VictimUserId);
             RaiseLocalEvent(ref priorityEv);
         }
     }

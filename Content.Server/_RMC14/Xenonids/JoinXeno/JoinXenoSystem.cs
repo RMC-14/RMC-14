@@ -1,4 +1,3 @@
-using Content.Server._RMC14.Admin;
 using Content.Server.Mind;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
@@ -21,6 +20,7 @@ using Content.Shared.Popups;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Log;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -46,10 +46,8 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
         SubscribeLocalEvent<LarvaReadyToBurstEvent>(OnLarvaReadyToBurst);
         SubscribeLocalEvent<BurstLarvaConsumedEvent>(OnBurstLarvaConsumed);
-
         SubscribeLocalEvent<LarvaQueueComponent, ComponentStartup>(OnLarvaQueueStartup);
         SubscribeLocalEvent<LarvaQueueComponent, ScanExistingLarvaeEvent>(OnScanExistingLarvae);
-
         SubscribeLocalEvent<LarvaPriorityComponent, ComponentStartup>(OnLarvaPriorityStartup);
         SubscribeLocalEvent<AssignLarvaPriorityEvent>(OnAssignLarvaPriority);
         SubscribeLocalEvent<LarvaPriorityCompletedEvent>(OnLarvaPriorityCompleted);
@@ -57,10 +55,8 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
     private void OnLarvaPriorityStartup(Entity<LarvaPriorityComponent> ent, ref ComponentStartup args)
     {
-        if (!ent.Comp.HasPriorityPlayers)
-            return;
-
-        ProcessLarvaPriority((ent.Owner, ent.Comp));
+        if (ent.Comp.HasPriorityPlayers)
+            ProcessLarvaPriority((ent.Owner, ent.Comp));
     }
 
     private void OnAssignLarvaPriority(ref AssignLarvaPriorityEvent args)
@@ -69,13 +65,10 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         priorityComp.OriginalParasiteUserId = args.OriginalParasiteUserId;
         priorityComp.BurstVictimUserId = args.BurstVictimUserId;
         priorityComp.HasPriorityPlayers = args.OriginalParasiteUserId != null || args.BurstVictimUserId != null;
-
         Dirty(args.Larva, priorityComp);
 
         if (priorityComp.HasPriorityPlayers)
-        {
             ProcessLarvaPriority((args.Larva, priorityComp));
-        }
     }
 
     private void OnLarvaPriorityCompleted(ref LarvaPriorityCompletedEvent args)
@@ -84,9 +77,7 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             return;
 
         if (!args.WasAccepted)
-        {
             AddLarvaToNormalQueue(args.Larva);
-        }
 
         RemCompDeferred<LarvaPriorityComponent>(args.Larva);
     }
@@ -97,46 +88,47 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (hive == null)
             return;
 
-        if (larva.Comp.OriginalParasiteUserId != null && !larva.Comp.ParasiteOffered)
+        if (ShouldOfferToParasite(larva.Comp))
         {
-            if (TryOfferLarvaToPriorityPlayer(larva, hive.Value, larva.Comp.OriginalParasiteUserId.Value, "original parasite"))
+            if (TryOfferLarvaToPriorityPlayer(larva, hive.Value, larva.Comp.OriginalParasiteUserId!.Value))
             {
                 larva.Comp.ParasiteOffered = true;
                 Dirty(larva.Owner, larva.Comp);
                 return;
             }
-            else
-            {
-                larva.Comp.ParasiteOffered = true;
-                Dirty(larva.Owner, larva.Comp);
-            }
+            larva.Comp.ParasiteOffered = true;
+            Dirty(larva.Owner, larva.Comp);
         }
 
-        if (larva.Comp.BurstVictimUserId != null && !larva.Comp.VictimOffered)
+        if (ShouldOfferToVictim(larva.Comp))
         {
-            if (TryOfferLarvaToPriorityPlayer(larva, hive.Value, larva.Comp.BurstVictimUserId.Value, "burst victim"))
+            if (TryOfferLarvaToPriorityPlayer(larva, hive.Value, larva.Comp.BurstVictimUserId!.Value))
             {
                 larva.Comp.VictimOffered = true;
                 Dirty(larva.Owner, larva.Comp);
                 return;
             }
-            else
-            {
-                larva.Comp.VictimOffered = true;
-                Dirty(larva.Owner, larva.Comp);
-            }
+            larva.Comp.VictimOffered = true;
+            Dirty(larva.Owner, larva.Comp);
         }
 
         AddLarvaToNormalQueue(larva.Owner);
         RemCompDeferred<LarvaPriorityComponent>(larva.Owner);
     }
 
-    private bool TryOfferLarvaToPriorityPlayer(Entity<LarvaPriorityComponent> larva, Entity<HiveComponent> hive, NetUserId userId, string playerType)
+    private bool ShouldOfferToParasite(LarvaPriorityComponent comp)
     {
-        if (!_playerManager.TryGetSessionById(userId, out var session))
-            return false;
+        return comp.OriginalParasiteUserId != null && !comp.ParasiteOffered;
+    }
 
-        if (!CanStayInQueue(session))
+    private bool ShouldOfferToVictim(LarvaPriorityComponent comp)
+    {
+        return comp.BurstVictimUserId != null && !comp.VictimOffered;
+    }
+
+    private bool TryOfferLarvaToPriorityPlayer(Entity<LarvaPriorityComponent> larva, Entity<HiveComponent> hive, NetUserId userId)
+    {
+        if (!TryGetValidSession(userId, out var session))
             return false;
 
         var promptComp = EnsureComp<LarvaQueuePromptComponent>(hive.Owner);
@@ -144,15 +136,32 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (promptComp.PendingPrompts.ContainsKey(userId))
             return false;
 
+        CreatePrompt(promptComp, hive, larva.Owner, userId);
+        return true;
+    }
+
+    private bool TryGetValidSession(NetUserId userId, out ICommonSession? session)
+    {
+        session = null;
+        if (!_playerManager.TryGetSessionById(userId, out session))
+            return false;
+
+        return CanStayInQueue(session);
+    }
+
+    private void CreatePrompt(LarvaQueuePromptComponent promptComp, Entity<HiveComponent> hive, EntityUid larva, NetUserId userId)
+    {
         var expiryTime = _timing.CurTime + promptComp.PromptTimeout;
-        var larvaNetEntity = GetNetEntity(larva.Owner);
+        var larvaNetEntity = GetNetEntity(larva);
         promptComp.PendingPrompts[userId] = (larvaNetEntity, expiryTime);
 
-        var promptEvent = new LarvaPromptEvent(larvaNetEntity, GetNetEntity(hive.Owner), expiryTime);
-        RaiseNetworkEvent(promptEvent, session);
+        if (_playerManager.TryGetSessionById(userId, out var session))
+        {
+            var promptEvent = new LarvaPromptEvent(larvaNetEntity, GetNetEntity(hive.Owner), expiryTime);
+            RaiseNetworkEvent(promptEvent, session);
+        }
 
         Dirty(hive.Owner, promptComp);
-        return true;
     }
 
     private void AddLarvaToNormalQueue(EntityUid larva)
@@ -161,21 +170,16 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (hive == null)
             return;
 
-        if (!TryComp<LarvaQueueComponent>(hive.Value.Owner, out var queue))
-        {
-            queue = EnsureComp<LarvaQueueComponent>(hive.Value.Owner);
-        }
+        var queue = EnsureComp<LarvaQueueComponent>(hive.Value.Owner);
 
-        if (!queue.PendingLarvae.Contains(larva))
-        {
-            queue.PendingLarvae.Add(larva);
-            Dirty(hive.Value.Owner, queue);
+        if (queue.PendingLarvae.Contains(larva))
+            return;
 
-            if (queue.PlayerQueue.Count > 0)
-            {
-                ProcessLarvaQueue(hive.Value, (hive.Value.Owner, queue));
-            }
-        }
+        queue.PendingLarvae.Add(larva);
+        Dirty(hive.Value.Owner, queue);
+
+        if (queue.PlayerQueue.Count > 0)
+            ProcessLarvaQueue(hive.Value, (hive.Value.Owner, queue));
     }
 
     private bool CanStayInQueue(ICommonSession session)
@@ -185,28 +189,16 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
         var entity = session.AttachedEntity.Value;
 
-        if (HasComp<GhostComponent>(entity))
-            return true;
-
-        if (HasComp<XenoParasiteComponent>(entity))
-            return true;
-
-        if (TryComp<XenoComponent>(entity, out var xeno) &&
-            xeno.Role.Id == "CMXenoLesserDrone")
-            return true;
-
-        if (HasComp<VictimBurstComponent>(entity))
-            return true;
-
-        if (HasComp<VictimInfectedComponent>(entity))
-            return true;
-
-        return false;
+        return HasComp<GhostComponent>(entity) ||
+               HasComp<XenoParasiteComponent>(entity) ||
+               HasComp<VictimBurstComponent>(entity) ||
+               HasComp<VictimInfectedComponent>(entity) ||
+               (TryComp<XenoComponent>(entity, out var xeno) && xeno.Role.Id == "CMXenoLesserDrone");
     }
 
     private void CleanupInvalidQueuePlayers(Entity<LarvaQueueComponent> queue)
     {
-        var tempQueue = new Queue<NetUserId>();
+        var validPlayers = new Queue<NetUserId>();
         var removedCount = 0;
 
         while (queue.Comp.PlayerQueue.Count > 0)
@@ -221,26 +213,26 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
             if (CanStayInQueue(session))
             {
-                tempQueue.Enqueue(userId);
+                validPlayers.Enqueue(userId);
             }
             else
             {
                 removedCount++;
                 if (session.AttachedEntity != null)
                 {
-                    var msg = Loc.GetString("rmc-xeno-queue-removed-invalid-state");
-                    _popup.PopupEntity(msg, session.AttachedEntity.Value,
-                        session.AttachedEntity.Value, PopupType.MediumCaution);
+                    _popup.PopupEntity(
+                        Loc.GetString("rmc-xeno-queue-removed-invalid-state"),
+                        session.AttachedEntity.Value,
+                        session.AttachedEntity.Value,
+                        PopupType.MediumCaution);
                 }
             }
         }
 
-        queue.Comp.PlayerQueue = tempQueue;
+        queue.Comp.PlayerQueue = validPlayers;
 
         if (removedCount > 0)
-        {
             Dirty(queue);
-        }
     }
 
     public override void Update(float frameTime)
@@ -256,7 +248,6 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         while (query.MoveNext(out var hiveId, out var hive, out var queue))
         {
             CleanupInvalidQueuePlayers((hiveId, queue));
-
             ProcessExpiredPrompts((hiveId, hive), (hiveId, queue), time);
 
             if (queue.PlayerQueue.Count == 0)
@@ -276,52 +267,63 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (!TryComp<LarvaQueuePromptComponent>(hive.Owner, out var promptComp))
             return;
 
-        var expiredPrompts = new List<NetUserId>();
+        var expiredPrompts = promptComp.PendingPrompts
+            .Where(kvp => currentTime >= kvp.Value.ExpiresAt)
+            .Select(kvp => new ExpiredPrompt(kvp.Key, kvp.Value.Larva))
+            .ToList();
 
-        foreach (var (userId, (larvaNetEntity, expiryTime)) in promptComp.PendingPrompts)
+        if (expiredPrompts.Count == 0)
+            return;
+
+        foreach (var expired in expiredPrompts)
         {
-            if (currentTime < expiryTime)
-                continue;
-
-            expiredPrompts.Add(userId);
-
-            if (!TryGetEntity(larvaNetEntity, out var larva))
-                continue;
-
-            if (TryComp<LarvaPriorityComponent>(larva.Value, out var priorityComp))
-            {
-                ProcessLarvaPriority((larva.Value, priorityComp));
-            }
-            else
-            {
-                if (!TerminatingOrDeleted(larva.Value) && !_mobState.IsDead(larva.Value))
-                {
-                    queue.Comp.PendingLarvae.Add(larva.Value);
-                }
-                queue.Comp.PlayerQueue.Enqueue(userId);
-            }
-
-            if (_playerManager.TryGetSessionById(userId, out var session))
-            {
-                var cancelEv = new LarvaPromptCancelledEvent(larvaNetEntity, "timeout");
-                RaiseNetworkEvent(cancelEv, session);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-prompt-timeout"),
-                    session.AttachedEntity ?? EntityUid.Invalid,
-                    session.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
-            }
+            promptComp.PendingPrompts.Remove(expired.UserId);
+            HandleExpiredPrompt(expired, queue);
+            NotifyPlayerOfTimeout(expired);
         }
 
-        foreach (var expiredUserId in expiredPrompts)
-        {
-            promptComp.PendingPrompts.Remove(expiredUserId);
-        }
+        Dirty(hive.Owner, promptComp);
+        Dirty(queue.Owner, queue.Comp);
+        SendQueueStatusToAll(hive, queue);
+    }
 
-        if (expiredPrompts.Count > 0)
+    private void HandleExpiredPrompt(ExpiredPrompt expired, Entity<LarvaQueueComponent> queue)
+    {
+        if (!TryGetEntity(expired.LarvaNetEntity, out var larva))
+            return;
+
+        if (TryComp<LarvaPriorityComponent>(larva.Value, out var priorityComp))
         {
-            Dirty(hive.Owner, promptComp);
-            Dirty(queue.Owner, queue.Comp);
-            SendQueueStatusToAll(hive, queue);
+            ProcessLarvaPriority((larva.Value, priorityComp));
         }
+        else
+        {
+            ReturnLarvaToQueue(larva.Value, queue);
+        }
+    }
+
+    private void ReturnLarvaToQueue(EntityUid larva, Entity<LarvaQueueComponent> queue)
+    {
+        if (TerminatingOrDeleted(larva) || _mobState.IsDead(larva))
+            return;
+
+        if (!queue.Comp.PendingLarvae.Contains(larva))
+            queue.Comp.PendingLarvae.Add(larva);
+    }
+
+    private void NotifyPlayerOfTimeout(ExpiredPrompt expired)
+    {
+        if (!_playerManager.TryGetSessionById(expired.UserId, out var session))
+            return;
+
+        var cancelEv = new LarvaPromptCancelledEvent(expired.LarvaNetEntity, "timeout");
+        RaiseNetworkEvent(cancelEv, session);
+
+        _popup.PopupEntity(
+            Loc.GetString("rmc-xeno-larva-prompt-timeout"),
+            session.AttachedEntity ?? EntityUid.Invalid,
+            session.AttachedEntity ?? EntityUid.Invalid,
+            PopupType.MediumCaution);
     }
 
     private void OnLarvaQueueStartup(Entity<LarvaQueueComponent> queue, ref ComponentStartup args)
@@ -336,36 +338,41 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
     private void ScanForExistingLarvae(Entity<LarvaQueueComponent> queue)
     {
-        var foundCount = 0;
+        var foundLarvae = new List<EntityUid>();
         var infectedQuery = EntityQueryEnumerator<VictimInfectedComponent>();
 
         while (infectedQuery.MoveNext(out var hostId, out var infected))
         {
-            if (infected.SpawnedLarva == null)
-                continue;
-
-            var larva = infected.SpawnedLarva.Value;
-            var larvaHive = _hive.GetHive(larva);
-
-            if (larvaHive?.Owner != queue.Owner)
-                continue;
-
-            if (!infected.IsBursting && !queue.Comp.PendingLarvae.Contains(larva) && !HasComp<LarvaPriorityComponent>(larva))
-            {
-                queue.Comp.PendingLarvae.Add(larva);
-                foundCount++;
-            }
+            if (ShouldAddLarvaFromScan(infected, queue, out var larva))
+                foundLarvae.Add(larva.Value);
         }
 
-        if (foundCount > 0)
-        {
-            Dirty(queue);
+        if (foundLarvae.Count == 0)
+            return;
 
-            if (queue.Comp.PlayerQueue.Count > 0 && TryComp<HiveComponent>(queue.Owner, out var hive))
-            {
-                ProcessLarvaQueue((queue.Owner, hive), queue);
-            }
-        }
+        foreach (var larva in foundLarvae)
+            queue.Comp.PendingLarvae.Add(larva);
+
+        Dirty(queue);
+
+        if (queue.Comp.PlayerQueue.Count > 0 && TryComp<HiveComponent>(queue.Owner, out var hive))
+            ProcessLarvaQueue((queue.Owner, hive), queue);
+    }
+
+    private bool ShouldAddLarvaFromScan(VictimInfectedComponent infected, Entity<LarvaQueueComponent> queue, out EntityUid? larva)
+    {
+        larva = null;
+
+        if (infected.SpawnedLarva == null || infected.IsBursting)
+            return false;
+
+        larva = infected.SpawnedLarva.Value;
+        var larvaHive = _hive.GetHive(larva.Value);
+
+        if (larvaHive?.Owner != queue.Owner)
+            return false;
+
+        return !queue.Comp.PendingLarvae.Contains(larva.Value) && !HasComp<LarvaPriorityComponent>(larva.Value);
     }
 
     private void OnLarvaReadyToBurst(ref LarvaReadyToBurstEvent args)
@@ -374,10 +381,7 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (hive == null)
             return;
 
-        if (!TryComp<LarvaQueueComponent>(hive.Value.Owner, out var queue))
-        {
-            queue = EnsureComp<LarvaQueueComponent>(hive.Value.Owner);
-        }
+        var queue = EnsureComp<LarvaQueueComponent>(hive.Value.Owner);
 
         if (HasComp<LarvaPriorityComponent>(args.Larva))
         {
@@ -385,14 +389,11 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             return;
         }
 
-        var wasInPending = queue.PendingLarvae.Contains(args.Larva);
         queue.PendingLarvae.Add(args.Larva);
         Dirty(hive.Value.Owner, queue);
 
         if (queue.PlayerQueue.Count > 0)
-        {
             ProcessLarvaQueue(hive.Value, (hive.Value.Owner, queue));
-        }
 
         SendQueueStatusToAll(hive.Value, (hive.Value.Owner, queue));
     }
@@ -402,14 +403,15 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         var query = EntityQueryEnumerator<LarvaQueueComponent>();
         while (query.MoveNext(out var queueId, out var queue))
         {
-            if (queue.PendingLarvae.Remove(args.Larva))
-            {
-                Dirty(queueId, queue);
+            if (!queue.PendingLarvae.Remove(args.Larva))
+                continue;
 
-                if (TryComp<HiveComponent>(queueId, out var hive))
-                    SendQueueStatusToAll((queueId, hive), (queueId, queue));
-                break;
-            }
+            Dirty(queueId, queue);
+
+            if (TryComp<HiveComponent>(queueId, out var hive))
+                SendQueueStatusToAll((queueId, hive), (queueId, queue));
+
+            break;
         }
     }
 
@@ -420,40 +422,38 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         if (queue.Comp.PlayerQueue.Count == 0)
             return;
 
-        var normalLarvaeCount = 0;
-        var priorityLarvae = new List<EntityUid>();
-
-        foreach (var larva in queue.Comp.PendingLarvae)
-        {
-            if (TryComp<LarvaPriorityComponent>(larva, out var priority) && priority.HasPriorityPlayers)
-            {
-                priorityLarvae.Add(larva);
-            }
-            else
-            {
-                normalLarvaeCount++;
-            }
-        }
-
-        var totalAvailable = hive.Comp.BurrowedLarva + normalLarvaeCount;
-
-        if (totalAvailable <= 0)
+        var availableCount = CountAvailableLarvae(queue.Comp, hive.Comp);
+        if (availableCount <= 0)
             return;
 
         var promptComp = EnsureComp<LarvaQueuePromptComponent>(hive.Owner);
+        var processed = ProcessQueuedPlayers(hive, queue, promptComp, availableCount);
+
+        if (processed > 0)
+        {
+            Dirty(hive.Owner, promptComp);
+            Dirty(queue);
+            SendQueueStatusToAll(hive, queue);
+        }
+    }
+
+    private int CountAvailableLarvae(LarvaQueueComponent queue, HiveComponent hive)
+    {
+        var normalLarvae = queue.PendingLarvae.Count(larva =>
+            !TryComp<LarvaPriorityComponent>(larva, out var priority) || !priority.HasPriorityPlayers);
+
+        return hive.BurrowedLarva + normalLarvae;
+    }
+
+    private int ProcessQueuedPlayers(Entity<HiveComponent> hive, Entity<LarvaQueueComponent> queue, LarvaQueuePromptComponent promptComp, int availableCount)
+    {
         var processed = 0;
 
-        while (processed < totalAvailable && queue.Comp.PlayerQueue.Count > 0)
+        while (processed < availableCount && queue.Comp.PlayerQueue.Count > 0)
         {
             var userId = queue.Comp.PlayerQueue.Dequeue();
 
-            if (!_playerManager.TryGetSessionById(userId, out var session))
-            {
-                processed++;
-                continue;
-            }
-
-            if (!CanStayInQueue(session))
+            if (!TryGetValidSession(userId, out var session))
             {
                 processed++;
                 continue;
@@ -465,125 +465,109 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
                 continue;
             }
 
-            EntityUid? availableLarva = null;
-
-            foreach (var larva in queue.Comp.PendingLarvae)
-            {
-                if (!TryComp<LarvaPriorityComponent>(larva, out var priority) || !priority.HasPriorityPlayers)
-                {
-                    availableLarva = larva;
-                    queue.Comp.PendingLarvae.Remove(larva);
-                    break;
-                }
-            }
-
-            if (availableLarva == null && hive.Comp.BurrowedLarva > 0)
-            {
-                if (TrySpawnBurrowedLarvaForPrompt(hive, out var burrowedLarva))
-                {
-                    availableLarva = burrowedLarva;
-                }
-            }
-
-            if (availableLarva == null)
+            if (!TryGetOrSpawnLarva(hive, queue, out var larva))
             {
                 queue.Comp.PlayerQueue.Enqueue(userId);
                 break;
             }
 
-            var expiryTime = _timing.CurTime + promptComp.PromptTimeout;
-            var larvaNetEntity = GetNetEntity(availableLarva.Value);
-            promptComp.PendingPrompts[userId] = (larvaNetEntity, expiryTime);
-
-            var promptEvent = new LarvaPromptEvent(larvaNetEntity, GetNetEntity(hive.Owner), expiryTime);
-            RaiseNetworkEvent(promptEvent, session);
-
+            CreatePrompt(promptComp, hive, larva.Value, userId);
             processed++;
         }
 
-        if (processed > 0)
-        {
-            Dirty(hive.Owner, promptComp);
-            Dirty(queue);
-            SendQueueStatusToAll(hive, queue);
-        }
+        return processed;
     }
 
-    private bool TrySpawnBurrowedLarvaForPrompt(Entity<HiveComponent> hive, out EntityUid larva)
+    private bool TryGetOrSpawnLarva(Entity<HiveComponent> hive, Entity<LarvaQueueComponent> queue, out EntityUid? larva)
     {
-        larva = default;
+        larva = null;
+
+        foreach (var candidate in queue.Comp.PendingLarvae)
+        {
+            if (!TryComp<LarvaPriorityComponent>(candidate, out var priority) || !priority.HasPriorityPlayers)
+            {
+                larva = candidate;
+                queue.Comp.PendingLarvae.Remove(candidate);
+                return true;
+            }
+        }
+
+        if (hive.Comp.BurrowedLarva > 0 && TrySpawnBurrowedLarva(hive, out larva))
+            return true;
+
+        return false;
+    }
+
+    private bool TrySpawnBurrowedLarva(Entity<HiveComponent> hive, out EntityUid? larva)
+    {
+        larva = null;
 
         if (hive.Comp.BurrowedLarva <= 0)
             return false;
 
-        EntityUid spawnedLarva = default;
-
-        bool TrySpawnAt<T>() where T : Component
-        {
-            var candidates = EntityQueryEnumerator<T, HiveMemberComponent>();
-            while (candidates.MoveNext(out var uid, out _, out var member))
-            {
-                if (member.Hive != hive.Owner)
-                    continue;
-
-                if (_mobState.IsDead(uid))
-                    continue;
-
-                var position = Transform(uid).Coordinates;
-                spawnedLarva = Spawn(hive.Comp.BurrowedLarvaId, position);
-                return true;
-            }
+        if (!TryFindSpawnLocation(hive, out var spawnCoords))
             return false;
-        }
 
-        if (!TrySpawnAt<HiveCoreComponent>() &&
-            !TrySpawnAt<XenoEvolutionGranterComponent>() &&
-            !TrySpawnAt<XenoComponent>())
-        {
-            return false;
-        }
-
-        if (spawnedLarva == default)
-            return false;
+        var spawnedLarva = Spawn(hive.Comp.BurrowedLarvaId, spawnCoords);
+        _hive.IncreaseBurrowedLarva(hive, -1);
+        _xeno.MakeXeno(spawnedLarva);
+        _hive.SetHive(spawnedLarva, hive.Owner);
 
         larva = spawnedLarva;
-
-        _hive.IncreaseBurrowedLarva(hive, -1);
-
-        _xeno.MakeXeno(larva);
-        _hive.SetHive(larva, hive.Owner);
-
         return true;
+    }
+
+    private bool TryFindSpawnLocation(Entity<HiveComponent> hive, out EntityCoordinates coords)
+    {
+        coords = default;
+
+        if (TryFindSpawnAt<HiveCoreComponent>(hive, out coords))
+            return true;
+
+        if (TryFindSpawnAt<XenoEvolutionGranterComponent>(hive, out coords))
+            return true;
+
+        if (TryFindSpawnAt<XenoComponent>(hive, out coords))
+            return true;
+
+        return false;
+    }
+
+    private bool TryFindSpawnAt<T>(Entity<HiveComponent> hive, out EntityCoordinates coords) where T : Component
+    {
+        coords = default;
+        var candidates = EntityQueryEnumerator<T, HiveMemberComponent>();
+
+        while (candidates.MoveNext(out var uid, out _, out var member))
+        {
+            if (member.Hive != hive.Owner || _mobState.IsDead(uid))
+                continue;
+
+            coords = Transform(uid).Coordinates;
+            return true;
+        }
+
+        return false;
     }
 
     private void CleanupStaleLarvae(Entity<LarvaQueueComponent> queue)
     {
-        var toRemove = new List<EntityUid>();
+        var staleLarvae = queue.Comp.PendingLarvae
+            .Where(larva => TerminatingOrDeleted(larva) || _mobState.IsDead(larva))
+            .ToList();
 
-        foreach (var larva in queue.Comp.PendingLarvae)
-        {
-            if (TerminatingOrDeleted(larva) || _mobState.IsDead(larva))
-            {
-                toRemove.Add(larva);
-            }
-        }
+        if (staleLarvae.Count == 0)
+            return;
 
-        if (toRemove.Count > 0)
-        {
-            foreach (var larva in toRemove)
-            {
-                queue.Comp.PendingLarvae.Remove(larva);
-            }
-            Dirty(queue);
-        }
+        foreach (var larva in staleLarvae)
+            queue.Comp.PendingLarvae.Remove(larva);
+
+        Dirty(queue);
     }
 
     private bool TryAssignLarva(Entity<HiveComponent> hive, EntityUid larva, ICommonSession session)
     {
-        if (TerminatingOrDeleted(larva))
-            return false;
-
-        if (_mobState.IsDead(larva))
+        if (TerminatingOrDeleted(larva) || _mobState.IsDead(larva))
             return false;
 
         if (!TryComp<MetaDataComponent>(larva, out var metaData))
@@ -592,12 +576,10 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         var newMind = _mind.CreateMind(session.UserId, metaData.EntityName);
         _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
 
-        if (TryComp<BursterComponent>(larva, out var burster))
+        if (TryComp<BursterComponent>(larva, out var burster) &&
+            TryComp<VictimInfectedComponent>(burster.BurstFrom, out var infected))
         {
-            if (TryComp<VictimInfectedComponent>(burster.BurstFrom, out var infected))
-            {
-                _parasiteSystem.TryStartBurst((burster.BurstFrom, infected));
-            }
+            _parasiteSystem.TryStartBurst((burster.BurstFrom, infected));
         }
 
         var consumedEv = new BurstLarvaConsumedEvent(larva);
@@ -608,110 +590,151 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
     protected override void OnAcceptLarvaPrompt(AcceptLarvaPromptRequest msg, EntitySessionEventArgs args)
     {
+        _logger.Info($"OnAcceptLarvaPrompt: Player {args.SenderSession.UserId} accepting larva {msg.Larva}");
+
         if (!TryGetEntity(msg.Larva, out var larva))
+        {
+            _logger.Info($"OnAcceptLarvaPrompt: Could not resolve larva entity {msg.Larva}");
             return;
+        }
 
         var query = EntityQueryEnumerator<HiveComponent, LarvaQueuePromptComponent>();
         while (query.MoveNext(out var hiveId, out var hive, out var promptComp))
         {
-            if (!promptComp.PendingPrompts.TryGetValue(args.SenderSession.UserId, out var promptData))
-                continue;
-
-            var (promptLarvaNetEntity, expiryTime) = promptData;
-            if (promptLarvaNetEntity != msg.Larva)
+            if (!ValidatePrompt(promptComp, args.SenderSession.UserId, msg.Larva, out var expiryTime))
                 continue;
 
             if (_timing.CurTime >= expiryTime)
             {
-                var timeoutMsg = Loc.GetString("rmc-xeno-larva-prompt-expired");
-                _popup.PopupEntity(timeoutMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
+                _logger.Info($"OnAcceptLarvaPrompt: Prompt expired for player {args.SenderSession.UserId}");
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-xeno-larva-prompt-expired"),
+                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                    PopupType.MediumCaution);
                 return;
             }
 
+            _logger.Info($"OnAcceptLarvaPrompt: Valid prompt found, assigning larva {ToPrettyString(larva.Value)} to player {args.SenderSession.UserId}");
             promptComp.PendingPrompts.Remove(args.SenderSession.UserId);
             Dirty(hiveId, promptComp);
 
-            if (TryAssignLarva((hiveId, hive), larva.Value, args.SenderSession))
-            {
-                _rmcGameTicker.PlayerJoinGame(args.SenderSession);
-                var successMessage = Loc.GetString("rmc-xeno-larva-accepted");
-                _popup.PopupEntity(successMessage, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.Medium);
-
-                if (TryComp<LarvaPriorityComponent>(larva.Value, out _))
-                {
-                    var completedEv = new LarvaPriorityCompletedEvent(larva.Value, true, args.SenderSession.UserId);
-                    RaiseLocalEvent(ref completedEv);
-                }
-            }
-            else
-            {
-                var failureMessage = Loc.GetString("rmc-xeno-larva-assignment-failed");
-                _popup.PopupEntity(failureMessage, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
-
-                if (TryComp<LarvaPriorityComponent>(larva.Value, out var priority))
-                {
-                    ProcessLarvaPriority((larva.Value, priority));
-                }
-                else if (TryComp<LarvaQueueComponent>(hiveId, out var queue))
-                {
-                    if (!TerminatingOrDeleted(larva.Value) && !_mobState.IsDead(larva.Value))
-                    {
-                        queue.PendingLarvae.Add(larva.Value);
-                        Dirty(hiveId, queue);
-                    }
-                }
-            }
+            HandleLarvaAcceptance((hiveId, hive), larva.Value, args.SenderSession);
 
             if (TryComp<LarvaQueueComponent>(hiveId, out var queueComp))
                 SendQueueStatusToAll((hiveId, hive), (hiveId, queueComp));
 
             return;
         }
+
+        _logger.Info($"OnAcceptLarvaPrompt: No valid prompt found for player {args.SenderSession.UserId}");
+    }
+
+    private bool ValidatePrompt(LarvaQueuePromptComponent promptComp, NetUserId userId, NetEntity larvaNet, out TimeSpan expiryTime)
+    {
+        expiryTime = default;
+
+        if (!promptComp.PendingPrompts.TryGetValue(userId, out var promptData))
+            return false;
+
+        if (promptData.Larva != larvaNet)
+            return false;
+
+        expiryTime = promptData.ExpiresAt;
+        return true;
+    }
+
+    private void HandleLarvaAcceptance(Entity<HiveComponent> hive, EntityUid larva, ICommonSession session)
+    {
+        if (TryAssignLarva(hive, larva, session))
+        {
+            _rmcGameTicker.PlayerJoinGame(session);
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-larva-accepted"),
+                session.AttachedEntity ?? EntityUid.Invalid,
+                session.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.Medium);
+
+            if (TryComp<LarvaPriorityComponent>(larva, out _))
+            {
+                var completedEv = new LarvaPriorityCompletedEvent(larva, true, session.UserId);
+                RaiseLocalEvent(ref completedEv);
+            }
+        }
+        else
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-larva-assignment-failed"),
+                session.AttachedEntity ?? EntityUid.Invalid,
+                session.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.MediumCaution);
+            HandleFailedAssignment(hive, larva);
+        }
+    }
+
+    private void HandleFailedAssignment(Entity<HiveComponent> hive, EntityUid larva)
+    {
+        if (TryComp<LarvaPriorityComponent>(larva, out var priority))
+        {
+            ProcessLarvaPriority((larva, priority));
+        }
+        else if (TryComp<LarvaQueueComponent>(hive.Owner, out var queue))
+        {
+            if (!TerminatingOrDeleted(larva) && !_mobState.IsDead(larva))
+            {
+                queue.PendingLarvae.Add(larva);
+                Dirty(hive.Owner, queue);
+            }
+        }
     }
 
     protected override void OnDeclineLarvaPrompt(DeclineLarvaPromptRequest msg, EntitySessionEventArgs args)
     {
+        _logger.Info($"OnDeclineLarvaPrompt: Player {args.SenderSession.UserId} declining larva {msg.Larva}");
+
         if (!TryGetEntity(msg.Larva, out var larva))
+        {
+            _logger.Info($"OnDeclineLarvaPrompt: Could not resolve larva entity {msg.Larva}");
             return;
+        }
 
         var query = EntityQueryEnumerator<HiveComponent, LarvaQueuePromptComponent>();
         while (query.MoveNext(out var hiveId, out var hive, out var promptComp))
         {
-            if (!promptComp.PendingPrompts.TryGetValue(args.SenderSession.UserId, out var promptData))
+            if (!ValidatePrompt(promptComp, args.SenderSession.UserId, msg.Larva, out _))
                 continue;
 
-            var (promptLarvaNetEntity, _) = promptData;
-            if (promptLarvaNetEntity != msg.Larva)
-                continue;
-
+            _logger.Info($"OnDeclineLarvaPrompt: Valid prompt found, handling decline for larva {ToPrettyString(larva.Value)}");
             promptComp.PendingPrompts.Remove(args.SenderSession.UserId);
             Dirty(hiveId, promptComp);
 
-            var declineMsg = Loc.GetString("rmc-xeno-larva-declined");
-            _popup.PopupEntity(declineMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.Medium);
-
-            if (TryComp<LarvaPriorityComponent>(larva.Value, out var priority))
-            {
-                ProcessLarvaPriority((larva.Value, priority));
-            }
-            else if (TryComp<LarvaQueueComponent>(hiveId, out var queue))
-            {
-                if (!TerminatingOrDeleted(larva.Value) && !_mobState.IsDead(larva.Value))
-                {
-                    queue.PendingLarvae.Add(larva.Value);
-                }
-
-                queue.PlayerQueue.Enqueue(args.SenderSession.UserId);
-                Dirty(hiveId, queue);
-
-                SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
-            }
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-larva-declined"),
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.Medium);
+            HandleLarvaDecline((hiveId, hive), larva.Value, args.SenderSession.UserId);
 
             return;
+        }
+
+        _logger.Info($"OnDeclineLarvaPrompt: No valid prompt found for player {args.SenderSession.UserId}");
+    }
+
+    private void HandleLarvaDecline(Entity<HiveComponent> hive, EntityUid larva, NetUserId userId)
+    {
+        if (TryComp<LarvaPriorityComponent>(larva, out var priority))
+        {
+            ProcessLarvaPriority((larva, priority));
+        }
+        else if (TryComp<LarvaQueueComponent>(hive.Owner, out var queue))
+        {
+            if (!TerminatingOrDeleted(larva) && !_mobState.IsDead(larva))
+                queue.PendingLarvae.Add(larva);
+
+            queue.PlayerQueue.Enqueue(userId);
+            Dirty(hive.Owner, queue);
+            SendQueueStatusToAll(hive, (hive.Owner, queue));
         }
     }
 
@@ -722,9 +745,11 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
         if (!CanStayInQueue(args.SenderSession))
         {
-            var invalidMsg = Loc.GetString("rmc-xeno-queue-invalid-state");
-            _popup.PopupEntity(invalidMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-queue-invalid-state"),
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.MediumCaution);
             return;
         }
 
@@ -734,34 +759,47 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             if (!TryComp(comp.Hive, out HiveComponent? hive))
                 continue;
 
-            var queue = EnsureComp<LarvaQueueComponent>(comp.Hive);
-
-            if (queue.PlayerQueue.Contains(args.SenderSession.UserId))
-            {
-                var alreadyInMsg = Loc.GetString("rmc-xeno-queue-already-in");
-                _popup.PopupEntity(alreadyInMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
+            if (!TryJoinQueue(args.SenderSession, comp.Hive, hive))
                 return;
-            }
 
-            if (queue.PlayerQueue.Count >= queue.MaxQueueSize)
-            {
-                var fullMsg = Loc.GetString("rmc-xeno-queue-full");
-                _popup.PopupEntity(fullMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.MediumCaution);
-                return;
-            }
-
-            queue.PlayerQueue.Enqueue(args.SenderSession.UserId);
-            Dirty(comp.Hive, queue);
-
-            var joinedMsg = Loc.GetString("rmc-xeno-queue-joined", ("position", queue.PlayerQueue.Count));
-            _popup.PopupEntity(joinedMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.Medium);
-
-            SendQueueStatusToAll((comp.Hive, hive), (comp.Hive, queue));
             break;
         }
+    }
+
+    private bool TryJoinQueue(ICommonSession session, EntityUid hiveId, HiveComponent hive)
+    {
+        var queue = EnsureComp<LarvaQueueComponent>(hiveId);
+
+        if (queue.PlayerQueue.Contains(session.UserId))
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-queue-already-in"),
+                session.AttachedEntity ?? EntityUid.Invalid,
+                session.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.MediumCaution);
+            return false;
+        }
+
+        if (queue.PlayerQueue.Count >= queue.MaxQueueSize)
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-queue-full"),
+                session.AttachedEntity ?? EntityUid.Invalid,
+                session.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.MediumCaution);
+            return false;
+        }
+
+        queue.PlayerQueue.Enqueue(session.UserId);
+        Dirty(hiveId, queue);
+
+        _popup.PopupEntity(
+            Loc.GetString("rmc-xeno-queue-joined", ("position", queue.PlayerQueue.Count)),
+            session.AttachedEntity ?? EntityUid.Invalid,
+            session.AttachedEntity ?? EntityUid.Invalid,
+            PopupType.Medium);
+        SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
+        return true;
     }
 
     protected override void OnLeaveLarvaQueueRequest(LeaveLarvaQueueRequest msg, EntitySessionEventArgs args)
@@ -769,32 +807,38 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         var query = EntityQueryEnumerator<HiveComponent, LarvaQueueComponent>();
         while (query.MoveNext(out var hiveId, out var hive, out var queue))
         {
-            var tempQueue = new Queue<NetUserId>();
-            var found = false;
+            if (!RemovePlayerFromQueue(queue, args.SenderSession.UserId))
+                continue;
 
-            while (queue.PlayerQueue.Count > 0)
-            {
-                var userId = queue.PlayerQueue.Dequeue();
-                if (userId == args.SenderSession.UserId)
-                {
-                    found = true;
-                    continue;
-                }
-                tempQueue.Enqueue(userId);
-            }
-
-            queue.PlayerQueue = tempQueue;
-
-            if (found)
-            {
-                Dirty(hiveId, queue);
-                var leftMsg = Loc.GetString("rmc-xeno-queue-left");
-                _popup.PopupEntity(leftMsg, args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
-                    args.SenderSession.AttachedEntity ?? EntityUid.Invalid, PopupType.Medium);
-                SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
-                break;
-            }
+            Dirty(hiveId, queue);
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-queue-left"),
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                args.SenderSession.AttachedEntity ?? EntityUid.Invalid,
+                PopupType.Medium);
+            SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
+            break;
         }
+    }
+
+    private bool RemovePlayerFromQueue(LarvaQueueComponent queue, NetUserId userId)
+    {
+        var tempQueue = new Queue<NetUserId>();
+        var found = false;
+
+        while (queue.PlayerQueue.Count > 0)
+        {
+            var queuedUserId = queue.PlayerQueue.Dequeue();
+            if (queuedUserId == userId)
+            {
+                found = true;
+                continue;
+            }
+            tempQueue.Enqueue(queuedUserId);
+        }
+
+        queue.PlayerQueue = tempQueue;
+        return found;
     }
 
     protected override void SendQueueStatusToAll(Entity<HiveComponent> hive, Entity<LarvaQueueComponent> queue)
@@ -807,8 +851,12 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             var position = GetQueuePosition(queue.Comp, session.UserId);
             var inQueue = position > 0;
             var totalAvailable = hive.Comp.BurrowedLarva + queue.Comp.PendingLarvae.Count;
-            var statusEv = new LarvaQueueStatusEvent(position, queue.Comp.PlayerQueue.Count,
-                totalAvailable, queue.Comp.PendingLarvae.Count, inQueue);
+            var statusEv = new LarvaQueueStatusEvent(
+                position,
+                queue.Comp.PlayerQueue.Count,
+                totalAvailable,
+                queue.Comp.PendingLarvae.Count,
+                inQueue);
             RaiseNetworkEvent(statusEv, session);
         }
     }
@@ -849,7 +897,11 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             }
         }
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-no-larvae-available"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(
+            Loc.GetString("rmc-xeno-no-larvae-available"),
+            ent.Owner,
+            ent.Owner,
+            PopupType.MediumCaution);
     }
 
     protected override void OnJoinBurrowedLarva(JoinBurrowedLarvaRequest msg, EntitySessionEventArgs args)
@@ -882,4 +934,6 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             }
         }
     }
+
+    private readonly record struct ExpiredPrompt(NetUserId UserId, NetEntity LarvaNetEntity);
 }

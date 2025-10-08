@@ -42,7 +42,6 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? SpawnedLarva;
 
-
     /// <summary>
     ///     How long it takes for the larva to burst out of the victim.
     /// </summary>
@@ -87,6 +86,9 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField, AutoNetworkedField]
     public NetUserId? OriginalParasiteUserId;
+
+    [DataField, AutoNetworkedField]
+    public NetUserId? VictimUserId;
 
     [DataField]
     public int FinalStage = 6;
@@ -150,7 +152,7 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
-    
+
     /// <summary>
     ///     How long the do-after of the larva bursting takes.
     /// </summary>
