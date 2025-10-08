@@ -18,6 +18,9 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Setup Submodule
+      run: git submodule update --init
+
     - name: Build and Run
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
