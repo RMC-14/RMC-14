@@ -9,6 +9,8 @@ var tagRem = Environment.GetEnvironmentVariable("TAG_REM");
 var tagAdd = Environment.GetEnvironmentVariable("TAG_ADD");
 const string owner = "RMC-14";
 
+Console.WriteLine(repo);
+
 var client = new GitHubClient(new ProductHeaderValue("RMC14GITHUBACTIONS"))
 {
     Credentials = new Credentials(token),
