@@ -10,6 +10,11 @@ marking-RMCSpotsSkrellBodyRight = Skrell Spots
 marking-RMCSpotsSkrellHairLeft = Skrell Spots
 marking-RMCSpotsSkrellHairRight = Skrell Spots
 
+marking-RMCHeaddressSkrellFestive = Festive Gold Headdress
+marking-RMCHeaddressSkrellGold = Gold Headdress
+marking-RMCHeaddressSkrellGoldDiamond = Gold Diamond Headdress
+marking-RMCHeaddressSkrellSilverDiamond = Silver Diamond Headdress
+
 marking-RMCTailSkrell = Skrell Tail
 marking-RMCTailSkrellExtraLong = Extra Long Skrell Tail
 marking-RMCTailSkrellLong = Long Skrell Tail
