@@ -17,8 +17,7 @@ var client = new GitHubClient(new ProductHeaderValue("RMC14GITHUBACTIONS"))
 
 var reviewerTeams = await GetUserTeamsInOrg(owner, reviewer);
 
-
-if (TargetCheck(reviewer, team, reviewerTeams))
+if (TargetCheck())
 {
     await RemoveLabel(client, owner, repo, prNumber, tagRem, tagAdd);
 }
@@ -32,7 +31,7 @@ else
 
 return;
 
-static bool TargetCheck(string? requestedReviewer, string? requestedTeam, HashSet<string>? reviewerTeams)
+bool TargetCheck()
 {
     var targetUsers = new HashSet<string>()
     {
@@ -44,12 +43,9 @@ static bool TargetCheck(string? requestedReviewer, string? requestedTeam, HashSe
         "maintainers",
     };
 
-    if (requestedReviewer != null)
-    {
-    }
 
-    return requestedReviewer != null && targetUsers.Contains(requestedReviewer.ToLower()) ||
-           requestedTeam != null && targetTeams.Contains(requestedTeam.ToLower()) ||
+    return reviewer != null && targetUsers.Contains(reviewer.ToLower()) ||
+           team != null && targetTeams.Contains(team.ToLower()) ||
            reviewerTeams != null && reviewerTeams.Contains("maintainers");
 }
 
