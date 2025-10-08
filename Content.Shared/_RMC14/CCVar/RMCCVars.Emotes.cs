@@ -46,51 +46,6 @@ public sealed partial class RMCCVars
     public static readonly CVarDef<bool> RMCPlayEmotesSkrell =
         CVarDef.Create("rmc.play_emotes_skrell", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid1 =
-        CVarDef.Create("rmc.emote_binding_humanoid_1", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid2 =
-        CVarDef.Create("rmc.emote_binding_humanoid_2", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid3 =
-        CVarDef.Create("rmc.emote_binding_humanoid_3", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid4 =
-        CVarDef.Create("rmc.emote_binding_humanoid_4", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid5 =
-        CVarDef.Create("rmc.emote_binding_humanoid_5", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid6 =
-        CVarDef.Create("rmc.emote_binding_humanoid_6", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid7 =
-        CVarDef.Create("rmc.emote_binding_humanoid_7", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingHumanoid8 =
-        CVarDef.Create("rmc.emote_binding_humanoid_8", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno1 =
-        CVarDef.Create("rmc.emote_binding_xeno_1", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno2 =
-        CVarDef.Create("rmc.emote_binding_xeno_2", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno3 =
-        CVarDef.Create("rmc.emote_binding_xeno_3", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno4 =
-        CVarDef.Create("rmc.emote_binding_xeno_4", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno5 =
-        CVarDef.Create("rmc.emote_binding_xeno_5", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno6 =
-        CVarDef.Create("rmc.emote_binding_xeno_6", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno7 =
-        CVarDef.Create("rmc.emote_binding_xeno_7", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<string> RMCEmoteBindingXeno8 =
-        CVarDef.Create("rmc.emote_binding_xeno_8", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+    public static readonly CVarDef<string> RMCEmoteBindings =
+        CVarDef.Create("rmc.emote_bindings", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 }

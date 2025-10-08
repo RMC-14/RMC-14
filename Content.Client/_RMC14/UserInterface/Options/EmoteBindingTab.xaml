@@ -18,28 +18,96 @@
                    StyleClasses="LabelKeyText" />
                 <cc:HSeparator Margin="0 5" />
                 <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-explain'}" StyleClasses="LabelSubText" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote1" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote2" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote3" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote4" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote4'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote5" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote5'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote6" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote6'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote7" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote7'}" />
-                <ui:OptionDropDown Name="DropDownHumanoidEmote8" Title="{Loc 'rmc-ui-emote-binding-humanoid-emote8'}" />
+                <BoxContainer Name="HumanoidDropDowns" Orientation="Vertical">
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote1" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote2" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote3" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote4'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote4" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote5'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote5" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote6'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote6" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote7'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote7" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote8'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownHumanoidEmote8" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                </BoxContainer>
 
                 <Label Text="{Loc 'rmc-ui-emote-binding-xeno-header'}"
                        FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                        StyleClasses="LabelKeyText"
                        Margin="0 2 0 0"/>
                 <cc:HSeparator Margin="0 5" />
-                <ui:OptionDropDown Name="DropDownXenoEmote1" Title="{Loc 'rmc-ui-emote-binding-xeno-emote1'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote2" Title="{Loc 'rmc-ui-emote-binding-xeno-emote2'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote3" Title="{Loc 'rmc-ui-emote-binding-xeno-emote3'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote4" Title="{Loc 'rmc-ui-emote-binding-xeno-emote4'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote5" Title="{Loc 'rmc-ui-emote-binding-xeno-emote5'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote6" Title="{Loc 'rmc-ui-emote-binding-xeno-emote6'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote7" Title="{Loc 'rmc-ui-emote-binding-xeno-emote7'}" />
-                <ui:OptionDropDown Name="DropDownXenoEmote8" Title="{Loc 'rmc-ui-emote-binding-xeno-emote8'}" />
+                <BoxContainer Name="XenoDropDowns" Orientation="Vertical">
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote1'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote1" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote2'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote2" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote3'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote3" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote4'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote4" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote5'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote5" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote6'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote6" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote7'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote7" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                    <BoxContainer HorizontalExpand="True">
+                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote8'}" />
+                        <Control HorizontalExpand="True"/>
+                        <OptionButton Name="DropDownXenoEmote8" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                </BoxContainer>
             </BoxContainer>
         </ScrollContainer>
         <ctrls:StripeBack HasBottomEdge="False" HasMargins="False">
