@@ -29,6 +29,8 @@ using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -55,6 +57,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoEnergyComponent> _xenoEnergyQuery;
     private readonly EntityQuery<XenoMaturingComponent> _xenoMaturingQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
+    private readonly EntityQuery<XenoShardComponent> _xenoShardsQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
@@ -88,6 +91,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoEnergyQuery = _entity.GetEntityQuery<XenoEnergyComponent>();
         _xenoMaturingQuery = _entity.GetEntityQuery<XenoMaturingComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
+        _xenoShardsQuery = _entity.GetEntityQuery<XenoShardComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
@@ -180,6 +184,7 @@ public sealed class XenoHudOverlay : Overlay
             UpdatePlasma((uid, xeno, sprite), handle);
             UpdateShields((uid, xeno, sprite), handle);
             UpdateEnergy((uid, xeno, sprite), handle);
+            UpdateShards((uid, xeno, sprite), handle);
         }
     }
 
@@ -610,15 +615,29 @@ public sealed class XenoHudOverlay : Overlay
 
     private void UpdateEnergy(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
-        var (uid, xeno, sprite) = ent;
-        if (!_xenoEnergyQuery.TryComp(uid, out var comp) ||
+        if (!_xenoEnergyQuery.TryComp(ent, out var comp) ||
             comp.Max == 0)
         {
             return;
         }
 
-        var energy = comp.Current;
-        var max = comp.Max;
+        UpdatePurpleBar(ent, handle, comp.Current, comp.Max, comp.GenerationCap);
+    }
+
+    private void UpdateShards(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
+    {
+        if (!_xenoShardsQuery.TryComp(ent, out var comp) ||
+            comp.MaxShards == 0)
+        {
+            return;
+        }
+
+        UpdatePurpleBar(ent, handle, comp.Shards, comp.MaxShards, null);
+    }
+
+    private void UpdatePurpleBar(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle, double energy, double max, int? generationCap)
+    {
+        var (_, xeno, sprite) = ent;
         var level = ContentHelpers.RoundToLevels(energy, max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
         var state = $"xenoenergy{name}";
@@ -632,9 +651,9 @@ public sealed class XenoHudOverlay : Overlay
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
 
-        if (comp.GenerationCap != null && comp.Current >= comp.GenerationCap)
+        if (generationCap != null && energy >= generationCap)
         {
-            var level2 = ContentHelpers.RoundToLevels(comp.GenerationCap.Value, max, 11);
+            var level2 = ContentHelpers.RoundToLevels(generationCap.Value, max, 11);
             var name2 = level2 > 0 ? $"{level2 * 10}" : "0";
             var state2 = $"cap{name2}";
             var icon2 = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state2);
