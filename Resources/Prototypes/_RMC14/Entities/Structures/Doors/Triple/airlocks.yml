@@ -1,0 +1,8 @@
+﻿- type: entity
+  parent: RMCDropshipDoorAftBase
+  id: RMCOCPLargeDoorDark
+  name: large door
+  suffix: OCP-583
+  components:
+  - type: Sprite
+    sprite: _RMC14\Structures\Doors\Airlocks\Triple\ocp_large_dark.rsi
