@@ -4,29 +4,35 @@ using Octokit;
 var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 var repo = Environment.GetEnvironmentVariable("REPOSITORY");
 var prNumberValid = int.TryParse(Environment.GetEnvironmentVariable("PR_NUMBER"), out var prNumber);
-var reviewer = Environment.GetEnvironmentVariable("REQUESTED_REVIEWER");
-var team =  Environment.GetEnvironmentVariable("REQUESTED_TEAM");
-var tag =  Environment.GetEnvironmentVariable("TAG_TO_REMOVE");
+var reviewer = Environment.GetEnvironmentVariable("REVIEWER");
+var team = Environment.GetEnvironmentVariable("REQUESTED_TEAM");
+var tagRem = Environment.GetEnvironmentVariable("TAG_REM");
+var tagAdd = Environment.GetEnvironmentVariable("TAG_ADD");
 const string owner = "RMC-14";
-
 
 var client = new GitHubClient(new ProductHeaderValue("RMC14GITHUBACTIONS"))
 {
     Credentials = new Credentials(token),
 };
 
-if (TargetCheck(reviewer, team))
+var reviewerTeams = await GetUserTeamsInOrg(owner, reviewer);
+
+
+if (TargetCheck(reviewer, team, reviewerTeams))
 {
-    await RemoveLabel(client, owner, repo, prNumber, tag);
+    await RemoveLabel(client, owner, repo, prNumber, tagRem, tagAdd);
 }
 else
 {
-    Console.WriteLine("Requested Person is not in the target group/is not a target, skipping.");
+    Console.WriteLine(
+        "Requested Person is not a target, " +
+        "Requested Person is not in a target group, " +
+        "Requested group is not a target, skipping.");
 }
 
 return;
 
-static bool TargetCheck(string? requestedReviewer, string? requestedTeam)
+static bool TargetCheck(string? requestedReviewer, string? requestedTeam, HashSet<string>? reviewerTeams)
 {
     var targetUsers = new HashSet<string>()
     {
@@ -38,23 +44,99 @@ static bool TargetCheck(string? requestedReviewer, string? requestedTeam)
         "maintainers",
     };
 
-    return requestedReviewer != null && targetUsers.Contains(requestedReviewer.ToLower()) || requestedTeam != null && targetTeams.Contains(requestedTeam.ToLower());
+    if (requestedReviewer != null)
+    {
+    }
+
+    return requestedReviewer != null && targetUsers.Contains(requestedReviewer.ToLower()) ||
+           requestedTeam != null && targetTeams.Contains(requestedTeam.ToLower()) ||
+           reviewerTeams != null && reviewerTeams.Contains("maintainers");
 }
 
-static async Task RemoveLabel(GitHubClient client, string owner, string? repo, int prNumber, string? tag)
+static async Task RemoveLabel(GitHubClient client,
+    string owner,
+    string? repo,
+    int prNumber,
+    string? tagRem,
+    string? tagAdd)
 {
     try
     {
-        await client.Issue.Labels.RemoveFromIssue(owner, repo, prNumber, tag);
-        Console.WriteLine($"Removed label {tag}, from PR {prNumber}");
+        await client.Issue.Labels.RemoveFromIssue(owner, repo, prNumber, tagRem);
+        Console.WriteLine($"Removed label {tagRem}, from PR {prNumber}");
     }
     catch (NotFoundException)
     {
-        Console.WriteLine($"Label {tag}, not found on PR {prNumber}");
+        Console.WriteLine($"Label {tagRem}, not found on PR {prNumber}");
     }
     catch (Exception e)
     {
         Console.WriteLine($"Error removing label: {e}");
+        throw;
+    }
+
+    if (tagAdd == null)
+    {
+        Console.WriteLine($"Label to add is null, skipping.");
+        return;
+    }
+
+    string[] str = [tagAdd];
+
+    try
+    {
+        await client.Issue.Labels.AddToIssue(owner, repo, prNumber, str);
+        Console.WriteLine($"Removed label {tagAdd}, from PR {prNumber}");
+    }
+    catch (NotFoundException)
+    {
+        Console.WriteLine($"Label {tagAdd}, not found on PR {prNumber}");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error removing label: {e}");
+        throw;
+    }
+}
+
+async Task<HashSet<string>?> GetUserTeamsInOrg(string org, string? userName)
+{
+    if (userName == null)
+    {
+        Console.WriteLine($"No user, ignoring team check.");
+        return null;
+    }
+
+    try
+    {
+        var allTeams = await client.Organization.Team.GetAll(owner);
+
+        var userTeams = new HashSet<string>();
+        foreach (var team in allTeams)
+        {
+            try
+            {
+                var isMember = await client.Organization.Team.GetMembershipDetails(team.Id, userName);
+                if (isMember != null)
+                    userTeams.Add(team.Name);
+            }
+            catch (NotFoundException nfe)
+            {
+                Console.WriteLine(nfe);
+                continue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        return userTeams;
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
         throw;
     }
 }
