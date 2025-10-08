@@ -26,6 +26,7 @@
     UndergarmentBottom: MobHumanoidAnyMarking
     Eyes: MobSkrellEyes
     HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
     LArm: MobSkrellLArm
     RArm: MobSkrellRArm
     LHand: MobSkrellLHand
@@ -43,7 +44,7 @@
       required: false
     Tail:
       points: 1
-      required: false # Opt-in
+      required: true # Opt-in
     FacialHair:
       points: 0
       required: false
