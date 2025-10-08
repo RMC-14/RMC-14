@@ -105,3 +105,5 @@
     name: cm-job-name-xeno-warrior
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
+  - type: RMCActionOrder
+    id: CMXenoWarrior

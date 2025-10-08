@@ -556,6 +556,20 @@
     - id: CMWeaponPistolM1984
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolCLF
+  name: M802 pattern 'Freedom' smart gun operator sidearm rig
+  description: A modification of the standard M802 load-bearing equipment, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
+  suffix: Filled, Mateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+    - id: RMCMagazineSmartGun
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig

@@ -614,6 +614,7 @@ public sealed partial class $CLASS$ : Shared$CLASS$ {
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FBDED813A3D26A429C42F3215186E80F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FBDED813A3D26A429C42F3215186E80F/Text/@EntryValue">public static readonly CVarDef&lt;$TYPE$&gt; $NAME$ =
     CVarDef.Create("$TAG$", $DEFAULT$, $FLAGS$);</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=acided/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=adminbus/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=adminned/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Aghost/@EntryIndexedValue">True</s:Boolean>
@@ -657,6 +658,7 @@ public sealed partial class $CLASS$ : Shared$CLASS$ {
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Diethylamine/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=doafter/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Drainable/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=electrogenetic/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=euid/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Firelock/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Cuffable/@EntryIndexedValue">True</s:Boolean>

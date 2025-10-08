@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -58,6 +59,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -81,6 +83,8 @@ public sealed class XenoLeapSystem : EntitySystem
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
+        SubscribeAllEvent<XenoLeapPredictedHitEvent>(OnPredictedHit);
+
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
@@ -97,6 +101,30 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapingComponent, PhysicsSleepEvent>(OnXenoLeapingPhysicsSleep);
         SubscribeLocalEvent<XenoLeapingComponent, StartPullAttemptEvent>(OnXenoLeapingStartPullAttempt);
         SubscribeLocalEvent<XenoLeapingComponent, PullAttemptEvent>(OnXenoLeapingPullAttempt);
+    }
+
+    private void OnPredictedHit(XenoLeapPredictedHitEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } ent)
+            return;
+
+        if (!TryComp(ent, out XenoLeapingComponent? leaping))
+            return;
+
+        if (GetEntity(msg.Target) is not { Valid: true } target)
+            return;
+
+        if (_net.IsServer)
+        {
+            if (!HasComp<XenoLeapComponent>(ent) || !leaping.Running)
+                return;
+
+            _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
+            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession))
+                return;
+        }
+
+        ApplyLeapingHitEffects((ent, leaping), target);
     }
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
@@ -189,9 +217,9 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (TryComp(xeno, out FixturesComponent? fixtures))
         {
-            var collisionGroup = (int)leaping.IgnoredCollisionGroupSmall;
+            var collisionGroup = (int) leaping.IgnoredCollisionGroupSmall;
             if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
-                collisionGroup = (int)leaping.IgnoredCollisionGroupLarge;
+                collisionGroup = (int) leaping.IgnoredCollisionGroupLarge;
 
             var fixture = fixtures.Fixtures.First();
             _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
@@ -430,13 +458,15 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             if (_net.IsServer)
             {
-                for (int i = 0; i < destroy.Amount; i++)
+                for (var i = 0; i < destroy.Amount; i++)
                 {
                     if (destroy.SpawnPrototype != null)
                         SpawnAtPosition(destroy.SpawnPrototype, target.ToCoordinates());
                 }
+
                 QueueDel(target);
             }
+
             _physics.SetCanCollide(target, false, force: true);
             return false;
         }
@@ -458,7 +488,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private bool ApplyLeapingHitEffects(Entity<XenoLeapingComponent> xeno, EntityUid target)
     {
-        if(!IsValidLeapHit(xeno, target))
+        if (!IsValidLeapHit(xeno, target))
             return false;
 
         if (_hive.FromSameHive(xeno.Owner, target))
@@ -527,6 +557,16 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             xeno.Comp.PlayedSound = true;
             _audio.PlayPvs(xeno.Comp.LeapSound, xeno);
+        }
+
+        if (_net.IsClient)
+        {
+            var predictedEv = new XenoLeapPredictedHitEvent(GetNetEntity(target), _rmcLagCompensation.GetLastRealTick(null));
+            RaiseNetworkEvent(predictedEv);
+            if (_timing.InPrediction && _timing.IsFirstTimePredicted)
+            {
+                RaisePredictiveEvent(predictedEv);
+            }
         }
 
         StopLeap(xeno);

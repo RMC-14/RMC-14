@@ -1,0 +1,35 @@
+name: "Labels: Reviewed"
+
+on:
+  pull_request_review:
+    types: [ submitted ]
+
+jobs:
+  add-tag:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'changes_requested'
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Setup Submodule
+      run: git submodule update --init
+
+    - name: Build and Run
+      env:
+        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
+        REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        REVIEWER: ${{ github.event.review.user.login }}
+        TAG_REM: "S: Needs Review"
+        TAG_ADD: "S: Awaiting Changes"
+
+      run: |
+        dotnet build Content.GitHubActions --configuration Release
+        dotnet run --project Content.GitHubActions
