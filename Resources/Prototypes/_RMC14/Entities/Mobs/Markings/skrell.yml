@@ -17,6 +17,15 @@
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_m_s
 
+- type: marking
+  id: RMCHairSkrellShorter #one pixel difference
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_short
+
 # Spots
 - type: marking
   id: RMCSpotsSkrellHairLeft
