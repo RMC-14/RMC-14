@@ -15,6 +15,7 @@ using Robust.Shared.Network;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Rejuvenate;
+using Content.Shared._RMC14.Barricade.Components;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -87,6 +88,10 @@ public sealed class XenoShardSystem : EntitySystem
     private void OnDamageChanged(Entity<XenoShardComponent> ent, ref DamageChangedEvent args)
     {
         if (args.DamageDelta == null || args.DamageDelta.GetTotal() <= FixedPoint2.Zero)
+            return;
+
+        // Don't gain shards from barbed barricade damage
+        if (args.Origin != null && HasComp<BarbedComponent>(args.Origin.Value))
             return;
 
         AddShards(ent, ent.Comp.ShardsOnDamage);
