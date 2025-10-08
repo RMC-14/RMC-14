@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Octokit;
+﻿using Octokit;
 
 var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 var repo = Environment.GetEnvironmentVariable("REPOSITORY");
