@@ -42,7 +42,7 @@ rmc-job-name-spp-commando-leader = 1st Kommando
 rmc-job-prefix-spp-commando-leader = 1stKdo
 
 rmc-ghost-name-spp-commando = SPP Commando (!DEATHSQUAD!)
-rmc-job-name-spp-commando = 1st Kommando
+rmc-job-name-spp-commando = Junior Kommando
 rmc-job-prefix-spp-commando = JKdo
 
 rmc-job-name-spp-gunner = Heavy Gunner

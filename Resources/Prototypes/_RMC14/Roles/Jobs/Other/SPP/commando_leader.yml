@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-deathsquad-description
   playTimeTracker: CMJobSPPCommmandoLeader
   ranks:
-    RMCRankSPPSerzhant: []
+    RMCRankSPP1stKommando: []
   startingGear: RMCGearSPPCommandoLeader
   icon: "RMCJobIconSPPCommandoLeader"
   joinNotifyCrew: false
