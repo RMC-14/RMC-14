@@ -43,10 +43,21 @@ public sealed partial class EmoteBindingTab : ScrollContainer
         UpdateDropdowns();
     }
 
+    private void CreateDropdowns(BoxContainer dropDownContainer, string type, int count)
+    {
+        for (int i = 1; i <= count; i++)
+        {
+            var newDropDown = new EmoteBindingDropDown($"{Loc.GetString($"rmc-ui-emote-binding-{type.ToLower()}-emote")} {i}");
+            dropDownContainer.AddChild(newDropDown);
+        }
+    }
+
     public void UpdateDropdowns()
     {
         ScanForEmoteProtos();
+        CreateDropdowns(HumanoidDropDowns, "Humanoid", 8);
         SetDropDownOptions(HumanoidDropDowns, "Humanoid");
+        CreateDropdowns(XenoDropDowns, "Xeno", 8);
         SetDropDownOptions(XenoDropDowns, "Xeno");
         Control.Initialize();
     }
@@ -56,6 +67,7 @@ public sealed partial class EmoteBindingTab : ScrollContainer
         //Logger.Log(LogLevel.Debug, $"Raw: {_emoteBindingValues}");
         var data = EmoteBindingToString(_emoteBindingValues);
         _configManager.SetCVar(RMCCVars.RMCEmoteBindings, data);
+        _configManager.SaveToFile();
         //Logger.Log(LogLevel.Debug, $"Serialised: {data}");
     }
 
@@ -136,9 +148,10 @@ public sealed partial class EmoteBindingTab : ScrollContainer
 
             foreach (var emoteProto in _emoteBindingOptions[type])
             {
-                var label = emoteProto.Available
-                    ? Loc.GetString(emoteProto.Name)
-                    : $"* {Loc.GetString(emoteProto.Name)}";
+                // var label = emoteProto.Available
+                //     ? Loc.GetString(emoteProto.Name)
+                //     : $"* {Loc.GetString(emoteProto.Name)}";
+                var label = Loc.GetString(emoteProto.Name);
                 var icon = _spriteSystem.Frame0(emoteProto.Icon);
                 dropDown.AddItem(icon: icon, label: label);
             }

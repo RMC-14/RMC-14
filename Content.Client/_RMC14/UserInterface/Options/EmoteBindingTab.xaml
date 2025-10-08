@@ -19,46 +19,6 @@
                 <cc:HSeparator Margin="0 5" />
                 <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-explain'}" StyleClasses="LabelSubText" />
                 <BoxContainer Name="HumanoidDropDowns" Orientation="Vertical">
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote1'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote1" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote2'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote2" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote3'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote3" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote4'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote4" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote5'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote5" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote6'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote6" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote7'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote7" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-emote8'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownHumanoidEmote8" HorizontalAlignment="Right" />
-                    </BoxContainer>
                 </BoxContainer>
 
                 <Label Text="{Loc 'rmc-ui-emote-binding-xeno-header'}"
@@ -67,57 +27,13 @@
                        Margin="0 2 0 0"/>
                 <cc:HSeparator Margin="0 5" />
                 <BoxContainer Name="XenoDropDowns" Orientation="Vertical">
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote1'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote1" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote2'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote2" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote3'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote3" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote4'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote4" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote5'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote5" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote6'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote6" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote7'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote7" HorizontalAlignment="Right" />
-                    </BoxContainer>
-                    <BoxContainer HorizontalExpand="True">
-                        <Label Text="{Loc 'rmc-ui-emote-binding-xeno-emote8'}" />
-                        <Control HorizontalExpand="True"/>
-                        <OptionButton Name="DropDownXenoEmote8" HorizontalAlignment="Right" />
-                    </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
         </ScrollContainer>
         <ctrls:StripeBack HasBottomEdge="False" HasMargins="False">
-            <BoxContainer Orientation="Horizontal" Margin="4 4">
-                <Control MinSize="4 0" />
-                <Label Text="{Loc 'rmc-ui-emote-binding-footer'}" StyleClasses="LabelSubText" />
-                <Button Name="ResetAllButton"
-                        Text="{Loc 'rmc-ui-emote-binding-reset-all'}"
-                        HorizontalExpand="True"
-                        HorizontalAlignment="Right" />
+            <BoxContainer Orientation="Vertical" Margin="4 4">
+                <Label Text="{Loc 'rmc-ui-emote-binding-footer1'}" StyleClasses="LabelSubText" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-footer2'}" StyleClasses="LabelSubText" />
             </BoxContainer>
         </ctrls:StripeBack>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />
