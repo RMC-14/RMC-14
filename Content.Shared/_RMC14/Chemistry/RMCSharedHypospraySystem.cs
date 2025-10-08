@@ -1,11 +1,17 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Refill;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.Forensics;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
@@ -13,6 +19,7 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -21,15 +28,18 @@ namespace Content.Shared._RMC14.Chemistry;
 
 public abstract class RMCSharedHypospraySystem : EntitySystem
 {
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
+    [Dependency] protected readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected readonly SharedAudioSystem _audio = default!;
+    [Dependency] protected readonly SharedContainerSystem _container = default!;
+    [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] protected readonly SharedInteractionSystem _interaction = default!;
     [Dependency] protected readonly HypospraySystem _hypospray = default!;
     [Dependency] protected readonly IPrototypeManager _prototype = default!;
+    [Dependency] protected readonly ReactiveSystem _reactive = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] protected readonly SkillsSystem _skills = default!;
     [Dependency] protected readonly ItemSlotsSystem _slots = default!;
     [Dependency] protected readonly EntityWhitelistSystem _whitelist = default!;
@@ -46,6 +56,9 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         SubscribeLocalEvent<RMCHyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCHyposprayComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RMCHyposprayComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCHyposprayComponent, TacticalReloadHyposprayDoAfterEvent>(OnTacticalReload);
+        SubscribeLocalEvent<RMCHyposprayComponent, HyposprayDoAfterEvent>(OnHypoInject);
+        SubscribeLocalEvent<RMCHyposprayComponent, RefilledSolutionEvent>(OnRefilled);
 
         // RMC14
         SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
@@ -143,14 +156,8 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         if (args.Target == null)
             return;
 
-        var canReach = args.CanReach;
-
-        // Re-check with lag compensated positions
-        if (!canReach)
-        {
-            if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, lagCompensated: true))
-                return;
-        }
+        if (!args.CanReach)
+            return;
 
         if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
             return;
@@ -278,6 +285,99 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
 
         args.Handled = true;
         _hypospray.TryDoInject(ent, target, args.User, false);
+    }
+
+    private void OnRefilled(Entity<RMCHyposprayComponent> ent, ref RefilledSolutionEvent args)
+    {
+        UpdateAppearance(ent);
+    }
+
+    private void OnHypoInject(Entity<RMCHyposprayComponent> ent, ref HyposprayDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        // This is basically just hypo code 2.0
+
+        string? msgFormat = null;
+
+        if (target == args.User)
+            msgFormat = "hypospray-component-inject-self-message";
+
+        if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container) || container.ContainedEntities.Count == 0)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-hypospray-no-vial"), ent, args.User);
+            return;
+        }
+
+        var vial = container.ContainedEntities[0];
+
+        if (!_solution.TryGetSolution(vial, ent.Comp.VialName, out var soln, out var solu) || solu.Volume == 0)
+        {
+            _popup.PopupClient(Loc.GetString("hypospray-component-empty-message"), target, args.User);
+            return;
+        }
+
+        if (!_solution.TryGetInjectableSolution(target, out var targetSoln, out var targetSolution))
+        {
+            _popup.PopupClient(Loc.GetString("hypospray-cant-inject", ("target", Identity.Entity(target, EntityManager))), target, args.User);
+            return;
+        }
+
+        _popup.PopupClient(Loc.GetString(msgFormat ?? "hypospray-component-inject-other-message", ("other", target)), target, args.User);
+
+        if (target != args.User)
+            _popup.PopupEntity(Loc.GetString("hypospray-component-feel-prick-message"), target, target);
+
+        _audio.PlayPredicted(ent.Comp.InjectSound, ent, args.User);
+
+        if (TryComp(ent, out UseDelayComponent? delayComp))
+            _useDelay.TryResetDelay((ent, delayComp));
+
+        var transferAmount = FixedPoint2.Min(ent.Comp.TransferAmount, targetSolution.AvailableVolume);
+
+        if (transferAmount <= 0)
+        {
+            _popup.PopupClient(Loc.GetString("hypospray-component-transfer-already-full-message", ("owner", target)), target, args.User);
+            return;
+        }
+
+        var removedSolution = _solution.SplitSolution(soln.Value, transferAmount);
+
+        if (!targetSolution.CanAddSolution(removedSolution))
+            return;
+
+        _reactive.DoEntityReaction(target, removedSolution, ReactionMethod.Injection);
+        _solution.TryAddSolution(targetSoln.Value, removedSolution);
+
+        var ev = new TransferDnaEvent { Donor = target, Recipient = ent };
+        RaiseLocalEvent(target, ref ev);
+
+        // same LogType as syringes...
+        _adminLog.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(args.User):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(ent):using}");
+        UpdateAppearance(ent);
+    }
+
+    private void OnTacticalReload(Entity<RMCHyposprayComponent> ent, ref TacticalReloadHyposprayDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
+            return;
+
+        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
+            return;
+
+        if (args.Target == null)
+            return;
+
+        _slots.TryInsertEmpty((ent, slots), args.Target.Value, null);
     }
 
     protected void UpdateAppearance(Entity<RMCHyposprayComponent> ent)

@@ -61,6 +61,8 @@ namespace Content.Server.Database
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
         public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
+        public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
+        public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -487,6 +489,51 @@ namespace Content.Server.Database
                 .HasForeignKey<RMCPlayerStats>(p => p.PlayerId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCPlayerActionOrder>()
+                .HasOne(a => a.Player)
+                .WithMany(p => p.ActionOrder)
+                .HasForeignKey(a => a.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCChatBans>()
+                .HasOne(b => b.Player)
+                .WithMany(p => p.ChatBans)
+                .HasForeignKey(b => b.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCChatBans>()
+                .HasOne(b => b.BanningAdmin)
+                .WithMany(p => p.AdminChatBansCreated)
+                .HasForeignKey(b => b.BanningAdminId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<RMCChatBans>()
+                .HasOne(b => b.UnbanningAdmin)
+                .WithMany(p => p.AdminChatBansPardoned)
+                .HasForeignKey(b => b.UnbanningAdminId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<RMCChatBans>()
+                .HasOne(b => b.LastEditedBy)
+                .WithMany(p => p.AdminChatBansLastEdited)
+                .HasForeignKey(b => b.LastEditedById)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<RMCChatBans>()
+                .OwnsOne(b => b.HWId)
+                .Property(h => h.Hwid)
+                .HasColumnName("hwid");
+
+            modelBuilder.Entity<RMCChatBans>()
+                .OwnsOne(b => b.HWId)
+                .Property(h => h.Type)
+                .HasDefaultValue(HwidType.Legacy);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -727,6 +774,11 @@ namespace Content.Server.Database
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
+        public List<RMCPlayerActionOrder> ActionOrder { get; set; } = default!;
+        public List<RMCChatBans> ChatBans { get; set; } = default!;
+        public List<RMCChatBans> AdminChatBansCreated { get; set; } = default!;
+        public List<RMCChatBans> AdminChatBansLastEdited { get; set; } = default!;
+        public List<RMCChatBans> AdminChatBansPardoned { get; set; } = default!;
     }
 
     [Table("whitelist")]

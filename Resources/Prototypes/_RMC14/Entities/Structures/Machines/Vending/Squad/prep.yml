@@ -140,6 +140,8 @@
         amount: 1
       - id: CMWebbingHolster
         amount: 1
+      - id: RMCWebbingHolsterBlack
+        amount: 1
     - name: Armor
       entries:
       - id: RMCArmorM3MediumCarrier

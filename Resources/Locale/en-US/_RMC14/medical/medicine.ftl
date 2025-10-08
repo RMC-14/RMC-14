@@ -63,6 +63,7 @@ rmc-epinephrine-container-label-text = EP
 rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
+rmc-imidazoline-container-label-text = IM
 
 rmc-custom-container-label-text = {$customLabel}
 

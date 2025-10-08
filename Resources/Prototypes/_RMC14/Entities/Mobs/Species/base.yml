@@ -1,7 +1,7 @@
 ﻿- type: entity
   save: false
   parent: BaseMobSpecies
-  id: CMBaseMobSpeciesOrganic
+  id: RMCBaseMobSpeciesOrganic
   abstract: true
   name: Urist C.M. McHands
   suffix: RMC14
@@ -391,3 +391,5 @@
   - type: RMCHealthIcons
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: RMCActionOrder
+    id: RMCBaseMobSpeciesOrganic

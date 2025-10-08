@@ -1,0 +1,36 @@
+name: "Labels: Review"
+
+on:
+  pull_request_target:
+    types: [ review_requested ]
+
+jobs:
+  remove-tag:
+    runs-on: ubuntu-latest
+    if: github.event.requested_team || github.event.requested_reviewer
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Setup Submodule
+      run: git submodule update --init
+
+    - name: Build and Run
+      env:
+        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
+        REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        REVIEWER: ${{ github.event.requested_reviewer.login }}
+        REQUESTED_TEAM: ${{ github.event.requested_team.name }}
+        TAG_REM: "S: Awaiting Changes"
+        TAG_ADD: "S: Needs Review"
+
+      run: |
+        dotnet build Content.GitHubActions --configuration Release
+        dotnet run --project Content.GitHubActions

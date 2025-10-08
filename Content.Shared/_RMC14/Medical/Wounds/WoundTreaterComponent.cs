@@ -30,6 +30,15 @@ public sealed partial class WoundTreaterComponent : Component
     public TimeSpan MinimumDoAfter = TimeSpan.FromSeconds(1.25);
 
     [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> DoAfterSkill = "RMCSkillMedical";
+
+    [DataField, AutoNetworkedField]
+    public float[] DoAfterSkillMultipliers = new[] { 1, 1, 1, 0.75f, 0.5f };
+
+    [DataField, AutoNetworkedField]
+    public float SelfTargetDoAfterMultiplier = 1.5f;
+
+    [DataField, AutoNetworkedField]
     public FixedPoint2? Damage;
 
     [DataField, AutoNetworkedField]

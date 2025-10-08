@@ -95,6 +95,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorOob
@@ -716,7 +717,26 @@
 - type: entity
   parent: RMCAreaKutjevoInteriorColonySouth
   id: RMCAreaKutjevoInteriorColonySouthPower2
-  name: Kutjevo - South Colony Treatment Plant
+  name: Kutjevo - South Colony Treatment Plant - North
+  components:
+  - type: Sprite
+    state: colony_caves_3
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorColonySouth
+  id: RMCAreaKutjevoInteriorColonySouthPower2South
+  name: Kutjevo - South Colony Treatment Plant - South
   components:
   - type: Sprite
     state: colony_caves_3

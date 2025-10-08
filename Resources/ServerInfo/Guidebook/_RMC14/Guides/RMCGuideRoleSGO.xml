@@ -2,35 +2,80 @@
   # ML66A 'Smart Gun' and You: An Introduction
 
   ## Introduction
-  Congratulations, Lance Corporal! You've been selected to handle one of, if not [italic]the[/italic] finest pieces of technological advancement in firearms in the last century: the [bold]ML66A Smartgun[/bold]! A pinnacle of Marine engineering, it boasts a [bold]500-round ammo capacity[/bold], comes standard with a [bold]pneumo-assisted combat harness[/bold] for ease of use, and most importantly, features an [bold]IFF system[/bold] to prevent friendly fire incidents.
+  Congratulations, Lance Corporal! You've been selected to handle one of, if not [italic]the[/italic] finest pieces of technological advancement in firearms in the last century: the [bold]ML66A Smartgun[/bold]!
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCSmartGun" Caption="ML66A Smartgun"/>
+  </Box>
+
+  A pinnacle of Marine engineering, it boasts a [bold]500-round ammo capacity[/bold], comes standard with a [bold]pneumo-assisted combat harness[/bold] for ease of use, and most importantly, features an [bold]IFF system[/bold] to prevent friendly fire incidents.
 
   This weapon will make you a [bold]mobile point of denial[/bold] against enemy forces, allowing you to provide covering fire for your entire battalion. While this might imbue you with a sense of newfound power, mastering its nuances will turn you from a walking turret into an [bold]indispensable asset[/bold] in any operation.
 
   ## Waking Up
   Try to contain your elation at receiving this lofty position—some of the other marines may envy your luck. Best to get dressed quickly and gear up before you start beaming with pride.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleSGO" Caption="You!"/>
+  </Box>
+
   Your [bold]prep room[/bold] will always be the second-to-last door before entering the [bold]main prep area[/bold] in each barracks section. Here, you will find two vendors supplying both essential and optional equipment for your deployment. [bold]Remember[/bold]: your ammo belt is provided by the [bold]uniform vendor[/bold], while the [bold]weapons vendor[/bold] contains the gun, ammunition, and harness.
+
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechSGEquipment" Caption="Uniform vendor"/>
+    <GuideEntityEmbed Entity="CMBeltSmartGunOperatorFilled" Caption="ML66A ammo belt"/>
+  </Box>
 
   A [bold]sidearm holster variant[/bold] of the Smartgun ammo belt is available, allowing for the storage of a standard sidearm at the cost of a single drum slot. Some SGOs swear by a quickdraw sidearm, while others deem it unnecessary—choose based on your personal preference.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCBeltSmartGunOperatorPistolFilled" Caption="Ammo belt with sidearm holster"/>
+  </Box>
+
   ## Gearing Up
   Your [bold]Smartgunner Weapons Vendor[/bold] provides a crate containing:
+
+  <Box>
+  <GuideEntityEmbed Entity="ColMarTechSGGear" Caption="Weapons vendor"/>
+    <GuideEntityEmbed Entity="CMSmartGunOperatorEquipmentCase" Caption="ML66A Smartgun case"/>
+  </Box>
+
   - [bold]1 ML66A Smartgun (loaded)[/bold]
   - [bold]1 ML66A Combat Harness[/bold]
+  - [bold]1 ML66A head mounted sight[/bold]
   - [bold]1 Spare battery[/bold]
   - [bold]3 Spare ammo drums[/bold]
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCPowerCellSmartgun" Caption="ML66A battery"/>
+    <GuideEntityEmbed Entity="RMCMagazineSmartGun" Caption="ML66A ammo drums"/>
+  </Box>
 
   No auxiliary pouches are provided by default, so equip these as needed.
 
   ### Key Equipment Notes:
   - You [italic]must[/italic] wear the [bold]ML66A Combat Harness[/bold] to holster the Smartgun on your back. Remove any belt items before equipping it.
+  <Box>
+    <GuideEntityEmbed Entity="CMArmorSmartGunCombatHarness" Caption="ML66A Combat Harness"/>
+  </Box>
   - Once equipped, your [bold]head-mounted NV optics[/bold] will automatically activate. These do not drain the weapon's battery and can be toggled via your HUD.
+  <Box>
+    <GuideEntityEmbed Entity="RMCGlassesSmartGunSight" Caption="ML66A Head Mounted Sight"/>
+  </Box>
   - Enable your [bold]harness light[/bold] so fellow marines can see you in low-visibility conditions.
   - [bold]Ammo storage[/bold]: At least [bold]one (1) Large General Pouch[/bold], capable of holding [bold]two additional ammo drums[/bold] or other equipment.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCPouchGeneralLargeFilledSmartGunDrums" Caption="Large general pouch"/>
+  </Box>
+
   After suiting up, check the [bold]special ammo vendor[/bold] on your squad's side of the prep room for [bold]extra free drums[/bold]. Additional ammunition becomes available as more marines wake up, so check back before deployment.
 
-  For more ammo, visit [bold]requisitions[/bold], where you can request up to [bold]two (2) additional drums[/bold]. The [bold]QM/ASO[/bold] may approve extra requests, but do not count on it—ammo is limited, and resupply groundside will take time and coordination.
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechMunitions" Caption="Special ammo vendor"/>
+  </Box>
+
+  For more ammo, visit [bold]requisitions[/bold], where you can request up to [bold]two (2) additional drums[/bold]. The [bold]LO[/bold] may approve extra requests, but do not count on it—ammo is limited, and resupply groundside will take time and coordination.
 
   ### Helmet Slots:
   Most [bold]Commanders enforce helmet use[/bold] for Specialist Marines. While this limits fashionable expression, it grants two additional slots for [bold]auto-injectors, a canteen, or personal items[/bold].
@@ -41,6 +86,10 @@
   ### Landing and Positioning:
   1. [bold]Rally on your Squad Leader (SL)[/bold] and follow their commands.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleSL"/>
+  </Box>
+
   2. Stay [bold]near the center of squad movement[/bold] and be mindful of marines without IFF weapons.
 
   3. Your role is [bold]supportive fire[/bold]—your [bold]Area of Denial[/bold] mimics a stationary turret, but with mobility and adaptability.
@@ -49,7 +98,17 @@
 
   5. Prioritize covering [bold]Hospital Corpsmen, Combat Technicians, and your SL[/bold].
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleHM"/>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCT"/>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleSL"/>
+  </Box>
+
   6. If retrieving [bold]critical personnel[/bold] (wounded or dead marines), instead provide cover for rescuers.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseMarine"/>
+  </Box>
 
   ### Positional Awareness:
   - If you get shot, it's often [bold]50/50[/bold] fault—your squadmates may not see your repositioning.
@@ -58,6 +117,11 @@
 
   ### Motion Detector Usage:
   - Keep your [bold]Motion Detector (MD) on at all times[/bold].
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionMotionDetector" Caption="Motion detector toggle" />
+  </Box>
+
   - Tune it to your preferred range after landing.
   - Since it lacks [bold]target count display[/bold], [bold]call out pings[/bold] for large enemy clusters and movement.
   - If another marine is leading MD calls, use yours for [bold]target acquisition[/bold] instead of excessive radio chatter.
@@ -67,12 +131,20 @@
   - [bold]DO NOT toggle IFF unless absolutely necessary[/bold] (e.g., engaging “untargetable” threats).
   - Disabling IFF enables [bold]friendly fire[/bold], requiring extreme situational awareness.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionIFF" Caption="IFF toggle being ON" />
+  </Box>
+
   ## Final Notes:
   - [bold]Stay with your SL.[/bold] Cover them, echo their commands if needed, and provide fire support.
   - A [bold]good Smartgunner enhances the squad[/bold] by acting as a mobile shield of burning lead.
   - Do [bold]not[/bold] take yourself too seriously—while crucial, [bold]you are not invincible[/bold].
   - [bold]Cohesion is key[/bold]—a disorganized squad will fail, no matter how well you shoot.
   - Keep your [bold]eyes peeled[/bold], your [bold]finger on the trigger[/bold], and your [bold]boots tied tight[/bold]—you've got a job to do!
+  - Talk to your superior or SEA if you are confused or have any questions.
+  <Box>
+    <GuideEntityEmbed Entity="CMGuidebookRoleSEA"/>
+  </Box>
 
   ### Guide made by GoodShowOldChap
 </Document>

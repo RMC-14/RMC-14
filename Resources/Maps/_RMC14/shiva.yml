@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.1
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/30/2025 13:41:09
-  entityCount: 17336
+  time: 10/06/2025 09:09:56
+  entityCount: 17342
 maps:
 - 1
 grids:
@@ -37821,6 +37821,8 @@ entities:
     - type: Transform
       pos: 61.5,125.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.45,-0.32
   - uid: 236
     components:
     - type: MetaData
@@ -37829,35 +37831,47 @@ entities:
       rot: 3.141592653589793 rad
       pos: 56.5,154.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 237
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 51.5,103.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 238
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,129.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 239
     components:
     - type: Transform
       pos: 26.5,56.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.45,-0.32
   - uid: 240
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 185.5,72.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 241
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 193.5,67.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
 - proto: CMApcNoPower
   entities:
   - uid: 242
@@ -37866,24 +37880,32 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 99.5,78.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 243
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 97.5,95.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 244
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 69.5,14.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 245
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 61.5,71.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 246
     components:
     - type: MetaData
@@ -37892,108 +37914,144 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 60.5,53.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 247
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,20.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 248
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 40.5,129.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 249
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 14.5,104.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 250
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,125.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 251
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 105.5,109.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 252
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 107.5,131.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 253
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 120.5,67.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 254
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 123.5,13.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 255
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 125.5,44.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 256
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 125.5,128.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 257
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 134.5,54.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
   - uid: 258
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 144.5,87.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 259
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 153.5,49.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 260
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 162.5,117.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 261
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 175.5,24.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 262
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 176.5,142.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 263
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 200.5,89.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
 - proto: CMArmorRiot
   entities:
   - uid: 265
@@ -45296,45 +45354,7 @@ entities:
     - type: Transform
       pos: 74.5,41.5
       parent: 1
-- proto: CMLightFixture
-  entities:
-  - uid: 1627
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 67.5,43.5
-      parent: 1
-  - uid: 1628
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 69.5,45.5
-      parent: 1
-  - uid: 1629
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 69.5,43.5
-      parent: 1
-  - uid: 1630
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 67.5,47.5
-      parent: 1
-  - uid: 1631
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 69.5,47.5
-      parent: 1
-  - uid: 1632
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 67.5,45.5
-      parent: 1
-- proto: CMLightFixtureSmall
+- proto: CMLightFixtureSmallOffset
   entities:
   - uid: 1633
     components:
@@ -45342,183 +45362,137 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 197.5,134.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1634
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 197.5,132.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1635
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 197.5,130.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1636
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 197.5,128.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1637
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 159.5,125.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1638
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 149.5,130.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1639
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 196.5,93.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1640
     components:
     - type: Transform
       pos: 186.5,44.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1641
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 191.5,67.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1642
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 182.5,74.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1643
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 122.5,94.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1644
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 119.5,94.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1645
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 116.5,94.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1646
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 98.5,101.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1647
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 122.5,100.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1648
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 116.5,101.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1649
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 119.5,100.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1650
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 119.5,106.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1651
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 116.5,105.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1652
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 100.5,55.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1653
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 102.5,55.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1654
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 91.5,94.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 1655
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 94.5,94.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
 - proto: CMLightReplacer
   entities:
   - uid: 1656
@@ -46928,12 +46902,37 @@ entities:
     - type: Transform
       pos: 217.5,27.5
       parent: 1
+  - uid: 3262
+    components:
+    - type: Transform
+      pos: 104.5,55.5
+      parent: 1
 - proto: CMPottedPlant22
   entities:
   - uid: 1869
     components:
     - type: Transform
       pos: 209.5,24.5
+      parent: 1
+  - uid: 3263
+    components:
+    - type: Transform
+      pos: 52.5,58.5
+      parent: 1
+  - uid: 3264
+    components:
+    - type: Transform
+      pos: 52.5,53.5
+      parent: 1
+  - uid: 3265
+    components:
+    - type: Transform
+      pos: 100.5,96.5
+      parent: 1
+  - uid: 3266
+    components:
+    - type: Transform
+      pos: 128.5,134.5
       parent: 1
 - proto: CMPottedPlant26
   entities:
@@ -54067,35 +54066,6 @@ entities:
     components:
     - type: Transform
       pos: 126.5,46.5
-      parent: 1
-- proto: PottedPlant21
-  entities:
-  - uid: 3262
-    components:
-    - type: Transform
-      pos: 104.5,55.5
-      parent: 1
-- proto: PottedPlant22
-  entities:
-  - uid: 3263
-    components:
-    - type: Transform
-      pos: 52.5,58.5
-      parent: 1
-  - uid: 3264
-    components:
-    - type: Transform
-      pos: 52.5,53.5
-      parent: 1
-  - uid: 3265
-    components:
-    - type: Transform
-      pos: 100.5,96.5
-      parent: 1
-  - uid: 3266
-    components:
-    - type: Transform
-      pos: 128.5,134.5
       parent: 1
 - proto: PowerCellRecharger
   entities:
@@ -114435,6 +114405,80 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 98.5,142.5
+      parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 1627
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,43.5
+      parent: 1
+  - uid: 1628
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,45.5
+      parent: 1
+  - uid: 1629
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,43.5
+      parent: 1
+  - uid: 1630
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,47.5
+      parent: 1
+  - uid: 1631
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,47.5
+      parent: 1
+  - uid: 1632
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,45.5
+      parent: 1
+  - uid: 17337
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,43.5
+      parent: 1
+  - uid: 17338
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,45.5
+      parent: 1
+  - uid: 17339
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,43.5
+      parent: 1
+  - uid: 17340
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,47.5
+      parent: 1
+  - uid: 17341
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 69.5,47.5
+      parent: 1
+  - uid: 17342
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 67.5,45.5
       parent: 1
 - proto: RMCLightStick
   entities:

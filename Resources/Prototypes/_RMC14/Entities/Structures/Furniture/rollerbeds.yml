@@ -74,6 +74,7 @@
   - type: Foldable
     fitIntoEntityStorage: true
   - type: RMCStrapNoDrawDepthChange
+  - type: RMCRetargetBucklePull
 
 - type: entity
   parent: CMRollerBed

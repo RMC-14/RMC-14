@@ -1,0 +1,13 @@
+﻿<controls:RMCAdminChatBanRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.ChatBans"
+    xmlns:c="clr-namespace:Content.Client.UserInterface.Controls">
+    <BoxContainer Orientation="Horizontal">
+        <Label Name="TypeLabel" Access="Public" MinWidth="150" VerticalAlignment="Top" />
+        <Label Name="BannedAtLabel" Access="Public" MinWidth="175" VerticalAlignment="Top" />
+        <Label Name="ExpiresAtLabel" Access="Public" MinWidth="275" VerticalAlignment="Top" />
+        <RichTextLabel Name="ReasonLabel" Access="Public" SetWidth="300" />
+        <c:ConfirmButton Name="PardonButton" Access="Public" Text="{Loc rmc-chat-bans-unban}"
+                         StyleClasses="OpenBoth" MinWidth="100" VerticalAlignment="Top" />
+    </BoxContainer>
+</controls:RMCAdminChatBanRow>

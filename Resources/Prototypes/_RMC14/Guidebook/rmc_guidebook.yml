@@ -56,6 +56,7 @@
   - RMCMedical
   - RMCRequisitions
   - RMCIntel
+  - RMCGuideRoleMilitaryPolice
   - RMCGuideRoleCombatTechnician
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
@@ -94,31 +95,38 @@
   name: "Intel"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCIntel.xml"
 
+- type: guideEntry  # made by WithinElysium
+  parent: RMC
+  id: RMCGuideRoleMilitaryPolice
+  priority: 5
+  name: "Military Police"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMilitaryPolice.xml"
+
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleCombatTechnician
-  priority: 5
+  priority: 6
   name: "Combat Technician"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCombatTechnician.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleMaintenanceTechnician
-  priority: 6
+  priority: 7
   name: "Maintenance Technician"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMaintenanceTechnician.xml"
 
 - type: guideEntry # made by GoodShowOldChap
   parent: RMC
   id: RMCGuideRoleSGO
-  priority: 7
+  priority: 8
   name: "Smart Gun Operator"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSGO.xml"
 
 - type: guideEntry # made by teatotaltemplar
   parent: RMC
   id: RMCGuideCommandRoles
-  priority: 8
+  priority: 9
   name: "Who is in Command?"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
 
@@ -126,7 +134,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleSpec
-  priority: 9
+  priority: 10
   name: "Specialists"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpec.xml"
   children:
@@ -166,14 +174,14 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleCAS
-  priority: 10
+  priority: 11
   name: "Dropships and CAS"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCAS.xml"
 
 - type: guideEntry # made by Gabrote42
   parent: RMC
   id: RMCGuideMarineCommunications
-  priority: 11
+  priority: 12
   name: "Marine Communications"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideMarineCommunications.xml"
 
@@ -181,14 +189,14 @@
   parent: RMC
   id: RMCGuideCorporateLiaison
   name: "Corporate Liaison"
-  priority: 12
+  priority: 13
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCorporateLiaison.xml"
 
 - type: guideEntry # made by UnicornOnLSD (GitHub)
   parent: RMC
   id: RMCGuideSquadLeader
   name: "Squad Leading 101"
-  priority: 13
+  priority: 14
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideSquadLeader.xml"
 
 # Marine Structures
@@ -497,3 +505,5 @@
   priority: 1
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/Medicine.xml"
   filterEnabled: True
+
+

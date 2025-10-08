@@ -56,11 +56,11 @@ public sealed partial class EqualHealthChange : EntityEffect
     public override void Effect(EntityEffectBaseArgs args)
     {
         var damage = new DamageSpecifier();
-        var cmDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var scale = (args as EntityEffectReagentArgs)?.Scale ?? 1;
         foreach (var (group, amount) in Damage)
         {
-            damage = cmDamageable.DistributeDamage(args.TargetEntity, group, amount * scale, damage);
+            damage = rmcDamageable.DistributeDamageCached(args.TargetEntity, group, amount * scale, damage);
         }
 
         args.EntityManager.System<DamageableSystem>()

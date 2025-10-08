@@ -112,26 +112,34 @@
     - 0,0,5,1 # 3 slots
 
 - type: entity
+  parent: CMArmorM4PMCSynth
+  id: RMCArmorM4PMCSynthFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGNailgun
+    - id: RMCMagazineSMGNailgun
+    # - id: RMCTelescopicBaton // 8/21/25: telebaton implementation is TODOed
+
+- type: entity
   parent: RMCArmorM4PMCNoLight
+  id: CMArmorM4PMHeavy
+  name: PMC heavy armor
+  description: A modification of the standard M3 armor. Featuring additional plating and straps to provide superior protection.
+
+- type: entity
+  parent: CMArmorM4PMHeavy
   id: CMArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
   description: A modification of the standard M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/heavy.rsi
-  - type: CMArmor
-    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
-    bio: 20 # CLOTHING_ARMOR_MEDIUM
-    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
-  - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier
-    walkModifier: .725
-    sprintModifier: .725
   - type: Corrodible
     isCorrodible: false
   - type: ClothingBlockBackpack

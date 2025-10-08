@@ -143,6 +143,8 @@
     - XenoFastResin
   - type: VentCrawler
     ventCrawlIcon: drone
+  - type: RMCActionOrder
+    id: CMXenoDrone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -214,6 +216,8 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: gardener
+  - type: RMCActionOrder
+    id: CMXenoDroneGardener
 
 - type: entity
   parent: CMXenoDroneBase
@@ -303,3 +307,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: healer
+  - type: RMCActionOrder
+    id: CMXenoDroneHealer

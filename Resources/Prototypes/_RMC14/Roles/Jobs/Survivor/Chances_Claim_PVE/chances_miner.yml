@@ -1,0 +1,79 @@
+﻿- type: job
+  parent: CMSurvivorMiner
+  id: CMSurvivorChancesMiner
+  name: rmc-job-name-survivor-chances-miner
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesMiner
+  startingGear: RMCGearSurvivorChancesMiner
+  spawnMenuRoleName: Mining Surveyor (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorChancesMiner
+  equipment:
+    head: RMCHardhatOrange
+    ears: CMHeadsetColony
+    gloves: RMCHandsBlack
+    back: CMSatchelEngineerMinerSurvivorFill
+    shoes: RMCShoesJackboots
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+    id: CMIDCardColonist
+    jumpsuit: RMCJumpsuitCivilianRed
+    outerClothing: CMUtilityVest
+    mask: RMCMaskRebreather
+    belt: RMCPickaxe
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesMiner
+  name: chances miner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesMiner
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesMiner
+  name: chances mining surveyor ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesMiner
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesMiner
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesMiner

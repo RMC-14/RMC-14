@@ -75,3 +75,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: weya_director
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_syn

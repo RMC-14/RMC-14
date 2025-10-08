@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist McRat
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobRodentia
   suffix: RMC14
   components:

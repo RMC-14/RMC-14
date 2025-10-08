@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Ingame screenshot",
+  "size": {
+    "x": 99,
+    "y": 100
+  },
+  "states": [
+    {
+      "name": "line"
+    }
+  ]
+}

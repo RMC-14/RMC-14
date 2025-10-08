@@ -7,3 +7,6 @@
 /// </summary>
 [ByRefEvent]
 public record struct CorrodingEvent(EntityUid Acid, float Dps, float ExpendableLightDps, bool Cancelled = false);
+
+[ByRefEvent]
+public record struct BeforeMeltedEvent();

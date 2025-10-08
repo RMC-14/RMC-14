@@ -132,6 +132,15 @@
     enableOverrideDir: false
 
 - type: entity
+  parent: RMCOverwatchConsoleRotating
+  id: RMCOverwatchConsoleRotatingPowered
+  suffix: Rotating, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCTacticalMapTable
   name: map table

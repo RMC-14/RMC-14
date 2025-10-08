@@ -1,0 +1,93 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorAdministrativeClerk
+  name: rmc-job-name-survivor-administrative-clerk
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorAdministrativeClerk
+  icon: "CMJobIconLiaison"
+  hasIcon: true
+  greeting: rmc-job-greeting-chances-colonist
+  ranks:
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 630000 # 175 hours
+    RMCRankWeYaSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 90000 # 25 hours
+    RMCRankWeYaJuniorExecutive: []
+  startingGear: RMCGearSurvivorAdministrativeClerk
+  spawnMenuRoleName: Administrative Clerk (Chances Colonist)
+  accessGroups:
+  - ColonistCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorAdministrativeClerk
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitLiaisonBlueGreyAdmin
+    shoes: RMCShoesLaceup
+    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    belt: CMClipboard
+    id: CMIDCardLiaisonColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchDocument
+  inhand:
+  - CMPenClicky
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorAdministrativeClerk
+  name:  spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorAdministrativeClerk
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorAdministrativeClerk
+  name: chances administrative clerk ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorAdministrativeClerk
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorAdministrativeClerk
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorAdministrativeClerk

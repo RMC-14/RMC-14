@@ -31,7 +31,7 @@
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
@@ -165,6 +165,17 @@
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSL
+  name: The Squad Leader
+  description: The Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: squad_leader
 
 - type: entity
   id: RMCGuidebookActionMove

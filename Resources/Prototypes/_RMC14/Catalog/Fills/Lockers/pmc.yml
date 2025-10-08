@@ -4,14 +4,14 @@
     children:
     - id: CMBootsBlackFilled
     - id: RMCJumpsuitVeteranPMCNoWebbing
-    - id: RMCHeadsetDistressPMC
+    - id: RMCHeadsetDistressPMCPVE
 
 - type: entityTable
   id: RMCClosetPMCSLFill
   table: !type:AllSelector
     children:
     - id: ArmorHelmetPMCOfficer
-    - id: RMCJumpsuitVeteranPMCLeader
+    - id: CMArmorM4PMCLeader
     - id: RMCLaserDesignator
     - id: RMCWhistle
 
@@ -20,10 +20,9 @@
   table: !type:AllSelector
     children:
     - id: ArmorHelmetPMCGunner
-    - id: RMCSmartGunPVE
+    - id: RMCSmartGunPMCPVE
     - id: RMCPowerCellSmartgun
     - id: CMArmorM4PMCSmartGunHarness
-    - id: RMCBeltSmartGunOperatorPistolFilled
-    - id: RMCMagazineSmartGun
-    - id: RMCMagazineSmartGun
+    - id: RMCBeltSmartGunOperatorPistolPMCFilled
+    - id: RMCPouchDrumPMCFill
     - id: RMCGlassesSmartGunSight

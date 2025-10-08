@@ -3,7 +3,7 @@
   abstract: true
   parent: BaseItem
   id: RMCBaseAirBurstGrenade
-  name: Air Burst Grenade
+  name: air burst grenade
   components:
   - type: Appearance
   - type: Sprite
@@ -23,7 +23,7 @@
 - type: entity
   parent: RMCBaseAirBurstGrenade
   id: RMC40MMGrenadeM74AGMF
-  name: M74 AGM-F 40mm Frag Grenade
+  name: M74 AGM-F 40mm frag grenade
   description: M74 - Airburst Grenade Munition - Fragmentation. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
   components:
   - type: Tag
@@ -42,7 +42,7 @@
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
   id: RMC40MMGrenadeM74AGMI
-  name: M74 AGM-I 40mm Incendiary Grenade
+  name: M74 AGM-I 40mm incendiary grenade
   description: M74 - Airburst Grenade Munition - Incendiary. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
   components:
   - type: Sprite
@@ -62,7 +62,7 @@
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
   id: RMCHornetShellM74AGMS
-  name: M74 AGM-H 40mm Hornet Shell
+  name: M74 AGM-H 40mm hornet shell
   description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the hornet shell shoots off holo-targeting .22lr rounds. The equivalent to buckshot at-range.
   components:
   - type: Sprite
@@ -76,7 +76,7 @@
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
   id: RMCStarShellM74AGMS
-  name: M74 AGM-S Star Shell
+  name: M74 AGM-S star shell
   description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the star shells bursts into burning phosphor that illuminates the area.
   components:
   - type: Sprite
@@ -90,7 +90,7 @@
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
   id: RMCBatonSlugHIRR
-  name: HIRR Baton Slug
+  name: HIRR baton slug
   description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
   components:
   - type: Sprite
@@ -109,7 +109,7 @@
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
   id: RMC40MMGrenadeM74AGMS
-  name: M74 AGM-S 40mm Smoke Grenade
+  name: M74 AGM-S 40mm smoke grenade
   description: M74 - Airburst Grenade Munition - Smoke. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. Upon detonation, instantly combines multiple chemicals inside its casing to form a smoke cloud.
   components:
   - type: Sprite
@@ -166,7 +166,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileFrag
-  name: M74 AGM-F 40mm Grenade
+  name: M74 AGM-F 40mm grenade
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectileGrenade
@@ -181,7 +181,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileIncendiary
-  name: M74 AGM-I 40mm Grenade
+  name: M74 AGM-I 40mm grenade
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -203,7 +203,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileHornet
-  name: M74 AGM-H 40mm Hornet Shell
+  name: M74 AGM-H 40mm hornet shell
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -222,7 +222,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileStarShell
-  name: M74 AGM-S Star Shell
+  name: M74 AGM-S star shell
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -253,7 +253,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileSmoke
-  name: M74 AGM-S 40mm Grenade
+  name: M74 AGM-S 40mm grenade
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -280,7 +280,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCStarShellBullet
-  name: Starshell bullet
+  name: starshell bullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -336,7 +336,7 @@
 - type: entity
   parent: RMCBaseAirburstRound
   id: RMCHornetRound
-  name: .22 Hornet Round
+  name: .22 hornet round
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -358,7 +358,7 @@
 - type: entity
   parent: RMCBaseAirburstRound
   id: RMCShrapnelJagged
-  name: Jagged Shrapnel
+  name: jagged shrapnel
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -376,9 +376,12 @@
   - type: CMArmorPiercing
     amount: 10
   - type: RMCStunOnHit
-    maxRange: 10
-    stunTime: 0
-    slowTime: 0.8
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 10
+      stunTime: 0
+      slowTime: 0.8
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:
@@ -388,7 +391,7 @@
 - type: entity
   parent: RMCBaseAirburstRound
   id: RMCShrapnelIncendiary
-  name: Flaming Shrapnel
+  name: flaming shrapnel
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -420,7 +423,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCBatonSlugProjectile
-  name: HIRR Baton Slug
+  name: HIRR baton slug
   description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
   categories: [ HideSpawnMenu ]
   components:
@@ -441,15 +444,18 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: RMCStunOnHit
-    maxRange: 10
-    stunTime: 1.6
-    slowTime: 4
-    knockBackPowerMin: 1
-    knockBackPowerMax: 3
-    knockBackSpeed: 5
-    forceKnockBack: true
-    slowsEffectBigXenos: true
-    dazeTime: 3.4
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 10
+      stunTime: 1.6
+      slowTime: 4
+      knockBackPowerMin: 1
+      knockBackPowerMax: 3
+      knockBackSpeed: 5
+      forceKnockBack: true
+      slowsEffectBigXenos: true
+      dazeTime: 3.4
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:

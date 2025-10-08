@@ -19,3 +19,51 @@
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
   id: RMCIDRoyalMarinesHidden
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesCommando
+  name: Commando's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesCommando
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesBreacher
+  name: Breacher's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesBreacher
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesSGO
+  name: SGO's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesSGO
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesMarksman
+  name: Marksman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesMarksman
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesMedic
+  name: Medic's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesMedic
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTeamlead
+  name: Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesTeamlead

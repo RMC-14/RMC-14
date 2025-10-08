@@ -51,6 +51,8 @@ public sealed class RMCConstructionSystem : EntitySystem
     {
         _doorQuery = GetEntityQuery<DoorComponent>();
 
+        SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+
         SubscribeLocalEvent<RMCConstructionPreventCollideComponent, PreventCollideEvent>(OnConstructionPreventCollide);
 
         SubscribeLocalEvent<RMCConstructionItemComponent, UseInHandEvent>(OnUseInHand);
@@ -69,6 +71,26 @@ public sealed class RMCConstructionSystem : EntitySystem
             {
                 subs.Event<RMCConstructionBuiMsg>(OnConstructionBuiMsg);
             });
+    }
+
+    private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        var query = EntityQueryEnumerator<RMCReplaceOnHijackLandComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Id is not { } id)
+            {
+                Del(uid);
+                continue;
+            }
+
+            var coordinates = _transform.GetMoverCoordinates(uid);
+            Del(uid);
+            Spawn(id, coordinates);
+        }
     }
 
     public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)

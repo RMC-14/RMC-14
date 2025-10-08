@@ -32,3 +32,16 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: CMMicrowave
+  id: CMMicrowaveLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+  - type: ApcPowerReceiver
+    needsPower: false # intentionally!
+    powerLoad: 0

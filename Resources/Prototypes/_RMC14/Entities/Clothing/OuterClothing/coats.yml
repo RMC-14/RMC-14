@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -282,11 +283,11 @@
   - type: CMArmor
     melee: 10
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
-  name: quartermaster jacket
+  name: Logistics Officer jacket
   description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
   components:
   - type: Sprite
@@ -875,3 +876,27 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+
+# Chance's Claim
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCBrownWEYACoat
+  name: brown WEYA coat
+  description: A long, tough coat with the company logo on the back. Popular on colonies which require function over form.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWEYARainCoat
+  name: WEYA rain coat
+  description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
