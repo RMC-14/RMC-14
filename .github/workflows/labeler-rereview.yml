@@ -23,7 +23,7 @@ jobs:
 
     - name: Build and Run
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
         REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         REVIEWER: ${{ github.event.requested_reviewer.login }}
