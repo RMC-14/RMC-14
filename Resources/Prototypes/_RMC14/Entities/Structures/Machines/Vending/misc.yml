@@ -119,6 +119,6 @@
       - id: RMCM5Bayonet
         amount: 5
       - id: RMCPackFlareCAS
-        amount: 0
+        amount: 1
       - id: CMPackFlare
         amount: 1
