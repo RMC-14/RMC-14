@@ -278,8 +278,8 @@
         amount: 1
       - id: CMPamphletEngineer
         amount: 1
-      #- id: Powerloader Certification
-      #  amount: 1
+      - id: CMPamphletPowerloader
+        amount: 1
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
       - id: RMCPowerCellCrap
