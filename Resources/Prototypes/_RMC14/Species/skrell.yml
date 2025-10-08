@@ -41,6 +41,9 @@
     Hair:
       points: 0
       required: false
+    Tail:
+      points: 1
+      required: false # Opt-in
     FacialHair:
       points: 0
       required: false

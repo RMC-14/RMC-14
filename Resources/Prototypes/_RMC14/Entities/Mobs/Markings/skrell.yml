@@ -75,3 +75,84 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/markings.rsi
       state: spots-right
+
+# Tails, which are intended to be completely opt-in
+- type: marking
+  id: RMCTailSkrellFringeShort
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_shortfringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_shortfringetail_fringe
+
+- type: marking
+  id: RMCTailSkrellFringe
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_fringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_fringetail_fringe
+
+- type: marking
+  id: RMCTailSkrellFringeLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_longfringetail
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_longfringetail_fringe
+
+- type: marking
+  id: TailSkrellFringeExtraLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_xlongfringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_xlongfringetail_fringe
+
+- type: marking
+  id: RMCTailSkrell
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail
+
+- type: marking
+  id: RMCTailSkrellShort
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_short
+
+- type: marking
+  id: RMCTailSkrellLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_long
+
+- type: marking
+  id: RMCTailSkrellExtraLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_xlong
