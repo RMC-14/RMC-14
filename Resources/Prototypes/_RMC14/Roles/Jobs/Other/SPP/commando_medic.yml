@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCSPPCommando
+  id: RMCSPPCommandoMedic
   name: rmc-job-name-spp-commando-medic
   description: rmc-ghost-role-information-deathsquad-description
   playTimeTracker: CMJobSPPCommmandoMedic
