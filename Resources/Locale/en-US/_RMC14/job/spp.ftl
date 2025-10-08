@@ -41,6 +41,10 @@ rmc-ghost-name-spp-commando-leader = SPP Commando Leader (!DEATHSQUAD!)
 rmc-job-name-spp-commando-leader = 1st Kommando
 rmc-job-prefix-spp-commando-leader = 1stKdo
 
+rmc-ghost-name-spp-commando-medic = SPP Commando Medic (!DEATHSQUAD!)
+rmc-job-name-spp-commando-medic = 2nd Kommando
+rmc-job-prefix-spp-commando-medic = 2ndKdo
+
 rmc-ghost-name-spp-commando = SPP Commando (!DEATHSQUAD!)
 rmc-job-name-spp-commando = Junior Kommando
 rmc-job-prefix-spp-commando = JKdo

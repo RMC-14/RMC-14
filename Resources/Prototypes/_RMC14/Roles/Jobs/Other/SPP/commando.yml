@@ -35,8 +35,6 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: MarineOrders
-    - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-commando
   hidden: true
@@ -64,7 +62,7 @@
     job: RMCSPPCommando
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobSquadLeader
+      role: CMJobRifleman
       time: 18000 # 5 Hours
     raffle:
       settings: short
@@ -91,7 +89,7 @@
     pocket2: RMCPouchFirstAidERTFill
   storage:
     back:
-    - CMMRE
+    - CMMRE # TODO RMC14 - SPP MRE
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMCrowbar
     - RMCHandcuffs

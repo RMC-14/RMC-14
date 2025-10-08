@@ -1,17 +1,17 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCSPPCommandoLeader
-  name: rmc-job-name-spp-commando-leader
+  id: RMCSPPCommando
+  name: rmc-job-name-spp-commando-medic
   description: rmc-ghost-role-information-deathsquad-description
-  playTimeTracker: CMJobSPPCommmandoLeader
+  playTimeTracker: CMJobSPPCommmandoMedic
   ranks:
-    RMCRankSPP1stKommando: []
-  startingGear: RMCGearSPPCommandoLeader
-  icon: "RMCJobIconSPPCommandoLeader"
+    RMCRankSPP2ndKommando: []
+  startingGear: RMCGearSPPCommandoMedic
+  icon: "RMCJobIconSPPCommandoMedic"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: SPP Commando Leader (!DEATHSQUAD!)
+  spawnMenuRoleName: SPP Commando Medic (!DEATHSQUAD!)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,8 +26,7 @@
         RMCSkillEngineer: 2
         RMCSkillFirearms: 2
         RMCSkillFireman: 2
-        RMCSkillJtac: 2
-        RMCSkillLeadership: 1
+        RMCSkillJtac: 1
         RMCSkillMedical: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 1
@@ -36,36 +35,34 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-    - type: MarineOrders
-    - type: RMCPointing
     - type: JobPrefix
-      prefix: rmc-job-prefix-spp-commando-leader
+      prefix: rmc-job-prefix-spp-commando-medic
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidSPPCommandoLeader
-  name: DEATHSQUAD spp ghost role commando leader
+  id: RMCRandomHumanoidSPPCommandoMedic
+  name: DEATHSQUAD spp ghost role commando medic
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: spp_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCSPPCommandoLeader
+    settings: RMCSPPCommandoMedic
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCSPPCommandoLeader
+  id: RMCSPPCommandoMedic
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-commando-leader
+    name: rmc-ghost-name-spp-commando-medic
     description: rmc-ghost-role-information-deathsquad-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
-    job: RMCSPPCommandoLeader
+    job: RMCSPPCommandoMedic
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobSquadLeader
+      role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
     raffle:
       settings: short
@@ -73,9 +70,9 @@
     squad: SquadSPP
 
 - type: startingGear
-  id: RMCGearSPPCommandoLeader
+  id: RMCGearSPPCommandoMedic
   equipment:
-    head: CMHeadCapSPPBeret
+    head: CMHeadCapSPP
     ears: RMCHeadsetSPPCommando
     ears2: RMCM5CameraGear
     jumpsuit: CMJumpsuitSPP
@@ -86,23 +83,23 @@
     mask: RMCMaskBalaclavaSPPCommando
     eyes: RMCGlassesSPPCommandoNightVision
     id: RMCIDSPP
-    belt: RMCBeltHolsterPistolSPPNPZ92
+    belt: RMCBeltMedicBagSPPCommandoFilled
     back: RMCBackpackSPPCommando
     pocket1: RMCPouchMagazineLarge
     pocket2: RMCPouchExplosiveFilledPlasticExplosives
   storage:
     back:
-    - CMMRE # TODO RMC14 - SPP MRE
-    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
-    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMDefibrillator
+    - CMAdvFirstAidKit
+    - CMRollerBedSpawnFolded
     - CMCrowbar
-    - RMCRangefinder
-    - RMCHandcuffs
-    - RMCHandcuffs
-    - RMCBoxZiptie
+    - CMMRE # TODO RMC14 - SPP MRE
     outerClothing:
-    - RMCMagazineRifleType71AP
-    - RMCMagazineRifleType71AP
+    - RMCHandcuffs
+    - RMCHandcuffs
     pocket1:
     - RMCMagazineRifleType71AP
     - RMCMagazineRifleType71AP
@@ -110,11 +107,11 @@
     - RMCMagazineRifleType71AP
 
 - type: playTimeTracker
-  id: CMJobSPPCommmandoLeader
+  id: CMJobSPPCommmandoMedic
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSPPCommandoLeader
+  id: RMCJobIconSPPCommandoMedic
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_comsl
+    state: upp_commed
