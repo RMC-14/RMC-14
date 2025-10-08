@@ -107,7 +107,7 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/tails.rsi
       state: skrell_longfringetail
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
       state: skrell_longfringetail_fringe
 
 - type: marking
