@@ -141,6 +141,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceWizards.RsiLib", "RSI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Analyzers", "Content.Analyzers\Content.Analyzers.csproj", "{2E203814-FD5C-40A9-B6BA-B22185F1E9B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.GitHubActions", "Content.GitHubActions\Content.GitHubActions.csproj", "{79072FAB-E65C-47D8-AB3E-7756C447CF9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -484,6 +486,14 @@ Global
 		{2E203814-FD5C-40A9-B6BA-B22185F1E9B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E203814-FD5C-40A9-B6BA-B22185F1E9B5}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E203814-FD5C-40A9-B6BA-B22185F1E9B5}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.DebugOpt|Any CPU.ActiveCfg = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.DebugOpt|Any CPU.Build.0 = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{79072FAB-E65C-47D8-AB3E-7756C447CF9A}.Tools|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
