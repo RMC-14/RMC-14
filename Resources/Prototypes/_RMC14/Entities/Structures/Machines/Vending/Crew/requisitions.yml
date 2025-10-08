@@ -264,8 +264,8 @@
         amount: 1
       - id: RMCLaserDesignator
         amount: 1
-      #- id: Welding Goggles
-      #  amount: 3
+      - id: RMCWeldingGoggles
+        amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
       - id: RMCPowerCellHigh
