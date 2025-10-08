@@ -7,6 +7,8 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_f_s
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_f_s_tips
 
 - type: marking
   id: RMCHairSkrellShort
@@ -34,6 +36,8 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_long
+    - sprite: _RMC14/Mobs/Feroxi/hair.rsi
+      state: skrell_hair_long_tips
 
 # Spots
 - type: marking
