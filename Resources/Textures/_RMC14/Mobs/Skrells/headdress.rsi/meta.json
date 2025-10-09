@@ -1,7 +1,7 @@
   {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/commit/f3e4f5fddb23177677b67535c3b1cb603fc93215, renamed gendered names to just be skrell given there is no need",
+  "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/commit/f3e4f5fddb23177677b67535c3b1cb603fc93215, renamed gendered names to just be skrell given there is no need, split and recolored by Monotheonist",
   "size": {
     "x": 32,
     "y": 32
@@ -20,7 +20,15 @@
       "directions": 4
     },
     {
+      "name": "skrell_golddia_gem_s",
+      "directions": 4
+    },
+    {
       "name": "skrell_silvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_silvdia_gem_s",
       "directions": 4
     }
   ]
