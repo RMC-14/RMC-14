@@ -9,74 +9,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared._RMC14.Weapons.Common;
-
-
-using System.Diagnostics.CodeAnalysis;
-using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.Chemistry.Reagent;
-using Content.Shared._RMC14.Fluids;
-using Content.Shared._RMC14.Line;
-using Content.Shared._RMC14.Weapons.Common;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
-using Content.Shared.Interaction;
-using Content.Shared.Popups;
-using Content.Shared.Temperature;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
-using System.Linq;
-using System.Numerics;
-using Content.Shared._RMC14.Attachable.Components;
-using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Evasion;
-using Content.Shared._RMC14.Hands;
-using Content.Shared._RMC14.Marines.Orders;
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Movement;
-using Content.Shared._RMC14.Projectiles;
-using Content.Shared._RMC14.Weapons.Common;
-using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.DoAfter;
-using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
-using Content.Shared.Interaction.Components;
-using Content.Shared.Inventory;
-using Content.Shared.Physics;
-using Content.Shared.Popups;
-using Content.Shared.Projectiles;
-using Content.Shared.Standing;
-using Content.Shared.Timing;
-using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Whitelist;
-using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Player;
-using Robust.Shared.Random;
-using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
-
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -108,6 +42,10 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         SubscribeLocalEvent<RMCAttachableSharedTankComponent, AttemptShootEvent>(AttemptShoot);
 
         SubscribeLocalEvent<RMCAttachableSharedTankComponent, UniqueActionEvent>(OnNozzleUniqueAction);
+
+        SubscribeLocalEvent<RMCAttachableSharedTankComponent, EntInsertedIntoContainerMessage>(OnInsertedIntoContainer);
+
+        SubscribeLocalEvent<RMCAttachableSharedTankComponent, EntRemovedFromContainerMessage>(OnRemovedFromContainer);
     }
     public void ShootNozzle(Entity<RMCAttachableSharedTankComponent> nozzle,
         Entity<GunComponent> gun,
@@ -134,16 +72,23 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
         EntProtoId fireKind = "";
         switch (reagent){
+            
             case "RMCNapalmUT":
                 fireKind = "RMCBulletSentryFireProjectile";
-
                 break;
+            
+            case "reagent-name-welding-fuel":
+                fireKind = "RMCBulletSentryFireProjectile";
+                break;
+            
             case "1": //Standin for the other fuel types someone should probably reagent this up though...
                 fireKind = "RMCBulletFireVesgGreen";
                 break;
+            
             case "2":
                 fireKind = "RMCBulletFireVesgBlue";
                 break;
+            
             default: //something funky is in the tank
                 return; 
         }
@@ -220,6 +165,39 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
         //_audio.PlayPredicted(wrapper.Comp.Sound, ent, args.UserUid);
         //_appearance.SetData(ent.Comp.Holder, RMCIgniterVisuals.Ignited, ent.Comp.Enabled);
+    }
+
+    private void OnInsertedIntoContainer(Entity<RMCAttachableSharedTankComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        //if (args.Container.ID != ent.Comp.ContainerId)
+        //    return;
+        //
+        //UpdateAppearance(ent);
+
+        //RaiseLocalEvent<RMCIgniterComponent>(wrapper);
+
+        if ( ! (ent.Comp.Holder != null))
+            return;
+        if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? flamerIgniter))
+            return;
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), flamerIgniter);
+        RaiseLocalEvent<RMCFlamerAmmoProviderComponent>(wrapper);
+        return;
+    }
+
+    private void OnRemovedFromContainer(Entity<RMCAttachableSharedTankComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        //if (args.Container.ID != ent.Comp.ContainerId)
+        //    return;
+        //
+        //UpdateAppearance(ent);
+        if ( ! (ent.Comp.Holder != null))
+            return;
+        if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? flamerIgniter))
+            return;
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), flamerIgniter);
+        RaiseLocalEvent<RMCFlamerAmmoProviderComponent>(wrapper);
+        return;
     }
 
 }
