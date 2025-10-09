@@ -118,7 +118,7 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         if(!TryComp(nozzle.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
 
-        Entity<RMCFlamerAmmoProviderComponent> wrapper = (nozzle.Comp.Holder, fuelTank);
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (nozzle.Comp.Holder.GetValueOrDefault(), fuelTank);
         if (!_flamer.TryGetTankSolution(wrapper, out var solutionEnt)) // Flipped TryGetTankSolution from private to public fn
             return;
         var volume = solutionEnt.Value.Comp.Solution.Volume;
@@ -163,11 +163,20 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void InitTankShare(Entity<RMCAttachableSharedTankComponent> ent, ref AttachableAlteredEvent args)
     {
-        ent.Comp.Holder = args.Holder;
-        if (! TryComp(args.Holder, out RMCIgniterComponent? igniter))
-            return;
-        ent.Comp.Enabled = igniter.Enabled;
-        Dirty(ent, ent.Comp);
+        switch (args.Alteration)
+        {
+            case AttachableAlteredType.Attached:
+                ent.Comp.Holder = args.Holder;
+                if (!TryComp(args.Holder, out RMCIgniterComponent? igniter))
+                    return;
+                ent.Comp.Enabled = igniter.Enabled;
+                Dirty(ent, ent.Comp);
+                break;
+            case AttachableAlteredType.Detached:
+                ent.Comp.Holder = null;
+                Dirty(ent, ent.Comp);
+                break;
+        }
 
     }
 
@@ -186,7 +195,9 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         //args.Capacity = 100;
         if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
-        Entity<RMCFlamerAmmoProviderComponent> wrapper = (ent.Comp.Holder, fuelTank);
+        if ( ! (ent.Comp.Holder != null))
+            return;
+        Entity<RMCFlamerAmmoProviderComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), fuelTank);
         if (!_flamer.TryGetTankSolution(wrapper, out var solutionEnt)) // Flipped TryGetTankSolution from private to public fn
             return;
         var solution = solutionEnt.Value.Comp.Solution;
@@ -197,9 +208,11 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void OnNozzleUniqueAction(Entity<RMCAttachableSharedTankComponent> ent, ref UniqueActionEvent args)
     {
+        if ( ! (ent.Comp.Holder != null))
+            return;
         if(!TryComp(ent.Comp.Holder, out RMCIgniterComponent? flamerIgniter))
             return;
-        Entity<RMCIgniterComponent> wrapper = (ent.Comp.Holder, flamerIgniter);
+        Entity<RMCIgniterComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), flamerIgniter);
         RaiseLocalEvent<RMCIgniterComponent>(wrapper);
         ent.Comp.Enabled = wrapper.Comp.Enabled;
 

@@ -19,7 +19,7 @@ public sealed partial class RMCAttachableSharedTankComponent : Component, IShoot
 
 
     [DataField, AutoNetworkedField]
-    public EntityUid Holder;
+    public EntityUid? Holder = null;
 
     //[DataField, AutoNetworkedField]
     //public List<EntProtoId> Spawn = ["RMCBulletFireVesgRed", "RMCBulletFireVesgGreen", "RMCBulletFireVesgBlue"]; // The projectiles
