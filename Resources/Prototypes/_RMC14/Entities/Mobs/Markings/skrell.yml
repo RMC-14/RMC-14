@@ -39,11 +39,11 @@
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_long_tips
 
-# Headdresses
+# Headdresses (all defined as tails so they load over your head, in special because they are a different type of overlay)
 - type: marking
   id: RMCHeaddressSkrellFestive
-  bodyPart: Tail # Cursed, but it would load under hair if I didn't do this.
-  markingCategory: Overlay
+  bodyPart: Tail # Cursed
+  markingCategory: Special
   speciesRestriction: [Skrell]
   forcedColoring: true
   coloring:
@@ -57,8 +57,8 @@
 
 - type: marking
   id: RMCHeaddressSkrellGold
-  bodyPart: Tail # Cursed, but it would load under hair if I didn't do this.
-  markingCategory: Overlay
+  bodyPart: Tail # Cursed
+  markingCategory: Special
   speciesRestriction: [Skrell]
   forcedColoring: true
   coloring:
@@ -72,8 +72,8 @@
 
 - type: marking
   id: RMCHeaddressSkrellGoldDiamond
-  bodyPart: Tail # Cursed, but it would load under hair if I didn't do this.
-  markingCategory: Overlay
+  bodyPart: Tail # Cursed
+  markingCategory: Special
   speciesRestriction: [Skrell]
   forcedColoring: true
   coloring:
@@ -87,8 +87,8 @@
 
 - type: marking
   id: RMCHeaddressSkrellSilverDiamond
-  bodyPart: Tail # Cursed, but it would load under hair if I didn't do this.
-  markingCategory: Overlay
+  bodyPart: Tail # Cursed
+  markingCategory: Special
   speciesRestriction: [Skrell]
   forcedColoring: true
   coloring:
