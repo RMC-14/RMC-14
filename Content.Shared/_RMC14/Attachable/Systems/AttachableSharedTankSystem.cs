@@ -136,8 +136,6 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void GetAmmoCount(Entity<RMCAttachableSharedTankComponent> ent, ref GetAmmoCountEvent args)
     {
-        //args.Count = 100;
-        //args.Capacity = 100;
         if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? fuelTank))
             return;
         if ( ! (ent.Comp.Holder != null))
@@ -162,19 +160,10 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         ent.Comp.Enabled = wrapper.Comp.Enabled;
 
         Dirty(ent);
-
-        //_audio.PlayPredicted(wrapper.Comp.Sound, ent, args.UserUid);
-        //_appearance.SetData(ent.Comp.Holder, RMCIgniterVisuals.Ignited, ent.Comp.Enabled);
     }
 
     private void OnInsertedIntoContainer(Entity<RMCAttachableSharedTankComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        //if (args.Container.ID != ent.Comp.ContainerId)
-        //    return;
-        //
-        //UpdateAppearance(ent);
-
-        //RaiseLocalEvent<RMCIgniterComponent>(wrapper);
 
         if ( ! (ent.Comp.Holder != null))
             return;
@@ -187,10 +176,6 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void OnRemovedFromContainer(Entity<RMCAttachableSharedTankComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        //if (args.Container.ID != ent.Comp.ContainerId)
-        //    return;
-        //
-        //UpdateAppearance(ent);
         if ( ! (ent.Comp.Holder != null))
             return;
         if(!TryComp(ent.Comp.Holder, out RMCFlamerAmmoProviderComponent? flamerIgniter))
