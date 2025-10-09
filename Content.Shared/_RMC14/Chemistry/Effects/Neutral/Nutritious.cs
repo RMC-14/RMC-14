@@ -2,7 +2,6 @@ using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Prototypes;
 
@@ -13,7 +12,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var updatedNutrimentFactor = NutrimentFactor > 0 ? NutrimentFactor : ActualPotency;
-        return $"Restores [color=green]{updatedNutrimentFactor * ActualPotency}[/color] nutrients to the body";
+        return $"Restores [color=green]{updatedNutrimentFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -26,10 +25,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
         if (mobStateSystem.IsDead(target))
             return;
 
-        if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent))
-            return;
-
         var updatedNutrimentFactor = NutrimentFactor > 0 ? NutrimentFactor : Potency;
-        hungerSystem.ModifyHunger(target, updatedNutrimentFactor * ActualPotency, hungerComponent);
+        hungerSystem.ModifyHunger(target, updatedNutrimentFactor * ActualPotency);
     }
 }

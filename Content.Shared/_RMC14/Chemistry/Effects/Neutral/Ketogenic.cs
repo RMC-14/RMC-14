@@ -1,10 +1,11 @@
 using Content.Shared._RMC14.Body;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
+using Content.Shared.EntityEffects.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -13,34 +14,46 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Ketogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-    private static readonly ProtoId<DamageGroupPrototype> GeneticGroup = "Genetic";
+    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var healing = PotencyPerSecond * 2;
-        return $"Heals [color=green]{healing}[/color] toxin damage and removes [color=green]0.125[/color] units of toxic chemicals from the bloodstream.\n" +
-               //$"Overdoses cause [color=red]{PotencyPerSecond}[/color] damage to the eyes.\n" +
-               $"Critical overdoses cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
+        return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients and [color=green]{PotencyPerSecond}[/color] units of alcohol from the bloodstream.\n" +
+               $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and some vomiting.\n" +
+               $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, ToxinGroup, potency * 2f);
+        var entityManager = args.EntityManager;
+        var target = args.TargetEntity;
+        var hungerSystem = entityManager.System<HungerSystem>();
 
-        // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, GeneticGroup, potency * 2f, healing);
-        damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond * 5);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        bloodstream.RemoveBloodstreamToxins(args.TargetEntity, 0.125f);
+        bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
+        var entityManager = args.EntityManager;
+        var target = args.TargetEntity;
+        var hungerSystem = entityManager.System<HungerSystem>();
 
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond * 5);
+
+        var damage = new DamageSpecifier();
+        damage.DamageDict[PoisonType] = potency;
+        damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
+
+        var random = IoCManager.Resolve<IRobustRandom>();
+        if (!random.Prob(0.025f * ActualPotency))
+            return;
+
+        var vomitEffect = new ChemVomit();
+        vomitEffect.Effect(args);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -50,7 +63,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
             args.TargetEntity,
             Unconscious,
             TimeSpan.FromSeconds(10),
-            true
+            false
         );
     }
 }

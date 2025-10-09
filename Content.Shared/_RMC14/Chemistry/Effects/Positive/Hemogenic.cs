@@ -32,17 +32,13 @@ public sealed partial class Hemogenic : RMCChemicalEffect
     {
         var entityManager = args.EntityManager;
         var target = args.TargetEntity;
-
-        // Check if entity is a carbon-based lifeform(?)
-        if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent))
-            return;
-
         var hungerSystem = entityManager.System<HungerSystem>();
-        var currentNutrition = hungerSystem.GetHunger(hungerComponent);
-        if (currentNutrition < 200)
+
+        if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent) ||
+            hungerSystem.GetHunger(hungerComponent) < 200)
             return;
 
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond, hungerComponent);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond);
 
         if (entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
         {
@@ -73,8 +69,6 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         var target = args.TargetEntity;
         var hungerSystem = entityManager.System<HungerSystem>();
 
-        if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent))
-            return;
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond, hungerComponent);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond);
     }
 }
