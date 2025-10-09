@@ -263,7 +263,7 @@
   description: A lightweight, low-profile suppressor designed specifically for SMGs and sidearms. It dampens sound and muzzle flash while marginally improving stability and accuracy, though it slightly reduces projectile velocity and terminal damage.
   components:
   - type: Sprite
-    state: suppressor
+    state: suppressor_sleek
   - type: Tag
     tags:
     - RMCAttachmentBarrel

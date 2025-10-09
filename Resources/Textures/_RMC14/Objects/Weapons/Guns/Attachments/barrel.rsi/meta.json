@@ -42,6 +42,9 @@
       "name": "suppressor"
     },
     {
+      "name": "suppressor_sleek"
+    },
+    {
       "name": "bayonet_a"
     },
     {
@@ -72,6 +75,9 @@
     },
     {
       "name": "suppressor_a"
+    },
+    {
+      "name": "suppressor_sleek_a"
     },
     {
       "name": "suppressor2_a"
