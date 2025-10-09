@@ -12,6 +12,8 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
+    soundGunshot:
+      collection: RMCM13Shoot
   - type: RMCSelectiveFire
     scatterWielded: 6
     scatterUnwielded: 7
@@ -50,8 +52,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -106,8 +108,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_unload.ogg
         priority: 2
         whitelist:
           tags:

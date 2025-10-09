@@ -270,7 +270,7 @@
     - RMCAttachmentSuppressorCompact
   - type: AttachableSilencer
     sound:
-      collection: CMSilencedShoot
+      collection: RMCSilencedShootAlt
       params:
         maxDistance: 6
 
