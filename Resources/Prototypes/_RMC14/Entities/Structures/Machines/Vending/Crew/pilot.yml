@@ -248,10 +248,8 @@
       # amount: 14
       - id: CMMagazinePistolMK80
         amount: 16
-      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13
         amount: 10
-      - id: RMCMagazinePistolM13Drum
-        amount: 15 #Drums aren't fully implemented -- supposed to have high jam chance and slow to reload...
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight

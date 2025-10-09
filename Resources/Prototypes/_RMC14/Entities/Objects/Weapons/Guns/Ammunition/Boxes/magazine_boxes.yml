@@ -2393,3 +2393,49 @@
       whitelist:
         tags:
         - RMCMagazinePistolM13ExtAP
+
+#M13 Drum
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM13DrumAPEmpty
+  name: magazine box (M13Drum AP x 12)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM13DrumAPEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#727e90"
+    - state: pistol_box_1984
+      color: "#ffa126"
+    - state: pistol_box_marking
+      color: "#7f8b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7f8b11"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13DrumAP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM13DrumAPEmpty
+  id: RMCBoxMagazinePistolM13DrumAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM13DrumAP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13DrumAP

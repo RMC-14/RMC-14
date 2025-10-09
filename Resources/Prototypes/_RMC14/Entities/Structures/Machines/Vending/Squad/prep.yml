@@ -341,6 +341,10 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
+      - id: RMCMagazinePistolM13AP
+        amount: 4
+      - id: RMCMagazinePistolM13ExtAP
+        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -354,9 +358,7 @@
       - id: CMMagazineRifleM54CExt
         amount: 2
       - id: RMCMagazinePistolM13Ext
-        amount: 2
-      - id: RMCMagazinePistolM13Drum
-        amount: 2
+        amount: 4
     - name: Special Ammunition
       entries:
       - id: RMCMagazineSmartGun

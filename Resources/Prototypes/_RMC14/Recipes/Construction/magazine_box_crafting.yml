@@ -309,6 +309,18 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Drum AP)
+  id: RMCBoxMagazinePistolM13DrumAPEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13DrumAPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain drum armor piercing M13 mags.
+  iconColor: "#7c4c1b"
+  objectType: Item
+
 # M34 Incinerator
 
 - type: construction
@@ -615,6 +627,12 @@
         amount: 1
         doAfter: 0.25
 
+    - to: RMCBoxMagazinePistolM13DrumAPEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M16
     - to: RMCBoxMagazineRifleM16Empty
       steps:
@@ -808,6 +826,8 @@
     entity: RMCBoxMagazinePistolM13APEmpty
   - node: RMCBoxMagazinePistolM13ExtAPEmpty
     entity: RMCBoxMagazinePistolM13ExtAPEmpty
+  - node: RMCBoxMagazinePistolM13DrumAPEmpty
+    entity: RMCBoxMagazinePistolM13DrumAPEmpty
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty
