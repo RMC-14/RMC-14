@@ -39,7 +39,7 @@
   description: A precision-engineered vented barrel extension used by various UN forces. Greatly improves accuracy, muzzle control, and projectile velocity, but reduces terminal damage due to pressure venting.
   components:
   - type: Sprite
-    state: ebarrel
+    state: ebarrel_vented
   - type: Tag
     tags:
     - RMCAttachmentBarrel
@@ -59,6 +59,13 @@
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
+  - type: ItemCamouflage
+    states:
+      Jungle: ebarrel_vented
+      Desert: d_ebarrel_vented
+      Snow: s_ebarrel_vented
+      Classic: c_ebarrel_vented
+      Urban: u_ebarrel_vented
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -144,7 +151,7 @@
   description: A heavy, overbuilt compensator and barrel extension for the M13 Auto Pistol. Greatly improves recoil control during automatic fire, at the cost of bulk and handling. Definitely compensating for something, but brutally effective.
   components:
   - type: Sprite
-    state: comp
+    state: m10_overcomp
   - type: Tag
     tags:
     - RMCAttachmentBarrel
@@ -159,6 +166,13 @@
         unwieldedOnly: true
       recoilFlat: 2
       accuracyAddMult: -0.2
+  - type: ItemCamouflage
+    states:
+      Jungle: m10_overcomp
+      Desert: d_m10_overcomp
+      Snow: s_m10_overcomp
+      Classic: c_m10_overcomp
+      Urban: u_m10_overcomp
 
 - type: entity
   parent: RMCAttachmentRecoilCompensatorM13
@@ -167,7 +181,7 @@
   description: A brutally heavy, over-engineered compensator and barrel extension for the M13 Auto Pistol, tipped with a hardened spiked cap. Greatly improves recoil control during automatic fire—and turns the pistol into a nasty bludgeon in close quarters. Definitely compensating for something, but brutally effective.
   components:
   - type: Sprite
-    state: comp
+    state: m10_overcomp_spike
   - type: Tag
     tags:
     - RMCAttachmentBarrel
@@ -177,6 +191,13 @@
     - bonusDamage:
         types:
           Slash: 20
+  - type: ItemCamouflage
+    states:
+      Jungle: m10_overcomp_spike
+      Desert: d_m10_overcomp_spike
+      Snow: s_m10_overcomp_spike
+      Classic: c_m10_overcomp_spike
+      Urban: u_m10_overcomp_spike
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -383,7 +404,6 @@
     tags:
     - RMCAttachmentBarrel
     - RMCAttachmentMatebaSnubNoseGolden
-
 
 - type: Tag
   id: RMCAttachmentBarrel
