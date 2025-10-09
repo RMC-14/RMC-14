@@ -219,16 +219,3 @@
   components:
   - type: Sprite
     state: disk_15
-
-- type: entity
-  parent: RMCDisk
-  id: RMCDisk4Tacmap
-  name: disk, tacmap
-  suffix: 4
-  components:
-  - type: Sprite
-    state: disk_4
-  - type: TacticalMapIcon
-    icon:
-      sprite: _RMC14/Interface/map_blips.rsi
-      state: xo
