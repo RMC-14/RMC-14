@@ -166,7 +166,7 @@
   description: A lightweight, low-profile dot optic designed for rapid target acquisition with minimal weight penalty. Optimized for submachine guns and sidearms, it's ideal for close-quarters combat where speed and agility matter most.
   components:
   - type: Sprite
-    state: reddot
+    state: reddot_small
   - type: Tag
     tags:
     - RMCAttachmentRail
