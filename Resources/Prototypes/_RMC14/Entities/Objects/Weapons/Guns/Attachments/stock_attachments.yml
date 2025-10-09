@@ -612,8 +612,8 @@
   description: A collapsible stock custom-fitted for the M13 Auto Pistol. Enhances recoil control when deployed, while maintaining compactness for close-quarters use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-    state: m54c-col
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+    state: stock
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -622,11 +622,11 @@
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      state: m54c-col
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      state: stock
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      state: m54c-col-on
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      state: stock-on
     actionName: Toggle M13 Folding Stock
   - type: AttachableSizeMods
     modifiers:
@@ -658,11 +658,11 @@
       recoilFlat: 2
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/urban.rsi
 
 - type: entity
   parent: RMCStockAttachmentBase
