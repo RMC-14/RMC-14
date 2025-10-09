@@ -671,8 +671,7 @@
   description: A fixed polymer stock designed exclusively for the M13 Auto Pistol, improving stability during sustained fire.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-    state: m54c-solid
+    state: m10_stock
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -701,12 +700,12 @@
       scatterFlat: 5
   - type: Appearance
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+    states:
+      Jungle: m10_stock
+      Desert: d_m10_stock
+      Snow: s_m10_stock
+      Classic: c_m10_stock
+      Urban: u_m10_stock
 
 - type: entity
   parent: RMCAttachableBase

@@ -240,6 +240,33 @@
     },
     {
       "name": "mp5_stock_a-on"
+    },
+    {
+      "name": "c_m10_stock"
+    },
+    {
+      "name": "m10_stock"
+    },
+    {
+      "name": "d_m10_stock"
+    },
+    {
+      "name": "u_m10_stock"
+    },
+    {
+      "name": "s_m10_stock"
+    },
+    {
+      "name": "m10_stock_a"
+    },
+    {
+      "name": "d_m10_stock_a"
+    },
+    {
+      "name": "u_m10_stock_a"
+    },
+    {
+      "name": "s_m10_stock_a"
     }
   ]
 }
