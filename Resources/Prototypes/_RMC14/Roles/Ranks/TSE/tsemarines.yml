@@ -10,6 +10,30 @@
   prefix: LCpl.
   paygrade: E2
 
+# PVE ranks below 
+
+# According to CM13, these roles are attached naval/army personnel - I think it's a cool touch
+
+- type: rank
+  id: RMCRankTSEGunner
+  name: Gunner
+  prefix: Gnr.
+  paygrade: E2G
+
+- type: rank
+  id: RMCRankTSEMedicalAssistant
+  name: Medical Assistant
+  prefix: MA.
+  paygrade: E2N
+
+- type: rank
+  id: RMCRankTSESapper
+  name: Sapper
+  prefix: Spr.
+  paygrade: E2E
+
+# PVE ranks above
+
 - type: rank
   id: RMCRankTSECorporal
   name: Corporal

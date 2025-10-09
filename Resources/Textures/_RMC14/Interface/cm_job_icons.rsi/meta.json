@@ -398,6 +398,42 @@
             "name": "rmc_major"
         },
         {
+            "name": "rmc_commander"
+        },
+        {
+            "name": "rmc_engi_pve"
+        },
+        {
+            "name": "rmc_sectionleader_pve"
+        },
+        {
+            "name": "rmc_troopleader_pve"
+        },
+        {
+            "name": "rmc_breacher_pve"
+        },
+        {
+            "name": "rmc_commander_pve"
+        },
+        {
+            "name": "rmc_lieutenant_pve"
+        },
+        {
+            "name": "rmc_marksman_pve"
+        },
+        {
+            "name": "rmc_medic_pve"
+        },
+        {
+            "name": "rmc_smartgunner_pve"
+        },
+        {
+            "name": "rmc_rifleman_pve"
+        },
+        {
+            "name": "rmc_teamleader_pve"
+        },
+        {
             "name": "hudsquad_vo"
         },
         {

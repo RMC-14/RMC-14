@@ -1,0 +1,51 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesSmartgunnerPVE
+  name: rmc-job-name-rcm-pve-gpmg-gunner
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalSmartgunnerPVE
+  ranks:
+    RMCRankTSEMarine: [ ]
+  startingGear: RMCGearRoyalSmartgunnerPVE
+  icon: "RMCJobIconRoyalSmartgunnerPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM GPMG Gunner (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1  
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-gpmg-gunner
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalSmartgunnerPVE
+  equipment:
+    id: RMCIDRoyalMarinesSmartgunnerPVE
+
+- type: playTimeTracker
+  id: RMCJobRoyalSmartgunnerPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalSmartgunnerPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_smartgunner_pve

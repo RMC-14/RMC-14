@@ -37,3 +37,30 @@ rmc-job-prefix-rcm-captain = RCM CAPT
 
 rmc-job-name-rcm-major = Royal Marines Major
 rmc-job-prefix-rcm-major = RCM MAJ
+
+rmc-job-name-rcm-pve-rifleman = Royal Crown Marines Rifleman
+rmc-job-prefix-rcm-pve-rifleman = RCM RM
+
+rmc-job-name-rcm-pve-troop-sergeant = Royal Crown Marines Troop Sergeant
+rmc-job-prefix-rcm-pve-troop-sergeant = RCM TS
+
+rmc-job-name-rcm-pve-section-leader = Royal Crown Marines Section Leader
+rmc-job-prefix-rcm-pve-section-leader = RCM STL
+
+rmc-job-name-rcm-pve-team-leader = Royal Crown Marines Team Leader
+rmc-job-prefix-rcm-pve-team-leader = RCM TL
+
+rmc-job-name-rcm-pve-gpmg-gunner = Royal Crown Marines GPMG Gunner
+rmc-job-prefix-rcm-pve-gpmg-gunner = RCM GPMG
+
+rmc-job-name-rcm-pve-medical-assistant = Royal Crown Marines Medical Assistant
+rmc-job-prefix-rcm-pve-medical-assistant = RCM MA
+
+rmc-job-name-rcm-pve-assault-engineer = Royal Crown Marines Assault Engineer
+rmc-job-prefix-rcm-pve-assault-engineer = RCM AE
+
+rmc-job-name-rcm-pve-scout-sniper = Royal Crown Marines Scout Sniper
+rmc-job-prefix-rcm-pve-scout-sniper = RCM SnS
+
+rmc-job-name-rcm-pve-bombardment-specialist = Royal Crown Marines Bombardment Specialist
+rmc-job-prefix-rcm-pve-bombardment-specialist = RCM BMBRD

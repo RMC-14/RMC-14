@@ -1,0 +1,55 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesTroopSargePVE
+  name: rmc-job-name-rcm-pve-troop-sergeant
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalTroopSargePVE
+  ranks:
+    RMCRankTSESergeant: [ ]
+  startingGear: RMCGearRoyalTroopSargePVE
+  icon: "RMCJobIconRoyalTroopSargePVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Troop Sergeant (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1  
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 3
+        RMCSkillOverwatch: 1
+        RMCSkillLeadership: 2
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-troop-sergeant
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalTroopSargePVE
+  equipment:
+    id: RMCIDRoyalMarinesTroopSargePVE
+
+- type: playTimeTracker
+  id: RMCJobRoyalTroopSargePVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalTroopSargePVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_troopleader_pve
