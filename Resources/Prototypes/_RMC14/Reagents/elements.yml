@@ -488,8 +488,8 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:SatiateHunger
-        factor: 5
+      - !type:Nutritious
+        potency: 1
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty

@@ -7,3 +7,15 @@
       amount: 1
   products:
     Water: 1
+
+- type: reaction
+  id: RMCVirusFood
+  reactants:
+    Water:
+      amount: 1
+    Milk:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+  products:
+    RMCVirusFood: 3

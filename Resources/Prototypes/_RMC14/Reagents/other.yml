@@ -1,0 +1,13 @@
+- type: reagent
+  parent: CMReagent
+  id: RMCVirusFood
+  name: reagent-name-rmcvirusfood
+  desc: reagent-desc-rmcvirusfood
+  color: "#899613"
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutrimentfactor: 2
