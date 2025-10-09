@@ -488,9 +488,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         amount: 3
+      - id: RMCAttachmentExtendedCompensator
+        amount: 3
       - id: RMCAttachmentRecoilCompensator
         amount: 3
+      - id: RMCAttachmentRecoilCompensatorM13
+        amount: 3
       - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentSuppressorCompact
         amount: 3
       - id: RMCAttachmentShotgunChoke
         amount: 2
@@ -503,6 +509,8 @@
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
+        amount: 3
+      - id: RMCAttachmentS5MicroRedDotSight
         amount: 3
       - id: RMCAttachmentS6ReflexSight
         amount: 3
@@ -532,6 +540,10 @@
         amount: 3
     - name: Stock
       entries:
+      - id: RMCAttachmentM13StockSolid
+        amount: 2
+      - id: RMCAttachmentM13StockCollapsible
+        amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace

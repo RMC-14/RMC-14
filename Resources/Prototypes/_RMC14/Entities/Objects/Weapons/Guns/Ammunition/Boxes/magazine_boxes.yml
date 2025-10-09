@@ -2301,3 +2301,95 @@
       whitelist:
         tags:
         - RMCMagazinePistolM13Drum
+
+# M13 AP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM13APEmpty
+  name: magazine box (M13 AP x 22)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM13APEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#727e90"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#318b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 22
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13AP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM13APEmpty
+  id: RMCBoxMagazinePistolM13AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM13AP
+    count: 22
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13AP
+
+#M13 Extended AP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM13ExtAPEmpty
+  name: magazine box (M13Ext AP x 14)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM13ExtAPEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#727e90"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#318b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 14
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13ExtAP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM13ExtAPEmpty
+  id: RMCBoxMagazinePistolM13ExtAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM13ExtAP
+    count: 14
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13ExtAP

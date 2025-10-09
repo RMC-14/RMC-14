@@ -1500,6 +1500,9 @@
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
+      - RMCMagazinePistolM13AP
+      - RMCMagazinePistolM13ExtAP
+      - RMCMagazinePistolM13DrumAP
       - RMCWeaponPistolM13
   - type: LimitedStorage
     limits:
@@ -1514,12 +1517,18 @@
         - RMCMagazinePistolM13
         - RMCMagazinePistolM13Ext
         - RMCMagazinePistolM13Drum
+        - RMCMagazinePistolM13AP
+        - RMCMagazinePistolM13ExtAP
+        - RMCMagazinePistolM13DrumAP
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCBeltHolsterM13
 
 - type: entity
   parent: CMBeltMarine
@@ -1833,6 +1842,9 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltHolsterM13
 
 - type: Tag
   id: RMCBeltMedical

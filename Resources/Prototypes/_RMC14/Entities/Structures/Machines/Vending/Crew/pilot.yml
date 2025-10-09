@@ -115,11 +115,17 @@
         points: 10
       - id: RMCAttachmentExtendedBarrel
         points: 10
+      - id: RMCAttachmentExtendedCompensator
+        points: 10
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 10
       - id: RMCAttachmentGyroscopicStabilizer
         points: 10
       - id: RMCAttachmentLaserSight
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
+        points: 10
+      - id: RMCAttachmentM13StockSolid
         points: 10
       - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
@@ -131,7 +137,11 @@
         points: 10
       - id: RMCAttachmentS5RedDotSight
         points: 10
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 10
       - id: RMCAttachmentSuppressor
+        points: 10
+      - id: RMCAttachmentSuppressorCompact
         points: 10
       - id: RMCAttachmentVerticalGrip
         points: 10

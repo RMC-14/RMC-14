@@ -285,6 +285,30 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 AP)
+  id: RMCBoxMagazinePistolM13APEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13APEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M13 mags.
+  iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Ext AP)
+  id: RMCBoxMagazinePistolM13ExtAPEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13ExtAPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended armor piercing M13 mags.
+  iconColor: "#7c4c1b"
+  objectType: Item
+
 # M34 Incinerator
 
 - type: construction
@@ -578,6 +602,19 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13ExtAPEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M16
     - to: RMCBoxMagazineRifleM16Empty
       steps:
@@ -767,6 +804,10 @@
     entity: RMCBoxMagazinePistolM13ExtEmpty
   - node: RMCBoxMagazinePistolM13DrumEmpty
     entity: RMCBoxMagazinePistolM13DrumEmpty
+  - node: RMCBoxMagazinePistolM13APEmpty
+    entity: RMCBoxMagazinePistolM13APEmpty
+  - node: RMCBoxMagazinePistolM13ExtAPEmpty
+    entity: RMCBoxMagazinePistolM13ExtAPEmpty
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty
