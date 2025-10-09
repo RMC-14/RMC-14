@@ -1,6 +1,6 @@
 - type: entity
   parent: RMCBaseSentry
-  id: RMCSentryPVE
+  id: RNMCSentryPVE
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   suffix: PVE
@@ -39,7 +39,7 @@
 
 - type: entity
   parent: RMCBaseSentry
-  id: RMCSentryPVEDamaged
+  id: RNMCSentryPVEDamaged
   name: damaged UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   suffix: PVE, Damaged
