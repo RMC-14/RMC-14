@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTeamLeaderPVE
   icon: "RMCJobIconRoyalTeamLeaderPVE"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-tl
+  supervisors: cm-job-supervisors-royal-section-leader
   spawnMenuRoleName: RCM Team Leader (PVE)
   special:
   - !type:AddComponentSpecial

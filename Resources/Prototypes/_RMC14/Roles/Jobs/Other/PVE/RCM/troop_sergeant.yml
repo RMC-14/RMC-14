@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTroopSargePVE
   icon: "RMCJobIconRoyalTroopSargePVE"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-tl
+  supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Troop Sergeant (PVE)
   special:
   - !type:AddComponentSpecial
