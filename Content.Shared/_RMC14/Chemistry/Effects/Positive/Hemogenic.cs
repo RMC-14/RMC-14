@@ -18,34 +18,35 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var bloodgen = ActualPotency > 3
-            ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage."
-            : $"Restores [color=green]{PotencyPerSecond}[/color]cl of blood.";
+        var baseText = $"Restores [color=green]{PotencyPerSecond}[/color]cl of blood while not hungry.\n" +
+                       $"Causes [color=red]{PotencyPerSecond}[/color] nutrient loss per second.\n" +
+                       $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
+                       $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] additional nutrient loss";
 
-        return $"{bloodgen}\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] nutrient loss";
+        return ActualPotency > 3
+            ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage.\n{baseText}"
+            : baseText;
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var entityManager = args.EntityManager;
         var target = args.TargetEntity;
-        var hungerSystem = entityManager.System<HungerSystem>();
-        var bloodstreamSystem = entityManager.System<SharedBloodstreamSystem>();
 
         // Check if entity is a carbon-based lifeform(?)
         if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent))
             return;
 
+        var hungerSystem = entityManager.System<HungerSystem>();
         var currentNutrition = hungerSystem.GetHunger(hungerComponent);
         if (currentNutrition < 200)
             return;
 
-        hungerSystem.ModifyHunger(target, -potency, hungerComponent);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond, hungerComponent);
 
         if (entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
         {
+            var bloodstreamSystem = entityManager.System<SharedBloodstreamSystem>();
             bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
         }
 
@@ -56,7 +57,6 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         damage.DamageDict[BluntType] = potency;
         damage.DamageDict[AsphyxiationType] = potency * 2;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
-
         // TODO RMC14 M.reagent_move_delay_modifier += potency
     }
 
@@ -75,6 +75,6 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
         if (!entityManager.TryGetComponent<HungerComponent>(target, out var hungerComponent))
             return;
-        hungerSystem.ModifyHunger(target, -potency, hungerComponent);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond, hungerComponent);
     }
 }
