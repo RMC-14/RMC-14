@@ -9,6 +9,16 @@
     Water: 1
 
 - type: reaction
+  id: RMCEthanoloxidation
+  reactants:
+    CMEthylredoxrazine:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+  products:
+    Water: 2
+
+- type: reaction
   id: RMCVirusFood
   reactants:
     Water:

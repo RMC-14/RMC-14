@@ -22,7 +22,7 @@ public sealed partial class Focusing : RMCChemicalEffect
     {
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        // the motherload of CC effects here
+        // remove drunkness and a ton of CC effects
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

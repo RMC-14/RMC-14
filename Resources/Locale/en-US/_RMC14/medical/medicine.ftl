@@ -84,5 +84,5 @@ antidepressant-effect-rmcparoxetine = Your mind feels much more stable.
 reagent-name-rmcantized = AntiZed
 reagent-desc-rmcantized = A chemical designed for use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
 
-reagent-name-rmcvirusfood = Virus Food
-reagent-desc-rmcvirusfood = A mixture of water, milk, and oxygen. Virus cells can use this mixture to reproduce.
+reagent-name-rmclipozine = Lipozine
+reagent-desc-rmclipozine = Lowers satiation and reduces body weight by increasing ketosis and the rate of which fat is metabolized. Use to treat obesity. Large doses can cause extreme weight loss.

@@ -34,6 +34,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
+        // Confused + Drowsyness
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
