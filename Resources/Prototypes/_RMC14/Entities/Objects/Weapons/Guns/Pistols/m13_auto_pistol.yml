@@ -68,25 +68,34 @@
         whitelist:
           tags:
           - RMCAttachmentBarrelCharger
-          - RMCAttachmentExtendedBarrel
-          - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentRecoilCompensatorM13
+          - RMCAttachmentRecoilCompensatorM13Spiked
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
-          - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5MicroRedDotSight
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentLaserSight
+          - RMCAttachmentMicroLaserSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM13StockCollapsible
+          - RMCAttachmentM13StockSolid
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.65, 0.13
       rmc-aslot-rail: 0.05, 0.16
       rmc-aslot-underbarrel: 0.4, -0.162
+      rmc-aslot-stock: -0.15, 0
 
 - type: entity
   parent: RMCWeaponPistolM13
