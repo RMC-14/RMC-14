@@ -232,7 +232,7 @@
   description: A compact, high-precision laser sight engineered exclusively for the M13 Auto Pistol. Offers exceptional accuracy gains by interfacing directly with the weapon's internal targeting systems.
   components:
   - type: Sprite
-    state: lasersight
+    state: lasersight_micro
   - type: AttachableVisuals
   - type: Tag
     tags:
