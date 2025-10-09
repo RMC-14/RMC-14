@@ -1,0 +1,18 @@
+﻿- type: entity
+  parent: BaseSign
+  id: RMCOverheadSemioticSign
+  name: overhead semiotic sign
+  description: A glowing sign, often hung above doorways to denote what's contained behind them; it features large English and smaller Japanese text, as well as one or more semiotic symbols.
+  components:
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/Lighting/semiotic_sign.rsi
+    state: overhead_semiotic_sign
+    snapCardinals: false
+    drawdepth: Overdoors
+  - type: PointLight
+    color: "#baac93"
+    energy: 1
+    radius: 5
+    softness: 1
+    offset: "0, -0.5"
