@@ -18,6 +18,9 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     // Halved again since chemicals tick every second in SS14, not every 2
     public float PotencyPerSecond => ActualPotency * 0.5f;
 
+    [DataField]
+    public float NutrimentFactor;
+
     public override void Effect(EntityEffectBaseArgs args)
     {
         if (args is not EntityEffectReagentArgs { Reagent: { } reagent } reagentArgs)
