@@ -142,6 +142,29 @@
 
 - type: entity
   parent: CMPacketBase
+  id: RMCPacketGrenadeWhitePhos
+  name: HPDP grenade packet
+  description: It contains three HPDP smoke grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: hpdp_packet
+      map: [ "closedLayer" ]
+    - state: hpdp_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeWhitePhos
+  id: RMCPacketGrenadeWhitePhosFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWhitePhosphorus
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
   id: RMCPacketGrenadeM74AGMF
   name: M74AGM-F grenade packet
   description: It contains three M74AGM-Frag airburst grenades.
