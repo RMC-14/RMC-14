@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/8555df0d70aadace9284023848efe303d89b48cf/icons/mob/human_races/species/skrell/body.dmi, https://github.com/Baystation12/Baystation12/blob/0f40ce0385e9ee74005ac5b78e6df3c418969f5c/icons/mob/human_races/species/skrell/eyes.dmi",
+  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/8555df0d70aadace9284023848efe303d89b48cf/icons/mob/human_races/species/skrell/body.dmi, https://github.com/Baystation12/Baystation12/blob/0f40ce0385e9ee74005ac5b78e6df3c418969f5c/icons/mob/human_races/species/skrell/eyes.dmi, eyes modified by Monotheonist to be white",
   "size": {
     "x": 32,
     "y": 32
