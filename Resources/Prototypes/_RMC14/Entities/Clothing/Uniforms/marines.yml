@@ -77,6 +77,16 @@
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalBlank # TODO RMC14 sprite
+  suffix: Royal
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
 # Formal
 - type: entity
   parent: RMCMarineUniformBase

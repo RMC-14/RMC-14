@@ -64,3 +64,6 @@ rmc-job-prefix-rcm-pve-scout-sniper = RCM SnS
 
 rmc-job-name-rcm-pve-bombardment-specialist = Royal Crown Marines Bombardment Specialist
 rmc-job-prefix-rcm-pve-bombardment-specialist = RCM BMBRD
+
+rmc-job-name-rcm-pve-troop-commander = Royal Crown Marines Troop Commander
+rmc-job-prefix-rcm-pve-troop-commander = RCM TCO

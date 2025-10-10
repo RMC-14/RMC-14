@@ -139,3 +139,11 @@
   components:
   - type: PresetIdCard
     job: CMRoyalMarinesAssaultEngineerPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTroopCommanderPVE
+  name: Troop Commander's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesTroopCommanderPVE

@@ -1,16 +1,16 @@
 - type: job
   parent: CMJobBase
-  id: CMRoyalMarinesTroopSargePVE
-  name: rmc-job-name-rcm-pve-troop-sergeant
+  id: CMRoyalMarinesTroopCommanderPVE
+  name: rmc-job-name-rcm-pve-troop-commander
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalTroopSargePVE
+  playTimeTracker: RMCJobRoyalTroopCommanderPVE
   ranks:
-    RMCRankTSESergeant: [ ]
-  startingGear: RMCGearRoyalTroopSargePVE
-  icon: "RMCJobIconRoyalTroopSargePVE"
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalTroopCommanderPVE
+  icon: "RMCJobIconRoyalTroopCommanderPVE"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-troop-commander
-  spawnMenuRoleName: RCM Troop Sergeant (PVE)
+  supervisors: cm-job-supervisors-royal-captain
+  spawnMenuRoleName: RCM Troop Commander (PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,20 +36,27 @@
     - type: RMCPointing
     - type: CommandAccent
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-troop-sergeant
+      prefix: rmc-job-prefix-rcm-pve-troop-commander
   hidden: true
 
 - type: startingGear
-  id: RMCGearRoyalTroopSargePVE
+  id: RMCGearRoyalTroopCommanderPVE
   equipment:
-    id: RMCIDRoyalMarinesTroopSargePVE
+    head: RMCHeadRoyalBeretLead
+    ears: RMCHeadsetRoyalMarineOfficer
+    jumpsuit: RMCJumpsuitMarineRoyalBlank # TOOD RMC14 royal marines commando uniform
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    id: RMCIDRoyalMarinesTroopCommanderPVE
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalTroopSargePVE
+  id: RMCJobRoyalTroopCommanderPVE
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalTroopSargePVE
+  id: RMCJobIconRoyalTroopCommanderPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_troopleader_pve
+    state: rmc_lieutenant_pve
