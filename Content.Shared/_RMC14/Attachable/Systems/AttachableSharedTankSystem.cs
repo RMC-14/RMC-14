@@ -112,9 +112,6 @@ public sealed class AttachableSharedTankSystem : EntitySystem
         {
             case AttachableAlteredType.Attached:
                 ent.Comp.Holder = args.Holder;
-                if (!TryComp(args.Holder, out RMCIgniterComponent? igniter))
-                    return;
-                ent.Comp.Enabled = igniter.Enabled;
                 Dirty(ent, ent.Comp);
                 break;
             case AttachableAlteredType.Detached:
@@ -127,10 +124,15 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
     private void AttemptShoot(Entity<RMCAttachableSharedTankComponent> ent, ref AttemptShootEvent args)
     { // I know more stuff can be here for pretty text and everything...
+        if(!TryComp(ent.Comp.Holder, out RMCIgniterComponent? flamerIgniter))
+            return;
+        if ( ! (ent.Comp.Holder != null))
+            return;
+        Entity<RMCIgniterComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), flamerIgniter);
         if (args.Cancelled)
             return;
 
-        if (!ent.Comp.Enabled)
+        if (!wrapper.Comp.Enabled)
             args.Cancelled = true;
     }
 
@@ -157,9 +159,9 @@ public sealed class AttachableSharedTankSystem : EntitySystem
             return;
         Entity<RMCIgniterComponent> wrapper = (ent.Comp.Holder.GetValueOrDefault(), flamerIgniter);
         RaiseLocalEvent<RMCIgniterComponent>(wrapper);
-        ent.Comp.Enabled = wrapper.Comp.Enabled;
+        //ent.Comp.Enabled = wrapper.Comp.Enabled;
 
-        Dirty(ent);
+        //Dirty(ent);
     }
 
     private void OnInsertedIntoContainer(Entity<RMCAttachableSharedTankComponent> ent, ref EntInsertedIntoContainerMessage args)

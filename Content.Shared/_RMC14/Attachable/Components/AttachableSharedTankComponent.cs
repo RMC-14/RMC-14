@@ -24,8 +24,8 @@ public sealed partial class RMCAttachableSharedTankComponent : Component, IShoot
     //[DataField, AutoNetworkedField]
     //public List<EntProtoId> Spawn = ["RMCBulletFireVesgRed", "RMCBulletFireVesgGreen", "RMCBulletFireVesgBlue"]; // The projectiles
 
-    [DataField, AutoNetworkedField]
-    public bool Enabled; // This should be the same value of the flamer's Igniter
+    //[DataField, AutoNetworkedField]
+    //public bool Enabled; // This should be the same value of the flamer's Igniter
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 CostPer = FixedPoint2.New(3);
