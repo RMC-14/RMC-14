@@ -25,14 +25,12 @@ rmc-xeno-larva-prompt-time = Time remaining: {$seconds} seconds
 rmc-xeno-larva-prompt-accept = Accept
 rmc-xeno-larva-prompt-decline = Decline
 
-# Status messages
 rmc-xeno-larva-accepted = You have been assigned to a larva! Get ready to burst!
 rmc-xeno-larva-declined = You declined the larva assignment. You have been re-added to the queue.
 rmc-xeno-larva-prompt-timeout = Your larva assignment timed out. You have been re-added to the queue.
 rmc-xeno-larva-prompt-expired = That larva assignment has already expired.
 rmc-xeno-larva-assignment-failed = Failed to assign the larva. Please try again.
 
-# Queue status messages
 rmc-xeno-queue-already-in = You are already in the larva queue.
 rmc-xeno-queue-full = The larva queue is full. Please try again later.
 rmc-xeno-queue-joined = You have joined the larva queue. Position: {$position}
@@ -40,9 +38,6 @@ rmc-xeno-queue-left = You have left the larva queue.
 rmc-xeno-queue-joined-success = Successfully joined as a larva!
 rmc-xeno-no-larvae-available = No larvae are currently available.
 rmc-xeno-no-hives = No hives are available to join.
-
-# General xeno UI
-rmc-xeno-ui-burrowed-need-time = You must wait {$seconds} seconds before joining as a xenonid.
 
 rmc-xeno-tracker-target-Queen = Queen
 rmc-xeno-tracker-target-HiveLeader = Hive Leader
