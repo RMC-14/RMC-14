@@ -46,7 +46,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
             bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
         }
 
-        if (!(ActualPotency > 3))// TODO RMC14 Check if blood volume is over maximum + 10. Add Yautja check when implemented.
+        if (!(ActualPotency > 3))// TODO RMC14 Also check if blood volume is over 560 + 10 and if they're a Yautja.
             return;
 
         var damage = new DamageSpecifier();

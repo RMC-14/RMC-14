@@ -13,7 +13,7 @@ public sealed partial class Focusing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=green]{PotencyPerSecond}[/color] units of alcohol from the bloodstream.\n" +
+        return $"Removes [color=green]{PotencyPerSecond}[/color] units of alcoholic substances from the bloodstream.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
                $"Critical overdoses cause [color=red]{PotencyPerSecond * 3}[/color] toxin damage";
     }
