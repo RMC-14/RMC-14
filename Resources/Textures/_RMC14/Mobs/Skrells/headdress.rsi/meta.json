@@ -24,7 +24,31 @@
       "directions": 4
     },
     {
+      "name": "skrell_tandia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_greendia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_blackdia_s",
+      "directions": 4
+    },
+    {
       "name": "skrell_silvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tansilvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_greensilvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_blacksilvdia_s",
       "directions": 4
     },
     {

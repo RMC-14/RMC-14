@@ -70,6 +70,45 @@
       state: skrell_golddia_gem_s
 
 - type: marking
+  id: RMCHeaddressSkrellTanDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_tandia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellGreenDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_greendia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellBlackDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_blackdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
   id: RMCHeaddressSkrellSilverDiamond
   bodyPart: Tail # Cursed
   markingCategory: Special
@@ -77,6 +116,45 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/headdress.rsi
       state: skrell_silvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverTanDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_tansilvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverGreenDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_greensilvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverBlackDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_blacksilvdia_s
     - sprite: _RMC14/Mobs/Skrells/headdress.rsi
       state: skrell_silvdia_gem_s
 

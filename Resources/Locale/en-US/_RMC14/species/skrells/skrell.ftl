@@ -10,10 +10,16 @@ marking-RMCSpotsSkrellBodyRight = Skrell Spots
 marking-RMCSpotsSkrellHairLeft = Skrell Spots
 marking-RMCSpotsSkrellHairRight = Skrell Spots
 
-marking-RMCHeaddressSkrellFestive = Festive Gold Headdress
-marking-RMCHeaddressSkrellGold = Gold Headdress
-marking-RMCHeaddressSkrellGoldDiamond = Gold Diamond Headdress
-marking-RMCHeaddressSkrellSilverDiamond = Silver Diamond Headdress
+marking-RMCHeaddressSkrellFestive = Festive Headdress
+marking-RMCHeaddressSkrellGold = Headdress
+marking-RMCHeaddressSkrellGoldDiamond = Gold Diamond Headdress (Colorable)
+marking-RMCHeaddressSkrellTanDiamond = Desert Diamond Headdress
+marking-RMCHeaddressSkrellGreenDiamond = Jungle Diamond Headdress
+marking-RMCHeaddressSkrellBlackDiamond = Urban Diamond Headdress
+marking-RMCHeaddressSkrellSilverDiamond = Silver Diamond Headdress (Colorable)
+marking-RMCHeaddressSkrellSilverTanDiamond = Desert Diamond Headdress (alt)
+marking-RMCHeaddressSkrellSilverGreenDiamond = Jungle Diamond Headdress (alt)
+marking-RMCHeaddressSkrellSilverBlackDiamond = Urban Diamond Headdress (alt)
 
 marking-RMCTailSkrell = Skrell Tail
 marking-RMCTailSkrellExtraLong = Extra Long Skrell Tail
@@ -36,6 +42,11 @@ marking-RMCSpotsSkrellBodyLeft-spots-left = Spots
 marking-RMCSpotsSkrellBodyRight-spots-right = Spots
 marking-RMCSpotsSkrellHairLeft-spots-hair-left = Spots
 marking-RMCSpotsSkrellHairRight-spots-hair-right = Spots
+
+marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_s = Headdress
+marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_gem_s = Gem
+marking-RMCHeaddressSkrellSilverDiamond-skrell_silvdia_s = Headdress
+marking-RMCHeaddressSkrellGoldDiamond-skrell_silvdia_gem_s = Gem
 
 marking-RMCTailSkrell-skrell_tail = Skrell Tail
 marking-RMCTailSkrellExtraLong-skrell_tail_xlong = Extra Long Skrell Tail
