@@ -332,6 +332,14 @@
     containers:
       key_slots:
       - CMEncryptionKeyPilot
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: RMCHeadset
