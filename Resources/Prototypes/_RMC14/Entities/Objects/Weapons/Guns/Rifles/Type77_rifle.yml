@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: Type 77 assault rifle
   id: RMCWeaponRifleType77
-  description: The SPP equivalent to the M54C Rifle, the Type 77 is a cheap and reliable substitute. As such, the weapon often winds up in the hands of mercenaries and insurgents. While not as accurate as the M54, the Type 77 is sturdier than the UNMC weapon. An Type 77 still works after being thrown off a cliff and left underwater for a month.
+  description: The SPP equivalent to the M54C Rifle, the Type 77 is a cheap and reliable substitute. As such, the weapon often winds up in the hands of mercenaries and insurgents. While not as accurate as the M54, the Type 77 is sturdier than the UNMC weapon. A Type 77 still works after being thrown off a cliff and left underwater for a month.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/Type77.rsi
