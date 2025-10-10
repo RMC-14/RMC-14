@@ -241,6 +241,45 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadMilitaryPolice
+  name: Military Police
+  components:
+  - type: SquadTeam
+    color: "#be324f"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    radio: MarineMilitaryPolice
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_mp
+    blacklistedSquadArmor:
+      - Helmet
+      - Goggles
+      - Armor
+      - Gloves
+    maxRoles:
+      CMCombatTech: 0
+      CMHospitalCorpsman: 0
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
+      CMSquadLeader: 1
+    canSupplyDrop: false
+    group: Military Police
+    hasLeaderIcon: false ## Prevents squad system from assigning a leader icon
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_cmp
+  - type: Tag
+    tags:
+    - RMCSquadMP
+
+- type: Tag
+  id: RMCSquadMP
+
+- type: entity
+  parent: SquadBase
   id: SquadProvost
   name: Provost
   components:
