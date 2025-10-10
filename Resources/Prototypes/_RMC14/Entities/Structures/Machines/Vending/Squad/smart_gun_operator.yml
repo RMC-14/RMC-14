@@ -31,8 +31,8 @@
         points: 30
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 30
-    #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeWhitePhosFilled
+        points: 30
       - id: RMCPacketGrenadeSmokeFilled
         points: 15
       - id: RMCPacketGrenadeM74AGMFFilled
