@@ -10,8 +10,8 @@ marking-RMCSpotsSkrellBodyRight = Skrell Spots
 marking-RMCSpotsSkrellHairLeft = Skrell Spots
 marking-RMCSpotsSkrellHairRight = Skrell Spots
 
-marking-RMCHeaddressSkrellFestive = Festive Headdress
-marking-RMCHeaddressSkrellGold = Headdress
+marking-RMCHeaddressSkrellFestive = Festive Headdress (Colorable)
+marking-RMCHeaddressSkrellGold = Headdress (Colorable)
 marking-RMCHeaddressSkrellGoldDiamond = Gold Diamond Headdress (Colorable)
 marking-RMCHeaddressSkrellTanDiamond = Desert Diamond Headdress
 marking-RMCHeaddressSkrellGreenDiamond = Jungle Diamond Headdress
