@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
@@ -82,6 +83,12 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
+
+    [DataField, AutoNetworkedField]
+    public NetUserId? OriginalParasiteUserId;
+
+    [DataField, AutoNetworkedField]
+    public NetUserId? VictimUserId;
 
     [DataField]
     public int FinalStage = 6;
