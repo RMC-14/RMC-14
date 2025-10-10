@@ -1,13 +1,23 @@
-name: "Labels: Approved (Dummy)"
+name: "Labels: Approved"
 on:
   pull_request_review:
     types: [submitted]
 jobs:
-  dummy-workflow:
+  add_label:
     # Change the repository name after you've made sure the team name is correct for your fork!
     if: ${{ (github.repository == 'RMC-14/RMC-14') && (github.event.review.state == 'APPROVED') }}
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
-    name: dummy workflow
     steps:
-    - name: Explanation
-      run: echo "this is a dummy workflow that triggers a workflow_run; it's necessary because otherwise the repo secrets will not be in scope for externally forked pull requests"
+    - uses: tspascoal/get-user-teams-membership@v3
+      id: checkUserMember
+      with:
+        username: ${{ github.actor }}
+        team: "maintainers"
+        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
+    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
+      uses: actions-ecosystem/action-add-labels@v1
+      with:
+        labels: "S: Approved"
