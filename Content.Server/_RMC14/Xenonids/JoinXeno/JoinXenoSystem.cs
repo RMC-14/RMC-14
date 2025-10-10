@@ -343,7 +343,7 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
 
         while (infectedQuery.MoveNext(out var hostId, out var infected))
         {
-            if (ShouldAddLarvaFromScan(infected, queue, out var larva))
+            if (ShouldAddLarvaFromScan(infected, queue, out var larva) && larva.HasValue)
                 foundLarvae.Add(larva.Value);
         }
 
@@ -354,7 +354,6 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             queue.Comp.PendingLarvae.Add(larva);
 
         Dirty(queue);
-
         if (queue.Comp.PlayerQueue.Count > 0 && TryComp<HiveComponent>(queue.Owner, out var hive))
             ProcessLarvaQueue((queue.Owner, hive), queue);
     }
@@ -448,11 +447,9 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
     private int ProcessQueuedPlayers(Entity<HiveComponent> hive, Entity<LarvaQueueComponent> queue, LarvaQueuePromptComponent promptComp, int availableCount)
     {
         var processed = 0;
-
         while (processed < availableCount && queue.Comp.PlayerQueue.Count > 0)
         {
             var userId = queue.Comp.PlayerQueue.Dequeue();
-
             if (!TryGetValidSession(userId, out var session))
             {
                 processed++;
@@ -465,7 +462,7 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
                 continue;
             }
 
-            if (!TryGetOrSpawnLarva(hive, queue, out var larva))
+            if (!TryGetOrSpawnLarva(hive, queue, out var larva) || !larva.HasValue)
             {
                 queue.Comp.PlayerQueue.Enqueue(userId);
                 break;
