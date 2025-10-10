@@ -46,7 +46,7 @@ marking-RMCSpotsSkrellHairRight-spots-hair-right = Spots
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_s = Headdress
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_gem_s = Gem
 marking-RMCHeaddressSkrellSilverDiamond-skrell_silvdia_s = Headdress
-marking-RMCHeaddressSkrellGoldDiamond-skrell_silvdia_gem_s = Gem
+marking-RMCHeaddressSkrellSilverDiamond-skrell_silvdia_gem_s = Gem
 
 marking-RMCTailSkrell-skrell_tail = Skrell Tail
 marking-RMCTailSkrellExtraLong-skrell_tail_xlong = Extra Long Skrell Tail
