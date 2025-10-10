@@ -1,71 +1,12 @@
-﻿name: "Labels: Needs Review"
+﻿name: "Labels: Review"
 
 on:
   pull_request_target:
     types: [review_requested, opened]
 
-env:
-  TARGET_TEAM: "maintainers"
-
 jobs:
-  collect_reviews:
-    runs-on: ubuntu-latest
-    outputs:
-      approved: ${{ steps.reviews_parsed.outputs.approved }}
-      changes_requested: ${{ steps.reviews_parsed.outputs.changes_requested }}
-      commented: ${{ steps.reviews_parsed.outputs.commented }}
-    steps:
-    - name: Get latest reviews
-      id: reviews
-      run: |
-        reviews=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
-          | jq -c '
-            sort_by(.submitted_at)
-            | group_by(.user.login)
-            | map(last)
-          ')
-        echo "reviews=$reviews" >> $GITHUB_OUTPUT
-
-    - name: Parse reviewers by state
-      id: reviews_parsed
-      run: |
-        approved=$(echo '${{ steps.reviews.outputs.reviews }}' \
-          | jq -c '[ map(select(.state=="APPROVED")) | map(.user.login) ]')
-        changes_requested=$(echo '${{ steps.reviews.outputs.reviews }}' \
-          | jq -c '[ map(select(.state=="CHANGES_REQUESTED")) | map(.user.login) ]')
-        commented=$(echo '${{ steps.reviews.outputs.reviews }}' \
-          | jq -c '[ map(select(.state=="COMMENTED")) | map(.user.login) ]')
-
-        echo "approved=$approved" >> $GITHUB_OUTPUT
-        echo "changes_requested=$changes_requested" >> $GITHUB_OUTPUT
-        echo "commented=$commented" >> $GITHUB_OUTPUT
-
-  check_changes_requested:
-    needs: collect_reviews
-    if: needs.collect_reviews.outputs.changes_requested != '[]'
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        user: ${{ fromJSON(needs.collect_reviews.outputs.changes_requested) }}
-    steps:
-    - uses: tspascoal/get-user-teams-membership@v3
-      id: membership
-      with:
-        username: ${{ matrix.user }}
-        team: env.TARGET_TEAM
-        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
-
-    - name: Mark if changes requested by team
-      if: steps.membership.outputs.isTeamMember == 'true'
-      run: echo "changes_by_team=true" >> $GITHUB_OUTPUT
-
   add_label:
-    needs: check_changes_requested
-    if: needs.check_changes_requested.outputs.changes_by_team == 'false'
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
     - uses: actions-ecosystem/action-add-labels@v1
       with:
