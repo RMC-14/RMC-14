@@ -1,4 +1,5 @@
 using Content.Shared.Mobs;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -153,9 +154,12 @@ public sealed class DamageOverlay : Overlay
             var innerRadius = innerMaxLevel - level * (innerMaxLevel - innerMinLevel);
 
             var pulse = MathF.Max(0f, MathF.Sin(adjustedTime));
+            // Xenonid Specific Handler
+            var isXeno = _entityManager.HasComponent<XenoComponent>(_playerManager.LocalEntity);
+            var painColor = isXeno ? new Vector3(0.3f, 0.7f, 0.15f) : new Vector3(1f, 0f, 0f);
 
             _bruteShader.SetParameter("time", pulse);
-            _bruteShader.SetParameter("color", new Vector3(1f, 0f, 0f));
+            _bruteShader.SetParameter("color", painColor);
             _bruteShader.SetParameter("darknessAlphaOuter", 0.8f);
 
             _bruteShader.SetParameter("outerCircleRadius", outerRadius);
