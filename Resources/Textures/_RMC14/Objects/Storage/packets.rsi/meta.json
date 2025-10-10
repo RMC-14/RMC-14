@@ -98,12 +98,6 @@
       "name": "hidp_packet_e"
     },
     {
-      "name": "hpdp_packet"
-    },
-    {
-      "name": "hpdp_packet_e"
-    },
-    {
       "name": "hsdp_packet"
     },
     {
