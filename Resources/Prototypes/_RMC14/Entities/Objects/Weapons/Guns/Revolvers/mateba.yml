@@ -81,6 +81,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -133,6 +134,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -166,6 +168,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:

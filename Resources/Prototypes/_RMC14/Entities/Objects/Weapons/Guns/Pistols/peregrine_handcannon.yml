@@ -59,6 +59,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         whitelist:

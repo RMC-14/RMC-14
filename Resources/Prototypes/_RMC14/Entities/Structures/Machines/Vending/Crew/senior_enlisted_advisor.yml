@@ -143,5 +143,6 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

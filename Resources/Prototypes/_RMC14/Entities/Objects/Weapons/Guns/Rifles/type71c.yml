@@ -65,6 +65,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedCompensator
           - RMCM5Bayonet
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:

@@ -341,6 +341,10 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
+      - id: RMCMagazinePistolM13AP
+        amount: 4
+      - id: RMCMagazinePistolM13ExtAP
+        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -354,9 +358,7 @@
       - id: CMMagazineRifleM54CExt
         amount: 2
       - id: RMCMagazinePistolM13Ext
-        amount: 2
-      - id: RMCMagazinePistolM13Drum
-        amount: 2
+        amount: 4
     - name: Special Ammunition
       entries:
       - id: RMCMagazineSmartGun
@@ -488,9 +490,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         amount: 3
+      - id: RMCAttachmentExtendedCompensator
+        amount: 3
       - id: RMCAttachmentRecoilCompensator
         amount: 3
+      - id: RMCAttachmentRecoilCompensatorM13
+        amount: 3
       - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentSuppressorCompact
         amount: 3
       - id: RMCAttachmentShotgunChoke
         amount: 2
@@ -503,6 +511,8 @@
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
+        amount: 3
+      - id: RMCAttachmentS5MicroRedDotSight
         amount: 3
       - id: RMCAttachmentS6ReflexSight
         amount: 3
@@ -532,6 +542,10 @@
         amount: 3
     - name: Stock
       entries:
+      - id: RMCAttachmentM13StockSolid
+        amount: 2
+      - id: RMCAttachmentM13StockCollapsible
+        amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
