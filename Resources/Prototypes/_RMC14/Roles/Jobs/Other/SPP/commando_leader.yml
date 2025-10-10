@@ -1,0 +1,120 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPCommandoLeader
+  name: rmc-job-name-spp-commando-leader
+  description: rmc-ghost-role-information-deathsquad-description
+  playTimeTracker: CMJobSPPCommmandoLeader
+  ranks:
+    RMCRankSPP1stKommando: []
+  startingGear: RMCGearSPPCommandoLeader
+  icon: "RMCJobIconSPPCommandoLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: SPP Commando Leader (!DEATHSQUAD!)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-commando-leader
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPCommandoLeader
+  name: DEATHSQUAD spp ghost role commando leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPCommandoLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPCommandoLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-commando-leader
+    description: rmc-ghost-role-information-deathsquad-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPCommandoLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: startingGear
+  id: RMCGearSPPCommandoLeader
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommando
+    ears2: RMCM5CameraGear
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPCommando
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponRifleType73Filled
+    mask: RMCMaskBalaclavaSPPCommando
+    eyes: RMCGlassesSPPCommandoNightVision
+    id: RMCIDSPP
+    belt: RMCBeltHolsterPistolSPPNPZ92
+    back: RMCBackpackSPPCommando
+    pocket1: RMCPouchMagazineLarge
+    pocket2: RMCPouchExplosiveFilledPlasticExplosives
+  storage:
+    back:
+    - CMMRE # TODO RMC14 - SPP MRE
+    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
+    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
+    - CMCrowbar
+    - RMCRangefinder
+    - RMCHandcuffs
+    - RMCHandcuffs
+    - RMCBoxZiptie
+    outerClothing:
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+    pocket1:
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+
+- type: playTimeTracker
+  id: CMJobSPPCommmandoLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPCommandoLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_comsl
