@@ -60,6 +60,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoShardComponent> _xenoShardsQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
+    private readonly EntityQuery<HedgehogShieldComponent> _hedgehogShieldQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
 
@@ -94,6 +95,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoShardsQuery = _entity.GetEntityQuery<XenoShardComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
+        _hedgehogShieldQuery = _entity.GetEntityQuery<HedgehogShieldComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
 
@@ -586,8 +588,23 @@ public sealed class XenoHudOverlay : Overlay
     private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
         var (uid, xeno, sprite) = ent;
-        if (!_xenoShieldQuery.TryComp(uid, out var comp))
+        
+        FixedPoint2 shieldAmount = 0;
+        
+        // Check for regular xeno shield
+        if (_xenoShieldQuery.TryComp(uid, out var xenoShield))
+        {
+            shieldAmount = xenoShield.ShieldAmount;
+        }
+        // Check for hedgehog shield
+        else if (_hedgehogShieldQuery.TryComp(uid, out var hedgehogShield))
+        {
+            shieldAmount = hedgehogShield.ShieldAmount;
+        }
+        else
+        {
             return;
+        }
 
         var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
         _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
@@ -597,7 +614,7 @@ public sealed class XenoHudOverlay : Overlay
         if (critThresholdNullable == null)
             return;
 
-        var shield = comp.ShieldAmount;
+        var shield = shieldAmount;
         var max = critThresholdNullable.Value.Double();
         var level = ContentHelpers.RoundToLevels(shield.Double(), max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
