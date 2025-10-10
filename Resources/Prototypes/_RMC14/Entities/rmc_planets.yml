@@ -393,6 +393,15 @@
     inRotation: false
 
 - type: entity
+  id: RMCPlanetJungleDelta
+  name: Jungle Delta
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/PVE/jungle_delta.yml
+    camouflage: Jungle
+    inRotation: false
+
+- type: entity
   id: RMCPlanetCorsat
   name: CORSAT
   components:
