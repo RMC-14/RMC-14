@@ -9,22 +9,18 @@
     department: CMRequisitions
     time: 36000 # 10 hours
   ranks:
-    RMCRankMasterSergeant:
+    RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobQuartermaster
       time: 252000 # 70 hours
-    RMCRankGunnerySergeant:
-    - !type:RoleTimeRequirement
-      role: CMJobQuartermaster
-      time: 36000 # 10 hours
-    RMCRankStaffSergeant: []
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
   joinNotifyCrew: false
-  marineAuthorityLevel: 6
-  supervisors: cm-job-supervisors-aso
+  marineAuthorityLevel: 8
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - QuarterMaster
   roleWeight: 0.25
@@ -62,7 +58,7 @@
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    shoes: CMBootsBlack
+    shoes: CMBootsBlackFilled
     head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
@@ -75,7 +71,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointQuartermaster
-  name: quartermaster spawn point
+  name: Logistics Officer spawn point
   components:
   - type: SpawnPoint
     job_id: CMQuartermaster
@@ -89,8 +85,8 @@
 - type: entity
   parent: CMGuidebookRole
   id: RMCGuidebookRoleQM
-  name: The QM
-  description: The Quartermaster.
+  name: The LO
+  description: The Logistics Officer.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

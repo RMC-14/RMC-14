@@ -234,7 +234,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (delta.Length() > flamer.Comp.Range)
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
-        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _, true);
+        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, flamer.Comp.Range, out _, true);
         if (tiles.Count == 0)
             return;
 

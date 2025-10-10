@@ -667,6 +667,65 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalCommando
+  suffix: Filled, Royal Commando
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3AP
+    - id: RMCMagazineRifleL83A3
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalMarksman
+  suffix: Filled, Royal Marksman
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24AP
+    - id: RMCVisorNightVision # TODO RMC14 M42 NVGs
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalMedic
+  suffix: Filled, Royal Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
+    - id: RMCHeadRoyalBeret
+    - id: CMMaskGas # TODO RMC14 royal marine gas masks
+    - id: RMCSyringeCase
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: CMMRE
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalTeamlead
+  suffix: Filled, Royal Team Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCSyringeCase
+    - id: CMCautery
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCMagazineRifleL24
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackBlack
   components:
   - type: Sprite
@@ -680,7 +739,25 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_black.rsi
 
 - type: entity
-  parent: RMCSatchelWelder
+  parent: RMCSatchelLightpack
+  id: RMCSatchelPMC
+  name: PMC combat backpack
+  description: A Weston-Yamada field tested backpack, featuring multiple pouches and compartments for ease of access, preventing slowdown from operatives in the field.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
+
+- type: entity
+  parent: [RMCSatchelPMC, RMCSatchelWelder]
+  id: RMCSatchelWelderPMC
+  name: pmc technician welderpack
+  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/welder.rsi
+
+- type: entity
+  parent: [RMCSatchelLightpack, RMCSatchelWelder]
   id: RMCSatchelLightpackWelder
   name: lightweight technician welderpack
   description: A small, lightweight pack for expeditions and short-range operations. Features a small fueltank for quick blowtorch refueling.
@@ -744,7 +821,7 @@
 - type: entity
   parent: CMSatchelMarineMedic
   id: RMCSatchelPMCMedic
-  description: pmc medic combat pack
+  name: pmc medic combat pack
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
@@ -759,6 +836,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: RMCSatchelTSEPA
+  id: RMCSatchelCorporateSynthetic
+  suffix: Filled, Corporate Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFirstAidKitFilled
+    - id: CMPenClicky
+    - id: CMClipboard
+    - id: CMPaper
 
 - type: entity
   parent: CMSatchel

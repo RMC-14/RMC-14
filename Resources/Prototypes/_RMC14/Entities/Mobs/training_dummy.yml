@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: RMCTrainingDummy
   name: training dummy
   description: A training dummy used by the UNMC to simulate a humanoid body. Feels almost too lifelike.

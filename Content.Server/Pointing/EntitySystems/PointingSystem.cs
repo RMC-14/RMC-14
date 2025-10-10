@@ -84,7 +84,8 @@ namespace Content.Server.Pointing.EntitySystems
             EntityUid pointed,
             string selfMessage,
             string viewerMessage,
-            string? viewerPointedAtMessage = null)
+            string? viewerPointedAtMessage = null,
+            Func<EntityUid, string>? viewerMessageFunc = null)
         {
             var netSource = GetNetEntity(source);
 
@@ -94,6 +95,9 @@ namespace Content.Server.Pointing.EntitySystems
                 {
                     continue;
                 }
+
+                if (viewerMessageFunc != null)
+                    viewerMessage = viewerMessageFunc.Invoke(viewerEntity);
 
                 var message = viewerEntity == source
                     ? selfMessage
@@ -211,6 +215,10 @@ namespace Content.Server.Pointing.EntitySystems
             string? viewerPointedAtMessage = null;
             var playerName = Identity.Name(player, EntityManager, player);
 
+            // RMC14
+            Func<EntityUid, string>? viewerMessageFunc;
+            // RMC14
+
             if (Exists(pointed))
             {
                 var pointedName = Identity.Name(pointed, EntityManager, player);
@@ -247,6 +255,12 @@ namespace Content.Server.Pointing.EntitySystems
                         selfMessage = Loc.GetString("pointing-system-point-in-own-inventory-self", ("item", itemName));
                         // Urist McPointer points at his item
                         viewerMessage = Loc.GetString("pointing-system-point-in-own-inventory-others", ("item", itemName), ("pointer", playerName));
+
+                        // RMC14
+                        viewerMessageFunc = viewer => Loc.GetString("pointing-system-point-in-own-inventory-others",
+                            ("item", itemName),
+                            ("pointer", Identity.Name(player, EntityManager, viewer)));
+                        // RMC14
                     }
                     else
                     {
@@ -255,7 +269,14 @@ namespace Content.Server.Pointing.EntitySystems
                         // Urist McPointer points at Urist McWearer's item
                         viewerMessage = Loc.GetString("pointing-system-point-in-other-inventory-others", ("item", itemName), ("pointer", playerName), ("wearer", pointedName));
                         // Urist McPointer points at your item
-                        viewerPointedAtMessage = Loc.GetString("pointing-system-point-in-other-inventory-target", ("item", itemName), ("pointer", playerName));
+                        // RMC14
+                        viewerPointedAtMessage = Loc.GetString("pointing-system-point-in-other-inventory-target", ("item", itemName), ("pointer", Identity.Name(player, EntityManager, pointed)));
+
+                        viewerMessageFunc = viewer => Loc.GetString("pointing-system-point-in-other-inventory-others",
+                            ("item", itemName),
+                            ("pointer", Identity.Name(player, EntityManager, viewer)),
+                            ("wearer", pointedName));
+                        // RMC14
                     }
                 }
                 else
@@ -273,7 +294,26 @@ namespace Content.Server.Pointing.EntitySystems
                         : Loc.GetString("pointing-system-point-at-other-others", ("otherName", playerName), ("other", pointedName));
 
                     // Urist McPointer points at you
-                    viewerPointedAtMessage = Loc.GetString("pointing-system-point-at-you-other", ("otherName", playerName));
+                    // RMC14
+                    viewerPointedAtMessage = Loc.GetString("pointing-system-point-at-you-other", ("otherName", Identity.Name(player, EntityManager, pointed)));
+
+                    viewerMessageFunc = pointingAtSelf
+                        ? viewer =>
+                        {
+                            var name = Identity.Name(player, EntityManager, viewer);
+                            return Loc.GetString("pointing-system-point-at-self-others",
+                                ("otherName", name),
+                                ("other", name));
+                        }
+                        : viewer =>
+                        {
+                            var playerName = Identity.Name(player, EntityManager, viewer);
+                            var pointedName = Identity.Name(pointed, EntityManager, viewer);
+                            return Loc.GetString("pointing-system-point-at-other-others",
+                                ("otherName", playerName),
+                                ("other", pointedName));
+                        };
+                    // RMC14
                 }
 
                 var ev = new AfterPointedAtEvent(pointed);
@@ -301,12 +341,18 @@ namespace Content.Server.Pointing.EntitySystems
 
                 viewerMessage = Loc.GetString("pointing-system-other-point-at-tile", ("otherName", playerName), ("tileName", name));
 
+                // RMC14
+                viewerMessageFunc = viewer => Loc.GetString("pointing-system-other-point-at-tile",
+                    ("otherName", Identity.Name(player, EntityManager, viewer)),
+                    ("tileName", name));
+
                 _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(player):user} pointed at {name} {(position == null ? mapCoordsPointed : position)}");
             }
 
             _pointers[session] = _gameTiming.CurTime;
 
-            SendMessage(player, viewers, pointed, selfMessage, viewerMessage, viewerPointedAtMessage);
+            // RMC14
+            SendMessage(player, viewers, pointed, selfMessage, viewerMessage, viewerPointedAtMessage, viewerMessageFunc);
 
             return true;
         }

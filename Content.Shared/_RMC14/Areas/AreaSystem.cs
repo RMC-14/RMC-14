@@ -75,8 +75,16 @@ public sealed class AreaSystem : EntitySystem
                 continue;
             }
 
+            EnsureAreaEntityExists(ent.Comp, area);
+        }
+    }
+
+    private void EnsureAreaEntityExists(AreaGridComponent areaGrid, EntProtoId<AreaComponent> area)
+    {
+        if (!areaGrid.AreaEntities.ContainsKey(area))
+        {
             var areaEnt = Spawn(area, MapCoordinates.Nullspace);
-            ent.Comp.AreaEntities[area] = areaEnt;
+            areaGrid.AreaEntities[area] = areaEnt;
             _rmcPvs.AddGlobalOverride(areaEnt);
         }
     }
@@ -84,6 +92,8 @@ public sealed class AreaSystem : EntitySystem
     public void ReplaceArea(AreaGridComponent areaGrid, Vector2i position, EntProtoId<AreaComponent> area)
     {
         areaGrid.Areas[position] = area;
+
+        EnsureAreaEntityExists(areaGrid, area);
     }
 
     public bool TryGetArea(

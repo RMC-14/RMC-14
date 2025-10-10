@@ -55,6 +55,8 @@
       entries:
       - id: RMCCigarCase
         points: 5
+      - id: RMCShioRoyalsCase
+        points: 5
       - id: RMCCigarettePackWeYaGold
         points: 5
       - id: RMCZippoExec

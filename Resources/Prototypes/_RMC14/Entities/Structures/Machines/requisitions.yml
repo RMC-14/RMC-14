@@ -118,6 +118,16 @@
   - type: RMCMesonsNonviewable
 
 - type: entity
+  parent: CMASRSConsole
+  id: CMASRSConsolePowered
+  suffix: Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+
+
+- type: entity
   id: CMCargoElevator
   name: cargo elevator
   suffix: Lowered, Requisitions

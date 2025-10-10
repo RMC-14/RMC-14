@@ -88,3 +88,25 @@
     - RMCGuideCommunicationsTowers
     - RMCGuideRoleCombatTechnician
     - RMCGuideRoleMaintenanceTechnician
+
+
+# Misc
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneCommandTent
+  name: Command tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneReqTent
+  name: Requisitions Tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneMessTent
+  name: Mess Tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneMPTent
+  name: Military Police Tent

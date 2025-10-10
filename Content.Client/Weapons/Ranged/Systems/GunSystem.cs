@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.ItemPickup;
+using Content.Client._RMC14.Movement;
 using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
@@ -43,6 +44,7 @@ public sealed partial class GunSystem : SharedGunSystem
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -214,7 +216,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
         Log.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");
 
-        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, null, session);
+        var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session);
 
         RaisePredictiveEvent(new RequestShootEvent()
         {
@@ -222,7 +224,7 @@ public sealed partial class GunSystem : SharedGunSystem
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gunUid),
             Shot = projectiles?.Select(e => e.Id).ToList(),
-            PointBlanked = projectiles?.Where(HasComp<RMCProjectilePointBlankedComponent>).Select(e => e.Id).ToList(),
+            LastRealTick = _rmcLagCompensation.GetLastRealTick(null),
         });
     }
 

@@ -13,6 +13,7 @@
   startingGear: RMCGearSurvivorSecurity
   accessGroups:
   - ColonistSec
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:

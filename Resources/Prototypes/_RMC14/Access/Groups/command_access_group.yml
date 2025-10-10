@@ -29,7 +29,7 @@
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
   - CMAccessPress # correspondent access
-  - CMAccessQM # quartermaster
+  - CMAccessQM # Logistics Officer
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted
@@ -74,7 +74,7 @@
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
   - CMAccessPress # correspondent access
-  - CMAccessQM # quartermaster
+  - CMAccessQM # Logistics Officer
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst",
   "size": {
     "x": 7,
     "y": 7
@@ -570,6 +570,9 @@
     },
     {
       "name": "pmc_syn"
+    },
+    {
+      "name": "pmc_tl"
     },
     {
       "name": "whiteout"

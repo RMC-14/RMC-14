@@ -74,3 +74,68 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LOWHEAVY
     walkModifier: 0.64
     sprintModifier: 0.64
+
+- type: entity 
+  parent: RMCArmorRoyalLight
+  id: RMCArmorRoyalLightFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRangefinder
+    - id: RMCExplosiveBreachingCharge
+    - id: CMCrowbar # TODO RMC14 tactical prybar
+
+- type: entity 
+  parent: RMCArmorRoyalLight
+  id: RMCArmorRoyalLightFilledMedic
+  suffix: Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24Extended
+    - id: RMCMagazineRifleL24Extended
+    - id: RMCMagazineRifleL24AP
+
+- type: entity 
+  parent: RMCArmorRoyalPointman
+  id: RMCArmorRoyalPointmanFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRangefinder
+    - id: RMCExplosiveBreachingCharge
+    - id: RMCMagazineRifleL24AP
+    - id: RMCMagazineRifleL24
+      amount: 4
+
+- type: entity 
+  parent: RMCArmorRoyalPadded
+  id: RMCArmorRoyalPaddedFilled
+  suffix: Filled, Team Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRangefinder
+    - id: RMCExplosiveBreachingCharge
+    - id: CMCrowbar
+    - id: RMCMagazineRifleL24Extended
+    - id: RMCMagazineRifleL24AP
+    - id: RMCMagazineRifleL24
+    - id: RMCMagazineRifleL24
+
+- type: entity 
+  parent: RMCArmorRoyalPadded
+  id: RMCArmorRoyalPaddedFilledCO
+  suffix: Filled, Major
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCLaserDesignator
+    - id: RMCExplosiveBreachingCharge
+    - id: CMCrowbar
+    - id: RMCMagazineRifleL24Extended
+    - id: RMCMagazineRifleL24Incendiary
+    - id: RMCMagazineRifleL24Incendiary
+    - id: RMCMagazineRifleL24

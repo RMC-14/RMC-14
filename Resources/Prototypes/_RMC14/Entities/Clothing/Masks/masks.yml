@@ -7,6 +7,7 @@
     layers:
       Snout: Mask
     hideOnToggle: true
+  - type: Appearance
 
 - type: entity
   parent: CMBaseMask
@@ -16,11 +17,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
+    layers:
+    - state: base
+    - state: camo
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
     slots:
     - Mask
     - Suitstorage
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
   - type: Item
     size: Small
   - type: Tag
@@ -28,7 +40,7 @@
     - GasMask
 
 - type: entity
-  parent: CMMaskGas
+  parent: CMBaseMask
   id: RMCMaskGasSPP
   name: ShMB/4 gasmask
   description: The standard issue gasmask utilized by the SPP Vanguard Collective and many SPP civilian organizations.
@@ -43,6 +55,11 @@
     - HeadTop
     - HeadSide
     - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
 
 - type: Tag
   id: GasMask
@@ -180,6 +197,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/tan_coif.rsi
 
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskCoifPMC
+  name: M8 pattern armored coif
+  description: An armored coif designed to conceal both the identity of the operator and act as an air-filter.
+  components:
+  - type: CMArmor
+    melee: 10
+    bio: 30
+    explosionArmor: 10
+
 # Balaclavas
 - type: entity
   parent: CMBaseMask
@@ -214,18 +242,7 @@
     sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
 
 - type: entity
-  parent: RMCMaskBalaclava
-  id: RMCMaskBalaclavaPMC
-  name: M8 pattern armored balaclava
-  description: An armored balaclava designed to conceal both the identity of the operator and act as an air-filter.
-  components:
-  - type: CMArmor
-    melee: 10
-    bio: 30
-    explosionArmor: 10
-
-- type: entity
-  parent: RMCMaskBalaclavaPMC
+  parent: RMCMaskCoifPMC
   id: RMCMaskBalaclavaMARSOC
   name: SOF armored balaclava
   description: Designed for maximum protection -- and badassery. Provides protection against facial attacks, filters toxins, and conceals the wearer's identity.

@@ -114,7 +114,7 @@
           Quantity: 8
         - ReagentId: Vitamin
           Quantity: 6
-        - ReagentId: Omnizine
+        - ReagentId: CMTricordrazine
           Quantity: 8
   - type: Tag
     tags:
@@ -142,9 +142,9 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 20
-        - ReagentId: Kelotane
+        - ReagentId: CMKelotane
           Quantity: 12
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 12
         - ReagentId: Vitamin
           Quantity: 20
@@ -315,7 +315,7 @@
         - ReagentId: Sugar
           Quantity: 8
         - ReagentId: Vitamin
-          Quantity: 17 
+          Quantity: 17
   - type: Tag
     tags:
     - Fruit
@@ -372,7 +372,7 @@
           Quantity: 8
         - ReagentId: Vitamin
           Quantity: 5
-        - ReagentId: Omnizine
+        - ReagentId: CMTricordrazine
           Quantity: 5
 
 # Rice
@@ -444,9 +444,9 @@
           Quantity: 18
         - ReagentId: Vitamin
           Quantity: 7
-        - ReagentId: Dexalin ##This is probably a reference to something but I don't get it
+        - ReagentId: CMDexalin ##This is probably a reference to something but I don't get it
           Quantity: 6.5
-        - ReagentId: Epinephrine
+        - ReagentId: CMEpinephrine
           Quantity: 2
   - type: Tag
     tags:
@@ -770,7 +770,7 @@
           Quantity: 15
         - ReagentId: Water
           Quantity: 10
-        - ReagentId: Omnizine
+        - ReagentId: CMTricordrazine
           Quantity: 5
         - ReagentId: Histamine
           Quantity: 4

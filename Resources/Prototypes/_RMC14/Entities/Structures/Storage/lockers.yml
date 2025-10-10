@@ -76,6 +76,17 @@
     access: [["CMAccessColonyCommand"]]
 
 - type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeLiaison
+  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
+  suffix: Corporate Liaison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["RMCAccessWeYa"]]
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
@@ -218,7 +229,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerQM
-  name: quartermaster's locker
+  name: Logistics Officer's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
@@ -231,7 +242,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerCargo
-  name: cargo technician's locker
+  name: requisitions technician's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/cargo.rsi
@@ -495,3 +506,29 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetTSEPAFill
+
+# SPP
+- type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderSPP
+  name: section lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorSPPOne
+  name: squad one heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorSPPOne
+  id: RMCLockerSmartGunOperatorSPPTwo
+  name: squad two heavy gunner locker

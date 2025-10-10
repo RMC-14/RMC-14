@@ -156,7 +156,6 @@
     - RMCAttachmentBarrel
     - RMCAttachmentSuppressor
   - type: AttachableVisuals
-    prefix: suppressor2
   - type: AttachableSilencer
     sound:
       collection: CMSilencedShoot

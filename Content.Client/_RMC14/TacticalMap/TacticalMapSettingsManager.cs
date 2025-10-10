@@ -115,13 +115,13 @@ public sealed class TacticalMapSettingsManager
             new TacticalMapSettingRegistration
             {
                 Key = "WindowWidth",
-                Value = 600.0f,
+                Value = 1000.0f,
                 PlanetId = null
             },
             new TacticalMapSettingRegistration
             {
                 Key = "WindowHeight",
-                Value = 600.0f,
+                Value = 800.0f,
                 PlanetId = null
             },
             new TacticalMapSettingRegistration
@@ -347,8 +347,8 @@ public sealed class TacticalMapSettingsManager
             SettingsVisible = GetSettingValue<bool>("SettingsVisible", planetId, false),
             LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, (int) TacticalMapControl.LabelMode.Area),
             WindowSize = new Vector2(
-                GetSettingValue<float>("WindowWidth", planetId, 600.0f),
-                GetSettingValue<float>("WindowHeight", planetId, 600.0f)
+                GetSettingValue<float>("WindowWidth", planetId, 1000.0f),
+                GetSettingValue<float>("WindowHeight", planetId, 800.0f)
             ),
             WindowPosition = new Vector2(
                 GetSettingValue<float>("WindowPositionX", planetId, -1.0f),

@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction.Upgrades;
 using Content.Shared._RMC14.Xenonids.Leap;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -33,6 +34,7 @@ public abstract class SharedBarbedSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly SharedXenoAcidSystem _xenoAcid = default!;
 
     public override void Initialize()
     {
@@ -62,6 +64,15 @@ public abstract class SharedBarbedSystem : EntitySystem
 
     private void OnInteractUsing(Entity<BarbedComponent> ent, ref InteractUsingEvent args)
     {
+        if (_xenoAcid.IsMelted(ent))
+        {
+            var failPopup = Loc.GetString("rmc-construction-melted");
+            _popupSystem.PopupClient(failPopup, ent, args.User, PopupType.SmallCaution);
+
+            args.Handled = true;
+            return;
+        }
+
         if (!ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var ev = new BarbedDoAfterEvent();

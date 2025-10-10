@@ -83,6 +83,16 @@
         amount: 4
 
 - type: entity
+  id: RMCCrateClothingWebbingHolsterBlack
+  parent: RMCCrateBase
+  name: black shoulder holster crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCWebbingHolsterBlack
+        amount: 4
+
+- type: entity
   id: RMCCrateClothingDropPouch
   parent: RMCCrateBase
   name: drop pouch crate (x4)

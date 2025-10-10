@@ -220,6 +220,24 @@
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-kelotane-dermaline
 
+- type: entity
+  parent: CMPill
+  id: RMCPillImidazoline
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 1
+        reagents:
+        - ReagentId: CMImidazoline
+          Quantity: 1
+  - type: Sprite
+    layers:
+    - state: pill3
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-imidazoline
+    
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity

@@ -856,6 +856,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else if (!_loocEnabled) return;
 
+        // RMC14
+        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Looc))
+        {
+            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+            return;
+        }
+
         // If crit player LOOC is disabled, don't send the message at all.
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
             return;
@@ -878,6 +886,15 @@ public sealed partial class ChatSystem : SharedChatSystem
         string wrappedMessage;
         if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled) // RMC14 - Check the status of the "rmc.dead_chat_enabled" CCvar before continuing.
             return;
+
+        // RMC14
+        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Dead))
+        {
+            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+            return;
+        }
+
         if (_adminManager.IsAdmin(player))
         {
             wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",

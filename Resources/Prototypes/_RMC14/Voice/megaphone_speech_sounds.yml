@@ -4,11 +4,14 @@
     path: /Audio/_RMC14/Items/megaphone.ogg
     params:
       referenceDistance: 4
+      maxDistance: 1.5
   askSound:
     path: /Audio/_RMC14/Items/megaphone.ogg
     params:
       referenceDistance: 4
+      maxDistance: 1.5
   exclaimSound:
     path: /Audio/_RMC14/Items/megaphone.ogg
     params:
       referenceDistance: 4
+      maxDistance: 1.5

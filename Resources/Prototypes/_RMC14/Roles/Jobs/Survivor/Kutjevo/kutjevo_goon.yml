@@ -1,0 +1,61 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorKutjevoGoon
+  name: rmc-job-name-survivor-kutjevo-goon
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoGoon
+  hasIcon: true
+  icon: RMCJobIconWeYaSec
+  spawnMenuRoleName: Kutjevo Security Guard (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoGoon
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorKutjevoGoon
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    ears: RMCHeadsetDistressWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoGoon
+  name: kutjevo goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoGoon
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetKutjevoGoon
+  name: kutjevo goon colonist preset
+  categories: [ HideSpawnMenu ]

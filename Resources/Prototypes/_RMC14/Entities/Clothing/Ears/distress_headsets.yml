@@ -95,6 +95,26 @@
     - CorporateLiaison
 
 - type: entity
+  parent: RMCHeadsetDistressWeYa
+  id: RMCHeadsetDistressPMCPVE
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  suffix: PVE
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYA
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmcPVE
+    trackerModes:
+    - LeaderPmcPVE
+    - TeamLeaderPmcPVE
+
+- type: entity
   parent: RMCHeadsetDistressPMC
   id: RMCHeadsetDistressPMCLeader
   suffix: Leader

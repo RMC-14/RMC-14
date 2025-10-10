@@ -44,7 +44,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -353,11 +353,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
     public void Heal(EntityUid target, FixedPoint2 amount)
     {
-        var damage = _rmcDamageable.DistributeDamage(target, BruteGroup, amount);
+        var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeDamage(target, BurnGroup, leftover, damage);
+            damage = _rmcDamageable.DistributeDamageCached(target, BurnGroup, leftover, damage);
         _damageable.TryChangeDamage(target, -damage, true);
     }
 

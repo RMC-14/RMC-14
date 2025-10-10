@@ -76,6 +76,19 @@
     currentLabel: reagent-name-water
 
 - type: entity
+  parent: RMCTankReagentWater
+  id: RMCTankReagentWaterLocked
+  suffix: Water, Locked
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags: None
+
+
+- type: entity
   parent: RMCTankReagentEmpty
   id: RMCTankReagentFuel
   name: fuel tank

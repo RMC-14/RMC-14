@@ -1,0 +1,69 @@
+﻿- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorChancesMedic
+  name: rmc-job-name-survivor-chances-medic
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesMedic
+  startingGear: RMCGearSurvivorChancesMedic
+  spawnMenuRoleName: Chance's Claim Medic (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorChancesMedic
+  equipment:
+    shoes: RMCShoesLaceup
+    mask: RMCMaskRebreather
+    jumpsuit: CMScrubsBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesMedic
+  name: chances medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesMedic
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesMedic
+  name: chances medic ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesMedic
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesMedic
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesMedic

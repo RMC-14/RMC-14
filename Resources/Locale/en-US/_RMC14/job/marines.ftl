@@ -31,7 +31,7 @@ CMJobHospitalCorpsman = Hospital Corpsman
 
 cm-job-name-combat-tech = Combat Technician
 cm-job-description-combat-tech = Build or remove fortifications. Establish and maintain FOB and Power. Gain access to blocked off areas.
-cm-job-prefix-combat-tech = ComTech
+cm-job-prefix-combat-tech = CT
 CMJobCombatTech = Combat Tech
 
 rmc-job-name-mortar-operator = Mortar Operator

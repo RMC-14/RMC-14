@@ -22,4 +22,4 @@ jobs:
         schema: RobustToolbox/Schemas/mapfile.yml
         path_pattern: .*Resources/Maps/.*
         validators_path: RobustToolbox/Schemas/mapfile_validators.py
-        validators_requirements: RobustToolbox/Schemas/mapfile_requirements.txt
+        validators_requirements: .github/Schemas/mapfile_requirements.txt

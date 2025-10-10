@@ -118,7 +118,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 continue;
 
             _hitEntities.Add(entity);
-            limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire));
+            limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire, null));
             Dirty(entity,limit);
 
             if(projectileCount == 0)

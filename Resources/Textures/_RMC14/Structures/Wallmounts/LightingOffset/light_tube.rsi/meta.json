@@ -1,0 +1,131 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/884db783073c035b756c175b1bc75fb43279803e/icons/obj/items/lighting.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "tube1",
+      "directions": 4
+    },
+    {
+      "name": "tube0",
+      "directions": 4
+    },
+    {
+      "name": "tube-empty",
+      "directions": 4
+    },
+    {
+      "name": "tube-burned",
+      "directions": 4
+    },
+    {
+      "name": "tube-broken",
+      "directions": 4
+    },
+    {
+      "name": "btube1",
+      "directions": 4
+    },
+    {
+      "name": "btube0",
+      "directions": 4
+    },
+    {
+      "name": "btube-empty",
+      "directions": 4
+    },
+    {
+      "name": "btube-burned",
+      "directions": 4
+    },
+    {
+      "name": "btube-broken",
+      "directions": 4
+    },
+    {
+      "name": "ptube1",
+      "directions": 4
+    },
+    {
+      "name": "ptube0",
+      "directions": 4
+    },
+    {
+      "name": "ptube-empty",
+      "directions": 4
+    },
+    {
+      "name": "ptube-burned",
+      "directions": 4
+    },
+    {
+      "name": "ptube-broken",
+      "directions": 4
+    },
+    {
+      "name": "bptube1",
+      "directions": 4
+    },
+    {
+      "name": "bptube0",
+      "directions": 4
+    },
+    {
+      "name": "bptube-empty",
+      "directions": 4
+    },
+    {
+      "name": "bptube-burned",
+      "directions": 4
+    },
+    {
+      "name": "bptube-broken",
+      "directions": 4
+    },
+    {
+      "name": "slight1",
+      "directions": 4
+    },
+    {
+      "name": "slight0",
+      "directions": 4
+    },
+    {
+      "name": "slight-empty",
+      "directions": 4
+    },
+    {
+      "name": "slight-burned",
+      "directions": 4
+    },
+    {
+      "name": "slight-broken",
+      "directions": 4
+    },
+    {
+      "name": "bslight1",
+      "directions": 4
+    },
+    {
+      "name": "bslight0",
+      "directions": 4
+    },
+    {
+      "name": "bslight-empty",
+      "directions": 4
+    },
+    {
+      "name": "bslight-burned",
+      "directions": 4
+    },
+    {
+      "name": "bslight-broken",
+      "directions": 4
+    }
+  ]
+}

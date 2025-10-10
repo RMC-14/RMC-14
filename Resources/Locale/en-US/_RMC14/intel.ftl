@@ -52,6 +52,7 @@ rmc-ui-intel-colony-status =
 
 ## Tech Control Console
 rmc-ui-tech-tier-header = [font size=14][bold]Tier: { $tier }[/bold][/font]
+rmc-ui-tech-points = [font size=14][bold]Points: { $points }[/bold][/font]
 rmc-ui-tech-points-value = Tech points: { $value }
 rmc-ui-tech-repurchasable = Repurchasable
 rmc-ui-tech-incremental-price = Incremental price: +{ $increase } per purchase

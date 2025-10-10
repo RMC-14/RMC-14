@@ -1,0 +1,43 @@
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoHedgehogSpikeProjectile
+  name: bone spike
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/shards.rsi
+    layers:
+    - state: bonechips
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 8
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 135
+  - type: XenoSlowingSpitProjectile
+    superSlow: false
+    slow: 3
+    paralyze: 0
+    armorResistsKnockdown: true
+  - type: TimedDespawn
+    lifetime: 1.0
+
+- type: entity
+  parent: XenoHedgehogSpikeProjectile
+  id: XenoHedgehogShieldSpikeProjectile
+  name: bone spike
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Slash: 8
+  - type: ProjectileMaxRange
+    max: 2.5
+  - type: TimedDespawn
+    lifetime: 1.5

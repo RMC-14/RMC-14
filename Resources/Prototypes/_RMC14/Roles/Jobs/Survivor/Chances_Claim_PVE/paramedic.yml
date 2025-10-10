@@ -1,0 +1,72 @@
+﻿- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorChancesParamedic
+  name: rmc-job-name-survivor-chances-paramedic
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesParamedic
+  startingGear: RMCGearSurvivorChancesParamedic
+  spawnMenuRoleName: Chance's Claim Paramedic (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorChancesParamedic
+  equipment:
+    shoes: RMCShoesBlack
+    head: RMCArmorHelmetSecurity
+    outerClothing: RMCOuterClothingExternalWebbing
+    mask: RMCMaskRebreather
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitEMTGreen
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesParamedic
+  name: chances paramedic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesParamedic
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesParamedic
+  name: chances paramedic ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesParamedic
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesParamedic
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesParamedic

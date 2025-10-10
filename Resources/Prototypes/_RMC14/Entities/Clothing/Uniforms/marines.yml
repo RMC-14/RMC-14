@@ -41,6 +41,42 @@
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalMK80 # TODO RMC14 sprite
+  suffix: Filled, Royal, MK80
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCShoulderHolsterMK80
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalMedic # TODO RMC14 sprite
+  suffix: Filled, Royal, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalBlue
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalTeamlead # TODO RMC14 sprite
+  suffix: Filled, Royal, Teamlead
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
@@ -158,22 +194,22 @@
 
 # Supply
 
-# Quartermaster / RO
+# Logistics Officer
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: quartermaster suit
-  description: A nicely-fitting military suit for a quartermaster. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: Logistics Officer suit
+  description: A nicely-fitting military suit for a Logistics Officer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
 
-# Cargotech
+# ReqTech / RT
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
-  name: cargo technician uniform
-  description: A standard-issue cargo tech uniform.
+  name: requisitions technician uniform
+  description: A standard-issue req tech uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
@@ -440,8 +476,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
-  name: pilot officer bodysuit
-  description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: pilot bodysuit
+  description: A bodysuit worn by pilots of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi

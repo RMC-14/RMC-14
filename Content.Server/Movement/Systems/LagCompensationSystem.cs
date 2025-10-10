@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Movement;
 using Content.Server.Movement.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -17,6 +18,9 @@ public sealed class LagCompensationSystem : EntitySystem
     // I figured 500 ping is max, so 1.5 is 750.
     // Max ping I've had is 350ms from aus to spain.
     public TimeSpan BufferTime = TimeSpan.FromMilliseconds(750);
+
+    // RMC14
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public override void Initialize()
     {
@@ -72,15 +76,20 @@ public sealed class LagCompensationSystem : EntitySystem
         var coordinates = EntityCoordinates.Invalid;
         var ping = pSession.Channel.Ping;
         // Use 1.5 due to the trip buffer.
-        var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
+        var offset = _timing.CurTick - _rmcLagCompensation.GetLastRealTick(pSession.UserId).Value;
+        var sentTime = _timing.CurTime - offset.Value * _timing.TickPeriod;
 
+        TimeSpan? found = null;
         foreach (var pos in lag.Positions)
         {
+            if (found != null && found != pos.Item1)
+                break;
+
             coordinates = pos.Item2;
             angle = pos.Item3;
 
             if (pos.Item1 >= sentTime)
-                break;
+                found ??= pos.Item1;
         }
 
         if (coordinates == default)

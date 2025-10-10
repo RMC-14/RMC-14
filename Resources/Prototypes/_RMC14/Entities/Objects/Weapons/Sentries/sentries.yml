@@ -90,6 +90,9 @@
 - type: Tag
   id: RMCSentry
 
+- type: Tag
+  id: RMCSentryWeYa
+
 - type: entity
   parent: RMCSentry
   id: RMCSentryMini
@@ -164,6 +167,9 @@
     - WeYa
   - type: UserIFF
     faction: FactionWeYa
+  - type: Tag
+    tags:
+    - RMCSentryWeYa
 
 - type: entity
   parent: RMCSentryMini

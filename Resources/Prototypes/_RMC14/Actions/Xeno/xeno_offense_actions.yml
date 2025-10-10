@@ -593,6 +593,7 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoPunchActionEvent
+    toggleOutline: false
   - type: XenoOffensiveAction
 
 - type: entity
@@ -620,6 +621,7 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoFlingActionEvent
+    toggleOutline: false
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
 
@@ -648,6 +650,7 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoLungeActionEvent
+    toggleOutline: false
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
   - type: RMCCooldownOnMiss
@@ -1429,3 +1432,4 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+

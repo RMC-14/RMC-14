@@ -3,7 +3,7 @@
   id: RMCMechBase
   components:
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: Sprite
     drawdepth: Mobs
     noRot: true

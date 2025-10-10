@@ -356,6 +356,17 @@
 #        amount: 7
 
 - type: entity
+  parent: ColMarTechMarineMedical
+  id: ColMarTechMarineMedicalPowered
+  suffix: Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: CMAutomatedVendor
+    ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: RMCNanoMed
   name: NanoMed

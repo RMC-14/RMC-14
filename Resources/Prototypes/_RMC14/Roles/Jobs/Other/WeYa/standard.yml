@@ -29,7 +29,6 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 1
         RMCSkillEndurance: 5
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
   hidden: true
@@ -82,15 +81,15 @@
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteran
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponSMGM63B2
   storage:
     back:
@@ -164,16 +163,16 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    outerClothing: RMCArmorM4PMCNoLight
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponRifleSSG45
   storage:
     back:
@@ -245,16 +244,16 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    outerClothing: RMCArmorM4PMCNoLight
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponRifleM54C2
   storage:
     back:

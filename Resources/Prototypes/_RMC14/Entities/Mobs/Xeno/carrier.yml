@@ -161,6 +161,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoCarrierEggsac
+  - type: RMCActionOrder
+    id: CMXenoCarrier
 
 - type: entity
   parent: RMCXenoCarrierBase
@@ -222,4 +224,6 @@
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoCarrierEggsac
 

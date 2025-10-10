@@ -1,0 +1,192 @@
+- type: job
+  parent: CMJobBase
+  id: RMCPMCWhiteout
+  name: rmc-job-name-pmc-whiteout
+  description: rmc-ghost-role-information-pmc-whiteout-description
+  playTimeTracker: RMCJobPMCWhiteout
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobPMCWhiteout
+  icon: RMCJobIconPMCWhiteout
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  - Synth
+  spawnMenuRoleName: WEYA Whiteout Combat Unit
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillLeadership: 3
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 3
+        RMCSkillJtac: 4
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+        RMCSkillExecution: 1
+        RMCSkillSmartGun: 1
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      - type: CMArmor
+        immuneToAP: true
+      - type: RandomMetadata
+        nameSegments:
+        - RMCNamesGreek
+        - RMCNamesNumbers
+        nameFormat: name-format-ert
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
+      canUseGuns: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-whiteout
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCWhiteout
+  name: DEATHSQUAD pmc ghost role whiteout
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCWhiteout
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesGreek
+    - RMCNamesNumbers
+    nameFormat: name-format-ert
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCWhiteout
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+    hair: HairBald # TODO RMC14 - This should probably make the species human too, and make them have no facial hair.
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-whiteout
+    description: rmc-ghost-role-information-pmc-whiteout-description
+    rules: rmc-ghost-role-information-pmc-whiteout-rules
+    reregister: false
+    job: RMCPMCWhiteout
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCWhiteout
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: ArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelPMC
+    belt: RMCWeaponFL3FlamerWhiteout
+    pocket1: RMCPouchMagazineLargePMC
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleM54C2Whiteout
+  storage:
+    back:
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - CMCrowbar # TODO RMC14 - Tactical Crowbar
+    # TODO RMC14 - Nanopaste
+    # TODO RMC14 - Whiteout Medkit
+    - RMCTankFlamerFL3
+    - RMCTankFlamerFL3
+    outerClothing:
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    pocket1:
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    pocket2:
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+    - RMCMagazineRifleM54CHEAP
+
+- type: playTimeTracker
+  id: RMCJobPMCWhiteout
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCWhiteout
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: wo_op

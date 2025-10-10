@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesMajor
+  name: rmc-job-name-rcm-major
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalMajor
+  ranks:
+    RMCRankTSEMajor: [ ] 
+  startingGear: RMCGearRoyalMajor
+  icon: "RMCJobIconRoyalMajor"
+  joinNotifyCrew: false
+  spawnMenuRoleName: RCM Major 
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 2 
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 3
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 3
+        RMCSkillPilot: 1
+        RMCSkillIntel: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillOverwatch: 1
+        RMCSkillSmartGun: 1
+        RMCSkillExecution: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: ViewIntelObjectives
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-major
+  hidden: true
+  
+- type: startingGear 
+  id: RMCGearRoyalMajor
+  equipment:
+    head: RMCHeadRoyalBeretLead
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: RMCHeadsetRoyalMarineOfficer
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalPaddedFilledCO
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarines
+    belt: RMCMatebaBeltLuxuriousFilled
+    back: RMCSatchelLightpackFilledRoyalMedic
+    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalMajor
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalMajor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_commander

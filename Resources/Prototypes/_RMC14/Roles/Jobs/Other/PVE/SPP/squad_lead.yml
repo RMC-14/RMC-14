@@ -50,14 +50,14 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSPPSquadLeadPVE
-  name: weya pmc team lead spawn point
+  name: spp squad lead spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
     job_id: RMCSPPSquadLeadPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
-    state: pmc_spawn
+    state: spp_spawn
 
 - type: startingGear
   id: RMCJobSPPSquadLeadPVEGear

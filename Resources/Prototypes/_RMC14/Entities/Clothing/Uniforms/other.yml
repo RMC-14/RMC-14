@@ -552,10 +552,34 @@
 - type: entity
   parent: RMCJumpsuitCLFSoldier
   id: RMCJumpsuitCLFWebbing
-  suffix: Webbing
+  suffix: Webbing, MAR
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingBrown
+    startingWebbing: RMCWebbingCLFMAR
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingMAR50
+  suffix: Webbing, MAR50
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCLFMAR50
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingBuckshot
+  suffix: Webbing, Buckshot
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCLFBuckshot
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingSurgical
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
 
 # Frontier
 - type: entity

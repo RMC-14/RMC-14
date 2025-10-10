@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
@@ -20,6 +21,7 @@ using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -534,8 +536,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         return true;
     }
-
-    private bool TryGetAttachmentContained(
+    // wtf why was it private
+    public bool TryGetAttachmentContained(
         EntityUid point,
         string containerId,
         out EntityUid contained)
@@ -557,5 +559,17 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
 
         return dropship.Comp.State == FTLState.Travelling || dropship.Comp.State == FTLState.Arriving;
+    }
+
+    public bool IsOnDropship(EntityUid entity)
+    {
+        var grid = _transform.GetGrid(entity);
+        return HasComp<DropshipComponent>(grid);
+    }
+
+    public bool IsOnDropship(EntityCoordinates coordinates)
+    {
+        var grid = _transform.GetGrid(coordinates);
+        return HasComp<DropshipComponent>(grid);
     }
 }

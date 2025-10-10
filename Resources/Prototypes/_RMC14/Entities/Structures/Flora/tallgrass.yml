@@ -9,6 +9,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Flora/tallgrass.rsi
     state: tallgrass
+    drawdepth: Walls
   - type: Physics
     canCollide: false
   - type: Fixtures

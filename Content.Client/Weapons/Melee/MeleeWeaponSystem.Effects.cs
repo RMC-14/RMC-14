@@ -20,6 +20,9 @@ public sealed partial class MeleeWeaponSystem
     /// </summary>
     public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, bool predicted = true)
     {
+        if (localPos == Vector2.Zero) // RMC14
+            return;
+
         if (!Timing.IsFirstTimePredicted)
             return;
 

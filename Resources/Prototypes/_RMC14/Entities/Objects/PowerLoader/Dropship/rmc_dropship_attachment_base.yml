@@ -9,7 +9,7 @@
   - type: Transform
     anchored: true
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: Sprite
     sprite: _RMC14/Objects/dropship_attachments.rsi
   - type: Physics
@@ -46,4 +46,5 @@
   - type: Item
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: VisiblyAcidOutsideContainer
 # TODO RMC14 make these climbable when we have single climb technology

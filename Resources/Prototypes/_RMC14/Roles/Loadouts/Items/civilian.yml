@@ -41,6 +41,12 @@
   inhand:
     - RMCPatchCLF
 
+- type: loadout
+  id: PatchOliveBranch
+  cost: 1
+  inhand:
+  - RMCPatchOliveBranch
+
 # Shoes
 - type: loadout
   id: ShoesBlackRMC

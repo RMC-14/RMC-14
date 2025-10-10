@@ -9,6 +9,7 @@
   startingGear: RMCGearSurvivorDoctor
   accessGroups:
   - ColonistMedical
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:

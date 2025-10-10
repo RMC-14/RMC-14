@@ -15,9 +15,6 @@
   marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
-  overwatchSortPriority: -6
-  overwatchShowName: true
-  overwatchRoleName: Squad Leader
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -38,6 +35,7 @@
         RMCSkillIntel: 1
         RMCSkillPilot: 2
         RMCSkillFirearms: 1
+    - type: SquadLeader
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

@@ -14,6 +14,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
@@ -62,7 +63,7 @@
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
   #  eyes: RMCMesonGoggles TODO RMC14
-    jumpsuit: RMCJumpsuitCLFSoldier
+    jumpsuit: RMCJumpsuitCLFWebbingBuckshot
     outerClothing: RMCCoatMilitia
     gloves: CMHandsInsulated
     shoes: RMCShoesBrown
@@ -70,7 +71,7 @@
     belt: CMBeltUtilityFilled
     back: RMCSatchelLightpackWelder
     pocket1: RMCPouchConstructionFillLowGrade
-    pocket2: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidERTFill
   inhand:
   - WeaponShotgunM357Sawn # TODO RMC14 - Make randomized
   - CMShellShotgunBuckshot # TODO RMC14 - Make randomized
@@ -83,6 +84,11 @@
     - RMCGrenadeMolotov
     - CMMRE
     - RMCFlashlight
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    outerClothing:
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
 
 - type: playTimeTracker
   id: RMCJobCLFEngineer

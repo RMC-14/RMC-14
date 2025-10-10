@@ -19,6 +19,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -71,7 +72,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnShootRequest(RequestShootEvent ev, EntitySessionEventArgs args)
     {
-        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, null, args.SenderSession);
+        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, args.SenderSession);
     }
 
     private void OnClientProjectileUpdateIsPredicted(Entity<PredictedProjectileClientComponent> ent, ref UpdateIsPredictedEvent args)
@@ -112,7 +113,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
 
         if (_spriteQuery.TryComp(ent, out var sprite))
-            sprite.Visible = false;
+            _sprite.SetVisible((ent, sprite), false);
     }
 
     public override void Update(float frameTime)

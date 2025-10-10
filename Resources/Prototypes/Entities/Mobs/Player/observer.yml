@@ -92,6 +92,11 @@
     xenos: true
   - type: ViewIntelObjectives
   - type: VentSight
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - Ladder
+    range: 15
 
 # proto for player ghosts specifically
 - type: entity

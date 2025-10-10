@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Mobs;
@@ -8,6 +9,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
@@ -27,6 +29,7 @@ public sealed class XenoCollisionSystem : EntitySystem
 
     private EntityQuery<MobCollisionComponent> _mobCollisionQuery;
     private EntityQuery<StunFriendlyXenoOnStepComponent> _stunFriendlyXenoOnStepQuery;
+    private EntityQuery<XenoFortifyComponent> _xenoFortifyQuery;
 
     private readonly HashSet<EntityUid> _contacts = new();
 
@@ -34,6 +37,7 @@ public sealed class XenoCollisionSystem : EntitySystem
     {
         _mobCollisionQuery = GetEntityQuery<MobCollisionComponent>();
         _stunFriendlyXenoOnStepQuery = GetEntityQuery<StunFriendlyXenoOnStepComponent>();
+        _xenoFortifyQuery = GetEntityQuery<XenoFortifyComponent>();
 
         SubscribeLocalEvent<XenoComponent, AttemptMobTargetCollideEvent>(OnXenoAttemptMobTargetCollide);
 
@@ -42,6 +46,7 @@ public sealed class XenoCollisionSystem : EntitySystem
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, StunnedEvent>(OnStunUpdated);
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, StatusEffectEndedEvent>(OnStunUpdated);
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, XenoOvipositorChangedEvent>(OnStunUpdated);
+        SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, PreventCollideEvent>(OnPreventCollide);
     }
 
     private void OnXenoAttemptMobTargetCollide(Entity<XenoComponent> ent, ref AttemptMobTargetCollideEvent args)
@@ -60,6 +65,15 @@ public sealed class XenoCollisionSystem : EntitySystem
                            !_statusEffects.HasStatusEffect(ent, ent.Comp.DisableStatus) &&
                            CompOrNull<XenoAttachedOvipositorComponent>(ent) is not { Running: true };
         Dirty(ent);
+    }
+
+    private void OnPreventCollide(Entity<StunFriendlyXenoOnStepComponent> ent, ref PreventCollideEvent args)
+    {
+        if (_xenoFortifyQuery.TryComp(args.OtherEntity, out var fortify) &&
+            fortify.Fortified)
+        {
+            args.Cancelled = true;
+        }
     }
 
     public override void Update(float frameTime)

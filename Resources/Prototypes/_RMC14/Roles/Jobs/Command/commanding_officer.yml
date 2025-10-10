@@ -89,6 +89,7 @@
     - type: CommendationGiver
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: InnateCommandSpeech
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

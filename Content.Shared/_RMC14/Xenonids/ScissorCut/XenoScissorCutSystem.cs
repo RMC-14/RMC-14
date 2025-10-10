@@ -21,7 +21,7 @@ namespace Content.Shared._RMC14.Xenonids.ScissorCut;
 
 public sealed class XenoScissorCutSystem : EntitySystem
 {
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;

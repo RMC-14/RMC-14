@@ -233,17 +233,9 @@
 
 # For lesser drone
 - type: entity
+  parent: ActionXenoPlantWeeds
   id: ActionLesserDronePlantWeeds
-  parent: ActionXenoBase
-  name: Plant Weeds (75) # TODO RMC14 proper plasma costs
-  description: Plant a weed node that will spread more weeds.
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: plant_weeds
-    useDelay: 1
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
       limitDistance: true

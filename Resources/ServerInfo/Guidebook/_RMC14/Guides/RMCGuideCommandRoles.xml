@@ -35,7 +35,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleASO"/>
   </Box>
-  -The [bold]Auxiliary Support Officer[/bold] oversees the Hangar, Intel, Requisitions, and Engineering departments. While Req and Engineering have their own section head, the ASO has direct authority over them.
+  -The [bold]Auxiliary Support Officer[/bold] oversees the Hangar, Intel, and Engineering departments. While Engineering has their own section head, the ASO has direct authority over them.
   \n
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleCE"/>
@@ -45,7 +45,7 @@
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookRoleQM"/>
   </Box>
-  -The [bold]Quartermaster[/bold] operates the requisitions department and oversees the Cargo Technicians. While not a commissioned officer, the QM is one of the highest ranking enlisted aboard and warrants a spot on this list.
+  -The [bold]Logistics Officer[/bold] operates the requisitions department and oversees the Requisitions Technicians.
   <Box>
   Refer to the Commander Succession to learn the pecking order and remember:
   </Box>

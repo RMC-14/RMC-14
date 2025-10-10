@@ -8,14 +8,15 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Strap
-    enabled: false
+  - type: Transform
+    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/couch.rsi
     state: couch_mid
   - type: RMCMesonsNonviewable
+  - type: BlockXenoConstruction
 
 - type: entity
   parent: RMCCouchMid

@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: RMCMobVulpkanin
   name: Urist C.M McVulp
   suffix: RMC14

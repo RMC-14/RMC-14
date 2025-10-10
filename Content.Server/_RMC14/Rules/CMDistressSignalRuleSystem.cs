@@ -442,7 +442,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         scenarioSuccess = true;
                         break;
                     }
-                    //If there are no scenario jobs left, fall through to insert jobs
+
+                    if (!scenarioSuccess)
+                    {
+                        stop = true;
+                        return null; // All scenario slots are filled, do not allow job
+                    }
                 }
 
                 // select an insert in order, reducing the slot of that insert
@@ -625,7 +630,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     {
                         var slots = _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
                         if (scaling.Squad)
+                        {
+                            foreach (var squadId in comp.SquadIds)
+                            {
+                                if (comp.Squads.TryGetValue(squadId, out var squad) &&
+                                    TryComp(squad, out SquadTeamComponent? squadTeam))
+                                {
+                                    _squad.SetSquadMaxRole((squad, squadTeam), job, slots);
+                                }
+                            }
+
                             slots *= 4;
+                        }
 
                         Log.Info($"Setting {job} to {slots} slots.");
                         var jobs = stationJobs.SetupAvailableJobs;

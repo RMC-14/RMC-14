@@ -73,3 +73,14 @@
 - type: playTimeTracker
   id: CMJobMilitaryPolice
   isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMP
+  name: Military Police
+  description: Military Police
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: military_police

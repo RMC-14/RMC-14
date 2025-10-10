@@ -27,15 +27,11 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Flamethrowers" Text="Werfs flammen" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Intelligence officer" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Orbital bombardment" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Mortars" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Dropship modifications" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Close air support" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Shivas Snowball" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
@@ -44,9 +40,14 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Plasma and flamethrower sentries" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Orbital bombardment" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Sorokyne Strata" Text="Planet map, ported by Tunguso4ka and Noctyrn" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Charger Crusher strain" />
@@ -91,6 +92,7 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Nuke and King endgame" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="ARES" Text="Shipside AI with its own room that you need an access ticket to get into." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Emergency response teams" Text="Factions that randomly spawn, are called to the Almayer through a distress signal sent by CIC, or spawned by admins. Each has their own objectives" />
@@ -113,8 +115,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mounted Weapons" Text="Mounted heavy machine guns are placeable machine guns with a high ammo count, usually placed behind barricades" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Pyrotechnician Kit" Text="Flamethrower with special kinds of fuel." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Fire missions" Text="A second way for dropships to attack, where instead of shooting directly at a flare or laser they move in a direction away from it and shoot their weapons to each side. This method of attack takes camera offset into account and is much more effective at clearing an area." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Plasma and flamethrower sentries" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke and King endgame" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ordnance Technician" Text="Shipside role in charge of making custom grenades, claymores, mortar shells, and rockets" />
                 </BoxContainer>
             </BoxContainer>

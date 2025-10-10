@@ -34,8 +34,6 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 2
     - type: MarineOrders
-    - type: SquadArmorWearer
-      leader: true
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
@@ -97,12 +95,12 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMCOfficer
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
+    mask: RMCMaskCoifPMC
     eyes: RMCGlassesMedicalHUDGlasses
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: RMCMK80BeltFilled # TODO RMC14: PMC re-sprite
+    back: RMCSatchelPMC
+    belt: RMCMK80BeltPMCFilled
     suitstorage: RMCWeaponRifleM54C2
-    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket1: RMCPouchMagazineLargePMC
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:

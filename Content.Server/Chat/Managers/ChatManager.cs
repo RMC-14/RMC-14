@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
@@ -55,6 +56,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
     [Dependency] private readonly MentorManager _mentor = default!;
+    [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -282,6 +284,14 @@ internal sealed partial class ChatManager : IChatManager
         }
         else if (!_oocEnabled)
         {
+            return;
+        }
+
+        // RMC14
+        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Ooc))
+        {
+            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+            ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
             return;
         }
 

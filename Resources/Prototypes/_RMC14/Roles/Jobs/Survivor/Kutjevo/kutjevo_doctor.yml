@@ -1,0 +1,56 @@
+﻿- type: job
+  parent: CMSurvivorDoctor
+  id: RMCSurvivorKutjevoDoctor
+  name: rmc-job-name-survivor-kutjevo-doctor
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoDoctor
+  spawnMenuRoleName: Kutjevo Doctor (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoDoctor
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorKutjevoDoctor
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses
+    head: RMCArmorHelmetPMCKutjevoMedical
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitKutjevoDrysuit
+    shoes: RMCShoesJackboots
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoDoctor
+  name: survivor kurjevo doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoDoctor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetKutjevoDoctor
+  name: kutjevo doctor colonist preset
+  categories: [ HideSpawnMenu ]

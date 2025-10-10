@@ -10,6 +10,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Prying.Systems;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
@@ -18,6 +19,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Doors;
 
@@ -31,6 +33,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -47,7 +50,9 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
-        SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
+        SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
+
+        SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
         SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
 
@@ -156,16 +161,44 @@ public sealed class CMDoorSystem : EntitySystem
         RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button), animState), Filter.PvsExcept(button));
     }
 
-    private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)
+    private void OnBeforePry(Entity<DoorComponent> ent, ref BeforePryEvent args)
     {
         if (TryComp(ent, out DoorComponent? door) && door.State != DoorState.Closed)
         {
-            args.Cancelled = true;
-            return;
+            if (HasComp<RMCPodDoorComponent>(ent) || HasComp<XenoComponent>(args.User))
+                args.Cancelled = true;
         }
 
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
+
+    }
+
+    private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)
+    {
+        if (args.Cancelled)
+        {
+            _audioSystem.Stop(ent.Comp.SoundEntity);
+        }
+        if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
+        {
+            if (HasComp<RMCPodDoorComponent>(ent.Owner))
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
+            else
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
+        }
+    }
+
+    private void OnPodDoorGetPryTimeModifier(Entity<RMCPodDoorComponent> ent, ref GetPryTimeModifierEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+        {
+            args.PryTimeModifier *= ent.Comp.XenoPodlockPryMultiplier;
+        }
     }
 
     private void OnDoorBoltStateChanged(Entity<LayerChangeOnWeldComponent> ent, ref DoorBoltsChangedEvent args)

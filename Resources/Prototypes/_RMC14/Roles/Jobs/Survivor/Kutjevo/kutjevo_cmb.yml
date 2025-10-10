@@ -1,0 +1,68 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorKutjevoCMBDeputy
+  name: rmc-job-name-survivor-cmb-deputy
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoCMBDeputy
+  hasIcon: true
+  icon: RMCJobIconBureauDeputy
+  spawnMenuRoleName: Kutjevo CMB Deputy (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoCMBDeputy
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorKutjevoCMBDeputy
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitKutjevoDrysuit
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoCMBDeputy
+  name: kutjevo cmb deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoCMBDeputy
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetKutjevoCMBDeputy
+  name: kutjevo goon colonist preset
+  categories: [ HideSpawnMenu ]

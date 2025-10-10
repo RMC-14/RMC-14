@@ -47,6 +47,9 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Appearance
   - type: InteractionOutline
   - type: Anchorable

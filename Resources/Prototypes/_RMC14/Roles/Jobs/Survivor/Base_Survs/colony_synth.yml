@@ -15,6 +15,7 @@
   - Colonist
   - Synth
   roleWeight: 0.25
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:

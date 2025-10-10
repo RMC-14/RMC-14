@@ -1,0 +1,119 @@
+- type: entity
+  parent: BaseItem
+  id: RMClogisticsofficerGuideBook
+  name: logistics Officers symbol
+  description: The Logistics Officers sumbol
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: logistics officer
+
+- type: entity
+  parent: BaseItem
+  id: RMCCargotechGuideBook
+  name: Cargo Technicians symbol
+  description: The Cargo Technicians symbol
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: tech
+
+- type: entity
+  parent: BaseItem
+  id: RMCPitRasedGuideBook
+  name: pitrased
+  description: All 5 drop pads
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: pitrased
+
+- type: entity
+  parent: BaseItem
+  id: RMCPitLowerdGuideBook
+  name: pitlowerd
+  description: cargo pit lowerd
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: pitlowerd
+
+- type: entity
+  parent: BaseItem
+  id: RMCStampGuideBook
+  name: approval stamp
+  description: a approval stamp
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: stamp
+
+- type: entity
+  parent: BaseItem
+  id: RMCInvoiceBlankGuideBook
+  name: Blank invoice
+  description: a Blank invoice
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: invoiceblank
+
+- type: entity
+  parent: BaseItem
+  id: RMCInvoiceApprovedBook
+  name: approved invoice
+  description: a approved invoice
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    state: invoiceapproved
+
+- type: entity
+  parent: BaseItem
+  id: RMCSupplyDropPadsGuideBook
+  name: supply drop pads
+  description: All 5 drop pads
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/padsjpg.rsi
+    state: pads
+  
+- type: entity
+  parent: BaseItem
+  id: RMCTheLineGuideBook
+  name: The Line
+  description: The Line
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/linejpg.rsi
+    state: line
+  
+- type: entity
+  parent: BaseItem
+  id: RMCASRSinterfaceGuideBook
+  name: ASRS interface
+  description: The ASRS interface
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/RMCreqguide/ASRSinterface.rsi
+    state: ASRSinterface

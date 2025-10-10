@@ -13,7 +13,7 @@
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - CMCorrespondent
   roleWeight: 0.25

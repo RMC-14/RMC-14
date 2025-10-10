@@ -1,7 +1,13 @@
-﻿using Content.Shared.Mobs;
+using Content.Shared._RMC14.Line;
+using Content.Shared.Climbing.Events;
+using Content.Shared.Coordinates;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 
@@ -11,8 +17,13 @@ public sealed class RMCMovementSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
 
+    private HashSet<EntityUid> _intersectedEntities = new();
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCMobCollisionComponent, MapInitEvent>(OnMobCollisionMapInit);
@@ -63,5 +74,44 @@ public sealed class RMCMovementSystem : EntitySystem
                 _fixture.DestroyFixture(ent, ent.Comp.FixtureId);
                 break;
         }
+    }
+
+    public bool CanClimbOver(EntityUid? user, EntityUid movingEntity, EntityUid target, bool includeTarget = true, bool popup = true)
+    {
+        if (user is null)
+        {
+            user = movingEntity;
+        }
+
+        var movingEntityMapCoords = _transform.GetMapCoordinates(movingEntity);
+        var targetMapCoords = _transform.GetMapCoordinates(target);
+        var transform = new Transform(0);
+
+        var line = new EdgeShape(movingEntityMapCoords.Position, targetMapCoords.Position);
+
+        _intersectedEntities.Clear();
+        _lookup.GetEntitiesIntersecting<EdgeShape>(_transform.GetMapId(movingEntity), line, transform, _intersectedEntities);
+
+        if (includeTarget)
+            _intersectedEntities.Add(target);
+        else
+            _intersectedEntities.Remove(target);
+
+        foreach (var entity in _intersectedEntities)
+        {
+            var ev = new AttemptClimbEvent(user.Value, movingEntity, entity);
+            RaiseLocalEvent(entity, ref ev);
+            if (!ev.Cancelled)
+            {
+                continue;
+            }
+
+            if (popup)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-climb-prevented-by-obstacles"), user, PopupType.MediumCaution);
+            }
+            return false;
+        }
+        return true;
     }
 }

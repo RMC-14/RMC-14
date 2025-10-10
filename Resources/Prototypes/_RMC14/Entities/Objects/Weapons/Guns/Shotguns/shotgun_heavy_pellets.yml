@@ -1,7 +1,7 @@
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletHeavyShotgunBuckshot
-  name: Heavy buckshot
+  name: heavy buckshot
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
@@ -30,11 +30,20 @@
     - range: 3
       falloff: 10
   - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 2.5 # TODO RMC14 1.5 if shot from underbarrel shotgun
+      stunTime: 1.4
+      slowTime: 2
+      superSlowTime: 1
+#    - whitelist: # TODO RMC14 stamina damage targeted at part
+#      - Marine
 
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletHeavyShotgunSlug
-  name: Heavy slug
+  name: heavy slug
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
@@ -55,11 +64,20 @@
   - type: CMArmorPiercing
     amount: 30
   - type: RMCStunOnHit
-    maxRange: 8
-    stunTime: 1.25
-    superSlowTime: 2
-    slowTime: 5
-    knockBackSpeed: 7
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 7.5
+      stunTime: 1
+      slowTime: 5
+      superSlowTime: 2
+      knockBackSpeed: 7
+    - whitelist: # TODO RMC14 stamina damage targeted at part
+        components:
+        - Marine
+      maxRange: 7.5
+      slowTime: 2
+      superSlowTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:
@@ -69,7 +87,7 @@
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletHeavyShotgunBeanbag
-  name: Heavy beanbag slug
+  name: heavy beanbag slug
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
@@ -93,7 +111,7 @@
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletHeavyShotgunFlechette
-  name: Heavy flechette shell
+  name: heavy flechette shell
   components:
   - type: CMArmorPiercing
     amount: 50

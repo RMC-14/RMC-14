@@ -369,6 +369,17 @@
 
 - type: entity
   parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonManager
+  name: manager's suit
+  description: It's a suit worn by those with the know-how to achieve the position of "Corporate Manager".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/managers_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/managers_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonSkirt
   name: liaison's skirt
   description: A black cardigan with a red skirt, quite fancy!
@@ -509,3 +520,48 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonCargoShorts
+  name: cargo shorts
+  description: A pair of Khaki shorts, and a short-sleeve dress shirt. A common choice for Executives working on warmer colonies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/cargo_shorts.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/cargo_shorts.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonLegalUniform
+  name: legal division jumpsuit
+  description: A grey and white jumpsuit with blue accents, often distributed to Legal Executives working in the frontier. Puncture and slash resistant, this uniform is fit for all the nasty places lawyers need to be.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/legal_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/legal_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonDisco
+  name: stylish dress shirt
+  description: A pink and purple dress shirt, coupled with grey dress pants. Makes a bold statement about the longevity of disco.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/disco_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/disco_uniform.rsi
+
+
+- type: entity
+  parent: RMCJumpsuitLiaisonKhakiWorkwear
+  id: RMCJumpsuitLiaisonBlueGreyAdmin
+  name: blue-grey administrative uniform
+  description: A pair of blue pants and a blue-grey shirt. A common look for colonial administration clerks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi

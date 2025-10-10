@@ -1,0 +1,101 @@
+﻿- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFL3Flamer
+  name: flammenwerfer 3 heavy incineration unit
+  description: A heavy industrial incineration unit produced by the Weston Corporation and later by Weston-Yamada. Often found among foliage cleaning missions on frontier colonies, it usually isn't seen in combat, but is devastating when actually used.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: strip
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      color: "#DD9B00"
+      map: ["enum.RMCFlamerVisualLayers.Strip"]
+    - state: lit
+      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
+    slots:
+    - suitStorage
+    - Back
+    - Belt
+  - type: Gun
+    soundGunshot:
+      collection: RMCFlamerFL3Shoot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerFL3
+        insertSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerFL3
+  - type: RMCIgniter
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_ignite.ogg
+  - type: AttachableHolder
+    slots: {}
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorFL3
+
+- type: entity
+  parent: RMCWeaponFL3Flamer
+  id: RMCWeaponFL3FlamerPVE
+  suffix: PVE
+  components:
+  - type: RMCMagneticItem
+  - type: Gun
+    fireRate: 2
+
+- type: entity
+  parent: RMCWeaponFL3Flamer
+  id: RMCWeaponFL3FlamerWhiteout
+  suffix: Whiteout
+  components:
+  - type: RMCMagneticItem
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerFL3
+  name: FW3 heavy incinerator tank
+  description: A heavy, high capacity tank utilized by the Flammenwerfer 3 Heavy Incineration Unit. This one has a blue, heat-resistant Weston-Yamada logo on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/fl3.rsi
+    state: flametank
+    layers:
+    - state: flametank
+    - state: flametank_strip2
+    - state: flametank_strip2
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 300
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 300
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: flametank_strip
+  - type: Tag
+    tags:
+    - RMCTankFlamerFL3
+
+- type: Tag
+  id: RMCWeaponIncineratorFL3
+
+- type: Tag
+  id: RMCTankFlamerFL3

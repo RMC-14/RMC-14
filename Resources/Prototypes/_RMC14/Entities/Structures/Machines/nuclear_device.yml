@@ -1,0 +1,6 @@
+#RMC14 Placeholder
+- type: entity
+  parent: [CMBaseStructure, StructureWheeled]
+  id: RMCNuke
+  name: Nuclear Fission Explosive (PlaceHolder)
+#RMC14 Placeholder

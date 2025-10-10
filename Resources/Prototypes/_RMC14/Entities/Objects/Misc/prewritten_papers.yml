@@ -1,0 +1,583 @@
+- type: entity
+  parent: CMPaper
+  id: RMCPaperExecutionOrder
+  name: execution order
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]   
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]  
+      [color=#8c0000]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#383838]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                             [color=goldenrod][head=1] Execution Order[/head][/color]
+                                                     [color=#383838]✧✧✦✧✧[/color]
+                         [bolditalic]By order of the Chief of Military Police 
+            IN COMPLIANCE WITH UNITED NATIONS MARINE LAW[/bolditalic]
+      [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+         [bold]This is a written order [bolditalic][color=green]AUTHORIZING[/color] the execution of[/bolditalic] 
+                                            [head=2][form][/head]
+      
+      [italic]The Chief of Military Police in consensus with the Commander, as the highest authority on judicial matters currently active aboard the UNS Almayer, has after careful consideration and review of the case, deemed it appropriate to sentence the above named to death on the charge(s) of:
+      [bullet][bold][form][/bold]
+      [bullet][bold][form][/bold]
+      [bullet][bold][form][/bold]
+      [bullet][bold][form][/bold]
+      
+      A ship-wide announcement will be conducted confirming the intent to execute, the crime(s) charged and the method of execution.[/italic]
+      
+      [bold]Signed,[/bold]
+      [color=#dfc189][italic][signature][/italic][/color] 
+      [bolditalic]Chief of Military Police[/bolditalic]
+      
+      [bold]Ratified by,[/bold]
+      [color=#dfc189][italic][signature][/italic][/color] 
+      [bolditalic]Commander|UNS Almayer[/bolditalic]
+      [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+      [color=#AAAAAA][italic][bullet]By signing this document you acknowledge that proper execution procedures will be followed as set forth by Marine Law.
+      [bullet]A prisoners last wishes if reasonably acquirable may not be waived. If unattainable they should be provided an alternative.
+      [bullet]The prisoner may request a blindfold if one is available.
+      [bullet]The prisoner may request up to three people to witness the execution.
+      [bullet]The prisoner is to be afforded the chance to give their final words.
+      [color=#ff0000]Use of this document inconsistent with UCMJ regulations and UNMC Policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP304
+  name: P-304 armory request form
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-304[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+           [head=1]Armory Requisitions Form[/head]
+      
+      [head=2][bold]Requesting Personnel[/bold][/head]
+      [bold]Name:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Position:[/bold] [form]
+      
+      [head=2]Requested Item(s)[/head]
+      [bold]Weapons Requested:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Attachments Requested:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Ammunition Requested:[/bold]
+      [bullet] [form]
+      [bullet] [form] 
+      
+      [bold]Additional Requests:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      Requested by,
+      [color=#1b67a5][italic][signature][/italic][/color]
+      
+      Approved by, 
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [color=#AAAAAA]===================================================[/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP399
+  name: P-399 gear retrieval form
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-399[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+      
+      [head=2]Gear Retrieval Form[/head]
+      [italic]In order to retrieve any of the items listed below you will need to present this to a member of the Military Police. They will only be returned to you so you may head back down to the colony or in other emergency situations.[/italic]
+      [color=#AAAAAA]===================================================[/color]
+      Owner of Equipment: [form]
+      Processer: [form]
+      [color=#AAAAAA]===================================================[/color]
+      [head=3]Weapons[/head]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [color=#AAAAAA]===================================================[/color]
+      [head=3]Ammo[/head]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [color=#AAAAAA]===================================================[/color]
+      [head=3]Bags[/head]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [bullet/][form]
+      [color=#AAAAAA]===================================================[/color]
+      [bold]Confirmed by,[/bold]
+      [bolditalic][signature][/bolditalic]
+      
+      [color=#AAAAAA]===================================================[/color]
+      [italic]I certify that the above information is accurate and complete to the best of my knowledge. 
+      I understand that any falsification or omission of information may result in charges brought against me.[/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP401
+  name: P-401 incident report
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]     [bold]Form:  [/bold][color=#ff0000]P-401[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                              [head=1]Incident Report[/head]
+      [italic][bold][color=#134975]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/color][/bold][/italic]
+      [color=#1b67a5][head=3]Informant's Details[/head][/color]
+      [bold]Name: [/bold][form]
+      [bold]Rank: [/bold][form]
+      [bold]Role: [/bold][form]
+      
+      [bold]Classification of incident:[/bold] [form]
+      [bold]Location: [/bold] [form] HERE
+      [bold]Incident Details: [/bold]
+      [form]
+      
+      
+      [bold]Signed,[/bold]
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [italic][bold][color=#134975]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/color][/bold][/italic]
+                           [italic][color=#ff0000]****MILITARY POLICE USE ONLY****[/color][/italic]
+      [bold]Officer Assigned: [/bold][italic][form][/italic]
+      [bold]Follow-up Recommendations:[/bold]
+      [bullet]Locate any witnesses and collect statements using P-402.
+      [bullet][form]
+      
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic][color=#AAAAAA]This document is to be kept on physical record for a minimum period of five (5) years, and digital record permanently.[/color][/italic]
+      [italic][color=#ff0000]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP402
+  name: P-402 provost correspondence
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]   [bold]Form: [/bold][color=#ff0000]402[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]  
+      [color=#8c0000]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#383838]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+              [head=1]Provost Correspondence[/head]
+      
+      [bold]To:[/bold] [color=#cb0000][bold]Provost[/bold][/color] Sector Marshal
+      [bold]Subject:[/bold] [italic][form][/italic]
+      [color=#134975][bold]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold]
+      [italic][form][/italic]
+      
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Signed,[/bold]
+      [color=#134975][italic][signature][/italic][/color]
+      [color=#570202][italic]==================================================[/italic][/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP403
+  name: P-403 arrest report
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]     [bold]Form:  [/bold][color=#ff0000]P-403[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+      [head=1][color=#cb0000]         REPORT OF ARREST[/color][/head]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [color=#134975][bold]Name of Arrested:[/bold][/color] [form]
+      [color=#134975][bold]Description:[/bold][/color] [form]
+      
+      [color=#134975]Arrested is considered ([italic]Mark with a[/italic] ✔ [italic]as applicable[/italic]):[/color]
+      [ [check] ] UNMC Personnel
+      [ [check] ] Non-UNMC Personnel
+      [ [check] ] Civilian
+      [color=#134975]If the above named is a member of the UNMC, please specify their: [/color]
+      [bold]Rank:[/bold] [form]
+      [bold]Role:[/bold] [form]
+      [bold]Squad:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [color=#134975]If the arrest is ordered by an officer, please check the box and specify: [/color]
+      [bold]Officer Ordered Arrest:[/bold] [ [check] ]
+      [bold]Rank:[/bold] [form]
+      [bold]Role:[/bold] [form]
+      [bold]Squad:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [color=DarkRed][bold]List of Charges and Penalties[/color][/bold]
+      [bullet][bold][form][/bold]; for a duration of [form].
+      [bullet][bold][form][/bold]; for a duration of [form].
+      
+      [bold]Sentencing Officer: [/bold][color=#134975][italic][form][/italic][/color]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Signed,[/bold]
+      [color=#134975][italic][signature][/italic][/color]
+      [bold][color=#cb0000]Military Police[/color][/bold] | [italic]Arresting Officer[/italic]
+      [color=#570202][italic]==================================================[/italic][/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP404
+  name: P-404 witness statement
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-404[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                          [head=1]Witness Statement[/head]
+      [bold]Witness Name:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Role:[/bold] [form]
+      I, [italic]NAMEHERE[/italic] of UNS [italic]Almayer[/italic] write this statement voluntarily without coercion, force, threats, rewards or the promise of reward.
+      The following is my point of view and the facts as far as I know them.
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+      [form]
+      [bold]Signed,[/bold]
+      [color=#134975][signature][/color]
+      [bolditalic][form][/bolditalic] 
+      [color=#AAAAAA]===================================================
+      [italic]I certify that the above information is accurate and complete to the best of my knowledge. 
+      I understand that any falsification or omission of information may result in charges brought against me.[/italic][/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP415
+  name: P-415 record of misuse of authority
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-415[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                   [head=2]Record of Misuse of Authority[/head]
+      [bold]Recording Officer's Name:[/bold] [form]
+      
+      [bold]Offender's Name:[/bold][form]
+      
+      [bold]Situation:[/bold] [form]
+      [bold]Description of MoA incident:[/bold][form]
+      [bold]Actions Taken:[/bold] [form]
+      [bold]Recommended Future Actions:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Signed,[/bold]
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic]All signatories agree that the above is true. 
+      This document shall be kept in records until such a time that the appropriate legal steps have been taken to investigate the above documented incident. 
+      After such proceedings have occurred, the results of said proceedings will determine how long this record is to remain on file, dependent upon the outcome of the investigation.[/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP508
+  name: P-508 search warrant
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]   [bold]Warrant №[/bold][color=#ff0000]XX[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]  
+      [color=#8c0000]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#383838]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                                 [head=1]Search Warrant[/head]
+      
+      [bold]Name of Person:[/bold] [form]
+      [bold]Description: [/bold] [form]
+      [italic]If Person is member of UNMC Marine Corps[/italic]:
+      [bold]Rank:[/bold] [form]
+      [bold]Role:[/bold] [form]
+      [bold]Squad:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Place/Persons being searched-[/bold] 
+      [italic]Please tick ✔[/italic]
+      [bold] Office:[/bold] [[check]]
+      [bold] Squad Bunks:[/bold] [[check]]
+      [bold] Person:[/bold] [[check]]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Reason for a Search Warrant:[/bold]
+      [bullet] [form]
+      
+      [bold]Signed,[/bold]
+      [italic][signature][/italic]
+      [bold]Chief Military Police[/bold]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+                         [bold]Note for the Provost Marshal Office[/bold]
+      [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP509
+  name: P-509 arrest warrant
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]   [bold]Warrant №[/bold][color=#ff0000]XX[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]  
+      [color=#8c0000]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#383838]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                                 [head=1][color=#ff0000]Arrest Warrant[/color][/head]
+      [bold]THE UNITED NATIONS MARINE CORP[/bold]
+      [bold]To any enlisted personnel[/bold]
+      
+      [bold]Defendant(s):[/bold] [italic][form][/italic]
+      [bold]Description:[/bold] [form]
+      [bolditalic]The defendant(s) listed above is charged with the crime(s) specified below. 
+      You are ordered forthwith to arrest the above named defendant(s) and bring them before me. 
+      All UNMC laws are to be followed during this arrest.[/bolditalic]
+      
+      [bold]Crimes charged:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Defendant(s) is considered:[/bold]
+      [ [check] ] Non-UNMC
+      [ [check] ] Not Hostile
+      [ [check] ] Hostile
+      [ [check] ] Unarmed
+      [ [check] ] Armed
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bullet]I certify that this order is lawful and true in accordance with UNMC laws and standards. 
+      [bullet]I affirm that the above is true to the best of my knowledge, and that the complaint filed on oath has legal grounds for an arrest. 
+      [bullet]In the event of an unlawfully ordered or unjustified arrest, I bear responsibility for the consequences of such an order.
+      [bullet]I understand that the charges of such an order may include, but not limited to: Prevarication, and/or Illegal Confinement. 
+      [bullet]In the event of a breach of law, I accept any judgment passed by UNMC High Command.
+      
+      [bold]Signed,[/bold]
+      [color=#AA8760][italic][signature][/italic][/color]
+      Chief Military Police, [italic]UNS Almayer[/italic]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP512
+  name: P-512 deployment request
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-512[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                   [head=1][color=#383838]Deployment Request[/color][/head]
+      
+      [italic]This form serves as a request to deploy to the forward operating base and or secure area(s) to carry out assigned duties.[/italic]
+      [bold]Requesting personnel: [/bold] [italic][form][/italic]
+      [bold]Reason(s):[/bold]
+      [bullet][form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bullet]I understand upon and during deployment, all laws and stipulations within the SOP and Marine Law are still in effect, and shall not be broken. 
+      [bullet]I understand that failure to stay within the boundary designated as the forward operating base or secure areas will result in charges brought against me.
+      [bullet]I understand this deployment can be canceled at the discretion of Command staff.
+      [bullet]I understand that in the event of a major attack on the forward operating base or should the status of secure areas be revoked, I must return to the Alamyer as soon as practicable.
+      
+      [bold]Signed,[/bold]
+      [italic][signature][/italic]
+      [color=#1b67a5]Military Police[/color]
+      
+      [bold]Authorised by,[/bold]
+      [italic][signature][/italic]
+      [color=#1b67a5]Chief Military Police[/color]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP605
+  name: P-605 incident report
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-605[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+                          [head=1]Incident Report[/head]
+      [bold]Reporting Officer:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Date/Time:[/bold] [form]
+      [bold]Location:[/bold] [form]
+      
+      [bold]Type of Incident:[/bold]
+      [ [check] ] Accident
+      [ [check] ] Disciplinary
+      [ [check] ] Security Breach
+      [ [check] ] Equipment Failure
+      [ [check] ] Other: [form]
+      
+      [bold]Personnel Involved:[/bold]
+      [form]
+      
+      [bold]Description of Incident:[/bold]
+      [form]
+      
+      [bold]Injuries/Damages:[/bold]
+      [form]
+      
+      [bold]Immediate Actions Taken:[/bold]
+      [form]
+      
+      [bold]Recommendations:[/bold]
+      [form]
+      
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [bold]Signed,[/bold]
+      [color=#134975][italic][signature][/italic][/color]
+      [bold]Reporting Officer[/bold]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP701
+  name: P-701 brigging checklist
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-701[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+           [head=1]Brigging Checklist[/head]
+       
+      [head=2][bold]Processing Personnel[/bold][/head]
+      [bold]Name:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Position:[/bold] [form]
+       [head=3]
+      Order of checks[/head]
+      [italic]1. Prisoner is not a member of a protected group who has been arrested without proper authorization. [check] 
+      
+      2. Speak with the Arresting MP to determine what the prisoner did leading to their arrest. [check] 
+      
+      3. Determine what crimes have been committed. [check] 
+      
+      4. Calculate the prisoners sentence. [check]
+       
+      5. Inform the prisoner of the crimes they are being charged with, their sentence, and their right to an appeal. [check] 
+      
+      6. Grab the prisoner and drag them to a locker, strip them of all their belongings. [check]
+      
+      7. Dress the prisoner in an orange prison uniform and communications earpiece. [check] 
+      
+      8. Take the prisoner into a free cell closing the windoor behind you and ensure they're unrestrained. [check] 
+      
+      9. Open the locker and search their belongings for contraband or stolen materials. [check] 
+      
+      10. Fill out a P-403 and P-409 form detailing the arrest, charges, and notable events. Fax the P-409 form to the Provost Marshal's Office. [check] 
+      [/italic]
+      
+      [bold]Items Confiscated:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+       
+      [bold]Additional Requests:[/bold]
+      [bullet] [form]
+       
+      [bold]Notes:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      Processed by,
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [bolditalic][form][/bolditalic]
+       
+      Approved by, 
+      [color=#1b67a5][italic][signature][/italic][/color]
+      [bolditalic][form][/bolditalic]
+      
+      [color=#AAAAAA]===================================================[/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperP702
+  name: P-702 processing checklist
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#8c0000]█[/color][color=#ffffff]░░[/color][color=#383838]█ [color=#8c0000]█▄[/color] █ [/color][head=3]U[/head][bold]nited [head=3]N[/head]ations [head=3]M[/head]arine [head=3]C[/head]orps[/bold]      [bold]Form:  [/bold][color=#ff0000]P-702[/color]
+      [color=#383838]▀▄▄[color=#8c0000]▀[/color] █[/color] [color=#8c0000]▀█[/color] [color=#AAAAAA][italic]UNS Almayer; 2nd Company "Falling Falcons"[/color][/italic]
+      [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+           [head=1]Processing Checklist[/head]
+      
+      [head=2][bold]Processing Personnel[/bold][/head]
+      [bold]Name:[/bold] [form]
+      [bold]Rank:[/bold] [form]
+      [bold]Position:[/bold] [form]
+      
+      [head=3]Order of checks[/head]
+      1. Build a connection to the visitors. Be polite and show consideration. If they trust you the process will go much smoother. [check]
+      
+      2. Offer the visitors the choice to leave the ship. Allow those who take this option to board the dropship at this point. [check]
+      
+      3. Take the visitors who remain to a secure area for processing. The panic room Is a good location for this, as Brig gives them the impression they are in trouble. [check]
+      
+      4. Have the visitors line up, and place all containers on the floor Infront of them. (Bags, Pouches, Belts, Coats, Webbings, Etc.)  [check]
+      
+      5. Search through the items, placing them in a separate pile as you do to avoid mix-ups. Remove Contraband and place it off to the side. [check]
+      
+      6. Have the visitors retrieve their items that they may keep. [check]
+      
+      7. Offer them medical care, and answer any questions they have before dismissing them. [check]
+      
+      [italic][bold][color=red]By signing below I, as Processing Personnel, Confirm that all of the above steps have been completed to the best of my ability in accordance with S.O.P.[/italic][/bold][color=black]
+      [Signature]
+      
+      [bold]Names of processed individuals:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Items Confiscated:[/bold]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      [bullet] [form]
+      
+      [bold]Notes:[/bold] [form]
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      Processed by,
+      [color=#1b67a5][italic][signature][/italic][/color]
+      
+      Approved by, 
+      [color=#1b67a5][italic][signature][/italic][/color]
+      
+      [italic][bold][color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color][/bold][/italic]
+      [head=2]Colonist Survivor Rights and Policies[/head]
+      
+      [bullet] Survivors may keep all tools and materials, unless used to commit a crime.
+      [bullet] Survivors may keep short blades such as pocket knives.
+      [bullet] Survivors may redeploy at any time they wish, receiving all confiscated items back before hand.
+      [bullet] Survivors can be Evicted by the CMP or Commander, should they commit a major crime.
+      [bullet] Survivors may NOT retain weapons, armor or munitions aboard the vessel.
+      
+      [color=#AAAAAA]===================================================[/color]
+      [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]

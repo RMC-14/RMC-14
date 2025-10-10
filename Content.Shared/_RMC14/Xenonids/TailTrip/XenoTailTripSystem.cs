@@ -19,7 +19,7 @@ public sealed class XenoTailTripSystem : EntitySystem
     [Dependency] private readonly RMCDazedSystem _daze = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()

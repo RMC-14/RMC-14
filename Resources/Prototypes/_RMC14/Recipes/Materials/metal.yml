@@ -98,10 +98,28 @@
   skill: RMCSkillConstruction
   requiredSkillLevel: 2
 
+# Bed
+- type: rmcConstruction
+  id: RMCBedBuild
+  name: bed
+  prototype: CMBed
+  noRotate: true
+  doAfterTime: 0.5
+  doAfterTimeMin: 0.5
+  materialCost: 2
+
+# Foldable Chair
+- type: rmcConstruction
+  id: RMCChairBuild
+  name: chair
+  prototype: CMChair
+  materialCost: 1
+  restrictedTags: [RMCSeat]
+
 # Comfy Chairs
 - type: rmcConstruction
   id: RMCComfyChairList
-  name: comfy chairs
+  name: comfy chairs (2 metal sheets) #material cost written manually since the lists won't show costs
   prototype: CMChairComfy
   listed:
   - RMCComfyChairBeigeBuild
@@ -143,6 +161,68 @@
   name: teal comfy chair
   prototype: CMChairComfyTeal
   materialCost: 2
+  restrictedTags: [RMCSeat]
+
+# Squad Chairs
+- type: rmcConstruction
+  id: RMCSquadChairList
+  name: squad chairs (2 metal sheets) #material cost written manually since the lists won't show costs
+  prototype: CMChairComfy
+  listed:
+  - RMCComfyChairAlphaBuild
+  - RMCComfyChairBravoBuild
+  - RMCComfyChairCharlieBuild
+  - RMCComfyChairDeltaBuild
+
+- type: rmcConstruction
+  id: RMCComfyChairAlphaBuild
+  name: alpha squad chair
+  prototype: CMChairComfyAlpha
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairBravoBuild
+  name: bravo squad chair
+  prototype: CMChairComfyBravo
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairCharlieBuild
+  name: charlie squad chair
+  prototype: CMChairComfyCharlie
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairDeltaBuild
+  name: delta squad chair
+  prototype: CMChairComfyDelta
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+# Office Chairs
+- type: rmcConstruction
+  id: RMCOfficeChairList
+  name: office chairs (5 metal sheets) #material cost written manually since the lists won't show costs
+  prototype: CMChairOfficeDark
+  listed:
+  - RMCOfficeChairDarkBuild
+  - RMCOfficeChairWhiteBuild
+
+- type: rmcConstruction
+  id: RMCOfficeChairDarkBuild
+  name: dark office chair
+  prototype: CMChairOfficeDark
+  materialCost: 5
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCOfficeChairWhiteBuild
+  name: white office chair
+  prototype: CMChairOfficeWhite
+  materialCost: 5
   restrictedTags: [RMCSeat]
 
 - type: rmcConstruction

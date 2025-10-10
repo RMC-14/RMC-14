@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/f803a0cdaabb7ea2df1cc839411ad497d8cdca83/icons/mob/humans/onmob/clothing/belts/belts_by_faction/WY.dmi, https://github.com/cmss13-devs/cmss13/blob/f803a0cdaabb7ea2df1cc839411ad497d8cdca83/icons/obj/items/clothing/belts/belts_by_faction/WY.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "full-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "full-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "icon-front"
+    }
+  ]
+}

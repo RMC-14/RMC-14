@@ -222,7 +222,8 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         var para = Spawn(resinHole.Comp.TrapPrototype);
         _hive.SetSameHive(resinHole.Owner, para);
 
-        if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
+        if (!_rmcHands.IsPickupByAllowed(para, args.User) ||
+            !_hands.TryPickupAnyHand(args.User, para))
         {
             QueueDel(para);
             return;

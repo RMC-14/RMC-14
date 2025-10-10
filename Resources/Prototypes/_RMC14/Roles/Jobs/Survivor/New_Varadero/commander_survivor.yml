@@ -38,6 +38,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: InnateCommandSpeech
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: NpcFactionMember

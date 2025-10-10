@@ -141,6 +141,28 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCorporateLogisticsJacket
+  name: corporate logistics jacket
+  description: A white jacket with brown accents. A popular choice among WEYA Logistic Managers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/logistics_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/logistics_jacket.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCorporateDutyJacket
+  name: corporate duty jacket
+  description: A brown coat, built to withstand the conditions of the frontier, to orbital space stations, ships, and colonies. Surprisingly comfortable and warm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_duty_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_duty_jacket.rsi
+
 # fancy suit jackets
 - type: entity
   parent: RMCJacketWindbreaker
@@ -202,3 +224,30 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCJacketCorporateManager
+  name: manager's outfit
+  description: A jacket that belongs to someone very important. It is made of insulating material and offers minor protection from all forms of damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_manager.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_manager.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerWEYA
+  name: Weston-Yamada windbreaker
+  description: A corporate windbreaker, distributed to important executives at corporate events and conferences. A jacket so good it needs two logos!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/weya_windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/weya_windbreaker.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-weya-windbreaker

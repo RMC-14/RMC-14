@@ -125,3 +125,5 @@
     item: RMCOrganXenoHeartT2
   - type: VentCrawler
     ventCrawlIcon: burrower
+  - type: RMCActionOrder
+    id: CMXenoBurrower

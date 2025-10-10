@@ -41,6 +41,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
