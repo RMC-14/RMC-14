@@ -206,8 +206,21 @@
     tags:
     - HideContextMenu
 
+# MFHS grenade
+- type: entity
+  parent: RMCGrenadeCustomMetalFoam
+  id: RMCGrenadeMFHS
+  name: M40 Metal Foam Grenade
+  description: A Metal-Foam Hull-Sealant grenade originally used for emergency repairs but have found other practical applications on the field.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40mfhs.rsi
+
 - type: Tag
   id: RMCGrenadeWeedkiller
 
 - type: Tag
   id: RMCGrenadeMetalFoam
+
+- type: Tag
+  id: RMCGrenadeMFHS
