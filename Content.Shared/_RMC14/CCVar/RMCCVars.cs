@@ -117,6 +117,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCEvolutionPointsAccumulateBeforeMinutes =
         CVarDef.Create("rmc.evolution_points_accumulate_before_minutes", 15, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCUnoviableTimerMinutes =
+        CVarDef.Create("rmc.unoviable_timer_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAreaSystemEnabled =
+        CVarDef.Create("rmc.area_system_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 

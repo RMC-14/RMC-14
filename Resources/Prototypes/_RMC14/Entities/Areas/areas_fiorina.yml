@@ -79,6 +79,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaFiorinaTumor
@@ -377,6 +378,8 @@
   components:
   - type: Sprite
     state: station1
+  - type: Area
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaFiorinaStation
