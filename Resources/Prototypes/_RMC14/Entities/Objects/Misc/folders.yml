@@ -28,7 +28,7 @@
     blacklist:
       components:
       - Xeno
-      
+
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderBase
@@ -49,7 +49,7 @@
 - type: entity
   parent: CMFolderBase
   id: CMFolderBlue
-  description: A blue folder.
+  description: A formal blue folder.
   components:
   - type: Sprite
     state: folder_blue
@@ -57,7 +57,7 @@
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderBlueEmpty
-  description: A blue folder.
+  description: A formal blue folder.
   components:
   - type: Sprite
     state: folder_blue
@@ -65,15 +65,15 @@
 - type: entity
   parent: CMFolderBase
   id: CMFolderRed
-  description: A red folder.
+  description: A firey red folder.
   components:
   - type: Sprite
     state: folder_red
-    
+
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderRedEmpty
-  description: A red folder.
+  description: A firey red folder.
   components:
   - type: Sprite
     state: folder_red
@@ -81,7 +81,7 @@
 - type: entity
   parent: CMFolderBase
   id: CMFolderYellow
-  description: A yellow folder.
+  description: A cheerful yellow folder.
   components:
   - type: Sprite
     state: folder_yellow
@@ -89,7 +89,7 @@
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderYellowEmpty
-  description: A yellow folder.
+  description: A cheerful yellow folder.
   components:
   - type: Sprite
     state: folder_yellow
@@ -97,7 +97,7 @@
 - type: entity
   parent: CMFolderBase
   id: CMFolderWhite
-  description: A white folder.
+  description: A plain white folder.
   components:
   - type: Sprite
     state: folder_white
@@ -105,7 +105,7 @@
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderWhiteEmpty
-  description: A white folder.
+  description: A plain white folder.
   components:
   - type: Sprite
     state: folder_white
@@ -113,7 +113,7 @@
 - type: entity
   parent: CMFolderBase
   id: CMFolderBlack
-  description:
+  description: A sleek black folder.
   components:
   - type: Sprite
     state: folder_black
@@ -121,7 +121,7 @@
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderBlackEmpty
-  description:
+  description: A sleek black folder.
   components:
   - type: Sprite
     state: folder_black

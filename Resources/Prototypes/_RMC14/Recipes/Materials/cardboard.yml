@@ -1,15 +1,21 @@
-
-# donut box
+# default
 - type: rmcConstruction
-  id: RMCDonutBoxBuild
-  name: donut box
-  prototype: RMCBoxDonutEmpty
+  id: RMCCardboardBuildBase
+  prototype: BoxCardboard
+  abstract: true
   noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
+  doAfterTime: 0.25
+  doAfterTimeMin: 0.25
   materialCost: 1
   ignoreBuildRestrictions: true
   restrictedCollisionGroup: null
+
+# donut box
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCDonutBoxBuild
+  name: donut box
+  prototype: RMCBoxDonutEmpty
 
 # pizza boxes
 - type: rmcConstruction
@@ -21,26 +27,16 @@
   - RMCPizzaGalaxyBoxBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCPizzaBoxBuild
   name: pizza box
   prototype: RMCBoxPizza
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCPizzaGalaxyBoxBuild
   name: Pizza Galaxy pizza box
   prototype: RMCBoxPizzaGalaxy
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # folders
 - type: rmcConstruction
@@ -55,60 +51,35 @@
   - RMCFolderYellowEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCFolderBlueEmptyBuild
   name: blue folder
   prototype: CMFolderBlueEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCFolderBlackEmptyBuild
   name: black folder
   prototype: CMFolderBlackEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-  
+
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCFolderRedEmptyBuild
   name: red folder
   prototype: CMFolderRedEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-  
+
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCFolderWhiteEmptyBuild
   name: white folder
   prototype: CMFolderWhiteEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-  
+
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCFolderYellowEmptyBuild
   name: yellow folder
   prototype: CMFolderYellowEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-  
+
 # empty ammunition boxes
 - type: rmcConstruction
   id: RMCEmptyAmmoBoxesList
@@ -121,48 +92,28 @@
   - RMCBoxBulletsSMGAPEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxBulletsRifleEmptyBuild
   name: rifle ammunition box (10x24mm)
   prototype: RMCBoxBulletsRifleEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxBulletsRifleAPEmptyBuild
   name: rifle ammunition box (10x24mm AP)
   prototype: RMCBoxBulletsRifleAPEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxBulletsSMGEmptyBuild
   name: SMG ammunition box (10x20mm)
   prototype: RMCBoxBulletsSMGEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxBulletsSMGAPEmptyBuild
   name: SMG ammunition box (10x20mm AP)
   prototype: RMCBoxBulletsSMGAPEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # empty rifle magazine boxes
 - type: rmcConstruction
@@ -184,114 +135,64 @@
   - RMCBoxMagazineRifleSSG45APEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CEmptyBuild
   name: M54C magazine box
   prototype: RMCBoxMagazineRifleM54CEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CAPEmptyBuild
   name: M54C magazine box (AP)
   prototype: RMCBoxMagazineRifleM54CAPEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CExtEmptyBuild
   name: M54C magazine box (Ext)
   prototype: RMCBoxMagazineRifleM54CExtEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPREmptyBuild
   name: M4SPR magazine box
   prototype: RMCBoxMagazineRifleM4SPREmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
   name: M4SPR magazine box (AP)
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
   name: M4SPR magazine box (Ext)
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxBullets458EmptyBuild
   name: .458 SOCOM bullet bundle box
   prototype: RMCBoxBullets458Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM16EmptyBuild
   name: M16 magazine box
   prototype: RMCBoxMagazineRifleM16Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleSSG45EmptyBuild
   name: SSG45 magazine box
   prototype: RMCBoxMagazineRifleSSG45Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
-  
+
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleSSG45APEmptyBuild
   name: SSG45 magazine box (AP)
   prototype: RMCBoxMagazineRifleSSG45APEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # empty smg magazine boxes
 - type: rmcConstruction
@@ -306,48 +207,28 @@
   - RMCBoxMagazineSMGNailgunEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63EmptyBuild
   name: M63 magazine box
   prototype: RMCBoxMagazineSMGM63Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63APEmptyBuild
   name: M63 magazine box (AP)
   prototype: RMCBoxMagazineSMGM63APEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63ExtEmptyBuild
   name: M63 magazine box (Ext)
   prototype: RMCBoxMagazineSMGM63ExtEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGNailgunEmptyBuild
   name: nailgun magazine box
   prototype: RMCBoxMagazineSMGNailgunEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # empty pistol magazine boxes
 - type: rmcConstruction
@@ -372,114 +253,65 @@
   - RMCBoxMagazinePistolM13DrumEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM1984EmptyBuild
   name: M1984 magazine box
   prototype: RMCBoxMagazinePistolM1984Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM1984APEmptyBuild
   name: M1984 magazine box (AP)
-  prototype: RMCBoxMagazinePistolM1984APEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
+  prototype: RMCBoxMagazinePistolM1984APEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolMK80EmptyBuild
   name: MK80 magazine box
   prototype: RMCBoxMagazinePistolMK80Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
+
   id: RMCBoxMagazinePistolSU6EmptyBuild
   name: SU-6 magazine box
   prototype: RMCBoxMagazinePistolSU6Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM77APEmptyBuild
   name: M77 magazine box (AP)
   prototype: RMCBoxMagazinePistolM77APEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRevolverM44EmptyBuild
   name: M44 speedloader box
   prototype: RMCBoxMagazineRevolverM44Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
   name: M44 speedloader box (Marksman)
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13EmptyBuild
   name: M13 magazine box
   prototype: RMCBoxMagazinePistolM13Empty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13ExtEmptyBuild
   name: M13 magazine box (Ext)
   prototype: RMCBoxMagazinePistolM13ExtEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13DrumEmptyBuild
   name: M13 magazine box (Drum)
   prototype: RMCBoxMagazinePistolM13DrumEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # empty shotgun shell boxes
 - type: rmcConstruction
@@ -497,81 +329,46 @@
   - RMCBoxShellsIncendiaryBuckshotEmptyBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsBuckshotEmptyBuild
   name: buckshot shell box
   prototype: RMCBoxShellsBuckshotEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsSlugsEmptyBuild
   name: slug shell box
   prototype: RMCBoxShellsSlugsEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsFlechetteEmptyBuild
   name: flechette shell box
   prototype: RMCBoxShellsFlechetteEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsBreachingEmptyBuild
   name: breaching shell box
   prototype: RMCBoxShellsBreachingEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsBeanbagEmptyBuild
   name: beanbag shell box
   prototype: RMCBoxShellsBeanbagEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsIncendiaryEmptyBuild
   name: incendiary shell box
   prototype: RMCBoxShellsIncendiaryEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxShellsIncendiaryBuckshotEmptyBuild
   name: incendiary buckshot shell box
   prototype: RMCBoxShellsIncendiaryBuckshotEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 # empty supply boxes
 - type: rmcConstruction
@@ -589,67 +386,37 @@
   - RMCBoxMagazinePowerCellsHighBuild
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxPackFlareEmptyBuild
   name: M94 flare packs box
   prototype: RMCBoxPackFlareEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxPackFlareCASEmptyBuild
   name: M89-S flare packs box
   prototype: RMCBoxPackFlareCASEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxFlamerTankEmptyBuild
   name: UT-Napthal fuel tanks box
   prototype: RMCBoxFlamerTankEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxFlashlightsEmptyBuild
   name: flashlights box
   prototype: RMCBoxFlashlightsEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMREEmptyBuild
   name: MREs box
   prototype: RMCBoxMREEmpty
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
 
 - type: rmcConstruction
+  parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePowerCellsHighBuild
   name: high-capacity power cells box
   prototype: RMCBoxMagazinePowerCellsHigh
-  noRotate: true
-  doAfterTime: 0.2
-  doAfterTimeMin: 0.2
-  materialCost: 1
-  ignoreBuildRestrictions: true
-  restrictedCollisionGroup: null
