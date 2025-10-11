@@ -262,7 +262,7 @@
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM1984APEmptyBuild
   name: M1984 magazine box (AP)
-  prototype: RMCBoxMagazinePistolM1984APEmptyBuild
+  prototype: RMCBoxMagazinePistolM1984APEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
