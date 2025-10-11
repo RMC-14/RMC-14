@@ -41,6 +41,7 @@
         density: 1000
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: RMCMesonsNonviewable
 
 - type: entity
   abstract: true
@@ -56,13 +57,15 @@
       Brute:
         collection: GlassSmack
   - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Glass
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: XenoToggleChargingDamage
     stageLoss: 2
     damage:
       types:
         Blunt: 40 # TODO RMC14 reduce window health to 100, check per window
+  - type: XenoCrusherChargable
+    instantDestroy: True
 
 - type: entity
   parent: CMBaseWindowIndestructible
@@ -82,6 +85,14 @@
     key: walls
     base: alm_rwindow
     mode: CardinalFlags
+
+- type: entity
+  parent: CMWindowReinforcedAlmayerHull
+  id: RMCWindowReinforcedAlmayerHullHijackBustable
+  suffix: Hijack Bustable
+  components:
+  - type: RMCReplaceOnHijackLand # TODO RMC14 also spawn glass
+    id: RMCWindowFrameAlmayer
 
 - type: entity
   parent: CMBaseWindow

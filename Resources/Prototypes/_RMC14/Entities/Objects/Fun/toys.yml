@@ -145,7 +145,7 @@
   parent: CMPlushieBase
   id: RMCPlushieAlec
   name: conspicuous plush
-  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hypoallergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
   suffix: DO NOT MAP
   components:
   - type: Sprite
@@ -185,6 +185,16 @@
     requiresSpecialDigestion: true
     useSound:
       path: /Audio/Voice/Moth/moth_chitter.ogg
+
+- type: entity
+  parent: RMCPlushieNyx
+  id: RMCPlushieMotivationalMoth
+  name: motivational marine moth
+  description: A soft, fluffy little marine companion for those who just need a little motivation to make it across the finish line. You can do it, yesyes! It chitters happily when squeezed!
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: plushie_wawa
 
 - type: entity
   parent: CMPlushieBase

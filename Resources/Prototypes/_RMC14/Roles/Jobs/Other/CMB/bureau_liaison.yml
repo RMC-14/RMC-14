@@ -8,19 +8,22 @@
   ranks:
     RMCRankICBCorporateLiaison: [ ]
   startingGear: RMCGearICBLiaison
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconICBLiaison"
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYaExecColony
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
     - type: Skills
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
-  hasIcon: false
+    - type: RMCTrackable
   hidden: true
 
 - type: entity
@@ -46,6 +49,10 @@
     job: CMICBLiaison
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -68,3 +75,10 @@
 
 - type: playTimeTracker
   id: RMCJobICBLiaison
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconICBLiaison
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_icc

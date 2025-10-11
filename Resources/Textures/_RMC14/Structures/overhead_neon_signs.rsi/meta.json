@@ -1,0 +1,377 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/wall_decorations/hybrisa64x64_signs.dmi, miscvert7 edited by github noctyrnal",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "jacksopen_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          4.2
+        ]
+      ]
+    },
+    {
+      "name": "jacksopen"
+    },
+    {
+      "name": "nightgoldcasinoopen_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          7.2
+        ]
+      ]
+    },
+    {
+      "name": "nightgoldcasinoopen"
+    },
+    {
+      "name": "open_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          2.4
+        ]
+      ]
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "open_on2",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          2.4
+        ]
+      ]
+    },
+    {
+      "name": "open2"
+    },
+    {
+      "name": "pizzaneon_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          7.2
+        ],
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          7.2
+        ],
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          7.2
+        ],
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          7.2
+        ]
+      ]
+    },
+    {
+      "name": "pizzaneon"
+    },
+    {
+      "name": "weyamartsign2",
+      "delays": [
+        [
+          0.1,
+          0.030000001,
+          0.3,
+          0.02,
+          8.2
+        ]
+      ]
+    },
+    {
+      "name": "weyamartsign2_off"
+    },
+    {
+      "name": "mechanicopen_on2",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          4.2
+        ]
+      ]
+    },
+    {
+      "name": "mechanicopen2"
+    },
+    {
+      "name": "barsign_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          3.4
+        ]
+      ]
+    },
+    {
+      "name": "barsign_off"
+    },
+    {
+      "name": "arcade_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          2.4
+        ]
+      ]
+    },
+    {
+      "name": "arcade_off"
+    },
+    {
+      "name": "cafe_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          4.2
+        ]
+      ]
+    },
+    {
+      "name": "cafe_off"
+    },
+    {
+      "name": "cafealt_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          4.2
+        ]
+      ]
+    },
+    {
+      "name": "cafealt_off"
+    },
+    {
+      "name": "misc_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.5,
+          0.02,
+          6.4
+        ]
+      ]
+    },
+    {
+      "name": "misc_off"
+    },
+    {
+      "name": "hotel_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          2.4
+        ]
+      ]
+    },
+    {
+      "name": "hotel_off"
+    },
+    {
+      "name": "casinolights_on",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "casinolights_off"
+    },
+    {
+      "name": "miscvert_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          1.2,
+          0.02,
+          4.6
+        ]
+      ]
+    },
+    {
+      "name": "miscvert_off"
+    },
+    {
+      "name": "miscvert2_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          1.2,
+          0.02,
+          4.6
+        ]
+      ]
+    },
+    {
+      "name": "miscvert2_off"
+    },
+    {
+      "name": "coffee_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          2.4
+        ]
+      ]
+    },
+    {
+      "name": "coffee_off"
+    },
+    {
+      "name": "coffeealt"
+    },
+    {
+      "name": "miscvert3_on",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "miscvert3_off"
+    },
+    {
+      "name": "miscvert4_on",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "miscvert4_off"
+    },
+    {
+      "name": "miscvert5_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          1.2,
+          0.02,
+          4.6
+        ]
+      ]
+    },
+    {
+      "name": "miscvert5_off"
+    },
+    {
+      "name": "miscvert6_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          1.2,
+          0.02,
+          4.6
+        ]
+      ]
+    },
+    {
+      "name": "miscvert6_off"
+    },
+    {
+      "name": "miscvert7_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          1.2,
+          0.02,
+          10
+        ]
+      ]
+    },
+    {
+      "name": "miscvert7_off"
+    },
+    {
+      "name": "pharmacy_on",
+      "delays": [
+        [
+          0.1,
+          0.07,
+          0.3,
+          0.02,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "pharmacy_off"
+    }
+  ]
+}

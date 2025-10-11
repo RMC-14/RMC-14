@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
@@ -10,6 +11,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -104,11 +107,21 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         var deleted = Deleted(target);
 
         var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
-        if (_guns.GunPrediction &&
-            TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
-            serverProjectile.Shooter is { } shooter)
+        if (_guns.GunPrediction)
         {
-            filter = filter.RemovePlayer(shooter);
+            // TODO RMC14 clean this up once gun prediction is using new lag compensation
+            if (TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
+                serverProjectile.Shooter is { } shooter)
+            {
+                filter = filter.RemovePlayer(shooter);
+            }
+
+            if (_net.IsServer &&
+                TryComp(projectile, out XenoProjectileShotComponent? shot) &&
+                shot.Shooter is { } xenoShooter)
+            {
+                filter = filter.RemovePlayer(xenoShooter);
+            }
         }
 
         if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
@@ -167,7 +180,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         //     component.ProjectileSpent = true;
         // }
 
-        if (!deleted)
+        if (!deleted && filter.Count > 0)
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 
@@ -407,7 +420,10 @@ public sealed class ImpactEffectEvent : EntityEventArgs
 /// Raised when an entity is just about to be hit with a projectile but can reflect it
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled);
+public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled) : IInventoryRelayEvent
+{
+    SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
 
 /// <summary>
 /// Raised when a projectile hits an entity

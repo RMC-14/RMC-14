@@ -53,3 +53,24 @@
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: hudhcdead
+
+- type: healthIcon
+  parent: CMHealthIconBase
+  id: RMCHealthIconHealthySynth
+  icon:
+    sprite: /Textures/_RMC14/Interface/health_hud.rsi
+    state: hudsynth
+
+- type: healthIcon
+  parent: CMHealthIconBase
+  id: RMCHealthIconDeadSynth
+  icon:
+    sprite: /Textures/_RMC14/Interface/health_hud.rsi
+    state: hudsynthdead
+
+- type: healthIcon
+  parent: CMHealthIconBase
+  id: RMCHealthIconDeadDNRSynth
+  icon:
+    sprite: /Textures/_RMC14/Interface/health_hud.rsi
+    state: hudsynthdnr

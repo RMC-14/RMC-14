@@ -1,5 +1,6 @@
 - type: alert
   id: XenoEnergyBase #used by default
+  category: Energy
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
     state: power_display_full

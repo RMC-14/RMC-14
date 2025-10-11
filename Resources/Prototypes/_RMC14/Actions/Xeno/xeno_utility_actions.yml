@@ -4,13 +4,15 @@
   name: Transfer plasma (50) # TODO RMC14 proper plasma costs
   description: Give plasma to a nearby xenonid.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: transfer_plasma
-    event: !type:XenoTransferPlasmaActionEvent
+  - type: TargetAction
     range: 2
+  - type: EntityTargetAction
+    event: !type:XenoTransferPlasmaActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -26,14 +28,16 @@
   name: Transfer plasma (100) # TODO RMC14 proper plasma costs
   description: Give plasma to a nearby xenonid.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: transfer_plasma
+  - type: TargetAction
+    range: 1.5
+  - type: EntityTargetAction
     event: !type:XenoTransferPlasmaActionEvent
       amount: 100
-    range: 1.5
 
 - type: entity
   id: ActionXenoTransferPlasmaHivelord
@@ -41,35 +45,40 @@
   name: Transfer plasma (200) # TODO RMC14 proper plasma costs
   description: Give plasma to a xenonid.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: transfer_plasma
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
     event: !type:XenoTransferPlasmaActionEvent
       amount: 200
-    range: 7
 
 - type: entity
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
-  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
+  description: Instantly grows a fruit when used (cooldown will be proprotial to growth time), creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
   components:
-  - type: EntityWorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gardener_resin_surge
-    event: !type:XenoResinSurgeActionEvent
-    range: 7
     useDelay: 10
+  - type: TargetAction
+    range: 7
     checkCanAccess: false
+  - type: EntityTargetAction
     whitelist:
       components:
       - XenoConstruct
       - XenoFruit
       - XenoWeeds
+  - type: WorldTargetAction
+    event: !type:XenoResinSurgeActionEvent
   - type: XenoResinSurgeAction
 
 - type: entity
@@ -78,13 +87,15 @@
   name: Retrieve (180 plasma, 100 fury)
   description: Pulls a xenonid to you if they are still, with a 0.6 second doafter. You can't pull very big xenonids unless they are downed.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: retrieve
-    event: !type:XenoRetrieveActionEvent
+  - type: TargetAction
     range: 7
+  - type: EntityTargetAction
+    event: !type:XenoRetrieveActionEvent
   - type: XenoActionPlasma
     cost: 180
   - type: XenoActionEnergy
@@ -107,14 +118,16 @@
   name: Aid Xenonid Healing (100 plasma, 100+ health reserves)
   description: Heals a nearby ally Xeno. Healing another Xeno will also heal you, and half your remaining health reserves will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: warden_heal
-    event: !type:XenoAidActionEvent
-    range: 1.5
     useDelay: 10
+  - type: TargetAction
+    range: 1.5
+  - type: EntityTargetAction
+    event: !type:XenoAidActionEvent
   - type: XenoActionPlasma
     cost: 100
   - type: ActionBlockIfResting
@@ -131,15 +144,17 @@
   name: Aid Xenonid Rejuvenate (100 plasma, 100 health reserves)
   description: Remove ailments and stuns from a far away ally Xeno.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: warden_rejuvenate
+    useDelay: 10
+  - type: TargetAction
+    range: 8
+  - type: EntityTargetAction
     event: !type:XenoAidActionEvent
       aidType: Ailments
-    range: 8
-    useDelay: 10
   - type: XenoActionPlasma
     cost: 100
   - type: ActionBlockIfResting
@@ -155,7 +170,7 @@
 #  name: Toggle Aid Type
 #  description: Toggles between healing or removing ailments with Aid Xenonid.
 #  components:
-#  - type: InstantAction
+#  - type: Action
 #    itemIconStyle: NoItem
 #    backgroundOn: null
 #    icon:
@@ -164,8 +179,9 @@
 #    iconOn:
 #      sprite: _RMC14/Actions/xeno_actions.rsi
 #      state: warden_rejuvenate
-#    event: !type:XenoAidToggleActionEvent
 #    useDelay: 0.5
+#  - type: InstantAction
+#    event: !type:XenoAidToggleActionEvent
 
 - type: entity
   parent: ActionXenoBase
@@ -173,14 +189,15 @@
   name: Choose/Follow Xenonid Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_lead
-    event: !type:HiveLeaderActionEvent
     useDelay: 3
+  - type: InstantAction
+    event: !type:HiveLeaderActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -198,16 +215,18 @@
   name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
   description: Heals xenonids in a 4 tile range around where you click for 30% of their health over 20 seconds.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: heal_xeno
-    event: !type:XenoHealActionEvent
     useDelay: 8
+  - type: TargetAction
     checkCanAccess: false
     range: -1
+  - type: WorldTargetAction
+    event: !type:XenoHealActionEvent
   - type: XenoActionPlasma
     cost: 600
 
@@ -237,15 +256,17 @@
   name: Apply Salve (200)
   description: Apply a salve to use some of your health to heal allied Xenos up to 100 health over 5 seconds. You can stack multiple salves.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: apply_salve
-    event: !type:XenoApplySalveActionEvent
     useDelay: 0.5
+  - type: TargetAction
     range: 2
+  - type: EntityTargetAction
+    event: !type:XenoApplySalveActionEvent
   - type: RMCDazeableAction
 
 - type: entity
@@ -254,14 +275,20 @@
   name: Sacrifice
   description: Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR TRANSFERRED HEALTH BY HEALING SISTERS.[/color]
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
-    event: !type:XenoSacrificeHealActionEvent
+  - type: TargetAction
     range: 1.5
+  - type: EntityTargetAction
+    event: !type:XenoSacrificeHealActionEvent
+      componentsRemove:
+      - type: RMCSlowdown
+      - type: RMCSuperSlowdown
+      - type: RMCRooted
 
 - type: entity
   parent: ActionXenoBase
@@ -269,14 +296,16 @@
   name: Tail Fountain
   description: Extinguishes fire from a nearby ally or foe. Uses up your melee attack.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_tail_fountain
-    event: !type:XenoTailFountainActionEvent
-    range: 2
     useDelay: 10
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    event: !type:XenoTailFountainActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -292,15 +321,17 @@
   name: Tantrum (100 plasma, 75 fury)
   description: Give an ally and yourself temporary armor for a few seconds, which lasts longer on you. Crushers and Ravagers get a speed boost instead.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: warden_heal
-    event: !type:XenoTantrumActionEvent
+    useDelay: 7
+  - type: TargetAction
     checkCanAccess: false
     range: 8
-    useDelay: 7
+  - type: EntityTargetAction
+    event: !type:XenoTantrumActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -316,13 +347,14 @@
   name: Fight or Flight (300 plasma, 75 fury)
   description: Remove ailments and stuns from all allies around you. The radius is longer if you have 75+ fury after paying the cost.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
-    event: !type:XenoFightOrFlightActionEvent
     useDelay: 45
+  - type: InstantAction
+    event: !type:XenoFightOrFlightActionEvent
   - type: XenoActionEnergy
     cost: 75
   - type: XenoActionPlasma
@@ -342,10 +374,11 @@
   name: Enter Eye Form
   description: Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: queen_eye
-    event: !type:QueenEyeActionEvent
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:QueenEyeActionEvent

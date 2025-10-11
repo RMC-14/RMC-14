@@ -33,7 +33,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    - ActionXenoSpit
+    - ActionXenoSpitPraetorian
     - ActionXenoDash
     - ActionXenoAcidBall
     - ActionXenoSprayAcidPraetorian
@@ -65,8 +65,6 @@
         Brute: 48
   - type: Tackle
     chance: 0.45
-    stunMin: 2
-    stunMax: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -77,6 +75,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -96,11 +95,10 @@
     barricadeDamage:
       types:
         Heat: 5
-    doAfter: 0.5
     range: 7
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: SlowOnPull
     slowdowns:
@@ -118,6 +116,10 @@
         - XenoHeavy
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: FixedIdentity
+    name: cm-job-name-xeno-praetorian
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -132,7 +134,6 @@
         Heat: 5
     acid: XenoAcidSprayAcidStacks
     plasmaCost: 80
-    doAfter: 0.5
   - type: XenoLeap
     plasmaCost: 40
     delay: 0
@@ -149,6 +150,8 @@
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianValkyrie
   - type: AcidTrap
+  - type: RMCActionOrder
+    id: CMXenoPraetorian
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -218,9 +221,11 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
-    - type: RMCDazed
   - type: XenoHighGallop
   - type: XenoHidden
+  - type: AcidTrap
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianValkyrie
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -257,6 +262,8 @@
         Brute: 40
   - type: XenoTailTrip
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianDancer
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -309,6 +316,8 @@
         Brute: 40
   - type: XenoCleave
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianVanguard
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -376,3 +385,5 @@
       groups:
         Brute: 15
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianOppressor

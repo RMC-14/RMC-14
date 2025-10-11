@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobAvali
   name: Urist C.M McRaptor
   suffix: RMC14
@@ -31,6 +31,8 @@
     animation: WeaponArcClaw
   - type: Inventory
     speciesId: avali
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-avali
 
 - type: entity
   parent: BaseSpeciesDummy

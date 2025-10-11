@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Sniper Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,7 +33,6 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
     - type: SniperWhitelist
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-sniper
   hidden: true
@@ -48,6 +48,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCSniper
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSniper
+  name: weya pmc sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCSniper
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCSniper
@@ -60,6 +71,10 @@
     job: RMCPMCSniper
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -71,14 +86,14 @@
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMCSniper
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCSniper
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    head: RMCArmorHelmetPMCTactical
+    mask: RMCMaskCoifPMC
     shoes: RMCBootsPMCFilled
     eyes: CMGlassesM42ScoutSight
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelPMC
     belt: RMCBeltHolsterSMGFilledSMGM63B2
     suitstorage: RMCXM43E1AntiMaterielRifle # TODO RMC14: PMC re-sprite
-    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket1: RMCPouchMagazineLargePMC
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:

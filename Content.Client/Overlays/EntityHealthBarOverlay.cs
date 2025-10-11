@@ -1,11 +1,13 @@
 using System.Numerics;
 using Content.Client.StatusIcon;
 using Content.Client.UserInterface.Systems;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.ParaDrop;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
@@ -28,7 +30,11 @@ public sealed class EntityHealthBarOverlay : Overlay
     private readonly MobStateSystem _mobStateSystem;
     private readonly MobThresholdSystem _mobThresholdSystem;
     private readonly StatusIconSystem _statusIconSystem;
+    private readonly SpriteSystem _spriteSystem;
     private readonly ProgressColorSystem _progressColor;
+
+    private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
+    private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
 
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
@@ -43,7 +49,10 @@ public sealed class EntityHealthBarOverlay : Overlay
         _mobStateSystem = _entManager.System<MobStateSystem>();
         _mobThresholdSystem = _entManager.System<MobThresholdSystem>();
         _statusIconSystem = _entManager.System<StatusIconSystem>();
+        _spriteSystem = _entManager.System<SpriteSystem>();
         _progressColor = _entManager.System<ProgressColorSystem>();
+        _crashLandingQuery = _entManager.GetEntityQuery<CrashLandingComponent>();
+        _paraDroppingQuery = _entManager.GetEntityQuery<ParaDroppingComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -76,7 +85,7 @@ public sealed class EntityHealthBarOverlay : Overlay
                 continue;
 
             // we use the status icon component bounds if specified otherwise use sprite
-            var bounds = _entManager.GetComponentOrNull<StatusIconComponent>(uid)?.Bounds ?? spriteComponent.Bounds;
+            var bounds = _entManager.GetComponentOrNull<StatusIconComponent>(uid)?.Bounds ?? _spriteSystem.GetLocalBounds((uid, spriteComponent));
             var worldPos = _transform.GetWorldPosition(xform, xformQuery);
 
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
@@ -99,6 +108,15 @@ public sealed class EntityHealthBarOverlay : Overlay
 
             var position = new Vector2(-widthOfMob / EyeManager.PixelsPerMeter / 2, yOffset / EyeManager.PixelsPerMeter);
             var color = GetProgressColor(deathProgress.ratio, deathProgress.inCrit);
+
+            //RMC14
+            if (_crashLandingQuery.HasComp(uid) || _paraDroppingQuery.HasComp(uid))
+            {
+                yOffset = 0.4f + spriteComponent.Offset.Y;
+                widthOfMob = spriteComponent.Offset.X;
+
+                position = new Vector2( widthOfMob, yOffset);
+            }
 
             // Hardcoded width of the progress bar because it doesn't match the texture.
             const float startX = 8f;
@@ -136,7 +154,7 @@ public sealed class EntityHealthBarOverlay : Overlay
                 !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold, thresholds))
                 return (1, false);
 
-            var ratio = 1 - ((FixedPoint2) (dmg.TotalDamage / threshold)).Float();
+            var ratio = 1 - ((FixedPoint2)(dmg.TotalDamage / threshold)).Float();
             return (ratio, false);
         }
 

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
@@ -5,26 +6,36 @@ using Content.Shared.Directions;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Prying.Systems;
+using Content.Shared.Tools.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Doors;
 
 public sealed class CMDoorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
     [Dependency] private readonly SharedDoorSystem _doors = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -39,7 +50,13 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
-        SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
+        SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
+
+        SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
+
+        SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
+
+        SubscribeLocalEvent<RMCOpenOnlyWhenUnanchoredComponent, BeforeDoorClosedEvent>(OnOpenOnlyWhenUnanchoredBeforeClosed);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -61,10 +78,30 @@ public sealed class CMDoorSystem : EntitySystem
         if (HasComp<XenoComponent>(user))
             return;
 
+        if (!_rmcPower.IsPowered(button))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-machines-unpowered"), button, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (button.Comp.MinimumRoundTimeToPress is { } minimumTime && _gameTicker.RoundDuration() <= minimumTime)
+        {
+            var minutesLeft = (int)(minimumTime.TotalMinutes - _gameTicker.RoundDuration().TotalMinutes);
+            var timeMessage = Loc.GetString(button.Comp.NoTimeMessage, ("minutes", minutesLeft));
+            _popup.PopupClient(timeMessage, user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (button.Comp.Used && button.Comp.UseOnlyOnce)
+        {
+            _popup.PopupClient(Loc.GetString(button.Comp.AlreadyUsedMessage), button, user, PopupType.SmallCaution);
+            return;
+        }
+
         if (!_accessReader.IsAllowed(user, button))
         {
-            // TODO RMC14 denied animation
             _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), button, user, PopupType.SmallCaution);
+            DoPodDoorButtonAnimation(button, button.Comp.DeniedState);
             return;
         }
 
@@ -73,6 +110,9 @@ public sealed class CMDoorSystem : EntitySystem
             return;
 
         button.Comp.LastUse = time;
+        button.Comp.Used = true;
+        Dirty(button);
+
         var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);
 
@@ -103,20 +143,92 @@ public sealed class CMDoorSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-door-button-pressed-others", ("user", user), ("button", button));
         _popup.PopupPredicted(selfMsg, othersMsg, user, user);
 
-        if (_net.IsServer)
-            RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
+        DoPodDoorButtonAnimation(button, button.Comp.OnState);
+
+        if (button.Comp.MarineAnnouncement != null)
+        {
+            var announceText = Loc.GetString(button.Comp.MarineAnnouncement);
+            var author = Loc.GetString(button.Comp.MarineAnnouncementAuthor);
+            _announce.AnnounceHighCommand(announceText, author);
+        }
     }
 
-    private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)
+    public void DoPodDoorButtonAnimation(EntityUid button, string animState)
+    {
+        if (_net.IsClient)
+            return;
+
+        RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button), animState), Filter.PvsExcept(button));
+    }
+
+    private void OnBeforePry(Entity<DoorComponent> ent, ref BeforePryEvent args)
     {
         if (TryComp(ent, out DoorComponent? door) && door.State != DoorState.Closed)
         {
-            args.Cancelled = true;
-            return;
+            if (HasComp<RMCPodDoorComponent>(ent) || HasComp<XenoComponent>(args.User))
+                args.Cancelled = true;
         }
 
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
+
+    }
+
+    private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)
+    {
+        if (args.Cancelled)
+        {
+            _audioSystem.Stop(ent.Comp.SoundEntity);
+        }
+        if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
+        {
+            if (HasComp<RMCPodDoorComponent>(ent.Owner))
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
+            else
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
+        }
+    }
+
+    private void OnPodDoorGetPryTimeModifier(Entity<RMCPodDoorComponent> ent, ref GetPryTimeModifierEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+        {
+            args.PryTimeModifier *= ent.Comp.XenoPodlockPryMultiplier;
+        }
+    }
+
+    private void OnDoorBoltStateChanged(Entity<LayerChangeOnWeldComponent> ent, ref DoorBoltsChangedEvent args)
+    {
+        if(!TryComp(ent, out FixturesComponent? fixtureComp) || !TryComp(ent, out DoorComponent? door))
+            return;
+
+        foreach (var fixture in fixtureComp.Fixtures)
+        {
+            switch (args.BoltsDown)
+            {
+                case true when fixture.Value.CollisionLayer == (int) ent.Comp.UnWeldedLayer && door.State == DoorState.Closed:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.WeldedLayer);
+                    break;
+                case false when fixture.Value.CollisionLayer == (int) ent.Comp.WeldedLayer:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.UnWeldedLayer);
+                    break;
+            }
+        }
+    }
+
+    private void OnOpenOnlyWhenUnanchoredBeforeClosed(Entity<RMCOpenOnlyWhenUnanchoredComponent> ent, ref BeforeDoorClosedEvent args)
+    {
+        if (TryComp(ent, out TransformComponent? xform) &&
+            xform.Anchored)
+        {
+            return;
+        }
+
+        args.Cancel();
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)

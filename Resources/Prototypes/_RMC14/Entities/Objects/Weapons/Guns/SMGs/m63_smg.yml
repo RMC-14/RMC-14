@@ -2,7 +2,7 @@
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
   id: WeaponSMGM63
-  description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  description: The AEGIS Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
@@ -86,6 +86,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight

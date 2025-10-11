@@ -1,0 +1,55 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomSentry
+  name: sentry loot spawner
+  description: This is a random sentry, for survivors.
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCTesla
+    # TODO JIMA planted flag
+    - RMCSentry
+    - RMCSentryFire
+
+- type: entity
+  parent: RMCSpawnerRandomSentry
+  id: RMCSpawnerRandomSentryLowChance
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry_20
+  - type: RandomSpawner
+    chance: 0.2 # 20% chance to spawn a sentry
+
+- type: entity
+  parent: RMCSpawnerRandomSentry
+  id: RMCSpawnerRandomSentryMidChance
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry_50
+  - type: RandomSpawner
+    chance: 0.5 # 50% chance to spawn a sentry
+
+- type: entity
+  parent: RMCSpawnerRandomSentry
+  id: RMCSpawnerRandomSentryHighChance
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry_80
+  - type: RandomSpawner
+    chance: 0.8 # 80% chance to spawn a sentry

@@ -45,7 +45,7 @@ public sealed partial class CassettePlayerComponent : Component
     public AudioState State;
 
     [DataField, AutoNetworkedField]
-    public AudioParams AudioParams = AudioParams.Default.WithVolume(-12f);
+    public AudioParams AudioParams = AudioParams.Default.WithVolume(-6f);
 
     [DataField, AutoNetworkedField]
     public int Tape;

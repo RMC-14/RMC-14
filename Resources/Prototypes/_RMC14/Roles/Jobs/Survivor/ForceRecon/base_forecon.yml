@@ -5,14 +5,22 @@
   description: rmc-job-description-forecon
   ranks:
     RMCRankSergeant: []
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ColonistEngi
   joinNotifyCrew: false
   startingGear: RMCGearForeconBase
-  hasIcon: false
+  hasIcon: true
   greeting: rmc-job-greeting-forecon
-  playTimeTracker: RMCSurvivorForecon
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: FORECON Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -28,7 +36,9 @@
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
 
 - type: playTimeTracker
-  id: RMCSurvivorForecon
+  id: RMCJobSurvivorMilitary
+  name: rmc-playtime-tracker-job-name-survivor-military
+  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
@@ -36,10 +46,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag and grey beanie
+    randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
+    - [ RMCHeadBeanie ]
+    - [ RMCHeadDurag ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]

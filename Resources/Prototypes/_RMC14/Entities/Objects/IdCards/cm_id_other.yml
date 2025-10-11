@@ -46,6 +46,16 @@
 
 - type: entity
   parent: CMIDCardLanyard
+  id: RMCIDCardColonistScientist
+  name: researcher colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorScientist
+  - type: ItemIFF
+    faction: FactionSurvivor
+
+- type: entity
+  parent: CMIDCardLanyard
   id: CMIDCardColonistSecurity
   name: security colonist ID card
   components:
@@ -62,8 +72,38 @@
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
-  name: liaison ID card
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  suffix: WeYa
   components:
+  - type: Sprite
+    state: corporate_liaison
+  - type: ItemIFF
+    faction: FactionWeYa
+  - type: PresetIdCard
+    job: CMLiaison
+
+- type: entity
+  parent: CMIDCardSilver
+  id: CMIDCardPMC
+  name: pmc holo-badge
+  description: A corporate holo-badge. It has a unique uncapped bottom.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
+  - type: ItemIFF
+    faction: FactionWeYa
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: CMIDCardPMCExecutive
+  name: corporate holo-badge
+  description: A corporate holo-badge in standard corporate orange and white. It has a unique uncapped bottom. It is fingerprint locked with 5-X clearance level. Commonly held by corporate managers.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
   - type: ItemIFF
     faction: FactionWeYa
   - type: PresetIdCard
@@ -78,12 +118,20 @@
     job: CMSurvivorCorporate
 
 - type: entity
-  parent: CMIDCardLiaison
-  id: RMCIDCardExecutiveCorporateSpecialist
-  name: executive corporate specialist ID card
+  parent: CMIDCardLiaisonColony
+  id: RMCIDCardWeYaCorporateSecurity
+  name: we-ya corporate security ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialist
+    job: RMCSurvivorHybrisaCorporateSecurity
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: RMCIDCardExecutiveCorporateSpecialist
+  name: executive legal specialist ID card
+  components:
+  - type: PresetIdCard
+    job: CMCorporateExecutiveSupervisorLegal
 
 - type: entity
   parent: CMIDCardLiaison
@@ -91,7 +139,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSupervisor
+    job: CMCorporateExecutiveSpecialistLegal
 
 - type: entity
   parent: CMIDCardLiaison
@@ -131,6 +179,8 @@
   components:
   - type: PresetIdCard
     job: CMBureauMarshal
+  - type: ItemIFF
+    faction: FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -140,6 +190,25 @@
   components:
   - type: PresetIdCard
     job: CMBureauDeputy
+  - type: ItemIFF
+    faction: FactionMarine
+
+# for survs
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardDeputySurvivor
+  name: bureau deputy silver badge
+  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+      state: icon
+    - type: Clothing
+      slots:
+      - idcard
+      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+    - type: ItemIFF
+      faction: FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -156,6 +225,7 @@
 
 - type: entity
   id: FactionWeYa
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
@@ -263,3 +333,48 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardFORECONSpotter
+  name: FORECON Spotter ID card
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-forecon-spotter
+
+- type: entity
+  id: RMCIDCardAegis
+  name: AEGIS Access Badge
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.
+  components:
+  - type: WarpPoint
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: keycard
+    drawdepth: SmallObjects
+  - type: Item
+    size: Tiny
+  - type: Clothing
+    slots:
+      - idcard
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Access
+    groups:
+      - CMAccessAegis
+  - type: AegisTrackable
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCIDCardAegis
+  id: RMCIDCardAegisIntel
+  name: AEGIS Access Badge
+  suffix: Intel-giving
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates. It has some blood on it.
+  components:
+  - type: IntelRescueSurvivorObjective
+    value: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: bloody

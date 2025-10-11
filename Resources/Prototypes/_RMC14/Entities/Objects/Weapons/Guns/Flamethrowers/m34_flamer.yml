@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCWeaponFlamer
   name: M34 incinerator unit
-  description: M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
+  description: The M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
@@ -91,6 +91,22 @@
         enum.RMCIgniterVisuals.Ignited:
           True: { visible: true }
           False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerPVE
+  suffix: PVE
+  components:
+  - type: Gun
+    fireRate: 2
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
 
 - type: entity
   parent: RMCWeaponFlamer
@@ -148,6 +164,14 @@
     maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankFlamer
+
+- type: Tag
+  id: RMCTankFlamer
 
 - type: entity
   parent: RMCGunCaseBase

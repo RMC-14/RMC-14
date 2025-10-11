@@ -2,9 +2,13 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconMarksman
   name: rmc-job-name-forecon-marksman
-  playTimeTracker: RMCJobSurvivorMarksmanForecon
-  startingGear: RMCGearForeconBase
+  startingGear: RMCGearForeconMarksman
   icon: "CMJobIconWeaponsSpecialist"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobWeaponsSpecialist
+    time: 3600 # 1 hour
+  spawnMenuRoleName: FORECON Marksman (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,7 +28,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: spec
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -35,12 +39,15 @@
       preset: RMCSurvivorPresetForeconMarksman
     - type: ScoutWhitelist
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: rmc-job-prefix-forecon-marksman
+    - type: SpotterWhitelist
   hidden: true
 
-- type: playTimeTracker
-  id: RMCJobSurvivorMarksmanForecon
-  isHumanoid: true
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconMarksman
+  equipment:
+    shoes: RMCScoutShoes
 
 - type: entity
   parent: CMSpawnPointJobBase

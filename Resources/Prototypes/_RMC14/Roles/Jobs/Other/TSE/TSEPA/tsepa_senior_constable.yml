@@ -11,7 +11,7 @@
   icon: "RMCJobIconTSEPASeniorConstable"
   joinNotifyCrew: false
   accessGroups:
-  - ColonistSec
+  - ColonistTSEPABrig
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,6 +31,7 @@
       - TSE
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-senior-constable
+    - type: RMCTrackable
   hidden: true
 
 - type: startingGear
@@ -39,18 +40,12 @@
     head: RMCHeadBeretTSEPA
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
-    outerClothing: RMCArmourM4TSEPA
+    outerClothing: RMCCoatTSEPA
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponRifleL83A2
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPASilverGold
     belt: RMCBeltHolsterRevolverSpearheadFill
     back: RMCSatchelTSEPA
-  storage:
-    back:
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2
 
 - type: entity
   parent: CMSpawnPointJobBase

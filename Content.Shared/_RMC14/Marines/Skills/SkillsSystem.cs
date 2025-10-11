@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -57,11 +58,11 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
-        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
         SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<ItemToggleRequiresSkillComponent, ItemToggleActivateAttemptEvent>(OnItemToggleRequiresSkill);
         SubscribeLocalEvent<ItemToggleDeactivateUnskilledComponent, GotEquippedEvent>(OnItemToggleDeactivateUnskilled);
@@ -114,6 +115,9 @@ public sealed class SkillsSystem : EntitySystem
         {
             foreach (var (name, level) in _skillsSorted)
             {
+                if (level == 0)
+                    continue;
+
                 msg.AddMarkupPermissive(Loc.GetString("rmc-skills-examine-skill", ("name", name), ("level", level)));
                 msg.PushNewline();
             }
@@ -122,7 +126,7 @@ public sealed class SkillsSystem : EntitySystem
         _examine.AddDetailedExamineVerb(args,
             ent,
             msg,
-            Loc.GetString("rmc-skills-examinable-text"),
+            Loc.GetString("rmc-skills-examine", ("target", ent)),
             "/Textures/Interface/students-cap.svg.192dpi.png",
             Loc.GetString("rmc-skills-examine", ("target", ent))
         );
@@ -275,7 +279,7 @@ public sealed class SkillsSystem : EntitySystem
         for (var i = 0; i < foundReagents.Count; i++)
         {
             var reagent = foundReagents[i];
-            var reagentLocalizedName = _prototypes.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
+            var reagentLocalizedName = _prototypes.IndexReagent<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
             var reagentQuantity = reagent.Quantity;
             fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
             if (i > reagentCount)
@@ -569,17 +573,18 @@ public sealed class SkillsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition)
+    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition, float[]? multipliers = null)
     {
         if (!definition.TryGet(out var definitionComp, _prototypes, _compFactory))
             return 1f;
 
-        if (definitionComp.DelayMultipliers.Length == 0)
+        multipliers ??= definitionComp.DelayMultipliers;
+        if (multipliers.Length == 0)
             return 1f;
 
         var skill = GetSkill(user, definition);
-        if (!definitionComp.DelayMultipliers.TryGetValue(skill, out var multiplier))
-            multiplier = definitionComp.DelayMultipliers[^1];
+        if (!multipliers.TryGetValue(skill, out var multiplier))
+            multiplier = multipliers[^1];
 
         return multiplier;
     }

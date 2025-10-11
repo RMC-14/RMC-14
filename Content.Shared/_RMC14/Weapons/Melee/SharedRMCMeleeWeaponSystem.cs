@@ -1,7 +1,9 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Interaction.Events;
@@ -18,6 +20,7 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -215,5 +218,58 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
         localPos = userXform.LocalRotation.RotateVec(localPos);
         _melee.DoLunge(user, target, Angle.Zero, localPos, null);
+    }
+
+    /// <summary>
+    ///     Check if the attack event should be modified in any way.
+    /// </summary>
+    /// <param name="target">The initial target of the attack</param>
+    /// <param name="weapon">The weapon used to attack</param>
+    /// <param name="user">The entity doing the attack</param>
+    /// <param name="attack">The <see cref="AttackEvent"/></param>
+    /// <param name="newAttack">The new <see cref="AttackEvent"/></param>
+    /// <param name="range">The range of the attack</param>
+    /// <returns>True if the attack hasn't been modified, or if it is modified and still valid</returns>
+    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack, float range = 1.5f)
+    {
+        var targetPosition = _transform.GetMoverCoordinates(target).Position;
+        var userPosition = _transform.GetMoverCoordinates(user).Position;
+        var entities = GetNetEntityList(_melee.ArcRayCast(userPosition,
+                (targetPosition -
+                 userPosition).ToWorldAngle(),
+                0,
+                range,
+                _transform.GetMapId(user),
+                user)
+            .ToList());
+
+        var meleeEv = new MeleeAttackAttemptEvent(GetNetEntity(target),
+            attack,
+            attack.Coordinates,
+            entities,
+            GetNetEntity(weapon));
+        RaiseLocalEvent(user, ref meleeEv);
+
+        newAttack = meleeEv.Attack;
+
+        // The attack hasn't been modified.
+        if (attack == newAttack)
+            return true;
+
+        // The new target is the weapon being used for the attack.
+        if (meleeEv.Weapon == meleeEv.Target)
+            return false;
+
+        var disarm = newAttack switch
+        {
+            DisarmAttackEvent => true,
+            _ => false,
+        };
+
+        // The new target is unable to be attacked by the user.
+        if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, disarm))
+            return false;
+
+        return true;
     }
 }

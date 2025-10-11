@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/disk.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "nucleardisk"
+    },
+    {
+      "name": "datadisk0"
+    },
+    {
+      "name": "datadisk1"
+    },
+    {
+      "name": "datadisk2"
+    },
+    {
+      "name": "datadisk3"
+    },
+    {
+      "name": "datadisk4"
+    },
+    {
+      "name": "datadisk5"
+    },
+    {
+      "name": "datadisk6"
+    },
+    {
+      "name": "botanydisk"
+    },
+    {
+      "name": "disk_1"
+    },
+    {
+      "name": "disk_2",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_3",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_4",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_5",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_6",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "disk_7"
+    },
+    {
+      "name": "disk_8",
+      "delays": [
+        [
+          0.6,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "disk_9",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_10"
+    },
+    {
+      "name": "disk_11",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_12",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_13",
+      "delays": [
+        [
+          0.2,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "disk_14",
+      "delays": [
+        [
+          0.8,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "disk_15",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    }
+  ]
+}

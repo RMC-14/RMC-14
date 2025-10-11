@@ -4,6 +4,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -112,9 +113,13 @@ public abstract class SharedLadderSystem : EntitySystem
         }
 
         var ev = new LadderDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.Delay, ev, ent, ent, ent)
+        var delay = ent.Comp.Delay;
+        if (HasComp<GhostComponent>(args.User))
+            delay = TimeSpan.Zero;
+
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, ent)
         {
-            AttemptFrequency = AttemptFrequency.EveryTick,
+            AttemptFrequency = delay == TimeSpan.Zero ? AttemptFrequency.Never : AttemptFrequency.EveryTick,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))
@@ -321,7 +326,7 @@ public abstract class SharedLadderSystem : EntitySystem
             if (toUpdate.Owner == uid)
                 continue;
 
-            if (ladder.Other is { } old)
+            if (ladder.Other is { } old && old != toUpdate.Owner)
                 Log.Error($"Found {ToPrettyString(toUpdate)} with duplicate ID {toUpdate.Comp.Id}, previous ladder: {ToPrettyString(old)}");
 
             ladder.Other = toUpdate;

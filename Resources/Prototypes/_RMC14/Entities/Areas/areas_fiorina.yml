@@ -15,6 +15,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#6C6767D8'
@@ -34,12 +35,14 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaFiorina
@@ -55,6 +58,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -72,6 +76,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -152,6 +157,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     landingZone: true
@@ -181,6 +187,8 @@
   components:
   - type: Sprite
     state: lz1
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -189,6 +197,8 @@
   components:
   - type: Sprite
     state: lz2
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -199,6 +209,7 @@
     state: shuttle
   - type: Area
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -209,6 +220,7 @@
     state: shuttle2
   - type: Area
     linkedLz: dropship_lz2
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorina
@@ -224,6 +236,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: true

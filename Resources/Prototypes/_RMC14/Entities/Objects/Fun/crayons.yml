@@ -58,6 +58,8 @@
     sprite: _RMC14/Objects/Misc/paint.rsi
   - type: Crayon
     capacity: 30
+  - type: SolutionContainerManager
+    solutions: {} #removes upstream reagents
 
 #red
 - type: entity

@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Requisitions;
@@ -8,6 +8,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Intel.Tech;
@@ -15,6 +16,7 @@ namespace Content.Shared._RMC14.Intel.Tech;
 public sealed class TechSystem : EntitySystem
 {
     [Dependency] private readonly DropshipFabricatorSystem _dropshipFabricator = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -22,16 +24,13 @@ public sealed class TechSystem : EntitySystem
     [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
 
-    private MapId? _purchasesMap;
-
     public override void Initialize()
     {
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<TechAnnounceEvent>(OnTechAnnounce);
         SubscribeLocalEvent<TechUnlockTierEvent>(OnTechUnlockTier);
         SubscribeLocalEvent<TechRequisitionsBudgetEvent>(OnTechRequisitionsBudget);
         SubscribeLocalEvent<TechDropshipBudgetEvent>(OnTechDropshipBudget);
-        SubscribeLocalEvent<TechWarheadEvent>(OnTechWarhead);
+        SubscribeLocalEvent<TechLogisticsDeliveryEvent>(OnTechLogisticsDelivery);
 
         SubscribeLocalEvent<TechControlConsoleComponent, BeforeActivatableUIOpenEvent>(OnControlConsoleBeforeOpen);
 
@@ -40,11 +39,6 @@ public sealed class TechSystem : EntitySystem
             {
                 subs.Event<TechPurchaseOptionBuiMsg>(OnPurchaseOptionMsg);
             });
-    }
-
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
-    {
-        _purchasesMap = null;
     }
 
     private void OnTechAnnounce(TechAnnounceEvent ev)
@@ -72,11 +66,9 @@ public sealed class TechSystem : EntitySystem
         _dropshipFabricator.ChangeBudget(ev.Amount);
     }
 
-    private void OnTechWarhead(TechWarheadEvent ev)
+    private void OnTechLogisticsDelivery(TechLogisticsDeliveryEvent ev)
     {
-        var map = EnsurePurchasesMap();
-        var warhead = Spawn(ev.Warhead, new MapCoordinates(Vector2.Zero, map));
-        EnsureComp<RequisitionsCustomDeliveryComponent>(warhead);
+        _requisitions.CreateSpecialDelivery(ev.Object);
     }
 
     private void OnControlConsoleBeforeOpen(Entity<TechControlConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -108,6 +100,9 @@ public sealed class TechSystem : EntitySystem
             return;
         }
 
+        if (option.TimeLock  > _ticker.RoundDuration())
+            return;
+
         if (option.Purchased && !option.Repurchasable)
             return;
 
@@ -127,15 +122,5 @@ public sealed class TechSystem : EntitySystem
         }
 
         _intel.UpdateTree(tree);
-    }
-
-    private MapId EnsurePurchasesMap()
-    {
-        if (_purchasesMap != null)
-            return _purchasesMap.Value;
-
-        _map.CreateMap(out var map);
-        _purchasesMap = map;
-        return map;
     }
 }
