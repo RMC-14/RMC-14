@@ -102,8 +102,19 @@ public abstract class SharedJoinXenoSystem : EntitySystem
 
         if (queue.PlayerQueue.Contains(actor.PlayerSession.UserId))
         {
-            var alreadyInMsg = Loc.GetString("rmc-xeno-queue-already-in");
-            _popup.PopupEntity(alreadyInMsg, ent.Owner, ent.Owner, PopupType.MediumCaution);
+            var tempQueue = new Queue<NetUserId>();
+            while (queue.PlayerQueue.Count > 0)
+            {
+                var userId = queue.PlayerQueue.Dequeue();
+                if (userId != actor.PlayerSession.UserId)
+                    tempQueue.Enqueue(userId);
+            }
+            queue.PlayerQueue = tempQueue;
+            Dirty(hive.Value, queue);
+
+            var leftMsg = Loc.GetString("rmc-xeno-queue-left");
+            _popup.PopupEntity(leftMsg, ent.Owner, ent.Owner, PopupType.Medium);
+            SendQueueStatusToAll((hive.Value, hiveComp), (hive.Value, queue));
             return;
         }
 
@@ -237,7 +248,6 @@ public abstract class SharedJoinXenoSystem : EntitySystem
         if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
 
-        // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
         if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
         {
             var timeSinceDeath = _timing.CurTime.Subtract(ghostComp.TimeOfDeath);

@@ -193,7 +193,7 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
                HasComp<XenoParasiteComponent>(entity) ||
                HasComp<VictimBurstComponent>(entity) ||
                HasComp<VictimInfectedComponent>(entity) ||
-               (TryComp<XenoComponent>(entity, out var xeno) && xeno.Role.Id == "CMXenoLesserDrone");
+               (TryComp<XenoComponent>(entity, out var xeno) && xeno.Role.Id == "CMXenoLesserDrone"); //cursed ahh code
     }
 
     private void CleanupInvalidQueuePlayers(Entity<LarvaQueueComponent> queue)
@@ -324,6 +324,18 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             session.AttachedEntity ?? EntityUid.Invalid,
             session.AttachedEntity ?? EntityUid.Invalid,
             PopupType.MediumCaution);
+
+        var query = EntityQueryEnumerator<HiveComponent, LarvaQueueComponent>();
+        while (query.MoveNext(out var hiveId, out var hive, out var queue))
+        {
+            if (!queue.PlayerQueue.Contains(expired.UserId))
+            {
+                queue.PlayerQueue.Enqueue(expired.UserId);
+                Dirty(hiveId, queue);
+                SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
+                break;
+            }
+        }
     }
 
     private void OnLarvaQueueStartup(Entity<LarvaQueueComponent> queue, ref ComponentStartup args)
@@ -729,7 +741,6 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
             if (!TerminatingOrDeleted(larva) && !_mobState.IsDead(larva))
                 queue.PendingLarvae.Add(larva);
 
-            queue.PlayerQueue.Enqueue(userId);
             Dirty(hive.Owner, queue);
             SendQueueStatusToAll(hive, (hive.Owner, queue));
         }

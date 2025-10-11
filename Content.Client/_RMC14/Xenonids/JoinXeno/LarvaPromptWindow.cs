@@ -101,10 +101,11 @@ public sealed class LarvaPromptWindow : DefaultWindow
                 _acceptButton.Modulate = Color.FromHex("#FFD93D");
                 _declineButton.Modulate = Color.FromHex("#FFD93D");
             }
-        }
-        else
-        {
-            Close();
+
+            if (_remainingTime <= 0.0f)
+            {
+                Timer.Spawn(0, Close); //better way to do this i just dont know it
+            }
         }
     }
 }
