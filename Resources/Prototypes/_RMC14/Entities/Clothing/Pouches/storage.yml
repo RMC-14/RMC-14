@@ -540,6 +540,22 @@
     grid:
     - 0,0,15,1 #8 slots
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledSynthetic
+  suffix: Filled, Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: CMWrench
+    - id: RMCCableCoil30
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    # Something about /item/tool/weldingtool/hugetank - leaving empty
+
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]

@@ -5,7 +5,7 @@
   description: rmc-job-description-forecon
   ranks:
     RMCRankSergeant: []
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ColonistEngi
   joinNotifyCrew: false
@@ -15,6 +15,7 @@
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
   useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
   medals:
     Bronze: RMCMedalBronzeService
     Silver: RMCMedalSilverService
