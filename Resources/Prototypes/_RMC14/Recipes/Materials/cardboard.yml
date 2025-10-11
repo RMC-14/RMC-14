@@ -2,7 +2,6 @@
 - type: rmcConstruction
   id: RMCCardboardBuildBase
   prototype: BoxCardboard
-  abstract: true
   noRotate: true
   doAfterTime: 0.25
   doAfterTimeMin: 0.25
