@@ -46,7 +46,7 @@ public partial class XenoChoiceControl : Control
 
     public void SetName(string name)
     {
-        Button.Name = name.Replace(" ","");
+        Button.Name = name;
     }
 
     public void SetLeader(Texture? texture)

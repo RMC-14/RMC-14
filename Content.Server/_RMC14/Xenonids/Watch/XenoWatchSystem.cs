@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
@@ -19,6 +20,7 @@ using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using static Content.Server.Chat.Systems.ChatSystem;
 
@@ -193,6 +195,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         while (query.MoveNext(out var uid, out var comp, out var member, out var metaData))
         {
             bool leader = false;
+            EntProtoId? StrainOf = null;
             if (uid == ent.Owner || member.Hive != hive.Owner)
                 continue;
 
@@ -201,6 +204,11 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
             if(TryComp<HiveLeaderComponent>(uid, out var leaderComp))
                 leader = true;
+
+            if (TryComp<XenoStrainComponent>(uid, out var strainComp))
+            {
+                StrainOf = strainComp.StrainOf;
+            }
 
             if (comp.CountedInSlots)
             {
@@ -229,7 +237,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
             _threshhold.TryGetIncapPercentage(uid, damageableComp.TotalDamage, out var incap);
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID,(1-incap)??0 , _plasma.GetPlasmaPercentage(uid), evo, leader));
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID,(1-incap)??0 , _plasma.GetPlasmaPercentage(uid), evo, leader, StrainOf));
         }
 
 

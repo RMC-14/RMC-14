@@ -207,6 +207,7 @@
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
     popup: rmc-xeno-eggsac-popup
+    strainOf: CMXenoCarrier
   - type: XenoPheromones
     pheromonesMultiplier: 3
     pheroSuffix: strong

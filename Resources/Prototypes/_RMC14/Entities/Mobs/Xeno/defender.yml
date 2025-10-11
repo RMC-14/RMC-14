@@ -146,6 +146,7 @@
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
     popup: rmc-xeno-steelcrest-popup
+    strainOf: CMXenoDefender
   - type: MeleeWeapon
     damage:
       groups:

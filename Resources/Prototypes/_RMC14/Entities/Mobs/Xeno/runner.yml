@@ -196,6 +196,7 @@
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
     popup: rmc-xeno-acider-popup
+    strainOf: CMXenoRunner
   - type: CMArmor
     xenoArmor: 15
   - type: MovementSpeedModifier

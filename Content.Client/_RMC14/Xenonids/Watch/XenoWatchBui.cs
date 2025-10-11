@@ -59,7 +59,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
-            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory) || xeno.Hidden)
+            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory) || entity.TryGetComponent(out XenoHiddenComponent? hidden, _compFactory))
                 continue;
 
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
@@ -93,7 +93,8 @@ public sealed class XenoWatchBui : BoundUserInterface
                 var xenobutton = new Button();
 
                 xenobutton.Text = xeno.Name;
-                xenobutton.Name = xeno.Name.Replace(" ", "");
+                xenobutton.Name = xeno.ID;
+
                 xenobutton.ToggleMode = true;
                 xenobutton.ModulateSelfOverride = Color.Purple;
                 xenobutton.AddStyleClass(StyleBase.ButtonSquare);
@@ -102,8 +103,8 @@ public sealed class XenoWatchBui : BoundUserInterface
                 xenocontrol.XenoButton.AddChild(xenobutton);
 
                 row.XenosContainer.AddChild(xenocontrol);
-                ShownXenos.Add(xeno.Name.Replace(" ", ""), false);
-                XenoCounts.Add(xeno.Name.Replace(" ", ""), 0);
+                ShownXenos.Add(xeno.ID, false);
+                XenoCounts.Add(xeno.ID, 0);
 
             }
             _window.RowContainer.AddChild(row);
@@ -136,39 +137,28 @@ public sealed class XenoWatchBui : BoundUserInterface
         var total = s.XenoCount + burrowedweight;
 
 
-        var tier2Slots = (total * 0.5f) - s.TierTwoAmount * s.TierThreeAmount;
+        var tier2Slots = (total * 0.5f) - (s.TierTwoAmount + s.TierThreeAmount);
         var tier3Slots = (total * 0.2f) - s.TierThreeAmount;
 
 
         foreach (var xeno in xenolist)
         {
             Texture? texture = null;
-            if (xeno.Id != null &&
-                _prototype.TryIndex(xeno.Id.Value, out var evolution))
+            if (_prototype.TryIndex(xeno.Id, out var evolution))
             {
                 texture = _sprite.Frame0(evolution);
             }
 
 
             var control = new XenoChoiceControl();
+            string name = xeno.StrainOf == null ? (xeno.Id??"NullProto") : xeno.StrainOf;
+
             control.Set(xeno.Name, texture);
+            control.SetName(name);
 
-
-            foreach (var xenokey in ShownXenos.Keys) //Lesser drones are evil
+            if (XenoCounts.ContainsKey(name))
             {
-                var name = control.NameLabel.GetMessage()??"EmptyString";
-                name = name.Replace(" ", "");
-                if (name.Contains(xenokey))
-                {
-                    if ((name.Contains("Lesser")) == (xenokey.Contains("Lesser")) )
-                        control.SetName(xenokey);
-                }
-            }
-
-            string value = control.Button.Name ?? "";
-            if (XenoCounts.ContainsKey(value))
-            {
-                XenoCounts[value] += 1;
+                XenoCounts[name] += 1;
             }
 
 
@@ -213,17 +203,18 @@ public sealed class XenoWatchBui : BoundUserInterface
                 if (child is not XenoHiveCountControl hive)
                     continue;
 
-                string name = "";
+                string name = String.Empty;
+
 
                 foreach (var button in hive.XenoButton.Children)
                 {
                     if (button is not Button xenobutton)
                         continue;
 
-                    name  = xenobutton.Text??"";
+                    name  = xenobutton.Name??String.Empty;
                 }
 
-                if (XenoCounts.TryGetValue(name.Replace(" ","")??"", out var count))
+                if (XenoCounts.TryGetValue(name, out var count))
                 {
                   hive.Count.Text = $"{count}";
                 }
@@ -294,7 +285,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         {
             foreach (var xeno in tiers[number])
             {
-                ShownXenos[xeno.Name.Replace(" ","")] = args.Button.Pressed;
+                ShownXenos[xeno.ID] = args.Button.Pressed;
             }
         }
         UpdateTierChilds();
