@@ -1,6 +1,6 @@
 - type: entity
   parent: RMCBaseSentry
-  id: RNMCSentryPVE
+  id: RMCSentryPVE
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   suffix: PVE
@@ -36,39 +36,3 @@
 
 - type: Tag
   id: RMCSentryPVE
-
-- type: entity
-  parent: RMCBaseSentry
-  id: RNMCSentryPVEDamaged
-  name: damaged UN 571-C sentry gun
-  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
-  suffix: PVE, Damaged
-  components:
-  - type: Icon
-    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: normal_uac_sentry_handheld
-  - type: NpcFactionMember
-    factions:
-    - RMCDumb
-  - type: UserIFF
-    faction: FactionMarine
-  - type: XenoCrusherChargable
-    setDamage:
-      types:
-        Blunt: 40
-  - type: Tag
-    tags:
-    - RMCSentry
-  - type: Gun
-    fireRate: 5
-    soundGunshot: /Audio/_RNMC14/Weapons/Guns/Gunshots/gun_smartgun1.ogg
-  - type: HTN
-    rootTask:
-      task: RMCSentryCompound
-    blackboard:
-      SoundTargetInLOS: !type:SoundPathSpecifier
-        path: /Audio/_RNMC14/Effects/twobeep.ogg
-      VisionRadius: !type:Single
-        3.0
-      AggroVisionRadius: !type:Single
-        3.0

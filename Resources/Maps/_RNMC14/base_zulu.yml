@@ -116,7 +116,6 @@ entities:
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
       enabled: True
-      inherent: True
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1200
       weatherEvents:
