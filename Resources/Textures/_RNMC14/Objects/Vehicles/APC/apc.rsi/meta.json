@@ -1,0 +1,61 @@
+{
+  "copyright" : "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3930ec0698c7acdda76e24cd226ed5a4e1e24d0d/icons/obj/vehicles/apc.dmi, and cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/a5ab856bebc50df699b230a266246f5f76e54e9f/icons/obj/vehicles/movieapc.dmi, and edited by Merrokitsune for RNMC-14.",
+  "license" : "CC-BY-SA-3.0",
+  "version": 1,
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 4
+    },
+    {
+      "name": "base-damaged",
+      "directions": 4
+    },
+    {
+      "name": "damage_visuals",
+      "directions": 4
+    },
+    {
+      "name": "wheels-idle",
+      "directions": 4
+    },
+    {
+      "name": "wheels-moving",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "wheels-broken",
+      "directions": 4
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     mode: PlaceFree
   components:
   - type: Sprite
-    sprite: _RNMC14/Objects/Vehicles/parts.rsi
+    sprite: _RNMC14/Objects/Vehicles/Speed_Buggy/parts.rsi
     noRot: true
     layers:
     - state: speed-buggy_0
@@ -98,7 +98,7 @@
     mode: PlaceFree
   components:
   - type: Sprite
-    sprite: _RNMC14/Objects/Vehicles/parts.rsi
+    sprite: _RNMC14/Objects/Vehicles/Speed_Buggy/parts.rsi
     noRot: true
     layers:
     - state: speed-buggy_destroyed
@@ -257,7 +257,7 @@
     mode: PlaceFree
   components:
   - type: Sprite
-    sprite: _RNMC14/Objects/Vehicles/parts.rsi
+    sprite: _RNMC14/Objects/Vehicles/Speed_Buggy/parts.rsi
     noRot: true
     layers:
     - state: speed-buggy_14

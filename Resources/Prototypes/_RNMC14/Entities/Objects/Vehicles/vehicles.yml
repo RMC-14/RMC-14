@@ -13,7 +13,7 @@
         RMCSkillVehicles: 1
   - type: Pullable
   - type: Sprite
-    sprite: _RNMC14/Objects/Vehicles/speed_buggy.rsi
+    sprite: _RNMC14/Objects/Vehicles/Speed_Buggy/speed_buggy.rsi
     drawdepth: Mobs
     noRot: true
     layers:

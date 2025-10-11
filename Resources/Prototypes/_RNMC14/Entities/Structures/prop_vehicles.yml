@@ -1,0 +1,42 @@
+- type: entity
+  parent: RMCPropVehicleBase
+  id: RNMCPropVehicleHugeBase
+  abstract: true
+  components:
+  - type: Transform
+    noRot: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.1,-2.0,1.1,2.0"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RNMCPropVehicleHugeBase
+  id: RNMCPropVehicleAPCUNMC
+  name: m46 armored personnel carrier
+  description: A M46 Armored Personnel Carrier. An armored transport with four big wheels. It's locked and seems to be broken down, forget driving this.
+  suffix: Prop, UNMC
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/APC/apc.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+    - state: wheels-idle
+
+- type: entity
+  parent: RNMCPropVehicleHugeBase
+  id: RNMCPropVehicleAPCHMMC
+  name: mark 4 armored personnel carrier
+  description: A Mark 4 Armored Personnel Carrier. An armored transport with eight wheels and used by His Majesty's Marine Corps. It's locked and seems to be broken down, forget driving this.
+  suffix: Prop, UNMC
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/HMMC_Apc/hmmc_apc.rsi
+    offset: 0, 0
+    state: base
