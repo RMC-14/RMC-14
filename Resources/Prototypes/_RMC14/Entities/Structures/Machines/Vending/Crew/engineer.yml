@@ -93,6 +93,10 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
+    - name: Spare Gear
+      entries:
+      - id: RMCSynthResetKey
+        points: 20
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
