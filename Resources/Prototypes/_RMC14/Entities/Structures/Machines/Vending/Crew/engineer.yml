@@ -96,7 +96,7 @@
     - name: Spare Gear
       entries:
       - id: RMCSynthResetKey
-        points: 20
+        amount: 2
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
