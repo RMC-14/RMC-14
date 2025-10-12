@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321, gp_spawn is a modification of dp_spawn by github BreakpointDebug1234",
   "size": {
     "x": 32,
     "y": 32
@@ -395,6 +395,9 @@
     {
       "name": "xo_spawn"
     },
+	{
+	  "name": "aso_spawn"
+	},
     {
       "name": "so_spawn"
     },
@@ -402,7 +405,10 @@
       "name": "io_spawn"
     },
     {
-      "name": "po_spawn"
+      "name": "dp_spawn"
+    },
+	{
+      "name": "gp_spawn"
     },
     {
       "name": "dcc_spawn"

@@ -38,12 +38,8 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivorLV624CorporateDomeGoon
-  - type: Sprite # TODO: Replace with landmark sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv_wy
+  - type: Sprite
+    state: surv_wy
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

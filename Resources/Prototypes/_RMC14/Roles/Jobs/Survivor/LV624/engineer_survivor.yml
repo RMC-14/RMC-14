@@ -39,16 +39,12 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorLV624Engineer
-  name: survivor icb spawn point
+  name: lv624 engineer spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+  - type: Sprite
+    state: surv_wy
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

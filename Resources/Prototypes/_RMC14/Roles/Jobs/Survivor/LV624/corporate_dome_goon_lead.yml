@@ -4,7 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
   spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
-  startingGear: RMCGearSurvivorGoon
+  startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
   special:
@@ -33,6 +33,28 @@
     - type: MarineOrders
   greeting: rmc-job-greeting-corporate-dome-goon-lead
 
+- type: startingGear
+  id: RMCGearSurvivorGoonLead
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteran
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack
+    belt: RMCM77BeltPMCFilled
+    suitstorage: RMCWeaponRifleM54CWhite
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorLV624CorporateDomeGoonLead
@@ -40,12 +62,8 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivorLV624CorporateDomeGoonLead
-  - type: Sprite # TODO: Replace with landmark sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv_wy
+  - type: Sprite
+    state: surv_wy
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

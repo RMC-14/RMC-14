@@ -97,12 +97,8 @@
   components:
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
-  - type: Sprite # TODO: Replace with landmark sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: auxiliary_support_officer
+  - type: Sprite
+    state: aso_spawn
 
 - type: entity
   parent: CMGuidebookRole
