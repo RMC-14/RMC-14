@@ -38,7 +38,7 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressWeYa
-    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
     outerClothing: CMArmorM4PMCCorporate
     gloves: RMCHandsVeteran
     head: ArmorHelmetPMCCorporate

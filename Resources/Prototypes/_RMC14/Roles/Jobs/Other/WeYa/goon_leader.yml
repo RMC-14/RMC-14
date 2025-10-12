@@ -7,7 +7,7 @@
   playTimeTracker: RMCJobWeYaGoonLead
   ranks:
     RMCRankWeYaOperator: []
-  startingGear: RMCJobWeYaGoonLead
+  startingGear: RMCJobWeYaGoonLeadLoadout
   icon: CMJobIconLiaison
   joinNotifyCrew: false
   accessGroups:
@@ -39,7 +39,7 @@
   id: RMCJobWeYaGoonLead
 
 - type: startingGear
-  id: RMCJobWeYaGoonLead
+  id: RMCJobWeYaGoonLeadLoadout
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressGoonLeader
