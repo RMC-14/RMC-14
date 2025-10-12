@@ -69,10 +69,10 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
         _solution.RemoveReagent(solutionEnt, reagentId, amount);
     }
 
-    public void RemoveBloodstreamAlcohols(EntityUid body, FixedPoint2 amount)
+    public bool RemoveBloodstreamAlcohols(EntityUid body, FixedPoint2 amount)
     {
         if (!TryGetChemicalSolution(body, out var solutionEnt, out _))
-            return;
+            return false;
 
         _reagentsToRemove.Clear();
         foreach (var content in solutionEnt.Comp.Solution.Contents)
@@ -86,9 +86,13 @@ public abstract class SharedRMCBloodstreamSystem : EntitySystem
             _reagentsToRemove.Add(content.Reagent);
         }
 
+        var alcoholRemoved = _reagentsToRemove.Count > 0;
+
         foreach (var remove in _reagentsToRemove)
         {
             _solution.RemoveReagent(solutionEnt, remove, amount);
         }
+
+        return alcoholRemoved;
     }
 }

@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Drowsiness;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.FixedPoint;
@@ -33,8 +34,13 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         hungerSystem.ModifyHunger(target, -PotencyPerSecond * 5);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        // TODO RMC14 If alcohol is being removed: min(M.confused + potency, 10 * potency) and min(M.drowsyness + potency, 15 * potency)
+        var alcoholRemoved = bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
+
+        if (!alcoholRemoved)
+            return;
+        var status = args.EntityManager.System<StatusEffectsSystem>();
+        // TODO RMC14 /datum/symptom/confusion
+        status.TryAddStatusEffect<DrowsinessStatusEffectComponent>(args.TargetEntity, "Drowsiness", TimeSpan.FromSeconds((float)(potency * 15)), true);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
