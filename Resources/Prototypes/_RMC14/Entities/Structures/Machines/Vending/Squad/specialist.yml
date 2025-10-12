@@ -199,6 +199,10 @@
       - id: CMBackpackMarine
       - id: CMSatchelMarine
         recommended: true
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: RMCArmorVestSpecialist
     - name: Belt
       choices: { CMBelt: 1 }
       entries:

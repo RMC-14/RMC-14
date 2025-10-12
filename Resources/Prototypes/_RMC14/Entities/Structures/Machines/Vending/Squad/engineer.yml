@@ -228,6 +228,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestCombatTechnician
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants

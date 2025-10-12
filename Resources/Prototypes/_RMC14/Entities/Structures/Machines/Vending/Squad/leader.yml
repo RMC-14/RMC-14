@@ -238,6 +238,7 @@
         recommended: true
       - id: RMCArmorM4Zipties
         name: leader M4 pattern marine armor (zipties)
+      - id: RMCArmorVestSquadLeader
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
