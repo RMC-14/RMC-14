@@ -17,11 +17,13 @@ public sealed class LarvaPromptWindow : DefaultWindow
 
     public event System.Action? AcceptButtonPressed;
     public event System.Action? DeclineButtonPressed;
+    public bool TimedOut { get; private set; }
 
     public LarvaPromptWindow(TimeSpan timeout)
     {
         Title = Loc.GetString("rmc-xeno-larva-prompt-title");
         _remainingTime = (float)timeout.TotalSeconds;
+        TimedOut = false;
 
         SetSize = new Vector2(400, 200);
         MinSize = new Vector2(400, 200);
@@ -104,7 +106,8 @@ public sealed class LarvaPromptWindow : DefaultWindow
 
             if (_remainingTime <= 0.0f)
             {
-                Timer.Spawn(0, Close); //better way to do this i just dont know it
+                TimedOut = true;
+                Timer.Spawn(0, Close); //yeah....
             }
         }
     }

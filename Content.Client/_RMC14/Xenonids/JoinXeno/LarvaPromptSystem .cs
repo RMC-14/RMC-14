@@ -13,6 +13,7 @@ public sealed class LarvaPromptSystem : SharedJoinXenoSystem
 
     private LarvaPromptWindow? _promptWindow;
     private NetEntity? _currentPromptLarva;
+    private bool _isClosingDueToTimeout;
 
     public override void Initialize()
     {
@@ -40,6 +41,7 @@ public sealed class LarvaPromptSystem : SharedJoinXenoSystem
         }
 
         _currentPromptLarva = ev.Larva;
+        _isClosingDueToTimeout = false;
 
         var timeoutDuration = ev.TimeoutAt - _timing.CurTime;
         if (timeoutDuration <= TimeSpan.Zero)
@@ -53,7 +55,6 @@ public sealed class LarvaPromptSystem : SharedJoinXenoSystem
         _promptWindow.OnClose += OnPromptClosed;
 
         _audio.PlayGlobal("/Audio/_RMC14/Xeno/alien_distantroar_3.ogg", Filter.Local(), false);
-
     }
 
     protected override void OnLarvaPromptCancelled(LarvaPromptCancelledEvent ev)
@@ -84,7 +85,9 @@ public sealed class LarvaPromptSystem : SharedJoinXenoSystem
 
     private void OnPromptClosed()
     {
-        if (_currentPromptLarva != null)
+        if (_currentPromptLarva != null &&
+            !_isClosingDueToTimeout &&
+            (_promptWindow == null || !_promptWindow.TimedOut))
         {
             DeclineLarvaPrompt(_currentPromptLarva.Value);
         }
@@ -102,5 +105,6 @@ public sealed class LarvaPromptSystem : SharedJoinXenoSystem
             _promptWindow = null;
         }
         _currentPromptLarva = null;
+        _isClosingDueToTimeout = false;
     }
 }

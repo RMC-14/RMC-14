@@ -248,6 +248,7 @@ public abstract class SharedJoinXenoSystem : EntitySystem
         if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
 
+        // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
         if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
         {
             var timeSinceDeath = _timing.CurTime.Subtract(ghostComp.TimeOfDeath);

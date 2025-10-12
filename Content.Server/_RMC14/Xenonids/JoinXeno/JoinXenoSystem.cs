@@ -319,22 +319,33 @@ public sealed class JoinXenoSystem : SharedJoinXenoSystem
         var cancelEv = new LarvaPromptCancelledEvent(expired.LarvaNetEntity, "timeout");
         RaiseNetworkEvent(cancelEv, session);
 
-        _popup.PopupEntity(
-            Loc.GetString("rmc-xeno-larva-prompt-timeout"),
-            session.AttachedEntity ?? EntityUid.Invalid,
-            session.AttachedEntity ?? EntityUid.Invalid,
-            PopupType.MediumCaution);
-
-        var query = EntityQueryEnumerator<HiveComponent, LarvaQueueComponent>();
-        while (query.MoveNext(out var hiveId, out var hive, out var queue))
+        if (session.AttachedEntity != null)
         {
-            if (!queue.PlayerQueue.Contains(expired.UserId))
-            {
-                queue.PlayerQueue.Enqueue(expired.UserId);
-                Dirty(hiveId, queue);
-                SendQueueStatusToAll((hiveId, hive), (hiveId, queue));
-                break;
-            }
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-larva-prompt-timeout"),
+                session.AttachedEntity.Value,
+                session.AttachedEntity.Value,
+                PopupType.MediumCaution);
+        }
+
+        if (!TryGetEntity(expired.LarvaNetEntity, out var larva))
+            return;
+
+        var hiveEntity = _hive.GetHive(larva.Value);
+        if (hiveEntity == null)
+            return;
+
+        if (!TryComp<HiveComponent>(hiveEntity.Value.Owner, out var hive))
+            return;
+
+        if (!TryComp<LarvaQueueComponent>(hiveEntity.Value.Owner, out var queue))
+            return;
+
+        if (!queue.PlayerQueue.Contains(expired.UserId))
+        {
+            queue.PlayerQueue.Enqueue(expired.UserId);
+            Dirty(hiveEntity.Value.Owner, queue);
+            SendQueueStatusToAll((hiveEntity.Value.Owner, hive), (hiveEntity.Value.Owner, queue));
         }
     }
 
