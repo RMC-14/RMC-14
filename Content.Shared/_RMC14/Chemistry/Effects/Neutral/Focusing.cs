@@ -1,8 +1,11 @@
 using Content.Shared._RMC14.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Drunk;
 using Content.Shared.EntityEffects;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Speech.Muting;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
@@ -13,7 +16,11 @@ public sealed partial class Focusing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=green]{PotencyPerSecond}[/color] units of alcoholic substances from the bloodstream.\n" +
+        var focusing = ActualPotency >= 3
+            ? ". Also powerful enough to cure mute and blindness."
+            : ".";
+
+        return $"Removes [color=green]{PotencyPerSecond}[/color] units of alcoholic substances and [color=green]{PotencyPerSecond * 2}[/color] seconds of drunkenness{focusing}\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
                $"Critical overdoses cause [color=red]{PotencyPerSecond * 3}[/color] toxin damage";
     }
@@ -21,8 +28,15 @@ public sealed partial class Focusing : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
+        var drunkSystem = args.EntityManager.System<SharedDrunkSystem>();
+
         bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        // remove drunkness and a ton of CC effects
+        drunkSystem.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
+
+        if (!(ActualPotency >= 3))
+            return;
+        args.EntityManager.EntitySysManager.GetEntitySystem<BlindableSystem>().AdjustEyeDamage(args.TargetEntity, -1);
+        args.EntityManager.RemoveComponent<MutedComponent>(args.TargetEntity);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

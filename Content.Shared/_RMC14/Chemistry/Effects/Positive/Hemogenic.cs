@@ -24,7 +24,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
                        $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] additional nutrient loss";
 
         return ActualPotency > 3
-            ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage.\n{baseText}"
+            ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage, and slows you down.\n{baseText}"
             : baseText;
     }
 
@@ -38,7 +38,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
             hungerSystem.GetHunger(hungerComponent) < 200)
             return;
 
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond); // TODO RMC14 Yuatja get no hunger drain.
 
         if (entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
         {
@@ -46,7 +46,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
             bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
         }
 
-        if (!(ActualPotency > 3))// TODO RMC14 Also check if blood volume is over 560 + 10 and if they're a Yautja.
+        if (!(ActualPotency > 3)) // TODO RMC14 Also check if blood volume is over 570 and if they're not a Yautja.
             return;
 
         var damage = new DamageSpecifier();

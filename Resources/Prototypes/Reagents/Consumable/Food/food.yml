@@ -15,7 +15,7 @@
         potency: 1
       - !type:Nutritious
         potency: 2
-        nutrimentfactor: 1.5 # 15 * REAGENTS_METABOLISM
+        nutrimentFactor: 15
       - !type:Hemogenic
         potency: 1
   pricePerUnit: 2
