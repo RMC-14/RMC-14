@@ -22,6 +22,7 @@
       takeAll: CMEquipment
       entries:
       - id: CMArmorHelmetM30
+      - id: RMCHeadCapPatrol
       - id: CMSatchel
       - id: CMMRE
     - name: Gloves

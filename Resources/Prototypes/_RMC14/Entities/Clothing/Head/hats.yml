@@ -281,6 +281,11 @@
           True: {visible: false}
           False: {visible: true}
 
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapPatrol
+  name: patrol cap
+  description: A casual cap issued as part of the non-combat uniform. While it only protects from the sun, it's much more comfortable than a helmet.
 
 - type: entity
   parent: RMCHeadCapFlippable
