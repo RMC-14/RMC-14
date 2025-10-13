@@ -24,7 +24,7 @@ public sealed class RMCSpriteVisualizerSystem : VisualizerSystem<SpriteSetRender
             args.Sprite.RenderOrder = (uint) order;
 
         if (AppearanceSystem.TryGetData(uid, SpriteSetRenderOrderComponent.Appearance.Offset, out Vector2 offset, args.Component))
-            args.Sprite.Offset = offset;
+            _sprite.SetOffset((uid, args.Sprite), offset);
     }
 
     public override void FrameUpdate(float frameTime)

@@ -1,7 +1,12 @@
 - files: ["PyrotechnicianXeno.png"]
-  license: "CC-BY-SA-3.0"
+  license: "CC-BY-SA-4.0"
   copyright: "Cleansing Fire by JirroZ https://www.instagram.com/jirroreal/, modified by DrSmugleaf"
   source: "https://www.instagram.com/p/C1ooB5lgU5n/?img_index=1"
+
+- files: ["Judgement_Day.png"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Judgment Day by JirroZ https://www.instagram.com/jirroreal/"
+  source: "https://www.instagram.com/jirroreal/"
 
 - files: ["from_fobbiton_with_love.png"]
   license: "CC-BY-SA-4.0"
@@ -52,3 +57,18 @@
   license: "CC-BY-4.0"
   copyright: "Made by p.r.ospector(Discord)"
   source: "https://www.instagram.com/prospectorares/"
+
+- files: ["LiquorCabinetsLastStand.png"]
+  license: "CC-BY-4.0"
+  copyright: "Art © 2025 by Kihiba is licensed under CC BY 4.0"
+  source: "https://www.instagram.com/kihiba_kun/"
+
+- files: ["APushTooFar.png"]
+  license: "CC-BY-NC-4.0"
+  copyright: "Made by Monotheonist (Bluesky, Newgrounds, Discord)"
+  source: "https://www.newgrounds.com/art/view/monotheonist/a-push-too-far"
+
+- files: ["WEYALobby.png"]
+  license: "CC-BY-4.0"
+  copyright: "Made by SharkSnake98 on Discord. WEYA Logo made by Noisrevni on Discord, Coloured by thereisabear on Discord. CRT Filter sourced from https://forums.libretro.com/t/scanline-pattern/34857."
+  source: "https://discord.com/channels/1168210010233376858/1168217254358425790/1423096469921071127"

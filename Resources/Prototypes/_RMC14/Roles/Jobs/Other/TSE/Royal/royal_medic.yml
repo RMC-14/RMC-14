@@ -1,0 +1,93 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesMedic
+  name: rmc-job-name-rcm-medic
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalMedic
+  ranks:
+    RMCRankTSECorporal: [ ]
+  startingGear: RMCGearRoyalMedic
+  icon: "RMCJobIconRoyalMedic"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Medical Technician
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1 
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidRoyalMarinesMedic
+  name: royal crown marines ghost role medic
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalMarinesMedic
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rcm-medic
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
+    reregister: false
+    job: CMRoyalMarinesMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+  
+- type: startingGear
+  id: RMCGearRoyalMedic
+  equipment:
+    head: RMCHeadRoyalHelmet # TODO RMC14 TSE medic helmet
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: RMCHeadsetRoyalMarine
+    jumpsuit: RMCJumpsuitMarineRoyalMedic # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalLightFilled
+    gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarinesMedic
+    belt: RMCBeltMedicBagRoyal
+    back: RMCSatchelLightpackFilledRoyalMedic
+    pocket1: RMCPouchReagentCanisterTricordrazineRevival
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_medic

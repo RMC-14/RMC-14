@@ -174,12 +174,6 @@
           events:
           - !type:TechUnlockTierEvent
             tier: 1
-          - !type:TechAnnounceEvent
-            author: ALMAYER DEFCON LEVEL INCREASED
-            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 1.
-
-              LEVEL 1 assets have been authorised to handle the situation."
-            sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
@@ -234,8 +228,8 @@
           increase: 2
           repurchasable: true
           events:
-          - !type:TechWarheadEvent
-            warhead: RMCOrbitalCannonWarheadExplosive
+          - !type:TechLogisticsDeliveryEvent
+            object: RMCOrbitalCannonWarheadExplosive
           - !type:TechAnnounceEvent
             author: ALMAYER SPECIAL ASSETS AUTHORIZED
             message: Additional Orbital Bombardment warheads (HE) have been delivered to Requisitions' ASRS.
@@ -248,8 +242,8 @@
           increase: 2
           repurchasable: true
           events:
-          - !type:TechWarheadEvent
-            warhead: RMCOrbitalCannonWarheadIncendiary
+          - !type:TechLogisticsDeliveryEvent
+            object: RMCOrbitalCannonWarheadIncendiary
           - !type:TechAnnounceEvent
             author: ALMAYER SPECIAL ASSETS AUTHORIZED
             message: Additional Orbital Bombardment warheads (Incendiary) have been delivered to Requisitions' ASRS.
@@ -262,8 +256,8 @@
           increase: 2
           repurchasable: true
           events:
-          - !type:TechWarheadEvent
-            warhead: RMCOrbitalCannonWarheadCluster
+          - !type:TechLogisticsDeliveryEvent
+            object: RMCOrbitalCannonWarheadCluster
           - !type:TechAnnounceEvent
             author: ALMAYER SPECIAL ASSETS AUTHORIZED
             message: Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
@@ -310,7 +304,35 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: overshield
+        - name: Unlock Tier 4
+          description: Transitions the tree to another tier.
+          cost: 5
+          events:
+          - !type:TechUnlockTierEvent
+            tier: 4
+          - !type:TechAnnounceEvent
+            author: ALMAYER DEFCON LEVEL INCREASED
+            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4.
 
+              LEVEL 4 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: upgrade
+#      -
+#        - name: Nuclear Device
+#          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
+#          cost: 5
+#          timeLock: 3m
+#          events:
+#          - !type:TechLogisticsDeliveryEvent
+#            object: RMCNuke
+#          - !type:TechAnnounceEvent
+#            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+#            message: The deployment of Nuclear Ordnance have been authorized and will be delivered to the Requisitions Department, via ASRS.
+#          icon:
+#            sprite: _RMC14/Interface/tech_tree.rsi
+#            state: nuke
 - type: Tag
   id: RMCIntelItem
 

@@ -37,7 +37,7 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, out EntityUid? blocker, bool hitBlocker = false)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false)
     {
         blocker = null;
         start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
@@ -45,6 +45,9 @@ public sealed class LineSystem : EntitySystem
         var tiles = new List<LineTile>();
         if (!start.TryDistance(EntityManager, _transform, end, out var distance))
             return tiles;
+
+        if (range != null)
+            distance = Math.Min(range.Value, distance);
 
         var distanceX = end.X - start.X;
         var distanceY = end.Y - start.Y;
