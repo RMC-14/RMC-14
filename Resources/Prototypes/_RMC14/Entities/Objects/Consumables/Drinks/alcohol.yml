@@ -46,7 +46,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCGrenadine
+        - ReagentId: Grenadine
           Quantity: 100
 
 - type: entity
@@ -62,7 +62,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCTequila
+        - ReagentId: Tequila
           Quantity: 100
 
 - type: entity
@@ -78,7 +78,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCAbsinthe
+        - ReagentId: Absinthe
           Quantity: 100
 
 - type: entity
@@ -94,7 +94,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCCognac
+        - ReagentId: Cognac
           Quantity: 100
 
 - type: entity
@@ -110,7 +110,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: RMCSpecialBlendWhiskey
+        - ReagentId: SpecialBlendWhiskey
           Quantity: 50
 
 - type: entity
@@ -126,7 +126,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCGin
+        - ReagentId: Gin
           Quantity: 100
 
 - type: entity
@@ -142,7 +142,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCGildlager
+        - ReagentId: Gildlager
           Quantity: 100
 
 - type: entity
@@ -158,7 +158,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCCoffeeLiqueur
+        - ReagentId: CoffeeLiqueur
           Quantity: 100
 
 - type: entity
@@ -174,7 +174,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCVermouth
+        - ReagentId: Vermouth
           Quantity: 100
 
 - type: entity
@@ -190,7 +190,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCMelonLiquor
+        - ReagentId: MelonLiquor
           Quantity: 100
 
 - type: entity
@@ -206,7 +206,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCBlueCuracao
+        - ReagentId: BlueCuracao
           Quantity: 100
 
 - type: entity
@@ -222,7 +222,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCPatron
+        - ReagentId: Patron
           Quantity: 100
 
 - type: entity
@@ -238,7 +238,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCWine
+        - ReagentId: Wine
           Quantity: 100
 
 - type: entity
@@ -254,7 +254,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCRum
+        - ReagentId: Rum
           Quantity: 100
 
 - type: entity
@@ -270,7 +270,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCSake
+        - ReagentId: Sake
           Quantity: 100
 
 - type: entity
@@ -286,7 +286,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCVodka
+        - ReagentId: Vodka
           Quantity: 100
 
 - type: entity
@@ -302,7 +302,7 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: RMCWhiskey
+        - ReagentId: Whiskey
           Quantity: 100
 
 - type: Tag
