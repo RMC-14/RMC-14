@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Drowsiness;
+using Content.Shared.Drunk;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition.EntitySystems;
@@ -20,6 +20,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients and [color=green]{PotencyPerSecond}[/color] units of alcohol from the bloodstream.\n" +
+               $"Increases alcohol metabolism by [color=green]{PotencyPerSecond}[/color] units.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and some vomiting.\n" +
                $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";
     }
@@ -37,9 +38,9 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
         if (!alcoholRemoved)
             return;
-        var status = args.EntityManager.System<StatusEffectsSystem>();
-        // TODO RMC14 /datum/symptom/confusion
-        status.TryAddStatusEffect<DrowsinessStatusEffectComponent>(args.TargetEntity, "Drowsiness", TimeSpan.FromSeconds((float)(potency * 15)), true);
+
+        var drunkSystem = args.EntityManager.System<SharedDrunkSystem>();
+        drunkSystem.TryApplyDrunkenness(args.TargetEntity, PotencyPerSecond * 10);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

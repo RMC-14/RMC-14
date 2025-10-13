@@ -6,6 +6,7 @@
   physicalDesc: reagent-physical-desc-acidic
   color: "#669900"
   unknown: true
+  toxin: true
   metabolisms:
     Poison:
       #TODO hurts on inject equal to amount
@@ -29,6 +30,7 @@
   desc: reagent-desc-rmclexorin
   physicalDesc: reagent-physical-desc-pungent
   color: "#C8A5DC"
+  toxin: true
   overdose: 30
   criticalOverdose: 50
   metabolisms:
@@ -157,6 +159,7 @@
   desc: rmc-reagent-desc-cyanide
   physicalDesc: reagent-physical-desc-pungent
   color: "#CF3600"
+  toxin: true
   metabolisms:
     Poison:
       metabolismRate: 0.2
