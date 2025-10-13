@@ -74,5 +74,5 @@ rmc-job-description-spp-xo = A Executive officer for the SPP's military. You ans
 rmc-job-name-spp-co= Commanding Officer
 rmc-job-prefix-spp-co = CO
 rmc-ghost-name-spp-co= SPP CO
-rmc-job-description-spp-so = The commanding officer of an SPP unit, you answer directly to SPP high command.
+rmc-job-description-spp-co = The commanding officer of an SPP unit, you answer directly to SPP high command.
 
