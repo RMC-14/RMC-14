@@ -1,4 +1,4 @@
-namespace Content.Shared._RMC14.Chemistry.Events;
+namespace Content.Shared._RMC14.Chemistry;
 
 [ByRefEvent]
 public readonly record struct RMCVomitEvent(

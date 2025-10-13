@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Body;
-using Content.Shared._RMC14.Chemistry.Events;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;

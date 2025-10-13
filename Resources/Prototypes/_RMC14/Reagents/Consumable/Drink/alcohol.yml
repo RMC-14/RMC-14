@@ -1,6 +1,5 @@
 - type: reagent
   id: RMCBaseAlcohol
-  parent: BaseAlcohol
   abstract: true
   alcohol: true
 
