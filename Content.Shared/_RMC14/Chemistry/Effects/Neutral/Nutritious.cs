@@ -26,8 +26,8 @@ public sealed partial class Nutritious : RMCChemicalEffect
             return;
 
         var updatedFactor = NutrimentFactor > 0
-            ? NutrimentFactor
+            ? NutrimentFactor * (float)args.Quantity
             : Potency;
-        hungerSystem.ModifyHunger(target, updatedFactor * (float)args.Quantity * ActualPotency);
+        hungerSystem.ModifyHunger(target, updatedFactor * ActualPotency);
     }
 }

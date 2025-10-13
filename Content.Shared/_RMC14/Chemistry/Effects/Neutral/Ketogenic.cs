@@ -1,10 +1,10 @@
 using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Chemistry.Events;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Drowsiness;
 using Content.Shared.EntityEffects;
-using Content.Shared.EntityEffects.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.StatusEffect;
@@ -59,8 +59,8 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         if (!random.Prob(0.025f * ActualPotency))
             return;
 
-        var vomitEffect = new ChemVomit();
-        vomitEffect.Effect(args);
+        var vomitEvent = new RMCVomitEvent(target);
+        entityManager.EventBus.RaiseEvent(EventSource.Local, ref vomitEvent);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
