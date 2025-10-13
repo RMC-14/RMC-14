@@ -62,8 +62,8 @@ rmc-job-prefix-spp-squadlead = SL
 rmc-ghost-name-spp-squadlead = SPP Squad Lead
 
 rmc-job-name-spp-so= Staff Officer
-rmc-job-prefix-spp-xo = SO
-rmc-ghost-name-spp-xo= SPP SO
+rmc-job-prefix-spp-so = SO
+rmc-ghost-name-spp-so= SPP SO
 rmc-job-description-spp-so = A Staff Officer for the SPP's military. You answer directly to the XO and CO.
 
 rmc-job-name-spp-xo= Executive Officer
