@@ -19,6 +19,16 @@
     Water: 2
 
 - type: reaction
+  id: RMCEthanoloxidationV2 # Upstream Ethanol
+  reactants:
+    CMEthylredoxrazine:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    Water: 2
+
+- type: reaction
   id: RMCVirusFood
   reactants:
     Water:

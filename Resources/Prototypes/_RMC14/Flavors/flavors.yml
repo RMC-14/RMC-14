@@ -4,7 +4,7 @@
   description: flavor-base-savory
 
 - type: flavor
-  id: rmcwhiskey
+  id: rmcspecialwhiskey
   flavorType: Complex
   description: rmc-flavor-complex-whiskey
 
