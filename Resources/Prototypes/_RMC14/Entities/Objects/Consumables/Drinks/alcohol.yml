@@ -110,7 +110,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: SpecialBlendWhiskey
+        - ReagentId: RMCSpecialBlendWhiskey
           Quantity: 50
 
 - type: entity
