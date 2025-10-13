@@ -79,6 +79,46 @@
 # THE RANKS ABOVE ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
 
 - type: rank
+  id: RMCRankSPPPoliticalKommissar
+  name: Political Kommissar
+  prefix: Kom.
+  paygrade: P2
+
+- type: rank
+  id: RMCRankSPPPoliticalBattalionKommissar
+  name: Battalion Kommissar
+  prefix: Batt. Kom.
+  paygrade: P3
+
+- type: rank
+  id: RMCRankSPPPoliticalSrBattalionKommissar
+  name: Senior Battalion Kommissar
+  prefix: Sr. Batt. Pol.
+  paygrade: P4
+
+- type: rank
+  id: RMCRankSPPPoliticalRegimentalKommissar
+  name: Regimental Kommissar
+  prefix: Reg. Pol.
+  paygrade: P5
+
+- type: rank
+  id: RMCRankSPPPoliticalBrigadeKommissar
+  name: Brigade Kommissar
+  prefix: Brig. Kom.
+  paygrade: P6
+
+#Above ranks could be seen regularly, rank below is political Kommisar High-comm equivelant, think Bgen or MajorGen.
+
+- type: rank
+  id: RMCRankSPPPoliticalDivisionKommissar
+  name: Division Kommissar
+  prefix: Div. Kom.
+  paygrade: P7
+
+#Above Ranks are political, and have no direct control over units, but serve as advisors to Officers and Enlisted and thus have indirect control.
+
+- type: rank
   id: RMCRankSPPMladshiyLeytenant
   name: Mladshiy Leytenant
   prefix: MsLt.
@@ -101,12 +141,6 @@
   name: Mayjor
   prefix: May.
   paygrade: O4
-
-- type: rank
-  id: RMCRankSPPPoliticalCommissar
-  name: Political Commissar
-  prefix: Pol.
-  # This is a civilian rank, so it doesn't have a paygrade
 
 - type: rank
   id: RMCRankSPPPodpolkovnik

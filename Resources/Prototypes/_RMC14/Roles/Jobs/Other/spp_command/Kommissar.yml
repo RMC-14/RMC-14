@@ -1,0 +1,452 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPKommissar
+  name: rmc-job-name-spp-kommissar
+  description: rmc-job-description-spp-kommissar
+  playTimeTracker: RMCJobSPPKommissar
+  ranks:
+    RMCRankSPPPoliticalKommissar: []
+  startingGear: RMCGearSPPKommissar
+  icon: "RMCJobIconSPPKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-kommissar
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPKommissarNeutral
+  name: Kommissar ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPKommissar
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPKommissar
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-kommissar
+    description: rmc-ghost-role-information-spp-kommissar-description
+    rules: rmc-ghost-role-information-spp-kommissar-rules
+    reregister: false
+    job: RMCSPPKommissar
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPKommissar
+  equipment:
+    head: CMHeadCapSPPPolBlack
+    ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
+    jumpsuit: RMCJumpsuitSPPOfficerShirt
+    outerClothing: RMCCoatKommissarShortBlack
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    id: RMCIDSPPCard
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    back: CMSatchel
+    pocket1: RMCPouchAutoinjectorFill
+  storage:
+    back:
+    - RMCBoxZiptie
+    - RMCSpeedLoaderZHNK72
+    - RMCSpeedLoaderZHNK72
+
+
+- type: playTimeTracker
+  id: RMCJobSPPKommissar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_kommissar
+
+#Above is base Kommissar, paygrade p2.
+
+- type: job
+  parent: CMJobBase
+  id: RMCSPPBattalionKommissar
+  name: rmc-job-name-spp-battalion-kommissar
+  description: rmc-job-description-spp-battalion-kommissar
+  playTimeTracker: RMCJobSPPBattalionKommissar
+  ranks:
+    RMCRankSPPPoliticalBattalionKommissar: []
+  startingGear: RMCGearSPPKommissar
+  icon: "RMCJobIconSPPBattalionKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Battalion Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-battalion-kommissar
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPBattalionKommissarNeutral
+  name: Battalion Kommissar ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPBattalionKommissar
+
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPBattalionKommissar
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-battalion-kommissar
+    description: rmc-ghost-role-information-spp-kommissar-description
+    rules: rmc-ghost-role-information-spp-kommissar-rules
+    reregister: false
+    job: RMCSPPBattalionKommissar
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobSPPBattalionKommissar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPBattalionKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_battkommissar
+
+
+#Above is Battalion Kommissar, paygrade p3.
+
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSrBattalionKommissar
+  name: rmc-job-name-spp-sr-battalion-kommissar
+  description: rmc-job-description-spp-sr-battalion-kommissar
+  playTimeTracker: RMCJobSPPSrBattalionKommissar
+  ranks:
+    RMCRankSPPPoliticalSrBattalionKommissar: []
+  startingGear: RMCGearSPPKommissar
+  icon: "RMCJobIconSPPSrBattalionKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Sr Battalion Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-sr-battalion-kommissar
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPSrBattalionKommissarNeutral
+  name: Sr. Battalion. Kommissar ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPSrBattalionKommissar
+
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPSrBattalionKommissar
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-sr-battalion-kommissar
+    description: rmc-ghost-role-information-spp-kommissar-description
+    rules: rmc-ghost-role-information-spp-kommissar-rules
+    reregister: false
+    job: RMCSPPSrBattalionKommissar
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobSPPSrBattalionKommissar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSrBattalionKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_srbattkommissar
+
+#Above is Sr Battalion Kommissar, paygrade 4.
+
+- type: job
+  parent: CMJobBase
+  id: RMCSPPRegimentalKommissar
+  name: rmc-job-name-spp-regimental-kommissar
+  description: rmc-job-description-spp-regimental-kommissar
+  playTimeTracker: RMCJobSPPRegimentalKommissar
+  ranks:
+    RMCRankSPPPoliticalRegimentalKommissar: []
+  startingGear: RMCGearSPPKommissar
+  icon: "RMCJobIconSPPRegimentalKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Regimental Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-regimental-kommissar
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPRegimentalKommissarNeutral
+  name: Regimental Kommissar ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPRegimentalKommissar
+
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPRegimentalKommissar
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-regimental-kommissar
+    description: rmc-ghost-role-information-spp-kommissar-description
+    rules: rmc-ghost-role-information-spp-kommissar-rules
+    reregister: false
+    job: RMCSPPRegimentalKommissar
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobSPPRegimentKommissar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPRegimentalKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_regkommissar
+
+
+#Above is Regiment Kommissar, paygrade 5.
+
+
+- type: job
+  parent: CMJobBase
+  id: RMCSPPBrigadeKommissar
+  name: rmc-job-name-spp-brigade-kommissar
+  description: rmc-job-description-spp-brigade-kommissar
+  playTimeTracker: RMCJobSPPBrigadeKommissar
+  ranks:
+    RMCRankSPPPoliticalBrigadeKommissar: []
+  startingGear: RMCGearSPPKommissar
+  icon: "RMCJobIconSPPBrigadeKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Brigade Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-brigade-kommissar
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPBrigadeKommissarNeutral
+  name: Brigade Kommissar ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPBrigadeKommissar
+
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPBrigadeKommissar
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-brigade-kommissar
+    description: rmc-ghost-role-information-spp-kommissar-description
+    rules: rmc-ghost-role-information-spp-kommissar-rules
+    reregister: false
+    job: RMCSPPBrigadeKommissar
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobSPPBrigadeKommissar
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPBrigadeKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_brigkommissar
+
+#above brigade kommissar, paygrade 6.
+
+- type: job
+  parent: CMJobBase
+  id: RMCSPPDivisionKommissar
+  name: rmc-job-name-spp-division-kommissar
+  description: rmc-job-description-spp-division-kommissar
+  playTimeTracker: RMCJobSPPDivisionKommissar
+  ranks:
+    RMCRankSPPPoliticalDivisionKommissar: []
+  startingGear: RMCGearSPPDivisionKommissar
+  icon: "RMCJobIconSPPDivisionKommissar"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: SPP Division Kommissar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 1
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+        RMCSkillExecution: 1
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 2
+    - type: MarineOrders
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-division-kommissar
+  hidden: true
+
+- type: playTimeTracker
+  id: RMCJobSPPDivisionKommissar
+
+- type: startingGear
+  id: RMCGearSPPDivisionKommissar
+  equipment:
+    head: CMHeadCapSPPPolKomWhite
+    ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
+    jumpsuit: RMCJumpsuitSPPOfficerShirt
+    outerClothing: RMCCoatOfficerShortWhite
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    id: RMCIDSPPCard
+    belt: RMCMatebaBeltFilled
+    back: CMSatchel
+    pocket1: RMCPouchAutoinjectorFill
+  storage:
+    back:
+    - RMCBoxZiptie
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPDivisionKommissar
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: spp_divkommissar
+
+
+#Above is the P7 Kommissar. PLEASE only use this for events or admin shit, thanks.
+
+

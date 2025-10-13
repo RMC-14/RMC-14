@@ -1,0 +1,84 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPXO
+  name: rmc-job-name-spp-xo
+  description: rmc-job-description-spp-xo
+  playTimeTracker: CMJobSPPXO
+  ranks:
+    RMCRankSPPKapitan: []
+  startingGear: RMCGearSPPXO
+  icon: "RMCJobIconSPPXO"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  - CombatTech
+  spawnMenuRoleName: SPP XO
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - SPP
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-xo
+  hidden: true
+
+
+- type: startingGear
+  id: RMCGearSPPXO
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
+    jumpsuit: CMJumpsuitSPPOfficerAmmoFilled
+    outerClothing: RMCCoatSPPSeniorFilled
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPPCard
+    belt: RMCBeltHolsterPistolSPPT73
+    back: RMCSatchelSPP
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchGeneralLargeFilledSPPCommand
+  storage:
+    back:
+    - RMCMegaphone
+    - RMCMotionDetector
+    - CMFireExtinguisher
+    - CMMRE
+
+- type: playTimeTracker
+  id: CMJobSPPXO
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPXO
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_xo

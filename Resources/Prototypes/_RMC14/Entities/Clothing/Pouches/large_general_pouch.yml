@@ -29,3 +29,14 @@
     contents:
     - id: RMCHeadRoyalBeret
     - id: CMMaskGas # TODO RMC14 royal marine gas masks
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledSPPCommand
+  suffix: Filled, SPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragOld #TODO, port SPP grenades.
+    - id: CMGrenadeFragOld
+#TODO, someone please port Phosphorus greandes. I have naught the ability to add those.

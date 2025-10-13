@@ -71,6 +71,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
 
 - type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CMJumpsuitSPPOfficerAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSPPCommandFilled
+
+- type: entity
   parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPPaP
   name: PaP service uniform
@@ -94,6 +101,30 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPMariner
+  name: SPP Mariner Fatigues
+  description: A set of SPP fatigues specifcially designed for Marines and Mariners.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mariner.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPOfficerShirt
+  name: SPP Officer's Shirt
+  description: A well-tailored off-white shirt and pants, designed for officers who don't use fatigues.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
 
 # Civilians
 - type: entity
