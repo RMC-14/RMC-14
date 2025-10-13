@@ -296,7 +296,7 @@
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
-  id: RMCJobSPPRegimentKommissar
+  id: RMCJobSPPRegimentalKommissar
 
 - type: jobIcon
   parent: CMJobIconBase

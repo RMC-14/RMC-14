@@ -3,7 +3,7 @@
   id: RMCSPPCO
   name: rmc-job-name-spp-co
   description: rmc-job-description-spp-co
-  playTimeTracker: CMJobSPPco
+  playTimeTracker: CMJobSPPCO
   ranks:
     RMCRankSPPMayjor: []
   startingGear: RMCGearSPPCO
