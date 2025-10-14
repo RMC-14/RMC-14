@@ -7,19 +7,23 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 3600 # 1 hour
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: io
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -38,6 +42,7 @@
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
     - type: CMVendorUser
+      id: CMIntelOfficer
       points: 45
     - type: MarineOrders
     - type: RMCPointing
@@ -51,7 +56,7 @@
     - type: SquadArmorWearer
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: io
     - type: SquadNameOverride
       name: cm-job-name-intel

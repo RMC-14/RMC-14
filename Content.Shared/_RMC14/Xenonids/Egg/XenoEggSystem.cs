@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dropship;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -55,6 +56,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -68,6 +70,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -126,10 +129,9 @@ public sealed class XenoEggSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            foreach (var (actionId, action) in _actions.GetActions(uid))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoGrowOvipositorActionEvent>(uid))
             {
-                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
-                    _actions.ClearCooldown(actionId);
+                _actions.ClearCooldown(action.AsNullable());
             }
         }
     }
@@ -163,7 +165,8 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
-            MovementThreshold = 0.001f
+            MovementThreshold = 0.001f,
+            BreakOnRest = !hasOvipositor,
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))
@@ -271,7 +274,8 @@ public sealed class XenoEggSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            RootEntity = true
         };
 
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);
@@ -542,6 +546,44 @@ public sealed class XenoEggSystem : EntitySystem
             RemCompDeferred<XenoFriendlyComponent>(egg);
 
         UpdateEggSprite(egg);
+
+        switch (state)
+        {
+            case XenoEggState.Item:
+            {
+                if (!egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = false;
+                Dirty(egg);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, 0);
+
+                _fixture.DestroyFixture(egg, egg.Comp.GrowingMaskFixture);
+                break;
+            }
+            case XenoEggState.Growing:
+            case XenoEggState.Grown:
+            case XenoEggState.Opening:
+            case XenoEggState.Opened:
+            case XenoEggState.Fragile:
+            case XenoEggState.Sustained:
+            {
+                if (egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = true;
+                Dirty(egg);
+
+                _fixture.TryCreateFixture(egg, egg.Comp.GrowingMaskShape, egg.Comp.GrowingMaskFixture, hard: false, collisionMask: (int) egg.Comp.GrowingMask);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, (int) egg.Comp.GrowingLayer);
+
+                break;
+            }
+        }
     }
 
     private void SetEggSprite(Entity<XenoEggComponent> egg, string sprite)

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5ac4050eacf80ca5216402ded336f3efb2fb003e/icons/mob/humans/human_hair.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5ac4050eacf80ca5216402ded336f3efb2fb003e/icons/mob/humans/human_hair.dmi, ponytail9, longmessy, longpulato and longpultao2 by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -637,6 +637,22 @@
     },
     {
       "name": "hair_braid3",
+      "directions": 4
+    },
+    {
+      "name": "hair_longmessy",
+      "directions": 4
+    },
+    {
+      "name": "hair_pulatolong",
+      "directions": 4
+    },
+    {
+      "name": "hair_pulatolong2",
+      "directions": 4
+    },
+    {
+      "name": "hair_ponytail9",
       "directions": 4
     }
   ]

@@ -8,6 +8,10 @@ namespace Content.Shared.DoAfter;
 [DataDefinition]
 public sealed partial class DoAfterArgs
 {
+    //RMC
+    [DataField]
+    public bool RootEntity;
+
     /// <summary>
     ///     The entity invoking do_after
     /// </summary>
@@ -155,6 +159,20 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public bool RequireCanInteract = true;
+
+    /// <summary>
+    ///     RMC14
+    ///     If the doafter should break when the user rests.
+    /// </summary>
+    [DataField]
+    public bool BreakOnRest = true;
+
+    /// <summary>
+    ///     RMC14
+    ///     Whether to use the position compensated by lag for the target, with the user as the reference.
+    /// </summary>
+    [DataField]
+    public bool LagCompensated;
     #endregion
 
     #region Duplicates
@@ -279,6 +297,11 @@ public sealed partial class DoAfterArgs
         CancelDuplicate = other.CancelDuplicate;
         DuplicateCondition = other.DuplicateCondition;
         ForceVisible = other.ForceVisible;
+        BreakOnRest = other.BreakOnRest;
+        LagCompensated = other.LagCompensated;
+
+        //RMC
+        RootEntity = other.RootEntity;
 
         // Networked
         NetUser = other.NetUser;

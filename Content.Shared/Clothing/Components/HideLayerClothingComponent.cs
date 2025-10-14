@@ -16,7 +16,7 @@ public sealed partial class HideLayerClothingComponent : Component
     /// </summary>
     [DataField]
     [Obsolete("This attribute is deprecated, please use Layers instead.")]
-    public HashSet<HumanoidVisualLayers>? Slots;
+    public HashSet<HumanoidVisualLayers>? Slots = new();
 
     /// <summary>
     /// A map of the appearance layer(s) to hide, and the equipment slot that should hide them.

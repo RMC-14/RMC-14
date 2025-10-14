@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.ScissorCut;
@@ -28,11 +29,12 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    private readonly HashSet<EntityUid> _pierceEnts = new();
+    private readonly HashSet<Entity<MarineComponent>> _pierceEnts = new();
+    private readonly HashSet<EntityUid> _hitAlready = new();
 
     public override void Initialize()
     {
@@ -44,16 +46,14 @@ public sealed class XenoPierceSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         if (_transform.GetGrid(args.Target) is not { } gridId || !HasComp<MapGridComponent>(gridId))
             return;
 
         var target = args.Target;
-
         var xenoCoords = _transform.GetMoverCoordinates(xeno);
-
         if (!args.Target.TryDistance(EntityManager, xenoCoords, out var dis))
             return;
 
@@ -64,33 +64,35 @@ public sealed class XenoPierceSystem : EntitySystem
             target = xenoCoords.WithPosition(xenoCoords.Position + newTile);
         }
 
-        var tiles = _line.DrawLine(xenoCoords, target, TimeSpan.Zero, out _);
+        var tiles = _line.DrawLine(xenoCoords, target, TimeSpan.Zero, xeno.Comp.Range.Float(), out _);
 
         if (tiles.Count == 0)
             return;
 
         args.Handled = true;
 
+        _hitAlready.Clear();
         var hits = 0;
-
         EntityUid? hitEnt = null;
 
         foreach (var tile in tiles)
         {
             _pierceEnts.Clear();
             var entTile = Spawn(xeno.Comp.Blocker, tile.Coordinates);
-            _lookup.GetEntitiesInRange(entTile, 0.5f, _pierceEnts);
+
+            // This won't get hostile xenos but this also doesn't currently hit non marines in can ability attack target
+            _lookup.GetEntitiesInRange(entTile.ToCoordinates(), 0.5f, _pierceEnts);
 
             foreach (var ent in _pierceEnts)
             {
-                if (!_interaction.InRangeUnobstructed(entTile, ent, xeno.Comp.Range.Float()))
+                if (!_interaction.InRangeUnobstructed(entTile, ent.Owner, xeno.Comp.Range.Float()))
                     continue;
 
                 if (TryComp<DestroyOnXenoPierceScissorComponent>(ent, out var destroy))
                 {
                     if (_net.IsServer)
                     {
-                        SpawnAtPosition(destroy.SpawnPrototype, ent.ToCoordinates());
+                        SpawnAtPosition(destroy.SpawnPrototype, ent.Owner.ToCoordinates());
                         QueueDel(ent);
                     }
                     _audio.PlayPredicted(destroy.Sound, ent, xeno);
@@ -100,9 +102,12 @@ public sealed class XenoPierceSystem : EntitySystem
                 if (!_xeno.CanAbilityAttackTarget(xeno, ent))
                     continue;
 
+                if (!_hitAlready.Add(ent))
+                    continue;
+
                 hits++;
 
-                var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
+                var change = _damage.TryChangeDamage(ent, _xeno.TryApplyXenoSlashDamageMultiplier(ent, xeno.Comp.Damage), origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
                 {
@@ -111,7 +116,7 @@ public sealed class XenoPierceSystem : EntitySystem
                 }
 
                 if (_net.IsServer)
-                    SpawnAttachedTo(xeno.Comp.AttackEffect, ent.ToCoordinates());
+                    SpawnAttachedTo(xeno.Comp.AttackEffect, ent.Owner.ToCoordinates());
 
                 if (hitEnt is null)
                     hitEnt = ent;

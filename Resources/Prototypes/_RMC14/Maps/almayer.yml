@@ -11,7 +11,7 @@
   fallback: true
   stations:
     Almayer:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardUNMCWarship
       components:
       - type: StationNameSetup
         mapNameTemplate: 'UNS Almayer'

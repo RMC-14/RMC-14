@@ -22,15 +22,10 @@
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
   joinNotifyCrew: false
+  marineAuthorityLevel: 4
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - CMWarden
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: warden
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -54,8 +49,9 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: warden
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearMilitaryWarden
@@ -67,7 +63,7 @@
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
-    ears: CMHeadsetCMP
+    ears: RMCHeadsetMW
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge
@@ -85,3 +81,14 @@
 - type: playTimeTracker
   id: CMJobMilitaryWarden
   isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMW
+  name: Military Warden
+  description: Military Warden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: warden

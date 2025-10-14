@@ -29,6 +29,7 @@
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 2
     damage: {}
+  - type: RMCSmartFridgeInsertable
 
 - type: entity
   parent: BaseBeakerMetallic
@@ -187,6 +188,7 @@
     - 80
     - 100
     - 120
+    - 240
     - 300
   - type: Openable
     opened: true
@@ -244,8 +246,9 @@
     - none
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
+# BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
 - type: entity
-  parent: CMBeakerBase
+  parent: BaseItem
   id: RMCPressurizedCanister
   name: pressurized canister
   description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
@@ -265,7 +268,7 @@
       beaker:
         maxVol: 480
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
+    maxFillLevels: 4
     fillBaseName: can
   - type: StaticPrice
     price: 40
@@ -273,15 +276,59 @@
     tags:
     - PressurizedCanister
     - ChemDispensable
-  - type: DrainableSolution
-    solution: beaker
   - type: Clothing
     quickEquip: false
     slots:
     - none
-  - type: RemoveComponents
-    components:
-    - type: Drink
+  # components from original parents
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: MixableSolution
+    solution: beaker
+  - type: FitsInDispenser
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    canSend: false
+    canReceive: false
+  - type: RMCPressurizedSolution
+    solution: beaker
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Appearance
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: DnaSubstanceTrace
 
 - type: entity
   parent: RMCPressurizedCanister
@@ -338,6 +385,36 @@
         reagents:
         - ReagentId: CMTricordrazine
           Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterMeraBic
+  suffix: MeraBic
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 240
+        - ReagentId: CMBicaridine
+          Quantity: 240
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterKeloDerm
+  suffix: KeloDerm
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 240
+        - ReagentId: CMDermaline
+          Quantity: 240
 
 - type: Tag
   id: PressurizedCanister

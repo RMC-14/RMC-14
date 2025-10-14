@@ -1,0 +1,49 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f92080d44ff62d1a1a18d5eb5265f541324684ec/icons/obj/structures/machinery/hydroponics.dmi , Seed, Harvest, and Produce sprites made by SurfinNinja1, The rest of the plant stages are orange tree sprites flipped",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "dead"
+        },
+        {
+            "name": "harvest"
+        },
+        {
+            "name": "produce"
+        },
+        {
+            "name": "seed"
+        },
+        {
+            "name": "stage-1"
+        },
+        {
+            "name": "stage-2"
+        },
+        {
+            "name": "stage-3"
+        },
+        {
+            "name": "stage-4"
+        },
+        {
+            "name": "stage-5"
+        },
+        {
+            "name": "stage-6"
+        },
+        {
+            "name": "produce-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "produce-inhand-right",
+            "directions": 4
+        }
+    ]
+}

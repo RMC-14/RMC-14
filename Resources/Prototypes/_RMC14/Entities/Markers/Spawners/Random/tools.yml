@@ -39,7 +39,7 @@
         - RMCToolboxMechanicalGreenFilled
         - RMCToolboxEmergencyFilled
       offset: 0
-      
+
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerRandomPowercell
@@ -93,7 +93,7 @@
         - RMCCableCoil
         - RMCCableCoil
         - RMCSpawnerRandomToolbox # x2
-        - RMCSpawnerRandomToolbox 
+        - RMCSpawnerRandomToolbox
         - CMBeltUtility # x2
         - CMBeltUtility
         - RMCSpawnerRandomTools # x5

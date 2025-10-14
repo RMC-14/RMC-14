@@ -12,6 +12,15 @@
     fiberMaterial: fibers-leather
     fiberColor: fibers-black
   - type: FingerprintMask
+  - type: SquadArmor
+    layer: Gloves
+    slot: GLOVES
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Hands/glove_overlays.rsi
+      state: std-gloves
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Hands/glove_overlays.rsi
+      state: std-gloves
 
 - type: entity
   parent: CMHandsBlackMarine
@@ -59,3 +68,25 @@
     melee: 40
     bullet: 40
     explosionArmor: 50
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsBrownMarine
+  name: marine brown combat gloves
+  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'. These are brown instead of the classic black."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/brown.rsi
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsGreyMarine
+  name: marine grey combat gloves
+  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'. These are a shade of grey instead of the classic black."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi

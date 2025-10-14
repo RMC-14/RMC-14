@@ -29,6 +29,11 @@
   - type: Clickable
   - type: InteractionOutline
   - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
+    - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadAegis
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -37,6 +42,9 @@
           Loaded: { state: obc_loaded }
           Unloaded: { state: obc_unloaded }
           Chambered: { state: obc_chambered }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examniable-orbital-cannon
+  - type: RMCMesonsNonviewable
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -88,6 +96,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadExplosive
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in heavily-fortified areas, and causes a large circular explosion if it manages to reach the ground."
   name: HE orbital warhead
   components:
   - type: Sprite
@@ -98,6 +107,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadIncendiary
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for cutting off enemy forces, and creates a large diamond of ultra-hot blue fire."
   name: incendiary orbital warhead
   components:
   - type: Sprite
@@ -108,12 +118,41 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadCluster
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in cramped heavily-fortified areas, and causes multiple explosions in a vaguely rectangular shape."
   name: cluster orbital warhead
   components:
   - type: Sprite
     state: ob_warhead_3
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionCluster
+
+- type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadAegis
+  description: "AEG-328-KRA, or KRAKEN, an experimental phoron-based orbital warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
+  name:  AEG-328-KRA
+  components:
+  - type: WarpPoint
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: aegisob
+  - type: TacticalMapTracked
+  - type: XenoMapTracked
+  - type: MarineMapTracked
+  - type: Sprite
+    sprite: _RMC14/Structures/ob_warhead_aegis.rsi
+    state: ob_warhead_aegis
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionAegis
+    isAegis: true
+    firstWarningRange: 60
+    secondWarningRange: 55
+    thirdWarningRange: 45
+    intelPointsAwarded: 5
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualWarheadRightAegis
+    virtualLeft: RMCVirtualWarheadLeftAegis
 
 - type: entity
   id: RMCOrbitalCannonWarheadSpawner
@@ -125,7 +164,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
-  - type: RandomSpawner
+  - type: UniqueRandomSpawner
+    spawnerGroup: RMCOrbitalCannonWarheadSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
@@ -156,6 +196,37 @@
       slope: 10
       max: 90
       delay: 0.6
+      explosionEffect: RMCExplosionEffectClusterOB
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  parent: MarkerBase
+  id: RMCOrbitalCannonExplosionAegis
+  name: explosive Aegis OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 5000
+      slope: 1500
+      max: 200
+      delay: 1
+    - type: RMCOBXenoTunnel
+      total: 150000
+      slope: 10
+      max: 90
+      delay: 0.3
+    - type: RMCOBXenoTunnel
+      total: 150000
+      slope: 10
+      max: 90
+      delay: 0.3
+    - fire: RMCTileFireOBAegis
+      fireRange: 35
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -199,6 +270,7 @@
       delayPer: 0.4
       spread: 12
       checkProtectionPer: true
+      explosionEffect: RMCExplosionEffectClusterOB
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -223,6 +295,10 @@
   - type: ActivatableUI
     key: enum.OrbitalCannonComputerUI.Key
   - type: OrbitalCannonComputer
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSeatBase
@@ -283,3 +359,25 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+# Effects
+- type: entity
+  id: RMCExplosionEffectClusterOB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2.5
+  - type: CMExplosionEffect
+    explosion: null
+    shockWave: RMCExplosionEffectClusterOBShockWave
+
+- type: entity
+  id: RMCExplosionEffectClusterOBShockWave
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: RMCExplosionShockWave
+    falloffPower: 50
+    sharpness: 25
+    width: 0.7

@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -20,6 +21,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -42,7 +44,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -50,6 +52,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -75,7 +78,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -271,6 +274,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
+
+        _flammable.Extinguish(target);
+
         FixedPoint2? targetCriticalThreshold = null;
         foreach (var threshold in targetThresholdsComp.Thresholds)
         {
@@ -295,7 +301,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        SacraficialHealShout(ent);
+        SacrificialHealShout(ent);
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), target, ent, PopupType.Medium);
 
@@ -313,41 +319,56 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         Heal(target, healAmount);
 
-        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
-        if(_net.IsServer)
-         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-
-        var corpsePosition = _transform.GetMoverCoordinates(ent);
-
-        // TODO: Gib the healing xeno here
-
-        if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
-            !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
+        foreach (var status in args.AilmentsRemove)
         {
-            return;
+            _status.TryRemoveStatusEffect(target, status);
         }
 
-        if (GetHiveCore(ent))
-            SacraficialHealRespawn(ent, args.RespawnDelay);
-        else
-            SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
 
-        QueueDel(ent);
+        EntityManager.RemoveComponents(target, args.ComponentsRemove);
+
+        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
+
+        if (TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) &&
+            _xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
+        {
+            var corpsePosition = _transform.GetMoverCoordinates(ent);
+
+            if (GetHiveCore(ent))
+                SacrificialHealRespawn(ent, args.RespawnDelay);
+            else
+                SacrificialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
+        }
+        else
+        {
+            SacrificeNoRespawn(ent);
+        }
+
+        if (_net.IsServer)
+        {
+            SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+
+            // TODO: Gib the healing xeno here
+            QueueDel(ent);
+        }
     }
 
     public void Heal(EntityUid target, FixedPoint2 amount)
     {
-        var damage = _rmcDamageable.DistributeHealing(target, BruteGroup, amount);
+        var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, damage);
+            damage = _rmcDamageable.DistributeDamageCached(target, BurnGroup, leftover, damage);
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
-    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt)
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false)
     {
+        if (!ignoreFire && _flammable.IsOnFire(target))
+            return;
+
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {
@@ -378,11 +399,15 @@ public abstract class SharedXenoHealSystem : EntitySystem
         return false;
     }
 
-    protected virtual void SacraficialHealShout(EntityUid xeno)
+    protected virtual void SacrificialHealShout(EntityUid xeno)
     {
     }
 
-    protected virtual void SacraficialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    protected virtual void SacrificialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    {
+    }
+
+    protected virtual void SacrificeNoRespawn(EntityUid xeno)
     {
     }
 

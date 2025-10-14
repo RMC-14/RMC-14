@@ -31,13 +31,13 @@ public sealed class SquadCommand : ToolshedCommand
     public EntityUid Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid marine,
-        [CommandArgument] SquadType squad)
+        [CommandArgument] Entity<SquadTeamComponent> squad)
     {
         if (!HasComp<MarineComponent>(marine))
             return marine;
 
         _squad ??= GetSys<SquadSystem>();
-        _squad.AssignSquad(marine, squad.Value, null);
+        _squad.AssignSquad(marine, (squad, squad), null);
         return marine;
     }
 
@@ -45,7 +45,7 @@ public sealed class SquadCommand : ToolshedCommand
     public IEnumerable<EntityUid> Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> marines,
-        [CommandArgument] SquadType squad)
+        [CommandArgument] Entity<SquadTeamComponent> squad)
     {
         return marines.Select(marine => Set(ctx, marine, squad));
     }
@@ -54,18 +54,18 @@ public sealed class SquadCommand : ToolshedCommand
     public IEnumerable<EntityUid> With(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> marines,
-        [CommandArgument] SquadType squad)
+        [CommandArgument] Entity<SquadTeamComponent> squad)
     {
-        return marines.Where(marine => TryComp(marine, out SquadMemberComponent? member) && member.Squad == squad.Value);
+        return marines.Where(marine => TryComp(marine, out SquadMemberComponent? member) && member.Squad == squad);
     }
 
     [CommandImplementation("refresh")]
     public EntityUid Refresh(
         [CommandInvocationContext] IInvocationContext ctx,
-        [CommandArgument] SquadType squad)
+        [CommandArgument] Entity<SquadTeamComponent> squad)
     {
         _squad ??= GetSys<SquadSystem>();
-        _squad.RefreshSquad(squad.Value);
-        return squad.Value;
+        _squad.RefreshSquad((squad, squad));
+        return squad;
     }
 }

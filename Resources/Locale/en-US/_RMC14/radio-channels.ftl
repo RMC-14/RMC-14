@@ -16,9 +16,11 @@ chat-radio-marine-delta = Delta
 chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
+chat-radio-marine-sof = SOF
+
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
-chat-radio-CMB = Colony Marshal Bureau
+chat-radio-CMB = CMB
 chat-radio-provost = Provost
 
 chat-radio-spp-command = SPP Command
@@ -26,7 +28,11 @@ chat-radio-spp = SPP
 chat-radio-spp-engi = SPP Engi
 chat-radio-spp-med = SPP Med
 chat-radio-spp-cct = SPP CCT
+chat-radio-halcyon = Halcyon Dynamics
 
 chat-radio-royal-marine = Royal Marine
+chat-radio-tse = TSE
 
 chat-radio-hivemind = Hivemind
+
+chat-radio-marine-sun-riders = Sun Riders

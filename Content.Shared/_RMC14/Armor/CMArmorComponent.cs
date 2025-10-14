@@ -11,6 +11,12 @@ public sealed partial class CMArmorComponent : Component
     public int XenoArmor;
 
     [DataField, AutoNetworkedField]
+    public int FrontalArmor;
+
+    [DataField, AutoNetworkedField]
+    public int SideArmor;
+
+    [DataField, AutoNetworkedField]
     public int Melee;
 
     [DataField, AutoNetworkedField]
@@ -23,4 +29,7 @@ public sealed partial class CMArmorComponent : Component
     // TODO RMC14 tank/sniper flak/shotgun incendiary burst is resisted by this but penetrated
     [DataField, AutoNetworkedField]
     public int ExplosionArmor;
+
+    [DataField, AutoNetworkedField]
+    public bool ImmuneToAP = false;
 }

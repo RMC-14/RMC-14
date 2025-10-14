@@ -3,9 +3,9 @@ using Content.Server.DoAfter;
 using Content.Server.Interaction;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Server._RMC14.NPC.Systems;
 
@@ -111,13 +111,17 @@ public sealed partial class NPCLeapSystem : EntitySystem
             }
             else
             {
-                if (!TryComp<XenoComponent>(uid, out var xeno) || !TryComp<WorldTargetActionComponent>(xeno.Actions[comp.ActionId], out var action))
+                if (!TryComp<XenoComponent>(uid, out var xeno))
                 {
                     comp.Status = LeapStatus.Unspecified;
                     continue;
                 }
 
-                if (!_actions.ValidAction(action))
+                var actions = xeno.Actions;
+                if (!actions.TryGetValue(comp.ActionId, out var actionId) ||
+                    !HasComp<WorldTargetActionComponent>(actionId) ||
+                    !TryComp(actionId, out ActionComponent? action) ||
+                    !_actions.ValidAction((actionId, action)))
                 {
                     comp.Status = LeapStatus.Unspecified;
                     continue;
@@ -132,23 +136,19 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 comp.Destination = destination;
 
-                if (action.Event != null)
+                var actionEvent = _actions.GetEvent(actionId);
+                if (actionEvent != null)
                 {
-                    action.Event.Performer = uid;
+                    actionEvent.Performer = uid;
+                    actionEvent.Action = (actionId, action);
 
-                    var actions = xeno.Actions;
-                    if (actions.TryGetValue(comp.ActionId, out var actionId) &&
-                        _actions.TryGetActionData(actionId, out var actionComp))
-                    {
-                        action.Event.Action = (actionId, actionComp);
-                    }
-
-                    action.Event.Target = destination;
+                    if (actionEvent is WorldTargetActionEvent worldTarget)
+                        worldTarget.Target = destination;
                 }
 
                 var doafter = after.NextId;
 
-                _actions.PerformAction(uid, null, xeno.Actions[comp.ActionId], action, action.BaseEvent, _timing.CurTime);
+                _actions.PerformAction(uid, (actionId, action), actionEvent);
 
                 // Means the action was cancelled for some reason
                 if (doafter == after.NextId)
@@ -158,7 +158,6 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     if (after.DoAfters.Count > 0)
                         comp.CurrentDoAfter = after.DoAfters[doafter].Id;
                 }
-
             }
         }
     }

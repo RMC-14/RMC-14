@@ -115,8 +115,8 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterArious
-  name: "Arious Motion Tracker"
+  id: CMPosterPathos
+  name: "Pathos Motion Tracker"
   description: "It's an ad for a civilian brand motion tracker, less reliable than the M314, but about half of the weight."
   components:
   - type: Sprite
@@ -178,9 +178,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterPulseRifle
+  id: CMPosterAssaultRifle
   name: "assault rifle pinup"
-  description: "The Aegis Battlefield Armaments Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
+  description: "The AEGIS Model 54 Derivative 'C' Assault Rifle Mark One. The only pinup you'll ever need."
   components:
   - type: Sprite
     state: assault_rifle
@@ -349,9 +349,9 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterWalkman
-  name: "Walkman"
-  description: "This poster depicts a walkman and reads 'Don't Forget Your Walkman.'"
+  id: RMCPosterCassettePlayer
+  name: "Cassette Player"
+  description: "This poster depicts a cassette player and reads 'Don't Forget Your Cassette Player.'"
   components:
   - type: Sprite
     state: walkman
@@ -409,3 +409,30 @@
   components:
   - type: Sprite
     state: falling_falcons
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterNoSmoking
+  name: NO SMOKING
+  description: "A warning sign which reads 'NO SMOKING'."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/decals.rsi
+    state: nosmoking
+
+- type: entity
+  parent: CMPosterNoSmoking
+  id: CMPosterNoSmoking2
+  components:
+  - type: Sprite
+    state: nosmoking2
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterUNMC
+  name: UNMC Poster
+  description: "An old recruitment poster for the UNMC. Looking at it floods you with a mixture of pride and sincere regret."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/decals.rsi
+    state: prop3

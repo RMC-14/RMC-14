@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMDepartmentsHuman
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: DepartmentGroup
     name: role-timer-human-roles
@@ -19,8 +18,7 @@
 
 - type: entity
   id: CMJobsMedical
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-medical-roles
@@ -34,8 +32,7 @@
 
 - type: entity
   id: CMJobsEngineering
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-engineering-roles
@@ -48,8 +45,7 @@
 
 - type: entity
   id: CMJobsDropship
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-dropship-roles
@@ -58,3 +54,45 @@
     - CMDropshipCrewChief
     - CMPilotDropship
     - CMPilotGunship
+
+- type: entity
+  id: CMJobsDropshipPilot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-dropship-pilot-roles
+    color: "#C38312"
+    jobs:
+    - CMPilotDropship
+    - CMPilotGunship
+
+- type: entity
+  id: RMCJobsCorporate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-corporate-roles
+    color: "#78ec0b"
+    jobs:
+    - CMLiaison
+    - CMSurvivorCorporate
+    - CMSurvivorICB
+
+# Survivor roles.
+
+- type: entity
+  id: RMCJobsSurvivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-survivor-roles
+    color: "#00b7ff"
+    jobs:
+    - RMCJobSyntheticColony
+    - CMSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorScientist
+    - CMSurvivorCorporate
+    - RMCSurvivorCommandingOfficer

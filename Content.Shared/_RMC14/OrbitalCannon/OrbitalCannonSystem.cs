@@ -4,6 +4,8 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.GameStates;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -12,14 +14,19 @@ using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.Ghost;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -36,11 +43,13 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMortarSystem _mortar = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
@@ -48,6 +57,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -101,15 +112,17 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (ent.Comp.Status != OrbitalCannonStatus.Unloaded)
+            return;
+
         if (_container.TryGetContainer(ent, ent.Comp.FuelContainer, out var fuel) &&
             fuel.ContainedEntities.Count > 0)
         {
             args.ToGrab = fuel.ContainedEntities[^1];
             args.Handled = true;
         }
-
-        if (_container.TryGetContainer(ent, ent.Comp.WarheadContainer, out var warhead) &&
-            warhead.ContainedEntities.Count > 0)
+        else if (_container.TryGetContainer(ent, ent.Comp.WarheadContainer, out var warhead) &&
+                 warhead.ContainedEntities.Count > 0)
         {
             args.ToGrab = warhead.ContainedEntities[^1];
             args.Handled = true;
@@ -163,7 +176,53 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
     private void OnWarheadOrbitalBombardmentFire(Entity<OrbitalCannonWarheadComponent> ent, ref OrbitalBombardmentFireEvent args)
     {
-        Spawn(ent.Comp.Explosion, args.Coordinates);
+        var coordinates = _transform.ToCoordinates(args.Coordinates);
+
+        // chck for indestructible walls at impact location and try to find alternative
+        if (TileHasIndestructibleWalls(coordinates))
+        {
+            var found = false;
+
+            for (var x = -1; x <= 1; x++)
+            {
+                for (var y = -1; y <= 1; y++)
+                {
+                    // Skip the center position (original impact location)
+                    if (x == 0 && y == 0)
+                        continue;
+
+                    var offset = new Vector2i(x, y);
+                    var testMapCoordinates = args.Coordinates.Offset(offset);
+                    if (!_rmcMap.TryGetTileDef(testMapCoordinates, out var tile) ||
+                        tile.ID == ContentTileDefinition.SpaceID)
+                        continue;
+
+                    var testCoordinates = _transform.ToCoordinates(testMapCoordinates);
+                    if (!_area.CanOrbitalBombard(testCoordinates, out var roofed))
+                        continue;
+
+                    if (!TileHasIndestructibleWalls(testCoordinates))
+                    {
+                        coordinates = testCoordinates;
+                        Log.Info($"Orbital bombardment impact redirected due to indestructible wall at impact site");
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                    break;
+            }
+
+            if (!found)
+            {
+                // No valid alternative found, warhead fizzles out like in BYOND
+                Log.Info($"Orbital bombardment impact blocked by indestructible walls, no valid alternative found");
+                return;
+            }
+        }
+
+        Spawn(ent.Comp.Explosion, coordinates);
     }
 
     private void OnFuelPowerLoaderInteract(Entity<OrbitalCannonFuelComponent> ent, ref PowerLoaderInteractEvent args)
@@ -378,6 +437,24 @@ public sealed class OrbitalCannonSystem : EntitySystem
         RaiseLocalEvent(cannon, ref ev, true);
     }
 
+    private bool TileHasIndestructibleWalls(EntityCoordinates coordinates)
+    {
+        var anchoredEntities = _rmcMap.GetAnchoredEntitiesEnumerator(coordinates);
+
+        while (anchoredEntities.MoveNext(out var entity))
+        {
+            // This part is shitty because there might be a wall that just... doesn't exactly go with this logic. Hope it works.
+            if (HasComp<TagComponent>(entity) &&
+                _tags.HasTag(entity, "Wall") &&
+                !HasComp<DamageableComponent>(entity))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public bool Fire(Entity<OrbitalCannonComponent> cannon, Vector2i fireCoordinates, EntityUid user, EntityUid squad)
     {
         if (_net.IsClient)
@@ -447,10 +524,26 @@ public sealed class OrbitalCannonSystem : EntitySystem
         firing.WarheadName = Name(warhead);
         firing.Squad = squad;
         firing.StartedAt = time;
+
+        if (TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp))
+        {
+            firing.FirstWarningRange = warheadComp.FirstWarningRange;
+            firing.SecondWarningRange = warheadComp.SecondWarningRange;
+            firing.ThirdWarningRange = warheadComp.ThirdWarningRange;
+
+            // Award intel points for specific warhead types
+            if (warheadComp.IntelPointsAwarded > 0 && _net.IsServer)
+            {
+                _intel.AddPoints(warheadComp.IntelPointsAwarded);
+            }
+        }
+
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
-        _adminLog.Add(LogType.RMCOrbitalBombardment, $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}");
+
+        var logMessage = $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}";
+        _adminLog.Add(LogType.RMCOrbitalBombardment, $"{logMessage}");
 
         var ev = new OrbitalCannonLaunchEvent(cannon.Comp.FireCooldown + firing.ImpactDelay);
         RaiseLocalEvent(ref ev);
@@ -518,21 +611,37 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
-                _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
+                _mortar.PopupWarning(planetCoordinates, firing.FirstWarningRange, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
             }
 
             if (!firing.WarnedOne && time > firing.StartedAt + firing.WarnOneDelay)
             {
                 firing.WarnedOne = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 25, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
+                _mortar.PopupWarning(planetCoordinates, firing.SecondWarningRange, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
             }
 
             if (!firing.WarnedTwo && time > firing.StartedAt + firing.WarnTwoDelay)
             {
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+                _mortar.PopupWarning(planetCoordinates, firing.ThirdWarningRange, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+            }
+
+            if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)
+            {
+                firing.AegisBoomed = true;
+                Dirty(uid, firing);
+
+                if (CannonHasWarhead((uid, cannon), out var foundWarhead) &&
+                    TryComp(foundWarhead, out OrbitalCannonWarheadComponent? foundWarheadComp) &&
+                    foundWarheadComp.IsAegis)
+                {
+                    var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
+                    var sound = _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(300));
+                    if (sound != null)
+                        _rmcPvs.AddGlobalOverride(sound.Value.Entity);
+                }
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)
@@ -620,6 +729,12 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                     if (step.CheckProtectionPer && !_area.CanOrbitalBombard(coordinates, out _))
                         continue;
+
+                    if (step.ExplosionEffect != null)
+                    {
+                        var effect = Spawn(step.ExplosionEffect.Value, mapCoordinates);
+                        _rmcExplosion.TryDoEffect(effect);
+                    }
 
                     if (step.Type is { } type)
                         _rmcExplosion.QueueExplosion(mapCoordinates, type, step.Total, step.Slope, step.Max, uid, canCreateVacuum: false);

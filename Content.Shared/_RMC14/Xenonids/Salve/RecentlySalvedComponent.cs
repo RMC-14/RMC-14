@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Heal;
@@ -14,8 +14,6 @@ public sealed partial class RecentlySalvedComponent : Component
 public enum XenoHealerVisuals
 {
     Gooped,
-    Downed,
-    Resting,
 }
 
 [Serializable, NetSerializable]

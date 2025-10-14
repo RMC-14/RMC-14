@@ -140,15 +140,14 @@ SalvagePartsT4Spawner: SalvageLootSpawner
 SalvagePartsT3Spawner: SalvageLootSpawner
 SalvagePartsT3T4Spawner: SalvageLootSpawner
 SalvagePartsT2Spawner: SalvageLootSpawner
-AdvancedCapacitorStockPart: CapacitorStockPart
-SuperCapacitorStockPart: CapacitorStockPart
-QuadraticCapacitorStockPart: CapacitorStockPart
-NanoManipulatorStockPart: MicroManipulatorStockPart
+#SuperCapacitorStockPart: CapacitorStockPart
+#QuadraticCapacitorStockPart: CapacitorStockPart
+#NanoManipulatorStockPart: MicroManipulatorStockPart
 PicoManipulatorStockPart: MicroManipulatorStockPart
 FemtoManipulatorStockPart: MicroManipulatorStockPart
-AdvancedMatterBinStockPart: MatterBinStockPart
-SuperMatterBinStockPart: MatterBinStockPart
-BluespaceMatterBinStockPart: MatterBinStockPart
+#AdvancedMatterBinStockPart: MatterBinStockPart
+#SuperMatterBinStockPart: MatterBinStockPart
+#BluespaceMatterBinStockPart: MatterBinStockPart
 AnsibleSubspaceStockPart: null
 FilterSubspaceStockPart: null
 AmplifierSubspaceStockPart: null
@@ -410,14 +409,14 @@ CMMagazineRifleM41A: CMMagazineRifleM54C
 CMMagazineRifleM41AAP: CMMagazineRifleM54CAP
 CMMagazineRifleM41AExt: CMMagazineRifleM54CExt
 CMAttachmentM41ASolidStock: RMCAttachmentM54CStockSolid
-WeaponRifleM41A: WeaponRifleM54C
+# WeaponRifleM41A: WeaponRifleM54C
 CMCrateBoxMagazineRifleM41A: RMCCrateBoxMagazineRifleM54C
 CMCrateBoxMagazineRifleM41AAP: RMCCrateBoxMagazineRifleM54CAP
 CMCrateBoxMagazineRifleM41AExt: RMCCrateBoxMagazineRifleM54CExt
 #CMCrateM41A: RMCCrateM54C
 CMCrateM41AE2: RMCCrateM54CE2
 CMMagazineRifleM41AE2: CMMagazineRifleM54CE2
-WeaponRifleM41AE2: WeaponRifleM54CE2
+# WeaponRifleM41AE2: WeaponRifleM54CE2
 
 # 2024-06-23
 FloorTileItemReinforced: PartRodMetal1
@@ -992,19 +991,30 @@ LightTree04: LightTree
 LightTree05: LightTree
 LightTree06: LightTree
 
-#2024-12-28
+# 2024-12-28
 DrinkIrishCarBomb: DrinkIrishSlammer
 
-#2025-01-06
+# 2025-01-06
+BorgModuleRadiationDetection: null
+BorgModuleGPS: null
+BorgModuleLightReplacer: BorgModuleCustodial
+BorgModuleAdvancedTreatment: null
 ClothingMaskSexyClown: ClothingMaskBlushingClown
 ClothingMaskSexyMime: ClothingMaskBlushingMime
 
 # 2025-01-27
 FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
 
-#2025-02-05
+# 2025-02-05
 WeaponSubMachineGunVector: null
 WeaponSubMachineGunVectorRubber: null
+
+# 2025-02-11
+WallShuttleInterior: WallShuttle
+
+# 2025-02-18
+PosterContrabandLustyExomorph: PosterContrabandRealExomorph
+PosterContrabandBustyBackdoorExoBabes6: PosterContrabandRouny
 
 # 2025-02-20
 MagazineBoxAntiMaterielBig: null
@@ -1050,8 +1060,8 @@ WeldingFuelTankFull: RMCTankReagentFuel
 WaterTankFull: RMCTankReagentWater
 
 # 2024-12-24
-WeaponRifleM54CCamo: WeaponRifleM54C
-WeaponRifleM54CE2Camo: WeaponRifleM54CE2
+#WeaponRifleM54CCamo: WeaponRifleM54C
+#WeaponRifleM54CE2Camo: WeaponRifleM54CE2
 WeaponRifleM4SPRCamo: WeaponRifleM4SPR
 WeaponSMGM63Camo: WeaponSMGM63
 WeaponShotgunM42A2Camo: WeaponShotgunM42A2
@@ -1136,5 +1146,285 @@ MuteToxinChemistryBottle: ChemistryBottleMuteToxin
 LeadChemistryBottle: ChemistryBottleLead
 ToxinChemistryBottle: ChemistryBottleToxin
 
+# 2025-03-29
+ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
+
+# 2025-04-14
+MailRobustToolsSpam: MailSpamLetter
+MailNanotrasenSpam: MailSpamLetter
+MailSyndicateSpam: MailSpamLetter
+MailAlternativeDimensionSpam: MailSpamLetter
+MailNarsieCultSpam: MailSpamLetter
+MailRageCageSpam: MailSpamLetter
+MailVoyageAdvertisementSpam: MailSpamLetter
+MailScienceSpiderClanSpam: MailSpamLetter
+MailAllAccessSpam: MailSpamLetter
+MailCentcommRetributionSpam: MailSpamLetter
+MailEvilLizardSpam: MailSpamLetter
+MailParentsNeedMoneySpam: MailSpamLetter
+
+# 2025-04-15
+SimpleXenoArtifact: ComplexXenoArtifact
+MediumXenoArtifact: ComplexXenoArtifact
+SimpleXenoArtifactItem: ComplexXenoArtifactItem
+MediumXenoArtifactItem: ComplexXenoArtifactItem
+VariedXenoArtifactItem: ComplexXenoArtifactItem
+
+# 2025-04-19
+ClothingOuterHardsuitSyndicate: ClothingOuterEVASuitSyndicate
+AirlockMaintCommonLocked: AirlockMaintLocked
+AirlockMaintIntLocked: AirlockMaintLocked
+
+# 2025-04-26
+ComputerCargoShuttle: ComputerShuttleCargo
+CargoShuttleComputerCircuitboard: CargoShuttleConsoleCircuitboard
+
+# 2025-05-02
+CigPackMixedNasty: CigPackMixed
+CigPackMixedMedical: CigPackMixed
+CigaretteIpecac: CigaretteNutriment
+CigarettePax: CigaretteSaline
+CigaretteTHC: CigaretteRobustHarvest
+CigaretteMuteToxin: CigaretteSodiumPolyacrylate
+CigaretteSpaceDrugs: CigaretteLipolicide
+CigaretteMilk: CigaretteHaloperidol
+CigaretteBread: CigaretteBbqSauce
+
+# 2025-05-09
+ClothingOuterHardsuitBasic: ClothingOuterHardsuitEVA
+ClothingHeadHelmetHardsuitBasic: null
+SuitStorageBasic: SuitStorageEVA
+
+# 2025-05-18
+ClothingNeckCloakMiner: null
+
+# 2025-05-22
+MatterBinStockPart: MicroManipulatorStockPart
+CapacitorStockPart: MicroManipulatorStockPart
+
+# 2025-05-26 Turrets
+WeaponEnergyTurretStation: WeaponEnergyTurretSecurity
+WeaponEnergyTurretStationControlPanel: WeaponEnergyTurretSecurityControlPanel
+WeaponEnergyTurretStationMachineCircuitboard: WeaponEnergyTurretSecurityMachineCircuitboard
+
+# 2025-05-30
+SpawnHonkBot: SpawnMobHonkBot
+
+# 2025-06-01
+CrateFoodPizzaLarge: CrateFoodPizza
+CrateFoodSoftdrinksLarge: CrateFoodSoftdrinks
+
+# 2025-06-09
+BarSignAlignTile: BarSign
+BarSignComboCafeAlignTile: BarSignComboCafe
+BarSignEmergencyRumPartyAlignTile: BarSignEmergencyRumParty
+BarSignLV426AlignTile: BarSignLV426
+BarSignMaidCafeAlignTile: BarSignMaidCafe
+BarSignMalteseFalconAlignTile: BarSignMalteseFalcon
+BarSignOfficerBeerskyAlignTile: BarSignOfficerBeersky
+BarSignRobustaCafeAlignTile: BarSignRobustaCafe
+BarSignTheAleNathAlignTile: BarSignTheAleNath
+BarSignTheBirdCageAlignTile: BarSignTheBirdCage
+BarSignTheCoderbusAlignTile: BarSignTheCoderbus
+BarSignTheDrunkCarpAlignTile: BarSignTheDrunkCarp
+BarSignEngineChangeAlignTile: BarSignEngineChange
+BarSignTheHarmbatonAlignTile: BarSignTheHarmbaton
+BarSignTheLightbulbAlignTile: BarSignTheLightbulb
+BarSignTheLooseGooseAlignTile: BarSignTheLooseGoose
+BarSignTheNetAlignTile: BarSignTheNet
+BarSignTheOuterSpessAlignTile: BarSignTheOuterSpess
+BarSignTheSinguloAlignTile: BarSignTheSingulo
+BarSignTheSunAlignTile: BarSignTheSun
+BarSignWiggleRoomAlignTile: BarSignWiggleRoom
+BarSignZocaloAlignTile: BarSignZocalo
+BarSignEmprahAlignTile: BarSignEmprah
+BarSignSpacebucksAlignTile: BarSignSpacebucks
+BarSignMaltroachAlignTile: BarSignMaltroach
+BarSignWhiskeyEchoesAlignTile: BarSignWhiskeyEchoes
+
+# 2025-06-21
+ClothingNeckHeadphones: ClothingMultipleHeadphones
+
 # 2025-04-14
 PlantBag: RMCStoragePlantBag
+
+# 2025-05-04
+CrateTrashCart: RMCTrashCart
+RMCVendorBundleXOShotgun: WeaponShotgunM890
+
+# 2025-05-05
+RMCArmorHelmetM12Dust: CMArmorHelmetM12
+
+# 2025-05-20
+GrenadeFlashBang: RMCGrenadeFlashBang
+
+# 2025-05-21
+CMVendorWalkman: CMVendorCassettes
+CMPosterWalkman: RMCPosterCassettePlayer
+
+# 2025-05-29
+CMBucketJani: RMCBucketJanitorial
+
+# 2025-05-24
+Katana: RMCKatana
+
+# 2025-06-7
+DrinkWhiskeyBottleFull: RMCDrinkAlcoholWhiskey
+DrinkWineBottleFull: RMCDrinkAlcoholPurpleWine
+DrinkVodkaBottleFull: RMCDrinkAlcoholVodka
+DrinkVermouthBottleFull: RMCDrinkAlcoholVermouth
+DrinkSakeBottleFull: RMCDrinkAlcoholSake
+
+# 2025-06-12
+DrinkMelonLiquorBottleFull: RMCDrinkAlcoholMelonLiquor
+DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
+
+# 2025-06-15
+ClothingOuterBioGeneral: RMCSuitBioGeneral
+ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral
+
+# 2025-06-18
+CMWebbingPouch: RMCWebbingDropPouch
+
+# 2025-06-24
+ClothingNeckStethoscope: RMCStethoscope
+
+# 2025-06-30
+ClosetL3Filled: CMClosetBioFilled
+ClosetL3VirologyFilled: CMClosetBioVirologyFilled
+ClosetL3SecurityFilled: CMClosetBioSecurityFilled
+ClosetL3JanitorFilled: CMClosetBioJanitorFilled
+ClosetL3ScienceFilled: CMClosetBioScientistFilled
+ClosetL3: CMClosetBio
+FireAxeCabinet: RMCFireAxeCabinet
+FireAxeCabinetOpen: RMCFireAxeCabinetFilled
+FireAxeCabinetFilled: RMCFireAxeCabinetFilled
+FireAxeCabinetFilledOpen: RMCFireAxeCabinetFilled
+
+# 2025-07-04
+SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
+WallGold: RMCWallGold
+ClosetL3Virology: CMClosetBioVirology
+ClosetL3Security: CMClosetBioSecurity
+ClosetL3Janitor: CMClosetBioJanitor
+ClosetL3Science: CMClosetBioScientist
+
+# 2025-07-05
+DrinkHotCoffee: RMCCoffeeCupFilled
+
+# 2025-07-06
+RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
+
+# 2025-07-08
+PortableGeneratorPacman: RMCPortableGenerator
+PortableGeneratorSuperPacman: RMCPortableGenerator2
+BaseBallBat: RMCBaseballBat
+HydroponicsToolSpade: RMCToolSpade
+HydroponicsToolMiniHoe: RMCToolMiniHoe
+HydroponicsToolHatchet: RMCToolHatchet
+ClothingEyesGlassesSunglasses: RMCSunglasses
+CableTerminal: RMCCableTerminal
+ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
+
+# 2025-07-08
+RMCGlassesBiMexYellow: RMCGlassesTriMaxYellow
+RMCGlassesBiMexBronze: RMCGlassesTriMaxBronze
+RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
+
+# 2025-07-12
+FoamedIronMetal: RMCFoamedIronMetal
+FoamedAluminiumMetal: RMCFoamedAluminiumMetal
+TimerTrigger: RMCTimerTrigger
+
+# 2025-07-15
+Ashtray: RMCAshtray
+
+# 2025-07-19
+FlippoEngravedLighter: RMCZippoGold
+
+# 2025-07-17
+RMCIDCardDeputy: RMCIDCardCMBDeputy
+RMCIDCardMarshal: RMCIDCardCMBMarshal
+
+# 2025-07-20
+RMCJumpsuitMarshal: RMCMarshalCMBUniform
+
+# 2025-07-23
+RMCM79Case: RMCM85A1Case
+CMWeaponLauncherM79: RMCWeaponLauncherM85A1
+RMCCrateM79: RMCCrateM85A1
+
+# 2025-07-30
+BoxBeaker: RMCBoxBeaker
+BoxPillCanister: RMCBoxPillCanister
+BoxSyringe: RMCBoxSyringe
+
+# 2025-08-01
+WeaponRifleSSG45: RMCWeaponRifleSSG45
+
+# 2025-08-06
+RMCSmartGun: RMCSmartGunUNMC
+
+# 2025-08-07
+RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
+
+# 2025-08-12
+GasPipeHalf: RMCGasPipeHalf
+GasPipeStraight: RMCGasPipeStraight
+GasPipeBend: RMCGasPipeBend
+GasPipeTJunction: RMCGasPipeTJunction
+GasPipeFourway: RMCGasPipeFourway
+
+# 2025-08-17
+WeaponRifleM54C: RMCWeaponRifleM54C
+WeaponRifleM54CE2: RMCWeaponRifleM54CE2
+WeaponRifleM54CMK1: RMCWeaponRifleM54CMK1
+WeaponRifleM54CMK1Unloaded: RMCWeaponRifleM54CMK1Unloaded
+WeaponRifleM54CMK1AP: RMCWeaponRifleM54CMK1AP
+WeaponRifleM54CStripped: RMCWeaponRifleM54CStripped
+WeaponRifleM59A: RMCWeaponRifleM59A
+
+# 2025-08-27
+RMCTray_empty: RMCTrayEmpty
+CMPosterArious: CMPosterPathos
+CMPosterPulseRifle: CMPosterAssaultRifle
+
+# 2025-08-30
+WallInvisible: RMCWallInvisibleBulletPassible
+PottedPlant1: CMPottedPlant1
+PottedPlant2: CMPottedPlant2
+PottedPlant3: CMPottedPlant3
+PottedPlant4: CMPottedPlant4
+PottedPlant5: CMPottedPlant5
+PottedPlant6: CMPottedPlant6
+PottedPlant7: CMPottedPlant7
+PottedPlant8: CMPottedPlant8
+PottedPlant10: CMPottedPlant10
+PottedPlant11: CMPottedPlant11
+PottedPlant12: CMPottedPlant12
+PottedPlant13: CMPottedPlant13
+PottedPlant14: CMPottedPlant14
+PottedPlant15: CMPottedPlant15
+PottedPlant16: CMPottedPlant16
+PottedPlant17: CMPottedPlant17
+PottedPlant18: CMPottedPlant18
+PottedPlant19: CMPottedPlant19
+PottedPlant20: CMPottedPlant20
+PottedPlant21: CMPottedPlant21
+PottedPlant22: CMPottedPlant22
+PottedPlant23: CMPottedPlant23
+PottedPlant24: CMPottedPlant24
+Grille: RMCGrille
+GrilleBroken: RMCGrilleBroken
+
+# 2025-09-20
+RMCTentRoofBase: null
+RMCTentRoofStandard: null
+RMCTentRoofExtended: null
+RMCTentBodyStandard: RMCTentUNMCStandard
+RMCTentBodyExtended: RMCTentUNMCExtended
+
+# 2025-09-28
+DeskBell: RMCDeskBell
+SignNoSmoking: CMPosterNoSmoking
+SignSmoking: CMPosterNoSmoking2

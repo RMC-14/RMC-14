@@ -61,8 +61,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -85,8 +87,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -173,8 +177,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -195,8 +201,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -225,8 +233,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -366,6 +376,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
@@ -390,6 +401,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
@@ -411,6 +423,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: false
     OB: true
     supplyDrop: true
 
@@ -426,6 +439,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -444,6 +458,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
@@ -507,6 +522,25 @@
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthCentralCavesLakeHouseTower
+  name: Lake House Communications Relay
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
   id: RMCAreaLv624GroundCavesSouthCentralCaves
   name: South Central Caves
   components:
@@ -536,6 +570,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624
@@ -551,6 +587,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     weatherEnabled: false
@@ -566,6 +603,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     landingZone: true
@@ -611,6 +649,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: true
@@ -763,6 +802,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
@@ -844,6 +884,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: false
@@ -859,6 +900,8 @@
   components:
   - type: Sprite
     state: tcomsatcham
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624Landing
@@ -867,6 +910,8 @@
   components:
   - type: Sprite
     state: tcomsatcham
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus

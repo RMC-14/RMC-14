@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/weapons/melee/hammers.dmi, https://github.com/cmss13-devs/cmss13/blob/678d63ad96b75b1ac639436b2a9fdd7bd8009b70/icons/mob/humans/onmob/inhands/equipment/tools_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/678d63ad96b75b1ac639436b2a9fdd7bd8009b70/icons/mob/humans/onmob/inhands/equipment/tools_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/c4bd5fb6834149adf299a152a0c838c723c102b9/icons/mob/humans/onmob/clothing/back/melee_weapons.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+},
+"states": [
+  {
+    "name": "icon"
+  },
+  {
+    "name": "wielded-inhand-left",
+    "directions": 4
+  },
+  {
+    "name": "inhand-right",
+    "directions": 4
+  },
+  {
+    "name": "wielded-inhand-right",
+    "directions": 4
+  },
+  {
+    "name": "inhand-left",
+    "directions": 4
+  },
+  {
+    "name": "equipped-BACKPACK",
+    "directions": 4
+  }
+]
+}

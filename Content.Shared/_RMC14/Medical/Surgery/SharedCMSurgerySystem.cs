@@ -1,38 +1,40 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
-using Content.Shared._RMC14.Medical.Surgery.Effects.Complete;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
+using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Surgery;
 
 public abstract partial class SharedCMSurgerySystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
@@ -48,6 +50,8 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         SubscribeLocalEvent<CMSurgeryCloseIncisionConditionComponent, CMSurgeryValidEvent>(OnCloseIncisionValid);
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<CMSurgeryPartConditionComponent, CMSurgeryValidEvent>(OnPartConditionValid);
+        SubscribeLocalEvent<RMCSurgeryDeadConditionComponent, CMSurgeryValidEvent>(OnIsDead);
+        SubscribeLocalEvent<RMCSurgeryXenoHeartConditionComponent, CMSurgeryValidEvent>(OnXenoHeartValid);
 
         InitializeSteps();
     }
@@ -99,6 +103,19 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     private void OnPartConditionValid(Entity<CMSurgeryPartConditionComponent> ent, ref CMSurgeryValidEvent args)
     {
         if (CompOrNull<BodyPartComponent>(args.Part)?.PartType != ent.Comp.Part)
+            args.Cancelled = true;
+    }
+
+    private void OnIsDead(Entity<RMCSurgeryDeadConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (!_mobState.IsDead(args.Body))
+            args.Cancelled = true;
+    }
+
+    private void OnXenoHeartValid(Entity<RMCSurgeryXenoHeartConditionComponent> ent, ref CMSurgeryValidEvent args)
+    {
+        if (!HasComp<RMCSurgeryXenoHeartComponent>(args.Body) ||
+            _body.GetBodyOrganEntityComps<XenoHeartComponent>(args.Body).Count == 0)
             args.Cancelled = true;
     }
 

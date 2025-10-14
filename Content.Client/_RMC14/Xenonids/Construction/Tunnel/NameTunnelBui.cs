@@ -7,11 +7,16 @@ namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 [UsedImplicitly]
 public sealed partial class NameTunnelBui(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
 {
+    [ViewVariables]
     private NameTunnelWindow? _window;
 
     protected override void Open()
     {
         base.Open();
+
+        // See https://github.com/space-wizards/RobustToolbox/issues/6005
+        if (_window is { IsOpen: true })
+            return;
 
         _window = this.CreateWindow<NameTunnelWindow>();
 

@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleM16 # TODO: Make the M16 grenadier rifle when impact nades exist
   name: M16 rifle
-  description: An old, reliable design first adopted by the U.S. military in the 1960s. Something like this belongs in a museum of war history. It is chambered in 5.56x45mm.
+  description: An old, reliable design first adopted by the U.N. military in the 1960s. Something like this belongs in a museum of war history. It is chambered in 5.56x45mm.
   suffix: Filled
   components:
   - type: Sprite
@@ -54,8 +54,8 @@
       gun_magazine:
         name: Magazine
         startingItem: RMCMagazineRifleM16
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m16_unload.ogg
         priority: 2
         whitelist:
           tags:
@@ -120,7 +120,6 @@
         - RMCAttachmentUnderbarrelExtinguisher
         - RMCAttachmentU7UnderbarrelShotgun
         - RMCAttachmentLaserSight
-        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, -0.03
@@ -169,6 +168,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mm
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

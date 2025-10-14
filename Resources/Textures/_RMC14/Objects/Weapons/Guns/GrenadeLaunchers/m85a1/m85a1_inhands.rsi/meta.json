@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/92eca7add661a35f9132971215d352a4e2123bae/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi, https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/92eca7add661a35f9132971215d352a4e2123bae/icons/mob/humans/onmob/items_righthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/92eca7add661a35f9132971215d352a4e2123bae/icons/mob/humans/onmob/suit_slot.dmi, https://github.com/cmss13-devs/cmss13/blob/92eca7add661a35f9132971215d352a4e2123bae/icons/mob/humans/onmob/back.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "sling",
+      "directions": 4
+    }
+  ]
+}

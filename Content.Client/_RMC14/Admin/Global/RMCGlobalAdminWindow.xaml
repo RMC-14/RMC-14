@@ -13,10 +13,12 @@
                               HorizontalExpand="True" VerticalExpand="True" />
             </ScrollContainer>
             <BoxContainer Name="MarinesTab" Access="Public" Orientation="Vertical">
-                <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Vertical" VerticalExpand="True">
                     <Label Text="Squads" />
                     <cc:HSeparator Color="#4972A1" />
-                    <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+                    </ScrollContainer>
                     <cc:HSeparator Color="#4972A1" />
                     <Label Name="MarinesLabel" Access="Public" />
                 </BoxContainer>

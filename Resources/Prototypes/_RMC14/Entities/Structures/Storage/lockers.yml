@@ -31,6 +31,8 @@
     stateDoorClosed: closed
   - type: AccessReader
   - type: Lock
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: CMLockerBase
@@ -55,13 +57,44 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLockerSecureSafe
+  name: secure safe
+  description: A safe for an important person to store any valuables or equipment they need. The hinges have begun to rust.
+  suffix: All Access
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+
+- type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeColony
+  suffix: Colony Command
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeLiaison
+  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
+  suffix: Corporate Liaison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["RMCAccessWeYa"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/staff.rsi
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMLockerBase
@@ -82,6 +115,11 @@
     sprite: _RMC14/Structures/Storage/Lockers/police.rsi
   - type: AccessReader
     access: [["CMAccessBrig"]]
+
+- type: entity
+  parent: CMLockerPolice
+  id: RMCLockerPoliceSoro
+  name: security officer's locker
 
 - type: entity
   parent: CMLockerBase
@@ -125,6 +163,8 @@
   name: red alert gun cabinet
   components:
   - type: RMCUnlockOnAlertLevel
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMLockerBase
@@ -189,17 +229,20 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerQM
-  name: quartermaster's locker
+  name: Logistics Officer's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
   - type: AccessReader
     access: [["CMAccessQM"]]
+  - type: StorageFill
+    contents:
+      - id: RMCMegaphone
 
 - type: entity
   parent: CMLockerBase
   id: CMLockerCargo
-  name: cargo technician's locker
+  name: requisitions technician's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/cargo.rsi
@@ -355,3 +398,137 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+# PVE
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerSquadLeader
+  name: section sergeant locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowSLFill
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerSmartGunOperatorOne
+  name: squad one smartgun operator locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorTwo
+  name: squad two smartgun operator locker
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorThree
+  name: squad three smartgun operator locker
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorFour
+  name: squad four smartgun operator locker
+
+- type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderPMC
+  name: force lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorPMCOne
+  name: squad one support gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorPMCOne
+  id: RMCLockerSmartGunOperatorPMCTwo
+  name: squad two support gunner locker
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerHeavyGunnerCLF
+  name: heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetCLFSGOFill
+
+- type: entity
+  parent: RMCCabinet
+  id: RMCCabinetTSEPAInspector
+  name: inspector's cabinet
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPAInspector"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerTSEPASeniorConstable
+  name: senior constable's locker
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPABrig"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetTSEPAFill
+
+- type: entity
+  parent: CMLockerPolice
+  id: RMCLockerTSEPA
+  name: constable's locker
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetTSEPAFill
+
+# SPP
+- type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderSPP
+  name: section lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorSPPOne
+  name: squad one heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorSPPOne
+  id: RMCLockerSmartGunOperatorSPPTwo
+  name: squad two heavy gunner locker

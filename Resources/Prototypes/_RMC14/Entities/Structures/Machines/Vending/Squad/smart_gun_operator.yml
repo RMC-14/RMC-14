@@ -47,6 +47,18 @@
     #  points: 20
     - name: Sidearm Ammunitions
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
+      - id: RMCSpeedLoader44Marksman
+        points: 10
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -86,11 +98,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      entries:
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
@@ -164,9 +176,14 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:

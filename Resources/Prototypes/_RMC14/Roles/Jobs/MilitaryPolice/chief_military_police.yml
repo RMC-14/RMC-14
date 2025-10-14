@@ -18,22 +18,17 @@
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobChiefMP
-      time: 36000 # 10 hours
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  marineAuthorityLevel: 11
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - CMP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cmp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -61,8 +56,9 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cmp
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefMP
@@ -93,6 +89,7 @@
   id: CMJobChiefMP
   isHumanoid: true
 
+# Guidebook
 - type: entity
   parent: CMGuidebookRole
   id: RMCGuidebookRoleCMP

@@ -1,6 +1,12 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
@@ -8,8 +14,11 @@ namespace Content.Shared._RMC14.Buckle;
 
 public sealed class RMCBuckleSystem : EntitySystem
 {
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly HashSet<EntityUid> _intersecting = new();
 
@@ -19,6 +28,8 @@ public sealed class RMCBuckleSystem : EntitySystem
         SubscribeLocalEvent<ActiveBuckleClimbingComponent, PreventCollideEvent>(OnBuckleClimbablePreventCollide);
         SubscribeLocalEvent<BuckleWhitelistComponent, BuckleAttemptEvent>(OnBuckleWhitelistAttempt);
         SubscribeLocalEvent<BuckleComponent, AttemptMobTargetCollideEvent>(OnBuckleAttemptMobTargetCollide);
+        SubscribeLocalEvent<StrapComponent, EntParentChangedMessage>(OnBuckleParentChanged);
+        SubscribeLocalEvent<StrapComponent, CombatModeShouldHandInteractEvent>(OnStrapCombatModeShouldHandInteract);
     }
 
     private void OnBuckleClimbableStrapped(Entity<BuckleClimbableComponent> ent, ref StrappedEvent args)
@@ -52,12 +63,50 @@ public sealed class RMCBuckleSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnBuckleParentChanged(Entity<StrapComponent> ent, ref EntParentChangedMessage args)
+    {
+        if (!HasComp<FTLMapComponent>(args.Transform.ParentUid) || args.OldParent == null)
+            return;
+
+        foreach (var entity in ent.Comp.BuckledEntities)
+        {
+            _buckle.TryUnbuckle(entity, entity, false);
+            var ev = new AttemptCrashLandEvent(entity);
+            RaiseLocalEvent(args.OldParent.Value, ref ev);
+
+            if (!ev.Cancelled)
+                _crashLand.TryCrashLand(entity, true);
+        }
+    }
+
+    private void OnStrapCombatModeShouldHandInteract(Entity<StrapComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+            args.Cancelled = true;
+    }
+
     public Vector2 GetOffset(Entity<RMCBuckleOffsetComponent?> offset)
     {
         if (!Resolve(offset, ref offset.Comp, false))
             return Vector2.Zero;
 
         return offset.Comp.Offset;
+    }
+
+    public bool CanBuckle(EntityUid? user, EntityUid buckle, bool popup = true)
+    {
+        if (!HasComp<XenoComponent>(user))
+            return true;
+
+        if (popup)
+        {
+            _popup.PopupPredicted("You don't have the dexterity to do that, try a nest.",
+                buckle,
+                user.Value,
+                PopupType.SmallCaution);
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)

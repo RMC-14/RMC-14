@@ -1,0 +1,154 @@
+﻿- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolver38Magnum
+  name: .38 magnum revolver
+  description: A lean .38 revolver. A timeless classic, from antiquity to the future. This specific model is known to be wildly inaccurate, yet extremely lethal.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolver38Magnum
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnum38.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnum38.rsi
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoader38
+      - RMCCartridgeRevolver38
+    proto: RMCCartridgeRevolver38
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_44mag.ogg
+    soundEmpty:
+      path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    recoilUnwielded: 3
+    scatterWielded: 8
+    scatterUnwielded: 12
+    baseFireRate: 1.67
+    burstScatterMult: 4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+  - type: AttachableHolderVisuals #File shows no attachment on the gun in 13 Unless it copies them from the base revolver.
+    offsets:
+      rmc-aslot-barrel: 0.1, 0.1
+
+# RMC14 TODO: REVOLVER TRICK TO DOUBLE ACCURACY WITH UNIQUE ACTION
+
+- type: entity
+  parent: RMCWeaponRevolver38Magnum
+  id: RMCWeaponRevolver38Empty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
+    chambers:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+
+- type: entity
+  id: RMCBaseSpeedLoader38
+  name: "Speed loader (.38)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader38
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolver38
+    capacity: 6
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoader38
+  id: RMCSpeedLoader38
+  name: "Speed loader (.38)"
+  description: A revolver speed loader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/38magnum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver38
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  id: RMCCartridgeRevolver38
+  name: cartridge (.38)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver38
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver38
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver38
+  name: bullet (.38)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 1
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 15
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+
+- type: Tag
+  id: RMCWeaponRevolver38Magnum
+
+- type: Tag
+  id: RMCSpeedLoader38
+
+- type: Tag
+  id: RMCCartridgeRevolver38
+

@@ -20,7 +20,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
+public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -42,6 +42,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         base.Initialize();
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
@@ -54,7 +55,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         args.Handled = true;
 
-        _action.SetUseDelay(args.Action, TimeSpan.Zero);
+        _action.SetUseDelay((args.Action, args.Action), TimeSpan.Zero);
 
         // If none of the entities on the selected, in-range tile are parasites, try to pull out a
         // parasite OR try to throw a held parasite
@@ -93,11 +94,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
         }
 
-        if (_hands.GetActiveItem((xeno, null)) is EntityUid heldEntity &&
+        if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&
             HasComp<XenoParasiteComponent>(heldEntity))
         {
-
-            _hands.TryDrop(xeno);
+            _hands.TryDrop(xeno.Owner);
             var coords = _transform.GetMoverCoordinates(xeno);
             // If throw distance would be more than 4, fix it to be exactly 4
             if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
@@ -107,7 +107,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
-            _throw.TryThrow(heldEntity, target, user: xeno, compensateFriction: true);
+            _throw.TryThrow(heldEntity, target, user: xeno);
 
             // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
             // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
@@ -118,7 +118,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 _parasite.GoActive((heldEntity, ai));
             }
 
-            _action.SetUseDelay(args.Action, xeno.Comp.ThrownParasiteCooldown);
+            _action.SetUseDelay((args.Action, args.Action), xeno.Comp.ThrownParasiteCooldown);
 
             return;
         }
@@ -129,7 +129,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return;
         }
 
-        if (!_hands.TryGetEmptyHand(xeno, out var _))
+        if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
             return;
 
         if (HasComp<OnFireComponent>(xeno))
@@ -195,19 +195,17 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         DropAllStoredParasites(xeno);
     }
 
-    protected override void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
     {
-        base.OnMobStateChanged(xeno, ref args);
-
         if (args.NewMobState != MobState.Dead)
             return;
+
         DropAllStoredParasites(xeno, 0.75f);
     }
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
     {
-        XenoComponent? xenComp = null;
-        TryComp(xeno, out xenComp);
+        TryComp(xeno, out XenoComponent? _);
 
         if (chance != 1.0 && xeno.Comp.CurParasites > 0)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
@@ -267,7 +265,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (overlayNumbers > parasiteNumber)
         {
             var visibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, true);
-            for (int i = 0; i < overlayNumbers - parasiteNumber; i++)
+            for (var i = 0; i < overlayNumbers - parasiteNumber; i++)
             {
                 var index = _random.PickAndTake(visibleIndexes);
                 xeno.Comp.VisiblePositions[index] = false;
@@ -276,7 +274,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         else
         {
             var invisibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, false);
-            for (int i = 0; i < parasiteNumber - overlayNumbers; i++)
+            for (var i = 0; i < parasiteNumber - overlayNumbers; i++)
             {
                 var index = _random.PickAndTake(invisibleIndexes);
                 xeno.Comp.VisiblePositions[index] = true;
@@ -286,7 +284,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         Dirty(xeno);
 
         //Need to clone the array for it to dirty properly
-        Appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
     }
 
     private List<int> GetVisualIndexes(bool[] bools, bool visible)
@@ -326,8 +324,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
 
         _hive.SetSameHive(xeno.Owner, para.Value);
+        _rmcObstacleSlamming.MakeImmune(para.Value);
         _transform.DropNextTo(para.Value, xeno.Owner);
         // Small throw
+
         _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
 
         return para;

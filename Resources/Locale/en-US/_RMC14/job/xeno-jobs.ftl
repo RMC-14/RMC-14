@@ -20,6 +20,7 @@ cm-job-name-xeno-hivelord = Hivelord
 CMJobXenoHivelord = Hivelord
 
 cm-job-name-xeno-parasite = Parasite
+cm-job-name-xeno-parasite-xeno = Child
 CMJobXenoParasite = Parasite
 
 cm-job-name-xeno-larva = Larva

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.Json.Nodes;
+using Content.Server._RMC14.Rules;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Robust.Server.ServerStatus;
@@ -28,6 +29,10 @@ namespace Content.Server.GameTicking
         ///     For access to the round ID in status responses.
         /// </summary>
         [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+        /// <summary>
+        ///     Needed to get entity system instances.
+        /// </summary>
+        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
 
         private void InitializeStatusShell()
         {
@@ -37,6 +42,7 @@ namespace Content.Server.GameTicking
         private void GetStatusResponse(JsonNode jObject)
         {
             var preset = CurrentPreset ?? Preset;
+            var cmDistressSignalRuleSystem = _entitySystemManager.GetEntitySystem<CMDistressSignalRuleSystem>();
 
             // This method is raised from another thread, so this better be thread safe!
             lock (_statusShellLock)
@@ -52,6 +58,11 @@ namespace Content.Server.GameTicking
                 jObject["run_level"] = (int) _runLevel;
                 if (preset != null)
                     jObject["preset"] = Loc.GetString(preset.ModeTitle);
+
+                var planetMapName = cmDistressSignalRuleSystem.SelectedPlanetMapName;
+                if (!string.IsNullOrEmpty(planetMapName))
+                    jObject["planet_map"] = planetMapName;
+
                 if (_runLevel >= GameRunLevel.InRound)
                 {
                     jObject["round_start_time"] = _roundStartDateTime.ToString("o");

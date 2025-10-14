@@ -10,6 +10,9 @@
   name: Warrior
   description: A beefy alien with an armored carapace.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleWarrior
   - type: GhostRole
     name: cm-job-name-xeno-warrior
   - type: Sprite
@@ -48,7 +51,7 @@
   - type: XenoPunch
     damage:
       types:
-        Blunt: 25
+        Blunt: 27.5
   - type: XenoFling
   - type: XenoLunge
   - type: XenoPlasma
@@ -58,7 +61,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoCrusher
+    - RMCXenoCrusher
     - CMXenoPraetorian
   - type: CMArmor
     xenoArmor: 20
@@ -94,7 +97,13 @@
     prefix: warrior
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: warrior
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-warrior
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
+  - type: RMCActionOrder
+    id: CMXenoWarrior

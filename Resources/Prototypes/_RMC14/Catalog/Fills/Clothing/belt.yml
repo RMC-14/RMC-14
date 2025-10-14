@@ -20,13 +20,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMCrowbar
-    - id: CMWrench
+    - id: RMCWeaponPistolM77
     - id: CMScrewdriver
-    - id: CMWirecutter
+    - id: CMWrench
     - id: CMWelder
+    - id: CMWirecutter
     - id: CMMultitool
-    - id: RMCCableCoil30
 
 - type: entity
   parent: CMBeltKnife
@@ -57,6 +56,33 @@
     - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
+      amount: 1
+
+- type: entity
+  parent: CMBeltMedicalFilled
+  id: RMCBeltMedicalDefibAnalyzerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMBurnKit10
+      amount: 1
+    - id: CMTraumaKit10
+      amount: 1
+    - id: CMDefibrillator
+      amount: 1
+    - id: CMHealthAnalyzer
       amount: 1
 
 - type: entity
@@ -191,12 +217,42 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: RMCBeltMarineUZI
+  suffix: Filled, UZI
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGUZI
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
   id: CMBeltMarineMP5
   suffix: Filled, MP5
   components:
   - type: StorageFill
     contents:
     - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineMK1
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineMK2
+  suffix: Filled, MK2
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54C
       amount: 5
 
 - type: entity
@@ -208,3 +264,106 @@
     contents:
     - id: RMCMagazineRifleM16
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineMAR
+  suffix: Filled, MAR30/40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 5
+
+- type: entity
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCBeltHolsterPistolTSEFilledL54
+  suffix: TSE, Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolL54
+      amount: 6
+    - id: RMCWeaponPistolL54
+
+# MP Belt
+- type: entity
+  parent: CMBeltSecurityMP
+  id: CMBeltSecurityMPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: RMCHandcuffs
+#    - id: Pepperspray # TODO RMC14
+#    - id: ForensicScanner # TODO RMC14 cm clue scanner
+
+- type: entity
+  parent: RMCBeltSecurityWeYa
+  id: RMCBeltSecurityWeYaFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: RMCHandcuffs
+#    - id: Pepperspray # TODO RMC14
+#    - id: ForensicScanner # TODO RMC14 cm clue scanner
+
+- type: entity
+  parent: CMBeltSecuritySPP
+  id: CMBeltSecuritySPPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: CMFlash
+    - id: CMStunbaton
+    - id: RMCHandcuffs
+#    - id: Pepperspray # TODO RMC14
+#    - id: # TODO RMC14 SPP shrapnel revolver magazine
+
+- type: entity
+  parent: CMBeltSecurityMarshal
+  id: CMBeltSecurityMarshalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: CMFlash
+    - id: CMStunbaton
+#    - id: Pepperspray # TODO RMC14
+#    - id: ForensicScanner # TODO RMC14 cm clue scanner
+    - id: RMCHandcuffs
+      amount: 2
+    - id: RMCGrenadeFlashBang
+
+- type: entity
+  parent: RMCBeltHolsterNailgun
+  id: RMCBeltHolsterNailgunFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGNailgun
+      amount: 2
+    - id: WeaponNailgun
+      amount: 1
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolHandcannonFilled
+  suffix: Filled, Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannon

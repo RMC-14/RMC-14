@@ -68,6 +68,11 @@
     tailDamage:
       groups:
         Brute: 36
+    soundHit:
+        collection: Punch
+        params:
+          variation: 0.15
+    hitAnimationId: RMCEffectSlam
   - type: Tackle
     max: 4
   - type: Fixtures
@@ -80,6 +85,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -93,15 +99,22 @@
     prefix: defender
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: defender
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-defender
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDefenderBase
   id: CMXenoDefender
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDefender
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -120,6 +133,8 @@
   - type: XenoEvolution
     strains:
     - CMXenoDefenderSteelcrest
+  - type: RMCActionOrder
+    id: CMXenoDefender
 
 - type: entity
   parent: CMXenoDefenderBase
@@ -139,7 +154,6 @@
     - ActionXenoSoak
     - ActionXenoFortifySteelcrest
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
@@ -166,4 +180,6 @@
       types:
         Blunt: 37.5
   - type: XenoSoak
-
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: CMXenoDefenderSteelcrest

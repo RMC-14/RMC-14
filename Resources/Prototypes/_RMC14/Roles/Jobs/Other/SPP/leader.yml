@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPLeader
-  name: RMCSPPLeader
+  name: rmc-job-name-spp-leader
   description: rmc-job-description-spp-leader
   playTimeTracker: CMJobSPPLeader
   ranks:
@@ -12,9 +12,11 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Squad Leader
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - SPP
@@ -45,30 +47,60 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidSPPLeader
+  id: RMCRandomHumanoidSPPLeaderHostile
   name: spp ghost role leader
-  suffix: Spawner, Player
+  suffix: Spawner, Player, Hostile
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
   - type: RandomHumanoidSpawner
     settings: RMCSPPLeader
+
+- type: entity
+  id: RMCRandomHumanoidSPPLeaderFriendly
+  name: spp ghost role leader
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPLeaderFriendly
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCSPPLeader
   components:
   - type: GhostRole
-    name: RMCSPPLeader
-    description: rmc-job-description-spp-leader
+    name: rmc-ghost-name-spp-hostile-leader
+    description: rmc-ghost-role-information-spp-hostile-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: randomHumanoidSettings
+  parent: RMCSPPLeader
+  id: RMCSPPLeaderFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-friendly-leader
+    description: rmc-ghost-role-information-spp-friendly-description
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
     job: RMCSPPLeader
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPLeader
@@ -79,10 +111,10 @@
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranSPP
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponRifleType71
     id: RMCIDSPP
-    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    belt: RMCBeltHolsterRevolverZHNK72Fill
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchFuelTankFilledExtinguisher

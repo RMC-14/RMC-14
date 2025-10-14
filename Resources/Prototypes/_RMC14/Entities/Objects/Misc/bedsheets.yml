@@ -104,3 +104,10 @@
   - type: Sprite
     state: sheetbrown
 
+- type: entity
+  parent: CMBedsheetWhite
+  id: RMCBedsheetSoro
+  components:
+  - type: Sprite
+    color: "#798675"
+

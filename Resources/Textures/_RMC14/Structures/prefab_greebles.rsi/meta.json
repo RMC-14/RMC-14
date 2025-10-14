@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/ice_colony/fabs_greebles.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "windsock",
+      "delays": [
+        [
+          0.3,
+          0.5,
+          0.2,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "vent1",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "vent2"
+    },
+    {
+      "name": "vent3",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "vent4",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "vent5",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flagpole"
+    },
+    {
+      "name": "solarpanel1",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "solarpanel2",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "antenna1"
+    },
+    {
+      "name": "antenna2"
+    },
+    {
+      "name": "smokestack"
+    }
+  ]
+}

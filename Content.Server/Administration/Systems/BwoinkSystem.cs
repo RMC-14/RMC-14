@@ -82,6 +82,9 @@ namespace Content.Server.Administration.Systems
         private int _maxAdditionalChars;
         private readonly Dictionary<NetUserId, DateTime> _activeConversations = new();
 
+        // RMC14
+        public Dictionary<NetUserId, DiscordRelayInteraction> RMCRelayMessages => _relayMessages;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -834,10 +837,11 @@ namespace Content.Server.Administration.Systems
             public string Message;
         }
 
+        // RMC14
         /// <summary>
         ///  Class specifically for holding information regarding existing Discord embeds
         /// </summary>
-        private sealed class DiscordRelayInteraction
+        public sealed class DiscordRelayInteraction
         {
             public string? Id;
 

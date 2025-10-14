@@ -93,6 +93,15 @@
     count: 25
 
 - type: entity
+  parent: CMSandbagEmpty
+  id: CMSandbagEmpty10
+  suffix: "10"
+  components:
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 10
+
+- type: entity
   parent: BaseItem
   id: CMSandbagFull
   name: sandbags
@@ -132,6 +141,15 @@
     stackType: CMSandbagFull
     count: 25
 
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull5
+  suffix: "5"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 5
+
 - type: stack
   id: CMSandbagEmpty
   name: empty sandbags
@@ -143,3 +161,11 @@
   name: empty sandbags
   spawn: CMSandbagFull
   maxCount: 50
+
+- type: entity
+  parent: CMBarricadeSandbag
+  id: RMCBarricadeSandbagSoro
+  suffix: Brown
+  components:
+  - type: Sprite
+    color: "#a98c7c"

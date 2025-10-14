@@ -2,7 +2,7 @@
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
   id: WeaponSMGM63
-  description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  description: The AEGIS Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
@@ -86,6 +86,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
@@ -107,6 +108,27 @@
       Classic: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
       Snow: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
       Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
+
+- type: entity
+  parent: WeaponSMGM63
+  id: RMCWeaponSMGM63ExtendedFilled
+  suffix: Filled, Extended
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        startingItem: CMMagazineSMGM63Ext
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
+          - RMCMagazineSMGM63HEAP
 
 - type: entity
   parent: CMMagazineRifleBase
