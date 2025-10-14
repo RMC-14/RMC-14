@@ -52,6 +52,8 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
 
+        SubscribeLocalEvent<DoorComponent, BeforePryEvent>(OnBeforePry);
+
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
         SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
