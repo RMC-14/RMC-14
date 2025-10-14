@@ -52,7 +52,7 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<DoorComponent, RMCDoorPryEvent>(OnDoorPry);
 
-        SubscribeLocalEvent<DoorComponent, BeforePryEvent>(OnBeforePry);
+        SubscribeLocalEvent<DoorComponent, RMCBeforePryEvent>(OnBeforePry);
 
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
@@ -163,7 +163,7 @@ public sealed class CMDoorSystem : EntitySystem
         RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button), animState), Filter.PvsExcept(button));
     }
 
-    private void OnBeforePry(Entity<DoorComponent> ent, ref BeforePryEvent args)
+    private void OnBeforePry(Entity<DoorComponent> ent, ref RMCBeforePryEvent args)
     {
         if (TryComp(ent, out DoorComponent? door) && door.State != DoorState.Closed)
         {
