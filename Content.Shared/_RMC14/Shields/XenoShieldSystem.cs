@@ -8,6 +8,11 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Content.Shared._RMC14.Xenonids.Projectile;
+using Robust.Shared.Map;
+using System.Numerics;
+using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -16,8 +21,11 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
+
     public enum ShieldType
     {
         Generic,
@@ -73,7 +81,31 @@ public sealed partial class XenoShieldSystem : EntitySystem
         else
         {
             if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
+            {
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
+
+                // Fire hedgehog spikes when shield is hit
+                if (ent.Comp.Shield == ShieldType.Hedgehog &&
+                    TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) &&
+                    spikeShield.Active)
+                {
+                    _xenoProjectile.TryShoot(
+                        ent.Owner,
+                        new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
+                        FixedPoint2.Zero,
+                        spikeShield.Projectile,
+                        null,
+                        spikeShield.ProjectileCount,
+                        new Angle(2 * Math.PI), // Full circle
+                        15f,
+                        projectileHitLimit: spikeShield.ProjectileHitLimit,
+                        predicted: false
+                    );
+
+                    _popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
+                }
+            }
+
             args.Damage.ClampMax(0);
         }
 
