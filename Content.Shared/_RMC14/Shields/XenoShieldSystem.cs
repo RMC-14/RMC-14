@@ -25,7 +25,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
-    private static readonly EntProtoId HedgehogSpikeProjectile = "XenoHedgehogShieldSpikeProjectile";
+
     public enum ShieldType
     {
         Generic,
@@ -85,17 +85,20 @@ public sealed partial class XenoShieldSystem : EntitySystem
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
 
                 // Fire hedgehog spikes when shield is hit
-                if (ent.Comp.Shield == ShieldType.Hedgehog && TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) && spikeShield.Active)
+                if (ent.Comp.Shield == ShieldType.Hedgehog &&
+                    TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) &&
+                    spikeShield.Active)
                 {
                     _xenoProjectile.TryShoot(
                         ent.Owner,
                         new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
                         FixedPoint2.Zero,
-                        HedgehogSpikeProjectile,
+                        spikeShield.Projectile,
                         null,
-                        9, // 9 spikes like CM13
+                        spikeShield.ProjectileCount,
                         new Angle(2 * Math.PI), // Full circle
                         15f,
+                        projectileHitLimit: spikeShield.ProjectileHitLimit,
                         predicted: false
                     );
 

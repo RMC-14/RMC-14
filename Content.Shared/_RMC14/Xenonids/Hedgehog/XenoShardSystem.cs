@@ -11,6 +11,9 @@ using Robust.Shared.Map;
 using System.Numerics;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Rejuvenate;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -25,18 +28,21 @@ public sealed class XenoShardSystem : EntitySystem
     [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
     [Dependency] private readonly XenoShieldSystem _xenoShield = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoShardComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<XenoShardComponent, CMGetArmorEvent>(OnShardGetArmor);
         SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<XenoShardComponent, MeleeHitEvent>(OnMeleeHit);
 
         SubscribeLocalEvent<XenoFireSpikesComponent, ActionXenoFireSpikesEvent>(OnFireSpikes);
         SubscribeLocalEvent<XenoSpikeShedComponent, ActionXenoSpikeShedEvent>(OnSpikeShed);
         SubscribeLocalEvent<XenoSpikeShieldComponent, ActionXenoSpikeShieldEvent>(OnSpikeShield);
 
         SubscribeLocalEvent<XenoSpikeShieldComponent, RemovedShieldEvent>(OnShieldRemoved);
+        SubscribeLocalEvent<XenoShardComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
     public override void Update(float frameTime)
@@ -82,6 +88,18 @@ public sealed class XenoShardSystem : EntitySystem
             return;
 
         AddShards(ent, ent.Comp.ShardsOnDamage);
+    }
+
+    private void OnMeleeHit(Entity<XenoShardComponent> ent, ref MeleeHitEvent args)
+    {
+        foreach (var target in args.HitEntities)
+        {
+            if (_xeno.CanAbilityAttackTarget(ent, target))
+            {
+                AddShards(ent, ent.Comp.ShardsPerSlash);
+                break; // Only gain shards once per attack
+            }
+        }
     }
 
     public void AddShards(Entity<XenoShardComponent> ent, int amount)
@@ -158,7 +176,8 @@ public sealed class XenoShardSystem : EntitySystem
             ent.Comp.ProjectileCount,
             new Angle(Math.PI / 4), // 45 degrees
             20f,
-            target: args.Entity
+            target: args.Entity,
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
     }
 
@@ -198,7 +217,8 @@ public sealed class XenoShardSystem : EntitySystem
             null,
             ent.Comp.ProjectileCount,
             new Angle(2 * Math.PI), // Full circle
-            20f
+            20f,
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
 
         // Apply speed boost (remove armor bonus, gain speed)
@@ -288,5 +308,32 @@ public sealed class XenoShardSystem : EntitySystem
 
         ent.Comp.Active = false;
         Dirty(ent, ent.Comp);
+    }
+
+    private void OnRejuvenate(Entity<XenoShardComponent> ent, ref RejuvenateEvent args)
+    {
+        // Reset shard cooldown
+        ent.Comp.SpikeShedCooldownEnd = TimeSpan.Zero;
+        ent.Comp.SpikeShedCooldownMessageShown = false;
+
+        // Set shards to 150
+        ent.Comp.Shards = 150;
+
+        // Reset ability cooldowns
+        if (TryComp<XenoFireSpikesComponent>(ent, out var fireSpikes))
+        {
+            fireSpikes.CooldownExpireAt = TimeSpan.Zero;
+            Dirty(ent, fireSpikes);
+        }
+
+        if (TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield))
+        {
+            spikeShield.CooldownExpireAt = TimeSpan.Zero;
+            Dirty(ent, spikeShield);
+        }
+
+        Dirty(ent);
+        _armor.UpdateArmorValue(ent.Owner);
+        UpdateHedgehogSprite(ent);
     }
 }

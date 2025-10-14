@@ -25,6 +25,8 @@
     slow: 3
     paralyze: 0
     armorResistsKnockdown: true
+  - type: TimedDespawn
+    lifetime: 1.0
 
 - type: entity
   parent: XenoHedgehogSpikeProjectile

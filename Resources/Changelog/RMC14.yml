@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed being able to use LOOC while unconscious from parasites or explosions.
-    type: Fix
-  id: 1934
-  time: '2025-07-05T06:28:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6899
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON not being able to use spotter equipment
-    type: Fix
-  id: 1935
-  time: '2025-07-05T06:30:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6907
-- author: Tunguso4ka
-  changes:
-  - message: Added M4SPR Extended, M1984 AP, M13 Extended, M13 Drum magazines to squad
-      vendors
-    type: Add
-  - message: Added welding googles to squad vendors.
-    type: Add
-  - message: Fixed the squad vendor having too many magnetic harness, S5 RedDot and
-      S6 Reflex attachments.
-    type: Fix
-  id: 1936
-  time: '2025-07-05T06:51:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6897
 - author: Dygon
   changes:
   - message: Fixed Lesser Drones being able to plant weed nodes out of range of other
@@ -4668,5 +4641,30 @@
   id: 2434
   time: '2025-10-06T12:23:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8063
+- author: CyberTropic
+  changes:
+  - message: Added a southern extension to Kutjevo.
+    type: Add
+  id: 2435
+  time: '2025-10-06T19:48:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7998
+- author: OmerF-afk
+  changes:
+  - message: Added L42A Rifle and magazine types for it
+    type: Add
+  - message: Missing Chance's claim MAR-30 and AP/Ext mags and HT ammo
+    type: Add
+  - message: Fixed nailgun magazines being too big to fit in some storages.
+    type: Fix
+  id: 2436
+  time: '2025-10-06T20:47:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8066
+- author: Tunguso4ka
+  changes:
+  - message: Fixed double lights on Sorokyne, Solaris, and Trijent.
+    type: Fix
+  id: 2437
+  time: '2025-10-10T07:46:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8078
 Name: RMC14
 Order: -1

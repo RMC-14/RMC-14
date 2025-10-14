@@ -752,27 +752,21 @@
     supplyDrop: false
     minimapColor: '#5A4501E7'
 
-# CLF insert areas
 - type: entity
-  parent: RMCAreaKutjevoInteriorColony
-  id: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
-  name: Kutjevo - Landing Zone Checkpoint
+  parent: RMCAreaKutjevoInteriorColonySouth
+  id: RMCAreaKutjevoInteriorColonySouthPower2South
+  name: Kutjevo - South Colony Treatment Plant - South
   components:
   - type: Sprite
-    state: colony_int
-
-- type: entity
-  parent: RMCAreaKutjevoInteriorColony
-  id: RMCAreaKutjevoInteriorColonyCLFShuttle
-  name: Kutjevo - Unregistered Freighter
-  components:
-  - type: Sprite
-    state: colony_int
-
-- type: entity
-  parent: RMCAreaKutjevoExterior
-  id: RMCAreaKutjevoExteriorCLFLZ
-  name: Kutjevo - Tertiary Landing Zone
-  components:
-  - type: Sprite
-    state: ext
+    state: colony_caves_3
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#5A4501E7'

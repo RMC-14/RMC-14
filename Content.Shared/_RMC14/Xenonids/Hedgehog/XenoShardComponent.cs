@@ -22,7 +22,10 @@ public sealed partial class XenoShardComponent : Component
     public float ShardGrowthRate = 5f; // shard_gain_onlife = 5
 
     [DataField, AutoNetworkedField]
-    public int ShardsOnDamage = 15; // shards_per_slash = 15
+    public int ShardsOnDamage = 10; // shards gained when hit by projectiles
+
+    [DataField, AutoNetworkedField]
+    public int ShardsPerSlash = 15; // shards gained when dealing melee damage
 
 
 
