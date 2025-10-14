@@ -237,3 +237,20 @@
   - type: Occluder
   - type: PaintableAirlock
     department: CMMilitaryPolice
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorOCPGeneric
+  suffix: OCP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/ocp_generic.rsi
+  - type: Occluder
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: RMCDoubleDoorOCPGenericGlass
+  suffix: OCP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/ocp_generic_glass.rsi
