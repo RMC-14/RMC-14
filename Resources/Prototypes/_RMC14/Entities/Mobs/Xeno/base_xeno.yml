@@ -239,6 +239,7 @@
   - type: WhitelistPickup
   - type: DropHeldOnIncapacitate
   - type: NightVision
+    state: Half
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
