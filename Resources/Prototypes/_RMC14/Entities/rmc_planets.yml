@@ -255,9 +255,6 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
-    nightmareScenarios:
-    - scenarioName: clfsmugglers
-      scenarioProbability: 0.1
     survivorJobInserts:
       CMSurvivor:
       - RMCSurvivorKutjevoChaplain: 1
@@ -273,20 +270,6 @@
       - RMCSurvivorKutjevoGoon: 1
       CMSurvivorScientist:
       - RMCSurvivorKutjevoResearcher: 2
-    survivorJobScenarios:
-      clfsmugglers:
-        CMSurvivor:
-        - RMCSurvivorCLFSoldier: -1
-        CMSurvivorCorporate:
-        - CMSurvivor: 0
-        CMSurvivorDoctor:
-        - RMCSurvivorCLFMedic: 1
-        CMSurvivorEngineer:
-        - RMCSurvivorCLFEngineer: 1
-        CMSurvivorSecurity:
-        - RMCSurvivorCLFLeader: 1
-        CMSurvivorScientist:
-        - CMSurvivor: 0
 
 - type: entity
   id: RMCPlanetChances
