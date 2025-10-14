@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
-public sealed partial class Anticarcinogenic : RMCChemicalEffect
+public sealed partial class Biocidic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
