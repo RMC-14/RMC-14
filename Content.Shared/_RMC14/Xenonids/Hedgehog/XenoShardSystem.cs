@@ -277,7 +277,7 @@ public sealed class XenoShardSystem : EntitySystem
 
         // Use hedgehog shield system instead of main shield system
         var hedgehogShieldSystem = EntityManager.System<HedgehogShieldSystem>();
-        hedgehogShieldSystem.ApplyShield(ent, FixedPoint2.New(9999), shield.ShieldDuration);
+        hedgehogShieldSystem.ApplyShield(ent, FixedPoint2.New(500), shield.ShieldDuration);
 
         // Show CM13-style messages
         var selfMsg = "We ruffle our bone-shard quills, forming a defensive shell!";
