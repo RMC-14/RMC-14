@@ -269,7 +269,7 @@ public sealed class XenoShardSystem : EntitySystem
 
 
         // Give overshield with very high HP so it blocks all damage but still triggers spike firing
-        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, FixedPoint2.New(9999), shield.ShieldDuration);
+        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, FixedPoint2.New(500), shield.ShieldDuration);
 
         // Show CM13-style messages
         var selfMsg = "We ruffle our bone-shard quills, forming a defensive shell!";
