@@ -20,7 +20,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients and [color=green]{PotencyPerSecond}[/color] units of alcohol from the bloodstream.\n" +
-               $"Increases alcohol metabolism by [color=green]{PotencyPerSecond}[/color] units.\n" +
+               $"Increases alcohol metabolism rate by [color=green]{PotencyPerSecond}[/color] units.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and some vomiting.\n" +
                $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";
     }
@@ -40,7 +40,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
             return;
 
         var drunkSystem = args.EntityManager.System<SharedDrunkSystem>();
-        drunkSystem.TryApplyDrunkenness(args.TargetEntity, PotencyPerSecond * 10);
+        drunkSystem.TryApplyDrunkenness(args.TargetEntity, PotencyPerSecond * 5);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

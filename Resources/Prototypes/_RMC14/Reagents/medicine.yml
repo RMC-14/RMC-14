@@ -76,16 +76,38 @@
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:Cryometabolizing
+        potency: 2
+      - !type:Neogenetic
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 1
+      - !type:Anticorrosive
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 1
+      - !type:Antitoxic
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 1
+      - !type:Anticarcinogenic
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 1
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
-          max: 170
+          max: 210
         damage:
-        - Brute: -1
-        - Burn: -1
-        - Toxin: -1.5
+        - Brute: -0.5
+        - Burn: -0.5
+        - Toxin: -0.5
         - Airloss: -0.5
-        - Genetic: -1
+        - Genetic: -0.5
 
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
@@ -340,15 +362,28 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:Cryometabolizing
+        potency: 6
+      - !type:Neogenetic
         conditions:
         - !type:Temperature
-          max: 170
-        damage:
-        - Brute: -2.25
-        - Burn: -2.25
-        - Toxin: -3
-        - Genetic: -1.5
+          max: 210
+        potency: 3
+      - !type:Anticorrosive
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 3
+      - !type:Antitoxic
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 3
+      - !type:Anticarcinogenic
+        conditions:
+        - !type:Temperature
+          max: 210
+        potency: 3
 
 # TODO RMC14 other effects
 - type: reagent
