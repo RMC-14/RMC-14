@@ -252,6 +252,96 @@
         - ReagentId: Vitamin
           Quantity: 1
 
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaSupremeFull
+  name: supreme pizza
+  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaSupremeSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaSupremeSlice
+  name: supreme slice
+  description: A slice of joy/sin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaCalabresaFull
+  name: calabresa pizza
+  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaCalabresaSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodCalabresaSlice
+  name: slice de calabresa
+  description: A slice of joy/sin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+
 # Pizza Box Base
 - type: entity
   parent: BaseStorageItem
