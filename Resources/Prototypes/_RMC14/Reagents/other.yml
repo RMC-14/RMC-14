@@ -11,4 +11,4 @@
       effects:
       - !type:Nutritious
         potency: 2
-        nutrimentfactor: 2
+        nutrimentFactor: 2
