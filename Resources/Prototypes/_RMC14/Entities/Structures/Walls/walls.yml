@@ -507,6 +507,13 @@
     key: walls
     base: cavewall
 
+- type: entity
+  parent: CMWallRock
+  id: RMCWallRockBosenmori
+  components:
+  - type: Sprite
+    color: "#967e73"
+
 # Cult
 - type: entity
   parent: CMBaseWall
