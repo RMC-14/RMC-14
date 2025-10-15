@@ -178,6 +178,15 @@
       state: spots-hair-right
 
 - type: marking
+  id: RMCSpotsSkrellHairTiny
+  bodyPart: HeadTop
+  markingCategory: Overlay
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: spots-hair-tiny
+
+- type: marking
   id: RMCSpotsSkrellBodyLeft
   bodyPart: Chest
   markingCategory: Overlay

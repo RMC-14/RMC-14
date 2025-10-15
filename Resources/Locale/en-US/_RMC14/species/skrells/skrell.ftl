@@ -5,10 +5,11 @@ marking-RMCHairSkrellShort = Short Skrell Hair
 marking-RMCHairSkrellLonger = Longer Skrell Hair
 marking-RMCHairSkrellShorter = Shorter Skrell Hair
 
-marking-RMCSpotsSkrellBodyLeft = Skrell Spots
-marking-RMCSpotsSkrellBodyRight = Skrell Spots
-marking-RMCSpotsSkrellHairLeft = Skrell Spots
-marking-RMCSpotsSkrellHairRight = Skrell Spots
+marking-RMCSpotsSkrellBodyLeft = Skrell Spots (Body, Left)
+marking-RMCSpotsSkrellBodyRight = Skrell Spots (Body, Right)
+marking-RMCSpotsSkrellHairLeft = Skrell Spots (Hair, Left)
+marking-RMCSpotsSkrellHairRight = Skrell Spots (Hair, Right)
+marking-RMCSpotsSkrellHairTiny = Skrell Tiny Spots
 
 marking-RMCHeaddressSkrellFestive = Festive Headdress (Colorable)
 marking-RMCHeaddressSkrellGold = Headdress (Colorable)
@@ -42,6 +43,7 @@ marking-RMCSpotsSkrellBodyLeft-spots-left = Spots
 marking-RMCSpotsSkrellBodyRight-spots-right = Spots
 marking-RMCSpotsSkrellHairLeft-spots-hair-left = Spots
 marking-RMCSpotsSkrellHairRight-spots-hair-right = Spots
+marking-RMCSpotsSkrellHairTiny-spots-hair-tiny = Spots
 
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_s = Headdress
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_gem_s = Gem
