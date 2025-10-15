@@ -19,7 +19,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients and [color=green]{PotencyPerSecond}[/color] units of alcohol from the bloodstream.\n" +
+        return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients, causing hunger.\n" +
                $"Increases alcohol metabolism rate by [color=green]{PotencyPerSecond}[/color] units.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and some vomiting.\n" +
                $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Damage;
+﻿using System.Linq;
+using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 
@@ -32,9 +33,16 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
+
+        // Calculate reagent-wide boost from all boost provider effects
+        var reagentBoostValue = CalculateReagentWideBoost(reagentArgs);
+
+        // Apply the boost to this effect's potency based on whether this effect allows self-boosting
+        var allowSelfBoost = this is IReagentBooster { BoostSelf: false };
+        ReagentBoost = allowSelfBoost ? reagentBoostValue : this is IReagentBooster ? 0f : reagentBoostValue;
+
         var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
-        CalculateReagentBoost(scaledPotency, reagentArgs);
 
         var totalQuantity = FixedPoint2.Zero;
         if (reagentArgs.Source != null)
@@ -47,8 +55,21 @@ public abstract partial class RMCChemicalEffect : EntityEffect
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
     }
 
-    protected virtual void CalculateReagentBoost(FixedPoint2 potency, EntityEffectReagentArgs args)
+    private static float CalculateReagentWideBoost(EntityEffectReagentArgs args)
     {
+        if (args.Reagent?.Metabolisms == null)
+            return 0f;
+
+        var totalBoost = 0f;
+
+        foreach (var effect in args.Reagent.Metabolisms.Values.SelectMany(metabolism => metabolism.Effects))
+        {
+            if (effect is IReagentBooster boostProvider)
+            {
+                totalBoost += boostProvider.CalculateBoost(args);
+            }
+        }
+        return totalBoost;
     }
 
     protected virtual void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

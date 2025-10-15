@@ -79,24 +79,12 @@
       - !type:Cryometabolizing
         potency: 2
       - !type:Neogenetic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 1
       - !type:Anticorrosive
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 1
       - !type:Antitoxic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 1
       - !type:Anticarcinogenic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 1
       - !type:EqualHealthChange
         conditions:
@@ -365,24 +353,12 @@
       - !type:Cryometabolizing
         potency: 6
       - !type:Neogenetic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 3
       - !type:Anticorrosive
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 3
       - !type:Antitoxic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 3
       - !type:Anticarcinogenic
-        conditions:
-        - !type:Temperature
-          max: 210
         potency: 3
 
 # TODO RMC14 other effects
