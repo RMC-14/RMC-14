@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Shared.Damage;
+﻿using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 
