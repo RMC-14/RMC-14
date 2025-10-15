@@ -19,3 +19,8 @@ ui-options-header-rmc-xeno = Xenonid
 
 ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack
 ui-options-function-rmc-xeno-rest = Xenonid Rest
+
+rmc-ui-options-night-vision-mode = Preferred Night Vision Mode
+rmc-ui-options-night-vision-mode-off = Off
+rmc-ui-options-night-vision-mode-half = Half
+rmc-ui-options-night-vision-mode-full = Full
