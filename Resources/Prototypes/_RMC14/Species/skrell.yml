@@ -48,7 +48,7 @@
       required: false
     Tail:
       points: 1
-      required: true # Opt-in
+      required: true
     FacialHair:
       points: 0
       required: false
