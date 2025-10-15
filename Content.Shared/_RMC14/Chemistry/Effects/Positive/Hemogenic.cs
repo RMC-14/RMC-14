@@ -6,6 +6,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared._RMC14.Body;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
@@ -21,7 +22,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         var baseText = $"Restores [color=green]{PotencyPerSecond}[/color]cl of blood while not hungry.\n" +
                        $"Causes [color=red]{PotencyPerSecond}[/color] nutrient loss per second.\n" +
                        $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
-                       $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] additional nutrient loss";
+                       $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] additional nutrient loss";
 
         return ActualPotency > 3
             ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage, and slows you down.\n{baseText}"
@@ -46,7 +47,12 @@ public sealed partial class Hemogenic : RMCChemicalEffect
             bloodstreamSystem.TryModifyBloodLevel((target, bloodstream), potency);
         }
 
-        if (!(ActualPotency > 3)) // TODO RMC14 Also check if blood volume is over 570 and if they're not a Yautja.
+        var rmcBloodstreamSystem = entityManager.System<SharedRMCBloodstreamSystem>();
+        var shouldApplyDamage = ActualPotency > 3 &&
+                                rmcBloodstreamSystem.TryGetBloodSolution(target, out var bloodSolution) &&
+                                bloodSolution.Volume > 570;
+        // TODO RMC14 Also check if they're not a Yautja.
+        if (!shouldApplyDamage)
             return;
 
         var damage = new DamageSpecifier();
@@ -69,6 +75,6 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         var target = args.TargetEntity;
         var hungerSystem = entityManager.System<HungerSystem>();
 
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond);
+        hungerSystem.ModifyHunger(target, -PotencyPerSecond * 5);
     }
 }
