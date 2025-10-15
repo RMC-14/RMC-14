@@ -84,7 +84,8 @@
         - Brute: -1
         - Burn: -1
         - Toxin: -1.5
-        - Genetic: -0.5
+        - Airloss: -0.5
+        - Genetic: -1
 
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
