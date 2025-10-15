@@ -199,7 +199,6 @@
     slice: FoodBanhMiHalf
     count: 2
 
-
 - type: entity
   name: banh mi half
   parent: CMFoodBase
@@ -223,7 +222,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 15
-
 
 - type: entity
   name: chicken parm hero
@@ -252,7 +250,6 @@
   - type: SliceableFood
     slice: FoodChickenParmHalf
     count: 2
-
 
 - type: entity
   name: chicken parm half
@@ -308,3 +305,54 @@
           Quantity: 5
   - type: Food
     transferAmount: 5
+
+- type: entity
+  name: black forest cake
+  parent: CMFoodBase
+  id: FoodBlackForestCake
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: black-forest-cake
+  - type: FlavorProfile
+    flavors:
+    - chocolate
+    - creamy
+    - cherry
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 60
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 30
+  - type: SliceableFood
+    slice: FoodBlackForestSlice
+    count: 6
+
+- type: entity
+  name: black forest cake slice
+  parent: CMFoodBase
+  id: FoodBlackForestSlice
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: black-forest-slice
+  - type: FlavorProfile
+    flavors:
+    - chocolate
+    - cherry
+    - creamy
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
