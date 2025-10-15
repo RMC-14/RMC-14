@@ -9,7 +9,7 @@ namespace Content.Client._RMC14.Shields
 
         protected override void OnAppearanceChange(EntityUid uid, XenoShieldComponent component, ref AppearanceChangeEvent args)
         {
-            if (!TryComp<SpriteComponent>(uid, out var sprite) || !sprite.LayerMapTryGet(RMCShieldVisuals.Base, out var layer))
+            if (!TryComp<SpriteComponent>(uid, out var sprite) || !SpriteSystem.LayerMapTryGet((uid, sprite), RMCShieldVisuals.Base, out var layer, true))
                 return;
 
             if (!AppearanceSystem.TryGetData<bool>(uid, RMCShieldVisuals.Active, out var active))
@@ -17,7 +17,7 @@ namespace Content.Client._RMC14.Shields
 
             if (!active)
             {
-                sprite.LayerSetVisible(layer, false);
+                SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
                 return;
             }
 
@@ -36,8 +36,8 @@ namespace Content.Client._RMC14.Shields
             else
                 state += "quarter";
 
-            sprite.LayerSetState(layer, state);
-            sprite.LayerSetVisible(layer, true);
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, state);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
         }
     }
 }

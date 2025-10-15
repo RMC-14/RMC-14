@@ -16,7 +16,7 @@ namespace Content.Shared._RMC14.Xenonids.Rend;
 
 public sealed class XenoRendSystem : EntitySystem
 {
-    [Dependency] private readonly RMCActionsSystem _actions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _actions = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -36,7 +36,7 @@ public sealed class XenoRendSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_actions.TryUseAction(xeno, args.Action))
+        if (!_actions.TryUseAction(args))
             return;
 
         args.Handled = true;

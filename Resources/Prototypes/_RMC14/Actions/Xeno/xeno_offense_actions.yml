@@ -1437,13 +1437,32 @@
   name: Rend
   description: Claw at enemies around you.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: rav_eviscerate
-    event: !type:XenoRendActionEvent
     useDelay: 2.5
+  - type: InstantAction
+    event: !type:XenoRendActionEvent
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 50
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDestroy
+  name: Destroy
+  description: After a short time, jump to the targeted locationing, destroying structures and gibbing hostiles within a 3x3 range.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 60
+  - type: TargetAction
+    range: 7
+    deselectOnMiss: false
+  - type: WorldTargetAction
+    event: !type:XenoDestroyActionEvent

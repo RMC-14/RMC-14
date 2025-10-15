@@ -2,7 +2,9 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoMobCollision
   id: RMCXenoKing
   name: King
   description: The end of the line.
@@ -10,7 +12,7 @@
   - type: GhostRole
     name: rmc-job-name-xeno-king
   - type: Sprite
-    sprite: _RMC14/Mobs/OldXenonids/king.rsi
+    sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi #TODO own rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -33,12 +35,13 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoRend
-# Doom
-# Destroy
+    - ActionXenoDoom
+    - ActionXenoDestroy
     - ActionXenoBulwarkOfTheHive
     - ActionXenoPheromones
     tier: 0
     bypassTierCount: true
+    countedInSlots: false
     unlockAt: 0
     hudOffset: -0.1,0
   - type: XenoHeavy
@@ -119,8 +122,15 @@
     color: "#921992"
   - type: RMCSize
     size: Immobile
-  - type: RMCXenoDamageVisuals
-    prefix: king
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
+  - type: RMCXenoDamageVisuals #TODO
+    prefix: queen
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -131,12 +141,23 @@
   - type: StunOnExplosionReceived
     weak: false
   - type: XenoOmitNumber
-  - type: Flammable
-    damage:
-      types:
-        Heat: 0
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
   - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
   - type: StunFriendlyXenoOnStep
+  - type: StunHostilesOnStep
+    damage:
+      groups:
+        Brute: 20   
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
   - type: XenoRankNames
     rankNames:
       2: rmc-xeno-mature-king
@@ -148,4 +169,9 @@
       groups:
         Brute: 25
   - type: XenoBulwarkOfTheHive
+  - type: XenoDoom
+  - type: XenoDestroy
+    structureDamage:
+      types:
+        Blunt: 1000
   
