@@ -37,6 +37,7 @@
   - type: ReceiverXenoClaws
     minimumClawStrength: Sharp
     maxHealth: 125
+    minimumXenoTier: 2
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
     flags: Breaching
@@ -89,6 +90,7 @@
   - type: ReceiverXenoClaws
     minimumClawStrength: Sharp
     maxHealth: 500
+    minimumXenoTier: 2
   - type: StaticPrice
     price: 66
 
