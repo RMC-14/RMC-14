@@ -9,11 +9,15 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     [DataField]
     public float Potency;
 
+    public float ReagentBoost;
+
+    public float PotencyBoost => Potency + ReagentBoost;
+
     /// <summary>
     ///     The value that should be used in actual calculations for chemical effect
     ///     Halved since potency is halved before being used
     /// </summary>
-    public float ActualPotency => Potency * 0.5f;
+    public float ActualPotency => PotencyBoost * 0.5f;
 
     // Halved again since chemicals tick every second in SS14, not every 2
     public float PotencyPerSecond => ActualPotency * 0.5f;
@@ -30,6 +34,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         var scale = reagentArgs.Scale;
         var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
+        CalculateReagentBoost(scaledPotency, reagentArgs);
 
         var totalQuantity = FixedPoint2.Zero;
         if (reagentArgs.Source != null)
@@ -40,6 +45,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         if (reagent.CriticalOverdose != null && totalQuantity >= reagent.CriticalOverdose)
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
+    }
+
+    protected virtual void CalculateReagentBoost(FixedPoint2 potency, EntityEffectReagentArgs args)
+    {
     }
 
     protected virtual void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
