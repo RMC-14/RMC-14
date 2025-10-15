@@ -312,3 +312,29 @@
     - rattles her tail
     - rattles his tail
     - rattles its tail
+
+- type: emote
+  id: Warcry
+  name: rmc-emote-name-warcry
+  category: Vocal
+  icon: _RMC14/Interface/Emotes/warcry.png
+  whitelist:
+    species:
+    - Human
+    - Vulpkanin
+    - Felinid
+    - Rodentia
+    - Dwarf
+    components:
+    - Vocal
+    tags:
+    - SiliconEmotes
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-warcry"]
+  chatTriggers:
+    - warcry
+    - warcries
+    - warcried
+    - warcrying

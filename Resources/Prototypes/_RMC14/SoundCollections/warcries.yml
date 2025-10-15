@@ -1,0 +1,17 @@
+- type: soundCollection
+  id: RMCMaleWarcries
+  files:
+    - /Audio/_RMC14/Voice/Human/malewarcry_1.ogg
+    - /Audio/_RMC14/Voice/Human/malewarcry_2.ogg
+    - /Audio/_RMC14/Voice/Human/malewarcry_3.ogg
+    - /Audio/_RMC14/Voice/Human/malewarcry_4.ogg
+    - /Audio/_RMC14/Voice/Human/malewarcry_5.ogg
+
+- type: soundCollection
+  id: RMCFemaleWarcries
+  files:
+    - /Audio/_RMC14/Voice/Human/femalewarcry_1.ogg
+    - /Audio/_RMC14/Voice/Human/femalewarcry_2.ogg
+    - /Audio/_RMC14/Voice/Human/femalewarcry_3.ogg
+    - /Audio/_RMC14/Voice/Human/femalewarcry_4.ogg
+    - /Audio/_RMC14/Voice/Human/femalewarcry_5.ogg

@@ -82,3 +82,38 @@
   license: "CC-BY-SA-3.0"
   copyright: "https://github.com/cmss13-devs/cmss13/commit/2b6f77936d1e4b114832c12598ac42947bdfc1a6"
   source: "https://github.com/cmss13-devs/cmss13/blob/92c1793b233955ef8bcd0eaee139736d340c374e/sound/voice/human_male_scream_5.ogg"
+
+- files:
+  - malewarcry_4.ogg
+  license: "CC-BY-4.0"
+  copyright: "Charge! - (Version 2) British Warrior by theuncertainman"
+  source: "https://freesound.org/s/458068/"
+
+- files:
+  - malewarcry_3.ogg
+  license: "CC-BY-4.0"
+  copyright: "Charge! - (Version 1) British Warrior by theuncertainman"
+  source: "https://freesound.org/s/458067/"
+
+- files:
+  - malewarcry_2.ogg
+  license: "CC-BY-4.0"
+  copyright: "YEAH! - Warcry, British Male by theuncertainman"
+  source: "https://freesound.org/s/440035/"
+
+- files:
+  - malewarcry_1.ogg
+  - malewarcry_5.ogg
+  license: "CC-BY-4.0"
+  copyright: "Warcry Yarghh! - British Male by theuncertainman"
+- files:
+  - femalewarcry_1.ogg
+  - femalewarcry_2.ogg
+  - femalewarcry_3.ogg
+  - femalewarcry_4.ogg
+  - femalewarcry_5.ogg
+  license: "CC0-1.0"
+  copyright: "hisoul on freesound.org"
+  source: "https://freesound.org/s/520281/"
+
+
