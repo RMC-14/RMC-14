@@ -224,3 +224,15 @@ public sealed class RMCCommendation
 
     public CommendationType Type { get; set; }
 }
+
+[Table("rmc_player_stats")]
+public sealed class RMCPlayerStats
+{
+    [Key]
+    [ForeignKey("Player")]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    public int ParasiteInfects { get; set; }
+}

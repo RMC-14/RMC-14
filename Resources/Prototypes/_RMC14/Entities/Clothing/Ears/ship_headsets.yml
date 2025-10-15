@@ -142,6 +142,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyCargotech
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineEngineer
+    - MarineCommand
   - type: GrantSquadLeaderTracker
     defaultMode: Quartermaster
     trackerModes:
@@ -152,6 +156,12 @@
   id: CMHeadsetChef
   name: kitchen radio headset
   description: Used by the onboard kitchen staff, filled with background noise of sizzling pots.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyRequisition
 
 - type: entity
   parent: RMCHeadsetShip
