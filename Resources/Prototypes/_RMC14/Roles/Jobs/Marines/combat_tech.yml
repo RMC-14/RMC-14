@@ -144,3 +144,14 @@
     - !type:RoleTimeRequirement
       role: CMJobCombatTech
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCT
+  name: Combat Technician
+  description: Combat Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: combat_tech

@@ -802,6 +802,28 @@ public sealed class SquadSystem : EntitySystem
         return result;
     }
 
+    public bool TryGetSquadMemberColor(EntityUid entity, out Color color, bool accessible = false)
+    {
+        color = default;
+
+        if (!TryComp(entity, out SquadMemberComponent? comp))
+            return false;
+
+        color = accessible && comp.AccessibleBackgroundColor != null
+            ? comp.AccessibleBackgroundColor.Value
+            : comp.BackgroundColor;
+
+        return true;
+    }
+
+    public void SetSquadMaxRole(Entity<SquadTeamComponent?> squad, ProtoId<JobPrototype> job, int amount)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        squad.Comp.MaxRoles[job] = amount;
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<SquadGrantAccessComponent>();
@@ -848,19 +870,5 @@ public sealed class SquadSystem : EntitySystem
         }
 
         _membersToUpdate.Clear();
-    }
-
-    public bool TryGetSquadMemberColor(EntityUid entity, out Color color, bool accessible = false)
-    {
-        color = default;
-
-        if (!TryComp(entity, out SquadMemberComponent? comp))
-            return false;
-
-        color = accessible && comp.AccessibleBackgroundColor != null
-            ? comp.AccessibleBackgroundColor.Value
-            : comp.BackgroundColor;
-
-        return true;
     }
 }

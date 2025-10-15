@@ -94,6 +94,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Glasses
       choices: { CMGlasses: 1 }
       entries:

@@ -43,28 +43,14 @@
   flavor: bitter
   color: "#808080"
   unknown: true
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2.5
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -435,7 +421,7 @@
       - !type:ChemVomit
         probability: 0
 
-- type: reagent
+- type: reagent # TODO rmc14
   parent: [RMCReagentElement, BaseAlcohol]
   id: RMCEthanol
   name: reagent-name-ethanol
