@@ -9,6 +9,7 @@
   startingGear: RMCGearSurvivorScientist
   accessGroups:
   - ColonistMedical
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -72,7 +73,7 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
-     
+
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorScientist
