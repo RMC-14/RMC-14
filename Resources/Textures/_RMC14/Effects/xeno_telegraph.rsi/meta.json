@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi, expand_out by Vermidia",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -40,33 +40,6 @@
           0.05,
           0.05,
           0.05
-        ]
-      ]
-    },
-    {
-      "name": "expand_out",
-      "delays": [
-        [
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25,
-          0.25
         ]
       ]
     }
