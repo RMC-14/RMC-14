@@ -50,7 +50,6 @@
 
 - type: loadout
   id: GoldMatebaRMC
-  cost: 4
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -63,7 +62,6 @@
 
 - type: loadout
   id: GoldHandcannonRMC
-  cost: 4
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
