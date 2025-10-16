@@ -1492,6 +1492,36 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_squad_preferences", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("rank_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("JobName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("job_name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_rank");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("rank", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -2567,6 +2597,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.Rank", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Rank")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rank_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2880,6 +2922,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
+
+                    b.Navigation("Rank");
 
                     b.Navigation("SquadPreference");
 
