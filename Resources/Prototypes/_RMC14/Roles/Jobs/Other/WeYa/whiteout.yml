@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-pmc-whiteout-description
   playTimeTracker: RMCJobPMCWhiteout
   ranks:
-    RMCRankWeYaOperator: []
+    RMCRankWeYaWhiteout: []
   startingGear: RMCJobPMCWhiteout
   icon: RMCJobIconPMCWhiteout
   joinNotifyCrew: false
