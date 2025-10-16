@@ -506,3 +506,12 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetTSEPAFill
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerPersonal
+  name: personal locker
+  description: A white locker, featuring both English and Japanese text on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/personal.rsi

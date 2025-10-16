@@ -47,3 +47,20 @@
     children:
     - id: RMCTabletCO
     - id: RMCHeadsetMarineCommand
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerWallPersonal
+  name: wall-mounted personal locker
+  description: A white wall-mounted locker, featuring both English and Japanese text on the front.
+  components:
+  - type: EntityStorage
+    isCollidableWhenOpen: true
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/personal.rsi
+  - type: RMCMesonsNonviewable

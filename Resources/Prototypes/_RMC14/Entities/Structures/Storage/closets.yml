@@ -94,6 +94,16 @@
     anchored: false
   - type: Physics
     bodyType: Dynamic
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetChest
+  name: chest closet
+  description: A small cabinet; looks like someone could fit inside with great effort. Wouldn't be comfortable, that's for sure.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/chest_closet.rsi
+
 # Colored
 - type: entity
   parent: CMClosetBase
