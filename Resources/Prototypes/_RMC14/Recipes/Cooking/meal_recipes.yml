@@ -201,6 +201,18 @@
     FoodMeat: 1
     FoodCabbage: 1
 
+- type: microwaveMealRecipe
+  id: RecipeChickenParm
+  name: chicken parm recipe
+  result: FoodChickenParmHero
+  time: 15
+  group: Savory
+  solids:
+    FoodBaguette: 1
+    FoodTomato: 1
+    FoodMeatChickenFried: 1
+    FoodCheeseSlice: 1
+
 #Cakes
 - type: microwaveMealRecipe
   id: RecipeRMCSuppermatter
@@ -213,3 +225,13 @@
     Sugar: 30
     RMCNitrogen: 10
     RMCPhoron: 10
+
+- type: microwaveMealRecipe
+  id: RecipeBlackForest
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 30
+  solids:
+    FoodCakeBatter: 2
+  reagents:
+    Sugar: 30

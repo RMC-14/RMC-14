@@ -309,8 +309,8 @@
 - type: entity
   name: black forest cake
   parent: CMFoodBase
-  id: FoodBlackForestCake
-  description: It's a grand gesture that isn't the least bit grand.
+  id: FoodCakeBlackForest
+  description: Now without fish-shaped ethyl benzene!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -321,7 +321,7 @@
     - creamy
     - cherry
   - type: Food
-    transferAmount: 5
+    transferAmount: 3
   - type: SolutionContainerManager
     solutions:
       food:
@@ -356,3 +356,74 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 6
+
+- type: entity
+  name: uncooked sausage
+  parent: CMFoodBase
+  id: FoodMeatSausage
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: sausage
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+
+- type: entity
+  name: uncooked sausage
+  parent: CMFoodBase
+  id: FoodMeatSausageCooked
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: sausage-cooked
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 4
+
+- type: entity
+  name: hot dog
+  parent: CMFoodBase
+  id: FoodHotDog
+  description: Life is tasting pretty good! Oh yes!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: hot-dog
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bread
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Protein
+          Quantity: 4
