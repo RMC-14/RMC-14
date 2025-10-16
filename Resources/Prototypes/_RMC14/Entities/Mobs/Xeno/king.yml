@@ -131,6 +131,8 @@
     - KnockedDown
   - type: RMCXenoDamageVisuals #TODO
     prefix: queen
+  - type: FixedIdentity
+    name: rmc-job-name-xeno-king
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

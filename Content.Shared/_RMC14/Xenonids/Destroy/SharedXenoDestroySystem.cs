@@ -4,6 +4,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Vents;
 using Content.Shared.Actions;
@@ -21,9 +22,11 @@ using Content.Shared.Jittering;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -60,6 +63,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -77,6 +81,10 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         SubscribeLocalEvent<XenoDestroyLeapingComponent, UseAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, PickupAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, AttackAttemptEvent>(OnLeapingCancel);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, ThrowAttemptEvent>(OnLeapingCancel);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, ChangeDirectionAttemptEvent>(OnLeapingCancel);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, InteractionAttemptEvent>(OnLeapingCancelInteract);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, PullAttemptEvent>(OnLeapingCancelPull);
     }
 
     private void OnXenoDestroyAction(Entity<XenoDestroyComponent> xeno, ref XenoDestroyActionEvent args)
@@ -127,6 +135,8 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         xeno.Comp.LastTargetCoords = _transform.GetMoverCoordinates(coords) - _transform.GetMoverCoordinates(xeno);
         Dirty(xeno);
 
+        _rmcPull.TryStopAllPullsFromAndOn(xeno);
+
         //Root
         _stun.TrySlowdown(xeno, xeno.Comp.CrashTime, true, 0f, 0f);
         var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
@@ -157,6 +167,16 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     private void OnLeapingCancel<T>(Entity<XenoDestroyLeapingComponent> ent, ref T args) where T : CancellableEntityEventArgs
     {
         args.Cancel();
+    }
+
+    private void OnLeapingCancelInteract(Entity<XenoDestroyLeapingComponent> ent, ref InteractionAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnLeapingCancelPull(Entity<XenoDestroyLeapingComponent> ent, ref PullAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
 

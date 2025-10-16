@@ -384,6 +384,9 @@ rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, s
 rmc-gut-finish-self = We tear this pathetic host in half!!
 rmc-gut-finish-others = {$user} tears {$target} in half!!
 
+# Doomed
+rmc-doomed-fail = It's not working...
+
 # Destroy
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!

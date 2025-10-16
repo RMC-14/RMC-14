@@ -7,6 +7,8 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Light.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
@@ -42,6 +44,7 @@ public abstract class SharedXenoDoomSystem : EntitySystem
         SubscribeLocalEvent<LightDoomedComponent, ComponentShutdown>(OnDoomedLightRemoved);
         SubscribeLocalEvent<LightDoomedComponent, AttemptPointLightToggleEvent>(OnDoomedLightAttemptToggle);
         SubscribeLocalEvent<LightDoomedComponent, PointLightToggleEvent>(OnDoomedLightToggle);
+        SubscribeLocalEvent<LightDoomedComponent, ItemToggleActivateAttemptEvent>(OnDoomedLightItemToggle);
 
         SubscribeLocalEvent<MobDoomedComponent, ComponentStartup>(OnDoomedAdded);
         SubscribeLocalEvent<MobDoomedComponent, ComponentShutdown>(OnDoomedRemoved);
@@ -77,14 +80,28 @@ public abstract class SharedXenoDoomSystem : EntitySystem
         _pointLight.SetEnabled(ent.Owner, ent.Comp.WasEnabled);
     }
 
-    //Cannot turn on a doomed light
-    private void OnDoomedLightAttemptToggle(Entity<LightDoomedComponent> ent, ref AttemptPointLightToggleEvent args)
+    private void OnDoomedLightItemToggle(Entity<LightDoomedComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
-        if (!args.Enabled || _timing.CurTime >= ent.Comp.EndsAt)
+        if (!HasComp<ItemTogglePointLightComponent>(ent))
             return;
 
-        //Nothing ever checks to unturn something off
-        ent.Comp.WasEnabled = true;
+        args.Popup = Loc.GetString("rmc-doomed-fail");
+        args.Cancelled = true;
+    }
+
+    //Cannot turn on a doomed light
+    //Tries to keep track of when something is switched on/off but doesn't do it perfectly
+    //Oh well
+    private void OnDoomedLightAttemptToggle(Entity<LightDoomedComponent> ent, ref AttemptPointLightToggleEvent args)
+    {
+        if (_timing.CurTime >= ent.Comp.EndsAt)
+            return;
+
+        if (ent.Comp.DoomActivated)
+            ent.Comp.WasEnabled = args.Enabled;
+
+        if (!args.Enabled)
+            return;
 
         args.Cancelled = true;
     }
@@ -94,9 +111,8 @@ public abstract class SharedXenoDoomSystem : EntitySystem
         if (!args.Enabled || _timing.CurTime >= ent.Comp.EndsAt)
             return;
 
-        ent.Comp.WasEnabled = true;
-
         //Shut it off if it turns on
+        ent.Comp.DoomActivated = true;
         _pointLight.SetEnabled(ent.Owner, false);
     }
 

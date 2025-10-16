@@ -6,7 +6,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 
 namespace Content.Server._RMC14.Xenonids.Doom;
-public sealed class XenoDoomSystem : SharedXenoDoomSystem
+public sealed partial class XenoDoomSystem : SharedXenoDoomSystem
 {
     [Dependency] private readonly ExpendableLightSystem _expend = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
@@ -38,6 +38,9 @@ public sealed class XenoDoomSystem : SharedXenoDoomSystem
         }
 
         ent.Comp.WasEnabled = light.Enabled;
+        if (!light.Enabled)
+            ent.Comp.DoomActivated = true;
+
         base.OnDoomedLightAdded(ent, ref args);
         Dirty(ent);
     }

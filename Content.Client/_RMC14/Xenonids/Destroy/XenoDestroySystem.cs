@@ -5,7 +5,7 @@ using Robust.Shared.Animations;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Destroy;
-public sealed class XenoDestroySystem : SharedXenoDestroySystem
+public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;

@@ -13,4 +13,7 @@ public sealed partial class LightDoomedComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool WasEnabled;
+
+    [DataField, AutoNetworkedField]
+    public bool DoomActivated = false;
 }
