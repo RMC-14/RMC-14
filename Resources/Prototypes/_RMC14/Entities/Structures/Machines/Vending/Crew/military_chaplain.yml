@@ -1,0 +1,72 @@
+﻿- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMilitaryChaplain
+  name: ColMarTech Military Chaplain Equipment Rack
+  description: An automated rack to supply any Military Chaplains with the items their faith requires.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedical" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCMilitaryChaplain
+    sections:
+    - name: Religious Texts
+      choices: { RMCBible: 1}
+      entries:
+      - id: RMCBible
+      - id: RMCQuran
+      - id: RMCTorah
+      - id: RMCHolyBook
+    - name: Jacket
+      choices: { CMCoat: 1}
+      entries:
+      - id: RMCClothingHolidayRobes
+      - id: RMCClothingPriestRobes
+      - id: RMCClothingNunRobes
+        # todo: Add clothes for other faiths
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
+      - id: RMCHeadNunHood
+        #TODO: More headwear options
+    - name: Accessories
+      entries:
+      - id: RMCHelmetGarbRosary
+        amount: 1
+      - id: RMCHelmetGarbChaplainPatch
+        amount: 1
+        # more icons for other faiths
+        # sikh dagger could be unique
+    - name: Neckwear
+      choices: { RMCStole: 1 }
+      entries:
+      - id: RMCStoleRed
+      - id: RMCStoleWhite
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelBlack
+      - id: CMSatchel
+    - name: Other Supplies
+      entries:
+      - id: RMCBinoculars
+        points: 5
+      - id: RMCFlashlight
+        points: 5
+        recommended: true
+      - id: SprayBottleSpaceCleaner
+        points: 2
+      - id: CMHandLabeler
+        points: 5
+      - id: CMPaperBin30
+        name: Paper Bin
+        points: 10
+      - id: RMCCandle
+        points: 1
+      - id: RMCBoxBodyBag
+        points: 10
+      - id: RMCUrn
+        points: 5
