@@ -13,8 +13,8 @@
     availableModes:
     - FullAuto
   - type: RMCSelectiveFire
-    scatterWielded: 14
-    scatterUnwielded: 16
+    scatterWielded: 12
+    scatterUnwielded: 13
     baseFireRate: 10
     burstScatterMult: 4
     modifiers:
