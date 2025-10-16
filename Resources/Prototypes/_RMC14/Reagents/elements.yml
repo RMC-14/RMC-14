@@ -78,30 +78,26 @@
   flavor: bitter
   color: "#808080"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
+      - !type:Toxic #TODO PROPERTY_NEUTRALIZING = 1
+        potency: 1
       - !type:HealthChange
         damage:
           groups:
-            Burn: 0.5
-            Toxin: 0.375
+            Burn: 0.25
+            Toxin: 0.125
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Burn: 1.0
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage: #TODO liver damage on high
-          groups:
-            Toxin: 2.5
+            Burn: 0.5
+            Toxin: 0.25
 
 - type: reagent
   parent: RMCReagentElement

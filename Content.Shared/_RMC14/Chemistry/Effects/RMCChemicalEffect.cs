@@ -21,7 +21,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     [DataField]
     public float NutrimentFactor;
 
-    public float BodyTemp = 310.15f;
+    protected const float BodyTemp = 310.15f;
 
     public override void Effect(EntityEffectBaseArgs args)
     {

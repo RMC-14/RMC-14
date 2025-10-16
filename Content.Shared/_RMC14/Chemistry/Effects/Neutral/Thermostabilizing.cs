@@ -15,7 +15,9 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the temperature of the body that it is in to {BodyTemp} degrees, by {40 * PotencyPerSecond * 1.5} degrees at a time";
+        return $"Stabilizes the temperature of the body that it is in to {BodyTemp} degrees, by {40f * PotencyPerSecond * 1.5f} degrees at a time.\n" +
+               $"Overdoses cause [color=red]10[/color] seconds of unconsciousness.\n" +
+               $"Critical overdoses cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

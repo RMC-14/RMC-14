@@ -11,7 +11,9 @@ public sealed partial class Nutritious : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var updatedFactor = NutrimentFactor > 0 ? NutrimentFactor : ActualPotency;
+        var updatedFactor = NutrimentFactor > 0
+            ? NutrimentFactor * 0.1
+            : ActualPotency;
         return $"Restores [color=green]{updatedFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
     }
 
@@ -26,7 +28,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
             return;
 
         var updatedFactor = NutrimentFactor > 0
-            ? NutrimentFactor * args.Scale.Float()
+            ? NutrimentFactor * (float)args.Quantity
             : Potency;
         hungerSystem.ModifyHunger(target, updatedFactor * ActualPotency);
     }
