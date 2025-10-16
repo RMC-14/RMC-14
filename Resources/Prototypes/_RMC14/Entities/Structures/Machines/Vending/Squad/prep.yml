@@ -144,6 +144,8 @@
         amount: 1
     - name: Armor
       entries:
+      - id: RMCArmorVestSquad
+        amount: 15
       - id: RMCArmorM3MediumCarrier
         amount: 15
       - id: RMCArmorM3MediumPadded

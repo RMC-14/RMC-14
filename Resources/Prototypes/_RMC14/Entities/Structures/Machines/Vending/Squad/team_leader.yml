@@ -179,6 +179,10 @@
       entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: RMCArmorVestFireteamLeader
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
