@@ -221,7 +221,11 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         foreach (var mob in _mobs)
         {
             if (mob.Owner == xeno.Owner)
+            {
+                //Smaller
+                _cameraShake.ShakeCamera(mob, 5, 1);
                 continue;
+            }
 
             _cameraShake.ShakeCamera(mob, 15, 1);
         }
