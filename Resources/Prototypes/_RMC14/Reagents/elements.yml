@@ -249,25 +249,9 @@
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cellular: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          types:
-            Cellular: 2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2
-#TODO causes internal bleeding, OD organ damage, critical causes even more
+      - !type:Carcinogenic
+        potency: 2
+#TODO causes internal bleeding, OD organ damage, critical causes even more #PROPERTY_HEMORRAGING = 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -351,24 +335,8 @@
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cellular: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          types:
-            Cellular: 2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2
+      - !type:Carcinogenic
+        potency: 2
 
 - type: reagent
   parent: RMCReagentElement
@@ -488,29 +456,13 @@
   flavor: acid
   color: "#DB5008"
   unknown: true
+  toxin: true
   metabolisms:
     #TODO hurts on inject equal to amount
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: 0.75
-            Toxin: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Burn: 3
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Burn: 7.5
-            Toxin: 2.5
+      - !type:Toxic
+        potency: 1
+      - !type:Corrosive
+        potency: 3

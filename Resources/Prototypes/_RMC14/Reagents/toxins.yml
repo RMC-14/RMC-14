@@ -1,5 +1,21 @@
 ﻿- type: reagent
   parent: CMReagent
+  id: RMCGenericToxin
+  name: reagent-name-rmcgenerictoxin
+  desc: reagent-desc-rmcgenerictoxin
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#CF3600"
+  unknown: true
+  toxin: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:Toxic
+        potency: 1
+
+- type: reagent
+  parent: CMReagent
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
   desc: reagent-desc-rmcmolecularacid
@@ -12,11 +28,10 @@
       #TODO hurts on inject equal to amount
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: 0.5 # Corrosive 2
-            Toxin: 0.25 # Toxic 1
+      - !type:Toxic
+        potency: 1
+      - !type:Corrosive
+        potency: 2
       - !type:PopupMessage
         type: Local
         visualType: SmallCaution
@@ -112,24 +127,6 @@
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange # Toxic 1
-        damage:
-          groups:
-            Toxin: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Toxin: 2.5
       - !type:Emote # Sedative 6
         emote: Yawn
         showInChat: true
@@ -150,7 +147,8 @@
         damage:
           types:
             Asphyxiation: 15
-
+      - !type:Toxic
+        potency: 1
 
 - type: reagent
   parent: CMReagent
