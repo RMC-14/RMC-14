@@ -1,0 +1,117 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPCommandoMedic
+  name: rmc-job-name-spp-commando-medic
+  description: rmc-ghost-role-information-deathsquad-description
+  playTimeTracker: CMJobSPPCommmandoMedic
+  ranks:
+    RMCRankSPP2ndKommando: []
+  startingGear: RMCGearSPPCommandoMedic
+  icon: "RMCJobIconSPPCommandoMedic"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: SPP Commando Medic (!DEATHSQUAD!)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-commando-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPCommandoMedic
+  name: DEATHSQUAD spp ghost role commando medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPCommandoMedic
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPCommandoMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-commando-medic
+    description: rmc-ghost-role-information-deathsquad-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPCommandoMedic
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: startingGear
+  id: RMCGearSPPCommandoMedic
+  equipment:
+    head: CMHeadCapSPP
+    ears: RMCHeadsetSPPCommando
+    ears2: RMCM5CameraGear
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPCommando
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponRifleType73Filled
+    mask: RMCMaskBalaclavaSPPCommando
+    eyes: RMCGlassesSPPCommandoNightVision
+    id: RMCIDSPP
+    belt: RMCBeltMedicBagSPPCommandoFilled
+    back: RMCBackpackSPPCommando
+    pocket1: RMCPouchMagazineLarge
+    pocket2: RMCPouchExplosiveFilledPlasticExplosives
+  storage:
+    back:
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMDefibrillator
+    - CMAdvFirstAidKit
+    - CMRollerBedSpawnFolded
+    - CMCrowbar
+    - CMMRE # TODO RMC14 - SPP MRE
+    outerClothing:
+    - RMCHandcuffs
+    - RMCHandcuffs
+    pocket1:
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+
+- type: playTimeTracker
+  id: CMJobSPPCommmandoMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPCommandoMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_commed
