@@ -281,7 +281,6 @@
           True: {visible: false}
           False: {visible: true}
 
-
 - type: entity
   parent: RMCHeadCapFlippable
   id: RMCYellowCap
