@@ -95,6 +95,8 @@
   id: RMCEffectXenoTelegraphKing
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 2
   - type: Sprite
     drawdepth: Effects
     sprite: _RMC14/Effects/xeno_telegraph_big.rsi

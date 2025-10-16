@@ -1453,7 +1453,7 @@
   parent: ActionXenoBase
   id: ActionXenoDestroy
   name: Destroy
-  description: After a short time, jump to the targeted locationing, destroying structures and gibbing hostiles within a 3x3 range.
+  description: After a short time, jump to the targeted location, destroying structures and gibbing hostiles within a 3x3 range. Works over barricades and other short barriers.
   components:
   - type: Action
     itemIconStyle: NoItem

@@ -174,4 +174,19 @@
     structureDamage:
       types:
         Blunt: 1000
+    structures:
+      tags:
+      - Structure
+      - Wall
+      - Window
+      components:
+      - Sentry
+      - RMCTeslaCoil
+      - Barricade
+      - Mortar
+      - EntityStorage
+      - ReagentTank
+      - PlaceableSurface
+      - ReagentDispenser
+      - IVDrip
   
