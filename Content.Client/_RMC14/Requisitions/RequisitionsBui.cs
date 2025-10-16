@@ -49,35 +49,35 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
     {
         _window ??= this.CreateWindow<RequisitionsWindow>();
 
-        var platformLabel = "No platform";
-        var platformButtonLabel = "No platform";
+        var platformLabel = Loc.GetString("rmc-requisitions-no-platform");
+        var platformButtonLabel = Loc.GetString("rmc-requisitions-no-platform");
         var platformButtonDisabled = false;
         bool? raise = null;
         switch (uiState.PlatformLowered)
         {
             case Lowered or Raised when uiState.Busy:
-                platformLabel = $"Platform position: {uiState.PlatformLowered}";
-                platformButtonLabel = "ASRS is busy";
+                platformLabel = Loc.GetString("rmc-requisitions-platform-position", ("position", uiState.PlatformLowered));
+                platformButtonLabel = Loc.GetString("rmc-requisitions-platform-asrs-busy");
                 platformButtonDisabled = true;
                 break;
             case Lowered:
-                platformButtonLabel = "Raise platform";
-                platformLabel = "Platform position: Lowered";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-platform-raise");
+                platformLabel = Loc.GetString("rmc-requisitions-platform-lowered");
                 raise = true;
                 break;
             case Raised:
-                platformButtonLabel = "Lower platform";
-                platformLabel = "Platform position: Raised";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-platform-lower");
+                platformLabel = Loc.GetString("rmc-requisitions-platform-raised");
                 raise = false;
                 break;
             case Lowering:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Platform lowering...";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-platform-please-wait");
+                platformLabel = Loc.GetString("rmc-requisitions-platform-lowering");
                 platformButtonDisabled = true;
                 break;
             case Raising:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Platform raising...";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-platform-please-wait");
+                platformLabel = Loc.GetString("rmc-requisitions-platform-raising");
                 platformButtonDisabled = true;
                 break;
             case null:
@@ -96,14 +96,14 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         }
 
         var budget = new FormattedMessage();
-        budget.AddMarkupOrThrow($"[bold]Supply budget: ${uiState.Balance}[/bold]");
+        budget.AddMarkupOrThrow(Loc.GetString("rmc-requisitions-budget", ("balance", uiState.Balance)));
         _window.MainView.BudgetLabel.SetMessage(budget);
         _window.OrderCategoriesView.BudgetLabel.SetMessage(budget);
         _window.CategoryView.BudgetLabel.SetMessage(budget);
         _window.OrderSearchView.BudgetLabel.SetMessage(budget);
 
         var categoryHeader = new FormattedMessage();
-        categoryHeader.AddMarkupOrThrow("[bold]Select a category[/bold]");
+        categoryHeader.AddMarkupOrThrow(Loc.GetString("rmc-requisitions-select-category"));
         _window.OrderCategoriesView.CategoryHeaderLabel.SetMessage(categoryHeader);
         _window.OrderCategoriesView.CategoriesContainer.DisposeAllChildren();
 
@@ -165,7 +165,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
 
         var category = computer.Categories[categoryIndex];
         var requestMsg = new FormattedMessage();
-        requestMsg.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
+        requestMsg.AddMarkupOrThrow(Loc.GetString("rmc-requisitions-request-from", ("category", category.Name)));
         _window.CategoryView.RequestFromLabel.SetMessage(requestMsg);
 
         var state = State as RequisitionsBuiState;
@@ -229,7 +229,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
                 continue;
 
             var categoryHeader = new FormattedMessage();
-            categoryHeader.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
+            categoryHeader.AddMarkupOrThrow(Loc.GetString("rmc-requisitions-request-from", ("category", category.Name)));
             categoryGroup.GroupLabel.SetMessage(categoryHeader);
 
             _window.OrderSearchView.ResultContainer.AddChild(categoryGroup);
