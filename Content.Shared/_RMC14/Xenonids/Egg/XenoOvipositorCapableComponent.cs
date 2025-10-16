@@ -12,6 +12,9 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     public string AttachedState = "normal";
 
     [DataField, AutoNetworkedField]
+    public bool Attached  = false;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
@@ -21,7 +24,7 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     public Vector2 Offset = new(-1, -1);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId[] ActionIds = ["ActionXenoLeader", "ActionXenoHeal", "ActionXenoQueenEye"];
+    public EntProtoId[] ActionIds = ["ActionXenoLeader", "ActionXenoHeal", "ActionXenoQueenEye", "ActionXenoRemotePlasmaTransfer"];
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();

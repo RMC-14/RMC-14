@@ -56,6 +56,19 @@ public sealed partial class XenoComponent : Component
     [DataField, AutoNetworkedField]
     public bool MuteOnSpawn;
 
+    /// <summary>
+    /// Hides this xeno from the caste unlock announcements.
+    /// Use for admeme or unimplemented castes that can't be evolved to.
+    /// </summary>
+    [DataField]
+    public bool Hidden;
+
+    [DataField]
+    public bool Refresh = true;
+
+    [DataField]
+    public bool ShowInWatchWindowCounts = true;
+
     public EmoteSoundsPrototype? Sounds;
 
     [DataField, AutoNetworkedField]

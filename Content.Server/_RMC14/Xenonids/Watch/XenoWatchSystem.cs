@@ -1,13 +1,27 @@
-﻿using Content.Server.Chat.Systems;
+﻿using System.Linq;
+using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Xenonids.Watch;
@@ -22,9 +36,20 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly MobThresholdSystem _threshhold = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
+
+    private TimeSpan _maxProcessTime;
+    private TimeSpan _nextUpdateTime;
+    private TimeSpan _updateEvery;
+
 
     private readonly Dictionary<ICommonSession, ICChatRecipientData> _recipients = new();
 
@@ -40,8 +65,35 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
         SubscribeLocalEvent<XenoWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<XenoWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
+        SubscribeLocalEvent<XenoComponent, WatchInfoUpdateEvent>(UpdateInfo);
+
 
         SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+
+        Subs.CVar(_config, RMCCVars.RMCXenoWatchUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+        if (time < _nextUpdateTime)
+            return;
+
+        _nextUpdateTime = time + _updateEvery;
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out _, out var member, out var metaData))
+        {
+            if (TryComp<XenoComponent>(uid, out var comp))
+            {
+                if (comp.Refresh)
+                {
+                    var updateEvent = new WatchInfoUpdateEvent();
+                    RaiseLocalEvent(uid, ref updateEvent);
+                }
+            }
+        }
     }
 
     private void OnWatchedRemove<T>(Entity<XenoWatchedComponent> ent, ref T args)
@@ -119,13 +171,79 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID));
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, 0, 0, 0));
         }
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,0,0,0));
     }
+
+    private void UpdateInfo(Entity<XenoComponent> ent, ref WatchInfoUpdateEvent args)
+    {
+        if (_hive.GetHive(ent.Owner) is not {} hive)
+            return;
+
+        short tier3Amount = 0;
+        short tier2Amount = 0;
+        short xenocount = 0;
+        bool queen = TryComp<XenoOvipositorCapableComponent>(ent, out var ovicomp) && ovicomp.Attached;
+
+
+        var xenos = new List<Xeno>();
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var member, out var metaData))
+        {
+            bool leader = false;
+            EntProtoId? StrainOf = null;
+            if (uid == ent.Owner || member.Hive != hive.Owner)
+                continue;
+
+            if (_mobState.IsDead(uid))
+                continue;
+
+            if(TryComp<HiveLeaderComponent>(uid, out var leaderComp))
+                leader = true;
+
+            if (TryComp<XenoStrainComponent>(uid, out var strainComp))
+            {
+                StrainOf = strainComp.StrainOf;
+            }
+
+            if (comp.CountedInSlots)
+            {
+                xenocount++;
+            }
+
+            switch (comp.Tier)
+            {
+                case 2:
+                    tier2Amount++;
+                    break;
+                case 3:
+                    tier3Amount++;
+                    break;
+            }
+
+
+            FixedPoint2 evo = 0;
+
+            if (TryComp<XenoEvolutionComponent>(uid, out var evoComp))
+            {
+                evo = evoComp.Points;
+            }
+            if(!TryComp<DamageableComponent>(uid, out var damageableComp))
+                return;
+
+            _threshhold.TryGetIncapPercentage(uid, damageableComp.TotalDamage, out var incap);
+
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID,(1-incap)??0 , _plasma.GetPlasmaPercentage(uid), evo, leader, StrainOf));
+        }
+
+
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos,  hive.Comp.BurrowedLarva, hive.Comp.BurrowedLarvaSlotFactor, xenocount, tier2Amount, tier3Amount, queen));
+    }
+
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
