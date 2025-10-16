@@ -9,7 +9,9 @@
     sprite: _RMC14/Structures/Windows/Frames/prison_frame.rsi
     state: prison_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -29,7 +31,9 @@
     sprite: _RMC14/Structures/Windows/prison_window.rsi
     state: prison_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
   - type: Repairable
@@ -82,7 +86,9 @@
     sprite: _RMC14/Structures/Windows/prison_cellwindow.rsi
     state: prison_cellwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_cellwindow
     mode: CardinalFlags
 
@@ -99,7 +105,9 @@
     sprite: _RMC14/Structures/Windows/prison_rwindow.rsi
     state: prison_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -156,7 +164,9 @@
     sprite: _RMC14/Structures/Windows/prison_rwindow.rsi
     state: prison_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_rwindow
     mode: CardinalFlags
     # TODO RMC14 200 hp, but then it spawns indestructible shutters apparently idk
