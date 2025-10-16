@@ -305,6 +305,8 @@
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -1057,6 +1059,7 @@
     supplyDrop: false
     minimapColor: '#C19504E7'
     weatherEnabled: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaLv522Atmos
