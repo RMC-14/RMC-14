@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared.Alert;
 using Content.Shared.Rounding;
 using Content.Shared.Mobs.Systems;
@@ -62,6 +63,9 @@ public sealed class XenoEnergySystem : EntitySystem
 
             if (xeno.Comp.IgnoreLateInfected && TryComp<VictimInfectedComponent>(hit, out var infect) && infect.CurrentStage >= infect.FinalSymptomsStart)
                 continue;
+            
+            if (HasComp<RMCTrainingDummyComponent>(hit))
+                return;
 
             isHit = true;
             if (_stand.IsDown(hit))
