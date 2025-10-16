@@ -74,7 +74,7 @@
   - type: SpawnPoint
     job_id: CMPilotGunship
   - type: Sprite
-    state: po_spawn
+    state: gp_spawn
 
 - type: playTimeTracker
   id: CMJobPilotGunship
