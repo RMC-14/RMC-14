@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Cell Commander
   special:
   - !type:AddComponentSpecial
     components:

@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFSpecialist
   icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Specialist
   special:
   - !type:AddComponentSpecial
     components:

@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFSoldier
   icon: RMCJobIconCLFSoldier
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Soldier
   special:
   - !type:AddComponentSpecial
     components:
