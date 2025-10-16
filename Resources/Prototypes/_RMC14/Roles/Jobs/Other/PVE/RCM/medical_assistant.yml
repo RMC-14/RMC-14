@@ -1,0 +1,50 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesMedicPVE
+  name: rmc-job-name-rcm-pve-medical-assistant
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalMedicPVE
+  ranks:
+    RMCRankTSEMedicalAssistant: [ ]
+  startingGear: RMCGearRoyalMedicPVE
+  icon: "RMCJobIconRoyalMedicPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Medical Assistant (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 2 
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-medical-assistant
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalMedicPVE
+  equipment:
+    id: RMCIDRoyalMarinesMedicPVE
+
+- type: playTimeTracker
+  id: RMCJobRoyalMedicPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalMedicPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_medic_pve

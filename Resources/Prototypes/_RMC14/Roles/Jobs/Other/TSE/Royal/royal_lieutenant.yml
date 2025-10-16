@@ -5,11 +5,11 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalLieutenant
   ranks:
-    RMCRankTSELieutenant: [ ] # According to CM13 devs
+    RMCRankTSESecondLieutenant: [ ] # According to CM13 devs
   startingGear: RMCGearRoyalLieutenant # If you don't pronounce it "leftenant"
   icon: "RMCJobIconRoyalLieutenant" # You should be banned for being LRP
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-major
+  supervisors: cm-job-supervisors-royal-captain
   spawnMenuRoleName: RCM Lieutenant # I echo the sentiment here
   special:
   - !type:AddComponentSpecial
@@ -60,7 +60,7 @@
     id: RMCIDRoyalMarines
     belt: RMCBeltHolsterPistolFilledL54
     back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker

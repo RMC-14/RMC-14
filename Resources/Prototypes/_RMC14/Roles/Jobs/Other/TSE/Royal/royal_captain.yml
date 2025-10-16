@@ -1,15 +1,15 @@
 - type: job
   parent: CMJobBase
-  id: CMRoyalMarinesMajor
-  name: rmc-job-name-rcm-major
+  id: CMRoyalMarinesCaptain
+  name: rmc-job-name-rcm-captain
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalMajor
+  playTimeTracker: RMCJobRoyalCaptain
   ranks:
-    RMCRankTSEMajor: [ ] 
-  startingGear: RMCGearRoyalMajor
-  icon: "RMCJobIconRoyalMajor"
+    RMCRankTSECaptain: [ ] 
+  startingGear: RMCGearRoyalCaptain
+  icon: "RMCJobIconRoyalCaptain"
   joinNotifyCrew: false
-  spawnMenuRoleName: RCM Major 
+  spawnMenuRoleName: RCM Captain
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,18 +36,16 @@
         RMCSkillIntel: 2
         RMCSkillPowerLoader: 1
         RMCSkillOverwatch: 1
-        RMCSkillSmartGun: 1
-        RMCSkillExecution: 1
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-major
+      prefix: rmc-job-prefix-rcm-captain
   hidden: true
-  
+
 - type: startingGear 
-  id: RMCGearRoyalMajor
+  id: RMCGearRoyalCaptain
   equipment:
     head: RMCHeadRoyalBeretLead
     eyes: RMCGlassesMedicalHUDGlasses
@@ -58,17 +56,17 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
-    belt: RMCMatebaBeltLuxuriousFilled
+    belt: RMCBeltHolsterPistolFilledL54
     back: RMCSatchelLightpackFilledRoyalMedic
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: RMCJobRoyalMajor
+  id: RMCJobRoyalCaptain
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalMajor
+  id: RMCJobIconRoyalCaptain
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_major
+    state: rmc_captain

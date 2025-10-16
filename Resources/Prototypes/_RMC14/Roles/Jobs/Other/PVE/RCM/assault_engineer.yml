@@ -1,0 +1,50 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesAssaultEngineerPVE
+  name: rmc-job-name-rcm-pve-assault-engineer
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalAssaultEngineerPVE
+  ranks:
+    RMCRankTSESapper: [ ]
+  startingGear: RMCGearRoyalAssaultEngineerPVE
+  icon: "RMCJobIconRoyalAssaultEngineerPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  spawnMenuRoleName: RCM Assault Engineer (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 3
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1  
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-assault-engineer
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalAssaultEngineerPVE
+  equipment:
+    id: RMCIDRoyalMarinesAssaultEngineerPVE
+
+- type: playTimeTracker
+  id: RMCJobRoyalAssaultEngineerPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalAssaultEngineerPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_engi_pve
