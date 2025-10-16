@@ -13,7 +13,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
     {
         var updatedFactor = NutrimentFactor > 0
             ? NutrimentFactor * 0.1
-            : ActualPotency;
+            : Potency;
         return $"Restores [color=green]{updatedFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
     }
 
