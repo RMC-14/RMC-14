@@ -21,9 +21,9 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     [DataField]
     public float NutFactor;
     [DataField]
-    public float NutRate;
+    public float NutMetabolism;
 
-    public float NutrimentFactor => NutFactor * NutRate;
+    public float NutrimentFactor => NutFactor * NutMetabolism;
 
     protected const float BodyTemp = 310.15f;
 

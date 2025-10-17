@@ -12,4 +12,4 @@
       - !type:Nutritious
         potency: 2
         nutFactor: 2
-        nutRate: 0.1
+        nutMetabolism: 0.1
