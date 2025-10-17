@@ -13,6 +13,13 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
     private const float JumpHeight = 10;
 
     private const string LeapingAnimationKey = "king-leap-animation";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeAllEvent<XenoDestroyLeapStartEvent>(OnXenoLeapStart);
+    }
     public Animation LeapAnimation(XenoDestroyComponent destroy, Vector2 leapOffset)
     {
         var midpoint = (leapOffset / 2);
@@ -50,8 +57,11 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
         };
     }
 
-    protected override void OnLeapingStart(Entity<XenoDestroyComponent> xeno, ref XenoDestroyLeapStartEvent args)
+    private void OnXenoLeapStart(XenoDestroyLeapStartEvent ev)
     {
+        if (!TryGetEntity(ev.King, out var xeno) || !TryComp<XenoDestroyComponent>(xeno, out var destroy))
+            return;
+
         if (!TryComp<SpriteComponent>(xeno, out var sprite) || TerminatingOrDeleted(xeno))
             return;
 
@@ -62,7 +72,7 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
             return;
 
 
-        _animPlayer.Play((xeno, player), LeapAnimation(xeno.Comp, args.LeapOffset), LeapingAnimationKey);
+        _animPlayer.Play(xeno.Value, LeapAnimation(destroy, ev.LeapOffset), LeapingAnimationKey);
     }
 
     protected override void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)

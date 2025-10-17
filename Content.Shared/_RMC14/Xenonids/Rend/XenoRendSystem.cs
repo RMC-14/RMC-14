@@ -11,6 +11,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rend;
 
@@ -60,10 +61,9 @@ public sealed class XenoRendSystem : EntitySystem
             }
 
             if (_net.IsServer)
-            {
                 SpawnAttachedTo(xeno.Comp.Effect, ent.Owner.ToCoordinates());
-                _audio.PlayPvs(xeno.Comp.Sound, xeno);
-            }
+
+            _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
         }
     }
 }
