@@ -79,7 +79,6 @@
           Shock: -15
           Cold: -15
       addComponents:
-      # TODO darksight instead of night vision
       - type: NightVision
         innate: true
         state: Half
