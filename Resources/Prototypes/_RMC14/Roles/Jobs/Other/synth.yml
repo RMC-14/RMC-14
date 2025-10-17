@@ -82,6 +82,7 @@
       # TODO darksight instead of night vision
       - type: NightVision
         innate: true
+        state: Half
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated
