@@ -12417,7 +12417,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 5
     components:
@@ -13801,7 +13801,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 24.5,-16.5
       parent: 23
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 893
     components:
