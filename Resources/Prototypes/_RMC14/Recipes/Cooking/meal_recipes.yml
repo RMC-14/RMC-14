@@ -213,6 +213,24 @@
     FoodMeatChickenFried: 1
     FoodCheeseSlice: 1
 
+- type: microwaveMealRecipe
+  id: RecipeHotDog
+  name: hot dog recipe
+  result: FoodHotDog
+  time: 10
+  solids:
+    FoodBun: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHotDogCooked
+  name: cooked hot dog recipe
+  result: FoodHotDog
+  time: 5
+  solids:
+    FoodBun: 1
+    FoodMeatSausageCooked: 1
+
 #Cakes
 - type: microwaveMealRecipe
   id: RecipeRMCSuppermatter
@@ -230,8 +248,9 @@
   id: RecipeBlackForest
   name: black forest cake recipe
   result: FoodCakeBlackForest
-  time: 30
+  time: 5
   solids:
-    FoodCakeBatter: 2
+    FoodCakeChocolate: 1
+    FoodCherry: 1
   reagents:
-    Sugar: 30
+    Cream: 10

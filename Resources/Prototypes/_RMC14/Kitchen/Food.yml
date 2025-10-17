@@ -380,7 +380,7 @@
           Quantity: 4
 
 - type: entity
-  name: uncooked sausage
+  name: cooked sausage
   parent: CMFoodBase
   id: FoodMeatSausageCooked
   description: It's a grand gesture that isn't the least bit grand.
