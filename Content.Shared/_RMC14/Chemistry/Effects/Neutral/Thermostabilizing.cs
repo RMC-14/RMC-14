@@ -43,7 +43,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
             args.TargetEntity,
             Unconscious,
             TimeSpan.FromSeconds(10),
-            true
+            false
         );
     }
 
@@ -58,7 +58,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
             args.TargetEntity,
             Unconscious,
             TimeSpan.FromSeconds(5),
-            true
+            false
         );
     }
 }

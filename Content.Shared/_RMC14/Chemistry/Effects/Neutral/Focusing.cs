@@ -42,7 +42,7 @@ public sealed partial class Focusing : RMCChemicalEffect
 
         if (!(ActualPotency >= 3))
             return;
-        args.EntityManager.EntitySysManager.GetEntitySystem<BlindableSystem>().AdjustEyeDamage(args.TargetEntity, -1);
+        args.EntityManager.EntitySysManager.GetEntitySystem<BlindableSystem>().AdjustEyeDamage(args.TargetEntity, -9);
         args.EntityManager.RemoveComponent<MutedComponent>(args.TargetEntity);
     }
 

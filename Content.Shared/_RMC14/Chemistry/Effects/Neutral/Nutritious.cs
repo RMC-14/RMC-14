@@ -12,7 +12,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var updatedFactor = NutrimentFactor > 0
-            ? NutrimentFactor * 0.1
+            ? NutrimentFactor * 0.1 // Can't un-hardcode :(
             : Potency;
         return $"Restores [color=green]{updatedFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
     }

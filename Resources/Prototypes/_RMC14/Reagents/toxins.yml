@@ -127,6 +127,8 @@
     Poison:
       metabolismRate: 0.05
       effects:
+      - !type:Toxic
+        potency: 1
       - !type:Emote # Sedative 6
         emote: Yawn
         showInChat: true
@@ -147,8 +149,6 @@
         damage:
           types:
             Asphyxiation: 15
-      - !type:Toxic
-        potency: 1
 
 - type: reagent
   parent: CMReagent

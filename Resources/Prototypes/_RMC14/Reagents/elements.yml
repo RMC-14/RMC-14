@@ -83,9 +83,9 @@
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:Toxic #TODO PROPERTY_NEUTRALIZING = 1
+      - !type:Toxic
         potency: 1
-      - !type:HealthChange
+      - !type:HealthChange #TODO PROPERTY_NEUTRALIZING = 1
         damage:
           groups:
             Burn: 0.25
