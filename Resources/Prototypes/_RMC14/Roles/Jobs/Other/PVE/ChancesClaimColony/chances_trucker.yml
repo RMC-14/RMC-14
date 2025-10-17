@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorTrucker
   id: CMSurvivorChancesTrucker
-  name: rmc-job-name-survivor-chances-trucker
+  name: rmc-job-name-colonist-chances-trucker
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesTrucker
   startingGear: RMCGearSurvivorChancesTrucker

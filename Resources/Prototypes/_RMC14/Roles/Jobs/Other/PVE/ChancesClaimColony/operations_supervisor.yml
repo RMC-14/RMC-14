@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivor
   id: CMSurvivorOperationsSupervisor
-  name: rmc-job-name-survivor-operations-supervisor
+  name: rmc-job-name-colonist-operations-supervisor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorOperationsSupervisor
   icon: "CMJobIconLiaison"

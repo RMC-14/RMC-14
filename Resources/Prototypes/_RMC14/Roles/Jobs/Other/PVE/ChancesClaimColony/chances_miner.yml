@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorMiner
   id: CMSurvivorChancesMiner
-  name: rmc-job-name-survivor-chances-miner
+  name: rmc-job-name-colonist-chances-miner
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesMiner
   startingGear: RMCGearSurvivorChancesMiner
