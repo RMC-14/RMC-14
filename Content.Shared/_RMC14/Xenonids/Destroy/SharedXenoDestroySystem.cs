@@ -71,12 +71,13 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     {
         SubscribeLocalEvent<XenoDestroyComponent, XenoDestroyActionEvent>(OnXenoDestroyAction);
         SubscribeLocalEvent<XenoDestroyComponent, XenoDestroyLeapDoafter>(OnXenoDestroyDoafter);
+        SubscribeLocalEvent<XenoDestroyComponent, XenoDestroyLeapStartEvent>(OnLeapingStart);
 
         SubscribeLocalEvent<XenoDestroyLeapingComponent, AttemptMobCollideEvent>(OnLeapCollide);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, AttemptMobTargetCollideEvent>(OnLeapTargetCollide);
 
-        SubscribeLocalEvent<XenoDestroyLeapingComponent, ComponentStartup>(OnLeapingInit);
-        SubscribeLocalEvent<XenoDestroyLeapingComponent, ComponentShutdown>(OnLeapingRemove);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, ComponentInit>(OnLeapingInit);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, ComponentRemove>(OnLeapingRemove);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, DropAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, UseAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, PickupAttemptEvent>(OnLeapingCancel);
@@ -132,26 +133,25 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             return;
         }
 
-        xeno.Comp.LastTargetCoords = _transform.GetMoverCoordinates(coords) - _transform.GetMoverCoordinates(xeno);
-        Dirty(xeno);
-
         _rmcPull.TryStopAllPullsFromAndOn(xeno);
 
         //Root
         _stun.TrySlowdown(xeno, xeno.Comp.CrashTime, true, 0f, 0f);
-        var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
-        leaping.Target = coords;
-        leaping.LeapMoveAt = _timing.CurTime + xeno.Comp.CrashTime / 2;
-        leaping.LeapEndAt = _timing.CurTime + xeno.Comp.CrashTime;
-        Dirty(xeno.Owner, leaping);
+        if (_net.IsServer)
+        {
+            var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
+            leaping.Target = coords;
+            leaping.LeapMoveAt = _timing.CurTime + xeno.Comp.CrashTime / 2;
+            leaping.LeapEndAt = _timing.CurTime + xeno.Comp.CrashTime;
+            Dirty(xeno.Owner, leaping);
+            SpawnAtPosition(xeno.Comp.Telegraph, coords);
+        }
+
+        var ev = new XenoDestroyLeapStartEvent(_transform.ToMapCoordinates(coords).Position - _transform.ToMapCoordinates(xeno.Owner.ToCoordinates()).Position);
+        RaiseLocalEvent(xeno, ref ev);
 
         _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote);
         _rotateToFace.TryFaceCoordinates(xeno, _transform.ToMapCoordinates(args.TargetCoords).Position);
-
-        if (_net.IsServer)
-        {
-            SpawnAtPosition(xeno.Comp.Telegraph, coords);
-        }
     }
 
     private void OnLeapCollide(Entity<XenoDestroyLeapingComponent> xeno, ref AttemptMobCollideEvent args)
@@ -306,7 +306,12 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         _actions.SetCooldown(destroy, cooldownTime);
     }
 
-    protected virtual void OnLeapingInit(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentStartup args)
+    protected virtual void OnLeapingStart(Entity<XenoDestroyComponent> xeno, ref XenoDestroyLeapStartEvent args)
+    {
+
+    }
+
+    private void OnLeapingInit(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentInit args)
     {
         var actions = _actions.GetActions(xeno);
         foreach (var action in actions)
@@ -315,7 +320,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         }
     }
 
-    protected virtual void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentShutdown args)
+    protected virtual void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)
     {
         var actions = _actions.GetActions(xeno);
         foreach (var action in actions)

@@ -13,12 +13,9 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
     private const float JumpHeight = 10;
 
     private const string LeapingAnimationKey = "king-leap-animation";
-    public Animation LeapAnimation(XenoDestroyComponent leaping)
+    public Animation LeapAnimation(XenoDestroyComponent destroy, Vector2 leapOffset)
     {
-        if (leaping.LastTargetCoords == null)
-            return new Animation();
-
-        var midpoint = (leaping.LastTargetCoords.Value.Position / 2);
+        var midpoint = (leapOffset / 2);
         var opposite = -midpoint;
 
         midpoint += new Vector2(0, JumpHeight);
@@ -29,11 +26,11 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
         //with extra y added so it feels like it's in the air
         //since the xeno gets moved halfway through theres an opposite midpoint so their general location is preserved
 
-        var midtime = (float)(leaping.CrashTime.TotalSeconds / 2f);
+        var midtime = (float)(destroy.CrashTime.TotalSeconds / 2f);
 
         return new Animation
         {
-            Length = leaping.CrashTime,
+            Length = destroy.CrashTime,
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty()
@@ -53,14 +50,9 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
         };
     }
 
-    protected override void OnLeapingInit(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentStartup args)
+    protected override void OnLeapingStart(Entity<XenoDestroyComponent> xeno, ref XenoDestroyLeapStartEvent args)
     {
-        base.OnLeapingInit(xeno, ref args);
-
-        if (!TryComp<SpriteComponent>(xeno, out var sprite) || TerminatingOrDeleted(xeno) || _timing.ApplyingState)
-            return;
-
-        if (!TryComp<XenoDestroyComponent>(xeno, out var dest))
+        if (!TryComp<SpriteComponent>(xeno, out var sprite) || TerminatingOrDeleted(xeno))
             return;
 
         if (!TryComp<AnimationPlayerComponent>(xeno, out var player))
@@ -70,17 +62,16 @@ public sealed partial class XenoDestroySystem : SharedXenoDestroySystem
             return;
 
 
-        _animPlayer.Play((xeno, player), LeapAnimation(dest), LeapingAnimationKey);
+        _animPlayer.Play((xeno, player), LeapAnimation(xeno.Comp, args.LeapOffset), LeapingAnimationKey);
     }
 
-    protected override void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentShutdown args)
+    protected override void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)
     {
         base.OnLeapingRemove(xeno, ref args);
 
         if (!TryComp<SpriteComponent>(xeno, out var sprite) || TerminatingOrDeleted(xeno))
             return;
 
-        //Hope this fixes itself tomorrow for no reason
         if (TryComp(xeno, out AnimationPlayerComponent? animation))
             _animPlayer.Stop((xeno, animation), LeapingAnimationKey);
 

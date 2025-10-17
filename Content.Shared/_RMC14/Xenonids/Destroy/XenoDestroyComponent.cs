@@ -8,6 +8,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Destroy;
 
@@ -56,9 +57,6 @@ public sealed partial class XenoDestroyComponent : Component
     //What it counts as for structure damages
     [DataField, AutoNetworkedField]
     public ProtoId<ExplosionPrototype> ExplosionType = "RMCOB";
-
-    [DataField, AutoNetworkedField]
-    public EntityCoordinates? LastTargetCoords;
 
     [DataField, AutoNetworkedField]
     public EntProtoId SmokeEffect = "CMExplosionEffectGrenade";
