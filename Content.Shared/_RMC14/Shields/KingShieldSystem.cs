@@ -2,14 +2,10 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Numerics;
-using static Content.Shared._RMC14.Sprite.SpriteSetRenderOrderComponent;
-
 namespace Content.Shared._RMC14.Shields;
 
 public sealed class KingShieldSystem : EntitySystem

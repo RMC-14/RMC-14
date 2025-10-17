@@ -3,7 +3,6 @@ using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;

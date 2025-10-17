@@ -1,6 +1,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Content.Shared._RMC14.Maths;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -14,7 +15,7 @@ public sealed partial class XenoBulwarkOfTheHiveComponent : Component
     public int DecayAmount = 100;
 
     [DataField]
-    public float Range = 7.334f;
+    public float Range = RMCMathExtensions.CircleAreaFromSquareAbilityRange(6);
 
     [DataField]
     public FixedPoint2 ShieldAmount = FixedPoint2.New(200);

@@ -2,13 +2,10 @@ using Content.Shared._RMC14.Maths;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
-using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Destroy;
 
@@ -50,9 +47,6 @@ public sealed partial class XenoDestroyComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(60);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan StartTime;
 
     //What it counts as for structure damages
     [DataField, AutoNetworkedField]

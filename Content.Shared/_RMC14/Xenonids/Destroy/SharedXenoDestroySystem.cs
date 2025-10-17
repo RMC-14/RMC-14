@@ -6,11 +6,9 @@ using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Vents;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion;
@@ -116,7 +114,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         };
 
         _doafter.TryStartDoAfter(doAfter);
-        xeno.Comp.StartTime = _timing.CurTime;
         Dirty(xeno);
     }
 
@@ -293,23 +290,11 @@ public abstract class SharedXenoDestroySystem : EntitySystem
 
     private void SetCooldown(Entity<XenoDestroyComponent> xeno)
     {
-        EntityUid? destroy = null;
-
-        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDestroyActionEvent>(xeno))
+        foreach (var (actionId, action) in _rmcActions.GetActionsWithEvent<XenoDestroyActionEvent>(xeno))
         {
-            destroy = action;
+            _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
             break;
         }
-
-        if (destroy == null)
-            return;
-
-        var cooldownTime = xeno.Comp.Cooldown - (_timing.CurTime - xeno.Comp.StartTime);
-
-        if (cooldownTime < TimeSpan.Zero)
-            cooldownTime = TimeSpan.Zero;
-
-        _actions.SetCooldown(destroy, cooldownTime);
     }
 
     private void OnLeapingInit(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentInit args)
