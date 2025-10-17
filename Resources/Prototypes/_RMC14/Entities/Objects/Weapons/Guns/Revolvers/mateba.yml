@@ -490,7 +490,7 @@
   - type: Storage
     whitelist:
       tags:
-      - RMCWeaponRevolverMateba
+      - RMCMateba
       - RMCAttachmentMatebaStandardGolden
       - RMCAttachmentMatebaMarksmanGolden
       - RMCAttachmentMatebaSnubNoseGolden
