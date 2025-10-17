@@ -14,7 +14,8 @@
       effects:
       - !type:Nutritious
         potency: 2
-        nutrimentFactor: 1
+        nutFactor: 1
+        nutRate: 0.1
 
 # Peanut Butter
 - type: reagent
@@ -41,4 +42,5 @@
       effects:
       - !type:Nutritious
         potency: 2
-        nutrimentFactor: 1
+        nutFactor: 1
+        nutRate: 0.1

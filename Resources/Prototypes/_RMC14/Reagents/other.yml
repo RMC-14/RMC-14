@@ -11,4 +11,5 @@
       effects:
       - !type:Nutritious
         potency: 2
-        nutrimentFactor: 2
+        nutFactor: 2
+        nutRate: 0.1

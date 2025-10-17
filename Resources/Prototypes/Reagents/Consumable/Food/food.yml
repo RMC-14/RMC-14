@@ -15,7 +15,8 @@
         potency: 1
       - !type:Nutritious
         potency: 2
-        nutrimentFactor: 15
+        nutFactor: 15
+        nutRate: 0.1
       - !type:Hemogenic
         potency: 1
   pricePerUnit: 2
