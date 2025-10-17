@@ -1430,11 +1430,13 @@
     event: !type:XenoTumbleActionEvent
     rotateOnUse: false
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoRend
-  name: Rend
+  name: Rend (25)
   description: Claw at enemies around you.
   components:
   - type: Action

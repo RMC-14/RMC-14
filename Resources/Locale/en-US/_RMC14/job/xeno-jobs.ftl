@@ -54,7 +54,7 @@ cm-job-name-xeno-warrior = Warrior
 CMJobXenoWarrior = Warrior
 
 rmc-job-name-xeno-king = King
-RMCJobXenoQueen = King
+RMCJobXenoKing = King
 
 # TODO RMC14
 department-CMXeno = Xenonid

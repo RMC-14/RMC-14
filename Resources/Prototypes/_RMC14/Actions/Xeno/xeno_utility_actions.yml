@@ -381,7 +381,7 @@
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoDoom
-  name: Doom
+  name: Doom (50)
   description: Turns off lights around you for 10 seconds, and slows, dazes, and drains hostiles as well.
   components:
   - type: Action
