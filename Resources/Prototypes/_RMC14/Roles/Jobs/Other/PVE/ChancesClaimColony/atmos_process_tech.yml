@@ -1,22 +1,22 @@
 ﻿- type: job
-  parent: CMSurvivorMiner
-  id: CMSurvivorChancesMiner
-  name: rmc-job-name-survivor-chances-miner
+  parent: CMSurvivorEngineer
+  id: CMSurvivorChancesAtmosProcessTech
+  name: rmc-job-name-colonist-atmos-process-tech
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorChancesMiner
-  startingGear: RMCGearSurvivorChancesMiner
-  spawnMenuRoleName: Mining Surveyor (Chances Colonist)
+  playTimeTracker: CMJobSurvivorChancesAtmosProcessTech
+  startingGear: RMCGearSurvivorChancesAtmosProcessTech
+  spawnMenuRoleName: Atmospheric Processing Reactor Technician (Chance's Colonist)
   greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
-        RMCSkillEngineer: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
@@ -28,26 +28,18 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorChancesMiner
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorChancesAtmosProcessTech
   equipment:
-    head: RMCHardhatOrange
-    ears: CMHeadsetColony
-    gloves: RMCHandsBlack
-    back: CMSatchelEngineerMinerSurvivorFill
-    shoes: RMCShoesJackboots
-    pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchToolsFill
-    id: CMIDCardColonist
-    jumpsuit: RMCJumpsuitCivilianRed
-    outerClothing: CMUtilityVest
-    mask: RMCMaskRebreather
-    belt: RMCPickaxe
+    head: RMCHardHat
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: RMCBrownWEYACoat
+    pocket1: RMCPouchToolsFill
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorChancesMiner
-  name: chances miner spawn point
+  id: RMCSpawnPointSurvivorChancesAtmosProcessTech
+  name: atmospheric processing reactor technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -57,23 +49,23 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorChancesMiner
+  id: CMJobSurvivorChancesAtmosProcessTech
   isHumanoid: true
 
 - type: entity
   parent: MarkerBase
-  id: RMCRandomHumanoidSurvivorChancesMiner
-  name: chances mining surveyor ghost role
+  id: RMCRandomHumanoidSurvivorChancesAtmosProcessTech
+  name: atmospheric processing reactor technician ghost role
   components:
   - type: Sprite
     layers:
     - state: red
   - type: RandomHumanoidSpawner
-    settings: RMCSurvivorChancesMiner
+    settings: RMCSurvivorChancesAtmosProcessTech
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
-  id: RMCSurvivorChancesMiner
+  id: RMCSurvivorChancesAtmosProcessTech
   components:
   - type: RMCJobSpawner
-    job: CMSurvivorChancesMiner
+    job: CMSurvivorChancesAtmosProcessTech
