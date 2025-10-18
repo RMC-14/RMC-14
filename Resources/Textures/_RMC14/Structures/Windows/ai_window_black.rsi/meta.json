@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f92080d44ff62d1a1a18d5eb5265f541324684ec/icons/turf/walls/windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alm_ai_rwindow12"
+    },
+    {
+      "name": "alm_ai_rwindow0"
+    },
+    {
+      "name": "alm_ai_rwindow1"
+    },
+    {
+      "name": "alm_ai_rwindow2"
+    },
+    {
+      "name": "alm_ai_rwindow3"
+    },
+    {
+      "name": "alm_ai_rwindow4"
+    },
+    {
+      "name": "alm_ai_rwindow8"
+    }
+  ]
+}
