@@ -1,0 +1,86 @@
+- type: entity
+  parent: BaseItem
+  id: RMCBasePortableDialysis
+  name: portable dialysis machine
+  description: A man-portable dialysis machine, with a small internal battery that can be recharged. Filters out all foreign compounds from the bloodstream of whoever it's attached to, but also typically ends up removing some blood as well.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    heldPrefix: defib
+  - type: Speech
+    speechVerb: Robotic
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_RMC14/Medical/defib_SafetyOn.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
+  - type: Defibrillator
+    zapDelay: 0
+    doAfterDuration: 4
+    allowDoAfterMovement: false
+    canDefibCrit: false
+    rmcZapHeal:
+    - Brute: -12
+    - Burn: -12
+    - Toxin: -12
+    - Genetic: -12
+    zapHeal:
+      groups:
+        Airloss: -400
+    zapSound:
+      path: /Audio/_RMC14/Medical/defib_release.ogg
+      params:
+        volume: -6
+    chargeSound:
+      path: /Audio/_RMC14/Medical/defib_charge.ogg
+      params:
+        volume: -8
+    failureSound:
+      path: /Audio/_RMC14/Medical/defib_failed.ogg
+      params:
+        volume: -6
+    successSound:
+      path: /Audio/_RMC14/Medical/defib_success.ogg
+      params:
+        volume: -6
+    readySound:
+      path: /Audio/_RMC14/Medical/defib_ready.ogg
+      params:
+        volume: -6
+    zapDamage: 0
+  - type: DoAfter
+  - type: UseDelay
+  - type: StaticPrice
+    price: 100
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  id: CMDefibrillator
+  parent: [ RMCBasePortableDialysis, RMCPowerCellSlotUnremovable ]
+  suffix: RMC14
+  components:
+  - type: PowerCellDraw
+    enabled: true
+    useRate: 10
+  - type: RMCPowerUsageDisplay
