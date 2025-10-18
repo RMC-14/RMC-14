@@ -154,6 +154,10 @@
       components:
       - RMCFireImmunityBypass
   - type: StunFriendlyXenoOnStep
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
+  - type: RMCActionOrder
+    id: RMCXenoQueen
   - type: StunHostilesOnStep
     damage:
       groups:
