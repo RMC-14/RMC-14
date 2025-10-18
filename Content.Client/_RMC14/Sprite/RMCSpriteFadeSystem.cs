@@ -11,6 +11,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Physics;
 using Robust.Client.Graphics;
+using Content.Shared.Ghost;
 
 namespace Content.Client._RMC14.Sprite;
 
@@ -91,13 +92,17 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
 
         if (_stateManager.CurrentState is GameplayState state && _spriteQuery.TryGetComponent(player, out var playerSprite))
         {
+            var playerIsGhost = player != null && HasComp<GhostComponent>(player.Value);
+
             foreach (var (mapPos, excludeBB) in _points)
             {
                 foreach (var ent in state.GetClickableEntities(mapPos, _eyeManager.CurrentEye, excludeFaded: false, ignoreInteractionTransparency: true))
                 {
-                    if (ent == player || !_fadeQuery.HasComponent(ent) || !_spriteQuery.TryGetComponent(ent, out var sprite) || sprite.DrawDepth < playerSprite.DrawDepth)
+                    if (ent == player || !_fadeQuery.HasComponent(ent) || !_spriteQuery.TryGetComponent(ent, out var sprite))
                         continue;
 
+                    if (!playerIsGhost && sprite.DrawDepth < playerSprite.DrawDepth)
+                        continue;
 
                     if (excludeBB && _fixturesQuery.TryComp(ent, out var body))
                     {

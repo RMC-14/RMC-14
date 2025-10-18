@@ -722,6 +722,20 @@
       - id: DrinkMugRed
         amount: 2
 
+- type: entity
+  parent: CMVendorDinnerware
+  id: CMVendorDinnerwareLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
+
 # BODA
 - type: entity
   parent: CMVendor
