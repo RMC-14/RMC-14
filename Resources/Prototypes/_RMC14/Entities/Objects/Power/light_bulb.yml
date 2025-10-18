@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseItem
-  id: CMLightBulbBase
+  id: RMCLightBulbBase
   abstract: true
   components:
   - type: MeleeSound
@@ -67,8 +67,8 @@
   - type: SpaceGarbage
 
 - type: entity
-  parent: CMLightBulbBase
-  id: CMLightBulb
+  parent: RMCLightBulbBase
+  id: RMCLightBulb
   name: light bulb
   description: A replacement light bulb.
   suffix: Warm
@@ -81,7 +81,7 @@
     PowerUse: 25
 
 - type: entity
-  parent: CMLightBulb
+  parent: RMCLightBulb
   id: RMCLightBulbBlue
   suffix: Blue
   components:
@@ -89,7 +89,7 @@
     color: "#D2E3EC"
 
 - type: entity
-  parent: CMLightBulb
+  parent: RMCLightBulb
   id: RMCLightBulbRed
   suffix: Red
   components:
@@ -97,8 +97,8 @@
     color: "#C02526"
 
 - type: entity
-  parent: CMLightBulbBase
-  id: CMLightBulbBroken
+  parent: RMCLightBulbBase
+  id: RMCLightBulbBroken
   name: light bulb
   description: A replacement light bulb.
   suffix: Broken

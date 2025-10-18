@@ -364,7 +364,7 @@
         amount: 4
       - id: CMWelderSmall
         amount: 2
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         amount: 4
     # - name: Utility
     #   entries:

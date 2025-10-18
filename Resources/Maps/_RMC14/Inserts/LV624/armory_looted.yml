@@ -80,7 +80,7 @@ entities:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 38
     components:
