@@ -211,3 +211,90 @@
     bullet: 10
     bio: 10
     explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatSPPSenior
+  id: RMCCoatSPPSeniorFilled
+  suffix: Filled, Command
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRangefinder
+    - id: CMGauze10
+
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatOfficerShortWhite
+  name: SPP UL5-W
+  description: A somewhat armored jacket that is primarily utilised by Naval or Marine Infantry COs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatOfficerLongWhite
+  name:  SPP UL5-W Shinel
+  description: A longer variant of the Naval UL5-W jacket found mainly during ceremonial functions and the winter months. Primarily used by COs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhiteshinel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhiteshinel.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatKommissarShortBlack
+  name: SPP UL5-B
+  description: A somewhat armored jacket that is primarily utilised by Political Kommisars, reminds you of october.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackcoat.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatKommissarLongBlack
+  name:  SPP UL5-B Shinel
+  description: A longer variant of the Naval UPL5-B jacket found mainly during ceremonial functions and the winter months, this black variant is most common during celebrations of the founding of the SPP, it reminds you of october.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
