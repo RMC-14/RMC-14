@@ -1,5 +1,8 @@
 uniform sampler2D SCREEN_TEXTURE;
 
+// Green tint
+uniform highp vec3 nv_color = vec3(0.1, 0.75, 0.1);
+
 void fragment() {
     highp vec4 color = zTextureSpec(SCREEN_TEXTURE, UV);
 
@@ -9,8 +12,8 @@ void fragment() {
     // Add noise
     // color.rgb += noise * 0.05; // Adjust intensity of the grain
 
-    // Apply the night vision green tint
-    color.rgb *= vec3(0.1, 0.75, 0.1);
+    // Apply the night vision tint
+    color.rgb *= nv_color;
 
     COLOR = vec4(clamp(color.rgb, 0.0, 1.0), color.a);
 }

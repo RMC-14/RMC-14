@@ -19,6 +19,13 @@
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
 
 - type: shader
+  id: RMCDoomVision
+  kind: source
+  path: "/Textures/_RMC14/Shaders/night_vision.swsl"
+  params:
+    nv_color: 0.5, 0.5, 0.5
+
+- type: shader
   id: RMCBlurryVisionX
   kind: source
   path: "/Textures/_RMC14/Shaders/blurryx.swsl"
