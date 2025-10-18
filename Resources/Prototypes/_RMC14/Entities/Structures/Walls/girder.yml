@@ -55,6 +55,10 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    minimumClawStrength: VerySharp
+    maxHealth: 125
+    minimumXenoTier: 2
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
     flags: Breaching
@@ -104,6 +108,10 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    minimumClawStrength: VerySharp
+    maxHealth: 500
+    minimumXenoTier: 2
   - type: StaticPrice
     price: 66
 

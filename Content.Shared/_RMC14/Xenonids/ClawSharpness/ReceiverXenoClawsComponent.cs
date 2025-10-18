@@ -14,4 +14,7 @@ public sealed partial class ReceiverXenoClawsComponent : Component
 
     [DataField, AutoNetworkedField]
     public XenoClawType MinimumClawStrength = XenoClawType.Sharp;
+
+    [DataField, AutoNetworkedField]
+    public int? MinimumXenoTier = null;
 }
