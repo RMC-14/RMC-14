@@ -210,3 +210,14 @@
   components:
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
+
+# high comm
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockHC
+  name: High Command Door
+  suffix: HighComm, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessHighCommand" ] ]

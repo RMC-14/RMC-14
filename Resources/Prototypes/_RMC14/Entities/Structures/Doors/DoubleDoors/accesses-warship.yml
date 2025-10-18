@@ -80,6 +80,26 @@
 
 - type: entity
   parent: RMCDoubleDoorAlmayerGlass
+  id: RMCDoubleDoorAlmayerGlassHC
+  suffix: Almayer, Glass, Locked, CO
+  description: A glass door locked to High Command.
+  name: High Command Double Door
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessHighCommand" ] ]
+
+- type: entity
+  parent: RMCDoubleDoorAlmayerSolid
+  id: RMCDoubleDoorAlmayerSolidHC
+  suffix: Almayer, Glass, Locked, HighComm
+  description: A door locked to High Command
+  name: High Command Double Door
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessHighCommand" ] ]
+
+- type: entity
+  parent: RMCDoubleDoorAlmayerGlass
   id: RMCDoubleDoorAlmayerGlassSynth
   suffix: Almayer, Glass, Locked, Synth
   description: A glass door locked to Synths.
