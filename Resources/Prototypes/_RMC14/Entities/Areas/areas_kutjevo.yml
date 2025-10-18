@@ -623,6 +623,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInteriorColonyCentral
@@ -641,6 +642,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -659,6 +661,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -677,6 +680,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -695,6 +699,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -713,6 +718,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaKutjevoInteriorColonySouth
@@ -751,3 +757,4 @@
     OB: true
     supplyDrop: false
     minimapColor: '#5A4501E7'
+    unoviableTimer: null

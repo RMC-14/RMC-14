@@ -333,6 +333,7 @@
     paradropping: false
     OB: true
     supplyDrop: false
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaShivaInteriorCaves

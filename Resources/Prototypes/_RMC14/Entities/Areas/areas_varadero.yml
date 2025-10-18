@@ -561,6 +561,7 @@
     state: tunnels0
   - type: Area
     minimapColor: '#3F3C3CEF'
+    unoviableTimer: null
 
 - type: entity
   parent: RMCAreaVaraderoInteriorCaves
@@ -638,3 +639,4 @@
     state: predship
   - type: Area
     minimapColor: '#885A04E7'
+    unoviableTimer: null
