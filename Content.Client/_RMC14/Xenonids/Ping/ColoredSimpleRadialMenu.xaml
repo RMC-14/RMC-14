@@ -1,0 +1,8 @@
+<ui:ColoredSimpleRadialMenu xmlns="https://spacestation14.io"
+                             xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.Ping"
+                             BackButtonStyleClass="RadialMenuBackButton"
+                             CloseButtonStyleClass="RadialMenuCloseButton"
+                             VerticalExpand="True"
+                             HorizontalExpand="True"
+                             MinSize="450 450">
+</ui:ColoredSimpleRadialMenu>
