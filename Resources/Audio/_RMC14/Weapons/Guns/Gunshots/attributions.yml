@@ -262,3 +262,28 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_kt42.ogg"
+
+- files: ["gun_m10_auto_pistol.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_m10_auto_pistol.ogg"
+
+- files: ["gun_m10_auto_pistol2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_m10_auto_pistol2.ogg"
+
+- files: ["gun_silenced_alt_shot1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot1.ogg"
+
+- files: ["gun_silenced_alt_shot2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot2.ogg"
+
+- files: ["gun_silenced_alt_shot3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot3.ogg"

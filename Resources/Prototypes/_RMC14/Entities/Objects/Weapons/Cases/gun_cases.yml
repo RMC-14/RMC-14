@@ -347,6 +347,45 @@
       - id: RMCSpeedLoaderZHNK72
         amount: 2
 
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM13
+  name: M13 auto-pistol case
+  description: A gun case containing the necessary attachments to assemble a custom M13 auto-pistol. Comes with two extended & two extended (AP) magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,3 # 11 Slots
+    whitelist:
+      tags:
+      - RMCWeaponPistolM13
+      - RMCMagazinePistolM13Ext
+      - RMCMagazinePistolM13ExtAP
+      - RMCAttachmentS5MicroRedDotSight
+      - RMCAttachmentSuppressorCompact
+      - RMCAttachmentRecoilCompensatorM13Spiked
+      - RMCAttachmentMicroLaserSight
+      - RMCAttachmentM13StockSolid
+      - RMCBeltHolsterM13
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM13
+    - id: RMCMagazinePistolM13Ext
+      amount: 2
+    - id: RMCMagazinePistolM13ExtAP
+      amount: 2
+    - id: RMCAttachmentS5MicroRedDotSight
+    - id: RMCAttachmentSuppressorCompact
+    - id: RMCAttachmentRecoilCompensatorM13Spiked
+    - id: RMCAttachmentMicroLaserSight
+    - id: RMCAttachmentM13StockSolid
+    - id: RMCBeltHolsterM13
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCBeltHolsterM13
+
 # rifles
 # M54C
 - type: entity
