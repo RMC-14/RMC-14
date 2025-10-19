@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added Nightmare Inserts to Trijent Dam.
-    type: Add
-  id: 1959
-  time: '2025-07-06T02:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6932
 - author: SharkSnake98
   changes:
   - message: Added OCP-583, a WeYa station intended for ERT spawns, admin events,
@@ -4653,5 +4646,21 @@
   id: 2459
   time: '2025-10-19T21:45:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8102
+- author: noctyrnal
+  changes:
+  - message: Added an M13 gun case to requisitions.
+    type: Add
+  - message: Added some attachments - M13 Compensator Regular / Spiked, Solid / Foldable
+      M13 Stock, S5 Micro Dot Sight, Micro Lazer, Compact Suppressor, and the Extended
+      Compensator.
+    type: Add
+  - message: Added new firing and reloading sounds to the M13.
+    type: Add
+  - message: Increased the M13's base damage, improved accuracy, and reduced bullet
+      spread.
+    type: Tweak
+  id: 2460
+  time: '2025-10-19T21:46:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8108
 Name: RMC14
 Order: -1
