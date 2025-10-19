@@ -41,7 +41,7 @@
       #  points: 30
       #- id: /obj/item/reagent_container/hypospray/autoinjector/ultrazine/liaison
       #  points: 25
-      #- id: RMCPillCyanide
+      #- id: RMCPillCyanide # https://github.com/RMC-14/RMC-14/pull/8092
       #  name: cyanide pill
       #  points: 20
       #- id: /obj/item/trash/ceramic_plate
