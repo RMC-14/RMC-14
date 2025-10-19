@@ -49,31 +49,26 @@ public sealed class XenoClawsSystem : EntitySystem
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
-
-        if (!_meleeWeaponQuery.HasComp(xeno))
+        if (!_meleeWeaponQuery.HasComp(xeno) || !_xenoClawsQuery.TryComp(xeno, out var claws))
             return;
 
-        var damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
-
-        if (_xenoClawsQuery.TryComp(xeno, out var claws))
+        var hasRequiredClaws = claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0;
+        var hasRequiredTier = true;
+        if (receiver.MinimumXenoTier != null)
         {
-            if (receiver.MinimumXenoTier != null)
-            {
-                if (_xenoQuery.TryComp(xeno, out var xenoComp) && xenoComp.Tier >= receiver.MinimumXenoTier)
-                {
-                    damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), receiver.MaxHealth / receiver.HitsToDestroy);
-                }
-            }
-            else
-            {
-                if (claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0)
-                {
-                    damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), receiver.MaxHealth / receiver.HitsToDestroy);
-                }
-            }
+            hasRequiredTier = _xenoQuery.TryComp(xeno, out var xenoComp) &&
+                            xenoComp.Tier >= receiver.MinimumXenoTier;
         }
 
-        args.Damage = damage;
+        if (hasRequiredClaws || hasRequiredTier)
+        {
+            args.Damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup),
+                                            receiver.MaxHealth / receiver.HitsToDestroy);
+        }
+        else
+        {
+            args.Damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
+        }
     }
 
     private void OnAirlockReceiverDamageModify(Entity<AirlockReceiverXenoClawsComponent> ent, ref DamageModifyEvent args)
