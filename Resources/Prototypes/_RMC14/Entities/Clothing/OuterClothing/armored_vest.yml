@@ -169,7 +169,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,7,1
+    - 0,0,5,1
   - type: StorageFill
     contents:
     - id: RMCBoxZiptie
@@ -180,7 +180,7 @@
         tags:
         - RMCBoxZipties
       whitelist: null
-      count: 3
+      count: 2
 
 - type: entity
   parent: RMCArmorVestSquad
