@@ -4,14 +4,11 @@ using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Movement.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Robust.Shared.Audio.Systems;
@@ -39,7 +36,7 @@ public sealed class XenoShardSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoShardComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<XenoShardComponent, DamageChangedEvent>(OnShardHitBy);
         SubscribeLocalEvent<XenoShardComponent, CMGetArmorEvent>(OnShardGetArmor);
         SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<XenoShardComponent, XenoEnergyChangedEvent>(OnShardLevelChanged);
@@ -72,9 +69,12 @@ public sealed class XenoShardSystem : EntitySystem
         }
     }
 
-    private void OnProjectileHit(Entity<XenoShardComponent> ent, ref ProjectileHitEvent args)
+    private void OnShardHitBy(Entity<XenoShardComponent> ent, ref DamageChangedEvent args)
     {
-        if (args.Damage == null || args.Damage.GetTotal() <= FixedPoint2.Zero)
+        if (args.Damageable.Damage == null || args.Damageable.Damage.GetTotal() <= FixedPoint2.Zero)
+            return;
+
+        if (!HasComp<ProjectileComponent>(args.Tool))
             return;
 
         if (!TryComp<XenoEnergyComponent>(ent, out var energy))

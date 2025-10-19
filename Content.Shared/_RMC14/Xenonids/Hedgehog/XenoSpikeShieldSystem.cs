@@ -49,19 +49,18 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
             return;
 
         // Fire hedgehog spikes when shield is hit by projectiles
-        if (HasComp<ProjectileComponent>(args.Tool) &&
-            TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield))
+        if (HasComp<ProjectileComponent>(args.Tool))
         {
             _xenoProjectile.TryShoot(
                     ent.Owner,
                     new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
                     FixedPoint2.Zero,
-                    spikeShield.Projectile,
+                    ent.Comp.Projectile,
                     null,
-                    spikeShield.ProjectileCount,
+                    ent.Comp.ProjectileCount,
                     new Angle(2 * Math.PI), // Full circle
                     15f,
-                    projectileHitLimit: spikeShield.ProjectileHitLimit,
+                    projectileHitLimit: ent.Comp.ProjectileHitLimit,
                     predicted: false
                 );
 
