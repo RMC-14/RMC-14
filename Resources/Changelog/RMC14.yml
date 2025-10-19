@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed Hybrisa windows not becoming frames when destroyed.
-    type: Fix
-  - message: Fixed Hybrisa hull windows being corrodible.
-    type: Fix
-  id: 1953
-  time: '2025-07-06T01:53:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6933
-- author: Dygon
-  changes:
-  - message: 'Dropship parts and ammo can now be recycled at the fabricator, this
-      returns 80% of their point value. Ammo that is partially used refunds less points
-      based on how much ammo is left, 70% of ammo left means you only get: 0.8 * 0.7
-      = 56% of the original point cost refunded instead of 80%.'
-    type: Add
-  id: 1954
-  time: '2025-07-06T01:54:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6801
 - author: Dygon
   changes:
   - message: A dropship flyby can now be canceled, reducing the flight duration to
@@ -4645,5 +4626,21 @@
   id: 2453
   time: '2025-10-19T06:29:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8107
+- author: CatAndHats
+  changes:
+  - message: 'Added cardboard construction menu, Press Z with cardboard in-hand to
+      open the menu: Craft ammo boxes and newly-craftable donut box, pizza boxes,
+      and folders!'
+    type: Add
+  id: 2454
+  time: '2025-10-19T06:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8010
+- author: BreakpointDebug1234
+  changes:
+  - message: CMB corpses no longer spawn with all access badges.
+    type: Fix
+  id: 2455
+  time: '2025-10-19T06:30:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8132
 Name: RMC14
 Order: -1
