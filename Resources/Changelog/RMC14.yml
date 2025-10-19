@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: VictorJob
-  changes:
-  - message: Resprited the extended barrel, barrel charger, and laser sight,
-    type: Tweak
-  id: 1958
-  time: '2025-07-06T02:00:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6780
 - author: Tunguso4ka
   changes:
   - message: Added Nightmare Inserts to Trijent Dam.
@@ -4648,5 +4641,17 @@
   id: 2458
   time: '2025-10-19T21:41:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8177
+- author: to4no_fix
+  changes:
+  - message: Fixed an issue where ghosts could block tent deployment.
+    type: Fix
+  - message: Fixed an issue where the tent roof did not become transparent to ghosts.
+    type: Fix
+  - message: Fixed an issue where it was impossible to interact with the water tank
+      and microwave in the Mess Tent.
+    type: Fix
+  id: 2459
+  time: '2025-10-19T21:45:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8102
 Name: RMC14
 Order: -1
