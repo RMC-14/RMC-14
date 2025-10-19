@@ -409,7 +409,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                     RequireCanInteract = false
                 };
 
-                var cho = _doafter.TryStartDoAfter(doafter);
+                _doafter.TryStartDoAfter(doafter);
                 _jitter.AddJitter(container.Owner, 5, 8);
             }
         }
