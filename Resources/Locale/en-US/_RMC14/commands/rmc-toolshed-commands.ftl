@@ -80,4 +80,4 @@ command-description-setoperationname = Changes the name of the operation for the
 command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
 command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.
 
-command-description-movespeed = changes the max movement speed for given entities.
+command-description-movespeed = Changes the max movement speed for given entities.
