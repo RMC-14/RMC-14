@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorChancesGoon
-  name: rmc-job-name-survivor-chances-goon
+  name: rmc-job-name-colonist-chances-goon
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesGoon
   startingGear: RMCGearSurvivorChancesGoon
