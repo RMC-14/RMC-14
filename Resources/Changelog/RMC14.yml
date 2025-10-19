@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Resin structures can no longer be placed on tiles that are already occupied
-      by another structure.
-    type: Fix
-  - message: Weed nodes can no longer be planted on tiles occupied by certain objects,
-      including tables, window frames and floodlights.
-    type: Fix
-  id: 1948
-  time: '2025-07-06T01:14:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6854
 - author: x5tink
   changes:
   - message: Added drop pouch to medical vendors
@@ -4644,5 +4633,14 @@
   id: 2448
   time: '2025-10-19T06:20:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8140
+- author: noctynral
+  changes:
+  - message: Fixed being able to pry open powered podlocks and shutters.
+    type: Fix
+  - message: Fixed Xenos being able to pry doors closed.
+    type: Fix
+  id: 2449
+  time: '2025-10-19T06:21:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8145
 Name: RMC14
 Order: -1
