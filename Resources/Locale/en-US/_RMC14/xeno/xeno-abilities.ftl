@@ -389,7 +389,7 @@ rmc-gut-finish-self = We tear this pathetic host in half!!
 rmc-gut-finish-others = {$user} tears {$target} in half!!
 
 # Shed Spikes
-rmc-shed-spikes = We have shed your spikes and cannot gain any more for 30 seconds!
+rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!
 rmc-shed-spikes-back = We can gain shards again!
 
 # Spike Shield
