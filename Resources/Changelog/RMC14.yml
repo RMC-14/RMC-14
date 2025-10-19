@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Chairs can now be folded.
-    type: Tweak
-  id: 1956
-  time: '2025-07-06T01:57:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6912
 - author: Dutch-VanDerLinde
   changes:
   - message: Colonists will now be an alerted when a new xeno caste unlocks
@@ -4639,5 +4632,12 @@
   id: 2456
   time: '2025-10-19T09:16:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8106
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Aegis spawns and spawer icon changed.
+    type: Tweak
+  id: 2457
+  time: '2025-10-19T21:39:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8183
 Name: RMC14
 Order: -1
