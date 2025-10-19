@@ -366,7 +366,7 @@
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoSpikeShield
-  name: Spike Shield (150)
+  name: Spike Shield (150 shards)
   description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds. 
   components:
   - type: Action
