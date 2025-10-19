@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: A dropship flyby can now be canceled, reducing the flight duration to
-      10 seconds.
-    type: Tweak
-  - message: Launching a dropship does not automatically close the navigation computer
-      UI anymore.
-    type: Tweak
-  id: 1955
-  time: '2025-07-06T01:56:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6787
 - author: noctyrnal
   changes:
   - message: Chairs can now be folded.
@@ -4642,5 +4631,13 @@
   id: 2455
   time: '2025-10-19T06:30:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8132
+- author: 0awful
+  changes:
+  - message: Requisition can now give you powerloader certification. Come quick there's
+      only 1.
+    type: Add
+  id: 2456
+  time: '2025-10-19T09:16:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8106
 Name: RMC14
 Order: -1
