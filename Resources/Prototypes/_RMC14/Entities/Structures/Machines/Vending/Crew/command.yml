@@ -286,6 +286,8 @@
         points: 12
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -309,6 +311,8 @@
     - name: Barrel Attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentExtendedCompensator
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
@@ -618,6 +622,8 @@
       entries:
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -651,9 +657,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         points: 15
+      - id: RMCAttachmentExtendedCompensator
+        points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
 
 
