@@ -2352,7 +2352,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13ExtAPEmpty
-  name: magazine box (M13Ext AP x 14)
+  name: magazine box (Ext M13 AP x 14)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -2398,7 +2398,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13DrumAPEmpty
-  name: magazine box (M13Drum AP x 12)
+  name: magazine box (Drum M13 AP x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
