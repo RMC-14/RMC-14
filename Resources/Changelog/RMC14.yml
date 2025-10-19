@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the default mode (the only one we have right now) for the underbarrel
-      flamer attachment being stronger than intended. Intensity 20 > 10, duration
-      24 > 10.
-    type: Fix
-  id: 1951
-  time: '2025-07-06T01:50:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6936
 - author: noctyrnal
   changes:
   - message: Fiornia has recieved a large update.
@@ -4649,5 +4640,18 @@
   id: 2451
   time: '2025-10-19T06:25:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8022
+- author: CatAndHats
+  changes:
+  - message: Fixed the dropship crew vendor not having M4SPR extended mags, S6 reflex
+      sights, and patrol caps.
+    type: Fix
+  - message: Fixed the purchasable m44 ammunition in the flight crew vendor not being
+      marksman.
+    type: Fix
+  - message: M4SPR extended mag now has a description.
+    type: Fix
+  id: 2452
+  time: '2025-10-19T06:27:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8125
 Name: RMC14
 Order: -1
