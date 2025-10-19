@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Fiornia has recieved a large update.
-    type: Add
-  - message: Added the V2 reactive thermal tarp, a version of the scout tarp that
-      can be used by anyone, but has slower and worse cloaking.
-    type: Add
-  - message: Added no-skill versions of pill canisters, found commonly in colonies.
-      These are pill canisters that can be opened by anyone.
-    type: Add
-  - message: Prisoner corpses now start with the correct jumpsuit.
-    type: Tweak
-  id: 1952
-  time: '2025-07-06T01:51:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6910
-- author: noctyrnal
-  changes:
   - message: Fixed Hybrisa windows not becoming frames when destroyed.
     type: Fix
   - message: Fixed Hybrisa hull windows being corrodible.
@@ -4653,5 +4638,12 @@
   id: 2452
   time: '2025-10-19T06:27:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8125
+- author: OmerF-afk
+  changes:
+  - message: Added empty L42A mags
+    type: Add
+  id: 2453
+  time: '2025-10-19T06:29:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8107
 Name: RMC14
 Order: -1
