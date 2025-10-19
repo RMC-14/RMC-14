@@ -142,7 +142,7 @@
 - type: entity
   parent: RMCArmorVestMP
   id: RMCArmorVestSquad
-  name: M3-XL pattern squad armor vest
+  name: M3-XL pattern marine armor vest
   description: A type of M3-XL body armor, made specially for UNMC Squads. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
   components:
   - type: Sprite
