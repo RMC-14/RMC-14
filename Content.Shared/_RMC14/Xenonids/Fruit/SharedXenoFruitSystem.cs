@@ -914,18 +914,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         var maxShield = _mobThreshold.GetThresholdForState(target, MobState.Dead) * comp.ShieldRatio;
         var shieldAmount = maxShield < comp.ShieldAmount ? maxShield : comp.ShieldAmount;
 
-        // For hedgehogs, use dedicated shield system to avoid spike shield conflicts
-        if (HasComp<XenoShardComponent>(target))
-        {
-            var hedgehogShieldSystem = EntityManager.System<HedgehogShieldSystem>();
-            hedgehogShieldSystem.ApplyShield(target, shieldAmount, comp.Duration, comp.ShieldDecay.Double());
-        }
-        else
-        {
-            _xenoShield.ApplyShield(target, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
-                comp.Duration, comp.ShieldDecay.Double(), true, shieldAmount.Double());
-            EnsureComp<GardenerShieldComponent>(target);
-        }
+        _xenoShield.ApplyShield(target, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
+            comp.Duration, comp.ShieldDecay.Double(), true, shieldAmount.Double());
+        EnsureComp<GardenerShieldComponent>(target);
     }
 
     public void OnShieldRemove(Entity<GardenerShieldComponent> ent, ref RemovedShieldEvent args)

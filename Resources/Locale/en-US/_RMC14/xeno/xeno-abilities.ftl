@@ -14,8 +14,12 @@ rmc-xeno-not-enough-fury = We're not angry enough for this!
 rmc-xeno-fury-increase-user = We are overcome with rage!
 
 # Acid reserves
-rmc-xeno-not-enough-acid = Your don't have enough acid built up!
-rmc-xeno-acid-increase-user = You feel your acid reserves increase!
+rmc-xeno-not-enough-acid = We don't have enough acid built up!
+rmc-xeno-acid-increase-user = We feel your acid reserves increase!
+
+# Shards
+rmc-xeno-not-enough-shards = We don't have enough shards!
+rmc-xeno-shards-increase-user = We grow more shards!
 
 # Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
@@ -383,3 +387,11 @@ rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, s
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
 rmc-gut-finish-others = {$user} tears {$target} in half!!
+
+# Shed Spikes
+rmc-shed-spikes = We have shed your spikes and cannot gain any more for 30 seconds!
+
+# Spike Shield
+rmc-spike-shield-self = We ruffle our bone-shard quills, forming a defensive shell!
+rmc-spike-shield-others = {$user} ruffles its bone-shard quills, forming a defensive shell!
+rmc-spike-shield-hit = {$user} sprays bone quills everywhere!

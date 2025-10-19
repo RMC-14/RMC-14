@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -12,7 +13,7 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public TimeSpan ShieldDuration = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ShieldExpireAt;
+    public TimeSpan? ShieldExpireAt;
 
     [DataField, AutoNetworkedField]
     public int ShardCost = 150;
@@ -30,20 +31,20 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public float SpikeRadius = 1.5f; // 3x3 AoE
 
     [DataField, AutoNetworkedField]
-    public bool Active = false;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan LastProcTime = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
     public float AccumulatedDamage;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoHedgehogShieldSpikeProjectile";
+    public EntProtoId Projectile = "XenoHedgehogSpikeProjectileSpreadShort";
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 9;
 
     [DataField, AutoNetworkedField]
     public int? ProjectileHitLimit = 6;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ShieldAmount = 500;
 }
