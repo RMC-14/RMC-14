@@ -43,7 +43,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_step", 1f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMin =
-        CVarDef.Create("rmc.auto_balance_min", 3.5f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
         CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
