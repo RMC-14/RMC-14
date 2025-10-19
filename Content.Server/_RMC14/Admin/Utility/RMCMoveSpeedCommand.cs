@@ -12,17 +12,17 @@ internal sealed class MoveSpeedCommand : ToolshedCommand
     private MovementSpeedModifierSystem? _moveSpeed;
 
     [CommandImplementation]
-    public void MoveSpeed([PipedArgument] IEnumerable<EntityUid> input, float sprintSpeed, float? walkSpeed)
+    public void MoveSpeed([PipedArgument] IEnumerable<EntityUid> input, float sprintSpeed, float? walkSpeed = null)
     {
         _moveSpeed ??= Sys<MovementSpeedModifierSystem>();
 
         foreach (var entity in input)
         {
             if (!EntityManager.TryGetComponent<MovementSpeedModifierComponent>(entity, out var moveSpeedModifier))
-                throw new ArgumentException("Missing map grid component from gridUid from the specified entity!");
+                throw new ArgumentException("MovementSpeedModifier component not found for entity!");
             _moveSpeed.ChangeBaseSpeed(entity,
-                sprintSpeed,
                 walkSpeed ?? moveSpeedModifier.BaseWalkSpeed,
+                sprintSpeed,
                 moveSpeedModifier.Acceleration);
         }
     }
