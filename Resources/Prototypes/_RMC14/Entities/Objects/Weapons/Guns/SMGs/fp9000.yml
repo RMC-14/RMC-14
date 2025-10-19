@@ -71,6 +71,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentRecoilCompensator
       rmc-aslot-rail:
         locked: true
@@ -165,11 +166,13 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
       rmc-aslot-rail:
-        locked: true
-        startingAttachable: RMCAttachmentFP9000Scope
         whitelist:
           tags:
-          - RMCAttachmentFP9000Scope
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentMagneticHarness
       rmc-aslot-underbarrel:
         whitelist:
           tags:
