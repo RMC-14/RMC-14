@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed Lesser Drones being able to plant weed nodes out of range of other
-      nodes.
-    type: Fix
-  id: 1937
-  time: '2025-07-05T11:11:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6878
 - author: Arykh
   changes:
   - message: Added the stethoscope! Anyone can use it, but only those with medical
@@ -4666,5 +4658,16 @@
   id: 2437
   time: '2025-10-10T07:46:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8078
+- author: Vermidia
+  changes:
+  - message: Fixed xenos not being kicked out of unanchored vents.
+    type: Fix
+  - message: Fixed vent crawling being possible while crit/dead.
+    type: Fix
+  - message: Fixed sometimes being unable to exit open pipes under a floor.
+    type: Fix
+  id: 2438
+  time: '2025-10-19T06:07:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8176
 Name: RMC14
 Order: -1
