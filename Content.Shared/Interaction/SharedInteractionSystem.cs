@@ -771,6 +771,12 @@ namespace Content.Shared.Interaction
             if (_net.IsServer)
                 range += _rmcLagCompensation.MarginTiles;
 
+            if (origin.Owner == other.Owner && Resolve(other, ref other.Comp, false))
+            {
+                otherCoordinates = other.Comp.Coordinates;
+                otherAngle = other.Comp.LocalRotation;
+            }
+
             Ignored combinedPredicate = e => e == origin.Owner || (predicate?.Invoke(e) ?? false);
             var inRange = true;
             MapCoordinates originPos = default;
