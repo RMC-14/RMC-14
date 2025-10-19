@@ -511,8 +511,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
-  - type: CMArmor
-    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -524,8 +522,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
-  - type: CMArmor
-    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -537,9 +533,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
-  - type: CMArmor
-    melee: 10
-
 
 - type: entity
   parent: CMCoatCO
@@ -551,8 +544,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
-  - type: CMArmor
-    melee: 10
 
 
 # Executive Officer
