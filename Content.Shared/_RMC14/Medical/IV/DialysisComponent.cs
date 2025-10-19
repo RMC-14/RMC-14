@@ -4,16 +4,14 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.IV;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-public sealed partial class DialysisComponent : Component
+public sealed partial class PortableDialysisComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public string Solution = "dialysis";
-
     [DataField, AutoNetworkedField]
     public FixedPoint2 TransferAmount = FixedPoint2.New(3);
 
@@ -46,4 +44,21 @@ public sealed partial class DialysisComponent : Component
 
     [DataField, AutoNetworkedField]
     public string[] TransferableReagents = ["Blood"];
+
+    [DataField, AutoNetworkedField]
+    public bool IsAttaching;
+
+    [DataField, AutoNetworkedField]
+    public bool IsDetaching;
+
+    [DataField, AutoNetworkedField]
+    public float BatteryChargePercent;
+}
+
+[Serializable, NetSerializable]
+public enum DialysisVisualLayers
+{
+    Attachment,
+    Effect,
+    Battery
 }

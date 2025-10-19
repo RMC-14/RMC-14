@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Chat.Systems;
+using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Body.Components;
@@ -146,7 +147,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
             UpdatePackVisuals((packId, packComp));
         }
 
-        var dialysis = EntityQueryEnumerator<DialysisComponent>();
+        var dialysis = EntityQueryEnumerator<PortableDialysisComponent>();
         while (dialysis.MoveNext(out var dialysisId, out var dialysisComp))
         {
             if (dialysisComp.AttachedTo is not { } attachedTo)
@@ -196,8 +197,24 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
                 _powerCell.TryUseActivatableCharge(dialysisId);
             }
+            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
 
             Dirty(dialysisId, dialysisComp);
+        }
+    }
+
+    private void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
+    {
+        var ev = new GetChargeEvent();
+        RaiseLocalEvent(dialysis, ref ev);
+
+        if (ev.MaxCharge > 0)
+        {
+            dialysis.Comp.BatteryChargePercent = ev.CurrentCharge * 100f / ev.MaxCharge;
+        }
+        else
+        {
+            dialysis.Comp.BatteryChargePercent = 0f;
         }
     }
 }

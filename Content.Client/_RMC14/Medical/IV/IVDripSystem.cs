@@ -58,4 +58,48 @@ public sealed class IVDripSystem : SharedIVDripSystem
             sprite.LayerSetVisible(fillLayer, true);
         }
     }
+
+    protected override void UpdateDialysisAppearance(Entity<PortableDialysisComponent> dialysis)
+    {
+        base.UpdateDialysisAppearance(dialysis);
+        if (!TryComp(dialysis, out SpriteComponent? sprite))
+            return;
+
+        var attachmentState = dialysis.Comp.AttachedTo != null ? "hooked" : "unhooked";
+        sprite.LayerSetState(DialysisVisualLayers.Attachment, attachmentState);
+
+        if (dialysis.Comp.IsDetaching)
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
+            sprite.LayerSetState(DialysisVisualLayers.Effect, "draining");
+        }
+        else if (dialysis.Comp.IsAttaching)
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
+            sprite.LayerSetState(DialysisVisualLayers.Effect, "filling");
+        }
+        else if (dialysis.Comp.AttachedTo != null)
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
+            sprite.LayerSetState(DialysisVisualLayers.Effect, "running");
+        }
+        else
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Effect, false);
+        }
+
+        var percent = dialysis.Comp.BatteryChargePercent;
+        var batteryState = percent switch
+        {
+            >= 85 => "battery100",
+            >= 60 => "battery85",
+            >= 45 => "battery60",
+            >= 30 => "battery45",
+            >= 15 => "battery30",
+            >= 1 => "battery15",
+            _ => "battery0"
+        };
+
+        sprite.LayerSetState(DialysisVisualLayers.Battery, batteryState);
+    }
 }
