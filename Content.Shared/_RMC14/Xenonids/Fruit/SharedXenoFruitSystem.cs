@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -909,15 +910,22 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Shield (unstable fruit)
     private void ApplyFruitShield(Entity<XenoFruitShieldComponent> fruit, EntityUid target)
     {
-        var ent = target;
         var comp = fruit.Comp;
-        var maxShield = _mobThreshold.GetThresholdForState(ent, MobState.Dead) * comp.ShieldRatio;
+        var maxShield = _mobThreshold.GetThresholdForState(target, MobState.Dead) * comp.ShieldRatio;
         var shieldAmount = maxShield < comp.ShieldAmount ? maxShield : comp.ShieldAmount;
 
-        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
-            comp.Duration, comp.ShieldDecay.Double(), true, shieldAmount.Double());
-
-        EnsureComp<GardenerShieldComponent>(target);
+        // For hedgehogs, use dedicated shield system to avoid spike shield conflicts
+        if (HasComp<XenoShardComponent>(target))
+        {
+            var hedgehogShieldSystem = EntityManager.System<HedgehogShieldSystem>();
+            hedgehogShieldSystem.ApplyShield(target, shieldAmount, comp.Duration, comp.ShieldDecay.Double());
+        }
+        else
+        {
+            _xenoShield.ApplyShield(target, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
+                comp.Duration, comp.ShieldDecay.Double(), true, shieldAmount.Double());
+            EnsureComp<GardenerShieldComponent>(target);
+        }
     }
 
     public void OnShieldRemove(Entity<GardenerShieldComponent> ent, ref RemovedShieldEvent args)
