@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added lore examines! You can inspect items more closely to see lore info
-      about them.
-    type: Add
-  id: 1946
-  time: '2025-07-06T01:12:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6915
-- author: Dygon
-  changes:
-  - message: You can unload unchambered warheads and fuel from the orbital cannon.
-    type: Fix
-  id: 1947
-  time: '2025-07-06T01:13:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6889
 - author: Dygon
   changes:
   - message: Resin structures can no longer be placed on tiles that are already occupied
@@ -4640,5 +4625,24 @@
   id: 2446
   time: '2025-10-19T06:16:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8148
+- author: yagwog
+  changes:
+  - message: Fixed Hedgehog Ravager spike shed not giving its movement speed buff.
+    type: Fix
+  - message: Fixed Hedgehog Ravager gaining shards from barbed barricades.
+    type: Fix
+  - message: Fixed Hedgehog Ravager spike shield and spike shed not being temporarily
+      disabled by baton slugs.
+    type: Fix
+  id: 2447
+  time: '2025-10-19T06:20:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8070
+- author: CatAndHats
+  changes:
+  - message: Fixed the echo supply drop console not having a requisitions access requirement.
+    type: Fix
+  id: 2448
+  time: '2025-10-19T06:20:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8140
 Name: RMC14
 Order: -1
