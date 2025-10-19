@@ -63,6 +63,7 @@
         whitelist:
           tags:
           - RMCMagazineSMGP90
+          - RMCMagazineSMGP90AP
   - type: AttachableHolder
     randomAttachmentChance: 0.1
     slots:
@@ -87,6 +88,35 @@
       rmc-aslot-rail: 0.2, 0.219
   - type: GunDamageModifier
     multiplier: 1.2
+
+- type: entity
+  parent: RMCWeaponSMGP90
+  name: FN-TSE P90 submachinegun
+  id: RMCWeaponSMGP90TSE
+  description: A variation of the FN P90 submachine gun. Used by mercenaries and TSE royal marines. This weapon only accepts 5.7x28mm rounds.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90tse.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90tse.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGP90 #AP port it
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGP90
+          - RMCMagazineSMGP90AP
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -120,10 +150,41 @@
   - type: Appearance
 
 - type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGP90AP
+  name: "FN P90 AP magazine (5.7×28mm)"
+  description: "An armor-piercing 5.7x28mm magazine for the FN P90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGP90AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge57x28mmAP
+    proto: RMCCartridge57x28mmAP
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/p90tse.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge57x28mm
   name: cartridge (57×28mm SMG)
-  description: A 5.7×28mm magazine for the FN P90.
+  description: A 5.7×28mm cartridge for the FN P90.
   components:
   - type: Tag
     tags:
@@ -131,6 +192,19 @@
     - RMCCartridge57x28mm
   - type: CartridgeAmmo
     proto: RMCBullet57x28mm
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge57x28mmAP
+  name: cartridge (57×28mm SMG)
+  description: A 5.7×28mm AP cartridge for the FN P90.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge57x28mmAP
+  - type: CartridgeAmmo
+    proto: RMCBullet57x28mmAP
 
 - type: entity
   parent: Bullet10x20mm
@@ -151,8 +225,36 @@
   - type: CMArmorPiercing
     amount: 10
 
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet57x28mmAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 8
+      falloff: 5
+  - type: CMArmorPiercing
+    amount: 20
+
+- type: Tag
+  id: RMCWeaponSMGP90TSE
+
 - type: Tag
   id: RMCMagazineSMGP90
 
 - type: Tag
+  id: RMCMagazineSMGP90AP
+
+- type: Tag
   id: RMCCartridge57x28mm
+
+- type: Tag
+  id: RMCCartridge57x28mmAP
