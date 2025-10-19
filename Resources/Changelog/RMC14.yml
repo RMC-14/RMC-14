@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added OCP-583, a WeYa station intended for ERT spawns, admin events,
-      and PvE.
-    type: Add
-  id: 1960
-  time: '2025-07-06T02:45:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6792
 - author: CyberTropic
   changes:
   - message: Added CORSAT
@@ -4662,5 +4654,12 @@
   id: 2460
   time: '2025-10-19T21:46:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8108
+- author: noctyrnal
+  changes:
+  - message: Windows will now correctly smooth with walls.
+    type: Tweak
+  id: 2461
+  time: '2025-10-19T21:49:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7289
 Name: RMC14
 Order: -1
