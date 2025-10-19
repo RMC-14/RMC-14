@@ -6,7 +6,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Admin.Utility;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Spawn)]
+[ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
 internal sealed class MoveSpeedCommand : ToolshedCommand
 {
     private MovementSpeedModifierSystem? _moveSpeed;
