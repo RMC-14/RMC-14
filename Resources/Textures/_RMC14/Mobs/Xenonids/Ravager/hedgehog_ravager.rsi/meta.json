@@ -61,7 +61,7 @@
       "name": "ravager_rest_2"
     },
     {
-      "name": "thedgehog_1",
+      "name": "hedgehog_1",
       "directions": 4
     },
     {
@@ -77,10 +77,10 @@
       "directions": 4
     },
     {
-      "name": "thedgehog_1_crit"
+      "name": "hedgehog_1_crit"
     },
     {
-      "name": "thedgehog_1_resting"
+      "name": "hedgehog_1_resting"
     },
     {
       "name": "hedgehog_2_crit"
