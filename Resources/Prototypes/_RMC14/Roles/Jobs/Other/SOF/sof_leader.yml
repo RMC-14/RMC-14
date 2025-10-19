@@ -89,9 +89,6 @@
     back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  storage:
-    back:
-    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaiderLeader

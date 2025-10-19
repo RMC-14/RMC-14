@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifleNoDualWieldPenalty, RMCBaseAttachableHolder, RMCBaseWeaponMagazineVisuals ]
   name: MOU482 tactical shotgun
   id: RMCWeaponShotgunMOU482
-  description: The M117 Tactical Shotgun, better known as the MOU482, is a semi-automatic 12 guage magazine fed shotgun. Deemed to expensive to be standard issue, use of the MOU482 is relegated to elite special forces units within the UNMC.
+  description: A semi-automatic 12 gauge magazine fed shotgun. Deemed to expensive to be standard issue, use of the MOU482 is relegated to elite special forces units within the UNMC.
   components:
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-mou482

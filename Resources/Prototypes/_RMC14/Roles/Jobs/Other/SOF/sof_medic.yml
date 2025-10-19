@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMMarineRaiderMedic
   name: rmc-job-name-marine-raider-medic
-  description: "" # TODO RMC14
+  description: rmc-ghost-role-information-sof-description
   playTimeTracker: CMJobMarineRaiderMedic
   ranks:
     RMCRankStaffSergeant: [ ]
@@ -82,9 +82,6 @@
     back: RMCSatchelMARSOC
     pocket1: RMCDefibrillatorCompact
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  storage:
-    back:
-    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaiderMedic
