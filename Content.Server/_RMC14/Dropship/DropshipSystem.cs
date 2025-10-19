@@ -648,7 +648,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var message = Loc.GetString("rmc-announcement-ares-lz-reminder");
             
             // Send to MarineCommand channel
-            _marineAnnounce.AnnounceRadio(ares, message, "MarineCommand");
+            _marineAnnounce.AnnounceRadio(ares.Owner, message, "MarineCommand");
         }
 
         if (roundDuration < _lzPrimaryAutoDelay)
