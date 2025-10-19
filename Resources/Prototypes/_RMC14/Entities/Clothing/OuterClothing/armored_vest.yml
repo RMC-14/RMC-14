@@ -167,22 +167,6 @@
 - type: entity
   parent: RMCArmorVestSquad
   id: RMCArmorVestFireteamLeader
-  suffix: Zipties
-  components:
-  - type: Storage
-    grid:
-    - 0,0,7,1
-  - type: StorageFill
-    contents:
-    - id: RMCBoxZiptie
-  - type: LimitedStorage
-    limits:
-    - popup: rmc-storage-limit-not-ziptie-box
-      blacklist:
-        tags:
-        - RMCBoxZipties
-      whitelist: null
-      count: 3
 
 - type: entity
   parent: RMCArmorVestSquad
