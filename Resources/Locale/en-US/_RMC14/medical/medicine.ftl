@@ -65,6 +65,7 @@ rmc-keloderm-container-label-text = KD
 rmc-russianred-container-label-text = Rr
 rmc-stimulant-container-label-text = ST
 rmc-fnplus-container-label-text = FN
+rmc-imidazoline-container-label-text = IM
 
 rmc-custom-container-label-text = {$customLabel}
 

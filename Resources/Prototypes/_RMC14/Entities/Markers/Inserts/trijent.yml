@@ -1,4 +1,4 @@
-﻿# Trijent
+# Trijent
 - type: entity
   abstract: true
   parent: RMCMapInsertBase
@@ -66,3 +66,31 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/ship_gone.yml"
       probability: 0.15
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCLFPods
+  name: CLF Pods
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/clfpods.yml"
+      probability: 0.1
+      offset: 0,-2.0
+      nightmareScenario: clf_pods
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCrashlandingSPPBar
+  name: Crashlanding SPP Bar
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/crashlanding-spp-bar.yml"
+      probability: 0.4
+      offset: 0,-2.0
+      nightmareScenario: spp_bar
+    replaceAreas: false

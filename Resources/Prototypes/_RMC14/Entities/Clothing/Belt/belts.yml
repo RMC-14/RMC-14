@@ -41,6 +41,9 @@
       #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+    blacklist:
+      tags:
+      - RMCAttachmentUnderbarrel
   - type: IgnoreContentsSize
     items:
       tags:
@@ -551,6 +554,20 @@
     - id: CMMagazinePistolM1984
       amount: 2
     - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolCLF
+  name: M802 pattern 'Freedom' smart gun operator sidearm rig
+  description: A modification of the standard M802 load-bearing equipment, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
+  suffix: Filled, Mateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+    - id: RMCMagazineSmartGun
+      amount: 3
+    - id: RMCWeaponRevolverMateba
 
 - type: entity
   parent: CMBeltMarine
@@ -1599,6 +1616,50 @@
     contents:
     - id: RMCMagazineMar50LMG
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL24BeltFilled
+  suffix: Filled, L24
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL83A3BeltFilled
+  suffix: Filled, L83A3
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3
+      amount: 5
+
+- type: entity
+  parent: RMCBeltUtilityGeneral
+  id: RMCBeltUtiliyGeneralFilledRoyal
+  suffix: Filled, Royal Breacher
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolFilledL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistol
