@@ -1,44 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new gunshot sounds for the M890 tactical shotgun, FN P90 SMG, and
-      the M357 rival double-barreled shotgun
-    type: Add
-  id: 1943
-  time: '2025-07-06T01:00:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6867
-- author: Vermidia
-  changes:
-  - message: Fixed resin surge not instant growing fruits. It now gives a cooldown
-      depending on the fruits base growth time.
-    type: Fix
-  - message: Fixed base fruit harvest and consume times. Gardener drones now feed
-      and harvest fruits faster than other xenos.
-    type: Fix
-  - message: Fixed fruits and hardy weeds not showing their effects on examine.
-    type: Fix
-  - message: Fixed spore fruit's effect lasting 30s too short (60 > 90)
-    type: Fix
-  - message: Fixed feeding fruit doafter not having a medical doafter effect.
-    type: Fix
-  - message: Fixed resin fruit in hand eat doafter not canceling if you switch hands.
-    type: Fix
-  - message: Fixed not being able to eat multiple planted fruits at once.
-    type: Fix
-  - message: Fixed reinforced resin not having a visual.
-    type: Fix
-  id: 1944
-  time: '2025-07-06T01:03:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6887
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added uniform accessories, such as patches. United nations patches were
-      added to the squad prep surplus clothing vendors, and squad uniforms will come
-      equipped with a UNMC patch. Sprites by noctyrnal.
-    type: Add
-  id: 1945
-  time: '2025-07-06T01:10:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6914
 - author: noctyrnal
   changes:
   - message: Added lore examines! You can inspect items more closely to see lore info
@@ -4659,5 +4619,26 @@
   id: 2443
   time: '2025-10-19T06:14:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8136
+- author: CatAndHats
+  changes:
+  - message: Added MP comms to the UNMC Synthetic headset
+    type: Add
+  id: 2444
+  time: '2025-10-19T06:17:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8149
+- author: CyberTropic
+  changes:
+  - message: Added Kutjevo nightmare inserts.
+    type: Add
+  id: 2445
+  time: '2025-10-19T06:16:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8151
+- author: CatAndHats
+  changes:
+  - message: Fixed PK-7 description having the wrong gun name.
+    type: Fix
+  id: 2446
+  time: '2025-10-19T06:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8148
 Name: RMC14
 Order: -1
