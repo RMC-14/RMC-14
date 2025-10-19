@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Colonists will now be an alerted when a new xeno caste unlocks
-    type: Add
-  id: 1957
-  time: '2025-07-06T01:58:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6768
 - author: VictorJob
   changes:
   - message: Resprited the extended barrel, barrel charger, and laser sight,
@@ -4639,5 +4632,21 @@
   id: 2457
   time: '2025-10-19T21:39:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8183
+- author: Vermidia
+  changes:
+  - message: Fixed hedgehog rav gaining stacks on melee damage sources
+    type: Fix
+  - message: Fixed hedgehog spikes having too high of a max range (shield has a slightly
+      lower range than the other two)
+    type: Fix
+  - message: Fixed hedgehog spike visuals not showing up in most states.
+    type: Fix
+  - message: Fixed hedgehog not being stunnable by explosions when below 50 shards
+    type: Fix
+  - message: Fixed hedgehog using the wrong damage sprites.
+    type: Fix
+  id: 2458
+  time: '2025-10-19T21:41:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8177
 Name: RMC14
 Order: -1
