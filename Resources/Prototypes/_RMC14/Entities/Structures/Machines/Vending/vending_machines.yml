@@ -552,7 +552,7 @@
     ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
-    PlantBag: 5
+    RMCStoragePlantBag: 5
     RMCToolSpade: 3
     RMCToolHatchet: 3
     # AmmoniaBottle: 10 #Premium
