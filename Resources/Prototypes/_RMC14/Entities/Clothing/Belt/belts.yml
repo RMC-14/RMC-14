@@ -873,6 +873,17 @@
     - id: RMCWeaponPistolT73
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNPZ92
+  suffix: Filled, NPZ92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolNPZ92
+    - id: RMCMagazinePistolNP92
+      amount: 5
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolTSE
   name: pistol belt
