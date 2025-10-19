@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added Coffee mugs.
-    type: Add
-  - message: Sorokyne has recieved an update, fixing alot of issues.
-    type: Add
-  id: 1965
-  time: '2025-07-07T00:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6929
 - author: DoguhanOzgurAkca
   changes:
   - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
@@ -4723,5 +4714,13 @@
   id: 2465
   time: '2025-10-19T22:50:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8184
+- author: DrSmugleaf
+  changes:
+  - message: Added Kurt 'Doc Holiday' Lachner figurine and updated Sips-On-Puddles
+      figurine.
+    type: Add
+  id: 2466
+  time: '2025-10-19T23:24:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8187
 Name: RMC14
 Order: -1
