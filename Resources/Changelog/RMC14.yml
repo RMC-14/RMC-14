@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fix some xeno castes not being able to add plasma to hive structures
-    type: Fix
-  id: 1962
-  time: '2025-07-07T00:19:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6944
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed hive clusters and hive pylons taking too long to repair. They now
       take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
     type: Fix
@@ -4661,5 +4654,12 @@
   id: 2462
   time: '2025-10-19T21:50:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7914
+- author: noctyrnal
+  changes:
+  - message: Removed the cyanide pill from the liaison's briefcase.
+    type: Remove
+  id: 2463
+  time: '2025-10-19T22:04:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8092
 Name: RMC14
 Order: -1
