@@ -585,7 +585,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM4SPRExtEmpty
-  name: magazine box (EXT M4SPR x 12)
+  name: magazine box (Ext M4SPR x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -2214,7 +2214,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13ExtEmpty
-  name: magazine box (M13Ext x 14)
+  name: magazine box (Ext M13 x 14)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -2260,7 +2260,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13DrumEmpty
-  name: magazine box (M13Drum x 12)
+  name: magazine box (Drum M13 x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
