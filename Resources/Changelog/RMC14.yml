@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the stethoscope! Anyone can use it, but only those with medical
-      skill 2 or higher can use it properly.
-    type: Add
-  id: 1938
-  time: '2025-07-05T11:14:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6830
-- author: Dygon
-  changes:
-  - message: Fixed floor resin, resin structures, and resin constructs not taking
-      fire damage over time.
-    type: Fix
-  id: 1939
-  time: '2025-07-05T11:16:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6862
-- author: Dygon
-  changes:
-  - message: Fixed Boilers being able to acid spray during the Bombard action's DoAfter.
-    type: Fix
-  id: 1940
-  time: '2025-07-05T11:39:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6872
 - author: x5tink
   changes:
   - message: The ChemMaster eject and clear button is now only Eject Beaker button.
@@ -4669,5 +4646,26 @@
   id: 2438
   time: '2025-10-19T06:07:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8176
+- author: Vermidia
+  changes:
+  - message: Fixed upgrading structures not being able to be resin surged.
+    type: Fix
+  id: 2439
+  time: '2025-10-19T06:09:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8172
+- author: YO0teacher
+  changes:
+  - message: Fixed acider runners gaining acid from hitting training dummies.
+    type: Fix
+  id: 2440
+  time: '2025-10-19T06:09:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8159
+- author: Vixting
+  changes:
+  - message: Synth vision now uses half vision.
+    type: Tweak
+  id: 2441
+  time: '2025-10-19T06:10:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8165
 Name: RMC14
 Order: -1
