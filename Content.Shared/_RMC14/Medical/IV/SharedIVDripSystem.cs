@@ -352,6 +352,32 @@ public abstract class SharedIVDripSystem : EntitySystem
             DoDetachFeedback(pack, target, user, predict);
     }
 
+    protected void DetachDialysis(Entity<DialysisComponent> dialysis, EntityUid? user, bool rip, bool predict)
+    {
+        if (dialysis.Comp.AttachedTo is not { } target)
+            return;
+
+        if (user != null && !_skills.HasAllSkills(user.Value, dialysis.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-dialysis-skill-required"), user.Value, user.Value);
+            return;
+        }
+
+        dialysis.Comp.AttachedTo = default;
+        Dirty(dialysis);
+
+        if (rip)
+            DoRip(dialysis.Comp.RipDamage, target, user, dialysis.Comp.RipEmote, predict);
+        else
+        {
+            if (!predict || _timing.IsFirstTimePredicted)
+            {
+                var msg = Loc.GetString("rmc-dialysis-detached", ("dialysis", dialysis.Owner), ("target", target));
+                _popup.PopupEntity(msg, target);
+            }
+        }
+    }
+
     private void ToggleInject(Entity<IVDripComponent> iv, EntityUid user)
     {
         ToggleInject(iv, ref iv.Comp.Injecting, user);

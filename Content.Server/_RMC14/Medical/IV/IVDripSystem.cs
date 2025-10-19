@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Chat.Systems;
+using Content.Server.PowerCell;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat.Prototypes;
@@ -18,6 +20,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly PowerCellSystem _powerCell = default!;
 
     private bool TryGetBloodstream(
         EntityUid attachedTo,
@@ -141,6 +144,60 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             Dirty(packId, packComp);
             UpdatePackVisuals((packId, packComp));
+        }
+
+        var dialysis = EntityQueryEnumerator<DialysisComponent>();
+        while (dialysis.MoveNext(out var dialysisId, out var dialysisComp))
+        {
+            if (dialysisComp.AttachedTo is not { } attachedTo)
+                continue;
+
+            if (!InRange(dialysisId, attachedTo, dialysisComp.Range))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, true, false);
+                continue;
+            }
+
+            if (!HasComp<BloodstreamComponent>(attachedTo))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, false, false);
+                continue;
+            }
+
+            if (time < dialysisComp.TransferAt)
+                continue;
+
+            dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
+
+            if (!_powerCell.HasActivatableCharge(dialysisId))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, false, false);
+                continue;
+            }
+
+            if (!TryGetBloodstream(attachedTo, out _, out _, out var bloodstreamSolution))
+                continue;
+
+            if (_solutionContainer.TryGetSolution(attachedTo, "chemicals", out var chemicalSolEnt, out var chemicalSol))
+            {
+                var toRemove = (from reagent in chemicalSol.Contents
+                               where !dialysisComp.TransferableReagents.Contains(reagent.Reagent.Prototype)
+                               select reagent.Reagent).ToList();
+
+                foreach (var reagent in toRemove)
+                {
+                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent.Prototype, dialysisComp.TransferAmount);
+                }
+
+                if (bloodstreamSolution is { } bloodSolutionEnt)
+                {
+                    _solutionContainer.RemoveReagent(bloodSolutionEnt, "Blood", dialysisComp.BloodRemovalCost);
+                }
+
+                _powerCell.TryUseActivatableCharge(dialysisId);
+            }
+
+            Dirty(dialysisId, dialysisComp);
         }
     }
 }
