@@ -9,10 +9,10 @@ using Robust.Shared.Configuration;
 namespace Content.IntegrationTests._RMC14;
 
 [TestFixture]
-public sealed class PlanetMapLoadTest
+public sealed class PlanetMapLoadTests
 {
     [Test]
-    public async Task Test()
+    public async Task PlanetLoadsWithoutErrorsTest()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
         {
