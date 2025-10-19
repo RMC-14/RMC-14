@@ -15,6 +15,7 @@
   - type: ItemSlots
   - type: Appearance
   - type: DeployableItem
+    magazineExamine: true
   - type: RMCUnfoldCardboard
     spawns:
     - id: RMCSheetCardboard1
