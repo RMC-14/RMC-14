@@ -39,3 +39,12 @@
   - type: RMCXenoScreechShockWave
     waveSpeed: 25
     waveStrength: 0.12
+
+- type: entity
+  parent: RMCEffectScreechValkyrie
+  id: RMCEffectScreechKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 10
+    waveStrength: 3
