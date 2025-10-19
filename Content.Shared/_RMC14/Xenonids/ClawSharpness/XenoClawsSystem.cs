@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Doors.Components;
 using Content.Shared.Weapons.Melee;
@@ -53,17 +53,18 @@ public sealed class XenoClawsSystem : EntitySystem
             return;
 
         var hasRequiredClaws = claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0;
-        var hasRequiredTier = true;
+        bool hasRequiredTier = false;
+
         if (receiver.MinimumXenoTier != null)
         {
             hasRequiredTier = _xenoQuery.TryComp(xeno, out var xenoComp) &&
-                            xenoComp.Tier >= receiver.MinimumXenoTier;
+                              xenoComp.Tier >= receiver.MinimumXenoTier;
         }
 
         if (hasRequiredClaws || hasRequiredTier)
         {
             args.Damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup),
-                                            receiver.MaxHealth / receiver.HitsToDestroy);
+                                              receiver.MaxHealth / receiver.HitsToDestroy);
         }
         else
         {
