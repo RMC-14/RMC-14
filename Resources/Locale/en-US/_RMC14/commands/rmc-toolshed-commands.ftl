@@ -86,3 +86,5 @@ command-description-tiletype-FromTileId = Returns a list of TileRefs that match 
 command-description-replacetile-FromProtoId = Replaces tiles to a specified ProtoId.
 command-description-replacetile-FromTileId = Replaces tiles to a specified Tile Defenition Id.
 command-description-gridtile = Gets TileRefs for a grid that a specified entity is apart of.
+
+command-description-movespeed = Changes the max movement speed for given entities.

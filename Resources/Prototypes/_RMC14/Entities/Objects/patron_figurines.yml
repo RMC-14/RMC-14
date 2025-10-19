@@ -1083,7 +1083,11 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSips-On-Puddles
   name: Sips-On-Puddles figurine
-  description: "\"If only I could weld your wounds!\""
+  description: "Floopy ears. Small Snout. Quirky Humour.
+
+    Half Kobold, All Marine.
+
+    This is the \"Sipper\"."
   components:
   - type: Sprite
     state: sips-on-puddles
@@ -1859,3 +1863,14 @@
     state: zeth_xi
   - type: PatronFigurine
     id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKurtDocHolidayLachner
+  name: Kurt 'Doc Holiday' Lachner figurine
+  description: "Looking at the bottom of the base of the figurine, you read: \"We choose to become corpsman not because it is easy, but because we really don't feel like being alone, ok?\""
+  components:
+  - type: Sprite
+    state: kurt_doc_holiday_lachner
+  - type: PatronFigurine
+    id: 3b62aa38-f239-4d0d-91d4-94323d48092d
