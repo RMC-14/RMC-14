@@ -290,8 +290,8 @@
         amount: 1
       - id: CMPamphletEngineer
         amount: 1
-      #- id: Powerloader Certification
-      #  amount: 1
+      - id: CMPamphletPowerloader
+        amount: 1
     - name: Explosive Boxes
       hasBoxes: true
       entries:
