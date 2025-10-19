@@ -100,7 +100,7 @@
 - type: entity
   parent: RMCArmorVestMP
   id: RMCArmorVestOfficer
-  name: M3-XL pattern Officer armor vest
+  name: M3-XL pattern officer armor vest
   description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
   - type: Sprite
