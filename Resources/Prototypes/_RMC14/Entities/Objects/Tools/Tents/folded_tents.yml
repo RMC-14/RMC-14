@@ -193,17 +193,13 @@
         - prototype: RMCRotaryPhoneReqTent
           mode: Reactive
           offset: -1.5, 0.5
-        - prototype: RMCRechargerLocked
-          mode: Reactive
-          offset: -1.5, -0.5
         - prototype: CMASRSConsolePowered
           mode: Reactive
           offset: 0.5, 0.5
         - prototype: ColMarTechFOBSupplies
           mode: Reactive
           offset: 1.5, 0.5
-        - prototype: CMAutolathe
-          mode: Reactive
+        - prototype: CMRack
           offset: 0.5, -1.5
         - prototype: CMRack
           offset: 1.5, -1.5
@@ -245,8 +241,15 @@
         - prototype: CMVendorIngredientsLockedPowered
           mode: Reactive
           offset: 0.5, 0.5
-        - prototype: CMVendorDinnerwareLockedPowered
-          mode: Reactive
+        - prototype: CMRack
+          offset: 1.5, 0.5
+        - prototype: RMCRollingPin
+          neverRedeployableSetup: true
+          anchor: false
+          offset: 1.5, 0.5
+        - prototype: RMCKitchenKnifeChef
+          neverRedeployableSetup: true
+          anchor: false
           offset: 1.5, 0.5
         - prototype: RMCTankReagentWaterLocked
           mode: Reactive
