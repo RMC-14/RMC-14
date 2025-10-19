@@ -163,6 +163,24 @@
 - type: entity
   parent: RMCArmorVestSquad
   id: RMCArmorVestSquadLeader
+  name: M3-XL pattern squad leader armor vest
+  description: A type of M3-XL body armor, made specially for squad leaders, with a dedicated pouch for a box of zip ties. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,7,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 3
 
 - type: entity
   parent: RMCArmorVestSquad
