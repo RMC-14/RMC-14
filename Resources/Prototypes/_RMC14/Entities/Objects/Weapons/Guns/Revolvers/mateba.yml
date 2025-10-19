@@ -487,6 +487,10 @@
   suffix: Filled, Mateba
   description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments, along with the mateba itself.
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMateba
   - type: Storage
     whitelist:
       tags:

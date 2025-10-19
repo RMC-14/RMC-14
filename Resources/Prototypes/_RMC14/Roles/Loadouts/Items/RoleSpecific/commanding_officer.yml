@@ -55,7 +55,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 1080000 # 300 hrs
+      time: 1620000 # 450 hrs
   storage:
     back:
     - RMCMatebaCustomizationCaseLuxuryWeapon
@@ -67,7 +67,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
-      time: 1080000 # 300 hrs
+      time: 1620000 # 450 hrs
   storage:
     back:
     - RMCWeaponPistolHandcannonGold
