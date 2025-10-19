@@ -114,6 +114,14 @@
 
 - type: entity
   parent: RMCMagazineRifleL42A
+  id: RMCMagazineRifleL42AEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: RMCMagazineRifleL42A
   id: RMCMagazineRifleL42AExtended
   name: L42A Extended magazine (10x24mm)
   description: A Extended 10x24mm battle rifle magazine.
@@ -136,6 +144,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: RMCMagazineRifleL42AExtended
+  id: RMCMagazineRifleL42AExtendedEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 
 - type: entity
@@ -168,6 +184,14 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
 
+- type: entity
+  parent: RMCMagazineRifleL42AAP
+  id: RMCMagazineRifleL42AAPEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
 - type: Tag
   id: RMCWeaponRifleL42A
 
@@ -175,7 +199,16 @@
   id: RMCMagazineRifleL42A
 
 - type: Tag
+  id: RMCMagazineRifleL42AEmpty
+
+- type: Tag
   id: RMCMagazineRifleL42AAP
 
 - type: Tag
+  id: RMCMagazineRifleL42AAPEmpty
+
+- type: Tag
   id: RMCMagazineRifleL42AExtended
+
+- type: Tag
+  id: RMCMagazineRifleL42AExtendedEmpty
