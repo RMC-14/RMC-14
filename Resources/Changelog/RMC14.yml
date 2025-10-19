@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Added drop pouch to medical vendors
-    type: Add
-  id: 1949
-  time: '2025-07-06T01:43:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6767
-- author: Arykh
-  changes:
-  - message: Xenonids can now bind a key to their rest action. (Shift+R by default)
-    type: Tweak
-  id: 1950
-  time: '2025-07-06T01:45:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6788
 - author: DrSmugleaf
   changes:
   - message: Fixed the default mode (the only one we have right now) for the underbarrel
@@ -4642,5 +4628,26 @@
   id: 2449
   time: '2025-10-19T06:21:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8145
+- author: CatAndHats
+  changes:
+  - message: Fixed the requisitions uniform vendor missing some uniforms, boots, backpacks,
+      goggles, and helmet accessories, and the requisitions attachment vendor missing
+      flashlight grips.
+    type: Fix
+  - message: Changed the order of items in the requisitions armament and uniform vendors,
+      with new categories.
+    type: Tweak
+  - message: Fixed the requisitions vendor descriptions to now mention the LO.
+    type: Fix
+  id: 2450
+  time: '2025-10-19T06:24:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8153
+- author: CatAndHats
+  changes:
+  - message: The Engi Supply Kit is now shown as recommended in the SL vendor.
+    type: Tweak
+  id: 2451
+  time: '2025-10-19T06:25:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8022
 Name: RMC14
 Order: -1
