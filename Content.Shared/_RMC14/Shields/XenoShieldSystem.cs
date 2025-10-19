@@ -8,11 +8,6 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Xenonids.Hedgehog;
-using Content.Shared._RMC14.Xenonids.Projectile;
-using Robust.Shared.Map;
-using System.Numerics;
-using Content.Shared.Popups;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -21,16 +16,13 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
-    private static readonly EntProtoId HedgehogSpikeProjectile = "XenoHedgehogShieldSpikeProjectile";
+
     public enum ShieldType
     {
         Generic,
         Ravager,
-        Hedgehog,
         Vanguard,
         Praetorian,
         Crusher,
@@ -83,25 +75,8 @@ public sealed partial class XenoShieldSystem : EntitySystem
             if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
             {
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
-                
-                // Fire hedgehog spikes when shield is hit
-                if (ent.Comp.Shield == ShieldType.Hedgehog && TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield) && spikeShield.Active)
-                {
-                    _xenoProjectile.TryShoot(
-                        ent.Owner,
-                        new EntityCoordinates(ent, Vector2.UnitX * 2.5f),
-                        FixedPoint2.Zero,
-                        HedgehogSpikeProjectile,
-                        null,
-                        9, // 9 spikes like CM13
-                        new Angle(2 * Math.PI), // Full circle
-                        15f
-                    );
-                    
-                    _popup.PopupPredicted("Damaging the shield sprays bone quills everywhere!", ent, ent);
-                }
             }
-            
+
             args.Damage.ClampMax(0);
         }
 

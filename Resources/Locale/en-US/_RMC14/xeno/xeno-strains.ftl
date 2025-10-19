@@ -144,13 +144,14 @@ rmc-xeno-charger-description = In exchange for:
 rmc-xeno-charger-popup = Nothing stops this hive. This one will become both the immovable object and the unstoppable force.
 
 rmc-xeno-hedgehog-name = Hedgehog
+# TODO RMC14 limb damage shrapnel and causing damage when they move
 rmc-xeno-hedgehog-description = You lose:
   - Your empower, charge, and scissor cut abilities.
   - Some movement speed and attack speed.
   - Your plasma system is replaced with bone shards (max 300).
   You gain:
   - Increased health and armor that scales with shard count (+2.5 armor per 50 shards).
-  - Fire Spikes: Launch 8 spikes that embed in targets, slowing them. (75 shards, 10s cooldown). # TODO RMC14 limb damage shrapnel and causing damage when they move
+  - Fire Spikes: Launch 8 spikes that embed in targets, slowing them. (75 shards, 10s cooldown).
   - Spike Shield: Temporary shield that damages nearby enemies when hit (150 shards, 2s duration, 11s cooldown).
   - Spike Shed: Launch all shards in all directions for massive damage, gain speed boost but lose shard generation for 30s (min 50 shards, 30s cooldown).
 rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them come and be pierced by your defenses.

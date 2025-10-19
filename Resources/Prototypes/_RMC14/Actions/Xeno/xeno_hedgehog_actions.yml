@@ -32,6 +32,7 @@
   - type: InstantAction
     event: !type:ActionXenoSpikeShedEvent
   - type: ActionBlockIfResting
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -47,3 +48,5 @@
     useDelay: 11.5
   - type: InstantAction
     event: !type:ActionXenoSpikeShieldEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction

@@ -11,6 +11,7 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoShardSystem _shard = default!;
+
     public bool TryActivateShield(Entity<XenoSpikeShieldComponent, XenoShardComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp2, false))
@@ -25,7 +26,7 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
 
         ent.Comp1.ShieldExpireAt = time + ent.Comp1.ShieldDuration;
         ent.Comp1.CooldownExpireAt = time + ent.Comp1.Cooldown;
-        
+
         EnsureComp<XenoShieldComponent>(ent);
         Dirty(ent.Owner, ent.Comp1);
         return true;
@@ -35,7 +36,6 @@ public sealed class XenoSpikeShieldSystem : EntitySystem
     {
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<XenoSpikeShieldComponent, XenoShieldComponent>();
-        
         while (query.MoveNext(out var uid, out var spike, out var shield))
         {
             if (spike.ShieldExpireAt <= time)

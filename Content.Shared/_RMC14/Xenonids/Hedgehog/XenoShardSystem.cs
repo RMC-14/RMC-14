@@ -1,18 +1,21 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Aura;
-using Content.Shared._RMC14.Shields;
+
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using System.Numerics;
 using Content.Shared.Popups;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Audio;
 using Robust.Shared.Network;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Rejuvenate;
+using Content.Shared._RMC14.Barricade.Components;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -25,28 +28,30 @@ public sealed class XenoShardSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
-    [Dependency] private readonly XenoShieldSystem _xenoShield = default!;
+
     [Dependency] private readonly INetManager _net = default!;
-
-
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoShardComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<XenoShardComponent, CMGetArmorEvent>(OnShardGetArmor);
         SubscribeLocalEvent<XenoShardComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<XenoShardComponent, MeleeHitEvent>(OnMeleeHit);
 
         SubscribeLocalEvent<XenoFireSpikesComponent, ActionXenoFireSpikesEvent>(OnFireSpikes);
         SubscribeLocalEvent<XenoSpikeShedComponent, ActionXenoSpikeShedEvent>(OnSpikeShed);
         SubscribeLocalEvent<XenoSpikeShieldComponent, ActionXenoSpikeShieldEvent>(OnSpikeShield);
 
-        SubscribeLocalEvent<XenoSpikeShieldComponent, RemovedShieldEvent>(OnShieldRemoved);
+
+        SubscribeLocalEvent<XenoShardComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<XenoShardComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
     }
 
     public override void Update(float frameTime)
     {
         var currentTime = _timing.CurTime;
-        
+
         var query = EntityQueryEnumerator<XenoShardComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -85,7 +90,23 @@ public sealed class XenoShardSystem : EntitySystem
         if (args.DamageDelta == null || args.DamageDelta.GetTotal() <= FixedPoint2.Zero)
             return;
 
+        // Don't gain shards from barbed barricade damage
+        if (args.Origin != null && HasComp<BarbedComponent>(args.Origin.Value))
+            return;
+
         AddShards(ent, ent.Comp.ShardsOnDamage);
+    }
+
+    private void OnMeleeHit(Entity<XenoShardComponent> ent, ref MeleeHitEvent args)
+    {
+        foreach (var target in args.HitEntities)
+        {
+            if (_xeno.CanAbilityAttackTarget(ent, target))
+            {
+                AddShards(ent, ent.Comp.ShardsPerSlash);
+                break; // Only gain shards once per attack
+            }
+        }
     }
 
     public void AddShards(Entity<XenoShardComponent> ent, int amount)
@@ -162,8 +183,8 @@ public sealed class XenoShardSystem : EntitySystem
             ent.Comp.ProjectileCount,
             new Angle(Math.PI / 4), // 45 degrees
             20f,
-            fixedDistance: 4.0f, // Exactly 4 tiles
-            target: args.Entity
+            target: args.Entity,
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
     }
 
@@ -204,7 +225,7 @@ public sealed class XenoShardSystem : EntitySystem
             ent.Comp.ProjectileCount,
             new Angle(2 * Math.PI), // Full circle
             20f,
-            fixedDistance: ent.Comp.ShedRadius
+            projectileHitLimit: ent.Comp.ProjectileHitLimit
         );
 
         // Apply speed boost (remove armor bonus, gain speed)
@@ -254,17 +275,19 @@ public sealed class XenoShardSystem : EntitySystem
         }
 
 
-        // Give overshield with very high HP so it blocks all damage but still triggers spike firing
-        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Hedgehog, FixedPoint2.New(9999), shield.ShieldDuration);
+        // Use hedgehog shield system instead of main shield system
+        var hedgehogShieldSystem = EntityManager.System<HedgehogShieldSystem>();
+        hedgehogShieldSystem.ApplyShield(ent, FixedPoint2.New(500), shield.ShieldDuration);
 
         // Show CM13-style messages
         var selfMsg = "We ruffle our bone-shard quills, forming a defensive shell!";
-        var othersMsg = $"{ent} ruffles its bone-shard quills, forming a defensive shell!";
+        var othersMsg = "The hedgehog ruffles its bone-shard quills, forming a defensive shell!";
         _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
         _aura.GiveAura(ent, Color.Blue, shield.ShieldDuration, 2);
 
         args.Handled = true;
     }
+
     private void UpdateHedgehogSprite(Entity<XenoShardComponent> ent)
     {
         // Determine sprite level based on shard count
@@ -286,13 +309,41 @@ public sealed class XenoShardSystem : EntitySystem
         UpdateHedgehogSprite(ent);
     }
 
-    private void OnShieldRemoved(Entity<XenoSpikeShieldComponent> ent, ref RemovedShieldEvent args)
-    {
-        if (args.Type != XenoShieldSystem.ShieldType.Hedgehog)
-            return;
 
-        ent.Comp.Active = false;
-        Dirty(ent, ent.Comp);
+
+    private void OnRejuvenate(Entity<XenoShardComponent> ent, ref RejuvenateEvent args)
+    {
+        // Reset shard cooldown
+        ent.Comp.SpikeShedCooldownEnd = TimeSpan.Zero;
+        ent.Comp.SpikeShedCooldownMessageShown = false;
+
+        // Set shards to 150
+        ent.Comp.Shards = 150;
+
+        // Reset ability cooldowns
+        if (TryComp<XenoFireSpikesComponent>(ent, out var fireSpikes))
+        {
+            fireSpikes.CooldownExpireAt = TimeSpan.Zero;
+            Dirty(ent, fireSpikes);
+        }
+
+        if (TryComp<XenoSpikeShieldComponent>(ent, out var spikeShield))
+        {
+            spikeShield.CooldownExpireAt = TimeSpan.Zero;
+            Dirty(ent, spikeShield);
+        }
+
+        Dirty(ent);
+        _armor.UpdateArmorValue(ent.Owner);
+        UpdateHedgehogSprite(ent);
     }
-    
+
+    private void OnRefreshMovementSpeed(Entity<XenoShardComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        // Apply speed boost when on spike shed cooldown (no shards)
+        if (ent.Comp.SpikeShedCooldownEnd > _timing.CurTime)
+        {
+            args.ModifySpeed(1.0f + ent.Comp.SpeedModifier, 1.0f + ent.Comp.SpeedModifier);
+        }
+    }
 }

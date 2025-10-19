@@ -22,6 +22,7 @@
       takeAll: CMEquipment
       entries:
       - id: CMArmorHelmetM30
+      - id: RMCHeadCapPatrol
       - id: CMSatchel
       - id: CMMRE
     - name: Gloves
@@ -94,11 +95,11 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Glasses
       choices: { CMGlasses: 1 }
       entries:
       - id: RMCSunglasses
-        recommended: true
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: RMCGlassesAviators
@@ -130,6 +131,8 @@
         points: 10
       - id: RMCAttachmentS5RedDotSight
         points: 10
+      - id: RMCAttachmentS6ReflexSight
+        points: 10
       - id: RMCAttachmentSuppressor
         points: 10
       - id: RMCAttachmentVerticalGrip
@@ -137,6 +140,8 @@
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
+        points: 10
+      - id: CMMagazineRifleM4SPRExt
         points: 10
       - id: CMMagazineSMGM63AP
         points: 10
@@ -146,7 +151,7 @@
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
-      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoader44Marksman
         points: 10
     - name: Utilities
       entries:

@@ -20,8 +20,10 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
       - id: RMCKitPyroMini
@@ -30,7 +32,6 @@
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
@@ -298,6 +299,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
