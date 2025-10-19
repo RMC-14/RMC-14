@@ -109,7 +109,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSMGP90 #AP port it
+        startingItem: RMCMagazineSMGP90AP #AP port it
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
