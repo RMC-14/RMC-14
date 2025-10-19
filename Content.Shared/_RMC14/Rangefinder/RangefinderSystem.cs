@@ -334,7 +334,7 @@ public sealed class RangefinderSystem : EntitySystem
         {
             BreakOnMove = true,
             NeedHand = true,
-            BreakOnHandChange = true,
+            BreakOnHandChange = false,
             MovementThreshold = 0.5f,
         };
 
