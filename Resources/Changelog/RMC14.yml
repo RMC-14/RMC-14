@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed hive clusters and hive pylons taking too long to repair. They now
-      take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
-    type: Fix
-  id: 1963
-  time: '2025-07-07T00:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6943
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed baton slugs permanently blinding xenos sometimes
     type: Fix
   id: 1964
@@ -4661,5 +4653,12 @@
   id: 2463
   time: '2025-10-19T22:04:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8092
+- author: Aurallianz
+  changes:
+  - message: everyone gets an armour vest.
+    type: Add
+  id: 2464
+  time: '2025-10-19T22:48:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8127
 Name: RMC14
 Order: -1
