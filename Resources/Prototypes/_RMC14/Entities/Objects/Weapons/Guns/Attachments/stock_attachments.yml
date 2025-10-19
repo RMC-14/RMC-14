@@ -1087,9 +1087,9 @@
 
 - type: entity
   parent: RMCAttachmentM54CStockCollapsible
-  id: RMCAttachmentAK4047StockCollapsible
-  name: AK-4047 folding stock
-  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  id: RMCAttachmentType77StockCollapsible
+  name: Type 77 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the Type 77 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
   components:
   - type: AttachableVisuals
     suffix: ""
@@ -1108,11 +1108,11 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: ak4047_stock-on
-    actionName: Toggle AK-4047 Folding Stock
+    actionName: Toggle Type 77 Folding Stock
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentAK4047StockCollapsible
+    - RMCAttachmentType77StockCollapsible
 
 
 - type: Tag
@@ -1206,7 +1206,7 @@
   id: RMCAttachmentL24BStock
 
 - type: Tag
-  id: RMCAttachmentAK4047StockCollapsible
+  id: RMCAttachmentType77StockCollapsible
 
 - type: Tag
   id: RMCAttachmentMP5AltStockCollapsible
