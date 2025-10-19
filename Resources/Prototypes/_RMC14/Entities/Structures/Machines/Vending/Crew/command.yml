@@ -120,6 +120,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -458,6 +459,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
@@ -796,6 +798,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
+      - id: RMCArmorVestExecutiveOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1152,6 +1155,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: CMBootsBlackFilled
       - id: RMCLaserDesignator
@@ -1232,6 +1236,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
     - name: Patches
@@ -1377,6 +1382,7 @@
       - CMCMO
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1527,6 +1533,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
