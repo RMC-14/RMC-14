@@ -13,10 +13,13 @@ namespace Content.Shared._RMC14.Medical.IV;
 public sealed partial class PortableDialysisComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 TransferAmount = FixedPoint2.New(3);
+    public FixedPoint2 TransferAmount = FixedPoint2.New(1.5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan TransferDelay = TimeSpan.FromSeconds(2);
+    public FixedPoint2 BloodRemovalCost = FixedPoint2.New(6);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan TransferDelay = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan TransferAt;
@@ -38,9 +41,6 @@ public sealed partial class PortableDialysisComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillMedical"] = 2 };
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 BloodRemovalCost = FixedPoint2.New(12);
 
     [DataField, AutoNetworkedField]
     public string[] TransferableReagents = ["Blood"];
