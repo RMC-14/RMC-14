@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed hive clusters and hive pylons taking too long to repair. They now
-      take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
-    type: Fix
-  id: 1963
-  time: '2025-07-07T00:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6943
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed baton slugs permanently blinding xenos sometimes
-    type: Fix
-  id: 1964
-  time: '2025-07-07T00:17:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6942
-- author: noctyrnal
-  changes:
-  - message: Added Coffee mugs.
-    type: Add
-  - message: Sorokyne has recieved an update, fixing alot of issues.
-    type: Add
-  id: 1965
-  time: '2025-07-07T00:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6929
 - author: DoguhanOzgurAkca
   changes:
   - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
@@ -4661,5 +4637,90 @@
   id: 2463
   time: '2025-10-19T22:04:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8092
+- author: Aurallianz
+  changes:
+  - message: everyone gets an armour vest.
+    type: Add
+  id: 2464
+  time: '2025-10-19T22:48:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8127
+- author: DrSmugleaf
+  changes:
+  - message: Fixed melee and tackles being unreliable on moving targets when no other
+      interaction occurs from the user.
+    type: Fix
+  - message: Fixed loose bullet boxes showing a magazine counter on examine.
+    type: Fix
+  - message: Fixed the entrenching tool not dealing 30 damage while unfolded, and
+      3 while folded.
+    type: Fix
+  - message: Fixed the power loader permanently being unable to operate one hand when
+      catching a basketball mid-air. You can still catch the basketball mid-air with
+      the power loader.
+    type: Fix
+  - message: Fixed the XM51 burst cooldown being too short, and its burst fire rate
+      being too low.
+    type: Fix
+  - message: Fixed Lurkers being unable to hit the target it leaped at if the Lurker
+      has high enough ping. Its first attack after a leap that roots it now has infinite
+      range, if hitting the target it leaped at.
+    type: Fix
+  - message: Fixed smart equip with Shift+E playing a duplicate storage insert sound.
+    type: Fix
+  - message: Fixed xeno tail stab leaking the xeno's true identity for others.
+    type: Fix
+  - message: Fixed mateba stuns letting you move while knocked down.
+    type: Fix
+  - message: Fixed the Requisitions office guidelines sign mentioning the QM instead
+      of the LO.
+    type: Fix
+  - message: Fixed the tier 4 intel unlock being purchasable while doing nothing yet.
+    type: Fix
+  - message: Fixed repairing with welders not looping the do after if there is more
+      damage to fix.
+    type: Fix
+  - message: Fixed not being able to eat or drink if you are moving fast enough.
+    type: Fix
+  - message: Fixed the health analyzer UI closing if you put it into a closed storage.
+    type: Fix
+  - message: Fixed surgical line and synth graft being two times faster than intended
+      on medical skill 2 (Corpsmen). This also fixes skill scaling.
+    type: Fix
+  - message: Fixed clicking someone with a surgical line or synth graft while already
+      doing so not starting a new do after.
+    type: Fix
+  - message: Fixed set pose accepting markdown formatting and breaking character examines.
+    type: Fix
+  - message: Fixed the flamer and underbarrel flamers going on cooldown if used close
+      enough to not create fire, and added a popup when trying to fire too close to
+      yourself.
+    type: Fix
+  - message: Fixed the chem master all reagents button not deleting all reagents from
+      its buffer when it is set to disposal and no beaker is loaded.
+    type: Fix
+  - message: Admin alerts are only shown to admins with edit notes permissions.
+    type: Tweak
+  - message: Shrapnel grenades (M15, HEFA, Improvised) no longer shoot shrapnel while
+      we figure out why they freeze the whole server on detonation.
+    type: Tweak
+  - message: Changing hands while targeting a laser with the rangefinder or laser
+      designator no longer breaks the do after and does not drop the lase.
+    type: Tweak
+  - message: The popup for being healed with surgical line or synth graft is now a
+      lot larger for the target.
+    type: Tweak
+  - message: Recommended items in vendors now also start with a star in their name.
+    type: Tweak
+  id: 2465
+  time: '2025-10-19T22:50:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8184
+- author: DrSmugleaf
+  changes:
+  - message: Added Kurt 'Doc Holiday' Lachner figurine and updated Sips-On-Puddles
+      figurine.
+    type: Add
+  id: 2466
+  time: '2025-10-19T23:24:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8187
 Name: RMC14
 Order: -1
