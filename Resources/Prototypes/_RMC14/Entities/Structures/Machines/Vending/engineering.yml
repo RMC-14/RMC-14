@@ -62,7 +62,7 @@
         amount: 4
       - id: CMWrench
         amount: 4
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         amount: 4
 
 # Circuits
