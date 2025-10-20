@@ -210,12 +210,12 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
-            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
+            GetDialysisCharge((dialysisId, dialysisComp));
             UpdateDialysisVisuals((dialysisId, dialysisComp));
         }
     }
 
-    private void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
+    private void GetDialysisCharge(Entity<PortableDialysisComponent> dialysis)
     {
         var ev = new GetChargeEvent();
         RaiseLocalEvent(dialysis, ref ev);
