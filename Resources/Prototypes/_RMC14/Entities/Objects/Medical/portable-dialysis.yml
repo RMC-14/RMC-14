@@ -27,9 +27,8 @@
       types:
         Piercing: 3
   - type: PowerCellDraw
-    enabled: true
+    enabled: false
     drawRate: 10
-  - type: RMCPowerUsageDisplay
   - type: InteractedBlacklist
     blacklist:
       components:

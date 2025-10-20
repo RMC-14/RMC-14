@@ -32,6 +32,7 @@ public abstract class SharedIVDripSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
 
     private readonly HashSet<EntityUid> _packsToUpdate = [];
 
@@ -480,6 +481,8 @@ public abstract class SharedIVDripSystem : EntitySystem
         dialysis.Comp.AttachedTo = to;
         Dirty(dialysis);
 
+        _powerCell.SetDrawEnabled((dialysis.Owner, null), true);
+
         AttachFeedback(dialysis, user, to, false);
     }
 
@@ -533,6 +536,8 @@ public abstract class SharedIVDripSystem : EntitySystem
         dialysis.Comp.AttachedTo = default;
         Dirty(dialysis);
         UpdateDialysisAppearance(dialysis);
+
+        _powerCell.SetDrawEnabled((dialysis.Owner, null), false);
 
         if (rip)
             DoRip(dialysis.Comp.RipDamage, target, user, dialysis.Comp.RipEmote, predict);

@@ -150,6 +150,8 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var dialysis = EntityQueryEnumerator<PortableDialysisComponent>();
         while (dialysis.MoveNext(out var dialysisId, out var dialysisComp))
         {
+            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
+
             if (dialysisComp.AttachedTo is not { } attachedTo)
                 continue;
 
@@ -189,15 +191,14 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 {
                     _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent.Prototype, dialysisComp.TransferAmount);
                 }
-
-                if (bloodstreamSolution is { } bloodSolutionEnt)
-                {
-                    _solutionContainer.RemoveReagent(bloodSolutionEnt, "Blood", dialysisComp.BloodRemovalCost);
-                }
-
-                _powerCell.TryUseActivatableCharge(dialysisId);
             }
-            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
+
+            if (bloodstreamSolution is { } bloodSolutionEnt)
+            {
+                _solutionContainer.RemoveReagent(bloodSolutionEnt, "Blood", dialysisComp.BloodRemovalCost);
+            }
+
+            _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
         }
