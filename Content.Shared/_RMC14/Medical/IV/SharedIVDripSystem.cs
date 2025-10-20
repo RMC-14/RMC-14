@@ -64,6 +64,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<BloodPackComponent, ExaminedEvent>(OnBloodPackExamine);
 
         SubscribeLocalEvent<PortableDialysisComponent, AfterInteractEvent>(OnDialysisAfterInteract);
+        SubscribeLocalEvent<PortableDialysisComponent, AfterAutoHandleStateEvent>(OnDialysisAfterHandleState);
         SubscribeLocalEvent<PortableDialysisComponent, DialysisDoAfterEvent>(OnDialysisDoAfter);
         SubscribeLocalEvent<PortableDialysisComponent, GotUnequippedHandEvent>(OnDialysisUnequippedHand);
         SubscribeLocalEvent<PortableDialysisComponent, ExaminedEvent>(OnDialysisExamine);
@@ -178,6 +179,11 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionContainerChangedEvent args)
     {
         UpdatePackVisuals(pack);
+    }
+
+    private void OnDialysisAfterHandleState(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateDialysisAppearance(dialysis);
     }
 
     private void OnBloodPackAfterInteract(Entity<BloodPackComponent> pack, ref AfterInteractEvent args)
@@ -480,6 +486,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         dialysis.Comp.AttachedTo = to;
         Dirty(dialysis);
+        UpdateDialysisAppearance(dialysis);
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), true);
 
@@ -534,6 +541,8 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
 
         dialysis.Comp.AttachedTo = default;
+        dialysis.Comp.IsAttaching = false;
+        dialysis.Comp.IsDetaching = false;
         Dirty(dialysis);
         UpdateDialysisAppearance(dialysis);
 

@@ -23,6 +23,8 @@ public sealed class IVDripSystem : SharedIVDripSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
 
+    private readonly List<string> _reagentRemovalBuffer = new();
+
     private bool TryGetBloodstream(
         EntityUid attachedTo,
         [NotNullWhen(true)] out Entity<SolutionComponent>? solEnt,
@@ -150,8 +152,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var dialysis = EntityQueryEnumerator<PortableDialysisComponent>();
         while (dialysis.MoveNext(out var dialysisId, out var dialysisComp))
         {
-            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
-
             if (dialysisComp.AttachedTo is not { } attachedTo)
                 continue;
 
@@ -168,7 +168,10 @@ public sealed class IVDripSystem : SharedIVDripSystem
             }
 
             if (time < dialysisComp.TransferAt)
+            {
+                UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
                 continue;
+            }
 
             dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
 
@@ -178,29 +181,38 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 continue;
             }
 
-            if (!TryGetBloodstream(attachedTo, out _, out _, out var bloodstreamSolution))
+            if (!HasComp<BloodstreamComponent>(attachedTo))
                 continue;
 
             if (_solutionContainer.TryGetSolution(attachedTo, "chemicals", out var chemicalSolEnt, out var chemicalSol))
             {
-                var toRemove = (from reagent in chemicalSol.Contents
-                               where !dialysisComp.TransferableReagents.Contains(reagent.Reagent.Prototype)
-                               select reagent.Reagent).ToList();
+                _reagentRemovalBuffer.Clear();
 
-                foreach (var reagent in toRemove)
+                foreach (var reagentQuantity in chemicalSol.Contents)
                 {
-                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent.Prototype, dialysisComp.TransferAmount);
+                    if (!dialysisComp.TransferableReagents.Contains(reagentQuantity.Reagent.Prototype))
+                    {
+                        _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
+                    }
+                }
+
+                foreach (var reagent in _reagentRemovalBuffer)
+                {
+                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent, dialysisComp.TransferAmount);
                 }
             }
 
-            if (bloodstreamSolution is { } bloodSolutionEnt)
+            if (TryComp(attachedTo, out BloodstreamComponent? bloodstreamComp) &&
+                _solutionContainer.ResolveSolution(attachedTo, bloodstreamComp.BloodSolutionName, ref bloodstreamComp.BloodSolution))
             {
-                _solutionContainer.RemoveReagent(bloodSolutionEnt, "Blood", dialysisComp.BloodRemovalCost);
+                _solutionContainer.SplitSolution(bloodstreamComp.BloodSolution.Value, dialysisComp.BloodRemovalCost);
             }
 
             _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
+
+            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
         }
     }
 
@@ -217,5 +229,8 @@ public sealed class IVDripSystem : SharedIVDripSystem
         {
             dialysis.Comp.BatteryChargePercent = 0f;
         }
+
+        Dirty(dialysis);
+        UpdateDialysisAppearance(dialysis);
     }
 }

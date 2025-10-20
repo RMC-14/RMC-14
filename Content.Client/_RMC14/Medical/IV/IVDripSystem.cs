@@ -68,6 +68,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var attachmentState = dialysis.Comp.AttachedTo != null ? "hooked" : "unhooked";
         sprite.LayerSetState(DialysisVisualLayers.Attachment, attachmentState);
 
+        // Handle the main effect animation (draining, filling, or running)
         if (dialysis.Comp.IsDetaching)
         {
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
@@ -75,17 +76,29 @@ public sealed class IVDripSystem : SharedIVDripSystem
         }
         else if (dialysis.Comp.IsAttaching)
         {
+            // CMSS13: Shows both "filling" and "running" during attachment
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
             sprite.LayerSetState(DialysisVisualLayers.Effect, "filling");
         }
         else if (dialysis.Comp.AttachedTo != null)
         {
+            // CMSS13: Shows "running" when actively filtering
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
             sprite.LayerSetState(DialysisVisualLayers.Effect, "running");
         }
         else
         {
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, false);
+        }
+
+        // Handle the filtering overlay (CMSS13: shows "filtering" when actively filtering)
+        if (dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching)
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Filtering, true);
+        }
+        else
+        {
+            sprite.LayerSetVisible(DialysisVisualLayers.Filtering, false);
         }
 
         var percent = dialysis.Comp.BatteryChargePercent;

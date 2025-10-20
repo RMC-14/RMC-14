@@ -13,6 +13,9 @@
     - state: draining
       map: [ "enum.DialysisVisualLayers.Effect" ]
       visible: false
+    - state: filtering
+      map: [ "enum.DialysisVisualLayers.Filtering" ]
+      visible: false
     - state: battery100
       map: [ "enum.DialysisVisualLayers.Battery" ]
   - type: Appearance

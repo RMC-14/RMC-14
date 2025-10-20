@@ -40,7 +40,7 @@ public sealed partial class PortableDialysisComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillMedical"] = 2 };
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BloodRemovalCost = FixedPoint2.New(6);
+    public FixedPoint2 BloodRemovalCost = FixedPoint2.New(12);
 
     [DataField, AutoNetworkedField]
     public string[] TransferableReagents = ["Blood"];
@@ -60,5 +60,6 @@ public enum DialysisVisualLayers
 {
     Attachment,
     Effect,
+    Filtering,
     Battery
 }
