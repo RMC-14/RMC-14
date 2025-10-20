@@ -873,6 +873,17 @@
     - id: RMCWeaponPistolT73
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNPZ92
+  suffix: Filled, NPZ92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolNPZ92
+    - id: RMCMagazinePistolNP92
+      amount: 5
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolTSE
   name: pistol belt
@@ -1526,7 +1537,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1550,12 +1561,15 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,17,1 # should be 9 slots
+    - 0,0,15,1 # 7 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
+      - RMCMagazinePistolM13AP
+      - RMCMagazinePistolM13ExtAP
+      - RMCMagazinePistolM13DrumAP
       - RMCWeaponPistolM13
   - type: LimitedStorage
     limits:
@@ -1564,18 +1578,24 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 8
+      count: 7
       whitelist:
         tags:
         - RMCMagazinePistolM13
         - RMCMagazinePistolM13Ext
         - RMCMagazinePistolM13Drum
+        - RMCMagazinePistolM13AP
+        - RMCMagazinePistolM13ExtAP
+        - RMCMagazinePistolM13DrumAP
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCBeltHolsterM13
 
 - type: entity
   parent: CMBeltMarine
@@ -1889,6 +1909,9 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltHolsterM13
 
 - type: Tag
   id: RMCBeltMedical

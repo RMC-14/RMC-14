@@ -26,6 +26,9 @@
       "name": "lasersight"
     },
     {
+      "name": "lasersight_micro"
+    },
+    {
       "name": "laserlight"
     },
     {
@@ -120,6 +123,9 @@
     },
     {
       "name": "lasersight_a"
+    },
+    {
+      "name": "lasersight_micro_a"
     },
     {
       "name": "laserlight_a"

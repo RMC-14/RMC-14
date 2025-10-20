@@ -67,10 +67,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
-                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
-                        {
+                        if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
                             uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
-                        }
+
                         uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
@@ -86,6 +85,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         }
                         else if (entry.Recommended)
                         {
+                            uiEntry.Panel.Button.Label.Text = $"★ {uiEntry.Panel.Button.Label.Text}";
                             name = $"Recommended: {name}";
                             color = Color.FromHex("#102919");
                             borderColor = Color.FromHex("#3A9B52");
