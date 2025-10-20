@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
@@ -50,11 +51,14 @@ public sealed class XenoProjectileSystem : EntitySystem
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;
 
+    private int _limitHitsId;
+
     public override void Initialize()
     {
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
         _preventAttackLightOffQuery = GetEntityQuery<PreventAttackLightOffComponent>();
 
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeNetworkEvent<XenoProjectilePredictedHitEvent>(OnPredictedHit);
 
         SubscribeLocalEvent<XenoProjectileShooterComponent, ComponentRemove>(OnShooterRemove);
@@ -68,6 +72,11 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _limitHitsId = 0;
     }
 
     private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args)
@@ -142,7 +151,6 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!TryComp(ent, out XenoProjectileShotComponent? shot))
             return;
 
-        Log.Info(_timing.CurTick.ToString());
         var ev = new XenoProjectilePredictedHitEvent(
             shot.Id,
             GetNetEntity(args.OtherEntity),
@@ -214,9 +222,14 @@ public sealed class XenoProjectileSystem : EntitySystem
         int shots,
         Angle deviation,
         float speed,
-        float? fixedDistance = null,
-        EntityUid? target = null)
+        float? stopAtDistance = null,
+        EntityUid? target = null,
+        bool predicted = true,
+        int? projectileHitLimit = null)
     {
+        if (!predicted && _net.IsClient)
+            return false;
+
         var origin = _transform.GetMapCoordinates(xeno);
         var targetMap = _transform.ToMapCoordinates(targetCoords);
         if (origin.MapId != targetMap.MapId ||
@@ -243,6 +256,9 @@ public sealed class XenoProjectileSystem : EntitySystem
 
         var originalDiff = targetMap.Position - origin.Position;
         var halfDeviation = deviation / 2;
+        if (projectileHitLimit != null)
+            _limitHitsId++;
+
         for (var i = 0; i < shots; i++)
         {
             // center projectile has no deviation; others are randomly offset within deviation
@@ -265,10 +281,10 @@ public sealed class XenoProjectileSystem : EntitySystem
 
             _hive.SetSameHive(xeno, projectile);
 
-            if (fixedDistance != null)
+            if (stopAtDistance != null)
             {
                 var fixedDistanceComp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
-                fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(fixedDistance.Value / speed);
+                fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(stopAtDistance.Value / speed);
                 Dirty(projectile, fixedDistanceComp);
             }
 
@@ -279,15 +295,27 @@ public sealed class XenoProjectileSystem : EntitySystem
                 Dirty(projectile, targeted);
             }
 
-            shooter ??= EnsureComp<XenoProjectileShooterComponent>(xeno);
-            shooter.Shot.Add(projectile);
-            Dirty(xeno, shooter);
+            if (projectileHitLimit != null)
+            {
+                var limitHits = EnsureComp<ProjectileLimitHitsComponent>(projectile);
+                limitHits.Limit = projectileHitLimit.Value;
+                limitHits.OriginEntity = xeno;
+                limitHits.ExtraId = _limitHitsId;
+                Dirty(projectile, limitHits);
+            }
 
-            var shot = EnsureComp<XenoProjectileShotComponent>(projectile);
-            shot.Id = shooter.NextId++;
-            shot.Shooter = shooterPlayer;
-            shot.ShooterEnt = xeno;
-            Dirty(projectile, shot);
+            if (predicted)
+            {
+                shooter ??= EnsureComp<XenoProjectileShooterComponent>(xeno);
+                shooter.Shot.Add(projectile);
+                Dirty(xeno, shooter);
+
+                var shot = EnsureComp<XenoProjectileShotComponent>(projectile);
+                shot.Id = shooter.NextId++;
+                shot.Shooter = shooterPlayer;
+                shot.ShooterEnt = xeno;
+                Dirty(projectile, shot);
+            }
 
             if (_net.IsServer)
                 continue;

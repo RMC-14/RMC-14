@@ -20,8 +20,10 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
       - id: RMCKitPyroMini
@@ -30,7 +32,6 @@
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
@@ -156,6 +157,10 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -167,9 +172,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #  points: 6
       - id: RMCSpeedLoader44Marksman
@@ -238,6 +241,8 @@
         recommended: true
       - id: RMCArmorM4Zipties
         name: leader M4 pattern marine armor (zipties)
+      - id: RMCArmorVestSquadLeader
+        name: leader M3-XL pattern armor vest (zipties)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -298,6 +303,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:

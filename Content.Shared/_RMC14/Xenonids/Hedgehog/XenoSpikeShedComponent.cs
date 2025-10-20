@@ -1,10 +1,12 @@
 using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoShardSystem), typeof(XenoSpikeShieldSystem))]
 public sealed partial class XenoSpikeShedComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -32,8 +34,14 @@ public sealed partial class XenoSpikeShedComponent : Component
     public float ShedRadius = 4f;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoHedgehogSpikeProjectile";
+    public EntProtoId Projectile = "XenoHedgehogSpikeProjectileSpread";
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 40;
+
+    [DataField, AutoNetworkedField]
+    public int? ProjectileHitLimit = 6;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/spike_spray.ogg");
 }

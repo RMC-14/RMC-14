@@ -72,11 +72,14 @@
           tags:
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS5RedDotSight
       rmc-aslot-underbarrel:
         whitelist:
