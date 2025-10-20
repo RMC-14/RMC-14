@@ -628,9 +628,6 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
       state: stock-on
     actionName: Toggle M13 Folding Stock
-  - type: AttachableSizeMods
-    modifiers:
-      - size: 1
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -656,6 +653,7 @@
         activeOnly: true
       accuracyAddMult: -0.15
       recoilFlat: 2
+      scatterFlat: 1
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/jungle.rsi
