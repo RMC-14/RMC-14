@@ -295,6 +295,8 @@
 - type: entity
   parent: RMCBoxPizza
   id: RMCBoxPizzaGalaxy
+  name: Pizza Galaxy pizza box
+  description: A box suited for the finest pizzas.
   suffix: Galaxy, Empty
   components:
   - type: Sprite

@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: [ BoxCardboard, BaseBagOpenClose ]
-  id: RMCBoxDonut
+  id: RMCBoxDonutEmpty
   name: Yum! donuts
   description: A box of mouth-watering "Yum!" brand donuts
   components:
@@ -44,12 +44,6 @@
     size: Normal
     sprite: _RMC14/Objects/Storage/donutbox.rsi
   - type: FixedItemSizeStorage
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:NestedSelector
-        tableId: RMCDonutTable
-        rolls: !type:ConstantNumberSelector
-          value: 6
   - type: Appearance
   - type: Storage
     grid:
@@ -57,6 +51,17 @@
     whitelist:
       tags:
       - Donut
+
+- type: entity
+  parent: RMCBoxDonutEmpty
+  id: RMCBoxDonut
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: RMCDonutTable
+        rolls: !type:ConstantNumberSelector
+          value: 6
 
 - type: entityTable
   id: RMCDonutTable
