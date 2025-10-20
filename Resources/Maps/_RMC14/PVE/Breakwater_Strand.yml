@@ -18217,7 +18217,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 122
     components:
@@ -18945,7 +18945,7 @@ entities:
     - type: Transform
       pos: -8.5,18.5
       parent: 2
-- proto: CMLightFixtureEmpty
+- proto: RMCLightFixtureEmpty
   entities:
   - uid: 2365
     components:
@@ -18970,7 +18970,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 44.5,26.5
       parent: 2
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 1340
     components:

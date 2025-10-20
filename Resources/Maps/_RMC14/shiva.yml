@@ -45354,7 +45354,7 @@ entities:
     - type: Transform
       pos: 74.5,41.5
       parent: 1
-- proto: CMLightFixtureSmallOffset
+- proto: RMCLightFixtureSmallOffset
   entities:
   - uid: 1627
     components:
@@ -45493,7 +45493,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 94.5,94.5
       parent: 1
-- proto: CMLightReplacer
+- proto: RMCLightReplacer
   entities:
   - uid: 1650
     components:

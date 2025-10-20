@@ -105,7 +105,7 @@
     state: lightreplacer0
   - type: CMVendorBundle
     bundle:
-    - CMLightReplacer
+    - RMCLightReplacer
     # demo scanner
     - TrashBag
     - RMCToolboxMechanicalFilled
