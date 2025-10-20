@@ -68,7 +68,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var attachmentState = dialysis.Comp.AttachedTo != null ? "hooked" : "unhooked";
         sprite.LayerSetState(DialysisVisualLayers.Attachment, attachmentState);
 
-        // Handle the main effect animation (draining, filling, or running)
         if (dialysis.Comp.IsDetaching)
         {
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
@@ -76,13 +75,11 @@ public sealed class IVDripSystem : SharedIVDripSystem
         }
         else if (dialysis.Comp.IsAttaching)
         {
-            // CMSS13: Shows both "filling" and "running" during attachment
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
             sprite.LayerSetState(DialysisVisualLayers.Effect, "filling");
         }
         else if (dialysis.Comp.AttachedTo != null)
         {
-            // CMSS13: Shows "running" when actively filtering
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, true);
             sprite.LayerSetState(DialysisVisualLayers.Effect, "running");
         }
@@ -91,7 +88,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
             sprite.LayerSetVisible(DialysisVisualLayers.Effect, false);
         }
 
-        // Handle the filtering overlay (CMSS13: shows "filtering" when actively filtering)
         if (dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching)
         {
             sprite.LayerSetVisible(DialysisVisualLayers.Filtering, true);
@@ -104,13 +100,13 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var percent = dialysis.Comp.BatteryChargePercent;
         var batteryState = percent switch
         {
-            >= 85 => "battery100",
-            >= 60 => "battery85",
-            >= 45 => "battery60",
-            >= 30 => "battery45",
-            >= 15 => "battery30",
-            >= 1 => "battery15",
-            _ => "battery0"
+            <= 100 => "battery100",
+            <= 85 => "battery85",
+            <= 60 => "battery60",
+            <= 45 => "battery45",
+            <= 30 => "battery30",
+            <= 15 => "battery15",
+            = 0 => "battery0"
         };
 
         sprite.LayerSetState(DialysisVisualLayers.Battery, batteryState);
