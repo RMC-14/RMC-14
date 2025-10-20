@@ -111,7 +111,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-- proto: CMLightFixtureSmallAlwaysPowered
+- proto: RMCLightFixtureSmallAlwaysPowered
   entities:
   - uid: 125
     components:
