@@ -624,7 +624,7 @@ entities:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-- proto: CMLightFixtureSmallAlwaysPowered
+- proto: RMCLightFixtureSmallAlwaysPowered
   entities:
   - uid: 125
     components:
