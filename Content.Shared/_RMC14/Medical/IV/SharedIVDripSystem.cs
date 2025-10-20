@@ -183,7 +183,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnDialysisAfterHandleState(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
     {
-        UpdateDialysisAppearance(dialysis);
+        UpdateDialysisVisuals(dialysis);
     }
 
     private void OnBloodPackAfterInteract(Entity<BloodPackComponent> pack, ref AfterInteractEvent args)
@@ -332,7 +332,6 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         dialysis.Comp.IsAttaching = true;
         Dirty(dialysis);
-        UpdateDialysisAppearance(dialysis);
 
         var ev = new DialysisDoAfterEvent { IsDetaching = false };
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, dialysis, target, dialysis)
@@ -354,7 +353,6 @@ public abstract class SharedIVDripSystem : EntitySystem
             dialysis.Comp.IsAttaching = false;
             dialysis.Comp.IsDetaching = false;
             Dirty(dialysis);
-            UpdateDialysisAppearance(dialysis);
             return;
         }
 
@@ -489,7 +487,6 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         dialysis.Comp.AttachedTo = to;
         Dirty(dialysis);
-        UpdateDialysisAppearance(dialysis);
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), true);
 
@@ -517,7 +514,6 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         dialysis.Comp.IsDetaching = true;
         Dirty(dialysis);
-        UpdateDialysisAppearance(dialysis);
 
         var ev = new DialysisDoAfterEvent { IsDetaching = true };
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, dialysis, target, dialysis)
@@ -547,7 +543,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         dialysis.Comp.IsAttaching = false;
         dialysis.Comp.IsDetaching = false;
         Dirty(dialysis);
-        UpdateDialysisAppearance(dialysis);
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), false);
 
@@ -629,6 +624,18 @@ public abstract class SharedIVDripSystem : EntitySystem
         iv.Comp.FillPercentage = 0;
         Dirty(iv);
         UpdateIVAppearance(iv);
+    }
+
+    protected void UpdateDialysisVisuals(Entity<PortableDialysisComponent> dialysis)
+    {
+        if (_net.IsClient)
+        {
+            UpdateDialysisAppearance(dialysis);
+            return;
+        }
+
+        Dirty(dialysis);
+        UpdateDialysisAppearance(dialysis);
     }
 
     protected virtual void UpdateIVAppearance(Entity<IVDripComponent> iv)
