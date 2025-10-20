@@ -29,3 +29,14 @@
     state: sign_spaceflight_terminal
     snapCardinals: false
     drawdepth: Overdoors
+
+- type: entity
+  parent: RMCSpaceflightTerminalSign
+  id: RMCMaintenanceDeckSign
+  name: directions sign
+  description: A large sign containing your current location, as well as directions to other locals and the semiotic symbols associated with them. Has both English & Japanese text.
+  components:
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/ocp_signs.rsi
+    state: sign_maintenance_deck

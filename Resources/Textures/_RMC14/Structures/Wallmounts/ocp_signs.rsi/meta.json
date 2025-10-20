@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "sign_spaceflight_terminal"
+    },
+    {
+      "name": "sign_maintenance_deck"
     }
   ]
 }
