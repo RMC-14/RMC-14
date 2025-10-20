@@ -209,7 +209,7 @@ entities:
         23,1: RMCAreaBigredv2CavesLambdaVirology
         24,2: RMCAreaBigredv2CavesLambdaVirology
         24,1: RMCAreaBigredv2CavesLambdaVirology
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 72
     components:

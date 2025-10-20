@@ -1,8 +1,6 @@
-﻿using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
-using Content.Shared._RMC14.Armor;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
@@ -23,6 +21,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     {
         Generic,
         Ravager,
+        Hedgehog,
         Vanguard,
         Praetorian,
         Crusher,
