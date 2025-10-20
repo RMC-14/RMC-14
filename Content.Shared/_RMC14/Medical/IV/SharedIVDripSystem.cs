@@ -286,7 +286,10 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnDialysisAfterInteract(Entity<PortableDialysisComponent> dialysis, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not { } target || args.Handled)
+        if (args.Target is not { } target)
+            return;
+
+        if (!InRange(dialysis, target, dialysis.Comp.Range) || !HasComp<IVDripTargetComponent>(target))
             return;
 
         args.Handled = true;
