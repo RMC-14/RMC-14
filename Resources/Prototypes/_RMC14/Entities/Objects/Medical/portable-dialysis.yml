@@ -26,6 +26,9 @@
     slots:
     - suitstorage
   - type: PortableDialysis
+    ripDamage:
+      types:
+        Piercing: 3
   - type: PowerCellDraw
     enabled: false
     drawRate: 10
