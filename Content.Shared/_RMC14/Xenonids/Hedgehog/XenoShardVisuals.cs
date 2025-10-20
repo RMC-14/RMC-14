@@ -7,3 +7,9 @@ public enum XenoShardVisuals : byte
 {
     Level
 }
+
+[Serializable, NetSerializable]
+public enum XenoShardVisualLayers : byte
+{
+    Base
+}
