@@ -193,6 +193,7 @@
       visible: false
     - state: cig10
       map: ["cig10"]
+      visible: false
     - state: cig11
       map: ["cig11"]
       visible: false
