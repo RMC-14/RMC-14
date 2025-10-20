@@ -111,7 +111,7 @@ public sealed class RMCUpstreamTileAndPlatingCheck
                             if (tileErrorsAfter.Count > 0)
                             {
                                 msg +=
-                                    ($"\nupstream tiles or improperly parented tiles at {string.Join("\n", tileErrorsAfter)}");
+                                    ($"\nupstream tiles or improperly parented tiles at \n{string.Join("\n", tileErrorsAfter)}\n");
                             }
 
                             Assert.Fail(msg);
