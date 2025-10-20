@@ -149,3 +149,78 @@
     contents:
     - id: RMCShioCigar
       amount: 5
+
+#SPP Cigars
+- type: entity
+  parent: RMCTarbackCase
+  id: RMCMonteComunePack
+  name: Montecomune Pack
+  description: A well-designed pack of premium SPP pack-cigars, outclasses anything on the UN's market, but also technically counts as UN contraband. Rolled somewhere.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/montecomune.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+  - type: StorageFill
+    contents:
+    - id: RMCMontecomuneCigar
+      amount: 12
+  - type: ItemCounter
+    count:
+      tags: [Cigar]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-montecomune

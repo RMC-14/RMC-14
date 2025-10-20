@@ -1,0 +1,27 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Modified by KompaniLinge from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/masks.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lit-icon",
+	  "delays": [
+        [
+          0.2,
+          0.1,
+		  0.1
+        ]
+      ]
+	},
+	{
+      "name": "burnt-icon"
+    },
+    {
+      "name": "unlit-icon"
+    }
+  ]
+}
