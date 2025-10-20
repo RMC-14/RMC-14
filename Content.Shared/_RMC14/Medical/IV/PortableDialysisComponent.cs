@@ -53,6 +53,9 @@ public sealed partial class PortableDialysisComponent : Component
 
     [DataField, AutoNetworkedField]
     public float BatteryChargePercent;
+
+    [DataField]
+    public string? LastBatteryState;
 }
 
 [Serializable, NetSerializable]

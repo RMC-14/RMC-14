@@ -6,6 +6,41 @@ namespace Content.Client._RMC14.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PortableDialysisComponent, AfterAutoHandleStateEvent>(OnDialysisBatteryStateChanged);
+    }
+
+    private void OnDialysisBatteryStateChanged(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateDialysisBattery(dialysis);
+    }
+
+    private void UpdateDialysisBattery(Entity<PortableDialysisComponent> dialysis)
+    {
+        if (!TryComp(dialysis, out SpriteComponent? sprite))
+            return;
+
+        var percent = dialysis.Comp.BatteryChargePercent;
+        var batteryState = percent switch
+        {
+            >= 100 => "battery100",
+            >= 85 => "battery85",
+            >= 60 => "battery60",
+            >= 45 => "battery45",
+            >= 30 => "battery30",
+            >= 15 => "battery15",
+            _ => "battery0"
+        };
+
+        if (dialysis.Comp.LastBatteryState == batteryState)
+            return;
+        dialysis.Comp.LastBatteryState = batteryState;
+        sprite.LayerSetState(DialysisVisualLayers.Battery, batteryState);
+    }
+
     protected override void UpdateIVAppearance(Entity<IVDripComponent> iv)
     {
         base.UpdateIVAppearance(iv);
@@ -96,19 +131,5 @@ public sealed class IVDripSystem : SharedIVDripSystem
         {
             sprite.LayerSetVisible(DialysisVisualLayers.Filtering, false);
         }
-
-        var percent = dialysis.Comp.BatteryChargePercent;
-        var batteryState = percent switch
-        {
-            >= 100 => "battery100",
-            >= 85 => "battery85",
-            >= 60 => "battery60",
-            >= 45 => "battery45",
-            >= 30 => "battery30",
-            >= 15 => "battery15",
-            >= 0 => "battery0"
-        };
-
-        sprite.LayerSetState(DialysisVisualLayers.Battery, batteryState);
     }
 }

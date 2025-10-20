@@ -25,6 +25,26 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
     private readonly List<string> _reagentRemovalBuffer = new();
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<PortableDialysisComponent, ChargeChangedEvent>(OnDialysisChargeChanged);
+    }
+
+    private void OnDialysisChargeChanged(Entity<PortableDialysisComponent> dialysis, ref ChargeChangedEvent args)
+    {
+        if (args.MaxCharge > 0)
+        {
+            dialysis.Comp.BatteryChargePercent = args.Charge * 100f / args.MaxCharge;
+        }
+        else
+        {
+            dialysis.Comp.BatteryChargePercent = 0f;
+        }
+
+        Dirty(dialysis);
+    }
+
     private bool TryGetBloodstream(
         EntityUid attachedTo,
         [NotNullWhen(true)] out Entity<SolutionComponent>? solEnt,
@@ -169,7 +189,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             if (time < dialysisComp.TransferAt)
             {
-                UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
                 continue;
             }
 
@@ -211,26 +230,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
-
-            UpdateDialysisBatteryVisuals((dialysisId, dialysisComp));
         }
-    }
-
-    private void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
-    {
-        var ev = new GetChargeEvent();
-        RaiseLocalEvent(dialysis, ref ev);
-
-        if (ev.MaxCharge > 0)
-        {
-            dialysis.Comp.BatteryChargePercent = ev.CurrentCharge * 100f / ev.MaxCharge;
-        }
-        else
-        {
-            dialysis.Comp.BatteryChargePercent = 0f;
-        }
-
-        Dirty(dialysis);
-        UpdateDialysisAppearance(dialysis);
     }
 }
