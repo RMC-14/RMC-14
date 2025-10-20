@@ -192,6 +192,8 @@
   - HeadBeanieGreenRMC
   - HeadBeanieGrayRMC
   - UNMCHeadsetRMC
+  - HeadCowboyHatLightRMC
+  - HeadCowboyHatDarkRMC
 
 - type: loadoutGroup
   id: HeadwearRMCPVE
@@ -732,8 +734,6 @@
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
-  - HeadCowboyHatLightRMC
-  - HeadCowboyHatDarkRMC
   - HeadBandRebelRMC
   # BiMex tactical shades TODO
   - ShoesBlackRMC
