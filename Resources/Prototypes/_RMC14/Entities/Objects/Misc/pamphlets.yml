@@ -210,15 +210,15 @@
   description: A pamphlet used to quickly impart vital knowledge. This one details the responsibilities of an Honor Guard.
   components:
   - type: Sprite
-    state: pamphlet_jtac
+    state: pamphlet_honorguard
   - type: SkillPamphlet
-    BypassSkill: true
+    bypassSkill: true
     giveJobTitle: rmc-job-name-honor-guard
     givePrefix: rmc-job-prefix-honor-guard
     isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: hudsquad_honorguard
+      state: hudsquad_hgmp
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: honorguard

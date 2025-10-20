@@ -2,6 +2,7 @@
   parent: RMCKitBase
   id: RMCKitHonorGuard
   name: honor guard kit
+  description: A case containing the equipment for an Honor Guard.
   components:
   - type: Item
     size: Ginormous
