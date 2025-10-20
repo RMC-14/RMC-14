@@ -47,10 +47,18 @@
     - type: JobPrefix
       prefix: cm-job-prefix-militarywarden
     - type: CommandAccent
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMP
+    - type: SquadArmorWearer
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: warden
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
     - type: RMCTrackable
 
 - type: startingGear

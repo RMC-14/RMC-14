@@ -60,5 +60,8 @@ public sealed partial class SquadTeamComponent : Component
     public string Group = "UNMC";
 
     [DataField]
+    public bool HasLeaderIcon = true;
+
+    [DataField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
 }
