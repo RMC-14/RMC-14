@@ -8,7 +8,7 @@
   - type: Storage
     maxItemSize: Ginormous
     grid:
-    - 0,0,7,0
+    - 0,0,8,0
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
@@ -16,6 +16,7 @@
   - type: StorageFill
     contents:
     - id: RMCHeadsetMPHonor
+    - id: RMCPamphletHonorGuard
     # - id: CMPacketPillsOxycodone    TODO: Pain system
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine
