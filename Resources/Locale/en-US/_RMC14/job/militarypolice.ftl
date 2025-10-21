@@ -13,3 +13,6 @@ cm-job-name-militarypolice = Military Police
 cm-job-description-militarypolice = Enforce Marine Law. Detain Criminals. Keep Shipside Personnel Safe.
 cm-job-prefix-militarypolice = MP
 CMJobMilitaryPolice = Military Police
+
+rmc-job-name-honor-guard = Honor Guard
+rmc-job-prefix-honor-guard = HG
