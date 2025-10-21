@@ -467,6 +467,13 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
+    - conditions:
+        wieldedOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      damageAddMult: -0.1
+      fireDelayFlat: 0.25
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-b8-smart-scope
 
