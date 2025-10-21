@@ -1,0 +1,14 @@
+<ui:XenoTierRow
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <BoxContainer Orientation="Vertical" Access="Public" Align="Center" Margin="20 5" HorizontalExpand="True">
+        <BoxContainer Align="Center">
+            <Button Name="TierButton" Text="Tier" StyleClasses="ButtonSquare" Access="Public" ToggleMode="True"  ModulateSelfOverride="Purple" />
+        </BoxContainer>
+        <Label Name="SlotsLeft" Text="0 Remaining Slots" Access="Public" Align="Center" Visible="False"></Label>
+        <BoxContainer Name="XenosContainer" Align="Center" Orientation="Horizontal" Access="Public">
+            <cc:HSeparator/>
+        </BoxContainer>
+    </BoxContainer>
+</ui:XenoTierRow>

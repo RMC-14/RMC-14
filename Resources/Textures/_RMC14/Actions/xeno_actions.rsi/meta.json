@@ -224,6 +224,9 @@
       "name": "heal_xeno"
     },
     {
+      "name": "remote_plasma_transfer"
+    },
+    {
       "name": "shield_xeno"
     },
     {
