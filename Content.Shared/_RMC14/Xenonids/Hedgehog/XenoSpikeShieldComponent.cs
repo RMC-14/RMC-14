@@ -40,7 +40,7 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public EntProtoId Projectile = "XenoHedgehogSpikeProjectileSpreadShort";
 
     [DataField, AutoNetworkedField]
-    public int ProjectileCount = 9;
+    public int ProjectileCount = 7;
 
     [DataField, AutoNetworkedField]
     public int? ProjectileHitLimit = 6;
