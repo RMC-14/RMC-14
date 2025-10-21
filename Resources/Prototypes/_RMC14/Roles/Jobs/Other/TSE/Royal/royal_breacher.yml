@@ -78,7 +78,7 @@
     id: RMCIDRoyalMarinesBreacher
     belt: RMCBeltUtiliyGeneralFilledRoyal
     # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
