@@ -31,6 +31,20 @@
       color: "#008000"
 
 - type: entity
+  parent: RMCVisorNightVision
+  id: RMCVisorNightVisionAdvanced
+  name: advanced night vision optic
+  description:  An insertable visor HUD into a standard UNMC helmet. This is a advanced type of the standard night vision optic, providing a vastly improved battery and give off less light than standard issue optics. It can be inserted into a recharger to recharge its internal battery.
+  components:
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 5.5
+  - type: ComponentToggler
+    components:
+    - type: PointLight
+      enabled: false
+
+- type: entity
   parent: BaseItem
   id: RMCVisorMedical
   name: basic medical optic
