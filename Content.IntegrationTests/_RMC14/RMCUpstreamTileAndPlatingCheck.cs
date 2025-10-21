@@ -106,8 +106,11 @@ public sealed class RMCUpstreamTileAndPlatingCheck
 
                             var msg = $"For {file} found:";
                             if (tileErrorsBefore.Count > 0)
+                            {
                                 msg +=
                                     ("\nUpstream Plating was used (use [self gridtile tiletype:FromProtoId \"Plating\" replacetile:FromProtoId \"CMFloorPlating\"] over the grid to fix this issue.)");
+                            }
+
                             if (tileErrorsAfter.Count > 0)
                             {
                                 msg +=
