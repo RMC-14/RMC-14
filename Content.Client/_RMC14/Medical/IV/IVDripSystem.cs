@@ -80,15 +80,23 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, true);
             _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "filling");
         }
-        else if (dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching)
+        else if (dialysis.Comp.AttachedTo != null)
         {
             _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, true);
             _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "running");
-            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "filtering");
         }
         else
         {
             _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, false);
+        }
+
+        if (dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching)
+        {
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, true);
+        }
+        else
+        {
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, false);
         }
 
         var percent = dialysis.Comp.BatteryChargePercent;

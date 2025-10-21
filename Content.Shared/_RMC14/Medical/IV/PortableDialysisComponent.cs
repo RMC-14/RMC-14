@@ -63,5 +63,6 @@ public enum DialysisVisualLayers
 {
     Attachment,
     Effect,
+    Filtering,
     Battery
 }
