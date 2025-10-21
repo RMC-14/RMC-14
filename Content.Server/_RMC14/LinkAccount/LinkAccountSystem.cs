@@ -3,7 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.GhostColor;
+using Content.Shared._RMC14.GhostAppearance;
 using Content.Shared._RMC14.LinkAccount;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
