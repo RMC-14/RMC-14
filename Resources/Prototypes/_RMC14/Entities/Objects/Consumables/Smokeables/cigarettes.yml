@@ -297,3 +297,319 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds_yellow.rsi
+
+#SPP Cigarettes.
+
+- type: entity
+  parent: CigPackBase
+  id: RMCCigarettePackLingxiaoGolds
+  name: lingxiao golds pack
+  description: The shining jewel in the SPP tobacco industry, and rated highly. Incredibly expensive, and considered to be contraband in the UN, but people who can afford them typically get away with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/liangxiao_golds.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+    - state: cig13
+      map: ["cig13"]
+      visible: false
+    - state: cig14
+      map: ["cig14"]
+      visible: false
+    - state: cig15
+      map: ["cig15"]
+      visible: false
+    - state: cig16
+      map: ["cig16"]
+      visible: false
+    - state: cig17
+      map: ["cig17"]
+      visible: false
+    - state: cig18
+      map: ["cig18"]
+      visible: false
+    - state: cig19
+      map: ["cig19"]
+      visible: false
+    - state: cig20
+      map: ["cig20"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: RMCLingxiaoCigarette
+      amount: 20
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+    - cig13
+    - cig14
+    - cig15
+    - cig16
+    - cig17
+    - cig18
+    - cig19
+    - cig20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-liangxiao
+
+
+- type: entity
+  parent: Cigarette
+  id: RMCLingxiaoCigarette
+  name: Lingxiao Cigarette
+  description: A high-quality roll of Yunnan Tobacco and nictoine. Experts say, this is the best way to get lung cancer. Technically considered contriband in the UN, but can be found anywhere affluent.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/langxiaogold_cig.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCLingxiaoCigaretteteSpent
+  parent: RMCLingxiaoCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
+  parent: CigPackBase
+  id: RMCCigarettePackTarasClassic
+  name: taras classic pack
+  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a Coal miner. Technically considered contriband in the UN.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/taras_classic.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+    - state: cig13
+      map: ["cig13"]
+      visible: false
+    - state: cig14
+      map: ["cig14"]
+      visible: false
+    - state: cig15
+      map: ["cig15"]
+      visible: false
+    - state: cig16
+      map: ["cig16"]
+      visible: false
+    - state: cig17
+      map: ["cig17"]
+      visible: false
+    - state: cig18
+      map: ["cig18"]
+      visible: false
+    - state: cig19
+      map: ["cig19"]
+      visible: false
+    - state: cig20
+      map: ["cig20"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: RMCSPPStandardCigarette
+      amount: 20
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+    - cig13
+    - cig14
+    - cig15
+    - cig16
+    - cig17
+    - cig18
+    - cig19
+    - cig20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-taras
+
+
+- type: entity
+  parent: Cigarette
+  id: RMCSPPStandardCigarette
+  name: SPP Filtered Cigarette
+  description: A simple filtered cigarette. Atleast it's maringally healthier then the UN Unfiltered ones!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/spp_cig.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCSPPStandardCigaretteSpent
+  parent: RMCSPPStandardCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
+  parent: RMCCigarettePackTarasClassic
+  id: RMCCigarettePackBoheBlueMenthols
+  name: bohe blue menthols
+  description: Strong, filtered menthol cigarettes made out of the finest off-planet mediocre tobacco and coated in as much menthol as possible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/bohe_blue_menthols.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bohe-blue
+
