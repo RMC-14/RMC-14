@@ -7,6 +7,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#E71B00"
+  toxin: true
   tileReactions:
   - !type:FlammableTileReaction {}
   reactiveEffects:
