@@ -4,7 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Medical.IV;
 
 [Serializable, NetSerializable]
-public sealed partial class DialysisDoAfterEvent : SimpleDoAfterEvent
-{
-    public bool IsDetaching;
-}
+public sealed partial class AttachDialysisDoAfterEvent : SimpleDoAfterEvent;

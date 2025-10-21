@@ -26,5 +26,3 @@ cm-blood-pack-poke-others = {$user} pokes {$target} with {$pack}.
 cm-blood-pack-contains = It contains: [color=#BB0000FF]{$units} units[/color] of liquid.
 
 rmc-dialysis-already-attached = You're already using the portable dialysis machine on someone else!
-rmc-dialysis-detach-self = You start removing the portable dialysis machine's needle from {$target}'s arm.
-rmc-dialysis-detach-others = {$user} starts removing the portable dialysis machine's needle from {$target}'s arm.

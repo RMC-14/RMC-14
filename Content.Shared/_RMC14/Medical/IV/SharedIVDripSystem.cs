@@ -65,7 +65,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         SubscribeLocalEvent<PortableDialysisComponent, AfterInteractEvent>(OnDialysisAfterInteract);
         SubscribeLocalEvent<PortableDialysisComponent, AfterAutoHandleStateEvent>(OnDialysisAfterHandleState);
-        SubscribeLocalEvent<PortableDialysisComponent, DialysisDoAfterEvent>(OnDialysisDoAfter);
+        SubscribeLocalEvent<PortableDialysisComponent, AttachDialysisDoAfterEvent>(OnDialysisDoAfter);
         SubscribeLocalEvent<PortableDialysisComponent, GotUnequippedHandEvent>(OnDialysisUnequippedHand);
         SubscribeLocalEvent<PortableDialysisComponent, ExaminedEvent>(OnDialysisExamine);
         SubscribeLocalEvent<PortableDialysisComponent, PowerCellSlotEmptyEvent>(OnDialysisPowerEmpty);
@@ -296,7 +296,7 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         if (dialysis.Comp.AttachedTo == target)
         {
-            DetachDialysisWithDoAfter(dialysis, args.User);
+            DetachDialysis(dialysis, args.User, false, true);
             return;
         }
 
@@ -334,7 +334,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         Dirty(dialysis);
         UpdateDialysisVisuals(dialysis);
 
-        var ev = new DialysisDoAfterEvent { IsDetaching = false };
+        var ev = new AttachDialysisDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, dialysis, target, dialysis)
         {
             BreakOnMove = true,
@@ -347,9 +347,9 @@ public abstract class SharedIVDripSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDialysisDoAfter(Entity<PortableDialysisComponent> dialysis, ref DialysisDoAfterEvent args)
+    private void OnDialysisDoAfter(Entity<PortableDialysisComponent> dialysis, ref AttachDialysisDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
         {
             dialysis.Comp.IsAttaching = false;
             dialysis.Comp.IsDetaching = false;
@@ -358,20 +358,8 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
-        if (args.IsDetaching)
-        {
-            dialysis.Comp.IsDetaching = false;
-            DetachDialysis(dialysis, args.User, false, true);
-        }
-        else
-        {
-            dialysis.Comp.IsAttaching = false;
-
-            if (args.Target is not { } target)
-                return;
-
-            AttachDialysis(dialysis, args.User, target);
-        }
+        dialysis.Comp.IsAttaching = false;
+        AttachDialysis(dialysis, args.User, target);
     }
 
     private void OnDialysisUnequippedHand(Entity<PortableDialysisComponent> dialysis, ref GotUnequippedHandEvent args)
@@ -487,6 +475,8 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
+        dialysis.Comp.IsDetaching = false;
+        dialysis.Comp.IsAttaching = false;
         dialysis.Comp.AttachedTo = to;
         Dirty(dialysis);
         UpdateDialysisVisuals(dialysis);
@@ -494,42 +484,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         _powerCell.SetDrawEnabled((dialysis.Owner, null), true);
 
         AttachFeedback(dialysis, user, to, false);
-    }
-
-    private void DetachDialysisWithDoAfter(Entity<PortableDialysisComponent> dialysis, EntityUid user)
-    {
-        if (dialysis.Comp.AttachedTo is not { } target)
-            return;
-
-        if (!_skills.HasAllSkills(user, dialysis.Comp.SkillRequired))
-        {
-            _popup.PopupClient(Loc.GetString("cm-iv-detach-no-skill"), user, user);
-            return;
-        }
-
-        var delay = dialysis.Comp.AttachDelay;
-        if (delay > TimeSpan.Zero)
-        {
-            var selfDetach = Loc.GetString("rmc-dialysis-detach-self", ("user", user), ("target", target));
-            var othersDetach = Loc.GetString("rmc-dialysis-detach-others", ("user", user), ("target", target));
-            _popup.PopupPredicted(selfDetach, othersDetach, target, user);
-        }
-
-        dialysis.Comp.IsDetaching = true;
-        Dirty(dialysis);
-        UpdateDialysisVisuals(dialysis);
-
-        var ev = new DialysisDoAfterEvent { IsDetaching = true };
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, dialysis, target, dialysis)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            BreakOnHandChange = true,
-            BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = "RMCEffectHealBusy",
-        };
-        _doAfter.TryStartDoAfter(doAfter);
     }
 
     protected void DetachDialysis(Entity<PortableDialysisComponent> dialysis, EntityUid? user, bool rip, bool predict)
@@ -543,11 +497,31 @@ public abstract class SharedIVDripSystem : EntitySystem
             return;
         }
 
+        var uid = dialysis.Owner;
         dialysis.Comp.AttachedTo = default;
-        dialysis.Comp.IsAttaching = false;
-        dialysis.Comp.IsDetaching = false;
+        dialysis.Comp.IsDetaching = true;
         Dirty(dialysis);
         UpdateDialysisVisuals(dialysis);
+
+        var delay = dialysis.Comp.AttachDelay;
+        if (delay > TimeSpan.Zero)
+        {
+            var captured = uid;
+            Timer.Spawn(
+                delay,
+                () =>
+                {
+                    if (!EntityManager.TryGetComponent(captured, out PortableDialysisComponent? comp))
+                        return;
+
+                    if (!comp.IsDetaching || comp.AttachedTo != null)
+                        return;
+                    comp.IsDetaching = false;
+                    Dirty(captured, comp);
+                    UpdateDialysisVisuals((captured, comp));
+                }
+            );
+        }
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), false);
 
