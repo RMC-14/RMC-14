@@ -349,7 +349,7 @@ public sealed partial class ShuttleSystem
         }
 
         _thruster.DisableLinearThrusters(shuttle);
-        _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.North);
+        _thruster.EnableLinearThrustDirection(shuttle, shuttle.FTLDirection); // RMC14
         _thruster.SetAngularThrust(shuttle, false);
         _dockSystem.UndockDocks(uid);
 
