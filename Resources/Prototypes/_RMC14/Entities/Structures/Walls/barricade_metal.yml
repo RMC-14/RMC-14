@@ -185,6 +185,14 @@
     tags:
     - RMCMetalBarricade
 
+- type: entity
+  parent: CMBarricadeMetal
+  id: RMCBarricadeMetalAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
