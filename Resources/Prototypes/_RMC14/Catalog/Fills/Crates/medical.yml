@@ -23,7 +23,7 @@
       - id: CMWebbingSurgicalGreen
       - id: CMPortableSurgicalBedSpawnFolded
       - id: RMCPortableDialysis
-      - id: CMIV
+      #- id: CMIV # Make IV fit in crate.
       - id: RMCSprayBottleSpaceCleaner
       - id: CMMaskGasMedical
       - id: RMCBoxSterileMask
