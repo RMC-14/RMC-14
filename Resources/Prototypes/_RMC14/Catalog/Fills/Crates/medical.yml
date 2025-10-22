@@ -23,7 +23,7 @@
       - id: CMWebbingSurgicalGreen
       - id: CMPortableSurgicalBedSpawnFolded
       - id: RMCPortableDialysis
-      #- id: CMIV # TODO RMC14 It doesn't fit. :(
+      - id: CMIV
       - id: RMCSprayBottleSpaceCleaner
       - id: CMMaskGasMedical
       - id: RMCBoxSterileMask

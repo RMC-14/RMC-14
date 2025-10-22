@@ -645,20 +645,6 @@ public abstract class SharedIVDripSystem : EntitySystem
     {
     }
 
-    public static string GetBatteryState(float percent)
-    {
-        return percent switch
-        {
-            >= 100 => "battery100",
-            >= 85 => "battery85",
-            >= 60 => "battery60",
-            >= 45 => "battery45",
-            >= 30 => "battery30",
-            >= 15 => "battery15",
-            _ => "battery0"
-        };
-    }
-
     protected virtual void DoRip(DamageSpecifier? damage,
         EntityUid attached,
         EntityUid? user,

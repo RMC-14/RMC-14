@@ -25,41 +25,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
     private readonly List<string> _reagentRemovalBuffer = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<PortableDialysisComponent, ChargeChangedEvent>(OnDialysisChargeChanged);
-    }
-
-    private void OnDialysisChargeChanged(Entity<PortableDialysisComponent> dialysis, ref ChargeChangedEvent args)
-    {
-        float newPercent;
-        if (args.MaxCharge > 0)
-        {
-            newPercent = args.Charge * 100f / args.MaxCharge;
-        }
-        else
-        {
-            newPercent = 0f;
-        }
-
-        // Clamp to sensible bounds
-        newPercent = Math.Clamp(newPercent, 0f, 100f);
-
-        var previousPercent = dialysis.Comp.BatteryChargePercent;
-        var prevState = GetBatteryState(previousPercent);
-        var newState = GetBatteryState(newPercent);
-
-        // Update the stored percent
-        dialysis.Comp.BatteryChargePercent = newPercent;
-
-        // Only mark dirty if the visual state would change (reduces unnecessary network updates)
-        if (prevState != newState)
-        {
-            Dirty(dialysis);
-        }
-    }
-
     private bool TryGetBloodstream(
         EntityUid attachedTo,
         [NotNullWhen(true)] out Entity<SolutionComponent>? solEnt,
@@ -245,7 +210,22 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
+            GetDialysisCharge((dialysisId, dialysisComp));
             UpdateDialysisVisuals((dialysisId, dialysisComp));
+        }
+    }
+
+    private void GetDialysisCharge(Entity<PortableDialysisComponent> dialysis)
+    {
+        var ev = new GetChargeEvent();
+        RaiseLocalEvent(dialysis, ref ev);
+        if (ev.MaxCharge > 0)
+        {
+            dialysis.Comp.BatteryChargePercent = ev.CurrentCharge * 100f / ev.MaxCharge;
+        }
+        else
+        {
+            dialysis.Comp.BatteryChargePercent = 0f;
         }
     }
 }
