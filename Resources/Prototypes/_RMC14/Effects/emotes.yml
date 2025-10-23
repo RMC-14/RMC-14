@@ -47,3 +47,11 @@
   components:
   - type: Sprite
     state: emote_hug
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectHandshake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_handshake
