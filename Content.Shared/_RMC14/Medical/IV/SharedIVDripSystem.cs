@@ -379,7 +379,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         DetachDialysis(dialysis, null, true, true);
     }
 
-    private void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
+    protected virtual void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
     {
         UpdateDialysisVisuals(dialysis);
     }
