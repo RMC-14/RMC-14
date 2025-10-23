@@ -51,6 +51,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Attachable;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -93,6 +94,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
+    [Dependency] private readonly AttachableSharedTankSystem _sharedTank = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -711,6 +713,10 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                    break;
+                case RMCAttachableSharedTankComponent flamer:
+                    if (ent != null)
+                        _sharedTank.ShootNozzle((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
                 case RMCFlamerAmmoProviderComponent flamer:
                     if (ent != null)
