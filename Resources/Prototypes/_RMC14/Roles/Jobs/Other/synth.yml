@@ -85,6 +85,8 @@
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated
+      - type: ParalyzeOnPullAttemptImmune
+      - type: InfectOnPullAttemptImmune
       - type: RMCLeapProtection
         inherentStunDuration: 3
       removeComponents:
@@ -102,12 +104,10 @@
       - type: RMCSuicide
         damage: { }
   hidden: true
-
 - type: startingGear
   id: RMCGearSynthetic
   equipment:
     id: RMCIDCardSynth
-
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
@@ -116,7 +116,6 @@
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
-
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSynth
@@ -126,7 +125,6 @@
     job_id: RMCJobSynthetic
   - type: Sprite
     state: syn_spawn
-
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
