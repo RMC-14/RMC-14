@@ -3,7 +3,86 @@
   name: The Jungle
   components:
   - type: RMCPlanetMapPrototype
-    map: /Maps/_RnMC14/jungle.yml
+    map: /Maps/_RNMC14/jungle.yml
     camouflage: Jungle
     announcement: "All systems online. Location below: LV-624. No nearby colonies detected."
     minPlayers: 1337 # admin only
+
+- type: entity
+  id: RNMCPlanetLV624Greenshift
+  name: LV-624 Greenshift
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RNMC14/lv624_greenshift.yml
+    camouflage: Jungle
+    announcement: "Uplink with the ground established. Ship orbiting above LV-624 Archeology Site. No emergencies detected."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorLV624CorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorLV624MedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorLV624Engineer: 2
+      - CMSurvivorLV624CargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorGoon: 2
+      - CMSurvivorCMBDeputy: 2
+      - CMSurvivorLV624SecurityGuard: 2
+      CMSurvivorScientist:
+      - CMSurvivorLV624Archeologist: 2
+
+- type: entity
+  id: RNMCPlanetVaraderoGreenshift
+  name: New Varadero Greenshift
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RNMC14/varadero_greenshift.yml
+    camouflage: Jungle
+    announcement: "Uplink established with UN Outpost New Varadero. No emergencies detected at this time.
+      Designation: Island research station and mining facility
+
+      Population: 47
+      Current Temperature: 68F Interior, 97F Exterior
+      Outpost Commander: UN Rep. Steve Haifisch
+      Telecommunications Array: Repairs required
+
+      No further information available at this time."
+
+- type: entity
+  id: RMCPlanetHybrisaGreenshift
+  name: LV-759 Hybrisa Prospera Greenshift
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RNMC14/hybrisa_greenshift.yml
+    camouflage: Urban
+    announcement: "Currently orbiting above a Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce."
+    minPlayers: 130
+    survivorJobInserts:
+      CMSurvivor:
+      - RMCSurvivorHybrisaCivilian: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
+      - RMCSurvivorHybrisaGrindBarista: 1
+      - RMCSurvivorHybrisaMaterialReprocessingTechnician: 1
+      - RMCSurvivorHybrisaOfficeWorker: 1
+      - RMCSurvivorHybrisaPizzaGalaxy: 1
+      - RMCSurvivorHybrisaWeyamartEmployee: 1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: 1
+      CMSurvivorCorporate:
+      - RMCSurvivorHybrisaCorporateLiaison: 2
+      - RMCSurvivorHybrisaCommercialPilot: 2
+      CMSurvivorDoctor:
+      - RMCSurvivorHybrisaMedicalDoctor: 3
+      - RMCSurvivorHybrisaEMTParamedic: 3
+      CMSurvivorEngineer:
+      - RMCSurvivorHybrisaConstructionWorker: 2
+      - RMCSurvivorHybrisaEngineer: 2
+      - RMCSurvivorHybrisaHeavyVehicleOperator: 2
+      CMSurvivorSecurity:
+      - RMCSurvivorHybrisaCorporateSecurity: 2
+      - RMCSurvivorHybrisaTSEPAConstable: 2
+      CMSurvivorScientist:
+      - RMCSurvivorHybrisaXenoarchaeologist: 2
+      - RMCSurvivorHybrisaXenobiologist: 2
