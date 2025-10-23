@@ -41,9 +41,9 @@
       #  points: 30
       #- id: /obj/item/reagent_container/hypospray/autoinjector/ultrazine/liaison
       #  points: 25
-      - id: RMCPillCyanide
-        name: cyanide pill
-        points: 20
+      #- id: RMCPillCyanide # https://github.com/RMC-14/RMC-14/pull/8092
+      #  name: cyanide pill
+      #  points: 20
       #- id: /obj/item/trash/ceramic_plate
       #  points: 10
       - id: RMCSpaceCash1000 # TODO RMC14 counterfiet
@@ -54,6 +54,8 @@
     - name: Smokables
       entries:
       - id: RMCCigarCase
+        points: 5
+      - id: RMCShioRoyalsCase
         points: 5
       - id: RMCCigarettePackWeYaGold
         points: 5

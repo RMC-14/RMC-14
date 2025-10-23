@@ -23,7 +23,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 12
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - SO
   roleWeight: 0.25
@@ -62,6 +62,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearStaffOfficer

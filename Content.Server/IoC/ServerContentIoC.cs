@@ -1,3 +1,5 @@
+using Content.Server._RMC14.Actions;
+using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
@@ -91,6 +93,8 @@ namespace Content.Server.IoC
             IoCManager.Register<RMCDiscordManager>();
             IoCManager.Register<MentorManager>();
             IoCManager.Register<CommendationManager>();
+            IoCManager.Register<RMCActionsManager>();
+            IoCManager.Register<RMCChatBansManager>();
         }
     }
 }

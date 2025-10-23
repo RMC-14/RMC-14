@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -23,6 +24,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedXenoAcidSystem _xenoAcid = default!;
 
     private readonly Dictionary<EntProtoId, RMCConstructionUpgradeComponent> _upgradePrototypes = new();
     private EntityQuery<RMCConstructionUpgradeItemComponent> _upgradeItemQuery;
@@ -61,6 +63,15 @@ public sealed class RMCUpgradeSystem : EntitySystem
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillAmountRequired))
         {
             var failPopup = Loc.GetString("rmc-construction-failure", ("ent", ent));
+            _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
+
+            args.Handled = true;
+            return;
+        }
+
+        if (_xenoAcid.IsMelted(ent))
+        {
+            var failPopup = Loc.GetString("rmc-construction-melted");
             _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
 
             args.Handled = true;

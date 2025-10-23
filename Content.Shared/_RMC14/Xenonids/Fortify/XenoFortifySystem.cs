@@ -35,7 +35,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 

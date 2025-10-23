@@ -137,6 +137,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoCrusherCharger
+  - type: RMCActionOrder
+    id: RMCXenoCrusher
 
 - type: entity
   parent: CMXenoCrusherBase
@@ -199,3 +201,5 @@
         Blunt: 75
   - type: XenoToggleCharging
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoCrusherCharger
