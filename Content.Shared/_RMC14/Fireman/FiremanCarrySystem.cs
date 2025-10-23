@@ -145,19 +145,19 @@ public sealed class FiremanCarrySystem : EntitySystem
     {
         if (!carriable.BeingCarried)
         {
-            _popup.PopupClient(Loc.GetString("You need to carry them first!"), carrier, carrier, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-fireman-carry-need-carry-first"), carrier, carrier, PopupType.SmallCaution);
             return false;
         }
 
         if (!carriable.CanThrow)
         {
-            _popup.PopupClient(Loc.GetString("You can't throw this!"), carrier, carrier, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-fireman-carry-cant-throw"), carrier, carrier, PopupType.SmallCaution);
             return false;
         }
 
         if (!ValidateCarrierWhitelist(carrier, target, carriable))
         {
-            _popup.PopupClient(Loc.GetString("You can't throw this!"), carrier, carrier, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-fireman-carry-cant-throw"), carrier, carrier, PopupType.SmallCaution);
             return false;
         }
 
@@ -185,7 +185,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         if (!carrier.AggressiveGrab)
         {
-            _popup.PopupClient(Loc.GetString("You need to grab them aggressively first!"), ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-fireman-carry-need-aggressive-grab"), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
@@ -207,7 +207,7 @@ public sealed class FiremanCarrySystem : EntitySystem
             return;
 
         var targetName = Identity.Name(target, EntityManager, user);
-        _popup.PopupClient(Loc.GetString($"You start loading {targetName} onto your back."), target, user, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("rmc-fireman-carry-start-loading", ("targetName", targetName)), target, user, PopupType.Medium);
     }
 
     private bool CanCarryEntity(EntityUid user, EntityUid target, CanFiremanCarryComponent carrier, FiremanCarriableComponent carriable)
@@ -217,7 +217,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         if (carriable.CarrierWhitelist == null && !_skills.HasSkill(user, carriable.Skill, 1))
         {
-            _popup.PopupClient(Loc.GetString("You aren't trained to carry people!"), target, user, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-fireman-carry-not-trained"), target, user, PopupType.MediumCaution);
             return false;
         }
 
@@ -459,7 +459,7 @@ public sealed class FiremanCarrySystem : EntitySystem
                 carriable.CarrierWhitelist == null ||
                 !_whitelist.IsValid(carriable.CarrierWhitelist, carrier.Owner))
             {
-                _popup.PopupClient(Loc.GetString("You can't grab this aggressively!"), target, carrier, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-fireman-carry-cant-grab-aggressively"), target, carrier, PopupType.MediumCaution);
                 return false;
             }
         }
@@ -467,13 +467,13 @@ public sealed class FiremanCarrySystem : EntitySystem
         {
             if (carriable.CarrierWhitelist != null && !_whitelist.IsValid(carriable.CarrierWhitelist, carrier.Owner))
             {
-                _popup.PopupClient(Loc.GetString("You can't grab this aggressively!"), target, carrier, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-fireman-carry-cant-grab-aggressively"), target, carrier, PopupType.MediumCaution);
                 return false;
             }
 
             if (carriable.CarrierWhitelist == null && !_skills.HasSkill(carrier.Owner, carriable.Skill, 1))
             {
-                _popup.PopupClient(Loc.GetString("You aren't trained to grab them aggressively!"), target, carrier, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-fireman-carry-not-trained-grab"), target, carrier, PopupType.MediumCaution);
                 return false;
             }
         }
