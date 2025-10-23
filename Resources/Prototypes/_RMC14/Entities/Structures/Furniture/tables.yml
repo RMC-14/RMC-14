@@ -245,6 +245,26 @@
   - type: Icon
     color: "#98A3AB"
 
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonBeige
+  suffix: Prison, Beige
+  components:
+  - type: Sprite
+    color: "#ffe6e6"
+  - type: Icon
+    color: "#ffe6e6"
+
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonBrown
+  suffix: Prison, Brown
+  components:
+  - type: Sprite
+    color: "#8B7B5B"
+  - type: Icon
+    color: "#8B7B5B"
+
 # Hunter
 - type: entity
   parent: CMTable
