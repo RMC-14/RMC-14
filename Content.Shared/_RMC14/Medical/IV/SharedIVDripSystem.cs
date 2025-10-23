@@ -69,6 +69,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<PortableDialysisComponent, GotUnequippedHandEvent>(OnDialysisUnequippedHand);
         SubscribeLocalEvent<PortableDialysisComponent, ExaminedEvent>(OnDialysisExamine);
         SubscribeLocalEvent<PortableDialysisComponent, PowerCellSlotEmptyEvent>(OnDialysisPowerEmpty);
+        SubscribeLocalEvent<PortableDialysisComponent, GotEquippedHandEvent>(OnDialysisEquippedHand);
     }
 
     private void OnIVDripEntInserted(Entity<IVDripComponent> iv, ref EntInsertedIntoContainerMessage args)
@@ -179,11 +180,6 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnBloodPackSolutionChanged(Entity<BloodPackComponent> pack, ref SolutionContainerChangedEvent args)
     {
         UpdatePackVisuals(pack);
-    }
-
-    private void OnDialysisAfterHandleState(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
-    {
-        UpdateDialysisVisuals(dialysis);
     }
 
     private void OnBloodPackAfterInteract(Entity<BloodPackComponent> pack, ref AfterInteractEvent args)
@@ -381,6 +377,16 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnDialysisPowerEmpty(Entity<PortableDialysisComponent> dialysis, ref PowerCellSlotEmptyEvent args)
     {
         DetachDialysis(dialysis, null, true, true);
+    }
+
+    private void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
+    {
+        UpdateDialysisVisuals(dialysis);
+    }
+
+    private void OnDialysisAfterHandleState(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateDialysisVisuals(dialysis);
     }
 
     protected bool InRange(EntityUid iv, EntityUid to, float range)
