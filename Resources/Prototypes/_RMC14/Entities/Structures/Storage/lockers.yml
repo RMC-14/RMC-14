@@ -516,6 +516,16 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/personal.rsi
 
+- type: entity
+  parent: RMCLockerPersonal
+  id: RMCLockerPersonalUnanchored
+  name: personal locker
+  description: A white locker, featuring both English and Japanese text on the front.
+  suffix: Unanchored
+  components:
+  - type: Transform
+    anchored: false
+
 # SPP
 - type: entity
   parent: RMCLockerSquadLeader

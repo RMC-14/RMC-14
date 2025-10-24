@@ -130,3 +130,30 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/luggage.rsi
     state: luggage5
+
+- type: entity
+  id: RMCBreakerBox
+  name: breaker box
+  description: "A box containing a collection of breakers which will activate to prevent overloading and fires. The interior of the panel door has a sheet full of technical info taped on."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/breaker_box.rsi
+    layers:
+    - state: breakerbox
+      map: [ "enum.ToggleableVisuals.Enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
+          True: { state: breakerbox }
+          False: { state: breakerbox_open }
+    sprite: _RMC14/Structures/Wallmounts/breaker_box.rsi
+  - type: ItemToggle
+    activated: true
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline

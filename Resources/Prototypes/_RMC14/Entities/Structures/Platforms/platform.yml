@@ -664,5 +664,35 @@
   - type: Sprite
     state: platform_sm_stair_alt
 
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformAlt
+  name: platform
+  description: A square metal surface, not supported by anything under it. Don't fall!
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: platform_alt
+
+- type: entity
+  parent: RMCPlatformRound
+  id: RMCPlatformRoundAlt
+  name: platform
+  description: A square metal surface, not supported by anything under it. Don't fall!
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: platform_round_alt
+
+- type: entity
+  parent: CMPlatformCorner
+  id: RMCPlatformCornerAlt
+  name: platform
+  description: A square metal surface, not supported by anything under it. Don't fall!
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: platform_corner_alt
+
 - type: Tag
   id: Platform
