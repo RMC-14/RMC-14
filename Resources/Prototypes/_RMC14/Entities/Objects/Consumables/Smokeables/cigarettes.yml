@@ -5,7 +5,7 @@
   description: These four-packs of Luckies come in every MRE. They're not as good as the Embassy Crowns found in some TSE MREs, but at least they're free.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_mini.rsi
     layers:
     - state: closed
     - state: open
@@ -192,6 +192,21 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
     state: unlit-icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
+
+- type: entity
+  parent: RMCCigarette
+  id: RMCCigaretteBlackRoll
+  description: A roll of tobacco, nicotine, and some phosphor, in a fancy black package. The phosphor makes the tip glow blue when lit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+    state: unlit-icon
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
 
 - type: entity
   id: RMCCigaretteSpent
@@ -213,10 +228,29 @@
       - Burnt
 
 - type: entity
+  id: RMCCigaretteBlackRollSpent
+  parent: RMCCigaretteBlackRoll
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
   parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackWeYaGold
   name: We-Ya gold packet
-  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the premium tobacco market. Comes backed by a fierce legal team.
+  description: The future is now, with better cigarettes! These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
@@ -224,6 +258,23 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/weya.rsi
       state: helmet
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 20
+
+- type: entity
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackWeYaGoldMini
+  name: We-Ya gold mini packet
+  description: The future is now, with better cigarettes! Compact and ready for your executive ventures, protecting corporate assets never felt cooler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 4
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -233,13 +284,34 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 20
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
       state: helmet
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackExecutiveSelectMini
+  name: executive select mini packet
+  description: Luxury right in your ration. You will have them just in time to use them while observing a nuclear blast and enjoying it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 4
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackArcturianAce
   name: arcturian ace
   description: An entry level brand of cigarettes with a bright blue packaging. You're guessing these aren't really good for you, but it doesn't matter when it's Arcturian baby!
@@ -259,7 +331,7 @@
     content: rmc-lore-examinable-lady-fingers
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackElectroGolds
   name: Kierlan electro golds
   description: Lovingly machine-rolled for YOUR pleasure. For when you want to look cool and the risk of a slow horrible death isn't really a factor.
@@ -270,7 +342,7 @@
     content: rmc-lore-examinable-kierland-electro-golds
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackEmeraldGreens
   name: emerald greens
   description: They remind you of a gross, tar-filled version of Ireland. These cheap cigarettes are Weston-Yamada's entry into the general market.
@@ -281,7 +353,7 @@
     content: rmc-lore-examinable-emerald-greens
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackSolRedsTurquoise
   name: turquoise sol reds
   description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive.
@@ -290,7 +362,7 @@
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds.rsi
 
 - type: entity
-  parent: RMCCigarettePackLuckySloths
+  parent: RMCCigarettePackWeYaGold
   id: RMCCigarettePackSolRedsYellow
   name: yellow sol reds
   description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive. This type seems to have a more mellow flavor.
