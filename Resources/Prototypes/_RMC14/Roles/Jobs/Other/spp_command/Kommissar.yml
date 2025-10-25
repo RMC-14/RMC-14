@@ -205,7 +205,6 @@
   - type: RandomHumanoidSpawner
     settings: RMCSPPSrBattalionKommissar
 
-
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCSPPSrBattalionKommissar
