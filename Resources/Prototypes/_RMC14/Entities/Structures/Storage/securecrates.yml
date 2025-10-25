@@ -20,7 +20,7 @@
     - FoodDonkpocket
     - CMGrenadeSmoke
     - DoorElectronics
-    - CMWireCutter
+    - CMWirecutter
     - CMBootsBlackFilled
     - RMCJumpsuitMarinePatch
 
@@ -44,7 +44,7 @@
     - RMCSpeedLoaderM44
     - CMMagazineRifleM54C
     - CMMagazineRifleM54CExt
-    - CMmagazinePistolM1984
+    - CMMagazinePistolM1984
     - CMShellShotgunBuckshot
     - CMShellShotgunFlechette
     - CMShellShotgunSlugs
@@ -95,7 +95,7 @@
     minMagazines: 5
     maxMagazines: 5
     offset: 0.05
-    chance: 1.0
+    chanceToSpawn: 1.0
     prototypes:
     - RMCWeaponPistolHoldout: RMCMagazinePistolHoldout
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
@@ -134,7 +134,7 @@
     minMagazines: 3
     maxMagazines: 3
     offset: 0.05
-    chance: 1.0
+    chanceToSpawn: 1.0
     prototypes:
     - RMCWeaponRevolverZHNK72: RMCSpeedLoaderZHNK72
     - RMCWeaponPistolNP92: RMCMagazinePistolNP92
@@ -160,7 +160,7 @@
     minMagazines: 3
     maxMagazines: 3
     offset: 0.05
-    chance: 1.0
+    chanceToSpawn: 1.0
     prototypes:
     - CMWeaponPistolM1984: CMMagazinePistolM1984
     - RMCWeaponRifleM54C: CMMagazineRifleM54C
