@@ -157,21 +157,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/bombsuit.rsi
 
-- type: entity
-  parent: CMClosetRadiation
-  id: CMClosetRadiationFilledTycho
-  name: radiation suit closet
-  description: It's a storage unit for rad-protective suits.
-  suffix: Filled, Tycho 4000 Suit
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCShoesTychoBoots
-    - id: RMCHeadTychoRadiationHood
-    - id: RMCHandsTychoGloves
-    - id: RMCSuitTychoRadiationSuit
-    - id: RMCGeigerCounter
-
 # Bio suits
 - type: entity
   parent: CMClosetBase
