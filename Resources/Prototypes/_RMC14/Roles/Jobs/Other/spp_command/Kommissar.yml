@@ -276,7 +276,6 @@
   - type: RandomHumanoidSpawner
     settings: RMCSPPRegimentalKommissar
 
-
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCSPPRegimentalKommissar
