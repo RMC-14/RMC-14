@@ -96,7 +96,7 @@
     - CMAdvFirstAidKit
     - CMRollerBedSpawnFolded
     - CMCrowbar
-    - CMMRE # TODO RMC14 - SPP MRE
+    - RMCMRESPP
     outerClothing:
     - RMCHandcuffs
     - RMCHandcuffs
