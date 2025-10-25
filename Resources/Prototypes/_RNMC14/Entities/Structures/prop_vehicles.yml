@@ -37,7 +37,7 @@
   suffix: Prop, UNMC
   components:
   - type: Sprite
-    sprite: _RNMC14/Objects/Vehicles/HMMC_Apc/hmmc_apc.rsi
+    sprite: _RNMC14/Objects/Vehicles/APC/hmmc_apc.rsi
     offset: 0, 0
     state: base
 
