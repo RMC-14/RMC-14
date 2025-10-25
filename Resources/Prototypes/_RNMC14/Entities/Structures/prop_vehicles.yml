@@ -30,6 +30,18 @@
     - state: wheels-idle
 
 - type: entity
+  parent: RNMCPropVehicleAPCUNMC
+  id: RNMCPropVehicleAPCUNMCDamaged
+  description: A M14 Armored Personnel Carrier. An armored transport with four big wheels, seems to be damaged beyond repair.
+  suffix: Prop, UNMC, Destroyed
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/APC/apc.rsi
+    layers:
+    - state: base-damaged
+    - state: wheels-broken
+
+- type: entity
   parent: RNMCPropVehicleHugeBase
   id: RNMCPropVehicleAPCHMMC
   name: mark 4 armored personnel carrier
@@ -40,6 +52,17 @@
     sprite: _RNMC14/Objects/Vehicles/APC/hmmc_apc.rsi
     offset: 0, 0
     state: base
+
+- type: entity
+  parent: RNMCPropVehicleAPCHMMC
+  id: RNMCPropVehicleAPCHMMCDamaged
+  name: mark 4 armored personnel carrier
+  description: A Mark 4 Armored Personnel Carrier. An armored transport with eight wheels and used by His Majesty's Marine Corps, seems to be damaged beyond repair.
+  suffix: Prop, UNMC, Destroyed
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/APC/hmmc_apc.rsi
+    state: base-broken
 
 - type: entity
   parent: RNMCPropVehicleHugeBase
