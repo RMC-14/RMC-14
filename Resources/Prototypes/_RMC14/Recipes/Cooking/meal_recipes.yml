@@ -214,10 +214,21 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
+  id: RecipeSausage
+  name: Sausage recipe
+  result: FoodMeatSausage
+  time: 5
+  group: Meat
+  solids:
+    FoodMeatCutlet: 1
+    FoodMeatMeatball: 1
+
+- type: microwaveMealRecipe
   id: RecipeHotDog
   name: hot dog recipe
   result: FoodHotDog
   time: 10
+  group: Savory
   solids:
     FoodBun: 1
     FoodMeatSausage: 1
@@ -227,6 +238,7 @@
   name: cooked hot dog recipe
   result: FoodHotDog
   time: 5
+  group: Savory
   solids:
     FoodBun: 1
     FoodMeatSausageCooked: 1
