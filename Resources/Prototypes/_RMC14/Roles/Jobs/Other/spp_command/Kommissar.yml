@@ -302,7 +302,6 @@
 
 #Above is Regiment Kommissar, paygrade 5.
 
-
 - type: job
   parent: CMJobBase
   id: RMCSPPBrigadeKommissar
