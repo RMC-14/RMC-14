@@ -107,7 +107,7 @@
     - CMStunbaton
     - CMCrowbar # TODO RMC14: tactical prybar
     - RMCRangefinder
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic
     - CMMagazineRifleM54CAP
