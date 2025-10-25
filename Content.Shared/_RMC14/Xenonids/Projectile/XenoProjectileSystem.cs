@@ -304,12 +304,12 @@ public sealed class XenoProjectileSystem : EntitySystem
                 Dirty(projectile, limitHits);
             }
 
-            shooter ??= EnsureComp<XenoProjectileShooterComponent>(xeno);
-            shooter.Shot.Add(projectile);
-            Dirty(xeno, shooter);
-
             if (predicted)
             {
+                shooter ??= EnsureComp<XenoProjectileShooterComponent>(xeno);
+                shooter.Shot.Add(projectile);
+                Dirty(xeno, shooter);
+
                 var shot = EnsureComp<XenoProjectileShotComponent>(projectile);
                 shot.Id = shooter.NextId++;
                 shot.Shooter = shooterPlayer;

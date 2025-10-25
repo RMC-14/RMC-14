@@ -184,7 +184,7 @@
         points: 2
       - id: RMCPowerCellHigh
         points: 3
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         points: 2
       - id: CMSheetMetal10
         name: metal x10
@@ -303,7 +303,7 @@
         points: 2
       - id: RMCFlashlightPen
         points: 2
-        
+
 
 - type: entity
   parent: ColMarTechBase

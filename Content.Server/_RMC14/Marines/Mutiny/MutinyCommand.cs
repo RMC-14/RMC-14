@@ -84,4 +84,35 @@ public sealed class MutinyCommand : ToolshedCommand
     {
         return marines.Select(marine => RemoveMutineer(ctx, marine));
     }
+
+
+    [CommandImplementation("makemutineerleader"), AdminCommand(AdminFlags.Fun)]
+    public EntityUid MakeMutineerLeader([CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] EntityUid marine)
+    {
+        EnsureComp<MutineerLeaderComponent>(marine);
+        return marine;
+    }
+
+    [CommandImplementation("makemutineerleader"), AdminCommand(AdminFlags.Fun)]
+    public IEnumerable<EntityUid> MakeMutineerLeader([CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] IEnumerable<EntityUid> marines)
+    {
+        return marines.Select(marine => MakeMutineerLeader(ctx, marine));
+    }
+
+    [CommandImplementation("removemutineerleader"), AdminCommand(AdminFlags.Fun)]
+    public EntityUid RemoveMutineerLeader([CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] EntityUid marine)
+    {
+        RemComp<MutineerLeaderComponent>(marine);
+        return marine;
+    }
+
+    [CommandImplementation("removemutineerleader"), AdminCommand(AdminFlags.Fun)]
+    public IEnumerable<EntityUid> RemoveMutineerLeader([CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] IEnumerable<EntityUid> marines)
+    {
+        return marines.Select(marine => RemoveMutineerLeader(ctx, marine));
+    }
 }

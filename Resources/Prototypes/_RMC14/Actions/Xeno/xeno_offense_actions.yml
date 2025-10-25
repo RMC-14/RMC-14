@@ -1433,3 +1433,41 @@
   - type: XenoActionPlasma
     cost: 25
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFireSpikes
+  name: Fire Spikes (75 shards)
+  description: Launch 8 small shards of spikes in the direction you click.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_spike
+    useDelay: 10
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoScatteredSpitActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionEnergy
+    cost: 75
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShed
+  name: Spike Shed (all shards)
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 150 shards minimum
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_shard_shed
+    useDelay: 30
+  - type: InstantAction
+    event: !type:ActionXenoSpikeShedEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
