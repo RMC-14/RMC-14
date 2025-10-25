@@ -103,10 +103,59 @@
   parent: CMMRE
   id: RMCMRESPP # TODO RMC14 - Custom Contents
   name: SPP IRP ration pack
-  description: "An Individual Meal Ration, mainly composed of a selection of canned food, despite being heavier, it has proven to be a lot more reliable."
+  description: An Individual Meal Ration, mainly composed of a selection of canned food, despite being heavier, it has proven to be a lot more reliable.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_spp.rsi
+
+- type: entity
+  parent: CMMRE
+  id: RMCMREWeYa # TODO RMC14 - Custom Contents
+  name: PMC CFR ration
+  description: A Combat Field Ration. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive foods, not much different from going to a restaurant. Eating better worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_weya.rsi
+
+- type: entity
+  parent: CMMRE
+  id: RMCMRETSE # TODO RMC14 - Custom Contents
+  name: TWE ORP ration
+  description: An Operation Ration Pack. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive meals from TSE cuisine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_tse.rsi
+
+- type: entity
+  parent: BaseItem
+  id: RMCMRECLF
+  name: wrapped makeshift meal
+  description: Some home cooked or salvaged meal, you do what you must within your capabilities.
+  components:
+  - type: Tag
+    tags:
+    - MRE
+  - type: Item
+    size: Small
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodMeatSlab
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodMeatSlabCheese
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodBread
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodMargaritaPizza
+      orGroup: RMCMRECLFFood
+    sound:
+      collection: CMFoodRip
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_clf.rsi
+    state: closed
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
