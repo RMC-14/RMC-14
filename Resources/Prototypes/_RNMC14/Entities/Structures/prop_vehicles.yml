@@ -19,7 +19,7 @@
   parent: RNMCPropVehicleHugeBase
   id: RNMCPropVehicleAPCUNMC
   name: m14 armored personnel carrier
-  description: A M14 Armored Personnel Carrier. An armored transport with four big wheels. It's locked and seems to be broken down, forget driving this.
+  description: A M14 Armored Personnel Carrier. An armored transport with four big wheels, seems to be broken down.
   suffix: Prop, UNMC
   components:
   - type: Sprite
@@ -33,7 +33,7 @@
   parent: RNMCPropVehicleHugeBase
   id: RNMCPropVehicleAPCHMMC
   name: mark 4 armored personnel carrier
-  description: A Mark 4 Armored Personnel Carrier. An armored transport with eight wheels and used by His Majesty's Marine Corps. It's locked and seems to be broken down, forget driving this.
+  description: A Mark 4 Armored Personnel Carrier. An armored transport with eight wheels and used by His Majesty's Marine Corps, seems to be broken down.
   suffix: Prop, UNMC
   components:
   - type: Sprite
@@ -45,7 +45,7 @@
   parent: RNMCPropVehicleHugeBase
   id: RNMCPropVehicleARCUNMC
   name: m13 armored reconnaisance carrier
-  description: A m13 Armored Reconnaisance Carrier. A lightly armored reconnaissance and intelligence vehicle. It's locked and seems to be broken down, forget driving this.
+  description: A m13 Armored Reconnaisance Carrier. A lightly armored reconnaissance and intelligence vehicle, seems to be broken down.
   suffix: Prop, UNMC
   components:
   - type: Fixtures
