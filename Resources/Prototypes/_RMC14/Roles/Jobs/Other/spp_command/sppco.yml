@@ -51,7 +51,6 @@
       prefix: rmc-job-prefix-spp-co
   hidden: true
 
-
 - type: startingGear
   id: RMCGearSPPCO
   equipment:
