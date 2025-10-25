@@ -170,7 +170,7 @@
     - id: RMCHeadTychoRadiationHood
     - id: RMCHandsTychoGloves
     - id: RMCSuitTychoRadiationSuit
-      # giger counter
+    - id: RMCGeigerCounter
 
 # Bio suits
 - type: entity
