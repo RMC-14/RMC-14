@@ -12,10 +12,6 @@
       "directions": 4
     },
     {
-      "name": "base-damaged",
-      "directions": 4
-    },
-    {
       "name": "damage_visuals",
       "directions": 4
     },

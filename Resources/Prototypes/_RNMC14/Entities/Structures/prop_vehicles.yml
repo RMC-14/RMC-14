@@ -38,7 +38,8 @@
   - type: Sprite
     sprite: _RNMC14/Objects/Vehicles/APC/apc.rsi
     layers:
-    - state: base-damaged
+    - state: base
+    - state: damage_visuals
     - state: wheels-broken
 
 - type: entity
