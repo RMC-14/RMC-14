@@ -159,7 +159,6 @@
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: spp_battkommissar
 
-
 #Above is Battalion Kommissar, paygrade p3.
 
 - type: job
