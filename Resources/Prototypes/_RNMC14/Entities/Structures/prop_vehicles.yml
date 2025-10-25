@@ -18,8 +18,8 @@
 - type: entity
   parent: RNMCPropVehicleHugeBase
   id: RNMCPropVehicleAPCUNMC
-  name: m46 armored personnel carrier
-  description: A M46 Armored Personnel Carrier. An armored transport with four big wheels. It's locked and seems to be broken down, forget driving this.
+  name: m14 armored personnel carrier
+  description: A M14 Armored Personnel Carrier. An armored transport with four big wheels. It's locked and seems to be broken down, forget driving this.
   suffix: Prop, UNMC
   components:
   - type: Sprite
