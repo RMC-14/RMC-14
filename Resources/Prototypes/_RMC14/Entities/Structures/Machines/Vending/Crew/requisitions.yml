@@ -645,6 +645,8 @@
         amount: 5
       - id: RMCAttachmentLaserSight
         amount: 10
+      - id: RMCAttachmentMicroLaserSight
+        amount: 4
       - id: RMCAttachmentMiniFlamethrower
         amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
