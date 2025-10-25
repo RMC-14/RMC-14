@@ -40,3 +40,26 @@
     sprite: _RNMC14/Objects/Vehicles/HMMC_Apc/hmmc_apc.rsi
     offset: 0, 0
     state: base
+
+- type: entity
+  parent: RNMCPropVehicleHugeBase
+  id: RNMCPropVehicleARCUNMC
+  name: m13 armored reconnaisance carrier
+  description: A m13 Armored Reconnaisance Carrier. A lightly armored reconnaissance and intelligence vehicle. It's locked and seems to be broken down, forget driving this.
+  suffix: Prop, UNMC
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.8,-1.5,0.8,1.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/ARC/arc.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+    - state: wheels-idle
