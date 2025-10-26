@@ -79,3 +79,12 @@ command-description-setoperationname = Changes the name of the operation for the
 
 command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
 command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.
+
+command-description-nearbytile = Gets TileRefs for a specified range around entities.
+command-description-tiletype-FromProtoId = Returns a list of TileRefs that match a specified ProtoId. (Inveratble)
+command-description-tiletype-FromTileId = Returns a list of TileRefs that match a Tile Defenition Id. (Inveratble)
+command-description-replacetile-FromProtoId = Replaces tiles to a specified ProtoId.
+command-description-replacetile-FromTileId = Replaces tiles to a specified Tile Defenition Id.
+command-description-gridtile = Gets TileRefs for a grid that a specified entity is apart of.
+
+command-description-movespeed = Changes the max movement speed for given entities.

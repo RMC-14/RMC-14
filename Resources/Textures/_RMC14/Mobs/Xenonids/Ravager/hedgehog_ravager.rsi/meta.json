@@ -9,11 +9,7 @@
   "states": [
     {
       "name": "alive",
-      "directions": 4,
-      "size": {
-        "x": 128,
-        "y": 128
-      }
+      "directions": 4
     },
     {
       "name": "dead"
@@ -66,41 +62,25 @@
     },
     {
       "name": "hedgehog_1",
-      "directions": 4,
-      "size": {
-        "x": 128,
-        "y": 128
-      }
+      "directions": 4
     },
     {
       "name": "hedgehog_2",
-      "directions": 4,
-      "size": {
-        "x": 128,
-        "y": 128
-      }
+      "directions": 4
     },
     {
       "name": "hedgehog_3",
-      "directions": 4,
-      "size": {
-        "x": 128,
-        "y": 128
-      }
+      "directions": 4
     },
     {
       "name": "hedgehog_4",
-      "directions": 4,
-      "size": {
-        "x": 128,
-        "y": 128
-      }
+      "directions": 4
     },
     {
-      "name": "Hedgehog_1_crit"
+      "name": "hedgehog_1_crit"
     },
     {
-      "name": "Hedgehog_1_resting"
+      "name": "hedgehog_1_resting"
     },
     {
       "name": "hedgehog_2_crit"

@@ -442,7 +442,7 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerAegisLeft
-  suffix: Aegis, Left
+  suffix: AEGIS, Left
   name: AEGIS Cargo Container
   description: "A huge industrial shipping container.\nThis one is from AEGIS, the defense contractors behind the M54C and other marine weaponry."
   components:
@@ -452,7 +452,7 @@
 - type: entity
   parent: RMCContainerAegisLeft
   id: RMCContainerAegisMiddle
-  suffix: Aegis, Middle
+  suffix: AEGIS, Middle
   components:
   - type: Sprite
     state: aegiscontainermiddle
@@ -460,7 +460,7 @@
 - type: entity
   parent: RMCContainerAegisLeft
   id: RMCContainerAegisRight
-  suffix: Aegis, Right
+  suffix: AEGIS, Right
   components:
   - type: Sprite
     state: aegiscontainerright
