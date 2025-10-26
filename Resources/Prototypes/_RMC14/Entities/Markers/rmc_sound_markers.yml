@@ -250,3 +250,130 @@
   - type: AmbientSound
     sound:
       path: /Audio/_RMC14/Ambience/ambiwar.ogg
+
+#Weather
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWeakSnowstorm
+  suffix: Weak Snowstorm
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/snowstorm_weak.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundSnowstorm
+  suffix: Snowstorm
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/snowstorm.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundRain
+  suffix: Rain
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/rain.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundRain2
+  suffix: Rain 2
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/rain2.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundRainHeavy
+  suffix: Heavy Rain
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/rain_heavy.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundRain2
+  suffix: Rain2
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/rain2.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind21
+  suffix: Wind 2-1
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_2_1.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind22
+  suffix: Wind 2-2
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_2_2.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind31
+  suffix: Wind 3-1
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_3_1.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind41
+  suffix: Wind 4-1
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_4_1.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind42
+  suffix: Wind 4-2
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_4_2.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWind51
+  suffix: Wind 5-1
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Effects/Weather/wind_5_1.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundThunderclap1
+  suffix: Thunderclap 1
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Effects/thunderclap1.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundThunderclap2
+  suffix: Thunderclap 2
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Effects/thunderclap2.ogg
