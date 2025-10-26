@@ -299,15 +299,6 @@
 
 - type: entity
   parent: RMCMarkerSoundAmbientBase
-  id: RMCMarkerSoundRain2
-  suffix: Rain2
-  components:
-  - type: AmbientSound
-    sound:
-      path: /Audio/Effects/Weather/rain2.ogg
-
-- type: entity
-  parent: RMCMarkerSoundAmbientBase
   id: RMCMarkerSoundWind21
   suffix: Wind 2-1
   components:
