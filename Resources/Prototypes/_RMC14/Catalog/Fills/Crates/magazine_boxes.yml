@@ -173,6 +173,16 @@
     - id: RMCTankFlamer
       amount: 4
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineBGel
+  name: M34 B-Gel fuel (4x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 4
+
 # Smart Pistol
 - type: entity
   parent: RMCCrateAmmo

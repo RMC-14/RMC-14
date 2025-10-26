@@ -403,8 +403,9 @@
     contents:
     - id: RMCBackpackFlamer
     - id: RMCWeaponFlamer
-    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
-      amount: 3 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamer
+      amount: 2 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamerBGel
     - id: CMFireExtinguisherPortable
 
 - type: entity
