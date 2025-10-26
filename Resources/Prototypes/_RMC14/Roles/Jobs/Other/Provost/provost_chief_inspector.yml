@@ -61,7 +61,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform
     outerClothing: RMCProvostCommandJacketFilled
-    gloves: CMHandsBlack
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostChiefInspector
     belt: RMCM1984BeltFilled

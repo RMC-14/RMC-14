@@ -69,7 +69,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
     outerClothing: RMCArmorProvost
-    gloves: CMHandsBlack
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     suitstorage: WeaponShotgunM890
     id: RMCIDCardProvostEnforcer

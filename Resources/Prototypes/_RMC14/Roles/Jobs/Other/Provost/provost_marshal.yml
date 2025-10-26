@@ -67,7 +67,7 @@
     ears: CMHeadsetHighCommand
     jumpsuit: CMJumpsuitProvostMarshal
     outerClothing: RMCProvostCoatMarshalFilled
-    gloves: CMHandsBlack
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostMarshal
     belt: RMCMatebaBeltLuxuriousFilled

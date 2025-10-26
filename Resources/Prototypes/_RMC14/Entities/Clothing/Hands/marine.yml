@@ -94,6 +94,6 @@
 #TODO RMC14 add fire resistance
 - type: entity
   parent: CMHandsBlackMarine
-  id: CMHandsBlack
+  id: RMCHandsBlackFireResistance
   name: black gloves
   description: "These gloves are fire-resistant."
