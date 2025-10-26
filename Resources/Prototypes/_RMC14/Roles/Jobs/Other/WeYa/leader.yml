@@ -33,6 +33,7 @@
         RMCSkillMedical: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 2
+        RMCSkillVehicles: 1
     - type: MarineOrders
     - type: SquadLeader
       icon:
