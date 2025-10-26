@@ -185,17 +185,3 @@
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: strata_blizzard
     drawdepth: Effects
-
-- type: entity
-  parent: RMCHybrisaRainLightProp
-  id: RMCStrataBlizzardProp
-  name: blizzard
-  description: It's a lot of snow, falling from the sky.
-  suffix: prop, Strata, weather
-  placement:
-    mode: SnapgridCenter
-  components:
-  - type: Sprite
-    sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: strata_blizzard
-    drawdepth: Effects
