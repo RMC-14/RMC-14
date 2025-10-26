@@ -162,3 +162,58 @@
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+# Colony
+- type: entity
+  parent: CMMRE
+  id: RMCWYMRE
+  name: We-Ya brand ration pack
+  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life. On the box is the Weston-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_colony.rsi
+    state: wy_mealpack
+  - type: Item
+    size: Small
+    heldPrefix: wy_mealpack
+  - type: Storage
+    grid:
+    - 0,0,9,1 #5 slots min
+    whitelist: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "wy_mealpackopened" }
+          False: { state: "wy_mealpack" }
+  - type: StorageFill
+    contents:
+    # entree
+    - id: CMMREComponentBonelessPorkRibs
+      orGroup: main
+    - id: CMMREComponentGrilledChicken
+      orGroup: main
+    - id: CMMREComponentChickenTender
+      orGroup: main
+    - id: CMMREComponentSpaghettiChunks
+      orGroup: main
+#    - id: RMCMREComponentWYGrilledChickenBreast
+#      orGroup: main
+    # side
+    - id: RMCFoodSnackCheeseburgerPackaged
+      orGroup: side
+    - id: RMCFoodSnackBurritoPackaged
+      orGroup: side
+    # snack
+    - id: RMCFoodSnackHotdogPackaged
+    # dessert
+    - id: RMCFoodSnackEATBar
+      orGroup: dessert
+    - id: RMCFoodSnackBoonie
+      orGroup: dessert
+    - id: RMCFoodSnackBarcaridine
+      orGroup: dessert
+    - id: RMCFoodSnackCHUNK
+      orGroup: dessert
+    # drink
+    - id: RMCDrinkWEYABugJuice

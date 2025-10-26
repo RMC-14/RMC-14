@@ -14,10 +14,18 @@
   - type: Drink
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/we_ya_water_bottle.rsi
-    state: base
-    layers: []
+    layers:
+    - state: wy_water
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "wy_water_open"}
+          False: {state: "wy_water"}
   - type: Item
     size: Small
+    heldPrefix: wy_water
   - type: DamageOnLand
     damage: {}
   - type: DamageOtherOnHit
@@ -31,3 +39,30 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: CMDrinkWEYAWaterBottle30
+  id: RMCDrinkWEYABugJuice
+  name: We-Ya bug juice protein drink
+  description: We-Ya brand plastic bottle full of toxic looking green goo, tastes like kiwi, but you are more than sure that there is none of it here.
+  components:
+  - type: Item
+    heldPrefix: wy_bug_juice
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCBugJuice
+          Quantity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/we_ya_water_bottle.rsi
+    layers:
+    - state: wy_bug_juice
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "wy_bug_juice_open"}
+          False: {state: "wy_bug_juice"}

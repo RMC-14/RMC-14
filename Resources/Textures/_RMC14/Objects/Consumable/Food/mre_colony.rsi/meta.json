@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wy_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_mealpackopened"
+    },
+    {
+      "name": "wy_mealpack"
+    }
+  ]
+}
