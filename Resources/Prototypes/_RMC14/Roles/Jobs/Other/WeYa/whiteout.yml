@@ -2,10 +2,10 @@
   parent: CMJobBase
   id: RMCPMCWhiteout
   name: rmc-job-name-pmc-whiteout
-  description: rmc-ghost-role-information-pmc-whiteout-description
+  description: rmc-ghost-role-information-deathsquad-description
   playTimeTracker: RMCJobPMCWhiteout
   ranks:
-    RMCRankWeYaOperator: []
+    RMCRankWeYaWhiteout: []
   startingGear: RMCJobPMCWhiteout
   icon: RMCJobIconPMCWhiteout
   joinNotifyCrew: false
@@ -127,7 +127,7 @@
     hair: HairBald # TODO RMC14 - This should probably make the species human too, and make them have no facial hair.
   - type: GhostRole
     name: rmc-ghost-name-pmc-whiteout
-    description: rmc-ghost-role-information-pmc-whiteout-description
+    description: rmc-ghost-role-information-deathsquad-description
     rules: rmc-ghost-role-information-pmc-whiteout-rules
     reregister: false
     job: RMCPMCWhiteout

@@ -91,6 +91,10 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -102,9 +106,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #   points: 6
       - id: RMCSpeedLoader44Marksman
@@ -228,6 +230,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestCombatTechnician
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -304,6 +307,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     - name: Mask
@@ -363,7 +367,7 @@
         amount: 4
       - id: CMWelderSmall
         amount: 2
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         amount: 4
     # - name: Utility
     #   entries:

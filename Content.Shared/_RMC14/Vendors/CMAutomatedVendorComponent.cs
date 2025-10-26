@@ -71,4 +71,10 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? AnimationSprite;
+
+    /// <summary>
+    ///     Whether to eject all contents when the vendor is destroyed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool EjectContentsOnDestruction = false;
 }

@@ -5,8 +5,10 @@ using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
@@ -58,6 +60,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -81,9 +84,12 @@ public sealed class XenoLeapSystem : EntitySystem
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
+        SubscribeAllEvent<XenoLeapPredictedHitEvent>(OnPredictedHit);
+
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
+        SubscribeLocalEvent<XenoLeapComponent, RMCMeleeUserGetRangeEvent>(OnXenoLeapingMeleeGetRange);
 
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotEquippedHandEvent>(OnEquippedHand);
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedHandEvent>(OnUnequippedHand);
@@ -97,6 +103,30 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapingComponent, PhysicsSleepEvent>(OnXenoLeapingPhysicsSleep);
         SubscribeLocalEvent<XenoLeapingComponent, StartPullAttemptEvent>(OnXenoLeapingStartPullAttempt);
         SubscribeLocalEvent<XenoLeapingComponent, PullAttemptEvent>(OnXenoLeapingPullAttempt);
+    }
+
+    private void OnPredictedHit(XenoLeapPredictedHitEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } ent)
+            return;
+
+        if (!TryComp(ent, out XenoLeapingComponent? leaping))
+            return;
+
+        if (GetEntity(msg.Target) is not { Valid: true } target)
+            return;
+
+        if (_net.IsServer)
+        {
+            if (!HasComp<XenoLeapComponent>(ent) || !leaping.Running)
+                return;
+
+            _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
+            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession))
+                return;
+        }
+
+        ApplyLeapingHitEffects((ent, leaping), target);
     }
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
@@ -189,9 +219,9 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (TryComp(xeno, out FixturesComponent? fixtures))
         {
-            var collisionGroup = (int)leaping.IgnoredCollisionGroupSmall;
+            var collisionGroup = (int) leaping.IgnoredCollisionGroupSmall;
             if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
-                collisionGroup = (int)leaping.IgnoredCollisionGroupLarge;
+                collisionGroup = (int) leaping.IgnoredCollisionGroupLarge;
 
             var fixture = fixtures.Fixtures.First();
             _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
@@ -226,8 +256,24 @@ public sealed class XenoLeapSystem : EntitySystem
                 RemComp<SlowedDownComponent>(xeno);
                 _movementSpeed.RefreshMovementSpeedModifiers(xeno);
             }
+
+            xeno.Comp.LastHit = null;
+            xeno.Comp.LastHitAt = null;
+            Dirty(xeno);
             break;
         }
+    }
+
+    private void OnXenoLeapingMeleeGetRange(Entity<XenoLeapComponent> ent, ref RMCMeleeUserGetRangeEvent args)
+    {
+        if (ent.Comp.LastHit == null ||
+            ent.Comp.LastHit != args.Target ||
+            _timing.CurTime > ent.Comp.LastHitAt + ent.Comp.MoveDelayTime)
+        {
+            return;
+        }
+
+        args.Range = ent.Comp.LastHitRange;
     }
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
@@ -260,10 +306,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapHitAttempt(Entity<RMCLeapProtectionComponent> ent, ref XenoLeapHitAttempt args)
     {
-        if(args.Cancelled)
+        if (args.Cancelled)
             return;
 
-        if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
+        if (!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
             return;
 
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
@@ -288,7 +334,7 @@ public sealed class XenoLeapSystem : EntitySystem
         if ((ent.Comp.Slots & args.SlotFlags) == 0)
             return;
 
-        if(!RemoveLeapProtection(args.Equipee, ent))
+        if (!RemoveLeapProtection(args.Equipee, ent))
             return;
 
         RemCompDeferred<RMCLeapProtectionComponent>(args.Equipee);
@@ -296,7 +342,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnEquippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedHandEvent args)
     {
-        if(!ent.Comp.ProtectsInHand)
+        if (!ent.Comp.ProtectsInHand)
             return;
 
         ApplyLeapProtection(args.User, ent);
@@ -304,10 +350,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnUnequippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotUnequippedHandEvent args)
     {
-        if(!ent.Comp.ProtectsInHand)
+        if (!ent.Comp.ProtectsInHand)
             return;
 
-        if(!RemoveLeapProtection(args.User, ent))
+        if (!RemoveLeapProtection(args.User, ent))
             return;
 
         RemCompDeferred<RMCLeapProtectionComponent>(args.User);
@@ -430,13 +476,15 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             if (_net.IsServer)
             {
-                for (int i = 0; i < destroy.Amount; i++)
+                for (var i = 0; i < destroy.Amount; i++)
                 {
                     if (destroy.SpawnPrototype != null)
                         SpawnAtPosition(destroy.SpawnPrototype, target.ToCoordinates());
                 }
+
                 QueueDel(target);
             }
+
             _physics.SetCanCollide(target, false, force: true);
             return false;
         }
@@ -458,7 +506,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private bool ApplyLeapingHitEffects(Entity<XenoLeapingComponent> xeno, EntityUid target)
     {
-        if(!IsValidLeapHit(xeno, target))
+        if (!IsValidLeapHit(xeno, target))
             return false;
 
         if (_hive.FromSameHive(xeno.Owner, target))
@@ -483,6 +531,13 @@ public sealed class XenoLeapSystem : EntitySystem
 
         xeno.Comp.KnockedDown = true;
         Dirty(xeno);
+
+        if (TryComp(xeno, out XenoLeapComponent? leap))
+        {
+            leap.LastHit = target;
+            leap.LastHitAt = _timing.CurTime;
+            Dirty(xeno, leap);
+        }
 
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {
@@ -527,6 +582,16 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             xeno.Comp.PlayedSound = true;
             _audio.PlayPvs(xeno.Comp.LeapSound, xeno);
+        }
+
+        if (_net.IsClient)
+        {
+            var predictedEv = new XenoLeapPredictedHitEvent(GetNetEntity(target), _rmcLagCompensation.GetLastRealTick(null));
+            RaiseNetworkEvent(predictedEv);
+            if (_timing.InPrediction && _timing.IsFirstTimePredicted)
+            {
+                RaisePredictiveEvent(predictedEv);
+            }
         }
 
         StopLeap(xeno);

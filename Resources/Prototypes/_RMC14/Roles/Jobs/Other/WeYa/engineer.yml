@@ -114,7 +114,7 @@
     pocket1:
     - CMWelder
     - CMEntrenchingTool
-    - CMLightReplacer
+    - RMCLightReplacer
 
 - type: playTimeTracker
   id: RMCJobPMCEngineer

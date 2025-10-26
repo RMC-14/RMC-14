@@ -47,7 +47,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
             return;
         }
 
-        limit.HitBy.Add(new Hit(GetNetEntity(ent.Comp.OriginEntity), _timing.CurTime + limit.Expire));
+        limit.HitBy.Add(new Hit(GetNetEntity(ent.Comp.OriginEntity), _timing.CurTime + limit.Expire, ent.Comp.ExtraId));
         Dirty(args.Target, limit);
     }
 
@@ -74,8 +74,11 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
                 !projectile.Comp.IgnoredEntities.Contains(user))
                 continue;
 
-            if (GetEntity(hit.Id) == projectile.Comp.OriginEntity ||
-                hit.Id == GetNetEntity(projectile.Owner)&&
+            // TODO RMC14 save me from this if statement
+            if (GetEntity(hit.Id) == projectile.Comp.OriginEntity &&
+                (hit.ExtraId == null || hit.ExtraId == projectile.Comp.ExtraId) ||
+                hit.Id == GetNetEntity(projectile.Owner) &&
+                (hit.ExtraId == null || hit.ExtraId == projectile.Comp.ExtraId) &&
                 hit.ExpireAt > time)
             {
                 count++;
