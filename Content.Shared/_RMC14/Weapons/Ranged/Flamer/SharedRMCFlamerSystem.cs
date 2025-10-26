@@ -250,7 +250,22 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         var chain = Spawn();
         var chainComp = EnsureComp<RMCFlamerChainComponent>(chain);
-        chainComp.Spawn = flamer.Comp.Spawn;
+
+        chainComp.Spawn = flamer.Comp.Spawn; //defaults to regular tile fire from napthal UT
+
+        if (reagent.HasValue)
+        {
+            switch (reagent.Value)
+            {
+                case "RMCBGel":
+                    chainComp.Spawn = "RMCTileFireGreen";
+                    break;
+                case "RMCNapalmX":
+                    chainComp.Spawn = "RMCTileFireBlue";
+                    break;
+            }
+        }
+
         chainComp.Tiles = tiles;
         chainComp.MaxIntensity = flamer.Comp.MaxIntensity;
         chainComp.MaxDuration = flamer.Comp.MaxDuration;

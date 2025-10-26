@@ -36,3 +36,14 @@
   color: "#DD9B00"
   intensity: 30
   duration: 20
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCBGel
+  name: reagent-name-rmcbgel
+  desc: reagent-desc-rmcbgel
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00dd00"
+  intensity: 30
+  duration: 20
