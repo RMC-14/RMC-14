@@ -17,6 +17,11 @@
       settings: parasiteTimeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: MobState
     allowedStates:
     - Alive

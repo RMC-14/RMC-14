@@ -23,6 +23,11 @@
     - Alive
     - Critical
     - Dead
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: Xeno
     role: CMXenoRunner
     tier: 1

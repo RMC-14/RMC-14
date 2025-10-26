@@ -108,6 +108,7 @@
   id: RMCGearSynthetic
   equipment:
     id: RMCIDCardSynth
+
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
@@ -116,6 +117,7 @@
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSynth
@@ -125,6 +127,7 @@
     job_id: RMCJobSynthetic
   - type: Sprite
     state: syn_spawn
+
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
