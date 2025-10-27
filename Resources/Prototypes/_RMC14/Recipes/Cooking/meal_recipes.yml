@@ -266,3 +266,52 @@
     FoodCherry: 1
   reagents:
     Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaSupreme
+  name: supreme pizza recipe
+  result: RMCFoodPizzaSupremeFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeat: 1
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionRedSlice: 1
+    FoodChiliPepper: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaCalabresa
+  name: calabresa pizza recipe
+  result: RMCFoodPizzaCalabresaFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeatSausage: 2
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaCalabresa
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 5
+  solids:
+    FoodCakeChocolate: 1
+    FoodCherry: 1
+  reagents:
+    Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeVanillaCake
+  name: vanilla cake recipe
+  result: FoodCakeVanilla
+  time: 5
+  group: Cake
+  reagents:
+    milk: 5
+    sugar: 5
+  solids:
+    FoodCakePlain: 1
