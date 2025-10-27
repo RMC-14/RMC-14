@@ -53,9 +53,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMedicAutoInjectorStimulantsEZ
-    - id: RMCMedicAutoInjectorStimulantsEZ
-    - id: RMCMedicAutoInjectorStimulantsEZ
+    - id: RMCMedicAutoInjectorStimulantsEZ1
+    - id: RMCMedicAutoInjectorStimulantsEZ1
+    - id: RMCMedicAutoInjectorStimulantsEZ1
 
 - type: entity
   parent: RMCSyringeCase

@@ -27,8 +27,9 @@
         mask:
         - Impassable
   - type: Storage
+    maxItemSize: Huge
     grid:
-    - 0,0,20,6 # 30 slots for buried treasure
+    - 0,0,19,9
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -90,7 +91,7 @@
     - entries:
       - id: RMCMotionDetectorCompact
         weight: 1
-      - id: CMPacketGrenadeHEFUFilled
+      - id: RCMPacketGrenadeHEFUFilled
         weight: 1
       - id: RMCGlassesM4SPRBattleSight
         weight: 1
