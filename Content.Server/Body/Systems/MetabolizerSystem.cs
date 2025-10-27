@@ -144,10 +144,6 @@ namespace Content.Server.Body.Systems
             var list = solution.Contents.ToArray();
             _random.Shuffle(list);
 
-            // RMC14
-            var preventMetabolism = EnsureComp<PreventMetabolismComponent>(solutionEntityUid.Value);
-            preventMetabolism.PreventedReagents.Clear();
-
             int reagents = 0;
             foreach (var (reagent, quantity) in list)
             {
@@ -218,12 +214,6 @@ namespace Content.Server.Body.Systems
 
                         effect.Effect(args);
                     }
-                }
-
-                // RMC14
-                if (preventMetabolism.PreventedReagents.Contains(proto.ID))
-                {
-                    continue;
                 }
 
                 // remove a certain amount of reagent
