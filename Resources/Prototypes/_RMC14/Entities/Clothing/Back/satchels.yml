@@ -605,6 +605,19 @@
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
 
 - type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOPMC
+  name: We-Ya radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
+  - type: RotaryPhone
+    category: Weston-Yamada
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelLightpack #ERT pack
   name: lightweight combat pack
