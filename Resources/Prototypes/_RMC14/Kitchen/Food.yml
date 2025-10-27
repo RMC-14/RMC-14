@@ -310,7 +310,7 @@
   name: black forest cake
   parent: CMFoodBase
   id: FoodCakeBlackForest
-  description: Now without fish-shaped ethyl benzene!
+  description: The cake is a lie no more!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -337,7 +337,7 @@
   name: black forest cake slice
   parent: CMFoodBase
   id: FoodBlackForestSlice
-  description: All it needs is Kirsch.
+  description: Now without fish-shaped ethyl benzene!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -347,6 +347,8 @@
     - chocolate
     - cherry
     - creamy
+  - type: Item
+    size: Tiny
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -427,3 +429,30 @@
           Quantity: 6
         - ReagentId: Protein
           Quantity: 4
+
+- type: entity
+  name: tapsilog
+  parent: CMFoodBase
+  id: FoodTapsilog
+  description: It's like steak and eggs, but better!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: tapsilog
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - garlic
+    - meaty
+    - egg
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+        - ReagentId: Protein
+          Quantity: 8
