@@ -25,6 +25,8 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
     public float NutrimentFactor => NutFactor * NutMetabolism;
 
+    protected const float CryoLiquidThreshold = 210f;
+
     public override void Effect(EntityEffectBaseArgs args)
     {
         if (args is not EntityEffectReagentArgs { Reagent: { } reagent } reagentArgs)
@@ -32,7 +34,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
-        var scaledPotency = PotencyPerSecond * scale;
+        var boost = 0f;
+        ReagentBoost(reagentArgs, ref boost);
+        var boostedPotency = (Potency + boost) * 0.5f * 0.5f;
+        var scaledPotency = boostedPotency * scale;
         Tick(damageable, scaledPotency, reagentArgs);
 
         var totalQuantity = FixedPoint2.Zero;
@@ -44,6 +49,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         if (reagent.CriticalOverdose != null && totalQuantity >= reagent.CriticalOverdose)
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
+    }
+
+    protected virtual void ReagentBoost(EntityEffectReagentArgs args, ref float boost)
+    {
     }
 
     protected virtual void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
