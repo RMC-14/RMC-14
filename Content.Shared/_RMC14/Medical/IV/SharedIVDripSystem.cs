@@ -358,11 +358,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         AttachDialysis(dialysis, args.User, target);
     }
 
-    private void OnDialysisUnequippedHand(Entity<PortableDialysisComponent> dialysis, ref GotUnequippedHandEvent args)
-    {
-        DetachDialysis((dialysis, dialysis), args.User, true, true);
-    }
-
     private void OnDialysisExamine(Entity<PortableDialysisComponent> dialysis, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(PortableDialysisComponent)))
@@ -379,9 +374,14 @@ public abstract class SharedIVDripSystem : EntitySystem
         DetachDialysis(dialysis, null, true, true);
     }
 
-    protected virtual void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
+    private void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
     {
         UpdateDialysisVisuals(dialysis);
+    }
+
+    private void OnDialysisUnequippedHand(Entity<PortableDialysisComponent> dialysis, ref GotUnequippedHandEvent args)
+    {
+        DetachDialysis((dialysis, dialysis), args.User, true, true);
     }
 
     private void OnDialysisAfterHandleState(Entity<PortableDialysisComponent> dialysis, ref AfterAutoHandleStateEvent args)
@@ -620,7 +620,12 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
 
         Dirty(dialysis);
+        UpdateDialysisCharge(dialysis);
         UpdateDialysisAppearance(dialysis);
+    }
+
+    protected virtual void UpdateDialysisCharge(Entity<PortableDialysisComponent> dialysis)
+    {
     }
 
     protected virtual void UpdateIVAppearance(Entity<IVDripComponent> iv)

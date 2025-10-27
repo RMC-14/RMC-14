@@ -10,7 +10,6 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
-using Content.Shared.Hands;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -211,18 +210,11 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _powerCell.TryUseActivatableCharge(dialysisId);
 
             Dirty(dialysisId, dialysisComp);
-            GetDialysisCharge((dialysisId, dialysisComp));
             UpdateDialysisVisuals((dialysisId, dialysisComp));
         }
     }
 
-    protected override void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
-    {
-        GetDialysisCharge(dialysis);
-        base.OnDialysisEquippedHand(dialysis, ref args);
-    }
-
-    private void GetDialysisCharge(Entity<PortableDialysisComponent> dialysis)
+    protected override void UpdateDialysisCharge(Entity<PortableDialysisComponent> dialysis)
     {
         var ev = new GetChargeEvent();
         RaiseLocalEvent(dialysis, ref ev);
