@@ -227,7 +227,7 @@
   name: chicken parm hero
   parent: CMFoodBase
   id: FoodChickenParmHero
-  description: It's a grand gesture that isn't the least bit grand.
+  description: Now thats a sandwich, fuggedaboutit!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -255,7 +255,7 @@
   name: chicken parm half
   parent: CMFoodBase
   id: FoodChickenParmHalf
-  description: It's a grand gesture that isn't the least bit grand.
+  description: Better than eating a grilled cheese off the radiator.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -337,7 +337,7 @@
   name: black forest cake slice
   parent: CMFoodBase
   id: FoodBlackForestSlice
-  description: It's a grand gesture that isn't the least bit grand.
+  description: All it needs is Kirsch.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -361,7 +361,7 @@
   name: uncooked sausage
   parent: CMFoodBase
   id: FoodMeatSausage
-  description: It's a grand gesture that isn't the least bit grand.
+  description: A piece of mixed, long meat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/meat.rsi
@@ -383,7 +383,7 @@
   name: cooked sausage
   parent: CMFoodBase
   id: FoodMeatSausageCooked
-  description: It's a grand gesture that isn't the least bit grand.
+  description: This snagger looks like it just came off the barbie!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/meat.rsi
