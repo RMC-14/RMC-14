@@ -441,7 +441,7 @@
   parent: CMPosterBase
   id: RMCPosterHorizon
   name: Happy New Horizons Day!
-  description: An old poster for celebrating the UN New Horizons Day holiday, celebrating hope and rememberance.
+  description: An old poster for celebrating the UN New Horizons Day holiday, celebrating hope and rememberance. It features a ship surrounded by stars flying away from a planet.
   components:
   - type: Sprite
     state: horizon
