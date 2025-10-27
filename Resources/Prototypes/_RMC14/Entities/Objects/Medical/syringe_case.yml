@@ -48,6 +48,17 @@
 
 - type: entity
   parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledHyperzine
+  suffix: Hyperzine, filled.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorStimulantsEZ
+    - id: RMCMedicAutoInjectorStimulantsEZ
+    - id: RMCMedicAutoInjectorStimulantsEZ
+
+- type: entity
+  parent: RMCSyringeCase
   id: RMCSyringeCaseFilledBurn
   suffix: Burn, Filled
   components:

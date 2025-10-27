@@ -1,0 +1,103 @@
+- type: entity
+  id: RMCBuriedItemsContainer
+  name: buried items
+  description: Something is buried here. Use an entrenching tool to dig it up.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    layers:
+    - sprite: Tiles/Misc/bananium.rsi
+      state: bananium
+      color: "#FFFFFF00"
+  - type: Clickable
+  - type: InteractionOutline
+    enabled: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 1000
+        hard: false
+        mask:
+        - Impassable
+  - type: Storage
+    grid:
+    - 0,0,20,6 # 30 slots for buried treasure
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: BuriedItems
+
+- type: entity
+  parent: RMCBuriedItemsContainer
+  id: RMCBuriedItemsContainerVisible
+  name: dirt mound
+  description: A small mound of disturbed dirt. Something might be buried here.
+  components:
+  - type: Sprite
+    color: "#FFFFFFFF"
+
+- type: entity
+  parent: RMCBuriedItemsContainer
+  id: RMCBuriedItemsContainerRandom
+  suffix: Random Loot
+  description: A buried cache with random loot.
+  components:
+  - type: BuriedItems
+    lootTables:
+    # Table 1: Cosmetic/pirate items
+    - entries: 
+      - id: RMCPlushieCrow
+        weight: 1
+    - entries:
+      - id: ClothingHeadHatPirate
+        weight: 1
+      - id: ClothingHeadHatPirateTricord
+        weight: 1
+      - id: PirateHandyFlag
+        weight: 1
+      - id: ClothingNeckCloakPirateCap
+        weight: 1
+      - id: ClothingCoatOuterPirate
+        weight: 1
+    # Table 2: Gun stuff
+    - entries:
+      - id: RMCMagazineRifleM54CMK1Incendiary
+        weight: 0.5
+      - id: RMCBoxShotgunIncendiary
+        weight: 1
+      - id: RMCBoxShotgunIncendiaryBuckshot
+        weight: 1
+      - id: RMCMagazineRifleM54CMK1HEAP
+        weight: 1
+      - id: RMCWeaponRifleAK4047
+        weight: 0.5
+        accompanying:
+        - RMCMagazineRifleAK4047AP
+        - RMCMagazineRifleAK4047AP
+        - RMCMagazineRifleAK4047Incendiary
+    # Table 3: Equipment
+    - entries:
+      - id: RMCMotionDetectorCompact
+        weight: 1
+      - id: CMPacketGrenadeHEFUFilled
+        weight: 1
+      - id: RMCGlassesM4SPRBattleSight
+        weight: 1
+      - id: RMCHeadsetTacticalMapLive
+        weight: 1
+      - id: RMCBackpackScoutNoRequirement
+        weight: 0.4
+      - id: RMCPamphletAdminEndurance4
+        weight: 0.5
+      - id: RMCSyringeCaseFilledHyperzine

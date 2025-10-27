@@ -522,3 +522,14 @@
   id: RMCHeadsetPrisoner
   name: prisoner headset
   description: Headset provided to prisoners as directed by marine law.
+
+# Tactical Map Live Update headset
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetTacticalMapLive
+  name: Experimental Senior Headset
+  description: An experimental headset that grants the user to a live tactical map.
+  components:
+  - type: Sprite
+    state: ce_headset
+  - type: TacticalMapGrantClothing

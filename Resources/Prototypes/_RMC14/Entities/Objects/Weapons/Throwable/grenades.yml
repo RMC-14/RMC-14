@@ -316,6 +316,27 @@
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
 
 - type: entity
+  parent: RMCGrenadeBlastM12
+  id: RMCGrenadeIncendiaryBlast
+  name: M40 HEFU Grenade
+  description: High Explosive Fuel-Augmented grenades from AEGIS R&D. Stuck in test phase for being too deadly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hefu.rsi
+  - type: OnUseTimerTrigger
+    beepSound: null
+  - type: CMVocalizeTrigger
+  - type: TileFireOnTrigger
+    spawn: RMCTileFireOBAegis
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - type: Tag
+    tags:
+    - Grenade
+    - RMCGrenadeIncendiaryBlast
+
+
+- type: entity
   parent: RMCGrenadeIncendiary
   id: RMCGrenadeMolotov
   name: improvised firebomb
