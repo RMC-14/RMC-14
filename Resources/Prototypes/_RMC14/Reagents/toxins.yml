@@ -162,13 +162,8 @@
     Poison:
       metabolismRate: 0.2
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Airloss: 8
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
+      - !type:Hypoxemic
+        potency: 4
       - !type:GenericStatusEffect
         key: Drowsiness
         component: Drowsiness
