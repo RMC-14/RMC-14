@@ -15,7 +15,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     ///     The value that should be used in actual calculations for chemical effect
     ///     Halved since potency is halved before being used
     /// </summary>
-    public float ActualPotency => _moddedPotency * 0.5f;
+    public float ActualPotency => (_moddedPotency != 0 ? _moddedPotency : Potency) * 0.5f;
 
     // Halved again since chemicals tick every second in SS14, not every 2
     public float PotencyPerSecond => ActualPotency * 0.5f;
@@ -35,7 +35,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
         var boost = CalculateReagentBoost(reagentArgs);
-        _moddedPotency = Potency + boost; //_moddedPotency = REAGENT_EFFECT * (Potency + boost);
+        _moddedPotency = Potency + boost;
         var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
 
