@@ -1,9 +1,11 @@
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Temperature;
+using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffect;
+using Content.Shared.Temperature;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -15,7 +17,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the temperature of the body that it is in to {BodyTemp} degrees, by {40f * PotencyPerSecond * 1.5f} degrees at a time.\n" +
+        return $"Stabilizes the temperature of the body to {TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)} kelvins, by {40f * PotencyPerSecond * 1.5f} K at a time.\n" +
                $"Overdoses cause [color=red]10[/color] seconds of unconsciousness.\n" +
                $"Critical overdoses cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
     }
@@ -24,14 +26,15 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
     {
         var sys = args.EntityManager.EntitySysManager.GetEntitySystem<SharedRMCTemperatureSystem>();
         var current = sys.GetTemperature(args.TargetEntity);
-        if (Math.Abs(current - BodyTemp) < 0.01)
+        var normalBodyTemp = TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature);
+        if (Math.Abs(current - normalBodyTemp) < 0.01)
             return;
 
         var change = 40f * potency.Float() * 1.5f;
 
-        var temp = current > BodyTemp
-            ? Math.Max(BodyTemp, current - change)
-            : Math.Min(BodyTemp, current + change);
+        var temp = current > normalBodyTemp
+            ? Math.Max(normalBodyTemp, current - change)
+            : Math.Min(normalBodyTemp, current + change);
 
         sys.ForceChangeTemperature(args.TargetEntity, temp);
     }

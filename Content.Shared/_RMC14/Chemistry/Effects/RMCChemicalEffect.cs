@@ -25,8 +25,6 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
     public float NutrimentFactor => NutFactor * NutMetabolism;
 
-    protected const float BodyTemp = 310.15f;
-
     public override void Effect(EntityEffectBaseArgs args)
     {
         if (args is not EntityEffectReagentArgs { Reagent: { } reagent } reagentArgs)
