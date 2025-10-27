@@ -455,3 +455,6 @@
 
 - type: Tag
   id: RMCGrenadeIED
+
+- type: Tag
+  id: RMCGrenadeIncendiaryBlast

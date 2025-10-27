@@ -69,7 +69,7 @@
         weight: 1
       - id: ClothingNeckCloakPirateCap
         weight: 1
-      - id: ClothingCoatOuterPirate
+      - id: ClothingOuterCoatPirate
         weight: 1
     # Table 2: Gun stuff
     - entries:
@@ -102,3 +102,4 @@
       - id: RMCPamphletAdminEndurance4
         weight: 0.5
       - id: RMCSyringeCaseFilledHyperzine
+        weight: 1

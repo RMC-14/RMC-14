@@ -456,8 +456,6 @@
     solution: pen
     reagents:
       Stimulants: 1
-  - type: IconLabel
-    labelTextLocId: rmc-stimulants-container-label-text
 
 - type: entity
   parent: RMCMedicAutoInjector15
