@@ -308,6 +308,34 @@
         {
             "name": "lemoon-slice"
 
+        },
+        {
+            "name": "cotton"
+        },
+        {
+            "name": "cotton-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "cotton-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "cotton-slice"
+        },
+        {
+            "name": "cotton-slice-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "cotton-slice-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "berry_delight"
+        },
+        {
+            "name": "berry_delight_slice"
         }
     ]
 }
