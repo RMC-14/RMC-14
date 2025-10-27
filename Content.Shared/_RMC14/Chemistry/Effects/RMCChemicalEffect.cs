@@ -32,8 +32,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         var damageable = args.EntityManager.System<DamageableSystem>();
         var scale = reagentArgs.Scale;
-        var boost = 0f;
-        ReagentBoost(reagentArgs, ref boost);
+        var boost = CalculateReagentBoost(reagentArgs);
         var boostedPotency = (Potency + boost) * 0.5f * 0.5f;
         var scaledPotency = boostedPotency * scale;
         Tick(damageable, scaledPotency, reagentArgs);
@@ -47,6 +46,25 @@ public abstract partial class RMCChemicalEffect : EntityEffect
 
         if (reagent.CriticalOverdose != null && totalQuantity >= reagent.CriticalOverdose)
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
+    }
+
+    private static float CalculateReagentBoost(EntityEffectReagentArgs args)
+    {
+        var boost = 0f;
+        if (args.Reagent?.Metabolisms == null)
+            return boost;
+
+        foreach (var (_, entry) in args.Reagent.Metabolisms)
+        {
+            foreach (var effect in entry.Effects)
+            {
+                if (effect is RMCChemicalEffect rmcEffect)
+                {
+                    rmcEffect.ReagentBoost(args, ref boost);
+                }
+            }
+        }
+        return boost;
     }
 
     protected virtual void ReagentBoost(EntityEffectReagentArgs args, ref float boost)
