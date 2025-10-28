@@ -780,6 +780,8 @@
         amount: 24
       - id: FoodMeatBacon
         amount: 24
+      - id: FoodMeatSausage
+        amount: 18
       - id: DrinkMilkCarton
         amount: 24
       - id: DrinkSoyMilkCarton

@@ -294,7 +294,7 @@
     FoodOnionSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRMCPizzaCalabresa
+  id: RecipeCakeBlackForest
   name: black forest cake recipe
   result: FoodCakeBlackForest
   time: 5

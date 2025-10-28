@@ -158,6 +158,16 @@
     Gunfire: 5
 
 - type: reaction
+  id: RMCGrapeSoda
+  reactants:
+    JuiceGrape:
+      amount: 2
+    Cola:
+      amount: 1
+  products:
+    GrapeSoda: 3
+
+- type: reaction
   id: CreateMeat
   impact: Low
   quantized: true

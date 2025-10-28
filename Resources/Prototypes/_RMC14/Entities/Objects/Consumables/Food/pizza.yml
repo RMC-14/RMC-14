@@ -256,7 +256,7 @@
   parent: RMCFoodPizzaFullBase
   id: RMCFoodPizzaSupremeFull
   name: supreme pizza
-  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  description: With this many toppings, it lives up to its name.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
@@ -276,7 +276,7 @@
   parent: RMCFoodPizzaSliceBase
   id: RMCFoodPizzaSupremeSlice
   name: supreme slice
-  description: A slice of joy/sin.
+  description: A slice of the top.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
@@ -296,12 +296,14 @@
           Quantity: 4
         - ReagentId: Vitamin
           Quantity: 1
+        - ReagentId: Protein
+          Quantity: 1
 
 - type: entity
   parent: RMCFoodPizzaFullBase
   id: RMCFoodPizzaCalabresaFull
   name: calabresa pizza
-  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  description: Pizza so good it will make you see Cristo Redentor!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
@@ -312,16 +314,15 @@
     - meaty
     - onion
     - cheesy
-    - oily
     - bread
   - type: SliceableFood
     slice: RMCFoodPizzaCalabresaSlice
 
 - type: entity
   parent: RMCFoodPizzaSliceBase
-  id: RMCFoodCalabresaSlice
+  id: RMCFoodPizzaCalabresaSlice
   name: slice de calabresa
-  description: A slice of joy/sin.
+  description: A slice of paraíso.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
@@ -330,7 +331,6 @@
     - meaty
     - onion
     - cheesy
-    - oily
     - bread
   - type: SolutionContainerManager
     solutions:
@@ -340,6 +340,8 @@
         - ReagentId: Nutriment
           Quantity: 4
         - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Protein
           Quantity: 1
 
 # Pizza Box Base
