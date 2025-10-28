@@ -177,7 +177,6 @@
   - type: Sprite
     drawdepth: "1"
 
-
 - type: entity
   id: RMCTelecomSensorComputer
   parent: RMCTelecomBusMainframe
