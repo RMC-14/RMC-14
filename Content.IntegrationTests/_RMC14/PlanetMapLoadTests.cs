@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Content.Server._RMC14.Rules;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Presets;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.CCVar;
@@ -63,9 +64,9 @@ public sealed class PlanetMapLoadTests
         await server.WaitPost(() =>
         {
             config.SetCVar(CCVars.GameLobbyEnabled, false);
+            ticker.SetGamePreset((GamePresetPrototype?) null);
         });
 
-        await pair.WaitCommand("forcepreset TestPreset");
         await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
 
         await pair.CleanReturnAsync();
