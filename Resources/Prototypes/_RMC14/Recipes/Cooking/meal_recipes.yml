@@ -215,6 +215,18 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
+  id: RecipeYorkshirePudding
+  name: yorkshire pudding recipe
+  result: FoodYorkshirePudding
+  time: 10
+  group: Breads
+  reagents:
+    Milk: 5
+    Flour: 5
+    Egg: 6
+    TableSalt: 5
+
+- type: microwaveMealRecipe
   id: RecipeSausage
   name: Sausage recipe
   result: FoodMeatSausage

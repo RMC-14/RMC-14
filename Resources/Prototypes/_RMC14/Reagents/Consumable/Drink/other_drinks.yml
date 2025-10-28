@@ -74,7 +74,7 @@
   metamorphicChangeColor: false
 
 - type: reagent
-  id: GrapeSoda
+  id: RMCGrapeSoda
   parent: BaseDrink
   name: reagent-name-grapesoda
   desc: reagent-desc-grapesoda

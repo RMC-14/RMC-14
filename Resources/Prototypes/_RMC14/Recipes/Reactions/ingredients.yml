@@ -165,7 +165,7 @@
     Cola:
       amount: 1
   products:
-    GrapeSoda: 3
+    RMCGrapeSoda: 3
 
 - type: reaction
   id: IceCafe
@@ -192,3 +192,19 @@
   effects:
   - !type:CreateEntityReactionEffect
     entity: FoodMeat
+
+- type: reaction
+  id: CreateFriedEgg
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    TableSalt:
+      amount: 1
+    BlackPepper:
+      amount: 1
+    CookedEgg:
+      amount: 5
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodMealFriedegg
