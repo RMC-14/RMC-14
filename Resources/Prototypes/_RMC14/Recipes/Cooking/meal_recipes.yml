@@ -183,7 +183,7 @@
     Sugar: 5
   solids:
     FoodBowlBig: 1
-    FoodMango: 1
+    RMCFoodMango: 1
 
 - type: microwaveMealRecipe
   id: RecipeBanhMi
