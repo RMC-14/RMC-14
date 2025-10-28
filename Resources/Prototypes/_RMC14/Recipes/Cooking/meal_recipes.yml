@@ -157,8 +157,9 @@
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
-    Water: 5
-    Rice: 5
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodBowlBig
 
 - type: microwaveMealRecipe
   id: RecipeCarbonara
