@@ -28,6 +28,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuiceBerry:
       amount: 1
   products:
@@ -38,6 +40,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuiceOrange:
       amount: 1
   products:
@@ -48,6 +52,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuicePotato:
       amount: 1
   products:
@@ -58,6 +64,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     Rice:
       amount: 1
   products:
@@ -68,6 +76,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     Coffee:
       amount: 1
     Sugar:
@@ -80,6 +90,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuiceWatermelon:
       amount: 1
   products:
@@ -90,6 +102,8 @@
   reactants:
     Enzyme:
       amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
     JuiceGrape:
       amount: 1
   products:
