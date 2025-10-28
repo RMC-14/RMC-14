@@ -151,15 +151,12 @@
   result: RMCFoodOnigiri
   time: 5
   group: Savory
-  solids:
-    FoodRiceBoiled: 1
   reagents:
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
-  effects:
-  - !type:CreateEntityReactionEffect
-    entity: FoodBowlBig
+    Water: 5
+    Rice: 5
 
 - type: microwaveMealRecipe
   id: RecipeCarbonara
