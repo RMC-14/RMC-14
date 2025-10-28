@@ -65,6 +65,7 @@ public sealed class PlanetMapLoadTests
         {
             config.SetCVar(CCVars.GameLobbyEnabled, false);
             ticker.SetGamePreset((GamePresetPrototype?) null);
+            ticker.StartRound();
         });
 
         await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
