@@ -325,3 +325,60 @@
     sugar: 5
   solids:
     FoodCakePlain: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTapsilog
+  name: tapsilog recipe
+  result: FoodTapsilog
+  time: 10
+  group: Savory
+  reagents:
+    rice: 5
+    water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTocilog
+  name: tocilog recipe
+  result: FoodTocilog
+  time: 10
+  group: Savory
+  reagents:
+    rice: 5
+    water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChicksilog
+  name: Chicksilog recipe
+  result: FoodChicksilog
+  time: 10
+  group: Savory
+  reagents:
+    rice: 5
+    water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatChickenFried: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCarpsilog
+  name: Carpsilog recipe
+  result: FoodCarpsilog
+  time: 10
+  group: Savory
+  reagents:
+    rice: 5
+    water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatFish: 1
+
