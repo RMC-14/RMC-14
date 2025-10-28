@@ -81,7 +81,7 @@
     Coffee:
       amount: 1
     Sugar:
-      Amount: 1
+      amount: 1
   products:
     CoffeeLiqueur: 2
 
@@ -215,7 +215,7 @@
   reactants:
     TableSalt:
       amount: 1
-    BlackPepper:
+    Blackpepper:
       amount: 1
     EggCooked:
       amount: 5

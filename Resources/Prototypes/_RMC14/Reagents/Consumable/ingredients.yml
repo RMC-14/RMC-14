@@ -19,20 +19,3 @@
   physicalDesc: reagent-physical-desc-creamy
   flavor: nutty
   color: "#BE893F"
-
-# Mango Juice
-
-- type: reagent
-  id: JuiceMango
-  name: reagent-name-juice-mango
-  parent: BaseJuice
-  desc: reagent-desc-juice-mango
-  physicalDesc: reagent-physical-desc-citric
-  flavor: mango
-  color: "#FFBF34"
-  metamorphicSprite:
-    sprite: Objects/Consumable/Drinks/orangejuiceglass.rsi
-    state: icon_empty
-  metamorphicMaxFillLevels: 5
-  metamorphicFillBaseName: fill-
-  metamorphicChangeColor: true

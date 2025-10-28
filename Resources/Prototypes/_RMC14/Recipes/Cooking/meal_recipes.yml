@@ -240,7 +240,7 @@
   time: 10
   group: Savory
   solids:
-    FoodBun: 1
+    FoodBreadBun: 1
     FoodMeatSausage: 1
 
 - type: microwaveMealRecipe
@@ -250,7 +250,7 @@
   time: 5
   group: Savory
   solids:
-    FoodBun: 1
+    FoodBreadBun: 1
     FoodMeatSausageCooked: 1
 
 #Cakes
