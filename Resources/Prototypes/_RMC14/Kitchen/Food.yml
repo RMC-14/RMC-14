@@ -378,8 +378,11 @@
       food:
         maxVol: 8
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: Protein
           Quantity: 4
+  - type: Construction
+    graph: FoodMeatSausage
+    node: start
 
 - type: entity
   name: cooked sausage
