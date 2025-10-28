@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
-      you can spawn. I am trying to get it to be auto-faxed to CIC as well.
-    type: Add
-  - message: Made it so that AEGIS fire system supports immunity bypassing fires.
-    type: Add
-  - message: Fixed the animation of AEGIS crates being all on client side and the
-      crate looking closed if you reset your client.
-    type: Fix
-  - message: Changed the announcements of factions regarding event briefly.
-    type: Tweak
-  id: 1966
-  time: '2025-07-07T12:29:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6798
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed being able to use actions while being devoured by a xeno.
@@ -4722,5 +4707,12 @@
   id: 2466
   time: '2025-10-19T23:24:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8187
+- author: noctyrnal
+  changes:
+  - message: Fixed xenos not being able to pry powered doors.
+    type: Fix
+  id: 2467
+  time: '2025-10-28T07:20:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8202
 Name: RMC14
 Order: -1
