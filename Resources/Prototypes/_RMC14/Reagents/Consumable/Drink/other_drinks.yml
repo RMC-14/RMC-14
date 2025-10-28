@@ -72,3 +72,33 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+- type: reagent
+  id: GrapeSoda
+  parent: BaseDrink
+  name: reagent-name-grapesoda
+  desc: reagent-desc-grapesoda
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#421C52"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/grapesoda.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: IceCafe
+  parent: BaseDrink
+  name: reagent-name-ice-cafe
+  desc: reagent-desc-ice-cafe
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#F88F00"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/icecafe.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: False

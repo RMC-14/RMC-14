@@ -168,6 +168,18 @@
     GrapeSoda: 3
 
 - type: reaction
+  id: IceCafe
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    IcedCoffee:
+      amount: 3
+    Milk:
+      amount: 2
+  products:
+    IceCafe: 5
+
+- type: reaction
   id: CreateMeat
   impact: Low
   quantized: true

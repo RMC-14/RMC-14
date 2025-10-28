@@ -456,3 +456,84 @@
           Quantity: 12
         - ReagentId: Protein
           Quantity: 8
+
+- type: entity
+  name: carpsilog
+  parent: CMFoodBase
+  id: FoodCarpsilog
+  description: Drenched in enough vinegar to make you forget about that carpotoxin!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: carpsilog
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - garlic
+    - fishy
+    - egg
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+        - ReagentId: Protein
+          Quantity: 8
+
+- type: entity
+  name: chicksilog
+  parent: CMFoodBase
+  id: FoodChicksilog
+  description: Now I know you asked for tonkatsu, but this is all we got today.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: chicksilog
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - garlic
+    - chicken
+    - egg
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+        - ReagentId: Protein
+          Quantity: 8
+
+- type: entity
+  name: tocilog
+  parent: CMFoodBase
+  id: FoodTocilog
+  description: Looks nothing like bacon, but just as great!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: tocilog
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - garlic
+    - bacon
+    - egg
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+        - ReagentId: Protein
+          Quantity: 8

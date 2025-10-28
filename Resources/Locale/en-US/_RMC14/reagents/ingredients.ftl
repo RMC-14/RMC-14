@@ -18,3 +18,9 @@ reagent-desc-gunfire = Raise a glass to the brave!
 
 reagent-name-sidecar = sidecar
 reagent-desc-sidecar = A drink fit for an army captain.
+
+reagent-name-grapesoda = grape soda
+reagent-desc-grapesoda = Grapes made into a fine drank.
+
+reagent-name-ice-cafe = ice café
+reagent-desc-ice-cafe = A coffee slushy with a wonderful aroma.
