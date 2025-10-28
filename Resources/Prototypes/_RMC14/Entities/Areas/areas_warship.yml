@@ -1,0 +1,1568 @@
+- type: entity
+  id: RMCAreaWarship
+  name: Warship
+  suffix: Warship Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: almayer
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: false # TODO RMC14 true
+    lasing: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: true
+    powerNet: warship
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: None
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipASOsOffice
+  name: ASOs Office
+  components:
+  - type: Sprite
+    color: "#619020"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipIOPreparations
+  name: IO Preparations
+  components:
+  - type: Sprite
+    color: "#A97B9C"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipIntelligenceLab
+  name: Intelligence Lab
+  components:
+  - type: Sprite
+    color: "#9DCD4A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipDropshipPreparations
+  name: Dropship Preparations
+  components:
+  - type: Sprite
+    color: "#4E6537"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipDropshipCrewQuarters
+  name: Dropship Crew Quarters
+  components:
+  - type: Sprite
+    color: "#60EB41"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipHangerCrewLounge
+  name: Hanger Crew Lounge
+  components:
+  - type: Sprite
+    color: "#003807"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipVehicleCrewQuarters
+  name: Vehicle Crew Quarters
+  components:
+  - type: Sprite
+    color: "#6C4BF4"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipVehicleCrewPreparations
+  name: Vehicle Crew Preparations
+  components:
+  - type: Sprite
+    color: "#6CE7D8"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipHangerConstruction
+  name: Hanger Construction
+  components:
+  - type: Sprite
+    color: "#A4E8F4"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipHangerBriefing
+  name: Hanger Briefing
+  components:
+  - type: Sprite
+    color: "#EEA0F1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipHangerHallwaySouth
+  name: Hanger Hallway South
+  components:
+  - type: Sprite
+    color: "#BAA871"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipDropshipHanger
+  name: Dropship Hanger
+  components:
+  - type: Sprite
+    color: "#BC92F6"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipIntelligenceMaintenance
+  name: Intelligence Maintenance
+  components:
+  - type: Sprite
+    color: "#4A8DC6"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEastEngineeringReactors
+  name: East Engineering Reactors
+  components:
+  - type: Sprite
+    color: "#A26C6E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEastEngineeringReactorsMaintenance
+  name: East Engineering Reactors Maintenance
+  components:
+  - type: Sprite
+    color: "#A2006E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMemorialandChapel
+  name: Memorial and Chapel
+  components:
+  - type: Sprite
+    color: "#5E4315"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMorguePreparation
+  name: Morgue Preparation
+  components:
+  - type: Sprite
+    color: "#634D65"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMorgue
+  name: Morgue
+  components:
+  - type: Sprite
+    color: "#7E4E5A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFieldDoctorsPreparations
+  name: Field Doctors Preparations
+  components:
+  - type: Sprite
+    color: "#C94EB2"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalORs
+  name: Medical ORs
+  components:
+  - type: Sprite
+    color: "#CB4F98"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedialORLobby
+  name: Medical OR Lobby
+  components:
+  - type: Sprite
+    color: "#7E020A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCMOsOffice
+  name: CMOs Office
+  components:
+  - type: Sprite
+    color: "#DC8B7B"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalJanitorial
+  name: Medical Janitorial
+  components:
+  - type: Sprite
+    color: "#596B47"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipChemistry
+  name: Chemistry
+  components:
+  - type: Sprite
+    color: "#7A8082"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalBreakRoom
+  name: Medical Break Room
+  components:
+  - type: Sprite
+    color: "#9356F7"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalArmory
+  name: Medical Armory
+  components:
+  - type: Sprite
+    color: "#F03997"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNursePrep
+  name: Nurse Prep
+  components:
+  - type: Sprite
+    color: "#912F5A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalMaintenance
+  name: Medical Maintenance
+  components:
+  - type: Sprite
+    color: "#614165"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalCheckpoint
+  name: Medical Checkpoint
+  components:
+  - type: Sprite
+    color: "#B27C5A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipResearchChemistry
+  name: Research Chemistry
+  components:
+  - type: Sprite
+    color: "#3FDE4F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipResearchLaboratories
+  name: Research Laboratories
+  components:
+  - type: Sprite
+    color: "#6EBAEF"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipResearchContainment
+  name: Research Containment
+  components:
+  - type: Sprite
+    color: "#5293B8"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipResearchHallway
+  name: Research Hallway
+  components:
+  - type: Sprite
+    color: "#F153E9"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFiringRangeHallway
+  name: Firing Range Hallway
+  components:
+  - type: Sprite
+    color: "#26BFD1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSouthBriefingHallway
+  name: South Briefing Hallway
+  components:
+  - type: Sprite
+    color: "#05E0BC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNorthBriefingHallway
+  name: North Briefing Hallway
+  components:
+  - type: Sprite
+    color: "#4B23FC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSouthRequisitionsHallway
+  name: South Requisitions Hallway
+  components:
+  - type: Sprite
+    color: "#DA4BCA"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNorthRequisitionsHallway
+  name: North Requisitions Hallway
+  components:
+  - type: Sprite
+    color: "#B21A5C"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRearDeltaPreparations
+  name: East Delta Preparations
+  components:
+  - type: Sprite
+    color: "#0CA6FA"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFrontDeltaPreparations
+  name: Front Delta Preparations
+  components:
+  - type: Sprite
+    color: "#C5CAA0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRearCharliePreparations
+  name: East Charlie Preparations
+  components:
+  - type: Sprite
+    color: "#2714A2"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFrontCharliePreparations
+  name: Front Charlie Preparations
+  components:
+  - type: Sprite
+    color: "#2DC5AD"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFrontBravoPreparations
+  name: Front Bravo Preparations
+  components:
+  - type: Sprite
+    color: "#9317BF"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRearBravoPreparations
+  name: East Bravo Preparations
+  components:
+  - type: Sprite
+    color: "#A7B1CC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFrontAlphaPreparations
+  name: Front Alpha Preparations
+  components:
+  - type: Sprite
+    color: "#E3D7AB"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRearAlphaPreparations
+  name: East Alpha Preparations
+  components:
+  - type: Sprite
+    color: "#57C329"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEchoPreparations
+  name: Echo Preparations
+  components:
+  - type: Sprite
+    color: "#EA901B"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFoxtrotPreparations
+  name: Foxtrot Preparations
+  components:
+  - type: Sprite
+    color: "#1DB383"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSEATrainingRange
+  name: SEA Training Range
+  components:
+  - type: Sprite
+    color: "#9E77FB"
+  - type: Area
+    NoTunnel: true
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSEAOfficeOne
+  name: SEA Office One
+  components:
+  - type: Sprite
+    color: "#CE679C"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSEAOfficeTwo
+  name: SEA Office Two
+  components:
+  - type: Sprite
+    color: "#4B69CB"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLowerEngineering
+  name: Lower Engineering
+  components:
+  - type: Sprite
+    color: "#7BA269"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLowerEngineeringAtmospherics
+  name: Lower Engineering Atmospherics
+  components:
+  - type: Sprite
+    color: "#E4F6EE"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipOrbitalCannonStorage
+  name: Orbital Cannon Storage
+  components:
+  - type: Sprite
+    color: "#5126C7"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRequisitionsExternal
+  name: Requisitions External
+  components:
+  - type: Sprite
+    color: "#D23EB2"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRequisitionsInternal
+  name: Requisitions Internal
+  components:
+  - type: Sprite
+    color: "#C9BA06"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipRequisitionsArmory
+  name: Requisitions Armory
+  components:
+  - type: Sprite
+    color: "#F03997"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFiringRange
+  name: Firing Range
+  components:
+  - type: Sprite
+    color: "#25E796"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMPFiringRangeOffice
+  name: MP Firing Range Office
+  components:
+  - type: Sprite
+    color: "#E6E81A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNCOLounge
+  name: NCO Lounge
+  components:
+  - type: Sprite
+    color: "#CD7653"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSquadBriefing
+  name: Squad Briefing
+  components:
+  - type: Sprite
+    color: "#64A57E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMessHall
+  name: Mess Hall
+  components:
+  - type: Sprite
+    color: "#954D28"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMessHallKitchen
+  name: Mess Hall Kitchen
+  components:
+  - type: Sprite
+    color: "#775B6A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLowerCentralCheckpoint
+  name: Lower Central Checkpoint
+  components:
+  - type: Sprite
+    color: "#CFE201"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFiringRangeCheckpoint
+  name: Firing Range Checkpoint
+  components:
+  - type: Sprite
+    color: "#876E79"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipAlphaBravoMaintenance
+  name: Alpha Bravo Maintenance
+  components:
+  - type: Sprite
+    color: "#49AD8B"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCharlieDeltaMaintenance
+  name: Charlie Delta Maintenance
+  components:
+  - type: Sprite
+    color: "#CF9FA6"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFiringRangeMaintenance
+  name: Firing Range Maintenance
+  components:
+  - type: Sprite
+    color: "#947427"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipResearchMaintenance
+  name: Research Maintenance
+  components:
+  - type: Sprite
+    color: "#F4C036"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLowerSecureBunker
+  name: Lower Secure Bunker
+  components:
+  - type: Sprite
+    color: "#212217"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipAEGISTargetedRailgun
+  name: AEGIS Targeted Railgun
+  components:
+  - type: Sprite
+    color: "#371830"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckEngineeringSouth
+  name: Upper Deck Engineering South
+  components:
+  - type: Sprite
+    color: "#2446FB"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckEngineeringNorth
+  name: Upper Deck Engineering North
+  components:
+  - type: Sprite
+    color: "#7D7436"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEngineeringHypersleep
+  name: Engineering Hypersleep
+  components:
+  - type: Sprite
+    color: "#34BC66"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEngineeringArmory
+  name: Engineering Armory
+  components:
+  - type: Sprite
+    color: "#9B841F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEngineeringArmorer
+  name: Engineering Armorer
+  components:
+  - type: Sprite
+    color: "#9B841F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipOrdnance
+  name: Ordnance
+  components:
+  - type: Sprite
+    color: "#13177C"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEngineeringStorage
+  name: Engineering Storage
+  components:
+  - type: Sprite
+    color: "#AF9903"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipChiefEngineersOffice
+  name: Chief Engineers Office
+  components:
+  - type: Sprite
+    color: "#2A65CF"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBasketBallandGym
+  name: Basket Ball and Gym
+  components:
+  - type: Sprite
+    color: "#BB26B1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipExecutiveChefsOffice
+  name: Executive Chefs Office
+  components:
+  - type: Sprite
+    color: "#DF99FA"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperWestNorthCheckpoint
+  name: Upper West North Checkpoint
+  components:
+  - type: Sprite
+    color: "#593F6B"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperWestSouthCheckpoint
+  name: Upper West South Checkpoint
+  components:
+  - type: Sprite
+    color: "#D46A94"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperWestNorthPump
+  name: Upper West North Pump
+  components:
+  - type: Sprite
+    color: "#58471A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperWestSouthPump
+  name: Upper West South Pump
+  components:
+  - type: Sprite
+    color: "#5E0D81"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperEastNorthPump
+  name: Upper East North Pump
+  components:
+  - type: Sprite
+    color: "#7332CC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperEastSouthPump
+  name: Upper East South Pump
+  components:
+  - type: Sprite
+    color: "#9B3D71"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLaundryRoom
+  name: Laundry Room
+  components:
+  - type: Sprite
+    color: "#5AFABB"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperNorthEngineeringMaintenance
+  name: Upper North Engineering Maintenance
+  components:
+  - type: Sprite
+    color: "#F917E0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperNorthEngineeringHallway
+  name: Upper North Engineering Hallway
+  components:
+  - type: Sprite
+    color: "#F917E0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperSouthEngineeringHallway
+  name: Upper South Engineering Hallway
+  components:
+  - type: Sprite
+    color: "#F917E0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperSouthEngineeringMaintenance
+  name: Upper South Engineering Maintenance
+  components:
+  - type: Sprite
+    color: "#9DAE18"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUNMCRecruitment
+  name: UNMC Recruitment
+  components:
+  - type: Sprite
+    color: "#A637E5"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipTemporaryCrewQuarters
+  name: Temporary Crew Quarters
+  components:
+  - type: Sprite
+    color: "#FD8952"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUNMCRecruitmentMaintenance
+  name: UNMC Recruitment Maintenance
+  components:
+  - type: Sprite
+    color: "#07E063"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperNorthMilitaryPoliceMaintenance
+  name: Upper North Military Police Maintenance
+  components:
+  - type: Sprite
+    color: "#36C40A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperSouthMilitaryPoliceMaintenance
+  name: Upper South Military Police Maintenance
+  components:
+  - type: Sprite
+    color: "#423BF0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEvacuationNorthMaintenance
+  name: Evacuation North Maintenance
+  components:
+  - type: Sprite
+    color: "#28ACB9"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEvacuationSouthMaintenance
+  name: Evacuation South Maintenance
+  components:
+  - type: Sprite
+    color: "#6F9134"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEvacuation
+  name: Evacuation
+  components:
+  - type: Sprite
+    color: "#961955"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNorthEvacuationCheckpoint
+  name: North Evacuation Checkpoint
+  components:
+  - type: Sprite
+    color: "#E72A03"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCentralEvacuationCheckpoint
+  name: Central Evacuation Checkpoint
+  components:
+  - type: Sprite
+    color: "#5BCB0A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSouthEvacuationCheckpoint
+  name: South Evacuation Checkpoint
+  components:
+  - type: Sprite
+    color: "#1753AA"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMPFiringRange
+  name: MP Firing Range
+  components:
+  - type: Sprite
+    color: "#83B936"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMPBunks
+  name: MP Bunks
+  components:
+  - type: Sprite
+    color: "#5B9C96"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipExecutionChamber
+  name: Execution Chamber
+  components:
+  - type: Sprite
+    color: "#254BF7"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipExecutionChamberEngineering
+  name: Execution Chamber Engineering
+  components:
+  - type: Sprite
+    color: "#C3D5D4"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPermanentConfinementMaintenance
+  name: Permanent Confinement Maintenance
+  components:
+  - type: Sprite
+    color: "#1D2F76"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPermanentConfinement
+  name: Permanent Confinement
+  components:
+  - type: Sprite
+    color: "#F0046A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPermanentConfinementHallway
+  name: Permanent Confinement Hallway
+  components:
+  - type: Sprite
+    color: "#6F78A1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigHolding
+  name: Brig Holding
+  components:
+  - type: Sprite
+    color: "#BBB99A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigHoldingHallway
+  name: Brig Holding Hallway
+  components:
+  - type: Sprite
+    color: "#C52762"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigHoldingObservation
+  name: Brig Holding Observation
+  components:
+  - type: Sprite
+    color: "#9431C3"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigMedical
+  name: Brig Medical
+  components:
+  - type: Sprite
+    color: "#CDEA1F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigLobby
+  name: Brig Lobby
+  components:
+  - type: Sprite
+    color: "#3D0E86"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMilitaryWardensOffice
+  name: Military Wardens Office
+  components:
+  - type: Sprite
+    color: "#E3D164"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCMPsOffice
+  name: CMPs Office
+  components:
+  - type: Sprite
+    color: "#7783F3"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigReception
+  name: Brig Reception
+  components:
+  - type: Sprite
+    color: "#E6F82F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipDrunkTank
+  name: Drunk Tank
+  components:
+  - type: Sprite
+    color: "#F05AFE"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMPPrep
+  name: MP Prep
+  components:
+  - type: Sprite
+    color: "#3D66CA"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMPArmory
+  name: MP Armory
+  components:
+  - type: Sprite
+    color: "#ED3793"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigEvidence
+  name: Brig Evidence
+  components:
+  - type: Sprite
+    color: "#59989D"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigInterview
+  name: Brig Interview
+  components:
+  - type: Sprite
+    color: "#0D169D"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigSecureHallway
+  name: Brig Secure Hallway
+  components:
+  - type: Sprite
+    color: "#EBC312"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigEntranceHallway
+  name: Brig Entrance Hallway
+  components:
+  - type: Sprite
+    color: "#64A271"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperNorthBrigHallway
+  name: Upper North Brig Hallway
+  components:
+  - type: Sprite
+    color: "#B41A75"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperSouthBrigHallway
+  name: Upper South Brig Hallway
+  components:
+  - type: Sprite
+    color: "#FA3D1A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperNorthCentralHallway
+  name: Upper North Central Hallway
+  components:
+  - type: Sprite
+    color: "#B5B0CB"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperCentralHallway
+  name: Upper Central Hallway
+  components:
+  - type: Sprite
+    color: "#CBDB24"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperSouthCentralHallway
+  name: Upper South Central Hallway
+  components:
+  - type: Sprite
+    color: "#FCB8E8"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPressBriefing
+  name: Press Briefing
+  components:
+  - type: Sprite
+    color: "#F00605"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipHighCommandAdjutantsOffice
+  name: High Command Adjutants Office
+  components:
+  - type: Sprite
+    color: "#E4EC92"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPressHallway
+  name: Press Hallway
+  components:
+  - type: Sprite
+    color: "#89E1E1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPressMeetingRoom
+  name: Press Meeting Room
+  components:
+  - type: Sprite
+    color: "#C073E4"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipPressQuarters
+  name: Press Quarters
+  components:
+  - type: Sprite
+    color: "#5F6A9E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSquadLeaderBriefing
+  name: Squad Leader Briefing
+  components:
+  - type: Sprite
+    color: "#A381C0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWardroomHallway
+  name: Wardroom Hallway
+  components:
+  - type: Sprite
+    color: "#F6BEB4"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWardroom
+  name: Wardroom
+  components:
+  - type: Sprite
+    color: "#B48212"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWardroomKitchen
+  name: Wardroom Kitchen
+  components:
+  - type: Sprite
+    color: "#B5453F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipStaffOfficersQuarters
+  name: Staff Officers Quarters
+  components:
+  - type: Sprite
+    color: "#EC8540"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWardroomReception
+  name: Wardroom Reception
+  components:
+  - type: Sprite
+    color: "#732E4E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckSouthViewingRoom
+  name: Upper Deck South Viewing Room
+  components:
+  - type: Sprite
+    color: "#83C604"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckNorthViewingRoom
+  name: Upper Deck North Viewing Room
+  components:
+  - type: Sprite
+    color: "#67B395"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckMedical
+  name: Upper Deck Medical
+  components:
+  - type: Sprite
+    color: "#05318D"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckMasterWashroom
+  name: Upper Deck Master Washroom
+  components:
+  - type: Sprite
+    color: "#D76ED7"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateHallway
+  name: Corporate Hallway
+  components:
+  - type: Sprite
+    color: "#32FE89"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateLiaisonsMainOffice
+  name: Corporate Liaisons Main Office
+  components:
+  - type: Sprite
+    color: "#8CC71A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateLiaisonsQuarters
+  name: Corporate Liaisons Quarters
+  components:
+  - type: Sprite
+    color: "#73CBC5"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateLiaisonsResearch
+  name: Corporate Liaisons Research
+  components:
+  - type: Sprite
+    color: "#73CBC5"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateMeetingRoom
+  name: Corporate Meeting Room
+  components:
+  - type: Sprite
+    color: "#04C2B5"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateMaintenance
+  name: Corporate Maintenance
+  components:
+  - type: Sprite
+    color: "#F63F9E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCorporateMeetingRoomMaintenance
+  name: Corporate Meeting Room Maintenance
+  components:
+  - type: Sprite
+    color: "#7A9F3C"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSecureRelay
+  name: Secure Relay
+  components:
+  - type: Sprite
+    color: "#6EAA48"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipTelecommunications
+  name: Telecommunications
+  components:
+  - type: Sprite
+    color: "#2EE514"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipTelecommunicationsEntrance
+  name: Telecommunications Entrance
+  components:
+  - type: Sprite
+    color: "#F60EAC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSyntheticPreparations
+  name: Synthetic Preparations
+  components:
+  - type: Sprite
+    color: "#E4ED8F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESBase
+  name: ARES Base
+  components:
+  - type: Area
+    ResinAllowed: False
+    Unweedable: True
+    NoTunnel: True
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESReception
+  name: ARES Reception
+  components:
+  - type: Sprite
+    color: "#70AE36"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESCore
+  name: ARES Core
+  components:
+  - type: Sprite
+    color: "#AEED34"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESHallway
+  name: ARES Hallway
+  components:
+  - type: Sprite
+    color: "#84E956"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESStorage
+  name: ARES Storage
+  components:
+  - type: Sprite
+    color: "#09092B"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipARESSecureStorage
+  name: ARES Secure Storage
+  components:
+  - type: Sprite
+    color: "#CAE618"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCommandingOfficersQuarters
+  name: Commanding Officers Quarters
+  components:
+  - type: Sprite
+    color: "#22B460"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipExecutiveOfficersQuarters
+  name: Executive Officers Quarters
+  components:
+  - type: Sprite
+    color: "#5810A0"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCombatInformationCenter
+  name: Combat Information Center
+  components:
+  - type: Sprite
+    color: "#6109C1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCICArmory
+  name: CIC Armory
+  components:
+  - type: Sprite
+    color: "#6A4C3E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipStaffOfficerPrep
+  name: Staff Officer Prep
+  components:
+  - type: Sprite
+    color: "#5E9C0F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCICReception
+  name: CIC Reception
+  components:
+  - type: Sprite
+    color: "#F03997"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCICWarRoom
+  name: CIC War Room
+  components:
+  - type: Sprite
+    color: "#F07E95"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCICHallwayNorth
+  name: CIC Hallway North
+  components:
+  - type: Sprite
+    color: "#1954FC"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipCICHallwaySouth
+  name: CIC Hallway South
+  components:
+  - type: Sprite
+    color: "#D94DD1"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipAstroNav
+  name: AstroNav
+  components:
+  - type: Sprite
+    color: "#C5F07A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipEscapePod
+  name: Escape Pod
+  components:
+  - type: Sprite
+    color: "#14B36A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLifeBoat
+  name: Life Boat
+  components:
+  - type: Sprite
+    color: "#14B36A"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNoEntry
+  name: Unknown
+  components:
+  - type: Area
+    NoTunnel: true
+    Unweedable: true
+  - type: Sprite
+    color: "#FF0000"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipLaundryHallway
+  name: Laundry Hallway
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipDockingPort
+  name: Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+  - type: Area
+    AlwaysPowered: true
+
+- type: entity
+  parent: RMCAreaWarshipDockingPort
+  id: RMCAreaWarshipDockingPortLE
+  name: Lower East Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarshipDockingPort
+  id: RMCAreaWarshipDockingPortLN
+  name: Lower North Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarshipDockingPort
+  id: RMCAreaWarshipDockingPortLS
+  name: Lower South Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarshipDockingPort
+  id: RMCAreaWarshipDockingPortUNW
+  name: Upper North West Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarshipDockingPort
+  id: RMCAreaWarshipDockingPortUSE
+  name: Upper South East Docking Port
+  components:
+  - type: Sprite
+    color: "#EE679E"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWestNorthStairwell
+  name: West North Stairwell
+  components:
+  - type: Sprite
+    color: "#A1A4FD"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipWestSouthStairwell
+  name: West South Stairwell
+  components:
+  - type: Sprite
+    color: "#A1A4FD"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipSouthCentralStairwell
+  name: South Central Stairwell
+  components:
+  - type: Sprite
+    color: "#EF829D"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipNorthCentralStairwell
+  name: North Central Stairwell
+  components:
+  - type: Sprite
+    color: "#B3B990"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipMedicalStairwell
+  name: Medical Stairwell
+  components:
+  - type: Sprite
+    color: "#C11C55"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipFiringRangeStairwell
+  name: Firing Range Stairwell
+  components:
+  - type: Sprite
+    color: "#94EB0D"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipBrigStairwell
+  name: Brig Stairwell
+  components:
+  - type: Sprite
+    color: "#978D21"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckCICStairwell
+  name: Upper Deck CIC Stairwell
+  components:
+  - type: Sprite
+    color: "#0CE74F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckStaffOfficerStairwell
+  name: Upper Deck SO Stairwell
+  components:
+  - type: Sprite
+    color: "#0C074F"
+
+- type: entity
+  parent: RMCAreaWarship
+  id: RMCAreaWarshipUpperDeckWardroomStairwell
+  name: Upper Deck Wardroom Stairwell
+  components:
+  - type: Sprite
+    color: "#0CE70F"
