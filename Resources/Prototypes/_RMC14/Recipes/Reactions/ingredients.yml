@@ -150,14 +150,14 @@
 - type: reaction
   id: Sidecar
   reactants:
-    Vodka:
+    Cognac:
+      amount: 2
+    JuiceOrange:
       amount: 1
-    LemonLime:
-      amount: 1
-    JuiceMango:
+    JuiceLemon:
       amount: 1
   products:
-    MangoCooler: 3
+    Sidecar: 4
 
 - type: reaction
   id: Gunfire
