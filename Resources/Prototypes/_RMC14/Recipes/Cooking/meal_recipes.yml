@@ -194,7 +194,7 @@
   reagents:
     Mayo: 5
   solids:
-    FoodBaguette: 1
+    FoodBreadBaguette: 1
     FoodCarrot: 1
     FoodMeat: 1
     FoodCabbage: 1
@@ -206,7 +206,7 @@
   time: 15
   group: Savory
   solids:
-    FoodBaguette: 1
+    FoodBreadBaguette: 1
     FoodTomato: 1
     FoodMeatChickenFried: 1
     FoodCheeseSlice: 1
@@ -321,8 +321,8 @@
   time: 5
   group: Cake
   reagents:
-    milk: 5
-    sugar: 5
+    Milk: 5
+    Sugar: 5
   solids:
     FoodCakePlain: 1
 
@@ -333,8 +333,8 @@
   time: 10
   group: Savory
   reagents:
-    rice: 5
-    water: 5
+    Rice: 5
+    Water: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1
@@ -347,8 +347,8 @@
   time: 10
   group: Savory
   reagents:
-    rice: 5
-    water: 5
+    Rice: 5
+    Water: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1
@@ -361,8 +361,8 @@
   time: 10
   group: Savory
   reagents:
-    rice: 5
-    water: 5
+    Rice: 5
+    Water: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1
@@ -375,8 +375,8 @@
   time: 10
   group: Savory
   reagents:
-    rice: 5
-    water: 5
+    Rice: 5
+    Water: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1

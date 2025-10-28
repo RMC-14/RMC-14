@@ -130,7 +130,7 @@
       amount: 2
     Sugar:
       amount: 1
-    JuiceMango:
+    RMCJuiceMango:
       amount: 2
   products:
     MangoAguaFresca: 5
@@ -142,7 +142,7 @@
       amount: 1
     LemonLime:
       amount: 1
-    JuiceMango:
+    RMCJuiceMango:
       amount: 1
   products:
     MangoCooler: 3
@@ -217,7 +217,7 @@
       amount: 1
     BlackPepper:
       amount: 1
-    CookedEgg:
+    EggCooked:
       amount: 5
   effects:
   - !type:CreateEntityReactionEffect
