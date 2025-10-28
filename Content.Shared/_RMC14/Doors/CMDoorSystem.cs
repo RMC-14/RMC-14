@@ -58,7 +58,8 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
 
-        SubscribeLocalEvent<RMCOpenOnlyWhenUnanchoredComponent, BeforeDoorClosedEvent>(OnOpenOnlyWhenUnanchoredBeforeClosed);
+        SubscribeLocalEvent<RMCOpenOnlyWhenUnanchoredComponent, BeforeDoorClosedEvent>(
+            OnOpenOnlyWhenUnanchoredBeforeClosed);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -171,9 +172,8 @@ public sealed class CMDoorSystem : EntitySystem
                 args.Cancelled = true;
         }
 
-        if (_rmcPower.IsPowered(ent))
+        if (_rmcPower.IsPowered(ent) && !HasComp<XenoComponent>(args.User))
             args.Cancelled = true;
-
     }
 
     private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)
@@ -182,11 +182,13 @@ public sealed class CMDoorSystem : EntitySystem
         {
             _audioSystem.Stop(ent.Comp.SoundEntity);
         }
+
         if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
         {
             if (HasComp<RMCPodDoorComponent>(ent.Owner))
             {
-                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)
+                    ?.Entity;
             }
             else
             {
@@ -205,24 +207,26 @@ public sealed class CMDoorSystem : EntitySystem
 
     private void OnDoorBoltStateChanged(Entity<LayerChangeOnWeldComponent> ent, ref DoorBoltsChangedEvent args)
     {
-        if(!TryComp(ent, out FixturesComponent? fixtureComp) || !TryComp(ent, out DoorComponent? door))
+        if (!TryComp(ent, out FixturesComponent? fixtureComp) || !TryComp(ent, out DoorComponent? door))
             return;
 
         foreach (var fixture in fixtureComp.Fixtures)
         {
             switch (args.BoltsDown)
             {
-                case true when fixture.Value.CollisionLayer == (int) ent.Comp.UnWeldedLayer && door.State == DoorState.Closed:
-                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.WeldedLayer);
+                case true when fixture.Value.CollisionLayer == (int)ent.Comp.UnWeldedLayer &&
+                               door.State == DoorState.Closed:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int)ent.Comp.WeldedLayer);
                     break;
-                case false when fixture.Value.CollisionLayer == (int) ent.Comp.WeldedLayer:
-                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.UnWeldedLayer);
+                case false when fixture.Value.CollisionLayer == (int)ent.Comp.WeldedLayer:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int)ent.Comp.UnWeldedLayer);
                     break;
             }
         }
     }
 
-    private void OnOpenOnlyWhenUnanchoredBeforeClosed(Entity<RMCOpenOnlyWhenUnanchoredComponent> ent, ref BeforeDoorClosedEvent args)
+    private void OnOpenOnlyWhenUnanchoredBeforeClosed(Entity<RMCOpenOnlyWhenUnanchoredComponent> ent,
+        ref BeforeDoorClosedEvent args)
     {
         if (TryComp(ent, out TransformComponent? xform) &&
             xform.Anchored)

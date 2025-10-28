@@ -9,7 +9,7 @@
   startingGear: RMCGearSurvivorCECResearcher
   accessGroups:
   - ColonistMedical
-  spawnMenuRoleName: CEC Researcher (Sorokyne Survivor)
+  spawnMenuRoleName: EC Researcher (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -46,7 +46,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorCECResearcher
-  name: cosmos exploration corps researcher spawn point
+  name: exploration corps researcher spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -58,7 +58,7 @@
 - type: entity
   parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetCECResearcher
-  name: cosmos exploration corps researcher preset
+  name: exploration corps researcher preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
