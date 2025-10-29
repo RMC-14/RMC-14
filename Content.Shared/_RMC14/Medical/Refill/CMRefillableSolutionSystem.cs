@@ -1,6 +1,9 @@
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -36,6 +39,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly RMCReagentSystem _reagent = default!;
 
     public override void Initialize()
     {
@@ -47,6 +52,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
 
+        SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, ExaminedEvent>(OnReagentCanisterPouchExamined);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionFromContainerOnStoreInserted);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, GetVerbsEvent<AlternativeVerb>>(OnRefillSolutionFromContainerOnStoreGetVerbs);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, ContainerFlushDoAfterEvent>(OnRefillSolutionFromContainerOnStoreFlush);
@@ -170,6 +176,52 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         var volume = refillable.Value.Comp.Solution.AvailableVolume;
         var drained = _solution.SplitSolution(drainable.Value, volume);
         _solution.AddSolution(refillable.Value, drained);
+    }
+
+    private void OnReagentCanisterPouchExamined(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        using (args.PushGroup(nameof(RMCRefillSolutionFromContainerOnStoreComponent)))
+        {
+            if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+                !container.ContainedEntities.TryFirstOrNull(out var contained))
+            {
+                args.PushMarkup(Loc.GetString("rmc-reagent-pouch-no-canister", ("target", ent.Owner)));
+                return;
+            }
+
+            var medicalSkill = new EntProtoId<SkillDefinitionComponent>("RMCSkillMedical");
+            if (!_skills.HasSkill(args.Examiner, medicalSkill, 1))
+            {
+                args.PushMarkup(Loc.GetString("rmc-reagent-pouch-unskilled"));
+                return;
+            }
+
+            if (!_solution.TryGetDrainableSolution(contained.Value, out _, out var sol) &&
+                !TryGetPressurizedSolution(contained.Value, out _, out sol))
+            {
+                args.PushMarkup(Loc.GetString("rmc-reagent-pouch-no-canister", ("target", ent.Owner)));
+                return;
+            }
+
+            if (sol.Contents.Count == 0)
+            {
+                args.PushMarkup(Loc.GetString("rmc-reagent-pouch-examine", ("target", ent.Owner), ("reagents", "No reagents")));
+                return;
+            }
+
+            var reagentList = new List<string>();
+            foreach (var reagent in sol.Contents)
+            {
+                var reagentProto = _reagent.Index(reagent.Reagent.Prototype);
+                reagentList.Add($"{reagentProto.LocalizedName}({reagent.Quantity.ToString()}u)");
+            }
+
+            var reagentsText = string.Join("; ", reagentList);
+            args.PushMarkup(Loc.GetString("rmc-reagent-pouch-examine", ("target", ent.Owner), ("reagents", reagentsText)));
+        }
     }
 
     public override void Update(float frameTime)
