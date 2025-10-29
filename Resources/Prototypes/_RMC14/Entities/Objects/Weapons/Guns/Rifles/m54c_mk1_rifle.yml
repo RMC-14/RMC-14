@@ -255,8 +255,13 @@
   name: "M54C MK1 AP extended magazine (10x24mm)"
   suffix: AP, Extended, 200
   components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1APExtended
   - type: BallisticAmmoProvider
-    capacity: 250
+    capacity: 300
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
     layers:
@@ -293,3 +298,6 @@
 
 - type: Tag
   id: RMCMagazineRifleM54CMK1HEAP
+
+- type: Tag
+  id: CMMagazineRifleM54CMK1APExtended
