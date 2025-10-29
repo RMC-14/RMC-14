@@ -68,6 +68,7 @@
   - type: Access
     groups:
     - ShipMasterAccess
+    - CMAccessHighCommand
 
 - type: playTimeTracker
   id: CMJobUNMCAdjutant
