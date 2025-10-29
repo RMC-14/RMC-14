@@ -102,6 +102,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLandingZonePrimaryReminderMinutes =
         CVarDef.Create("rmc.landing_zone_primary_reminder_minutes", 8f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCLandingZonePrimaryAutoEnabled =
+        CVarDef.Create("rmc.landing_zone_primary_auto_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCLandingZoneMiasmaEnabled =
         CVarDef.Create("rmc.landing_zone_miasma_enabled", false, CVar.REPLICATED | CVar.SERVER);
 
