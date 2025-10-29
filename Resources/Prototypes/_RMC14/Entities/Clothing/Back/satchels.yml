@@ -622,10 +622,12 @@
 
 - type: entity
   parent: RMCBackpackRTO
-  id: RMCBackpackRTOSPP # TODO RMC14 - Different Sprites
+  id: RMCBackpackRTOSPP
   name: SPP radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Socialist Progressive People's insignia.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/rto.rsi
   - type: Storage
     grid:
     - 0,0,19,1 # 20
