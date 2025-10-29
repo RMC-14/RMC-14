@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
@@ -10,7 +9,8 @@ using Robust.Shared.Audio.Systems;
 namespace Content.Shared._RMC14.BuriedItems;
 
 /// <summary>
-/// Handles digging up buried items with an entrenching tool.
+/// Shared system for handling buried items interactions.
+/// Manages digging up buried items with entrenching tools and controlling examine/storage access.
 /// </summary>
 public sealed class BuriedItemsSystem : EntitySystem
 {
@@ -21,6 +21,7 @@ public sealed class BuriedItemsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<BuriedItemsComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<BuriedItemsComponent, ExamineAttemptEvent>(OnExamineAttempt);
         SubscribeLocalEvent<BuriedItemsComponent, StorageInteractAttemptEvent>(OnStorageOpenAttempt);
@@ -31,7 +32,8 @@ public sealed class BuriedItemsSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (HasComp<GhostComponent>(args.Examiner))
+        // Only entities with SeeBuriedItemsComponent (admin ghosts) can examine buried items
+        if (HasComp<SeeBuriedItemsComponent>(args.Examiner))
             return;
 
         args.Cancel();
@@ -64,11 +66,11 @@ public sealed class BuriedItemsSystem : EntitySystem
 
     private void OnStorageOpenAttempt(Entity<BuriedItemsComponent> buried, ref StorageInteractAttemptEvent args)
     {
-        // Allow ghosts to open
-        if (HasComp<GhostComponent>(args.User))
+        // Allow ghosts to open and inspect contents
+        if (HasComp<SeeBuriedItemsComponent>(args.User))
             return;
-        
-        // Block everyone else
+
+        // Block everyone else from opening storage UI
         args.Cancelled = true;
     }
 }

@@ -10,7 +10,7 @@ using Robust.Shared.Random;
 namespace Content.Server._RMC14.BuriedItems;
 
 /// <summary>
-/// Server-side system for handling buried items spawn logic.
+/// Server-side system for handling buried items loot generation and dig completion.
 /// </summary>
 public sealed class BuriedItemsSystem : EntitySystem
 {
@@ -24,6 +24,7 @@ public sealed class BuriedItemsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<BuriedItemsComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BuriedItemsComponent, BuriedItemsDigDoAfterEvent>(OnDigDoAfter);
     }
@@ -53,8 +54,8 @@ public sealed class BuriedItemsSystem : EntitySystem
 
             // Pick a weighted random entry from this table
             var pickedEntry = _random.Pick(weightedEntries).Key;
-            
-            // Spawn the main item and try to insert it into storage
+
+            // Spawn the main item and insert it into storage
             var spawned = Spawn(pickedEntry.Id, Transform(buried).Coordinates);
             _storage.Insert(buried, spawned, out _, storageComp: null, playSound: false);
 
@@ -80,8 +81,8 @@ public sealed class BuriedItemsSystem : EntitySystem
         _audio.PlayPvs(buried.Comp.RevealSound, buried);
         _popup.PopupEntity(Loc.GetString("rmc-buried-items-dig-success", ("user", args.User)), buried, PopupType.Medium);
 
-        // Destroy the entity, which will trigger DestructionEventArgs.
-        // StorageComponent automatically empties its container when destroyed.
+        // Destroy the mound entity.
+        // StorageComponent automatically empties its container when destroyed, spilling contents to the ground.
         _destructible.DestroyEntity(buried);
     }
 }

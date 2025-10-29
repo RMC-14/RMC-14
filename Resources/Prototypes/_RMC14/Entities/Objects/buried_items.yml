@@ -8,8 +8,8 @@
   - type: Sprite
     noRot: true
     layers:
-    - sprite: Tiles/Misc/bananium.rsi
-      state: bananium
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: buried_mound
       color: "#FFFFFF00"
   - type: Clickable
   - type: InteractionOutline
@@ -77,9 +77,9 @@
         weight: 0.5
       - id: RMCBoxShotgunIncendiary
         weight: 1
-      - id: RMCBoxShotgunIncendiaryBuckshot
+      - id: CMMagazineRifleM54CMK1APExtended
         weight: 1
-      - id: RMCMagazineRifleM54CMK1HEAP
+      - id: RMCBoxShotgunIncendiaryBuckshot
         weight: 1
       - id: RMCWeaponRifleAK4047
         weight: 0.5

@@ -74,7 +74,7 @@ public partial struct BuriedItemsLootEntry
 
     /// <summary>
     /// Optional list of accompanying items to spawn alongside this item.
-    /// For example, a pistol magazine could spawn with the actual pistol.
+    /// For example, magazines could spawn with a weapon.
     /// </summary>
     [DataField]
     public List<EntProtoId>? Accompanying;
