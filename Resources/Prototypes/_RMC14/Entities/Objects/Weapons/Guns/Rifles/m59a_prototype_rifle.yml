@@ -75,6 +75,7 @@
           - CMMagazineRifleM54CMK1AP
           - RMCMagazineRifleM54CIncendiary
           - RMCMagazineRifleM54CMK1Incendiary
+          - CMMagazineRifleM54CMK1APExtended
         startingItem: CMMagazineRifleM54CMK1
   - type: GunDamageModifier
     multiplier: 1.1
