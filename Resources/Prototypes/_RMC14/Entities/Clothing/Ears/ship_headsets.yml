@@ -454,23 +454,6 @@
     - ProvostInspector
 
 - type: entity
-  parent: CMHeadsetHighCommand
-  id: RMCHeadsetHighCommandProvostLead
-  suffix: SL Tracker
-  components:
-  - type: GrantSquadLeaderTracker
-    defaultMode: ProvostTeamLeader
-    trackerModes:
-    - ProvostMarshal
-    - ProvostDeputyMarshal
-    - ProvostChiefInspector
-    - ProvostInspector
-    - ProvostTeamLeader
-    - ProvostAdvisor
-    - CommandingOfficer
-    - ExecutiveOfficer
-
-- type: entity
   parent: CMHeadsetSeniorCommand
   id: RMCHeadsetSEA
   name: marine senior enlisted advisor headset
