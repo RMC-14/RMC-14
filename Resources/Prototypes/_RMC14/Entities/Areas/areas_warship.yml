@@ -414,7 +414,7 @@
   - type: Sprite
     color: "#9E77FB"
   - type: Area
-    NoTunnel: true
+    noTunnel: true
 
 - type: entity
   parent: RMCAreaWarship
@@ -1278,9 +1278,9 @@
   name: ARES Base
   components:
   - type: Area
-    ResinAllowed: False
-    Unweedable: True
-    NoTunnel: True
+    resinAllowed: False
+    unweedable: True
+    noTunnel: True
 
 - type: entity
   parent: RMCAreaWarship
@@ -1424,8 +1424,8 @@
   name: Unknown
   components:
   - type: Area
-    NoTunnel: true
-    Unweedable: true
+    noTunnel: true
+    unweedable: true
   - type: Sprite
     color: "#FF0000"
 
