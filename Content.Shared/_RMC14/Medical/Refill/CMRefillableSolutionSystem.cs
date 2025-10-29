@@ -18,6 +18,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Shared.DoAfter;
@@ -212,14 +213,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
                 return;
             }
 
-            var reagentList = new List<string>();
-            foreach (var reagent in sol.Contents)
-            {
-                var reagentProto = _reagent.Index(reagent.Reagent.Prototype);
-                reagentList.Add($"{reagentProto.LocalizedName}({reagent.Quantity.ToString()}u)");
-            }
+            var reagentsText = string.Join("; ",
+                sol.Contents.Select(r => $"{_reagent.Index(r.Reagent.Prototype).LocalizedName}({r.Quantity.ToString()}u)"));
 
-            var reagentsText = string.Join("; ", reagentList);
             args.PushMarkup(Loc.GetString("rmc-reagent-pouch-examine", ("target", ent.Owner), ("reagents", reagentsText)));
         }
     }
