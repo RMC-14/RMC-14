@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Actions;
@@ -130,7 +131,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         SubscribeLocalEvent<BursterComponent, MoveInputEvent>(OnTryMove);
         IntializeAI();
-
     }
 
     private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
@@ -598,6 +598,23 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
 
+        if (_net.IsServer)
+        {
+            if (TryComp<ActorComponent>(parasite, out var parasiteActor))
+            {
+                var tracking = EnsureComp<ParasiteInfectionTrackingComponent>(victim);
+                tracking.OriginalParasiteUserId = parasiteActor.PlayerSession.UserId;
+                Dirty(victim, tracking);
+            }
+
+            if (TryComp<ActorComponent>(victim, out var victimActor))
+            {
+                var infected = EnsureComp<VictimInfectedComponent>(victim);
+                infected.VictimUserId = victimActor.PlayerSession.UserId;
+                Dirty(victim, infected);
+            }
+        }
+
         RemCompDeferred<ParasiteAIComponent>(parasite);
         var ev = new XenoParasiteInfectEvent(victim, parasite.Owner);
         RaiseLocalEvent(victim, ev, true);
@@ -689,6 +706,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 SetHive((infectedVictim, victimComp), _hive.GetHive(uid)?.Owner);
 
                 // TODO RMC14 also do damage to the parasite
+
+                if (_net.IsServer && TryComp<ParasiteInfectionTrackingComponent>(infectedVictim, out var tracking))
+                {
+                    victimComp.OriginalParasiteUserId = tracking.OriginalParasiteUserId;
+                    RemCompDeferred<ParasiteInfectionTrackingComponent>(infectedVictim);
+                }
+
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
@@ -1046,6 +1070,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         EnsureComp<BursterComponent>(spawned, out var burster);
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
+
+        var readyEv = new LarvaReadyToBurstEvent(victim.Owner, spawned);
+        RaiseLocalEvent(ref readyEv);
+
+        if (_net.IsServer && (victim.Comp.OriginalParasiteUserId != null || victim.Comp.VictimUserId != null))
+        {
+            var priorityEv = new AssignLarvaPriorityEvent(spawned, victim.Comp.OriginalParasiteUserId, victim.Comp.VictimUserId);
+            RaiseLocalEvent(ref priorityEv);
+        }
     }
 }
 
