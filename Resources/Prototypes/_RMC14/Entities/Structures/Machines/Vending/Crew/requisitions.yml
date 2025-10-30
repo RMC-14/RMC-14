@@ -463,12 +463,15 @@
       - id: RMCBoxMagazinePistolM13AP
         name: Magazine Box (M13 AP x 22)
         box: RMCMagazinePistolM13AP
+        boxAmount: 0
       - id: RMCBoxMagazinePistolM13ExtAP
         name: Magazine Box (Ext M13 AP x 14)
         box: RMCMagazinePistolM13ExtAP
+        boxAmount: 0
       - id: RMCBoxMagazinePistolM13DrumAP
         name: Magazine Box (Drum M13 AP x 14)
         box: RMCMagazinePistolM13DrumAP
+        boxAmount: 0
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -645,6 +648,8 @@
         amount: 5
       - id: RMCAttachmentLaserSight
         amount: 10
+      - id: RMCAttachmentMicroLaserSight
+        amount: 4
       - id: RMCAttachmentMiniFlamethrower
         amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
