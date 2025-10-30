@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Chat.Systems;
+using Content.Server.Power.Components;
+using Content.Server.PowerCell;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat.Prototypes;
@@ -18,6 +21,9 @@ public sealed class IVDripSystem : SharedIVDripSystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+
+    private readonly List<string> _reagentRemovalBuffer = new();
 
     private bool TryGetBloodstream(
         EntityUid attachedTo,
@@ -141,6 +147,84 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             Dirty(packId, packComp);
             UpdatePackVisuals((packId, packComp));
+        }
+
+        var dialysis = EntityQueryEnumerator<PortableDialysisComponent>();
+        while (dialysis.MoveNext(out var dialysisId, out var dialysisComp))
+        {
+            if (dialysisComp.AttachedTo is not { } attachedTo)
+                continue;
+
+            if (!InRange(dialysisId, attachedTo, dialysisComp.Range))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, true, false);
+                continue;
+            }
+
+            if (!HasComp<BloodstreamComponent>(attachedTo))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, false, false);
+                continue;
+            }
+
+            if (time < dialysisComp.TransferAt)
+            {
+                continue;
+            }
+
+            dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
+
+            if (!_powerCell.HasActivatableCharge(dialysisId))
+            {
+                DetachDialysis((dialysisId, dialysisComp), null, false, false);
+                continue;
+            }
+
+            if (!HasComp<BloodstreamComponent>(attachedTo))
+                continue;
+
+            if (_solutionContainer.TryGetSolution(attachedTo, "chemicals", out var chemicalSolEnt, out var chemicalSol))
+            {
+                _reagentRemovalBuffer.Clear();
+
+                foreach (var reagentQuantity in chemicalSol.Contents)
+                {
+                    if (!dialysisComp.TransferableReagents.Contains(reagentQuantity.Reagent.Prototype))
+                    {
+                        _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
+                    }
+                }
+
+                foreach (var reagent in _reagentRemovalBuffer)
+                {
+                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent, dialysisComp.TransferAmount);
+                }
+            }
+
+            if (TryComp(attachedTo, out BloodstreamComponent? bloodstreamComp) &&
+                _solutionContainer.ResolveSolution(attachedTo, bloodstreamComp.BloodSolutionName, ref bloodstreamComp.BloodSolution))
+            {
+                _solutionContainer.SplitSolution(bloodstreamComp.BloodSolution.Value, dialysisComp.BloodRemovalCost);
+            }
+
+            _powerCell.TryUseActivatableCharge(dialysisId);
+
+            Dirty(dialysisId, dialysisComp);
+            UpdateDialysisVisuals((dialysisId, dialysisComp));
+        }
+    }
+
+    protected override void UpdateDialysisCharge(Entity<PortableDialysisComponent> dialysis)
+    {
+        var ev = new GetChargeEvent();
+        RaiseLocalEvent(dialysis, ref ev);
+        if (ev.MaxCharge > 0)
+        {
+            dialysis.Comp.BatteryChargePercent = ev.CurrentCharge * 100f / ev.MaxCharge;
+        }
+        else
+        {
+            dialysis.Comp.BatteryChargePercent = 0f;
         }
     }
 }
