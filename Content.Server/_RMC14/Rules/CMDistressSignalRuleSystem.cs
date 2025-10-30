@@ -1833,23 +1833,42 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _currentVote = null;
             RMCPlanet picked;
 
-            var voteResult = planets.Zip(args.Votes);
-            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes.GetValueOrDefault(p.First.Proto.ID))).ToList();
-            var maxVotes = adjustedVotes.Max(v => v.Item2);
-            var winningMaps = adjustedVotes.Where(item => item.Item2 == maxVotes).Select(item => item.Item1).ToList();
+            var adjustedVotes = planets
+                .Zip(args.Votes, (planet, newVotes) => (
+                    planet,
+                    newVotes,
+                    totalVotes: newVotes + _carryoverVotes.GetValueOrDefault(planet.Proto.ID)
+                ))
+                .ToList();
+            var maxVotes = adjustedVotes.Max(v => v.totalVotes);
+            var winningMaps = adjustedVotes
+                .Where(v => v.totalVotes == maxVotes)
+                .Select(v => v.planet)
+                .ToList();
+
+            var msg = "Map Vote Results\n";
+            foreach (var result in adjustedVotes)
+            {
+                msg += $"  {result.planet.Proto.Name}: {result.totalVotes}"
+                       + (result.newVotes > 0 ? $" ({result.newVotes} new)\n" : "\n");
+            }
 
             if (winningMaps.Count > 1)
             {
+                msg += "Vote tied between:\n";
+                foreach (var map in winningMaps)
+                {
+                    msg += $"    {map.Proto.Name}\n";
+                }
                 picked = _random.Pick(winningMaps);
-                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
                 picked = winningMaps.First();
-                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
+            msg += $"Vote result: {picked.Proto.Name}";
+
+            _chatManager.DispatchServerAnnouncement(msg);
 
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {
