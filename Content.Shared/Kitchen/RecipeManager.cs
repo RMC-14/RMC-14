@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Kitchen

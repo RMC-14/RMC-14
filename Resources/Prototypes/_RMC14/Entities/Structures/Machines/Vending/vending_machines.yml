@@ -585,6 +585,7 @@
     ChanterelleSeeds: 2
     ChiliSeeds: 3
     CornSeeds: 3
+    CottonSeeds: 3
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
@@ -779,6 +780,8 @@
         amount: 24
       - id: FoodMeatBacon
         amount: 24
+      - id: FoodMeatSausage
+        amount: 18
       - id: DrinkMilkCarton
         amount: 24
       - id: DrinkSoyMilkCarton

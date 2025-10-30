@@ -37,14 +37,14 @@
   - !type:SequenceLength
     range:
       min: 2
-      max: 3
-  - !type:IngredientsWithTags # 1 meat cutlet
+      max: 2
+  - !type:IngredientsWithTags # 1 meat cutlet, cant do normal leeway because it conflicts with several other recipes.
     tags:
     - Cooked
     - Meat
     count:
       min: 1
-      max: 2
+      max: 1
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
