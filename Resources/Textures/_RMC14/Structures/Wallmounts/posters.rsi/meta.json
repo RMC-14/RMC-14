@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf, horizon poster by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -141,6 +141,9 @@
     },
     {
       "name": "falling_falcons"
+    },
+    {
+      "name": "horizon"
     }
   ]
 }

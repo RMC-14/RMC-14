@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-isr
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorISR
-  spawnMenuRoleName: Interstellar Sapient-Life Rights Observer (Survivor)
+  spawnMenuRoleName: Interstellar Life Rights Observer (Survivor)
   icon: "RMCJobIconBureauObserver"
   hasIcon: true
   ranks:
