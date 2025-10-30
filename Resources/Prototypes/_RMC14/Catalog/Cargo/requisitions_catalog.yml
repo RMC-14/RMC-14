@@ -71,6 +71,8 @@
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
+        crate: RMCCrateMagazineBGel
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFire
