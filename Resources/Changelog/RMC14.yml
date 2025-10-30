@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed deafness not hiding radio messages.
-    type: Fix
-  id: 1968
-  time: '2025-07-08T01:19:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6952
-- author: FeelFlows
-  changes:
-  - message: Added intel spawners to CORSAT.
-    type: Add
-  id: 1969
-  time: '2025-07-08T01:23:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6946
 - author: DoguhanOzgurAkca
   changes:
   - message: A new alert that shows area information
@@ -4716,5 +4702,20 @@
   id: 2468
   time: '2025-10-28T21:41:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7992
+- author: CyberTropic
+  changes:
+  - message: Changed Kutjevo Abandoned Construction area.
+    type: Tweak
+  id: 2469
+  time: '2025-10-30T11:43:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8237
+- author: J C Denton
+  changes:
+  - message: Fixed players becoming stuck in LV-624 engineering room due to platform
+      placement.
+    type: Fix
+  id: 2470
+  time: '2025-10-30T11:43:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8220
 Name: RMC14
 Order: -1
