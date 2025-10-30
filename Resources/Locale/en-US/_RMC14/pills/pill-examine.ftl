@@ -14,3 +14,8 @@ rmc-pill-contents-kelotane-dermaline = A Kelotane-Dermaline pill. Rapidly heals 
 rmc-pill-contents-russianred = A Russian Red pill. A very dangerous radiation-countering substance.
 rmc-pill-contents-antized = A pill of some unique medicine. You believe it can treat necrotic infections.
 rmc-pill-contents-imidazoline = An Imidazoline pill. Used to restore vision from non-congenital eye damage.
+
+rmc-reagent-pouch-no-canister = This {$target} has no container inside!
+rmc-reagent-pouch-unskilled = You don't know what's in it.
+rmc-reagent-pouch-examine-contains = Contains: {$reagents}
+rmc-reagent-pouch-examine-empty = The container is empty.
