@@ -775,6 +775,23 @@
     - Snout
 
 - type: entity
+  parent: RMCHeadRadiationHood
+  id: RMCHeadTychoRadiationHood
+  name: Tycho 4000 radiation protection hood
+  description: The burn-resistant hood for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and it's recommended you wear a rebreather or gas mask under it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: CMArmor
+    bio: 100
+    melee: 25
+    bullet: 15
+    explosionArmor: 10
+    #rad: 50
+
+- type: entity
   parent: CMHeadBeret
   id: RMCHeadWeYaPilotCap
   name: Weston-Yamada Pilot cap
