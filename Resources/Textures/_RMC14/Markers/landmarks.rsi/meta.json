@@ -508,6 +508,9 @@
     },
     {
       "name": "clf_spawn"
+    },
+    {
+      "name": "buried_mound"
     }
   ]
 }

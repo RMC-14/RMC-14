@@ -56,6 +56,17 @@
       amount: 3
 
 - type: entity
+  parent: CMPacketGrenadeHighExplosive
+  id: RCMPacketGrenadeHEFUFilled
+  name: HEFU grenade packet
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeIncendiaryBlast
+      amount: 3
+
+- type: entity
   parent: CMPacketBase
   id: CMPacketGrenadeFrag
   name: HEFA grenade packet

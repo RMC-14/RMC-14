@@ -436,6 +436,28 @@
     transferAmount: 60
 
 - type: entity
+  parent: RMCMedicAutoInjectorEZ1 
+  id: RMCMedicAutoInjectorStimulantsEZ1 # Just change with actual stims whenever those are added.
+  name: stimulants autoinjector (E-U)
+  description: A single-use EZ autoinjector containing a small dose of stimulants for immediate use.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 1
+        reagents:
+        - ReagentId: Stimulants
+          Quantity: 1
+  - type: Hypospray
+    transferAmount: 1
+    onlyAffectsMobs: false
+    injectOnly: true
+  - type: CMRefillableSolution
+    solution: pen
+    reagents:
+      Stimulants: 1
+
+- type: entity
   parent: RMCMedicAutoInjector15
   id: RMCMedicAutoInjectorBicaridine15
   suffix: Bicaridine

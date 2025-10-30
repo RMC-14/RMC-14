@@ -137,6 +137,47 @@
 
 - type: entity
   parent: CMSatchel
+  id: BaseScoutCloak
+  name: BaseScoutCloak
+  description: Base scout cloak with no armor requirements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15 slots
+  - type: ThermalCloak
+    opacity: 0.03 # Put to 0.03 for testing
+    restrictWeapons: true
+    whitelist: null
+    cloakedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Tail
+    - Snout # I don't know if this is hugely problematic but better safe than sorry
+    cloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+      params:
+        variation: 0.09
+    uncloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+      params:
+        variation: 0.09
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: BaseScoutCloak
+  id: RMCBackpackScoutNoRequirement
+  name: V78 thermal cloak
+  description: A thermal cloak modified to work without a supporting armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel
   description: A tough satchel with extra pockets.
