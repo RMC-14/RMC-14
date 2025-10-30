@@ -1866,7 +1866,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 picked = winningMaps.First();
             }
-            msg += $"Vote result: {picked.Proto.Name}";
+            msg += $"Winner: {picked.Proto.Name}";
 
             _chatManager.DispatchServerAnnouncement(msg);
 
