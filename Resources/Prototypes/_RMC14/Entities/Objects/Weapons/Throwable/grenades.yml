@@ -126,6 +126,59 @@
   - type: Ammo
 
 - type: entity
+  parent: 
+  - CMGrenadeBase
+  - RMCM40DPTags
+  id: RMCWhitePhosphorus
+  name: M40 HPDP Grenade
+  description: The M40 HPDP is a small, but powerful phosphorus grenade. It is set to detonate in 2 seconds. Sets ablaze whoever enters the phosphorus cloud with intense burning smoke. 
+  components:
+  - type: OnUseTimerTrigger
+    delay: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hpdp.rsi
+  - type: SpawnOnTrigger
+    proto: RMCSmokeWhitePhos
+  - type: CMVocalizeTrigger
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeRiot
+  - type: Ammo
+
+- type: entity
+  parent: RMCSmoke
+  id: RMCSmokeWhitePhos
+  components:
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#FFFFFF"
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 3
+  - type: RMCIgniteOnCollide
+  - type: DeleteOnExplosion
+
+- type: entity
   parent: Smoke
   id: RMCSmokeExplosionProof
   components:
@@ -434,3 +487,9 @@
 
 - type: Tag
   id: RMCGrenadeIED
+
+- type: Tag
+  id: RMCWhitePhosphorus
+
+- type: Tag
+  id: RMCSmokeWhitePhos
