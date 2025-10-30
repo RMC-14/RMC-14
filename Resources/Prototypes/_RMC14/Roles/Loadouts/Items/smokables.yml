@@ -132,3 +132,44 @@
     back:
     - RMCMatchboxFull
 
+- type: loadout
+  id: RMCCigarettePackLingxiaoGolds
+  cost: 6
+  storage:
+    back:
+    - RMCCigarettePackLingxiaoGolds
+
+- type: loadout
+  id: RMCMonteComunePack
+  cost: 6
+  storage:
+    back:
+    - RMCMonteComunePack
+
+- type: loadout
+  id: RMCMontecomuneCigar
+  cost: 2
+  storage:
+    back:
+    - RMCMontecomuneCigar
+
+- type: loadout
+  id: RMCLighterSPP
+  cost: 2
+  storage:
+    back:
+    - RMCLighterSPP
+
+- type: loadout
+  id: RMCCigarettePackTarasClassic
+  cost: 2
+  storage:
+    back:
+    - RMCCigarettePackTarasClassic
+
+- type: loadout
+  id: RMCCigarettePackBoheBlueMenthols
+  cost: 2
+  storage:
+    back:
+    - RMCCigarettePackBoheBlueMenthols
