@@ -183,6 +183,7 @@
     name: rmc-xeno-charger-name
     description: rmc-xeno-charger-description
     popup: rmc-xeno-charger-popup
+    strainOf: RMCXenoCrusher
   - type: CombatMode
     toggleMouseRotator: false
   - type: XenoTumble
