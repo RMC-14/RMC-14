@@ -560,6 +560,26 @@
 
 - type: entity
   parent: RMCGunCaseBase
+  id: RMCM59ACaseAP
+  name: M59A prototype rifle AP case
+  description: A gun case containing the M59A prototype rifle loaded with AP rounds. Experimental and back issue only, built to outperform the standard M54C. While this case contains MK1 rifle magazines, the weapon also supports MK2 rifle magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM59A
+      - CMMagazineRifleM54CMK1AP
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleM59A
+    - id: CMMagazineRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCGunCaseBase
   id: RMCM54CMK2Case
   name: M54C assault rifle MK2 case
   description: A gun case containing the M54C assault rifle MK2.
