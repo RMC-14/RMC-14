@@ -276,8 +276,8 @@
         amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
-      #- id: Welding Goggles
-      #  amount: 3
+      - id: RMCWeldingGoggles
+        amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
       - id: RMCPowerCellHigh
