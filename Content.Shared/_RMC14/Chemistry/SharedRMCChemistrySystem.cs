@@ -341,7 +341,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             Dirty(storageId, storage);
 
             var storageTransform = Transform(storageId);
-            
+
             _dispensers.Clear();
             var dispensers = EntityQueryEnumerator<RMCChemicalDispenserComponent>();
             while (dispensers.MoveNext(out var dispenserId, out var dispenser))
