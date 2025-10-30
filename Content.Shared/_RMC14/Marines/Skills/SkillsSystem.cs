@@ -240,7 +240,6 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
-        // Xenos cannot examine reagent containers
         if (HasComp<XenoComponent>(args.Examiner))
             return;
 
