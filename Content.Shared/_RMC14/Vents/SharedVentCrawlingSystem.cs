@@ -21,6 +21,11 @@ using Content.Shared.Coordinates;
 using Content.Shared.Actions.Events;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
+using Content.Shared._RMC14.Storage.Containers;
+using Content.Shared.Hands;
+using Content.Shared.Item;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -38,6 +43,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
 
     private bool _relativeMovement;
     public override void Initialize()
@@ -50,13 +56,15 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
         SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
-        SubscribeLocalEvent<VentCrawlableComponent, DestructionEventArgs>(OnVentDuctDestroyed);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
+        SubscribeLocalEvent<VentCrawlableComponent, RMCContainerDestructionEmptyEvent>(OnVentContainerDeletionEmpty);
 
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentRemove>(OnVentCrawlingEnd);
-        SubscribeLocalEvent<VentCrawlingComponent, EntGotRemovedFromContainerMessage>(OnVentCrawlingRemove);
+        SubscribeLocalEvent<VentCrawlingComponent, DropAttemptEvent>(OnVentCrawlingCancel);
+        SubscribeLocalEvent<VentCrawlingComponent, PickupAttemptEvent>(OnVentCrawlingCancel);
+        SubscribeLocalEvent<VentCrawlingComponent, UseAttemptEvent>(OnVentCrawlingCancel);
 
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
@@ -97,20 +105,28 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         Dirty(vent);
     }
 
-    private void OnVentDuctDestroyed(Entity<VentCrawlableComponent> vent, ref DestructionEventArgs args)
-    {
-        if (!TryGetVent(vent, out var comp, out var container))
-            return;
-
-        _container.EmptyContainer(container, true);
-    }
-
     private void OnVentAnchorChanged(Entity<VentCrawlableComponent> vent, ref AnchorStateChangedEvent args)
     {
-        if (!TryGetVent(vent, out var comp, out var container))
+        EmptyVent(vent);
+    }
+
+    private void OnVentContainerDeletionEmpty(Entity<VentCrawlableComponent> vent, ref RMCContainerDestructionEmptyEvent args)
+    {
+        EmptyVent(vent);
+    }
+
+    private void EmptyVent(EntityUid vent)
+    {
+        if (!TryComp<VentCrawlableComponent>(vent, out var ventComp))
             return;
 
-        _container.EmptyContainer(container, true);
+        var container = _container.EnsureContainer<Container>(vent, ventComp.ContainerId);
+
+        var ents = _container.EmptyContainer(container, true);
+        foreach (var en in ents)
+        {
+            RemoveVentCrawling(en);
+        }
     }
 
     private bool TryGetVent(EntityUid vent, [NotNullWhen(true)] out VentCrawlableComponent? ventComp, [NotNullWhen(true)] out Container? container)
@@ -233,17 +249,19 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         _container.Remove(args.User, container);
         _audio.PlayPredicted(vent.Comp.ExitSound, vent, args.User);
 
+        RemoveVentCrawling(args.User);
+
         _transform.AttachToGridOrMap(args.User);
     }
 
-    private void OnVentCrawlingRemove(Entity<VentCrawlingComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void RemoveVentCrawling(EntityUid ent)
     {
         RemCompDeferred<VentCrawlingComponent>(ent);
         if (TryComp<RMCTrayCrawlerComponent>(ent, out var scanner))
         {
             scanner.Enabled = false;
-            Dirty(ent.Owner, scanner);
-            _eye.RefreshVisibilityMask(ent.Owner);
+            Dirty(ent, scanner);
+            _eye.RefreshVisibilityMask(ent);
             RemComp<VentSightComponent>(ent);
         }
     }
@@ -307,6 +325,11 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         }
     }
 
+    private void OnVentCrawlingCancel<T>(Entity<VentCrawlingComponent> ent, ref T args) where T : CancellableEntityEventArgs
+    {
+        args.Cancel();
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -319,6 +342,9 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                 continue;
 
             if (crawling.TravelDirection == null)
+                continue;
+
+            if (!_mob.IsAlive(uid))
                 continue;
 
             if (!_container.TryGetContainingContainer(uid, out var container) || !TryComp<VentCrawlableComponent>(container.Owner, out var vent))
@@ -370,7 +396,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                 }
 
                 if (_rmcmap.IsTileBlocked(container.Owner.ToCoordinates()))
-                    return;
+                    continue;
 
                 var ev = new VentExitDoafterEvent();
 
@@ -379,7 +405,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                     BreakOnMove = true,
                     DuplicateCondition = DuplicateConditions.SameEvent,
                     CancelDuplicate = false,
-                    BlockDuplicate = true
+                    BlockDuplicate = true,
+                    RequireCanInteract = false
                 };
 
                 _doafter.TryStartDoAfter(doafter);

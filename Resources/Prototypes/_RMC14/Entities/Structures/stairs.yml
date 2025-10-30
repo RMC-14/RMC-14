@@ -12,6 +12,12 @@
     sprite: _RMC14/Structures/stairs.rsi
     state: p_stair_full
     drawdepth: FloorTiles
+  - type: Tag
+    tags:
+    - RMCStairs
+
+- type: Tag
+  id: RMCStairs
 
 - type: entity
   parent: RMCStairs
@@ -230,6 +236,22 @@
   - type: Sprite
     state: rampbottom
     color: "#a6aeab"
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairs
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: rampbottom
+
+- type: entity
+  parent: RMCStairs
+  id: RMCAlmayerStairsTop
+  suffix: Almayer
+  components:
+  - type: Sprite
+    state: ramptop
 
 - type: entity
   parent: RMCStairs

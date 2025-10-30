@@ -1,0 +1,92 @@
+- type: decal
+  id: RMCDecalSiding1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding1
+
+- type: decal
+  id: RMCDecalSiding2
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding2
+
+- type: decal
+  id: RMCDecalSiding4
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding4
+
+- type: decal
+  id: RMCDecalSiding5
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding5
+
+- type: decal
+  id: RMCDecalSiding6
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding6
+
+- type: decal
+  id: RMCDecalSiding7
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding7
+
+- type: decal
+  id: RMCDecalSiding8
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding8
+
+- type: decal
+  id: RMCDecalSiding9
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding9
+
+- type: decal
+  id: RMCDecalSiding10
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding10
+
+- type: decal
+  id: RMCDecalSiding11
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding11
+
+- type: decal
+  id: RMCDecalSiding13
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding13
+
+- type: decal
+  id: RMCDecalSiding14
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding14
+
+- type: decal
+  id: RMCDecalSiding15
+  parent: RMCDecalSiding1
+  sprite:
+    sprite: _RMC14/Decals/siding.rsi
+    state: siding15

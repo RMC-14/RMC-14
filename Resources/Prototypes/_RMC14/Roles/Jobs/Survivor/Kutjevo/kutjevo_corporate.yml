@@ -1,0 +1,55 @@
+﻿- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorKutjevoCorporate
+  name: rmc-job-name-survivor-kutjevo-corporate
+  description: cm-job-description-survivor
+  spawnMenuRoleName: Kutjevo Corporation Liaison (Kutjevo Survivor)
+  startingGear: RMCGearSurvivorKutjevoCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorKutjevoCorporate
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    mask: RMCMaskKutjevoRespirator
+    shoes: RMCBootsCorporate
+    jumpsuit: RMCJumpsuitLiaisonOrange
+    gloves: RMCHandsBlack
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoCorporate
+  name: survivor kutjevo liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoCorporate
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetKutjevoCorporate
+  name: kutjevo liaison preset
+  categories: [ HideSpawnMenu ]

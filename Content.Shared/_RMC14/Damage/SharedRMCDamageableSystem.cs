@@ -125,6 +125,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnActiveDamageOnPulledMobState);
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, XenoTargetDevouredAttemptEvent>(OnActiveDamageOnPulledDevoured);
 
+        SubscribeLocalEvent<DamageReceivedModifierWhenUnanchoredComponent, DamageModifyEvent>(
+            OnDamageReceivedModifierWhenUnanchoredModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
+            ]
+        );
+
         _bruteTypes.Clear();
         _burnTypes.Clear();
 
@@ -322,7 +331,23 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    public DamageSpecifier DistributeDamage(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    private void OnDamageReceivedModifierWhenUnanchoredModify(Entity<DamageReceivedModifierWhenUnanchoredComponent> ent, ref DamageModifyEvent args)
+    {
+        if (!TryComp(ent, out TransformComponent? xform) ||
+            xform.Anchored)
+        {
+            return;
+        }
+
+        var total = args.Damage.GetTotal();
+        if (total <= FixedPoint2.Zero)
+            return;
+
+        args.Damage *= ent.Comp.Multiplier;
+    }
+
+    /// <remarks>Do not use when <see cref="equal"/> already has damage types from <see cref="groupId"/></remarks>
+    public DamageSpecifier DistributeDamageCached(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
         equal ??= new DamageSpecifier();
         if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
@@ -371,26 +396,37 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return equal;
     }
 
-    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
+    public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount)
     {
         if (amount > FixedPoint2.Zero)
             amount = -amount;
 
-        return DistributeDamage(damageable, groupId, amount, equal);
+        return DistributeDamageCached(damageable, groupId, amount);
     }
 
-    public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    /// <remarks>Do not use when <see cref="equal"/> already has damage types from <see cref="groupId"/></remarks>
+    public DamageSpecifier DistributeHealingCached(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
     {
+        if (amount > FixedPoint2.Zero)
+            amount = -amount;
+
+        return DistributeDamageCached(damageable, groupId, amount, equal);
+    }
+
+    public DamageSpecifier DistributeTypes(Entity<DamageableComponent?> damageable, FixedPoint2 amount)
+    {
+        var equal = new DamageSpecifier();
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
-            equal = DistributeDamage(damageable, group.ID, amount, equal);
+            equal = DistributeDamageCached(damageable, group.ID, amount, equal);
         }
 
-        return equal ?? new DamageSpecifier();
+        return equal;
     }
 
-    public DamageSpecifier DistributeTypesTotal(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    public DamageSpecifier DistributeTypesTotal(Entity<DamageableComponent?> damageable, FixedPoint2 amount)
     {
+        var equal = new DamageSpecifier();
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
             var total = equal?.GetTotal() ?? FixedPoint2.Zero;
@@ -400,7 +436,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 break;
             }
 
-            equal = DistributeDamage(damageable, group.ID, left, equal);
+            equal = DistributeDamageCached(damageable, group.ID, left, equal);
             amount = left;
         }
 

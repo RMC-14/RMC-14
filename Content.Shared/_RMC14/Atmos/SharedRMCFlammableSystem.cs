@@ -81,7 +81,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private EntityQuery<RMCIgniteOnCollideComponent> _igniteOnCollideQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<TileFireComponent> _tileFireQuery;
-    private EntityQuery<RMCImmuneToIgnitionComponent> _immuneToIgnitionQuery;
     private EntityQuery<InventoryComponent> _inventoryQuery;
 
     public override void Initialize()
@@ -92,7 +91,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         _igniteOnCollideQuery = GetEntityQuery<RMCIgniteOnCollideComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
         _tileFireQuery = GetEntityQuery<TileFireComponent>();
-        _immuneToIgnitionQuery = GetEntityQuery<RMCImmuneToIgnitionComponent>();
         _inventoryQuery = GetEntityQuery<InventoryComponent>();
 
         SubscribeLocalEvent<IgniteOnProjectileHitComponent, ProjectileHitEvent>(OnIgniteOnProjectileHit);
@@ -130,7 +128,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
     {
-        if (!CanBeIgnited(args.Target, ent))
+        if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity))
             return;
 
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
@@ -301,7 +299,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
     {
-        if (!CanBeIgnited(args.Target, ent, true)) // Direct hits can ignore pyro/firesuit ignition resistance
+        if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity, true)) // Direct hits can ignore pyro/firesuit ignition resistance
             return;
 
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
@@ -446,6 +444,28 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SpawnFires(spawn, center, range, chain, intensity, duration);
     }
 
+    public void SpawnFireLines(EntProtoId spawn, EntityCoordinates center, int cardinalRange, int ordinalRange, int? intensity = null, int? duration = null)
+    {
+        var chain = _onCollide.SpawnChain();
+        var spawned = new HashSet<EntityCoordinates>();
+        foreach (var direction in DirectionExtensions.AllDirections)
+        {
+            var range = _rmcMap.CardinalDirections.Contains(direction) ? cardinalRange : ordinalRange;
+            var nextRange = range;
+            var target = center.Offset(direction);
+            while (nextRange > 0)
+            {
+                if (!spawned.Add(target))
+                    continue;
+
+                nextRange = SpawnFire(target, spawn, chain, nextRange, intensity, duration, out var cont);
+                target = target.Offset(direction);
+                if (cont)
+                    break;
+            }
+        }
+    }
+
     public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration, out bool cont)
     {
         cont = false;
@@ -548,7 +568,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The entity creating the fire</param>
     /// <param name="target">The tile the fire is being spawned from</param>
-    /// <param name="direction">The direction the entity is facing</param>
     /// <param name="initialShot">If </param>
     /// <returns>Returns a list of potential targets for a fire to be spawned on</returns>
     private HashSet<EntityCoordinates> AddTarget(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates target, bool initialShot)
@@ -714,7 +733,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (checkIgnited && wasOnFire)
             return;
 
-        if (!CanBeIgnited(other, ent))
+        if (!CanBeIgnited(other, ent, ent.Comp.Intensity))
             return;
 
         // Check RMCImmuneToFireTileDamageComponent for ignition immunity
@@ -783,7 +802,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         // Check for ignition immunity before igniting
-        var canIgnite = CanBeIgnited(uid, fireEntity);
+        var canIgnite = CanBeIgnited(uid, fireEntity, ignite.Intensity);
 
         if (canIgnite)
         {
@@ -975,13 +994,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// </summary>
     /// <param name="target">The entity that might be ignited</param>
     /// <param name="fireSource">The fire source attempting to ignite the target</param>
+    /// <param name="intensity">How powerful the fire is</param>
     /// <returns>True if the target can be ignited, false if immunity blocks it</returns>
-    public bool CanBeIgnited(EntityUid target, EntityUid fireSource, bool directHit = false)
+    public bool CanBeIgnited(EntityUid target, EntityUid fireSource, int intensity, bool directHit = false)
     {
-        if (!_igniteOnCollideQuery.TryComp(fireSource, out var collide))
-            return true;
-
-        var ev = new GetIgnitionImmunityEvent(collide.Intensity, directHit);
+        var ev = new GetIgnitionImmunityEvent(intensity, directHit);
         RaiseLocalEvent(target, ref ev);
 
         if (_inventoryQuery.TryComp(target, out var inv))

@@ -36,6 +36,197 @@
     idleLoad: 2
     activeLoad: 4
     channel: Environment
+  - type: RMCMesonsNonviewable
+
+# Shipside Buttons
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonShip
+  name: button
+  description: A basic button that does basic things.
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonMP
+  name: button
+  description: A button locked to Military Police.
+  suffix: Locked, Brig & Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ], [ "CMAccessBrig" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonCommand
+  name: button
+  description: A basic button locked to Command.
+  suffix: Locked, Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonSeniorCommand
+  name: button
+  description: A basic button locked to Senior Command.
+  suffix: Locked, Senior Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSeniorCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonPilot
+  name: button
+  description: A basic button locked to pilots and crew chiefs.
+  suffix: Locked, Dropship & Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ], ["CMAccessDropship"] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonRequisitions
+  name: button
+  description: A basic button locked to requisitions staff.
+  suffix: Locked, Requisitions & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonKitchen
+  name: button
+  description: A basic button locked to kitchen staff.
+  suffix: Locked, Kitchen & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessKitchen" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonEngineering
+  name: button
+  description: A basic button locked to engineering staff.
+  suffix: Locked, Engineering & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonVehicle
+  name: button
+  description: A basic button locked to Vehicle Crewmen.
+  suffix: Locked, Vehicle Crewmen & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonOrdnance
+  name: button
+  description: A basic button locked to Ordnance Techs.
+  suffix: Locked, Ordnance & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessOT" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonMedical
+  name: button
+  description: A basic button locked to medical staff.
+  suffix: Locked, Medical & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonChemistry
+  name: button
+  description: A basic button locked to chemistry.
+  suffix: Locked, Chemistry & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessChemistry" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonResearch
+  name: button
+  description: A basic button locked to research staff.
+  suffix: Locked, Research & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessResearch" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonSynth
+  name: button
+  description: A basic button locked to Synthetics.
+  suffix: Locked, Synthetic
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSynth" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonCMO
+  name: button
+  description: A basic button locked to the Chief Medical Officer.
+  suffix: Locked, CMO
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCMO" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonCE
+  name: button
+  description: A basic button locked to the Chief Engineer.
+  suffix: Locked, CE
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCE" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonCO
+  name: button
+  description: A basic button locked to the Commanding Officer.
+  suffix: Locked, CO
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCO" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonSEA
+  name: button
+  description: A basic button locked to Senior Enlisted Advisors.
+  suffix: Locked, SEA
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessSEA" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonArmory
+  name: button
+  description: A basic button locked to Armory.
+  suffix: Locked, Armory
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessArmory" ] ]
+
+# \Shipside Buttons
 
 - type: entity
   parent: RMCPodDoorButton
@@ -48,6 +239,196 @@
     layers:
     - state: doorctrl
       map: [ "enum.RMCPodDoorButtonLayers.Animation" ]
+
+# Shipside Buttons
+
+- type: entity
+  parent: RMCPodDoorButtonBigRed
+  id: RMCPodDoorButtonBigRedShip
+  name: button
+  description: A basic button that does basic things.
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedMP
+  name: button
+  description: A button locked to Military Police.
+  suffix: Locked, Brig & Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ], [ "CMAccessBrig" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedCommand
+  name: button
+  description: A basic button locked to Command.
+  suffix: Locked, Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedSeniorCommand
+  name: button
+  description: A basic button locked to Senior Command.
+  suffix: Locked, Senior Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSeniorCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedPilot
+  name: button
+  description: A basic button locked to pilots and crew chiefs.
+  suffix: Locked, Dropship & Command
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ], ["CMAccessDropship"] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedRequisitions
+  name: button
+  description: A basic button locked to requisitions staff.
+  suffix: Locked, Requisitions & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedKitchen
+  name: button
+  description: A basic button locked to kitchen staff.
+  suffix: Locked, Kitchen & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessKitchen" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedEngineering
+  name: button
+  description: A basic button locked to engineering staff.
+  suffix: Locked, Engineering & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedVehicle
+  name: button
+  description: A basic button locked to Vehicle Crewmen.
+  suffix: Locked, Vehicle Crewmen & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedOrdnance
+  name: button
+  description: A basic button locked to Ordnance Techs.
+  suffix: Locked, Ordnance & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessOT" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedMedical
+  name: button
+  description: A basic button locked to medical staff.
+  suffix: Locked, Medical & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedChemistry
+  name: button
+  description: A basic button locked to chemistry.
+  suffix: Locked, Chemistry & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessChemistry" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedResearch
+  name: button
+  description: A basic button locked to research staff.
+  suffix: Locked, Research & Command
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessResearch" ], [ "RMCAccessCommand" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedSynth
+  name: button
+  description: A basic button locked to Synthetics.
+  suffix: Locked, Synthetic
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSynth" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedCMO
+  name: button
+  description: A basic button locked to the Chief Medical Officer.
+  suffix: Locked, CMO
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCMO" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedCE
+  name: button
+  description: A basic button locked to the Chief Engineer.
+  suffix: Locked, CE
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCE" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedCO
+  name: button
+  description: A basic button locked to the Commanding Officer.
+  suffix: Locked, CO
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCO" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedSEA
+  name: button
+  description: A basic button locked to Senior Enlisted Advisors.
+  suffix: Locked, SEA
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessSEA" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonBigRedShip
+  id: RMCPodDoorButtonBigRedArmory
+  name: button
+  description: A basic button locked to Armory.
+  suffix: Locked, Armory
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessArmory" ] ]
+
+# \Shipside Buttons
 
 - type: entity
   parent: RMCPodDoorButton
