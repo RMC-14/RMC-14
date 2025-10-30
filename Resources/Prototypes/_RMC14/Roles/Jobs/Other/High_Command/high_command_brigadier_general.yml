@@ -80,6 +80,7 @@
     - CMAccessHighCommand
     - CMAccessXenoQueen
     - CMAccessXeno
+    - CMAccessHighCommand
 
 - type: playTimeTracker
   id: CMJobUNMCBrigadierGeneral
