@@ -11,5 +11,5 @@ rmc-refillsolution-flush-start = You hold down the emergency flush button. Wait 
 
 rmc-reagent-pouch-no-canister = This {$target} has no container inside!
 rmc-reagent-pouch-unskilled = You don't know what's in it.
-rmc-reagent-pouch-examine-contains = Contains: {$reagents}
-rmc-reagent-pouch-examine-empty = The container is empty.
+rmc-reagent-pouch-examine-contains = This {$target} contains: {$reagents}
+rmc-reagent-pouch-examine-empty = This {$target} contains: No reagents

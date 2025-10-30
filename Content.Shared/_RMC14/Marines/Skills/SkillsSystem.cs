@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -239,6 +240,10 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
+        // Xenos cannot examine reagent containers
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
         if (!HasAllSkills(args.Examiner, ent.Comp.Skills))
         {
             if (ent.Comp.UnskilledExamine != null)
@@ -289,7 +294,7 @@ public sealed class SkillsSystem : EntitySystem
         {
             using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
             {
-                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone));
+                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone, ("target", ent.Owner)));
             }
 
             return;
@@ -300,7 +305,7 @@ public sealed class SkillsSystem : EntitySystem
 
         using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
         {
-            args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineContains, ("reagents", reagentsText)));
+            args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineContains, ("target", ent.Owner), ("reagents", reagentsText)));
         }
     }
 
