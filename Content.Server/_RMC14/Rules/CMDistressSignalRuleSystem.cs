@@ -337,7 +337,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!_playTime.IsAllowed(player, role))
                     return false;
 
-                return true;
+                 // Check if player has antag preference matching this job
+                 if (_prototypes.TryIndex(role, out var rolePrototype) &&
+                     rolePrototype.AntagRole != null &&
+                     ev.Profiles.TryGetValue(id, out var profile) &&
+                     !profile.AntagPreferences.Contains(rolePrototype.AntagRole))
+                 {
+                     return false;
+                 }
+
+                 return true;
             }
 
             NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)

@@ -150,7 +150,7 @@ public sealed class SurvivorSystem : EntitySystem
 
     public bool TryInsertItemInStorage(EntityUid mob, EntityUid toInsert)
     {
-        var slots = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK);
+        var slots = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK | SlotFlags.POCKET);
         while (slots.MoveNext(out var slot))
         {
             if (slot.ContainedEntity is not { } storageItem ||
