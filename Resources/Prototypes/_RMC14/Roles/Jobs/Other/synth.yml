@@ -66,6 +66,7 @@
       damage:
         types:
           Blunt: 35
+    - type: RMCAllowSuitStorage
     - type: Synth
       welderDamageToRepair:
         types:
