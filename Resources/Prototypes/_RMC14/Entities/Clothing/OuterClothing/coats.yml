@@ -501,6 +501,50 @@
   - type: CMArmor
     melee: 10
 
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketStandard
+  name: Standard commanding officer standard issue jacket
+  description: A jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketPurple
+  name: Purple commanding officer standard issue jacket
+  description: A purple jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGreen
+  name: Green commanding officer standard issue jacket
+  description: A green jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGrey
+  name: Grey commanding officer standard issue jacket
+  description: A grey jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+
 # Executive Officer
 
 - type: entity
