@@ -580,7 +580,6 @@ public sealed partial class TacticalMapControl : TextureRect
 
             handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
             handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
-            Logger.Info(blip.Color.ToString());
 
             if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
