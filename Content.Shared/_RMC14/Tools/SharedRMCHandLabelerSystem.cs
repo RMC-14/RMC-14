@@ -38,6 +38,13 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         ent.Comp.Mode = args.Activated;
         Dirty(ent);
 
+        // When turning off, clear the assigned label so base system knows we're in removal mode
+        if (!args.Activated && TryComp<HandLabelerComponent>(ent, out var labeler))
+        {
+            labeler.AssignedLabel = string.Empty;
+            Dirty(ent, labeler);
+        }
+
         var message = args.Activated
             ? Loc.GetString("rmc-hand-labeler-turned-on")
             : Loc.GetString("rmc-hand-labeler-turned-off");
@@ -56,7 +63,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
         var target = args.Target.Value;
 
-        if (!ent.Comp.Mode) // If toggled off, can only remove labels
+        if (!ent.Comp.Mode)
         {
             if (!TryComp<LabelComponent>(target, out var labelComp) || string.IsNullOrEmpty(labelComp.CurrentLabel))
             {
@@ -67,7 +74,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
             if (ent.Comp.RemoveLabelSound != null)
                 _audio.PlayPredicted(ent.Comp.RemoveLabelSound, target, args.User);
-            // Let base system handle the actual removal
+            // Let base system handle removal
             return;
         }
 
