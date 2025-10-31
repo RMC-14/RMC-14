@@ -191,7 +191,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -413,7 +413,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -660,7 +660,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -1078,7 +1078,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
