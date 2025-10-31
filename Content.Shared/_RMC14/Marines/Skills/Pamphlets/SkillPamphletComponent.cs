@@ -52,4 +52,7 @@ public sealed partial class SkillPamphletComponent : Component
     public readonly record struct JobWhitelist(LocId Popup, ProtoId<JobPrototype> JobProto);
 
     public bool GaveSkill;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassSkill = false;
 }
