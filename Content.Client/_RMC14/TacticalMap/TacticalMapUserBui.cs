@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._RMC14.UserInterface;
+using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
@@ -12,6 +13,7 @@ namespace Content.Client._RMC14.TacticalMap;
 [UsedImplicitly]
 public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutBui<TacticalMapWindow>(owner, uiKey)
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
     private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     protected override TacticalMapWindow? Window { get; set; }
@@ -159,25 +161,39 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             return;
         }
 
-        var blips = new TacticalMapBlip[user.MarineBlips.Count + user.XenoBlips.Count + user.XenoStructureBlips.Count];
+        var totalCount = user.MarineBlips.Count + user.XenoBlips.Count + user.XenoStructureBlips.Count;
+        var blips = new TacticalMapBlip[totalCount];
+        var entityIds = new int[totalCount];
         var i = 0;
 
-        foreach (var blip in user.MarineBlips.Values)
+        foreach (var (entityId, blip) in user.MarineBlips)
         {
-            blips[i++] = blip;
+            blips[i] = blip;
+            entityIds[i] = entityId;
+            i++;
         }
 
-        foreach (var blip in user.XenoBlips.Values)
+        foreach (var (entityId, blip) in user.XenoBlips)
         {
-            blips[i++] = blip;
+            blips[i] = blip;
+            entityIds[i] = entityId;
+            i++;
         }
 
-        foreach (var blip in user.XenoStructureBlips.Values)
+        foreach (var (entityId, blip) in user.XenoStructureBlips)
         {
-            blips[i++] = blip;
+            blips[i] = blip;
+            entityIds[i] = entityId;
+            i++;
         }
 
-        Window.Wrapper.UpdateBlips(blips);
+        Window.Wrapper.UpdateBlips(blips, entityIds);
+
+        int? localPlayerId = _player.LocalEntity != null
+            ? (int?)EntMan.GetNetEntity(_player.LocalEntity.Value)
+            : null;
+        Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
+        Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
     }
 
     private void UpdateLabels()
