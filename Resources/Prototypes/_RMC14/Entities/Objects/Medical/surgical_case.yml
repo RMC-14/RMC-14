@@ -58,3 +58,27 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
+
+- type: entity
+  parent: CMSurgicalCase
+  id: RMCSurgicalCaseRCM
+  name: RCM surgical case
+  description: An improved surgical case used by the Royal Crown Marines, capable of fitting more tools.
+  suffix: RCM
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 5 slots
+
+- type: entity
+  parent: RMCSurgicalCaseRCM
+  id: RMCSurgicalCaseRCMFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
+    - id: CMSurgicalLine
+    - id: CMSynthGraft

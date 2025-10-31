@@ -197,3 +197,30 @@
     - RMCWeaponTaser
     - RMCMegaphone
     #TODO RMC14 Paper Map.
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEAssaultEngi
+  name: Essential Engineering Set
+  description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - RMCEngineerKitRCMPVEFilled
+    - RMCPouchToolsSocRCMPVEAssaultEngi
+    - RMCToolWebbingSmallFilledRCMPVEAssaultEngi
+    - RMCTesla # TODO RMC14 THIS HAS UNMC IFF!!!!! FIX WITH PROPER IMPLEMENTATION
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMedic
+  name: Essential Medical Set
+  description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
+  components:
+  - type: CMVendorBundle
+    bundle:
+    - RMCFlashlightPen
+    - RMCStethoscope
+    - CMSynthGraft
+    - RMCSurgicalCaseRCMFilled
+    - CMHealthAnalyzer

@@ -540,6 +540,20 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallFilledRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: RMCWelderIndustrial
+    - id: CMCrowbar
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
+  parent: RMCToolWebbingSmall
   id: RMCToolWebbingSmallERT
   suffix: Filled
   components:
