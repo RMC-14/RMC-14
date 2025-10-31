@@ -1,3 +1,5 @@
+# Case
+
 - type: entity
   parent: RMCSecureCase
   id: RMCSecureCaseM54CMag
@@ -20,6 +22,8 @@
     - id: CMMagazineRifleM54C
       amount: 10
 
+# Strapped
+
 - type: entity
   parent: RMCSecureCaseStrapped
   id: RMCSecureCaseStrappedMetal
@@ -30,3 +34,27 @@
     spawn:
     - id: CMSheetMetal50
       amount: 4
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedWater
+  name: We-Ya Bottled Water crate (x50)
+  description: A crate containing fifty Weston-Yamada Bottled Spring Water bottles.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMDrinkWEYAWaterBottle30
+      amount: 50
+
+# Medical Big
+
+- type: entity
+  parent: RMCSecureCaseMedicalBig
+  id: RMCSecureCaseMedicalBigIV
+  name: IV stand crate (x3)
+  description: A medical supply crate containing three IV drips.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMIV
+      amount: 3
