@@ -72,7 +72,6 @@ public sealed class AttachableSharedTankSystem : EntitySystem
 
         EntProtoId fireKind = "";
         switch (reagent){
-            
             case "RMCNapalmUT":
                 fireKind = "RMCBulletSentryFireProjectile";
                 break;
@@ -81,11 +80,11 @@ public sealed class AttachableSharedTankSystem : EntitySystem
                 fireKind = "RMCBulletSentryFireProjectile";
                 break;
             
-            case "1": //Standin for the other fuel types someone should probably reagent this up though...
+            case "RMCBGel": 
                 fireKind = "RMCBulletFireVesgGreen";
                 break;
             
-            case "2":
+            case "RMCNapalmX":
                 fireKind = "RMCBulletFireVesgBlue";
                 break;
             
