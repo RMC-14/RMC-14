@@ -186,13 +186,17 @@
       storedRotation: 0
     - type: RMCHandLabeler
     - type: ItemToggle
+    - type: UserInterface
+      interfaces:
+        enum.RMCHandLabelerUiKey.PillBottleColor:
+          type: RMCHandLabelerPillBottleColorBui
 
 - type: entity
   parent: CMHandLabeler
   id: RMCHandLabelerInfinite
   name: infinite hand labeler
-  description: A hand labeler with an infinite supply of paper.
-  suffix: RMC14, Infinite, Admin
+  description: A hand labeler with an infinite supply of labels.
+  suffix: RMC14, Infinite
   components:
   - type: RMCHandLabeler
     labelsLeft: -1

@@ -4,6 +4,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Labels.Components;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -14,6 +15,9 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private const string PillCanisterTag = "PillCanister";
 
     public override void Initialize()
     {
@@ -38,7 +42,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         ent.Comp.Mode = args.Activated;
         Dirty(ent);
 
-        // When turning off, clear the assigned label so base system knows we're in removal mode
+        // When turning off, clear the assigned label so base system can remove labels
         if (!args.Activated && TryComp<HandLabelerComponent>(ent, out var labeler))
         {
             labeler.AssignedLabel = string.Empty;
@@ -62,6 +66,15 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
             return;
 
         var target = args.Target.Value;
+
+        // Special handling for pill bottles - let them choose color
+        if (ent.Comp.Mode && _tag.HasTag(target, PillCanisterTag))
+        {
+            // Open color selection UI (handled by server-side override)
+            OnPillBottleInteract(ent, target, args.User);
+            args.Handled = true;
+            return;
+        }
 
         if (!ent.Comp.Mode)
         {
@@ -101,6 +114,10 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         if (ent.Comp.LabelSound != null)
             _audio.PlayPredicted(ent.Comp.LabelSound, target, args.User);
         // Let base HandLabeler system handle the actual labeling
+    }
+
+    protected virtual void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
+    {
     }
 
     private void OnInteractUsing(Entity<RMCHandLabelerComponent> ent, ref InteractUsingEvent args)
