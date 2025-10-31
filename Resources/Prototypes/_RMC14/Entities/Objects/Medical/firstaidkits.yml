@@ -299,7 +299,7 @@
 
 - type: entity
   parent: CMFirstAidKit
-  id: CMStandardAidKitPVE
+  id: RMCStandardAidKitPVE
   name: standard-issue first-aid pack
   description: A soft first-aid pack typically containing essential medical supplies for use in the field.
   suffix: PVE
@@ -312,8 +312,8 @@
       visible: false
 
 - type: entity
-  parent: CMStandardAidKitPVE
-  id: CMStandardAidKitFilledPVE
+  parent: RMCStandardAidKitPVE
+  id: RMCStandardAidKitFilledPVE
   suffix: Filled, PVE
   components:
   - type: StorageFill
@@ -328,7 +328,7 @@
 
 - type: entity
   parent: CMFirstAidKit
-  id: CMBruteAidKitPVE
+  id: RMCBruteAidKitPVE
   name: brute first-aid pack
   description: A soft first-aid pack containing equipment for physical treatment in the field.
   suffix: PVE
@@ -341,8 +341,8 @@
       visible: false
 
 - type: entity
-  parent: CMBruteAidKitPVE
-  id: CMBruteAidKitFilledPVE
+  parent: RMCBruteAidKitPVE
+  id: RMCBruteAidKitFilledPVE
   suffix: Filled, PVE
   components:
   - type: StorageFill
@@ -352,12 +352,12 @@
     - id: CMTraumaKit10
 #   - id: CMMedicalSplint5
     - id: CMSurgicalLine
-    - id: CMIronAutoInjector
+    - id: RMCIronAutoInjector
     - id: CMBicaridineAutoInjector
 
 - type: entity
   parent: CMFirstAidKit
-  id: CMBurnAidKitPVE
+  id: RMCBurnAidKitPVE
   name: burn first-aid pack
   description: A soft first-aid pack containing equipment for burns treatment in the field.
   suffix: PVE
@@ -370,8 +370,8 @@
       visible: false
 
 - type: entity
-  parent: CMBurnAidKitPVE
-  id: CMBurnAidKitFilledPVE
+  parent: RMCBurnAidKitPVE
+  id: RMCBurnAidKitFilledPVE
   suffix: Filled, PVE
   components:
   - type: StorageFill
@@ -380,6 +380,6 @@
     - id: CMBurnKit10
     - id: CMBurnKit10
     - id: CMSynthGraft
-    - id: CMDermalineAutoInjector
+    - id: RMCDermalineAutoInjector
     - id: CMKelotaneAutoInjector
 #   - id: CMOxycodoneAutoInjector

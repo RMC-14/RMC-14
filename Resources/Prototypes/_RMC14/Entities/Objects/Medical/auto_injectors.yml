@@ -246,7 +246,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: CMIronAutoInjector
+  id: RMCIronAutoInjector
   name: iron autoinjector
   description: An autoinjector loaded with 3 uses of iron, a chemical commonly used to treat blood loss.
   components:
@@ -265,7 +265,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: CMDermalineAutoInjector
+  id: RMCDermalineAutoInjector
   name: dermaline autoinjector
   description: An autoinjector loaded with 3 uses of Dermaline, an advanced burn treatment chemical.
   components:
