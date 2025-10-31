@@ -1,4 +1,4 @@
-﻿cm-pill-contains = The pill contains:
+﻿cm-pill-contains = The pill contains: {$reagents}
 cm-pill-contains-none = The pill contains: No reagents.
 
 cm-pill-contents-unknown = You don't know what's in it.
