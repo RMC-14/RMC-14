@@ -172,10 +172,10 @@
         crate: RMCCrateInflatableBarriers
       - cost: 2000
         crate: RMCCrateReplacementLights
-#      - cost: 3000
-#        crate: RMCCratePacmanParts
-#      - cost: 4000
-#        crate: RMCCrateSuperPacmanParts
+      - cost: 3000
+        crate: RMCCratePacmanParts
+      - cost: 4000
+        crate: RMCCrateSuperPacmanParts
       - cost: 1000
         crate: RMCCrateFlashlights
       - cost: 1000
