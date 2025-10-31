@@ -71,6 +71,7 @@
         whitelist:
           tags:
           - RMCAttachmentExtinguisher
+          - RMCAttachmentXMVESG1FlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
