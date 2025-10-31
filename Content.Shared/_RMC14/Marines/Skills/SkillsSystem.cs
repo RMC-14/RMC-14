@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Chemistry.Reagent;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -240,9 +239,6 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnExamineReagentContainer(Entity<ReagentExaminationRequiresSkillComponent> ent, ref ExaminedEvent args)
     {
-        if (HasComp<XenoComponent>(args.Examiner))
-            return;
-
         if (!HasAllSkills(args.Examiner, ent.Comp.Skills))
         {
             if (ent.Comp.UnskilledExamine != null)
