@@ -175,6 +175,7 @@
 - type: entity
   parent: HandLabeler
   id: CMHandLabeler
+  suffix: RMC14
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
@@ -183,6 +184,18 @@
       size: Normal
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
       storedRotation: 0
+    - type: RMCHandLabeler
+    - type: ItemToggle
+
+- type: entity
+  parent: CMHandLabeler
+  id: RMCHandLabelerInfinite
+  name: infinite hand labeler
+  description: A hand labeler with an infinite supply of paper.
+  suffix: RMC14, Infinite, Admin
+  components:
+  - type: RMCHandLabeler
+    labelsLeft: -1
 
 - type: entity
   parent: Shovel
