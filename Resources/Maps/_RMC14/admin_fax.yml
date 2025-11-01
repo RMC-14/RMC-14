@@ -12533,7 +12533,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCRotaryPhone
+- proto: RMCRotaryPhoneAdmin
   entities:
   - uid: 141
     components:
@@ -12542,9 +12542,6 @@ entities:
     - type: Transform
       pos: 6.952858,-37.11934
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 493
@@ -12554,9 +12551,6 @@ entities:
     - type: Transform
       pos: 3.001381,-16.039557
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 861
@@ -12566,9 +12560,6 @@ entities:
     - type: Transform
       pos: 8.06543,-16.076128
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1224
@@ -12578,9 +12569,6 @@ entities:
     - type: Transform
       pos: 27.281536,-10.829494
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1406
@@ -12590,9 +12578,6 @@ entities:
     - type: Transform
       pos: 37.682404,-13.022226
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1700
@@ -12602,9 +12587,6 @@ entities:
     - type: Transform
       pos: 23.30077,-28.107748
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1908
@@ -12614,9 +12596,6 @@ entities:
     - type: Transform
       pos: 34.997738,-25.30221
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 2047
@@ -12626,9 +12605,6 @@ entities:
     - type: Transform
       pos: 49.822044,-27.54003
       parent: 2
-    - type: RotaryPhone
-      canDnd: True
-      category: Comms Relay
     - type: Fixtures
       fixtures: {}
 - proto: RMCSensorTower
