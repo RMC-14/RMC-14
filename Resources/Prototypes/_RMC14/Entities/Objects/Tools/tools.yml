@@ -185,21 +185,10 @@
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
       storedRotation: 0
     - type: RMCHandLabeler
-    - type: ItemToggle
     - type: UserInterface
       interfaces:
         enum.RMCHandLabelerUiKey.PillBottleColor:
           type: RMCHandLabelerPillBottleColorBui
-
-- type: entity
-  parent: CMHandLabeler
-  id: RMCHandLabelerInfinite
-  name: infinite hand labeler
-  description: A hand labeler with an infinite supply of labels.
-  suffix: RMC14, Infinite
-  components:
-  - type: RMCHandLabeler
-    labelsLeft: -1
 
 - type: entity
   parent: Shovel

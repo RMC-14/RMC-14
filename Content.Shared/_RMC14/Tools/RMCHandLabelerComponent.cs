@@ -15,18 +15,11 @@ public sealed partial class RMCHandLabelerComponent : Component
     [DataField, AutoNetworkedField]
     public int MaxLabels = 50;
 
-    /// <summary>
-    /// Whether the hand labeler is currently turned on.
-    /// When off, it can only remove labels, not apply them.
-    /// </summary>
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
-    public bool Mode;
+    [DataField]
+    public SoundSpecifier LabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/component_pickup.ogg");
 
     [DataField]
-    public SoundSpecifier? LabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/component_pickup.ogg");
-
-    [DataField]
-    public SoundSpecifier? RemoveLabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/paper_ripped.ogg");
+    public SoundSpecifier RemoveLabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/paper_ripped.ogg");
 
     [DataField]
     public EntityUid? CurrentPillBottle;
