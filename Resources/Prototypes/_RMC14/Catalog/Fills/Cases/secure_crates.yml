@@ -46,6 +46,17 @@
     - id: CMDrinkWEYAWaterBottle30
       amount: 50
 
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedMRE
+  name: UNMC MRE crate (x60)
+  description: A supply crate containing sixty UNMC MRE packets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMMRE
+      amount: 60
+
 # Medical Big
 
 - type: entity
@@ -58,3 +69,24 @@
     spawn:
     - id: CMIV
       amount: 3
+
+- type: entity
+  parent: RMCSecureCaseMedicalBig
+  id: RMCSecureCaseMedicalBigFirstAid
+  name: first aid supply crate (x20)
+  description: A medical supply crate containing six advanced, three standard, three burn, two toxin, two oxygen, and two radiation first aid kits.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMAdvFirstAidKitFilled
+      amount: 6
+    - id: CMFirstAidKitFilled
+      amount: 3
+    - id: CMBurnAidKitFilled
+      amount: 3
+    - id: CMToxinAidKitFilled
+      amount: 2
+    - id: CMFirstAidO2KitFilled
+      amount: 2
+    - id: RMCRadiationAidKitFilled
+      amount: 2
