@@ -565,6 +565,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         ReactorUpdated(ent);
     }
 
+    public void FullyDestroy(Entity<RMCFusionReactorComponent> ent)
+    {
+        ent.Comp.State = RMCFusionReactorState.Weld;
+        Dirty(ent);
+        UpdateAppearance(ent);
+    }
+
     private void OnFusionReactorExamined(Entity<RMCFusionReactorComponent> ent, ref ExaminedEvent args)
     {
         if (HasComp<XenoComponent>(args.Examiner))

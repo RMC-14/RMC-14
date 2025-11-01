@@ -201,7 +201,11 @@ public sealed class SensorTowerSystem : EntitySystem
             return;
 
         args.Handled = true;
+        FullyDestroy(ent);
+    }
 
+    public void FullyDestroy(Entity<SensorTowerComponent> ent)
+    {
         ent.Comp.State = SensorTowerState.Weld;
         Dirty(ent);
         UpdateAppearance(ent);
