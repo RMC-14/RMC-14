@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Chemistry.ChemMaster;
 using Content.Shared._RMC14.Tools;
+using Content.Shared.Interaction.Events;
 
 namespace Content.Server._RMC14.Labeler;
 
@@ -13,6 +14,13 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCHandLabelerComponent, RMCHandLabelerPillBottleColorMsg>(OnPillBottleColorMsg);
+        SubscribeLocalEvent<RMCHandLabelerComponent, DroppedEvent>(OnHandLabelerDropped);
+    }
+
+    private void OnHandLabelerDropped(Entity<RMCHandLabelerComponent> ent, ref DroppedEvent args)
+    {
+        // Close the pill bottle color picker UI when the hand labeler is dropped
+        _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
     }
 
     protected override void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
