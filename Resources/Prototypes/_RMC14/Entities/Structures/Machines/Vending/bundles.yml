@@ -204,6 +204,9 @@
   name: Essential Engineering Set
   description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    state: icon
   - type: CMVendorBundle
     bundle:
     - RMCEngineerKitRCMPVEFilled
@@ -217,6 +220,10 @@
   name: Essential Medical Set
   description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/surgical_case.rsi
+    layers:
+    - state: surgical_case_base
   - type: CMVendorBundle
     bundle:
     - RMCFlashlightPen

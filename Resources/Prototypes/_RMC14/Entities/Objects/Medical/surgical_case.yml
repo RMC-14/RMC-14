@@ -72,7 +72,7 @@
 
 - type: entity
   parent: RMCSurgicalCaseRCM
-  id: RMCSurgicalCaseRCMFilled
+  id: RMCSurgicalCaseRCMFilled # TODO RMC14 unique sprite
   suffix: Filled
   components:
   - type: StorageFill
