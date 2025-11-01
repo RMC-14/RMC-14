@@ -1,3 +1,4 @@
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
@@ -13,6 +14,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
 using Robust.Server.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -20,6 +22,7 @@ namespace Content.Server._RMC14.Telephone;
 
 public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
 {
+    [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CommunicationsTowerSystem _communicationsTower = default!;
@@ -107,6 +110,12 @@ public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
         else
         {
             _chat.TrySendInGameICMessage(ev.Receiving, "phone rings vigorously!", InGameICChatType.Emote, false, ignoreActionBlocker: true);
+        }
+
+        if (TryComp<RotaryPhoneComponent>(ev.Receiving, out var phone) && phone.NotifyAdmins)
+        {
+            _chatManager.SendAdminAnnouncement(Loc.GetString("admin-call-incoming", ("actor", Name(ev.Actor)), ("from", Name(ev.Calling)), ("to", Name(ev.Receiving))));
+            _audio.PlayGlobal(phone.ReceivingSound, Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
         }
     }
 
