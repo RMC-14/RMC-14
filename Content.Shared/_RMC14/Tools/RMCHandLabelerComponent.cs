@@ -6,9 +6,6 @@ namespace Content.Shared._RMC14.Tools;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCHandLabelerComponent : Component
 {
-    /// <summary>
-    /// Number of labels remaining. Set to -1 for infinite labels.
-    /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public int LabelsLeft = 50;
 

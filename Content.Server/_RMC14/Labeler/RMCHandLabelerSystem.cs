@@ -19,7 +19,6 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
 
     private void OnHandLabelerDropped(Entity<RMCHandLabelerComponent> ent, ref DroppedEvent args)
     {
-        // Close the pill bottle color picker UI when the hand labeler is dropped
         _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
     }
 
