@@ -606,6 +606,108 @@
     actionName: Toggle M54C Folding Stock
 
 - type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentM13StockCollapsible
+  name: M13 folding stock
+  description: A collapsible stock custom-fitted for the M13 Auto Pistol. Enhances recoil control when deployed, while maintaining compactness for close-quarters use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+    state: stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM13StockCollapsible
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      state: stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      state: stock-on
+    actionName: Toggle M13 Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+      - size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -3
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/urban.rsi
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM13StockSolid
+  name: M13 solid stock
+  description: A fixed polymer stock designed exclusively for the M13 Auto Pistol, improving stability during sustained fire.
+  components:
+  - type: Sprite
+    state: m10_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM13StockSolid
+  - type: AttachableVisuals
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.35
+      recoilFlat: -3
+      scatterFlat: -5
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.25
+      recoilFlat: 1
+      scatterFlat: 5
+  - type: Appearance
+  - type: ItemCamouflage
+    states:
+      Jungle: m10_stock
+      Desert: d_m10_stock
+      Snow: s_m10_stock
+      Classic: c_m10_stock
+      Urban: u_m10_stock
+
+- type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
@@ -1213,3 +1315,9 @@
 
 - type: Tag
   id: RMCAttachmentM54CE2Stock
+
+- type: Tag
+  id: RMCAttachmentM13StockSolid
+
+- type: Tag
+  id: RMCAttachmentM13StockCollapsible

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Doors.Components;
 using Content.Shared.Weapons.Melee;
@@ -12,12 +12,14 @@ public sealed class XenoClawsSystem : EntitySystem
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoClawsComponent> _xenoClawsQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
     private readonly ProtoId<DamageGroupPrototype> _clawsDamageGroup = "Brute";
 
     public override void Initialize()
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoClawsQuery = GetEntityQuery<XenoClawsComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<ReceiverXenoClawsComponent, DamageModifyEvent>(OnReceiverDamageModify);
         SubscribeLocalEvent<AirlockReceiverXenoClawsComponent, DamageModifyEvent>(OnAirlockReceiverDamageModify);
@@ -47,19 +49,27 @@ public sealed class XenoClawsSystem : EntitySystem
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
-
-        if (!_meleeWeaponQuery.HasComp(xeno))
+        if (!_meleeWeaponQuery.HasComp(xeno) || !_xenoClawsQuery.TryComp(xeno, out var claws))
             return;
 
-        var damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
+        var hasRequiredClaws = claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0;
+        bool hasRequiredTier = false;
 
-        if (_xenoClawsQuery.TryComp(xeno, out var claws))
+        if (receiver.MinimumXenoTier != null)
         {
-            if (claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0)
-                damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), receiver.MaxHealth / receiver.HitsToDestroy);
+            hasRequiredTier = _xenoQuery.TryComp(xeno, out var xenoComp) &&
+                              xenoComp.Tier >= receiver.MinimumXenoTier;
         }
 
-        args.Damage = damage;
+        if (hasRequiredClaws || hasRequiredTier)
+        {
+            args.Damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup),
+                                              receiver.MaxHealth / receiver.HitsToDestroy);
+        }
+        else
+        {
+            args.Damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
+        }
     }
 
     private void OnAirlockReceiverDamageModify(Entity<AirlockReceiverXenoClawsComponent> ent, ref DamageModifyEvent args)

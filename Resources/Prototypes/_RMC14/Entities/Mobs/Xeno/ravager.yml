@@ -18,6 +18,27 @@
     name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -164,6 +185,9 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRavagerBerserker
+    - RMCXenoRavagerHedgehog
+  - type: RMCActionOrder
+    id: CMXenoRavager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -235,3 +259,83 @@
       groups:
         Brute: 20
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoRavagerBerserker
+
+- type: entity
+  parent: RMCXenoRavagerBase
+  id: RMCXenoRavagerHedgehog
+  suffix: Hedgehog
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoFireSpikes
+    - ActionXenoSpikeShield
+    - ActionXenoSpikeShed
+    - ActionXenoDevolve
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: CMArmor
+    xenoArmor: 30
+    explosionArmor: 80
+  - type: XenoStrain
+    name: rmc-xeno-hedgehog-name
+    description: rmc-xeno-hedgehog-description
+    popup: rmc-xeno-hedgehog-popup
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoEnergy
+    gain: 5
+    gainAttack: 15
+    gainAttackDowned: 15
+    popupGain: rmc-xeno-shards-increase-user
+    popupNotEnough: rmc-xeno-not-enough-shards
+    alert: XenoEnergyShards
+    gainOnProjectiles: false
+    max: 300
+  - type: XenoScatteredSpit
+    plasmaCost: 0
+    projectileId: XenoHedgehogSpikeProjectileSpread
+    sound:
+      path: /Audio/_RMC14/Xeno/spike_spray.ogg
+    speed: 20
+    maxProjectiles: 8
+    maxDeviation: 60
+  - type: XenoShard
+  - type: Appearance
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 3.2
+  - type: MeleeWeapon
+    attackRate: 0.9
+    damage:
+      groups:
+        Brute: 35
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: XenoSpikeShield
+    spikeDamage:
+      groups:
+        Brute: 15
+  - type: XenoSpikeShed
+    shardDamage:
+      groups:
+        Brute: 20
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoRavagerHedgehog

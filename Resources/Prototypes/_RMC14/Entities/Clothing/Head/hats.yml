@@ -32,53 +32,6 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: RMCHeadCivilianTanBeret
-  name: tan beret
-  description: A nice fashionable beret, popular with executives.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/berettan/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/berettan/classic.rsi
-  - type: Appearance
-
-- type: entity
-  parent: CMHeadBeret
-  id: RMCHeadCivilianWhiteBeret
-  name: white beret
-  description: A nice fashionable beret, popular with executives.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
-  - type: Appearance
-
-- type: entity
-  parent: RMCHeadCivilianWhiteBeret
-  id: RMCHeadCivilianBlackBeret
-  name: black beret
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/black_beret.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/black_beret.rsi
-  - type: Appearance
-
-- type: entity
-  parent: CMHeadBeret
-  id: RMCHeadCivilianBrownBeret
-  name: brown beret
-  description: A nice fashionable beret, popular with executives.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/berettan/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/berettan/urban.rsi
-  - type: Appearance
-
-- type: entity
-  parent: CMHeadBeret
   id: CMHeadBeretRed
   name: MP beret
   components:
@@ -327,7 +280,6 @@
         unfoldedLayer:
           True: {visible: false}
           False: {visible: true}
-
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -1054,3 +1006,21 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadHorizonsWreath
+  name: new horizons day wreath
+  description: A wreath of blue and white flowers, traditionally worn on New Horizons Day.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+    slots:
+    - HEAD
+    - neck
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+      state: helmet
