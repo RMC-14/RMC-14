@@ -229,7 +229,7 @@
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 1
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
@@ -451,7 +451,7 @@
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 1
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
@@ -698,7 +698,7 @@
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 1
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled #todo spp machete scabbard
         name: Machete Scabbard (Full)
@@ -1116,7 +1116,7 @@
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 1
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
@@ -1126,4 +1126,206 @@
       - id: RMCAttachmentTwoPointSling
         amount: 5
       - id: RMCM5Bayonet
+        amount: 25
+
+# RCM
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusRCMPVE
+  name: We-Ya Surplus Uniform Vendor
+  description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
+  suffix: PVE, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessMarinePrep" # TODO RMC14 FIX ACCESSES/JOBS AFTER PR 8076 MERGED!!!!
+    hackable: true
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: RMCBootsRoyal
+        name: Combat Boots
+        amount: 15
+      - id: RMCJumpsuitMarineRoyal # TODO RMC14 replace with RMCJumpsuitMarineRoyalBlank when PR 8076 is merged
+        name: RoyalMarineUniform
+        amount: 15
+      - id: RMCHandsVeteranRoyalMarine
+        name: Combat Gloves
+        amount: 15
+      - id: RMCHeadRoyalHelmet
+        name: L5A2 Ballistic Helmet
+        amount: 15
+      - id: RMCHeadRoyalBeanie
+        name: Tactical Beanie
+        amount: 15
+      - id: RMCHeadsetRoyalMarine
+        name: Radio Headset
+        amount: 15
+    - name: Webbings # TODO RMC14 armor webbings - a friend of mine is on that
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch webbing (4 small slots)
+        name: Webbing
+        amount: 10
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+        amount: 3
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
+        amount: 5
+    - name: Armor
+      entries: # TODO RMC14 shoulder pads and leg guards for newmed in a week
+      - id: RMCArmorRoyal
+        name: Kestrel Armored Cuirass
+        amount: 15
+    - name: Backpack
+      entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
+      - id: CMBackpackMarine
+        name: Backpack
+        amount: 10
+      - id: RMCSatchelLightpack
+        name: Lightpack
+        amount: 5
+      - id: CMSatchel
+        name: Satchel
+        amount: 10
+    - name: Belts
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMarine
+        amount: 15
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstResponder
+        amount: 10
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+        amount: 10
+      - id: RMCPouchMagazineLarge
+        amount: 10
+      - id: RMCPouchGeneralLarge
+        amount: 10
+      - id: RMCPouchMagazinePistolLarge
+        amount: 10
+      - id: RMCPouchPistol
+        amount: 10
+      - id: RMCPouchExplosive
+        amount: 10
+      # -id: RMCPouchSling // TODO RMC14 implement sling pouch
+      #  amount: 10
+    - name: Mask
+      entries:
+      - id: CMMaskGas # TODO RMC14 TWE L7 gas mask
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallisticBlack
+        name: Ballistic Goggles
+        amount: 10
+      - id: RMCGogglesPrescriptionBallistic
+        name: Prescription Ballistic Goggles # These goggles both mention UNMC in their descriptions but whatever
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
+      - id: RMCPatchTSEMarines
+        amount: 15
+      - id: RMCPatchTSE
+        amount: 15
+      - id: BedrollFolded
+        amount: 10
+      - id: CMCanteen
+        amount: 10
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechUtilitiesRCMPVE
+  suffix: PVE, RCM
+  name: We-Ya Automated Utilities Section Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities, tools, and medical supplies. Can be accessed by any Royal marine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessMarinePrep" # TODO RMC14  # TODO RMC14 !!!!ACCESS!!!!
+    hackable: true
+    sections:
+    - name: Food
+      entries:
+      - id: CMMRE # TODO RMC14 replace with RMCMRETSE when PR 8221 is merged
+        name: MRE
+        amount: 5
+      - id: RMCBoxMRE  # TODO RMC14 as above
+        name: MRE Box
+        amount: 1
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      - id: CMTraumaKit10
+        amount: 15
+        name: Trauma Treatment Pack
+      - id: CMBurnKit10
+        amount: 15
+        name: Burn Treatment Pack
+      #- id: RMCSplints10 # TODO RMC14 implement newmed
+      #  amount: 15 
+      - id: CMEmergencyAutoInjector
+        name: Emergency Autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
+      #  amount: 15
+    - name: Explosives
+      entries:
+      - id: RMCExplosivePlastic
+        amount: 2
+      - id: RMCExplosiveBreachingCharge
+        amount: 2
+    - name: Flare and Light
+      entries:
+      - id: RMCFlashlight # TODO RMC14 combat flashlight
+        amount: 10
+      - id: CMPackFlare # TODO RMC14 TWE L96 marking flares
+        amount: 10
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77
+        amount: 2
+      - id: RMCMK80
+        amount: 2
+      - id: RMCWeaponPistolL54
+        amount: 2
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 2
+      - id: CMRollerBedSpawnFolded
+        amount: 2
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        amount: 5
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: RMCBinoculars
+        amount: 2
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentTwoPointSling 
+        amount: 5
+      - id: RMCM5Bayonet # TODO RMC14 Fairbairn-Sykes fighting knife (what a fucking incredible name)
         amount: 25

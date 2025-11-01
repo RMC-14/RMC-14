@@ -281,6 +281,25 @@
     storageOpen: null
 
 - type: entity
+  parent: RMCBackpackAmmo
+  id: RMCBackpackAmmoRCM
+  name: RCM carry frame
+  description: A backpack specifically designed to hold equipment for commandos.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCAmmoBox
+      - CMFirstAidKit
+      - RMCPacketGrenade
+      components:
+      - EmptySandbag
+      - FullSandbag
+      - MortarShell
+
+- type: entity
   parent: CMBackpackWelder
   id: RMCBackpackWelderPMC
   name: pmc technician welderpack
