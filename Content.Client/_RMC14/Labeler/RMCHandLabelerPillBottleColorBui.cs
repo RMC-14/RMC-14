@@ -1,20 +1,24 @@
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
 using Content.Shared._RMC14.Tools;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Utility;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Labeler;
 
 public sealed class RMCHandLabelerPillBottleColorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     private RMCPillBottleColorWindow? _window;
 
     protected override void Open()
     {
         base.Open();
 
-        _window = new RMCPillBottleColorWindow();
+        _window = new RMCPillBottleColorWindow(_sprite);
         _window.OnColorSelected += OnColorSelected;
         _window.OpenCentered();
     }
@@ -40,7 +44,7 @@ public sealed class RMCPillBottleColorWindow : FancyWindow
 {
     public event Action<RMCPillBottleColors>? OnColorSelected;
 
-    public RMCPillBottleColorWindow()
+    public RMCPillBottleColorWindow(SpriteSystem spriteSystem)
     {
         Title = Loc.GetString("rmc-hand-labeler-pill-bottle-color");
         SetSize = new Vector2(300, 400);
@@ -58,15 +62,21 @@ public sealed class RMCPillBottleColorWindow : FancyWindow
             VSeparationOverride = 4
         };
 
+        var pillCanisterRsi = new ResPath("_RMC14/Objects/Chemistry/pill_canister.rsi");
         var colors = Enum.GetValues<RMCPillBottleColors>();
-        foreach (var color in colors)
+        var colorCount = colors.Length - 1;
+
+        for (var i = 0; i < colorCount; i++)
         {
-            var button = new Button
+            var state = spriteSystem.GetState(new SpriteSpecifier.Rsi(pillCanisterRsi, $"pill_canister{i}"));
+            var button = new TextureButton
             {
-                Text = color.ToString(),
-                SetSize = new Vector2(90, 40)
+                TextureNormal = state.Frame0,
+                SetSize = new Vector2(90, 40),
+                Scale = new Vector2(2, 2)
             };
 
+            var color = colors[i];
             button.OnPressed += _ => OnColorSelected?.Invoke(color);
             grid.AddChild(button);
         }
