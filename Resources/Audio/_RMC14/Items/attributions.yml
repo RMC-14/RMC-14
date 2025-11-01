@@ -17,3 +17,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a50253802b9d56391f7b857684e345119a207f43/sound/items/megaphone.ogg"
+
+- files: ["component_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/febec972c54c25442dd9229cd95a73125e84471d/sound/items/component_pickup.ogg"
+
+- files: ["paper_ripped.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/febec972c54c25442dd9229cd95a73125e84471d/sound/items/paper_ripped.ogg"
