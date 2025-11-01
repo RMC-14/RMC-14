@@ -72,7 +72,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarine
     jumpsuit: RMCJumpsuitMarineRoyalMedic # TOOD RMC14 royal marines commando uniform
-    outerClothing: RMCArmorRoyalLightFilled
+    outerClothing: RMCArmorRoyalLightFilledMedic
     gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24

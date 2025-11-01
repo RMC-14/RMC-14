@@ -699,6 +699,7 @@
   - type: StorageFill
     contents:
     - id: CMAdvFirstAidKitFilled
+    - id: CMDefibrillator
     - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
     - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
     - id: RMCHeadRoyalBeret

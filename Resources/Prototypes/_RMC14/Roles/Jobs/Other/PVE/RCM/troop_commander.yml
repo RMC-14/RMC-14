@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTroopCommanderPVE
   icon: "RMCJobIconRoyalTroopCommanderPVE"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-captain
+  supervisors: cm-job-supervisors-squadron-command
   spawnMenuRoleName: RCM Troop Commander (PVE)
   special:
   - !type:AddComponentSpecial
@@ -27,7 +27,7 @@
         RMCSkillEngineer: 2
         RMCSkillEndurance: 3
         RMCSkillMedical: 2
-        RMCSkillSurgery: 1  
+        RMCSkillSurgery: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 3
         RMCSkillOverwatch: 1
