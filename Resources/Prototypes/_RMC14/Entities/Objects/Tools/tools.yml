@@ -187,6 +187,8 @@
     - type: RMCHandLabeler
     - type: UserInterface
       interfaces:
+        enum.HandLabelerUiKey.Key:
+          type: HandLabelerBoundUserInterface
         enum.RMCHandLabelerUiKey.PillBottleColor:
           type: RMCHandLabelerPillBottleColorBui
 
