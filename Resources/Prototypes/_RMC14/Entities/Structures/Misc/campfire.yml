@@ -12,5 +12,5 @@
       - state: burning
   - type: Construction
     graph: RMCCampfire
-    node: start
+    node: Campfire
   - type: RMCMesonsNonviewable

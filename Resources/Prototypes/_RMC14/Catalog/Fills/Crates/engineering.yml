@@ -80,7 +80,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ToolboxElectricalFilled # TODO RMC14 use cm prototype
+      - id: RMCToolboxElectricalFilled
         amount: 2
       - id: CMHandsInsulated
         amount: 2
@@ -100,23 +100,22 @@
         amount: 3
       - id: RMCHazardVest
         amount: 3
-      - id: ClothingHeadHatWelding # TODO RMC14 use cm prototype
+      - id: RMCHelmetWelding
         amount: 2
       - id: RMCHardHat
         amount: 1
 
-#- type: entity # TODO RMC14 probably not relevant to rmc14 but will leave it here in case we want it
-#  id: RMCCrateInflatableBarriers
-#  parent: RMCCrateConstruction
-#  name: inflatable barriers crate
-#  components:
-#  - type: StorageFill
-#    contents:
-#      - id: InflatableDoorStack
-#      #max stack - 4. making 2 stacks would be easier and good
-#        amount: 2
-#      - id: InflatableWallStack
-#      #max stack - 10. Making 1 stack would be easier and good
+- type: entity
+  id: RMCCrateInflatableBarriers
+  parent: RMCCrateConstruction
+  name: inflatable barriers crate
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCInflatableDoorFolded
+      amount: 2
+    - id: RMCInflatableWallFolded
+      amount: 1
 
 - type: entity
   id: RMCCrateReplacementLights
@@ -135,10 +134,12 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorPacmanMachineCircuitboard # TODO RMC14 use cm prototype
-        amount: 2
-      - id: MicroManipulatorStockPart # TODO RMC14 use cm prototype
-        amount: 2
+      - id: RMCPortableGeneratorPacmanMachineCircuitBoard
+        amount: 1
+#  TODO RMC14 material requirements
+#  /obj/item/stock_parts/micro_laser,
+#  /obj/item/stock_parts/capacitor,
+#  /obj/item/stock_parts/matter_bin,
 
 - type: entity
   id: RMCCrateSuperPacmanParts
@@ -147,10 +148,12 @@
   components:
   - type: StorageFill
     contents:
-      - id: PortableGeneratorSuperPacmanMachineCircuitboard # TODO RMC14 use cm prototype
-        amount: 2
-      - id: MicroManipulatorStockPart # TODO RMC14 use cm prototype
-        amount: 4
+      - id: RMCPortableGeneratorSuperPacmanMachineCircuitboard
+        amount: 1
+#  TODO RMC14 material requirements
+#  /obj/item/stock_parts/micro_laser,
+#  /obj/item/stock_parts/capacitor,
+#  /obj/item/stock_parts/matter_bin,
 
 - type: entity
   id: RMCCrateFlashlights
