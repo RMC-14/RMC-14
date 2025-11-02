@@ -13,10 +13,10 @@ public sealed partial class RMCHandLabelerComponent : Component
     public int MaxLabels = 50;
 
     [DataField]
-    public SoundSpecifier LabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/component_pickup.ogg");
+    public SoundSpecifier LabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/component_pickup.ogg", AudioParams.Default.WithMaxDistance(0));
 
     [DataField]
-    public SoundSpecifier RemoveLabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/paper_ripped.ogg");
+    public SoundSpecifier RemoveLabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/paper_ripped.ogg", AudioParams.Default.WithMaxDistance(0));
 
     [DataField]
     public EntityUid? CurrentPillBottle;

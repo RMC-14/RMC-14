@@ -89,7 +89,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
             {
                 ent.Comp.LabelsLeft--;
                 Dirty(ent);
-                _audio.PlayPredicted(ent.Comp.LabelSound, target, args.User);
+                _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
 
                 if (_net.IsServer)
                 {
@@ -104,7 +104,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         }
         else if (TryComp<LabelComponent>(target, out var labelComp) && !string.IsNullOrEmpty(labelComp.CurrentLabel))
         {
-            _audio.PlayPredicted(ent.Comp.RemoveLabelSound, target, args.User);
+            _audio.PlayPredicted(ent.Comp.RemoveLabelSound, ent, args.User);
 
             if (_net.IsServer)
             {
@@ -131,7 +131,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
             if (TryComp<LabelComponent>(target, out var labelComp) &&
                 !string.IsNullOrEmpty(labelComp.CurrentLabel))
             {
-                _audio.PlayPredicted(ent.Comp.RemoveLabelSound, target, args.User);
+                _audio.PlayPredicted(ent.Comp.RemoveLabelSound, ent, args.User);
             }
             return;
         }
@@ -151,7 +151,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
                 break;
         }
 
-        _audio.PlayPredicted(ent.Comp.LabelSound, target, args.User);
+        _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
     }
 
     protected virtual void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
