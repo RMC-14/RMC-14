@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob. suppressed_sniper_barrel modified from sniperbarrel by N2H4",
   "size": {
     "x": 32,
     "y": 32
@@ -43,6 +43,9 @@
     },
     {
       "name": "suppressor_sleek"
+    },
+    {
+      "name": "suppressed_sniper_barrel"
     },
     {
       "name": "bayonet_a"

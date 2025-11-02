@@ -325,8 +325,8 @@
   name: M96S-B integrated suppressor
   description: You shouldn't have this.
   components:
-  #- type: Sprite
-  #  state: m96sb_suppressor
+  - type: Sprite
+    state: suppressed_sniper_barrel
   - type: Tag
     tags:
     - RMCAttachmentBarrel

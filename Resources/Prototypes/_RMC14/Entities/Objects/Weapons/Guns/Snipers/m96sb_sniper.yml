@@ -16,7 +16,7 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: sniperbarrel
+      state: suppressed_sniper_barrel
       offset: 0.715, 0.025
   - type: Item
     size: Large
