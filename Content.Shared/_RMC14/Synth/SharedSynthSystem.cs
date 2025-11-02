@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -42,7 +43,7 @@ public abstract class SharedSynthSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SynthComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SynthComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedBloodstreamSystem)]);
         SubscribeLocalEvent<SynthComponent, AttackAttemptEvent>(OnMeleeAttempted);
         SubscribeLocalEvent<SynthComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<SynthComponent, TryingToSleepEvent>(OnSleepAttempt);
