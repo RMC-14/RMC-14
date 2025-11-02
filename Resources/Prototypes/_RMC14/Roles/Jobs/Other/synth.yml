@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSynthetic
   ranks:
     RMCRankMasterSergeant: [ ]
-  startingGear: RMCGearSynthetic
+  startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
@@ -102,11 +102,6 @@
       - type: RMCSuicide
         damage: { }
   hidden: true
-
-- type: startingGear
-  id: RMCGearSynthetic
-  equipment:
-    id: RMCIDCardSynth
 
 - type: startingGear
   id: RMCGearSyntheticEquipped
