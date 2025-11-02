@@ -9,7 +9,7 @@
     guides:
     - RMCGuideRoleSpecSniper
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi # TODO RMC14 duplicate this and revise on its own as m96sb.rsi when urban back sprites are fixed
     layers:
     - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
