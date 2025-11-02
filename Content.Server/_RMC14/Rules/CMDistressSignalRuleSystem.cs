@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -1846,19 +1847,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 .Select(v => v.planet)
                 .ToList();
 
-            var msg = "Map Vote Results\n";
+            var sb = new StringBuilder();
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-header"));
             foreach (var result in adjustedVotes)
             {
-                msg += $"  {result.planet.Proto.Name}: {result.totalVotes}"
-                       + (result.newVotes > 0 ? $" ({result.newVotes} new)\n" : "\n");
+                sb.AppendLine(Loc.GetString(result.newVotes > 0
+                    ? "rmc-distress-signal-next-map-votes-new"
+                    : "rmc-distress-signal-next-map-votes",
+                    ("map", result.planet.Proto.Name),
+                    ("votes", result.totalVotes),
+                    ("newVotes", result.newVotes)));
             }
 
             if (winningMaps.Count > 1)
             {
-                msg += "Vote tied between:\n";
+                sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-tiebreaker"));
                 foreach (var map in winningMaps)
                 {
-                    msg += $"    {map.Proto.Name}\n";
+                    sb.AppendLine($"    {map.Proto.Name}");
                 }
                 picked = _random.Pick(winningMaps);
             }
@@ -1866,9 +1872,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 picked = winningMaps.First();
             }
-            msg += $"Winner: {picked.Proto.Name}";
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name)));
 
-            _chatManager.DispatchServerAnnouncement(msg);
+            _chatManager.DispatchServerAnnouncement(sb.ToString());
 
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {
