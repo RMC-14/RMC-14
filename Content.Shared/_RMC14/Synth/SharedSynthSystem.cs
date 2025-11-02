@@ -59,9 +59,9 @@ public abstract class SharedSynthSystem : EntitySystem
 
     protected virtual void MakeSynth(Entity<SynthComponent> ent)
     {
-        if (ent.Comp.AddComponents != null)
-            EntityManager.AddComponents(ent.Owner, ent.Comp.AddComponents);
+        EntityManager.AddComponents(ent.Owner, ent.Comp.AlwaysAddComponents);
 
+        EntityManager.RemoveComponents(ent.Owner, ent.Comp.AlwaysRemoveComponents);
         if (ent.Comp.RemoveComponents != null)
             EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
 

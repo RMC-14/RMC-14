@@ -1,9 +1,24 @@
 ﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared._RMC14.Medical.IV;
+using Content.Shared._RMC14.Medical.Surgery;
+using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Suicide;
+using Content.Shared._RMC14.Xenonids.Leap;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body.Organ;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.ForceSay;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Electrocution;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Forensics.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
@@ -16,10 +31,44 @@ namespace Content.Shared._RMC14.Synth;
 public sealed partial class SynthComponent : Component
 {
     [DataField]
-    public ComponentRegistry? AddComponents;
+    public ComponentRegistry? RemoveComponents;
 
     [DataField]
-    public ComponentRegistry? RemoveComponents;
+    public ComponentRegistry AlwaysAddComponents = new()
+    {
+        {"NightVision", new(new NightVisionComponent()
+        {
+          Innate = true,
+          State = NightVisionState.Half,
+          OnlyHalf = true,
+          Alert = "SynthNightVision",
+        }, [])},
+        {"EyeProtection", new(new EyeProtectionComponent(), [])},
+        {"WoundableUntreatable", new(new WoundableUntreatableComponent(), [])},
+        {"Insulated", new(new InsulatedComponent(), [])},
+        {"RMCLeapProtection", new(new RMCLeapProtectionComponent()
+        {
+            InherentStunDuration = TimeSpan.FromSeconds(3),
+        }, [])},
+    };
+
+    [DataField]
+    public ComponentRegistry AlwaysRemoveComponents = new()
+    {
+        {"CMSurgeryTarget", new(new CMSurgeryTargetComponent(), [])},
+        {"Infectable", new(new InfectableComponent(), [])},
+        {"Hunger", new(new HungerComponent(), [])},
+        {"Thirst", new(new ThirstComponent(), [])},
+        {"Perishable", new(new PerishableComponent(), [])},
+        {"Stamina", new(new StaminaComponent(), [])},
+        // ThermalRegulator is sadly a server only component from upstream,
+        // so we have to keep it in RemoveComponents.
+        {"DamageForceSay", new(new DamageForceSayComponent(), [])},
+        {"Dna", new(new DnaComponent(), [])},
+        {"InjectableSolution", new(new InjectableSolutionComponent(), [])},
+        {"IVDripTarget", new(new IVDripTargetComponent(), [])},
+        {"RMCSuicide", new(new RMCSuicideComponent(), [])},
+    };
 
     /// <summary>
     /// The final stun duration (after endurance skill) is divided by this number.
@@ -97,10 +146,25 @@ public sealed partial class SynthComponent : Component
     public ProtoId<ToolQualityPrototype> RepairQuality = "Welding";
 
     [DataField]
-    public DamageSpecifier? WelderDamageToRepair;
+    public DamageSpecifier? WelderDamageToRepair = new()
+    {
+        DamageDict = {
+            ["Blunt"] = -15,
+            ["Piercing"] = -15,
+            ["Slash"] = -15,
+        },
+    };
 
     [DataField]
-    public DamageSpecifier? CableCoilDamageToRepair;
+    public DamageSpecifier? CableCoilDamageToRepair = new()
+    {
+        DamageDict = {
+            ["Caustic"] = -15,
+            ["Heat"] = -15,
+            ["Shock"] = -15,
+            ["Cold"] = -15,
+        },
+    };
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> WelderDamageGroup = "Brute";

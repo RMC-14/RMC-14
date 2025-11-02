@@ -1,4 +1,5 @@
-﻿using Content.Shared.Alert;
+﻿using Content.Shared._RMC14.Synth;
+using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -6,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.NightVision;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedNightVisionSystem))]
+[Access(typeof(SharedNightVisionSystem), typeof(SynthComponent))]
 public sealed partial class NightVisionComponent : Component
 {
     [DataField]
@@ -32,6 +33,9 @@ public sealed partial class NightVisionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockScopes;
+
+    [DataField, AutoNetworkedField]
+    public bool OnlyHalf;
 }
 
 [Serializable, NetSerializable]
