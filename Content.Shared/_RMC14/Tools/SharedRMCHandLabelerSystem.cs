@@ -27,7 +27,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCHandLabelerComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing, before: new[] { typeof(SharedStorageSystem) });
         SubscribeLocalEvent<RMCHandLabelerComponent, AfterInteractEvent>(OnAfterInteract, before: new[] { typeof(SharedHandLabelerSystem) });
 
         SubscribeLocalEvent<InteractUsingEvent>(OnAnyInteractUsing, before: new[] { typeof(SharedStorageSystem) });
@@ -89,13 +89,6 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
             return;
 
         var target = args.Target.Value;
-
-        if (_tag.HasTag(target, PillCanisterTag))
-        {
-            OnPillBottleInteract(ent, target, args.User);
-            args.Handled = true;
-            return;
-        }
 
         if (!TryComp<HandLabelerComponent>(ent, out var labeler))
             return;
