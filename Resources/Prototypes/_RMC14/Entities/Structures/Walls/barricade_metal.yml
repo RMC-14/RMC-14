@@ -423,6 +423,14 @@
       node: nodeHandrail
 
 - type: entity
+  parent: RMCBarricadeWireRail
+  id: RMCBarricadeWireRailAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
+- type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisa
   components:

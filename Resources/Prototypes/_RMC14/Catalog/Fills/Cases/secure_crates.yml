@@ -57,6 +57,39 @@
     - id: CMMRE
       amount: 60
 
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedSandbag
+  name: sandbag supply crate (x100)
+  description: A supply crate containing four piles of twenty-five sandbags.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSandbagFull25
+      amount: 4
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedFlare
+  name: flare supply crate (x320)
+  description: A supply crate containing two crates of flares.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCCrateGearPackFlare
+      amount: 2
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedTripod
+  name: Tripod light crate (x8)
+  description: A supply crate containing eight tripod lights.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCLampTripodGrey
+      amount: 8
+
 # Medical Big
 
 - type: entity
