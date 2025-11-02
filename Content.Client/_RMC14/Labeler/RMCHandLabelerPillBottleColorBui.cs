@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client._RMC14.Chemistry.Master;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
 using Robust.Client.GameObjects;
@@ -31,6 +32,7 @@ public sealed class RMCHandLabelerPillBottleColorBui(EntityUid owner, Enum uiKey
             var button = new TextureButton
             {
                 TextureNormal = state.Frame0,
+                Scale = new Vector2(2, 2),
             };
 
             var color = colors[i];

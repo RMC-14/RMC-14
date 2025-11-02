@@ -27,6 +27,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCHandLabelerComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<RMCHandLabelerComponent, BeforeRangedInteractEvent>(OnBeforeRangedInteract);
         SubscribeLocalEvent<RMCHandLabelerComponent, AfterInteractEvent>(OnAfterInteract, before: new[] { typeof(SharedHandLabelerSystem) });
     }
 
@@ -63,20 +64,63 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
         args.Handled = true;
     }
-
-    private void OnAfterInteract(Entity<RMCHandLabelerComponent> ent, ref AfterInteractEvent args)
+    // Pill bottle interaction because storage system marks args.Handled = true before we can do anything.
+    private void OnBeforeRangedInteract(Entity<RMCHandLabelerComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled || !args.CanReach || args.Target == null)
             return;
 
         var target = args.Target.Value;
 
-        if (_tag.HasTag(target, PillCanisterTag))
-        {
-            OnPillBottleInteract(ent, target, args.User);
-            args.Handled = true;
+        if (!_tag.HasTag(target, PillCanisterTag))
             return;
+
+        if (!TryComp<HandLabelerComponent>(ent, out var labeler))
+            return;
+
+        OnPillBottleInteract(ent, target, args.User);
+
+        var labelText = labeler.AssignedLabel;
+
+        if (!string.IsNullOrEmpty(labelText))
+        {
+            if (!_whitelist.IsWhitelistFail(labeler.Whitelist, target) && ent.Comp.LabelsLeft > 0)
+            {
+                ent.Comp.LabelsLeft--;
+                Dirty(ent);
+                _audio.PlayPredicted(ent.Comp.LabelSound, target, args.User);
+
+                if (_net.IsServer)
+                {
+                    var labelSys = EntityManager.System<LabelSystem>();
+                    labelSys.Label(target, labelText);
+                }
+            }
+            else if (ent.Comp.LabelsLeft <= 0)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-out-of-labels"), ent, args.User);
+            }
         }
+        else if (TryComp<LabelComponent>(target, out var labelComp) && !string.IsNullOrEmpty(labelComp.CurrentLabel))
+        {
+            _audio.PlayPredicted(ent.Comp.RemoveLabelSound, target, args.User);
+
+            if (_net.IsServer)
+            {
+                var labelSys = EntityManager.System<LabelSystem>();
+                labelSys.Label(target, null);
+            }
+        }
+
+        args.Handled = true;
+    }
+    // Non pill bottle interaction
+    private void OnAfterInteract(Entity<RMCHandLabelerComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled || !args.CanReach || args.Target == null)
+            return;
+
+        var target = args.Target.Value;
 
         if (!TryComp<HandLabelerComponent>(ent, out var labeler))
             return;
