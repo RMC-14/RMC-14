@@ -30,7 +30,6 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCHandLabelerComponent, AfterInteractEvent>(OnAfterInteract, before: new[] { typeof(SharedHandLabelerSystem) });
 
-        // Subscribe to ALL entities' InteractUsing to catch hand labeler + pill canister interaction
         SubscribeLocalEvent<InteractUsingEvent>(OnAnyInteractUsing, before: new[] { typeof(SharedStorageSystem) });
     }
 
