@@ -1,6 +1,5 @@
 using Content.Client.Light.Components;
 using Content.Shared.Light.Components;
-using Content.Shared.Popups;
 using Robust.Client.GameObjects;
 using Robust.Shared.Audio.Systems;
 
@@ -11,7 +10,6 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
     [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
 
     public override void Initialize()
     {
@@ -67,23 +65,12 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
                         SpriteSystem.LayerSetColor((uid, args.Sprite), layerIdx, comp.GlowColorLit.Value);
                     SpriteSystem.LayerSetVisible((uid, args.Sprite), layerIdx, true);
                 }
-                _popups.PopupEntity("appearanceChanged", uid);
-                //if (comp.AltGlowColorLit.HasValue)
-                // {
-                //    _popups.PopupEntity(comp.AltGlowColorLit.Value.ToString(), uid);
-                //    SpriteSystem.LayerSetColor((uid, args.Sprite), ExpendableLightVisualLayers.Glow, comp.AltGlowColorLit.Value);
-                //}
-                if(AppearanceSystem.TryGetData<Color>(uid, ExpendableLightVisuals.Color, out var color, args.Component))
-                {
-                    _popups.PopupEntity("asdfniasdfn9uiasnfi", uid);
+
+                if (AppearanceSystem.TryGetData<Color>(uid, ExpendableLightVisuals.Color, out var color, args.Component))
                     SpriteSystem.LayerSetColor((uid, args.Sprite), ExpendableLightVisualLayers.Glow, color);
-                }
+
                 if (comp.GlowColorLit.HasValue)
-                {
-                    _popups.PopupEntity("asdfniasdfn9uiasnfi", uid);
                     SpriteSystem.LayerSetColor((uid, args.Sprite), ExpendableLightVisualLayers.Glow, comp.GlowColorLit.Value);
-                }else
-                    _popups.PopupEntity("no value", uid);
                 SpriteSystem.LayerSetVisible((uid, args.Sprite), ExpendableLightVisualLayers.Glow, true);
 
                 break;

@@ -1143,8 +1143,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             var comp = Comp<ExpendableLightComponent>(ent);
             var flare = Comp<FlareSignalComponent>(ent);
             var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
-            if (!CasDebug)
-                _popup.PopupEntity("Debug is failing", ent);
 
             if (CasDebug && _area.CanCAS(coordinates))
                 ev.AltColor = null;

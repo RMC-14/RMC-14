@@ -21,8 +21,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
-using Content.Shared.Popups;
-using Robust.Shared.GameObjects;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -36,7 +34,6 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly StackSystem _stackSystem = default!;
         [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-        [Dependency] private readonly SharedPopupSystem _popups = default!;
 
         // RMC14
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -191,16 +188,14 @@ namespace Content.Server.Light.EntitySystems
 
             _appearance.SetData(ent, ExpendableLightVisuals.State, component.CurrentState, appearance);
 
+            //RMC14
             if (component.GlowColorLit.HasValue)
                 _appearance.SetData(ent, ExpendableLightVisuals.Color, component.GlowColorLit.Value, appearance);
+            //RMC14
 
             switch (component.CurrentState)
             {
                 case ExpendableLightState.Lit:
-                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.TurnOnBehaviourID, appearance);
-                    break;
-
-                case ExpendableLightState.AltLit:
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.TurnOnBehaviourID, appearance);
                     break;
 
@@ -264,7 +259,6 @@ namespace Content.Server.Light.EntitySystems
             if (args.AltColor.HasValue)
             {
                 component.GlowColorLit = args.AltColor.Value;
-                _popups.PopupEntity("signal flare activated", ent);
                 UpdateVisualizer(ent, appearance);
             }
         }
