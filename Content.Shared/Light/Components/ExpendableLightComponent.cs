@@ -43,6 +43,12 @@ public sealed partial class ExpendableLightComponent : Component
     public Color? GlowColorLit = null;
 
     /// <summary>
+    /// Whether the sprite uses the overlay for animation in addition to the base sprite
+    /// </summary>
+    [DataField]
+    public bool UsesOverlay = true;
+
+    /// <summary>
     /// The sound that plays when the expendable light is lit.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -101,7 +107,8 @@ public sealed partial class ExpendableLightComponent : Component
 public enum ExpendableLightVisuals
 {
     State,
-    Behavior
+    Behavior,
+    LightBLinking
 }
 
 [Serializable, NetSerializable]

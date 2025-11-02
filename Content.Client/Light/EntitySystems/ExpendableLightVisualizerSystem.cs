@@ -73,7 +73,12 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
                 break;
             case ExpendableLightState.Dead:
                 comp.PlayingStream = _audioSystem.Stop(comp.PlayingStream);
-                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out layerIdx, true))
+
+                var spentLayer = ExpendableLightVisualLayers.Base;
+                if (comp.UsesOverlay)
+                    spentLayer = ExpendableLightVisualLayers.Overlay;
+
+                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), spentLayer, out layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateSpent))
                         SpriteSystem.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateSpent);

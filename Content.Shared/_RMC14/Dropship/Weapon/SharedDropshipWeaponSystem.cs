@@ -50,6 +50,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
@@ -1137,6 +1138,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+        if (CasDebug && _area.CanCAS(coordinates))
+        {
+            if (TryComp<AppearanceComponent>(ent, out var appearance))
+                _appearance.SetData(ent, SignalFlareVisuals.BeaconState, true, appearance);
+        }
+
         return true;
     }
 
@@ -1505,3 +1513,9 @@ public record struct DropshipWeaponShotEvent(
     RMCFire? Fire,
     int SoundEveryShots
 );
+
+[Serializable, NetSerializable]
+public enum SignalFlareVisuals : byte
+{
+    BeaconState
+}
