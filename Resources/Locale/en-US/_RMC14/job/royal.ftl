@@ -6,64 +6,64 @@
 rmc-ghost-role-information-rcm-description = Ensure the survival of the UNS ship, eliminate any hostiles, and assist the crew in any way possible.
 
 rmc-ghost-name-rcm-sgo = Royal Crown Marines Smart Gun Operator (Friendly)
-rmc-job-name-rcm-sgo = Royal Marines Smart Gun Operator
+rmc-job-name-rcm-sgo = Smart Gun Operator
 rmc-job-prefix-rcm-sgo = RCM SGO
 
 rmc-ghost-name-rcm-commando = Royal Crown Marines Rifleman (Friendly)
-rmc-job-name-rcm-commando = Royal Marines Rifleman
+rmc-job-name-rcm-commando = Rifleman
 rmc-job-prefix-rcm-commando = RCM RFN
 
 rmc-ghost-name-rcm-marksman = Royal Crown Marines Marksman (Friendly)
-rmc-job-name-rcm-marksman = Royal Marines Marksman
+rmc-job-name-rcm-marksman = Marksman
 rmc-job-prefix-rcm-marksman = RCM MKSMN
 
 rmc-ghost-name-rcm-breacher = Royal Crown Marines Breacher (Friendly)
-rmc-job-name-rcm-breacher = Royal Marines Breacher
+rmc-job-name-rcm-breacher = Breacher
 rmc-job-prefix-rcm-breacher = RCM BRCH
 
 rmc-ghost-name-rcm-medic = Royal Crown Marines Medical Technician (Friendly)
-rmc-job-name-rcm-medic = Royal Marines Medical Technician
+rmc-job-name-rcm-medic = Medical Technician
 rmc-job-prefix-rcm-medic = RCM MED
 
 rmc-ghost-name-rcm-teamlead = Royal Crown Marines Team Leader (Friendly)
-rmc-job-name-rcm-teamlead = Royal Marines Team Leader
+rmc-job-name-rcm-teamlead = Team Leader
 rmc-job-prefix-rcm-teamlead = RCM TL
 
-rmc-job-name-rcm-lieutenant = Royal Marines Lieutenant
+rmc-job-name-rcm-lieutenant = Lieutenant
 rmc-job-prefix-rcm-lieutenant = RCM LT
 
-rmc-job-name-rcm-captain = Royal Marines Captain
+rmc-job-name-rcm-captain = Captain
 rmc-job-prefix-rcm-captain = RCM CAPT
 
-rmc-job-name-rcm-major = Royal Marines Major
+rmc-job-name-rcm-major = Major
 rmc-job-prefix-rcm-major = RCM MAJ
 
-rmc-job-name-rcm-pve-rifleman = Royal Crown Marines Rifleman
+rmc-job-name-rcm-pve-rifleman = Rifleman
 rmc-job-prefix-rcm-pve-rifleman = RCM RM
 
-rmc-job-name-rcm-pve-troop-sergeant = Royal Crown Marines Troop Sergeant
+rmc-job-name-rcm-pve-troop-sergeant = Troop Sergeant
 rmc-job-prefix-rcm-pve-troop-sergeant = RCM TS
 
-rmc-job-name-rcm-pve-section-leader = Royal Crown Marines Section Leader
+rmc-job-name-rcm-pve-section-leader = Section Leader
 rmc-job-prefix-rcm-pve-section-leader = RCM STL
 
-rmc-job-name-rcm-pve-team-leader = Royal Crown Marines Team Leader
+rmc-job-name-rcm-pve-team-leader = Team Leader
 rmc-job-prefix-rcm-pve-team-leader = RCM TL
 
-rmc-job-name-rcm-pve-gpmg-gunner = Royal Crown Marines GPMG Gunner
+rmc-job-name-rcm-pve-gpmg-gunner = GPMG Gunner
 rmc-job-prefix-rcm-pve-gpmg-gunner = RCM GPMG
 
-rmc-job-name-rcm-pve-medical-assistant = Royal Crown Marines Medical Assistant
+rmc-job-name-rcm-pve-medical-assistant = Medical Assistant
 rmc-job-prefix-rcm-pve-medical-assistant = RCM MA
 
-rmc-job-name-rcm-pve-assault-engineer = Royal Crown Marines Assault Engineer
+rmc-job-name-rcm-pve-assault-engineer = Assault Engineer
 rmc-job-prefix-rcm-pve-assault-engineer = RCM AE
 
-rmc-job-name-rcm-pve-scout-sniper = Royal Crown Marines Scout Sniper
+rmc-job-name-rcm-pve-scout-sniper = Scout Sniper
 rmc-job-prefix-rcm-pve-scout-sniper = RCM SnS
 
-rmc-job-name-rcm-pve-bombardment-specialist = Royal Crown Marines Bombardment Specialist
+rmc-job-name-rcm-pve-bombardment-specialist = Bombardment Specialist
 rmc-job-prefix-rcm-pve-bombardment-specialist = RCM BMBRD
 
-rmc-job-name-rcm-pve-troop-commander = Royal Crown Marines Troop Commander
+rmc-job-name-rcm-pve-troop-commander = Troop Commander
 rmc-job-prefix-rcm-pve-troop-commander = RCM TCO
