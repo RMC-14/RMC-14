@@ -60,7 +60,7 @@
 - type: startingGear
   id: RMCGearSPPKommissar
   equipment:
-    head: CMHeadCapSPPPolBlack
+    head: RMCHeadCapSPPPolBlack
     ears: RMCHeadsetSPPCommand
     ears2: RMCM5CameraGear
     jumpsuit: RMCJumpsuitSPPOfficerShirt
@@ -416,7 +416,7 @@
 - type: startingGear
   id: RMCGearSPPDivisionKommissar
   equipment:
-    head: CMHeadCapSPPPolKomWhite
+    head: RMCHeadCapSPPPolKomWhite
     ears: RMCHeadsetSPPCommand
     ears2: RMCM5CameraGear
     jumpsuit: RMCJumpsuitSPPOfficerShirt
