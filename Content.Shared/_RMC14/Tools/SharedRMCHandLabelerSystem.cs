@@ -47,6 +47,9 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         if (!TryComp<PaperComponent>(args.Used, out _))
             return;
 
+        if (!_net.IsServer)
+            return;
+
         if (ent.Comp.LabelsLeft >= ent.Comp.MaxLabels)
         {
             _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-already-full"), ent, args.User);
@@ -57,14 +60,12 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         ent.Comp.LabelsLeft = ent.Comp.MaxLabels;
         Dirty(ent);
 
-        _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-refilled"), ent, args.User);
-
-        if (_net.IsServer)
-            QueueDel(args.Used);
+        _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-refill"), ent, args.User);
+        QueueDel(args.Used);
 
         args.Handled = true;
     }
-    // Pill bottle interaction because storage system marks args.Handled = true before we can do anything.
+    // Pill bottle interaction because storage system marks args.Handled = true even if insertion fails.
     private void OnBeforeRangedInteract(Entity<RMCHandLabelerComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled || !args.CanReach || args.Target == null)
