@@ -74,9 +74,11 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
             case ExpendableLightState.Dead:
                 comp.PlayingStream = _audioSystem.Stop(comp.PlayingStream);
 
+                //RMC14
                 var spentLayer = ExpendableLightVisualLayers.Base;
                 if (comp.UsesOverlay)
                     spentLayer = ExpendableLightVisualLayers.Overlay;
+                //RMC14
 
                 if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), spentLayer, out layerIdx, true))
                 {

@@ -27,7 +27,7 @@
           visible: false
           shader: unshaded
         - map: [ enum.ExpendableLightVisualLayers.Overlay ]
-          state: overlay
+          state: overlay #RMC14
     - type: Icon
       sprite: Objects/Misc/torch.rsi
       state: icon

@@ -95,7 +95,6 @@
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
-    blinkyLightState: flare-on
   - type: GenericVisualizer
     visuals:
       enum.SignalFlareVisuals.BeaconState:
