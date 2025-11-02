@@ -64,7 +64,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateConditons = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         var selfMsg = Loc.GetString("rmc-gut-start-self");
