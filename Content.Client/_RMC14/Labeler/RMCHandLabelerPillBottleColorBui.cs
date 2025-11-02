@@ -1,16 +1,14 @@
-using Content.Client.UserInterface.Controls;
+using Content.Client._RMC14.Chemistry.Master;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
-using Content.Shared._RMC14.Tools;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Client._RMC14.Labeler;
 
 public sealed class RMCHandLabelerPillBottleColorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private RMCPillBottleColorWindow? _window;
+    private RMCChemMasterPopupWindow? _window;
 
     protected override void Open()
     {
@@ -19,49 +17,9 @@ public sealed class RMCHandLabelerPillBottleColorBui(EntityUid owner, Enum uiKey
         _window?.Close();
 
         var spriteSystem = EntMan.System<SpriteSystem>();
-        _window = new RMCPillBottleColorWindow(spriteSystem);
-        _window.OnColorSelected += OnColorSelected;
+        _window = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-hand-labeler-pill-bottle-color") };
+        _window.OnClose += () => _window = null;
         _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (disposing)
-            _window?.Close();
-    }
-
-    private void OnColorSelected(RMCPillBottleColors color)
-    {
-        if (!EntMan.TryGetComponent<RMCHandLabelerComponent>(Owner, out var comp) || comp.CurrentPillBottle == null)
-            return;
-
-        SendPredictedMessage(new RMCHandLabelerPillBottleColorMsg(EntMan.GetNetEntity(comp.CurrentPillBottle.Value), color));
-        _window?.Close();
-    }
-}
-
-public sealed class RMCPillBottleColorWindow : FancyWindow
-{
-    public event Action<RMCPillBottleColors>? OnColorSelected;
-
-    public RMCPillBottleColorWindow(SpriteSystem spriteSystem)
-    {
-        Title = Loc.GetString("rmc-hand-labeler-pill-bottle-color");
-        SetSize = new Vector2(300, 400);
-
-        var scroll = new ScrollContainer
-        {
-            HScrollEnabled = false,
-            VScrollEnabled = true
-        };
-
-        var grid = new GridContainer
-        {
-            Columns = 3,
-            HSeparationOverride = 4,
-            VSeparationOverride = 4
-        };
 
         var pillCanisterRsi = new ResPath("_RMC14/Objects/Chemistry/pill_canister.rsi");
         var colors = Enum.GetValues<RMCPillBottleColors>();
@@ -73,16 +31,23 @@ public sealed class RMCPillBottleColorWindow : FancyWindow
             var button = new TextureButton
             {
                 TextureNormal = state.Frame0,
-                SetSize = new Vector2(90, 40),
-                Scale = new Vector2(2, 2)
             };
 
             var color = colors[i];
-            button.OnPressed += _ => OnColorSelected?.Invoke(color);
-            grid.AddChild(button);
-        }
+            button.OnPressed += _ =>
+            {
+                SendPredictedMessage(new RMCChemMasterPillBottleColorMsg(color));
+                _window?.Close();
+            };
 
-        scroll.AddChild(grid);
-        AddChild(scroll);
+            _window.Grid.AddChild(button);
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+            _window?.Close();
     }
 }

@@ -13,15 +13,13 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCHandLabelerComponent, RMCHandLabelerPillBottleColorMsg>(OnPillBottleColorMsg);
+        SubscribeLocalEvent<RMCHandLabelerComponent, RMCChemMasterPillBottleColorMsg>(OnPillBottleColorMsg);
         SubscribeLocalEvent<RMCHandLabelerComponent, DroppedEvent>(OnHandLabelerDropped);
     }
 
     private void OnHandLabelerDropped(Entity<RMCHandLabelerComponent> ent, ref DroppedEvent args)
     {
-        ent.Comp.CurrentPillBottle = null;
-        Dirty(ent);
-        _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
+        CloseColorUI(ent, clearBottle: true);
     }
 
     protected override void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
@@ -35,29 +33,34 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
         _ui.TryOpenUi(labeler, RMCHandLabelerUiKey.PillBottleColor, user);
     }
 
-    private void OnPillBottleColorMsg(Entity<RMCHandLabelerComponent> ent, ref RMCHandLabelerPillBottleColorMsg args)
+    private void OnPillBottleColorMsg(Entity<RMCHandLabelerComponent> ent, ref RMCChemMasterPillBottleColorMsg args)
     {
-        if (!TryGetEntity(args.PillBottle, out var pillBottle))
+        if (ent.Comp.CurrentPillBottle == null)
         {
-            ent.Comp.CurrentPillBottle = null;
-            Dirty(ent);
-            _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
+            CloseColorUI(ent);
             return;
         }
 
-        if (!TryComp<AppearanceComponent>(pillBottle.Value, out var appearance))
+        var pillBottle = ent.Comp.CurrentPillBottle.Value;
+
+        if (!Exists(pillBottle) || !TryComp<AppearanceComponent>(pillBottle, out var appearance))
         {
-            // Pill bottle doesn't have appearance component, close UI without changing anything
-            ent.Comp.CurrentPillBottle = null;
-            Dirty(ent);
-            _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
+            CloseColorUI(ent, clearBottle: true);
             return;
         }
 
-        _appearance.SetData(pillBottle.Value, RMCPillBottleVisuals.Color, args.Color, appearance);
+        _appearance.SetData(pillBottle, RMCPillBottleVisuals.Color, args.Color, appearance);
+        CloseColorUI(ent, clearBottle: true);
+    }
 
-        ent.Comp.CurrentPillBottle = null;
-        Dirty(ent);
+    private void CloseColorUI(Entity<RMCHandLabelerComponent> ent, bool clearBottle = false)
+    {
+        if (clearBottle)
+        {
+            ent.Comp.CurrentPillBottle = null;
+            Dirty(ent);
+        }
+
         _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
     }
 }

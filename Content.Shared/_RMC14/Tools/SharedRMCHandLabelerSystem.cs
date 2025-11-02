@@ -4,7 +4,6 @@ using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
-using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -27,10 +26,8 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCHandLabelerComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing, before: new[] { typeof(SharedStorageSystem) });
+        SubscribeLocalEvent<RMCHandLabelerComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCHandLabelerComponent, AfterInteractEvent>(OnAfterInteract, before: new[] { typeof(SharedHandLabelerSystem) });
-
-        SubscribeLocalEvent<InteractUsingEvent>(OnAnyInteractUsing, before: new[] { typeof(SharedStorageSystem) });
     }
 
     private void OnExamine(Entity<RMCHandLabelerComponent> ent, ref ExaminedEvent args)
@@ -67,28 +64,19 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnAnyInteractUsing(InteractUsingEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (!_tag.HasTag(args.Target, PillCanisterTag))
-            return;
-
-        if (!HasComp<RMCHandLabelerComponent>(args.Used))
-            return;
-
-        // Handle the pill canister interaction and prevent storage insertion cancer
-        OnPillBottleInteract(args.Used, args.Target, args.User);
-        args.Handled = true;
-    }
-
     private void OnAfterInteract(Entity<RMCHandLabelerComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach || args.Target == null)
             return;
 
         var target = args.Target.Value;
+
+        if (_tag.HasTag(target, PillCanisterTag))
+        {
+            OnPillBottleInteract(ent, target, args.User);
+            args.Handled = true;
+            return;
+        }
 
         if (!TryComp<HandLabelerComponent>(ent, out var labeler))
             return;
