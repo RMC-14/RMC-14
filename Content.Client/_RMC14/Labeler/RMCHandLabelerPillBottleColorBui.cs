@@ -10,15 +10,16 @@ namespace Content.Client._RMC14.Labeler;
 
 public sealed class RMCHandLabelerPillBottleColorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-
     private RMCPillBottleColorWindow? _window;
 
     protected override void Open()
     {
         base.Open();
 
-        _window = new RMCPillBottleColorWindow(_sprite);
+        _window?.Close();
+
+        var spriteSystem = EntMan.System<SpriteSystem>();
+        _window = new RMCPillBottleColorWindow(spriteSystem);
         _window.OnColorSelected += OnColorSelected;
         _window.OpenCentered();
     }

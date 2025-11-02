@@ -19,6 +19,8 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
 
     private void OnHandLabelerDropped(Entity<RMCHandLabelerComponent> ent, ref DroppedEvent args)
     {
+        ent.Comp.CurrentPillBottle = null;
+        Dirty(ent);
         _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
     }
 
@@ -36,13 +38,26 @@ public sealed class RMCHandLabelerSystem : SharedRMCHandLabelerSystem
     private void OnPillBottleColorMsg(Entity<RMCHandLabelerComponent> ent, ref RMCHandLabelerPillBottleColorMsg args)
     {
         if (!TryGetEntity(args.PillBottle, out var pillBottle))
+        {
+            ent.Comp.CurrentPillBottle = null;
+            Dirty(ent);
+            _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
             return;
+        }
 
         if (!TryComp<AppearanceComponent>(pillBottle.Value, out var appearance))
+        {
+            // Pill bottle doesn't have appearance component, close UI without changing anything
+            ent.Comp.CurrentPillBottle = null;
+            Dirty(ent);
+            _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
             return;
+        }
 
         _appearance.SetData(pillBottle.Value, RMCPillBottleVisuals.Color, args.Color, appearance);
 
+        ent.Comp.CurrentPillBottle = null;
+        Dirty(ent);
         _ui.CloseUi(ent.Owner, RMCHandLabelerUiKey.PillBottleColor);
     }
 }
