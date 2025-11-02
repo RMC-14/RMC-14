@@ -141,7 +141,7 @@
 
 - type: entity
   parent: CMHeadCapSPP
-  id: CMHeadCapSPPPolKomWhite
+  id: RMCHeadCapSPPPolKomWhite
   name: SPP  UL5 C-1 peaked cap
   description: SPP headgear issued to high ranking officers in the navy or Marine Infantry corps.
   components:
@@ -152,7 +152,7 @@
 
 - type: entity
   parent: CMHeadCapSPP
-  id: CMHeadCapSPPPolBlack
+  id: RMCHeadCapSPPPolBlack
   name: SPP  UL5 P-1 peaked cap
   description: SPP headgear issued to political Kommisars of all types. Reminds you of october.
   components:
