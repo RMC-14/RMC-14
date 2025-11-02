@@ -133,6 +133,10 @@
       entries:
       - id: RMCBinoculars
         points: 5
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries:
       - id: RMCVisorNightVision
