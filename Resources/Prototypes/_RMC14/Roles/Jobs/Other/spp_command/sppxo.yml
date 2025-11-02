@@ -55,7 +55,7 @@
     head: CMHeadCapSPPBeret
     ears: RMCHeadsetSPPCommand
     ears2: RMCM5CameraGear
-    jumpsuit: CMJumpsuitSPPOfficerAmmoFilled
+    jumpsuit: RMCJumpsuitSPPOfficerAmmoFilled
     outerClothing: RMCCoatSPPSeniorFilled
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled
