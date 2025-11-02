@@ -5,5 +5,5 @@ namespace Content.Shared._RMC14.Tools;
 [Serializable, NetSerializable]
 public enum RMCHandLabelerUiKey
 {
-    PillBottleColor
+    PillBottleColor,
 }

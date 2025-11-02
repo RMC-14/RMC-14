@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Tools;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCHandLabelerComponent : Component
 {
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public int LabelsLeft = 50;
 
     [DataField, AutoNetworkedField]
