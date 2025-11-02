@@ -107,8 +107,7 @@ public sealed partial class ExpendableLightComponent : Component
 public enum ExpendableLightVisuals
 {
     State,
-    Behavior,
-    LightBLinking
+    Behavior
 }
 
 [Serializable, NetSerializable]
