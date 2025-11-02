@@ -883,7 +883,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 if (map.XenoBlips.TryGetValue(playerId, out var playerXenoBlip))
                     user.Comp.XenoBlips[playerId] = playerXenoBlip;
-                else if (map.XenoStructureBlips.TryGetValue(playerId, out var playerXenoStructureBlip))
+                else if (map.XenoStructureBlips.TryGetValue(playerId, out var playerXenoStructureBlip)) // Shouldn't happen but just in case
                     user.Comp.XenoStructureBlips[playerId] = playerXenoStructureBlip;
             }
 
