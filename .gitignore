@@ -306,6 +306,3 @@ Resources/MapImages
 
 # Direnv stuff
 .direnv/
-/server_config.toml
-/Resources/ConfigPresets/Build/debug.toml
-/Resources/Changelog/Parts
