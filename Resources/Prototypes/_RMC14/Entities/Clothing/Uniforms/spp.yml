@@ -72,7 +72,7 @@
 
 - type: entity
   parent: CMJumpsuitSPPOfficer
-  id: CMJumpsuitSPPOfficerAmmoFilled
+  id: RMCJumpsuitSPPOfficerAmmoFilled
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingSPPCommandFilled
