@@ -37,6 +37,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMGrenadeFragOld #TODO, port SPP grenades.
+    - id: CMGrenadeFragOld #TODO rmc14, port SPP grenades.
     - id: CMGrenadeFragOld
-#TODO, someone please port Phosphorus greandes. I have naught the ability to add those.
+#TODO rmc14, someone please port Phosphorus greandes. I have naught the ability to add those.
