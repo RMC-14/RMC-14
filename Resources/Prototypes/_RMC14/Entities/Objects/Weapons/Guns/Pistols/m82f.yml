@@ -47,6 +47,7 @@
       - Flare
       - RMCFlare
       - RMCFlareCAS
+      - RMCFlareL96
     capacity: 1
     proto: CMFlare
     soundInsert:

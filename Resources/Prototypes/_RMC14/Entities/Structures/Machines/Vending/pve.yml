@@ -1203,7 +1203,7 @@
       entries:
       - id: RMCPouchFirstResponder
         amount: 10
-      - id: RMCPouchFlareFilled
+      - id: RMCPouchFlareL96Filled
         name: flare pouch (Full)
         amount: 10
       - id: RMCPouchMagazineLarge
@@ -1299,7 +1299,7 @@
       entries:
       - id: RMCFlashlight # TODO RMC14 combat flashlight
         amount: 10
-      - id: CMPackFlare # TODO RMC14 TWE L96 marking flares
+      - id: RMCPackFlareL96
         amount: 10
     - name: Sidearms
       entries:

@@ -408,6 +408,126 @@
   - type: TimedDespawn
     lifetime: 300
 
+- type: entity
+  name: flare
+  parent: BaseItem
+  id: RMCFlareL96
+  description: A vibrant purple Royal Crown Marines issued flare. There are instructions on the side, it reads 'To light, pull cord'.
+  components:
+  - type: Tag
+    tags:
+    - RMCFlareL96
+  - type: ExpendableLight
+    spentName: expendable-light-spent-flare-name
+    spentDesc: expendable-light-spent-flare-desc
+    glowDuration: 600
+    fadeOutDuration: 30
+    iconStateSpent: flare_spent
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+    litSound:
+      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
+      params:
+        variation: 0.08
+    loopedSound: /Audio/Items/Flare/flare_burn.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#C156C2"
+        visible: false
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: icon
+  - type: Item
+    size: Small
+    heldPrefix: unlit
+  - type: Appearance
+  - type: PointLight
+    enabled: false
+    color: "#C8BFE7"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour # faster then base flares
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour # burns out slower
+        id: fade_out
+        maxDuration: 570
+        startValue: 7.0
+        endValue: 1.0
+  - type: RMCNightVisionVisibleOnIgnite
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareL96Bullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareL96
+
+- type: entity
+  parent: CMPackFlareBase
+  id: RMCPackFlareL96
+  name: L96 marking flare pack
+  description: A packet of eight L96 Signal Marking Flares.
+  suffix: Filled
+  components:
+  - type: Tag
+    tags:
+    - RMCPackFlareL96
+  - type: Sprite
+    layers:
+    - state: l96_e
+      map: [ "emptyLayer" ]
+    - state: l96
+      map: [ "fullLayer" ] # TODO RMC14 proper sprites for this
+  - type: CMItemSlots
+    count: 8
+    startingItem: RMCFlareL96
+    slot:
+      whitelist:
+        tags:
+        - RMCFlareL96
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareL96Bullet
+  name: L96 flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareL96
+  - type: PointLight
+    enabled: true
+    color: "#C8BFE7"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  id: RMCAirFlareL96
+  name: air flare
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#C8BFE7"
+    radius: 8.0
+    energy: 0.6
+  - type: TimedDespawn
+    lifetime: 300
+
 - type: Tag
   id: RMCFlare
 
@@ -416,3 +536,9 @@
 
 - type: Tag
   id: RMCPackFlareCAS
+
+- type: Tag
+  id: RMCFlareL96
+
+- type: Tag 
+  id: RMCPackFlareL96
