@@ -33,6 +33,41 @@
     - delay: 0.4
 
 - type: entity
+  parent: RMCAttachmentExtendedBarrel
+  id: RMCAttachmentExtendedCompensator
+  name: AB-RVX extended compensator
+  description: A precision-engineered vented barrel extension used by various UN forces. Greatly improves accuracy, muzzle control, and projectile velocity, but reduces terminal damage due to pressure venting.
+  components:
+  - type: Sprite
+    state: ebarrel_vented
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentExtendedCompensator
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.3
+      projectileSpeedFlat: 10
+      damageFalloffAddMult: -0.1
+      damageAddMult: -0.1
+      recoilFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      recoilFlat: 1
+      accuracyAddMult: -0.3
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: ItemCamouflage
+    states:
+      Jungle: ebarrel_vented
+      Desert: d_ebarrel_vented
+      Snow: s_ebarrel_vented
+      Classic: c_ebarrel_vented
+      Urban: u_ebarrel_vented
+
+- type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentBarrelMar50
   name: MAR-50 barrel
@@ -111,6 +146,61 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentRecoilCompensatorM13
+  name: M13 extended recoil compensator
+  description: A heavy, overbuilt compensator and barrel extension for the M13 Auto Pistol. Greatly improves recoil control during automatic fire, at the cost of bulk and handling. Definitely compensating for something, but brutally effective.
+  components:
+  - type: Sprite
+    state: m10_overcomp
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentRecoilCompensatorM13
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.15
+      damageAddMult: 0.1
+      recoilFlat: -2
+    - conditions:
+        unwieldedOnly: true
+      recoilFlat: 2
+      accuracyAddMult: -0.2
+  - type: ItemCamouflage
+    states:
+      Jungle: m10_overcomp
+      Desert: d_m10_overcomp
+      Snow: s_m10_overcomp
+      Classic: c_m10_overcomp
+      Urban: u_m10_overcomp
+
+- type: entity
+  parent: RMCAttachmentRecoilCompensatorM13
+  id: RMCAttachmentRecoilCompensatorM13Spiked
+  name: M13 extended spiked recoil compensator
+  description: A brutally heavy, over-engineered compensator and barrel extension for the M13 Auto Pistol, tipped with a hardened spiked cap. Greatly improves recoil control during automatic fire—and turns the pistol into a nasty bludgeon in close quarters. Definitely compensating for something, but brutally effective.
+  components:
+  - type: Sprite
+    state: m10_overcomp_spike
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentRecoilCompensatorM13Spiked
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Slash: 20
+  - type: ItemCamouflage
+    states:
+      Jungle: m10_overcomp_spike
+      Desert: d_m10_overcomp_spike
+      Snow: s_m10_overcomp_spike
+      Classic: c_m10_overcomp_spike
+      Urban: u_m10_overcomp_spike
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
   id: RMCAttachmentShotgunChoke # choke
   name: shotgun choke
   description: "A threaded choke that can be inserted into the M42A2 Shotgun.
@@ -142,6 +232,7 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressor # suppressor
@@ -156,7 +247,6 @@
     - RMCAttachmentBarrel
     - RMCAttachmentSuppressor
   - type: AttachableVisuals
-    prefix: suppressor2
   - type: AttachableSilencer
     sound:
       collection: CMSilencedShoot
@@ -168,7 +258,25 @@
 
 - type: entity
   parent: RMCAttachmentSuppressor
-  id: RMCAttachmentSuppressorXM40 # XM40 suppressor
+  id: RMCAttachmentSuppressorCompact
+  name: compact suppressor
+  description: A lightweight, low-profile suppressor designed specifically for SMGs and sidearms. It dampens sound and muzzle flash while marginally improving stability and accuracy, though it slightly reduces projectile velocity and terminal damage.
+  components:
+  - type: Sprite
+    state: suppressor_sleek
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressorCompact
+  - type: AttachableSilencer
+    sound:
+      collection: RMCSilencedShootAlt
+      params:
+        maxDistance: 6
+
+- type: entity
+  parent: RMCAttachmentSuppressor
+  id: RMCAttachmentSuppressorXM40
   name: XM40 suppressor
   description: "A small tube with exhaust ports to expel noise and gas.
     Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."
@@ -297,7 +405,6 @@
     - RMCAttachmentBarrel
     - RMCAttachmentMatebaSnubNoseGolden
 
-
 - type: Tag
   id: RMCAttachmentBarrel
 
@@ -308,13 +415,25 @@
   id: RMCAttachmentExtendedBarrel
 
 - type: Tag
+  id: RMCAttachmentExtendedCompensator
+
+- type: Tag
   id: RMCAttachmentRecoilCompensator
+
+- type: Tag
+  id: RMCAttachmentRecoilCompensatorM13
+
+- type: Tag
+  id: RMCAttachmentRecoilCompensatorM13Spiked
 
 - type: Tag
   id: RMCAttachmentShotgunChoke
 
 - type: Tag
   id: RMCAttachmentSuppressor
+
+- type: Tag
+  id: RMCAttachmentSuppressorCompact
 
 - type: Tag
   id: RMCAttachmentSuppressorXM40

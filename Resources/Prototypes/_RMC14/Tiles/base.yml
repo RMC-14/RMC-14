@@ -1,0 +1,17 @@
+- type: tile
+  abstract: true
+  id: CMTileBase
+  baseTurf: CMFloorPlating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: CMTileItemSteel
+  heatCapacity: 10000
+  friction: 1
+
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMTileBaseUnpryable
+  deconstructTools: [ ]

@@ -37,8 +37,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
 
-    private bool _log;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -179,16 +177,10 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (_log)
-            Log.Info($"Running {nameof(CMRefillableSolutionSystem)}");
-
         var time = _timing.CurTime;
         var refillers = EntityQueryEnumerator<CMSolutionRefillerComponent, TransformComponent>();
         while (refillers.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (_log)
-                Log.Info($"Running {nameof(CMRefillableSolutionSystem)} for {uid}: {time}, {comp.RechargeAt}");
-
             if (time < comp.RechargeAt)
                 continue;
 
@@ -210,7 +202,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             }
 
             if (!any)
-                return;
+                continue;
 
             comp.Current = FixedPoint2.Min(comp.Max, comp.Current + comp.Recharge);
         }

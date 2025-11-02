@@ -8,7 +8,6 @@
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
   icon: "RMCJobIconSynth"
-  requireAdminNotify: true
   joinNotifyCrew: true
   whitelisted: true
   supervisors: cm-job-supervisors-colonists
@@ -16,6 +15,7 @@
   - Colonist
   - Synth
   roleWeight: 0.25
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:

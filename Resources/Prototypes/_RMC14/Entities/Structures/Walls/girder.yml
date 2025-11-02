@@ -1,8 +1,27 @@
 - type: entity
-  parent: Girder
+  parent: BaseStructure
   id: CMGirder
   name: girder
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - GlassAirlockLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: StaticPrice
+    price: 30
   - type: Sprite
     sprite: _RMC14/Structures/Walls/girder.rsi
     state: girder
@@ -12,6 +31,8 @@
   - type: Construction
     graph: CMGirder
     node: girder
+  - type: Damageable
+    damageModifierSet: RMCGirder
   - type: Destructible
     thresholds:
     - trigger:
@@ -34,6 +55,10 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    minimumClawStrength: VerySharp
+    maxHealth: 125
+    minimumXenoTier: 2
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
     flags: Breaching
@@ -83,6 +108,10 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    minimumClawStrength: VerySharp
+    maxHealth: 500
+    minimumXenoTier: 2
   - type: StaticPrice
     price: 66
 
