@@ -30,6 +30,7 @@
         RMCSkillSurgery: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 3
+        RMCSkillPilot: 1
         RMCSkillOverwatch: 1
         RMCSkillLeadership: 2
     - type: MarineOrders

@@ -30,6 +30,7 @@
         RMCSkillSurgery: 1  
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
+        RMCSkillPilot: 1
         RMCSkillLeadership: 1
     - type: MarineOrders
     - type: RMCPointing

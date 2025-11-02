@@ -30,6 +30,7 @@
         RMCSkillSurgery: 2 
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
+        RMCSkillPilot: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-medical-assistant
   hidden: true
