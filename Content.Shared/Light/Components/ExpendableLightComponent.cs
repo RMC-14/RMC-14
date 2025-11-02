@@ -43,6 +43,12 @@ public sealed partial class ExpendableLightComponent : Component
     public Color? GlowColorLit = null;
 
     /// <summary>
+    /// the sprite layer shader used while the expendable light is under cover
+    /// </summary>
+    [DataField]
+    public Color? AltGlowColorLit = Color.FromHex("#ED2F09");
+
+    /// <summary>
     /// The sound that plays when the expendable light is lit.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -101,7 +107,8 @@ public sealed partial class ExpendableLightComponent : Component
 public enum ExpendableLightVisuals
 {
     State,
-    Behavior
+    Behavior,
+    Color
 }
 
 [Serializable, NetSerializable]
@@ -110,7 +117,8 @@ public enum ExpendableLightState
     BrandNew,
     Lit,
     Fading,
-    Dead
+    Dead,
+    AltLit
 }
 
 [Serializable, NetSerializable]
@@ -119,4 +127,5 @@ public enum ExpendableLightVisualLayers : byte
     Base = 0,
     Glow = 1,
     Overlay = 2,
+    AlternateGlow = 3
 }

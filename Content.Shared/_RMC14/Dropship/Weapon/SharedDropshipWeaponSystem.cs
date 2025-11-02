@@ -1137,6 +1137,23 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
+        if (HasComp<ExpendableLightComponent>(ent) && HasComp<FlareSignalComponent>(ent))
+        {
+            var ev = new SignalFlareActivatedEvent();
+            var comp = Comp<ExpendableLightComponent>(ent);
+            var flare = Comp<FlareSignalComponent>(ent);
+            var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+            if (!CasDebug)
+                _popup.PopupEntity("Debug is failing", ent);
+
+            if (CasDebug && _area.CanCAS(coordinates))
+                ev.AltColor = null;
+            else
+                ev.AltColor = flare.SignalFailedColor;
+
+            RaiseLocalEvent(ent, ev);
+        }
+
         return true;
     }
 
@@ -1505,3 +1522,8 @@ public record struct DropshipWeaponShotEvent(
     RMCFire? Fire,
     int SoundEveryShots
 );
+
+public sealed class SignalFlareActivatedEvent : EntityEventArgs
+{
+    public Color? AltColor;
+}

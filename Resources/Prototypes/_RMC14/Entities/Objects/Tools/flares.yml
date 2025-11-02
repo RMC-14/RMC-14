@@ -92,6 +92,7 @@
   - type: PointLight
     color: "#AACCAA"
   - type: FlareSignal
+    signalFailedColor: "#ED2F09"
   - type: ExpendableLight
     glowDuration: 180
   - type: LightBehaviour
