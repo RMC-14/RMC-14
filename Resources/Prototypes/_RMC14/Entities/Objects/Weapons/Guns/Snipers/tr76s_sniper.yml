@@ -106,3 +106,12 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: Tag
+  id: RMCTR76SniperRifle
+
+- type: Tag
+  id: RMCMagazineSniperTR76
+
+- type: Tag
+  id: RMCTR76SIntegratedScope

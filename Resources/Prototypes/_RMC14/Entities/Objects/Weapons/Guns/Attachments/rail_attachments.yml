@@ -689,3 +689,6 @@
 
 - type: Tag
   id: RMCAttachmentFP9000Scope
+
+- type: Tag
+  id: RMCTR76SIntegratedScope
