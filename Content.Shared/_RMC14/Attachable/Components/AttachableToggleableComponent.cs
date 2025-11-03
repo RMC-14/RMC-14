@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Actions.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -151,6 +152,9 @@ public sealed partial class AttachableToggleableComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Attached = false;
+
+    [DataField, AutoNetworkedField]
+    public ItemActionIconStyle ActionIconStyle = ItemActionIconStyle.BigItem;
 }
 
 public enum AttachableInstantToggleConditions : byte

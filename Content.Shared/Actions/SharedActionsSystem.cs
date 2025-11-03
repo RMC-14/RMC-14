@@ -1008,6 +1008,16 @@ public abstract class SharedActionsSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(ActionComponent.IconColor));
     }
 
+    // RMC14
+    public void SetItemIconStyle(Entity<ActionComponent?> ent, ItemActionIconStyle style)
+    {
+        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.ItemIconStyle == style)
+            return;
+
+        ent.Comp.ItemIconStyle = style;
+        DirtyField(ent, ent.Comp, nameof(ActionComponent.ItemIconStyle));
+    }
+
     /// <summary>
     /// Set the event of an action.
     /// Since the event isn't required to be serializable this is not networked.
