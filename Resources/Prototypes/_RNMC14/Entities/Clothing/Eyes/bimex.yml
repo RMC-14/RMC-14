@@ -1,0 +1,10 @@
+- type: entity
+  parent: RMCSunglassesBig
+  id: RNMCGlassesBiMex
+  name: BiMex tactical shades
+  description: An expensive pair of BiMex branded, orange-tinted sunglasses. Largely produced for members of the US Army to protect their eyes from dust during range-time, but some pairs find their way onto the private market.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_tactical_shades.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_tactical_shades.rsi

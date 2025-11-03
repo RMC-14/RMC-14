@@ -1,0 +1,34 @@
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RNMCArmorPBAS
+  name: Personal Body Armor System
+  description: Whilst it saw limited field-testing amongst the USCMC, the US Army adopted the M4 series pattern armor across the board under the PBAS program. Surprisingly uncomfortable, even compared to the old M3 series armor. At least it's compatible with attachable suplementary armor components of the M3 series.
+  suffix: heavy
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/OuterClothing/Armor/PBAS.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/OuterClothing/Armor/PBAS.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 35
+    bio: 25
+    explosionArmor: 35
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier
+    walkModifier: 0.62
+    sprintModifier: 0.62
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMCanteen
+    - id: CMCrowbar
+    - id: CMEntrenchingTool
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false

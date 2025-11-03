@@ -1,0 +1,22 @@
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
+  id: CMBootsArmyBlack
+  name: US Army combat boots
+  description: A pair of standard issue black United States Army combat boots.
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+          - ThrowingKnife
+        startingItem: RNMCM1BakerKnife

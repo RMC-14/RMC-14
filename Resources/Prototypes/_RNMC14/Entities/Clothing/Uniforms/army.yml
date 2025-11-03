@@ -1,0 +1,14 @@
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RNMCJumpsuitArmy
+  name: army combat uniform
+  description: Standard-issue Army uniform in a two-tone desert/temperate color scheme, complete with venlar armor inserts at critical areas to protect from blades and ballistics.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Uniforms/army_jumpsuit.rsi
+  - type: Appearance
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchInfantry, RNMCPatchUSArmy ]
+  - type: CMArmor
+    bullet: 15
+    melee: 10

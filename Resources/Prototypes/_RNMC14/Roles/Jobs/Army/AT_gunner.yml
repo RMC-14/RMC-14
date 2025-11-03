@@ -1,0 +1,97 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCAntiTankGunner
+  name: rnmc-job-name-at-gunner
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobAntiTankGunner
+  ranks:
+    RNMCRankSpecialist: []
+  startingGear: RNMCJobAntiTankGunner
+  icon: RNMCJobIconAntiTankGunner
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Anti-Tank Gunner (Needs Loader)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+    - type: DemoSpecWhitelist
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-at-gunner
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyATGunner
+  name: US army anti-tank gunner ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCSniper
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyATGunner
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-at-gunner
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCAntiTankGunner
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobAntiTankGunner
+  equipment:
+    id: RNMCDogtagArmyATGunner
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: RNMCArmorPBAS
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: RNMCWeaponRifleM41AMK1Army
+    belt: RMCBeltMarineMK1
+    suitstorage: RMCWeaponLauncherM5ATL
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareFilled
+  storage:
+    back:
+    - RMCRocket84mm
+    - RMCRocket84mm
+    - RMCRocket84mmAntiArmor
+    - RMCRocket84mmAntiArmor
+
+- type: playTimeTracker
+  id: RNMCJobAntiTankGunner
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconAntiTankGunner
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: AT_gunner
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyATGunner
+  name: Army AT Gunner's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCAntiTankGunner

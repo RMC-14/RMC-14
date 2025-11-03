@@ -1,0 +1,12 @@
+- type: entity
+  parent: ClothingHandsBase
+  id: RNMCHandsBrownFingerless
+  name: fingerless combat gloves
+  description: A pair of brown combat gloves with the finger coverings cut off. No longer insulated from electrical shocks, nor wholly capable of protecting from shrapnel, at least your hands won't be quiet as sweaty all the time now though.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Hands/Gloves/brown_fingerless.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Hands/Gloves/brown_fingerless.rsi
+  - type: Fiber
+    fiberColor: fibers-brown

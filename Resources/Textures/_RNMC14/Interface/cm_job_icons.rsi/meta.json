@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites edited by github noctyrnal and Harriet",
+  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/mob/hud/hud.dmi, marsoc sprites edited by github noctyrnal and Harriet",
   "size": {
     "x": 16,
     "y": 16
@@ -18,6 +18,12 @@
         },
         {
             "name": "hudsquad_spec_hunter"
+        },
+        {
+            "name": "AT_gunner"
+        },
+        {
+            "name": "AT_loader"
         }
     ]
 }

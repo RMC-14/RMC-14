@@ -1,0 +1,14 @@
+- type: entity
+  parent: RMCHeadsetMarine
+  id: CMHeadsetUSArmy
+  name: Army radio headset
+  description: A robust headset used by members of the United States Army. Built to outlast those it's issued to.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/headsets.rsi
+    state: army
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RNMCEncryptionKeyUSArmy
+      - CMEncryptionKeyColony

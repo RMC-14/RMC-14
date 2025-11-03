@@ -1,0 +1,5 @@
+- type: rank
+  id: RNMCRankSpecialist
+  name: Specialist
+  prefix: Spc.
+  paygrade: E4
