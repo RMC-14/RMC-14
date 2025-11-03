@@ -17,9 +17,6 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsEngineering
-    time: 3600 # 1 hour
   ranks:
     RMCRankCaptain: []
   weight: 5
