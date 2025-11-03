@@ -411,14 +411,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                         var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
                         _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
                     }
-
-                    _solution.UpdateChemicals(pillSolution.Value);
                 }
             }
         }
 
         _solution.UpdateChemicals(buffer.Value);
-
         _adminLog.Add(LogType.RMCChemMaster,
             $"""
             {ToPrettyString(args.Actor):user} created {ent.Comp.PillAmount:pillAmount} {perPill:pillUnits}u pills in {ent.Comp.SelectedBottles.Count:bottleAmount} pill bottles using {ToPrettyString(ent):chemMaster}.
