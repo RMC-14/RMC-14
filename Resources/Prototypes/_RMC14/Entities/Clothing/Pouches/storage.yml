@@ -246,6 +246,16 @@
     grid:
     - 0,0,11,1 #6 slots
 
+- type: entity
+  parent: RMCPouchMagazinePistolLarge
+  id: RMCPouchMagazinePistolLargeFilledHighCommand
+  suffix: Filled, High Command
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 6
+
 # Shotgun Shell Pouch
 - type: entity
   parent: [RMCPouchStorage]

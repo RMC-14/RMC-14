@@ -45,13 +45,13 @@
     shoes: RMCBootsCBRN
     head: RMCHeadCapGeneral
     id: RMCIDCardUNMCBrigadierGeneral
-    ears: CMHeadsetHighCommand # RMC14 TODO: Provost Comms Access
+    ears: CMHeadsetHighCommand
     eyes: RMCSunglasses
     gloves: RMCHandsVeteranCBRN
     back: RMCSatchelLightpackFilledHighCommand
     belt: RMCMatebaBeltLuxuriousFilled
-    pocket1: RMCPouchGeneralLarge
-    pocket2: RMCPouchCommandFill
+    pocket1: RMCPouchMagazinePistolLargeFilledHighCommand
+    pocket2: RMCPouchGeneralLarge
   inhand:
     - RMCHeadBeretGeneral
 

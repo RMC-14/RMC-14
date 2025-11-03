@@ -365,6 +365,9 @@
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Item # Intentionally allows the armor to be stored in bags.
+    size: Normal
+    storedRotation: 0
 
 - type: entity
   parent: CMArmorM3Medium

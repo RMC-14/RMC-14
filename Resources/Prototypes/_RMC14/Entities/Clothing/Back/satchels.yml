@@ -733,8 +733,10 @@
     contents:
     # M40 CCDP Greande #RMC14 TODO
     - id: RMCGrenadeFlashBang
-    #- id: RMCArmorM3General
-    #- id: CMArmorHelmetM11CGenera
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+    - id: RMCArmorM3General
+    - id: CMArmorHelmetM11CGeneral
 
 - type: entity
   parent: RMCSatchelLightpack
