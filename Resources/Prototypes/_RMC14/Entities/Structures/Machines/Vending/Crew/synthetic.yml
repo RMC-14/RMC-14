@@ -332,8 +332,6 @@
         points: 15
       # backpack firefighting watertank - 15 Points
       # crew monitor - 15 Points
-      - id: RMCGlassesExperimentalMeson
-        points: 15
       # maintenance jack - 15 Points
       # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
