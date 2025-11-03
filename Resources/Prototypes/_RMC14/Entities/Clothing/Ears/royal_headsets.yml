@@ -40,7 +40,6 @@
       key_slots:
       - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
-    channels:
     radioTextIncrease: 3
   - type: GrantTacMapAlert
 
