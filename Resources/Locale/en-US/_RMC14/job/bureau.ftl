@@ -22,3 +22,7 @@ rmc-job-prefix-bureau-observer = OBS
 rmc-ghost-name-icb = Interstellar Commerce Bureau Liaison (Friendly)
 rmc-job-name-icb = Interstellar Commerce Bureau Liaison
 rmc-job-prefix-icb = ICB
+
+rmc-ghost-name-bureau-marksman = CMB Marksman (Friendly)
+rmc-job-name-bureau-marksman = CMB Marksman
+rmc-job-prefix-bureau-marksman = CMB MARK.

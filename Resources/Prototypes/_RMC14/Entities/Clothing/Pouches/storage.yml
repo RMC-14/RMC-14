@@ -216,6 +216,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag_pmc.rsi
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeTR76S
+  suffix: Filled, TR76S
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSniperTR76
+      amount: 4
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine

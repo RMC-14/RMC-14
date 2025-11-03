@@ -1,0 +1,108 @@
+﻿- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: RMCTR76SniperRifle
+  name: TR76S police marksman rifle
+  description: A heavy sniper rifle produced for law enforcement agencies, such as the CMB and ZSPA. Features an integrated scope, as well as IFF capabilities and a 14-round magazine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_inhands.rsi
+  - type: Tag
+    tags:
+    - RMCTR76SniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.55
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperTR76
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperTR76
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: IFFToggle
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCTR76SIntegratedScope
+        whitelist:
+          tags:
+          - RMCTR76SIntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.5, -0.343
+  - type: RMCGunChamber
+    enabled: false
+
+- type: entity
+  parent: BaseItem
+  id: RMCMagazineSniperTR76
+  name: "TR76S marksman magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo for the TR76S Police Marksman Rifle.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperTR76
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x28mm
+    proto: CMCartridgeSniper10x28mm
+    capacity: 14
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/tr76s.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

@@ -562,6 +562,25 @@
     actionDesc: Lets you see further.
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCTR76SIntegratedScope
+  name: TR76S integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: tr76s_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCTR76SIntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: tr76s_scope
+    actionName: Look through the TR76s' Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
