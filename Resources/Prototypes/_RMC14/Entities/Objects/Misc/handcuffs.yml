@@ -58,13 +58,12 @@
   description: A box full of zipties.
   suffix: RMC
   components:
-  - type: Item
-    sprite: Objects/Storage/boxes.rsi
   - type: Sprite
-    sprite: Objects/Storage/boxes.rsi
-    layers:
-    - state: box_security
-    - state: ziptie
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    state: handcuff
+  - type: Item
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    size: Large
   - type: ItemSlots
   - type: CMItemSlots
     startingItem: RMCZipties
