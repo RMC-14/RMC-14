@@ -18,6 +18,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly LabelSystem _labelSystem = default!;
 
     private const string PillCanisterTag = "PillCanister";
 
@@ -85,32 +86,22 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
         if (!string.IsNullOrEmpty(labelText))
         {
-            if (!_whitelist.IsWhitelistFail(labeler.Whitelist, target) && ent.Comp.LabelsLeft > 0)
+            if (_whitelist.IsWhitelistFail(labeler.Whitelist, target))
             {
-                ent.Comp.LabelsLeft--;
-                Dirty(ent);
-                _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
-
-                if (_net.IsServer)
-                {
-                    var labelSys = EntityManager.System<LabelSystem>();
-                    labelSys.Label(target, labelText);
-                }
+                args.Handled = true;
+                return;
             }
-            else if (ent.Comp.LabelsLeft <= 0)
+
+            if (ConsumeLabel(ent, args.User))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-out-of-labels"), ent, args.User);
+                ApplyLabel(target, labelText);
+                _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
             }
         }
         else if (TryComp<LabelComponent>(target, out var labelComp) && !string.IsNullOrEmpty(labelComp.CurrentLabel))
         {
+            ApplyLabel(target, null);
             _audio.PlayPredicted(ent.Comp.RemoveLabelSound, ent, args.User);
-
-            if (_net.IsServer)
-            {
-                var labelSys = EntityManager.System<LabelSystem>();
-                labelSys.Label(target, null);
-            }
         }
 
         args.Handled = true;
@@ -139,16 +130,10 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         if (_whitelist.IsWhitelistFail(labeler.Whitelist, target))
             return;
 
-        switch (ent.Comp.LabelsLeft)
+        if (!ConsumeLabel(ent, args.User))
         {
-            case <= 0:
-                _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-out-of-labels"), ent, args.User);
-                args.Handled = true;
-                return;
-            case > 0:
-                ent.Comp.LabelsLeft--;
-                Dirty(ent);
-                break;
+            args.Handled = true;
+            return;
         }
 
         _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
@@ -156,5 +141,26 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
 
     protected virtual void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
     {
+    }
+
+    private bool ConsumeLabel(Entity<RMCHandLabelerComponent> ent, EntityUid user)
+    {
+        if (ent.Comp.LabelsLeft <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hand-labeler-out-of-labels"), ent, user);
+            return false;
+        }
+
+        ent.Comp.LabelsLeft--;
+        Dirty(ent);
+        return true;
+    }
+
+    private void ApplyLabel(EntityUid target, string? labelText)
+    {
+        if (_net.IsServer)
+        {
+            _labelSystem.Label(target, labelText);
+        }
     }
 }
