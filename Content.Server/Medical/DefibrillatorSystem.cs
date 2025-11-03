@@ -22,10 +22,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.PowerCell;
 using Content.Shared.Timing;
 using Content.Shared.Traits.Assorted;
-using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Serialization;
 
 namespace Content.Server.Medical;
 
