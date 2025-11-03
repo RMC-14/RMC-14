@@ -101,6 +101,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+      - type: ZombieImmune
   hidden: true
 
 - type: startingGear
