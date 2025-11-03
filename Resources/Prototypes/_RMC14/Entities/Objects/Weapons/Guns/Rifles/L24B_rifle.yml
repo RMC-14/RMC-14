@@ -6,18 +6,18 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/inhand.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
     layers:
     - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24B_Icon.rsi
     - state: bolt-open
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24B_Icon.rsi
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24B_Icon.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/inhand.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
   - type: Gun
     shotsPerBurst: 3
     selectedMode: FullAuto
@@ -92,26 +92,17 @@
           - RMCAttachmentS42xTelescopicMiniscope
         random:
         - RMCAttachmentS6ReflexSight
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentL24BStock
-        whitelist:
-          tags:
-          - RMCAttachmentL24BStock
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentU7UnderbarrelShotgun
+        startingAttachable: RMCAttachmentUnderbarrelShotgunL24B
         whitelist:
           tags:
-          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentUnderbarrelShotgunL24B
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.906, 0.03125
-      rmc-aslot-rail: -0.0175, 0.19
-      rmc-aslot-stock: -0.469, 0.01
-      rmc-aslot-underbarrel: 0.31375, -0.315
-
+      rmc-aslot-barrel: 0.965, 0.065
+      rmc-aslot-rail: 0.125, 0.215
+      rmc-aslot-underbarrel: 0.5605, -0.25
 
 - type: Tag
   id: RMCWeaponRifleL24B
-
