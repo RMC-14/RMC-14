@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalTroopSargePVE
   ranks:
-    RMCRankTSESergeant: [ ]
+    RMCRankTSEColourSergeant: [ ]
   startingGear: RMCGearRoyalTroopSargePVE
   icon: "RMCJobIconRoyalTroopSargePVE"
   joinNotifyCrew: false
@@ -36,6 +36,11 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: SquadLeader
+      icon: 
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_troopleader_pve
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-troop-sergeant
   hidden: true

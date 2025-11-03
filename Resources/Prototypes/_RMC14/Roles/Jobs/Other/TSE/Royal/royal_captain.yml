@@ -40,6 +40,11 @@
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon: 
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_captain
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-captain
   hidden: true

@@ -151,6 +151,26 @@
   alert: SquadTrackerCommandingOfficer
 
 - type: trackerMode
+  id: RCMPVESectionLead
+  job: CMRoyalMarinesSectionLeaderPVE
+  alert: SquadTrackerRCMPVESectionLead
+
+- type: trackerMode
+  id: RCMPVETroopSergeant
+  job: CMRoyalMarinesTroopSargePVE
+  alert: SquadTrackerRCMPVETroopSergeant
+
+- type: trackerMode
+  id: RCMPVETeamLead
+  job: CMRoyalMarinesTeamLeaderPVE
+  alert: SquadTrackerRCMPVETeamLead
+
+- type: trackerMode
+  id: RCMPVETroopCommander
+  job: CMRoyalMarinesTroopCommanderPVE
+  alert: SquadTrackerRCMPVETroopCommander
+
+- type: trackerMode
   id: MARSOCLeader
   job: CMMarineRaiderLeader
 

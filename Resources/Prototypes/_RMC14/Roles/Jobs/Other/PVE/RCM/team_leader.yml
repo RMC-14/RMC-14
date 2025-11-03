@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalTeamLeaderPVE
   ranks:
-    RMCRankTSELanceCorporal: [ ]
+    RMCRankTSECorporal: [ ]
   startingGear: RMCGearRoyalTeamLeaderPVE
   icon: "RMCJobIconRoyalTeamLeaderPVE"
   joinNotifyCrew: false
@@ -35,6 +35,11 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: SquadLeader
+      icon: 
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_teamleader_pve
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-team-leader
   hidden: true

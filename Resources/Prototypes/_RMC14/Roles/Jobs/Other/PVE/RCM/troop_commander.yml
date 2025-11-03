@@ -36,6 +36,11 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: SquadLeader
+      icon: 
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_lieutenant_pve
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-troop-commander
   hidden: true

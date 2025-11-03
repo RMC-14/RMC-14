@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalMedicPVE
   ranks:
-    RMCRankTSEMarine: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearRoyalMedicPVE
   icon: "RMCJobIconRoyalMedicPVE"
   joinNotifyCrew: false

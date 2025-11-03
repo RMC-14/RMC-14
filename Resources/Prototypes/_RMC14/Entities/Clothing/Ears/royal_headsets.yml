@@ -16,38 +16,65 @@
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetIconsTSE
+  parent: RMCHeadsetRoyalMarine
   id: RMCHeadsetRoyalMarineLeader
   name: royal marine leader's headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
   components:
-  - type: Sprite
-    state: vai_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyRoyalMarine
+      - RMCEncryptionKeyRoyalMarineCommand
   - type: RMCHeadset
-    channels:
-    - RoyalMarine
     radioTextIncrease: 2
   - type: GrantTacMapAlert
 
 - type: entity
-  parent: RMCHeadsetIconsTSE
+  parent: RMCHeadsetRoyalMarine
   id: RMCHeadsetRoyalMarineOfficer
   name: royal marine officer's headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
   components:
-  - type: Sprite
-    state: vai_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyRoyalMarine
+      - RMCEncryptionKeyRoyalMarineCommand
+  - type: RMCHeadset
+    channels:
+    radioTextIncrease: 3
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalMarine
+  id: RMCHeadsetRoyalMarinePVE
+  name: royal marine's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. 
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMPVETroopCommander
+    trackerModes:
+    - RCMPVESectionLead
+    - RCMPVETroopSergeant
+    - RCMPVETeamLead
+    - RCMPVETroopCommander
   - type: RMCHeadset
     channels:
     - RoyalMarine
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetRoyalMarinePVE
+  id: RMCHeadsetRoyalMarineLeaderPVE
+  name: royal marine leader's headset
+  suffix: PVE
+  description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarineCommand
+  - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantTacMapAlert
 
@@ -58,9 +85,19 @@
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommand
     - MarineCommon
     - RoyalMarine
     defaultChannel: RoyalMarine
   - type: Sprite
     state: sl_key
+
+- type: entity
+  parent: RMCEncryptionKeyRoyalMarine
+  id: RMCEncryptionKeyRoyalMarineCommand
+  name: royal marine command radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon
+    - RoyalMarine
+    - MarineCommand
