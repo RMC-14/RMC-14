@@ -9,6 +9,10 @@
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
   ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobNurse
+      time: 252000 # 70 hours
     RMCRankSergeant:
     - !type:RoleTimeRequirement
       role: CMJobNurse
