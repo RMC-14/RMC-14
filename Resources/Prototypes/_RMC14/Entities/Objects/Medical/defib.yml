@@ -12,6 +12,8 @@
     - state: defib_on
       map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
+    - state: full
+      map: [ "enum.DefibrillatorVisualLayers.Overlay"]
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -19,6 +21,13 @@
         enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
+      enum.DefibrillatorVisuals.DefibrillatorCharge:
+        enum.DefibrillatorVisualLayers.Overlay:
+          Empty: { state: empty }
+          Low: { state: low }
+          Half: { state: half }
+          Full: { state: full }
+        
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Medical/defib.rsi
