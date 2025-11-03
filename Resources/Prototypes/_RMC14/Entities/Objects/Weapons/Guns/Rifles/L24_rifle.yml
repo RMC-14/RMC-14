@@ -100,12 +100,6 @@
         random:
         - RMCAttachmentS6ReflexSight
         - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentL24Stock
-        whitelist:
-          tags:
-          - RMCAttachmentL24Stock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -125,10 +119,19 @@
         - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.906, 0.03125
-      rmc-aslot-rail: -0.0175, 0.19
-      rmc-aslot-stock: -0.5, 0.01
-      rmc-aslot-underbarrel: 0.3125, -0.315
+      rmc-aslot-barrel: 0.965, 0.065
+      rmc-aslot-rail: 0.125, 0.215
+      rmc-aslot-underbarrel: 0.563, -0.26
+
+- type: entity
+  parent: RMCWeaponRifleL24
+  id: RMCWeaponRifleL24PVE
+  suffix: PVE
+  components:
+  - type: RMCSelectiveFire
+    baseFireRate: 3.25
+  - type: AttachableHolder
+    randomAttachmentChance: 0
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -148,7 +151,7 @@
     proto: RMCCartridgeRifleL24
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -174,7 +177,7 @@
       - RMCCartridgeRifleL24AP
     proto: RMCCartridgeRifleL24AP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -202,7 +205,7 @@
         - RMCCartridgeRifleL24HEAP
       proto: RMCCartridgeRifleL24HEAP
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -230,7 +233,7 @@
         - RMCCartridgeRifleL24Incendiary
       proto: RMCCartridgeRifleL24Incendiary
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -259,7 +262,7 @@
       proto: RMCCartridgeRifleL24
       capacity: 45
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/extendedL24.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24e.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
