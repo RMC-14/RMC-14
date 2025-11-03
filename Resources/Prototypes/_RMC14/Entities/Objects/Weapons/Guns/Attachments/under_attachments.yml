@@ -402,6 +402,9 @@
     state: ""
   - type: AttachableVisuals
     suffix: ""
+  - type: AttachableToggleable
+    actionIconStyle: NoItem
+    actionName: Switch to the L24B underbarrel shotgun
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -828,6 +831,9 @@
 
 - type: Tag
   id: RMCAttachmentU7UnderbarrelShotgun
+
+- type: Tag
+  id: RMCAttachmentUnderbarrelShotgunL24B
 
 - type: Tag
   id: RMCAttachmentU1GrenadeLauncher

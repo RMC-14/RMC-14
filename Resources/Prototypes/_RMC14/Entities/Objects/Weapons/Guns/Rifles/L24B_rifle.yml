@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleL24B
   name: L24B rifle
-  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marine units. This particular model was modified to facilitate RCM operations in tight quarters.
+  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marine units. This particular model was modified to facilitate RMC operations in tight quarters, allowing for it to be fired one-handed. This however crippled its stopping power due to a shorter barrel needed to make it compact. Burst fire still kicks like a mule. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in RCM's purple-blue camouflage
   suffix: Filled
   components:
   - type: Sprite
@@ -100,9 +100,19 @@
           - RMCAttachmentUnderbarrelShotgunL24B
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.965, 0.065
+      rmc-aslot-barrel: 0.845, 0.065
       rmc-aslot-rail: 0.125, 0.215
       rmc-aslot-underbarrel: 0.5605, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL24B
+  id: RMCWeaponRifleL24BPVE
+  suffix: PVE
+  components:
+  - type: RMCSelectiveFire
+    baseFireRate: 4
+  - type: AttachableHolder
+    randomAttachmentChance: 0
 
 - type: Tag
   id: RMCWeaponRifleL24B
