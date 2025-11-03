@@ -49,14 +49,13 @@
       prefix: rmc-job-prefix-spp-xo
   hidden: true
 
-
 - type: startingGear
   id: RMCGearSPPXO
   equipment:
     head: CMHeadCapSPPBeret
     ears: RMCHeadsetSPPCommand
     ears2: RMCM5CameraGear
-    jumpsuit: CMJumpsuitSPPOfficerAmmoFilled
+    jumpsuit: RMCJumpsuitSPPOfficerAmmoFilled
     outerClothing: RMCCoatSPPSeniorFilled
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled

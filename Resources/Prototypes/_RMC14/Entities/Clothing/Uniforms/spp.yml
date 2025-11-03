@@ -72,7 +72,7 @@
 
 - type: entity
   parent: CMJumpsuitSPPOfficer
-  id: CMJumpsuitSPPOfficerAmmoFilled
+  id: RMCJumpsuitSPPOfficerAmmoFilled
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingSPPCommandFilled
@@ -122,9 +122,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-jacket-verb-unfold
-    foldVerbText: rmc-jacket-verb-fold
 
 # Civilians
 - type: entity

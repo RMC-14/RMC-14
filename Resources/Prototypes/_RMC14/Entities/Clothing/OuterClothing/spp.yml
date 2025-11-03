@@ -222,7 +222,6 @@
     - id: RMCRangefinder
     - id: CMGauze10
 
-
 - type: entity
   parent: RMCCoatBureauDeputy
   id: RMCCoatOfficerShortWhite
