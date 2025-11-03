@@ -121,7 +121,7 @@
     offsets:
       rmc-aslot-barrel: 0.965, 0.065
       rmc-aslot-rail: 0.125, 0.215
-      rmc-aslot-underbarrel: 0.563, -0.26
+      rmc-aslot-underbarrel: 0.5605, -0.25
 
 - type: entity
   parent: RMCWeaponRifleL24
