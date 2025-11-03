@@ -377,6 +377,13 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         var originalSolution = string.Join(", ",
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
         var coords = Transform(ent).Coordinates;
+
+        var reagentAmountsPerPill = new Dictionary<string, FixedPoint2>();
+        foreach (var reagent in buffer.Value.Comp.Solution.Contents)
+        {
+            reagentAmountsPerPill[reagent.Reagent.Prototype] = reagent.Quantity / divider;
+        }
+
         foreach (var fill in _toFill)
         {
             var label = CompOrNull<LabelComponent>(fill)?.CurrentLabel;
@@ -399,10 +406,18 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 if (TryComp(pill, out SolutionSpikerComponent? spiker) &&
                     _solution.TryGetSolution(pill, spiker.SourceSolution, out var pillSolution))
                 {
-                    _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, pill, pillSolution.Value, perPill);
+                    foreach (var (reagentProto, amount) in reagentAmountsPerPill)
+                    {
+                        var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
+                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
+                    }
+
+                    _solution.UpdateChemicals(pillSolution.Value);
                 }
             }
         }
+
+        _solution.UpdateChemicals(buffer.Value);
 
         _adminLog.Add(LogType.RMCChemMaster,
             $"""
