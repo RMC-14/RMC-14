@@ -18,7 +18,7 @@
   - type: Item
     size: Large
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_inhands.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_inhands.rsi
   - type: Tag
     tags:
     - RMCTR76SniperRifle
