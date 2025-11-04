@@ -1,7 +1,7 @@
 - type: gameMap
   id: Rover
   mapName: "Rover"
-  mapPath: /Maps/_RMC14/rover.yml
+  mapPath: /Maps/_RMC14/PVE/rover.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
