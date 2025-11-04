@@ -270,9 +270,6 @@ public sealed class FiremanCarrySystem : EntitySystem
         _transform.SetLocalPosition(target, Vector2.Zero);
         _standing.Down(target, changeCollision: true);
 
-        if (carrier.Carrying != null)
-            _virtualItem.TrySpawnVirtualItemInHand(target, user);
-
         _movementSpeed.RefreshMovementSpeedModifiers(user);
         _rmcSprite.SetRenderOrder(user, 1);
     }
