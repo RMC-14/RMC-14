@@ -94,12 +94,6 @@
         - RMCAttachmentS5RedDotSight
         - RMCAttachmentS6ReflexSight
         - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentL83A2Stock
-        whitelist:
-          tags:
-          - RMCAttachmentL83A2Stock
       rmc-aslot-underbarrel:
         whitelist:
           tags:

@@ -59,7 +59,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  
+
 - type: startingGear
   id: RMCGearRoyalCommando
   equipment:
@@ -69,7 +69,7 @@
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
-    suitstorage: WeaponRifleL83A3
+    suitstorage: RMCWeaponRifleL83A3
     id: RMCIDRoyalMarinesCommando
     belt: RMCL83A3BeltFilled
     back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack

@@ -1100,22 +1100,6 @@
 
 - type: entity
   parent: RMCAttachableBase
-  id: RMCAttachmentL83A2Stock
-  name: L83A2 solid stock
-  description: Intergrated into the L83A2. You shouldn't have this.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
-    state: l83a2_a
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentL83A2Stock
-
-- type: entity
-  parent: RMCAttachableBase
   id: RMCAttachmentM54CE2Stock
   name: M54CE2 solid stock
   description: Intergrated into the M54CE2. You shouldn't have this.
@@ -1136,22 +1120,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM54CE2Stock
-
-- type: entity
-  parent: RMCAttachableBase
-  id: RMCAttachmentL83A3Stock
-  name: L83A3 solid stock
-  description: Integrated into the L83A3. You shouldn't have this.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
-    state: L83A3
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentL83A3Stock
 
 - type: entity
   parent: RMCAttachmentM54CStockCollapsible
@@ -1259,12 +1227,6 @@
 
 - type: Tag
   id: RMCAttachmentType71Stock
-
-- type: Tag
-  id: RMCAttachmentL83A2Stock
-
-- type: Tag
-  id: RMCAttachmentL83A3Stock
 
 - type: Tag
   id: RMCAttachmentAK4047StockCollapsible
