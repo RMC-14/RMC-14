@@ -70,3 +70,7 @@
 - type: lobbyBackground
   id: JudgmentDay
   background: /Textures/_RMC14/Lobby/Judgment_Day.png
+
+- type: lobbyBackground
+  id: goodhits
+  background: /Textures/_RMC14/Lobby/good_hits.png
