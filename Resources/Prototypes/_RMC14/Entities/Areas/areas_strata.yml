@@ -162,7 +162,7 @@
   name: Geothermal Springs Marshes
   components:
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -216,7 +216,7 @@
   - type: Sprite
     state: marshship
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
