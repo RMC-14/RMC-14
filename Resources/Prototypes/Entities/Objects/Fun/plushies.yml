@@ -426,19 +426,15 @@
       right:
       - state: inhand-right
         shader: shaded
+  - type: UseDelay
+    delay: 120
   - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Items/Toys/arf.ogg
-  - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/arf.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/arf.ogg
   - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Items/Toys/arf.ogg
-  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Items/Toys/arf.ogg
   - type: Food
