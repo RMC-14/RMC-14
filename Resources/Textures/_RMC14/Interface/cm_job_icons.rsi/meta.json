@@ -197,6 +197,12 @@
             "name": "hudsquad_pvi2"
         },
         {
+            "name": "hudsquad_pid"
+        },
+        {
+            "name": "hudsquad_pid2"
+        },
+        {
             "name": "hudsquad_pvtml"
         },
         {
