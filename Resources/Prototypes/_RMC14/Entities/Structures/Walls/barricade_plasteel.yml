@@ -4,6 +4,7 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeExplosivePlasteel
+    baseEntity: RMCBarricadePlasteel
 
 - type: entity
   parent: RMCBiohazardUpgrade
@@ -11,6 +12,7 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeBurnPlasteel
+    baseEntity: RMCBarricadePlasteel
 
 - type: entity
   parent: RMCBruteUpgrade
@@ -18,6 +20,7 @@
   components:
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeBrutePlasteel
+    baseEntity: RMCBarricadePlasteel
 
 - type: Tag
   id: RMCPlasteelBarricade
@@ -128,6 +131,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBiohazardUpgradePlasteel
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -151,6 +155,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBruteUpgradePlasteel
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -173,6 +178,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCExplosiveUpgradePlasteel
 
 - type: entity
   parent: CMBarricadeMetalDoor

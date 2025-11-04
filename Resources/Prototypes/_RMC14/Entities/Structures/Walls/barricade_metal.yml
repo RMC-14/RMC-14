@@ -87,6 +87,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-explosive
     upgradedEntity: CMBarricadeExplosive
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: explosive
 
@@ -98,6 +99,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-burn
     upgradedEntity: CMBarricadeBurn
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: burn
 
@@ -109,6 +111,7 @@
   - type: RMCConstructionUpgrade
     upgradedPopup: rmc-construction-upgrade-brute
     upgradedEntity: CMBarricadeBrute
+    baseEntity: CMBarricadeMetal
   - type: Sprite
     state: brute
 
@@ -208,6 +211,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBiohazardUpgrade
 
 - type: entity
   parent: CMBarricadeMetal
@@ -231,6 +235,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBruteUpgrade
 
 - type: entity
   parent: CMBarricadeMetal
@@ -253,6 +258,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCExplosiveUpgrade
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity
