@@ -77,20 +77,6 @@
     - RMCPlushieGnarpGnarpAlt
 
 - type: loadout
-  id: PlushieXippyRMC
-  cost: 4
-  storage:
-    back:
-      - RMCPlushieXippy
-
-- type: loadout
-  id: PlushieCrowRMC
-  cost: 4
-  storage:
-    back:
-      - RMCPlushieCrow
-
-- type: loadout
   id: PlushieRounyRMC
   cost: 4
   storage:
