@@ -455,3 +455,54 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+
+- type: entity
+  parent: RMCColMarTechMedicalEquipmentPVE
+  id: ColMarTechMedicalChemicalPVE
+  suffix: PVE
+  name: ColMarTech squad medical chemical rack
+  description: An automated gear rack for specialized chemicals for the hospital corpsman.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_chemical.rsi
+  - type: CMAutomatedVendor
+    pointsType: Chemicals
+    sections:
+    - name: Essential Medication
+      choices: { RMCEssentialChemical: 1 }
+      entries:
+      # TODO RMC14: newmed; replace GC with IA
+      # - id: RMCPillCanisterImidazolineAlkysine
+      #   recommended: true
+      # - id: RMCBottleImidazolineAlkysine
+      #   recommended: true
+      - id: RMCPillCanisterGC
+        recommended: true
+      - id: RMCLargeBottleGC
+        recommended: true
+    - name: Pill Bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        points: 60
+      - id: CMPillCanisterKelotaneDermaline
+        points: 60
+      # TODO RMC14: newmed
+      # - id: RMCPillCanisterNitrogenWater
+      #   points: 30
+      - id: RMCPillCanisterDexalinPlus
+        points: 30
+      - id: RMCPillCanisterIron
+        points: 30
+    - name: Liquid Bottles
+      entries:
+      - id: RMCLargeBottleMeralyneBicaridine
+        points: 40
+      - id: RMCLargeBottleKelotaneDermaline
+        points: 40
+      - id: RMCLargeBottleDexalinPlus
+        points: 30
+    # TODO RMC14: the minitank is currently non functional
+    # - name: Injectors
+    #   entries:
+    #   - id: CMMiniTank
+    #     points: 40

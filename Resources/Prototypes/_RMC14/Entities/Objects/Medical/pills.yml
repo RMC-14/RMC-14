@@ -281,3 +281,69 @@
   - type: ExamineRequiresSkill
     skills:
       RMCSkillMedical: 0
+
+- type: entity
+  parent: CMPill
+  id: RMCPillDexalinPlus
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 0.1
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 0.1
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-dexalin-plus
+
+- type: entity
+  parent: CMPill
+  id: RMCPillGC
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 2.96
+        - ReagentId: CMKelotane
+          Quantity: 2.96
+        - ReagentId: CMDermaline
+          Quantity: 2.96
+        - ReagentId: CMMeralyne
+          Quantity: 2.96
+        - ReagentId: CMTricordrazine
+          Quantity: 2.96
+        - ReagentId: CMDexalinPlus
+          Quantity: 0.2
+  - type: Sprite
+    layers:
+    - state: pill1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-gc
+
+- type: entity
+  parent: CMPill
+  id: RMCPillIron
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    layers:
+    - state: pill14
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-iron
