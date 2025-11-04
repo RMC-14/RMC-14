@@ -60,7 +60,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
         _upgradeItemQuery.TryComp(used, out var upgradeItem);
         _downgradeItemQuery.TryComp(used, out var downgradeItem);
 
-        if (upgradeItem != null && downgradeItem != null)
+        if (upgradeItem == null && downgradeItem == null)
             return;
 
         if (upgradeItem != null && !_whitelist.IsValid(upgradeItem.Whitelist, ent))
