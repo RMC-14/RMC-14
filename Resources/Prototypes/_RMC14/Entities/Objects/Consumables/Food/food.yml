@@ -552,3 +552,28 @@
           Quantity: 12
         - ReagentId: Protein
           Quantity: 8
+
+- type: entity
+  name: bangers and mash
+  parent: CMFoodBase
+  id: FoodBangersMash
+  description: Goes together like fish and chips, beans and.... nevermind.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: bangers-mash
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - meaty
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 4
