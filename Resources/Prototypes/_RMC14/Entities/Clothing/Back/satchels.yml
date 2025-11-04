@@ -139,13 +139,13 @@
   parent: RMCBackpackScout
   id: RMCBackpackPID
   name: P68 thermal cloak
-  description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible, and does not inhibit weapon usage.
+  description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
   - type: ThermalCloak
     opacity: 0
-    restrictWeapons: false
+    restrictWeapons: true
     cloakedHideLayers:
     - Hair
     - HeadTop
