@@ -12,6 +12,13 @@
   prefix: PvSnM.
   paygrade: O8
 
+# Any admin with high law understanding, now CIA style
+- type: rank
+  id: RMCRankProvostAgent
+  name: Special Agent
+  prefix: PvSA.
+  paygrade: A
+
 # Any admin with low law understanding, or wanting a lower rank
 - type: rank
   id: RMCRankProvostMarshal

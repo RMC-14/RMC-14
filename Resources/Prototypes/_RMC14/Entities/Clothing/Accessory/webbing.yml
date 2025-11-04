@@ -665,6 +665,19 @@
 
 - type: entity
   parent: CMWebbingBlack
+  id: RMCWebbingPID
+  suffix: PID, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCLaserDesignatorScout
+    - id: CMFlash
+    - id: RMCTelescopicBaton
+    - id: RMCHandcuffs
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: CMWebbingBlack
   id: RMCWebbingPMC
   suffix: PMC, Filled
   components:

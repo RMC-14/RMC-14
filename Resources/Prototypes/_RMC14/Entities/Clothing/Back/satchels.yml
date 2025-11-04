@@ -136,6 +136,46 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
 
 - type: entity
+  parent: RMCBackpackScout
+  id: RMCBackpackPID
+  name: P68 thermal cloak
+  description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible, and does not inhibit weapon usage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
+  - type: ThermalCloak
+    opacity: 0
+    restrictWeapons: false
+    cloakedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Tail
+    - Snout # I don't know if this is hugely problematic but better safe than sorry
+    whitelist:
+      components:
+      - ScoutWhitelist
+    cloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+      params:
+        variation: 0.09
+    uncloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+      params:
+        variation: 0.09
+
+- type: entity
+  parent: RMCBackpackPID
+  id: RMCBackpackPIDFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: RMCPacketGrenadeFlashBang
+    - id: RMCTabletCO
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel

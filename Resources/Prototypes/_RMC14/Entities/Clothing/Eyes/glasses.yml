@@ -64,6 +64,20 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
 
 - type: entity
+  parent: CMGlassesM42ScoutSight
+  id: RMCGlassesPIDCommandoNightVision
+  name: Type 9 provost goggles
+  description: A headset and night vision goggles system used by Provost Special Agents. Allows highlighted imaging of surroundings while also providing flash immunity and security information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+  - type: FlashImmunity
+
+- type: entity
   parent: ClothingEyesHudMedical
   id: RMCGlassesM4SPRBattleSight
   name: M4SPR Battle Sight

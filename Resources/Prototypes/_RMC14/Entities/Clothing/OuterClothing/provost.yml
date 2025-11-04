@@ -98,6 +98,31 @@
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: Storage
     grid:
-    - 0,0,3,1 # 2 slots
+    - 0,0,7,1 # 3 slots + ziptie box
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - RMCScoutArmor
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 3
+
+
+- type: entity
+  parent: RMCArmorProvostAgent
+  id: RMCArmorProvostAgentFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleXM40HEAP
+    - id: RMCMagazineRifleXM40HEAP
+    - id: RMCMagazineRifleXM40HEAP
+    - id: RMCBoxZiptie
