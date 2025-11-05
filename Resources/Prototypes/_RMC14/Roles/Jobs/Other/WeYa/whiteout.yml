@@ -56,8 +56,6 @@
         types:
           Blunt: 35
     - type: Synth
-      removeComponents:
-      - type: ThermalRegulator
       canUseGuns: true
     - type: CMArmor
       immuneToAP: true

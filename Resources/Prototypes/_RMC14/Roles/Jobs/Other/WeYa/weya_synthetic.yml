@@ -54,8 +54,6 @@
         types:
           Blunt: 35
     - type: Synth
-      removeComponents:
-      - type: ThermalRegulator
   hasIcon: false
   hidden: true
 

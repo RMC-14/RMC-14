@@ -67,9 +67,6 @@
         types:
           Blunt: 35
     - type: Synth
-      removeComponents:
-      - type: ThermalRegulator
-      - type: ZombieImmune
   hidden: true
 
 - type: startingGear
@@ -94,3 +91,37 @@
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
+
+- type: entity
+  id: RMCSynthAddComponents
+  hidden: true
+  components:
+  - type: NightVision
+    innate: true
+    state: half
+    onlyHalf: true
+    alert: SynthNightVision
+  - type: EyeProtection
+  - type: WoundableUntreatable
+  - type: Insulated
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+  - type: ZombieImmune
+
+- type: entity
+  id: RMCSynthRemoveComponents
+  hidden: true
+  components:
+  - type: CMSurgeryTarget
+  - type: Infectable
+  - type: Hunger
+  - type: Thirst
+  - type: Perishable
+  - type: ThermalRegulator
+  - type: Stamina
+  - type: DamageForceSay
+  - type: Dna
+  - type: InjectableSolution
+  - type: IVDripTarget
+  - type: RMCSuicide
+    damage: { }

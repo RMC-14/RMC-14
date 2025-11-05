@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.IdentityManagement;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
@@ -60,11 +59,11 @@ public abstract class SharedSynthSystem : EntitySystem
 
     protected virtual void MakeSynth(Entity<SynthComponent> ent)
     {
-        EntityManager.AddComponents(ent.Owner, ent.Comp.AlwaysAddComponents);
+        if (_prototypes.TryIndex(ent.Comp.AddComponents, out var addComponents))
+            EntityManager.AddComponents(ent.Owner, addComponents.Components);
 
-        EntityManager.RemoveComponents(ent.Owner, ent.Comp.AlwaysRemoveComponents);
-        if (ent.Comp.RemoveComponents != null)
-            EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
+        if (_prototypes.TryIndex(ent.Comp.RemoveComponents, out var removeComponents))
+            EntityManager.RemoveComponents(ent.Owner, removeComponents.Components);
 
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);

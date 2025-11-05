@@ -67,9 +67,6 @@
           Blunt: 35
     - type: Synth
       generation: rmc-species-synth-generation-second
-      removeComponents:
-      - type: ThermalRegulator
-      - type: ZombieImmune
   hidden: true
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 

@@ -56,8 +56,6 @@
       preset: RMCSurvivorPresetHybrisaSynthXenoarch
     - type: Synth
       generation: rmc-species-synth-generation-second
-      removeComponents:
-      - type: ThermalRegulator
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear

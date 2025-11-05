@@ -62,8 +62,6 @@
         types:
           Blunt: 35
     - type: Synth
-      removeComponents:
-      - type: ThermalRegulator
   hidden: true
 
 - type: startingGear
