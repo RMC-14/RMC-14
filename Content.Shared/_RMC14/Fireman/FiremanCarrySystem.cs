@@ -87,32 +87,26 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarriableCanDropDragged(Entity<FiremanCarriableComponent> ent, ref CanDropDraggedEvent args)
     {
-        if (args.User != args.Target)
+        if (args.User != args.Target || !TryComp(args.Target, out CanFiremanCarryComponent? carrier))
             return;
 
-        if (!TryComp(args.Target, out CanFiremanCarryComponent? carrier))
-            return;
-
-        if (!_rmcPulling.IsPulling(args.User, ent.Owner))
-            return;
-
-        args.CanDrop = true;
-        args.Handled = true;
+        if (_rmcPulling.IsPulling(args.User, ent.Owner))
+        {
+            args.CanDrop = true;
+            args.Handled = true;
+        }
     }
 
     private void OnCarrierCanDropTarget(Entity<CanFiremanCarryComponent> ent, ref CanDropTargetEvent args)
     {
-        if (args.User != ent.Owner)
+        if (args.User != ent.Owner || !TryComp(args.Dragged, out FiremanCarriableComponent? carriable))
             return;
 
-        if (!TryComp(args.Dragged, out FiremanCarriableComponent? carriable))
-            return;
-
-        if (!_rmcPulling.IsPulling(args.User, args.Dragged))
-            return;
-
-        args.CanDrop = true;
-        args.Handled = true;
+        if (_rmcPulling.IsPulling(args.User, args.Dragged))
+        {
+            args.CanDrop = true;
+            args.Handled = true;
+        }
     }
 
     private void OnCarrierBeforeThrow(Entity<CanFiremanCarryComponent> carrier, ref BeforeThrowEvent args)
@@ -135,10 +129,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private EntityUid GetActualItem(EntityUid itemUid)
     {
-        if (TryComp(itemUid, out VirtualItemComponent? virtualItem))
-            return virtualItem.BlockingEntity;
-
-        return itemUid;
+        return TryComp(itemUid, out VirtualItemComponent? virtualItem) ? virtualItem.BlockingEntity : itemUid;
     }
 
     private bool ValidateThrow(Entity<CanFiremanCarryComponent> carrier, EntityUid target, FiremanCarriableComponent carriable, EntityUid heldItem)
@@ -161,21 +152,14 @@ public sealed class FiremanCarrySystem : EntitySystem
             return false;
         }
 
-        if (!_handsQuery.TryComp(carrier, out var hands))
-            return false;
-
-        if (!_hands.IsHolding((carrier.Owner, hands), heldItem))
-            return false;
-
-        return true;
+        return _handsQuery.TryComp(carrier, out var hands) && _hands.IsHolding((carrier.Owner, hands), heldItem);
     }
 
     private void OnCarriableDragDropDragged(Entity<FiremanCarriableComponent> ent, ref DragDropDraggedEvent args)
     {
-        if (!TryComp(args.User, out CanFiremanCarryComponent? carrier) || args.Target != args.User)
-            return;
-
-        if (!_rmcPulling.IsPulling(args.User, ent.Owner))
+        if (!TryComp(args.User, out CanFiremanCarryComponent? carrier) ||
+            args.Target != args.User ||
+            !_rmcPulling.IsPulling(args.User, ent.Owner))
             return;
 
         args.Handled = true;
@@ -226,10 +210,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private bool ValidateCarrierWhitelist(EntityUid carrier, EntityUid target, FiremanCarriableComponent carriable)
     {
-        if (carriable.CarrierWhitelist == null)
-            return true;
-
-        return _whitelist.IsValid(carriable.CarrierWhitelist, carrier);
+        return carriable.CarrierWhitelist == null || _whitelist.IsValid(carriable.CarrierWhitelist, carrier);
     }
 
     private void OnCarriableFiremanCarryDoAfterAttempt(Entity<FiremanCarriableComponent> ent, ref DoAfterAttemptEvent<FiremanCarryDoAfterEvent> args)
@@ -240,10 +221,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarriableFiremanCarryDoAfter(Entity<FiremanCarriableComponent> ent, ref FiremanCarryDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        if (!TryComp(args.User, out CanFiremanCarryComponent? carrier))
+        if (args.Cancelled || args.Handled || !TryComp(args.User, out CanFiremanCarryComponent? carrier))
             return;
 
         if (_transform.IsParentOf(Transform(ent.Owner), args.User))
@@ -306,10 +284,8 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         ent.Comp.BreakingFree = true;
 
-        if (!_rmcPulling.IsBeingPulled(ent.Owner, out var puller))
-            return;
-
-        ShowBreakFreeMessages(ent, puller);
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller))
+            ShowBreakFreeMessages(ent, puller);
     }
 
     private void ShowBreakFreeMessages(EntityUid target, EntityUid puller)
@@ -372,27 +348,19 @@ public sealed class FiremanCarrySystem : EntitySystem
         if (args.PulledUid != ent.Owner)
             return;
 
-        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller) &&
-            TryComp(puller, out CanFiremanCarryComponent? carrier))
-        {
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller) && TryComp(puller, out CanFiremanCarryComponent? carrier))
             StopPull((puller, carrier), ent);
-        }
     }
 
     private void OnCarriablePullStopped(Entity<FiremanCarriableComponent> ent, ref PullStoppedMessage args)
     {
-        if (ent.Owner != args.PulledUid)
-            return;
-
-        _standing.Stand(ent);
+        if (ent.Owner == args.PulledUid)
+            _standing.Stand(ent);
     }
 
     private void OnCarriablePullAttempt(Entity<FiremanCarriableComponent> ent, ref PullAttemptEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (ent.Comp.BeingCarried || IsBeingAggressivelyGrabbed(ent))
+        if (!args.Cancelled && (ent.Comp.BeingCarried || IsBeingAggressivelyGrabbed(ent)))
             args.Cancelled = true;
     }
 
@@ -416,10 +384,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarrierMobStateChanged(Entity<CanFiremanCarryComponent> ent, ref MobStateChangedEvent args)
     {
-        if (ent.Comp.Carrying is not { } carrying)
-            return;
-
-        if (args.NewMobState == MobState.Dead)
+        if (ent.Comp.Carrying is { } carrying && args.NewMobState == MobState.Dead)
             StopCarry((ent, ent), carrying);
     }
 
@@ -490,7 +455,6 @@ public sealed class FiremanCarrySystem : EntitySystem
             EnsureComp<KnockedDownComponent>(target);
 
         _rmcPulling.PlayPullEffect(carrier, target);
-
         ShowAggressiveGrabMessages(carrier, target);
     }
 
