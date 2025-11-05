@@ -468,18 +468,14 @@
   - type: CMAutomatedVendor
     pointsType: Chemicals
     sections:
-    - name: Essential Medication
-      choices: { RMCEssentialChemical: 1 }
-      entries:
-      # TODO RMC14: newmed; replace GC with IA
-      # - id: RMCPillCanisterImidazolineAlkysine
-      #   recommended: true
-      # - id: RMCBottleImidazolineAlkysine
-      #   recommended: true
-      - id: RMCPillCanisterGC
-        recommended: true
-      - id: RMCLargeBottleGC
-        recommended: true
+    # TODO RMC14: newmed
+    # - name: Essential Medication
+    #   choices: { RMCEssentialChemical: 1 }
+    #   entries:
+    #   - id: RMCPillCanisterImidazolineAlkysine
+    #     recommended: true
+    #   - id: RMCBottleImidazolineAlkysine
+    #     recommended: true
     - name: Pill Bottles
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
