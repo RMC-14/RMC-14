@@ -77,15 +77,50 @@
     - RMCPlushieGnarpGnarpAlt
 
 - type: loadout
+  id: PlushieArachnidRMC
+  cost: 4
+  storage:
+    back:
+      - PlushieArachnid
+
+- type: loadout
+  id: PlushieLizardRMC
+  cost: 4
+  storage:
+    back:
+      - PlushieLizard
+
+- type: loadout
+  id: PlushieDionaRMC
+  cost: 4
+  storage:
+    back:
+      - PlushieDiona
+
+- type: loadout
+  id: PlushieHampterRMC
+  cost: 4
+  storage:
+    back:
+      - PlushieHampter
+
+- type: loadout
+  id: PlushiePenguinRMC
+  cost: 4
+  storage:
+    back:
+      - PlushiePenguin
+
+- type: loadout
   id: PlushieRounyRMC
   cost: 4
   storage:
     back:
-      - PlushieRouny
+    - PlushieRouny
 
 - type: loadout
   id: PlushieExperimentRMC
   cost: 4
   storage:
     back:
-      - PlushieExperiment
+    - PlushieExperiment

@@ -180,19 +180,15 @@
   - type: Sprite
     sprite: Objects/Fun/Plushies/hampter.rsi
     state: icon
+  - type: UseDelay
+    delay: 120
   - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Items/Toys/mousesqueek.ogg
-  - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Items/Toys/mousesqueek.ogg
-  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: Food
@@ -305,26 +301,22 @@
 
 - type: entity
   parent: BasePlushie
-  id: PlushieArachind
+  id: PlushieArachnid
   name: arachnid plushie
   description: An adorable stuffed toy that resembles an arachnid. It feels silky..
   components:
   - type: Sprite
     sprite: Objects/Fun/Plushies/arachnid.rsi
     state: icon
+  - type: UseDelay
+    delay: 120
   - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
-  - type: EmitSoundOnLand
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
   - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
-  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
   - type: Food
@@ -348,26 +340,22 @@
   parent: BasePlushie
   id: PlushieLizard #Weh!
   name: lizard plushie
-  description: An adorable stuffed toy that resembles a lizardperson. Made by CentComm as a token initiative to combat speciesism in work environments. "Welcome your new colleagues as you do this plush, with open arms!"
+  description: An adorable stuffed toy that resembles a lizardperson. Made as a token initiative to combat speciesism in work environments. "Welcome your new colleagues as you do this plush, with open arms!"
   components:
   - type: Sprite
     sprite: Objects/Fun/Plushies/lizard.rsi
     state: icon
   - type: Item
     sprite: Objects/Fun/Plushies/lizard.rsi
+  - type: UseDelay
+    delay: 120
   - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: Food
@@ -614,19 +602,15 @@
     - state: plushie_diona1
       map: [ "enum.SolutionContainerLayers.Fill" ]
       visible: false
+  - type: UseDelay
+    delay: 120
   - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Items/Toys/toy_rustle.ogg
-  - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
   - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Items/Toys/toy_rustle.ogg
-  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
   - type: MeleeWeapon
@@ -1153,6 +1137,8 @@
   - type: Sprite
     sprite: Objects/Fun/Plushies/penguin.rsi
     state: icon
+  - type: UseDelay
+    delay: 120
   - type: Clothing
     quickEquip: false
     sprite: Objects/Fun/Plushies/penguin.rsi
