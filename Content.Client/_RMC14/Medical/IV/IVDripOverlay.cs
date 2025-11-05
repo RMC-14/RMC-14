@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Medical.IV;
-using Content.Shared._RMC14.Telephone;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
