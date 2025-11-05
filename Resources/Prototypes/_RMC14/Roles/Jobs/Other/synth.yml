@@ -94,7 +94,7 @@
 
 - type: entity
   id: RMCSynthAddComponents
-  hidden: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: NightVision
     innate: true
@@ -110,7 +110,7 @@
 
 - type: entity
   id: RMCSynthRemoveComponents
-  hidden: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMSurgeryTarget
   - type: Infectable
