@@ -413,6 +413,48 @@
 
 - type: entity
   parent: RMCFoodSnackBase
+  id: RMCFoodSnackSamosaPackaged
+  name: packaged samosa
+  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  components:
+  - type: Sprite
+    state: samosa
+  - type: Item
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodPacketSamosaTrash
+    - id: RMCFoodSnackSamosa
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSamosa
+  name: packaged samosa
+  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - Potato
+    - bread
+    - salty
+  - type: Sprite
+    state: open_samosa
+  - type: Item
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
   id: RMCFoodSnackEATBar
   name: MEAT Bar
   description: It is a vacuum sealed tube of suspicious meat. Artificially packed full of nutrients you can't pronounce. The M is printed on the side, so it just reads EAT. Guess that's where the slogan comes from.
@@ -555,6 +597,16 @@
   components:
   - type: Sprite
     state: hotdog_trash
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSamosaTrash
+  name: samosa wrapper
+  description: A greasy plastic film that once held a Samosa. Packaged by We-Ya.
+  components:
+  - type: Sprite
+    state: samosa_trash
 
 - type: entity
   categories: [ HideSpawnMenu ]
