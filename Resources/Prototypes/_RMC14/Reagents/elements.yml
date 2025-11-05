@@ -143,7 +143,7 @@
   desc: reagent-desc-iron
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#C8A5DC"
+  color: "#a19d94"
   overdose: 30
   metabolisms:
     Medicine:
