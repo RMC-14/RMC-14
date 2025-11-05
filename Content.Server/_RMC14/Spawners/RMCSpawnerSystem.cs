@@ -73,8 +73,15 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (_rmcMap.IsTileBlocked(coordinates))
             return false;
 
-        if (tile == null || _turf.IsSpace(tile))
+        if (_turf.IsSpace(tile))
             return false;
+
+        if (TryComp<GunSpawnerComponent>(uid, out var spawner))
+        {
+            var def = _turf.GetContentTileDefinition(tile);
+            if (spawner.BlockedTiles.Contains(def.ID))
+                return false;
+        }
 
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid.Value);
         while (anchored.MoveNext(out var ent))
@@ -180,7 +187,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
                     else
                     {
                         Spawn(protoId, spawnerCoords);
-                        Logger.Error($"Random spawner {ToPrettyString(ent)} was unable to find valid coordinates");
+                        Logger.Warning($"Random spawner {ToPrettyString(ent)} was unable to find valid coordinates");
                     }
                 }
             }
