@@ -81,7 +81,7 @@
   cost: 4
   storage:
     back:
-      - PlushieArachnid
+      - PlushieArachind
 
 - type: loadout
   id: PlushieLizardRMC
