@@ -328,35 +328,3 @@
     reagents:
       CMKelotane: 70
       CMDermaline: 70
-
-- type: entity
-  parent: RMCLargeBottleFilled
-  id: RMCLargeBottleGC
-  name: large general cure bottle
-  description: A large bottle. Contains general cure - used to treat most types of damage.
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 140
-        reagents:
-        - ReagentId: CMBicaridine
-          Quantity: 27.44
-        - ReagentId: CMKelotane
-          Quantity: 27.44
-        - ReagentId: CMDermaline
-          Quantity: 27.44
-        - ReagentId: CMMeralyne
-          Quantity: 27.44
-        - ReagentId: CMTricordrazine
-          Quantity: 27.44
-        - ReagentId: CMDexalinPlus
-          Quantity: 2.8
-  - type: CMRefillableSolution
-    reagents:
-      CMBicaridine: 27.44
-      CMKelotane: 27.44
-      CMDermaline: 27.44
-      CMMeralyne: 27.44
-      CMTricordrazine: 27.44
-      CMDexalinPlus: 2.8

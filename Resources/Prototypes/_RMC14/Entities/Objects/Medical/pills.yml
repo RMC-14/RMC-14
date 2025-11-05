@@ -302,34 +302,6 @@
 
 - type: entity
   parent: CMPill
-  id: RMCPillGC
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: CMBicaridine
-          Quantity: 2.96
-        - ReagentId: CMKelotane
-          Quantity: 2.96
-        - ReagentId: CMDermaline
-          Quantity: 2.96
-        - ReagentId: CMMeralyne
-          Quantity: 2.96
-        - ReagentId: CMTricordrazine
-          Quantity: 2.96
-        - ReagentId: CMDexalinPlus
-          Quantity: 0.2
-  - type: Sprite
-    layers:
-    - state: pill1
-      map: [ "enum.DamageStateVisualLayers.Base" ]
-  - type: ExamineRequiresSkill
-    skilledExamine: rmc-pill-contents-gc
-
-- type: entity
-  parent: CMPill
   id: RMCPillIron
   components:
   - type: SolutionContainerManager

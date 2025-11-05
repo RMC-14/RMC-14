@@ -402,38 +402,6 @@
 
 - type: entity
   parent: RMCPillCanisterNoSkill
-  id: RMCPillCanisterGCNoSkill
-  name: general cure pill bottle
-  suffix: GC, 16, No Skill
-  components:
-  - type: Item
-    heldPrefix: 3
-  - type: Sprite
-    layers:
-    - state: pill_canister0
-      map: [ "bottleSurfaceLayer" ]
-    - state: open
-      map: [ "openLayer" ]
-    - state: closed
-      map: [ "closedLayer" ]
-  - type: StorageFill
-    contents:
-    - id: RMCPillGC
-      amount: 16
-  - type: IconLabel
-    labelTextLocId: rmc-gc-container-label-text
-
-- type: entity
-  parent: RMCPillCanisterGCNoSkill
-  id: RMCPillCanisterGC
-  suffix: GC, 16
-  components:
-  - type: StorageSkillRequired
-    skills:
-      RMCSkillMedical: 2
-
-- type: entity
-  parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterIronNoSkill
   name: iron pill bottle
   suffix: Iron, 16, No Skill

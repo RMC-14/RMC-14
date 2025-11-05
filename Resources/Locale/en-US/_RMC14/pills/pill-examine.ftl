@@ -15,5 +15,4 @@ rmc-pill-contents-russianred = A Russian Red pill. A very dangerous radiation-co
 rmc-pill-contents-antized = A pill of some unique medicine. You believe it can treat necrotic infections.
 rmc-pill-contents-imidazoline = An Imidazoline pill. Used to restore vision from non-congenital eye damage.
 rmc-pill-contents-dexalin-plus = A Dexalin Plus pill. Used to instantly treat oxygen deprivation.
-rmc-pill-contents-gc = A General Cure pill. Used to treat most types of damage.
 rmc-pill-contents-iron = A Iron pill. Used to quickly restore blood.

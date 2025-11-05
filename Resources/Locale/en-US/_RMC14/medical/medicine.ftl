@@ -64,7 +64,6 @@ rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
 rmc-imidazoline-container-label-text = IM
-rmc-gc-container-label-text = GC
 rmc-iron-container-label-text = Fe
 
 rmc-custom-container-label-text = {$customLabel}
@@ -88,6 +87,3 @@ reagent-desc-rmcantized = A chemical designed for use against Agent A0-3959X.91â
 
 reagent-name-rmclipozine = Lipozine
 reagent-desc-rmclipozine = Lowers satiation and reduces body weight by increasing ketosis and the rate of which fat is metabolized. Use to treat obesity. Large doses can cause extreme weight loss.
-
-reagent-name-gc = General Cure
-reagent-desc-gc = A vicious concoction of (almost) every chemical known to man. Treats most types of damage.
