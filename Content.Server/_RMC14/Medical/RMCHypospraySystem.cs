@@ -35,6 +35,9 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         if (_slots.CanInsert(ent, args.Used, args.User, slots.Slots[ent.Comp.SlotId], true))
             return;
 
+        if (container.ContainedEntities.Count == 0)
+            return;
+
         var vial = container.ContainedEntities[0];
 
         // Syringe and Spikable handling mostly copied from various places
