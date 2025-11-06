@@ -104,7 +104,7 @@
 
 - type: entity
   parent: RMCBookBase
-  id: RMCBookStarHunter
+  id: RMCBookInterstellarLogistics
   name: "Interstellar Logistics & Planning in the 22nd Century."
   description: This book is focused mostly on the transportation of goods and services in the context of interstellar travel, as well as some recent issues the industry is facing, especially in regards to tensions between the superpowers and CLF activity on the frontier. Written by Economist Jayliee Mearsh.
   components:
