@@ -12,7 +12,7 @@
   parent: RMCBookBase
   id: RMCBookSPP
   name: "The Raise And Steadying of the Socialist Progressive Peoples, By Robert Mendes"
-  description: A large, supposedly unbiased history book containing what's supposed to be the history of the so-called UPP. Written by Historian Robert Mendes, United Nations.
+  description: A large, supposedly unbiased history book containing what's supposed to be the history of the so-called SPP. Written by Historian Robert Mendes, United Nations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/SPP.rsi
