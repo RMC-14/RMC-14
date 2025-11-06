@@ -480,19 +480,19 @@ cm-chatsan-word-nuke = nuke
 cm-chatsan-replacement-nuke = hive killer
 
 cm-chatsan-word-intel = intel
-cm-chatsan-replacement-intel = scavenger talls
+cm-chatsan-replacement-intel = scavenger hosts
 
 cm-chatsan-word-survivor = survivor
 cm-chatsan-replacement-survivor = planet tall
 
 cm-chatsan-word-survivors = survivors
-cm-chatsan-replacement-survivors = planet talls
+cm-chatsan-replacement-survivors = planet hosts
 
 cm-chatsan-word-surv = surv
 cm-chatsan-replacement-surv = planet tall
 
 cm-chatsan-word-survs = survs
-cm-chatsan-replacement-survs = planet talls
+cm-chatsan-replacement-survs = planet hosts
 
 cm-chatsan-word-bro = bro
 cm-chatsan-replacement-bro = sister
@@ -819,22 +819,22 @@ cm-chatsan-word-ap = armor piercing
 cm-chatsan-word-replacement-ap = armor piercing
 
 cm-chatsan-word-alpha = alpha
-cm-chatsan-word-replacement-alpha = red talls
+cm-chatsan-word-replacement-alpha = red hosts
 
 cm-chatsan-word-bravo = bravo
-cm-chatsan-word-replacement-bravo = yellow talls
+cm-chatsan-word-replacement-bravo = yellow hosts
 
 cm-chatsan-word-charlie = charlie
-cm-chatsan-word-replacement-charlie = purple talls
+cm-chatsan-word-replacement-charlie = purple hosts
 
 cm-chatsan-word-delta = delta
-cm-chatsan-word-replacement-delta = blue talls
+cm-chatsan-word-replacement-delta = blue hosts
 
 cm-chatsan-word-echo = echo
-cm-chatsan-word-replacement-echo = green talls
+cm-chatsan-word-replacement-echo = green hosts
 
 cm-chatsan-word-foxtrot = foxtrot
-cm-chatsan-word-replacement-foxtrot = brown talls
+cm-chatsan-word-replacement-foxtrot = brown hosts
 
 cm-chatsan-word-thru = through
 cm-chatsan-replacement-thru = through
