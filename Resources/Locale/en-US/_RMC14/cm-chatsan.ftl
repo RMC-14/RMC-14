@@ -856,3 +856,6 @@ cm-chatsan-replacement-t4 = tier 4
 
 cm-chatsan-word-evo = evo
 cm-chatsan-replacement-evo = evolution
+
+cm-chatsan-word-evos = evos
+cm-chatsan-replacement-evos = evolutions
