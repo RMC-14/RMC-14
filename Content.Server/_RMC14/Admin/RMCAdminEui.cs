@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
+using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Admin;
@@ -29,6 +30,7 @@ public sealed class RMCAdminEui : BaseEui
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IReflectionManager _reflection = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
 
     private readonly RMCAdminSystem _rmcAdmin;
     private readonly SharedCMAutomatedVendorSystem _automatedVendor;
@@ -268,10 +270,13 @@ public sealed class RMCAdminEui : BaseEui
             }
             case RMCAdminClearHiveMsg clearHive:
             {
-                if (_entities.TryGetEntity(_target, out var target))
+                if (_entities.TryGetEntity(_target, out var target) &&
+                    _entities.TryGetComponent<ActorComponent>(target.Value, out var actor))
                 {
                     _xeno.MakeXeno(target.Value);
                     _entities.RemoveComponent<HiveMemberComponent>(target.Value);
+                    var playerName = actor.PlayerSession?.Name ?? "unknown";
+                    _chatManager.SendAdminAnnouncement($"Player {playerName} was banished from their hive.");
                 }
 
                 break;
