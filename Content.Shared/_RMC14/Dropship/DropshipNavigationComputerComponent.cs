@@ -28,4 +28,7 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Hijackable = true;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoteControl = false;
 }
