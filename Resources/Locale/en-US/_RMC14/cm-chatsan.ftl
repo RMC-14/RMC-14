@@ -835,3 +835,24 @@ cm-chatsan-word-replacement-echo = green talls
 
 cm-chatsan-word-foxtrot = foxtrot
 cm-chatsan-word-replacement-foxtrot = brown talls
+
+cm-chatsan-word-thru = through
+cm-chatsan-replacement-thru = through
+
+cm-chatsan-word-tho = though
+cm-chatsan-replacement-tho = though
+
+cm-chatsan-word-t1 = t1
+cm-chatsan-replacement-t1 = tier 1
+
+cm-chatsan-word-t2 = t2
+cm-chatsan-replacement-t2 = tier 2
+
+cm-chatsan-word-t3 = t3
+cm-chatsan-replacement-t3 = tier 3
+
+cm-chatsan-word-t4 = t4
+cm-chatsan-replacement-t4 = tier 4
+
+cm-chatsan-word-evo = evo
+cm-chatsan-replacement-evo = evolution
