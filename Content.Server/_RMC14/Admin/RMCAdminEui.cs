@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
@@ -27,6 +28,7 @@ namespace Content.Server._RMC14.Admin;
 public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IReflectionManager _reflection = default!;
@@ -275,8 +277,12 @@ public sealed class RMCAdminEui : BaseEui
                 {
                     _xeno.MakeXeno(target.Value);
                     _entities.RemoveComponent<HiveMemberComponent>(target.Value);
+
                     var playerName = actor.PlayerSession?.Name ?? "unknown";
-                    _chatManager.SendAdminAnnouncement($"Player {playerName} was banished from their hive.");
+                    var adminmessage = Loc.GetString("rmc-xeno-banish", ("target", playerName));
+
+                    _chatManager.SendAdminAlert(adminmessage);
+                    _adminLog.Add(LogType.RMCAdminCommandLogging, LogImpact.Extreme, adminmessage);
                 }
 
                 break;
