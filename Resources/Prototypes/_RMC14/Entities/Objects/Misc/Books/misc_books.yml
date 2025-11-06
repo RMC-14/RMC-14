@@ -1,0 +1,153 @@
+﻿- type: entity
+  parent: RMCBookBase
+  id: RMCBookBrokenArrow
+  name: "After Action Report No.55: Operation Broken Arrow"
+  description: "An after action report of the infamous Operation 'Broken Arrow', so big that it had to be turned into a book. Warning: Some information, such as personal names, have been REDACTED on this print. Written by Executive Officer 'REDACTED', UNS Heyst, United Nations."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/light_red.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookSPP
+  name: "The Raise And Steadying of the Socialist Progressive Peoples, By Robert Mendes"
+  description: A large, supposedly unbiased history book containing what's supposed to be the history of the so-called UPP. Written by Historian Robert Mendes, United Nations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/SPP.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookPaperwork
+  name: "Bureaucracy and Paperworking: Everything You Need to Know"
+  description: A book containing all kinds of knowledge and pre-made formularies for the writing of important documents. You need it? This book have it. Written by UNMC High Command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/book.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookWEYA
+  name: "Weston & Yamada: The Future is Now."
+  description: This sizeable autobiographical book covers the history of the Weston & Yamada Corporations, their merger, and eventual dominance over the Corporate world. Written by Alexander Weston and Ryucihi Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/WEYA.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookIllandalBridge
+  name: "Warrior of Illandal: The Bridge of Terror."
+  description: Ah, one of the classic Warrior of Illandal books. This one has the mighty Warrior attempting to cross a bridge of comical proportions to defeat a goblin warlord, which hangs over the entrance to hell. If those stakes weren't high enough, he's also on a time limit before the bridge collapses and explodes. Written by John Desierder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/tan.rsi
+    state: icon
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-warrior-of-illandal
+
+- type: entity
+  parent: RMCBookIllandalBridge
+  id: RMCBookIllandalNecromancer
+  name: "Warrior of Illandal: The Necromancer of Tethar."
+  description: The Warrior returns in this thrilling new entry into the Warrior of Illandal. This time, the Warrior must team up with his previous enemy, the Orc Bazaak to stop the schemes of an evil necromancer. It's pretty standard for the Warrior of Illandal series, except for the portion where the pair of protaganists debate the difference between Absurdism and Existentialism. Written by John Desierder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/purple.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookXenobiology
+  name: "The Living Universe: Xenobiology for Beginners!"
+  description: A decently-sized book featuring an adorable picture of different cartoon alien animals and plants on the cover. A nonfiction novel, it covers an astonishing range of species, from the towering megaflora of LV-5433 to the tiny sand-roaches of Tenora IV, and about everything between and beyond. Written by Ilora Starglow.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/green.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookStarHunter
+  name: "THE STAR-HUNTER."
+  description: This novel's a strange one. It seems to be a fictional biography around the author's encounter with some form of horrible creature, which killed and maimed and slaughtered. Despite the publisher's warning that this novel is clearly fiction, there's something in the terrified, frantic prose which makes it seem more real. The Author is unknown.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/black.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookManga
+  name: "Suddenly I’m Reborn As The Top Student At Mecha MagiGirl Supernatural Cursed High School With The Powers Of A Great Mage?! No.1308."
+  description: The newest volume in the series, in which an unhappy corporate employee is... reborn as a super-successful student at a mecha training high-school filled with demons... who joins a... magical girl group, to fight against... their socialist rivals using the power of friendship and Weston-Yamada Solid Anti-tank Tungsten rounds... and the main character is also the heir to a wealthy dynasty of mighty mages and the main team starts a rock band- who wrote this?! Printed by WEYA.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/white.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookDarkLight
+  name: "Dark Light: The Painful Day"
+  description: Oh god. This book centres around an 'ancient conflict' between Vampires and Werewolves, but it's really just a thousand or so pages of edgy prose which has the emotional depth of a swimming pool, a main vampire character so bland he's not much more then a cardboard cutout, and werewolves so stupid the plot itself becomes an incomprehensible sludge. Written by The Fruit of Solace.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/dark.rsi
+    state: icon
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-dark-light
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookStarHunter
+  name: "Interstellar Logistics & Planning in the 22nd Century."
+  description: This book is focused mostly on the transportation of goods and services in the context of interstellar travel, as well as some recent issues the industry is facing, especially in regards to tensions between the superpowers and CLF activity on the frontier. Written by Economist Jayliee Mearsh.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/book.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookCyrusAutobiography
+  name: "A Future Worth Living: The Rise of Cyrus Solara"
+  description: A sizable biographical book containing the information and current life story of Cyrus Solara, following their rise in politics to their eventual role as leader of the United Nations. Rated the Sol Bestseller for April 2123. Written by Historian Kurgan Fiercehammer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/blue.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookAnodicMusic
+  name: "The Future of FUNK! Anodic Sines and YOU!"
+  description: A book on the incredibly fringe theory regarding the existence of "Advanced Quasi-Dimensional Anodic Pseduo-Sine Waves", which the author claims is an state of sound in which various factors such as beats, constructive and deconstructive phases, and amplitude combine to produce a Supra-natural effect on the world. Some effects include breaking into frantic dance, being unable to forget the tune, and entering a state of ego-death. The prose seems over-eager and hyped up. Written by DJ. Switzwald Giessen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/orange.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookPrendergastMoor
+  name: "Ian Prendergast and the Murder on the Moor"
+  description: This is a classic entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. This one has the Detective investigating the murder of an important colonial administrator on the isolated moorlands of LV-43, with a full complement of suspicious characters. Written by Jiya Patel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/wine.rsi
+    state: icon
+
+- type: entity
+  parent: RMCBookBase
+  id: RMCBookPrendergastShuttle
+  name: "Ian Prendergast and the Missing Shuttle"
+  description: Another entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. In this one, the Detective must find out who stole the shuttle of an important SPP Diplomat before an important Summit between the interstellar superpowers. Written by Jiya Patel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Colored/red.rsi
+    state: icon

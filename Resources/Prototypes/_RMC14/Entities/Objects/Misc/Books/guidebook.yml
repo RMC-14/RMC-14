@@ -3,7 +3,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookLawMarine
   name: marine law
-  description: "Usually being the favorite read of any member of the Military Police of the UNMC, it's whole meaning is to work as the scales for the sword of justice that brandishes onboard the vessels of the United Nations Marine Corps, so peace and order can be maintained. It's nicknames may include but are not limited to: Devil's Red Book, Bible of All Sinners, THE Book, ML, Red Brick, Provost's Torture Manual, Provost's Red Devil's Torture Bible of All Sinners."
+  description: "Usually being the favorite read of any member of the Military Police of the UNMC, it's whole meaning is to work as the scales for the sword of justice that brandishes onboard the vessels of the United Nations Marine Corps, so peace and order can be maintained. It's nicknames may include but are not limited to: Devil's Red Book, Bible of All Sinners, THE Book, ML, Red Brick, Provost's Torture Manual, Provost's Red Devil's Torture Bible of All Sinners. Written by the UNMC Provost Office"
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/marine_law.rsi
@@ -42,10 +42,170 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookSOP
   name: standard operating procedure
-  description: One of the most important books onboard any United Nations Marine Corps vessel, or at least that's how you are supposed to feel about it. The book carries within it's pages the UNMC guidelines and procedures regarding all kinds of situations.
+  description: One of the most important books onboard any United Nations Marine Corps vessel, or at least that's how you are supposed to feel about it. The book carries within it's pages the UNMC guidelines and procedures regarding all kinds of situations. Written by UNMC High Command
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/SOP.rsi
   - type: GuideHelp
     guides:
     - RMCMarineSOP
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookChainOfCommand
+  name: "The Marine Ranks: United Nations Marine Corp Chain of Command and Ranking"
+  description: This book contains information regarding all ranks inside the United Nations Marine Corp, and its consequent chain of command. Written by UNMC High Command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/book.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideCommandRoles
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookEngineering
+  name: "Tools, Radiowaves And Electrical Grids"
+  description: A book containing basic and yet important information regarding engineering procedures. Written by the UNMC Engineer Association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/engineering_0.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMaintenanceTechnician
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookConstruction
+  name: "Construction Destruction"
+  description: A detailed guide containing a series of diagrams and tables regarding the required resources and proper procedures to building, from barricades to floor tiles. Written by the UNMC Engineer Association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/engineering_0.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookHacking
+  name: "Hack-A-Mole: How Electrical Components Work"
+  description: A guide specialized on the knowledge of 'hacking', being that of airlocks, vending machines, or anything else that your multi tool is capable of messing with. Written by the UNMC Engineer Association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/hacking.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMaintenanceTechnician
+
+# TODO OT Book, EVA Book
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookTelecomms
+  name: "Subspace Telecommunications And You"
+  description: An instructions manual regarding the use of communication channels and advice on how to be properly heard over the radiowaves while speaking all kinds of languages. Written by the UNMC Association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/particle.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookReactor
+  name: "How to React: Steps to maintain a S-52 Fusion Reactor"
+  description: A manual containing information on how to maintain S-52 Fusion Ship Reactors, very popular engines among space vessels. Written by the UNMC Engineer Association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/supermatter.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMaintenanceTechnician
+
+# TODO OB Cannon, Powerloader Operations
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookSurgery
+  name: "Surgical Reference Manual"
+  description: A detailed reference manual for surgical procedures. To be read mid-surgery when you forget a simple surgical step. Written by the UNMC Bureau of Medicine and Surgery.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/medical.rsi
+  - type: GuideHelp
+    guides:
+    - RMCMedical # TODO: Specific Surgery when Guidebook entry for that is added
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookMedical
+  name: "Principles and Practice of Medicine"
+  description: Firstly and foremost, do no harm. A detailed, thick and heavy medical practitioner's guide, with the first five full pages only being the book's dedication. Written by Chief Medical Officer Pierre Corbeau, UNMC Bureau of Medicine and Surgery.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/medical.rsi
+  - type: GuideHelp
+    guides:
+    - RMCMedical
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookChemistry
+  name: "Chemical Reactions and How They Can Ruin Your Day"
+  description: A detailed manual containing everything you need to know about chemistry. Recipes and methodology included. Written by the UNMC Bureau of Medicine and Surgery.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/chemistry.rsi
+  - type: GuideHelp
+    guides:
+    - RMCChemicals
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookCooking
+  name: "Pans and Dishes: Your Way Around the Marine Kitchens"
+  description: A huge book containing lots and lots of cooking recipes, perfect for those who wish to actually cook and not only stand in front of the microwave, staring at it. Written by Food Service Specialist Louis Covenant, United Nations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/cooking.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideFood
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookDrinks
+  name: "Barman Recipes: Mixing Drinks and Changing Lives Under the Blitz"
+  description: One of the most popular recipe books for drinks in the entirety of humankind. Now on it's 39th edition, it was first published in 1946 after the end of the Second World War by Sir Hugh Fairfax, one of the most prestigious barmen of all time. Written by Sir Hugh Fairfax, Three Sun Empire.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/bar.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideDrinks
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookDetective
+  name: "The Film Noir: Proper Procedures for Investigations"
+  description: A book discussing investigation procedure and police work. Written by Lawyer Ruben Knight, Weston-Yamada Corporation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/detective.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
+
+- type: entity
+  parent: RMCGuidebookBase
+  id: RMCGuidebookLiaison
+  name: "Do's and Don'ts: A Practical Guide for Representing Weston-Yamada."
+  description: This book contains advice on how Company employees can best represent the Weston-Yamada Corporation, targeted mostly at newer executives. Written by Executive Supervisor Akaji Sasahara, Weston-Yamada Corporation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Books/Other/WEYA.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideCorporateLiaison
