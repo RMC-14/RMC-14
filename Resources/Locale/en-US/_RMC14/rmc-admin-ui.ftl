@@ -12,6 +12,7 @@ rmc-ui-add-to-squad = Add to Squad
 rmc-ui-xeno-tab = Xeno
 rmc-ui-xeno-hive = Hive:
 rmc-ui-create-new-hive = Create new hive
+rmc-ui-banish-xeno = Banish Xeno
 rmc-ui-create-hive-title = New hive name
 rmc-ui-humanoid = Humanoid
 rmc-ui-tier = Tier {$tier}

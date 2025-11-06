@@ -8,5 +8,7 @@
             <Button Text="{Loc rmc-ui-create-new-hive}" Name="CreateHiveButton" Access="Public"
                     StyleClasses="ButtonSquare" />
         </BoxContainer>
+        <Button Text="{Loc rmc-ui-banish-xeno}" Name="BanishXenoButton" Access="Public"
+                StyleClasses="ButtonSquare" />
     </BoxContainer>
 </controls:RMCXenoTab>

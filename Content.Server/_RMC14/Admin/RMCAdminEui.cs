@@ -266,6 +266,16 @@ public sealed class RMCAdminEui : BaseEui
                 StateDirty();
                 break;
             }
+            case RMCAdminClearHiveMsg clearHive:
+            {
+                if (_entities.TryGetEntity(_target, out var target))
+                {
+                    _xeno.MakeXeno(target.Value);
+                    _entities.RemoveComponent<HiveMemberComponent>(target.Value);
+                }
+
+                break;
+            }
             case RMCAdminTransformHumanoidMsg transformHumanoid:
             {
                 if (_entities.GetEntity(_target) is not { Valid: true } entity)

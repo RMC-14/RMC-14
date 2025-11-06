@@ -104,6 +104,11 @@ public sealed class RMCAdminCreateHiveMsg(string name) : EuiMessageBase
 }
 
 [Serializable, NetSerializable]
+public sealed class RMCAdminClearHiveMsg() : EuiMessageBase
+{
+}
+
+[Serializable, NetSerializable]
 public sealed class RMCAdminTransformHumanoidMsg(string speciesId) : EuiMessageBase
 {
     public readonly string SpeciesId = speciesId;

@@ -39,6 +39,7 @@ public sealed class RMCAdminEui : BaseEui
 
         _adminWindow.XenoTab.HiveList.OnItemSelected += OnHiveSelected;
         _adminWindow.XenoTab.CreateHiveButton.OnPressed += OnCreateHivePressed;
+        _adminWindow.XenoTab.BanishXenoButton.OnPressed += OnBanishXenoPressed;
 
         var allSpecies = new SortedSet<SpeciesPrototype>(SpeciesComparer);
         foreach (var entity in _prototypes.EnumeratePrototypes<SpeciesPrototype>())
@@ -153,6 +154,11 @@ public sealed class RMCAdminEui : BaseEui
         var msg = new RMCAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
         _createHiveWindow?.Close();
+    }
+
+    private void OnBanishXenoPressed(ButtonEventArgs args)
+    {
+        SendMessage(new RMCAdminClearHiveMsg());
     }
 
     public override void HandleState(EuiStateBase state)
