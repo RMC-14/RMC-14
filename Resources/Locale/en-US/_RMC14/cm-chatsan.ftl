@@ -772,3 +772,66 @@ cm-chatsan-word-replacement-capped = captured
 
 cm-chatsan-word-phero = phero
 cm-chatsan-word-replacement-phero = pheromone
+
+cm-chatsan-word-baton = silence spit
+cm-chatsan-word-replacement-baton = silence spit
+
+cm-chatsan-word-batons = silence spits
+cm-chatsan-word-replacement-batons = silence spits
+
+cm-chatsan-word-batong = silence spit
+cm-chatsan-word-replacement-batong = silence spit
+
+cm-chatsan-word-batongs = silence spits
+cm-chatsan-word-replacement-batongs = silence spits
+
+cm-chatsan-word-batoned = silence spitted
+cm-chatsan-word-replacement-batoned = silence spitted
+
+cm-chatsan-word-batonged = silence spitted
+cm-chatsan-word-replacement-batonged = silence spitted
+
+cm-chatsan-word-xover = over
+cm-chatsan-word-replacement-xover = over
+
+cm-chatsan-word-m13 = fast spitter
+cm-chatsan-word-replacement-m13 = fast spitter
+
+cm-chatsan-word-m63 = fast spitter
+cm-chatsan-word-replacement-m63 = fast spitter
+
+cm-chatsan-word-p90 = fast spitter
+cm-chatsan-word-replacement-p90 = fast spitter
+
+cm-chatsan-word-m54c = spitter
+cm-chatsan-word-replacement-m54c = spitter
+
+cm-chatsan-word-m42a2 = scatter spitter
+cm-chatsan-word-replacement-m42a2 = scatter spitter
+
+cm-chatsan-word-m34 = fire spitter
+cm-chatsan-word-replacement-m34 = fire spitter
+
+cm-chatsan-word-c4 = boom node
+cm-chatsan-word-replacement-c4 = boom node
+
+cm-chatsan-word-ap = armor piercing
+cm-chatsan-word-replacement-ap = armor piercing
+
+cm-chatsan-word-alpha = alpha
+cm-chatsan-word-replacement-alpha = red talls
+
+cm-chatsan-word-bravo = bravo
+cm-chatsan-word-replacement-bravo = yellow talls
+
+cm-chatsan-word-charlie = charlie
+cm-chatsan-word-replacement-charlie = purple talls
+
+cm-chatsan-word-delta = delta
+cm-chatsan-word-replacement-delta = blue talls
+
+cm-chatsan-word-echo = echo
+cm-chatsan-word-replacement-echo = green talls
+
+cm-chatsan-word-foxtrot = foxtrot
+cm-chatsan-word-replacement-foxtrot = brown talls
