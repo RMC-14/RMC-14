@@ -126,7 +126,7 @@
   parent: RMCBookBase
   id: RMCBookAnodicMusic
   name: "The Future of FUNK! Anodic Sines and YOU!"
-  description: A book on the incredibly fringe theory regarding the existence of "Advanced Quasi-Dimensional Anodic Pseduo-Sine Waves", which the author claims is an state of sound in which various factors such as beats, constructive and deconstructive phases, and amplitude combine to produce a Supra-natural effect on the world. Some effects include breaking into frantic dance, being unable to forget the tune, and entering a state of ego-death. The prose seems over-eager and hyped up. Written by DJ. Switzwald Giessen.
+  description: A book on the incredibly fringe theory regarding the existence of "Advanced Quasi-Dimensional Anodic Pseduo-Sine Waves", which the author claims is a state of sound in which various factors such as beats, constructive and deconstructive phases, and amplitude combine to produce a Supra-natural effect on the world. Some effects include breaking into frantic dance, being unable to forget the tune, and entering a state of ego-death. The prose seems over-eager and hyped up. Written by DJ. Switzwald Giessen.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/orange.rsi
