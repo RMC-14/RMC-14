@@ -277,7 +277,7 @@ public sealed class RMCAdminEui : BaseEui
                     _entities.RemoveComponent<HiveMemberComponent>(target.Value);
 
                     var playerName = actor.PlayerSession?.Name ?? "unknown";
-                    _chatManager.SendAdminAlert(Loc.GetString("rmc-xeno-banish", ("target", playerName)));
+                    _chatManager.SendAdminAlert(Loc.GetString("rmc-xeno-banish-admin", ("target", playerName)));
                 }
 
                 break;
