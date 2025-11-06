@@ -1,0 +1,39 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCLaptopBudget
+  name: laptop
+  description: The screen is stuck on some sort of boot-loop in terrible garish green. All the text is in Rusoek, a creole language spawned out of the borders of UN and SPP space from some Korean settlements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/laptop.rsi
+    state: laptop_on
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Misc/laptop.rsi
+
+- type: entity
+  parent: RMCLaptopBudget
+  id: RMCLaptop
+  name: laptop
+  description: Laptops, porta-comps, and reel-back computers, all of these and more available at your local WEYA-Mart electronics section!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/laptop.rsi
+    layers:
+    - state: laptop_closed
+      map: [ "enum.ToggleableVisuals.Enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
+          True: { state: laptop_off }
+          False: { state: laptop_closed }
+    sprite: _RMC14/Objects/Misc/laptop.rsi
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Misc/laptop.rsi
+  - type: ItemToggle
+    activated: false
+  - type: Appearance
+  - type: ItemToggleSize
+    activatedSize: Large
