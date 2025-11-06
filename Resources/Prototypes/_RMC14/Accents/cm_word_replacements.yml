@@ -282,9 +282,7 @@
     cm-chatsan-word-caps: cm-chatsan-word-replacement-caps
     cm-chatsan-word-capped: cm-chatsan-word-replacement-capped
     cm-chatsan-word-phero: cm-chatsan-word-replacement-phero
-    cm-chatsan-word-baton: cm-chatsan-word-replacement-baton
     cm-chatsan-word-batong: cm-chatsan-word-replacement-batong
-    cm-chatsan-word-batons: cm-chatsan-word-replacement-batongs
     cm-chatsan-word-batongs: cm-chatsan-word-replacement-batongs
     cm-chatsan-word-batoned: cm-chatsan-word-replacement-batoned
     cm-chatsan-word-batonged: cm-chatsan-word-replacement-batonged

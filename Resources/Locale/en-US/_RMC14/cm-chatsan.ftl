@@ -773,12 +773,6 @@ cm-chatsan-word-replacement-capped = captured
 cm-chatsan-word-phero = phero
 cm-chatsan-word-replacement-phero = pheromone
 
-cm-chatsan-word-baton = silence spit
-cm-chatsan-word-replacement-baton = silence spit
-
-cm-chatsan-word-batons = silence spits
-cm-chatsan-word-replacement-batons = silence spits
-
 cm-chatsan-word-batong = silence spit
 cm-chatsan-word-replacement-batong = silence spit
 
