@@ -386,8 +386,29 @@
   name: air flare
   categories: [ HideSpawnMenu ]
   components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 600
+    fadeOutDuration: 30
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour
+        id: fade_out
+        maxDuration: 570
+        startValue: 7.0
+        endValue: 1.0
+  - type: Sprite #added just to satisfy ExpendableLightComp
+  - type: Appearance
   - type: PointLight
-    enabled: true
+    enabled: false
+    netsync: false
     color: "#FFCCCC"
     radius: 8.0
     energy: 0.6
@@ -395,16 +416,41 @@
     lifetime: 300
 
 - type: entity
+  parent: RMCAirFlare
   id: RMCAirFlareCAS
   name: air signal flare
   categories: [ HideSpawnMenu ]
   components:
+  - type: Tag
+    tags:
+    - RMCFlareCAS
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 180
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#A7FFA7"
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour # faster then base flares
+       id: turn_on
+       maxDuration: 5.0
+       startValue: 2.5
+       endValue: 7.0
+      - !type:FadeBehaviour # burns out slower
+       id: fade_out
+       maxDuration: 150
+       startValue: 7.0
+       endValue: 1.0
   - type: PointLight
-    enabled: true
     color: "#A7FFA7"
     radius: 8.0
     energy: 0.6
   - type: FlareSignal
+  - type: RMCNightVisionVisibleOnIgnite
   - type: TimedDespawn
     lifetime: 300
 

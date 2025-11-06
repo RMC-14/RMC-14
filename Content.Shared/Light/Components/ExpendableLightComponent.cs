@@ -37,6 +37,12 @@ public sealed partial class ExpendableLightComponent : Component
     public string? SpriteShaderSpent = null;
 
     /// <summary>
+    /// If the expendable light should activate itself on initialization
+    /// </summary>
+    [DataField]
+    public bool StartsActivated = false;
+
+    /// <summary>
     /// The sprite layer shader used after the expendable light has burnt out.
     /// </summary>
     [DataField]
