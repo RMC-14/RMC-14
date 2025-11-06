@@ -42,6 +42,7 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: CMVendorUser
+      id: CMChiefEngineer
       points: 45
     - type: MarineOrders
     - type: RMCPointing
