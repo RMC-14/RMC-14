@@ -124,9 +124,9 @@ public partial class ChatBox : UIWidget
         formatted.Pop();
 
         // RMC14
+        formatted = FilterProblematicTags(formatted);
         if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
             return;
-        formatted = FilterProblematicTags(formatted);
 
         Contents.AddMessage(formatted);
     }
