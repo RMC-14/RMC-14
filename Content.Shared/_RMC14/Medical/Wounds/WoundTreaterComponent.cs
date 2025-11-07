@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -7,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Medical.Wounds;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 [Access(typeof(SharedWoundsSystem))]
 public sealed partial class WoundTreaterComponent : Component
 {
@@ -25,9 +26,6 @@ public sealed partial class WoundTreaterComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ScalingDoAfter;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan MinimumDoAfter = TimeSpan.FromSeconds(1.25);
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> DoAfterSkill = "RMCSkillMedical";
@@ -88,4 +86,7 @@ public sealed partial class WoundTreaterComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? NoWoundsOnTargetPopup;
+
+    [DataField, AutoNetworkedField]
+    public ushort? CurrentDoAfter;
 }
