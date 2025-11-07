@@ -865,3 +865,6 @@ cm-chatsan-replacement-taxing = building
 
 cm-chatsan-word-taxed = built
 cm-chatsan-replacement-taxed = built
+
+cm-chatsan-word-pb = point blank
+cm-chatsan-replacement-pb = point blank
