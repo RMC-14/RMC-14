@@ -468,8 +468,8 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchSPPCEC
-  name: CEC patch
-  description: An old, worn and faded fire-resistant circular patch with a gold star on a split orange and red background. Once worn by members of the Cosmos Exploration Corps (CEC), a division of the SPP dedicated to exploration, resource assessment, and establishing colonies on new worlds. The patch serves as a reminder of the CEC's daring missions aboard aging starships, a symbol of perseverance in the face of adversity.
+  name: Exploration Corps patch
+  description: An old, worn and faded fire-resistant circular patch with a gold star on a split orange and red background. Once worn by members of the Exploration Corps, a division of the SPP dedicated to exploration, resource assessment, and establishing colonies on new worlds. The patch serves as a reminder of the EC's daring missions aboard aging starships, a symbol of perseverance in the face of adversity.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/cec_patch.rsi
