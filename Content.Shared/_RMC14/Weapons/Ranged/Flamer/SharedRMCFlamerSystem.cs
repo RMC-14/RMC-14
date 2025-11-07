@@ -115,6 +115,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         ent.Comp.CantShootPopupLast = time;
         Dirty(ent);
 
+        if (_outOfFuel)
+        {
+            args.Message = Loc.GetString("rmc-flamer-empty");
+            return;
+        }
+
         args.Message = Loc.GetString("rmc-flamer-too-close");
     }
 
@@ -261,6 +267,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         Dirty(chain, chainComp);
     }
 
+    private bool _outOfFuel = false;
     private bool CanShootFlamer(
         Entity<RMCFlamerAmmoProviderComponent> flamer,
         EntityCoordinates fromCoordinates,
@@ -268,6 +275,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         [NotNullWhen(true)] out List<LineTile>? tiles,
         out Entity<SolutionComponent> solution)
     {
+        _outOfFuel = false;
         tiles = null;
         solution = default;
         if (!TryGetTankSolution(flamer, out var solutionEnt))
@@ -275,7 +283,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         var volume = solutionEnt.Value.Comp.Solution.Volume;
         if (volume <= flamer.Comp.CostPer)
+        {
+            _outOfFuel = true;
             return false;
+        }
 
         if (!fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta))
             return false;
