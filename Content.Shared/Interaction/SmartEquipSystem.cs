@@ -35,6 +35,12 @@ public sealed class SmartEquipSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket1, InputCmdHandler.FromDelegate(HandleSmartEquipPocket1, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket2, InputCmdHandler.FromDelegate(HandleSmartEquipPocket2, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipSuitStorage, InputCmdHandler.FromDelegate(HandleSmartEquipSuitStorage, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipInnerClothing, InputCmdHandler.FromDelegate(HandleSmartEquipInnerClothing, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipOuterClothing, InputCmdHandler.FromDelegate(HandleSmartEquipOuterClothing, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipHead, InputCmdHandler.FromDelegate(HandleSmartEquipHead, handle: false, outsidePrediction: false))
             .Register<SmartEquipSystem>();
     }
 
@@ -55,6 +61,35 @@ public sealed class SmartEquipSystem : EntitySystem
         HandleSmartEquip(session, "belt");
     }
 
+    private void HandleSmartEquipPocket1(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket1");
+    }
+
+    private void HandleSmartEquipPocket2(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket2");
+    }
+
+    private void HandleSmartEquipSuitStorage(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "suitstorage");
+    }
+
+    private void HandleSmartEquipInnerClothing(ICommonSession? session)
+    {
+        HandleSmartEquip(session,  "jumpsuit");
+    }
+
+    private void HandleSmartEquipOuterClothing(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "outerClothing");
+    }
+
+    private void HandleSmartEquipHead(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "head");
+    }
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
     {
         if (session is not { } playerSession)
