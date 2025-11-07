@@ -63,7 +63,7 @@ public sealed class XenoEnergySystem : EntitySystem
 
             if (xeno.Comp.IgnoreLateInfected && TryComp<VictimInfectedComponent>(hit, out var infect) && infect.CurrentStage >= infect.FinalSymptomsStart)
                 continue;
-            
+
             if (HasComp<RMCTrainingDummyComponent>(hit))
                 return;
 
@@ -82,6 +82,9 @@ public sealed class XenoEnergySystem : EntitySystem
 
     private void OnXenoProjectileHitUser(Entity<XenoEnergyComponent> xeno, ref XenoProjectileHitUserEvent args)
     {
+        if (!xeno.Comp.GainOnProjectiles)
+            return;
+
         if (_xeno.CanAbilityAttackTarget(xeno, args.Hit))
         {
             AddEnergy(xeno, xeno.Comp.GainAttack);
@@ -123,12 +126,20 @@ public sealed class XenoEnergySystem : EntitySystem
 
     public void AddEnergy(Entity<XenoEnergyComponent> xeno, int energy, bool popup = true)
     {
+        var rev = new XenoEnergyGainAttemptEvent();
+        RaiseLocalEvent(xeno, rev);
+
+        if (rev.Cancelled)
+            return;
+
         if (popup && xeno.Comp.Current < xeno.Comp.Max && energy > 0)
             _popup.PopupClient(Loc.GetString(xeno.Comp.PopupGain), xeno, xeno);
 
         xeno.Comp.Current = Math.Min(xeno.Comp.Max, xeno.Comp.Current + energy);
         Dirty(xeno);
         UpdateAlert(xeno);
+        var ev = new XenoEnergyChangedEvent(xeno.Comp.Current);
+        RaiseLocalEvent(xeno, ref ev);
     }
 
     public bool HasEnergy(Entity<XenoEnergyComponent> xeno, int energy)
@@ -169,6 +180,8 @@ public sealed class XenoEnergySystem : EntitySystem
 
         xeno.Comp.Current = int.Max(0, xeno.Comp.Current - plasma);
         UpdateAlert((xeno, xeno.Comp));
+        var ev = new XenoEnergyChangedEvent(xeno.Comp.Current);
+        RaiseLocalEvent(xeno, ref ev);
         Dirty(xeno);
     }
 

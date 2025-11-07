@@ -76,6 +76,8 @@
         amount: 2
       - id: RMCM85A1Case
         amount: 3
+      - id: RMCGunCasePistolM13
+        amount: 3
       - id: RMCXM51Case
         amount: 3
     - name: Explosives
@@ -458,6 +460,15 @@
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
         box: RMCMagazinePistolM13Drum
+      - id: RMCBoxMagazinePistolM13AP
+        name: Magazine Box (M13 AP x 22)
+        box: RMCMagazinePistolM13AP
+      - id: RMCBoxMagazinePistolM13ExtAP
+        name: Magazine Box (Ext M13 AP x 14)
+        box: RMCMagazinePistolM13ExtAP
+      - id: RMCBoxMagazinePistolM13DrumAP
+        name: Magazine Box (Drum M13 AP x 14)
+        box: RMCMagazinePistolM13DrumAP
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -596,7 +607,11 @@
         amount: 11
       - id: RMCAttachmentRecoilCompensator
         amount: 7
+      - id: RMCAttachmentRecoilCompensatorM13
+        amount: 7
       - id: RMCAttachmentSuppressor
+        amount: 7
+      - id: RMCAttachmentSuppressorCompact
         amount: 7
       - id: RMCAttachmentShotgunChoke
         amount: 5
@@ -611,6 +626,8 @@
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 5
       - id: RMCAttachmentS5RedDotSight
+        amount: 10
+      - id: RMCAttachmentS5MicroRedDotSight
         amount: 10
       - id: RMCAttachmentS6ReflexSight
         amount: 10
@@ -644,6 +661,10 @@
         amount: 10
     - name: Stock
       entries:
+      - id: RMCAttachmentM13StockSolid
+        amount: 5
+      - id: RMCAttachmentM13StockCollapsible
+        amount: 5
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
