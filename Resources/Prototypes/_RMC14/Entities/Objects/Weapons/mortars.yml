@@ -182,7 +182,7 @@
   components:
   - type: ExpendableLight
     startsActivated: true
-    glowDuration: 600
+    glowDuration: 150
     fadeOutDuration: 30
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
@@ -196,7 +196,7 @@
         endValue: 7.0
       - !type:FadeBehaviour
         id: fade_out
-        maxDuration: 570
+        maxDuration: 30
         startValue: 7.0
         endValue: 3.0
   - type: Sprite  #added just to satisfy ExpendableLightComp
@@ -210,9 +210,8 @@
     enabled: false
     netsync: false
     radius: 5
-  - type: RandomTimedDespawn
-    min: 270
-    max: 330
+  - type: TimedDespawn
+    lifetime: 180
 
 - type: entity
   id: RMCMortarCamera
