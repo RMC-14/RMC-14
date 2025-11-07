@@ -265,10 +265,10 @@
       - id: RMCJumpsuitVeteranPMCNoWebbing
         name: PMC Uniform
         amount: 15
-      - id: CMHandsBlackMarine
+      - id: RMCHandsVeteran
         name: Combat Gloves
         amount: 15
-      - id: RMCHeadsetDistressPMC
+      - id: RMCHeadsetDistressPMCPVE
         name: PMC Radio Headset
         amount: 15
       - id: RMCCameraGearPMC
@@ -288,13 +288,16 @@
       entries:
       - id: RMCArmorHelmetPMCTactical
         amount: 15
-      - id: CMArmorM4PMC
+        name: tactical helmet (Helmet Light)
+      - id: RMCArmorM4PMCNoLight
+        name: M4 pattern PMC armor (No Suitlight)
         amount: 15
       - id: CMArmorM4PMCLight
+        name: M4 pattern light PMC armor (Suitlight)
         amount: 15
     - name: Backpack
       entries:
-      - id: RMCSatchelLightpack
+      - id: RMCSatchelPMC
         amount: 30
     - name: Restricted Backpack
       entries:
@@ -343,11 +346,9 @@
         amount: 1
       - id: RMCPouchFuelTank
         amount: 1
-      - id: RMCPouchShotgun
-        amount: 1
     - name: Mask
       entries:
-      - id: RMCMaskBalaclava
+      - id: RMCMaskCoifPMC
         amount: 15
     - name: Miscellaneous
       entries:
@@ -766,6 +767,8 @@
       - id: RMCWebbingDropPouch
         amount: 5
       - id: CMWebbingHolster
+        amount: 5
+      - id: RMCWebbingHolsterBlack
         amount: 5
     - name: Armor #todo m3-r armor
       entries:

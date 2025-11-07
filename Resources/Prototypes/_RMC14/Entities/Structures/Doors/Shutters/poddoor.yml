@@ -22,7 +22,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: false
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -70,7 +70,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: false
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -99,7 +99,7 @@
   description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
   components:
   - type: Door
-    canPry: false # TODO RMC14
+    canPry: true
   - type: XenoCrusherChargable
     instantDestroy: true
 
@@ -129,7 +129,7 @@
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
-    
+
 - type: entity
   parent: RMCPodDoorHybrisaRed
   id: RMCPodDoorHybrisaRedOpen
@@ -216,11 +216,45 @@
     enabled: false
 
 - type: entity
+  parent: RMCPodDoorAlmayerOpen
+  id: RMCPodDoorBrigLockdown
+  suffix: Open, BrigLockdown
+  components:
+  - type: RMCPodDoor
+    id: BrigLockdown
+
+- type: entity
+  parent: RMCPodDoorAlmayerOpen
+  id: RMCPodDoorHangerLockdown
+  suffix: Open, HangerLockdown
+  components:
+  - type: RMCPodDoor
+    id: HangerLockdown
+
+- type: entity
   parent: RMCPodDoor
   id: RMCPodDoorAlmayerBlack
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/almayer_poddoor.rsi
+
+- type: entity
+  parent: RMCPodDoorAlmayerBlack
+  id: RMCPodDoorAIBlackLockdown
+  suffix: Open, AILockdown
+  components:
+  - type: RMCPodDoor
+    id: AILockdown
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
 
 - type: entity
   parent: RMCPodDoor
@@ -235,6 +269,24 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/ai_door.rsi
+
+- type: entity
+  parent: RMCPodDoorAI
+  id: RMCPodDoorAILockdown
+  suffix: Open, AILockdown
+  components:
+  - type: RMCPodDoor
+    id: AILockdown
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false
 
 - type: entity
   parent: RMCPodDoor

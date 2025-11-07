@@ -1,0 +1,214 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ] # L42A battle rifle base remove wield stuff (uses m54c ammo diffrent mags)
+  name: L42A battle rifle
+  id: RMCWeaponRifleL42A
+  description: The L42A Battle Rifle, found commonly around the frontiers of the Galaxy. It's commonly used by colonists for self defense, as well as many colonial militias, whomever they serve due to it's rugged reliability and ease of use without much training. This rifle was put up for adoption by the UNMC and tested for a time, but ultimately lost to the M4SPR already in service.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l42a.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l42a.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 2
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 2.857
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL42A
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL42A
+          - RMCMagazineRifleL42AAP
+          - RMCMagazineRifleL42AExtended
+  - type: GunDamageModifier
+    multiplier: 1.3
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+    accuracyMultiplierUnwielded: 0.8
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.83, .065
+      rmc-aslot-rail: 0.01, 0.12
+      rmc-aslot-underbarrel: 0.3, -0.26
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL42A
+  name: L42A magazine (10x24mm)
+  description: A 10x24mm battle rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL42A
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l42a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCMagazineRifleL42A
+  id: RMCMagazineRifleL42AEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: RMCMagazineRifleL42A
+  id: RMCMagazineRifleL42AExtended
+  name: L42A Extended magazine (10x24mm)
+  description: A Extended 10x24mm battle rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL42AExtended
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 35
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l42aext.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: RMCMagazineRifleL42AExtended
+  id: RMCMagazineRifleL42AExtendedEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL42AAP
+  name: L42A AP magazine (10x24mm)
+  description: A 10x24mm Armor Piercing battle rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL42AAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l42a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCMagazineRifleL42AAP
+  id: RMCMagazineRifleL42AAPEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: Tag
+  id: RMCWeaponRifleL42A
+
+- type: Tag
+  id: RMCMagazineRifleL42A
+
+- type: Tag
+  id: RMCMagazineRifleL42AEmpty
+
+- type: Tag
+  id: RMCMagazineRifleL42AAP
+
+- type: Tag
+  id: RMCMagazineRifleL42AAPEmpty
+
+- type: Tag
+  id: RMCMagazineRifleL42AExtended
+
+- type: Tag
+  id: RMCMagazineRifleL42AExtendedEmpty

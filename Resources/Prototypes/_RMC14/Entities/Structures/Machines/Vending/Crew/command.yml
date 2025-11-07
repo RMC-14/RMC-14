@@ -120,6 +120,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -189,6 +190,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -285,6 +287,8 @@
         points: 12
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -308,6 +312,8 @@
     - name: Barrel Attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentExtendedCompensator
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
@@ -453,6 +459,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
@@ -471,6 +478,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -616,6 +624,8 @@
       entries:
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -649,9 +659,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         points: 15
+      - id: RMCAttachmentExtendedCompensator
+        points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
 
 
@@ -782,6 +798,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
+      - id: RMCArmorVestExecutiveOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -853,6 +870,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Hats
       jobs:
       - CMExecutiveOfficer
@@ -974,6 +992,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
     - name: Books
@@ -981,7 +1000,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1119,6 +1140,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
@@ -1133,6 +1155,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: CMBootsBlackFilled
       - id: RMCLaserDesignator
@@ -1171,15 +1194,13 @@
       - id: RMCSynthResetKey
         amount: 15
     # ////////////////////////////////////
-    # Quartermaster
+    # Logistics Officer
     # ////////////////////////////////////
     - name: Standard Equipment
       jobs:
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitQM
-      - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
@@ -1187,15 +1208,12 @@
       - CMQuartermaster
       choices: { CMHands: 1 }
       entries:
-      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      - id: RMCHeadCapQuartermaster
-        recommended: true
       - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
@@ -1218,9 +1236,9 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
-      - id: CMBootsBlackFilled
     - name: Patches
       jobs:
       - CMQuartermaster
@@ -1364,6 +1382,7 @@
       - CMCMO
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1514,6 +1533,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1563,3 +1583,4 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
