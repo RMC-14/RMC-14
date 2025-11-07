@@ -37,8 +37,8 @@ cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB Rep.
 
-cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
-CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
+cm-job-name-survivor-isr = Interstellar Life Rights Observer
+CMJobSurvivorISR = Interstellar Life Rights Observer
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy

@@ -294,9 +294,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private void OnBufferTransferAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferTransferAllMsg args)
     {
-        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
-            return;
-
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
@@ -304,8 +301,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             _solution.RemoveAllSolution(buffer.Value);
         }
+        else if (TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
+        {
+            _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
+        }
 
-        _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
         Dirty(ent);
         RefreshUIs(ent);
     }
