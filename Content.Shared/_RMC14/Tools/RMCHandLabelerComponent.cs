@@ -18,6 +18,6 @@ public sealed partial class RMCHandLabelerComponent : Component
     [DataField]
     public SoundSpecifier RemoveLabelSound = new SoundPathSpecifier("/Audio/_RMC14/Items/paper_ripped.ogg");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? CurrentPillBottle;
 }

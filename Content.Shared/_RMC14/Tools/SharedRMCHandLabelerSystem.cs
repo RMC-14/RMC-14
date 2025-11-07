@@ -139,7 +139,7 @@ public abstract class SharedRMCHandLabelerSystem : EntitySystem
         _audio.PlayPredicted(ent.Comp.LabelSound, ent, args.User);
     }
 
-    protected virtual void OnPillBottleInteract(EntityUid labeler, EntityUid pillBottle, EntityUid user)
+    protected virtual void OnPillBottleInteract(Entity<RMCHandLabelerComponent> labeler, EntityUid pillBottle, EntityUid user)
     {
     }
 
