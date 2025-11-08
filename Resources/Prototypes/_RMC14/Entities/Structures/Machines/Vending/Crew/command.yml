@@ -459,7 +459,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
-      - id: RMCArmorVestSeniorOfficer
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
