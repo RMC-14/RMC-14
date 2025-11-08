@@ -88,6 +88,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: Appearance
 
 # MP
 
@@ -127,6 +128,8 @@
   name: M3-XL pattern senior officer armor vest
   description: A type of body armor designed for mobility with additional padding for senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
   - type: CMArmor
     melee: 10
     bullet: 10
@@ -148,6 +151,8 @@
   name: M3-XL pattern commanding officer armor vest
   description: A type of body armor designed for mobility with additional padding for commanding officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/jungle.rsi
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/jungle.rsi
