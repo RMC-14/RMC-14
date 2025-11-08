@@ -41,7 +41,7 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
             }
         }
 
-        if (args.Sprite == null)
+        if (args.Sprite == null || !SpriteSystem.LayerExists((uid, args.Sprite), ExpendableLightVisualLayers.Overlay))
             return;
 
         if (!AppearanceSystem.TryGetData<ExpendableLightState>(uid, ExpendableLightVisuals.State, out var state, args.Component))
