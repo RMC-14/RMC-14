@@ -25,6 +25,7 @@
         hard: false
   - type: XenoWeeds
     level: 1
+  - type: QueenEyeVision
   - type: RMCMesonsNonviewable
   - type: Clickable
   - type: XenoWeedsSpreading
@@ -161,7 +162,6 @@
       tags:
       - XenoWeedNode
       - XenoWeedTile
-  - type: QueenEyeVision
   - type: Damageable
     damage:
       groups:
