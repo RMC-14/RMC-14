@@ -552,7 +552,7 @@
     ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
-    PlantBag: 5
+    RMCStoragePlantBag: 5
     RMCToolSpade: 3
     RMCToolHatchet: 3
     # AmmoniaBottle: 10 #Premium
@@ -721,6 +721,20 @@
         amount: 2
       - id: DrinkMugRed
         amount: 2
+
+- type: entity
+  parent: CMVendorDinnerware
+  id: CMVendorDinnerwareLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 
 # BODA
 - type: entity

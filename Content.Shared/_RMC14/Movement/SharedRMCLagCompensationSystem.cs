@@ -104,7 +104,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
     public void SendLastRealTick()
     {
-        if (_net.IsClient)
+        if (_net.IsServer)
             return;
 
         RaiseNetworkEvent(new RMCSetLastRealTickEvent(GetLastRealTick(null)));

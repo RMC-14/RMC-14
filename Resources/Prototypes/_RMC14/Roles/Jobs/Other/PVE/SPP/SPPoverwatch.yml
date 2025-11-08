@@ -10,8 +10,7 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
-  - SO
-  - Rifleman
+  - ShipMasterAccess
   spawnMenuRoleName: SPP Platoon Commander (PVE)
   special:
   - !type:AddComponentSpecial
