@@ -800,7 +800,7 @@
       state: bombard
     useDelay: 1
   - type: TargetAction
-    range: 10
+    range: 15 # the actual range is in XenoBombardComponent
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoBombardActionEvent
@@ -1204,7 +1204,7 @@
       state: abduct
     useDelay: 15
   - type: TargetAction
-    range: 6
+    range: 15 # the actual range is in XenoAbductComponent
     deselectOnMiss: false
     checkCanAccess: false
   - type: EntityTargetAction
