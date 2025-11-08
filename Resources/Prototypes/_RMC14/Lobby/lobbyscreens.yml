@@ -1,72 +1,72 @@
 - type: lobbyBackground
   id: Pyro
-  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
+  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.webp
 
 - type: lobbyBackground
   id: fob
-  background: /Textures/_RMC14/Lobby/from_fobbiton_with_love.png
+  background: /Textures/_RMC14/Lobby/from_fobbiton_with_love.webp
 
 - type: lobbyBackground
   id: shnee
-  background: /Textures/_RMC14/Lobby/only_you_shnee.png
+  background: /Textures/_RMC14/Lobby/only_you_shnee.webp
 
 - type: lobbyBackground
   id: sisters
-  background: /Textures/_RMC14/Lobby/sisters.png
+  background: /Textures/_RMC14/Lobby/sisters.webp
 
 - type: lobbyBackground
   id: smartgunoperator
-  background: /Textures/_RMC14/Lobby/smart_gun.png
+  background: /Textures/_RMC14/Lobby/smart_gun.webp
 
 - type: lobbyBackground
   id: MarineMajor
-  background: /Textures/_RMC14/Lobby/MarineMajor.png
+  background: /Textures/_RMC14/Lobby/MarineMajor.webp
 
 - type: lobbyBackground
   id: Battered
-  background: /Textures/_RMC14/Lobby/Battered.png
+  background: /Textures/_RMC14/Lobby/Battered.webp
 
 - type: lobbyBackground
   id: FriendlySkies
-  background: /Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.png
+  background: /Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.webp
 
 - type: lobbyBackground
   id: LoneMedevac
-  background: /Textures/_RMC14/Lobby/Lone_Medevac.png
+  background: /Textures/_RMC14/Lobby/Lone_Medevac.webp
 
 - type: lobbyBackground
   id: MoveOut
-  background: /Textures/_RMC14/Lobby/Move_Out.png
+  background: /Textures/_RMC14/Lobby/Move_Out.webp
 
 - type: lobbyBackground
   id: Cornered
-  background: /Textures/_RMC14/Lobby/Cornered.png
+  background: /Textures/_RMC14/Lobby/Cornered.webp
 
 - type: lobbyBackground
   id: EyesUp
-  background: /Textures/_RMC14/Lobby/Eyes_Up.png
+  background: /Textures/_RMC14/Lobby/Eyes_Up.webp
 
 - type: lobbyBackground
   id: FocusFire
-  background: /Textures/_RMC14/Lobby/Focus_Fire.png
+  background: /Textures/_RMC14/Lobby/Focus_Fire.webp
 
 - type: lobbyBackground
   id: Intelligence
-  background: /Textures/_RMC14/Lobby/Intelligence.png
+  background: /Textures/_RMC14/Lobby/Intelligence.webp
 
 - type: lobbyBackground
   id: LiquorCabinetsLastStand
-  background: /Textures/_RMC14/Lobby/LiquorCabinetsLastStand.png
+  background: /Textures/_RMC14/Lobby/LiquorCabinetsLastStand.webp
 
 - type: lobbyBackground
   id: APushTooFar
-  background: /Textures/_RMC14/Lobby/APushTooFar.png
+  background: /Textures/_RMC14/Lobby/APushTooFar.webp
 
 
 - type: lobbyBackground
   id: WEYALobby
-  background: /Textures/_RMC14/Lobby/WEYALobby.png
+  background: /Textures/_RMC14/Lobby/WEYALobby.webp
 
 - type: lobbyBackground
   id: JudgmentDay
-  background: /Textures/_RMC14/Lobby/Judgment_Day.png
+  background: /Textures/_RMC14/Lobby/Judgment_Day.webp
