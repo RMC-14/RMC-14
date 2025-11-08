@@ -15,15 +15,15 @@
   ranks:
     RMCRankWeYaBodyguardPPC:
     - !type:RoleTimeRequirement
-      role: RMCWeYaCorporateBodyguard
+      role: RMCJobWeYaCorporateBodyguard
       time: 630000 # 175 hours
     RMCRankWeYaBodyguardPPS:
     - !type:RoleTimeRequirement
-      role: RMCWeYaCorporateBodyguard
+      role: RMCJobWeYaCorporateBodyguard
       time: 252000 # 70 hours
     RMCRankWeYaBodyguardPPO:
     - !type:RoleTimeRequirement
-      role: RMCWeYaCorporateBodyguard
+      role: RMCJobWeYaCorporateBodyguard
       time: 90000 # 25 hours
     RMCRankWeYaBodyguardTPPO: []
   startingGear: RMCJobWeYaCorporateBodyguard

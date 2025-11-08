@@ -1,0 +1,124 @@
+﻿# Corporate Bodyguard
+
+  #Clothes Rack
+- type: entity
+  parent: ColMarTechWardrobeCorp
+  id: ColMarTechWardrobeCB
+  name: Corporate Security Clothes Rack
+  description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
+  suffix: Corp. Bodyguard
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCWeYaCorporateBodyguard
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCBootsPMCFilled
+      - id: RMCHeadsetLiaison
+      - id: RMCGlassesSecurityBlue
+        # Blue SecHud Perscription
+    - name: Uniforms
+      choices: { CMUniform: 5 }
+      entries:
+      - id: CMJumpsuitLiaisonBlack
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+      - id: CMJumpsuitLiaisonBlue
+      - id: CMJumpsuitLiaisonBrown
+      - id: CMJumpsuitLiaisonCorporateFormal
+    - name: Jackets
+      choices: { CMArmor: 5 }
+      entries:
+      - id: RMCJacketCorporateBlack
+      - id: RMCJacketCorporateBlue
+      - id: RMCJacketCorporateBrown
+      - id: RMCJacketCorporateFormal
+      - id: RMCCoatBureauTrenchCoatBeige
+      - id: RMCCoatBureauTrenchCoatBrown
+      - id: RMCCoatBureauTrenchCoatGrey
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelBlack
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
+
+   # PPO Gear
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGearRackCB
+  name: Corporate Security Gear Rack
+  description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue gear.
+  suffix: Corp. Bodyguard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCWeYaCorporateBodyguard
+    sections:
+    - name: Headgear
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: RMCHeadCapPPO
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: RMCMaskRebreather
+    - name: Jackets
+      choices: { CMArmor: 1 }
+      entries:
+      - id: RMCArmorM1PPO
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelBlack
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: RMCHandsVeteranPPO
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment)
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: RMCPouchMagazine
+      - id: RMCPouchGeneralMedium
+    - name: Sidearm
+      choices: { CMSidearm: 1 }
+      entries:
+      - id: RMCWeaponPistolPK7
+      - id: RMCMK80
+      - id: RMCWeaponPistolM77
+    - name: Ammunition
+      entries:
+      - id: RMCMagazinePistolPK7
+        amount: 4
+      - id: CMMagazinePistolMK80
+        amount: 6
+      - id: CMMagazinePistolM77AP
+        amount: 4
+    - name: Spare Equipment
+      entries:
+      - id: CMFlash
+        amount: 2
+      # Pepper Spray
+      - id: CMStunbaton
+        amount: 4
+      - id: RMCBoxZiptie
+        amount: 4

@@ -240,7 +240,7 @@
 
 - type: entity
   parent: CMArmorM4PMCLight
-  id: RMCArmorM4PPO
+  id: RMCArmorM1PPO
   name: M1 pattern PPO armor
   description: A basic vest with a Weston-Yamada badge on the right breast. This variant is worn by Personal Protection Officers protecting Weston-Yamada employees, as denoted by the blue badge.
   components:
