@@ -185,7 +185,7 @@
       entries:
       - id: CMArmorM4
         recommended: true
-      - id: RMCArmorVestFireteamLeader
+      - id: RMCArmorVestSquad
     - name: Belt
       choices: { CMBelt: 1 }
       entries:

@@ -30,7 +30,7 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
-      - id: RMCArmorVestRifleman
+      - id: RMCArmorVestSquad
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
