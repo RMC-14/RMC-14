@@ -631,6 +631,29 @@
   - CivilianOnlyRMC
 
 - type: roleLoadout
+  id: JobCMCorporateBodyguard
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
   id: JobCMMessTech
   points: 7
   groups:

@@ -1,0 +1,92 @@
+﻿# Corporate Bodyguard
+- type: job
+  parent: RMCJobNametagBase
+  id: RMCWeYaCorporateBodyguard
+  name: rmc-job-name-corporate-bodyguard
+  description: rmc-job-description-corporate-bodyguard
+  playTimeTracker: RMCJobWeYaCorporateBodyguard
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMLiaison
+    time: 90000 # 25 hours
+  ranks:
+    RMCRankWeYaBodyguardPPC:
+    - !type:RoleTimeRequirement
+      role: RMCWeYaCorporateBodyguard
+      time: 630000 # 175 hours
+    RMCRankWeYaBodyguardPPS:
+    - !type:RoleTimeRequirement
+      role: RMCWeYaCorporateBodyguard
+      time: 252000 # 70 hours
+    RMCRankWeYaBodyguardPPO:
+    - !type:RoleTimeRequirement
+      role: RMCWeYaCorporateBodyguard
+      time: 90000 # 25 hours
+    RMCRankWeYaBodyguardTPPO: []
+  startingGear: RMCJobWeYaCorporateBodyguard
+  icon: "RMCJobIconPMCGoonStandard"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-cl
+  roleWeight: 0.25
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA Corporate Bodyguard
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corporate-bodyguard
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillFirearms: 1
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_standard
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+
+- type: playTimeTracker
+  id: RMCJobWeYaCorporateBodyguard
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCJobWeYaCorporateBodyguard
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetLiaison
+    jumpsuit: RMCJumpsuitLiaisonBlackCorporateBodyguard
+    outerClothing: RMCJacketCorporateBlack
+    eyes: RMCGlassesSecurityBlue
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelBlack
+    pocket1: RMCPouchFirstAidPMCFill # Might not be the right one?
+    # pocket2: SecurityToolsPouch
+  storage:
+    back:
+    - RMCBoxZiptie
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCorporateBodyguard
+  name: corporate bodyguard spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCWeYaCorporateBodyguard
+  - type: Sprite
+    state: cs_spawn

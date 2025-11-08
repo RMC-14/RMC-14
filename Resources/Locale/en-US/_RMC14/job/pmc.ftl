@@ -116,7 +116,7 @@ rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
 
 # Corporate Bodyguard
-cm-job-name-corporate-bodyguard = Corporate Bodyguard
-cm-job-description-corporate-bodyguard = Protect the Corporate Liaison and their office. Remember not to serve as a thug, and work with the Military Police when needed.
-cm-job-prefix-corporate-bodyguard = CB
-RMCJobCorporateBodyguard = Corporate Bodyguard
+rmc-job-name-corporate-bodyguard = Corporate Bodyguard
+rmc-job-description-corporate-bodyguard = Protect the Corporate Liaison and their office. Remember not to serve as a thug, and work with the Military Police when needed.
+rmc-job-prefix-corporate-bodyguard = CB
+RMCWeYaCorporateBodyguard = Corporate Bodyguard
