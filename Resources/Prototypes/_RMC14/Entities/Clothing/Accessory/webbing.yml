@@ -289,6 +289,18 @@
         tags:
         - Sidearm
     - type: StoreAfterFailedInteract
+    - type: RMCStorageEjectHand
+      state: Open
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterBlack
+  name: black shoulder holster
+  description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_black.rsi
+    state: holster
 
 - type: entity
   parent: CMWebbingBase
@@ -568,6 +580,40 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
+      amount: 3
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFMAR
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 3
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCLFMAR50
+  suffix: Filled
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineMar50LMG
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
+      amount: 5
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFBuckshot
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
       amount: 3
 
 - type: entity

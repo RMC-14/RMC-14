@@ -437,7 +437,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             QueueDel(upgradeable);
-            Spawn(to, snapped);
+            var spawn = Spawn(to, snapped);
+            _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
             return;
         }

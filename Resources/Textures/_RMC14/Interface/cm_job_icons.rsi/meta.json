@@ -242,6 +242,9 @@
             "name": "hudmutineer"
         },
         {
+            "name": "hudmutineerleader"
+        },
+        {
             "name": "rmc_adjutant"
         },
         {
