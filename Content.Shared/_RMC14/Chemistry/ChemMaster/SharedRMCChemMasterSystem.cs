@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Storage;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -214,13 +215,13 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (args.Amount < FixedPoint2.Zero)
             return;
 
-        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
+        if (!TryGetBeaker(ent, out _, out _, out var beakerSolution))
             return;
 
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
-        var removed = beakerSolution.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
+        var removed = beakerSolution.Comp.Solution.RemoveReagent(new ReagentQuantity(args.Reagent, args.Amount), true);
 
         _solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted);
         removed -= accepted;
@@ -266,7 +267,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
-        var removed = buffer.Value.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
+        var removed = buffer.Value.Comp.Solution.RemoveReagent(new ReagentQuantity(args.Reagent, args.Amount), true);
         if (ent.Comp.BufferTransferMode == RMCChemMasterBufferMode.ToDisposal)
         {
             _solution.UpdateChemicals(buffer.Value);
@@ -293,9 +294,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private void OnBufferTransferAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferTransferAllMsg args)
     {
-        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
-            return;
-
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
@@ -303,8 +301,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             _solution.RemoveAllSolution(buffer.Value);
         }
+        else if (TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
+        {
+            _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
+        }
 
-        _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
         Dirty(ent);
         RefreshUIs(ent);
     }

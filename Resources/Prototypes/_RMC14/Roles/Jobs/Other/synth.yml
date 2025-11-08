@@ -9,10 +9,9 @@
   startingGear: RMCGearSynthetic
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
-  requireAdminNotify: true
   joinNotifyCrew: true
   whitelisted: true
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ShipMasterAccess
   - Synth
@@ -42,8 +41,8 @@
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
     - type: CMVendorUser
+      id: RMCJobSynthetic
       points: 45
-    - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -53,7 +52,7 @@
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: MeleeWeapon
       soundHit:
@@ -80,9 +79,9 @@
           Shock: -15
           Cold: -15
       addComponents:
-      # TODO darksight instead of night vision
       - type: NightVision
         innate: true
+        state: Half
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated

@@ -281,7 +281,6 @@
           True: {visible: false}
           False: {visible: true}
 
-
 - type: entity
   parent: RMCHeadCapFlippable
   id: RMCYellowCap
@@ -460,6 +459,17 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/flapcap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapCorrespondent
+  name: combat correspondent cap
+  description: A faithful cap for any terrain war correspondents may find themselves in.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
 
 # soft caps
 
@@ -692,6 +702,7 @@
 - type: entity
   parent: RMCHeadBeanie
   id: RMCHeadBeanieTan
+  name: tan beanie
   suffix: Tan, RMC
   components:
   - type: Sprite
@@ -702,12 +713,35 @@
 - type: entity
   parent: RMCHeadBeanie
   id: RMCHeadBeanieGray
+  name: gray beanie
   suffix: Gray, RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieGreen
+  name: green beanie
+  suffix: Green, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/green.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieCargo
+  name: cargo beanie
+  suffix: Cargo, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/cargo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/cargo.rsi
 
 - type: entity
   parent: RMCHeadBeanie
@@ -871,6 +905,60 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap_old.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadCowboyHatLight
+  name: light cowboy hat
+  description: A finely made cowboy hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/light_cowboy.rsi
+
+- type: entity
+  parent: RMCHeadCowboyHatLight
+  id: RMCHeadCowboyHatDark
+  name: dark cowboy hat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+
 # Chaplain
 
 - type: entity
@@ -883,3 +971,56 @@
     sprite: Clothing/Head/Hoods/nun.rsi
   - type: Clothing
     sprite: Clothing/Head/Hoods/nun.rsi
+
+# Misc Caps
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadHorizonsWreath
+  name: new horizons day wreath
+  description: A wreath of blue and white flowers, traditionally worn on New Horizons Day.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+    slots:
+    - HEAD
+    - neck
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
+      state: helmet

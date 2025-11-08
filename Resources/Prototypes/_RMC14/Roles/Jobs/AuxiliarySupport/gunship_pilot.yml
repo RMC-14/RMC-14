@@ -21,7 +21,7 @@
   startingGear: CMGearPilotGunship
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false
-  marineAuthorityLevel: 8
+  marineAuthorityLevel: 7
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
@@ -44,6 +44,7 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMPilotGunship
       points: 45
     - type: RMCPointing
     - type: JobPrefix
@@ -51,11 +52,12 @@
     - type: ViewIntelObjectives
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: gp
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearPilotGunship

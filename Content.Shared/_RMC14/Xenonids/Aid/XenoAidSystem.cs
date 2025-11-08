@@ -25,7 +25,7 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -73,7 +73,7 @@ public sealed class XenoAidSystem : EntitySystem
         switch (args.aidType)
         {
             case XenoAidMode.Healing:
-                {
+            {
                 if (!_interaction.InRangeUnobstructed(xeno.Owner, target))
                     return;
 

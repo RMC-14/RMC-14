@@ -1,18 +1,36 @@
 # REQUISITIONS
-
-# ARMAMENTS VENDOR
 - type: entity
+  abstract: true
   parent: ColMarTechBase
-  id: ColMarTechCargoGuns
-  name: ColMarTech automated armaments vendor
-  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  id: ColMarTechCargo
   components:
   - type: AccessReader
     access:
     - [ "CMAccessRequisitions" ]
+  - type: CMAutomatedVendor
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+
+# ARMAMENTS VENDOR
+- type: entity
+  parent: ColMarTechCargo
+  id: ColMarTechCargoGuns
+  name: ASRS automated armaments vendor
+  description: An automated supply rack hooked up to a big storage of various firearms, explosives, load carrying equipment, and other miscellaneous items. Can be accessed by the Logistics Officer and Requisitions Technicians.
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+      state: vend
     sections:
     - name: Primary firearms
       entries:
@@ -20,7 +38,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20
@@ -57,6 +75,8 @@
       - id: RMCCaseFlamer
         amount: 2
       - id: RMCM85A1Case
+        amount: 3
+      - id: RMCGunCasePistolM13
         amount: 3
       - id: RMCXM51Case
         amount: 3
@@ -104,9 +124,15 @@
         amount: 2
       - id: CMWebbing
         amount: 5
+      - id: RMCWebbingBlackSmall
+        amount: 5
       - id: RMCWebbingDropPouch
         amount: 2
+      - id: RMCWebbingDropPouchBlack
+        amount: 2
       - id: CMWebbingHolster
+        amount: 2
+      - id: RMCWebbingHolsterBlack
         amount: 2
       - id: CMWebbingKnivesFilled
         amount: 1
@@ -214,22 +240,8 @@
         amount: 1
       - id: RMCPouchShotgunLarge
         amount: 1
-    - name: Miscellaneous
+    - name: Essential Devices
       entries:
-      - id: RMCFlashlight # Combat Flashlight
-        amount: 5
-      - id: CMEntrenchingTool
-        amount: 4
-      - id: CMMaskGas
-        amount: 10
-      - id: RMCPackFlareCAS
-        amount: 2
-      - id: CMPackFlare
-        amount: 10
-      - id: RMCScabbardMacheteFilled
-        amount: 6
-      #- id: MB-6 Folding Barricades (x3)
-      #   amount: 3
       - id: RMCMotionDetector
         amount: 4
       - id: RMCIntelDetector
@@ -240,28 +252,48 @@
         amount: 1
       - id: RMCLaserDesignator
         amount: 1
+      - id: RMCFulton20
+        amount: 1
+      #- id: Sentry Gun Network Laptop
+      #   amount: 4
+      #- id: Spare PDT/L Battle Buddy Kit
+      #  amount: 4
+    - name: Flare and Light
+      entries:
+      - id: RMCFlashlight # Combat Flashlight
+        amount: 8
+      - id: RMCPackFlareCAS
+        amount: 2
+      - id: CMPackFlare
+        amount: 10
+    - name: Miscellaneous
+      entries:
+      - id: CMEntrenchingTool
+        amount: 4
+      - id: CMMaskGas
+        amount: 10
+      - id: RMCScabbardMacheteFilled
+        amount: 6
+      #- id: MB-6 Folding Barricades (x3)
+      #   amount: 3
       #- id: Welding Goggles
       #  amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
       - id: RMCPowerCellHigh
         amount: 1
-      - id: RMCFulton20
-        amount: 1
-      #- id: Sentry Gun Network Laptop
-      #   amount: 4
-      - id: CMPamphletJTAC
-        amount: 1
-      - id: CMPamphletEngineer
-        amount: 1
-      #- id: Powerloader Certification
-      #  amount: 1
-      #- id: Spare PDT/L Battle Buddy Kit
-      #  amount: 4
       - id: RMCPowerCellCrap
         amount: 10
       - id: RMCMagazineSMGNailgun
         amount: 4
+    - name: Pamphlets
+      entries:
+      - id: CMPamphletJTAC
+        amount: 1
+      - id: CMPamphletEngineer
+        amount: 1
+      - id: CMPamphletPowerloader
+        amount: 1
     - name: Explosive Boxes
       hasBoxes: true
       entries:
@@ -318,17 +350,21 @@
 
 #AMMUNITION VENDOR
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechCargo
   id: ColMarTechCargoAmmo
-  name: ColMarTech automated munition vendor
-  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ASRS automated munition vendor
+  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
-  - type: AccessReader
-    access:
-    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+      state: vend
     sections:
     - name: Regular ammunition
       entries:
@@ -366,13 +402,15 @@
         amount: 2
     - name: Extended ammunition
       entries:
-      - id: CMMagazineSMGM63Ext
-        amount: 10
-      - id: CMMagazineRifleM54CExt
-        amount: 8
       - id: RMCMagazinePistolM13Ext
         amount: 10
       - id: RMCMagazinePistolM13Drum
+        amount: 8
+      - id: CMMagazineSMGM63Ext
+        amount: 10
+      - id: CMMagazineRifleM4SPRExt
+        amount: 10
+      - id: CMMagazineRifleM54CExt
         amount: 8
     - name: Special ammunition
       entries:
@@ -384,8 +422,8 @@
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
         amount: 16 # TODO RMC14 6 once heavy is in
-      #- id: M4A3 HP Magazine (9mm)
-      #  amount: 2
+      - id: RMCMagazinePistolM1984HP
+        amount: 2
       - id: CMMagazineRifleM54CE2HT
         amount: 2
       - id: RMCBox458SOCOM
@@ -422,6 +460,15 @@
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
         box: RMCMagazinePistolM13Drum
+      - id: RMCBoxMagazinePistolM13AP
+        name: Magazine Box (M13 AP x 22)
+        box: RMCMagazinePistolM13AP
+      - id: RMCBoxMagazinePistolM13ExtAP
+        name: Magazine Box (Ext M13 AP x 14)
+        box: RMCMagazinePistolM13ExtAP
+      - id: RMCBoxMagazinePistolM13DrumAP
+        name: Magazine Box (Drum M13 AP x 14)
+        box: RMCMagazinePistolM13DrumAP
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -536,17 +583,21 @@
 
 #ATTACHMENTS VENDOR
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechCargo
   id: ColMarTechCargoAttachments
-  name: Aegis Armaments attachments vendor
-  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: AEGIS Armaments attachments vendor
+  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
-  - type: AccessReader
-    access:
-    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+  - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+      state: base
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+      state: vend
     sections:
     - name: Barrel
       entries:
@@ -556,7 +607,11 @@
         amount: 11
       - id: RMCAttachmentRecoilCompensator
         amount: 7
+      - id: RMCAttachmentRecoilCompensatorM13
+        amount: 7
       - id: RMCAttachmentSuppressor
+        amount: 7
+      - id: RMCAttachmentSuppressorCompact
         amount: 7
       - id: RMCAttachmentShotgunChoke
         amount: 5
@@ -571,6 +626,8 @@
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 5
       - id: RMCAttachmentS5RedDotSight
+        amount: 10
+      - id: RMCAttachmentS5MicroRedDotSight
         amount: 10
       - id: RMCAttachmentS6ReflexSight
         amount: 10
@@ -596,12 +653,18 @@
         amount: 5
       - id: RMCAttachmentUnderbarrelExtinguisher
         amount: 5
+      - id: RMCAttachmentFlashlightGrip
+        amount: 10
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
       - id: RMCAttachmentVerticalGrip
         amount: 10
     - name: Stock
       entries:
+      - id: RMCAttachmentM13StockSolid
+        amount: 5
+      - id: RMCAttachmentM13StockCollapsible
+        amount: 5
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
@@ -621,8 +684,8 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
-  name: ColMarTech surplus uniform vendor
-  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ASRS surplus uniform vendor
+  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Logistics Officer and Requisitions Technicians.
   suffix: Requisitions
   components:
   - type: AccessReader
@@ -634,18 +697,34 @@
     sections:
     - name: Uniform
       entries:
-      - id: CMBackpackMarine
-        amount: 20
-      - id: CMBootsBlack
-        amount: 20
-      - id: CMBeltMarine
-        amount: 10
-      - id: RMCM276ShotgunShellLoadingRig
-        amount: 10
-      - id: CMSatchelMarine
-        amount: 20
       - id: JumpsuitMarine
         amount: 20
+      - id: CMJumpsuitMarineEngineer
+        amount: 5
+      - id: CMJumpsuitMarineMedic
+        amount: 5
+    - name: Boots
+      entries:
+      - id: CMBootsBlack
+        amount: 20
+      - id: CMBootsBrown
+        amount: 5
+      - id: CMBootsGrey
+        amount: 5
+    - name: Backpacks
+      entries:
+      - id: CMBackpackMarine
+        amount: 20
+      - id: CMSatchelMarine
+        amount: 20
+      - id: CMBackpackMarineTech
+        amount: 10
+      - id: CMSatchelMarineTech
+        amount: 10
+      - id: CMBackpackMarineMedic
+        amount: 10
+      - id: CMSatchelMarineMedic
+        amount: 10
     - name: Armor
       entries:
       - id: ArmorHelmetM10
@@ -673,6 +752,8 @@
     - name: Gloves
       entries:
       - id: CMHandsBrown
+        amount: 40
+      - id: RMCHandsGreyMarine
         amount: 40
       - id: CMHandsBlackMarine
         amount: 40
@@ -712,12 +793,26 @@
         amount: 10
       - id: RMCMaskRebreather
         amount: 20
+    - name: Goggles
+      entries:
+      - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesM1A1Ballistic
+        amount: 10
+      - id: RMCGogglesPrescriptionBallistic
+        amount: 10
+      - id: RMCGlassesMarineRpg
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: BedrollFolded
         amount: 30
       - id: RMCM5CameraGear
-        amount: 3
+        amount: 5
+      - id: RMCHelmetGarbNetting
+        amount: 10
+      - id: RMCHelmetGarbRainCover
+        amount: 10
       - id: RMCPatchFallingFalcons
         amount: 15
       - id: RMCPatchFallingFalconsAlt

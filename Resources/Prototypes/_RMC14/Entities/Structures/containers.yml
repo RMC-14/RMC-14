@@ -25,12 +25,29 @@
   - type: Clickable
   - type: Occluder
     boundingBox: "-0.5,-0.5,0.5,1.5"
-  - type: DeleteOnExplosion
   - type: XenoToggleChargingDamage
     stageLoss: 4
     destroy: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ImmuneToUnarmed
+  - type: ExplosionResistance
+    damageCoefficient: 2 # takes 2x explosion damage
+  - type: ProjectileDamageReceived
+    multiplier: 0.2 # takes 80% less projectile damage
+  - type: RMCWallExplosionDeletable
 
 # Large
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCContainerBase
@@ -325,7 +342,7 @@
   id: RMCContainerSPPLeft
   suffix: SPP, Left
   name: SPP Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from the Socailists Progressive Peoples, as indicated by the massive symbol on the side."
+  description: "A huge industrial shipping container.\nThis one is from the Socialist Progressive Peoples, as indicated by the massive symbol on the side."
   components:
   - type: Sprite
     state: sppcontainerleft
@@ -425,7 +442,7 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerAegisLeft
-  suffix: Aegis, Left
+  suffix: AEGIS, Left
   name: AEGIS Cargo Container
   description: "A huge industrial shipping container.\nThis one is from AEGIS, the defense contractors behind the M54C and other marine weaponry."
   components:
@@ -435,7 +452,7 @@
 - type: entity
   parent: RMCContainerAegisLeft
   id: RMCContainerAegisMiddle
-  suffix: Aegis, Middle
+  suffix: AEGIS, Middle
   components:
   - type: Sprite
     state: aegiscontainermiddle
@@ -443,7 +460,7 @@
 - type: entity
   parent: RMCContainerAegisLeft
   id: RMCContainerAegisRight
-  suffix: Aegis, Right
+  suffix: AEGIS, Right
   components:
   - type: Sprite
     state: aegiscontainerright

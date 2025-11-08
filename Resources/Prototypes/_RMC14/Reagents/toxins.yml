@@ -30,37 +30,15 @@
   physicalDesc: reagent-physical-desc-pungent
   color: "#C8A5DC"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-          types:
-            Asphyxiation: 4
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 2.5
-            Toxin: 2
-          types:
-            Asphyxiation: 10
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 11.25
-            Toxin: 4
+      - !type:Hypoxemic
+        potency: 8
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: [ CMReagent, MindbreakerToxin ]
@@ -70,6 +48,8 @@
   color: "#B31008"
   unknown: true
   toxin: true
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.05
@@ -113,3 +93,84 @@
           conditions:
             - !type:ReagentThreshold
               min: 5
+
+- type: reagent
+  parent: CMReagent
+  id: RMCChloralhydrate
+  name: reagent-name-rmc-chloral-hydrate
+  desc: reagent-desc-rmc-chloral-hydrate
+  physicalDesc: reagent-physical-desc-nondescript
+  color: "#000067"
+  flavor: bitter
+  unknown: true
+  toxin: true
+  overdose: 15
+  criticalOverdose: 25
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange # Toxic 1
+        damage:
+          groups:
+            Toxin: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Toxin: 2.5
+      - !type:Emote # Sedative 6
+        emote: Yawn
+        showInChat: true
+        probability: 0.25 #TODO makes them confused and eventually sleepy
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 3
+        refresh: false
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Asphyxiation: 15
+
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCyanide
+  name: rmc-reagent-name-cyanide
+  desc: rmc-reagent-desc-cyanide
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#CF3600"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Airloss: 8
+      - !type:Emote
+        emote: Gasp
+        probability: 0.1
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        component: Drowsiness
+        time: 4
+        type: Add
+        refresh: false

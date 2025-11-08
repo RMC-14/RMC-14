@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
@@ -26,6 +25,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Movement;
 
 namespace Content.Shared.Buckle;
 
@@ -38,6 +39,7 @@ public abstract partial class SharedBuckleSystem
 
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
 
     private void InitializeBuckle()
     {
@@ -249,6 +251,11 @@ public abstract partial class SharedBuckleSystem
         // RMC14
         if (!strapComp.Enabled)
             return false;
+
+        if (!_rmcMovement.CanClimbOver(user, buckleUid, strapUid, false))
+        {
+            return false;
+        }
         // RMC14
 
         // Does it pass the Whitelist
@@ -334,7 +341,7 @@ public abstract partial class SharedBuckleSystem
             return false;
         }
 
-        if (!XenoCheck(user, buckleUid, popup))
+        if (!_rmcBuckle.CanBuckle(user, buckleUid, popup))
             return false;
 
         var buckleAttempt = new BuckleAttemptEvent((strapUid, strapComp), (buckleUid, buckleComp), user, popup);
@@ -466,9 +473,9 @@ public abstract partial class SharedBuckleSystem
     private void Unbuckle(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap, EntityUid? user)
     {
         if (user == buckle.Owner)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled themselves from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled themselves from {ToPrettyString(strap):strap}");
         else if (user != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled {buckle} from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled {ToPrettyString(buckle):target} from {ToPrettyString(strap):strap}");
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
@@ -497,7 +504,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
-        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
+        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle) || TryComp(buckle, out RMCRestComponent? rest) && rest.Resting == true)
             _standing.Down(buckle, playSound: false, changeCollision: true);
         else
             _standing.Stand(buckle);
@@ -588,21 +595,5 @@ public abstract partial class SharedBuckleSystem
             ev.Cancel();
             TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
         }
-    }
-
-    private bool XenoCheck(EntityUid? user, EntityUid buckle, bool popup = true)
-    {
-        if (!HasComp<XenoComponent>(user))
-            return true;
-
-        if (popup && _net.IsServer)
-        {
-            _popup.PopupEntity("You don't have the dexterity to do that, try a nest.",
-                buckle,
-                user.Value,
-                PopupType.SmallCaution);
-        }
-
-        return false;
     }
 }

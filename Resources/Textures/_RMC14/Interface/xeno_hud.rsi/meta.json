@@ -611,6 +611,18 @@
     },
     {
       "name": "fake_tall"
+    },
+    {
+      "name": "hudxenoupgrade2-ui"
+    },
+    {
+      "name": "hudxenoupgrade3-ui"
+    },
+    {
+      "name": "hudxenoupgrade4-ui"
+    },
+    {
+      "name": "hudxenoupgrade5-ui"
     }
   ]
 }

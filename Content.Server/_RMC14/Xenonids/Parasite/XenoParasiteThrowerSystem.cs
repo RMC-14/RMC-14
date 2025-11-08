@@ -20,7 +20,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
+public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -324,8 +324,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
 
         _hive.SetSameHive(xeno.Owner, para.Value);
+        _rmcObstacleSlamming.MakeImmune(para.Value);
         _transform.DropNextTo(para.Value, xeno.Owner);
         // Small throw
+
         _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
 
         return para;

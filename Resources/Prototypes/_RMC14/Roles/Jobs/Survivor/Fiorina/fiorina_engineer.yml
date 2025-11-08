@@ -1,0 +1,54 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorFiorinaEngineer
+  name: cm-job-name-survivor-fiorina-engineer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  startingGear: RMCGearSurvivorFiorinaEngineer
+  accessGroups:
+  - ColonistEngi
+  spawnMenuRoleName: Fiorina Engineer (Fiorina Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorFiorinaEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitKhakiWorkwear
+    outerClothing: RMCHazardVest # TODO RMC14: Blue Coveralls
+    back: CMSatchelEngineerSurvivorFill
+    shoes: RMCShoesJackboots
+    head: RMCHardhatOrange
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaEngineer
+  name: survivor fiorina engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFiorinaEngineer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

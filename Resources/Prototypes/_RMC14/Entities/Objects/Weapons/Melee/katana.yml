@@ -19,9 +19,6 @@
       types:
         Slash: 45
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 18
 
 - type: entity
   parent: RMCKatana
@@ -39,9 +36,6 @@
       types:
         Slash: 45
   - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 1777
 
 - type: Tag
   id: RMCKatana

@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaOfficeWorker
   name: rmc-job-name-survivor-hybrisa-office-worker
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaOfficeWorker
   startingGear: RMCGearSurvivorHybrisaOfficeWorker
   spawnMenuRoleName: Civilian - Office Worker (Hybrisa Survivor)
   special:
@@ -24,6 +23,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -40,10 +40,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaOfficeWorker
-  isHumanoid: true
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]

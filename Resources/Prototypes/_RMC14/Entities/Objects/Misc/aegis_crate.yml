@@ -23,7 +23,7 @@
       openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: aegiscrate
     - type: TacticalMapTracked
     - type: XenoMapTracked
