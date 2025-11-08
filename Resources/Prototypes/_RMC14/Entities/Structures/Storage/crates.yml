@@ -860,3 +860,69 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableAlpha
+  name: alpha wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Painted in Alpha squad red, for the bravest and freshest recruits.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_alpha.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_alpha.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableBravo
+  name: bravo wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Painted in Bravo squad yellow, for the defenders far from the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_bravo.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_bravo.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableCharlie
+  name: charlie wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Painted in Charlie squad purple, for those who push through all adversity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_charlie.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_charlie.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableDelta
+  name: delta wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Painted in Delta squad blue, for the first to fight and first to die.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_delta.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_delta.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableEcho
+  name: echo wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Quickly painted in Echo squad green, for those in need.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_echo.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_echo.rsi
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateWoodenBuildableFoxtrot
+  name: foxtrot wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless to ASRS. Painted in Foxtrot squad brown, for those who came before us.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_foxtrot.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate_foxtrot.rsi
