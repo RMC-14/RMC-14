@@ -105,8 +105,8 @@
 
 - type: entity
   parent: RMCArmorVestXLBase
-  id: RMCArmorVestOfficer
-  name: M3-XL pattern officer armor vest
+  id: RMCArmorVestIntel
+  name: M3-XL pattern intel armor vest
   description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
   - type: CMArmor
@@ -114,29 +114,15 @@
     bullet: 10
     bio: 0
     explosionArmor: 0
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/desert.rsi
-      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/snow.rsi
-      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/classic.rsi
-      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/urban.rsi
 
 - type: entity
-  parent: RMCArmorVestOfficer
-  id: RMCArmorVestSeniorOfficer
-  name: M3-XL pattern senior officer armor vest
-  description: A type of body armor designed for mobility with additional padding for senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
+  parent: RMCArmorVestIntel
+  id: RMCArmorVestOfficer
+  name: M3-XL pattern officer armor vest
+  description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
-  - type: CMArmor
-    melee: 10
-    bullet: 10
-    bio: 10
-    explosionArmor: 0
-#    rad: 10
-#    internal: 10
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
@@ -144,6 +130,20 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/desert-snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/desert-snow-urban.rsi
+
+- type: entity
+  parent: RMCArmorVestOfficer
+  id: RMCArmorVestSeniorOfficer
+  name: M3-XL pattern senior officer armor vest
+  description: A type of body armor designed for mobility with additional padding for senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
+  components:
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 0
+#    rad: 10
+#    internal: 10
 
 - type: entity
   parent: RMCArmorVestSeniorOfficer
