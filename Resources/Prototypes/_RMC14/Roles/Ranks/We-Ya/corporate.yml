@@ -85,21 +85,83 @@
   paygrade: WYPO2
 
 # Synthetics
-# A/N: probably not particularly useful, but I want some variety 
+# A/N: probably not particularly useful, but I want some variety
 - type: rank
   id: RMCRankWeYaUtilitySynth # Simple labor synths (drivers, cargo haulers, repairmen)
   name: Utility Synthetic
   prefix: U. Syn.
   paygrade: WYS1
-  
+
 - type: rank
   id: RMCRankWeYaAssistantSynth # Secretaries, data entry, analysis, PR, etc.
   name: Assistant Synthetic
   prefix: Assis. Syn.
   paygrade: WYS2
-  
+
 - type: rank
   id: RMCRankWeYaAdministrativeSynth # Project managers, directors, overseers (with organic oversight obv)
   name: Administrative Synthetic
   prefix: Adm. Syn.
   paygrade: WYS3
+
+# Corporate Security
+- type: rank
+  id: RMCRankWeYaSecurityOfficer
+  name: Corporate Security Officer
+  prefix: Off.
+  paygrade: WY-SEC
+
+- type: rank
+  id: RMCRankWeYaSecuritySpecialist
+  name: Senior Corporate Security Officer
+  prefix: Sr. Off.
+  paygrade: WY-SEC-SPEC
+
+- type: rank
+  id: RMCRankWeYaSecurityLead
+  name: Corporate Security Sergeant
+  prefix: CSSgt.
+  paygrade: WY-SEC-LEAD
+
+  #TTPO
+- type: rank
+  id: RMCRankWeYaBodyguardTPPO
+  name: Trainee Personal Protection Officer
+  prefix: TPPO.
+  paygrade: WY-SEC-TPPO
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPO
+  name: Personal Protection Officer
+  prefix: PPO.
+  paygrade: WY-SEC-PPO
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPS
+  name: Personal Protection Specialist
+  prefix: PPS.
+  paygrade: WY-SEC-PPS
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPC
+  name: Personal Protection Coordinator
+  prefix: PPC.
+  paygrade: WY-SEC-PPC
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPO
+  name: Directorate Protection Officer
+  prefix: DPO.
+  paygrade: WY-SEC-DPO
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPS
+  name: Directorate Protection Specialist
+  prefix: DPS.
+  paygrade: WY-SEC-DPS
+
+- type: rank
+  id: RMCRankWeYaBodyguardDPC
+  name: Directorate Protection Coordinator
+  prefix: DPC.
+  paygrade: WY-SEC-DPC

@@ -227,3 +227,29 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+
+# PPO
+- type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM4PPO
+  name: M4 pattern PPO armor
+  description: A modification of the standard AEGIS M3 armor. This variant is worn by Personal Protection Officers protecting Weston-Yamada employees, as denoted by the blue detailing. Has some armor plating removed for extra mobility.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_armor.rsi
+
+- type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM4PPO
+  name: M1 pattern PPO armor
+  description: A basic vest with a Weston-Yamada badge on the right breast. This variant is worn by Personal Protection Officers protecting Weston-Yamada employees, as denoted by the blue badge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_light.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
