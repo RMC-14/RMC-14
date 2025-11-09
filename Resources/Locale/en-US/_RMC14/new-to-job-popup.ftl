@@ -36,7 +36,7 @@ rmc-new-to-job-staff-officer = As a Staff Officer, your job is to â€œoverwatchâ€
 
                                              Your main posting is in CIC, at one of four terminals marked by colored metal plating corresponding to one of four squads. The terminal can squad message (send a blue, visible message to the squad regardless of comms), swap marines to another squad, assign someone as acting Squad Leader, and directly watch marines via helmet cameras (clicking on their name, which only works with a helmet or camera gear). You also have access to a live Tactical Map, which updates live with marine positions and statuses (alongside xenos, if sensors are up), and a telephone, which allows you to call any other telephone and communicate via speaking without the use of radio.
 
-                                             You can also send supply drops via the Supply Drops tab on the left. Communicate with Requisitions to ensure your supply drop has the supplies that are necessary and that the crate is ready over the requisitions radio frequency (.u); once the crate is sealed, the crate can be sent on coordinates under roof 0 or 1.
+                                             You can also send supply drops via the Supply Drops tab on the left. Communicate with Requisitions to ensure your supply drop has the supplies that are necessary and that the crate is ready over the requisitions radio frequency (u;) - Once the crate is sealed, the crate can be sent on coordinates under roof level 0 or 1.
 
                                              Normally, your presence at briefing is necessary, but if you feel you might need more help or time, you can ask to be excused in order to experiment and test squad consoles.
 
