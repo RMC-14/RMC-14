@@ -390,6 +390,10 @@
         amount: 100
     - name: Armor-piercing ammunition
       entries:
+      - id: RMCMagazinePistolM13AP
+        amount: 14
+      - id: RMCMagazinePistolM13ExtAP
+        amount: 6
       - id: CMMagazinePistolM77AP
         amount: 50
       - id: CMMagazineRifleM4SPRAP
@@ -404,8 +408,6 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         amount: 10
-      - id: RMCMagazinePistolM13Drum
-        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM4SPRExt
@@ -457,21 +459,12 @@
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
         box: RMCMagazinePistolM13Ext
-      - id: RMCBoxMagazinePistolM13Drum
-        name: Magazine Box (Drum M13 x 12)
-        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazinePistolM13AP
         name: Magazine Box (M13 AP x 22)
         box: RMCMagazinePistolM13AP
-        boxAmount: 0
       - id: RMCBoxMagazinePistolM13ExtAP
         name: Magazine Box (Ext M13 AP x 14)
         box: RMCMagazinePistolM13ExtAP
-        boxAmount: 0
-      - id: RMCBoxMagazinePistolM13DrumAP
-        name: Magazine Box (Drum M13 AP x 14)
-        box: RMCMagazinePistolM13DrumAP
-        boxAmount: 0
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -503,6 +496,9 @@
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazineRifleM4SPRExt
+        name: Magazine Box (Ext M4SPR x 16)
+        box: CMMagazineRifleM4SPRExt
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
