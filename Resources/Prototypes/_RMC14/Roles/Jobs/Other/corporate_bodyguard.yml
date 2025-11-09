@@ -34,7 +34,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: Weston-Yamada Security Officer Bodyguard
+  spawnMenuRoleName: Weston-Yamada Executive Bodyguard
   special:
   - !type:AddComponentSpecial
     components:
@@ -91,7 +91,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointCorporateBodyguard
-  name: weston-yamada security officer (PPO) spawn point
+  name: weston-yamada executive bodyguard spawn point
   components:
   - type: SpawnPoint
     job_id: RMCWeYaCorporateBodyguard
