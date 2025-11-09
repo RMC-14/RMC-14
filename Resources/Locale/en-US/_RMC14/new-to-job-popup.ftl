@@ -30,7 +30,7 @@ rmc-new-to-job-rifleman = As a rifleman, you are the main fighting force of your
 
                                              On the right of your screen, you will see a grey and black rectangle with a coloured arrow, with 'SL' underneath - This is a pointer for your Squad leader. Follow it to find your squad. You can speak to your squad by pressing T, and then putting a ';h' at the start of your message. This will only work if communications relay tower is fixed and powered, which you dont need to worry about, but it will mean that sometimes this wont work. You can speak to those around you by simply pressing T and typing.
 
-                                             You can do a left cirly bracket at the start of your message to type in 'LOOC', which will let you talk about things outside of your character, which is helpful for telling people you are new or need help.
+                                             You can do a left curly bracket at the start of your message to type in 'LOOC', which will let you talk about things outside of your character, which is helpful for telling people you are new or need help.
 
 rmc-new-to-job-staff-officer = As a Staff Officer, your job is to “overwatch”; to monitor and support the squad under your tasking.
 
