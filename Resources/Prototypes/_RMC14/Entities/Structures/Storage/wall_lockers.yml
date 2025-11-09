@@ -27,6 +27,7 @@
       - RMCHeadset
   - type: AccessReader
     access: [["RMCAccessSeniorCommand"]]
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMLockerCMDCabinet

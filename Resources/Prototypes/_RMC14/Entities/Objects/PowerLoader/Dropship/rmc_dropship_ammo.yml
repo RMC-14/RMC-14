@@ -186,6 +186,74 @@
     fire:
       type: RMCTileFireNapalm
       range: 3
+      cardinalRange: 5
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketHarpoon
+  name: AGM-184 'Harpoon II'
+  description: The AGM-184 Harpoon II is an Anti-Ship Missile, designed and used to effectively take down enemy ships with a huge blast wave with low explosive power. This one is modified to use ground signals and can be seen as a cheaper alternative to conventional ordnance. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: harpoon
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipAmmo
+    travelTime: 5
+    explosion:
+      total: 1850
+      slope: 3.2
+      max: 32
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketThermobaric
+  name: BLU-200 'Dragon's Breath'
+  description: The BLU-200 'Dragon's Breath' is a thermobaric fuel-air bomb. The aerosolized fuel mixture creates a vacuum when ignited causing serious damage to those in its way. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: fatty
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 5
+    implosion:
+      pullRange: 5.5
+      pullDistance: 3.5
+      pullSpeed: 15
+    fire:
+      type: RMCTileFireThermobaric
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketBanshee
+  name: AGM-227 'Banshee'
+  description: The AGM-227 missile is a mainstay of the overhauled dropship fleet against any mobile or armored ground targets. It's earned the nickname of 'Banshee' from the sudden wail that it emits right before hitting a target. Useful to clear out large areas. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: banshee
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 6
+    explosion:
+      total: 2000
+      slope: 5.5
+      max: 40
+    fire:
+      type: RMCTileFireBanshee
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
 
 - type: entity
   abstract: true

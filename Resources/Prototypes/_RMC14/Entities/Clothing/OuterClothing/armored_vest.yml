@@ -59,7 +59,7 @@
     explosionArmor: 0
   - type: Item
     size: Huge
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: cm-defib-take-off-armor
     showOnExamine: false
   - type: InteractedBlacklist
@@ -82,14 +82,25 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: RMCNameItemOnVend
     item: Armor
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
 
-# mild melee armor
+- type: entity
+  parent: RMCArmorVestMedic
+  id: RMCArmorVestNone
+  name: armor vest
+  suffix: None
+
+# Officers
+
 - type: entity
   parent: RMCArmorVestMP
-  id: RMCArmorVestIO
-  name: M3-XL pattern intel armor vest
+  id: RMCArmorVestOfficer
+  name: M3-XL pattern officer armor vest
   description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
   - type: Sprite
@@ -101,10 +112,38 @@
     explosionArmor: 0
 
 - type: entity
+  parent: RMCArmorVestOfficer
+  id: RMCArmorVestIO
+  name: M3-XL pattern intel armor vest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel.rsi
+
+- type: entity
+  parent: RMCArmorVestOfficer
+  id: RMCArmorVestExecutiveOfficer
+  name: M3-XL pattern Executive Officer armor vest
+  description: A type of body armor designed for mobility and the more senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
+  components:
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 0
+#    rad: 10
+#    internal: 10
+
+- type: entity
+  parent: RMCArmorVestExecutiveOfficer
+  id: RMCArmorVestCommandingOfficer
+  name: M3-XL pattern Commanding Officer armor vest
+
+# Squad
+- type: entity
   parent: RMCArmorVestMP
-  id: RMCArmorVestMedic
-  name: M3-XL pattern corpsman armor vest
-  description: A type of M3-XL body armor, made specially for UNMC Corpsmen. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
+  id: RMCArmorVestSquad
+  name: M3-XL pattern marine armor vest
+  description: A type of M3-XL body armor, standard issue for UNMC marines. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/corpsman.rsi
@@ -113,7 +152,48 @@
     bullet: 10
 
 - type: entity
-  parent: RMCArmorVestMedic
-  id: RMCArmorVestNone
-  name: armor vest
-  suffix: None
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestMedic
+  name: M3-XL pattern corpsman armor vest
+  description: A type of M3-XL body armor, made specially for UNMC Corpsmen. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/corpsman.rsi
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestSquadLeader
+  name: M3-XL pattern squad leader armor vest
+  description: A type of M3-XL body armor, made specially for squad leaders, with a dedicated pouch for a box of zip ties. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,5,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 2
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestFireteamLeader
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestSpecialist
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestCombatTechnician
+
+- type: entity
+  parent: RMCArmorVestSquad
+  id: RMCArmorVestRifleman

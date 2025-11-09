@@ -31,7 +31,7 @@
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
@@ -39,6 +39,7 @@
   overwatchShowName: true
   overwatchRoleName: Squad Leader
   roleWeight: 1
+  displayWeight: 6
   special:
   - !type:AddComponentSpecial
     components:
@@ -73,6 +74,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: leader
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -164,3 +166,41 @@
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSL
+  name: The Squad Leader
+  description: The Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: squad_leader
+
+- type: entity
+  id: RMCGuidebookActionMove
+  name: Move order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: move
+
+- type: entity
+  id: RMCGuidebookActionHold
+  name: Hold order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: hold
+
+- type: entity
+  id: RMCGuidebookActionFocus
+  name: Focus order
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Actions/marine_actions.rsi
+    state: focus

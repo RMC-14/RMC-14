@@ -1,6 +1,3 @@
-# TODO Recreational
-# TODO Miscellaneous
-
 # Auxiliary Support
 - type: roleLoadout
   id: JobCMAuxiliarySupportOfficer
@@ -882,3 +879,82 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+
+# PVE
+
+- type: roleLoadout
+  id: JobCMPVERifleman
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEHospitalCorpsman
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESmartGunOperator
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESquadLeader
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESectionSergeant
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEPlatoonCommander
+  points: 20
+  groups:
+  - MarineBackpack
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins

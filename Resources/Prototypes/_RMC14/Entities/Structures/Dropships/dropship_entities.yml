@@ -86,6 +86,31 @@
   - type: Tag
     tags:
     - RMCDropshipEnginePoint
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
+  id: RMCElectronicSystemAttachPoint
+  categories: [ HideSpawnMenu ]
+  name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipElectronicSystemPoint
+  - type: DropshipPointVisuals
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags:
+    - RMCDropshipElectronicSystemPoint
 
 - type: Tag
   id: RMCDropshipEnginePoint
+
+- type: Tag
+  id: RMCDropshipElectronicSystemPoint

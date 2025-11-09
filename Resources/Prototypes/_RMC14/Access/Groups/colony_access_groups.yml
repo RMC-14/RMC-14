@@ -17,6 +17,12 @@
   - CMAccessColonyPublic
 
 - type: accessGroup
+  id: ColonistObserver
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyCommand
+
+- type: accessGroup
   id: ColonyCorrespondent
   tags:
   - RMCAccessCommand

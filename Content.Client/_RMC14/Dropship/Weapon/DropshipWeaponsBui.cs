@@ -5,6 +5,7 @@ using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.TacticalMap;
@@ -229,6 +230,11 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(true)));
         var paraDropUnTarget = ButtonAction("clear",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(false)));
+        var spotlightToggleOn = ButtonAction("enable",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(true)));
+        var spotlightToggleOff = ButtonAction("disable",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(false)));
+
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
@@ -253,10 +259,12 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     out var four,
                     out var utilityOne,
                     out var utilityTwo,
-                    out var utilityThree
+                    out var utilityThree,
+                    out var electronicSystemOne,
+                    out var electronicSystemTwo
                 );
                 screen.LeftRow.SetData(one, two, utilityOne, utilityTwo, utilityThree);
-                screen.RightRow.SetData(three, four);
+                screen.RightRow.SetData(three, four, electronicSystemOne, electronicSystemTwo);
 
                 var text = new StringBuilder();
                 void AddWeaponEntry(DropshipWeaponsButtonData? data)
@@ -308,7 +316,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 AddTargets(out var previous, out var next);
                 screen.BottomRow.SetData(exit, five: next);
                 screen.TopRow.SetData(fire, five: previous);
-                TryGetWeapons(first, out var one, out var two, out var three, out var four, out _, out _, out _);
+                TryGetWeapons(first, out var one, out var two, out var three, out var four, out _, out _, out _, out _, out _);
                 screen.LeftRow.SetData(cancel, one, two, three, four);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
@@ -442,6 +450,16 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.TopRow.SetData(equip);
                 break;
             }
+            case Spotlight:
+            {
+                screen.TopRow.SetData(equip);
+                screen.BottomRow.SetData(exit);
+                if (!EntMan.TryGetComponent(EntMan.GetEntity(terminal.SelectedSystem), out DropshipSpotlightComponent? spotlight))
+                    break;
+
+                screen.LeftRow.SetData(!spotlight.Enabled ? spotlightToggleOn : spotlightToggleOff);
+                break;
+            }
             default:
                 screen.BottomRow.SetData(exit);
                 break;
@@ -516,7 +534,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         out DropshipWeaponsButtonData? four,
         out DropshipWeaponsButtonData? utilityOne,
         out DropshipWeaponsButtonData? utilityTwo,
-        out DropshipWeaponsButtonData? utilityThree)
+        out DropshipWeaponsButtonData? utilityThree,
+        out DropshipWeaponsButtonData? electronicSystemOne,
+        out DropshipWeaponsButtonData? electronicSystemTwo)
     {
         one = default;
         two = default;
@@ -525,11 +545,14 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         utilityOne = default;
         utilityTwo = default;
         utilityThree = default;
+        electronicSystemOne = default;
+        electronicSystemTwo = default;
         if (!_system.TryGetGridDropship(Owner, out var dropship))
             return;
 
         var weapons = new List<DropshipWeaponsButtonData?>();
         var utility = new List<DropshipWeaponsButtonData?>();
+        var electronicSystem = new List<DropshipWeaponsButtonData?>();
         foreach (var pointId in dropship.Comp.AttachmentPoints)
         {
             if (EntMan.TryGetComponent(pointId, out DropshipUtilityPointComponent? utilityComp) &&
@@ -568,6 +591,32 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 utility.Add(data);
             }
 
+            if (EntMan.TryGetComponent(pointId, out DropshipElectronicSystemPointComponent? electronicSystemComp) &&
+                _container.TryGetContainer(pointId, electronicSystemComp.ContainerId, out var electronicSystemContainer) &&
+                electronicSystemContainer.ContainedEntities.Count > 0)
+            {
+                string text;
+                BoundUserInterfaceMessage msg;
+                var electronicSystemMount = electronicSystemContainer.ContainedEntities[0];
+                if (EntMan.HasComponent<DropshipSpotlightComponent>(electronicSystemMount))
+                {
+                    text = "Spotlight";
+                    msg = new DropshipTerminalWeaponsChooseSpotlightMsg(first, EntMan.GetNetEntity(electronicSystemMount));
+                }
+                else
+                {
+                    continue;
+                }
+
+                var netEnt = EntMan.GetNetEntity(electronicSystemMount);
+                var data = new DropshipWeaponsButtonData(
+                    text,
+                    _ => SendPredictedMessage(msg),
+                    netEnt
+                );
+                electronicSystem.Add(data);
+            }
+
             if (!EntMan.TryGetComponent(pointId, out DropshipWeaponPointComponent? pointComp))
                 continue;
 
@@ -601,6 +650,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);
         utility.TryGetValue(2, out utilityThree);
+
+        electronicSystem.TryGetValue(0, out electronicSystemOne);
+        electronicSystem.TryGetValue(1, out electronicSystemTwo);
     }
 
     protected override void Dispose(bool disposing)
