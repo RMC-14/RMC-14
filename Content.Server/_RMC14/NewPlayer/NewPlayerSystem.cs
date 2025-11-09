@@ -74,7 +74,7 @@ public sealed class NewPlayerSystem : EntitySystem
                 var jobName = job.Name ?? string.Empty;
                 if (jobInfo != null)
                 {
-                    var newToJobEvent = new NewToJobEvent(args.Mob, jobInfo, jobName);
+                    var newToJobEvent = new NewToJobEvent(GetNetEntity(args.Mob), jobInfo, jobName);
                     RaiseNetworkEvent(newToJobEvent);
                 }
             }

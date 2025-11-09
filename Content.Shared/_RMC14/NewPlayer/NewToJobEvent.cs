@@ -15,7 +15,7 @@ public sealed class NewToJobEvent : EntityEventArgs
     public string? JobInfo { get; }
     public string JobName { get; }
 
-    public NewToJobEvent(EntityUid mob, string? jobInfo, string jobName)
+    public NewToJobEvent(NetEntity mob, string? jobInfo, string jobName)
     {
         Mob = mob;
         JobInfo = jobInfo;

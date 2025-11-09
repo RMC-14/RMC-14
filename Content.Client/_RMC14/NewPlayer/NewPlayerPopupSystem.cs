@@ -36,7 +36,7 @@ public sealed class NewPlayerPopupSystem : EntitySystem
         if (jobInfo == null)
             return;
 
-        if (!TryGetEntity(mob, out var targetMob) || targetMob != _player.LocalEntity)
+        if (_players.LocalEntity == null || mob != _players.LocalEntity)
             return;
 
         _window = new NewToJobPopup();
