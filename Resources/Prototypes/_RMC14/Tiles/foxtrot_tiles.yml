@@ -1,0 +1,71 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelfoxtrotBase
+  name: tiles-cm-foxtrot
+  itemDrop: CMTileItemSteel # TODO RMC14
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot0
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_0.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot1
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_1.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot2
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_2.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot3
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_3.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot4
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_4.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot5
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_5.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot6
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_6.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrot7
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrot_7.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrotCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrotcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrotCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrotcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrotCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrotcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrotCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrotcorner_3.png
+
+- type: tile
+  parent: CMFloorSteelfoxtrotBase
+  id: CMFloorSteelfoxtrotFull
+  sprite: /Textures/_RMC14/Tiles/almayer/foxtrot/foxtrotfull.png

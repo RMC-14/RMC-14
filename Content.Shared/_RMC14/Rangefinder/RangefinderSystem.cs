@@ -52,7 +52,6 @@ public sealed class RangefinderSystem : EntitySystem
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, DroppedEvent>(OnLaserDesignatorDropped);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, RMCDroppedEvent>(OnLaserDesignatorDropped);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, GotUnequippedHandEvent>(OnLaserDesignatorDropped);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, HandDeselectedEvent>(OnLaserDesignatorDropped);
 
         SubscribeLocalEvent<LaserDesignatorTargetComponent, ComponentRemove>(OnLaserDesignatorTargetRemove);
         SubscribeLocalEvent<LaserDesignatorTargetComponent, EntityTerminatingEvent>(OnLaserDesignatorTargetRemove);
@@ -334,7 +333,7 @@ public sealed class RangefinderSystem : EntitySystem
         {
             BreakOnMove = true,
             NeedHand = true,
-            BreakOnHandChange = true,
+            BreakOnHandChange = false,
             MovementThreshold = 0.5f,
         };
 
