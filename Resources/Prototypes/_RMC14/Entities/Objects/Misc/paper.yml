@@ -249,11 +249,15 @@
   - type: RequisitionsInvoice
 
 - type: entity
-  parent: CMPaperWritten
+  parent: CMPaper
   id: RMCPaperBodyguardInstructions
   name: Weston-Yamada liaison bodyguard instructions (Must Read)
   components:
   - type: Paper
+    stampState: paper_stamp-we_ya
+    stampedBy:
+    - stampedColor: '#996600'
+      stampedName: stamp-component-stamped-name-cm-we-ya
     content: |
       [bold]WESTON-YAMADA CORPORATION[/bold]
       [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]█[/color][color=#FF6655]▌[color=#FFFFFF]░░░░[/color]▄███▌[color=#25b266]▌▄[/color][color=#1c8a4e]█▀[/color]▄██████████[/color]
@@ -273,6 +277,8 @@
       [italic]As a Bodyguard, you are tasked with ensuring the safety of the Liaison and their office. As such, you are permitted to disable or detain people causing trouble or trespassing in the Liaison's office. Note that this removal [bold]MUST[/bold] be [bold]NON-LETHAL[/bold], and any detainees are to be handed over to [bold]Military Police[/bold] in regards to MLaw.
 
       These permissions are withheld outside of the Corporate Liaison's Office, thus if the suspect leaves the office or someone is causing trouble for the Liaison outside of the office, you do not have the right to detain them. The [bold]EXECPTION[/bold] is in situations where somebody poses a direct physical risk to the Liaison or you. Handling of these situations are to be done with [bold]STRICT ADHERENCE TO ESCALATION LAWS[/bold] as per SOP/MLaw. Keep to non-lethal responses wherever possible.[/italic]
+
+      You are permitted to carry sidearms and non-lethal weaponry on Code Green, with lethal weapons being permitted in the Liaison's Office or the AO. On Code Blue and above you are allowed to carry lethal weaponry. This right can be revoked by the Commander or Chief MP.
 
       [ head=3 ]Your Role.[/head]
       [italic]Your duties are to keep the Liaison and office safe, as well as engaging with the Liaison. You should not attempt to enforce Marine Law outside of the Liaison's office. You are allied with the Ship, and should not hinder the marine effort. You are also allied with the [bold]Military Police[/bold] and should not interfere with their duties.

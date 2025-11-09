@@ -604,5 +604,40 @@
       - RMCMagazineSmartGunirradiated
   - type: FixedItemSizeStorage
 
+# Security Tools
+- type: entity
+  parent: RMCPouchGeneral
+  id: RMCPouchSecurityTools
+  name: tactical security pouch
+  description: A custom fit security pouch, capable of fitting a variety of security tools in different compartments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+      - SecBeltEquip
+      - Taser
+      - Flashlight
+      - CMMagazinePistol
+      - RMCShellShotgun
+      - RMCMagazineRevolver
+      - Donut
+      - RMCGrenadeFlashBang
+      - Radio
+      components:
+      - Handcuff
+      - Flash
+      - FlashOnTrigger
+      - Stunbaton
+      - ForensicScanner
+      - MeleeWeapon
+      - Gun
+      - RMCLighter
+  - type: FixedItemSizeStorage
+
 - type: Tag
   id: RMCPouchShotgunShells

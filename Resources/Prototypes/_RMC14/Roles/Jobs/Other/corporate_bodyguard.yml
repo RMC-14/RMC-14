@@ -34,7 +34,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA Corporate Bodyguard
+  spawnMenuRoleName: Weston-Yamada Security Officer Bodyguard
   special:
   - !type:AddComponentSpecial
     components:
@@ -74,13 +74,19 @@
     shoes: RMCBootsPMCFilled
     back: RMCSatchelBlack
     pocket1: RMCPouchFirstAidPMCFill # Might not be the right one?
-    # pocket2: SecurityToolsPouch
+    pocket2: RMCPouchSecurityTools
   storage:
     back:
     - RMCBoxZiptie
     - CMCrowbar
     - CMMRE # TODO RMC14: PMC CFR ration
     - RMCPaperBodyguardInstructions
+    pocket2:
+    - CMStunbaton
+    - RMCWeaponTaser
+    - CMFlash
+    - RMCHandcuffs
+    # TODO: RMCPepperSpray
 
 - type: entity
   parent: CMSpawnPointJobBase
