@@ -3,6 +3,7 @@
   id: CMMilitaryPolice
   name: cm-job-name-militarypolice
   description: cm-job-description-militarypolice
+  newToJobInfo: rmc-new-to-job-military-police
   playTimeTracker: CMJobMilitaryPolice
   requirements:
   - !type:DepartmentTimeRequirement
