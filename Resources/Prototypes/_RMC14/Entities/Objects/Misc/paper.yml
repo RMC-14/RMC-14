@@ -247,3 +247,36 @@
     headerImagePath: "/Textures/_RMC14/Interface/Paper/paper_heading_requisition_invoice.svg.96dpi.png"
     headerMargin: 0.0, 12.0, 0.0, 0.0
   - type: RequisitionsInvoice
+
+- type: entity
+  parent: CMPaperWritten
+  id: RMCPaperBodyguardInstructions
+  name: Weston-Yamada liaison bodyguard instructions (Must Read)
+  components:
+  - type: Paper
+    content: |
+      [bold]WESTON-YAMADA CORPORATION[/bold]
+      [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]█[/color][color=#FF6655]▌[color=#FFFFFF]░░░░[/color]▄███▌[color=#25b266]▌▄[/color][color=#1c8a4e]█▀[/color]▄██████████[/color]
+      [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]█[/color][color=#FF6655]▌[color=#FFFFFF]░░[/color]▄██[color=#eb5c4c]██[/color]█▌[color=#1c8a4e]█▀[/color]▄██[color=#eb5c4c]█▀[/color][/color]
+      [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]█[/color][color=#FF6655]▌▄██[color=#eb5c4c]█▀[/color][color=#1c8a4e]▄[/color][color=#eb5c4c]▐[/color]█▌▄██[color=#eb5c4c]█▀[/color][color=#EEEE]▄[/color]▐████████[/color]
+      [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]█[/color][color=#FF6655]██[color=#eb5c4c]█▀[/color][color=#25b266]▄█[/color][color=#1c8a4e]█[/color][color=#eb5c4c]▐[/color]███[color=#eb5c4c]█▀[/color][color=#EEEEEE]▄█[/color][color=#DDDDDD]█[/color][/color]
+      [color=#FFFFFF]░░░░░░░░[/color][color=#eb5c4c]██▀[/color][color=#25b266]▄█[/color][color=#1c8a4e]█▀[/color][color=#FFFFFF]░[/color][color=#eb5c4c]▐██▀[/color][color=#EEEEEE]▄█[/color][color=#DDDDDD]█▀▐[/color][color=#FF6655]▐████████[/color]
+      [bolditalic]"THE FUTURE IS NOW"[/bolditalic]
+      [color=#383838]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+      [color=#FF6655]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+
+      [ head=2 ]Authority & You; Your Provisions on a UNMC Vessel![/head]
+
+      [ italic ]As a Bodyguard for one of our Liaisons situated aboard a UNMC vessel, you hold the important task of keeping the Executive safe, while also working with the shipside [bold]Military Police[/bold] to ensure proper adherence to Marine Law.[/italic]
+
+      [ head=3 ]Authority & Rights.[/head]
+      [italic]As a Bodyguard, you are tasked with ensuring the safety of the Liaison and their office. As such, you are permitted to disable or detain people causing trouble or trespassing in the Liaison's office. Note that this removal [bold]MUST[/bold] be [bold]NON-LETHAL[/bold], and any detainees are to be handed over to [bold]Military Police[/bold] in regards to MLaw.
+
+      These permissions are withheld outside of the Corporate Liaison's Office, thus if the suspect leaves the office or someone is causing trouble for the Liaison outside of the office, you do not have the right to detain them. The [bold]EXECPTION[/bold] is in situations where somebody poses a direct physical risk to the Liaison or you. Handling of these situations are to be done with [bold]STRICT ADHERENCE TO ESCALATION LAWS[/bold] as per SOP/MLaw. Keep to non-lethal responses wherever possible.[/italic]
+
+      [ head=3 ]Your Role.[/head]
+      [italic]Your duties are to keep the Liaison and office safe, as well as engaging with the Liaison. You should not attempt to enforce Marine Law outside of the Liaison's office. You are allied with the Ship, and should not hinder the marine effort. You are also allied with the [bold]Military Police[/bold] and should not interfere with their duties.
+
+      Your greatest ability is providing a partner for the CL to interact with. As such, you should [bold]NEVER[/bold] deploy planetside to fight hostiles.
+
+      Failure to adhere to the above rules and intentions may result in termination.[/italic]

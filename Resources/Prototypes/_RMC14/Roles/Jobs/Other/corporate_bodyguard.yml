@@ -80,11 +80,12 @@
     - RMCBoxZiptie
     - CMCrowbar
     - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCPaperBodyguardInstructions
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointCorporateBodyguard
-  name: corporate bodyguard spawn point
+  name: weston-yamada security officer (PPO) spawn point
   components:
   - type: SpawnPoint
     job_id: RMCWeYaCorporateBodyguard

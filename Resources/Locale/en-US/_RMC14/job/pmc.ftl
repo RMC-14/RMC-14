@@ -115,8 +115,8 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
 
-# Corporate Bodyguard
-rmc-job-name-corporate-bodyguard = Corporate Bodyguard
+# CL Bodyguard
+rmc-job-name-corporate-bodyguard = Weston-Yamada Security Officer
 rmc-job-description-corporate-bodyguard = Protect the Corporate Liaison and their office. Remember not to serve as a thug, and work with the Military Police when needed.
-rmc-job-prefix-corporate-bodyguard = CB
-RMCWeYaCorporateBodyguard = Corporate Bodyguard
+rmc-job-prefix-corporate-bodyguard = WYSO
+RMCWeYaCorporateBodyguard = Weston-Yamada Security Officer
