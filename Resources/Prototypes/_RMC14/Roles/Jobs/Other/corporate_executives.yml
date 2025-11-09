@@ -467,7 +467,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCDirector
     shoes: RMCShoesLaceup
     back: CMSatchel
-    belt: GoldHandcannonBeltFilled
+    belt: RMCGoldHandcannonBeltFilled
     outerClothing: RMCArmorPMCDirector
     id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressPMCDirector

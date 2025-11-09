@@ -115,26 +115,6 @@
           - RMCMagazinePistolHandcannonHI
           - RMCMagazinePistolHandcannonHIAP
         startingItem: RMCMagazinePistolHandcannonHI
-  - type: Tag
-    tags:
-    - Sidearm
-    - RMCWeaponPistolHandcannonGold
-  - type: RMCBattleExecute
-
-- type: entity
-  parent: RMCWeaponPistolHandcannonGold
-  id: RMCWeaponPistolHandcannonWinterWyvern
-  name: winter wyvern handcannon
-  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
-  - type: Tag
-    tags:
-    - Sidearm
-    - RMCWeaponPistolHandcannonWyvern
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
@@ -143,6 +123,26 @@
     shakeAmount: 5
     requiredSkills:
       RMCSkillLeadership: 3
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonGold
+  - type: RMCBattleExecute
+
+- type: entity
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonCO
+  name: blacksteel peregrine handcannon
+  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. It's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_co.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_co.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonCO
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -316,7 +316,7 @@
   id: RMCWeaponPistolHandcannonGold
 
 - type: Tag
-  id: RMCWeaponPistolHandcannonWyvern
+  id: RMCWeaponPistolHandcannonCO
 
 - type: Tag
   id: RMCMagazinePistolHandcannon

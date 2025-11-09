@@ -1438,3 +1438,8 @@ CMLightFixtureAlwaysPowered: RMCLightFixtureAlwaysPowered
 CMLightFixtureSmallAlwaysPowered: RMCLightFixtureSmallAlwaysPowered
 CMLightFixtureSmallOffset: RMCLightFixtureSmallOffset
 CMLightFixtureEmpty: RMCLightFixtureEmpty
+
+# 2025-11-09
+RMCWeaponPistolHandcannonWinterWyvern: RMCWeaponPistolHandcannonCO
+RMCD50WinterWyvernBeltFilled: RMCCOHandcannonBeltFilled
+GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
