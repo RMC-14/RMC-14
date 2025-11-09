@@ -27,3 +27,16 @@
   components:
   - type: Sprite
     state: rocreed
+
+- type: entity
+  parent: RMCSignRequisitions
+  id: RMCSignWeYaRestrictedArea
+  name: weston-yamada restricted area sign
+  description: 1. The shipside Weston-Yamada Security Officer is permitted to non-lethally detain and/or disable trespassing or trouble-causing personnel in accordance with Marine Law in this area. Detained personnel must be transferred to Military Police custody.
+
+                    2. The Security Officer is permitted longarms within the office while on Code Green.
+
+    3. These rights are suspended outside of this office. Exception to the first rule is when the Officer and/or Liaison are in immediate danger. Accordance to proper escalation is required.
+  components:
+  - type: Sprite
+    state: weyarestrictedarea
