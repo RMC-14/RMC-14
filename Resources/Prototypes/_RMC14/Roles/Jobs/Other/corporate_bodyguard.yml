@@ -79,7 +79,7 @@
     back:
     - RMCBoxZiptie
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMMRE # TODO RMC14: WEYA colony ration
     - RMCPaperBodyguardInstructions
     pocket2:
     - CMStunbaton
