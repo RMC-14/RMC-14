@@ -14,15 +14,15 @@ public sealed class NewPlayerPopupSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeNetworkEvent<NewToJobEvent>(OnNewToJob);
+        SubscribeLocalEvent<NewToJobEvent>(OnNewToJob);
     }
 
-    private void OnNewToJob(NewToJobEvent ev)
+    private void OnNewToJob(ref NewToJobEvent ev)
     {
         if (_cfg.GetCVar(RMCCVars.RMCNewToJobPopup) == false)
             return;
 
-        OpenNewPlayerPopup(ev.JobInfo, ev.JobName);
+        OpenNewPlayerPopup(ev.jobInfo, ev.jobName);
     }
 
     private void OpenNewPlayerPopup(string? jobInfo, string jobName)
