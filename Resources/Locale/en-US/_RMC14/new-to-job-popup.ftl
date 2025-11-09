@@ -32,7 +32,7 @@ rmc-new-to-job-rifleman = As a rifleman, you are the main fighting force of your
 
                                              You can do a left curly bracket at the start of your message to type in 'LOOC', which will let you talk about things outside of your character, which is helpful for telling people you are new or need help.
 
-rmc-new-to-job-staff-officer = As a staff officer, your job is to “overwatch”, to monitor and support the squad under your tasking.
+rmc-new-to-job-staff-officer = As a staff officer, your job is to “overwatch”, to monitor and support the squad under your tasking, and relay orders from the operation Commander.
 
                                              Your main posting is in CIC, at one of four terminals marked by coloured metal plating corresponding to one of four squads. The terminal can send a squad message (send a blue, visible message to the squad regardless of comms), swap marines to another squad, assign someone as acting squad leader, and directly watch marines via helmet cameras (clicking on their name, which only works with a helmet or camera gear). You also have access to a live tactical map, which updates live with marine positions and statuses (alongside xenos, if sensors are up), and a telephone, which allows you to call any other telephone and communicate via speaking without the use of radio.
 
