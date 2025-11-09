@@ -41,6 +41,9 @@
       #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+    blacklist:
+      tags:
+      - RMCAttachmentUnderbarrel
   - type: IgnoreContentsSize
     items:
       tags:
@@ -553,6 +556,20 @@
     - id: CMWeaponPistolM1984
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolCLF
+  name: M802 pattern 'Freedom' smart gun operator sidearm rig
+  description: A modification of the standard M802 load-bearing equipment, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
+  suffix: Filled, Mateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+    - id: RMCMagazineSmartGun
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig
@@ -854,6 +871,17 @@
     - id: RMCMagazinePistolT73
       amount: 5
     - id: RMCWeaponPistolT73
+
+- type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNPZ92
+  suffix: Filled, NPZ92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolNPZ92
+    - id: RMCMagazinePistolNP92
+      amount: 5
 
 - type: entity
   parent: RMCBeltHolsterPistol
@@ -1453,7 +1481,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1477,12 +1505,15 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,17,1 # should be 9 slots
+    - 0,0,15,1 # 7 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
+      - RMCMagazinePistolM13AP
+      - RMCMagazinePistolM13ExtAP
+      - RMCMagazinePistolM13DrumAP
       - RMCWeaponPistolM13
   - type: LimitedStorage
     limits:
@@ -1491,18 +1522,24 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 8
+      count: 7
       whitelist:
         tags:
         - RMCMagazinePistolM13
         - RMCMagazinePistolM13Ext
         - RMCMagazinePistolM13Drum
+        - RMCMagazinePistolM13AP
+        - RMCMagazinePistolM13ExtAP
+        - RMCMagazinePistolM13DrumAP
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCBeltHolsterM13
 
 - type: entity
   parent: CMBeltMarine
@@ -1543,6 +1580,50 @@
     contents:
     - id: RMCMagazineMar50LMG
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL24BeltFilled
+  suffix: Filled, L24
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL83A3BeltFilled
+  suffix: Filled, L83A3
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3
+      amount: 5
+
+- type: entity
+  parent: RMCBeltUtilityGeneral
+  id: RMCBeltUtiliyGeneralFilledRoyal
+  suffix: Filled, Royal Breacher
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolFilledL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistol
@@ -1772,6 +1853,9 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltHolsterM13
 
 - type: Tag
   id: RMCBeltMedical

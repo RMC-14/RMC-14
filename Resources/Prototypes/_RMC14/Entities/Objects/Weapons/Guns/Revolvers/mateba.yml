@@ -81,6 +81,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -133,6 +134,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -166,6 +168,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -373,8 +376,11 @@
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
   - type: RMCDebilitate
@@ -412,8 +418,11 @@
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
 

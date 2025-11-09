@@ -47,7 +47,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
             });
-        SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<IdModificationConsoleComponent, MapInitEvent>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<IdModificationConsoleComponent, InteractUsingEvent>(OnInteractHand);
 
@@ -179,7 +179,10 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             ContainerInHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
             if (ent.Comp.Authenticated)
                 return;
-            _popup.PopupClient($"This id is missing the {Loc.GetString(ent.Comp.Access)}",
+            if (!_prototype.TryIndex(ent.Comp.Access, out var accessPrototype) || accessPrototype.Name == null)
+                return;
+
+            _popup.PopupClient($"This id is missing the {Loc.GetString(accessPrototype.Name)}",
                 args.Actor,
                 PopupType.MediumCaution);
         }
@@ -377,7 +380,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         return contained != null;
     }
 
-    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref ComponentInit args)
+    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref MapInitEvent args)
     {
         UpdateAccessList(ent);
     }

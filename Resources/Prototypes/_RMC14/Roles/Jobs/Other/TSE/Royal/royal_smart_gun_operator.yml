@@ -5,10 +5,11 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalSmartGunOperator
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearRoyalSmartGunOperator
   icon: RMCJobIconRoyalSmartGunOperator
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
   spawnMenuRoleName: RCM Smart Gun Operator
   special:
   - !type:AddComponentSpecial
@@ -33,7 +34,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-sgo
-  hasIcon: false
   hidden: true
 
 - type: entity
@@ -76,7 +76,7 @@
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCSmartGunRoyal
-    id: RMCIDRoyalMarines
+    id: RMCIDRoyalMarinesSGO
     belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
     back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums

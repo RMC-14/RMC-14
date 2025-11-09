@@ -117,6 +117,10 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -128,9 +132,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #  points: 6
       - id: RMCSpeedLoader44Marksman
@@ -305,6 +307,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -358,6 +361,63 @@
       - id: CMBeltMedicBagFilled
         name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#       recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchVialFill
+        name: vial pouch (Full)
+      - id: RMCPouchMedical
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+
+- type: entity
+  parent: RMCColMarTechMedicalEquipmentPVE
+  id: RMCPMCMedicalEquipmentPVE
+  name: We-Ya squad medical equipment rack
+  description: An automated rack hooked up to a colossal storage of corporate medic standard-issue equipment.
+  suffix: PVE, PMC
+  components:
+  - type: CMAutomatedVendor
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCHandsLatexMarine
+        name: combat sterile gloves
+      - id: CMMaskSterile
+      - id: RMCSatchelPMCMedic
+        recommended: true
+      - id: ArmorHelmetPMC
+        recommended: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltMedicBagPMCFilled
         name: M276 medical storage rig (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
