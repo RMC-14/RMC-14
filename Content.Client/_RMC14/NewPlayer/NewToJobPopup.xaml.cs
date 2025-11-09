@@ -27,40 +27,31 @@ public sealed partial class NewToJobPopup : FancyWindow
         ResetTimer();
     }
 
+    public void SetJobInfo(string? info,  string name)
+    {
+        if (string.IsNullOrWhiteSpace(info))
+            return;
+
+        NewToJobName.SetMessage(Loc.GetString("new-to-job-popup-job-name", ("name", Loc.GetString(name))));
+        NewToJobLabel.SetMessage(Loc.GetString(info));
+    }
+
     private void InitializeUI()
     {
-        TitleLabel.Text = Loc.GetString("no-eorg-popup-label");
-        MessageLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("no-eorg-popup-message")));
-        RuleLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("no-eorg-popup-rule")));
-        RuleTextLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("no-eorg-popup-rule-text")));
-
-        _initialSkipState =
-            _cfg.GetCVar(RMCCVars.RMCSkipRoundEndNoEorgPopup); // Store the initial CVar value to compare against
-        SkipCheckBox.Pressed = _initialSkipState;
-        NoEorgCloseButton.Disabled = true;
+        NewToJobCloseButton.Disabled = true;
 
         UpdateCloseButtonText();
     }
 
     private void InitializeEvents()
     {
-        OnClose += SaveSkipState; // Only change the CVar once the close button is pressed
-        NoEorgCloseButton.OnPressed += OnClosePressed;
+        NewToJobCloseButton.OnPressed += OnClosePressed;
     }
 
     private void ResetTimer()
     {
-        _remainingTime = _cfg.GetCVar(RMCCVars.RMCRoundEndNoEorgPopupTime); // Set how long to show the popup for
+        _remainingTime = _cfg.GetCVar(RMCCVars.RMCNewToJobPopupTime); // Set how long to show the popup for
         UpdateCloseButtonText();
-    }
-
-    private void SaveSkipState()
-    {
-        if (SkipCheckBox.Pressed == _initialSkipState)
-            return;
-
-        _cfg.SetCVar(RMCCVars.RMCSkipRoundEndNoEorgPopup, SkipCheckBox.Pressed);
-        _cfg.SaveToFile();
     }
 
     private void OnClosePressed(BaseButton.ButtonEventArgs args)
@@ -71,17 +62,17 @@ public sealed partial class NewToJobPopup : FancyWindow
     private void UpdateCloseButtonText()
     {
         var isWaiting = _remainingTime > 0f;
-        NoEorgCloseButton.Text = isWaiting
-            ? Loc.GetString("no-eorg-popup-close-button-wait", ("time", (int)MathF.Ceiling(_remainingTime)))
-            : Loc.GetString("no-eorg-popup-close-button");
-        NoEorgCloseButton.Disabled = isWaiting;
+        NewToJobCloseButton.Text = isWaiting
+            ? Loc.GetString("new-to-job-popup-close-button-wait", ("time", (int)MathF.Ceiling(_remainingTime)))
+            : Loc.GetString("new-to-job-popup-close-button");
+        NewToJobCloseButton.Disabled = isWaiting;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
 
-        if (!NoEorgCloseButton.Disabled)
+        if (!NewToJobCloseButton.Disabled)
             return;
 
         _remainingTime = MathF.Max(0f, _remainingTime - args.DeltaSeconds);

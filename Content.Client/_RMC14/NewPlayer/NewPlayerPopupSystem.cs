@@ -19,15 +19,23 @@ public sealed class NewPlayerPopupSystem : EntitySystem
 
     private void OnNewToJob(NewToJobEvent ev)
     {
-        OpenNewPlayerPopup();
+        if (_cfg.GetCVar(RMCCVars.RMCNewToJobPopup) == false)
+            return;
+
+        OpenNewPlayerPopup(ev.JobInfo, ev.JobName);
     }
 
-    private void OpenNewPlayerPopup()
+    private void OpenNewPlayerPopup(string? jobInfo, string jobName)
     {
         if (_window != null)
             return;
 
+        if (jobInfo == null)
+            return;
+
         _window = new NewToJobPopup();
+        if (!string.IsNullOrEmpty(jobInfo))
+            _window.SetJobInfo(jobInfo, jobName);
         _window.OpenCentered();
         _window.OnClose += () => _window = null;
     }

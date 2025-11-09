@@ -494,4 +494,16 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
+
+    /// <summary>
+    /// Whether the new to job popup is enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCNewToJobPopup =
+        CVarDef.Create("game.new_to_job_popup_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How long to display the new to job popup for.
+    /// </summary>
+    public static readonly CVarDef<float> RMCNewToJobPopupTime =
+        CVarDef.Create("game.new_to_job_popup_time", 5f, CVar.SERVER | CVar.REPLICATED);
 }
