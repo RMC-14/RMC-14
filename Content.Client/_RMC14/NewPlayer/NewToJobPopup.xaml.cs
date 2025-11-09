@@ -32,8 +32,9 @@ public sealed partial class NewToJobPopup : FancyWindow
         if (string.IsNullOrWhiteSpace(info))
             return;
 
-        NewToJobName.SetMessage(Loc.GetString("new-to-job-popup-job-name", ("name", Loc.GetString(name))));
+        NewToJobName.SetMessage(Loc.GetString("rmc-new-to-job-popup-job-name", ("name", Loc.GetString(name))));
         NewToJobLabel.SetMessage(Loc.GetString(info));
+        NewToJobAdditional.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("rmc-new-to-job-additional")));
     }
 
     private void InitializeUI()
@@ -63,8 +64,8 @@ public sealed partial class NewToJobPopup : FancyWindow
     {
         var isWaiting = _remainingTime > 0f;
         NewToJobCloseButton.Text = isWaiting
-            ? Loc.GetString("new-to-job-popup-close-button-wait", ("time", (int)MathF.Ceiling(_remainingTime)))
-            : Loc.GetString("new-to-job-popup-close-button");
+            ? Loc.GetString("rmc-new-to-job-popup-close-button-wait", ("time", (int)MathF.Ceiling(_remainingTime)))
+            : Loc.GetString("rmc-new-to-job-popup-close-button");
         NewToJobCloseButton.Disabled = isWaiting;
     }
 

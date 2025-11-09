@@ -505,5 +505,5 @@ public sealed partial class RMCCVars : CVars
     /// How long to display the new to job popup for.
     /// </summary>
     public static readonly CVarDef<float> RMCNewToJobPopupTime =
-        CVarDef.Create("game.new_to_job_popup_time", 5f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("game.new_to_job_popup_time", 15f, CVar.SERVER | CVar.REPLICATED);
 }
