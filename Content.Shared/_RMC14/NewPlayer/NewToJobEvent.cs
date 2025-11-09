@@ -5,7 +5,7 @@
 /// </summary>
 [ByRefEvent]
     public readonly record struct NewToJobEvent(
-        EntityUid player,
+        EntityUid Mob,
         string? jobInfo,
         string jobName
 );
