@@ -56,12 +56,24 @@
     base: runedstone
 
 - type: entity
+  parent: RMCWallSandstoneTemple
+  id: RMCWallSandstoneTempleGrey
+  components:
+  - type: Sprite
+    color: '#666666'
+
+- type: entity
+  parent: RMCWallSandstoneTempleGrey
+  id: RMCWallSandstoneMemorial
+  name: memorial wall
+
+- type: entity
   parent: RMCWallSandstone
   id: RMCWallUranium
   name: uranium wall
   description: A wall with uranium plating. This is probably a bad idea.
   components:
-  - type: SpriteColor
+  - type: Sprite
     color: '#1b4506'
 
 - type: entity
