@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.NewPlayer;
 using Content.Shared.GameTicking;
+using Robust.Client.Player;
 using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.NewPlayer;
@@ -8,6 +9,8 @@ namespace Content.Client._RMC14.NewPlayer;
 public sealed class NewPlayerPopupSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IPlayerManager _players = default!;
+
 
     private NewToJobPopup? _window;
 
@@ -22,15 +25,18 @@ public sealed class NewPlayerPopupSystem : EntitySystem
         if (_cfg.GetCVar(RMCCVars.RMCNewToJobPopup) == false)
             return;
 
-        OpenNewPlayerPopup(ev.JobInfo, ev.JobName);
+        OpenNewPlayerPopup(GetEntity(ev.Mob), ev.JobInfo, ev.JobName);
     }
 
-    private void OpenNewPlayerPopup(string? jobInfo, string jobName)
+    private void OpenNewPlayerPopup(EntityUid mob, string? jobInfo, string jobName)
     {
         if (_window != null)
             return;
 
         if (jobInfo == null)
+            return;
+
+        if (!TryGetEntity(mob, out var targetMob) || targetMob != _player.LocalEntity)
             return;
 
         _window = new NewToJobPopup();

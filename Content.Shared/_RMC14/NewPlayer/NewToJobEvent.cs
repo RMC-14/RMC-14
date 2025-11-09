@@ -11,13 +11,13 @@ namespace Content.Shared._RMC14.NewPlayer;
 [Serializable, NetSerializable]
 public sealed class NewToJobEvent : EntityEventArgs
 {
-    public NetUserId PlayerId { get; }
+    public NetEntity Mob { get; }
     public string? JobInfo { get; }
     public string JobName { get; }
 
-    public NewToJobEvent(NetUserId playerId, string? jobInfo, string jobName)
+    public NewToJobEvent(EntityUid mob, string? jobInfo, string jobName)
     {
-        PlayerId = playerId;
+        Mob = mob;
         JobInfo = jobInfo;
         JobName = jobName;
     }
