@@ -57,3 +57,11 @@
   components:
   - type: Sprite
     state: rope
+
+- type: entity
+  parent: RMCLadderRope
+  id: RMCLadderRopeAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
