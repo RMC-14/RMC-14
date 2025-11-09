@@ -67,7 +67,11 @@ public sealed class NewPlayerSystem : EntitySystem
             var newJob = jobTime <= _newPlayerTimeJob;
             var brandNewJob = jobTime <= _brandNewPlayerTimeJob;
             if (brandNewJob) // purple
+            {
                 _appearance.SetData(ent, NewPlayerLayers.Layer, NewPlayerVisuals.Four);
+                var newToJobEvent = new NewToJobEvent(args.Player.UserId);
+                RaiseNetworkEvent(newToJobEvent);
+            }
             else if (newTotal && newJob) // red
                 _appearance.SetData(ent, NewPlayerLayers.Layer, NewPlayerVisuals.One);
             else if (newTotal) // yellow
