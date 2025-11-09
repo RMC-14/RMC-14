@@ -20,7 +20,7 @@ rmc-new-to-job-nurse = As a nurse, your job is to assist doctors and learn the b
 
 rmc-new-to-job-rifleman = As a rifleman, you are the main fighting force of your squad, having numbers to bolster. You have strength and less likelihood of being captured by the enemy force in numbers and proximity.
 
-                                             As you wake up from cryo, you will be hungry. Get some food from the food vendors at the north or south of the room you woke up in. You can interact with left click and inspect with Shift + Left Click. Grab some food, and press E with the food in your hand to eat it.
+                                             As you wake up from cryo, you will be hungry. Get some food from the food vendors at the top or bottom of the room you woke up in. You can interact with left click and inspect with Shift + Left Click. Grab some food, and press E with the food in your hand to eat it.
 
                                              After you've eaten, walk left; you will see a large line of vendors – these are where you will get your clothing and other utility items, such as belts and pouches. Anything in orange is important, and green is mandatory. After getting your gear, continue left into the next room. You will find shared vendors for weapons, attachments, and surplus tools. The weapon racks are on the far left top and bottom of the shared room – grab a weapon and a magazine. You can load weapons by placing a magazine in your hand and clicking on the gun in your other hand. You can switch your main hand with X.
 
