@@ -631,7 +631,7 @@
   - CivilianOnlyRMC
 
 - type: roleLoadout
-  id: JobCMCorporateBodyguard
+  id: JobRMCWeYaCorporateBodyguard
   points: 7
   groups:
   - MarineLeatherBackpack
