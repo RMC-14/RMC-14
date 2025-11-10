@@ -289,10 +289,10 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 0.1
+        maxVol: 10
         reagents:
         - ReagentId: CMDexalinPlus
-          Quantity: 0.1
+          Quantity: 10
   - type: Sprite
     layers:
     - state: pill16
