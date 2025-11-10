@@ -132,7 +132,7 @@
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
   id: RMCWeaponPistolHandcannonCO
-  name: blacksteel peregrine handcannon
+  name: custom peregrine handcannon
   description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. It's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
