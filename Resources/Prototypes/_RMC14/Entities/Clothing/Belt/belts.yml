@@ -1182,10 +1182,11 @@
     maxItemSize: Normal
     grid:
     - 0,0,13,1 # 7 slots
-    blacklist:
+    whitelist:
       tags:
-      - CMFirstAidKit
-      - RMCEngineerKit
+      - RMCRevolver
+      - RMCMagazineRevolver
+      - RMCMatebaCustomizationCase
   - type: Tag
     tags:
     - RMCMatebaHolster
@@ -1452,151 +1453,14 @@
   id: RMCBeltSOCOM
 
 - type: entity
-  parent: CMBeltBaseStorage
+  parent: RMCBeltHolsterPistol
   id: RMCPeregrineBelt
   name: M276 pattern Peregrine holster rig
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Peregrine handcannon, along with six small pouches for magazines.
-  components:
-  - type: Sprite # TODO RMC14 custom sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
-    layers:
-    - state: icon
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: _m77
-      map: [ "_m77_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984
-      map: [ "m1984_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: mk80
-      map: [ "mk80_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: b92fs
-      map: [ "b92fs_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m13
-      map: [ "m13_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: highpower
-      map: [ "mk45_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: tt
-      map: [ "t73_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: l54
-      map: [ "l54_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: deagle
-      map: [ "handcannon_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: g_deagle
-      map: [ "g_handcannon_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: c_deagle
-      map: [ "co_handcannon_fill" ]
-    - state: icon-front
-      map: [ "holstered" ]
-    - state: half
-      map: [ "openLayer" ]
-    - state: full
-      map: [ "closedLayer" ]
-  - type: Clothing
-    slots:
-    - suitStorage
-    - belt
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
-  - type: Storage
-    maxItemSize: Normal
-    grid:
-    - 0,0,13,1 # 7 slots
-    blacklist:
-      tags:
-      - CMFirstAidKit
-      - RMCEngineerKit
+  components: # TODO RMC14 custom sprite
   - type: Tag
     tags:
     - RMCPeregrineHolster
-  - type: FixedItemSizeStorage
-  - type: CMHolster
-    whitelist:
-      components:
-      - Gun
-  - type: LimitedStorage
-    limits:
-    - popup: rmc-storage-limit-one-gun
-      whitelist:
-        components:
-        - Gun
-  - type: ItemMapper # Parenting off of the general pistol holster rig directly also inherits the storage whitelist, which we want to avoid.
-    spriteLayers:
-    - holstered
-    - _m77_fill
-    - m1984_fill
-    - mk80_fill
-    - b92fs_fill
-    - mk45_fill
-    - t73_fill
-    - m13_fill
-    - l54_fill
-    - handcannon_fill
-    - g_handcannon_fill
-    - co_handcannon_fill
-    mapLayers:
-      holstered:
-        whitelist:
-          tags:
-          - Sidearm
-      _m77_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolM77
-      m1984_fill:
-        whitelist:
-          tags:
-          - CMWeaponPistolM1984
-      mk80_fill:
-        whitelist:
-          tags:
-          - RMCMK80
-      b92fs_fill:
-        whitelist:
-          tags:
-          - RMCb92fs
-      mk45_fill:
-        whitelist:
-          tags:
-          - RMCMK45
-      m13_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolM13
-      t73_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolT73
-      l54_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolL54
-      handcannon_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolHandcannon
-      g_handcannon_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolHandcannonGold
-      co_handcannon_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolHandcannonCO
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
-      Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
-      Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/urban.rsi
 
 - type: Tag
   id: RMCPeregrineHolster
