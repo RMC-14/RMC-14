@@ -184,6 +184,8 @@ public sealed class CPRSystem : EntitySystem
 
     private bool StartCPR(EntityUid performer, EntityUid target)
     {
+        RemComp<ReceivingCPRComponent>(target); // Remove any stale ReceivingCPRComponent
+
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
