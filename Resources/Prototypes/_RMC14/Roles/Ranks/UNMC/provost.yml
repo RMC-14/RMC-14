@@ -26,7 +26,7 @@
   prefix: PvDM.
   paygrade: O6
 
-# Any player with medium-high law understanding, with active admin supervision
+# Any admin or whitelisted CO with medium-high law understanding.
 - type: rank
   id: RMCRankProvostAgent
   name: Special Agent
