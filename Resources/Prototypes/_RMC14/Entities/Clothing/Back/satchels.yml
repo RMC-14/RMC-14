@@ -139,6 +139,7 @@
   parent: RMCBackpackScout
   id: RMCBackpackPID
   name: P68 thermal cloak
+  suffix: Provost
   description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible.
   components:
   - type: Sprite
@@ -146,28 +147,11 @@
   - type: ThermalCloak
     opacity: 0
     restrictWeapons: true
-    cloakedHideLayers:
-    - Hair
-    - HeadTop
-    - HeadSide
-    - Tail
-    - Snout # I don't know if this is hugely problematic but better safe than sorry
-    whitelist:
-      components:
-      - ScoutWhitelist
-    cloakSound:
-      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
-      params:
-        variation: 0.09
-    uncloakSound:
-      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
-      params:
-        variation: 0.09
 
 - type: entity
   parent: RMCBackpackPID
   id: RMCBackpackPIDFilled
-  suffix: Filled
+  suffix: Provost, Filled
   components:
   - type: StorageFill
     contents:
