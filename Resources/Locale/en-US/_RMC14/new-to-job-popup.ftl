@@ -49,3 +49,19 @@ rmc-new-to-job-military-police = As an MP, your job is to enforce Marine Law (ML
                                              After the Marines deploy, your time will be spent patrolling the ship, assisting with logistical tasks, moving boxes of intelligence to the computer lab on the second floor, and helping with mortuary duties. You can also advise and teach new players through drills or just general support, and you have ample spare time to head to FOB or walk around the ship to RP and hang out.
 
                                              If survivors are recovered from the ground, it's your job to help process them and ensure they receive medical treatment and examination. Check your guidebook for details on third-party processing when you hear survivors are on the way up. You will also be expected to process and control prisoners of war, which can be found in the third-party section of the guidebook.
+
+rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots and ensure the smooth operation of the dropships.
+
+                                             At the beginning of the round, decide which pilot you would like to assist and ask them what they would like installed on their ship. North of the dropships there is a room with a part fabricator and power loaders. Be sure to use the premade parts lying around the hangar before fabricating any additional ones.
+
+                                             Get in one of the loaders to pick up and install parts onto the appropriate hardpoints of the ships, and use the fabricator to print additional parts and ammunition. Every pilot has different preferences, so be sure to ask before you print anything! You may be asked to procure other items for the ships from medical or requisitions as well.
+
+                                             Once the ships are prepped and the mission is underway, you will ride with the pilot and assist them with various tasks:
+
+                                             On The Dropship Alamo (Yellow) you will be expected to help load and unload various items. Intel documents and corpses are to be brought up and left in the hangar bay near the doors to medical.
+
+                                             On The Dropship Normandy (Grey) you will be expected to reload the weapons between flights. Use the power loader to remove partially spent payloads from the weapons, combine boxes of ammunition, and insert it back into the guns. Completely empty weapons simply need fresh ammo inserted.
+
+                                             In the case of a medevac, go to the back of the ship and interact with the red medevac module. This will bring the patient up onto your ship from the ground. Inform the Almayer's medical staff that they are coming aboard and make sure they are brought into their care.
+
+                                             You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
