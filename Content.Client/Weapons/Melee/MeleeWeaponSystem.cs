@@ -36,15 +36,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly RMCMeleeWeaponSystem _RMCMelee = default!;
-
     private EntityQuery<TransformComponent> _xformQuery;
 
     private const string MeleeLungeKey = "melee-lunge";
 
     // RMC14
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
-    [Dependency] private readonly RMCMeleeWeaponSystem _rmcMeleeWeapon = default!;
+    [Dependency] private readonly RMCMeleeWeaponSystem _RMCMelee = default!;
 
     public override void Initialize()
     {
@@ -255,7 +253,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             }
         }
         // RMC14
-        if ((attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.GetUserLightAttackRange(attacker, target, meleeComponent))
+        if ((attackerPos.Position - mousePos.Position).Length() > _RMCMelee.GetUserLightAttackRange(attacker, target, meleeComponent))
             return;
         // RMC14
 
