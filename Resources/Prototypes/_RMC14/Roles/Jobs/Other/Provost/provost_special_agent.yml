@@ -68,7 +68,7 @@
     jumpsuit: CMJumpsuitProvostAgent
     outerClothing: RMCArmorProvostAgentFilled
     gloves: CMHandsBlackInsulated
-    shoes: CMBootsBlackFilled
+    shoes: RMCScoutShoes
     suitstorage: RMCWeaponRifleXM40
     id: RMCIDCardProvostSpecialAgent
     belt: RMCMatebaBeltFilled
