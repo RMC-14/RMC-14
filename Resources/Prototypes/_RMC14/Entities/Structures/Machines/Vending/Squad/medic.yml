@@ -474,7 +474,7 @@
     #   entries:
     #   - id: RMCPillCanisterImidazolineAlkysine
     #     recommended: true
-    #   - id: RMCBottleImidazolineAlkysine
+    #   - id: RMCLargeBottleImidazolineAlkysine
     #     recommended: true
     - name: Pill Bottles
       entries:
