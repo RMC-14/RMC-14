@@ -155,8 +155,8 @@
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
-    Water: 5
-    Rice: 5
+  solids:
+    FoodRiceBoiled: 1
 
 - type: microwaveMealRecipe
   id: RecipeCarbonara
@@ -349,6 +349,7 @@
   reagents:
     Rice: 5
     Water: 5
+    Sugar: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1
@@ -377,6 +378,7 @@
   reagents:
     Rice: 5
     Water: 5
+    Vinegar: 5
   solids:
     FoodMealFriedegg: 1
     FoodGarlic: 1
@@ -391,4 +393,15 @@
   solids:
     FoodOnionSlice: 1
     FoodMeatSausage: 1
+    FoodPotato: 1
+
+- type: microwaveMealRecipe
+  id: RecipePieMash
+  name: pie and mash recipe
+  result: FoodPieMash
+  time: 10
+  group: Savory
+  solids:
+    FoodButterSlice: 1
+    FoodPieMeatSlice: 1
     FoodPotato: 1

@@ -36,8 +36,8 @@
     heldPrefix: pink
   - type: FlavorProfile
     flavors:
-    - bread
     - sweet
+    - cherry
 
 - type: entity
   parent: RMCFoodDonut
@@ -62,7 +62,7 @@
     heldPrefix: pink
   - type: FlavorProfile
     flavors:
-    - bread
+    - cherry
     - sweet
 
 - type: entity
@@ -487,6 +487,7 @@
     - garlic
     - fishy
     - egg
+    - bitter
   - type: Food
     transferAmount: 4
   - type: SolutionContainerManager
@@ -566,6 +567,32 @@
     flavors:
     - potatoes
     - meaty
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 4
+
+- type: entity
+  name: pie and mash
+  parent: CMFoodBase
+  id: FoodPieMash
+  description: Goes together like fish and chips, beans and.... nevermind.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: pie-mash
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - meaty
+    - butter
   - type: Food
     transferAmount: 4
   - type: SolutionContainerManager
