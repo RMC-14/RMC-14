@@ -118,11 +118,13 @@
     - name: Executive Officer
       takeAll: RMCDresser
       jobs:
+      - CMCommandingOfficer
       - CMExecutiveOfficer
       entries:
       - id: CMJumpsuitXOFormal
       - id: CMCoatXOFormal
       - id: CMHeadCapPeakedFormal
+      - id: RMCSunglassesBig
     # Engineering
     - name: Engineering
       takeAll: RMCDresser
@@ -294,6 +296,18 @@
       - id: CMHandsBlackMarine
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
+    # Glasses
+    - name: Standard Glasses
+      takeAll: RMCDresser
+      entries:
+      - id: RMCSunglasses
+      - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
+      - id: RMCGlassesAviators
+      - id: RMCGlassesAviatorsSilver
+      - id: RMCPrescriptionSunglasses
+      - id: RMCHipsterGlasses
+      - id: RMCHippieGlasses
     # Service
     - name: Service Uniform
       takeAll: RMCDresser
