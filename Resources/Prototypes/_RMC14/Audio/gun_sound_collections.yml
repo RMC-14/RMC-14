@@ -62,3 +62,23 @@
   id: RMCAK4047Shoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ak4047.ogg
+
+- type: soundCollection
+  id: RMCFlamerFL3Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamethrower3.ogg
+
+- type: soundCollection
+  id: RMCSilencedShootAlt
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_alt_shot1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_alt_shot2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_alt_shot3.ogg
+
+- type: soundCollection
+  id: RMCM13Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m10_auto_pistol.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m10_auto_pistol2.ogg

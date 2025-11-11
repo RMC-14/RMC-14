@@ -5,9 +5,9 @@
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: CMJobPMCGunnerPVE
   ranks:
-    RMCRankWeYaMedicalSpecialist: []
+    RMCRankWeYaSupportSpecialist: []
   startingGear: RMCJobPMCGunnerPVE
-  icon: RMCJobIconPMCMedic
+  icon: RMCJobIconPMCGunner
   joinNotifyCrew: false
   accessGroups:
   - Colony
@@ -31,9 +31,22 @@
         RMCSkillSmartGun: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
-    - type: SquadArmorWearer
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

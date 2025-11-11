@@ -127,7 +127,7 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmoke
+  id: RMCSmokeExplosionProof
   components:
   - type: Transform
     anchored: true
@@ -147,6 +147,19 @@
   - type: EvenSmoke
     spawn: RMCSmoke
     range: 3
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmokeExplosionProofSmall
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
+
+- type: entity
+  parent: RMCSmokeExplosionProof
+  id: RMCSmoke
+  components:
   - type: DeleteOnExplosion
 
 - type: entity
@@ -188,7 +201,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 48
+    capacity: 1 # TODO RMC14 shrapnel lag
     directHit: false
   - type: ContainerContainer
     containers:
@@ -221,7 +234,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 48 #same as HEFA
+    capacity: 1 #same as HEFA # TODO RMC14 shrapnel lag
     directHit: false
   - type: ContainerContainer
     containers:
@@ -337,7 +350,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 48
+    capacity: 1 # TODO RMC14 shrapnel lag
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

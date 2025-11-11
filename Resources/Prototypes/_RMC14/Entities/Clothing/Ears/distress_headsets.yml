@@ -34,7 +34,7 @@
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -49,7 +49,7 @@
   parent: RMCHeadsetDistressBureau
   id: RMCHeadsetDistressBureauDamaged
   name: damaged bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
   components:
   - type: ContainerFill
     containers:
@@ -93,6 +93,26 @@
     - DirectorPmc
     - LeaderPmc
     - CorporateLiaison
+
+- type: entity
+  parent: RMCHeadsetDistressWeYa
+  id: RMCHeadsetDistressPMCPVE
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  suffix: PVE
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYA
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmcPVE
+    trackerModes:
+    - LeaderPmcPVE
+    - TeamLeaderPmcPVE
 
 - type: entity
   parent: RMCHeadsetDistressPMC

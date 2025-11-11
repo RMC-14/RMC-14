@@ -14,27 +14,27 @@ public sealed partial class CCVars
     ///     The dataset prototype to use when selecting a random tip.
     /// </summary>
     public static readonly CVarDef<string> TipsDataset =
-        CVarDef.Create("tips.dataset", "Tips");
+        CVarDef.Create("tips.dataset", "RMC_Tips");
 
     /// <summary>
     ///     The number of seconds between each tip being displayed when the round is not actively going
     ///     (i.e. postround or lobby)
     /// </summary>
     public static readonly CVarDef<float> TipFrequencyOutOfRound =
-        CVarDef.Create("tips.out_of_game_frequency", 60f * 1.5f);
+        CVarDef.Create("tips.out_of_game_frequency", 60f * 0.5f);
 
     /// <summary>
     ///     The number of seconds between each tip being displayed when the round is actively going
     /// </summary>
     public static readonly CVarDef<float> TipFrequencyInRound =
-        CVarDef.Create("tips.in_game_frequency", 60f * 60);
+        CVarDef.Create("tips.in_game_frequency", 60f * 30);
 
     public static readonly CVarDef<string> LoginTipsDataset =
-        CVarDef.Create("tips.login_dataset", "Tips");
+        CVarDef.Create("tips.login_dataset", "RMC_Tips");
 
     /// <summary>
     ///     The chance for Tippy to replace a normal tip message.
     /// </summary>
     public static readonly CVarDef<float> TipsTippyChance =
-        CVarDef.Create("tips.tippy_chance", 0.01f);
+        CVarDef.Create("tips.tippy_chance", 0f);
 }

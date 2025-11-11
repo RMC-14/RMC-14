@@ -6,6 +6,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 10
+    bio: 15
+    explosionArmor: 10
 
 - type: entity
   parent: RMCArmorTMCC
@@ -13,20 +18,3 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC_alt.rsi
-
-- type: entity
-  parent: RMCBaseMarineArmor
-  id: RMCArmorParamedic
-  name: EMT - Paramedic utility fatigues
-  description: A set of EMT - Paramedic utility fatigues, this one is red.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
-
-- type: entity
-  parent: RMCArmorParamedic
-  id: RMCArmorParamedicGreen
-  description: A set of EMT - Paramedic utility fatigues, this one is green.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi

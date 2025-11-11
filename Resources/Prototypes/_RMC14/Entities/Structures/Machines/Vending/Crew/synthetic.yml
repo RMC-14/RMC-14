@@ -18,6 +18,7 @@
       entries:
       # /obj/item/coin/marine/synth
       # /obj/item/device/defibrillator/synthetic
+      - id: RMCSynthResetKey
       - id: RMCHeadsetSynth
     - name: Uniform
       choices: { CMUniform: 1 }
@@ -36,10 +37,11 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
-      - id: CMWebbingSurgicalBlue
-      - id: CMWebbingSurgicalGreen
+      - id: RMCWebbingHolsterBlack
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
@@ -52,7 +54,7 @@
       - id: RMCHardhatOrange
         name: orange hard hat
       - id: RMCHelmetWelding
-      # /obj/item/clothing/head/cmcap/flap
+      - id: CMHeadFlapCap
 #    - name: Suit
 #      choices: { CMSuit: 1 }
 #      entries:
@@ -182,7 +184,7 @@
         points: 2
       - id: RMCPowerCellHigh
         points: 3
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         points: 2
       - id: CMSheetMetal10
         name: metal x10
@@ -286,7 +288,7 @@
       - id: RMCFlashlight
         points: 1
         recommended: true
-      - id: RMCFulton
+      - id: RMCFulton20
         points: 5
       - id: RMCMotionDetector
         points: 5
@@ -301,6 +303,7 @@
         points: 2
       - id: RMCFlashlightPen
         points: 2
+
 
 - type: entity
   parent: ColMarTechBase
@@ -334,6 +337,14 @@
       # maintenance jack - 15 Points
       # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
+        points: 15
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      - id: CMWebbingSurgicalGreen
+        points: 15
+      - id: CMSatchelMarineLogistics
+        points: 15
+      - id: RMCSatchelMarineIntelChestrig
         points: 15
 
 - type: entity

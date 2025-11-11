@@ -1,5 +1,11 @@
-﻿- type: dataset
-  id: CM_Tips
+﻿- type: localizedDataset
+  id: RMC_Tips
+  values:
+    prefix: rmc-tips-
+    count: 142
+
+- type: dataset
+  id: CM_Tips_Old # Save these to add the rest later
   values:
 # Marine Tips
   - "Pilots: there is one of each engine upgrade in the hangar at the start of the round, saving you the point cost of having to print out a pair of each."

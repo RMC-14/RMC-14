@@ -32,25 +32,29 @@
   overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
   roleWeight: 1
+  displayWeight: 2
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
     - type: CMVendorUser
+      id: CMHospitalCorpsman
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-hospital-corpsman
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: medic
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearHospitalCorpsman
@@ -143,3 +147,14 @@
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleHM
+  name: Hospital Corpsman
+  description: Hospital Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hospital_corpsman

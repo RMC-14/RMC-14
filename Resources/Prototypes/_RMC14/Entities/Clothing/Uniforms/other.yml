@@ -422,7 +422,8 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitEMT
-  description: A set of EMT - Paramedic fatigues, this one is green.
+  name: EMT - Paramedic uniform
+  description: A set of EMT - Paramedic fatigues, this one is red.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
@@ -430,15 +431,25 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCJumpsuitEMT
   id: RMCJumpsuitEMTGreen
-  name: EMT - Paramedic uniform
-  description: A set of EMT - Paramedic fatigues, this one is red.
+  description: A set of EMT - Paramedic fatigues, this one is green.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitLaborersOveralls
+  name: laborer's overalls
+  description: A set of durable overalls for getting the job done.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
 
 # Kutjevo
 - type: entity
@@ -541,10 +552,34 @@
 - type: entity
   parent: RMCJumpsuitCLFSoldier
   id: RMCJumpsuitCLFWebbing
-  suffix: Webbing
+  suffix: Webbing, MAR
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingBrown
+    startingWebbing: RMCWebbingCLFMAR
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingMAR50
+  suffix: Webbing, MAR50
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCLFMAR50
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingBuckshot
+  suffix: Webbing, Buckshot
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCLFBuckshot
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingSurgical
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
 
 # Frontier
 - type: entity

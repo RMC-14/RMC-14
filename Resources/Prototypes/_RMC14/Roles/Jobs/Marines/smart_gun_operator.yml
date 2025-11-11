@@ -30,24 +30,28 @@
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
   roleWeight: 1
+  displayWeight: 3
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
     - type: CMVendorUser
+      id: CMSmartGunOperator
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: smartgunner
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearSmartGunOperator
@@ -139,3 +143,14 @@
     - !type:RoleTimeRequirement
       role: CMJobSmartGunOperator
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSGO
+  name: Smart Gun Operator
+  description: Smart Gun Operator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: smart_gun_operator

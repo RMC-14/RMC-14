@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
-using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
@@ -75,6 +74,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage-falloff",
                 ("colour", modifierExamineColour), ("sign", modSet.DamageFalloffAddMult > 0 ? '+' : ""), ("falloff", modSet.DamageFalloffAddMult)));
 
+        if (modSet.RangeFlat != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-range",
+                ("colour", modifierExamineColour), ("sign", modSet.RangeFlat > 0 ? '+' : ""), ("falloff", modSet.RangeFlat)));
+
         return result;
     }
 
@@ -147,6 +150,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.FalloffMultiplier += modSet.DamageFalloffAddMult;
+            args.Args.Range += modSet.RangeFlat;
         }
     }
 
@@ -169,6 +173,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.AccuracyMultiplier += modSet.AccuracyAddMult;
+            args.Args.Range += modSet.RangeFlat;
         }
     }
 

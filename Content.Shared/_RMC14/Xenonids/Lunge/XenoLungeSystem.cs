@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
@@ -87,12 +88,12 @@ public sealed class XenoLungeSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno, 0.5f);
-        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
+        _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
 
-        //Handle close-range or same-tile lunges
+        // Handle close-range or same-tile lunges
         foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
         {
             if (ent != args.Target)
@@ -128,13 +129,12 @@ public sealed class XenoLungeSystem : EntitySystem
         if (target == null || _pulling.IsPulling(ent))
             return;
 
-        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value))
+        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value, lagCompensate: false))
             ApplyLungeHitEffects(ent, target.Value);
     }
 
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
     {
-        // TODO RMC14 lag compensation
         if (_mobState.IsDead(targetId))
             return false;
 
@@ -178,6 +178,7 @@ public sealed class XenoLungeSystem : EntitySystem
             Dirty(xeno, melee);
         }
 
+        StopLunge(xeno);
         _pulling.TryStartPull(xeno, targetId);
         return true;
     }
@@ -191,6 +192,8 @@ public sealed class XenoLungeSystem : EntitySystem
         {
             _statusEffects.TryRemoveStatusEffect(ent, effect);
         }
+
+        RemCompDeferred<XenoLungeStunnedComponent>(ent.Owner);
     }
 
     private void OnXenoLungeHitAttempt(Entity<RMCLungeProtectionComponent> ent, ref XenoLungeHitAttempt args)
@@ -216,6 +219,15 @@ public sealed class XenoLungeSystem : EntitySystem
                 args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
                 break;
         }
+    }
+
+    private void StopLunge(EntityUid lunging)
+    {
+        if (!_physicsQuery.TryGetComponent(lunging, out var physics))
+            return;
+
+        _physics.SetLinearVelocity(lunging, Vector2.Zero, body: physics);
+        _physics.SetBodyStatus(lunging, physics, BodyStatus.OnGround);
     }
 
     public override void Update(float frameTime)
