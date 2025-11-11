@@ -194,6 +194,20 @@
     IceCafe: 5
 
 - type: reaction
+  id: SwissLemonade
+  requiredMixerCategories:
+  - Shake
+  reactants:
+    JuiceLime:
+      amount: 1
+    Cream:
+      amount: 2
+    Water:
+      amount: 2
+  products:
+    SwissLemonade: 5
+
+- type: reaction
   id: CreateMeat
   impact: Low
   quantized: true

@@ -102,3 +102,18 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: False
+
+- type: reagent
+  id: SwissLemonade
+  parent: BaseDrink
+  name: reagent-name-swiss-lemonade
+  desc: reagent-desc-swiss-lemonade
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#CECAAD"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/swiss_lemonade.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: False
