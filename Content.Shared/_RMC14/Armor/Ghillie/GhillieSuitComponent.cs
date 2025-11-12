@@ -44,7 +44,7 @@ public sealed partial class GhillieSuitComponent : Component
     public TimeSpan InvisibilityBreakDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public bool BlockFriendlyFire = false;
+    public bool BlockFriendlyFire = true;
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();

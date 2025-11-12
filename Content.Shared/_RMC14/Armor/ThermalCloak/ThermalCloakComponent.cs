@@ -36,7 +36,7 @@ public sealed partial class ThermalCloakComponent : Component
     public bool HideNightVision = true;
 
     [DataField, AutoNetworkedField]
-    public bool BlockFriendlyFire = false;
+    public bool BlockFriendlyFire = true;
 
     /// <summary>
     /// Layers to hide while cloaked
