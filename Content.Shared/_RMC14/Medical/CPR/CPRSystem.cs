@@ -108,16 +108,7 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
-        var isStale = false;
-        if (ent.Comp.Performer != null && !Exists(ent.Comp.Performer.Value))
-        {
-            isStale = true;
-        }
-        // Check if the DoAfter has timed out
-        else if (_timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(8))
-        {
-            isStale = true;
-        }
+        bool isStale = _timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(8) || ent.Comp.Performer != null && !Exists(ent.Comp.Performer.Value);
         // If stale, remove the component and allow the new CPR attempt
         if (isStale)
         {
