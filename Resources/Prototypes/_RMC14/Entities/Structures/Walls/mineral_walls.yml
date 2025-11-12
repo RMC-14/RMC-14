@@ -37,6 +37,14 @@
     base: stone
 
 - type: entity
+  parent: RMCWallSandstoneTemple
+  id: RMCWallSandstoneTempleTimed
+  suffix: Timed
+  components:
+  - type: TimedDespawn
+    lifetime: 1200
+
+- type: entity
   parent: RMCWallSandstone
   id: RMCWallSandstoneTempleRuned
   name: runed sandstone temple wall

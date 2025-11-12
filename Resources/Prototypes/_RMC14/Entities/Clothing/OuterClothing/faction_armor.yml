@@ -305,6 +305,7 @@
   id: RMCArmorPMCRiot
   name: UN-M1 riot armor
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.
+  suffix: ""
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/un-m1_body_armor.rsi

@@ -54,6 +54,7 @@
   id: CMArmorM4PMCCorporate
   name: M1 pattern corporate security armor
   description: A basic vest with a We-Ya badge on the right breast. This is commonly worn by low-level guards protecting We-Ya facilities.
+  suffix: ""
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate.rsi
@@ -70,6 +71,7 @@
   parent: CMArmorM4PMCCorporate
   id: CMArmorM4PMCCorporateLead
   description: A basic vest with a We-Ya badge on the right breast. This variant is worn by low-level guards that have elevated in rank due to 'good conduct in the field', also known as corporate bootlicking.
+  suffix: Leader
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_lead.rsi
