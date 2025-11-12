@@ -108,6 +108,23 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
+        var isStale = false;
+        if (ent.Comp.Performer != null && !Exists(ent.Comp.Performer.Value))
+        {
+            isStale = true;
+        }
+        // Check if the DoAfter has timed out
+        else if (_timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(8))
+        {
+            isStale = true;
+        }
+        // If stale, remove the component and allow the new CPR attempt
+        if (isStale)
+        {
+            RemCompDeferred<ReceivingCPRComponent>(ent);
+            return;
+        }
+
         args.Cancelled = true;
 
         if (_net.IsClient)
@@ -184,12 +201,13 @@ public sealed class CPRSystem : EntitySystem
 
     private bool StartCPR(EntityUid performer, EntityUid target)
     {
-        RemComp<ReceivingCPRComponent>(target); // Remove any stale ReceivingCPRComponent
-
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
         var cprComp = EnsureComp<ReceivingCPRComponent>(target);
+        cprComp.Performer = performer;
+        cprComp.StartTime = _timing.CurTime;
+        Dirty(target, cprComp);
 
         // If the performer has skills in medical their CPR time will be reduced.
         var delay = TimeSpan.FromSeconds(cprComp.CPRPerformingTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
