@@ -26,6 +26,14 @@
     state: laz_sign
 
 - type: entity
+  parent: RMCLazarusLandingSign
+  id: RMCLazarusLandingSignFixed
+  description: A large sign reading 'Lazarus Landing - POP. 73'. The Company logo is emblazoned in the corner.
+  components:
+  - type: Sprite
+    state: laz_sign_fixed
+
+- type: entity
   parent: RMCBaseLandingSign
   id: RMCSolarisRidgeSign
   name: Solaris Ridge sign
