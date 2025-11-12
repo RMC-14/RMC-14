@@ -42,7 +42,6 @@ public sealed class CPRSystem : EntitySystem
     {
         base.Initialize();
 
-        // TODO RMC14 use skills
         // TODO RMC14 something more generic than "marine"
         SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand,
             before: [typeof(InteractionPopupSystem), typeof(StunShakeableSystem)]);
@@ -108,9 +107,8 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
-        bool isStale = _timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(8) || ent.Comp.Performer != null && !Exists(ent.Comp.Performer.Value);
-        // If stale, remove the component and allow the new CPR attempt
-        if (isStale)
+        var isStale = _timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(7);
+        if (isStale) // If stale, remove the component and allow the new CPR attempt
         {
             RemCompDeferred<ReceivingCPRComponent>(ent);
             return;
@@ -196,7 +194,6 @@ public sealed class CPRSystem : EntitySystem
             return false;
 
         var cprComp = EnsureComp<ReceivingCPRComponent>(target);
-        cprComp.Performer = performer;
         cprComp.StartTime = _timing.CurTime;
         Dirty(target, cprComp);
 

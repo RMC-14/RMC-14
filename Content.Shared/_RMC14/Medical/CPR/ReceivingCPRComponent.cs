@@ -11,8 +11,5 @@ public sealed partial class ReceivingCPRComponent : Component
     public int CPRPerformingTime = 4;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? Performer;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan StartTime;
 }
