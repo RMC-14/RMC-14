@@ -125,6 +125,41 @@
       - id: CMCoatXOFormal
       - id: CMHeadCapPeakedFormal
       - id: RMCSunglassesBig
+    - name: Squad Colors
+      jobs:
+      - CMCommandingOfficer
+      - CMExecutiveOfficer
+      - CMAuxiliarySupportOfficer
+      - CMStaffOfficer
+      entries:
+      - id: RMCHeadBeretSquadAlpha
+      - id: RMCAlphaArmband
+      - id: CMHeadBandAlpha
+      - id: RMCMaskScarfAlpha
+      - id: RMCHeadBeretSquadBravo
+      - id: RMCBravoArmband
+      - id: CMHeadBandBravo
+      - id: RMCMaskScarfBravo
+      - id: RMCHeadBeretSquadCharlie
+      - id: RMCCharlieArmband
+      - id: CMHeadBandCharlie
+      - id: RMCMaskScarfCharlie
+      - id: RMCHeadBeretSquadDelta
+      - id: RMCDeltaArmband
+      - id: CMHeadBandDelta
+      - id: RMCMaskScarfDelta
+      - id: RMCHeadBeretSquadEcho
+      - id: RMCEchoArmband
+      - id: CMHeadBandEcho
+      - id: RMCMaskScarfEcho
+      - id: RMCHeadBeretSquadFoxtrot
+      - id: RMCFoxtrotArmband
+      - id: CMHeadBandFoxtrot
+      - id: RMCMaskScarfFoxtrot
+      - id: RMCHeadBeretSquadIntel
+      # - id: No RMCIntelArmband
+      - id: CMHeadBandIntel
+      # - id: No RMCMaskScarfIntel
     # Engineering
     - name: Engineering
       takeAll: RMCDresser
@@ -287,7 +322,6 @@
       - id: ClothingHeadHatChef
     # Gloves
     - name: Standard Gloves
-      takeAll: RMCDresser
       entries:
       - id: CMHandsLatex
       - id: RMCHandsLatexMarine
@@ -298,9 +332,10 @@
       - id: CMHandsBlackInsulated
     # Glasses
     - name: Standard Glasses
-      takeAll: RMCDresser
       entries:
+      - id: RMCEyepatch
       - id: RMCSunglasses
+      - id: RMCSunglassesBigFake
       - id: RMCGlassesMarineRpg
       - id: RMCGlassesMarineRpgOld
       - id: RMCGlassesAviators
@@ -308,6 +343,87 @@
       - id: RMCPrescriptionSunglasses
       - id: RMCHipsterGlasses
       - id: RMCHippieGlasses
+      - id: RMCHippieGlassesBloodred
+      - id: RMCHippieGlassesGreen
+      - id: RMCHippieGlassesMidnight
+      - id: RMCHippieGlassesNightblue
+      - id: RMCHippieGlassesPink
+      - id: RMCHippieGlassesSunrise
+      - id: RMCHippieGlassesSunset
+      - id: RMCGlassesTriMaxYellowFake
+      - id: RMCGlassesTriMaxBronzeFake
+      - id: RMCGlassesTriMaxBlackFake
+    # Goggles
+    - name: Standard Goggles
+      entries:
+      - id: RMCGogglesBallistic
+      - id: RMCGogglesPrescriptionBallistic
+      - id: RMCGogglesBallisticBlack
+      - id: RMCGogglesBallisticOrange
+      - id: RMCGogglesBallisticRed
+      - id: RMCGogglesBallisticBlue
+      - id: RMCGogglesBallisticPurple
+      - id: RMCGogglesBallisticYellow
+      - id: RMCGogglesBallisticSquad
+      - id: RMCGogglesM1A1Ballistic
+      - id: RMCGogglesBallisticPolarizedBlue
+      - id: RMCGogglesBallisticPolarizedOrange
+      - id: RMCGogglesM1A1BallisticBlue
+    # Masks and scarfs
+    - name: Standard Masks and Scarfs
+      entries:
+      - id: RMCMaskBalaclava
+      - id: RMCMaskBalaclavaGreen
+      - id: CMMaskCoif
+      - id: CMMaskGas
+      - id: RMCMaskScarfSquad
+      - id: RMCMaskScarfRed
+      - id: RMCMaskScarfBlack
+      - id: RMCMaskScarfGray
+      - id: RMCMaskScarfGreen
+      - id: RMCMaskScarfTan
+      - id: RMCMaskNeckerchiefSquad
+      - id: RMCMaskNeckerchiefTan
+      - id: RMCMaskNeckerchiefBlack
+      - id: RMCMaskNeckerchiefGray
+      - id: RMCMaskNeckerchiefGreen
+      - id: RMCMaskNeckerchiefWhite
+      - id: RMCMaskTornScarfBlack
+      - id: RMCMaskTornScarfDesert
+      - id: RMCMaskTornScarfGreen
+      - id: RMCMaskTornScarfGrey
+      - id: RMCMaskTornScarfUrban
+      - id: RMCMaskTornScarfSnow
+      - id: RMCMaskSmockBlack
+      - id: RMCMaskSmockCamo
+      - id: RMCMaskCoifGreen
+      - id: RMCMaskCoifGrey
+      - id: RMCMaskCoifTan
+      - id: RMCMaskKeffiyeh
+      - id: RMCMaskKeffiyehBlack
+      - id: RMCMaskKeffiyehBlue
+      - id: RMCMaskKeffiyehGreen
+      - id: RMCMaskKeffiyehWhite
+      - id: RMCMaskKeffiyehRed
+      - id: RMCMaskBalaclavaSkullBlue
+      - id: RMCMaskBalaclavaSkullBlack
+    # Squad
+    - name: Squad Themed Apparel
+      jobs:
+      - CMIntelOfficer
+      - CMSquadLeader
+      - CMFireteamLeader
+      - CMWeaponsSpecialist
+      - CMSmartGunOperator
+      - CMHospitalCorpsman
+      - CMCombatTech
+      - CMRifleman
+      - RMCRecruit
+      entries:
+      - id: RMCHeadBeretSquad
+      - id: RMCSquadArmband
+      - id: RMCHeadBandSquad
+      - id: RMCMaskScarfSquad
     # Service
     - name: Service Uniform
       takeAll: RMCDresser
@@ -337,7 +453,6 @@
       entries:
       - id: RMCUniformCaseService
       - id: RMCHeadCapPatrol
-      - id: RMCHeadBeretSquad
       - id: RMCHeadBeretGreen
     # Full Dress
     - name: Enlisted Dress Uniform
