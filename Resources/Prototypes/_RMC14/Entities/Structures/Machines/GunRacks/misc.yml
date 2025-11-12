@@ -138,5 +138,5 @@
   - type: ContainerFill
     containers:
       item_1:
-      -   id: WeaponShotgunM357
+      - WeaponShotgunM357
 
