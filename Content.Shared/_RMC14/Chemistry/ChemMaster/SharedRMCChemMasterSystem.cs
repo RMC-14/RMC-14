@@ -378,11 +378,9 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
         var coords = Transform(ent).Coordinates;
 
-        var reagentAmountsPerPill = new Dictionary<string, FixedPoint2>();
-        foreach (var reagent in buffer.Value.Comp.Solution.Contents)
-        {
-            reagentAmountsPerPill[reagent.Reagent.Prototype] = reagent.Quantity / divider;
-        }
+        var reagentAmountsPerPill = buffer.Value.Comp.Solution.Contents
+            .Select(c => (c.Reagent.Prototype, Amount: c.Quantity / divider))
+            .ToList();
 
         foreach (var fill in _toFill)
         {
