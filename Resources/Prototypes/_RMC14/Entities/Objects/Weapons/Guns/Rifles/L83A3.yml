@@ -255,7 +255,7 @@
     tags:
     - CMMagazineRifle
     - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3extended
+    - RMCMagazineRifleL83A3Extended
   - type: BallisticAmmoProvider
     whitelist:
       tags:
