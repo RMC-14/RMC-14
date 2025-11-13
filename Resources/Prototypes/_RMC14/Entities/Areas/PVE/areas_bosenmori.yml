@@ -173,13 +173,11 @@
 
 - type: entity
   parent: RMCAreaBosenmoriBasho
-  id: RMCAreaBosenmoriBashoNorthSector
-  name: North Sector
+  id: RMCAreaBosenmoriBashoNorthBarrens
+  name: North Barrens
   components:
   - type: Sprite
     state: red
-  - type: Area
-    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBosenmoriBasho
