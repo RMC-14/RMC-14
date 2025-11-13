@@ -46,6 +46,9 @@
       - id: CMArmorPress
         name: Combat Correspondent's Armor
         recommended: true
+      - id: CMArmorPressBlue
+        name: Combat Correspondent's Armor
+        recommended: true
       - id: RMCCoatCorrespondentBlue
         name: Blue Vest
       - id: RMCHazardVestBlack
@@ -58,6 +61,9 @@
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetPress
+        name: Combat Correspondent's Helmet
+        recommended: true
+      - id: CMArmorHelmetPressBlue
         name: Combat Correspondent's Helmet
         recommended: true
       - id: RMCHeadCapCorrespondent
