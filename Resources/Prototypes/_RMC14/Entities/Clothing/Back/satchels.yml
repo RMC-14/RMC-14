@@ -799,6 +799,20 @@
     - id: CMRollerBedSpawnFolded
 
 - type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSynth
+  suffix: Filled, Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: RMCSynthResetKey # TODO RMC14 SPP version of this (Halcyon)
+
+- type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelSPPWelder
   name: UCP3-E technician welderpack

@@ -491,3 +491,22 @@
     solution: beaker
     reagents:
       CMTricordrazine: 30
+
+- type: entity
+  parent: RMCVial
+  id: RMCVialEpinephrine
+  name: epinephrine vial
+  description: A small glass vial. Can hold up to 30 units. Contains Epinephrne, a cardiostimulant used to assist in revival.
+  suffix: Filled, Epinephrine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 30
+  - type: CMRefillableSolution
+    solution: beaker
+    reagents:
+      CMTricordrazine: 30

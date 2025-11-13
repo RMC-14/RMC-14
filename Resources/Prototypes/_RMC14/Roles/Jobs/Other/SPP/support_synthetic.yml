@@ -1,0 +1,122 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSynthetic
+  name: rmc-job-name-spp-synth
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPSynthetic
+  ranks:
+    RMCRankSPPSynthetic: [ ]
+  startingGear: RMCGearSPPSynthetic
+  icon: "RMCJobIconSPPSynth"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  - Synth
+  spawnMenuRoleName: SPP Support Synthetic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+    - type: CMVendorUser
+      id: RMCJobSynthetic
+      points: 45
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      - type: NightVision
+        innate: true
+        state: Half
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPSynthetic
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    eyes: RMCGlassesMedicalHUDGlasses
+    mask: CMScrewdriver
+    back: RMCSatchelSPPSynth
+    belt: RMCBeltMedicBagSPPSynthFilled
+    gloves: RMCHandsVeteranSPP
+    suitstorage: RMCMotionDetector # TODO RMC14 SPP-aligned MD
+    jumpsuit: RMCJumpsuitSPPMedicSurgicalWebbing
+    outerClothing: RMCArmorSPPSupportSynthFilled
+    shoes: RMCBootsSPPBlackFilled
+    id: RMCIDSPP
+    pocket1: RMCPouchToolsSocFilledSPPSynthetic
+    pocket2: RMCPouchMedicalSPPSynth
+
+- type: playTimeTracker
+  id: RMCJobSPPSynthetic
+  isHumanoid: true

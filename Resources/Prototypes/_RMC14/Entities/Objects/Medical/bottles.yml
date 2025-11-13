@@ -234,3 +234,20 @@
   - type: CMRefillableSolution
     reagents:
       RMCMindbreakerToxin: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleEpinephrine
+  name: epinephrine bottle
+  description: A small bottle. Contains epinephrine, a cardiostimulant used to assist in revival.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCMindbreakerToxin: 60

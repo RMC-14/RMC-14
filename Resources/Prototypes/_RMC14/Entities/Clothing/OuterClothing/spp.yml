@@ -73,6 +73,17 @@
     sprintModifier: 0.897
 
 - type: entity
+  parent: RMCArmorSPPSupportSynth
+  id: RMCArmorSPPSupportSynthFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    #- id: RMCTelebaton // TODO RMC14 should be telebaton
+    - id: RMCHandcuffs
+    - id: RMCHandcuffs
+
+- type: entity
   parent: RMCArmorSPP
   id: RMCArmorSPPCommando
   name: SPP UM5CU personal armor

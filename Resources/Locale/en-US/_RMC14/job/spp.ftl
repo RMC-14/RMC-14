@@ -72,3 +72,6 @@ rmc-ghost-name-spp-sectionsergeant = SPP Section Sergeant
 rmc-job-name-spp-squadlead = Squad Lead
 rmc-job-prefix-spp-squadlead = SL
 rmc-ghost-name-spp-squadlead = SPP Squad Lead
+
+rmc-job-name-spp-synth = Support Synthetic
+rmc-job-prefix-spp-synth = SYN.
