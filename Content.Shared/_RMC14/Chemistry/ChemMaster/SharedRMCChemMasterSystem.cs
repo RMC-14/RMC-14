@@ -378,7 +378,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
         var coords = Transform(ent).Coordinates;
 
-        var reagentAmountsPerPill = buffer.Value.Comp.Solution.Contents
+        var reagentsPerPill = buffer.Value.Comp.Solution.Contents
             .Select(c => (c.Reagent.Prototype, Amount: c.Quantity / divider))
             .ToList();
 
@@ -404,7 +404,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 if (TryComp(pill, out SolutionSpikerComponent? spiker) &&
                     _solution.TryGetSolution(pill, spiker.SourceSolution, out var pillSolution))
                 {
-                    foreach (var (reagentProto, amount) in reagentAmountsPerPill)
+                    foreach (var (reagentProto, amount) in reagentsPerPill)
                     {
                         var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
                         _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
