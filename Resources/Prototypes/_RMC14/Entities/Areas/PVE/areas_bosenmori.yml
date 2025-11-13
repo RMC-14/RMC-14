@@ -313,7 +313,7 @@
 - type: entity
   parent: RMCAreaBosenmoriBashoDrowningCrow
   id: RMCAreaBosenmoriBashoTelecomms
-  name: Telecomunnication Department
+  name: Telecommunication Department
   components:
   - type: Sprite
     state: yellow
