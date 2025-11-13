@@ -62,7 +62,7 @@
       damage:
         types:
           Blunt: 35
-    - type: Synth
+    - type: Synth # TODO RMC14 clean this shit up https://github.com/RMC-14/RMC-14/pull/8280
       welderDamageToRepair:
         types:
           Blunt: -15

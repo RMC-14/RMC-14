@@ -189,3 +189,17 @@
   - type: RequiresSkill
     skills:
       RMCSkillEngineer: 0
+
+- type: entity
+  parent: RMCSynthResetKey
+  id: RMCSynthResetKeyHalcyon
+  name: Halcyon synthetic reset key
+  description: An independant Halcyon design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/halcyon_key.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
