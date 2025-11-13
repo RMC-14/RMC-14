@@ -496,7 +496,7 @@
   parent: RMCVial
   id: RMCVialEpinephrine
   name: epinephrine vial
-  description: A small glass vial. Can hold up to 30 units. Contains Epinephrne, a cardiostimulant used to assist in revival.
+  description: A small glass vial. Can hold up to 30 units. Contains Epinephrine, a cardiostimulant used to assist in revival.
   suffix: Filled, Epinephrine
   components:
   - type: SolutionContainerManager
