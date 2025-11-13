@@ -86,7 +86,8 @@
         points: 1
     - name: Medical Utilities
       entries:
-     #    CMMS11SmartRefillTank: 6P
+      - id: CMMiniTank
+        points: 6
      # FixOVien: 7P
       - id: CMRollerBedSpawnFolded
         points: 4

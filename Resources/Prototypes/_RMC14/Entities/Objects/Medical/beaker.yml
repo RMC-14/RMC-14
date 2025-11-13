@@ -236,14 +236,27 @@
     solutions:
       beaker:
         maxVol: 180
-  - type: Spillable
-    solution: beaker
   - type: StaticPrice
     price: 20
   - type: Clothing
     quickEquip: false
     slots:
     - none
+  - type: Tag
+    tags:
+    - GlassBeaker
+    - RMCMiniTank
+  - type: RMCSmartRefillTank
+    solution: beaker
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    canSend: false
+    canReceive: false
+  - type: RMCPressurizedSolution
+    solution: beaker
+
+- type: Tag
+  id: RMCMiniTank
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
 # BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
