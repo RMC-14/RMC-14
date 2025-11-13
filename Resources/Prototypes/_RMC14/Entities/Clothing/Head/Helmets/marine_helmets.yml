@@ -322,7 +322,7 @@
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetPressBlue
-  name: Blue press helmet
+  name: press helmet
   description: A special helmet variant worn by the press.
   components:
   - type: Sprite
