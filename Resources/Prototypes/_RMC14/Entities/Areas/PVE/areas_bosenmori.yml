@@ -190,8 +190,7 @@
 - type: entity
   parent: RMCAreaBosenmoriBashoDrowningCrow
   id: RMCAreaBosenmoriBashoFiltrationInside
-  name: Filtration Sector
-  suffix: Bosenmori Basho Area, Inside
+  name: Filtration Department
   components:
   - type: Sprite
     state: bluenew
@@ -211,14 +210,6 @@
   components:
   - type: Sprite
     state: bluenew
-
-- type: entity
-  parent: RMCAreaBosenmoriBasho
-  id: RMCAreaBosenmoriBashoNorthBarrens
-  name: North Barrens
-  components:
-  - type: Sprite
-    state: red
 
 - type: entity
   parent: RMCAreaBosenmoriBasho
@@ -331,7 +322,7 @@
 - type: entity
   parent: RMCAreaBosenmoriBashoDrowningCrow
   id: RMCAreaBosenmoriBashoTerrarnium
-  name: Terrarnium
+  name: Terrarium
   components:
   - type: Area
     weatherEnabled: true
@@ -564,7 +555,7 @@
 - type: entity
   parent: RMCAreaBosenmoriBashoUnknownCaves
   id: RMCAreaBosenmoriBashoTerraniumLow
-  name: Terrarnium Lower Level
+  name: Terrarium Lower Level
   components:
   - type: Sprite
     state: away2
@@ -586,3 +577,24 @@
     state: storage
   - type: Area
     linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoSandTemple
+  name: Sand Temple
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoRuinsPerimeter
+  name: Ruins Perimeter
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoMining
+  name: Mining Sector
