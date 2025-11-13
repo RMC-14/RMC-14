@@ -318,6 +318,22 @@
   - type: RMCBulkyArmor
     isBulky: false
 
+# Press
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetPress
+  name: press helmet
+  description: A special helmet variant worn by the press.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi/press-helmet-blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi/press-helmet-blue.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: RMCBulkyArmor
+    isBulky: false
+
 # M3-S Scout Spec
 - type: entity
   parent: ArmorHelmetM10
