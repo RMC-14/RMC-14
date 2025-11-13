@@ -61,17 +61,16 @@
   - !type:IngredientsWithTags # 1 chicken meat
     tags:
     - Cooked
-    - Cutlet
     - Meat
     - Chicken
     count:
       min: 1
       max: 2
-  - !type:FoodHasReagent # 5 +- 2 mayo
+  - !type:FoodHasReagent # 3 +- 2 mayo
     reagent: Mayo
     count:
-      min: 3
-      max: 7
+      min: 1
+      max: 5
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
