@@ -66,6 +66,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
     private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
     {
+        if (ent.Comp.Reagents.Count == 0)
+            return;
+
         using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
         {
             args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
@@ -484,7 +487,10 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         var notEnough = false;
         foreach (var (reagent, amount) in refillableSolutionComponent.Reagents)
         {
-            var toFill = FixedPoint2.Max(amount - penSolution.GetTotalPrototypeQuantity(reagent.Id), 0);
+            var toFill = FixedPoint2.Max(amount - penSolution.GetTotalPrototypeQuantity(reagent.Id), FixedPoint2.Zero);
+            if (toFill == FixedPoint2.Zero)
+                continue;
+
             missing.Add(reagent, toFill);
             if (tankSolution.GetTotalPrototypeQuantity(reagent.Id) < toFill)
             {
@@ -498,6 +504,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-smart-refill-not-enough", ("tank", ent.Owner)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
+
+        if (missing.Count == 0)
+            return;
 
         foreach (var (reagent, amount) in missing)
         {
