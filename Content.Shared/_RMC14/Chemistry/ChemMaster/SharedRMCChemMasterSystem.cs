@@ -409,6 +409,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                         var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
                         _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
                     }
+
+                    _adminLog.Add(LogType.Action,
+                        LogImpact.Medium,
+                        $"{ToPrettyString(args.Actor):player} transferred {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)} to {ToPrettyString(pill):target}, which now contains {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)}");
                 }
             }
         }
