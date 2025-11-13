@@ -55,7 +55,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder
@@ -108,7 +108,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -144,7 +144,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder
@@ -188,7 +188,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentExtinguisher
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -204,8 +204,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleL83A
-    proto: RMCCartridgeRifleL83A
+      - RMCCartridgeRifleL83A # Whoever implemented the L83s did it in a really annoying way
+    proto: RMCCartridgeRifleL83A # Cross-compatible cartridges are L83A to let them fit in either mag
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
@@ -464,7 +464,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.5
   - type: AttachableHolder
@@ -517,7 +517,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
-          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -553,7 +553,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.5
   - type: AttachableHolder
@@ -655,7 +655,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder

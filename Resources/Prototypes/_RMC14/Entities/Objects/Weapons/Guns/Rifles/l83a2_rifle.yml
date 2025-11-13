@@ -61,7 +61,7 @@
           tags:
           - RMCMagazineRifleL83A2
           - RMCMagazineRifleL83A2AP
-          - RMCMagazineRifleL83A2extended
+          - RMCMagazineRifleL83A2Extended
           - RMCMagazineRifleL83A2Incendiary
           - RMCMagazineRifleL83A2HEAP
   - type: GunDamageModifier
@@ -130,6 +130,70 @@
       rmc-aslot-rail: -0.15, 0.215
       rmc-aslot-stock: -0.87, 0.03
       rmc-aslot-underbarrel: 0.3, -0.30
+
+- type: entity
+  parent: WeaponRifleL83A2
+  id: RMCWeaponRifleL83A2Stripped
+  suffix: Stripped
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL83A2
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL83A2
+          - RMCMagazineRifleL83A2AP
+          - RMCMagazineRifleL83A2Extended
+          - RMCMagazineRifleL83A2Incendiary
+          - RMCMagazineRifleL83A2HEAP
+  - type: GunDamageModifier
+    multiplier: 1.3
+  - type: AttachableHolder
+    randomAttachmentChance: 0.42
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL83A2Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL83A2Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -201,7 +265,7 @@
 
 - type: entity
   parent: RMCMagazineRifleL83A2
-  id: RMCMagazineRifleL83A2extended
+  id: RMCMagazineRifleL83A2Extended
   description: "An extended magazine for the L83A2 rifle."
   name: L83A2 extended Magazine (5.56x45mm)
   suffix: Extended
@@ -210,7 +274,7 @@
     tags:
     - CMMagazineRifle
     - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2extended
+    - RMCMagazineRifleL83A2Extended
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -327,5 +391,5 @@
   id: RMCMagazineRifleL83A2Incendiary
 
 - type: Tag
-  id: RMCMagazineRifleL83A2extended
+  id: RMCMagazineRifleL83A2Extended
 
