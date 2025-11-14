@@ -113,9 +113,9 @@
         - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.965, 0.065
+      rmc-aslot-barrel: 1, 0.093
       rmc-aslot-rail: 0.125, 0.215
-      rmc-aslot-underbarrel: 0.5345, -0.215
+      rmc-aslot-underbarrel: 0.4015, -0.281
 
 - type: entity
   parent: RMCWeaponRifleL83A3
