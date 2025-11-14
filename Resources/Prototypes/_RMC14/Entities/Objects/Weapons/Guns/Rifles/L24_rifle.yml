@@ -251,7 +251,6 @@
       - RMCCartridgeRifleL24AP
     proto: RMCCartridgeRifleL24AP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -259,7 +258,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: ammo_band
       color: "#1F951F"
-  - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -279,7 +277,6 @@
         - RMCCartridgeRifleL24HEAP
       proto: RMCCartridgeRifleL24HEAP
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -287,7 +284,6 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: ammo_band
         color: "#9C9A19"
-    - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -307,7 +303,6 @@
         - RMCCartridgeRifleL24Incendiary
       proto: RMCCartridgeRifleL24Incendiary
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -315,7 +310,6 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: ammo_band
         color: "#771A10"
-    - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -342,7 +336,6 @@
         map: [ "enum.GunVisualLayers.Base" ]
       - state: mag-1
         map: [ "enum.GunVisualLayers.Mag" ]
-    - type: Appearance
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -444,7 +437,6 @@
   - type: CMArmorPiercing
     amount: 10
   - type: IgniteOnProjectileHit
-
 
 - type: Tag
   id: RMCMagazineRifleL24
