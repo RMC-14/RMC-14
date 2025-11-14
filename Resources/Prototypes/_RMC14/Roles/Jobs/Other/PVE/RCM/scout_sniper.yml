@@ -31,7 +31,8 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
         RMCSkillPilot: 1
-        RMCSkillSpecialistWeapons: 1 # Bandaid solution for not having 1:1 spec skills
+        RMCSkillSpecialistWeapons: 1
+    - type: SniperWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-scout-sniper
   hidden: true

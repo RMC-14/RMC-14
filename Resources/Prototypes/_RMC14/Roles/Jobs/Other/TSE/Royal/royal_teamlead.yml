@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTeamlead
   icon: "RMCJobIconRoyalTeamlead"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-officer
+  supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Team Leader
   special:
   - !type:AddComponentSpecial

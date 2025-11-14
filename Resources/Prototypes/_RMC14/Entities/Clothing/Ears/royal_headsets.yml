@@ -4,6 +4,11 @@
   name: royal marine headset
   description: A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
   components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMTeamLead
+    trackerModes:
+    - RCMTeamLead
+    - RCMLieutenant
   - type: Sprite
     state: vai_headset
   - type: ContainerFill

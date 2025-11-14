@@ -654,6 +654,62 @@
   description: Tracks the Troop Sergeant
 
 - type: alert
+  parent: SquadTracker
+  id: SquadTrackerRCMTeamLead
+  category: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west_teamlead
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest_teamlead
+  name: Royal Squad Tracker
+  description: Tracks the Team Leader
+
+- type: alert
+  parent: SquadTracker
+  id: SquadTrackerRCMLieutenant
+  category: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west_lt
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest_lt
+  name: Royal Squad Tracker
+  description: Tracks the Lieutenant
+
+- type: alert
   id: MarineTacMapAlert
   category: Tacmap
   icons:
