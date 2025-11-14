@@ -321,7 +321,7 @@
 # Press
 - type: entity
   parent: ArmorHelmetM10
-  id: CMArmorHelmetPressBlue
+  id: RMCArmorHelmetPressBlue
   name: press helmet
   description: A special helmet variant worn by the press.
   components:
