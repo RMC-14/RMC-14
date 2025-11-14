@@ -43,10 +43,10 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorPress
+      - id: RMCArmorPress
         name: Combat Correspondent's Armor
         recommended: true
-      - id: CMArmorPressBlue
+      - id: RMCArmorPressBlue
         name: Combat Correspondent's Armor
         recommended: true
       - id: RMCCoatCorrespondentBlue
