@@ -10,5 +10,5 @@ public sealed partial class RMCPillBottleTransferComponent : Component
     public float TimePerBottle = 0.43f;
 
     [DataField]
-    public SoundSpecifier? UseSound = new SoundPathSpecifier("/Audio/Effects/rustle1.ogg");
+    public SoundSpecifier? InsertPillBottleSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
 }

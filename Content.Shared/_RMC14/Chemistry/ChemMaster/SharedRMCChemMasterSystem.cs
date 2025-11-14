@@ -95,24 +95,14 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 return;
             }
 
-            // Calculate how many bottles we can transfer
             var availableSpace = ent.Comp.MaxPillBottles - pillSlot.Count;
             var bottlesToTransfer = Math.Min(boxStorage.StoredItems.Count, availableSpace);
 
-            if (bottlesToTransfer <= 0)
-            {
-                _popup.PopupClient(Loc.GetString("rmc-chem-master-full-pill-bottles"), ent, args.User);
-                return;
-            }
-
-            // Show progress message
             _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-start", ("box", args.Used), ("target", ent)), args.User, args.User);
 
-            // Calculate transfer time
             var transferTime = TimeSpan.FromSeconds(bottlesToTransfer * boxComp.TimePerBottle);
-
             var ev = new RMCChemMasterPillBottleTransferDoAfterEvent();
-            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, transferTime, ev, ent, target: ent, used: args.Used)
+            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, transferTime, ev, ent.Owner, target: ent.Owner, used: args.Used)
             {
                 BreakOnMove = true,
                 NeedHand = true,
@@ -517,7 +507,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         if (transferred > 0)
         {
-            _audio.PlayPredicted(boxComp.UseSound, ent, args.User);
+            _audio.PlayPredicted(boxComp.InsertPillBottleSound, ent, args.User);
             _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-complete", ("count", transferred), ("target", ent)), args.User, args.User);
         }
         else
