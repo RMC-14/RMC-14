@@ -82,8 +82,9 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             args.Handled = true;
             var pillSlot = _container.EnsureContainer<Container>(ent, ent.Comp.PillBottleContainer);
+            var availableSpace = ent.Comp.MaxPillBottles - pillSlot.Count;
 
-            if (pillSlot.Count >= ent.Comp.MaxPillBottles)
+            if (availableSpace <= 0)
             {
                 _popup.PopupClient(Loc.GetString("rmc-chem-master-full-pill-bottles"), ent, args.User);
                 return;
@@ -95,7 +96,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 return;
             }
 
-            var availableSpace = ent.Comp.MaxPillBottles - pillSlot.Count;
             var bottlesToTransfer = Math.Min(boxStorage.StoredItems.Count, availableSpace);
 
             _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-start", ("box", args.Used), ("target", ent)), args.User, args.User);
@@ -469,8 +469,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         args.Handled = true;
 
         var slot = _container.EnsureContainer<Container>(ent, ent.Comp.PillBottleContainer);
-
-        if (slot.Count >= ent.Comp.MaxPillBottles)
+        var availableSpace = ent.Comp.MaxPillBottles - slot.Count;
+        if (availableSpace <= 0)
         {
             _popup.PopupClient(Loc.GetString("rmc-chem-master-full-pill-bottles"), ent, args.User);
             return;
@@ -480,11 +480,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             return;
 
         var transferred = 0;
-        var bottlesToTransfer = boxStorage.StoredItems.Keys.ToList();
+        var bottlesToTransfer = boxContainer.ContainedEntities.ToList();
 
         foreach (var bottle in bottlesToTransfer)
         {
-            if (slot.Count >= ent.Comp.MaxPillBottles)
+            if (transferred >= availableSpace)
                 break;
 
             if (!_entityWhitelist.IsWhitelistPass(ent.Comp.PillBottleWhitelist, bottle))
