@@ -81,8 +81,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             TryComp(args.Used, out StorageComponent? boxStorage))
         {
             args.Handled = true;
-            var pillSlot = _container.EnsureContainer<Container>(ent, ent.Comp.PillBottleContainer);
-            var availableSpace = ent.Comp.MaxPillBottles - pillSlot.Count;
+            var pillBottleSlot = _container.EnsureContainer<Container>(ent, ent.Comp.PillBottleContainer);
+            var availableSpace = ent.Comp.MaxPillBottles - pillBottleSlot.Count;
             if (availableSpace <= 0)
             {
                 _popup.PopupClient(Loc.GetString("rmc-chem-master-full-pill-bottles"), ent, args.User);
