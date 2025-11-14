@@ -96,9 +96,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             }
 
             var bottlesToTransfer = Math.Min(boxStorage.StoredItems.Count, availableSpace);
-
-            _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-start", ("box", args.Used), ("target", ent)), args.User, args.User);
-
             var transferTime = TimeSpan.FromSeconds(bottlesToTransfer * boxComp.TimePerBottle);
             var ev = new RMCChemMasterPillBottleTransferDoAfterEvent();
             var doAfterArgs = new DoAfterArgs(EntityManager, args.User, transferTime, ev, ent.Owner, target: ent.Owner, used: args.Used)
@@ -107,7 +104,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 NeedHand = true,
             };
 
-            _doAfter.TryStartDoAfter(doAfterArgs);
+            if (_doAfter.TryStartDoAfter(doAfterArgs))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-start", ("box", args.Used), ("target", ent)), args.User, args.User);
+            }
             return;
         }
 
@@ -456,12 +456,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        if (args.Used == null)
-            return;
-
-        if (!TryComp(args.Used, out RMCPillBottleTransferComponent? boxComp) ||
+        if (args.Used == null || !Exists(args.Used) ||
+            !TryComp(args.Used, out RMCPillBottleTransferComponent? boxComp) ||
             !TryComp(args.Used, out StorageComponent? boxStorage))
         {
+            _popup.PopupClient(Loc.GetString("rmc-chem-master-pill-bottle-box-failed"), args.User, args.User);
             return;
         }
 
@@ -484,13 +483,12 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             if (transferred >= availableSpace)
                 break;
-
+            if (!Exists(bottle))
+                continue;
             if (!_entityWhitelist.IsWhitelistPass(ent.Comp.PillBottleWhitelist, bottle))
                 continue;
-
             if (!_container.Remove(bottle, boxContainer))
                 continue;
-
             if (_container.Insert(bottle, slot))
             {
                 transferred++;
