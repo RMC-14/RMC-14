@@ -558,7 +558,7 @@
 
 - type: entity
   parent: CMArmorPress
-  id: CMArmorPressBlue
+  id: RMCArmorPressBlue
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
