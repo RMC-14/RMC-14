@@ -83,7 +83,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             args.Handled = true;
             var pillSlot = _container.EnsureContainer<Container>(ent, ent.Comp.PillBottleContainer);
             var availableSpace = ent.Comp.MaxPillBottles - pillSlot.Count;
-
             if (availableSpace <= 0)
             {
                 _popup.PopupClient(Loc.GetString("rmc-chem-master-full-pill-bottles"), ent, args.User);
@@ -481,7 +480,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         var transferred = 0;
         var bottlesToTransfer = boxContainer.ContainedEntities.ToList();
-
         foreach (var bottle in bottlesToTransfer)
         {
             if (transferred >= availableSpace)
@@ -492,6 +490,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
             if (!_container.Remove(bottle, boxContainer))
                 continue;
+
             if (_container.Insert(bottle, slot))
             {
                 transferred++;
