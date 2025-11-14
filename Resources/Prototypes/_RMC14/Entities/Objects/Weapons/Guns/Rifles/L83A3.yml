@@ -227,7 +227,7 @@
     proto: RMCCartridgeRifleL83A
     capacity: 25
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a3.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -253,7 +253,7 @@
       - RMCCartridgeRifleL83AAP
     proto: RMCCartridgeRifleL83AAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a3.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -282,7 +282,7 @@
     proto: RMCCartridgeRifleL83A
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3extended.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a3e.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -308,7 +308,7 @@
       - RMCCartridgeRifleL83AHEAP
     proto: RMCCartridgeRifleL83AHEAP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a3.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -336,7 +336,7 @@
       - RMCCartridgeRifleL83AIncendiary
     proto: RMCCartridgeRifleL83AIncendiary
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a3.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
