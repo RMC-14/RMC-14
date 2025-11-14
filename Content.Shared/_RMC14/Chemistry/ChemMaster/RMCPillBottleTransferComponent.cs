@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 public sealed partial class RMCPillBottleTransferComponent : Component
 {
     [DataField]
-    public float TimePerBottle = 0.43f;
+    public float TimePerBottle = 0.3f; // time_to_empty = 3
 
     [DataField]
     public SoundSpecifier? InsertPillBottleSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
