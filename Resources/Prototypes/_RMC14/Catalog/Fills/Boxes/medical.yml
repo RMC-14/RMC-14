@@ -56,7 +56,6 @@
     maxItemSize: Small
     grid:
     - 0,0,13,1
-    quickInsert: true
     areaInsert: true
     areaInsertRadius: 1
     whitelist:
