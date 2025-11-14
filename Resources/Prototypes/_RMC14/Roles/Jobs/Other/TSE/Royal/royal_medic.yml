@@ -64,6 +64,7 @@
       role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
   
 - type: startingGear
   id: RMCGearRoyalMedic

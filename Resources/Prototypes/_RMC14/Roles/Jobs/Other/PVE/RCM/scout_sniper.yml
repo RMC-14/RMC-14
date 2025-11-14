@@ -35,6 +35,10 @@
     - type: SniperWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-scout-sniper
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 - type: startingGear

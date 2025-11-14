@@ -35,6 +35,10 @@
     - type: GrenadeSpecWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-bombardment-specialist
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 - type: startingGear

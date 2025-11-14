@@ -44,6 +44,10 @@
     - type: ViewIntelObjectives
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
   
 - type: startingGear 

@@ -64,6 +64,7 @@
       role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
   
 - type: startingGear
   id: RMCGearRoyalBreacher

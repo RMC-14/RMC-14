@@ -42,6 +42,10 @@
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-section-leader
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 - type: startingGear

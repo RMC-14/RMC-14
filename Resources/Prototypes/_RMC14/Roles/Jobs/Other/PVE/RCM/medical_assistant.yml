@@ -33,6 +33,10 @@
         RMCSkillPilot: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-medical-assistant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 - type: startingGear

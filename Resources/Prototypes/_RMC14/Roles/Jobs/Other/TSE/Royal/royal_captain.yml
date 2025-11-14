@@ -47,6 +47,10 @@
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-captain
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 - type: startingGear 

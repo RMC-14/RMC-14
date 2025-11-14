@@ -47,6 +47,10 @@
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
   hidden: true
 
 # This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality

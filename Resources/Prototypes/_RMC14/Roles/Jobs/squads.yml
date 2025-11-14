@@ -238,6 +238,12 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: rmc_teamleader
+    type: Tag
+    tags:
+    - RMCSquadRoyalMarines
+
+- type: Tag
+  id: RMCSquadRoyalMarines
 
 - type: entity
   parent: SquadBase
