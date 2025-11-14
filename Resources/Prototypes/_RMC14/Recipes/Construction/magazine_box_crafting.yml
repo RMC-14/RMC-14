@@ -929,6 +929,14 @@
   - node: RMCBoxBulletsRifleTSEAPEmpty
     entity: RMCBoxBulletsRifleTSEAPEmpty
 
+  # L83A3
+  - node: RMCBoxMagazineRifleL83A3Empty
+    entity: RMCBoxMagazineRifleL83A3Empty
+  - node: RMCBoxMagazineRifleL83A3APEmpty
+    entity: RMCBoxMagazineRifleL83A3APEmpty
+  - node: RMCBoxMagazineRifleL83A3ExtEmpty
+    entity: RMCBoxMagazineRifleL83A3ExtEmpty
+
   # M16
   - node: RMCBoxMagazineRifleM16Empty
     entity: RMCBoxMagazineRifleM16Empty
