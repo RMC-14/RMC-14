@@ -38,7 +38,7 @@
   description: A pouch given to colonists in the event of an emergency.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/tools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_brown.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -61,7 +61,7 @@
   id: RMCPouchSurvivalBlack
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
 
 # Survival Synth Pouch
 - type: entity
@@ -70,6 +70,8 @@
   name: synth survival pouch
   description: An emergency pouch given to silicons in the event of an emergency.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_grey.rsi
   - type: Storage
     grid:
     - 0,0,11,1 #6 slots

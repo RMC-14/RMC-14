@@ -251,7 +251,7 @@
   id: RMCPouchSurvivalBlackFilled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
 
 - type: entity
   parent: RMCPouchSurvivalSynth
