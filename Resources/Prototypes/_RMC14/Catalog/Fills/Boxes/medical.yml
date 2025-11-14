@@ -62,7 +62,7 @@
     whitelist:
       tags:
       - PillCanister
-  - type: RMCPillBottleBox
+  - type: RMCPillBottleTransfer
   - type: IgnoreContentsSize
     items:
       tags:
