@@ -125,7 +125,6 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/inhand.rsi
     layers:
     - state: base
       sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/L24B_Icon.rsi
