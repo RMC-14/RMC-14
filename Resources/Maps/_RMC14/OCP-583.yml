@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/11/2025 18:19:37
-  entityCount: 5733
+  time: 10/20/2025 01:57:03
+  entityCount: 5729
 maps:
 - 1
 grids:
@@ -657,11 +657,6 @@ entities:
             204: -12,-11
             205: -9,-11
             206: -8,-11
-        - node:
-            color: '#0B0806FF'
-            id: splatter
-          decals:
-            323: 50.345585,-7.0037365
     - type: MapAtmosphere
       space: False
       mixture:
@@ -9544,354 +9539,264 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 37.5,0.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 273
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 37.5,-0.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 274
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 39.5,0.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 275
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 39.5,-0.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 415
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 54.5,-3.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 437
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 52.5,-3.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 466
     components:
     - type: Transform
       pos: 57.5,-16.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 475
     components:
     - type: Transform
       pos: 56.5,-16.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 839
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 28.5,5.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 904
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -2.5,14.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 905
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,14.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 906
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,13.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 907
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -2.5,13.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 952
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -7.5,13.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 953
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -7.5,12.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1337
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -32.5,-10.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1339
     components:
     - type: Transform
       pos: -32.5,-8.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1341
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -34.5,-5.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1342
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -32.5,-5.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1955
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,27.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1956
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,26.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1957
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 32.5,27.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1958
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 32.5,26.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1959
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.5,27.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1960
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.5,26.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1961
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 37.5,27.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 1962
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 37.5,26.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2205
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 39.5,42.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2206
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 41.5,42.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2315
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 30.5,40.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2367
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,45.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2368
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 29.5,45.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2995
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 73.5,20.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2996
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 73.5,19.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2997
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 75.5,20.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 2998
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 75.5,19.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 3288
     components:
     - type: Transform
       pos: 64.5,51.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4969
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -12.5,30.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4970
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,31.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4971
     components:
     - type: Transform
       pos: -5.5,31.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4972
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,30.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4973
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,48.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4974
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,49.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4975
     components:
     - type: Transform
       pos: -8.5,49.5
       parent: 23
-    - type: Physics
-      bodyType: Static
   - uid: 4976
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -13.5,48.5
       parent: 23
-    - type: Physics
-      bodyType: Static
 - proto: CMChairComfy
   entities:
   - uid: 943
@@ -14169,26 +14074,6 @@ entities:
     components:
     - type: Transform
       pos: 40.5,68.5
-      parent: 23
-  - uid: 5730
-    components:
-    - type: Transform
-      pos: 22.5,22.5
-      parent: 23
-  - uid: 5731
-    components:
-    - type: Transform
-      pos: 28.5,19.5
-      parent: 23
-  - uid: 5732
-    components:
-    - type: Transform
-      pos: 50.5,11.5
-      parent: 23
-  - uid: 5733
-    components:
-    - type: Transform
-      pos: 45.5,29.5
       parent: 23
 - proto: CMRack
   entities:
@@ -21417,12 +21302,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 37.5,10.5
-      parent: 23
-  - uid: 5729
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,7.5
       parent: 23
 - proto: CMWallMetalAlmayerWhite
   entities:
