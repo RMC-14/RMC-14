@@ -1,19 +1,18 @@
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyDesignatedMarksman
-  name: rnmc-job-name-army-marksman
+  id: RNMCArmyIntelligenceOfficer
+  name: rnmc-job-name-army-intel-officer
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyMarksman
+  playTimeTracker: RNMCJobArmyIntelOfficer
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyMarksman
-  icon: RNMCJobIconArmyMarksman
+    RMCRankCaptain: []
+  startingGear: RNMCJobArmyIntelOfficer
+  icon: RNMCJobIconArmyIntelOfficer
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Designated Marksman
+  spawnMenuRoleName: Army Intel Officer
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,25 +25,33 @@
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
         RMCSkillEndurance: 2
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
+        RMCSkillIntel: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-marksman
+      prefix: rnmc-job-prefix-army-intel-officer
   hidden: true
+
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyDesignatedMarksmanLesserRank
-  name: rnmc-job-name-army-marksman
+  id: RNMCArmyIntelligenceOfficerLesserRank
+  name: rnmc-job-name-army-intel-officer
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyMarksmanLesserRank
+  playTimeTracker: RNMCJobArmyIntelOfficerLesserRank
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyMarksman
-  icon: RNMCJobIconArmyMarksman
+    RMCRankSecondLT: []
+  startingGear: RNMCJobArmyIntelOfficer
+  icon: RNMCJobIconArmyIntelOfficer
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Designated Marksman (Lesser Rank)
+  spawnMenuRoleName: Army Intel Officer (Lesser Rank)
   special:
   - !type:AddComponentSpecial
     components:
@@ -57,51 +64,62 @@
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
         RMCSkillEndurance: 2
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
+        RMCSkillIntel: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-marksman
+      prefix: rnmc-job-prefix-army-intel-officer
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidArmyMarksman
-  name: US army designated marksman ghost role spawner
+  id: RMCRandomHumanoidArmyIntelOfficer
+  name: US army intelligence officer ghost role spawner
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: co_spawn
   - type: RandomHumanoidSpawner
-    settings: RNMCArmyMarksman
+    settings: RNMCArmyIntelOfficer
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RNMCArmyMarksman
+  id: RNMCArmyIntelOfficer
   components:
   - type: GhostRole
-    name: rnmc-job-name-army-marksman
+    name: rnmc-job-name-army-intel-officer
     description: rnmc-ghost-role-information-army-description
     rules: rmc-ghost-role-information-pmc-rules
     reregister: false
-    job: RNMCArmyDesignatedMarksman
+    job: RNMCArmyIntelligenceOfficer
     raffle:
       settings: short
 
 - type: startingGear
-  id: RNMCJobArmyMarksman
+  id: RNMCJobArmyIntelOfficer
   equipment:
-    id: RNMCDogtagArmyMarksman
-    ears: CMHeadsetUSArmy
-    jumpsuit: RNMCJumpsuitArmy
-    outerClothing: RNMCArmorPBASLight
+    id: RNMCDogtagArmyIntelOfficer
+    ears: CMHeadsetUSArmyCommand
+    jumpsuit: RNMCJumpsuitArmyBoilersuit
+    outerClothing: RNMCArmorPBASMk2
     gloves: RNMCHandsBrownFingerless
-    head: RNMCArmorHelmetPHAS
+    head: CMHeadCap
     shoes: CMBootsArmyBlack
     eyes: RNMCGlassesBiMex
+    back: RMCSatchelMarineIntelChestrig
     belt: RMCBeltHolsterPistol
-    suitstorage: RNMCWeaponRifleM49A
+    suitstorage: RNMCWeaponRifleM41AMK1Army
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchMagazineLarge
+    pocket2: RMCPouchMagazine
   storage:
+    back:
+    - CMFolderBlack
+    - CMPackFlare
     belt:
     - RMCMagazinePistolB92FS
     - RMCMagazinePistolB92FS
@@ -111,28 +129,29 @@
     - RMCMagazinePistolB92FS
     - RMCWeaponPistolB92FS
     pocket2:
-    - CMMagazineRifleM4SPRAP
-    - CMMagazineRifleM4SPRAP
-    - CMMagazineRifleM4SPRAP
-    - RNMCMagazineRifleM4SPRIncendiary
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    outerClothing:
+    - RMCLaserDesignator
 
 - type: playTimeTracker
-  id: RNMCJobArmyMarksman
+  id: RNMCJobArmyIntelOfficer
 
 - type: playTimeTracker
-  id: RNMCJobArmyMarksmanLesserRank
+  id: RNMCJobArmyIntelOfficerLesserRank
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RNMCJobIconArmyMarksman
+  id: RNMCJobIconArmyIntelOfficer
   icon:
     sprite: _RNMC14/Interface/cm_job_icons.rsi
-    state: armysniper
+    state: armyio
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RNMCDogtagArmyMarksman
-  name: Army Designated Marksman's dogtags
+  id: RNMCDogtagArmyIntelOfficer
+  name: Army Intelligence Officer's dogtags
   components:
   - type: PresetIdCard
-    job: RNMCArmyDesignatedMarksman
+    job: RNMCArmyIntelligenceOfficer

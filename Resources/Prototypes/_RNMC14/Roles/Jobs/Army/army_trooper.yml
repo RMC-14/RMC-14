@@ -1,19 +1,19 @@
-
+# Sniper
 - type: job
   parent: CMJobBase
-  id: RNMCAntiTankGunner
-  name: rnmc-job-name-at-gunner
+  id: RNMCArmyTrooper
+  name: rnmc-job-name-army-trooper
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobAntiTankGunner
+  playTimeTracker: RNMCJobArmyTrooper
   ranks:
-    RNMCRankSpecialist: []
-  startingGear: RNMCJobAntiTankGunner
-  icon: RNMCJobIconAntiTankGunner
-  joinNotifyCrew: false
+    RMCRankPrivate: []
+  startingGear: RNMCJobArmyTrooper
+  icon: RNMCJobIconArmyTrooper
   supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Anti-Tank Gunner (Needs Loader)
+  spawnMenuRoleName: Army Trooper
   special:
   - !type:AddComponentSpecial
     components:
@@ -29,37 +29,37 @@
         RMCSkillVehicles: 1
     - type: DemoSpecWhitelist
     - type: JobPrefix
-      prefix: rnmc-job-prefix-at-gunner
+      prefix: rnmc-job-prefix-army-trooper
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidArmyATGunner
-  name: US army anti-tank gunner ghost role spawner
+  id: RMCRandomHumanoidArmyTrooper
+  name: US army trooper ghost role sniper
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: co_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCPMCSniper
+    settings: RNMCArmyTrooper
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RNMCArmyATGunner
+  id: RNMCArmyTrooper
   components:
   - type: GhostRole
-    name: rnmc-job-name-at-gunner
+    name: rnmc-job-name-army-trooper
     description: rnmc-ghost-role-information-army-description
     rules: rmc-ghost-role-information-pmc-rules
     reregister: false
-    job: RNMCAntiTankGunner
+    job: RNMCArmyTrooper
     raffle:
       settings: short
 
 - type: startingGear
-  id: RNMCJobAntiTankGunner
+  id: RNMCJobArmyTrooper
   equipment:
-    id: RNMCDogtagArmyATGunner
+    id: RNMCDogtagArmyTrooper
     ears: CMHeadsetUSArmy
     jumpsuit: RNMCJumpsuitArmy
     outerClothing: RNMCArmorPBAS
@@ -67,32 +67,29 @@
     head: RNMCArmorHelmetPHAS
     shoes: CMBootsArmyBlack
     eyes: RNMCGlassesBiMex
-    back: RNMCWeaponRifleM41AMK1Army
+    back: CMBackpackMarine
     belt: RMCBeltMarineMK1
-    suitstorage: RMCWeaponLauncherM5ATL
+    suitstorage: RNMCWeaponRifleM41AMK1Army
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchFlareFilled
+    pocket2: RMCPouchExplosiveFilledHEDP
   storage:
     back:
-    - RMCRocket84mm
-    - RMCRocket84mm
-    - RMCRocket84mmAntiArmor
-    - RMCRocket84mmAntiArmor
+    - CMPackFlare
 
 - type: playTimeTracker
-  id: RNMCJobAntiTankGunner
+  id: RNMCJobArmyTrooper
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RNMCJobIconAntiTankGunner
+  id: RNMCJobIconArmyTrooper
   icon:
     sprite: _RNMC14/Interface/cm_job_icons.rsi
-    state: AT_gunner
+    state: armytrooper
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RNMCDogtagArmyATGunner
-  name: Army AT Gunner's dogtags
+  id: RNMCDogtagArmyTrooper
+  name: Army Trooper's dogtags
   components:
   - type: PresetIdCard
-    job: RNMCAntiTankGunner
+    job: RNMCJobArmyTrooper

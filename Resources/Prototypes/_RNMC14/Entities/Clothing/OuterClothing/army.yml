@@ -32,3 +32,40 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+
+- type: entity
+  parent: RNMCArmorPBAS
+  id: RNMCArmorPBASMk2
+  name: Mk2 Personal Body Armor System
+  description: An experimental modification of the personal body armor system, combining capable protection with an integrated motion tracker.
+  suffix: heavy
+  components:
+  - type: MotionDetector
+    handToggleable: false
+  - type: ToggleableMotionDetector
+    slots:
+    - OUTERCLOTHING
+    batteryDrain: 0
+
+- type: entity
+  parent: RNMCArmorPBAS
+  id: RNMCArmorPBASLight
+  name: Personal Body Armor System
+  description: Whilst it saw limited field-testing amongst the USCMC, the US Army adopted the M4 series pattern armor across the board under the PBAS program. Surprisingly uncomfortable, even compared to the old M3 series armor. At least it's compatible with attachable suplementary armor components of the M3 series.
+  suffix: light, marksman
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/OuterClothing/Armor/PBAS_marksman.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/OuterClothing/Armor/PBAS_marksman.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 35
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725

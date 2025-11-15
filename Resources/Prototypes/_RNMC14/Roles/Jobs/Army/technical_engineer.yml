@@ -1,19 +1,19 @@
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyCombatTechnician
-  name: rnmc-job-name-army-comtech
+  id: RNMCArmyTechnicalEngineer
+  name: rnmc-job-name-army-tech-engi
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyComtech
+  playTimeTracker: RNMCJobArmyTechEngi
   ranks:
-    RNMCRankSpecialist: []
-  startingGear: RNMCJobArmyComtech
-  icon: RNMCJobIconArmyComtech
+    RMCRankSergeant: []
+  startingGear: RNMCJobArmyTechEngi
+  icon: RNMCJobIconArmyTechEngi
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Combat Engineering Technician
+  spawnMenuRoleName: Army Technical Engineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,74 +26,73 @@
         RMCSkillFireman: 1
         RMCSkillEngineer: 3
         RMCSkillConstruction: 2
-        RMCSkillPowerLoader: 1
+        RMCSkillPowerLoader: 2
         RMCSkillEndurance: 2
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 3
+        RMCSkillJTAC: 2
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-comtech
+      prefix: rnmc-job-prefix-army-tech-engi
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidArmyComtech
-  name: US army comtech ghost role spawner
+  id: RMCRandomHumanoidArmyTechEngi
+  name: US army technical engineer ghost role spawner
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: co_spawn
   - type: RandomHumanoidSpawner
-    settings: RNMCArmyComtech
+    settings: RNMCArmyTechEngi
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RNMCArmyComtech
+  id: RNMCArmyTechEngi
   components:
   - type: GhostRole
-    name: rnmc-job-name-army-comtech
+    name: rnmc-job-name-army-tech-engi
     description: rnmc-ghost-role-information-army-description
     rules: rmc-ghost-role-information-pmc-rules
     reregister: false
-    job: RNMCArmyCombatTechnician
+    job: RNMCArmyTechnicalEngineer
     raffle:
       settings: short
 
 - type: startingGear
-  id: RNMCJobArmyComtech
+  id: RNMCJobArmyTechEngi
   equipment:
-    id: RNMCDogtagArmyCombatTech
+    id: RNMCDogtagArmyTechEngi
     ears: CMHeadsetUSArmy
-    jumpsuit: RNMCJumpsuitArmyWebbing
-    outerClothing: RNMCArmorPBAS
-    gloves: RNMCHandsBrownFingerless
-    head: RNMCArmorHelmetPHAS
+    jumpsuit: RNMCJumpsuitArmyBoilersuitWebbing
+    outerClothing: RMCHazardVestBlack
+    gloves: CMHandsInsulated
+    head: CMHeadCap
     shoes: CMBootsArmyBlack
     eyes: RNMCGlassesBiMex
     back: RMCSatchelWelderChestrig
-    belt: RNMCMK1BeltFilled
-    suitstorage: RNMCWeaponRifleM41AMK1Army
+    suitstorage: RMCFlashlight
     pocket1: RMCPouchConstructionFillFull
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
   storage:
     back:
     - CMPackFlare
     - RMCEngineerKit
-    outerClothing:
-    - RMCExplosiveBreachingCharge
+    - RMCSentryPVE
 
 - type: playTimeTracker
-  id: RNMCJobArmyComtech
+  id: RNMCJobArmyTechEngi
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RNMCJobIconArmyComtech
+  id: RNMCJobIconArmyTechEngi
   icon:
     sprite: _RNMC14/Interface/cm_job_icons.rsi
-    state: armycomtech
+    state: armyengi
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RNMCDogtagArmyCombatTech
-  name: Army Combat Engineering Technician's dogtags
+  id: RNMCDogtagArmyTechEngi
+  name: Army Technical Engineer's dogtags
   components:
   - type: PresetIdCard
-    job: RNMCArmyCombatTechnician
+    job: RNMCArmyTechnicalEngineer

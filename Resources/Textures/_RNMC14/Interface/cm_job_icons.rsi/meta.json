@@ -24,6 +24,51 @@
         },
         {
             "name": "AT_loader"
+        },
+        {
+            "name": "armycomtech"
+        },
+        {
+            "name": "armygrenadier"
+        },
+        {
+            "name": "armygunner"
+        },
+        {
+            "name": "armymedtech"
+        },
+        {
+            "name": "armysmartgunner"
+        },
+        {
+            "name": "armysniper"
+        },
+        {
+            "name": "armyteamlead"
+        },
+        {
+            "name": "armyio"
+        },
+        {
+            "name": "armylogispec"
+        },
+        {
+            "name": "armylogiofficer"
+        },
+        {
+            "name": "armypltco"
+        },
+        {
+            "name": "armysciofficer"
+        },
+        {
+            "name": "armysl"
+        },
+        {
+            "name": "armytrooper"
+        },
+        {
+            "name": "armyengi"
         }
     ]
 }

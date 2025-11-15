@@ -3,3 +3,9 @@
   name: Specialist
   prefix: Spc.
   paygrade: E4
+
+- type: rank
+  id: RNMCRankSergeantFirstClass
+  name: Sergeant First Class
+  prefix: SFC
+  paygrade: E7

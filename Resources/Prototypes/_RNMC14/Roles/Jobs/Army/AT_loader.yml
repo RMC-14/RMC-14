@@ -7,8 +7,9 @@
   playTimeTracker: RNMCJobAntiTankloader
   ranks:
     RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobAntiTankloader
-  icon: RNMCJobIconAntiTankloader
+  startingGear: RNMCJobAntiTankLoader
+  icon: RNMCJobIconAntiTankLoader
+  supervisors: cm-job-supervisors-sl
   joinNotifyCrew: false
   accessGroups:
   - Colony
@@ -32,8 +33,8 @@
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidPMCSniper
-  name: weya pmc ghost role sniper
+  id: RMCRandomHumanoidArmyLoader
+  name: US army loader ghost role sniper
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -58,7 +59,7 @@
 - type: startingGear
   id: RNMCJobAntiTankLoader
   equipment:
-    id: RNMCDogtagArmyATloader
+    id: RNMCDogtagArmyATLoader
     ears: CMHeadsetUSArmy
     jumpsuit: RNMCJumpsuitArmy
     outerClothing: RNMCArmorPBAS
@@ -66,11 +67,17 @@
     head: RNMCArmorHelmetPHAS
     shoes: CMBootsArmyBlack
     eyes: RNMCGlassesBiMex
-    back: RNMCWeaponRifleM41AMK1Army
+    back: RMCSatchelDemoSpec
     belt: RMCBeltMarineMK1
     suitstorage: RNMCWeaponRifleM41AMK1Army
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
     pocket2: RMCPouchFlareFilled
+  storage:
+    back:
+    - RMCRocket84mmAntiArmor
+    - RMCRocket84mmAntiArmor
+    - RMCRocket84mm
+    - RMCRocket84mm
 
 - type: playTimeTracker
   id: RNMCJobAntiTankLoader

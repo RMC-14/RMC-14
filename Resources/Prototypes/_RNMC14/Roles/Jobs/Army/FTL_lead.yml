@@ -10,6 +10,7 @@
   startingGear: RNMCJobArmyFTLLead
   icon: RNMCJobIconArmyFTLLead
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
   spawnMenuRoleName: Army Fireteam Lead
@@ -76,7 +77,7 @@
   storage:
     outerClothing:
     - RMCLaserDesignator
-    pocket1:
+    pocket2:
     - CMShellShotgunBuckshot
     - CMShellShotgunBuckshot
     - CMShellShotgunBuckshot

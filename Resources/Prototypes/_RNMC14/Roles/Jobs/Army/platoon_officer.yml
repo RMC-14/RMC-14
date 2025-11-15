@@ -1,19 +1,18 @@
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyDesignatedMarksman
-  name: rnmc-job-name-army-marksman
+  id: RNMCArmyPlatoonOfficer
+  name: rnmc-job-name-army-platoon-officer
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyMarksman
+  playTimeTracker: RNMCJobArmyPlatoonOfficer
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyMarksman
-  icon: RNMCJobIconArmyMarksman
+    RMCRankFirstLT: []
+  startingGear: RNMCJobArmyPlatoonOfficer
+  icon: RNMCJobIconArmyPlatoonOfficer
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Designated Marksman
+  spawnMenuRoleName: Army Platoon Officer
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,25 +25,32 @@
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
         RMCSkillEndurance: 2
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-marksman
+      prefix: rnmc-job-prefix-army-platoon-officer
   hidden: true
+
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyDesignatedMarksmanLesserRank
-  name: rnmc-job-name-army-marksman
+  id: RNMCArmyPlatoonOfficerLesserRank
+  name: rnmc-job-name-army-platoon-officer
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyMarksmanLesserRank
+  playTimeTracker: RNMCJobArmyPlatoonOfficerLesserRank
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyMarksman
-  icon: RNMCJobIconArmyMarksman
+    RMCRankSecondLT: []
+  startingGear: RNMCJobArmyPlatoonOfficer
+  icon: RNMCJobIconArmyPlatoonOfficer
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Designated Marksman (Lesser Rank)
+  spawnMenuRoleName: Army Platoon Officer (Lesser Rank)
   special:
   - !type:AddComponentSpecial
     components:
@@ -57,50 +63,56 @@
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
         RMCSkillEndurance: 2
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-marksman
+      prefix: rnmc-job-prefix-army-platoon-officer
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidArmyMarksman
-  name: US army designated marksman ghost role spawner
+  id: RMCRandomHumanoidArmyPlatoonOfficer
+  name: US army platoon officer ghost role spawner
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: co_spawn
   - type: RandomHumanoidSpawner
-    settings: RNMCArmyMarksman
+    settings: RNMCArmyPlatoonOfficer
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RNMCArmyMarksman
+  id: RNMCArmyPlatoonOfficer
   components:
   - type: GhostRole
-    name: rnmc-job-name-army-marksman
+    name: rnmc-job-name-army-platoon-officer
     description: rnmc-ghost-role-information-army-description
     rules: rmc-ghost-role-information-pmc-rules
     reregister: false
-    job: RNMCArmyDesignatedMarksman
+    job: RNMCArmyPlatoonOfficer
     raffle:
       settings: short
 
 - type: startingGear
-  id: RNMCJobArmyMarksman
+  id: RNMCJobArmyPlatoonOfficer
   equipment:
-    id: RNMCDogtagArmyMarksman
-    ears: CMHeadsetUSArmy
+    id: RNMCDogtagArmyPlatoonOfficer
+    ears: CMHeadsetUSArmyCommand
     jumpsuit: RNMCJumpsuitArmy
-    outerClothing: RNMCArmorPBASLight
+    outerClothing: RNMCArmorPBASMk2
     gloves: RNMCHandsBrownFingerless
-    head: RNMCArmorHelmetPHAS
+    head: CMHeadCap
     shoes: CMBootsArmyBlack
     eyes: RNMCGlassesBiMex
     belt: RMCBeltHolsterPistol
-    suitstorage: RNMCWeaponRifleM49A
+    suitstorage: RNMCWeaponRifleM41AMK1Army
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchMagazineLarge
+    pocket2: RMCPouchMagazine
   storage:
     belt:
     - RMCMagazinePistolB92FS
@@ -111,28 +123,29 @@
     - RMCMagazinePistolB92FS
     - RMCWeaponPistolB92FS
     pocket2:
-    - CMMagazineRifleM4SPRAP
-    - CMMagazineRifleM4SPRAP
-    - CMMagazineRifleM4SPRAP
-    - RNMCMagazineRifleM4SPRIncendiary
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    outerClothing:
+    - RMCLaserDesignator
 
 - type: playTimeTracker
-  id: RNMCJobArmyMarksman
+  id: RNMCJobArmyPlatoonOfficer
 
 - type: playTimeTracker
-  id: RNMCJobArmyMarksmanLesserRank
+  id: RNMCJobArmyPlatoonOfficerLesserRank
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RNMCJobIconArmyMarksman
+  id: RNMCJobIconArmyPlatoonOfficer
   icon:
     sprite: _RNMC14/Interface/cm_job_icons.rsi
-    state: armysniper
+    state: armypltco
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RNMCDogtagArmyMarksman
-  name: Army Designated Marksman's dogtags
+  id: RNMCDogtagArmyPlatoonOfficer
+  name: Army Lieutenant's dogtags
   components:
   - type: PresetIdCard
-    job: RNMCArmyDesignatedMarksman
+    job: RNMCArmyPlatoonOfficer

@@ -1,19 +1,19 @@
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyGunner
-  name: rnmc-job-name-army-gunner
+  id: RNMCArmySquadLeader
+  name: rnmc-job-name-army-sl
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyGunner
+  playTimeTracker: RNMCJobArmySL
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyGunner
-  icon: RNMCJobIconArmyGunner
+    RNMCRankSergeantFirstClass: []
+  startingGear: RNMCJobArmySL
+  icon: RNMCJobIconArmySL
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Gunner (M41AE2)
+  spawnMenuRoleName: Army Squad Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -23,28 +23,32 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillVehicles: 1
+        RMCSkillJTAC: 3
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-gunner
+      prefix: rnmc-job-prefix-army-sl
   hidden: true
 
 - type: job
   parent: CMJobBase
-  id: RNMCArmyGunnerLesserRank
-  name: rnmc-job-name-army-gunner
+  id: RNMCArmySquadLeaderLesserRank
+  name: rnmc-job-name-army-sl
   description: rnmc-ghost-role-information-army-description
-  playTimeTracker: RNMCJobArmyGunnerLesserRank
+  playTimeTracker: RNMCJobArmySLLesserRank
   ranks:
-    RMCRankPrivateFirstClass: []
-  startingGear: RNMCJobArmyGunner
-  icon: RNMCJobIconArmyGunner
+    RMCRankStaffSergeant: []
+  startingGear: RNMCJobArmySL
+  icon: RNMCJobIconArmySL
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
-  spawnMenuRoleName: Army Gunner (M41AE2, Lesser Rank)
+  spawnMenuRoleName: Army Squad Leader (Lesser Rank)
   special:
   - !type:AddComponentSpecial
     components:
@@ -54,75 +58,82 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
         RMCSkillFireman: 1
         RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillVehicles: 1
+        RMCSkillJTAC: 3
     - type: JobPrefix
-      prefix: rnmc-job-prefix-army-gunner
+      prefix: rnmc-job-prefix-army-sl
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidArmyGunner
-  name: US army gunner ghost role spawner
+  id: RMCRandomHumanoidArmySL
+  name: US army squad leader ghost role spawner
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: co_spawn
   - type: RandomHumanoidSpawner
-    settings: RNMCArmyGunner
+    settings: RNMCArmySL
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RNMCArmyGunner
+  id: RNMCArmySL
   components:
   - type: GhostRole
-    name: rnmc-job-name-army-gunner
+    name: rnmc-job-name-army-sl
     description: rnmc-ghost-role-information-army-description
     rules: rmc-ghost-role-information-pmc-rules
     reregister: false
-    job: RNMCArmyGunner
+    job: RNMCArmySL
     raffle:
       settings: short
 
 - type: startingGear
-  id: RNMCJobArmyGunner
+  id: RNMCJobArmySL
   equipment:
-    id: RNMCDogtagArmyGunner
+    id: RNMCDogtagArmySL
     ears: CMHeadsetUSArmy
     jumpsuit: RNMCJumpsuitArmy
     outerClothing: RNMCArmorPBAS
     gloves: RNMCHandsBrownFingerless
     head: RNMCArmorHelmetPHAS
     shoes: CMBootsArmyBlack
-    eyes: RNMCGlassesBiMex
-    belt: RMCBeltUtilityGeneral
-    suitstorage: RNMCWeaponRifleM41AE2
-    pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchFlareFilled
+    eyes: RNMCGlassesBiMexBlack
+    back: RMCBackpackRTO
+    belt: RNMCMK1BeltFilled
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFirstResponderFill
   storage:
-    belt:
-    - CMMagazineRifleM54CE2AP
-    - CMMagazineRifleM54CE2AP
+    outerClothing:
+    - RMCLaserDesignator
+    back:
+    - CMPackFlare
+    - RMCPackFlareCAS
+    - CMPacketGrenadeHighExplosiveFilled
 
 - type: playTimeTracker
-  id: RNMCJobArmyGunner
+  id: RNMCJobArmySL
 
 - type: playTimeTracker
-  id: RNMCJobArmyGunnerLesserRank
+  id: RNMCJobArmySLLesserRank
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RNMCJobIconArmyGunner
+  id: RNMCJobIconArmySL
   icon:
     sprite: _RNMC14/Interface/cm_job_icons.rsi
-    state: armygunner
+    state: armysl
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RNMCDogtagArmyGunner
-  name: Army Gunner's dogtags
+  id: RNMCDogtagArmySL
+  name: Army Squad Leader's dogtags
   components:
   - type: PresetIdCard
-    job: RNMCArmyGunner
+    job: RNMCArmySquadLeader

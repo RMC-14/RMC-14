@@ -8,3 +8,14 @@
     sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_tactical_shades.rsi
   - type: Clothing
     sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_tactical_shades.rsi
+
+- type: entity
+  parent: RMCSunglassesBig
+  id: RNMCGlassesBiMexBlack
+  name: BiMex polarized shades
+  description: Sleek, angular shades designed for the modern operator. BiMex's latest 'TactOptix' line comes with advanced polarization and lightweight ballistic lenses capable of shrugging off small shrapnel impacts. A favorite among frontline operators and deep-space scouts, these shades are marketed as 'combat-tested and action-approved.' Rumors abound of lucky users surviving close-range laser shots thanks to the multi-reflective lens coating, though BiMex's official stance is to 'Stop standing in front of lasers.'
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_polarized_shades.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Eyes/Glasses/bimex_polarized_shades.rsi

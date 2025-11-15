@@ -10,6 +10,7 @@
   startingGear: RNMCJobArmyMedtech
   icon: RNMCJobIconArmyMedtech
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
   spawnMenuRoleName: Army Combat Medical Technician

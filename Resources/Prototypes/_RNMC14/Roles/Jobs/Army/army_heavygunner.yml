@@ -10,6 +10,7 @@
   startingGear: RNMCJobArmyHeavyGunner
   icon: RNMCJobIconArmyHeavyGunner
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colony
   spawnMenuRoleName: Army Heavy Gunner
