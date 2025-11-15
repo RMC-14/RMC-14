@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/15/2025 14:09:22
-  entityCount: 1460
+  time: 11/15/2025 15:29:22
+  entityCount: 1461
 maps:
 - 1
 grids:
@@ -11013,5 +11013,12 @@ entities:
     components:
     - type: Transform
       pos: -39.5,29.5
+      parent: 1
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 3305
+    components:
+    - type: Transform
+      pos: -1.5,11.5
       parent: 1
 ...
