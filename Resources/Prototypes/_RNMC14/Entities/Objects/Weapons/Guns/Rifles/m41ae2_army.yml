@@ -1,0 +1,151 @@
+
+- type: entity
+  name: M41AE2 heavy pulse rifle
+  parent: WeaponRifleM54CE2
+  id: RNMCWeaponRifleM41AE2
+  description: The US Army's adoption of the M41AE2 adds a longer barrel and improved retention system, operating in a more traditional machine gun role.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentMagneticHarness
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      # Start of RNMC-14 modifications.
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CMK1StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockCollapsible
+      # End of RNMC-14 modifications.
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RNMCAttachmentBipod
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.03125
+      rmc-aslot-rail: 0.1, 0.185
+      rmc-aslot-stock: -0.81, 0.05
+      rmc-aslot-underbarrel: 0.37, -0.3125
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54CE2AP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CE2
+
+- type: entity
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
+  id: RNMCAttachmentBipod
+  name: bipod
+  description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
+    When properly placed, greatly increases accuracy, fire-rate and reduces recoil, but when not deployed also increases weapon size and slows fire-rate."
+  suffix: buffed
+  components:
+  - type: Sprite
+    state: bipod
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentBipod
+  - type: AttachableToggleable
+    heldOnlyActivate: true
+    userOnly: true
+    doInterrupt: true
+    attachedOnly: true
+    breakOnMove: true
+    breakOnFullRotate: true
+    breakOnDrop: true
+    doAfter: 1.5
+    deactivateDoAfter: 0
+    doAfterNeedHand: false
+    instantToggle: Brace
+    useDelay: 0.5
+    activatePopupText: attachable-popup-activate-deploy-on-ground
+    deactivatePopupText: attachable-popup-deactivate-retract
+    activateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
+    deactivateSound:
+      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
+      params:
+        volume: -3
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: bipod
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: bipod-on
+    actionName: Deploy Bipod
+    actionDesc: Deploy the bipod and get into a firing position.
+  - type: AttachableVisuals
+    showActive: true
+  - type: AttachableTemporarySpeedMods
+    alteration: Interrupted
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 2
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: -10
+  - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.25
+      scatterFlat: -2
+      recoilFlat: -2
+    - conditions:
+        activeOnly: true
+      burstScatterAddMult: -3
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - CMM96SSniperRifle
+      fireDelayFlat: -0.5
+    - conditions:
+        activeOnly: true
+        blacklist:
+          tags:
+          - CMM96SSniperRifle
+      fireDelayFlat: -0.1
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponLMGM60
+      fireDelayFlat: -0.1

@@ -1,0 +1,108 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyMedicalTechnician
+  name: rnmc-job-name-army-medtech
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyMedtech
+  ranks:
+    RNMCRankSpecialist: []
+  startingGear: RNMCJobArmyMedtech
+  icon: RNMCJobIconArmyMedtech
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Combat Medical Technician
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillIntel: 2
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-medtech
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyMedtech
+  name: US army medical technician ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyMedtech
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyMedtech
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-medtech
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyMedicalTechnician
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyMedtech
+  equipment:
+    id: RNMCDogtagArmyMedTech
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: RNMCArmorPBASMk2
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: RNMCBackpackArmyMedic
+    belt: CMBeltMedicBagFilled
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchMedkit
+  storage:
+    back:
+    - CMCanteen
+    - CMMRE
+    - CMPackFlare
+    - CMFirstAidKitFilled
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    pocket2:
+    - RMCSyringeCaseFilled
+    - CMRollerBedSpawnFolded
+    - CMSynthGraft
+    - CMSurgicalLine
+    - CMStasisBagFolded
+    - CMBloodPackFull
+
+- type: playTimeTracker
+  id: RNMCJobArmyMedtech
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyMedtech
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armymedtech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyMedTech
+  name: Army Combat Medical Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyMedicalTechnician

@@ -1,0 +1,79 @@
+- type: entity
+  parent: CMMagazineRifleM4SPR
+  id: RNMCMagazineRifleM4SPRIncendiary
+  name: M4SPR incendiary magazine (10x24mm)
+  description: "A magazine of incendiary 10x24mm rounds for use in the M4SPR battle rifle."
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RNMCMagazineRifleM4SPRIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spra19.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#9C2219"
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCBulletRifle10x24mmIncendiary
+
+- type: Tag
+  id: RNMCMagazineRifleM4SPRIncendiary
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  name: M49A battle rifle
+  description: The M49A battle rifle is a designated marksman rifle used by multiple branches of the UA armed forces. Sporting a bullpup configuration, the M49A battle rifle is perfect for reconnaissance and fire support teams.
+  id: RNMCWeaponRifleM49A
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
+        whitelist:
+          tags:
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentAngledGrip
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM4SPRAP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RNMCMagazineRifleM4SPRIncendiary

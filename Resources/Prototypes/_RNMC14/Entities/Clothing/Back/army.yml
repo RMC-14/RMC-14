@@ -1,0 +1,5 @@
+- type: entity
+  parent: CMBackpackMarineMedic
+  id: RNMCBackpackArmyMedic
+  name: Army combat medic backpack
+  description: A standard-issue backpack worn by US Army medics.

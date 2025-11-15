@@ -1,0 +1,104 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyFireteamLead
+  name: rnmc-job-name-army-ftl-lead
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyFireteamLead
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RNMCJobArmyFTLLead
+  icon: RNMCJobIconArmyFTLLead
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Fireteam Lead
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillJTAC: 3
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-ftl-lead
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyFireteamLead
+  name: US army fireteam lead ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyFireteamLead
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyFireteamLead
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-ftl-lead
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyFireteamLead
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyFTLLead
+  equipment:
+    id: RNMCDogtagArmyFTLLead
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: RNMCArmorPBAS
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMexBlack
+    back: RNMCBreachingHammer
+    belt: RNMCMK1BeltFilled
+    suitstorage: RNMCWeaponRifleM41AMK1ArmyShotgun
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchShotgunLarge
+  storage:
+    outerClothing:
+    - RMCLaserDesignator
+    pocket1:
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+
+- type: playTimeTracker
+  id: RNMCJobArmyFireteamLead
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyFTLLead
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armyteamlead
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyFTLLead
+  name: Army Fireteam Lead's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyFireteamLead

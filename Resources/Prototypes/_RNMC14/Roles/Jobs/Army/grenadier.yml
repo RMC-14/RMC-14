@@ -1,0 +1,112 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyGrenadier
+  name: rnmc-job-name-army-grenadier
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyGrenadier
+  ranks:
+    RMCRankPrivateFirstClass: []
+  startingGear: RNMCJobArmyGrenadier
+  icon: RNMCJobIconArmyGrenadier
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Grenadier
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-grenadier
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyGrenadier
+  name: US army grenadier ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyGrenadier
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyGrenadier
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-grenadier
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyGrenadier
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyGrenadier
+  equipment:
+    id: RNMCDogtagArmyGrenadier
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    mask: RMCMaskCoifGreen
+    outerClothing: RNMCArmorPBAS
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: RMCSatchelMarineLogisticsBig
+    belt: RMCBeltGrenade
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchMagazine
+  storage:
+    back:
+    - CMPackFlare
+    - RMCPacketGrenadeIncendiaryFilled
+    belt:
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    - CMGrenadeHighExplosive
+    pocket2:
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+
+- type: playTimeTracker
+  id: RNMCJobArmyGrenadier
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyGrenadier
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armygrenadier
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyGrenadier
+  name: Army Grenadier's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyGrenadier
