@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Shiva has received a large update. It should be more inline with parity
-      now.
-    type: Add
-  - message: You can now destroy soil nets and planter boxes.
-    type: Add
-  id: 1976
-  time: '2025-07-09T00:24:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6972
-- author: noctyrnal
-  changes:
   - message: Adjusted the colour of the Squad HUD Icons.
     type: Tweak
   id: 1977
@@ -4702,5 +4692,12 @@
   id: 2476
   time: '2025-11-15T07:47:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8264
+- author: Ian321
+  changes:
+  - message: Some phones can now be set to "do not disturb".
+    type: Add
+  id: 2477
+  time: '2025-11-15T07:52:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8272
 Name: RMC14
 Order: -1
