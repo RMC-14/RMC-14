@@ -273,7 +273,7 @@ public sealed class SkillsSystem : EntitySystem
         if (!TryComp(entityToExamine, out SolutionContainerManagerComponent? solutionContainerManager))
             return;
 
-        List<ReagentQuantity>? foundReagents = null;
+        var foundReagents = new List<ReagentQuantity>();
         foreach (var solutionContainerId in solutionContainerManager.Containers)
         {
             if (!_solutionContainerSystem.TryGetSolution(entityToExamine, solutionContainerId, out _, out var solution))
@@ -281,12 +281,11 @@ public sealed class SkillsSystem : EntitySystem
 
             foreach (var reagent in solution.Contents)
             {
-                foundReagents ??= new List<ReagentQuantity>();
                 foundReagents.Add(reagent);
             }
         }
 
-        if (foundReagents == null || foundReagents.Count == 0)
+        if (!foundReagents.Any())
         {
             using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
             {
