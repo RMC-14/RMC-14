@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Adjusted the colour of the Squad HUD Icons.
-    type: Tweak
-  id: 1977
-  time: '2025-07-09T00:24:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6974
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed escape pods not exploding when it's launched over the maximum occupancy,
@@ -4699,5 +4692,12 @@
   id: 2477
   time: '2025-11-15T07:52:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8272
+- author: SharkSnake98
+  changes:
+  - message: Added Raw Fish, Grilled Fish, Fish & Chips, and Fish Sushi Rolls
+    type: Add
+  id: 2478
+  time: '2025-11-15T07:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7941
 Name: RMC14
 Order: -1
