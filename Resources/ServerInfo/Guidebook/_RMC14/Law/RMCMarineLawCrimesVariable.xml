@@ -51,7 +51,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"].
+        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"]. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
       </Box>
     </ColorBox>
     <ColorBox>
