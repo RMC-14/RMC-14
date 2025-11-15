@@ -483,22 +483,19 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             if (transferred >= availableSpace)
                 break;
-            if (!Exists(bottle))
+
+            if (!Exists(bottle) ||
+                !_entityWhitelist.IsWhitelistPass(ent.Comp.PillBottleWhitelist, bottle) ||
+                !_container.Remove(bottle, boxContainer))
                 continue;
-            if (!_entityWhitelist.IsWhitelistPass(ent.Comp.PillBottleWhitelist, bottle))
-                continue;
-            if (!_container.Remove(bottle, boxContainer))
-                continue;
+
             if (_container.Insert(bottle, slot))
             {
                 transferred++;
             }
-            else
+            else if (!_container.Insert(bottle, boxContainer))
             {
-                if (!_container.Insert(bottle, boxContainer))
-                {
-                    _hands.TryPickupAnyHand(args.User, bottle);
-                }
+                _hands.TryPickupAnyHand(args.User, bottle);
             }
         }
 
