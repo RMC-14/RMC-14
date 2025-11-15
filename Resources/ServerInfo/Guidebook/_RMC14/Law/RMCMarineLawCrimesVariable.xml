@@ -151,7 +151,7 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Disorderly Conduct in Confinement
+        Disorderly Conduct in \nConfinement
       </Box>
     </ColorBox>
     <ColorBox>
@@ -166,7 +166,28 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Breaking a Major Law while under arrest or in Prison.[bold]15 minutes.[/bold]
+        Breaking a Major Law while under arrest or in Prison.\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Intentional Public Mischief
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Making a false statement that accuses someone of having committed an offence. \nDoing anything intended to cause someone to be suspected of having committed an offence that the person has not committed. \nTo divert suspicion from themselves, reporting that an offence has been committed when it has not been committed. \nFalse statements relating to investigations are considered [bold]False Testimony[/bold].
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Relating to a minor crime.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Relating to a major crime, or anything above this.\n[bold]15 minutes.[/bold]
       </Box>
     </ColorBox>
 
