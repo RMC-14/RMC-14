@@ -27,6 +27,15 @@
   flavor: nutty
   color: "#BE893F"
 
+- type: reagent
+  parent: BaseJuice
+  id: RMCBatter
+  name: reagent-name-rmc-batter
+  desc: reagent-desc-rmc-batter
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: creamy
+  color: "#FFFDD0"
+
 # Sprinkles
 - type: reagent
   id: RMCSprinkles
