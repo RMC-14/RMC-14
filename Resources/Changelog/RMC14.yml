@@ -1,49 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The flare gun is now available in the prep room and at requisitions.
-      Its built-in scope allows you to launch flares much farther than you could throw
-      them by hand. Flare guns can also be used to illuminate an area or mark a CAS
-      target by firing flares into the sky, without leaving one on the ground. However,
-      flares launched into the air are dimmer and burn for a shorter duration.
-    type: Add
-  - message: The Mateba and Winter Wyvern can now be fired into the sky if you have
-      level 3 leadership, this will shake the screen of any nearby marines.
-    type: Tweak
-  - message: Signal flares now show their CAS designator when examined.
-    type: Tweak
-  - message: Starshell ashes won't clip inside walls anymore.
-    type: Fix
-  id: 1972
-  time: '2025-07-08T01:57:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6769
-- author: noctyrnal
-  changes:
-  - message: Added more patches and armbands. You can find these in your loadout and
-      prep vendors, along with requsitions.
-    type: Add
-  - message: Ties and armbands are now treated as accessories instead of clothing
-      - You clip these onto your uniforms instead of wearing them in your neck slot.
-    type: Tweak
-  id: 1973
-  time: '2025-07-08T02:04:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6947
-- author: Ian321
-  changes:
-  - message: Xenos can now be dissected.
-    type: Add
-  id: 1974
-  time: '2025-07-08T03:19:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5869
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON having almayer comms
-    type: Fix
-  - message: Renamed FORECON radio channel to 'SOF'
-    type: Fix
-  id: 1975
-  time: '2025-07-09T00:23:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6971
 - author: noctyrnal
   changes:
   - message: Shiva has received a large update. It should be more inline with parity
@@ -4715,5 +4670,37 @@
   id: 2472
   time: '2025-11-15T07:46:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8105
+- author: CyberTropic
+  changes:
+  - message: Fixed double corpse spawners on New Varadero.
+    type: Fix
+  id: 2473
+  time: '2025-11-15T07:48:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8326
+- author: Shromply
+  changes:
+  - message: '[PVE] Added the UNS Rover, a FORECON ship map.'
+    type: Add
+  id: 2474
+  time: '2025-11-15T07:47:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7790
+- author: SharkSnake98
+  changes:
+  - message: Removed OCP-583 from roundstart loading
+    type: Fix
+  - message: Added a shuttle to repaired chances
+    type: Add
+  - message: Fixed a wall in the site director's office
+    type: Fix
+  id: 2475
+  time: '2025-11-15T07:49:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7468
+- author: PursuitInAshes
+  changes:
+  - message: '[PVE] CORSAT now has basic Tactical Map labels.'
+    type: Add
+  id: 2476
+  time: '2025-11-15T07:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8264
 Name: RMC14
 Order: -1
