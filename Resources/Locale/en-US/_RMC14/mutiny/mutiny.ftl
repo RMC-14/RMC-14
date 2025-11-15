@@ -12,6 +12,6 @@ mutineer-leader-status-added = You have been made the leader of the mutiny.
 mutineer-leader-status-removed = You are no longer the leader of the mutiny.
 
 mutineer-invite-title = Mutiny Invitation
-mutineer-invite-text = You are being asked to join the mutiny.
+mutineer-invite-text = You are being asked to join the mutiny. By accepting you have read and understand the mutiny expectations and rules outlined in the server rules. (Core Rules -> "Mutinies, Riots")
 mutineer-invite-accept = Join
 mutineer-invite-deny = Decline
