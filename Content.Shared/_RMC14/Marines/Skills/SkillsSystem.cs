@@ -253,7 +253,7 @@ public sealed class SkillsSystem : EntitySystem
         }
 
         // If ContainerId is specified, examine the entity inside the container instead
-        EntityUid entityToExamine = args.Examined;
+        var entityToExamine = args.Examined;
         if (ent.Comp.ContainerId != null)
         {
             if (!_container.TryGetContainer(args.Examined, ent.Comp.ContainerId, out var container) ||
@@ -273,7 +273,7 @@ public sealed class SkillsSystem : EntitySystem
         if (!TryComp(entityToExamine, out SolutionContainerManagerComponent? solutionContainerManager))
             return;
 
-        var foundReagents = new List<ReagentQuantity>();
+        List<ReagentQuantity>? foundReagents = null;
         foreach (var solutionContainerId in solutionContainerManager.Containers)
         {
             if (!_solutionContainerSystem.TryGetSolution(entityToExamine, solutionContainerId, out _, out var solution))
@@ -281,11 +281,12 @@ public sealed class SkillsSystem : EntitySystem
 
             foreach (var reagent in solution.Contents)
             {
+                foundReagents ??= new List<ReagentQuantity>();
                 foundReagents.Add(reagent);
             }
         }
 
-        if (!foundReagents.Any())
+        if (foundReagents == null || foundReagents.Count == 0)
         {
             using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
             {
