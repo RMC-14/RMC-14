@@ -20,6 +20,7 @@
     - type: MindContainer
     - type: NewPlayerLabel
     - type: Perishable
+    - type: RMCRevivable
     - type: SSDIndicator
     - type: TacticalMapTracked
     - type: Thirst
