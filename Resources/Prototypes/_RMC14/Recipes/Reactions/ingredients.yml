@@ -12,6 +12,20 @@
     RMCCherryJelly: 2
 
 - type: reaction
+  id: RMCBatter
+  reactants:
+    Flour:
+      amount: 5
+    OilOlive:
+      amount: 5
+    Egg:
+      amount: 6
+    Milk:
+      amount: 5
+  products:
+    RMCBatter: 20
+
+- type: reaction
   id: CookingMayoOliveOil
   reactants:
     Vinegar:
