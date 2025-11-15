@@ -116,8 +116,7 @@
   solids:
     FoodMeatChickenCutlet: 1
   reagents:
-    Flour: 5
-    Egg: 6
+    RMCBatter: 5
 
 - type: microwaveMealRecipe
   id: RecipeRMCVegetablePizza
