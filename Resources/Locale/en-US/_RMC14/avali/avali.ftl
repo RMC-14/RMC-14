@@ -128,6 +128,7 @@ marking-AvaliTailTrimTwo = (Type Two) Trimmed Avali Tail
 marking-AvaliTailTrimTwo-tail_avalibase = Tail Base
 marking-AvaliTailTrimTwo-tail_avali_primary = Primary
 marking-AvaliTailTrimTwo-tail_avali_secondary = Secondary
+marking-AvaliTailAnimated = (Base,wag) Avali tail
 
 rmc-name-avali-1 = Ko
 rmc-name-avali-2 = Nomi
