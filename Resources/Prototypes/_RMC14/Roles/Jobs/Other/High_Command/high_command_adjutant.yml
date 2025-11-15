@@ -68,6 +68,7 @@
   - type: Access
     groups:
     - ShipMasterAccess
+    tags:
     - CMAccessHighCommand
 
 - type: playTimeTracker
