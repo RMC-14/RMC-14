@@ -1,84 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: A new alert that shows area information
-    type: Add
-  - message: Area name from the tacmap alert sas been removed to be moved to the new
-      alert.
-    type: Remove
-  id: 1970
-  time: '2025-07-08T01:35:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6805
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Tail stabs will now temporarily blind marines for 1 to 3 seconds depending
-      on the xeno's size. New effects have also been added for tail stabs.
-    type: Add
-  id: 1971
-  time: '2025-07-08T01:37:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6953
-- author: Dygon
-  changes:
-  - message: The flare gun is now available in the prep room and at requisitions.
-      Its built-in scope allows you to launch flares much farther than you could throw
-      them by hand. Flare guns can also be used to illuminate an area or mark a CAS
-      target by firing flares into the sky, without leaving one on the ground. However,
-      flares launched into the air are dimmer and burn for a shorter duration.
-    type: Add
-  - message: The Mateba and Winter Wyvern can now be fired into the sky if you have
-      level 3 leadership, this will shake the screen of any nearby marines.
-    type: Tweak
-  - message: Signal flares now show their CAS designator when examined.
-    type: Tweak
-  - message: Starshell ashes won't clip inside walls anymore.
-    type: Fix
-  id: 1972
-  time: '2025-07-08T01:57:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6769
-- author: noctyrnal
-  changes:
-  - message: Added more patches and armbands. You can find these in your loadout and
-      prep vendors, along with requsitions.
-    type: Add
-  - message: Ties and armbands are now treated as accessories instead of clothing
-      - You clip these onto your uniforms instead of wearing them in your neck slot.
-    type: Tweak
-  id: 1973
-  time: '2025-07-08T02:04:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6947
-- author: Ian321
-  changes:
-  - message: Xenos can now be dissected.
-    type: Add
-  id: 1974
-  time: '2025-07-08T03:19:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5869
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed FORECON having almayer comms
-    type: Fix
-  - message: Renamed FORECON radio channel to 'SOF'
-    type: Fix
-  id: 1975
-  time: '2025-07-09T00:23:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6971
-- author: noctyrnal
-  changes:
-  - message: Shiva has received a large update. It should be more inline with parity
-      now.
-    type: Add
-  - message: You can now destroy soil nets and planter boxes.
-    type: Add
-  id: 1976
-  time: '2025-07-09T00:24:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6972
-- author: noctyrnal
-  changes:
-  - message: Adjusted the colour of the Squad HUD Icons.
-    type: Tweak
-  id: 1977
-  time: '2025-07-09T00:24:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6974
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed escape pods not exploding when it's launched over the maximum occupancy,
@@ -4717,5 +4637,67 @@
   id: 2470
   time: '2025-10-30T11:43:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8220
+- author: SharkSnake98
+  changes:
+  - message: Added Port Nereid, a dense jungle PvE map!
+    type: Add
+  - message: Added a bunch of different props for the map
+    type: Add
+  id: 2471
+  time: '2025-11-15T07:45:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7658
+- author: 0awful
+  changes:
+  - message: Requisition can now distribute welding googles
+    type: Add
+  id: 2472
+  time: '2025-11-15T07:46:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8105
+- author: CyberTropic
+  changes:
+  - message: Fixed double corpse spawners on New Varadero.
+    type: Fix
+  id: 2473
+  time: '2025-11-15T07:48:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8326
+- author: Shromply
+  changes:
+  - message: '[PVE] Added the UNS Rover, a FORECON ship map.'
+    type: Add
+  id: 2474
+  time: '2025-11-15T07:47:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7790
+- author: SharkSnake98
+  changes:
+  - message: Removed OCP-583 from roundstart loading
+    type: Fix
+  - message: Added a shuttle to repaired chances
+    type: Add
+  - message: Fixed a wall in the site director's office
+    type: Fix
+  id: 2475
+  time: '2025-11-15T07:49:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7468
+- author: PursuitInAshes
+  changes:
+  - message: '[PVE] CORSAT now has basic Tactical Map labels.'
+    type: Add
+  id: 2476
+  time: '2025-11-15T07:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8264
+- author: Ian321
+  changes:
+  - message: Some phones can now be set to "do not disturb".
+    type: Add
+  id: 2477
+  time: '2025-11-15T07:52:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8272
+- author: SharkSnake98
+  changes:
+  - message: Added Raw Fish, Grilled Fish, Fish & Chips, and Fish Sushi Rolls
+    type: Add
+  id: 2478
+  time: '2025-11-15T07:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7941
 Name: RMC14
 Order: -1
