@@ -146,6 +146,9 @@ entities:
   entities:
   - uid: 1
     components:
+    - type: DayNightCycle
+    - type: MapLight
+    - type: LightCycle
     - type: MetaData
       name: LCS-14 Savannah
     - type: Transform
