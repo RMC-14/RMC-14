@@ -420,7 +420,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         _solution.UpdateChemicals(buffer.Value);
         _adminLog.Add(LogType.RMCChemMaster,
             $"""
-            {ToPrettyString(args.Actor):user} created {ent.Comp.PillAmount} {perPill:pillUnits}u pills in {ent.Comp.SelectedBottles.Count} pill bottles using {ToPrettyString(ent):chemMaster}.
+            {ToPrettyString(args.Actor):user} created {ent.Comp.PillAmount:pillAmount} {perPill:pillUnits}u pills in {ent.Comp.SelectedBottles.Count:bottleAmount} pill bottles using {ToPrettyString(ent):chemMaster}.
             Solution: {originalSolution:solution}
             Pill bottle IDs: {string.Join(", ", ent.Comp.SelectedBottles):bottleIds}
             """);
