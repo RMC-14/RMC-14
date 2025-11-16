@@ -1,4 +1,3 @@
-
 - type: entity
   parent: RMCFoodDonut
   id: RMCFoodDonutJellyFrosted
@@ -16,8 +15,8 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 3
-        - ReagentId: Sugar
-          Quantity: 1 # Sprinkles
+        - ReagentId: RMCSprinkles
+          Quantity: 1
         - ReagentId: RMCCherryJelly
           Quantity: 5
   - type: Item
