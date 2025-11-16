@@ -4,23 +4,23 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._NC14.DayNight;
+namespace Content.Shared._Forge.DayNight;
 
-public sealed class NCDayNightTimeSystem : EntitySystem
+public sealed class DayNightTimeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
-    public bool TryGetTime(MapId mapId, out NCDayTimeInfo info)
+    public bool TryGetTime(MapId mapId, out DayTimeInfo info)
     {
         info = default;
 
         if (!TryGetMap(mapId, out var mapUid))
             return false;
 
-        if (!HasComp<NCDayNightCycleComponent>(mapUid))
+        if (!HasComp<DayNightCycleComponent>(mapUid))
             return false;
 
         if (!TryComp(mapUid, out LightCycleComponent? lightCycle))
@@ -39,7 +39,7 @@ public sealed class NCDayNightTimeSystem : EntitySystem
 
         var totalDays = (long)Math.Floor(timeSeconds / duration);
 
-        info = new NCDayTimeInfo(hour, minute, normalized, GetPhase(hour, minute), totalDays + 1);
+        info = new DayTimeInfo(hour, minute, normalized, GetPhase(hour, minute), totalDays + 1);
         return true;
     }
 
@@ -58,32 +58,32 @@ public sealed class NCDayNightTimeSystem : EntitySystem
         return r < 0 ? r + m : r;
     }
 
-    private static NCDayPhase GetPhase(int hour, int minute)
+    private static DayPhase GetPhase(int hour, int minute)
     {
         var totalMinutes = hour * 60 + minute;
         if (totalMinutes < 4 * 60)
-            return NCDayPhase.DeepNight;
+            return DayPhase.DeepNight;
         if (totalMinutes < 6 * 60)
-            return NCDayPhase.Night;
+            return DayPhase.Night;
         if (totalMinutes < 7 * 60)
-            return NCDayPhase.Dawn;
+            return DayPhase.Dawn;
         if (totalMinutes < 12 * 60)
-            return NCDayPhase.Morning;
+            return DayPhase.Morning;
         if (totalMinutes < 17 * 60)
-            return NCDayPhase.Day;
+            return DayPhase.Day;
         if (totalMinutes < 19 * 60)
-            return NCDayPhase.Afternoon;
+            return DayPhase.Afternoon;
         if (totalMinutes < 21 * 60)
-            return NCDayPhase.Evening;
+            return DayPhase.Evening;
         if (totalMinutes < 23 * 60)
-            return NCDayPhase.LateEvening;
-        return NCDayPhase.DeepNight;
+            return DayPhase.LateEvening;
+        return DayPhase.DeepNight;
     }
 
     private static double SecondsPerFullDay() => 86400.0;
 }
 
-public enum NCDayPhase
+public enum DayPhase
 {
     DeepNight,
     Night,
@@ -95,4 +95,4 @@ public enum NCDayPhase
     LateEvening,
 }
 
-public readonly record struct NCDayTimeInfo(int Hour, int Minute, double Normalized, NCDayPhase Phase, long DayNumber);
+public readonly record struct DayTimeInfo(int Hour, int Minute, double Normalized, DayPhase Phase, long DayNumber);

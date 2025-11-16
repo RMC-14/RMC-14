@@ -1,6 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
-using Content.Shared._NC14.RoundSeed;
+using Content.Shared._Forge.RoundSeed;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Robust.Server.GameStates;
@@ -11,9 +11,9 @@ using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Content.Server._NC14.RoundSeed;
+namespace Content.Server._Forge.RoundSeed;
 
-public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
+public sealed class RoundSeedSystem : SharedRoundSeedSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
@@ -80,11 +80,11 @@ public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
         var seedValue = GenerateSeedValue(seedText);
 
         var who = string.IsNullOrEmpty(by)
-            ? Loc.GetString("nc14-round-seed-system-actor-server")
+            ? Loc.GetString("round-seed-system-actor-server")
             : by;
 
         var logMessage = Loc.GetString(
-            "nc14-round-seed-system-log-queued-next",
+            "round-seed-system-log-queued-next",
             ("by", who),
             ("seedText", seedText),
             ("seedValue", seedValue));
@@ -97,12 +97,12 @@ public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
     {
         var logMessage = queued
             ? Loc.GetString(
-                "nc14-round-seed-system-log-seed-queued",
+                "round-seed-system-log-seed-queued",
                 ("roundId", roundId),
                 ("seedValue", seed),
                 ("seedText", sourceText ?? seed.ToString()))
             : Loc.GetString(
-                "nc14-round-seed-system-log-seed-generated",
+                "round-seed-system-log-seed-generated",
                 ("roundId", roundId),
                 ("seedValue", seed));
 
@@ -122,10 +122,10 @@ public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
         return BinaryPrimitives.ReadInt32LittleEndian(hash.AsSpan());
     }
 
-    private Entity<NCRoundSeedComponent> EnsureTracker()
+    private Entity<RoundSeedComponent> EnsureTracker()
     {
         if (_seedEntity is { } existing &&
-            TryComp(existing, out NCRoundSeedComponent? existingTracker))
+            TryComp(existing, out RoundSeedComponent? existingTracker))
         {
             return (existing, existingTracker);
         }
@@ -138,7 +138,7 @@ public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
         }
 
         var trackerEntity = SpawnSeedEntity();
-        var comp = EnsureComp<NCRoundSeedComponent>(trackerEntity);
+        var comp = EnsureComp<RoundSeedComponent>(trackerEntity);
         Dirty(trackerEntity, comp);
 
         _seedEntity = trackerEntity;
@@ -153,9 +153,9 @@ public sealed class NCRoundSeedSystem : SharedNCRoundSeedSystem
         return tracker;
     }
 
-    private Entity<NCRoundSeedComponent>? TryGetTracker()
+    private Entity<RoundSeedComponent>? TryGetTracker()
     {
-        var query = EntityQueryEnumerator<NCRoundSeedComponent>();
+        var query = EntityQueryEnumerator<RoundSeedComponent>();
         if (!query.MoveNext(out var tracker, out var trackerComponent))
             return null;
 

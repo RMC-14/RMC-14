@@ -1,24 +1,24 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._NC14.DayNight;
+namespace Content.Shared._Forge.DayNight;
 
 /// <summary>
 /// Marks a map to run a deterministic day/night light cycle driven by the round seed.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class NCDayNightCycleComponent : Component
+public sealed partial class DayNightCycleComponent : Component
 {
     /// <summary>
     /// Baseline duration of a full day/night cycle.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan BaseDuration = TimeSpan.FromMinutes(10);
+    public TimeSpan BaseDuration = TimeSpan.FromHours(1);
 
     /// <summary>
     /// Jitter applied to the duration (positive or negative).
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan DurationJitter = TimeSpan.FromMinutes(5);
+    public TimeSpan DurationJitter = TimeSpan.FromMinutes(10);
 
     /// <summary>
     /// Whether this cycle runs.
@@ -48,7 +48,7 @@ public sealed partial class NCDayNightCycleComponent : Component
     /// Current phase of the day.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public NCDayPhase Phase = NCDayPhase.Day;
+    public DayPhase Phase = DayPhase.Day;
 
     /// <summary>
     /// Normalized position in the cycle [0,1).

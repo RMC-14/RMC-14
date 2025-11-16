@@ -1,6 +1,6 @@
 using System;
-using Content.Server._NC14.RoundSeed;
-using Content.Shared._NC14.DayNight;
+using Content.Server._Forge.RoundSeed;
+using Content.Shared._Forge.DayNight;
 using Content.Shared.GameTicking;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
@@ -8,15 +8,15 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
-namespace Content.Server._NC14.DayNight;
+namespace Content.Server._Forge.DayNight;
 
 /// <summary>
-/// Drives the map light cycle for maps that opt-in via <see cref="NCDayNightCycleComponent"/>,
+/// Drives the map light cycle for maps that opt-in via <see cref="DayNightCycleComponent"/>,
 /// using the global round seed for deterministic timing.
 /// </summary>
-public sealed class NCDayNightCycleSystem : EntitySystem
+public sealed class DayNightCycleSystem : EntitySystem
 {
-    [Dependency] private readonly NCRoundSeedSystem _roundSeed = default!;
+    [Dependency] private readonly RoundSeedSystem _roundSeed = default!;
     [Dependency] private readonly SharedLightCycleSystem _lightCycle = default!;
 
     private double? _durationSample;
@@ -26,17 +26,17 @@ public sealed class NCDayNightCycleSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<NCDayNightCycleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<NCDayNightCycleComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<DayNightCycleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DayNightCycleComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => ResetSamples());
     }
 
-    private void OnMapInit(Entity<NCDayNightCycleComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<DayNightCycleComponent> ent, ref MapInitEvent args)
     {
         ApplyCycle(ent);
     }
 
-    private void OnStartup(Entity<NCDayNightCycleComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<DayNightCycleComponent> ent, ref ComponentStartup args)
     {
         ApplyCycle(ent);
     }
@@ -47,7 +47,7 @@ public sealed class NCDayNightCycleSystem : EntitySystem
         _offsetSample = null;
     }
 
-    private void ApplyCycle(Entity<NCDayNightCycleComponent> ent)
+    private void ApplyCycle(Entity<DayNightCycleComponent> ent)
     {
         if (!ent.Comp.Enabled)
             return;

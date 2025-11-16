@@ -1,12 +1,12 @@
 using System;
 
-namespace Content.Shared._NC14.RoundSeed;
+namespace Content.Shared._Forge.RoundSeed;
 
-public abstract class SharedNCRoundSeedSystem : EntitySystem
+public abstract class SharedRoundSeedSystem : EntitySystem
 {
     public bool TryGetSeed(out int seed)
     {
-        var query = EntityQueryEnumerator<NCRoundSeedComponent>();
+        var query = EntityQueryEnumerator<RoundSeedComponent>();
         while (query.MoveNext(out var roundSeed))
         {
             seed = roundSeed.Seed;

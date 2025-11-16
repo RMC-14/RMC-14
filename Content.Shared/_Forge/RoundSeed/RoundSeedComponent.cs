@@ -1,10 +1,10 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._NC14.RoundSeed;
+namespace Content.Shared._Forge.RoundSeed;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedNCRoundSeedSystem))]
-public sealed partial class NCRoundSeedComponent : Component
+[Access(typeof(SharedRoundSeedSystem))]
+public sealed partial class RoundSeedComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Seed;
