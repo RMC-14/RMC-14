@@ -33,6 +33,7 @@
   parent: RMCHeadsetShip
   id: RMCHeadsetProvostMarshal
   name: UNMC provost marshal headset
+  description: Issued only to provost marshals.
   components:
   - type: ContainerFill
     containers:
