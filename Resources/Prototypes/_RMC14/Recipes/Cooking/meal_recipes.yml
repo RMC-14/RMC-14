@@ -271,8 +271,8 @@
     RMCFoodMeatFish: 1
     FoodMealFries: 1
   reagents:
-    RMCBatter: 10
-    OilOlive: 5
+    RMCBatter: 5
+    Vinegar: 5
 
 - type: microwaveMealRecipe
   id: RecipeRMCFishSushi
