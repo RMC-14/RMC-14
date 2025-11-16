@@ -19,7 +19,6 @@ public sealed class PlanetMapLoadTests
         {
             Dirty = true,
             DummyTicker = false,
-            Connected = true,
             InLobby = true,
         });
 

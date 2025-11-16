@@ -117,5 +117,40 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
             _window.Tabs.AddChild(category);
             TabContainer.SetTabTitle(category, categoryName);
         }
+
+        _window.Buttons.DisposeAllChildren();
+        if (state.Dnd)
+        {
+            var disableDndButton = new Button
+            {
+                Text = Loc.GetString("phone-dnd-button"),
+                StyleClasses = { "OpenBoth", "Caution" },
+                ToolTip = Loc.GetString("phone-dnd-tooltip-enabled"),
+            };
+            disableDndButton.OnPressed += _ => SendPredictedMessage(new RMCTelephoneDndBuiMsg(false));
+            _window.Buttons.AddChild(disableDndButton);
+        }
+        else if (state.CanDnd)
+        {
+            var enableDndButton = new Button
+            {
+                Text = Loc.GetString("phone-dnd-button"),
+                StyleClasses = { "OpenBoth" },
+                ToolTip = Loc.GetString("phone-dnd-tooltip-disabled"),
+            };
+            enableDndButton.OnPressed += _ => SendPredictedMessage(new RMCTelephoneDndBuiMsg(true));
+            _window.Buttons.AddChild(enableDndButton);
+        }
+        else
+        {
+            var enableDndButton = new Button
+            {
+                Text = Loc.GetString("phone-dnd-button"),
+                StyleClasses = { "OpenBoth" },
+                ToolTip = Loc.GetString("phone-dnd-tooltip-locked"),
+                Disabled = true,
+            };
+            _window.Buttons.AddChild(enableDndButton);
+        }
     }
 }

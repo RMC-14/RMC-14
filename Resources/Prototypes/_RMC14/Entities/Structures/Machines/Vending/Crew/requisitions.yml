@@ -181,8 +181,8 @@
         amount: 2
       - id: RMCBeltHolsterRevolver
         amount: 5
-      #- id: M276 M82F Holster Rig
-      #  amount: 2
+      - id: RMCM82FHolster
+        amount: 2
       - id: RMCM276ShotgunShellLoadingRig
         amount: 10
       - id: CMBeltMortar
@@ -276,8 +276,8 @@
         amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
-      #- id: Welding Goggles
-      #  amount: 3
+      - id: RMCWeldingGoggles
+        amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
       - id: RMCPowerCellHigh
