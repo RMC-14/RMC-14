@@ -10,8 +10,11 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -489,6 +492,15 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
+        if (HasComp<XenoParasiteComponent>(target))
+            return false;
+        
+        if (HasComp<XenoFruitComponent>(target))
+            return false;
+
+        if (HasComp<XenoEggComponent>(target))
+            return false;
+
         if (_standing.IsDown(target))
             return false;
 
@@ -496,6 +508,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
+            return false;
+
+        if (size == RMCSizes.VerySmallXeno)
             return false;
 
         if (HasComp<XenoWeedsComponent>(target) || HasComp<XenoConstructComponent>(target))
