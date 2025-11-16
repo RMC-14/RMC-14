@@ -28,3 +28,24 @@
     - ProvostInspector
     - ProvostTeamLeader
     - ProvostAdvisor
+
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetProvostMarshal
+  name: UNMC provost marshal headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyProvostMarshal
+  - type: Sprite
+    state: mco_headset
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: ProvostTeamLeader
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector

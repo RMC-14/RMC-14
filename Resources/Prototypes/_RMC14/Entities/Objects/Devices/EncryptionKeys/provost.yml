@@ -23,3 +23,31 @@
     defaultChannel: Provost
   - type: Sprite
     state: stripped_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyProvostMarshal
+  name: provost marshal radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - Provost
+    - MarineSOF
+    - MarineHighCommand
+    - MarineCommand
+    - MarineMilitaryPolice
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineCommon
+    defaultChannel: Provost
+  - type: Sprite
+    state: stripped_key
