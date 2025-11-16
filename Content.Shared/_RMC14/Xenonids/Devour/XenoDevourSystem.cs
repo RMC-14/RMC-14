@@ -3,6 +3,8 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -493,6 +495,14 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-cant-now"), victim, xeno);
+
+            return false;
+        }
+
+        if (HasComp<SynthComponent>(victim) || HasComp<RMCTrainingDummyComponent>(victim))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-fake-host"), victim, xeno);
 
             return false;
         }
