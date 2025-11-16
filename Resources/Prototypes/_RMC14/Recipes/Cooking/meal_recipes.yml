@@ -271,7 +271,7 @@
     RMCFoodMeatFish: 1
     FoodMealFries: 1
   reagents:
-    RMCBatter: 20
+    RMCBatter: 10
     OilOlive: 5
 
 - type: microwaveMealRecipe
@@ -281,8 +281,10 @@
   time: 5
   group: Savory
   solids:
-    FoodRiceBoiled: 1
     RMCFoodMeatFish: 1
+  reagents:
+    Water: 5
+    Rice: 5
 
 #Cakes
 - type: microwaveMealRecipe

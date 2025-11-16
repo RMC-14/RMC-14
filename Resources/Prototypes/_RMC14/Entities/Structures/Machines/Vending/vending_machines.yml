@@ -775,6 +775,8 @@
       - id: FoodMeatChicken
         amount: 24
       - id: FoodMeatFish
+        amount: 18
+      - id: RMCFoodMeatFish
         amount: 12
       - id: FoodMeat
         amount: 24
