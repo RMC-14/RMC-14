@@ -293,14 +293,19 @@ public sealed class XenoDevourSystem : EntitySystem
             !TryComp<MeleeWeaponComponent>(weapon, out var melee))
             return;
 
-        //Do all melee weapon logic with our stuff - note it does not take into account melee multipliers - it just uses the damage from the item directly
-        var weaponDamage = _meleeWeapon.GetDamage(weapon.Value, devoured) * usuable.DamageMult;
+            DamageSpecifier totalDamage = _meleeWeapon.GetDamage(weapon.Value, devoured);
+            var bonusDamage = new DamageSpecifier();
+            var hitEvent = new MeleeHitEvent(new List<EntityUid> { container.Owner }, devoured.Owner, weapon.Value, totalDamage, null);
+            RaiseLocalEvent(weapon.Value, hitEvent, true);
+            if (hitEvent.BonusDamage != null)
+                totalDamage += hitEvent.BonusDamage;
+            totalDamage *= usuable.DamageMult;
 
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
         Dirty(weapon.Value, melee);
 
-        var damage = _damage.TryChangeDamage(container.Owner, weaponDamage, true, false, origin: devoured, tool: weapon);
+        var damage = _damage.TryChangeDamage(container.Owner, totalDamage, true, false, origin: devoured, tool: weapon);
 
         _audio.PlayPredicted(melee.HitSound, container.Owner.ToCoordinates(), devoured);
 
