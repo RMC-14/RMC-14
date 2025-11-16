@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed escape pods not exploding when it's launched over the maximum occupancy,
-      and not reopening the door.
-    type: Fix
-  id: 1978
-  time: '2025-07-09T00:26:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6967
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added squad markings for gloves.
     type: Add
   id: 1979
@@ -4699,5 +4691,12 @@
   id: 2478
   time: '2025-11-15T07:55:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7941
+- author: 0awful
+  changes:
+  - message: Requisitions can now dispense flare gun holsters from their vendors.
+    type: Add
+  id: 2479
+  time: '2025-11-15T23:52:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8068
 Name: RMC14
 Order: -1
