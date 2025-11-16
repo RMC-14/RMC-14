@@ -25,4 +25,34 @@ public sealed partial class NCDayNightCycleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
+
+    /// <summary>
+    /// Current simulated hour (0-23) on this map.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int Hour;
+
+    /// <summary>
+    /// Current simulated minute (0-59) on this map.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int Minute;
+
+    /// <summary>
+    /// Current simulated day number (starts at 1).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public long DayNumber = 1;
+
+    /// <summary>
+    /// Current phase of the day.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public NCDayPhase Phase = NCDayPhase.Day;
+
+    /// <summary>
+    /// Normalized position in the cycle [0,1).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float NormalizedTime;
 }
