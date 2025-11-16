@@ -569,6 +569,7 @@
     storageOpen: null
   - type: RotaryPhone
     category: Marine
+    canDnd: true
   - type: RotaryPhoneBackpack
   - type: UserInterface
     interfaces:

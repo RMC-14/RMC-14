@@ -84,6 +84,17 @@
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
 
+- type: entity
+  parent: RMCCabinetBase
+  id: RMCCabinetBaseUnanchored
+  suffix: Unanchored
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+
 # Colored
 - type: entity
   parent: CMClosetBase

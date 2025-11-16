@@ -129,14 +129,11 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 3
-        - ReagentId: Sugar
-          Quantity: 2 # Sprinkles
+        - ReagentId: RMCSprinkles
+          Quantity: 2
   - type: Item
     heldPrefix: pink
   - type: FlavorProfile
     flavors:
       - bread
       - sweet
-
-
-
