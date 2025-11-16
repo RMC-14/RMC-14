@@ -1,13 +1,14 @@
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
+using Content.Server._Forge.Temperature; // Forge - allow temperature controller to access map atmosphere
 
 namespace Content.Server.Atmos.Components;
 
 /// <summary>
 ///     Component that defines the default GasMixture for a map.
 /// </summary>
-[RegisterComponent, Access(typeof(SharedAtmosphereSystem))]
+[RegisterComponent, Access(typeof(SharedAtmosphereSystem), typeof(TemperatureControllerSystem))] // Forge - allow temp controller writes
 public sealed partial class MapAtmosphereComponent : SharedMapAtmosphereComponent
 {
     /// <summary>

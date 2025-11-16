@@ -45,3 +45,10 @@ dayphase-deep-night = Deep night
 dayphase-dawn = Dawn
 dayphase-morning = Morning
 dayphase-afternoon = Afternoon
+
+command-gettemperature-description = Show the current map temperature.
+command-gettemperature-help = Usage: gettemperature <mapId>
+command-gettemperature-usage = Usage: gettemperature <mapId>
+command-gettemperature-invalid-map = Invalid map id.
+command-gettemperature-no-controller = No temperature controller on this map.
+command-gettemperature-success = Temperature: {$kelvin} K ({$celsius} C), zone {$zone}

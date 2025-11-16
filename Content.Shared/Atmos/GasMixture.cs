@@ -67,6 +67,18 @@ namespace Content.Shared.Atmos
             }
         }
 
+        // Forge - allow temperature controller to modify immutable map atmosphere temperature
+        /// <summary>
+        /// Forces temperature change even for immutable mixtures.
+        /// Use only for map atmosphere temperature control.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetMapTemperature(float value)
+        {
+            DebugTools.Assert(!float.IsNaN(value));
+            _temperature = MathF.Min(MathF.Max(value, Atmospherics.TCMB), Atmospherics.Tmax);
+        }
+
         [DataField("volume")]
         [ViewVariables(VVAccess.ReadWrite)]
         public float Volume { get; set; }
