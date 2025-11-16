@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Added Flare Gun and Belt spawns to New Varadero, Sorokyne Strata and
-      Fiorina.
-    type: Add
-  id: 1980
-  time: '2025-07-09T00:29:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6965
 - author: Dygon
   changes:
   - message: Dropship fabricators can now print the "HPU-1 paradrop deployment system",
@@ -4699,5 +4691,24 @@
   id: 2480
   time: '2025-11-16T01:02:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8380
+- author: Arykh
+  changes:
+  - message: Added Focusing, Ketogenic, Nutritious, Hemogenic, Anticarcinogenic, Carcinogenic,
+      Toxic, Corrosive, Thermostabilizing, and Boosting properties!
+    type: Add
+  - message: Added Virus Food, Lipozine, and Generic Toxin!
+    type: Add
+  - message: Ethylredoxrazine can now turn ethanol into water!
+    type: Add
+  - message: Fixed Iron and Nutriment blood and hunger values being double the intended
+      value.
+    type: Fix
+  - message: Fixed Cyanide damage being double the intended amount.
+    type: Fix
+  - message: Vitamin and Protein now copy the effects of Nutriment.
+    type: Tweak
+  id: 2481
+  time: '2025-11-16T01:05:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8104
 Name: RMC14
 Order: -1
