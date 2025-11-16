@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added squad markings for gloves.
-    type: Add
-  id: 1979
-  time: '2025-07-09T00:27:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6975
 - author: J C Denton
   changes:
   - message: Added Flare Gun and Belt spawns to New Varadero, Sorokyne Strata and
@@ -4698,5 +4691,13 @@
   id: 2479
   time: '2025-11-15T23:52:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8068
+- author: Arykh
+  changes:
+  - message: Fixed not being able to perform CPR after a previous attempt fails, causing
+      the strip menu to open instead.
+    type: Fix
+  id: 2480
+  time: '2025-11-16T01:02:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8380
 Name: RMC14
 Order: -1
