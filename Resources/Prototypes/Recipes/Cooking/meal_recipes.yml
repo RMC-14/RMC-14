@@ -1880,14 +1880,14 @@
     FoodOnionSlice: 1
     FoodTomato: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe # Changed for RMC
   id: RecipeColdChili
   name: cold chili recipe
   result: FoodSoupChiliCold
   time: 5
   group: Soup
   reagents:
-    Nitrogen: 5
+    RMCNitrogen: 5
   solids:
     FoodSoupChiliHot: 1
 
