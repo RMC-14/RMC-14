@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: More lore descriptions ported.
-    type: Add
-  id: 1983
-  time: '2025-07-12T04:44:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6966
 - author: Dygon
   changes:
   - message: Applying barbed wire to a barricade now increases it's max health by
@@ -4700,5 +4693,17 @@
   id: 2483
   time: '2025-11-17T07:30:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8218
+- author: noctyrnal
+  changes:
+  - message: Added faction-specific versions of MREs.
+    type: Add
+  - message: Made minor adjustments to supply box sprites.
+    type: Tweak
+  - message: Fixed MRE supply boxes getting a white marking after being opened for
+      the first time.
+    type: Fix
+  id: 2484
+  time: '2025-11-17T07:33:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8221
 Name: RMC14
 Order: -1
