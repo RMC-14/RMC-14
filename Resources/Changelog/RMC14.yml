@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Applying barbed wire to a barricade now increases it's max health by
-      50.
-    type: Tweak
-  - message: Attempting to attack or tackle over a barricade from the front now has
-      a chance to make you attack the barricade instead. The chance of this occurring
-      ranges from 100% to 30%, depending on the barricade's current health.
-    type: Tweak
-  - message: Trying to leap or pounce over a barbed barricade will now stun you.
-    type: Tweak
-  - message: All leaps now ignore barricades without barbed wire.
-    type: Tweak
-  - message: Tail Stab is now a targeted action and requires you to click on your
-      target.
-    type: Tweak
-  - message: The grenadier armor's leap protection no longer blocks ravagers and praetorians.
-    type: Fix
-  id: 1984
-  time: '2025-07-12T04:52:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6699
-- author: Dygon
-  changes:
-  - message: Warrior's Lunge, Dancer's Impale and Dancer's Tail Trip now have a 1.5-second
-      cooldown if used on an invalid target.
-    type: Tweak
-  id: 1985
-  time: '2025-07-12T04:55:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6891
 - author: Vixting
   changes:
   - message: Added ghost previews for resin structures & when ordering construction.
@@ -4705,5 +4676,35 @@
   id: 2484
   time: '2025-11-17T07:33:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8221
+- author: PursuitInAshes
+  changes:
+  - message: '[PVE] Standard Welders (Received from the ship) no longer require eye
+      protection.'
+    type: Fix
+  id: 2485
+  time: '2025-11-17T08:27:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8262
+- author: PursuitInAshes
+  changes:
+  - message: UNMC Synthetics now spawn with the correct starting gear.
+    type: Fix
+  - message: Survivor Synthetics now spawn with a stack of metal in their survival
+      pouch instead of a flashlight.
+    type: Fix
+  - message: Removed the Experimental Meson Goggles from the synthetic auxiliary gear
+      rack.
+    type: Remove
+  - message: Survivor Synth Access is now matching parity. (Colony AA, Shipside Med
+      and Engineering)
+    type: Tweak
+  - message: Survivor Synth now starts with no IFF by default. (Previously UNMC IFF)
+    type: Tweak
+  - message: Synthetic Armor and Camo Variants to the synthetic equipment rack.
+    type: Add
+  - message: Synths are now immune to becoming zombies.
+    type: Fix
+  id: 2486
+  time: '2025-11-17T08:27:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8283
 Name: RMC14
 Order: -1
