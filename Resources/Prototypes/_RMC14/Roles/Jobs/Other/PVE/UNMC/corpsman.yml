@@ -30,6 +30,7 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

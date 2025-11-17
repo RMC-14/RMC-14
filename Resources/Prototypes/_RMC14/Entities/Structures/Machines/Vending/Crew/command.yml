@@ -377,6 +377,7 @@
       - id: CMJumpsuitCO
       - id: CMJumpsuitOperations
       - id: CMHeadCapCO
+      - id: CMHeadCapOfficer
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
