@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Synth;
@@ -34,6 +35,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
@@ -293,13 +295,28 @@ public sealed class XenoDevourSystem : EntitySystem
             !TryComp<MeleeWeaponComponent>(weapon, out var melee))
             return;
 
-            DamageSpecifier totalDamage = _meleeWeapon.GetDamage(weapon.Value, devoured);
-            var bonusDamage = new DamageSpecifier();
-            var hitEvent = new MeleeHitEvent(new List<EntityUid> { container.Owner }, devoured.Owner, weapon.Value, totalDamage, null);
-            RaiseLocalEvent(weapon.Value, hitEvent, true);
-            if (hitEvent.BonusDamage != null)
-                totalDamage += hitEvent.BonusDamage;
-            totalDamage *= usuable.DamageMult;
+        DamageSpecifier totalDamage = new DamageSpecifier(_meleeWeapon.GetDamage(weapon.Value, devoured));
+        foreach (var attachment in EntityManager.GetComponents<BonusMeleeDamageComponent>(weapon.Value))
+        {
+            if (attachment.BonusDamage != null)
+                totalDamage += attachment.BonusDamage;
+        }
+
+        foreach (var childTransform in EntityManager.EntityQuery<TransformComponent>())
+        {
+            var childUid = childTransform.Owner;
+            if (childTransform.ParentUid != weapon.Value)
+                continue;
+            if (TryComp<AttachableWeaponMeleeModsComponent>(childUid, out var modsComp))
+            {
+                foreach (var set in modsComp.Modifiers)
+                {
+                    if (set.BonusDamage != null)
+                        totalDamage += set.BonusDamage;
+                }
+            }
+        }
+        totalDamage *= usuable.DamageMult;
 
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
