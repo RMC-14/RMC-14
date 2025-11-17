@@ -707,7 +707,7 @@
     - id: RMCSyringeCase
     - id: CMPortableSurgicalBedSpawnFolded
     - id: CMCrowbar # TODO RMC14 tactical prybar
-    - id: CMMRE
+    - id: RMCMRETSE
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -782,7 +782,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: CMFireExtinguisherPortable
     - id: CMPackFlare
     - id: CMPackFlare
@@ -794,7 +794,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
@@ -815,7 +815,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: RMCMotionDetector # TODO RMC14: hacked MD
     - id: RMCSentryMiniSPP
 

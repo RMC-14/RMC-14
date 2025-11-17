@@ -11,7 +11,16 @@
       "name": "closed"
     },
     {
-      "name": "open"
+      "name": "open_meat"
+    },
+    {
+      "name": "open_meat_cheese"
+    },
+    {
+      "name": "open_bread"
+    },
+    {
+      "name": "open_pizza"
     },
     {
       "name": "inhand-right",
