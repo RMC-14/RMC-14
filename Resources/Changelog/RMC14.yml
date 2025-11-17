@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Magicocity1
-  changes:
-  - message: UN 55-FA Assault Sentry Flamer
-    type: Add
-  - message: UN 45-FM mini sentry
-    type: Add
-  - message: UN 60-FP Plasma Sentry
-    type: Add
-  id: 1996
-  time: '2025-07-12T05:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6176
-- author: t0wnshark
-  changes:
-  - message: added the FORECON Recon Synthetic role, not currently available in PVP
-    type: Add
-  id: 1997
-  time: '2025-07-12T05:22:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6934
-- author: noctyrnal
-  changes:
-  - message: Adjusted zombies for RMC14 use. They heal very fast, but stop healing
-      while on fire and are weak to fire. They also are now faster, can see in the
-      dark, and correctly target people as AI.
-    type: Tweak
-  - message: Added Black Goo and AntiZed, causing and curing zombie infections respectively.
-    type: Add
-  id: 1998
-  time: '2025-07-12T05:22:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6827
 - author: to4no_fix
   changes:
   - message: 'Added a megaphone that greatly increases the volume of your text in
@@ -4696,5 +4667,28 @@
   id: 2496
   time: '2025-11-17T09:42:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8322
+- author: PursuitInAshes
+  changes:
+  - message: The MP Riot Grenade Launcher now requires police 1 to fire.
+    type: Tweak
+  id: 2497
+  time: '2025-11-17T09:47:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8305
+- author: PursuitInAshes
+  changes:
+  - message: The SPP Deathsquad Medic now has the correct skill (Med 2) to use their
+      medical supplies.
+    type: Fix
+  id: 2498
+  time: '2025-11-17T09:48:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8302
+- author: PursuitInAshes
+  changes:
+  - message: Fireteam Leader Gear Racks now have Rangefinders (10 Pts) and Laser Designators
+      (15 pts) for purchase.
+    type: Add
+  id: 2499
+  time: '2025-11-17T09:47:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8284
 Name: RMC14
 Order: -1
