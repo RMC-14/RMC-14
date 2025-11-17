@@ -69,7 +69,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<PortableDialysisComponent, GotUnequippedHandEvent>(OnDialysisUnequippedHand);
         SubscribeLocalEvent<PortableDialysisComponent, ExaminedEvent>(OnDialysisExamine);
         SubscribeLocalEvent<PortableDialysisComponent, PowerCellSlotEmptyEvent>(OnDialysisPowerEmpty);
-        SubscribeLocalEvent<PortableDialysisComponent, GotEquippedHandEvent>(OnDialysisEquippedHand);
     }
 
     private void OnIVDripEntInserted(Entity<IVDripComponent> iv, ref EntInsertedIntoContainerMessage args)
@@ -372,11 +371,6 @@ public abstract class SharedIVDripSystem : EntitySystem
     private void OnDialysisPowerEmpty(Entity<PortableDialysisComponent> dialysis, ref PowerCellSlotEmptyEvent args)
     {
         DetachDialysis(dialysis, null, true, true);
-    }
-
-    private void OnDialysisEquippedHand(Entity<PortableDialysisComponent> dialysis, ref GotEquippedHandEvent args)
-    {
-        UpdateDialysisVisuals(dialysis);
     }
 
     private void OnDialysisUnequippedHand(Entity<PortableDialysisComponent> dialysis, ref GotUnequippedHandEvent args)
