@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Most headsets now have additional tracking options, accessible via the
-      Squad Tracker menu.
-    type: Add
-  - message: The honor guard kit now contains the honor guard radio headset.
-    type: Add
-  - message: Xenonids can now choose to track the queen, a hive leader or a tunnel
-      by right clicking their hive tracker.
-    type: Add
-  id: 1990
-  time: '2025-07-12T05:12:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6300
 - author: Vermidia
   changes:
   - message: Fixed berserker rav having 40 extra crit health.
@@ -4701,5 +4688,12 @@
   id: 2490
   time: '2025-11-17T09:34:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8225
+- author: Tyzemol
+  changes:
+  - message: Flamer can no longer stack multiple fires on the same tile
+    type: Fix
+  id: 2491
+  time: '2025-11-17T09:38:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8349
 Name: RMC14
 Order: -1
