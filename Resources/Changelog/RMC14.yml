@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed berserker rav having 40 extra crit health.
-    type: Fix
-  id: 1991
-  time: '2025-07-12T05:13:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6994
-- author: noctyrnal
-  changes:
-  - message: Added peregrine handcannons! These can rarely be found in colonies, and
-      the CO can take the "Winter Wyvern" handcannon as a secondary
-    type: Add
-  id: 1992
-  time: '2025-07-12T05:14:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6982
 - author: Dutch-VanDerLinde
   changes:
   - message: Added random rare items that civilian survivors spawn with.
@@ -4695,5 +4680,23 @@
   id: 2491
   time: '2025-11-17T09:38:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8349
+- author: CyberTropic
+  changes:
+  - message: Changed map vote results display.
+    type: Tweak
+  id: 2492
+  time: '2025-11-17T09:40:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8254
+- author: CyberTropic
+  changes:
+  - message: Added new crates to Requisitions.
+    type: Add
+  - message: Pacman generators are constructable, but not functional.
+    type: Add
+  - message: Fortunes can fit inside helmets.
+    type: Fix
+  id: 2493
+  time: '2025-11-17T09:40:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8258
 Name: RMC14
 Order: -1
