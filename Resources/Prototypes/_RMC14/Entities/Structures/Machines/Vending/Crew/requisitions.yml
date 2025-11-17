@@ -503,6 +503,9 @@
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazineRifleM4SPRExt
+        name: Magazine Box (Ext M4SPR x 12)
+        box: CMMagazineRifleM4SPRExt
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
