@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Folded keffiyehs no longer hide your hair and your head top / side markings.
-    type: Fix
-  id: 2012
-  time: '2025-07-14T06:18:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7025
-- author: noctyrnal
-  changes:
   - message: Xenonid emotes now have a cooldown.
     type: Fix
   id: 2013
@@ -4629,5 +4622,14 @@
   id: 2512
   time: '2025-11-17T10:15:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8420
+- author: Ian321
+  changes:
+  - message: Added M13 AP and extended AP magazines to requisitions.
+    type: Add
+  - message: Removed M13 drum magazines from requisitions.
+    type: Remove
+  id: 2513
+  time: '2025-11-17T10:16:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8374
 Name: RMC14
 Order: -1
