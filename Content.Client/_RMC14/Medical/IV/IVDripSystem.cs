@@ -102,11 +102,11 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var percent = dialysis.Comp.BatteryChargePercent;
         var batteryState = percent switch
         {
-            >= 85 => "battery100",
-            >= 60 => "battery85",
-            >= 45 => "battery60",
-            >= 30 => "battery45",
-            >= 15 => "battery30",
+            >= 86 => "battery100",
+            >= 61 => "battery85",
+            >= 46 => "battery60",
+            >= 31 => "battery45",
+            >= 16 => "battery30",
             >= 1 => "battery15",
             _ => "battery0"
         };
