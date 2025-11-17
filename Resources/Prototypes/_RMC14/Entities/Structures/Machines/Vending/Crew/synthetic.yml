@@ -330,10 +330,15 @@
         points: 15
       - id: RMCTelescopicBaton
         points: 15
-      - id: CMWebbingSurgicalBlue
-        points: 15
       - id: CMWebbingSurgicalGreen
         points: 15
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      # Surgical Drop Pouch (Green) - 15 Points
+      # Surgical Drop Pouch (Blue) - 15 Points
+      # Surgical Drop Pouch (Black) - 15 Points
+      # Tool Webbing (Not small) - 15 Points
+      # Tool Drop Pouch (Not small) - 15 Points
       - id: CMSatchelMarineLogistics
         points: 15
       - id: RMCSatchelMarineIntelChestrig
