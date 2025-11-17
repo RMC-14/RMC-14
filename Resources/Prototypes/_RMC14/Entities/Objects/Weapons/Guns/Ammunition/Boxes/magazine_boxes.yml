@@ -320,9 +320,9 @@
     - state: supply_lid_small_closed # "size"_lid - Base Colour
       map: [ "lid" ]
       color: "#887b67"
-    - state: rifle_lid_marking # "size"_lid_marking - Type Colour
+    - state: supply_lid_small_closed_marking # "size"_lid - Base Colour
       map: [ "lid_marking" ]
-      color: "#8888ff"
+      color: "#887b67"
   - type: GenericVisualizer
     visuals:
       enum.DeployableItemVisuals.Deployed:

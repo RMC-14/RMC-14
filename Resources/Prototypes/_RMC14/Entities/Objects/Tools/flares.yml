@@ -156,7 +156,7 @@
       endValue: 1.0
 
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxPackFlareEmpty
   name: box of M94 flare packs (x10)
   description: A box of M94 marking flare packs, to brighten up your day.
@@ -175,17 +175,20 @@
         - CMFlarePack
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#646a3c"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_flare
+    - state: supply_box_small_flare
       color: "#646a3c"
-    - state: supply_box_flare_colour
+    - state: supply_box_small_flare_colour
       color: "#f0c16f"
-    - state: supply_lid_closed
+    - state: supply_lid_small_closed
       map: [ "lid" ]
+      color: "#646a3c"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
       color: "#646a3c"
 
 - type: entity
@@ -197,7 +200,7 @@
     startingItem: CMPackFlare
 
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxPackFlareCASEmpty
   name: box of M89-S flare packs (x10)
   description: A box of M89 signal flare packs, to mark up the way.
@@ -216,17 +219,20 @@
         - RMCPackFlareCAS
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#646a3c"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_flare
+    - state: supply_box_small_flare
       color: "#646a3c"
-    - state: supply_box_flare_colour
+    - state: supply_box_small_flare_colour
       color: "#f06f6f"
-    - state: supply_lid_closed
+    - state: supply_lid_small_closed
       map: [ "lid" ]
+      color: "#646a3c"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
       color: "#646a3c"
 
 - type: entity
