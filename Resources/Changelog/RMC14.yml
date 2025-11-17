@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Glass sheets no longer let you place upstream glass tiles.
-    type: Fix
-  id: 2020
-  time: '2025-07-20T09:12:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7038
 - author: Dutch-VanDerLinde
   changes:
   - message: Added the weedkiller grenade, metal foam grenade for scientist survivors.
@@ -4646,5 +4639,14 @@
   id: 2520
   time: '2025-11-17T11:50:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8398
+- author: x5tink
+  changes:
+  - message: Added SMO Admeme Plushie
+    type: Add
+  - message: Liliana Patron Figurine
+    type: Tweak
+  id: 2521
+  time: '2025-11-17T12:12:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8394
 Name: RMC14
 Order: -1
