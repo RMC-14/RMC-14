@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Content.Server._Forge.RoundSeed;
 
-public sealed class RoundSeedSystem : SharedRoundSeedSystem
+public sealed class CFRoundSeedSystem : CFSharedRoundSeedSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
@@ -113,10 +113,10 @@ public sealed class RoundSeedSystem : SharedRoundSeedSystem
         return BinaryPrimitives.ReadInt32LittleEndian(hash.AsSpan());
     }
 
-    private Entity<RoundSeedComponent> EnsureTracker()
+    private Entity<CFRoundSeedComponent> EnsureTracker()
     {
         if (_seedEntity is { } existing &&
-            TryComp(existing, out RoundSeedComponent? existingTracker))
+            TryComp(existing, out CFRoundSeedComponent? existingTracker))
         {
             return (existing, existingTracker);
         }
@@ -129,7 +129,7 @@ public sealed class RoundSeedSystem : SharedRoundSeedSystem
         }
 
         var trackerEntity = SpawnSeedEntity();
-        var comp = EnsureComp<RoundSeedComponent>(trackerEntity);
+        var comp = EnsureComp<CFRoundSeedComponent>(trackerEntity);
         Dirty(trackerEntity, comp);
 
         _seedEntity = trackerEntity;
@@ -144,9 +144,9 @@ public sealed class RoundSeedSystem : SharedRoundSeedSystem
         return tracker;
     }
 
-    private Entity<RoundSeedComponent>? TryGetTracker()
+    private Entity<CFRoundSeedComponent>? TryGetTracker()
     {
-        var query = EntityQueryEnumerator<RoundSeedComponent>();
+        var query = EntityQueryEnumerator<CFRoundSeedComponent>();
         if (!query.MoveNext(out var tracker, out var trackerComponent))
             return null;
 

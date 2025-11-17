@@ -2,11 +2,11 @@ using System;
 
 namespace Content.Shared._Forge.RoundSeed;
 
-public abstract class SharedRoundSeedSystem : EntitySystem
+public abstract class CFSharedRoundSeedSystem : EntitySystem
 {
     public bool TryGetSeed(out int seed)
     {
-        var query = EntityQueryEnumerator<RoundSeedComponent>();
+        var query = EntityQueryEnumerator<CFRoundSeedComponent>();
         while (query.MoveNext(out var roundSeed))
         {
             seed = roundSeed.Seed;

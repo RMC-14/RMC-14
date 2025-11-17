@@ -146,8 +146,8 @@ entities:
   entities:
   - uid: 1
     components:
-    - type: DayNightCycle
-    - type: TemperatureController
+    - type: CFDayNightCycle
+    - type: CFTemperatureController
       zone: Desert
     - type: MapLight
     - type: LightCycle

@@ -4,17 +4,17 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Forge.Temperature;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class TemperatureControllerComponent : Component
+public sealed partial class CFTemperatureControllerComponent : Component
 {
     /// <summary>
     /// Temperature zone that determines temperature parameters.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TemperatureZone Zone = TemperatureZone.Temperate;
+    public CFTemperatureZone Zone = CFTemperatureZone.Temperate;
 }
 
 [Serializable, NetSerializable]
-public enum TemperatureZone : byte
+public enum CFTemperatureZone : byte
 {
     Temperate = 1,
     Desert = 2,

@@ -7,15 +7,15 @@ using Robust.Shared.Console;
 namespace Content.Server._Forge.RoundSeed;
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class SetRoundSeedCommand : LocalizedEntityCommands
+public sealed class CFSetRoundSeedCommand : LocalizedEntityCommands
 {
-    public override string Command => "setroundseed";
+    public override string Command => "cfsetroundseed";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
         {
-            shell.WriteError(LocalizationManager.GetString("command-setroundseed-usage"));
+            shell.WriteError(LocalizationManager.GetString("command-cfsetroundseed-usage"));
             return;
         }
 
@@ -23,7 +23,7 @@ public sealed class SetRoundSeedCommand : LocalizedEntityCommands
 
         if (string.IsNullOrWhiteSpace(seedText))
         {
-            shell.WriteError(LocalizationManager.GetString("command-setroundseed-usage"));
+            shell.WriteError(LocalizationManager.GetString("command-cfsetroundseed-usage"));
             return;
         }
 
@@ -31,17 +31,17 @@ public sealed class SetRoundSeedCommand : LocalizedEntityCommands
 
         if (ticker.RunLevel != GameRunLevel.PreRoundLobby)
         {
-            shell.WriteError(LocalizationManager.GetString("command-setroundseed-not-in-lobby"));
+            shell.WriteError(LocalizationManager.GetString("command-cfsetroundseed-not-in-lobby"));
             return;
         }
 
         var actor = shell.Player != null
             ? shell.Player.Name
-            : LocalizationManager.GetString("command-setroundseed-server-console");
+            : LocalizationManager.GetString("command-cfsetroundseed-server-console");
 
-        var roundSeed = EntityManager.System<RoundSeedSystem>();
+        var roundSeed = EntityManager.System<CFRoundSeedSystem>();
         roundSeed.SetNextSeed(seedText, actor);
 
-        shell.WriteLine(LocalizationManager.GetString("command-setroundseed-success", ("seed", seedText)));
+        shell.WriteLine(LocalizationManager.GetString("command-cfsetroundseed-success", ("seed", seedText)));
     }
 }

@@ -2,6 +2,6 @@ using Content.Shared._Forge.RoundSeed;
 
 namespace Content.Client._Forge.RoundSeed;
 
-public sealed class RoundSeedSystem : SharedRoundSeedSystem
+public sealed class CFRoundSeedSystem : CFSharedRoundSeedSystem
 {
 }

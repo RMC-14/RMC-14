@@ -8,7 +8,7 @@ namespace Content.Server.Atmos.Components;
 /// <summary>
 ///     Component that defines the default GasMixture for a map.
 /// </summary>
-[RegisterComponent, Access(typeof(SharedAtmosphereSystem), typeof(TemperatureControllerSystem))] // Forge - allow temp controller writes
+[RegisterComponent, Access(typeof(SharedAtmosphereSystem), typeof(CFTemperatureControllerSystem))] // Forge - allow temp controller writes
 public sealed partial class MapAtmosphereComponent : SharedMapAtmosphereComponent
 {
     /// <summary>

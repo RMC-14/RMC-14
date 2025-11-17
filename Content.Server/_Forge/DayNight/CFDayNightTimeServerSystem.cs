@@ -5,11 +5,11 @@ using Robust.Shared.Timing;
 namespace Content.Server._Forge.DayNight;
 
 /// <summary>
-/// Server-side updater that writes the current day/time info into the DayNightCycleComponent for consumers.
+/// Server-side updater that writes the current day/time info into the CFDayNightCycleComponent for consumers.
 /// </summary>
-public sealed class DayNightTimeServerSystem : EntitySystem
+public sealed class CFDayNightTimeServerSystem : EntitySystem
 {
-    [Dependency] private readonly DayNightTimeSystem _timeSystem = default!;
+    [Dependency] private readonly CFDayNightTimeSystem _timeSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _nextUpdate;
@@ -25,7 +25,7 @@ public sealed class DayNightTimeServerSystem : EntitySystem
 
         _nextUpdate = curTime + TimeSpan.FromSeconds(1.0);
 
-        var query = EntityQueryEnumerator<DayNightCycleComponent, MapComponent>();
+        var query = EntityQueryEnumerator<CFDayNightCycleComponent, MapComponent>();
         while (query.MoveNext(out var uid, out var cycle, out var map))
         {
             if (!_timeSystem.TryGetTime(map.MapId, out var info))

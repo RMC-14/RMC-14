@@ -7,7 +7,7 @@ namespace Content.Shared._Forge.DayNight;
 /// Marks a map to run a deterministic day/night light cycle driven by the round seed.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class DayNightCycleComponent : Component
+public sealed partial class CFDayNightCycleComponent : Component
 {
     /// <summary>
     /// Baseline duration of a full day/night cycle.
@@ -49,7 +49,7 @@ public sealed partial class DayNightCycleComponent : Component
     /// Current phase of the day.
     /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    public DayPhase Phase = DayPhase.Day;
+    public CFDayPhase Phase = CFDayPhase.Day;
 
     /// <summary>
     /// Normalized position in the cycle [0,1).

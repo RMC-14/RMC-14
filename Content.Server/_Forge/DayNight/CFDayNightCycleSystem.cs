@@ -11,12 +11,12 @@ using Robust.Shared.Map.Components;
 namespace Content.Server._Forge.DayNight;
 
 /// <summary>
-/// Drives the map light cycle for maps that opt-in via <see cref="DayNightCycleComponent"/>,
+/// Drives the map light cycle for maps that opt-in via <see cref="CFDayNightCycleComponent"/>,
 /// using the global round seed for deterministic timing.
 /// </summary>
-public sealed class DayNightCycleSystem : EntitySystem
+public sealed class CFDayNightCycleSystem : EntitySystem
 {
-    [Dependency] private readonly RoundSeedSystem _roundSeed = default!;
+    [Dependency] private readonly CFRoundSeedSystem _roundSeed = default!;
     [Dependency] private readonly SharedLightCycleSystem _lightCycle = default!;
 
     private double? _durationSample;
@@ -26,12 +26,12 @@ public sealed class DayNightCycleSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DayNightCycleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DayNightCycleComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<CFDayNightCycleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CFDayNightCycleComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
     }
 
-    private void OnComponentRemove(Entity<DayNightCycleComponent> ent, ref ComponentRemove args)
+    private void OnComponentRemove(Entity<CFDayNightCycleComponent> ent, ref ComponentRemove args)
     {
         var target = GetTargetMap(ent.Owner);
         if (target is not EntityUid mapUid)
@@ -41,7 +41,7 @@ public sealed class DayNightCycleSystem : EntitySystem
         RemComp<LightCycleComponent>(mapUid);
     }
 
-    private void OnMapInit(Entity<DayNightCycleComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<CFDayNightCycleComponent> ent, ref MapInitEvent args)
     {
         ApplyCycle(ent);
     }
@@ -52,7 +52,7 @@ public sealed class DayNightCycleSystem : EntitySystem
         _offsetSample = null;
     }
 
-    private void ApplyCycle(Entity<DayNightCycleComponent> ent)
+    private void ApplyCycle(Entity<CFDayNightCycleComponent> ent)
     {
         if (!ent.Comp.Enabled)
             return;

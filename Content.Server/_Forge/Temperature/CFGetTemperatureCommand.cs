@@ -8,9 +8,9 @@ using Robust.Shared.Map;
 namespace Content.Server._Forge.Temperature;
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class GetTemperatureCommand : LocalizedEntityCommands
+public sealed class CFGetTemperatureCommand : LocalizedEntityCommands
 {
-    public override string Command => "gettemperature";
+    public override string Command => "cfgettemperature";
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
@@ -24,36 +24,36 @@ public sealed class GetTemperatureCommand : LocalizedEntityCommands
     {
         if (args.Length != 1)
         {
-            shell.WriteError(LocalizationManager.GetString("command-gettemperature-usage"));
+            shell.WriteError(LocalizationManager.GetString("command-cfgettemperature-usage"));
             return;
         }
 
         if (!TryParseMapId(args[0], out var mapId))
         {
-            shell.WriteError(LocalizationManager.GetString("command-gettemperature-invalid-map"));
+            shell.WriteError(LocalizationManager.GetString("command-cfgettemperature-invalid-map"));
             return;
         }
 
         if (!EntityManager.System<SharedMapSystem>().TryGetMap(mapId, out var mapUidNullable) || mapUidNullable is not EntityUid mapEntity)
         {
-            shell.WriteError(LocalizationManager.GetString("command-gettemperature-invalid-map"));
+            shell.WriteError(LocalizationManager.GetString("command-cfgettemperature-invalid-map"));
             return;
         }
 
-        TemperatureControllerComponent? tempCtrl;
+        CFTemperatureControllerComponent? tempCtrl;
         MapAtmosphereComponent? atm;
 
         if (!EntityManager.TryGetComponent(mapEntity, out tempCtrl) ||
             !EntityManager.TryGetComponent(mapEntity, out atm))
         {
-            shell.WriteError(LocalizationManager.GetString("command-gettemperature-no-controller"));
+            shell.WriteError(LocalizationManager.GetString("command-cfgettemperature-no-controller"));
             return;
         }
 
         var kelvin = atm.Mixture.Temperature;
         var celsius = kelvin - 273.15f;
 
-        shell.WriteLine(LocalizationManager.GetString("command-gettemperature-success",
+        shell.WriteLine(LocalizationManager.GetString("command-cfgettemperature-success",
             ("kelvin", kelvin.ToString("0.##")),
             ("celsius", celsius.ToString("0.##")),
             ("zone", tempCtrl.Zone.ToString())));

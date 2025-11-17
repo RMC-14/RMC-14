@@ -12,9 +12,9 @@ namespace Content.Server._Forge.Temperature;
 /// <summary>
 /// Adjusts map temperature based on day/night cycle, round seed and zone.
 /// </summary>
-public sealed class TemperatureControllerSystem : EntitySystem
+public sealed class CFTemperatureControllerSystem : EntitySystem
 {
-    [Dependency] private readonly RoundSeedSystem _roundSeed = default!;
+    [Dependency] private readonly CFRoundSeedSystem _roundSeed = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -23,7 +23,7 @@ public sealed class TemperatureControllerSystem : EntitySystem
     // Cache current day's jitter to avoid recreating Random every second
     private long _cachedDay = -1;
     private int _cachedSeed = -1;
-    private TemperatureZone _cachedZone;
+    private CFTemperatureZone _cachedZone;
     private float _cachedJitter;
 
     public override void Update(float frameTime)
@@ -37,7 +37,7 @@ public sealed class TemperatureControllerSystem : EntitySystem
 
         _nextUpdate = curTime + TimeSpan.FromSeconds(1.0);
 
-        var query = EntityQueryEnumerator<TemperatureControllerComponent, MapComponent, MapAtmosphereComponent, DayNightCycleComponent>();
+        var query = EntityQueryEnumerator<CFTemperatureControllerComponent, MapComponent, MapAtmosphereComponent, CFDayNightCycleComponent>();
         while (query.MoveNext(out var uid, out var tempCtrl, out var map, out var atmosphere, out var dayCycle))
         {
             if (atmosphere.Space)
@@ -78,19 +78,19 @@ public sealed class TemperatureControllerSystem : EntitySystem
         }
     }
 
-    private static (float Base, float Amplitude, float Jitter) GetZoneSettings(TemperatureZone zone)
+    private static (float Base, float Amplitude, float Jitter) GetZoneSettings(CFTemperatureZone zone)
     {
         return zone switch
         {
-            TemperatureZone.Temperate => (290f, 10f, 2f),
-            TemperatureZone.Desert => (300f, 18f, 3f),
-            TemperatureZone.Arctic => (270f, 8f, 2f),
-            TemperatureZone.Jungle => (303f, 12f, 2.5f),
+            CFTemperatureZone.Temperate => (290f, 10f, 2f),
+            CFTemperatureZone.Desert => (300f, 18f, 3f),
+            CFTemperatureZone.Arctic => (270f, 8f, 2f),
+            CFTemperatureZone.Jungle => (303f, 12f, 2.5f),
             _ => (290f, 10f, 2f),
         };
     }
 
-    private static int MakeSeed(int roundSeed, TemperatureZone zone, long dayNumber)
+    private static int MakeSeed(int roundSeed, CFTemperatureZone zone, long dayNumber)
     {
         unchecked
         {
