@@ -26,9 +26,9 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> coreLog = "ARESTabARESLogs";
-    private static readonly EntProtoId<RMCARESTabCategoryComponent> logCat = "ARESCategoryLogs";
-    private static readonly int logsShown = 12;
+    private static readonly EntProtoId<RMCARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
+    private static readonly EntProtoId<RMCARESTabCategoryComponent> LogCat = "ARESCategoryLogs";
+    private static readonly int LogsShown = 12;
 
     public HashSet<EntProtoId<RMCARESLogTypeComponent>> LogTypes { get; private set; } = [];
     public HashSet<EntProtoId<RMCARESTabCategoryComponent>> TabCategories { get; private set; } = [];
@@ -52,8 +52,12 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
     private void OnExternalShowLogs(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalShowLogs args)
     {
         ent.Comp.Logs.Clear();
-        if(_net.IsClient)
+        if (_net.IsClient)
             return;
+
+        if (args.Type == null)
+            return;
+
         if (!ent.Comp.ARESCore.HasValue ||
             !_core.PullARESLogs(ent.Comp.ARESCore.Value, args.Type, out var logs) || logs == null)
         {
@@ -65,7 +69,7 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
 
         ent.Comp.LogsLength = logs.Count;
 
-        ent.Comp.Logs = logs.SkipLast(args.Index*logsShown).TakeLast(logsShown).Reverse().ToList();
+        ent.Comp.Logs = logs.SkipLast(args.Index*LogsShown).TakeLast(LogsShown).Reverse().ToList();
         Dirty(ent);
     }
 
@@ -114,7 +118,7 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
         if (!_idCard.TryFindIdCard(args.Actor, out var idCard) || !TryComp<AccessComponent>(idCard, out var access) || !TryComp<ItemIFFComponent>(idCard, out var itemIff) || idCard.Comp.FullName == null || idCard.Comp._jobTitle == null || itemIff.Faction != ent.Comp.Faction)
             return;
 
-        _core.CreateARESLog(ent.Comp.Faction, coreLog, $"{idCard.Comp.FullName}'s ID card was used to log into the ARES system.");
+        _core.CreateARESLog(ent.Comp.Faction, CoreLog, $"{idCard.Comp.FullName}'s ID card was used to log into the ARES system.");
 
         ent.Comp.LoggedIn = true;
         ent.Comp.Accesses = access.Tags;
@@ -123,7 +127,7 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
         // logs are special...
         if (ent.Comp.ShowsLogs)
         {
-            ent.Comp.ShownCategories.Add(logCat);
+            ent.Comp.ShownCategories.Add(LogCat);
 
             //This compares the stored ID card data and determines what log types you can view.
             foreach (var logType in LogTypes)
