@@ -1,52 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: tunnel blips not displaying
-    type: Fix
-  id: 2000
-  time: '2025-07-12T05:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6688
-- author: t0wnshark
-  changes:
-  - message: Fixed a typo in the "personal locker" entity.
-    type: Fix
-  - message: Fixed a redundant item entry in the synthetic gear rack.
-    type: Fix
-  id: 2001
-  time: '2025-07-12T05:30:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6903
-- author: Vixting
-  changes:
-  - message: Added tactical map dynamical resize, zoom in and out with the scroll
-      wheel, panning around with right click.
-    type: Add
-  - message: Added being able to adjust the size of blips and the width of lines drawn
-      on the tactical map.
-    type: Add
-  - message: Added a tacmap switch between tactical & area labels, and the ability
-      to create custom tactical labels.
-    type: Add
-  - message: Added a mode to draw straight lines on the tacmap.
-    type: Add
-  - message: Added changing canvas label mode on the tacmap.
-    type: Add
-  - message: Added tacmap being able to centre on current blip location (live updates).
-    type: Add
-  - message: Tacmap queen in queen eye can click on map to jump to that location.
-    type: Add
-  - message: Fixed clicking on blip on the tacmap overriding drawing.
-    type: Fix
-  id: 2002
-  time: '2025-07-12T05:39:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6814
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Corporate colonists now rank up from corporate survivor time instead
-      of liaison time.
-    type: Tweak
-  id: 2003
-  time: '2025-07-12T05:47:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6684
 - author: DrSmugleaf
   changes:
   - message: Added cornmeal and mayonnaise to the mess tech vendor.
@@ -4681,5 +4633,34 @@
   id: 2500
   time: '2025-11-17T09:49:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8351
+- author: CatAndHats
+  changes:
+  - message: Fixed missing vehicles skills on a few roles.
+    type: Fix
+  id: 2501
+  time: '2025-11-17T09:57:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8231
+- author: CatAndHats
+  changes:
+  - message: Fixed the requisitions munition vendor lacking m4spr ext magazine boxes.
+    type: Fix
+  id: 2502
+  time: '2025-11-17T09:57:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8241
+- author: CatAndHats
+  changes:
+  - message: Fixed the new M13 AP magazine boxes not being in the cardboard construction
+      menu.
+    type: Fix
+  id: 2503
+  time: '2025-11-17T09:56:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8217
+- author: Vixting
+  changes:
+  - message: MD no longer pings if you share IFF
+    type: Add
+  id: 2504
+  time: '2025-11-17T09:58:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8366
 Name: RMC14
 Order: -1
