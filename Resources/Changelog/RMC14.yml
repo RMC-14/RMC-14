@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Dexalin Plus has been added to the pressurized chemical dispenser!
-    type: Add
-  id: 2017
-  time: '2025-07-20T09:08:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7040
 - author: NotInButIn
   changes:
   - message: SL squad management menu and supply drop console have become prettier
@@ -4646,5 +4639,12 @@
   id: 2517
   time: '2025-11-17T10:25:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8389
+- author: PursuitInAshes
+  changes:
+  - message: The FORECON CO no longer has all access by default.
+    type: Tweak
+  id: 2518
+  time: '2025-11-17T11:45:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8224
 Name: RMC14
 Order: -1
