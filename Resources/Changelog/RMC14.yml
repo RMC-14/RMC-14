@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Dropship fabricators can now print the "HPU-1 paradrop deployment system",
-      installing this module in a dropship allows it to open it's doors mid-flight
-      after selecting a viable paradrop target. Players that walk out of a dropship
-      that is mid-flight while a target is selected will land near it.
-    type: Add
-  - message: Throwing a crate out of the dropship will now make it land near the location
-      targeted by the pilot.
-    type: Add
-  - message: Requisitions vendors now stock parachutes, having a parachute equipped
-      will prevent you from falling to your death if you walk off a dropship mid-flight.
-      If no target is selected by the pilot when you fall out you will paradrop to
-      a random location.
-    type: Add
-  - message: When falling out of the dropship you can't land at underground areas
-      anymore.
-    type: Fix
-  id: 1981
-  time: '2025-07-09T00:37:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6901
 - author: DoguhanOzgurAkca
   changes:
   - message: Added new icon to area alert for unknown areas, by SigmaTheDragon.
@@ -4710,5 +4689,12 @@
   id: 2481
   time: '2025-11-16T01:05:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8104
+- author: Monotheonist
+  changes:
+  - message: Fixed skrell markings not showing up and their eyes being weird.
+    type: Fix
+  id: 2482
+  time: '2025-11-17T07:28:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8097
 Name: RMC14
 Order: -1
