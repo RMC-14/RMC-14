@@ -301,7 +301,7 @@
         amount: 30
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO
+      - id: RMCBackpackRTOPMC
         amount: 1
     - name: Belts
       entries:
@@ -537,7 +537,7 @@
         amount: 15
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO
+      - id: RMCBackpackRTOSPP
         amount: 1
     - name: Belts
       entries:
