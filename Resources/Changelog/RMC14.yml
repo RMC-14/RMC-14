@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new mag visuals for pistols, revolvers, and the M79.
-    type: Add
-  - message: Fixed the Beretta M92FS having errors.
-    type: Fix
-  id: 2016
-  time: '2025-07-20T08:59:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7024
 - author: Arykh
   changes:
   - message: Dexalin Plus has been added to the pressurized chemical dispenser!
@@ -4648,5 +4639,12 @@
   id: 2516
   time: '2025-11-17T10:24:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8393
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed Basira-Armstrong magazines being medium instead of small sized.
+    type: Fix
+  id: 2517
+  time: '2025-11-17T10:25:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8389
 Name: RMC14
 Order: -1
