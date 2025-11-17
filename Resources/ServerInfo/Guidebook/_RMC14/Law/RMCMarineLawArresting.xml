@@ -4,20 +4,23 @@
   Should the warship get boarded by a hostile force, no arrests should be made unless the person presents a danger to the warship and/or its personnel.
 
   - Any orders given by any personnel who are legally detained or facing charges are considered void until the charges are cleared, the brig time is served, or the detention is resolved.
+  - Always consider first if an arrest is actually needed to resolve a conflict. Arresting a doctor immediately for [bold]Neglect of Duty[/bold] will not make medical duties be performed more efficiently since they would be in the brig - but if they actually refuse to do their duties, then it would make sense to perform an arrest.
 
-  ## Officer Ordered Arrests
-  Should an Officer of the UNMC order an arrest for a crime, MPs MUST arrest that person.
-  - Only the [color=#008000][bold]Commander[/bold][/color] [italic](not a [color=#90EE90][bold]Duty Officer[/bold][/color])[/italic] and [color=#8B0000][bold]Chief MP[/bold][/color] can Officer order an arrest on an MP.
-  - They may arrest and hold that person for ten minutes after they have reached the brig while they gather evidence.
-  - Should the suspect be declared innocent of all accused crimes, the requesting officer may incur a Prevarication charge. The time for any crimes the suspect committed as a result of the arrest must still be served, however.
-  - Before the suspect is detained, the Officer may rescind the order.
-  - In the case of [bold]officer ordered arrests[/bold] the [color=#8B0000][bold]Chief MP[/bold][/color] or [color=#008000][bold]Commander[/bold][/color] may choose to assign an NJP over the initial charge (where valid).
+  ## Investigative Detainment
+  Unless an investigation becomes an arrest, a suspect being investigated should not be moved away from their duties, such as the frontline, but should still be kept relatively safe.
+  - [color=#ff000d][bold]MP[/bold][/color] may detain and physically restrain a suspect, with reasonable suspicion that they are involved in a crime, for up to 10 minutes to gather evidence and witness testimony.
+  - This time used also carries over to an arrest, which will not grant an extra 10 minutes.
+  - If these 10 minutes pass during the investigation, the suspect is to be immediately released if not found guilty of any crimes. If found guilty of crimes, they must still not be detained longer than 10 minutes, and be processed into arresting and charging procedure with reasonable speed.
+  - Should the suspect be found innocent of all accused crimes, the suspect should be released, and all investigations being done by [color=#ff000d][bold]MP[/bold][/color] ended.
+  - The [color=#8B0000][bold]Chief MP[/bold][/color] may order the release of a suspect under Investigative Detainment.
+  - Fleeing an [bold]Investigative Detainment[/bold] is considered [bold]Resisting Arrest[/bold]
 
   ## Arresting a Suspect
   [italic]These arrests can be performed anywhere on the warship.[/italic]
   - Take down the Suspect if they resist and securely restrain them.
   - Move the Suspect to a holding cell.
   - Continue to [bold]charging procedure[/bold].
+  - A suspect must be arrested and charged within 10 minutes. Any longer than this without good reason is considered [bold]Neglect of Duty[/bold] by whoever is most responsible for the delay.
 
   ## Arresting MP
   - The [color=#8B0000][bold]Chief MP[/bold][/color] can only be arrested if approved by the [color=#008000][bold]Commander[/bold][/color] or [color=#ffa500][bold]Provost Marshal Office[/bold][/color].
