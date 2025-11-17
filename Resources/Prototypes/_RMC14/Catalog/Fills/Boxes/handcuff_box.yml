@@ -23,6 +23,9 @@
         amount: 10
   - type: Item
     size: Small
+  - type: Tag
+    tags:
+    - RMCBoxZipties
 
 - type: Tag
   id: RMCBoxZipties
