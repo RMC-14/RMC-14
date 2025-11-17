@@ -94,6 +94,8 @@
   id: RMCMagazineRifleHunting
   name: "Basira-Armstrong magazine (6.5mm)"
   components:
+  - type: Item
+    size: Small
   - type: Tag
     tags:
     - CMMagazineRifle
