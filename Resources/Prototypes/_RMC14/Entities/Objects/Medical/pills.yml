@@ -237,7 +237,7 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-imidazoline
-    
+
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity
