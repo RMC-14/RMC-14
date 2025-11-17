@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: to4no_fix
-  changes:
-  - message: 'Added a megaphone that greatly increases the volume of your text in
-      speech bubbles and also makes a special sound when used! Believe, you can''t
-      help but notice a megaphone user. The Megaphone has been added to the Commanding
-      Officer Essentials Kit, the CO and Quartermaster closets, and can be found in
-      the following locations on Almayer: Center of the Hangar; Medbay Reception;
-      Center of Briefroom; CIC; CMO Room. The megaphone will also be added to planetary
-      maps in the future.'
-    type: Add
-  - message: Fixed a bug related to the fact that in speech bubbles without names
-      the text of the squad leader was not enlarged.
-    type: Fix
-  id: 1999
-  time: '2025-07-12T05:27:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6562
 - author: Vixting
   changes:
   - message: tunnel blips not displaying
@@ -4690,5 +4674,12 @@
   id: 2499
   time: '2025-11-17T09:47:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8284
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed mice being replaced incorrectly in chat when said by xenos.
+    type: Fix
+  id: 2500
+  time: '2025-11-17T09:49:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8351
 Name: RMC14
 Order: -1
