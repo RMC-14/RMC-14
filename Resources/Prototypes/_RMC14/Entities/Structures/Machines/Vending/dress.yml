@@ -56,17 +56,17 @@
     # Command
     - name: Officer
       takeAll: RMCDresser
-      # ranks:
-      # - RMCRankWarrantOfficer
-      # - RMCRankChiefWarrantOfficer
-      # - RMCRankSecondLT
-      # - RMCRankFirstLT
-      # - RMCRankCaptain
-      # - RMCRankMajor
-      # - RMCRankLieutenantColonel
-      # - RMCRankColonel
-      # - RMCRankBrigadierGeneral
-      # - RMCRankMajorGeneral
+      ranks:
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
       entries:
       - id: CMJumpsuitOperations
       - id: CMHeadCapPeakedService
@@ -95,17 +95,17 @@
       takeAll: RMCDresser
       jobs:
       - CMCommandingOfficer
-      # ranks:
-      # - RMCRankLieutenantColonel
-      # - RMCRankColonel
+      ranks:
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
       entries:
       - id: CMHeadBeretCOLtCol
     - name: Commanding Officer (Colonel)
       takeAll: RMCDresser
       jobs:
       - CMCommandingOfficer
-      # ranks:
-      # - RMCRankColonel
+      ranks:
+      - RMCRankColonel
       entries:
       - id: CMHeadBeretCOCol
     - name: Ceremonial Weapon
@@ -427,29 +427,29 @@
     # Service
     - name: Service Uniform
       takeAll: RMCDresser
-      # ranks:
-      # - RMCRankRecruit
-      # - RMCRankPrivate
-      # - RMCRankPrivateFirstClass
-      # - RMCRankLanceCorporal
-      # - RMCRankCorporal
-      # - RMCRankSergeant
-      # - RMCRankStaffSergeant
-      # - RMCRankGunnerySergeant
-      # - RMCRankMasterSergeant
-      # - RMCRankFirstSergeant
-      # - RMCRankMasterGunnerySergeant
-      # - RMCRankSergeantMajor
-      # - RMCRankWarrantOfficer
-      # - RMCRankChiefWarrantOfficer
-      # - RMCRankSecondLT
-      # - RMCRankFirstLT
-      # - RMCRankCaptain
-      # - RMCRankMajor
-      # - RMCRankLieutenantColonel
-      # - RMCRankColonel
-      # - RMCRankBrigadierGeneral
-      # - RMCRankMajorGeneral
+      ranks:
+      - RMCRankRecruit
+      - RMCRankPrivate
+      - RMCRankPrivateFirstClass
+      - RMCRankLanceCorporal
+      - RMCRankCorporal
+      - RMCRankSergeant
+      - RMCRankStaffSergeant
+      - RMCRankGunnerySergeant
+      - RMCRankMasterSergeant
+      - RMCRankFirstSergeant
+      - RMCRankMasterGunnerySergeant
+      - RMCRankSergeantMajor
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
       entries:
       - id: RMCUniformCaseService
       - id: RMCHeadCapPatrol
@@ -457,39 +457,39 @@
     # Full Dress
     - name: Enlisted Dress Uniform
       takeAll: RMCDresser
-      # ranks:
-      # - RMCRankRecruit
-      # - RMCRankPrivate
-      # - RMCRankPrivateFirstClass
-      # - RMCRankLanceCorporal
+      ranks:
+      - RMCRankRecruit
+      - RMCRankPrivate
+      - RMCRankPrivateFirstClass
+      - RMCRankLanceCorporal
       entries:
       - id: RMCUniformCaseDressEnlisted
     - name: NCO Dress Uniform
       takeAll: RMCDresser
-      # ranks:
-      # - RMCRankCorporal
-      # - RMCRankSergeant
-      # - RMCRankStaffSergeant
-      # - RMCRankGunnerySergeant
-      # - RMCRankMasterSergeant
-      # - RMCRankFirstSergeant
-      # - RMCRankMasterGunnerySergeant
-      # - RMCRankSergeantMajor
+      ranks:
+      - RMCRankCorporal
+      - RMCRankSergeant
+      - RMCRankStaffSergeant
+      - RMCRankGunnerySergeant
+      - RMCRankMasterSergeant
+      - RMCRankFirstSergeant
+      - RMCRankMasterGunnerySergeant
+      - RMCRankSergeantMajor
       entries:
       - id: RMCUniformCaseDressNCO
     - name: Officer Dress Uniform
       takeAll: RMCDresser
-      # ranks:
-      # - RMCRankWarrantOfficer
-      # - RMCRankChiefWarrantOfficer
-      # - RMCRankSecondLT
-      # - RMCRankFirstLT
-      # - RMCRankCaptain
-      # - RMCRankMajor
-      # - RMCRankLieutenantColonel
-      # - RMCRankColonel
-      # - RMCRankBrigadierGeneral
-      # - RMCRankMajorGeneral
+      ranks:
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
       entries:
       - id: RMCUniformCaseDressOfficer
 
