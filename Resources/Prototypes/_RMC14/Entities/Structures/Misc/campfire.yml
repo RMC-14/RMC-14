@@ -38,3 +38,5 @@
     node: start
   - type: PointLight
     radius: 5
+    node: Campfire
+  - type: RMCMesonsNonviewable

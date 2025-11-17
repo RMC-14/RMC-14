@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: to4no_fix
-  changes:
-  - message: Fixed not being able to give gibbed marines medals.
-    type: Fix
-  id: 1989
-  time: '2025-07-12T05:08:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6629
-- author: Dygon
-  changes:
-  - message: Most headsets now have additional tracking options, accessible via the
-      Squad Tracker menu.
-    type: Add
-  - message: The honor guard kit now contains the honor guard radio headset.
-    type: Add
-  - message: Xenonids can now choose to track the queen, a hive leader or a tunnel
-      by right clicking their hive tracker.
-    type: Add
-  id: 1990
-  time: '2025-07-12T05:12:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6300
-- author: Vermidia
-  changes:
-  - message: Fixed berserker rav having 40 extra crit health.
-    type: Fix
-  id: 1991
-  time: '2025-07-12T05:13:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6994
-- author: noctyrnal
-  changes:
-  - message: Added peregrine handcannons! These can rarely be found in colonies, and
-      the CO can take the "Winter Wyvern" handcannon as a secondary
-    type: Add
-  id: 1992
-  time: '2025-07-12T05:14:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6982
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added random rare items that civilian survivors spawn with.
-    type: Add
-  id: 1993
-  time: '2025-07-12T05:15:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6985
-- author: FarmWizard
-  changes:
-  - message: Added the Shotgun Choke attachment.
-    type: Add
-  id: 1994
-  time: '2025-07-12T05:19:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6960
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new health icons for synths
-    type: Add
-  - message: Fixed suicided marines appearing as revivable on the health hud
-    type: Fix
-  id: 1995
-  time: '2025-07-12T05:19:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6950
 - author: Magicocity1
   changes:
   - message: UN 55-FA Assault Sentry Flamer
@@ -4701,5 +4643,58 @@
   id: 2489
   time: '2025-11-17T08:33:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8356
+- author: CatAndHats
+  changes:
+  - message: Added new lobby art, Running From Ravager by trashycinder!
+    type: Add
+  id: 2490
+  time: '2025-11-17T09:34:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8225
+- author: Tyzemol
+  changes:
+  - message: Flamer can no longer stack multiple fires on the same tile
+    type: Fix
+  id: 2491
+  time: '2025-11-17T09:38:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8349
+- author: CyberTropic
+  changes:
+  - message: Changed map vote results display.
+    type: Tweak
+  id: 2492
+  time: '2025-11-17T09:40:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8254
+- author: CyberTropic
+  changes:
+  - message: Added new crates to Requisitions.
+    type: Add
+  - message: Pacman generators are constructable, but not functional.
+    type: Add
+  - message: Fortunes can fit inside helmets.
+    type: Fix
+  id: 2493
+  time: '2025-11-17T09:40:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8258
+- author: CyberTropic
+  changes:
+  - message: Fixed wall weeds staying around when the weeded wall is removed.
+    type: Fix
+  id: 2494
+  time: '2025-11-17T09:41:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8293
+- author: PursuitInAshes
+  changes:
+  - message: The XM40 no longer has a floating pixel when wielded.
+    type: Fix
+  id: 2495
+  time: '2025-11-17T09:43:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8288
+- author: CyberTropic
+  changes:
+  - message: Added visual IV drip connections.
+    type: Add
+  id: 2496
+  time: '2025-11-17T09:42:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8322
 Name: RMC14
 Order: -1
