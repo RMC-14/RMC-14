@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added cornmeal and mayonnaise to the mess tech vendor.
-    type: Add
-  - message: Added admin logs for automated vendors, round end shoutouts, and xeno
-      nesting.
-    type: Add
-  - message: Added system for custom chems and implemented Neogenetic, Anticorrosive,
-      Antitoxic and Oxygenating properties. This shouldn't change anything in-game
-      yet, if it does report it as a bug. Chemicals using the new system will display
-      their overdoses, critical overdoses, and effects in a new format on the guidebook.
-    type: Add
-  - message: Fixed short delay before showing all channels on some headset examines.
-    type: Fix
-  - message: Fixed active laser designators breaking too easily, when being moved
-      0.1 tiles instead of 0.5 tiles.
-    type: Fix
-  - message: Fixed short delay before showing the tacmap when using the action or
-      clicking the alert. Doing so when it is already open now also closes it.
-    type: Fix
-  - message: Fixed AEGIS access card being drawn under tables.
-    type: Fix
-  - message: Fixed short delay before the health scanner UI opens when using it.
-    type: Fix
-  - message: Fixed some items having duplicate Unequip and Put in hand verbs.
-    type: Fix
-  - message: Fixed transfer all button not refreshing the chem master UI.
-    type: Fix
-  - message: Fixed being able to duplicate chems with the chem master.
-    type: Fix
-  - message: Fixed some cases of equipment visuals causing your client to endlessly
-      lag and refresh the screen.
-    type: Fix
-  - message: The motion detector and intel detector empty scratch sound now only plays
-      for the user holding the item, not everyone around them.
-    type: Tweak
-  - message: Icon labels now align to the left.
-    type: Tweak
-  - message: Shortened the link discord account button label so the buttons stop getting
-      squished as much.
-    type: Tweak
-  id: 2004
-  time: '2025-07-12T06:55:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7001
-- author: noctyrnal
-  changes:
-  - message: Light fixtures now have the correct colours.
-    type: Fix
-  id: 2005
-  time: '2025-07-13T03:54:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7010
-- author: AverageNotDoingAnythingEnjoyer
-  changes:
-  - message: Fixed FORECON Sniper spawning with the rest of the squad.
-    type: Fix
-  id: 2006
-  time: '2025-07-13T03:56:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7007
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the lightweight combat pack (the PMC one) having less storage space
@@ -4662,5 +4604,35 @@
   id: 2504
   time: '2025-11-17T09:58:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8366
+- author: Ian321
+  changes:
+  - message: You can no longer store boots inside of helmets.
+    type: Fix
+  id: 2505
+  time: '2025-11-17T10:04:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8405
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed pocket defibrillators being medium instead of small
+    type: Fix
+  id: 2506
+  time: '2025-11-17T10:04:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8408
+- author: CatAndHats
+  changes:
+  - message: Fixed the weapon specialist vendor having fragmentation and smoke grenades.
+    type: Fix
+  - message: Fixed the cost of AGM grenades in the CT/HM/SL/FTL vendors being too
+      high.
+    type: Fix
+  - message: Squad vendors now have medical comms key for purchase.
+    type: Fix
+  - message: Fixed a number of missing items in squad vendors, including; welding
+      goggles in the engi supply kit, electronics pouch in the SGO vendor, and data
+      detector and range finder in the WS vendor.
+    type: Fix
+  id: 2507
+  time: '2025-11-17T10:04:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8355
 Name: RMC14
 Order: -1
