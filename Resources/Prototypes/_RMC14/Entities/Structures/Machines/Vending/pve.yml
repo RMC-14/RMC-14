@@ -191,7 +191,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -377,7 +377,7 @@
     sections:
     - name: Food
       entries:
-      - id: CMMRE # TODO RMC14 - PMC rations
+      - id: RMCMREWeYa
         name: MRE
         amount: 5
       - id: RMCBoxMRE  # TODO RMC14 - PMC rations
@@ -413,7 +413,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -624,10 +624,10 @@
     sections:
     - name: Food
       entries:
-      - id: CMMRE #todo spp mres
+      - id: RMCMRESPP
         name: MRE
         amount: 5
-      - id: RMCBoxMRE
+      - id: RMCBoxMRE # TODO RMC14 - SPP MRE
         name: MRE Box
         amount: 1
     - name: Medical
@@ -660,7 +660,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -1078,7 +1078,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:

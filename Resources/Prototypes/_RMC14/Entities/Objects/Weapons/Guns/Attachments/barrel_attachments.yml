@@ -164,7 +164,6 @@
       recoilFlat: -2
     - conditions:
         unwieldedOnly: true
-      recoilFlat: 2
       accuracyAddMult: -0.2
   - type: ItemCamouflage
     states:

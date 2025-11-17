@@ -158,6 +158,38 @@
     Vinegar: 5
     Sugar: 5
 
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFish
+  name: grilled fish recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChips
+  name: fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 20
+    OilOlive: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushi
+  name: fish sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    FoodRiceBoiled: 1
+    RMCFoodMeatFish: 1
+
 #Cakes
 - type: microwaveMealRecipe
   id: RecipeRMCSuppermatter
