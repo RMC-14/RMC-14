@@ -457,7 +457,7 @@
 # Avali animated sprites
 
 - type: marking
-  id: AvaliTailAnimated
+  id: AvaliTailBaseAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
