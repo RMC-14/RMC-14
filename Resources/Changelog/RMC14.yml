@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Treating wounds with surgical line or synthgraft now breaks when moving
-      0.5 tiles, instead of only 0.3.
-    type: Tweak
-  id: 2011
-  time: '2025-07-13T10:25:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7019
 - author: noctyrnal
   changes:
   - message: Folded keffiyehs no longer hide your hair and your head top / side markings.
@@ -4630,5 +4622,12 @@
   id: 2511
   time: '2025-11-17T10:13:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8365
+- author: CatAndHats
+  changes:
+  - message: Fixed minor ak-4047 sprite issues when wielded in-hand
+    type: Fix
+  id: 2512
+  time: '2025-11-17T10:15:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8420
 Name: RMC14
 Order: -1
