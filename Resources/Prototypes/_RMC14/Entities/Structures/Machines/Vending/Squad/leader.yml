@@ -322,7 +322,7 @@
   description: Contains a Radio Telephone pack, a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
