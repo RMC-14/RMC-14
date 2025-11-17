@@ -25,6 +25,28 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
     private readonly List<string> _reagentRemovalBuffer = new();
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PortableDialysisComponent, ChargeChangedEvent>(OnDialysisBatteryChargeChanged);
+    }
+
+    private void OnDialysisBatteryChargeChanged(Entity<PortableDialysisComponent> dialysis, ref ChargeChangedEvent args)
+    {
+        if (args.MaxCharge > 0)
+        {
+            dialysis.Comp.BatteryChargePercent = args.Charge * 100f / args.MaxCharge;
+        }
+        else
+        {
+            dialysis.Comp.BatteryChargePercent = 0f;
+        }
+
+        Dirty(dialysis);
+        UpdateDialysisBatterySprite(dialysis);
+    }
+
     private bool TryGetBloodstream(
         EntityUid attachedTo,
         [NotNullWhen(true)] out Entity<SolutionComponent>? solEnt,
@@ -161,12 +183,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 continue;
             }
 
-            if (!HasComp<BloodstreamComponent>(attachedTo))
-            {
-                DetachDialysis((dialysisId, dialysisComp), null, false, false);
-                continue;
-            }
-
             if (time < dialysisComp.TransferAt)
             {
                 continue;
@@ -174,14 +190,11 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
 
-            if (!_powerCell.HasActivatableCharge(dialysisId))
+            if (!_powerCell.HasActivatableCharge(dialysisId) || !HasComp<BloodstreamComponent>(attachedTo))
             {
                 DetachDialysis((dialysisId, dialysisComp), null, false, false);
                 continue;
             }
-
-            if (!HasComp<BloodstreamComponent>(attachedTo))
-                continue;
 
             if (_solutionContainer.TryGetSolution(attachedTo, "chemicals", out var chemicalSolEnt, out var chemicalSol))
             {
@@ -211,20 +224,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
             Dirty(dialysisId, dialysisComp);
             UpdateDialysisVisuals((dialysisId, dialysisComp));
-        }
-    }
-
-    protected override void UpdateDialysisCharge(Entity<PortableDialysisComponent> dialysis)
-    {
-        var ev = new GetChargeEvent();
-        RaiseLocalEvent(dialysis, ref ev);
-        if (ev.MaxCharge > 0)
-        {
-            dialysis.Comp.BatteryChargePercent = ev.CurrentCharge * 100f / ev.MaxCharge;
-        }
-        else
-        {
-            dialysis.Comp.BatteryChargePercent = 0f;
         }
     }
 }

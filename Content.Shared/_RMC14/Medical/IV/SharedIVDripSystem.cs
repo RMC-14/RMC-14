@@ -620,11 +620,10 @@ public abstract class SharedIVDripSystem : EntitySystem
         }
 
         Dirty(dialysis);
-        UpdateDialysisCharge(dialysis);
         UpdateDialysisAppearance(dialysis);
     }
 
-    protected virtual void UpdateDialysisCharge(Entity<PortableDialysisComponent> dialysis)
+    protected virtual void UpdateDialysisBatterySprite(Entity<PortableDialysisComponent> dialysis)
     {
     }
 
