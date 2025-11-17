@@ -460,7 +460,7 @@
   id: AvaliTailAnimated
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Avali]
+  speciesRestriction: []
   sprites:
     - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
       state: avali_tail_wag
