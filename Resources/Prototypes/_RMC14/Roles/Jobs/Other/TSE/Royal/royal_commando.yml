@@ -60,13 +60,13 @@
       settings: short
   - type: GhostRoleApplySpecial
     squad: SquadRoyalMarines
-  
+
 - type: startingGear
   id: RMCGearRoyalCommando
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyalMK80 # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyalMK80
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

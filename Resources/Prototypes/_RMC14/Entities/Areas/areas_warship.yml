@@ -1445,7 +1445,7 @@
   - type: Sprite
     color: "#EE679E"
   - type: Area
-    AlwaysPowered: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaWarshipDockingPort
