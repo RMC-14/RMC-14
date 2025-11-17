@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: NotInButIn
-  changes:
-  - message: SL squad management menu and supply drop console have become prettier
-      UI!
-    type: Tweak
-  id: 2018
-  time: '2025-07-20T09:09:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7009
 - author: OmerF-afk
   changes:
   - message: Added multiple new weaponry for random loot spawners and surv base spawn
@@ -4646,5 +4638,15 @@
   id: 2518
   time: '2025-11-17T11:45:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8224
+- author: Arykh
+  changes:
+  - message: You can now examine reagents inside a pressurized reagent canister pouch!
+      This requires medical skill 1 just like examining pills.
+    type: Add
+  - message: Fixed multiple reagent names in pills not properly seperated.
+    type: Fix
+  id: 2519
+  time: '2025-11-17T11:47:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8248
 Name: RMC14
 Order: -1
