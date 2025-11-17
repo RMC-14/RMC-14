@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Added new icon to area alert for unknown areas, by SigmaTheDragon.
-    type: Add
-  - message: Fixes xeno alert ordering.
-    type: Fix
-  id: 1982
-  time: '2025-07-12T04:42:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6996
 - author: J C Denton
   changes:
   - message: More lore descriptions ported.
@@ -4696,5 +4687,18 @@
   id: 2482
   time: '2025-11-17T07:28:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8097
+- author: SharkSnake98
+  changes:
+  - message: Added the Tycho 4000 Radiation Suit, Boots, Gloves, and hood. Also added
+      a filled locker for it.
+    type: Add
+  - message: Added the Geiger Counter.
+    type: Add
+  - message: Fixed the normal radiation suit locker to have the radiation suit, hood,
+      and geiger counter.
+    type: Fix
+  id: 2483
+  time: '2025-11-17T07:30:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8218
 Name: RMC14
 Order: -1
