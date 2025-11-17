@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
@@ -14,6 +15,7 @@ using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.AlertLevel;
 
@@ -24,6 +26,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly RMCARESCoreSystem _core = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -31,6 +34,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 
     private EntityQuery<GhostComponent> _ghostQuery;
 
+    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
@@ -107,6 +111,14 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         while (almayerQuery.MoveNext(out var uid, out _))
         {
             almayers.Add(uid);
+        }
+
+        if (user != null)
+        {
+            foreach (var almayer in almayers)
+            {
+                _core.CreateARESLog(almayer, LogCat, (string)$"{Name(user.Value)} set the alert level to: {level}");
+            }
         }
 
         var transformQuery = EntityManager.TransformQuery;

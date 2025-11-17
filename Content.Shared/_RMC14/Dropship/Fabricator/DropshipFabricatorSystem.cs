@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.PowerLoader;
@@ -23,6 +25,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly RMCARESCoreSystem _core = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
@@ -32,8 +35,9 @@ public sealed class DropshipFabricatorSystem : EntitySystem
 
     private int _startingPoints;
     private TimeSpan _gainEvery;
-
     public ImmutableArray<EntProtoId<DropshipFabricatorPrintableComponent>> Printables { get; private set; }
+
+    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
 
     public override void Initialize()
     {
@@ -119,6 +123,8 @@ public sealed class DropshipFabricatorSystem : EntitySystem
         Dirty(ent);
 
         _appearance.SetData(ent, DropshipFabricatorVisuals.State, DropshipFabricatorState.Fabricating);
+
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} printed {proto.Name} for {printable.Cost} points at the dropship lathe");
     }
 
     private Entity<DropshipFabricatorPointsComponent> EnsurePoints()

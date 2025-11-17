@@ -4,6 +4,7 @@ public sealed class ARESSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
+    [Obsolete]
     private bool TryGetARES(out Entity<ARESComponent> alert)
     {
         var query = EntityQueryEnumerator<ARESComponent>();
@@ -17,6 +18,7 @@ public sealed class ARESSystem : EntitySystem
         return false;
     }
 
+    [Obsolete]
     public Entity<ARESComponent> EnsureARES()
     {
         if (TryGetARES(out var alert))
