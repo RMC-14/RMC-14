@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Gave the Freelancers guns, ammo, and other gear.
-    type: Add
-  - message: Reworked the Freelancer's skills.
-    type: Add
-  - message: Changed the Freelancer Standard's rank from Mercendary to Mercenary.
-    type: Fix
-  id: 2015
-  time: '2025-07-20T08:55:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6820
 - author: Dutch-VanDerLinde
   changes:
   - message: Added new mag visuals for pistols, revolvers, and the M79.
@@ -4652,5 +4641,12 @@
   id: 2515
   time: '2025-11-17T10:20:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8255
+- author: x5tink
+  changes:
+  - message: Fixed Rollerbeds not appearing in hand.
+    type: Fix
+  id: 2516
+  time: '2025-11-17T10:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8393
 Name: RMC14
 Order: -1
