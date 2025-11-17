@@ -74,8 +74,6 @@
     ears: RMCHeadsetRoyalMarine
     jumpsuit: RMCJumpsuitMarineRoyalMedic
     outerClothing: RMCArmorRoyalLightFilledMedic
-    jumpsuit: RMCJumpsuitMarineRoyalMedic
-    outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
