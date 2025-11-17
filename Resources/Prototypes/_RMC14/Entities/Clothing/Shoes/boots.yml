@@ -244,6 +244,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesTychoBoots
+  name: Tycho 4000 radiation protection boots
+  description: The burn-resistant boots for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and the boot is steel-toed, perfect for trouncing around detonated nuclear reactors and avoiding radiation poisoning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rad_boots_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rad_boots_weya.rsi
+
 
 # Royal Crown Marines
 - type: entity

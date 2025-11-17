@@ -315,13 +315,14 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
   name: essential SL kit
-  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
+  description: Contains a Radio Telephone pack, a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
