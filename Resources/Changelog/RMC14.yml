@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Xenonid emotes now have a cooldown.
-    type: Fix
-  id: 2013
-  time: '2025-07-20T08:36:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7074
-- author: Arykh
-  changes:
-  - message: Crayons no longer contain upstream reagents.
-    type: Tweak
-  id: 2014
-  time: '2025-07-20T08:42:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7088
 - author: Shromply
   changes:
   - message: Gave the Freelancers guns, ammo, and other gear.
@@ -4631,5 +4617,40 @@
   id: 2513
   time: '2025-11-17T10:16:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8374
+- author: SurfinNinja1
+  changes:
+  - message: added 8 new drinks
+    type: Add
+  - message: added 2 new pizzas
+    type: Add
+  - message: added 4 new cakes
+    type: Add
+  - message: added 14 new foods
+    type: Add
+  - message: added 15 new recipes
+    type: Add
+  - message: added cotton seeds to the seed vendor
+    type: Add
+  - message: tweaked several cotton foods to be edible by marines
+    type: Tweak
+  - message: adjusted plain burger stacking recipe (no more cheeseburgers turning
+      into plain burgers!)
+    type: Tweak
+  - message: adjusted onigiri recipe, now provides a bowl!
+    type: Tweak
+  - message: fried chicken is now batter fried!
+    type: Tweak
+  - message: the ghosts from burger stacking have now been exorcised!
+    type: Fix
+  id: 2514
+  time: '2025-11-17T10:20:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8239
+- author: 0awful
+  changes:
+  - message: Req can now give you the fancy new xl armor vests.
+    type: Add
+  id: 2515
+  time: '2025-11-17T10:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8255
 Name: RMC14
 Order: -1
