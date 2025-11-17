@@ -66,6 +66,13 @@ public sealed partial class RotaryPhoneComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool TryGetHolderName = true;
+
+    /// <summary>
+    /// Should admins be notified when being called.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public bool NotifyAdmins { get; set; } = false;
 }
 
 [Serializable, NetSerializable]
