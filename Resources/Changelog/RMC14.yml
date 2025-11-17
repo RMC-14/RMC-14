@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Added ghost previews for resin structures & when ordering construction.
-    type: Add
-  - message: Queen can now order construction in queen eye mode.
-    type: Add
-  - message: Queen has thick resin, no plasma cost, remote thicken, reduced build
-      time for first 30 minutes of the round.
-    type: Add
-  id: 1986
-  time: '2025-07-12T05:03:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6839
-- author: Dygon
-  changes:
-  - message: Fixed Airburst grenade projectiles hitting corpses.
-    type: Fix
-  id: 1987
-  time: '2025-07-12T05:03:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6992
-- author: Dygon
-  changes:
-  - message: Fixed Oppressor's Tail Seize ability going over barricades.
-    type: Fix
-  - message: Fixed Oppressor's Abduct ability going through resin walls.
-    type: Fix
-  id: 1988
-  time: '2025-07-12T05:04:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6991
 - author: to4no_fix
   changes:
   - message: Fixed not being able to give gibbed marines medals.
@@ -4706,5 +4678,28 @@
   id: 2486
   time: '2025-11-17T08:27:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8283
+- author: Aurallianz
+  changes:
+  - message: Hopefully fixed the ID console's functionality to grant IFF.
+    type: Fix
+  id: 2487
+  time: '2025-11-17T08:32:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8191
+- author: noctyrnal
+  changes:
+  - message: Added per-faction Radio Telephone backpacks.
+    type: Add
+  - message: Resprited the Radio Telephone backpack.
+    type: Tweak
+  id: 2488
+  time: '2025-11-17T08:31:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8235
+- author: noctyrnal
+  changes:
+  - message: SLs now get a Radio Telephone pack in their essential kit.
+    type: Add
+  id: 2489
+  time: '2025-11-17T08:33:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8356
 Name: RMC14
 Order: -1
