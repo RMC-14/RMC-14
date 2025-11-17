@@ -114,17 +114,17 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To resist a lawful arrest or search by a Military Police officer.
+        To resist or refuse to comply with a lawful arrest, detainment, search, or NJP.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Refusing to comply with a lawful search or arrest.\n[bold]5 minutes.[/bold]
+        Refusing to comply.\n[bold]5 minutes.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Resisting a legal arrest by an MP by fleeing or using force.\n[bold]10 minutes.[/bold]
+        Resisting by fleeing or using force.\n[bold]10 minutes.[/bold]
       </Box>
     </ColorBox>
 
