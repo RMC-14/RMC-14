@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSynthetic
   ranks:
     RMCRankMasterSergeant: [ ]
-  startingGear: RMCGearSynthetic
+  startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
@@ -101,12 +101,8 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+      - type: ZombieImmune
   hidden: true
-
-- type: startingGear
-  id: RMCGearSynthetic
-  equipment:
-    id: RMCIDCardSynth
 
 - type: startingGear
   id: RMCGearSyntheticEquipped

@@ -260,7 +260,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: CMSheetMetal50
     - id: CMCrowbarRed
     - id: CMWelder
     - id: RMCCableCoil
