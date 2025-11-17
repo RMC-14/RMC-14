@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Chat.Systems;
-using Content.Server.Power.Components;
 using Content.Server.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat.Prototypes;
@@ -28,15 +28,21 @@ public sealed class IVDripSystem : SharedIVDripSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<PortableDialysisComponent, ChargeChangedEvent>(OnDialysisBatteryChargeChanged);
+        SubscribeLocalEvent<PortableDialysisComponent, PowerCellChangedEvent>(OnDialysisBatteryChargeChanged);
     }
 
-    private void OnDialysisBatteryChargeChanged(Entity<PortableDialysisComponent> dialysis, ref ChargeChangedEvent args)
+    private void OnDialysisBatteryChargeChanged(Entity<PortableDialysisComponent> dialysis, ref PowerCellChangedEvent args)
     {
-        if (args.MaxCharge > 0)
+        if (_powerCell.TryGetBatteryFromSlot(dialysis, out var battery))
         {
-            dialysis.Comp.BatteryChargePercent = args.Charge * 100f / args.MaxCharge;
+            if (battery.MaxCharge > 0)
+            {
+                dialysis.Comp.BatteryChargePercent = battery.CurrentCharge * 100f / battery.MaxCharge;
+            }
+            else
+            {
+                dialysis.Comp.BatteryChargePercent = 0f;
+            }
         }
         else
         {
