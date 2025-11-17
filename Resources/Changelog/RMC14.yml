@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the lightweight combat pack (the PMC one) having less storage space
-      than intended.
-    type: Fix
-  id: 2007
-  time: '2025-07-13T06:03:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7018
 - author: Dygon
   changes:
   - message: Flamethrower fire, acid sprays, and the Vanguard's Pierce action no longer
@@ -4634,5 +4626,14 @@
   id: 2507
   time: '2025-11-17T10:04:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8355
+- author: noctyrnal
+  changes:
+  - message: Resprited the M5 ATL.
+    type: Tweak
+  - message: The M5 ATL now has a built-in magnetic harness.
+    type: Tweak
+  id: 2508
+  time: '2025-11-17T10:08:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8333
 Name: RMC14
 Order: -1
