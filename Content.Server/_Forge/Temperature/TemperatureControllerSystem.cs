@@ -5,6 +5,7 @@ using Content.Shared._Forge.DayNight;
 using Content.Shared._Forge.Temperature;
 using Content.Shared.Atmos;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Temperature;
 
@@ -15,10 +16,26 @@ public sealed class TemperatureControllerSystem : EntitySystem
 {
     [Dependency] private readonly RoundSeedSystem _roundSeed = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private TimeSpan _nextUpdate;
+
+    // Cache current day's jitter to avoid recreating Random every second
+    private long _cachedDay = -1;
+    private int _cachedSeed = -1;
+    private TemperatureZone _cachedZone;
+    private float _cachedJitter;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        // Throttle updates to once per second
+        var curTime = _timing.CurTime;
+        if (curTime < _nextUpdate)
+            return;
+
+        _nextUpdate = curTime + TimeSpan.FromSeconds(1.0);
 
         var query = EntityQueryEnumerator<TemperatureControllerComponent, MapComponent, MapAtmosphereComponent, DayNightCycleComponent>();
         while (query.MoveNext(out var uid, out var tempCtrl, out var map, out var atmosphere, out var dayCycle))
@@ -29,8 +46,19 @@ public sealed class TemperatureControllerSystem : EntitySystem
             var (baseTemp, amplitude, jitter) = GetZoneSettings(tempCtrl.Zone);
 
             var (seed, _, _) = _roundSeed.EnsureSeed();
-            var rng = new Random(MakeSeed(seed, tempCtrl.Zone, dayCycle.DayNumber));
-            var dailyJitter = (float)((rng.NextDouble() * 2 - 1) * jitter);
+
+            // Cache current day's jitter to avoid creating Random every second
+            // Recalculate only when day, seed, or zone changes
+            if (dayCycle.DayNumber != _cachedDay || seed != _cachedSeed || tempCtrl.Zone != _cachedZone)
+            {
+                var rng = new Random(MakeSeed(seed, tempCtrl.Zone, dayCycle.DayNumber));
+                _cachedJitter = (float)((rng.NextDouble() * 2 - 1) * jitter);
+                _cachedDay = dayCycle.DayNumber;
+                _cachedSeed = seed;
+                _cachedZone = tempCtrl.Zone;
+            }
+
+            var dailyJitter = _cachedJitter;
 
             var normalized = dayCycle.NormalizedTime;
             var seasonal = (float)Math.Sin((normalized - 0.25f) * Math.Tau); // peak around midday

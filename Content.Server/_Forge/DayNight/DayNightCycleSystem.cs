@@ -27,8 +27,18 @@ public sealed class DayNightCycleSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<DayNightCycleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DayNightCycleComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => ResetSamples());
+        SubscribeLocalEvent<DayNightCycleComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+    }
+
+    private void OnComponentRemove(Entity<DayNightCycleComponent> ent, ref ComponentRemove args)
+    {
+        var target = GetTargetMap(ent.Owner);
+        if (target is not EntityUid mapUid)
+            return;
+
+        // Clean up the LightCycleComponent that was added by this system
+        RemComp<LightCycleComponent>(mapUid);
     }
 
     private void OnMapInit(Entity<DayNightCycleComponent> ent, ref MapInitEvent args)
@@ -36,12 +46,7 @@ public sealed class DayNightCycleSystem : EntitySystem
         ApplyCycle(ent);
     }
 
-    private void OnStartup(Entity<DayNightCycleComponent> ent, ref ComponentStartup args)
-    {
-        ApplyCycle(ent);
-    }
-
-    private void ResetSamples()
+    private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
         _durationSample = null;
         _offsetSample = null;

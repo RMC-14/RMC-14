@@ -83,31 +83,22 @@ public sealed class RoundSeedSystem : SharedRoundSeedSystem
             ? Loc.GetString("round-seed-system-actor-server")
             : by;
 
-        var logMessage = Loc.GetString(
-            "round-seed-system-log-queued-next",
-            ("by", who),
-            ("seedText", seedText),
-            ("seedValue", seedValue));
-
-        _adminLogs.Add(LogType.NC14RoundSeed, LogImpact.Medium, $"{logMessage}");
-        Log.Info(logMessage);
+        _adminLogs.Add(LogType.ForgeRoundSeed, LogImpact.Medium,
+            $"{Loc.GetString("round-seed-system-log-queued-next", ("by", who), ("seedText", seedText), ("seedValue", seedValue))}");
     }
 
     private void LogSeed(int roundId, int seed, bool queued, string? sourceText)
     {
-        var logMessage = queued
-            ? Loc.GetString(
-                "round-seed-system-log-seed-queued",
-                ("roundId", roundId),
-                ("seedValue", seed),
-                ("seedText", sourceText ?? seed.ToString()))
-            : Loc.GetString(
-                "round-seed-system-log-seed-generated",
-                ("roundId", roundId),
-                ("seedValue", seed));
-
-        _adminLogs.Add(LogType.NC14RoundSeed, LogImpact.Low, $"{logMessage}");
-        Log.Info(logMessage);
+        if (queued)
+        {
+            _adminLogs.Add(LogType.ForgeRoundSeed, LogImpact.Low,
+                $"{Loc.GetString("round-seed-system-log-seed-queued", ("roundId", roundId), ("seedText", sourceText ?? seed.ToString()), ("seedValue", seed))}");
+        }
+        else
+        {
+            _adminLogs.Add(LogType.ForgeRoundSeed, LogImpact.Low,
+                $"{Loc.GetString("round-seed-system-log-seed-generated", ("roundId", roundId), ("seedValue", seed))}");
+        }
     }
 
     private static int GenerateSeedValue(string seedText)

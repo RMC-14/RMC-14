@@ -1,5 +1,6 @@
 using Content.Shared._Forge.DayNight;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.DayNight;
 
@@ -9,10 +10,20 @@ namespace Content.Server._Forge.DayNight;
 public sealed class DayNightTimeServerSystem : EntitySystem
 {
     [Dependency] private readonly DayNightTimeSystem _timeSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private TimeSpan _nextUpdate;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        // Throttle updates to once per second
+        var curTime = _timing.CurTime;
+        if (curTime < _nextUpdate)
+            return;
+
+        _nextUpdate = curTime + TimeSpan.FromSeconds(1.0);
 
         var query = EntityQueryEnumerator<DayNightCycleComponent, MapComponent>();
         while (query.MoveNext(out var uid, out var cycle, out var map))

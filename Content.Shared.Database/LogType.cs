@@ -526,5 +526,5 @@ public enum LogType
     /// <summary>
     /// Round seed generated at the start of a round.
     /// </summary>
-    NC14RoundSeed = 11000,
+    ForgeRoundSeed = 11000,
 }

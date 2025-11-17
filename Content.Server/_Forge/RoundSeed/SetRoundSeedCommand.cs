@@ -3,24 +3,19 @@ using Content.Server.GameTicking;
 using Content.Shared.Administration;
 using Content.Shared.GameTicking;
 using Robust.Shared.Console;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
-using Robust.Shared.Localization;
 
 namespace Content.Server._Forge.RoundSeed;
 
 [AdminCommand(AdminFlags.Host)]
-public sealed class SetRoundSeedCommand : IConsoleCommand
+public sealed class SetRoundSeedCommand : LocalizedEntityCommands
 {
-    public string Command => "setroundseed";
-    public string Description => Loc.GetString("command-setroundseed-description");
-    public string Help => Loc.GetString("command-setroundseed-help");
+    public override string Command => "setroundseed";
 
-    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
         {
-            shell.WriteError(Loc.GetString("command-setroundseed-usage"));
+            shell.WriteError(LocalizationManager.GetString("command-setroundseed-usage"));
             return;
         }
 
@@ -28,26 +23,25 @@ public sealed class SetRoundSeedCommand : IConsoleCommand
 
         if (string.IsNullOrWhiteSpace(seedText))
         {
-            shell.WriteError(Loc.GetString("command-setroundseed-usage"));
+            shell.WriteError(LocalizationManager.GetString("command-setroundseed-usage"));
             return;
         }
 
-        var entManager = IoCManager.Resolve<IEntityManager>();
-        var ticker = entManager.System<GameTicker>();
+        var ticker = EntityManager.System<GameTicker>();
 
         if (ticker.RunLevel != GameRunLevel.PreRoundLobby)
         {
-            shell.WriteError(Loc.GetString("command-setroundseed-not-in-lobby"));
+            shell.WriteError(LocalizationManager.GetString("command-setroundseed-not-in-lobby"));
             return;
         }
 
         var actor = shell.Player != null
             ? shell.Player.Name
-            : Loc.GetString("command-setroundseed-server-console");
+            : LocalizationManager.GetString("command-setroundseed-server-console");
 
-        var roundSeed = entManager.System<RoundSeedSystem>();
+        var roundSeed = EntityManager.System<RoundSeedSystem>();
         roundSeed.SetNextSeed(seedText, actor);
 
-        shell.WriteLine(Loc.GetString("command-setroundseed-success", ("seed", seedText)));
+        shell.WriteLine(LocalizationManager.GetString("command-setroundseed-success", ("seed", seedText)));
     }
 }
