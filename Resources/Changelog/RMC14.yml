@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added FN FP9000/FN FP9k/2 PMC and MP5A5
-    type: Add
-  - message: Fixed Mar-50's firerate Type23's missing buckshot HG3712's Typo on YML
-    type: Fix
-  id: 2010
-  time: '2025-07-13T09:11:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6983
 - author: DrSmugleaf
   changes:
   - message: Treating wounds with surgical line or synthgraft now breaks when moving
@@ -4632,5 +4623,12 @@
   id: 2510
   time: '2025-11-17T10:12:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8409
+- author: Vixting
+  changes:
+  - message: Fix setting IFF not working
+    type: Fix
+  id: 2511
+  time: '2025-11-17T10:13:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8365
 Name: RMC14
 Order: -1
