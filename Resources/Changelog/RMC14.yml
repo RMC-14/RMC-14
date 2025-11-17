@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: to4no_fix
-  changes:
-  - message: Fixed not being able to give gibbed marines medals.
-    type: Fix
-  id: 1989
-  time: '2025-07-12T05:08:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6629
 - author: Dygon
   changes:
   - message: Most headsets now have additional tracking options, accessible via the
@@ -4701,5 +4694,12 @@
   id: 2489
   time: '2025-11-17T08:33:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8356
+- author: CatAndHats
+  changes:
+  - message: Added new lobby art, Running From Ravager by trashycinder!
+    type: Add
+  id: 2490
+  time: '2025-11-17T09:34:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8225
 Name: RMC14
 Order: -1
