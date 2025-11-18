@@ -99,11 +99,11 @@
     - name: Extra Grenades
       entries:
       - id: CMGrenadeHighExplosive
-        name: M40 HEDP Blast Grenades (x6)
+        name: 30mm HEDP Blast Grenades (x6)
         points: 40
         spawn: 6
       - id: RMCGrenadeIncendiary
-        name: M40 HIDP Incendiary Grenades (x6)
+        name: 30mm HIDP Incendiary Grenades (x6)
         points: 40
         spawn: 6
       #- id: M40HPDPWhitePhosphorusGrenadesx6
