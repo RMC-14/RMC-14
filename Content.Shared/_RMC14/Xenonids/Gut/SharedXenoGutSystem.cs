@@ -62,6 +62,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
         var ev = new XenoGutDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno, target)
         {
+            DuplicateCondition = DuplicateConditions.SameEvent,
             BreakOnMove = true,
             BlockDuplicate = true,
         };
