@@ -104,13 +104,17 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
+        points: 13
+    # - id: CMM20MineBox4
+    #   points: 20
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -148,7 +152,7 @@
     - name: Armors
       entries:
       - id: CMArmorB12
-        points: 28
+        points: 24
       - id: CMArmorM4
         points: 16
     - name: Restricted Firearms
