@@ -138,11 +138,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        // Skip the acid-already-exists check - replacement was already validated during DoAfter start
         if (!TryComp(target, out CorrodibleComponent? corrodible) || !corrodible.IsCorrodible)
             return;
 
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
+            return;
+
+        // Re-check if acid can be replaced at DoAfter end to prevent race conditions
+        // (e.g., weak acid downgrading strong acid if both DoAfters were started before any completed)
+        if (IsMelted(target) && !CanReplaceAcid(target, args.Strength))
             return;
 
         var mult = corrodible.MeltTimeMult;
@@ -158,7 +162,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        // Remove existing acid if present (replacement was already validated during DoAfter start)
+        // Remove existing acid if present (we validated we can replace it above)
         if (_net.IsServer && IsMelted(target))
             RemoveAcid(target);
 
