@@ -295,28 +295,25 @@ public sealed class XenoDevourSystem : EntitySystem
             !TryComp<MeleeWeaponComponent>(weapon, out var melee))
             return;
 
-        DamageSpecifier totalDamage = new DamageSpecifier(_meleeWeapon.GetDamage(weapon.Value, devoured));
-        foreach (var attachment in EntityManager.GetComponents<BonusMeleeDamageComponent>(weapon.Value))
+        var totalDamage = new DamageSpecifier(_meleeWeapon.GetDamage(weapon.Value, devoured));
+        if (TryComp<BonusMeleeDamageComponent>(weapon.Value, out var bonusDamageComp))
         {
-            if (attachment.BonusDamage != null)
-                totalDamage += attachment.BonusDamage;
+            if (bonusDamageComp.BonusDamage != null)
+                totalDamage += bonusDamageComp.BonusDamage;
         }
 
-        foreach (var childTransform in EntityManager.EntityQuery<TransformComponent>())
+        var weaponTransform = Transform(weapon.Value);
+        var children = weaponTransform.ChildEnumerator;
+        while (children.MoveNext(out var childUid))
         {
-            var childUid = childTransform.Owner;
-            if (childTransform.ParentUid != weapon.Value)
+            if (!TryComp<AttachableWeaponMeleeModsComponent>(childUid, out var modsComp))
                 continue;
-            if (TryComp<AttachableWeaponMeleeModsComponent>(childUid, out var modsComp))
+            foreach (var set in modsComp.Modifiers)
             {
-                foreach (var set in modsComp.Modifiers)
-                {
-                    if (set.BonusDamage != null)
-                        totalDamage += set.BonusDamage;
-                }
+                if (set.BonusDamage != null)
+                    totalDamage += set.BonusDamage;
             }
         }
-        totalDamage *= usuable.DamageMult;
 
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
