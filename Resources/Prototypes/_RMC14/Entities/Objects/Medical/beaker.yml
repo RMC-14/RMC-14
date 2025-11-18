@@ -509,4 +509,4 @@
   - type: CMRefillableSolution
     solution: beaker
     reagents:
-      CMTricordrazine: 30
+      CMEpinephrine: 30

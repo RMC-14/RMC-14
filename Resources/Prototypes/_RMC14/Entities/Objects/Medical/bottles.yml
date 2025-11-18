@@ -250,4 +250,4 @@
           Quantity: 60
   - type: CMRefillableSolution
     reagents:
-      RMCMindbreakerToxin: 60
+      CMEpinephrine: 60
