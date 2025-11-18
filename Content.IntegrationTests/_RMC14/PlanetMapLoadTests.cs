@@ -19,7 +19,6 @@ public sealed class PlanetMapLoadTests
         {
             Dirty = true,
             DummyTicker = false,
-            Connected = true,
             InLobby = true,
         });
 
@@ -45,7 +44,7 @@ public sealed class PlanetMapLoadTests
             {
                 await pair.WaitCommand("forcepreset CMDistressSignal");
                 await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
-            });
+            }, $"Failed to load planet {planet.Proto.Name}!");
 
             Assert.Multiple(() =>
             {
