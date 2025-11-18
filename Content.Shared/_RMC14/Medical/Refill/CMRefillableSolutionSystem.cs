@@ -58,7 +58,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
 
-        SubscribeLocalEvent<RMCSmartRefillTankComponent, ComponentStartup>(OnSmartRefillStartup);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, GetVerbsEvent<AlternativeVerb>>(OnSmartRefillGetVerbs);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, ContainerFlushDoAfterEvent>(OnSmartRefillFlush);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse);
