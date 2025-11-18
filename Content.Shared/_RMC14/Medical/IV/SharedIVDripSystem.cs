@@ -499,7 +499,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdateDialysisVisuals(dialysis);
 
         var delay = dialysis.Comp.AttachDelay;
-        if (delay > TimeSpan.Zero && (_net.IsServer || predict))
+        if (delay > TimeSpan.Zero)
         {
             var captured = uid;
             Timer.Spawn(
