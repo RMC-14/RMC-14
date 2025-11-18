@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: There is now a marine announcement when the Hybrisa caves lockdown is
-      lifted. You can no longer lift the lockdown until 25 minutes has passed.
-    type: Add
-  - message: Fixed pod door buttons not requiring power.
-    type: Fix
-  id: 2022
-  time: '2025-07-20T09:15:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7045
 - author: noctyrnal
   changes:
   - message: Adjusted the Overwatch Console's UI to be more inline with parity.
@@ -4646,5 +4636,12 @@
   id: 2522
   time: '2025-11-18T11:02:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8426
+- author: OmerF-afk
+  changes:
+  - message: Added extra functionality and sovl to welding masks
+    type: Add
+  id: 2523
+  time: '2025-11-18T11:04:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8411
 Name: RMC14
 Order: -1
