@@ -223,7 +223,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
@@ -238,7 +238,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
