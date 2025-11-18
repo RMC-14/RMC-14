@@ -22,6 +22,7 @@ namespace Content.Shared._RMC14.Medical.IV;
 
 public abstract class SharedIVDripSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -611,10 +612,6 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdateDialysisAppearance(dialysis);
     }
 
-    protected virtual void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
-    {
-    }
-
     protected virtual void UpdateIVAppearance(Entity<IVDripComponent> iv)
     {
     }
@@ -641,6 +638,11 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     protected virtual void UpdateDialysisAppearance(Entity<PortableDialysisComponent> dialysis)
     {
+    }
+
+    protected void UpdateDialysisBatteryAppearance(Entity<AppearanceComponent?> ent, DialysisBatteryLevel batteryLevel)
+    {
+        _appearance.SetData(ent, DialysisVisuals.BatteryLevel, batteryLevel, ent.Comp);
     }
 
     protected virtual void DoRip(DamageSpecifier? damage,

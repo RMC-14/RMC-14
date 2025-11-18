@@ -33,24 +33,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
     private void OnDialysisBatteryChargeChanged(Entity<PortableDialysisComponent> dialysis, ref PowerCellChangedEvent args)
     {
-        if (_powerCell.TryGetBatteryFromSlot(dialysis, out var battery))
-        {
-            if (battery.MaxCharge > 0)
-            {
-                dialysis.Comp.BatteryChargePercent = battery.CurrentCharge * 100f / battery.MaxCharge;
-            }
-            else
-            {
-                dialysis.Comp.BatteryChargePercent = 0f;
-            }
-        }
-        else
-        {
-            dialysis.Comp.BatteryChargePercent = 0f;
-        }
-
-        Dirty(dialysis);
-        UpdateDialysisBatteryVisuals(dialysis);
+        UpdateDialysisBatteryLevel(dialysis);
     }
 
     private bool TryGetBloodstream(
@@ -231,5 +214,29 @@ public sealed class IVDripSystem : SharedIVDripSystem
             Dirty(dialysisId, dialysisComp);
             UpdateDialysisVisuals((dialysisId, dialysisComp));
         }
+    }
+
+    private void UpdateDialysisBatteryLevel(Entity<PortableDialysisComponent> dialysis)
+    {
+        var batteryLevel = GetDialysisBatteryLevel(dialysis);
+        UpdateDialysisBatteryAppearance(dialysis.Owner, batteryLevel);
+    }
+
+    private DialysisBatteryLevel GetDialysisBatteryLevel(Entity<PortableDialysisComponent> dialysis)
+    {
+        if (!_powerCell.TryGetBatteryFromSlot(dialysis, out _, out var battery) || battery.MaxCharge <= 0)
+            return DialysisBatteryLevel.Empty;
+
+        var percentCharged = battery.CurrentCharge / battery.MaxCharge;
+        return percentCharged switch
+        {
+            >= 0.86f => DialysisBatteryLevel.Full,
+            >= 0.61f => DialysisBatteryLevel.VeryHigh,
+            >= 0.46f => DialysisBatteryLevel.High,
+            >= 0.31f => DialysisBatteryLevel.Medium,
+            >= 0.16f => DialysisBatteryLevel.Low,
+            >= 0.01f => DialysisBatteryLevel.VeryLow,
+            _ => DialysisBatteryLevel.Empty,
+        };
     }
 }

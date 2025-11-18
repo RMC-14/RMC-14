@@ -16,9 +16,19 @@
     - state: filtering
       map: [ "enum.DialysisVisualLayers.Filtering" ]
       visible: false
-    - state: battery100
-      map: [ "enum.DialysisVisualLayers.Battery" ]
+    - map: [ "enum.DialysisVisualLayers.Battery" ]
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DialysisVisuals.BatteryLevel:
+        DialysisVisualLayers.Battery:
+          Empty: { state: battery0 }
+          VeryLow: { state: battery15 }
+          Low: { state: battery30 }
+          Medium: { state: battery45 }
+          High: { state: battery60 }
+          VeryHigh: { state: battery85 }
+          Full: { state: battery100 }
   - type: Item
     size: Normal
   - type: Clothing

@@ -50,9 +50,6 @@ public sealed partial class PortableDialysisComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool IsDetaching;
-
-    [DataField, AutoNetworkedField]
-    public float BatteryChargePercent;
 }
 
 [Serializable, NetSerializable]
@@ -62,4 +59,22 @@ public enum DialysisVisualLayers
     Effect,
     Filtering,
     Battery
+}
+
+[Serializable, NetSerializable]
+public enum DialysisBatteryLevel : byte
+{
+    Empty,
+    VeryLow,
+    Low,
+    Medium,
+    High,
+    VeryHigh,
+    Full
+}
+
+[Serializable, NetSerializable]
+public enum DialysisVisuals : byte
+{
+    BatteryLevel
 }

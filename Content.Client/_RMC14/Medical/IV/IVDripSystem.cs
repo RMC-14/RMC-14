@@ -113,28 +113,5 @@ public sealed class IVDripSystem : SharedIVDripSystem
         {
             _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, false);
         }
-
-        UpdateDialysisBatteryVisuals(dialysis);
-    }
-
-    protected override void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
-    {
-        base.UpdateDialysisBatteryVisuals(dialysis);
-        if (!TryComp(dialysis, out SpriteComponent? sprite))
-            return;
-
-        var percent = dialysis.Comp.BatteryChargePercent;
-        var batteryState = percent switch
-        {
-            >= 86 => "battery100",
-            >= 61 => "battery85",
-            >= 46 => "battery60",
-            >= 31 => "battery45",
-            >= 16 => "battery30",
-            >= 1 => "battery15",
-            _ => "battery0"
-        };
-
-        _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Battery, batteryState);
     }
 }
