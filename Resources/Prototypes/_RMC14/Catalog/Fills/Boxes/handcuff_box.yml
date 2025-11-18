@@ -22,7 +22,7 @@
       - id: RMCZipties
         amount: 10
   - type: Item
-    size: Small
+    size: Tiny
   - type: Tag
     tags:
     - RMCBoxZipties
