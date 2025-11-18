@@ -24,5 +24,3 @@ cm-blood-pack-cannot-self = You cannot connect this to yourself.
 cm-blood-pack-poke-self = You poke {$target} with {$pack}.
 cm-blood-pack-poke-others = {$user} pokes {$target} with {$pack}.
 cm-blood-pack-contains = It contains: [color=#BB0000FF]{$units} units[/color] of liquid.
-
-rmc-dialysis-already-attached = You're already using the portable dialysis machine on someone else!

@@ -114,12 +114,12 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, false);
         }
 
-        UpdateDialysisBatterySprite(dialysis);
+        UpdateDialysisBatteryVisuals(dialysis);
     }
 
-    protected override void UpdateDialysisBatterySprite(Entity<PortableDialysisComponent> dialysis)
+    protected override void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
     {
-        base.UpdateDialysisBatterySprite(dialysis);
+        base.UpdateDialysisBatteryVisuals(dialysis);
         if (!TryComp(dialysis, out SpriteComponent? sprite))
             return;
 
@@ -135,9 +135,6 @@ public sealed class IVDripSystem : SharedIVDripSystem
             _ => "battery0"
         };
 
-        if (dialysis.Comp.LastBatteryState == batteryState)
-            return;
-        dialysis.Comp.LastBatteryState = batteryState;
         _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Battery, batteryState);
     }
 }

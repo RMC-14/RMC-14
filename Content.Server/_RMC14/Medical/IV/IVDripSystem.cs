@@ -50,7 +50,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
         }
 
         Dirty(dialysis);
-        UpdateDialysisBatterySprite(dialysis);
+        UpdateDialysisBatteryVisuals(dialysis);
     }
 
     private bool TryGetBloodstream(

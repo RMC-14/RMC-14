@@ -289,19 +289,13 @@ public abstract class SharedIVDripSystem : EntitySystem
 
         args.Handled = true;
 
-        if (dialysis.Comp.AttachedTo == target)
+        var user = args.User;
+        if (dialysis.Comp.AttachedTo != null)
         {
             DetachDialysis(dialysis, args.User, false, true);
             return;
         }
 
-        if (dialysis.Comp.AttachedTo != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-dialysis-already-attached"), args.User, args.User);
-            return;
-        }
-
-        var user = args.User;
         if (!_skills.HasAllSkills(user, dialysis.Comp.SkillRequired))
         {
             _popup.PopupClient(Loc.GetString("cm-iv-attach-no-skill"), user, user);
@@ -504,14 +498,14 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdateDialysisVisuals(dialysis);
 
         var delay = dialysis.Comp.AttachDelay;
-        if (delay > TimeSpan.Zero)
+        if (delay > TimeSpan.Zero && (_net.IsServer || predict))
         {
             var captured = uid;
             Timer.Spawn(
                 delay,
                 () =>
                 {
-                    if (!EntityManager.TryGetComponent(captured, out PortableDialysisComponent? comp))
+                    if (!TryComp(captured, out PortableDialysisComponent? comp))
                         return;
 
                     if (!comp.IsDetaching || comp.AttachedTo != null)
@@ -617,7 +611,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         UpdateDialysisAppearance(dialysis);
     }
 
-    protected virtual void UpdateDialysisBatterySprite(Entity<PortableDialysisComponent> dialysis)
+    protected virtual void UpdateDialysisBatteryVisuals(Entity<PortableDialysisComponent> dialysis)
     {
     }
 
