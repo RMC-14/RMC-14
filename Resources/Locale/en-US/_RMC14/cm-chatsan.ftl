@@ -868,3 +868,6 @@ cm-chatsan-replacement-taxed = built
 
 cm-chatsan-word-pb = point blank
 cm-chatsan-replacement-pb = point blank
+
+cm-chatsan-word-slopcade = bad cades
+cm-chatsan-replacement-slopcade = bad cades

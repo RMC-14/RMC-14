@@ -25,6 +25,7 @@
     cm-chatsan-word-admin-marine: cm-chatsan-replacement-admin-marine
     cm-chatsan-word-admins-marine: cm-chatsan-replacement-admins-marine
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
+    cm-chatsan-word-slopcade: cm-chatsan-replacement-slopcade
 
 - type: accent
   id: CMChatSanitizeXeno
