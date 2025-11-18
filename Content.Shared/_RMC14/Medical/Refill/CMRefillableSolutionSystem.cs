@@ -55,7 +55,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
 
-        SubscribeLocalEvent<RMCSmartRefillTankComponent, ComponentStartup>(OnSmartRefillStartup);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, GetVerbsEvent<AlternativeVerb>>(OnSmartRefillGetVerbs);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, ContainerFlushDoAfterEvent>(OnSmartRefillFlush);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse);
@@ -366,15 +365,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         if (TryComp<AppearanceComponent>(ent, out var appearance))
             _appearance.QueueUpdate(ent, appearance);
-    }
-
-    private void OnSmartRefillStartup(Entity<RMCSmartRefillTankComponent> ent, ref ComponentStartup args)
-    {
-        RemComp<DrinkComponent>(ent);
-        RemComp<DrainableSolutionComponent>(ent);
-        RemComp<DrawableSolutionComponent>(ent);
-        RemComp<InjectableSolutionComponent>(ent);
-        RemComp<RefillableSolutionComponent>(ent);
     }
 
     private void OnSmartRefillGetVerbs(Entity<RMCSmartRefillTankComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
