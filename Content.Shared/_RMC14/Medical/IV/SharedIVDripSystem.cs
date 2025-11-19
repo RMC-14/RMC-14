@@ -517,6 +517,12 @@ public abstract class SharedIVDripSystem : EntitySystem
                 }
             );
         }
+        else
+        {
+            dialysis.Comp.IsDetaching = false;
+            Dirty(dialysis);
+            UpdateDialysisVisuals(dialysis);
+        }
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), false);
 
