@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Adjusted the Overwatch Console's UI to be more inline with parity.
-    type: Tweak
-  - message: Added "Hide Squad Info" to the Overwatch Console, which collapses the
-      table displaying slots in a squad.
-    type: Add
-  id: 2023
-  time: '2025-07-20T09:14:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7022
 - author: Dutch-VanDerLinde
   changes:
   - message: Added a roll effect when resisting fire.
@@ -4643,5 +4633,12 @@
   id: 2523
   time: '2025-11-18T11:04:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8411
+- author: Aurallianz
+  changes:
+  - message: improved Mutiny text
+    type: Add
+  id: 2524
+  time: '2025-11-19T02:17:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8432
 Name: RMC14
 Order: -1
