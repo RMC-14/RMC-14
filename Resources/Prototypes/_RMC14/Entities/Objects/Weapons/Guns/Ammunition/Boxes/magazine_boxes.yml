@@ -320,9 +320,9 @@
     - state: supply_lid_small_closed # "size"_lid - Base Colour
       map: [ "lid" ]
       color: "#887b67"
-    - state: rifle_lid_marking # "size"_lid_marking - Type Colour
+    - state: supply_lid_small_closed_marking # "size"_lid - Base Colour
       map: [ "lid_marking" ]
-      color: "#8888ff"
+      color: "#887b67"
   - type: GenericVisualizer
     visuals:
       enum.DeployableItemVisuals.Deployed:
@@ -1302,6 +1302,52 @@
       whitelist:
         tags:
         - CMMagazineSMGM63Ext
+
+# M63 HEAP
+
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGM63HEAPEmpty
+  name: magazine box (HEAP M63 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#727e90"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_63
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#9C9A19"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGM63HEAP
+
+- type: entity
+  parent: RMCBoxMagazineSMGM63HEAPEmpty
+  id: RMCBoxMagazineSMGM63HEAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGM63HEAP
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGM63HEAP
 
 # Type 64
 - type: entity

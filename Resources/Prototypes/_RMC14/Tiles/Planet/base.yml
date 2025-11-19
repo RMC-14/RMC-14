@@ -206,3 +206,9 @@
   parent: RMCPlanetDirtBrown
   id: RMCPlanetDirtBrownDug
   sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert_dug.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCVoid
+  name: tiles-rmc-empty
+  sprite: /Textures/_RMC14/Tiles/floors/void.png

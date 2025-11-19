@@ -88,3 +88,8 @@ command-description-replacetile-FromTileId = Replaces tiles to a specified Tile 
 command-description-gridtile = Gets TileRefs for a grid that a specified entity is apart of.
 
 command-description-movespeed = Changes the max movement speed for given entities.
+
+command-description-stairwell = Sets the teleportation offset for the given Teleporter entities.
+command-description-stairwellprojector = Sets the projection id for the given TeleporterView entities.
+
+command-description-getusername = Gets the username attached to an entity.
