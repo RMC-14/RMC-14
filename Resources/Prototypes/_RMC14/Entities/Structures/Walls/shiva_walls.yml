@@ -25,6 +25,7 @@
   id: RCMWallShivaInvincibleFab
   name: reinforced prefabricated structure wall
   description: It cannot be destroyed by any means you have available. Perhaps praying to the gods may help.
+  suffix: Hull
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab_r.rsi

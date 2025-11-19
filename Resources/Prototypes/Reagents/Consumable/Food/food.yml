@@ -11,46 +11,26 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:SatiateHunger
-        factor: 35
-      - !type:ModifyBloodLevel
-        conditions:
-        - !type:Hunger
-          min: 200
-        amount: 0.5
-      - !type:SatiateHunger
-        conditions:
-        - !type:Hunger
-          min: 200
-        factor: -5
-      - !type:EqualHealthChange
-        damage:
-        - Brute: -0.25
+      - !type:Neogenetic
+        potency: 1
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 15
+        nutMetabolism: 0.1
+      - !type:Hemogenic
+        potency: 1
   pricePerUnit: 2
 
 - type: reagent
   id: Vitamin #Anything "healthy"
+  parent: Nutriment
   name: reagent-name-vitamin
   group: Foods
   desc: reagent-desc-vitamin
   physicalDesc: reagent-physical-desc-chalky
   flavor: vitamin
   color: "#D3D3D3"
-  metabolisms:
-    Food: #This makes it not compete with medicines, a large bonus for something that can heal
-      effects:
-      - !type:HealthChange
-        probability: 0.5
-        damage:
-          groups:
-            Brute: -0.5
-            Burn: -0.5
-      # Helps you stop bleeding to an extent.
-      - !type:ModifyBleedAmount
-        amount: -0.25
-      - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
-  # Lets plants benefit too
-  plantMetabolism:
+  plantMetabolism: # Lets plants benefit too
   - !type:PlantAdjustNutrition
     amount: 0.5
   - !type:PlantAdjustHealth
@@ -59,23 +39,13 @@
 
 - type: reagent
   id: Protein #Meat and beans
+  parent: Nutriment
   name: reagent-name-protein
   group: Foods
   desc: reagent-desc-protein
   physicalDesc: reagent-physical-desc-clumpy
   flavor: protein
   color: "#FFFFE5"
-  metabolisms:
-    Food:
-      effects:
-      - !type:HealthChange
-        probability: 0.5
-        damage:
-          groups:
-            Brute: -0.4
-      - !type:ModifyBloodLevel
-        amount: 1 # weaker than iron but pretty good all things considered
-      - !type:SatiateHunger
   pricePerUnit: 3
 
 - type: reagent
