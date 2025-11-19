@@ -9,6 +9,10 @@
     department: CMMilitaryPolice
     time: 36000 # 10 hours
   ranks:
+    RMCRankMasterSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 630000 # 175 hours
     RMCRankGunnerySergeant:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryWarden
