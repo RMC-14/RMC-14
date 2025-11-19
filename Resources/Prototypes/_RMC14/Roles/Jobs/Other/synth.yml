@@ -85,6 +85,8 @@
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated
+      - type: ParalyzeOnPullAttemptImmune
+      - type: InfectOnPullAttemptImmune
       - type: RMCLeapProtection
         inherentStunDuration: 3
       removeComponents:
@@ -103,7 +105,6 @@
         damage: { }
       - type: ZombieImmune
   hidden: true
-
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
