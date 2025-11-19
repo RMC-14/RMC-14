@@ -570,20 +570,21 @@
 
 
 # Cassetes Pouch
-#- type: entity
-#  parent: [RMCPouchStorage, RMCPouchOpenClosed]
-#  id: RMCPouchCassette
-#  name: cassette pouch
-#  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
-#  components:
-#  - type: Sprite
-#    sprite: _RMC14/Objects/Clothing/Pouches/cassette.rsi
-#  - type: Item
-#    size: small
-#  - type: Storage
-#    grid:
-#    - 0,0,2,1 #3 slots
-#whitelist: # TODO RMC14 add cassettes
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchCassette
+  name: cassette pouch
+  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/cassette.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist: 
+      components:
+      - CassetteTape
 
 # Drum Pouch
 - type: entity
