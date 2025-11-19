@@ -1,32 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Added CMB Deputy and marshal badge ID cards
-    type: Add
-  id: 2032
-  time: '2025-07-20T09:28:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7063
-- author: noctyrnal
-  changes:
-  - message: Kutjevo has recieved a large update.
-    type: Add
-  - message: Added the M37-17, an improved HG that can hold 2 more shells and does
-      x1.15 damage. Can be found on select maps and in the hands of the CMB.
-    type: Add
-  - message: Fixed the liaison's ID card name, description and icon.
-    type: Fix
-  id: 2033
-  time: '2025-07-20T09:37:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7046
-- author: noctyrnal
-  changes:
-  - message: The M5-ATL has received new sprites.
-    type: Add
-  id: 2034
-  time: '2025-07-20T09:39:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7023
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed space cash not having different sprites with larger stacks
     type: Fix
   id: 2035
@@ -4634,5 +4608,34 @@
   id: 2532
   time: '2025-11-19T02:58:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8372
+- author: PursuitInAshes
+  changes:
+  - message: The 'High Command' job now spawns with more equipment.
+    type: Tweak
+  - message: The 'High Command' headset now has access to the provost radio channel.
+    type: Tweak
+  id: 2533
+  time: '2025-11-19T02:59:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8286
+- author: CyberTropic
+  changes:
+  - message: Added exclamation to primed grenades.
+    type: Add
+  id: 2534
+  time: '2025-11-19T03:00:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8317
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 2535
+  time: '2025-11-19T02:59:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8259
 Name: RMC14
 Order: -1
