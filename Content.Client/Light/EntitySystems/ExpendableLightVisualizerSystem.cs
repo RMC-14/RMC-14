@@ -41,6 +41,7 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
             }
         }
 
+		// RMC14
         if (args.Sprite == null || !SpriteSystem.LayerExists((uid, args.Sprite), ExpendableLightVisualLayers.Overlay))
             return;
 

@@ -188,6 +188,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         if (args.Ignite)
             return;
+
         if (HasComp<PhysicsComponent>(ent))
             _physics.SetBodyType(ent, BodyType.Dynamic);
         RemCompDeferred<DropshipTargetComponent>(ent);

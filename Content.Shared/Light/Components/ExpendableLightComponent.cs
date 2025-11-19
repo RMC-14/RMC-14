@@ -36,6 +36,7 @@ public sealed partial class ExpendableLightComponent : Component
     [DataField]
     public string? SpriteShaderSpent = null;
 
+	// RMC14
     /// <summary>
     /// If the expendable light should activate itself on initialization
     /// </summary>

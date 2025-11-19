@@ -239,6 +239,8 @@ namespace Content.Server.Light.EntitySystems
 
             component.CurrentState = ExpendableLightState.BrandNew;
             component.StateExpiryTime = (float)component.GlowDuration.TotalSeconds;
+
+			// RMC14
             if (component.StartsActivated)
                 TryActivate((uid, component));
 
