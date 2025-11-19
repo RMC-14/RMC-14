@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Parasites will now collide with a door during their leap if the leap
-      didn't start underneath it.
-    type: Fix
-  - message: Parasites can't start a leap while underneath and airlock, they can still
-      start a leap while underneath a resin door.
-    type: Fix
-  - message: Thrown parasites will now collide with doors during the throw.
-    type: Fix
-  id: 2040
-  time: '2025-07-20T20:17:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7097
 - author: noctyrnal
   changes:
   - message: Fixed the draw depth of the 'ship security camera' console.
@@ -4621,5 +4608,14 @@
   id: 2540
   time: '2025-11-19T03:07:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8209
+- author: ExponentialWizard
+  changes:
+  - message: Air-fired CAS flares now have a sprite.
+    type: Add
+  - message: Fixed air flares lasting longer than 3 minutes.
+    type: Fix
+  id: 2541
+  time: '2025-11-19T03:11:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8331
 Name: RMC14
 Order: -1
