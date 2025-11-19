@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Chances Claim has recieved a large update.
-    type: Add
-  - message: Walls will now turn into girders when destroyed, instead of dissapearing.
-    type: Add
-  id: 2036
-  time: '2025-07-20T09:41:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7077
 - author: Dutch-VanDerLinde
   changes:
   - message: Added civilian-only loadouts for the correspondant, liaison, and survivors.
@@ -4638,5 +4629,13 @@
   id: 2536
   time: '2025-11-19T03:01:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8384
+- author: CatAndHats
+  changes:
+  - message: Added new survival pouch sprites; grey for synthetics, black for SPP
+      military and PMCs, and brown for everyone else.
+    type: Add
+  id: 2537
+  time: '2025-11-19T03:03:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8433
 Name: RMC14
 Order: -1
