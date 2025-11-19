@@ -12,9 +12,10 @@
   whitelisted: true
   supervisors: cm-job-supervisors-colonists
   accessGroups:
-  - Colonist
-  - Synth
+  - Colony # Colony All Access
+  - ColonistSynthShipside # Med, Engi, Synth
   roleWeight: 0.25
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -100,6 +101,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+      - type: ZombieImmune
   hidden: true
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 

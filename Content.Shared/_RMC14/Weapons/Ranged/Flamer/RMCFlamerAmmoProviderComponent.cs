@@ -2,10 +2,11 @@
 using Content.Shared.Weapons.Ranged;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedRMCFlamerSystem))]
 public sealed partial class RMCFlamerAmmoProviderComponent : Component, IShootable
 {
@@ -29,4 +30,10 @@ public sealed partial class RMCFlamerAmmoProviderComponent : Component, IShootab
 
     [DataField, AutoNetworkedField]
     public int MaxDuration = 24;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan CantShootPopupLast;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CantShootPopupCooldown = TimeSpan.FromSeconds(0.25);
 }

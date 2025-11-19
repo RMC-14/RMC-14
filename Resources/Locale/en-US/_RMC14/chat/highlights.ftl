@@ -12,8 +12,8 @@ highlights-executive-officer = Executive Officer, "XO", Captain, "Cap", Combat I
 highlights-staff-officer = Staff Officer, "SO", Combat Information Center, "CIC", Command, Overwatch, "OW", Appeal, Queen, "OB", Coords, Coordinates, Supply, Loose, Burst, "FOB", Comms, Tacmap, Map, Phone, "TECH REPORT", "SL", Commander
 
 # Requisitions
-highlights-quartermaster = Quartermaster, "QM", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
-highlights-cargo-technician = Cargo Technician, Cargo Tech, "CT" Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
+highlights-logistics-officer = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
+highlights-requisitions-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
 
 # Engineering
 highlights-chief-engineer = Chief Engineer, "CE", Engineering, Engineer, "Engi", Command, "OB", "OT"
@@ -27,9 +27,9 @@ highlights-nurse = Nurse, Medical, MedBay, "Med", Infected, Surgery, "Chem", "Ch
 highlights-researcher = Researcher, Research, Science, "Sci", "Chem", "Chems"
 
 # Military Police
-highlights-chief-MP = Chief MP, "CMP", "MP", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command"
-highlights-military-warden = Military Warden, Warden, "MP", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
-highlights-military-police = Military Police, "MP", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
+highlights-chief-MP = Chief MP, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command"
+highlights-military-warden = Military Warden, Warden, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
+highlights-military-police = Military Police, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
 
 # Other
 highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, Weston-Yamada, Weston Yamada, "WeYa", We-Ya

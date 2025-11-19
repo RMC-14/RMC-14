@@ -1,5 +1,5 @@
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCNoWebbing
   name: PMC fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit.
@@ -32,6 +32,28 @@
     startingWebbing: RMCWebbingPMCGunner
 
 - type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCSynth
+  suffix: Webbing, Synthetic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitVeteranPMCEngineer
+  name: PMC engineer fatigues
+  description: A black set of fatigues, designed for private security engineers. The symbol of the Weston-Yamada corporation is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/engineer.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCEngineer
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitVeteranPMCLeader
   name: PMC command fatigues
@@ -43,16 +65,13 @@
     startingWebbing: RMCWebbingPMC
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitVeteranPMCLeader
   id: RMCJumpsuitVeteranPMCCommando
   name: PMC commando uniform
   description: An armored uniform worn by We-Ya elite commandos. It is well protected while remaining light and comfortable.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/commando.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCWhiteout
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]

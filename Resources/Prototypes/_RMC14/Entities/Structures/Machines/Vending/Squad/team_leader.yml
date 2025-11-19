@@ -26,23 +26,29 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
+        points: 13
     #- id: CMM20MineBoxx4
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
     #  points: 5
+    # -id: RMCElectroshockGrenadex3
+    #  points: 16
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -54,9 +60,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -84,7 +88,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -132,6 +135,10 @@
       entries:
       - id: RMCBinoculars
         points: 5
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries:
       - id: RMCVisorNightVision
@@ -150,6 +157,8 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5
 
 - type: entity
@@ -171,7 +180,6 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
-      - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
@@ -180,6 +188,12 @@
       entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorM4
+        recommended: true
+      - id: RMCArmorVestFireteamLeader
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -234,6 +248,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -245,7 +260,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator and two packs of signal flares.
+  description: Contains a laser designator, two packs of signal flares and a Radio Telephone pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -254,6 +269,7 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator

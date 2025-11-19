@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "cmd_standard_canvas, med_standard_canvas, med_standard_roof, req_extension_roof, mess_extension_roof taken from cmss13 at https://github.com/cmss13-devs/cmss13/commit/d5b119380250ea512db2a5319e36592c7f604250 . The rest is made by Ramiris",
+  "size": {
+    "x": 160,
+    "y": 160
+  },
+  "states": [
+    {
+      "name": "standard_frame"
+    },
+    {
+      "name": "standard_roof"
+    },
+    {
+      "name": "standard_canvas"
+    },
+    {
+      "name": "extension_frame"
+    },
+    {
+      "name": "extension_roof"
+    },
+    {
+      "name": "extension_canvas"
+    },
+    {
+      "name": "cmd_standard_canvas"
+    },
+    {
+      "name": "med_standard_canvas"
+    },
+    {
+      "name": "med_standard_roof"
+    },
+    {
+      "name": "req_extension_roof"
+    }
+    ,
+    {
+      "name": "mess_extension_roof"
+    }
+    ,
+    {
+      "name": "mp_extension_roof"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -442,7 +443,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         scenarioSuccess = true;
                         break;
                     }
-                    //If there are no scenario jobs left, fall through to insert jobs
+
+                    if (!scenarioSuccess)
+                    {
+                        stop = true;
+                        return null; // All scenario slots are filled, do not allow job
+                    }
                 }
 
                 // select an insert in order, reducing the slot of that insert
@@ -625,7 +631,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     {
                         var slots = _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
                         if (scaling.Squad)
+                        {
+                            foreach (var squadId in comp.SquadIds)
+                            {
+                                if (comp.Squads.TryGetValue(squadId, out var squad) &&
+                                    TryComp(squad, out SquadTeamComponent? squadTeam))
+                                {
+                                    _squad.SetSquadMaxRole((squad, squadTeam), job, slots);
+                                }
+                            }
+
                             slots *= 4;
+                        }
 
                         Log.Info($"Setting {job} to {slots} slots.");
                         var jobs = stationJobs.SetupAvailableJobs;
@@ -1817,23 +1834,47 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _currentVote = null;
             RMCPlanet picked;
 
-            var voteResult = planets.Zip(args.Votes);
-            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes.GetValueOrDefault(p.First.Proto.ID))).ToList();
-            var maxVotes = adjustedVotes.Max(v => v.Item2);
-            var winningMaps = adjustedVotes.Where(item => item.Item2 == maxVotes).Select(item => item.Item1).ToList();
+            var adjustedVotes = planets
+                .Zip(args.Votes, (planet, newVotes) => (
+                    planet,
+                    newVotes,
+                    totalVotes: newVotes + _carryoverVotes.GetValueOrDefault(planet.Proto.ID)
+                ))
+                .ToList();
+            var maxVotes = adjustedVotes.Max(v => v.totalVotes);
+            var winningMaps = adjustedVotes
+                .Where(v => v.totalVotes == maxVotes)
+                .Select(v => v.planet)
+                .ToList();
+
+            var sb = new StringBuilder();
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-header"));
+            foreach (var result in adjustedVotes)
+            {
+                sb.AppendLine(Loc.GetString(result.newVotes > 0
+                    ? "rmc-distress-signal-next-map-votes-new"
+                    : "rmc-distress-signal-next-map-votes",
+                    ("map", result.planet.Proto.Name),
+                    ("votes", result.totalVotes),
+                    ("newVotes", result.newVotes)));
+            }
 
             if (winningMaps.Count > 1)
             {
+                sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-tiebreaker"));
+                foreach (var map in winningMaps)
+                {
+                    sb.AppendLine($"    {map.Proto.Name}");
+                }
                 picked = _random.Pick(winningMaps);
-                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
                 picked = winningMaps.First();
-                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name)));
+
+            _chatManager.DispatchServerAnnouncement(sb.ToString());
 
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {

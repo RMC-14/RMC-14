@@ -1,4 +1,4 @@
-﻿- type: lobbyBackground
+- type: lobbyBackground
   id: Pyro
   background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
 
@@ -51,9 +51,25 @@
   background: /Textures/_RMC14/Lobby/Focus_Fire.png
 
 - type: lobbyBackground
-  id: Evac
-  background: /Textures/_RMC14/Lobby/Evac.png
-
-- type: lobbyBackground
   id: Intelligence
   background: /Textures/_RMC14/Lobby/Intelligence.png
+
+- type: lobbyBackground
+  id: LiquorCabinetsLastStand
+  background: /Textures/_RMC14/Lobby/LiquorCabinetsLastStand.png
+
+- type: lobbyBackground
+  id: APushTooFar
+  background: /Textures/_RMC14/Lobby/APushTooFar.png
+
+- type: lobbyBackground
+  id: WEYALobby
+  background: /Textures/_RMC14/Lobby/WEYALobby.png
+
+- type: lobbyBackground
+  id: JudgmentDay
+  background: /Textures/_RMC14/Lobby/Judgment_Day.png
+
+- type: lobbyBackground
+  id: runningfromravager
+  background: /Textures/_RMC14/Lobby/running_from_ravager.png

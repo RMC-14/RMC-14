@@ -6,12 +6,12 @@
   playTimeTracker: RMCJobSynthetic
   ranks:
     RMCRankMasterSergeant: [ ]
-  startingGear: RMCGearSynthetic
+  startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
   whitelisted: true
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ShipMasterAccess
   - Synth
@@ -79,9 +79,9 @@
           Shock: -15
           Cold: -15
       addComponents:
-      # TODO darksight instead of night vision
       - type: NightVision
         innate: true
+        state: Half
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated
@@ -101,12 +101,8 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+      - type: ZombieImmune
   hidden: true
-
-- type: startingGear
-  id: RMCGearSynthetic
-  equipment:
-    id: RMCIDCardSynth
 
 - type: startingGear
   id: RMCGearSyntheticEquipped

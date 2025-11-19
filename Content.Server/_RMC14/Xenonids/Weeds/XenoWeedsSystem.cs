@@ -191,7 +191,8 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     {
                         if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
                             !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
-                            !weedableTransform.Anchored)
+                            !weedableTransform.Anchored ||
+                            weedable.Entity != null)
                         {
                             continue;
                         }
