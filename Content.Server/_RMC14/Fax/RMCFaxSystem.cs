@@ -37,6 +37,9 @@ public sealed class RMCFaxSystem : EntitySystem
 
     private void CopyMultipleWithLoop(EntityUid uid, FaxMachineComponent component, int copies)
     {
+        // Clamped to only allow 1 to 10 to prevent aboose
+        copies = Math.Clamp(copies, 1, 10);
+
         var originalTimeout = component.SendTimeoutRemaining;
         
         component.SendTimeoutRemaining = 0;
