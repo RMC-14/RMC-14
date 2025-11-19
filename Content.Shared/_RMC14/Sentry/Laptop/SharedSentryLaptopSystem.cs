@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Interaction;
@@ -10,7 +11,7 @@ using Content.Shared.Tools.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Network;
-using System.Linq;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Sentry.Laptop;
 
@@ -25,6 +26,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _sentryTargeting = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private const float NearbyLaptopRange = 2.0f;
 

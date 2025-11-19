@@ -1,20 +1,22 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Destructible;
+using Content.Server.NPC.HTN;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Sentry.Laptop;
-using Content.Shared.Damage;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using SentryAlertEvent = Content.Shared._RMC14.Sentry.Laptop.SentryAlertEvent;
 using SentryAlertType = Content.Shared._RMC14.Sentry.Laptop.SentryAlertType;
-using Content.Shared.Weapons.Ranged.Systems;
-using Content.Server.NPC.HTN;
 
 namespace Content.Server._RMC14.Sentry.Laptop;
 
@@ -27,6 +29,9 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+
+    private EntityQuery<ActorComponent> _actorQuery;
 
     private float _updateTimer;
     private const float UpdateInterval = 1.0f;
@@ -35,6 +40,8 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         base.Initialize();
 
+        _actorQuery = GetEntityQuery<ActorComponent>();
+
         SubscribeLocalEvent<SentryLaptopComponent, AfterActivatableUIOpenEvent>(OnUIOpened);
         SubscribeLocalEvent<SentryLaptopComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopViewCameraBuiMsg>(OnViewCameraMsg);
@@ -42,9 +49,13 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopGlobalToggleFactionBuiMsg>(OnGlobalToggleFactionMsg);
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopGlobalResetTargetingBuiMsg>(OnGlobalResetTargetingMsg);
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopGlobalTogglePowerBuiMsg>(OnGlobalTogglePowerMsg);
+        SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopCloseCameraBuiMsg>(OnCloseCameraMsg);
 
         SubscribeLocalEvent<SentryComponent, DamageChangedEvent>(OnSentryDamageChanged);
         SubscribeLocalEvent<SentryComponent, GunShotEvent>(OnSentryShot);
+
+        SubscribeLocalEvent<SentryLaptopWatcherComponent, ComponentShutdown>(OnWatcherShutdown);
+        SubscribeLocalEvent<SentryLaptopWatcherComponent, PlayerDetachedEvent>(OnWatcherDetached);
     }
 
     public override void Update(float frameTime)
@@ -185,6 +196,38 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
         if (!laptop.Comp.LinkedSentries.Contains(sentryUid.Value))
             return;
+
+        var user = args.Actor;
+        if (!_actorQuery.TryComp(user, out var actor))
+            return;
+
+        if (!TryComp<SentryLaptopWatcherComponent>(user, out var watcher))
+            watcher = EnsureComp<SentryLaptopWatcherComponent>(user);
+
+        if (watcher.CurrentSentry is { } oldNet && TryGetEntity(oldNet, out var oldSentry))
+            _viewSubscriber.RemoveViewSubscriber(oldSentry.Value, actor.PlayerSession);
+
+        watcher.Laptop = laptop.Owner;
+        watcher.CurrentSentry = GetNetEntity(sentryUid.Value);
+        Dirty(user, watcher);
+
+        _viewSubscriber.AddViewSubscriber(sentryUid.Value, actor.PlayerSession);
+    }
+
+    private void OnCloseCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopCloseCameraBuiMsg args)
+    {
+        var user = args.Actor;
+
+        if (!TryComp<SentryLaptopWatcherComponent>(user, out var watcher))
+            return;
+
+        if (_actorQuery.TryComp(user, out var actor) && watcher.CurrentSentry is { } net && TryGetEntity(net, out var sentryUid))
+            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
+
+        watcher.Laptop = null;
+        watcher.CurrentSentry = null;
+        Dirty(user, watcher);
+        RemCompDeferred<SentryLaptopWatcherComponent>(user);
     }
 
     private void OnSetNameMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopSetNameBuiMsg args)
@@ -252,60 +295,25 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         UpdateUI(laptop);
     }
 
-    private void OnSentryLaptopSetFactionsBuiMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopSetFactionsBuiMsg args)
+    private void OnWatcherShutdown(Entity<SentryLaptopWatcherComponent> watcher, ref ComponentShutdown args)
     {
-        if (!TryGetEntity(args.Sentry, out var sentryUid))
+        if (!_actorQuery.TryComp(watcher.Owner, out var actor))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryUid.Value))
-            return;
+        if (watcher.Comp.CurrentSentry is { } net && TryGetEntity(net, out var sentryUid))
+            _viewSubscriber.RemoveViewSubscriber((EntityUid)sentryUid, actor.PlayerSession);
 
-        if (TryComp<SentryTargetingComponent>(sentryUid.Value, out var targeting))
-        {
-            var factionSet = new HashSet<string>(args.Factions);
-            _sentryTargeting.SetFriendlyFactions((sentryUid.Value, targeting), factionSet);
-        }
-
-        UpdateUI(laptop);
+        watcher.Comp.Laptop = null;
+        watcher.Comp.CurrentSentry = null;
     }
 
-    private void OnSentryLaptopResetTargetingBuiMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopResetTargetingBuiMsg args)
+    private void OnWatcherDetached(Entity<SentryLaptopWatcherComponent> watcher, ref PlayerDetachedEvent args)
     {
-        if (!TryGetEntity(args.Sentry, out var sentryUid))
-            return;
+        if (watcher.Comp.CurrentSentry is { } net && TryGetEntity(net, out var sentryUid))
+            _viewSubscriber.RemoveViewSubscriber((EntityUid)sentryUid, args.Player);
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryUid.Value))
-            return;
-
-        if (TryComp<SentryTargetingComponent>(sentryUid.Value, out var targeting))
-        {
-            _sentryTargeting.ResetToDefault((sentryUid.Value, targeting));
-        }
-
-        UpdateUI(laptop);
-    }
-
-    private void OnSentryLaptopViewBuiMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopViewBuiMsg args)
-    {
-    }
-
-    private void OnSentryLaptopUnlinkBuiMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopUnlinkBuiMsg args)
-    {
-        if (!TryGetEntity(args.Sentry, out var sentryUid))
-            return;
-
-        laptop.Comp.LinkedSentries.Remove(sentryUid.Value);
-        laptop.Comp.SentryCustomNames.Remove(sentryUid.Value);
-        Dirty(laptop);
-        UpdateUI(laptop);
-    }
-
-    private void OnSentryLaptopUnlinkAllBuiMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopUnlinkAllBuiMsg args)
-    {
-        laptop.Comp.LinkedSentries.Clear();
-        laptop.Comp.SentryCustomNames.Clear();
-        Dirty(laptop);
-        UpdateUI(laptop);
+        watcher.Comp.Laptop = null;
+        watcher.Comp.CurrentSentry = null;
     }
 
     protected override void UpdateUI(Entity<SentryLaptopComponent> laptop)
