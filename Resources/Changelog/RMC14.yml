@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed breaching charges not requiring 1 engineering skill.
-    type: Fix
-  id: 2026
-  time: '2025-07-20T09:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7071
 - author: CyberTropic
   changes:
   - message: Corporate dome map insert to LV.
@@ -4636,5 +4629,14 @@
   id: 2526
   time: '2025-11-19T02:23:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8280
+- author: noctyrnal
+  changes:
+  - message: Added Bosenmori Basho, a large version of LV designed for PVE.
+    type: Add
+  - message: Fixed RCM, Corporate Security and UN Riot armor having PMC lights.
+    type: Fix
+  id: 2527
+  time: '2025-11-19T02:25:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8391
 Name: RMC14
 Order: -1
