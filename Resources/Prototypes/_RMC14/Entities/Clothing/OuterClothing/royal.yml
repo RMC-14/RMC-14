@@ -1,7 +1,7 @@
 # Royal Crown Marines
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: [CMArmorM4PMC, RMCAllowSuitStorageClothingArmorRoyal]
+  parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight, RMCAllowSuitStorageClothingArmorRoyal]
   id: RMCArmorRoyal
   name: kestrel armoured vest
   description: A customizable personal armor system used by the Royal Crown Marines. # TODO: write new, legally distinct description
@@ -75,7 +75,7 @@
     walkModifier: 0.64
     sprintModifier: 0.64
 
-- type: entity 
+- type: entity
   parent: RMCArmorRoyalLight
   id: RMCArmorRoyalLightFilled
   suffix: Filled
@@ -86,7 +86,7 @@
     - id: RMCExplosiveBreachingCharge
     - id: CMCrowbar # TODO RMC14 tactical prybar
 
-- type: entity 
+- type: entity
   parent: RMCArmorRoyalLight
   id: RMCArmorRoyalLightFilledMedic
   suffix: Filled, Medic
@@ -97,7 +97,7 @@
     - id: RMCMagazineRifleL24Extended
     - id: RMCMagazineRifleL24AP
 
-- type: entity 
+- type: entity
   parent: RMCArmorRoyalPointman
   id: RMCArmorRoyalPointmanFilled
   suffix: Filled
@@ -110,7 +110,7 @@
     - id: RMCMagazineRifleL24
       amount: 4
 
-- type: entity 
+- type: entity
   parent: RMCArmorRoyalPadded
   id: RMCArmorRoyalPaddedFilled
   suffix: Filled, Team Leader
@@ -125,7 +125,7 @@
     - id: RMCMagazineRifleL24
     - id: RMCMagazineRifleL24
 
-- type: entity 
+- type: entity
   parent: RMCArmorRoyalPadded
   id: RMCArmorRoyalPaddedFilledCO
   suffix: Filled, Major
