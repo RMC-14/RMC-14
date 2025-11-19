@@ -1,42 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added civilian-only loadouts for the correspondant, liaison, and survivors.
-    type: Add
-  id: 2037
-  time: '2025-07-20T09:42:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6938
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the last charge on a defibrillator not being usable.
-    type: Fix
-  id: 2038
-  time: '2025-07-20T09:45:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7090
-- author: to4no_fix
-  changes:
-  - message: Added automatic appointment of acting Commander system. Now, 2 minutes
-      after the start of the round, ARES checks for the presence of CO and XO. If
-      no senior commanders are found, ARES notifies all marines and starts a timer
-      to select an acting Commander. A Marine can remove his ID during the selection
-      process if he does not want to be a Commander. After one minute, ARES selects
-      candidates from available Marines and appoints an acting Commander with the
-      highest authority and priority rank. The selected acting Commander will be announced  by
-      ARES, including his name and title. Also, if necessary, additional access will
-      be added to his ID. This system will help maintain the integrity of the operation
-      with a low amount of players online.
-    type: Add
-  - message: Command headset added to CIC Command Tablet cabinet.
-    type: Add
-  - message: The CIC Command Tablet cabinet can now store headsets in addition to
-      the tablet. The total capacity of the cabinet is 3 items.
-    type: Tweak
-  - message: Updated the information in the Chain of Command article in the guidebook
-      to clarify the seniority of Marines from squad leader down.
-    type: Tweak
-  id: 2039
-  time: '2025-07-20T10:35:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6290
 - author: Dygon
   changes:
   - message: Parasites will now collide with a door during their leap if the leap
@@ -4637,5 +4599,27 @@
   id: 2537
   time: '2025-11-19T03:03:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8433
+- author: Vixting
+  changes:
+  - message: Sentry respects faction IFF
+    type: Add
+  id: 2538
+  time: '2025-11-19T03:06:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8367
+- author: CatAndHats
+  changes:
+  - message: The 571-C sentry gun is now highlighted as a recommended option in the
+      combat technician vendor.
+    type: Tweak
+  id: 2539
+  time: '2025-11-19T03:06:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8023
+- author: CatAndHats
+  changes:
+  - message: Fixed xenos being able to examine humanoid's skills.
+    type: Fix
+  id: 2540
+  time: '2025-11-19T03:07:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8209
 Name: RMC14
 Order: -1
