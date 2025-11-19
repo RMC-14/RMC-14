@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Corporate dome map insert to LV.
-    type: Add
-  id: 2027
-  time: '2025-07-20T09:26:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7067
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Liaisons now spawn with the country club outfit instead of the black
-      suit pants.
-    type: Tweak
-  - message: Fixed WeYA PMC headsets having the incorrect sprite.
-    type: Fix
-  id: 2028
-  time: '2025-07-20T09:25:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7054
 - author: SharkSnake98
   changes:
   - message: Added some items, rooms, and cosmetic changes to the Admin fax rooms
@@ -4638,5 +4621,21 @@
   id: 2527
   time: '2025-11-19T02:25:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8391
+- author: CatAndHats
+  changes:
+  - message: Fixed the LV-624 corporate goon medic special survivor to have the proper
+      hud icon
+    type: Fix
+  id: 2528
+  time: '2025-11-19T02:47:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8413
+- author: PursuitInAshes
+  changes:
+  - message: The LV-624 Goon Leader survivor variant will now spawn with the correct
+      uniform.
+    type: Fix
+  id: 2529
+  time: '2025-11-19T02:48:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8285
 Name: RMC14
 Order: -1
