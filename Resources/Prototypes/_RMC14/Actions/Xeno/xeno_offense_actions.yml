@@ -14,6 +14,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
+      strength: Normal
       plasmaCost: 100
       time: 50 # seconds
       dps: 8
@@ -43,6 +44,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
+      strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
       dps: 4
@@ -64,6 +66,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 125
       time: 20 # seconds
       dps: 20
@@ -85,6 +88,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 0
       energyCost: 100
       applyTimeMultiplier: 0.25
