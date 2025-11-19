@@ -776,6 +776,20 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledHighCommand
+  suffix: Filled, High Command
+  components:
+  - type: StorageFill
+    contents:
+    # M40 CCDP Greande #RMC14 TODO
+    - id: RMCGrenadeFlashBang
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+    - id: RMCArmorM3General
+    - id: CMArmorHelmetM11CGeneral
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackBlack
   components:
   - type: Sprite
