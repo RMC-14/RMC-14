@@ -11,4 +11,22 @@
   - type: Sprite
     state: handcuff
 
+- type: entity
+  name: ziptie box
+  parent: RMCBoxHandcuffs
+  id: RMCBoxZiptie
+  description: A box full of zipties.
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCZipties
+        amount: 10
+  - type: Item
+    size: Small
+    shape: null
+  - type: Tag
+    tags:
+    - RMCBoxZipties
 
+- type: Tag
+  id: RMCBoxZipties
