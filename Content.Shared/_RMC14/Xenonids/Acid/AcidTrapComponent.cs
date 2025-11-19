@@ -13,7 +13,10 @@ public sealed partial class AcidTrapComponent : Component
     public int TrapLevel = 2;
 
     [DataField, AutoNetworkedField]
-    public int Cost = 100;
+    public int PlasmaCost = 100;
+
+    [DataField, AutoNetworkedField]
+    public int EnergyCost = 75;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spray = "XenoAcidSprayTrap";

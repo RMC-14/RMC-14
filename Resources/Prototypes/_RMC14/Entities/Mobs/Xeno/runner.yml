@@ -250,6 +250,9 @@
         types:
           Heat: 1
   - type: XenoAciderGeneration
+  - type: AcidTrap
+    trapLevel: 3
+    spray: XenoAcidSprayTrapStrong
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59
