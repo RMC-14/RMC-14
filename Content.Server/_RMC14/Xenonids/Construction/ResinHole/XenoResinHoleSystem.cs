@@ -200,12 +200,12 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         {
             if (HasComp<XenoAciderGenerationComponent>(args.User))
             {
-                if (!_xenoEnergy.HasEnergyPopup(args.User, ourAcid.EnergyCost, false))
+                if (!_xenoEnergy.HasEnergyPopup(args.User, ourAcid.Cost, false))
                     return;
             }
             else 
             {
-                if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.PlasmaCost, false))
+                if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
                     return;
             }
 
@@ -283,8 +283,8 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return;
 
             if (HasComp<XenoAciderGenerationComponent>(args.User))
-                _xenoEnergy.TryRemoveEnergy(args.User, acid.EnergyCost);
-            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.PlasmaCost) && !HasComp<XenoAciderGenerationComponent>(args.User))
+                _xenoEnergy.TryRemoveEnergy(args.User, acid.Cost);
+            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost) && !HasComp<XenoAciderGenerationComponent>(args.User))
                 return;
 
             SetTrapType(resinHole, acid.Spray);
