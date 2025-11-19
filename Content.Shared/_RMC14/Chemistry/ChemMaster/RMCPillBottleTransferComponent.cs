@@ -3,8 +3,8 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class RMCPillBottleTransferComponent : Component
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed class RMCPillBottleTransferComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float TimePerBottle = 0.3f; // time_to_empty = 3
