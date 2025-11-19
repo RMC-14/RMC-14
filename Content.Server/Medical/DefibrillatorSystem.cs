@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Suicide;
+using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -283,7 +284,8 @@ public sealed class DefibrillatorSystem : EntitySystem
                     _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _player), session);
                 }
             }
-            else
+            // RMC14 don't show the pop-up for training dummies.
+            else if (!HasComp<RMCTrainingDummyComponent>(target))
             {
                 _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-no-mind"),
                     InGameICChatType.Speak, true);

@@ -99,13 +99,133 @@
           tags:
           - RMCWeaponRifleM5SPR
 
+- type: entity
+  parent: RMCPVECaseM42A2
+  id: RMCPVECaseType23
+  name: Type 23 shotgun case
+  description: A heavy case for storing a type 23 pump-action shotgun, a SPP semi-automatic shotgun.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunType23
+      - RMCHandful
+      - RMCAttachmentType23Stock
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunType23
+    - id: RMCAttachmentType23Stock
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunType23
+- type: entity
+  parent: RMCPVECaseM5SPR
+  id: RMCPVECaseM5SPR2
+  name: M5SPR2 battle rifle case
+  description: A large case for storing an M5SPR2, a modified We-Ya PMC battle rifle equipped with HV-P Rounds.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCWeaponRifleM5SPR2
+      - CMMagazineRifleM4SPR
+      - CMMagazineRifleM4SPRAP
+      - CMMagazineRifleM4SPRExt
+      - RMCMagazineRifleM5SPRHVP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM5SPR2
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponRifleM5SPR2
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseType64
+  name: Type 64 smg case
+  description: A heavy case for storing a Type 64 submachine-gun, the standard SMG of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/type_64.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponSMGType64
+      - RMCMagazineSMGType64
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGType64
+    - id: RMCMagazineSMGType64
+    - id: RMCMagazineSMGType64
+    - id: RMCMagazineSMGType64
+    - id: RMCMagazineSMGType64
+    - id: RMCMagazineSMGType64
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponSMGType64
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseType88
+  name: Type 88 DMR case
+  description: A heavy case for storing a Type 88 Designated Marksman Rifle, the standard-issue DMR of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/type_88.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCType88SniperRifle
+      - RMCMagazineSniperType88
+  - type: StorageFill
+    contents:
+    - id: RMCType88SniperRifle
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCType88SniperRifle
+
 # Sentry
 
 - type: entity
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseSentry
   name: UN 571-C Sentry Gun case
-  description: A gun case containing the UA 571-C sentry unit and a spare drum.
+  description: A gun case containing the UN 571-C sentry unit and a spare drum.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
@@ -127,6 +247,39 @@
         whitelist:
           tags:
           - RMCSentry
+
+- type: entity
+  parent: RMCPVECaseSentry
+  id: RMCPVECaseSentrySPP
+  name: SPP SDS-R8 Sentry Gun case
+  description: A gun case containing the SPP SDS-R8 unit and a spare drum.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSentryMiniSPP
+    - id: RMCMagazineSentry
+
+- type: entity
+  parent: RMCPVECaseSentry
+  id: RMCPVECaseSentryPMC
+  name: We-Ya 512-M mini sentry case
+  description: A gun case containing the We-Ya 512-M mini sentry and a spare drum.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCSentryWeYa
+      - RMCMagazineSentry
+  - type: StorageFill
+    contents:
+    - id: RMCSentryMiniWeYa
+    - id: RMCMagazineSentry
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCSentryWeYa
 
 # Misc
 

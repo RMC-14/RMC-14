@@ -62,6 +62,7 @@
         whitelist:
           tags:
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -112,6 +113,19 @@
   id: WeaponRifleM5SPR
   description: The M5SPR battle rifle is a modified version of the M4SPR, able to chamber High Velocity Piercing rounds, and equipped a two-burst configuration.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_custom_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -148,9 +162,69 @@
           - CMMagazineRifleM4SPRExt
           - RMCMagazineRifleM5SPRHVP
           - RMCMagazineRifleM5SPRHVHIP
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_custom_barrel
+        Desert: d_m4spr_custom_barrel
+        Snow: s_m4spr_custom_barrel
+        Classic: c_m4spr_custom_barrel
+        Urban: u_m4spr_custom_barrel
   - type: Tag
     tags:
     - RMCWeaponRifleM5SPR
+
+- type: entity
+  parent: WeaponRifleM5SPR
+  id: WeaponRifleM5SPR2
+  name: M5SPR/2 battle rifle
+  description: The M5SPR/2 battle rifle is a modified version of the M5SPR, designed for PMC Operatives to take out targets at longer ranges.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m5spr2.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: m5spr2_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m5spr2.rsi
+  - type: RMCSelectiveFire
+    recoilUnwielded: 1
+    scatterWielded: 4
+    baseFireRate: 2.8
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleM5SPRHVP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM5SPRHVP
+          - RMCMagazineRifleM5SPRHVHIP
+  - type: ItemCamouflage
+    camouflageVariations: {}
+    layers:
+      barrel: {}
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM5SPR2
 
 - type: entity
   parent: WeaponRifleM4SPR
@@ -240,6 +314,7 @@
   parent: CMMagazineRifleM4SPR
   id: CMMagazineRifleM4SPRExt
   name: "M4SPR extended magazine (10x24mm)"
+  description: "An extended magazine of standard 10x24mm rounds for use in the M4SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     capacity: 35
@@ -383,6 +458,9 @@
 
 - type: Tag
   id: RMCWeaponRifleM5SPR
+
+- type: Tag
+  id: RMCWeaponRifleM5SPR2
 
 - type: Tag
   id: RMCMagazineRifleM5SPRHVHIP

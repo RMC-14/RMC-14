@@ -294,9 +294,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private void OnBufferTransferAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferTransferAllMsg args)
     {
-        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
-            return;
-
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
@@ -304,8 +301,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         {
             _solution.RemoveAllSolution(buffer.Value);
         }
+        else if (TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
+        {
+            _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
+        }
 
-        _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
         Dirty(ent);
         RefreshUIs(ent);
     }
@@ -377,6 +377,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         var originalSolution = string.Join(", ",
             buffer.Value.Comp.Solution.Contents.Select(c => $"{c.Quantity}u {c.Reagent.Prototype}"));
         var coords = Transform(ent).Coordinates;
+
+        var reagentsPerPill = buffer.Value.Comp.Solution.Contents
+            .Select(c => (c.Reagent.Prototype, Amount: c.Quantity / divider))
+            .ToList();
+
         foreach (var fill in _toFill)
         {
             var label = CompOrNull<LabelComponent>(fill)?.CurrentLabel;
@@ -399,11 +404,20 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 if (TryComp(pill, out SolutionSpikerComponent? spiker) &&
                     _solution.TryGetSolution(pill, spiker.SourceSolution, out var pillSolution))
                 {
-                    _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, pill, pillSolution.Value, perPill);
+                    foreach (var (reagentProto, amount) in reagentsPerPill)
+                    {
+                        var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
+                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
+                    }
+
+                    _adminLog.Add(LogType.Action,
+                        LogImpact.Medium,
+                        $"{ToPrettyString(args.Actor):player} transferred {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)} to {ToPrettyString(pill):target}, which now contains {SharedSolutionContainerSystem.ToPrettyString(pillSolution.Value.Comp.Solution)}");
                 }
             }
         }
 
+        _solution.UpdateChemicals(buffer.Value);
         _adminLog.Add(LogType.RMCChemMaster,
             $"""
             {ToPrettyString(args.Actor):user} created {ent.Comp.PillAmount:pillAmount} {perPill:pillUnits}u pills in {ent.Comp.SelectedBottles.Count:bottleAmount} pill bottles using {ToPrettyString(ent):chemMaster}.

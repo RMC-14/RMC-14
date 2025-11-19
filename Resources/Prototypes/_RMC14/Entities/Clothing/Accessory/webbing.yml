@@ -289,6 +289,18 @@
         tags:
         - Sidearm
     - type: StoreAfterFailedInteract
+    - type: RMCStorageEjectHand
+      state: Open
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterBlack
+  name: black shoulder holster
+  description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_black.rsi
+    state: holster
 
 - type: entity
   parent: CMWebbingBase
@@ -571,6 +583,40 @@
       amount: 3
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFMAR
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 3
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCLFMAR50
+  suffix: Filled
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineMar50LMG
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
+      amount: 5
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFBuckshot
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 3
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
   name: M272 pattern knife vest
@@ -637,7 +683,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCRangefinder
     - id: RMCGrenadeBlastM12
     - id: RMCTelescopicBaton
@@ -650,8 +696,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
+    - id: RMCMREWeYa
     - id: CMCrowbar # TODO RMC14: tactical prybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
@@ -665,7 +711,7 @@
     contents:
     # - id: CMSplint5
     - id: CMFireExtinguisherPortable
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
 
@@ -698,7 +744,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch
@@ -709,7 +755,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalHelmetBallistic
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch

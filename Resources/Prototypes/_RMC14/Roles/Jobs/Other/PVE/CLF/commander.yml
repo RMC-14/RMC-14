@@ -37,6 +37,7 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
+        RMCSkillVehicles: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-commander
