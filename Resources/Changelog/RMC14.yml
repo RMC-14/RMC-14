@@ -1,26 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Added new reload sounds for the M16.
-    type: Add
-  - message: Added new gunshot sounds for the CMB Revolver and MK-45.
-    type: Add
-  - message: Fixed the XM88 having 2 bullet examine texts.
-    type: Fix
-  - message: Fixed the MK-45 not automatically ejecting empty mags
-    type: Fix
-  id: 2030
-  time: '2025-07-20T09:28:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7061
-- author: J C Denton
-  changes:
-  - message: Fixed Airlock assembly being non-corrodible.
-    type: Fix
-  id: 2031
-  time: '2025-07-20T09:29:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7065
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added CMB Deputy and marshal badge ID cards
     type: Add
   id: 2032
@@ -4639,5 +4619,20 @@
   id: 2530
   time: '2025-11-19T02:52:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8368
+- author: breeplayx3
+  changes:
+  - message: Added new lobby art by breeplayx3
+    type: Add
+  id: 2531
+  time: '2025-11-19T02:57:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8311
+- author: Ian321
+  changes:
+  - message: Syringes now toggle correctly between drawing and injecting when used
+      on a hypospray.
+    type: Fix
+  id: 2532
+  time: '2025-11-19T02:58:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8372
 Name: RMC14
 Order: -1
