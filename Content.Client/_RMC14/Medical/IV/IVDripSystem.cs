@@ -83,35 +83,38 @@ public sealed class IVDripSystem : SharedIVDripSystem
             return;
 
         var attachmentState = dialysis.Comp.AttachedTo != null ? "hooked" : "unhooked";
-        _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Attachment, attachmentState);
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Attachment, out var attachmentLayer, false))
+            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), attachmentLayer, attachmentState);
 
-        if (dialysis.Comp.IsDetaching)
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Effect, out var effectLayer, false))
         {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, true);
-            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "draining");
-        }
-        else if (dialysis.Comp.IsAttaching)
-        {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, true);
-            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "filling");
-        }
-        else if (dialysis.Comp.AttachedTo != null)
-        {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, true);
-            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), DialysisVisualLayers.Effect, "running");
-        }
-        else
-        {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Effect, false);
+            string? effectState = null;
+            var showEffect = false;
+            if (dialysis.Comp.IsDetaching)
+            {
+                effectState = "draining";
+                showEffect = true;
+            }
+            else if (dialysis.Comp.IsAttaching)
+            {
+                effectState = "filling";
+                showEffect = true;
+            }
+            else if (dialysis.Comp.AttachedTo != null)
+            {
+                effectState = "running";
+                showEffect = true;
+            }
+
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), effectLayer, showEffect);
+            if (showEffect && effectState != null)
+                _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), effectLayer, effectState);
         }
 
-        if (dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching)
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, out var filteringLayer, false))
         {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, true);
-        }
-        else
-        {
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, false);
+            var showFiltering = dialysis.Comp.AttachedTo != null && !dialysis.Comp.IsAttaching && !dialysis.Comp.IsDetaching;
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), filteringLayer, showFiltering);
         }
     }
 }

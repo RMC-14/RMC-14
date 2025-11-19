@@ -191,7 +191,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
                 foreach (var reagentQuantity in chemicalSol.Contents)
                 {
-                    if (!dialysisComp.TransferableReagents.Contains(reagentQuantity.Reagent.Prototype))
+                    if (!dialysisComp.NonTransferableReagents.Contains(reagentQuantity.Reagent.Prototype))
                     {
                         _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
                     }

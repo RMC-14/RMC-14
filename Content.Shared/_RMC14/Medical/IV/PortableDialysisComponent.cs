@@ -43,7 +43,7 @@ public sealed partial class PortableDialysisComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillMedical"] = 2 };
 
     [DataField, AutoNetworkedField]
-    public string[] TransferableReagents = ["Blood"];
+    public string[] NonTransferableReagents = ["Blood"];
 
     [DataField, AutoNetworkedField]
     public bool IsAttaching;
