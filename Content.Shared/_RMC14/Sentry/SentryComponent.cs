@@ -62,6 +62,27 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HomingShots = true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Camera;
+
+    [DataField, AutoNetworkedField]
+    public float LowAmmoThreshold = 0.25f;
+
+    [DataField, AutoNetworkedField]
+    public float CriticalHealthThreshold = 0.25f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastLowAmmoAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastHealthAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastTargetAlert;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AlertCooldown = TimeSpan.FromSeconds(5);
 }
 
 [Serializable, NetSerializable]
@@ -77,3 +98,4 @@ public enum SentryLayers
 {
     Layer,
 }
+

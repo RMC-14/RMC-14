@@ -1,10 +1,11 @@
 - type: entity
   abstract: true
   parent: RMCSentryPremade
-  id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
+  id: RMCBaseSentry
   name: turret
   components:
   - type: Sentry
+  - type: Eye
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -71,6 +72,10 @@
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: SentryTargeting
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: normal_uac_sentry_handheld
