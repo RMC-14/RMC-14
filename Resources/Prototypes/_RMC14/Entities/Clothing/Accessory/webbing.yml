@@ -673,7 +673,7 @@
     - id: RMCLaserDesignatorScout
     - id: CMFlash
     - id: RMCTelescopicBaton
-    - id: RMCHandcuffs
+    - id: RMCThermalTarpProvostFolded
     - id: RMCHandcuffs
 
 - type: entity

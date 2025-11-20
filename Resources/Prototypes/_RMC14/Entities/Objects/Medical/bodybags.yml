@@ -284,3 +284,59 @@
   components:
   - type: Foldable
     folded: true
+
+# Folded V2 thermal tarp
+- type: entity
+  parent: RMCThermalTarpV2
+  id: RMCThermalTarpV2Folded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+
+# P3 thermal tarp
+- type: entity
+  parent: RMCBaseStorageBag
+  id: RMCThermalTarpProvost
+  name: P3 reactive thermal tarp
+  suffix: Provost
+  description: A more compact and improved version of the V2 thermal tarp, further upgraded for provost usage, intended primarily for the transportation of captured or deceased suspects. It has drastically improved cloaking technology than earlier models, allowing it to quickly and entirely cloak itself, but can only be used with special training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    layers:
+    - state: provosttarp_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: provosttarp_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: provosttarp_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: _RMC14/Objects/Medical/bodybags.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    state: provosttarp_closed
+  - type: RMCPassiveStealth
+    toggleable: true
+    minOpacity: 0.00
+    delay: 1
+    unCloakDelay: 1
+    whitelist:
+      components:
+      - ScoutWhitelist
+  - type: EntityStorageVisuals
+    stateDoorOpen: provosttarp_open
+  - type: Corrodible
+    isCorrodible: false
+  - type: Tag # Prevents slowdown from pulling.
+
+# Folded P3 thermal tarp
+- type: entity
+  parent: RMCThermalTarpProvost
+  id: RMCThermalTarpProvostFolded
+  suffix: Provost, folded
+  components:
+  - type: Foldable
+    folded: true
