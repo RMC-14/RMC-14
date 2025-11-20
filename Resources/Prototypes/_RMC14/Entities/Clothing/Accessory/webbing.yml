@@ -544,14 +544,11 @@
     - id: CMMultitool
 
 - type: entity
-  parent: CMWebbing
+  parent: RMCToolWebbingSmall
   id: RMCToolWebbing
   name: tool webbing
   description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
-    state: webbing
   - type: Storage
     grid:
     - 0,0,13,1 #7 slots
@@ -570,12 +567,6 @@
       - Welder
       - PowerCell
       - EntrenchingTool
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      components:
-      - EntrenchingTool
-      - LightReplacer
   - type: Webbing
     components:
     - type: Storage
@@ -926,3 +917,4 @@
 #     - Nanopaste
       - id: CMSurgicalLine
       - id: CMSynthGraft
+
