@@ -1,5 +1,4 @@
 # MEDICAL
-
 - type: entity
   id: CMMedilinkSupplyPort
   name: medilink supply port
@@ -15,7 +14,6 @@
     drawdepth: FloorObjects
   - type: CMMedicalSupplyLink
   - type: RMCMesonsNonviewable
-
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -33,7 +31,7 @@
     randomizeReagentsPlanetside: true
     current: 600
     max: 600
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMBicaridine
@@ -53,6 +51,8 @@
       - Vial
       tags:
       - Bottle
+  - type: RMCMedLinkRestocker
+    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
@@ -61,33 +61,37 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        amount: 10
       - id: CMGauze10
-        amount: 6
+        amount: 10
 #      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+#        amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        amount: 5
+      - id: CMDyloveneAutoInjector
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
+        amount: 5
 #      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
 #      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
+        amount: 5
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
@@ -109,19 +113,21 @@
     - name: Pill bottles
       entries:
       - id: CMPillCanisterBicaridine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterKelotane
-        amount: 2
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
+#        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
+#        amount: 4
     - name: Medical utilities
       entries:
       - id: CMDefibrillator
@@ -131,7 +137,7 @@
       - id: CMSynthGraft
         amount: 2
       - id: CMHyposprayFilledTricord
-        amount: 2
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
@@ -139,7 +145,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        amount: 3
       - id: CMSyringe
         amount: 7
 
@@ -161,33 +167,37 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        amount: 10
       - id: CMGauze10
-        amount: 6
+        amount: 10
 #      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+#        amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        amount: 5
+      - id: CMDyloveneAutoInjector
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
+        amount: 5
 #      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
 #      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+ #        amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
+        amount: 5
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
@@ -208,22 +218,22 @@
 #        amount: 3
     - name: Pill bottles
       entries:
-      - id: RMCPillCanisterMeralyneBicaridine
-        amount: 2
-      - id: CMPillCanisterKelotaneDermaline
-        amount: 2
-      - id: CMPillCanisterTricordrazine
-        amount: 2
+      - id: CMPillCanisterBicaridine
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        amount: 4
+      - id: CMPillCanisterKelotane
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
+#        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
+#        amount: 4
     - name: Medical utilities
       entries:
       - id: CMSurgicalLine
@@ -231,7 +241,7 @@
       - id: CMSynthGraft
         amount: 2
       - id: CMHyposprayFilledTricord
-        amount: 2
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
@@ -239,7 +249,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        amount: 3
       - id: CMSyringe
         amount: 7
 
@@ -262,6 +272,8 @@
     whitelist:
       tags:
       - Bottle
+  - type: RMCMedLinkRestocker
+    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
     - name: Liquid bottles
@@ -276,12 +288,12 @@
         amount: 6
       - id: CMBottleKelotane
         amount: 6
-    #      - id: CMBottleOxycodone # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottlePeridaxon # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottleTramadol # TODO RMC14
-    #        amount: 6
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 6
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 6
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 6
     - name: Miscellaneous
       entries:
       - id: CMBeaker
@@ -296,7 +308,6 @@
         amount: 3
       - id: CMSyringe
         amount: 7
-
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -325,7 +336,7 @@
   - type: CMSolutionRefiller
     current: 600
     max: 600
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -333,13 +344,16 @@
     whitelist:
       components:
       - Hypospray
+  - type: RMCMedLinkRestocker
+    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor
     sections:
     - name: Autoinjectors
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 5
-    #- id: CMPainStopAutoinjector
+#      - id: CMPainStopAutoinjector
+#        amount: 5
     - name: Devices
       entries:
       - id: CMHealthAnalyzer
@@ -349,11 +363,11 @@
       - id: CMFireExtinguisherPortable
         amount: 5
       - id: CMOintment10
-        amount: 7
+        amount: 8
       - id: CMGauze10
-        amount: 7
+        amount: 8
 #      - id: CMMedicalSplints5
-#        amount: 7
+#        amount: 8
 
 - type: entity
   parent: ColMarTechMarineMedical
@@ -401,25 +415,27 @@
     whitelist:
       components:
       - Hypospray
+  - type: RMCMedLinkRestocker
+    allowSupplyLinkRestock: false
   - type: CMAutomatedVendor
     hackable: true
     sections:
     - name: Supplies
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
+      #- id: CMPainStopAutoinjector
+      #  amount: 2
       - id: CMGauze10
         amount: 4
       - id: CMOintment10
         amount: 4
-      # - id: CMMedicalSplints5
-      #   amount: 4
+      #- id: CMMedicalSplints5
+      #  amount: 4
     - name: Utility
       entries:
       - id: CMHealthAnalyzer
-        amount: 3
+        amount: 2
 
 - type: entity
   parent: RMCNanoMed
@@ -430,7 +446,7 @@
   - type: CMSolutionRefiller
     current: 150
     max: 150
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -518,16 +534,17 @@
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
+  - type: RMCMedLinkRestocker
+    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor
     hackable: true
     sections:
     - name: Blood Packs
       entries:
       - id: CMBloodPackFull
-        amount: 30
+        amount: 30 # 6 blood types, 5 each
     - name: Miscellaneous
       entries:
       - id: CMBloodPack
         amount: 5
         name: empty blood pack
-
