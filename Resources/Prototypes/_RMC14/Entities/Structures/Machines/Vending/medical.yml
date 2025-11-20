@@ -21,6 +21,13 @@
   - type: RMCMesonsNonviewable
 
 - type: entity
+  parent: CMMedilinkSupplyPort
+  id: RMCGreyMedilinkSupplyPort
+  components:
+  - type: CMMedicalSupplyLink
+    baseState: medlink
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorMedicalAllAccess
   name: We-Ya-Med Plus
