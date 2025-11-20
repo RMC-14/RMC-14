@@ -1,6 +1,7 @@
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -10,15 +11,19 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
 {
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
 
     private TimeSpan _nextRestock = TimeSpan.Zero;
-    private const float RestockInterval = 30f; // 30 Seconds PROCESSING_SUBSYSTEM_DEF(slowobj)
+    private const float RestockInterval = 30f; // Restock every 30 seconds PROCESSING_SUBSYSTEM_DEF(slowobj)
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
 
         var curTime = _timing.CurTime;
         if (curTime < _nextRestock)
@@ -31,6 +36,9 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
         while (vendors.MoveNext(out var uid, out var restocker, out var vendor, out var xform))
         {
             if (!restocker.AllowSupplyLinkRestock)
+                continue;
+
+            if (!xform.Anchored)
                 continue;
 
             if (roundDuration.TotalMinutes < restocker.RestockMinimumRoundTime)
