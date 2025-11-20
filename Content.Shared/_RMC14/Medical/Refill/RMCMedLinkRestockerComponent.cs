@@ -10,5 +10,5 @@ public sealed partial class RMCMedLinkRestockerComponent : Component
     public bool AllowSupplyLinkRestock = true;
 
     [DataField, AutoNetworkedField]
-    public int RestockMinimumRoundTime = 20; //Minutes
+    public int RestockMinimumRoundTime = 20; //20 Minutes
 }

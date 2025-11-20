@@ -32,11 +32,11 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
         {
             if (!restocker.AllowSupplyLinkRestock)
                 continue;
-            if (!xform.Anchored)
-                continue;
+
             if (roundDuration.TotalMinutes < restocker.RestockMinimumRoundTime)
                 continue;
-            if (!TryGetSupplyLink((uid, restocker)))
+
+            if (!TryGetSupplyLink(uid, restocker, xform))
                 continue;
 
             RestockVendorItems((uid, vendor));
@@ -54,8 +54,10 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
             {
                 if (entry.Max is not { } max || entry.Amount >= max)
                     continue;
+
                 if (entry.Box != null)
                     continue;
+
                 if (!_random.Prob(restockChance))
                     continue;
 

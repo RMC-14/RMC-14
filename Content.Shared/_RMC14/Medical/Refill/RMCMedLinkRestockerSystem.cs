@@ -18,24 +18,28 @@ public abstract class RMCMedLinkRestockerSystem : EntitySystem
     {
         using (args.PushGroup(nameof(RMCMedLinkRestockerComponent)))
         {
-            if (TryGetSupplyLink(ent))
+            if (!TryComp(ent.Owner, out TransformComponent? xform))
+                return;
+
+            if (TryGetSupplyLink(ent.Owner, ent.Comp, xform))
             {
                 args.PushMarkup(Loc.GetString("rmc-vending-machine-supply-link-connected"));
             }
         }
     }
 
-    protected bool TryGetSupplyLink(Entity<RMCMedLinkRestockerComponent> vendor)
+    protected bool TryGetSupplyLink(EntityUid vendor, RMCMedLinkRestockerComponent restocker, TransformComponent xform)
     {
-        if (!vendor.Comp.AllowSupplyLinkRestock)
+        if (!restocker.AllowSupplyLinkRestock)
             return false;
-        if (!TryComp<TransformComponent>(vendor, out var xform) || !xform.Anchored)
+
+        if (!xform.Anchored)
             return false;
 
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(vendor);
         while (anchored.MoveNext(out var anchoredId))
         {
-            if (HasComp<CMMedicalSupplyLinkComponent>(anchoredId))
+            if (HasComp(anchoredId, typeof(CMMedicalSupplyLinkComponent)))
                 return true;
         }
 

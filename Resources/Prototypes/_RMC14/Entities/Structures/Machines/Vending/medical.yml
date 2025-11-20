@@ -52,7 +52,6 @@
       tags:
       - Bottle
   - type: RMCMedLinkRestocker
-    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
@@ -273,7 +272,6 @@
       tags:
       - Bottle
   - type: RMCMedLinkRestocker
-    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
     - name: Liquid bottles
@@ -345,7 +343,6 @@
       components:
       - Hypospray
   - type: RMCMedLinkRestocker
-    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor
     sections:
     - name: Autoinjectors
@@ -407,7 +404,7 @@
   - type: CMSolutionRefiller
     current: 250
     max: 250
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -535,7 +532,6 @@
     access:
     - [ "CMAccessMedical" ]
   - type: RMCMedLinkRestocker
-    restockMinimumRoundTime: 20
   - type: CMAutomatedVendor
     hackable: true
     sections:
