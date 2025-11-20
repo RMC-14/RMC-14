@@ -696,7 +696,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCRangefinder
     - id: RMCGrenadeBlastM12
     - id: RMCTelescopicBaton
@@ -709,8 +709,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
+    - id: RMCMREWeYa
     - id: CMCrowbar # TODO RMC14: tactical prybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
@@ -724,7 +724,7 @@
     contents:
     # - id: CMSplint5
     - id: CMFireExtinguisherPortable
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
 
@@ -757,7 +757,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch
@@ -768,7 +768,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalHelmetBallistic
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch
