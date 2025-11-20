@@ -874,7 +874,7 @@
     - id: CMPortableSurgicalBedSpawnFolded
     - id: CMBloodPackFull
     - id: CMBloodPackFull
-    - id: RMCSynthResetKey # TODO RMC14 someone else who can actually sprite please redo this
+    - id: RMCSynthResetKeyHalcyon
 
 - type: entity
   parent: RMCSatchelWelder
