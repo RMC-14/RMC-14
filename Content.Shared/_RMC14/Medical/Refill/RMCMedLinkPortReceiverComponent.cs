@@ -3,8 +3,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Medical.Refill;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMMedicalSupplyLinkSystem))]
-public sealed partial class RMCMedLinkRestockerComponent : Component
+[Access(typeof(RMCMedicalSupplyLinkSystem))]
+public sealed partial class RMCMedLinkPortReceiverComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool AllowSupplyLinkRestock = true;

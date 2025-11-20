@@ -14,9 +14,10 @@
     drawdepth: FloorObjects
     layers:
     - state: medlink_green_unclamped
-  - type: Appearance
+      map: ["base"]
   - type: CMMedicalSupplyLink
     baseState: medlink_green
+  - type: RMCAnimation
   - type: RMCMesonsNonviewable
 
 - type: entity
@@ -55,7 +56,7 @@
       - Vial
       tags:
       - Bottle
-  - type: RMCMedLinkRestocker
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
@@ -275,7 +276,7 @@
     whitelist:
       tags:
       - Bottle
-  - type: RMCMedLinkRestocker
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
     - name: Liquid bottles
@@ -346,7 +347,7 @@
     whitelist:
       components:
       - Hypospray
-  - type: RMCMedLinkRestocker
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor
     sections:
     - name: Autoinjectors
@@ -416,7 +417,7 @@
     whitelist:
       components:
       - Hypospray
-  - type: RMCMedLinkRestocker
+  - type: RMCMedLinkPortReceiver
     allowSupplyLinkRestock: false
   - type: CMAutomatedVendor
     hackable: true
@@ -535,7 +536,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
-  - type: RMCMedLinkRestocker
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor
     hackable: true
     sections:

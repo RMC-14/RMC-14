@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.Refill;
 
-public sealed class CMMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.CMMedicalSupplyLinkSystem
+public sealed class RMCMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.RMCMedicalSupplyLinkSystem
 {
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -41,7 +41,7 @@ public sealed class CMMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.CMM
                 if (!TryComp<CMAutomatedVendorComponent>(anchoredId, out var vendorComp))
                     continue;
 
-                if (!TryComp<RMCMedLinkRestockerComponent>(anchoredId, out var restocker))
+                if (!TryComp<RMCMedLinkPortReceiverComponent>(anchoredId, out var restocker))
                     continue;
 
                 if (!restocker.AllowSupplyLinkRestock)
@@ -57,7 +57,7 @@ public sealed class CMMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.CMM
 
     private void RestockVendorItems(Entity<CMAutomatedVendorComponent> vendor)
     {
-        var changed = false;
+        var restocked = false;
         const float restockChance = 0.2f; // 20% chance to restock each item per check
 
         foreach (var section in vendor.Comp.Sections)
@@ -71,12 +71,12 @@ public sealed class CMMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.CMM
                     continue;
 
                 entry.Amount++;
-                changed = true;
+                restocked = true;
                 _vendor.AmountUpdated(vendor, entry);
             }
         }
 
-        if (changed)
+        if (restocked)
             Dirty(vendor);
     }
 }
