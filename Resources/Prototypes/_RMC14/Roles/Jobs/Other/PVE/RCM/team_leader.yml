@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalTeamLeaderPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-section-leader
+  accessGroups:
+  - FTL
   spawnMenuRoleName: RCM Team Leader (PVE)
   special:
   - !type:AddComponentSpecial

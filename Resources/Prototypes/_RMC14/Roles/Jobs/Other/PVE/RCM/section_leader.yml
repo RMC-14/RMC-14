@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalSectionLeaderPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-troop-sergeant
+  accessGroups:
+  - FTL
   spawnMenuRoleName: RCM Section Leader (PVE)
   special:
   - !type:AddComponentSpecial

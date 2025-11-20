@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalTroopSargePVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-troop-commander
+  accessGroups:
+  - SquadLeader
   spawnMenuRoleName: RCM Troop Sergeant (PVE)
   special:
   - !type:AddComponentSpecial

@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalBombSpecPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+  - WeaponSpec
   spawnMenuRoleName: RCM Bombardment Specialist (PVE)
   special:
   - !type:AddComponentSpecial

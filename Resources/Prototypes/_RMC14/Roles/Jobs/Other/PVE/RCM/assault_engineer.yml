@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalAssaultEngineerPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+  - CombatTech
   spawnMenuRoleName: RCM Assault Engineer (PVE)
   special:
   - !type:AddComponentSpecial

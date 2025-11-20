@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalTroopCommanderPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-squadron-command
+  accessGroups:
+  - ShipMasterAccess
   spawnMenuRoleName: RCM Troop Commander (PVE)
   special:
   - !type:AddComponentSpecial

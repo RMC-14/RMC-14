@@ -10,6 +10,8 @@
   icon: "RMCJobIconRoyalMedicPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+  - HospitalCorpsman
   spawnMenuRoleName: RCM Medical Assistant (PVE)
   special:
   - !type:AddComponentSpecial
