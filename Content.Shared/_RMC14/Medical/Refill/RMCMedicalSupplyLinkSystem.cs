@@ -39,7 +39,7 @@ public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
         }
     }
 
-    protected bool TryGetSupplyLink(EntityUid vendor, RMCMedLinkPortReceiverComponent portReceiver, TransformComponent xform)
+    private bool TryGetSupplyLink(EntityUid vendor, RMCMedLinkPortReceiverComponent portReceiver, TransformComponent xform)
     {
         if (!portReceiver.AllowSupplyLinkRestock)
             return false;
