@@ -10,9 +10,13 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
-    state: medlink_green_clamped # TODO RMC14 change states dynamically
+    state: medlink_green_unclamped
     drawdepth: FloorObjects
+    layers:
+    - state: medlink_green_unclamped
+  - type: Appearance
   - type: CMMedicalSupplyLink
+    baseState: medlink_green
   - type: RMCMesonsNonviewable
 
 - type: entity

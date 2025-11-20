@@ -1,17 +1,17 @@
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Medical.Refill;
 
-public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMCMedLinkRestockerSystem
+public sealed class CMMedicalSupplyLinkSystem : Shared._RMC14.Medical.Refill.CMMedicalSupplyLinkSystem
 {
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
 
@@ -22,9 +22,6 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
     {
         base.Update(frameTime);
 
-        if (_net.IsClient)
-            return;
-
         var curTime = _timing.CurTime;
         if (curTime < _nextRestock)
             return;
@@ -32,22 +29,29 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
         _nextRestock = curTime + TimeSpan.FromSeconds(RestockInterval);
 
         var roundDuration = _gameTicker.RoundDuration();
-        var vendors = EntityQueryEnumerator<RMCMedLinkRestockerComponent, CMAutomatedVendorComponent, TransformComponent>();
-        while (vendors.MoveNext(out var uid, out var restocker, out var vendor, out var xform))
+        var links = EntityQueryEnumerator<CMMedicalSupplyLinkComponent, TransformComponent>();
+        while (links.MoveNext(out var linkUid, out _, out var linkXform))
         {
-            if (!restocker.AllowSupplyLinkRestock)
+            if (!linkXform.Anchored)
                 continue;
 
-            if (!xform.Anchored)
-                continue;
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(linkUid);
+            while (anchored.MoveNext(out var anchoredId))
+            {
+                if (!TryComp<CMAutomatedVendorComponent>(anchoredId, out var vendorComp))
+                    continue;
 
-            if (roundDuration.TotalMinutes < restocker.RestockMinimumRoundTime)
-                continue;
+                if (!TryComp<RMCMedLinkRestockerComponent>(anchoredId, out var restocker))
+                    continue;
 
-            if (!TryGetSupplyLink(uid, restocker, xform))
-                continue;
+                if (!restocker.AllowSupplyLinkRestock)
+                    continue;
 
-            RestockVendorItems((uid, vendor));
+                if (roundDuration.TotalMinutes < restocker.RestockMinimumRoundTime)
+                    continue;
+
+                RestockVendorItems((anchoredId, vendorComp));
+            }
         }
     }
 
@@ -61,9 +65,6 @@ public sealed class RMCMedLinkRestockerSystem : Shared._RMC14.Medical.Refill.RMC
             foreach (var entry in section.Entries)
             {
                 if (entry.Max is not { } max || entry.Amount >= max)
-                    continue;
-
-                if (entry.Box != null)
                     continue;
 
                 if (!_random.Prob(restockChance))
