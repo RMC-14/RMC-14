@@ -37,6 +37,9 @@
                         <Button Name="MessageSquadButton" Access="Public" Text="Message Squad"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="MessageSquadLeaderButton" Access="Public" Text="Message Squad Leader"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
                         <Button Name="HideSquadInfoButton" Access="Public" Text="Hide Squad Info"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />

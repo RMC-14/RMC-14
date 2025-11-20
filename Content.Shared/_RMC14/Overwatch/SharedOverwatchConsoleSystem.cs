@@ -122,6 +122,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
             // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
+            subs.Event<OverwatchConsoleSendMessageSquadLeaderBuiMsg>(OnOverwatchMessageSquadLeaderBui);
         });
 
         Subs.CVar(_config, RMCCVars.RMCOverwatchMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
@@ -556,6 +557,44 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
         var userMsg = $"[bold][color=#6685F5]'{Name(squad.Value)}' squad message sent: '{message}'.[/color][/bold]";
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
+    }
+    private void OnOverwatchMessageSquadLeaderBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageSquadLeaderBuiMsg args)
+    {
+        if (!ent.Comp.CanMessageSquad)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastMessage + ent.Comp.MessageCooldown)
+            return;
+
+        var message = args.Message;
+        if (message.Length > 200)
+            message = message[..200];
+
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            Prototype(squad.Value) is not { } squadProto)
+        {
+            return;
+        }
+
+        ent.Comp.LastMessage = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad leader message: {args.Message}");
+        if (TryComp<SquadTeamComponent>(squad.Value, out var squadComp) && _squad.TryGetSquadLeader((squad.Value, squadComp), out var SL))
+        {
+            _marineAnnounce.AnnounceSingle($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits directly: [font size=16][bold]{message}[/bold][/font][/color]", SL.Owner);
+        }
+        
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+        var userMsg = $"[bold][color=#6685F5]'{Name(squad.Value)}' squad leader message sent: '{message}'.[/color][/bold]";
         var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
         _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }

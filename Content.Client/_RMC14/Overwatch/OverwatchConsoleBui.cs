@@ -232,6 +232,23 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     window.OpenCentered();
                 };
 
+                 monitor.MessageSquadLeaderButton.OnPressed += _ =>
+                {
+                    var window = new OverwatchTextInputWindow();
+                    window.Title = "Squad Leader Message";
+
+                    void SendSquadLeaderMessage()
+                    {
+                        SendPredictedMessage(new OverwatchConsoleSendMessageSquadLeaderBuiMsg(window.MessageBox.Text));
+                        window.Close();
+                    }
+
+                    window.MessageBox.OnTextEntered += _ => SendSquadLeaderMessage();
+                    window.OkButton.OnPressed += _ => SendSquadLeaderMessage();
+                    window.CancelButton.OnPressed += _ => window.Close();
+                    window.OpenCentered();
+                };
+
                 var canSupplyDrop = EntMan.HasComponent<SupplyDropComputerComponent>(Owner) && squad.CanSupplyDrop;
                 TabContainer.SetTabVisible(monitor.SupplyDrop, canSupplyDrop);
 
@@ -239,6 +256,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
                     monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageSquadLeaderButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
