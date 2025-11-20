@@ -285,15 +285,6 @@
   - type: Foldable
     folded: true
 
-# Folded V2 thermal tarp
-- type: entity
-  parent: RMCThermalTarpV2
-  id: RMCThermalTarpV2Folded
-  suffix: folded
-  components:
-  - type: Foldable
-    folded: true
-
 # P3 thermal tarp
 - type: entity
   parent: RMCBaseStorageBag
