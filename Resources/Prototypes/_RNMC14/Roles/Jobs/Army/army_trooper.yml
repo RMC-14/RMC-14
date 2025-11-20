@@ -1,0 +1,95 @@
+# Sniper
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyTrooper
+  name: rnmc-job-name-army-trooper
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyTrooper
+  ranks:
+    RMCRankPrivate: []
+  startingGear: RNMCJobArmyTrooper
+  icon: RNMCJobIconArmyTrooper
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Trooper
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+    - type: DemoSpecWhitelist
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-trooper
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyTrooper
+  name: US army trooper ghost role sniper
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyTrooper
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyTrooper
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-trooper
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyTrooper
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyTrooper
+  equipment:
+    id: RNMCDogtagArmyTrooper
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: RNMCArmorPBAS
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: CMBackpackMarine
+    belt: RMCBeltMarineMK1
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchExplosiveFilledHEDP
+  storage:
+    back:
+    - CMPackFlare
+
+- type: playTimeTracker
+  id: RNMCJobArmyTrooper
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyTrooper
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armytrooper
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyTrooper
+  name: Army Trooper's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCJobArmyTrooper

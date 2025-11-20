@@ -1,0 +1,102 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyLogisticsOfficer
+  name: rnmc-job-name-army-logi-officer
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyLogiOfficer
+  ranks:
+    RMCRankFirstLT: []
+  startingGear: RNMCJobArmyLogiOfficer
+  icon: RNMCJobIconArmyLogiOfficer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Logistics Officer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillConstruction: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-logi-officer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyLogiOfficer
+  name: US army logistics officer ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyLogiOfficer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyLogiOfficer
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-logi-officer
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyLogisticsOfficer
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyLogiOfficer
+  equipment:
+    id: RNMCDogtagArmyLogiOfficer
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmyLogiOfficerWebbing
+    outerClothing: RMCHazardVestBlue
+    gloves: RNMCHandsBrownFingerless
+    head: CMHeadCap
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    belt: RMCBeltHolsterPistol
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    belt:
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS # yes i know i can define an amount of 1 specific id no im not gonna do that fuck you
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCWeaponPistolB92FS
+
+- type: playTimeTracker
+  id: RNMCJobArmyLogiOfficer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyLogiOfficer
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armylogiofficer
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyLogiOfficer
+  name: Army Logistics Officer's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyLogisticsOfficer

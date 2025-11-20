@@ -1,0 +1,31 @@
+- type: entity
+  parent: RMCHeadsetMarine
+  id: CMHeadsetUSArmy
+  name: Army radio headset
+  description: A robust headset used by members of the United States Army. Built to outlast those it's issued to.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/headsets.rsi
+    state: army
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RNMCEncryptionKeyUSArmy
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: CMHeadsetUSArmyCommand
+  name: Army Command headset
+  description: A robust headset used by officers of the United States Army. Built to outlast those it's issued to. This model features a reinforced brace complete with blinky light to make you seem even more important to the grunts you lead!
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/headsets.rsi
+    state: army_com
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RNMCEncryptionKeyUSArmy
+      - CMEncryptionKeyColony
+      - CMEncryptionKeyJTAC
+      - CMEncryptionKeyCommand

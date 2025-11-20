@@ -1,0 +1,98 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyTechnicalEngineer
+  name: rnmc-job-name-army-tech-engi
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyTechEngi
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RNMCJobArmyTechEngi
+  icon: RNMCJobIconArmyTechEngi
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Technical Engineer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 3
+        RMCSkillJTAC: 2
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-tech-engi
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyTechEngi
+  name: US army technical engineer ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyTechEngi
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyTechEngi
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-tech-engi
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyTechnicalEngineer
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyTechEngi
+  equipment:
+    id: RNMCDogtagArmyTechEngi
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmyBoilersuitWebbing
+    outerClothing: RMCHazardVestBlack
+    gloves: CMHandsInsulated
+    head: CMHeadCap
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: RMCSatchelWelderChestrig
+    suitstorage: RMCFlashlight
+    pocket1: RMCPouchConstructionFillFull
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    back:
+    - CMPackFlare
+    - RMCEngineerKit
+    - RMCSentryPVE
+
+- type: playTimeTracker
+  id: RNMCJobArmyTechEngi
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyTechEngi
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armyengi
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyTechEngi
+  name: Army Technical Engineer's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyTechnicalEngineer

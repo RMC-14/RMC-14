@@ -15,3 +15,12 @@
   color: "#aa4242"
   longRange: true
   tower: true
+
+- type: radioChannel
+  id: USArmy
+  name: chat-radio-us-army
+  keycode: "3"
+  frequency: 1495
+  color: "#075f31"
+  longRange: true
+  tower: true

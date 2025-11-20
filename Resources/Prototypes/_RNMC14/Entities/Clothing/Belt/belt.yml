@@ -15,3 +15,13 @@
     whitelist:
       tags:
       - RNMCBulletElephant
+
+- type: entity
+  parent: CMBeltMarine
+  id: RNMCMK1BeltFilled
+  suffix: Filled, MK1
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 3

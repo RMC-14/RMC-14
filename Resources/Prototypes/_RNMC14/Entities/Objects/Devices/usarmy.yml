@@ -1,0 +1,11 @@
+- type: entity
+  parent: CMEncryptionKey
+  id: RNMCEncryptionKeyUSArmy
+  name: US Army Radio Encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - USArmy
+    defaultChannel: USArmy
+  - type: Sprite
+    state: stripped_key

@@ -1,0 +1,41 @@
+- type: entity
+  parent: RMCPatchBase
+  id: RNMCPatchInfantry
+  name: Army Infantry patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 1st Cavalry Division.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Accessory/Patches/infantry_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RNMC14/Objects/Clothing/Accessory/Patches/infantry_patch.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RNMCPatchUSArmy
+  name: US Army patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the United States Army.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Accessory/Patches/army_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RNMC14/Objects/Clothing/Accessory/Patches/army_patch.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RNMCPatchArmyIntelligence
+  name: Army Intelligence patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 525th Army Intelligence Brigade.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Accessory/Patches/intelligence_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RNMC14/Objects/Clothing/Accessory/Patches/intelligence_patch.rsi
+      state: patch

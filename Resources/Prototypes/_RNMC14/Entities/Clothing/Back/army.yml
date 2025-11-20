@@ -1,0 +1,17 @@
+- type: entity
+  parent: CMBackpackMarineMedic
+  id: RNMCBackpackArmyMedic
+  name: Army combat medic backpack
+  description: A standard-issue backpack worn by US Army medics.
+
+- type: entity
+  parent: CMSatchelMarine
+  id: CMSatchelArmyIntel
+  name: Army expedition chestrig
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20

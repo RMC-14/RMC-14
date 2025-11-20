@@ -1,0 +1,157 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyIntelligenceOfficer
+  name: rnmc-job-name-army-intel-officer
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyIntelOfficer
+  ranks:
+    RMCRankCaptain: []
+  startingGear: RNMCJobArmyIntelOfficer
+  icon: RNMCJobIconArmyIntelOfficer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Intel Officer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 2
+        RMCSkillIntel: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-intel-officer
+  hidden: true
+
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyIntelligenceOfficerLesserRank
+  name: rnmc-job-name-army-intel-officer
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyIntelOfficerLesserRank
+  ranks:
+    RMCRankSecondLT: []
+  startingGear: RNMCJobArmyIntelOfficer
+  icon: RNMCJobIconArmyIntelOfficer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Intel Officer (Lesser Rank)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 2
+        RMCSkillIntel: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillJTAC: 3
+        RMCSkillPilot: 1
+        RMCSkillConstruction: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-intel-officer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyIntelOfficer
+  name: US army intelligence officer ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmyIntelOfficer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyIntelOfficer
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-intel-officer
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyIntelligenceOfficer
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyIntelOfficer
+  equipment:
+    id: RNMCDogtagArmyIntelOfficer
+    ears: CMHeadsetUSArmyCommand
+    jumpsuit: RNMCJumpsuitArmyBoilersuit
+    outerClothing: RNMCArmorPBASMk2
+    gloves: RNMCHandsBrownFingerless
+    head: CMHeadCap
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMex
+    back: RMCSatchelMarineIntelChestrig
+    belt: RMCBeltHolsterPistol
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchMagazine
+  storage:
+    back:
+    - CMFolderBlack
+    - CMPackFlare
+    belt:
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS # yes i know i can define an amount of 1 specific id no im not gonna do that fuck you
+    - RMCMagazinePistolB92FS
+    - RMCMagazinePistolB92FS
+    - RMCWeaponPistolB92FS
+    pocket2:
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    outerClothing:
+    - RMCLaserDesignator
+
+- type: playTimeTracker
+  id: RNMCJobArmyIntelOfficer
+
+- type: playTimeTracker
+  id: RNMCJobArmyIntelOfficerLesserRank
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyIntelOfficer
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armyio
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyIntelOfficer
+  name: Army Intelligence Officer's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyIntelligenceOfficer

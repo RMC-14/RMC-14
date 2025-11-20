@@ -1,0 +1,126 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyHeavyGunner
+  name: rnmc-job-name-army-heavy-gunner
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyHeavyGunner
+  ranks:
+    RNMCRankSpecialist: []
+  startingGear: RNMCJobArmyHeavyGunner
+  icon: RNMCJobIconArmyHeavyGunner
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Heavy Gunner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillSmartGun: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-heavy-gunner
+  hidden: true
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmyHeavyGunnerLesserRank
+  name: rnmc-job-name-army-heavy-gunner
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmyHeavyGunnerLesserRank
+  ranks:
+    RMCRankPrivateFirstClass: []
+  startingGear: RNMCJobArmyHeavyGunner
+  icon: RNMCJobIconArmyHeavyGunner
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Heavy Gunner (Lesser Rank)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillSmartGun: 1
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-heavy-gunner
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmyHeavyGunner
+  name: US army heavy gunner ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCArmyHeavyGunner
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmyHeavyGunner
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-heavy-gunner
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmyHeavyGunner
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmyHeavyGunner
+  equipment:
+    id: RNMCDogtagArmyHeavyGunner
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: CMArmorSmartGunCombatHarness
+    gloves: RNMCHandsBrownFingerless
+    head: CMHeadCap
+    shoes: CMBootsArmyBlack
+    eyes: RMCGlassesSmartGunSight
+    belt: RMCBeltSmartGunOperatorPistol
+    suitstorage: RMCSmartGunPVE
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareFilled
+
+- type: playTimeTracker
+  id: RNMCJobArmyHeavyGunner
+
+- type: playTimeTracker
+  id: RNMCJobArmyHeavyGunnerLesserRank
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmyHeavyGunner
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armysmartgunner
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmyHeavyGunner
+  name: Army Heavy Gunner's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmyHeavyGunner

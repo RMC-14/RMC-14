@@ -1,0 +1,139 @@
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmySquadLeader
+  name: rnmc-job-name-army-sl
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmySL
+  ranks:
+    RNMCRankSergeantFirstClass: []
+  startingGear: RNMCJobArmySL
+  icon: RNMCJobIconArmySL
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Squad Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillJTAC: 3
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-sl
+  hidden: true
+
+- type: job
+  parent: CMJobBase
+  id: RNMCArmySquadLeaderLesserRank
+  name: rnmc-job-name-army-sl
+  description: rnmc-ghost-role-information-army-description
+  playTimeTracker: RNMCJobArmySLLesserRank
+  ranks:
+    RMCRankStaffSergeant: []
+  startingGear: RNMCJobArmySL
+  icon: RNMCJobIconArmySL
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Army Squad Leader (Lesser Rank)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillJTAC: 3
+    - type: JobPrefix
+      prefix: rnmc-job-prefix-army-sl
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidArmySL
+  name: US army squad leader ghost role spawner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: co_spawn
+  - type: RandomHumanoidSpawner
+    settings: RNMCArmySL
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RNMCArmySL
+  components:
+  - type: GhostRole
+    name: rnmc-job-name-army-sl
+    description: rnmc-ghost-role-information-army-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RNMCArmySL
+    raffle:
+      settings: short
+
+- type: startingGear
+  id: RNMCJobArmySL
+  equipment:
+    id: RNMCDogtagArmySL
+    ears: CMHeadsetUSArmy
+    jumpsuit: RNMCJumpsuitArmy
+    outerClothing: RNMCArmorPBAS
+    gloves: RNMCHandsBrownFingerless
+    head: RNMCArmorHelmetPHAS
+    shoes: CMBootsArmyBlack
+    eyes: RNMCGlassesBiMexBlack
+    back: RMCBackpackRTO
+    belt: RNMCMK1BeltFilled
+    suitstorage: RNMCWeaponRifleM41AMK1Army
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFirstResponderFill
+  storage:
+    outerClothing:
+    - RMCLaserDesignator
+    back:
+    - CMPackFlare
+    - RMCPackFlareCAS
+    - CMPacketGrenadeHighExplosiveFilled
+
+- type: playTimeTracker
+  id: RNMCJobArmySL
+
+- type: playTimeTracker
+  id: RNMCJobArmySLLesserRank
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RNMCJobIconArmySL
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: armysl
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RNMCDogtagArmySL
+  name: Army Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RNMCArmySquadLeader

@@ -1,0 +1,8 @@
+- type: entity
+  parent: RMCAttachmentMK1GrenadeLauncher
+  id: RMCAttachmentMK1GrenadeLauncherLoaded
+  suffix: loaded, M40 HEDP
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 5
+    proto: CMGrenadeHighExplosive

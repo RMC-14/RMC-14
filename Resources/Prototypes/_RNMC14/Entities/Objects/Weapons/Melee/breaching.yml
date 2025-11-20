@@ -1,0 +1,21 @@
+- type: entity
+  parent: [RMCBaseMeleeWeapon, Sledgehammer]
+  id: RNMCBreachingHammer
+  name: D2 Breaching Hammer
+  description: A much lighter version of the B5 Breaching Hammer, this destructive tool packs enough force in its swings to take down walls with relative ease. It can punch through almost anything, hit like a truck, and unlike its predecessor it can be wielded by most adult humans.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Weapons/Melee/breaching_black.rsi
+  - type: Clothing
+    slots: Back
+    sprite: _RNMC14/Objects/Weapons/Melee/breaching_black.rsi
+  - type: MeleeWeapon
+    attackRate: 0.5
+    damage:
+      types:
+        Blunt: 80
+        Structural: 45
+    soundHit:
+      collection: GenericHit
+    wideAnimationRotation: 90

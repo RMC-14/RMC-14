@@ -1,0 +1,14 @@
+- type: entity
+  parent: [RMCMarineHelmetBase, RMCFoldableHelmetBase]
+  id: RNMCArmorHelmetPHAS
+  name: Personal Head Armor System helmet
+  description: Despite it failing to be procured by the USCMC, the US Army happily introduced the new M12 series of helmets to vast swathes of it's forces in a short span of time under the PHAS program, a complementary program to the PBAS.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Head/army.rsi
+  - type: Clothing
+    sprite: _RNMC14/Objects/Clothing/Head/army.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbBuckshot
+    - id: RMCGogglesM1A1BallisticBlue

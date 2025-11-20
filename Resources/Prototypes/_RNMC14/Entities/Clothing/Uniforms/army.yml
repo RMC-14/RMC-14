@@ -1,0 +1,83 @@
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RNMCJumpsuitArmy
+  name: army combat uniform
+  description: Standard-issue Army uniform in a two-tone desert/temperate color scheme, complete with venlar armor inserts at critical areas to protect from blades and ballistics.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Uniforms/army_jumpsuit.rsi
+  - type: Appearance
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchInfantry, RNMCPatchUSArmy ]
+  - type: CMArmor
+    bullet: 15
+    melee: 10
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RNMCJumpsuitArmyWebbing
+  name: army combat uniform
+  description: Standard-issue Army uniform in a two-tone desert/temperate color scheme, complete with venlar armor inserts at critical areas to protect from blades and ballistics.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Uniforms/army_jumpsuit.rsi
+  - type: Appearance
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchInfantry, RNMCPatchUSArmy ]
+  - type: CMArmor
+    bullet: 15
+    melee: 10
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingSmallFilled
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RNMCJumpsuitArmyBoilersuit
+  name: multi-branch operations boilersuit
+  description:  uniform favoured by those in the UA armed forces who are rarely on the field. Looks a little outdated.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Uniforms/boilersuit.rsi
+  - type: Appearance
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchArmyIntelligence, RNMCPatchUSArmy ]
+  - type: CMArmor
+    bullet: 15
+
+- type: entity
+  parent: RNMCJumpsuitArmyBoilersuit
+  id: RNMCJumpsuitArmyBoilersuitWebbing
+  name: multi-branch operations boilersuit
+  description:  uniform favoured by those in the UA armed forces who are rarely on the field. Looks a little outdated.
+  suffix: tool webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingSmallFilled
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RNMCJumpsuitArmyLogiOfficerWebbing
+  name: logistics officer uniform
+  description: A nicely-fitting military uniform for a logistics officer, combining style & practicality. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Clothing/Uniforms/RO_jumpsuit.rsi
+  - type: Appearance
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchUSArmy ]
+  - type: CMArmor
+    bullet: 15
+    melee: 10
+  - type: WebbingClothing
+    startingWebbing: CMWebbing
+
+- type: entity
+  parent: CMJumpsuitCargoTech
+  id: RNMCJumpsuitArmyLogiSpecialistWebbing
+  name: support uniform
+  description: A pair of hard-wearing BDU pants & a short-sleeve breathable shirt. Perfect for those who work to support the frontline troops in various ways.
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbing
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RNMCPatchUSArmy ]

@@ -118,6 +118,10 @@
     - MarineIntel
     - WEYA
     - CMB
+# RNMC
+    - SunRiders
+    - RedDawn
+    - USArmy
 
 - type: entity
   abstract: true
