@@ -34,13 +34,13 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
             if (curTime < portReceiver.NextRestock)
                 continue;
 
-            portReceiver.NextRestock = curTime + TimeSpan.FromSeconds(portReceiver.RestockIntervalSeconds);
             if (roundDuration.TotalMinutes < portReceiver.RestockMinimumRoundTime)
                 continue;
 
             if (!IsConnectedToSupplyLink(vendorUid))
                 continue;
 
+            portReceiver.NextRestock = curTime + TimeSpan.FromSeconds(portReceiver.RestockIntervalSeconds);
             RestockVendorItems((vendorUid, vendorComp), portReceiver);
         }
     }

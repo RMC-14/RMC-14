@@ -11,7 +11,6 @@ public abstract class SharedMedicalSupplyLinkSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCAnimationSystem _animation = default!;
 
-
     public override void Initialize()
     {
         base.Initialize();
