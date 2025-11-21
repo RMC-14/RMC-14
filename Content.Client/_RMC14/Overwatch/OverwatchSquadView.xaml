@@ -101,6 +101,9 @@
                                             <Button Name="TransferMarineButton" Access="Public"
                                                     Text="Transfer marine" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" />
+                                            <Button Name="InsubordinationButton" Access="Public" Text="Insubordination"
+                                                    StyleClasses="ActionButton" ModulateSelfOverride="#D3B400">
+                                            </Button>
                                         </BoxContainer>
                                     </PanelContainer>
                                     <BoxContainer Orientation="Vertical" Margin="5"

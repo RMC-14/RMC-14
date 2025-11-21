@@ -26,6 +26,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Security.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
@@ -94,6 +95,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
+        SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchInsubordinateMarineSelectedEvent>(OnInsubordinationSelected);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -108,6 +110,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleShowDeadBuiMsg>(OnOverwatchShowDeadBui);
             subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
             subs.Event<OverwatchConsoleTransferMarineBuiMsg>(OnOverwatchTransferMarineBui);
+            subs.Event<OverwatchConsoleInsubordinateMarineBuiMsg>(OnOverwatchMarkForInsubordinationBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
             subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
@@ -258,6 +261,35 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
     }
 
+    private void OnInsubordinationSelected(Entity<OverwatchConsoleComponent> ent, ref OverwatchInsubordinateMarineSelectedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (GetEntity(args.Actor) is not { Valid: true } actor)
+            return;
+
+        if (!TryGetEntity(args.Marine, out var marineId))
+            return;
+
+        var criminalComp = EnsureComp<CriminalRecordComponent>(marineId.Value);
+        if (criminalComp.StatusIcon == "SecurityIconWanted")
+        {
+            _popup.PopupCursor($"{Name(marineId.Value)} is already marked for insubordination.", actor, PopupType.LargeCaution);
+            return;
+        }
+        criminalComp.StatusIcon = "SecurityIconWanted";
+        Dirty(marineId.Value, criminalComp);
+
+        var selfMsg = $"{Name(marineId.Value)} has been reported for insubordination. Logging to enlistment file.";
+        _marineAnnounce.AnnounceSingle(selfMsg, actor);
+        _popup.PopupCursor(selfMsg, actor, PopupType.Large);
+
+        var targetMsg = $"You've been reported for insubordination by your overwatch officer.";
+        _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
+        _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
+    }
+
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
@@ -373,6 +405,32 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
 
         _dialog.OpenOptions(ent, args.Actor, "Transfer Marine", options, "Choose marine to transfer");
+    }
+    private void OnOverwatchMarkForInsubordinationBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleInsubordinateMarineBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Squad is not { } selectedSquad)
+            return;
+
+        var state = GetOverwatchBuiState(ent);
+        var options = new List<DialogOption>();
+        if (state.Marines.TryGetValue(selectedSquad, out var marines))
+        {
+            foreach (var marine in marines)
+            {
+                var option = new DialogOption
+                {
+                    Text = $"{marine.Name}",
+                    Event = new OverwatchInsubordinateMarineSelectedEvent(GetNetEntity(args.Actor), marine.Id),
+                };
+
+                options.Add(option);
+            }
+        }
+
+        _dialog.OpenOptions(ent, args.Actor, "Mark for Insubordination", options, "Report a marine for insubordination");
     }
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)

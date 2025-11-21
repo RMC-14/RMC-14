@@ -69,6 +69,9 @@ public sealed class OverwatchConsoleShowHiddenBuiMsg(bool show) : BoundUserInter
 public sealed class OverwatchConsoleTransferMarineBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleInsubordinateMarineBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
