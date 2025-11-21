@@ -230,11 +230,11 @@
     - name: Pill bottles
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterKelotaneDermaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterTricordrazine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterBicaridine
         amount: 4
       - id: CMPillCanisterDexalin
