@@ -15,50 +15,46 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
 
-    private const float RestockIntervalSeconds = 30f; // PROCESSING_SUBSYSTEM_DEF(slowobj)
-    private TimeSpan _nextRestock = TimeSpan.Zero;
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
-        if (curTime < _nextRestock)
-            return;
-
-        _nextRestock = curTime + TimeSpan.FromSeconds(RestockIntervalSeconds);
-
         var roundDuration = _gameTicker.RoundDuration();
-        var links = EntityQueryEnumerator<CMMedicalSupplyLinkComponent, TransformComponent>();
-        while (links.MoveNext(out var linkUid, out var linkComp, out var linkXform))
+
+        var vendors = EntityQueryEnumerator<RMCMedLinkPortReceiverComponent, CMAutomatedVendorComponent, TransformComponent>();
+        while (vendors.MoveNext(out var vendorUid, out var portReceiver, out var vendorComp, out var vendorXform))
         {
-            if (!linkXform.Anchored)
-                continue;
-
-            ProcessLinkedRestocking((linkUid, linkComp), roundDuration);
-        }
-    }
-
-    private void ProcessLinkedRestocking(Entity<CMMedicalSupplyLinkComponent> link, TimeSpan roundDuration)
-    {
-        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(link);
-
-        while (anchored.MoveNext(out var anchoredId))
-        {
-            if (!TryComp<CMAutomatedVendorComponent>(anchoredId, out var vendorComp))
-                continue;
-
-            if (!TryComp<RMCMedLinkPortReceiverComponent>(anchoredId, out var portReceiver))
-                continue;
-
             if (!portReceiver.AllowSupplyLinkRestock)
                 continue;
 
+            if (!vendorXform.Anchored)
+                continue;
+
+            if (curTime < portReceiver.NextRestock)
+                continue;
+
+            portReceiver.NextRestock = curTime + TimeSpan.FromSeconds(portReceiver.RestockIntervalSeconds);
             if (roundDuration.TotalMinutes < portReceiver.RestockMinimumRoundTime)
                 continue;
 
-            RestockVendorItems((anchoredId, vendorComp), portReceiver);
+            if (!IsConnectedToSupplyLink(vendorUid))
+                continue;
+
+            RestockVendorItems((vendorUid, vendorComp), portReceiver);
         }
+    }
+
+    private bool IsConnectedToSupplyLink(EntityUid vendor)
+    {
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(vendor);
+        while (anchored.MoveNext(out var anchoredId))
+        {
+            if (HasComp<CMMedicalSupplyLinkComponent>(anchoredId))
+                return true;
+        }
+
+        return false;
     }
 
     private void RestockVendorItems(Entity<CMAutomatedVendorComponent> vendor, RMCMedLinkPortReceiverComponent portReceiver)

@@ -17,4 +17,7 @@ public sealed partial class RMCMedLinkPortReceiverComponent : Component
 
     [DataField, AutoNetworkedField]
     public float RestockChancePerItem = 0.2f; // 20% chance to restock each item per check
+
+    [DataField]
+    public TimeSpan NextRestock = TimeSpan.Zero;
 }
