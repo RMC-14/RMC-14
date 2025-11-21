@@ -1,4 +1,3 @@
-using System.Net.NetworkInformation;
 using Content.Shared._RMC14.Medical.Refill;
 using Robust.Client.GameObjects;
 

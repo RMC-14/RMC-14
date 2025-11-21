@@ -10,13 +10,13 @@ public sealed partial class RMCMedLinkPortReceiverComponent : Component
     public bool AllowSupplyLinkRestock = true;
 
     [DataField, AutoNetworkedField]
-    public int RestockMinimumRoundTime = 20; // 20 Minutes
+    public int RestockMinimumRoundTime = 20;
 
     [DataField, AutoNetworkedField]
     public float RestockIntervalSeconds = 30f; // PROCESSING_SUBSYSTEM_DEF(slowobj)
 
     [DataField, AutoNetworkedField]
-    public float RestockChancePerItem = 0.2f; // 20% chance to restock each item per check
+    public float RestockChancePerItem = 0.2f;
 
     [DataField]
     public TimeSpan NextRestock = TimeSpan.Zero;
