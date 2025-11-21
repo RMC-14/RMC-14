@@ -206,7 +206,7 @@
 #      - id: CMPeridaxonAutoinjector # TODO RMC14
 #        amount: 5
 #      - id: CMTramadolAutoinjector # TODO RMC14
- #        amount: 5
+#        amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
     - name: Liquid bottles
@@ -229,6 +229,12 @@
 #        amount: 3
     - name: Pill bottles
       entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        amount: 2
+      - id: CMPillCanisterKelotaneDermaline
+        amount: 2
+      - id: CMPillCanisterTricordrazine
+        amount: 2
       - id: CMPillCanisterBicaridine
         amount: 4
       - id: CMPillCanisterDexalin
