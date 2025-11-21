@@ -27,6 +27,12 @@
         maxVol: 100
       tank:
         maxVol: 500
+  - type: SolutionRegeneration
+    solution: tank
+    generated:
+      reagents:
+      - ReagentId: Water
+        Quantity: 500
   - type: DrainableSolution
     solution: tank
   - type: ReagentTank
@@ -59,7 +65,6 @@
     range: 8
     sound:
       path: /Audio/Ambience/Objects/drain.ogg
-
 
 - type: entity
   parent: CMSinkEmpty
