@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using Content.Shared._RMC14.Medical.Refill;
 using Robust.Client.GameObjects;
 
@@ -23,6 +24,6 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
             ? $"{ent.Comp.BaseState}_clamped"
             : $"{ent.Comp.BaseState}_unclamped";
 
-        _sprite.LayerSetRsiState((ent.Owner, sprite), BaseLayerKey, state);
+        _sprite.LayerSetRsiState((ent.Owner, sprite), ent.Comp.BaseLayerKey, state);
     }
 }

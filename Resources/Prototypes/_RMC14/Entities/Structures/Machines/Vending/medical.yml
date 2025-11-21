@@ -14,7 +14,7 @@
     drawdepth: FloorObjects
     layers:
     - state: medlink_green_unclamped
-      map: ["base"]
+      map: ["MedLinkLayerKey"]
   - type: CMMedicalSupplyLink
     baseState: medlink_green
   - type: RMCAnimation

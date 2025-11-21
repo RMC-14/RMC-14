@@ -16,7 +16,6 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
 
     private const float RestockIntervalSeconds = 30f; // PROCESSING_SUBSYSTEM_DEF(slowobj)
-    private const float RestockChancePerItem = 0.2f; // 20% chance to restock each item per check
     private TimeSpan _nextRestock = TimeSpan.Zero;
 
     public override void Update(float frameTime)
@@ -31,18 +30,18 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
 
         var roundDuration = _gameTicker.RoundDuration();
         var links = EntityQueryEnumerator<CMMedicalSupplyLinkComponent, TransformComponent>();
-        while (links.MoveNext(out var linkUid, out _, out var linkXform))
+        while (links.MoveNext(out var linkUid, out var linkComp, out var linkXform))
         {
             if (!linkXform.Anchored)
                 continue;
 
-            ProcessLinkedRestocking(linkUid, roundDuration);
+            ProcessLinkedRestocking((linkUid, linkComp), roundDuration);
         }
     }
 
-    private void ProcessLinkedRestocking(EntityUid linkUid, TimeSpan roundDuration)
+    private void ProcessLinkedRestocking(Entity<CMMedicalSupplyLinkComponent> link, TimeSpan roundDuration)
     {
-        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(linkUid);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(link);
 
         while (anchored.MoveNext(out var anchoredId))
         {
@@ -58,11 +57,11 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
             if (roundDuration.TotalMinutes < portReceiver.RestockMinimumRoundTime)
                 continue;
 
-            RestockVendorItems((anchoredId, vendorComp));
+            RestockVendorItems((anchoredId, vendorComp), portReceiver);
         }
     }
 
-    private void RestockVendorItems(Entity<CMAutomatedVendorComponent> vendor)
+    private void RestockVendorItems(Entity<CMAutomatedVendorComponent> vendor, RMCMedLinkPortReceiverComponent portReceiver)
     {
         var restocked = false;
         foreach (var section in vendor.Comp.Sections)
@@ -72,7 +71,7 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
                 if (entry.Max is not { } max || entry.Amount >= max)
                     continue;
 
-                if (!_random.Prob(RestockChancePerItem))
+                if (!_random.Prob(portReceiver.RestockChancePerItem))
                     continue;
 
                 entry.Amount++;

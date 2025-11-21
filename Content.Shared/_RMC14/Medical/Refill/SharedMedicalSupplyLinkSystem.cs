@@ -11,8 +11,6 @@ public abstract class SharedMedicalSupplyLinkSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCAnimationSystem _animation = default!;
 
-    private const string MedilinkRsiPath = "_RMC14/Structures/Machines/Medical/medilink.rsi";
-    protected const string BaseLayerKey = "base";
 
     public override void Initialize()
     {
@@ -104,14 +102,10 @@ public abstract class SharedMedicalSupplyLinkSystem : EntitySystem
                 ? $"{link.Comp.BaseState}_clamped"
                 : $"{link.Comp.BaseState}_unclamped";
 
-            var animationRsi = new SpriteSpecifier.Rsi(
-                new ResPath(MedilinkRsiPath),
-                animationState);
-            var defaultRsi = new SpriteSpecifier.Rsi(
-                new ResPath(MedilinkRsiPath),
-                finalState);
+            var animationRsi = new SpriteSpecifier.Rsi(new ResPath(link.Comp.MedilinkRsiPath), animationState);
+            var defaultRsi = new SpriteSpecifier.Rsi(new ResPath(link.Comp.MedilinkRsiPath), finalState);
 
-            _animation.Flick((link.Owner, null), animationRsi, defaultRsi, BaseLayerKey);
+            _animation.Flick((link.Owner, null), animationRsi, defaultRsi, link.Comp.BaseLayerKey);
         }
 
         Dirty(link);
