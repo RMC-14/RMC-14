@@ -646,7 +646,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad leader message: {args.Message}");
         if (TryComp<SquadTeamComponent>(squad.Value, out var squadComp) && _squad.TryGetSquadLeader((squad.Value, squadComp), out var SL))
         {
-            _marineAnnounce.AnnounceSingle($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits directly: [font size=16][bold]{message}[/bold][/font][/color]", SL.Owner);
+            _marineAnnounce.AnnounceSingle($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits directly: [font size=16][bold]{message}[/bold][/font][/color]", 
+            SL.Owner, sound: SharedMarineAnnounceSystem.DefaultSquadSound);
         }
         
         var coordinates = _transform.GetMapCoordinates(ent);
