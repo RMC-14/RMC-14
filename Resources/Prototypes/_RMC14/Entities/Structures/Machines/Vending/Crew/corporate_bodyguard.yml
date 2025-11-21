@@ -65,60 +65,270 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
     jobs:
-    - RMCWeYaCorporateBodyguard
+      - RMCWeYaCorporateBodyguard
     sections:
-    - name: Headgear
-      choices: { CMHelmet: 1 }
-      entries:
-      - id: RMCHeadCapPPO
-    - name: Mask
-      choices: { CMMask: 1 }
-      entries:
-      - id: CMMaskGas
-      - id: RMCMaskRebreather
-    - name: Jackets
-      choices: { CMArmor: 1 }
-      entries:
-      - id: RMCArmorM1PPO
-    - name: Backpack
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: RMCSatchelBlack
-    - name: Gloves
-      choices: { CMHands: 1 }
-      entries:
-      - id: RMCHandsVeteranPPO
-    - name: Pouches
-      choices: { CMPouches: 2 }
-      entries:
-      - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
-      - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment)
-      - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
-      - id: RMCPouchMagazine
-      - id: RMCPouchGeneralMedium
-    - name: Sidearm
-      choices: { CMSidearm: 1 }
-      entries:
-      - id: RMCWeaponPistolPK7
-      - id: RMCMK80
-      - id: RMCWeaponPistolM77
-    - name: Ammunition
-      entries:
-      - id: RMCMagazinePistolPK7
-        amount: 4
-      - id: CMMagazinePistolMK80
-        amount: 6
-      - id: CMMagazinePistolM77AP
-        amount: 4
-    - name: Spare Equipment
-      entries:
-      - id: CMFlash
-        amount: 2
-      # Pepper Spray
-      - id: CMStunbaton
-        amount: 4
-      - id: RMCBoxZiptie
-        amount: 4
+    # ////////////////////////////////////
+    # JR PPO
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapPPO
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1PPO
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranPPO
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMSidearm: 1 }
+        entries:
+        - id: RMCWeaponPistolPK7
+      - name: Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        entries:
+        - id: RMCMagazinePistolPK7
+          amount: 4
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        entries:
+        - id: CMFlash
+          amount: 2
+        # Pepper Spray
+        - id: CMStunbaton
+          amount: 4
+        - id: RMCBoxZiptie
+          amount: 4
+    # ////////////////////////////////////
+    # PPO
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapPPO
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1PPO
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranPPO
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMSidearm: 1 }
+        entries:
+        - id: RMCWeaponPistolPK7
+        - id: RMCMK80
+        - id: RMCWeaponPistolM77
+      - name: Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        entries:
+        - id: RMCMagazinePistolPK7
+          amount: 4
+        - id: CMMagazinePistolMK80
+          amount: 6
+        - id: CMMagazinePistolM77AP
+          amount: 4
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        entries:
+        - id: CMFlash
+          amount: 2
+        # Pepper Spray
+        - id: CMStunbaton
+          amount: 4
+        - id: RMCBoxZiptie
+          amount: 4
+    # ////////////////////////////////////
+    # PPO
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapPPO
+        - id: ArmorHelmetPPO
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1PPO
+        - id: RMCArmorM4PPO
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranPPO
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Primary
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMPrimary: 1 }
+        entries:
+        - id: RMCWeaponRifleM54CWhite
+        - id: WeaponSMGM63
+        - id: RMCWeaponRifleSSG45Stripped
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMSidearm: 1 }
+        entries:
+        - id: RMCWeaponPistolPK7
+        - id: RMCMK80
+        - id: RMCWeaponPistolM77
+      - name: Primary Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        - id: CMMagazineSMGM63
+          amount: 4
+        - id: CMMagazineSMGM63Ext
+          amount: 2
+        - id: CMMagazineSMGM63AP
+          amount: 2
+        - id: CMMagazineRifleM54C
+          amount: 4
+        - id: CMMagazineRifleM54CExt
+          amount: 2
+        - id: CMMagazineRifleM54CAP
+          amount: 2
+        - id: RMCMagazineRifleSSG45
+          amount: 4
+        - id: RMCMagazineRifleSSG45Extended
+          amount: 2
+        - id: RMCMagazineRifleSSG45AP
+          amount: 2
+      - name: Sidearm Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        - id: RMCMagazinePistolPK7
+          amount: 4
+        - id: CMMagazinePistolMK80
+          amount: 6
+        - id: CMMagazinePistolM77AP
+          amount: 4
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        - id: CMFlash
+          amount: 2
+        # Pepper Spray
+        - id: CMStunbaton
+          amount: 4
+        - id: RMCBoxZiptie
+          amount: 4

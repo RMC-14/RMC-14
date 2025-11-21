@@ -24,7 +24,7 @@
     RMCRankWeYaBodyguardPPO:
     - !type:RoleTimeRequirement
       role: RMCJobWeYaCorporateBodyguard
-      time: 90000 # 25 hours
+      time: 36000 # 10 hours
     RMCRankWeYaBodyguardTPPO: []
   startingGear: RMCJobWeYaCorporateBodyguard
   icon: "RMCJobIconPMCGoonStandard"
