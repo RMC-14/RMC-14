@@ -22,7 +22,7 @@
 
 - type: entity
   parent: CMMedilinkSupplyPort
-  id: RMCGreyMedilinkSupplyPort
+  id: RMCMedilinkSupplyPortGrey
   components:
   - type: CMMedicalSupplyLink
     baseState: medlink

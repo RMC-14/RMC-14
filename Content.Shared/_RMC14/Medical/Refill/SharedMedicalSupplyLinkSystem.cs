@@ -6,10 +6,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
-public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
+public abstract class SharedMedicalSupplyLinkSystem : EntitySystem
 {
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCAnimationSystem _animation = default!;
+
+    private const string MedilinkRsiPath = "_RMC14/Structures/Machines/Medical/medilink.rsi";
+    protected const string BaseLayerKey = "base";
 
     public override void Initialize()
     {
@@ -39,9 +42,12 @@ public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
         }
     }
 
-    private bool TryGetSupplyLink(EntityUid vendor, RMCMedLinkPortReceiverComponent portReceiver, TransformComponent xform)
+    protected bool TryGetSupplyLink(EntityUid vendor, RMCMedLinkPortReceiverComponent portReceiver, TransformComponent? xform = null)
     {
         if (!portReceiver.AllowSupplyLinkRestock)
+            return false;
+
+        if (!Resolve(vendor, ref xform))
             return false;
 
         if (!xform.Anchored)
@@ -50,7 +56,7 @@ public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(vendor);
         while (anchored.MoveNext(out var anchoredId))
         {
-            if (HasComp(anchoredId, typeof(CMMedicalSupplyLinkComponent)))
+            if (HasComp<CMMedicalSupplyLinkComponent>(anchoredId))
                 return true;
         }
 
@@ -86,8 +92,8 @@ public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
             portConnected = found;
         }
 
-        var previousState = link.Comp.PortConnected;
-        link.Comp.PortConnected = portConnected.Value;
+        var previousState = link.Comp.ConnectedPort;
+        link.Comp.ConnectedPort = portConnected.Value;
 
         if (playAnimation && previousState != portConnected.Value)
         {
@@ -99,13 +105,13 @@ public abstract class RMCMedicalSupplyLinkSystem : EntitySystem
                 : $"{link.Comp.BaseState}_unclamped";
 
             var animationRsi = new SpriteSpecifier.Rsi(
-                new ResPath("_RMC14/Structures/Machines/Medical/medilink.rsi"),
+                new ResPath(MedilinkRsiPath),
                 animationState);
             var defaultRsi = new SpriteSpecifier.Rsi(
-                new ResPath("_RMC14/Structures/Machines/Medical/medilink.rsi"),
+                new ResPath(MedilinkRsiPath),
                 finalState);
 
-            _animation.Flick((link.Owner, null), animationRsi, defaultRsi, "base");
+            _animation.Flick((link.Owner, null), animationRsi, defaultRsi, BaseLayerKey);
         }
 
         Dirty(link);

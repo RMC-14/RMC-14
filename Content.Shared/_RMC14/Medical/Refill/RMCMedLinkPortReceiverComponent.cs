@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Medical.Refill;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCMedicalSupplyLinkSystem))]
+[Access(typeof(SharedMedicalSupplyLinkSystem))]
 public sealed partial class RMCMedLinkPortReceiverComponent : Component
 {
     [DataField, AutoNetworkedField]
