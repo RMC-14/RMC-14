@@ -26,8 +26,8 @@
   - Place them inside the cell, buckled to the bed, then flash or stun them and recover your handcuffs.
   - Search their belongings for contraband and theft.
   - When the time is over, let them grab their belongings, escort them out of the brig.
-  - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig cryo.
-  - If a prisoner has been SSD for over 5 minutes you may place them in cryo, but they must serve the rest of their time if they return.
+  - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig hypersleep.
+  - If a prisoner has been SSD for over 5 minutes you may place them in hypersleep, but they must serve the rest of their time if they return.
 
   ## Medical Experiments
   A prisoner may waive their rights to participate in medical experiments. Researchers performing approved medical experiments  may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
