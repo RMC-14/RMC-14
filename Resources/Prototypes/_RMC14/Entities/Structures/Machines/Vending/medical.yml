@@ -24,6 +24,13 @@
   parent: CMMedilinkSupplyPort
   id: RMCMedilinkSupplyPortGrey
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
+    state: medlink_unclamped
+    drawdepth: FloorObjects
+    layers:
+    - state: medlink_unclamped
+      map: [ "MedLinkLayerKey" ]
   - type: CMMedicalSupplyLink
     baseState: medlink
 
