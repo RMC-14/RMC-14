@@ -12,10 +12,6 @@
     - id: RMCBoxPizzaMeat
     - id: CMDrinkCanDrGibb
     # ThirteenLoko
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - BoxCardboard
 
 - type: entity
   parent: CMSatchel
