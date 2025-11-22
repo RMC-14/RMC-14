@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/obj/items/weapons/guns/guns_by_faction/USCM/hmg.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m2c_overheat",
+      "directions": 4
+    },
+    {
+      "name": "m2c",
+      "directions": 4
+    },
+    {
+      "name": "m2c_e",
+      "directions": 4
+    },
+    {
+      "name": "m2c_gun_mount_e"
+    },
+    {
+      "name": "m2c_gun_mount"
+    },
+    {
+      "name": "m2c_gun_mount_broken"
+    },
+    {
+      "name": "m2c_gun_mount_broken_e"
+    }
+  ]
+}
