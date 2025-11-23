@@ -56,7 +56,7 @@
   equipment:
     head: RMCHeadRoyalBeretLead
     ears: RMCHeadsetRoyalMarineOfficer
-    jumpsuit: RMCJumpsuitMarineRoyalBlank # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyal
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     id: RMCIDRoyalMarinesTroopCommanderPVE
