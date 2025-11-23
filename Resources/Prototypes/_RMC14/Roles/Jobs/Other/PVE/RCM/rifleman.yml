@@ -44,6 +44,17 @@
   equipment:
     id: RMCIDRoyalMarinesRiflemanPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVERifleman
+  name: RCM rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesRiflemanPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalRiflemanPVE
 

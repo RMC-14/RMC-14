@@ -48,6 +48,17 @@
   equipment:
     id: RMCIDRoyalMarinesBombSpecPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEBombSpec
+  name: RCM bombardment specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesBombSpecPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalBombSpecPVE
 

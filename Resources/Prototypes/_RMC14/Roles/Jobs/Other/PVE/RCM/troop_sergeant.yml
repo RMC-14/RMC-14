@@ -56,6 +56,17 @@
   equipment:
     id: RMCIDRoyalMarinesTroopSargePVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVETroopSergeant
+  name: RCM troop sergeant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesTroopSargePVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalTroopSargePVE
 

@@ -63,6 +63,17 @@
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVETroopCommander
+  name: RCM troop commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesTroopCommanderPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalTroopCommanderPVE
 

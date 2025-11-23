@@ -48,6 +48,17 @@
   equipment:
     id: RMCIDRoyalMarinesScoutSniperPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEScoutSniper
+  name: RCM scout sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesScoutSniperPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalScoutSniperPVE
 

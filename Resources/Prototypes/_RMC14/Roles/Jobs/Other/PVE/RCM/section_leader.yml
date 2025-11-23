@@ -55,6 +55,17 @@
   equipment:
     id: RMCIDRoyalMarinesSectionLeaderPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVESectionLeader
+  name: RCM section leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesSectionLeaderPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalSectionLeaderPVE
 

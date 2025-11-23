@@ -46,6 +46,17 @@
   equipment:
     id: RMCIDRoyalMarinesMedicPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEMedicalAssistant
+  name: RCM medical assistant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesMedicPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalMedicPVE
 

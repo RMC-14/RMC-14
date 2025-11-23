@@ -47,6 +47,17 @@
   equipment:
     id: RMCIDRoyalMarinesSmartgunnerPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEGPMGGunner
+  name: RCM gpmg gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesSmartgunnerPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalSmartgunnerPVE
 

@@ -46,6 +46,17 @@
   equipment:
     id: RMCIDRoyalMarinesAssaultEngineerPVE
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEAssaultEngineer
+  name: RCM assault engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesAssaultEngineerPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
 - type: playTimeTracker
   id: RMCJobRoyalAssaultEngineerPVE
 
