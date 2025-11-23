@@ -321,6 +321,37 @@
     state: kate_gel_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: drink
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Slime
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
+    transferAmounts:
+    - 5
+  - type: RMCFlask
 
 - type: entity
   parent: RMCBaseFigurinePatron
