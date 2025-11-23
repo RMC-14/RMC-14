@@ -40,6 +40,7 @@
   id: RMCFigurinePatronFritzVohlkson
   name: Fritz Vohlkson figurine
   description: "A member of the Colony Liaison's security detail. A tacky reward given by We-Ya for 20 years of service."
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: Fritz_Vohlkson
@@ -291,6 +292,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronOrionBlackburn
   name: Orion Blackburn figurine
+  categories: [ HideSpawnMenu ]
   description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
   components:
   - type: Sprite
@@ -1874,3 +1876,14 @@
     state: kurt_doc_holiday_lachner
   - type: PatronFigurine
     id: 3b62aa38-f239-4d0d-91d4-94323d48092d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmberFallsLamplight
+  name: Amber 'Falls' Lamplight figurine
+  description: "A photorealistic depiction of the most commonly awoken Dropship Crew Chief. Despite her downfalls, she’s always making an effort to do her job the best she can: whether it be medevacing the injured or… or… uhhh…"
+  components:
+  - type: Sprite
+    state: amber_falls_lamplight
+  - type: PatronFigurine
+    id: 3ecb2df2-ea5f-489f-94fc-60f73fa812ad
