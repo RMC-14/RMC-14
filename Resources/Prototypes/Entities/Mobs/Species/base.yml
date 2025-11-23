@@ -29,7 +29,7 @@
     - map: [ "gloves" ]
     - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
-    - map: [ "id" ]
+    - map: [ "id" ] # RMC14 re-arrange id slot
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "outerClothing" ]
