@@ -59,7 +59,7 @@
     head: RMCHeadRoyalBeretLead
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarineOfficer
-    jumpsuit: RMCJumpsuitMarineRoyalTeamlead # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
     outerClothing: RMCArmorRoyalPaddedFilledCO
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

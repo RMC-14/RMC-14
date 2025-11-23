@@ -72,7 +72,7 @@
     head: RMCHeadRoyalHelmetBallistic
     eyes: RMCGlassesSmartGunSight
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal
+    jumpsuit: RMCJumpsuitMarineRoyalDropPouch
     outerClothing: RMCArmorRoyalHarnessFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

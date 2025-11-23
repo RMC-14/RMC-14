@@ -71,7 +71,7 @@
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal
+    jumpsuit: RMCJumpsuitMarineRoyalDropPouch
     outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

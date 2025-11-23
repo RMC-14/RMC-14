@@ -33,13 +33,10 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
-  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
-  suffix: Filled, Royal
+  description: The field uniform of the Royal Crown Marines. It has shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
@@ -55,7 +52,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalMK80
-  suffix: Filled, Royal, MK80
+  suffix: MK80
   components:
   - type: WebbingClothing
     startingWebbing: RMCShoulderHolsterMK80
@@ -63,7 +60,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalMedic
-  suffix: Filled, Royal, Medic
+  suffix: Medic
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingSurgicalBlue
@@ -72,8 +69,7 @@
   parent: JumpsuitMarine
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine uniform
-  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
-  suffix: Filled, Royal, Teamlead
+  suffix: Teamlead
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
@@ -87,14 +83,12 @@
     camouflageVariations: {}
 
 - type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalBlank # TODO RMC14 sprite
-  suffix: Royal
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalDropPouch
+  suffix: Drop Pouch
   components:
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyal
 
 # Formal
 - type: entity
