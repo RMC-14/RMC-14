@@ -171,7 +171,7 @@ public sealed class CMDoorSystem : EntitySystem
                 args.Cancelled = true;
         }
 
-        if (_rmcPower.IsPowered(ent))
+        if (_rmcPower.IsPowered(ent) && !HasComp<XenoComponent>(args.User))
             args.Cancelled = true;
 
     }

@@ -14,7 +14,7 @@
   id: RMCBaseRockNonCollideStrata
   abstract: true
   components:
-  - type: SpriteColor
+  - type: Sprite
     color: '#9D7766FF'
 
 - type: entity
