@@ -1940,3 +1940,14 @@
     state: agu_seal
   - type: PatronFigurine
     id: 0b0f5346-f2de-4e59-8f32-5d6f7b5882ee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEricLunaheart
+  name: Eric Lunaheart figurine
+  description: "Lunaheart is here to save the day! 3/4 Doctor 1/4 MP is the way!"
+  components:
+  - type: Sprite
+    state: eric_lunaheart
+  - type: PatronFigurine
+    id: 923f5334-8957-4818-9fec-a704eaab0959
