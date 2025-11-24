@@ -1956,7 +1956,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronLeahLocaHarding
   name: Leah 'Loca' Harding figurine
-  description: ""
+  description: "Your local kitchen raider, some confuse her with a space-racoon. announce when you approach, she can be skittish and she is armed."
   components:
   - type: Sprite
     state: leah_loca_harding
