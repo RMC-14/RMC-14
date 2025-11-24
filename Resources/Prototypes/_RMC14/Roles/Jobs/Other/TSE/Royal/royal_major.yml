@@ -48,6 +48,13 @@
       whitelist:
         tags:
         - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_major
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: startingGear

@@ -33,6 +33,13 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-marksman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_marksman
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
