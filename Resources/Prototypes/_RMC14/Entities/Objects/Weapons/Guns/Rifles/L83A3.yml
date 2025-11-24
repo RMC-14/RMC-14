@@ -1,6 +1,6 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL83A3   #In cm13 the L42
+  id: RMCWeaponRifleL83A3   #In cm13 the L42
   name: L83A3 rifle
   description: The L83A3 Battle Rifle, found commonly in Three Suns Empires armories.
   suffix: Filled
@@ -126,7 +126,7 @@
       rmc-aslot-underbarrel: 0.3, -0.30
 
 - type: entity
-  parent: WeaponRifleL83A3
+  parent: RMCWeaponRifleL83A3
   id: RMCWeaponRifleL83A3Stripped
   suffix: Stripped
   components:

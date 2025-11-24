@@ -774,6 +774,96 @@
         tags:
         - RMCMagazineRifleL24Extended
 
+# L24 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleL24HEAPEmpty
+  name: magazine box (HEAP L24 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#323b3e"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1f951f"
+    - state: rifle_box_24
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#9C9A19"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#323b3e"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL24HEAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleL24HEAPEmpty
+  id: RMCBoxMagazineRifleL24HEAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL24HEAP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL24HEAP
+
+# L24 Inc
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleL24IncendiaryEmpty
+  name: magazine box (Inc L24 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#323b3e"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1f951f"
+    - state: rifle_box_24
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#771A10"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#323b3e"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#771A10"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL24Incendiary
+
+- type: entity
+  parent: RMCBoxMagazineRifleL24IncendiaryEmpty
+  id: RMCBoxMagazineRifleL24Incendiary
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL24Incendiary
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL24Incendiary
+
 # L42A REG
 - type: entity
   parent: RMCBoxMagazineRifleBase

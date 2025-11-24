@@ -5,12 +5,12 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalLieutenant
   ranks:
-    RMCRankTSESecondLieutenant: [ ] # According to CM13 devs
-  startingGear: RMCGearRoyalLieutenant # If you don't pronounce it "leftenant"
-  icon: "RMCJobIconRoyalLieutenant" # You should be banned for being LRP
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalLieutenant
+  icon: "RMCJobIconRoyalLieutenant"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-captain
-  spawnMenuRoleName: RCM Lieutenant # I echo the sentiment here
+  spawnMenuRoleName: RCM Lieutenant
   special:
   - !type:AddComponentSpecial
     components:

@@ -1,6 +1,6 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL83A2
+  id: RMCWeaponRifleL83A2
   name: L83A2 rifle
   description: A civilian grade caseless rifle utilised by TSEPA officers.
   suffix: Filled
@@ -132,7 +132,7 @@
       rmc-aslot-underbarrel: 0.3, -0.30
 
 - type: entity
-  parent: WeaponRifleL83A2
+  parent: RMCWeaponRifleL83A2
   id: RMCWeaponRifleL83A2Stripped
   suffix: Stripped
   components:
