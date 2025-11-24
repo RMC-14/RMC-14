@@ -30,7 +30,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      collection: RMCFlamerShoot
+      collection: RMCFlamerColonyShoot
   - type: ShootUseDelay
   - type: ContainerContainer
     containers:
@@ -72,6 +72,8 @@
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
   - type: RMCIgniter
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_ignite.ogg
   - type: RMCAmmoEject
   - type: GenericVisualizer
     visuals:
