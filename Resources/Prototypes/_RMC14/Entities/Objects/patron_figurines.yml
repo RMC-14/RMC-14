@@ -1951,3 +1951,14 @@
     state: eric_lunaheart
   - type: PatronFigurine
     id: 923f5334-8957-4818-9fec-a704eaab0959
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLeahLocaHarding
+  name: Leah 'Loca' Harding figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: leah_loca_harding
+  - type: PatronFigurine
+    id: 4f6b4b8d-4477-4690-b0c3-009758301934
