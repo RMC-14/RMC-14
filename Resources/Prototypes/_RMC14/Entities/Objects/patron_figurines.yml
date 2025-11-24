@@ -1918,3 +1918,14 @@
     state: amber_falls_lamplight
   - type: PatronFigurine
     id: 3ecb2df2-ea5f-489f-94fc-60f73fa812ad
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArthurNash
+  name: Arthur Nash figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: arthur_nash
+  - type: PatronFigurine
+    id: 6dd7c705-ba54-4e45-bb47-8d1c32231709
