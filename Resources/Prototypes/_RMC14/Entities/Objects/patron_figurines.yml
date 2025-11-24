@@ -1962,3 +1962,14 @@
     state: leah_loca_harding
   - type: PatronFigurine
     id: 4f6b4b8d-4477-4690-b0c3-009758301934
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZaydenSoapKirkson
+  name: Zayden 'Soap' Kirkson figurine
+  description: "BATTLE, WE SHALL GIVE THEM WAR!"
+  components:
+  - type: Sprite
+    state: zayden_soap_kirkson
+  - type: PatronFigurine
+    id: e3cf902c-a055-42ed-a3fd-c1267eb795bd
