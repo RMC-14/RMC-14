@@ -1,0 +1,160 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCWeaponFlamerColony
+  name: LC9 incinerator unit
+  description: The LC9 is a large, bulky incinerator designed for civilian use with a unique flame intensity switch on the bottom. The low-intensity setting serves as a welding torch, with the high-intensity setting used for organic matter disposal and waste clearing. The switch is jammed to the high-intensity setting.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/colony.rsi
+    state: base
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+      offset: 0.035, 0
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/colony.rsi
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/colony.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.333
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerColony
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerColony
+  - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: GunRequiresWield
+  - type: RMCFlamerAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.05, 0.092
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: RMCIgniter
+  - type: RMCAmmoEject
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFlamerVisualLayers.Strip:
+        enum.RMCFlamerVisualLayers.Strip:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCIgniterVisuals.Ignited:
+        enum.RMCIgniterVisuals.Ignited:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCTankFlamerColony
+
+- type: entity
+  parent: RMCWeaponFlamerColony
+  id: RMCWeaponFlamerImprovised
+  name: improvised flamethrower
+  description: A custom made incinerator, made from repurposed welding and piping equipment strapped onto a butchered m16, using LC9 flamer tanks as fuel sources. It's bulky and awkward to use, but gets the job done.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+    state: base
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorInprovised
+
+- type: entity
+  parent: BaseItem
+  id: RMCTankFlamerColony
+  name: LC9 flamer tank
+  description: A fuel tank used to store fuel for use in the LC9 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_improvised
+    layers:
+    - state: flametank_improvised
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankFlamerColony
+
+- type: Tag
+  id: RMCWeaponIncineratorColony
+
+- type: Tag
+  id: RMCWeaponIncineratorInprovised
+
+- type: Tag
+  id: RMCTankFlamerColony
