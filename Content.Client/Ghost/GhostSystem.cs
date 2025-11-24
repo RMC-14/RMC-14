@@ -1,6 +1,5 @@
 using Content.Client._RMC14.NightVision;
 using Content.Client.Movement.Systems;
-using Content.Shared._RMC14.NightVision;
 using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Robust.Client.Console;
