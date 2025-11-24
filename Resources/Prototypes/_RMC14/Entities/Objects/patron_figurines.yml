@@ -1929,3 +1929,14 @@
     state: arthur_nash
   - type: PatronFigurine
     id: 6dd7c705-ba54-4e45-bb47-8d1c32231709
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAguSeal
+  name: Agu Seal figurine
+  description: "Agu Seal stands firm in his tactical vest and tilted beret, carrying himself with calm authority. Agu’s movements are disciplined and precise, every step controlled and deliberate."
+  components:
+  - type: Sprite
+    state: agu_seal
+  - type: PatronFigurine
+    id: 0b0f5346-f2de-4e59-8f32-5d6f7b5882ee
