@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst, rmc_(role)_pve by github monomethylhydrazine",
   "size": {
     "x": 7,
     "y": 7
@@ -531,6 +531,39 @@
     },
     {
       "name": "rmc_breacher"
+    },
+    {
+      "name": "rmc_breacher_pve"
+    },
+    {
+      "name": "rmc_commander_pve"
+    },
+    {
+      "name": "rmc_engi_pve"
+    },
+    {
+      "name": "rmc_lieutenant_pve"
+    },
+    {
+      "name": "rmc_marksman_pve"
+    },
+    {
+      "name": "rmc_medic_pve"
+    },
+    {
+      "name": "rmc_rifleman_pve"
+    },
+    {
+      "name": "rmc_sectionleader_pve"
+    },
+    {
+      "name": "rmc_smartgunner_pve"
+    },
+    {
+      "name": "rmc_troopleader_pve"
+    },
+    {
+      "name": "rmc_teamleader_pve"
     },
     {
       "name": "background_pmc"
