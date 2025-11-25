@@ -94,6 +94,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         _jobWhitelists.AddRange(message.Whitelist);
         Updated?.Invoke();
     }
+
     // RMC14-Whitelist-Tweak-Start
     private bool IsWhitelistedInternal(string jobId)
     {
