@@ -224,7 +224,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         var hasRequiredAcidStrength = newStrength.CompareTo(corrodible.MinimumAcidStrength) >= 0;
         if (!hasRequiredAcidStrength)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-too-weak"), xeno, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-too-weak", ("target", target)), xeno, xeno, PopupType.SmallCaution);
             return false;
         }
 
