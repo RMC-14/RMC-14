@@ -954,7 +954,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 break;
         }
 
-        if (matchingEntry == null || TryComp<StorageComponent>(item, out _))
+        if (matchingEntry == null || (TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _)))
         {
             if (!valid)
                 _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", item)), vendor, user);
@@ -1011,9 +1011,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Validates reagent containers (bottles, autoinjectors, hyposprays).
+    /// Validates reagent containers.
     /// Syringes, droppers, and beakers are sold empty so they pass if empty (Containers.Count == 0).
-    /// Bottles and hyposprays are sold full so they must be full.
+    /// Bottles and hyposprays are sold full so they must be full. etc.
     /// </summary>
     private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
     {
@@ -1207,7 +1207,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Validates equipment items (storage containers, holsters) are in proper state.
+    /// Validates equipment items (armor, helmets, machete holsters) are in proper state.
     /// </summary>
     private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
     {
@@ -1323,7 +1323,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Helper method to show validation popup when needed.
+    /// Helper method to show validation popup.
     /// </summary>
     private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)
     {
