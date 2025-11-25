@@ -104,7 +104,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromBagDoAfterEvent>(OnRestockFromContainer);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
         SubscribeLocalEvent<CMAutomatedVendorComponent, CanDropTargetEvent>(OnVendorCanDropTarget);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DragDropTargetEvent>(OnVendorDragDropTarget);
 
@@ -904,7 +904,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             if (!EntityManager.EntityExists(item))
                 continue;
 
-            var ev = new RMCVendorRestockFromBagDoAfterEvent();
+            var ev = new RMCVendorRestockFromStorageDoAfterEvent();
             var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, item)
             {
                 BreakOnMove = true,
@@ -915,7 +915,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void OnRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromBagDoAfterEvent args)
+    private void OnRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromStorageDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
