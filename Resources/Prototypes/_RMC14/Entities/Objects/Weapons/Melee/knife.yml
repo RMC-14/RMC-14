@@ -94,7 +94,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCCombatUtilityKnifeB
-  name: "'Druzhina' Combat Utility Knife"
+  name: "'Druzhina' combat utility knife"
   description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
   components:
   - type: Clothing
@@ -116,7 +116,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCTantoA # bayonet
-  name: "MK3 Special Service Tanto"
+  name: "MK3 infantry service tanto"
   description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
   components:
   - type: Clothing
@@ -138,7 +138,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCTantoB # bayonet
-  name: "MK3 Special Service Tanto"
+  name: "MK3 infantry service tanto"
   description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
   components:
   - type: Clothing
@@ -160,7 +160,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCSawtoothDaggerA # bayonet
-  name: "Fiore-Pattern Trench Dagger"
+  name: "Fiore-pattern trench dagger"
   description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
   components:
   - type: Clothing
@@ -182,7 +182,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCSawtoothDaggerB # bayonet
-  name: "Fiore-Pattern Trench Dagger"
+  name: "Fiore-Pattern trench dagger"
   description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
   components:
   - type: Clothing
