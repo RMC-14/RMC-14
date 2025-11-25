@@ -51,6 +51,8 @@ using Content.Shared._RMC14.Weapons.Ranged.Chamber;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
@@ -992,6 +994,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <returns>True if the item can be restocked, false otherwise.</returns>
     protected bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
+        if (!ValidateReagentContainers(item, user, valid))
+            return false;
         if (!ValidateStackAmount(item, user, valid, prototypeId))
             return false;
 
@@ -1006,6 +1010,84 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ValidateSpecializedItems(item, user, valid))
             return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Validates reagent containers (bottles, autoinjectors, hyposprays).
+    /// Syringes, droppers, and beakers are sold empty so they pass if empty (Containers.Count == 0).
+    /// Bottles and hyposprays are sold full so they must be full.
+    /// </summary>
+    private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
+    {
+        if (!TryComp<SolutionContainerManagerComponent>(item, out var solutionManager))
+            return true;
+
+        if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank))
+        {
+            return ValidateFlamerTank(item, flamerTank, user, valid);
+        }
+
+        if (solutionManager.Containers.Count == 0)
+            return true;
+
+        var isBottle = _tags.HasTag(item, new ProtoId<TagPrototype>("Bottle"));
+        var isHypospray = HasComp<HyposprayComponent>(item);
+        if (!isBottle && !isHypospray)
+            return true;
+
+        foreach (var solutionName in solutionManager.Containers)
+        {
+            if (!_solution.TryGetSolution((item, solutionManager), solutionName, out _, out var solution))
+                continue;
+
+            if (solution.Volume >= solution.MaxVolume)
+                continue;
+
+            if (!valid)
+            {
+                var locString = Loc.GetString("rmc-vending-machine-restock-reagent-container-not-full", ("item", item));
+                _popup.PopupEntity(locString, item, user);
+            }
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(tank, flamerTank.SolutionId, out _, out var solution))
+        {
+            if (!valid)
+                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", tank)), tank, user);
+            return false;
+        }
+
+        const string expectedFuel = "RMCNapalmUT";
+        var hasCorrectFuel = false;
+        foreach (var reagent in solution.Contents)
+        {
+            if (reagent.Reagent.Prototype != expectedFuel)
+                continue;
+            hasCorrectFuel = true;
+            break;
+        }
+
+        if (!hasCorrectFuel || solution.Contents.Count != 1)
+        {
+            if (!valid)
+                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-wrong-fuel", ("item", tank)), tank, user);
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            if (!valid)
+                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-not-full", ("item", tank)), tank, user);
+            return false;
+        }
 
         return true;
     }
@@ -1076,28 +1158,27 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (TryComp<AttachableHolderComponent>(gun, out var holderComp))
+        if (!TryComp<AttachableHolderComponent>(gun, out var holderComp))
+            return true;
+        var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
+        foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
-            foreach (var slotId in holder.Comp.Slots.Keys)
+            if (!_container.TryGetContainer(gun, slotId, out var slotContainer) ||
+                slotContainer.ContainedEntities.Count <= 0)
+                continue;
+
+            var attachedEntity = slotContainer.ContainedEntities[0];
+            var attachedProto = MetaData(attachedEntity).EntityPrototype?.ID;
+            if (attachedProto != null &&
+                holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto) &&
+                attachedProto == startingProto)
             {
-                if (!_container.TryGetContainer(gun, slotId, out var slotContainer) ||
-                    slotContainer.ContainedEntities.Count <= 0)
-                    continue;
-
-                var attachedEntity = slotContainer.ContainedEntities[0];
-                var attachedProto = MetaData(attachedEntity).EntityPrototype?.ID;
-                if (attachedProto != null &&
-                    holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto) &&
-                    attachedProto == startingProto)
-                {
-                    continue;
-                }
-
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-attachments", ("gun", gun)), gun, user);
-                return false;
+                continue;
             }
+
+            if (!valid)
+                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-attachments", ("gun", gun)), gun, user);
+            return false;
         }
 
         return true;
@@ -1208,16 +1289,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Validates specialized items: flamer tanks, flare packs, and power cells.
+    /// Validates specialized items: flare packs, power cells.
     /// </summary>
     private bool ValidateSpecializedItems(EntityUid item, EntityUid user, bool valid)
     {
-        if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank))
-        {
-            if (!ValidateFlamerTank(item, flamerTank, user, valid))
-                return false;
-        }
-
         if (TryComp<CMItemSlotsComponent>(item, out var cmItemSlots) &&
             _tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")))
         {
@@ -1227,42 +1302,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ValidatePowerCell(item, user, valid))
             return false;
-
-        return true;
-    }
-
-    private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
-    {
-        if (!_solution.TryGetSolution(tank, flamerTank.SolutionId, out _, out var solution))
-        {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", tank)), tank, user);
-            return false;
-        }
-
-        const string expectedFuel = "RMCNapalmUT";
-        var hasCorrectFuel = false;
-        foreach (var reagent in solution.Contents)
-        {
-            if (reagent.Reagent.Prototype != expectedFuel)
-                continue;
-            hasCorrectFuel = true;
-            break;
-        }
-
-        if (!hasCorrectFuel || solution.Contents.Count != 1)
-        {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-wrong-fuel", ("item", tank)), tank, user);
-            return false;
-        }
-
-        if (solution.Volume < solution.MaxVolume)
-        {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-not-full", ("item", tank)), tank, user);
-            return false;
-        }
 
         return true;
     }
