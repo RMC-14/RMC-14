@@ -89,15 +89,15 @@
       - map: ["enum.HumanoidVisualLayers.RHand"]
       - map: [ "gloves" ]
       - map: [ "shoes" ]
+      - map: [ "id" ] # RMC14 re-arrange id slot
       - map: [ "belt" ]
       - map: [ "outerClothing" ]
       - map: [ "enum.WebbingVisualLayers.Base" ]
       - map: [ "enum.MedalVisualLayers.Base" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
-      - map: [ "neck" ]
       - map: [ "back" ]
-      - map: [ "id" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "enum.HumanoidVisualLayers.Hair" ] # Do these need to be here? (arachnid hair arachnid hair)
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "ears" ]
