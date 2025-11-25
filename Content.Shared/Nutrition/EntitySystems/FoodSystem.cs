@@ -193,14 +193,14 @@ public sealed class FoodSystem : EntitySystem
             target: target,
             used: food)
         {
-            BreakOnHandChange = false,
-            BreakOnMove = forceFeed,
-            BreakOnDamage = true,
+            // rnmc start
+            BreakOnHandChange = true,
+            BreakOnMove = true,
+            BreakOnDamage = false,
             MovementThreshold = 0.3f, // RMC14
             DistanceThreshold = MaxFeedDistance,
-            // do-after will stop if item is dropped when trying to feed someone else
-            // or if the item started out in the user's own hands
-            NeedHand = forceFeed || _hands.IsHolding(user, food),
+            NeedHand = true
+            // rnmc end
         };
 
         _doAfter.TryStartDoAfter(doAfterArgs);
@@ -298,7 +298,7 @@ public sealed class FoodSystem : EntitySystem
             _utensil.TryBreak(utensil, args.User);
         }
 
-        args.Repeat = !forceFeed;
+        args.Repeat = false; // rnmc14
 
         if (TryComp<StackComponent>(entity, out var stack))
         {

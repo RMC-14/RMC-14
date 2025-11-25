@@ -13,8 +13,8 @@ food-system-remove-mask = You need to take off the {$entity} first.
 
 ## System
 
-food-system-you-cannot-eat-any-more = You can't eat any more!
-food-system-you-cannot-eat-any-more-other = {CAPITALIZE(SUBJECT($target))} can't eat any more!
+food-system-you-cannot-eat-any-more = You don't feel like eating more right now.
+food-system-you-cannot-eat-any-more-other = {CAPITALIZE(SUBJECT($target))} doesn't feel like eating more right now.
 food-system-try-use-food-is-empty = {CAPITALIZE(THE($entity))} is empty!
 food-system-wrong-utensil = You can't eat {THE($food)} with {INDEFINITE($utensil)} {$utensil}.
 food-system-cant-digest = You can't digest {THE($entity)}!
@@ -24,6 +24,6 @@ food-system-verb-eat = Eat
 
 ## Force feeding
 
-food-system-force-feed = {CAPITALIZE(THE($user))} is trying to feed you something!
-food-system-force-feed-success = {CAPITALIZE(THE($user))} forced you to eat something! {$flavors}
+food-system-force-feed = {CAPITALIZE(THE($user))} is trying to feed you.
+food-system-force-feed-success = {CAPITALIZE(THE($user))} fed you. {$flavors}
 food-system-force-feed-success-user = You successfully feed {THE($target)}

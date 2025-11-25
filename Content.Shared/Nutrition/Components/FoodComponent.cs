@@ -59,7 +59,7 @@ public sealed partial class FoodComponent : Component
     /// How long it takes to eat the food personally.
     /// </summary>
     [DataField]
-    public float Delay = 0.5f;
+    public float Delay = 2f; // rnmc
 
     /// <summary>
     ///     This is how many seconds it takes to force feed someone this food.

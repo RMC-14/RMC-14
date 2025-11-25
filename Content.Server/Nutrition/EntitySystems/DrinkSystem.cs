@@ -250,6 +250,6 @@ public sealed class DrinkSystem : SharedDrinkSystem
         _forensics.TransferDna(entity, args.Target.Value);
 
         if (!forceDrink && solution.Volume > 0)
-            args.Repeat = true;
+            args.Repeat = false; // rnmc
     }
 }
