@@ -20,6 +20,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -102,8 +103,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorRestockDoAfterEvent>(OnRestock);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromBagDoAfterEvent>(OnRestockFromBag);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, CanDropTargetEvent>(OnVendorCanDropTarget);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, DragDropTargetEvent>(OnVendorDragDropTarget);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
@@ -312,20 +315,36 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        if (TryComp<StorageComponent>(args.Used, out var storage))
-        {
-            if (_net.IsClient)
-                return;
-
-            args.Handled = true;
-            TryRestockFromContainer(ent, args.Used, args.User, storage);
-            return;
-        }
-
         if (TryRestockSingleItem(ent, args.Used, args.User))
         {
             args.Handled = true;
         }
+    }
+
+    private void OnVendorCanDropTarget(Entity<CMAutomatedVendorComponent> vendor, ref CanDropTargetEvent args)
+    {
+        if (!TryComp<StorageComponent>(args.Dragged, out var storage))
+            return;
+        if (storage.Container.ContainedEntities.Count <= 0)
+            return;
+        args.Handled = true;
+        args.CanDrop = true;
+    }
+
+    private void OnVendorDragDropTarget(Entity<CMAutomatedVendorComponent> vendor, ref DragDropTargetEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<StorageComponent>(args.Dragged, out var storage))
+            return;
+
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return;
+
+        TryRestockFromContainer(vendor, args.Dragged, args.User, storage);
     }
 
     private void OnHack(Entity<CMAutomatedVendorComponent> ent, ref RMCAutomatedVendorHackDoAfterEvent args)
@@ -867,19 +886,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return Math.Max(1, amount);
     }
 
-    private void OnRestock(Entity<CMAutomatedVendorComponent> vendor, ref RMCAutomatedVendorRestockDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (args.Target == null)
-            return;
-
-        TryRestockSingleItem(vendor, args.Target.Value, args.User, valid: true);
-    }
-
     private void TryRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage)
     {
         var items = storage.Container.ContainedEntities.ToList();
@@ -896,7 +902,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             if (!EntityManager.EntityExists(item))
                 continue;
 
-            var ev = new RMCAutomatedVendorRestockDoAfterEvent();
+            var ev = new RMCVendorRestockFromBagDoAfterEvent();
             var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, item)
             {
                 BreakOnMove = true,
@@ -905,6 +911,19 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             _doAfter.TryStartDoAfter(doAfter);
         }
+    }
+
+    private void OnRestockFromBag(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromBagDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (args.Target == null)
+            return;
+
+        TryRestockSingleItem(vendor, args.Target.Value, args.User, valid: true);
     }
 
     private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
@@ -1073,9 +1092,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Validates a magazine box is full and all contained magazines are full.
-    /// </summary>
     private bool ValidateMagazineBox(EntityUid box, ItemSlotsComponent slots, EntityUid user, bool valid)
     {
         var totalSlots = 0;
@@ -1125,36 +1141,26 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (HasComp<CMHolsterComponent>(item) &&
-            MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase))
+        if (HasComp<CMHolsterComponent>(item) && MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase))
         {
-            if (!ValidateMacheteHolster(item, user, valid))
-                return false;
+            if (!TryComp<ItemSlotsComponent>(item, out var itemSlots))
+                return true;
+
+            foreach (var (slotId, _) in itemSlots.Slots)
+            {
+                if (_container.TryGetContainer(item, slotId, out var container) &&
+                    container.ContainedEntities.Count > 0)
+                {
+                    return true;
+                }
+            }
+
+            if (!valid)
+                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-machete-holster-empty", ("item", item)), item, user);
+            return false;
         }
 
         return true;
-    }
-
-    /// <summary>
-    /// Validates that a machete holster contains a machete.
-    /// </summary>
-    private bool ValidateMacheteHolster(EntityUid holster, EntityUid user, bool valid)
-    {
-        if (!TryComp<ItemSlotsComponent>(holster, out var itemSlots))
-            return true;
-
-        foreach (var (slotId, _) in itemSlots.Slots)
-        {
-            if (_container.TryGetContainer(holster, slotId, out var container) &&
-                container.ContainedEntities.Count > 0)
-            {
-                return true;
-            }
-        }
-
-        if (!valid)
-            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-machete-holster-empty", ("item", holster)), holster, user);
-        return false;
     }
 
     /// <summary>
@@ -1181,9 +1187,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Validates a flamer tank has the correct fuel type and is full.
-    /// </summary>
     private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
     {
         if (!_solution.TryGetSolution(tank, flamerTank.SolutionId, out _, out var solution))
@@ -1220,9 +1223,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Validates a flare pack is completely full of flares.
-    /// </summary>
     private bool ValidateFlarePack(EntityUid pack, CMItemSlotsComponent slots, EntityUid user, bool valid)
     {
         if (slots.Count == null)
@@ -1255,11 +1255,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Validates that items with power cells have them installed and charged.
-    /// Server-side should override GetBatteryCharge to provide actual charge data.
-    /// </summary>
-    protected bool ValidatePowerCell(EntityUid item, EntityUid user, bool valid)
+    private bool ValidatePowerCell(EntityUid item, EntityUid user, bool valid)
     {
         if (!TryComp<PowerCellSlotComponent>(item, out var powerCellSlot))
             return true;
