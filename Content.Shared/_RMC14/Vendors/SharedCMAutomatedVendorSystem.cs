@@ -53,6 +53,7 @@ using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.Stacks;
 using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Vendors;
@@ -965,7 +966,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
-        if (!ValidateItemForRestock(item, user, valid))
+        if (!ValidateItemForRestock(item, user, valid, matchingEntry.Id))
             return false;
 
         if (!valid)
@@ -987,9 +988,13 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <param name="item">The item to validate.</param>
     /// <param name="user">The user attempting to restock.</param>
     /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
+    /// <param name="prototypeId">The prototype ID of the item being sold in the vendor (for stack comparison).</param>
     /// <returns>True if the item can be restocked, false otherwise.</returns>
-    protected bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid = false)
+    protected bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
+        if (!ValidateStackAmount(item, user, valid, prototypeId))
+            return false;
+
         if (HasComp<GunComponent>(item) && !ValidateGun(item, user, valid))
             return false;
 
@@ -1003,6 +1008,34 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    /// <summary>
+    /// Validates that stackable items have the correct stack amount for restocking.
+    /// Compares against the stack count in the vendor's prototype.
+    /// For example, if vendor sells folding barricades in stacks of 3, only stacks of 3 can be restocked.
+    /// </summary>
+    private bool ValidateStackAmount(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
+    {
+        if (!TryComp<StackComponent>(item, out var stack))
+            return true;
+
+        if (!_prototypes.TryIndex(prototypeId, out var prototype))
+            return true;
+
+        if (!prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
+            return true;
+
+        if (stack.Count == protoStack.Count)
+            return true;
+        if (!valid)
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-vending-machine-restock-stack-wrong-amount", ("item", item), ("required", protoStack.Count), ("current", stack.Count)),
+                item,
+                user);
+        }
+        return false;
     }
 
     /// <summary>
@@ -1043,15 +1076,24 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (TryComp<AttachableHolderComponent>(gun, out var holder))
+        if (TryComp<AttachableHolderComponent>(gun, out var holderComp))
         {
-            foreach (var slotId in holder.Slots.Keys)
+            var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
+            foreach (var slotId in holder.Comp.Slots.Keys)
             {
                 if (!_container.TryGetContainer(gun, slotId, out var slotContainer) ||
                     slotContainer.ContainedEntities.Count <= 0)
                     continue;
 
-                // TODO: Track starting attachments and only reject non-standard ones
+                var attachedEntity = slotContainer.ContainedEntities[0];
+                var attachedProto = MetaData(attachedEntity).EntityPrototype?.ID;
+                if (attachedProto != null &&
+                    holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto) &&
+                    attachedProto == startingProto)
+                {
+                    continue;
+                }
+
                 if (!valid)
                     _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-attachments", ("gun", gun)), gun, user);
                 return false;
