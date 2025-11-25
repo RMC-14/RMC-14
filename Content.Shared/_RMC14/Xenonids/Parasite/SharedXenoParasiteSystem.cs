@@ -837,7 +837,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
 
-        if (_container.TryGetContainingContainer(victim, out var container) && HasComp<RMCPassiveStealthComponent>(container.Owner))
+        if (_container.TryGetContainingContainer(victim, out var container) && HasComp<RMCHideParasiteInfectionContainerPopupComponent>(container.Owner))
             return;
 
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
