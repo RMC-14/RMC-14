@@ -97,7 +97,6 @@
         visible: false
       - map: [ "gloves" ]
       - map: [ "shoes" ]
-      - map: [ "id" ] # RMC14 re-arrange id slot
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
       - map: [ "enum.WebbingVisualLayers.Base" ]
@@ -105,9 +104,10 @@
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
+      - map: [ "neck" ]
       - map: [ "back" ]
+      - map: [ "id" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
-      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
