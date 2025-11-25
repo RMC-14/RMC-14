@@ -12,7 +12,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-section-sergeant
   accessGroups:
-  - CMSSPSquadSergeantAccess
+  - CMSPPSquadSergeantAccess
   overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Sergeant
@@ -41,7 +41,7 @@
         RMCSkillVehicles: 1
         RMCSkillSpecialistWeapons: 7
         RMCSkillPowerLoader: 1
-        RmcSkillPilot: 1
+        RMCSkillPilot: 1
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
@@ -70,7 +70,7 @@
   name: red dawn squad sergeant spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSPPSquadSergeantPVE
+    job_id: CMSSPSquadSergeantPVE
   - type: Sprite
     state: marine_spawn
 
@@ -87,7 +87,7 @@
   name: Squad Sergeant's dogtags
   components:
   - type: PresetIdCard
-    job: CMSPPSquadSergeantPVE
+    job: CMSSPSquadSergeantPVE
 
 - type: startingGear
   id: RMCGearSPPSquadSergeant
