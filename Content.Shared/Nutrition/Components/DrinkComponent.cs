@@ -22,7 +22,7 @@ public sealed partial class DrinkComponent : Component
     /// How long it takes to drink this yourself.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float Delay = 0.5f;
+    public float Delay = 0f; // rmc
 
     [DataField, AutoNetworkedField]
     public bool Examinable = true;

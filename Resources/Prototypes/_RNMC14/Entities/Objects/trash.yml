@@ -1,0 +1,14 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseItem
+  id: RNMCFoodEmptyTray
+  name: USCM Tray
+  description: Finished with its tour of duty.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Consumable/Trash/emptytray.rsi
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - Trash

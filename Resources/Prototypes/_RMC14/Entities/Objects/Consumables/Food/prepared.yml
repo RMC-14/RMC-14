@@ -32,6 +32,8 @@
     state: cornbread
   - type: Food
     transferAmount: 3
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -50,6 +52,8 @@
     state: chicken
   - type: Food
     transferAmount: 3
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -68,6 +72,8 @@
     state: pasta
   - type: Food
     transferAmount: 3
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -86,6 +92,8 @@
     state: pizza
   - type: Food
     transferAmount: 8
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -104,6 +112,8 @@
     state: pork
   - type: Food
     transferAmount: 4.5
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -122,6 +132,8 @@
     state: tofu
   - type: Food
     transferAmount: 1
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -142,6 +154,8 @@
     state: cookies
   - type: Food
     transferAmount: 8
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -162,6 +176,8 @@
     state: gingerbread
   - type: Food
     transferAmount: 8
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
@@ -182,6 +198,8 @@
     state: fruit_cake
   - type: Food
     transferAmount: 8
+    trash:
+    - RNMCFoodEmptyTray
   - type: SolutionContainerManager
     solutions:
       food:
