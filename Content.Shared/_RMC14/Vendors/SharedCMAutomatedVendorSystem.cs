@@ -104,7 +104,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromBagDoAfterEvent>(OnRestockFromBag);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromBagDoAfterEvent>(OnRestockFromContainer);
         SubscribeLocalEvent<CMAutomatedVendorComponent, CanDropTargetEvent>(OnVendorCanDropTarget);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DragDropTargetEvent>(OnVendorDragDropTarget);
 
@@ -323,9 +323,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnVendorCanDropTarget(Entity<CMAutomatedVendorComponent> vendor, ref CanDropTargetEvent args)
     {
-        if (!TryComp<StorageComponent>(args.Dragged, out var storage))
-            return;
-        if (storage.Container.ContainedEntities.Count <= 0)
+        if (TryComp<StorageComponent>(args.Dragged, out var storage) &&
+            storage.Container.ContainedEntities.Count <= 0)
             return;
         args.Handled = true;
         args.CanDrop = true;
@@ -336,15 +335,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!TryComp<StorageComponent>(args.Dragged, out var storage))
-            return;
-
         args.Handled = true;
 
         if (_net.IsClient)
             return;
 
-        TryRestockFromContainer(vendor, args.Dragged, args.User, storage);
+        if (TryComp<StorageComponent>(args.Dragged, out var storage))
+        {
+            TryRestockFromContainer(vendor, args.Dragged, args.User, storage);
+            return;
+        }
+
+        TryRestockSingleItem(vendor, args.Dragged, args.User);
     }
 
     private void OnHack(Entity<CMAutomatedVendorComponent> ent, ref RMCAutomatedVendorHackDoAfterEvent args)
@@ -913,7 +915,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void OnRestockFromBag(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromBagDoAfterEvent args)
+    private void OnRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromBagDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -949,7 +951,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 break;
         }
 
-        if (matchingEntry == null)
+        if (matchingEntry == null || TryComp<StorageComponent>(item, out _))
         {
             if (!valid)
                 _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", item)), vendor, user);
