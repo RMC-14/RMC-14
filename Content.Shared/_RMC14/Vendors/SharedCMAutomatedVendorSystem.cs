@@ -998,16 +998,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         if (!ValidateStackAmount(item, user, valid, prototypeId))
             return false;
-
         if (HasComp<GunComponent>(item) && !ValidateGun(item, user, valid))
             return false;
-
         if (!ValidateAmmunition(item, user, valid))
             return false;
-
         if (!ValidateEquipment(item, user, valid))
             return false;
-
         if (!ValidateSpecializedItems(item, user, valid))
             return false;
 
@@ -1025,31 +1021,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return true;
 
         if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank))
-        {
             return ValidateFlamerTank(item, flamerTank, user, valid);
-        }
 
         if (solutionManager.Containers.Count == 0)
             return true;
 
-        var isBottle = _tags.HasTag(item, new ProtoId<TagPrototype>("Bottle"));
-        var isHypospray = HasComp<HyposprayComponent>(item);
-        if (!isBottle && !isHypospray)
+        if (!_tags.HasTag(item, new ProtoId<TagPrototype>("Bottle")) && !HasComp<HyposprayComponent>(item))
             return true;
 
         foreach (var solutionName in solutionManager.Containers)
         {
-            if (!_solution.TryGetSolution((item, solutionManager), solutionName, out _, out var solution))
+            if (!_solution.TryGetSolution((item, solutionManager), solutionName, out _, out var solution) ||
+                solution.Volume >= solution.MaxVolume)
                 continue;
 
-            if (solution.Volume >= solution.MaxVolume)
-                continue;
-
-            if (!valid)
-            {
-                var locString = Loc.GetString("rmc-vending-machine-restock-reagent-container-not-full", ("item", item));
-                _popup.PopupEntity(locString, item, user);
-            }
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-reagent-container-not-full", item, user, ("item", item));
             return false;
         }
 
@@ -1060,32 +1046,23 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         if (!_solution.TryGetSolution(tank, flamerTank.SolutionId, out _, out var solution))
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", tank)), tank, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", tank, user, ("item", tank));
             return false;
         }
 
-        const string expectedFuel = "RMCNapalmUT";
-        var hasCorrectFuel = false;
-        foreach (var reagent in solution.Contents)
-        {
-            if (reagent.Reagent.Prototype != expectedFuel)
-                continue;
-            hasCorrectFuel = true;
-            break;
-        }
+        const string expectedFlamerFuel = "RMCNapalmUT";
+        var hasCorrectFuel = solution.Contents.Count == 1 &&
+                            solution.Contents.Any(r => r.Reagent.Prototype == expectedFlamerFuel);
 
-        if (!hasCorrectFuel || solution.Contents.Count != 1)
+        if (!hasCorrectFuel)
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-wrong-fuel", ("item", tank)), tank, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flamer-tank-wrong-fuel", tank, user, ("item", tank));
             return false;
         }
 
         if (solution.Volume < solution.MaxVolume)
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-flamer-tank-not-full", ("item", tank)), tank, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flamer-tank-not-full", tank, user, ("item", tank));
             return false;
         }
 
@@ -1099,24 +1076,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     private bool ValidateStackAmount(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
-        if (!TryComp<StackComponent>(item, out var stack))
-            return true;
-
-        if (!_prototypes.TryIndex(prototypeId, out var prototype))
-            return true;
-
-        if (!prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
+        if (!TryComp<StackComponent>(item, out var stack) ||
+            !_prototypes.TryIndex(prototypeId, out var prototype) ||
+            !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
             return true;
 
         if (stack.Count == protoStack.Count)
             return true;
-        if (!valid)
-        {
-            _popup.PopupEntity(
-                Loc.GetString("rmc-vending-machine-restock-stack-wrong-amount", ("item", item), ("required", protoStack.Count), ("current", stack.Count)),
-                item,
-                user);
-        }
+
+        RestockValidationPopup(valid, "rmc-vending-machine-restock-stack-wrong-amount", item, user, ("item", item), ("required", protoStack.Count), ("current", stack.Count));
         return false;
     }
 
@@ -1126,45 +1094,47 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     private bool ValidateGun(EntityUid gun, EntityUid user, bool valid)
     {
-        if (TryComp<MagazineAmmoProviderComponent>(gun, out _))
+        if (IsGunLoaded(gun))
         {
-            if (_container.TryGetContainer(gun, "gun_magazine", out var magContainer) &&
-                magContainer.ContainedEntities.Count > 0)
-            {
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-loaded", ("gun", gun)), gun, user);
-                return false;
-            }
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-loaded", gun, user, ("gun", gun));
+            return false;
         }
 
-        if (TryComp<RMCGunChamberComponent>(gun, out var chamber))
-        {
-            if (_container.TryGetContainer(gun, chamber.ContainerId, out var chamberContainer) &&
-                chamberContainer.ContainedEntities.Count > 0)
-            {
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-loaded", ("gun", gun)), gun, user);
-                return false;
-            }
-        }
+        return ValidateGunAttachments(gun, user, valid);
+    }
 
-        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticProvider))
-        {
-            if (ballisticProvider.UnspawnedCount > 0 || ballisticProvider.Entities.Count > 0)
-            {
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-loaded", ("gun", gun)), gun, user);
-                return false;
-            }
-        }
+    private bool IsGunLoaded(EntityUid gun)
+    {
+        // Check magazine
+        if (TryComp<MagazineAmmoProviderComponent>(gun, out _) &&
+            _container.TryGetContainer(gun, "gun_magazine", out var magContainer) &&
+            magContainer.ContainedEntities.Count > 0)
+            return true;
 
+        // Check chamber
+        if (TryComp<RMCGunChamberComponent>(gun, out var chamber) &&
+            _container.TryGetContainer(gun, chamber.ContainerId, out var chamberContainer) &&
+            chamberContainer.ContainedEntities.Count > 0)
+            return true;
+
+        // Check internal ammo
+        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticProvider) &&
+            (ballisticProvider.UnspawnedCount > 0 || ballisticProvider.Entities.Count > 0))
+            return true;
+
+        return false;
+    }
+
+    private bool ValidateGunAttachments(EntityUid gun, EntityUid user, bool valid)
+    {
         if (!TryComp<AttachableHolderComponent>(gun, out var holderComp))
             return true;
+
         var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
         foreach (var slotId in holder.Comp.Slots.Keys)
         {
             if (!_container.TryGetContainer(gun, slotId, out var slotContainer) ||
-                slotContainer.ContainedEntities.Count <= 0)
+                slotContainer.ContainedEntities.Count == 0)
                 continue;
 
             var attachedEntity = slotContainer.ContainedEntities[0];
@@ -1172,12 +1142,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             if (attachedProto != null &&
                 holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto) &&
                 attachedProto == startingProto)
-            {
                 continue;
-            }
 
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-gun-attachments", ("gun", gun)), gun, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
             return false;
         }
 
@@ -1189,28 +1156,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     private bool ValidateAmmunition(EntityUid item, EntityUid user, bool valid)
     {
-        if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider))
+        if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) && ammoProvider.Count < ammoProvider.Capacity)
         {
-            if (ammoProvider.Count < ammoProvider.Capacity)
-            {
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-mag-not-full", ("mag", item)), item, user);
-                return false;
-            }
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", item, user, ("mag", item));
+            return false;
         }
 
-        if (TryComp<ItemSlotsComponent>(item, out var boxSlots) && !HasComp<CMHolsterComponent>(item))
-        {
-            if (!ValidateMagazineBox(item, boxSlots, user, valid))
-                return false;
-        }
+        if (TryComp<ItemSlotsComponent>(item, out var boxSlots) &&
+            !HasComp<CMHolsterComponent>(item) &&
+            !ValidateMagazineBox(item, boxSlots, user, valid))
+            return false;
 
-        if (TryComp<BulletBoxComponent>(item, out var bulletBox))
+        if (TryComp<BulletBoxComponent>(item, out var bulletBox) && bulletBox.Amount < bulletBox.Max)
         {
-            if (bulletBox.Amount >= bulletBox.Max)
-                return true;
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-box-not-full", ("item", item)), item, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
             return false;
         }
 
@@ -1225,26 +1184,22 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         foreach (var (slotId, _) in slots.Slots)
         {
             totalSlots++;
-            if (!_container.TryGetContainer(box, slotId, out var container))
-                continue;
-            if (container.ContainedEntities.Count <= 0)
+            if (!_container.TryGetContainer(box, slotId, out var container) ||
+                container.ContainedEntities.Count == 0)
                 continue;
 
             filledSlots++;
             var magazine = container.ContainedEntities[0];
-            if (!TryComp<BallisticAmmoProviderComponent>(magazine, out var magAmmo))
-                continue;
-            if (magAmmo.Count >= magAmmo.Capacity)
-                continue;
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-mag-not-full", ("mag", magazine)), box, user);
-            return false;
+            if (TryComp<BallisticAmmoProviderComponent>(magazine, out var magAmmo) && magAmmo.Count < magAmmo.Capacity)
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", box, user, ("mag", magazine));
+                return false;
+            }
         }
 
         if (totalSlots > 1 && filledSlots < totalSlots)
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-box-not-full", ("item", box)), box, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", box, user, ("item", box));
             return false;
         }
 
@@ -1365,5 +1320,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     protected virtual (float currentCharge, float maxCharge) GetBatteryCharge(EntityUid item, PowerCellSlotComponent powerCellSlot)
     {
         return (0, 0);
+    }
+
+    /// <summary>
+    /// Helper method to show validation popup when needed.
+    /// </summary>
+    private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)
+    {
+        if (!showError)
+            return;
+
+        var message = Loc.GetString(locKey, args);
+        _popup.PopupEntity(message, target, user);
     }
 }
