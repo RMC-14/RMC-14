@@ -163,6 +163,8 @@
   - type: ReceiverXenoClaws
     maxHealth: 9000
     minimumClawStrength: VerySharp
+  - type: Corrodible
+    minimumAcidStrength: Strong
   - type: Destructible
     thresholds:
     - trigger:
@@ -182,38 +184,6 @@
     node: reinforcedWall
   - type: StaticPrice
     price: 150
-
-- type: entity
-  parent: CMBaseWall
-  name: reinforced wall
-  id: CMWallSuperReinforced
-  description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
-  suffix: Super Reinforced
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/rwall.rsi
-  - type: Icon
-    sprite: _RMC14/Structures/Walls/rwall.rsi
-  - type: Tag
-    tags:
-    - Wall
-  - type: ReceiverXenoClaws
-    maxHealth: 9000
-    minimumClawStrength: VerySharp
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 9000
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: IconSmooth
-    key: walls
-    additionalKeys:
-    - windows
-    - doors
-    base: rwall
 
 - type: entity
   parent: CMWallReinforced
