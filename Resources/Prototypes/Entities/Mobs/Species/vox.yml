@@ -78,14 +78,14 @@
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
     - map: [ "gloves" ]
     - map: [ "shoes" ]
-    - map: [ "id" ] # RMC14 re-arrange id slot
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
-    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
