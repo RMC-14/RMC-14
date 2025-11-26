@@ -1,0 +1,32 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCPVEArmorPadsBase
+  name: armor pads
+  description: Abstract armor pads.
+  components:
+  - type: UniformAccessory
+    category: Pads
+    limit: 1
+    hasIconSprite: true
+  - type: Appearance
+
+# Pads
+- type: entity
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPads
+  name: M3 Pauldrons
+  description: Attachable supplementary armor for the M3 armor system. Protects from glancing hits and covers the arm opening in the cuirass against shrapnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
+    state: icon
+  - type: UniformAccessory
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/urban.rsi
+

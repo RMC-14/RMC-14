@@ -48,6 +48,16 @@
 - type: entity
   abstract: true
   parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemArmorPVE
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Medal
+    - Pads
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
   id: RMCBaseUniformAccessoryItemGloves
   components:
   - type: UniformAccessoryHolder
