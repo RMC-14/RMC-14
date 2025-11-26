@@ -1150,7 +1150,6 @@
         name: Combat Boots
         amount: 15
       - id: RMCJumpsuitMarineRoyal
-        name: RoyalMarineUniform
         amount: 15
       - id: RMCHandsVeteranRoyalMarine
         name: Combat Gloves
