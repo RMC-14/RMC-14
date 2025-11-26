@@ -53,6 +53,14 @@
   - type: UniformAccessory
     category: ShinGuard
 
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorKneeGuardBase
+  components:
+  - type: UniformAccessory
+    category: KneeGuard
+
 # Pads
 - type: entity
   parent: RMCPVEArmorPadsBase
@@ -137,4 +145,21 @@
       Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/classic.rsi
       Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/snow.rsi
       Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/urban.rsi
+
+# Knee Guard
+- type: entity
+  parent: RMCPVEArmorKneeGuardBase
+  id: RMCPVEArmorKneeGuard
+  name: M3 Kneepads
+  description: Attachable supplementary armor for the M3 armor system. High impact ruggedized outer shell and polymer internals protect from shrapnel as well as low power ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/urban.rsi
 

@@ -58,6 +58,7 @@
     - NeckGuard
     - GroinPlate
     - ShinGuard
+    - KneeGuard
 
 - type: entity
   abstract: true
