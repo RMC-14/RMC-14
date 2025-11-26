@@ -140,14 +140,6 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
             }
 
-            if (clothingSprite != null && accessoryComp.HasIconSprite)
-            {
-                var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
-                clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);
-                clothingSprite.LayerSetRSI(clothingLayer, sprite.RsiPath);
-                clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
-            }
-
             if (accessoryComp.LayerKey != null)
                 key = accessoryComp.LayerKey;
         }
