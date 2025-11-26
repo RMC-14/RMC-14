@@ -28,7 +28,7 @@
       entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
       - id: CMBackpackMarine
         name: Backpack
-      - id: CMSatchel
+      - id: CMSatchelMarine
         name: Satchel
       - id: CMBackpackWelder
         name: Engineering Backpack
@@ -71,8 +71,8 @@
     - name: Backpack (Choose 1)
       choices: { CMBackpack: 1 } 
       entries:
-      - id: RMCSatchelLightpack # TODO RMC14 TWE heavy-duty medical backpack
-        name: Lightpack
+      - id: RMCSatchelMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
+      - id: RMCBackpackMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
     - name: Belt
       choices: { CMBelt: 1 }
       entries: # TODO RMC14 TWE belts

@@ -1185,7 +1185,7 @@
       - id: CMBackpackMarine
         name: Backpack
         amount: 15
-      - id: CMSatchel
+      - id: CMSatchelMarine
         name: Satchel
         amount: 15
     - name: Belts
