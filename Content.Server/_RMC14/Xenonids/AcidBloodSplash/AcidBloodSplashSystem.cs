@@ -103,7 +103,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
     private void OnGib(Entity<AcidBloodSplashComponent> ent, ref BeingGibbedEvent args)
     {
-        if (ent.Comp.IsActivateSplashOnGib)
+        if (!ent.Comp.IsActivateSplashOnGib)
             return;
 
         ActivateSplash(ent.Owner, ent.Comp, ent.Comp.GibSplashRadius);
