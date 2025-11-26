@@ -55,4 +55,4 @@
   id: RMCJobIconPMCGoonMedic
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: weya_goon_engi
+    state: weya_goon_medic
