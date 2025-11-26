@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
@@ -593,11 +594,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var unremovable = EnsureComp<UnremoveableComponent>(parasite);
         unremovable.DeleteOnDrop = false;
-
         parasite.Comp.InfectedVictim = victim;
         parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
 
+        RemCompDeferred<RMCGibOnDeathComponent>(parasite); // No gibbing on someone's face
         RemCompDeferred<ParasiteAIComponent>(parasite);
         var ev = new XenoParasiteInfectEvent(victim, parasite.Owner);
         RaiseLocalEvent(victim, ev, true);

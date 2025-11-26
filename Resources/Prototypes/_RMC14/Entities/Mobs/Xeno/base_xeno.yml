@@ -190,6 +190,12 @@
         layer:
         - BulletImpassable
   - type: CMSurgeryTarget
+  - type: Gibbable
+  - type: RMCGibOnDeath
+  - type: RMCSpawnEntitiesOnGibComponent
+    entities:
+    - RMCDecalSpawnerGibsDrone # TODO one for every caste
+    - RMCGibEffectXenoSmall # TODO larger gib effect for larger xenos
   - type: Body
     prototype: Xenonid
   - type: Xeno
