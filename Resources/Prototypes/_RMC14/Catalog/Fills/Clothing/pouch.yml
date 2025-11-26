@@ -154,7 +154,7 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: RMCFLareL96
+    startingItem: RMCFlareL96
 
 # Electronics Pouch
 - type: entity

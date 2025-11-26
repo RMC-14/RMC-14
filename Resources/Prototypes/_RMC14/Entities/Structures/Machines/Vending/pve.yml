@@ -1141,7 +1141,7 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
   - type: CMAutomatedVendor
     access:
-    - "RMCAccessMarinePrep" # TODO RMC14 FIX ACCESSES/JOBS AFTER PR 8076 MERGED!!!!
+    - "RMCAccessMarinePrep" 
     hackable: true
     sections:
     - name: Standard Equipment
@@ -1149,7 +1149,7 @@
       - id: RMCBootsRoyal
         name: Combat Boots
         amount: 15
-      - id: RMCJumpsuitMarineRoyal # TODO RMC14 replace with RMCJumpsuitMarineRoyalBlank when PR 8076 is merged
+      - id: RMCJumpsuitMarineRoyal
         name: RoyalMarineUniform
         amount: 15
       - id: RMCHandsVeteranRoyalMarine
@@ -1164,7 +1164,7 @@
       - id: RMCHeadsetRoyalMarine
         name: Radio Headset
         amount: 15
-    - name: Webbings # TODO RMC14 armor webbings - a friend of mine is on that
+    - name: Webbings # TODO RMC14 armor webbings 
       entries:
       - id: CMWebbingBlack # TODO RMC14 small pouch webbing (4 small slots)
         name: Webbing
@@ -1184,18 +1184,15 @@
       entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
       - id: CMBackpackMarine
         name: Backpack
-        amount: 10
-      - id: RMCSatchelLightpack
-        name: Lightpack
-        amount: 5
+        amount: 15
       - id: CMSatchel
         name: Satchel
-        amount: 10
+        amount: 15
     - name: Belts
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
         amount: 15
-      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterPistolTSE
         amount: 15
       - id: RMCBeltUtilityGeneral
         amount: 5
@@ -1253,15 +1250,15 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
   - type: CMAutomatedVendor
     access:
-    - "RMCAccessMarinePrep" # TODO RMC14  # TODO RMC14 !!!!ACCESS!!!!
+    - "RMCAccessMarinePrep"
     hackable: true
     sections:
     - name: Food
       entries:
-      - id: CMMRE # TODO RMC14 replace with RMCMRETSE when PR 8221 is merged
+      - id: RMCMRETSE
         name: MRE
         amount: 5
-      - id: RMCBoxMRE  # TODO RMC14 as above
+      - id: RMCBoxMRE
         name: MRE Box
         amount: 1
     - name: Medical
@@ -1297,7 +1294,7 @@
         amount: 2
     - name: Flare and Light
       entries:
-      - id: RMCFlashlight # TODO RMC14 combat flashlight
+      - id: RMCFlashlight
         amount: 10
       - id: RMCPackFlareL96
         amount: 10
@@ -1327,5 +1324,5 @@
         amount: 5
       - id: RMCAttachmentTwoPointSling 
         amount: 5
-      - id: RMCM5Bayonet # TODO RMC14 Fairbairn-Sykes fighting knife (what a fucking incredible name)
+      - id: RMCM5Bayonet # TODO RMC14 RMCTantoA once #8476 is merged
         amount: 25

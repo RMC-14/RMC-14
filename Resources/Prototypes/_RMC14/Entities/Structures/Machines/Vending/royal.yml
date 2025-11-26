@@ -28,8 +28,6 @@
       entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
       - id: CMBackpackMarine
         name: Backpack
-      - id: RMCSatchelLightpack
-        name: Lightpack
       - id: CMSatchel
         name: Satchel
       - id: CMBackpackWelder
@@ -38,7 +36,7 @@
       choices: { CMBelt: 1 }
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
-      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterPistolTSE
       - id: RMCBeltUtilityGeneral
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -61,7 +59,7 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: AccessReader
     access:
-    - [ "CMAccessMedPrep" ] # TODO RMC14 !!!!ACCESS!!!!
+    - [ "CMAccessMedPrep" ]
   - type: CMAutomatedVendor
     jobs:
     - CMHospitalCorpsman # TODO RMC14 CMRoyalMarinesMedicPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
