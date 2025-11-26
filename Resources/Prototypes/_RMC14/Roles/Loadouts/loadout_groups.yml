@@ -350,12 +350,12 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - RMCCombatUtilityKnifeA
-  - RMCCombatUtilityKnifeB
-  - RMCTantoA
-  - RMCTantoB
-  - RMCSawtoothDaggerA
-  - RMCSawtoothDaggerB
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
 
 # Weapons
 - type: loadoutGroup
