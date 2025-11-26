@@ -1,0 +1,298 @@
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalAssaultEngineerVendor
+  name: We-Ya section engineering equipment rack
+  suffix: PVE, RCM
+  description: An automated rack hooked up to a colossal storage of assault engineer standard-issue equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ] # TODO RMC14 !!!!ACCESS!!!!
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCombatTech # TODO RMC14 CMRoyalMarinesAssaultEngineerPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
+    sections:
+    - name: Engineering Set (Mandatory)
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleRCMPVEAssaultEngi
+    #- name: Heavy-Duty Breaching Equipment (Choose 1) // TODO RMC14 D2 breaching hammer
+    #  choices: { IDKwhatthefuckbutitschoose1notmandatory }
+    #  - id: RMCBreachingHammerD2
+    #    name: Breaching Hammer
+    - name: Backpack (Choose 1)
+      choices: { CMBackpack: 1 }
+      entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
+      - id: CMBackpackMarine
+        name: Backpack
+      - id: CMSatchelMarine
+        name: Satchel
+      - id: CMBackpackWelder
+        name: Engineering Backpack
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMarine
+      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltUtilityGeneral
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
+        name: Webbing
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalMedicalAssistantVendor
+  name: We-Ya section medical equipment rack
+  suffix: PVE, RCM
+  description: An automated rack hooked up to a colossal storage of medical assistant standard-issue equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedPrep" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMHospitalCorpsman # TODO RMC14 CMRoyalMarinesMedicPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
+    sections:
+    - name: Medical Set (Mandatory)
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleRCMPVEMedic
+    - name: Backpack (Choose 1)
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
+      - id: CMBackpackMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMedical
+      - id: RMCBeltUtilityGeneral
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchMedkit
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchReagentCanisterMeraBic
+        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+      - id: RMCPouchReagentCanisterKeloDerm
+        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchVialFill
+        name: vial pouch (Full)
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
+        name: Webbing
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusRCMPVE
+  name: We-Ya Surplus Uniform Vendor
+  description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
+  suffix: PVE, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: RMCBootsRoyal
+        name: Combat Boots
+        amount: 15
+      - id: RMCJumpsuitMarineRoyal
+        amount: 15
+      - id: RMCHandsVeteranRoyalMarine
+        name: Combat Gloves
+        amount: 15
+      - id: RMCHeadRoyalHelmet
+        name: L5A2 Ballistic Helmet
+        amount: 15
+      - id: RMCHeadRoyalBeanie
+        name: Tactical Beanie
+        amount: 15
+      - id: RMCHeadsetRoyalMarine
+        name: Radio Headset
+        amount: 15
+    - name: Webbings # TODO RMC14 armor webbings
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch webbing (4 small slots)
+        name: Webbing
+        amount: 10
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+        amount: 3
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
+        amount: 5
+    - name: Armor
+      entries: # TODO RMC14 shoulder pads and leg guards for newmed in a week
+      - id: RMCArmorRoyal
+        name: Kestrel Armored Cuirass
+        amount: 15
+    - name: Backpack
+      entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
+      - id: CMBackpackMarine
+        name: Backpack
+        amount: 15
+      - id: CMSatchelMarine
+        name: Satchel
+        amount: 15
+    - name: Belts
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMarine
+        amount: 15
+      - id: RMCBeltHolsterPistolTSE
+        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstResponder
+        amount: 10
+      - id: RMCPouchFlareL96Filled
+        name: flare pouch (Full)
+        amount: 10
+      - id: RMCPouchMagazineLarge
+        amount: 10
+      - id: RMCPouchGeneralLarge
+        amount: 10
+      - id: RMCPouchMagazinePistolLarge
+        amount: 10
+      - id: RMCPouchPistol
+        amount: 10
+      - id: RMCPouchExplosive
+        amount: 10
+      # -id: RMCPouchSling // TODO RMC14 implement sling pouch
+      #  amount: 10
+    - name: Mask
+      entries:
+      - id: CMMaskGas # TODO RMC14 TWE L7 gas mask
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallisticBlack
+        name: Ballistic Goggles
+        amount: 10
+      - id: RMCGogglesPrescriptionBallistic
+        name: Prescription Ballistic Goggles # These goggles both mention UNMC in their descriptions but whatever
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
+      - id: RMCPatchTSEMarines
+        amount: 15
+      - id: RMCPatchTSE
+        amount: 15
+      - id: BedrollFolded
+        amount: 10
+      - id: CMCanteen
+        amount: 10
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechUtilitiesRCMPVE
+  suffix: PVE, RCM
+  name: We-Ya Automated Utilities Section Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities, tools, and medical supplies. Can be accessed by any Royal marine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
+    sections:
+    - name: Food
+      entries:
+      - id: RMCMRETSE
+        name: MRE
+        amount: 5
+      - id: RMCBoxMRE
+        name: MRE Box
+        amount: 1
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      - id: CMTraumaKit10
+        amount: 15
+        name: Trauma Treatment Pack
+      - id: CMBurnKit10
+        amount: 15
+        name: Burn Treatment Pack
+      #- id: RMCSplints10 # TODO RMC14 implement newmed
+      #  amount: 15
+      - id: CMEmergencyAutoInjector
+        name: Emergency Autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+      #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
+      #  amount: 15
+    - name: Explosives
+      entries:
+      - id: RMCExplosivePlastic
+        amount: 2
+      - id: RMCExplosiveBreachingCharge
+        amount: 2
+    - name: Flare and Light
+      entries:
+      - id: RMCFlashlight
+        amount: 10
+      - id: RMCPackFlareL96
+        amount: 10
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77
+        amount: 2
+      - id: RMCMK80
+        amount: 2
+      - id: RMCWeaponPistolL54
+        amount: 2
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 2
+      - id: CMRollerBedSpawnFolded
+        amount: 2
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        amount: 5
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: RMCBinoculars
+        amount: 2
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentTwoPointSling
+        amount: 5
+      - id: RMCM5Bayonet # TODO RMC14 RMCTantoA once #8476 is merged
+        amount: 25
+

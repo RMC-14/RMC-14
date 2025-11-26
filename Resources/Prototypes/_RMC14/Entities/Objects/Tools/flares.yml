@@ -595,10 +595,6 @@
   - type: PointLight
     enabled: true
     color: "#C8BFE7"
-    radius: 8.0
-    energy: 0.6
-  - type: TimedDespawn
-    lifetime: 300
 
 - type: Tag
   id: RMCFlare
@@ -612,5 +608,5 @@
 - type: Tag
   id: RMCFlareL96
 
-- type: Tag 
+- type: Tag
   id: RMCPackFlareL96
