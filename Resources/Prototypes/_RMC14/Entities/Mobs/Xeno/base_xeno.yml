@@ -192,7 +192,7 @@
   - type: CMSurgeryTarget
   - type: Gibbable
   - type: RMCGibOnDeath
-  - type: RMCSpawnEntitiesOnGibComponent
+  - type: RMCSpawnEntitiesOnGib
     entities:
     - RMCDecalSpawnerGibsDrone # TODO one for every caste
     - RMCGibEffectXenoSmall # TODO larger gib effect for larger xenos
