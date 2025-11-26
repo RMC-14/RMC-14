@@ -252,7 +252,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
                     _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
-                    _body.GibBody(xeno, true);
+                    _body.GibBody(xeno);
                     RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }

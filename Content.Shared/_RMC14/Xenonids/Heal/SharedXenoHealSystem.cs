@@ -347,7 +347,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         if (_net.IsServer)
         {
             SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-            _body.GibBody(ent, true);
+            _body.GibBody(ent);
         }
     }
 

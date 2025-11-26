@@ -65,7 +65,7 @@ public sealed class RMCGibSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _body.GibBody(ent, true);
+        _body.GibBody(ent, ent.Comp.DropOrgans);
     }
 
     /// <summary>

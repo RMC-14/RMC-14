@@ -16,4 +16,10 @@ public sealed partial class RMCGibOnDeathComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float DamageGibMultiplier = 0.005f; // * 0.01 to get probability, / 2 by parity
+
+    /// <summary>
+    /// If organs should be dropped on gibbing.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DropOrgans = false;
 }
