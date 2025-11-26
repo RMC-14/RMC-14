@@ -9,6 +9,7 @@
     state: icon
   - type: UniformAccessory
     limit: 1
+    hasIconSprite: true
   - type: Appearance
 
 - type: entity
