@@ -1,15 +1,32 @@
 - type: entity
   abstract: true
   parent: RMCBaseUniformAccessory
-  id: RMCPVEArmorPadsBase
-  name: armor pads
-  description: Abstract armor pads.
+  id: RMCPVEArmorAccessoryBase
+  name: armor accessory
+  description: Abstract armor accessories.
   components:
+  - type: Sprite
+    state: icon
   - type: UniformAccessory
-    category: Pads
     limit: 1
     hasIconSprite: true
   - type: Appearance
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorAccessoryBase
+  id: RMCPVEArmorPadsBase
+  components:
+  - type: UniformAccessory
+    category: Pads
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorBracersBase
+  components:
+  - type: UniformAccessory
+    category: Bracers
 
 # Pads
 - type: entity
@@ -20,8 +37,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
-    state: icon
-  - type: UniformAccessory
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
@@ -30,3 +45,19 @@
       Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/snow.rsi
       Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/urban.rsi
 
+# Bracers
+- type: entity
+  parent: RMCPVEArmorBracersBase
+  id: RMCPVEArmorBracers
+  name: M3 Vambraces
+  description: Attachable supplementary armor for the M3 armor system. A pair of composite ballistic vambraces to shield the forearms, with straps to ensure it doesn't ride up or down.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/urban.rsi

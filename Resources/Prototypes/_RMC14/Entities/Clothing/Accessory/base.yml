@@ -54,6 +54,7 @@
     allowedCategories:
     - Medal
     - Pads
+    - Bracers
 
 - type: entity
   abstract: true
