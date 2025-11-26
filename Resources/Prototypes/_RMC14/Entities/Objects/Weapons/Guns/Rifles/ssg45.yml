@@ -179,8 +179,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle7x62mm
-    proto: CMCartridgeRifle7x62mm
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
@@ -191,7 +191,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSSG
+    bulletType: RMCBoxBulletsRifle
 
 - type: entity
   parent: RMCMagazineRifleSSG45
@@ -206,8 +206,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle7x62mm
-    proto: CMCartridgeRifle7x62mm
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
     capacity: 45
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45e.rsi
@@ -234,8 +234,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle7x62mmAP
-    proto: CMCartridgeRifle7x62mmAP
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
@@ -246,8 +246,6 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#1F951F"
-  - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSSGAP
 
 - type: entity
   parent: RMCMagazineRifleSSG45
@@ -262,8 +260,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifle7x62mmHEAP
-    proto: RMCCartridgeRifle7x62mmHEAP
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
@@ -288,8 +286,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifle7x62mmIncendiary
-    proto: RMCCartridgeRifle7x62mmIncendiary
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
