@@ -45,6 +45,14 @@
   - type: UniformAccessory
     category: GroinPlate
 
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorShinGuardBase
+  components:
+  - type: UniformAccessory
+    category: ShinGuard
+
 # Pads
 - type: entity
   parent: RMCPVEArmorPadsBase
@@ -112,4 +120,21 @@
       Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/classic.rsi
       Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/snow.rsi
       Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/urban.rsi
+
+# Shin Guard
+- type: entity
+  parent: RMCPVEArmorShinGuardBase
+  id: RMCPVEArmorShinGuard
+  name: M3 Greaves
+  description: Attachable supplementary armor for the M3 armor system. Lightweight polymer clamshell-style plates enclose the lower legs to provide shrapnel and pistol protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/urban.rsi
 

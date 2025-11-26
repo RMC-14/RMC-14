@@ -57,6 +57,7 @@
     - Bracers
     - NeckGuard
     - GroinPlate
+    - ShinGuard
 
 - type: entity
   abstract: true
