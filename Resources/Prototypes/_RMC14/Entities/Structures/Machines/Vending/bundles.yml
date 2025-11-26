@@ -228,6 +228,5 @@
     bundle:
     - RMCFlashlightPen
     - RMCStethoscope
-    - CMSynthGraft
     - RMCSurgicalCaseRCMFilled
     - CMHealthAnalyzer
