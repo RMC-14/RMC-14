@@ -1141,7 +1141,7 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
   - type: CMAutomatedVendor
     access:
-    - "RMCAccessMarinePrep" 
+    - "CMAccessMarinePrep" 
     hackable: true
     sections:
     - name: Standard Equipment
