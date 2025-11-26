@@ -267,7 +267,7 @@
 - type: entity
   parent: RMCPVEArmorPaintBase
   id: RMCPVEArmorPaintCross
-  name: cross armor paint
+  name: medic cross armor paint
   description: A set of paint tones to etch a religious symbol into a Marine's armor.
   components:
   - type: Sprite
