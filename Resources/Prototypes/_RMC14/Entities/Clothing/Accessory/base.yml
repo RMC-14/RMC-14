@@ -55,6 +55,7 @@
     - Medal
     - Pads
     - Bracers
+    - NeckGuard
 
 - type: entity
   abstract: true

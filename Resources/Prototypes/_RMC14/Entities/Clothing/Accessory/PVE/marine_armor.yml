@@ -28,6 +28,14 @@
   - type: UniformAccessory
     category: Bracers
 
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorNeckGuardBase
+  components:
+  - type: UniformAccessory
+    category: NeckGuard
+
 # Pads
 - type: entity
   parent: RMCPVEArmorPadsBase
@@ -61,3 +69,20 @@
       Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/classic.rsi
       Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/snow.rsi
       Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/urban.rsi
+
+# Neck Guard
+- type: entity
+  parent: RMCPVEArmorNeckGuardBase
+  id: RMCPVEArmorNeckGuard
+  name: M3 Gorget
+  description: Attachable supplementary armor for the M3 armor system. A simple polymer ballistic plate to resist ricochets and shrapnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/urban.rsi
