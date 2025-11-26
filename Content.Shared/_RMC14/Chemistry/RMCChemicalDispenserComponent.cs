@@ -34,7 +34,7 @@ public sealed partial class RMCChemicalDispenserComponent : Component
     ];
 
     [DataField, AutoNetworkedField]
-    public ProtoId<ReagentPrototype>[] FreeReagents = ["Water"];
+    public HashSet<ProtoId<ReagentPrototype>> FreeReagents = ["Water"];
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 DispenseSetting = 5;
