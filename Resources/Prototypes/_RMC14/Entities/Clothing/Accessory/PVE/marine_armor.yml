@@ -5,6 +5,7 @@
   id: RMCPVEArmorAccessoryBase
   name: armor accessory
   description: Abstract armor accessories.
+  suffix: PVE
   components:
   - type: Sprite
     state: icon
@@ -60,6 +61,14 @@
   components:
   - type: UniformAccessory
     category: KneeGuard
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPaintBase
+  components:
+  - type: UniformAccessory
+    category: Paint
 
 # Pads
 - type: entity
@@ -162,4 +171,135 @@
       Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/classic.rsi
       Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/snow.rsi
       Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/urban.rsi
+
+# Paint
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintSkull
+  name: skull armor paint
+  description: A set of paint tones to etch a skull into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/skull.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/skull.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintHeart
+  name: heart armor paint
+  description: A set of paint tones to etch a heart into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/heart.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/heart.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintMedic
+  name: cross armor paint
+  description: A set of paint tones to etch a blue cross into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/medic.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/medic.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintUN
+  name: UN flag armor paint
+  description: A set of paint tones to etch the white and blue into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/un.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/un.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintTarget
+  name: target armor paint
+  description: A set of paint tones to etch a target pattern into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/target.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/target.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintSmileyFace
+  name: smileyface armor paint
+  description: A set of paint tones to etch a happy face into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/smiley.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/smiley.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintNeutralFace
+  name: neutralface armor paint
+  description: A set of paint tones to etch a neutral face into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/neutral.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/neutral.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintCross
+  name: cross armor paint
+  description: A set of paint tones to etch a religious symbol into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/cross.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/cross.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintInscription
+  name: inscription armor paint
+  description: A set of paint tones to etch a text phrase into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/inscription.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/inscription.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintMixtape
+  name: flames armor paint
+  description: A set of paint tones to etch straight heat into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/mixtape.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/mixtape.rsi
+      state: equipped
 

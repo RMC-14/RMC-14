@@ -59,6 +59,7 @@
     - GroinPlate
     - ShinGuard
     - KneeGuard
+    - Paint
 
 - type: entity
   abstract: true
