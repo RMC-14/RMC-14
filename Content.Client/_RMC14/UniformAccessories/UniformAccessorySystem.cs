@@ -52,7 +52,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             var layer = GetKey(accessory, accessoryComp, index);
 
-            if (accessoryComp.PlayerSprite == null && TryComp(accessoryComp, out SpriteComponent? accessorySprite))
+            if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
             }
