@@ -21,6 +21,8 @@
     back:
     - RMCPatchPeace
 
+# Paint (FOR PVE)
+
 - type: loadout
   id: PaintSkullRMC
   cost: 1

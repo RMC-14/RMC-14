@@ -373,6 +373,7 @@
   id: RMCSatchelMarineChestrigPVE # Reskin for PVE
   name: UNMC IMP chestrig
   description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand.
+  suffix: PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
