@@ -900,7 +900,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             var ev = new RMCVendorRestockFromStorageDoAfterEvent
             {
-                Container = container,
+                Container = GetNetEntity(container),
                 ItemIndex = index,
             };
             var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, item)
@@ -923,15 +923,16 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         args.Handled = true;
 
-        if (args.Target == null || args.Container == null)
+        if (args.Target == null)
             return;
 
+        var container = GetEntity(args.Container);
         TryRestockSingleItem(vendor, args.Target.Value, args.User, valid: true);
 
-        if (!TryComp<StorageComponent>(args.Container.Value, out var storage))
+        if (!TryComp<StorageComponent>(container, out var storage))
             return;
 
-        StartNextRestock(vendor, args.Container.Value, args.User, storage, args.ItemIndex + 1);
+        StartNextRestock(vendor, container, args.User, storage, args.ItemIndex + 1);
     }
 
     private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
@@ -1114,19 +1115,28 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
         foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            if (!_container.TryGetContainer(gun, slotId, out var slotContainer) ||
-                slotContainer.ContainedEntities.Count == 0)
-                continue;
+            var hasAttachment = _container.TryGetContainer(gun, slotId, out var slotContainer) &&
+                                slotContainer.ContainedEntities.Count > 0;
+            var hasStartingAttachment = holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto);
 
-            var attachedEntity = slotContainer.ContainedEntities[0];
+            switch (hasAttachment)
+            {
+                case false when !hasStartingAttachment:
+                    continue;
+
+                case false when hasStartingAttachment:
+                case true when !hasStartingAttachment:
+                    RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
+                    return false;
+            }
+
+            var attachedEntity = slotContainer!.ContainedEntities[0];
             var attachedProto = MetaData(attachedEntity).EntityPrototype?.ID;
-            if (attachedProto != null &&
-                holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto) &&
-                attachedProto == startingProto)
-                continue;
-
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
-            return false;
+            if (attachedProto == null || attachedProto != startingProto)
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
+                return false;
+            }
         }
 
         return true;
