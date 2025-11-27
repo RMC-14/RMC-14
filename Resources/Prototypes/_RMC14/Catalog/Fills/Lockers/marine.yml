@@ -11,7 +11,7 @@
   table: !type:AllSelector
     children:
     - id: CMArmorHelmetM11
-    - id: RMCLaserDesignator
+    - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCArmorB12PVE
 

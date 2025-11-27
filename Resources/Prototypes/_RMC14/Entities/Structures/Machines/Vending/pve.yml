@@ -234,6 +234,8 @@
       - id: RMCWelderPVE
         name: Blowtorch
         amount: 2
+      - id: RMCBinocularsPVE
+        amount: 1
     - name: Explosives
       entries:
       - id: RMCExplosivePlastic
