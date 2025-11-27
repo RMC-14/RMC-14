@@ -879,7 +879,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-start", ("vendor", vendor), ("container", container)), vendor, user);
 
-        // Start restocking with the first item
         StartNextRestock(vendor, container, user, storage, 0);
     }
 
@@ -903,7 +902,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 Container = GetNetEntity(container),
                 ItemIndex = index,
             };
-            var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, item)
+            var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, item, vendor, item)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -927,24 +926,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
 
         var container = GetEntity(args.Container);
-        TryRestockSingleItem(vendor, args.Target.Value, args.User, valid: true);
+        var item = args.Target.Value;
+        TryRestockSingleItem(vendor, item, args.User, valid: true, container);
 
-        if (!TryComp<StorageComponent>(container, out var storage))
+        if (!TryComp(container, out StorageComponent? storage))
             return;
 
         StartNextRestock(vendor, container, args.User, storage, args.ItemIndex + 1);
     }
 
-    private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
+    private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false, EntityUid? sourceContainer = null)
     {
         if (_net.IsClient)
             return false;
 
-        CMVendorEntry? matchingEntry = null;
         var itemProto = MetaData(item).EntityPrototype?.ID;
         if (itemProto == null)
             return false;
 
+        CMVendorEntry? matchingEntry = null;
         foreach (var section in vendor.Comp.Sections)
         {
             foreach (var entry in section.Entries)
@@ -958,22 +958,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 break;
         }
 
-        if (matchingEntry == null || (TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _)))
+        if (matchingEntry == null || TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _))
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-invalid", ("item", item)), vendor, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", vendor, user, ("item", item));
             return false;
         }
 
         if (matchingEntry.Amount >= matchingEntry.Max)
         {
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-full", ("vendor", vendor), ("item", item)), vendor, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-full", vendor, user, ("vendor", vendor), ("item", item));
             return false;
         }
 
         if (!ValidateItemForRestock(item, user, valid, matchingEntry.Id))
             return false;
+
+        if (sourceContainer != null && TryComp(sourceContainer.Value, out StorageComponent? storage))
+        {
+            _container.Remove(item, storage.Container);
+        }
 
         if (!valid)
         {
@@ -1199,39 +1202,41 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates equipment items (armor, helmets, machete holsters) are in proper state.
+    /// Armor/helmet must be empty, machete holsters must contain a machete.
     /// </summary>
     private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
     {
-        if (TryComp<StorageComponent>(item, out var storage))
+        if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
-            if (storage.Container.ContainedEntities.Count > 0)
-            {
-                if (!valid)
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-storage-not-empty", ("item", item)), item, user);
-                return false;
-            }
-        }
-
-        if (HasComp<CMHolsterComponent>(item) && MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase))
-        {
-            if (!TryComp<ItemSlotsComponent>(item, out var itemSlots))
-                return true;
-
-            foreach (var (slotId, _) in itemSlots.Slots)
-            {
-                if (_container.TryGetContainer(item, slotId, out var container) &&
-                    container.ContainedEntities.Count > 0)
-                {
-                    return true;
-                }
-            }
-
-            if (!valid)
-                _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-machete-holster-empty", ("item", item)), item, user);
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
             return false;
         }
 
+        if (HasComp<CMHolsterComponent>(item) &&
+            MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase))
+        {
+            return ValidateMacheteHolster(item, user, valid);
+        }
+
         return true;
+    }
+
+    private bool ValidateMacheteHolster(EntityUid holster, EntityUid user, bool valid)
+    {
+        if (!TryComp<ItemSlotsComponent>(holster, out var itemSlots))
+            return true;
+
+        foreach (var (slotId, _) in itemSlots.Slots)
+        {
+            if (_container.TryGetContainer(holster, slotId, out var container) &&
+                container.ContainedEntities.Count > 0)
+            {
+                return true;
+            }
+        }
+
+        RestockValidationPopup(valid, "rmc-vending-machine-restock-machete-holster-empty", holster, user, ("item", holster));
+        return false;
     }
 
     /// <summary>
@@ -1313,9 +1318,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return (0, 0);
     }
 
-    /// <summary>
-    /// Helper method to show validation popup.
-    /// </summary>
     private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)
     {
         if (!showError)
