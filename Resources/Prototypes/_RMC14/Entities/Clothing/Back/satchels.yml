@@ -369,6 +369,22 @@
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineChestrigPVE # Reskin for PVE
+  name: UNMC IMP chestrig
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+
+- type: entity
   parent: CMSatchelMarineIntel
   id: RMCSatchelMarineIntelSatchel
   name: UNMC lightweight expedition satchel
