@@ -105,7 +105,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(CMRefillableSolutionSystem)]);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
@@ -918,7 +918,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 _container.Remove(item, storage.Container);
                 continue;
             }
-            // Skip storage containers to prevent nested container processing
+            // Skip nested storage containers to prevent recursive processing
             if (TryComp<StorageComponent>(item, out _))
             {
                 _container.Remove(item, storage.Container);
@@ -965,30 +965,23 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         _container.Remove(item, storage.Container);
-        // Handle refillable items specially during bulk restocking
-        var isRefillable = HasComp<CMRefillableSolutionComponent>(item);
-        if (isRefillable)
+        // Refillable items (bottles, autoinjectors) use the refill system
+        if (HasComp<CMRefillableSolutionComponent>(item))
         {
             var vendorCoords = Transform(vendor).Coordinates;
             _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
 
             if (EntityManager.EntityExists(item))
             {
-                var restocked = TryRestockSingleItem(vendor, item, args.User, valid: true);
-                if (!restocked)
-                {
-                    _container.Insert(item, storage.Container);
-                    args.FailedBulkRestockItems.Add(GetNetEntity(item));
-                }
+                _container.Insert(item, storage.Container);
+                args.FailedBulkRestockItems.Add(GetNetEntity(item));
             }
         }
         else
         {
-            // Non-refillable items: use normal interaction flow
-            var vendorCoords = Transform(vendor).Coordinates;
-            _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
-
-            if (EntityManager.EntityExists(item))
+            // Standard vendor items: validate and restock directly
+            var restocked = TryRestockSingleItem(vendor, item, args.User, valid: true);
+            if (!restocked)
             {
                 _container.Insert(item, storage.Container);
                 args.FailedBulkRestockItems.Add(GetNetEntity(item));
@@ -1050,13 +1043,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates that an item meets all requirements for restocking into the vendor.
-    /// Checks weapons, ammunition, equipment, and power cells for proper state.
+    /// All applicable validation checks must pass for the item to be restocked.
+    /// Uses short-circuit evaluation: returns false on first failed check.
     /// </summary>
     /// <param name="item">The item to validate.</param>
     /// <param name="user">The user attempting to restock.</param>
     /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
     /// <param name="prototypeId">The prototype ID of the item being sold in the vendor (for stack comparison).</param>
-    /// <returns>True if the item can be restocked, false otherwise.</returns>
+    /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
     protected bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
         return ValidateReagentContainers(item, user, valid)
@@ -1069,7 +1063,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <summary>
     /// Validates reagent containers.
     /// Checks flamer tanks for correct fuel type and fill level.
-    /// Reagent containers from We-Ya-Med Plus(bottles, hyposprays, etc.) are handled by the refilling system before vendor restocking.
+    /// Reagent containers from We-Ya-Med Plus(bottles, hyposprays, etc.) are handled by the refilling system before restocking.
     /// </summary>
     private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
     {
@@ -1229,7 +1223,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             filledSlots++;
             var magazine = container.ContainedEntities[0];
-            if (TryComp<BallisticAmmoProviderComponent>(magazine, out var magAmmo) && magAmmo.Count < magAmmo.Capacity)
+            if (!TryComp<BallisticAmmoProviderComponent>(magazine, out var magAmmo))
+                continue;
+
+            if (magAmmo.Count < magAmmo.Capacity)
             {
                 RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", box, user, ("mag", magazine));
                 return false;
@@ -1247,7 +1244,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates equipment items (armor, helmets, machete holsters, flare packs, power cells) are in proper state.
-    /// Storage items must be empty, machete holsters must contain a machete, flare packs must be full, power cells must be charged.
     /// </summary>
     private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
     {
