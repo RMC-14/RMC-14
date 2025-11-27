@@ -291,8 +291,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
-        var isRefillable = HasComp<CMRefillableSolutionComponent>(args.Used);
-        if (args.Handled && !isRefillable) // Refills first then restocks via TryRestockFromContainer
+        if (args.Handled)
             return;
 
         if (HasComp<MultitoolComponent>(args.Used))
@@ -966,14 +965,34 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         _container.Remove(item, storage.Container);
-
-        var vendorCoords = Transform(vendor).Coordinates;
-        _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
-
-        if (EntityManager.EntityExists(item))
+        // Handle refillable items specially during bulk restocking
+        var isRefillable = HasComp<CMRefillableSolutionComponent>(item);
+        if (isRefillable)
         {
-            _container.Insert(item, storage.Container);
-            args.FailedBulkRestockItems.Add(GetNetEntity(item));
+            var vendorCoords = Transform(vendor).Coordinates;
+            _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
+
+            if (EntityManager.EntityExists(item))
+            {
+                var restocked = TryRestockSingleItem(vendor, item, args.User, valid: true);
+                if (!restocked)
+                {
+                    _container.Insert(item, storage.Container);
+                    args.FailedBulkRestockItems.Add(GetNetEntity(item));
+                }
+            }
+        }
+        else
+        {
+            // Non-refillable items: use normal interaction flow
+            var vendorCoords = Transform(vendor).Coordinates;
+            _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
+
+            if (EntityManager.EntityExists(item))
+            {
+                _container.Insert(item, storage.Container);
+                args.FailedBulkRestockItems.Add(GetNetEntity(item));
+            }
         }
 
         StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
