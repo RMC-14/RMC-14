@@ -1,5 +1,4 @@
 # RIFLEMAN
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipment
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     sections:
     - name: Standard Equipment
       takeAll: CMStandard

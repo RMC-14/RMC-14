@@ -1,5 +1,4 @@
 # SQUAD LEADER
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSLGear
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMSquadLeader
     sections:
@@ -228,6 +228,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMSquadLeader
     sections:
