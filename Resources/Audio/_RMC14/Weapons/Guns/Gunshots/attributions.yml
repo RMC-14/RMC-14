@@ -292,3 +292,8 @@
   license: "CC-BY-4.0"
   copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"
+
+- files: [ "gun_m56d.ogg" ]
+  license: "CC-BY-4.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/gun_rifle.ogg"

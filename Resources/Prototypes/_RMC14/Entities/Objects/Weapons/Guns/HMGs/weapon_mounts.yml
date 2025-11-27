@@ -1,0 +1,141 @@
+- type: entity
+  abstract: true
+  id: BaseWeaponMount
+  name: weapon mount
+  description: A mount to place a weapon on
+  components:
+  - type: Appearance
+  - type: Corrodible
+    isCorrodible: false
+  - type: Strap
+    whitelist: { components: [ Marine ] }
+    position: Stand
+    buckleOffset: "0,0.5"
+  - type: WeaponMount
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49, 0.05"
+        density: 5
+        mask:
+        - FullTileMask
+        layer:
+        - BarricadeImpassable
+  - type: RMCRepairable
+    heal: 40
+    skill: RMCSkillConstruction
+    delay: 8
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMBarricade
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCMesonsNonviewable
+  - type: DamageExaminable
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: false
+
+- type: entity
+  parent: BaseWeaponMount
+  id: RMCM56DNestSandbag
+  name: scoped M56D heavy machine gun nest
+  description: A scoped M56D heavy machine gun mounted upon a small reinforced post with sandbags to provide a small machine gun nest for all your defensive needs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/mount.rsi
+    state: towergun
+  - type: Transform
+    anchored: true
+  - type: RMCLungeProtection
+  - type: DirectionalAttackBlocker
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMountedStatic"
+    isWeaponSecured: true
+    isWeaponLocked: true
+  - type: Physics
+    bodyType: Static
+
+- type: entity
+  parent: RMCM56DNestSandbag
+  id: RMCM56DNestMetal
+  name: scoped M56D heavy machine gun
+  description: A scoped M56D heavy machine gun mounted behind a metal shield.
+  components:
+  - type: Sprite
+    state: towergun_folding
+
+- type: entity
+  parent: [BaseWeaponMount, BaseDeployFoldable, BaseItem]
+  id: RMCM56DMount
+  name: M56D mount
+  description: A foldable mount for the M56D, provides stability to the M56D.
+  suffix: Folded
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/mount.rsi
+    state: folded_mount
+    layers:
+    - state: m56d_mount
+      map: [ "unfoldedLayer" ]
+    - state: folded_mount
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: m56d
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: false
+    - state: m56d_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: false
+    - state: m56d_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: m56d_gun_mount_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+  - type: Foldable
+    folded: true
+    enableStrapOnUnfold: false
+  - type: Anchorable
+    tool: Screwing
+  - type: Rotatable
+  - type: Strap
+    enabled: false
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:EmptyContainersBehaviour
+        containers:
+        - weapon
+  - type: CollisionWake

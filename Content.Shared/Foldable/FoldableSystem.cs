@@ -83,7 +83,10 @@ public sealed class FoldableSystem : EntitySystem
         component.IsFolded = folded;
         Dirty(uid, component);
         _appearance.SetData(uid, FoldedVisuals.State, folded);
-        _buckle.StrapSetEnabled(uid, !component.IsFolded);
+
+        //RMC14
+        if (component.EnableStrapOnUnfold)
+            _buckle.StrapSetEnabled(uid, !component.IsFolded);
 
         var ev = new FoldedEvent(folded);
         RaiseLocalEvent(uid, ref ev);
@@ -143,7 +146,7 @@ public sealed class FoldableSystem : EntitySystem
 
     #region Verb
 
-    private void AddFoldVerb(EntityUid uid, FoldableComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void AddFoldVerb(EntityUid uid, FoldableComponent component, GetVerbsEvent<AlternativeVerb> args)//
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;

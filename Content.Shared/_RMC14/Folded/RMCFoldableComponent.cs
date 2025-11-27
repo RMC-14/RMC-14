@@ -6,4 +6,7 @@ public sealed partial class FoldableComponent
 {
     [DataField, AutoNetworkedField]
     public bool AnchorOnUnfold;
+
+    [DataField, AutoNetworkedField]
+    public bool EnableStrapOnUnfold = true;
 }

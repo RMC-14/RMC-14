@@ -49,6 +49,15 @@ public sealed partial class ScopeComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Attachment;
+
+    [DataField, AutoNetworkedField]
+    public bool CanUseInsideContainer;
+
+    [DataField, AutoNetworkedField]
+    public string? ScopePopup = "cm-action-popup-scoping-user";
+
+    [DataField, AutoNetworkedField]
+    public string? UnScopePopup = "cm-action-popup-scoping-stopping-user";
 }
 
 [DataRecord, Serializable, NetSerializable]

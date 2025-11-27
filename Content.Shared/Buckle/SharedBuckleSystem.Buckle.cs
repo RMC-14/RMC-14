@@ -479,6 +479,8 @@ public abstract partial class SharedBuckleSystem
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
+        var buckledLocation = _transform.GetMoverCoordinates(buckle); //RMC14
+
         SetBuckledTo(buckle, null);
 
         var buckleXform = Transform(buckle);
@@ -496,7 +498,7 @@ public abstract partial class SharedBuckleSystem
             var offset = strap.Comp.BuckleOffset + _rmcBuckle.GetOffset(buckle.Owner);
             if (offset != Vector2.Zero)
             {
-                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(offset);
+                buckleXform.Coordinates = buckledLocation; //RMC14
             }
         }
 
