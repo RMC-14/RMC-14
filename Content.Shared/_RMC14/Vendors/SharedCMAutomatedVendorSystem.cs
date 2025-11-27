@@ -20,7 +20,6 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -51,8 +50,6 @@ using Content.Shared._RMC14.Weapons.Ranged.Chamber;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
@@ -108,8 +105,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, CanDropTargetEvent>(OnVendorCanDropTarget);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, DragDropTargetEvent>(OnVendorDragDropTarget);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
@@ -292,6 +287,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (HasComp<MultitoolComponent>(args.Used))
         {
             args.Handled = true;
@@ -318,38 +316,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
+        if (TryComp<StorageComponent>(args.Used, out var storage))
+        {
+            TryRestockFromContainer(ent, args.Used, args.User, storage);
+            args.Handled = true;
+            return;
+        }
+
         if (TryRestockSingleItem(ent, args.Used, args.User))
         {
             args.Handled = true;
         }
-    }
-
-    private void OnVendorCanDropTarget(Entity<CMAutomatedVendorComponent> vendor, ref CanDropTargetEvent args)
-    {
-        if (TryComp<StorageComponent>(args.Dragged, out var storage) &&
-            storage.Container.ContainedEntities.Count <= 0)
-            return;
-        args.Handled = true;
-        args.CanDrop = true;
-    }
-
-    private void OnVendorDragDropTarget(Entity<CMAutomatedVendorComponent> vendor, ref DragDropTargetEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (_net.IsClient)
-            return;
-
-        if (TryComp<StorageComponent>(args.Dragged, out var storage))
-        {
-            TryRestockFromContainer(vendor, args.Dragged, args.User, storage);
-            return;
-        }
-
-        TryRestockSingleItem(vendor, args.Dragged, args.User);
     }
 
     private void OnHack(Entity<CMAutomatedVendorComponent> ent, ref RMCAutomatedVendorHackDoAfterEvent args)
@@ -902,12 +879,30 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-start", ("vendor", vendor), ("container", container)), vendor, user);
 
-        foreach (var item in items)
-        {
-            if (!EntityManager.EntityExists(item))
-                continue;
+        // Start restocking with the first item
+        StartNextRestock(vendor, container, user, storage, 0);
+    }
 
-            var ev = new RMCVendorRestockFromStorageDoAfterEvent();
+    private void StartNextRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage, int index)
+    {
+        if (_net.IsClient)
+            return;
+
+        var items = storage.Container.ContainedEntities.ToList();
+        while (index < items.Count)
+        {
+            var item = items[index];
+            if (!EntityManager.EntityExists(item))
+            {
+                index++;
+                continue;
+            }
+
+            var ev = new RMCVendorRestockFromStorageDoAfterEvent
+            {
+                Container = container,
+                ItemIndex = index,
+            };
             var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, item)
             {
                 BreakOnMove = true,
@@ -915,7 +910,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             };
 
             _doAfter.TryStartDoAfter(doAfter);
+            return;
         }
+
+        _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-finish", ("vendor", vendor), ("container", container)), vendor, user);
     }
 
     private void OnRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromStorageDoAfterEvent args)
@@ -925,10 +923,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         args.Handled = true;
 
-        if (args.Target == null)
+        if (args.Target == null || args.Container == null)
             return;
 
         TryRestockSingleItem(vendor, args.Target.Value, args.User, valid: true);
+
+        if (!TryComp<StorageComponent>(args.Container.Value, out var storage))
+            return;
+
+        StartNextRestock(vendor, args.Container.Value, args.User, storage, args.ItemIndex + 1);
     }
 
     private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
@@ -1012,34 +1015,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates reagent containers.
-    /// Syringes, droppers, and beakers are sold empty so they pass if empty (Containers.Count == 0).
-    /// Bottles and hyposprays are sold full so they must be full. etc.
+    /// Checks flamer tanks for correct fuel type and fill level.
+    /// Reagent containers from We-Ya-Med Plus(bottles, hyposprays, etc.) are handled by the refilling system before vendor restocking.
     /// </summary>
     private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
     {
-        if (!TryComp<SolutionContainerManagerComponent>(item, out var solutionManager))
-            return true;
-
-        if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank))
-            return ValidateFlamerTank(item, flamerTank, user, valid);
-
-        if (solutionManager.Containers.Count == 0)
-            return true;
-
-        if (!_tags.HasTag(item, new ProtoId<TagPrototype>("Bottle")) && !HasComp<HyposprayComponent>(item))
-            return true;
-
-        foreach (var solutionName in solutionManager.Containers)
-        {
-            if (!_solution.TryGetSolution((item, solutionManager), solutionName, out _, out var solution) ||
-                solution.Volume >= solution.MaxVolume)
-                continue;
-
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-reagent-container-not-full", item, user, ("item", item));
-            return false;
-        }
-
-        return true;
+        return !TryComp<RMCFlamerTankComponent>(item, out var flamerTank) || ValidateFlamerTank(item, flamerTank, user, valid);
     }
 
     private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
