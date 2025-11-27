@@ -9,7 +9,7 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: AccessReader
     access:
-    - [ "CMAccessCombatTechPrep" ] # TODO RMC14 !!!!ACCESS!!!!
+    - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
     jobs:
     - CMCombatTech # TODO RMC14 CMRoyalMarinesAssaultEngineerPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
@@ -99,6 +99,57 @@
         name: Shoulder Holster
       - id: RMCWebbingDropPouchBlack
         name: Drop Pouch
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalBombSpecVendor
+  name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity but idk wtf that means - changing for clarity
+  description: An automated rack hooked up to a colossal storage of medical assistant standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMWeaponsSpecialist # TODO RMC14 !!!!ACCESS!!!! CMRoyalMarinesBombSpecPVE
+    pointsType: Specialist
+    sections:
+    - name: Fire Support Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      - id: WeaponLauncherM83 # TODO RMC14 L164A3 MGL kit
+      - id: RMCMortarKit # TODO RMC14 L53A1 light mortar kit
+    - name: Mortar Shells
+      entries:
+      - id: RMCMortarShellHE
+        points: 15
+      - id: RMCMortarShellIncendiary
+        points: 15
+      - id: RMCMortarShellFlare
+        points: 10
+      #- id: RMCMortarShellFrag # TODO RMC14 more mortar shell types
+      #  points: 10
+      #- id: RMCMortarShellSmoke
+      #  points: 10
+      #- id: RMCMortarShellWhitePhosphorus
+      #  points: 25
+    - name: Grenade Packets # TODO RMC14 20mm grenades
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      #- id: CMPacketGrenade20mmHESHFilled
+      #  points: 20
+      #- id: CMPacketGrenade20mmHoloTargetingFilled
+      #  points: 20
+      #- id: CMPacketGrenade20mmCN20Filled
+      #  points: 20
+
 
 - type: entity
   parent: ColMarTechBase
