@@ -90,7 +90,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
-            args.Handled = true;
+            args.Handled = true; //For vendor restocking after being filled
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
