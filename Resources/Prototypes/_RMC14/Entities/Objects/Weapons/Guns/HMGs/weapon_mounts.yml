@@ -10,6 +10,9 @@
   - type: Strap
     whitelist: { components: [ Marine ] }
     position: Stand
+    buckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+    unbuckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+    buckledAlertType: null
     buckleOffset: "0,0.5"
   - type: WeaponMount
   - type: Fixtures

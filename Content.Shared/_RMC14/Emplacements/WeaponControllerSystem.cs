@@ -1,14 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Buckle;
 using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Shared._RMC14.Emplacements;
 
 public sealed class WeaponControllerSystem : EntitySystem
 {
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<WeaponControllerComponent, BeforeAttemptShootEvent>(OnAdjustShotOrigin);
+        SubscribeLocalEvent<WeaponControllerComponent, DismountActionEvent>(OnDismountAction);
     }
 
     private void OnAdjustShotOrigin(Entity<WeaponControllerComponent> ent, ref BeforeAttemptShootEvent args)
@@ -18,6 +22,11 @@ public sealed class WeaponControllerSystem : EntitySystem
 
         args.Origin = Transform(GetEntity(ent.Comp.ControlledWeapon.Value)).Coordinates;
         args.Handled = true;
+    }
+
+    private void OnDismountAction(Entity<WeaponControllerComponent> ent, ref DismountActionEvent args)
+    {
+        _buckle.Unbuckle(ent.Owner, ent);
     }
 
     /// <summary>

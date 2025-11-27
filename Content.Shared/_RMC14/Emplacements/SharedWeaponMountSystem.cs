@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Actions;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
@@ -31,6 +32,7 @@ namespace Content.Shared._RMC14.Emplacements;
 
 public sealed class SharedWeaponMountSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
@@ -402,6 +404,8 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         {
             _scope.StartScoping((ent.Comp.MountedEntity.Value, scope), args.Buckle);
         }
+
+        _actions.AddAction(args.Buckle, ref ent.Comp.DismountActionEntity, ent.Comp.DismountAction, args.Buckle);
     }
 
     private void OnUnStrapped(Entity<WeaponMountComponent> ent, ref UnstrappedEvent args)
@@ -413,6 +417,8 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         {
             _scope.Unscope((ent.Comp.MountedEntity.Value, scope));
         }
+
+        _actions.RemoveAction(ent.Comp.DismountActionEntity);
     }
 
     private void OnExamine(Entity<WeaponMountComponent> ent, ref ExaminedEvent args)

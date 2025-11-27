@@ -211,7 +211,10 @@ public abstract partial class SharedBuckleSystem
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
             Dirty(strapEnt);
-            _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType);
+
+            //RMC14 null check
+            if (strapEnt.Comp.BuckledAlertType != null)
+                _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType.Value);
         }
         else
         {

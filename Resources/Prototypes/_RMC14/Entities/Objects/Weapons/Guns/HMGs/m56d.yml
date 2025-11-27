@@ -104,7 +104,7 @@
     - zoom: 1
       offset: 7
       doAfter: 0
-    allowMovement: true
+      allowMovement: true
 
 - type: entity
   parent: RMCSmartGunMounted
