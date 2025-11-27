@@ -34,6 +34,9 @@
         RMCSkillJtac: 1
         RMCSkillPilot: 1
         RMCSkillSpecialistWeapons: 1
+    - type: CMVendorUser
+      extraPoints:
+        Specialist: 120
     - type: GrenadeSpecWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-bombardment-specialist
