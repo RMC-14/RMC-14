@@ -139,6 +139,24 @@
 
 - type: entity
   parent: RMCLockerGunBase
+  id: RMCLockerGunStorageBrig
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: entity
+  parent: RMCLockerGunBase
+  id: RMCLockerGunStorageCommand
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: AccessReader
+    access: [["RMCAccessCommand"]]
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunBlue
   name: riot control equipment Cabinet
   components:
@@ -532,3 +550,4 @@
   parent: RMCLockerSmartGunOperatorSPPOne
   id: RMCLockerSmartGunOperatorSPPTwo
   name: squad two heavy gunner locker
+

@@ -1,9 +1,12 @@
-﻿using Robust.Client.GameObjects;
+﻿using System.Numerics;
+using Content.Shared.Coordinates.Helpers;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Enums;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using static Content.Client.Mapping.MappingState;
 
@@ -29,6 +32,10 @@ public sealed class MappingOverlay : Overlay
     private readonly ShaderInstance _shader;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
+
+    // RMC14
+    [Dependency] private readonly IEyeManager _eye = default!;
+    // RMC14
 
     public MappingOverlay(MappingState state)
     {
@@ -83,6 +90,28 @@ public sealed class MappingOverlay : Overlay
 
                 break;
             }
+            // RMC14
+            case CursorState.Grab:
+                if (_state.GetGrabBox() is not { } box)
+                    break;
+
+                if (_state.DraggingGrab is { } dragging &&
+                    _state.GetCursorPosition() is { } cursor)
+                {
+                    cursor = new MapCoordinates(_state.VectorSnapToGrid(cursor.MapId, cursor.Position, Vector2.Zero), cursor.MapId);
+                    box = box.Translated(cursor.Position - dragging);
+                    var bottomLeft = _state.VectorSnapToGrid(cursor.MapId, box.BottomLeft, -Vector2Helpers.Half);
+                    var topRight = _state.VectorSnapToGrid(cursor.MapId, box.TopRight, -Vector2Helpers.Half);
+                    box = new Box2(bottomLeft, topRight);
+                }
+
+                // TODO RMC14 rotation
+                handle.DrawRect(box, Color.White.WithAlpha(0.05f));
+                handle.DrawRect(box, Color.Lime, false);
+
+                _state.SetGrabSizeLabel($"W:{box.Width} H:{box.Height}");
+                break;
+            // RMC14
         }
 
         handle.UseShader(null);

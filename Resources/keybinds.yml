@@ -682,3 +682,17 @@ binds:
   type: State
   key: R
   mod1: Shift
+- function: MappingEnableGrab
+  type: State
+  key: Num3
+- function: MappingGrab
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: MappingEnableGrab
+  type: State
+  key: Num3
+- function: MappingGrab
+  type: State
+  key: MouseLeft
+  canFocus: true

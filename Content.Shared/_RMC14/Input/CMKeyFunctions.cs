@@ -24,4 +24,8 @@ public sealed class CMKeyFunctions
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
+
+    // Mapping
+    public static readonly BoundKeyFunction MappingEnableGrab = "MappingEnableGrab";
+    public static readonly BoundKeyFunction MappingGrab = "MappingGrab";
 }
