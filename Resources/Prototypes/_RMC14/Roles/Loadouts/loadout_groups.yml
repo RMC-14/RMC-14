@@ -214,6 +214,7 @@
   maxLimit: 10
   loadouts:
   - FakeNVGRMC
+  - FakeNVGPVERMC
   - NettingRMC
   - NettingUrbanRMC
   - NettingDesertRMC
