@@ -6,6 +6,6 @@ namespace Content.Shared._RMC14.Vendors;
 [Serializable, NetSerializable]
 public sealed partial class RMCVendorRestockFromStorageDoAfterEvent : SimpleDoAfterEvent
 {
-    public EntityUid? Container;
+    public NetEntity Container;
     public int ItemIndex;
 }
