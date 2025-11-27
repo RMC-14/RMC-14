@@ -12,6 +12,7 @@ using Content.Shared.Input;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Pointing;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
@@ -91,7 +92,9 @@ namespace Content.Server.Pointing.EntitySystems
 
             foreach (var viewer in viewers)
             {
-                if (viewer.AttachedEntity is not {Valid: true} viewerEntity)
+                if (viewer.AttachedEntity is not {Valid: true} viewerEntity ||
+                    ((TryComp<RMCIgnorePointingComponent>(viewerEntity, out var ignore) && source != viewerEntity)
+                    && ((ignore.IgnoreMobs && HasComp<MobStateComponent>(source)) || (ignore.IgnoreGhosts && HasComp<GhostComponent>(source)))))
                 {
                     continue;
                 }
@@ -174,6 +177,7 @@ namespace Content.Server.Pointing.EntitySystems
             {
                 pointing.StartPosition = _transform.ToCoordinates((arrow, Transform(arrow)), _transform.ToMapCoordinates(Transform(player).Coordinates)).Position;
                 pointing.EndTime = _gameTiming.CurTime + PointDuration;
+                pointing.Source = GetNetEntity(player);
 
                 Dirty(arrow, pointing);
             }
