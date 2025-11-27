@@ -1011,8 +1011,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         if (!ValidateEquipment(item, user, valid))
             return false;
-        if (!ValidateSpecializedItems(item, user, valid))
-            return false;
 
         return true;
     }
@@ -1201,8 +1199,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Validates equipment items (armor, helmets, machete holsters) are in proper state.
-    /// Armor/helmet must be empty, machete holsters must contain a machete.
+    /// Validates equipment items (armor, helmets, machete holsters, flare packs, power cells) are in proper state.
+    /// Storage items must be empty, machete holsters must contain a machete, flare packs must be full, power cells must be charged.
     /// </summary>
     private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
     {
@@ -1215,8 +1213,19 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (HasComp<CMHolsterComponent>(item) &&
             MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase))
         {
-            return ValidateMacheteHolster(item, user, valid);
+            if (!ValidateMacheteHolster(item, user, valid))
+                return false;
         }
+
+        if (TryComp<CMItemSlotsComponent>(item, out var cmItemSlots) &&
+            _tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")))
+        {
+            if (!ValidateFlarePack(item, cmItemSlots, user, valid))
+                return false;
+        }
+
+        if (!ValidatePowerCell(item, user, valid))
+            return false;
 
         return true;
     }
@@ -1237,24 +1246,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         RestockValidationPopup(valid, "rmc-vending-machine-restock-machete-holster-empty", holster, user, ("item", holster));
         return false;
-    }
-
-    /// <summary>
-    /// Validates specialized items: flare packs, power cells.
-    /// </summary>
-    private bool ValidateSpecializedItems(EntityUid item, EntityUid user, bool valid)
-    {
-        if (TryComp<CMItemSlotsComponent>(item, out var cmItemSlots) &&
-            _tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")))
-        {
-            if (!ValidateFlarePack(item, cmItemSlots, user, valid))
-                return false;
-        }
-
-        if (!ValidatePowerCell(item, user, valid))
-            return false;
-
-        return true;
     }
 
     private bool ValidateFlarePack(EntityUid pack, CMItemSlotsComponent slots, EntityUid user, bool valid)
