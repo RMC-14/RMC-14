@@ -54,6 +54,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared._RMC14.Medical.Refill;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -102,7 +103,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(CMRefillableSolutionSystem)]);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
@@ -288,7 +289,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled)
+        var isRefillable = HasComp<CMRefillableSolutionComponent>(args.Used);
+        if (args.Handled && !isRefillable) // Refills first then restocks via TryRestockFromContainer
             return;
 
         if (HasComp<MultitoolComponent>(args.Used))
@@ -874,8 +876,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var items = storage.Container.ContainedEntities.ToList();
-        if (items.Count == 0)
+        if (storage.Container.ContainedEntities.Count == 0)
         {
             _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-empty", ("container", container)), vendor, user);
             return;
@@ -883,30 +884,55 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-start", ("vendor", vendor), ("container", container)), vendor, user);
 
-        StartNextRestock(vendor, container, user, storage, 0);
+        StartNextRestock(vendor, container, user, storage);
     }
 
-    private void StartNextRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage, int index)
+    private void StartNextRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage, HashSet<NetEntity>? failedItems = null)
     {
         if (_net.IsClient)
             return;
 
-        var items = storage.Container.ContainedEntities.ToList();
-        while (index < items.Count)
+        failedItems ??= new HashSet<NetEntity>();
+
+        var items = storage.Container.ContainedEntities;
+
+        while (items.Count > 0)
         {
-            var item = items[index];
+            var item = items[0];
+            var netItem = GetNetEntity(item);
+
+            if (failedItems.Contains(netItem))
+            {
+                _container.Remove(item, storage.Container);
+                _container.Insert(item, storage.Container);
+
+                if (items.All(i => failedItems.Contains(GetNetEntity(i))))
+                    break;
+
+                continue;
+            }
+
             if (!EntityManager.EntityExists(item))
             {
-                index++;
+                _container.Remove(item, storage.Container);
+                continue;
+            }
+            // Skip storage containers to prevent nested container processing
+            if (TryComp<StorageComponent>(item, out _))
+            {
+                _container.Remove(item, storage.Container);
+                _container.Insert(item, storage.Container);
+                failedItems.Add(netItem);
                 continue;
             }
 
             var ev = new RMCVendorRestockFromStorageDoAfterEvent
             {
                 Container = GetNetEntity(container),
-                ItemIndex = index,
+                FailedBulkRestockItems = failedItems,
+                Item = GetNetEntity(item),
             };
-            var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, item, vendor, item)
+            var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, vendor)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -926,22 +952,30 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         args.Handled = true;
 
-        if (args.Target == null)
-            return;
-
         var container = GetEntity(args.Container);
-        var item = args.Target.Value;
-        if (TryComp(container, out StorageComponent? containerStorage))
-        {
-            _container.Remove(item, containerStorage.Container);
-        }
-        var vendorCoords = Transform(vendor).Coordinates;
-        _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
-
+        var item = GetEntity(args.Item);
         if (!TryComp(container, out StorageComponent? storage))
             return;
 
-        StartNextRestock(vendor, container, args.User, storage, args.ItemIndex + 1);
+        if (!EntityManager.EntityExists(item))
+        {
+            StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
+            return;
+        }
+
+        _container.Remove(item, storage.Container);
+
+        var vendorCoords = Transform(vendor).Coordinates;
+        _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
+
+        var itemWasDeleted = !EntityManager.EntityExists(item);
+        if (!itemWasDeleted)
+        {
+            _container.Insert(item, storage.Container);
+            args.FailedBulkRestockItems.Add(GetNetEntity(item));
+        }
+
+        StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
     }
 
     private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
