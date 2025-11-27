@@ -7,5 +7,6 @@ namespace Content.Shared._RMC14.Vendors;
 public sealed partial class RMCVendorRestockFromStorageDoAfterEvent : SimpleDoAfterEvent
 {
     public NetEntity Container;
-    public int ItemIndex;
+    public NetEntity Item;
+    public HashSet<NetEntity> FailedBulkRestockItems = [];
 }
