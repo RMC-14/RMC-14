@@ -87,6 +87,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -870,6 +871,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void TryRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage)
     {
+        if (_net.IsClient)
+            return;
+
         var items = storage.Container.ContainedEntities.ToList();
         if (items.Count == 0)
         {
@@ -927,7 +931,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var container = GetEntity(args.Container);
         var item = args.Target.Value;
-        TryRestockSingleItem(vendor, item, args.User, valid: true, container);
+        if (TryComp(container, out StorageComponent? containerStorage))
+        {
+            _container.Remove(item, containerStorage.Container);
+        }
+        var vendorCoords = Transform(vendor).Coordinates;
+        _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
 
         if (!TryComp(container, out StorageComponent? storage))
             return;
@@ -935,7 +944,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         StartNextRestock(vendor, container, args.User, storage, args.ItemIndex + 1);
     }
 
-    private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false, EntityUid? sourceContainer = null)
+    private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
     {
         if (_net.IsClient)
             return false;
@@ -972,11 +981,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ValidateItemForRestock(item, user, valid, matchingEntry.Id))
             return false;
-
-        if (sourceContainer != null && TryComp(sourceContainer.Value, out StorageComponent? storage))
-        {
-            _container.Remove(item, storage.Container);
-        }
 
         if (!valid)
         {
