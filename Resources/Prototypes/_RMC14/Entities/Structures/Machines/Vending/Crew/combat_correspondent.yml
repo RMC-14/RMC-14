@@ -1,5 +1,4 @@
 # EQUIPMENT VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewCombatCorrespondent
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMCorrespondent
     sections:

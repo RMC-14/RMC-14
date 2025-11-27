@@ -1,5 +1,4 @@
 # SMART GUN OPERATOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGGear
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/smart_gun_operator_gear.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMSmartGunOperator
     sections:
@@ -133,6 +133,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMSmartGunOperator
     sections:

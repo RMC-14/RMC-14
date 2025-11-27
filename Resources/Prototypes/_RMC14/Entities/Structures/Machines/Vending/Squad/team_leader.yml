@@ -1,5 +1,4 @@
 # FIRE TEAM LEADER
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFLGear
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/fireteam_leader_gear.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMFireteamLeader
     sections:
@@ -173,6 +173,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMFireteamLeader
     sections:

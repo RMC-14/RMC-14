@@ -10,6 +10,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/intel.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMIntelOfficer
     sections:
@@ -121,6 +122,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMIntelOfficer
     sections:

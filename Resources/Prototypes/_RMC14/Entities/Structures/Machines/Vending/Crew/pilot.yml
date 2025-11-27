@@ -13,6 +13,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMDropshipCrewChief
     - CMPilotDropship

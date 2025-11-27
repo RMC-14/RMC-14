@@ -1,5 +1,4 @@
 # HOSPITAL CORPSMAN
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMedicalGear
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMHospitalCorpsman
     sections:
@@ -217,6 +217,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMHospitalCorpsman
     - CMPVEHospitalCorpsman
@@ -321,7 +322,6 @@
       - id: RMCMaskRebreather
 
 # PVE
-
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechMedicalEquipmentPVE
@@ -335,6 +335,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMHospitalCorpsman
     - CMPVEHospitalCorpsman
@@ -407,6 +408,7 @@
   suffix: PVE, PMC
   components:
   - type: CMAutomatedVendor
+    canRestock: false
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -466,6 +468,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_chemical.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     pointsType: Chemicals
     sections:
     # TODO RMC14: newmed

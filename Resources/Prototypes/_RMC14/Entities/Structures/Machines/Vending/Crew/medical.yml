@@ -1,5 +1,4 @@
 # MEDICAL
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMedicalEquipment
@@ -12,6 +11,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_equipment.rsi
   - type: CMAutomatedVendor
+    canRestock: false
     jobs:
     - CMNurse
     - CMDoctor
