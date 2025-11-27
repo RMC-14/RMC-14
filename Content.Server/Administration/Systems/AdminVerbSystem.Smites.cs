@@ -56,6 +56,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
+using Content.Shared.Damage.Prototypes;
+using Content.Server._RMC14.Damage;
 
 namespace Content.Server.Administration.Systems;
 
@@ -87,9 +89,14 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly SlipperySystem _slipperySystem = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _xenoParasite = default!;
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private readonly MobStateSystem _mobstate = default!;
+    [Dependency] private readonly RMCDamageableSystem _rmcdamage = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     private static readonly EntProtoId MouseProto = "CMMobMouse";
     private static readonly ProtoId<RandomHumanoidSettingsPrototype> RiflemanProto = "RMCUnassignedRifleman";
+
+    private static readonly ProtoId<DamageGroupPrototype> CriticalDamage = "Brute";
 
     // All smite verbs have names so invokeverb works.
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
@@ -983,5 +990,51 @@ public sealed partial class AdminVerbSystem
             Message = "Chestburst into rifleman",
         };
         args.Verbs.Add(chestburstRifleman);
+
+        Verb forceCritical = new()
+        {
+            Text = "Force into critical state",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddefib"),
+            Act = () =>
+            {
+                if (!TryComp<DamageableComponent>(args.Target, out var damage))
+                    return;
+
+                if (!_mobThresholdSystem.TryGetIncapThreshold(args.Target, out var threshold))
+                    return;
+
+                if (!TryComp<MobStateComponent>(args.Target, out var state))
+                    return;
+
+                if (state.CurrentState == MobState.Dead)
+                {
+                    //Revive + Heal
+                    var heal = Math.Min(damage.TotalDamage.Float() - threshold.Value.Float(), threshold.Value.Float());
+
+                    if (heal < 0)
+                        heal = 0;
+
+                    var healing = _rmcdamage.DistributeTypesTotal((args.Target, damage), heal);
+                    _damage.TryChangeDamage(args.Target, healing, true);
+                    _mobstate.ChangeMobState(args.Target, MobState.Critical);
+                }
+                else if (state.CurrentState == MobState.Alive)
+                {
+                    //Just damage
+                    var hurt = Math.Max(threshold.Value.Float() - damage.TotalDamage.Float(), 0);
+
+                    if (!_prototypeManager.TryIndex<DamageGroupPrototype>(CriticalDamage, out var damageGroup))
+                        return;
+
+                    var damager = new DamageSpecifier(damageGroup, hurt);
+
+                    var damaging = _damage.TryChangeDamage(args.Target, damager, true);
+                }
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was",
+        };
+        args.Verbs.Add(forceCritical);
     }
 }
