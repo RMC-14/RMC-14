@@ -112,7 +112,7 @@
         amount: 5
       - id: RMCBeltUtilityGeneral
         amount: 5
-    - name: Restricted  Belts
+    - name: Restricted Belts
       entries:
       - id: RMCScabbardShotgunWaist
         amount: 1
