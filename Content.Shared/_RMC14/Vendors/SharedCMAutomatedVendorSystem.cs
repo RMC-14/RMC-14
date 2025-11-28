@@ -1250,7 +1250,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
     {
-        // Armor/Helmets must be empty
         if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
@@ -1352,7 +1351,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)
     {
-        if (!showError)
+        if (showError)
             return;
 
         var message = Loc.GetString(locKey, args);
