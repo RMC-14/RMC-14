@@ -119,7 +119,7 @@
       params:
         volume: -6
   - type: XenoAnnounceDeath
-    message: cm-xeno-death-king
+    message: rmc-xeno-death-king
     color: "#921992"
   - type: RMCSize
     size: Immobile
