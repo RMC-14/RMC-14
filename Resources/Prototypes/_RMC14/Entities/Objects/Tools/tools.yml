@@ -212,7 +212,7 @@
   id: RMCWireSnappers
   name: wire snappers
   description: The jaws are perfect for snipping large wires and other small metal bits, but are a bit too heavy for delicate work.
-  suffix: INSTANT
+  suffix: INSTANT, Repeating
   components:
   - type: RMCDeviceBreaker
     useSound: /Audio/Items/jaws_pry.ogg
@@ -238,6 +238,14 @@
     quickEquip: false
     slots:
     - Suitstorage
+
+- type: entity
+  parent: RMCWireSnappers
+  id: RMCWireSnappersNoRepeat
+  suffix: INSTANT
+  components:
+  - type: RMCDeviceBreaker
+    repeat: false
 
 - type: entity
   parent: RMCWireSnappers

@@ -1,7 +1,7 @@
-using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Components;
 using Content.Shared.Damage;
@@ -25,6 +25,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using System.Numerics;
 using static Content.Shared.Popups.PopupType;
 
 namespace Content.Shared._RMC14.Power;
@@ -416,6 +417,19 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         else if (_tool.HasQuality(used, ent.Comp.WrenchQuality))
         {
             TryRepair(ent, user, used, RMCFusionReactorState.Wrench);
+        }
+        else if (TryComp<RMCDeviceBreakerComponent>(used, out var breaker) && ent.Comp.State != RMCFusionReactorState.Weld)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            _doAfter.TryStartDoAfter(doafter);
+            return;
         }
     }
 

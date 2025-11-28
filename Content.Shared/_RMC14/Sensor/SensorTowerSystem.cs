@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -65,6 +67,21 @@ public sealed class SensorTowerSystem : EntitySystem
         }
 
         var used = args.Used;
+
+        if (TryComp<RMCDeviceBreakerComponent>(args.Used, out var breaker) && ent.Comp.State != SensorTowerState.Weld)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            args.Handled = true;
+            _doAfter.TryStartDoAfter(doafter);
+            return;
+        }
 
         var correctQuality = ent.Comp.State switch
         {

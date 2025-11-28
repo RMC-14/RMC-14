@@ -7,7 +7,7 @@ using Content.Shared.Interaction;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Tools;
-public sealed partial class RMCDeviceBreakerSystem : EntitySystem
+public sealed class RMCDeviceBreakerSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
@@ -16,26 +16,7 @@ public sealed partial class RMCDeviceBreakerSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCDeviceBreakerComponent, InteractUsingEvent>(OnDeviceBreakerUsed);
         SubscribeLocalEvent<RMCDeviceBreakerComponent, RMCDeviceBreakerDoAfterEvent>(OnDeviceBreakerDoafter);
-    }
-
-    private void OnDeviceBreakerUsed(Entity<RMCDeviceBreakerComponent> breaker, ref InteractUsingEvent args)
-    {
-        if (args.Handled || !CanBreak(args.Target))
-            return;
-
-        args.Handled = true;
-
-        var doafter = new DoAfterArgs(EntityManager, args.User, breaker.Comp.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
-        {
-            BreakOnMove = true,
-            RequireCanInteract = true,
-            BreakOnHandChange = true,
-            DuplicateCondition = DuplicateConditions.SameTool
-        };
-
-        _doafter.TryStartDoAfter(doafter);
     }
 
     private void OnDeviceBreakerDoafter(Entity<RMCDeviceBreakerComponent> breaker, ref RMCDeviceBreakerDoAfterEvent args)
@@ -48,6 +29,19 @@ public sealed partial class RMCDeviceBreakerSystem : EntitySystem
         Break(args.Target.Value, args.User);
 
         _audio.PlayPredicted(breaker.Comp.UseSound, breaker, args.User);
+
+        if (breaker.Comp.Repeat && CanBreak(args.Target.Value))
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.Comp.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            _doafter.TryStartDoAfter(doafter);
+        }
     }
 
     private bool CanBreak(EntityUid target)
