@@ -72,7 +72,7 @@
 - type: humanoidBaseSprite
   id: MobSkrellEyes
   baseSprite:
-    sprite: _RMC14/Mobs/Avali/parts.rsi
+    sprite: _RMC14/Mobs/Skrells/parts.rsi
     state: eyes
 
 - type: humanoidBaseSprite
