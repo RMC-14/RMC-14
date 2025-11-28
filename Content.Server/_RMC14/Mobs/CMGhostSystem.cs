@@ -1,3 +1,4 @@
+using Content.Server.Ghost;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mobs;
@@ -24,6 +25,7 @@ namespace Content.Server._RMC14.Mobs
             //This shit is so scuffed but honest to god not sure what else I can use that isn't a duplicate
             SubscribeLocalEvent<GhostHearingComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<CMGhostComponent, ComponentStartup>(OnCMGhostStartup);
+            SubscribeLocalEvent<CMGhostComponent, MapInitEvent>(OnCMGhostInit, after: [typeof(GhostSystem)]);
 
             SubscribeLocalEvent<CMGhostComponent, ToggleMarineHudActionEvent>(OnMarineHudAction);
             SubscribeLocalEvent<CMGhostComponent, ToggleXenoHudActionEvent>(OnXenoHudAction);
@@ -48,9 +50,6 @@ namespace Content.Server._RMC14.Mobs
             EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
             EnsureComp<PropCallingComponent>(uid);
-
-            if (TryComp<GhostComponent>(uid, out var ghost))
-                ChangeGhostBoo((uid, ghost));
         }
 
         private void OnMarineHudAction(EntityUid uid, CMGhostComponent comp, ToggleMarineHudActionEvent args)
@@ -90,6 +89,12 @@ namespace Content.Server._RMC14.Mobs
                 AddComp<CMGhostXenoHudComponent>(uid);
                 _actions.SetToggled(comp.ToggleXenoHudEntity, false);
             }
+        }
+
+        private void OnCMGhostInit(Entity<CMGhostComponent> cmghost, ref MapInitEvent args)
+        {
+            if (TryComp<GhostComponent>(cmghost, out var ghost))
+                ChangeGhostBoo((cmghost, ghost));
         }
 
         private void OnGhostBooChange(bool value, in CVarChangeInfo info)
