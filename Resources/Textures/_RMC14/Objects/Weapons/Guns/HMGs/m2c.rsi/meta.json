@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/obj/items/weapons/guns/guns_by_faction/USCM/hmg.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/obj/items/weapons/guns/guns_by_faction/USCM/hmg.dmi, https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/mob/humans/onmob/clothing/back/guns_by_type/machineguns.dmi, https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/mob/humans/onmob/inhands/weapons/guns/machineguns_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/b36381d345bd0591ca115bd58fee67e4660ddb31/icons/mob/humans/onmob/inhands/weapons/guns/machineguns_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -16,11 +16,11 @@
       "directions": 4
     },
     {
-      "name": "m2c_e",
+      "name": "m2c_magazine",
       "directions": 4
     },
     {
-      "name": "m2c_gun_mount_e"
+      "name": "mag-0"
     },
     {
       "name": "m2c_gun_mount"
@@ -29,7 +29,20 @@
       "name": "m2c_gun_mount_broken"
     },
     {
-      "name": "m2c_gun_mount_broken_e"
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
     }
   ]
 }

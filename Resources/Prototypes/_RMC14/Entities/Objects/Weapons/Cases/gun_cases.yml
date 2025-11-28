@@ -650,3 +650,60 @@
     - id: RMCPacketGrenadeM74AGMSStarShellFilled
     - id: RMCPacketGrenadeM74AGMSHornetFilled
     - id: RMCPacketGrenadeBatonSlugHIRRFilled
+
+# Mountable weapons
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM56DCase
+  name: M56D heavy machine gun case
+  description: A gun case containing the M56D heavy machine gun. Comes with 2 magazines
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCSmartGunMounted
+      - RMCMagazineM56D
+      - M56DMount
+      - Wrench
+      - Screwdriver
+      - RMCSkillPamphlet
+      - RMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RMCSmartGunMounted
+    - id: RMCMagazineM56D
+    - id: RMCMagazineM56D
+    - id: RMCM56DMount
+    - id: CMWrench
+    - id: CMScrewdriver
+    - id: RMCPamphletHeavyMachineGunner
+    - id: RMCBeltMachineGunner
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM2CCase
+  name: M2C heavy machine gun case
+  description: A gun case containing the M2C heavy machine gun. Comes with 4 magazines
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - M2CMount
+      - RMCMagazineM2C
+      - RMCSkillPamphlet
+      - RMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RMCPamphletHeavyMachineGunner
+    - id: RMCM2CMount
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCBeltMachineGunner

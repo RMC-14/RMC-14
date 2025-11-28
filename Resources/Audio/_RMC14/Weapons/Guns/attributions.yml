@@ -17,3 +17,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/weapons/handling/gun_cmb_click1.ogg"
+
+- files: ["m56dauto_rotate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/items/m56dauto_rotate.ogg"
+
+- files: ["m56dauto_setup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/items/m56dauto_setup.ogg"
+
+- files: ["hmg_cooling.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/hmg_cooling.ogg"

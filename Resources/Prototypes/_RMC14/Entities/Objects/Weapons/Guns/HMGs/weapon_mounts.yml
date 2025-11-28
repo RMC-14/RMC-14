@@ -142,3 +142,74 @@
         containers:
         - weapon
   - type: CollisionWake
+  - type: Tag
+    tags:
+    - M56DMount
+
+- type: entity
+  parent: [BaseWeaponMount, BaseItem]
+  id: RMCM2CMount
+  name: M2C heavy machine gun
+  description: The disassembled M2C HMG, with its telescopic tripods folded up and unable to fire.
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/m2c.rsi
+    state: m2c_gun_mount
+    layers:
+    - state: m2c
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: false
+    - state: m2c_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: false
+    - state: m2c_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: m2c_gun_mount_broken
+      map: [ "enum.WeaponMountComponentVisualLayers.Broken" ]
+      visible: false
+    - state: mag-0
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+  - type: Rotatable
+  - type: Strap
+    enabled: false
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 230
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: CollisionWake
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCMachineGunM2C"
+    isWeaponSecured: true
+    isWeaponLocked: true
+    canRotateWithoutTool: true
+    mountOnDeploy: true
+    rotateSound: "/Audio/_RMC14/Weapons/Guns/m56dauto_rotate.ogg"
+    deploySound: "/Audio/_RMC14/Weapons/Guns/m56dauto_setup.ogg"
+    undeploySound: "/Audio/_RMC14/Weapons/Guns/m56dauto_setup.ogg"
+    barricadeExclusionAreaSize: 2
+  - type: Tag
+    tags:
+    - M2CMount
+  - type: Foldable
+    folded: true
+
+- type: Tag
+  id: M56DMount
+
+- type: Tag
+  id: M2CMount

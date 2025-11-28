@@ -68,10 +68,10 @@
         amount: 3
       - id: RMCM54CMK1Case
         amount: 3
-      #- id: M56D Heavy Machine Gun
-      #  amount: 2
-      #- id: M2C Heavy Machine Gun
-      #  amount: 2
+      - id: RMCM56DCase
+        amount: 2
+      - id: RMCM2CCase
+        amount: 2
       - id: RMCCaseFlamer
         amount: 2
       - id: RMCM85A1Case
@@ -444,10 +444,10 @@
         amount: 5
       - id: CMMagazineRifleM54CMK1AP
         amount: 2
-      #- id: M56D Drum Magazine
-      #  amount: 2
-      #- id: M2C Box Magazine
-      #  amount: 2
+      - id: RMCMagazineM56D
+        amount: 2
+      - id: RMCMagazineM2C
+        amount: 2
       - id: RMCMagazineShotgunXM51
         amount: 3
     - name: Magazine Boxes

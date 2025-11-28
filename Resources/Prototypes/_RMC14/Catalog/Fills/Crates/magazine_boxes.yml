@@ -302,3 +302,23 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazinePistolM13Drum
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM56DDrum
+  name: M56D drum magazine crate (x1)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineM56D
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM2C
+  name: M2C ammunition crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineM2C
+      amount: 2

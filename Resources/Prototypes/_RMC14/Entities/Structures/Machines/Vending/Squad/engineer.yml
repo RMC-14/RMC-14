@@ -137,8 +137,8 @@
         points: 12
       - id: RMCM85A1Case
         points: 24
-    #- id: CMM56DHeavyMachineGun
-    #  points: 24
+      - id: RMCM56DCase
+        points: 24
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled

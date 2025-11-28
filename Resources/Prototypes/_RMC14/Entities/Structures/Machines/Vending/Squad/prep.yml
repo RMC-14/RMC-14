@@ -402,10 +402,10 @@
         amount: 6
       - id: RMCTankFlamer
         amount: 3
-      #- id: CMMagazineDrumM56D
-      #  amount: 2
-      #- id: CMMagazineBoxM2C
-      #  amount: 2
+      - id: RMCMagazineM56D
+        amount: 2
+      - id: RMCMagazineM2C
+        amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
       - id: RMCBatonSlugHIRR

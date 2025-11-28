@@ -297,3 +297,8 @@
   license: "CC-BY-4.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/gun_rifle.ogg"
+
+- files: [ "gun_m56d_auto.ogg" ]
+  license: "CC-BY-4.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/gun_m56d_auto.ogg"

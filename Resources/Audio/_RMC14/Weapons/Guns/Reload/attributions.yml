@@ -162,3 +162,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/handling/gun_m10_auto_pistol_unload.ogg"
+
+- files: ["gun_minigun_cocked.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from CM-SS13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/gun_minigun_cocked.ogg"
+
+- files: ["gun_minigun_cocked.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from CM-SS13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/items/m56dauto_load.ogg"
+
+- files: ["hmg_eject_mag.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/6791e451bc811407b6daf545a6cf8e3535ee4e4c/sound/weapons/hmg_eject_mag.ogg"

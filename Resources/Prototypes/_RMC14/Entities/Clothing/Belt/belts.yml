@@ -1851,6 +1851,47 @@
     - id: RMCMagazineRifleAK4047
       amount: 2
 
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltMachineGunner
+  name: M804 heavygunner storage rig
+  description: The M804 heavygunner storage rig is an M276 pattern toolbelt rig modified to carry ammunition for heavy machinegun systems, and engineering tools for the gunner.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - Wrench
+      - Screwdriver
+      - Crowbar
+      - Wirecutter
+      - CMFireExtinguisherPortable
+      - RMCMagazineM56D
+      - RMCMagazineM2C
+      - CableCoil
+      - Multitool
+      - RMCExplosiveBreachingCharge
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      # - claymore
+      components:
+      - Welder
+      - EntrenchingTool
+      - BarbedWire
+      - EmptySandbag
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+  - type: Tag
+    tags:
+    - RMCMachineGunnerRig
+
 - type: Tag
   id: RMCNailgunHolster
 
@@ -1862,3 +1903,6 @@
 
 - type: Tag
   id: RMCM82FHolster
+
+- type: Tag
+  id: RMCMachineGunnerRig

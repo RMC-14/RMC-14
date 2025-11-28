@@ -1,8 +1,9 @@
 - type: entity
   parent: [ CMBaseWeaponGun, BaseItem]
-  id: RMCSmartGunMounted
-  name: M56D heavy machine gun
-  description: The top half of a M56D heavy machine gun post. However it ain't much use without the tripod.
+  id: RMCMachineGunM2C
+  categories: [ HideSpawnMenu ]
+  name: M2C heavy machine gun
+  description: The top half of a M2C heavy machine gun post. However it ain't much use without a tripod.
   components:
   - type: Item
     size: Huge
@@ -11,6 +12,7 @@
     price: 500
   - type: MagazineAmmoProvider
     autoEject: true
+    soundAutoEject: /Audio/_RMC14/Weapons/Guns/Reload/hmg_eject_mag.ogg
   - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
@@ -19,14 +21,10 @@
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
-  - type: Corrodible
-    isCorrodible: false
-  - type: GunIFF
-    enabled: true
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/m56d.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/m2c.rsi
     layers:
-    - state: m56d_gun_e
+    - state: m2c_gun_mount
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
@@ -41,24 +39,22 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m56d.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m56d_auto.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
-    - SemiAuto
     recoilUnwielded: 0
     scatterUnwielded: 0
-    baseFireRate: 3.33
+    baseFireRate: 8
     modifiers:
       FullAuto:
         maxScatterModifier: 0
         useBurstScatterMult: false
         unwieldedScatterMultiplier: 0
-        shotsToMaxScatter: 700
+        shotsToMaxScatter: 125
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.05
   - type: ContainerContainer
@@ -69,17 +65,17 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineM56D
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
+        startingItem: RMCMagazineM2C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m56dauto_load.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hmg_eject_mag.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineM56D
-          - RMCMagazineM56DLarge
+          - RMCMagazineM2C
   - type: GunDamageModifier
     multiplier: 1
-  #- type: GunRequiresSkills //TODO uncomment this
+  #- type: GunRequiresSkills
+  #  skills:
   #    RMCSkillEngineer: 1
   - type: GunSkilledRecoil
     setRecoil: 0
@@ -106,59 +102,27 @@
       allowMovement: true
   - type: Tag
     tags:
-    - RMCSmartGunMounted
-
-- type: entity
-  parent: RMCSmartGunMounted
-  id: RMCSmartGunMountedStatic
-  name: M56D heavy machine gun
-  suffix: Static version
-  components:
-  - type: MagazineAmmoProvider
-    autoEject: false
-  - type: RMCSelectiveFire
-    baseFireModes:
-    - FullAuto
-    - SemiAuto
-    baseFireRate: 5
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: RMCMagazineM56DLarge
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineM56DLarge
-  - type: Scope
-    zoomLevels:
-    - zoom: 1
-      offset: 12
-      doAfter: 0
-      allowMovement: true
+    - RMCMachineGunM2C
 
 # Magazines
-
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineM56D
-  name: M56D drum magazine (10x28mm)
-  description: A box of 700, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system.
+  id: RMCMagazineM2C
+  name: M2C Ammunition Box (10x28mm tungsten rounds)
+  description: A box of 125, 10x28mm caseless tungsten rounds for the M2C heavy machine gun system.
   components:
   - type: Tag
     tags:
-    - RMCMagazineM56D
+    - RMCMagazineM2C
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridgeHMG10x28mm
+      - RMCCartridgeHMG10x28mmTungsten
     proto: RMCCartridgeHMG10x28mm
-    capacity: 700
+    capacity: 125
     deleteWhenEmpty: true
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/m56d.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/m2c.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -167,31 +131,13 @@
   - type: Clothing
     slots:
     - suitStorage
-  - type: Item
-    size: Large
-
-- type: entity
-  parent: RMCMagazineM56D
-  id: RMCMagazineM56DLarge
-  name: large M56D drum magazine (10x28mm)
-  description: A box of 1500, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system.
-  components:
-  - type: Tag
-    tags:
-    - RMCMagazineM56DLarge
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - RMCCartridgeHMG10x28mm
-    proto: RMCCartridgeHMG10x28mm
-    capacity: 1500
 
 # Cartridges
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeHMG10x28mm
-  name: cartridge (10x28mm)
+  id: RMCCartridgeHMG10x28mmTungsten
+  name: cartridge (10x28mm Tungsten)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
@@ -199,17 +145,17 @@
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: CartridgeAmmo
-    proto: RMCBulletHMG10x28mm
+    proto: RMCBulletHMG10x28mmTungsten
   - type: Tag
     tags:
-    - RMCCartridgeHMG10x28mm
+    - RMCCartridgeHMG10x28mmTungsten
 
 # Projectiles
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletHMG10x28mm
-  name: bullet (10x28mm)
+  id: RMCBulletHMG10x28mmTungsten
+  name: bullet (10x28mm Tungsten)
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -220,13 +166,13 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 36
+        Piercing: 50
   - type: CMArmorPiercing
-    amount: 50
+    amount: 30
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 7
-      falloff: 4
+      falloff: 3
     - range: 15
       falloff: 9999
   - type: RMCProjectileAccuracy
@@ -236,15 +182,12 @@
       falloff: 3
 
 # Tags
+- type: Tag
+  id: RMCMagazineM2C
 
 - type: Tag
-  id: RMCSmartGunMounted
+  id: RMCMachineGunM2C
 
 - type: Tag
-  id: RMCMagazineM56D
+  id: RMCCartridgeHMG10x28mmTungsten
 
-- type: Tag
-  id: RMCMagazineM56DLarge
-
-- type: Tag
-  id: RMCCartridgeHMG10x28mm
