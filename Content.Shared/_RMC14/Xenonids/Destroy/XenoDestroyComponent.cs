@@ -16,7 +16,10 @@ public sealed partial class XenoDestroyComponent : Component
     public DamageSpecifier StructureDamage = new();
 
     [DataField, AutoNetworkedField]
-    public bool Gibs = true; //If false mobs will take the structure damage instead (no resist)
+    public DamageSpecifier MobDamage = new();
+
+    [DataField, AutoNetworkedField]
+    public bool Gibs = true; //If false mobs will take the mob damage instead (no resist)
 
     [DataField, AutoNetworkedField]
     public EntProtoId Telegraph = "RMCEffectXenoTelegraphKing";

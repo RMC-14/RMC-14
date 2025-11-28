@@ -206,7 +206,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
                     if (!xeno.Comp.Gibs || !TryComp<BodyComponent>(ent, out var body))
                     {
                         //just do a ton of damage instead
-                        _damage.TryChangeDamage(ent, xeno.Comp.StructureDamage, true, origin: xeno, tool: xeno);
+                        _damage.TryChangeDamage(ent, xeno.Comp.MobDamage, true, origin: xeno, tool: xeno);
                         continue;
                     }
 

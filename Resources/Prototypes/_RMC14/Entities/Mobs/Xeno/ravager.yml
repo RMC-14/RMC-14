@@ -72,10 +72,6 @@
     chance: 0.35
     stunMin: 4
     stunMax: 5
-  - type: Flammable
-    damage:
-      types:
-        Heat: 1
   - type: Fixtures
     fixtures:
       fix1:

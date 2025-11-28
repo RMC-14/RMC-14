@@ -12,7 +12,7 @@
   - type: GhostRole
     name: rmc-job-name-xeno-king
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi #TODO own rsi
+    sprite: _RMC14/Mobs/Xenonids/King/king.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -56,6 +56,7 @@
   - type: CMArmor
     xenoArmor: 45
     explosionArmor: 70
+  - type: InnateCommandSpeech
   - type: XenoClaws
     clawType: VerySharp
   - type: MeleeWeapon
@@ -129,8 +130,8 @@
     exceptEffects:
     - Stun
     - KnockedDown
-  - type: RMCXenoDamageVisuals #TODO
-    prefix: queen
+  - type: RMCXenoDamageVisuals
+    prefix: king
   - type: FixedIdentity
     name: rmc-job-name-xeno-king
   - type: TacticalMapIcon
@@ -143,12 +144,6 @@
   - type: StunOnExplosionReceived
     weak: false
   - type: XenoOmitNumber
-  - type: RMCFireArmorDebuffModifier
-    debuffModifier: 1.4
-  - type: RMCImmuneToIgnition
-    bypassWhitelist:
-      components:
-      - RMCFireImmunityBypass
   - type: RMCImmuneToFireTileDamage
     bypassWhitelist:
       components:
@@ -157,7 +152,7 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
   - type: RMCActionOrder
-    id: RMCXenoQueen
+    id: RMCXenoKing
   - type: StunHostilesOnStep
     damage:
       groups:
@@ -180,6 +175,9 @@
     structureDamage:
       types:
         Blunt: 1000
+    mobDamage:
+      types:
+        Blunt: 1000
     structures:
       tags:
       - Structure
@@ -195,4 +193,7 @@
       - PlaceableSurface
       - ReagentDispenser
       - IVDrip
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
   
