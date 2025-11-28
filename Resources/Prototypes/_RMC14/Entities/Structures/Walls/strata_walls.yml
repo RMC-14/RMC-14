@@ -109,3 +109,11 @@
     - windows
     - doors
     base: strata_rock
+
+- type: entity
+  parent: RMCWallStrataRock
+  id: RMCWallStrataRockTimed
+  suffix: Timed
+  components:
+  - type: TimedDespawn
+    lifetime: 1200

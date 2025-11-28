@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7b6ef825373f0874ee0c61a7927a71eed1082cbe/icons/obj/items/storage.dmi https://github.com/cmss13-devs/cmss13/blob/7b6ef825373f0874ee0c61a7927a71eed1082cbe/icons/mob/humans/onmob/back.dmi https://github.com/cmss13-devs/cmss13/blob/7b6ef825373f0874ee0c61a7927a71eed1082cbe/icons/mob/humans/onmob/items_lefthand_0.dmi https://github.com/cmss13-devs/cmss13/blob/7b6ef825373f0874ee0c61a7927a71eed1082cbe/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sheath"
+    },
+    {
+      "name": "sheath-shotgun"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "full-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    }
+  ]
+}
