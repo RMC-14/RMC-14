@@ -40,10 +40,6 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-vc
-    - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadEcho
     - type: SquadArmorWearer
     - type: SquadNameOverride
       name: cm-job-name-vc
