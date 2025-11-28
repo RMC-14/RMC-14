@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
@@ -527,6 +527,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         }
 
         args.Handled = true;
+        DestroyReactor(ent, args.User);
+
+        if (ent.Comp.State != RMCFusionReactorState.Weld)
+            args.Repeat = true;
+    }
+
+    public void DestroyReactor(Entity<RMCFusionReactorComponent> ent, EntityUid? user)
+    {
         ent.Comp.State = ent.Comp.State switch
         {
             RMCFusionReactorState.Working => RMCFusionReactorState.Wrench,
@@ -539,9 +547,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         UpdateAppearance(ent);
 
         _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-destroyed", ("reactor", ent)), ent, user, SmallCaution);
-
-        if (ent.Comp.State != RMCFusionReactorState.Weld)
-            args.Repeat = true;
 
         ReactorUpdated(ent);
     }

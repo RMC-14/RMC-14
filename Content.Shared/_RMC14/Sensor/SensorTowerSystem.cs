@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
@@ -186,6 +186,21 @@ public sealed class SensorTowerSystem : EntitySystem
         args.Handled = true;
 
         ent.Comp.State = SensorTowerState.Weld;
+        Dirty(ent);
+        UpdateAppearance(ent);
+    }
+
+    public void SensorTowerIncrementalDestroy(Entity<SensorTowerComponent> ent)
+    {
+        ent.Comp.State = ent.Comp.State switch
+        {
+            SensorTowerState.On => SensorTowerState.Wrench,
+            SensorTowerState.Off => SensorTowerState.Wrench,
+            SensorTowerState.Wrench => SensorTowerState.Wire,
+            SensorTowerState.Wire => SensorTowerState.Weld,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         Dirty(ent);
         UpdateAppearance(ent);
     }

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Screwdriver
   id: CMScrewdriver
   components:
@@ -205,3 +205,44 @@
   - type: Appearance
   - type: XenoTunnelFiller
   - type: Shovel
+
+#PVE Tool
+- type: entity
+  parent: BaseItem
+  id: RMCWireSnippers
+  name: wire snippers
+  description: The jaws are perfect for snipping large wires, but are a bit too heavy for delicate work.
+  suffix: INSTANT
+  components:
+  - type: RMCDeviceBreaker
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    layers:
+    - state: cutters
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    - state: cutters-cutty-thingy
+      color: "#808080"
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        cutters: Rainbow
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    storedRotation: 0
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
+
+- type: entity
+  parent: RMCWireSnippers
+  id: RMCWireSnippersNormal
+  suffix: Slow
+  components:
+  - type: RMCDeviceBreaker
+    doAfterTime: 7
+  
