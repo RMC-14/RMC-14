@@ -11,10 +11,7 @@ rmc-vending-machine-hack-finish-restore = You have restored access restrictions 
 
 rmc-vending-machine-restock-empty = {THE($container)} is empty.
 rmc-vending-machine-restock-start = You start restocking {THE($vendor)} with supplies from {THE($container)}.
-rmc-vending-machine-restock-progress = You are restocking {THE($vendor)} with supplies.
-rmc-vending-machine-restock-stop = You stop restocking {THE($vendor)}.
 rmc-vending-machine-restock-finish = You finish restocking {THE($vendor)} with supplies.
-rmc-vending-machine-restock-item-start = You start stocking {THE($vendor)} with {THE($item)}.
 rmc-vending-machine-restock-item-finish = You stock {THE($vendor)} with {THE($item)}.
 rmc-vending-machine-restock-item-full = {THE($vendor)} is already full of {THE($item)}!
 rmc-vending-machine-restock-item-invalid = {THE($item)} cannot be restocked.
@@ -30,5 +27,3 @@ rmc-vending-machine-restock-flare-pack-not-full = {THE($item)} is not full. Fill
 rmc-vending-machine-restock-power-cell-missing = {THE($item)} needs a power cell installed to be restocked.
 rmc-vending-machine-restock-power-cell-not-charged = {THE($item)}'s power cell needs to be fully charged before restocking.
 rmc-vending-machine-restock-stack-wrong-amount = {THE($item)} must be in stacks of {$required} for restocking. Current amount: {$current}.
-rmc-vending-machine-restock-reagent-container-not-empty = {THE($item)} needs to be empty to restock it!
-rmc-vending-machine-restock-reagent-container-not-full = {THE($item)} needs to be completely full to restock it!
