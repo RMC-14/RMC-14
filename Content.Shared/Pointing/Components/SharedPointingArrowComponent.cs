@@ -19,9 +19,4 @@ public abstract partial class SharedPointingArrowComponent : Component
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan EndTime;
-
-    //RMC14
-    [DataField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public NetEntity Source;
 }

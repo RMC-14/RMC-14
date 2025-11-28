@@ -177,9 +177,14 @@ namespace Content.Server.Pointing.EntitySystems
             {
                 pointing.StartPosition = _transform.ToCoordinates((arrow, Transform(arrow)), _transform.ToMapCoordinates(Transform(player).Coordinates)).Position;
                 pointing.EndTime = _gameTiming.CurTime + PointDuration;
-                pointing.Source = GetNetEntity(player);
 
                 Dirty(arrow, pointing);
+            }
+
+            if(TryComp<RMCPointingArrowComponent>(arrow, out var rmcpoint))
+            {
+                rmcpoint.Source = GetNetEntity(player);
+                Dirty(arrow, rmcpoint);
             }
 
             if (EntityQuery<PointingArrowAngeringComponent>().FirstOrDefault() != null)
