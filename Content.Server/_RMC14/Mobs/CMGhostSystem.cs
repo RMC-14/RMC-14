@@ -48,6 +48,9 @@ namespace Content.Server._RMC14.Mobs
             EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
             EnsureComp<PropCallingComponent>(uid);
+
+            if (TryComp<GhostComponent>(uid, out var ghost))
+                ChangeGhostBoo((uid, ghost));
         }
 
         private void OnMarineHudAction(EntityUid uid, CMGhostComponent comp, ToggleMarineHudActionEvent args)
