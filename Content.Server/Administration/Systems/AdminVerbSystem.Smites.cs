@@ -991,51 +991,100 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(chestburstRifleman);
 
-        Verb forceCritical = new()
+        Verb forceCritical1 = new()
         {
-            Text = "Force into critical state",
+            Text = "Force into critical state (100% Critical Health)",
             Category = VerbCategory.Smite,
             Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddefib"),
             Act = () =>
             {
-                if (!TryComp<DamageableComponent>(args.Target, out var damage))
-                    return;
-
-                if (!_mobThresholdSystem.TryGetIncapThreshold(args.Target, out var threshold))
-                    return;
-
-                if (!TryComp<MobStateComponent>(args.Target, out var state))
-                    return;
-
-                if (state.CurrentState != MobState.Alive)
-                {
-                    //Revive + Heal
-                    var heal = damage.TotalDamage.Double() - threshold.Value.Double();
-
-                    if (heal < 0)
-                        heal = 0;
-
-                    var healing = _rmcdamage.DistributeTypesTotal((args.Target, damage), heal);
-                    _damage.TryChangeDamage(args.Target, -healing, true);
-                    if (state.CurrentState == MobState.Dead)
-                        _mobstate.ChangeMobState(args.Target, MobState.Critical);
-                }
-                else
-                {
-                    //Just damage
-                    var hurt = Math.Max(threshold.Value.Float() - damage.TotalDamage.Float(), 0);
-
-                    if (!_prototypeManager.TryIndex(CriticalDamage, out var damageGroup))
-                        return;
-
-                    var damager = new DamageSpecifier(damageGroup, hurt);
-
-                    var damaging = _damage.TryChangeDamage(args.Target, damager, true);
-                }
+                Crit(args.Target, 1.0);
             },
             Impact = LogImpact.Extreme,
-            Message = "Forces mob into critical, no matter what its state before was",
+            Message = "Forces mob into critical, no matter what its state before was, at 100% of critical health",
         };
-        args.Verbs.Add(forceCritical);
+        args.Verbs.Add(forceCritical1);
+
+        Verb forceCritical2 = new()
+        {
+            Text = "Force into critical state (75% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeadclose"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.75);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 75% of critical health",
+        };
+        args.Verbs.Add(forceCritical2);
+
+        Verb forceCritical3 = new()
+        {
+            Text = "Force into critical state (50% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeadalmost"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.50);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 50% of critical health",
+        };
+        args.Verbs.Add(forceCritical3);
+
+        Verb forceCritical4 = new()
+        {
+            Text = "Force into critical state (50% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddnr"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.25);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 25% of critical health",
+        };
+        args.Verbs.Add(forceCritical4);
+    }
+
+    private void Crit(EntityUid target, double criticalThresholdPercent)
+    {
+        if (!TryComp<DamageableComponent>(target, out var damage))
+            return;
+
+        if (!_mobThresholdSystem.TryGetIncapThreshold(target, out var threshold) || !_mobThresholdSystem.TryGetDeadThreshold(target, out var dead))
+            return;
+
+        var desiredThreshold = (threshold * criticalThresholdPercent) + (dead * (1 - criticalThresholdPercent));
+
+        if (!TryComp<MobStateComponent>(target, out var state))
+            return;
+
+        if (damage.TotalDamage > desiredThreshold)
+        {
+            //Revive + Heal
+            var heal = damage.TotalDamage.Double() - desiredThreshold.Value.Double();
+
+            if (heal < 0)
+                heal = 0;
+
+            var healing = _rmcdamage.DistributeTypesTotal((target, damage), heal);
+            _damage.TryChangeDamage(target, -healing, true);
+            if (state.CurrentState == MobState.Dead)
+                _mobstate.ChangeMobState(target, MobState.Critical);
+        }
+        else if (damage.TotalDamage < desiredThreshold)
+        {
+            //Just damage
+            var hurt = Math.Max(desiredThreshold.Value.Double() - damage.TotalDamage.Double(), 0);
+
+            if (!_prototypeManager.TryIndex(CriticalDamage, out var damageGroup))
+                return;
+
+            var damager = new DamageSpecifier(damageGroup, hurt);
+
+            var damaging = _damage.TryChangeDamage(target, damager, true);
+        }
     }
 }
