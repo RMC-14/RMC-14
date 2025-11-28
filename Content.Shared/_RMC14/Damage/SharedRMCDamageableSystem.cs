@@ -429,7 +429,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         var equal = new DamageSpecifier();
         foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
         {
-            var total =  equal?.GetTotal() ?? FixedPoint2.Zero;
+            var total = equal?.GetTotal() ?? FixedPoint2.Zero;
             var left = amount - total;
             if (left <= FixedPoint2.Zero)
             {
