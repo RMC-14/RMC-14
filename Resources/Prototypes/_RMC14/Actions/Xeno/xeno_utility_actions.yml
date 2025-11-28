@@ -365,6 +365,23 @@
 
 - type: entity
   parent: ActionXenoBase
+  id: ActionXenoSpikeShield
+  name: Spike Shield (150 shards)
+  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds. 
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_shard_shield
+    useDelay: 11.5
+  - type: InstantAction
+    event: !type:ActionXenoSpikeShieldEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
   id: ActionXenoBulwarkOfTheHive
   name: Bulwark Of The Hive
   description: Grants all hivemembers around you a temporary shield that blocks 200 damage for 10 seconds. While their shield is up, hivemembers can only take damage up to 10% of their health at a time.

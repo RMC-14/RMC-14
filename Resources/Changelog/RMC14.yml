@@ -1,265 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed Lesser Drones being able to plant weed nodes out of range of other
-      nodes.
-    type: Fix
-  id: 1937
-  time: '2025-07-05T11:11:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6878
-- author: Arykh
-  changes:
-  - message: Added the stethoscope! Anyone can use it, but only those with medical
-      skill 2 or higher can use it properly.
-    type: Add
-  id: 1938
-  time: '2025-07-05T11:14:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6830
-- author: Dygon
-  changes:
-  - message: Fixed floor resin, resin structures, and resin constructs not taking
-      fire damage over time.
-    type: Fix
-  id: 1939
-  time: '2025-07-05T11:16:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6862
-- author: Dygon
-  changes:
-  - message: Fixed Boilers being able to acid spray during the Bombard action's DoAfter.
-    type: Fix
-  id: 1940
-  time: '2025-07-05T11:39:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6872
-- author: x5tink
-  changes:
-  - message: The ChemMaster eject and clear button is now only Eject Beaker button.
-    type: Tweak
-  - message: The ChemMaster buffer side, all reagents button can now send everything
-      to disposals.
-    type: Fix
-  id: 1941
-  time: '2025-07-06T00:59:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6753
-- author: Dygon
-  changes:
-  - message: IMP ammo racks can now store empty and full sandbags.
-    type: Tweak
-  - message: IO headsets now have access to the requisitions channel.
-    type: Tweak
-  - message: 'Underbarrel extinguishers now also fit on the following weapons: M54CE2,
-      M63, MOU53, MP5, XM51.'
-    type: Tweak
-  id: 1942
-  time: '2025-07-06T01:01:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6877
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new gunshot sounds for the M890 tactical shotgun, FN P90 SMG, and
-      the M357 rival double-barreled shotgun
-    type: Add
-  id: 1943
-  time: '2025-07-06T01:00:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6867
-- author: Vermidia
-  changes:
-  - message: Fixed resin surge not instant growing fruits. It now gives a cooldown
-      depending on the fruits base growth time.
-    type: Fix
-  - message: Fixed base fruit harvest and consume times. Gardener drones now feed
-      and harvest fruits faster than other xenos.
-    type: Fix
-  - message: Fixed fruits and hardy weeds not showing their effects on examine.
-    type: Fix
-  - message: Fixed spore fruit's effect lasting 30s too short (60 > 90)
-    type: Fix
-  - message: Fixed feeding fruit doafter not having a medical doafter effect.
-    type: Fix
-  - message: Fixed resin fruit in hand eat doafter not canceling if you switch hands.
-    type: Fix
-  - message: Fixed not being able to eat multiple planted fruits at once.
-    type: Fix
-  - message: Fixed reinforced resin not having a visual.
-    type: Fix
-  id: 1944
-  time: '2025-07-06T01:03:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6887
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added uniform accessories, such as patches. United nations patches were
-      added to the squad prep surplus clothing vendors, and squad uniforms will come
-      equipped with a UNMC patch. Sprites by noctyrnal.
-    type: Add
-  id: 1945
-  time: '2025-07-06T01:10:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6914
-- author: noctyrnal
-  changes:
-  - message: Added lore examines! You can inspect items more closely to see lore info
-      about them.
-    type: Add
-  id: 1946
-  time: '2025-07-06T01:12:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6915
-- author: Dygon
-  changes:
-  - message: You can unload unchambered warheads and fuel from the orbital cannon.
-    type: Fix
-  id: 1947
-  time: '2025-07-06T01:13:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6889
-- author: Dygon
-  changes:
-  - message: Resin structures can no longer be placed on tiles that are already occupied
-      by another structure.
-    type: Fix
-  - message: Weed nodes can no longer be planted on tiles occupied by certain objects,
-      including tables, window frames and floodlights.
-    type: Fix
-  id: 1948
-  time: '2025-07-06T01:14:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6854
-- author: x5tink
-  changes:
-  - message: Added drop pouch to medical vendors
-    type: Add
-  id: 1949
-  time: '2025-07-06T01:43:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6767
-- author: Arykh
-  changes:
-  - message: Xenonids can now bind a key to their rest action. (Shift+R by default)
-    type: Tweak
-  id: 1950
-  time: '2025-07-06T01:45:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6788
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the default mode (the only one we have right now) for the underbarrel
-      flamer attachment being stronger than intended. Intensity 20 > 10, duration
-      24 > 10.
-    type: Fix
-  id: 1951
-  time: '2025-07-06T01:50:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6936
-- author: noctyrnal
-  changes:
-  - message: Fiornia has recieved a large update.
-    type: Add
-  - message: Added the V2 reactive thermal tarp, a version of the scout tarp that
-      can be used by anyone, but has slower and worse cloaking.
-    type: Add
-  - message: Added no-skill versions of pill canisters, found commonly in colonies.
-      These are pill canisters that can be opened by anyone.
-    type: Add
-  - message: Prisoner corpses now start with the correct jumpsuit.
-    type: Tweak
-  id: 1952
-  time: '2025-07-06T01:51:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6910
-- author: noctyrnal
-  changes:
-  - message: Fixed Hybrisa windows not becoming frames when destroyed.
-    type: Fix
-  - message: Fixed Hybrisa hull windows being corrodible.
-    type: Fix
-  id: 1953
-  time: '2025-07-06T01:53:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6933
-- author: Dygon
-  changes:
-  - message: 'Dropship parts and ammo can now be recycled at the fabricator, this
-      returns 80% of their point value. Ammo that is partially used refunds less points
-      based on how much ammo is left, 70% of ammo left means you only get: 0.8 * 0.7
-      = 56% of the original point cost refunded instead of 80%.'
-    type: Add
-  id: 1954
-  time: '2025-07-06T01:54:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6801
-- author: Dygon
-  changes:
-  - message: A dropship flyby can now be canceled, reducing the flight duration to
-      10 seconds.
-    type: Tweak
-  - message: Launching a dropship does not automatically close the navigation computer
-      UI anymore.
-    type: Tweak
-  id: 1955
-  time: '2025-07-06T01:56:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6787
-- author: noctyrnal
-  changes:
-  - message: Chairs can now be folded.
-    type: Tweak
-  id: 1956
-  time: '2025-07-06T01:57:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6912
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Colonists will now be an alerted when a new xeno caste unlocks
-    type: Add
-  id: 1957
-  time: '2025-07-06T01:58:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6768
-- author: VictorJob
-  changes:
-  - message: Resprited the extended barrel, barrel charger, and laser sight,
-    type: Tweak
-  id: 1958
-  time: '2025-07-06T02:00:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6780
-- author: Tunguso4ka
-  changes:
-  - message: Added Nightmare Inserts to Trijent Dam.
-    type: Add
-  id: 1959
-  time: '2025-07-06T02:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6932
-- author: SharkSnake98
-  changes:
-  - message: Added OCP-583, a WeYa station intended for ERT spawns, admin events,
-      and PvE.
-    type: Add
-  id: 1960
-  time: '2025-07-06T02:45:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6792
-- author: CyberTropic
-  changes:
-  - message: Added CORSAT
-    type: Add
-  id: 1961
-  time: '2025-07-06T07:33:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6909
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fix some xeno castes not being able to add plasma to hive structures
-    type: Fix
-  id: 1962
-  time: '2025-07-07T00:19:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6944
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed hive clusters and hive pylons taking too long to repair. They now
-      take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
-    type: Fix
-  id: 1963
-  time: '2025-07-07T00:18:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6943
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed baton slugs permanently blinding xenos sometimes
-    type: Fix
-  id: 1964
-  time: '2025-07-07T00:17:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6942
-- author: noctyrnal
-  changes:
-  - message: Added Coffee mugs.
-    type: Add
-  - message: Sorokyne has recieved an update, fixing alot of issues.
-    type: Add
-  id: 1965
-  time: '2025-07-07T00:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6929
 - author: DoguhanOzgurAkca
   changes:
   - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
@@ -4666,5 +4405,322 @@
   id: 2437
   time: '2025-10-10T07:46:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8078
+- author: Vermidia
+  changes:
+  - message: Fixed xenos not being kicked out of unanchored vents.
+    type: Fix
+  - message: Fixed vent crawling being possible while crit/dead.
+    type: Fix
+  - message: Fixed sometimes being unable to exit open pipes under a floor.
+    type: Fix
+  id: 2438
+  time: '2025-10-19T06:07:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8176
+- author: Vermidia
+  changes:
+  - message: Fixed upgrading structures not being able to be resin surged.
+    type: Fix
+  id: 2439
+  time: '2025-10-19T06:09:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8172
+- author: YO0teacher
+  changes:
+  - message: Fixed acider runners gaining acid from hitting training dummies.
+    type: Fix
+  id: 2440
+  time: '2025-10-19T06:09:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8159
+- author: Vixting
+  changes:
+  - message: Synth vision now uses half vision.
+    type: Tweak
+  id: 2441
+  time: '2025-10-19T06:10:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8165
+- author: Timemaster99
+  changes:
+  - message: Fixed requisitions auto chat highlights not applying.
+    type: Fix
+  id: 2442
+  time: '2025-10-19T06:14:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8155
+- author: CatAndHats
+  changes:
+  - message: The Nutrimax vendor now stocks the correct RMC plant bag.
+    type: Fix
+  id: 2443
+  time: '2025-10-19T06:14:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8136
+- author: CatAndHats
+  changes:
+  - message: Added MP comms to the UNMC Synthetic headset
+    type: Add
+  id: 2444
+  time: '2025-10-19T06:17:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8149
+- author: CyberTropic
+  changes:
+  - message: Added Kutjevo nightmare inserts.
+    type: Add
+  id: 2445
+  time: '2025-10-19T06:16:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8151
+- author: CatAndHats
+  changes:
+  - message: Fixed PK-7 description having the wrong gun name.
+    type: Fix
+  id: 2446
+  time: '2025-10-19T06:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8148
+- author: yagwog
+  changes:
+  - message: Fixed Hedgehog Ravager spike shed not giving its movement speed buff.
+    type: Fix
+  - message: Fixed Hedgehog Ravager gaining shards from barbed barricades.
+    type: Fix
+  - message: Fixed Hedgehog Ravager spike shield and spike shed not being temporarily
+      disabled by baton slugs.
+    type: Fix
+  id: 2447
+  time: '2025-10-19T06:20:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8070
+- author: CatAndHats
+  changes:
+  - message: Fixed the echo supply drop console not having a requisitions access requirement.
+    type: Fix
+  id: 2448
+  time: '2025-10-19T06:20:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8140
+- author: noctynral
+  changes:
+  - message: Fixed being able to pry open powered podlocks and shutters.
+    type: Fix
+  - message: Fixed Xenos being able to pry doors closed.
+    type: Fix
+  id: 2449
+  time: '2025-10-19T06:21:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8145
+- author: CatAndHats
+  changes:
+  - message: Fixed the requisitions uniform vendor missing some uniforms, boots, backpacks,
+      goggles, and helmet accessories, and the requisitions attachment vendor missing
+      flashlight grips.
+    type: Fix
+  - message: Changed the order of items in the requisitions armament and uniform vendors,
+      with new categories.
+    type: Tweak
+  - message: Fixed the requisitions vendor descriptions to now mention the LO.
+    type: Fix
+  id: 2450
+  time: '2025-10-19T06:24:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8153
+- author: CatAndHats
+  changes:
+  - message: The Engi Supply Kit is now shown as recommended in the SL vendor.
+    type: Tweak
+  id: 2451
+  time: '2025-10-19T06:25:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8022
+- author: CatAndHats
+  changes:
+  - message: Fixed the dropship crew vendor not having M4SPR extended mags, S6 reflex
+      sights, and patrol caps.
+    type: Fix
+  - message: Fixed the purchasable m44 ammunition in the flight crew vendor not being
+      marksman.
+    type: Fix
+  - message: M4SPR extended mag now has a description.
+    type: Fix
+  id: 2452
+  time: '2025-10-19T06:27:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8125
+- author: OmerF-afk
+  changes:
+  - message: Added empty L42A mags
+    type: Add
+  id: 2453
+  time: '2025-10-19T06:29:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8107
+- author: CatAndHats
+  changes:
+  - message: 'Added cardboard construction menu, Press Z with cardboard in-hand to
+      open the menu: Craft ammo boxes and newly-craftable donut box, pizza boxes,
+      and folders!'
+    type: Add
+  id: 2454
+  time: '2025-10-19T06:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8010
+- author: BreakpointDebug1234
+  changes:
+  - message: CMB corpses no longer spawn with all access badges.
+    type: Fix
+  id: 2455
+  time: '2025-10-19T06:30:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8132
+- author: 0awful
+  changes:
+  - message: Requisition can now give you powerloader certification. Come quick there's
+      only 1.
+    type: Add
+  id: 2456
+  time: '2025-10-19T09:16:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8106
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Aegis spawns and spawer icon changed.
+    type: Tweak
+  id: 2457
+  time: '2025-10-19T21:39:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8183
+- author: Vermidia
+  changes:
+  - message: Fixed hedgehog rav gaining stacks on melee damage sources
+    type: Fix
+  - message: Fixed hedgehog spikes having too high of a max range (shield has a slightly
+      lower range than the other two)
+    type: Fix
+  - message: Fixed hedgehog spike visuals not showing up in most states.
+    type: Fix
+  - message: Fixed hedgehog not being stunnable by explosions when below 50 shards
+    type: Fix
+  - message: Fixed hedgehog using the wrong damage sprites.
+    type: Fix
+  id: 2458
+  time: '2025-10-19T21:41:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8177
+- author: to4no_fix
+  changes:
+  - message: Fixed an issue where ghosts could block tent deployment.
+    type: Fix
+  - message: Fixed an issue where the tent roof did not become transparent to ghosts.
+    type: Fix
+  - message: Fixed an issue where it was impossible to interact with the water tank
+      and microwave in the Mess Tent.
+    type: Fix
+  id: 2459
+  time: '2025-10-19T21:45:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8102
+- author: noctyrnal
+  changes:
+  - message: Added an M13 gun case to requisitions.
+    type: Add
+  - message: Added some attachments - M13 Compensator Regular / Spiked, Solid / Foldable
+      M13 Stock, S5 Micro Dot Sight, Micro Lazer, Compact Suppressor, and the Extended
+      Compensator.
+    type: Add
+  - message: Added new firing and reloading sounds to the M13.
+    type: Add
+  - message: Increased the M13's base damage, improved accuracy, and reduced bullet
+      spread.
+    type: Tweak
+  id: 2460
+  time: '2025-10-19T21:46:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8108
+- author: noctyrnal
+  changes:
+  - message: Windows will now correctly smooth with walls.
+    type: Tweak
+  id: 2461
+  time: '2025-10-19T21:49:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7289
+- author: Vixting
+  changes:
+  - message: fix girders being weak
+    type: Fix
+  id: 2462
+  time: '2025-10-19T21:50:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7914
+- author: noctyrnal
+  changes:
+  - message: Removed the cyanide pill from the liaison's briefcase.
+    type: Remove
+  id: 2463
+  time: '2025-10-19T22:04:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8092
+- author: Aurallianz
+  changes:
+  - message: everyone gets an armour vest.
+    type: Add
+  id: 2464
+  time: '2025-10-19T22:48:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8127
+- author: DrSmugleaf
+  changes:
+  - message: Fixed melee and tackles being unreliable on moving targets when no other
+      interaction occurs from the user.
+    type: Fix
+  - message: Fixed loose bullet boxes showing a magazine counter on examine.
+    type: Fix
+  - message: Fixed the entrenching tool not dealing 30 damage while unfolded, and
+      3 while folded.
+    type: Fix
+  - message: Fixed the power loader permanently being unable to operate one hand when
+      catching a basketball mid-air. You can still catch the basketball mid-air with
+      the power loader.
+    type: Fix
+  - message: Fixed the XM51 burst cooldown being too short, and its burst fire rate
+      being too low.
+    type: Fix
+  - message: Fixed Lurkers being unable to hit the target it leaped at if the Lurker
+      has high enough ping. Its first attack after a leap that roots it now has infinite
+      range, if hitting the target it leaped at.
+    type: Fix
+  - message: Fixed smart equip with Shift+E playing a duplicate storage insert sound.
+    type: Fix
+  - message: Fixed xeno tail stab leaking the xeno's true identity for others.
+    type: Fix
+  - message: Fixed mateba stuns letting you move while knocked down.
+    type: Fix
+  - message: Fixed the Requisitions office guidelines sign mentioning the QM instead
+      of the LO.
+    type: Fix
+  - message: Fixed the tier 4 intel unlock being purchasable while doing nothing yet.
+    type: Fix
+  - message: Fixed repairing with welders not looping the do after if there is more
+      damage to fix.
+    type: Fix
+  - message: Fixed not being able to eat or drink if you are moving fast enough.
+    type: Fix
+  - message: Fixed the health analyzer UI closing if you put it into a closed storage.
+    type: Fix
+  - message: Fixed surgical line and synth graft being two times faster than intended
+      on medical skill 2 (Corpsmen). This also fixes skill scaling.
+    type: Fix
+  - message: Fixed clicking someone with a surgical line or synth graft while already
+      doing so not starting a new do after.
+    type: Fix
+  - message: Fixed set pose accepting markdown formatting and breaking character examines.
+    type: Fix
+  - message: Fixed the flamer and underbarrel flamers going on cooldown if used close
+      enough to not create fire, and added a popup when trying to fire too close to
+      yourself.
+    type: Fix
+  - message: Fixed the chem master all reagents button not deleting all reagents from
+      its buffer when it is set to disposal and no beaker is loaded.
+    type: Fix
+  - message: Admin alerts are only shown to admins with edit notes permissions.
+    type: Tweak
+  - message: Shrapnel grenades (M15, HEFA, Improvised) no longer shoot shrapnel while
+      we figure out why they freeze the whole server on detonation.
+    type: Tweak
+  - message: Changing hands while targeting a laser with the rangefinder or laser
+      designator no longer breaks the do after and does not drop the lase.
+    type: Tweak
+  - message: The popup for being healed with surgical line or synth graft is now a
+      lot larger for the target.
+    type: Tweak
+  - message: Recommended items in vendors now also start with a star in their name.
+    type: Tweak
+  id: 2465
+  time: '2025-10-19T22:50:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8184
+- author: DrSmugleaf
+  changes:
+  - message: Added Kurt 'Doc Holiday' Lachner figurine and updated Sips-On-Puddles
+      figurine.
+    type: Add
+  id: 2466
+  time: '2025-10-19T23:24:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8187
 Name: RMC14
 Order: -1

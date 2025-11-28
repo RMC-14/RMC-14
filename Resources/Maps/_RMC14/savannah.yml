@@ -26649,7 +26649,7 @@ entities:
     - type: Transform
       pos: -72.5,-22.5
       parent: 1
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 54
     components:
@@ -29579,7 +29579,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 179
     components:

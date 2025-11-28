@@ -29,6 +29,8 @@ using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -581,7 +583,11 @@ public sealed class XenoHudOverlay : Overlay
     private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
         var (uid, xeno, sprite) = ent;
-        if (!_xenoShieldQuery.TryComp(uid, out var comp))
+
+        FixedPoint2 shieldAmount = 0;
+
+        // Check for regular xeno shield
+        if (!_xenoShieldQuery.TryComp(uid, out var xenoShield))
             return;
 
         var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
@@ -592,7 +598,7 @@ public sealed class XenoHudOverlay : Overlay
         if (critThresholdNullable == null)
             return;
 
-        var shield = comp.ShieldAmount;
+        var shield = xenoShield.ShieldAmount;
         var max = critThresholdNullable.Value.Double();
         var level = ContentHelpers.RoundToLevels(shield.Double(), max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
@@ -610,15 +616,18 @@ public sealed class XenoHudOverlay : Overlay
 
     private void UpdateEnergy(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
-        var (uid, xeno, sprite) = ent;
-        if (!_xenoEnergyQuery.TryComp(uid, out var comp) ||
+        if (!_xenoEnergyQuery.TryComp(ent, out var comp) ||
             comp.Max == 0)
         {
             return;
         }
 
-        var energy = comp.Current;
-        var max = comp.Max;
+        UpdatePurpleBar(ent, handle, comp.Current, comp.Max, comp.GenerationCap);
+    }
+
+    private void UpdatePurpleBar(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle, double energy, double max, int? generationCap)
+    {
+        var (_, xeno, sprite) = ent;
         var level = ContentHelpers.RoundToLevels(energy, max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
         var state = $"xenoenergy{name}";
@@ -632,9 +641,9 @@ public sealed class XenoHudOverlay : Overlay
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
 
-        if (comp.GenerationCap != null && comp.Current >= comp.GenerationCap)
+        if (generationCap != null && energy >= generationCap)
         {
-            var level2 = ContentHelpers.RoundToLevels(comp.GenerationCap.Value, max, 11);
+            var level2 = ContentHelpers.RoundToLevels(generationCap.Value, max, 11);
             var name2 = level2 > 0 ? $"{level2 * 10}" : "0";
             var state2 = $"cap{name2}";
             var icon2 = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state2);

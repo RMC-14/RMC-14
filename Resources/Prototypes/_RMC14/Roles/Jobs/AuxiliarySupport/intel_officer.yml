@@ -60,6 +60,7 @@
         state: io
     - type: SquadNameOverride
       name: cm-job-name-intel
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearIntelOfficer
