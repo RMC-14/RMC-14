@@ -3953,7 +3953,7 @@ entities:
       parent: 2
 - proto: CMSpawnPointCrewman
   entities:
-  - uid: 257
+  - uid: 5000
     components:
     - type: Transform
       pos: 0.5,3.5
