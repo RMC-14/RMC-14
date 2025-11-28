@@ -3974,7 +3974,7 @@ entities:
       parent: 2
 - proto: CMSpawnPointFieldDoctor
   entities:
-  - uid: 257
+  - uid: 5001
     components:
     - type: Transform
       pos: 2.5,-1.5
