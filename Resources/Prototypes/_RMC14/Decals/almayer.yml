@@ -60,3 +60,30 @@
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
     state: almayer6
+
+- type: decal
+  id: RMCDecalWeYaTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: weya_1
+
+- type: decal
+  id: RMCDecalWeYaTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: weya_2
+
+- type: decal
+  id: RMCDecalWeYaTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: weya_3

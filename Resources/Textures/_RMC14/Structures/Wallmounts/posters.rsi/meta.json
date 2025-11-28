@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf, horizon poster by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1ea078e04c49e1004b0bb715f252260cdf39b602/icons/obj/structures/props/posters.dmi, electro modified by DrSmugleaf, horizon poster by github noctyrnal, weya poster 1 made by sharksnake 98, minor edits by SharkSnake98",
   "size": {
     "x": 32,
     "y": 32
@@ -144,6 +144,186 @@
     },
     {
       "name": "horizon"
+    },
+    {
+      "name": "weya_1"
+    },
+    {
+      "name": "electroman"
+    },
+    {
+      "name": "electro_cyan"
+    },
+    {
+      "name": "safety_waste"
+    },
+    {
+      "name": "pizza_galaxy"
+    },
+    {
+      "name": "tartarus"
+    },
+    {
+      "name": "eat_blue"
+    },
+    {
+      "name": "cola"
+    },
+    {
+      "name": "marine_corp_2"
+    },
+    {
+      "name": "daniel_1"
+    },
+    {
+      "name": "daniel_2"
+    },
+    {
+      "name": "CMB_1"
+    },
+    {
+      "name": "CMB_2"
+    },
+    {
+      "name": "weya_2"
+    },
+    {
+      "name": "weya_3"
+    },
+    {
+      "name": "art_4"
+    },
+    {
+      "name": "art_5"
+    },
+    {
+      "name": "davenport_gin"
+    },
+    {
+      "name": "daniel_3"
+    },
+    {
+      "name": "safety_silence"
+    },
+    {
+      "name": "daniel_4"
+    },
+    {
+      "name": "daniel_5"
+    },
+    {
+      "name": "marine_corp_1"
+    },
+    {
+      "name": "marine_corp_3"
+    },
+    {
+      "name": "marine_corp_4"
+    },
+    {
+      "name": "safety_switch"
+    },
+    {
+      "name": "daniel_6"
+    },
+    {
+      "name": "safety_clearhead"
+    },
+    {
+      "name": "safety_foreign"
+    },
+    {
+      "name": "bobda_blue"
+    },
+    {
+      "name": "safety_check"
+    },
+    {
+      "name": "bobda_lime"
+    },
+    {
+      "name": "marine_corp_5"
+    },
+    {
+      "name": "marine_corp_6"
+    },
+    {
+      "name": "safety_susobject"
+    },
+    {
+      "name": "daniel_7"
+    },
+    {
+      "name": "forecon"
+    },
+    {
+      "name": "safety_clean"
+    },
+    {
+      "name": "marine_corp_7"
+    },
+    {
+      "name": "safety_container"
+    },
+    {
+      "name": "safety_quiet"
+    },
+    {
+      "name": "weya_4"
+    },
+    {
+      "name": "weya_5"
+    },
+    {
+      "name": "safety_soap"
+    },
+    {
+      "name": "ZSPA_1"
+    },
+    {
+      "name": "ZSPA_2"
+    },
+    {
+      "name": "ZSPA_3"
+    },
+    {
+      "name": "SPP_1"
+    },
+    {
+      "name": "SPP_2"
+    },
+    {
+      "name": "SPP_3"
+    },
+    {
+      "name": "SPP_4"
+    },
+    {
+      "name": "SPP_5"
+    },
+    {
+      "name": "SPP_6"
+    },
+    {
+      "name": "SPP_7"
+    },
+    {
+      "name": "SPP_8"
+    },
+    {
+      "name": "SPP_9"
+    },
+    {
+      "name": "SPP_10"
+    },
+    {
+      "name": "SPP_11"
+    },
+    {
+      "name": "SPP_12"
+    },
+    {
+      "name": "SPP_13"
     }
   ]
 }

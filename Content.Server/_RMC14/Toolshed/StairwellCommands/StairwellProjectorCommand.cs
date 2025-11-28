@@ -1,9 +1,6 @@
 using Content.Server.Administration;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Administration;
-using Robust.Server.GameObjects;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Toolshed.StairwellCommands;
@@ -16,7 +13,8 @@ internal sealed class StairwellProjectorCommand : ToolshedCommand
     {
         foreach (var entity in input)
         {
-            var comp = EntityManager.GetComponent<RMCTeleporterViewerComponent>(entity);
+            if (!EntityManager.TryGetComponent<RMCTeleporterViewerComponent>(entity, out var comp))
+                continue;
 
 #pragma warning disable RA0002
             comp.Id = id;
