@@ -1035,7 +1035,7 @@ public sealed partial class AdminVerbSystem
 
         Verb forceCritical4 = new()
         {
-            Text = "Force into critical state (50% Critical Health)",
+            Text = "Force into critical state (25% Critical Health)",
             Category = VerbCategory.Smite,
             Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddnr"),
             Act = () =>
