@@ -297,6 +297,8 @@
   placement:
     mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: TileFire
     id: RMCTileFireForever
     extinguishInstantly: false
@@ -394,6 +396,7 @@
 
 - type: entity
   parent: RMCTileFireForeverOrange
+  id: RMCTileFireForeverStrongOrange
   components:
   - type: TileFire
     id: RMCTileFireForeverStrongOrange
