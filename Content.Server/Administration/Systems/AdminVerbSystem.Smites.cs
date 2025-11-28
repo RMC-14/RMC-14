@@ -1007,24 +1007,25 @@ public sealed partial class AdminVerbSystem
                 if (!TryComp<MobStateComponent>(args.Target, out var state))
                     return;
 
-                if (state.CurrentState == MobState.Dead)
+                if (state.CurrentState != MobState.Alive)
                 {
                     //Revive + Heal
-                    var heal = Math.Min(damage.TotalDamage.Float() - threshold.Value.Float(), threshold.Value.Float());
+                    var heal = damage.TotalDamage.Double() - threshold.Value.Double();
 
                     if (heal < 0)
                         heal = 0;
 
                     var healing = _rmcdamage.DistributeTypesTotal((args.Target, damage), heal);
-                    _damage.TryChangeDamage(args.Target, healing, true);
-                    _mobstate.ChangeMobState(args.Target, MobState.Critical);
+                    _damage.TryChangeDamage(args.Target, -healing, true);
+                    if (state.CurrentState == MobState.Dead)
+                        _mobstate.ChangeMobState(args.Target, MobState.Critical);
                 }
-                else if (state.CurrentState == MobState.Alive)
+                else
                 {
                     //Just damage
                     var hurt = Math.Max(threshold.Value.Float() - damage.TotalDamage.Float(), 0);
 
-                    if (!_prototypeManager.TryIndex<DamageGroupPrototype>(CriticalDamage, out var damageGroup))
+                    if (!_prototypeManager.TryIndex(CriticalDamage, out var damageGroup))
                         return;
 
                     var damager = new DamageSpecifier(damageGroup, hurt);
