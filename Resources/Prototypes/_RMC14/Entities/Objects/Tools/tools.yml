@@ -209,12 +209,13 @@
 #PVE Tool
 - type: entity
   parent: BaseItem
-  id: RMCWireSnippers
-  name: wire snippers
-  description: The jaws are perfect for snipping large wires, but are a bit too heavy for delicate work.
+  id: RMCWireSnappers
+  name: wire snappers
+  description: The jaws are perfect for snipping large wires and other small metal bits, but are a bit too heavy for delicate work.
   suffix: INSTANT
   components:
   - type: RMCDeviceBreaker
+    useSound: /Audio/Items/jaws_pry.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Tools/wirecutters.rsi
     layers:
@@ -239,8 +240,8 @@
     - Suitstorage
 
 - type: entity
-  parent: RMCWireSnippers
-  id: RMCWireSnippersNormal
+  parent: RMCWireSnappers
+  id: RMCWireSnappersNormal
   suffix: Slow
   components:
   - type: RMCDeviceBreaker

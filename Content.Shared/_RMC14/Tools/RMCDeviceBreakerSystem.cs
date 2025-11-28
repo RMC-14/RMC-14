@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Sensor;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Tools;
 public sealed partial class RMCDeviceBreakerSystem : EntitySystem
@@ -12,6 +13,7 @@ public sealed partial class RMCDeviceBreakerSystem : EntitySystem
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly SharedDestructibleSystem _destroy = default!;
     [Dependency] private readonly SensorTowerSystem _sensor = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCDeviceBreakerComponent, InteractUsingEvent>(OnDeviceBreakerUsed);
@@ -44,6 +46,8 @@ public sealed partial class RMCDeviceBreakerSystem : EntitySystem
         args.Handled = true;
 
         Break(args.Target.Value, args.User);
+
+        _audio.PlayPredicted(breaker.Comp.UseSound, breaker, args.User);
     }
 
     private bool CanBreak(EntityUid target)
