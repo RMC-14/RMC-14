@@ -21,6 +21,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -102,7 +103,8 @@ namespace Content.Server.Light.EntitySystems
                         }
 
                         // RMC14
-                        _physics.SetBodyType(ent, BodyType.Dynamic);
+                        if (HasComp<PhysicsComponent>(ent))
+                            _physics.SetBodyType(ent, BodyType.Dynamic);
 
                         break;
                 }
@@ -237,6 +239,11 @@ namespace Content.Server.Light.EntitySystems
 
             component.CurrentState = ExpendableLightState.BrandNew;
             component.StateExpiryTime = (float)component.GlowDuration.TotalSeconds;
+
+			// RMC14
+            if (component.StartsActivated)
+                TryActivate((uid, component));
+
             // RMC14
             Dirty(uid, component);
 

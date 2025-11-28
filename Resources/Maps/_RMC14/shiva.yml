@@ -37912,7 +37912,7 @@ entities:
     - type: MetaData
       name: telecomms relay power controller
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 60.5,53.5
       parent: 1
     - type: SpriteSetRenderOrder

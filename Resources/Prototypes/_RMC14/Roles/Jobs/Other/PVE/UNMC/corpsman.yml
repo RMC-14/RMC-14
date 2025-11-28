@@ -30,6 +30,12 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
+    - type: CMVendorUser
+      id: CMPVEHospitalCorpsman
+      points: 0
+      extraPoints:
+        Chemicals: 120
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

@@ -192,11 +192,17 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                         if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (HasComp<DamageableCorrodingComponent>(cade))
-                            continue;
+                        // Check if barricade already has acid and if we can replace it
+                        if (_acid.IsMelted(cade))
+                        {
+                            // Only proceed if our acid is stronger, otherwise skip this barricade
+                            if (!_acid.CanReplaceAcid(cade, active.AcidStrength))
+                                continue;
+                            
+                            _acid.RemoveAcid(cade);
+                        }
 
-                        _acid.ApplyAcid(active.Acid, cade, active.AcidDps, 0, active.AcidTime);
-
+                        _acid.ApplyAcid(active.Acid, active.AcidStrength, cade, active.AcidDps, 0, active.AcidTime);
                     }
 
 
