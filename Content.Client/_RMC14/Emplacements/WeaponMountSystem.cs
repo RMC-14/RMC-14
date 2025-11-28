@@ -6,12 +6,15 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Emplacements;
 
-public sealed class WeaponMountSystem : EntitySystem
+public sealed class WeaponMountSystem : SharedWeaponMountSystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
+    private const string FoldedLayer = "foldedLayer";
+
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<WeaponMountComponent, AfterAutoHandleStateEvent>(OnHandleState);
         SubscribeLocalEvent<WeaponMountComponent, AppearanceChangeEvent>(OnAppearanceChange);
     }
@@ -39,20 +42,47 @@ public sealed class WeaponMountSystem : EntitySystem
 
             if (foldable != null)
             {
-                state = state && !foldable.IsFolded;
+                state = state && !foldable.IsFolded && !mount.Comp.Broken;
             }
 
-            UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.MountedAmmo);
+            // Only show the mounted ammo sprite if the mount is not folded.
+            if (foldable != null && foldable.IsFolded)
+                _sprite.LayerSetVisible((mount,sprite), WeaponMountComponentVisualLayers.MountedAmmo, false);
+
+            if (foldable == null || !foldable.IsFolded)
+                    UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.MountedAmmo);
+
+            // Enable the mounted layer if the mount is deployed
             _sprite.LayerSetVisible((mount,sprite), mountLayer, state);
+
+            // Show broken state
+            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
+                _sprite.LayerSetVisible((mount,sprite), brokenLayer, mount.Comp.Broken);
         }
 
-        if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Folded, out var foldedLayer, false) &&
+        if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Folded, out var transportLayer, false) &&
             foldable != null)
         {
+            // Only show the folded ammo sprite if the mount is folded
+            if (foldable.IsFolded)
+                UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.FoldedAmmo);
+            else
+            {
+                _sprite.LayerSetVisible((mount, sprite), WeaponMountComponentVisualLayers.FoldedAmmo, false);
+            }
 
-            UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.FoldedAmmo);
-            _sprite.LayerSetVisible((mount,sprite),foldedLayer, foldable.IsFolded && mount.Comp.MountedEntity != null);
-            _sprite.LayerSetVisible((mount,sprite),"foldedLayer", foldable.IsFolded && mount.Comp.MountedEntity == null);
+            var folded = foldable.IsFolded && !mount.Comp.Broken;
+
+            // Set the folded state based on if the mount is folded and has a mounted entity.
+            _sprite.LayerSetVisible((mount,sprite), transportLayer, folded && mount.Comp.MountedEntity != null);
+
+            // Disable the folded layer from the FoldedComponent
+            if (_sprite.LayerMapTryGet((mount, sprite), FoldedLayer, out var foldedLayer, false))
+                _sprite.LayerSetVisible((mount,sprite), foldedLayer, folded && mount.Comp.MountedEntity == null);
+
+            // Show broken state
+            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
+                _sprite.LayerSetVisible((mount,sprite), brokenLayer, mount.Comp.Broken);
         }
 
         // Set the draw depth based on the mount's assembly/folded state
@@ -62,6 +92,9 @@ public sealed class WeaponMountSystem : EntitySystem
             _sprite.SetDrawDepth((mount,sprite), (int)DrawDepth.Mobs);
     }
 
+    /// <summary>
+    ///     Updates the ammo sprite based on if there is any ammo left in the gun.
+    /// </summary>
     private void UpdateAmmoVisual(Entity<WeaponMountComponent> mount, Entity<SpriteComponent?> sprite, Enum mapKey)
     {
         var hasAmmo = false;

@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
@@ -325,7 +324,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         // Get existing acid strength from the component
         XenoAcidStrength? existingStrength = null;
-        
+
         if (TryComp<TimedCorrodingComponent>(target, out var timedCorroding))
             existingStrength = timedCorroding.Strength;
         else if (TryComp<DamageableCorrodingComponent>(target, out var damageableCorroding))
@@ -353,5 +352,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
+    public void SetCorrodible(CorrodibleComponent component, bool isCorrodible)
+    {
+        component.IsCorrodible = isCorrodible;
+    }
 
 }

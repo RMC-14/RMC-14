@@ -14,7 +14,7 @@ public sealed partial class WeaponMountComponent : Component
     /// <summary>
     ///     The whitelist of what is allowed to be mounted. //TODO implement this
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> AttachablePrototypes = new();
 
     /// <summary>
@@ -50,56 +50,56 @@ public sealed partial class WeaponMountComponent : Component
     /// <summary>
     ///     The DoAfter duration for any assembling related actions.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan AssembleDelay = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
     ///     The DOAfter duration for any disassembling related actions.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan DisassembleDelay = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
     ///     The tool quality required to rotate the mount.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> RotationTool = "Anchoring";
 
     /// <summary>
     ///     The tool quality required to remove a mounted entity from the mount.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> DismantlingTool = "Prying";
 
     /// <summary>
     ///     The id for the container the weapon will be stored in.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string WeaponSlotId = "weapon";
 
     /// <summary>
     ///     The item size while nothing is attached to the mount.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<ItemSizePrototype> MountSize = "Normal";
 
     /// <summary>
     ///     The item size while an entity is attached to the mount.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<ItemSizePrototype> MountedWeaponSize = "Huge";
 
     /// <summary>
     ///     The distance in which no other weapon mounts can be placed.
     /// </summary>
-    [DataField]
-    public int ExclusionAreaSize = 5;
+    [DataField, AutoNetworkedField]
+    public int MountExclusionAreaSize = 5;
 
     /// <summary>
-    ///     Whether the mount can ignore the check for nearby other mounts.
+    ///     The distance in which no barricade can be placed.
     /// </summary>
-    [DataField]
-    public bool CanPlaceNearOtherMounts;
+    [DataField, AutoNetworkedField]
+    public int BarricadeExclusionAreaSize;
 
     /// <summary>
     ///     The action prototype to stop using the mount.
@@ -110,20 +110,41 @@ public sealed partial class WeaponMountComponent : Component
     /// <summary>
     ///     The uid of that makes you stop using the mount.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? DismountActionEntity;
 
-    [DataField]
-    public SoundSpecifier ScrewSound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
+    /// <summary>
+    ///     Whether the mount can be rotated without the use of any tool.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool CanRotateWithoutTool;
+
+    /// <summary>
+    ///     Whether the user will mount the emplacement automatically after deploying it from their hand.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool MountOnDeploy;
+
+    /// <summary>
+    ///     Whether the mount is currently in a broken state.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Broken;
 
     [DataField]
-    public SoundSpecifier WrenchSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
+    public SoundSpecifier UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
+
+    [DataField]
+    public SoundSpecifier RotateSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
 
     [DataField]
     public SoundSpecifier PrySound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
 
     [DataField]
     public SoundSpecifier SecureSound = new SoundPathSpecifier("/Audio/Items/deconstruct.ogg");
+
+    [DataField]
+    public SoundSpecifier? DeploySound;
 }
 
 [Serializable, NetSerializable]
@@ -133,4 +154,5 @@ public enum WeaponMountComponentVisualLayers : byte
     MountedAmmo,
     Folded,
     FoldedAmmo,
+    Broken,
 }

@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.EntitySystems;
@@ -15,6 +14,7 @@ public sealed class MountableWeaponSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MountableWeaponComponent, AttemptShootEvent>(OnAttemptShoot);
@@ -33,16 +33,36 @@ public sealed class MountableWeaponSystem : EntitySystem
             return;
         }
 
-        // Cancel the shot if not aiming inside the cone of fire
-        var arcDegrees = ent.Comp.ShootArc;
-        var weaponFront = _transform.GetWorldRotation(ent).ToWorldVec();
-        var aimedLocation = (_transform.ToWorldPosition(args.ToCoordinates.Value) - _transform.GetWorldPosition(ent)).Normalized();
-        var dot = Math.Clamp(Vector2.Dot(weaponFront, aimedLocation), -1f, 1f);
-        var angleDegrees = MathHelper.RadiansToDegrees(MathF.Acos(dot));
+        if (ent.Comp.MountedTo == null)
+            return;
 
-        if (angleDegrees >= arcDegrees / 2f)
+        var mountEntity = GetEntity(ent.Comp.MountedTo.Value);
+
+        // Cancel the shot if not aiming inside the cone of fire
+        var mountPosition = _transform.GetWorldPosition(ent);
+        var aimedLocation = _transform.ToWorldPosition(args.ToCoordinates.Value);
+
+        var targetDirection = Angle.FromWorldVec(aimedLocation - mountPosition);
+        var weaponFront = _transform.GetWorldRotation(mountEntity);
+        var normalizedDirection = Angle.ShortestDistance(weaponFront, targetDirection).Degrees;
+
+        if (Math.Abs(normalizedDirection) > ent.Comp.ShootArc / 2f)
         {
             args.Cancelled = true;
+
+            // Rotate the mount to the aimed location if it's rotation is not locked
+            if (TryComp(mountEntity, out WeaponMountComponent? mount) &&
+                mount.CanRotateWithoutTool && args.ToCoordinates != null)
+            {
+                var diff = targetDirection.GetCardinalDir() - weaponFront.GetCardinalDir();
+
+                if (diff > 4)
+                    diff -= 8;
+                else if (diff < -4)
+                    diff += 8;
+
+                _weaponMount.RotateMount((mountEntity, mount), args.User, diff * 45);
+            }
             return;
         }
 

@@ -121,7 +121,7 @@ public sealed class FoldableSystem : EntitySystem
             return false;
 
         if (!TryComp(uid, out PhysicsComponent? body) ||
-            !_anchorable.TileFree(Transform(uid).Coordinates, body))
+            !_anchorable.TileFree(Transform(uid).Coordinates, body, uid)) //RMC14
             return false;
 
         var ev = new FoldAttemptEvent(fold);

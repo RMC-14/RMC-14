@@ -1,12 +1,18 @@
+using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Foldable;
@@ -30,11 +36,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Emplacements;
 
-public sealed class SharedWeaponMountSystem : EntitySystem
+public abstract class SharedWeaponMountSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedXenoAcidSystem XenoAcid = default!;
+
+    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly BarricadeSystem _barricade = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -72,6 +82,9 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         SubscribeLocalEvent<WeaponMountComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<WeaponMountComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<WeaponMountComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
+        SubscribeLocalEvent<WeaponMountComponent, BreakageEventArgs>(OnBreak);
+        SubscribeLocalEvent<WeaponMountComponent, DamageModifyEvent>(OnDamageModified);
+        SubscribeLocalEvent<WeaponMountComponent, RMCCheckTileFreeEvent>(OnCheckTileFree);
 
         //Mount Assembly/Disassembly
         SubscribeLocalEvent<WeaponMountComponent, AttachToMountDoAfterEvent>(OnAttachToMount);
@@ -224,20 +237,7 @@ public sealed class SharedWeaponMountSystem : EntitySystem
             if (foldable == null)
                 return;
 
-            var undeployDoAfterArgs = new DoAfterArgs(EntityManager,
-                args.User,
-                ent.Comp.DisassembleDelay,
-                new MountUnDeployDoAfterEvent(),
-                ent,
-                ent,
-                args.Tool)
-            {
-                NeedHand = true,
-                BreakOnMove = true,
-                BreakOnHandChange = true,
-            };
-
-            _doAfter.TryStartDoAfter(new DoAfterArgs(undeployDoAfterArgs));
+            TryUndeployMount(ent, args.User, args.Tool);
         }
     }
 
@@ -266,7 +266,7 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
 
-        _audio.PlayPredicted(ent.Comp.WrenchSound, ent, args.User);
+        _audio.PlayPredicted(ent.Comp.RotateSound, ent, args.User);
     }
 
     private void OnSecureToMount(Entity<WeaponMountComponent>ent, ref SecureToMountDoAfterEvent args)
@@ -326,12 +326,25 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         if (TryComp(ent, out FoldableComponent? foldable))
             _foldable.SetFolded(ent, foldable, false);
 
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked)
+            _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description-mounted"));
+
         var xform = Transform(ent);
         _transform.SetCoordinates(ent, xform, coordinates, rotation);
         _transform.AnchorEntity(ent, xform);
         _collisionWake.SetEnabled(ent, false);
 
         _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, false);
+
+        if (ent.Comp.MountOnDeploy && ent.Comp.MountedEntity != null)
+        {
+            var ammoCountEvent = new GetAmmoCountEvent();
+            RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
+            if (ammoCountEvent.Count > 0)
+                _buckle.TryBuckle(args.User, args.User, ent, popup: false);
+        }
+
+        _audio.PlayPredicted(ent.Comp.DeploySound, ent, args.User);
     }
 
     private void OnMountUndeploy(Entity<WeaponMountComponent>ent, ref MountUnDeployDoAfterEvent args)
@@ -342,14 +355,28 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         if (!TryComp(ent, out FoldableComponent? foldable))
             return;
 
+        UndeployMount(ent, args.User, foldable);
+    }
+
+    public void UndeployMount(Entity<WeaponMountComponent> ent, EntityUid? user = null, FoldableComponent? foldable = null)
+    {
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked)
+            _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description"));
+
         ent.Comp.IsWeaponSecured = false;
         _transform.Unanchor(ent);
-        _foldable.SetFolded(ent, foldable, true);
+
+        if (foldable != null)
+            _foldable.SetFolded(ent, foldable, true);
+
         _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, true);
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
 
-        _audio.PlayPredicted(ent.Comp.ScrewSound, ent, args.User);
+        _audio.PlayPredicted(ent.Comp.UndeploySound, ent, user);
+
+        if (TryComp(user, out HandsComponent? hands))
+            _hands.TryPickupAnyHand(user.Value, ent, handsComp: hands);
     }
 
     private bool CanDeployPopup(Entity<WeaponMountComponent> ent, EntityUid user, out EntityCoordinates coordinates, out Angle rotation)
@@ -357,6 +384,13 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = moverCoordinates.Coords;
         rotation = moverCoordinates.worldRot.GetCardinalDir().ToAngle();
+
+        if (ent.Comp.Broken)
+        {
+            var msg = Loc.GetString("emplacement-mount-deploy-broken", ("mount", ent));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         var direction = rotation.GetCardinalDir();
         coordinates = coordinates.Offset(direction.ToVec());
@@ -370,7 +404,11 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {
-            if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.ExclusionAreaSize))
+            if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.MountExclusionAreaSize))
+                return false;
+
+            if (ent.Comp.BarricadeExclusionAreaSize != 0 &&
+                _barricade.HasBarricadeNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.BarricadeExclusionAreaSize))
                 return false;
         }
         return true;
@@ -433,10 +471,13 @@ public sealed class SharedWeaponMountSystem : EntitySystem
             RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
             args.PushMarkup(Loc.GetString("gun-magazine-examine", ("color", AmmoExamineColor), ("count",ammoCountEvent.Count)));
             args.PushMarkup(Loc.GetString("gun-selected-mode-examine", ("color", ModeExamineColor),
-                ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), gunComponent.SelectedMode)}"))), priority: 3);
+                ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), gunComponent.SelectedMode)}"))), priority: 4);
             args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor),
                 ("fireRate", $"{gunComponent.FireRateModified:0.0}")), priority: 3);
         }
+
+        if (ent.Comp.Broken)
+            args.PushMarkup(Loc.GetString("emplacement-mount-broken-examine"), priority: 0);
 
         if (ent.Comp.IsWeaponLocked)
             return;
@@ -464,7 +505,7 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         if (!TryComp(component.MountedEntity, out GunComponent? gun))
             return;
 
-        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null || gun.SelectedMode == gun.AvailableModes)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null)
             return;
 
         if (HasComp<XenoComponent>(args.User))
@@ -472,15 +513,71 @@ public sealed class SharedWeaponMountSystem : EntitySystem
 
         var nextMode = _gun.GetNextMode(gun);
 
-        AlternativeVerb verb = new()
+        // Add the fire mode change verb
+        if (gun.SelectedMode != gun.AvailableModes)
         {
-            Act = () => _gun.SelectFire(component.MountedEntity.Value, gun, nextMode, args.User),
-            Text = Loc.GetString("gun-selector-verb", ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), nextMode)}"))),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
-            Priority = 3,
-        };
+            AlternativeVerb verb = new()
+            {
+                Act = () => _gun.SelectFire(component.MountedEntity.Value, gun, nextMode, args.User),
+                Text = Loc.GetString("gun-selector-verb", ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), nextMode)}"))),
+                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
+                Priority = 3,
+            };
 
-        args.Verbs.Add(verb);
+            args.Verbs.Add(verb);
+        }
+
+        // Add the Undeploy verb
+        if (component.IsWeaponLocked && TryComp(uid, out FoldableComponent? foldable) && !foldable.IsFolded)
+        {
+            AlternativeVerb dismantleVerb = new()
+            {
+                Act = () => TryUndeployMount((uid, component), args.User),
+                Text = Loc.GetString("emplacement-mount-undeploy"),
+                Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
+                Priority = 3,
+            };
+            args.Verbs.Add(dismantleVerb);
+        }
+
+        // Add the ammo eject verb
+        if (TryComp(component.MountedEntity, out ItemSlotsComponent? itemSlots) && HasComp<FoldableComponent>(uid))
+        {
+            foreach (var slot in itemSlots.Slots.Values)
+            {
+                if (slot.EjectOnInteract || slot.DisableEject)
+                    continue;
+
+                if (!_slots.CanEject(uid, args.User, slot))
+                    continue;
+
+                if (!_actionBlockerSystem.CanPickup(args.User, slot.Item!.Value))
+                    continue;
+
+                var verbSubject = slot.Name != string.Empty
+                    ? Loc.GetString(slot.Name)
+                    : Comp<MetaDataComponent>(slot.Item.Value).EntityName;
+
+                AlternativeVerb verb = new()
+                {
+                    IconEntity = GetNetEntity(slot.Item),
+                    Act = () => EjectMagazine(component.MountedEntity.Value, slot, args.User, uid)
+                };
+
+                if (slot.EjectVerbText == null)
+                {
+                    verb.Text = verbSubject;
+                    verb.Category = VerbCategory.Eject;
+                }
+                else
+                {
+                    verb.Text = Loc.GetString(slot.EjectVerbText);
+                }
+
+                verb.Priority = 3;
+                args.Verbs.Add(verb);
+            }
+        }
     }
 
     /// <summary>
@@ -508,6 +605,7 @@ public sealed class SharedWeaponMountSystem : EntitySystem
         }
         return false;
     }
+
     /// <summary>
     ///     Checks if the mount can be assembled at its current location.
     /// </summary>
@@ -517,14 +615,14 @@ public sealed class SharedWeaponMountSystem : EntitySystem
 
     private bool CanAssembleMount(Entity<WeaponMountComponent> ent, EntityUid user)
     {
-        if (ent.Comp.CanPlaceNearOtherMounts)
+        if (ent.Comp.MountExclusionAreaSize == 0)
             return true;
 
         var grid = _transform.GetGrid((ent, Transform(ent)));
         if (!TryComp(grid, out MapGridComponent? mapGrid))
             return true;
 
-        if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, _transform.GetMoverCoordinates(ent), ent.Comp.ExclusionAreaSize))
+        if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, _transform.GetMoverCoordinates(ent), ent.Comp.MountExclusionAreaSize))
             return false;
 
         return true;
@@ -536,10 +634,10 @@ public sealed class SharedWeaponMountSystem : EntitySystem
     /// <param name="ent">The entity being rotated</param>
     /// <param name="user">The entity rotating the mount</param>
     /// <param name="rotationDegrees">The rotation of the mount in degrees</param>
-    private void RotateMount(Entity<WeaponMountComponent> ent, EntityUid? user, int rotationDegrees = 90)
+    public void RotateMount(Entity<WeaponMountComponent> ent, EntityUid? user, int rotationDegrees = 90)
     {
         _transform.SetLocalRotation(ent, _transform.GetWorldRotation(ent) + Angle.FromDegrees(rotationDegrees));
-        _audio.PlayPredicted(ent.Comp.WrenchSound, ent, user);
+        _audio.PlayPredicted(ent.Comp.RotateSound, ent, user);
 
         if (ent.Comp.User == null || !TryComp(ent.Comp.MountedEntity, out ScopeComponent? scope))
             return;
@@ -583,7 +681,7 @@ public sealed class SharedWeaponMountSystem : EntitySystem
     /// <param name="user">The entity that tried to detach</param>
     /// <param name="used">The entity being used to detach</param>
     /// <returns></returns>
-    private bool TryDetachFromMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used)
+    private bool TryDetachFromMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used = null)
     {
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
@@ -600,6 +698,68 @@ public sealed class SharedWeaponMountSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(doAfterArgs));
         return true;
+    }
+
+    private bool TryUndeployMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used = null)
+    {
+        var undeployDoAfterArgs = new DoAfterArgs(EntityManager,
+            user,
+            ent.Comp.DisassembleDelay,
+            new MountUnDeployDoAfterEvent(),
+            ent,
+            ent,
+            used)
+        {
+            NeedHand = true,
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+        };
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(undeployDoAfterArgs));
+        return true;
+    }
+
+    private void EjectMagazine(EntityUid uid, ItemSlot slot, EntityUid user, EntityUid mount)
+    {
+        if (_slots.TryEjectToHands(uid, slot, user, excludeUserAudio: true))
+        {
+            var ammoSpriteKey = WeaponMountComponentVisualLayers.MountedAmmo;
+            if (TryComp(mount, out FoldableComponent? foldableComp) && foldableComp.IsFolded)
+                ammoSpriteKey = WeaponMountComponentVisualLayers.FoldedAmmo;
+
+            _appearance.SetData(mount, ammoSpriteKey, false);
+        }
+    }
+
+    private void OnBreak(Entity<WeaponMountComponent> ent, ref BreakageEventArgs args)
+    {
+        TryComp(ent, out FoldableComponent? foldable);
+        ent.Comp.Broken = true;
+        Dirty(ent);
+
+        // The mount can be melted while broken
+        if (TryComp(ent, out CorrodibleComponent? corrodible))
+            XenoAcid.SetCorrodible(corrodible, true);
+
+        UndeployMount(ent, null, foldable);
+        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Broken, true);
+        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Mounted, false);
+        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, false);
+    }
+
+    private void OnDamageModified(Entity<WeaponMountComponent> ent, ref DamageModifyEvent args)
+    {
+        // Set all damage received to 0 if the mount is folded.
+        if (TryComp(ent, out FoldableComponent? foldable) && foldable.IsFolded)
+            args.Damage = new DamageSpecifier();
+    }
+
+    private void OnCheckTileFree(Entity<WeaponMountComponent> ent, ref RMCCheckTileFreeEvent args)
+    {
+        if (!HasComp<BarricadeComponent>(args.AnchoredEntity))
+            return;
+
+        args.IsTileFree = true;
     }
 }
 
