@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent: BaseFigurine
   id: RMCBaseFigurinePatron
@@ -663,12 +663,12 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronGives-The-Fish
-  name: Gives-The-Fish figurine
+  id: RMCFigurinePatronFishyMcTuna
+  name: Fishy McTuna figurine
   description: "\"Fishy, where is my goddamn fish?\""
   components:
   - type: Sprite
-    state: gives-the-fish
+    state: fishy_mctuna
   - type: PatronFigurine
     id: 9c5deff6-212d-4578-855e-0afb86a0a910
 
