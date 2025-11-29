@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Returned plushies to the people!
-    type: Fix
-  id: 2075
-  time: '2025-07-21T21:40:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7125
 - author: DrSmugleaf
   changes:
   - message: Fixed some folding barricades having very high amounts of health.
@@ -4594,5 +4587,13 @@
   id: 2575
   time: '2025-11-29T10:17:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7896
+- author: CatAndHats
+  changes:
+  - message: Fixed squad prep and requisitions vendors missing the micro laser sight
+      attachment.
+    type: Fix
+  id: 2576
+  time: '2025-11-29T10:58:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8216
 Name: RMC14
 Order: -1
