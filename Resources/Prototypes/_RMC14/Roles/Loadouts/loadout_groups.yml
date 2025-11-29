@@ -528,6 +528,8 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
+  - MatebaRMC
+  - HandcannonRMC
   - GoldMatebaRMC
   - GoldHandcannonRMC
 
