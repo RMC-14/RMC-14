@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed the draw depth of the 'ship security camera' console.
-    type: Fix
-  id: 2041
-  time: '2025-07-20T20:19:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7103
-- author: noctyrnal
-  changes:
-  - message: Resprites the security survivor's jumpsuit and helmet.
-    type: Tweak
-  - message: Replaces the colonist uniform with new sprites.
-    type: Tweak
-  id: 2042
-  time: '2025-07-20T20:26:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7094
 - author: Dutch-VanDerLinde
   changes:
   - message: Added the M5A1 SLAW, which CLF specialists will appear with, aswell as
@@ -4617,5 +4601,20 @@
   id: 2541
   time: '2025-11-19T03:11:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8331
+- author: Vermidia
+  changes:
+  - message: Fixed Valk Tantrum being usuable past it's max range sometimes
+    type: Fix
+  id: 2542
+  time: '2025-11-29T02:51:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8492
+- author: PursuitInAshes
+  changes:
+  - message: UNMC Synthetics now have the correct points for the experimental tools
+      vendor.
+    type: Fix
+  id: 2543
+  time: '2025-11-29T02:52:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8269
 Name: RMC14
 Order: -1
