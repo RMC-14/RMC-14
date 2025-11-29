@@ -1,8 +1,10 @@
+using Content.Client._RMC14.NightVision;
 using Content.Client.Movement.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
@@ -16,6 +18,8 @@ namespace Content.Client.Ghost
         [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
+        //RMC14
+        [Dependency] private readonly IOverlayManager _overlay = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
 
@@ -76,6 +80,7 @@ namespace Content.Client.Ghost
                 _sprite.SetVisible((uid, sprite), GhostVisibility || uid == _playerManager.LocalEntity);
         }
 
+        //RMC14
         private void OnToggleLighting(EntityUid uid, EyeComponent component, ToggleLightingActionEvent args)
         {
             if (args.Handled)
@@ -89,11 +94,18 @@ namespace Content.Client.Ghost
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-normal"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, true);
             }
-            else if (!light?.Enabled ?? false) // skip this option if we have no PointLightComponent
+            else if ((!light?.Enabled ?? false) && !_overlay.HasOverlay<HalfNightVisionBrightnessOverlay>()) // skip this option if we have no PointLightComponent
             {
                 // enable personal light
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-personal-light"), args.Performer);
                 _pointLightSystem.SetEnabled(uid, true, light);
+            }
+            else if ((light?.Enabled ?? false) && !_overlay.HasOverlay<HalfNightVisionBrightnessOverlay>())
+            {
+                //RMC14 half bright mode
+                Popup.PopupEntity(Loc.GetString("rmc-ghost-gui-toggle-lighting-manager-popup-halfbright"), args.Performer);
+                _pointLightSystem.SetEnabled(uid, false, light);
+                _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
             }
             else
             {
@@ -101,9 +113,11 @@ namespace Content.Client.Ghost
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-fullbright"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, false);
                 _pointLightSystem.SetEnabled(uid, false, light);
+                _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
             }
             args.Handled = true;
         }
+        //RMC14
 
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
