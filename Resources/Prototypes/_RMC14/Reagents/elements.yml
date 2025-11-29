@@ -78,30 +78,26 @@
   flavor: bitter
   color: "#808080"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
+      - !type:Toxic
+        potency: 1
+      - !type:HealthChange #TODO PROPERTY_NEUTRALIZING = 1
         damage:
           groups:
-            Burn: 0.5
-            Toxin: 0.375
+            Burn: 0.25
+            Toxin: 0.125
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Burn: 1.0
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage: #TODO liver damage on high
-          groups:
-            Toxin: 2.5
+            Burn: 0.5
+            Toxin: 0.25
 
 - type: reagent
   parent: RMCReagentElement
@@ -143,34 +139,15 @@
   desc: reagent-desc-iron
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#C8A5DC"
+  color: "#a19d94"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:ModifyBloodLevel
-        conditions:
-        - !type:Hunger
-          min: 200
-        amount: 1.5
-      - !type:SatiateHunger
-        conditions:
-        - !type:Hunger
-          min: 200
-        factor: -15
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 0.75
-      - !type:SatiateHunger
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        factor: -75
+      - !type:Hemogenic
+        potency: 3
 
 - type: reagent
   parent: RMCReagentElement
@@ -268,25 +245,9 @@
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cellular: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          types:
-            Cellular: 2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2
-#TODO causes internal bleeding, OD organ damage, critical causes even more
+      - !type:Carcinogenic
+        potency: 2
+#TODO causes internal bleeding, OD organ damage, critical causes even more #PROPERTY_HEMORRAGING = 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -370,24 +331,8 @@
     Poison:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cellular: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          types:
-            Cellular: 2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2
+      - !type:Carcinogenic
+        potency: 2
 
 - type: reagent
   parent: RMCReagentElement
@@ -488,8 +433,8 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:SatiateHunger
-        factor: 5
+      - !type:Nutritious
+        potency: 1
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
@@ -507,29 +452,13 @@
   flavor: acid
   color: "#DB5008"
   unknown: true
+  toxin: true
   metabolisms:
     #TODO hurts on inject equal to amount
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: 0.75
-            Toxin: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Burn: 3
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Burn: 7.5
-            Toxin: 2.5
+      - !type:Toxic
+        potency: 1
+      - !type:Corrosive
+        potency: 3

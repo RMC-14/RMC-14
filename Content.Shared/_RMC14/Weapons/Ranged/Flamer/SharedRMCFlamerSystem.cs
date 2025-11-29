@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -40,6 +41,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     public override void Initialize()
     {
@@ -413,6 +415,14 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 {
                     comp.Tiles.Remove(tile);
                     var fire = Spawn(comp.Spawn, tile.Coordinates);
+
+                    // check for any fires on the same tile other than the one we just spawned, and delete them
+                    if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(_transform.ToCoordinates(fire, tile.Coordinates), out var oldTileFire)
+                        && oldTileFire.Owner.Id != fire.Id)
+                    {
+                        QueueDel(oldTileFire);
+                    }
+
                     if (_prototypes.TryIndexReagent(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity.Int());

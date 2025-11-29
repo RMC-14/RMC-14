@@ -111,8 +111,8 @@
 - type: entity
   parent: CMPlatform
   id: RMCPlatformStrataRock
-  name: ice rock edge
-  description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty.
+  name: rock edge
+  description: A solid chunk of desolate rocks. Looks like you could climb it with some difficulty.
   components:
   - type: Sprite
     state: strata_rock_platform
@@ -123,8 +123,8 @@
 - type: entity
   parent: CMPlatformBroken
   id: RMCPlatformStrataRockBroken
-  name: destroyed ice rock edge
-  description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty. It has been destroyed.
+  name: destroyed rock edge
+  description: A solid chunk of desolate rocks. Looks like you could climb it with some difficulty. It has been destroyed.
   components:
   - type: Sprite
     state: strata_rock_platform_broken
@@ -135,8 +135,8 @@
 - type: entity
   parent: RMCPlatformCornerSmall
   id: RMCPlatformStrataRockCornerSmall
-  name: ice rock corner
-  description: A solid chunk of desolate rocks and ice.
+  name: rock corner
+  description: A solid chunk of desolate rocks.
   components:
   - type: Sprite
     state: strata_rock_platform_deco
