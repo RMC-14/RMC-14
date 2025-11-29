@@ -303,17 +303,17 @@
         boxAmount: 3
         boxSlots: 3
       - id: CMPacketGrenadeHighExplosiveFilled
-        name: M40 HEDP grenade packet
+        name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeIncendiaryFilled
-        name: M40 HIDP grenade packet
+        name: 30mm HIDP grenade packet
         box: RMCGrenadeIncendiary
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeSmokeFilled
-        name: M40 HSDP grenade packet
+        name: 30mm HSDP grenade packet
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
