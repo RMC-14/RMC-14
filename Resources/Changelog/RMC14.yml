@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Updated the Shiva tileset sprites.
-    type: Tweak
-  id: 2069
-  time: '2025-07-21T21:28:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7159
 - author: Tunguso4ka
   changes:
   - message: Fixed LZ1 buttons and LZ2 comm tower on Sorokyne Strata.
@@ -4603,5 +4596,13 @@
   id: 2569
   time: '2025-11-29T06:08:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8469
+- author: Whisper
+  changes:
+  - message: Added the Provost Inspector, an SEA style role for the military police
+      to ensure the intents of Provost are followed.
+    type: Add
+  id: 2570
+  time: '2025-11-29T09:08:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8494
 Name: RMC14
 Order: -1
