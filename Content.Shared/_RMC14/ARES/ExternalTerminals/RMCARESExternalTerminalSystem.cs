@@ -27,7 +27,6 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
 
     private static readonly EntProtoId<RMCARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
-    private static readonly EntProtoId<RMCARESTabCategoryComponent> LogCat = "ARESCategoryLogs";
     private static readonly int LogsShown = 12;
 
     public HashSet<EntProtoId<RMCARESLogTypeComponent>> LogTypes { get; private set; } = [];
@@ -127,8 +126,6 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
         // logs are special...
         if (ent.Comp.ShowsLogs)
         {
-            ent.Comp.ShownCategories.Add(LogCat);
-
             //This compares the stored ID card data and determines what log types you can view.
             foreach (var logType in LogTypes)
             {
