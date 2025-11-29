@@ -772,3 +772,6 @@ cm-chatsan-word-replacement-capped = captured
 
 cm-chatsan-word-phero = phero
 cm-chatsan-word-replacement-phero = pheromone
+
+cm-chatsan-word-clanker = clanker
+cm-chatsan-replacement-clanker = synthetic
