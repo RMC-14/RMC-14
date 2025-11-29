@@ -73,3 +73,7 @@
 - type: lobbyBackground
   id: runningfromravager
   background: /Textures/_RMC14/Lobby/running_from_ravager.png
+
+- type: lobbyBackground
+  id: goodhits
+  background: /Textures/_RMC14/Lobby/good_hits.png
