@@ -616,7 +616,7 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
-  parent: RMCToolWebbingSmall
+  parent: RMCToolWebbingSmallERT
   id: RMCToolWebbingFilled
   suffix: Filled
   components:
