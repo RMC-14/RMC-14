@@ -81,6 +81,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -133,6 +134,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -166,6 +168,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -455,7 +458,6 @@
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
 
-
 - type: entity
   parent: RMCMatebaCustomizationCase
   id: RMCMatebaCustomizationCaseLuxury
@@ -482,6 +484,29 @@
     - id: RMCAttachmentMatebaMarksmanGolden
     - id: RMCAttachmentMatebaSnubNoseGolden
 
+- type: entity
+  parent: RMCMatebaCustomizationCaseLuxury
+  id: RMCMatebaCustomizationCaseLuxuryWeapon
+  suffix: Filled, Mateba
+  description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments, along with the mateba itself.
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMateba
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCMateba
+      - RMCAttachmentMatebaStandardGolden
+      - RMCAttachmentMatebaMarksmanGolden
+      - RMCAttachmentMatebaSnubNoseGolden
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverMatebaGold
+    - id: RMCAttachmentMatebaStandardGolden
+    - id: RMCAttachmentMatebaMarksmanGolden
+    - id: RMCAttachmentMatebaSnubNoseGolden
 
 - type: Tag
   id: RMCSpeedLoaderMateba

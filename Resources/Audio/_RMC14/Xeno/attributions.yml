@@ -417,3 +417,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8d03fdc4382b7af9512f522fd6521e7dcbcc400c/sound/effects/alien_ventpass2.ogg"
+
+- files: ["spike_spray.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8a583493f634e4fa9e983ac78c8f2306f31d6159/sound/effects/spike_spray.ogg"
