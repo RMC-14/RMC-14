@@ -496,5 +496,5 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCGhostCanBoo =
-        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
 }

@@ -13,8 +13,8 @@ namespace Content.Server._RMC14.Mobs
     public sealed class CMGhostSystem : EntitySystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly SharedMarineSystem _marine = default!;
         [Dependency] private readonly IConfigurationManager _configuration = default!;
+        [Dependency] private readonly SharedMarineSystem _marine = default!;
 
         private bool _ghostsCanBoo;
 
