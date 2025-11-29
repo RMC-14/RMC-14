@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseFigurine
   id: RMCBaseFigurinePatron
@@ -1410,7 +1410,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronLilianaShorkGodwin
   name: Liliana 'Shork' Godwin figurine
-  description: "SHORK GANG RISE UP!!"
+  description: "Shork Medical Officer on Deck!"
   components:
   - type: Sprite
     state: liliana_shork_godwin
