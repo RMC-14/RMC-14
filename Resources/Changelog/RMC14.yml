@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Added Peregrine Handcannon spawns to Fiorina and Hybrisa.
-    type: Add
-  id: 2044
-  time: '2025-07-20T20:30:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7098
 - author: noctyrnal, Dutch_VanDerLinde
   changes:
   - message: Added Hybrisa Survivor Variants.
@@ -4615,5 +4608,13 @@
   id: 2544
   time: '2025-11-29T02:54:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8446
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed MOU53 not receiving the correct accuracy bonus from the gyroscopic
+      stabilizer.
+    type: Fix
+  id: 2545
+  time: '2025-11-29T02:57:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8483
 Name: RMC14
 Order: -1
