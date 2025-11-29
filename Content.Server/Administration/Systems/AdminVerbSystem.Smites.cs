@@ -87,6 +87,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SuperBonkSystem _superBonkSystem = default!;
     [Dependency] private readonly SlipperySystem _slipperySystem = default!;
+    //RMC-14
     [Dependency] private readonly SharedXenoParasiteSystem _xenoParasite = default!;
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
     [Dependency] private readonly MobStateSystem _mobstate = default!;
@@ -97,6 +98,7 @@ public sealed partial class AdminVerbSystem
     private static readonly ProtoId<RandomHumanoidSettingsPrototype> RiflemanProto = "RMCUnassignedRifleman";
 
     private static readonly ProtoId<DamageGroupPrototype> CriticalDamage = "Brute";
+    //RMC-14
 
     // All smite verbs have names so invokeverb works.
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
@@ -940,7 +942,7 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", omniaccentName, Loc.GetString("admin-smite-omni-accent-description"))
         };
         args.Verbs.Add(omniaccent);
-
+        //RMC-14
         Verb chestburst = new()
         {
             Text = "Chestburst into larva",
@@ -1087,4 +1089,5 @@ public sealed partial class AdminVerbSystem
             var damaging = _damage.TryChangeDamage(target, damager, true);
         }
     }
+    //RMC-14
 }
