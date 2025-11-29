@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added weather to sorokyne
-    type: Add
-  - message: Blocked ambient light indoors on sorokyne
-    type: Fix
-  id: 2064
-  time: '2025-07-21T09:33:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7135
 - author: Dutch-VanDerLinde
   changes:
   - message: Survivor jobs now roll more randomly, instead of rolling in a specific
@@ -4611,5 +4602,12 @@
   id: 2564
   time: '2025-11-29T05:16:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8124
+- author: Vermidia
+  changes:
+  - message: Fixed Queen gut ability sometimes being able to gib multiple marines
+    type: Fix
+  id: 2565
+  time: '2025-11-29T05:26:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8281
 Name: RMC14
 Order: -1
