@@ -43,7 +43,7 @@
     - FullAuto
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66d.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
@@ -69,8 +69,8 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
         priority: 2
         whitelist:
           tags:
@@ -126,8 +126,8 @@
       gun_magazine:
         name: Magazine
         startingItem: RMCMagazineML66DLarge
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
         priority: 2
         whitelist:
           tags:

@@ -203,9 +203,6 @@
     isWeaponLocked: true
     canRotateWithoutTool: true
     mountOnDeploy: true
-    rotateSound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_rotate.ogg"
-    deploySound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_setup.ogg"
-    undeploySound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_setup.ogg"
     barricadeExclusionAreaSize: 2
   - type: Tag
     tags:

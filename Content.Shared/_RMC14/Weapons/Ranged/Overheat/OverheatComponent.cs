@@ -71,5 +71,5 @@ public sealed partial class OverheatComponent : Component
     ///     The sound that plays when the weapon overheats.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? OverheatSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/hmg_cooling.ogg");
+    public SoundSpecifier? OverheatSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/acid_sizzle1.ogg");
 }
