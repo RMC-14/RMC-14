@@ -559,7 +559,7 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
-  id: RMCToolWebbingSmallERT
+  id: RMCToolWebbing
   name: tool webbing
   description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage.
   components:
@@ -616,7 +616,7 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
-  parent: RMCToolWebbingSmallERT
+  parent: RMCToolWebbing
   id: RMCToolWebbingFilled
   suffix: Filled
   components:
