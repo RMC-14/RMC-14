@@ -1,111 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xeno tailstab not having a range of 2.5 (2 > 2.5)
-    type: Fix
-  id: 2063
-  time: '2025-07-21T01:46:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7130
-- author: CyberTropic
-  changes:
-  - message: Added weather to sorokyne
-    type: Add
-  - message: Blocked ambient light indoors on sorokyne
-    type: Fix
-  id: 2064
-  time: '2025-07-21T09:33:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7135
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Survivor jobs now roll more randomly, instead of rolling in a specific
-      order every round.
-    type: Tweak
-  id: 2065
-  time: '2025-07-21T09:35:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7138
-- author: J C Denton
-  changes:
-  - message: Fixed all Marine roles having Dropship Access. Squad Leaders can still
-      access Dropship Controls.
-    type: Fix
-  - message: Lifeboat Consoles now require Dropship Access.
-    type: Tweak
-  - message: Marine Police now officially has Dropship Access.
-    type: Tweak
-  id: 2066
-  time: '2025-07-21T21:09:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7151
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed scientist survivor variants not having firearms skill.
-    type: Fix
-  id: 2067
-  time: '2025-07-21T21:15:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7162
-- author: J C Denton
-  changes:
-  - message: Lifeboat consoles now accept Command access too.
-    type: Tweak
-  id: 2068
-  time: '2025-07-21T21:23:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7171
-- author: noctyrnal
-  changes:
-  - message: Updated the Shiva tileset sprites.
-    type: Tweak
-  id: 2069
-  time: '2025-07-21T21:28:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7159
-- author: Tunguso4ka
-  changes:
-  - message: Fixed LZ1 buttons and LZ2 comm tower on Sorokyne Strata.
-    type: Fix
-  id: 2070
-  time: '2025-07-21T21:29:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7147
-- author: noctyrnal
-  changes:
-  - message: Fixed the UNMC cup's sprite.
-    type: Fix
-  id: 2071
-  time: '2025-07-21T21:34:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7170
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new playtime medals, in the form of engraved metal name badges.
-    type: Add
-  - message: Replaced the CL's ribbon system with the new badges.
-    type: Tweak
-  id: 2072
-  time: '2025-07-21T21:37:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7165
-- author: noctyrnal
-  changes:
-  - message: Added the "UNMC lightweight expedition satchel", a visual alternative
-      to the current IO backpacks.
-    type: Add
-  - message: Added Leg Pouches, these come in black and camo, and serve as visual
-      alternatives to the 5 slot webbings.
-    type: Add
-  - message: SOs now have Black Insulated Gloves instead of Black Gloves in their
-      vendors.
-    type: Tweak
-  id: 2073
-  time: '2025-07-21T21:37:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7168
-- author: Dygon
-  changes:
-  - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
-      again.
-    type: Fix
-  - message: You're now unable to drop or fall onto the Almayer.
-    type: Fix
-  - message: Parasites already under a resin door won't be blocked by it during their
-      leap.
-    type: Fix
-  id: 2074
-  time: '2025-07-21T21:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7167
 - author: x5tink
   changes:
   - message: Returned plushies to the people!
@@ -4610,5 +4503,96 @@
   id: 2563
   time: '2025-11-29T05:03:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8441
+- author: CatAndHats
+  changes:
+  - message: Fixed the Chief Engineer and Maintenance Technician vendors to now have
+      points and gave them some items they were missing.
+    type: Fix
+  id: 2564
+  time: '2025-11-29T05:16:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8124
+- author: Vermidia
+  changes:
+  - message: Fixed Queen gut ability sometimes being able to gib multiple marines
+    type: Fix
+  id: 2565
+  time: '2025-11-29T05:26:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8281
+- author: CatAndHats
+  changes:
+  - message: Fixed maintenance semiotic name
+    type: Fix
+  id: 2566
+  time: '2025-11-29T05:47:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8464
+- author: CatAndHats
+  changes:
+  - message: Fixed being able to put multiple nailguns in the customised nailgun holster
+    type: Fix
+  id: 2567
+  time: '2025-11-29T05:52:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8448
+- author: Vinny-Shick
+  changes:
+  - message: Avali base tail wag animation.
+    type: Add
+  id: 2568
+  time: '2025-11-29T05:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8430
+- author: CyberTropic
+  changes:
+  - message: Added half-bright mode for ghosts.
+    type: Add
+  id: 2569
+  time: '2025-11-29T06:08:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8469
+- author: Whisper
+  changes:
+  - message: Added the Provost Inspector, an SEA style role for the military police
+      to ensure the intents of Provost are followed.
+    type: Add
+  id: 2570
+  time: '2025-11-29T09:08:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8494
+- author: Arykh
+  changes:
+  - message: Water now costs 0 energy in the Chem Dispenser!
+    type: Tweak
+  - message: Sinks now give infinite water!
+    type: Tweak
+  id: 2571
+  time: '2025-11-29T09:12:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8447
+- author: CatAndHats
+  changes:
+  - message: Added the honor guard pamphlet which is found in the honor guard kit,
+      which grants them their hud icon and job title.
+    type: Add
+  id: 2572
+  time: '2025-11-29T09:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8195
+- author: noctyrnal
+  changes:
+  - message: COs with 450+ Hours can now get golden versions of their sidearms in
+      their loadouts.
+    type: Add
+  id: 2573
+  time: '2025-11-29T09:46:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8162
+- author: BramvanZijp
+  changes:
+  - message: The Commanding Officer's M59a Prototype Rifle now comes in a case alongside
+      3 MK1 AP Magazines instead of one regular MK1 Magazine.
+    type: Tweak
+  id: 2574
+  time: '2025-11-29T10:12:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8158
+- author: ayou331
+  changes:
+  - message: Added xeno cheveron for playtime over 350h
+    type: Add
+  id: 2575
+  time: '2025-11-29T10:17:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7896
 Name: RMC14
 Order: -1
