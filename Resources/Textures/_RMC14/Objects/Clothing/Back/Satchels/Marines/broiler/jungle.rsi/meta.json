@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/obj/items/clothing/backpack/backpacks_by_map/jungle.dmi, https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/mob/humans/onmob/clothing/back/backpacks_by_map/jungle.dmi, inhand sprites are based on the backpack sprite and edited by Ian321",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/obj/items/clothing/backpack/backpacks_by_map/jungle.dmi, https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/mob/humans/onmob/clothing/back/backpacks_by_map/jungle.dmi, inhand sprites are based on the backpack sprite and edited by Ian321, icon color corrected by Ian321",
   "size": {
     "x": 32,
     "y": 32
