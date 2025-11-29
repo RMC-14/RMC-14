@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Tools;
+
 public sealed class RMCDeviceBreakerSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
@@ -14,6 +15,7 @@ public sealed class RMCDeviceBreakerSystem : EntitySystem
     [Dependency] private readonly SharedDestructibleSystem _destroy = default!;
     [Dependency] private readonly SensorTowerSystem _sensor = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCDeviceBreakerComponent, RMCDeviceBreakerDoAfterEvent>(OnDeviceBreakerDoafter);
