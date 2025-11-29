@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
-      again.
-    type: Fix
-  - message: You're now unable to drop or fall onto the Almayer.
-    type: Fix
-  - message: Parasites already under a resin door won't be blocked by it during their
-      leap.
-    type: Fix
-  id: 2074
-  time: '2025-07-21T21:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7167
 - author: x5tink
   changes:
   - message: Returned plushies to the people!
@@ -4600,5 +4587,12 @@
   id: 2574
   time: '2025-11-29T10:12:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8158
+- author: ayou331
+  changes:
+  - message: Added xeno cheveron for playtime over 350h
+    type: Add
+  id: 2575
+  time: '2025-11-29T10:17:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7896
 Name: RMC14
 Order: -1
