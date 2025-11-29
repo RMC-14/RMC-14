@@ -116,4 +116,4 @@
   id: RMCJobIconProvostInspector
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pvi2
+    state: hudsquad_pvi
