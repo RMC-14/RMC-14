@@ -40,6 +40,7 @@
           CMMilitaryWarden: [ -1, -1 ]
           CMCorrespondent: [ -1, -1 ]
           CMLiaison: [ -1, -1 ]
+          RMCWeYaCorporateBodyguard: [ -1, -1 ]
           CMMessTech: [ -1, -1 ]
           CMSeniorEnlistedAdvisor: [ -1, -1 ]
           CMCargoTech: [ -1, -1 ]

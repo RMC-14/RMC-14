@@ -192,6 +192,15 @@
     - RMCPatchWeYaBlack
 
 - type: entity
+  parent: CMJumpsuitLiaisonBlack
+  id: RMCJumpsuitLiaisonBlackCorporateBodyguard
+  suffix: Corporate Bodyguard
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+
+- type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonOrange
   name: orange outfit
