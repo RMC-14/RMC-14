@@ -3,7 +3,7 @@
   id: CMSurvivorSolarisCMBMarshal
   name: rmc-job-name-survivor-bureau-marshal
   description: cm-job-description-commanding-officer
-  playTimeTracker: RMCJobSurvivorSolarisCMBMarshal
+  playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankCMBMarshal: []
   startingGear: RMCGearSurvivorSolarisCMBMarshal
