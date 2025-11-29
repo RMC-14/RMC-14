@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: BaseWeaponMount
+  id: RMCBaseWeaponMount
   name: weapon mount
   description: A mount to place a weapon on
   components:
@@ -53,7 +53,7 @@
     noRot: false
 
 - type: entity
-  parent: BaseWeaponMount
+  parent: RMCBaseWeaponMount
   id: RMCML66DNestSandbag
   name: scoped ML66D heavy machine gun nest
   description: A scoped ML66D heavy machine gun mounted upon a small reinforced post with sandbags to provide a small machine gun nest for all your defensive needs.
@@ -88,7 +88,7 @@
     state: towergun_folding
 
 - type: entity
-  parent: [BaseWeaponMount, BaseDeployFoldable, BaseItem]
+  parent: [RMCBaseWeaponMount, BaseDeployFoldable, BaseItem]
   id: RMCML66DMount
   name: ML66D mount
   description: A foldable mount for the ML66D, provides stability to the ML66D.
@@ -149,7 +149,7 @@
     - ML66DMount
 
 - type: entity
-  parent: [BaseWeaponMount, BaseItem]
+  parent: [RMCBaseWeaponMount, BaseItem]
   id: RMCM2CMount
   name: M2C heavy machine gun
   description: The disassembled M2C HMG, with its telescopic tripods folded up and unable to fire.
