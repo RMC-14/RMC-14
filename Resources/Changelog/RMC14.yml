@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed overwatch console UI crate status and orbital status not displaying
-      properly.
-    type: Fix
-  id: 2054
-  time: '2025-07-20T23:08:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7118
 - author: DrSmugleaf
   changes:
   - message: Fixed the Almayer starting unpowered (hopefully).
@@ -4614,5 +4606,12 @@
   id: 2554
   time: '2025-11-29T03:30:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8467
+- author: 0awful
+  changes:
+  - message: Rifleman's armor vest option now renders like the other armor options.
+    type: Tweak
+  id: 2555
+  time: '2025-11-29T03:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8419
 Name: RMC14
 Order: -1
