@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Fixed LZ1 buttons and LZ2 comm tower on Sorokyne Strata.
-    type: Fix
-  id: 2070
-  time: '2025-07-21T21:29:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7147
 - author: noctyrnal
   changes:
   - message: Fixed the UNMC cup's sprite.
@@ -4604,5 +4597,14 @@
   id: 2570
   time: '2025-11-29T09:08:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8494
+- author: Arykh
+  changes:
+  - message: Water now costs 0 energy in the Chem Dispenser!
+    type: Tweak
+  - message: Sinks now give infinite water!
+    type: Tweak
+  id: 2571
+  time: '2025-11-29T09:12:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8447
 Name: RMC14
 Order: -1
