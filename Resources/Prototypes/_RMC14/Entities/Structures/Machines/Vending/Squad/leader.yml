@@ -112,17 +112,19 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
-    #- id: CMM20MineBoxx4mines
-    #  points: 20
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+        points: 13
+    # - id: CMM20MineBoxx4mines
+    #   points: 20
+    # - id: CMM40MFHSMetalFoamGrenade
+    #   points: 5
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Medical Supplies
       entries:
       - id: CMBurnKit10
@@ -142,7 +144,7 @@
       - id: CMKelotaneAutoInjector
         points: 1
 #      - id: CMInjectorOxycodone
-#        points: 2
+#        points: 1
 #      - id: CMInjectorTramadol
 #        points: 1
       - id: CMTricordrazineAutoInjector
@@ -210,6 +212,8 @@
       - id: CMEncryptionKeyJTAC
         points: 3
       - id: CMEncryptionKeyRequisition
+        points: 3
+      - id: CMEncryptionKeyMedical
         points: 3
 
 - type: entity
@@ -315,17 +319,18 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
   name: essential SL kit
-  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
+  description: Contains a Radio Telephone pack, a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
-    - CMFireExtinguisher
+    - CMFireExtinguisherPortable
 
 - type: entity
   parent: RMCKitBase
@@ -383,7 +388,7 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-#    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+    - id: RMCWeldingGoggles
 
 - type: entity
   parent: RMCKitBase

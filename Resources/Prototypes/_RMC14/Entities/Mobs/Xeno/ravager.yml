@@ -285,8 +285,8 @@
       650: Critical
       750: Dead
   - type: CMArmor
-    xenoArmor: 30
-    explosionArmor: 80
+    xenoArmor: 25
+    explosionArmor: 100
   - type: XenoStrain
     name: rmc-xeno-hedgehog-name
     description: rmc-xeno-hedgehog-description

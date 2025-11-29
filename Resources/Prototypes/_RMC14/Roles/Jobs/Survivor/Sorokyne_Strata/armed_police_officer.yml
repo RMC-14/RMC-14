@@ -54,6 +54,7 @@
     outerClothing: RMCCoatPaP
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
+    pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazine
     id: RMCIDCardPaP
     back: RMCSatchelBlack
