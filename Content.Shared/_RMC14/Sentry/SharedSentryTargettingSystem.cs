@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -137,8 +138,8 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     private HashSet<string> GetAllNpcFactions()
     {
         var factions = new HashSet<string>();
-
         var query = AllEntityQuery<NpcFactionMemberComponent>();
+
         while (query.MoveNext(out var comp))
         {
             foreach (var faction in comp.Factions)
@@ -156,6 +157,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         _iff.ClearUserFactions((ent, userIFF));
 
         var factionToIFF = GetFactionToIFFMapping();
+        var addedCount = 0;
 
         foreach (var faction in ent.Comp.FriendlyFactions)
         {
@@ -166,6 +168,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
                 continue;
 
             _iff.AddUserFaction((ent, userIFF), iffFaction);
+            addedCount++;
         }
     }
 
@@ -184,5 +187,30 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
             { "Bureau", "FactionBureau" },
             { "TSE", "FactionTSE" }
         };
+    }
+
+    public void ApplyDeployerFactions(EntityUid sentry, EntityUid deployer)
+    {
+        if (!TryComp<NpcFactionMemberComponent>(deployer, out var deployerFaction))
+            return;
+
+        if (deployerFaction.Factions.Count == 0)
+            return;
+
+        var targeting = EnsureComp<SentryTargetingComponent>(sentry);
+
+        var newFactions = new HashSet<string>(targeting.FriendlyFactions);
+
+        foreach (var faction in deployerFaction.Factions)
+        {
+            if (faction == SentryHostileToAllFaction)
+                continue;
+
+            newFactions.Add(faction);
+        }
+
+        targeting.OriginalFaction = deployerFaction.Factions.First();
+
+        SetFriendlyFactions((sentry, targeting), newFactions);
     }
 }

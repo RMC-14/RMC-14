@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -52,6 +53,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -69,7 +71,6 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
-
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -132,6 +133,9 @@ public sealed class SentrySystem : EntitySystem
         _transform.AnchorEntity(sentry, xform);
 
         _rmcInteraction.SetMaxRotation(sentry.Owner, angle, sentry.Comp.MaxDeviation);
+
+        _targeting.ApplyDeployerFactions(sentry.Owner, args.User);
+
         UpdateState(sentry);
     }
 
@@ -148,7 +152,7 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
                 {
                     if (sentry != defense && defense.Comp.Mode == SentryMode.On)
                     {
@@ -183,13 +187,12 @@ public sealed class SentrySystem : EntitySystem
 
     private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
     {
-        if(!ent.Comp.HomingShots)
+        if (!ent.Comp.HomingShots)
             return;
 
-        //Make projectiles shot from a sentry gun homing.
         foreach (var projectile in args.FiredProjectiles)
         {
-            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
+            if (!TryComp(projectile, out TargetedProjectileComponent? targeted))
                 return;
 
             var homing = EnsureComp<HomingProjectileComponent>(projectile);
@@ -229,7 +232,7 @@ public sealed class SentrySystem : EntitySystem
             else
             {
                 string ret;
-                if(sentry.Comp.Mode == SentryMode.On)
+                if (sentry.Comp.Mode == SentryMode.On)
                     ret = Loc.GetString("rmc-sentry-active-norot", ("sentry", sentry));
                 else
                     ret = Loc.GetString("rmc-sentry-item-norot", ("sentry", sentry));
@@ -317,7 +320,7 @@ public sealed class SentrySystem : EntitySystem
         {
             if (ent.Comp.MaxDeviation < Angle.FromDegrees(180))
             {
-                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
+                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int) ent.Comp.MaxDeviation.Degrees));
                 args.PushMarkup(rot);
             }
 
