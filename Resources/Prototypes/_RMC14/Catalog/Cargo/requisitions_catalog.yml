@@ -79,7 +79,7 @@
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
       - cost: 2500
-        crate: RMCCrateMagazineM56DDrum
+        crate: RMCCrateMagazineML66DDrum
       - cost: 2500
         crate: RMCCrateMagazineM2C
     - name: Attachments
@@ -324,7 +324,7 @@
       - cost: 4000
         crate: RMCCrateM85A1
       - cost: 6000
-        crate: RMCCrateM56D
+        crate: RMCCrateML66D
       - cost: 6000
         crate: RMCCrateM2C
     - name: Weapons Specialist Ammo

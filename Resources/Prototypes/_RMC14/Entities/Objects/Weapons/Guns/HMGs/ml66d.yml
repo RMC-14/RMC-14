@@ -1,8 +1,8 @@
 - type: entity
   parent: [ CMBaseWeaponGun, BaseItem]
   id: RMCSmartGunMounted
-  name: M56D heavy machine gun
-  description: The top half of a M56D heavy machine gun post. However it ain't much use without the tripod.
+  name: ML66D heavy machine gun
+  description: The top half of a ML66D heavy machine gun post. However it ain't much use without the tripod.
   components:
   - type: Item
     size: Huge
@@ -24,9 +24,9 @@
   - type: GunIFF
     enabled: true
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/m56d.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/ml66d.rsi
     layers:
-    - state: m56d_gun_e
+    - state: ml66d_gun_e
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
@@ -43,7 +43,7 @@
     - FullAuto
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m56d.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66d.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
@@ -74,8 +74,8 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineM56D
-          - RMCMagazineM56DLarge
+          - RMCMagazineML66D
+          - RMCMagazineML66DLarge
   - type: GunDamageModifier
     multiplier: 1
   - type: GunRequiresSkills
@@ -111,7 +111,7 @@
 - type: entity
   parent: RMCSmartGunMounted
   id: RMCSmartGunMountedStatic
-  name: M56D heavy machine gun
+  name: ML66D heavy machine gun
   suffix: Static version
   components:
   - type: MagazineAmmoProvider
@@ -125,13 +125,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineM56DLarge
+        startingItem: RMCMagazineML66DLarge
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineM56DLarge
+          - RMCMagazineML66DLarge
   - type: Scope
     zoomLevels:
     - zoom: 1
@@ -143,13 +143,13 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineM56D
-  name: M56D drum magazine (10x28mm)
-  description: A box of 700, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system.
+  id: RMCMagazineML66D
+  name: ML66D drum magazine (10x28mm)
+  description: A box of 700, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
   components:
   - type: Tag
     tags:
-    - RMCMagazineM56D
+    - RMCMagazineML66D
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -158,7 +158,7 @@
     capacity: 700
     deleteWhenEmpty: true
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/m56d.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/ml66d.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -171,14 +171,14 @@
     size: Large
 
 - type: entity
-  parent: RMCMagazineM56D
-  id: RMCMagazineM56DLarge
-  name: large M56D drum magazine (10x28mm)
-  description: A box of 1500, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system.
+  parent: RMCMagazineML66D
+  id: RMCMagazineML66DLarge
+  name: large ML66D drum magazine (10x28mm)
+  description: A box of 1500, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
   components:
   - type: Tag
     tags:
-    - RMCMagazineM56DLarge
+    - RMCMagazineML66DLarge
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -241,10 +241,10 @@
   id: RMCSmartGunMounted
 
 - type: Tag
-  id: RMCMagazineM56D
+  id: RMCMagazineML66D
 
 - type: Tag
-  id: RMCMagazineM56DLarge
+  id: RMCMagazineML66DLarge
 
 - type: Tag
   id: RMCCartridgeHMG10x28mm

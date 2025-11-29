@@ -40,7 +40,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m56d_auto.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66d_auto.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
@@ -65,7 +65,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m56dauto_load.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/ml66d_auto_load.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hmg_eject_mag.ogg
         priority: 2
         whitelist:

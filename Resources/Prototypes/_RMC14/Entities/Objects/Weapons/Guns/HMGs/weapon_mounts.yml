@@ -54,12 +54,12 @@
 
 - type: entity
   parent: BaseWeaponMount
-  id: RMCM56DNestSandbag
-  name: scoped M56D heavy machine gun nest
-  description: A scoped M56D heavy machine gun mounted upon a small reinforced post with sandbags to provide a small machine gun nest for all your defensive needs.
+  id: RMCML66DNestSandbag
+  name: scoped ML66D heavy machine gun nest
+  description: A scoped ML66D heavy machine gun mounted upon a small reinforced post with sandbags to provide a small machine gun nest for all your defensive needs.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/mount.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
     state: towergun
   - type: Transform
     anchored: true
@@ -79,42 +79,42 @@
       RMCSkillEngineer: 0
 
 - type: entity
-  parent: RMCM56DNestSandbag
-  id: RMCM56DNestMetal
-  name: scoped M56D heavy machine gun
-  description: A scoped M56D heavy machine gun mounted behind a metal shield.
+  parent: RMCML66DNestSandbag
+  id: RMCML66DNestMetal
+  name: scoped ML66D heavy machine gun
+  description: A scoped ML66D heavy machine gun mounted behind a metal shield.
   components:
   - type: Sprite
     state: towergun_folding
 
 - type: entity
   parent: [BaseWeaponMount, BaseDeployFoldable, BaseItem]
-  id: RMCM56DMount
-  name: M56D mount
-  description: A foldable mount for the M56D, provides stability to the M56D.
+  id: RMCML66DMount
+  name: ML66D mount
+  description: A foldable mount for the ML66D, provides stability to the ML66D.
   suffix: Folded
   components:
   - type: Item
     size: Small
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/HMGs/M56D/mount.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
     state: folded_mount
     layers:
-    - state: m56d_mount
+    - state: ml66d_mount
       map: [ "unfoldedLayer" ]
     - state: folded_mount
       map: [ "foldedLayer" ]
       visible: false
-    - state: m56d
+    - state: ml66d
       map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
       visible: false
-    - state: m56d_magazine
+    - state: ml66d_magazine
       map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
       visible: false
-    - state: m56d_gun_mount
+    - state: ml66d_gun_mount
       map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
       visible: false
-    - state: m56d_gun_mount_magazine
+    - state: ml66d_gun_mount_magazine
       map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
       visible: false
   - type: Foldable
@@ -146,7 +146,7 @@
   - type: CollisionWake
   - type: Tag
     tags:
-    - M56DMount
+    - ML66DMount
 
 - type: entity
   parent: [BaseWeaponMount, BaseItem]
@@ -203,9 +203,9 @@
     isWeaponLocked: true
     canRotateWithoutTool: true
     mountOnDeploy: true
-    rotateSound: "/Audio/_RMC14/Weapons/Guns/m56dauto_rotate.ogg"
-    deploySound: "/Audio/_RMC14/Weapons/Guns/m56dauto_setup.ogg"
-    undeploySound: "/Audio/_RMC14/Weapons/Guns/m56dauto_setup.ogg"
+    rotateSound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_rotate.ogg"
+    deploySound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_setup.ogg"
+    undeploySound: "/Audio/_RMC14/Weapons/Guns/ml66dauto_setup.ogg"
     barricadeExclusionAreaSize: 2
   - type: Tag
     tags:
@@ -214,7 +214,7 @@
     folded: true
 
 - type: Tag
-  id: M56DMount
+  id: ML66DMount
 
 - type: Tag
   id: M2CMount

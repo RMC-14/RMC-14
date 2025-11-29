@@ -8,28 +8,28 @@
   },
   "states": [
     {
-      "name": "m56d",
+      "name": "ml66d",
       "directions": 4
     },
     {
-      "name": "m56d_magazine",
+      "name": "ml66d_magazine",
       "directions": 4
     },
     {
-      "name": "m56d_mount",
+      "name": "ml66d_mount",
       "directions": 4
     },
     {
-      "name": "m56d_gun_mount"
+      "name": "ml66d_gun_mount"
     },
     {
-      "name": "m56d_gun_mount_magazine"
+      "name": "ml66d_gun_mount_magazine"
     },
     {
-      "name": "m56d_gun_mount_e_broken"
+      "name": "ml66d_gun_mount_e_broken"
     },
     {
-      "name": "m56d_gun_mount_broken"
+      "name": "ml66d_gun_mount_broken"
     },
     {
       "name": "folded_mount"

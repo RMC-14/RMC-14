@@ -106,12 +106,12 @@
 
 - type: entity
   parent: RMCCrateWeapons
-  id: RMCCrateM56D
-  name: M56D Machine Gun Crate (x1)
+  id: RMCCrateML66D
+  name: ML66D Machine Gun Crate (x1)
   components:
   - type: StorageFill
     contents:
-    - id: RMCM56DCase
+    - id: RMCML66DCase
       amount: 1
 
 - type: entity

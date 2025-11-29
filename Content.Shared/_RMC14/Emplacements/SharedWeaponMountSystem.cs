@@ -32,7 +32,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -803,6 +802,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
 
         _damage.TryChangeDamage(mount, damage);
+        if (mountComponent.MountedEntity != null)
+            _popup.PopupClient(Loc.GetString("emplacement-mounted-weapon-overheated",
+                ("weapon", mountComponent.MountedEntity.Value)),
+                mount, mountComponent.User,
+                PopupType.SmallCaution);
     }
 
     public void UpdateAppearance(EntityUid mount, WeaponMountComponent? mountComponent = null)

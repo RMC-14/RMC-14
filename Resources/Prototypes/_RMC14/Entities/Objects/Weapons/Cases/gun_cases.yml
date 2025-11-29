@@ -654,9 +654,9 @@
 # Mountable weapons
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCM56DCase
-  name: M56D heavy machine gun case
-  description: A gun case containing the M56D heavy machine gun. Comes with 2 magazines
+  id: RMCML66DCase
+  name: ML66D heavy machine gun case
+  description: A gun case containing the ML66D heavy machine gun. Comes with 2 magazines
   components:
   - type: Storage
     maxItemSize: Ginormous
@@ -665,8 +665,8 @@
     whitelist:
       tags:
       - RMCSmartGunMounted
-      - RMCMagazineM56D
-      - M56DMount
+      - RMCMagazineML66D
+      - ML66DMount
       - Wrench
       - Screwdriver
       - RMCSkillPamphlet
@@ -674,9 +674,9 @@
   - type: StorageFill
     contents:
     - id: RMCSmartGunMounted
-    - id: RMCMagazineM56D
-    - id: RMCMagazineM56D
-    - id: RMCM56DMount
+    - id: RMCMagazineML66D
+    - id: RMCMagazineML66D
+    - id: RMCML66DMount
     - id: CMWrench
     - id: CMScrewdriver
     - id: RMCPamphletHeavyMachineGunner

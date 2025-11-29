@@ -68,7 +68,7 @@
         amount: 3
       - id: RMCM54CMK1Case
         amount: 3
-      - id: RMCM56DCase
+      - id: RMCML66DCase
         amount: 2
       - id: RMCM2CCase
         amount: 2
@@ -444,7 +444,7 @@
         amount: 5
       - id: CMMagazineRifleM54CMK1AP
         amount: 2
-      - id: RMCMagazineM56D
+      - id: RMCMagazineML66D
         amount: 2
       - id: RMCMagazineM2C
         amount: 2
@@ -540,7 +540,7 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56B x 8)
 #        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56D x 8)
+#      - name: Magazine Box (ML66D x 8)
 #        box: CMMagazineSMGM63
       - id: RMCBoxMagazineRevolverM44
         name: Magazine Box (M44 x 16)
