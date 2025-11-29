@@ -52,7 +52,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: pve_inspector
+        state: pve_chief_inspector
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
