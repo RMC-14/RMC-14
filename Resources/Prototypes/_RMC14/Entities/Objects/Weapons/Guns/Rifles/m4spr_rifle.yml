@@ -62,6 +62,7 @@
         whitelist:
           tags:
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -313,6 +314,7 @@
   parent: CMMagazineRifleM4SPR
   id: CMMagazineRifleM4SPRExt
   name: "M4SPR extended magazine (10x24mm)"
+  description: "An extended magazine of standard 10x24mm rounds for use in the M4SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     capacity: 35

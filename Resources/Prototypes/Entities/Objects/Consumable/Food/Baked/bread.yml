@@ -132,7 +132,7 @@
     - cotton
     - bread
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true -Disabled for RMC
   - type: Sprite
     layers:
     - state: cotton
@@ -163,7 +163,7 @@
     - cotton
     - bread
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true -Disabled for RMC
   - type: Sprite
     layers:
     - state: cotton-slice
@@ -713,7 +713,7 @@
   - type: SliceableFood
     slice: FoodBreadBaguetteCottonSlice
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true
   - type: Tag
     tags:
     - Bread
@@ -773,7 +773,7 @@
   - type: Sprite
     state: crostini-cotton
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true -Disabled for RMC
   - type: Tag
     tags:
     - Bread

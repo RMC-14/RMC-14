@@ -120,6 +120,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -286,6 +287,8 @@
         points: 12
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -309,6 +312,8 @@
     - name: Barrel Attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentExtendedCompensator
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
@@ -372,6 +377,7 @@
       - id: CMJumpsuitCO
       - id: CMJumpsuitOperations
       - id: CMHeadCapCO
+      - id: CMHeadCapOfficer
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
@@ -458,6 +464,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
@@ -622,6 +629,8 @@
       entries:
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -655,9 +664,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         points: 15
+      - id: RMCAttachmentExtendedCompensator
+        points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
 
 
@@ -788,6 +803,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
+      - id: RMCArmorVestExecutiveOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1033,7 +1049,7 @@
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
       - id: RMCHeadCapFlippable
-      # TODO Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       jobs:
       - CMChiefEngineer
@@ -1089,7 +1105,6 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
@@ -1123,8 +1138,8 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingBrown
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
@@ -1144,6 +1159,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: CMBootsBlackFilled
       - id: RMCLaserDesignator
@@ -1178,9 +1194,9 @@
       - CMChiefEngineer
       entries:
       - id: CMHeadsetEngineer
-        amount: 15
+        points: 15
       - id: RMCSynthResetKey
-        amount: 15
+        points: 15
     # ////////////////////////////////////
     # Logistics Officer
     # ////////////////////////////////////
@@ -1224,6 +1240,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
     - name: Patches
@@ -1369,6 +1386,7 @@
       - CMCMO
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1519,6 +1537,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled

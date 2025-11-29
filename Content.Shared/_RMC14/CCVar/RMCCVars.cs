@@ -43,7 +43,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_step", 1f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMin =
-        CVarDef.Create("rmc.auto_balance_min", 3.5f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
         CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
@@ -494,4 +494,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGhostCanBoo =
+        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
 }

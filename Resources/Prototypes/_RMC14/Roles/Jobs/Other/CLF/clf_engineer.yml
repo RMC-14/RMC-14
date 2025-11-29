@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFEngineer
   icon: RMCJobIconCLFEngineer
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Engineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -82,7 +83,7 @@
     - RMCExplosiveBreachingCharge
     - RMCExplosivePlastic
     - RMCGrenadeMolotov
-    - CMMRE
+    - RMCMRECLF
     - RMCFlashlight
     - CMShellShotgunBuckshot
     - CMShellShotgunBuckshot

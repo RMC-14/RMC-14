@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFMedic
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -78,7 +79,7 @@
     - CMAdvFirstAidKitFilled
     - CMAdvFirstAidKitFilled
     - RMCPacketGrenadeSmokeFilled
-    - CMMRE
+    - RMCMRECLF
     - CMSynthGraft
     - CMCrowbar
     pocket2:

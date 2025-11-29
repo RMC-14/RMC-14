@@ -534,6 +534,30 @@
     supplyDrop: true
 
 - type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionNorth
+  name: Kutjevo - Northern Abandoned Construction Interior
+  components:
+  - type: Sprite
+    state: construction
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionEast
+  name: Kutjevo - Eastern Abandoned Construction Interior
+  components:
+  - type: Sprite
+    state: construction
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionSignalTower
+  name: Kutjevo - Abandoned Signal Tower
+  components:
+  - type: Sprite
+    state: construction2
+
+- type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorForemansOffice
   name: Kutjevo - Foreman's Office
@@ -751,3 +775,28 @@
     OB: true
     supplyDrop: false
     minimapColor: '#5A4501E7'
+
+# CLF insert areas
+- type: entity
+  parent: RMCAreaKutjevoInteriorColony
+  id: RMCAreaKutjevoInteriorColonyLandingZoneCheckpoint
+  name: Kutjevo - Landing Zone Checkpoint
+  components:
+  - type: Sprite
+    state: colony_int
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorColony
+  id: RMCAreaKutjevoInteriorColonyCLFShuttle
+  name: Kutjevo - Unregistered Freighter
+  components:
+  - type: Sprite
+    state: colony_int
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorCLFLZ
+  name: Kutjevo - Tertiary Landing Zone
+  components:
+  - type: Sprite
+    state: ext
