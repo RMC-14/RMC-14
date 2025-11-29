@@ -561,7 +561,7 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: RMCWeaponRifleM59A
+      - id: RMCM59ACaseAP
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
@@ -1046,7 +1046,7 @@
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
       - id: RMCHeadCapFlippable
-      # TODO Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       jobs:
       - CMChiefEngineer
@@ -1102,7 +1102,6 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
@@ -1136,8 +1135,8 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingBrown
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
@@ -1192,9 +1191,9 @@
       - CMChiefEngineer
       entries:
       - id: CMHeadsetEngineer
-        amount: 15
+        points: 15
       - id: RMCSynthResetKey
-        amount: 15
+        points: 15
     # ////////////////////////////////////
     # Logistics Officer
     # ////////////////////////////////////

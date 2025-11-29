@@ -219,6 +219,7 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
+      - RMCBoxZipties
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: RMCNameItemOnVend
