@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed medkits spawning inside of unskilled survivor's bags inside of
-      inhand.
-    type: Fix
-  id: 2058
-  time: '2025-07-20T23:42:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7122
 - author: DrSmugleaf
   changes:
   - message: Fixed player-given medal names not displaying properly.
@@ -4609,5 +4601,12 @@
   id: 2558
   time: '2025-11-29T04:41:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8484
+- author: monomethylhydrazine
+  changes:
+  - message: Added more order callouts, ported from CM13.
+    type: Add
+  id: 2559
+  time: '2025-11-29T04:45:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8479
 Name: RMC14
 Order: -1
