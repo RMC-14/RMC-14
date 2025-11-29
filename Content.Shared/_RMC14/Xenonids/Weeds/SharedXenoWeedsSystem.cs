@@ -88,6 +88,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsRemove);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
+        SubscribeLocalEvent<XenoWeedableComponent, ComponentRemove>(OnWeedableRemove);
+        SubscribeLocalEvent<XenoWeedableComponent, EntityTerminatingEvent>(OnWeedableRemove);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
@@ -212,6 +214,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         if (_net.IsServer && !args.Anchored)
             QueueDel(weedable.Comp.Entity);
+    }
+
+    private void OnWeedableRemove<T>(Entity<XenoWeedableComponent> weedable, ref T args)
+    {
+        if (_net.IsServer && weedable.Comp.Entity != null)
+        {
+            QueueDel(weedable.Comp.Entity);
+        }
     }
 
     private void OnDamageOffWeedsMapInit(Entity<DamageOffWeedsComponent> damage, ref MapInitEvent args)

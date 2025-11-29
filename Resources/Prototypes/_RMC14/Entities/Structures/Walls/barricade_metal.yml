@@ -191,6 +191,14 @@
     tags:
     - RMCMetalBarricade
 
+- type: entity
+  parent: CMBarricadeMetal
+  id: RMCBarricadeMetalAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
@@ -427,6 +435,14 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeWireRail
+  id: RMCBarricadeWireRailAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
 
 - type: entity
   parent: RMCBarricadeHandrail

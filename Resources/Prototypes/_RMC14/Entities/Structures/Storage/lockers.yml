@@ -128,7 +128,7 @@
   description: It's an immobile card-locked storage unit.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/gun_cabinet.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
   - type: InsertBlacklist
@@ -136,14 +136,6 @@
       components:
       - Xeno
       - Marine
-
-- type: entity
-  parent: RMCLockerGunBase
-  id: RMCLockerGunBlue
-  name: riot control equipment Cabinet
-  components:
-  - type: RMCUnlockOnAlertLevel
-    level: Blue
 
 - type: entity
   parent: RMCLockerGunBase
@@ -159,9 +151,21 @@
 
 - type: entity
   parent: RMCLockerGunBase
+  id: RMCLockerGunBlue
+  name: riot control equipment Cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
+  - type: RMCUnlockOnAlertLevel
+    level: Blue
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunRed
   name: red alert gun cabinet
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
   - type: RMCUnlockOnAlertLevel
   - type: Destructible
     thresholds: []
