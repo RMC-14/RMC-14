@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed scientist survivor variants not having firearms skill.
-    type: Fix
-  id: 2067
-  time: '2025-07-21T21:15:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7162
 - author: J C Denton
   changes:
   - message: Lifeboat consoles now accept Command access too.
@@ -4603,5 +4596,12 @@
   id: 2567
   time: '2025-11-29T05:52:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8448
+- author: Vinny-Shick
+  changes:
+  - message: Avali base tail wag animation.
+    type: Add
+  id: 2568
+  time: '2025-11-29T05:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8430
 Name: RMC14
 Order: -1
