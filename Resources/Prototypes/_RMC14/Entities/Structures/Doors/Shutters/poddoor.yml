@@ -44,8 +44,6 @@
     price: 280
   - type: RMCPodDoor
   - type: RMCMesonsNonviewable
-  - type: Corrodible
-    isCorrodible: false
 
 - type: entity
   parent: RMCShutterBaseIndestructible
@@ -104,8 +102,6 @@
     canPry: true
   - type: XenoCrusherChargable
     instantDestroy: true
-  - type: Corrodible
-    isCorrodible: true
 
 - type: entity
   parent: RMCPodDoor
@@ -191,6 +187,8 @@
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi # the sprites on these are a little fucked but ive spent 2 weeks porting this fucking map and im not wasting time fixing an animated sprite that is 1 tile too long someone else do this please im going mad
   - type: MinimapColor
     color: "#451e5eb8"
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPodDoorAlmayer
