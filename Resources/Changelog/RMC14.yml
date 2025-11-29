@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed not being able to take uniform accessories from armor if there's
-      more than one.
-    type: Fix
-  id: 2050
-  time: '2025-07-20T22:11:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7111
 - author: Magicocity1
   changes:
   - message: Tesla appears once in the CT vendor
@@ -4611,5 +4603,13 @@
   id: 2550
   time: '2025-11-29T03:16:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8271
+- author: Vermidia
+  changes:
+  - message: Fixed bloodpacks refilling blood off of non-blood reagents contained
+      within them.
+    type: Fix
+  id: 2551
+  time: '2025-11-29T03:18:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8260
 Name: RMC14
 Order: -1
