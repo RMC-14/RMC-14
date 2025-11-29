@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the "UNMC lightweight expedition satchel", a visual alternative
-      to the current IO backpacks.
-    type: Add
-  - message: Added Leg Pouches, these come in black and camo, and serve as visual
-      alternatives to the 5 slot webbings.
-    type: Add
-  - message: SOs now have Black Insulated Gloves instead of Black Gloves in their
-      vendors.
-    type: Tweak
-  id: 2073
-  time: '2025-07-21T21:37:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7168
 - author: Dygon
   changes:
   - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
@@ -4606,5 +4592,13 @@
   id: 2573
   time: '2025-11-29T09:46:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8162
+- author: BramvanZijp
+  changes:
+  - message: The Commanding Officer's M59a Prototype Rifle now comes in a case alongside
+      3 MK1 AP Magazines instead of one regular MK1 Magazine.
+    type: Tweak
+  id: 2574
+  time: '2025-11-29T10:12:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8158
 Name: RMC14
 Order: -1
