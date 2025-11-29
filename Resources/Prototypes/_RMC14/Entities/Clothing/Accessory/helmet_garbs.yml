@@ -432,7 +432,7 @@
       state: helmet
 
 - type: entity
-  parent: [ RMCHelmetGarbBase, RMCUtilityBase ]
+  parent: [RMCHelmetGarbBase, RMCUtilityBase]
   id: RMCHelmetGarbRosary
   name: rosary
   description: Jesus Saves Lives!
