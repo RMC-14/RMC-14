@@ -34,23 +34,24 @@
         RMCSkillSmartGun: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
+    - type: MarineOrders
   hidden: true
 
 - type: startingGear
   id: RMCGearUNMCBrigadierGeneral
   equipment:
     jumpsuit: CMJumpsuitGeneral
-    outerClothing: RMCCoatJacketGeneral
+    outerClothing: RMCCoatJacketGeneralFilled
     shoes: RMCBootsCBRN
     head: RMCHeadCapGeneral
     id: RMCIDCardUNMCBrigadierGeneral
     ears: CMHeadsetHighCommand
     eyes: RMCSunglasses
     gloves: RMCHandsVeteranCBRN
-    back: CMSatchel
+    back: RMCSatchelLightpackFilledHighCommand
     belt: RMCMatebaBeltLuxuriousFilled
-    pocket1: RMCPouchGeneralLarge
-    pocket2: RMCPouchCommandFill
+    pocket1: RMCPouchMagazinePistolLargeFilledHighCommand
+    pocket2: RMCPouchGeneralLarge
   inhand:
     - RMCHeadBeretGeneral
 

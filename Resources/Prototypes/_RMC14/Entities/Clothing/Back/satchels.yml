@@ -258,6 +258,15 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost
+  id: CMSatchelSecurityFilledProvostInspector
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi
+
+- type: entity
+  parent: CMSatchelSecurity
   suffix: Provost Dep Mar
   id: CMSatchelSecurityFilledProvostDeputyMarshal
   components:
@@ -773,6 +782,20 @@
     - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
     - id: RMCMagazineRifleL24
     - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledHighCommand
+  suffix: Filled, High Command
+  components:
+  - type: StorageFill
+    contents:
+    # M40 CCDP Greande #RMC14 TODO
+    - id: RMCGrenadeFlashBang
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+    - id: RMCArmorM3General
+    - id: CMArmorHelmetM11CGeneral
 
 - type: entity
   parent: RMCSatchelLightpack

@@ -683,6 +683,7 @@
   id: RMCCrateSecureWeYa
   name: secure We-Ya crate
   description: A secure crate with a We-Ya insignia on it.
+  suffix: We-Ya, Req, Locked
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
@@ -704,7 +705,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
   - type: AccessReader
-    access: [["CMAccessRequisitions"], ["CMAccessCorp"]]
+    access: [["CMAccessRequisitions"], ["RMCAccessWeYa"]]
 
 - type: entity
   parent: RMCCrateSecure
