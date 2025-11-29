@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal, Dutch_VanDerLinde
-  changes:
-  - message: Added Hybrisa Survivor Variants.
-    type: Add
-  id: 2045
-  time: '2025-07-20T20:32:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6984
 - author: DoguhanOzgurAkca
   changes:
   - message: New pinpointer for RMC.
@@ -4616,5 +4609,12 @@
   id: 2545
   time: '2025-11-29T02:57:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8483
+- author: Vermidia
+  changes:
+  - message: Added even more avali names
+    type: Add
+  id: 2546
+  time: '2025-11-29T02:58:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8475
 Name: RMC14
 Order: -1
