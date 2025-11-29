@@ -39,10 +39,8 @@
   name: survivor solaris coporate liaison spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+    job_id: CMSurvivorSolarisCorporateLiaison
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

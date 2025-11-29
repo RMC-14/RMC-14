@@ -55,7 +55,7 @@
     head: RMCHeadCapBureau
     suitstorage: RMCWeaponSMGMP5Alt
     belt: CMBeltMarineMP5
-    back: CMSatchelSecuritySurvivorFillCMBMarshal
+    back: RMCSatchelSecuritySurvivorFillCMBMarshal
     gloves: RMCHandsVeteran # TODO RMC14: swat gloves
     shoes: CMBootsBlackFilled
     ears: RMCHeadsetDistressBureauDamaged
@@ -100,6 +100,6 @@
   name: solaris cmb marshal spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisCMBMarshal
+    job_id: CMSurvivorSolarisCMBMarshal
   - type: Sprite
     state: co_spawn

@@ -39,7 +39,7 @@
   name: survivor solaris chaplain spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisChaplain
+    job_id: CMSurvivorSolarisChaplain
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

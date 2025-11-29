@@ -40,7 +40,7 @@
   name: survivor solaris engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisEngineer
+    job_id: CMSurvivorSolarisEngineer
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

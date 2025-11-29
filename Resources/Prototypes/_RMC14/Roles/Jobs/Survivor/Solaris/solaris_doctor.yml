@@ -41,7 +41,7 @@
   name: survivor solaris doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisDoctor
+    job_id: CMSurvivorSolarisDoctor
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

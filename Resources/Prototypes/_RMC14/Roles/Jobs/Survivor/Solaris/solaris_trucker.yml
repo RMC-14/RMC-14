@@ -42,7 +42,7 @@
   name: solaris trucker spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisTrucker
+    job_id: CMSurvivorSolarisTrucker
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

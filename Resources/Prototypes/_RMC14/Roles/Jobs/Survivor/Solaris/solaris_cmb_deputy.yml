@@ -52,7 +52,7 @@
   name: solaris cmb deputy spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisCMBDeputy
+    job_id: CMSurvivorSolarisCMBDeputy
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
