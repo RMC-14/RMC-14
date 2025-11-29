@@ -5,6 +5,7 @@
   description: cm-department-MilitaryPolice-description
   color: "#DE3A3A"
   roles:
+  - CMProvostInspector
   - CMChiefMP
   - CMMilitaryWarden
   - CMMilitaryPolice
