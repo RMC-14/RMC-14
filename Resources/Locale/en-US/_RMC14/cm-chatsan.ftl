@@ -785,7 +785,7 @@ cm-chatsan-word-replacement-batoned = daze spitted
 cm-chatsan-word-batonged = batonged
 cm-chatsan-word-replacement-batonged = daze spitted
 
-cm-chatsan-word-xover = over
+cm-chatsan-word-xover = xover
 cm-chatsan-word-replacement-xover = over
 
 cm-chatsan-word-m13 = m13
