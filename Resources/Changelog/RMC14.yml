@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Lifeboat consoles now accept Command access too.
-    type: Tweak
-  id: 2068
-  time: '2025-07-21T21:23:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7171
 - author: noctyrnal
   changes:
   - message: Updated the Shiva tileset sprites.
@@ -4603,5 +4596,12 @@
   id: 2568
   time: '2025-11-29T05:55:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8430
+- author: CyberTropic
+  changes:
+  - message: Added half-bright mode for ghosts.
+    type: Add
+  id: 2569
+  time: '2025-11-29T06:08:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8469
 Name: RMC14
 Order: -1
