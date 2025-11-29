@@ -249,6 +249,17 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  id: RMCSatchelSecuritySurvivorFillCMBMarshal
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCArmorHelmetM10CMB
+    - id: RMCVisorSWAT
+
+- type: entity
+  parent: CMSatchelSecurity
   suffix: Provost
   id: CMSatchelSecurityFilledProvost
   components:
