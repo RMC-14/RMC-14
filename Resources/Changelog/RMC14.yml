@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Magicocity1
-  changes:
-  - message: Tesla appears once in the CT vendor
-    type: Fix
-  id: 2051
-  time: '2025-07-20T22:11:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7112
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed nurse and security colonist jobs causing the customization menu
@@ -4611,5 +4604,15 @@
   id: 2551
   time: '2025-11-29T03:18:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8260
+- author: Arykh
+  changes:
+  - message: You can now transfer pill bottles into the chemmaster using via pill
+      box!
+    type: Add
+  - message: You can now collect pill bottles from the floor using the pill box!
+    type: Add
+  id: 2552
+  time: '2025-11-29T03:24:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8402
 Name: RMC14
 Order: -1
