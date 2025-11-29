@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: New pinpointer for RMC.
-    type: Add
-  - message: A new version of AEGIS event run from the lobby.
-    type: Add
-  - message: Some texts related to AEGIS has been slightly changed.
-    type: Tweak
-  id: 2046
-  time: '2025-07-20T20:33:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6980
-- author: Dygon
-  changes:
-  - message: Being buckled to something when you leave adropship that is in-flight
-      no longer prevents you from crash landing or paradropping.
-    type: Fix
-  id: 2047
-  time: '2025-07-20T21:41:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7107
 - author: crazy1112345
   changes:
   - message: Added LV-624 map survivors! This includes the Archeologist, Cargo Tech,
@@ -4616,5 +4597,21 @@
   id: 2546
   time: '2025-11-29T02:58:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8475
+- author: noctyrnal
+  changes:
+  - message: Added basketball hoops!
+    type: Add
+  - message: The Large Tree on LV has been resprited.
+    type: Add
+  id: 2547
+  time: '2025-11-29T03:03:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8466
+- author: BramvanZijp
+  changes:
+  - message: Ziptie boxes will now fit in armor and armor vests again.
+    type: Fix
+  id: 2548
+  time: '2025-11-29T03:04:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8444
 Name: RMC14
 Order: -1
