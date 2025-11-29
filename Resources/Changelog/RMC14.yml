@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some xeno actions being permanently disabled at 0 charges.
-    type: Fix
-  id: 2057
-  time: '2025-07-20T23:29:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7121
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed medkits spawning inside of unskilled survivor's bags inside of
@@ -4609,5 +4602,12 @@
   id: 2557
   time: '2025-11-29T04:36:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8451
+- author: Gallagin
+  changes:
+  - message: Added a PvE visor helmet garb to the PvP loadout
+    type: Add
+  id: 2558
+  time: '2025-11-29T04:41:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8484
 Name: RMC14
 Order: -1
