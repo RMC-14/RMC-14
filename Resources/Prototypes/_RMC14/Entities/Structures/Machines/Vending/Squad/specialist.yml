@@ -39,7 +39,12 @@
         isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-pyro
         isAppendPrefix: true
-        # pyro needs his own icons
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_pyro
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_pyro
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
         isAppendSquadRoleName: false
