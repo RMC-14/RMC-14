@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed player-given medal names not displaying properly.
-    type: Fix
-  id: 2059
-  time: '2025-07-20T23:44:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7123
 - author: Dygon
   changes:
   - message: Weeds don't block leaps anymore.
@@ -4608,5 +4601,12 @@
   id: 2559
   time: '2025-11-29T04:45:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8479
+- author: noctyrnaled
+  changes:
+  - message: Fixed IDs layering over armour and jackets.
+    type: Fix
+  id: 2560
+  time: '2025-11-29T04:48:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8460
 Name: RMC14
 Order: -1
