@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Weeds don't block leaps anymore.
-    type: Fix
-  id: 2060
-  time: '2025-07-21T00:11:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7124
-- author: Dygon
-  changes:
   - message: HIDP grenade packets now contain HIDP grenades again.
     type: Fix
   id: 2061
@@ -4608,5 +4601,12 @@
   id: 2560
   time: '2025-11-29T04:48:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8460
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the dead examine text for xenos appearing twice.
+    type: Fix
+  id: 2561
+  time: '2025-11-29T04:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8450
 Name: RMC14
 Order: -1
