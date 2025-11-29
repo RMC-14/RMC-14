@@ -181,7 +181,7 @@ namespace Content.Server.Pointing.EntitySystems
                 Dirty(arrow, pointing);
             }
 
-            if(TryComp<RMCPointingArrowComponent>(arrow, out var rmcpoint))
+            if (TryComp<RMCPointingArrowComponent>(arrow, out var rmcpoint))
             {
                 rmcpoint.Source = GetNetEntity(player);
                 Dirty(arrow, rmcpoint);
