@@ -25,6 +25,8 @@ rmc-job-prefix-provost-enforcer = PvE
 rmc-ghost-name-corp-provost-inspector = Provost Inspector (Friendly)
 rmc-job-name-corp-provost-inspector = Provost Inspector
 rmc-job-prefix-provost-inspector = PvI
+rmc-job-description-inspector = Mentor new MPs, and advise on and investigate matters of Marine Law and conflict resolution aboard the ship, ensuring that Military Police are acting to uphold the intentions of the Provost.
+    Inspectors are a direct line to Provost, and are the final word on Marine Law, even above the Commanding Officer.
 
 rmc-ghost-name-corp-provost-marshal = Provost Marshal (Friendly)
 rmc-job-name-corp-provost-marshal = Provost Marshal
