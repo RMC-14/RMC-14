@@ -12,8 +12,8 @@
     size: Small
 
 - type: entity
-  name: M40 grenade casing
-  description: A casing for an M40 Grenade.
+  name: 30mm grenade casing
+  description: A casing for an 30mm Grenade.
   parent: RMCCasingBase
   id: RMCM40GrenadeCasing
   components:

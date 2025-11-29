@@ -33,6 +33,11 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
+    - type: CMVendorUser
+      id: CMPMCCorpsmanPVE
+      points: 0
+      extraPoints:
+        Chemicals: 120
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
     - type: DemoSpecWhitelist

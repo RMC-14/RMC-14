@@ -333,6 +333,8 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+  - type: ItemIFF
+    faction: FactionSurvivor
 
 - type: entity
   parent: CMIDCardBase
