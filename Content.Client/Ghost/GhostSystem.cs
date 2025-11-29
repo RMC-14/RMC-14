@@ -18,6 +18,7 @@ namespace Content.Client.Ghost
         [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
+        //RMC14
         [Dependency] private readonly IOverlayManager _overlay = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
@@ -79,6 +80,7 @@ namespace Content.Client.Ghost
                 _sprite.SetVisible((uid, sprite), GhostVisibility || uid == _playerManager.LocalEntity);
         }
 
+        //RMC14
         private void OnToggleLighting(EntityUid uid, EyeComponent component, ToggleLightingActionEvent args)
         {
             if (args.Handled)
@@ -115,6 +117,7 @@ namespace Content.Client.Ghost
             }
             args.Handled = true;
         }
+        //RMC14
 
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
