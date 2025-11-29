@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new playtime medals, in the form of engraved metal name badges.
-    type: Add
-  - message: Replaced the CL's ribbon system with the new badges.
-    type: Tweak
-  id: 2072
-  time: '2025-07-21T21:37:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7165
 - author: noctyrnal
   changes:
   - message: Added the "UNMC lightweight expedition satchel", a visual alternative
@@ -4607,5 +4598,13 @@
   id: 2572
   time: '2025-11-29T09:44:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8195
+- author: noctyrnal
+  changes:
+  - message: COs with 450+ Hours can now get golden versions of their sidearms in
+      their loadouts.
+    type: Add
+  id: 2573
+  time: '2025-11-29T09:46:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8162
 Name: RMC14
 Order: -1
