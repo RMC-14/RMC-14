@@ -57,7 +57,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCRandomHumanoidSurvivorTrucker
+  id: RMCRandomHumanoidSurvivorFlightOperator
   name: flight operator colonist ghost role
   components:
   - type: Sprite
