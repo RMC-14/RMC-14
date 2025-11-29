@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed all Marine roles having Dropship Access. Squad Leaders can still
-      access Dropship Controls.
-    type: Fix
-  - message: Lifeboat Consoles now require Dropship Access.
-    type: Tweak
-  - message: Marine Police now officially has Dropship Access.
-    type: Tweak
-  id: 2066
-  time: '2025-07-21T21:09:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7151
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed scientist survivor variants not having firearms skill.
@@ -4608,5 +4596,12 @@
   id: 2566
   time: '2025-11-29T05:47:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8464
+- author: CatAndHats
+  changes:
+  - message: Fixed being able to put multiple nailguns in the customised nailgun holster
+    type: Fix
+  id: 2567
+  time: '2025-11-29T05:52:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8448
 Name: RMC14
 Order: -1
