@@ -188,7 +188,7 @@
     contents:
     - id: CMArmorM35
     - id: CMArmorHelmetM35
-    # Broiler-T flexible refueling system
+    - id: RMCBackpackBroiler
     - id: RMCWeaponFlamerSpec
     - id: RMCTankFlamerLarge
     - id: RMCPouchFuelTank

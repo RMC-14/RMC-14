@@ -41,6 +41,9 @@
           tags:
           - RMCTankFlamer
           - RMCTankFlamerLarge
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34T
 
 - type: entity
   parent: RMCTankFlamer
@@ -121,3 +124,6 @@
 
 - type: Tag
   id: RMCTankFlamerLarge
+
+- type: Tag
+  id: RMCWeaponIncineratorM34T
