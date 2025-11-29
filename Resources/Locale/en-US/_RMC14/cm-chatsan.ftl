@@ -699,6 +699,12 @@ cm-chatsan-replacement-flashlight = glow tube
 cm-chatsan-word-flashlights = flashlights
 cm-chatsan-replacement-flashlights = glow tubes
 
+cm-chatsan-word-window = window
+cm-chatsan-replacement-window = tall membrane
+
+cm-chatsan-word-windows = windows
+cm-chatsan-replacement-windows = tall membranes
+
 cm-chatsan-word-light-bulb = light bulb
 cm-chatsan-word-lightbulb = lightbulb
 cm-chatsan-replacement-light-bulb = glow orb
@@ -766,3 +772,6 @@ cm-chatsan-word-replacement-capped = captured
 
 cm-chatsan-word-phero = phero
 cm-chatsan-word-replacement-phero = pheromone
+
+cm-chatsan-word-clanker = clanker
+cm-chatsan-replacement-clanker = synthetic

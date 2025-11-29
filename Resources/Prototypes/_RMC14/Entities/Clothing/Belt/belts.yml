@@ -1721,7 +1721,7 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - Sidearm
+        - RMCNailgunCompact
     - popup: rmc-storage-limit-max-mags
       count: 2
       whitelist:

@@ -320,6 +320,7 @@
   - type: CMAutomatedVendor
     jobs:
     - RMCJobSynthetic
+    pointsType: ExperimentalTools
     sections:
     - name: Experimental Tools
       entries:
