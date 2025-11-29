@@ -14,10 +14,9 @@ namespace Content.Shared._RMC14.ARES;
 
 public sealed class RMCARESCoreSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private List<Entity<RMCARESCoreComponent>> _cores = new();
 
@@ -70,6 +69,7 @@ public sealed class RMCARESCoreSystem : EntitySystem
             ares = (uid, comp);
             return true;
         }
+
         ares = null;
         return false;
     }
@@ -82,7 +82,6 @@ public sealed class RMCARESCoreSystem : EntitySystem
     /// <returns></returns>
     public bool TryGetARES(MapId mapId, out Entity<RMCARESCoreComponent>? ares)
     {
-
         foreach (var core in _cores)
         {
             if (_transform.GetMapId(core.Owner) != mapId)
@@ -99,6 +98,7 @@ public sealed class RMCARESCoreSystem : EntitySystem
             ares = (uid, comp);
             return true;
         }
+
         ares = null;
         return false;
     }
@@ -111,7 +111,6 @@ public sealed class RMCARESCoreSystem : EntitySystem
     /// <returns></returns>
     public bool TryGetARES(Entity<MapComponent> map, out Entity<RMCARESCoreComponent>? ares)
     {
-
         foreach (var core in _cores)
         {
             if (_transform.GetMap(core.Owner) != map)
@@ -128,6 +127,7 @@ public sealed class RMCARESCoreSystem : EntitySystem
             ares = (uid, comp);
             return true;
         }
+
         ares = null;
         return false;
     }
@@ -140,7 +140,6 @@ public sealed class RMCARESCoreSystem : EntitySystem
     /// <returns></returns>
     public bool TryGetARES(EntityUid entity, out Entity<RMCARESCoreComponent>? ares)
     {
-
         foreach (var core in _cores)
         {
             if (_transform.GetMap(core.Owner) != _transform.GetMap(entity))
@@ -157,13 +156,14 @@ public sealed class RMCARESCoreSystem : EntitySystem
             ares = (uid, comp);
             return true;
         }
+
         ares = null;
         return false;
     }
 
     // Logs
 
-    public void CreateARESLog( EntProtoId<RMCARESLogTypeComponent> logType, string message, EntityUid aiCore)
+    public void CreateARESLog(EntProtoId<RMCARESLogTypeComponent> logType, string message, EntityUid aiCore)
     {
         if (!TryComp(aiCore, out RMCARESCoreComponent? core) || _net.IsClient)
             return;
@@ -188,7 +188,9 @@ public sealed class RMCARESCoreSystem : EntitySystem
         CreateARESLog(logType, message, ares.Value.Owner);
     }
 
-    public void CreateARESLog(EntProtoId<IFFFactionComponent> faction, EntProtoId<RMCARESLogTypeComponent> logType, string message)
+    public void CreateARESLog(EntProtoId<IFFFactionComponent> faction,
+        EntProtoId<RMCARESLogTypeComponent> logType,
+        string message)
     {
         if (!TryGetARES(faction, out var ares) || ares == null)
             return;

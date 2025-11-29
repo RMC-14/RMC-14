@@ -18,19 +18,19 @@ namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
 public sealed class RMCARESExternalTerminalSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly RMCARESCoreSystem _core = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly ISerializationManager _serializationManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
 
     private static readonly EntProtoId<RMCARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
     private static readonly int LogsShown = 12;
 
     public HashSet<EntProtoId<RMCARESLogTypeComponent>> LogTypes { get; private set; } = [];
     public HashSet<EntProtoId<RMCARESTabCategoryComponent>> TabCategories { get; private set; } = [];
+
     public override void Initialize()
     {
         Subs.BuiEvents<RMCARESExternalTerminalComponent>(RMCARESExternalTerminalUIKey.Key,
@@ -68,7 +68,7 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
 
         ent.Comp.LogsLength = logs.Count;
 
-        ent.Comp.Logs = logs.SkipLast(args.Index*LogsShown).TakeLast(LogsShown).Reverse().ToList();
+        ent.Comp.Logs = logs.SkipLast(args.Index * LogsShown).TakeLast(LogsShown).Reverse().ToList();
         Dirty(ent);
     }
 
@@ -101,12 +101,12 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
 
     private void OnExternalLogout(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalLogout args)
     {
-        if (Prototype(ent) is not { }  proto)
+        if (Prototype(ent) is not { } proto)
             return;
 
         proto.TryGetComponent<RMCARESExternalTerminalComponent>(out var comp, _componentFactory);
         var refComp = ent.Comp;
-        _serializationManager.CopyTo(comp, ref refComp);
+        _serialization.CopyTo(comp, ref refComp);
 
         Dirty(ent);
     }
@@ -114,10 +114,14 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
     private void OnExternalLogin(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalLogin args)
     {
         SetAres(ent);
-        if (!_idCard.TryFindIdCard(args.Actor, out var idCard) || !TryComp<AccessComponent>(idCard, out var access) || !TryComp<ItemIFFComponent>(idCard, out var itemIff) || idCard.Comp.FullName == null || idCard.Comp._jobTitle == null || itemIff.Faction != ent.Comp.Faction)
+        if (!_idCard.TryFindIdCard(args.Actor, out var idCard) || !TryComp<AccessComponent>(idCard, out var access) ||
+            !TryComp<ItemIFFComponent>(idCard, out var itemIff) || idCard.Comp.FullName == null ||
+            idCard.Comp._jobTitle == null || itemIff.Faction != ent.Comp.Faction)
             return;
 
-        _core.CreateARESLog(ent.Comp.Faction, CoreLog, $"{idCard.Comp.FullName}'s ID card was used to log into the ARES system.");
+        _core.CreateARESLog(ent.Comp.Faction,
+            CoreLog,
+            $"{idCard.Comp.FullName}'s ID card was used to log into the ARES system.");
 
         ent.Comp.LoggedIn = true;
         ent.Comp.Accesses = access.Tags;
@@ -146,10 +150,12 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
                 }
             }
         }
+
         Dirty(ent);
     }
 
-    private void OnBeforeActivatableUIOpen(Entity<RMCARESExternalTerminalComponent> ent, ref BeforeActivatableUIOpenEvent args)
+    private void OnBeforeActivatableUIOpen(Entity<RMCARESExternalTerminalComponent> ent,
+        ref BeforeActivatableUIOpenEvent args)
     {
         SetAres(ent);
     }

@@ -12,8 +12,8 @@ namespace Content.Client._RMC14.ARES;
 
 public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ProtoId<AccessLevelPrototype> _logAccess = "RMCAccessLogs";
     private Menu _menu = Menu.HomeMenu;

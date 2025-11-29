@@ -36,6 +36,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly ChasmSystem _chasm = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly RMCARESCoreSystem _core = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -45,7 +46,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
     private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
