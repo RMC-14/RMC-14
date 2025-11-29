@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Content.Server._RMC14.Rules;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Presets;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.CCVar;
+using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
 
 namespace Content.IntegrationTests._RMC14;
@@ -18,7 +20,6 @@ public sealed class PlanetMapLoadTests
         {
             Dirty = true,
             DummyTicker = false,
-            Connected = true,
             InLobby = true,
         });
 
@@ -44,6 +45,15 @@ public sealed class PlanetMapLoadTests
             {
                 await pair.WaitCommand("forcepreset CMDistressSignal");
                 await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
+            }, $"Failed to load planet {planet.Proto.Name}!");
+
+            await server.WaitPost(() =>
+            {
+                // https://github.com/RMC-14/RMC-14/actions/runs/19488437482/job/55775559108
+                foreach (var allEntity in server.EntMan.AllEntities<InputMoverComponent>())
+                {
+                    server.EntMan.DeleteEntity(allEntity);
+                }
             });
 
             Assert.Multiple(() =>
@@ -63,9 +73,10 @@ public sealed class PlanetMapLoadTests
         await server.WaitPost(() =>
         {
             config.SetCVar(CCVars.GameLobbyEnabled, false);
+            ticker.SetGamePreset((GamePresetPrototype?) null);
+            ticker.StartRound();
         });
 
-        await pair.WaitCommand("forcepreset TestPreset");
         await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
 
         await pair.CleanReturnAsync();

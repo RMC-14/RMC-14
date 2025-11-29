@@ -23,4 +23,7 @@ public partial class ReagentPrototype
 
     [DataField]
     public bool Toxin;
+
+    [DataField]
+    public bool Alcohol;
 }

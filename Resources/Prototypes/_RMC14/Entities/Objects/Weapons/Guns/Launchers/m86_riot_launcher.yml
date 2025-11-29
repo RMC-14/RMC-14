@@ -35,3 +35,6 @@
   - type: UniqueAction
   - type: BreechLoaded
     needOpenClose: false
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 1

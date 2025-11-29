@@ -1,5 +1,4 @@
 ﻿# Cherry Jelly
-
 - type: reagent
   parent: BaseJuice
   id: RMCCherryJelly
@@ -8,9 +7,17 @@
   physicalDesc: reagent-physical-desc-sweet
   flavor: cherry
   color: "#801E28"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 1
+        nutMetabolism: 0.1
 
 # Peanut Butter
-
 - type: reagent
   parent: BaseJuice
   id: RMCPeanutButter
@@ -19,3 +26,30 @@
   physicalDesc: reagent-physical-desc-creamy
   flavor: nutty
   color: "#BE893F"
+
+- type: reagent
+  parent: BaseJuice
+  id: RMCBatter
+  name: reagent-name-rmc-batter
+  desc: reagent-desc-rmc-batter
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: creamy
+  color: "#FFFDD0"
+
+# Sprinkles
+- type: reagent
+  id: RMCSprinkles
+  name: reagent-name-rmc-sprinkles
+  desc: reagent-desc-rmc-sprinkles
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#FF00FF"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 1
+        nutMetabolism: 0.1
