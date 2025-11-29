@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: crazy1112345
-  changes:
-  - message: Added LV-624 map survivors! This includes the Archeologist, Cargo Tech,
-      Corporate Liaison, Engineer, Emergency Medical Tech, CMB Deputy, We-Ya Corporate
-      Security, We-Ya Security Guard, and the Priest.
-    type: Add
-  id: 2048
-  time: '2025-07-20T21:07:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6708
 - author: SigmaTheDragon
   changes:
   - message: Fixed missing clothing items in the ASO vendor
@@ -4613,5 +4604,12 @@
   id: 2548
   time: '2025-11-29T03:04:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8444
+- author: noctyrnal
+  changes:
+  - message: The Civilian Binoculars have received new sprites.
+    type: Tweak
+  id: 2549
+  time: '2025-11-29T03:07:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8468
 Name: RMC14
 Order: -1
