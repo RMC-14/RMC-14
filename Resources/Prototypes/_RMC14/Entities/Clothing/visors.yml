@@ -162,9 +162,6 @@
     onIcon:
       sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
       state: po_visor_down
-  - type: ComponentToggler
-    components:
-    - type: FlashImmunity
 
 - type: entity
   parent: RMCVisorPilotBlack
