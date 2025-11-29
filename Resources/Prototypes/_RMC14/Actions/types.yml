@@ -30,8 +30,8 @@
   id: ActionToggleAvaliWagging
   components:
   - type: Action
-    icon: { sprite: _RMC14/Mobs/avali/avali_parts.rsi, state: tail-wag-icon }
-    iconOn: { sprite: _RMC14/Mobs/avali/avali_parts.rsi, state: tail-wag-icon }
+    icon: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
+    iconOn: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
     itemIconStyle: NoItem
     useDelay: 1 # Prevents Emote Spam
   - type: InstantAction
