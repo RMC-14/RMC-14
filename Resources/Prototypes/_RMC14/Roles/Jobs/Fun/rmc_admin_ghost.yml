@@ -8,6 +8,7 @@
     prototypes: [ RMCMobAghostGear ]
   - type: IntrinsicUI
     uis: { }
+  - type: SeeBuriedItems
 
 - type: startingGear
   parent: MobAghostGear

@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.TacticalMap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-[Access(typeof(SharedTacticalMapSystem))]
+[Access(typeof(SharedTacticalMapSystem), typeof(TacticalMapGrantClothingSystem))]
 public sealed partial class TacticalMapUserComponent : Component
 {
     public override bool SendOnlyToOwner => true;
