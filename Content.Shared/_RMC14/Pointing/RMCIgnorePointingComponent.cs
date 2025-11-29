@@ -5,7 +5,6 @@ namespace Content.Shared._RMC14.Pointing;
 /// <summary>
 /// Ents with this component will ignore points (arrows and messages) from other sources (either mobs, ghosts, or both)
 /// </summary>
-
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCIgnorePointingComponent : Component
 {

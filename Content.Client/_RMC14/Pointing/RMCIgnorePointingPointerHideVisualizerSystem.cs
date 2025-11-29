@@ -5,9 +5,11 @@ using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Pointing;
+
 public sealed class RMCIgnorePointingPointerHideVisualizerSystem : VisualizerSystem<RMCPointingArrowComponent>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+
     public override void Initialize()
     {
         base.Initialize();
