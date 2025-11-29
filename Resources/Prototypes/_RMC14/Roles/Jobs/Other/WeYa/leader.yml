@@ -33,6 +33,7 @@
         RMCSkillMedical: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 2
+        RMCSkillVehicles: 1
     - type: MarineOrders
     - type: SquadLeader
       icon:
@@ -107,7 +108,7 @@
     - CMStunbaton
     - CMCrowbar # TODO RMC14: tactical prybar
     - RMCRangefinder
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic
     - CMMagazineRifleM54CAP
