@@ -17,6 +17,8 @@
       Male: RMCMaleAvali
       Unsexed: RMCMaleAvali
       Female: RMCFemaleAvali
+  - type: Wagging 
+    action: ActionToggleAvaliWagging
   - type: Speech
     speechVerb: Parrot # Didn't come with one
     speechSounds: MaleAvali
