@@ -81,7 +81,7 @@
       - CMSurvivorSolarisEngineer: -1
       CMSurvivorSecurity:
       - CMSurvivorSolarisCMBDeputy: -1
-      - CMSurvivorUNPeacekeeper: -1
+      - CMSurvivorSolarisUNPeacekeeper: -1
       CMSurvivorScientist:
       - CMSurvivorSolarisScientist: -1
 #    survivorJobScenarios:
