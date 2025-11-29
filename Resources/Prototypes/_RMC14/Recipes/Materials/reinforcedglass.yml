@@ -12,7 +12,7 @@
 # windoor
 - type: rmcConstruction
   id: RMCWindoorBuild
-  name: glass door
+  name: glass windoor
   prototype: CMWindoorAssembly
   doAfterTime: 2
   doAfterTimeMin: 1
