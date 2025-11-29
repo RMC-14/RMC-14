@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the M5A1 SLAW, which CLF specialists will appear with, aswell as
-      extremely rare planet loot.
-    type: Add
-  id: 2043
-  time: '2025-07-20T20:29:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7035
 - author: J C Denton
   changes:
   - message: Added Peregrine Handcannon spawns to Fiorina and Hybrisa.
@@ -4616,5 +4608,12 @@
   id: 2543
   time: '2025-11-29T02:52:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8269
+- author: JustMyselfUwU
+  changes:
+  - message: Added storage draw/open methods to tool webbings
+    type: Add
+  id: 2544
+  time: '2025-11-29T02:54:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8446
 Name: RMC14
 Order: -1
