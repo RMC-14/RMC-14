@@ -51,12 +51,12 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"]. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
+        Failing to follow a lawful order from a superior person of rank or position, while under their command. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow an order which is not personally directed.\n\nOR\n\nDisrespecting someone of a higher rank or position.\n[bold]7.5 minutes.[/bold]
+        Failing to follow an order which is not personally directed.\n[bold]7.5 minutes.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
@@ -88,12 +88,12 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Unauthorized use of Listening Devices
+        Illegal use of Listening Devices
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        The use of listening devices in violation of Standard Operating Procedures.
+        The unauthorized use of listening devices in violation of Standard Operating Procedures.
       </Box>
     </ColorBox>
     <ColorBox>
