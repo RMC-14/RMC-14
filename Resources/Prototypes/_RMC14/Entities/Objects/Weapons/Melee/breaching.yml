@@ -1,0 +1,27 @@
+- type: entity
+  parent: [RMCBaseMeleeWeapon, Sledgehammer]
+  id: RMCSynthBreachingHammer
+  name: b5 breaching hammer
+  description: This 100-pound monstrosity of a sledgehammer is made of solid tungsten carbide and hits with enough force to level walls like they’re made of paper. It tears through steel and concrete without slowing down, and is completely unusable by anyone without superhuman strength. It’s too heavy for a normal person to even lift.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/breaching.rsi
+  - type: Clothing
+    slots: Back
+    sprite: _RMC14/Objects/Weapons/Melee/breaching.rsi
+  - type: MeleeWeapon
+    attackRate: 0.5
+    damage:
+      types:
+        Blunt: 45
+        Structural: 45
+    soundHit:
+      collection: GenericHit
+    wideAnimationRotation: 90
+  - type: MeleeRequiresWield
+  - type: WhitelistPickupBy
+    whitelist:
+      components:
+        - Synth
+# TODO RMC14: This hammer needs to be ONLY picked up by Synths, It should be impossible for a regular person to pick it up. Ideally there should be an error message saying "This is too heavy for you to pick up!" or something like that.

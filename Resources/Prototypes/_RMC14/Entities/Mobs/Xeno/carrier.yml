@@ -94,12 +94,16 @@
     prefix: carrier
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: carrier
   - type: XenoInhands
     prefix: carrier
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-carrier
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: RMCXenoCarrierBase
@@ -157,6 +161,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoCarrierEggsac
+  - type: RMCActionOrder
+    id: CMXenoCarrier
 
 - type: entity
   parent: RMCXenoCarrierBase
@@ -218,4 +224,6 @@
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoCarrierEggsac
 

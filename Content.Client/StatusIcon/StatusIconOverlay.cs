@@ -6,11 +6,15 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
+using Content.Shared.ParaDrop;
 
 namespace Content.Client.StatusIcon;
 
 public sealed class StatusIconOverlay : Overlay
 {
+    private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
+
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -29,7 +33,7 @@ public sealed class StatusIconOverlay : Overlay
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
         _statusIcon = _entity.System<StatusIconSystem>();
-        _unshadedShader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = _prototype.Index(UnshadedShader).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -48,7 +52,7 @@ public sealed class StatusIconOverlay : Overlay
             if (xform.MapID != args.MapId || !sprite.Visible)
                 continue;
 
-            var bounds = comp.Bounds ?? sprite.Bounds;
+            var bounds = comp.Bounds ?? _sprite.GetLocalBounds((uid, sprite));
 
             var worldPos = _transform.GetWorldPosition(xform, xformQuery);
 
@@ -86,29 +90,39 @@ public sealed class StatusIconOverlay : Overlay
                 if (proto.LocationPreference == StatusIconLocationPreference.Left ||
                     proto.LocationPreference == StatusIconLocationPreference.None && countL <= countR)
                 {
-                    if (accOffsetL + texture.Height > sprite.Bounds.Height * EyeManager.PixelsPerMeter)
+                    if (accOffsetL + texture.Height > _sprite.GetLocalBounds((uid, sprite)).Height * EyeManager.PixelsPerMeter)
                         break;
                     if (proto.Layer == StatusIconLayer.Base)
                     {
                         accOffsetL += texture.Height;
                         countL++;
                     }
-                    yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) (accOffsetL - proto.Offset) / EyeManager.PixelsPerMeter;
+                    yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)(accOffsetL - proto.Offset) / EyeManager.PixelsPerMeter;
                     xOffset = -(bounds.Width + sprite.Offset.X) / 2f;
 
+                    if (_entity.HasComponent<CrashLandingComponent>(uid) ||
+                        _entity.HasComponent<ParaDroppingComponent>(uid))
+                    {
+                        yOffset = 0.25f + sprite.Offset.Y;
+                    }
                 }
                 else
                 {
-                    if (accOffsetR + texture.Height > sprite.Bounds.Height * EyeManager.PixelsPerMeter)
+                    if (accOffsetR + texture.Height > _sprite.GetLocalBounds((uid, sprite)).Height * EyeManager.PixelsPerMeter)
                         break;
                     if (proto.Layer == StatusIconLayer.Base)
                     {
                         accOffsetR += texture.Height;
                         countR++;
                     }
+
                     yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) (accOffsetR - proto.Offset) / EyeManager.PixelsPerMeter;
                     xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
-
+                    if (_entity.HasComponent<CrashLandingComponent>(uid) ||
+                        _entity.HasComponent<ParaDroppingComponent>(uid))
+                    {
+                        yOffset = 0.25f + sprite.Offset.Y;
+                    }
                 }
 
                 if (proto.IsShaded)
@@ -121,6 +135,7 @@ public sealed class StatusIconOverlay : Overlay
             }
 
             handle.UseShader(null);
+            handle.SetTransform(Matrix3x2.Identity);
         }
     }
 }

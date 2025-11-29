@@ -34,6 +34,9 @@
   id: RMCSkillDomestics
   name: Domestics
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillDefinition
+    delayMultipliers: [ 1, .9, 0.5 ]
 
 - type: entity
   parent: RMCSkillBase
@@ -97,6 +100,9 @@
   id: RMCSkillMedical
   name: Medical
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillDefinition
+    delayMultipliers: [ 1, 1, 1, 0.75, 0.35 ]
 
 - type: entity
   parent: RMCSkillBase

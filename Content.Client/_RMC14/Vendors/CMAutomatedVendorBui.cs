@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Holiday;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Mind;
@@ -27,6 +28,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private readonly SharedJobSystem _job;
     private readonly SharedMindSystem _mind;
+    private readonly SharedRankSystem _rank;
     private readonly SharedRMCHolidaySystem _rmcHoliday;
 
     private CMAutomatedVendorWindow? _window;
@@ -36,6 +38,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _job = EntMan.System<SharedJobSystem>();
         _mind = EntMan.System<SharedMindSystem>();
         _rmcHoliday = EntMan.System<SharedRMCHolidaySystem>();
+        _rank = EntMan.System<SharedRankSystem>();
     }
 
     protected override void Open()
@@ -51,27 +54,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
-
-                var validJob = true;
-                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
-                {
-                    foreach (var job in section.Jobs)
-                    {
-                        validJob = _job.MindHasJobWithId(mindId, job.Id);
-                    }
-                }
-
-                var validHoliday = section.Holidays.Count == 0;
-                foreach (var holiday in section.Holidays)
-                {
-                    if (_rmcHoliday.IsActiveHoliday(holiday))
-                        validHoliday = true;
-                }
-
-                var uiSection = new CMAutomatedVendorSection();
+                var uiSection = new CMAutomatedVendorSection { Section = section };
                 uiSection.Label.SetMessage(GetSectionName(user, section));
 
-                if (!validJob || !validHoliday)
+                if (!IsSectionValid(section))
                     uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
@@ -84,10 +70,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
-                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
-                        {
+                        if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
                             uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
-                        }
+
                         uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
@@ -103,6 +88,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         }
                         else if (entry.Recommended)
                         {
+                            uiEntry.Panel.Button.Label.Text = $"★ {uiEntry.Panel.Button.Label.Text}";
                             name = $"Recommended: {name}";
                             color = Color.FromHex("#102919");
                             borderColor = Color.FromHex("#3A9B52");
@@ -157,10 +143,53 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         Refresh();
     }
 
+    private bool IsSectionValid(CMVendorSection section)
+    {
+        var validJob = true;
+        var validRank = true;
+        if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                {
+                    validJob = true;
+                    break;
+                }
+            }
+
+            if (_player.LocalEntity != null)
+            {
+                foreach (var rank in section.Ranks)
+                {
+                    var userRank = _rank.GetRank(_player.LocalEntity.Value);
+                    if (userRank is null || userRank != rank)
+                        validRank = false;
+                    else
+                    {
+                        validRank = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        var validHoliday = section.Holidays.Count == 0;
+        foreach (var holiday in section.Holidays)
+        {
+            if (_rmcHoliday.IsActiveHoliday(holiday))
+                validHoliday = true;
+        }
+
+        return validJob && validHoliday && validRank;
+    }
+
     private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
         var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
-        SendMessage(msg);
+        SendPredictedMessage(msg);
     }
 
     private void OnSearchChanged(LineEditEventArgs args)
@@ -188,7 +217,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     any = true;
             }
 
-            section.Visible = any;
+            section.Visible = any && (section.Section == null || IsSectionValid(section.Section));
         }
     }
 

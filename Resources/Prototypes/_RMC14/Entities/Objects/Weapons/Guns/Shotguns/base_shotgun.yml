@@ -71,11 +71,13 @@
   - type: GunPointBlank
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+  - type: RMCGunChamber
+    enabled: false
 
 - type: entity
   abstract: true

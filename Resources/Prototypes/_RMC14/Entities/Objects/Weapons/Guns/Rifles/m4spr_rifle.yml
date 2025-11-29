@@ -62,6 +62,7 @@
         whitelist:
           tags:
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -102,6 +103,128 @@
         Snow: s_m4spr_barrel
         Classic: c_m4spr_barrel
         Urban: u_m4spr_barrel
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM4SPR
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  name: M5SPR battle rifle
+  id: WeaponRifleM5SPR
+  description: The M5SPR battle rifle is a modified version of the M4SPR, able to chamber High Velocity Piercing rounds, and equipped a two-burst configuration.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_custom_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    burstFireRateMultiplier: 5
+    modifiers:
+      Burst:
+        # fireDelay: 0.01
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Gun
+    shotsPerBurst: 2
+    burstCooldown: 0.75
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleM5SPRHVP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM5SPRHVP
+          - RMCMagazineRifleM5SPRHVHIP
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_custom_barrel
+        Desert: d_m4spr_custom_barrel
+        Snow: s_m4spr_custom_barrel
+        Classic: c_m4spr_custom_barrel
+        Urban: u_m4spr_custom_barrel
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM5SPR
+
+- type: entity
+  parent: WeaponRifleM5SPR
+  id: WeaponRifleM5SPR2
+  name: M5SPR/2 battle rifle
+  description: The M5SPR/2 battle rifle is a modified version of the M5SPR, designed for PMC Operatives to take out targets at longer ranges.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m5spr2.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: m5spr2_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m5spr2.rsi
+  - type: RMCSelectiveFire
+    recoilUnwielded: 1
+    scatterWielded: 4
+    baseFireRate: 2.8
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleM5SPRHVP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM5SPRHVP
+          - RMCMagazineRifleM5SPRHVHIP
+  - type: ItemCamouflage
+    camouflageVariations: {}
+    layers:
+      barrel: {}
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM5SPR2
 
 - type: entity
   parent: WeaponRifleM4SPR
@@ -180,9 +303,18 @@
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: CMMagazineRifleM4SPRAP
+  id: RMCMagazineRifleM4SPRAPEmpty
+  suffix: AP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: CMMagazineRifleM4SPR
   id: CMMagazineRifleM4SPRExt
   name: "M4SPR extended magazine (10x24mm)"
+  description: "An extended magazine of standard 10x24mm rounds for use in the M4SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     capacity: 35
@@ -198,6 +330,114 @@
     - CMMagazineRifle
     - CMMagazineRifleM4SPRExt
 
+- type: entity
+  parent: CMMagazineRifleM4SPR
+  id: RMCMagazineRifleM5SPRHVP
+  name: "M5SPR HV-Piercing magazine (10x24mm)"
+  description: "A magazine of HV-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM5SPRHVP
+    proto: RMCCartridgeRifleM5SPRHVP
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#2d9c75"
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM5SPRHVP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleM5SPRHVP
+  name: cartridge (HV-Piercing)
+  description: A high-velocity HV-Piercing cartridge. Fits in M5SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM5SPRHVP
+  - type: CartridgeAmmo
+    proto: BulletRifleM5SPRHVP
+
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifleM5SPRHVP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+  - type: RMCPenetratingProjectile
+    rangeLossPerHit: 1
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleM5SPRHVHIP
+  name: cartridge (HVHI-Piercing)
+  description: A high-velocity HVHI-Piercing cartridge. Fits in M5SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM5SPRHVHIP
+  - type: CartridgeAmmo
+    proto: BulletRifleM5SPRHVHIP
+
+- type: entity
+  parent: BulletRifleM5SPRHVP
+  id: BulletRifleM5SPRHVHIP
+  components:
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 32
+      losesEffectWithRange: true
+      stunTime: 1
+      superSlowTime: 4
+      slowTime: 10
+
+- type: entity
+  parent: RMCMagazineRifleM5SPRHVP
+  id: RMCMagazineRifleM5SPRHVHIP
+  name: "M5SPR HVHI-Piercing magazine (10x24mm)"
+  description: "A magazine of HVHI-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM5SPRHVHIP
+    proto: RMCCartridgeRifleM5SPRHVHIP
+    capacity: 25
+
 - type: Tag
   id: CMMagazineRifleM4SPR
 
@@ -206,3 +446,24 @@
 
 - type: Tag
   id: CMMagazineRifleM4SPRExt
+
+- type: Tag
+  id: RMCMagazineRifleM5SPRHVP
+
+- type: Tag
+  id: RMCCartridgeRifleM5SPRHVP
+
+- type: Tag
+  id: RMCWeaponRifleM4SPR
+
+- type: Tag
+  id: RMCWeaponRifleM5SPR
+
+- type: Tag
+  id: RMCWeaponRifleM5SPR2
+
+- type: Tag
+  id: RMCMagazineRifleM5SPRHVHIP
+
+- type: Tag
+  id: RMCCartridgeRifleM5SPRHVHIP

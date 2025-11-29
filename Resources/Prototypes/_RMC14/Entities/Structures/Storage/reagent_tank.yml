@@ -23,6 +23,7 @@
         density: 155
         mask:
         - MachineMask
+        - HighImpassable
         layer:
         - HighImpassable
         - BulletImpassable
@@ -53,6 +54,12 @@
     tags:
     - RMCTankReagent
     - Structure
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 0
+    throwRange: 2
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCTankReagentEmpty
@@ -67,6 +74,19 @@
           Quantity: 1000
   - type: Label
     currentLabel: reagent-name-water
+
+- type: entity
+  parent: RMCTankReagentWater
+  id: RMCTankReagentWaterLocked
+  suffix: Water, Locked
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags: None
+
 
 - type: entity
   parent: RMCTankReagentEmpty
@@ -116,3 +136,31 @@
 
 - type: Tag
   id: RMCTankReagent
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentMeralyne
+  suffix: Meralyne
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-cmmeralyne
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentDermaline
+  suffix: Dermaline
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: CMDermaline
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-cmdermaline

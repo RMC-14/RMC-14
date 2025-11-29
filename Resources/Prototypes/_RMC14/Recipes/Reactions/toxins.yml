@@ -1,0 +1,11 @@
+- type: reaction
+  id: RMCLexorin
+  reactants:
+    RMCPhoron:
+      amount: 1
+    RMCHydrogen:
+      amount: 1
+    RMCNitrogen:
+      amount: 1
+  products:
+    RMCLexorin: 3

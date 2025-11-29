@@ -496,3 +496,17 @@
       SquadDelta: RMCMaskNeckerchiefDelta
       SquadEcho: RMCMaskNeckerchiefEcho
       SquadFoxtrot: RMCMaskNeckerchiefFoxtrot
+
+- type: entity
+  parent: RMCMaskNeckerchiefAlpha
+  id: RMCMaskNeckerchiefWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefWhite]
+  id: RMCMaskNeckerchiefWhiteDown
+  name: neckerchief

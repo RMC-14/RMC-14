@@ -66,6 +66,9 @@
   name: warning cone
   description: This cone is trying to warn you of something!
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
     state: cone
@@ -80,7 +83,7 @@
 
 - type: entity
   parent: BaseItem
-  id: CMLightReplacer
+  id: RMCLightReplacer
   name: light replacer
   description: A device to automatically replace lights. Refill with working lightbulbs.
   components:
@@ -91,9 +94,9 @@
     sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
   - type: LightReplacer
     contents:
-    - id: CMLightTube
+    - id: RMCLightTube
       amount: 50
-    - id: CMLightBulb
+    - id: RMCLightBulb
       amount: 50
   - type: StaticPrice
     price: 100
@@ -102,15 +105,22 @@
       light_replacer_storage: !type:Container
 
 - type: entity
-  parent: CMLightReplacer
-  id: CMLightReplacerEmpty
+  parent: RMCLightReplacer
+  id: RMCLightReplacerEmpty
   suffix: Empty
   components:
   - type: LightReplacer
     contents:
-    - id: CMLightTube
+    - id: RMCLightTube
       amount: 0
 
 - type: entity
   parent: SprayBottleSpaceCleaner
-  id: RMCSprayBottleSpaceCleaner # TODO RMC14
+  id: RMCSprayBottleSpaceCleaner
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/space_cleaner.rsi

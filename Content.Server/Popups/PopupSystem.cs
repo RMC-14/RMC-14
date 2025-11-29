@@ -37,6 +37,16 @@ namespace Content.Server.Popups
                 RaiseNetworkEvent(new PopupCursorEvent(message, type), actor.PlayerSession);
         }
 
+        public override void PopupPredictedCursor(string? message, ICommonSession recipient, PopupType type = PopupType.Small)
+        {
+            // Do nothing, since the client already predicted the popup.
+        }
+
+        public override void PopupPredictedCursor(string? message, EntityUid recipient, PopupType type = PopupType.Small)
+        {
+            // Do nothing, since the client already predicted the popup.
+        }
+
         public override void PopupCoordinates(string? message, EntityCoordinates coordinates, Filter filter, bool replayRecord, PopupType type = PopupType.Small)
         {
             if (message == null)
@@ -141,7 +151,7 @@ namespace Content.Server.Popups
             if (recipient != null)
             {
                 // RMC14 Check if popups should be shown to nearby players.
-                if(!_rmcPopup.ShouldPopup(recipient.Value))
+                if (!_rmcPopup.ShouldPopup(recipient.Value))
                     return;
 
                 // Don't send to recipient, since they predicted it locally

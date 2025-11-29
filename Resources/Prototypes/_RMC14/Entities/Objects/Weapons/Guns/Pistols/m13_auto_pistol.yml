@@ -1,0 +1,372 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolM13
+  name: M13 Auto Pistol
+  description: The M13 Auto Pistol, a compact, rapid-firing sidearm designed for close-quarters defense. With a 40-round magazine, it emphasizes fire rate over precision, providing effective suppressive fire in short-range engagements.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolM13
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      collection: RMCM13Shoot
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 7
+    baseFireRate: 10
+    burstScatterMult: 4
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 4
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 40
+    baseFireModes:
+    - FullAuto
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m13.rsi
+    layers:
+    - state: base
+    - state: camo
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m13.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+  - type: GunDamageModifier
+    multiplier: .65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolM13
+          - RMCMagazinePistolM13Ext
+          - RMCMagazinePistolM13Drum
+          - RMCMagazinePistolM13AP
+          - RMCMagazinePistolM13ExtAP
+          - RMCMagazinePistolM13DrumAP
+        startingItem: RMCMagazinePistolM13
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentRecoilCompensatorM13
+          - RMCAttachmentRecoilCompensatorM13Spiked
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5MicroRedDotSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentMicroLaserSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM13StockCollapsible
+          - RMCAttachmentM13StockSolid
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.65, 0.13
+      rmc-aslot-rail: 0.05, 0.16
+      rmc-aslot-underbarrel: 0.4, -0.162
+      rmc-aslot-stock: -0.5, 0.16
+
+- type: entity
+  parent: RMCWeaponPistolM13
+  id: RMCWeaponPistolM13Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_m10_auto_pistol_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolM13
+          - RMCMagazinePistolM13Ext
+          - RMCMagazinePistolM13Drum
+          - RMCMagazinePistolM13AP
+          - RMCMagazinePistolM13ExtAP
+          - RMCMagazinePistolM13DrumAP
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM13
+  name: M13 HV Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistol
+    proto: RMCCartridgeAutoPistol
+    capacity: 40
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
+
+- type: entity
+  parent: RMCMagazinePistolM13
+  id: RMCMagazinePistolM13AP
+  name: M13 AP Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistolAP
+    proto: RMCCartridgeAutoPistolAP
+    capacity: 40
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
+
+#Missing Jam mod medium "the blicky"
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM13Ext
+  name: M13 HV Extended Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13Ext
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistol
+    proto: RMCCartridgeAutoPistol
+    capacity: 62
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13ext.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM13ExtAP
+  name: M13 AP Extended Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13ExtAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistolAP
+    proto: RMCCartridgeAutoPistolAP
+    capacity: 62
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13ext.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
+
+#missing Jam mod critical "cant handle this shit brap brap brap"
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM13Drum
+  name: M13 HV Drum Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13Drum
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistol
+    proto: RMCCartridgeAutoPistol
+    capacity: 84
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13drum.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM13DrumAP
+  name: M13 AP Drum Magazine (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM13DrumAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeAutoPistolAP
+    proto: RMCCartridgeAutoPistolAP
+    capacity: 84
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m13drum.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: RMCCartridgeAutoPistol
+  name: cartridge (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeAutoPistol
+  - type: CartridgeAmmo
+    proto: RMCBulletAutoPistol
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: RMCCartridgeAutoPistolAP
+  name: armor-piercing cartridge (10x20mm-APC)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeAutoPistolAP
+  - type: CartridgeAmmo
+    proto: RMCBulletAutoPistolAP
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletAutoPistol
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 32
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 4
+      falloff: 7
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 115
+    thresholds:
+    - range: 4
+      falloff: 10
+
+- type: entity
+  parent: RMCBulletAutoPistol
+  id: RMCBulletAutoPistolAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 24
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: RMCWeaponPistolM13
+
+- type: Tag
+  id: RMCCartridgeAutoPistol
+
+- type: Tag
+  id: RMCCartridgeAutoPistolAP
+
+- type: Tag
+  id: RMCMagazinePistolM13
+
+- type: Tag
+  id: RMCMagazinePistolM13Ext
+
+- type: Tag
+  id: RMCMagazinePistolM13Drum
+
+- type: Tag
+  id: RMCMagazinePistolM13AP
+
+- type: Tag
+  id: RMCMagazinePistolM13ExtAP
+
+- type: Tag
+  id: RMCMagazinePistolM13DrumAP

@@ -1,3 +1,6 @@
+- type: Tag
+  id: RMCHeadset
+
 - type: entity
   parent: Clothing
   id: CMHeadset
@@ -9,7 +12,7 @@
       key_slots: !type:Container
   - type: Headset
   - type: EncryptionKeyHolder
-    keySlots: 4 # TODO RMC14 3 when intrinsic channels are all done
+    keySlots: 3
   - type: Clothing
     slots:
     - ears
@@ -26,7 +29,17 @@
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
   - type: HeadsetMultiBroadcast
+  - type: Tag
+    tags:
+    - RMCHeadset
   - type: RMCHeadset
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCHeadsetIconsUNMC
@@ -34,10 +47,10 @@
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.
   components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyCommon
+  - type: RMCHeadset
+    channels:
+    - MarineCommon
+  - type: GrantAreaInfo
   - type: GrantTacMapAlert
 
 - type: entity
@@ -51,7 +64,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyCE
   - type: RMCRadioFilter
     disabledChannels:
@@ -65,6 +77,11 @@
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: PrimaryLandingZone
+    trackerModes:
+    - SquadLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: RMCHeadsetShip
@@ -77,7 +94,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyCMO
   - type: RMCRadioFilter
     disabledChannels:
@@ -103,28 +119,43 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyEngineer
+  - type: GrantSquadLeaderTracker
+    defaultMode: ChiefEngineer
+    trackerModes:
+    - ChiefEngineer
 
 - type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetRequisition
-  name: supply radio headset
-  description: Used by the lowly Cargo Technicians of the Marine, light weight and portable.
+  name: requisitions radio headset
+  description: Used by the Requisitions Technicians, lightweight and portable.
   components:
   - type: Sprite
     state: req_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
-      - CMEncryptionKeyRequisition
+      - RMCEncryptionKeyCargotech
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineEngineer
+    - MarineCommand
+  - type: GrantSquadLeaderTracker
+    defaultMode: Quartermaster
+    trackerModes:
+    - Quartermaster
 
 - type: entity
   parent: CMHeadsetRequisition
   id: CMHeadsetChef
   name: kitchen radio headset
   description: Used by the onboard kitchen staff, filled with background noise of sizzling pots.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyRequisition
 
 - type: entity
   parent: RMCHeadsetShip
@@ -137,8 +168,11 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyMedical
+  - type: GrantSquadLeaderTracker
+    defaultMode: ChiefMedicalOfficer
+    trackerModes:
+    - ChiefMedicalOfficer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -151,21 +185,23 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyResearcher
+  - type: GrantSquadLeaderTracker
+    defaultMode: ChiefMedicalOfficer
+    trackerModes:
+    - ChiefMedicalOfficer
 
 - type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetQM
-  name: quartermaster radio headset
-  description: A headset used by the quartermaster for controlling their slave(s).
+  name: Logistics Officer radio headset
+  description: A headset used by the Logistics Officer.
   components:
   - type: Sprite
     state: ro_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeyQuartermaster
   - type: RMCRadioFilter
     disabledChannels:
@@ -192,8 +228,28 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyMPO
+  - type: GrantSquadLeaderTracker
+    defaultMode: ChiefMilitaryPolice
+    trackerModes:
+    - ChiefMilitaryPolice
+    - MilitaryWarden
+
+- type: entity
+  parent: CMHeadsetMPO
+  id: RMCHeadsetMPHonor
+  name: marine honor guard radio headset
+  description: This is used by members of the marine honor guard.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - MilitaryWarden
 
 - type: entity
   parent: RMCHeadsetShip
@@ -206,7 +262,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyCMP
   - type: RMCRadioFilter
     disabledChannels:
@@ -218,6 +273,27 @@
     - MarineFoxtrot
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - AuxiliarySupportOfficer
+    - MilitaryWarden
+
+- type: entity
+  parent: CMHeadsetCMP
+  id: RMCHeadsetMW
+  name: marine military warden radio headset
+  description: It seems oddly similar to the CMPs'... Smells like donuts too.
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: ChiefMilitaryPolice
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - AuxiliarySupportOfficer
+    - ChiefMilitaryPolice
 
 - type: entity
   parent: RMCHeadsetShip
@@ -230,7 +306,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
@@ -245,7 +320,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeyMarineCommandAlternative
 
 - type: entity
@@ -257,12 +331,15 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - CMEncryptionKeyPilot
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: AuxiliarySupportOfficer
+    trackerModes:
+    - AuxiliarySupportOfficer
 
 - type: entity
   parent: RMCHeadsetMarine
@@ -285,6 +362,13 @@
     - MarineFoxtrot
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: AuxiliarySupportOfficer
+    trackerModes:
+    - AuxiliarySupportOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: RMCHeadsetShip
@@ -297,12 +381,17 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
   - type: GrantMarineIcons
     factions:
     - UNMC
     - WeYa
+  - type: GrantSquadLeaderTracker
+    defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetShip
@@ -313,8 +402,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeyCorrespondent
 
 - type: entity
   parent: RMCHeadsetShip
@@ -327,12 +415,16 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -345,19 +437,38 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
       - RMCEncryptionKeyHighCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+    channels:
+    - MarineSOF
+  - type: GrantSquadLeaderTracker
+    defaultMode: ProvostMarshal
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
 
 - type: entity
   parent: CMHeadsetHighCommand
   id: RMCHeadsetHighCommandProvostLead
+  suffix: SL Tracker
   components:
   - type: GrantSquadLeaderTracker
+    defaultMode: ProvostTeamLeader
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
+    - ProvostTeamLeader
+    - ProvostAdvisor
+    - CommandingOfficer
+    - ExecutiveOfficer
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -370,12 +481,18 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - Rifleman
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -388,10 +505,16 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - PrimaryLandingZone
 
 # Prisoner headset
 - type: entity

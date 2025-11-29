@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -18,6 +20,7 @@ using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -33,6 +36,8 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly RMCReagentSystem _reagent = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MeleeSkill = "RMCSkillMeleeWeapons";
 
@@ -57,11 +62,11 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
-        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
         SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<ItemToggleRequiresSkillComponent, ItemToggleActivateAttemptEvent>(OnItemToggleRequiresSkill);
         SubscribeLocalEvent<ItemToggleDeactivateUnskilledComponent, GotEquippedEvent>(OnItemToggleDeactivateUnskilled);
@@ -93,7 +98,9 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnSkillsVerbExamine(Entity<SkillsComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
-        if (!args.CanInteract || !args.CanAccess)
+        var user = args.User;
+
+        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(user))
             return;
 
         _skillsSorted.Clear();
@@ -114,6 +121,9 @@ public sealed class SkillsSystem : EntitySystem
         {
             foreach (var (name, level) in _skillsSorted)
             {
+                if (level == 0)
+                    continue;
+
                 msg.AddMarkupPermissive(Loc.GetString("rmc-skills-examine-skill", ("name", name), ("level", level)));
                 msg.PushNewline();
             }
@@ -122,7 +132,7 @@ public sealed class SkillsSystem : EntitySystem
         _examine.AddDetailedExamineVerb(args,
             ent,
             msg,
-            Loc.GetString("rmc-skills-examinable-text"),
+            Loc.GetString("rmc-skills-examine", ("target", ent)),
             "/Textures/Interface/students-cap.svg.192dpi.png",
             Loc.GetString("rmc-skills-examine", ("target", ent))
         );
@@ -245,13 +255,31 @@ public sealed class SkillsSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(args.Examined, out SolutionContainerManagerComponent? solutionContainerManager))
+        // If ContainerId is specified, examine the entity inside the container instead
+        var entityToExamine = args.Examined;
+        if (ent.Comp.ContainerId != null)
+        {
+            if (!_container.TryGetContainer(args.Examined, ent.Comp.ContainerId, out var container) ||
+                !container.ContainedEntities.TryFirstOrNull(out var contained))
+            {
+                if (ent.Comp.NoContainerExamine == null)
+                    return;
+                using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
+                {
+                    args.PushMarkup(Loc.GetString(ent.Comp.NoContainerExamine, ("target", ent.Owner)));
+                }
+                return;
+            }
+            entityToExamine = contained.Value;
+        }
+
+        if (!TryComp(entityToExamine, out SolutionContainerManagerComponent? solutionContainerManager))
             return;
 
         var foundReagents = new List<ReagentQuantity>();
         foreach (var solutionContainerId in solutionContainerManager.Containers)
         {
-            if (!_solutionContainerSystem.TryGetSolution(args.Examined, solutionContainerId, out _, out var solution))
+            if (!_solutionContainerSystem.TryGetSolution(entityToExamine, solutionContainerId, out _, out var solution))
                 continue;
 
             foreach (var reagent in solution.Contents)
@@ -264,27 +292,18 @@ public sealed class SkillsSystem : EntitySystem
         {
             using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
             {
-                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone));
+                args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineNone, ("target", ent.Owner)));
             }
 
             return;
         }
 
-        var reagentCount = foundReagents.Count;
-        var fullMessage = $"{Loc.GetString(ent.Comp.SkilledExamineContains)} ";
-        for (var i = 0; i < foundReagents.Count; i++)
-        {
-            var reagent = foundReagents[i];
-            var reagentLocalizedName = _prototypes.Index<ReagentPrototype>(reagent.Reagent.Prototype).LocalizedName;
-            var reagentQuantity = reagent.Quantity;
-            fullMessage += $"{reagentLocalizedName}({reagentQuantity}u)";
-            if (i > reagentCount)
-                fullMessage += ", ";
-        }
+        var reagentsText = string.Join("; ",
+            foundReagents.Select(r => $"{_reagent.Index(r.Reagent.Prototype).LocalizedName}({r.Quantity}u)"));
 
         using (args.PushGroup(nameof(ReagentExaminationRequiresSkillComponent)))
         {
-            args.PushMarkup(fullMessage);
+            args.PushMarkup(Loc.GetString(ent.Comp.SkilledExamineContains, ("target", ent.Owner), ("reagents", reagentsText)));
         }
     }
 
@@ -569,17 +588,18 @@ public sealed class SkillsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition)
+    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition, float[]? multipliers = null)
     {
         if (!definition.TryGet(out var definitionComp, _prototypes, _compFactory))
             return 1f;
 
-        if (definitionComp.DelayMultipliers.Length == 0)
+        multipliers ??= definitionComp.DelayMultipliers;
+        if (multipliers.Length == 0)
             return 1f;
 
         var skill = GetSkill(user, definition);
-        if (!definitionComp.DelayMultipliers.TryGetValue(skill, out var multiplier))
-            multiplier = definitionComp.DelayMultipliers[^1];
+        if (!multipliers.TryGetValue(skill, out var multiplier))
+            multiplier = multipliers[^1];
 
         return multiplier;
     }

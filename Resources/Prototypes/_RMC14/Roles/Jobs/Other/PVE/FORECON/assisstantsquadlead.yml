@@ -1,0 +1,69 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFORECONPVEAssistantSL
+  name: rmc-job-name-pve-forecon-assistant-lead
+  description: cm-job-description-fireteam-leader
+  playTimeTracker: CMJobFORECONPVEAssistantSL
+  ranks:
+   RMCRankStaffSergeant: []
+  startingGear: RMCJobFORECONPVEAssistantSL
+  icon: "CMJobIconFireteamLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - FTL
+  spawnMenuRoleName: FORECON Assistant Squad Lead (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillPilot: 1
+        RMCSkillSmartGun: 1
+        RMCSkillJtac: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillLeadership: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pve-forecon-assistant-lead
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointFORECONPVEAssistantSL
+  name: forecon assistant squad lead spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    state: leader_spawn
+  - type: SpawnPoint
+    job_id: RMCFORECONPVEAssistantSL
+
+- type: startingGear
+  id: RMCJobFORECONPVEAssistantSL
+  equipment:
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: CMJobFORECONPVEAssistantSL

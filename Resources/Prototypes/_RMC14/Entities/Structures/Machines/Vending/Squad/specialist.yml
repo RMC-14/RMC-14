@@ -21,7 +21,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_demo
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
@@ -32,7 +32,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_grenadier
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_grenadier
       #  points: 0
       #- id: PyroSet
@@ -53,7 +53,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_sniper
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_sniper
         linkedEntries:
         - RMCAntiMaterielEquipmentCase
@@ -66,7 +66,7 @@
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_anti_materiel_sniper
         giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
@@ -99,19 +99,11 @@
     - name: Extra Grenades
       entries:
       - id: CMGrenadeHighExplosive
-        name: M40 HEDP Blast Grenades (x6)
+        name: 30mm HEDP Blast Grenades (x6)
         points: 40
-        spawn: 6
-      - id: CMGrenadeFrag # TODO RMC14 hefa and smoke temporarily until normal options are coded
-        name: M40 HEFA Frag Grenades (x6)
-        points: 40
-        spawn: 6
-      - id: CMGrenadeSmoke
-        name: M40 HSDP Smoke Grenades (x6)
-        points: 20
         spawn: 6
       - id: RMCGrenadeIncendiary
-        name: M40 HIDP Incendiary Grenades (x6)
+        name: 30mm HIDP Incendiary Grenades (x6)
         points: 40
         spawn: 6
       #- id: M40HPDPWhitePhosphorusGrenadesx6
@@ -125,8 +117,10 @@
       - id: RMC40MMGrenadeM74AGMS
         points: 20
         spawn: 6
-    - name: Extra Flamethrower Tanks
-      entries: [ ]
+      # -id: RMCElectroshockGrenadex6
+      # points: 40
+    #- name: Extra Flamethrower Tanks
+    #  entries: [ ]
     #- id: LargeIncineratorTank
     #  points: 40
     #- id: LargeIncineratorTankB GreenFlame
@@ -205,10 +199,11 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -238,9 +233,14 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -255,8 +255,16 @@
         points: 15
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 6
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -273,7 +281,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 5
-    #- id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
+        points: 3
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
@@ -291,12 +300,16 @@
         points: 5
       - id: RMCMotionDetector
         points: 10
+      - id: RMCIntelDetector
+        points: 10
       - id: RMCWhistle
         points: 5
     - name: Binoculars
       entries:
       - id: RMCBinoculars
         points: 5
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -320,4 +333,6 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5

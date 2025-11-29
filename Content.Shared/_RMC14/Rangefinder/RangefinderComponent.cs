@@ -70,6 +70,9 @@ public sealed partial class RangefinderComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
+
+    [DataField, AutoNetworkedField]
+    public float BreakRange = 0.5f;
 }
 
 [Serializable, NetSerializable]

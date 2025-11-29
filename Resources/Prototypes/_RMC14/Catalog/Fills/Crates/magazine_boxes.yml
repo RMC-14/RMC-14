@@ -235,6 +235,36 @@
 
 - type: entity
   parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFire
+  name: UN 42-FM sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFire
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireBlue
+  name: UN 55-FA sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireBlue
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireSmoke
+  name: UN 60-FP sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireSmoke
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineBreaching
   name: XM51 Ammo (2x mags) (1x small breaching shell box)
   components:

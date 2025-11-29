@@ -1,29 +1,46 @@
 - type: entity
-  parent: CMLightBulbBase
-  id: CMLightTubeBase
+  parent: RMCLightBulbBase
+  id: RMCLightTubeBase
   abstract: true
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Power/light_tube.rsi
   - type: LightBulb
     bulb: Tube
-
-- type: entity
-  parent: CMLightTubeBase
-  id: CMLightTube
-  name: light tube
-  description: A replacement light tube.
-  components:
-  - type: LightBulb
-    color: "#FFE4CE" # 5000K color temp
-    lightEnergy: 0.8
+    lightEnergy: 1
     lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
 
 - type: entity
-  parent: CMLightTubeBase
-  id: CMLightTubeBroken
+  parent: RMCLightTubeBase
+  id: RMCLightTube
+  name: light tube
+  description: A replacement light tube.
+  suffix: Warm
+  components:
+  - type: LightBulb
+    color: "#FFEFD2"
+
+- type: entity
+  parent: RMCLightTube
+  id: RMCLightTubeBlue
+  suffix: Blue
+  components:
+  - type: LightBulb
+    color: "#D2E3EC"
+
+- type: entity
+  parent: RMCLightTube
+  id: RMCLightTubeWarm
+  suffix: Orange
+  components:
+  - type: LightBulb
+    color: "#FA8E2A"
+
+- type: entity
+  parent: RMCLightTubeBase
+  id: RMCLightTubeBroken
   name: light tube
   description: A replacement light tube.
   suffix: Broken

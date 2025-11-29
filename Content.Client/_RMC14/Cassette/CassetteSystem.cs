@@ -1,10 +1,12 @@
 ﻿using Content.Shared._RMC14.Cassette;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -28,10 +30,13 @@ public sealed class CassetteSystem : SharedCassetteSystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private float _gain;
+    private readonly Dictionary<AudioStream, string> _names = new();
 
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         Subs.CVar(_config, RMCCVars.VolumeGainCassettes, SetGain, true);
 
@@ -53,6 +58,11 @@ public sealed class CassetteSystem : SharedCassetteSystem
         {
             Log.Error($"Error preloading cassette songs:\n{e}");
         }
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _names.Clear();
     }
 
     private void SetGain(float gain)
@@ -84,8 +94,11 @@ public sealed class CassetteSystem : SharedCassetteSystem
         if (!_timing.IsFirstTimePredicted)
             return null;
 
-        var audioParams = player.Comp.AudioParams.AddVolume(SharedAudioSystem.GainToVolume(_gain));
-        return _audio.PlayGlobal(stream, null, audioParams)?.Entity;
+        if (!_names.TryGetValue(stream, out var name))
+            return null;
+
+        var audioParams = player.Comp.AudioParams.WithVolume(SharedAudioSystem.GainToVolume(_gain));
+        return _audio.PlayGlobal(stream, new ResolvedPathSpecifier(name), audioParams)?.Entity;
     }
 
     protected override async void ChooseCustomTrack(Entity<CassetteTapeComponent> tape)
@@ -102,6 +115,10 @@ public sealed class CassetteSystem : SharedCassetteSystem
 
             var audio = _audioManager.LoadAudioOggVorbis(file);
             tape.Comp.CustomTrack = audio;
+
+            var name = $"/Audio/_RMC14/_CustomCassetteUploads/upload_{_names.Count}.ogg";
+            _resourceCache.CacheResource(name, new AudioResource(audio));
+            _names[audio] = name;
         }
         catch (Exception e)
         {

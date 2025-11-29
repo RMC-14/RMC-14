@@ -1,7 +1,10 @@
-﻿using Content.Shared.Body.Organ;
+﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
+using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -13,10 +16,10 @@ namespace Content.Shared._RMC14.Synth;
 public sealed partial class SynthComponent : Component
 {
     [DataField]
-    public ComponentRegistry? AddComponents;
+    public EntProtoId AddComponents = "RMCSynthAddComponents";
 
     [DataField]
-    public ComponentRegistry? RemoveComponents;
+    public EntProtoId RemoveComponents = "RMCSynthRemoveComponents";
 
     /// <summary>
     /// The final stun duration (after endurance skill) is divided by this number.
@@ -51,6 +54,21 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Generation = "rmc-species-synth-generation-third";
 
+    [DataField, AutoNetworkedField]
+    public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<RMCHealthIconTypes, ProtoId<HealthIconPrototype>> HealthIconOverrides = new()
+    {
+        [RMCHealthIconTypes.Healthy] = "RMCHealthIconHealthySynth",
+        [RMCHealthIconTypes.DeadDefib] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadClose] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadAlmost] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadDNR] = "RMCHealthIconDeadDNRSynth",
+        [RMCHealthIconTypes.Dead] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.HCDead] = "RMCHealthIconDeadSynth",
+    };
+
     /// <summary>
     /// New brain organ to add when the synth is created.
     /// </summary>
@@ -69,6 +87,9 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
 
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 CritThreshold = FixedPoint2.New(199);
+
     /// <summary>
     /// The tool quality needed to repair the synth brute damage.
     /// </summary>
@@ -76,10 +97,25 @@ public sealed partial class SynthComponent : Component
     public ProtoId<ToolQualityPrototype> RepairQuality = "Welding";
 
     [DataField]
-    public DamageSpecifier? WelderDamageToRepair;
+    public DamageSpecifier? WelderDamageToRepair = new()
+    {
+        DamageDict = {
+            ["Blunt"] = -15,
+            ["Piercing"] = -15,
+            ["Slash"] = -15,
+        },
+    };
 
     [DataField]
-    public DamageSpecifier? CableCoilDamageToRepair;
+    public DamageSpecifier? CableCoilDamageToRepair = new()
+    {
+        DamageDict = {
+            ["Caustic"] = -15,
+            ["Heat"] = -15,
+            ["Shock"] = -15,
+            ["Cold"] = -15,
+        },
+    };
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> WelderDamageGroup = "Brute";

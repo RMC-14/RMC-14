@@ -8,11 +8,12 @@
   ranks:
     RMCRankWeYaOperator: []
   startingGear: RMCJobWeYaGoon
-  icon: CMJobIconLiaison
+  icon: "RMCJobIconPMCGoonStandard"
   joinNotifyCrew: false
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Goon
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +28,7 @@
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
 
 - type: playTimeTracker
   id: RMCJobWeYaGoon
@@ -35,7 +37,7 @@
   id: RMCJobWeYaGoon
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMC
+    ears: RMCHeadsetDistressGoon
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
     gloves: RMCHandsVeteranPMC
@@ -43,7 +45,7 @@
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
-    suitstorage: WeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
+    suitstorage: RMCWeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
     pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
   storage:
@@ -53,7 +55,7 @@
     - RMCZipties
     - RMCZipties
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     pocket1:
     - CMMagazineRifleM54C
     - CMMagazineRifleM54C
@@ -86,4 +88,15 @@
     job: RMCWeYaGoon
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGoonStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_standard

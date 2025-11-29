@@ -20,22 +20,18 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-      - id: RMCM79Case
+      - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
-    - name: Armors
-      entries:
-      - id: RMCArmorM4Zipties
-        name: leader M4 pattern marine armor (zipties)
-        points: 16
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
@@ -79,6 +75,8 @@
       entries:
       - id: CMHandsInsulated
         points: 3
+      - id: CMHandsBlackInsulated
+        points: 3
       - id: CMSheetMetal10
         name: metal x10
         points: 5
@@ -101,8 +99,8 @@
         points: 7
       - id: RMCPouchToolsFill
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 5
+      - id: RMCWeldingGoggles
+        points: 5
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -114,17 +112,19 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
-    #- id: CMM20MineBoxx4mines
-    #  points: 20
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+        points: 13
+    # - id: CMM20MineBoxx4mines
+    #   points: 20
+    # - id: CMM40MFHSMetalFoamGrenade
+    #   points: 5
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Medical Supplies
       entries:
       - id: CMBurnKit10
@@ -144,7 +144,7 @@
       - id: CMKelotaneAutoInjector
         points: 1
 #      - id: CMInjectorOxycodone
-#        points: 2
+#        points: 1
 #      - id: CMInjectorTramadol
 #        points: 1
       - id: CMTricordrazineAutoInjector
@@ -157,6 +157,12 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
+      - id: CMMagazineRifleM4SPRExt
+        points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -167,8 +173,16 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 6
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      - id: RMCMagazinePistolM1984HP
+        points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -187,7 +201,7 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 18
     - name: Radio Keys
       entries:
@@ -198,6 +212,8 @@
       - id: CMEncryptionKeyJTAC
         points: 3
       - id: CMEncryptionKeyRequisition
+        points: 3
+      - id: CMEncryptionKeyMedical
         points: 3
 
 - type: entity
@@ -219,10 +235,18 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: RMCArmorB12Zipties
-        name: leader B12 pattern marine armor (zipties)
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+    - name: Armor
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorB12Zipties
+        name: leader B12 pattern marine armor (zipties)
+        recommended: true
+      - id: RMCArmorM4Zipties
+        name: leader M4 pattern marine armor (zipties)
+      - id: RMCArmorVestSquadLeader
+        name: leader M3-XL pattern armor vest (zipties)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -239,10 +263,11 @@
       - id: CMBeltMedicBag
       - id: CMBeltMedical
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -275,9 +300,14 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -289,17 +319,18 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
   name: essential SL kit
-  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
+  description: Contains a Radio Telephone pack, a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
-    - CMFireExtinguisher
+    - CMFireExtinguisherPortable
 
 - type: entity
   parent: RMCKitBase
@@ -332,7 +363,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54C
+    - id: RMCWeaponRifleM54C
     - id: RMCAttachmentAngledGrip
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel
@@ -357,12 +388,13 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-#    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+    - id: RMCWeldingGoggles
 
 - type: entity
   parent: RMCKitBase
   id: RMCKitPyroMini
-  name: m34 pyrotechnician support kit
+  name: M34 pyrotechnician support kit
+  description: Contains a M34 incinerator unit, a G4-1 fueltank, 3 incinerator tanks, and a portable fire extinguisher.
   components:
   - type: Storage
     maxItemSize: Huge

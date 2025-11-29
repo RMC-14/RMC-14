@@ -9,7 +9,7 @@
 - type: startingGear
   id: RMCGearCorpsePrisoner
   equipment:
-    jumpsuit: ClothingUniformJumpsuitColorOrange # TODO RMC14 colored uniform
+    jumpsuit: RMCJumpsuitOrange
     back: CMSatchel
     shoes: RMCShoesOrange
     id: CMIDCardColonist
@@ -114,6 +114,27 @@
 #    # motion detector
 #    # good research notes
 
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseScientistAegis
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientistAegis ]
+
+- type: startingGear
+  id: RMCGearCorpseScientistAegis
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsLatex
+    outerClothing: ClothingOuterCoatLab
+    id: RMCIDCardAegisIntel
+    ears: CMHeadsetColony
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
 # Miner
 - type: randomHumanoidSettings
   parent: RMCCorpse
@@ -151,12 +172,14 @@
 - type: startingGear
   id: RMCGearCorpseSecurity
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
-    back: CMBackpackSecurity
+    jumpsuit: RMCJumpsuitCivilianSecurity
+    back: CMSatchelSecurity
+    head: RMCArmorHelmetSecurity
+    outerClothing: RMCArmorSecurity
     shoes: RMCShoesJackboots
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
-    id: CMIDCardColonist
+    id: CMIDCardColonistSecurity
     ears: CMHeadsetColony
     belt: CMBeltSecurityMPFilled
   storage:
@@ -164,7 +187,7 @@
     - RMCM5Bayonet
     - RMCRadioHandheldColonyOff
 
-# Marshal Bureau Deputy
+# CMB Deputy
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseDeputy
@@ -176,15 +199,15 @@
 - type: startingGear
   id: RMCGearCorpseDeputy
   equipment:
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     back: CMSatchelSecurity
     outerClothing: RMCCoatBureauDeputy
     shoes: CMBootsBlackFilled
     head: RMCHeadCapBureau
     eyes: CMGlassesSecurity
-    id: RMCIDCardDeputy
+    id: RMCIDCardDeputySurvivor
     ears: CMHeadsetColony
-#    belt: /obj/item/storage/belt/gun/m4a3/heavy
+    belt: RMCBeltHolsterPistolHandcannonFilled
 
 # Corporate Liaison
 - type: randomHumanoidSettings
@@ -192,22 +215,45 @@
   id: RMCCorpseLiaison
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseLiaison ]
+    prototypes:
+    - RMCGearCorpseLiaison
+    - RMCGearCorpseLiaisonBlue
+    - RMCGearCorpseLiaisonBrown
+    - RMCGearCorpseLiaisonWhite
   - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonField
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCArmorVest
     back: CMSatchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
     id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
-#    belt: /obj/item/storage/belt/gun/m4a3/mod88
+    belt: CMM77BeltFilled
   storage:
     back:
     - RMCRadioHandheldColonyOff
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBlue
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlue
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBrown
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBrown
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonWhite
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
 
 # Prison Guard
 - type: randomHumanoidSettings
@@ -362,7 +408,7 @@
     shoes: RMCBootsPMCFilled
     mask: RMCMaskBalaclava
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchToolsFill
   storage:
@@ -386,7 +432,7 @@
 - type: startingGear
   id: RMCGearCorpseWeYaManager # TODO RMC14 manager jacket, jumpsuit and hat, lockable satchel
   equipment:
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack

@@ -20,6 +20,9 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobIntelOfficer
+    time: 18000 # 5 hours
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
@@ -31,7 +34,8 @@
   icon: "CMJobIconASO"
   requireAdminNotify: true
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  marineAuthorityLevel: 13
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ASO
   roleWeight: 0.25
@@ -41,6 +45,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -51,6 +56,7 @@
         RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPilot: 2
+        RMCSkillResearch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
@@ -63,11 +69,13 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: aso
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearASO
