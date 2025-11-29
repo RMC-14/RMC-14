@@ -83,6 +83,7 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
+      - RMCBoxZipties
   - type: RMCNameItemOnVend
     item: Armor
   - type: ExplosionResistance

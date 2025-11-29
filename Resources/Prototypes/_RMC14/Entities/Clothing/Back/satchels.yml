@@ -282,6 +282,15 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost
+  id: CMSatchelSecurityFilledProvostInspector
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi
+
+- type: entity
+  parent: CMSatchelSecurity
   suffix: Provost Dep Mar
   id: CMSatchelSecurityFilledProvostDeputyMarshal
   components:
