@@ -42,13 +42,13 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVESmartgunner
   name: forecon smartgunner spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: marine_spawn
+    state: smartgunner_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVESmartgunner
 
