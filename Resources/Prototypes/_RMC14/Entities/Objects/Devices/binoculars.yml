@@ -3,6 +3,7 @@
   id: RMCBinoculars
   name: binoculars
   description: A military-issued pair of binoculars.
+  suffix: RMC
   components:
   - type: Item
     size: Small
