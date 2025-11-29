@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Almayer starting unpowered (hopefully).
-    type: Fix
-  - message: Fixed some storages starting without some items or having strange shapes.
-    type: Fix
-  id: 2055
-  time: '2025-07-20T23:10:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7119
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Sorokyne Doctor survivor spawning with less gear than intended.
@@ -4613,5 +4604,12 @@
   id: 2555
   time: '2025-11-29T03:37:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8419
+- author: Vermidia
+  changes:
+  - message: Fixed some heals not healing enough.
+    type: Fix
+  id: 2556
+  time: '2025-11-29T04:24:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8486
 Name: RMC14
 Order: -1
