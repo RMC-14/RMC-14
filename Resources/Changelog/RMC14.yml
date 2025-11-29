@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed the UNMC cup's sprite.
-    type: Fix
-  id: 2071
-  time: '2025-07-21T21:34:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7170
 - author: SharkSnake98
   changes:
   - message: Added 4 new playtime medals, in the form of engraved metal name badges.
@@ -4606,5 +4599,13 @@
   id: 2571
   time: '2025-11-29T09:12:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8447
+- author: CatAndHats
+  changes:
+  - message: Added the honor guard pamphlet which is found in the honor guard kit,
+      which grants them their hud icon and job title.
+    type: Add
+  id: 2572
+  time: '2025-11-29T09:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8195
 Name: RMC14
 Order: -1
