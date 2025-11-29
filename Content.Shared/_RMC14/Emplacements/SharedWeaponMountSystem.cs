@@ -315,7 +315,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _item.SetSize(ent, ent.Comp.MountSize);
 
         UpdateAppearance(ent);
-        _audio.PlayPredicted(ent.Comp.PrySound, ent, args.User);
+        _audio.PlayPredicted(ent.Comp.DetachSound, ent, args.User);
     }
 
     private void OnMountDeploy(Entity<WeaponMountComponent>ent, ref MountDeployDoafterEvent args)
@@ -478,6 +478,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                 ("fireRate", $"{gunComponent.FireRateModified:0.0}")), priority: 3);
         }
 
+        // Broken information
         if (ent.Comp.Broken)
             args.PushMarkup(Loc.GetString("emplacement-mount-broken-examine"), priority: 0);
 

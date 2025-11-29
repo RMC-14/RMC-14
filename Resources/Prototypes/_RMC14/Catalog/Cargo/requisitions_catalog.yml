@@ -78,9 +78,9 @@
         crate: RMCCrateBoxMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
-      - cost: 2000
+      - cost: 2500
         crate: RMCCrateMagazineM56DDrum
-      - cost: 2000
+      - cost: 2500
         crate: RMCCrateMagazineM2C
     - name: Attachments
       entries:
@@ -306,7 +306,7 @@
     - name: Weapons
       entries:
       - cost: 4000
-        crate: RMCCrateM54CE2 #
+        crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
       - cost: 4000

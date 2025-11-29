@@ -1,7 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Overheat;
 
@@ -63,13 +62,13 @@ public sealed partial class OverheatComponent : Component
     public bool OverHeated;
 
     /// <summary>
-    ///     Whether the weapon is currently overheated.
+    ///     The time the weapon got overheated at.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan OverHeatedAt;
 
     /// <summary>
-    ///     The sound that is played when the weapon overheats
+    ///     The sound that plays when the weapon overheats.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? OverheatSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/hmg_cooling.ogg");

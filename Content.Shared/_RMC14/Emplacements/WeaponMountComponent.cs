@@ -93,13 +93,13 @@ public sealed partial class WeaponMountComponent : Component
     public ProtoId<ItemSizePrototype> MountedWeaponSize = "Huge";
 
     /// <summary>
-    ///     The distance in which no other weapon mounts can be placed.
+    ///     The distance required from the closest mount.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int MountExclusionAreaSize = 5;
 
     /// <summary>
-    ///     The distance in which no barricade can be placed.
+    ///     The distance required from the closest barricade.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int BarricadeExclusionAreaSize;
@@ -111,13 +111,13 @@ public sealed partial class WeaponMountComponent : Component
     public string? DismountAction = "RMCActionDismount";
 
     /// <summary>
-    ///     The uid of that makes you stop using the mount.
+    ///     The uid of the action that makes you stop using the mount.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? DismountActionEntity;
 
     /// <summary>
-    ///     Whether the mount can be rotated without the use of any tool.
+    ///     Whether the mount can be rotated without the use of any tools.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool CanRotateWithoutTool;
@@ -141,7 +141,7 @@ public sealed partial class WeaponMountComponent : Component
     public SoundSpecifier RotateSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
 
     [DataField]
-    public SoundSpecifier PrySound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
+    public SoundSpecifier DetachSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
 
     [DataField]
     public SoundSpecifier SecureSound = new SoundPathSpecifier("/Audio/Items/deconstruct.ogg");
