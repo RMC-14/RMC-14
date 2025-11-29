@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.ActionBlocker;
@@ -31,6 +32,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -49,6 +51,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
@@ -262,10 +265,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         weapon.MountedTo = GetNetEntity(ent);
         ent.Comp.MountedEntity = args.Used;
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Mounted, true);
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
 
+        UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.RotateSound, ent, args.User);
     }
 
@@ -307,11 +310,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         }
 
         ent.Comp.MountedEntity = null;
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Mounted, false);
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
         _item.SetSize(ent, ent.Comp.MountSize);
 
+        UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.PrySound, ent, args.User);
     }
 
@@ -334,8 +337,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _transform.AnchorEntity(ent, xform);
         _collisionWake.SetEnabled(ent, false);
 
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, false);
-
         if (ent.Comp.MountOnDeploy && ent.Comp.MountedEntity != null)
         {
             var ammoCountEvent = new GetAmmoCountEvent();
@@ -344,6 +345,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
         }
 
+        UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.DeploySound, ent, args.User);
     }
 
@@ -369,14 +371,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (foldable != null)
             _foldable.SetFolded(ent, foldable, true);
 
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, true);
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
 
-        _audio.PlayPredicted(ent.Comp.UndeploySound, ent, user);
-
         if (TryComp(user, out HandsComponent? hands))
             _hands.TryPickupAnyHand(user.Value, ent, handsComp: hands);
+
+        UpdateAppearance(ent);
+        _audio.PlayPredicted(ent.Comp.UndeploySound, ent, user);
     }
 
     private bool CanDeployPopup(Entity<WeaponMountComponent> ent, EntityUid user, out EntityCoordinates coordinates, out Angle rotation)
@@ -657,6 +659,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (!CanAssembleMount(ent, user))
             return false;
 
+        if (!IsViableWeapon(used, ent))
+            return false;
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
             ent.Comp.AssembleDelay,
@@ -742,9 +747,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             XenoAcid.SetCorrodible(corrodible, true);
 
         UndeployMount(ent, null, foldable);
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Broken, true);
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Mounted, false);
-        _appearance.SetData(ent, WeaponMountComponentVisualLayers.Folded, false);
+        UpdateAppearance(ent);
     }
 
     private void OnDamageModified(Entity<WeaponMountComponent> ent, ref DamageModifyEvent args)
@@ -760,6 +763,73 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
 
         args.IsTileFree = true;
+    }
+
+    /// <summary>
+    ///     Checks if the entity is able to be attached to the mount.
+    /// </summary>
+    /// <param name="weapon">The entity being attached</param>
+    /// <param name="mount">The mount being attached to</param>
+    /// <param name="weaponMountComponent">The <see cref="WeaponMountComponent"/> of the mount</param>
+    /// <returns>True if the weapon is able to be attached to the mount</returns>
+    public bool IsViableWeapon(EntityUid weapon, EntityUid mount, WeaponMountComponent? weaponMountComponent = null)
+    {
+        if (!Resolve(mount, ref weaponMountComponent))
+            return false;
+
+        if (TryComp(weapon, out MetaDataComponent? metaData) && metaData.EntityPrototype != null)
+        {
+            var validMount = false;
+            foreach (var prototype in weaponMountComponent.AttachablePrototypes)
+            {
+                if (metaData.EntityPrototype.ID != prototype.Id)
+                    continue;
+
+                validMount = true;
+                break;
+            }
+
+            if (!validMount)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void OverheatMount(EntityUid mount, DamageSpecifier damage, WeaponMountComponent? mountComponent = null)
+    {
+        if (!Resolve(mount, ref mountComponent))
+            return;
+
+        _damage.TryChangeDamage(mount, damage);
+    }
+
+    public void UpdateAppearance(EntityUid mount, WeaponMountComponent? mountComponent = null)
+    {
+        if (!Resolve(mount, ref mountComponent))
+            return;
+
+        if (TryComp(mount, out FoldableComponent? foldable))
+        {
+            //Deployed with weapon attached
+            _appearance.SetData(mount, WeaponMountComponentVisualLayers.Mounted, !foldable.IsFolded && mountComponent.MountedEntity != null);
+            //Folded with weapon attached
+            _appearance.SetData(mount, WeaponMountComponentVisualLayers.Folded, foldable.IsFolded && mountComponent.MountedEntity != null);
+            //Broken while folded
+            _appearance.SetData(mount, WeaponMountComponentVisualLayers.Broken, mountComponent.Broken);
+        }
+
+        if (mountComponent.MountedEntity == null || !TryComp(mountComponent.MountedEntity.Value, out OverheatComponent? overheat))
+            return;
+
+        // Overheat visual that gradually increases/decreases its visibility depending on the amount of heat stacks
+        _appearance.TryGetData<Color>(mount, WeaponMountComponentVisualLayers.Overheated, out var color);
+
+        var showHeated = foldable == null || !foldable.IsFolded;
+        _appearance.SetData(mount, WeaponMountComponentVisualLayers.Overheated, showHeated);
+
+        var alpha = Math.Clamp(overheat.Heat / overheat.MaxHeat, 0f, 1f);
+        _appearance.SetData(mount, WeaponMountComponentVisualLayers.Overheated, color.WithAlpha(alpha));
     }
 }
 

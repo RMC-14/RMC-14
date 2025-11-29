@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared.Foldable;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Client.GameObjects;
@@ -43,6 +44,15 @@ public sealed class WeaponMountSystem : SharedWeaponMountSystem
             if (foldable != null)
             {
                 state = state && !foldable.IsFolded && !mount.Comp.Broken;
+            }
+
+            // Gradually increase/decrease the visibility of the overheat sprite based on the current amount of heat.
+            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Overheated, out var hotLayer, false) &&
+                TryComp(mount.Comp.MountedEntity, out OverheatComponent? overheat))
+            {
+                _sprite.LayerSetVisible((mount,sprite), hotLayer, state);
+                var alpha = Math.Clamp(overheat.Heat / overheat.MaxHeat, 0f, 1f);
+                _sprite.LayerSetColor((mount, sprite), hotLayer, sprite.Color.WithAlpha(alpha));
             }
 
             // Only show the mounted ammo sprite if the mount is not folded.

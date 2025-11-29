@@ -32,7 +32,6 @@
     delay: 8
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: CMBarricade
   - type: Destructible
     thresholds:
     - trigger:
@@ -172,6 +171,9 @@
       visible: false
     - state: mag-0
       map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+    - state: m2c_overheat
+      map: [ "enum.WeaponMountComponentVisualLayers.Overheated" ]
       visible: false
   - type: Rotatable
   - type: Strap

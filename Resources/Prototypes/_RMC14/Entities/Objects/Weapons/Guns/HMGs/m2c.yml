@@ -65,7 +65,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineM2C
+        startingItem: RMCMagazineM2C #TODO remove this
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m56dauto_load.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hmg_eject_mag.ogg
         priority: 2
@@ -74,7 +74,7 @@
           - RMCMagazineM2C
   - type: GunDamageModifier
     multiplier: 1
-  #- type: GunRequiresSkills
+  #- type: GunRequiresSkills //TODO uncomment this
   #  skills:
   #    RMCSkillEngineer: 1
   - type: GunSkilledRecoil
@@ -103,6 +103,7 @@
   - type: Tag
     tags:
     - RMCMachineGunM2C
+  - type: Overheat
 
 # Magazines
 - type: entity

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.EntitySystems;
@@ -19,6 +20,8 @@ public sealed class MountableWeaponSystem : EntitySystem
     {
         SubscribeLocalEvent<MountableWeaponComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<MountableWeaponComponent, TakeAmmoEvent>(OnTakeAmmo);
+        SubscribeLocalEvent<MountableWeaponComponent, OverheatedEvent>(OnOverheated);
+        SubscribeLocalEvent<MountableWeaponComponent, HeatGainedEvent>(OnHeatGained);
     }
 
     private void OnAttemptShoot(Entity<MountableWeaponComponent> ent, ref AttemptShootEvent args)
@@ -90,5 +93,21 @@ public sealed class MountableWeaponSystem : EntitySystem
             ammoSpriteKey = WeaponMountComponentVisualLayers.FoldedAmmo;
 
         _appearance.SetData(GetEntity(ent.Comp.MountedTo.Value), ammoSpriteKey, ammoEv.Count - 1 > 0);
+    }
+
+    private void OnOverheated(Entity<MountableWeaponComponent> ent, ref OverheatedEvent args)
+    {
+        if (ent.Comp.MountedTo == null || args.Damage == null)
+            return;
+
+        _weaponMount.OverheatMount(GetEntity(ent.Comp.MountedTo.Value), args.Damage);
+    }
+
+    private void OnHeatGained(Entity<MountableWeaponComponent> ent, ref HeatGainedEvent args)
+    {
+        if (ent.Comp.MountedTo == null)
+            return;
+
+        _weaponMount.UpdateAppearance(GetEntity(ent.Comp.MountedTo.Value));
     }
 }

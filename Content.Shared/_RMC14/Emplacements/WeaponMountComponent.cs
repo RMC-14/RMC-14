@@ -12,10 +12,13 @@ namespace Content.Shared._RMC14.Emplacements;
 public sealed partial class WeaponMountComponent : Component
 {
     /// <summary>
-    ///     The whitelist of what is allowed to be mounted. //TODO implement this
+    ///     The whitelist of what is allowed to be mounted.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> AttachablePrototypes = new();
+    public List<EntProtoId> AttachablePrototypes = new()
+    {
+        "RMCSmartGunMounted",
+    };
 
     /// <summary>
     ///     The prototype that spawns permanently attached to the mount.
@@ -155,4 +158,5 @@ public enum WeaponMountComponentVisualLayers : byte
     Folded,
     FoldedAmmo,
     Broken,
+    Overheated,
 }

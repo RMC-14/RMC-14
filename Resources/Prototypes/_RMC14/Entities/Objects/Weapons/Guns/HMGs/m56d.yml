@@ -69,7 +69,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineM56D
+        startingItem: RMCMagazineM56D #TODO remove this
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_minigun_cocked.ogg
         priority: 2
@@ -80,6 +80,7 @@
   - type: GunDamageModifier
     multiplier: 1
   #- type: GunRequiresSkills //TODO uncomment this
+  #  skills:
   #    RMCSkillEngineer: 1
   - type: GunSkilledRecoil
     setRecoil: 0
