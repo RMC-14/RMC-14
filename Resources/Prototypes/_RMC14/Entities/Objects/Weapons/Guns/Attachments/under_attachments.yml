@@ -461,6 +461,25 @@
       state: all
 
 - type: entity
+  parent: RMCAttachmentUnderbarrelExtinguisher
+  id: RMCAttachmentUnderbarrelExtinguisherSpec
+  name: HME-88B underbarrel extinguisher
+  description: An experimental Taiho-Technologies HME-88B underbarrel extinguisher integrated with a select few gun models. It is capable of putting out the strongest of flames. Point at flame before applying pressure.
+  components:
+  - type: Spray
+    sprayedPrototype: RMCExtinguisherSpraySpec
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 500
+        reagents:
+        - ReagentId: Water
+          Quantity: 500
+  - type: SolutionTransfer
+    maxTransferAmount: 500
+    transferAmount: 500
+
+- type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentU1GrenadeLauncher
   name: U1 grenade launcher

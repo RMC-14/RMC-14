@@ -46,8 +46,8 @@
         ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
         priority: 2
         whitelist:
-          components:
-          - RMCFlamerTank
+          tags:
+          - RMCTankFlamer
   - type: Wieldable
   - type: WieldableSpeedModifiers
     base: 0.5

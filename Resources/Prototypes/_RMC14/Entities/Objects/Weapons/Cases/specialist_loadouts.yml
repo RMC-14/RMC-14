@@ -169,6 +169,40 @@
     - type: ScoutWhitelist
 
 - type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCPyroSpecEquipmentCase
+  name: pyrotechnician equipment case
+  description: "A large case containing M34-T incinerator unit, M35 pyrotechnician armor and helmet, Broiler-T flexible refueling system and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: pyro
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,3
+  - type: StorageFill
+    contents:
+    - id: CMArmorM35
+    - id: CMArmorHelmetM35
+    # Broiler-T flexible refueling system
+    - id: RMCWeaponFlamerSpec
+    - id: RMCTankFlamerLarge
+    - id: RMCPouchFuelTank
+    - id: CMFireExtinguisher
+    - id: CMFireExtinguisherPortable
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: PyroWhitelist
+
+- type: entity
   parent: RMCKitBase
   id: RMCKitLoader
   name: loader kit

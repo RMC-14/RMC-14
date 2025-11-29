@@ -1,0 +1,123 @@
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerSpec
+  name: M34-T incinerator unit
+  description: An improved version of the M34 incinerator unit, the M34-T model is capable of dispersing a larger variety of fuel types.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - PyroWhitelist
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34t.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34t.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34t.rsi
+  - type: AttachableHolder # NOTE: The nozzle is only for the base M34.
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisherSpec
+        whitelist:
+          tags:
+          - RMCAttachmentExtinguisher
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamer
+          - RMCTankFlamerLarge
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerLarge
+  name: large incinerator tank
+  description: A large fuel tank for use in the M34-T incinerator unit. Handle with extreme caution.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_large_custom
+    layers:
+    - state: flametank_large_custom
+    - state: flametank_large_custom_strip2
+    - state: flametank_large_custom_strip2
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 250
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 250
+  # - type: RMCFlamerTank
+  #   maxIntensity: 80
+  #   maxRange: 5
+  #   maxDuration: 24
+  - type: Tag
+    tags:
+    - RMCTankFlamerLarge
+
+- type: entity
+  parent: RMCTankFlamerLarge
+  id: RMCTankFlamerLargeB
+  name: large incinerator tank (B)
+  description: A large fuel tank of Ultra Thick Napthal Fuel type B, a special variant of napalm that is easily extinguished, but disperses over a wide area while burning slowly.
+  # components:
+  # - type: RMCFlamerTank
+  #   maxRange: 6
+  # - type: SolutionContainerManager
+  #   solutions:
+  #     rmc_flamer_tank:
+  #       maxVol: 250
+  #       reagents:
+  #       - ReagentId: RMCBGel
+  #         Quantity: 250
+
+- type: entity
+  parent: RMCTankFlamerLarge
+  id: RMCTankFlamerLargeX
+  name: large incinerator tank (X)
+  description: A large fuel tank of Ultra Thick Napthal Fuel type X, a sticky combustible liquid chemical that burns extremely hot, for use in the M34-T incinerator unit. Handle with extreme caution.
+  # components:
+  # - type: RMCFlamerTank
+  #   maxRange: 6
+  # - type: SolutionContainerManager
+  #   solutions:
+  #     rmc_flamer_tank:
+  #       maxVol: 250
+  #       reagents:
+  #       - ReagentId: RMCXGel
+  #         Quantity: 250
+
+- type: entity
+  parent: RMCTankFlamerLarge
+  id: RMCTankFlamerLargeCustom
+  name: large custom incinerator tank
+  description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
+  # components:
+  # - type: RMCFlamerTank
+  #   maxIntensity: 60
+  #   maxRange: 8
+  #   maxDuration: 50
+  # - type: SolutionContainerManager
+  #   solutions:
+  #     rmc_flamer_tank:
+  #       maxVol: 250
+  #       reagents: [ ]
+
+- type: Tag
+  id: RMCTankFlamerLarge
