@@ -27,12 +27,7 @@
         maxVol: 100
       tank:
         maxVol: 500
-  - type: SolutionRegeneration
-    solution: tank
-    generated:
-      reagents:
-      - ReagentId: Water
-        Quantity: 500
+  - type: RMCSinkWater
   - type: DrainableSolution
     solution: tank
   - type: ReagentTank
