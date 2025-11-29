@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: HIDP grenade packets now contain HIDP grenades again.
-    type: Fix
-  id: 2061
-  time: '2025-07-21T01:39:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7126
 - author: DrSmugleaf
   changes:
   - message: Fixed burrowers not being able to burrow to location.
@@ -4608,5 +4601,13 @@
   id: 2561
   time: '2025-11-29T04:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8450
+- author: Vermidia
+  changes:
+  - message: Fixed hedgehog ravager having slightly too much base armor and not enough
+      explosion armor.
+    type: Fix
+  id: 2562
+  time: '2025-11-29T05:00:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8495
 Name: RMC14
 Order: -1
