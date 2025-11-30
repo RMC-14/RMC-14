@@ -10,7 +10,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMMaintTech
     sections:

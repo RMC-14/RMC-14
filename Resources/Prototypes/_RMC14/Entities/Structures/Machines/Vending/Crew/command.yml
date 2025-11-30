@@ -13,7 +13,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMStaffOfficer
     sections:
@@ -102,6 +101,7 @@
         points: 5
 
 # Armoury Vend
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerWeapon
@@ -114,7 +114,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMStaffOfficer
     sections:
@@ -229,6 +228,7 @@
       - id: RMCScabbardMacheteFilled
         points: 5
 
+
 # Executive Officer #
 
 # Weapon Vendor
@@ -244,7 +244,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMExecutiveOfficer
     pointsType: Specialist
@@ -356,6 +355,7 @@
 # Commanding Officer #
 
 # Clothing Vend
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerClothing
@@ -436,7 +436,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMCommandingOfficer
     sections:
@@ -541,6 +540,7 @@
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
 
+
 # Weapon Vend
 - type: entity
   parent: ColMarTechBase
@@ -554,7 +554,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMCommandingOfficer
     sections:
@@ -672,6 +671,7 @@
       - id: RMCAttachmentSuppressorCompact
         points: 15
 
+
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleXOFormal
@@ -733,7 +733,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMExecutiveOfficer
     - CMChiefMP

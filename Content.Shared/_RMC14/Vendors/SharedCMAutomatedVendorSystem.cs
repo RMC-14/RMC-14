@@ -301,7 +301,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        if (!ent.Comp.CanRestock)
+        if (!ent.Comp.CanManualRestock)
             return;
 
         if (TryComp<StorageComponent>(args.Used, out var storage))
