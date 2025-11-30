@@ -76,6 +76,17 @@
     access: [["CMAccessColonyCommand"]]
 
 - type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeLiaison
+  description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
+  suffix: Corporate Liaison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["RMCAccessWeYa"]]
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
@@ -83,7 +94,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/staff.rsi
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMLockerBase
@@ -117,7 +128,7 @@
   description: It's an immobile card-locked storage unit.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/gun_cabinet.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
   - type: InsertBlacklist
@@ -125,14 +136,6 @@
       components:
       - Xeno
       - Marine
-
-- type: entity
-  parent: RMCLockerGunBase
-  id: RMCLockerGunBlue
-  name: riot control equipment Cabinet
-  components:
-  - type: RMCUnlockOnAlertLevel
-    level: Blue
 
 - type: entity
   parent: RMCLockerGunBase
@@ -148,10 +151,24 @@
 
 - type: entity
   parent: RMCLockerGunBase
+  id: RMCLockerGunBlue
+  name: riot control equipment Cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
+  - type: RMCUnlockOnAlertLevel
+    level: Blue
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunRed
   name: red alert gun cabinet
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armory_locker.rsi
   - type: RMCUnlockOnAlertLevel
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMLockerBase
@@ -216,7 +233,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerQM
-  name: quartermaster's locker
+  name: Logistics Officer's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
@@ -229,7 +246,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerCargo
-  name: cargo technician's locker
+  name: requisitions technician's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/cargo.rsi
@@ -428,6 +445,41 @@
   name: squad four smartgun operator locker
 
 - type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderPMC
+  name: force lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorPMCOne
+  name: squad one support gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorPMCOne
+  id: RMCLockerSmartGunOperatorPMCTwo
+  name: squad two support gunner locker
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerHeavyGunnerCLF
+  name: heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetCLFSGOFill
+
+- type: entity
   parent: RMCCabinet
   id: RMCCabinetTSEPAInspector
   name: inspector's cabinet
@@ -458,3 +510,29 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetTSEPAFill
+
+# SPP
+- type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderSPP
+  name: section lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorSPPOne
+  name: squad one heavy gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorSPPOne
+  id: RMCLockerSmartGunOperatorSPPTwo
+  name: squad two heavy gunner locker

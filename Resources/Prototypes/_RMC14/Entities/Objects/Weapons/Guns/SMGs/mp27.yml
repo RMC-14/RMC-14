@@ -72,13 +72,16 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
@@ -164,7 +167,7 @@
     - Cartridge
     - RMCCartridge46x30mm
   - type: CartridgeAmmo
-    proto: RMCBullet57x28mm
+    proto: RMCBullet46x30mm
 
 - type: entity
   parent: Bullet10x20mm

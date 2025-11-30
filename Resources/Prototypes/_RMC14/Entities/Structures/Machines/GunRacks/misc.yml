@@ -5,7 +5,7 @@
   id: RMCGunRackM34IncineratorEmpty
   name: M34 Incinerator rack
   suffix: M34 Incinerator, Empty
-  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, USCM comissioned racks with fixed slots which only fit M34 Incinerator Units. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC commissioned racks with fixed slots which only fit M34 Incinerator Units. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
   components:
   - type: ContainerContainer
     containers:
@@ -52,6 +52,91 @@
   - type: ContainerFill
     containers:
       item_1:
-      - RMCWeaponFlamer
+      - RMCWeaponFlamerPVE
       item_2:
-      - RMCWeaponFlamer
+      - RMCWeaponFlamerPVE
+
+# MAR 50 Wall-Mounted Rack
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackMAR50WallEmpty
+  name: MAR-50 wooden rack
+  suffix: MAR-50, Empty
+  description: A wooden rack, mounted onto a wall with exposed notches to rest a MAR-50 on.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/mar50_wall_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: MAR50
+        whitelist:
+          tags:
+          - RMCWeaponMar50LMG
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponMar50LMG
+
+- type: entity
+  parent: RMCGunRackMAR50WallEmpty
+  id: RMCGunRackMAR50WallFilled
+  suffix: MAR-50, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponMar50LMG
+
+# Rival 78 Wall-Mounted Rack
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackM357WallEmpty
+  name: M357 Rival wooden rack
+  suffix: M357 Rival, Empty
+  description: A wooden rack, mounted onto a wall with exposed notches to rest a M357 Rival on.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m357_wall_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M357 Rival
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM357
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM357
+
+- type: entity
+  parent: RMCGunRackM357WallEmpty
+  id: RMCGunRackM357WallFilled
+  suffix: M357 Rival, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - WeaponShotgunM357
+

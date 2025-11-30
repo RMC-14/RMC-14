@@ -22,7 +22,7 @@ public sealed class XenoBombardSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -49,12 +49,12 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
-            target = target.Offset(direction.Normalized() * ent.Comp.Range);
+            target = source.Offset(direction.Normalized() * ent.Comp.Range);
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
         var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true, RootEntity = true };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);

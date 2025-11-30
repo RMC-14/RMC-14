@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist C.M McWeb
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobArachnid
   suffix: RMC14
   components:
@@ -49,8 +49,6 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
-    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
     - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
@@ -61,6 +59,7 @@
     - map: [ "gloves" ]
     - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
+    - map: [ "id" ] # RMC14 re-arrange id slot
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
@@ -71,13 +70,12 @@
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
     - map: [ "back" ]
-    - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ] # Do these need to be here? (arachnid hair arachnid hair)
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]
-    - map: [ "neck" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
     - map: [ "enum.VisorVisualLayers.Base" ]

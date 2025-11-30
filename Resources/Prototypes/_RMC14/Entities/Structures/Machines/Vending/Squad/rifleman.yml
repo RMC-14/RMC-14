@@ -23,6 +23,8 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
+      - id: RMCArmorVestRifleman
+        name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -101,7 +103,7 @@
         points: 15
       - id: RMCGunCasePistolSmart
         points: 15
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 30
     - name: Explosives
       entries:
@@ -129,6 +131,10 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -140,15 +146,13 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       #- id: M44 Heavy Speedloader
       #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
-      #- id: M1984 Hollow Point magazine
-      #  points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
       - id: RMCMagazinePistolM1984AP
         points: 5
       - id: CMMagazinePistolMK80
@@ -165,13 +169,23 @@
       entries:
       - id: CMWebbing
         points: 10
+      - id: RMCWebbingBlackSmall
+        points: 10
       - id: CMWebbingBrown
         points: 15
       - id: CMWebbingBlack
         points: 15
+      - id: RMCWebbingLegPouch
+        points: 15
+      - id: RMCWebbingLegPouchBlack
+        points: 15
       - id: RMCWebbingDropPouch
         points: 15
+      - id: RMCWebbingDropPouchBlack
+        points: 15
       - id: CMWebbingHolster
+        points: 15
+      - id: RMCWebbingHolsterBlack
         points: 15
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -232,4 +246,6 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5

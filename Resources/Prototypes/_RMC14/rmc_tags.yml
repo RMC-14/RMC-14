@@ -5,13 +5,16 @@
   id: CMCartridgePistol9mm
 
 - type: Tag
-  id: CMCartridgePistol.22mm
+  id: CMCartridgePistol22mm
 
 - type: Tag
   id: CMCartridgePistol9mmAP
 
 - type: Tag
   id: RMCCartridgeRevolver44
+
+- type: Tag
+  id: RMCCartridgeRevolver44Marksman
 
 - type: Tag
   id: RCMCartridgePistol9mmSquashHead
@@ -119,4 +122,16 @@
   id: Bacon
 
 - type: Tag
+
   id: Watch
+
+-type: Tag
+
+  id: RMCPinpointer
+
+- type: Tag
+  id: RMCSynthResetKey
+
+
+- type: Tag
+  id: RMCXenoParasitePreparingLeap

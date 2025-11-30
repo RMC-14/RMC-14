@@ -81,6 +81,7 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMCommandingOfficer
       points: 120
     - type: RMCPointing
     - type: JobPrefix
@@ -88,12 +89,13 @@
     - type: CommendationGiver
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: InnateCommandSpeech
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: co
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
 

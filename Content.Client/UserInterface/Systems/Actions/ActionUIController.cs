@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.Actions;
 using Content.Client.Actions;
 using Content.Client.Construction;
 using Content.Client.Gameplay;
@@ -192,10 +193,6 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         // stop targeting when needed
         if (ev.FoundTarget ? !target.Repeat : target.DeselectOnMiss)
             StopTargeting();
-
-        // RMC14
-        if (!ev.FoundTarget)
-            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(actionId))); // RMC14
 
         return true;
     }
@@ -463,6 +460,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
         if (updateSlots)
             _container?.SetActionData(_actionsSystem, _actions.ToArray());
+
+        EntityManager.SystemOrNull<RMCActionsSystem>()?.ActionsChanged(_actions);
     }
 
     private void DragAction()
@@ -836,8 +835,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         // - Add a yes/no checkmark where the HandItemOverlay usually is
 
         // Highlight valid entity targets
-        if (!EntityManager.TryGetComponent<EntityTargetActionComponent>(uid, out var entity))
+        if (!EntityManager.TryGetComponent<EntityTargetActionComponent>(uid, out var entity) ||
+            !entity.ToggleOutline)
+        {
             return;
+        }
 
         Func<EntityUid, bool>? predicate = null;
         var attachedEnt = action.AttachedEntity;

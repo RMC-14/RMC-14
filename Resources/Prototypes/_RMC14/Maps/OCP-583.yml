@@ -7,9 +7,7 @@
   randomRotation: false
   stations:
     OCP-583:
-      stationProto: StandardUNMCWarship
+      stationProto: UNMCHighCommand
       components:
         - type: StationNameSetup
           mapNameTemplate: 'OCP-583'
-        - type: StationJobs
-          availableJobs: {}

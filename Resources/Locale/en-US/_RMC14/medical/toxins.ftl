@@ -1,4 +1,7 @@
-﻿reagent-name-rmcmolecularacid = Diluted Molecular Acid
+﻿reagent-name-rmcgenerictoxin = Generic Toxin
+reagent-desc-rmcgenerictoxin = General identification for many similar toxins, sometimes created as a byproduct through chemical reactions.
+
+reagent-name-rmcmolecularacid = Diluted Molecular Acid
 reagent-desc-rmcmolecularacid = An acid of unknown composition, this sample doesn't seem to be as dangerous those found within Xenonid bloodstreams.
 
 rmc-body-stings = Your body stings slightly.
@@ -11,3 +14,6 @@ reagent-desc-rmcmindbreakertoxin = A powerful hallucinogenic compound that is il
 
 reagent-name-rmcblackgoo = Black Goo
 reagent-desc-rmcblackgoo = A strange substance of unknown origin. . .
+
+reagent-name-rmc-chloral-hydrate = Chloral Hydrate
+reagent-desc-rmc-chloral-hydrate = Chloral hydrate was the first synthetically produced sedative-hypnotic drug. It is a powerful sedative which causes near instant sleepiness, but can be deadly in large quantities. Often used together with other anesthetics for surgical procedures.

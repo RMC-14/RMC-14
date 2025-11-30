@@ -43,6 +43,8 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
 
+command-description-rmcresetahelprelay = Restarts the AHelp and MHelp relays.
+
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
 command-description-intel-spawnintel = Spawns intel on all initialized maps.
@@ -74,3 +76,20 @@ command-description-rmcresetahelptracking = Resets all data about tracked AHelp 
 command-description-hijack-trigger = Triggers hijack on the map that you are currently on.
 
 command-description-setoperationname = Changes the name of the operation for the upcoming round.
+
+command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
+command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.
+
+command-description-nearbytile = Gets TileRefs for a specified range around entities.
+command-description-tiletype-FromProtoId = Returns a list of TileRefs that match a specified ProtoId. (Inveratble)
+command-description-tiletype-FromTileId = Returns a list of TileRefs that match a Tile Defenition Id. (Inveratble)
+command-description-replacetile-FromProtoId = Replaces tiles to a specified ProtoId.
+command-description-replacetile-FromTileId = Replaces tiles to a specified Tile Defenition Id.
+command-description-gridtile = Gets TileRefs for a grid that a specified entity is apart of.
+
+command-description-movespeed = Changes the max movement speed for given entities.
+
+command-description-stairwell = Sets the teleportation offset for the given Teleporter entities.
+command-description-stairwellprojector = Sets the projection id for the given TeleporterView entities.
+
+command-description-getusername = Gets the username attached to an entity.

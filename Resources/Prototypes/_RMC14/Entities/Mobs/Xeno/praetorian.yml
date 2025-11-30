@@ -98,7 +98,7 @@
     range: 7
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: SlowOnPull
     slowdowns:
@@ -150,6 +150,8 @@
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianValkyrie
   - type: AcidTrap
+  - type: RMCActionOrder
+    id: CMXenoPraetorian
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -220,6 +222,9 @@
     - type: RMCRooted
   - type: XenoHighGallop
   - type: XenoHidden
+  - type: AcidTrap
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianValkyrie
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -242,7 +247,6 @@
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
-  - type: AcidTrap
   - type: CMArmor
     xenoArmor: 20
   - type: XenoClaws
@@ -255,6 +259,8 @@
         Brute: 40
   - type: XenoTailTrip
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianDancer
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -306,6 +312,8 @@
         Brute: 40
   - type: XenoCleave
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianVanguard
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -372,3 +380,5 @@
       groups:
         Brute: 15
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoPraetorianOppressor

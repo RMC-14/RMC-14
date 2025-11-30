@@ -52,12 +52,6 @@ public sealed partial class PerishableComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool ForceRotProgression;
-
-    /// <summary>
-    /// If true, it ignores human body temperature.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IgnoreTemperature;
 }
 
 

@@ -83,10 +83,14 @@ public sealed class RMCSizeStunSystem : EntitySystem
         return size <= RMCSizes.Humanoid;
     }
 
-    public bool IsXenoSized(Entity<RMCSizeComponent> ent)
+    public bool IsXenoSized(Entity<RMCSizeComponent?> ent)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
         return ent.Comp.Size >= RMCSizes.VerySmallXeno;
     }
+
     public bool IsXenoSized(RMCSizes size)
     {
         return size >= RMCSizes.VerySmallXeno;
@@ -113,51 +117,55 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (bullet.Comp.ShotFrom == null)
             return;
 
-        var distance = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Length();
-
-        if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
-            return;
-
-        if (!TryComp<RMCSizeComponent>(args.Target, out var size))
-            return;
-
-        KnockBack(args.Target, bullet.Comp.ShotFrom, bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax, bullet.Comp.KnockBackSpeed);
-
-        if (_net.IsClient)
-            return;
-
-        // Multiply daze duration based on the size of the target
-        var dazeMultiplier = 1.0;
-        if (size.Size >= RMCSizes.Big)
-            dazeMultiplier = DazedMultiplierBigXeno;
-        else if (size.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, size)))
-            dazeMultiplier = DazedMultiplierSmallXeno;
-
-        //Try to daze before the big size check, because big xenos can still be dazed.
-        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
-
-        //Stun part
-        if (IsXenoSized((args.Target, size)))
+        foreach (var stun in bullet.Comp.Stuns)
         {
-            var stun = bullet.Comp.StunTime;
-            var superSlow = bullet.Comp.SuperSlowTime;
-            var slow = bullet.Comp.SlowTime;
+            if (_entityWhitelist.IsWhitelistFail(stun.Whitelist, args.Target))
+                continue;
 
-            if (bullet.Comp.LosesEffectWithRange)
+            var distance = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Length();
+            if (distance > stun.MaxRange || _stand.IsDown(args.Target))
+                return;
+
+            if (!TryComp<RMCSizeComponent>(args.Target, out var size))
+                return;
+
+            KnockBack(args.Target, bullet.Comp.ShotFrom, stun.KnockBackPowerMin, stun.KnockBackPowerMax, stun.KnockBackSpeed);
+
+            if (_net.IsClient)
+                return;
+
+            // Multiply daze duration based on the size of the target
+            var dazeMultiplier = 1.0;
+            if (size.Size >= RMCSizes.Big)
+                dazeMultiplier = DazedMultiplierBigXeno;
+            else if (size.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, size)))
+                dazeMultiplier = DazedMultiplierSmallXeno;
+
+            //Try to daze before the big size check, because big xenos can still be dazed.
+            _dazed.TryDaze(args.Target, stun.DazeTime * dazeMultiplier);
+
+            //Stun part
+            if (IsXenoSized((args.Target, size)))
             {
-                stun -= TimeSpan.FromSeconds(distance / 50);
-                superSlow -= TimeSpan.FromSeconds(distance / 10);
-                slow -= TimeSpan.FromSeconds(distance / 5);
+                var stunTime = stun.StunTime;
+                var superSlow = stun.SuperSlowTime;
+                var slow = stun.SlowTime;
+
+                if (stun.LosesEffectWithRange)
+                {
+                    stunTime -= TimeSpan.FromSeconds(distance / 50);
+                    superSlow -= TimeSpan.FromSeconds(distance / 10);
+                    slow -= TimeSpan.FromSeconds(distance / 5);
+                }
+
+                if (stun.SlowsEffectBigXenos || size.Size < RMCSizes.Big)
+                    ApplyEffects(args.Target, stunTime, slow, superSlow);
+
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
             }
-
-            if (bullet.Comp.SlowsEffectBigXenos || size.Size < RMCSizes.Big)
-                ApplyEffects(args.Target, stun, slow, superSlow);
-
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
+            else
+                _stamina.DoStaminaDamage(args.Target, args.Damage.GetTotal().Float());
         }
-        else
-            _stamina.DoStaminaDamage(args.Target, args.Damage.GetTotal().Float());
-
     }
 
     /// <summary>
@@ -180,10 +188,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// </summary>
     public void KnockBack(EntityUid target, MapCoordinates? knockedBackFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big && !ignoreSize)
+        if ((!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big) && !ignoreSize)
             return;
 
-        if(knockedBackFrom == null)
+        if (knockedBackFrom == null)
             return;
 
         //TODO Camera Shake
@@ -206,14 +214,18 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private void OnTrigger(Entity<RMCStunOnHitComponent> ent, ref RMCTriggerEvent args)
     {
         var moverCoordinates = _transform.GetMoverCoordinates(ent, Transform(ent));
-
-        var location = _entityLookup.GetEntitiesInRange<StatusEffectsComponent>(moverCoordinates, ent.Comp.StunArea);
-
-        foreach (var target in location)
+        foreach (var stun in ent.Comp.Stuns)
         {
-            ApplyEffects(target, ent.Comp.StunTime, ent.Comp.SlowTime, ent.Comp.SuperSlowTime);
-            KnockBack(target, ent.Comp.ShotFrom, ent.Comp.KnockBackPowerMin, ent.Comp.KnockBackPowerMax, ent.Comp.KnockBackSpeed);
-            break;
+            var location = _entityLookup.GetEntitiesInRange<StatusEffectsComponent>(moverCoordinates, stun.StunArea);
+            foreach (var target in location)
+            {
+                if (_entityWhitelist.IsWhitelistFail(stun.Whitelist, target))
+                    continue;
+
+                ApplyEffects(target, stun.StunTime, stun.SlowTime, stun.SuperSlowTime);
+                KnockBack(target, ent.Comp.ShotFrom, stun.KnockBackPowerMin, stun.KnockBackPowerMax, stun.KnockBackSpeed);
+                break;
+            }
         }
     }
 
@@ -332,7 +344,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousUpdate(Entity<RMCUnconsciousComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         //Readd comps just in case they were removed by a status
@@ -345,7 +357,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)
     {
-        if (!_status.HasStatusEffect(ent, KnockedOut))
+        if (!IsKnockedOut(ent))
             return;
 
         args.Cancel();
@@ -359,5 +371,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private void OnKnockOutCollideThrowHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
         TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
+    }
+
+    public bool IsKnockedOut(EntityUid uid)
+    {
+        return _status.HasStatusEffect(uid, KnockedOut);
     }
 }

@@ -19,9 +19,17 @@
       types:
         Slash: 45
   - type: UsableWhileDevoured
+
+- type: entity
+  parent: RMCKatana
+  id: RMCKatanaDull
+  name: replica katana
+  description: A cheap knock-off commonly found in regular knife stores. Can still do some damage.
+  components:
+  - type: MeleeWeapon
     damage:
       types:
-        Slash: 18
+        Slash: 10
 
 - type: entity
   parent: RMCKatana
@@ -38,10 +46,5 @@
     damage:
       types:
         Slash: 45
-  - type: UsableWhileDevoured
-    damage:
-      types:
-        Slash: 1777
-
 - type: Tag
   id: RMCKatana

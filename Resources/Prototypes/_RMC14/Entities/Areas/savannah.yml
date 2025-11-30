@@ -24,6 +24,7 @@
     mortarFire: false # TODO RMC14 true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     powerNet: savannah
@@ -303,7 +304,7 @@
 - type: entity
   parent: RMCAreaSavannahRequisitions
   id: RMCAreaSavannahQuartermaster
-  name: Quartermaster Office
+  name: Logistics Officer Office
 
 - type: entity
   parent: RMCAreaSavannahAuxiliary
@@ -463,7 +464,7 @@
   parent: RMCAreaSavannahLifeboatAmidship
   id: RMCAreaSavannahLifeboatStarboard
   name: Lifeboat Docking Starboard
-  
+
 - type: entity
   parent: RMCAreaSavannahLifeboatAmidship
   id: RMCAreaSavannahLifeboatPort

@@ -1,0 +1,124 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaDeynekaCryo
+  name: Deyneka Cryo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_deyneka.rsi
+    state: cryo
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaAI
+  name: Deyneka AI Core
+  components:
+  - type: Sprite
+    state: aicore
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaArmory
+  name: Deyneka Armory
+  components:
+  - type: Sprite
+    state: armory
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaBridge
+  name: Deyneka Bridge
+  components:
+  - type: Sprite
+    state: bridge
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaCargo
+  name: Deyneka Cargo
+  components:
+  - type: Sprite
+    state: cargo
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaDorm
+  name: Deyneka Dorm
+  components:
+  - type: Sprite
+    state: dorm
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaEngi
+  name: Deyneka Engi
+  components:
+  - type: Sprite
+    state: engi
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaHanger
+  name: Deyneka Hangar
+  components:
+  - type: Sprite
+    state: hanger
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaKitchen
+  name: Deyneka Kitchen
+  components:
+  - type: Sprite
+    state: kitchen
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaLowerHall
+  name: Deyneka Lower Hall
+  components:
+  - type: Sprite
+    state: lowerhall
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaMed
+  name: Deyneka Med
+  components:
+  - type: Sprite
+    state: med
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaOOB
+  name: Deyneka OOB
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    alwaysPowered: true
+
+- type: entity
+  parent: RMCAreaDeynekaCryo
+  id: RMCAreaDeynekaUpperHall
+  name: Deyneka Upper Hall
+  components:
+  - type: Sprite
+    state: upperhall

@@ -20,12 +20,11 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      takeOne: CMHandheldDefense
+      choices:  { CMHandheldDefense : 1 }
       entries:
-      - id: RMCTesla
     #    CMJIMAPlantedFlag
-    #    CMUA42FSentryFlamer
       - id: RMCSentry
+        recommended: true
       - id: RMCTesla
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
@@ -75,23 +74,29 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 18
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 18
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
-    #- id: CMM20MineBox4
-    #  points: 18
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+        points: 13
+    # - id: CMM20MineBox4
+    #   points: 18
+    # - id: CMM40MFHSMetalFoamGrenade
+    #   points: 5
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -103,15 +108,13 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #   points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
-      # - id: RMCMagazinePistolM1984HP
-      #   points: 3
+      - id: RMCMagazinePistolM1984HP
+        points: 3
       - id: RMCMagazinePistolM1984AP
         points: 3
       - id: CMMagazinePistolMK80
@@ -132,7 +135,7 @@
         points: 12
       - id: RMCCaseFlamer
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
@@ -194,6 +197,8 @@
         points: 3
       - id: CMEncryptionKeyRequisition
         points: 3
+      - id: CMEncryptionKeyMedical
+        points: 3
 
 - type: entity
   parent: ColMarTechBase
@@ -216,9 +221,9 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
@@ -229,6 +234,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestCombatTechnician
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -298,9 +304,14 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     - name: Mask
@@ -360,7 +371,7 @@
         amount: 4
       - id: CMWelderSmall
         amount: 2
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         amount: 4
     # - name: Utility
     #   entries:

@@ -81,9 +81,11 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
@@ -96,10 +98,12 @@
   - type: RMCAirShot
     preparationTime: 1.5
     requiresCombat: true
+    doAfterBreakOnMove: false
     ignoreRoof: true
     shakeAmount: 5
     requiredSkills:
       RMCSkillLeadership: 3
+  - type: RMCBattleExecute
 
 - type: entity
   parent: RMCWeaponRevolverMateba
@@ -130,9 +134,11 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
@@ -162,6 +168,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
@@ -369,13 +376,24 @@
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
 
 - type: entity
-  parent: CMBulletBase
+  parent: RMCBulletMatebaHighImpact
   id: RMCBulletMatebaHighImpactArmorPiercing #HIAP
   name: bullet (.454) HIAP
   categories: [ HideSpawnMenu ]
@@ -386,11 +404,6 @@
         Piercing: 45
   - type: CMArmorPiercing
     amount: 50
-  - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
-  - type: RMCProjectileAccuracy
-    accuracy: 90
 
 - type: entity
   parent: CMBulletBase
@@ -405,8 +418,11 @@
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 90
 

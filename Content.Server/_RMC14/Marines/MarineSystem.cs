@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Server.Access.Systems;
+using Content.Shared._RMC14.Marines;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -9,6 +10,8 @@ namespace Content.Server._RMC14.Marines;
 public sealed class MarineSystem : SharedMarineSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IdCardSystem _idCard = default!;
+
 
     public override void Initialize()
     {
@@ -30,5 +33,10 @@ public sealed class MarineSystem : SharedMarineSystem
             icon = jobIcon.Icon;
 
         MakeMarine(args.Mob, icon);
+
+        if (!_idCard.TryFindIdCard(ent, out var card))
+            return;
+
+        card.Comp.OriginalOwner = ent.Owner;
     }
 }

@@ -3,6 +3,7 @@
   id: RMCBinoculars
   name: binoculars
   description: A military-issued pair of binoculars.
+  suffix: RMC
   components:
   - type: Item
     size: Small
@@ -20,6 +21,12 @@
   - type: Tag
     tags:
     - Binoculars
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
   - type: Clothing
     quickEquip: false
     slots:

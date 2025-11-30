@@ -88,6 +88,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsRemove);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
+        SubscribeLocalEvent<XenoWeedableComponent, ComponentRemove>(OnWeedableRemove);
+        SubscribeLocalEvent<XenoWeedableComponent, EntityTerminatingEvent>(OnWeedableRemove);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
@@ -212,6 +214,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         if (_net.IsServer && !args.Anchored)
             QueueDel(weedable.Comp.Entity);
+    }
+
+    private void OnWeedableRemove<T>(Entity<XenoWeedableComponent> weedable, ref T args)
+    {
+        if (_net.IsServer && weedable.Comp.Entity != null)
+        {
+            QueueDel(weedable.Comp.Entity);
+        }
     }
 
     private void OnDamageOffWeedsMapInit(Entity<DamageOffWeedsComponent> damage, ref MapInitEvent args)
@@ -481,7 +491,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
             Prototype(weededEntity) is not { } weededEntityProto ||
             !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId) ||
-            TerminatingOrDeleted(weedSource))
+            TerminatingOrDeleted(weedSource) ||
+            comp.HasReplaced)
         {
             return;
         }
@@ -505,6 +516,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
         curWeeds.Clear();
         RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
+        comp.HasReplaced = true;
         QueueDel(ent);
     }
 

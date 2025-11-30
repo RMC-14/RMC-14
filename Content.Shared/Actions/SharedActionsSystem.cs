@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Movement;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -35,9 +37,8 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
 
     // RMC14
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;
@@ -268,6 +269,7 @@ public abstract class SharedActionsSystem : EntitySystem
     /// </summary>
     private void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
     {
+        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, ev.LastRealTick);
         if (args.SenderSession.AttachedEntity is not { } user)
             return;
 
@@ -319,7 +321,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (validateEv.Invalid)
             return;
 
-        if (!_rmcActions.CanUseActionPopup(user, actionEnt))
+        if (!_rmcActions.CanUseActionPopup(user, actionEnt, GetEntity(ev.EntityTarget)))
             return;
 
         // All checks passed. Perform the action!
@@ -364,7 +366,10 @@ public abstract class SharedActionsSystem : EntitySystem
             _rotateToFace.TryFaceCoordinates(user, targetWorldPos);
 
         if (!ValidateEntityTarget(user, target, ent))
+        {
+            args.Invalid = true;
             return;
+        }
 
         _adminLogger.Add(LogType.Action,
             $"{ToPrettyString(user):user} is performing the {Name(ent):action} action (provided by {ToPrettyString(args.Provider):provider}) targeted at {ToPrettyString(target):target}.");
@@ -413,7 +418,10 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         var (uid, comp) = ent;
         if (!target.IsValid() || Deleted(target))
+        {
+            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(ent))); // RMC14
             return false;
+        }
 
         if (_whitelist.IsWhitelistFail(comp.Whitelist, target))
             return false;
@@ -421,8 +429,10 @@ public abstract class SharedActionsSystem : EntitySystem
         if (_whitelist.IsBlacklistPass(comp.Blacklist, target))
             return false;
 
-        if (_actionQuery.Comp(uid).CheckCanInteract && !_actionBlocker.CanInteract(user, target))
+        // RMC14
+        if (_actionQuery.Comp(uid).CheckCanInteract && !_actionBlocker.CanInteract(user, target) && ent.Comp.TargetCheckCanInteract)
             return false;
+        // RMC14
 
         if (user == target)
             return comp.CanTargetSelf;
@@ -430,11 +440,17 @@ public abstract class SharedActionsSystem : EntitySystem
         var targetAction = Comp<TargetActionComponent>(uid);
         // not using the ValidateBaseTarget logic since its raycast fails if the target is e.g. a wall
         if (targetAction.CheckCanAccess)
-            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range);
+        {
+            // RMC14
+            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
+                   // if not just checking pure range, let stored entities be targeted by actions
+                   // if it's out of range it probably isn't stored anyway...
+                   _interaction.CanAccessViaStorage(user, target);
+        }
 
-        // if not just checking pure range, let stored entities be targeted by actions
-        // if it's out of range it probably isn't stored anyway...
-        return _interaction.CanAccessViaStorage(user, target);
+        // RMC14 if CheckCanAccess is false the target should still be valid if it's not in a container.
+        // CanAccessViaStorage returns false if the target is not in a container.
+        return true;
     }
 
     public bool ValidateWorldTarget(EntityUid user, EntityCoordinates target, Entity<WorldTargetActionComponent> ent)

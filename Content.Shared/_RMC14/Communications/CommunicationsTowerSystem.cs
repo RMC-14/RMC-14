@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Tools;
@@ -66,16 +66,12 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         if (ent.Comp.State != CommunicationsTowerState.Broken)
             return;
 
-        ent.Comp.State = CommunicationsTowerState.Off;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        ChangeState(ent, CommunicationsTowerState.Off);
     }
 
     private void OnTowerBreakage(Entity<CommunicationsTowerComponent> ent, ref BreakageEventArgs args)
     {
-        ent.Comp.State = CommunicationsTowerState.Broken;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        ChangeState(ent, CommunicationsTowerState.Broken);
     }
 
     private void OnTowerExamined(Entity<CommunicationsTowerComponent> ent, ref ExaminedEvent args)
@@ -93,6 +89,20 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         if (ent.Comp.State == CommunicationsTowerState.Broken)
             return;
+
+        if (TryComp<RMCDeviceBreakerComponent>(args.Used, out var breaker) && ent.Comp.State != CommunicationsTowerState.Broken)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            _doAfter.TryStartDoAfter(doafter);
+            return;
+        }
 
         if (!HasComp<MultitoolComponent>(args.Used))
             return;
@@ -174,18 +184,16 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
         }
 
-        ent.Comp.State = ent.Comp.State switch
+        var state = ent.Comp.State switch
         {
             CommunicationsTowerState.Off => CommunicationsTowerState.On,
             CommunicationsTowerState.On => CommunicationsTowerState.Off,
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        var state = ent.Comp.State == CommunicationsTowerState.On ? "on" : "off";
         _adminLog.Add(LogType.RMCCommunicationsTower, $"{ToPrettyString(args.User):user} turned {ToPrettyString(ent):tower} {state}.");
 
-        Dirty(ent);
-        UpdateAppearance(ent);
+        ChangeState(ent, state);
 
         if (ent.Comp.State == CommunicationsTowerState.On)
             _intel.RestoreColonyCommunications();
@@ -202,14 +210,17 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
         }
 
-        ent.Comp.State = CommunicationsTowerState.Off;
-        Dirty(ent);
-        UpdateAppearance(ent);
+        ChangeState(ent, CommunicationsTowerState.Off);
     }
 
-    private void UpdateAppearance(Entity<CommunicationsTowerComponent> tower)
+    private void ChangeState(Entity<CommunicationsTowerComponent> tower, CommunicationsTowerState newState)
     {
-        _appearance.SetData(tower, CommunicationsTowerLayers.Layer, tower.Comp.State);
+        tower.Comp.State = newState;
+        Dirty(tower);
+
+        var ev = new CommunicationsTowerStateChangedEvent(tower);
+        RaiseLocalEvent(tower, ev);
+        UpdateAppearance(tower);
     }
 
     public bool CanTransmit(ProtoId<RadioChannelPrototype> channel)
@@ -227,6 +238,11 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public void UpdateAppearance(Entity<CommunicationsTowerComponent> tower)
+    {
+        _appearance.SetData(tower, CommunicationsTowerLayers.Layer, tower.Comp.State);
     }
 
     public override void Update(float frameTime)

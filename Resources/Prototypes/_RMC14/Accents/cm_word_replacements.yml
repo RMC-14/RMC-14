@@ -15,6 +15,7 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
+    cm-chatsan-word-clanker: cm-chatsan-replacement-clanker
 
 - type: accent
   id: CMChatSanitizeMarine
@@ -66,7 +67,7 @@
     cm-chatsan-word-engie: cm-chatsan-replacement-engie
     cm-chatsan-word-engineer: cm-chatsan-replacement-engineer
     cm-chatsan-word-comtech: cm-chatsan-replacement-comtech
-    cm-chatsan-word-combat-technitian: cm-chatsan-replacement-combat-technitian
+    cm-chatsan-word-combat-technician: cm-chatsan-replacement-combat-technician
     cm-chatsan-word-corpsman: cm-chatsan-replacement-corpsman
     cm-chatsan-word-medic: cm-chatsan-replacement-medic
     cm-chatsan-word-doc: cm-chatsan-replacement-doc
@@ -77,11 +78,24 @@
     cm-chatsan-word-comm-officer: cm-chatsan-replacement-comm-officer
     cm-chatsan-word-co: cm-chatsan-replacement-co
     cm-chatsan-word-staff-officer: cm-chatsan-replacement-staff-officer
+    cm-chatsan-word-staff-officers: cm-chatsan-replacement-staff-officers
     cm-chatsan-word-xo: cm-chatsan-replacement-xo
     cm-chatsan-word-executive-officer: cm-chatsan-replacement-executive-officer
     cm-chatsan-word-exec-officer: cm-chatsan-replacement-exec-officer
     cm-chatsan-word-senior-enlisted: cm-chatsan-replacement-senior-enlisted
     cm-chatsan-word-senior-enlisted-advisor: cm-chatsan-replacement-senior-enlisted-advisor
+    cm-chatsan-word-senior-enlisted-advisors: cm-chatsan-replacement-senior-enlisted-advisors
+    rmc-chatsan-word-auxiliary-support-officer: rmc-chatsan-replacement-auxiliary-support-officer
+    rmc-chatsan-word-aux-support-officer: rmc-chatsan-replacement-aux-support-officer
+    rmc-chatsan-word-aso: rmc-chatsan-replacement-aso
+    rmc-chatsan-word-honor-guard: rmc-chatsan-replacement-honor-guard
+    rmc-chatsan-word-honor-guards: rmc-chatsan-replacement-honor-guards
+    rmc-chatsan-word-brigadier: rmc-chatsan-replacement-brigadier
+    rmc-chatsan-word-major-general: rmc-chatsan-replacement-major-general
+    rmc-chatsan-word-lieutenant-general: rmc-chatsan-replacement-lieutenant-general
+    rmc-chatsan-word-lt-general: rmc-chatsan-replacement-lt-general
+    rmc-chatsan-word-commandant: rmc-chatsan-replacement-commandant
+    rmc-chatsan-word-high-command: rmc-chatsan-replacement-high-command
     cm-chatsan-word-lz: cm-chatsan-replacement-lz
     cm-chatsan-word-shoot: cm-chatsan-replacement-shoot
     cm-chatsan-word-felinid: cm-chatsan-replacement-felinid
@@ -113,7 +127,7 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-
+    cm-chatsan-word-mice: cm-chatsan-replacement-mice
     cm-chatsan-word-feroxi: cm-chatsan-replacement-feroxi
     cm-chatsan-word-feroxis: cm-chatsan-replacement-feroxi
     cm-chatsan-word-shark: cm-chatsan-replacement-shark
@@ -195,10 +209,10 @@
     cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
     cm-chatsan-word-paras: cm-chatsan-replacement-parasites
     cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
-    cm-chatsan-word-baricade: cm-chatsan-replacement-baricades
-    cm-chatsan-word-cade: cm-chatsan-replacement-baricades
-    cm-chatsan-word-baricades: cm-chatsan-replacement-baricades
-    cm-chatsan-word-cades: cm-chatsan-replacement-baricades
+    cm-chatsan-word-barricade: cm-chatsan-replacement-barricades
+    cm-chatsan-word-cade: cm-chatsan-replacement-barricades
+    cm-chatsan-word-barricades: cm-chatsan-replacement-barricades
+    cm-chatsan-word-cades: cm-chatsan-replacement-barricades
     cm-chatsan-word-barbed: cm-chatsan-replacement-barbed
     cm-chatsan-word-barbs: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wire: cm-chatsan-replacement-barbed-wires
@@ -239,8 +253,6 @@
     cm-chatsan-word-generators: cm-chatsan-replacement-generators
     cm-chatsan-word-disk: cm-chatsan-replacement-disk
     cm-chatsan-word-disc: cm-chatsan-replacement-disk
-    cm-chatsan-word-canteen: cm-chatsan-replacement-canteen
-    cm-chatsan-word-canteens: cm-chatsan-replacement-canteens
     cm-chatsan-word-flashlight: cm-chatsan-replacement-flashlight
     cm-chatsan-word-flashlights: cm-chatsan-replacement-flashlights
     cm-chatsan-word-window: cm-chatsan-replacement-window
@@ -257,4 +269,15 @@
     cm-chatsan-word-folder: cm-chatsan-replacement-folder
     cm-chatsan-word-papers: cm-chatsan-replacement-papers
     cm-chatsan-word-folders: cm-chatsan-replacement-folders
-
+    cm-chatsan-word-zerker: cm-chatsan-word-replacement-zerker
+    cm-chatsan-word-zerkers: cm-chatsan-word-replacement-zerkers
+    cm-chatsan-word-rav: cm-chatsan-word-replacement-rav
+    cm-chatsan-word-ravs: cm-chatsan-word-replacement-ravs
+    cm-chatsan-word-prae: cm-chatsan-word-replacement-prae
+    cm-chatsan-word-praes: cm-chatsan-word-replacement-praes
+    cm-chatsan-word-hivey: cm-chatsan-word-replacement-hivey
+    cm-chatsan-word-hiveys: cm-chatsan-word-replacement-hiveys
+    cm-chatsan-word-cap: cm-chatsan-word-replacement-cap
+    cm-chatsan-word-caps: cm-chatsan-word-replacement-caps
+    cm-chatsan-word-capped: cm-chatsan-word-replacement-capped
+    cm-chatsan-word-phero: cm-chatsan-word-replacement-phero

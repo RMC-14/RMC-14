@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker by github DummeHytteOst",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst, honorguard.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/ui_icons/map_blips.dmi",
   "size": {
     "x": 7,
     "y": 7
@@ -398,6 +398,9 @@
       "name": "cmp"
     },
     {
+      "name": "honorguard"
+    },
+    {
       "name": "warden"
     },
     {
@@ -570,6 +573,9 @@
     },
     {
       "name": "pmc_syn"
+    },
+    {
+      "name": "pmc_tl"
     },
     {
       "name": "whiteout"
@@ -806,7 +812,16 @@
       "name": "recovery_node"
     },
     {
-      "name": "morpher"
+      "name": "morpher",
+      "delays": [
+        [
+            4.0,
+            0.05,
+            0.1,
+            0.2,
+            0.5
+        ]
+      ]
     },
     {
       "name": "spec_demo"
@@ -848,6 +863,15 @@
           0.08,
           0.08,
           0.08
+        ]
+      ]
+    },
+    {
+      "name": "pylon",
+      "delays": [
+        [
+          0.25,
+          0.25
         ]
       ]
     }

@@ -5,7 +5,7 @@
   description: A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.
   components:
   - type: Transform
-    anchored: false
+    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
@@ -30,6 +30,7 @@
           CMSheetMetal1:
             min: 1
             max: 1
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMBed
@@ -73,6 +74,46 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: alien_bed
+  - type: Construction
+
+- type: entity
+  parent: CMBed
+  id: RMCBedBunk
+  name: black bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_black
+  - type: Construction
+
+- type: entity
+  parent: CMBed
+  id: RMCBedBunkBlue
+  name: blue bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_blue
+  - type: Construction
+
+- type: entity
+  parent: CMBed
+  id: RMCBedBunkGreen
+  name: green bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_green
+  - type: Construction
+
+- type: entity
+  parent: CMBed
+  id: RMCBedBunkRed
+  name: red bunk-bed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_red
   - type: Construction
 
 # Bedroll

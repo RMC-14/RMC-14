@@ -5,7 +5,7 @@
   id: RMCGunRackM54CEmpty
   name: M54C gun rack
   suffix: M54C, Empty
-  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC commissioned racks with fixed slots which only fit M54C rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
   components:
   - type: ContainerContainer
     containers:
@@ -94,15 +94,15 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_2:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_3:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_4:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_5:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
 
 # M54C Mk 1
 
@@ -111,7 +111,7 @@
   id: RMCGunRackM54CMk1Empty
   name: M54C Mk1 gun rack
   suffix: M54C Mk1, Empty
-  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C Mk1 rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC commissioned racks with fixed slots which only fit M54C Mk1 rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c_rack.rsi
@@ -178,12 +178,447 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_2:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_3:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_4:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_5:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
+
+# SSG45
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackSSG45Empty
+  name: SSG45 gun rack
+  suffix: SSG45, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, Weston-Yamada commissioned racks with fixed slots which only fit SSG45 rifles. Some say they were cheaper, and some say the main reason was operators' ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/ssg45_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_2:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_3:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_4:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_5:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+
+- type: entity
+  parent: RMCGunRackSSG45Empty
+  id: RMCGunRackSSG45Filled
+  suffix: SSG45, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleSSG45Stripped
+      item_2:
+      - RMCWeaponRifleSSG45Stripped
+      item_3:
+      - RMCWeaponRifleSSG45Stripped
+      item_4:
+      - RMCWeaponRifleSSG45Stripped
+      item_5:
+      - RMCWeaponRifleSSG45Stripped
+
+# M54C/2
+
+- type: entity
+  parent: RMCGunRackM54CEmpty
+  id: RMCGunRackM54C2Empty
+  name: M54C/2 gun rack
+  suffix: M54C/2, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, Weston-Yamada commissioned racks with fixed slots which only fit M54C/2 rifles. Some say they were cheaper, and some say the main reason was operators' ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c2_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_2:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_3:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_4:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      item_5:
+        name: M54C/2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54C2
+
+- type: entity
+  parent: RMCGunRackM54C2Empty
+  id: RMCGunRackM54C2Filled
+  suffix: M54C/2, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleM54C2
+      item_2:
+      - RMCWeaponRifleM54C2
+      item_3:
+      - RMCWeaponRifleM54C2
+      item_4:
+      - RMCWeaponRifleM54C2
+      item_5:
+      - RMCWeaponRifleM54C2
+
+
+# Type 71
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackType71Empty
+  name: Type 71 gun rack
+  suffix: Type 71, Empty
+  description: Some off-branded gun rack. Per SOF and SPPA regulations, weapons should be stored in secure safes and only given out when necessary. Of course, most (but not all!) units overlook this regulation, only storing their firearms in safes when inspection arrives.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_6: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/t71_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      item_2:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      item_3:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      item_4:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      item_5:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      item_6:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+      fill_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71
+
+- type: entity
+  parent: RMCGunRackType71Empty
+  id: RMCGunRackType71Filled
+  suffix: Type 71, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleType71
+      item_2:
+      - RMCWeaponRifleType71
+      item_3:
+      - RMCWeaponRifleType71
+      item_4:
+      - RMCWeaponRifleType71
+      item_5:
+      - RMCWeaponRifleType71
+      item_6:
+      - RMCWeaponRifleType71
+
+# Type 71, PVE
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackType71EmptyPVE
+  name: Type 71 gun rack
+  suffix: Type 71, Empty, PVE
+  description: Some off-branded gun rack. Per SOF and SPPA regulations, weapons should be stored in secure safes and only given out when necessary. Of course, most (but not all!) units overlook this regulation, only storing their firearms in safes when inspection arrives.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_6: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/t71_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      item_2:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      item_3:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      item_4:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      item_5:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      item_6:
+        name: Type 71
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+      fill_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCWeaponRifleType71PVE
+
+- type: entity
+  parent: RMCGunRackType71Empty
+  id: RMCGunRackType71FilledPVE
+  suffix: Type 71, Filled, PVE
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleType71PVE
+      item_2:
+      - RMCWeaponRifleType71PVE
+      item_3:
+      - RMCWeaponRifleType71PVE
+      item_4:
+      - RMCWeaponRifleType71PVE
+      item_5:
+      - RMCWeaponRifleType71PVE
+      item_6:
+      - RMCWeaponRifleType71PVE

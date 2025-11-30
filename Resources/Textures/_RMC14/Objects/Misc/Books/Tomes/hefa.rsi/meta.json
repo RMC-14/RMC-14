@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/98e7e7e47ac177f77031e304da31a86689d4ae58/icons/obj/items/books.dmi, https://github.com/cmss13-devs/cmss13/blob/416abfba679334e9013bf485ad2a1dbba0579966/icons/mob/humans/onmob/inhands/items/books_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/416abfba679334e9013bf485ad2a1dbba0579966/icons/mob/humans/onmob/inhands/items/books_lefthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "icon_1"
+    }
+  ]
+}

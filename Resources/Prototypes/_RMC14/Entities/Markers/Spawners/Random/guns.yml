@@ -292,10 +292,10 @@
     prototypes:
     - RMCWeaponMar50LMG: RMCMagazineMar50LMG
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
-    # TODO Disposable rocket launcher SADAR
-    - WeaponRifleM54C: CMMagazineRifleM54C
+    - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
+    - RMCWeaponRifleM54C: CMMagazineRifleM54C
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
-    - CMWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
+    - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
 
 - type: entity
   parent: RMCSpawnerRandomGunSpecial
@@ -422,3 +422,29 @@
     - CMPacketGrenadeFragOldFilled
     - RMCPacketGrenadeM74AGMFFilled
     - RMCPacketGrenadeM74AGMIFilled
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomRockets
+  name: random rockets spawner
+  description: This is a random rocket.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_sentry
+  - type: RandomSpawner
+    offset: 0
+    chance: 1
+    prototypes:
+    - RMCRocket84mm
+    - RMCRocket84mmAntiArmor
+
+- type: entity
+  parent: RMCSpawnerRandomRockets
+  id: RMCSpawnerRandomRocketsDisposable
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    chance: 0 # disposable rocket don't spawn with any

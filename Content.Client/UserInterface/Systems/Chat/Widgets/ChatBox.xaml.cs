@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Chat;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
@@ -28,6 +29,10 @@ public partial class ChatBox : UIWidget
     public bool Main { get; set; }
 
     public ChatSelectChannel SelectedChannel => ChatInput.ChannelSelector.SelectedChannel;
+
+    // RMC14
+    public readonly Queue<RepeatedMessage> RepeatQueue = new();
+    private readonly HashSet<string> _whitelist = ["mono", "scramble", "bolditalic", "bold", "bullet", "color", "font", "head", "italic"];
 
     public ChatBox()
     {
@@ -68,7 +73,7 @@ public partial class ChatBox : UIWidget
 
         var color = msg.MessageColorOverride ?? msg.Channel.TextColor();
 
-        AddLine(msg.WrappedMessage, color);
+        AddLine(msg.WrappedMessage, color, msg.SenderEntity, msg.Message, msg.Channel, msg.RepeatCheckSender);
     }
 
     private void OnHighlightsUpdated(string highlights)
@@ -111,13 +116,31 @@ public partial class ChatBox : UIWidget
         _controller.UpdateHighlights(highlighs);
     }
 
-    public void AddLine(string message, Color color)
+    public void AddLine(string message, Color color, NetEntity sender, string unwrapped, ChatChannel channel, bool repeatCheckSender)
     {
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
+
+        // RMC14
+        formatted = FilterProblematicTags(formatted);
+        if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
+            return;
+
         Contents.AddMessage(formatted);
+    }
+
+    // RMC14
+    private FormattedMessage FilterProblematicTags(FormattedMessage message)
+    {
+        var output = new FormattedMessage(message.Count);
+        foreach (var tag in message)
+        {
+            if (tag.Name is not { } name || _whitelist.Contains(name))
+                output.PushTag(tag);
+        }
+        return output;
     }
 
     public void Focus(ChatSelectChannel? channel = null)

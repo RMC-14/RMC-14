@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverZHNK72
   name: ZHNK-72 revolver
-  description: The ZHNK-72 is a SPP designed revolver. The ZHNK-72 is used by the UPP armed forces in a policing role as well as limited numbers in the hands of SNCOs.
+  description: The ZHNK-72 is a SPP designed revolver. The ZHNK-72 is used by the SPP armed forces in a policing role as well as limited numbers in the hands of SNCOs.
   components:
   - type: Tag
     tags:
@@ -50,11 +50,13 @@
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:

@@ -80,7 +80,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_ass
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: spotter
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -154,9 +154,9 @@
     state: pamphlet_loader
   - type: SkillPamphlet
     addSkills:
-      RMCSkillEndurance: 1
+      RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -164,7 +164,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: loader
     bypassLimit: true
     jobWhitelists:
@@ -193,12 +193,39 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: mortar
     bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+
+# OTHER
+
+# Honor Guard
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletHonorGuard
+  name: honor guard instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one details the responsibilities of an Honor Guard.
+  components:
+  - type: Sprite
+    state: pamphlet_honorguard
+  - type: SkillPamphlet
+    bypassSkill: true
+    giveJobTitle: rmc-job-name-honor-guard
+    givePrefix: rmc-job-prefix-honor-guard
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_hgmp
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: honorguard
+    bypassLimit: true
+    jobWhitelists:
+    - popup: rmc-pamphlets-mp-warning
+      jobProto: CMMilitaryPolice
 
 # LANGUAGE / bypasses limit
 

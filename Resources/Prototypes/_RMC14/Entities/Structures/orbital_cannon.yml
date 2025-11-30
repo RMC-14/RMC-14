@@ -1,7 +1,7 @@
 ﻿- type: entity
-  id: RMCOrbitalCannon
-  name: orbital cannon
-  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  id: RMCOrbitalCannonDerelict
+  name: derelict orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. This one appears inoperable."
   placement:
     mode: SnapgridCenter
   components:
@@ -28,12 +28,6 @@
       map: [ "base" ]
   - type: Clickable
   - type: InteractionOutline
-  - type: OrbitalCannon
-    warheadTypes:
-    - RMCOrbitalCannonWarheadExplosive
-    - RMCOrbitalCannonWarheadCluster
-    - RMCOrbitalCannonWarheadIncendiary
-    - RMCOrbitalCannonWarheadAegis
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -42,6 +36,22 @@
           Loaded: { state: obc_loaded }
           Unloaded: { state: obc_unloaded }
           Chambered: { state: obc_chambered }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examniable-orbital-cannon
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCOrbitalCannonDerelict
+  id: RMCOrbitalCannon
+  name: orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  components:
+  - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
+    - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadAegis
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -93,6 +103,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadExplosive
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in heavily-fortified areas, and causes a large circular explosion if it manages to reach the ground."
   name: HE orbital warhead
   components:
   - type: Sprite
@@ -103,6 +114,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadIncendiary
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for cutting off enemy forces, and creates a large diamond of ultra-hot blue fire."
   name: incendiary orbital warhead
   components:
   - type: Sprite
@@ -113,6 +125,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadCluster
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in cramped heavily-fortified areas, and causes multiple explosions in a vaguely rectangular shape."
   name: cluster orbital warhead
   components:
   - type: Sprite
@@ -123,14 +136,14 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadAegis
-  description: "An experimental phoron-based AEGIS Orbital Warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
-  name: AEGIS orbital warhead
+  description: "AEG-328-KRA, or KRAKEN, an experimental phoron-based orbital warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
+  name:  AEG-328-KRA
   components:
   - type: WarpPoint
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
-      state: aegis_ob_2
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: aegisob
   - type: TacticalMapTracked
   - type: XenoMapTracked
   - type: MarineMapTracked
@@ -143,6 +156,7 @@
     firstWarningRange: 60
     secondWarningRange: 55
     thirdWarningRange: 45
+    intelPointsAwarded: 5
   - type: PowerLoaderGrabbable
     virtualRight: RMCVirtualWarheadRightAegis
     virtualLeft: RMCVirtualWarheadLeftAegis
@@ -157,7 +171,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
-  - type: RandomSpawner
+  - type: UniqueRandomSpawner
+    spawnerGroup: RMCOrbitalCannonWarheadSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
@@ -287,6 +302,10 @@
   - type: ActivatableUI
     key: enum.OrbitalCannonComputerUI.Key
   - type: OrbitalCannonComputer
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSeatBase

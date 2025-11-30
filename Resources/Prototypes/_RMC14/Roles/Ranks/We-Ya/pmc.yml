@@ -71,10 +71,22 @@
   paygrade: PMC-ELG
 
 - type: rank
+  id: RMCRankWeYaPMCSynthetic
+  name: Synthetic
+  prefix: SYN.
+  paygrade: PMC-SYN
+
+- type: rank
   id: RMCRankWeYaTeamLeader
   name: Team Leader
   prefix: TML.
   paygrade: PMC-TL
+
+- type: rank
+  id: RMCRankWeYaForceLeader
+  name: Force Leader
+  prefix: FL.
+  paygrade: PMC-FL
 
 - type: rank
   id: RMCRankWeYaEliteTeamLeader
@@ -87,3 +99,15 @@
   name: PMC Site Director
   prefix: Director
   paygrade: PMC-DIR
+
+- type: rank
+  id: RMCRankWeYaForceCommand
+  name: PMC Force Command
+  prefix: FCO.
+  paygrade: PMC-FCO
+
+- type: rank
+  id: RMCRankWeYaWhiteout
+  name: Whiteout Team Combat Unit
+  prefix: WO.
+  paygrade: ???

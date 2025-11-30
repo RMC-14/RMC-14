@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: RMCMobVulpkanin
   name: Urist C.M McVulp
   suffix: RMC14
@@ -44,8 +44,6 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
-      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
       - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
       - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - shader: StencilClear
@@ -66,14 +64,13 @@
         sprite: Objects/Misc/handcuffs.rsi
         state: body-overlay-2
         visible: false
-      - map: [ "id" ]
       - map: [ "gloves" ]
       - map: [ "shoes" ]
+      - map: [ "id" ] # RMC14 re-arrange id slot
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
-      - map: [ "neck" ]
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
@@ -81,6 +78,7 @@
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ]
       - map: [ "mask" ]
+      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
