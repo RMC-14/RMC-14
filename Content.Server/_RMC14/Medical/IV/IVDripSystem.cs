@@ -173,9 +173,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 DetachDialysis((dialysisId, dialysisComp), null, true, false);
 
             if (time < dialysisComp.TransferAt)
-            {
                 continue;
-            }
 
             dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
 

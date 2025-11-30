@@ -33,9 +33,8 @@
   - type: Item
     size: Normal
   - type: Clothing
-    quickEquip: false
     slots:
-    - suitstorage
+    - belt
   - type: PortableDialysis
     ripDamage:
       types:
