@@ -56,7 +56,7 @@ public sealed partial class MarineOrdersComponent : Component
     public List<LocId> FocusCallouts = new() { "focus-order-callout-1", "focus-order-callout-2", "focus-order-callout-3", "focus-order-callout-4", "focus-order-callout-5", "focus-order-callout-6", "focus-order-callout-7", "focus-order-callout-8", "focus-order-callout-9", "focus-order-callout-10", "focus-order-callout-11", "focus-order-callout-12", "focus-order-callout-13", "focus-order-callout-14", "focus-order-callout-15", "focus-order-callout-16", "focus-order-callout-17", "focus-order-callout-18", "focus-order-callout-19" };
 
     [DataField, AutoNetworkedField]
-    public List<LocId> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3", "hold-order-callout-4", "hold-order-callout-5", "hold-order-callout-6", "hold-order-callout-7", "hold-order-callout-8", "hold-order-callout-9", "hold-order-callout-10", "hold-order-callout-11", "hold-order-callout-12", "hold-order-callout-13", "hold-order-callout-14", "hold-order-callout-15", "hold-order-callout-16", "hold-order-callout-17", "hold-order-callout-18", "hold-order-callout-19" };
+    public List<LocId> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3", "hold-order-callout-4", "hold-order-callout-5", "hold-order-callout-6", "hold-order-callout-7", "hold-order-callout-8", "hold-order-callout-9", "hold-order-callout-10", "hold-order-callout-11", "hold-order-callout-12", "hold-order-callout-13", "hold-order-callout-14", "hold-order-callout-15", "hold-order-callout-16", "hold-order-callout-17", "hold-order-callout-18" };
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillLeadership";
