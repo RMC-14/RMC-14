@@ -6,6 +6,8 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Sentry.Laptop;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -24,6 +26,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     [Dependency] private readonly SharedTransformSystem _transformServer = default!;
     [Dependency] private readonly IGameTiming _timingServer = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
 
@@ -82,6 +85,31 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         UpdateUI(laptop);
     }
 
+    protected override void UpdateUI(Entity<SentryLaptopComponent> laptop)
+    {
+        if (!_uiServer.IsUiOpen(laptop.Owner, SentryLaptopUiKey.Key))
+            return;
+
+        var sentries = BuildSentryInfoList(laptop);
+        var factions = GetFactionList();
+
+        var state = new SentryLaptopBuiState(
+            sentries,
+            factions.Keys.ToList(),
+            factions
+        );
+
+        _uiServer.SetUiState(laptop.Owner, SentryLaptopUiKey.Key, state);
+    }
+
+    private Dictionary<string, string> GetFactionList()
+    {
+        var all = _faction.GetFactions();
+        var dummy = all.GetValueOrDefault("RMCDumb", new FactionData());
+        var hostile = all.Where(x => dummy.Hostile.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Key);
+        return hostile;
+    }
+
     private void OnViewCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopViewCameraBuiMsg args)
     {
         if (!TryGetEntity(args.Sentry, out var sentryUid))
@@ -105,26 +133,6 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         Dirty(user, watcher);
 
         _viewSubscriber.AddViewSubscriber(sentryUid.Value, actor.PlayerSession);
-    }
-
-    private void OnCloseCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopCloseCameraBuiMsg args)
-    {
-        var user = args.Actor;
-
-        if (!TryComp<SentryLaptopWatcherComponent>(user, out var watcher))
-            return;
-
-        if (_actorQuery.TryComp(user, out var actor) &&
-            watcher.CurrentSentry is { } net &&
-            TryGetEntity(net, out var sentryUid))
-        {
-            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
-        }
-
-        watcher.Laptop = null;
-        watcher.CurrentSentry = null;
-        Dirty(user, watcher);
-        RemCompDeferred<SentryLaptopWatcherComponent>(user);
     }
 
     private void OnSetNameMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopSetNameBuiMsg args)
@@ -192,6 +200,26 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         UpdateUI(laptop);
     }
 
+    private void OnCloseCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopCloseCameraBuiMsg args)
+    {
+        var user = args.Actor;
+
+        if (!TryComp<SentryLaptopWatcherComponent>(user, out var watcher))
+            return;
+
+        if (_actorQuery.TryComp(user, out var actor) &&
+            watcher.CurrentSentry is { } net &&
+            TryGetEntity(net, out var sentryUid))
+        {
+            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
+        }
+
+        watcher.Laptop = null;
+        watcher.CurrentSentry = null;
+        Dirty(user, watcher);
+        RemCompDeferred<SentryLaptopWatcherComponent>(user);
+    }
+
     private void OnWatcherShutdown(Entity<SentryLaptopWatcherComponent> watcher, ref ComponentShutdown args)
     {
         if (!_actorQuery.TryComp(watcher.Owner, out var actor))
@@ -211,16 +239,6 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
         watcher.Comp.Laptop = null;
         watcher.Comp.CurrentSentry = null;
-    }
-
-    protected override void UpdateUI(Entity<SentryLaptopComponent> laptop)
-    {
-        if (!_uiServer.IsUiOpen(laptop.Owner, SentryLaptopUiKey.Key))
-            return;
-
-        var sentries = BuildSentryInfoList(laptop);
-        var state = new SentryLaptopBuiState(sentries);
-        _uiServer.SetUiState(laptop.Owner, SentryLaptopUiKey.Key, state);
     }
 
     private float GetSentryVisionRadius(EntityUid sentry)

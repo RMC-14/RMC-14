@@ -26,16 +26,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
     private string _searchText = "";
     private EntityUid? _currentCameraTarget;
     private EntityUid? _cameraEntity;
-    private readonly EyeLerpingSystem _eyeLerping;
-    private readonly PopupSystem _popup;
-    private readonly SharedEyeSystem _eyeSystem;
 
     public SentryLaptopBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
-        _eyeLerping = EntMan.System<EyeLerpingSystem>();
-        _popup = EntMan.System<PopupSystem>();
-        _eyeSystem = EntMan.System<SharedEyeSystem>();
     }
 
     protected override void Open()
@@ -46,7 +40,6 @@ public sealed class SentryLaptopBui : BoundUserInterface
         _window.OnClose += Close;
 
         SetupWindowControls();
-        SetupGlobalIFFControls();
 
         if (State is SentryLaptopBuiState state)
             UpdateState(state);
@@ -64,6 +57,21 @@ public sealed class SentryLaptopBui : BoundUserInterface
         _window.GlobalIFFButton.Button.OnPressed += _ => ToggleGlobalIFFPanel();
         _window.SearchBar.OnTextChanged += args => OnSearchTextChanged(args.Text);
         _window.CloseCameraButton.Button.OnPressed += _ => CloseCamera();
+
+        _window.GlobalResetTargetingButton.Button.OnPressed += _ =>
+        {
+            SendMessage(new SentryLaptopGlobalResetTargetingBuiMsg());
+        };
+
+        _window.GlobalPowerOnButton.Button.OnPressed += _ =>
+        {
+            SendMessage(new SentryLaptopGlobalTogglePowerBuiMsg(true));
+        };
+
+        _window.GlobalPowerOffButton.Button.OnPressed += _ =>
+        {
+            SendMessage(new SentryLaptopGlobalTogglePowerBuiMsg(false));
+        };
     }
 
     private void SetupGlobalIFFControls()
@@ -72,6 +80,9 @@ public sealed class SentryLaptopBui : BoundUserInterface
             return;
 
         _window.GlobalFactionContainer.DisposeAllChildren();
+
+        if (State is not SentryLaptopBuiState state || state.AllFactions.Count == 0)
+            return;
 
         var selectAllContainer = new BoxContainer
         {
@@ -96,7 +107,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         selectAllButton.OnPressed += _ =>
         {
-            foreach (var faction in SentryFactions.AllFactions)
+            foreach (var faction in state.AllFactions)
             {
                 SendMessage(new SentryLaptopGlobalToggleFactionBuiMsg(faction, true));
             }
@@ -104,7 +115,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         deselectAllButton.OnPressed += _ =>
         {
-            foreach (var faction in SentryFactions.AllFactions)
+            foreach (var faction in state.AllFactions)
             {
                 SendMessage(new SentryLaptopGlobalToggleFactionBuiMsg(faction, false));
             }
@@ -114,29 +125,14 @@ public sealed class SentryLaptopBui : BoundUserInterface
         selectAllContainer.AddChild(deselectAllButton);
         _window.GlobalFactionContainer.AddChild(selectAllContainer);
 
-        foreach (var faction in SentryFactions.AllFactions)
+        foreach (var faction in state.AllFactions)
         {
-            var checkboxContainer = CreateGlobalFactionCheckbox(faction);
+            var checkboxContainer = CreateGlobalFactionCheckbox(faction, state.FactionNames);
             _window.GlobalFactionContainer.AddChild(checkboxContainer);
         }
-
-        _window.GlobalResetTargetingButton.Button.OnPressed += _ =>
-        {
-            SendMessage(new SentryLaptopGlobalResetTargetingBuiMsg());
-        };
-
-        _window.GlobalPowerOnButton.Button.OnPressed += _ =>
-        {
-            SendMessage(new SentryLaptopGlobalTogglePowerBuiMsg(true));
-        };
-
-        _window.GlobalPowerOffButton.Button.OnPressed += _ =>
-        {
-            SendMessage(new SentryLaptopGlobalTogglePowerBuiMsg(false));
-        };
     }
 
-    private BoxContainer CreateGlobalFactionCheckbox(string faction)
+    private BoxContainer CreateGlobalFactionCheckbox(string faction, Dictionary<string, string> factionNames)
     {
         var container = new BoxContainer
         {
@@ -152,9 +148,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
             VerticalAlignment = Control.VAlignment.Center
         };
 
+        var displayName = factionNames.GetValueOrDefault(faction, faction);
         var label = new Label
         {
-            Text = SentryFactions.FactionNames[faction],
+            Text = displayName,
             VerticalAlignment = Control.VAlignment.Center,
             HorizontalExpand = true,
             Margin = new Thickness(5, 0, 0, 0),
@@ -178,6 +175,11 @@ public sealed class SentryLaptopBui : BoundUserInterface
             return;
 
         _window.GlobalIFFPanel.Visible = !_window.GlobalIFFPanel.Visible;
+
+        if (_window.GlobalIFFPanel.Visible)
+        {
+            SetupGlobalIFFControls();
+        }
     }
 
     private void OnSearchTextChanged(string text)
@@ -227,7 +229,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _popup.PopupEntity(alert.Message, Owner);
+        var popup = EntMan.System<PopupSystem>();
+        popup.PopupEntity(alert.Message, Owner);
     }
 
     private void UpdateDisplay(SentryLaptopBuiState state)
@@ -237,6 +240,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         UpdateHeader(state);
         UpdateStatusLabel(state);
+        SetupGlobalIFFControls();
         UpdateSentryCards(state);
         FilterSentryCards();
     }
@@ -403,9 +407,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
     {
         card.FactionContainer.DisposeAllChildren();
 
-        foreach (var faction in SentryFactions.AllFactions)
+        if (State is not SentryLaptopBuiState state)
+            return;
+
+        foreach (var faction in state.AllFactions)
         {
-            var checkboxContainer = CreateFactionCheckbox(faction, info);
+            var checkboxContainer = CreateFactionCheckbox(faction, info, state.FactionNames);
             card.FactionContainer.AddChild(checkboxContainer);
         }
 
@@ -420,6 +427,9 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
     private void UpdateFactionControls(SentryCard card, SentryInfo info)
     {
+        if (State is not SentryLaptopBuiState state)
+            return;
+
         var existingCheckboxes = new Dictionary<string, CheckBox>();
 
         foreach (var child in card.FactionContainer.Children)
@@ -429,8 +439,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
                 var label = container.Children.Skip(1).FirstOrDefault() as Label;
                 if (label != null)
                 {
-                    var faction = SentryFactions.AllFactions.FirstOrDefault(f =>
-                        SentryFactions.FactionNames[f] == label.Text);
+                    var faction = state.AllFactions.FirstOrDefault(f =>
+                        state.FactionNames.GetValueOrDefault(f, f) == label.Text);
                     if (faction != null)
                     {
                         existingCheckboxes[faction] = checkbox;
@@ -439,7 +449,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
             }
         }
 
-        foreach (var faction in SentryFactions.AllFactions)
+        foreach (var faction in state.AllFactions)
         {
             if (existingCheckboxes.TryGetValue(faction, out var checkbox))
             {
@@ -458,7 +468,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         card.IFFExpandButton.Text = isExpanded ? "▼" : "►";
     }
 
-    private BoxContainer CreateFactionCheckbox(string faction, SentryInfo info)
+    private BoxContainer CreateFactionCheckbox(string faction, SentryInfo info, Dictionary<string, string> factionNames)
     {
         var container = new BoxContainer
         {
@@ -474,9 +484,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
             VerticalAlignment = Control.VAlignment.Center
         };
 
+        var displayName = factionNames.GetValueOrDefault(faction, faction);
         var label = new Label
         {
-            Text = SentryFactions.FactionNames[faction],
+            Text = displayName,
             VerticalAlignment = Control.VAlignment.Center,
             HorizontalExpand = true,
             Margin = new Thickness(5, 0, 0, 0),
@@ -523,9 +534,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (!_entities.TryGetComponent<TransformComponent>(sentryEntity.Value, out var sentryXform))
             return;
 
+        var eyeLerping = EntMan.System<EyeLerpingSystem>();
+        var eyeSystem = EntMan.System<SharedEyeSystem>();
+
         if (_currentCameraTarget is { } oldCamera)
         {
-            _eyeLerping.RemoveEye(oldCamera);
+            eyeLerping.RemoveEye(oldCamera);
             if (_cameraEntity != null)
             {
                 _entities.DeleteEntity(_cameraEntity.Value);
@@ -559,11 +573,11 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (zoom < 0.5f) zoom = 0.5f;
         if (zoom > 4f) zoom = 4f;
 
-        _eyeSystem.SetZoom(_cameraEntity.Value, new Vector2(zoom, zoom), eye);
-        _eyeSystem.SetRotation(_cameraEntity.Value, sentryXform.LocalRotation, eye);
+        eyeSystem.SetZoom(_cameraEntity.Value, new Vector2(zoom, zoom), eye);
+        eyeSystem.SetRotation(_cameraEntity.Value, sentryXform.LocalRotation, eye);
 
         _currentCameraTarget = _cameraEntity;
-        _eyeLerping.AddEye(_cameraEntity.Value);
+        eyeLerping.AddEye(_cameraEntity.Value);
 
         _window.CameraPanel.Visible = true;
         _window.CameraViewport.Eye = eye.Eye;
@@ -587,7 +601,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         if (_currentCameraTarget is { } camera)
         {
-            _eyeLerping.RemoveEye(camera);
+            var eyeLerping = EntMan.System<EyeLerpingSystem>();
+            eyeLerping.RemoveEye(camera);
 
             if (_cameraEntity != null)
             {
@@ -630,7 +645,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
         {
             if (_currentCameraTarget is { } camera)
             {
-                _eyeLerping.RemoveEye(camera);
+                var eyeLerping = EntMan.System<EyeLerpingSystem>();
+                eyeLerping.RemoveEye(camera);
 
                 if (_cameraEntity != null)
                 {

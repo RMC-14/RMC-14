@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -115,11 +116,11 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         _faction.AddFaction((ent, factionMember), SentryHostileToAllFaction, dirty: false);
 
         var friendlyFactions = ent.Comp.FriendlyFactions.ToList();
-        var allFactions = GetAllNpcFactions();
+        var allFactions = GetFilteredNpcFactions();
 
         var count = 0;
 
-        foreach (var faction in allFactions)
+        foreach (var faction in allFactions.Keys)
         {
             if (!ent.Comp.FriendlyFactions.Contains(faction))
                 continue;
@@ -135,18 +136,12 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         UpdateSentryIFF(ent);
     }
 
-    private HashSet<string> GetAllNpcFactions()
+    private Dictionary<string, FactionData> GetFilteredNpcFactions()
     {
-        var factions = new HashSet<string>();
-        var query = AllEntityQuery<NpcFactionMemberComponent>();
-
-        while (query.MoveNext(out var comp))
-        {
-            foreach (var faction in comp.Factions)
-                factions.Add(faction);
-        }
-
-        return factions;
+        var allFactions = _faction.GetFactions();
+        var dummy = allFactions.GetValueOrDefault(SentryHostileToAllFaction, new FactionData());
+        var filtered = allFactions.Where(x => dummy.Hostile.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
+        return filtered;
     }
 
     private void UpdateSentryIFF(Entity<SentryTargetingComponent> ent)

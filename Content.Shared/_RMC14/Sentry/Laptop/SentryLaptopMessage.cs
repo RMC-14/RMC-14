@@ -103,33 +103,9 @@ public enum SentryAlertType
 }
 
 [Serializable, NetSerializable]
+
 public static class SentryFactions
 {
-    public static readonly Dictionary<string, string> FactionNames = new()
-    {
-        { "UNMC", "Marines (UNMC)" },
-        { "RMCXeno", "Xenomorphs" },
-        { "CLF", "Colonial Liberation Front" },
-        { "SPP", "Seegson Security" },
-        { "Halcyon", "Halcyon Corporation" },
-        { "WeYa", "Weston-Yamada" },
-        { "Civilian", "Civilians" },
-        { "RoyalMarines", "Royal Marines" },
-        { "Bureau", "Bureau of Colonial Affairs" },
-        { "TSE", "Three Saints Enterprises" }
-    };
-
-    public static readonly List<string> AllFactions = new()
-    {
-        "UNMC",
-        "RMCXeno",
-        "CLF",
-        "SPP",
-        "Halcyon",
-        "WeYa",
-        "Civilian",
-        "RoyalMarines",
-        "Bureau",
-        "TSE"
-    };
+    public static List<string> AllFactions = new();
+    public static Dictionary<string, string> FactionNames = new();
 }
