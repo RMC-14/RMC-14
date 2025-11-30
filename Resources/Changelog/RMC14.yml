@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed LV-624 CMB Deputy Survivor not having a tacmap icon.
-    type: Fix
-  - message: Fixed LV-624 CMB Deputy survivor headset having marine channels.
-    type: Fix
-  id: 2077
-  time: '2025-07-22T21:29:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7181
-- author: Max_Power
-  changes:
-  - message: Fixed the M42 Pump Shotgun, M890, MOU53, M357, Custom-built having a
-      0.95x unwielded accuracy multiplier instead of 0.5x.
-    type: Fix
-  - message: Fixed the XM38 Shotgun having a 1.15x wielded accuracy and 0.9x unwielded
-      accuracy multiplier instead of 1.20x wielded and 0.95x unwielded.
-    type: Fix
-  id: 2078
-  time: '2025-07-22T21:28:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7205
 - author: OmerF-afk
   changes:
   - message: Fixed MP27 using the wrong bullet.
@@ -4591,5 +4571,19 @@
   id: 2577
   time: '2025-11-30T06:25:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8502
+- author: KompaniLinge
+  changes:
+  - message: Added CO service jackets, enjoy!
+    type: Add
+  id: 2578
+  time: '2025-11-30T09:26:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8173
+- author: noctyrnal
+  changes:
+  - message: Fixed indestructible podlocks being corrodible.
+    type: Fix
+  id: 2579
+  time: '2025-11-30T09:27:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8505
 Name: RMC14
 Order: -1
