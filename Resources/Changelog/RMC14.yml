@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some folding barricades having very high amounts of health.
-    type: Fix
-  - message: Fixed xenos not being able to damage sentries with spit by sprite clicking
-      them.
-    type: Fix
-  - message: Fixed not being able to go past page 4 in dropship targets UI.
-    type: Fix
-  id: 2076
-  time: '2025-07-21T22:37:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7173
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed LV-624 CMB Deputy Survivor not having a tacmap icon.
@@ -4595,5 +4583,13 @@
   id: 2576
   time: '2025-11-29T10:58:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8216
+- author: noctyrnal
+  changes:
+  - message: Added Flight Visors, visors that JTAC crew can get from their vendors,
+      and pre-installed in their helmets. Purely cosmetic, but they look pretty cool.
+    type: Add
+  id: 2577
+  time: '2025-11-30T06:25:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8502
 Name: RMC14
 Order: -1
