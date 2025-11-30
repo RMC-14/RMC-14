@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Fixed MP27 using the wrong bullet.
-    type: Fix
-  id: 2079
-  time: '2025-07-22T21:30:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7189
 - author: noctyrnal
   changes:
   - message: Fixed New Varadero plating friction.
@@ -4585,5 +4578,12 @@
   id: 2579
   time: '2025-11-30T09:27:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8505
+- author: Vermidia
+  changes:
+  - message: Fixed Queens not maturing instantly on hijack start.
+    type: Fix
+  id: 2580
+  time: '2025-11-30T09:40:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8268
 Name: RMC14
 Order: -1
