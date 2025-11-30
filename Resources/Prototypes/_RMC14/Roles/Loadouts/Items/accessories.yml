@@ -33,7 +33,7 @@
     - RMCWatchCaseBasic
 
 - type: loadout
-  id: WatchRipleyRMC
+  id: WatchSurvRMC
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -42,10 +42,10 @@
         time: 36000 # 10 hrs
   storage:
     back:
-    - RMCWatchCaseRipley
+    - RMCWatchCaseSurv
 
 - type: loadout
-  id: WatchDallasRMC
+  id: WatchPilotRMC
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -54,10 +54,10 @@
         time: 43200 # 12 hrs
   storage:
     back:
-    - RMCWatchCaseDallas
+    - RMCWatchCasePilot
 
 - type: loadout
-  id: WatchBurkeRMC
+  id: WatchLiaisonRMC
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -66,10 +66,10 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseBurke
+    - RMCWatchCaseLiaison
 
 - type: loadout
-  id: WatchBishopRMC
+  id: WatchSynthRMC
   effects:
     - !type:JobRequirementLoadoutEffect
       requirement:
@@ -78,4 +78,4 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseBishop
+    - RMCWatchCaseSynth
