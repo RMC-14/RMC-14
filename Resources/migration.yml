@@ -1442,5 +1442,9 @@ CMLightFixtureEmpty: RMCLightFixtureEmpty
 # 2025-11-14
 ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
 
-# 2025-11-25
+# 2025-11-27
+RMCToolWebbingSmallERT: RMCToolWebbing
+RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
+
+# 2025-11-29
 CMWallSuperReinforced: CMWallReinforced
