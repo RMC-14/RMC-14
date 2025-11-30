@@ -76,7 +76,7 @@
   description: A fancy black-bodied wristwatch. Once set correctly, it always holds the right time. For the connoisseurs of precision.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Watches/bishop.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/synth.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
@@ -92,7 +92,7 @@
   description: With the pioneering design of analog quartz chronographs beating inside it, this asymetric wristwatch is perfect for anyone who can remain standing where others have all fallen.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Watches/ripley.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/surv.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
