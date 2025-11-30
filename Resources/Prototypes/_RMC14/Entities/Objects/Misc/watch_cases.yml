@@ -29,36 +29,36 @@
   
 - type: entity
   parent: RMCWatchCase
-  id: RMCWatchCaseBishop
+  id: RMCWatchCaseSynth
   name: Seikaku 13B6-2000 wristwatch storage case
   components:
   - type: StorageFill
     contents:
-    - id: RMCWatchBishop
+    - id: RMCWatchSynth
   
 - type: entity
   parent: RMCWatchCase
-  id: RMCWatchCaseRipley
+  id: RMCWatchCaseSurv
   name: Seikaku 13B6-3000 wristwatch storage case
   components:
   - type: StorageFill
     contents:
-    - id: RMCWatchRipley
+    - id: RMCWatchSurv
   
 - type: entity
   parent: RMCWatchCase
-  id: RMCWatchCaseBurke
+  id: RMCWatchCaseLiaison
   name: Seikaku H487-9098 wristwatch storage case
   components:
   - type: StorageFill
     contents:
-    - id: RMCWatchBurke
+    - id: RMCWatchLiaison
   
 - type: entity
   parent: RMCWatchCase
-  id: RMCWatchCaseDallas
+  id: RMCWatchCasePilot
   name: Veniti E-338 wristwatch storage case
   components:
   - type: StorageFill
     contents:
-    - id: RMCWatchDallas
+    - id: RMCWatchPilot

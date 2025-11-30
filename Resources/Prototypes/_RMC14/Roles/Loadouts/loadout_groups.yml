@@ -731,8 +731,8 @@
   loadouts: 
   - WatchCheapRMC
   - WatchBasicRMC
-  - WatchRipleyRMC
-  - WatchDallasRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
 
 - type: loadoutGroup
   id: WatchesSynthRMC
@@ -742,9 +742,9 @@
   loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
-  - WatchRipleyRMC
-  - WatchDallasRMC
-  - WatchBishopRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchSynthRMC
 
 - type: loadoutGroup
   id: WatchesLiaisonRMC
@@ -754,9 +754,9 @@
   loadouts: 
   - WatchCheapRMC
   - WatchBasicRMC
-  - WatchRipleyRMC
-  - WatchDallasRMC
-  - WatchBurkeRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
 
 - type: loadoutGroup
   id: WatchesCommandingOfficerRMC
@@ -766,10 +766,10 @@
   loadouts: 
   - WatchCheapRMC
   - WatchBasicRMC
-  - WatchRipleyRMC
-  - WatchDallasRMC
-  - WatchBurkeRMC
-  - WatchBishopRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
+  - WatchSynthRMC
 
 # Civilian
 - type: loadoutGroup

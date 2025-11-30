@@ -71,12 +71,12 @@
     
 - type: entity 
   parent: RMCWatchBaseL
-  id: RMCWatchBishop
+  id: RMCWatchSynth
   name: Seikaku 13B6-2000 wristwatch
   description: A fancy black-bodied wristwatch. Once set correctly, it always holds the right time. For the connoisseurs of precision.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Watches/bishop.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/synth.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
@@ -87,12 +87,12 @@
     
 - type: entity 
   parent: RMCWatchBaseL
-  id: RMCWatchRipley
+  id: RMCWatchSurv
   name: Seikaku 13B6-3000 wristwatch
   description: With the pioneering design of analog quartz chronographs beating inside it, this asymetric wristwatch is perfect for anyone who can remain standing where others have all fallen.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Watches/ripley.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/surv.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
@@ -103,7 +103,7 @@
     
 - type: entity 
   parent: RMCWatchBaseL
-  id: RMCWatchBurke
+  id: RMCWatchLiaison
   name: Seikaku H487-9098 wristwatch
   description: A more upmarket wristwatch tailored towards junior executives & 'company guys' all across the galaxy. Flashy, but not horribly ostentatious.
   components:
@@ -119,7 +119,7 @@
 
 - type: entity 
   parent: RMCWatchBaseL
-  id: RMCWatchDallas
+  id: RMCWatchPilot
   name: Veniti E-338 wristwatch
   description: Advertised as being 'A new dawn of precision digital watches', the E-338 became a popular hit with members of the civil aerospace industry.
   components:
