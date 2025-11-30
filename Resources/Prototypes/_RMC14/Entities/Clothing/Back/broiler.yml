@@ -57,7 +57,6 @@
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: RMCMagneticItemReceiver
+  - type: RMCBroiler
 
-# TODO RMC14: Component to select active tank.
 # TODO RMC14: Component to enable flamer to draw directly from here.
-# TODO RMC14: Visual for what tank is selected.

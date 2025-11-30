@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -27,10 +28,10 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
 public abstract class SharedRMCFlamerSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -61,6 +62,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCIgniterComponent, UniqueActionEvent>(OnIgniterUniqueAction);
         SubscribeLocalEvent<RMCIgniterComponent, IsHotEvent>(OnIgniterToggle);
         SubscribeLocalEvent<RMCIgniterComponent, AttemptShootEvent>(OnIgniterAttemptShoot);
+
+        SubscribeLocalEvent<RMCBroilerComponent, GetItemActionsEvent>(OnBroilerGetItemActions);
+        SubscribeLocalEvent<RMCBroilerComponent, RMCBroilerActionEvent>(OnBroilerAction);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -392,6 +396,47 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         args.Handled = true;
         Transfer(target, targetSolutionEnt, tank, tankSolutionEnt.Value, args.User);
+    }
+
+    private void OnBroilerGetItemActions(Entity<RMCBroilerComponent> ent, ref GetItemActionsEvent args)
+    {
+        if (args.SlotFlags == null || (args.SlotFlags & ent.Comp.Slot) == 0)
+            return;
+
+        args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId, ent);
+        if (ent.Comp.Action is { } action)
+        {
+            var n = ent.Comp.ActiveTank + 1;
+            _action.SetIcon(action, new SpriteSpecifier.Rsi(ent.Comp.NumberingResource, n.ToString()));
+        }
+    }
+
+    private List<string> BroilerListTanks(Entity<RMCBroilerComponent> ent)
+    {
+        List<string> list = [];
+        foreach (var container in _container.GetAllContainers(ent))
+        {
+            var name = container.ID;
+            if (name.StartsWith(ent.Comp.ContainerPrefix))
+                list.Add(name);
+        }
+        return list;
+    }
+
+    private void OnBroilerAction(Entity<RMCBroilerComponent> ent, ref RMCBroilerActionEvent args)
+    {
+        args.Handled = true;
+
+        ent.Comp.ActiveTank = (ent.Comp.ActiveTank + 1) % BroilerListTanks(ent).Count;
+        Dirty(ent);
+
+        var n = ent.Comp.ActiveTank + 1;
+        if (ent.Comp.Action is { } action)
+        {
+            _action.SetIcon(action, new SpriteSpecifier.Rsi(ent.Comp.NumberingResource, n.ToString()));
+        }
+
+        _popup.PopupClient(Loc.GetString("rmc-broiler-switch-tank", ("n", n)), ent, args.Performer);
     }
 
     public override void Update(float frameTime)

@@ -44,6 +44,7 @@
   - type: Tag
     tags:
     - RMCWeaponIncineratorM34T
+  - type: RMCCanUseBroiler
 
 - type: entity
   parent: RMCTankFlamer
