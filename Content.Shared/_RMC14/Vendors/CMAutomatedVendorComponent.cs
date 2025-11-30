@@ -83,9 +83,8 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public bool EjectContentsOnDestruction = false;
 
     /// <summary>
-    ///     Whether this vendor can be restocked.
-    ///     False for standard job equipment/gear vendors and anything that costs points or can only be vended once.
+    ///     Whether this vendor can be manually restocked.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool CanRestock = true;
+    public bool CanManualRestock;
 }

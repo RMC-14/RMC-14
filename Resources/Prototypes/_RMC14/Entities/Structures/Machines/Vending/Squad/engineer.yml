@@ -1,4 +1,5 @@
 # COMBAT TECHNICIAN
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSCTGear
@@ -11,7 +12,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/combat_technician_gear.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMCombatTech
     sections:
@@ -212,7 +212,6 @@
     access:
     - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMCombatTech
     sections:
@@ -339,6 +338,7 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     hackable: true

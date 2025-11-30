@@ -10,7 +10,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - RMCJobSynthetic
     sections:
@@ -158,7 +157,6 @@
   suffix: Colony Synth Access
   components:
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - RMCJobSyntheticColony
 
@@ -174,7 +172,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - RMCJobSynthetic
     sections:
@@ -307,6 +304,7 @@
       - id: RMCFlashlightPen
         points: 2
 
+
 - type: entity
   parent: ColMarTechBase
   id: WeYaExperimentalToolsVendor
@@ -320,7 +318,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/experimental.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - RMCJobSynthetic
     pointsType: ExperimentalTools

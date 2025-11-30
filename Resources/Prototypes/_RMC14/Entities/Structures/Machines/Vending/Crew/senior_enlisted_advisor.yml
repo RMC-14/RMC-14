@@ -10,7 +10,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMSeniorEnlistedAdvisor
     sections:
@@ -117,7 +116,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMSeniorEnlistedAdvisor
     sections:

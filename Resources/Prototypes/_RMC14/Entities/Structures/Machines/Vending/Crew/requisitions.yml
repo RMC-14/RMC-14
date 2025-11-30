@@ -8,6 +8,7 @@
     access:
     - [ "CMAccessRequisitions" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     sound:
       path: /Audio/_RMC14/Machines/vending_drop.ogg
       params:
@@ -695,6 +696,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     sections:
     - name: Uniform
       entries:

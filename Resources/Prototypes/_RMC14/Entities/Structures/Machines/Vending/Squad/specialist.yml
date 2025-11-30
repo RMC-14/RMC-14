@@ -4,7 +4,6 @@
   id: RMCVendorWeaponsSpecialistGearBase
   components:
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMWeaponsSpecialist
     pointsType: Specialist
@@ -179,7 +178,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
-    canRestock: false
     jobs:
     - CMWeaponsSpecialist
     sections:
