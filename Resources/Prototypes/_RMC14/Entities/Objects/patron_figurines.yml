@@ -653,6 +653,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
+  categories: [ HideSpawnMenu ]
   description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of platinum and tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves.
     She works hard to ensure that her grunts all embrace in victory, alive and happy. She's also open to feedback. She's been accused of a war crime and even eating human organs, but we don't talk about that.:3"
   components:
