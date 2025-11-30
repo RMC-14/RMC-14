@@ -11,6 +11,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Temperature;
 using Content.Shared.Weapons.Ranged.Components;
@@ -32,6 +33,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -325,7 +327,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     {
         solutionEnt = null;
 
-        Entity<RMCFlamerTankComponent> tank;
+        Entity<RMCFlamerTankComponent>? tank = null;
         if (TryComp(flamer, out RMCFlamerTankComponent? tankComp))
         {
             tank = (flamer, tankComp);
@@ -336,12 +338,41 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         {
             tank = (tankId.Value, tankComp);
         }
-        else
+        else if (HasComp<RMCCanUseBroilerComponent>(flamer))
         {
-            return false;
+            if (!_container.TryGetContainingContainer((flamer.Owner, null), out var holder))
+                return false;
+
+            var inventoryEnumerator = _inventory.GetSlotEnumerator(holder.Owner);
+            while (inventoryEnumerator.MoveNext(out var slot))
+            {
+                if (!TryComp<RMCBroilerComponent>(slot.ContainedEntity, out var broiler))
+                    continue;
+
+                Entity<RMCBroilerComponent> broilerEnt = (slot.ContainedEntity.Value, broiler);
+                var containers = BroilerListTanks(broilerEnt);
+                if (containers.Count <= broiler.ActiveTank)
+                    continue;
+
+                var activeTankContainerName = containers[broiler.ActiveTank];
+                if (!_container.TryGetContainer(broilerEnt, activeTankContainerName, out var activeTankContainer))
+                    continue;
+
+                if (!activeTankContainer.ContainedEntities.TryFirstOrNull(out tankId))
+                    continue;
+
+                if (!TryComp(tankId, out tankComp))
+                    continue;
+
+                tank = (tankId.Value, tankComp);
+                break;
+            }
         }
 
-        return _solution.TryGetSolution(tank.Owner, tank.Comp.SolutionId, out solutionEnt, out _);
+        if (tank is not { } tankValue)
+            return false;
+
+        return _solution.TryGetSolution(tankValue.Owner, tankValue.Comp.SolutionId, out solutionEnt, out _);
     }
 
     private void Transfer(EntityUid source,

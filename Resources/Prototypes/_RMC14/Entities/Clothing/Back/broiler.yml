@@ -58,5 +58,3 @@
     camouflageVariations: {}
   - type: RMCMagneticItemReceiver
   - type: RMCBroiler
-
-# TODO RMC14: Component to enable flamer to draw directly from here.
