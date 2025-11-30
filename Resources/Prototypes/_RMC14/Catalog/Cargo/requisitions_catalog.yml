@@ -73,6 +73,8 @@
       - cost: 4000
         crate: RMCCrateMagazineBGel
       - cost: 4000
+        crate: RMCCrateMagazineFlamerMixed
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFire

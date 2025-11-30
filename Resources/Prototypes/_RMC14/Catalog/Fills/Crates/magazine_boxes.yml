@@ -183,6 +183,18 @@
     - id: RMCTankFlamerBGel
       amount: 4
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineFlamerMixed
+  name: M34 Mixed fuel (2x UT-Napthal, 2x B-Gel)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 2
+    - id: RMCTankFlamer
+      amount: 2
+
 # Smart Pistol
 - type: entity
   parent: RMCCrateAmmo
