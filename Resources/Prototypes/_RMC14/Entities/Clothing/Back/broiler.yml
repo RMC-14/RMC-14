@@ -45,7 +45,7 @@
         - RMCTankFlamerLarge
   - type: ItemSlots
     slots:
-      incinerator:
+      item:
         name: Incinerator
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
@@ -59,8 +59,8 @@
     - RMCBackpackFlamer
   - type: ItemCamouflage
     camouflageVariations: {}
+  - type: RMCMagneticItemReceiver
 
 # TODO RMC14: Component to select active tank.
-# TODO RMC14: Component to allow magnetic harnes.
 # TODO RMC14: Component to enable flamer to draw directly from here.
 # TODO RMC14: Visual for what tank is selected.

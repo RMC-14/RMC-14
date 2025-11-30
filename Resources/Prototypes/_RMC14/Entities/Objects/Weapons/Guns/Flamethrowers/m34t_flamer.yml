@@ -103,7 +103,7 @@
   #     rmc_flamer_tank:
   #       maxVol: 250
   #       reagents:
-  #       - ReagentId: RMCXGel
+  #       - ReagentId: RMCNapalmX
   #         Quantity: 250
 
 - type: entity
