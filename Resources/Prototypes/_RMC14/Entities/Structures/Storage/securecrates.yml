@@ -389,19 +389,6 @@
     spawn: RMCBoxPackFlare
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Flare Boxes
-  id: RMCCrateMRE60
-  name: UNMC MRE crate (x60)
-  description: A supply crate containing sixty UNMC MRE packets.
-  components:
-  - type: CrateOpenable
-    spawn:
-    - id: RMCBoxMRE
-      amount: 4
-  - type: SpawnOnTerminate
-    spawn: RMCBoxMRE
-
-- type: entity
   parent: RMCSecureCaseStrapped #Powerloader
   id: RMCCratePowerLoaderYellow
   name: Powerloader crate
