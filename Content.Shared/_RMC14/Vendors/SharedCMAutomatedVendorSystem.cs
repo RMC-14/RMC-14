@@ -296,27 +296,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (HasComp<MultitoolComponent>(args.Used))
         {
+            TryHackVendor(ent, args.User, args.Used);
             args.Handled = true;
-            if (!ent.Comp.Hackable)
-            {
-                _popup.PopupClient(Loc.GetString("rmc-vending-machine-cannot-hack", ("vendor", ent)), ent, args.User);
-                return;
-            }
-
-            if (!_skills.HasSkill(args.User, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
-            {
-                var msg = Loc.GetString("rmc-vending-machine-hack-no-skill", ("vendor", ent));
-                _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
-                return;
-            }
-
-            var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.HackSkill);
-            var ev = new RMCAutomatedVendorHackDoAfterEvent();
-            var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, args.Used);
-            if (_doAfter.TryStartDoAfter(doAfter))
-            {
-                _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, args.User);
-            }
             return;
         }
 
@@ -333,6 +314,30 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryRestockSingleItem(ent, args.Used, args.User))
         {
             args.Handled = true;
+        }
+    }
+
+    private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
+    {
+        if (!ent.Comp.Hackable)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-cannot-hack", ("vendor", ent)), ent, user);
+            return;
+        }
+
+        if (!_skills.HasSkill(user, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
+        {
+            var msg = Loc.GetString("rmc-vending-machine-hack-no-skill", ("vendor", ent));
+            _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.HackSkill);
+        var ev = new RMCAutomatedVendorHackDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, user);
         }
     }
 
