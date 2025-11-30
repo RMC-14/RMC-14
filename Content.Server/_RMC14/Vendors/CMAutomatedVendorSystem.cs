@@ -7,8 +7,8 @@ namespace Content.Server._RMC14.Vendors;
 
 public sealed class CMAutomatedVendorSystem : SharedCMAutomatedVendorSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     protected override void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
