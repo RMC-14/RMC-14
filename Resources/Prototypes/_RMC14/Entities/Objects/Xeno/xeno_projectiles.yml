@@ -247,6 +247,7 @@
   - type: RMCProjectileAccuracy
     accuracy: 95
   - type: Ammo
+    muzzleFlash: null
   - type: IgnorePredictionHide
   - type: TriggerOnFixedDistanceStop
     delay: 0
@@ -305,6 +306,7 @@
   - type: RMCProjectileAccuracy
     accuracy: 95
   - type: Ammo
+    muzzleFlash: null
   - type: IgnorePredictionHide
   - type: TriggerOnFixedDistanceStop
     delay: 0
