@@ -106,9 +106,15 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 showEffect = true;
             }
 
-            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), effectLayer, showEffect);
             if (showEffect && effectState != null)
+            {
                 _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), effectLayer, effectState);
+                _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), effectLayer, true);
+            }
+            else
+            {
+                _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), effectLayer, false);
+            }
         }
 
         if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, out var filteringLayer, false))

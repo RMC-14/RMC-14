@@ -57,7 +57,8 @@ public enum DialysisVisualLayers
 {
     Attachment,
     Effect,
-    Filtering
+    Filtering,
+    Battery
 }
 
 [Serializable, NetSerializable]

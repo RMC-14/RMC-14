@@ -16,7 +16,8 @@
     - state: filtering
       map: [ "enum.DialysisVisualLayers.Filtering" ]
       visible: false
-    - map: [ "enum.DialysisVisualLayers.Battery" ]
+    - state: battery0
+      map: [ "enum.DialysisVisualLayers.Battery" ]
   - type: Appearance
   - type: GenericVisualizer
     visuals:

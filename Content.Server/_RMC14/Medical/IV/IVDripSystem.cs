@@ -170,10 +170,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
                 continue;
 
             if (!InRange(dialysisId, attachedTo, dialysisComp.Range))
-            {
                 DetachDialysis((dialysisId, dialysisComp), null, true, false);
-                continue;
-            }
 
             if (time < dialysisComp.TransferAt)
             {
@@ -183,10 +180,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
             dialysisComp.TransferAt = time + dialysisComp.TransferDelay;
 
             if (!_powerCell.HasActivatableCharge(dialysisId) || !HasComp<BloodstreamComponent>(attachedTo))
-            {
                 DetachDialysis((dialysisId, dialysisComp), null, false, false);
-                continue;
-            }
 
             if (_solutionContainer.TryGetSolution(attachedTo, "chemicals", out var chemicalSolEnt, out var chemicalSol))
             {
