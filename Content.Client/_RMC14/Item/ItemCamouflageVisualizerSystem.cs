@@ -89,8 +89,9 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
 
                             var rsi = _resource.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / layer.RsiPath).RSI;
 
-                            var newState = $"equipped-{args.Slot.ToUpper()}-color";
-                            var speciesState = $"{state}-{speciesId}";
+                            var baseEquippedState = $"equipped-{args.Slot.ToUpper()}";
+                            var newState = $"{baseEquippedState}-color";
+                            var speciesState = $"{baseEquippedState}-{speciesId}-color";
 
                             // species specific
                             if (speciesId != null && rsi.TryGetState(speciesState, out _))
