@@ -220,7 +220,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var volume = FixedPoint2.Zero;
         var maxVolume = FixedPoint2.Zero;
         var tank = false;
-        if (TryGetTankSolution(ent, out var solutionEnt))
+        if (TryGetTankSolution(ent, out var solutionEnt, display: true))
         {
             var solution = solutionEnt.Value.Comp.Solution;
             volume = solution.Volume;
@@ -323,7 +323,14 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates));
     }
 
-    private bool TryGetTankSolution(Entity<RMCFlamerAmmoProviderComponent> flamer, [NotNullWhen(true)] out Entity<SolutionComponent>? solutionEnt)
+    /// <summary>
+    /// Get the solution that will be used by the flamer
+    /// </summary>
+    /// <param name="flamer">The incinerator that is being used.</param>
+    /// <param name="solutionEnt">The found solution.</param>
+    /// <param name="display">Is this just being called to configure the sprite? It ignores the Broiler if true.</param>
+    /// <returns>True if a solution has been found.</returns>
+    private bool TryGetTankSolution(Entity<RMCFlamerAmmoProviderComponent> flamer, [NotNullWhen(true)] out Entity<SolutionComponent>? solutionEnt, bool display = false)
     {
         solutionEnt = null;
 
@@ -338,7 +345,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         {
             tank = (tankId.Value, tankComp);
         }
-        else if (HasComp<RMCCanUseBroilerComponent>(flamer))
+        else if (!display && HasComp<RMCCanUseBroilerComponent>(flamer))
         {
             if (!_container.TryGetContainingContainer((flamer.Owner, null), out var holder))
                 return false;
