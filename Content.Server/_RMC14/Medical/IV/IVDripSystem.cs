@@ -202,7 +202,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
                 foreach (var reagent in _reagentRemovalBuffer)
                 {
-                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent, dialysisComp.TransferAmount);
+                    _solutionContainer.RemoveReagent(chemicalSolEnt.Value, reagent, dialysisComp.ReagentRemovalAmount);
                 }
             }
 
