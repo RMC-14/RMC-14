@@ -101,10 +101,9 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
                             newLayer.MapKeys = new() { newState };
                             newLayer.Color = camoColor;
                         }
+
                         if (newLayer.State is not null)
-                        {
                             args.Layers.Add((newLayer.State, newLayer));
-                        }
                     }
                 }
             }
