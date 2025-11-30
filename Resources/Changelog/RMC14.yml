@@ -1,54 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed the UNMC cup's sprite.
-    type: Fix
-  id: 2071
-  time: '2025-07-21T21:34:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7170
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new playtime medals, in the form of engraved metal name badges.
-    type: Add
-  - message: Replaced the CL's ribbon system with the new badges.
-    type: Tweak
-  id: 2072
-  time: '2025-07-21T21:37:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7165
-- author: noctyrnal
-  changes:
-  - message: Added the "UNMC lightweight expedition satchel", a visual alternative
-      to the current IO backpacks.
-    type: Add
-  - message: Added Leg Pouches, these come in black and camo, and serve as visual
-      alternatives to the 5 slot webbings.
-    type: Add
-  - message: SOs now have Black Insulated Gloves instead of Black Gloves in their
-      vendors.
-    type: Tweak
-  id: 2073
-  time: '2025-07-21T21:37:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7168
-- author: Dygon
-  changes:
-  - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
-      again.
-    type: Fix
-  - message: You're now unable to drop or fall onto the Almayer.
-    type: Fix
-  - message: Parasites already under a resin door won't be blocked by it during their
-      leap.
-    type: Fix
-  id: 2074
-  time: '2025-07-21T21:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7167
-- author: x5tink
-  changes:
-  - message: Returned plushies to the people!
-    type: Fix
-  id: 2075
-  time: '2025-07-21T21:40:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7125
 - author: DrSmugleaf
   changes:
   - message: Fixed some folding barricades having very high amounts of health.
@@ -4606,5 +4556,44 @@
   id: 2571
   time: '2025-11-29T09:12:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8447
+- author: CatAndHats
+  changes:
+  - message: Added the honor guard pamphlet which is found in the honor guard kit,
+      which grants them their hud icon and job title.
+    type: Add
+  id: 2572
+  time: '2025-11-29T09:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8195
+- author: noctyrnal
+  changes:
+  - message: COs with 450+ Hours can now get golden versions of their sidearms in
+      their loadouts.
+    type: Add
+  id: 2573
+  time: '2025-11-29T09:46:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8162
+- author: BramvanZijp
+  changes:
+  - message: The Commanding Officer's M59a Prototype Rifle now comes in a case alongside
+      3 MK1 AP Magazines instead of one regular MK1 Magazine.
+    type: Tweak
+  id: 2574
+  time: '2025-11-29T10:12:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8158
+- author: ayou331
+  changes:
+  - message: Added xeno cheveron for playtime over 350h
+    type: Add
+  id: 2575
+  time: '2025-11-29T10:17:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7896
+- author: CatAndHats
+  changes:
+  - message: Fixed squad prep and requisitions vendors missing the micro laser sight
+      attachment.
+    type: Fix
+  id: 2576
+  time: '2025-11-29T10:58:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8216
 Name: RMC14
 Order: -1
