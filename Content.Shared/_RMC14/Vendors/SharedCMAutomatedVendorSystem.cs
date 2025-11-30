@@ -51,6 +51,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -93,9 +94,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
 
-    private const string FlamerTankReagent = "RMCNapalmUT";
-
     private readonly Dictionary<EntProtoId, CMVendorEntry> _entries = new();
+    private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
     private readonly List<CMVendorEntry> _boxEntries = new();
 
     public override void Initialize()
