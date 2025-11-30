@@ -54,9 +54,6 @@
         whitelist:
           tags:
           - RMCWeaponIncineratorM34T
-  - type: Tag
-    tags:
-    - RMCBackpackFlamer
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: RMCMagneticItemReceiver
