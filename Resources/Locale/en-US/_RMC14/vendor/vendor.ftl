@@ -24,6 +24,7 @@ rmc-vending-machine-restock-box-not-full = {THE($item)} is not full. Fill it com
 rmc-vending-machine-restock-flamer-tank-wrong-fuel = {THE($item)} contains non-standard fuel. It must contain only standard napalm.
 rmc-vending-machine-restock-flamer-tank-not-full = {THE($item)} is not full. Fill it completely before restocking.
 rmc-vending-machine-restock-flare-pack-not-full = {THE($item)} is not full. Fill it with flares before restocking.
+rmc-vending-machine-restock-flare-spent = Some flares in {THE($item)} have been used. All flares must be unused to restock.
 rmc-vending-machine-restock-power-cell-missing = {THE($item)} needs a power cell installed to be restocked.
 rmc-vending-machine-restock-power-cell-not-charged = {THE($item)}'s power cell needs to be fully charged before restocking.
 rmc-vending-machine-restock-stack-wrong-amount = {THE($item)} must be in stacks of {$required} for restocking. Current amount: {$current}.
