@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Immature Queens can't start a hijack from the Almayer anymore.
-    type: Tweak
-  - message: Queens can't start a second hijack from the Almayer after one already
-      happened.
-    type: Fix
-  id: 2084
-  time: '2025-07-22T21:52:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7207
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed flamer fuel contents not appearing
-    type: Fix
-  - message: Fixed reagent tanks dispense mode lagging when you examine it.
-    type: Fix
-  id: 2085
-  time: '2025-07-22T21:53:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7178
 - author: DrSmugleaf
   changes:
   - message: Fixed multi row storages sometimes not preserving item order when taking
@@ -4591,5 +4572,20 @@
   id: 2584
   time: '2025-12-01T01:10:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8392
+- author: noctyrnal
+  changes:
+  - message: The XL Vests have been resprited, along with having camo now.
+    type: Tweak
+  id: 2585
+  time: '2025-12-01T01:12:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8358
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the gas mask not using the species-specific sprites for the species
+      that have them.
+    type: Tweak
+  id: 2586
+  time: '2025-12-01T01:12:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8510
 Name: RMC14
 Order: -1
