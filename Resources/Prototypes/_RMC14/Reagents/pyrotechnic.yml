@@ -29,9 +29,44 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalm
+  name: reagent-name-rmcnapalm
+  desc: reagent-desc-rmcnapalm
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ffb300"
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmSticky
+  name: reagent-name-rmcnapalm-sticky
+  desc: reagent-desc-rmcnapalm-sticky
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#f8e3b2"
+  intensity: 15
+  duration: 50
+  radius: 5
+  fireEntity: RMCTileFireStickyNapalm
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmHighCombustion
+  name: reagent-name-rmcnapalm-hc
+  desc: reagent-desc-rmcnapalm-hc
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#c51c1c"
+  intensity: 45
+  duration: 10
+  radius: 5
+  fireEntity: RMCTileFireHCNapalm
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
   id: RMCNapalmUT
-  name: reagent-name-rmcnapalmut
-  desc: reagent-desc-rmcnapalmut
+  name: reagent-name-rmcnapalm-ut
+  desc: reagent-desc-rmcnapalm-ut
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#DD9B00"
@@ -54,9 +89,22 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmX
+  name: reagent-name-rmcrapalm-x
+  desc: reagent-desc-rmcrapalm-x
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00b8ff"
+  intensity: 40
+  duration: 40
+  radius: 6
+  fireEntity: RMCTileFireBlue
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
   id: RMCNapalmB
-  name: reagent-name-rmcnapalb
-  desc: reagent-desc-rmcnapalb
+  name: reagent-name-rmcnapalm-b
+  desc: reagent-desc-rmcnapalm-b
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#00dd00"
@@ -68,13 +116,57 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
-  id: RMCNapalmX
-  name: reagent-name-rmcrapalmx
-  desc: reagent-desc-rmcrapalmx
+  id: RMCNapalmE
+  name: reagent-name-rmcnapalm-e
+  desc: reagent-desc-rmcnapalm-e
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
-  color: "#00b8ff"
+  color: "#800080"
+  intensity: 15
+  duration: 50
+  radius: 6
+  fireEntity: RMCTileFireNapalmE
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmEX
+  name: reagent-name-rmcnapalm-ex
+  desc: reagent-desc-rmcnapalm-ex
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#641dd6"
   intensity: 40
   duration: 40
   radius: 6
-  fireEntity: RMCTileFireBlue
+  fireEntity: RMCTileFireNapalmEX
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCR189
+  name: reagent-name-rmcr189
+  desc: reagent-desc-rmcr189
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ffe49c"
+  intensity: 50
+  duration: 30
+  radius: 6
+  fireEntity: RMCTileFireR189
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCCLF3
+  name: reagent-name-rmcclf3
+  desc: reagent-desc-rmcclf3
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ff9300"
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCMethane
+  name: reagent-name-rmcmethane
+  desc: reagent-desc-rmcmethane
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#0064C8"
