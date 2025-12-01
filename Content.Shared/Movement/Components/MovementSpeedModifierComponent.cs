@@ -20,7 +20,7 @@ namespace Content.Shared.Movement.Components
 
         // friction
         public const float DefaultAcceleration = 20f;
-        public const float DefaultFriction = 2.5f;
+        public const float DefaultFriction = 1; // RMC14
         public const float DefaultFrictionNoInput = 2.5f;
         public const float DefaultMinimumFrictionSpeed = 0.005f;
 
