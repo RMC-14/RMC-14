@@ -62,6 +62,7 @@ public sealed partial class AnnouncementWidget : UIWidget
         };
 
         SetupUI();
+        ConfigureAnimationAndEffects();
         Visible = true;
     }
 

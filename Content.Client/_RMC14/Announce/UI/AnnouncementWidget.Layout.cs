@@ -504,4 +504,46 @@ public sealed partial class AnnouncementWidget
 
         return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor);
     }
+
+    private void UpdatePosition()
+    {
+        if (Parent is not UIScreen screen || ActiveAnnouncement == null)
+            return;
+
+        var screenSize = screen.Size;
+        Measure(screenSize);
+        var widgetSize = DesiredSize;
+        var style = ActiveAnnouncement.Data.Style;
+
+        var position = CalculatePosition(screenSize, widgetSize, style);
+        position += ActiveAnnouncement.CurrentSlideOffset + ActiveAnnouncement.CurrentBounceOffset;
+
+        LayoutContainer.SetPosition(this, position);
+
+        if (style.AnimationEnhancements?.EnableZoom == true)
+        {
+            SetWidth = widgetSize.X * ActiveAnnouncement.ZoomCurrentScale;
+            SetHeight = widgetSize.Y * ActiveAnnouncement.ZoomCurrentScale;
+        }
+    }
+
+    private static Vector2 CalculatePosition(Vector2 screenSize, Vector2 widgetSize, AnnouncementStyle style)
+    {
+        const float padding = 50f;
+        const float topPadding = 100f;
+
+        return style.Position switch
+        {
+            AnnouncementPosition.TopLeft => new Vector2(padding, topPadding),
+            AnnouncementPosition.TopCenter => new Vector2((screenSize.X - widgetSize.X) / 2, padding),
+            AnnouncementPosition.TopRight => new Vector2(screenSize.X - widgetSize.X - padding, topPadding),
+            AnnouncementPosition.MiddleLeft => new Vector2(padding, (screenSize.Y - widgetSize.Y) / 2),
+            AnnouncementPosition.MiddleCenter => new Vector2((screenSize.X - widgetSize.X) / 2, (screenSize.Y - widgetSize.Y) / 2),
+            AnnouncementPosition.MiddleRight => new Vector2(screenSize.X - widgetSize.X - padding, (screenSize.Y - widgetSize.Y) / 2),
+            AnnouncementPosition.BottomLeft => new Vector2(padding, screenSize.Y - widgetSize.Y - padding),
+            AnnouncementPosition.BottomCenter => new Vector2((screenSize.X - widgetSize.X) / 2, screenSize.Y - widgetSize.Y - padding),
+            AnnouncementPosition.BottomRight => new Vector2(screenSize.X - widgetSize.X - padding, screenSize.Y - widgetSize.Y - padding),
+            _ => new Vector2((screenSize.X - widgetSize.X) / 2, (screenSize.Y - widgetSize.Y) / 2)
+        };
+    }
 }
