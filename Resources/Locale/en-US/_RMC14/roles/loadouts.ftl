@@ -7,6 +7,7 @@ rmc-loadout-group-accessories = Clothing accessories
 rmc-loadout-group-paperwork = Paperwork
 rmc-loadout-group-plushies = Plushies
 rmc-loadout-group-recreational = Recreational
+rmc-loadout-group-melee-weapons = Melee Weapons
 rmc-loadout-group-weapons = Weapons
 rmc-loadout-group-canned-drinks = Canned Drinks
 rmc-loadout-group-flasks = Flasks

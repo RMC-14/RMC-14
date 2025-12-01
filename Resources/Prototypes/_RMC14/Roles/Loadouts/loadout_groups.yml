@@ -362,6 +362,19 @@
   - D20DiceRMC
   - D6DiceRMC
 
+# Melee Weapons
+- type: loadoutGroup
+  id: MeleeWeaponsRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
 
 # Weapons
 - type: loadoutGroup
