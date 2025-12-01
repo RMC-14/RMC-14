@@ -705,7 +705,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
   - type: AccessReader
-    access: [["CMAccessRequisitions"], ["RMCAccessWeYa"]]
+    access: [["RMCAccessWeYa"]]
 
 - type: entity
   parent: RMCCrateSecure
