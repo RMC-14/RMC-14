@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Cassette;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
@@ -10,6 +11,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Medical.IV;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
@@ -64,41 +66,42 @@ namespace Content.Shared._RMC14.Vendors;
 public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
-    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
+    [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
     [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
 
     private readonly Dictionary<EntProtoId, CMVendorEntry> _entries = new();
-    private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
     private readonly List<CMVendorEntry> _boxEntries = new();
+    private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
 
     public override void Initialize()
     {
@@ -1034,14 +1037,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (matchingEntry.Amount >= matchingEntry.Max)
         {
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-full", vendor, user, ("vendor", vendor), ("item", item));
-            return false;
+            if (!CanTopOffPartialStack(vendor, item, matchingEntry))
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-item-full", vendor, user, ("vendor", vendor), ("item", item));
+                return false;
+            }
         }
 
         if (!ValidateItemForRestock(item, user, valid, matchingEntry.Id))
             return false;
+        // Try partial stack restocking first (for stacks like sandbags, materials, etc.)
+        if (TryRestockPartialStack(vendor, item, user, valid, matchingEntry))
+            return true;
 
-        if (!valid)
+        if (!valid) // Regular single item restocking
         {
             _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
         }
@@ -1051,6 +1060,127 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         AmountUpdated(vendor, matchingEntry);
         QueueDel(item);
         return true;
+    }
+
+    private bool CanTopOffPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, CMVendorEntry entry)
+    {
+        if (!TryComp<StackComponent>(item, out var itemStack) ||
+            !_prototypes.TryIndex(entry.Id, out var itemPrototype) ||
+            !itemPrototype.TryGetComponent(out StackComponent? itemProtoStack, _compFactory))
+            return false;
+
+        if (!vendor.Comp.PartialProductStacks.TryGetValue(entry.Id, out var partialAmount) ||
+            partialAmount == 0)
+            return false;
+
+        return partialAmount + itemStack.Count <= itemProtoStack.Count;
+    }
+
+    /// <summary>
+    /// Handles restocking of partial stacks (sandbags, materials, etc.)
+    /// Calculates how many full vendor stacks can be made, tracks partial remainders,
+    /// and leaves any excess in the player's hand.
+    /// </summary>
+    /// <remarks>
+    /// Stack size rules:
+    /// - Folding barricades: Must be exactly the prototype amount (no partial restocking)
+    /// - Sandbags: Restocked in multiples of 5
+    /// - Other materials (metal, plasteel, etc.): Restocked in multiples of 10
+    /// </remarks>
+    private bool TryRestockPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid, CMVendorEntry matchingEntry)
+    {
+        if (!TryComp<StackComponent>(item, out var stackComp) ||
+            !_prototypes.TryIndex(matchingEntry.Id, out var prototype) ||
+            !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
+            return false;
+
+        var (stacksToRestock, stackSize) = CalculateRestockAmount(item, stackComp, protoStack);
+        var amountConsumed = UpdatePartialStackTracking(vendor, matchingEntry, stackComp, stackSize, protoStack.Count, ref stacksToRestock);
+        if (stacksToRestock == 0)
+            return false;
+
+        UpdateInventoryStacks(item, stackComp, amountConsumed);
+        FinalizeRestock(vendor, item, user, valid, matchingEntry, stacksToRestock);
+
+        return true;
+    }
+
+    private (int stacksToRestock, int stackSize) CalculateRestockAmount(EntityUid item, StackComponent stackComp, StackComponent protoStack)
+    {
+        const int sandbagStackSize = 5;
+        const int materialStackSize = 10;
+
+        var itemPrototypeId = MetaData(item).EntityPrototype?.ID ?? string.Empty;
+        if (itemPrototypeId == "CMBarricadeFolding")
+        {
+            var isExactAmount = stackComp.Count == protoStack.Count;
+            return (isExactAmount ? 1 : 0, protoStack.Count);
+        }
+
+        if (itemPrototypeId.Contains("Sandbag", StringComparison.OrdinalIgnoreCase))
+            return (stackComp.Count / sandbagStackSize, sandbagStackSize);
+
+        if (stackComp.Count >= materialStackSize)
+            return (stackComp.Count / materialStackSize, materialStackSize);
+
+        return (0, materialStackSize);
+    }
+
+    private int UpdatePartialStackTracking(Entity<CMAutomatedVendorComponent> vendor,
+        CMVendorEntry entry,
+        StackComponent stackComp,
+        int stackSize,
+        int maxStackSize,
+        ref int stacksToRestock)
+    {
+        vendor.Comp.PartialProductStacks.TryAdd(entry.Id, 0);
+
+        var existingPartial = vendor.Comp.PartialProductStacks[entry.Id];
+        var newPartial = stackComp.Count % stackSize;
+        var combinedPartial = existingPartial + newPartial;
+        var playerStackConsumed = stacksToRestock * stackSize + newPartial; // Initial amount consumed
+        if (combinedPartial >= maxStackSize)
+        {
+            // Partials combined into a full stack
+            stacksToRestock++;
+            vendor.Comp.PartialProductStacks[entry.Id] = combinedPartial % maxStackSize;
+            // Don't change playerStackConsumed - the extra full stack came from combining partials
+        }
+        else
+        {
+            vendor.Comp.PartialProductStacks[entry.Id] = combinedPartial;
+        }
+
+        return playerStackConsumed;
+    }
+
+    private void UpdateInventoryStacks(EntityUid item, StackComponent stackComp, int amountConsumed)
+    {
+        var remainder = stackComp.Count - amountConsumed;
+        if (remainder > 0)
+            _stack.SetCount(item, remainder, stackComp);
+        else
+            QueueDel(item);
+    }
+
+    private void FinalizeRestock(Entity<CMAutomatedVendorComponent> vendor,
+        EntityUid item,
+        EntityUid user,
+        bool valid,
+        CMVendorEntry entry,
+        int stacksToRestock)
+    {
+        if (!valid)
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
+                vendor,
+                user);
+        }
+
+        entry.Amount += stacksToRestock;
+        Dirty(vendor);
+        AmountUpdated(vendor, entry);
     }
 
     /// <summary>
@@ -1074,12 +1204,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates reagent containers.
-    /// Checks flamer tanks for correct fuel type and fill level.
+    /// Checks flamer tanks for correct fuel type and fill level and if blood packs are full.
     /// Reagent containers from We-Ya-Med Plus(bottles, hyposprays, etc.) are handled by the refilling system before restocking.
     /// </summary>
     private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
     {
-        return !TryComp<RMCFlamerTankComponent>(item, out var flamerTank) || ValidateFlamerTank(item, flamerTank, user, valid);
+        if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank) && !ValidateFlamerTank(item, flamerTank, user, valid))
+            return false;
+
+        if (TryComp<BloodPackComponent>(item, out var bloodPack) && !ValidateBloodPack(item, bloodPack, user, valid))
+            return false;
+
+        return true;
     }
 
     private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
@@ -1107,22 +1243,83 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
+    private bool ValidateBloodPack(EntityUid pack, BloodPackComponent bloodPack, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(pack, bloodPack.Solution, out _, out var solution))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", pack, user, ("item", pack));
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-blood-pack-not-full", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
     /// <summary>
     /// Validates that stackable items have the correct stack amount for restocking.
-    /// Compares against the stack count in the vendor's prototype.
-    /// For example, if vendor sells folding barricades in stacks of 3, only stacks of 3 can be restocked.
     /// </summary>
+    /// <remarks>
+    /// Stack validation rules:
+    /// - Folding barricades: Must be exactly the prototype amount (no flexibility)
+    /// - Sandbags: Minimum 5 (restocked in multiples of 5)
+    /// - Other materials: Minimum 10 (restocked in multiples of 10)
+    /// Partial stack logic is handled in TryRestockPartialStack.
+    /// </remarks>
     private bool ValidateStackAmount(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
+        const int minimumSandbagCount = 5;
+        const int minimumMaterialCount = 10;
+
         if (!TryComp<StackComponent>(item, out var stack) ||
             !_prototypes.TryIndex(prototypeId, out var prototype) ||
             !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
             return true;
 
+        var itemPrototypeId = MetaData(item).EntityPrototype?.ID ?? string.Empty;
+        if (itemPrototypeId == "CMBarricadeFolding")
+            return ValidateExactStackCount(item, stack, protoStack, user, valid);
+
+        if (itemPrototypeId.Contains("Sandbag", StringComparison.OrdinalIgnoreCase))
+            return ValidateMinimumStackCount(item, stack, minimumSandbagCount, user, valid);
+
+        if (stack.Count < minimumMaterialCount && stack.Count != protoStack.Count)
+            return ValidateMinimumStackCount(item, stack, minimumMaterialCount, user, valid);
+
+        return true;
+    }
+
+    private bool ValidateExactStackCount(EntityUid item, StackComponent stack, StackComponent protoStack, EntityUid user, bool valid)
+    {
         if (stack.Count == protoStack.Count)
             return true;
 
-        RestockValidationPopup(valid, "rmc-vending-machine-restock-stack-wrong-amount", item, user, ("item", item), ("required", protoStack.Count), ("current", stack.Count));
+        RestockValidationPopup(valid,
+            "rmc-vending-machine-restock-stack-wrong-amount",
+            item,
+            user,
+            ("item", item),
+            ("required", protoStack.Count),
+            ("current", stack.Count));
+        return false;
+    }
+
+    private bool ValidateMinimumStackCount(EntityUid item, StackComponent stack, int minimum, EntityUid user, bool valid)
+    {
+        if (stack.Count >= minimum)
+            return true;
+
+        RestockValidationPopup(valid,
+            "rmc-vending-machine-restock-stack-minimum",
+            item,
+            user,
+            ("item", item),
+            ("minimum", minimum),
+            ("current", stack.Count));
         return false;
     }
 
@@ -1281,6 +1478,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
+        if (TryComp<CassettePlayerComponent>(item, out var cassettePlayer) &&
+            !ValidateCassettePlayer(item, cassettePlayer, user, valid))
+        {
+            return false;
+        }
+
         return ValidatePowerCell(item, user, valid);
     }
 
@@ -1311,30 +1514,50 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var maxSlots = slots.Count.Value;
-        var slotName = slots.Slot?.Name ?? "Flare";
-        var filledSlots = 0;
-
-        for (var i = 1; i <= maxSlots; i++)
+        var slotBaseName = slots.Slot?.Name ?? "Flare";
+        var filledSlotCount = 0;
+        for (var slotIndex = 1; slotIndex <= maxSlots; slotIndex++)
         {
-            var slotId = $"{slotName}{i}";
+            var slotId = $"{slotBaseName}{slotIndex}";
             if (!_container.TryGetContainer(pack, slotId, out var container) ||
                 container.ContainedEntities.Count == 0)
                 continue;
 
-            filledSlots++;
-            var flare = container.ContainedEntities[0];
+            filledSlotCount++;
 
-            if (TryComp<ExpendableLightComponent>(flare, out var expendable) &&
-                expendable.CurrentState != ExpendableLightState.BrandNew)
-            {
-                RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-spent", pack, user, ("item", pack));
+            if (!ValidateFlareCondition(container.ContainedEntities[0], pack, user, valid))
                 return false;
-            }
         }
 
-        if (filledSlots < maxSlots)
+        if (filledSlotCount < maxSlots)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-pack-not-full", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateFlareCondition(EntityUid flare, EntityUid pack, EntityUid user, bool valid)
+    {
+        if (!TryComp<ExpendableLightComponent>(flare, out var expendable))
+            return true;
+
+        if (expendable.CurrentState != ExpendableLightState.BrandNew)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-spent", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateCassettePlayer(EntityUid player, CassettePlayerComponent cassettePlayer, EntityUid user, bool valid)
+    {
+        if (_container.TryGetContainer(player, cassettePlayer.ContainerId, out var container) &&
+            container.ContainedEntities.Count > 0)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-cassette-player-has-tape", player, user, ("item", player));
             return false;
         }
 
