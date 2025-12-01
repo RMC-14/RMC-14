@@ -47,9 +47,6 @@ public sealed class HolocardSystem : EntitySystem
         if (!_transform.InRange(ent.Owner, viewer.Value, 15f))
             return;
 
-        if (HasComp<OverwatchWatchingComponent>(viewer.Value))
-            return;
-
         // A player with insufficient medical skill cannot change holocards
         if (!_skills.HasSkill(viewer.Value, SkillType, MinimumRequiredSkill))
             return;
