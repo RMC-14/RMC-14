@@ -230,6 +230,8 @@
       range: 1
       cardinalRange: 3
       ordinalRange: 3
+    soundWarning: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    laserWarning: true
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
