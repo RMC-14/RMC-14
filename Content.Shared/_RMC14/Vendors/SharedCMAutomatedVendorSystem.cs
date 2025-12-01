@@ -1,24 +1,35 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Animations;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
+using Content.Shared._RMC14.Weapons.Ranged.Chamber;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -28,35 +39,25 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Stacks;
+using Content.Shared.Storage;
+using Content.Shared.Tag;
+using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
+using Content.Shared.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Destructible;
-using Content.Shared.Throwing;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Robust.Shared.Containers;
-using Content.Shared.Storage;
-using Content.Shared.Weapons.Ranged;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared._RMC14.Attachable.Components;
-using Content.Shared._RMC14.Weapons.Ranged.Chamber;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
-using Content.Shared._RMC14.Weapons.Ranged.Flamer;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
-using Content.Shared.PowerCell.Components;
-using Content.Shared.Stacks;
-using Content.Shared.Tag;
-using Content.Shared._RMC14.Medical.Refill;
-using Content.Shared.Light.Components;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -304,8 +305,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ent.Comp.CanManualRestock)
             return;
-
-        if (TryComp<StorageComponent>(args.Used, out var storage))
+        // Check for storage containers (backpacks, boxes, belts, etc.) but exclude armor/helmets with storage
+        if (TryComp<StorageComponent>(args.Used, out var storage) &&
+            !HasComp<CMArmorComponent>(args.Used) &&
+            !HasComp<CMHardArmorComponent>(args.Used))
         {
             TryRestockFromContainer(ent, args.Used, args.User, storage);
             args.Handled = true;
@@ -1258,6 +1261,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
+            // Empty armor and helmets.
             RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
             return false;
         }
@@ -1270,7 +1274,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         if (TryComp<CMItemSlotsComponent>(item, out var cmItemSlots) &&
-            _tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")) &&
+            (_tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")) ||
+             _tags.HasTag(item, new ProtoId<TagPrototype>("RMCPackFlareCAS"))) &&
             !ValidateFlarePack(item, cmItemSlots, user, valid))
         {
             return false;
