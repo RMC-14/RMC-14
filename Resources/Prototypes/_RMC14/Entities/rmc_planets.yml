@@ -171,13 +171,6 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
-    survivorJobs:
-    - CMSurvivor: -1
-    - CMSurvivorCorporate: 2
-    - CMSurvivorDoctor: 3
-    - CMSurvivorEngineer: 4
-    - CMSurvivorSecurity: 2
-    - CMSurvivorScientist: 2
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivorTrijentTrucker: -1
