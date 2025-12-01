@@ -23,6 +23,8 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
+      - id: RMCArmorVestSquad
+        name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -30,7 +32,6 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
-      - id: RMCArmorVestRifleman
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -245,4 +246,6 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5

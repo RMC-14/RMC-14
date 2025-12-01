@@ -1,4 +1,173 @@
 - type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomCrateLoot
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMWelder
+    - CMBeltUtilityFilled
+    - CMMultitool
+    - RMCFlashlight
+    - FoodDonkpocket
+    - CMGrenadeSmoke
+    - DoorElectronics
+    - CMWirecutter
+    - CMBootsBlackFilled
+    - RMCJumpsuitMarinePatch
+
+#TODO RMC14: Igniter
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomMiniAmmoCrateLoot
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCSpeedLoaderM44
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CExt
+    - CMMagazinePistolM1984
+    - CMShellShotgunBuckshot
+    - CMShellShotgunFlechette
+    - CMShellShotgunSlugs
+    - CMMagazineSMGM63
+    - CMMagazineSMGM63Ext
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomMiniMedcase
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - CMTricordrazineAutoInjectorNoSkill
+    - RMCFlashlight
+    - CMHealthAnalyzer
+    - CMOintment10
+    - CMFireExtinguisherPortable
+    - CMScrewdriver
+    - CMTraumaKit10
+    - CMPillCanisterTricordrazine
+    - CMBurnKit10
+    - CMCrowbar
+    - CMEntrenchingTool
+
+#TODO RMC14: tramadol,splint,
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomMERCGuns
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: GunSpawner
+    minMagazines: 5
+    maxMagazines: 5
+    offset: 0.05
+    chanceToSpawn: 1.0
+    prototypes:
+    - RMCWeaponPistolHoldout: RMCMagazinePistolHoldout
+    - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
+    - RMCWeaponPistolMK45: RMCMagazinePistolMK45
+    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
+    - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
+    - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
+    - RMCWeaponShotgunHG3712: CMShellShotgunBuckshot
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGType64: RMCMagazineSMGType64
+    - WeaponSMGMAC15: RMCMagazineSMGMAC15
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
+    - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
+    - RMCWeaponRifleL42A: RMCMagazineRifleL42A
+    - RMCWeaponSMGType19: RMCMagazineSMGType19
+    - RMCWeaponRifleABR40: RMCMagazineRifleABR40
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponRifleM16: RMCMagazineRifleM16
+    - WeaponRifleAR10: RMCMagazineRifleAR10
+    - RMCWeaponRifleType71: RMCMagazineRifleType71
+    - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomHalyconGuns
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: GunSpawner
+    minMagazines: 3
+    maxMagazines: 3
+    offset: 0.05
+    chanceToSpawn: 1.0
+    prototypes:
+    - RMCWeaponRevolverZHNK72: RMCSpeedLoaderZHNK72
+    - RMCWeaponPistolNP92: RMCMagazinePistolNP92
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
+    - WeaponRifleMAR40: RMCMagazineRifleMAR40
+    - RMCType88SniperRifle: RMCMagazineSniperType88
+    - RMCWeaponSMGType19: RMCMagazineSMGType19
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomUNMCGuns
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: GunSpawner
+    minMagazines: 3
+    maxMagazines: 3
+    offset: 0.05
+    chanceToSpawn: 1.0
+    prototypes:
+    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - RMCWeaponRifleM54C: CMMagazineRifleM54C
+    - WeaponShotgunM42A2: CMShellShotgunSlugs
+    - WeaponSMGM63: CMMagazineSMGM63
+
+- type: entity
   abstract: true
   parent: BaseStructureDynamic
   id: RMCCrateOpenableBase
@@ -6,7 +175,9 @@
   - type: CrateOpenable
     spawn:
     - id: RMCPlankWood2
-      amount: 1 # TODO RMC14 other drops
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomCrateLoot
 
 - type: entity
   parent: RMCCrateOpenableBase
@@ -74,6 +245,215 @@
   - type: XenoToggleChargingDamage
     stageLoss: 1
     destroy: true
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateHalyconFireArms
+  name: Halycon firearm crate
+  description: A hefty wooden crate.
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomHalyconGuns
+#Todo RMC14: Make it so it does it 3 times
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketFireArms
+  name: Black market firearm crate
+  description: A hefty wooden crate.
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomMERCGuns
+
+- type: entity
+  parent: RMCSecureCaseDouble #Evilass hidden GUN GAMBA CRATEEEEEEEE For CHANCESSSS CLAIMEEEEEEEEEEEEEE
+  id: RMCCrateBlackmarketFireArmsHidden
+  name: supply crate
+  description: A hefty wooden crate.
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomMERCGuns
+
+- type: entity
+  parent: RMCCrateLarge # TDLR (randomized spawn does not work with crateopenable spawn a object that uses Spawnonterminate for it) Part of UNMC Guns Crate
+  id: RMCCrateUNMCGunsDecoyObject
+  name: Decoy Object UNMC firearms crate (x3)
+  description: Decoy Object.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.005
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomUNMCGuns
+
+- type: entity
+  parent: RMCCrateLarge # UNMC Guns Crate
+  id: RMCCrateUNMCGuns
+  name: UNMC firearms crate (x3)
+  description: A supply crate containing 3 firearms used by UNMC forces.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCCrateUNMCGunsDecoyObject
+      amount: 3
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomUNMCGuns #Basicly does nothing but is needed to avoid base crate loot
+
+- type: entity
+  parent: RMCCrateLarge # UNMC Guns Crate
+  id: RMCCrateUNMCGunsSingle
+  name: UNMC firearms crate
+  description: A supply crate containing firearms used by UNMC forces.
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomUNMCGuns
+
+- type: entity
+  parent: RMCSecureCaseMedicalBig #Medical Vendor Crate
+  id: RMCCrateMedicalVendor
+  name: We-Ya-Med Plus crate
+  description: A crate containing one We-Ya-Med Plus vendor.
+  components:
+  - type: SpawnOnTerminate
+    spawn: CMVendorMedicalAllAccess
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Generator Crate
+  id: RMCCrateGeneratorPACMAN
+  name: P.A.C.M.A.N. crate
+  description: A crate containing a P.A.C.M.A.N. generator, some fuel, and some cable coil to get your power up and going.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPortableGenerator
+      amount: 1
+    - id: RMCCableCoil10
+      amount: 1
+    - id: CMSheetPhoron15
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: CMWelder
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
+  id: RMCCrateFloodlightX4
+  name: floodlight crate (x4)
+  description: A crate containing four floodlights. "Warning It might be bit tangled!" written on the side.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCSmallFloodlightUnanchored
+      amount: 4
+  - type: SpawnOnTerminate
+    spawn: FoodDonkpocket
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Floodlights (funny drag stuff)
+  id: RMCCrateTablesAndRacks
+  name: storage solutions crate (x10, x10)
+  description: A crate containing ten table parts, and ten rack parts, for easy storage setup.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCTablePartAlmayer
+      amount: 10
+    - id: RMCRackParts
+      amount: 9
+  - type: SpawnOnTerminate
+    spawn: RMCRackParts
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Water Bottles
+  id: RMCCrateBottledWaterX50
+  name: We-Ya Bottled Water crate (x50)
+  description: A crate containing fifty We-Ya Bottled Spring Water bottles.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMDrinkWEYAWaterBottle30
+      amount: 49
+  - type: SpawnOnTerminate
+    spawn: CMDrinkWEYAWaterBottle30
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Flare Boxes
+  id: RMCCrateFlares200
+  name: Flare supply crate (x200)
+  description: A supply crate containing two crates of flares.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCBoxPackFlare
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: RMCBoxPackFlare
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Powerloader
+  id: RMCCratePowerLoaderYellow
+  name: Powerloader crate
+  description: A crate containing one folded, but fully assembled, LU-50 Power Loader and included pamphlet for quick training.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMechPowerLoader
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: CMPamphletPowerloader
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Powerloader Fujin
+  id: RMCCratePowerLoaderGreen
+  name: Fujin Powerloader crate
+  description: A crate containing one folded, but fully assembled, LU-43 Power Loader and included pamphlet for quick training.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMechPowerLoaderGreen
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: CMPamphletPowerloader
+
+- type: entity
+  parent: RMCSecureCaseStrapped #Powerloader Ferret
+  id: RMCCratePowerLoaderBlue
+  name: Ferret Powerloader crate
+  description: A crate containing one folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMechPowerLoaderBlue
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: CMPamphletPowerloader
+
+- type: entity
+  parent: RMCSecureCaseStrapped # 4 x25 Sandbags
+  id: RMCCrateSandbags100
+  name: sandbag supply crate (x100)
+  description: A supply crate containing four piles of twenty-five sandbags.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSandbagFull25
+      amount: 3
+  - type: SpawnOnTerminate
+    spawn: CMSandbagFull25
+
+- type: entity
+  parent: RMCSecureCaseStrapped # 2 x30 Plasteel Sheets
+  id: RMCCratePlasteel60
+  name: plasteel supply crate (x60)
+  description: A supply crate containing two stacks of 30 plasteel sheets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSheetPlasteel30
+      amount: 1
+  - type: SpawnOnTerminate
+    spawn: CMSheetPlasteel30
+
+#Blackmarket will be down from there TODO RMC14: Blackmarket Crates after R4T rifle
 
 - type: entity
   parent: RMCCrateOpenableBase
@@ -367,6 +747,8 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/minimedcase.rsi
     state: base
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomMiniMedcase
 
 - type: entity
   parent: RMCSmallChestYellow
@@ -383,6 +765,8 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/miniammo.rsi
     state: base
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomMiniAmmoCrateLoot
 
 - type: entity
   parent: RMCSmallChestYellow
