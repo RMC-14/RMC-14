@@ -69,3 +69,9 @@
     back:
     - d6Dice
 
+- type: loadout
+  id: RedTennisBall
+  cost: 1
+  storage:
+    back:
+    - RedTennisBall

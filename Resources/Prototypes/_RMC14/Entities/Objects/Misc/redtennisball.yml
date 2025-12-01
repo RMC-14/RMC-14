@@ -1,0 +1,42 @@
+- type: entity
+  parent: BaseItem
+  id: RedTennisBall
+  name: red tennis ball
+  description: The one tennis ball to rule them all. Painted red with the blood of your enemies, or just paint. 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/redtennisball.rsi
+    state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.5 # a little bouncy
+        friction: 0.2
+  - type: Catchable
+    catchChance: 0.8
+    catchSuccessSound:
+      path: /Audio/Effects/Footsteps/bounce.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Effects/Footsteps/bounce.ogg
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Misc/redtennisball.rsi
+  - type: EmitSoundOnUse
+    sound:
+      collection: ToySqueak
+      params:
+        volume: -8
+  - type: UseDelay
+  - type: Clothing
+    slots: [mask]
+  - type: Tag
+    tags:
+    - PetWearable
+  - type: TileFrictionModifier
+    modifier: 0.5  
