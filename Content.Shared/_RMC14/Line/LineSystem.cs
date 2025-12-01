@@ -49,6 +49,9 @@ public sealed class LineSystem : EntitySystem
         if (range != null)
             distance = Math.Min(range.Value, distance);
 
+        if (thick && distance > 1)
+            distance -= 1;
+
         var distanceX = end.X - start.X;
         var distanceY = end.Y - start.Y;
         var x = start.X;
@@ -100,7 +103,7 @@ public sealed class LineSystem : EntitySystem
                 var isDuplicate = false;
                 foreach (var existing in tiles)
                 {
-                    if (existing.Coordinates == mapCoords)
+                    if (existing.Coordinates.Position == mapCoords.Position)
                     {
                         isDuplicate = true;
                         break;
