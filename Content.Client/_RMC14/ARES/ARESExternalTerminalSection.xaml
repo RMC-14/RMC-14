@@ -2,9 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.ARES">
     <BoxContainer Orientation="Vertical">
-    <RichTextLabel Access="Public" Name="SectionName" Text="[font size= 15]ERROR" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
-    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-        <GridContainer Access="Public" Name="ButtonContainer" Columns="4"/>
-    </BoxContainer>
+	    <RichTextLabel Access="Public" Name="SectionName" Text="[font size= 15]ERROR" Margin="0 10 0 5" HorizontalAlignment="Center" HorizontalExpand="True"/>
+	    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+	        <GridContainer Access="Public" Name="ButtonContainer" Columns="4"/>
+	    </BoxContainer>
     </BoxContainer>
 </controls:ARESExternalTerminalSection>
