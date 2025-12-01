@@ -413,6 +413,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCOverwatchConsoleUpdateEverySeconds =
         CVarDef.Create("rmc.overwatch_console_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCXenoWatchUpdateEverySeconds =
+        CVarDef.Create("rmc.xeno_watch_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
+
     /// <summary>
     ///     If the amount of resin constructs divided by the amount of buildable tiles in an area is higher than this value, the
     ///     plasma cost of new constructs in the area is increased.

@@ -220,6 +220,7 @@
     name: rmc-xeno-berserker-name
     description: rmc-xeno-berserker-description
     popup: rmc-xeno-berserker-popup
+    strainOf: CMXenoRavager
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0

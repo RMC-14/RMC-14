@@ -194,6 +194,7 @@
     name: rmc-xeno-vampire-name
     description: rmc-xeno-vampire-description
     popup: rmc-xeno-vampire-popup
+    strainOf: CMXenoLurker
   - type: CMArmor
     xenoArmor: 20
     explosionArmor: 20

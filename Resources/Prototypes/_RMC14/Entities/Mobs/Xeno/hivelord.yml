@@ -198,6 +198,7 @@
     name: rmc-xeno-resin-whisperer-name
     description: rmc-xeno-resin-whisperer-description
     popup: rmc-xeno-resin-whisperer-popup
+    strainOf: CMXenoHivelord
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordResinWhisperer

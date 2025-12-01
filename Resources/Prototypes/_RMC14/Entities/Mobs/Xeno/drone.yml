@@ -202,6 +202,7 @@
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
     popup: rmc-xeno-gardener-popup
+    strainOf: CMXenoDrone
   - type: XenoFruitPlanter
     canPlant:
     - XenoFruitGreater
@@ -286,6 +287,7 @@
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description
     popup: rmc-xeno-healer-popup
+    strainOf: CMXenoDrone
   - type: XenoFruitPlanter
     fruitChoice: XenoFruitLesser
     canPlant:
