@@ -33,6 +33,10 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - EntityStorage
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
