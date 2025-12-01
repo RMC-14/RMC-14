@@ -388,6 +388,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
     }
 
+    public virtual void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+    }
+
     private void SpawnFireChain(EntProtoId spawn, EntityUid chain, EntityCoordinates coordinates, int? intensity, int? duration)
     {
         var spawned = Spawn(spawn, coordinates);
