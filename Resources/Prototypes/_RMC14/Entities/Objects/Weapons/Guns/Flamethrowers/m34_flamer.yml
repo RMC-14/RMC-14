@@ -176,9 +176,9 @@
   name: incinerator tank (B-Gel)
   description: A fuel tank full of specialized Ultra Thick Napthal Fuel type B-Gel, a gelled variant of napalm that is easily extinguished, but shoots further and lingers for longer. Handle with exceptional care.
   components:
-  # - type: RMCFlamerTank
-  #   maxRange: 7
-  #   maxDuration: 50
+  - type: RMCFlamerTank
+    maxRange: 7
+    maxDuration: 50
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:

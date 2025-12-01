@@ -67,10 +67,10 @@
         reagents:
         - ReagentId: RMCNapalmUT
           Quantity: 250
-  # - type: RMCFlamerTank
-  #   maxIntensity: 80
-  #   maxRange: 5
-  #   maxDuration: 24
+  - type: RMCFlamerTank
+    maxIntensity: 80
+    maxRange: 5
+    maxDuration: 24
   - type: Tag
     tags:
     - RMCTankFlamerLarge
@@ -81,14 +81,14 @@
   name: large incinerator tank (B)
   description: A large fuel tank of Ultra Thick Napthal Fuel type B, a special variant of napalm that is easily extinguished, but disperses over a wide area while burning slowly.
   components:
-  # - type: RMCFlamerTank
-  #   maxRange: 6
+  - type: RMCFlamerTank
+    maxRange: 6
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
         maxVol: 250
         reagents:
-        - ReagentId: RMCBGel
+        - ReagentId: RMCNapalmB
           Quantity: 250
 
 - type: entity
@@ -97,8 +97,8 @@
   name: large incinerator tank (X)
   description: A large fuel tank of Ultra Thick Napthal Fuel type X, a sticky combustible liquid chemical that burns extremely hot, for use in the M34-T incinerator unit. Handle with extreme caution.
   components:
-  # - type: RMCFlamerTank
-  #   maxRange: 6
+  - type: RMCFlamerTank
+    maxRange: 6
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
@@ -113,10 +113,10 @@
   name: large custom incinerator tank
   description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
   components:
-  # - type: RMCFlamerTank
-  #   maxIntensity: 60
-  #   maxRange: 8
-  #   maxDuration: 50
+  - type: RMCFlamerTank
+    maxIntensity: 60
+    maxRange: 8
+    maxDuration: 50
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:

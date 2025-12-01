@@ -54,6 +54,19 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmB
+  name: reagent-name-rmcnapalb
+  desc: reagent-desc-rmcnapalb
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00dd00"
+  intensity: 15
+  duration: 50
+  radius: 6
+  fireEntity: RMCTileFireGreen
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
   id: RMCNapalmX
   name: reagent-name-rmcrapalmx
   desc: reagent-desc-rmcrapalmx

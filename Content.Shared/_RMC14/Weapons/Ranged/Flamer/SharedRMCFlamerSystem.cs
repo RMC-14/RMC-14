@@ -81,7 +81,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnGetAmmoCount(Entity<RMCFlamerAmmoProviderComponent> ent, ref GetAmmoCountEvent args)
     {
-        if (!TryGetTankSolution(ent, out var solutionEnt))
+        if (!TryGetTankSolution(ent, out var solutionEnt, out var _))
             return;
 
         var solution = solutionEnt.Value.Comp.Solution;
@@ -108,7 +108,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnAttemptShoot(Entity<RMCFlamerAmmoProviderComponent> ent, ref AttemptShootEvent args)
     {
         if (args.ToCoordinates is not { } toCoordinates ||
-            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _, out _))
+            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _, out _, out _))
         {
             return;
         }
@@ -220,7 +220,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var volume = FixedPoint2.Zero;
         var maxVolume = FixedPoint2.Zero;
         var tank = false;
-        if (TryGetTankSolution(ent, out var solutionEnt, display: true))
+        if (TryGetTankSolution(ent, out var solutionEnt, out var _, display: true))
         {
             var solution = solutionEnt.Value.Comp.Solution;
             volume = solution.Volume;
@@ -241,7 +241,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         EntityCoordinates fromCoordinates,
         EntityCoordinates toCoordinates)
     {
-        if (!CanShootFlamer(flamer, fromCoordinates, toCoordinates, out var tiles, out var solution, out var reagent))
+        if (!CanShootFlamer(flamer, fromCoordinates, toCoordinates, out var tiles, out var solution, out var reagent, out var tank))
             return;
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
@@ -257,8 +257,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Spawn = reagent.FireEntity;
         chainComp.Tiles = tiles;
         chainComp.Reagent = reagent.ID;
-        chainComp.MaxIntensity = flamer.Comp.MaxIntensity;
-        chainComp.MaxDuration = flamer.Comp.MaxDuration;
+        chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
+        chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
 
         Dirty(chain, chainComp);
     }
@@ -269,12 +269,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         EntityCoordinates toCoordinates,
         [NotNullWhen(true)] out List<LineTile>? tiles,
         out Entity<SolutionComponent> solution,
-        [NotNullWhen(true)] out ReagentPrototype? reagent)
+        [NotNullWhen(true)] out ReagentPrototype? reagent,
+        [NotNullWhen(true)] out Entity<RMCFlamerTankComponent>? tank)
     {
         tiles = null;
         solution = default;
         reagent = null;
-        if (!TryGetTankSolution(flamer, out var solutionEnt))
+        if (!TryGetTankSolution(flamer, out var solutionEnt, out tank))
             return false;
 
         var volume = solutionEnt.Value.Comp.Solution.Volume;
@@ -297,7 +298,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
-        var maxRange = Math.Min(flamer.Comp.MaxRange, reagent.Radius);
+        var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
@@ -330,22 +331,23 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     /// </summary>
     /// <param name="flamer">The incinerator that is being used.</param>
     /// <param name="solutionEnt">The found solution.</param>
+    /// <param name="tankEnt">The found tank.</param>
     /// <param name="display">Is this just being called to configure the sprite? It ignores the Broiler if true.</param>
     /// <returns>True if a solution has been found.</returns>
-    private bool TryGetTankSolution(Entity<RMCFlamerAmmoProviderComponent> flamer, [NotNullWhen(true)] out Entity<SolutionComponent>? solutionEnt, bool display = false)
+    private bool TryGetTankSolution(Entity<RMCFlamerAmmoProviderComponent> flamer, [NotNullWhen(true)] out Entity<SolutionComponent>? solutionEnt, [NotNullWhen(true)] out Entity<RMCFlamerTankComponent>? tankEnt, bool display = false)
     {
         solutionEnt = null;
+        tankEnt = null;
 
-        Entity<RMCFlamerTankComponent>? tank = null;
         if (TryComp(flamer, out RMCFlamerTankComponent? tankComp))
         {
-            tank = (flamer, tankComp);
+            tankEnt = (flamer, tankComp);
         }
         else if (_container.TryGetContainer(flamer, flamer.Comp.ContainerId, out var container) &&
                  container.ContainedEntities.TryFirstOrNull(out var tankId) &&
                  TryComp(tankId, out tankComp))
         {
-            tank = (tankId.Value, tankComp);
+            tankEnt = (tankId.Value, tankComp);
         }
         else if (!display && HasComp<RMCCanUseBroilerComponent>(flamer))
         {
@@ -373,12 +375,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 if (!TryComp(tankId, out tankComp))
                     continue;
 
-                tank = (tankId.Value, tankComp);
+                tankEnt = (tankId.Value, tankComp);
                 break;
             }
         }
 
-        if (tank is not { } tankValue)
+        if (tankEnt is not { } tankValue)
             return false;
 
         return _solution.TryGetSolution(tankValue.Owner, tankValue.Comp.SolutionId, out solutionEnt, out _);
