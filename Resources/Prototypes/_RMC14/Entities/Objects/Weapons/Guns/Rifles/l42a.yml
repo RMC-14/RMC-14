@@ -219,7 +219,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL42AIncendiary
-  name: L42A Incendiary magazine (10x24mm)
+  name: L42A incendiary magazine (10x24mm)
   description: A 10x24mm Incendiary battle rifle magazine.
   components:
   - type: Tag

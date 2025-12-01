@@ -266,7 +266,7 @@
 - type: entity
   parent: CMMagazineRifleM54CE2
   id: RMCMagazineRifleM54CE2Incendiary
-  name: "M54CE2 Incendiary magazine (10x24mm)"
+  name: "M54CE2 incendiary magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True

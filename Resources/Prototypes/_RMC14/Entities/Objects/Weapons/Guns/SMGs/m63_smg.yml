@@ -250,7 +250,7 @@
 - type: entity
   parent: CMMagazineSMGM63
   id: RMCMagazineSMGM63Incendiary
-  name: "M63 Incendiary magazine (10x20mm)"
+  name: "M63 incendiary magazine (10x20mm)"
   suffix: Incendiary
   components:
   - type: BallisticAmmoProvider
@@ -344,7 +344,7 @@
 - type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge10x20mmIncendiary
-  name: HEAP cartridge (10x20mm)
+  name: incendiary cartridge (10x20mm)
   components:
   - type: Tag
     tags:
