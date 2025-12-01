@@ -11,6 +11,9 @@ public sealed partial class RMCIgniterComponent : Component
     public bool Enabled;
 
     [DataField, AutoNetworkedField]
+    public bool Locked;
+
+    [DataField, AutoNetworkedField]
     public SoundPathSpecifier? Sound = new("/Audio/_RMC14/Weapons/Handling/flamer_ignition.ogg");
 
     [DataField, AutoNetworkedField]

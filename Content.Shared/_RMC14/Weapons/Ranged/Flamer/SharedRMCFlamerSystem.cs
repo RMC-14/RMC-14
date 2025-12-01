@@ -24,7 +24,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -72,6 +71,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCBroilerComponent, GetItemActionsEvent>(OnBroilerGetItemActions);
         SubscribeLocalEvent<RMCBroilerComponent, RMCBroilerActionEvent>(OnBroilerAction);
+
+        SubscribeLocalEvent<RMCCanUseBroilerComponent, UniqueActionEvent>(OnBroilerUniqueAction);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -222,6 +223,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnIgniterUniqueAction(Entity<RMCIgniterComponent> ent, ref UniqueActionEvent args)
     {
+        if (args.Handled || ent.Comp.Locked)
+            return;
+
+        args.Handled = true;
         ent.Comp.Enabled = !ent.Comp.Enabled;
         Dirty(ent);
 
@@ -510,6 +515,25 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         }
 
         _popup.PopupClient(Loc.GetString("rmc-broiler-switch-tank", ("n", n)), ent, args.Performer);
+    }
+
+    public void OnBroilerUniqueAction(Entity<RMCCanUseBroilerComponent> ent, ref UniqueActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var inventoryEnumerator = _inventory.GetSlotEnumerator(args.UserUid);
+        while (inventoryEnumerator.MoveNext(out var slot))
+        {
+            if (!TryComp<RMCBroilerComponent>(slot.ContainedEntity, out var _))
+                continue;
+
+            args.Handled = true;
+            var ev = new RMCBroilerActionEvent();
+            ev.Performer = args.UserUid;
+            RaiseLocalEvent(slot.ContainedEntity.Value, ev);
+            break;
+        }
     }
 
     public override void Update(float frameTime)

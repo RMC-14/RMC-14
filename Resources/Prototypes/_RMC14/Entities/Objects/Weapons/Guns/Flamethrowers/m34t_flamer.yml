@@ -45,6 +45,9 @@
     tags:
     - RMCWeaponIncineratorM34T
   - type: RMCCanUseBroiler
+  - type: RMCIgniter
+    enabled: true
+    locked: true
 
 - type: entity
   parent: RMCTankFlamer
