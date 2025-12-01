@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added medical action examine button. This can be used to see the status
-      of a marine, such as if they're unrevivable, dead, bleeding, or unconscious.
-    type: Add
-  id: 2100
-  time: '2025-08-06T03:49:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7172
-- author: Max_Power
-  changes:
-  - message: Fixed 32 roles missing Endurance 1 (such as Corpsman, Comtech, FTL, SGO,
-      ASO, DCC, PO, SO, all of reqs, medical, engi and more marine/non-marine roles)
-      and CMB Observer missing Endurance 2.
-    type: Fix
-  - message: Fixed some roles not having Endurance and Firearms skill set to 0.
-    type: Fix
-  id: 2101
-  time: '2025-08-06T03:51:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7210
 - author: Max_Power
   changes:
   - message: Fixed Loader Pamphlet giving Endurance 2 instead of Engineering 1, letting
@@ -4638,5 +4619,21 @@
   id: 2600
   time: '2025-12-01T07:50:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8376
+- author: august-sun
+  changes:
+  - message: Added new combat knife variants, available in loadouts.
+    type: Add
+  id: 2601
+  time: '2025-12-01T07:52:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8476
+- author: CatAndHats
+  changes:
+  - message: Added Glass, Reinforced Glass, and Plastic construction menus; press
+      Z with those materials in-hand to open the constuction menus and build items
+      such as the now-craftable plastic crate, plastic ashtray, and plastic cutlery.
+    type: Add
+  id: 2602
+  time: '2025-12-01T07:53:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8504
 Name: RMC14
 Order: -1
