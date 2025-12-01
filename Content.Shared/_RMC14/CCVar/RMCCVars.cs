@@ -466,7 +466,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.queen_building_boost_duration_minutes", 30, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostSpeedMultiplier =
-        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 0.65f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 5f / 6f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
         CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
@@ -494,4 +494,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGhostCanBoo =
+        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
 }

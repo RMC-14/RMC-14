@@ -177,6 +177,8 @@
     sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPodDoorIndestructible

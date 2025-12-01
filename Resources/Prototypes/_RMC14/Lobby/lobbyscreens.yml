@@ -62,7 +62,6 @@
   id: APushTooFar
   background: /Textures/_RMC14/Lobby/APushTooFar.png
 
-
 - type: lobbyBackground
   id: WEYALobby
   background: /Textures/_RMC14/Lobby/WEYALobby.png
@@ -70,3 +69,11 @@
 - type: lobbyBackground
   id: JudgmentDay
   background: /Textures/_RMC14/Lobby/Judgment_Day.png
+
+- type: lobbyBackground
+  id: runningfromravager
+  background: /Textures/_RMC14/Lobby/running_from_ravager.png
+
+- type: lobbyBackground
+  id: goodhits
+  background: /Textures/_RMC14/Lobby/good_hits.png

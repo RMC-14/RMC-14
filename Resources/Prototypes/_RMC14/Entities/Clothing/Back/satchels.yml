@@ -258,6 +258,15 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost
+  id: CMSatchelSecurityFilledProvostInspector
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi
+
+- type: entity
+  parent: CMSatchelSecurity
   suffix: Provost Dep Mar
   id: CMSatchelSecurityFilledProvostDeputyMarshal
   components:
@@ -560,13 +569,14 @@
   description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
     layers:
     - state: icon
       map: [ "base" ]
-  - type: CMStorageVisualizer
-    storageClosed: null
-    storageOpen: null
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
   - type: RotaryPhone
     category: Marine
     canDnd: true
@@ -596,6 +606,54 @@
     - RMCGuideCommunicationsTowers
     - RMCGuideRoleCombatTechnician
     - RMCGuideRoleMaintenanceTechnician
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOPMC
+  name: We-Ya radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
+  - type: RotaryPhone
+    category: Weston-Yamada
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOSPP
+  name: SPP radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Socialist Progressive People's insignia.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/rto.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
+  - type: RotaryPhone
+    category: Socialist Progressive People
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOTSE # TODO RMC14 - Different Sprites
+  name: TSE radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Three Suns Empire's insignia.
+  components:
+  - type: RotaryPhone
+    category: Three Suns Empire
 
 - type: entity
   parent: CMSatchel
@@ -707,7 +765,7 @@
     - id: RMCSyringeCase
     - id: CMPortableSurgicalBedSpawnFolded
     - id: CMCrowbar # TODO RMC14 tactical prybar
-    - id: CMMRE
+    - id: RMCMRETSE
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -724,6 +782,20 @@
     - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
     - id: RMCMagazineRifleL24
     - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledHighCommand
+  suffix: Filled, High Command
+  components:
+  - type: StorageFill
+    contents:
+    # M40 CCDP Greande #RMC14 TODO
+    - id: RMCGrenadeFlashBang
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+    - id: RMCArmorM3General
+    - id: CMArmorHelmetM11CGeneral
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -782,7 +854,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: CMFireExtinguisherPortable
     - id: CMPackFlare
     - id: CMPackFlare
@@ -794,7 +866,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
@@ -815,7 +887,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMRESPP
     - id: RMCMotionDetector # TODO RMC14: hacked MD
     - id: RMCSentryMiniSPP
 
