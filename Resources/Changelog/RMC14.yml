@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Replaced the M79 with the M85A1. Functionally the same, just new sprites
-      and lore.
-    type: Tweak
-  - message: Resprited the M42A2. The old sprites are now used for the colony-only
-      M42A1.
-    type: Tweak
-  - message: Resprited the Mini Flamer, along with renaming it to the "Underbarrel
-      Flamer" for consistency.
-    type: Tweak
-  id: 2087
-  time: '2025-07-25T21:46:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7233
-- author: noctyrnal
-  changes:
   - message: Added the Flamer tank box, which holds 8 Napalm fuel tanks similar to
       magazine boxes.
     type: Add
@@ -4579,5 +4565,15 @@
   id: 2587
   time: '2025-12-01T01:23:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8313
+- author: noctyrnal
+  changes:
+  - message: Added new sprites for the Evacuation Airlocks, along with new black and
+      white variants.
+    type: Add
+  - message: Fixed Evacuation Airlock's panels always showing.
+    type: Fix
+  id: 2588
+  time: '2025-12-01T01:26:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8465
 Name: RMC14
 Order: -1
