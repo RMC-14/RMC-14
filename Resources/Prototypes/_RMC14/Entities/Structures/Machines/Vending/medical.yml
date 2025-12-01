@@ -54,6 +54,7 @@
       tags:
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
+    canManualRestock: true
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
     randomEmptyChance: 0.25 # 25% chance
@@ -334,6 +335,7 @@
       components:
       - Hypospray
   - type: CMAutomatedVendor
+    canManualRestock: true
     sections:
     - name: Autoinjectors
       entries:
@@ -402,6 +404,7 @@
       components:
       - Hypospray
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Supplies
@@ -530,4 +533,3 @@
       - id: CMBloodPack
         amount: 5
         name: empty blood pack
-

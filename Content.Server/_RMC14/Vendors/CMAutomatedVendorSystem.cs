@@ -1,5 +1,5 @@
-﻿using Content.Shared._RMC14.Vendors;
-using Content.Server.PowerCell;
+﻿using Content.Server.PowerCell;
+using Content.Shared._RMC14.Vendors;
 using Content.Shared.PowerCell.Components;
 using Robust.Server.GameObjects;
 
