@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added Repaired Chances Claim
-    type: Add
-  - message: Added a Chance's Claim sign
-    type: Add
-  id: 2099
-  time: '2025-08-06T03:50:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7206
 - author: Dutch-VanDerLinde
   changes:
   - message: Added medical action examine button. This can be used to see the status
@@ -4632,5 +4623,20 @@
   id: 2599
   time: '2025-12-01T07:48:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8517
+- author: Tyzemol
+  changes:
+  - message: As a xeno you can now build sticky/speed resin and hive structures on
+      the same tile you are standing on.
+    type: Tweak
+  - message: Minimal range to build walls and doors have been made much more lenient.
+    type: Tweak
+  - message: Hivelords can now upgrade resin on the diagonal corners.
+    type: Tweak
+  - message: Secrete resin ability no longer cancels current resin structure doafter
+      when trying to build a new one too early
+    type: Tweak
+  id: 2600
+  time: '2025-12-01T07:50:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8376
 Name: RMC14
 Order: -1
