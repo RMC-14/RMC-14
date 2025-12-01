@@ -839,6 +839,14 @@
     reward: 0
 
 - type: entity
+  parent: RMCCratePlastic
+  id: RMCCratePlasticBuildable
+  suffix: Buildable, No Req Reward
+  components:
+  - type: RequisitionsCrate
+    reward: 0
+
+- type: entity
   parent: RMCCrateMetalBuildable
   id: RMCCrateWoodenBuildable
   name: wooden crate
