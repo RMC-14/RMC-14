@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: VictorJob
-  changes:
-  - message: Added new barbed wire item sprites.
-    type: Add
-  id: 2096
-  time: '2025-08-05T03:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5455
 - author: SharkSnake98
   changes:
   - message: Added a CL Guidebook entry
@@ -4638,5 +4631,12 @@
   id: 2596
   time: '2025-12-01T05:31:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8503
+- author: yagwog
+  changes:
+  - message: secure we-ya crate having wrong access
+    type: Fix
+  id: 2597
+  time: '2025-12-01T07:09:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8518
 Name: RMC14
 Order: -1
