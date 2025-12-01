@@ -118,7 +118,6 @@
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
 
-
 - type: entity
   parent: CMArmorHelmetM10Medic
   id: RMCArmorHelmetM10MedicWhite
@@ -301,6 +300,7 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+    - RMCVisorPilotBlack
 
 # Press
 - type: entity

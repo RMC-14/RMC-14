@@ -36,7 +36,7 @@
       - id: RMCHardhatWhite
       - id: RMCHardhatOrange
       - id: RMCHardhatBlue
-      # Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       choices: { CMSuit: 1 }
       entries:
@@ -50,29 +50,33 @@
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
-        recommended: true
       - id: RMCSatchelWelder
-      - id: RMCSatchelWelderChestrig
         recommended: true
+      - id: RMCSatchelWelderChestrig
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
+        recommended: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchGeneralMedium
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pill packets)
+        recommended: true
       - id: RMCPouchConstruction
-      #- id: CMElectronicsPouchFull
-      #name: Electronics Pouch (Full)
+        recommended: true
+      - id: RMCPouchElectronicsFill
+        name: Electronics Pouch (Full)
       - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
       - id: RMCPouchFlareFilled
@@ -93,6 +97,10 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
+    - name: Spare Gear
+      entries:
+      - id: RMCSynthResetKey
+        points: 20
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

@@ -40,6 +40,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -69,6 +70,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -188,7 +190,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnExamined(Entity<CMAutomatedVendorComponent> ent, ref ExaminedEvent args)
     {
-        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
+        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel) || !ent.Comp.Hackable)
             return;
 
         using (args.PushGroup(nameof(CMAutomatedVendorComponent)))
@@ -248,6 +250,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 return;
 
             if (vendorUser?.Id == job)
+                return;
+        }
+
+        if (vendor.Comp.Ranks.Count == 0)
+            return;
+
+        foreach (var rank in vendor.Comp.Ranks)
+        {
+            var userRank = _rank.GetRank(args.User);
+
+            if (userRank != null && userRank == rank)
                 return;
         }
 
@@ -431,7 +444,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!validJob)
+        var validRank = true;
+        foreach (var rank in section.Ranks)
+        {
+            var userRank = _rank.GetRank(actor);
+            if (userRank == null || rank != userRank)
+                validRank = false;
+            else
+            {
+                validRank = true;
+                break;
+            }
+        }
+
+        if (!validJob || !validRank)
             return;
 
         var validHoliday = section.Holidays.Count == 0;

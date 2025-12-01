@@ -17,6 +17,8 @@
       entries:
       - id: RMCCassettePlayer
         amount: 50
+      - id: RMCPouchCassette
+        amount: 10
       - id: RMCCassetteTapeWigWoo1
         amount: 10
       - id: RMCCassetteTapeMendax
