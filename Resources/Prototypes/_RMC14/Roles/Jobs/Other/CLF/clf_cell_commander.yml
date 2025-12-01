@@ -72,7 +72,7 @@
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
-    mask: RMCSawtoothDaggerA
+    mask: RMCCombatUtilityKnifeB
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     outerClothing: RMCCoatMilitiaHarness
