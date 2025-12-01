@@ -37,7 +37,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCSpraySystem _rmcSpray = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
@@ -45,6 +44,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCReagentSystem _reagent = default!;
 
     public override void Initialize()
     {
@@ -108,7 +108,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnAttemptShoot(Entity<RMCFlamerAmmoProviderComponent> ent, ref AttemptShootEvent args)
     {
         if (args.ToCoordinates is not { } toCoordinates ||
-            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _))
+            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _, out _))
         {
             return;
         }
@@ -241,14 +241,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         EntityCoordinates fromCoordinates,
         EntityCoordinates toCoordinates)
     {
-        if (!CanShootFlamer(flamer, fromCoordinates, toCoordinates, out var tiles, out var solution))
+        if (!CanShootFlamer(flamer, fromCoordinates, toCoordinates, out var tiles, out var solution, out var reagent))
             return;
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
-
-        ProtoId<ReagentPrototype>? reagent = null;
-        if (solution.Comp.Solution.TryFirstOrNull(out var firstReagent))
-            reagent = firstReagent.Value.Reagent.Prototype;
 
         solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * tiles.Count);
         _solution.UpdateChemicals(solution);
@@ -258,28 +254,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         var chain = Spawn();
         var chainComp = EnsureComp<RMCFlamerChainComponent>(chain);
-
-        chainComp.Spawn = flamer.Comp.Spawn; //defaults to regular tile fire from napthal UT
-
-        if (reagent.HasValue)
-        {
-            switch (reagent.Value)
-            {
-                case "RMCBGel":
-                    chainComp.Spawn = "RMCTileFireGreen";
-                    break;
-                case "RMCNapalmX":
-                    chainComp.Spawn = "RMCTileFireBlue";
-                    break;
-            }
-        }
-
+        chainComp.Spawn = reagent.FireEntity;
         chainComp.Tiles = tiles;
+        chainComp.Reagent = reagent.ID;
         chainComp.MaxIntensity = flamer.Comp.MaxIntensity;
         chainComp.MaxDuration = flamer.Comp.MaxDuration;
-
-        if (reagent != null)
-            chainComp.Reagent = reagent.Value;
 
         Dirty(chain, chainComp);
     }
@@ -289,10 +268,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         EntityCoordinates fromCoordinates,
         EntityCoordinates toCoordinates,
         [NotNullWhen(true)] out List<LineTile>? tiles,
-        out Entity<SolutionComponent> solution)
+        out Entity<SolutionComponent> solution,
+        [NotNullWhen(true)] out ReagentPrototype? reagent)
     {
         tiles = null;
         solution = default;
+        reagent = null;
         if (!TryGetTankSolution(flamer, out var solutionEnt))
             return false;
 
@@ -311,11 +292,17 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         // to prevent hitting yourself
         fromCoordinates = fromCoordinates.Offset(normalized * 0.23f);
 
-        var range = Math.Min((volume / flamer.Comp.CostPer).Int(), flamer.Comp.Range);
-        if (delta.Length() > flamer.Comp.Range)
+        if (!solutionEnt.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))
+            return false;
+
+        reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
+
+        var maxRange = Math.Min(flamer.Comp.MaxRange, reagent.Radius);
+        var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
+        if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
-        tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, flamer.Comp.Range, out _, true);
+        tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, maxRange, out _, true);
         if (tiles.Count == 0)
         {
             tiles = null;
@@ -407,8 +394,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var targetSolution = sourceSolutionEnt.Comp.Solution;
         foreach (var content in targetSolution.Contents)
         {
-            if (_prototypes.TryIndexReagent(content.Reagent.Prototype, out ReagentPrototype? reagent) &&
-                reagent.Intensity <= FixedPoint2.Zero)
+            if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
+                reagent.Intensity <= 0)
             {
                 _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
                 return;
@@ -521,10 +508,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                         QueueDel(oldTileFire);
                     }
 
-                    if (_prototypes.TryIndexReagent(comp.Reagent, out var reagent))
+                    if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
-                        var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity.Int());
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration.Int());
+                        var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 

@@ -6,3 +6,6 @@ reagent-desc-rmcnapalmut = Known as Ultra Thick Napthal Fuel, a sticky combustib
 
 reagent-name-rmcbgel = Napalm B-Gel
 reagent-desc-rmcbgel = Unlike its liquid contemporaries, this gelled variant of napalm is easily extinguished, but shoots far and lingers on the ground in a viscous mess, while reacting with inorganic materials to ignite them.
+
+reagent-name-rmcrapalmx = Napalm X
+reagent-desc-rmcrapalmx = A sticky combustible liquid chemical that burns extremely hot.

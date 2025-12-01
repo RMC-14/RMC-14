@@ -130,7 +130,6 @@
   id: RMCTankFlamer
   name: incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
-  suffix: Napthal
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
@@ -174,15 +173,19 @@
 - type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerBGel
-  suffix: B-Gel
+  name: incinerator tank (B-Gel)
+  description: A fuel tank full of specialized Ultra Thick Napthal Fuel type B-Gel, a gelled variant of napalm that is easily extinguished, but shoots further and lingers for longer. Handle with exceptional care.
   components:
+  # - type: RMCFlamerTank
+  #   maxRange: 7
+  #   maxDuration: 50
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
-        maxVol: 100
+        maxVol: 200
         reagents:
         - ReagentId: RMCBGel
-          Quantity: 100
+          Quantity: 200
 
 - type: Tag
   id: RMCTankFlamer

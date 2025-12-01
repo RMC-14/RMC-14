@@ -80,48 +80,48 @@
   id: RMCTankFlamerLargeB
   name: large incinerator tank (B)
   description: A large fuel tank of Ultra Thick Napthal Fuel type B, a special variant of napalm that is easily extinguished, but disperses over a wide area while burning slowly.
-  # components:
+  components:
   # - type: RMCFlamerTank
   #   maxRange: 6
-  # - type: SolutionContainerManager
-  #   solutions:
-  #     rmc_flamer_tank:
-  #       maxVol: 250
-  #       reagents:
-  #       - ReagentId: RMCBGel
-  #         Quantity: 250
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 250
+        reagents:
+        - ReagentId: RMCBGel
+          Quantity: 250
 
 - type: entity
   parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeX
   name: large incinerator tank (X)
   description: A large fuel tank of Ultra Thick Napthal Fuel type X, a sticky combustible liquid chemical that burns extremely hot, for use in the M34-T incinerator unit. Handle with extreme caution.
-  # components:
+  components:
   # - type: RMCFlamerTank
   #   maxRange: 6
-  # - type: SolutionContainerManager
-  #   solutions:
-  #     rmc_flamer_tank:
-  #       maxVol: 250
-  #       reagents:
-  #       - ReagentId: RMCNapalmX
-  #         Quantity: 250
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 250
+        reagents:
+        - ReagentId: RMCNapalmX
+          Quantity: 250
 
 - type: entity
   parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeCustom
   name: large custom incinerator tank
   description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
-  # components:
+  components:
   # - type: RMCFlamerTank
   #   maxIntensity: 60
   #   maxRange: 8
   #   maxDuration: 50
-  # - type: SolutionContainerManager
-  #   solutions:
-  #     rmc_flamer_tank:
-  #       maxVol: 250
-  #       reagents: [ ]
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 250
+        reagents: [ ]
 
 - type: Tag
   id: RMCTankFlamerLarge
