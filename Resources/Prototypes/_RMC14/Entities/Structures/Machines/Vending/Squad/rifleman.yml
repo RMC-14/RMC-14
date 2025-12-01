@@ -23,7 +23,7 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
-      - id: RMCArmorVestRifleman
+      - id: RMCArmorVestSquad
         name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor

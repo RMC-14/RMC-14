@@ -803,7 +803,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
-      - id: RMCArmorVestExecutiveOfficer
+      - id: RMCArmorVestSeniorOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
