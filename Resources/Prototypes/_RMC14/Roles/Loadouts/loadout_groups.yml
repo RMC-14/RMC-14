@@ -554,6 +554,17 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+- type: loadoutGroup
+  id: CommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - MatebaRMC
+  - HandcannonRMC
+  - GoldMatebaRMC
+  - GoldHandcannonRMC
+
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC
