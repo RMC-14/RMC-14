@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added dropship double and triple doors.
-    type: Add
-  id: 2104
-  time: '2025-08-06T03:53:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7217
 - author: Ian321
   changes:
   - message: The examine text for the flare gun, winter wyvern handcannon and mateba
@@ -4632,5 +4625,13 @@
   id: 2604
   time: '2025-12-01T07:57:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8478
+- author: noctyrnal
+  changes:
+  - message: COs with 250+ Hours can now get golden versions of their sidearms in
+      their loadouts.
+    type: Add
+  id: 2605
+  time: '2025-12-01T08:48:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8500
 Name: RMC14
 Order: -1
