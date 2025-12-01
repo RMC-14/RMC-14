@@ -41,6 +41,8 @@ public sealed class GeneralAnnounceSystem : EntitySystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     private AnnouncementValidator? _validator;
+    private AnnouncementPresetResolver? _presetResolver;
+    private AnnouncementTargetFilter? _targetFilter;
 
     public override void Initialize()
     {
@@ -85,6 +87,8 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         try
         {
             _validator = new AnnouncementValidator();
+            _presetResolver = new AnnouncementPresetResolver(_prototypes);
+            _targetFilter = new AnnouncementTargetFilter(EntityManager);
         }
         catch (Exception ex)
         {
@@ -119,7 +123,10 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             }
         }
 
-        var preset = GetEffectivePreset(request);
+        if (_presetResolver == null || _targetFilter == null)
+            return;
+
+        var preset = _presetResolver.Resolve(request.Preset);
         if (preset == null)
         {
             Log.Warning($"No valid preset found for announcement request with preset '{request.Preset}'");
@@ -129,7 +136,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var style = preset.Style;
         if (request.StyleOverride != null)
         {
-            style = MergeStyles(style, request.StyleOverride);
+            style = AnnouncementStyleMerger.Merge(style, request.StyleOverride);
         }
 
         var sound = request.SoundOverride ?? preset.Sound;
@@ -138,7 +145,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var canInterrupt = request.CanInterrupt ?? preset.CanInterrupt;
         var canBeInterrupted = request.CanBeInterrupted ?? preset.CanBeInterrupted;
 
-        var filter = CreateFilter(request.Target, request.Source, request.TargetEntity);
+        var filter = _targetFilter.Build(request.Target);
         if (filter.Count == 0)
             return;
 
@@ -146,7 +153,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         {
             _pvsOverride.AddSessionOverrides(request.Speaker.Value, filter);
 
-            var totalDuration = CalculateAnnouncementDuration(style) + style.HoldDuration + 2.0f;
+            var totalDuration = AnnouncementDurationCalculator.Calculate(style) + style.HoldDuration + 2.0f;
             Timer.Spawn(TimeSpan.FromSeconds(totalDuration), () =>
             {
                 if (EntityManager.EntityExists(request.Speaker.Value))
@@ -207,28 +214,6 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         }
 
         LogAnnouncement(request.Preset ?? "custom", lines, request.Target, request.Source, filter.Count);
-    }
-
-    private float CalculateAnnouncementDuration(AnnouncementStyle style)
-    {
-        var baseDuration = style.Animation switch
-        {
-            AnnouncementAnimation.Typewriter => 5.0f,
-            AnnouncementAnimation.Slide => style.AnimationEnhancements?.SlideDuration ?? 1.0f,
-            AnnouncementAnimation.Zoom => style.AnimationEnhancements?.ZoomDuration ?? 1.0f,
-            AnnouncementAnimation.Bounce => (style.AnimationEnhancements?.BounceCount ?? 3) * 0.5f,
-            AnnouncementAnimation.Fade => 2.0f,
-            AnnouncementAnimation.Pulse => 1.0f,
-            AnnouncementAnimation.Glitch => 3.0f,
-            _ => 1.0f
-        };
-
-        return baseDuration;
-    }
-
-    public AnnouncementBuilder CreateAnnouncement()
-    {
-        return new AnnouncementBuilder(this);
     }
 
     public void AnnounceAsPlayer(EntityUid playerEntity, string message, string? presetId = null,
@@ -401,119 +386,6 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         };
 
         AnnounceAdvanced(request);
-    }
-
-    private AnnouncementPresetPrototype? GetEffectivePreset(AnnouncementRequest request)
-    {
-        if (string.IsNullOrEmpty(request.Preset))
-            return null;
-
-        if (_prototypes.TryIndex<AnnouncementPresetPrototype>(request.Preset, out var prototypePreset))
-        {
-            Log.Debug($"Found preset by direct ID: {request.Preset}");
-            return prototypePreset;
-        }
-
-        foreach (var preset in _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>())
-        {
-            if (preset.Aliases.Contains(request.Preset, StringComparer.OrdinalIgnoreCase))
-            {
-                Log.Debug($"Found preset by alias: {request.Preset} -> {preset.ID}");
-                return preset;
-            }
-        }
-
-        var availablePresets = _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>().ToList();
-        Log.Warning($"No preset found for '{request.Preset}'. Available: {string.Join(", ", availablePresets.Select(p => p.ID))}");
-
-        return null;
-    }
-
-    private AnnouncementStyle MergeStyles(AnnouncementStyle baseStyle, AnnouncementStyle overrideStyle)
-    {
-        return new AnnouncementStyle
-        {
-            Animation = overrideStyle.Animation != AnnouncementAnimation.Typewriter ? overrideStyle.Animation : baseStyle.Animation,
-            Position = overrideStyle.Position != AnnouncementPosition.MiddleCenter ? overrideStyle.Position : baseStyle.Position,
-            ShowBackground = overrideStyle.ShowBackground != baseStyle.ShowBackground ? overrideStyle.ShowBackground : baseStyle.ShowBackground,
-            BackgroundAlpha = overrideStyle.BackgroundAlpha != baseStyle.BackgroundAlpha ? overrideStyle.BackgroundAlpha : baseStyle.BackgroundAlpha,
-            BackgroundColor = overrideStyle.BackgroundColor != baseStyle.BackgroundColor ? overrideStyle.BackgroundColor : baseStyle.BackgroundColor,
-            PrimaryColor = overrideStyle.PrimaryColor != baseStyle.PrimaryColor ? overrideStyle.PrimaryColor : baseStyle.PrimaryColor,
-            SecondaryColor = overrideStyle.SecondaryColor ?? baseStyle.SecondaryColor,
-            AccentColor = overrideStyle.AccentColor ?? baseStyle.AccentColor,
-            FontSize = overrideStyle.FontSize != baseStyle.FontSize ? overrideStyle.FontSize : baseStyle.FontSize,
-            LineHeight = overrideStyle.LineHeight != baseStyle.LineHeight ? overrideStyle.LineHeight : baseStyle.LineHeight,
-            PrintSpeed = overrideStyle.PrintSpeed != baseStyle.PrintSpeed ? overrideStyle.PrintSpeed : baseStyle.PrintSpeed,
-            HoldDuration = overrideStyle.HoldDuration != baseStyle.HoldDuration ? overrideStyle.HoldDuration : baseStyle.HoldDuration,
-            ShakeIntensity = overrideStyle.ShakeIntensity != baseStyle.ShakeIntensity ? overrideStyle.ShakeIntensity : baseStyle.ShakeIntensity,
-            FlickerChance = overrideStyle.FlickerChance != baseStyle.FlickerChance ? overrideStyle.FlickerChance : baseStyle.FlickerChance,
-            GlitchChance = overrideStyle.GlitchChance != baseStyle.GlitchChance ? overrideStyle.GlitchChance : baseStyle.GlitchChance,
-            ShowSpriteBox = overrideStyle.ShowSpriteBox != baseStyle.ShowSpriteBox ? overrideStyle.ShowSpriteBox : baseStyle.ShowSpriteBox,
-            SpriteBoxColor = overrideStyle.SpriteBoxColor != baseStyle.SpriteBoxColor ? overrideStyle.SpriteBoxColor : baseStyle.SpriteBoxColor,
-            SpriteBoxBorderColor = overrideStyle.SpriteBoxBorderColor != baseStyle.SpriteBoxBorderColor ? overrideStyle.SpriteBoxBorderColor : baseStyle.SpriteBoxBorderColor,
-            SpriteBoxBorderThickness = overrideStyle.SpriteBoxBorderThickness != baseStyle.SpriteBoxBorderThickness ? overrideStyle.SpriteBoxBorderThickness : baseStyle.SpriteBoxBorderThickness,
-            SpriteBoxPadding = overrideStyle.SpriteBoxPadding != baseStyle.SpriteBoxPadding ? overrideStyle.SpriteBoxPadding : baseStyle.SpriteBoxPadding,
-            SpriteGlow = overrideStyle.SpriteGlow != baseStyle.SpriteGlow ? overrideStyle.SpriteGlow : baseStyle.SpriteGlow,
-            SpriteGlowColor = overrideStyle.SpriteGlowColor != baseStyle.SpriteGlowColor ? overrideStyle.SpriteGlowColor : baseStyle.SpriteGlowColor,
-            SpriteGlowIntensity = overrideStyle.SpriteGlowIntensity != baseStyle.SpriteGlowIntensity ? overrideStyle.SpriteGlowIntensity : baseStyle.SpriteGlowIntensity,
-            ShowSpeakerName = overrideStyle.ShowSpeakerName != baseStyle.ShowSpeakerName ? overrideStyle.ShowSpeakerName : baseStyle.ShowSpeakerName,
-            SpeakerNameColor = overrideStyle.SpeakerNameColor != baseStyle.SpeakerNameColor ? overrideStyle.SpeakerNameColor : baseStyle.SpeakerNameColor,
-            SpeakerNameFontSize = overrideStyle.SpeakerNameFontSize != baseStyle.SpeakerNameFontSize ? overrideStyle.SpeakerNameFontSize : baseStyle.SpeakerNameFontSize,
-            SpeakerNamePosition = overrideStyle.SpeakerNamePosition != baseStyle.SpeakerNamePosition ? overrideStyle.SpeakerNamePosition : baseStyle.SpeakerNamePosition,
-            SpritePosition = overrideStyle.SpritePosition != baseStyle.SpritePosition ? overrideStyle.SpritePosition : baseStyle.SpritePosition,
-            SpriteSpacing = overrideStyle.SpriteSpacing != baseStyle.SpriteSpacing ? overrideStyle.SpriteSpacing : baseStyle.SpriteSpacing,
-            AnimationEnhancements = overrideStyle.AnimationEnhancements ?? baseStyle.AnimationEnhancements,
-            TextEnhancements = overrideStyle.TextEnhancements ?? baseStyle.TextEnhancements,
-            BackgroundStyle = overrideStyle.BackgroundStyle ?? baseStyle.BackgroundStyle,
-            EnableScreenShake = overrideStyle.EnableScreenShake != baseStyle.EnableScreenShake ? overrideStyle.EnableScreenShake : baseStyle.EnableScreenShake,
-            ShakeDuration = overrideStyle.ShakeDuration != baseStyle.ShakeDuration ? overrideStyle.ShakeDuration : baseStyle.ShakeDuration,
-            EnableFlash = overrideStyle.EnableFlash != baseStyle.EnableFlash ? overrideStyle.EnableFlash : baseStyle.EnableFlash,
-            FlashColor = overrideStyle.FlashColor != baseStyle.FlashColor ? overrideStyle.FlashColor : baseStyle.FlashColor,
-            FlashDuration = overrideStyle.FlashDuration != baseStyle.FlashDuration ? overrideStyle.FlashDuration : baseStyle.FlashDuration,
-            FlashCount = overrideStyle.FlashCount != baseStyle.FlashCount ? overrideStyle.FlashCount : baseStyle.FlashCount
-        };
-    }
-
-    private Filter CreateFilter(AnnouncementTarget target, EntityUid? source, EntityUid? targetEntity)
-    {
-        var allPlayers = Filter.Broadcast();
-
-        switch (target)
-        {
-            case AnnouncementTarget.Marines:
-                var marineFilter = new List<ICommonSession>();
-                foreach (var session in allPlayers.Recipients)
-                {
-                    if (session.AttachedEntity is not { } entity)
-                        continue;
-
-                    if (HasComp<MarineComponent>(entity) ||
-                        HasComp<GhostComponent>(entity))
-                    {
-                        marineFilter.Add(session);
-                    }
-                }
-                return Filter.Empty().AddPlayers(marineFilter);
-
-            case AnnouncementTarget.Xenos:
-                var xenoFilter = new List<ICommonSession>();
-                foreach (var session in allPlayers.Recipients)
-                {
-                    if (session.AttachedEntity is not { } entity)
-                        continue;
-
-                    if (HasComp<XenoComponent>(entity) ||
-                        HasComp<GhostComponent>(entity))
-                    {
-                        xenoFilter.Add(session);
-                    }
-                }
-                return Filter.Empty().AddPlayers(xenoFilter);
-
-            case AnnouncementTarget.All:
-            default:
-                return allPlayers;
-        }
     }
 
     private void LogAnnouncement(string configId, string[] text, AnnouncementTarget target, EntityUid? source, int recipientCount)

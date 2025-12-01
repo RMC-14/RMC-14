@@ -1,5 +1,4 @@
 using Content.Server.Administration;
-using Content.Server._RMC14.Announce.Core;
 using Content.Shared.Administration;
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.Console;
@@ -33,27 +32,29 @@ public sealed class CommandAnnounceCommand : IConsoleCommand
             return;
         }
 
-        var builder = AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("MarineCommand")
-            .WithTarget(AnnouncementTarget.Marines)
-            .WithMessage(message);
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "MarineCommand",
+            Target = AnnouncementTarget.Marines
+        };
 
         if (options.TryGetValue("entity", out var entityStr) &&
             EntityUid.TryParse(entityStr, out var entityId))
         {
-            builder.WithSpeaker(entityId);
+            request.Speaker = entityId;
         }
         else if (shell.Player?.AttachedEntity is { } playerEntity)
         {
-            builder.WithSpeaker(playerEntity);
+            request.Speaker = playerEntity;
         }
 
         if (options.TryGetValue("name", out var name))
         {
-            builder.WithSpeakerNameOverride(name);
+            request.SpeakerNameOverride = name;
         }
 
-        builder.Send();
+        announceSystem.AnnounceAdvanced(request);
         shell.WriteLine($"Sent marine command announcement: {message}");
     }
 
@@ -184,19 +185,21 @@ public sealed class AresAnnounceCommand : IConsoleCommand
             return;
         }
 
-        var builder = AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("Ares")
-            .WithTarget(AnnouncementTarget.All)
-            .WithMessage(message)
-            .WithSpeakerNameOverride("A.R.E.S.");
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "Ares",
+            Target = AnnouncementTarget.All,
+            SpeakerNameOverride = "A.R.E.S."
+        };
 
         if (options.TryGetValue("entity", out var entityStr) &&
             EntityUid.TryParse(entityStr, out var entityId))
         {
-            builder.WithSpeaker(entityId);
+            request.Speaker = entityId;
         }
 
-        builder.Send();
+        announceSystem.AnnounceAdvanced(request);
         shell.WriteLine($"Sent ARES announcement: {message}");
     }
 
@@ -294,11 +297,12 @@ public sealed class CriticalAnnounceCommand : IConsoleCommand
             return;
         }
 
-        AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("Critical")
-            .WithTarget(AnnouncementTarget.All)
-            .WithMessage(message)
-            .Send();
+        announceSystem.AnnounceAdvanced(new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "Critical",
+            Target = AnnouncementTarget.All
+        });
 
         shell.WriteLine($"Sent critical announcement: {message}");
     }
@@ -333,11 +337,12 @@ public sealed class EmergencyAnnounceCommand : IConsoleCommand
             return;
         }
 
-        AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("Emergency")
-            .WithTarget(AnnouncementTarget.All)
-            .WithMessage(message)
-            .Send();
+        announceSystem.AnnounceAdvanced(new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "Emergency",
+            Target = AnnouncementTarget.All
+        });
 
         shell.WriteLine($"Sent emergency announcement: {message}");
     }
@@ -368,23 +373,25 @@ public sealed class SquadAnnounceCommand : IConsoleCommand
             return;
         }
 
-        var builder = AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("Squad")
-            .WithTarget(AnnouncementTarget.Marines)
-            .WithMessage(message);
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "Squad",
+            Target = AnnouncementTarget.Marines
+        };
 
         if (options.TryGetValue("entity", out var entityStr) &&
             EntityUid.TryParse(entityStr, out var entityId))
         {
-            builder.WithSpeaker(entityId);
+            request.Speaker = entityId;
         }
 
         if (options.TryGetValue("name", out var name))
         {
-            builder.WithSpeakerNameOverride(name);
+            request.SpeakerNameOverride = name;
         }
 
-        builder.Send();
+        announceSystem.AnnounceAdvanced(request);
         shell.WriteLine($"Sent squad announcement: {message}");
     }
 
@@ -482,19 +489,21 @@ public sealed class HiveAnnounceCommand : IConsoleCommand
             return;
         }
 
-        var builder = AnnouncementBuilder.Create(announceSystem)
-            .WithPreset("XenoHive")
-            .WithTarget(AnnouncementTarget.Xenos)
-            .WithMessage(message)
-            .WithSpeakerNameOverride("Hive Mind");
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = "XenoHive",
+            Target = AnnouncementTarget.Xenos,
+            SpeakerNameOverride = "Hive Mind"
+        };
 
         if (options.TryGetValue("entity", out var entityStr) &&
             EntityUid.TryParse(entityStr, out var entityId))
         {
-            builder.WithSpeaker(entityId);
+            request.Speaker = entityId;
         }
 
-        builder.Send();
+        announceSystem.AnnounceAdvanced(request);
         shell.WriteLine($"Sent hive mind announcement: {message}");
     }
 

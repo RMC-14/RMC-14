@@ -581,7 +581,7 @@ public sealed partial class ScreenEffects
 }
 
 [DataDefinition, Serializable, NetSerializable]
-public sealed partial class AnnouncementStyle
+public sealed partial record AnnouncementStyle
 {
     [DataField]
     public AnnouncementAnimation Animation { get; set; } = AnnouncementAnimation.Typewriter;
