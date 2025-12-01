@@ -255,6 +255,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes =
         CVarDef.Create("rmc.late_joins_burrowed_larva_death_time_ignore_before_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCBurrowedLarvaSacrificeTimeMinutes =
+        CVarDef.Create("rmc.burrowed_larva_sacrifice_time_minutes", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBurrowedLarvaEvolutionPointsPer =
+        CVarDef.Create("rmc.burrowed_larva_evolution_points_per", 250, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCPlaytimeBronzeMedalTimeHours =
         CVarDef.Create("rmc.playtime_bronze_medal_time_hours", 10, CVar.REPLICATED | CVar.SERVER);
 

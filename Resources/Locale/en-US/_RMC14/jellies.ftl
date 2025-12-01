@@ -23,6 +23,16 @@ rmc-jelly-error-limit-reached = You can't give out any more jellies ({ $given }/
 # Hive Management UI
 rmc-hivemanagement-deevolve = De-evolve (500)
 rmc-hivemanagement-reward = Reward Jelly (500)
+
+rmc-hivemanagement-exchange-larva = Exchange larva for evolution
+rmc-hivemanagement-exchange-larv-not-enough = We need at least 1 burrowed larva to sacrifice one for evolution points.
+rmc-hivemanagement-exchange-larva-title = Give Evolution Points
+rmc-hivemanagement-exchange-larva-description = Choose a xenonid to give {$points} evolution
+  points for a burrowed larva
+rmc-hivemanagement-exchange-larva-need-minutes = We must give some time for larva to spawn before sacrificing them. Please wait another {$minutes} minutes
+rmc-hivemanagement-exchange-larva-given-user = {$target} was given {$points} evolution points.
+rmc-hivemanagement-exchange-larva-given-target = {$user} has given you {$points} evolution points! Use them well.
+
 rmc-hivemanagement-hive-management = Hive Management
 rmc-hivemanagement-manage-the-hive = Manage The Hive
 rmc-hivemanagement-deevolution = Deevolution

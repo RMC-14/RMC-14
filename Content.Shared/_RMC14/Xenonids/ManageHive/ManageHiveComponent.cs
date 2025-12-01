@@ -16,6 +16,9 @@ public sealed partial class ManageHiveComponent : Component
     public FixedPoint2 JellyPlasmaCost = 500;
 
     [DataField, AutoNetworkedField]
+    public FixedPoint2 SacrificeBurrowedLarvaForEvolutionCost = 100;
+
+    [DataField, AutoNetworkedField]
     public ProtoId<PlayTimeTrackerPrototype> PlayTime = "CMJobXenoQueen";
 
     [DataField, AutoNetworkedField]
