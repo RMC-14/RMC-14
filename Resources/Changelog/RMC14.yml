@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed ghosts being able to ignore the burrowed larva cooldown.
-    type: Fix
-  id: 2082
-  time: '2025-07-22T21:36:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7176
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed unbuttoned service jackets not appearing unbuttoned.
     type: Fix
   id: 2083
@@ -4585,5 +4578,12 @@
   id: 2582
   time: '2025-12-01T00:36:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8334
+- author: Shromply
+  changes:
+  - message: Added a trio of soft first-aid packs for PVE.
+    type: Add
+  id: 2583
+  time: '2025-12-01T00:40:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8261
 Name: RMC14
 Order: -1
