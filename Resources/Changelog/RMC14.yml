@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed New Varadero plating friction.
-    type: Fix
-  id: 2080
-  time: '2025-07-22T21:30:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7200
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Sorokyne Strata survivors having the wrong ranks.
@@ -4585,5 +4578,12 @@
   id: 2580
   time: '2025-11-30T09:40:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8268
+- author: Whisper
+  changes:
+  - message: Fixed Xenonids fitting in storage containers.
+    type: Fix
+  id: 2581
+  time: '2025-12-01T00:24:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8511
 Name: RMC14
 Order: -1
