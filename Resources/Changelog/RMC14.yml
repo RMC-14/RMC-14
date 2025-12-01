@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed multi row storages sometimes not preserving item order when taking
-      items out of them.
-    type: Fix
-  - message: Fixed being able to buckle to folded roller beds.
-    type: Fix
-  - message: Fixed overdoses not doing anything on updated medicines.
-    type: Fix
-  - message: Fixed PvE rounds having automatic commander promotions and burrowed larva.
-    type: Fix
-  - message: Fixed rounds on Chance's Claim not starting.
-    type: Fix
-  id: 2086
-  time: '2025-07-22T22:16:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7208
 - author: noctyrnal
   changes:
   - message: Replaced the M79 with the M85A1. Functionally the same, just new sprites
@@ -4587,5 +4571,13 @@
   id: 2586
   time: '2025-12-01T01:12:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8510
+- author: Vermidia
+  changes:
+  - message: Fixed barricades not taking damage when on the same tile as fire. Bio
+      and Composite barricades take less.
+    type: Fix
+  id: 2587
+  time: '2025-12-01T01:23:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8313
 Name: RMC14
 Order: -1
