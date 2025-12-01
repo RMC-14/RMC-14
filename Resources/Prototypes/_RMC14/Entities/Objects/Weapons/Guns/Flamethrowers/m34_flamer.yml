@@ -130,6 +130,7 @@
   id: RMCTankFlamer
   name: incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
+  suffix: Napthal
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
@@ -169,6 +170,19 @@
   - type: Tag
     tags:
     - RMCTankFlamer
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerBGel
+  suffix: B-Gel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCBGel
+          Quantity: 100
 
 - type: Tag
   id: RMCTankFlamer
