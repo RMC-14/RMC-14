@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fax Responder roles now spawn with their corresponding stamps and pen.
-    type: Add
-  - message: Fixed Asphalt and Cement tiles not hiding wires and dispo system.
-    type: Fix
-  - message: Fixed Queen and Xenonid roles in lobby using naked marine sprites.
-    type: Fix
-  - message: ICB Liaison, Survivor and not, now have their respective icons.
-    type: Fix
-  id: 2103
-  time: '2025-08-06T03:54:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7215
 - author: Tunguso4ka
   changes:
   - message: Added dropship double and triple doors.
@@ -4636,5 +4623,14 @@
   id: 2603
   time: '2025-12-01T07:54:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8274
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Xenos now have a chance to gib upon death
+    type: Add
+  - message: Added new effects for xenos gibbing
+    type: Add
+  id: 2604
+  time: '2025-12-01T07:57:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8478
 Name: RMC14
 Order: -1
