@@ -73,6 +73,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCBroilerComponent, RMCBroilerActionEvent>(OnBroilerAction);
 
         SubscribeLocalEvent<RMCCanUseBroilerComponent, UniqueActionEvent>(OnBroilerUniqueAction);
+        SubscribeLocalEvent<RMCCanUseBroilerComponent, ExaminedEvent>(OnBroilerUniqueActionExamine, before: [typeof(SharedGunSystem)]);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -534,6 +535,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             RaiseLocalEvent(slot.ContainedEntity.Value, ev);
             break;
         }
+    }
+
+    public void OnBroilerUniqueActionExamine(Entity<RMCCanUseBroilerComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
     public override void Update(float frameTime)
