@@ -41,6 +41,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Hedgehog Ravager strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Plasma and flamethrower sentries" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
@@ -104,7 +105,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
                 </BoxContainer>
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Future versions" />
