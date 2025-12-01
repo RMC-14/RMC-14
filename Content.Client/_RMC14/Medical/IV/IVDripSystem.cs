@@ -15,6 +15,18 @@ public sealed class IVDripSystem : SharedIVDripSystem
         base.Initialize();
         if (!_overlay.HasOverlay<IVDripOverlay>())
             _overlay.AddOverlay(new IVDripOverlay());
+
+        SubscribeNetworkEvent<DialysisDetachedEvent>(OnDialysisDetachedEvent);
+    }
+
+    private void OnDialysisDetachedEvent(DialysisDetachedEvent ev)
+    {
+        var dialysis = GetEntity(ev.Dialysis);
+        if (!TryComp<PortableDialysisComponent>(dialysis, out var comp))
+            return;
+
+        comp.IsDetaching = ev.IsDetaching;
+        UpdateDialysisAppearance((dialysis, comp));
     }
 
     public override void Shutdown()

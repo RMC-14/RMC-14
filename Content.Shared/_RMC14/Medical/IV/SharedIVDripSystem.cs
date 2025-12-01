@@ -497,6 +497,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         dialysis.Comp.IsDetaching = true;
         Dirty(dialysis);
         UpdateDialysisVisuals(dialysis);
+        OnServerDialysisDetached(dialysis);
 
         var delay = dialysis.Comp.AttachDelay;
         if (delay > TimeSpan.Zero)
@@ -514,6 +515,7 @@ public abstract class SharedIVDripSystem : EntitySystem
                     comp.IsDetaching = false;
                     Dirty(captured, comp);
                     UpdateDialysisVisuals((captured, comp));
+                    OnServerDialysisDetached((captured, comp));
                 }
             );
         }
@@ -522,6 +524,7 @@ public abstract class SharedIVDripSystem : EntitySystem
             dialysis.Comp.IsDetaching = false;
             Dirty(dialysis);
             UpdateDialysisVisuals(dialysis);
+            OnServerDialysisDetached(dialysis);
         }
 
         _powerCell.SetDrawEnabled((dialysis.Owner, null), false);
@@ -530,6 +533,10 @@ public abstract class SharedIVDripSystem : EntitySystem
             DoRip(dialysis.Comp.RipDamage, target, user, dialysis.Comp.RipEmote, predict);
         else
             DoDetachFeedback(dialysis, target, user, predict);
+    }
+
+    protected virtual void OnServerDialysisDetached(Entity<PortableDialysisComponent> dialysis)
+    {
     }
 
     private void ToggleInject(Entity<IVDripComponent> iv, EntityUid user)

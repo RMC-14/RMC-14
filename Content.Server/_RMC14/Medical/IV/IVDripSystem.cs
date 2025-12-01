@@ -31,6 +31,14 @@ public sealed class IVDripSystem : SharedIVDripSystem
         SubscribeLocalEvent<PortableDialysisComponent, PowerCellChangedEvent>(OnDialysisBatteryChargeChanged);
     }
 
+    protected override void OnServerDialysisDetached(Entity<PortableDialysisComponent> dialysis)
+    {
+        base.OnServerDialysisDetached(dialysis);
+        // Raise networked event to update client sprites with current state
+        var ev = new DialysisDetachedEvent(GetNetEntity(dialysis), dialysis.Comp.IsDetaching);
+        RaiseNetworkEvent(ev);
+    }
+
     private void OnDialysisBatteryChargeChanged(Entity<PortableDialysisComponent> dialysis, ref PowerCellChangedEvent args)
     {
         UpdateDialysisBatteryLevel(dialysis);
