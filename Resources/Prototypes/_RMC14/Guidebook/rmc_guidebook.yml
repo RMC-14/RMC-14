@@ -471,6 +471,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideFood.xml"
   children:
   - RMCGuideDrinks
+  filterEnabled: True
 
 - type: guideEntry
   parent: RMC
@@ -478,6 +479,7 @@
   name: "Drink Recipes"
   priority: 1
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideDrinks.xml"
+  filterEnabled: True
 
 # Chemistry stuff
 - type: guideEntry

@@ -415,7 +415,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var inRange = _queenEye.IsInQueenEye(xeno.Owner) ||
                         (hasBoost && _queenBoostQuery.TryComp(xeno.Owner, out var boost)
                             ? _transform.InRange(_transform.GetMoverCoordinates(xeno.Owner), args.Target, boost.RemoteUpgradeRange)
-                            : _interaction.InRangeUnobstructed(xeno.Owner, upgradeable.Owner, popup: true));
+                            : _transform.InRange(_transform.GetMoverCoordinates(xeno.Owner), args.Target, xeno.Comp.BuildRange.Float()));
 
             if (!inRange)
                 return;
@@ -479,7 +479,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, finalBuildTime, ev, xeno)
         {
             BreakOnMove = true,
-            RootEntity = true
+            RootEntity = true,
+            CancelDuplicate = false
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -797,7 +798,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (inRange)
                     return;
             }
-            if (_interaction.InRangeUnobstructed(args.User, upgradeable.Owner, popup: false))
+            if (_transform.InRange(_transform.GetMoverCoordinates(args.User), upgradeable.Owner.ToCoordinates(), construction.BuildRange.Float()))
                 return;
         }
 
@@ -1041,6 +1042,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return null;
     }
 
+    public FixedPoint2 GetStructureMinRange(EntProtoId prototype)
+    {
+        XenoConstructionMinRangeComponent? minRangeComp = null;
+        if (_prototype.TryIndex(prototype, out var buildChoice))
+            buildChoice.TryGetComponent(out minRangeComp, _compFactory);
+        if (minRangeComp != null)
+            return minRangeComp.MinRange.Float();
+        return 0;
+    }
+
     private float? GetBuildSpeed(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
@@ -1063,6 +1074,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return null;
     }
 
+    public FixedPoint2 GetStructureMinRange(EntProtoId? building)
+    {
+        if (building is { } choice &&
+            GetStructureMinRange(choice) is { } minRange)
+        {
+            return minRange;
+        }
+
+        return 0;
+    }
+
     private bool TileSolidAndNotBlocked(EntityCoordinates target)
     {
         return _turf.GetTileRef(target) is { } tile &&
@@ -1072,7 +1094,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                !_xenoNest.HasAdjacentNestFacing(target);
     }
 
-    private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
+    private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range, float minRange = 0)
     {
         var origin = _transform.GetMoverCoordinates(xeno);
         target = target.SnapToGrid(EntityManager, _map);
@@ -1082,7 +1104,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (_transform.InRange(origin, target, 0.75f))
+        if (minRange != 0 && _transform.InRange(origin, target, minRange))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-build-in-self"), target, xeno);
             return false;
@@ -1120,7 +1142,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (ev.Range > 0 && !_queenEye.IsInQueenEye(xeno.Owner))
         {
-            if (!InRangePopup(xeno, target, ev.Range.Float()))
+            if (!InRangePopup(xeno, target, ev.Range.Float(), GetStructureMinRange(buildChoice).Float()))
                 return false;
         }
 
@@ -1192,7 +1214,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (!CanSecreteOnTilePopup(xeno, xeno.Comp.BuildChoice, target, false, false))
+        if (!CanSecreteOnTilePopup(xeno, choice, target, false, false))
             return false;
 
         if (_transform.GetGrid(target) is not { } gridId ||

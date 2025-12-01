@@ -64,6 +64,7 @@ rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
 rmc-imidazoline-container-label-text = IM
+rmc-dermaline-container-label-text = DE
 rmc-iron-container-label-text = Fe
 
 rmc-custom-container-label-text = {$customLabel}
