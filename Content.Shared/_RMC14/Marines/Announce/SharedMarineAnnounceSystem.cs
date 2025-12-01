@@ -29,7 +29,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
@@ -47,7 +47,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public int CharacterLimit = 1000;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
     public override void Initialize()
     {

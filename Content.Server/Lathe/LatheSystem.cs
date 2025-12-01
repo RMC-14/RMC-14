@@ -60,9 +60,9 @@ namespace Content.Server.Lathe
 
         // RMC14
         [Dependency] private readonly IComponentFactory _compFactory = default!;
-        [Dependency] private readonly RMCARESCoreSystem _core = default!;
+        [Dependency] private readonly ARESCoreSystem _core = default!;
 
-        private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabManufacturingLogs";
+        private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabManufacturingLogs";
         // RMC14
 
 

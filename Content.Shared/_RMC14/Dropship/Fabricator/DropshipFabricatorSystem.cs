@@ -25,7 +25,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
@@ -37,7 +37,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
     private TimeSpan _gainEvery;
     public ImmutableArray<EntProtoId<DropshipFabricatorPrintableComponent>> Printables { get; private set; }
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
 
     public override void Initialize()
     {

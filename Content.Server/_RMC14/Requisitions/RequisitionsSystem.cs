@@ -36,7 +36,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly ChasmSystem _chasm = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -58,7 +58,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabRequisitionsLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabRequisitionsLogs";
     public override void Initialize()
     {
         base.Initialize();

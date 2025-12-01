@@ -16,7 +16,7 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 public sealed class TechSystem : EntitySystem
 {
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DropshipFabricatorSystem _dropshipFabricator = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
@@ -26,7 +26,7 @@ public sealed class TechSystem : EntitySystem
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
 
     public override void Initialize()
     {

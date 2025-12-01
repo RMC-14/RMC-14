@@ -16,24 +16,23 @@ using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
-public sealed class RMCARESExternalTerminalSystem : EntitySystem
+public sealed class ARESExternalTerminalSystem : EntitySystem
 {
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> CoreLog = "ARESTabARESLogs";
     private static readonly int LogsShown = 12;
 
-    public HashSet<EntProtoId<RMCARESLogTypeComponent>> LogTypes { get; private set; } = [];
-    public HashSet<EntProtoId<RMCARESTabCategoryComponent>> TabCategories { get; private set; } = [];
+    public HashSet<EntProtoId<ARESLogTypeComponent>> LogTypes { get; private set; } = [];
 
     public override void Initialize()
     {
-        Subs.BuiEvents<RMCARESExternalTerminalComponent>(RMCARESExternalTerminalUIKey.Key,
+        Subs.BuiEvents<ARESExternalTerminalComponent>(ARESExternalTerminalUIKey.Key,
             subs =>
             {
                 subs.Event<RMCARESExternalLogin>(OnExternalLogin);
@@ -41,14 +40,14 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
                 subs.Event<RMCARESExternalShowLogs>(OnExternalShowLogs);
             });
 
-        SubscribeLocalEvent<RMCARESExternalTerminalComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<RMCARESExternalTerminalComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
+        SubscribeLocalEvent<ARESExternalTerminalComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ARESExternalTerminalComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         ReloadTabs();
     }
 
-    private void OnExternalShowLogs(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalShowLogs args)
+    private void OnExternalShowLogs(Entity<ARESExternalTerminalComponent> ent, ref RMCARESExternalShowLogs args)
     {
         ent.Comp.Logs.Clear();
         if (_net.IsClient)
@@ -81,37 +80,30 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
     private void ReloadTabs()
     {
         LogTypes = [];
-        TabCategories = [];
 
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (entity.HasComponent<RMCARESLogTypeComponent>())
+            if (entity.HasComponent<ARESLogTypeComponent>())
             {
                 LogTypes.Add(entity.ID);
-                continue;
-            }
-
-            if (entity.HasComponent<RMCARESTabCategoryComponent>())
-            {
-                TabCategories.Add(entity.ID);
                 continue;
             }
         }
     }
 
-    private void OnExternalLogout(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalLogout args)
+    private void OnExternalLogout(Entity<ARESExternalTerminalComponent> ent, ref RMCARESExternalLogout args)
     {
         if (Prototype(ent) is not { } proto)
             return;
 
-        proto.TryGetComponent<RMCARESExternalTerminalComponent>(out var comp, _componentFactory);
+        proto.TryGetComponent<ARESExternalTerminalComponent>(out var comp, _componentFactory);
         var refComp = ent.Comp;
         _serialization.CopyTo(comp, ref refComp);
 
         Dirty(ent);
     }
 
-    private void OnExternalLogin(Entity<RMCARESExternalTerminalComponent> ent, ref RMCARESExternalLogin args)
+    private void OnExternalLogin(Entity<ARESExternalTerminalComponent> ent, ref RMCARESExternalLogin args)
     {
         SetAres(ent);
         if (!_idCard.TryFindIdCard(args.Actor, out var idCard) || !TryComp<AccessComponent>(idCard, out var access) ||
@@ -154,18 +146,18 @@ public sealed class RMCARESExternalTerminalSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnBeforeActivatableUIOpen(Entity<RMCARESExternalTerminalComponent> ent,
+    private void OnBeforeActivatableUIOpen(Entity<ARESExternalTerminalComponent> ent,
         ref BeforeActivatableUIOpenEvent args)
     {
         SetAres(ent);
     }
 
-    private void OnMapInit(Entity<RMCARESExternalTerminalComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<ARESExternalTerminalComponent> ent, ref MapInitEvent args)
     {
         SetAres(ent);
     }
 
-    private void SetAres(Entity<RMCARESExternalTerminalComponent> ent)
+    private void SetAres(Entity<ARESExternalTerminalComponent> ent)
     {
         if (ent.Comp.ARESCore == null)
         {

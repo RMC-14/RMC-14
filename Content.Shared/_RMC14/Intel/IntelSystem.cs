@@ -44,10 +44,9 @@ public sealed class IntelSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -139,7 +138,7 @@ public sealed class IntelSystem : EntitySystem
 
     private EntityQuery<IntelReadObjectiveComponent> _readObjectiveQuery;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
 
     public override void Initialize()
     {
@@ -506,7 +505,7 @@ public sealed class IntelSystem : EntitySystem
             }
 
             if (_idCard.TryFindIdCard(args.User, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF) && idCardIFF.Faction != null)
-                _core.CreateARESLog(idCardIFF.Faction.Value, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
+                _aresCore.CreateARESLog(idCardIFF.Faction.Value, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
         }
 
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge))
@@ -861,7 +860,7 @@ public sealed class IntelSystem : EntitySystem
             tree.Value.Comp.LastAnnounceAt = time + _announceEvery;
             Dirty(tree.Value);
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             var points = tree.Value.Comp.Tree.Points;
             var last = tree.Value.Comp.LastAnnouncePoints;
             tree.Value.Comp.LastAnnouncePoints = points;

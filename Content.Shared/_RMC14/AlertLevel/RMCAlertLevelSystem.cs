@@ -23,10 +23,9 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -34,7 +33,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 
     private EntityQuery<GhostComponent> _ghostQuery;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
@@ -117,7 +116,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             foreach (var almayer in almayers)
             {
-                _core.CreateARESLog(almayer, LogCat, (string)$"{Name(user.Value)} set the alert level to: {level}");
+                _aresCore.CreateARESLog(almayer, LogCat, (string)$"{Name(user.Value)} set the alert level to: {level}");
             }
         }
 
@@ -149,7 +148,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             }
             else if (message != null)
             {
-                var ares = _ares.EnsureARES();
+                var ares = _aresCore.EnsureMarineARES();
                 _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
             }
         }

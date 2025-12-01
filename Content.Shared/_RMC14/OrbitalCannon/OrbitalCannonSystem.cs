@@ -63,11 +63,11 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
 
     private static readonly EntProtoId OrbitalTargetMarker = "RMCLaserDropshipTarget";
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabOrbitalCannonLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabOrbitalCannonLogs";
 
     public override void Initialize()
     {

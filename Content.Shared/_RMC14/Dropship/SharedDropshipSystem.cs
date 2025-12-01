@@ -35,7 +35,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -47,7 +47,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
 
     public override void Initialize()
     {

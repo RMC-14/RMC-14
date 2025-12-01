@@ -32,7 +32,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -54,7 +54,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     private readonly HashSet<Entity<CanBeSupplyDroppedComponent>> _crates = new();
     private readonly HashSet<EntityUid> _intersecting = new();
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabRequisitionsLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabRequisitionsLogs";
 
     public override void Initialize()
     {

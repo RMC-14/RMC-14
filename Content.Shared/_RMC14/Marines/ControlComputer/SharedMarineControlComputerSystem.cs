@@ -29,7 +29,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly SharedCommendationSystem _commendation = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -41,7 +41,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly WarshipSystem _warship = default!;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
     private LocalizedDatasetPrototype _medalsDataset = default!;
     private int _characterLimit = 1000;

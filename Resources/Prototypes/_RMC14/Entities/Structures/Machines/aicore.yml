@@ -6,7 +6,7 @@
     mode: SnapgridCenter
   components: #has no collission in 13 they have invisible walls behind it
   - type: InteractionOutline
-  - type: RMCARESCore
+  - type: ARESCore
   - type: Clickable
   - type: Corrodible
     isCorrodible: false
@@ -202,30 +202,21 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # Intentional
-  - type: RMCARESExternalTerminal
+  - type: ARESExternalTerminal
     showsLogs: true
   - type: ActivatableUI
-    key: enum.RMCARESExternalTerminalUIKey.Key
+    key: enum.ARESExternalTerminalUIKey.Key
   - type: UserInterface
     interfaces:
-      enum.RMCARESExternalTerminalUIKey.Key:
+      enum.ARESExternalTerminalUIKey.Key:
         type: ARESExternalTerminalBui
-
-# Category EntProts for the UIs
-
-- type: entity
-  abstract: true
-  id: MasterARESCategory
-  name: SYS Error Category
-  components:
-  - type: RMCARESTabCategory
 
 - type: entity
   abstract: true
   id: MasterARESLogType
   name: SYS Error Log
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
 
 #Logs Category
 #The permissions set here are arbitrary as hell
@@ -235,7 +226,7 @@
   id: ARESTabRequisitionsLogs
   name: Requisitions Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - CMAccessQM
 
@@ -244,7 +235,7 @@
   id: ARESTabAnnouncementLogs
   name: Announcement Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCAccessCommand
 
@@ -253,7 +244,7 @@
   id: ARESTabOrbitalCannonLogs
   name: Orbital Cannon Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCAccessSeniorCommand
 
@@ -262,7 +253,7 @@
   id: ARESTabMedicalLogs
   name: Medical Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - CMAccessCMO
 
@@ -271,7 +262,7 @@
   id: ARESTabARESLogs
   name: ARES Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCAccessSeniorCommand
 
@@ -280,7 +271,7 @@
   id: ARESTabIdentificationLogs
   name: Identification Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCAccessSeniorCommand
 
@@ -289,7 +280,7 @@
   id: ARESTabManufacturingLogs
   name: Manufacturing Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCBaseEngineeringAccess
 
@@ -298,7 +289,7 @@
   id: ARESTabIntelLogs
   name: Intel Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - RMCAccessSeniorCommand
 
@@ -307,6 +298,6 @@
   id: ARESTabDropshipLogs
   name: Dropship Logs
   components:
-  - type: RMCARESLogType
+  - type: ARESLogType
     permissions:
     - CMAccessDropship

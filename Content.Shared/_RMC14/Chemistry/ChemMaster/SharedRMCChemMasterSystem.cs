@@ -36,7 +36,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -54,7 +54,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private readonly List<EntityUid> _toFill = new();
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabMedicalLogs";
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCChemMasterComponent, InteractUsingEvent>(OnInteractUsing);

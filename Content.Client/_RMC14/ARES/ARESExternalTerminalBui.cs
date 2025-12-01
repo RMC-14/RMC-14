@@ -19,7 +19,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
     private Menu _menu = Menu.HomeMenu;
     private Menu _previousMenu = Menu.HomeMenu;
     private int _logIndex = 0;
-    private EntProtoId<RMCARESLogTypeComponent>? _logType;
+    private EntProtoId<ARESLogTypeComponent>? _logType;
 
     private enum Menu
     {
@@ -38,7 +38,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         if (_window is not { IsOpen: true })
             return;
 
-        if (!EntMan.TryGetComponent(Owner, out RMCARESExternalTerminalComponent? terminal))
+        if (!EntMan.TryGetComponent(Owner, out ARESExternalTerminalComponent? terminal))
             return;
 
         UpdateMenu(terminal);
@@ -47,7 +47,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         RefreshLogs(terminal);
     }
 
-    private void RefreshLogs(RMCARESExternalTerminalComponent component)
+    private void RefreshLogs(ARESExternalTerminalComponent component)
     {
         if (_window is not { IsOpen: true })
             return;
@@ -80,7 +80,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         _window.LogNumber.Text = $"[font size= 16]{_logIndex + 1}/{logPageCount}";
     }
 
-    private void UpdateMenu(RMCARESExternalTerminalComponent component)
+    private void UpdateMenu(ARESExternalTerminalComponent component)
     {
         if (_window is not { IsOpen: true })
             return;
@@ -98,7 +98,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         }
     }
 
-    public void UpdateLogCategory(RMCARESExternalTerminalComponent terminal)
+    public void UpdateLogCategory(ARESExternalTerminalComponent terminal)
     {
         if (_window is not { IsOpen: true })
             return;
@@ -143,7 +143,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
         }
     }
 
-    private void RefreshLogin(RMCARESExternalTerminalComponent terminal)
+    private void RefreshLogin(ARESExternalTerminalComponent terminal)
     {
         if (_window is not { IsOpen: true })
             return;

@@ -21,7 +21,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly RMCARESCoreSystem _core = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -37,7 +37,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     private FrozenDictionary<string, AccessLevelPrototype> _accessLevel =
         FrozenDictionary<string, AccessLevelPrototype>.Empty;
 
-    private static readonly EntProtoId<RMCARESLogTypeComponent> LogCat = "ARESTabIdentificationLogs";
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIdentificationLogs";
     public override void Initialize()
     {
         Subs.BuiEvents<IdModificationConsoleComponent>(IdModificationConsoleUIKey.Key,

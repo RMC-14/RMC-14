@@ -13,10 +13,10 @@ public sealed class ARESExternalTerminalUISystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCARESExternalTerminalComponent, AfterAutoHandleStateEvent>(OnState);
+        SubscribeLocalEvent<ARESExternalTerminalComponent, AfterAutoHandleStateEvent>(OnState);
     }
 
-    private void OnState(Entity<RMCARESExternalTerminalComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnState(Entity<ARESExternalTerminalComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_timing.CurTick != _timing.LastRealTick)
             return;
@@ -24,7 +24,7 @@ public sealed class ARESExternalTerminalUISystem : EntitySystem
         RefreshUIs(ent);
     }
 
-    private void RefreshUIs(Entity<RMCARESExternalTerminalComponent> ent)
+    private void RefreshUIs(Entity<ARESExternalTerminalComponent> ent)
     {
         _rmcUI.RefreshUIs<ARESExternalTerminalBui>(ent.Owner);
     }

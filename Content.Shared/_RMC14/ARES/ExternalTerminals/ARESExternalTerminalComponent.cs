@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class RMCARESExternalTerminalComponent : Component
+public sealed partial class ARESExternalTerminalComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
@@ -17,16 +17,13 @@ public sealed partial class RMCARESExternalTerminalComponent : Component
     public EntityUid? ARESCore;
 
     [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId<RMCARESTabCategoryComponent>> ShownCategories = new();
+    public HashSet<EntProtoId<ARESTabComponent>> ShownTabs = new();
 
     [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId<RMCARESTabComponent>> ShownTabs = new();
+    public HashSet<EntProtoId<ARESLogTypeComponent>> ShownLogs = new();
 
     [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId<RMCARESLogTypeComponent>> ShownLogs = new();
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId<RMCARESLogTypeComponent>? SelectedLogPage;
+    public EntProtoId<ARESLogTypeComponent>? SelectedLogPage;
 
     [DataField, AutoNetworkedField]
     public List<string> Logs = new();

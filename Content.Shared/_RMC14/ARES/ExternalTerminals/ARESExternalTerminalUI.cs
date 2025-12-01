@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.ARES.ExternalTerminals;
 
 [Serializable] [NetSerializable]
-public enum RMCARESExternalTerminalUIKey
+public enum ARESExternalTerminalUIKey
 {
     Key,
 }
@@ -17,8 +17,8 @@ public sealed class RMCARESExternalLogin() : BoundUserInterfaceMessage;
 public sealed class RMCARESExternalLogout() : BoundUserInterfaceMessage;
 
 [Serializable] [NetSerializable]
-public sealed class RMCARESExternalShowLogs(EntProtoId<RMCARESLogTypeComponent>? type, int index) : BoundUserInterfaceMessage
+public sealed class RMCARESExternalShowLogs(EntProtoId<ARESLogTypeComponent>? type, int index) : BoundUserInterfaceMessage
 {
-    public readonly EntProtoId<RMCARESLogTypeComponent>? Type = type;
+    public readonly EntProtoId<ARESLogTypeComponent>? Type = type;
     public readonly int Index = index;
 }

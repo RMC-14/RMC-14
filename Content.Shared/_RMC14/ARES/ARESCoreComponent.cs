@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.ARES;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class RMCARESCoreComponent : Component
+public sealed partial class ARESCoreComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string ARESCoreName = "Hermes";
@@ -21,6 +21,6 @@ public sealed partial class RMCARESCoreComponent : Component
     public int MaxLogs = 5000;
 
     // Client Empty.
-    [DataField, Access(typeof(RMCARESCoreSystem), Other = AccessPermissions.None)]
-    public Dictionary<EntProtoId<RMCARESLogTypeComponent>, List<string>> Logs = new();
+    [DataField, Access(typeof(ARESCoreSystem), Other = AccessPermissions.None)]
+    public Dictionary<EntProtoId<ARESLogTypeComponent>, List<string>> Logs = new();
 }
