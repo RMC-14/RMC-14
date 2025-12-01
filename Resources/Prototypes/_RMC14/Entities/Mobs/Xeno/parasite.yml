@@ -134,6 +134,7 @@
       - Xeno
   - type: VentCrawler
     ventCrawlIcon: parasite
+  - type: Unshieldable
 
 - type: entity
   parent: CMXenoParasiteBase
