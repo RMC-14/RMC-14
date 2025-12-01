@@ -47,13 +47,6 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float TargetScreamProbability = 0.6f;
 
     /// <summary>
-    /// Substitution of base gib chance
-    /// </summary>
-    // TODO: remove when xeno can be gibbed
-    [DataField]
-    public float BaseGibSplashProbability = 0.05f;
-
-    /// <summary>
     /// How much probability increase if damage type is brute
     /// </summary>
     [DataField]
@@ -64,13 +57,6 @@ public sealed partial class AcidBloodSplashComponent : Component
     /// </summary>
     [DataField]
     public float DamageTriggerProbabilityMultiplier = 0.33f;
-
-    /// <summary>
-    /// Substitution of coefficient that increases chance of gib depending on health after death
-    /// </summary>
-    // TODO: remove when xeno can be gibbed
-    [DataField]
-    public float DamageSplashGibMultiplier = 0.005f; // * 0.01 to get probability, / 2 by parity
 
     [DataField]
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(3);

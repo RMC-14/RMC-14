@@ -190,7 +190,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnExamined(Entity<CMAutomatedVendorComponent> ent, ref ExaminedEvent args)
     {
-        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
+        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel) || !ent.Comp.Hackable)
             return;
 
         using (args.PushGroup(nameof(CMAutomatedVendorComponent)))
