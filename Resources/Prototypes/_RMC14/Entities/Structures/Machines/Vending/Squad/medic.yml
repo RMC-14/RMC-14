@@ -104,13 +104,17 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
+        points: 13
+    # - id: CMM20MineBox4
+    #   points: 20
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -148,7 +152,7 @@
     - name: Armors
       entries:
       - id: CMArmorB12
-        points: 28
+        points: 24
       - id: CMArmorM4
         points: 16
     - name: Restricted Firearms
@@ -228,7 +232,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: RMCArmorVestMedic
+      - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -451,3 +455,50 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+
+- type: entity
+  parent: RMCColMarTechMedicalEquipmentPVE
+  id: ColMarTechMedicalChemicalPVE
+  suffix: PVE
+  name: ColMarTech squad medical chemical rack
+  description: An automated gear rack for specialized chemicals for the hospital corpsman.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_chemical.rsi
+  - type: CMAutomatedVendor
+    pointsType: Chemicals
+    sections:
+    # TODO RMC14: newmed
+    # - name: Essential Medication
+    #   choices: { RMCEssentialChemical: 1 }
+    #   entries:
+    #   - id: RMCPillCanisterImidazolineAlkysine
+    #     recommended: true
+    #   - id: RMCLargeBottleImidazolineAlkysine
+    #     recommended: true
+    - name: Pill Bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        points: 60
+      - id: CMPillCanisterKelotaneDermaline
+        points: 60
+      # TODO RMC14: newmed
+      # - id: RMCPillCanisterNitrogenWater
+      #   points: 30
+      - id: RMCPillCanisterDexalinPlus
+        points: 30
+      - id: RMCPillCanisterIron
+        points: 30
+    - name: Liquid Bottles
+      entries:
+      - id: RMCLargeBottleMeralyneBicaridine
+        points: 40
+      - id: RMCLargeBottleKelotaneDermaline
+        points: 40
+      - id: RMCLargeBottleDexalinPlus
+        points: 30
+    # TODO RMC14: the minitank is currently non functional
+    # - name: Injectors
+    #   entries:
+    #   - id: CMMiniTank
+    #     points: 40

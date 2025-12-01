@@ -251,6 +251,9 @@
   - RMCBoxMagazinePistolM13EmptyBuild
   - RMCBoxMagazinePistolM13ExtEmptyBuild
   - RMCBoxMagazinePistolM13DrumEmptyBuild
+  - RMCBoxMagazinePistolM13APEmptyBuild
+  - RMCBoxMagazinePistolM13ExtAPEmptyBuild
+  - RMCBoxMagazinePistolM13DrumAPEmptyBuild
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
@@ -312,6 +315,24 @@
   id: RMCBoxMagazinePistolM13DrumEmptyBuild
   name: M13 magazine box (Drum)
   prototype: RMCBoxMagazinePistolM13DrumEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13APEmptyBuild
+  name: M13 magazine box (AP)
+  prototype: RMCBoxMagazinePistolM13APEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13ExtAPEmptyBuild
+  name: M13 magazine box (Ext AP)
+  prototype: RMCBoxMagazinePistolM13ExtAPEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13DrumAPEmptyBuild
+  name: M13 magazine box (Drum AP)
+  prototype: RMCBoxMagazinePistolM13DrumAPEmpty
 
 # empty shotgun shell boxes
 - type: rmcConstruction

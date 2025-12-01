@@ -43,7 +43,7 @@
     back: RMCSatchelLightpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponRifleM54CWhite
-    pocket1: RMCPouchSurvivalFill
+    pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:

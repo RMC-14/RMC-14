@@ -335,6 +335,7 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+    - RMCVisorPilotBlack
 
 # Press
 - type: entity

@@ -15,6 +15,10 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
+    cm-chatsan-word-thru: cm-chatsan-replacement-thru
+    cm-chatsan-word-tho: cm-chatsan-replacement-tho
+    cm-chatsan-word-pb: cm-chatsan-word-replacement-pb
+    cm-chatsan-word-clanker: cm-chatsan-replacement-clanker
 
 - type: accent
   id: CMChatSanitizeMarine
@@ -22,6 +26,7 @@
     cm-chatsan-word-admin-marine: cm-chatsan-replacement-admin-marine
     cm-chatsan-word-admins-marine: cm-chatsan-replacement-admins-marine
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
+    cm-chatsan-word-slopcade: cm-chatsan-replacement-slopcade
 
 - type: accent
   id: CMChatSanitizeXeno
@@ -126,7 +131,7 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-
+    cm-chatsan-word-mice: cm-chatsan-replacement-mice
     cm-chatsan-word-feroxi: cm-chatsan-replacement-feroxi
     cm-chatsan-word-feroxis: cm-chatsan-replacement-feroxi
     cm-chatsan-word-shark: cm-chatsan-replacement-shark
@@ -280,3 +285,33 @@
     cm-chatsan-word-caps: cm-chatsan-word-replacement-caps
     cm-chatsan-word-capped: cm-chatsan-word-replacement-capped
     cm-chatsan-word-phero: cm-chatsan-word-replacement-phero
+    cm-chatsan-word-batong: cm-chatsan-word-replacement-batong
+    cm-chatsan-word-batongs: cm-chatsan-word-replacement-batongs
+    cm-chatsan-word-batoned: cm-chatsan-word-replacement-batoned
+    cm-chatsan-word-batonged: cm-chatsan-word-replacement-batonged
+    cm-chatsan-word-xover: cm-chatsan-word-replacement-xover
+    cm-chatsan-word-m13: cm-chatsan-word-replacement-m13
+    cm-chatsan-word-m63: cm-chatsan-word-replacement-m63
+    cm-chatsan-word-p90: cm-chatsan-word-replacement-p90
+    cm-chatsan-word-m54c: cm-chatsan-word-replacement-m54c
+    cm-chatsan-word-m42a2: cm-chatsan-word-replacement-m42a2
+    cm-chatsan-word-m54: cm-chatsan-word-replacement-m54
+    cm-chatsan-word-c4: cm-chatsan-word-replacement-c4
+    cm-chatsan-word-ap: cm-chatsan-word-replacement-ap
+    cm-chatsan-word-alpha: cm-chatsan-word-replacement-alpha
+    cm-chatsan-word-bravo: cm-chatsan-word-replacement-bravo
+    cm-chatsan-word-charlie: cm-chatsan-word-replacement-charlie
+    cm-chatsan-word-delta: cm-chatsan-word-replacement-delta
+    cm-chatsan-word-echo: cm-chatsan-word-replacement-echo
+    cm-chatsan-word-foxtrot: cm-chatsan-word-replacement-foxtrot
+    cm-chatsan-word-t1: cm-chatsan-word-replacement-t1
+    cm-chatsan-word-t2: cm-chatsan-word-replacement-t2
+    cm-chatsan-word-t3: cm-chatsan-word-replacement-t3
+    cm-chatsan-word-t4: cm-chatsan-word-replacement-t4
+    cm-chatsan-word-evo: cm-chatsan-word-replacement-evo
+    cm-chatsan-word-evos: cm-chatsan-word-replacement-evos
+    cm-chatsan-word-tax: cm-chatsan-word-replacement-tax
+    cm-chatsan-word-taxes: cm-chatsan-word-replacement-taxes
+    cm-chatsan-word-taxing: cm-chatsan-word-replacement-taxing
+    cm-chatsan-word-taxed: cm-chatsan-word-replacement-taxed
+
