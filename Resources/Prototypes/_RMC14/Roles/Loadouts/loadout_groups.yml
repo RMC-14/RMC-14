@@ -289,6 +289,24 @@
   - SquadArmbandRMC
   - PatchPeaceRMC
 
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMCPVE
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintUNRMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
+
 # Paperwork
 - type: loadoutGroup
   id: PaperworkRMC
