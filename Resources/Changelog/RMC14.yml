@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed USCM being mentioned in a few places, and changed them correctly
-      to UNMC.
-    type: Fix
-  id: 2090
-  time: '2025-07-30T22:30:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7329
 - author: MoonlightHollow
   changes:
   - message: ASO now has Research access and skill
@@ -4570,5 +4562,12 @@
   id: 2590
   time: '2025-12-01T01:50:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8506
+- author: YO0teacher
+  changes:
+  - message: Examining now works while watching xenos or viewing Overwatch cameras.
+    type: Tweak
+  id: 2591
+  time: '2025-12-01T01:53:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8508
 Name: RMC14
 Order: -1
