@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the Flamer tank box, which holds 8 Napalm fuel tanks similar to
-      magazine boxes.
-    type: Add
-  - message: Resprites the ammunition boxes, magazine boxes, shell boxes, and supply
-      boxes.
-    type: Tweak
-  id: 2088
-  time: '2025-07-25T21:47:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7086
 - author: Whisper
   changes:
   - message: New SOP regarding dropships has been published. Check your SOP book for
@@ -4575,5 +4564,12 @@
   id: 2588
   time: '2025-12-01T01:26:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8465
+- author: mio780308
+  changes:
+  - message: Added a search box for food and drink recipes in the guidebook.
+    type: Add
+  id: 2589
+  time: '2025-12-01T01:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8457
 Name: RMC14
 Order: -1
