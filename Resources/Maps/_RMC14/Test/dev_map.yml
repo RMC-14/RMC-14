@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/22/2025 22:08:44
-  entityCount: 1474
+  time: 12/01/2025 22:30:18
+  entityCount: 1475
 maps:
 - 1
 grids:
@@ -3953,10 +3953,10 @@ entities:
       parent: 2
 - proto: CMSpawnPointCrewman
   entities:
-  - uid: 5000
+  - uid: 1475
     components:
     - type: Transform
-      pos: 0.5,3.5
+      pos: -0.5,3.5
       parent: 2
 - proto: CMSpawnPointDCC
   entities:
@@ -9315,13 +9315,6 @@ entities:
     - type: Transform
       pos: -6.5,-11.5
       parent: 2
-- proto: RMCCableTerminal
-  entities:
-  - uid: 369
-    components:
-    - type: Transform
-      pos: -6.5,-11.5
-      parent: 2
 - proto: RMCChemDispenserGround
   entities:
   - uid: 191
@@ -10102,13 +10095,6 @@ entities:
     components:
     - type: Transform
       pos: -6.5,-1.5
-      parent: 2
-- proto: RMCTimerTrigger
-  entities:
-  - uid: 1305
-    components:
-    - type: Transform
-      pos: 6.413024,9.39097
       parent: 2
 - proto: RMCTimerTrigger
   entities:
