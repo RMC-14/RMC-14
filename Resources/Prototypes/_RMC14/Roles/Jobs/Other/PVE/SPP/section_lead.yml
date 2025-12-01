@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPSectionLeadPVE
   name: rmc-job-name-spp-sectionsergeant
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-sectionsergeant
   playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
     RMCRankSPPStarshiySerzhant: []

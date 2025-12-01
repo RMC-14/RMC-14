@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCGunnerPVE
   name: rmc-job-name-pmc-gunner
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-gunner
   playTimeTracker: CMJobPMCGunnerPVE
   ranks:
     RMCRankWeYaSupportSpecialist: []

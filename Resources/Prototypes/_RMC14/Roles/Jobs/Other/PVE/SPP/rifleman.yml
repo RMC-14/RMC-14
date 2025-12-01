@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPRiflemanPVE
   name: rmc-job-name-spp-rifleman
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-rifleman-pve
   playTimeTracker: RMCJobSPPRiflemanPVE
   ranks:
    RMCRankSPPRyadovoy: []

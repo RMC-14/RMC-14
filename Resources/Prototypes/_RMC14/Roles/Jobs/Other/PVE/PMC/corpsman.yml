@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCCorpsmanPVE
   name: rmc-job-name-pmc-medic
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-medic
   playTimeTracker: CMJobPMCCorpsmanPVE
   ranks:
     RMCRankWeYaMedicalSpecialist: []

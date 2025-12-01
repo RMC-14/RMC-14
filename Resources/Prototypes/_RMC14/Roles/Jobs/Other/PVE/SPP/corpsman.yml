@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPCorpsmanPVE
   name: rmc-job-name-spp-corpsman
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-corpsman-pve
   playTimeTracker: RMCJobSPPCorpsmanPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []

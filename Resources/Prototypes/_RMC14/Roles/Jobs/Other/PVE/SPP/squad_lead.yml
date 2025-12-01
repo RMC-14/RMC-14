@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPSquadLeadPVE
   name: rmc-job-name-spp-squadlead
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-squadlead
   playTimeTracker: RMCJobSPPSquadLeadPVE
   ranks:
     RMCRankSPPSerzhant: []

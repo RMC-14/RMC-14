@@ -342,6 +342,10 @@
         amount: 10
       - id: RMCWebbingDropPouch
         amount: 5
+        name: Drop Pouch, Brown
+      - id: RMCWebbingDropPouchBlack
+        amount: 5
+        name: Drop Pouch, Black
     - name: Armor
       entries:
       - id: RMCArmorHelmetPMCTactical
@@ -363,11 +367,11 @@
         amount: 1
     - name: Belts
       entries:
-      - id: CMBeltMarine
+      - id: CMBeltPMC
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterPistolPMC
         amount: 15
       - id: RMCBeltHolsterRevolver
         amount: 15

@@ -52,23 +52,29 @@ rmc-job-prefix-spp-commando = JKdo
 rmc-job-name-spp-gunner = Heavy Gunner
 rmc-job-prefix-spp-gunner = Hvy. Gnr.
 rmc-ghost-name-spp-gunner = SPP Heavy Gunner
+rmc-job-description-spp-gunner-pve = Support your squad with heavy weaponry and lay down suppressing fire.
 
 rmc-job-name-spp-rifleman-pve = Rifleman
 rmc-job-prefix-spp-rifleman-pve = RFN
 rmc-ghost-name-spp-rifleman-pve = SPP Rifleman
+rmc-job-description-spp-rifleman-pve = Follow orders from your squad leader. Do your job and shoot where you're needed to shoot.
 
 rmc-job-name-spp-corpsman = Corpsman
 rmc-job-prefix-spp-corpsman = HM
 rmc-ghost-name-spp-corpsman = SPP Corpsman
+rmc-job-description-spp-corpsman-pve = Keep your section in fighting condition, or as close as you can get them.
 
 rmc-job-name-spp-overwatch = Platoon Commander
 rmc-job-prefix-spp-overwatch = PltCo.
 rmc-ghost-name-spp-overwatch = SPP PltCo.
+rmc-job-description-spp-overwatch = Overwatch and lead your platoon. Follow orders from command.
 
 rmc-job-name-spp-sectionsergeant = Section Sergeant
 rmc-job-prefix-spp-sectionsergeant = Sec. Sarge
 rmc-ghost-name-spp-sectionsergeant = SPP Section Sergeant
+rmc-job-description-spp-sectionsergeant = Lead one of the platoon's sections. Give your section and squads objectives and follow orders from the Platoon Commander. Keep your section in one piece.
 
 rmc-job-name-spp-squadlead = Squad Lead
 rmc-job-prefix-spp-squadlead = SL
 rmc-ghost-name-spp-squadlead = SPP Squad Lead
+rmc-job-description-spp-squadlead = Follow the section sergeant's orders and command your squad. 

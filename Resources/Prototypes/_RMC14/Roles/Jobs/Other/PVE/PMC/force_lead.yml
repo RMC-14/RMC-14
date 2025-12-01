@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCForceLeadPVE
   name: rmc-job-name-pmc-pve-force-leader
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-force-leader
   playTimeTracker: CMJobPMCForceLeadPVE
   ranks:
     RMCRankWeYaForceLeader: []
