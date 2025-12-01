@@ -5,15 +5,18 @@ using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Temperature;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -33,6 +36,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -56,6 +60,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCFlamerAmmoProviderComponent, AttemptShootEvent>(OnAttemptShoot);
 
         SubscribeLocalEvent<RMCFlamerTankComponent, BeforeRangedInteractEvent>(OnFlamerTankBeforeRangedInteract);
+        SubscribeLocalEvent<RMCFlamerTankComponent, GetVerbsEvent<ExamineVerb>>(OnFlamerTankVerbExamine);
 
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, TakeAmmoEvent>(OnSprayTakeAmmo);
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, GetAmmoCountEvent>(OnSprayGetAmmoCount);
@@ -167,6 +172,32 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         args.Handled = true;
         Transfer(target, targetSolutionEnt, tank, tankSolutionEnt.Value, args.User);
+    }
+
+    private void OnFlamerTankVerbExamine(Entity<RMCFlamerTankComponent> tank, ref GetVerbsEvent<ExamineVerb> args)
+    {
+        var user = args.User;
+
+        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(user))
+            return;
+
+        var msg = new FormattedMessage();
+        List<int> values = new([tank.Comp.MaxIntensity, tank.Comp.MaxDuration, tank.Comp.MaxRange]);
+        for (var i = 0; i < values.Count; i++)
+        {
+            msg.AddMarkupPermissive(Loc.GetString("rmc-flamer-tank-examine-line-" + i, ("value", values[i])));
+
+            if (i + 1 != values.Count)
+                msg.PushNewline();
+        }
+
+        _examine.AddDetailedExamineVerb(args,
+            tank,
+            msg,
+            Loc.GetString("rmc-flamer-tank-examine-short"),
+            tank.Comp.ExamineIcon,
+            Loc.GetString("rmc-flamer-tank-examine")
+        );
     }
 
     private void OnSprayTakeAmmo(Entity<RMCSprayAmmoProviderComponent> ent, ref TakeAmmoEvent args)

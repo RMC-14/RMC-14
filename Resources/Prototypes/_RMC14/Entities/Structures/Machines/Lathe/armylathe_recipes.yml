@@ -66,18 +66,18 @@
     CMSteel: 500 # 18750
 
 - type: latheRecipe
-  id: RMCCustomM34A1FuelTankCase
-  result: RMCCustomM34A1FuelTankCase
+  id: RMCTankFlamerCustom
+  result: RMCTankFlamerCustom
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 100 # 3750
 
 - type: latheRecipe
-  id: RMCCustomM34TFuelTankCase
-  result: RMCCustomM34TFuelTankCase
+  id: RMCTankFlamerLargeCustom
+  result: RMCTankFlamerLargeCustom
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 100 # 3750
 
 - type: latheRecipe
   id: RMCCustomM34A1SmokeTankCase

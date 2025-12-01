@@ -111,7 +111,8 @@
   parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeCustom
   name: large custom incinerator tank
-  description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
+  description: A large fuel tank for use in the M34-T incinerator unit.
+  # description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
   components:
   - type: RMCFlamerTank
     maxIntensity: 60

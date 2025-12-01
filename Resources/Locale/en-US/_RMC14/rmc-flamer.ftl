@@ -4,3 +4,9 @@ rmc-flamer-ignite-first-with = You need to ignite the gun first!
 rmc-flamer-refill = You refill {THE($refilled)}
 rmc-flamer-too-close = You are too close to your target!
 rmc-broiler-switch-tank = Now using the tank in slot {$n}.
+
+rmc-flamer-tank-examine = Examine incinerator tank properties
+rmc-flamer-tank-examine-short = Tank properties
+rmc-flamer-tank-examine-line-0 = [color=yellow]Max Intensity[/color]: [color=lightblue]{$value}[/color]
+rmc-flamer-tank-examine-line-1 = [color=yellow]Max Duration[/color]: [color=lightblue]{$value}[/color]
+rmc-flamer-tank-examine-line-2 = [color=yellow]Max Range[/color]: [color=lightblue]{$value}[/color]
