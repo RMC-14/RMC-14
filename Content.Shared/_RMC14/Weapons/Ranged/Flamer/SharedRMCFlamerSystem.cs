@@ -246,7 +246,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
 
-        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * tiles.Count);
+        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * Math.Min(tiles.Count, reagent.Radius));
         _solution.UpdateChemicals(solution);
 
         if (_net.IsClient)
@@ -303,7 +303,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
-        tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, maxRange, out _, true);
+        tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, maxRange, out _, true, reagent.FireSpread);
         if (tiles.Count == 0)
         {
             tiles = null;

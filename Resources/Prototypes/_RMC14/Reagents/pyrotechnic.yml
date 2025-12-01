@@ -64,6 +64,7 @@
   duration: 50
   radius: 6
   fireEntity: RMCTileFireGreen
+  fireSpread: true
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]

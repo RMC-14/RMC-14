@@ -29,6 +29,9 @@ public partial class ReagentPrototype
     public EntProtoId FireEntity = "RMCTileFire";
 
     [DataField]
+    public bool FireSpread;
+
+    [DataField]
     public bool Toxin;
 
     [DataField]
