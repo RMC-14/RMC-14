@@ -410,6 +410,10 @@
       - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
+      - id: RMCCoatCOServiceJacketStandard
+      - id: RMCCoatCOServiceJacketGreen
+      - id: RMCCoatCOServiceJacketPurple
+      - id: RMCCoatCOServiceJacketGrey
       - id: CMCoatCOBomber
     - name: Dress
       entries:
@@ -799,7 +803,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
-      - id: RMCArmorVestExecutiveOfficer
+      - id: RMCArmorVestSeniorOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
