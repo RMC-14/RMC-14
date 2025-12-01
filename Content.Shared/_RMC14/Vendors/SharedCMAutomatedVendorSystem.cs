@@ -56,6 +56,7 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared._RMC14.Medical.Refill;
+using Content.Shared.Light.Components;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -1311,10 +1312,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         for (var i = 1; i <= maxSlots; i++)
         {
             var slotId = $"{slotName}{i}";
-            if (_container.TryGetContainer(pack, slotId, out var container) &&
-                container.ContainedEntities.Count > 0)
+            if (!_container.TryGetContainer(pack, slotId, out var container) ||
+                container.ContainedEntities.Count == 0)
+                continue;
+
+            filledSlots++;
+            var flare = container.ContainedEntities[0];
+
+            if (TryComp<ExpendableLightComponent>(flare, out var expendable) &&
+                expendable.CurrentState != ExpendableLightState.BrandNew)
             {
-                filledSlots++;
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-spent", pack, user, ("item", pack));
+                return false;
             }
         }
 
