@@ -43,15 +43,15 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi
 
-# MP Armor vest - No slowdown, no general protection
 - type: entity
   parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem, RMCBaseUniformAccessoryItemOuterClothing]
-  id: RMCArmorVestMP
-  name: M3-XL pattern MP armor vest
-  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat or for deployment use against hostiles.
+  id: RMCArmorVestXLBase
+  abstract: true
+  name: M3-XL pattern armor vest
+  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/mp.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/jungle.rsi
   - type: CMArmor
     melee: 0
     bullet: 20
@@ -75,6 +75,7 @@
     grid:
     - 0,0,3,1 # 2 slots
   - type: FixedItemSizeStorage
+  - type: RMCStorageEjectHand
   - type: IgnoreContentsSize
     items:
       tags:
@@ -83,28 +84,33 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
+      - RMCBoxZipties
   - type: RMCNameItemOnVend
     item: Armor
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: Appearance
+
+# MP
 
 - type: entity
-  parent: RMCArmorVestMedic
-  id: RMCArmorVestNone
-  name: armor vest
-  suffix: None
+  parent: RMCArmorVestXLBase
+  id: RMCArmorVestMP
+  name: M3-XL pattern MP armor vest
+  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat or for deployment use against hostiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/mp.rsi
 
 # Officers
 
 - type: entity
-  parent: RMCArmorVestMP
-  id: RMCArmorVestOfficer
-  name: M3-XL pattern officer armor vest
+  parent: RMCArmorVestXLBase
+  id: RMCArmorVestIntel
+  name: M3-XL pattern intel armor vest
   description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel.rsi
   - type: CMArmor
     melee: 10
     bullet: 10
@@ -112,18 +118,25 @@
     explosionArmor: 0
 
 - type: entity
-  parent: RMCArmorVestOfficer
-  id: RMCArmorVestIO
-  name: M3-XL pattern intel armor vest
+  parent: RMCArmorVestIntel
+  id: RMCArmorVestOfficer
+  name: M3-XL pattern officer armor vest
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/desert-snow-urban.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/desert-snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/classic-jungle.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/officer/desert-snow-urban.rsi
 
 - type: entity
   parent: RMCArmorVestOfficer
-  id: RMCArmorVestExecutiveOfficer
-  name: M3-XL pattern Executive Officer armor vest
-  description: A type of body armor designed for mobility and the more senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
+  id: RMCArmorVestSeniorOfficer
+  name: M3-XL pattern senior officer armor vest
+  description: A type of body armor designed for mobility with additional padding for senior officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
   components:
   - type: CMArmor
     melee: 10
@@ -134,31 +147,38 @@
 #    internal: 10
 
 - type: entity
-  parent: RMCArmorVestExecutiveOfficer
+  parent: RMCArmorVestSeniorOfficer
   id: RMCArmorVestCommandingOfficer
-  name: M3-XL pattern Commanding Officer armor vest
+  name: M3-XL pattern commanding officer armor vest
+  description: A type of body armor designed for mobility with additional padding for commanding officers. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions. Not recommended for direct combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/commanding_officer/urban.rsi
 
 # Squad
 - type: entity
-  parent: RMCArmorVestMP
+  parent: RMCArmorVestXLBase
   id: RMCArmorVestSquad
   name: M3-XL pattern marine armor vest
   description: A type of M3-XL body armor, standard issue for UNMC marines. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/corpsman.rsi
   - type: CMArmor
     melee: 0
     bullet: 10
-
-- type: entity
-  parent: RMCArmorVestSquad
-  id: RMCArmorVestMedic
-  name: M3-XL pattern corpsman armor vest
-  description: A type of M3-XL body armor, made specially for UNMC Corpsmen. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/corpsman.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/standard/urban.rsi
 
 - type: entity
   parent: RMCArmorVestSquad
@@ -181,19 +201,3 @@
         - RMCBoxZipties
       whitelist: null
       count: 2
-
-- type: entity
-  parent: RMCArmorVestSquad
-  id: RMCArmorVestFireteamLeader
-
-- type: entity
-  parent: RMCArmorVestSquad
-  id: RMCArmorVestSpecialist
-
-- type: entity
-  parent: RMCArmorVestSquad
-  id: RMCArmorVestCombatTechnician
-
-- type: entity
-  parent: RMCArmorVestSquad
-  id: RMCArmorVestRifleman

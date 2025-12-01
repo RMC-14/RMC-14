@@ -2,13 +2,29 @@
   parent: CMJobBase
   id: CMProvostInspector
   name: rmc-job-name-corp-provost-inspector
-  description: rmc-ghost-role-information-provost-description
+  description: rmc-job-description-inspector
+  whitelisted: true
   playTimeTracker: CMJobProvostInspector
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 126000 # 35 hours, any roles
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 108000 # 30 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 108000 # 30 hours
+  - !type:RoleTimeRequirement
+    role: CMJobChiefMP
+    time: 108000 # 30 hours
   ranks:
     RMCRankProvostInspector: []
   startingGear: RMCGearProvostInspector
   icon: RMCJobIconProvostInspector
-  joinNotifyCrew: false
+  joinNotifyCrew: true
+  marineAuthorityLevel: 0
+  supervisors: cm-job-supervisors-marine-high-command
   accessGroups:
   - ShipMasterAccess
   special:
@@ -22,10 +38,24 @@
         RMCSkillFireman: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-inspector
+    - type: MarineOrders
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: RMCPointing
     - type: RMCTrackable
-  hidden: true
+    - type: SeeNewPlayers
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pve_chief_inspector
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
 
 - type: entity
   id: RMCRandomHumanoidProvostInspector
@@ -52,6 +82,16 @@
       settings: short
   - type: GhostRoleApplySpecial
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointProvostInspector
+  name: Provost Inspector spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMProvostInspector
+  - type: Sprite
+    state: x # todo rmc14 need a spawn location sprite
+
 - type: startingGear
   id: RMCGearProvostInspector
   equipment:
@@ -63,8 +103,8 @@
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
-    belt: CMBeltSecurityMPFilled
-    back: CMSatchelSecurityFilledProvost
+    belt: RMCM1984BeltFilled
+    back: CMSatchelSecurityFilledProvostInspector
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
 
@@ -76,4 +116,4 @@
   id: RMCJobIconProvostInspector
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pvi2
+    state: hudsquad_pvi

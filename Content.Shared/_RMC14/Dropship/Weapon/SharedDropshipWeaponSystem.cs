@@ -46,6 +46,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -188,7 +189,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Ignite)
             return;
 
-        _physics.SetBodyType(ent, BodyType.Dynamic);
+        if (HasComp<PhysicsComponent>(ent))
+            _physics.SetBodyType(ent, BodyType.Dynamic);
         RemCompDeferred<DropshipTargetComponent>(ent);
     }
 

@@ -220,3 +220,15 @@
       amount: 1
   products:
     RMCParoxetine: 3
+
+- type: reaction
+  id: RMCLipozine
+  reactants:
+    TableSalt:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+    RMCRadium:
+      amount: 1
+  products:
+    RMCLipozine: 3
