@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: noctyrnal
   changes:
-  - message: Added the 'UNCSS Haurchefant', a PMC shipmap for PVE, designed for slighter
-      smaller max pops than Sun Rider sessions.
-    type: Add
-  id: 2092
-  time: '2025-08-01T08:44:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7335
-- author: noctyrnal
-  changes:
   - message: Resprited the SSG45 and AK4047.
     type: Tweak
   - message: Resprited the worn and inhand sprites for the RIVAL shotguns.
@@ -4630,5 +4622,28 @@
   id: 2592
   time: '2025-12-01T01:54:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8401
+- author: noctyrnal
+  changes:
+  - message: Added Modular Armor to PVE.  You now start with a generic light / medium
+      vest that you can attach multiple different armor pieces to, such as shin guards,
+      neck guards and paint.
+    type: Add
+  - message: Expanded the options within the PVE equipment vendors, adding more attachments
+      and equipment.
+    type: Add
+  - message: Added Monoculars for PVE - Shorter range binoculars that can only be
+      used when standing still.
+    type: Add
+  - message: Sun Rider Riflemen in PVE can now use special job pamphlets, such as
+      spotter and loader pamphlets.
+    type: Fix
+  - message: Resprited the PVE Smart Gun Harness attachment.
+    type: Add
+  - message: PVE SGOs now get a machete backpack, and no longer get the clip on pouch
+      / grenade webbing.
+    type: Add
+  id: 2593
+  time: '2025-12-01T01:57:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8482
 Name: RMC14
 Order: -1
