@@ -457,6 +457,9 @@
     - id: RMCAttachmentMatebaStandard
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
+  - type: Tag
+    tags:
+    - RMCMatebaCustomizationCase
 
 
 - type: entity
@@ -485,6 +488,8 @@
     - id: RMCAttachmentMatebaMarksmanGolden
     - id: RMCAttachmentMatebaSnubNoseGolden
 
+- type: Tag
+  id: RMCMatebaCustomizationCase
 
 - type: Tag
   id: RMCSpeedLoaderMateba

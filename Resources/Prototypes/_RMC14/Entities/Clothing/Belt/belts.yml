@@ -812,7 +812,7 @@
       co_handcannon_fill:
         whitelist:
           tags:
-          - RMCWeaponPistolHandcannonWyvern
+          - RMCWeaponPistolHandcannonCO
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
@@ -1160,7 +1160,7 @@
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with six small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2110s.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
@@ -1182,10 +1182,11 @@
     maxItemSize: Normal
     grid:
     - 0,0,13,1 # 7 slots
-    blacklist:
+    whitelist:
       tags:
-      - CMFirstAidKit
-      - RMCEngineerKit
+      - RMCRevolver
+      - RMCMagazineRevolver
+      - RMCMatebaCustomizationCase
   - type: Tag
     tags:
     - RMCMatebaHolster
@@ -1208,7 +1209,7 @@
   parent: RMCMatebaBelt
   id: RMCMatebaBeltLuxurious
   name: luxurious M276 pattern Mateba holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with six small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
@@ -1453,7 +1454,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilled
+  id: RMCPeregrineBelt
+  name: M276 pattern Peregrine holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Peregrine handcannon, along with six small pouches for magazines.
+  components: # TODO RMC14 custom sprite
+  - type: Tag
+    tags:
+    - RMCPeregrineHolster
+
+- type: Tag
+  id: RMCPeregrineHolster
+
+- type: entity
+  parent: RMCPeregrineBelt
+  id: RMCCOHandcannonBeltFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -1462,11 +1476,11 @@
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolHandcannonWinterWyvern
+    - id: RMCWeaponPistolHandcannonCO
 
 - type: entity
-  parent: RMCBeltHolsterPistol
-  id: GoldHandcannonBeltFilled
+  parent: RMCPeregrineBelt
+  id: RMCGoldHandcannonBeltFilled
   suffix: Filled, Gold Handcannon
   components:
   - type: StorageFill

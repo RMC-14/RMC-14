@@ -1439,6 +1439,10 @@ CMLightFixtureSmallAlwaysPowered: RMCLightFixtureSmallAlwaysPowered
 CMLightFixtureSmallOffset: RMCLightFixtureSmallOffset
 CMLightFixtureEmpty: RMCLightFixtureEmpty
 
+# 2025-11-09
+RMCWeaponPistolHandcannonWinterWyvern: RMCWeaponPistolHandcannonCO
+RMCD50WinterWyvernBeltFilled: RMCCOHandcannonBeltFilled
+GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
 # 2025-11-14
 ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
 
