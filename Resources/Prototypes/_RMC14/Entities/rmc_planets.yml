@@ -58,6 +58,7 @@
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
     survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
     - CMSurvivorCorporate: 2
     - CMSurvivorDoctor: 3
