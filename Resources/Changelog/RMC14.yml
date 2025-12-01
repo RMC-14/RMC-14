@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: New SOP regarding dropships has been published. Check your SOP book for
-      details.
-    type: Add
-  id: 2089
-  time: '2025-07-25T22:49:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7246
 - author: DummeHytteOst
   changes:
   - message: Fixed USCM being mentioned in a few places, and changed them correctly
@@ -4571,5 +4563,12 @@
   id: 2589
   time: '2025-12-01T01:37:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8457
+- author: J C Denton
+  changes:
+  - message: Solaris Ridge unique survivors.
+    type: Add
+  id: 2590
+  time: '2025-12-01T01:50:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8506
 Name: RMC14
 Order: -1
