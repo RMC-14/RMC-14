@@ -367,7 +367,7 @@
     stateDoorClosed: pizzabox1
   - type: Appearance
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Small
     grid:
     - 0,0,1,1
     whitelist:

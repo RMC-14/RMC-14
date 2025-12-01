@@ -1,0 +1,39 @@
+- type: entity
+  parent: BaseItem
+  id: RMCWeaponBoilgun
+  name: young boilgun
+  description: Mother, would you still love us if we were a gun?
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Unsorted/boilgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Normal
+  - type: Gun
+    projectileSpeed: 7.5
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Xeno/blobattack.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: XenoBombardAcidProjectile
+    fireCost: 1
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: XenoBombardAcidProjectile
+      fireCost: 1
+    - proto: XenoBombardNeurotoxinProjectile
+      fireCost: 1
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+  - type: ShootAtFixedPoint
+  - type: GunIgnorePrediction
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 10

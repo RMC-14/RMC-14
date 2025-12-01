@@ -858,6 +858,12 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 TryIgnite((uid, apply), contact, true);
             }
 
+            var enumerator = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
+            while (enumerator.MoveNext(out var contact))
+            {
+                TryIgnite((uid, apply), contact, true);
+            }
+
             if (apply.InitDamaged)
                 continue;
 

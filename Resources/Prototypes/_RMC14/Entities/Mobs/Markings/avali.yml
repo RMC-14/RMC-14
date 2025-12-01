@@ -453,3 +453,14 @@
     state: tail_avali_primary
   - sprite: _RMC14/Mobs/Avali/avali_trim_two.rsi
     state: tail_avali_secondary
+
+# Avali animated sprites
+
+- type: marking
+  id: AvaliTailBaseAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tail_wag

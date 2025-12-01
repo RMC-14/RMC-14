@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 02:58:23
-  entityCount: 1473
+  time: 11/22/2025 22:08:44
+  entityCount: 1474
 maps:
 - 1
 grids:
@@ -1469,7 +1469,7 @@ entities:
         path: /Audio/_RMC14/Announcements/ARES/GQfullcall.ogg
       unidentifledlifesignsSound: !type:SoundPathSpecifier
         path: /Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg
-      lastLocked: { }
+      lastLocked: {}
       attachmentPoints: []
       crashWarningSound: !type:SoundPathSpecifier
         params:
@@ -9470,21 +9470,21 @@ entities:
       pos: -14.5,1.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 527
     components:
     - type: Transform
       pos: 1.5,-3.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 529
     components:
     - type: Transform
       pos: -2.5,-3.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 530
     components:
     - type: Transform
@@ -9492,7 +9492,7 @@ entities:
       pos: 25.5,14.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 532
     components:
     - type: Transform
@@ -9500,7 +9500,7 @@ entities:
       pos: 18.5,14.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 534
     components:
     - type: Transform
@@ -9508,7 +9508,7 @@ entities:
       pos: -7.5,4.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 535
     components:
     - type: Transform
@@ -9516,7 +9516,7 @@ entities:
       pos: -8.5,9.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 538
     components:
     - type: Transform
@@ -9524,7 +9524,7 @@ entities:
       pos: -17.5,4.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 541
     components:
     - type: Transform
@@ -9532,7 +9532,7 @@ entities:
       pos: 4.5,3.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 543
     components:
     - type: Transform
@@ -9540,7 +9540,7 @@ entities:
       pos: -2.5,10.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 544
     components:
     - type: Transform
@@ -9548,7 +9548,7 @@ entities:
       pos: 6.5,7.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 545
     components:
     - type: Transform
@@ -9556,7 +9556,7 @@ entities:
       pos: -6.5,0.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 546
     components:
     - type: Transform
@@ -9564,7 +9564,7 @@ entities:
       pos: -6.5,-10.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 547
     components:
     - type: Transform
@@ -9572,14 +9572,14 @@ entities:
       pos: 4.5,-5.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 548
     components:
     - type: Transform
       pos: 5.5,-3.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 549
     components:
     - type: Transform
@@ -9587,7 +9587,7 @@ entities:
       pos: 3.5,7.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 550
     components:
     - type: Transform
@@ -9595,7 +9595,7 @@ entities:
       pos: -14.5,16.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 551
     components:
     - type: Transform
@@ -9603,7 +9603,7 @@ entities:
       pos: 0.5,16.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 553
     components:
     - type: Transform
@@ -9611,7 +9611,7 @@ entities:
       pos: -13.5,17.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 554
     components:
     - type: Transform
@@ -9619,7 +9619,7 @@ entities:
       pos: -11.5,-5.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 555
     components:
     - type: Transform
@@ -9627,7 +9627,7 @@ entities:
       pos: -11.5,-0.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 556
     components:
     - type: Transform
@@ -9635,7 +9635,7 @@ entities:
       pos: -15.5,-5.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 557
     components:
     - type: Transform
@@ -9643,28 +9643,28 @@ entities:
       pos: -15.5,-0.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 559
     components:
     - type: Transform
       pos: -14.5,6.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 560
     components:
     - type: Transform
       pos: -13.5,-7.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 561
     components:
     - type: Transform
       pos: -7.5,12.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 562
     components:
     - type: Transform
@@ -9672,14 +9672,14 @@ entities:
       pos: 3.5,18.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 564
     components:
     - type: Transform
       pos: 22.5,12.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 565
     components:
     - type: Transform
@@ -9687,7 +9687,7 @@ entities:
       pos: 11.5,14.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
 - proto: RMCLightFixtureSmall
   entities:
   - uid: 205
@@ -9707,7 +9707,7 @@ entities:
       pos: 0.5,-5.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 578
     components:
     - type: Transform
@@ -9717,7 +9717,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 0
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 579
     components:
     - type: Transform
@@ -9727,7 +9727,7 @@ entities:
     - type: ApcPowerReceiver
       powerLoad: 0
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 580
     components:
     - type: Transform
@@ -9735,7 +9735,7 @@ entities:
       pos: -4.5,-5.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
   - uid: 581
     components:
     - type: Transform
@@ -9743,7 +9743,7 @@ entities:
       pos: 5.5,-12.5
       parent: 2
     - type: Fixtures
-      fixtures: { }
+      fixtures: {}
 - proto: RMCMechPowerLoader
   entities:
   - uid: 1272
@@ -10039,6 +10039,13 @@ entities:
     components:
     - type: Transform
       pos: 3.5,17.5
+      parent: 2
+- proto: RMCSpawnPointProvostInspector
+  entities:
+  - uid: 1474
+    components:
+    - type: Transform
+      pos: 0.5,3.5
       parent: 2
 - proto: RMCSurveillanceCameraAlmayer
   entities:
