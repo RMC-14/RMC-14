@@ -8,7 +8,6 @@
     RMCRankMajor: []
   accessGroups:
   - ColonistEngi
-  - ShipMasterAccess # TODO RMC14 here until we have the id console
   startingGear: RMCGearForeconCommander
   spawnMenuRoleName: FORECON Commander (Survivor)
   supervisors: cm-job-supervisors-marine-high-command

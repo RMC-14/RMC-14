@@ -132,6 +132,10 @@
     - type: RMCConstructionUpgradeTarget
       upgrades: null
       downgrade: RMCBiohazardUpgradePlasteel
+    - type: Flammable
+      damage:
+        types:
+          Heat: 2.8125
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -179,6 +183,10 @@
     - type: RMCConstructionUpgradeTarget
       upgrades: null
       downgrade: RMCExplosiveUpgradePlasteel
+    - type: Flammable
+      damage:
+        types:
+          Heat: 1.875
 
 - type: entity
   parent: CMBarricadeMetalDoor

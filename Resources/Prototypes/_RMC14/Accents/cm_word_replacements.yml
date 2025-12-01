@@ -15,6 +15,7 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
+    cm-chatsan-word-clanker: cm-chatsan-replacement-clanker
 
 - type: accent
   id: CMChatSanitizeMarine
@@ -126,7 +127,7 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-
+    cm-chatsan-word-mice: cm-chatsan-replacement-mice
     cm-chatsan-word-feroxi: cm-chatsan-replacement-feroxi
     cm-chatsan-word-feroxis: cm-chatsan-replacement-feroxi
     cm-chatsan-word-shark: cm-chatsan-replacement-shark
