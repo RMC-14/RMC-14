@@ -367,7 +367,7 @@
         amount: 1
     - name: Belts
       entries:
-      - id: CMBeltPMC
+      - id: RMCBeltPMC
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
