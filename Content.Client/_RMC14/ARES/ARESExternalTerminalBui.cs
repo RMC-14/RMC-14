@@ -156,7 +156,7 @@ public sealed class ARESExternalTerminalBui : BoundUserInterface, IRefreshableBu
             return;
         }
 
-        var text = $"[font size= 15]{FormattedMessage.EscapeText(terminal.LoggedInUser)}[/font]";
+        var text = $"[font size=15]{FormattedMessage.EscapeText(terminal.LoggedInUser)}[/font]";
         _window.SignedInUser.Text =  text;
         _window.MainProgram.Visible = true;
         _window.LoginScreen.Visible = false;
