@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: ASO now has Research access and skill
-    type: Add
-  id: 2091
-  time: '2025-07-30T22:33:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7262
 - author: noctyrnal
   changes:
   - message: Added the 'UNCSS Haurchefant', a PMC shipmap for PVE, designed for slighter
@@ -4569,5 +4562,73 @@
   id: 2591
   time: '2025-12-01T01:53:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8508
+- author: Whisper
+  changes:
+  - message: (General Change) Officer Ordered Arrests and all their related mentions
+      and provisions have been removed - excluding those given to Commanding Officers.
+    type: Remove
+  - message: (Marine Law) Added text explaining the goals of the MP and an example
+      of problem-solving.
+    type: Add
+  - message: (Law, Definitions) Added a definition of High Ranking Officers and a
+      link to their provisions.
+    type: Add
+  - message: (Law, Definitions) Standard Issue Equipment definition added, equipment
+      SOP made more clear.
+    type: Add
+  - message: (Law, Arresting) More leeway is granted for accidental bodily harm while
+      deployed.
+    type: Fix
+  - message: (Law, Arresting) Field Arrests have been reworked. This includes a loosening
+      of movement restrictions of groundside MPs, when given approval.
+    type: Tweak
+  - message: (Law, Arresting) MP may warn people for minor crimes.
+    type: Add
+  - message: (Law, Arresting) Added Investigative detainment, and time restrictions
+      for processing and completing arrests.
+    type: Add
+  - message: (Law, Charging) This page has been reorganized for ease of review - following
+      issues of not following procedure.
+    type: Tweak
+  - message: (Prisoner Rights)  Added prisoner rights to have clothing.
+    type: Add
+  - message: (Law, Synthetics) Synthetics not part of either the UNMC or WeYA now
+      have rights.
+    type: Add
+  - message: (Law, Variable Crimes) Insubordination cannot be applied to orders that
+      are made with the intent to arrest - this should be resisting arrest.
+    type: Fix
+  - message: (Law, Variable Crimes) Optional crimes have been merged into variable
+      crimes.
+    type: Tweak
+  - message: (Law, Variable Crimes) Public Mischief has been added as a variable crime.
+      It relates to false statement that accuses someone of having committed an offence,
+      and similar behavior of wasting time.
+    type: Add
+  - message: (Law, Variable Crimes) Cleaned up the text of the Resisting Arrest crime.
+    type: Tweak
+  - message: (SOP, Equipment) Added regulations for the command tablet.
+    type: Add
+  - message: (Rules, Core 5) Added a notice that if behavior in the Military Police
+      role does not meet community standards, rolebans may be applied less leniently.
+      This may not be an indication of a bad player, but it is an indication that
+      a player doesn't have the understanding required to play MP.
+    type: Add
+  - message: (Rules, Command) Command rules have been condensed into a single page.
+    type: Tweak
+  - message: (Rules, Command) MP to the best of their ability should be investigating
+      reports of crimes.
+    type: Add
+  - message: (Marine Roleplay Standards) Do not use setpose for anything but setting
+      an examinable character pose - such as leaning on a wall.
+    type: Add
+  - message: (Law, Minor Crimes) Remade DASO into Disrespecting a Superior, which
+      is an NJP charge that applies to any higher ranking person.
+    type: Tweak
+  - message: Minor guidebook spelling and consistency fixes by CatAndHats
+    type: Fix
+  id: 2592
+  time: '2025-12-01T01:54:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8401
 Name: RMC14
 Order: -1
