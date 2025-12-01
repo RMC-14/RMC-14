@@ -182,7 +182,7 @@
   name: military combat boots
 
 - type: entity
-  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP] # TODO RMC14 SPP Bayonet
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP]
   id: RMCBootsSPPFilled
   suffix: Filled
   components:
