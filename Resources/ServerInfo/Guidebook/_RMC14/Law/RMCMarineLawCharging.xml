@@ -1,37 +1,50 @@
 ﻿<Document>
-  # Charging and sentencing
+  # Charging and Sentencing
 
-  [italic]This procedure is subject to change, with new brig timer technology in the future. Ensure prisoner rights are followed.[/italic]
+  [italic]This procedure is subject to change, with new brig timer technology in the future.[/italic]
 
-  ## General Charging Procedure
-  Upon arrest, the arresting [color=#ff000d][bold]MP[/bold][/color] must transfer the suspect to the brig, where they will have the suspect charged with the crimes committed, by another member of the [color=#ff000d][bold]MP[/bold][/color].
+  ## General Information
+
   - Brig timers must not exceed 30 minutes unless in the case of a [bold]Capital Crime[/bold], or if extended by crimes performed while jailed.
-  - Charging is to be done, in order of availability, by the Military [bold]Warden[/bold], the [color=#8B0000][bold]Chief MP[/bold][/color], an uninvolved [color=#ff000d][bold]MP[/bold][/color], the arresting [color=#ff000d][bold]MP[/bold][/color].
-  - If any of these are present they may explicitly defer to the next in-line if their attention is required elsewhere. This right should be used reasonably.
-  - The person issuing the charges should also determine a sentence.
-  - Inform the Suspect of their Charges before the brig timer starts.
-  - Inform the Suspect they may file an appeal should they wish so.
   - Ensure to follow prisoner rights and the right to appeal.
+  - In the case of Prisoners of War, be sure to read the relevant section of [textlink="Third-Parties SOP." link="RMCMarineSOPNONModThirdparty"]
+  - If a prisoner has been SSD for over 5 minutes you may place them in hypersleep, but they must serve the rest of their time if they return.
 
-  ## Additional charging of Military Police
-  - [bold]Always ensure you are permitted to arrest them, first.[/bold]
-  - They are to be charged with neglect of duty as an additional crime. This does not upgrade minor crimes to major.
-  - In the event of any major or worse crimes, if they do not attempt to appeal, or their appeal or pardon is denied, they are to be demoted, following the [color=#ff000d][bold]MP[/bold][/color] demotion procedure.
+  ### Charging must be carried out in this order:
 
-  ## Brigging checklist
+  - [bold]Military Warden[/bold].
+  - Chief MP.
+  - An uninvolved [color=#ff000d][bold]MP[/bold][/color], in order of rank.
+  - Arresting [color=#ff000d][bold]MP[/bold][/color] (only as a last resort).
+
+  Anyone may choose to defer to the next in line if their attention is needed elsewhere. This should be done sparingly.
+
+  ## Charging and Sentencing Procedure
+
+  Charging and sentencing should be done in this order.
+
+  - The person issuing the charges should determine a sentence.
+  - Inform the Suspect of their Charges before the brig timer starts.
   - Apply the charges and activate the brig timer.
-  - Remove all their belongings, including ID card and headset.
-  - Put them in the orange uniform, if available, else their original uniform.
+  - Remove all their belongings, including ID and headset.
+  - Put them in the orange uniform, if available, else their original uniform. Ensure they also have footwear.
   - Give them a standard headset of common channel, if available.
-  - Place them inside the cell, buckled to the bed, then flash or stun them and recover your handcuffs.
+  - Place them inside the cell, buckled to the bed, then stun them and recover your handcuffs.
+  - Inform the Suspect they may file an appeal should they wish so.
   - Search their belongings for contraband and theft.
   - When the time is over, let them grab their belongings, escort them out of the brig.
-  - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig cryo.
-  - If a prisoner has been SSD for over 5 minutes you may place them in cryo, but they must serve the rest of their time if they return.
+  - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig hypersleep.
+
+  ## Additional Charging of Military Police
+
+  - [bold]Always ensure you are permitted to arrest them, first.[/bold]
+  - They are to be charged with [bold]Neglect of Duty[/bold] as an additional crime. This does not upgrade minor crimes to major.
+  - In the event of any major or worse crimes, if they do not attempt to appeal, or their appeal or pardon is denied, they are to be demoted, following the [color=#ff000d][bold]MP[/bold][/color] demotion procedure.
 
   ## Medical Experiments
+
   A prisoner may waive their rights to participate in medical experiments. Researchers performing approved medical experiments  may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
-  - All experiments require the signed (or stamped) approval of either the [color=#008000][bold]Commander[/bold][/color] (But not [color=#90EE90][bold]Duty Officer[/bold][/color]) or the CMO.
+  - All experiments require the signed (or stamped) approval of either the [color=#008000][bold]Commander[/bold][/color] (But not [color=#90EE90][bold]Duty Officer[/bold][/color]) or the [bold]Chief Medical Officer[/bold].
   - Prisoners can request to be used as subjects. The prisoner's brig time must continue to run while they are being used, and are free to go when it expires and are not obligated to continue.
   - Medical experiments that will result in death must only be offered to prisoners who are to be executed, or if execution is one of the listed punishment options for their crime. It is otherwise illegal, and will result in a [bold]Attempted Murder[/bold], or [bold]Murder[/bold] charge where relevant.
 
