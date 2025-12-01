@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Max_Power
-  changes:
-  - message: Fixed Loader Pamphlet giving Endurance 2 instead of Engineering 1, letting
-      the Loader use the C4 in their kit.
-    type: Fix
-  id: 2102
-  time: '2025-08-06T03:54:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7220
 - author: J C Denton
   changes:
   - message: Fax Responder roles now spawn with their corresponding stamps and pen.
@@ -4635,5 +4627,14 @@
   id: 2602
   time: '2025-12-01T07:53:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8504
+- author: Arykh
+  changes:
+  - message: Hand Labelers can now change pill bottle color!
+    type: Add
+  - message: Added sounds for applying and removing labels.
+    type: Add
+  id: 2603
+  time: '2025-12-01T07:54:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8274
 Name: RMC14
 Order: -1
