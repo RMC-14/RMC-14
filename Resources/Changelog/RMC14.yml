@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Resprited the SSG45 and AK4047.
-    type: Tweak
-  - message: Resprited the worn and inhand sprites for the RIVAL shotguns.
-    type: Tweak
-  id: 2093
-  time: '2025-08-01T22:02:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7346
 - author: SharkSnake98
   changes:
   - message: Added Breakwater Strand, a small base designed for duel ERT/PvE purposes.
@@ -4645,5 +4636,12 @@
   id: 2593
   time: '2025-12-01T01:57:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8482
+- author: OmerF-afk
+  changes:
+  - message: Added Crate Loot and Powerloader variants, made Floodlights Unanchorable
+    type: Add
+  id: 2594
+  time: '2025-12-01T02:02:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8222
 Name: RMC14
 Order: -1
