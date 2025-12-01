@@ -9,14 +9,33 @@
 
   Read the relevant sections for the entire text.
 
-  - [textlink="(Equipment SOP)" link="RMCMarineSOPEquipment"] All shipside roles that are provided a M3-XL pattern armor vest may wear it during code green.
-  - [textlink="(Non-Mod Command SOP)" link="RMCMarineSOPNONModCommand"] Deputizing is now permitted by Commanders under certain conditions.
-  - (General) The Auxiliary Support Officer no longer has authority in requisitions.
-  - (General) The Quartermaster has been replaced with the Logistics Officer. All Officer mentions also apply to this new role.
+  - (General Change) Officer Ordered Arrests and all their related mentions and provisions have been removed - excluding those given to Commanding Officers.
+  - [textlink="(Marine Law)" link="RMCMarineLaw"] Added text explaining the goals of the MP and an example of problem-solving.
+  - [textlink="(Law, Definitions)" link="RMCMarineLawDefinitions"] Added a definition of High Ranking Officers and a link to their provisions.
+  - [textlink="(Law, Definitions)" link="RMCMarineLawDefinitions"] Standard Issue Equipment definition added, equipment SOP made more clear.
+  - [textlink="(Law, Arresting)" link="RMCMarineLawArresting"] More leeway is granted for accidental bodily harm while deployed.
+  - [textlink="(Law, Arresting)" link="RMCMarineLawArresting"] Field Arrests have been reworked. This includes a loosening of movement restrictions of groundside MPs, when given approval.
+  - [textlink="(Law, Arresting)" link="RMCMarineLaw"] MP may warn people for minor crimes.
+  - [textlink="(Law, Arresting)" link="RMCMarineLawArresting"] Added Investigative detainment, and time restrictions for processing and completing arrests.
+  - [textlink="(Law, Charging)" link="RMCMarineLawCharging"] This page has been reorganized for ease of review - following issues of not following procedure.
+  - [textlink="Prisoner Rights, Clothing" link="RMCMarineLawAppeals"] Added prisoner rights to have clothing.
+  - [textlink="(Law, Synthetics)" link="RMCMarineLawSynthetics"] Synthetics not part of either the UNMC or WeYA now have rights.
+  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Insubordination cannot be applied to orders that are made with the intent to arrest - this should be resisting arrest.
+  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Optional crimes have been merged into variable crimes.
+  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Public Mischief has been added as a variable crime. It relates to false statement that accuses someone of having committed an offence, and similar behavior of wasting time.
+  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Cleaned up the text of the Resisting Arrest crime.
+  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Insubordination now only applies to following orders.
+  - [textlink="(Law, Minor Crimes)" link="RMCMarineLawCrimesMinor"] Remade DASO into Disrespecting a Superior, which is an NJP charge that applies to any higher ranking person.
+  - [textlink="(SOP, Equipment)" link="RMCMarineSOPEquipment"] Added regulations for the command tablet.
+
+
+  - [textlink="(Rules, Core 5)" link="RMCKindness"] Added a notice that if behavior in the Military Police role does not meet community standards, rolebans may be applied less leniently. This may not be an indication of a bad player, but it is an indication that a player doesn't have the understanding required to play MP.
+  - [textlink="(Rules, Command)" link="RMCRulesCommand"] Command rules have been condensed into a single page.
+  - [textlink="(Rules, Command)" link="RMCRulesCommand"] MP to the best of their ability should be investigating reports of crimes.
+  - (Marine Roleplay Standards) Do not use setpose for anything but setting an examinable character pose - such as leaning on a wall.
+
   - [textlink="(Core Rules)" link="RMCKindness"] Split in character crimes into its own section, allowing for more clarity. More information and guidelines have been added.
   - (Current Page) Added Community Rules. These are the same community rules on the Discord.
-  - [textlink="(Non-Mod Department SOP)" link="RMCMarineSOPNONModDepartment"] Access Modification.
-  - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] Clarification: Don't share in-game information with anyone playing, neither in-character or any ooc/external means.
   - [textlink="(Zero Tolerance)" link="RMCZeroTolerance"] External communities should not be promoted or advertised.
 
   ## Admin Decisions Are Final.
@@ -46,11 +65,11 @@
   ## Core Game Rules
   These are the general rules of RMC14. Click them for more information.
   - [textlink="1. This is a English server, please only use English." link="RMCLanguage"]
-  - [textlink="2. Do not use multiple accounts, or alt accounts, and do not share accounts." link="RMCMultikey"]
+  - [textlink="2. Do not use multiple accounts, or alt accounts." link="RMCMultikey"]
   - [textlink="3. Follow the rules of escalation against non-hostiles." link="RMCRulesEscalation"]
   - [textlink="4. Don't use information gained from outside your character's knowledge." link="RMCMetaknowledge"]
   - [textlink="5. Don't antagonize or harass players." link="RMCKindness"]
-  - [textlink="6. Don't quit a command level role without notice." link="RMCCommandRoles"]
+  - [textlink="6. Don't quit a command level role without notice." link="RMCRulesCommand"]
   - [textlink="7. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
   - 8. Don't quit if you do not get the role/kit/squad you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
@@ -68,12 +87,13 @@
   - Do not discuss, complain, or comment about anyone's admin/moderator bans/notes/actions including your own. If you've been banned or disagree with an action, the person involved must make an appeal in our appeals forum where a ruling can be made. It is otherwise assumed that the action is valid and there is no issue.
 
   ## Command and Military Police
-  These rules also apply to any individual who is a MP/Command role (unless they are a member of a hostile force).\n[italic]Command roles are defined as; all heads, cic staff, MP, and squad leaders.[/italic]
-  - [textlink="1. Command and MP must follow Marine Law." link="RMCMarineLaw"]
-  - [textlink="2. Command and MP are held to a higher standard of play." link="RMCHigherStandards"]
-  - [textlink="3. MP should try to remain non-lethal and effect arrests, except in specific special circumstances." link="RMCLethalForce"]
-  - [textlink="4. MP will be expected to answer for use of lethal force." link="RMCLethalForceConsequences"]
-  - Only a whitelisted CO or Provost may pardon a sentence, but appeals can be done. See marine law.
+
+  These rules also apply to any individual who is a MP/Command role (unless they are a member of a hostile force).
+
+  - Command level roles are defined as all department heads, cic staff, MP, and squad leaders.
+  - [textlink="1. Command and MP are held to higher standards." link="RMCRulesCommand"]
+  - [textlink="2. Command and MP must follow Marine Law." link="RMCMarineLaw"]
+  - 3. The goal of MP is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal, by mediating conflicts and assisting the crew and marines with their needs with the minimal force required.
 
   ## Roleplay Rules and Standards
 
