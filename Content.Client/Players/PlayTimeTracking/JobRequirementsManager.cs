@@ -112,7 +112,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             return IsWhitelistedInternal(jobPrototype.WhitelistParent.Value.Id);
         }
 
-        return false;;
+        return false;
     }
     // RMC14-Whitelist-Tweak-End
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
