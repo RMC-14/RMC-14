@@ -84,6 +84,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     /// <summary>
     ///     Whether this vendor can be manually restocked.
+    ///     Think before setting this as true for some vendors. Example: Infinite nutriment.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool CanManualRestock;
@@ -91,7 +92,6 @@ public sealed partial class CMAutomatedVendorComponent : Component
     /// <summary>
     ///     Tracks partial stacks for items that are stored in specific amounts.
     ///     Key: prototype ID, Value: partial stack amount (0 to max_stack - 1)
-    ///     Used by medical vendors with supply links to allow topping off partial stacks.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, int> PartialProductStacks = new();

@@ -1193,7 +1193,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
     /// <param name="prototypeId">The prototype ID of the item being sold in the vendor (for stack comparison).</param>
     /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
-    protected bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
+    private bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
         return ValidateReagentContainers(item, user, valid)
                && ValidateStackAmount(item, user, valid, prototypeId)

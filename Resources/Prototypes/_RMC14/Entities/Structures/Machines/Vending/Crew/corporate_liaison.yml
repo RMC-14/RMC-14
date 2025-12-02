@@ -15,7 +15,6 @@
     - state: "base"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
-    canManualRestock: true
     sections:
     - name: Suits
       entries:
