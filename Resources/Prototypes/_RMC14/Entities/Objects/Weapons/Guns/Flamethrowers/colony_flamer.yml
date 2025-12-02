@@ -90,30 +90,6 @@
     - RMCTankFlamerColony
 
 - type: entity
-  parent: RMCWeaponFlamerColony
-  id: RMCWeaponFlamerImprovised
-  name: improvised flamethrower
-  description: A custom made incinerator, made from repurposed welding and piping equipment strapped onto a butchered m16, using LC9 flamer tanks as fuel sources. It's bulky and awkward to use, but gets the job done.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
-    state: base
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: lit
-      map: ["enum.RMCIgniterVisuals.Ignited"]
-  - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
-  - type: Tag
-    tags:
-    - RMCWeaponIncineratorInprovised
-
-- type: entity
   parent: BaseItem
   id: RMCTankFlamerColony
   name: LC9 flamer tank
@@ -154,9 +130,6 @@
 
 - type: Tag
   id: RMCWeaponIncineratorColony
-
-- type: Tag
-  id: RMCWeaponIncineratorInprovised
 
 - type: Tag
   id: RMCTankFlamerColony
