@@ -20,7 +20,7 @@ namespace Content.Shared.Movement.Components
 
         // friction
         public const float DefaultAcceleration = 20f;
-        public const float DefaultFriction = 1; // RMC14
+        public const float DefaultFriction = 2.5f;
         public const float DefaultFrictionNoInput = 2.5f;
         public const float DefaultMinimumFrictionSpeed = 0.005f;
 
@@ -51,7 +51,7 @@ namespace Content.Shared.Movement.Components
         /// The body's base friction modifier that is applied in *all* circumstances.
         /// </summary>
         [AutoNetworkedField, DataField]
-        public float BaseFriction = DefaultFriction;
+        public float BaseFriction = 1; // RMC14 DefaultFriction;
 
         /// <summary>
         /// Minimum speed a mob has to be moving before applying movement friction.
