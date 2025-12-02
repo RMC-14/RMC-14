@@ -1985,3 +1985,14 @@
     state: psy_juni_juniper
   - type: PatronFigurine
     id: f7b90833-5c77-43b5-b109-a262a3083742
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIceyIana
+  name: Icey Iana figurine
+  description: "Be Aggressive! Never stop pushing!"
+  components:
+  - type: Sprite
+    state: icey_iana
+  - type: PatronFigurine
+    id: 9f9087f0-270c-4177-866c-1b988b596ffb
