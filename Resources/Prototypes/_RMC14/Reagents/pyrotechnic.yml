@@ -35,6 +35,9 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ffb300"
+  # OXIDIZING = 6
+  # FUELING = 7
+  # FLOWING = 1
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -161,6 +164,16 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ff9300"
+  # OXIDIZING = 9
+  # IGNITING = 1
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:Corrosive
+        potency: 6
+      - !type:Toxic
+        potency: 6
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -170,3 +183,11 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#0064C8"
+  # VISCOUS = 3
+  # FUELING = 2
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:Toxic
+        potency: 2
