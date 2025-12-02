@@ -88,7 +88,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         args.Handled = true;
         Toggle(ent);
 
-        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
     }
 
     private void OnMotionDetectorGetVerbs(Entity<MotionDetectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -150,7 +154,11 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         var user = args.Performer;
         if (TryComp(ent, out MotionDetectorComponent? detector))
+        {
             _motionDetector.Toggle((ent, detector));
+            detector.LastUser = user;
+            Dirty(ent);
+        }
 
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
         DetectorUpdated(ent);
@@ -282,16 +290,6 @@ public sealed class MotionDetectorSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.Enabled;
     }
 
-    public EntityUid TryGetMotionDetectorUser(Entity<MotionDetectorComponent?> ent)
-    {
-        var parent = Transform(ent).ParentUid;
-
-        if (HasComp<StorageComponent>(parent))
-            return Transform(parent).ParentUid;
-        else
-            return parent;
-    }
-
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -327,8 +325,8 @@ public sealed class MotionDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
-            var userUid = TryGetMotionDetectorUser((uid, detector));
-            var hasFaction = _gunIFF.TryGetFaction(userUid, out var userFaction);
+            var userUid = detector.LastUser;
+            var hasFaction = userUid != null && _gunIFF.TryGetFaction(userUid.Value, out var userFaction);
 
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
