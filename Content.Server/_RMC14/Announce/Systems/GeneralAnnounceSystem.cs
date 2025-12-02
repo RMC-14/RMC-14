@@ -136,7 +136,27 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var style = preset.Style;
         if (request.StyleOverride != null)
         {
-            style = AnnouncementStyleMerger.Merge(style, request.StyleOverride);
+            var o = request.StyleOverride;
+            style = style with
+            {
+                Animation = o.Animation ?? style.Animation,
+                AnimationEnhancements = o.AnimationEnhancements ?? style.AnimationEnhancements,
+
+                PrimaryColor = o.PrimaryColor ?? style.PrimaryColor,
+                BackgroundColor = o.BackgroundColor ?? style.BackgroundColor,
+                BackgroundAlpha = o.BackgroundAlpha ?? style.BackgroundAlpha,
+
+                Position = o.Position ?? style.Position,
+                SpritePosition = o.SpritePosition ?? style.SpritePosition,
+
+                ShowSpeakerName = o.ShowSpeakerName ?? style.ShowSpeakerName,
+                SpeakerNameColor = o.SpeakerNameColor ?? style.SpeakerNameColor,
+                SpeakerNameFontSize = o.SpeakerNameFontSize ?? style.SpeakerNameFontSize,
+                SpeakerNamePosition = o.SpeakerNamePosition ?? style.SpeakerNamePosition,
+
+                SpriteScale = o.SpriteScale ?? style.SpriteScale,
+                SpriteSpacing = o.SpriteSpacing ?? style.SpriteSpacing
+            };
         }
 
         var sound = request.SoundOverride ?? preset.Sound;
@@ -278,8 +298,9 @@ public sealed class GeneralAnnounceSystem : EntitySystem
     public void AnnounceSlide(string message, SlideDirection direction = SlideDirection.Top,
         AnnouncementTarget target = AnnouncementTarget.All, EntityUid? source = null)
     {
-        var style = new AnnouncementStyle
+        var style = new AnnouncementStyleOverride
         {
+            Animation = AnnouncementAnimation.Slide,
             AnimationEnhancements = new RealisticAnimations
             {
                 EnableSlide = true,
@@ -303,8 +324,9 @@ public sealed class GeneralAnnounceSystem : EntitySystem
     public void AnnounceZoom(string message, float startScale = 0.1f,
         AnnouncementTarget target = AnnouncementTarget.All, EntityUid? source = null)
     {
-        var style = new AnnouncementStyle
+        var style = new AnnouncementStyleOverride
         {
+            Animation = AnnouncementAnimation.Zoom,
             AnimationEnhancements = new RealisticAnimations
             {
                 EnableZoom = true,
@@ -366,8 +388,9 @@ public sealed class GeneralAnnounceSystem : EntitySystem
     public void AnnounceBounce(string message, int bounceCount = 3, float bounceHeight = 15f,
         AnnouncementTarget target = AnnouncementTarget.All, EntityUid? source = null)
     {
-        var style = new AnnouncementStyle
+        var style = new AnnouncementStyleOverride
         {
+            Animation = AnnouncementAnimation.Bounce,
             AnimationEnhancements = new RealisticAnimations
             {
                 EnableBounce = true,

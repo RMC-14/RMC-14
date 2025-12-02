@@ -821,7 +821,7 @@ public sealed class AnnouncementRequest
     public EntityUid? Speaker { get; set; }
     public EntityUid? Source { get; set; }
     public EntityUid? TargetEntity { get; set; }
-    public AnnouncementStyle? StyleOverride { get; set; }
+    public AnnouncementStyleOverride? StyleOverride { get; set; }
     public SoundSpecifier? SoundOverride { get; set; }
     public float? VolumeOverride { get; set; }
     public float? PriorityOverride { get; set; }
