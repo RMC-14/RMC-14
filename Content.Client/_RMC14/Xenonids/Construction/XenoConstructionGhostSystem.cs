@@ -184,20 +184,22 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         var (buildChoice, isConstructionActive) = GetConstructionState(player.Value);
         var isBuilding = IsBuilding(player.Value);
+        var hasQueenBuildingBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(player.Value);
 
         var isMouseDown = _inputManager.IsKeyDown(Keyboard.Key.MouseLeft);
+        var upgradeTargetUnderMouse = hasQueenBuildingBoost && HasUpgradeableStructureUnderMouse();
 
         if (isMouseDown &&
             isConstructionActive &&
             !string.IsNullOrEmpty(buildChoice) &&
-            !isBuilding &&
+            (!isBuilding || upgradeTargetUnderMouse) &&
             TryComp(player.Value, out XenoConstructionComponent? construction) &&
             !construction.OrderConstructionTargeting)
         {
             var now = _timing.CurTime;
             if (now - _lastUpgradeAttempt >= _upgradeCooldown)
             {
-                TryConstructionAtMousePosition(player.Value);
+                TryConstructionAtMousePosition(player.Value, upgradeTargetUnderMouse);
                 _lastUpgradeAttempt = now;
             }
         }
@@ -223,7 +225,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         }
     }
 
-    private void TryConstructionAtMousePosition(EntityUid player)
+    private void TryConstructionAtMousePosition(EntityUid player, bool upgradeOnly = false)
     {
         if (!TryComp(player, out XenoConstructionComponent? construction))
             return;
@@ -273,6 +275,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         }
         else
         {
+            if (upgradeOnly)
+                return;
+
             if (construction.BuildChoice == null)
                 return;
 
@@ -289,6 +294,34 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         var request = new RequestPerformActionEvent(GetNetEntity(selectedActionId), null, GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null));
         RaisePredictiveEvent(request);
+    }
+
+    private bool HasUpgradeableStructureUnderMouse()
+    {
+        var mouseScreenPos = _inputManager.MouseScreenPosition;
+        var coords = SnapToGrid(mouseScreenPos);
+
+        if (!coords.IsValid(EntityManager))
+            return false;
+
+        var snapped = coords.SnapToGrid(EntityManager, _mapManager);
+
+        if (_transform.GetGrid(snapped) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+            return false;
+
+        var tile = _mapSystem.CoordinatesToTile(gridId, grid, snapped);
+
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (TryComp(uid, out XenoStructureUpgradeableComponent? comp) && comp.To != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
