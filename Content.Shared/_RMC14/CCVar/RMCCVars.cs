@@ -34,7 +34,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.marines_per_xeno", 4f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);
@@ -43,10 +43,10 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_step", 1f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMin =
-        CVarDef.Create("rmc.auto_balance_min", 4f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_min", 3f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 7f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -466,7 +466,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.queen_building_boost_duration_minutes", 30, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostSpeedMultiplier =
-        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 0.65f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 5f / 6f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
         CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
@@ -492,12 +492,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLagCompensationInteractionMarginTiles =
-        CVarDef.Create("rmc.lag_compensation_interaction_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
+        CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> RMCLagCompensationPointBlanks =
-        CVarDef.Create("rmc.lag_compensation_point_blanks", true, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<float> RMCLagCompensationPointBlanksMarginTiles =
-        CVarDef.Create("rmc.lag_compensation_point_blanks_margin_tiles", 0.5f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<bool> RMCGhostCanBoo =
+        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
 }

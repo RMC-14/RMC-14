@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
@@ -12,6 +13,8 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -22,19 +25,20 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 
 public abstract class SharedXenoAcidSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -90,7 +94,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             var e when TryComp<DropshipEnginePointComponent>(e, out var engine) => engine.ContainerId,
             _ => string.Empty
         };
-        
+
         if (!string.IsNullOrEmpty(containerId))
         {
             if (_dropship.TryGetAttachmentContained(target, containerId, out var containedEntity))
@@ -103,7 +107,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
 
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, target, out var time, out var _))
+            !CheckCorrodiblePopupsWithReplacement(xeno, target, args.Strength, out var time, out var _))
         {
             return;
         }
@@ -134,8 +138,18 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target, out var _, out var mult))
+        if (!TryComp(target, out CorrodibleComponent? corrodible) || !corrodible.IsCorrodible)
             return;
+
+        if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
+            return;
+
+        // Re-check if acid can be replaced at DoAfter end to prevent race conditions
+        // (e.g., weak acid downgrading strong acid if both DoAfters were started before any completed)
+        if (IsMelted(target) && !CanReplaceAcid(target, args.Strength))
+            return;
+
+        var mult = corrodible.MeltTimeMult;
 
         if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
@@ -148,7 +162,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
+        // Remove existing acid if present (we validated we can replace it above)
+        if (_net.IsServer && IsMelted(target))
+            RemoveAcid(target);
+
+        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
     }
 
     /// <summary>
@@ -161,7 +179,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         foreach (var projectile in args.FiredProjectiles)
         {
-            ApplyAcid(corroding.AcidPrototype, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
         }
     }
 
@@ -172,11 +190,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         if (TryComp(args.Source, out TimedCorrodingComponent? corroding))
         {
-            ApplyAcid(corroding.AcidPrototype,ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
         }
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time, out float mult)
+    private bool CheckCorrodiblePopupsWithReplacement(Entity<XenoAcidComponent> xeno, EntityUid target, XenoAcidStrength newStrength, out TimeSpan time, out float mult)
     {
         time = TimeSpan.Zero;
         mult = 1;
@@ -187,10 +205,14 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<TimedCorrodingComponent>(target) || HasComp<DamageableCorrodingComponent>(target))
+        // Check if acid already exists and if new acid can replace it
+        if (IsMelted(target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
-            return false;
+            if (!CanReplaceAcid(target, newStrength))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
+                return false;
+            }
         }
 
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
@@ -205,13 +227,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         return true;
     }
 
-    public void ApplyAcid(EntProtoId acidId, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
+    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
     {
         if (_net.IsClient)
             return;
 
         EntityUid acid;
-        if (HasComp<VisiblyAcidOutsideContainerComponent>(target) && 
+        if (HasComp<VisiblyAcidOutsideContainerComponent>(target) &&
             _container.TryGetContainingContainer(target, out var container))
         {
             acid = SpawnAttachedTo(acidId, container.Owner.ToCoordinates());
@@ -220,7 +242,6 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             acid = SpawnAttachedTo(acidId, target.ToCoordinates());
         }
-
 
         if (!inherit)
             time += _timing.CurTime;
@@ -234,6 +255,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             Acid = acid,
             AcidPrototype = acidId,
+            Strength = strength,
             CorrodesAt = time,
             Dps = dps,
             LightDps = lightDps,
@@ -275,6 +297,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
 
+            _entityStorage.EmptyContents(uid);
+
+            if (TryComp(uid, out StorageComponent? storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities.ToArray())
+                {
+                    if (!TryComp(contained, out CorrodibleComponent? corrodible) ||
+                        !corrodible.IsCorrodible)
+                    {
+                        _container.Remove(contained, storage.Container);
+                    }
+                }
+            }
+
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
         }
@@ -285,18 +321,35 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         return HasComp<TimedCorrodingComponent>(uid) || HasComp<DamageableCorrodingComponent>(uid);
     }
 
+    public bool CanReplaceAcid(EntityUid target, XenoAcidStrength newStrength)
+    {
+        // Get existing acid strength from the component
+        XenoAcidStrength? existingStrength = null;
+        
+        if (TryComp<TimedCorrodingComponent>(target, out var timedCorroding))
+            existingStrength = timedCorroding.Strength;
+        else if (TryComp<DamageableCorrodingComponent>(target, out var damageableCorroding))
+            existingStrength = damageableCorroding.Strength;
+
+        if (existingStrength == null)
+            return true;
+
+        // Simple comparison - can only replace if new acid is stronger
+        return newStrength > existingStrength;
+    }
+
     public void RemoveAcid(EntityUid uid)
     {
         if (TryComp<TimedCorrodingComponent>(uid, out var timed))
         {
             QueueDel(timed.Acid);
-            RemCompDeferred<TimedCorrodingComponent>(uid);
+            RemComp<TimedCorrodingComponent>(uid);
         }
 
         if (TryComp<DamageableCorrodingComponent>(uid, out var damageable))
         {
             QueueDel(damageable.Acid);
-            RemCompDeferred<DamageableCorrodingComponent>(uid);
+            RemComp<DamageableCorrodingComponent>(uid);
         }
     }
 

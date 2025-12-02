@@ -32,10 +32,10 @@
       path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
   - type: Defibrillator
     zapDelay: 0
-    doAfterDuration: 6.25
+    doAfterDuration: 4
     allowDoAfterMovement: false
     canDefibCrit: false
-    cmZapHeal:
+    rmcZapHeal:
     - Brute: -12
     - Burn: -12
     - Toxin: -12
@@ -114,13 +114,7 @@
     sprite: _RMC14/Objects/Medical/compact_defib.rsi
   - type: Item
     sprite: _RMC14/Objects/Medical/compact_defib.rsi
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - pocket
-  - type: Tag
-    tags:
-    - Pouch
+    size: Small
   - type: PowerCellDraw
     useRate: 132
 

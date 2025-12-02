@@ -148,6 +148,10 @@
         amount: 1
       - id: RMCCoatBomberBlack
         amount: 1
+      - id: RMCBrownWEYACoat
+        amount: 1
+      - id: RMCWEYARainCoat
+        amount: 1
 #      - id: LiaisonsWinterCoat
 #        amount:
       - id: RMCCoatHoboBrown

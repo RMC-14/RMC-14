@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -500,6 +501,50 @@
   - type: CMArmor
     melee: 10
 
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketStandard
+  name: Standard commanding officer standard issue jacket
+  description: A jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketPurple
+  name: Purple commanding officer standard issue jacket
+  description: A purple jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGreen
+  name: Green commanding officer standard issue jacket
+  description: A green jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGrey
+  name: Grey commanding officer standard issue jacket
+  description: A grey jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+
 # Executive Officer
 
 - type: entity
@@ -875,3 +920,27 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+
+# Chance's Claim
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCBrownWEYACoat
+  name: brown WEYA coat
+  description: A long, tough coat with the company logo on the back. Popular on colonies which require function over form.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWEYARainCoat
+  name: WEYA rain coat
+  description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi

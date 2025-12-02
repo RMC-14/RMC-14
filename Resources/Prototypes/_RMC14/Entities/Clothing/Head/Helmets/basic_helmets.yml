@@ -23,7 +23,6 @@
         components:
         - RMCFlask
         - CMScalpel
-        - Figurine
         - CassettePlayer
         - CassetteTape
         tags:
@@ -67,7 +66,6 @@
       - RMCFlask
       - CMScalpel
       - Figurine
-      - Matchbox
       - HelmetAccessory
       - CassettePlayer
       - CassetteTape
@@ -93,6 +91,7 @@
   - type: Appearance
   - type: HelmetAccessoryHolder
     isHat: false
+
 - type: entity
   parent: RMCHelmetBase
   id: RMCMarineHelmetBase

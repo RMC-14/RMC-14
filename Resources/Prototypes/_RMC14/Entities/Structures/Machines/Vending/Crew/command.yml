@@ -120,6 +120,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -189,6 +190,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -285,6 +287,8 @@
         points: 12
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -308,6 +312,8 @@
     - name: Barrel Attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentExtendedCompensator
         points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
@@ -371,6 +377,7 @@
       - id: CMJumpsuitCO
       - id: CMJumpsuitOperations
       - id: CMHeadCapCO
+      - id: CMHeadCapOfficer
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
@@ -403,6 +410,10 @@
       - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
+      - id: RMCCoatCOServiceJacketStandard
+      - id: RMCCoatCOServiceJacketGreen
+      - id: RMCCoatCOServiceJacketPurple
+      - id: RMCCoatCOServiceJacketGrey
       - id: CMCoatCOBomber
     - name: Dress
       entries:
@@ -453,6 +464,7 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
+      - id: RMCArmorVestCommandingOfficer
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
       - id: RMCHandsDeluxeMarine
@@ -471,6 +483,7 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -551,16 +564,16 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: RMCWeaponRifleM59A
+      - id: RMCM59ACaseAP
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary
+    - name: Commander's Secondary Belt
       choices: { CMSecondary: 1 }
       entries:
-      - id: RMCD50WinterWyvernBeltFilled
-      - id: RMCMatebaBeltFilled
+      - id: RMCD50WinterWyvernBeltFilledAmmo
+      - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -616,6 +629,8 @@
       entries:
       - id: RMCAttachmentS5RedDotSight
         points: 15
+      - id: RMCAttachmentS5MicroRedDotSight
+        points: 15
       - id: RMCAttachmentS6ReflexSight
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
@@ -649,9 +664,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         points: 15
+      - id: RMCAttachmentExtendedCompensator
+        points: 15
       - id: RMCAttachmentRecoilCompensator
         points: 15
+      - id: RMCAttachmentRecoilCompensatorM13
+        points: 15
       - id: RMCAttachmentSuppressor
+        points: 15
+      - id: RMCAttachmentSuppressorCompact
         points: 15
 
 
@@ -782,6 +803,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
+      - id: RMCArmorVestSeniorOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -853,6 +875,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Hats
       jobs:
       - CMExecutiveOfficer
@@ -974,6 +997,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
     - name: Books
@@ -981,7 +1005,9 @@
       - CMChiefMP
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1023,7 +1049,7 @@
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
       - id: RMCHeadCapFlippable
-      # TODO Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       jobs:
       - CMChiefEngineer
@@ -1079,7 +1105,6 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
@@ -1113,12 +1138,13 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingBrown
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
@@ -1133,6 +1159,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: CMBootsBlackFilled
       - id: RMCLaserDesignator
@@ -1167,9 +1194,9 @@
       - CMChiefEngineer
       entries:
       - id: CMHeadsetEngineer
-        amount: 15
+        points: 15
       - id: RMCSynthResetKey
-        amount: 15
+        points: 15
     # ////////////////////////////////////
     # Logistics Officer
     # ////////////////////////////////////
@@ -1213,6 +1240,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
     - name: Patches
@@ -1358,6 +1386,7 @@
       - CMCMO
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1508,6 +1537,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCArmorVestOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1557,3 +1587,4 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack

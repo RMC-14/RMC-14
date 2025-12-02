@@ -1,7 +1,7 @@
 ﻿- type: entity
-  id: RMCOrbitalCannon
-  name: orbital cannon
-  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  id: RMCOrbitalCannonDerelict
+  name: derelict orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. This one appears inoperable."
   placement:
     mode: SnapgridCenter
   components:
@@ -28,12 +28,6 @@
       map: [ "base" ]
   - type: Clickable
   - type: InteractionOutline
-  - type: OrbitalCannon
-    warheadTypes:
-    - RMCOrbitalCannonWarheadExplosive
-    - RMCOrbitalCannonWarheadCluster
-    - RMCOrbitalCannonWarheadIncendiary
-    - RMCOrbitalCannonWarheadAegis
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -45,6 +39,19 @@
   - type: RMCLoreExaminable
     content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCOrbitalCannonDerelict
+  id: RMCOrbitalCannon
+  name: orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  components:
+  - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
+    - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadAegis
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -164,7 +171,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
-  - type: RandomSpawner
+  - type: UniqueRandomSpawner
+    spawnerGroup: RMCOrbitalCannonWarheadSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster

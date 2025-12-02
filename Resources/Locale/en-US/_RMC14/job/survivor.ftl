@@ -36,11 +36,18 @@ cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB Rep.
 
-cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
-CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
+cm-job-name-survivor-isr = Interstellar Life Rights Observer
+CMJobSurvivorISR = Interstellar Life Rights Observer
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+rmc-job-name-survivor-bureau-marshal = CMB Marshal
+cm-job-prefix-survivor-cmb-marshal = CMB MAR
+
+cm-job-name-survivor-flight-control-operator = Flight Control Operator
+
+cm-job-name-survivor-unmc = UNMC Remnant
 
 # misc survs
 
@@ -268,3 +275,19 @@ rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
 rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# Solaris Ridge Survs
+
+rmc-job-name-survivor-solaris-chaplain = Solaris Chaplain
+
+rmc-job-name-survivor-solaris-corporate-liaison = Solaris Corporate Liaison
+
+rmc-job-name-survivor-solaris-doctor = Solaris Doctor
+
+rmc-job-name-survivor-solaris-engineer = Solaris Engineer
+
+rmc-job-name-survivor-solaris-scientist = Solaris Scientist
+
+rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
+
+rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter

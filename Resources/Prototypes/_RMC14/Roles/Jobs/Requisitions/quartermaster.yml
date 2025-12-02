@@ -54,6 +54,7 @@
         state: cargo
     - type: RMCAllowSuitStorage
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearQuartermaster

@@ -52,6 +52,16 @@
         amount: 7
   - type: Sprite
     state: pillbox
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1
+    areaInsert: true
+    areaInsertRadius: 1
+    whitelist:
+      tags:
+      - PillCanister
+  - type: RMCPillBottleTransfer
   - type: IgnoreContentsSize
     items:
       tags:

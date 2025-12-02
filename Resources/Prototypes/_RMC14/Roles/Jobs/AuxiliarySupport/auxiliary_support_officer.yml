@@ -76,6 +76,7 @@
         state: background_command
     - type: RMCAllowSuitStorage
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearASO
