@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Beam.Components;
@@ -49,9 +50,6 @@ public sealed class LineSystem : EntitySystem
         if (range != null)
             distance = Math.Min(range.Value, distance);
 
-        if (thick && distance > 1)
-            distance -= 1;
-
         var distanceX = end.X - start.X;
         var distanceY = end.Y - start.Y;
         var x = start.X;
@@ -63,26 +61,26 @@ public sealed class LineSystem : EntitySystem
         var gridComp = gridId == null ? null : _mapGridQuery.CompOrNull(gridId.Value);
         Entity<MapGridComponent>? grid = gridComp == null ? null : new Entity<MapGridComponent>(gridId!.Value, gridComp);
         var lastCoords = start;
-        var delay = 0;
 
         for (var i = 0; i < distance; i++)
         {
-            List<EntityCoordinates> coords = [];
-
             x += xOffset;
             y += yOffset;
             var center = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
             if (center == lastCoords)
                 continue;
 
-            lastCoords = center;
+            List<EntityCoordinates> coords = new(9);
             coords.Add(center);
-            if (thick && i > 0)
+            if (thick && i > 1)
             {
                 for (var xo = -1; xo < 2; xo++)
                 {
                     for (var yo = -1; yo < 2; yo++)
                     {
+                        if (xo == 0 && yo == 0)
+                            continue;
+
                         var point = new EntityCoordinates(start.EntityId, x + xo, y + yo).SnapToGrid(EntityManager, _mapManager);
                         coords.Add(point);
                     }
@@ -111,8 +109,8 @@ public sealed class LineSystem : EntitySystem
                 }
                 if (!isDuplicate)
                 {
+                    var delay = Vector2.Distance(entityCoords.Position, start.Position) - 1;
                     tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
-                    delay++;
                 }
 
                 if (blocked && j == 0)
@@ -124,6 +122,8 @@ public sealed class LineSystem : EntitySystem
 
             if (centerBlocked)
                 break;
+
+            lastCoords = center;
         }
 
         return tiles;

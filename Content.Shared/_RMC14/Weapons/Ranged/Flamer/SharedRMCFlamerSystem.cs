@@ -283,7 +283,14 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
 
-        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * Math.Min(tiles.Count, reagent.Radius));
+        //  333456
+        // 1233456
+        //  333456
+        var cost = tiles.Count;
+        if (reagent.FireSpread && cost > 2)
+            cost = (int)Math.Ceiling(cost / 3.0f);
+
+        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * cost);
         _solution.UpdateChemicals(solution);
 
         if (_net.IsClient)
@@ -336,6 +343,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
         var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
+        if (reagent.FireSpread)
+            maxRange -= 1;
+
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
