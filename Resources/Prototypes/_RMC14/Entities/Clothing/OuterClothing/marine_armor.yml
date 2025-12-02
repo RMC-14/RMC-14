@@ -286,6 +286,7 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-warden-jumpsuit
     whitelist:
       tags:
@@ -307,6 +308,7 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-cmp-jumpsuit
     whitelist:
       tags:
@@ -890,6 +892,7 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-mp-jumpsuit
     whitelist:
       tags:
@@ -909,6 +912,7 @@
     - 0,0,9,1 # 5 slots
   - type: ClothingBlockWebbing
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-intel-not-intel-jumpsuit
     whitelist:
       tags:

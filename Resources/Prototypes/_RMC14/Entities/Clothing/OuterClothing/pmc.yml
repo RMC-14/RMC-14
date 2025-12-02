@@ -27,6 +27,7 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-pmc-jumpsuit
     whitelist:
       tags:

@@ -22,6 +22,7 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-spp-jumpsuit
     whitelist:
       tags:
@@ -158,6 +159,7 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-spp-jumpsuit
     whitelist:
       tags:

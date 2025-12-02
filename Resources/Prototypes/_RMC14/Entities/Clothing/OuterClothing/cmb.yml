@@ -3,6 +3,7 @@
   abstract: true
   components:
   - type: ClothingRequireEquipped
+    autoUnequip: true
     denyReason: rmc-armor-not-cmb-jumpsuit
     whitelist:
       tags:
