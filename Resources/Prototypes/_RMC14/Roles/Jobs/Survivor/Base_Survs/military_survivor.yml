@@ -10,7 +10,7 @@
   spawnMenuRoleName: Military Survivor (Base)
   useLoadoutOfJob: CMSurvivor
   basePlaytimeTracker: true
-  hidden: true # Keep hidden
+  hidden: true # Keep hidden, this role exists as a base for other military survivor roles and so playtimes are visible in the character stats menu
 
 - type: startingGear
   id: RMCGearMilitarySurvivor
