@@ -35,7 +35,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -324,7 +323,7 @@
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
