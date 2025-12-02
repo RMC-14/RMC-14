@@ -776,8 +776,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 if (HasComp<StorageComponent>(item) && HasComp<StorageComponent>(itemToReplace))
                     _storage.TransferEntities(itemToReplace.Value, item);
-
-                QueueDel(itemToReplace.Value);
             }
         }
 
