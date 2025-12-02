@@ -17,7 +17,7 @@
     base: hangar
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallBunker
   name: bunker wall
   components:
@@ -35,7 +35,7 @@
     base: bunker
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallChigusa
   name: facility wall
   components:
