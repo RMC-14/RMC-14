@@ -16,10 +16,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swat_uniform.rsi
-  - type: Tag
-    tags:
-    - RMCUniformMarine
-    - RMCUniformCMB
 
 - type: entity
   parent: RMCCMBUniformBase
@@ -29,10 +25,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swatleader_uniform.rsi
-  - type: Tag
-    tags:
-    - RMCUniformMarine
-    - RMCUniformCMB
 
 - type: entity
   parent: [RMCCMBUniformBase, RMCAlternateFoldableUniformBase]
@@ -43,7 +35,3 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_marshal_uniform.rsi
   - type: Appearance
-  - type: Tag
-    tags:
-    - RMCUniformMarine
-    - RMCUniformCMB
