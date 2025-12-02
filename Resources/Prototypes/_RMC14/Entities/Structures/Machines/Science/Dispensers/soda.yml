@@ -5,7 +5,9 @@
   description: A drink fabricating machine, capable of producing many sugary drinks with just one touch.
   components:
   - type: Transform
-    anchored: true
+    anchored: false
+  - type: Anchorable
+    flags: None
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
@@ -49,7 +51,6 @@
           - GlassBeaker
           - ChemDispensable
           - DrinkGlass
-  - type: Anchorable
   - type: Pullable
 
 - type: entity

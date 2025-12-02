@@ -48,3 +48,20 @@
     sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
     state: maintenancehatch_alt
     offset: 0, 0.2
+
+- type: entity
+  parent: RMCLadder
+  id: RMCLadderRope
+  name: rope
+  description: A sturdy rope.
+  components:
+  - type: Sprite
+    state: rope
+
+- type: entity
+  parent: RMCLadderRope
+  id: RMCLadderRopeAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects

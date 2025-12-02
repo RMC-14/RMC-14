@@ -25,11 +25,7 @@
     solutions:
       drainBuffer:
         maxVol: 100
-      tank:
-        maxVol: 500
-  - type: DrainableSolution
-    solution: tank
-  - type: ReagentTank
+  - type: RMCSinkWater
   - type: Drain
     autoDrain: false
   - type: DumpableSolution
@@ -60,7 +56,6 @@
     sound:
       path: /Audio/Ambience/Objects/drain.ogg
 
-
 - type: entity
   parent: CMSinkEmpty
   id: CMSink
@@ -71,7 +66,3 @@
     solutions:
       drainBuffer:
         maxVol: 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 500

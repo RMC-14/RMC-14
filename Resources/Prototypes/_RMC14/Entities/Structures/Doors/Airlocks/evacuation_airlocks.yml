@@ -19,6 +19,23 @@
         - FullTileLayer # TODO RMC14 AirlockLayer when not bolted (in evac)
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/escape_pod_door.rsi
+    layers:
+    - state: closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
+    - state: locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
   - type: EvacuationDoor
   - type: Corrodible
     isCorrodible: true
@@ -27,6 +44,20 @@
     needsPower: false
   - type: Airlock
     powered: true
+
+- type: entity
+  parent: RMCAirlockEvacuation
+  id: RMCAirlockEvacuationBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/escape_pod_door_black.rsi
+
+- type: entity
+  parent: RMCAirlockEvacuation
+  id: RMCAirlockEvacuationWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/escape_pod_door_white.rsi
 
 - type: entity
   parent: RMCBaseDoorInvincible
