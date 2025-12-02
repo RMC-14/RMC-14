@@ -9,6 +9,8 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Log;
+using Robust.Client.ResourceManagement;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -17,6 +19,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IResourceCache _resCache = default!;
 
     public event Action? OnAnnouncementFinished;
 
@@ -27,6 +30,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     private readonly List<Control> _textContainers = new();
     private bool _hasTitle;
     private int _titleOffset;
+    private int _incognitoDebugFrames;
 
     public AnnouncementWidget()
     {
@@ -78,6 +82,12 @@ public sealed partial class AnnouncementWidget : UIWidget
 
         UpdateAnnouncement(deltaTime, currentTime);
         UpdatePosition();
+
+        if (ActiveAnnouncement?.Data.IncognitoMask == true && _spriteContainer != null && _incognitoDebugFrames < 8)
+        {
+            Logger.Info($"[AnnouncementWidget] Frame incognito debug #{_incognitoDebugFrames}: sprite Desired={_spriteContainer.DesiredSize}, Pixel={_spriteContainer.PixelSize}, GlobalRect={_spriteContainer.GlobalPixelRect}, parent={_spriteContainer.Parent?.GetType().Name}, parentRect={( _spriteContainer.Parent as Control)?.GlobalPixelRect}, widgetRect={GlobalPixelRect}, position={Position}");
+            _incognitoDebugFrames++;
+        }
     }
 
     private void FinishAnnouncement()
@@ -97,6 +107,7 @@ public sealed partial class AnnouncementWidget : UIWidget
         Modulate = Color.White;
         _hasTitle = false;
         _titleOffset = 0;
+        _incognitoDebugFrames = 0;
     }
 
     private string[] PreprocessText(string[] originalText)

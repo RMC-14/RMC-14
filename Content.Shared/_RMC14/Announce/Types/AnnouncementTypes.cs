@@ -103,6 +103,17 @@ public enum AnnouncementTitlePosition : byte
 }
 
 [Serializable, NetSerializable]
+public enum AnnouncementDecalPlacement : byte
+{
+    ReplaceSprite,
+    BehindSprite,
+    Left,
+    Right,
+    Above,
+    Below
+}
+
+[Serializable, NetSerializable]
 public enum EasingType : byte
 {
     Linear,
@@ -800,6 +811,10 @@ public sealed class AnnouncementNetData
     public float SpriteScale { get; set; } = 1.0f;
     public Vector2 SpriteOffset { get; set; }
     public string? Title { get; set; }
+    public string? DecalRsi { get; set; }
+    public string? DecalState { get; set; }
+    public AnnouncementDecalPlacement? DecalPlacement { get; set; }
+    public bool IncognitoMask { get; set; }
 }
 
 [Serializable, NetSerializable]
@@ -832,4 +847,8 @@ public sealed class AnnouncementRequest
     public Vector2? SpriteOffset { get; set; }
     public string? SpeakerNameOverride { get; set; }
     public string? Title { get; set; }
+    public string? DecalRsi { get; set; }
+    public string? DecalState { get; set; }
+    public AnnouncementDecalPlacement? DecalPlacement { get; set; }
+    public bool IncognitoMask { get; set; }
 }

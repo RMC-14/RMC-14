@@ -8,6 +8,9 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
 using System.Linq;
 using Robust.Shared.Utility;
+using Robust.Shared.Log;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Graphics.RSI;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -36,8 +39,9 @@ public sealed partial class AnnouncementWidget
             SeparationOverride = 0
         };
 
-        CreateTextLabels(announcement.Text, titleText, style);
+        // Build sprite first so text width calculations can account for its size.
         CreateSpriteContainer(announcement);
+        CreateTextLabels(announcement.Text, titleText, style);
 
         if (_spriteContainer != null)
         {
@@ -124,7 +128,22 @@ public sealed partial class AnnouncementWidget
     private void CreateTextLabels(string[] text, string? titleText, AnnouncementStyle style)
     {
         var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
+        var baseMaxWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
         var optimalWidth = AnnouncementStyling.CalculateOptimalTextWidth(text, style, screenSize);
+        var maxAllowedWidth = Math.Min(baseMaxWidth, optimalWidth * 1.1f);
+        // Expand available width when the sprite is laid out horizontally with text.
+        if (_spriteContainer != null && (style.SpritePosition == AnnouncementSpritePosition.Left || style.SpritePosition == AnnouncementSpritePosition.Right))
+        {
+            _spriteContainer.Measure(screenSize);
+            var spriteWidth = _spriteContainer.DesiredSize.X;
+            maxAllowedWidth = baseMaxWidth + spriteWidth;
+            Logger.Info($"[AnnouncementWidget] Sizing -> screen {screenSize}, baseMaxWidth {baseMaxWidth}, spriteWidth {spriteWidth}, adjustedMaxWidth {maxAllowedWidth}, hasTitle {_hasTitle}");
+        }
+        else
+        {
+            Logger.Info($"[AnnouncementWidget] Sizing -> screen {screenSize}, maxAllowedWidth {maxAllowedWidth}, hasTitle {_hasTitle}");
+        }
+        optimalWidth = Math.Min(maxAllowedWidth, optimalWidth);
 
         var totalLabels = text.Length + _titleOffset;
         _richTextLabels = new RichTextLabel[totalLabels];
@@ -132,23 +151,33 @@ public sealed partial class AnnouncementWidget
         var outerContainer = new Control
         {
             HorizontalAlignment = HAlignment.Center,
-            VerticalAlignment = VAlignment.Top
+            VerticalAlignment = VAlignment.Top,
+            HorizontalExpand = true,
+            SetWidth = optimalWidth,
+            MinWidth = optimalWidth
         };
-
         var container = new PanelContainer
         {
             HorizontalAlignment = HAlignment.Stretch,
-            VerticalAlignment = VAlignment.Stretch
+            VerticalAlignment = VAlignment.Stretch,
+            HorizontalExpand = true
         };
+        container.SetWidth = optimalWidth;
+        container.MinWidth = optimalWidth;
 
         var textContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalAlignment = HAlignment.Center,
-            VerticalAlignment = VAlignment.Top
+            VerticalAlignment = VAlignment.Top,
+            HorizontalExpand = true
         };
+        textContainer.MaxWidth = optimalWidth;
+        textContainer.MinWidth = optimalWidth;
+        textContainer.SetWidth = optimalWidth;
 
         var labelIndex = 0;
+        RichTextLabel? titleLabelRef = null;
 
         if (_hasTitle && !string.IsNullOrEmpty(titleText))
         {
@@ -156,17 +185,18 @@ public sealed partial class AnnouncementWidget
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center,
-                MaxWidth = optimalWidth
+                MaxWidth = maxAllowedWidth,
+                HorizontalExpand = false
             };
 
-            var titleMessage = new FormattedMessage();
-            titleMessage.PushColor(style.TitleColor);
-            titleMessage.AddText(titleText);
-            titleMessage.Pop();
+            var titleMessage = CreateFormattedTitleMessage(titleText, style, screenSize, maxAllowedWidth);
             titleLabel.SetMessage(titleMessage);
+            var titleResponsive = AnnouncementStyling.CalculateResponsiveFontSize(new[] { titleText }, style.TitleFontSize, maxAllowedWidth, screenSize);
+            Logger.Info($"[AnnouncementWidget] Title label MaxWidth {titleLabel.MaxWidth}, text \"{titleText}\", titleFont {style.TitleFontSize}, responsive {titleResponsive}, fontResource {style.TitleFont}");
 
             textContainer.AddChild(titleLabel);
             _richTextLabels[labelIndex] = titleLabel;
+            titleLabelRef = titleLabel;
             labelIndex++;
         }
 
@@ -176,7 +206,8 @@ public sealed partial class AnnouncementWidget
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center,
-                MaxWidth = optimalWidth
+                MaxWidth = maxAllowedWidth,
+                HorizontalExpand = false
             };
 
             textContainer.AddChild(label);
@@ -187,6 +218,8 @@ public sealed partial class AnnouncementWidget
         container.AddChild(textContainer);
         outerContainer.AddChild(container);
 
+        CRTOverlay? crtOverlayRef = null;
+
         if (style.AnimationEnhancements?.EnableCRT == true)
         {
             var crtSettings = GetCRTSettingsFromStyle(style);
@@ -194,28 +227,140 @@ public sealed partial class AnnouncementWidget
             {
                 Settings = crtSettings,
                 HorizontalAlignment = HAlignment.Stretch,
-                VerticalAlignment = VAlignment.Stretch
+                VerticalAlignment = VAlignment.Stretch,
+                HorizontalExpand = true,
+                MinWidth = optimalWidth,
+                SetWidth = optimalWidth
             };
             outerContainer.AddChild(crtOverlay);
+            crtOverlayRef = crtOverlay;
         }
 
         _textContainers.Add(outerContainer);
         ApplyTextStyling();
+
+        // Measure to understand actual sizes after layout
+        outerContainer.Measure(screenSize);
+        container.Measure(screenSize);
+        textContainer.Measure(screenSize);
+        titleLabelRef?.Measure(screenSize);
+        crtOverlayRef?.Measure(screenSize);
+        Logger.Info($"[AnnouncementWidget] Measured outer width {outerContainer.DesiredSize.X}, panel width {container.DesiredSize.X}, text stack width {textContainer.DesiredSize.X}");
+        Logger.Info($"[AnnouncementWidget] Title desired width {(titleLabelRef?.DesiredSize.X ?? 0)}, maxAllowed {maxAllowedWidth}, Size {titleLabelRef?.Size ?? Vector2.Zero}, MinSize {titleLabelRef?.MinSize ?? Vector2.Zero}, MaxSize {titleLabelRef?.MaxSize ?? Vector2.Zero}");
+        Logger.Info($"[AnnouncementWidget] Widget desired size {DesiredSize}, UI scale {style.UIScale}");
+        if (crtOverlayRef != null)
+        {
+            Logger.Info($"[AnnouncementWidget] CRT overlay desired {crtOverlayRef.DesiredSize}, MinWidth {crtOverlayRef.MinWidth}");
+        }
+    }
+
+    private void ApplyIncognitoFinal(AnnouncementNetData announcement, Vector2 screenSize)
+    {
+        var wantsEyeBand = string.Equals(announcement.ConfigId, "PMC", StringComparison.OrdinalIgnoreCase);
+        var applyMask = announcement.IncognitoMask;
+
+        if ((!applyMask && !wantsEyeBand) || _spriteContainer == null)
+        {
+            Logger.Info($"[AnnouncementWidget] Incognito early-exit: mask={announcement.IncognitoMask}, eyeBand={wantsEyeBand}, spriteContainer={_spriteContainer != null}");
+            return;
+        }
+
+        _spriteContainer.Measure(screenSize);
+        var spriteSize = _spriteContainer.DesiredSize;
+        var spriteContent = _spriteContainer;
+        Logger.Info($"[AnnouncementWidget] Incognito measure pre-wrap: sprite Desired {spriteSize}, Type={spriteContent.GetType().Name}");
+
+        // Wrap sprite and mask in a fixed-size container so the overlay fully covers the sprite.
+        var wrapper = new Control
+        {
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Top,
+            HorizontalExpand = true,
+            VerticalExpand = true,
+            MinWidth = spriteSize.X,
+            MinHeight = spriteSize.Y,
+            SetWidth = spriteSize.X,
+            SetHeight = spriteSize.Y,
+            RectClipContent = true
+        };
+
+        // Ensure children match the wrapper bounds.
+        spriteContent.HorizontalAlignment = HAlignment.Stretch;
+        spriteContent.VerticalAlignment = VAlignment.Stretch;
+        spriteContent.HorizontalExpand = true;
+        spriteContent.VerticalExpand = true;
+        spriteContent.MinWidth = spriteSize.X;
+        spriteContent.MinHeight = spriteSize.Y;
+
+        wrapper.AddChild(spriteContent);
+        if (applyMask)
+        {
+            var mask = new IncognitoOverlay
+            {
+                HorizontalAlignment = HAlignment.Stretch,
+                VerticalAlignment = VAlignment.Stretch,
+                HorizontalExpand = true,
+                VerticalExpand = true,
+                MinWidth = spriteSize.X,
+                MinHeight = spriteSize.Y,
+                SetWidth = spriteSize.X,
+                SetHeight = spriteSize.Y
+            };
+            wrapper.AddChild(mask);
+        }
+
+        if (applyMask || wantsEyeBand)
+        {
+            // Separate eye band overlay so it can be toggled/adjusted independently from static.
+            var eyeBand = new EyeBandOverlay
+            {
+                HorizontalAlignment = HAlignment.Stretch,
+                VerticalAlignment = VAlignment.Stretch,
+                HorizontalExpand = true,
+                VerticalExpand = true
+            };
+            wrapper.AddChild(eyeBand);
+        }
+
+        wrapper.Measure(screenSize);
+        Logger.Info($"[AnnouncementWidget] Incognito overlay applied; sprite Desired {spriteContent.DesiredSize}, wrapper {wrapper.DesiredSize}");
+        LogSpriteTree("Incognito tree", wrapper, 1);
+
+        _spriteContainer = wrapper;
     }
 
     private void CreateSpriteContainer(AnnouncementNetData announcement)
     {
+        Control? decalControl = null;
+        var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
+        Logger.Info($"[AnnouncementWidget] CreateSpriteContainer start; incognito={announcement.IncognitoMask}, decal={announcement.DecalRsi}:{announcement.DecalState}, showSprite={announcement.ShowSprite}, speakerEntity={announcement.SpeakerEntity}");
+
+        if (!string.IsNullOrEmpty(announcement.DecalRsi) && !string.IsNullOrEmpty(announcement.DecalState))
+        {
+            TryCreateDecalContainer(announcement, out decalControl);
+            if (announcement.DecalPlacement == AnnouncementDecalPlacement.ReplaceSprite && decalControl != null)
+            {
+                _spriteContainer = decalControl;
+                ApplyIncognitoFinal(announcement, screenSize);
+                return;
+            }
+        }
+
         if (!announcement.SpeakerEntity.HasValue ||
             !announcement.ShowSprite ||
             !_entityManager.TryGetEntity(announcement.SpeakerEntity.Value, out var speakerUid))
         {
+            Logger.Info($"[AnnouncementWidget] Sprite skipped: hasSpeaker={announcement.SpeakerEntity.HasValue}, showSprite={announcement.ShowSprite}, speakerLookup={(announcement.SpeakerEntity.HasValue && _entityManager.TryGetEntity(announcement.SpeakerEntity.Value, out _))}");
+            if (!string.IsNullOrEmpty(announcement.DecalRsi) && !string.IsNullOrEmpty(announcement.DecalState))
+            {
+                TryCreateDecalContainer(announcement, out _spriteContainer);
+                ApplyIncognitoFinal(announcement, screenSize);
+            }
             return;
         }
 
         var style = announcement.Style;
         var spriteScale = style.SpriteScale * announcement.SpriteScale;
-
-        var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
         var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
 
         var clipContainer = new Control
@@ -235,14 +380,13 @@ public sealed partial class AnnouncementWidget
         spriteView.SetEntity(speakerUid.Value);
 
         SetSpriteDisplayProperties(clipContainer, spriteView, style, spriteScale, screenScaleFactor);
-
         clipContainer.AddChild(spriteView);
 
         Control container = clipContainer;
 
         if (style.ShowSpriteBox)
         {
-            var outerContainer = new Control
+            var outerPanel = new Control
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top
@@ -273,47 +417,39 @@ public sealed partial class AnnouncementWidget
             styleBox.ContentMarginRightOverride = padding;
 
             panel.PanelOverride = styleBox;
-            panel.AddChild(clipContainer);
-            outerContainer.AddChild(panel);
-
-            if (style.AnimationEnhancements?.EnableCRT == true)
-            {
-                var crtSettings = GetCRTSettingsFromStyle(style);
-                var crtOverlay = new CRTOverlay
-                {
-                    Settings = crtSettings,
-                    HorizontalAlignment = HAlignment.Stretch,
-                    VerticalAlignment = VAlignment.Stretch
-                };
-                outerContainer.AddChild(crtOverlay);
-            }
-
-            container = outerContainer;
+            panel.AddChild(container);
+            outerPanel.AddChild(panel);
+            container = outerPanel;
         }
-        else if (style.AnimationEnhancements?.EnableCRT == true)
+
+        if (style.AnimationEnhancements?.EnableCRT == true)
         {
-            var outerContainer = new Control
+            var crtWrapper = new Control
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top
             };
 
-            outerContainer.AddChild(clipContainer);
+            crtWrapper.AddChild(container);
 
-            var crtSettings = GetCRTSettingsFromStyle(style);
             var crtOverlay = new CRTOverlay
             {
-                Settings = crtSettings,
+                Settings = GetCRTSettingsFromStyle(style),
                 HorizontalAlignment = HAlignment.Stretch,
                 VerticalAlignment = VAlignment.Stretch
             };
 
-            outerContainer.AddChild(crtOverlay);
-            container = outerContainer;
+            crtWrapper.AddChild(crtOverlay);
+            container = crtWrapper;
         }
 
         if (style.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
         {
+            // Apply incognito before attaching the speaker name so the mask only covers the sprite.
+            _spriteContainer = container;
+            ApplyIncognitoFinal(announcement, screenSize);
+            container = _spriteContainer!;
+
             var nameContainer = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
@@ -322,34 +458,205 @@ public sealed partial class AnnouncementWidget
                 SeparationOverride = 0
             };
 
-            var nameLabel = new RichTextLabel
+            var label = new RichTextLabel
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center
             };
 
-            var nameMessage = CreateFormattedMessage(announcement.SpeakerName, new AnnouncementStyle
+            var message = CreateFormattedMessage(announcement.SpeakerName, new AnnouncementStyle
             {
                 PrimaryColor = style.SpeakerNameColor,
                 FontSize = style.SpeakerNameFontSize
             });
-            nameLabel.SetMessage(nameMessage);
+
+            label.SetMessage(message);
 
             if (style.SpeakerNamePosition == AnnouncementSpeakerNamePosition.Above)
             {
-                nameContainer.AddChild(nameLabel);
+                nameContainer.AddChild(label);
                 nameContainer.AddChild(container);
             }
             else
             {
                 nameContainer.AddChild(container);
-                nameContainer.AddChild(nameLabel);
+                nameContainer.AddChild(label);
             }
 
             container = nameContainer;
         }
 
+        // If no speaker name, still apply incognito before decal placement.
+        if (!style.ShowSpeakerName || string.IsNullOrEmpty(announcement.SpeakerName))
+        {
+            _spriteContainer = container;
+            ApplyIncognitoFinal(announcement, screenSize);
+            container = _spriteContainer!;
+        }
+
         _spriteContainer = container;
+        Logger.Info($"[AnnouncementWidget] Sprite container built: type={_spriteContainer.GetType().Name}, Desired={_spriteContainer.DesiredSize}");
+        ApplyDecalPlacement(decalControl, announcement, screenSize);
+    }
+
+    private void LogSpriteTree(string label, Control node, int depth)
+    {
+        var pad = new string(' ', depth * 2);
+        Logger.Info($"[AnnouncementWidget] {label} depth={depth} type={node.GetType().Name} Desired={node.DesiredSize} Pixel={node.PixelSize} Global={node.GlobalPixelRect} RectClip={node.RectClipContent} Visible={node.Visible}");
+        foreach (var child in node.Children)
+        {
+            LogSpriteTree(label, child, depth + 1);
+        }
+    }
+
+
+    private void ApplyDecalPlacement(Control? decalControl, AnnouncementNetData announcement, Vector2 screenSize)
+    {
+        if (decalControl == null || _spriteContainer == null)
+            return;
+
+        Control? finalContainer = null;
+        switch (announcement.DecalPlacement)
+        {
+            case AnnouncementDecalPlacement.BehindSprite:
+                _spriteContainer.Measure(screenSize);
+                var spriteSize = _spriteContainer.DesiredSize;
+                var overlay = new Control
+                {
+                    HorizontalAlignment = HAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
+                    HorizontalExpand = true,
+                    VerticalExpand = true,
+                    SetWidth = spriteSize.X,
+                    SetHeight = spriteSize.Y,
+                    MinWidth = spriteSize.X,
+                    MinHeight = spriteSize.Y,
+                    RectClipContent = true
+                };
+
+                // Center the decal behind the sprite so it sits more to the right instead of hugging the left.
+                decalControl.HorizontalAlignment = HAlignment.Center;
+                decalControl.VerticalAlignment = VAlignment.Center;
+                decalControl.HorizontalExpand = false;
+                decalControl.VerticalExpand = false;
+                _spriteContainer.HorizontalAlignment = HAlignment.Stretch;
+                _spriteContainer.VerticalAlignment = VAlignment.Stretch;
+
+                overlay.AddChild(decalControl);
+                overlay.AddChild(_spriteContainer);
+                overlay.Measure(screenSize);
+                finalContainer = overlay;
+                Logger.Info($"[AnnouncementWidget] Decal behind sprite applied: overlay size {overlay.DesiredSize}, sprite {spriteSize}");
+                break;
+            case AnnouncementDecalPlacement.Left:
+                var leftBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                    HorizontalAlignment = HAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
+                    SeparationOverride = 0
+                };
+                leftBox.AddChild(decalControl);
+                leftBox.AddChild(_spriteContainer);
+                leftBox.Measure(screenSize);
+                finalContainer = leftBox;
+                Logger.Info($"[AnnouncementWidget] Decal left placement: decal {decalControl.DesiredSize}, sprite {_spriteContainer.DesiredSize}, combined {leftBox.DesiredSize}");
+                break;
+            case AnnouncementDecalPlacement.Right:
+                var rightBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                    HorizontalAlignment = HAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
+                    SeparationOverride = 0
+                };
+                rightBox.AddChild(_spriteContainer);
+                rightBox.AddChild(decalControl);
+                rightBox.Measure(screenSize);
+                finalContainer = rightBox;
+                Logger.Info($"[AnnouncementWidget] Decal right placement: decal {decalControl.DesiredSize}, sprite {_spriteContainer.DesiredSize}, combined {rightBox.DesiredSize}");
+                break;
+            case AnnouncementDecalPlacement.Above:
+                var aboveBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalAlignment = HAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
+                    SeparationOverride = 0
+                };
+                aboveBox.AddChild(decalControl);
+                aboveBox.AddChild(_spriteContainer);
+                aboveBox.Measure(screenSize);
+                finalContainer = aboveBox;
+                Logger.Info($"[AnnouncementWidget] Decal above placement: decal {decalControl.DesiredSize}, sprite {_spriteContainer.DesiredSize}, combined {aboveBox.DesiredSize}");
+                break;
+            case AnnouncementDecalPlacement.Below:
+                var belowBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalAlignment = HAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
+                    SeparationOverride = 0
+                };
+                belowBox.AddChild(_spriteContainer);
+                belowBox.AddChild(decalControl);
+                belowBox.Measure(screenSize);
+                finalContainer = belowBox;
+                Logger.Info($"[AnnouncementWidget] Decal below placement: decal {decalControl.DesiredSize}, sprite {_spriteContainer.DesiredSize}, combined {belowBox.DesiredSize}");
+                break;
+        }
+
+        if (finalContainer != null)
+            _spriteContainer = finalContainer;
+    }
+
+    private void TryCreateDecalContainer(AnnouncementNetData announcement, out Control? containerOut)
+    {
+        containerOut = null;
+        try
+        {
+            var resPath = new ResPath(announcement.DecalRsi!);
+            var rsi = _resCache.GetResource<RSIResource>(resPath);
+            if (!rsi.RSI.TryGetState(announcement.DecalState!, out var state) || state == null || state.DelayCount <= 0)
+            {
+                Logger.Info($"[AnnouncementWidget] Decal missing state {announcement.DecalState} in {announcement.DecalRsi}");
+                return;
+            }
+
+            var texture = state.GetFrame(RsiDirection.South, 0);
+            const float decalTestScale = 4f;
+            var texRect = new TextureRect
+            {
+                Texture = texture,
+                Stretch = TextureRect.StretchMode.Scale,
+                SetWidth = texture.Width * decalTestScale,
+                SetHeight = texture.Height * decalTestScale,
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Top,
+                HorizontalExpand = true,
+                VerticalExpand = true
+            };
+
+            var width = texture.Width * decalTestScale;
+            var height = texture.Height * decalTestScale;
+
+            var clipContainer = new Control
+            {
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Top,
+                RectClipContent = true,
+                SetWidth = width,
+                SetHeight = height
+            };
+            clipContainer.AddChild(texRect);
+
+            containerOut = clipContainer;
+            Logger.Info($"[AnnouncementWidget] Decal container created for {announcement.DecalRsi}:{announcement.DecalState} size {width}x{height} (scaled x{decalTestScale})");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"[AnnouncementWidget] Failed to load decal {announcement.DecalRsi}:{announcement.DecalState}: {ex}");
+        }
     }
 
     private void SetSpriteDisplayProperties(Control clipContainer, SpriteView spriteView, AnnouncementStyle style, float spriteScale, float screenScaleFactor)
@@ -499,10 +806,18 @@ public sealed partial class AnnouncementWidget
     private FormattedMessage CreateFormattedMessage(string text, AnnouncementStyle style)
     {
         var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
-        var optimalWidth = AnnouncementStyling.CalculateOptimalTextWidth(ActiveAnnouncement?.Data.Text ?? new[] { text }, style, screenSize);
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, optimalWidth, screenSize);
+        var maxAllowedWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, maxAllowedWidth, screenSize);
 
         return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor);
+    }
+
+    private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)
+    {
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleFontSize, maxAllowedWidth, screenSize);
+        // Keep titles slightly smaller than body to avoid overflow and give hierarchy.
+        var cappedFontSize = Math.Min(responsiveFontSize, style.FontSize * 0.9f);
+        return AnnouncementStyling.CreateFormattedMessage(text, cappedFontSize, style.TitleColor, style.TitleFont);
     }
 
     private void UpdatePosition()

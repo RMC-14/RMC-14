@@ -7,7 +7,7 @@
     animation: Typewriter
     position: TopLeft
     showBackground: true
-    backgroundAlpha: 0.9
+    backgroundAlpha: 0.7
     backgroundColor: "#0a1a2d"
     primaryColor: "#4a9eff"
     secondaryColor: "#87ceeb"
@@ -103,3 +103,193 @@
   canInterrupt: true
   canBeInterrupted: false
   aliases: ["command", "cmd", "hc", "marine_command"]
+  decalRsi: "/Textures/_RMC14/Structures/Wallmounts/banners.rsi"
+  decalState: "unmcflag"
+  decalPlacement: BehindSprite
+  incognitoMask: false
+
+- type: announcementPreset
+  id: CLF
+  name: "CLF Broadcast"
+  description: "Colony Liberation Front transmission"
+  target: All
+  style:
+    animation: Typewriter
+    position: TopLeft
+    showBackground: true
+    backgroundAlpha: 0.9
+    backgroundColor: "#0a1a0a"
+    primaryColor: "#ff2a2a"
+    secondaryColor: "#ff6666"
+    accentColor: "#ffffff"
+    fontSize: 20
+    lineHeight: 48
+    printSpeed: 0.03
+    holdDuration: 10
+    shakeIntensity: 0.6
+    flickerChance: 0.02
+    glitchChance: 0.02
+    showSpriteBox: true
+    spriteBoxColor: "#0a1a0a"
+    spriteBoxBorderColor: "#ff2a2a"
+    spriteBoxBorderThickness: 2
+    spriteBoxPadding: 18
+    spriteGlow: true
+    spriteGlowColor: "#ff2a2a"
+    spriteGlowIntensity: 0.7
+    showSpeakerName: true
+    speakerNameColor: "#ffffff"
+    speakerNameFontSize: 14
+    speakerNamePosition: Below
+    spritePosition: Left
+    spriteSpacing: 0
+    spriteDisplayMode: TopHalf
+    spriteScale: 1
+    uiScale: 3
+    showTitle: true
+    title: ">> CLF TRANSMISSION <<"
+    titleColor: "#ff2a2a"
+    titleFontSize: 36
+    titleFont: "DefaultBold"
+    titlePosition: Above
+    animationEnhancements:
+      enableCRT: true
+      crtSettings:
+        enabled: true
+        showScanlines: true
+        scanlineSpacing: 3
+        scanlineThickness: 2
+        scanlineAlpha: 0.7
+        scanlineSpeed: 60
+        scanlineColor: "#000000"
+        showNoise: true
+        noiseIntensity: 4
+        noiseAlpha: 0.6
+        showVignette: true
+        vignetteIntensity: 2.5
+        vignetteColor: "#000000"
+        showGlow: true
+        glowIntensity: 1.2
+        glowSpeed: 1
+        glowColor: "#ff2a2a"
+        showCurvature: true
+        curvatureAmount: 0.3
+        showChromaticAberration: true
+        chromaticAmount: 1
+    textEnhancements:
+      showOutline: true
+      outlineColor: "#000000"
+      outlineThickness: 2
+    backgroundStyle:
+      type: Gradient
+      showGradient: true
+      gradientStart: "#0a1a0a"
+      gradientEnd: "#031003"
+      direction: Vertical
+    enableScreenShake: false
+    shakeDuration: 1
+    enableFlash: false
+    flashColor: "#ffffff"
+    flashDuration: 0.05
+    flashCount: 1
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  soundVolume: 1.0
+  priority: 7
+  canInterrupt: true
+  canBeInterrupted: true
+  aliases: ["clf", "liberation", "front"]
+  incognitoMask: false
+
+- type: announcementPreset
+  id: PMC
+  name: "PMC Dispatch"
+  description: "Private Military Contractor transmission"
+  target: Marines
+  style:
+    animation: Typewriter
+    position: TopRight
+    showBackground: true
+    backgroundAlpha: 0.9
+    backgroundColor: "#0b0b0f"
+    primaryColor: "#b2f2ff"
+    secondaryColor: "#6dd3ff"
+    accentColor: "#ffffff"
+    fontSize: 20
+    lineHeight: 48
+    printSpeed: 0.025
+    holdDuration: 10
+    shakeIntensity: 0.6
+    flickerChance: 0.01
+    glitchChance: 0.01
+    showSpriteBox: true
+    spriteBoxColor: "#0b0b0f"
+    spriteBoxBorderColor: "#6dd3ff"
+    spriteBoxBorderThickness: 2
+    spriteBoxPadding: 18
+    spriteGlow: true
+    spriteGlowColor: "#6dd3ff"
+    spriteGlowIntensity: 0.6
+    showSpeakerName: true
+    speakerNameColor: "#d1f7ff"
+    speakerNameFontSize: 14
+    speakerNamePosition: Below
+    spritePosition: Left
+    spriteSpacing: 0
+    spriteDisplayMode: TopHalf
+    spriteScale: 1
+    uiScale: 3
+    showTitle: true
+    title: ">> PMC DISPATCH <<"
+    titleColor: "#6dd3ff"
+    titleFontSize: 36
+    titleFont: "DefaultBold"
+    titlePosition: Above
+    animationEnhancements:
+      enableCRT: true
+      crtSettings:
+        enabled: true
+        showScanlines: true
+        scanlineSpacing: 3
+        scanlineThickness: 2
+        scanlineAlpha: 0.7
+        scanlineSpeed: 60
+        scanlineColor: "#000000"
+        showNoise: true
+        noiseIntensity: 4
+        noiseAlpha: 0.6
+        showVignette: true
+        vignetteIntensity: 2.5
+        vignetteColor: "#000000"
+        showGlow: true
+        glowIntensity: 1.2
+        glowSpeed: 1
+        glowColor: "#6dd3ff"
+        showCurvature: true
+        curvatureAmount: 0.3
+        showChromaticAberration: true
+        chromaticAmount: 1
+    textEnhancements:
+      showOutline: true
+      outlineColor: "#000000"
+      outlineThickness: 2
+    backgroundStyle:
+      type: Gradient
+      showGradient: true
+      gradientStart: "#0b0b0f"
+      gradientEnd: "#03070c"
+      direction: Vertical
+    enableScreenShake: false
+    shakeDuration: 1
+    enableFlash: false
+    flashColor: "#ffffff"
+    flashDuration: 0.05
+    flashCount: 1
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  soundVolume: 1.0
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  aliases: ["pmc", "contractor", "dispatch"]
+  incognitoMask: false

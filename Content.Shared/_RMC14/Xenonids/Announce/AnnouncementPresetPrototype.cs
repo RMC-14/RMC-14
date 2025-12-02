@@ -41,4 +41,16 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
 
     [DataField]
     public List<string> Aliases { get; private set; } = new();
+
+    [DataField]
+    public string? DecalRsi { get; private set; }
+
+    [DataField]
+    public string? DecalState { get; private set; }
+
+    [DataField]
+    public AnnouncementDecalPlacement? DecalPlacement { get; private set; }
+
+    [DataField]
+    public bool IncognitoMask { get; private set; }
 }

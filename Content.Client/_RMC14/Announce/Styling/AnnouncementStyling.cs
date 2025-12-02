@@ -240,9 +240,12 @@ public static class AnnouncementStyling
         label.Text = formattedText;
     }
 
-    public static string CreateFormattedTextWithSize(string text, float fontSize, Color color)
+    public static string CreateFormattedTextWithSize(string text, float fontSize, Color color, string? font = null)
     {
         var colorHex = ColorToHex(color);
+        if (!string.IsNullOrEmpty(font))
+            return $"[font=\"{font}\" size={(int)fontSize}][color={colorHex}]{text}[/color][/font]";
+
         return $"[font size={(int)fontSize}][color={colorHex}]{text}[/color][/font]";
     }
 
@@ -254,9 +257,9 @@ public static class AnnouncementStyling
         return $"#{r:X2}{g:X2}{b:X2}";
     }
 
-    public static FormattedMessage CreateFormattedMessage(string text, float fontSize, Color color)
+    public static FormattedMessage CreateFormattedMessage(string text, float fontSize, Color color, string? font = null)
     {
-        var formattedText = CreateFormattedTextWithSize(text, fontSize, color);
+        var formattedText = CreateFormattedTextWithSize(text, fontSize, color, font);
         return FormattedMessage.FromMarkupPermissive(formattedText);
     }
 }

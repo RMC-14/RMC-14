@@ -164,6 +164,11 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var priority = request.PriorityOverride ?? preset.Priority;
         var canInterrupt = request.CanInterrupt ?? preset.CanInterrupt;
         var canBeInterrupted = request.CanBeInterrupted ?? preset.CanBeInterrupted;
+        var decalRsi = request.DecalRsi ?? preset.DecalRsi;
+        var decalState = request.DecalState ?? preset.DecalState;
+        var decalPlacement = request.DecalPlacement ?? preset.DecalPlacement;
+        var incognitoMask = request.IncognitoMask || preset.IncognitoMask;
+        Logger.Info($"[GeneralAnnounceSystem] Preset {preset.ID} resolved decalRsi={decalRsi}, decalState={decalState}, requestDecalRsi={request.DecalRsi}, requestDecalState={request.DecalState}");
 
         var filter = _targetFilter.Build(request.Target);
         if (filter.Count == 0)
@@ -209,8 +214,13 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             SpeakerName = speakerName,
             ShowSprite = request.ShowSprite,
             SpriteScale = request.SpriteScale,
-            SpriteOffset = request.SpriteOffset ?? Vector2.Zero
+            SpriteOffset = request.SpriteOffset ?? Vector2.Zero,
+            DecalRsi = decalRsi,
+            DecalState = decalState,
+            DecalPlacement = decalPlacement,
+            IncognitoMask = incognitoMask
         };
+        Logger.Info($"[GeneralAnnounceSystem] Sending announcement with decalRsi={clientData.DecalRsi}, decalState={clientData.DecalState}");
 
         var msg = new AnnouncementNetMessage(clientData);
         RaiseNetworkEvent(msg, filter);
