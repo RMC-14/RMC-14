@@ -522,6 +522,7 @@
     access:
     - [ "CMAccessMedical" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Blood Packs
