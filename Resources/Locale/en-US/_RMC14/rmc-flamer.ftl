@@ -11,3 +11,12 @@ rmc-flamer-tank-examine-short = Tank properties
 rmc-flamer-tank-examine-line-0 = [color=yellow]Max Intensity[/color]: [color=lightblue]{$value}[/color]
 rmc-flamer-tank-examine-line-1 = [color=yellow]Max Duration[/color]: [color=lightblue]{$value}[/color]
 rmc-flamer-tank-examine-line-2 = [color=yellow]Max Range[/color]: [color=lightblue]{$value}[/color]
+
+rmc-flamer-guidebook-header = Flammability
+rmc-flamer-guidebook-description-base = It burns with an intensity of [bold]{$intensity}[/bold] for [bold]{$duration}[/bold] seconds.
+rmc-flamer-guidebook-description-radius = It can reach up to [bold]{$radius}[/bold] meters{$spread ->
+        [true]{" "}and may [bold]spread itself[/bold]
+        *[false]{""}
+    }.
+rmc-flamer-guidebook-description-shred = It [bold]reacts[/bold] with inorganic materials.
+rmc-flamer-guidebook-description-bypass = It [bold]penetrates[/bold] the best fire retardants.
