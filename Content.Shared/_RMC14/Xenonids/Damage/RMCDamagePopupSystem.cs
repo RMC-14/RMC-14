@@ -26,7 +26,7 @@ public sealed class RMCDamagePopupSystem : EntitySystem
 
     private void ShowClientDamagePopup(EntityUid target, FixedPoint2 damageTotal, DamagePopupType type, EntityUid? origin, DamageSpecifier? damageDelta)
     {
-        if (damageDelta == null || _net.IsServer)
+        if (damageDelta == null)
             return;
 
         var delta = damageDelta.GetTotal();
@@ -38,6 +38,6 @@ public sealed class RMCDamagePopupSystem : EntitySystem
             DamagePopupType.Hit => "!",
             _ => "Invalid type",
         };
-        _popupSystem.PopupPredicted(msg, target, origin);
+        _popupSystem.PopupClient(msg, target, origin);
     }
 }
