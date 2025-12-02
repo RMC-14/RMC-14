@@ -14,6 +14,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
+      strength: Normal
       plasmaCost: 100
       time: 50 # seconds
       dps: 8
@@ -43,6 +44,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
+      strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
       dps: 4
@@ -64,6 +66,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 125
       time: 20 # seconds
       dps: 20
@@ -85,6 +88,7 @@
   - type: EntityTargetAction
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 0
       energyCost: 100
       applyTimeMultiplier: 0.25
@@ -800,7 +804,7 @@
       state: bombard
     useDelay: 1
   - type: TargetAction
-    range: 10
+    range: 15 # the actual range is in XenoBombardComponent
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoBombardActionEvent
@@ -1204,7 +1208,7 @@
       state: abduct
     useDelay: 15
   - type: TargetAction
-    range: 6
+    range: 15 # the actual range is in XenoAbductComponent
     deselectOnMiss: false
     checkCanAccess: false
   - type: EntityTargetAction
@@ -1471,3 +1475,38 @@
   - type: ActionBlockIfResting
   - type: RMCDazeableAction
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRend
+  name: Rend (25)
+  description: Claw at enemies around you.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 2.5
+  - type: InstantAction
+    event: !type:XenoRendActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDestroy
+  name: Destroy
+  description: After a short time, jump to the targeted location, destroying structures and gibbing hostiles within a 3x3 range. Works over barricades and other short barriers.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 60
+  - type: TargetAction
+    range: 7
+    deselectOnMiss: false
+  - type: WorldTargetAction
+    event: !type:XenoDestroyActionEvent
