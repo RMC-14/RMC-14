@@ -1,0 +1,24 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorMilitary
+  name: rmc-job-name-survivor-military
+  description: rmc-job-description-survivor-military
+  playTimeTracker: RMCJobSurvivorMilitary
+  startingGear: RMCGearMilitarySurvivor
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  spawnMenuRoleName: Military Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
+
+- type: startingGear
+  id: RMCGearMilitarySurvivor
+  equipment:
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+    back: CMSatchelMarine
+
+- type: playTimeTracker
+  id: RMCJobSurvivorMilitary
+  name: rmc-playtime-tracker-job-name-survivor-military
+  isHumanoid: true
