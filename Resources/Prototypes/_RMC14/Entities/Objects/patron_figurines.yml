@@ -1974,3 +1974,14 @@
     state: zayden_soap_kirkson
   - type: PatronFigurine
     id: e3cf902c-a055-42ed-a3fd-c1267eb795bd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPsyJuniJuniper
+  name: Psy 'Juni' Juniper figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: psy_juni_juniper
+  - type: PatronFigurine
+    id: f7b90833-5c77-43b5-b109-a262a3083742
