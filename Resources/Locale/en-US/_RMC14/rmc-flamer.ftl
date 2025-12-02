@@ -15,7 +15,7 @@ rmc-flamer-tank-examine-line-2 = [color=yellow]Max Range[/color]: [color=lightbl
 rmc-flamer-guidebook-header = Flammability
 rmc-flamer-guidebook-description-base = It burns with an intensity of [bold]{$intensity}[/bold] for [bold]{$duration}[/bold] seconds.
 rmc-flamer-guidebook-description-radius = It can reach up to [bold]{$radius}[/bold] meters{$spread ->
-        [true]{" "}and may [bold]spread itself[/bold]
+        [true]{" "}and may [bold]spread[/bold] itself
         *[false]{""}
     }.
 rmc-flamer-guidebook-description-shred = It [bold]reacts[/bold] with inorganic materials.
