@@ -1979,7 +1979,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronPsyJuniJuniper
   name: Psy 'Juni' Juniper figurine
-  description: ""
+  description: "You look at the tiny rabbit, he has an Anti-Material Rifle on his back and blood all over his fur. He's offering a carrot! Just for you!"
   components:
   - type: Sprite
     state: psy_juni_juniper
