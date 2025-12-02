@@ -1,101 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 8 Trijent Survs
-    type: Add
-  - message: Added the Trucker Survivour base
-    type: Add
-  - message: Added RD's jumpsuit, purple beret, laborer's overalls, and the blue trucker
-      cap
-    type: Add
-  - message: Added the WeYa Sec. icon
-    type: Add
-  id: 2095
-  time: '2025-08-04T01:20:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7056
-- author: VictorJob
-  changes:
-  - message: Added new barbed wire item sprites.
-    type: Add
-  id: 2096
-  time: '2025-08-05T03:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5455
-- author: SharkSnake98
-  changes:
-  - message: Added a CL Guidebook entry
-    type: Add
-  - message: Added a few lines to the Correspondent, Liaison, and Doctor YML for guidebook
-      photos
-    type: Add
-  id: 2097
-  time: '2025-08-06T03:48:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7113
-- author: Dygon
-  changes:
-  - message: Lunge, Tumble, Headbutt and Charge consistently hit their target again.
-    type: Fix
-  - message: Lunge, Tumble and Headbutt won't move past their target anymore after
-      hitting them.
-    type: Fix
-  id: 2098
-  time: '2025-08-06T03:50:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7209
-- author: SharkSnake98
-  changes:
-  - message: Added Repaired Chances Claim
-    type: Add
-  - message: Added a Chance's Claim sign
-    type: Add
-  id: 2099
-  time: '2025-08-06T03:50:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7206
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added medical action examine button. This can be used to see the status
-      of a marine, such as if they're unrevivable, dead, bleeding, or unconscious.
-    type: Add
-  id: 2100
-  time: '2025-08-06T03:49:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7172
-- author: Max_Power
-  changes:
-  - message: Fixed 32 roles missing Endurance 1 (such as Corpsman, Comtech, FTL, SGO,
-      ASO, DCC, PO, SO, all of reqs, medical, engi and more marine/non-marine roles)
-      and CMB Observer missing Endurance 2.
-    type: Fix
-  - message: Fixed some roles not having Endurance and Firearms skill set to 0.
-    type: Fix
-  id: 2101
-  time: '2025-08-06T03:51:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7210
-- author: Max_Power
-  changes:
-  - message: Fixed Loader Pamphlet giving Endurance 2 instead of Engineering 1, letting
-      the Loader use the C4 in their kit.
-    type: Fix
-  id: 2102
-  time: '2025-08-06T03:54:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7220
-- author: J C Denton
-  changes:
-  - message: Fax Responder roles now spawn with their corresponding stamps and pen.
-    type: Add
-  - message: Fixed Asphalt and Cement tiles not hiding wires and dispo system.
-    type: Fix
-  - message: Fixed Queen and Xenonid roles in lobby using naked marine sprites.
-    type: Fix
-  - message: ICB Liaison, Survivor and not, now have their respective icons.
-    type: Fix
-  id: 2103
-  time: '2025-08-06T03:54:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7215
-- author: Tunguso4ka
-  changes:
-  - message: Added dropship double and triple doors.
-    type: Add
-  id: 2104
-  time: '2025-08-06T03:53:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7217
 - author: Ian321
   changes:
   - message: The examine text for the flare gun, winter wyvern handcannon and mateba
@@ -4645,5 +4548,90 @@
   id: 2595
   time: '2025-12-01T02:06:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8263
+- author: Vixting
+  changes:
+  - message: Adjust half light vision
+    type: Tweak
+  id: 2596
+  time: '2025-12-01T05:31:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8503
+- author: yagwog
+  changes:
+  - message: secure we-ya crate having wrong access
+    type: Fix
+  id: 2597
+  time: '2025-12-01T07:09:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8518
+- author: Vermidia
+  changes:
+  - message: fixed Healer and Gardener drone abilities not ignoring shields
+    type: Fix
+  id: 2598
+  time: '2025-12-01T07:47:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8160
+- author: Aurallianz
+  changes:
+  - message: Fixed being able to melt IDs
+    type: Fix
+  id: 2599
+  time: '2025-12-01T07:48:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8517
+- author: Tyzemol
+  changes:
+  - message: As a xeno you can now build sticky/speed resin and hive structures on
+      the same tile you are standing on.
+    type: Tweak
+  - message: Minimal range to build walls and doors have been made much more lenient.
+    type: Tweak
+  - message: Hivelords can now upgrade resin on the diagonal corners.
+    type: Tweak
+  - message: Secrete resin ability no longer cancels current resin structure doafter
+      when trying to build a new one too early
+    type: Tweak
+  id: 2600
+  time: '2025-12-01T07:50:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8376
+- author: august-sun
+  changes:
+  - message: Added new combat knife variants, available in loadouts.
+    type: Add
+  id: 2601
+  time: '2025-12-01T07:52:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8476
+- author: CatAndHats
+  changes:
+  - message: Added Glass, Reinforced Glass, and Plastic construction menus; press
+      Z with those materials in-hand to open the constuction menus and build items
+      such as the now-craftable plastic crate, plastic ashtray, and plastic cutlery.
+    type: Add
+  id: 2602
+  time: '2025-12-01T07:53:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8504
+- author: Arykh
+  changes:
+  - message: Hand Labelers can now change pill bottle color!
+    type: Add
+  - message: Added sounds for applying and removing labels.
+    type: Add
+  id: 2603
+  time: '2025-12-01T07:54:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8274
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Xenos now have a chance to gib upon death
+    type: Add
+  - message: Added new effects for xenos gibbing
+    type: Add
+  id: 2604
+  time: '2025-12-01T07:57:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8478
+- author: noctyrnal
+  changes:
+  - message: COs with 250+ Hours can now get golden versions of their sidearms in
+      their loadouts.
+    type: Add
+  id: 2605
+  time: '2025-12-01T08:48:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8500
 Name: RMC14
 Order: -1
