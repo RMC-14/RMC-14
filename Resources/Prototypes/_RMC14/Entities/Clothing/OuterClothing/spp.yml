@@ -157,6 +157,11 @@
     #internal: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
 
 # SPP coats
 - type: entity

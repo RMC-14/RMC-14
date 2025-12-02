@@ -88,7 +88,9 @@ public sealed class RMCClothingSystem : EntitySystem
             return;
 
         args.Cancel();
-        args.Reason = ent.Comp.DenyReason;
+
+        var denyReason = Loc.GetString(ent.Comp.DenyReason);
+        _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
     }
 
     private void OnDropped(Entity<ClothingComponent> ent, ref DroppedEvent args)
