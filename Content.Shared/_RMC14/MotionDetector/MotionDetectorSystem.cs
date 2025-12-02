@@ -282,6 +282,16 @@ public sealed class MotionDetectorSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.Enabled;
     }
 
+    public EntityUid TryGetMotionDetectorUser(Entity<MotionDetectorComponent?> ent)
+    {
+        var parent = Transform(ent).ParentUid;
+
+        if (HasComp<StorageComponent>(parent))
+            return Transform(parent).ParentUid;
+        else
+            return parent;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -317,7 +327,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
-            var userUid = Transform(uid).ParentUid;
+            var userUid = TryGetMotionDetectorUser((uid, detector));
             var hasFaction = _gunIFF.TryGetFaction(userUid, out var userFaction);
 
             detector.Blips.Clear();
