@@ -21,6 +21,11 @@
     - 0,0,1,1 # 1 slot
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
 
 - type: entity
   parent: RMCArmorSPP

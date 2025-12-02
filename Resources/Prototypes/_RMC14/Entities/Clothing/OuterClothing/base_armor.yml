@@ -242,6 +242,11 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
   - type: RMCStorageEjectHand
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
   parent: RMCBaseMarineArmorNoAccessory

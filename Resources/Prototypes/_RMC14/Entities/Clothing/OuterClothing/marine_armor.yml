@@ -285,6 +285,11 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-warden-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformWarden
 
 - type: entity
   parent: CMArmorM2MP
@@ -301,6 +306,11 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-cmp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformCMP
 
 #Officer armors
 - type: entity
@@ -879,6 +889,11 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-mp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMP
 
 - type: entity
   parent: CMArmorM4
