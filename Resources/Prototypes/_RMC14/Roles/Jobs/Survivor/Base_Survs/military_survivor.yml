@@ -10,6 +10,7 @@
   spawnMenuRoleName: Military Survivor (Base)
   useLoadoutOfJob: CMSurvivor
   basePlaytimeTracker: true
+  hidden: true # Keep hidden
 
 - type: startingGear
   id: RMCGearMilitarySurvivor
