@@ -805,4 +805,5 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ProvostCoatRMC
+  - ProvostJacketFilledRMC
+  - ProvostCoatFilledRMC
