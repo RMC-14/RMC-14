@@ -20,7 +20,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public bool IsActivateSplashOnGib = true;
 
     [DataField]
-    public float CloseSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(0.5f);
+    public float CloseSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(1);
 
     [DataField]
     public float StandardSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(3);
