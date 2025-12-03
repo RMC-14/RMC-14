@@ -96,3 +96,21 @@
   - type: Sprite
     state: unflag_worn
 
+# Other
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerWEYA
+  name: WEYA flag
+  description: A flag of the Weston-Yamada Corporation. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: weyaflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerTSEAlt
+  name: old TSE flag
+  description: A flag of the Three-Sun Empire. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings. This design was used years ago; apparently it's got a niche following.
+  components:
+  - type: Sprite
+    state: tseflag_alt

@@ -19,6 +19,6 @@ public sealed class RMCDebilitateSystem : EntitySystem
         if (!_entityWhitelist.CheckBoth(args.Target, ent.Comp.Blacklist, ent.Comp.Whitelist))
             return;
 
-        _stun.TryKnockdown(args.Target, ent.Comp.Knockdown, true);
+        _stun.TryParalyze(args.Target, ent.Comp.Knockdown, true);
     }
 }

@@ -110,3 +110,18 @@
   - RMCAccessTSEPA
   - RMCAccessTSEPABrig
   - RMCAccessTSEPAInspector
+
+# Survivor Synth Access
+- type: accessGroup
+  id: ColonistSynthShipside
+  tags:
+  - CMAccessCMO
+  - CMAccessMedical
+  - CMAccessResearch
+  - CMAccessChemistry
+  - CMAccessMaint
+  - CMAccessEngineering
+  - CMAccessCE
+  - CMAccessOT
+  - RMCAccessSynth
+  - RMCAccessDatabase

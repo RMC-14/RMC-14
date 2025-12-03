@@ -552,7 +552,7 @@
     ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
-    PlantBag: 5
+    RMCStoragePlantBag: 5
     RMCToolSpade: 3
     RMCToolHatchet: 3
     # AmmoniaBottle: 10 #Premium
@@ -585,6 +585,7 @@
     ChanterelleSeeds: 2
     ChiliSeeds: 3
     CornSeeds: 3
+    CottonSeeds: 3
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
@@ -722,6 +723,20 @@
       - id: DrinkMugRed
         amount: 2
 
+- type: entity
+  parent: CMVendorDinnerware
+  id: CMVendorDinnerwareLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
+
 # BODA
 - type: entity
   parent: CMVendor
@@ -760,11 +775,15 @@
       - id: FoodMeatChicken
         amount: 24
       - id: FoodMeatFish
+        amount: 18
+      - id: RMCFoodMeatFish
         amount: 12
       - id: FoodMeat
         amount: 24
       - id: FoodMeatBacon
         amount: 24
+      - id: FoodMeatSausage
+        amount: 18
       - id: DrinkMilkCarton
         amount: 24
       - id: DrinkSoyMilkCarton

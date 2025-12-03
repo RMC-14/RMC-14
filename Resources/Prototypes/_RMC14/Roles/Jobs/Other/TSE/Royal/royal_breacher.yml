@@ -21,7 +21,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillFirearms: 1 
+        RMCSkillFirearms: 1
         RMCSkillPolice: 2
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
@@ -64,13 +64,13 @@
       role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-  
+
 - type: startingGear
   id: RMCGearRoyalBreacher
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyal
     outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

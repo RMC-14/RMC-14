@@ -365,6 +365,9 @@
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Item # Intentionally allows the armor to be stored in bags.
+    size: Normal
+    storedRotation: 0
 
 - type: entity
   parent: CMArmorM3Medium
@@ -655,6 +658,57 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
+
+# Forced Camo Variants for Vendor Parity
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthJungle
+  name: M3A1 synthetic utility vest (Jungle)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthDesert
+  name: M3A1 synthetic utility vest (Desert)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthSnow
+  name: M3A1 synthetic utility vest (Snow)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthClassic
+  name: M3A1 synthetic utility vest (Classic)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthUrban
+  name: M3A1 synthetic utility vest (Urban)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # m4
 - type: entity

@@ -1,0 +1,199 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoMobCollision
+  id: RMCXenoKing
+  name: King
+  description: The end of the line.
+  components:
+  - type: GhostRole
+    name: rmc-job-name-xeno-king
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/King/king.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1500: Critical
+      1600: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Xeno
+    role: RMCXenoKing
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoRend
+    - ActionXenoDoom
+    - ActionXenoDestroy
+    - ActionXenoBulwarkOfTheHive
+    - ActionXenoPheromones
+    tier: 0
+    bypassTierCount: true
+    countedInSlots: false
+    unlockAt: 0
+    hudOffset: -0.1,0
+  - type: XenoHeavy
+  - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 6
+    pheroSuffix: king
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 2
+  - type: CMArmor
+    xenoArmor: 45
+    explosionArmor: 70
+  - type: InnateCommandSpeech
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 66
+  - type: Tackle
+    stunMin: 6
+    stunMax: 10
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        - BarbedBarricade
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.52
+        density: 185
+        layer:
+        - BulletImpassable
+  - type: DropshipHijacker
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: MobMover
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: -6
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
+      params:
+        volume: -6
+  - type: XenoAnnounceDeath
+    message: rmc-xeno-death-king
+    color: "#921992"
+  - type: RMCSize
+    size: Immobile
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
+  - type: RMCXenoDamageVisuals
+    prefix: king
+  - type: FixedIdentity
+    name: rmc-job-name-xeno-king
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xenoking
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoOmitNumber
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
+  - type: StunFriendlyXenoOnStep
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
+  - type: RMCActionOrder
+    id: RMCXenoKing
+  - type: StunHostilesOnStep
+    damage:
+      groups:
+        Brute: 20   
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
+  - type: XenoRankNames
+    rankNames:
+      2: rmc-xeno-mature-king
+      3: rmc-xeno-mature-king
+      4: rmc-xeno-mature-king
+      5: rmc-xeno-mature-king
+  - type: XenoRend
+    damage:
+      groups:
+        Brute: 25
+  - type: XenoBulwarkOfTheHive
+  - type: XenoDoom
+  - type: XenoDestroy
+    structureDamage:
+      types:
+        Blunt: 1000
+    mobDamage:
+      types:
+        Blunt: 1000
+    structures:
+      tags:
+      - Structure
+      - Wall
+      - Window
+      components:
+      - Sentry
+      - RMCTeslaCoil
+      - Barricade
+      - Mortar
+      - EntityStorage
+      - ReagentTank
+      - PlaceableSurface
+      - ReagentDispenser
+      - IVDrip
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  

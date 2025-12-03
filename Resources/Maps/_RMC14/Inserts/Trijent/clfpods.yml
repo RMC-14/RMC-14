@@ -910,7 +910,7 @@ entities:
     - type: Transform
       pos: 6.5,-1.5
       parent: 1
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 324
     components:

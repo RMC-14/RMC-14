@@ -1,7 +1,7 @@
 ﻿{
     "version": 1,
     "license": "CC-BY-SA-4.0",
-    "copyright": "peanut butter cookie sprite by Crow/noctrn., PB&J and onigiri sprites by SurfinNinja",
+    "copyright": "peanut butter cookie sprite by Crow/noctrn., -silog sprites by Kezu, other sprites sprites by SurfinNinja, Raw Fish, Grilled Fish, Fish & Chips by SharkSnake98",
     "size": {
         "x": 32,
         "y": 32
@@ -15,6 +15,69 @@
         },
         {
             "name": "onigiri"
+        },
+        {
+            "name": "rawfish"
+        },
+        {
+            "name": "grilledfish"
+        },
+        {
+            "name": "fishandchips"
+        },
+        {
+            "name": "fishsushiroll"
+        },
+        {
+            "name": "carbonara"
+        },
+        {
+            "name": "banh-mi"
+        },
+        {
+            "name": "banh-mi-half"
+        },
+        {
+            "name": "chicken-parm-hero"
+        },
+        {
+            "name": "chicken-parm-half"
+        },
+        {
+            "name": "yorkshire-pudding"
+        },
+        {
+            "name": "yorkshire-pudding-1"
+        },
+        {
+            "name": "yorkshire-pudding-2"
+        },
+        {
+            "name": "black-forest-cake"
+        },
+        {
+            "name": "black-forest-slice"
+        },
+        {
+            "name": "hot-dog"
+        },
+        {
+            "name": "tapsilog"
+        },
+        {
+            "name": "carpsilog"
+        },
+        {
+            "name": "tocilog"
+        },
+        {
+            "name": "chicksilog"
+        },
+        {
+            "name": "bangers-mash"
+        },
+        {
+            "name": "pie-mash"
         }
     ]
 }

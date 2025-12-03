@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Inventory;
-using Content.Shared.ActionBlocker; using Content.Shared.Construction.EntitySystems;
-using Content.Shared.Coordinates;
+using Content.Shared.ActionBlocker;
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
@@ -99,25 +99,33 @@ public sealed class DeployableItemSystem : EntitySystem
         var (filled, total) = _cmInventory.GetItemSlotsFilled(ent.Owner);
         using (args.PushGroup(nameof(DeployableItemComponent)))
         {
-            if (ent.Comp.Position == DeployableItemPosition.None)
-            {
-                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-not-deployed"));
-
-                if (filled == 0)
-                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-empty"));
-                else if (filled < total * ent.Comp.AlmostEmptyThreshold)
-                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-almost-empty"));
-                else if (filled < total * ent.Comp.HalfFullThreshold)
-                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-half-full"));
-                else
-                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-almost-full"));
-            }
-            else
+            if (ent.Comp.Position != DeployableItemPosition.None)
             {
                 args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-click"));
                 args.PushMarkup(Loc.GetString("cm-magazine-box-examine-deployed-drag"));
-                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-magazines", ("filled", filled), ("total", total)));
+
+                if (ent.Comp.MagazineExamine)
+                {
+                    args.PushMarkup(Loc.GetString("cm-magazine-box-examine-magazines",
+                        ("filled", filled),
+                        ("total", total)));
+                }
+
+                return;
             }
+
+            args.PushMarkup(Loc.GetString("cm-magazine-box-examine-not-deployed"));
+            if (!ent.Comp.MagazineExamine)
+                return;
+
+            if (filled == 0)
+                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-empty"));
+            else if (filled < total * ent.Comp.AlmostEmptyThreshold)
+                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-almost-empty"));
+            else if (filled < total * ent.Comp.HalfFullThreshold)
+                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-half-full"));
+            else
+                args.PushMarkup(Loc.GetString("cm-magazine-box-examine-almost-full"));
         }
     }
 

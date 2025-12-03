@@ -357,8 +357,8 @@
 - type: entity
   parent: RMCBoxBase
   id: RMCBoxHEDP
-  name: M40 HEDP grenade box
-  description: A secure box holding 25 M40 High-Explosive Dual-Purpose grenades. High explosive, don't store near the flamer fuel.
+  name: 30mm HEDP grenade box
+  description: A secure box holding 25 30mm High-Explosive Dual-Purpose grenades. High explosive, don't store near the flamer fuel.
   components:
   - type: Sprite
     layers:
@@ -380,8 +380,8 @@
 - type: entity
   parent: RMCBoxBase
   id: RMCBoxHEFA
-  name: M40 HEFA grenade box
-  description: A secure box holding 25 M40 High-Explosive Fragmenting-Antipersonnel grenades. High explosive, don't store near the flamer fuel.
+  name: 30mm HEFA grenade box
+  description: A secure box holding 25 30mm High-Explosive Fragmenting-Antipersonnel grenades. High explosive, don't store near the flamer fuel.
   components:
   - type: Sprite
     layers:

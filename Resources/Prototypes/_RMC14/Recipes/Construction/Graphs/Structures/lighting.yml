@@ -1,5 +1,5 @@
 ﻿- type: constructionGraph
-  id: CMLightFixture
+  id: RMCLightFixture
   start: start
   graph:
     - node: start
@@ -16,7 +16,7 @@
               doAfter: 2.0
 
     - node: tubeLight
-      entity: CMLightFixtureEmpty
+      entity: RMCLightFixtureEmpty
       edges:
         - to: start
           conditions:
@@ -32,7 +32,7 @@
             - !type:DeleteEntity {}
 
     - node: bulbLight
-      entity: CMLightFixtureSmallEmpty
+      entity: RMCLightFixtureSmallEmpty
       edges:
         - to: start
           conditions:

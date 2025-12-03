@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCAreaBase
   id: RMCAreaLv759
   name: LV-759 Hybrisa Prospera
@@ -785,7 +785,7 @@
   id: RMCAreaLv759IndoorsCavesNorthEastCavesSouth
   components:
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -869,7 +869,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#00B3FFE7'
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -1771,7 +1771,7 @@
   - type: Sprite
     state: mining
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
@@ -2344,7 +2344,7 @@
   - type: Sprite
     state: security_checkpoint_east
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity

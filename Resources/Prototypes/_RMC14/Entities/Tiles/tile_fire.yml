@@ -285,3 +285,173 @@
   - type: RMCIgniteOnCollide
     maxStacks: 25
     intensity: 25
+
+#Forever fires for pve
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireForever
+  name: fire
+  description: That isn't going out any time soon!!
+  suffix: Undying, Very Strong
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: TileFire
+    id: RMCTileFireForever
+    extinguishInstantly: false
+    patExtinguishMultiplier: 0
+    sprayExtinguishMultiplier: 0
+    duration: 86400 # 24 hours :)
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_4 }
+          Two: { state: red_4 }
+          Three: { state: red_4 }
+          Four: { state: red_4 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverStrong
+  suffix: Undying, Strong
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverStrong
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_3
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_3 }
+          Two: { state: red_3 }
+          Three: { state: red_3 }
+          Four: { state: red_3 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverNormal
+  suffix: Undying
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverNormal
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_2
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_2 }
+          Two: { state: red_2 }
+          Three: { state: red_2 }
+          Four: { state: red_2 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverWeak
+  suffix: Undying, Weak
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverWeak
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_1
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_1 }
+          Three: { state: red_1 }
+          Four: { state: red_1 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverOrange
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+      color: "#FF7700"
+  - type: TileFire
+    id: RMCTileFireForeverOrange
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_4 }
+          Two: { state: dynamic_4 }
+          Three: { state: dynamic_4 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFireForeverOrange
+  id: RMCTileFireForeverStrongOrange
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverStrongOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_3
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_3 }
+          Two: { state: dynamic_3 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_3 }
+
+- type: entity
+  parent: RMCTileFireForeverNormal
+  id: RMCTileFireForeverNormalOrange
+  suffix: Undying
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverNormalOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_2
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_2 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_2 }
+          Four: { state: dynamic_2 }
+
+- type: entity
+  parent: RMCTileFireForeverWeak
+  id: RMCTileFireForeverWeakOrange
+  suffix: Undying, Weak
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverWeakOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_1
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_1 }
+          Three: { state: dynamic_1 }
+          Four: { state: dynamic_1 }

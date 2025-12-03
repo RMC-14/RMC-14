@@ -1,0 +1,21 @@
+- type: entity
+  abstract: true
+  parent: DecalSpawnerBase
+  id: RMCDecalSpawnerGibsBase
+  suffix: RMC14, Gibs
+  components:
+  - type: RandomDecalSpawner
+    radius: 0
+    randomRotation: false
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: RMCDecalSpawnerGibsBase
+  id: RMCDecalSpawnerGibsDrone
+  name: gibs spawner
+  suffix: RMC14, Drone
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalGibSplatterDrone

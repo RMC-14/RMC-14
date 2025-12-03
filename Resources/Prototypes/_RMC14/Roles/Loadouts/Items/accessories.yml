@@ -14,10 +14,81 @@
     back:
     - RMCSquadArmband
 
-
 - type: loadout
   id: PatchPeaceRMC
   cost: 1
   storage:
     back:
     - RMCPatchPeace
+
+# Paint (FOR PVE)
+
+- type: loadout
+  id: PaintSkullRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintSkull
+
+- type: loadout
+  id: PaintHeartRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintHeart
+
+- type: loadout
+  id: PaintMedicRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintMedic
+
+- type: loadout
+  id: PaintUNRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintUN
+
+- type: loadout
+  id: PaintTargetRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintTarget
+
+- type: loadout
+  id: PaintSmileyFaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintSmileyFace
+
+- type: loadout
+  id: PaintNeutralFaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintNeutralFace
+
+- type: loadout
+  id: PaintCrossRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintCross
+
+- type: loadout
+  id: PaintInscriptionRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintInscription
+
+- type: loadout
+  id: PaintMixtapeRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintMixtape

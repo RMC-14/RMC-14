@@ -1,0 +1,25 @@
+rmc-name-avali-first-1 = Ei
+rmc-name-avali-first-2 = Ha
+rmc-name-avali-first-3 = He
+rmc-name-avali-first-4 = Ja
+rmc-name-avali-first-5 = Je
+rmc-name-avali-first-6 = Ka
+rmc-name-avali-first-7 = Kaa
+rmc-name-avali-first-8 = Khau
+rmc-name-avali-first-9 = Khe
+rmc-name-avali-first-10 = Khou
+rmc-name-avali-first-11 = Ko
+rmc-name-avali-first-12 = Na
+rmc-name-avali-first-13 = Naa
+rmc-name-avali-first-14 = Nau
+rmc-name-avali-first-15 = Ne
+rmc-name-avali-first-16 = Nhe
+rmc-name-avali-first-17 = No
+rmc-name-avali-first-18 = Nu
+rmc-name-avali-first-19 = Ra
+rmc-name-avali-first-20 = Re
+rmc-name-avali-first-21 = Rha
+rmc-name-avali-first-22 = Ru
+rmc-name-avali-first-23 = Ta
+rmc-name-avali-first-24 = Te
+

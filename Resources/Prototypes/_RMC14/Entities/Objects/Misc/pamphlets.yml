@@ -85,6 +85,8 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
 
 # gives powerloader skill / bypasses limit
 - type: entity
@@ -170,6 +172,8 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
 
 - type: entity
   parent: CMPamphlet
@@ -199,6 +203,35 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
+
+# OTHER
+
+# Honor Guard
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletHonorGuard
+  name: honor guard instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one details the responsibilities of an Honor Guard.
+  components:
+  - type: Sprite
+    state: pamphlet_honorguard
+  - type: SkillPamphlet
+    bypassSkill: true
+    giveJobTitle: rmc-job-name-honor-guard
+    givePrefix: rmc-job-prefix-honor-guard
+    isAppendPrefix: false
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_hgmp
+    giveMapBlip:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: honorguard
+    bypassLimit: true
+    jobWhitelists:
+    - popup: rmc-pamphlets-mp-warning
+      jobProto: CMMilitaryPolice
 
 # LANGUAGE / bypasses limit
 

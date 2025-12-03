@@ -114,13 +114,7 @@
     sprite: _RMC14/Objects/Medical/compact_defib.rsi
   - type: Item
     sprite: _RMC14/Objects/Medical/compact_defib.rsi
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - pocket
-  - type: Tag
-    tags:
-    - Pouch
+    size: Small
   - type: PowerCellDraw
     useRate: 132
 

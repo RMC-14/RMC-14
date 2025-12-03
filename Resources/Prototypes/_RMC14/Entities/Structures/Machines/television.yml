@@ -61,8 +61,10 @@
   - type: WallMount
     arc: 360
   - type: Transform
-    anchored: true
+    anchored: false
     noRot: false
+  - type: Anchorable
+    flags: None
   - type: Sprite
     drawdepth: WallMountedItems
   - type: Fixtures

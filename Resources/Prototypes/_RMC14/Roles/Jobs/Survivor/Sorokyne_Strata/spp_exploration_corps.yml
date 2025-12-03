@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorCECResearcher
+  name: rmc-job-name-survivor-cec-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  ranks:
+    RMCRankCivilianDoctor: []
+  startingGear: RMCGearSurvivorCECResearcher
+  accessGroups:
+  - ColonistMedical
+  spawnMenuRoleName: EC Researcher (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCECResearcher
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorCECResearcher
+  equipment:
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitCivilianScientist
+    outerClothing: RMCLabcoatBrown
+    pocket2: RMCPouchMedicalFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCECResearcher
+  name: exploration corps researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCGearSurvivorPresetCECResearcher
+  name: exploration corps researcher preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomStartingGear:
+      back:
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      eyes:
+      - RMCGlassesMarineRpg
+      - RMCHippieGlasses
+      - RMCHipsterGlasses
+      shoes:
+      - RMCShoesLaceup
+      - RMCShoesLaceupBrown
+      - RMCBootsSPP
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]
+    tryEquipRandomOtherGear: false

@@ -65,6 +65,7 @@
           - CMMagazineRifleM54CMK1AP
           - RMCMagazineRifleM54CMK1Incendiary
           - RMCMagazineRifleM54CMK1HEAP
+          - RMCMagazineRifleM54CMK1WP
         startingItem: CMMagazineRifleM54CMK1
   - type: GunDamageModifier
     multiplier: 1.1
@@ -122,6 +123,7 @@
           - CMMagazineRifleM54CMK1AP
           - RMCMagazineRifleM54CMK1Incendiary
           - RMCMagazineRifleM54CMK1HEAP
+          - RMCMagazineRifleM54CMK1WP
         startingItem: null
 
 - type: entity
@@ -249,6 +251,33 @@
 #  - type: RefillableByBulletBox disabled till HEAP bulletboxes
 #    bulletType: RMCBoxBulletsRifleAP
 
+- type: entity
+  parent: CMMagazineRifleM54CMK1
+  id: RMCMagazineRifleM54CMK1WP
+  name: "M54C MK1 WP magazine (10x24mm)"
+  suffix: WP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CMK1WP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmWP
+    proto: RMCCartridgeRifle10x24mmWP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#6365E6"
+#  - type: RefillableByBulletBox disabled till HEAP bulletboxes
+#    bulletType: RMCBoxBulletsRifleAP
+
 - type: Tag
   id: RMCWeaponRifleM54CMK1
 
@@ -263,3 +292,6 @@
 
 - type: Tag
   id: RMCMagazineRifleM54CMK1HEAP
+
+- type: Tag
+  id: RMCMagazineRifleM54CMK1WP

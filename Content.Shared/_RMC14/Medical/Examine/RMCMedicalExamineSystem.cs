@@ -25,7 +25,10 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
         using (args.PushGroup(nameof(RMCMedicalExamineSystem), -1))
         {
             if (ent.Comp.Simple && _mobState.IsDead(ent.Owner))
+            {
                 args.PushMarkup(Loc.GetString(ent.Comp.DeadText, ("victim", ent.Owner)));
+                return;
+            }
 
             if (HasComp<RMCBlockMedicalExamineComponent>(args.Examiner))
                 return;
@@ -51,10 +54,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
             stateText = ent.Comp.CritText;
 
         if (stateText != null)
-        {
-            msg.PushNewline();
             msg.AddMarkupOrThrow(Loc.GetString(stateText, ("victim", ent.Owner)));
-        }
 
         return msg;
     }

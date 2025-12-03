@@ -18,4 +18,10 @@ public sealed partial class ReagentExaminationRequiresSkillComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
+
+    [DataField, AutoNetworkedField]
+    public string? ContainerId;
+
+    [DataField, AutoNetworkedField]
+    public LocId? NoContainerExamine;
 }

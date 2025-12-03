@@ -12,6 +12,9 @@ public sealed partial class DamageableCorrodingComponent : Component
     public EntityUid Acid;
 
     [DataField, AutoNetworkedField]
+    public XenoAcidStrength Strength = XenoAcidStrength.Normal;
+
+    [DataField, AutoNetworkedField]
     public float Dps;
 
     [DataField, AutoNetworkedField]

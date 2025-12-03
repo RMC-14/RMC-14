@@ -1,0 +1,45 @@
+- type: entity
+  id: RMCGraveCross
+  name: wooden cross
+  description: A wooden grave marker. Is it more respectful because someone made it by hand, or less, because it's crude and misshapen?
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/cross.rsi
+    state: cross1
+  - type: Appearance
+  - type: Clickable
+
+- type: entity
+  id: RMCGravestone1
+  name: grave marker
+  description: A grave marker, in the traditional Japanese style.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/gravestone.rsi
+    state: gravestone1
+  - type: Appearance
+  - type: Clickable
+
+- type: entity
+  parent: RMCGravestone1
+  id: RMCGravestone2
+  components:
+  - type: Sprite
+    state: gravestone2
+
+- type: entity
+  parent: RMCGravestone1
+  id: RMCGravestone3
+  components:
+  - type: Sprite
+    state: gravestone3

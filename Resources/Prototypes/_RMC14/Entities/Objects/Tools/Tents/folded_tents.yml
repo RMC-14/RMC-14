@@ -30,6 +30,29 @@
           angle: 0
 
 - type: entity
+  parent: RMCTentUNMCStandardFolded
+  id: RMCTentUNMCBigFolded
+  name: folded UNMC Big Tent
+  description: A standard UNMC Field Tent. This one is just a general purpose, large version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+  components:
+    - type: RMCDeployable
+      deployTime: 10
+      collapseTime: 10
+      deployArea:
+        !type:PhysShapeAabb
+        bounds: "-0.4,0.6,2.1,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
+      collapseToolPrototype: CMEntrenchingTool
+      areaBlockedCheck: true
+      failIfNotSurface: true
+      deploySetups:
+        - prototype: RMCTentUNMCStandard
+          neverRedeployableSetup: false
+          mode: ReactiveParental
+          anchor: true
+          offset: 0.2, 0
+          angle: 0
+
+- type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardCommandFolded
   name: folded UNMC Command Tent

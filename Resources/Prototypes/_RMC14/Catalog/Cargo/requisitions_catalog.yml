@@ -168,8 +168,8 @@
         crate: RMCCrateElectricalMaintenance
       - cost: 2000
         crate: RMCCrateMechanicalMaintenance
-#      - cost: 2000
-#        crate: RMCCrateInflatableBarriers
+      - cost: 2000
+        crate: RMCCrateInflatableBarriers
       - cost: 2000
         crate: RMCCrateReplacementLights
       - cost: 3000
@@ -267,8 +267,10 @@
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
-#    - name: Reagent tanks
-#      entries: []
+    - name: Reagent tanks
+      entries:
+      - cost: 2000
+        crate: RMCTankReagentFuel
     - name: Research
       entries:
       - cost: 3000
@@ -287,8 +289,8 @@
       entries:
       - cost: 2000
         crate: RMCCrateSupplyInternals
-#      - cost: 1000
-#        crate: RMCCrateSupplyEvacuation
+      - cost: 1000
+        crate: RMCCrateSupplyEvacuation
       - cost: 1000
         crate: RMCCrateSuppliesBoxes
       - cost: 1000

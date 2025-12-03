@@ -32,7 +32,7 @@
   id: RMCJumpsuitSPPWebbingTools
   components:
   - type: WebbingClothing
-    startingWebbing: RMCToolWebbingSmallERTFilled
+    startingWebbing: RMCToolWebbingFilled
 
 - type: entity
   parent: CMJumpsuitSPP

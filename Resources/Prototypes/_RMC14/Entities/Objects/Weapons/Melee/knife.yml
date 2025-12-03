@@ -70,6 +70,138 @@
       path: /Audio/Items/wirecutter.ogg
 
 - type: entity
+  parent: RMCM5Bayonet
+  id: RMCCombatUtilityKnifeA
+  name: "'Druzhina' Combat Utility Knife"
+  description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_a.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_a.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_a.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: combatutilitya
+
+- type: entity
+  parent: RMCM5Bayonet
+  id: RMCCombatUtilityKnifeB
+  name: "'Druzhina' combat utility knife"
+  description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_b.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_b.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/combat_utility_b.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: combatutilityb
+
+- type: entity
+  parent: RMCM5Bayonet
+  id: RMCTantoA # bayonet
+  name: "MK3 infantry service tanto"
+  description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_a.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_a.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_a.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: tantoa
+
+- type: entity
+  parent: RMCM5Bayonet
+  id: RMCTantoB # bayonet
+  name: "MK3 infantry service tanto"
+  description: Forged for the elite forces of the Royal Crown Marines, the sleek, tempered construction of this blade has been lauded by its wielders.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_b.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_b.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/mk3_tanto_b.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: tantob
+
+- type: entity
+  parent: RMCM5Bayonet
+  id: RMCSawtoothDaggerA # bayonet
+  name: "Fiore-pattern trench dagger"
+  description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_a.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_a.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_a.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: daggera
+
+- type: entity
+  parent: RMCM5Bayonet
+  id: RMCSawtoothDaggerB # bayonet
+  name: "Fiore-Pattern trench dagger"
+  description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
+  components:
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    - suitstorage
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_b.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_b.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Weapons/Melee/sawtooth_dagger_b.rsi
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: daggerb
+
+- type: entity
   name: M11 throwing knife
   parent: [ RMCBaseMeleeWeapon, BaseKnife ]
   id: CMM11Knife

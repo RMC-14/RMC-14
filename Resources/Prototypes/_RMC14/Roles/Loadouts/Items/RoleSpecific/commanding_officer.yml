@@ -47,3 +47,39 @@
       inverted: true # if you have atleast 175 hours you get the colonel ID, so invert this
   equipment:
     id: CMIDCardCommandingOfficer
+
+- type: loadout
+  id: GoldMatebaRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 900000 # 250 hrs
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseLuxuryWeapon
+
+- type: loadout
+  id: GoldHandcannonRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 900000 # 250 hrs
+  storage:
+    back:
+    - RMCWeaponPistolHandcannonGold
+
+- type: loadout
+  id: MatebaRMC
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseWeapon
+
+- type: loadout
+  id: HandcannonRMC
+  storage:
+    back:
+    - RMCWeaponPistolHandcannonWinterWyvern

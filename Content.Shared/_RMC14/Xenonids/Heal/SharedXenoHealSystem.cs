@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Strain;
+using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -48,6 +49,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
@@ -189,7 +191,10 @@ public abstract class SharedXenoHealSystem : EntitySystem
                 [BluntGroup] = damageTaken,
             },
         };
-        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
+
+        if (TryComp<DamageableComponent>(ent, out var damage))
+            _damageable.AddDamage(ent.Owner, damage, damageTakenSpecifier);
+
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-self", ("target_xeno", target)), ent, PopupType.Medium);
 
         args.Handled = true;
@@ -345,9 +350,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         if (_net.IsServer)
         {
             SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-
-            // TODO: Gib the healing xeno here
-            QueueDel(ent);
+            _body.GibBody(ent);
         }
     }
 

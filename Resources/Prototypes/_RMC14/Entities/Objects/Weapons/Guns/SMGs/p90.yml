@@ -72,13 +72,16 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
   - type: AttachableHolderVisuals

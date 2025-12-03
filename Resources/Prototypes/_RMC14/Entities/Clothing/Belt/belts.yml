@@ -572,8 +572,8 @@
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
-  name: M276 pattern M40 grenade rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
+  name: M276 pattern 30mm grenade rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the 30mm type grenades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
@@ -593,7 +593,7 @@
 - type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeLarge
-  name: M276 pattern M40 grenade rig Mk. II
+  name: M276 pattern 30mm grenade rig Mk. II
   description: The M276 Mk. II is an upgraded version of the M276 grenade rig, with more storage capacity.
   components:
   - type: Storage
@@ -871,6 +871,17 @@
     - id: RMCMagazinePistolT73
       amount: 5
     - id: RMCWeaponPistolT73
+
+- type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNPZ92
+  suffix: Filled, NPZ92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolNPZ92
+    - id: RMCMagazinePistolNP92
+      amount: 5
 
 - type: entity
   parent: RMCBeltHolsterPistol
@@ -1247,8 +1258,20 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilledAmmo
+  suffix: Filled, Mateba Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
@@ -1442,8 +1465,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilledAmmo
+  suffix: Filled, Winter Wyvern Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled
+  suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
     contents:
@@ -1470,7 +1505,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1494,12 +1529,15 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,17,1 # should be 9 slots
+    - 0,0,15,1 # 7 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
+      - RMCMagazinePistolM13AP
+      - RMCMagazinePistolM13ExtAP
+      - RMCMagazinePistolM13DrumAP
       - RMCWeaponPistolM13
   - type: LimitedStorage
     limits:
@@ -1508,18 +1546,24 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 8
+      count: 7
       whitelist:
         tags:
         - RMCMagazinePistolM13
         - RMCMagazinePistolM13Ext
         - RMCMagazinePistolM13Drum
+        - RMCMagazinePistolM13AP
+        - RMCMagazinePistolM13ExtAP
+        - RMCMagazinePistolM13DrumAP
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCBeltHolsterM13
 
 - type: entity
   parent: CMBeltMarine
@@ -1701,7 +1745,7 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - Sidearm
+        - RMCNailgunCompact
     - popup: rmc-storage-limit-max-mags
       count: 2
       whitelist:
@@ -1833,6 +1877,9 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltHolsterM13
 
 - type: Tag
   id: RMCBeltMedical

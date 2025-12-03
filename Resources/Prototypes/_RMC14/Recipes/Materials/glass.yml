@@ -1,0 +1,10 @@
+# directional window
+- type: rmcConstruction
+  id: RMCWindowDirectionalBuild
+  name: directional window
+  prototype: CMWindowDirectional
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 1
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2

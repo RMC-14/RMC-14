@@ -3,6 +3,7 @@
   id: RMCBinoculars
   name: binoculars
   description: A military-issued pair of binoculars.
+  suffix: RMC
   components:
   - type: Item
     size: Small
@@ -41,6 +42,24 @@
 
 - type: entity
   parent: RMCBinoculars
+  id: RMCBinocularsPVE
+  suffix: PVE
+  name: tactical monocular
+  description: A military-issued monocular.
+  components:
+  - type: Sprite
+    state: monocular
+  - type: Scope
+    zoomLevels:
+    - zoom: 1.4
+      offset: 10
+      allowMovement: false
+      doAfter: 0.1
+  - type: ItemCamouflage
+    states: {}
+
+- type: entity
+  parent: RMCBinoculars
   id: RMCBinocularsCiv
   name: binoculars
   description: A pair of binoculars.
@@ -49,7 +68,19 @@
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     state: binoculars_civ
   - type: ItemCamouflage
-    states:
+    states: {}
+
+- type: entity
+  parent: RMCBinocularsCiv
+  id: RMCBinocularsCivPVE
+  suffix: PVE
+  components:
+  - type: Scope
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: false
+      doAfter: 0.1
 
 - type: entity
   parent: RMCBinoculars
@@ -102,6 +133,33 @@
   - type: Rangefinder
     mode: Designator
     canDesignate: true
+
+- type: entity
+  parent: RMCLaserDesignator
+  id: RMCLaserDesignatorPVE
+  suffix: PVE
+  name: tactical monocular designator
+  description: Two-mode tactical monocular, developed for use alongside CAS elements and orbital support. Click a tile to target something.
+  components:
+  - type: Sprite
+    layers:
+    - state: advanced_monocular
+    - state: laser_cas_mono
+  - type: GenericVisualizer
+    visuals:
+      enum.RangefinderLayers.Layer:
+        light:
+          Rangefinder: { state: laser_range_mono }
+          Designator: { state: laser_cas_mono }
+          Spotter: { state: laser_spotter_mono }
+  - type: Scope
+    zoomLevels:
+    - zoom: 1.4
+      offset: 10
+      allowMovement: false
+      doAfter: 0.1
+  - type: ItemCamouflage
+    states: {}
 
 - type: entity
   parent: RMCRangefinder

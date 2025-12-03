@@ -14,6 +14,7 @@
   - All combat roles should deploy when possible.
   - Correspondents focus on reporting on combat and disengage when attacked.
   - Medical roles (excluding corpsmen) are not combat roles.
+  - Do not use setpose for anything but setting an examinable character pose - such as leaning on a wall.
 
   ## Character Restrictions
   - Characters that are not synthetics by role must be entirely biological, and genuinely sentient; capable of independent thought, emotions, and free will.

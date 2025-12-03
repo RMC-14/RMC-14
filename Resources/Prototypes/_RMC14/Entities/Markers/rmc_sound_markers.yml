@@ -132,6 +132,33 @@
     sound:
       path: /Audio/_RMC14/Structures/metalhit.ogg
 
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundXenoVentCrawl
+  suffix: Vent Crawl
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      collection: XenoVentCrawl
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundXenoVentPass
+  suffix: Vent Pass
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      collection: XenoVentPass
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundXenoDoorPry
+  suffix: Xeno Door Pry
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      collection: RMCXenoPry
+
 # Ambient Markers
 
 - type: entity

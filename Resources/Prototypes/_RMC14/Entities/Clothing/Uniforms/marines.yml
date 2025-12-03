@@ -30,52 +30,61 @@
 
 # Royal
 - type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineRoyal
+  name: royal crown marine uniform
+  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
   suffix: Filled, Royal
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyal
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
 
 - type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMK80 # TODO RMC14 sprite
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalMK80
   suffix: Filled, Royal, MK80
   components:
   - type: WebbingClothing
     startingWebbing: RMCShoulderHolsterMK80
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
 
 - type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMedic # TODO RMC14 sprite
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalMedic
   suffix: Filled, Royal, Medic
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingSurgicalBlue
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
 
 - type: entity
   parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalTeamlead # TODO RMC14 sprite
+  id: RMCJumpsuitMarineRoyalTeamlead
+  name: royal crown marine uniform
+  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
   suffix: Filled, Royal, Teamlead
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyalTeamlead
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 # Formal
 - type: entity

@@ -12,8 +12,8 @@
   whitelisted: true
   supervisors: cm-job-supervisors-colonists
   accessGroups:
-  - Colonist
-  - Synth
+  - Colony # Colony All Access
+  - ColonistSynthShipside # Med, Engi, Synth
   roleWeight: 0.25
   basePlaytimeTracker: true
   special:
@@ -67,40 +67,6 @@
           Blunt: 35
     - type: Synth
       generation: rmc-species-synth-generation-second
-      welderDamageToRepair:
-        types:
-          Blunt: -15
-          Piercing: -15
-          Slash: -15
-      cableCoilDamageToRepair:
-        types:
-          Caustic: -15
-          Heat: -15
-          Shock: -15
-          Cold: -15
-      addComponents:
-      # TODO darksight instead of night vision
-      - type: NightVision
-        innate: true
-      - type: EyeProtection
-      - type: WoundableUntreatable
-      - type: Insulated
-      - type: RMCLeapProtection
-        inherentStunDuration: 3
-      removeComponents:
-      - type: CMSurgeryTarget
-      - type: Infectable
-      - type: Hunger
-      - type: Thirst
-      - type: Perishable
-      - type: ThermalRegulator
-      - type: Stamina
-      - type: DamageForceSay
-      - type: Dna
-      - type: InjectableSolution
-      - type: IVDripTarget
-      - type: RMCSuicide
-        damage: { }
   hidden: true
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 

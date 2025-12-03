@@ -61,7 +61,7 @@
 - type: entity
   parent: CMBeltMedicalFilled
   id: RMCBeltMedicalDefibAnalyzerFilled
-  suffix: Filled
+  suffix: Filled, Better
   components:
   - type: StorageFill
     contents:

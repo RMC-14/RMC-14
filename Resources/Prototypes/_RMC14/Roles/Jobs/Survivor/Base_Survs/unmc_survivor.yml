@@ -1,0 +1,60 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorUNMC
+  name: cm-job-name-survivor-unmc
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorUNMC
+  spawnMenuRoleName: UNMC Remnant (Survivor)
+  ranks:
+    RMCRankPrivateFirstClass: []
+  accessGroups:
+  - Colonist
+  startingGear: RMCGearSurvivorUNMC
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilian
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorUNMC
+  equipment:
+    id: CMDogtagRifleman
+    jumpsuit: JumpsuitMarine
+    outerClothing: RMCArmorM3LightVariants
+    shoes: CMBootsBlackFilled
+    back: CMSatchelFillSurvivor # remake to be marine satchel
+    head: ArmorHelmetM10
+    gloves: CMHandsBlackMarine
+    pocket2: RMCPouchFlareFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorUNMC
+  name: survivor unmc spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorUNMC
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorUNMC
+  isHumanoid: true

@@ -164,6 +164,9 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
       state: hudeye
@@ -236,6 +239,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi

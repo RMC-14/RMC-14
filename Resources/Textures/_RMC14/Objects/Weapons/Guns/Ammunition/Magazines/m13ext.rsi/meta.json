@@ -4,7 +4,7 @@
         "x": 32,
         "y": 32
     },
-    "license": "CC-BY-SA-3.0",
+    "license": "CC-BY-SA-4.0",
     "copyright": "Sprites by github noctyrnal",
     "states": [
         {
@@ -12,6 +12,9 @@
         },
         {
             "name": "mag-1"
+        },
+        {
+            "name": "ammo_band"
         }
     ]
 }

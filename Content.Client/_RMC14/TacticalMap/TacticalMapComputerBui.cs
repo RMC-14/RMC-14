@@ -157,14 +157,23 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
 
         var blips = new TacticalMapBlip[computer.Blips.Count];
+        var entityIds = new int[computer.Blips.Count];
         var i = 0;
 
-        foreach (var blip in computer.Blips.Values)
+        foreach (var (entityId, blip) in computer.Blips)
         {
-            blips[i++] = blip;
+            blips[i] = blip;
+            entityIds[i] = entityId;
+            i++;
         }
 
-        Window.Wrapper.UpdateBlips(blips);
+        Window.Wrapper.UpdateBlips(blips, entityIds);
+
+        int? localPlayerId = _player.LocalEntity != null
+            ? (int?)EntMan.GetNetEntity(_player.LocalEntity.Value)
+            : null;
+        Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
+        Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
     }
 
     private void UpdateLabels()

@@ -505,7 +505,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: GrantSquadLeaderTracker
@@ -521,4 +521,4 @@
   parent: RMCHeadsetShip
   id: RMCHeadsetPrisoner
   name: prisoner headset
-  description: Headset provided to prisoners as directed by marine law.
+  description: Headset provided to prisoners as directed by Marine Law.

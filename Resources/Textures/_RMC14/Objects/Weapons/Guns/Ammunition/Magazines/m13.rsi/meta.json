@@ -12,6 +12,9 @@
         },
         {
             "name": "mag-1"
+        },
+        {
+            "name": "ammo_band"
         }
     ]
 }

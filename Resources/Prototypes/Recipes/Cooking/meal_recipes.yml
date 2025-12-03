@@ -1727,6 +1727,18 @@
     OrganAnimalHeart: 1
 
 - type: microwaveMealRecipe
+  id: RecipeBerryDelight
+  name: berry delight recipe
+  result: FoodCakeBerryDelight
+  time: 5
+  group: Cake
+  solids:
+    FoodCakeBlueberry: 1
+    FoodBerries: 2
+  reagents:
+    Milk: 10
+
+- type: microwaveMealRecipe
   id: RecipeBreadDog
   name: bread dog recipe
   result: MobBreadDog
@@ -1868,14 +1880,14 @@
     FoodOnionSlice: 1
     FoodTomato: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe # Changed for RMC
   id: RecipeColdChili
   name: cold chili recipe
   result: FoodSoupChiliCold
   time: 5
   group: Soup
   reagents:
-    Nitrogen: 5
+    RMCNitrogen: 5
   solids:
     FoodSoupChiliHot: 1
 
@@ -2481,3 +2493,14 @@
     PoppySeeds: 1
   reagents:
     SodaWater: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCottonCake
+  name: cotton cake recipe
+  result: FoodCakeCotton
+  time: 5
+  group: Moth
+  reagents:
+    Fiber: 10
+  solids:
+    FoodCakePlain: 1

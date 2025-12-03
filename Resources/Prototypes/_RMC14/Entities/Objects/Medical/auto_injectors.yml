@@ -245,6 +245,44 @@
     labelTextLocId: rmc-epinephrine-container-label-text
 
 - type: entity
+  parent: CMAutoInjector
+  id: RMCIronAutoInjector
+  name: iron autoinjector
+  description: An autoinjector loaded with 3 uses of iron, a chemical commonly used to treat blood loss.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      RMCIron: 45
+  - type: IconLabel
+    labelTextLocId: rmc-iron-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCDermalineAutoInjector
+  name: dermaline autoinjector
+  description: An autoinjector loaded with 3 uses of Dermaline, an advanced burn treatment chemical.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMDermaline
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMDermaline: 45
+  - type: IconLabel
+    labelTextLocId: rmc-dermaline-container-label-text
+
+- type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjector15
   name: medic autoinjector (M-XL)

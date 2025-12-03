@@ -26,6 +26,14 @@
     state: laz_sign
 
 - type: entity
+  parent: RMCLazarusLandingSign
+  id: RMCLazarusLandingSignFixed
+  description: A large sign reading 'Lazarus Landing - POP. 73'. The Company logo is emblazoned in the corner.
+  components:
+  - type: Sprite
+    state: laz_sign_fixed
+
+- type: entity
   parent: RMCBaseLandingSign
   id: RMCSolarisRidgeSign
   name: Solaris Ridge sign
@@ -139,3 +147,21 @@
   components:
   - type: Sprite
     state: chances_claim
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCPortNereidCargoSign
+  name: Port Nereid - Weston-Yamada Cargo Depot AC-170 - Landing Zone one sign
+  description: A large sign that identifies this area as "Cargo Depot AC-170". It's clearly seen many days of rain, and jungle flora has started to creep up it.
+  components:
+  - type: Sprite
+    state: nereidcargo_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCPortNereidSpaceportSign
+  name: Port Nereid - Port Nereid International Spaceport - Landing Zone two sign
+  description: A large sign that reads 'Port Nereid Spaceport". Under the blue light, you can read some incredibly mundane information about the colony, above a sweeping graphic of what appears to be a stylized spaceship. Although the sign has some vine growing on it, it's clear it's been repainted many times, keeping it clean and sleek.
+  components:
+  - type: Sprite
+    state: nereidspaceport_sign

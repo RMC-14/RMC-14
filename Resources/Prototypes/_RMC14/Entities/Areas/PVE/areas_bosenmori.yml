@@ -1,0 +1,600 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBosenmoriBasho
+  suffix: Bosenmori Basho Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoOob
+  name: Out Of Bounds
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false
+    alwaysPowered: true
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoLZ1
+  name: Bosenmori Basho - Nexus Landing
+  components:
+  - type: Sprite
+    state: noop
+  - type: Area
+    landingZone: true
+    minimapColor: '#EBE5E5E3'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoLZ1
+  id: RMCAreaBosenmoriBashoLZ2
+  name: Bosenmori Basho - Corporate Landing
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoLZ1
+  id: RMCAreaBosenmoriBashoLZ3
+  name: Bosenmori Basho - Cave Entry
+  components:
+  - type: Area
+    linkedLz: dropship_lz3
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoUnknownCaves
+  name: Unknown
+  components:
+  - type: Sprite
+    state: cave
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    paradropping: false
+    OB: true
+    supplyDrop: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoUnknownTemple
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoFirstLevelCaves
+  name: Underground Cave Network
+  components:
+  - type: Sprite
+    state: away2
+  - type: Area
+    linkedLz: dropship_lz3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoRuinsInternal
+  name: Ruins Interal
+  components:
+  - type: Sprite
+    state: away
+  - type: Area
+    linkedLz: dropship_lz3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoAbandonedSector
+  name: Abandoned Sector
+  components:
+  - type: Sprite
+    state: cave
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoAbandonedDome
+  name: Abandoned Dome
+  components:
+  - type: Sprite
+    state: cave
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoPilgrimPath
+  name: Pilgrim Path
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoPilgrimPath
+  id: RMCAreaBosenmoriBashoDrowningCrow
+  name: The Drowning Crow
+  components:
+  - type: Sprite
+    state: away1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: false
+    OB: true
+    supplyDrop: true
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoFieldResearchSite
+  name: Field Research Site
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoFieldResearchSiteInside
+  name: Field Research Site
+  suffix: Bosenmori Basho Area, Inside
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoNorthBarrens
+  name: North Barrens
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoFiltration
+  name: Filtration Sector
+  components:
+  - type: Sprite
+    state: bluenew
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoFiltrationInside
+  name: Filtration Department
+  components:
+  - type: Sprite
+    state: bluenew
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoCavernRiver
+  name: Cavern River
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoRiver
+  name: Bosenmori River
+  components:
+  - type: Sprite
+    state: bluenew
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoWestSector
+  name: West Sector
+  components:
+  - type: Sprite
+    state: west
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoWestBarrens
+  name: West Barrens
+  components:
+  - type: Sprite
+    state: west
+  - type: Area
+    linkedLz: dropship_lz2, dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoSecuredArmory
+  name: Secure Armory
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoSouthWestSector
+  name: Southwest Sector
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoSouthEastSector
+  name: Southeast Sector
+  components:
+  - type: Sprite
+    state: southeast
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoEastSector
+  name: East Sector
+  components:
+  - type: Sprite
+    state: east
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoNorthSector
+  name: North Sector
+  components:
+  - type: Sprite
+    state: north
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoMountainClearing
+  name: Mountain Clearing
+  components:
+  - type: Sprite
+    state: away1
+  - type: Area
+    linkedLz: dropship_lz3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoCorporateDome
+  name: Weston-Yamada Corporate Dome
+  components:
+  - type: Sprite
+    state: bluenew
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoTelecomms
+  name: Telecommunication Department
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoTelecomms
+  id: RMCAreaBosenmoriBashoEngineering
+  name: Engineering Department
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoCorporateDome
+  id: RMCAreaBosenmoriBashoHumanResources
+  name: Human Resources Department
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoTerrarnium
+  name: Terrarium
+  components:
+  - type: Area
+    weatherEnabled: true
+  - type: Sprite
+    state: atmos
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoLivingSector
+  name: Living Sector
+  components:
+  - type: Sprite
+    state: crew_quarters
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoResearch
+  name: Research Department
+  components:
+  - type: Sprite
+    state: research
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoGym
+  name: Gym
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoMedical
+  name: Medical
+  components:
+  - type: Sprite
+    state: medbay3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoFoodProcessing
+  name: Food Porcessing Department
+  components:
+  - type: Sprite
+    state: hydro
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoConstruction
+  name: Construction Site
+  components:
+  - type: Sprite
+    state: storage
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriBashoCargo
+  name: Cargo Department
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoCargo
+  id: RMCAreaBosenmoriBashoShipment
+  name: Shipment Department
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriKitchen
+  name: Kitchen Department
+  components:
+  - type: Sprite
+    state: kitchen
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriNexusMain
+  name: Nexus Main Hall
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriSecurityDepartment
+  name: Security Department
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriArmory
+  name: Armory
+  components:
+  - type: Sprite
+    state: armory
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriSurplusStore
+  name: Surplus Store
+  components:
+  - type: Sprite
+    state: bunker01_storage
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoDrowningCrow
+  id: RMCAreaBosenmoriColonyOperation
+  name: Colony Operation center
+  components:
+  - type: Sprite
+    state: bluenew
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoMaintenanceSegment
+  name: Maintenance Segment
+  components:
+  - type: Sprite
+    state: away1
+  - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoCorporateLow
+  name: Corporate Lower Level
+  components:
+  - type: Sprite
+    state: bluenew
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoSecuredArmoryLow
+  name: Secure Armory Lower Level
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoEngineeringLow
+  name: Engineering Lower Level
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoUndergroundCaveNetwork
+  name: Underground Local Cave Network
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoShipmentLow
+  name: Shipment Lower Level
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoNexusLow
+  name: Nexus Lower Level
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoArmoryLow
+  name: Armory Lower Level
+  components:
+  - type: Sprite
+    state: armory
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoEmergencyOpLow
+  name: Emergency Operations Lower Level
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoEngineeringLow
+  id: RMCAreaBosenmoriBashoSewageSystem
+  name: Bosenmori Sewage System
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoResearchLow
+  name: Research Lower Level
+  components:
+  - type: Sprite
+    state: research
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoTerraniumLow
+  name: Terrarium Lower Level
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoFoodLow
+  name: Food Processing Lower Level
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoCargoLow
+  name: Cargo Lower Level
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoSandTemple
+  name: Sand Temple
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaBosenmoriBasho
+  id: RMCAreaBosenmoriBashoRuinsPerimeter
+  name: Ruins Perimeter
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaBosenmoriBashoUnknownCaves
+  id: RMCAreaBosenmoriBashoMining
+  name: Mining Sector

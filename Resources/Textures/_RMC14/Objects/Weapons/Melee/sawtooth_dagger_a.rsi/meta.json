@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Created for RMC14 by augustsun(discord/august-sun(github)",
+  "size": {
+      "x": 32,
+      "y": 32
+  },
+  "states": [
+        {
+          "name": "equipped-MASK",
+          "directions": 4
+        },
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+  ]
+}

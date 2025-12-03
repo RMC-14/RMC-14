@@ -1,0 +1,22 @@
+﻿- type: entity
+  parent: RMCBaseEffect
+  id: RMCBaseGibEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.8
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCBaseGibEffect
+  id: RMCGibEffectXenoSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/Gibs/xeno_gib_small.rsi
+    noRot: true
+    state: small_gib
+    drawdepth: Effects

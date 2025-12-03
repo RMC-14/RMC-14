@@ -88,10 +88,28 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Sugar
+        - ReagentId: RMCSugar
           Quantity: 50
 
 # Ketchup
+- type: reagent
+  id: RMCKetchup
+  name: reagent-name-ketchup
+  group: Foods
+  desc: reagent-desc-ketchup
+  physicalDesc: reagent-physical-desc-tangy
+  flavor: tomato
+  color: "#731008"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 5
+        nutMetabolism: 0.1
+
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentKetchup
@@ -104,10 +122,28 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Ketchup
+        - ReagentId: RMCKetchup
           Quantity: 50
 
 # Soy Sauce
+- type: reagent
+  id: RMCSoysauce
+  name: reagent-name-soysauce
+  group: Foods
+  desc: reagent-desc-soysauce
+  physicalDesc: reagent-physical-desc-salty
+  flavor: salty
+  color: "#792300"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 2
+        nutMetabolism: 0.1
+
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentSoysauce
@@ -120,10 +156,28 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Soysauce
+        - ReagentId: RMCSoysauce
           Quantity: 50
 
 # Corn Oil
+- type: reagent
+  id: RMCCornoil
+  name: reagent-name-cornoil
+  group: Foods
+  desc: reagent-desc-cornoil
+  physicalDesc: reagent-physical-desc-oily
+  flavor: oily
+  color: "#302000"
+  recognizable: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 20
+        nutMetabolism: 0.1
+
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentCornOil
@@ -136,7 +190,7 @@
     solutions:
       food:
         reagents:
-        - ReagentId: OilOlive
+        - ReagentId: RMCCornoil
           Quantity: 50
 
 # Salt

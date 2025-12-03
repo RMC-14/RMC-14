@@ -245,6 +245,27 @@
         - LowImpassable
 
 - type: entity
+  parent: RMCTacticalMapTableLarge
+  id: RMCTacticalMapTableLargeSquare
+  suffix: 2x2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/2x2_map_table.rsi
+    offset: 0.5, 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.4,1.4"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCEscapePodController
   name: escape pod controller

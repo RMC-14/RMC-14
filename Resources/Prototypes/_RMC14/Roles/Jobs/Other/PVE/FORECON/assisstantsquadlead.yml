@@ -47,13 +47,13 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVEAssistantSL
   name: forecon assistant squad lead spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: marine_spawn
+    state: leader_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVEAssistantSL
 

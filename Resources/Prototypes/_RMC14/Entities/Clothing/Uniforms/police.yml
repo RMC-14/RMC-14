@@ -112,7 +112,7 @@
   parent: RMCMarineUniformBase
   id: RMCScrubsPrisonMedsec
   name: prisoner medium custody scrubs
-  description: Orange scrubs worn by prisoners as directed by marine law. Marked with yellow for medium custody prisoners.
+  description: Orange scrubs worn by prisoners as directed by Marine Law. Marked with yellow for medium custody prisoners.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/prisoner/medsec.rsi
@@ -121,7 +121,7 @@
   parent: RMCMarineUniformBase
   id: RMCScrubsPrisonMaxsec
   name: prisoner maximum custody scrubs
-  description: Orange scrubs worn by prisoners as directed by marine law. Marked with red for maximum custody prisoners.
+  description: Orange scrubs worn by prisoners as directed by Marine Law. Marked with red for maximum custody prisoners.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/prisoner/maxsec.rsi

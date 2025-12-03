@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Access;
 using Content.Shared.Roles;
@@ -19,6 +20,9 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<JobPrototype>> Jobs = new();
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<RankPrototype>> Ranks = new();
 
     [DataField, AutoNetworkedField]
     public List<CMVendorSection> Sections = new();

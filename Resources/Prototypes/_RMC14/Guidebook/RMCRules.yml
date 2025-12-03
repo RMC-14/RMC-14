@@ -98,23 +98,6 @@
   name: rmc-guide-entry-rules-command
   priority: 5
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCommand.xml"
-  children:
-  - RMCCommandRoles
-  - RMCHigherStandards
-
-- type: guideEntry
-  parent: RMC
-  id: RMCCommandRoles
-  name: rmc-guide-entry-rules-command-roles
-  priority: 13
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCCommandRoles.xml"
-
-- type: guideEntry
-  parent: RMC
-  id: RMCHigherStandards
-  name: rmc-guide-entry-rules-higher-standards
-  priority: 14
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCHigherStandards.xml"
 
 # roleplay standards
 - type: guideEntry

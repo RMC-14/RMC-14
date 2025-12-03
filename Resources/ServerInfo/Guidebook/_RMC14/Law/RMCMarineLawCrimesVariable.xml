@@ -51,12 +51,12 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"].
+        Failing to follow a lawful order from a superior person of rank or position, while under their command. \n[italic]This does not apply to orders made to a person with intent to arrest, which instead would be [bold]Resisting Arrest[/bold][/italic]
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow an order which is not personally directed.\n\nOR\n\nDisrespecting someone of a higher rank or position.\n[bold]7.5 minutes.[/bold]
+        Failing to follow an order which is not personally directed.\n[bold]7.5 minutes.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
@@ -88,12 +88,12 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Unauthorized use of Listening Devices
+        Illegal use of Listening Devices
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        The use of listening devices in violation of Standard Operating Procedures.
+        The unauthorized use of listening devices in violation of Standard Operating Procedures.
       </Box>
     </ColorBox>
     <ColorBox>
@@ -104,6 +104,90 @@
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Illegally placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\n[italic]If the listening device is also tied to a foreign government or terror organisation this is additionally considered Subterfuge[/italic].\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Resisting Arrest
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To resist or refuse to comply with a lawful arrest, detainment, search, or NJP.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Refusing to comply.\n[bold]5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Resisting by fleeing or using force.\n[bold]10 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Aiding and Abetting
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Assisting others in committing a crime, directly or indirectly, or encouraging them to commit one. Any person Aiding and Abetting is required to be told the crimes of the person they aided.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]Same punishment as crime committed.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]Same punishment as crime committed.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Disorderly Conduct in \nConfinement
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To cause disruption in a significant manner while in Brig and under arrest. This can be added on to any charge.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Breaking a Minor Law while under arrest or in Prison.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Breaking a Major Law while under arrest or in Prison.\n[bold]15 minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Intentional Public Mischief
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Making a false statement that accuses someone of having committed an offence. \nDoing anything intended to cause someone to be suspected of having committed an offence that the person has not committed. \nTo divert suspicion from themselves, reporting that an offence has been committed when it has not been committed. \nFalse statements relating to investigations are considered [bold]False Testimony[/bold].
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Relating to a minor crime.\n[bold]7.5 minutes.[/bold]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Relating to a major crime, or anything above this.\n[bold]15 minutes.[/bold]
       </Box>
     </ColorBox>
 

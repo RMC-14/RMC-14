@@ -304,21 +304,21 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: overshield
-        - name: Unlock Tier 4
-          description: Transitions the tree to another tier.
-          cost: 5
-          events:
-          - !type:TechUnlockTierEvent
-            tier: 4
-          - !type:TechAnnounceEvent
-            author: ALMAYER DEFCON LEVEL INCREASED
-            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4.
-
-              LEVEL 4 assets have been authorised to handle the situation."
-            sound: /Audio/_RMC14/AI/commandreport.ogg
-          icon:
-            sprite: _RMC14/Interface/tech_tree.rsi
-            state: upgrade
+#        - name: Unlock Tier 4
+#          description: Transitions the tree to another tier.
+#          cost: 5
+#          events:
+#          - !type:TechUnlockTierEvent
+#            tier: 4
+#          - !type:TechAnnounceEvent
+#            author: ALMAYER DEFCON LEVEL INCREASED
+#            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4.
+#
+#              LEVEL 4 assets have been authorised to handle the situation."
+#            sound: /Audio/_RMC14/AI/commandreport.ogg
+#          icon:
+#            sprite: _RMC14/Interface/tech_tree.rsi
+#            state: upgrade
 #      -
 #        - name: Nuclear Device
 #          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.

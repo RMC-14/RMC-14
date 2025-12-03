@@ -21,7 +21,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillFirearms: 1 
+        RMCSkillFirearms: 1
         RMCSkillPolice: 2
         RMCSkillFireman: 2
         RMCSkillConstruction: 1
@@ -64,14 +64,14 @@
       role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-  
+
 - type: startingGear
   id: RMCGearRoyalMedic
   equipment:
     head: RMCHeadRoyalHelmet # TODO RMC14 TSE medic helmet
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyalMedic # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyalMedic
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
     shoes: RMCBootsRoyalFilled

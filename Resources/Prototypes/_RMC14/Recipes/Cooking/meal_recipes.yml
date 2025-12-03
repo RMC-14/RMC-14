@@ -116,8 +116,7 @@
   solids:
     FoodMeatChickenCutlet: 1
   reagents:
-    Flour: 5
-    Egg: 6
+    RMCBatter: 5
 
 - type: microwaveMealRecipe
   id: RecipeRMCVegetablePizza
@@ -151,12 +150,141 @@
   result: RMCFoodOnigiri
   time: 5
   group: Savory
-  solids:
-    FoodRiceBoiled: 1
   reagents:
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
+  solids:
+    FoodRiceBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCarbonara
+  name: carbonara recipe
+  result: RMCFoodCarbonara
+  time: 10
+  group: Pasta
+  solids:
+    FoodNoodlesBoiled: 1
+    FoodCheeseSlice: 1
+    FoodMeatBacon: 1
+  reagents:
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRiceMango
+  name: mango recipe
+  result: FoodRiceMango
+  time: 15
+  group: Dessert
+  reagents:
+    Rice: 15
+    Milk: 10
+    Sugar: 5
+  solids:
+    FoodBowlBig: 1
+    RMCFoodMango: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBanhMi
+  name: banh mi recipe
+  result: FoodBanhMi
+  time: 15
+  group: Savory
+  reagents:
+    Mayo: 5
+  solids:
+    FoodBreadBaguette: 1
+    FoodCarrot: 1
+    FoodMeat: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenParm
+  name: chicken parm recipe
+  result: FoodChickenParmHero
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodTomato: 1
+    FoodMeatChickenFried: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeYorkshirePudding
+  name: yorkshire pudding recipe
+  result: FoodYorkshirePudding
+  time: 10
+  group: Breads
+  reagents:
+    Milk: 5
+    Flour: 5
+    Egg: 6
+    TableSalt: 5
+
+- type: microwaveMealRecipe
+  id: RecipeSausage
+  name: Sausage recipe
+  result: FoodMeatSausage
+  time: 5
+  group: Meat
+  solids:
+    FoodMeatCutlet: 1
+    FoodMeatMeatball: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHotDog
+  name: hot dog recipe
+  result: FoodHotDog
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHotDogCooked
+  name: cooked hot dog recipe
+  result: FoodHotDog
+  time: 5
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatSausageCooked: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFish
+  name: grilled fish recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChips
+  name: fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushi
+  name: fish sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+  reagents:
+    Water: 5
+    Rice: 5
 
 #Cakes
 - type: microwaveMealRecipe
@@ -170,3 +298,143 @@
     Sugar: 30
     RMCNitrogen: 10
     RMCPhoron: 10
+
+- type: microwaveMealRecipe
+  id: RecipeBlackForest
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 5
+  solids:
+    FoodCakeChocolate: 1
+    FoodCherry: 1
+  reagents:
+    Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaSupreme
+  name: supreme pizza recipe
+  result: RMCFoodPizzaSupremeFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeat: 1
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionRedSlice: 1
+    FoodChiliPepper: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaCalabresa
+  name: calabresa pizza recipe
+  result: RMCFoodPizzaCalabresaFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeatSausage: 2
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCakeBlackForest
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 5
+  solids:
+    FoodCakeChocolate: 1
+    FoodCherry: 1
+  reagents:
+    Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeVanillaCake
+  name: vanilla cake recipe
+  result: FoodCakeVanilla
+  time: 5
+  group: Cake
+  reagents:
+    Milk: 5
+    Sugar: 5
+  solids:
+    FoodCakePlain: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTapsilog
+  name: tapsilog recipe
+  result: FoodTapsilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTocilog
+  name: tocilog recipe
+  result: FoodTocilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+    Sugar: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChicksilog
+  name: Chicksilog recipe
+  result: FoodChicksilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatChickenFried: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCarpsilog
+  name: Carpsilog recipe
+  result: FoodCarpsilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+    Vinegar: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatFish: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBangersMash
+  name: bangers and mash recipe
+  result: FoodBangersMash
+  time: 10
+  group: Savory
+  solids:
+    FoodOnionSlice: 1
+    FoodMeatSausage: 1
+    FoodPotato: 1
+
+- type: microwaveMealRecipe
+  id: RecipePieMash
+  name: pie and mash recipe
+  result: FoodPieMash
+  time: 10
+  group: Savory
+  solids:
+    FoodButterSlice: 1
+    FoodPieMeatSlice: 1
+    FoodPotato: 1

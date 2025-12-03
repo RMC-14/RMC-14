@@ -304,6 +304,9 @@ public abstract class SharedStorageSystem : EntitySystem
         // close ui
         foreach (var entity in storageComp.Container.ContainedEntities)
         {
+            if (HasComp<RMCItemKeepUIOpenOnStorageClosedComponent>(entity))
+                continue;
+
             UI.CloseUis(entity, actor);
         }
     }

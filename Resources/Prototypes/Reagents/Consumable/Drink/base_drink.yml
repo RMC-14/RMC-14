@@ -45,6 +45,7 @@
   id: BaseAlcohol
   group: Drinks
   abstract: true
+  alcohol: true # RMC14
   slipData:
     requiredSlipSpeed: 3.5
   friction: 0.4

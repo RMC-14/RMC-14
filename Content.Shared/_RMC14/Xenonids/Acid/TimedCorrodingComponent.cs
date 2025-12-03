@@ -14,6 +14,9 @@ public sealed partial class TimedCorrodingComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId AcidPrototype;
 
+    [DataField, AutoNetworkedField]
+    public XenoAcidStrength Strength = XenoAcidStrength.Normal;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan CorrodesAt;
 

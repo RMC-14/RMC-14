@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Tools;
@@ -89,6 +89,20 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         if (ent.Comp.State == CommunicationsTowerState.Broken)
             return;
+
+        if (TryComp<RMCDeviceBreakerComponent>(args.Used, out var breaker) && ent.Comp.State != CommunicationsTowerState.Broken)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            _doAfter.TryStartDoAfter(doafter);
+            return;
+        }
 
         if (!HasComp<MultitoolComponent>(args.Used))
             return;

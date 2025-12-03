@@ -140,6 +140,73 @@
     flavors:
     - ChickenTender
 
+# CLF
+
+- type: entity
+  abstract: true
+  parent: CMMREFoodMain
+  id: RMCMREFoodCLF
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_clf.rsi
+  - type: Food
+    transferAmount: 4
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 26
+        - ReagentId: TableSalt
+          Quantity: 4
+
+- type: entity
+  parent: RMCMREFoodCLF
+  id: RMCMREFoodMeatSlab
+  name: wrapped meat slab
+  description: A wrapped, rare slab of some meat that has been quickly grilled.
+  components:
+  - type: Sprite
+    state: open_meat
+  - type: FlavorProfile
+    flavors:
+    - meaty
+
+- type: entity
+  parent: RMCMREFoodCLF
+  id: RMCMREFoodMeatSlabCheese
+  name: wrapped cheesy meat slab
+  description: A wrapped, rare slab of some meat that has been quickly grilled and covered in melted cheese. Wonderfully greasy.
+  components:
+  - type: Sprite
+    state: open_meat_cheese
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - cheesy
+
+- type: entity
+  parent: RMCMREFoodCLF
+  id: RMCMREFoodBread
+  name: wrapped sourdough bread
+  description: A wrapped, small loaf of dry sourdough bread.
+  components:
+  - type: Sprite
+    state: open_bread
+  - type: FlavorProfile
+    flavors:
+    - bread
+
+- type: entity
+  parent: RMCMREFoodMeatSlabCheese
+  id: RMCMREFoodMargaritaPizza
+  name: wrapped margarita pizza
+  description: A wrapped, small margarita pizza.
+  components:
+  - type: Sprite
+    state: open_pizza
+
 # Flavors
 - type: flavor
   id: BonelessPorkRibs

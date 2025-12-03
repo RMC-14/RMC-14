@@ -1,14 +1,14 @@
 ﻿<Document>
-  # NON-Modifiable Department Regulations
+  # NON-Modifiable Department and Equipment
 
-  ## Equipment and Clothing
+  ## Job Specific Equipment
 
-  - Equipment, clothing, and any similar items from personal job-specific vendors may not be awarded or otherwise handed out unless it is standard issue equipment that can be obtained through requisitions normally, or is equipment specifically intended to be used by another designated person, such as spotter equipment from a sniper specialist being given to a rifleman that is becoming a spotter.
-  - Armory equipment is unrelated to this, and has its own regulations.
+  - Equipment, clothing, and any similar items from personal job-specific vendors may not be awarded or otherwise handed out.
+  - The only exceptions to this is [bold]Standard Issue[/bold] equipment that can be obtained through requisitions normally, or is equipment specifically intended to be used by another designated person, such as spotter equipment from a sniper specialist being given to a rifleman that is becoming a spotter.
 
   ## Armories
 
-  Armory equipment is intended to supply and provide protection for shipside personnel during shipside emergencies.
+  Armory equipment is unrelated other equipment, and has its own regulations. Armory equipment is intended to supply and provide protection for shipside personnel during shipside emergencies.
 
   - Armory equipment may only be given to all personnel during a Code [bold][color=red]Red[/color][/bold] or Code [bold][color=black]Delta[/color][/bold] scenario. Officers must be prioritized before enlisted.
   - Equipment stored in armories such as M890 Tactical Shotguns and ballistics vests are not allowed to be handed out without a clear, understandable, and urgent reason. Deployment is not an urgent reason.
@@ -20,7 +20,7 @@
   - The UNMC and UN flag.
   - All provided tents.
   - Honor Guard kits, provided they are used within their own restrictions.
-  - Staff Officer Armory Weapon Racks.
+  - [bold]Staff Officer[/bold] Armory Weapon Racks.
 
   ## AI Core
 
@@ -67,7 +67,7 @@
 
   - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] may modify any access to a person's ID card for any reason.
   - The [color=#008000][bold]Commander[/bold][/color] may modify any person's access to any or all departments with the head of department's approval.
-  - Department heads may grant and approve access to their work area when employing recovered personnel.
+  - [bold]Department Heads[/bold] may grant and approve access to their work area when employing recovered personnel.
   - In emergencies, such as missing command staff, any [bold]Officer[/bold] may modify their own access.
 
 </Document>

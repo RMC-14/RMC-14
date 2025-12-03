@@ -468,6 +468,9 @@
   name: small tool webbing
   description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage. This is the small low-budget version.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
+    state: webbing
   - type: Storage
     grid:
     - 0,0,11,1 #6 slots
@@ -519,6 +522,8 @@
         components:
         - EntrenchingTool
         - LightReplacer
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -540,26 +545,65 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
-  id: RMCToolWebbingSmallERT
-  suffix: Filled
+  id: RMCToolWebbing
+  name: tool webbing
+  description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage.
   components:
   - type: Storage
-    maxItemSize: Small
     grid:
-    - 0,0,13,1 # 7 slots
+    - 0,0,13,1 #7 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - PowerCell
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      components:
+      - Welder
+      - PowerCell
+      - EntrenchingTool
   - type: Webbing
     components:
     - type: Storage
       maxItemSize: Small
       grid:
-      - 0,0,13,1 # 7 slots
+      - 0,0,13,1 #7 slots
+      whitelist:
+        tags:
+        - Crowbar
+        - Screwdriver
+        - Wirecutter
+        - Wrench
+        - CableCoil
+        - Multitool
+        - PowerCell
+        - RMCNailgunCompact
+        - RMCNailgunTactical
+        components:
+        - Welder
+        - PowerCell
+        - EntrenchingTool
     - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        components:
+        - EntrenchingTool
+        - LightReplacer
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
     - type: StoreAfterFailedInteract
-  - type: FixedItemSizeStorage
 
 - type: entity
-  parent: RMCToolWebbingSmallERT
-  id: RMCToolWebbingSmallERTFilled
+  parent: RMCToolWebbing
+  id: RMCToolWebbingFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -683,7 +727,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCRangefinder
     - id: RMCGrenadeBlastM12
     - id: RMCTelescopicBaton
@@ -696,8 +740,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO RMC14: PMC CFR ration
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
+    - id: RMCMREWeYa
     - id: CMCrowbar # TODO RMC14: tactical prybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
@@ -711,7 +755,7 @@
     contents:
     # - id: CMSplint5
     - id: CMFireExtinguisherPortable
-    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCMREWeYa
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
 
@@ -744,7 +788,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch
@@ -755,7 +799,7 @@
     contents:
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalHelmetBallistic
-      - id: CMMRE # TODO RMC14 TSE ORP ration
+      - id: RMCMRETSE
 
 - type: entity
   parent: RMCWebbingDropPouch

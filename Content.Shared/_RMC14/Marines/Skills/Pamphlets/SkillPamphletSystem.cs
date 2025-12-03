@@ -96,7 +96,7 @@ public sealed class SkillPamphletSystem : EntitySystem
             ent.Comp.GaveSkill = true;
         }
 
-        if (ent.Comp.GaveSkill)
+        if (ent.Comp.GaveSkill || ent.Comp.BypassSkill)
         {
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
 

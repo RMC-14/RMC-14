@@ -2,6 +2,7 @@
   parent: MarkerBase
   id: CMRandomPosterAny
   name: random poster spawner
+  suffix: RMC14, all
   components:
   - type: Sprite
     layers:
@@ -51,6 +52,216 @@
     - CMPosterJimmy
     - CMPosterVoteNo
     - CMPosterFallingFalcons
+    - CMPosterElectroMan
+    - CMPosterPizzaGalaxy
+    - CMPosterTartarus
+    - CMPosterEATBlue
+    - CMPosterCola
+    - CMPosterCMB1
+    - CMPosterCMB2
+    - CMPosterElectroCyan
+    - CMPosterArt4
+    - CMPosterArt5
+    - CMPosterDavenportGin
+    - CMPosterBobdaBlue
+    - CMPosterBobdaLime
+    - CMPosterSafetyWaste
+    - CMPosterSafetySilence
+    - CMPosterSafetySwitch
+    - CMPosterSafetyClearhead
+    - CMPosterSafetyCheck
+    - CMPosterSafetySusObject
+    - CMPosterSafetyClean
+    - CMPosterSafetyForeign
+    - CMPosterSafetyContainer
+    - CMPosterSafetyQuiet
+    - CMPosterSafetySoap
+    - RMCPosterWEYA1
+    - RMCPosterWEYA2
+    - RMCPosterWEYA3
+    - RMCPosterWEYA4
+    - RMCPosterWEYA5
+    - CMPosterDaniel1
+    - CMPosterDaniel2
+    - CMPosterDaniel3
+    - CMPosterDaniel4
+    - CMPosterDaniel5
+    - CMPosterDaniel6
+    - CMPosterDaniel7
+    - CMPosterMarineCorp1
+    - CMPosterMarineCorp2
+    - CMPosterMarineCorp3
+    - CMPosterMarineCorp4
+    - CMPosterMarineCorp5
+    - CMPosterMarineCorp6
+    - CMPosterMarineCorp7
+    - CMPosterFORECON
+    - CMPosterZSPA1
+    - CMPosterZSPA2
+    - CMPosterZSPA3
+    - CMPosterSPP1
+    - CMPosterSPP2
+    - CMPosterSPP3
+    - CMPosterSPP4
+    - CMPosterSPP5
+    - CMPosterSPP6
+    - CMPosterSPP7
+    - CMPosterSPP8
+    - CMPosterSPP9
+    - CMPosterSPP10
+    - CMPosterSPP11
+    - CMPosterSPP12
+    - CMPosterSPP13
+    chance: 0.95
+    rarePrototypes:
+    - PosterBroken
+    rareChance: 0.05
+
+- type: entity
+  parent: CMRandomPosterAny
+  id: CMRandomPosterUN
+  name: random poster spawner
+  suffix: RMC14, UN
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Wallmounts/posters.rsi
+      state: random_anything
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - CMPosterBroken
+    - CMPosterTheFuture
+    - CMPosterUnicorn
+    - CMPosterRocker1
+    - CMPosterPresident
+    - CMPosterBeth
+    - CMPosterArt1
+    - CMPostEat
+    - CMPosterPathos
+    - CMPosterSilicon2
+    - CMPosterElectro
+    - CMPosterSilicon
+    - CMPosterMissJanuary
+    - CMPosterF100
+    - CMPosterRememberIo
+    - CMPosterAssaultRifle
+    - CMPosterMissJuly
+    - CMPosterMissApril
+    - CMPosterSuspicious
+    - CMPosterTheo
+    - CMPosterGroves
+    - CMPosterBobda
+    - CMPosterArt2
+    - CMPosterArt3
+    - CMPosterRocker2
+    - CMPosterJoan
+    - CMPosterSafetyGuidance
+    - CMPosterSafetyGoggles1
+    - CMPosterMissFebruary
+    - CMPosterProperLifting
+    - CMPosterSafetyGoggles2
+    - CMPosterMrUniverse1
+    - CMPosterMrUniverse2
+    - CMPosterMrUniverse3
+    - RMCPosterCassettePlayer
+    - CMPosterTAB
+    - CMPosterBepis
+    - CMPosterMTV
+    - CMPosterJimmy
+    - CMPosterVoteNo
+    - CMPosterFallingFalcons
+    - CMPosterElectroMan
+    - CMPosterPizzaGalaxy
+    - CMPosterTartarus
+    - CMPosterEATBlue
+    - CMPosterCola
+    - CMPosterCMB1
+    - CMPosterCMB2
+    - CMPosterElectroCyan
+    - CMPosterArt4
+    - CMPosterArt5
+    - CMPosterDavenportGin
+    - CMPosterBobdaBlue
+    - CMPosterBobdaLime
+    - CMPosterSafetyWaste
+    - CMPosterSafetySilence
+    - CMPosterSafetySwitch
+    - CMPosterSafetyClearhead
+    - CMPosterSafetyCheck
+    - CMPosterSafetySusObject
+    - CMPosterSafetyClean
+    - CMPosterSafetyForeign
+    - CMPosterSafetyContainer
+    - CMPosterSafetyQuiet
+    - CMPosterSafetySoap
+    - RMCPosterWEYA1
+    - RMCPosterWEYA2
+    - RMCPosterWEYA3
+    - RMCPosterWEYA4
+    - RMCPosterWEYA5
+    - CMPosterDaniel1
+    - CMPosterDaniel2
+    - CMPosterDaniel3
+    - CMPosterDaniel4
+    - CMPosterDaniel5
+    - CMPosterDaniel6
+    - CMPosterDaniel7
+    - CMPosterMarineCorp1
+    - CMPosterMarineCorp2
+    - CMPosterMarineCorp3
+    - CMPosterMarineCorp4
+    - CMPosterMarineCorp5
+    - CMPosterMarineCorp6
+    - CMPosterMarineCorp7
+    - CMPosterFORECON
+    - CMPosterZSPA1
+    - CMPosterZSPA2
+    - CMPosterZSPA3
+    chance: 0.95
+    rarePrototypes:
+    - PosterBroken
+    rareChance: 0.05
+
+- type: entity
+  parent: CMRandomPosterAny
+  id: CMRandomPosterSPP
+  name: random poster spawner
+  suffix: RMC14, SPP
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Wallmounts/posters.rsi
+      state: random_anything
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - CMPosterSuspicious
+    - CMPosterBroken
+    - CMPosterSafetyWaste
+    - CMPosterSafetySilence
+    - CMPosterSafetySwitch
+    - CMPosterSafetyClearhead
+    - CMPosterSafetyCheck
+    - CMPosterSafetySusObject
+    - CMPosterSafetyClean
+    - CMPosterSafetyForeign
+    - CMPosterSafetyContainer
+    - CMPosterSafetyQuiet
+    - CMPosterSafetySoap
+    - CMPosterSPP1
+    - CMPosterSPP2
+    - CMPosterSPP3
+    - CMPosterSPP4
+    - CMPosterSPP5
+    - CMPosterSPP6
+    - CMPosterSPP7
+    - CMPosterSPP8
+    - CMPosterSPP9
+    - CMPosterSPP10
+    - CMPosterSPP11
+    - CMPosterSPP12
+    - CMPosterSPP13
     chance: 0.95
     rarePrototypes:
     - PosterBroken

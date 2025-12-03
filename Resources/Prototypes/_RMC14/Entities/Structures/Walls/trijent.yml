@@ -11,6 +11,9 @@
     state: hangar
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: hangar
 
 - type: entity
@@ -26,6 +29,9 @@
     state: bunker
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: bunker
 
 - type: entity
@@ -41,6 +47,9 @@
     state: chigusa
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: chigusa
 
 - type: entity

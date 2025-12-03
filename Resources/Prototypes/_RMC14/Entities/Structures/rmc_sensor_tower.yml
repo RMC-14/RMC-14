@@ -58,3 +58,11 @@
   - type: SensorTower
     state: On
     breakChance: 0
+
+- type: entity
+  parent: RMCSensorTower
+  id: RMCSensorTowerOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0.25,2

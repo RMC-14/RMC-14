@@ -2,13 +2,14 @@
   parent: RMCKitBase
   id: RMCKitHonorGuard
   name: honor guard kit
+  description: A case containing the equipment for an Honor Guard.
   components:
   - type: Item
     size: Ginormous
   - type: Storage
     maxItemSize: Ginormous
     grid:
-    - 0,0,7,0
+    - 0,0,8,0
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
@@ -16,6 +17,7 @@
   - type: StorageFill
     contents:
     - id: RMCHeadsetMPHonor
+    - id: RMCPamphletHonorGuard
     # - id: CMPacketPillsOxycodone    TODO: Pain system
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine

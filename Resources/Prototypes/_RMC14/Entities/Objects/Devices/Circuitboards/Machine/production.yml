@@ -28,47 +28,35 @@
 #      materialRequirements:
 #        CMGlass: 1
 
-#- type: entity
-#  parent: CMBaseMachineCircuitboard
-#  id: CMPortableGeneratorPacmanMachineCircuitBoard
-#  name: P.A.C.M.A.N.-type portable generator machine board
-#  components:
-#    - type: Sprite
-#      state: power_mod
-##    - type: MachineBoard
-##      prototype: RMCPortableGenerator # TODO RMC14 buildable
-##      requirements:
-##        Capacitor: 1
-##      materialRequirements:
-##        CableHV: 5
-#    - type: PhysicalComposition
-#      materialComposition:
-#        CMGlass: 200
-#      chemicalComposition:
-#        Silicon: 20
-#    - type: StaticPrice
-#      price: 40
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCPortableGeneratorPacmanMachineCircuitBoard
+  name: P.A.C.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: power_mod
+    - type: MachineBoard
+      prototype: RMCPortableGenerator
+# TODO RMC14 material requirements
+#		/obj/item/stock_parts/matter_bin = 1,
+#		/obj/item/stock_parts/micro_laser = 1,
+#		/obj/item/stack/cable_coil = 2,
+#		/obj/item/stock_parts/capacitor = 1,
 
-#- type: entity
-#  parent: CMBaseMachineCircuitboard
-#  id: CMPortableGeneratorSuperPacmanMachineCircuitboard
-#  name: S.U.P.E.R.P.A.C.M.A.N.-type portable generator machine board
-#  components:
-#    - type: Sprite
-#      state: power_mod
-#    - type: MachineBoard
-#      prototype: RMCPortableGenerator2 # TODO RMC14 buildable
-##      requirements:
-##        Capacitor: 2
-##      materialRequirements:
-##        CableHV: 10
-#    - type: PhysicalComposition
-#      materialComposition:
-#        CMGlass: 200
-#      chemicalComposition:
-#        Silicon: 20
-#    - type: StaticPrice
-#      price: 40
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCPortableGeneratorSuperPacmanMachineCircuitboard
+  name: S.U.P.E.R.P.A.C.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: power_mod
+    - type: MachineBoard
+      prototype: RMCPortableGenerator2
+# TODO RMC14 material requirements
+#		/obj/item/stock_parts/matter_bin = 1,
+#		/obj/item/stock_parts/micro_laser = 1,
+#		/obj/item/stack/cable_coil = 2,
+#		/obj/item/stock_parts/capacitor = 1,
 
 - type: entity
   parent: CMBaseMachineCircuitboard

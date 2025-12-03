@@ -180,6 +180,35 @@
     accuracy: 135
 
 - type: entity
+  parent: XenoBoneChipsProjectile # TODO one projectile out of the 8 spawned for fire spikes is this one
+  id: XenoHedgehogSpikeProjectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 8
+  - type: ProjectileMaxRange
+    max: 5
+
+- type: entity
+  parent: XenoHedgehogSpikeProjectile
+  id: XenoHedgehogSpikeProjectileSpread
+  name: small bone chips
+  components:
+  - type: ProjectileMaxRange
+    max: 4
+
+- type: entity
+  parent: XenoHedgehogSpikeProjectileSpread
+  id: XenoHedgehogSpikeProjectileSpreadShort
+  name: small bone chips
+  components:
+  - type: ProjectileMaxRange
+    max: 2
+
+- type: entity
   parent: XenoBaseProjectile
   id: XenoBombardAcidProjectile
   name: glob of acid gas
@@ -217,6 +246,12 @@
       - Marine
   - type: RMCProjectileAccuracy
     accuracy: 95
+  - type: Ammo
+    muzzleFlash: null
+  - type: IgnorePredictionHide
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
 
 - type: entity
   id: CMGuidebookXenoBombardAcidProjectile
@@ -270,6 +305,12 @@
         Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
+  - type: Ammo
+    muzzleFlash: null
+  - type: IgnorePredictionHide
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
 
 - type: entity
   id: CMGuidebookXenoBombardNeurotoxinProjectile

@@ -43,13 +43,13 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVERadioTelephoneOperator
   name: forecon rto spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: marine_spawn
+    state: tl_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVERadioTelephoneOperator
 

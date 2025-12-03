@@ -1,0 +1,46 @@
+﻿- type: job
+  parent: CMSurvivorPriest
+  id: CMSurvivorSolarisChaplain
+  name: rmc-job-name-survivor-solaris-chaplain
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorSolarisChaplain
+  spawnMenuRoleName: Solaris Chaplain (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPriest
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorPriest
+  id: RMCGearSurvivorSolarisChaplain
+  equipment:
+    outerClothing: RMCClothingHolidayRobes
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisChaplain
+  name: survivor solaris chaplain spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisChaplain
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

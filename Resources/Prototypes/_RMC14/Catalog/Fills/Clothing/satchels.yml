@@ -12,10 +12,6 @@
     - id: RMCBoxPizzaMeat
     - id: CMDrinkCanDrGibb
     # ThirteenLoko
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - BoxCardboard
 
 - type: entity
   parent: CMSatchel
@@ -25,6 +21,16 @@
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
+
+- type: entity
+  parent: RMCSatchelCivilianFill
+  id: RMCSatchelFlightOperatorFill
+  suffix: Flight Operator, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCBinoculars
 
 - type: entity
   parent: CMSatchelMarine

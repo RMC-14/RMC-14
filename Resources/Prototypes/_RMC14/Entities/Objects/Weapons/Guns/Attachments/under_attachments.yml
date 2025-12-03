@@ -227,6 +227,30 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
+  id: RMCAttachmentMicroLaserSight
+  name: micro laser sight
+  description: A compact, high-precision laser sight engineered exclusively for the M13 Auto Pistol. Offers exceptional accuracy gains by interfacing directly with the weapon's internal targeting systems.
+  components:
+  - type: Sprite
+    state: lasersight_micro
+  - type: AttachableVisuals
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentMicroLaserSight
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.05
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+      scatterFlat: -2
+
+- type: entity
+  parent: RMCUnderAttachmentBase
   id: RMCAttachmentMiniFlamethrower
   name: underbarrel flamethrower # TODO RMC14 intensity toggle
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
@@ -786,6 +810,9 @@
 
 - type: Tag
   id: RMCAttachmentLaserSight
+
+- type: Tag
+  id: RMCAttachmentMicroLaserSight
 
 - type: Tag
   id: RMCAttachmentU7UnderbarrelShotgun

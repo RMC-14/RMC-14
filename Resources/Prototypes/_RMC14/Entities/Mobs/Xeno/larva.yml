@@ -40,8 +40,12 @@
     plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
-  - type: AcidBloodSplash
-    baseGibSplashProbability: 0.25
+  - type: RMCGibOnDeath
+    gibChance: 0.25
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    # - RMCDecalSpawnerGibsLarva # TODO
+    - RMCGibEffectXenoSmall
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     requiresGranter: false

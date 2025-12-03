@@ -50,6 +50,11 @@
       visible: false
   - type: Item
     size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: GenericVisualizer
     visuals:
       enum.StrapVisuals.State:

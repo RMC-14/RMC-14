@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCSmokeAcid
   name: acid gas
   categories: [ HideSpawnMenu ]
@@ -145,6 +145,44 @@
   - type: Appearance
   - type: DeleteOnExplosion
 
+- type: entity
+  id: RMCSmokeKingDoom
+  name: king doom
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Sprite
+    sprite: _RMC14/Effects/effects.rsi
+    state: sparks
+    color: "#000000"
+    drawdepth: Puddles #BELOW_OBJ_LAYER, below items and mobs and structures, above the floor and open doors
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: DeleteOnExplosion
+  - type: EdgeSpreader
+    id: RMCSmokeKingDoom
+  - type: ActiveEdgeSpreader
+  - type: EvenSmoke
+    spawn: RMCSmokeKingDoom
+    range: 7
+
+
 
 - type: entity
   parent: RMCSmokeAcid
@@ -175,6 +213,10 @@
   - type: EvenSmoke
     spawn: RMCSmokeAcidDeathcloud
     range: 2
+
+- type: edgeSpreader
+  id: RMCSmokeKingDoom
+  updatesPerSecond: 2
 
 - type: edgeSpreader
   id: RMCSmokeAcid

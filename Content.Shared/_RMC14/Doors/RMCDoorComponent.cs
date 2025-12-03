@@ -48,3 +48,10 @@ public record struct RMCDoorPryEvent(EntityUid User)
 
     public bool Cancelled;
 }
+
+[ByRefEvent]
+public record struct RMCBeforePryEvent(EntityUid User)
+{
+    public readonly EntityUid User = User;
+    public bool Cancelled;
+}

@@ -1,0 +1,103 @@
+# Cardboard
+
+- type: material
+  id: RMCSheetCardboard
+  stackEntity: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  color: "#70736C"
+  price: 0.01
+
+- type: stack
+  id: RMCSheetCardboard
+  name: materials-cardboard
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
+  spawn: RMCSheetCardboard
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetCardboard
+  name: cardboard
+  suffix: Full, RMC
+  components:
+  - type: RMCConstructionItem
+    buildable:
+    # box
+    - RMCDonutBoxBuild
+    # egg box
+    # light tubes box
+    # light bulbs box
+    # mouse traps box
+    # cardborg suit
+    # cardborg helmet
+    - RMCPizzaBoxList
+    # dartboard
+    - RMCDividerConstruction
+    - RMCFolderList
+    - RMCDividerConstruction
+    - RMCEmptyAmmoBoxesList
+    - RMCEmptyRifleMagazineBoxesList
+    - RMCEmptySMGMagazineBoxesList
+    - RMCEmptyPistolMagazineBoxesList
+    - RMCEmptyShotgunShellBoxesList
+    - RMCDividerConstruction
+    - RMCEmptySupplyBoxesList
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCSheetCardboard: 100
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 50
+  - type: Sprite
+    state: icon
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Item
+    heldPrefix: cardboard
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard30
+  suffix: 30, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 30
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard25
+  suffix: 25, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 25
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard10
+  suffix: 10, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 10
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard1
+  suffix: Single, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 1

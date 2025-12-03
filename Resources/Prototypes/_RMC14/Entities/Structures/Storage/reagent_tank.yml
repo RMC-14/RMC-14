@@ -136,3 +136,31 @@
 
 - type: Tag
   id: RMCTankReagent
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentMeralyne
+  suffix: Meralyne
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-cmmeralyne
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentDermaline
+  suffix: Dermaline
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: CMDermaline
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-cmdermaline

@@ -432,7 +432,7 @@
       state: helmet
 
 - type: entity
-  parent: RMCHelmetGarbBase
+  parent: [RMCHelmetGarbBase, RMCUtilityBase]
   id: RMCHelmetGarbRosary
   name: rosary
   description: Jesus Saves Lives!
@@ -446,6 +446,10 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
       state: helmet
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
+      state: neck
 
 - type: entity
   parent: RMCHelmetGarbBase

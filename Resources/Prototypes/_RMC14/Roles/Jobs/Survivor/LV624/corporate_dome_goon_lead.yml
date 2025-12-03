@@ -4,7 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-leader
   description: cm-job-description-survivor
   spawnMenuRoleName: We-Ya Goon Lead (Survivor Special)
-  startingGear: RMCGearSurvivorGoon
+  startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
   special:
@@ -46,6 +46,28 @@
       state: green
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
+
+- type: startingGear
+  id: RMCGearSurvivorGoonLead
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteran
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack
+    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54CWhite
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

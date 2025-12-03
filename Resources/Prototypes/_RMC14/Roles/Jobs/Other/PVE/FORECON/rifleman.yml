@@ -42,12 +42,12 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVERifleman
   name: forecon rifleman spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
     state: marine_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVERifleman

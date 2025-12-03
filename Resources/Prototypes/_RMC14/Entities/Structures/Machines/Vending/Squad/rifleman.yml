@@ -23,6 +23,8 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
+      - id: RMCArmorVestSquad
+        name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -129,6 +131,10 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -140,9 +146,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       #- id: M44 Heavy Speedloader
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -242,4 +246,6 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5

@@ -17,6 +17,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Abduct;
@@ -64,8 +65,18 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
         CleanUpTiles(xeno);
 
-        var range = CompOrNull<TargetActionComponent>(args.Action)?.Range;
-        var tiles = _line.DrawLine(xeno.Owner.ToCoordinates(), args.Target, TimeSpan.Zero, range, out _);
+        var target = GetNetCoordinates(args.Target);
+        var xenoCoords = _transform.GetMoverCoordinates(xeno);
+        var length = (target.Position - xenoCoords.Position).Length();
+
+        if (length > xeno.Comp.Range)
+        {
+            var direction = (target.Position - xenoCoords.Position).Normalized();
+            var newTile = direction * xeno.Comp.Range;
+            target = new NetCoordinates(GetNetEntity(args.Target.EntityId), xenoCoords.Position + newTile);
+        }
+
+        var tiles = _line.DrawLine(xenoCoords, GetCoordinates(target), TimeSpan.Zero, xeno.Comp.Range, out _);
         if (tiles.Count == 0)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-abduct-no-room"), xeno, PopupType.SmallCaution);

@@ -29,6 +29,36 @@
 
 - type: entity
   parent: RMCCouchMid
+  id: RMCCouchMidRed
+  name: red couch
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/red_couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchEndLowerRed
+  name: red couch
+  suffix: End, Lower
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/red_couch.rsi
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchEndUpperRed
+  name: red couch
+  suffix: End, Upper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/red_couch.rsi
+    state: couch_end_upper
+
+- type: entity
+  parent: RMCCouchMid
   id: RMCCouchLeftBar
   suffix: Left
   name: bar booth

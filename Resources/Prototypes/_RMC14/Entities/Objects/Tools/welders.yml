@@ -180,3 +180,18 @@
         - ReagentId: WeldingFuel
           Quantity: 150
         maxVol: 150 # TODO RMC14 60 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderPVE
+  name: modified blowtorch
+  description: A more 'advanced' version of the standard UNMC Blowtorch, this blowtorch has a welding shield for eye protection affixed to it. Seems the eye shield was ripped off of a standard ME3 hand welder and then crudely affixed.
+  suffix: PVE, DO NOT MAP
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed

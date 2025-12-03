@@ -26,6 +26,9 @@
           acts: ["Breakage"]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
   - type: Construction
     graph: CMGirder
@@ -45,6 +48,9 @@
     state: wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -135,6 +141,9 @@
     state: wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 # Reinforced
@@ -164,6 +173,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
   - type: Construction
     graph: CMGirder
@@ -198,6 +210,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -213,6 +228,9 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -303,6 +321,9 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -318,6 +339,9 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: aiwall
 
 # Indestructible
@@ -336,6 +360,9 @@
       - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -351,6 +378,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -441,6 +471,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -456,6 +489,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: aiwall
 
 # TODO RMC14 temp hull, breakable only after hijack
@@ -505,6 +541,9 @@
     state: cavewall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: cavewall
 
 # Cult
@@ -535,6 +574,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: cult
 
 # Wood
@@ -564,6 +606,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wood
 
 # Jungle
@@ -583,6 +628,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: jungle_veg
 
 - type: entity
@@ -596,6 +644,9 @@
     state: strata_jungle0
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: strata_jungle
 
 # Elevator
@@ -615,6 +666,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -1003,6 +1057,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
 
 - type: entity
@@ -1018,6 +1075,9 @@
     state: metal
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
   - type: Tag
     tags:

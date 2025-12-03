@@ -141,6 +141,9 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!_rmcActions.TryUseAction(args))
+            return;
+
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
         RaiseLocalEvent(xeno, ref ev);
 
@@ -181,6 +184,9 @@ public sealed class XenoSpitSystem : EntitySystem
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = _xenoProjectile.TryShoot(

@@ -1,0 +1,46 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: CMSurvivorSolarisCorporateLiaison
+  name: rmc-job-name-survivor-solaris-corporate-liaison
+  description: cm-job-description-survivor
+  spawnMenuRoleName: Corporate Liaison (Solaris Survivor)
+  startingGear: RMCGearSurvivorSolarisCorporateLiaison
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorSolarisCorporateLiaison
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonIvy
+    shoes: RMCShoesLaceupBrown
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisCorporateLiaison
+  name: survivor solaris coporate liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisCorporateLiaison
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

@@ -61,10 +61,15 @@
   - type: XenoLeap
     knockdownTime: 1
   - type: AcidBloodSplash
-    baseGibSplashProbability: 0.75
     damage:
       types:
         Heat: 5
+  - type: RMCGibOnDeath
+    gibChance: 0.75
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    # - RMCDecalSpawnerGibsParasite # TODO
+    - RMCGibEffectXenoSmall
   - type: XenoParasite
   - type: InfectOnPullAttempt
   - type: Item
@@ -134,6 +139,7 @@
       - Xeno
   - type: VentCrawler
     ventCrawlIcon: parasite
+  - type: Unshieldable
 
 - type: entity
   parent: CMXenoParasiteBase

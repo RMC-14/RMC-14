@@ -1,0 +1,119 @@
+﻿- type: reagent
+  id: RMCMilkshake
+  parent: BaseDrink
+  name: reagent-name-rmc-milkshake
+  desc: reagent-desc-rmc-milkshake
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: creamy
+  color: "#DFC6AF"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/milkshake.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+
+- type: reagent
+  id: MangoAguaFresca
+  parent: BaseDrink
+  name: reagent-name-mango-agua-fresca
+  desc: reagent-desc-mango-agua-fresca
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#FFBF34"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/mango_agua_fresca.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: MangoCooler
+  parent: BaseAlcohol
+  name: reagent-name-mango-cooler
+  desc: reagent-desc-mango-cooler
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#C19128"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/mango_cooler.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: Sidecar
+  parent: BaseAlcohol
+  name: reagent-name-sidecar
+  desc: reagent-desc-sidecar
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#C19128"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/sidecar.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: Gunfire
+  parent: BaseAlcohol
+  name: reagent-name-gunfire
+  desc: reagent-desc-gunfire
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#F88F00"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/gunfire.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: RMCGrapeSoda
+  parent: BaseDrink
+  name: reagent-name-grapesoda
+  desc: reagent-desc-grapesoda
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#421C52"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/grapesoda.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: IceCafe
+  parent: BaseDrink
+  name: reagent-name-ice-cafe
+  desc: reagent-desc-ice-cafe
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#F88F00"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/icecafe.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: False
+
+- type: reagent
+  id: SwissLemonade
+  parent: BaseDrink
+  name: reagent-name-swiss-lemonade
+  desc: reagent-desc-swiss-lemonade
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: bitter
+  color: "#CECAAD"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/swiss_lemonade.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: False

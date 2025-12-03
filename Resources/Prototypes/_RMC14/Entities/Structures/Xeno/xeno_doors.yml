@@ -85,6 +85,7 @@
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: XenoConstructionMinRange
   - type: ExplosionResistance
     damageCoefficient: 7.5 # Doors take 15x explosive damage, resin doors reduce that by 50%
   - type: XenoConstruct

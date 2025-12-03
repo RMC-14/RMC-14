@@ -41,6 +41,7 @@
         whitelist:
           tags:
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:

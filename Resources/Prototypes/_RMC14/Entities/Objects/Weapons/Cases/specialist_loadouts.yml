@@ -54,7 +54,7 @@
   parent: RMCBaseEquipmentCase
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
-  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various 30mm grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     layers:

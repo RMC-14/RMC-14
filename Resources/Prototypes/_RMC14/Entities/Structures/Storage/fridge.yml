@@ -92,3 +92,5 @@
     contents:
     - id: FoodMeatFish # TODO RMC14 2 boxes of 7
       amount: 14
+    - id: RMCFoodMeatFish
+      amount: 14

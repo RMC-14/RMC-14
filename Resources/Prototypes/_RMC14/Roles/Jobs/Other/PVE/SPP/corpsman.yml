@@ -32,6 +32,11 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
+    - type: CMVendorUser
+      id: RMCSPPCorpsmanPVE
+      points: 0
+      extraPoints:
+        Chemicals: 120
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-corpsman

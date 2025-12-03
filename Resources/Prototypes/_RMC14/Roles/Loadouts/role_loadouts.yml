@@ -21,6 +21,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -44,6 +45,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -67,6 +69,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -90,6 +93,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -113,14 +117,16 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - CommandingOfficerIDRMC
   - MarineLeatherBackpack
+  - CommandingOfficerIDRMC
+  - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
@@ -139,6 +145,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -162,6 +169,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -185,6 +193,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Engineering
 - type: roleLoadout
@@ -209,6 +218,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -232,6 +242,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -255,6 +266,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Squad Roles
 - type: roleLoadout
@@ -279,6 +291,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -302,6 +315,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -325,6 +339,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -348,6 +363,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -371,6 +387,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -394,6 +411,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -417,6 +435,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Medical
 - type: roleLoadout
@@ -441,6 +460,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -464,6 +484,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMNurse
@@ -487,6 +508,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -510,6 +532,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Military Police
 - type: roleLoadout
@@ -535,6 +558,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -558,6 +582,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -581,6 +606,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Other
 - type: roleLoadout
@@ -652,6 +678,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -675,6 +702,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobRMCJobSynthetic
@@ -695,6 +723,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Requsitions
 - type: roleLoadout
@@ -719,6 +748,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -742,6 +772,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Survivors
 # They don't have access to some loadout categories
@@ -761,6 +792,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobRMCJobSyntheticColony
@@ -778,6 +810,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSurvivorCorporate
@@ -795,6 +828,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSurvivorDoctor
@@ -812,6 +846,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSurvivorEngineer
@@ -829,6 +864,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSurvivorScientist
@@ -846,6 +882,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSurvivorSecurity
@@ -863,6 +900,7 @@
   - SmokablesRMC
   - MiscellaneousRMC
   - CivilianOnlyRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobRMCSurvivorCommandingOfficer
@@ -879,6 +917,7 @@
   - RMCLoadoutGroupPins
   - SmokablesRMC
   - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # PVE
 
@@ -891,6 +930,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -904,6 +944,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -917,6 +958,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -930,6 +972,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -943,6 +986,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
@@ -955,6 +999,7 @@
   - EyewearRMCPVE
   - MasksRMCPVE
   - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins

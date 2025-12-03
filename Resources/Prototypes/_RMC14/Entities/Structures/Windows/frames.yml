@@ -82,7 +82,9 @@
     sprite: _RMC14/Structures/Windows/Frames/almayer_frame.rsi
     state: alm_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: alm_frame
     mode: CardinalFlags
   - type: Construction
@@ -100,7 +102,9 @@
     sprite: _RMC14/Structures/Windows/Frames/white_frame.rsi
     state: white_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: white_frame
     mode: CardinalFlags
   - type: Construction
@@ -118,7 +122,9 @@
     sprite: _RMC14/Structures/Windows/Frames/ai_frame.rsi
     state: ai_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: ai_frame
     mode: CardinalFlags
   - type: Construction
@@ -136,7 +142,9 @@
     sprite: _RMC14/Structures/Windows/Frames/colony_frame.rsi
     state: col_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_frame
     mode: CardinalFlags
   - type: Construction
@@ -154,7 +162,9 @@
     sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
     state: col_rframe0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_rframe
     mode: CardinalFlags
   - type: Construction
@@ -177,7 +187,9 @@
     state: col_rframe0
     color: "#aba9a9"
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_rframe
     mode: CardinalFlags
   - type: Construction
@@ -195,7 +207,9 @@
     sprite: _RMC14/Structures/Windows/Frames/wood_frame.rsi
     state: wood_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: wood_frame
     mode: CardinalFlags
   - type: Construction
