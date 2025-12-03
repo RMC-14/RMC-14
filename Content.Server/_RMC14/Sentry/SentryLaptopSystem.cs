@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Content.Server.Destructible;
+using Content.Server.Destructible.Thresholds;
 using Content.Server.NPC.HTN;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Sentry;
@@ -331,5 +333,23 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
             return radius;
 
         return 5.0f;
+    }
+
+    protected override float GetSentryMaxHealth(EntityUid sentry)
+    {
+        if (TryComp<DestructibleComponent>(sentry, out var destruct))
+        {
+            var max = 0f;
+            foreach (var threshold in destruct.Thresholds)
+            {
+                if (threshold.Trigger is DamageTrigger damageTrigger)
+                    max = Math.Max(max, damageTrigger.Damage.Total);
+            }
+
+            if (max > 0f)
+                return max;
+        }
+
+        return base.GetSentryMaxHealth(sentry);
     }
 }

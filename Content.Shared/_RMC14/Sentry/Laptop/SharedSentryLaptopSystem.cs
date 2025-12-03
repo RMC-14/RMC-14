@@ -105,13 +105,13 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             if (!laptop.IsPowered || !_ui.IsUiOpen(laptopUid, SentryLaptopUiKey.Key))
                 continue;
 
-            foreach (var sentryUid in GetLinkedSentries(laptop))
+            foreach (var sentryUid in GetLinkedSentries((laptopUid, laptop)))
             {
                 if (!TryComp<SentryComponent>(sentryUid, out var sentry))
                     continue;
 
                 var ammo = GetSentryAmmo(sentryUid, out var maxAmmo);
-                if (maxAmmo > 0 && (float) ammo / maxAmmo <= sentry.LowAmmoThreshold)
+                if (maxAmmo > 0 && (float)ammo / maxAmmo <= sentry.LowAmmoThreshold)
                 {
                     if (time - sentry.LastLowAmmoAlert > sentry.AlertCooldown)
                     {
@@ -160,8 +160,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var health = GetSentryHealth(sentry, out var maxHealth);
         var healthPercent = maxHealth > 0 ? (int) ((health / maxHealth) * 100) : 0;
 
-        SendAlert(laptop.Value, sentry, SentryAlertType.Damaged,
-            $"{GetSentryDisplayName(laptop.Value, sentry)}: Taking damage! ({healthPercent}% health)");
+        var laptopEntity = laptop!.Value;
+        SendAlert(laptopEntity.Owner, sentry, SentryAlertType.Damaged,
+            $"{GetSentryDisplayName(laptopEntity, sentry)}: Taking damage! ({healthPercent}% health)");
     }
 
     private void OnSentryShot(Entity<SentryComponent> sentry, ref GunShotEvent args)
@@ -183,8 +184,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return;
 
         var targetName = Name(gun.Target.Value);
-        SendAlert(laptop.Value, sentry, SentryAlertType.TargetAcquired,
-            $"{GetSentryDisplayName(laptop.Value, sentry)}: Engaging {targetName}");
+        var laptopEntity = laptop!.Value;
+        SendAlert(laptopEntity.Owner, sentry, SentryAlertType.TargetAcquired,
+            $"{GetSentryDisplayName(laptopEntity, sentry)}: Engaging {targetName}");
     }
 
     private void SendAlert(EntityUid laptop, EntityUid sentry, SentryAlertType alertType, string message)
@@ -630,21 +632,8 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         return new HashSet<string> { "UNMC" };
     }
 
-    private float GetSentryMaxHealth(EntityUid sentry)
+    protected virtual float GetSentryMaxHealth(EntityUid sentry)
     {
-        if (TryComp<DestructibleComponent>(sentry, out var destruct))
-        {
-            var max = 0f;
-            foreach (var threshold in destruct.Thresholds)
-            {
-                if (threshold.Trigger is DamageTrigger damageTrigger)
-                    max = Math.Max(max, damageTrigger.Damage.Total);
-            }
-
-            if (max > 0f)
-                return max;
-        }
-
         return 100f;
     }
 

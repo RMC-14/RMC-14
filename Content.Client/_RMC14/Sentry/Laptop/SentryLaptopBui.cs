@@ -260,9 +260,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         foreach (var (netEntity, card) in _sentryCards)
         {
-            var name = card.SentryName.GetMessage().ToLower();
-            var location = card.LocationLabel.Text?.ToLower() ?? "";
-
+            var name = card.SentryName.GetMessage()?.ToLower() ?? string.Empty;
+            var location = card.LocationLabel.Text?.ToLower() ?? string.Empty;
             card.Visible = name.Contains(_searchText) || location.Contains(_searchText);
         }
     }
