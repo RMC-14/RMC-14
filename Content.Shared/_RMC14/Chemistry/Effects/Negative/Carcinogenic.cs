@@ -12,11 +12,13 @@ public sealed partial class Carcinogenic : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> GeneticType = "Cellular";
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
+    public override string Abbreviation => "CRG";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Deals [color=red]{PotencyPerSecond * 0.5}[/color] genetic damage.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] genetic damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 2}[/color] brute damage";
+               $"Critical overdoses cause [color=red]{PotencyPerSecond * 2}[/color] brute damage.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

@@ -4,16 +4,14 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Electrogenetic : RMCChemicalEffect
 {
-    public static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    public static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-    public static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    public override string Abbreviation => "EGN";
 
     private readonly FixedPoint2 _healPerLevel = 10;
-    public FixedPoint2 HealAmount => _healPerLevel * Potency;
+    public FixedPoint2 HealAmount => _healPerLevel * Level;
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

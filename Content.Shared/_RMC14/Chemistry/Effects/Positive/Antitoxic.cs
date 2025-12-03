@@ -13,10 +13,9 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-    private static readonly ProtoId<DamageGroupPrototype> GeneticGroup = "Genetic";
-
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
+
+    public override string Abbreviation => "ATX";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

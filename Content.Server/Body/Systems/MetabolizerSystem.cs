@@ -30,7 +30,10 @@ namespace Content.Server.Body.Systems
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+
+        // RMC14
         [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
+        [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
         private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
@@ -169,12 +172,25 @@ namespace Content.Server.Body.Systems
                 if (ent.Comp1.MetabolismGroups is null)
                     continue;
 
+                var canMetabolize = true;
                 foreach (var group in ent.Comp1.MetabolismGroups)
                 {
                     if (!proto.Metabolisms.TryGetValue(group.Id, out var entry))
                         continue;
 
+                    // RMC14
+                    var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
+                    if (canMetabolize && !_rmcReagent.CanMetabolize(actualEntity, entry.Effects))
+                        canMetabolize = false;
+
+                    if (!canMetabolize)
+                        continue;
+                    // RMC14
+
                     var rate = entry.MetabolismRate * group.MetabolismRateModifier;
+
+                    // RMC14
+                    rate *= _rmcReagent.GetMetabolismModifier(entry.Effects);
 
                     // Remove $rate, as long as there's enough reagent there to actually remove that much
                     mostToRemove = FixedPoint2.Clamp(rate, 0, quantity);
@@ -190,8 +206,7 @@ namespace Content.Server.Body.Systems
                             continue;
                     }
 
-                    var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
-                    var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale);
+                    var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale, soln.Value);
 
                     // do all effects, if conditions apply
                     foreach (var effect in entry.Effects)
@@ -216,7 +231,7 @@ namespace Content.Server.Body.Systems
                 }
 
                 // remove a certain amount of reagent
-                if (mostToRemove > FixedPoint2.Zero)
+                if (canMetabolize && mostToRemove > FixedPoint2.Zero)
                 {
                     solution.RemoveReagent(reagent, mostToRemove);
 
