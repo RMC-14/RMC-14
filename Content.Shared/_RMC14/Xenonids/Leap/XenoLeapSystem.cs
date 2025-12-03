@@ -16,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -492,14 +493,13 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<XenoParasiteComponent>(target))
+        if (HasComp<XenoParasiteComponent>(target) ||
+            HasComp<XenoFruitComponent>(target) ||
+            HasComp<XenoEggComponent>(target) ||
+            HasComp<XenoAcidSplatterComponent>(target))
+        {
             return false;
-        
-        if (HasComp<XenoFruitComponent>(target))
-            return false;
-
-        if (HasComp<XenoEggComponent>(target))
-            return false;
+        }
 
         if (_standing.IsDown(target))
             return false;
