@@ -8,9 +8,9 @@
     drawdepth: SmallObjects
     layers:
     - state: recharger
-      #map: ["enum.PowerChargerVisualLayers.Base"] # TODO RMC14 charge visuals
+      map: ["enum.PowerChargerVisualLayers.Base"]
     - state: recharger-0
-      #map: ["enum.PowerChargerVisualLayers.Light"]
+      map: ["enum.PowerChargerVisualLayers.Light"]
       shader: unshaded
   - type: Fixtures
     fixtures:
@@ -54,6 +54,10 @@
         whitelist:
           components:
             - Stunbaton
+  - type: PowerChargerVisuals
+    emptyState: "recharger"
+    occupiedState: "recharger"
+    chargeLevelState: "recharger-{0}"
 
 - type: entity
   parent: RMCRecharger

@@ -4,6 +4,7 @@ using Content.Server.PowerCell;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.PowerCell;
 using Content.Shared.Emp;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
@@ -192,6 +193,43 @@ internal sealed class ChargerSystem : EntitySystem
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        // Update numeric charge-level appearance so the client visualizer can show progress frames.
+        UpdateChargeLevelVisual(uid, component, appearance);
+    }
+
+    private void UpdateChargeLevelVisual(EntityUid uid, ChargerComponent component, AppearanceComponent? appearance = null)
+    {
+        if (!_container.TryGetContainer(uid, component.SlotId, out var container))
+            return;
+
+        // No item -> show empty (level 0)
+        if (container.ContainedEntities.Count == 0)
+        {
+            _appearance.SetData(uid, PowerCellVisuals.ChargeLevel, (byte)0, appearance);
+            return;
+        }
+
+        var contained = container.ContainedEntities[0];
+        if (!SearchForBattery(contained, out var batteryUid, out var battery))
+        {
+            _appearance.SetData(uid, PowerCellVisuals.ChargeLevel, (byte)0, appearance);
+            return;
+        }
+
+        var max = Math.Max(1f, battery.MaxCharge);
+        var percent = battery.CurrentCharge / max;
+        byte level;
+
+        // Show recharger-5 only when fully charged
+        if (percent >= 1f)
+            level = 5;
+        else if (percent <= 0f)
+            level = 0;
+        else
+            // Map 0-99% to levels 1-4
+            level = (byte)Math.Clamp((int)Math.Ceiling(percent * 4f), 1, 4);
+
+        _appearance.SetData(uid, PowerCellVisuals.ChargeLevel, level, appearance);
     }
 
     private void OnEmpPulse(EntityUid uid, ChargerComponent component, ref EmpPulseEvent args)
@@ -248,6 +286,8 @@ internal sealed class ChargerSystem : EntitySystem
 
         _battery.SetCharge(batteryUid.Value, heldBattery.CurrentCharge + component.ChargeRate * frameTime, heldBattery);
         UpdateStatus(uid, component);
+        // Update charge-level appearance immediately so the client reflects progress promptly.
+        UpdateChargeLevelVisual(uid, component);
     }
 
     private bool SearchForBattery(EntityUid uid, [NotNullWhen(true)] out EntityUid? batteryUid, [NotNullWhen(true)] out BatteryComponent? component)
