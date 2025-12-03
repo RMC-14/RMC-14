@@ -29,10 +29,11 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float GibSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(5);
 
     /// <summary>
-    /// Probability of trigger acid splash after minimal damage check, may be increased
+    /// Probability of trigger acid splash after minimal damage check, may be increased.
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BaseSplashTriggerProbability = 0.2f;
+    public float BaseSplashTriggerProbability = 20f;
 
     /// <summary>
     /// Probability that target will be hit after splash is activated, decreases with the number of targets
@@ -48,9 +49,10 @@ public sealed partial class AcidBloodSplashComponent : Component
 
     /// <summary>
     /// How much probability increase if damage type is brute
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BruteDamageProbabilityModificator = 0.05f;
+    public float BruteDamageProbabilityModificator = 5f;
 
     /// <summary>
     /// How much probability of trigger acid splash increase with additional damage

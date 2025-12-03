@@ -126,7 +126,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             return;
 
         var damageDict = args.DamageDelta.DamageDict;
-        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation
+        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation, in percents
         triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageTriggerProbabilityMultiplier;
 
         foreach (var (type, _) in damageDict)
@@ -135,9 +135,11 @@ public sealed class AcidBloodSplashSystem : EntitySystem
                 triggerProbability += comp.BruteDamageProbabilityModificator;
         }
 
+        triggerProbability /= 100f; // Reduce the value to decimal
+
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 
-        if (_random.NextFloat() > triggerProbability)
+        if (!_random.Prob(triggerProbability))
             return;
 
         ActivateSplash(uid, comp, comp.StandardSplashRadius);
