@@ -51,6 +51,7 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
+using Content.Shared.Verbs;
 using Content.Shared.Wall;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -111,6 +112,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<InteractionVerb>>(OnGetRestockVerb);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
@@ -296,32 +298,51 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled)
+        if (!HasComp<MultitoolComponent>(args.Used))
             return;
 
-        if (HasComp<MultitoolComponent>(args.Used))
-        {
-            TryHackVendor(ent, args.User, args.Used);
-            args.Handled = true;
-            return;
-        }
+        args.Handled = true;
+        TryHackVendor(ent, args.User, args.Used);
+    }
 
+    private void OnGetRestockVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
         if (!ent.Comp.CanManualRestock)
             return;
 
-        var itemProtoId = MetaData(args.Used).EntityPrototype?.ID;
-        var ignoreBulkRestock = itemProtoId != null && ent.Comp.IgnoreBulkRestockById.Contains(itemProtoId) ||
-                                 IgnoreBulkRestockByComponent(args.Used);
-        if (TryComp<StorageComponent>(args.Used, out var storage) && !ignoreBulkRestock)
-        {
-            TryRestockFromContainer(ent, args.Used, args.User, storage);
-            args.Handled = true;
+        if (!args.CanAccess || !args.CanInteract)
             return;
-        }
 
-        if (TryRestockSingleItem(ent, args.Used, args.User))
+        if (!_hands.TryGetActiveItem(args.User, out var heldItem))
+            return;
+
+        var user = args.User;
+        var item = heldItem.Value;
+
+        var ignoreBulkRestock = false;
+        var itemProtoId = MetaData(item).EntityPrototype?.ID;
+        if (itemProtoId != null)
+            ignoreBulkRestock = ent.Comp.IgnoreBulkRestockById.Contains(itemProtoId) || IgnoreBulkRestockByComponent(item);
+
+        if (TryComp<StorageComponent>(item, out var storage) && !ignoreBulkRestock)
         {
-            args.Handled = true;
+            // Bulk restock verb for storage containers
+            args.Verbs.Add(new InteractionVerb
+            {
+                Text = Loc.GetString("rmc-vending-machine-restock-bulk-verb"),
+                Act = () => TryRestockFromContainer(ent, item, user, storage),
+                Priority = -1
+            });
+        }
+        else
+        {
+            // Single item restock verb
+            args.Verbs.Add(new InteractionVerb
+            {
+                Text = Loc.GetString("rmc-vending-machine-restock-single-verb"),
+                Act = () => TryRestockSingleItem(ent, item, user),
+                Priority = -1
+            });
         }
     }
 

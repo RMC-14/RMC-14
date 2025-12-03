@@ -9,6 +9,8 @@ rmc-vending-machine-hack-start = You start tweaking access restrictions in {THE(
 rmc-vending-machine-hack-finish-remove = You have successfully removed access restrictions in {THE($vendor)}
 rmc-vending-machine-hack-finish-restore = You have restored access restrictions in {THE($vendor)}
 
+rmc-vending-machine-restock-bulk-verb = Restock from container
+rmc-vending-machine-restock-single-verb = Restock item
 rmc-vending-machine-restock-empty = {THE($container)} is empty.
 rmc-vending-machine-restock-start = You start restocking {THE($vendor)} with supplies from {THE($container)}.
 rmc-vending-machine-restock-finish = You finish restocking {THE($vendor)} with supplies.
