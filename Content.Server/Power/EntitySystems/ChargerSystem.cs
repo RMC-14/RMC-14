@@ -220,16 +220,29 @@ internal sealed class ChargerSystem : EntitySystem
 
         var max = Math.Max(1f, battery.MaxCharge);
         var percent = battery.CurrentCharge / max;
+
+        // Determine number of steps from component (minimum 3: empty, at least one intermediate, full)
+        var steps = Math.Max(3, component.ChargeLevelSteps);
+        var lastIndex = steps - 1;
+
         byte level;
 
-        // Show recharger-5 only when fully charged
         if (percent >= 1f)
-            level = 5;
+        {
+            // Fully charged -> highest index
+            level = (byte)lastIndex;
+        }
         else if (percent <= 0f)
+        {
+            // Empty
             level = 0;
+        }
         else
-            // Map 0-99% to levels 1-4
-            level = (byte)Math.Clamp((int)Math.Ceiling(percent * 4f), 1, 4);
+        {
+            // Map 0..99% to the intermediate states 1..(steps-2)
+            var intermediateCount = steps - 2;
+            level = (byte)Math.Clamp((int)Math.Ceiling(percent * intermediateCount), 1, intermediateCount);
+        }
 
         _appearance.SetData(uid, PowerCellVisuals.ChargeLevel, level, appearance);
     }
