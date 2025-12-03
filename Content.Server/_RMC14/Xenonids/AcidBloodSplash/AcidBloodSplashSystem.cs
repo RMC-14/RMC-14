@@ -132,7 +132,10 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         foreach (var (type, _) in damageDict)
         {
             if (_bruteTypes.Contains(type) && damageDict[type] > 0)
+            {
                 triggerProbability += comp.BruteDamageProbabilityModificator;
+                break;
+            }
         }
 
         triggerProbability /= 100f; // Reduce the value to decimal
