@@ -112,7 +112,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<InteractionVerb>>(OnGetRestockVerb);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<InteractionVerb>>(OnGetRestockInteractVerb);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
@@ -296,16 +296,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
-    {
-        if (!HasComp<MultitoolComponent>(args.Used))
-            return;
-
-        args.Handled = true;
-        TryHackVendor(ent, args.User, args.Used);
-    }
-
-    private void OnGetRestockVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    private void OnGetRestockInteractVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!ent.Comp.CanManualRestock)
             return;
@@ -344,6 +335,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 Priority = -1
             });
         }
+    }
+
+    private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!HasComp<MultitoolComponent>(args.Used))
+            return;
+
+        args.Handled = true;
+        TryHackVendor(ent, args.User, args.Used);
     }
 
     private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
@@ -930,10 +930,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        failedItems ??= new HashSet<NetEntity>();
+        failedItems ??= [];
 
         var items = storage.Container.ContainedEntities;
-
         while (items.Count > 0)
         {
             var item = items[0];
@@ -1070,7 +1069,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ValidateItemForRestock(vendor, item, user, valid, matchingEntry.Id))
             return false;
-        // Try partial stack restocking first (for stacks like sandbags, materials, etc.)
+        // Try partial stack restocking first (sandbags, materials, gauze, etc.)
         if (TryRestockPartialStack(vendor, item, user, valid, matchingEntry))
             return true;
 
@@ -1097,114 +1096,172 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             partialAmount == 0)
             return false;
 
-        return partialAmount + itemStack.Count <= itemProtoStack.Count;
+        var totalItems = partialAmount + itemStack.Count;
+        var maxStackSize = itemProtoStack.Count;
+        var fullStacksCreated = totalItems / maxStackSize;
+        if (fullStacksCreated <= 0)
+            return true;
+
+        if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
+            return true;
+
+        return currentAmount + fullStacksCreated <= max;
     }
 
     /// <summary>
     /// Handles restocking of partial stacks (sandbags, materials, etc.)
-    /// Calculates how many full vendor stacks can be made, tracks partial remainders,
-    /// and leaves any excess in the player's hand.
+    /// Calculates how many full vendor stacks can be made, tracks partial remainders, and leaves any excess in hand if exceeds vendor max.
     /// </summary>
     /// <remarks>
-    /// Stack size rules:
-    /// - Folding barricades: Must be exactly the prototype amount (no partial restocking)
-    /// - Sandbags: Restocked in multiples of 5
-    /// - Other materials (metal, plasteel, etc.): Restocked in multiples of 10
+    /// Any amount can be restocked, partials are tracked and accumulated.
+    /// When partials combine to form a full stack, a new vendor stack is created.
+    /// If stacks exceed vendor max, only restocks what fits and leaves the excess in hand.
     /// </remarks>
     private bool TryRestockPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid, CMVendorEntry matchingEntry)
     {
-        if (!TryComp<StackComponent>(item, out var stackComp) ||
-            !_prototypes.TryIndex(matchingEntry.Id, out var prototype) ||
-            !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
+        if (!TryGetStackComponents(item, matchingEntry.Id, out var stackComp, out var maxStackSize))
             return false;
 
-        var (stacksToRestock, stackSize) = CalculateRestockAmount(item, stackComp, protoStack);
-        var amountConsumed = UpdatePartialStackTracking(vendor, matchingEntry, stackComp, stackSize, protoStack.Count, ref stacksToRestock);
-        if (stacksToRestock == 0)
+        vendor.Comp.PartialProductStacks.TryAdd(matchingEntry.Id, 0);
+        var existingPartial = vendor.Comp.PartialProductStacks[matchingEntry.Id];
+        var itemCount = stackComp!.Count;
+
+        var restockPlan = CalculateRestockPlan(existingPartial, itemCount, maxStackSize, matchingEntry);
+        if (!restockPlan.CanRestock)
             return false;
 
-        UpdateInventoryStacks(item, stackComp, amountConsumed);
-        FinalizeRestock(vendor, item, user, valid, matchingEntry, stacksToRestock);
+        ApplyRestockPlan(vendor, item, stackComp, matchingEntry, restockPlan);
+        ShowRestockFeedback(vendor, item, user, valid);
 
         return true;
     }
 
-    private (int stacksToRestock, int stackSize) CalculateRestockAmount(EntityUid item, StackComponent stackComp, StackComponent protoStack)
+    private bool TryGetStackComponents(EntityUid item, EntProtoId protoId, out StackComponent? stackComp, out int maxStackSize)
     {
-        const int sandbagStackSize = 5;
-        const int materialStackSize = 10;
+        stackComp = null;
+        maxStackSize = 0;
 
-        var itemPrototypeId = MetaData(item).EntityPrototype?.ID ?? string.Empty;
-        if (itemPrototypeId == "CMBarricadeFolding")
-        {
-            var isExactAmount = stackComp.Count == protoStack.Count;
-            return (isExactAmount ? 1 : 0, protoStack.Count);
-        }
+        if (!TryComp(item, out stackComp) ||
+            !_prototypes.TryIndex(protoId, out var prototype) ||
+            !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
+            return false;
 
-        if (itemPrototypeId.Contains("Sandbag", StringComparison.OrdinalIgnoreCase))
-            return (stackComp.Count / sandbagStackSize, sandbagStackSize);
-
-        if (stackComp.Count >= materialStackSize)
-            return (stackComp.Count / materialStackSize, materialStackSize);
-
-        return (0, materialStackSize);
+        maxStackSize = protoStack.Count;
+        return true;
     }
 
-    private int UpdatePartialStackTracking(Entity<CMAutomatedVendorComponent> vendor,
-        CMVendorEntry entry,
-        StackComponent stackComp,
-        int stackSize,
-        int maxStackSize,
-        ref int stacksToRestock)
+    private RestockPlan CalculateRestockPlan(int existingPartial, int itemCount, int maxStackSize, CMVendorEntry entry)
     {
-        vendor.Comp.PartialProductStacks.TryAdd(entry.Id, 0);
-
-        var existingPartial = vendor.Comp.PartialProductStacks[entry.Id];
-        var newPartial = stackComp.Count % stackSize;
-        var combinedPartial = existingPartial + newPartial;
-        var playerStackConsumed = stacksToRestock * stackSize + newPartial; // Initial amount consumed
-        if (combinedPartial >= maxStackSize)
+        var totalItems = existingPartial + itemCount;
+        var potentialFullStacks = totalItems / maxStackSize;
+        var potentialPartial = totalItems % maxStackSize;
+        // Check if vendor has a max limit
+        if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
         {
-            // Partials combined into a full stack
-            stacksToRestock++;
-            vendor.Comp.PartialProductStacks[entry.Id] = combinedPartial % maxStackSize;
-            // Don't change playerStackConsumed - the extra full stack came from combining partials
+            return new RestockPlan
+            {
+                CanRestock = true,
+                StacksToAdd = potentialFullStacks,
+                ItemsToConsume = itemCount,
+                FinalPartial = potentialPartial
+            };
         }
-        else
+        // Has max limit - check if we'd exceed it
+        if (currentAmount + potentialFullStacks <= max)
         {
-            vendor.Comp.PartialProductStacks[entry.Id] = combinedPartial;
+            return new RestockPlan
+            {
+                CanRestock = true,
+                StacksToAdd = potentialFullStacks,
+                ItemsToConsume = itemCount,
+                FinalPartial = potentialPartial
+            };
         }
-
-        return playerStackConsumed;
+        // Would exceed max - calculate limited restocking
+        return CalculateLimitedRestockPlan(existingPartial, itemCount, maxStackSize, max, currentAmount);
     }
 
-    private void UpdateInventoryStacks(EntityUid item, StackComponent stackComp, int amountConsumed)
+    private RestockPlan CalculateLimitedRestockPlan(int existingPartial, int itemCount, int maxStackSize, int max, int currentAmount)
     {
-        var remainder = stackComp.Count - amountConsumed;
-        if (remainder > 0)
-            _stack.SetCount(item, remainder, stackComp);
-        else
+        var roomForStacks = max - currentAmount;
+
+        if (roomForStacks <= 0)
+        {
+            return CalculatePartialOnlyPlan(existingPartial, itemCount, maxStackSize);
+        }
+
+        var itemsNeededForFullStacks = (roomForStacks * maxStackSize) - existingPartial;
+        var itemsToConsume = Math.Min(itemCount, itemsNeededForFullStacks);
+        var finalPartial = (existingPartial + itemsToConsume) % maxStackSize;
+
+        return new RestockPlan
+        {
+            CanRestock = true,
+            StacksToAdd = roomForStacks,
+            ItemsToConsume = itemsToConsume,
+            FinalPartial = finalPartial
+        };
+    }
+
+    private RestockPlan CalculatePartialOnlyPlan(int existingPartial, int itemCount, int maxStackSize)
+    {
+        if (existingPartial == 0)
+        {
+            // Completely full, can't restock anything
+            return new RestockPlan { CanRestock = false };
+        }
+
+        var canAddToPartial = maxStackSize - existingPartial;
+        if (itemCount > canAddToPartial)
+        {
+            // Can't fit all items - would create a stack and exceed max
+            return new RestockPlan { CanRestock = false };
+        }
+        // Can add all items to partial without creating a full stack
+        return new RestockPlan
+        {
+            CanRestock = true,
+            StacksToAdd = 0,
+            ItemsToConsume = itemCount,
+            FinalPartial = existingPartial + itemCount
+        };
+    }
+
+    private void ApplyRestockPlan(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, StackComponent stackComp, CMVendorEntry entry, RestockPlan plan)
+    {
+        vendor.Comp.PartialProductStacks[entry.Id] = plan.FinalPartial;
+
+        if (plan.StacksToAdd > 0)
+        {
+            entry.Amount += plan.StacksToAdd;
+            Dirty(vendor);
+            AmountUpdated(vendor, entry);
+        }
+
+        ConsumePlayerStack(item, stackComp, plan.ItemsToConsume, stackComp.Count);
+    }
+
+    private void ConsumePlayerStack(EntityUid item, StackComponent stackComp, int itemsToConsume, int totalItems)
+    {
+        if (itemsToConsume >= totalItems)
+        {
             QueueDel(item);
+        }
+        else
+        {
+            _stack.SetCount(item, totalItems - itemsToConsume, stackComp);
+        }
     }
 
-    private void FinalizeRestock(Entity<CMAutomatedVendorComponent> vendor,
-        EntityUid item,
-        EntityUid user,
-        bool valid,
-        CMVendorEntry entry,
-        int stacksToRestock)
+    private void ShowRestockFeedback(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup)
     {
-        if (!valid)
-        {
-            _popup.PopupEntity(
-                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
-                vendor,
-                user);
-        }
+        if (suppressPopup)
+            return;
 
-        entry.Amount += stacksToRestock;
-        Dirty(vendor);
-        AmountUpdated(vendor, entry);
+        _popup.PopupEntity(
+            Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
+            vendor,
+            user);
     }
 
     /// <summary>
@@ -1290,16 +1347,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     /// <remarks>
     /// Stack validation rules:
-    /// - Folding barricades: Must be exactly the prototype amount (no flexibility)
-    /// - Sandbags: Minimum 5 (restocked in multiples of 5)
-    /// - Other materials: Minimum 10 (restocked in multiples of 10)
+    /// - Folding barricades: Must be exactly the prototype amount (stored in stacks of 3)
+    /// - All other stackable items: Any amount allowed (partial stacks are tracked and accumulated)
     /// Partial stack logic is handled in TryRestockPartialStack.
     /// </remarks>
     private bool ValidateStackAmount(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
-        const int minimumSandbagCount = 5;
-        const int minimumMaterialCount = 10;
-
         if (!TryComp<StackComponent>(item, out var stack) ||
             !_prototypes.TryIndex(prototypeId, out var prototype) ||
             !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
@@ -1308,12 +1361,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var itemPrototypeId = MetaData(item).EntityPrototype?.ID ?? string.Empty;
         if (itemPrototypeId == "CMBarricadeFolding")
             return ValidateExactStackCount(item, stack, protoStack, user, valid);
-
-        if (itemPrototypeId.Contains("Sandbag", StringComparison.OrdinalIgnoreCase))
-            return ValidateMinimumStackCount(item, stack, minimumSandbagCount, user, valid);
-
-        if (stack.Count < minimumMaterialCount && stack.Count != protoStack.Count)
-            return ValidateMinimumStackCount(item, stack, minimumMaterialCount, user, valid);
 
         return true;
     }
@@ -1329,21 +1376,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             user,
             ("item", item),
             ("required", protoStack.Count),
-            ("current", stack.Count));
-        return false;
-    }
-
-    private bool ValidateMinimumStackCount(EntityUid item, StackComponent stack, int minimum, EntityUid user, bool valid)
-    {
-        if (stack.Count >= minimum)
-            return true;
-
-        RestockValidationPopup(valid,
-            "rmc-vending-machine-restock-stack-minimum",
-            item,
-            user,
-            ("item", item),
-            ("minimum", minimum),
             ("current", stack.Count));
         return false;
     }
@@ -1418,12 +1450,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Validates ammunition items (magazines and ammo boxes) are full.
+    /// Validates if ammunition items (magazines, ammo boxes, etc.) are full.
     /// </summary>
     private bool ValidateAmmunition(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
         if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) &&
-            !HasComp<GunComponent>(item) && // Skip for guns with BallisticAmmoProviderComponent (flare guns, shotguns, revolvers)
+            !HasComp<GunComponent>(item) && // Skip guns with BallisticAmmoProviderComponent (flare guns, shotguns, revolvers)
             ammoProvider.Count < ammoProvider.Capacity)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", item, user, ("mag", item));
@@ -1510,7 +1542,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
-            // Armor and helmets need to be empty.
+            // Armor/helmets use IgnoreBulkRestockByComponent to get here.
             RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
             return false;
         }
@@ -1645,7 +1677,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private bool IgnoreBulkRestockByComponent(EntityUid item)
     {
-        // For restocking armor/helmets
+        // For armor/helmets because they have storage component
         return HasComp<CMArmorComponent>(item) || HasComp<CMHardArmorComponent>(item);
     }
 
