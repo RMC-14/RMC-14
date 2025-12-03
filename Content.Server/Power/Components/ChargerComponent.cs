@@ -37,9 +37,9 @@ namespace Content.Server.Power.Components
         /// <summary>
         /// How many charge-level sprite states the charger should support.
         /// The server will produce a value in the range `0..(ChargeLevelSteps-1)` where 0 = empty
-        /// and `ChargeLevelSteps-1` = fully charged. Default is 6 to preserve legacy 0-5 behaviour.
+        /// and `ChargeLevelSteps-1` = fully charged. Default is 2 (one intermediate and one full charge sprite)
         /// </summary>
         [DataField("chargeLevelSteps")]
-        public int ChargeLevelSteps = 6;
+        public int ChargeLevelSteps = 2;
     }
 }
