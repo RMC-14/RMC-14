@@ -336,6 +336,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryComp<SentryComponent>(sentryEnt.Value, out var sentry))
             return;
 
+        if (sentry.Mode == SentryMode.Item)
+            return;
+
         var newMode = sentry.Mode == SentryMode.On ? SentryMode.Off : SentryMode.On;
         EntityManager.System<SentrySystem>().TrySetMode((sentryEnt.Value, sentry), newMode);
         UpdateUI(laptop);
@@ -363,8 +366,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     {
         var laptopXform = Transform(laptop);
         var surfaceXform = Transform(surface);
-        laptopXform.Coordinates = surfaceXform.Coordinates;
-        laptopXform.AttachParent(surface);
+
+        _transform.SetCoordinates(laptop.Owner, surfaceXform.Coordinates);
+        _transform.SetParent(laptop.Owner, surface);
 
         laptop.Comp.IsOpen = true;
         SetPowered(laptop, true);
