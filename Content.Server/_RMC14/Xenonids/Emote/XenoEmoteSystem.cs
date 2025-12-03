@@ -59,8 +59,8 @@ public sealed class XenoEmoteSystem : EntitySystem
 
         if (_random.Prob(chance))
         {
-            var emote = _random.Prob(ent.Comp.EmoteChance) ? ent.Comp.Emote : ent.Comp.RareEmote;
-            _emote.TryEmoteWithChat(target, emote);
+            var emote = _random.Prob(comp.EmoteChance) ? comp.Emote : comp.RareEmote;
+            _emote.TryEmoteWithChat(target, emote, cooldown: comp.EmoteCooldown);
         }
     }
 }

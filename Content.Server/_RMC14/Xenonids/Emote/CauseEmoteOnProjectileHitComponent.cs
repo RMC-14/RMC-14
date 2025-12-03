@@ -24,6 +24,9 @@ public sealed partial class CauseEmoteOnProjectileHitComponent : Component
     [DataField]
     public ProtoId<EmotePrototype> RareEmote = "Growl";
 
+    [DataField]
+    public TimeSpan? EmoteCooldown = TimeSpan.FromSeconds(5);
+
     /// <summary>
     /// Entity whitelist for valid targets to emote. Not required.
     /// </summary>
