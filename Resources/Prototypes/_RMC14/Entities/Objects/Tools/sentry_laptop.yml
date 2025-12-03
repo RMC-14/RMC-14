@@ -43,6 +43,9 @@
   - type: ActivatableUI
     key: enum.SentryLaptopUiKey.Key
     inHandsOnly: false
+  - type: DeviceNetwork
+  - type: DeviceLinkSource
+    ports: [ SentryControl ]
   - type: SentryLaptop
   - type: ItemToggle
     activated: false

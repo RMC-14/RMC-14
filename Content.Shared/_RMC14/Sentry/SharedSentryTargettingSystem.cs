@@ -47,14 +47,20 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     {
         var comp = ent.Comp;
         comp.FriendlyFactions.Clear();
+        comp.HumanoidAdded.Clear();
 
-        foreach (var faction in factions)
+        var friendly = factions.Where(f => f != SentryHostileToAllFaction && f != "Humanoid").ToHashSet();
+
+        if (factions.Contains("Humanoid"))
         {
-            if (faction == SentryHostileToAllFaction)
-                continue;
-
-            comp.FriendlyFactions.Add(faction);
+            foreach (var faction in GetNonXenoFactions())
+            {
+                if (friendly.Add(faction))
+                    comp.HumanoidAdded.Add(faction);
+            }
         }
+
+        comp.FriendlyFactions.UnionWith(friendly);
 
         if (_net.IsServer)
             ApplyTargeting(ent);
@@ -66,6 +72,15 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     {
         if (faction == SentryHostileToAllFaction)
             return;
+
+        if (faction == "Humanoid")
+        {
+            ToggleHumanoid(ent, friendly);
+            if (_net.IsServer)
+                ApplyTargeting(ent);
+            Dirty(ent);
+            return;
+        }
 
         if (friendly)
             ent.Comp.FriendlyFactions.Add(faction);
@@ -82,10 +97,17 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     {
         var comp = ent.Comp;
         comp.FriendlyFactions.Clear();
+        comp.HumanoidAdded.Clear();
 
         var originalFaction = ent.Comp.OriginalFaction;
         if (!string.IsNullOrEmpty(originalFaction))
             comp.FriendlyFactions.Add(originalFaction);
+
+        foreach (var faction in GetNonXenoFactions())
+        {
+            comp.FriendlyFactions.Add(faction);
+            comp.HumanoidAdded.Add(faction);
+        }
 
         if (_net.IsServer)
             ApplyTargeting(ent);
@@ -207,5 +229,42 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         targeting.OriginalFaction = deployerFaction.Factions.First();
 
         SetFriendlyFactions((sentry, targeting), newFactions);
+    }
+
+    public IEnumerable<string> GetNonXenoFactions()
+    {
+        var all = _faction.GetFactions();
+        foreach (var faction in all.Keys)
+        {
+            if (faction == "RMCXeno" || faction == SentryHostileToAllFaction)
+                continue;
+
+            yield return faction;
+        }
+    }
+
+    public bool ContainsAllNonXeno(HashSet<string> friendlyFactions)
+    {
+        var nonXeno = GetNonXenoFactions().ToList();
+        return nonXeno.All(friendlyFactions.Contains);
+    }
+
+    public void ToggleHumanoid(Entity<SentryTargetingComponent> ent, bool friendly)
+    {
+        if (friendly)
+        {
+            foreach (var faction in GetNonXenoFactions())
+            {
+                if (ent.Comp.FriendlyFactions.Add(faction))
+                    ent.Comp.HumanoidAdded.Add(faction);
+            }
+        }
+        else
+        {
+            foreach (var faction in ent.Comp.HumanoidAdded)
+                ent.Comp.FriendlyFactions.Remove(faction);
+
+            ent.Comp.HumanoidAdded.Clear();
+        }
     }
 }

@@ -6,6 +6,9 @@
   components:
   - type: Sentry
   - type: Eye
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
 
 - type: htnCompound
   id: RMCSentryCompound

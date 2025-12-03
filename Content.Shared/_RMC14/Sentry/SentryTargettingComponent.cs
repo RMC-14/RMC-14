@@ -14,4 +14,7 @@ public sealed partial class SentryTargetingComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<string> TargetedFactions = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<string> HumanoidAdded = new();
 }

@@ -96,6 +96,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
         var sentries = BuildSentryInfoList(laptop);
         var factions = GetFactionList();
+        factions["Humanoid"] = "Humanoid";
 
         var state = new SentryLaptopBuiState(
             sentries,
@@ -119,7 +120,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         if (!TryGetEntity(args.Sentry, out var sentryUid))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryUid.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryUid.Value))
             return;
 
         if (!TryComp<SentryComponent>(sentryUid.Value, out var sentry) || sentry.Mode == SentryMode.Item)
@@ -153,7 +154,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         if (!TryGetEntity(args.Sentry, out var sentryUid))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryUid.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryUid.Value))
             return;
 
         var name = args.Name.Trim();
@@ -171,7 +172,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
     private void OnGlobalToggleFactionMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopGlobalToggleFactionBuiMsg args)
     {
-        foreach (var sentryUid in laptop.Comp.LinkedSentries)
+        foreach (var sentryUid in GetLinkedSentries(laptop))
         {
             if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
                 continue;
@@ -186,7 +187,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         var factionSet = args.Factions.ToHashSet();
 
-        foreach (var sentryUid in laptop.Comp.LinkedSentries)
+        foreach (var sentryUid in GetLinkedSentries(laptop))
         {
             if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
                 continue;
@@ -199,7 +200,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
     private void OnGlobalResetTargetingMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopGlobalResetTargetingBuiMsg args)
     {
-        foreach (var sentryUid in laptop.Comp.LinkedSentries)
+        foreach (var sentryUid in GetLinkedSentries(laptop))
         {
             if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
                 continue;
@@ -214,7 +215,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         var newMode = args.PowerOn ? SentryMode.On : SentryMode.Off;
 
-        foreach (var sentryUid in laptop.Comp.LinkedSentries)
+        foreach (var sentryUid in GetLinkedSentries(laptop))
         {
             if (!TryComp<SentryComponent>(sentryUid, out var sentry))
                 continue;

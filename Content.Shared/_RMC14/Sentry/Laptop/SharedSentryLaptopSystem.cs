@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DeviceLinking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
@@ -39,6 +40,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
 
     private const float UpdateInterval = 1.0f;
 
@@ -54,9 +56,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         SubscribeLocalEvent<SentryLaptopComponent, ActivatableUIOpenAttemptEvent>(OnLaptopUIOpenAttempt);
 
         SubscribeLocalEvent<SentryLaptopLinkedComponent, ComponentShutdown>(OnSentryLinkedShutdown);
-
-        SubscribeLocalEvent<SentryComponent, AfterInteractUsingEvent>(OnSentryInteractUsing);
-        SubscribeLocalEvent<SentryLaptopComponent, AfterInteractUsingEvent>(OnLaptopInteractUsing);
 
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopUnlinkBuiMsg>(OnUnlinkMessage);
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopUnlinkAllBuiMsg>(OnUnlinkAllMessage);
@@ -106,7 +105,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             if (!laptop.IsPowered || !_ui.IsUiOpen(laptopUid, SentryLaptopUiKey.Key))
                 continue;
 
-            foreach (var sentryUid in laptop.LinkedSentries)
+            foreach (var sentryUid in GetLinkedSentries(laptop))
             {
                 if (!TryComp<SentryComponent>(sentryUid, out var sentry))
                     continue;
@@ -155,17 +154,14 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         sentry.Comp.LastHealthAlert = time;
         Dirty(sentry);
 
-        if (!TryComp<SentryLaptopLinkedComponent>(sentry, out var linked) || linked.LinkedLaptop == null)
-            return;
-
-        if (!TryComp<SentryLaptopComponent>(linked.LinkedLaptop.Value, out var laptop))
+        if (!TryGetLinkedLaptop(sentry.Owner, out var laptop))
             return;
 
         var health = GetSentryHealth(sentry, out var maxHealth);
         var healthPercent = maxHealth > 0 ? (int) ((health / maxHealth) * 100) : 0;
 
-        SendAlert(linked.LinkedLaptop.Value, sentry, SentryAlertType.Damaged,
-            $"{GetSentryDisplayName((linked.LinkedLaptop.Value, laptop), sentry)}: Taking damage! ({healthPercent}% health)");
+        SendAlert(laptop.Value, sentry, SentryAlertType.Damaged,
+            $"{GetSentryDisplayName(laptop.Value, sentry)}: Taking damage! ({healthPercent}% health)");
     }
 
     private void OnSentryShot(Entity<SentryComponent> sentry, ref GunShotEvent args)
@@ -183,15 +179,12 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         sentry.Comp.LastTargetAlert = time;
         Dirty(sentry);
 
-        if (!TryComp<SentryLaptopLinkedComponent>(sentry, out var linked) || linked.LinkedLaptop == null)
-            return;
-
-        if (!TryComp<SentryLaptopComponent>(linked.LinkedLaptop.Value, out var laptop))
+        if (!TryGetLinkedLaptop(sentry.Owner, out var laptop))
             return;
 
         var targetName = Name(gun.Target.Value);
-        SendAlert(linked.LinkedLaptop.Value, sentry, SentryAlertType.TargetAcquired,
-            $"{GetSentryDisplayName((linked.LinkedLaptop.Value, laptop), sentry)}: Engaging {targetName}");
+        SendAlert(laptop.Value, sentry, SentryAlertType.TargetAcquired,
+            $"{GetSentryDisplayName(laptop.Value, sentry)}: Engaging {targetName}");
     }
 
     private void SendAlert(EntityUid laptop, EntityUid sentry, SentryAlertType alertType, string message)
@@ -264,139 +257,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         UnlinkSentry((sentry.Comp.LinkedLaptop.Value, laptop), sentry.Owner);
     }
 
-    private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref AfterInteractUsingEvent args)
-    {
-        if (args.Handled || !args.CanReach)
-            return;
-
-        if (!HasComp<MultitoolComponent>(args.Used))
-            return;
-
-        if (!TryComp<NetworkConfiguratorComponent>(args.Used, out var configurator))
-            return;
-
-        args.Handled = true;
-
-        if (IsSentryAlreadyLinked(sentry))
-        {
-            _popup.PopupClient("This sentry is already linked to a laptop!", sentry, args.User);
-            return;
-        }
-
-        HandleLinkInteraction(args.Used, sentry.Owner, isLaptopTarget: false, args.User, ref configurator);
-    }
-
-    private void OnLaptopInteractUsing(Entity<SentryLaptopComponent> laptop, ref AfterInteractUsingEvent args)
-    {
-        if (args.Handled || !args.CanReach)
-            return;
-
-        if (!HasComp<MultitoolComponent>(args.Used))
-            return;
-
-        if (!TryComp<NetworkConfiguratorComponent>(args.Used, out var configurator))
-            return;
-
-        args.Handled = true;
-
-        HandleLinkInteraction(args.Used, laptop.Owner, isLaptopTarget: true, args.User, ref configurator);
-    }
-
-    private void HandleLinkInteraction(EntityUid multitool, EntityUid target, bool isLaptopTarget, EntityUid user, ref NetworkConfiguratorComponent configurator)
-    {
-        if (configurator.ActiveDeviceLink == null)
-        {
-            configurator.LinkModeActive = true;
-            configurator.ActiveDeviceLink = target;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-
-            var targetName = Name(target);
-            _popup.PopupClient($"Link mode started: {targetName} stored.", target, user);
-            return;
-        }
-
-        var stored = configurator.ActiveDeviceLink;
-        var storedIsLaptop = stored.HasValue && HasComp<SentryLaptopComponent>(stored.Value);
-        var storedIsSentry = stored.HasValue && HasComp<SentryComponent>(stored.Value);
-
-        if (storedIsLaptop == isLaptopTarget)
-        {
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            _popup.PopupClient("Link mode stopped.", target, user);
-            return;
-        }
-
-        if (!stored.HasValue || !TryGetEntity(GetNetEntity(stored.Value), out var storedEnt))
-        {
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            _popup.PopupClient("Stored link target is missing.", target, user);
-            return;
-        }
-
-        Entity<SentryLaptopComponent>? laptopEntity = null;
-        Entity<SentryComponent>? sentryEntity = null;
-
-        if (storedIsLaptop &&
-            TryComp<SentryLaptopComponent>(storedEnt.Value, out var storedLaptop) &&
-            TryComp<SentryComponent>(target, out var targetSentry))
-        {
-            laptopEntity = new Entity<SentryLaptopComponent>(storedEnt.Value, storedLaptop);
-            sentryEntity = new Entity<SentryComponent>(target, targetSentry);
-        }
-        else if (storedIsSentry &&
-                 TryComp<SentryComponent>(storedEnt.Value, out var storedSentry) &&
-                 TryComp<SentryLaptopComponent>(target, out var targetLaptop))
-        {
-            laptopEntity = new Entity<SentryLaptopComponent>(target, targetLaptop);
-            sentryEntity = new Entity<SentryComponent>(storedEnt.Value, storedSentry);
-        }
-        else
-        {
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            _popup.PopupClient("Invalid link targets.", target, user);
-            return;
-        }
-
-        if (laptopEntity is null || sentryEntity is null)
-        {
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            _popup.PopupClient("Stored link target is unavailable.", target, user);
-            return;
-        }
-
-        if (IsSentryAlreadyLinked(sentryEntity.Value))
-        {
-            _popup.PopupClient("This sentry is already linked to a laptop!", sentryEntity.Value, user);
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            return;
-        }
-
-        if (!ValidateLaptopForLinking(laptopEntity.Value, sentryEntity.Value, user))
-        {
-            configurator.ActiveDeviceLink = null;
-            configurator.DeviceLinkTarget = null;
-            Dirty(multitool, configurator);
-            return;
-        }
-
-        if (_net.IsServer)
-            LinkSentryToLaptop(laptopEntity.Value, sentryEntity.Value, user);
-
-        configurator.ActiveDeviceLink = null;
-        configurator.DeviceLinkTarget = null;
-        Dirty(multitool, configurator);
-    }
 
     private void OnUnlinkMessage(Entity<SentryLaptopComponent> laptop, ref SentryLaptopUnlinkBuiMsg args)
     {
@@ -427,7 +287,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryGetEntity(args.Sentry, out var sentryEnt))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryEnt.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryEnt.Value))
             return;
 
         if (!TryComp<SentryTargetingComponent>(sentryEnt.Value, out var targeting))
@@ -446,7 +306,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryGetEntity(args.Sentry, out var sentryEnt))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryEnt.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryEnt.Value))
             return;
 
         if (!TryComp<SentryTargetingComponent>(sentryEnt.Value, out var targeting))
@@ -464,7 +324,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryGetEntity(args.Sentry, out var sentryEnt))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryEnt.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryEnt.Value))
             return;
 
         if (!TryComp<SentryComponent>(sentryEnt.Value, out var sentry))
@@ -483,7 +343,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryGetEntity(args.Sentry, out var sentryEnt))
             return;
 
-        if (!laptop.Comp.LinkedSentries.Contains(sentryEnt.Value))
+        if (!GetLinkedSentries(laptop).Contains(sentryEnt.Value))
             return;
 
         if (!TryComp<SentryTargetingComponent>(sentryEnt.Value, out var targeting))
@@ -514,7 +374,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return false;
         }
 
-        if (laptop.Comp.LinkedSentries.Count >= laptop.Comp.MaxLinkedSentries)
+        if (GetLinkedSentries(laptop).Count >= laptop.Comp.MaxLinkedSentries)
         {
             _popup.PopupClient($"The laptop can only control {laptop.Comp.MaxLinkedSentries} sentries at once!", laptop, user);
             return false;
@@ -525,6 +385,11 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
     private void LinkSentryToLaptop(Entity<SentryLaptopComponent> laptop, Entity<SentryComponent> sentry, EntityUid user)
     {
+        var source = EnsureComp<DeviceLinkSourceComponent>(laptop.Owner);
+        var sink = EnsureComp<DeviceLinkSinkComponent>(sentry.Owner);
+
+        _deviceLink.LinkDefaults(user, laptop.Owner, sentry.Owner, source, sink);
+
         laptop.Comp.LinkedSentries.Add(sentry);
 
         var linkedComp = EnsureComp<SentryLaptopLinkedComponent>(sentry);
@@ -550,27 +415,31 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!HasComp<GunIFFComponent>(sentry) && HasComp<GunComponent>(sentry))
             _iff.EnableIntrinsicIFF(sentry);
 
-        if (targeting.FriendlyFactions.Count == 0)
-        {
-            var defaultFactions = new HashSet<string>();
+        var defaultFactions = targeting.FriendlyFactions.Count == 0
+            ? new HashSet<string>()
+            : new HashSet<string>(targeting.FriendlyFactions);
 
+        if (defaultFactions.Count == 0)
+        {
             if (!string.IsNullOrEmpty(targeting.OriginalFaction))
                 defaultFactions.Add(targeting.OriginalFaction);
             else
                 defaultFactions.Add("UNMC");
+        }
 
-            _sentryTargeting.SetFriendlyFactions((sentry, targeting), defaultFactions);
-        }
-        else
-        {
-            _sentryTargeting.SetFriendlyFactions((sentry, targeting), new HashSet<string>(targeting.FriendlyFactions));
-        }
+        foreach (var faction in _sentryTargeting.GetNonXenoFactions())
+            defaultFactions.Add(faction);
+
+        _sentryTargeting.SetFriendlyFactions((sentry, targeting), defaultFactions);
     }
 
     public void UnlinkSentry(Entity<SentryLaptopComponent> laptop, EntityUid sentry)
     {
         if (!laptop.Comp.LinkedSentries.Remove(sentry))
             return;
+
+        if (TryComp<DeviceLinkSinkComponent>(sentry, out var sink))
+            _deviceLink.RemoveAllFromSink(sentry, sink);
 
         laptop.Comp.SentryCustomNames.Remove(sentry);
         RemComp<SentryLaptopLinkedComponent>(sentry);
@@ -586,7 +455,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
     private void UnlinkAllSentries(Entity<SentryLaptopComponent> laptop)
     {
-        var sentries = laptop.Comp.LinkedSentries.ToList();
+        var sentries = GetLinkedSentries(laptop).ToList();
         foreach (var sentry in sentries)
             UnlinkSentry(laptop, sentry);
     }
@@ -616,7 +485,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     {
         var sentries = new List<SentryInfo>();
 
-        foreach (var sentryUid in laptop.Comp.LinkedSentries)
+        foreach (var sentryUid in GetLinkedSentries(laptop))
         {
             if (!TryComp<SentryComponent>(sentryUid, out var sentry))
                 continue;
@@ -667,7 +536,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
     private float GetSentryHealth(EntityUid sentry, out float maxHealth)
     {
-        maxHealth = 100f;
+        maxHealth = GetSentryMaxHealth(sentry);
         var health = maxHealth;
 
         if (TryComp<DamageableComponent>(sentry, out var damageable))
@@ -725,6 +594,26 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         return "Unknown";
     }
 
+    protected List<EntityUid> GetLinkedSentries(Entity<SentryLaptopComponent> laptop)
+    {
+        var linked = new List<EntityUid>();
+
+        if (TryComp<DeviceLinkSourceComponent>(laptop, out var source))
+        {
+            foreach (var sink in source.LinkedPorts.Keys)
+            {
+                if (HasComp<SentryComponent>(sink))
+                    linked.Add(sink);
+            }
+
+            laptop.Comp.LinkedSentries = linked.ToHashSet();
+            return linked;
+        }
+
+        linked.AddRange(laptop.Comp.LinkedSentries);
+        return linked;
+    }
+
     private NetEntity? GetSentryTarget(EntityUid sentry)
     {
         if (TryComp<GunComponent>(sentry, out var gun) && gun.Target != null)
@@ -739,5 +628,42 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return targeting.FriendlyFactions;
 
         return new HashSet<string> { "UNMC" };
+    }
+
+    private float GetSentryMaxHealth(EntityUid sentry)
+    {
+        if (TryComp<DestructibleComponent>(sentry, out var destruct))
+        {
+            var max = 0f;
+            foreach (var threshold in destruct.Thresholds)
+            {
+                if (threshold.Trigger is DamageTrigger damageTrigger)
+                    max = Math.Max(max, damageTrigger.Damage.Total);
+            }
+
+            if (max > 0f)
+                return max;
+        }
+
+        return 100f;
+    }
+
+    private bool TryGetLinkedLaptop(EntityUid sentry, out Entity<SentryLaptopComponent>? laptop)
+    {
+        laptop = null;
+
+        if (!TryComp<DeviceLinkSinkComponent>(sentry, out var sink))
+            return false;
+
+        foreach (var source in sink.LinkedSources)
+        {
+            if (TryComp<SentryLaptopComponent>(source, out var comp))
+            {
+                laptop = new Entity<SentryLaptopComponent>(source, comp);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

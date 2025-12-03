@@ -199,7 +199,18 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (state.Sentries.Count == 0)
             return false;
 
-        return state.Sentries.All(s => s.FriendlyFactions.Contains(faction));
+        return state.Sentries.All(s => IsFactionSelected(s.FriendlyFactions, faction, state.AllFactions));
+    }
+
+    private bool IsFactionSelected(HashSet<string> friendly, string faction, List<string> allFactions)
+    {
+        if (faction == "Humanoid")
+        {
+            var nonXeno = allFactions.Where(f => f != "RMCXeno" && f != "Humanoid").ToList();
+            return nonXeno.All(friendly.Contains);
+        }
+
+        return friendly.Contains(faction);
     }
 
     private void ApplyGlobalIFF()
@@ -460,7 +471,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         foreach (var faction in state.AllFactions)
         {
-            var checkboxContainer = CreateFactionCheckbox(faction, info, state.FactionNames);
+            var checkboxContainer = CreateFactionCheckbox(faction, info, state);
             card.FactionContainer.AddChild(checkboxContainer);
         }
 
@@ -501,7 +512,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         {
             if (existingCheckboxes.TryGetValue(faction, out var checkbox))
             {
-                checkbox.Pressed = info.FriendlyFactions.Contains(faction);
+                checkbox.Pressed = IsFactionSelected(info.FriendlyFactions, faction, state.AllFactions);
             }
         }
     }
@@ -516,7 +527,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         card.IFFExpandButton.Text = isExpanded ? "▼" : "►";
     }
 
-    private BoxContainer CreateFactionCheckbox(string faction, SentryInfo info, Dictionary<string, string> factionNames)
+    private BoxContainer CreateFactionCheckbox(string faction, SentryInfo info, SentryLaptopBuiState state)
     {
         var container = new BoxContainer
         {
@@ -528,11 +539,11 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         var checkbox = new CheckBox
         {
-            Pressed = info.FriendlyFactions.Contains(faction),
+            Pressed = IsFactionSelected(info.FriendlyFactions, faction, state.AllFactions),
             VerticalAlignment = Control.VAlignment.Center
         };
 
-        var displayName = factionNames.GetValueOrDefault(faction, faction);
+        var displayName = state.FactionNames.GetValueOrDefault(faction, faction);
         var label = new Label
         {
             Text = displayName,
