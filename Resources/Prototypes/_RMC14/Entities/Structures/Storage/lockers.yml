@@ -233,7 +233,7 @@
 - type: entity
   parent: CMLockerBase
   id: CMLockerQM
-  name: Logistics Officer's locker
+  name: Requisitions Officer's locker
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi

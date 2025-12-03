@@ -43,7 +43,7 @@ The ASRS terminal is one of your most critical tools in Requisitions. It enables
  <GuideEntityEmbed Entity="CMASRSConsole" Caption="ASRS Console"/>
 </Box>
 
-However, Technician, always consult your [color=#FFA500]Logistics Officer[/color] before placing any orders — or, in their absence, the most senior member of the Requisitions staff. Maintaining oversight of purchases, inventory, and budget is essential to the effective operation of the department.
+However, Technician, always consult your [color=#FFA500]Requisitions Officer[/color] before placing any orders — or, in their absence, the most senior member of the Requisitions staff. Maintaining oversight of purchases, inventory, and budget is essential to the effective operation of the department.
 
 [bold]Remember[/bold]: communication is critical. Monitor your radio traffic, maintain situational awareness, and ensure you know which squad has requested which supplies.
 
@@ -120,7 +120,7 @@ Marines can request all kinds of supplies—but some must always be packed, no m
 ##Basic Packing
 Line’s secured. Crates are packed. Supplies running low. Time to move, Techie. Cardboard’s in South Storage—same location as the surplus vendor. Retrieve it and start fabricating ammo boxes.
 
-Requisitions are tapped. Vendors are dry. Time to relocate to the Squad Preparation Room—that’s your new ammo-packing station. Listen up, Techie: Marine ammo vendors are off-limits. You’ll need the [color=#FFA500]Logistics Officer[/color] to issue all packing supplies. Proceed accordingly.
+Requisitions are tapped. Vendors are dry. Time to relocate to the Squad Preparation Room—that’s your new ammo-packing station. Listen up, Techie: Marine ammo vendors are off-limits. You’ll need the [color=#FFA500]Requisitions Officer[/color] to issue all packing supplies. Proceed accordingly.
 <Box>
  <GuideEntityEmbed Entity="ColMarTechEquipment" Caption="Weapons rack"/>
 </Box>
@@ -137,14 +137,14 @@ Requisition Technician, you're the backbone of Requisitions—never forget it. U
 <Box>
  <GuideEntityEmbed Entity="RMCCargotechGuideBook" Caption="Requisition Technician symbol"/>
 </Box>
-Requisitons Technician you answer directly to the [color=#FFA500]Logistics Officer[/color]. Their orders are your mission. Execute swiftly, and Requisitions stays stocked and operational. You begin at rank E1—the foundation. Earn your stripes through discipline and drive. Push forward to E2, then E3. Stay focused. Stay relentless. Stay the course, Techie.
+Requisitons Technician you answer directly to the [color=#FFA500]Requisitions Officer[/color]. Their orders are your mission. Execute swiftly, and Requisitions stays stocked and operational. You begin at rank E1—the foundation. Earn your stripes through discipline and drive. Push forward to E2, then E3. Stay focused. Stay relentless. Stay the course, Techie.
 
-Marines may outrank you on paper, but rank doesn’t equal authority in Requisitions. You hold the power to approve or deny their requests. Only the [color=#FFA500]Logistics Officer[/color] or the [color=#008000]Commander[/color] can override your call. Do not be intimidated. Do not be pressured. Stand firm, Technician. Hold the line.
+Marines may outrank you on paper, but rank doesn’t equal authority in Requisitions. You hold the power to approve or deny their requests. Only the [color=#FFA500]Requisitions Officer[/color] or the [color=#008000]Commander[/color] can override your call. Do not be intimidated. Do not be pressured. Stand firm, Technician. Hold the line.
 
-##Logistics Officer
-The [color=#FFA500]Logistics Officer[/color] top of the chain in Requisitions. Your direct superior. They command every facet of logistics, supply, and cargo operations. No crate moves without their say-so. They authorize and deny. Everything they deem necessary. Their word stands—within reason. Only the [color=#008000]Commander[/color] of the Almayer holds authority over them. Not even a higher-ranking officer can override the [color=#FFA500]Logistics Officer[/color] command in matters of Requisitons. Know the hierarchy. Respect the chain.
+##Requisitions Officer
+The [color=#FFA500]Requisitions Officer[/color] top of the chain in Requisitions. Your direct superior. They command every facet of logistics, supply, and cargo operations. No crate moves without their say-so. They authorize and deny. Everything they deem necessary. Their word stands—within reason. Only the [color=#008000]Commander[/color] of the Almayer holds authority over them. Not even a higher-ranking officer can override the [color=#FFA500]Requisitions Officer[/color] command in matters of Requisitons. Know the hierarchy. Respect the chain.
 <Box>
- <GuideEntityEmbed Entity="RMClogisticsofficerGuideBook" Caption="logistics Officer Symbol"/>
+ <GuideEntityEmbed Entity="RMClogisticsofficerGuideBook" Caption="requisitions Officer Symbol"/>
 </Box>
-The [color=#FFA500]Logistics Officer[/color] enters at O1. With grit and performance, they climb to O2. They bear the weight of Requisitions and command its full operational power.The [color=#FFA500]Logistics Officer[/color] reports to the [color=#008000]Commander[/color]. Only the [color=#008000]Commander[/color] of the Almayer may issue them orders. But remeber the [color=#FFA500]Logistics Officer[/color] [bold]only[/bold] has direct authority within Requisitions.
+The [color=#FFA500]Requisitions Officer[/color] enters at O1. With grit and performance, they climb to O2. They bear the weight of Requisitions and command its full operational power.The [color=#FFA500]Requisitions Officer[/color] reports to the [color=#008000]Commander[/color]. Only the [color=#008000]Commander[/color] of the Almayer may issue them orders. But remeber the [color=#FFA500]Requisitions Officer[/color] [bold]only[/bold] has direct authority within Requisitions.
 </Document>

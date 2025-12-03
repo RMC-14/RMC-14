@@ -194,8 +194,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetQM
-  name: Logistics Officer radio headset
-  description: A headset used by the Logistics Officer.
+  name: Requisitions Officer radio headset
+  description: A headset used by the Requisitions Officer.
   components:
   - type: Sprite
     state: ro_headset

@@ -89,7 +89,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampQM
-  name: Logistics Officer's rubber stamp
+  name: Requisitions Officer's rubber stamp
   components:
   - type: Sprite
     state: stamp-ro

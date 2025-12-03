@@ -1198,7 +1198,7 @@
       - id: RMCSynthResetKey
         points: 15
     # ////////////////////////////////////
-    # Logistics Officer
+    # Requisitions Officer
     # ////////////////////////////////////
     - name: Standard Equipment
       jobs:
