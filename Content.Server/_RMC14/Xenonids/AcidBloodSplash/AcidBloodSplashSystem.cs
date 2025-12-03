@@ -118,7 +118,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         if (comp.NextSplashAvailable > time)
             return;
 
-        if (_mobState.IsDead(uid))
+        if (_mobState.IsDead(uid) && !comp.WorksWhileDead)
             return;
 
         if (!args.DamageIncreased || args.DamageDelta == null)

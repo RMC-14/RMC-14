@@ -17,6 +17,9 @@ public sealed partial class AcidBloodSplashComponent : Component
     public FixedPoint2 MinimalTriggerDamage = 12;
 
     [DataField]
+    public bool WorksWhileDead = true;
+
+    [DataField]
     public bool IsActivateSplashOnGib = true;
 
     [DataField]
