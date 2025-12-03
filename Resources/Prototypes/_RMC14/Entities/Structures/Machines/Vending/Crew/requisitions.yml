@@ -45,15 +45,15 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 50
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 50
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 50
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 50
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 20
     - name: Restricted Firearms
       entries:

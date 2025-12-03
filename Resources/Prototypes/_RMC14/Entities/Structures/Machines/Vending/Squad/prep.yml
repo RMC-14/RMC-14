@@ -56,7 +56,7 @@
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 10
     - name: Sidearm ammunition
       entries:
