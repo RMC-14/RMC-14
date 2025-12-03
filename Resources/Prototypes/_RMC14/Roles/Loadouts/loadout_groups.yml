@@ -797,3 +797,12 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+
+# Provost Inspector
+- type: loadoutGroup
+  id: ProvostRoleSpecificOuterwearRMC
+  name: rmc-loadout-group-provost-role-specific-outerwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ProvostCoatRMC
