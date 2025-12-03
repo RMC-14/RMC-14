@@ -1622,7 +1622,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private bool IgnoreBulkRestockByComponent(EntityUid item)
     {
-        // Check for armor or hard armor components
+        // For restocking armor/helmets
         return HasComp<CMArmorComponent>(item) || HasComp<CMHardArmorComponent>(item);
     }
 
