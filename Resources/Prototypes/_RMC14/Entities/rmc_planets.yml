@@ -69,7 +69,6 @@
       RMCSurvivorCommandingOfficer:
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
-      - CMSurvivorSolarisTrucker: -1
       - CMSurvivorSolarisChaplain: -1
       - CMSurvivorUNMCRecruiter: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
@@ -81,6 +80,7 @@
       - CMSurvivorSolarisDoctor: -1
       - RMCSurvivorHybrisaEMTParamedic: -1
       CMSurvivorEngineer:
+      - CMSurvivorSolarisTrucker: -1
       - CMSurvivorSolarisEngineer: -1
       CMSurvivorSecurity:
       - CMSurvivorSolarisCMBDeputy: -1
@@ -173,7 +173,6 @@
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     survivorJobInserts:
       CMSurvivor:
-      - CMSurvivorTrijentTrucker: -1
       - CMSurvivorMiner: -1
       - CMSurvivorTrijentChaplain: 1
       CMSurvivorCorporate:
@@ -184,6 +183,7 @@
       CMSurvivorEngineer:
       - CMSurvivorTrijentEngiHydro: 2
       - CMSurvivorTrijentDamTech: 2
+      - CMSurvivorTrijentTrucker: 2
       CMSurvivorSecurity:
       - CMSurvivorTrijentGoon: 1
       - CMSurvivorCMBDeputy: 1
@@ -281,13 +281,13 @@
     survivorJobInserts:
       CMSurvivor:
       - RMCSurvivorKutjevoChaplain: 1
-      - RMCSurvivorKutjevoTrucker: -1
       CMSurvivorCorporate:
       - RMCSurvivorKutjevoCorporate: 2
       CMSurvivorDoctor:
       - RMCSurvivorKutjevoDoctor: 3
       CMSurvivorEngineer:
       - RMCSurvivorKutjevoEngineer: 4
+      - RMCSurvivorKutjevoTrucker: 4
       CMSurvivorSecurity:
       - RMCSurvivorKutjevoCMBDeputy: 1
       - RMCSurvivorKutjevoGoon: 1
