@@ -64,10 +64,12 @@ internal sealed class ChargerSystem : EntitySystem
             }
             else
             {
-                // add how much each item is charged it
+                // add how much each item is charged. Used SearchForBattery so items
+                // that contain a slotted battery (e.g. visors with internal powercells)
+                // have their charge shown.
                 foreach (var contained in container.ContainedEntities)
                 {
-                    if (!TryComp<BatteryComponent>(contained, out var battery))
+                    if (!SearchForBattery(contained, out var batteryUid, out var battery))
                         continue;
 
                     var chargePercentage = (battery.CurrentCharge / battery.MaxCharge) * 100;
