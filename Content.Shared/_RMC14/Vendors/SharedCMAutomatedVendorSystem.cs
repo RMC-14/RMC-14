@@ -1401,7 +1401,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// </summary>
     private bool ValidateAmmunition(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
-        if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) && ammoProvider.Count < ammoProvider.Capacity)
+        if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) &&
+            !HasComp<GunComponent>(item) && // Skip for guns with BallisticAmmoProviderComponent (flare guns, shotguns, revolvers)
+            ammoProvider.Count < ammoProvider.Capacity)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", item, user, ("mag", item));
             return false;
