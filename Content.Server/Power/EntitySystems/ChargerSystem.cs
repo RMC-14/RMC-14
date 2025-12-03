@@ -4,7 +4,7 @@ using Content.Server.PowerCell;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.PowerCell.Components;
-using Content.Shared.PowerCell;
+using Content.Shared.PowerCell; // RMC14
 using Content.Shared.Emp;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
@@ -64,7 +64,7 @@ internal sealed class ChargerSystem : EntitySystem
             }
             else
             {
-                // add how much each item is charged. Used SearchForBattery so items
+                // RMC14 - add how much each item is charged. Used SearchForBattery so items
                 // that contain a slotted battery (e.g. visors with internal powercells)
                 // have their charge shown.
                 foreach (var contained in container.ContainedEntities)
@@ -195,7 +195,7 @@ internal sealed class ChargerSystem : EntitySystem
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        // Update numeric charge-level appearance so the client visualizer can show progress frames.
+        // RMC14 - Update numeric charge-level appearance so the client visualizer can show progress frames.
         UpdateChargeLevelVisual(uid, component, appearance);
     }
 
@@ -204,7 +204,7 @@ internal sealed class ChargerSystem : EntitySystem
         if (!_container.TryGetContainer(uid, component.SlotId, out var container))
             return;
 
-        // No item -> show empty (level 0)
+        // RMC14 - No item -> show empty (level 0)
         if (container.ContainedEntities.Count == 0)
         {
             _appearance.SetData(uid, PowerCellVisuals.ChargeLevel, (byte)0, appearance);
@@ -221,7 +221,7 @@ internal sealed class ChargerSystem : EntitySystem
         var max = Math.Max(1f, battery.MaxCharge);
         var percent = battery.CurrentCharge / max;
 
-        // Determine number of steps from component (minimum 3: empty, at least one intermediate, full)
+        // RMC14 - Determine number of steps from component (minimum 3: empty, at least one intermediate, full)
         var steps = Math.Max(3, component.ChargeLevelSteps);
         var lastIndex = steps - 1;
 
@@ -229,17 +229,17 @@ internal sealed class ChargerSystem : EntitySystem
 
         if (percent >= 1f)
         {
-            // Fully charged -> highest index
+            // RMC14 - Fully charged -> highest index
             level = (byte)lastIndex;
         }
         else if (percent <= 0f)
         {
-            // Empty
+            // RMC14 - Empty
             level = 0;
         }
         else
         {
-            // Map 0..99% to the intermediate states 1..(steps-2)
+            // RMC14 - Map 0..99% to the intermediate states 1..(steps-2)
             var intermediateCount = steps - 2;
             level = (byte)Math.Clamp((int)Math.Ceiling(percent * intermediateCount), 1, intermediateCount);
         }
@@ -301,7 +301,7 @@ internal sealed class ChargerSystem : EntitySystem
 
         _battery.SetCharge(batteryUid.Value, heldBattery.CurrentCharge + component.ChargeRate * frameTime, heldBattery);
         UpdateStatus(uid, component);
-        // Update charge-level appearance immediately so the client reflects progress promptly.
+        // RMC14 - Update charge-level appearance immediately so the client reflects progress promptly.
         UpdateChargeLevelVisual(uid, component);
     }
 

@@ -1,5 +1,5 @@
 using Content.Shared.Power;
-using Content.Shared.PowerCell;
+using Content.Shared.PowerCell; // RMC14
 using Robust.Client.GameObjects;
 
 namespace Content.Client.PowerCell;
@@ -22,7 +22,7 @@ public sealed class PowerChargerVisualizerSystem : VisualizerSystem<PowerCharger
             SpriteSystem.LayerSetRsiState((uid, args.Sprite), PowerChargerVisualLayers.Base, comp.EmptyState);
         }
 
-        // Update charge level indicator (priority over status lights)
+        // RMC14 - Update charge level indicator (priority over status lights)
         if (SpriteSystem.LayerExists((uid, args.Sprite), PowerChargerVisualLayers.Light))
         {
             if (!string.IsNullOrEmpty(comp.ChargeLevelState) &&
@@ -32,7 +32,7 @@ public sealed class PowerChargerVisualizerSystem : VisualizerSystem<PowerCharger
                 SpriteSystem.LayerSetRsiState((uid, args.Sprite), PowerChargerVisualLayers.Light, chargeState);
                 SpriteSystem.LayerSetVisible((uid, args.Sprite), PowerChargerVisualLayers.Light, true);
             }
-            // Fallback to status lights if no charge level format is configured
+            // RMC14 - Fallback to status lights if no charge level format is configured
             else if (AppearanceSystem.TryGetData<CellChargerStatus>(uid, CellVisual.Light, out var status, args.Component)
                 && comp.LightStates.TryGetValue(status, out var lightState))
             {
