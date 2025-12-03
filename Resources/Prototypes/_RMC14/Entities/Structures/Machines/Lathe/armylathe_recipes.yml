@@ -70,14 +70,14 @@
   result: RMCTankFlamerCustom
   completetime: 4
   materials:
-    CMSteel: 100 # 3750
+    CMSteel: 125 # 4687
 
 - type: latheRecipe
   id: RMCTankFlamerLargeCustom
   result: RMCTankFlamerLargeCustom
   completetime: 4
   materials:
-    CMSteel: 100 # 3750
+    CMSteel: 125 # 4687
 
 - type: latheRecipe
   id: RMCCustomM34A1SmokeTankCase
