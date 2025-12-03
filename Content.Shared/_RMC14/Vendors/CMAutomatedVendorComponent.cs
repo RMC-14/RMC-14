@@ -97,9 +97,16 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public HashSet<EntProtoId> IgnoreBulkRestockById = [];
 
     /// <summary>
-    ///     Tracks partial stacks for items that are stored in specific amounts.
-    ///     Key: prototype ID, Value: partial stack amount (0 to max_stack - 1)
+    ///     Tracks partial stacks for stackable items like trauma kits.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, int> PartialProductStacks = new();
+}
+
+internal readonly struct RestockPlan
+{
+    public bool CanRestock { get; init; }
+    public int StacksToAdd { get; init; }
+    public int ItemsToConsume { get; init; }
+    public int FinalPartial { get; init; }
 }
