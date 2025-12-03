@@ -32,6 +32,7 @@ public sealed partial class SentryLaptopComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? CurrentCamera;
+
 }
 
 [Serializable, NetSerializable]

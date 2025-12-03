@@ -79,6 +79,12 @@ public sealed class SentryLaptopGlobalTogglePowerBuiMsg(bool powerOn) : BoundUse
 }
 
 [Serializable, NetSerializable]
+public sealed class SentryLaptopGlobalSetFactionsBuiMsg(List<string> factions) : BoundUserInterfaceMessage
+{
+    public List<string> Factions = factions;
+}
+
+[Serializable, NetSerializable]
 public sealed class SentryAlertEvent : BoundUserInterfaceMessage
 {
     public NetEntity Sentry { get; }

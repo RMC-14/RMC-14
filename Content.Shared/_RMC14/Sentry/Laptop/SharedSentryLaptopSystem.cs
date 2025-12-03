@@ -5,8 +5,9 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Placeable;
@@ -15,6 +16,7 @@ using Content.Shared.Tools.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.DeviceNetwork.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -30,14 +32,14 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _sentryTargeting = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
 
-    private const float NearbyLaptopRange = 2.0f;
     private const float UpdateInterval = 1.0f;
 
     private float _updateTimer;
@@ -54,6 +56,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         SubscribeLocalEvent<SentryLaptopLinkedComponent, ComponentShutdown>(OnSentryLinkedShutdown);
 
         SubscribeLocalEvent<SentryComponent, AfterInteractUsingEvent>(OnSentryInteractUsing);
+        SubscribeLocalEvent<SentryLaptopComponent, AfterInteractUsingEvent>(OnLaptopInteractUsing);
 
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopUnlinkBuiMsg>(OnUnlinkMessage);
         SubscribeLocalEvent<SentryLaptopComponent, SentryLaptopUnlinkAllBuiMsg>(OnUnlinkAllMessage);
@@ -213,8 +216,11 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
         args.Handled = true;
 
+        if (!_hands.TryDrop(args.User, laptop.Owner, checkActionBlocker: false))
+            return;
+
         if (_net.IsServer)
-            PlaceLaptopOnSurface(laptop, args.Target.Value);
+            PlaceLaptopOnSurface(laptop, args.Target.Value, args.User);
     }
 
     private void OnLaptopToggled(Entity<SentryLaptopComponent> laptop, ref ItemToggledEvent args)
@@ -266,6 +272,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!HasComp<MultitoolComponent>(args.Used))
             return;
 
+        if (!TryComp<NetworkConfiguratorComponent>(args.Used, out var configurator))
+            return;
+
         args.Handled = true;
 
         if (IsSentryAlreadyLinked(sentry))
@@ -274,18 +283,119 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return;
         }
 
-        var laptop = FindLaptopForLinking(sentry, args.User);
-        if (laptop == null)
+        HandleLinkInteraction(args.Used, sentry.Owner, isLaptopTarget: false, args.User, ref configurator);
+    }
+
+    private void OnLaptopInteractUsing(Entity<SentryLaptopComponent> laptop, ref AfterInteractUsingEvent args)
+    {
+        if (args.Handled || !args.CanReach)
+            return;
+
+        if (!HasComp<MultitoolComponent>(args.Used))
+            return;
+
+        if (!TryComp<NetworkConfiguratorComponent>(args.Used, out var configurator))
+            return;
+
+        args.Handled = true;
+
+        HandleLinkInteraction(args.Used, laptop.Owner, isLaptopTarget: true, args.User, ref configurator);
+    }
+
+    private void HandleLinkInteraction(EntityUid multitool, EntityUid target, bool isLaptopTarget, EntityUid user, ref NetworkConfiguratorComponent configurator)
+    {
+        if (configurator.ActiveDeviceLink == null)
         {
-            _popup.PopupClient("No laptop found nearby or in inventory!", sentry, args.User);
+            configurator.LinkModeActive = true;
+            configurator.ActiveDeviceLink = target;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+
+            var targetName = Name(target);
+            _popup.PopupClient($"Link mode started: {targetName} stored.", target, user);
             return;
         }
 
-        if (!ValidateLaptopForLinking(laptop.Value, sentry, args.User))
+        var stored = configurator.ActiveDeviceLink;
+        var storedIsLaptop = stored.HasValue && HasComp<SentryLaptopComponent>(stored.Value);
+        var storedIsSentry = stored.HasValue && HasComp<SentryComponent>(stored.Value);
+
+        if (storedIsLaptop == isLaptopTarget)
+        {
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            _popup.PopupClient("Link mode stopped.", target, user);
             return;
+        }
+
+        if (!stored.HasValue || !TryGetEntity(GetNetEntity(stored.Value), out var storedEnt))
+        {
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            _popup.PopupClient("Stored link target is missing.", target, user);
+            return;
+        }
+
+        Entity<SentryLaptopComponent>? laptopEntity = null;
+        Entity<SentryComponent>? sentryEntity = null;
+
+        if (storedIsLaptop &&
+            TryComp<SentryLaptopComponent>(storedEnt.Value, out var storedLaptop) &&
+            TryComp<SentryComponent>(target, out var targetSentry))
+        {
+            laptopEntity = new Entity<SentryLaptopComponent>(storedEnt.Value, storedLaptop);
+            sentryEntity = new Entity<SentryComponent>(target, targetSentry);
+        }
+        else if (storedIsSentry &&
+                 TryComp<SentryComponent>(storedEnt.Value, out var storedSentry) &&
+                 TryComp<SentryLaptopComponent>(target, out var targetLaptop))
+        {
+            laptopEntity = new Entity<SentryLaptopComponent>(target, targetLaptop);
+            sentryEntity = new Entity<SentryComponent>(storedEnt.Value, storedSentry);
+        }
+        else
+        {
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            _popup.PopupClient("Invalid link targets.", target, user);
+            return;
+        }
+
+        if (laptopEntity is null || sentryEntity is null)
+        {
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            _popup.PopupClient("Stored link target is unavailable.", target, user);
+            return;
+        }
+
+        if (IsSentryAlreadyLinked(sentryEntity.Value))
+        {
+            _popup.PopupClient("This sentry is already linked to a laptop!", sentryEntity.Value, user);
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            return;
+        }
+
+        if (!ValidateLaptopForLinking(laptopEntity.Value, sentryEntity.Value, user))
+        {
+            configurator.ActiveDeviceLink = null;
+            configurator.DeviceLinkTarget = null;
+            Dirty(multitool, configurator);
+            return;
+        }
 
         if (_net.IsServer)
-            LinkSentryToLaptop(laptop.Value, sentry, args.User);
+            LinkSentryToLaptop(laptopEntity.Value, sentryEntity.Value, user);
+
+        configurator.ActiveDeviceLink = null;
+        configurator.DeviceLinkTarget = null;
+        Dirty(multitool, configurator);
     }
 
     private void OnUnlinkMessage(Entity<SentryLaptopComponent> laptop, ref SentryLaptopUnlinkBuiMsg args)
@@ -383,7 +493,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         UpdateUI(laptop);
     }
 
-    private void PlaceLaptopOnSurface(Entity<SentryLaptopComponent> laptop, EntityUid surface)
+    private void PlaceLaptopOnSurface(Entity<SentryLaptopComponent> laptop, EntityUid surface, EntityUid user)
     {
         var laptopXform = Transform(laptop);
         var surfaceXform = Transform(surface);
@@ -394,51 +504,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     private bool IsSentryAlreadyLinked(Entity<SentryComponent> sentry)
     {
         return TryComp<SentryLaptopLinkedComponent>(sentry, out var linked) && linked.LinkedLaptop != null;
-    }
-
-    private Entity<SentryLaptopComponent>? FindLaptopForLinking(Entity<SentryComponent> sentry, EntityUid user)
-    {
-        var laptop = FindLaptopInInventory(user);
-        if (laptop != null)
-            return laptop;
-
-        return FindLaptopNearby(sentry);
-    }
-
-    private Entity<SentryLaptopComponent>? FindLaptopInInventory(EntityUid user)
-    {
-        if (_inventory.TryGetSlotEntity(user, "belt", out var beltItem) &&
-            TryComp<SentryLaptopComponent>(beltItem, out var laptop))
-        {
-            return new Entity<SentryLaptopComponent>(beltItem.Value, laptop);
-        }
-
-        if (_inventory.TryGetSlotEntity(user, "back", out var backItem) &&
-            TryComp<SentryLaptopComponent>(backItem, out laptop))
-        {
-            return new Entity<SentryLaptopComponent>(backItem.Value, laptop);
-        }
-
-        return null;
-    }
-
-    private Entity<SentryLaptopComponent>? FindLaptopNearby(Entity<SentryComponent> sentry)
-    {
-        var sentryPos = _transform.GetMapCoordinates(sentry);
-        var query = EntityQueryEnumerator<SentryLaptopComponent, TransformComponent>();
-
-        while (query.MoveNext(out var uid, out var laptop, out var xform))
-        {
-            var laptopPos = _transform.GetMapCoordinates(uid, xform);
-            if (laptopPos.MapId != sentryPos.MapId)
-                continue;
-
-            var distance = (laptopPos.Position - sentryPos.Position).Length();
-            if (distance <= NearbyLaptopRange)
-                return (uid, laptop);
-        }
-
-        return null;
     }
 
     private bool ValidateLaptopForLinking(Entity<SentryLaptopComponent> laptop, Entity<SentryComponent> sentry, EntityUid user)

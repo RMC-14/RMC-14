@@ -5,7 +5,7 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:vp="clr-namespace:Content.Client.Viewport"
     Title="Sentry Network Control"
-    MinSize="1400 700">
+    MinSize="800 700">
     <BoxContainer Orientation="Horizontal">
         <PanelContainer MinWidth="600" HorizontalExpand="True">
             <PanelContainer.PanelOverride>
@@ -60,13 +60,18 @@
                     <BoxContainer Orientation="Vertical" Margin="10">
                         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                             <Label Text="GLOBAL IFF TARGETING CONTROLS" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
+                            <controls:SentryButton Name="GlobalApplyIFFButton" Access="Public"
+                                                 Margin="0 0 5 0"
+                                                 BackgroundColor="#1A3D5C"
+                                                 BorderColor="#88C7FA" BorderThickness="1"
+                                                 Text="APPLY TO ALL" />
                             <controls:SentryButton Name="GlobalResetTargetingButton" Access="Public"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
                                                  Text="RESET ALL TO DEFAULT" />
                         </BoxContainer>
                         <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
-                        <ScrollContainer MaxHeight="200">
+                        <ScrollContainer MaxHeight="200" MinHeight="140" HorizontalExpand="True">
                             <BoxContainer Name="GlobalFactionContainer"
                                         Access="Public"
                                         Orientation="Vertical"

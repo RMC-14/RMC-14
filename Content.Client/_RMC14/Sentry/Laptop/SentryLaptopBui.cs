@@ -11,6 +11,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Sentry.Laptop;
@@ -23,6 +24,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
     private SentryLaptopWindow? _window;
     private readonly Dictionary<NetEntity, SentryCard> _sentryCards = new();
     private readonly Dictionary<NetEntity, bool> _iffExpanded = new();
+    private readonly Dictionary<string, bool> _globalFactionSelections = new();
     private string _searchText = "";
     private EntityUid? _currentCameraTarget;
     private EntityUid? _cameraEntity;
@@ -57,9 +59,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
         _window.GlobalIFFButton.Button.OnPressed += _ => ToggleGlobalIFFPanel();
         _window.SearchBar.OnTextChanged += args => OnSearchTextChanged(args.Text);
         _window.CloseCameraButton.Button.OnPressed += _ => CloseCamera();
+        _window.GlobalApplyIFFButton.Button.OnPressed += _ => ApplyGlobalIFF();
 
         _window.GlobalResetTargetingButton.Button.OnPressed += _ =>
         {
+            _globalFactionSelections.Clear();
+            SetupGlobalIFFControls();
             SendMessage(new SentryLaptopGlobalResetTargetingBuiMsg());
         };
 
@@ -84,6 +89,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (State is not SentryLaptopBuiState state || state.AllFactions.Count == 0)
             return;
 
+        var missing = _globalFactionSelections.Keys.Except(state.AllFactions).ToList();
+        foreach (var key in missing)
+            _globalFactionSelections.Remove(key);
+
         var selectAllContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
@@ -91,34 +100,44 @@ public sealed class SentryLaptopBui : BoundUserInterface
             HorizontalExpand = true
         };
 
-        var selectAllButton = new Button
+        var selectAllButton = new SentryButton
         {
             Text = "Select All",
             HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 2, 0)
+            Margin = new Thickness(0, 0, 2, 0),
+            BackgroundColor = Color.FromHex("#1A3D5C"),
+            BorderColor = Color.FromHex("#88C7FA"),
+            BorderThickness = new Thickness(1)
         };
 
-        var deselectAllButton = new Button
+        var deselectAllButton = new SentryButton
         {
             Text = "Deselect All",
             HorizontalExpand = true,
-            Margin = new Thickness(2, 0, 0, 0)
+            Margin = new Thickness(2, 0, 0, 0),
+            BackgroundColor = Color.FromHex("#5C1A1A"),
+            BorderColor = Color.FromHex("#A42625"),
+            BorderThickness = new Thickness(1)
         };
 
-        selectAllButton.OnPressed += _ =>
+        selectAllButton.Button.OnPressed += _ =>
         {
             foreach (var faction in state.AllFactions)
             {
-                SendMessage(new SentryLaptopGlobalToggleFactionBuiMsg(faction, true));
+                _globalFactionSelections[faction] = true;
             }
+
+            SetupGlobalIFFControls();
         };
 
-        deselectAllButton.OnPressed += _ =>
+        deselectAllButton.Button.OnPressed += _ =>
         {
             foreach (var faction in state.AllFactions)
             {
-                SendMessage(new SentryLaptopGlobalToggleFactionBuiMsg(faction, false));
+                _globalFactionSelections[faction] = false;
             }
+
+            SetupGlobalIFFControls();
         };
 
         selectAllContainer.AddChild(selectAllButton);
@@ -127,12 +146,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         foreach (var faction in state.AllFactions)
         {
-            var checkboxContainer = CreateGlobalFactionCheckbox(faction, state.FactionNames);
+            var checkboxContainer = CreateGlobalFactionCheckbox(faction, state);
             _window.GlobalFactionContainer.AddChild(checkboxContainer);
         }
     }
 
-    private BoxContainer CreateGlobalFactionCheckbox(string faction, Dictionary<string, string> factionNames)
+    private BoxContainer CreateGlobalFactionCheckbox(string faction, SentryLaptopBuiState state)
     {
         var container = new BoxContainer
         {
@@ -142,13 +161,19 @@ public sealed class SentryLaptopBui : BoundUserInterface
             MinHeight = 22
         };
 
+        var isSelected = _globalFactionSelections.TryGetValue(faction, out var selected)
+            ? selected
+            : IsFactionSelectedGlobally(faction, state);
+
+        _globalFactionSelections[faction] = isSelected;
+
         var checkbox = new CheckBox
         {
-            Pressed = false,
+            Pressed = isSelected,
             VerticalAlignment = Control.VAlignment.Center
         };
 
-        var displayName = factionNames.GetValueOrDefault(faction, faction);
+        var displayName = state.FactionNames.GetValueOrDefault(faction, faction);
         var label = new Label
         {
             Text = displayName,
@@ -160,13 +185,36 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         checkbox.OnToggled += args =>
         {
-            SendMessage(new SentryLaptopGlobalToggleFactionBuiMsg(faction, args.Pressed));
+            _globalFactionSelections[faction] = args.Pressed;
         };
 
         container.AddChild(checkbox);
         container.AddChild(label);
 
         return container;
+    }
+
+    private bool IsFactionSelectedGlobally(string faction, SentryLaptopBuiState state)
+    {
+        if (state.Sentries.Count == 0)
+            return false;
+
+        return state.Sentries.All(s => s.FriendlyFactions.Contains(faction));
+    }
+
+    private void ApplyGlobalIFF()
+    {
+        if (State is not SentryLaptopBuiState state || state.AllFactions.Count == 0)
+            return;
+
+        var selected = new List<string>();
+        foreach (var faction in state.AllFactions)
+        {
+            if (_globalFactionSelections.TryGetValue(faction, out var targeted) && targeted)
+                selected.Add(faction);
+        }
+
+        SendMessage(new SentryLaptopGlobalSetFactionsBuiMsg(selected));
     }
 
     private void ToggleGlobalIFFPanel()
@@ -531,9 +579,17 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
+        if (State is SentryLaptopBuiState state)
+        {
+            var info = state.Sentries.FirstOrDefault(s => s.Id == sentryNetEntity);
+            if (info != null && info.Mode == SentryMode.Item)
+                return;
+        }
+
         if (!_entities.TryGetComponent<TransformComponent>(sentryEntity.Value, out var sentryXform))
             return;
 
+        UpdateWindowSize(true);
         var eyeLerping = EntMan.System<EyeLerpingSystem>();
         var eyeSystem = EntMan.System<SharedEyeSystem>();
 
@@ -599,6 +655,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         _window.CameraPanel.Visible = false;
 
+        UpdateWindowSize(false);
+
         if (_currentCameraTarget is { } camera)
         {
             var eyeLerping = EntMan.System<EyeLerpingSystem>();
@@ -635,6 +693,16 @@ public sealed class SentryLaptopBui : BoundUserInterface
     {
         if (State is SentryLaptopBuiState state)
             UpdateDisplay(state);
+    }
+
+    private void UpdateWindowSize(bool cameraOpen)
+    {
+        if (_window == null)
+            return;
+
+        var targetMin = cameraOpen ? new Vector2i(1500, 700) : new Vector2i(800, 700);
+        _window.SetSize = targetMin;
+        _window.MinSize = targetMin;
     }
 
     protected override void Dispose(bool disposing)
