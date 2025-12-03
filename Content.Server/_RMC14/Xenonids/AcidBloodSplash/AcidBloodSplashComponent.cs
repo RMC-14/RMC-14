@@ -20,7 +20,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public bool IsActivateSplashOnGib = true;
 
     [DataField]
-    public float CloseSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(1);
+    public float CloseSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(0.5f);
 
     [DataField]
     public float StandardSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(3);
@@ -37,9 +37,10 @@ public sealed partial class AcidBloodSplashComponent : Component
 
     /// <summary>
     /// Probability that target will be hit after splash is activated, decreases with the number of targets
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BaseHitProbability = 0.65f;
+    public float BaseHitProbability = 65f;
 
     /// <summary>
     /// Probability that target will scream after hit

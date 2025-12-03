@@ -12,13 +12,11 @@ using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using System.Linq;
 using Content.Server._RMC14.Decals;
 using Content.Server.Spawners.Components;
-using Content.Shared.Decals;
 using Content.Shared.Body.Events;
+using Content.Shared.Effects;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -34,7 +32,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
-    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -79,10 +77,12 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(uid, target))
                 continue;
 
-            var hitProbability = comp.BaseHitProbability - i * 0.05;
+            var hitProbability = comp.BaseHitProbability - i * 5;
 
             if (closeRangeTargets.Contains(target))
-                hitProbability += 0.3;
+                hitProbability += 30;
+
+            hitProbability /= 100f; // Reduce the value to decimal
 
             if (_random.NextFloat() > hitProbability)
                 continue;
@@ -98,6 +98,9 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
             if (_random.NextFloat() < comp.TargetScreamProbability) // TODO: don't activate when target don't feel pain
                 _emote.TryEmoteWithChat(target, ScreamProto);
+
+            var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == uid);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
     }
 
@@ -142,7 +145,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 
-        if (!_random.Prob(triggerProbability))
+        if (_random.NextFloat() > triggerProbability)
             return;
 
         ActivateSplash(uid, comp, comp.StandardSplashRadius);
