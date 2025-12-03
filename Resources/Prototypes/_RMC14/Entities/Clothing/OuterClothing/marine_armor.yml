@@ -670,6 +670,8 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
+  - type: ClothingRequireEquipped
+    whitelist: null
 
 # Forced Camo Variants for Vendor Parity
 - type: entity
