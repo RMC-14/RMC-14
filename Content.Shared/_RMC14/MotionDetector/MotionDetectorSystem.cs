@@ -123,6 +123,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
     }
+    
     private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
     {
         DisableDetectorsOnMob(ent.Target);
