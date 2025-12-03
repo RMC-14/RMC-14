@@ -90,12 +90,16 @@ public sealed class SentryAlertEvent : BoundUserInterfaceMessage
     public NetEntity Sentry { get; }
     public SentryAlertType AlertType { get; }
     public string Message { get; }
+    public string Color { get; }
+    public int FontSize { get; }
 
-    public SentryAlertEvent(NetEntity sentry, SentryAlertType alertType, string message)
+    public SentryAlertEvent(NetEntity sentry, SentryAlertType alertType, string message, string color, int fontSize)
     {
         Sentry = sentry;
         AlertType = alertType;
         Message = message;
+        Color = color;
+        FontSize = fontSize;
     }
 }
 

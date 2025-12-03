@@ -11,7 +11,7 @@
       probability: 0.35
     clearEntities: true
     clearDecals: true
-    replaceAreas: false
+    replaceAreas: true
 
 - type: entity
   parent: RMCMapInsertBase

@@ -47,8 +47,6 @@
   - type: DeviceLinkSource
     ports: [ SentryControl ]
   - type: SentryLaptop
-  - type: ItemToggle
-    activated: false
   - type: UseDelay
     delay: 0.5
 

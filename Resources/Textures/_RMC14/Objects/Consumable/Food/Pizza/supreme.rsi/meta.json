@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Pizza and slice sprites by SurfinNinja",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pizza"
+    },
+    {
+      "name": "slice"
+    }
+  ]
+}

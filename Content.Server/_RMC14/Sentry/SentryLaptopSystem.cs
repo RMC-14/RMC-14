@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds;
+using Content.Server.Destructible.Thresholds.Triggers;
 using Content.Server.NPC.HTN;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Sentry;
@@ -343,7 +344,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
             foreach (var threshold in destruct.Thresholds)
             {
                 if (threshold.Trigger is DamageTrigger damageTrigger)
-                    max = Math.Max(max, damageTrigger.Damage.Total);
+                    max = Math.Max(max, damageTrigger.Damage);
             }
 
             if (max > 0f)

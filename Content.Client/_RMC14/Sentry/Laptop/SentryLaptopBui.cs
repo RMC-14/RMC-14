@@ -5,6 +5,7 @@ using Content.Client.Message;
 using Content.Client.Popups;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Sentry.Laptop;
+using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -288,7 +289,15 @@ public sealed class SentryLaptopBui : BoundUserInterface
             return;
 
         var popup = EntMan.System<PopupSystem>();
-        popup.PopupEntity(alert.Message, Owner);
+        var type = alert.AlertType switch
+        {
+            SentryAlertType.CriticalHealth => PopupType.LargeCaution,
+            SentryAlertType.Damaged => PopupType.MediumCaution,
+            SentryAlertType.TargetAcquired => PopupType.MediumCaution,
+            SentryAlertType.LowAmmo => PopupType.Medium,
+            _ => PopupType.Medium
+        };
+        popup.PopupEntity(alert.Message, Owner, type);
     }
 
     private void UpdateDisplay(SentryLaptopBuiState state)

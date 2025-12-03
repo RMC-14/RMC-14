@@ -18,6 +18,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.DeviceNetwork.Components;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -51,9 +52,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SentryLaptopComponent, AfterInteractEvent>(OnLaptopAfterInteract);
-        SubscribeLocalEvent<SentryLaptopComponent, ItemToggledEvent>(OnLaptopToggled);
         SubscribeLocalEvent<SentryLaptopComponent, ComponentShutdown>(OnLaptopShutdown);
         SubscribeLocalEvent<SentryLaptopComponent, ActivatableUIOpenAttemptEvent>(OnLaptopUIOpenAttempt);
+        SubscribeLocalEvent<SentryLaptopComponent, EntParentChangedMessage>(OnLaptopParentChanged);
 
         SubscribeLocalEvent<SentryLaptopLinkedComponent, ComponentShutdown>(OnSentryLinkedShutdown);
 
@@ -197,7 +198,16 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!_ui.IsUiOpen(laptop, SentryLaptopUiKey.Key))
             return;
 
-        var alert = new SentryAlertEvent(GetNetEntity(sentry), alertType, message);
+        var (color, size) = alertType switch
+        {
+            SentryAlertType.LowAmmo => ("#CED22B", 14),
+            SentryAlertType.CriticalHealth => ("#A42625", 16),
+            SentryAlertType.TargetAcquired => ("#A42625", 14),
+            SentryAlertType.Damaged => ("#A42625", 14),
+            _ => ("#88C7FA", 14)
+        };
+
+        var alert = new SentryAlertEvent(GetNetEntity(sentry), alertType, message, color, size);
         _ui.ServerSendUiMessage(laptop, SentryLaptopUiKey.Key, alert);
     }
 
@@ -218,29 +228,23 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             PlaceLaptopOnSurface(laptop, args.Target.Value, args.User);
     }
 
-    private void OnLaptopToggled(Entity<SentryLaptopComponent> laptop, ref ItemToggledEvent args)
-    {
-        laptop.Comp.IsOpen = args.Activated;
-
-        if (!args.Activated)
-        {
-            SetPowered(laptop, false);
-
-            if (_net.IsServer)
-                _ui.CloseUi(laptop.Owner, SentryLaptopUiKey.Key);
-        }
-
-        UpdateLaptopVisuals(laptop);
-        Dirty(laptop);
-    }
-
     private void OnLaptopUIOpenAttempt(Entity<SentryLaptopComponent> laptop, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (laptop.Comp.IsOpen)
+        var parent = Transform(laptop).ParentUid;
+        if (!HasComp<PlaceableSurfaceComponent>(parent))
+        {
+            _popup.PopupClient("Place the laptop on a table first!", laptop, args.User);
+            args.Cancel();
             return;
+        }
 
-        _popup.PopupClient("The laptop must be opened first!", laptop, args.User);
-        args.Cancel();
+        if (!laptop.Comp.IsOpen)
+        {
+            laptop.Comp.IsOpen = true;
+            SetPowered(laptop, true);
+            UpdateLaptopVisuals(laptop);
+            Dirty(laptop);
+        }
     }
 
     private void OnLaptopShutdown(Entity<SentryLaptopComponent> laptop, ref ComponentShutdown args)
@@ -361,6 +365,34 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var surfaceXform = Transform(surface);
         laptopXform.Coordinates = surfaceXform.Coordinates;
         laptopXform.AttachParent(surface);
+
+        laptop.Comp.IsOpen = true;
+        SetPowered(laptop, true);
+        UpdateLaptopVisuals(laptop);
+        Dirty(laptop);
+    }
+
+    private void OnLaptopParentChanged(Entity<SentryLaptopComponent> laptop, ref EntParentChangedMessage args)
+    {
+        var parent = Transform(laptop).ParentUid;
+        var onSurface = HasComp<PlaceableSurfaceComponent>(parent);
+
+        if (onSurface)
+        {
+            laptop.Comp.IsOpen = true;
+            SetPowered(laptop, true);
+            UpdateLaptopVisuals(laptop);
+            Dirty(laptop);
+            return;
+        }
+
+        laptop.Comp.IsOpen = false;
+        SetPowered(laptop, false);
+        UpdateLaptopVisuals(laptop);
+        Dirty(laptop);
+
+        if (_net.IsServer)
+            _ui.CloseUi(laptop.Owner, SentryLaptopUiKey.Key);
     }
 
     private bool IsSentryAlreadyLinked(Entity<SentryComponent> sentry)
