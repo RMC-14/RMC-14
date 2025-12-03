@@ -11,6 +11,10 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor # intentionally without access
     canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
     hackable: false
     ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
     sections:

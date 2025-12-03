@@ -90,6 +90,13 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public bool CanManualRestock;
 
     /// <summary>
+    ///     Specific prototype IDs that should be restocked individually even if they have a storage component.
+    ///     Useful for shotgun ammo boxes and other special cases.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<EntProtoId> IgnoreBulkRestockById = [];
+
+    /// <summary>
     ///     Tracks partial stacks for items that are stored in specific amounts.
     ///     Key: prototype ID, Value: partial stack amount (0 to max_stack - 1)
     /// </summary>

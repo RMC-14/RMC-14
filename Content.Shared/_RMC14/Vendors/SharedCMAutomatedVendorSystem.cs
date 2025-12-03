@@ -308,10 +308,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ent.Comp.CanManualRestock)
             return;
-        // Check for storage containers (backpacks, boxes, belts, etc.) but exclude armor/helmets with storage
-        if (TryComp<StorageComponent>(args.Used, out var storage) &&
-            !HasComp<CMArmorComponent>(args.Used) &&
-            !HasComp<CMHardArmorComponent>(args.Used))
+
+        var itemProtoId = MetaData(args.Used).EntityPrototype?.ID;
+        var ignoreBulkRestock = itemProtoId != null && ent.Comp.IgnoreBulkRestockById.Contains(itemProtoId) ||
+                                 IgnoreBulkRestockByComponent(args.Used);
+        if (TryComp<StorageComponent>(args.Used, out var storage) && !ignoreBulkRestock)
         {
             TryRestockFromContainer(ent, args.Used, args.User, storage);
             args.Handled = true;
@@ -1029,7 +1030,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 break;
         }
 
-        if (matchingEntry == null || TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _))
+        var ignoreBulkRestock = vendor.Comp.IgnoreBulkRestockById.Contains(itemProto) ||
+                                IgnoreBulkRestockByComponent(item);
+        if (matchingEntry == null || TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _) && !ignoreBulkRestock)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", vendor, user, ("item", item));
             return false;
@@ -1044,7 +1047,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!ValidateItemForRestock(item, user, valid, matchingEntry.Id))
+        if (!ValidateItemForRestock(vendor, item, user, valid, matchingEntry.Id))
             return false;
         // Try partial stack restocking first (for stacks like sandbags, materials, etc.)
         if (TryRestockPartialStack(vendor, item, user, valid, matchingEntry))
@@ -1188,17 +1191,18 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// All applicable validation checks must pass for the item to be restocked.
     /// Uses short-circuit evaluation: returns false on first failed check.
     /// </summary>
+    /// <param name="vendor">The vendor being restocked.</param>
     /// <param name="item">The item to validate.</param>
     /// <param name="user">The user attempting to restock.</param>
     /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
     /// <param name="prototypeId">The prototype ID of the item being sold in the vendor (for stack comparison).</param>
     /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
-    private bool ValidateItemForRestock(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
+    private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
     {
         return ValidateReagentContainers(item, user, valid)
                && ValidateStackAmount(item, user, valid, prototypeId)
                && (!HasComp<GunComponent>(item) || ValidateGun(item, user, valid))
-               && ValidateAmmunition(item, user, valid)
+               && ValidateAmmunition(vendor, item, user, valid)
                && ValidateEquipment(item, user, valid);
     }
 
@@ -1395,7 +1399,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <summary>
     /// Validates ammunition items (magazines and ammo boxes) are full.
     /// </summary>
-    private bool ValidateAmmunition(EntityUid item, EntityUid user, bool valid)
+    private bool ValidateAmmunition(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
         if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) && ammoProvider.Count < ammoProvider.Capacity)
         {
@@ -1416,7 +1420,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
-        return true;
+        return ValidateStorageBasedAmmoBox(vendor, item, user, valid); // Shotgun shell boxes and similar
     }
 
     private bool ValidateMagazineBox(EntityUid box, ItemSlotsComponent slots, EntityUid user, bool valid)
@@ -1451,6 +1455,31 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
+    private bool ValidateStorageBasedAmmoBox(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
+    {
+        var itemProto = MetaData(item).EntityPrototype?.ID;
+        if (itemProto == null || !vendor.Comp.IgnoreBulkRestockById.Contains(itemProto))
+            return true;
+
+        if (!TryComp<StorageComponent>(item, out var storage))
+            return true;
+
+        if (storage.Container.ContainedEntities.Count == 0)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
+            return false;
+        }
+
+        var maxCapacity = storage.Grid.GetArea();
+        if (maxCapacity > 0 && storage.Container.ContainedEntities.Count < maxCapacity)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
+            return false;
+        }
+
+        return true;
+    }
+
     /// <summary>
     /// Validates equipment items (armor, helmets, machete holsters, flare packs, power cells) are in proper state.
     /// </summary>
@@ -1458,7 +1487,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
-            // Empty armor and helmets.
+            // Armor and helmets need to be empty.
             RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
             return false;
         }
@@ -1589,6 +1618,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     protected virtual (float currentCharge, float maxCharge) GetBatteryCharge(EntityUid item, PowerCellSlotComponent powerCellSlot)
     {
         return (0, 0);
+    }
+
+    private bool IgnoreBulkRestockByComponent(EntityUid item)
+    {
+        // Check for armor or hard armor components
+        return HasComp<CMArmorComponent>(item) || HasComp<CMHardArmorComponent>(item);
     }
 
     private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)

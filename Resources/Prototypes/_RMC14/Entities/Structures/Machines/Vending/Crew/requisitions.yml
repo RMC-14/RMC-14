@@ -360,6 +360,12 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
   - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
+    - RMCBoxShotgunBreaching
+    - RMCBox458SOCOM
     baseSprite:
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
       state: base
