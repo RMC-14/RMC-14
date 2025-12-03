@@ -50,7 +50,7 @@
   equipment:
     id: RMCIDCardDeputySurvivor
     jumpsuit: RMCMarshalCMBUniformSurvivorMarshal
-    outerClothing: RMCCoatBureauMarshal
+    outerClothing: RMCArmorM4RLight
     eyes: CMGlassesSecurity
     head: RMCHeadCapBureau
     suitstorage: RMCWeaponSMGMP5Alt
