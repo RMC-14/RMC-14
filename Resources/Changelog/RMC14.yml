@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The examine text for the flare gun, winter wyvern handcannon and mateba
-      now explains how to fire them into the air.
-    type: Tweak
-  id: 2105
-  time: '2025-08-06T03:54:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7222
 - author: Utmanarn
   changes:
   - message: Added the option for ghosts to opt in to being teleported over to game
@@ -4633,5 +4625,12 @@
   id: 2605
   time: '2025-12-01T08:48:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8500
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed dead marines layering under dead xenos and items.
+    type: Fix
+  id: 2606
+  time: '2025-12-04T07:01:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8560
 Name: RMC14
 Order: -1
