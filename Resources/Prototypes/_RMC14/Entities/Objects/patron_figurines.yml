@@ -2001,7 +2001,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaizerDeathwishValentine
   name: Kaizer 'Deathwish' Valentine figurine
-  description: ""
+  description: "This high-quality figurine depicts Kaizer 'Deathwish' Valentine, an elite UNMC medic known for his perfectionist attitude towards treatment and his reckless disregard for his own safety when recovering the fallen.  Sculpted with exceptional precision, the figure shows his pristine, meticulously arranged medical tools contrasted against his battle-worn armor, reflecting both his discipline and the danger he constantly throws himself into.  His focused expression peers through a cracked visor, one hand gripping a compact scanner while the other reaches toward a debris-strewn base featuring shattered concrete and a partially exposed UNMC emblem.  Premium paintwork, layered shading, and fine weathering give the entire piece a cinematic realism befitting a tribute to a medic who refuses to lose a patient—even at his own expense."
   components:
   - type: Sprite
     state: kaizer_deathwish_valentine
