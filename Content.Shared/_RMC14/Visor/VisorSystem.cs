@@ -43,7 +43,6 @@ public sealed class VisorSystem : EntitySystem
         SubscribeLocalEvent<CycleableVisorComponent, CycleVisorActionEvent>(OnCycleableVisorAction);
         SubscribeLocalEvent<CycleableVisorComponent, InteractUsingEvent>(OnCycleableVisorInteractUsing, before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<CycleableVisorComponent, InventoryRelayedEvent<ScopedEvent>>(OnCycleableVisorScoped);
-        SubscribeLocalEvent<CycleableVisorComponent, ExaminedEvent>(OnCycleableVisorExamined);
         SubscribeLocalEvent<CycleableVisorComponent, GotEquippedEvent>(OnCycleableVisorEquipped);
 
         SubscribeLocalEvent<VisorComponent, ActivateVisorAttemptEvent>(OnVisorAttemptActivate);
@@ -312,26 +311,6 @@ public sealed class VisorSystem : EntitySystem
         }
 
         args.Args = ev.Event;
-    }
-
-    private void OnCycleableVisorExamined(Entity<CycleableVisorComponent> ent, ref ExaminedEvent args)
-    {
-        //TODO RMC14 show the current visor that's down
-        using (args.PushGroup(nameof(CycleableVisorComponent)))
-        {
-            if (ent.Comp.CurrentVisor != null)
-            {
-                if (!ent.Comp.Containers.TryGetValue(ent.Comp.CurrentVisor.Value, out var currentId))
-                    return;
-
-                if (!_container.TryGetContainer(ent, currentId, out var currentContainer))
-                    return;
-
-                args.PushMarkup(Loc.GetString("rmc-visor-down", ("visor", currentContainer.ContainedEntities.FirstOrDefault())));
-            }
-
-            args.PushMarkup("Use a [color=cyan]screwdriver[/color] on this to take out any visors!");
-        }
     }
 
     private void OnVisorAttemptActivate(Entity<VisorComponent> ent, ref ActivateVisorAttemptEvent args)
