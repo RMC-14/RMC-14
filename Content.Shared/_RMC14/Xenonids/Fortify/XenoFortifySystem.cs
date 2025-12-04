@@ -45,7 +45,6 @@ public sealed class XenoFortifySystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resist knockback from small explosives
-        SubscribeLocalEvent<XenoFortifyComponent, AttackAttemptEvent>(OnXenoFortifyAttackAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
 
         SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
@@ -63,15 +62,6 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, MobStateChangedEvent>(OnXenoFortifyMobStateChanged);
         SubscribeLocalEvent<XenoFortifyComponent, RefreshMovementSpeedModifiersEvent>(OnXenoFortifyRefreshSpeed);
         SubscribeLocalEvent<XenoFortifyComponent, GetMeleeDamageEvent>(OnXenoFortifyGetMeleeDamage);
-    }
-
-    private void OnXenoFortifyAttackAttempt(Entity<XenoFortifyComponent> xeno, ref AttackAttemptEvent args)
-    {
-        if (args.Target is not { } target)
-            return;
-
-        if (HasComp<MarineComponent>(target) && xeno.Comp.Fortified && !xeno.Comp.CanAttackHumanoidsFortified)
-            args.Cancel();
     }
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)

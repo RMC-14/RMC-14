@@ -59,5 +59,5 @@ public sealed partial class XenoFortifyComponent : Component
     public DamageSpecifier DamageAddedFortified = new();
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier FortifySound = new SoundPathSpecifier("/Audio/Effects/stonedoor_openclose.ogg");
+    public SoundSpecifier FortifySound = new SoundPathSpecifier("/Audio/Effects/stonedoor_openclose.ogg", AudioParams.Default.WithVariation(0.2f));
 }
