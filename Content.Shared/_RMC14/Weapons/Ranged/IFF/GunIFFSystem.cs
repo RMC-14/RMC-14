@@ -60,7 +60,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnItemIFFGetFaction(Entity<ItemIFFComponent> ent, ref InventoryRelayedEvent<GetIFFFactionEvent> args)
     {
-        args.Args.Faction = ent.Comp.Faction;
+        args.Args.Faction ??= ent.Comp.Faction;
     }
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)

@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: RMCSentryPremade
-  id: RMCBaseSentry
+  id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
   name: turret
   components:
   - type: Sentry

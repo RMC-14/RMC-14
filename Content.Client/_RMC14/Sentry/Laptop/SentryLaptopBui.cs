@@ -307,7 +307,6 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
-        // cache current info for lightweight local prediction tweaks
         var currentIds = state.Sentries.Select(s => s.Id).ToHashSet();
         foreach (var id in _currentInfos.Keys.Where(id => !currentIds.Contains(id)).ToList())
             _currentInfos.Remove(id);

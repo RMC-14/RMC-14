@@ -19,7 +19,6 @@
                              Margin="5 0 0 0"/>
             </BoxContainer>
 
-            <!-- Custom Name Field -->
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
                 <Label Text="NAME:" MinWidth="60" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
                 <LineEdit Name="NameLineEdit" Access="Public"

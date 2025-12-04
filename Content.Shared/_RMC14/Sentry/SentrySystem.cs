@@ -153,7 +153,7 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))  // TODO RMC14 more general defense check
                 {
                     if (sentry != defense && defense.Comp.Mode == SentryMode.On)
                     {
@@ -188,12 +188,12 @@ public sealed class SentrySystem : EntitySystem
 
     private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
     {
-        if (!ent.Comp.HomingShots)
+        if(!ent.Comp.HomingShots)
             return;
 
         foreach (var projectile in args.FiredProjectiles)
         {
-            if (!TryComp(projectile, out TargetedProjectileComponent? targeted))
+            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
                 return;
 
             var homing = EnsureComp<HomingProjectileComponent>(projectile);
@@ -321,7 +321,7 @@ public sealed class SentrySystem : EntitySystem
         {
             if (ent.Comp.MaxDeviation < Angle.FromDegrees(180))
             {
-                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int) ent.Comp.MaxDeviation.Degrees));
+                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
                 args.PushMarkup(rot);
             }
 

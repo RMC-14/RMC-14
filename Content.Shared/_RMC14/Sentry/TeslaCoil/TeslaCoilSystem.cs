@@ -48,7 +48,7 @@ public sealed class TeslaCoilSystem : EntitySystem
                    out var xform,
                    out var targetingComp))
         {
-            if (sentryComp.Mode != SentryMode.On)
+            if (sentryComp.Mode != SentryMode.On || !xform.Anchored)
                 continue;
 
             if (time < teslaComp.LastFired + teslaComp.FireDelay)
