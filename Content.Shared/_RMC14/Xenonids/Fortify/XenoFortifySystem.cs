@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -18,6 +19,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
@@ -30,6 +32,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
@@ -42,6 +45,7 @@ public sealed class XenoFortifySystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resist knockback from small explosives
+        SubscribeLocalEvent<XenoFortifyComponent, AttackAttemptEvent>(OnXenoFortifyAttackAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoFortifyActionEvent>(OnXenoFortifyAction);
 
         SubscribeLocalEvent<XenoFortifyComponent, CMGetArmorEvent>(OnXenoFortifyGetArmor);
@@ -61,6 +65,15 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, GetMeleeDamageEvent>(OnXenoFortifyGetMeleeDamage);
     }
 
+    private void OnXenoFortifyAttackAttempt(Entity<XenoFortifyComponent> xeno, ref AttackAttemptEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        if (HasComp<MarineComponent>(target) && xeno.Comp.Fortified && !xeno.Comp.CanAttackHumanoidsFortified)
+            args.Cancel();
+    }
+
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
     {
         if (args.Handled)
@@ -73,6 +86,8 @@ public sealed class XenoFortifySystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        _audio.PlayPredicted(xeno.Comp.FortifySound, xeno, xeno);
 
         if (xeno.Comp.Fortified)
             Unfortify(xeno);
