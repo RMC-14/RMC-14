@@ -72,11 +72,11 @@
                         </BoxContainer>
                         <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
                         <ScrollContainer MaxHeight="200" MinHeight="140" HorizontalExpand="True">
-                            <BoxContainer Name="GlobalFactionContainer"
-                                        Access="Public"
-                                        Orientation="Vertical"
-                                        Margin="5"
-                                        HorizontalExpand="True"/>
+                            <GridContainer Name="GlobalFactionContainer"
+                                           Access="Public"
+                                           Columns="3"
+                                           Margin="5"
+                                           HorizontalExpand="True"/>
                         </ScrollContainer>
                         <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
                         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">

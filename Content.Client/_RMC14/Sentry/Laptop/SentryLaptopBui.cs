@@ -25,10 +25,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
     private SentryLaptopWindow? _window;
     private readonly Dictionary<NetEntity, SentryCard> _sentryCards = new();
     private readonly Dictionary<NetEntity, bool> _iffExpanded = new();
+    private readonly Dictionary<NetEntity, SentryInfo> _currentInfos = new();
     private readonly Dictionary<string, bool> _globalFactionSelections = new();
     private string _searchText = "";
     private EntityUid? _currentCameraTarget;
     private EntityUid? _cameraEntity;
+    private Vector2i? _savedWindowSize;
 
     public SentryLaptopBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -305,6 +307,13 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
+        // cache current info for lightweight local prediction tweaks
+        var currentIds = state.Sentries.Select(s => s.Id).ToHashSet();
+        foreach (var id in _currentInfos.Keys.Where(id => !currentIds.Contains(id)).ToList())
+            _currentInfos.Remove(id);
+        foreach (var sentry in state.Sentries)
+            _currentInfos[sentry.Id] = sentry;
+
         UpdateHeader(state);
         UpdateStatusLabel(state);
         SetupGlobalIFFControls();
@@ -571,6 +580,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         checkbox.OnToggled += args =>
         {
+            ApplyLocalFactionChange(info.Id, faction, args.Pressed, container);
             SendMessage(new SentryLaptopToggleFactionBuiMsg(info.Id, faction, args.Pressed));
         };
 
@@ -578,6 +588,20 @@ public sealed class SentryLaptopBui : BoundUserInterface
         container.AddChild(label);
 
         return container;
+    }
+
+    private void ApplyLocalFactionChange(NetEntity sentryId, string faction, bool targeted, BoxContainer? container)
+    {
+        if (!_currentInfos.TryGetValue(sentryId, out var info))
+            return;
+
+        if (targeted)
+            info.FriendlyFactions.Add(faction);
+        else
+            info.FriendlyFactions.Remove(faction);
+
+        if (container != null && container.Parent is SentryCard card && _currentInfos.TryGetValue(sentryId, out var updated))
+            UpdateFactionControls(card, updated);
     }
 
     private Color GetFactionLabelColor(string faction, SentryInfo info)
@@ -679,6 +703,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         var fovText = sentryInfo?.MaxDeviation is >= 180 ? "360°" : $"{(int)((sentryInfo?.MaxDeviation ?? 75f) * 2)}°";
         _window.CameraTitle.SetMarkupPermissive($"[color=#88C7FA][bold]CAMERA: {sentryName} (Range: {visionRadius:F1} tiles, FOV: {fovText})[/bold][/color]");
+
+        if (_savedWindowSize == null)
+            _savedWindowSize = new Vector2i((int)_window.Size.X, (int)_window.Size.Y);
+        UpdateWindowSize(true);
     }
 
     private void CloseCamera()
@@ -704,6 +732,14 @@ public sealed class SentryLaptopBui : BoundUserInterface
             }
 
             _currentCameraTarget = null;
+        }
+
+        if (_window != null && _savedWindowSize is { } saved)
+        {
+            var min = _window.MinSize;
+            var target = new Vector2i((int)Math.Max(saved.X, min.X), (int)Math.Max(saved.Y, min.Y));
+            _window.SetSize = target;
+            _savedWindowSize = null;
         }
     }
 
@@ -736,8 +772,13 @@ public sealed class SentryLaptopBui : BoundUserInterface
             return;
 
         var targetMin = cameraOpen ? new Vector2i(1500, 700) : new Vector2i(800, 700);
-        _window.SetSize = targetMin;
         _window.MinSize = targetMin;
+
+        var current = _window.Size;
+        _window.SetSize = new Vector2i(
+            Math.Max((int)current.X, targetMin.X),
+            Math.Max((int)current.Y, targetMin.Y)
+        );
     }
 
     protected override void Dispose(bool disposing)

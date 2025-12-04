@@ -109,11 +109,11 @@
                                                BorderColor="#4AA3E8" BorderThickness="1" />
                     </PanelContainer.PanelOverride>
                     <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Name="FactionContainer"
-                                    Access="Public"
-                                    Orientation="Vertical"
-                                    Margin="5"
-                                    HorizontalExpand="True"/>
+                        <GridContainer Name="FactionContainer"
+                                       Access="Public"
+                                       Columns="3"
+                                       Margin="5"
+                                       HorizontalExpand="True"/>
                     </ScrollContainer>
                 </PanelContainer>
             </BoxContainer>

@@ -17,6 +17,7 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
 
     public override void Initialize()
     {
@@ -148,6 +149,9 @@ public sealed class GunIFFSystem : EntitySystem
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
+        if (user.Comp.Faction == null && user.Comp.Factions.Count == 0)
+            return false;
+
         var ev = new GetIFFFactionEvent(null, slots);
         RaiseLocalEvent(user, ref ev);
 
@@ -167,7 +171,7 @@ public sealed class GunIFFSystem : EntitySystem
             if (user.Comp.Faction == faction)
                 return true;
 
-            if (user.Comp.Factions.Contains(faction))
+            if (user.Comp.Factions.Count > 0 && user.Comp.Factions.Contains(faction))
                 return true;
         }
 
@@ -265,20 +269,26 @@ public sealed class GunIFFSystem : EntitySystem
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(owner, ref ev);
 
+        _factionBuffer.Clear();
+        if (_userIFFQuery.TryComp(owner, out var ownerIFF))
+            _factionBuffer.UnionWith(ownerIFF.Factions);
+
+        var singleFaction = ev.Faction;
+        var hasAnyFaction = enabled && (singleFaction != null || _factionBuffer.Count > 0);
+
         foreach (var projectile in args.FiredProjectiles)
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
 
-            if (ev.Faction is { } singleFaction)
-                iff.Faction = singleFaction;
+            iff.Faction = singleFaction;
 
             iff.Factions.Clear();
-            foreach (var faction in userIFF.Factions)
+            foreach (var faction in _factionBuffer)
             {
                 iff.Factions.Add(faction);
             }
 
-            iff.Enabled = enabled;
+            iff.Enabled = hasAnyFaction;
             Dirty(projectile, iff);
         }
     }

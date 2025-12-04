@@ -39,6 +39,12 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
 
     private void OnTargetingStartup(Entity<SentryTargetingComponent> ent, ref ComponentStartup args)
     {
+        if (ent.Comp.FriendlyFactions.Count == 0 && !string.IsNullOrEmpty(ent.Comp.OriginalFaction))
+        {
+            ent.Comp.FriendlyFactions.Add(ent.Comp.OriginalFaction);
+            ent.Comp.HumanoidAdded.Clear();
+        }
+
         if (_net.IsServer)
             ApplyTargeting(ent);
     }
@@ -102,12 +108,6 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         var originalFaction = ent.Comp.OriginalFaction;
         if (!string.IsNullOrEmpty(originalFaction))
             comp.FriendlyFactions.Add(originalFaction);
-
-        foreach (var faction in GetNonXenoFactions())
-        {
-            comp.FriendlyFactions.Add(faction);
-            comp.HumanoidAdded.Add(faction);
-        }
 
         if (_net.IsServer)
             ApplyTargeting(ent);

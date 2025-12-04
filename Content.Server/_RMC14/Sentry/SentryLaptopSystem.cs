@@ -325,7 +325,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         RemCompDeferred<SentryLaptopWatcherComponent>(watcherUid);
     }
 
-    private float GetSentryVisionRadius(EntityUid sentry)
+    protected override float GetSentryVisionRadius(EntityUid sentry)
     {
         if (!TryComp<HTNComponent>(sentry, out var htn))
             return 5.0f;

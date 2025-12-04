@@ -560,7 +560,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         );
     }
 
-    private float GetSentryVisionRadius(EntityUid sentry)
+    protected virtual float GetSentryVisionRadius(EntityUid sentry)
     {
         return 5.0f;
     }
