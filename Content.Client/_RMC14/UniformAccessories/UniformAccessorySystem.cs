@@ -144,7 +144,6 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (accessoryComp.LayerKey != null)
                 key = accessoryComp.LayerKey;
-        }
 
             if (!args.RevealedLayers.Contains(key))
                 continue;
