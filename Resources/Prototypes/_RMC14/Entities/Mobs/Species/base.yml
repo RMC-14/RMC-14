@@ -377,7 +377,7 @@
   - type: XenoToggleChargingParalyze
   - type: RMCMobStateDrawDepth
     drawDepths:
-      Dead: DeadMobs
+      Dead: BelowMobs
   - type: IVDripTarget
   - type: FixedIdentity
     name: rmc-host

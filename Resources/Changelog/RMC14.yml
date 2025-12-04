@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The examine text for the flare gun, winter wyvern handcannon and mateba
-      now explains how to fire them into the air.
-    type: Tweak
-  id: 2105
-  time: '2025-08-06T03:54:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7222
-- author: Utmanarn
-  changes:
-  - message: Added the option for ghosts to opt in to being teleported over to game
-      masters that need props for an event.
-    type: Add
-  - message: Added the ability for game masters to call over ghosts who have signed
-      up for being a prop to their location.
-    type: Add
-  id: 2106
-  time: '2025-08-06T03:57:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7230
 - author: Arykh
   changes:
   - message: Fixed the EOD heavy armor being slighty slower than intended.
@@ -4633,5 +4614,29 @@
   id: 2605
   time: '2025-12-01T08:48:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8500
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed dead marines layering under dead xenos and items.
+    type: Fix
+  id: 2606
+  time: '2025-12-04T07:01:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8560
+- author: YO0teacher
+  changes:
+  - message: Fixed xeno leaps colliding with things they shouldn't.
+    type: Fix
+  - message: Fixed a hotkey letting you pick up items while devoured.
+    type: Fix
+  - message: Fixed being able to devour synths.
+    type: Fix
+  - message: Fixed motion detectors not being deactivated when devoured.
+    type: Fix
+  - message: Fixed melee hits not doing proper damage while devoured.
+    type: Fix
+  - message: Fixed larva and parasites making noise when trying to pry doors.
+    type: Fix
+  id: 2607
+  time: '2025-12-04T12:11:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8424
 Name: RMC14
 Order: -1
