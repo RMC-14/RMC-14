@@ -1,0 +1,13 @@
+- type: entity
+  name: Purple Lightning
+  id: RMCPurpleLightning
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    drawdepth: Effects
+    state: "purple_lightning"
+  - type: Beam
+  - type: Tag
+    tags:
+    - HideContextMenu

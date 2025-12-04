@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Actions;
@@ -48,6 +49,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoDevouredEvent>(OnMotionDetectorDevoured);
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
@@ -122,6 +124,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
+    }
+    
+    private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
+    {
+        DisableDetectorsOnMob(ent.Target);
     }
 
     private void OnMotionDetectorExamined(Entity<MotionDetectorComponent> ent, ref ExaminedEvent args)

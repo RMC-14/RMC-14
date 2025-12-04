@@ -175,6 +175,7 @@
 - type: entity
   parent: HandLabeler
   id: CMHandLabeler
+  suffix: RMC14
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
@@ -183,6 +184,13 @@
       size: Normal
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
       storedRotation: 0
+    - type: RMCHandLabeler
+    - type: UserInterface
+      interfaces:
+        enum.HandLabelerUiKey.Key:
+          type: HandLabelerBoundUserInterface
+        enum.RMCHandLabelerUiKey.PillBottleColor:
+          type: RMCHandLabelerPillBottleColorBui
 
 - type: entity
   parent: Shovel

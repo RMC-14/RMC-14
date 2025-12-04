@@ -8,6 +8,9 @@ using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.UniformAccessories;
 
@@ -47,6 +50,11 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 continue;
 
             var layer = GetKey(accessory, accessoryComp, index);
+
+            if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
+            {
+                accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
+            }
 
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
@@ -129,6 +137,14 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (accessoryComp.LayerKey is not { } key)
                 continue;
+            if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
+            {
+                accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
+            }
+
+            if (accessoryComp.LayerKey != null)
+                key = accessoryComp.LayerKey;
+        }
 
             if (!args.RevealedLayers.Contains(key))
                 continue;

@@ -1,0 +1,59 @@
+- type: job
+  parent: CMSurvivorCMBDeputy
+  id: CMSurvivorSolarisCMBDeputy
+  name: rmc-job-name-survivor-cmb-deputy
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorSolarisCMBDeputy
+  hasIcon: true
+  icon: RMCJobIconBureauDeputy
+  spawnMenuRoleName: Solaris CMB Deputy (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBDeputy
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorSolarisCMBDeputy
+  equipment:
+    shoes: RMCBootsPMC
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisCMBDeputy
+  name: solaris cmb deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisCMBDeputy
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
