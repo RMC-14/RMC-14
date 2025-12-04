@@ -7,7 +7,7 @@
   ranks:
    RMCRankLanceCorporal: []
   startingGear: RMCJobFORECONPVERifleman
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconRifleman"
   joinNotifyCrew: false
   accessGroups:
   - Rifleman
@@ -33,13 +33,16 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
   hidden: true
-
 
 - type: entity
   parent: CMSpawnPointJobBase

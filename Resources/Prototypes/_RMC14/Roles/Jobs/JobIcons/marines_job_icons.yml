@@ -53,3 +53,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_load
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rifleman
