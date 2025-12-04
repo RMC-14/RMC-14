@@ -695,6 +695,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 AmountUpdated(vendor, entry);
             }
         }
+        // Check if we just vended the last item, and it has partial stacks. This needs to happen AFTER Amount-- to detect when we hit 0.
+        EntProtoId? partialStackItemId = null;
+        int? partialStackAmount = null;
+        if (entry.Amount == 0 && comp.PartialProductStacks.TryGetValue(entry.Id, out var partial) && partial > 0)
+        {
+            partialStackItemId = entry.Id;
+            partialStackAmount = partial;
+            comp.PartialProductStacks[entry.Id] = 0; // Clear the partial after using it
+        }
 
         if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
         {
@@ -730,16 +739,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         for (var i = 0; i < entry.Spawn; i++)
         {
             var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
+            var currentPartialAmount = i == 0 ? partialStackAmount : null;
+            var currentPartialItemId = i == 0 ? partialStackItemId : null;
             if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
             {
                 foreach (var bundled in bundle.Bundle)
                 {
-                    Vend(vendor, actor, bundled, offset);
+                    // Only apply partial stack to the specific item that has it
+                    var bundledPartialAmount = bundled == currentPartialItemId ? currentPartialAmount : null;
+                    Vend(vendor, actor, bundled, offset, bundledPartialAmount);
                 }
             }
             else
             {
-                Vend(vendor, actor, entry.Id, offset);
+                Vend(vendor, actor, entry.Id, offset, currentPartialAmount);
             }
         }
 
@@ -750,7 +763,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset)
+    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, int? partialStackAmount = null)
     {
         if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
@@ -778,12 +791,23 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var itemPlacementOffset = requisitionsChair.Comp.OffsetItem;
             var finalPlacementCoordinates = requisitionsChair.Owner.ToCoordinates().Offset(itemPlacementOffset);
             var spawn = SpawnAtPosition(toVend, finalPlacementCoordinates);
+            // Apply partial stack amount if specified
+            if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
+            {
+                _stack.SetCount(spawn, partialStackAmount.Value, stack);
+            }
 
             AfterVend(spawn, player, vendor, offset, true);
         }
         else
         {
             var spawn = SpawnNextToOrDrop(toVend, vendor);
+            // Apply partial stack amount if specified
+            if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
+            {
+                _stack.SetCount(spawn, partialStackAmount.Value, stack);
+            }
+
             AfterVend(spawn, player, vendor, offset);
         }
     }
@@ -1150,29 +1174,49 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    private RestockPlan CalculateRestockPlan(int existingPartial, int itemCount, int maxStackSize, CMVendorEntry entry)
+    private static RestockPlan CalculateRestockPlan(int existingPartial, int itemCount, int maxStackSize, CMVendorEntry entry)
     {
+        // Sanity checks to prevent edge cases
+        if (maxStackSize <= 0 || itemCount <= 0)
+        {
+            return new RestockPlan { CanRestock = false };
+        }
+
         var totalItems = existingPartial + itemCount;
         var potentialFullStacks = totalItems / maxStackSize;
         var potentialPartial = totalItems % maxStackSize;
-        // Check if vendor has a max limit
-        if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
+
+        var shouldIncrementVendorCount = existingPartial == 0 || potentialFullStacks > 0;
+        if (!shouldIncrementVendorCount)
         {
+            // Just adding to partials without creating a full stack. No vendor count increase needed.
             return new RestockPlan
             {
                 CanRestock = true,
-                StacksToAdd = potentialFullStacks,
+                StacksToAdd = 0,
                 ItemsToConsume = itemCount,
-                FinalPartial = potentialPartial
+                FinalPartial = totalItems
             };
         }
-        // Has max limit - check if we'd exceed it
-        if (currentAmount + potentialFullStacks <= max)
+
+        int stacksToAdd;
+        if (existingPartial == 0 && potentialFullStacks == 0)
+        {
+            // First partial: add 1 vendor entry even though not a full stack
+            stacksToAdd = 1;
+        }
+        else
+        {
+            // Normal case: add the number of full stacks created
+            stacksToAdd = potentialFullStacks;
+        }
+        // Check if we can add all stacks without exceeding max (or if no max exists)
+        if (entry.Max is not { } max || entry.Amount is not { } currentAmount || currentAmount + stacksToAdd <= max)
         {
             return new RestockPlan
             {
                 CanRestock = true,
-                StacksToAdd = potentialFullStacks,
+                StacksToAdd = stacksToAdd,
                 ItemsToConsume = itemCount,
                 FinalPartial = potentialPartial
             };
@@ -1181,7 +1225,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return CalculateLimitedRestockPlan(existingPartial, itemCount, maxStackSize, max, currentAmount);
     }
 
-    private RestockPlan CalculateLimitedRestockPlan(int existingPartial, int itemCount, int maxStackSize, int max, int currentAmount)
+    private static RestockPlan CalculateLimitedRestockPlan(int existingPartial, int itemCount, int maxStackSize, int max, int currentAmount)
     {
         var roomForStacks = max - currentAmount;
 
@@ -1203,27 +1247,22 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         };
     }
 
-    private RestockPlan CalculatePartialOnlyPlan(int existingPartial, int itemCount, int maxStackSize)
+    private static RestockPlan CalculatePartialOnlyPlan(int existingPartial, int itemCount, int maxStackSize)
     {
         if (existingPartial == 0)
         {
-            // Completely full, can't restock anything
             return new RestockPlan { CanRestock = false };
         }
 
         var canAddToPartial = maxStackSize - existingPartial;
-        if (itemCount > canAddToPartial)
-        {
-            // Can't fit all items - would create a stack and exceed max
-            return new RestockPlan { CanRestock = false };
-        }
-        // Can add all items to partial without creating a full stack
+        var itemsToConsume = Math.Min(itemCount, canAddToPartial);
+        var finalPartial = existingPartial + itemsToConsume;
         return new RestockPlan
         {
             CanRestock = true,
             StacksToAdd = 0,
-            ItemsToConsume = itemCount,
-            FinalPartial = existingPartial + itemCount
+            ItemsToConsume = itemsToConsume,
+            FinalPartial = finalPartial
         };
     }
 
