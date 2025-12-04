@@ -38,6 +38,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-squad-lead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
