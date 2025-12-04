@@ -1996,3 +1996,14 @@
     state: icey_iana
   - type: PatronFigurine
     id: 9f9087f0-270c-4177-866c-1b988b596ffb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaizerDeathwishValentine
+  name: Kaizer 'Deathwish' Valentine figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: kaizer_deathwish_valentine
+  - type: PatronFigurine
+    id: 2cd412a9-6316-4163-8a33-637c63b2cd38
