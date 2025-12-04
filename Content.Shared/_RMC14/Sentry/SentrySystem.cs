@@ -153,7 +153,7 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))  // TODO RMC14 more general defense check
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
                 {
                     if (sentry != defense && defense.Comp.Mode == SentryMode.On)
                     {
@@ -191,6 +191,7 @@ public sealed class SentrySystem : EntitySystem
         if(!ent.Comp.HomingShots)
             return;
 
+        //Make projectiles shot from a sentry gun homing.
         foreach (var projectile in args.FiredProjectiles)
         {
             if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
@@ -233,7 +234,7 @@ public sealed class SentrySystem : EntitySystem
             else
             {
                 string ret;
-                if (sentry.Comp.Mode == SentryMode.On)
+                if(sentry.Comp.Mode == SentryMode.On)
                     ret = Loc.GetString("rmc-sentry-active-norot", ("sentry", sentry));
                 else
                     ret = Loc.GetString("rmc-sentry-item-norot", ("sentry", sentry));
