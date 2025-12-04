@@ -97,10 +97,11 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public HashSet<EntProtoId> IgnoreBulkRestockById = [];
 
     /// <summary>
-    ///     Tracks partial stacks for stackable items like trauma kits.
+    ///     Tracks partial stacks for stackable items by their StackTypeId.
+    ///     Using StackTypeId as the key ensures split/merged stacks are tracked correctly.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntProtoId, int> PartialProductStacks = new();
+    public Dictionary<string, int> PartialProductStacks = new();
 }
 
 internal readonly struct RestockPlan
