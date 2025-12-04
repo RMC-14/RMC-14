@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Emplacements;
 public sealed partial class WeaponMountComponent : Component
 {
     /// <summary>
-    ///     The whitelist of what is allowed to be mounted.
+    ///     A list of prototypes that are allowed to be mounted.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntProtoId> AttachablePrototypes = new()
@@ -21,7 +21,7 @@ public sealed partial class WeaponMountComponent : Component
     };
 
     /// <summary>
-    ///     The prototype that spawns permanently attached to the mount.
+    ///     The prototype that spawns attached to the mount.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? FixedWeaponPrototype;

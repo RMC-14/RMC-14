@@ -637,7 +637,7 @@ public sealed class CMGunSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnAmmoEjectActivateInWorld(Entity<RMCAmmoEjectComponent> gun, ref ActivateInWorldEvent args) //
+    private void OnAmmoEjectActivateInWorld(Entity<RMCAmmoEjectComponent> gun, ref ActivateInWorldEvent args)
     {
         if (args.Handled ||
             !_container.TryGetContainer(gun.Owner, gun.Comp.ContainerID, out var container) ||

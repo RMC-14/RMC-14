@@ -356,5 +356,4 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         component.IsCorrodible = isCorrodible;
     }
-
 }

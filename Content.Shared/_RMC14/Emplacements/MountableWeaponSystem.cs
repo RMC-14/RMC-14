@@ -29,7 +29,7 @@ public sealed class MountableWeaponSystem : EntitySystem
         if (args.ToCoordinates == null)
             return;
 
-        //Cancel the shot if the weapon is not mounted
+        // Cancel the shot if the weapon is not mounted
         if (ent.Comp.RequiresMount && ent.Comp.MountedTo == null)
         {
             args.Cancelled = true;
@@ -69,7 +69,7 @@ public sealed class MountableWeaponSystem : EntitySystem
             return;
         }
 
-        //Cancel the shot if not enough free hands
+        // Cancel the shot if not enough free hands
         if (_hands.CountFreeHands(args.User) < ent.Comp.RequiredFreeHands)
         {
             args.Cancelled = true;
