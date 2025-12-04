@@ -12,6 +12,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  - HospitalCorpsman
   spawnMenuRoleName: WEYA PMC Medic (PVE)
   special:
   - !type:AddComponentSpecial

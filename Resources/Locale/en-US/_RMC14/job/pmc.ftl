@@ -86,7 +86,7 @@ rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL
-rmc-job-description-pmc-pve-team-leader = Lighten the burden of the Force Leader. Ensure your team effectively carries out orders.
+rmc-job-description-pmc-pve-team-leader = Lighten the burden on the Force Leader. Ensure your team effectively carries out orders.
 
 rmc-job-name-pmc-pve-force-leader = Force Leader
 rmc-job-prefix-pmc-pve-force-leader = FL
