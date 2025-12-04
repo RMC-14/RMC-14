@@ -52,7 +52,7 @@
 - type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerLarge
-  name: large incinerator tank
+  name: M34 large incinerator tank
   description: A large fuel tank for use in the M34-T incinerator unit. Handle with extreme caution.
   components:
   - type: Sprite
@@ -81,7 +81,7 @@
 - type: entity
   parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeB
-  name: large incinerator tank (B)
+  name: M34 large incinerator tank (B)
   description: A large fuel tank of Ultra Thick Napthal Fuel type B, a special variant of napalm that is easily extinguished, but disperses over a wide area while burning slowly.
   components:
   - type: RMCFlamerTank
@@ -97,7 +97,7 @@
 - type: entity
   parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeX
-  name: large incinerator tank (X)
+  name: M34 large incinerator tank (X)
   description: A large fuel tank of Ultra Thick Napthal Fuel type X, a sticky combustible liquid chemical that burns extremely hot, for use in the M34-T incinerator unit. Handle with extreme caution.
   components:
   - type: RMCFlamerTank
@@ -112,8 +112,24 @@
 
 - type: entity
   parent: RMCTankFlamerLarge
+  id: RMCTankFlamerLargeEX
+  name: M34 large incinerator tank (EX)
+  description: A large fuel tank of Ultra Thick Napthal Fuel type EX, a sticky combustible liquid chemical that burns so hot it melts straight through most flame-resistant materials, for use in the M34-T incinerator unit. Handle with extreme caution.
+  components:
+  - type: RMCFlamerTank
+    maxRange: 7
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 250
+        reagents:
+        - ReagentId: RMCNapalmEX
+          Quantity: 250
+
+- type: entity
+  parent: RMCTankFlamerLarge
   id: RMCTankFlamerLargeCustom
-  name: large custom incinerator tank
+  name: M34 large custom incinerator tank
   description: A large fuel tank for use in the M34-T incinerator unit.
   # description: A large fuel tank for use in the M34-T incinerator unit. This one has been modified with a pressure regulator and a large internal propellant tank. Must be manually attached.
   components:

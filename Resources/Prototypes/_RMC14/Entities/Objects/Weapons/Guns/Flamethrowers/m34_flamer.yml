@@ -128,7 +128,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTankFlamer
-  name: incinerator tank
+  name: M34 incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
   components:
   - type: Sprite
@@ -173,7 +173,7 @@
 - type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerCustom
-  name: custom incinerator tank
+  name: M34 custom incinerator tank
   description: A fuel tank for use in the M34 incinerator unit.
   # description: A fuel tank for use in the M34 incinerator unit. This one has been modified with a pressure regulator and an internal propellant tank.
   components:
@@ -188,7 +188,7 @@
 - type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerBGel
-  name: incinerator tank (B-Gel)
+  name: M34 incinerator tank (B-Gel)
   description: A fuel tank full of specialized Ultra Thick Napthal Fuel type B-Gel, a gelled variant of napalm that is easily extinguished, but shoots further and lingers for longer. Handle with exceptional care.
   components:
   - type: RMCFlamerTank
@@ -205,7 +205,7 @@
 - type: entity
   parent: RMCTankFlamer
   id: RMCTankFlamerUpgraded
-  name: upgraded incinerator tank
+  name: M34 upgraded incinerator tank
   description: A fuel tank for use in the M34 incinerator unit. This one has been modified with a larger and more sophisticated internal propellant tank, allowing for larger capacity and stronger fuels.
   components:
   - type: RMCFlamerTank
