@@ -283,8 +283,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     var partialStacks = vendor.PartialProductStacks;
                     var hasPartialStack = partialStacks.TryGetValue(entry.Id, out var partialAmount) && partialAmount > 0;
-                    uiEntry.Amount.Text = hasPartialStack // Display as "amount (+partial)" for items with partial stacks
-                        ? $"{entry.Amount}(+{partialAmount})"
+                    uiEntry.Amount.Text = hasPartialStack
+                        ? $"{entry.Amount}*" // Display asterisk (*) for items with partial stacks
                         : entry.Amount.ToString();
                 }
 
