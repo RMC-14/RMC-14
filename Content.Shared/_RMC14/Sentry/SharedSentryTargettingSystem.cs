@@ -215,8 +215,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
             return;
 
         var targeting = EnsureComp<SentryTargetingComponent>(sentry);
-
-        var newFactions = new HashSet<string>(targeting.FriendlyFactions);
+        var newFactions = new HashSet<string>();
 
         foreach (var faction in deployerFaction.Factions)
         {

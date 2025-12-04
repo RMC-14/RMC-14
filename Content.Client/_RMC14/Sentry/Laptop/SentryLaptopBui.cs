@@ -637,17 +637,13 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (_window == null)
             return;
 
-        if (State is SentryLaptopBuiState state)
-        {
-            var info = state.Sentries.FirstOrDefault(s => s.Id == sentryNetEntity);
-            if (info != null && info.Mode == SentryMode.Item)
-                return;
-        }
+        if (_entities.TryGetComponent<SentryComponent>(sentryEntity.Value, out var sentryComp) &&
+            sentryComp.Mode == SentryMode.Item)
+            return;
 
         if (!_entities.TryGetComponent<TransformComponent>(sentryEntity.Value, out var sentryXform))
             return;
 
-        UpdateWindowSize(true);
         var eyeLerping = EntMan.System<EyeLerpingSystem>();
         var eyeSystem = EntMan.System<SharedEyeSystem>();
 

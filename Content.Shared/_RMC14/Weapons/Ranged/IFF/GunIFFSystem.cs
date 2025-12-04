@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
@@ -60,7 +62,11 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnItemIFFGetFaction(Entity<ItemIFFComponent> ent, ref InventoryRelayedEvent<GetIFFFactionEvent> args)
     {
-        args.Args.Faction ??= ent.Comp.Faction;
+        if (ent.Comp.Faction != null)
+            args.Args.Faction ??= ent.Comp.Faction;
+
+        if (ent.Comp.Factions.Count > 0)
+            args.Args.Factions.UnionWith(ent.Comp.Factions);
     }
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
@@ -152,13 +158,20 @@ public sealed class GunIFFSystem : EntitySystem
         if (user.Comp.Faction == null && user.Comp.Factions.Count == 0)
             return false;
 
-        var ev = new GetIFFFactionEvent(null, slots);
+        var ev = new GetIFFFactionEvent(null, slots, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(user, ref ev);
 
-        if (ev.Faction is not { } newFaction)
+        var newFaction = ev.Faction;
+        if (newFaction == null && ev.Factions.Count > 0)
+            newFaction = ev.Factions.First();
+
+        if (newFaction is not { } picked)
             return false;
 
-        faction = newFaction;
+        if (_userIFFQuery.Resolve(user, ref user.Comp, false))
+            user.Comp.Factions.UnionWith(ev.Factions);
+
+        faction = picked;
         return true;
     }
 
@@ -175,7 +188,7 @@ public sealed class GunIFFSystem : EntitySystem
                 return true;
         }
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(uid, ref ev);
 
         if (ev.Faction is { } fromItems &&
@@ -183,6 +196,9 @@ public sealed class GunIFFSystem : EntitySystem
         {
             return true;
         }
+
+        if (ev.Factions.Count > 0 && ev.Factions.Contains(faction))
+            return true;
 
         return false;
     }
@@ -266,14 +282,16 @@ public sealed class GunIFFSystem : EntitySystem
         if (!_userIFFQuery.TryComp(owner, out var userIFF))
             return;
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
+        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(owner, ref ev);
 
         _factionBuffer.Clear();
         if (_userIFFQuery.TryComp(owner, out var ownerIFF))
             _factionBuffer.UnionWith(ownerIFF.Factions);
 
-        var singleFaction = ev.Faction;
+        _factionBuffer.UnionWith(ev.Factions);
+
+        var singleFaction = ev.Faction ?? ownerIFF?.Faction;
         var hasAnyFaction = enabled && (singleFaction != null || _factionBuffer.Count > 0);
 
         foreach (var projectile in args.FiredProjectiles)
