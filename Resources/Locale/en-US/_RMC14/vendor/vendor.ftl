@@ -1,7 +1,6 @@
 cm-vending-machine-wrong-card = Wrong ID card owner detected.
 cm-vending-machine-access-denied = Access denied.
 cm-vending-machine-specialist-max = That set is already taken.
-
 rmc-vending-machine-can-hack = You believe you can hack this one with an [color=cyan]access tuner[/color] to remove the access requirements.
 rmc-vending-machine-cannot-hack = You are unable to hack access restrictions in {THE($vendor)}.
 rmc-vending-machine-hack-no-skill = You do not understand how to tweak the access requirements of {THE($vendor)}
@@ -32,4 +31,3 @@ rmc-vending-machine-restock-blood-pack-not-full = {THE($item)} is not full. Fill
 rmc-vending-machine-restock-power-cell-missing = {THE($item)} needs a power cell installed to be restocked.
 rmc-vending-machine-restock-power-cell-not-charged = {THE($item)}'s power cell needs to be fully charged before restocking.
 rmc-vending-machine-restock-stack-wrong-amount = {THE($item)} must be in stacks of {$required} for restocking. Current amount: {$current}.
-rmc-vending-machine-restock-stack-minimum = {THE($item)} must have at least {$minimum} to restock. Current amount: {$current}.

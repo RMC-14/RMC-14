@@ -112,7 +112,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<InteractionVerb>>(OnGetRestockInteractVerb);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetRestockInteractVerb);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
@@ -296,14 +296,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnGetRestockInteractVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    private void OnGetRestockInteractVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!ent.Comp.CanManualRestock)
             return;
-
         if (!args.CanAccess || !args.CanInteract)
             return;
-
         if (!_hands.TryGetActiveItem(args.User, out var heldItem))
             return;
 
@@ -318,7 +316,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryComp<StorageComponent>(item, out var storage) && !ignoreBulkRestock)
         {
             // Bulk restock verb for storage containers
-            args.Verbs.Add(new InteractionVerb
+            args.Verbs.Add(new AlternativeVerb
             {
                 Text = Loc.GetString("rmc-vending-machine-restock-bulk-verb"),
                 Act = () => TryRestockFromContainer(ent, item, user, storage),
@@ -328,7 +326,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         else
         {
             // Single item restock verb
-            args.Verbs.Add(new InteractionVerb
+            args.Verbs.Add(new AlternativeVerb
             {
                 Text = Loc.GetString("rmc-vending-machine-restock-single-verb"),
                 Act = () => TryRestockSingleItem(ent, item, user),
