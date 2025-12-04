@@ -16,6 +16,8 @@
   - type: BallisticAmmoProvider
     proto: RMCRocket84mmAntiArmor
     cycleable: false
+    whitelist:
+      tags: []
   - type: RMCFoldableGun
     foldDelay: 2
     foldText: rmc-gun-foldable-launcher-fold-self
