@@ -47,9 +47,6 @@ public sealed partial class XenoFortifyComponent : Component
     public bool CanMoveFortified = false;
 
     [DataField, AutoNetworkedField]
-    public bool CanAttackHumanoidsFortified = false;
-
-    [DataField, AutoNetworkedField]
     public bool CanHeadbuttFortified = false;
 
     [DataField, AutoNetworkedField]
