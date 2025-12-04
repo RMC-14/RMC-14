@@ -214,6 +214,7 @@
   maxLimit: 10
   loadouts:
   - FakeNVGRMC
+  - FakeNVGPVERMC
   - NettingRMC
   - NettingUrbanRMC
   - NettingDesertRMC
@@ -288,6 +289,24 @@
   - SquadArmbandRMC
   - PatchPeaceRMC
 
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMCPVE
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintUNRMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
+
 # Paperwork
 - type: loadoutGroup
   id: PaperworkRMC
@@ -343,6 +362,19 @@
   - D20DiceRMC
   - D6DiceRMC
 
+# Melee Weapons
+- type: loadoutGroup
+  id: MeleeWeaponsRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
 
 # Weapons
 - type: loadoutGroup
@@ -521,6 +553,17 @@
   loadouts:
   - ColIDCardRMC
   - ColNormalIDCardRMC
+
+- type: loadoutGroup
+  id: CommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - MatebaRMC
+  - HandcannonRMC
+  - GoldMatebaRMC
+  - GoldHandcannonRMC
 
 # Corporate Liaison
 - type: loadoutGroup

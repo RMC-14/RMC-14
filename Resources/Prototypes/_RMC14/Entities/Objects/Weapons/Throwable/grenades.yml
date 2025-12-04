@@ -75,8 +75,8 @@
   - CMGrenadeBase
   - RMCM40DPTags
   id: CMGrenadeHighExplosive
-  name: M40 HEDP grenade
-  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
+  name: 30mm HEDP grenade
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the 30mm HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
@@ -102,8 +102,8 @@
   - CMGrenadeBase
   - RMCM40DPTags
   id: CMGrenadeSmoke
-  name: M40 HSDP smoke grenade
-  description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
+  name: 30mm HSDP smoke grenade
+  description: The 30mm HSDP is a small, but powerful smoke grenade. Based off the same platform as the 30mm HEDP. It is set to detonate in 2 seconds.
   components:
   - type: OnUseTimerTrigger
     delay: 2
@@ -189,8 +189,8 @@
 - type: entity
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFrag
-  name: M40 HEFA grenade
-  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in grenade launchers, or thrown by hand.
+  name: 30mm HEFA grenade
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the 30mm HEDP. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
@@ -223,7 +223,7 @@
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFragOld
   name: M15 fragmentation grenade
-  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
+  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer 30mm-series grenades. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
@@ -283,7 +283,7 @@
   parent: CMGrenadeBase
   id: RMCGrenadeTraining
   name: M07 Training Grenade
-  description: A harmless reusable version of the M40 HEDP, used for training. Capable of being loaded into a grenade launcher, or thrown by hand.
+  description: A harmless reusable version of the 30mm HEDP, used for training. Capable of being loaded into a grenade launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m07training.rsi
@@ -302,8 +302,8 @@
   - RMCM40DPTags
   - CMGrenadeBase
   id: RMCGrenadeIncendiary
-  name: M40 HIDP incendiary grenade
-  description: The M40 HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
+  name: 30mm HIDP incendiary grenade
+  description: The 30mm HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hidp.rsi

@@ -480,19 +480,19 @@ cm-chatsan-word-nuke = nuke
 cm-chatsan-replacement-nuke = hive killer
 
 cm-chatsan-word-intel = intel
-cm-chatsan-replacement-intel = scavenger talls
+cm-chatsan-replacement-intel = scavenger hosts
 
 cm-chatsan-word-survivor = survivor
 cm-chatsan-replacement-survivor = planet tall
 
 cm-chatsan-word-survivors = survivors
-cm-chatsan-replacement-survivors = planet talls
+cm-chatsan-replacement-survivors = planet hosts
 
 cm-chatsan-word-surv = surv
 cm-chatsan-replacement-surv = planet tall
 
 cm-chatsan-word-survs = survs
-cm-chatsan-replacement-survs = planet talls
+cm-chatsan-replacement-survs = planet hosts
 
 cm-chatsan-word-bro = bro
 cm-chatsan-replacement-bro = sister
@@ -772,3 +772,105 @@ cm-chatsan-word-replacement-capped = captured
 
 cm-chatsan-word-phero = phero
 cm-chatsan-word-replacement-phero = pheromone
+
+cm-chatsan-word-batong = batong
+cm-chatsan-word-replacement-batong = daze spit
+
+cm-chatsan-word-batongs = batongs
+cm-chatsan-word-replacement-batongs = daze spits
+
+cm-chatsan-word-batoned = batoned
+cm-chatsan-word-replacement-batoned = daze spitted
+
+cm-chatsan-word-batonged = batonged
+cm-chatsan-word-replacement-batonged = daze spitted
+
+cm-chatsan-word-xover = xover
+cm-chatsan-word-replacement-xover = over
+
+cm-chatsan-word-m13 = m13
+cm-chatsan-word-replacement-m13 = fast spitter
+
+cm-chatsan-word-m63 = m63
+cm-chatsan-word-replacement-m63 = fast spitter
+
+cm-chatsan-word-p90 = p90
+cm-chatsan-word-replacement-p90 = fast spitter
+
+cm-chatsan-word-m54c = m54c
+cm-chatsan-word-replacement-m54c = spitter
+
+cm-chatsan-word-m42a2 = m42a2
+cm-chatsan-word-replacement-m42a2 = scatter spitter
+
+cm-chatsan-word-m34 = m34
+cm-chatsan-word-replacement-m34 = fire spitter
+
+cm-chatsan-word-c4 = c4
+cm-chatsan-word-replacement-c4 = boom node
+
+cm-chatsan-word-ap = ap
+cm-chatsan-word-replacement-ap = armor piercing
+
+cm-chatsan-word-alpha = alpha
+cm-chatsan-word-replacement-alpha = red hosts
+
+cm-chatsan-word-bravo = bravo
+cm-chatsan-word-replacement-bravo = yellow hosts
+
+cm-chatsan-word-charlie = charlie
+cm-chatsan-word-replacement-charlie = purple hosts
+
+cm-chatsan-word-delta = delta
+cm-chatsan-word-replacement-delta = blue hosts
+
+cm-chatsan-word-echo = echo
+cm-chatsan-word-replacement-echo = green hosts
+
+cm-chatsan-word-foxtrot = foxtrot
+cm-chatsan-word-replacement-foxtrot = brown hosts
+
+cm-chatsan-word-thru = thru
+cm-chatsan-replacement-thru = through
+
+cm-chatsan-word-tho = th
+cm-chatsan-replacement-tho = though
+
+cm-chatsan-word-t1 = t1
+cm-chatsan-replacement-t1 = tier 1
+
+cm-chatsan-word-t2 = t2
+cm-chatsan-replacement-t2 = tier 2
+
+cm-chatsan-word-t3 = t3
+cm-chatsan-replacement-t3 = tier 3
+
+cm-chatsan-word-t4 = t4
+cm-chatsan-replacement-t4 = tier 4
+
+cm-chatsan-word-evo = evo
+cm-chatsan-replacement-evo = evolution
+
+cm-chatsan-word-evos = evos
+cm-chatsan-replacement-evos = evolutions
+
+cm-chatsan-word-tax = tax
+cm-chatsan-replacement-tax = build
+
+cm-chatsan-word-taxes = taxes
+cm-chatsan-replacement-taxes = building
+
+cm-chatsan-word-taxing = taxing
+cm-chatsan-replacement-taxing = building
+
+cm-chatsan-word-taxed = taxed
+cm-chatsan-replacement-taxed = built
+
+cm-chatsan-word-pb = pb
+cm-chatsan-replacement-pb = point blank
+
+cm-chatsan-word-slopcade = slopcade
+cm-chatsan-replacement-slopcade = bad cades
+
+cm-chatsan-word-clanker = clanker
+cm-chatsan-replacement-clanker = synthetic

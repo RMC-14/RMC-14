@@ -40,6 +40,7 @@
   id: RMCFigurinePatronFritzVohlkson
   name: Fritz Vohlkson figurine
   description: "A member of the Colony Liaison's security detail. A tacky reward given by We-Ya for 20 years of service."
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: Fritz_Vohlkson
@@ -291,6 +292,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronOrionBlackburn
   name: Orion Blackburn figurine
+  categories: [ HideSpawnMenu ]
   description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
   components:
   - type: Sprite
@@ -319,6 +321,37 @@
     state: kate_gel_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: drink
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Slime
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
+    transferAmounts:
+    - 5
+  - type: RMCFlask
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -620,6 +653,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
+  categories: [ HideSpawnMenu ]
   description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of platinum and tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves.
     She works hard to ensure that her grunts all embrace in victory, alive and happy. She's also open to feedback. She's been accused of a war crime and even eating human organs, but we don't talk about that.:3"
   components:
@@ -630,12 +664,12 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronGives-The-Fish
-  name: Gives-The-Fish figurine
+  id: RMCFigurinePatronFishyMcTuna
+  name: Fishy McTuna figurine
   description: "\"Fishy, where is my goddamn fish?\""
   components:
   - type: Sprite
-    state: gives-the-fish
+    state: fishy_mctuna
   - type: PatronFigurine
     id: 9c5deff6-212d-4578-855e-0afb86a0a910
 
@@ -1410,7 +1444,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronLilianaShorkGodwin
   name: Liliana 'Shork' Godwin figurine
-  description: "SHORK GANG RISE UP!!"
+  description: "Shork Medical Officer on Deck!"
   components:
   - type: Sprite
     state: liliana_shork_godwin
@@ -1874,3 +1908,69 @@
     state: kurt_doc_holiday_lachner
   - type: PatronFigurine
     id: 3b62aa38-f239-4d0d-91d4-94323d48092d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmberFallsLamplight
+  name: Amber 'Falls' Lamplight figurine
+  description: "A photorealistic depiction of the most commonly awoken Dropship Crew Chief. Despite her downfalls, she’s always making an effort to do her job the best she can: whether it be medevacing the injured or… or… uhhh…"
+  components:
+  - type: Sprite
+    state: amber_falls_lamplight
+  - type: PatronFigurine
+    id: 3ecb2df2-ea5f-489f-94fc-60f73fa812ad
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArthurNash
+  name: Arthur Nash figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: arthur_nash
+  - type: PatronFigurine
+    id: 6dd7c705-ba54-4e45-bb47-8d1c32231709
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAguSeal
+  name: Agu Seal figurine
+  description: "Agu Seal stands firm in his tactical vest and tilted beret, carrying himself with calm authority. Agu’s movements are disciplined and precise, every step controlled and deliberate."
+  components:
+  - type: Sprite
+    state: agu_seal
+  - type: PatronFigurine
+    id: 0b0f5346-f2de-4e59-8f32-5d6f7b5882ee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEricLunaheart
+  name: Eric Lunaheart figurine
+  description: "Lunaheart is here to save the day! 3/4 Doctor 1/4 MP is the way!"
+  components:
+  - type: Sprite
+    state: eric_lunaheart
+  - type: PatronFigurine
+    id: 923f5334-8957-4818-9fec-a704eaab0959
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLeahLocaHarding
+  name: Leah 'Loca' Harding figurine
+  description: "Your local kitchen raider, some confuse her with a space-racoon. announce when you approach, she can be skittish and she is armed."
+  components:
+  - type: Sprite
+    state: leah_loca_harding
+  - type: PatronFigurine
+    id: 4f6b4b8d-4477-4690-b0c3-009758301934
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZaydenSoapKirkson
+  name: Zayden 'Soap' Kirkson figurine
+  description: "BATTLE, WE SHALL GIVE THEM WAR!"
+  components:
+  - type: Sprite
+    state: zayden_soap_kirkson
+  - type: PatronFigurine
+    id: e3cf902c-a055-42ed-a3fd-c1267eb795bd

@@ -572,8 +572,8 @@
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
-  name: M276 pattern M40 grenade rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
+  name: M276 pattern 30mm grenade rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the 30mm type grenades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
@@ -593,7 +593,7 @@
 - type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeLarge
-  name: M276 pattern M40 grenade rig Mk. II
+  name: M276 pattern 30mm grenade rig Mk. II
   description: The M276 Mk. II is an upgraded version of the M276 grenade rig, with more storage capacity.
   components:
   - type: Storage
@@ -1258,8 +1258,20 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilledAmmo
+  suffix: Filled, Mateba Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
@@ -1453,8 +1465,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilledAmmo
+  suffix: Filled, Winter Wyvern Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled
+  suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
     contents:
@@ -1721,7 +1745,7 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - Sidearm
+        - RMCNailgunCompact
     - popup: rmc-storage-limit-max-mags
       count: 2
       whitelist:

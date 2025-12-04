@@ -78,6 +78,12 @@
         Blunt: 150
   - type: RMCMesonsNonviewable
   - type: DamageReceivedModifierWhenUnanchored
+  - type: Flammable
+    fireSpread: false
+    maximumFireStacks: 0.5
+    damage:
+      types:
+        Heat: 3.75
 
 - type: entity
   parent: RMCBarricadeUpgradeBase
@@ -185,6 +191,14 @@
     tags:
     - RMCMetalBarricade
 
+- type: entity
+  parent: CMBarricadeMetal
+  id: RMCBarricadeMetalAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
+
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
@@ -208,6 +222,10 @@
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+    - type: Flammable
+      damage:
+        types:
+          Heat: 2.8125
 
 - type: entity
   parent: CMBarricadeMetal
@@ -253,6 +271,10 @@
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+    - type: Flammable
+      damage:
+        types:
+          Heat: 1.875
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity
@@ -413,6 +435,14 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeWireRail
+  id: RMCBarricadeWireRailAltDrawdepth
+  suffix: Layers over Platforms
+  components:
+    - type: Sprite
+      drawdepth: SmallObjects
 
 - type: entity
   parent: RMCBarricadeHandrail

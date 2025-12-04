@@ -181,8 +181,8 @@
         amount: 2
       - id: RMCBeltHolsterRevolver
         amount: 5
-      #- id: M276 M82F Holster Rig
-      #  amount: 2
+      - id: RMCM82FHolster
+        amount: 2
       - id: RMCM276ShotgunShellLoadingRig
         amount: 10
       - id: CMBeltMortar
@@ -276,8 +276,8 @@
         amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
-      #- id: Welding Goggles
-      #  amount: 3
+      - id: RMCWeldingGoggles
+        amount: 3
       - id: CMFireExtinguisherPortable
         amount: 3
       - id: RMCPowerCellHigh
@@ -303,17 +303,17 @@
         boxAmount: 3
         boxSlots: 3
       - id: CMPacketGrenadeHighExplosiveFilled
-        name: M40 HEDP grenade packet
+        name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeIncendiaryFilled
-        name: M40 HIDP grenade packet
+        name: 30mm HIDP grenade packet
         box: RMCGrenadeIncendiary
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeSmokeFilled
-        name: M40 HSDP grenade packet
+        name: 30mm HSDP grenade packet
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
@@ -390,6 +390,10 @@
         amount: 100
     - name: Armor-piercing ammunition
       entries:
+      - id: RMCMagazinePistolM13AP
+        amount: 14
+      - id: RMCMagazinePistolM13ExtAP
+        amount: 6
       - id: CMMagazinePistolM77AP
         amount: 50
       - id: CMMagazineRifleM4SPRAP
@@ -404,8 +408,6 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         amount: 10
-      - id: RMCMagazinePistolM13Drum
-        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM4SPRExt
@@ -457,18 +459,12 @@
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
         box: RMCMagazinePistolM13Ext
-      - id: RMCBoxMagazinePistolM13Drum
-        name: Magazine Box (Drum M13 x 12)
-        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazinePistolM13AP
         name: Magazine Box (M13 AP x 22)
         box: RMCMagazinePistolM13AP
       - id: RMCBoxMagazinePistolM13ExtAP
         name: Magazine Box (Ext M13 AP x 14)
         box: RMCMagazinePistolM13ExtAP
-      - id: RMCBoxMagazinePistolM13DrumAP
-        name: Magazine Box (Drum M13 AP x 14)
-        box: RMCMagazinePistolM13DrumAP
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -500,6 +496,9 @@
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazineRifleM4SPRExt
+        name: Magazine Box (Ext M4SPR x 16)
+        box: CMMagazineRifleM4SPRExt
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
@@ -645,6 +644,8 @@
         amount: 5
       - id: RMCAttachmentLaserSight
         amount: 10
+      - id: RMCAttachmentMicroLaserSight
+        amount: 4
       - id: RMCAttachmentMiniFlamethrower
         amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
@@ -733,6 +734,8 @@
         amount: 20
       - id: CMArmorHelmetM10Medic
         amount: 20
+      - id: RMCArmorVestSquad
+        amount: 15
       - id: RMCArmorM3MediumCarrier
         amount: 15
       - id: RMCArmorM3MediumPadded
