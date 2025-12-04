@@ -555,7 +555,8 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             GetSentryFriendlyFactions(sentryUid),
             customName,
             visionRadius,
-            maxDeviation
+            maxDeviation,
+            GetSentryHumanoidAdded(sentryUid)
         );
     }
 
@@ -665,7 +666,15 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (TryComp<SentryTargetingComponent>(sentry, out var targeting))
             return targeting.FriendlyFactions;
 
-        return new HashSet<string> { "UNMC" };
+        return new HashSet<string>();
+    }
+
+    private HashSet<string> GetSentryHumanoidAdded(EntityUid sentry)
+    {
+        if (TryComp<SentryTargetingComponent>(sentry, out var targeting))
+            return targeting.HumanoidAdded;
+
+        return new HashSet<string>();
     }
 
     protected virtual float GetSentryMaxHealth(EntityUid sentry)

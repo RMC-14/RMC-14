@@ -521,6 +521,13 @@ public sealed class SentryLaptopBui : BoundUserInterface
             if (existingCheckboxes.TryGetValue(faction, out var checkbox))
             {
                 checkbox.Pressed = IsFactionSelected(info.FriendlyFactions, faction, state.AllFactions);
+
+                if (checkbox.Parent is BoxContainer container)
+                {
+                    var label = container.Children.OfType<Label>().FirstOrDefault();
+                    if (label != null)
+                        label.FontColorOverride = GetFactionLabelColor(faction, info);
+                }
             }
         }
     }
@@ -542,7 +549,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
             Margin = new Thickness(2, 1),
             HorizontalExpand = true,
-            MinHeight = 22
+            MinHeight = 22,
+            Name = faction
         };
 
         var checkbox = new CheckBox
@@ -558,7 +566,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
             VerticalAlignment = Control.VAlignment.Center,
             HorizontalExpand = true,
             Margin = new Thickness(5, 0, 0, 0),
-            FontColorOverride = GetFactionColor(faction)
+            FontColorOverride = GetFactionLabelColor(faction, info)
         };
 
         checkbox.OnToggled += args =>
@@ -570,6 +578,14 @@ public sealed class SentryLaptopBui : BoundUserInterface
         container.AddChild(label);
 
         return container;
+    }
+
+    private Color GetFactionLabelColor(string faction, SentryInfo info)
+    {
+        if (info.HumanoidAdded != null && info.HumanoidAdded.Contains(faction))
+            return Color.FromHex("#B180FF");
+
+        return GetFactionColor(faction);
     }
 
     private void SetupSentryCardButtons(SentryCard card, SentryInfo info)

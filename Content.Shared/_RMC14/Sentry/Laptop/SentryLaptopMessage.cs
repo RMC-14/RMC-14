@@ -16,7 +16,8 @@ public record SentryInfo(
     HashSet<string> FriendlyFactions,
     string? CustomName = null,
     float VisionRadius = 5.0f,
-    float MaxDeviation = 75.0f
+    float MaxDeviation = 75.0f,
+    HashSet<string>? HumanoidAdded = null
 );
 
 [Serializable, NetSerializable]
