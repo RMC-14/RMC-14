@@ -254,8 +254,8 @@
         amount: 1
       - id: RMCFulton20
         amount: 1
-      #- id: Sentry Gun Network Laptop
-      #   amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
     - name: Flare and Light

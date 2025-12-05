@@ -49,4 +49,7 @@
   - type: SentryLaptop
   - type: UseDelay
     delay: 0.5
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 2
 

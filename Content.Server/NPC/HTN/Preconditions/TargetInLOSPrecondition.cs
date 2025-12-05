@@ -5,7 +5,6 @@ using Content.Shared.Mobs.Systems; //RMC
 using Content.Shared.Inventory; //RMC
 using Content.Shared.Physics;
 using Robust.Shared.Prototypes; //RMC
-using Content.Shared.Mobs.Components; //RMC
 
 namespace Content.Server.NPC.HTN.Preconditions;
 
