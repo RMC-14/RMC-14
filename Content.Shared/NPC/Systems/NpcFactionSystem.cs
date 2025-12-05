@@ -2,7 +2,6 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Prototypes;
 using System.Collections.Frozen;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Content.Shared.NPC.Systems;
