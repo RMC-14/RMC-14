@@ -2,6 +2,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Prototypes;
 using System.Collections.Frozen;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Content.Shared.NPC.Systems;
@@ -170,6 +171,21 @@ public sealed partial class NpcFactionSystem : EntitySystem
             return;
 
         ent.Comp.Factions.Clear();
+
+        if (dirty)
+            RefreshFactions((ent, ent.Comp));
+    }
+
+    /// <summary>
+    /// RMC
+    /// Sets hostile factions on this entity. overwrites any previous override list
+    /// </summary>
+    public void SetAdditionalHostiles(Entity<NpcFactionMemberComponent?> ent, HashSet<ProtoId<NpcFactionPrototype>> hostiles, bool dirty = true)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        ent.Comp.AddHostileFactions = hostiles;
 
         if (dirty)
             RefreshFactions((ent, ent.Comp));

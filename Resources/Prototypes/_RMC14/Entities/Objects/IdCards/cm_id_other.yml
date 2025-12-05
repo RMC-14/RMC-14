@@ -114,6 +114,10 @@
   id: CMIDCardLiaisonColony
   name: liaison ID card
   components:
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCorporate
 

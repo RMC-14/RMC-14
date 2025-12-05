@@ -16,7 +16,21 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
 
-    private const string SentryHostileToAllFaction = "RMCDumb";
+    private const string SentryExcludedFaction = "RMCDumb";
+    public static readonly Dictionary<string, EntProtoId<IFFFactionComponent>> SentryFactionToIff = new()
+    {
+        { "UNMC", "FactionMarine" },
+        { "CLF", "FactionCLF" },
+        { "SPP", "FactionSPP" },
+        { "Halcyon", "FactionHalcyon" },
+        { "WeYa", "FactionWeYa" },
+        { "Civilian", "FactionSurvivor" },
+        { "RoyalMarines", "FactionRoyalMarines" },
+        { "Bureau", "FactionBureau" },
+        { "TSE", "FactionTSE" }
+    };
+
+    public static readonly HashSet<string> SentryAllowedFactions = SentryFactionToIff.Keys.ToHashSet();
 
     public override void Initialize()
     {
@@ -55,11 +69,13 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         comp.FriendlyFactions.Clear();
         comp.HumanoidAdded.Clear();
 
-        var friendly = factions.Where(f => f != SentryHostileToAllFaction && f != "Humanoid").ToHashSet();
+        var friendly = factions
+            .Where(f => f != SentryExcludedFaction && f != "Humanoid" && SentryAllowedFactions.Contains(f))
+            .ToHashSet();
 
         if (factions.Contains("Humanoid"))
         {
-            foreach (var faction in GetNonXenoFactions())
+            foreach (var faction in GetHumanoidFactions())
             {
                 if (friendly.Add(faction))
                     comp.HumanoidAdded.Add(faction);
@@ -76,7 +92,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
 
     public void ToggleFaction(Entity<SentryTargetingComponent> ent, string faction, bool friendly)
     {
-        if (faction == SentryHostileToAllFaction)
+        if (faction == SentryExcludedFaction)
             return;
 
         if (faction == "Humanoid")
@@ -135,35 +151,46 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
             return;
 
         _faction.ClearFactions((ent, factionMember), dirty: false);
-        _faction.AddFaction((ent, factionMember), SentryHostileToAllFaction, dirty: false);
+        _faction.SetAdditionalHostiles((ent, factionMember), BuildHostileFactions(ent.Comp.FriendlyFactions), dirty: false);
 
-        var friendlyFactions = ent.Comp.FriendlyFactions.ToList();
-        var allFactions = GetFilteredNpcFactions();
+        var friendlyFactions = ent.Comp.FriendlyFactions
+            .Where(f => f != SentryExcludedFaction && SentryAllowedFactions.Contains(f))
+            .ToList();
 
-        var count = 0;
-
-        foreach (var faction in allFactions.Keys)
+        if (friendlyFactions.Count == 0)
         {
-            if (!ent.Comp.FriendlyFactions.Contains(faction))
-                continue;
-
-            count++;
-            var isLast = count == friendlyFactions.Count;
-            _faction.AddFaction((ent, factionMember), faction, dirty: isLast);
+            _faction.ClearFactions((ent, factionMember));
+            UpdateSentryIFF(ent);
+            return;
         }
 
-        if (count == 0)
-            Dirty(ent, factionMember);
+        for (var i = 0; i < friendlyFactions.Count; i++)
+        {
+            var faction = friendlyFactions[i];
+            var isLast = i == friendlyFactions.Count - 1;
+            _faction.AddFaction((ent, factionMember), faction, dirty: isLast);
+        }
 
         UpdateSentryIFF(ent);
     }
 
-    private Dictionary<string, FactionData> GetFilteredNpcFactions()
+    private HashSet<ProtoId<NpcFactionPrototype>> BuildHostileFactions(HashSet<string> friendlyFactions)
     {
+        var hostiles = new HashSet<ProtoId<NpcFactionPrototype>>();
         var allFactions = _faction.GetFactions();
-        var dummy = allFactions.GetValueOrDefault(SentryHostileToAllFaction, new FactionData());
-        var filtered = allFactions.Where(x => dummy.Hostile.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
-        return filtered;
+
+        foreach (var faction in allFactions.Keys)
+        {
+            if (faction == SentryExcludedFaction)
+                continue;
+
+            if (friendlyFactions.Contains(faction))
+                continue;
+
+            hostiles.Add(faction);
+        }
+
+        return hostiles;
     }
 
     private void UpdateSentryIFF(Entity<SentryTargetingComponent> ent)
@@ -174,36 +201,19 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         _iff.ClearUserFactions((ent, userIFF));
 
         var factionToIFF = GetFactionToIFFMapping();
-        var addedCount = 0;
 
         foreach (var faction in ent.Comp.FriendlyFactions)
         {
-            if (faction == SentryHostileToAllFaction)
-                continue;
-
             if (!factionToIFF.TryGetValue(faction, out var iffFaction))
                 continue;
 
             _iff.AddUserFaction((ent, userIFF), iffFaction);
-            addedCount++;
         }
     }
 
     private Dictionary<string, EntProtoId<IFFFactionComponent>> GetFactionToIFFMapping()
     {
-        return new Dictionary<string, EntProtoId<IFFFactionComponent>>
-        {
-            { "UNMC", "FactionMarine" },
-            { "RMCXeno", "FactionXeno" },
-            { "CLF", "FactionCLF" },
-            { "SPP", "FactionSPP" },
-            { "Halcyon", "FactionHalcyon" },
-            { "WeYa", "FactionWeYa" },
-            { "Civilian", "FactionSurvivor" },
-            { "RoyalMarines", "FactionRoyalMarines" },
-            { "Bureau", "FactionBureau" },
-            { "TSE", "FactionTSE" }
-        };
+        return SentryFactionToIff;
     }
 
     public void ApplyDeployerFactions(EntityUid sentry, EntityUid deployer)
@@ -219,10 +229,11 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
 
         foreach (var faction in deployerFaction.Factions)
         {
-            if (faction == SentryHostileToAllFaction)
+            if (faction == SentryExcludedFaction)
                 continue;
 
-            newFactions.Add(faction);
+            if (SentryAllowedFactions.Contains(faction))
+                newFactions.Add(faction);
         }
 
         targeting.OriginalFaction = deployerFaction.Factions.First();
@@ -230,29 +241,22 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         SetFriendlyFactions((sentry, targeting), newFactions);
     }
 
-    public IEnumerable<string> GetNonXenoFactions()
+    public IEnumerable<string> GetHumanoidFactions()
     {
-        var all = _faction.GetFactions();
-        foreach (var faction in all.Keys)
-        {
-            if (faction == "RMCXeno" || faction == SentryHostileToAllFaction)
-                continue;
-
-            yield return faction;
-        }
+        return SentryAllowedFactions;
     }
 
     public bool ContainsAllNonXeno(HashSet<string> friendlyFactions)
     {
-        var nonXeno = GetNonXenoFactions().ToList();
-        return nonXeno.All(friendlyFactions.Contains);
+        var allowed = GetHumanoidFactions().ToList();
+        return allowed.All(friendlyFactions.Contains);
     }
 
     public void ToggleHumanoid(Entity<SentryTargetingComponent> ent, bool friendly)
     {
         if (friendly)
         {
-            foreach (var faction in GetNonXenoFactions())
+            foreach (var faction in GetHumanoidFactions())
             {
                 if (ent.Comp.FriendlyFactions.Add(faction))
                     ent.Comp.HumanoidAdded.Add(faction);

@@ -87,7 +87,6 @@
     state: normal_uac_sentry_handheld
   - type: NpcFactionMember
     factions:
-    - RMCDumb
     - UNMC
   - type: UserIFF
     factions:
@@ -181,7 +180,6 @@
     originalFaction: WeYa
   - type: NpcFactionMember
     factions:
-    - RMCDumb
     - WeYa
   - type: UserIFF
     factions:
@@ -202,7 +200,6 @@
     originalFaction: SPP
   - type: NpcFactionMember
     factions:
-    - RMCDumb
     - SPP
   - type: UserIFF
     factions:
@@ -504,7 +501,6 @@
           On: { state: normal_uac_flamer_on }
   - type: NpcFactionMember
     factions:
-    - RMCDumb
     - UNMC
   - type: UserIFF
     factions:

@@ -113,9 +113,9 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     private Dictionary<string, string> GetFactionList()
     {
         var all = _faction.GetFactions();
-        var dummy = all.GetValueOrDefault("RMCDumb", new FactionData());
-        var hostile = all.Where(x => dummy.Hostile.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Key);
-        return hostile;
+        var allowed = SharedSentryTargetingSystem.SentryAllowedFactions;
+        var filtered = all.Where(x => allowed.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Key);
+        return filtered;
     }
 
     private void OnViewCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopViewCameraBuiMsg args)

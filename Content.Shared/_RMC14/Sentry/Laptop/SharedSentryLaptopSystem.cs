@@ -482,7 +482,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
                 defaultFactions.Add("UNMC");
         }
 
-        foreach (var faction in _sentryTargeting.GetNonXenoFactions())
+        foreach (var faction in _sentryTargeting.GetHumanoidFactions())
             defaultFactions.Add(faction);
 
         _sentryTargeting.SetFriendlyFactions((sentry, targeting), defaultFactions);
