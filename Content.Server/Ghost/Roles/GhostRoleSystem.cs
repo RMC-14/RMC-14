@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server._RMC14.Ghost.Roles;
+using Content.Server._RMC14.Xenonids.Banish;
 using Content.Server.Administration.Logs;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
@@ -20,6 +21,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Players;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
