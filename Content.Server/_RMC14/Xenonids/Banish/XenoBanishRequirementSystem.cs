@@ -1,6 +1,6 @@
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
-using Content.Shared.Roles;
+using Content.Shared._RMC14.Xenonids;
 using JetBrains.Annotations;
 using Robust.Shared.Player;
 
@@ -21,12 +21,9 @@ public sealed class XenoBanishRequirementSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        // Check if this is a xeno ghost role
-        if (!ent.Comp.RoleName.Contains("Larva", StringComparison.OrdinalIgnoreCase) &&
-            !ent.Comp.RoleName.Contains("Facehugger", StringComparison.OrdinalIgnoreCase))
-        {
+        // Check if this is a xeno ghost role by checking if the entity has XenoComponent
+        if (!HasComp<XenoComponent>(ent))
             return;
-        }
 
         // Check if player is banished
         if (!_banish.CanTakeXenoRole(args.Player.UserId))

@@ -10,7 +10,7 @@ rmc-banish-confirm-simple = Are you sure you want to banish {$name} from the hiv
 
 Read Banishment Rules
 rmc-banish-reason-prompt = Provide a reason for banishing {$name}. This will be announced to the entire hive!
-rmc-banish-must-provide-reason = You must provide a reason for banishing this xenomorph.
+rmc-banish-must-provide-reason = You must provide a reason for banishing this xenomorph. Read banishment rules.
 rmc-banish-success = {$name} has been banished from the hive.
 rmc-banish-no-valid-targets = No valid xenomorphs to banish.
 
