@@ -20,10 +20,11 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      takeOne: CMHandheldDefense
+      choices:  { CMHandheldDefense : 1 }
       entries:
     #    CMJIMAPlantedFlag
       - id: RMCSentry
+        recommended: true
       - id: RMCTesla
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
@@ -233,7 +234,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: RMCArmorVestCombatTechnician
+      - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
