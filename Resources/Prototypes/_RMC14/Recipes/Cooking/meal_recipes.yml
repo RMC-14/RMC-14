@@ -185,32 +185,6 @@
     RMCFoodMango: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBanhMi
-  name: banh mi recipe
-  result: FoodBanhMi
-  time: 15
-  group: Savory
-  reagents:
-    Mayo: 5
-  solids:
-    FoodBreadBaguette: 1
-    FoodCarrot: 1
-    FoodMeat: 1
-    FoodCabbage: 1
-
-- type: microwaveMealRecipe
-  id: RecipeChickenParm
-  name: chicken parm recipe
-  result: FoodChickenParmHero
-  time: 15
-  group: Savory
-  solids:
-    FoodBreadBaguette: 1
-    FoodTomato: 1
-    FoodMeatChickenFried: 1
-    FoodCheeseSlice: 1
-
-- type: microwaveMealRecipe
   id: RecipeYorkshirePudding
   name: yorkshire pudding recipe
   result: FoodYorkshirePudding
@@ -438,3 +412,68 @@
     FoodButterSlice: 1
     FoodPieMeatSlice: 1
     FoodPotato: 1
+
+# Sandvich
+
+- type: microwaveMealRecipe
+  id: RecipeBanhMi
+  name: banh mi recipe
+  result: FoodBanhMi
+  time: 15
+  group: Savory
+  reagents:
+    Mayo: 5
+  solids:
+    FoodBreadBaguette: 1
+    FoodCarrot: 1
+    FoodMeat: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenParm
+  name: chicken parm recipe
+  result: FoodChickenParmHero
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodTomato: 1
+    FoodMeatChickenFried: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeMeatballSub
+  name: meatball sub recipe
+  result: FoodMeatballSub
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodTomato: 1
+    FoodMeatMeatball: 2
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeGabagool
+  name: Gabagool sandwich recipe
+  result: FoodGabagool
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodChiliPepper: 1
+    FoodMeatCutlet: 2
+    FoodCheeseSlice: 1
+  reagents:
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCheesesteak
+  name: cheesesteak recipe
+  result: FoodCheesesteak
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodMeatCutlet: 3
+    FoodCheeseSlice: 1
