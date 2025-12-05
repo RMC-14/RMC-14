@@ -68,6 +68,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCIgniterComponent, UniqueActionEvent>(OnIgniterUniqueAction);
         SubscribeLocalEvent<RMCIgniterComponent, IsHotEvent>(OnIgniterToggle);
         SubscribeLocalEvent<RMCIgniterComponent, AttemptShootEvent>(OnIgniterAttemptShoot);
+        SubscribeLocalEvent<RMCIgniterComponent, ExaminedEvent>(OnIgniterUniqueActionExamine, before: [typeof(SharedGunSystem)]);
 
         SubscribeLocalEvent<RMCBroilerComponent, GetItemActionsEvent>(OnBroilerGetItemActions);
         SubscribeLocalEvent<RMCBroilerComponent, RMCBroilerActionEvent>(OnBroilerAction);
@@ -247,6 +248,14 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         if (!ent.Comp.Enabled)
             args.Cancelled = true;
+    }
+
+    private void OnIgniterUniqueActionExamine(Entity<RMCIgniterComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.Locked)
+            return;
+
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
     private void UpdateAppearance(Entity<RMCFlamerAmmoProviderComponent> ent)

@@ -21,4 +21,7 @@ public sealed partial class RMCIgniterComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId PopupKey = "rmc-flamer-ignite-first-with";
+
+    [DataField, AutoNetworkedField]
+    public LocId ExamineText = "rmc-flamer-ignite-action-examine";
 }

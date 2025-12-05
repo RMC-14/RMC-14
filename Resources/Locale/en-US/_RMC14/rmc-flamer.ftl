@@ -1,6 +1,7 @@
 ﻿rmc-flamer-tank-not-potent-enough = This chemical is not potent enough to be used in a flamethrower!
 rmc-flamer-ignite-first = You need to ignite the gun with {$key} first!
 rmc-flamer-ignite-first-with = You need to ignite the gun first!
+rmc-flamer-ignite-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to toggle the pilot light.[/bold]
 rmc-flamer-refill = You refill {THE($refilled)}
 rmc-flamer-too-close = You are too close to your target!
 rmc-broiler-switch-tank = Now using the tank in slot {$n}.

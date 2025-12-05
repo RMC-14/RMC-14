@@ -65,6 +65,17 @@
   suffix: Whiteout
   components:
   - type: RMCMagneticItem
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerFL3Whiteout
+        insertSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerFL3
 
 - type: entity
   parent: RMCTankFlamer
@@ -80,6 +91,9 @@
     - state: flametank_strip2
     - state: flametank_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: RMCFlamerTank
+    maxIntensity: 70
+    maxRange: 8
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
