@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using Content.Server._RMC14.Xenonids.Banish;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.GameTicking;
 using Content.Shared._RMC14.Rules;
@@ -96,6 +97,17 @@ public sealed class JoinXenoSystem : EntitySystem
 
         if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
+
+        // Check if player is banished from taking xeno roles (server-side only)
+        if (_net.IsServer && TryComp(user, out ActorComponent? actor))
+        {
+            var banishSystem = EntityManager.System<XenoBanishServerSystem>();
+            if (!banishSystem.CanTakeXenoRole(actor.PlayerSession.UserId))
+            {
+                _popup.PopupEntity("You are currently unable to take xeno roles.", user, user, PopupType.MediumCaution);
+                return false;
+            }
+        }
 
         // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
         if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)

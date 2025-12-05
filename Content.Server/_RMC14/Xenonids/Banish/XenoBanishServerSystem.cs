@@ -67,6 +67,8 @@ public sealed class XenoBanishServerSystem : EntitySystem
         // Schedule automatic unbanish after 30 minutes
         Timer.Spawn(TimeSpan.FromMinutes(30), () =>
         {
+            _banishedPlayers.Remove(userId);
+            
             if (Exists(xeno) && TryComp(xeno, out XenoBanishComponent? comp) && comp.Banished)
             {
                 var banishSystem = EntityManager.System<XenoBanishSystem>();

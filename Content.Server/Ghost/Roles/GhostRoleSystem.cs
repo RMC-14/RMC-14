@@ -708,6 +708,17 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
         }
 
+        // Check requirements
+        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
+        RaiseLocalEvent(uid, ref reqEv);
+        if (reqEv.Cancelled)
+        {
+            if (reqEv.Reason != null)
+                _popupSystem.PopupEntity(reqEv.Reason, uid, args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
+            args.TookRole = false;
+            return;
+        }
+
         if (string.IsNullOrEmpty(component.Prototype))
             throw new NullReferenceException("Prototype string cannot be null or empty!");
 
@@ -752,6 +763,17 @@ public sealed class GhostRoleSystem : EntitySystem
         if (!TryComp(uid, out GhostRoleComponent? ghostRole) ||
             !CanTakeGhost(uid, ghostRole))
         {
+            args.TookRole = false;
+            return;
+        }
+
+        // Check requirements
+        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
+        RaiseLocalEvent(uid, ref reqEv);
+        if (reqEv.Cancelled)
+        {
+            if (reqEv.Reason != null)
+                _popupSystem.PopupEntity(reqEv.Reason, uid, args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
             args.TookRole = false;
             return;
         }
