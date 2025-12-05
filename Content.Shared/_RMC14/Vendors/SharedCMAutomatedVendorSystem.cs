@@ -1326,6 +1326,117 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     }
 
     /// <summary>
+    /// Clears any partial stack for an entry, effectively completing it to a full stack.
+    /// Partial stacks are cleared when the vendor is at max stock.
+    /// </summary>
+    /// <param name="vendor">The vendor entity.</param>
+    /// <param name="entry">The vendor entry to clear partial stacks for.</param>
+    /// <returns>True if a partial stack was cleared, false otherwise.</returns>
+    public bool TryClearPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
+    {
+        // Get the stack type for this entry
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return false;
+
+        var stackTypeId = entryStack.StackTypeId;
+
+        // Check if there's a partial stack to clear
+        if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
+            partialAmount == 0)
+            return false;
+
+        // Clear the partial stack (complete it to a full stack)
+        vendor.Comp.PartialProductStacks[stackTypeId] = 0;
+        Dirty(vendor);
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to fill a partial stack for an entry via automatic restocking (e.g., medical supply link).
+    /// If the entry has a partial stack, it will be filled towards a full stack.
+    /// If filling completes a full stack and there's room, entry.Amount is increased.
+    /// </summary>
+    /// <param name="vendor">The vendor entity.</param>
+    /// <param name="entry">The vendor entry to try filling partial stacks for.</param>
+    /// <param name="fillAmount">How much to add to the partial stack (defaults to filling completely).</param>
+    /// <returns>True if any partial stack was modified, false otherwise.</returns>
+    public bool TryFillPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry, int? fillAmount = null)
+    {
+        // Get the stack type for this entry
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return false;
+
+        var stackTypeId = entryStack.StackTypeId;
+
+        // Check if there's a partial stack to fill
+        if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
+            partialAmount == 0)
+            return false;
+
+        var maxStackSize = _stack.GetMaxCount(entryStack);
+        if (maxStackSize <= 0)
+            return false;
+
+        // Calculate how much to fill
+        var amountToFill = fillAmount ?? (maxStackSize - partialAmount);
+        if (amountToFill <= 0)
+            return false;
+
+        var newPartialAmount = partialAmount + amountToFill;
+
+        // Check if we complete a full stack
+        if (newPartialAmount >= maxStackSize)
+        {
+            // We're completing to a full stack
+            var remainder = newPartialAmount - maxStackSize;
+
+            // Check if we have room to increase entry.Amount (completing partial doesn't need new slot)
+            // The partial was already counted in entry.Amount when it was created
+            vendor.Comp.PartialProductStacks[stackTypeId] = remainder;
+            Dirty(vendor);
+            return true;
+        }
+        else
+        {
+            // Just adding to partial, not completing
+            vendor.Comp.PartialProductStacks[stackTypeId] = newPartialAmount;
+            Dirty(vendor);
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Gets the partial stack amount for a vendor entry, if any.
+    /// </summary>
+    /// <param name="vendor">The vendor entity.</param>
+    /// <param name="entry">The vendor entry to check.</param>
+    /// <returns>The partial stack amount, or 0 if no partial stack exists.</returns>
+    public int GetPartialStackAmount(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
+    {
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return 0;
+
+        return vendor.Comp.PartialProductStacks.GetValueOrDefault(entryStack.StackTypeId, 0);
+    }
+
+    /// <summary>
+    /// Gets the max stack size for a vendor entry, if it's a stackable item.
+    /// </summary>
+    /// <param name="entry">The vendor entry to check.</param>
+    /// <returns>The max stack size, or 0 if not a stackable item.</returns>
+    public int GetMaxStackSize(CMVendorEntry entry)
+    {
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return 0;
+
+        return _stack.GetMaxCount(entryStack);
+    }
+
+    /// <summary>
     /// Validates that an item meets all requirements for restocking into the vendor.
     /// All applicable validation checks must pass for the item to be restocked.
     /// Uses short-circuit evaluation: returns false on first failed check.
