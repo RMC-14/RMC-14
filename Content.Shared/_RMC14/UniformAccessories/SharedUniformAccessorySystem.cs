@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -19,6 +20,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -63,6 +65,25 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail"), args.User, args.User, PopupType.SmallCaution);
             _hands.TryDrop(args.User, ent, checkActionBlocker: false);
             return;
+        }
+
+        // If this accessory is a mask-type accessory and the user already has something in
+        // their mask or neck slots, prevent putting it into the uniform accessory holder.
+        if (accessory.Category == "Mask" && args.User != EntityUid.Invalid)
+        {
+            var blocked = false;
+
+            if (_inventory.TryGetSlotEntity(args.User, "mask", out _))
+                blocked = true;
+
+            if (!blocked && _inventory.TryGetSlotEntity(args.User, "neck", out _))
+                blocked = true;
+
+            if (blocked)
+            {
+                _popup.PopupClient(Loc.GetString("inventory-component-can-equip-does-not-fit"), args.User, args.User, PopupType.SmallCaution);
+                return;
+            }
         }
 
         if (!ent.Comp.AllowedCategories.Contains(accessory.Category))
