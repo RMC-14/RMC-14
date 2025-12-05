@@ -103,26 +103,6 @@ public sealed class XenoBanishServerSystem : EntitySystem
         _delayedLarvaSpawns.Clear();
     }
 
-    public bool CanTakeXenoRole(Guid userId)
-    {
-        // Check if player is currently banished or has delayed larva spawn
-        if (_banishedPlayers.ContainsKey(userId) || _delayedLarvaSpawns.ContainsKey(userId))
-            return false;
-
-        return true;
-    }
-
-    public TimeSpan? GetDelayedLarvaTime(Guid userId)
-    {
-        if (!_delayedLarvaSpawns.TryGetValue(userId, out var spawnTime))
-            return null;
-
-        var remaining = spawnTime - _timing.CurTime;
-        return remaining > TimeSpan.Zero ? remaining : null;
-    }
-
-
-
     public override void Update(float frameTime)
     {
         var currentTime = _timing.CurTime;

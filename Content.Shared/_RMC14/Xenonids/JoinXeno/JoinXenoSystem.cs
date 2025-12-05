@@ -97,8 +97,6 @@ public sealed class JoinXenoSystem : EntitySystem
         if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
 
-
-
         // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
         if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
         {
@@ -124,7 +122,6 @@ public sealed class JoinXenoSystem : EntitySystem
             return;
         }
 
-        // Check if player can join xeno (includes banishment check on server)
         if (!CanJoinXeno(ent))
             return;
 

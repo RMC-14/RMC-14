@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server._RMC14.Ghost.Roles;
-using Content.Server._RMC14.Xenonids.Banish;
 using Content.Server.Administration.Logs;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
@@ -591,6 +590,8 @@ public sealed class GhostRoleSystem : EntitySystem
                 ? _timing.CurTime.Add(raffle.Countdown)
                 : TimeSpan.MinValue;
 
+
+
             roles.Add(new GhostRoleInfo
             {
                 Identifier = id,
@@ -710,17 +711,6 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
         }
 
-        // Check requirements
-        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
-        RaiseLocalEvent(uid, ref reqEv);
-        if (reqEv.Cancelled)
-        {
-            if (reqEv.Reason != null)
-                _popupSystem.PopupEntity(reqEv.Reason, reqEv.Target ?? uid, reqEv.Target ?? args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
-            args.TookRole = false;
-            return;
-        }
-
         if (string.IsNullOrEmpty(component.Prototype))
             throw new NullReferenceException("Prototype string cannot be null or empty!");
 
@@ -765,17 +755,6 @@ public sealed class GhostRoleSystem : EntitySystem
         if (!TryComp(uid, out GhostRoleComponent? ghostRole) ||
             !CanTakeGhost(uid, ghostRole))
         {
-            args.TookRole = false;
-            return;
-        }
-
-        // Check requirements
-        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
-        RaiseLocalEvent(uid, ref reqEv);
-        if (reqEv.Cancelled)
-        {
-            if (reqEv.Reason != null)
-                _popupSystem.PopupEntity(reqEv.Reason, reqEv.Target ?? uid, reqEv.Target ?? args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
             args.TookRole = false;
             return;
         }
@@ -854,15 +833,6 @@ public sealed class GhostRoleSystem : EntitySystem
             var msg = Loc.GetString("ghostrole-spawner-select", ("mode", verbText));
             _popupSystem.PopupEntity(msg, uid, userUid.Value);
         }
-    }
-
-    // RMC14: Set requirements for a ghost role
-    public void SetRequirements(EntityUid uid, HashSet<JobRequirement>? requirements, GhostRoleComponent? component = null)
-    {
-        if (!Resolve(uid, ref component, false))
-            return;
-
-        component.Requirements = requirements;
     }
 
     public void OnGhostRoleRadioMessage(Entity<GhostRoleMobSpawnerComponent> entity, ref GhostRoleRadioMessage args)
