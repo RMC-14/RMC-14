@@ -1110,7 +1110,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!ValidateItemForRestock(vendor, item, user, valid, matchingEntry.Id))
+        if (!ValidateItemForRestock(vendor, item, user, valid))
             return false;
         // Try partial stack restocking first (sandbags, materials, gauze, etc.)
         if (TryRestockPartialStack(vendor, item, user, valid, matchingEntry))
@@ -1334,12 +1334,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <param name="item">The item to validate.</param>
     /// <param name="user">The user attempting to restock.</param>
     /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
-    /// <param name="prototypeId">The prototype ID of the item being sold in the vendor (for stack comparison).</param>
     /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
-    private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
+    private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
         return ValidateReagentContainers(item, user, valid)
-               && ValidateStackAmount(item, user, valid, prototypeId)
                && (!HasComp<GunComponent>(item) || ValidateGun(item, user, valid))
                && ValidateAmmunition(vendor, item, user, valid)
                && ValidateEquipment(item, user, valid);
@@ -1401,44 +1399,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         return true;
-    }
-
-    /// <summary>
-    /// Validates that stackable items have the correct stack amount for restocking.
-    /// </summary>
-    /// <remarks>
-    /// Stack validation rules:
-    /// - Folding barricades: Must be exactly the prototype amount (stored in stacks of 3)
-    /// - All other stackable items: Any amount allowed (partial stacks are tracked and accumulated)
-    /// Partial stack logic is handled in TryRestockPartialStack.
-    /// </remarks>
-    private bool ValidateStackAmount(EntityUid item, EntityUid user, bool valid, EntProtoId prototypeId)
-    {
-        if (!TryComp<StackComponent>(item, out var stack) ||
-            !_prototypes.TryIndex(prototypeId, out var prototype) ||
-            !prototype.TryGetComponent(out StackComponent? protoStack, _compFactory))
-            return true;
-
-        var itemPrototypeId = MetaData(item).EntityPrototype?.ID ?? string.Empty;
-        if (itemPrototypeId == "CMBarricadeFolding")
-            return ValidateExactStackCount(item, stack, protoStack, user, valid);
-
-        return true;
-    }
-
-    private bool ValidateExactStackCount(EntityUid item, StackComponent stack, StackComponent protoStack, EntityUid user, bool valid)
-    {
-        if (stack.Count == protoStack.Count)
-            return true;
-
-        RestockValidationPopup(valid,
-            "rmc-vending-machine-restock-stack-wrong-amount",
-            item,
-            user,
-            ("item", item),
-            ("required", protoStack.Count),
-            ("current", stack.Count));
-        return false;
     }
 
     /// <summary>
