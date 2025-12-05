@@ -31,20 +31,10 @@ public sealed class XenoBanishRequirementSystem : EntitySystem
         // Check if player is banished
         if (!_banish.CanTakeXenoRole(args.Player.UserId))
         {
-            args.Reason = "You are currently unable to take xeno roles.";
-            args.Cancelled = true;
+            args = args with { Cancelled = true, Reason = "You are currently unable to take xeno roles." };
         }
     }
 }
 
-public sealed class GhostRoleRequirementsCheckEvent : EntityEventArgs
-{
-    public ICommonSession Player;
-    public bool Cancelled;
-    public string? Reason;
-
-    public GhostRoleRequirementsCheckEvent(ICommonSession player)
-    {
-        Player = player;
-    }
-}
+[ByRefEvent]
+public record struct GhostRoleRequirementsCheckEvent(ICommonSession Player, bool Cancelled = false, string? Reason = null);

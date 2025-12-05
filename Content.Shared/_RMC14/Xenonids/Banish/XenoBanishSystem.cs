@@ -1,9 +1,7 @@
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -26,8 +24,6 @@ public sealed class XenoBanishSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
