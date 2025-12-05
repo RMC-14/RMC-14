@@ -258,7 +258,9 @@
         maxVol: 60
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30
+          Quantity: 16
+        - ReagentId: Protein
+          Quantity: 10
   - type: SliceableFood
     slice: FoodChickenParmHalf
     count: 2
@@ -286,13 +288,15 @@
         maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 15
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 5
 
 - type: entity
   name: meatball sub
   parent: CMFoodBase
   id: FoodMeatballSub
-  description: Now thats a sandwich, fuggedaboutit!
+  description: Made with the secrets of Death Kwon Do!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -311,7 +315,9 @@
         maxVol: 60
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30
+          Quantity: 16
+        - ReagentId: Protein
+          Quantity: 10
   - type: SliceableFood
     slice: FoodMeatballSubHalf
     count: 2
@@ -320,7 +326,7 @@
   name: meatball sub half
   parent: CMFoodBase
   id: FoodMeatballSubHalf
-  description: Better than eating a grilled cheese off the radiator.
+  description: It's enough to make a grown marine cry.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -339,13 +345,15 @@
         maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 15
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 5
 
 - type: entity
   name: gabagool sandwich
   parent: CMFoodBase
   id: FoodGabagool
-  description: Now thats a sandwich, fuggedaboutit!
+  description: Woke up this morning, got yourself a sandwich.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -373,7 +381,7 @@
   name: gabagool sandwich half
   parent: CMFoodBase
   id: FoodGabagoolHalf
-  description: Gabagool? OVAH HEEYAH!
+  description: Gabagool? Over here!!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -398,7 +406,7 @@
   name: cheesesteak
   parent: CMFoodBase
   id: FoodCheesesteak
-  description: Now thats a sandwich, fuggedaboutit!
+  description: If your hands aren't greasy holding it, is it really a cheesesteak?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -416,7 +424,9 @@
         maxVol: 60
         reagents:
         - ReagentId: Nutriment
-          Quantity: 30
+          Quantity: 16
+        - ReagentId: Protein
+          Quantity: 10
   - type: SliceableFood
     slice: FoodCheesesteakHalf
     count: 2
@@ -425,7 +435,7 @@
   name: cheesesteak half
   parent: CMFoodBase
   id: FoodCheesesteakHalf
-  description: Gabagool? OVAH HEEYAH!
+  description: Served wit-out onions.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -443,7 +453,9 @@
         maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 15
+          Quantity: 8
+        - ReagentId: Protein
+          Quantity: 5
 
 - type: entity
   name: yorkshire pudding
