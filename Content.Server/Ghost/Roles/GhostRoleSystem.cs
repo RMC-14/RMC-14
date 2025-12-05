@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server._RMC14.Ghost.Roles;
+using Content.Server._RMC14.Xenonids.Banish;
 using Content.Server.Administration.Logs;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
@@ -51,6 +52,7 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private uint _nextRoleIdentifier;
@@ -708,6 +710,16 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
         }
 
+        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
+        RaiseLocalEvent(uid, ref reqEv);
+        if (reqEv.Cancelled)
+        {
+            if (reqEv.Reason != null && reqEv.Target is { } target)
+                _popupSystem.PopupEntity(reqEv.Reason, target, target);
+            args.TookRole = false;
+            return;
+        }
+
         if (string.IsNullOrEmpty(component.Prototype))
             throw new NullReferenceException("Prototype string cannot be null or empty!");
 
@@ -752,6 +764,16 @@ public sealed class GhostRoleSystem : EntitySystem
         if (!TryComp(uid, out GhostRoleComponent? ghostRole) ||
             !CanTakeGhost(uid, ghostRole))
         {
+            args.TookRole = false;
+            return;
+        }
+
+        var reqEv = new GhostRoleRequirementsCheckEvent(args.Player);
+        RaiseLocalEvent(uid, ref reqEv);
+        if (reqEv.Cancelled)
+        {
+            if (reqEv.Reason != null && reqEv.Target is { } target)
+                _popupSystem.PopupEntity(reqEv.Reason, target, target);
             args.TookRole = false;
             return;
         }
