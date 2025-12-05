@@ -195,9 +195,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        if (!_ui.IsUiOpen(laptop, SentryLaptopUiKey.Key))
-            return;
-
         var (color, size) = alertType switch
         {
             SentryAlertType.LowAmmo => ("#CED22B", 14),
@@ -207,8 +204,28 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             _ => ("#88C7FA", 14)
         };
 
+        var uiOpen = _ui.IsUiOpen(laptop, SentryLaptopUiKey.Key);
         var alert = new SentryAlertEvent(GetNetEntity(sentry), alertType, message, color, size);
-        _ui.ServerSendUiMessage(laptop, SentryLaptopUiKey.Key, alert);
+        if (uiOpen)
+        {
+            _ui.ServerSendUiMessage(laptop, SentryLaptopUiKey.Key, alert);
+            return;
+        }
+
+        var parent = Transform(laptop).ParentUid;
+        if (!HasComp<PlaceableSurfaceComponent>(parent))
+            return;
+
+        var popupType = alertType switch
+        {
+            SentryAlertType.CriticalHealth => PopupType.LargeCaution,
+            SentryAlertType.Damaged => PopupType.MediumCaution,
+            SentryAlertType.TargetAcquired => PopupType.MediumCaution,
+            SentryAlertType.LowAmmo => PopupType.Medium,
+            _ => PopupType.Medium
+        };
+
+        _popup.PopupEntity(message, laptop, popupType);
     }
 
     private void OnLaptopAfterInteract(Entity<SentryLaptopComponent> laptop, ref AfterInteractEvent args)
