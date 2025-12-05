@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -42,6 +43,13 @@ public sealed class XenoBanishSystem : EntitySystem
         if (queen == target)
         {
             reason = "rmc-banish-cant-banish-self";
+            return false;
+        }
+
+        // RMC14: Can't banish parasites
+        if (HasComp<XenoParasiteComponent>(target))
+        {
+            reason = "rmc-banish-cant-banish-parasite";
             return false;
         }
 
@@ -116,9 +124,9 @@ public sealed class XenoBanishSystem : EntitySystem
         // Message to banished xeno
         if (TryComp(target, out ActorComponent? actor))
         {
-            var msg = "The Queen has banished you from the hive! Other xenomorphs may now attack you freely, but your link to the hivemind remains, preventing you from harming other sisters.";
+            var msg = "The Queen has banished you from the hive! Other xenomorphs may now attack you freely, but your link to the hivemind remains.";
             _rmcChat.ChatMessageToOne(ChatChannel.Local, msg, msg, default, false, actor.PlayerSession.Channel);
-            _popup.PopupEntity(msg, target, PopupType.LargeCaution);
+            _popup.PopupEntity(msg, target, target, PopupType.LargeCaution);
         }
 
         // Remove leader status if banished
@@ -158,7 +166,7 @@ public sealed class XenoBanishSystem : EntitySystem
         {
             var msg = "You have been readmitted to the hive by the Queen.";
             _rmcChat.ChatMessageToOne(ChatChannel.Local, msg, msg, default, false, actor.PlayerSession.Channel);
-            _popup.PopupEntity(msg, target, PopupType.Large);
+            _popup.PopupEntity(msg, target, target, PopupType.Large);
         }
 
         var ev = new XenoReadmittedEvent(target);
@@ -183,7 +191,7 @@ public sealed class XenoBanishSystem : EntitySystem
         {
             var msg = "Your banishment has expired. You are now readmitted to the hive.";
             _rmcChat.ChatMessageToOne(ChatChannel.Local, msg, msg, default, false, actor.PlayerSession.Channel);
-            _popup.PopupEntity(msg, target, PopupType.Large);
+            _popup.PopupEntity(msg, target, target, PopupType.Large);
         }
     }
 

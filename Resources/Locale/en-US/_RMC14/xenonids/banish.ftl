@@ -7,15 +7,14 @@ rmc-banish-choose-xeno = Choose a xenomorph to banish:
 rmc-banish-choose-xeno-prompt = Select a xenomorph to banish from the hive.
 rmc-banish-title = Banishment
 rmc-banish-confirm-simple = Are you sure you want to banish {$name} from the hive?
-
-Read Banishment Rules
-rmc-banish-reason-prompt = Provide a reason for banishing {$name}. This will be announced to the entire hive!
-rmc-banish-must-provide-reason = You must provide a reason for banishing this xenomorph. Read banishment rules.
+rmc-banish-reason-prompt = Provide a reason for banishing {$name}. This will be announced to the entire hive! Read Banishment Rules
+rmc-banish-must-provide-reason = You must provide a reason for banishing this xenomorph.
 rmc-banish-success = {$name} has been banished from the hive.
 rmc-banish-no-valid-targets = No valid xenomorphs to banish.
 
 # Banish Errors
 rmc-banish-cant-banish-self = You cannot banish yourself.
+rmc-banish-cant-banish-parasite = You cannot banish parasites.
 rmc-banish-already-banished = This xenomorph is already banished!
 rmc-banish-different-hive = This xenomorph doesn't belong to your hive!
 rmc-banish-cant-banish-crit = What's the point? They're already about to die.
@@ -31,3 +30,7 @@ rmc-readmit-no-valid-targets = No banished xenomorphs to readmit.
 # Readmit Errors
 rmc-readmit-not-banished = This xenomorph is not banished.
 rmc-readmit-cooldown = You must wait before readmitting this xenomorph.
+
+# Role Taking Prevention
+rmc-banish-cant-take-role = You are currently unable to take xeno roles.
+rmc-banish-cant-take-role-time = You are currently unable to take xeno roles. Time remaining: {$seconds} seconds.

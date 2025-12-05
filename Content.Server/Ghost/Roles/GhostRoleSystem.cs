@@ -716,7 +716,7 @@ public sealed class GhostRoleSystem : EntitySystem
         if (reqEv.Cancelled)
         {
             if (reqEv.Reason != null)
-                _popupSystem.PopupEntity(reqEv.Reason, uid, args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
+                _popupSystem.PopupEntity(reqEv.Reason, reqEv.Target ?? uid, reqEv.Target ?? args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
             args.TookRole = false;
             return;
         }
@@ -775,7 +775,7 @@ public sealed class GhostRoleSystem : EntitySystem
         if (reqEv.Cancelled)
         {
             if (reqEv.Reason != null)
-                _popupSystem.PopupEntity(reqEv.Reason, uid, args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
+                _popupSystem.PopupEntity(reqEv.Reason, reqEv.Target ?? uid, reqEv.Target ?? args.Player.AttachedEntity ?? uid, PopupType.MediumCaution);
             args.TookRole = false;
             return;
         }
@@ -854,6 +854,15 @@ public sealed class GhostRoleSystem : EntitySystem
             var msg = Loc.GetString("ghostrole-spawner-select", ("mode", verbText));
             _popupSystem.PopupEntity(msg, uid, userUid.Value);
         }
+    }
+
+    // RMC14: Set requirements for a ghost role
+    public void SetRequirements(EntityUid uid, HashSet<JobRequirement>? requirements, GhostRoleComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false))
+            return;
+
+        component.Requirements = requirements;
     }
 
     public void OnGhostRoleRadioMessage(Entity<GhostRoleMobSpawnerComponent> entity, ref GhostRoleRadioMessage args)

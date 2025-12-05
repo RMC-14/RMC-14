@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Xenonids;
+using Content.Server._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.GameTicking;
@@ -47,6 +48,10 @@ public sealed class XenoBanishServerSystem : EntitySystem
     private void OnBanishedMobStateChanged(Entity<XenoBanishComponent> ent, ref MobStateChangedEvent args)
     {
         if (!ent.Comp.Banished || args.NewMobState != MobState.Dead)
+            return;
+
+        // RMC14: Lesser drones don't give larva when banished
+        if (HasComp<XenoHiveCoreRoleComponent>(ent.Owner))
             return;
 
         // When a banished xeno dies, add a burrowed larva after 5 minutes
