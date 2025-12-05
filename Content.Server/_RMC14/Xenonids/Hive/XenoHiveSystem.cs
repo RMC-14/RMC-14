@@ -49,7 +49,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
-        SubscribeLocalEvent<JoinBurrowedLarvaAttemptEvent>(OnJoinBurrowedLarvaAttempt);
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
@@ -105,22 +104,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private void OnBurrowedSurgeShutdown(Entity<HijackBurrowedSurgeComponent> hive, ref ComponentShutdown args)
     {
         _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive, Loc.GetString("rmc-xeno-burrowed-surge-end"));
-    }
-
-    private void OnJoinBurrowedLarvaAttempt(ref JoinBurrowedLarvaAttemptEvent ev)
-    {
-        if (!_banish.CanTakeXenoRole(ev.Session.UserId))
-        {
-            var delay = _banish.GetDelayedLarvaTime(ev.Session.UserId);
-            var msg = delay.HasValue 
-                ? $"You are currently unable to take xeno roles. Time remaining: {(int)delay.Value.TotalSeconds} seconds."
-                : "You are currently unable to take xeno roles.";
-            
-            if (ev.Session.AttachedEntity is { } ghost)
-                _popup.PopupEntity(msg, ghost, ghost);
-            
-            ev.Cancelled = true;
-        }
     }
 
     public override void Update(float frameTime)

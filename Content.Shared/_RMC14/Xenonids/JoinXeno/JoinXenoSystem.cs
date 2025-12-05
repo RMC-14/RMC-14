@@ -122,9 +122,6 @@ public sealed class JoinXenoSystem : EntitySystem
             return;
         }
 
-        if (!CanJoinXeno(ent))
-            return;
-
         _hive.JoinBurrowedLarva((hive.Value, hiveComp), actor.PlayerSession);
     }
 

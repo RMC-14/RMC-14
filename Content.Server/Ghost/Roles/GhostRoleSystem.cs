@@ -51,7 +51,6 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private uint _nextRoleIdentifier;
@@ -589,8 +588,6 @@ public sealed class GhostRoleSystem : EntitySystem
             var raffleEndTime = raffle is not null
                 ? _timing.CurTime.Add(raffle.Countdown)
                 : TimeSpan.MinValue;
-
-
 
             roles.Add(new GhostRoleInfo
             {
