@@ -176,21 +176,6 @@ public sealed partial class NpcFactionSystem : EntitySystem
             RefreshFactions((ent, ent.Comp));
     }
 
-    /// <summary>
-    /// RMC
-    /// Sets hostile factions on this entity. overwrites any previous override list
-    /// </summary>
-    public void SetAdditionalHostiles(Entity<NpcFactionMemberComponent?> ent, HashSet<ProtoId<NpcFactionPrototype>> hostiles, bool dirty = true)
-    {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return;
-
-        ent.Comp.AddHostileFactions = hostiles;
-
-        if (dirty)
-            RefreshFactions((ent, ent.Comp));
-    }
-
     public IEnumerable<EntityUid> GetNearbyHostiles(Entity<NpcFactionMemberComponent?, FactionExceptionComponent?> ent, float range)
     {
         if (!Resolve(ent, ref ent.Comp1, false))
