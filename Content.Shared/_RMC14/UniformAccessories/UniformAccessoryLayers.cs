@@ -6,4 +6,5 @@ namespace Content.Shared._RMC14.UniformAccessories;
 public enum UniformAccessoryLayer
 {
     Base,
+    Mask,
 }
