@@ -2,10 +2,10 @@
   parent: CMJobBase
   id: RMCPMCWhiteout
   name: rmc-job-name-pmc-whiteout
-  description: rmc-ghost-role-information-pmc-whiteout-description
+  description: rmc-ghost-role-information-deathsquad-description
   playTimeTracker: RMCJobPMCWhiteout
   ranks:
-    RMCRankWeYaOperator: []
+    RMCRankWeYaWhiteout: []
   startingGear: RMCJobPMCWhiteout
   icon: RMCJobIconPMCWhiteout
   joinNotifyCrew: false
@@ -56,48 +56,14 @@
         types:
           Blunt: 35
     - type: Synth
-      welderDamageToRepair:
-        types:
-          Blunt: -15
-          Piercing: -15
-          Slash: -15
-      cableCoilDamageToRepair:
-        types:
-          Caustic: -15
-          Heat: -15
-          Shock: -15
-          Cold: -15
-      addComponents:
-      # TODO darksight instead of night vision
-      - type: NightVision
-        innate: true
-      - type: EyeProtection
-      - type: WoundableUntreatable
-      - type: Insulated
-      - type: RMCLeapProtection
-        inherentStunDuration: 3
-      - type: CMArmor
-        immuneToAP: true
-      - type: RandomMetadata
-        nameSegments:
-        - RMCNamesGreek
-        - RMCNamesNumbers
-        nameFormat: name-format-ert
-      removeComponents:
-      - type: CMSurgeryTarget
-      - type: Infectable
-      - type: Hunger
-      - type: Thirst
-      - type: Perishable
-      - type: ThermalRegulator
-      - type: Stamina
-      - type: DamageForceSay
-      - type: Dna
-      - type: InjectableSolution
-      - type: IVDripTarget
-      - type: RMCSuicide
-        damage: { }
       canUseGuns: true
+    - type: CMArmor
+      immuneToAP: true
+    - type: RandomMetadata
+      nameSegments:
+      - RMCNamesGreek
+      - RMCNamesNumbers
+      nameFormat: name-format-ert
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-whiteout
   hidden: true
@@ -127,7 +93,7 @@
     hair: HairBald # TODO RMC14 - This should probably make the species human too, and make them have no facial hair.
   - type: GhostRole
     name: rmc-ghost-name-pmc-whiteout
-    description: rmc-ghost-role-information-pmc-whiteout-description
+    description: rmc-ghost-role-information-deathsquad-description
     rules: rmc-ghost-role-information-pmc-whiteout-rules
     reregister: false
     job: RMCPMCWhiteout

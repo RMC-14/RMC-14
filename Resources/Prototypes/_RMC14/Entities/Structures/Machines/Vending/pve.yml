@@ -51,22 +51,48 @@
         amount: 5
       - id: RMCWebbingDropPouch
         amount: 5
+      - id: RMCWebbingDropPouchBlack
+        amount: 5
     - name: Armor
       entries:
       - id: ArmorHelmetM10
         amount: 15
-      - id: RMCArmorM3MediumVariants
+      - id: RMCArmorM3PVE
         name: Standard M3 Pattern Armor Set
         amount: 15
+      - id: RMCArmorM3PVERidged
+        name: Ridged M3 Pattern Armor Set
+        amount: 15
+      - id: RMCArmorM3PVESmooth
+        name: Smooth M3 Pattern Armor Set
+        amount: 15
+    - name: Attachable Armor
+      entries:
+      - id: RMCPVEArmorNeckGuard
+        amount: 10
+      - id: RMCPVEArmorShinGuard
+        amount: 10
+      - id: RMCPVEArmorKneeGuard
+        amount: 10
+      - id: RMCPVEArmorGroinPlate
+        amount: 10
+      - id: RMCPVEArmorPads
+        amount: 10
+      - id: RMCPVEArmorBracers
+        amount: 10
     - name: Backpack
       entries:
       - id: CMBackpackMarine
         amount: 15
       - id: CMBackpackMarineTech
         amount: 15
+      - id: RMCSatchelMarineChestrigPVE
+        amount: 15
       - id: CMSatchelMarine
         amount: 15
       - id: RMCSatchelWelder
+        amount: 15
+      - id: RMCSatchelWelderChestrig
         amount: 15
     - name: Restricted Backpack
       entries:
@@ -86,6 +112,10 @@
         amount: 5
       - id: RMCBeltUtilityGeneral
         amount: 5
+    - name: Restricted Belts
+      entries:
+      - id: RMCScabbardShotgunWaist
+        amount: 1
     - name: Pouches
       entries:
       - id: RMCPouchFirstAid
@@ -123,7 +153,15 @@
         amount: 15
       - id: RMCMaskScarfGray
         amount: 10
+      - id: RMCMaskScarfGreen
+        amount: 10
+      - id: RMCMaskScarfTan
+        amount: 10
+      - id: RMCMaskScarfRed
+        amount: 10
       - id: CMMaskCoif
+        amount: 10
+      - id: RMCMaskKeffiyehBlack
         amount: 10
     - name: Miscellaneous
       entries:
@@ -135,6 +173,8 @@
         amount: 10
       - id: RMCGogglesM1A1Ballistic
         name: Ballistic Goggles, laser-shaded (brown)
+        amount: 10
+      - id: RMCWeldingGoggles
         amount: 10
       - id: RMCPatchSolarDevils
         amount: 15
@@ -191,7 +231,10 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
+        name: Blowtorch
+        amount: 2
+      - id: RMCBinocularsPVE
         amount: 1
     - name: Explosives
       entries:
@@ -216,11 +259,31 @@
     - name: Sidearms
       entries:
       - id: RMCWeaponPistolM77
-        amount: 2
+        amount: 5
       - id: CMWeaponPistolM1984
-        amount: 2
+        amount: 5
       - id: RMCWeaponPistolM82F
+        amount: 3
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentExtendedCompensator
+        amount: 5
+      - id: RMCAttachmentAngledGrip
+        amount: 5
+      - id: RMCAttachmentVerticalGrip
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 5
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 2
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 1
+      - id: RMCAttachmentTwoPointSling
+        amount: 15
     - name: Miscellaneous
       entries:
       - id: CMFireExtinguisher
@@ -234,13 +297,8 @@
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
         amount: 5
-      - id: RMCAttachmentRailFlashlight
-        amount: 5
-      - id: RMCAttachmentTwoPointSling
-        amount: 5
       - id: RMCM5Bayonet
         amount: 25
-
 # PMC
 
 - type: entity
@@ -301,7 +359,7 @@
         amount: 30
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO
+      - id: RMCBackpackRTOPMC
         amount: 1
     - name: Belts
       entries:
@@ -377,7 +435,7 @@
     sections:
     - name: Food
       entries:
-      - id: CMMRE # TODO RMC14 - PMC rations
+      - id: RMCMREWeYa
         name: MRE
         amount: 5
       - id: RMCBoxMRE  # TODO RMC14 - PMC rations
@@ -413,7 +471,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -537,7 +595,7 @@
         amount: 15
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO
+      - id: RMCBackpackRTOSPP
         amount: 1
     - name: Belts
       entries:
@@ -624,10 +682,10 @@
     sections:
     - name: Food
       entries:
-      - id: CMMRE #todo spp mres
+      - id: RMCMRESPP
         name: MRE
         amount: 5
-      - id: RMCBoxMRE
+      - id: RMCBoxMRE # TODO RMC14 - SPP MRE
         name: MRE Box
         amount: 1
     - name: Medical
@@ -660,7 +718,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:
@@ -1078,7 +1136,7 @@
       - id: CMMultitool
         name: Multitool
         amount: 5
-      - id: CMWelder
+      - id: RMCWelderPVE
         amount: 1
     - name: Explosives
       entries:

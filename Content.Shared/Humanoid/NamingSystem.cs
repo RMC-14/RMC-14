@@ -41,6 +41,9 @@ namespace Content.Shared.Humanoid
                 case SpeciesNaming.LastFirst: // this is for Rodentia
                     return Loc.GetString("namepreset-lastfirst",
                         ("last", GetLastName(speciesProto)), ("first", GetFirstName(speciesProto, gender)));
+                case SpeciesNaming.FirstLastCombined: // this is for avali
+                    return Loc.GetString("rmc-namepreset-firstlastcombined",
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto)));
                 case SpeciesNaming.FirstLast:
                 default:
                     return Loc.GetString("namepreset-firstlast",
