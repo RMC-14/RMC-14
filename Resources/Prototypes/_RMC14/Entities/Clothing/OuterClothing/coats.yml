@@ -979,7 +979,7 @@
 
 - type: entity
   parent: RMCCoatSnowSurvivor
-  id: RMCCoatSnowSurvivorCMB
+  id: RMCCoatSnowSurvivorCMBDeputy
   name: CMB deputy parka
   description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
   components:
