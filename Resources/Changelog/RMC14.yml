@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed barricades not preventing weeds from spreading past them.
-    type: Fix
-  - message: Adjusted the spread delay of hive weeds(3s > 1.25s), hardy weeds(3s >
-      3.125s), and regular weeds(3s > 3.33s)
-    type: Fix
-  id: 2109
-  time: '2025-08-06T03:55:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7225
-- author: Dygon
-  changes:
   - message: Platforms, barricades and open doors/shutters/podlocks no longer block
       resin structures.
     type: Fix
@@ -4629,5 +4619,12 @@
   id: 2609
   time: '2025-12-06T09:08:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8544
+- author: Whisper
+  changes:
+  - message: Added naming guidelines for Skrell and Feroxi.
+    type: Add
+  id: 2610
+  time: '2025-12-06T19:00:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8585
 Name: RMC14
 Order: -1
