@@ -16,8 +16,6 @@
       map: ["enum.StorageFillLayers.Fill"]
       visible: false
   - type: Item
-    sprite: Objects/Tools/matches.rsi
-    heldPrefix: matchbox
     size: Tiny
   - type: Clothing
     slots:
@@ -71,6 +69,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Matches/match.rsi
     state: match_unlit
+  - type: Item
+    heldPrefix: unlit
+  - type: BurnStateVisuals
+    unlitIcon: match_unlit
+    litIcon: match_lit
+    burntIcon: match_burnt
 
 - type: entity
   name: paper match
@@ -81,3 +85,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Matches/paper.rsi
     state: match_unlit
+  - type: Item
+    heldPrefix: unlit
+  - type: BurnStateVisuals
+    unlitIcon: match_unlit
+    litIcon: match_lit
+    burntIcon: match_burnt

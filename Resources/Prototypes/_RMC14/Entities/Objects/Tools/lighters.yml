@@ -57,6 +57,14 @@
     slots:
     - suitstorage
   - type: RMCLighter
+  - type: ToggleableLightVisuals
+    inhandVisuals:
+      left:
+      - state: zippoon-inhand-left
+        shader: unshaded
+      right:
+      - state: zippoon-inhand-right
+        shader: unshaded
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/zippo.rsi
