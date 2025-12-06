@@ -908,19 +908,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
-# Snow
-
-- type: entity
-  parent: RMCBaseJacket
-  id: RMCCoatSnow
-  name: snow suit
-  description: A standard snow suit. It can protect the wearer from extreme cold.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
-
 # Chance's Claim
 
 - type: entity
@@ -944,3 +931,115 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
+
+# Snow
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSnow
+  name: snow suit
+  description: A standard snow suit. It can protect the wearer from extreme cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 20
+    explosionArmor: 0
+  # TODO give temperature protection
+  # TODO 10 internal damage armor
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowSurvivor
+  name: robust snow suit
+  description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
+  - type: CMHardArmor
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorSecurity
+  name: security parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/security.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/security.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorNavy
+  name: navy parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/navy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/navy.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorYellow
+  name: yellow parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/yellow.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorGreen
+  name: green parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/green.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorPurple
+  name: purple parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/purple.rsi
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowSoviet
+  name: soviet snowcoat
+  description: A winter coat made in some desolate snowplanet. This wintercoat was made from the fur of local wildlife which donated their fur for the greater good of SPP!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/soviet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/soviet.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowLiaison
+  name: liaison's wintercoat
+  description: A Weston-Yamada winter coat. Only the best comfort for the liaison in a cold environment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi

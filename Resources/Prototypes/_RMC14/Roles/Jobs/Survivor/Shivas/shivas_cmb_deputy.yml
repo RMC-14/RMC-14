@@ -1,0 +1,17 @@
+- type: job
+  parent: CMSurvivorCMBDeputy
+  id: RMCSurvivorShivasCMBDeputy
+  name: rmc-job-name-survivor-cmb-deputy
+  startingGear: RMCGearSurvivorShivasCMBDeputy
+  spawnMenuRoleName: CMB Deputy (Shivas Survivor)
+  camouflageStartingGear: null
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorShivasCMBDeputy
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivorSecurity
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMC
