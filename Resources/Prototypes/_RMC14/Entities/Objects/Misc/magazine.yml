@@ -179,8 +179,86 @@
   parent: RMCMagazineWeYaOrrery
   id: RMCMagazineWeYaOrreryN258
   name: WeYa Orrery Issue No.258.
-  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a colony surrounded by trees on the shore of an ocean, massive mountains towering over it, with the headline 'The Creation of a Home'
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a colony surrounded by trees on the shore of an ocean, massive mountains towering over it, with the headline 'Brick by Brick; How Colonies are Forged.'
   components:
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-orrery-258
 
+# La Voz
+- type: entity
+  parent: BaseItem
+  id: RMCMagazineLaVoz34
+  name: La Voz Issue No.34.
+  description: An SPP produced magazine. The cover displays two clever-looking individuals, facing each other over a chessboard with the headline 'The Duel of Minds'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+    state: icon-3
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-34
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz57
+  name: La Voz Issue No.57.
+  description: An SPP produced magazine. The cover features a UN MRE, with a spread of MRE packages around it.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-57
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz100
+  name: La Voz Issue No.100.
+  description: An SPP produced magazine. The cover features an artistic picture of various people of the SPP, from workers to soldiers, standing side by side. Above them is the SPP flag, flying proudly, and the headline 'Anniversary 100, Our Thanks to You.'
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-100
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz112
+  name: La Voz Issue No.112.
+  description: An SPP produced magazine. The cover features a very important looking SPP individual shaking hands with a TSE dignitary. The headline reads 'Peace, Diplomacy, and Hope; Resolution over GD 432'.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-112
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz126
+  name: La Voz Issue No.126.
+  description: An SPP produced magazine. The cover features a hardened yet happy guerilla fighter underneath the flag of the SPP. The headline reads 'Casting Off the Chains! Freedom for SV-6583b'.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-126
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz138
+  name: La Voz Issue No.138.
+  description: An SPP produced magazine. The cover features a Vulpkanin in a bulky hazmat suit and geiger counter in their hand, with a massive destroyed reactor in the background. The headline reads 'The New Novosibirsk Incident'.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-138
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz144
+  name: La Voz Issue No.144.
+  description: An SPP produced magazine. The cover features a SPP Naval Infantry sitting on a bunk in the barracks of a military spaceship. Her left leg appears to be artificial. The headlines reads 'Injuries in Service'.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-144
+
+- type: entity
+  parent: RMCMagazineLaVoz34
+  id: RMCMagazineLaVoz159
+  name: La Voz Issue No.159.
+  description: An SPP produced magazine. The cover features a collection of proud people dressed in a variety of sports gear. The headlines reads 'Recent Successes in Sports!'
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lavoz-159
