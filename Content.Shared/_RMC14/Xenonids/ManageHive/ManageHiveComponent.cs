@@ -20,4 +20,10 @@ public sealed partial class ManageHiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan JellyRequiredTime = TimeSpan.FromHours(25);
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 BanishPlasmaCost = 500;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ReadmitPlasmaCost = 100;
 }

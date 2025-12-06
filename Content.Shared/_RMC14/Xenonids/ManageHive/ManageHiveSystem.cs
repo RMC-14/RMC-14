@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -33,6 +34,7 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
+    [Dependency] private readonly XenoBanishSystem _xenoBanish = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
@@ -50,6 +52,13 @@ public sealed class ManageHiveSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveJellyMessageEvent>(OnManageHiveJellyMessage);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveConfirmEvent>(OnManageHiveDevolveConfirm);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveMessageEvent>(OnManageHiveDevolveMessage);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishEvent>(OnManageHiveBanish);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishXenoEvent>(OnManageHiveBanishXeno);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishConfirmEvent>(OnManageHiveBanishConfirm);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveBanishMessageEvent>(OnManageHiveBanishMessage);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitEvent>(OnManageHiveReadmit);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitXenoEvent>(OnManageHiveReadmitXeno);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveReadmitConfirmEvent>(OnManageHiveReadmitConfirm);
 
         Subs.CVar(_config, RMCCVars.RMCJelliesPerQueen, v => _jelliesPerQueen = v, true);
         _jelliesDataset = _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJellies");
@@ -60,7 +69,9 @@ public sealed class ManageHiveSystem : EntitySystem
         // TODO RMC14 other options
         var options = new List<DialogOption>
         {
-            new(Loc.GetString("rmc-hivemanagement-deevolve"), new ManageHiveDevolveEvent())
+            new(Loc.GetString("rmc-hivemanagement-deevolve"), new ManageHiveDevolveEvent()),
+            new(Loc.GetString("rmc-hivemanagement-banish"), new ManageHiveBanishEvent()),
+            new(Loc.GetString("rmc-hivemanagement-readmit"), new ManageHiveReadmitEvent())
         };
 
         if (TryComp(manage, out CommendationGiverComponent? giver) &&
@@ -308,5 +319,164 @@ public sealed class ManageHiveSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private void OnManageHiveBanish(Entity<ManageHiveComponent> manage, ref ManageHiveBanishEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!_xenoPlasma.HasPlasmaPopup(manage.Owner, manage.Comp.BanishPlasmaCost, false))
+            return;
+
+        var choices = new List<DialogOption>();
+        var manageMemberComp = CompOrNull<HiveMemberComponent>(manage);
+        var receivers = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+        while (receivers.MoveNext(out var uid, out _, out var member))
+        {
+            if (!_hive.FromSameHive(manage.Owner, (uid, member)) || uid == manage.Owner)
+                continue;
+
+            if (_xenoBanish.CanBanish(manage.Owner, uid, out _))
+                choices.Add(new DialogOption(Name(uid), new ManageHiveBanishXenoEvent(GetNetEntity(uid))));
+        }
+
+        if (choices.Count == 0)
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-banish-no-valid-targets"), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-banish-choose-xeno"), choices, Loc.GetString("rmc-banish-choose-xeno-prompt"));
+    }
+
+    private void OnManageHiveBanishXeno(Entity<ManageHiveComponent> manage, ref ManageHiveBanishXenoEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!_xenoBanish.CanBanish(manage.Owner, xeno.Value, out var reason))
+        {
+            _popup.PopupCursor(Loc.GetString(reason), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        var confirmMsg = Loc.GetString("rmc-banish-confirm-simple", ("name", Name(xeno.Value)));
+        _dialog.OpenConfirmation(manage, Loc.GetString("rmc-banish-title"), confirmMsg, new ManageHiveBanishConfirmEvent(args.Xeno));
+    }
+
+    private void OnManageHiveBanishConfirm(Entity<ManageHiveComponent> manage, ref ManageHiveBanishConfirmEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!_xenoBanish.CanBanish(manage.Owner, xeno.Value, out var reason))
+        {
+            _popup.PopupCursor(Loc.GetString(reason), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        var ev = new ManageHiveBanishMessageEvent(args.Xeno, "");
+        _dialog.OpenInput(manage, Loc.GetString("rmc-banish-reason-prompt", ("name", Name(xeno.Value))), ev);
+    }
+
+    private void OnManageHiveBanishMessage(Entity<ManageHiveComponent> manage, ref ManageHiveBanishMessageEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (string.IsNullOrWhiteSpace(args.Message))
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-banish-must-provide-reason"), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_xenoBanish.CanBanish(manage.Owner, xeno.Value, out var reason))
+        {
+            _popup.PopupCursor(Loc.GetString(reason), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(manage.Owner, manage.Comp.BanishPlasmaCost))
+            return;
+
+        _xenoBanish.BanishXeno(manage.Owner, xeno.Value, args.Message);
+        _popup.PopupCursor(Loc.GetString("rmc-banish-success", ("name", Name(xeno.Value))), manage, PopupType.Large);
+    }
+
+    private void OnManageHiveReadmit(Entity<ManageHiveComponent> manage, ref ManageHiveReadmitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!_xenoPlasma.HasPlasmaPopup(manage.Owner, manage.Comp.ReadmitPlasmaCost, false))
+            return;
+
+        var choices = new List<DialogOption>();
+        var receivers = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, XenoBanishComponent>();
+        while (receivers.MoveNext(out var uid, out _, out var member, out var banish))
+        {
+            if (!_hive.FromSameHive(manage.Owner, (uid, member)) || uid == manage.Owner)
+                continue;
+
+            if (_xenoBanish.CanReadmit(manage.Owner, uid, out _))
+                choices.Add(new DialogOption(Name(uid), new ManageHiveReadmitXenoEvent(GetNetEntity(uid))));
+        }
+
+        if (choices.Count == 0)
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-readmit-no-valid-targets"), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        _dialog.OpenOptions(manage, Loc.GetString("rmc-readmit-choose-xeno"), choices, Loc.GetString("rmc-readmit-choose-xeno-prompt"));
+    }
+
+    private void OnManageHiveReadmitXeno(Entity<ManageHiveComponent> manage, ref ManageHiveReadmitXenoEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!_xenoBanish.CanReadmit(manage.Owner, xeno.Value, out var reason))
+        {
+            _popup.PopupCursor(Loc.GetString(reason), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        var confirmMsg = Loc.GetString("rmc-readmit-confirm", ("name", Name(xeno.Value)));
+        _dialog.OpenConfirmation(manage, Loc.GetString("rmc-readmit-title"), confirmMsg, new ManageHiveReadmitConfirmEvent(args.Xeno));
+    }
+
+    private void OnManageHiveReadmitConfirm(Entity<ManageHiveComponent> manage, ref ManageHiveReadmitConfirmEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        if (!_xenoBanish.CanReadmit(manage.Owner, xeno.Value, out var reason))
+        {
+            _popup.PopupCursor(Loc.GetString(reason), manage, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(manage.Owner, manage.Comp.ReadmitPlasmaCost))
+            return;
+
+        _xenoBanish.ReadmitXeno(manage.Owner, xeno.Value);
+        _popup.PopupCursor(Loc.GetString("rmc-readmit-success", ("name", Name(xeno.Value))), manage, PopupType.Large);
     }
 }

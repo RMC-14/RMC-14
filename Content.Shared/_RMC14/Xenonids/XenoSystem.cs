@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.ScissorCut;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
@@ -213,8 +214,28 @@ public sealed partial class XenoSystem : EntitySystem
             return;
 
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
-            _mobState.IsDead(target))
+        if (_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target))
+        {
+            // Banished xenos can't attack their hive, but hive can attack banished xenos
+            if (TryComp<XenoBanishComponent>(xeno, out var attackerBanish) && attackerBanish.Banished)
+            {
+                if (!args.Disarm)
+                    args.Cancel();
+                return;
+            }
+            
+            // Allow attacking banished xenos from same hive
+            if (TryComp<XenoBanishComponent>(target, out var targetBanish) && targetBanish.Banished)
+            {
+                return;
+            }
+            
+            if (!args.Disarm)
+                args.Cancel();
+            return;
+        }
+        
+        if (_mobState.IsDead(target))
         {
             if (!args.Disarm)
                 args.Cancel();
