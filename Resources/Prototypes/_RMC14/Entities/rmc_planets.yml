@@ -1,6 +1,6 @@
 - type: entity
   id: RMCPlanetLV624
-  name: LV-624
+  name: LV-624 Lazarus Landing
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/lv624.yml
