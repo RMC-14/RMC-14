@@ -180,6 +180,8 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
+      - id: RMCBackpackRTO
+        replaceSlot: back
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
@@ -260,7 +262,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator, two packs of signal flares and a Radio Telephone pack.
+  description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -269,7 +271,6 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator
