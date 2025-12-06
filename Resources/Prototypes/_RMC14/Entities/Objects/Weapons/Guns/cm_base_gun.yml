@@ -61,6 +61,12 @@
   - type: Projectile
     soundHit:
       path: /Audio/_RMC14/Bullets/bullet_impact1.ogg
+  - type: CauseEmoteOnProjectileHit
+    emote: Hiss
+    rareEmote: XenoRoar
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

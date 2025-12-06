@@ -75,6 +75,9 @@
         volume: -4
   - type: RMCHealthExaminable
   - type: AcidBloodSplash
+    closeSplashRadius: 0.5
+    standardSplashRadius: 1.5
+    gibSplashRadius: 2.5
     damage:
       types:
         Heat: 25
