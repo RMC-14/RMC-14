@@ -4,6 +4,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
@@ -34,11 +36,13 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly ChasmSystem _chasm = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -54,6 +58,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabRequisitionsLogs";
     public override void Initialize()
     {
         base.Initialize();
@@ -119,6 +124,13 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+
+        if(!_prototype.TryIndex(order.Crate, out var prototype))
+            return;
+
+        _core.CreateARESLog(computer.Owner,
+            LogCat,
+            (string)$"{Name(actor)} bought {prototype.Name} for {order.Cost}$");
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)
@@ -162,6 +174,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         comp.Busy = true;
         SetMode(elevator, Preparing, nextMode);
         Dirty(elevator);
+
+        if (nextMode == Raising)
+            _core.CreateARESLog(computer.Owner, LogCat, (string)$"{Name(args.Actor)} raised the requisitions elevator");
+        if (nextMode == Lowering)
+            _core.CreateARESLog(computer.Owner, LogCat, (string)$"{Name(args.Actor)} lowered the requisitions elevator");
     }
 
     private Entity<RequisitionsAccountComponent> GetAccount()

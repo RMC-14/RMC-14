@@ -12,6 +12,7 @@
   - CMAccessDelta
   - CMAccessMarinePrep
   - RMCAccessDatabase
+  - RMCAccessLogs
 
 - type: accessGroup
   id: CMCargoTech
