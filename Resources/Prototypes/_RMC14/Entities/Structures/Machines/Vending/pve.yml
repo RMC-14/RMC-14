@@ -845,10 +845,6 @@
         amount: 15
       - id: RMCSatchelWelder
         amount: 15
-    - name: Restricted Backpack #todo, remove once forecon map is in with mapped RTO.
-      entries:
-      - id: RMCBackpackRTO
-        amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine
