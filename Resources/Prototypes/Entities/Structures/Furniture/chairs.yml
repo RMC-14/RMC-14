@@ -59,6 +59,11 @@
   components:
   - type: Anchorable
   - type: Rotatable
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 1
+    xenoDamage:
+      types:
+        Slash: 51
 
 #Start anchored, cannot be rotated while anchored
 - type: entity
