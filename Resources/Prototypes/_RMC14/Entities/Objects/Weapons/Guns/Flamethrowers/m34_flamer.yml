@@ -128,7 +128,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTankFlamer
-  name: incinerator tank
+  name: M34 incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
   components:
   - type: Sprite

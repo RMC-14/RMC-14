@@ -1,0 +1,44 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropBodybagPile
+  name: bodybag pile
+  description: A grim mound of body bags stacked haphazardly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/bodybag_pile.rsi
+    state: bodybag_pile
+    offset: 0.5, 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.5,0.5"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropBodybagPile
+  id: RMCPropBodybagPileFlipped
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: bodybag_pile2
+
+- type: entity
+  parent: RMCPropBodybagPile
+  id: RMCPropBodybagPileCharred
+  name: charred bodybag pile
+  description: A grim mound of body bags stacked haphazardly, their surfaces blackened and blistered from intense heat. The contents are partially burned.
+  components:
+  - type: Sprite
+    state: bodybag_pile_charred
+
+- type: entity
+  parent: RMCPropBodybagPileCharred
+  id: RMCPropBodybagPileCharredFlipped
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: bodybag_pile_charred2

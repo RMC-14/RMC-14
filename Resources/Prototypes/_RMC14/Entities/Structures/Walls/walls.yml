@@ -636,6 +636,7 @@
 - type: entity
   parent: CMWallJungle
   id: RMCWallJungleStrata
+  suffix: Strata
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/strata_jungle.rsi

@@ -132,6 +132,15 @@
   - type: Foldable
     folded: true
 
+# Open Body bag
+- type: entity
+  parent: CMBodyBag
+  id: RMCBodyBagOpen
+  suffix: Open
+  components:
+  - type: EntityStorage
+    open: True
+
 # Stasis bag
 - type: entity
   parent: RMCBaseStorageBag
