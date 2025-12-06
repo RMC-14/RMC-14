@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(GunIFFSystem))]
+[Access(typeof(GunIFFSystem), typeof(IdModificationConsoleSystem))]
 public sealed partial class ItemIFFComponent : Component
 {
     [DataField, AutoNetworkedField]
