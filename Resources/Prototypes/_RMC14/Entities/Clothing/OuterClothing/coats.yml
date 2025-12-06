@@ -611,6 +611,16 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
 
+- type: entity
+  parent: RMCProvostCoat
+  id: RMCProvostCoatFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
 
 - type: entity
   parent: CMCoatOfficer
