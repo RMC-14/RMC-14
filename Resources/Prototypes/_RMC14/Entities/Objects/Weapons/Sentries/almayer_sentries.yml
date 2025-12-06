@@ -49,7 +49,8 @@
       AggroVisionRadius: !type:Single
         5.5
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: BaseStructure
