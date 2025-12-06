@@ -88,7 +88,9 @@ public sealed class RMCClothingSystem : EntitySystem
             return;
 
         args.Cancel();
-        args.Reason = ent.Comp.DenyReason;
+
+        var denyReason = Loc.GetString(ent.Comp.DenyReason);
+        _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
     }
 
     private void OnDropped(Entity<ClothingComponent> ent, ref DroppedEvent args)
@@ -99,7 +101,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsValid(requiresEquipped.Whitelist, ent.Owner))
+            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, ent.Owner))
             {
                 if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
                     continue;
@@ -109,11 +111,11 @@ public sealed class RMCClothingSystem : EntitySystem
         }
     }
 
-    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist whitelist)
+    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist? whitelist)
     {
         foreach (var held in _hands.EnumerateHeld(uid))
         {
-            if (_whitelist.IsValid(whitelist, held))
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, held))
                 return true;
         }
 
@@ -123,7 +125,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (_whitelist.IsValid(whitelist, contained))
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, contained))
                 return true;
         }
 
