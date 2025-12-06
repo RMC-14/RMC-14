@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCOperatorPVE
   name: rmc-job-name-pmc-standard
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-standard
   playTimeTracker: CMJobPMCOperativePVE
   ranks:
     RMCRankWeYaOperator: []
@@ -33,6 +33,10 @@
         RMCSkillSmartGun: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
