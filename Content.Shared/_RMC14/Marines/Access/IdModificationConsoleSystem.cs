@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using System.Linq;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -132,24 +133,43 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             return;
 
         EnsureComp<ItemIFFComponent>(uid.Value, out var iff);
+        var targetFaction = ent.Comp.Faction;
 
-        if (iff.Faction != ent.Comp.Faction && !args.Revoke)
+        if (!args.Revoke)
         {
-            _iff.SetIdFaction((uid.Value, iff), ent.Comp.Faction);
+            if (!iff.Factions.Contains(targetFaction))
+            {
+                iff.Factions.Add(targetFaction);
+                Dirty(uid.Value, iff);
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Medium,
+                    $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
+            }
+
             ent.Comp.HasIFF = true;
-            _adminLogger.Add(LogType.RMCIdModify,
-                LogImpact.Medium,
-                $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
         }
-        else if (args.Revoke)
+        else
         {
-            _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
-            ent.Comp.HasIFF = false;
-            _adminLogger.Add(LogType.RMCIdModify,
-                LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
-        }
+            var removed = iff.Factions.Remove(targetFaction);
 
+            if (iff.Factions.Count == 0)
+            {
+                _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+            }
+            else if (removed)
+            {
+                Dirty(uid.Value, iff);
+            }
+
+            ent.Comp.HasIFF = false;
+
+            if (removed)
+            {
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Low,
+                    $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
+            }
+        }
 
         Dirty(ent);
     }
@@ -348,8 +368,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (accessComponent.Tags.Contains(ent.Comp.Access) && containerType == ent.Comp.PrivilegedIdSlot)
             ent.Comp.Authenticated = true;
 
+        ent.Comp.HasIFF = false;
         if (TryComp(handItem, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
-            ent.Comp.HasIFF = iff.Faction == ent.Comp.Faction;
+            ent.Comp.HasIFF = iff.Factions.Contains(ent.Comp.Faction);
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         _container.Insert(handItem.Value, container);

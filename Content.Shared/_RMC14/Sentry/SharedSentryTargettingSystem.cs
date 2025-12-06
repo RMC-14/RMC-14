@@ -136,11 +136,8 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     private bool IsFriendlyByIff(EntityUid target)
     {
         _targetIffBuffer.Clear();
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD, _targetIffBuffer);
+        var ev = new GetIFFFactionEvent(SlotFlags.IDCARD, _targetIffBuffer);
         RaiseLocalEvent(target, ref ev);
-
-        if (ev.Faction is { } factionEvent && _friendlyIffBuffer.Contains(factionEvent))
-            return true;
 
         foreach (var targetFaction in _targetIffBuffer)
         {

@@ -110,7 +110,7 @@ public sealed class ScalingSystem : EntitySystem
         var marines = EntityQueryEnumerator<UserIFFComponent, ActorComponent>();
         while (marines.MoveNext(out var marineId, out var userIFF, out _))
         {
-            if (userIFF.Faction != faction)
+            if (!userIFF.Factions.Contains(faction))
                 continue;
 
             if (!_mind.TryGetMind(marineId, out var mindId, out _) ||

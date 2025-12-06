@@ -81,13 +81,13 @@ public sealed class PlantableFlagSystem : EntitySystem
         {
             sound = ent.Comp.RaisedCombatSound;
             if (TryComp(args.User, out UserIFFComponent? userIff) &&
-                userIff.Faction != null)
+                userIff.Factions.Count > 0)
             {
                 var allies = 0;
                 var inRange = _entityLookup.GetEntitiesInRange<UserIFFComponent>(args.User.ToCoordinates(), ent.Comp.AlliesRange);
                 foreach (var inRangeEnt in inRange)
                 {
-                    if (userIff.Faction == inRangeEnt.Comp.Faction)
+                    if (userIff.Factions.Overlaps(inRangeEnt.Comp.Factions))
                         allies++;
 
                     if (allies >= ent.Comp.AlliesRequired)

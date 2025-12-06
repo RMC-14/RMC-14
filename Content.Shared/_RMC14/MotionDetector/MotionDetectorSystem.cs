@@ -12,6 +12,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
+using System.Linq;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -40,6 +42,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = new();
 
     public override void Initialize()
     {
@@ -318,7 +321,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
             var userUid = Transform(uid).ParentUid;
-            var hasFaction = _gunIFF.TryGetFaction(userUid, out var userFaction);
+            var hasFaction = _gunIFF.TryGetFactions((userUid, null), _userFactions);
 
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
@@ -329,7 +332,7 @@ public sealed class MotionDetectorSystem : EntitySystem
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                if (hasFaction && _gunIFF.IsInFaction(tracked.Owner, userFaction))
+                if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
                     continue;
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));

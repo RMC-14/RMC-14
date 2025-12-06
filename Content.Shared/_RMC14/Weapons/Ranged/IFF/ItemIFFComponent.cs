@@ -8,8 +8,5 @@ namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 public sealed partial class ItemIFFComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId<IFFFactionComponent>? Faction;
-
-    [DataField, AutoNetworkedField]
     public HashSet<EntProtoId<IFFFactionComponent>> Factions = new();
 }

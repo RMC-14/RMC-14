@@ -70,18 +70,10 @@ public sealed partial class TargetInLOSPrecondition : HTNPrecondition
         var factions = new HashSet<EntProtoId<IFFFactionComponent>>();
 
         if (_entManager.TryGetComponent(owner, out UserIFFComponent? userIff))
-        {
-            if (userIff.Faction is { } faction)
-                factions.Add(faction);
-
             factions.UnionWith(userIff.Factions);
-        }
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
+        var ev = new GetIFFFactionEvent(SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
         _entManager.EventBus.RaiseLocalEvent(owner, ref ev);
-
-        if (ev.Faction is { } primary)
-            factions.Add(primary);
 
         factions.UnionWith(ev.Factions);
 

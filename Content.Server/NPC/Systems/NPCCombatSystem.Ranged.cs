@@ -242,18 +242,10 @@ public sealed partial class NPCCombatSystem
         var factions = new HashSet<EntProtoId<IFFFactionComponent>>();
 
         if (TryComp<UserIFFComponent>(owner, out var userIff))
-        {
-            if (userIff.Faction is { } faction)
-                factions.Add(faction);
-
             factions.UnionWith(userIff.Factions);
-        }
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
+        var ev = new GetIFFFactionEvent(SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(owner, ref ev);
-
-        if (ev.Faction is { } primary)
-            factions.Add(primary);
 
         factions.UnionWith(ev.Factions);
 
