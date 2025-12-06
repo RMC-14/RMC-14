@@ -14,7 +14,7 @@
   equipment:
     head: RMCHeadUshanka
     mask: CMMaskCoif
-    outerClothing: RMCCoatSnowSurvivor
+    outerClothing: RMCCoatSnowSurvivorSecurity
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMC
 
