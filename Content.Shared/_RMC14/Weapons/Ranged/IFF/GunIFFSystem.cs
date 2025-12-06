@@ -155,9 +155,6 @@ public sealed class GunIFFSystem : EntitySystem
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
-        if (user.Comp.Faction == null && user.Comp.Factions.Count == 0)
-            return false;
-
         var ev = new GetIFFFactionEvent(null, slots, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(user, ref ev);
 
