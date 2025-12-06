@@ -32,4 +32,3 @@ rmc-vending-machine-restock-cassette-player-has-tape = {THE($item)} has a tape i
 rmc-vending-machine-restock-blood-pack-not-full = {THE($item)} is not full. Fill it completely before restocking.
 rmc-vending-machine-restock-power-cell-missing = {THE($item)} needs a power cell installed to be restocked.
 rmc-vending-machine-restock-power-cell-not-charged = {THE($item)}'s power cell needs to be fully charged before restocking.
-rmc-vending-machine-restock-stack-wrong-amount = {THE($item)} must be in stacks of {$required} for restocking. Current amount: {$current}.
