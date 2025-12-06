@@ -307,6 +307,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> RMCMentorHelpSound =
         CVarDef.Create("rmc.mentor_help_sound", "/Audio/_RMC14/Effects/Admin/mhelp.ogg", CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<string> RMCPreferredNightVisionMode =
+        CVarDef.Create("rmc.preferred_night_vision_mode", "Half", CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> RMCMentorChatSound =
         CVarDef.Create("rmc.mentor_chat_sound", "/Audio/Items/pop.ogg", CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 

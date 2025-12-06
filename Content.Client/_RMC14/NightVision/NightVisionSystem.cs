@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Examine;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
+using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.NightVision;
 
@@ -17,6 +19,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<NightVisionComponent> _nvQuery;
@@ -34,6 +37,16 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void OnNightVisionAttached(Entity<NightVisionComponent> ent, ref LocalPlayerAttachedEvent args)
     {
+        if (_entity.HasComponent<XenoComponent>(ent))
+        {
+            var preferredMode = _cfg.GetCVar(RMCCVars.RMCPreferredNightVisionMode);
+            if (Enum.TryParse<NightVisionState>(preferredMode, out var mode))
+            {
+                ent.Comp.State = mode;
+                Dirty(ent);
+            }
+        }
+
         NightVisionChanged(ent);
     }
 
