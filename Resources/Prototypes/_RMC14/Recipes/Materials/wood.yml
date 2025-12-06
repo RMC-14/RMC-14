@@ -32,10 +32,67 @@
   doAfterTime: 2
   materialCost: 5
 
+# Wooden Crates
 - type: rmcConstruction
-  id: RMCWoodenCrateBuild
-  name: wooden crate
+  id: RMCWoodenCrateList
+  name: wooden crates (5 wooden plank) # cost named manually since lists won't name costs otherwise
   prototype: RMCCrateWoodenBuildable
+  listed:
+  - RMCWoodenCrateBuild
+  - RMCDividerConstruction
+  - RMCAlphaWoodenCrateBuild
+  - RMCBravoWoodenCrateBuild
+  - RMCCharlieWoodenCrateBuild
+  - RMCDeltaWoodenCrateBuild
+  - RMCEchoWoodenCrateBuild
+  - RMCFoxtrotWoodenCrateBuild
+
+- type: rmcConstruction
+  id: RMCWoodenCrateBuildBase
+  prototype: RMCCrateWoodenBuildable
+  abstract: true
   noRotate: true
   doAfterTime: 2
   materialCost: 5
+
+- type: rmcConstruction
+  id: RMCWoodenCrateBuild
+  parent: RMCWoodenCrateBuildBase
+  name: wooden crate
+  prototype: RMCCrateWoodenBuildable
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: alpha wooden crate
+  id: RMCAlphaWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableAlpha
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: bravo wooden crate
+  id: RMCBravoWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableBravo
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: charlie wooden crate
+  id: RMCCharlieWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableCharlie
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: delta wooden crate
+  id: RMCDeltaWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableDelta
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: echo wooden crate
+  id: RMCEchoWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableEcho
+
+- type: rmcConstruction
+  parent: RMCWoodenCrateBuildBase
+  name: foxtrot wooden crate
+  id: RMCFoxtrotWoodenCrateBuild
+  prototype: RMCCrateWoodenBuildableFoxtrot
