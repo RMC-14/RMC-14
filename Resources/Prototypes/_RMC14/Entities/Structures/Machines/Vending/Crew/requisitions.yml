@@ -90,8 +90,8 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
-      #  amount: 4
+      - id: RMCWhitePhosphorus
+        amount: 4
       - id: CMGrenadeSmoke
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
@@ -106,8 +106,8 @@
         amount: 4
       - id: RMCBatonSlugHIRR
         amount: 8
-      #- id: M40 MFHS Metal Foam Grenade
-      #  amount: 6
+      - id: RMCGrenadeCustomMetalFoam
+        amount: 6
       - id: RMCExplosivePlastic
         amount: 3
       - id: RMCExplosiveBreachingCharge
