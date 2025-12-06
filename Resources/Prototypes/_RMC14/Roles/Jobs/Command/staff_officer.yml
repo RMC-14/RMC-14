@@ -11,6 +11,9 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 3600 # 1 hour
   ranks:
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
