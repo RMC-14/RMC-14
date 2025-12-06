@@ -1,0 +1,219 @@
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechSurplusPMCPVE
+  name: PMC Uniform Vendor
+  description: An automated rack hooked up to a small storage of standard PMC uniforms.
+  suffix: PVE, PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessWeYa"
+    hackable: true
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: CMBootsBlack
+        name: Combat Boots
+        amount: 15
+      - id: RMCJumpsuitVeteranPMCNoWebbing
+        name: PMC Uniform
+        amount: 15
+      - id: RMCHandsVeteran
+        name: Combat Gloves
+        amount: 15
+      - id: RMCHeadsetDistressPMCPVE
+        name: PMC Radio Headset
+        amount: 15
+      - id: RMCCameraGearPMC
+        name: Mk3 TOCU headcam
+        amount: 15
+    - name: Webbings
+      entries:
+      - id: CMWebbingBlack
+        name: Webbing, Black
+        amount: 10
+      - id: RMCWebbingLegPouchBlack
+        name: Leg Pouch, Black
+        amount: 10
+      - id: RMCWebbingDropPouch
+        amount: 5
+    - name: Armor
+      entries:
+      - id: RMCArmorHelmetPMCTactical
+        amount: 15
+        name: tactical helmet (Helmet Light)
+      - id: RMCArmorM4PMCNoLight
+        name: M4 pattern PMC armor (No Suitlight)
+        amount: 15
+      - id: CMArmorM4PMCLight
+        name: M4 pattern light PMC armor (Suitlight)
+        amount: 15
+    - name: Backpack
+      entries:
+      - id: RMCSatchelPMC
+        amount: 30
+    - name: Restricted Backpack
+      entries:
+      - id: RMCBackpackRTOPMC
+        amount: 1
+    - name: Belts
+      entries:
+      - id: CMBeltMarine
+        amount: 15
+      - id: RMCBeltGrenade
+        amount: 10
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCBeltHolsterRevolver
+        amount: 15
+      - id: RMCM82FHolster
+        amount: 5
+      - id: RMCBeltUtilityGeneral
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstAid
+        amount: 15
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+        amount: 15
+      - id: RMCPouchMagazine
+        amount: 15
+      - id: RMCPouchGeneralMedium
+        amount: 15
+      - id: RMCPouchMagazinePistol
+        amount: 15
+      - id: RMCPouchPistol
+        amount: 15
+    - name: Restricted Pouches
+      entries:
+      - id: RMCPouchConstruction
+        amount: 1
+      - id: RMCPouchExplosive
+        amount: 1
+      - id: RMCPouchFirstResponder
+        amount: 2
+      - id: RMCPouchMagazinePistolLarge
+        amount: 2
+      - id: RMCPouchToolsFill
+        amount: 1
+      - id: RMCPouchFuelTank
+        amount: 1
+    - name: Mask
+      entries:
+      - id: RMCMaskCoifPMC
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallistic
+        name: Ballistic Goggles
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
+      - id: ArmorHelmetPMC
+        amount: 15
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCColMarTechUtilitiesPMCPVE
+  suffix: PVE, PMC
+  name: PMC Automated Utilities Squad Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any PMC Operator.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessWeYa"
+    hackable: true
+    sections:
+    - name: Food
+      entries:
+      - id: RMCMREWeYa
+        name: MRE
+        amount: 5
+      - id: RMCBoxMRE  # TODO RMC14 - PMC rations
+        name: MRE Box
+        amount: 1
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 15
+      - id: CMOintment10
+        amount: 15
+      - id: CMEmergencyAutoInjector
+        name: Emergency Autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+    - name: Tools
+      entries:
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: CMScrewdriver
+        amount: 5
+      - id: CMWirecutter
+        amount: 5
+      - id: CMCrowbar
+        amount: 5
+      - id: CMWrench
+        amount: 5
+      - id: CMMultitool
+        name: Multitool
+        amount: 5
+      - id: RMCWelderPVE
+        amount: 1
+    - name: Explosives
+      entries:
+      - id: RMCExplosivePlastic
+        amount: 2
+      - id: RMCExplosiveBreachingCharge
+        amount: 2
+    - name: Flare and Light
+      entries:
+      - id: RMCFlashlight
+        amount: 5
+      - id: RMCBoxFlashlights
+        name: Box of Flashlights
+        amount: 1
+      - id: RMCBoxPackFlare
+        name: Box of Flares
+        amount: 1
+      - id: CMPackFlare
+        amount: 10
+      - id: RMCBoxPackFlareCAS
+        amount: 1
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77
+        amount: 2
+      - id: RMCMK80
+        amount: 2
+      - id: RMCWeaponPistolM82F
+        amount: 1
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisher
+        name: Extinguisher
+        amount: 5
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 1
+      - id: CMRollerBed
+        amount: 2
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        amount: 5
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentTwoPointSling
+        amount: 5
+      - id: RMCM5Bayonet
+        amount: 25
