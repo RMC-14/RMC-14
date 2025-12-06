@@ -1343,16 +1343,36 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Validates reagent containers.
-    /// Checks flamer tanks for correct fuel type and fill level and if blood packs are full.
-    /// Reagent containers from We-Ya-Med Plus(bottles, hyposprays, etc.) are handled by the refilling system before restocking.
+    /// Checks flamer tanks for correct fuel type and fill level, blood packs are full,
+    /// and refillable solution containers (autoinjectors, bottles, etc.) are full.
     /// </summary>
     private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
     {
+        if (TryComp<CMRefillableSolutionComponent>(item, out var refillable) && !ValidateRefillableSolution(item, refillable, user, valid))
+            return false;
+
         if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank) && !ValidateFlamerTank(item, flamerTank, user, valid))
             return false;
 
         if (TryComp<BloodPackComponent>(item, out var bloodPack) && !ValidateBloodPack(item, bloodPack, user, valid))
             return false;
+
+        return true;
+    }
+
+    private bool ValidateRefillableSolution(EntityUid item, CMRefillableSolutionComponent refillable, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(item, refillable.Solution, out _, out var solution))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", item, user, ("item", item));
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-refillable-not-full", item, user, ("item", item));
+            return false;
+        }
 
         return true;
     }
