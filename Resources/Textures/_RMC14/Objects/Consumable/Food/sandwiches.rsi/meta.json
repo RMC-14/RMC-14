@@ -1,0 +1,41 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Sandwich sprites by SurfinNinja",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "banh-mi"
+        },
+        {
+            "name": "banh-mi-half"
+        },
+        {
+            "name": "chicken-parm-hero"
+        },
+        {
+            "name": "chicken-parm-half"
+        },
+        {
+            "name": "meatball-sub"
+        },
+        {
+            "name": "meatball-sub-half"
+        },
+        {
+            "name": "gabagool"
+        },
+        {
+            "name": "gabagool-half"
+        },
+        {
+            "name": "cheesesteak"
+        },
+        {
+            "name": "cheesesteak-half"
+        }
+    ]
+}
