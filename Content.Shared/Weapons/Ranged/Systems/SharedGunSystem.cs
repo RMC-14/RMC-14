@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
@@ -93,6 +94,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
+    [Dependency] private readonly WeaponControllerSystem _weaponController = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -203,6 +205,11 @@ public abstract partial class SharedGunSystem : EntitySystem
             gunComp = gun;
             return true;
         }
+
+        //RMC14
+        if (_weaponController.TryGetControlledWeapon(entity, out gunEntity, out gunComp))
+            return true;
+        //
 
         return false;
     }
@@ -335,6 +342,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         var fromCoordinates = Transform(user).Coordinates;
+
+        //RMC14
+        var shotOriginEv = new BeforeAttemptShootEvent();
+        RaiseLocalEvent(user, ref shotOriginEv);
+
+        if (shotOriginEv.Handled)
+            fromCoordinates = shotOriginEv.Origin;
+        //
+
         var attemptEv = new AttemptShootEvent(user, null, fromCoordinates, toCoordinates);
         RaiseLocalEvent(gunUid, ref attemptEv);
 

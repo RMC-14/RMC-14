@@ -1,4 +1,5 @@
-﻿using Content.Shared.Camera;
+﻿using Content.Shared._RMC14.Emplacements;
+using Content.Shared.Camera;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
@@ -50,6 +51,9 @@ public partial class SharedScopeSystem
 
     private void OnParentChanged(Entity<ScopingComponent> ent, ref EntParentChangedMessage args)
     {
+        if (HasComp<WeaponControllerComponent>(ent))
+            return;
+
         UserStopScoping(ent);
     }
 
