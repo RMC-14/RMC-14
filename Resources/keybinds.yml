@@ -629,6 +629,10 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+- function: MappingMeasure
+  type: State
+  key: MouseLeft
+  canFocus: true
 
 # RMC14
 - function: RMCActivateAttachableRail
