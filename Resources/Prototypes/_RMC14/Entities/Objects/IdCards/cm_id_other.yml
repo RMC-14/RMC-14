@@ -318,6 +318,14 @@
     job: CMProvostMarshal
 
 - type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostSpecialAgent
+  name: provost special agent ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostSpecialAgent
+
+- type: entity
   parent: CMIDCardGold
   id: RMCIDCardSynth
   name: synth ID card
