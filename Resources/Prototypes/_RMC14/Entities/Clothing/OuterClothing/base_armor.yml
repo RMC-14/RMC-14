@@ -62,6 +62,7 @@
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
 
 - type: entity
   abstract: true
