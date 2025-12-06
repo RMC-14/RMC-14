@@ -1028,7 +1028,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         _container.Remove(item, storage.Container);
-        // Refillable items (bottles, autoinjectors) use the refill system
+        // Refillable items (bottles, autoinjectors) use the CMRefillableSolutionSystem
         if (HasComp<CMRefillableSolutionComponent>(item))
         {
             var vendorCoords = Transform(vendor).Coordinates;
@@ -1156,7 +1156,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// Handles restocking of partial stacks (sandbags, materials, etc.)
     /// Calculates how many full vendor stacks can be made, tracks partial remainders, and leaves any excess in hand if exceeds vendor max.
     /// </summary>
-    private bool TryRestockPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid, CMVendorEntry matchingEntry)
+    private bool TryRestockPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
     {
         if (!TryComp<StackComponent>(item, out var stackComp))
             return false;
@@ -1174,16 +1174,34 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!restockPlan.CanRestock)
             return false;
 
-        ApplyRestockPlan(vendor, item, stackComp, stackTypeId, matchingEntry, restockPlan);
-        ShowRestockFeedback(vendor, item, user, valid);
+        vendor.Comp.PartialProductStacks[stackTypeId] = restockPlan.FinalPartial;
+        if (restockPlan.StacksToAdd > 0)
+        {
+            matchingEntry.Amount += restockPlan.StacksToAdd;
+            AmountUpdated(vendor, matchingEntry);
+        }
+
+        Dirty(vendor);
+
+        if (restockPlan.ItemsToConsume >= itemCount)
+            QueueDel(item);
+        else
+            _stack.SetCount(item, itemCount - restockPlan.ItemsToConsume, stackComp);
+
+        if (!suppressPopup)
+        {
+            _popup.PopupEntity(
+                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
+                vendor,
+                user);
+        }
 
         return true;
     }
 
     private static RestockPlan CalculateRestockPlan(int existingPartial, int itemCount, int maxStackSize, CMVendorEntry entry)
     {
-        // Sanity checks to prevent edge cases
-        if (maxStackSize <= 0 || itemCount <= 0)
+        if (maxStackSize <= 0 || itemCount <= 0) // Sanity checks to prevent edge cases
         {
             return new RestockPlan { CanRestock = false };
         }
@@ -1193,7 +1211,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var potentialPartial = totalItems % maxStackSize;
         if (existingPartial > 0 && potentialFullStacks == 0)
         {
-            // Just adding to partials without creating a full stack. No vendor count increase needed.
+            // Just adding to partials without creating a full stack.
             return new RestockPlan
             {
                 CanRestock = true,
@@ -1203,19 +1221,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             };
         }
         // Calculate how many NEW entries we need (entries that don't already exist)
-        int stacksToAdd;
-        if (existingPartial == 0 && potentialFullStacks == 0)
+        var stacksToAdd = existingPartial switch
         {
-            stacksToAdd = 1;
-        }
-        else if (existingPartial > 0)
-        {
-            stacksToAdd = Math.Max(0, potentialFullStacks - 1);
-        }
-        else
-        {
-            stacksToAdd = potentialFullStacks;
-        }
+            0 when potentialFullStacks == 0 => 1,
+            > 0 => Math.Max(0, potentialFullStacks - 1),
+            _ => potentialFullStacks
+        };
         // Check if we have room for all the new entries (or if no max exists)
         if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
         {
@@ -1278,7 +1289,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var itemsToConsume = Math.Min(itemCount, canAddToPartial);
         var finalPartial = existingPartial + itemsToConsume;
         if (finalPartial >= maxStackSize)
-            finalPartial = 0; // Normalize: if the partial equals a full stack, set it to 0.
+            finalPartial = 0;
         return new RestockPlan
         {
             CanRestock = true,
@@ -1288,152 +1299,28 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         };
     }
 
-    private void ApplyRestockPlan(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, StackComponent stackComp, string stackTypeId, CMVendorEntry entry, RestockPlan plan)
-    {
-        vendor.Comp.PartialProductStacks[stackTypeId] = plan.FinalPartial;
-
-        if (plan.StacksToAdd > 0)
-        {
-            entry.Amount += plan.StacksToAdd;
-            AmountUpdated(vendor, entry);
-        }
-
-        Dirty(vendor);
-        ConsumePlayerStack(item, stackComp, plan.ItemsToConsume, stackComp.Count);
-    }
-
-    private void ConsumePlayerStack(EntityUid item, StackComponent stackComp, int itemsToConsume, int totalItems)
-    {
-        if (itemsToConsume >= totalItems)
-        {
-            QueueDel(item);
-        }
-        else
-        {
-            _stack.SetCount(item, totalItems - itemsToConsume, stackComp);
-        }
-    }
-
-    private void ShowRestockFeedback(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup)
-    {
-        if (suppressPopup)
-            return;
-
-        _popup.PopupEntity(
-            Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
-            vendor,
-            user);
-    }
-
     /// <summary>
-    /// Clears any partial stack for an entry, effectively completing it to a full stack.
+    /// Clears any partial stack for an entry, turning it to a full stack.
     /// Partial stacks are cleared when the vendor is at max stock.
+    /// Used by the Medical Supply Link.
     /// </summary>
     /// <param name="vendor">The vendor entity.</param>
     /// <param name="entry">The vendor entry to clear partial stacks for.</param>
     /// <returns>True if a partial stack was cleared, false otherwise.</returns>
     public bool TryClearPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
     {
-        // Get the stack type for this entry
         if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
             !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
             return false;
 
         var stackTypeId = entryStack.StackTypeId;
-
-        // Check if there's a partial stack to clear
         if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
             partialAmount == 0)
             return false;
 
-        // Clear the partial stack (complete it to a full stack)
         vendor.Comp.PartialProductStacks[stackTypeId] = 0;
         Dirty(vendor);
         return true;
-    }
-
-    /// <summary>
-    /// Attempts to fill a partial stack for an entry via automatic restocking (e.g., medical supply link).
-    /// If the entry has a partial stack, it will be filled towards a full stack.
-    /// If filling completes a full stack and there's room, entry.Amount is increased.
-    /// </summary>
-    /// <param name="vendor">The vendor entity.</param>
-    /// <param name="entry">The vendor entry to try filling partial stacks for.</param>
-    /// <param name="fillAmount">How much to add to the partial stack (defaults to filling completely).</param>
-    /// <returns>True if any partial stack was modified, false otherwise.</returns>
-    public bool TryFillPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry, int? fillAmount = null)
-    {
-        // Get the stack type for this entry
-        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
-            return false;
-
-        var stackTypeId = entryStack.StackTypeId;
-
-        // Check if there's a partial stack to fill
-        if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
-            partialAmount == 0)
-            return false;
-
-        var maxStackSize = _stack.GetMaxCount(entryStack);
-        if (maxStackSize <= 0)
-            return false;
-
-        // Calculate how much to fill
-        var amountToFill = fillAmount ?? (maxStackSize - partialAmount);
-        if (amountToFill <= 0)
-            return false;
-
-        var newPartialAmount = partialAmount + amountToFill;
-
-        // Check if we complete a full stack
-        if (newPartialAmount >= maxStackSize)
-        {
-            // We're completing to a full stack
-            var remainder = newPartialAmount - maxStackSize;
-
-            // Check if we have room to increase entry.Amount (completing partial doesn't need new slot)
-            // The partial was already counted in entry.Amount when it was created
-            vendor.Comp.PartialProductStacks[stackTypeId] = remainder;
-            Dirty(vendor);
-            return true;
-        }
-        else
-        {
-            // Just adding to partial, not completing
-            vendor.Comp.PartialProductStacks[stackTypeId] = newPartialAmount;
-            Dirty(vendor);
-            return true;
-        }
-    }
-
-    /// <summary>
-    /// Gets the partial stack amount for a vendor entry, if any.
-    /// </summary>
-    /// <param name="vendor">The vendor entity.</param>
-    /// <param name="entry">The vendor entry to check.</param>
-    /// <returns>The partial stack amount, or 0 if no partial stack exists.</returns>
-    public int GetPartialStackAmount(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
-    {
-        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
-            return 0;
-
-        return vendor.Comp.PartialProductStacks.GetValueOrDefault(entryStack.StackTypeId, 0);
-    }
-
-    /// <summary>
-    /// Gets the max stack size for a vendor entry, if it's a stackable item.
-    /// </summary>
-    /// <param name="entry">The vendor entry to check.</param>
-    /// <returns>The max stack size, or 0 if not a stackable item.</returns>
-    public int GetMaxStackSize(CMVendorEntry entry)
-    {
-        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
-            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
-            return 0;
-
-        return _stack.GetMaxCount(entryStack);
     }
 
     /// <summary>

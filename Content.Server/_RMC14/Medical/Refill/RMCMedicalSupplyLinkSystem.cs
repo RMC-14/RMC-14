@@ -64,11 +64,19 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
         {
             foreach (var entry in section.Entries)
             {
-                if (entry.Max is not { } max || entry.Amount >= max)
+                if (entry.Max is not { } max)
                     continue;
 
                 if (!_random.Prob(portReceiver.RestockChancePerItem))
                     continue;
+                // When at max, try to complete any partial stacks instead of increasing amount
+                if (entry.Amount >= max)
+                {
+                    if (_vendor.TryClearPartialStack(vendor, entry))
+                        restocked = true;
+
+                    continue;
+                }
 
                 entry.Amount++;
                 restocked = true;
