@@ -145,7 +145,7 @@
         1: 4 # 2%
       RMCDefibrillatorCompact:
         5: 8 # 2%
-      RMCTankFlamerImprovised:
+      RMCTankFlamerColony:
         9: 16 # 4%
       CMPacketGrenadeHighExplosiveFilled:
         17: 26 # 5%
