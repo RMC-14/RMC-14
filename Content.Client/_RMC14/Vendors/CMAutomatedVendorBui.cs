@@ -281,7 +281,11 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
                 else
                 {
-                    uiEntry.Amount.Text = entry.Amount.ToString();
+                    var partialStacks = vendor.PartialProductStacks;
+                    var hasPartialStack = partialStacks.TryGetValue(entry.Id, out var partialAmount) && partialAmount > 0;
+                    uiEntry.Amount.Text = hasPartialStack
+                        ? $"{entry.Amount}*" // Display asterisk (*) for items with partial stacks
+                        : entry.Amount.ToString();
                 }
 
                 uiEntry.Amount.Modulate = disabled ? Color.Red : Color.White;
