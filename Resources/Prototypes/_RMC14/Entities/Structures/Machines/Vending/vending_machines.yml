@@ -418,6 +418,20 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_cigs.rsi
+  - type: VendingMachine
+    pack: RMCSPPVendorCigs
+
+- type: vendingMachineInventory
+  id: RMCSPPVendorCigs
+  startingInventory:
+    RMCMonteComunePack: 20
+    RMCCigarettePackLingxiaoGolds: 25
+    RMCCigarettePackTarasClassic: 50
+    RMCCigarettePackBoheBlueMenthols: 50
+    RMCMatchboxFull: 15
+    RMCLighter: 25
+    RMCLighterSPP: 10
+
 
 # Security
 - type: entity
