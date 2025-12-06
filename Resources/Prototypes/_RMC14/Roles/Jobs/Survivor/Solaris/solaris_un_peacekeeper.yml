@@ -36,9 +36,8 @@
   id: RMCGearSurvivorSolarisUNPeacekeeper
   equipment:
     jumpsuit: RMCJumpsuitUNSecurity
-    head: ArmorHelmetPMCRiotShield
     outerClothing: RMCArmorVest
-    # head: RMCHeadBeretOfficer      TODO: Port Officer Beret
+    head: RMCHeadBeretOfficerHos
 
 - type: entity
   parent: CMSpawnPointJobBase
