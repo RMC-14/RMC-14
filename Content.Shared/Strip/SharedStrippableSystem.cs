@@ -292,11 +292,8 @@ public abstract class SharedStrippableSystem : EntitySystem
         {
             if (unstrippableItem.PoliceCanStrip && _skills.HasSkill(user, Skill, MinimumStripSkillLevel))
                 return true;
-            else
-            {
-                _popupSystem.PopupCursor(Loc.GetString("rmc-unstrippable", ("item", slotItem), ("owner", Identity.Entity(target, EntityManager))));
-                return false;
-            }
+            _popupSystem.PopupCursor(Loc.GetString("rmc-unstrippable", ("item", slotItem), ("owner", Identity.Entity(target, EntityManager))));
+            return false;
         }
 
         return true;
