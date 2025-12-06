@@ -62,6 +62,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
 
     [DataField, AutoNetworkedField]
     public bool DeactivateOnDrop = true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? LastUser;
 }
 
 [Serializable, NetSerializable]
