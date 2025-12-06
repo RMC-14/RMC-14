@@ -1,0 +1,60 @@
+- type: entity
+  parent: [ Clothing, ClothingSlotBase ]
+  id: RMCBackpackBroiler
+  name: Broiler-T flexible refueling system
+  description: A specialized back harness that carries the Broiler-T flexible refueling system. Designed by and for UNMC Pyrotechnicians.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/broiler/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/broiler/jungle.rsi
+    quickEquip: false
+    slots:
+    - back
+  - type: ItemMapper
+    mapLayers:
+      incinerator:
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorM34T
+  - type: Appearance
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCWeaponIncineratorM34T
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: CMItemSlots
+    count: 3
+    startingItems:
+    - RMCTankFlamerLarge
+    - RMCTankFlamerLargeB
+    - RMCTankFlamerLargeX
+    slot:
+      name: Tank
+      whitelist:
+        tags:
+        - RMCTankFlamer
+        - RMCTankFlamerLarge
+  - type: ItemSlots
+    slots:
+      item:
+        name: Incinerator
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorM34T
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: RMCMagneticItemReceiver
+  - type: RMCBroiler

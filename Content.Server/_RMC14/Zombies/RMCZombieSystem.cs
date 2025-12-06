@@ -26,6 +26,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
         RemComp<MarineOrdersComponent>(target);
         RemComp<ScoutWhitelistComponent>(target);
         RemComp<SniperWhitelistComponent>(target);
+        RemComp<PyroWhitelistComponent>(target);
         RemComp<InfectableComponent>(target);
         RemComp<GhostRoleComponent>(target);
         RemComp<GhostTakeoverAvailableComponent>(target);

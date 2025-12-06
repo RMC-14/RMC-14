@@ -4,11 +4,13 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Armor.Magnetic;
 
 public sealed class RMCMagneticSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
@@ -49,7 +51,7 @@ public sealed class RMCMagneticSystem : EntitySystem
 
     private void OnMagneticItemDropAttempt(Entity<RMCMagneticItemComponent> ent, ref DropAttemptEvent args)
     {
-        if (!CanReturn(ent, args.Uid, out _))
+        if (!CanReturn(ent, args.Uid, out _, out _, out _))
             return;
 
         args.Cancel();
@@ -57,6 +59,25 @@ public sealed class RMCMagneticSystem : EntitySystem
 
     private void OnMagnetizeItem(Entity<RMCMagneticArmorComponent> ent, ref InventoryRelayedEvent<RMCMagnetizeItemEvent> args)
     {
+        var everySlotEnumerator = _inventory.GetSlotEnumerator(args.Args.User);
+        while (everySlotEnumerator.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } slotItem ||
+                !HasComp<RMCMagneticItemReceiverComponent>(slotItem))
+                continue;
+
+            foreach (var slotContainer in _container.GetAllContainers(slotItem))
+            {
+                if (_container.CanInsert(args.Args.Item, slotContainer))
+                {
+                    args.Args.Magnetizer = ent;
+                    args.Args.ReceivingItem = slotItem;
+                    args.Args.ReceivingContainer = slotContainer.ID;
+                    return;
+                }
+            }
+        }
+
         if ((ent.Comp.AllowMagnetizeToSlots & args.Args.MagnetizeToSlots) == SlotFlags.NONE)
             return;
 
@@ -72,23 +93,27 @@ public sealed class RMCMagneticSystem : EntitySystem
         }
     }
 
-    private bool CanReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user, out EntityUid magnetizer)
+    private bool CanReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user, out EntityUid magnetizer, out EntityUid? receivingItem, out string receivingContainer)
     {
-        var ev = new RMCMagnetizeItemEvent(user, ent.Comp.MagnetizeToSlots, SlotFlags.OUTERCLOTHING);
+        var ev = new RMCMagnetizeItemEvent(user, ent.Owner, ent.Comp.MagnetizeToSlots, SlotFlags.OUTERCLOTHING);
         RaiseLocalEvent(user, ref ev);
 
         magnetizer = ev.Magnetizer ?? default;
+        receivingItem = ev.ReceivingItem;
+        receivingContainer = ev.ReceivingContainer;
         return magnetizer != default;
     }
 
     private bool TryReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user)
     {
-        if (!CanReturn(ent, user, out var magnetizer))
+        if (!CanReturn(ent, user, out var magnetizer, out var receivingItem, out var receivingContainer))
             return false;
 
         var returnComp = EnsureComp<RMCReturnToInventoryComponent>(ent);
         returnComp.User = user;
         returnComp.Magnetizer = magnetizer;
+        returnComp.ReceivingItem = receivingItem;
+        returnComp.ReceivingContainer = receivingContainer;
 
         Dirty(ent, returnComp);
         return true;
@@ -112,19 +137,36 @@ public sealed class RMCMagneticSystem : EntitySystem
             var magnetizer = comp.Magnetizer;
             if (!TerminatingOrDeleted(user) && !TerminatingOrDeleted(magnetizer))
             {
-                var slots = _inventory.GetSlotEnumerator(user, SlotFlags.SUITSTORAGE);
-                while (slots.MoveNext(out var slot))
+                if (comp.ReceivingItem is { } insertInto)
                 {
-                    if (_inventory.TryEquip(user, uid, slot.ID, force: true))
+                    if (_container.TryGetContainer(insertInto, comp.ReceivingContainer, out var container) &&
+                        _container.Insert(uid, container, force: true))
                     {
                         var popup = Loc.GetString("rmc-magnetize-return",
                             ("item", uid),
-                            ("magnetizer", magnetizer));
+                            ("magnetizer", insertInto));
                         _popup.PopupClient(popup, user, user, PopupType.Medium);
 
                         comp.Returned = true;
                         Dirty(uid, comp);
-                        break;
+                    }
+                }
+                else
+                {
+                    var slots = _inventory.GetSlotEnumerator(user, SlotFlags.SUITSTORAGE);
+                    while (slots.MoveNext(out var slot))
+                    {
+                        if (_inventory.TryEquip(user, uid, slot.ID, force: true))
+                        {
+                            var popup = Loc.GetString("rmc-magnetize-return",
+                                ("item", uid),
+                                ("magnetizer", magnetizer));
+                            _popup.PopupClient(popup, user, user, PopupType.Medium);
+
+                            comp.Returned = true;
+                            Dirty(uid, comp);
+                            break;
+                        }
                     }
                 }
             }

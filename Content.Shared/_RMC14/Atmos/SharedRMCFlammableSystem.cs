@@ -167,7 +167,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
         }
 
-        ent.Comp.Duration -= TimeSpan.FromSeconds(7);
+        ent.Comp.Duration -= TimeSpan.FromSeconds(args.Power);
         Dirty(ent);
     }
 

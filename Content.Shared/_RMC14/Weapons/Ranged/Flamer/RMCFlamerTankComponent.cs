@@ -12,4 +12,16 @@ public sealed partial class RMCFlamerTankComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? RefillWhitelist;
+
+    [DataField, AutoNetworkedField]
+    public int MaxIntensity = 40;
+
+    [DataField, AutoNetworkedField]
+    public int MaxDuration = 30;
+
+    [DataField, AutoNetworkedField]
+    public int MaxRange = 5;
+
+    [DataField, AutoNetworkedField]
+    public string ExamineIcon = "/Textures/_RMC14/Structures/Storage/reagent_tank.rsi/weldtank.png";
 }

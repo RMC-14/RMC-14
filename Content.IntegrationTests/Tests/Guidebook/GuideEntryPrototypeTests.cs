@@ -4,6 +4,9 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using Content.Shared.Guidebook;
+using Robust.Shared.Configuration;
+using Robust.UnitTesting;
+using Robust.Shared.Log;
 
 namespace Content.IntegrationTests.Tests.Guidebook;
 
@@ -24,6 +27,13 @@ public sealed class GuideEntryPrototypeTests
         var parser = client.ResolveDependency<DocumentParsingManager>();
         var prototypes = protoMan.EnumeratePrototypes<GuideEntryPrototype>().ToList();
 
+        // RMC14: The "all reagents" page is larger than the arbitrary limit.
+        //        This makes it so that it takes 2 ticks to render it.
+        //        Which in turn logs a warning that would fail this test.
+        var cfg = client.ResolveDependency<IConfigurationManager>();
+        var originalFailLevel = cfg.GetCVar(RTCVars.FailureLogLevel);
+        cfg.SetCVar(RTCVars.FailureLogLevel, LogLevel.Error);
+
         foreach (var proto in prototypes)
         {
             await client.WaitAssertion(() =>
@@ -34,9 +44,10 @@ public sealed class GuideEntryPrototypeTests
             });
 
             // Avoid styleguide update limit
-            await client.WaitRunTicks(1);
+            await client.WaitRunTicks(2);
         }
 
+        cfg.SetCVar(RTCVars.FailureLogLevel, originalFailLevel);
         await pair.CleanReturnAsync();
     }
 }
