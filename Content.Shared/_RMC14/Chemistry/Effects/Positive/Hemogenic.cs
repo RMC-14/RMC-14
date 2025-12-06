@@ -13,9 +13,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Hemogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
-    private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
+    public override string Abbreviation => "HMG";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -24,7 +22,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
                        $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
                        $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] additional nutrient loss";
 
-        return ActualPotency > 3
+        return Potency > 3
             ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage, and slows you down.\n{baseText}"
             : baseText;
     }
@@ -48,7 +46,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         }
 
         var rmcBloodstreamSystem = entityManager.System<SharedRMCBloodstreamSystem>();
-        var shouldApplyDamage = ActualPotency > 3 &&
+        var shouldApplyDamage = Potency > 3 &&
                                 rmcBloodstreamSystem.TryGetBloodSolution(target, out var bloodSolution) &&
                                 bloodSolution.Volume > 570; // TODO RMC14 Also check if they're not a Yautja.
         if (!shouldApplyDamage)

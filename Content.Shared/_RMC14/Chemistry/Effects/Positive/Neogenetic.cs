@@ -9,14 +9,12 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Neogenetic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
-    private static readonly ProtoId<DamageTypePrototype> HeatType = "Heat";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    public override string Abbreviation => "NGN";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var healing = PotencyPerSecond;
-        if (ActualPotency > 2)
+        if (Potency > 2)
             healing += PotencyPerSecond * 0.5f;
 
         return $"Heals [color=green]{healing}[/color] brute damage.\n" +
@@ -30,7 +28,7 @@ public sealed partial class Neogenetic : RMCChemicalEffect
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BruteGroup, potency);
 
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
-        if (ActualPotency > 2)
+        if (Potency > 2)
         {
             healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BruteGroup, potency * 0.5f);
             damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);

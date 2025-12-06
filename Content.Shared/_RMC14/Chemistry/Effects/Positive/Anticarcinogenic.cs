@@ -9,9 +9,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Anticarcinogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> GeneticGroup = "Genetic";
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    public override string Abbreviation => "ACG";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

@@ -10,11 +10,13 @@ public sealed partial class Biocidic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
 
+    public override string Abbreviation => "BCD";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Deals [color=red]{PotencyPerSecond}[/color] brute damage.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] brute damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute damage";
+               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute damage.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

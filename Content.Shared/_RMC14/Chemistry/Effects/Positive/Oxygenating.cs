@@ -11,16 +11,13 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Oxygenating : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
-
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
-
     private static readonly ProtoId<ReagentPrototype> Lexorin = "RMCLexorin";
+
+    public override string Abbreviation => "OXG";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var healing = ActualPotency >= 3
+        var healing = Potency >= 3
             ? $"Heals [color=green]all[/color] airloss damage and removes [color=green]{PotencyPerSecond}[/color] Lexorin from the bloodstream."
             : $"Heals [color=green]{PotencyPerSecond}[/color] airloss damage and removes [color=green]{PotencyPerSecond}[/color] Lexorin from the bloodstream.";
 
@@ -32,7 +29,7 @@ public sealed partial class Oxygenating : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var amount = ActualPotency >= 3 ? 99999 : potency;
+        var amount = Potency >= 3 ? 99999 : potency;
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, AirlossGroup, amount);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 

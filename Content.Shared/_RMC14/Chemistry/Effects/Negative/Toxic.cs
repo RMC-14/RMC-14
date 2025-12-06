@@ -11,11 +11,13 @@ public sealed partial class Toxic : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
+    public override string Abbreviation => "TXC";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Deals [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] toxin damage";
+               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] toxin damage.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

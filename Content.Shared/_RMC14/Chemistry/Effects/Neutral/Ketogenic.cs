@@ -14,14 +14,15 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Ketogenic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
+
+    public override string Abbreviation => "KTG";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Removes [color=red]{PotencyPerSecond * 5}[/color] nutrients, causing hunger over time.\n" +
                $"Increases alcohol metabolism rate by [color=green]{PotencyPerSecond}[/color] units.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and a [color=red]{ActualPotency * 2.5}%[/color] chance of vomiting.\n" +
+               $"Overdoses cause [color=red]{PotencyPerSecond * 5}[/color] nutrition loss, [color=red]{PotencyPerSecond}[/color] toxin damage, and a [color=red]{Potency * 2.5}%[/color] chance of vomiting.\n" +
                $"Critical overdoses will knock you unconscious for [color=red]10[/color] seconds";
     }
 
@@ -56,7 +57,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         damageable.TryChangeDamage(target, damage, true, interruptsDoAfters: false);
 
         var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(0.025f * ActualPotency))
+        if (!random.Prob(0.025f * Potency))
             return;
 
         var vomitEvent = new RMCVomitEvent(target);

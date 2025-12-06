@@ -11,11 +11,13 @@ public sealed partial class Corrosive : RMCChemicalEffect
 {
     private static readonly ProtoId<DamageTypePrototype> CausticType = "Caustic";
 
+    public override string Abbreviation => "CRS";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Deals [color=red]{PotencyPerSecond}[/color] burn damage.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] burn damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] burn damage";
+               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] burn damage.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

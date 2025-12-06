@@ -13,6 +13,8 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Thermostabilizing : RMCChemicalEffect
 {
+    public override string Abbreviation => "TSL";
+
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
