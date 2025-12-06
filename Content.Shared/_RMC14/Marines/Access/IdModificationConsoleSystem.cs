@@ -138,13 +138,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (!args.Revoke)
         {
             if (!iff.Factions.Contains(targetFaction))
-            {
                 iff.Factions.Add(targetFaction);
-                Dirty(uid.Value, iff);
-                _adminLogger.Add(LogType.RMCIdModify,
-                    LogImpact.Medium,
-                    $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
-            }
+
+            Dirty(uid.Value, iff);
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
+                $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
 
             ent.Comp.HasIFF = true;
         }
@@ -157,9 +156,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
             }
             else if (removed)
-            {
                 Dirty(uid.Value, iff);
-            }
 
             ent.Comp.HasIFF = false;
 
