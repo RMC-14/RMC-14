@@ -88,7 +88,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         SubscribeLocalEvent<WeaponMountComponent, DamageModifyEvent>(OnDamageModified);
         SubscribeLocalEvent<WeaponMountComponent, RMCCheckTileFreeEvent>(OnCheckTileFree);
 
-        //Mount Assembly/Disassembly
+        // Relayed events
+        SubscribeLocalEvent<WeaponMountComponent, MountableWeaponRelayedEvent<OverheatedEvent>>(OnWeaponOverheated);
+        SubscribeLocalEvent<WeaponMountComponent, MountableWeaponRelayedEvent<HeatGainedEvent>>(OnWeaponHeatGained);
+
+        // Mount Assembly/Disassembly
         SubscribeLocalEvent<WeaponMountComponent, AttachToMountDoAfterEvent>(OnAttachToMount);
         SubscribeLocalEvent<WeaponMountComponent, SecureToMountDoAfterEvent>(OnSecureToMount);
         SubscribeLocalEvent<WeaponMountComponent, DetachFromMountDoAfterEvent>(OnDetachFromMount);
@@ -279,10 +283,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         ent.Comp.IsWeaponSecured = true;
         _buckle.StrapSetEnabled(ent, true);
 
-        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta))
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && mountedMeta.EntityPrototype != null)
         {
             _metaData.SetEntityName(ent, mountedMeta.EntityName);
-            _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description-mounted"));
+            _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description-mounted"));
         }
 
         _audio.PlayPredicted(ent.Comp.SecureSound, ent, args.User);
@@ -302,10 +306,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             attachedWeapon.MountedTo = GetNetEntity(ent);
         }
 
-        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta))
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && mountedMeta.EntityPrototype != null)
         {
-            _metaData.SetEntityName(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-name"));
-            _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description"));
+            _metaData.SetEntityName(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-name"));
+            _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description"));
         }
 
         ent.Comp.MountedEntity = null;
@@ -328,8 +332,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (TryComp(ent, out FoldableComponent? foldable))
             _foldable.SetFolded(ent, foldable, false);
 
-        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked)
-            _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description-mounted"));
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked && mountedMeta.EntityPrototype != null)
+            _metaData.SetEntityDescription(ent, Loc.GetString( "emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description-mounted"));
 
         var xform = Transform(ent);
         _transform.SetCoordinates(ent, xform, coordinates, rotation);
@@ -361,8 +365,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     public void UndeployMount(Entity<WeaponMountComponent> ent, EntityUid? user = null, FoldableComponent? foldable = null)
     {
-        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked)
-            _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityName.Replace(" ", "") + "-description"));
+        if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && ent.Comp.IsWeaponLocked && mountedMeta.EntityPrototype != null)
+            _metaData.SetEntityDescription(ent, Loc.GetString("emplacement-mount-" + mountedMeta.EntityPrototype.ID + "-description"));
 
         ent.Comp.IsWeaponSecured = false;
         _transform.Unanchor(ent);
@@ -796,17 +800,25 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         return true;
     }
 
-    public void OverheatMount(EntityUid mount, DamageSpecifier damage, WeaponMountComponent? mountComponent = null)
+    private void OnWeaponOverheated(Entity<WeaponMountComponent> ent, ref MountableWeaponRelayedEvent<OverheatedEvent> args)
     {
-        if (!Resolve(mount, ref mountComponent))
+        if (args.Args.Damage == null)
             return;
 
-        _damage.TryChangeDamage(mount, damage);
-        if (mountComponent.MountedEntity != null)
+        _damage.TryChangeDamage(ent, args.Args.Damage);
+        if (ent.Comp.MountedEntity != null)
+        {
             _popup.PopupClient(Loc.GetString("emplacement-mounted-weapon-overheated",
-                ("weapon", mountComponent.MountedEntity.Value)),
-                mount, mountComponent.User,
+                    ("weapon", ent.Comp.MountedEntity.Value)),
+                ent,
+                ent.Comp.User,
                 PopupType.SmallCaution);
+        }
+    }
+
+    private void OnWeaponHeatGained(Entity<WeaponMountComponent> ent, ref MountableWeaponRelayedEvent<HeatGainedEvent> args)
+    {
+        UpdateAppearance(ent);
     }
 
     public void UpdateAppearance(EntityUid mount, WeaponMountComponent? mountComponent = null)
@@ -857,7 +869,7 @@ public sealed partial class DetachFromMountDoAfterEvent : SimpleDoAfterEvent
 }
 
 /// <summary>
-///     DoAfter event for detaching equipment from an equipment mount.
+///     DoAfter event for securing  equipment to an equipment mount.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class SecureToMountDoAfterEvent : SimpleDoAfterEvent
@@ -875,7 +887,7 @@ public sealed partial class MountDeployDoafterEvent : SimpleDoAfterEvent
 }
 
 /// <summary>
-///     DoAfter event for detaching equipment from an equipment mount.
+///     DoAfter event for attempting to pick up a deployed mount.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class MountUnDeployDoAfterEvent : SimpleDoAfterEvent

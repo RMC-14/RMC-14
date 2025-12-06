@@ -97,10 +97,11 @@ public sealed class MountableWeaponSystem : EntitySystem
 
     private void OnOverheated(Entity<MountableWeaponComponent> ent, ref OverheatedEvent args)
     {
-        if (ent.Comp.MountedTo == null || args.Damage == null)
+        if (ent.Comp.MountedTo == null)
             return;
 
-        _weaponMount.OverheatMount(GetEntity(ent.Comp.MountedTo.Value), args.Damage);
+        var ev = new MountableWeaponRelayedEvent<OverheatedEvent>(args);
+        RaiseLocalEvent(GetEntity(ent.Comp.MountedTo.Value), ref ev);
     }
 
     private void OnHeatGained(Entity<MountableWeaponComponent> ent, ref HeatGainedEvent args)
@@ -108,6 +109,13 @@ public sealed class MountableWeaponSystem : EntitySystem
         if (ent.Comp.MountedTo == null)
             return;
 
-        _weaponMount.UpdateAppearance(GetEntity(ent.Comp.MountedTo.Value));
+        var ev = new MountableWeaponRelayedEvent<HeatGainedEvent>(args);
+        RaiseLocalEvent(GetEntity(ent.Comp.MountedTo.Value), ref ev);
     }
 }
+
+/// <summary>
+///     Relays events originally raised on a mountable weapon.
+/// </summary>
+[ByRefEvent]
+public record struct MountableWeaponRelayedEvent<TEvent>(TEvent Args);
