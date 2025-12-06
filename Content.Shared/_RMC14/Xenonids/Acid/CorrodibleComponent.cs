@@ -18,4 +18,7 @@ public sealed partial class CorrodibleComponent : Component
 
     [DataField, AutoNetworkedField]
     public float MeltTimeMult = 1;
+
+    [DataField, AutoNetworkedField]
+    public XenoAcidStrength MinimumAcidStrength = XenoAcidStrength.Weak;
 }
