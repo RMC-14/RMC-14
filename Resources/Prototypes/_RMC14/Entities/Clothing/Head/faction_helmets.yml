@@ -4,7 +4,7 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetMARSOC
   name: SOF operator helmet
-  description: A special variant of the M10 Pattern Helmet worn by UNMC SOF.
+  description: A special variant of the M10 Pattern Helmet worn by UNMC SOF. It features integrated medical optics, and comes standard issue with a advanced night vision visor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
@@ -12,6 +12,17 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+    - RMCVisorNightVisionAdvanced
 
 # Dutch's Dozen
 - type: entity
