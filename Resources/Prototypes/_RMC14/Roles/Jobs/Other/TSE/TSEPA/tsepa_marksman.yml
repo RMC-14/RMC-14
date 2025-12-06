@@ -1,0 +1,72 @@
+﻿# TSEPA Marksman
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAMarksman
+  name: rmc-job-name-tsepa-marksman
+  description: rmc-job-description-tsepa-marksman
+  playTimeTracker: RMCJobTSEPAMarksman
+  ranks:
+    RMCRankTSEPAMarksman: []
+  startingGear: RMCGearTSEPAMarksman
+  icon: "RMCJobIconTSEPAMarksman"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistTSEPABrig
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 0
+        RMCSkillFireman: 2
+    - type: SniperWhitelist
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-marksman
+    - type: RMCTrackable
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearTSEPASeniorConstable
+  id: RMCGearTSEPAMarksman
+  equipment:
+    eyes: RMCGlassesSecurityBlue
+    head: RMCHeadCapTSEPA
+    outerClothing: RMCArmorVestTSEPA
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchMagazineLargeTR76S
+    suitstorage: RMCTR76SniperRifle
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPAMarksman
+  name: tsepa marksman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPAMarksman
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPAMarksman
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAMarksman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: tse_pamarksman
