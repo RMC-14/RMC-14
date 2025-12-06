@@ -3,3 +3,6 @@ reagent-desc-rmcphoron = A special form of metallic plasma that is not found on 
 
 reagent-name-rmcnapalmut = UT-Napthal Fuel
 reagent-desc-rmcnapalmut = Known as Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, typically used with flamethrowers.
+
+reagent-name-rmcbgel = Napalm B-Gel
+reagent-desc-rmcbgel = Unlike its liquid contemporaries, this gelled variant of napalm is easily extinguished, but shoots far and lingers on the ground in a viscous mess, while reacting with inorganic materials to ignite them.
