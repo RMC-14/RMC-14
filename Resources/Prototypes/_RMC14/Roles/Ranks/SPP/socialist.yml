@@ -18,6 +18,11 @@
   prefix: Strsh.
   paygrade: STRSH
 
+- type: rank
+  id: RMCRankSPPSynthetic
+  name: Synthetic
+  prefix: Syn.
+
 # Military
 
 - type: rank

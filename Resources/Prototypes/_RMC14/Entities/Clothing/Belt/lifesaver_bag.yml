@@ -107,6 +107,32 @@
 
 - type: entity
   parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPSynthFilled
+  suffix: Synthetic, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterOxycodone
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMUpgradedTraumaKit10
+      amount: 3
+    - id: CMUpgradedBurnKit10
+      amount: 3
+    # - id: RMCSplints10
+    #   amount: 3
+    - id: CMDexalinPlusAutoInjector
+    #- id: CMOxycodoneAutoInjector
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
   id: RMCBeltMedicBagPMC
   name: WY-TM625 pattern medical bag
   description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
