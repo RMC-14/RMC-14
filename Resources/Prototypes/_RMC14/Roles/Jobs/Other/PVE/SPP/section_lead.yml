@@ -38,6 +38,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-sectionsergeant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable

@@ -35,6 +35,10 @@
         RMCSkillPowerLoader: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

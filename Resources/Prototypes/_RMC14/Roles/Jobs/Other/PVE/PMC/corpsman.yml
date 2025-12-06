@@ -41,6 +41,10 @@
         Chemicals: 120
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

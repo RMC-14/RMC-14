@@ -37,6 +37,10 @@
         RMCSkillSmartGun: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-team-leader
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable

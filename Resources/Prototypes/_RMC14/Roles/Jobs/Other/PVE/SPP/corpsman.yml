@@ -40,6 +40,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-corpsman
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

@@ -38,6 +38,10 @@
         RMCSkillSmartGun: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-force-leader
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
