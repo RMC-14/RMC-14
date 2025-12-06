@@ -203,12 +203,12 @@
 
 # Supply
 
-# Logistics Officer
+# Requisitions Officer
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: Logistics Officer suit
-  description: A nicely-fitting military suit for a Logistics Officer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: Requisitions Officer suit
+  description: A nicely-fitting military suit for a Requisitions Officer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi

@@ -283,11 +283,11 @@
   - type: CMArmor
     melee: 10
 
-# Logistics Officer
+# Requisitions Officer
 - type: entity
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
-  name: Logistics Officer jacket
+  name: Requisitions Officer jacket
   description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
   components:
   - type: Sprite
