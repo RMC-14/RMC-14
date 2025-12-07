@@ -1212,8 +1212,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Clears any partial stack for an entry, turning it to a full stack.
-    /// Partial stacks are cleared when the vendor is at max stock.
-    /// Used by the Medical Supply Link.
+    /// Primarily used by the Medical Supply Link.
     /// </summary>
     /// <param name="vendor">The vendor entity.</param>
     /// <param name="entry">The vendor entry to clear partial stacks for.</param>
