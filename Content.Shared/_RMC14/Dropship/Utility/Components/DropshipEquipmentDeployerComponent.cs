@@ -7,17 +7,41 @@ namespace Content.Shared._RMC14.Dropship.Utility.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DropshipEquipmentDeployerComponent : Component
 {
+    /// <summary>
+    ///     The prototype to deploy.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? DeployPrototype = "RMCML66DNestMetal";
 
+    /// <summary>
+    ///     The item slot to put the spawned entity in.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public string DeploySlotId = "dropship_deploy";
 
+    /// <summary>
+    ///     The text shown on the button in a dropship weapons control console.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string DropShipWindowButtonText = "MG";
+
+    /// <summary>
+    ///     The entity that will be deployed.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public NetEntity? DeployEntity;
 
+    /// <summary>
+    ///     Whether the deployer can deploy.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsDeployable;
+
+    /// <summary>
+    ///     Whether the stored entity is currently deployed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsDeployed;
 
     [DataField, AutoNetworkedField]
     public Vector2i StarboardForeDeployDirection = new(1, 0);
@@ -40,6 +64,9 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
     [DataField, AutoNetworkedField]
     public float StarboardWingDeployRotationDegrees = 90;
 
+    /// <summary>
+    ///     Whether the deployer should automatically deploy when a dropship arrives at it's destination.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool AutoDeploy;
 

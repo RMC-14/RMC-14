@@ -87,7 +87,7 @@
     - RMCSentry
 
 - type: entity
-  parent: RMCBaseSentry
+  parent: [RMCBaseSentry, BaseItem]
   id: RMCSentryItem
   components:
   - type: Item
@@ -561,6 +561,8 @@
 - type: entity
   parent: RMCSentry
   id: RMCSentryDropship
+  name: UN 571-D omnidirectional sentry gun
+  description: A deployable, semi-automated turret with 360 degree range AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi

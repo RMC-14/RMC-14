@@ -548,6 +548,24 @@ public sealed class SentrySystem : EntitySystem
         return true;
     }
 
+    public bool TryGetSentryAmmo(EntityUid sentry, [NotNullWhen(true)] out int? ammoCount, [NotNullWhen(true)] out int? ammoCapacity, SentryComponent? sentryComponent = null)
+    {
+        ammoCount = null;
+        ammoCapacity = null;
+        if (!Resolve(sentry, ref sentryComponent, false))
+            return false;
+
+        if (!_container.TryGetContainer(sentry, sentryComponent.ContainerSlotId, out var container) ||  container.Count == 0)
+            return false;
+
+        var ammoEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(container.ContainedEntities[0], ref ammoEv);
+
+        ammoCount = ammoEv.Count;
+        ammoCapacity = ammoEv.Capacity;
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)

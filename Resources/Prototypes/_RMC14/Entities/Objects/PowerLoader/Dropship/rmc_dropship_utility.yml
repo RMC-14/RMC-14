@@ -142,6 +142,7 @@
     - RMCDropshipWeaponPoint
   - type: DropshipEquipmentDeployer
     deployPrototype: RMCSentryDropship
+    dropShipWindowButtonText: Sentry
     starboardForeDeployDirection: 0, 1
     portForeDeployDirection: 0, 1
     starboardWingDeployDirection: 1, 0

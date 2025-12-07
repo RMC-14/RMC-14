@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Foldable;
@@ -82,17 +83,14 @@ public sealed class MountableWeaponSystem : EntitySystem
         if (ent.Comp.MountedTo == null)
             return;
 
-        if (!_slots.TryGetSlot(ent, "gun_magazine", out var itemSlot) ||  itemSlot.Item == null)
+        if (!_weaponMount.TryGetWeaponAmmo(ent, out var ammoCount, out  _))
             return;
-
-        var ammoEv = new GetAmmoCountEvent();
-        RaiseLocalEvent(itemSlot.Item.Value, ref ammoEv);
 
         var ammoSpriteKey = WeaponMountComponentVisualLayers.MountedAmmo;
         if (TryComp(ent, out FoldableComponent? foldableComp) && foldableComp.IsFolded)
             ammoSpriteKey = WeaponMountComponentVisualLayers.FoldedAmmo;
 
-        _appearance.SetData(GetEntity(ent.Comp.MountedTo.Value), ammoSpriteKey, ammoEv.Count - 1 > 0);
+        _appearance.SetData(GetEntity(ent.Comp.MountedTo.Value), ammoSpriteKey, ammoCount - 1 > 0);
     }
 
     private void OnOverheated(Entity<MountableWeaponComponent> ent, ref OverheatedEvent args)

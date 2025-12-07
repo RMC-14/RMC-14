@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
@@ -472,9 +473,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         // Weapon stats
         if (TryComp(ent.Comp.MountedEntity, out GunComponent? gunComponent))
         {
-            var ammoCountEvent = new GetAmmoCountEvent();
-            RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
-            args.PushMarkup(Loc.GetString("gun-magazine-examine", ("color", AmmoExamineColor), ("count",ammoCountEvent.Count)));
+            if (!TryGetWeaponAmmo(ent, out var ammoCount, out _))
+                return;
+
+            args.PushMarkup(Loc.GetString("gun-magazine-examine", ("color", AmmoExamineColor), ("count", ammoCount)));
             args.PushMarkup(Loc.GetString("gun-selected-mode-examine", ("color", ModeExamineColor),
                 ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), gunComponent.SelectedMode)}"))), priority: 4);
             args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor),
@@ -778,7 +780,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     /// <returns>True if the weapon is able to be attached to the mount</returns>
     public bool IsViableWeapon(EntityUid weapon, EntityUid mount, WeaponMountComponent? weaponMountComponent = null)
     {
-        if (!Resolve(mount, ref weaponMountComponent))
+        if (!Resolve(mount, ref weaponMountComponent, false))
             return false;
 
         if (TryComp(weapon, out MetaDataComponent? metaData) && metaData.EntityPrototype != null)
@@ -823,7 +825,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     public void UpdateAppearance(EntityUid mount, WeaponMountComponent? mountComponent = null)
     {
-        if (!Resolve(mount, ref mountComponent))
+        if (!Resolve(mount, ref mountComponent, false))
             return;
 
         if (TryComp(mount, out FoldableComponent? foldable))
@@ -847,6 +849,32 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         var alpha = Math.Clamp(overheat.Heat / overheat.MaxHeat, 0f, 1f);
         _appearance.SetData(mount, WeaponMountComponentVisualLayers.Overheated, color.WithAlpha(alpha));
+    }
+
+    /// <summary>
+    ///     Tries to get the current amount of ammo and max amount of ammo of the weapon attached to the mount.
+    /// </summary>
+    /// <param name="mount">The mount</param>
+    /// <param name="ammoCount">The current amount of ammo</param>
+    /// <param name="ammoCapacity">The maximum amount of ammo</param>
+    /// <param name="mountComponent">The <see cref="WeaponMountComponent"/> of the mount</param>
+    /// <returns>True if an ammo count is found.</returns>
+    public bool TryGetWeaponAmmo(EntityUid mount, [NotNullWhen(true)] out int? ammoCount, [NotNullWhen(true)] out int? ammoCapacity, WeaponMountComponent? mountComponent = null)
+    {
+        ammoCount = null;
+        ammoCapacity = null;
+        if (!Resolve(mount, ref mountComponent, false) || mountComponent.MountedEntity == null)
+            return false;
+
+        if (!_slots.TryGetSlot(mountComponent.MountedEntity.Value, "gun_magazine", out var itemSlot) ||  itemSlot.Item == null)
+            return false;
+
+        var ammoEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(itemSlot.Item.Value, ref ammoEv);
+
+        ammoCount = ammoEv.Count;
+        ammoCapacity = ammoEv.Capacity;
+        return true;
     }
 }
 
