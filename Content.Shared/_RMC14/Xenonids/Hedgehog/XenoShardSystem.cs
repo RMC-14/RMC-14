@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Energy;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared.Projectiles;
+using Content.Shared._RMC14.Xenonids.Sweep;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -136,6 +137,7 @@ public sealed class XenoShardSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-shed-spikes"), ent, ent);
 
         _audio.PlayPredicted(ent.Comp.Sound, ent, ent);
+        EnsureComp<XenoSweepingComponent>(ent);
 
         // Fire projectiles in all directions (40 like CM13 shrapnel_amount)
         _xenoProjectile.TryShoot(

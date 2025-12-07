@@ -57,6 +57,36 @@
       scenarioProbability: 0.1
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - CMSurvivorSolarisCMBMarshal: 1
+      CMSurvivor:
+      - CMSurvivorSolarisTrucker: -1
+      - CMSurvivorSolarisChaplain: -1
+      - CMSurvivorUNMCRecruiter: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: -1
+      - CMSurvivorFlightOperator: -1
+      CMSurvivorCorporate:
+      - CMSurvivorSolarisCorporateLiaison: -1
+      CMSurvivorDoctor:
+      - CMSurvivorSolarisDoctor: -1
+      - RMCSurvivorHybrisaEMTParamedic: -1
+      CMSurvivorEngineer:
+      - CMSurvivorSolarisEngineer: -1
+      CMSurvivorSecurity:
+      - CMSurvivorSolarisCMBDeputy: -1
+      - CMSurvivorSolarisUNPeacekeeper: -1
+      CMSurvivorScientist:
+      - CMSurvivorSolarisScientist: -1
 #    survivorJobScenarios:
 #      clfmining:
 #        CMSurvivor:
@@ -141,13 +171,6 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
-    survivorJobs:
-    - CMSurvivor: -1
-    - CMSurvivorCorporate: 2
-    - CMSurvivorDoctor: 3
-    - CMSurvivorEngineer: 4
-    - CMSurvivorSecurity: 2
-    - CMSurvivorScientist: 2
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivorTrijentTrucker: -1

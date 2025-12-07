@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/mob/humans/onmob/clothing/helmet_garb/huds.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a0922d708fa6ef0e4d09d08e742c188ae9bb5d4e/icons/mob/humans/onmob/clothing/helmet_garb/huds.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -103,6 +103,30 @@
     },
     {
       "name": "goon_weld_visor",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_purple",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_lightblue",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_red",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_darkblue",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_yellow",
+      "directions": 4
+    },
+    {
+      "name": "po_visor_black",
       "directions": 4
     }
   ]
