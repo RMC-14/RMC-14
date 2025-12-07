@@ -104,10 +104,10 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public Dictionary<string, int> PartialProductStacks = new();
 }
 
-internal readonly struct RestockPlan
+internal readonly struct StackRestockPlan
 {
     public bool CanRestock { get; init; }
-    public int StacksToAdd { get; init; }
+    public int EntriesToAdd { get; init; }
     public int ItemsToConsume { get; init; }
-    public int FinalPartial { get; init; }
+    public int RemainingPartial { get; init; }
 }

@@ -320,7 +320,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 Text = Loc.GetString("rmc-vending-machine-restock-bulk-verb"),
                 Act = () => TryRestockFromContainer(ent, item, user, storage),
-                Priority = -1
+                Priority = 2
             });
         }
         else
@@ -330,7 +330,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 Text = Loc.GetString("rmc-vending-machine-restock-single-verb"),
                 Act = () => TryRestockSingleItem(ent, item, user),
-                Priority = -1
+                Priority = 2
             });
         }
     }
@@ -1110,19 +1110,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
-        if (matchingEntry.Amount >= matchingEntry.Max)
-        {
-            if (!CanTopOffPartialStack(vendor, item, matchingEntry))
-            {
-                RestockValidationPopup(valid, "rmc-vending-machine-restock-item-full", vendor, user, ("vendor", vendor), ("item", item));
-                return false;
-            }
-        }
-
         if (!ValidateItemForRestock(vendor, item, user, valid))
             return false;
-        // Try partial stack restocking first (sandbags, materials, gauze, etc.)
-        if (TryRestockPartialStack(vendor, item, user, valid, matchingEntry))
+        // Handle stackable items first (gauze, sandbags, materials, etc.)
+        if (TryRestockStackableItem(vendor, item, user, valid, matchingEntry))
             return true;
 
         if (!valid)
@@ -1137,65 +1128,41 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    private bool CanTopOffPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, CMVendorEntry entry)
-    {
-        if (!TryComp<StackComponent>(item, out var itemStack))
-            return false;
-
-        var stackTypeId = itemStack.StackTypeId;
-        if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
-            partialAmount == 0)
-            return false;
-
-        var maxStackSize = _stack.GetMaxCount(itemStack);
-        var totalItems = partialAmount + itemStack.Count;
-        var fullStacksCreated = totalItems / maxStackSize;
-        if (fullStacksCreated <= 0)
-            return true;
-
-        if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
-            return true;
-        // When there's an existing partial, completing it to a full stack doesn't require a new entry.
-        // It's already counted in entry.Amount. Only additional full stacks beyond the first need new entries.
-        var additionalStacksNeeded = fullStacksCreated - 1;
-        return currentAmount + additionalStacksNeeded <= max;
-    }
-
     /// <summary>
-    /// Handles restocking of partial stacks (sandbags, materials, etc.)
-    /// Calculates how many full vendor stacks can be made, tracks partial remainders, and leaves any excess in hand if exceeds vendor max.
+    /// Attempts to restock a stackable item into the vendor.
+    /// Calculates full vendor entries from the stack, tracks partial remainders.
     /// </summary>
-    private bool TryRestockPartialStack(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
+    private bool TryRestockStackableItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry entry)
     {
-        if (!TryComp<StackComponent>(item, out var stackComp))
+        if (!TryComp<StackComponent>(item, out var stack))
             return false;
 
-        var stackTypeId = stackComp.StackTypeId;
-        var maxStackSize = _stack.GetMaxCount(stackComp);
+        var stackTypeId = stack.StackTypeId;
+        var maxStackSize = _stack.GetMaxCount(stack);
         if (maxStackSize <= 0)
             return false;
 
         vendor.Comp.PartialProductStacks.TryAdd(stackTypeId, 0);
-        var existingPartial = vendor.Comp.PartialProductStacks[stackTypeId];
-        var itemCount = stackComp.Count;
+        var currentPartial = vendor.Comp.PartialProductStacks[stackTypeId];
+        var itemCount = stack.Count;
 
-        var restockPlan = CalculateRestockPlan(existingPartial, itemCount, maxStackSize, matchingEntry);
-        if (!restockPlan.CanRestock)
+        var plan = CalculateStackRestockPlan(currentPartial, itemCount, maxStackSize);
+        if (!plan.CanRestock)
             return false;
 
-        vendor.Comp.PartialProductStacks[stackTypeId] = restockPlan.FinalPartial;
-        if (restockPlan.StacksToAdd > 0)
+        vendor.Comp.PartialProductStacks[stackTypeId] = plan.RemainingPartial;
+        if (plan.EntriesToAdd > 0)
         {
-            matchingEntry.Amount += restockPlan.StacksToAdd;
-            AmountUpdated(vendor, matchingEntry);
+            entry.Amount += plan.EntriesToAdd;
+            AmountUpdated(vendor, entry);
         }
 
         Dirty(vendor);
 
-        if (restockPlan.ItemsToConsume >= itemCount)
+        if (plan.ItemsToConsume >= itemCount)
             QueueDel(item);
         else
-            _stack.SetCount(item, itemCount - restockPlan.ItemsToConsume, stackComp);
+            _stack.SetCount(item, itemCount - plan.ItemsToConsume, stack);
 
         if (!suppressPopup)
         {
@@ -1208,103 +1175,38 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return true;
     }
 
-    private static RestockPlan CalculateRestockPlan(int existingPartial, int itemCount, int maxStackSize, CMVendorEntry entry)
+    private static StackRestockPlan CalculateStackRestockPlan(int currentPartial, int itemCount, int maxStackSize)
     {
-        if (maxStackSize <= 0 || itemCount <= 0) // Sanity checks to prevent edge cases
-        {
-            return new RestockPlan { CanRestock = false };
-        }
+        if (maxStackSize <= 0 || itemCount <= 0)
+            return new StackRestockPlan { CanRestock = false };
 
-        var totalItems = existingPartial + itemCount;
-        var potentialFullStacks = totalItems / maxStackSize;
-        var potentialPartial = totalItems % maxStackSize;
-        if (existingPartial > 0 && potentialFullStacks == 0)
+        var totalItems = currentPartial + itemCount;
+        var fullEntries = totalItems / maxStackSize;
+        var remainingPartial = totalItems % maxStackSize;
+        if (currentPartial > 0 && fullEntries == 0)
         {
-            // Just adding to partials without creating a full stack.
-            return new RestockPlan
+            return new StackRestockPlan
             {
                 CanRestock = true,
-                StacksToAdd = 0,
+                EntriesToAdd = 0,
                 ItemsToConsume = itemCount,
-                FinalPartial = totalItems
+                RemainingPartial = totalItems
             };
         }
-        // Calculate how many NEW entries we need (entries that don't already exist)
-        var stacksToAdd = existingPartial switch
+
+        var entriesToAdd = currentPartial switch
         {
-            0 when potentialFullStacks == 0 => 1,
-            > 0 => Math.Max(0, potentialFullStacks - 1),
-            _ => potentialFullStacks
+            0 when fullEntries == 0 => 1,
+            > 0 => Math.Max(0, fullEntries - 1),
+            _ => fullEntries
         };
-        // Check if we have room for all the new entries (or if no max exists)
-        if (entry.Max is not { } max || entry.Amount is not { } currentAmount)
-        {
-            return new RestockPlan
-            {
-                CanRestock = true,
-                StacksToAdd = stacksToAdd,
-                ItemsToConsume = itemCount,
-                FinalPartial = potentialPartial
-            };
-        }
-        // Check if we can add all the new stacks
-        // When existingPartial > 0, and we're at max capacity, we need limited restocking even if stacksToAdd is 0, since partial + remainder would overflow.
-        var atMaxCapacity = currentAmount >= max;
-        var wouldCreateFullStacks = potentialFullStacks > 0;
-        if (currentAmount + stacksToAdd <= max && !(atMaxCapacity && wouldCreateFullStacks))
-        {
-            return new RestockPlan
-            {
-                CanRestock = true,
-                StacksToAdd = stacksToAdd,
-                ItemsToConsume = itemCount,
-                FinalPartial = potentialPartial
-            };
-        }
-        // Would exceed max - calculate limited restocking
-        return CalculateLimitedRestockPlan(existingPartial, itemCount, maxStackSize, max, currentAmount);
-    }
 
-    private static RestockPlan CalculateLimitedRestockPlan(int existingPartial, int itemCount, int maxStackSize, int max, int currentAmount)
-    {
-        var roomForStacks = max - currentAmount;
-
-        if (roomForStacks <= 0)
-        {
-            return CalculatePartialOnlyPlan(existingPartial, itemCount, maxStackSize);
-        }
-
-        var itemsNeededForFullStacks = (roomForStacks * maxStackSize) - existingPartial;
-        var itemsToConsume = Math.Min(itemCount, itemsNeededForFullStacks);
-        var finalPartial = (existingPartial + itemsToConsume) % maxStackSize;
-
-        return new RestockPlan
+        return new StackRestockPlan
         {
             CanRestock = true,
-            StacksToAdd = roomForStacks,
-            ItemsToConsume = itemsToConsume,
-            FinalPartial = finalPartial
-        };
-    }
-
-    private static RestockPlan CalculatePartialOnlyPlan(int existingPartial, int itemCount, int maxStackSize)
-    {
-        if (existingPartial == 0)
-        {
-            return new RestockPlan { CanRestock = false };
-        }
-
-        var canAddToPartial = maxStackSize - existingPartial;
-        var itemsToConsume = Math.Min(itemCount, canAddToPartial);
-        var finalPartial = existingPartial + itemsToConsume;
-        if (finalPartial >= maxStackSize)
-            finalPartial = 0;
-        return new RestockPlan
-        {
-            CanRestock = true,
-            StacksToAdd = 0,
-            ItemsToConsume = itemsToConsume,
-            FinalPartial = finalPartial
+            EntriesToAdd = entriesToAdd,
+            ItemsToConsume = itemCount,
+            RemainingPartial = remainingPartial
         };
     }
 
