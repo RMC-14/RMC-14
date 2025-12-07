@@ -30,7 +30,7 @@
     sound:
       collection: RMCEquipGun
       params:
-        volume: -4
+        volume: -6
   - type: EmitSoundOnDrop
     sound:
       collection: RMCRustleGun

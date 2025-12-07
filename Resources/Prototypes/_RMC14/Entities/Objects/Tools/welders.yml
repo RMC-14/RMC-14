@@ -14,6 +14,8 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
