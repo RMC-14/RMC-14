@@ -57,9 +57,18 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCRustleGun
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCRustleGun
+      params:
+        volume: -4
   - type: UsableWhileDevoured
     canUnequip: true
   - type: Tag
