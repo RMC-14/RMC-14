@@ -1771,7 +1771,7 @@
   group: BarsAndCookies
   reagents:
     Flour: 15
-    Sugar: 30
+    RMCSugar: 30 #Changed for RMC
     Egg: 18
   solids:
     FoodButter: 2
@@ -2190,7 +2190,7 @@
   solids:
     FoodCakeBatter: 2
   reagents:
-    Sugar: 30
+    RMCSugar: 30 #Changed for RMC
     Nitrogen: 10
     Plasma: 10
 
@@ -2231,7 +2231,7 @@
   group: BarsAndCookies
   reagents:
     Flour: 15
-    Sugar: 30
+    RMCSugar: 30 #Changed for RMC
     Egg: 18
   solids:
     FoodCannabisButter: 2
