@@ -74,9 +74,6 @@
     isWeaponLocked: true
   - type: Physics
     bodyType: Static
-  - type: GunRequiresSkills
-    skills:
-      RMCSkillEngineer: 0
 
 - type: entity
   parent: RMCML66DNestSandbag

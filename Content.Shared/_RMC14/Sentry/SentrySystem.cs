@@ -146,7 +146,7 @@ public sealed class SentrySystem : EntitySystem
     private void OnSentryActivateInWorld(Entity<SentryComponent> sentry, ref ActivateInWorldEvent args)
     {
         ref var mode = ref sentry.Comp.Mode;
-        if (mode == SentryMode.Item)
+        if (mode == SentryMode.Item || sentry.Comp.IsLocked)
             return;
 
         args.Handled = true;
@@ -207,6 +207,9 @@ public sealed class SentrySystem : EntitySystem
 
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
     {
+        if (sentry.Comp.IsLocked)
+            return;
+
         var user = args.User;
         var used = args.Used;
         if (TryComp(used, out SentryUpgradeItemComponent? upgrade))
@@ -329,8 +332,11 @@ public sealed class SentrySystem : EntitySystem
                 args.PushMarkup(rot);
             }
 
-            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-            args.PushMarkup(msg);
+            if (!ent.Comp.IsLocked)
+            {
+                var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
+            }
 
             if (ent.Comp.Mode == SentryMode.Off)
             {

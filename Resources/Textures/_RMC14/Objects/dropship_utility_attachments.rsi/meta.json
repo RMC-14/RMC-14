@@ -67,6 +67,29 @@
     },
     {
       "name": "paradrop_system"
-    }
+    },
+    {
+      "name": "mg_system"
+    },
+    {
+      "name": "mg_system_deployed"
+    },
+    {
+      "name": "mg_system_installed"
+    },
+    {
+      "name": "sentry_system"
+    },
+    {
+      "name": "sentry_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_deployed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_destroyed"
+      }
   ]
 }

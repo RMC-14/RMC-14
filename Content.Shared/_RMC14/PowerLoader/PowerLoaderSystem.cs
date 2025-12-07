@@ -627,6 +627,11 @@ public sealed class PowerLoaderSystem : EntitySystem
                 return false;
             }
         }
+        else if (HasComp<DropshipEquipmentDeployerComponent>(used))
+        {
+            slotId = target.Comp.WeaponContainerSlotId;
+            msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+        }
         else
         {
             return false;
@@ -921,32 +926,35 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         foreach (var contained in weaponContainer.ContainedEntities)
         {
-            if (!TryComp(contained, out DropshipWeaponComponent? weapon))
-                continue;
+            SpriteSpecifier.Rsi? rsi = null;
 
-            SpriteSpecifier.Rsi? rsi;
-            if (rounds > 0 && hasRounds)
+            if (TryComp(contained, out DropshipWeaponComponent? weapon))
             {
-                rsi = weapon.AmmoAttachedSprite;
-
-                if (rsi != null &&
-                    weapon.AmmoAttachedSprite != null &&
-                    rounds != maxRounds)
+                if (rounds > 0 && hasRounds)
                 {
-                    foreach (var ammoCount in weapon.AmmoSpriteThresholds)
-                    {
-                        if (ammoCount > rounds)
-                            continue;
+                    rsi = weapon.AmmoAttachedSprite;
 
-                        rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + ammoCount);
-                        break;
+                    if (rsi != null &&
+                        weapon.AmmoAttachedSprite != null &&
+                        rounds != maxRounds)
+                    {
+                        foreach (var ammoCount in weapon.AmmoSpriteThresholds)
+                        {
+                            if (ammoCount > rounds)
+                                continue;
+
+                            rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + ammoCount);
+                            break;
+                        }
                     }
                 }
+                else if (rounds > 0)
+                    rsi = weapon.AmmoEmptyAttachedSprite;
+                else
+                    rsi = weapon.WeaponAttachedSprite;
             }
-            else if (rounds > 0)
-                rsi = weapon.AmmoEmptyAttachedSprite;
-            else
-                rsi = weapon.WeaponAttachedSprite;
+            else if (TryComp(contained, out DropshipAttachedSpriteComponent? attachedSprite))
+                rsi = attachedSprite.WeaponSlotSprite;
 
             if (rsi == null)
                 continue;

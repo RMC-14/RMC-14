@@ -62,6 +62,12 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HomingShots = true;
+
+    /// <summary>
+    ///     Can the sentry be picked up or toggled on/off.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsLocked;
 }
 
 [Serializable, NetSerializable]

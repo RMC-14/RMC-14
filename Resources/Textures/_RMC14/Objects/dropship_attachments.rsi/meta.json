@@ -163,6 +163,22 @@
     },
     {
       "name": "harpoon"
+    },
+    {
+      "name": "mg_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "mg_system_deployed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_deployed",
+      "directions": 4
     }
   ]
 }
