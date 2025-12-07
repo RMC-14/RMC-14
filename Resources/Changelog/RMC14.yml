@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Platforms, barricades and open doors/shutters/podlocks no longer block
-      resin structures.
-    type: Fix
-  id: 2110
-  time: '2025-08-06T03:58:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7234
 - author: path-to-aaru
   changes:
   - message: Xeno announcements for queen death cooldown and hive core destruction
@@ -4626,5 +4618,13 @@
   id: 2610
   time: '2025-12-06T19:00:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8585
+- author: PursuitinAshes
+  changes:
+  - message: Provost Inspectors have loadout options and a loadout option to choose
+      which jacket to spawn with.
+    type: Tweak
+  id: 2611
+  time: '2025-12-07T08:51:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8549
 Name: RMC14
 Order: -1
