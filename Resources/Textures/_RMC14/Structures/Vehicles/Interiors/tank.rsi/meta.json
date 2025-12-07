@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "trank_front_1",
+      "directions": 4
+    },
+    {
+      "name": "tank_front_2",
+      "directions": 4
+    },
+    {
+      "name": "tank_front_3",
+      "directions": 4
+    },
+    {
+      "name": "tank_right_1",
+      "directions": 4
+    },
+    {
+      "name": "tank_right_2",
+      "directions": 4
+    },
+    {
+      "name": "tank_right_3",
+      "directions": 4
+    },
+    {
+      "name": "tank_back_1",
+      "directions": 4
+    },
+    {
+      "name": "tank_back_2",
+      "directions": 4
+    },
+    {
+      "name": "tank_back_3",
+      "directions": 4
+    },
+    {
+      "name": "tank_left_1",
+      "directions": 4
+    },
+    {
+      "name": "tank_left_2",
+      "directions": 4
+    },
+    {
+      "name": "tank_left_3",
+      "directions": 4
+    },
+    {
+      "name": "hatch",
+      "directions": 4
+    },
+    {
+      "name": "prop0"
+    },
+    {
+      "name": "prop1"
+    },
+    {
+      "name": "prop2"
+    },
+    {
+      "name": "prop3"
+    },
+    {
+      "name": "prop4"
+    },
+    {
+      "name": "prop5"
+    },
+    {
+      "name": "prop6"
+    },
+    {
+      "name": "prop7"
+    },
+    {
+      "name": "prop8_extra"
+    },
+    {
+      "name": "new stuff"
+    },
+    {
+      "name": "back_1"
+    },
+    {
+      "name": "back_2"
+    },
+    {
+      "name": "back_3"
+    },
+    {
+      "name": "exterior_1"
+    },
+    {
+      "name": "exterior_2"
+    },
+    {
+      "name": "exterior_3"
+    },
+    {
+      "name": "front_1"
+    },
+    {
+      "name": "front_2"
+    },
+    {
+      "name": "front_3"
+    },
+    {
+      "name": "wall"
+    },
+    {
+      "name": "wall_1"
+    },
+    {
+      "name": "locker"
+    },
+    {
+      "name": "locker_open"
+    }
+  ]
+}

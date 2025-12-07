@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "weapons_loader"
+    },
+    {
+      "name": "VIEWPORTS"
+    },
+    {
+      "name": "viewport",
+      "directions": 4
+    },
+    {
+      "name": "viewport_simple"
+    },
+    {
+      "name": "SEATS"
+    },
+    {
+      "name": "armor_chair_old",
+      "directions": 4
+    },
+    {
+      "name": "armor_chair_unfold",
+      "directions": 4
+    },
+    {
+      "name": "armor_chair",
+      "directions": 4
+    },
+    {
+      "name": "armor_chair_buckled",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat_buckled",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_bars",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat_destroyed",
+      "directions": 4
+    },
+    {
+      "name": "MISC_STORAGE"
+    },
+    {
+      "name": "locker_open"
+    },
+    {
+      "name": "locker"
+    },
+    {
+      "name": "locker_med"
+    },
+    {
+      "name": "extinguisher"
+    },
+    {
+      "name": "extinguisher_closed"
+    },
+    {
+      "name": "extinguisher_full"
+    },
+    {
+      "name": "extinguisher_mini"
+    },
+    {
+      "name": "extinguisher_empty"
+    },
+    {
+      "name": "MEDVENDORS"
+    },
+    {
+      "name": "nanomed"
+    },
+    {
+      "name": "nanomed_vend",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "nanomed_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "med",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "med_vend",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "med_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "med_off"
+    },
+    {
+      "name": "med_broken"
+    },
+    {
+      "name": "med_panel"
+    },
+    {
+      "name": "blood"
+    },
+    {
+      "name": "blood_vend",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "blood_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "blood_off"
+    },
+    {
+      "name": "blood_broken"
+    },
+    {
+      "name": "blood_panel"
+    },
+    {
+      "name": "SUPPLY_VENDORS"
+    },
+    {
+      "name": "supply"
+    },
+    {
+      "name": "supply_off"
+    },
+    {
+      "name": "supply_broken"
+    },
+    {
+      "name": "supply_panel"
+    },
+    {
+      "name": "MISC_MACHINERY"
+    },
+    {
+      "name": "wall_phone",
+      "directions": 4
+    },
+    {
+      "name": "wall_phone_ring",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "wall_phone_ear",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_camera",
+      "directions": 8
+    },
+    {
+      "name": "vehicle_cameraemp",
+      "directions": 8,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

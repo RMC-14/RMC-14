@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "hull_wy",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "PRIMARY"
+    },
+    {
+      "name": "dual_cannon_wy_0",
+      "directions": 4
+    },
+    {
+      "name": "dual_cannon_wy_1",
+      "directions": 4
+    },
+    {
+      "name": "damaged_hdpt_primary",
+      "directions": 4
+    },
+    {
+      "name": "SECONDARY"
+    },
+    {
+      "name": "frontalcannon_wy_0",
+      "directions": 4
+    },
+    {
+      "name": "frontalcannon_wy_1",
+      "directions": 4
+    },
+    {
+      "name": "freight_0",
+      "directions": 4
+    },
+    {
+      "name": "freight_1",
+      "directions": 4
+    },
+    {
+      "name": "freight_2",
+      "directions": 4
+    },
+    {
+      "name": "WHEELS"
+    },
+    {
+      "name": "SUPPORT"
+    },
+    {
+      "name": "comms_relay_0",
+      "directions": 4
+    },
+    {
+      "name": "comms_relay_1",
+      "directions": 4
+    },
+    {
+      "name": "flare_launcher_0",
+      "directions": 4
+    },
+    {
+      "name": "flare_launcher_1",
+      "directions": 4
+    },
+    {
+      "name": "flare_launcher_2",
+      "directions": 4
+    },
+    {
+      "name": "damaged_hdpt_support",
+      "directions": 4
+    },
+    {
+      "name": "MISC"
+    },
+    {
+      "name": "wheels_wy_0",
+      "directions": 4
+    },
+    {
+      "name": "wheels_wy_0",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "wheels_wy_1",
+      "directions": 4
+    },
+    {
+      "name": "empty fuel cell",
+      "directions": 4
+    },
+    {
+      "name": "damaged_frame",
+      "directions": 4
+    }
+  ]
+}

@@ -224,10 +224,12 @@
   - type: MobMover
   - type: DoAfter
   - type: InputMover
+  - type: ItemSlots
+  - type: RMCVehicleWheelSlots
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5
     baseSprintSpeed: 7.0
-    baseAcceleration: 10
+    baseAcceleration: 2.5
 
 - type: entity
   parent: RMCVehicleTestThing

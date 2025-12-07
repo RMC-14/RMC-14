@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "laser_targetter"
+    },
+    {
+      "name": "comms_relay"
+    },
+    {
+      "name": "freighter_storage"
+    },
+    {
+      "name": "flare_launcher"
+    },
+    {
+      "name": "flare_launcher_installed"
+    },
+    {
+      "name": "front_cannon"
+    },
+    {
+      "name": "dual_cannon"
+    },
+    {
+      "name": "tires"
+    },
+    {
+      "name": "m56_FPW",
+      "directions": 4
+    },
+    {
+      "name": "front_cannon_wy"
+    },
+    {
+      "name": "dual_cannon_wy"
+    },
+    {
+      "name": "tires_wy"
+    }
+  ]
+}

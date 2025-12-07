@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "apc_front_1",
+      "directions": 4
+    },
+    {
+      "name": "apc_front_2",
+      "directions": 4
+    },
+    {
+      "name": "apc_front_3",
+      "directions": 4
+    },
+    {
+      "name": "apc_right_1",
+      "directions": 4
+    },
+    {
+      "name": "apc_right_2",
+      "directions": 4
+    },
+    {
+      "name": "apc_right_3",
+      "directions": 4
+    },
+    {
+      "name": "apc_right_4",
+      "directions": 4
+    },
+    {
+      "name": "apc_back_1",
+      "directions": 4
+    },
+    {
+      "name": "apc_back_2",
+      "directions": 4
+    },
+    {
+      "name": "apc_back_3",
+      "directions": 4
+    },
+    {
+      "name": "apc_left_1",
+      "directions": 4
+    },
+    {
+      "name": "apc_left_2",
+      "directions": 4
+    },
+    {
+      "name": "apc_left_3",
+      "directions": 4
+    },
+    {
+      "name": "apc_left_4",
+      "directions": 4
+    },
+    {
+      "name": "exit_door",
+      "directions": 4
+    },
+    {
+      "name": "current_interior_sprites"
+    },
+    {
+      "name": "rear_wheel_L"
+    },
+    {
+      "name": "rear_wheel_R"
+    },
+    {
+      "name": "front_wheel_L"
+    },
+    {
+      "name": "front_wheel_R"
+    },
+    {
+      "name": "corner_L"
+    },
+    {
+      "name": "corner_R"
+    },
+    {
+      "name": "wall"
+    },
+    {
+      "name": "corner_inverse_L"
+    },
+    {
+      "name": "corner_inverse_L_1"
+    },
+    {
+      "name": "corner_inverse_L_2"
+    },
+    {
+      "name": "corner_inverse_L_3"
+    },
+    {
+      "name": "corner_inverse_L_4"
+    },
+    {
+      "name": "corner_inverse_L_5"
+    },
+    {
+      "name": "corner_inverse_R"
+    },
+    {
+      "name": "corner_inverse_R_1"
+    },
+    {
+      "name": "corner_inverse_R_2"
+    },
+    {
+      "name": "corner_inverse_R_3"
+    },
+    {
+      "name": "corner_inverse_R_4"
+    },
+    {
+      "name": "corner_small_L"
+    },
+    {
+      "name": "corner_small_R"
+    },
+    {
+      "name": "wall_small_L"
+    },
+    {
+      "name": "wall_small_R"
+    },
+    {
+      "name": "wall_door_front"
+    },
+    {
+      "name": "door_front"
+    },
+    {
+      "name": "door_back"
+    },
+    {
+      "name": "rear_1"
+    },
+    {
+      "name": "rear_2"
+    },
+    {
+      "name": "rear_3"
+    },
+    {
+      "name": "rear_4"
+    },
+    {
+      "name": "rear_5"
+    },
+    {
+      "name": "rear_6"
+    },
+    {
+      "name": "wall_1"
+    },
+    {
+      "name": "wall_2"
+    },
+    {
+      "name": "wall_3"
+    },
+    {
+      "name": "wall_4"
+    },
+    {
+      "name": "wall_5"
+    },
+    {
+      "name": "wall_6"
+    },
+    {
+      "name": "front_1"
+    },
+    {
+      "name": "front_2"
+    },
+    {
+      "name": "front_3"
+    },
+    {
+      "name": "front_4"
+    },
+    {
+      "name": "front_5"
+    },
+    {
+      "name": "front_6"
+    },
+    {
+      "name": "wheel_front_top_1"
+    },
+    {
+      "name": "wheel_front_top_2"
+    },
+    {
+      "name": "wheel_back_top_1"
+    },
+    {
+      "name": "wheel_back_top_2"
+    },
+    {
+      "name": "door_rear_right"
+    },
+    {
+      "name": "door_rear_center"
+    },
+    {
+      "name": "door_rear_left"
+    },
+    {
+      "name": "m56_FPW",
+      "directions": 4
+    },
+    {
+      "name": "sensors_equipment",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

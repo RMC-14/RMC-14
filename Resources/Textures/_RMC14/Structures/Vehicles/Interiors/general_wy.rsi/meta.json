@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "weapons_loader"
+    },
+    {
+      "name": "locker"
+    },
+    {
+      "name": "locker_open"
+    },
+    {
+      "name": "nanomed"
+    },
+    {
+      "name": "nanomed_vend",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "nanomed_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "extinguisher"
+    },
+    {
+      "name": "extinguisher_closed"
+    },
+    {
+      "name": "extinguisher_full"
+    },
+    {
+      "name": "extinguisher_mini"
+    },
+    {
+      "name": "extinguisher_empty"
+    },
+    {
+      "name": "viewport",
+      "directions": 4
+    },
+    {
+      "name": "wall_phone",
+      "directions": 4
+    },
+    {
+      "name": "wall_phone_ring",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "wall_phone_ear",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat_buckled",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_bars",
+      "directions": 4
+    },
+    {
+      "name": "vehicle_seat_destroyed",
+      "directions": 4
+    },
+    {
+      "name": "armor_chair",
+      "directions": 4
+    },
+    {
+      "name": "armor_chair_buckled",
+      "directions": 4
+    }
+  ]
+}

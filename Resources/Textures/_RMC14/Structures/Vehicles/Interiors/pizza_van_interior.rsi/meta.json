@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "back_1"
+    },
+    {
+      "name": "back_2"
+    },
+    {
+      "name": "back_3"
+    },
+    {
+      "name": "exterior_2"
+    },
+    {
+      "name": "exterior_3"
+    },
+    {
+      "name": "roof_1"
+    },
+    {
+      "name": "roof_2"
+    },
+    {
+      "name": "roof_3"
+    },
+    {
+      "name": "roof_4"
+    },
+    {
+      "name": "roof_5"
+    },
+    {
+      "name": "background_2"
+    },
+    {
+      "name": "background_3"
+    },
+    {
+      "name": "exterior_door"
+    },
+    {
+      "name": "interior_door"
+    },
+    {
+      "name": "front_roof_1"
+    },
+    {
+      "name": "front_roof_2"
+    },
+    {
+      "name": "front_1"
+    },
+    {
+      "name": "front_2"
+    },
+    {
+      "name": "front_3"
+    },
+    {
+      "name": "exterior_door_unique"
+    },
+    {
+      "name": "windshield_viewport_top"
+    },
+    {
+      "name": "windshield_viewport_bottom"
+    }
+  ]
+}

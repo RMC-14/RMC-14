@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "POWERLOADER CLAMPS"
+    },
+    {
+      "name": "loader_clamp",
+      "delays": [
+        [
+          25,
+          0.1,
+          0.1,
+          0.1,
+          1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "loader_clamp_right"
+    },
+    {
+      "name": "POWERLOADER CLAMPS CARGO"
+    },
+    {
+      "name": "ob_fuel"
+    },
+    {
+      "name": "ob_fuel_right"
+    },
+    {
+      "name": "ob_warhead"
+    },
+    {
+      "name": "ob_warhead_right"
+    },
+    {
+      "name": "vehicle_module"
+    },
+    {
+      "name": "vehicle_module_right"
+    },
+    {
+      "name": "ds_gear"
+    },
+    {
+      "name": "ds_gear_right"
+    },
+    {
+      "name": "ds_ammo"
+    },
+    {
+      "name": "ds_ammo_right"
+    },
+    {
+      "name": "ds_rocket"
+    },
+    {
+      "name": "ds_rocket_right"
+    },
+    {
+      "name": "reagent_dispenser"
+    },
+    {
+      "name": "reagent_dispenser_right"
+    },
+    {
+      "name": "crate"
+    },
+    {
+      "name": "crate_right"
+    },
+    {
+      "name": "big_crate"
+    },
+    {
+      "name": "big_crate_right"
+    },
+    {
+      "name": "chairs"
+    },
+    {
+      "name": "chairs_right"
+    },
+    {
+      "name": "floodlight"
+    },
+    {
+      "name": "floodlight_right"
+    },
+    {
+      "name": "OLD AND UNUSED"
+    },
+    {
+      "name": "loader_clamp_old"
+    },
+    {
+      "name": "loader_clamp_full_old"
+    }
+  ]
+}

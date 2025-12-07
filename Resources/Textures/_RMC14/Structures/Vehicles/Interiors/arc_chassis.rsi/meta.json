@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 160,
+    "y": 160
+  },
+  "states": [
+    {
+      "name": "arc_chassis"
+    }
+  ]
+}

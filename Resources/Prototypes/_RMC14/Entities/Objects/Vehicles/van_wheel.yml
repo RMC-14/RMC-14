@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVanWheel
+  name: van wheel
+  description: A sturdy wheel for the van. Can be removed or replaced.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/van.rsi
+    state: tires
+  - type: Item
+    size: Large
+  - type: RMCVehicleWheelItem
