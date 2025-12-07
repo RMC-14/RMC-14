@@ -103,6 +103,15 @@
   parent: CMDefibrillator
   suffix: RMC14, Empty
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+    - state: empty
+      map: [ "enum.DefibrillatorVisualLayers.Overlay"]
   - type: ItemSlots
     slots:
       cell_slot:
