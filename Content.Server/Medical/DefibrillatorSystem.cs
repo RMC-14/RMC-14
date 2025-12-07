@@ -5,8 +5,6 @@ using Content.Server.Electrocution;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
-using Content.Server.Power;
-using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
@@ -306,10 +304,9 @@ public sealed class DefibrillatorSystem : EntitySystem
         var ev = new TargetDefibrillatedEvent(user, (uid, component));
         RaiseLocalEvent(target, ref ev);
     }
-
+    //RMC14
     private void OnChangeCharge(Entity<DefibrillatorComponent> entity, ref PowerCellChangedEvent args)
     {
-        _popup.PopupEntity("charge_changed", entity);
         UpdateChargeVisuals(entity);
     }
     private void UpdateChargeVisuals(EntityUid uid)
@@ -338,4 +335,5 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (TryComp<AppearanceComponent>(uid, out var appearance))
             _appearance.SetData(uid, DefibrillatorVisuals.DefibrillatorCharge, charge, appearance);
     }
+    //RMC14
 }
