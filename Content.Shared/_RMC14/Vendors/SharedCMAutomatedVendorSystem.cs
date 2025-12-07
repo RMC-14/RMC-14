@@ -337,11 +337,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
-        if (!HasComp<MultitoolComponent>(args.Used))
+        if (HasComp<MultitoolComponent>(args.Used))
+        {
+            args.Handled = true;
+            TryHackVendor(ent, args.User, args.Used);
             return;
+        }
 
+        // Medical vendor restocking QoL
+        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent))
+            return;
+        if (!ent.Comp.CanManualRestock)
+            return;
+        TryRestockSingleItem(ent, args.Used, args.User);
         args.Handled = true;
-        TryHackVendor(ent, args.User, args.Used);
     }
 
     private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
