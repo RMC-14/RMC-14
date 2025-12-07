@@ -219,6 +219,17 @@
     sprite: _RMC14/Structures/Vehicles/van.rsi
     layers:
     - state: van_base
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+        visible: true
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+        visible: true
   - type: Corrodible
     isCorrodible: false
   - type: MobMover
@@ -226,6 +237,8 @@
   - type: InputMover
   - type: ItemSlots
   - type: RMCVehicleWheelSlots
+    slotCount: 1
+  - type: Appearance
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5
     baseSprintSpeed: 7.0

@@ -25,10 +25,6 @@
     },
     {
       "name": "wheels_0",
-      "directions": 4
-    },
-    {
-      "name": "wheels_0",
       "directions": 4,
       "delays": [
         [
