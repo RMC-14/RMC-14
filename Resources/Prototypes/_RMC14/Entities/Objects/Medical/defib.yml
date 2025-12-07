@@ -27,7 +27,6 @@
           Low: { state: low }
           Half: { state: half }
           Full: { state: full }
-        
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Medical/defib.rsi

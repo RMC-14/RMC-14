@@ -295,7 +295,6 @@ public sealed class DefibrillatorSystem : EntitySystem
             : component.SuccessSound;
         _audio.PlayPvs(sound, uid);
 
-
         // if we don't have enough power left for another shot, turn it off
         if (!_powerCell.HasActivatableCharge(uid))
             _toggle.TryDeactivate(uid);
@@ -304,6 +303,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         var ev = new TargetDefibrillatedEvent(user, (uid, component));
         RaiseLocalEvent(target, ref ev);
     }
+
     //RMC14
     private void OnChangeCharge(Entity<DefibrillatorComponent> entity, ref PowerCellChangedEvent args)
     {
