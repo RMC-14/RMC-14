@@ -557,13 +557,13 @@ public sealed class NPCUtilitySystem : EntitySystem
                         entities.Add(ent);
                     }
                 }
-                // Ed RMC
                 else
                 {
                     foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
                     {
                         entities.Add(ent);
                     }
+                    // End RMC
                 }
                 break;
             }
