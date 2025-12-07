@@ -27,6 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Movement;
+using Content.Shared.Movement.Components;
 
 namespace Content.Shared.Buckle;
 
@@ -186,6 +187,13 @@ public abstract partial class SharedBuckleSystem
 
     private void OnBuckleUpdateCanMove(EntityUid uid, BuckleComponent component, UpdateCanMoveEvent args)
     {
+        // If we're relaying then don't cancel.
+        // NOTE: I don't love this solution. It's by far the easiest but i hate having it be a consideration.
+        // We need to have a more logical way of distinguishing between a "physical" movement being blocked
+        // And simply being unable to move due to being unconscious, dead, etc. -EMO
+        if (HasComp<RelayInputMoverComponent>(uid))
+            return;
+
         // RMC14
         if (HasComp<RMCAllowStrapMovementComponent>(component.BuckledTo))
             return;
