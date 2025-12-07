@@ -298,17 +298,19 @@ namespace Content.Shared.Movement.Systems
 
         private void HandleDirChange(Entity<InputMoverComponent?> entity, Direction dir, ushort subTick, bool state)
         {
+            var hasMover = MoverQuery.Resolve(entity.Owner, ref entity.Comp, false);
+
             // Relayed movement just uses the same keybinds given we're moving the relayed entity
             // the same as us.
 
             // TODO: Should move this into HandleMobMovement itself.
-            if (entity.Comp.CanMove && RelayQuery.TryComp(entity, out var relayMover))
+            if (hasMover && entity.Comp != null && entity.Comp.CanMove && RelayQuery.TryComp(entity, out var relayMover))
             {
                 DebugTools.Assert(relayMover.RelayEntity != entity.Owner);
                 DebugTools.AssertNotNull(relayMover.RelayEntity);
 
                 if (MoverQuery.TryGetComponent(entity, out var mover))
-                    SetMoveInput((entity, mover), MoveButtons.None);
+                    SetMoveInput((entity.Owner, mover), MoveButtons.None);
 
                 HandleDirChange(relayMover.RelayEntity, dir, subTick, state);
                 return;
@@ -325,7 +327,11 @@ namespace Content.Shared.Movement.Systems
                 RaiseLocalEvent(xform.ParentUid, ref relayMoveEvent);
             }
 
-            SetVelocityDirection((entity, entity.Comp), dir, subTick, state);        }
+            if (!hasMover || entity.Comp == null)
+                return;
+
+            SetVelocityDirection(new Entity<InputMoverComponent>(entity.Owner, entity.Comp), dir, subTick, state);
+        }
 
         private void OnInputInit(Entity<InputMoverComponent> entity, ref ComponentInit args)
         {

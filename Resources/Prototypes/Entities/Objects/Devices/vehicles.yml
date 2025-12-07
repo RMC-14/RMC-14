@@ -216,9 +216,9 @@
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
-    sprite: _RMC14/Structures/Vehicles/vehicles.rsi
+    sprite: _RMC14/Structures/Vehicles/van.rsi
     layers:
-    - state: mizutani_black
+    - state: van_base
   - type: Corrodible
     isCorrodible: false
   - type: MobMover

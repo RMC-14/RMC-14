@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
+using Robust.Shared.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Localization;
@@ -19,6 +20,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class RMCVehicleSystem : EntitySystem
 {
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
@@ -48,6 +50,9 @@ public sealed class RMCVehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleDriverSeatComponent, StrapAttemptEvent>(OnDriverSeatStrapAttempt);
         SubscribeLocalEvent<VehicleDriverSeatComponent, StrappedEvent>(OnDriverSeatStrapped);
         SubscribeLocalEvent<VehicleDriverSeatComponent, UnstrappedEvent>(OnDriverSeatUnstrapped);
+
+        SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleEnteredEvent>(OnVehicleOperatorEntered);
+        SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleExitedEvent>(OnVehicleOperatorExited);
     }
 
     private void OnVehicleEnterActivate(Entity<VehicleEnterComponent> ent, ref ActivateInWorldEvent args)
@@ -226,6 +231,31 @@ public sealed class RMCVehicleSystem : EntitySystem
             return;
 
         _vehicles.TryRemoveOperator((vehicle.Value, vehicleComp));
+    }
+
+    private void OnVehicleOperatorEntered(Entity<VehicleOperatorComponent> ent, ref OnVehicleEnteredEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<VehicleEnterComponent>(args.Vehicle.Owner))
+            return;
+
+        _eye.SetTarget(ent.Owner, args.Vehicle.Owner);
+    }
+
+    private void OnVehicleOperatorExited(Entity<VehicleOperatorComponent> ent, ref OnVehicleExitedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent, out EyeComponent? eye))
+            return;
+
+        if (eye.Target != args.Vehicle.Owner)
+            return;
+
+        _eye.SetTarget(ent.Owner, null, eye);
     }
 
     private bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
