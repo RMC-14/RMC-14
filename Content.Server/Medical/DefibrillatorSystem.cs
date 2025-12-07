@@ -5,6 +5,8 @@ using Content.Server.Electrocution;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
+using Content.Server.Power;
+using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
@@ -21,6 +23,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Timing;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
@@ -61,6 +64,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     {
         SubscribeLocalEvent<DefibrillatorComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DefibrillatorComponent, DefibrillatorZapDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
     }
 
     private void OnAfterInteract(EntityUid uid, DefibrillatorComponent component, AfterInteractEvent args)
@@ -293,7 +297,6 @@ public sealed class DefibrillatorSystem : EntitySystem
             : component.SuccessSound;
         _audio.PlayPvs(sound, uid);
 
-        UpdateChargeVisuals(uid);
 
         // if we don't have enough power left for another shot, turn it off
         if (!_powerCell.HasActivatableCharge(uid))
@@ -302,6 +305,12 @@ public sealed class DefibrillatorSystem : EntitySystem
         // TODO clean up this clown show above
         var ev = new TargetDefibrillatedEvent(user, (uid, component));
         RaiseLocalEvent(target, ref ev);
+    }
+
+    private void OnChangeCharge(Entity<DefibrillatorComponent> entity, ref PowerCellChangedEvent args)
+    {
+        _popup.PopupEntity("charge_changed", entity);
+        UpdateChargeVisuals(entity);
     }
     private void UpdateChargeVisuals(EntityUid uid)
     {
