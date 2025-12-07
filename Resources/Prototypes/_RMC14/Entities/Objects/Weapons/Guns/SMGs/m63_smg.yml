@@ -57,6 +57,8 @@
           - CMMagazineSMGM63Ext
           - RMCMagazineSMGM63Rubber
           - RMCMagazineSMGM63HEAP
+          - RMCMagazineSMGM63WP
+          - RMCMagazineSMGM63Incendiary
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -220,6 +222,60 @@
 
 - type: entity
   parent: CMMagazineSMGM63
+  id: RMCMagazineSMGM63WP
+  name: "M63 WP magazine (10x20mm)"
+  suffix: WP
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridge10x20mmWP
+    proto: RMCCartridge10x20mmWP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#6365E6"
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGM63WP
+#  - type: RefillableByBulletBox no HEAP bulletbox
+#    bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: CMMagazineSMGM63
+  id: RMCMagazineSMGM63Incendiary
+  name: "M63 incendiary magazine (10x20mm)"
+  suffix: Incendiary
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridge10x20mmIncendiary
+    proto: RMCCartridge10x20mmIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGM63Incendiary
+#  - type: RefillableByBulletBox no HEAP bulletbox
+#    bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: CMMagazineSMGM63
   id: CMMagazineSMGM63Ext
   name: "M63 extended magazine (10x20mm)"
   components:
@@ -274,6 +330,30 @@
     proto: RMCBullet10x20mmHEAP
 
 - type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge10x20mmWP
+  name: WP cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge10x20mmWP
+  - type: CartridgeAmmo
+    proto: RMCBullet10x20mmWP
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge10x20mmIncendiary
+  name: incendiary cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge10x20mmIncendiary
+  - type: CartridgeAmmo
+    proto: RMCBullet10x20mmIncendiary
+
+- type: entity
   parent: RMCBaseBullet
   id: Bullet10x20mm
   categories: [ HideSpawnMenu ]
@@ -321,6 +401,35 @@
   - type: CMArmorPiercing
     amount: 30
 
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet10x20mmWP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCPenetratingProjectile
+  - type: TimedDespawn #Otherwise your game goes all laggy from too many projectiles still flying after going beyond 0 damage
+    lifetime: 0.2
+
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet10x20mmIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 5
+  - type: IgniteOnProjectileHit
+
 - type: Tag
   id: RMCWeaponSMGM63
 
@@ -334,6 +443,12 @@
   id: RMCMagazineSMGM63HEAP
 
 - type: Tag
+  id: RMCMagazineSMGM63WP
+
+- type: Tag
+  id: RMCMagazineSMGM63Incendiary
+
+- type: Tag
   id: CMMagazineSMGM63Ext
 
 - type: Tag
@@ -341,3 +456,9 @@
 
 - type: Tag
   id: RMCCartridge10x20mmHEAP
+
+- type: Tag
+  id: RMCCartridge10x20mmWP
+
+- type: Tag
+  id: RMCCartridge10x20mmIncendiary

@@ -1,4 +1,5 @@
-﻿- type: job
+﻿
+- type: job
   abstract: true
   id: CMJobBase
   isCM: true

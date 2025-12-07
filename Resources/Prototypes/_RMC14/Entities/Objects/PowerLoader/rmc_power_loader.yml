@@ -67,14 +67,82 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:DoActsBehavior # TODO RMC14 spawn wreckage
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCPowerCellAPC:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
         acts: ["Destruction"]
+
+- type: entity
+  id: RMCMechPowerLoaderWreckage
+  name: LU-50 Power loader wreckage
+  description: The wreckage of a LU-50 Power loader.
+  components:
+  - type: Corrodible
+    isCorrodible: true
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck
+  - type: Clickable
+  - type: InputMover
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Strap
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCMechPowerLoaderWreckage
+  id: RMCMechPowerLoaderWreckageGreen
+  name: LU-43 Power loader wreckage
+  description: The wreckage of a LU-43 Power loader.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck_jd
+
+- type: entity
+  parent: RMCMechPowerLoaderWreckage
+  id: RMCMechPowerLoaderWreckageBlue
+  name: LU-52 Power loader wreckage
+  description: The wreckage of a LU-52 Power loader.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck_ft
 
 - type: entity
   parent: RMCMechBase
   id: RMCMechPowerLoader
-  name: power loader # TODO RMC14 name
-  description: An old but trusted design used in warehouses, constructions and military ships everywhere. # TODO RMC14 description
+  name: LU-50 Power loader
+  description: An old Fujin design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: RMCAllowStrapMovement
   - type: PowerLoader
@@ -93,3 +161,35 @@
       tags:
       - RMCDropshipEnginePoint
     range: 2
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckage
+
+- type: entity
+  parent: RMCMechPowerLoader
+  id: RMCMechPowerLoaderGreen
+  name: LU-43 Power loader
+  description: An really old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you’ve never heard of them before. # TODO RMC14 BETTER DESCRIPTION
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: powerloader_jd
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckageGreen
+
+- type: entity
+  parent: RMCMechPowerLoader
+  id: RMCMechPowerLoaderBlue
+  name: LU-52 Power loader
+  description: A modernized design made to outdo the older models once used in fancy ports and facilities. It was built by Ferret Heavy Industries before they went bankrupt, making these units surprisingly affordable. # TODO RMC14 BETTER DESCRIPTION
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: powerloader_ft
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckageBlue

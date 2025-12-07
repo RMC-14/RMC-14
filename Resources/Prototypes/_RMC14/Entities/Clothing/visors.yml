@@ -1,14 +1,22 @@
 - type: entity
-  parent: [ BaseItem, RMCPowerCellSlotUnremovableSuper ]
+  parent: BaseItem
+  id: RMCVisorBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+  - type: Item
+    size: Tiny
+  - type: ToggleVisor
+
+- type: entity
+  parent: [ RMCVisorBase, RMCPowerCellSlotUnremovableSuper ]
   id: RMCVisorNightVision
   name: night vision optic
   description: An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in units with regular funding. It can be inserted into a recharger to recharge its internal battery.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
     state: nvg_sight
-  - type: Item
-    size: Tiny
   - type: PowerCellDraw
     enabled: false
     drawRate: 33
@@ -31,16 +39,13 @@
       color: "#008000"
 
 - type: entity
-  parent: BaseItem
+  parent: RMCVisorBase
   id: RMCVisorMedical
   name: basic medical optic
   description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids health status.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
     state: med_sight
-  - type: Item
-    size: Tiny
   - type: Visor
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
@@ -48,7 +53,6 @@
     onIcon:
       sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
       state: med_sight_down
-  - type: ToggleVisor
   - type: ComponentToggler
     components:
     - type: ShowHealthBars
@@ -66,7 +70,6 @@
   description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids health status and research notes.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
     state: med_adv_sight
   - type: Visor
     onIcon:
@@ -89,16 +92,13 @@
       state: med_sight_left
 
 - type: entity
-  parent: BaseItem
+  parent: RMCVisorBase
   id: RMCVisorWelding
   name: welding visor
   description: An insertable visor HUD into a standard UNMC helmet. This type protects the eyes from welders.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
     state: sight_empty
-  - type: Item
-    size: Tiny
   - type: Visor
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
@@ -106,7 +106,6 @@
     onIcon:
       sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
       state: blank_hud_sight_down
-  - type: ToggleVisor
   - type: ComponentToggler
     components:
     - type: EyeProtection
@@ -119,16 +118,13 @@
   - type: UnremovableVisor
 
 - type: entity
-  parent: BaseItem
+  parent: RMCVisorBase
   id: RMCVisorSquad
   name: squad optic
   description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display of marine squads.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
     state: hud_sight
-  - type: Item
-    size: Tiny
   - type: Visor
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
@@ -136,7 +132,6 @@
     onIcon:
       sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
       state: hud_sight_down
-  - type: ToggleVisor
   - type: ComponentToggler
     components:
     - type: GrantMarineIcons
@@ -151,3 +146,94 @@
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
       state: hud_sight_left
+
+- type: entity
+  parent: RMCVisorBase
+  id: RMCVisorPilotBlack
+  name: MK30 black flight visor
+  description: A standard issue snap-on visor used by UNMC dropship pilots. Polarized to reduce glare and protect the eyes during atmospheric re-entry and orbital deployment.
+  components:
+  - type: Sprite
+    state: po_visor
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_black
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_down
+
+- type: entity
+  parent: RMCVisorPilotBlack
+  id: RMCVisorPilotDarkblue
+  name: MK30 dark blue flight visor
+  components:
+  - type: Sprite
+    state: po_visor_darkblue
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_darkblue
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_darkblue_down
+
+- type: entity
+  parent: RMCVisorPilotBlack
+  id: RMCVisorPilotLightblue
+  name: MK30 light blue flight visor
+  components:
+  - type: Sprite
+    state: po_visor_lightblue
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_lightblue
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_lightblue_down
+
+- type: entity
+  parent: RMCVisorPilotBlack
+  id: RMCVisorPilotPurple
+  name: MK30 purple flight visor
+  components:
+  - type: Sprite
+    state: po_visor_purple
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_purple
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_purple_down
+
+- type: entity
+  parent: RMCVisorPilotBlack
+  id: RMCVisorPilotRed
+  name: MK30 red flight visor
+  components:
+  - type: Sprite
+    state: po_visor_red
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_red
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_red_down
+
+- type: entity
+  parent: RMCVisorPilotBlack
+  id: RMCVisorPilotYellow
+  name: MK30 yellow flight visor
+  components:
+  - type: Sprite
+    state: po_visor_yellow
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: po_visor_yellow
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: po_visor_yellow_down

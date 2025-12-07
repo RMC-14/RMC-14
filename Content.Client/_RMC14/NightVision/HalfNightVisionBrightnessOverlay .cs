@@ -14,7 +14,7 @@ public sealed class HalfNightVisionBrightnessOverlay : Overlay
             return;
 
         var worldBounds = args.WorldAABB;
-        var brightnessColor = new Color(0.35f, 0.35f, 0.35f, 1.0f);
+        var brightnessColor = new Color(0.45f, 0.45f, 0.45f, 1.0f);
 
         worldHandle.DrawRect(worldBounds, brightnessColor);
     }
