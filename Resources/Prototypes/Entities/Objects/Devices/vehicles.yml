@@ -225,8 +225,9 @@
   - type: DoAfter
   - type: InputMover
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 2
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 7.0
+    baseAcceleration: 10
 
 - type: entity
   parent: RMCVehicleTestThing

@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "van_front_1",
+      "directions": 4
+    },
+    {
+      "name": "van_front_2",
+      "directions": 4
+    },
+    {
+      "name": "van_right_1",
+      "directions": 4
+    },
+    {
+      "name": "van_right_2",
+      "directions": 4
+    },
+    {
+      "name": "van_right_3",
+      "directions": 4
+    },
+    {
+      "name": "van_back_1",
+      "directions": 4
+    },
+    {
+      "name": "van_back_2",
+      "directions": 4
+    },
+    {
+      "name": "van_left_1",
+      "directions": 4
+    },
+    {
+      "name": "van_left_2",
+      "directions": 4
+    },
+    {
+      "name": "van_left_3",
+      "directions": 4
+    },
+    {
+      "name": "new stuff"
+    },
+    {
+      "name": "back_1"
+    },
+    {
+      "name": "back_2"
+    },
+    {
+      "name": "back_3"
+    },
+    {
+      "name": "exterior_1"
+    },
+    {
+      "name": "exterior_2"
+    },
+    {
+      "name": "exterior_3"
+    },
+    {
+      "name": "exterior_1_old"
+    },
+    {
+      "name": "exterior_2_old"
+    },
+    {
+      "name": "exterior_3_old"
+    },
+    {
+      "name": "roof_1"
+    },
+    {
+      "name": "roof_2"
+    },
+    {
+      "name": "roof_3"
+    },
+    {
+      "name": "background_1"
+    },
+    {
+      "name": "background_2"
+    },
+    {
+      "name": "background_3"
+    },
+    {
+      "name": "exterior_door"
+    },
+    {
+      "name": "interior_door"
+    },
+    {
+      "name": "front_roof_1"
+    },
+    {
+      "name": "front_roof_2"
+    },
+    {
+      "name": "front_1"
+    },
+    {
+      "name": "front_2"
+    },
+    {
+      "name": "front_3"
+    },
+    {
+      "name": "exterior_door_unique"
+    },
+    {
+      "name": "windshield_viewport_top"
+    },
+    {
+      "name": "windshield_viewport_bottom"
+    }
+  ]
+}
