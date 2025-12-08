@@ -1,6 +1,9 @@
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
@@ -12,7 +15,9 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
@@ -24,22 +29,29 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _attackBlockerSystem = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
+    private EntityQuery<RMCProjectileAccuracyComponent> _projectileQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
+        _projectileQuery = GetEntityQuery<RMCProjectileAccuracyComponent>();
+
+        SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnBarricadePreventCollide, before: [typeof(RequireProjectileTargetSystem)]);
 
         SubscribeLocalEvent<EntrenchingToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
@@ -52,6 +64,39 @@ public sealed class BarricadeSystem : EntitySystem
         SubscribeLocalEvent<FullSandbagComponent, ActivateInWorldEvent>(OnFullActivateInWorld);
         SubscribeLocalEvent<FullSandbagComponent, AfterInteractEvent>(OnFullAfterInteract);
         SubscribeLocalEvent<FullSandbagComponent, SandbagBuildDoAfterEvent>(OnFullBuildDoAfter);
+    }
+
+    private void OnBarricadePreventCollide(Entity<BarricadeComponent> barricade, ref PreventCollideEvent args)
+    {
+        var projectile = args.OtherEntity;
+
+        if (!_projectileQuery.TryComp(projectile, out var projectileComp))
+            return;
+
+        if (projectileComp.ShotFrom == null)
+            return;
+
+        var barricadeCoords = _transform.GetMoverCoordinates(barricade.Owner);
+        var distance = (barricadeCoords.Position - projectileComp.ShotFrom.Value.Position).Length();
+
+        // TODO weapons shot from hardpoints (tanks and other vehicles) subtract 3 distance
+
+        if (distance < 1 || distance > 3 && _attackBlockerSystem.IsFacingTarget(barricade, projectile))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, projectileComp), barricade.Owner).Float();
+        var projectileCoverage = barricade.Comp.ProjectileCoverage;
+        var distanceLimit = barricade.Comp.DistanceLimit;
+        var accuracyFactor = barricade.Comp.AccuracyFactor;
+
+        var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
+        hitChance /= 100; // Convert to decimal
+
+        if (!_random.Prob(hitChance))
+            args.Cancelled = true;
     }
 
     private void OnAfterInteract(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
