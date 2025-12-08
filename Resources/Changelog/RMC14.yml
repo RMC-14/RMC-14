@@ -3305,8 +3305,7 @@
   - message: Removed the Experimental Meson Goggles from the synthetic auxiliary gear
       rack.
     type: Remove
-  - message: Survivor Synth Access is now correct. (Colony AA, Shipside Med
-      and Engineering)
+  - message: Survivor Synth Access is now correct. (Colony AA, Shipside Med and Engineering)
     type: Tweak
   - message: Survivor Synth now starts with no IFF by default. (Previously UNMC IFF)
     type: Tweak
@@ -4745,5 +4744,14 @@
   id: 2639
   time: '2025-12-08T08:58:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8597
+- author: DrSmugleaf
+  changes:
+  - message: Added 2 new hive boons, hive boon of fire resistance which grants all
+      xenos fire immunity for 5 minutes, and surge of larva which grants 5 burrowed
+      larva to the hive.
+    type: Add
+  id: 2640
+  time: '2025-12-08T11:00:59.820643+00:00'
+  url: null
 Name: RMC14
 Order: -1
