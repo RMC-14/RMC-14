@@ -96,7 +96,7 @@ namespace Content.IntegrationTests.Tests
                             Assert.Fail($"Failed to delete {meta.EntityPrototype}, NAME: {meta.EntityName}");
                         }
 
-                        Assert.That(entityMan.EntityCount, Is.Zero, $"On of these prototypes is to blame: {string.Join(",", chunk)}");
+                        Assert.That(entityMan.EntityCount, Is.Zero, $"One of these prototypes is to blame: {string.Join(",", chunk)}");
                     });
                 });
 
@@ -250,7 +250,7 @@ namespace Content.IntegrationTests.Tests
                             Assert.Fail($"Failed to delete {meta.EntityPrototype}, NAME: {meta.EntityName}");
                         }
 
-                        Assert.That(sEntMan.EntityCount, Is.Zero, $"On of these prototypes is to blame: {string.Join(",", chunk)}");
+                        Assert.That(sEntMan.EntityCount, Is.Zero, $"One of these prototypes is to blame: {string.Join(",", chunk)}");
                     });
                 });
 
