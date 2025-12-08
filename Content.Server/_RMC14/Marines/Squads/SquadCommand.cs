@@ -33,9 +33,6 @@ public sealed class SquadCommand : ToolshedCommand
         [PipedArgument] EntityUid marine,
         [CommandArgument] Entity<SquadTeamComponent> squad)
     {
-        if (!HasComp<MarineComponent>(marine))
-            return marine;
-
         _squad ??= GetSys<SquadSystem>();
         _squad.AssignSquad(marine, (squad, squad), null);
         return marine;
