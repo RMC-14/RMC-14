@@ -190,8 +190,10 @@
       entries:
       - id: RMCTankFlamer
         points: 3
-    #- id: CMM240IncineratorTankB-Gel
-    #  points: 3
+        name: incinerator tank (UT-Napthal)
+      - id: RMCTankFlamerBGel
+        points: 3
+        name: incinerator tank (B-Gel)
     - name: Restricted Firearms
       entries:
       - id: RMCCaseFlamer
@@ -408,8 +410,9 @@
     contents:
     - id: RMCBackpackFlamer
     - id: RMCWeaponFlamer
-    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
-      amount: 3 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamer
+      amount: 2 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamerBGel
     - id: CMFireExtinguisherPortable
 
 - type: entity
