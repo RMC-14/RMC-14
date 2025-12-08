@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Random;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
@@ -21,12 +22,14 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
 
 public sealed class BarricadeSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -109,7 +112,13 @@ public sealed class BarricadeSystem : EntitySystem
         var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
         hitChance /= 100; // Convert to decimal
 
-        if (!_random.Prob(hitChance))
+        var tick = _timing.CurTick.Value;
+        var iD = GetNetEntity(projectile).Id;
+
+        var seed = ((long)tick << 32) | (uint)iD;
+        var blockHit = new Xoroshiro64S(seed).NextFloat(0, 1);
+
+        if (hitChance > blockHit)
             args.Cancelled = true;
     }
 
