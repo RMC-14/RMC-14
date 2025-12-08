@@ -87,7 +87,7 @@
     - RMCSentry
 
 - type: entity
-  parent: [RMCBaseSentry, BaseItem]
+  parent: [RMCSentryConstruct, BaseItem]
   id: RMCSentry
   components:
   - type: Item
