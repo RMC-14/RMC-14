@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: RMC Undergarments now uses upstream marking category.
-    type: Tweak
-  id: 2117
-  time: '2025-08-06T04:00:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7238
-- author: Vermidia
-  changes:
-  - message: Fixed enhanced spitter acid not taking 2 rolls and/or extinguisher hits
-      to get rid of.
-    type: Fix
-  id: 2118
-  time: '2025-08-06T04:03:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7253
-- author: Vermidia
-  changes:
-  - message: Fixed Dancer being able to fill traps with acid.
-    type: Fix
-  - message: Fixed Valkyrie not being able to fill traps with acid.
-    type: Fix
-  id: 2119
-  time: '2025-08-06T04:04:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7254
-- author: Dygon
-  changes:
-  - message: Barricades no longer block humanoid melee attacks
-    type: Fix
-  - message: Barricades no longer occasionally block attacks made from the back.
-    type: Fix
-  id: 2120
-  time: '2025-08-06T04:06:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7258
 - author: Vermidia
   changes:
   - message: Fixed flaregun flares and airburst starshells ignites applying for too
@@ -4654,5 +4621,34 @@
   id: 2617
   time: '2025-12-08T07:59:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7892
+- author: noctyrnal
+  changes:
+  - message: Added the 'Flamer Bodybag' insert to Sorokyne Strata's engineering. It
+      has a 60% chance to spawn.
+    type: Add
+  id: 2618
+  time: '2025-12-08T08:04:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8558
+- author: Wizden
+  changes:
+  - message: Fixed foldable clothes not working while worn.
+    type: Fix
+  id: 2619
+  time: '2025-12-08T08:04:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8569
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Firing a mortar will shake the camera of marines near the mortar
+    type: Tweak
+  id: 2620
+  time: '2025-12-08T08:03:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8530
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Hybrisa Caves Lockdown podlocks being pryable
+    type: Fix
+  id: 2621
+  time: '2025-12-08T08:03:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8529
 Name: RMC14
 Order: -1
