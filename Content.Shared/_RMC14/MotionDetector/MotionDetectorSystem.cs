@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Weapons.Ranged.Battery;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Actions;
@@ -51,6 +52,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoDevouredEvent>(OnMotionDetectorDevoured);
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
@@ -91,7 +93,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         args.Handled = true;
         Toggle(ent);
 
-        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
     }
 
     private void OnMotionDetectorGetVerbs(Entity<MotionDetectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -127,6 +133,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         MotionDetectorUpdated(ent);
     }
 
+    private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
+    {
+        DisableDetectorsOnMob(ent.Target);
+    }
+
     private void OnMotionDetectorExamined(Entity<MotionDetectorComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(MotionDetectorComponent)))
@@ -153,7 +164,11 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         var user = args.Performer;
         if (TryComp(ent, out MotionDetectorComponent? detector))
+        {
             _motionDetector.Toggle((ent, detector));
+            detector.LastUser = user;
+            Dirty(ent);
+        }
 
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
         DetectorUpdated(ent);
@@ -326,7 +341,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Owner == userUid) // User of the MD isn't tracked
+                if (tracked.Owner == detector.LastUser)
                     continue;
 
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
