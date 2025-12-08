@@ -323,7 +323,7 @@
         - name: Nuclear Device
           description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
           cost: 5
-          timeLock: 3m
+          timeLock: 115m
           events:
           - !type:TechLogisticsDeliveryEvent
             object: RMCNuke

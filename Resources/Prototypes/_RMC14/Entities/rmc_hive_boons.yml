@@ -4,6 +4,30 @@
   name: hive boon
   components:
   - type: HiveBoonDefinition
+    cost: 1
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonFireResistance
+  name: Boon of Fire Resistance
+  description: Makes all xenonids immune to fire for 5 minutes.
+  components:
+  - type: HiveBoonDefinition
+    duration: 5m
+    duplicateId: RMCHiveBoonFireResistance
+    event: !type:HiveBoonActivateFireResistanceEvent
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonLarvaSurge
+  name: Surge of Larva
+  description: Provides 5 larva instantly to the hive.
+  components:
+  - type: HiveBoonDefinition
+    cost: 5
+    reusable: false
+    duplicateId: RMCHiveBoonLarvaSurge
+    event: !type:HiveBoonActivateLarvaSurgeEvent
 
 - type: entity
   parent: RMCHiveBoonBase

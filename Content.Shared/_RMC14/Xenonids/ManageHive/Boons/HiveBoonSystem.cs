@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Dialog;
@@ -28,6 +29,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
@@ -63,7 +65,7 @@ public sealed class HiveBoonSystem : EntitySystem
         private set;
     } = ImmutableArray<(EntityPrototype Prototype, HiveBoonDefinitionComponent Component)>.Empty;
 
-    public int AliveMarineRequirement { get; private set; }
+    private int _aliveMarineRequirement;
     private TimeSpan _royalResinEvery;
     public TimeSpan CommunicationTowerXenoTakeoverTime { get; private set; }
     private TimeSpan _kingVoteCandidateTimeRequired;
@@ -81,8 +83,12 @@ public sealed class HiveBoonSystem : EntitySystem
         _excludedFromKingVoteQuery = GetEntityQuery<ExcludedFromKingVoteComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<HiveBoonActivateFireResistanceEvent>(OnActivateFireResistance);
+        SubscribeLocalEvent<HiveBoonActivateLarvaSurgeEvent>(OnActivateLarvaSurge);
         SubscribeLocalEvent<HiveBoonActivateKingEvent>(OnActivateKing);
 
+        SubscribeLocalEvent<XenoComponent, RMCGetFireImmunityEvent>(OnGetTileFireImmunity);
+        SubscribeLocalEvent<XenoComponent, GetIgnitionImmunityEvent>(OnGetTileFireIgnitionImmunity);
         SubscribeLocalEvent<XenoComponent, HiveKingVoteDialogEvent>(OnKingVote);
 
         SubscribeLocalEvent<HiveClusterComponent, ExaminedEvent>(OnClusterExamined);
@@ -98,7 +104,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
         Subs.CVar(_config,
             RMCCVars.RMCBoonsLiveMarineRequirement,
-            v => AliveMarineRequirement = v,
+            v => _aliveMarineRequirement = v,
             true);
 
         Subs.CVar(_config,
@@ -145,6 +151,18 @@ public sealed class HiveBoonSystem : EntitySystem
             ReloadPrototypes();
     }
 
+    private void OnActivateFireResistance(HiveBoonActivateFireResistanceEvent ev)
+    {
+        EnsureComp<HiveBoonFireImmunityComponent>(ev.Boon);
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has imbued us with flame-resistant chitin for 5 minutes.");
+    }
+
+    private void OnActivateLarvaSurge(HiveBoonActivateLarvaSurgeEvent ev)
+    {
+        _hive.IncreaseBurrowedLarva(ev.Hive, 5);
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has awakened 5 extra burrowed larva to join the hive!");
+    }
+
     private void OnActivateKing(HiveBoonActivateKingEvent ev)
     {
         var pylonQuery = EntityQueryEnumerator<HivePylonComponent>();
@@ -153,18 +171,40 @@ public sealed class HiveBoonSystem : EntitySystem
             _area.TrySetCanOrbitalBombardRoofing(uid, false);
         }
 
-        var core = _hive.GetHiveCore(ev.Hive);
-        if (core == null)
+        if (ev.Core is not { } core)
             return;
 
-        ev.Activated = true;
-        var cocoon = SpawnAtPosition(KingCocoonId, core.Value.ToCoordinates());
+        var cocoon = SpawnAtPosition(KingCocoonId, core.Owner.ToCoordinates());
 
         _hive.SetHive(cocoon, ev.Hive);
 
-        var areaName = _area.GetAreaName(core.Value);
+        var areaName = _area.GetAreaName(core);
         _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-boon-king-announcement-marine", ("area", areaName)));
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(core.Value, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(core.Owner, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
+    }
+
+    private void OnGetTileFireImmunity(Entity<XenoComponent> xeno, ref RMCGetFireImmunityEvent ev)
+    {
+        var query = EntityQueryEnumerator<HiveBoonFireImmunityComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (!_hive.FromSameHive(uid, xeno.Owner))
+                continue;
+
+            ev.Ignite = false;
+            ev.Immune = true;
+            return;
+        }
+    }
+
+    private void OnGetTileFireIgnitionImmunity(Entity<XenoComponent> xeno, ref GetIgnitionImmunityEvent args)
+    {
+        var query = EntityQueryEnumerator<HiveBoonFireImmunityComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (_hive.FromSameHive(uid, xeno.Owner))
+                args.Ignite = false;
+        }
     }
 
     private void OnKingVote(Entity<XenoComponent> ent, ref HiveKingVoteDialogEvent args)
@@ -286,7 +326,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
     public bool HasEnoughAliveMarines()
     {
-        if (AliveMarineRequirement <= 0)
+        if (_aliveMarineRequirement <= 0)
             return true;
 
         var marines = 0;
@@ -300,7 +340,7 @@ public sealed class HiveBoonSystem : EntitySystem
                 continue;
 
             marines++;
-            if (marines >= AliveMarineRequirement)
+            if (marines >= _aliveMarineRequirement)
                 return true;
         }
 
@@ -490,12 +530,15 @@ public sealed class HiveBoonSystem : EntitySystem
 
         if (!boons.Comp.UnlockAt.TryGetValue(boonProto.ID, out var unlockAt))
         {
-            unlockAt = boonComp.UnlockAt + _random.Next(TimeSpan.Zero, boonComp.UnlockAtRandomAdd);
+            unlockAt = boonComp.UnlockAt;
+            if (boonComp.UnlockAtRandomAdd != TimeSpan.Zero)
+                unlockAt +=_random.Next(TimeSpan.Zero, boonComp.UnlockAtRandomAdd);
+
             boons.Comp.UnlockAt[boonProto.ID] = unlockAt;
             Dirty(boons);
         }
 
-        if (unlockAt < _gameTicker.RoundDuration())
+        if (_gameTicker.RoundDuration() < unlockAt)
         {
             var msg = Loc.GetString("rmc-boon-not-enough-time");
             _popup.PopupCursor(msg, manage, PopupType.MediumCaution);
@@ -568,22 +611,20 @@ public sealed class HiveBoonSystem : EntitySystem
         if (ev == null)
             return;
 
-        ev.Hive = hive;
-        RaiseLocalEvent((object) ev);
-
-        if (!ev.Activated)
-            return;
-
         boons.Comp.UsedAt[boonProto.ID] = time;
         boons.Comp.RoyalResin = Math.Max(0, boons.Comp.RoyalResin - boonComp.Cost);
 
         var boonEnt = Spawn(boonProto.ID, MapCoordinates.Nullspace);
-        var activeBoonComp = EnsureComp<HiveActiveBoonComponent>(boonEnt);
-        activeBoonComp.ExpireAt = time + boonComp.Duration;
-        Dirty(boonEnt, activeBoonComp);
+        _hive.SetSameHive(manage.Owner, boonEnt);
+
+        EnsureComp<TimedDespawnComponent>(boonEnt).Lifetime = (float) boonComp.Duration.TotalSeconds;
 
         boons.Comp.Active[boonProto.ID] = boonEnt;
         Dirty(boons, boons.Comp);
+
+        ev.Boon = boonEnt;
+        ev.Hive = hive;
+        RaiseLocalEvent((object) ev);
     }
 
     public Entity<HiveBoonsComponent> EnsureBoons(Entity<HiveComponent> hive)

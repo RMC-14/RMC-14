@@ -487,7 +487,7 @@
   changes:
   - message: Added a Liaison role-specific loadout section
     type: Add
-  - message: Adjusted the items in the Liaison's Automated Briefcase to match parity
+  - message: Adjusted the items in the Liaison's Automated Briefcase to be correct
       and no longer use upstream items
     type: Tweak
   id: 2199
@@ -945,8 +945,7 @@
   - message: UNMC Chaplain patch, Io Flair, Peace Flair, Terratek Flair, UNMC Flair,
       and movie ticket helmet garbs
     type: Add
-  - message: All Boots! Magazines, as well as a new, nonparity magazine, the WeYa
-      Orrery
+  - message: All Boots! Magazines, as well as a new magazine, the WeYa Orrery
     type: Add
   - message: UNMC Headset headwear
     type: Add
@@ -3306,7 +3305,7 @@
   - message: Removed the Experimental Meson Goggles from the synthetic auxiliary gear
       rack.
     type: Remove
-  - message: Survivor Synth Access is now matching parity. (Colony AA, Shipside Med
+  - message: Survivor Synth Access is now correct. (Colony AA, Shipside Med
       and Engineering)
     type: Tweak
   - message: Survivor Synth now starts with no IFF by default. (Previously UNMC IFF)
@@ -3717,19 +3716,6 @@
   id: 2534
   time: '2025-11-19T03:00:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8317
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
-  - message: Fixed fun!
-    type: Fix
-  id: 2535
-  time: '2025-11-19T02:59:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8259
 - author: Ian321
   changes:
   - message: Added the automated personal uniform closet, north of CIC and in the
@@ -4028,7 +4014,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/8158
 - author: ayou331
   changes:
-  - message: Added xeno cheveron for playtime over 350h
+  - message: Added xeno chevron for playtime over 350h
     type: Add
   id: 2575
   time: '2025-11-29T10:17:09.0000000+00:00'
@@ -4079,7 +4065,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/8511
 - author: Vixting
   changes:
-  - message: Adjust queen boost
+  - message: Fixed queen building speed boost being too fast.
     type: Tweak
   id: 2582
   time: '2025-12-01T00:36:14.0000000+00:00'
@@ -4515,7 +4501,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/8529
 - author: Tunguso4ka
   changes:
-  - message: Varadero got a big parity update.
+  - message: Varadero got a big update.
     type: Tweak
   id: 2622
   time: '2025-12-08T08:22:34.0000000+00:00'
@@ -4663,8 +4649,6 @@
   - message: Sticky and High-Combustion Napalm that can be made by Ordnance Technicians.
     type: Add
   - message: Incinerator tanks and the guidebook now explain how different fuels behave.
-    type: Add
-  - message: Added B-Gel tanks for use in the M34 incinerator unit.
     type: Add
   id: 2637
   time: '2025-12-08T08:44:51.0000000+00:00'

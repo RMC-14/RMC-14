@@ -9,8 +9,8 @@ namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 public partial class HiveBoonEvent
 {
     [NonSerialized]
-    public Entity<HiveComponent> Hive;
+    public EntityUid Boon;
 
-    [DataField]
-    public bool Activated;
+    [NonSerialized]
+    public Entity<HiveComponent> Hive;
 }
