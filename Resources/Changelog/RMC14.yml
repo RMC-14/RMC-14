@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Varen
-  changes:
-  - message: Added green stripes on 1984 AP magazine
-    type: Add
-  id: 2139
-  time: '2025-08-06T04:23:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7320
 - author: J C Denton
   changes:
   - message: Fixed Admin Fax phones being in Almayer network and other Fax's mapping
@@ -4753,5 +4746,12 @@
   id: 2640
   time: '2025-12-08T11:00:59.820643+00:00'
   url: null
+- author: Ian321
+  changes:
+  - message: The selected dropship navigation target is now highlighted correctly.
+    type: Fix
+  id: 2641
+  time: '2025-12-08T11:08:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8346
 Name: RMC14
 Order: -1
