@@ -64,6 +64,5 @@
     location: alien cocoon
   - type: RMCTrackable
   - type: HiveKingCocoon
-    timeLeft: 10m
   - type: MeleeReceivedMultiplier
     xenoDamage: {}
