@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -20,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
@@ -43,6 +45,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
@@ -66,6 +69,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
+        SubscribeLocalEvent<XenoPheromonesComponent, PlayerDetachedEvent>(OnXenoPheromonesDetached);
 
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
             after: [typeof(MobThresholdSystem)]);
@@ -90,15 +94,20 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnActiveMobStateChanged(Entity<XenoActivePheromonesComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+        if (args.NewMobState is MobState.Critical or MobState.Dead)
             DeactivatePheromones(ent.Owner);
     }
 
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
         args.Handled = true;
-        DeactivatePheromones((xeno, xeno));
+        DeactivatePheromones(xeno.AsNullable());
         _ui.TryOpenUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
+    }
+
+    private void OnXenoPheromonesDetached(Entity<XenoPheromonesComponent> xeno, ref PlayerDetachedEvent args)
+    {
+        DeactivatePheromones(xeno.AsNullable());
     }
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)
@@ -371,7 +380,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         for (var i = 0; i < _pheromonesJob.Pheromones.Count; i++)
         {
-            var (_, active, pheromones, _) = _pheromonesJob.Pheromones[i];
+            var (sourceUid, active, pheromones, _) = _pheromonesJob.Pheromones[i];
             var receivers = _pheromonesJob.Receivers[i].Receivers;
 
             switch (active.Pheromones)
@@ -380,6 +389,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
+                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
                             continue;
 
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Recovery)
@@ -397,6 +409,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
+                            continue;
+
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Warding)
                             continue;
 
@@ -410,6 +425,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in active.Receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
+                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
                             continue;
 
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Frenzy)

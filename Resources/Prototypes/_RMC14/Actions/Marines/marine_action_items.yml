@@ -211,6 +211,16 @@
 
 - type: entity
   parent: ActionMarineBase
+  id: RMCActionBroiler
+  name: Switch Tank
+  description: Switch to a different fuel tank.
+  components:
+  - type: Action
+  - type: InstantAction
+    event: !type:RMCBroilerActionEvent
+
+- type: entity
+  parent: ActionMarineBase
   id: RMCActionDismount
   name: Dismount
   description: Stop using the weapon

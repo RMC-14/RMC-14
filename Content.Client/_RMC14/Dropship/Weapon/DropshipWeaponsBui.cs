@@ -420,6 +420,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-medevac-system-screen-text");
                 break;
             }
             case Fulton:
@@ -437,6 +438,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-fulton-system-screen-text");
                 break;
             }
             case Paradrop:

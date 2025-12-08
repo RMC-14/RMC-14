@@ -148,6 +148,7 @@
         name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
+        replaceSlot: back
         points: 15
       - id: RMCPouchFuelTank
         points: 4
@@ -234,7 +235,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: RMCArmorVestCombatTechnician
+      - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -248,11 +249,16 @@
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
       - id: CMBackpackMarineTech
+        replaceSlot: back
       - id: CMSatchelMarineTech
+        replaceSlot: back
       - id: CMBackpackWelder
+        replaceSlot: back
         recommended: true
       - id: RMCSatchelWelder
+        replaceSlot: back
       - id: RMCSatchelWelderChestrig
+        replaceSlot: back
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }

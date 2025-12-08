@@ -34,6 +34,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
@@ -48,6 +49,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -88,6 +90,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -461,6 +464,7 @@
       tags:
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
@@ -1258,8 +1262,20 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilledAmmo
+  suffix: Filled, Mateba Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
@@ -1434,6 +1450,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - RMCShellShotgun
   - type: FixedItemSizeStorage
@@ -1453,8 +1470,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilledAmmo
+  suffix: Filled, Winter Wyvern Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled
+  suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
     contents:
@@ -1815,6 +1844,9 @@
     whitelist:
       tags:
       - RMCFlareGun
+  - type: Tag
+    tags:
+    - RMCM82FHolster
 
 - type: entity
   parent: RMCM82FHolster

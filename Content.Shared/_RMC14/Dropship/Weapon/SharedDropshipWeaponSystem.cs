@@ -51,6 +51,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
@@ -628,6 +629,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.SoundMarker,
             ammo.Comp.SoundGround,
             ammo.Comp.SoundImpact,
+            ammo.Comp.SoundWarning,
+            ammo.Comp.MarkerWarning,
             ammo.Comp.ImpactEffects,
             ammo.Comp.Explosion,
             ammo.Comp.Implosion,
@@ -664,6 +667,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ev.SoundMarker,
             SoundGround = ev.SoundGround,
             SoundImpact = ev.SoundImpact,
+            SoundWarning = ev.SoundWarning,
+            MarkerWarning = ev.MarkerWarning,
+            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
             ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
             Implosion = ev.Implosion,
@@ -700,6 +706,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ammo.SoundMarker,
             SoundGround = ammo.SoundGround,
             SoundImpact = ammo.SoundImpact,
+            SoundWarning = ammo.SoundWarning,
+            MarkerWarning = ammo.MarkerWarning,
+            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
             ImpactEffects = ammo.ImpactEffects,
             Explosion = ammo.Explosion,
             Implosion = ammo.Implosion,
@@ -1245,6 +1254,28 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
+            if (!flight.WarnedSound)
+            {
+                flight.WarnedSound = true;
+                Dirty(uid, flight);
+
+                if (flight.SoundWarning != null)
+                    _audio.PlayPvs(flight.SoundWarning, flight.Target);
+            }
+
+            if (time >= flight.WarningMarkerAt && !flight.WarnedMarker)
+            {
+                flight.WarnedMarker = true;
+                Dirty(uid, flight);
+
+                if (flight.MarkerWarning)
+                {
+                    flight.WarningMarker = Spawn(DropshipTargetMarker, flight.Target);
+                    var despawn = EnsureComp<TimedDespawnComponent>(flight.WarningMarker.Value);
+                    despawn.Lifetime = (float) (flight.MarkerAt - _timing.CurTime).TotalSeconds;
+                }
+            }
+
             if (flight.MarkerAt > time)
                 continue;
 
@@ -1255,6 +1286,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 Dirty(uid, flight);
 
                 _audio.PlayPvs(flight.SoundMarker, flight.Marker.Value);
+
+                if (_net.IsServer)
+                    QueueDel(flight.WarningMarker);
+
+                flight.WarningMarker = null;
             }
 
             if (flight.MarkerAt.Add(TimeSpan.FromSeconds(1)) > time)
@@ -1570,6 +1606,8 @@ public record struct DropshipWeaponShotEvent(
     SoundSpecifier? SoundMarker,
     SoundSpecifier? SoundGround,
     SoundSpecifier? SoundImpact,
+    SoundSpecifier? SoundWarning,
+    bool MarkerWarning,
     List<EntProtoId> ImpactEffect,
     RMCExplosion? Explosion,
     RMCImplosion? Implosion,
