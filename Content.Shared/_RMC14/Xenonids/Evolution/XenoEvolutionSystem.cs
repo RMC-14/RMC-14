@@ -549,6 +549,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    public FixedPoint2 AddPointsCapped(Entity<XenoEvolutionComponent?> evolution, FixedPoint2 points)
+    {
+        if (!Resolve(evolution, ref evolution.Comp, false))
+            return FixedPoint2.Zero;
+
+        var oldPoints = evolution.Comp.Points;
+        evolution.Comp.Points += FixedPoint2.Min(evolution.Comp.Max, points);
+        Dirty(evolution);
+
+        return evolution.Comp.Points - oldPoints;
+    }
+
     public void SetPoints(Entity<XenoEvolutionComponent> evolution, FixedPoint2 points)
     {
         evolution.Comp.Points = points;

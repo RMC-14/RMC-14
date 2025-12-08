@@ -21,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
@@ -68,6 +69,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
+        SubscribeLocalEvent<XenoPheromonesComponent, PlayerDetachedEvent>(OnXenoPheromonesDetached);
 
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
             after: [typeof(MobThresholdSystem)]);
@@ -92,15 +94,20 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnActiveMobStateChanged(Entity<XenoActivePheromonesComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+        if (args.NewMobState is MobState.Critical or MobState.Dead)
             DeactivatePheromones(ent.Owner);
     }
 
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)
     {
         args.Handled = true;
-        DeactivatePheromones((xeno, xeno));
+        DeactivatePheromones(xeno.AsNullable());
         _ui.TryOpenUi(xeno.Owner, XenoPheromonesUI.Key, xeno);
+    }
+
+    private void OnXenoPheromonesDetached(Entity<XenoPheromonesComponent> xeno, ref PlayerDetachedEvent args)
+    {
+        DeactivatePheromones(xeno.AsNullable());
     }
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)

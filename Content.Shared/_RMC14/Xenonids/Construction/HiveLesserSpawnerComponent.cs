@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 [Access(typeof(SharedXenoConstructionSystem), typeof(SharedXenoPylonSystem))]
-public sealed partial class HivePylonComponent : Component
+public sealed partial class HiveLesserSpawnerComponent : Component
 {
     [DataField]
     public int MinimumLesserDrones = 2;
