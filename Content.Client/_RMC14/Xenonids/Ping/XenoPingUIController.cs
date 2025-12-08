@@ -1,0 +1,392 @@
+using Content.Client.Gameplay;
+using Content.Client.UserInterface.Controls;
+using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Ping;
+using Robust.Client.Input;
+using Robust.Client.Player;
+using Robust.Client.State;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controllers;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
+using Robust.Shared.Utility;
+using System.Collections.Generic;
+using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
+using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Prototypes;
+using System.Linq;
+
+namespace Content.Client._RMC14.Xenonids.Ping;
+
+public sealed class XenoPingUIController : UIController, IOnStateChanged<GameplayState>
+{
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
+    private ColoredSimpleRadialMenu? _menu;
+    private EntityCoordinates? _targetCoordinates;
+    private EntityUid? _targetEntity;
+
+    private static readonly Color MenuBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.1f);
+    private static readonly Color MenuHoverBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.5f);
+
+    public void OnStateEntered(GameplayState state)
+    {
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.CMXenoPing,
+                InputCmdHandler.FromDelegate(_ => TogglePingMenu()))
+            .Register<XenoPingUIController>();
+    }
+
+    public void OnStateExited(GameplayState state)
+    {
+        CommandBinds.Unregister<XenoPingUIController>();
+        CloseMenu();
+    }
+
+    private void TogglePingMenu()
+    {
+        if (_playerManager.LocalEntity is not { } player)
+        {
+            return;
+        }
+
+        var hasXenoComp = _entityManager.HasComponent<XenoComponent>(player);
+        var hasPingComp = _entityManager.HasComponent<XenoPingComponent>(player);
+
+        if (!hasXenoComp || !hasPingComp)
+        {
+            return;
+        }
+
+        if (_menu != null)
+        {
+            CloseMenu();
+            return;
+        }
+
+        _targetEntity = GetEntityUnderCursor(player);
+        _targetCoordinates = GetTargetCoordinates(player);
+
+        var models = ConvertToPingButtons(player);
+
+        _menu = new ColoredSimpleRadialMenu();
+        _menu.SetButtons(models, new SimpleRadialMenuSettings
+        {
+            DefaultContainerRadius = 80,
+            UseSectors = true,
+            DisplayBorders = true,
+            NoBackground = false
+        });
+        _menu.OnClose += OnWindowClosed;
+
+        _menu.Open();
+        _menu.OpenOverMouseScreenPosition();
+    }
+
+    private EntityUid? GetEntityUnderCursor(EntityUid player)
+    {
+        var currentState = _stateManager.CurrentState;
+        if (currentState is not GameplayStateBase screen)
+            return null;
+
+        EntityUid? entityToClick = null;
+
+        if (_uiManager.CurrentlyHovered is IViewportControl vp && _inputManager.MouseScreenPosition.IsValid)
+        {
+            var mousePosWorld = vp.PixelToMap(_inputManager.MouseScreenPosition.Position);
+            entityToClick = screen.GetClickedEntity(mousePosWorld);
+        }
+
+        if (entityToClick != null &&
+            _entityManager.HasComponent<XenoComponent>(entityToClick.Value))
+        {
+            return entityToClick;
+        }
+
+        return null;
+    }
+
+    private EntityCoordinates GetTargetCoordinates(EntityUid player)
+    {
+        var transformSystem = _entityManager.System<SharedTransformSystem>();
+
+        if (_targetEntity != null)
+        {
+            return transformSystem.GetMoverCoordinates(_targetEntity.Value);
+        }
+        else
+        {
+            var mouseCoords = _inputManager.MouseScreenPosition;
+            var mapCoords = _eyeManager.PixelToMap(mouseCoords.Position);
+
+            if (mapCoords.MapId == MapId.Nullspace)
+            {
+                return transformSystem.GetMoverCoordinates(player);
+            }
+            else if (_mapManager.TryFindGridAt(mapCoords, out var gridUid, out _))
+            {
+                return new EntityCoordinates(gridUid, transformSystem.ToCoordinates(gridUid, mapCoords).Position);
+            }
+            else if (_mapManager.MapExists(mapCoords.MapId))
+            {
+                return new EntityCoordinates(_mapManager.GetMapEntityId(mapCoords.MapId), mapCoords.Position);
+            }
+            else
+            {
+                return transformSystem.GetMoverCoordinates(player);
+            }
+        }
+    }
+
+    private IEnumerable<RadialMenuOption> ConvertToPingButtons(EntityUid player)
+    {
+        var clientPingSystem = _entityManager.System<XenoPingSystem>();
+        var availablePings = clientPingSystem.GetAvailablePingTypesWithColors();
+
+        var pingsByCategory = GroupPingsByCategory(availablePings);
+        var options = new List<RadialMenuOption>();
+
+        var primaryPings = GetPrimaryPings(availablePings);
+        foreach (var (pingType, pingInfo) in primaryPings)
+        {
+            options.Add(CreatePingOption(pingType, pingInfo));
+        }
+
+        foreach (var (category, pings) in pingsByCategory)
+        {
+            if (category == "primary") continue;
+
+            var categoryActions = pings.Select(kvp => CreatePingOption(kvp.Key, kvp.Value)).Cast<RadialMenuOption>().ToList();
+
+            if (categoryActions.Count > 0)
+            {
+                var nestedOption = CreateNestedCategoryOption(category, categoryActions);
+                options.Add(nestedOption);
+            }
+        }
+
+        return options;
+    }
+
+    private Dictionary<string, Dictionary<string, (string Name, Color Color, string Description)>> GroupPingsByCategory(
+        Dictionary<string, (string Name, Color Color, string Description)> availablePings)
+    {
+        var grouped = new Dictionary<string, Dictionary<string, (string Name, Color Color, string Description)>>();
+
+        foreach (var (pingType, pingInfo) in availablePings)
+        {
+            var pingData = GetPingDataFromEntityId(pingType);
+            if (pingData == null)
+                continue;
+
+            var category = pingData.Categories.FirstOrDefault();
+            if (string.IsNullOrEmpty(category))
+                continue;
+
+            var uiCategory = category switch
+            {
+                "tactical" when IsPrimaryTactical(pingType) => "primary",
+                "tactical" => "tactical",
+                "construction" => "construction",
+                "support" => "support",
+                "hunting" => "support",
+                "warning" => "primary",
+                _ => null
+            };
+
+            if (uiCategory == null)
+                continue;
+
+            if (!grouped.ContainsKey(uiCategory))
+                grouped[uiCategory] = new Dictionary<string, (string Name, Color Color, string Description)>();
+
+            grouped[uiCategory][pingType] = pingInfo;
+        }
+
+        return grouped;
+    }
+
+    private bool IsPrimaryTactical(string pingType)
+    {
+        return pingType is "XenoPingMove" or "XenoPingDefend" or "XenoPingAttack" or "XenoPingRegroup";
+    }
+
+    private Dictionary<string, (string Name, Color Color, string Description)> GetPrimaryPings(
+        Dictionary<string, (string Name, Color Color, string Description)> availablePings)
+    {
+        var primary = new Dictionary<string, (string Name, Color Color, string Description)>();
+
+        foreach (var (pingType, pingInfo) in availablePings)
+        {
+            var pingData = GetPingDataFromEntityId(pingType);
+            if (pingData == null)
+                continue;
+
+            if (pingData.Priority >= 85 || IsPrimaryTactical(pingType))
+            {
+                primary[pingType] = pingInfo;
+            }
+        }
+
+        return primary
+            .OrderByDescending(kvp =>
+            {
+                var pingData = GetPingDataFromEntityId(kvp.Key);
+                return pingData?.Priority ?? 0;
+            })
+            .Take(6)
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    }
+
+    private RadialMenuNestedLayerOption CreateNestedCategoryOption(string category, List<RadialMenuOption> actions)
+    {
+        var (categoryName, categoryIcon, categoryColor) = GetCategoryInfo(category);
+
+        return new RadialMenuNestedLayerOption(actions, 100)
+        {
+            ToolTip = categoryName,
+            BackgroundColor = MenuBackgroundColor,
+            HoverBackgroundColor = MenuHoverBackgroundColor,
+            Sprite = categoryIcon
+        };
+    }
+
+    private (string Name, SpriteSpecifier Icon, Color Color) GetCategoryInfo(string category)
+    {
+        return category switch
+        {
+            "tactical" => ("Tactical Commands",
+                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "fortify"),
+                Color.OrangeRed),
+
+            "support" => ("Support Commands",
+                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "aide"),
+                Color.LimeGreen),
+
+            "construction" => ("Construction",
+                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "weed"),
+                Color.ForestGreen),
+
+            _ => ("Commands",
+                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "no_direction"),
+                Color.Gray)
+        };
+    }
+
+    private ColoredRadialMenuActionOption<string> CreatePingOption(string pingType, (string Name, Color Color, string Description) pingInfo)
+    {
+        var sprite = GetSpriteForPingType(pingType);
+        var tooltip = BuildTooltip(pingInfo, pingType);
+
+        return new ColoredRadialMenuActionOption<string>(HandlePingSelection, pingType)
+        {
+            ToolTip = tooltip,
+            BackgroundColor = MenuBackgroundColor,
+            HoverBackgroundColor = MenuHoverBackgroundColor,
+            Sprite = sprite,
+            SpriteColor = pingInfo.Color
+        };
+    }
+
+    private SpriteSpecifier GetSpriteForPingType(string pingType)
+    {
+        if (_prototypeManager.TryIndex<EntityPrototype>(pingType, out var entityProto))
+        {
+            if (entityProto.Components.TryGetValue("Sprite", out var spriteData))
+            {
+                try
+                {
+                    var spriteComp = (SpriteComponent)spriteData.Component;
+                    if (spriteComp.BaseRSI != null && spriteComp[0].RsiState.IsValid)
+                    {
+                        var stateName = spriteComp[0].RsiState.Name;
+                        if (!string.IsNullOrEmpty(stateName))
+                        {
+                            return new SpriteSpecifier.Rsi(new ResPath(spriteComp.BaseRSI.Path.ToString()), stateName);
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "no_direction");
+    }
+
+    private string BuildTooltip((string Name, Color Color, string Description) pingInfo, string pingType)
+    {
+        var tooltip = $"{pingInfo.Name}\n{pingInfo.Description}";
+
+        var pingData = GetPingDataFromEntityId(pingType);
+        if (pingData != null && pingData.Priority > 90)
+        {
+            tooltip += "\n[High Priority]";
+        }
+
+        if (_targetEntity != null)
+        {
+            var targetName = _entityManager.GetComponent<MetaDataComponent>(_targetEntity.Value).EntityName ?? "Unknown";
+            tooltip += $"\nTarget: {targetName}";
+        }
+        else
+        {
+            tooltip += "\nLocation-based ping";
+        }
+
+        return tooltip;
+    }
+
+    private XenoPingDataComponent? GetPingDataFromEntityId(string entityId)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(entityId, out var prototype))
+            return null;
+
+        if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+            return null;
+
+        return (XenoPingDataComponent)pingDataComponent.Component;
+    }
+
+    private void HandlePingSelection(string pingType)
+    {
+        if (_targetCoordinates == null)
+        {
+            return;
+        }
+
+        var netCoords = _entityManager.GetNetCoordinates(_targetCoordinates.Value);
+        var netTargetEntity = _targetEntity.HasValue ? _entityManager.GetNetEntity(_targetEntity.Value) : (NetEntity?)null;
+        var message = new XenoPingRequestEvent(pingType, netCoords, netTargetEntity);
+        _entityManager.RaisePredictiveEvent(message);
+
+        CloseMenu();
+    }
+
+    private void OnWindowClosed()
+    {
+        CloseMenu();
+    }
+
+    private void CloseMenu()
+    {
+        if (_menu == null)
+            return;
+
+        _menu.OnClose -= OnWindowClosed;
+        _menu = null;
+        _targetCoordinates = null;
+        _targetEntity = null;
+    }
+}
