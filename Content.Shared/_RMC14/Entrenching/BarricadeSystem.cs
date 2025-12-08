@@ -95,7 +95,7 @@ public sealed class BarricadeSystem : EntitySystem
 
         // If the distance is less than 1 tile
         // or the distance is greater than 3 but the shooter is behind the cade (the right side), then the bullet passes through
-        if (distance < 1 || distance > 3 && _directionalAttackBlocker.IsFacingTarget(projectile, barricade, checkBehind: true))
+        if (distance < 1 || distance > 3 && _directionalAttackBlocker.IsBehindTarget(projectile, barricade))
         {
             args.Cancelled = true;
             return;
