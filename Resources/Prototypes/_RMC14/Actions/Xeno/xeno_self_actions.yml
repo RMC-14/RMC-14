@@ -2,7 +2,7 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -17,7 +17,7 @@
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
