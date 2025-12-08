@@ -59,6 +59,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
@@ -159,6 +160,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector

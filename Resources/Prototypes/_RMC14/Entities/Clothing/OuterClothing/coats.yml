@@ -101,6 +101,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
@@ -132,6 +133,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - Flashlight
       - DiscreteHealthAnalyzer
       - GasTank
@@ -170,6 +172,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - RMCMacheteScabbard
       - RMCScabbardKatana
       - RMCDetector
