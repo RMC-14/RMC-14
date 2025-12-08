@@ -25,6 +25,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Whitelist;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -61,6 +62,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
@@ -271,6 +275,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         foreach (var contacting in _intersecting)
         {
+            var isWhitelisted = _entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, contacting);
+
             if (_slowResinQuery.TryComp(contacting, out var slowResin))
             {
                 if (hive == null || !_hive.IsMember(contacting, hive.Hive))
@@ -288,7 +294,13 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             if (_fastResinQuery.TryComp(contacting, out var fastResin))
             {
-                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                // If whitelisted, apply speedup
+                if (isWhitelisted)
+                {
+                    speedResin += fastResin.HiveSpeedModifier;
+                    entriesResin++;
+                }
+                else if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
                 {
                     speedResin += fastResin.HiveSpeedModifier;
                     entriesResin++;
@@ -302,7 +314,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             anyWeeds = true;
 
-            if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+            // If whitelisted, apply speedup, no slowdown
+            if (isWhitelisted)
+            {
+                    speedWeeds += weeds.SpeedMultiplierXeno;
+                    friendlyWeeds = true;
+                    entriesWeeds++;
+            }
+            else if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
                 speedWeeds += weeds.SpeedMultiplierXeno;
                 friendlyWeeds = true;
@@ -333,7 +352,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (entriesResin > 0)
             speedResin /= entriesResin;
 
-        //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
+        //If Weeds is a speedup, let them stack, otherwise treat them as slowdowns
         if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
             finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)

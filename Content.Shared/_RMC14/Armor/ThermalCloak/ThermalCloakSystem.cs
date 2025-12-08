@@ -126,6 +126,8 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;
+            Dirty(ent.Owner, ent.Comp);
+            Dirty(user, turnInvisible);
             if (HasComp<InstantActionComponent>(ent.Comp.Action) &&
                 TryComp(ent.Comp.Action, out ActionComponent? action))
             {
@@ -160,6 +162,8 @@ public sealed class ThermalCloakSystem : EntitySystem
             ent.Comp.Enabled = false;
             turnInvisible.Enabled = false;
 
+            Dirty(ent.Owner, ent.Comp);
+            Dirty(user, turnInvisible);
             if (forced)
             {
                 if (HasComp<InstantActionComponent>(ent.Comp.Action) &&

@@ -126897,7 +126897,7 @@ entities:
     - type: Transform
       pos: 124.5,83.5
       parent: 1
-- proto: RMCTankFlamerImprovised
+- proto: RMCTankFlamerColony
   entities:
   - uid: 16631
     components:
@@ -128967,7 +128967,7 @@ entities:
     - type: Transform
       pos: 26.5,121.5
       parent: 1
-- proto: RMCWeaponFlamerImprovised
+- proto: RMCWeaponFlamerColony
   entities:
   - uid: 16985
     components:

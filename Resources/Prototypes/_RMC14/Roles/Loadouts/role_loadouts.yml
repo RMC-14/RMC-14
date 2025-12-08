@@ -124,8 +124,9 @@
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - CommandingOfficerIDRMC
   - MarineLeatherBackpack
+  - CommandingOfficerIDRMC
+  - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
@@ -534,6 +535,30 @@
   - MeleeWeaponsRMC
 
 # Military Police
+- type: roleLoadout
+  id: JobCMProvostInspector
+  points: 7
+  groups:
+  - ProvostRoleSpecificOuterwearRMC
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
 - type: roleLoadout
   id: JobCMChiefMP
   points: 7
