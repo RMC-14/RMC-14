@@ -15,10 +15,19 @@
   parent: RMCMapInsertSorokyneBase
   id: RMCMapInsertSorokyneMedbay
   name: CLF Camp
-  suffix: Insert Sorokyne
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Sorokyne/clfcamp.yml"
       probability: 0.5
       nightmareScenario: clfcamp
+
+- type: entity
+  parent: RMCMapInsertSorokyneBase
+  id: RMCMapInsertSorokyneFlamerBodypile
+  name: Flamer Bodypile
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/flamer_bodypile.yml"
+      probability: 0.6

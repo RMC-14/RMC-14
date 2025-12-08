@@ -3,8 +3,8 @@
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-rmc-ghost-role-information-provost-description = Enforce marine law, turn to your superiors for guidance. Authority is tied to your chain of command.
-rmc-ghost-role-information-provost-squad-description = Ensure compliance with marine law, quell riots and protect any Provost Officials.
+rmc-ghost-role-information-provost-description = Enforce Marine Law, turn to your superiors for guidance. Authority is tied to your chain of command.
+rmc-ghost-role-information-provost-squad-description = Ensure compliance with Marine Law, quell riots and protect any Provost Officials.
 
 rmc-ghost-name-corp-provost-advisor = Provost Advisor (Friendly)
 rmc-job-name-corp-provost-advisor = Provost Advisor
