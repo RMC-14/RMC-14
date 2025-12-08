@@ -81,10 +81,10 @@ public sealed class BarricadeSystem : EntitySystem
     {
         var projectile = args.OtherEntity;
 
-        if (!_accuracyQuery.TryComp(projectile, out var accuracyComponentComp))
+        if (!_accuracyQuery.TryComp(projectile, out var accuracyComp))
             return;
 
-        if (accuracyComponentComp.ShotFrom == null)
+        if (accuracyComp.ShotFrom == null)
             return;
 
         // Someone aiming at a barricade always hits it
@@ -92,7 +92,7 @@ public sealed class BarricadeSystem : EntitySystem
             return;
 
         var barricadeCoords = _transform.GetMoverCoordinates(barricade.Owner);
-        var distance = (barricadeCoords.Position - accuracyComponentComp.ShotFrom.Value.Position).Length();
+        var distance = (barricadeCoords.Position - accuracyComp.ShotFrom.Value.Position).Length();
 
         // TODO weapons shot from hardpoints (tanks and other vehicles) subtract 3 distance
 
@@ -104,21 +104,15 @@ public sealed class BarricadeSystem : EntitySystem
             return;
         }
 
-        var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, accuracyComponentComp), barricade.Owner).Float();
+        var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, accuracyComp), barricade.Owner).Float();
         var projectileCoverage = barricade.Comp.ProjectileCoverage;
         var distanceLimit = barricade.Comp.DistanceLimit;
         var accuracyFactor = barricade.Comp.AccuracyFactor;
 
         var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
-        hitChance /= 100; // Convert to decimal
+        var blockHit = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
 
-        var tick = _timing.CurTick.Value;
-        var iD = GetNetEntity(projectile).Id;
-
-        var seed = ((long)tick << 32) | (uint)iD;
-        var blockHit = new Xoroshiro64S(seed).NextFloat(0, 1);
-
-        if (hitChance > blockHit)
+        if (hitChance >= blockHit)
             args.Cancelled = true;
     }
 
