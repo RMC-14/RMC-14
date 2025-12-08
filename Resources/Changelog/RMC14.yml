@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed flaregun flares and airburst starshells ignites applying for too
-      long. Starshell ignites also no longer do less damage.
-    type: Fix
-  id: 2121
-  time: '2025-08-06T04:05:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7255
-- author: lyxcaster
-  changes:
-  - message: Backpacks now have a delay to open when using the click-to-open option.
-    type: Fix
-  id: 2122
-  time: '2025-08-06T04:05:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7257
-- author: CyberTropic
-  changes:
-  - message: Added edges to Soro grass tiles.
-    type: Add
-  id: 2123
-  time: '2025-08-06T04:08:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7261
-- author: Max_Power
-  changes:
-  - message: Added pickup, equip and drop sounds for binoculars, bags, armors, helmets
-      and boots!
-    type: Add
-  - message: Added a new sound for turning off Armor lights!
-    type: Add
-  id: 2124
-  time: '2025-08-06T04:09:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7269
 - author: Dygon
   changes:
   - message: Training grenades no longer explode without priming when shot from a
@@ -4650,5 +4618,37 @@
   id: 2621
   time: '2025-12-08T08:03:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8529
+- author: Tunguso4ka
+  changes:
+  - message: Varadero got a big parity update.
+    type: Tweak
+  id: 2622
+  time: '2025-12-08T08:22:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8556
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Xenos now have a chance to hiss or roar upon being shot
+    type: Tweak
+  - message: Fixed damaging a xeno ALWAYS splashing acid onto marines. The chance
+      now scales itself based on the damage as intended.
+    type: Fix
+  id: 2623
+  time: '2025-12-08T08:21:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8559
+- author: Anoknee
+  changes:
+  - message: The dropship medevac and fulton screens now show the name of the active
+      system
+    type: Tweak
+  id: 2624
+  time: '2025-12-08T08:23:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8550
+- author: Dygon
+  changes:
+  - message: Shooting a dummy with a gun now shows the damage popup to the shooter.
+    type: Fix
+  id: 2625
+  time: '2025-12-08T08:22:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8532
 Name: RMC14
 Order: -1
