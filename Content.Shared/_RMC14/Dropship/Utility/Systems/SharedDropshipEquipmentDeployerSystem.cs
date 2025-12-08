@@ -14,7 +14,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed partial class DropshipEquipmentDeployerSystem : EntitySystem
+public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -67,9 +67,6 @@ public sealed partial class DropshipEquipmentDeployerSystem : EntitySystem
                 TryDeploy(ent, false);
                 return;
             }
-
-            if (!ent.Comp.IsDeployable)
-                return;
 
             TryDeploy(ent, true, deployOffset, rotationOffset);
         }
@@ -173,6 +170,9 @@ public sealed partial class DropshipEquipmentDeployerSystem : EntitySystem
             return false;
 
         if (!_container.TryGetContainer(deployer, equipmentDeployerComponent.DeploySlotId, out var container))
+            return false;
+
+        if (!equipmentDeployerComponent.IsDeployable)
             return false;
 
         var deployingEntity = GetEntity(equipmentDeployerComponent.DeployEntity);

@@ -27,7 +27,7 @@ namespace Content.Client._RMC14.Dropship.Weapon;
 public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 {
     private readonly ContainerSystem _container;
-    private readonly DropshipEquipmentDeployerSystem _equipmentDeployer;
+    private readonly SharedDropshipEquipmentDeployerSystem _equipmentDeployer;
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
@@ -46,7 +46,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
         _tacticalMapSystem = EntMan.System<TacticalMapSystem>();
-        _equipmentDeployer = EntMan.System<DropshipEquipmentDeployerSystem>();
+        _equipmentDeployer = EntMan.System<SharedDropshipEquipmentDeployerSystem>();
     }
 
     protected override void Open()

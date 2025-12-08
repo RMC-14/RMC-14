@@ -33,6 +33,7 @@ using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -139,6 +140,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             RaiseLocalEvent(ent, ref ev, true);
         }
 
+        RelayFTLToMountedEntities(ent, args);
+
         if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
         {
             int xenoCount = 0;
@@ -185,6 +188,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
+
+        RelayFTLToMountedEntities(ent, args);
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
@@ -530,6 +535,38 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         return doorLockStatus;
+    }
+
+    /// <summary>
+    ///     Relays FTL events to equipment slotted in the dropship's weapon or utility hardpoints.
+    /// </summary>
+    /// <param name="ent">The dropship entity that received the relayed FTL event</param>
+    /// <param name="args">The raised event that is forwarded</param>
+    /// <typeparam name="TEvent">The type of the event</typeparam>
+    private void RelayFTLToMountedEntities<TEvent>(EntityUid ent, TEvent args) where TEvent : struct
+    {
+        var childEnumerator = Transform(ent).ChildEnumerator;
+
+        while (childEnumerator.MoveNext(out var entity))
+        {
+            if (!Transform(entity).Anchored)
+                continue;
+
+            BaseContainer? container;
+            TryComp(entity, out DropshipWeaponPointComponent? weaponPoint);
+            TryComp(entity, out DropshipUtilityPointComponent? utilityPoint);
+
+            if (weaponPoint == null && utilityPoint == null)
+                continue;
+
+            if (weaponPoint != null)
+                _container.TryGetContainer(entity, weaponPoint.WeaponContainerSlotId, out container);
+            else
+                _container.TryGetContainer(entity, utilityPoint!.UtilitySlotId, out container);
+
+            if (container?.ContainedEntities.Count > 0)
+                RaiseLocalEvent(container.ContainedEntities[0], args);
+        }
     }
 
     public void LockDoor(Entity<DoorBoltComponent?> door)
