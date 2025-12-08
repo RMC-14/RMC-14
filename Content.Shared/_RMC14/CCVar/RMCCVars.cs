@@ -503,4 +503,28 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
+        CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCCommunicationTowerXenoTakeoverMinutes =
+        CVarDef.Create("rmc.communication_tower_xeno_takeover_minutes", 55, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBoonsLiveMarineRequirement =
+        CVarDef.Create("rmc.boons_live_marine_requirement", 12, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCKingVoteCandidateTimeRequirementHours =
+        CVarDef.Create("rmc.king_vote_candidate_time_requirement", 50, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCKingHatchingFirstWarningMinutes =
+        CVarDef.Create("rmc.king_hatching_first_warning_minutes", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCKingVoteStartTimeSeconds =
+        CVarDef.Create("rmc.king_vote_start_time_seconds", 60, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCKingVoteAskCandidatesTimeSeconds =
+        CVarDef.Create("rmc.king_vote_ask_candidates_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCKingVoteStartHatchingTimeSeconds =
+        CVarDef.Create("rmc.king_vote_start_hatching_time_seconds", 20, CVar.REPLICATED | CVar.SERVER);
 }

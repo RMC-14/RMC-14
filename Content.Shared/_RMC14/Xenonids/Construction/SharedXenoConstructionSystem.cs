@@ -218,6 +218,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)
     {
+        if (HasComp<HiveConstructionSuppressAnnouncementsComponent>(ent))
+            return;
+
         if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 

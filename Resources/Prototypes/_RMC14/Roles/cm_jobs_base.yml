@@ -37,6 +37,7 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+  isXeno: true
 
 - type: entity
   parent: MarkerBase

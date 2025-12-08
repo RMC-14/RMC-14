@@ -114,3 +114,4 @@
     ventCrawlIcon: lesser
   - type: RMCActionOrder
     id: CMXenoLesserDrone
+  - type: ExcludedFromKingVote
