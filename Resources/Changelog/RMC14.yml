@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Training grenades no longer explode without priming when shot from a
-      grenade launcher, and now regain their original size after 'exploding.
-    type: Fix
-  id: 2125
-  time: '2025-08-06T04:09:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7268
-- author: Dygon
-  changes:
-  - message: Signal flares shot from a flare gun can no longer be pulled around.
-    type: Fix
-  id: 2126
-  time: '2025-08-06T04:08:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7265
 - author: Vermidia
   changes:
   - message: Fixed Crusher passive not reducing charge and defensive shield cooldowns.
@@ -4650,5 +4635,20 @@
   id: 2625
   time: '2025-12-08T08:22:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8532
+- author: noctyrnal
+  changes:
+  - message: Replaced the improvised flamer with the LC9 incinerator unit, a flamer
+      designed for colony use.
+    type: Add
+  id: 2626
+  time: '2025-12-08T08:24:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8536
+- author: Thereisabear
+  changes:
+  - message: Red Neckerchief to loadout selections
+    type: Add
+  id: 2627
+  time: '2025-12-08T08:24:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8535
 Name: RMC14
 Order: -1
