@@ -22,7 +22,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     public static readonly Dictionary<string, EntProtoId<IFFFactionComponent>> SentryFactionToIff = new()
     {
         { "UNMC", "FactionMarine" },
-        { "CLF", "FactionCLF" },
+        { "CLF", "FactionSurvivor" },
         { "SPP", "FactionSPP" },
         { "Halcyon", "FactionHalcyon" },
         { "WeYa", "FactionWeYa" },
