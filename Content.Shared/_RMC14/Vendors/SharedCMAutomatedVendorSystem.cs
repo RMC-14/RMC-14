@@ -806,7 +806,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var itemPlacementOffset = requisitionsChair.Comp.OffsetItem;
             var finalPlacementCoordinates = requisitionsChair.Owner.ToCoordinates().Offset(itemPlacementOffset);
             var spawn = SpawnAtPosition(toVend, finalPlacementCoordinates);
-            // Apply partial stack amount if specified
             if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
             {
                 _stack.SetCount(spawn, partialStackAmount.Value, stack);
@@ -817,7 +816,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         else
         {
             var spawn = SpawnNextToOrDrop(toVend, vendor);
-            // Apply partial stack amount if specified
             if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
             {
                 _stack.SetCount(spawn, partialStackAmount.Value, stack);
@@ -1141,15 +1139,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
 
         var stackTypeId = stack.StackTypeId;
-        var maxStackSize = _stack.GetMaxCount(stack);
-        if (maxStackSize <= 0)
+
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return false;
+
+        var entryStackSize = entryStack.Count;
+        if (entryStackSize <= 0)
             return false;
 
         vendor.Comp.PartialProductStacks.TryAdd(stackTypeId, 0);
         var currentPartial = vendor.Comp.PartialProductStacks[stackTypeId];
         var itemCount = stack.Count;
 
-        var plan = CalculateStackRestockPlan(currentPartial, itemCount, maxStackSize);
+        var plan = CalculateStackRestockPlan(currentPartial, itemCount, entryStackSize);
         if (!plan.CanRestock)
             return false;
 

@@ -94,13 +94,13 @@
         amount: 0
     - name: Building materials
       entries:
-      - id: RMCSheetCardboard1
-        amount: 10
-      - id: BarbedWire1
+      - id: RMCSheetCardboard10
+        amount: 1
+      - id: BarbedWire10
         amount: 0
-      - id: CMSheetMetal1
+      - id: CMSheetMetal10
         amount: 0
-      - id: CMSheetPlasteel1
+      - id: CMSheetPlasteel10
         amount: 0
       - id: CMSandbagEmpty10
         amount: 0
@@ -111,6 +111,20 @@
       - id: ArmorHelmetM10
         amount: 0
       - id: RMCArmorM3MediumCarrier
+        amount: 0
+      - id: RMCArmorM3MediumPadded
+        amount: 0
+      - id: RMCArmorM3MediumPadless
+        amount: 0
+      - id: RMCArmorM3MediumRidged
+        amount: 0
+      - id: RMCArmorM3MediumSkull
+        amount: 0
+      - id: RMCArmorM3MediumSmooth
+        amount: 0
+      - id: RMCArmorM3HeavyPadded
+        amount: 0
+      - id: RMCArmorM3LightPadded
         amount: 0
     - name: Miscellaneous
       entries:
