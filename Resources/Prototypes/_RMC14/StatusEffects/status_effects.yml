@@ -14,9 +14,6 @@
 - type: statusEffect
   id: RMCMuted
   alwaysAllowed: true
-  icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
-  name: alerts-muted-name
-  description: alerts-muted-desc
   alert: RMCMuted
 
 - type: alert
