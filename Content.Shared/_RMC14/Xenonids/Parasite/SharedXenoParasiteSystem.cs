@@ -2,9 +2,11 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -598,6 +600,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
 
+        RemCompDeferred<RMCGibOnDeathComponent>(parasite); // No gibbing on someone's face
         RemCompDeferred<ParasiteAIComponent>(parasite);
         var ev = new XenoParasiteInfectEvent(victim, parasite.Owner);
         RaiseLocalEvent(victim, ev, true);
@@ -692,6 +695,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
+
+                SetBurstSpawn((infectedVictim, victimComp), para.BurstProto);
                 Dirty(infectedVictim, infectable);
             }
         }
@@ -835,6 +840,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
+
+        if (_container.TryGetContainingContainer(victim, out var container) && HasComp<RMCHideParasiteInfectionContainerPopupComponent>(container.Owner))
+            return;
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 

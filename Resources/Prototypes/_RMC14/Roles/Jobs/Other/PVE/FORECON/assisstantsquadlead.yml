@@ -35,6 +35,14 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-assistant-lead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tl
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -44,7 +52,6 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
   hidden: true
-
 
 - type: entity
   parent: CMSpawnPointJobBase
