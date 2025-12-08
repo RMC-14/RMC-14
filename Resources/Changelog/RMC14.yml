@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Getting hit by a starshell projectile no longer moves you around.
-    type: Fix
-  id: 2133
-  time: '2025-08-06T04:13:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7281
-- author: Max_Power
-  changes:
-  - message: Added a sensor tower to CORSAT
-    type: Add
-  id: 2134
-  time: '2025-08-06T04:12:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7279
-- author: Dygon
-  changes:
   - message: Xenos can now track the hive core.
     type: Tweak
   - message: Clicking the hive tracker now watches the xeno being tracked.
@@ -4657,5 +4643,25 @@
   id: 2633
   time: '2025-12-08T08:32:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8412
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added Shivas survivor variants!
+    type: Add
+  - message: Fixed biosuits not resisting sentinel slow spit stun.
+    type: Fix
+  - message: Fixed biosuits not having light armor speed.
+    type: Fix
+  - message: Added a winter coat for the corporate liaison, located in their vendor.
+    type: Add
+  id: 2634
+  time: '2025-12-08T08:35:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8586
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added chatsan for the word 'surv' for marines.
+    type: Tweak
+  id: 2635
+  time: '2025-12-08T08:35:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8589
 Name: RMC14
 Order: -1
