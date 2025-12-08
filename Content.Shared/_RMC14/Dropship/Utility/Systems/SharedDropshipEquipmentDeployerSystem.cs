@@ -74,14 +74,15 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
 
     private void OnInserted(Entity<DropshipEquipmentDeployerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        ent.Comp.IsDeployed = false;
-
         if (!HasComp<DropshipWeaponPointComponent>(args.Container.Owner) && !HasComp<DropshipUtilityPointComponent>(args.Container.Owner))
         {
             ent.Comp.IsDeployable = false;
             Dirty(ent);
             return;
         }
+
+        if (HasComp<DropshipWeaponPointComponent>(args.Container.Owner))
+            ent.Comp.AutoUnDeploy = true;
 
         ent.Comp.IsDeployable = true;
         Dirty(ent);
@@ -92,12 +93,12 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         if (ent.Comp.DeployEntity != null)
         {
             TryDeploy(ent,  false);
-            //_container.Insert(GetEntity(ent.Comp.DeployEntity.Value), container);
         }
 
         ent.Comp.IsDeployable = false;
         ent.Comp.IsDeployed = false;
         ent.Comp.AutoDeploy = false;
+        ent.Comp.AutoUnDeploy = false;
         Dirty(ent);
     }
 

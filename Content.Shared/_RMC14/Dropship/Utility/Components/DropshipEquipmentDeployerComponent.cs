@@ -43,6 +43,18 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsDeployed;
 
+    /// <summary>
+    ///     Whether the deployer should automatically deploy when a dropship arrives at it's destination.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AutoDeploy;
+
+    /// <summary>
+    ///     Whether the deployer should automatically undeploy when a dropship goes into FTL.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AutoUnDeploy;
+
     [DataField, AutoNetworkedField]
     public Vector2i StarboardForeDeployDirection = new(1, 0);
 
@@ -63,12 +75,6 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
 
     [DataField, AutoNetworkedField]
     public float StarboardWingDeployRotationDegrees = 90;
-
-    /// <summary>
-    ///     Whether the deployer should automatically deploy when a dropship arrives at it's destination.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool AutoDeploy;
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? UtilityDeployedSprite;

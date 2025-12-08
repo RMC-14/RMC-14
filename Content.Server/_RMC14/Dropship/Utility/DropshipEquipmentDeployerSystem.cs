@@ -15,6 +15,9 @@ public sealed class DropshipEquipmentDeployerSystem : SharedDropshipEquipmentDep
 
     private void OnFTLStarted(Entity<DropshipEquipmentDeployerComponent> ent, ref FTLUpdatedRelayedEvent<FTLStartedEvent> args)
     {
+        if (!ent.Comp.AutoUnDeploy)
+            return;
+
         TryDeploy(ent, false);
         ent.Comp.IsDeployable = false;
         Dirty(ent);
