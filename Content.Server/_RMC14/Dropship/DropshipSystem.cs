@@ -540,7 +540,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     /// <summary>
     ///     Relays FTL events to equipment slotted in the dropship's weapon or utility hardpoints.
     /// </summary>
-    /// <param name="ent">The dropship entity that received the relayed FTL event</param>
+    /// <param name="ent">The dropship entity that received the FTL event that will be relayed</param>
     /// <param name="args">The raised event that is forwarded</param>
     /// <typeparam name="TEvent">The type of the event</typeparam>
     private void RelayFTLToMountedEntities<TEvent>(EntityUid ent, TEvent args) where TEvent : struct
@@ -564,8 +564,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
             else
                 _container.TryGetContainer(entity, utilityPoint!.UtilitySlotId, out container);
 
-            if (container?.ContainedEntities.Count > 0)
-                RaiseLocalEvent(container.ContainedEntities[0], args);
+            if (container == null)
+                continue;
+
+            foreach (var mountedEntity in container.ContainedEntities)
+            {
+                RaiseLocalEvent(mountedEntity, args);
+            }
         }
     }
 

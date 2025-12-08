@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
@@ -88,6 +89,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         SubscribeLocalEvent<WeaponMountComponent, BreakageEventArgs>(OnBreak);
         SubscribeLocalEvent<WeaponMountComponent, DamageModifyEvent>(OnDamageModified);
         SubscribeLocalEvent<WeaponMountComponent, RMCCheckTileFreeEvent>(OnCheckTileFree);
+        SubscribeLocalEvent<WeaponMountComponent, GetIFFGunUserEvent>(OnGetGunUser);
 
         // Relayed events
         SubscribeLocalEvent<WeaponMountComponent, MountableWeaponRelayedEvent<OverheatedEvent>>(OnWeaponOverheated);
@@ -821,6 +823,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     private void OnWeaponHeatGained(Entity<WeaponMountComponent> ent, ref MountableWeaponRelayedEvent<HeatGainedEvent> args)
     {
         UpdateAppearance(ent);
+    }
+
+    private void OnGetGunUser(Entity<WeaponMountComponent> ent, ref GetIFFGunUserEvent args)
+    {
+        args.GunUser = ent.Comp.User;
     }
 
     public void UpdateAppearance(EntityUid mount, WeaponMountComponent? mountComponent = null)

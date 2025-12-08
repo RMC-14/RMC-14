@@ -115,7 +115,6 @@
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: mg_system_deployed
 
-
 - type: entity
   parent: RMCDropshipAttachmentUtility
   id: RMCDropshipAttachmentSentryDefenseSystem
