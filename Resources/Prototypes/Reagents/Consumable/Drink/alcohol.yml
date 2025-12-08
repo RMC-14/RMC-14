@@ -171,7 +171,7 @@
           shouldHave: false
         damage:
           types:
-            Poison: 1
+            Poison: 0.01
       # dwarves take less toxin damage and heal a marginal amount of brute
       - !type:HealthChange
         conditions:
@@ -181,7 +181,7 @@
           type: Dwarf
         damage:
           types:
-            Poison: 0.2
+            Poison: 0.02
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -190,7 +190,7 @@
           type: Dwarf
         damage:
           groups:
-            Brute: -1
+            Brute: -0.01
       - !type:ChemVomit
         probability: 0.04
         conditions:

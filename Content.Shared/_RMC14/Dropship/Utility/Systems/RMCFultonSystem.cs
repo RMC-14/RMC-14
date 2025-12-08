@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Suicide;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -72,7 +73,7 @@ public sealed class RMCFultonSystem : EntitySystem
         }
 
         if (HasComp<PerishableComponent>(target) && !_rotting.IsRotten(target) ||
-            HasComp<RMCRevivableComponent>(target) && !_unrevivable.IsUnrevivable(target))
+            HasComp<RMCRevivableComponent>(target) && !_unrevivable.IsUnrevivable(target) || !HasComp<RMCHasSuicidedComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("rmc-fulton-not-unrevivable", ("fulton", used), ("target", target)), target, user);
             return;

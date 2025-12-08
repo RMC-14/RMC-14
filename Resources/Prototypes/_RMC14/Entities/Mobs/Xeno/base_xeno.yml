@@ -33,6 +33,10 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - EntityStorage
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
@@ -71,6 +75,9 @@
         volume: -4
   - type: RMCHealthExaminable
   - type: AcidBloodSplash
+    closeSplashRadius: 0.5
+    standardSplashRadius: 1.5
+    gibSplashRadius: 2.5
     damage:
       types:
         Heat: 25
@@ -123,6 +130,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -190,6 +200,12 @@
         layer:
         - BulletImpassable
   - type: CMSurgeryTarget
+  - type: Gibbable
+  - type: RMCGibOnDeath
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    - RMCDecalSpawnerGibsDrone # TODO one for every caste
+    - RMCGibEffectXenoSmall # TODO larger gib effect for larger xenos
   - type: Body
     prototype: Xenonid
   - type: Xeno
