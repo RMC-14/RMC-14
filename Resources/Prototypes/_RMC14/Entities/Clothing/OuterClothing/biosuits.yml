@@ -47,8 +47,6 @@
   - type: ClothingSpeedModifier # slowdown = 1 (SLOWDOWN_ARMOR_HEAVY)
     walkModifier: 0.62
     sprintModifier: 0.62
-  - type: RMCArmorSpeedTier
-    speedTier: heavy
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.3
