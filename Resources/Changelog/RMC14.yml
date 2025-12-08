@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Xenos can now track the hive core.
-    type: Tweak
-  - message: Clicking the hive tracker now watches the xeno being tracked.
-    type: Fix
-  id: 2135
-  time: '2025-08-06T04:15:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7290
-- author: noctyrnal
-  changes:
-  - message: Added random spawners for food vendors and food / drinks.
-    type: Add
-  id: 2136
-  time: '2025-08-06T04:11:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7277
-- author: Dygon
-  changes:
   - message: A shuttle landing on a fire tile will no longer ignite it's passengers.
     type: Fix
   id: 2137
@@ -4663,5 +4647,41 @@
   id: 2635
   time: '2025-12-08T08:35:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8589
+- author: Ian321
+  changes:
+  - message: The foxtrot WS can now pick any kit.
+    type: Tweak
+  id: 2636
+  time: '2025-12-08T08:45:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6126
+- author: Ian321
+  changes:
+  - message: The pyrotechnician weapons specialization has been added.
+    type: Add
+  - message: M34-T incinerator unit used by the pyro specialist. Comes with an improved
+      extinguisher, can hold large tanks and can directly pull fuel from an equipped
+      Broiler-T system.
+    type: Add
+  - message: Broiler-T flexible refueling system used by the pyro specialist. Stores
+      three large fuel canisters that can be directly access by the M34-T incinerator.
+    type: Add
+  - message: Napalm B fuel that is armor shredding like the B-Gel, but also spreads
+      over a large area.
+    type: Add
+  - message: Napalm X fuel that burns brighter and longer.
+    type: Add
+  - message: There can now only be one of each weapon specialization.
+    type: Tweak
+  - message: Industrial chem master for Ordnance Technicians.
+    type: Add
+  - message: Sticky and High-Combustion Napalm that can be made by Ordnance Technicians.
+    type: Add
+  - message: Incinerator tanks and the guidebook now explain how different fuels behave.
+    type: Add
+  - message: Added B-Gel tanks for use in the M34 incinerator unit.
+    type: Add
+  id: 2637
+  time: '2025-12-08T08:44:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8498
 Name: RMC14
 Order: -1
