@@ -527,4 +527,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCKingVoteStartHatchingTimeSeconds =
         CVarDef.Create("rmc.king_vote_start_hatching_time_seconds", 20, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCNewResinPreventCollideTimeSeconds =
+        CVarDef.Create("rmc.new_resin_prevent_collide_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
 }
