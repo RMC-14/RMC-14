@@ -21,6 +21,8 @@ public sealed partial class Antihallucinogenic : RMCChemicalEffect
     private static readonly ProtoId<ReagentPrototype> MindbreakerToxin = "RMCMindbreakerToxin";
     private static readonly ProtoId<ReagentPrototype> SpaceDrugs = "RMCSpaceDrugs";
 
+    public override string Abbreviation => "AHL";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Removes [color=green]2.5[/color] units of Mindbreaker Toxin and Space Drugs from the bloodstream. It also stabilizes perceptive abnormalities such as hallucinations\n" +

@@ -14,11 +14,11 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Focusing : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    public override string Abbreviation => "FCS";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var focusing = ActualPotency >= 3
+        var focusing = Potency >= 3
             ? ". Also powerful enough to instantly cure mute and blindness."
             : ".";
 
@@ -40,7 +40,7 @@ public sealed partial class Focusing : RMCChemicalEffect
         statusEffects.TryRemoveTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * 2));
         // ReduceEyeBlur(PotencyPerSecond * 2) but BlurryVisionComponent is sealed so only healing the eyes will remove blur.
 
-        if (!(ActualPotency >= 3))
+        if (!(Potency >= 3))
             return;
         args.EntityManager.EntitySysManager.GetEntitySystem<BlindableSystem>().AdjustEyeDamage(args.TargetEntity, -9);
         args.EntityManager.RemoveComponent<MutedComponent>(args.TargetEntity);

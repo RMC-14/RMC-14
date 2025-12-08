@@ -9,15 +9,12 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Anticorrosive : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
-
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
+    public override string Abbreviation => "ACR";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var healing = PotencyPerSecond;
-        if (ActualPotency > 2)
+        if (Potency > 2)
             healing += PotencyPerSecond * 0.5f;
 
         return $"Heals [color=green]{healing}[/color] burn damage.\n" +
@@ -31,7 +28,7 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency);
 
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
-        if (ActualPotency > 2)
+        if (Potency > 2)
         {
             healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, BurnGroup, potency * 0.5f);
             damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
