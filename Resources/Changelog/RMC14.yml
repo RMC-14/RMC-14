@@ -4683,5 +4683,12 @@
   id: 2637
   time: '2025-12-08T08:44:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8498
+- author: TheLuggage05
+  changes:
+  - message: Added B-Gel tanks for use in the M34 incinerator unit.
+    type: Add
+  id: 2638
+  time: '2025-12-08T08:44:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8498
 Name: RMC14
 Order: -1
