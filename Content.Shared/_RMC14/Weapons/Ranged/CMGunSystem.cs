@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
-using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Hands;
@@ -75,7 +74,6 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalAttackBlocker = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -794,6 +792,23 @@ public sealed class CMGunSystem : EntitySystem
         TryAssistedReload(args.User, args.Target.Value, ent);
     }
 
+    private bool IsBehindTarget(EntityUid user, EntityUid target)
+    {
+        var targetFacingDirection = Transform(target).LocalRotation.GetCardinalDir();
+        var behindAngle = targetFacingDirection.GetOpposite().ToAngle();
+
+        var userMapPos = _transform.GetMapCoordinates(user);
+        var targetMapPos = _transform.GetMapCoordinates(target);
+        var currentAngle = (userMapPos.Position - targetMapPos.Position).ToWorldAngle();
+
+        var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
+
+        if (differenceFromBehindAngle > -45 && differenceFromBehindAngle < 45)
+            return true;
+
+        return false;
+    }
+
     private void TryAssistedReload(EntityUid user, EntityUid target, Entity<AssistedReloadAmmoComponent> ammo)
     {
         if (!TryComp<AssistedReloadReceiverComponent>(target, out var reloadReceiver))
@@ -812,7 +827,7 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
-        if (!_directionalAttackBlocker.IsBehindTarget(user, target))
+        if (!IsBehindTarget(user, target))
         {
             var failAnglePopup = Loc.GetString("rmc-assisted-reload-fail-angle", ("target", target));
             _popup.PopupClient(failAnglePopup, user, user, PopupType.SmallCaution);

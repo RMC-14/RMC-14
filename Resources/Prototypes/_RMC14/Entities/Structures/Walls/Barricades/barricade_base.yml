@@ -85,7 +85,7 @@
       types:
         Heat: 3.75
   - type: ExaminableDamage
-    messages: WindowMessages
+    messages: RMCBarricadeMessages
   - type: RMCGenericExamine
     messageId: rmc-barricade-examine-tip
     whitelist:
