@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: Admins and GMs can now disable deadchat by using `setdchat`.
-    type: Add
-  id: 2112
-  time: '2025-08-06T04:00:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7240
-- author: FallingDownofMadness
-  changes:
-  - message: A parachute crate in the cargo catalog
-    type: Add
-  id: 2113
-  time: '2025-08-06T04:00:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7239
-- author: Tunguso4ka
-  changes:
-  - message: You can now store flashbangs, lighters, radios and donuts in security
-      rig.
-    type: Add
-  - message: Added 5 whistles to SecVend.
-    type: Add
-  id: 2114
-  time: '2025-08-06T04:01:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7242
 - author: Dygon
   changes:
   - message: Boilers now inject neurotoxin again instead of acid while neuro gas is
@@ -4626,5 +4602,36 @@
   id: 2612
   time: '2025-12-08T07:54:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8553
+- author: monomethylhydrazine
+  changes:
+  - message: Added an icon to FORECON PVE riflemen and RTOs.
+    type: Add
+  - message: Added tacmap icons to FORECON PVE roles.
+    type: Add
+  - message: Fixed FORECON PVE roles needing to be manually added to the Recon squad.
+    type: Fix
+  - message: Removed the RTO from FORECON vendors.
+    type: Remove
+  id: 2613
+  time: '2025-12-08T07:55:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8563
+- author: Dutch-VanDerLinde
+  changes:
+  - message: 'LV-624 now displays its colony name: LV-624 Lazarus Landing.'
+    type: Tweak
+  id: 2614
+  time: '2025-12-08T07:56:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8587
+- author: Gosera
+  changes:
+  - message: Fixed M276 pattern M13 holster rig not being able to be equipped on the
+      suit storage slot.
+    type: Fix
+  - message: Fixed M276 pattern M82F flare gun holster rig not being able to be equipped
+      on the suit storage slot.
+    type: Fix
+  id: 2615
+  time: '2025-12-08T07:57:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8584
 Name: RMC14
 Order: -1
