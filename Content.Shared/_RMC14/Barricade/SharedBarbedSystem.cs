@@ -62,7 +62,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         using (args.PushGroup(nameof(SharedBarbedSystem)))
         {
-            args.PushMarkup(Loc.GetString("rmc-vending-machine-can-hack"));
+            args.PushMarkup(Loc.GetString("rmc-barricade-examine-barbed"));
         }
     }
 

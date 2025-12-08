@@ -9,9 +9,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Stacks;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -28,6 +31,7 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -44,14 +48,18 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
-    private EntityQuery<RMCProjectileAccuracyComponent> _projectileQuery;
+    private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<TargetedProjectileComponent> _projectileTargetQuery;
+    private EntityQuery<RMCProjectileAccuracyComponent> _accuracyQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
-        _projectileQuery = GetEntityQuery<RMCProjectileAccuracyComponent>();
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
+        _projectileTargetQuery = GetEntityQuery<TargetedProjectileComponent>();
+        _accuracyQuery = GetEntityQuery<RMCProjectileAccuracyComponent>();
 
-        SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnBarricadePreventCollide, before: [typeof(RequireProjectileTargetSystem)]);
+        SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnBarricadePreventCollide, after: [typeof(RequireProjectileTargetSystem)]);
 
         SubscribeLocalEvent<EntrenchingToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
@@ -70,14 +78,18 @@ public sealed class BarricadeSystem : EntitySystem
     {
         var projectile = args.OtherEntity;
 
-        if (!_projectileQuery.TryComp(projectile, out var projectileComp))
+        if (!_accuracyQuery.TryComp(projectile, out var accuracyComponentComp))
             return;
 
-        if (projectileComp.ShotFrom == null)
+        if (accuracyComponentComp.ShotFrom == null)
+            return;
+
+        // Someone aiming at a barricade always hits it
+        if (IsProjectileTargeting(barricade.Owner, projectile))
             return;
 
         var barricadeCoords = _transform.GetMoverCoordinates(barricade.Owner);
-        var distance = (barricadeCoords.Position - projectileComp.ShotFrom.Value.Position).Length();
+        var distance = (barricadeCoords.Position - accuracyComponentComp.ShotFrom.Value.Position).Length();
 
         // TODO weapons shot from hardpoints (tanks and other vehicles) subtract 3 distance
 
@@ -89,7 +101,7 @@ public sealed class BarricadeSystem : EntitySystem
             return;
         }
 
-        var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, projectileComp), barricade.Owner).Float();
+        var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, accuracyComponentComp), barricade.Owner).Float();
         var projectileCoverage = barricade.Comp.ProjectileCoverage;
         var distanceLimit = barricade.Comp.DistanceLimit;
         var accuracyFactor = barricade.Comp.AccuracyFactor;
@@ -511,6 +523,33 @@ public sealed class BarricadeSystem : EntitySystem
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    ///    Checks if the person who shot the projectile had their mouse hovered over the target.
+    /// </summary>
+    public bool IsProjectileTargeting(EntityUid target, EntityUid other)
+    {
+        if (_projectileTargetQuery.TryComp(other, out var projectileTarget) && projectileTarget.Target == target)
+            return true;
+
+        if (_projectileQuery.TryComp(other, out var projectile))
+        {
+            // Prevents shooting out of while inside of crates
+            var shooter = projectile.Shooter;
+            if (!shooter.HasValue)
+                return true;
+
+            // ProjectileGrenades delete the entity that's shooting the projectile,
+            // so it's impossible to check if the entity is in a container
+            if (TerminatingOrDeleted(shooter.Value))
+                return true;
+
+            if (!_container.IsEntityOrParentInContainer(shooter.Value))
+                return false;
         }
 
         return false;
