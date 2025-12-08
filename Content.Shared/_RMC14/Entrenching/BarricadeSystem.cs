@@ -39,7 +39,7 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _attackBlockerSystem = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalAttackBlocker = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
@@ -81,7 +81,9 @@ public sealed class BarricadeSystem : EntitySystem
 
         // TODO weapons shot from hardpoints (tanks and other vehicles) subtract 3 distance
 
-        if (distance < 1 || distance > 3 && _attackBlockerSystem.IsFacingTarget(barricade, projectile))
+        // If the distance is less than 1 tile
+        // or the distance is greater than 3 but the shooter is behind the cade (the right side), then the bullet passes through
+        if (distance < 1 || distance > 3 && _directionalAttackBlocker.IsBehindTarget(projectile, barricade))
         {
             args.Cancelled = true;
             return;

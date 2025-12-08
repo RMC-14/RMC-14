@@ -103,4 +103,27 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
         return relativeDiff is 0 or 1 or 7;
     }
+
+    /// <summary>
+    ///     Check if the user is behind the user.
+    /// </summary>
+    /// <param name="user">The entity that is checked to see if it is in behind the target</param>
+    /// <param name="target">The entity whose direction is checked</param>
+    /// <returns>True if the blocker is behind the target</returns>
+    public bool IsBehindTarget(EntityUid user, EntityUid target)
+    {
+        var targetFacingDirection = Transform(target).LocalRotation.GetCardinalDir();
+        var behindAngle = targetFacingDirection.GetOpposite().ToAngle();
+
+        var userMapPos = _transform.GetMapCoordinates(user);
+        var targetMapPos = _transform.GetMapCoordinates(target);
+        var currentAngle = (userMapPos.Position - targetMapPos.Position).ToWorldAngle();
+
+        var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
+
+        if (differenceFromBehindAngle > -45 && differenceFromBehindAngle < 45)
+            return true;
+
+        return false;
+    }
 }
