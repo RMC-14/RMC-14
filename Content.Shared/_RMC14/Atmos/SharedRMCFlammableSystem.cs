@@ -124,6 +124,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<RMCImmuneToIgnitionComponent, GetIgnitionImmunityEvent>(OnGetIgnitionImmunity);
         SubscribeLocalEvent<RMCImmuneToIgnitionComponent, InventoryRelayedEvent<GetIgnitionImmunityEvent>>(OnGetIgnitionEquipmentImmunity);
+        SubscribeLocalEvent<RMCImmuneToIgnitionComponent, ExaminedEvent>(OnIgnitionImmunityExamined);
+
+        SubscribeLocalEvent<RMCImmuneToFireTileDamageComponent, ExaminedEvent>(OnImmuneToTileFireExamined);
+
+        SubscribeLocalEvent<RMCFireArmorDebuffModifierComponent, ExaminedEvent>(OnFireArmorDebuffModifierExamined);
     }
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
@@ -167,7 +172,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
         }
 
-        ent.Comp.Duration -= TimeSpan.FromSeconds(7);
+        ent.Comp.Duration -= TimeSpan.FromSeconds(args.Power);
         Dirty(ent);
     }
 
@@ -385,6 +390,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     }
 
     public virtual void Pat(Entity<FlammableComponent?> flammable, int stacks)
+    {
+    }
+
+    public virtual void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
     {
     }
 
@@ -697,6 +706,31 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         args.Ignite = false;
+    }
+
+    private void OnIgnitionImmunityExamined(Entity<RMCImmuneToIgnitionComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCImmuneToIgnitionComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-immune-to-ignition-examine", ("ent", ent)));
+        }
+    }
+
+    private void OnImmuneToTileFireExamined(Entity<RMCImmuneToFireTileDamageComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCImmuneToFireTileDamageComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-immune-to-fire-tile-damage-examine", ("ent", ent)));
+        }
+    }
+
+    private void OnFireArmorDebuffModifierExamined(Entity<RMCFireArmorDebuffModifierComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCFireArmorDebuffModifierComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-fire-armor-debuff-modifier-examine", ("ent", ent), ("percentage",
+                $"{(ent.Comp.DebuffModifier - 1) * 100:F0}")));
+        }
     }
 
     public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)

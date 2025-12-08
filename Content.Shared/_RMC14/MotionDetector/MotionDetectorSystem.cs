@@ -38,8 +38,8 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<MotionDetectorComponent> _detectorQuery;
-    private EntityQuery<StorageComponent> _storageQuery;
+    private EntityQuery<MotionDetectorComponent> _detectorQuery = default!;
+    private EntityQuery<StorageComponent> _storageQuery = default!;
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
@@ -151,7 +151,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         if (ent.Comp.Slots != SlotFlags.All &&
             (args.InHands ||
-            (args.SlotFlags & ent.Comp.Slots) == 0))
+             (args.SlotFlags & ent.Comp.Slots) == 0))
         {
             return;
         }
@@ -298,6 +298,14 @@ public sealed class MotionDetectorSystem : EntitySystem
     public bool IsEnabled(Entity<MotionDetectorComponent?> ent)
     {
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.Enabled;
+    }
+
+    public bool IsEnabled(EntityUid uid)
+    {
+        if (!TryComp<MotionDetectorComponent>(uid, out var comp))
+            return false;
+
+        return comp.Enabled;
     }
 
     public override void Update(float frameTime)

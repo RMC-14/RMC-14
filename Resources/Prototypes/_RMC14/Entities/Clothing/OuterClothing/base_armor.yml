@@ -18,9 +18,18 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
@@ -59,6 +68,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
@@ -159,6 +169,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector

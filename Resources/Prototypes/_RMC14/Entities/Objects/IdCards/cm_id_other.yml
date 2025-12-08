@@ -346,9 +346,9 @@
     factions:
     - FactionSurvivor
 - type: entity
-  parent: CMIDCardBase
+  parent: CMIDCardStandardDogtag
   id: RMCIDCardFORECONSpotter
-  name: FORECON Spotter ID card
+  name: FORECON Spotter's dogtags
   components:
   - type: IdCard
     jobTitle: rmc-job-name-forecon-spotter
