@@ -337,7 +337,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             return false;
 
         var volume = solution.Value.Comp.Solution.Volume;
-        if (volume <= flamer.Comp.CostPer)
+        if (volume < flamer.Comp.CostPer)
             return false;
 
         if (!fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta))
