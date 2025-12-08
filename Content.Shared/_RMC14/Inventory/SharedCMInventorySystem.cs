@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -357,7 +358,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void TryPickupDroppedItems(EntityUid user)
     {
-        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
+        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems) || HasComp<DevouredComponent>(user))
             return;
 
         // Sort items by importance

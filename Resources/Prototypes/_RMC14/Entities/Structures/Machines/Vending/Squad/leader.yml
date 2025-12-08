@@ -35,7 +35,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -237,6 +236,8 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
+      - id: RMCBackpackRTO
+        replaceSlot: back
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Armor
@@ -321,14 +322,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
   name: essential SL kit
-  description: Contains a Radio Telephone pack, a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
+  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
-    - RMCBackpackRTO
     - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
