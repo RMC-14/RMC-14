@@ -1,0 +1,62 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandSpec
+  name: rmc-job-name-crashland-spec
+  startingGear: RMCGearSPPCrashlandSpec
+  ranks:
+    RMCRankSPPSerzhant: []
+  icon: "RMCJobIconSPPSpecialist"
+  spawnMenuRoleName: SPP Airborne Specialist (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-spec
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandSpec
+  equipment:
+    back: RMCSatchelSPPSurvivorSpec
+    belt: RMCBeltHolsterPistolSPPT73
+    outerClothing: RMCArmorSPPHeavySurvivorFill
+    head: ArmorHelmetSPPHeavy
+  inhand: 
+  - RMCWeaponRifleType71Flamer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandSpec
+  name: spp crashland specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandSpec
+  - type: Sprite
+    state: spp_spawn

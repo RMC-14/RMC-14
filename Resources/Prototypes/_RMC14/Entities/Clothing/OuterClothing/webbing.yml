@@ -63,3 +63,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_black.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingSPPSurvivor
+  suffix: SPP, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: RMCMRESPP

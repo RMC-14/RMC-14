@@ -1,0 +1,107 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorSPPCrashlandBase
+  name: rmc-job-name-crashland-base
+  description: rmc-job-description-crashland
+  ranks:
+    RMCRankSPPRyadovoy: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSPPCrashlandBase
+  hasIcon: true
+  greeting: rmc-job-greeting-crashland
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: SPP Airborne Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPCrashlandBase
+  equipment:
+    jumpsuit: RMCJumpsuitSPPPatchAirborne
+    back: RMCSatchelSPPSurvivor
+    shoes: RMCBootsSPPFilled
+    gloves: RMCHandsVeteranSPP
+    id: RMCIDSPP
+    ears: RMCHeadsetSPPCrashland
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareFilled
+
+- type: entity
+  id: RMCSurvivorPresetSPPCrashlandWeaponOnly
+  name: spp crashland survivor weapon only preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+
+- type: entity
+  id: RMCSurvivorPresetSPPCrashlandNoBelt
+  name: spp crashland survivor no belt preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+    randomGearOther:
+    - # Armor
+      - [ RMCArmorSPPSurvivorFill, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
+      - [ RMCArmorSPPSupportSurvivorFill ]
+    - # Headwear // TODO RMC14 implement random chance here in a less ugly way
+      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ CMHeadCapSPP ] # 3/9 chance
+      - [ CMHeadCapSPPBeret ] # 2/9 chance
+      - [ CMHeadCapSPPUshanka ] # 2/9 chance
+
+- type: entity
+  id: RMCSurvivorPresetSPPCrashland
+  name: spp crashland survivor all random preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
+    - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71C ]
+    - [ RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCShellShotgunHeavyBuckshot, RMCWeaponShotgunType23 ]
+    - [ RMCMagazineSMGType64, RMCMagazineSMGType64, RMCWeaponSMGType64 ]
+    primaryWeaponChance: 1
+    randomGearOther:
+    - # Armor
+      - [ RMCArmorSPPSurvivorFill, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ]
+      - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
+      - [ RMCArmorSPPSupportSurvivorFill ]
+    - # Headwear // TODO RMC14 implement random chance here in a less ugly way
+      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ CMHeadCapSPP ] # 3/9 chance
+      - [ CMHeadCapSPPBeret ] # 2/9 chance
+      - [ CMHeadCapSPPUshanka ] # 2/9 chance
+    - # Belt
+      - [ RMCBeltHolsterPistolSPPNP92 ]
+      - [ RMCBeltHolsterPistolSPPNP92 ] # 2/4ths chance
+      - [ RMCBeltHolsterPistolSPPT73 ]
+      - [ RMCBeltSPPBrown ]

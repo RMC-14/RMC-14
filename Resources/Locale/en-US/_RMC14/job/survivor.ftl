@@ -240,6 +240,36 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
+# Trijent crashland insert survs 
+
+rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, Recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-crashland-base = SPP Airborne Survivor
+
+rmc-job-description-crashland = You are a stranded SPP Airborne marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-crashland-sapper = Airborne Sapper
+rmc-job-prefix-crashland-sapper = 173/RECON SAP
+
+rmc-job-name-crashland-medic = Airborne Medic
+rmc-job-prefix-crashland-medic = 173/RECON MED
+
+rmc-job-name-crashland-sl = Airborne Squad Leader
+rmc-job-prefix-crashland-sl = 173/RECON SL
+
+rmc-job-name-crashland-spec = Airborne Specialist
+rmc-job-prefix-crashland-spec = 173/RECON SPEC
+
+rmc-job-name-crashland-soldier = Airborne Soldier
+rmc-job-prefix-crashland-soldier = 173/RECON SOL
+
+
 # Fiorina Science Annex Survs
 
 cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison

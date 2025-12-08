@@ -280,3 +280,21 @@
     defaultMode: MARSOCLeader
     trackerModes:
     - MARSOCLeader
+
+# For Trijent SPP Airborne
+
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetSPPCrashland
+  name: SPP 173/Airborne headset 
+  description: A headset used by members of the 173rd Airborne Reconnaissance unit.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: GrantSquadLeaderTracker
+    defaultMode: SPPAirborneSL
+    trackerModes:
+    - SPPAirborneSL
