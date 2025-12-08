@@ -987,6 +987,26 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
 
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadUshanka
+  name: ushanka
+  description: Perfect for winter in Siberia, da?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 15
+    explosionArmor: 10
+    # TODO 15 internal damage armor
+    # TODO give cold protection
+
 # Chaplain
 
 - type: entity

@@ -294,3 +294,10 @@ rmc-job-name-survivor-solaris-scientist = Solaris Scientist
 rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
 rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+# Shivas survs
+
+rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
+rmc-job-name-survivor-shivas-doctor = Shivas Doctor
+rmc-job-name-survivor-shivas-researcher = Shivas Researcher
+rmc-job-name-survivor-shivas-engineer = Shivas Engineer

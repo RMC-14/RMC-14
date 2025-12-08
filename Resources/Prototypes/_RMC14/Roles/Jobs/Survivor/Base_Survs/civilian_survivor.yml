@@ -45,6 +45,8 @@
   hasIcon: false
   useLoadoutOfJob: CMSurvivor # for inheritance
   basePlaytimeTracker: true
+  camouflageStartingGear:
+    Snow: RMCGearSurvivorSnowGear
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack
@@ -72,6 +74,15 @@
   equipment:
     jumpsuit: CMJumpsuitColonist
     shoes: RMCShoesBlack
+
+- type: startingGear
+  id: RMCGearSurvivorSnowGear
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivor
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
