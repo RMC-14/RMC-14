@@ -113,7 +113,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
             _squad.RemoveSquad(idCard.OriginalOwner.Value, null);
-            _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
+            _metaData.SetEntityName(uid.Value,
+                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
         }
 
         _adminLogger.Add(LogType.RMCIdModify,
@@ -127,8 +128,10 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (!ent.Comp.Authenticated)
             return;
 
-        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || !TryComp(uid, out ItemIFFComponent? iff))
+        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || uid == null)
             return;
+
+        EnsureComp<ItemIFFComponent>(uid.Value, out var iff);
 
         if (iff.Faction != ent.Comp.Faction && !args.Revoke)
         {

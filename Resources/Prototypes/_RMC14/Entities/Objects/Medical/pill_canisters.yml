@@ -367,3 +367,67 @@
     labelTextLocId: rmc-imidazoline-container-label-text
 
 # TODO RMC14 peridaxon, tramadol
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterDexalinPlusNoSkill
+  name: dexalin plus pill bottle
+  suffix: DexalinPlus, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 3
+  - type: Sprite
+    layers:
+    - state: pill_canister1
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillDexalinPlus
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-dexalin-plus-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterDexalinPlusNoSkill
+  id: RMCPillCanisterDexalinPlus
+  suffix: DexalinPlus, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterIronNoSkill
+  name: iron pill bottle
+  suffix: Iron, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 3
+  - type: Sprite
+    layers:
+    - state: pill_canister12
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillIron
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-iron-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterIronNoSkill
+  id: RMCPillCanisterIron
+  suffix: Iron, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2

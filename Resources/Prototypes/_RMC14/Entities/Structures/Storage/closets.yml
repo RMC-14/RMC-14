@@ -83,6 +83,18 @@
       path: /Audio/Effects/woodenclosetclose.ogg
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
+
+- type: entity
+  parent: RMCCabinetBase
+  id: RMCCabinetBaseUnanchored
+  suffix: Unanchored
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+
 # Colored
 - type: entity
   parent: CMClosetBase
@@ -208,6 +220,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
+
+# Jobs
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetMiner
+  name: miner's equipment
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/mining.rsi
 
 # PVE
 - type: entity

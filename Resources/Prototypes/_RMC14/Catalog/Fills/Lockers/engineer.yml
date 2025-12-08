@@ -34,8 +34,25 @@
   suffix: Filled
   components:
   - type: StorageFill
-    contents: []
-##      - id: ClothingOuterSuitRad
-##        amount: 2
-##      - id: GeigerCounter
-##        amount: 2
+    contents:
+     - id: RMCSuitRadiation
+       amount: 2
+     - id: RMCHeadRadiationHood
+       amount: 2
+     - id: RMCGeigerCounter
+       amount: 2
+
+- type: entity
+  parent: CMClosetRadiation
+  id: CMClosetRadiationFilledTycho
+  name: radiation suit closet
+  description: It's a storage unit for rad-protective suits.
+  suffix: Filled, Tycho 4000 Suit
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCShoesTychoBoots
+    - id: RMCHeadTychoRadiationHood
+    - id: RMCHandsTychoGloves
+    - id: RMCSuitTychoRadiationSuit
+    - id: RMCGeigerCounter
