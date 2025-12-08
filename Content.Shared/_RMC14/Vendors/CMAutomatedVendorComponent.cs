@@ -84,7 +84,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     /// <summary>
     ///     Whether this vendor can be manually restocked.
-    ///     Think before setting this as true for some vendors. Example: Infinite nutriment.
+    ///     Think before setting this as true for some vendors. Example: Infinite Nutriment/Molotov.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool CanManualRestock;

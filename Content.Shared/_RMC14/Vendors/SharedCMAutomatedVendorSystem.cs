@@ -296,6 +296,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
+    // Better than drag and drop to restock.
     private void OnAltInteractRestockVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!ent.Comp.CanManualRestock)
@@ -344,13 +345,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
         }
 
-        // Medical vendor restocking QoL
-        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent))
+        // Medical vendor restocking QoL - single items only
+        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent) || !ent.Comp.CanManualRestock)
             return;
-        if (!ent.Comp.CanManualRestock)
+        if (args.Handled) // CMRefillableSolutionSystem
             return;
-        TryRestockSingleItem(ent, args.Used, args.User);
-        args.Handled = true;
+        if (HasComp<StorageComponent>(args.Used)) // Use alt click for bulk restock
+            return;
+        if (TryRestockSingleItem(ent, args.Used, args.User))
+            args.Handled = true;
     }
 
     private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
@@ -1320,9 +1323,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
-        if (solution.Volume < solution.MaxVolume)
+        if (solution.Volume > 0 && solution.Volume < solution.MaxVolume)
         {
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-blood-pack-not-full", pack, user, ("item", pack));
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-invalid-blood-pack", pack, user, ("item", pack));
             return false;
         }
 
@@ -1468,15 +1471,23 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!TryComp<StorageComponent>(item, out var storage))
             return true;
 
-        if (storage.Container.ContainedEntities.Count == 0)
+        var maxCapacity = storage.Grid.GetArea();
+        if (maxCapacity <= 0)
+            return true;
+
+        if (storage.Container.ContainedEntities.Count < maxCapacity)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
             return false;
         }
 
-        var maxCapacity = storage.Grid.GetArea();
-        if (maxCapacity > 0 && storage.Container.ContainedEntities.Count < maxCapacity)
+        foreach (var entity in storage.Container.ContainedEntities)
         {
+            if (!TryComp<StackComponent>(entity, out var stack))
+                continue;
+            var maxCount = _stack.GetMaxCount(stack);
+            if (stack.Count >= maxCount)
+                continue;
             RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
             return false;
         }
