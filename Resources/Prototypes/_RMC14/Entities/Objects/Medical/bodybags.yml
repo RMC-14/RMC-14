@@ -239,6 +239,7 @@
     whitelist:
       components:
       - Marine
+  - type: RMCHideParasiteInfectionContainerPopup
   - type: EntityStorageVisuals
     stateDoorOpen: reactivetarp_open
 
@@ -282,6 +283,7 @@
     whitelist:
       components:
       - ScoutWhitelist
+  - type: RMCHideParasiteInfectionContainerPopup
   - type: EntityStorageVisuals
     stateDoorOpen: scouttarp_open
 
