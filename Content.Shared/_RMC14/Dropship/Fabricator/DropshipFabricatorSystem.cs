@@ -73,15 +73,17 @@ public sealed class DropshipFabricatorSystem : EntitySystem
 
         if (!TryComp(args.Used, out DropshipFabricatorPrintableComponent? printable) ||
             !TryComp(ent.Comp.Account, out DropshipFabricatorPointsComponent? points))
+        {
             return;
+        }
 
         args.Handled = true;
 
         var refund = printable.Cost;
-        if (TryComp(ent, out DropshipAmmoComponent? ammo))
-            refund *= ammo.Rounds / ammo.MaxRounds;
+        if (TryComp(args.Used, out DropshipAmmoComponent? ammo))
+            refund = (int) (refund * (float) ammo.Rounds / ammo.MaxRounds);
 
-        points.Points += (int)(refund * printable.RecycleMultiplier);
+        points.Points += (int) (refund * printable.RecycleMultiplier);
         Dirty(ent.Comp.Account.Value, points);
         Del(args.Used);
 

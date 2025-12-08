@@ -65,4 +65,16 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 
         _flammable.AdjustFireStacks(flammable, stacks, flammable);
     }
+
+    public override void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+        if (!Resolve(flammable, ref flammable.Comp, false))
+            return;
+
+        flammable.Comp.Intensity = 30;
+        flammable.Comp.Duration = 20;
+        Dirty(flammable);
+
+        _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
 }

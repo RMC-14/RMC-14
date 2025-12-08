@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Robust.Shared.Configuration;
+using Robust.Shared.Console;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -21,13 +22,13 @@ public abstract class SharedCMChatSystem : EntitySystem
 
     private void OnMarineGetPrefix(Entity<MarineComponent> ent, ref ChatGetPrefixEvent args)
     {
-        if (args.Channel?.ID == SharedChatSystem.HivemindChannel.Id)
+        if (args.Channel != null && args.Channel.IsXenoHivemind)
             args.Channel = null;
     }
 
     private void OnXenoGetPrefix(Entity<XenoComponent> ent, ref ChatGetPrefixEvent args)
     {
-        if (args.Channel?.ID != SharedChatSystem.HivemindChannel.Id)
+        if (args.Channel != null && !args.Channel.IsXenoHivemind)
             args.Channel = null;
     }
 
@@ -91,6 +92,15 @@ public abstract class SharedCMChatSystem : EntitySystem
         string? audioPath = null,
         float audioVolume = 0,
         NetUserId? author = null)
+    {
+    }
+
+    public virtual void Emote(
+        EntityUid source,
+        string message,
+        string? nameOverride = null,
+        bool checkRadioPrefix = true,
+        bool ignoreActionBlocker = false)
     {
     }
 

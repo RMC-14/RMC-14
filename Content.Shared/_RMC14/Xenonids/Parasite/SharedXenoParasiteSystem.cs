@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -694,6 +695,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
+
+                SetBurstSpawn((infectedVictim, victimComp), para.BurstProto);
                 Dirty(infectedVictim, infectable);
             }
         }
@@ -837,6 +840,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
+
+        if (_container.TryGetContainingContainer(victim, out var container) && HasComp<RMCHideParasiteInfectionContainerPopupComponent>(container.Owner))
+            return;
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
