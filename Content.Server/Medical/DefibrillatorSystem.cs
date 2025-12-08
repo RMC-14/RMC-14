@@ -9,6 +9,7 @@ using Content.Server.PowerCell;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared._RMC14.Suicide;
 using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -246,6 +247,11 @@ public sealed class DefibrillatorSystem : EntitySystem
         else if (TryComp<UnrevivableComponent>(target, out var unrevivable))
         {
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString(unrevivable.ReasonMessage),
+                InGameICChatType.Speak, true);
+        }
+        else if (HasComp<RMCHasSuicidedComponent>(target)) // RMC-Suicide-Fix
+        {
+            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unrevivable"),
                 InGameICChatType.Speak, true);
         }
         else
