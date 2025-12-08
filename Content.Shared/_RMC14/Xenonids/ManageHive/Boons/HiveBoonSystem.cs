@@ -229,7 +229,7 @@ public sealed class HiveBoonSystem : EntitySystem
     {
         using (args.PushGroup(nameof(HivePylonComponent)))
         {
-            var msg = $"[color=cyan]If placed after {(int) CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes, this can turn into a hive pylon when its weeds take over a telecommunications tower![/color]";
+            var msg = $"[color=cyan]If placed {(int) CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, this can turn into a hive pylon when its weeds take over a telecommunications tower![/color]";
             args.PushMarkup(msg);
         }
     }
