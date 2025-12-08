@@ -131,8 +131,8 @@
     - CMCrowbar # TODO RMC14 - Tactical Crowbar
     # TODO RMC14 - Nanopaste
     # TODO RMC14 - Whiteout Medkit
-    - RMCTankFlamerFL3
-    - RMCTankFlamerFL3
+    - RMCTankFlamerFL3Whiteout
+    - RMCTankFlamerFL3Whiteout
     outerClothing:
     - RMCMagazineRifleM54CHEAP
     - RMCMagazineRifleM54CHEAP

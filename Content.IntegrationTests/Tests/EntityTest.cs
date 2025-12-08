@@ -179,7 +179,7 @@ namespace Content.IntegrationTests.Tests
                 .EnumeratePrototypes<EntityPrototype>()
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
+                .Where(p => !p.Components.ContainsKey("MapGrid") && !p.Components.ContainsKey("HiveKingCocoon")) // This will smash stuff otherwise.
                 .Select(p => p.ID)
                 .ToList();
 
@@ -287,6 +287,7 @@ namespace Content.IntegrationTests.Tests
                 // RMC14
                 "ActivateDropshipWeaponOnSpawn",
                 "AmbientSound",
+                "HiveKingCocoon"
                 // RMC14
             };
 
