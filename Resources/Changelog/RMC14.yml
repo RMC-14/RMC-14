@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Crusher passive not reducing charge and defensive shield cooldowns.
-    type: Fix
-  id: 2127
-  time: '2025-08-06T04:09:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7270
-- author: Ian321
-  changes:
-  - message: Added admin-only training dummy.
-    type: Add
-  id: 2128
-  time: '2025-08-06T04:07:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7260
 - author: Dygon
   changes:
   - message: The Valkyrie's High Gallop ability now knocks back grenades again.
@@ -4650,5 +4636,20 @@
   id: 2627
   time: '2025-12-08T08:24:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8535
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Backpacks selected in marine vendors will now replace your current backpack
+      with the vended one. The contents will transfer.
+    type: Tweak
+  id: 2628
+  time: '2025-12-08T08:26:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8539
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FORECON playtime is now visible in the stats menu under 'Military Survivor'.
+    type: Tweak
+  id: 2629
+  time: '2025-12-08T08:27:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8540
 Name: RMC14
 Order: -1
