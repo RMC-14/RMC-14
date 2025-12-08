@@ -159,7 +159,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructComponent, EntityTerminatingEvent>(OnXenoConstructRemoved);
 
         SubscribeLocalEvent<XenoRecentlyConstructedComponent, PreventCollideEvent>(OnRecentlyPreventCollide);
-        SubscribeLocalEvent<XenoRecentlyConstructedComponent, EndCollideEvent>(OnRecentlyEndCollide);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
@@ -1071,15 +1070,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnRecentlyEndCollide(Entity<XenoRecentlyConstructedComponent> ent, ref EndCollideEvent args)
-    {
-        ent.Comp.StopCollide.Remove(args.OtherEntity);
-        Dirty(ent);
-
-        if (ent.Comp.StopCollide.Count == 0)
-            RemCompDeferred<XenoRecentlyConstructedComponent>(ent);
-    }
-
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
@@ -1550,6 +1540,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp))
         {
             if (time >= comp.ExpireAt)
+            {
+                RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
+                continue;
+            }
+
+            _intersectingResin.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersectingResin);
+            for (var i = comp.StopCollide.Count - 1; i >= 0; i--)
+            {
+                var colliding = comp.StopCollide[i];
+                if (!_intersectingResin.Contains(colliding))
+                    comp.StopCollide.RemoveAt(i);
+            }
+
+            if (comp.StopCollide.Count == 0)
                 RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
         }
     }
