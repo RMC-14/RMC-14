@@ -18,14 +18,14 @@
   kind: source
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
   params:
-    nv_color: 0.1, 0.75, 0.1
+    nv_color: 0.1, 0.75, 0.1 // Green tint
 
 - type: shader
   id: RMCDoomVision
   kind: source
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
   params:
-    nv_color: 0.5, 0.5, 0.5 // Green tint
+    nv_color: 0.5, 0.5, 0.5
 
 - type: shader
   id: RMCBlurryVisionX
