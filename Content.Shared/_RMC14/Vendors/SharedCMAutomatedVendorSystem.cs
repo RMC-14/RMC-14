@@ -1251,7 +1251,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         return ValidateReagentContainers(item, user, valid)
                && (!HasComp<GunComponent>(item) || ValidateGun(item, user, valid))
                && ValidateAmmunition(vendor, item, user, valid)
-               && ValidateEquipment(item, user, valid);
+               && ValidateEquipment(vendor, item, user, valid);
     }
 
     /// <summary>
@@ -1471,23 +1471,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!TryComp<StorageComponent>(item, out var storage))
             return true;
 
-        var maxCapacity = storage.Grid.GetArea();
-        if (maxCapacity <= 0)
-            return true;
-
-        if (storage.Container.ContainedEntities.Count < maxCapacity)
+        if (storage.Container.ContainedEntities.Count == 0)
         {
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
-            return false;
-        }
-
-        foreach (var entity in storage.Container.ContainedEntities)
-        {
-            if (!TryComp<StackComponent>(entity, out var stack))
-                continue;
-            var maxCount = _stack.GetMaxCount(stack);
-            if (stack.Count >= maxCount)
-                continue;
             RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
             return false;
         }
@@ -1498,9 +1483,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// <summary>
     /// Validates equipment items (armor, helmets, machete holsters, flare packs, power cells) are in proper state.
     /// </summary>
-    private bool ValidateEquipment(EntityUid item, EntityUid user, bool valid)
+    private bool ValidateEquipment(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
-        if (TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
+        var itemProto = MetaData(item).EntityPrototype?.ID;
+        var isSpecialAmmoBox = itemProto != null && vendor.Comp.IgnoreBulkRestockById.Contains(itemProto);
+        if (!isSpecialAmmoBox && TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
         {
             // Armor/helmets use IgnoreBulkRestockByComponent to get here.
             RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
