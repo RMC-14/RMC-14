@@ -77,7 +77,11 @@ public sealed class LagCompensationSystem : EntitySystem
         var ping = pSession.Channel.Ping;
         // Use 1.5 due to the trip buffer.
         var offset = _timing.CurTick - _rmcLagCompensation.GetLastRealTick(pSession.UserId).Value;
-        var sentTime = _timing.CurTime - offset.Value * _timing.TickPeriod;
+        var offsetTime = offset.Value * _timing.TickPeriod;
+        if (offsetTime > BufferTime)
+            offsetTime = TimeSpan.Zero;
+
+        var sentTime = _timing.CurTime - offsetTime;
 
         TimeSpan? found = null;
         foreach (var pos in lag.Positions)

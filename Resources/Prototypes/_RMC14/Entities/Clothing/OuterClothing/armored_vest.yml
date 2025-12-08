@@ -66,6 +66,11 @@
     blacklist:
       components:
       - Xeno
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg

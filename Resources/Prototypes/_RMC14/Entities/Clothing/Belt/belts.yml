@@ -34,6 +34,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
@@ -48,6 +49,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -88,6 +90,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -461,6 +464,7 @@
       tags:
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
@@ -1457,6 +1461,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - RMCShellShotgun
   - type: FixedItemSizeStorage
@@ -1850,6 +1855,9 @@
     whitelist:
       tags:
       - RMCFlareGun
+  - type: Tag
+    tags:
+    - RMCM82FHolster
 
 - type: entity
   parent: RMCM82FHolster
