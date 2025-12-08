@@ -44,6 +44,8 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !pair.IsTestPrototype(p))
                     .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
                     .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
+                    .Where(p => !p.Components.ContainsKey("HiveKingCocoon")) // Spawns an (audio) announcement.
+                    .Where(p => !p.Components.ContainsKey("HivePylon")) // Spawn an (audio) announcement on deletion.
                     .Select(p => p.ID)
                     .ToList();
             });
@@ -87,7 +89,15 @@ namespace Content.IntegrationTests.Tests
                             entityMan.DeleteEntity(uid);
                     }
 
-                    Assert.That(entityMan.EntityCount, Is.Zero);
+                    Assert.Multiple(() =>
+                    {
+                        foreach (var (uid, meta) in Query<MetaDataComponent>(entityMan))
+                        {
+                            Assert.Fail($"Failed to delete {meta.EntityPrototype}, NAME: {meta.EntityName}");
+                        }
+
+                        Assert.That(entityMan.EntityCount, Is.Zero, $"On of these prototypes is to blame: {string.Join(",", chunk)}");
+                    });
                 });
 
                 GC.Collect();
@@ -179,7 +189,9 @@ namespace Content.IntegrationTests.Tests
                 .EnumeratePrototypes<EntityPrototype>()
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => !p.Components.ContainsKey("MapGrid") && !p.Components.ContainsKey("HiveKingCocoon")) // This will smash stuff otherwise.
+                .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
+                .Where(p => !p.Components.ContainsKey("HiveKingCocoon")) // Spawns an (audio) announcement.
+                .Where(p => !p.Components.ContainsKey("HivePylon")) // Spawn an (audio) announcement on deletion.
                 .Select(p => p.ID)
                 .ToList();
 
@@ -231,7 +243,15 @@ namespace Content.IntegrationTests.Tests
                             sEntMan.DeleteEntity(uid);
                     }
 
-                    Assert.That(sEntMan.EntityCount, Is.Zero);
+                    Assert.Multiple(() =>
+                    {
+                        foreach (var (uid, meta) in Query<MetaDataComponent>(sEntMan))
+                        {
+                            Assert.Fail($"Failed to delete {meta.EntityPrototype}, NAME: {meta.EntityName}");
+                        }
+
+                        Assert.That(sEntMan.EntityCount, Is.Zero, $"On of these prototypes is to blame: {string.Join(",", chunk)}");
+                    });
                 });
 
                 GC.Collect();
