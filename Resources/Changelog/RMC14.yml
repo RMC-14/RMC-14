@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: yagwog
-  changes:
-  - message: Stamps not working correctly with tags
-    type: Fix
-  - message: Bottom margin not correctly extending for tags
-    type: Fix
-  - message: made buttons nicer to look at.
-    type: Fix
-  id: 2131
-  time: '2025-08-06T04:14:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7288
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The X17 riot charge no longer requires police skill to use.
-    type: Tweak
-  id: 2132
-  time: '2025-08-06T04:15:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7293
 - author: Dygon
   changes:
   - message: Getting hit by a starshell projectile no longer moves you around.
@@ -4656,5 +4638,24 @@
   id: 2631
   time: '2025-12-08T08:29:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8591
+- author: SharkSnake98
+  changes:
+  - message: Fixed test fails
+    type: Fix
+  id: 2632
+  time: '2025-12-08T08:33:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8431
+- author: YO0teacher
+  changes:
+  - message: Infected people shaking doesn't show a popup for others when they're
+      inside a thermal tarp.
+    type: Tweak
+  - message: Fixed visual and audio issues resulting from client desync with invisibility.
+    type: Fix
+  - message: Fixed being able to PB stealthed people in your own faction.
+    type: Fix
+  id: 2633
+  time: '2025-12-08T08:32:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8412
 Name: RMC14
 Order: -1
