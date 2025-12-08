@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Centered the M37-17 Sprite.
-    type: Fix
-  id: 2142
-  time: '2025-08-06T04:22:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7316
 - author: Dutch-VanDerLinde
   changes:
   - message: Survivor rolling has been reworked, now every survivor job has an equal
@@ -4751,5 +4744,15 @@
   id: 2643
   time: '2025-12-08T11:09:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8320
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed biosuits slowing you down while holding them
+    type: Fix
+  - message: Fixed firesuits not preventing fire from igniting you, similar to the
+      Pyro spec's armor.
+    type: Fix
+  id: 2644
+  time: '2025-12-08T21:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8600
 Name: RMC14
 Order: -1
