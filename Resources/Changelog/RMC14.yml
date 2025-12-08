@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Boilers now inject neurotoxin again instead of acid while neuro gas is
-      selected.
-    type: Fix
-  - message: Using Tail Stab on an entity that didn't get hit by it now plays the
-      correct sound effect.
-    type: Fix
-  id: 2115
-  time: '2025-08-06T04:01:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7244
-- author: noctyrnal
-  changes:
-  - message: The M13 has recieved new sprites.
-    type: Tweak
-  id: 2116
-  time: '2025-08-06T04:02:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7249
 - author: Tunguso4ka
   changes:
   - message: RMC Undergarments now uses upstream marking category.
@@ -4633,5 +4615,44 @@
   id: 2615
   time: '2025-12-08T07:57:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8584
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xenos being able to pry powered shutters and podlocks. They can
+      still pry powered doors.
+    type: Fix
+  id: 2616
+  time: '2025-12-08T07:59:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8579
+- author: NotInButIn
+  changes:
+  - message: Wooden barricades can now be destroyed with Charge/ToggleCharge and jumped
+      over by runners.
+    type: Add
+  - message: added feature to specify in the XenoParasite component which larva will
+      be born from the infected.
+    type: Add
+  - message: Removed Vanilla-Unequip verb from armor. Use rmc unequip or click to
+      remove.
+    type: Remove
+  - message: The `squad` command now works for all entities, not only marines.
+    type: Fix
+  - message: Items from weapon spawners no longer appear in inaccessible locations.
+    type: Fix
+  - message: Larva are no longer instantly removed after suicide, and you cannot use
+      disablers or toy guns to suicide.
+    type: Fix
+  - message: Queens are now tracked separately per hive. So now each hive has its
+      own evolution points, hive mind and the like.
+    type: Fix
+  - message: "Queen\u2019s Screech no longer stuns other queens."
+    type: Fix
+  - message: Pheromones are no longer distributed to xeno that are not members of
+      the hive.
+    type: Fix
+  - message: Hive mind chat rewritten. Xenos can now possess any specified hive mind.
+    type: Tweak
+  id: 2617
+  time: '2025-12-08T07:59:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7892
 Name: RMC14
 Order: -1
