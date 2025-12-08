@@ -167,6 +167,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretOfficerHos
+  name: officer beret
+  description: A navy-blue beret with a captain's rank emblem. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
