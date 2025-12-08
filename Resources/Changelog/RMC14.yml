@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: A shuttle landing on a fire tile will no longer ignite it's passengers.
-    type: Fix
-  id: 2137
-  time: '2025-08-06T04:12:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7280
-- author: Ian321
-  changes:
-  - message: The barrel of the mateba is now visible again.
-    type: Fix
-  id: 2138
-  time: '2025-08-06T04:15:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7291
 - author: Varen
   changes:
   - message: Added green stripes on 1984 AP magazine
@@ -4690,5 +4676,90 @@
   id: 2638
   time: '2025-12-08T08:44:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8498
+- author: DrSmugleaf
+  changes:
+  - message: Added hive boons, accessible by the Queen through the manage hive action.
+      More boons will be available in the future, obtainable by spending royal resin
+      which is obtained by placing a hive cluster next to a broken telecommunications
+      tower 55 minutes after round-start.
+    type: Add
+  - message: Added the His Grace hive boon. It begins the 10-minute hatching process
+      of the King. It costs 0 royal resin, requires a hive pylon at both telecommunications
+      tower, and is obtainable at a random time between 1 hour 30 minutes and 1 hour
+      55 minutes.
+    type: Add
+  - message: Added being able to sacrifice 1 burrowed larva as Queen to give a xeno
+      250 evolution points, through the manage hive action.
+    type: Add
+  - message: Added xeno's base 1 second crit grace where they can still move when
+      going into crit.
+    type: Add
+  - message: Added the nuke, by Aurallianz. It can be purchased using intel points
+      on the tech tree and deployed on the planet.
+    type: Add
+  - message: Added examine tooltips to any xenos that are fire immune.
+    type: Add
+  - message: Added the missing blue shield icon to Hedgehog Ravagers to show when
+      they are immune to damage.
+    type: Add
+  - message: Fixed Warrior Lunge being inconsistent, specially on high ping.
+    type: Fix
+  - message: Fixed not being able to process all intel even if you have all documents
+      and other intel items.
+    type: Fix
+  - message: Fixed pulling others being around 40% too slow.
+    type: Fix
+  - message: Fixed Resin Whisperer Hivelord not being able to use tunnels.
+    type: Fix
+  - message: FIxed Spitters losing their movement speed buff when firing a charged
+      spit, instead of it lasting for the full duration.
+    type: Fix
+  - message: Fixed recovery nodes healing 20 instead of 25 health, and fixed them
+      having a cooldown of 5 seconds instead of 3 seconds.
+    type: Fix
+  - message: Fixed being able to sell players on the Requisitions elevator if they
+      are on a power loader.
+    type: Fix
+  - message: Fixed recycling partially spent dropship ammo giving you back the full
+      price.
+    type: Fix
+  - message: Fixed BLU-200 'Dragon's Breath' implosion rockets (the one that pulls
+      you in) not having a 4-second long sound and laser warning.
+    type: Fix
+  - message: Fixed M74 AGM-F grenades not having a max hit cap of 5 per grenade on
+      the same target.
+    type: Fix
+  - message: Fixed being able to toggle storage drawing method on other people's equipped
+      items.
+    type: Fix
+  - message: Fixed being able to hear hijack audio if you set it to 0% until you set
+      it to 0% again.
+    type: Fix
+  - message: Fixed conveyors having higher health than intended.
+    type: Fix
+  - message: Fixed Berserker Ravager Apprehend resetting your melee cooldown.
+    type: Fix
+  - message: Fixed being able to refill HEAP magazines with regular bullet boxes.
+    type: Fix
+  - message: Fixed the motion detector sound being audible further than 7 tiles away
+      from the source.
+    type: Fix
+  - message: Fixed pheromones not deactivating when the xeno giving them ghosts.
+    type: Fix
+  - message: Fixed getting pushed by resin structures that finish building on top
+      of you. Any player that is standing where a resin structure finishes building
+      will ignore collision with it until they move out of it, or 5 seconds pass,
+      whichever happens sooner.
+    type: Fix
+  - message: Changed the Rest action tooltip to mention that you can also press Shift+R
+      to rest.
+    type: Tweak
+  - message: Updated the Sentinel sleeping sprite, by Aleksh.
+    type: Tweak
+  - message: Updated the Roadmap.
+    type: Tweak
+  id: 2639
+  time: '2025-12-08T08:58:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8597
 Name: RMC14
 Order: -1
