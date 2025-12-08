@@ -421,7 +421,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!Resolve(entity, ref entity.Comp))
             return false;
 
-        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
+        var coordinates = _rmcMap.SnapToGrid(_transform.GetMoverCoordinates(entity, entity.Comp));
 
         if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
@@ -437,8 +437,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!Resolve(entity, ref entity.Comp))
             return false;
 
-        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
-
+        var coordinates = _rmcMap.SnapToGrid(_transform.GetMoverCoordinates(entity, entity.Comp));
         if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? grid))
         {
@@ -453,7 +452,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return false;
 
         return true;
-
     }
 
     private void OnResinSlowdownStartCollide(Entity<ResinSlowdownModifierComponent> ent, ref StartCollideEvent args)
