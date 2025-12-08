@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: path-to-aaru
-  changes:
-  - message: Xeno announcements for queen death cooldown and hive core destruction
-      cooldown
-    type: Add
-  id: 2111
-  time: '2025-08-06T04:02:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7252
 - author: PursuitInAshes
   changes:
   - message: Admins and GMs can now disable deadchat by using `setdchat`.
@@ -4626,5 +4618,13 @@
   id: 2611
   time: '2025-12-07T08:51:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8549
+- author: J C Denton
+  changes:
+  - message: Trucker survivor and it's variations now replace engineer colonist instead
+      of civilian.
+    type: Tweak
+  id: 2612
+  time: '2025-12-08T07:54:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8553
 Name: RMC14
 Order: -1
