@@ -9,4 +9,7 @@ public sealed partial class SkillsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<SkillPresetPrototype>? Preset;
 }

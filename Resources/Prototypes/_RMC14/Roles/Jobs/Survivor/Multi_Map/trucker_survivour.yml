@@ -8,13 +8,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 2
-        RMCSkillVehicles: 3
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
+      preset: SurvivorTrucker
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetTrucker
     - type: RMCSurvivor
