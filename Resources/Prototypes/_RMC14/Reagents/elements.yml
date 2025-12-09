@@ -163,8 +163,12 @@
   flavor: metallic
   color: "#808080"
   unknown: true
-  intensityMod: 0.15
-  # OXIDIZING 1
+  intensity: 8
+  duration: -3
+  radius: 0
+  intensityMod: 0.2
+  durationMod: -0.1
+  radiusMod: -0.01
   metabolisms:
     Poison:
       metabolismRate: 0.1

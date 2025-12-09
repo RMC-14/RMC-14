@@ -38,9 +38,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ffb300"
-  # OXIDIZING = 6
-  # FUELING = 7
-  # FLOWING = 1
+  intensity: 27
+  duration: 38
+  radius: 2
+  intensityMod: 0.45
+  durationMod: 0.75
+  radiusMod: 0.06
+  fireEntity: RMCTileFireNapalmBase
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -173,8 +177,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ff9300"
-  # OXIDIZING = 9
-  # IGNITING = 1
+  intensity: 72
+  duration: -27
+  radius: 0
+  intensityMod: 1.8
+  durationMod: -0.9
+  radiusMod: -0.09
+  # TODO RMC14: IGNITING = 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -192,9 +201,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#0064C8"
-  # FLOWING = 3
-  # VISCOUS = 3
-  # FUELING = 2
+  toxin: true
+  intensity: -6
+  duration: 16
+  radius: 6
+  intensityMod: -0.35
+  durationMod: 0.25
+  radiusMod: 0.095
   metabolisms:
     Poison:
       metabolismRate: 0.1
