@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSynthetic
   ranks:
     RMCRankMasterSergeant: [ ]
-  startingGear: RMCGearSynthetic
+  startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
@@ -43,6 +43,8 @@
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
+      extraPoints:
+        ExperimentalTools: 30
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -67,46 +69,7 @@
         types:
           Blunt: 35
     - type: Synth
-      welderDamageToRepair:
-        types:
-          Blunt: -15
-          Piercing: -15
-          Slash: -15
-      cableCoilDamageToRepair:
-        types:
-          Caustic: -15
-          Heat: -15
-          Shock: -15
-          Cold: -15
-      addComponents:
-      - type: NightVision
-        innate: true
-        state: Half
-      - type: EyeProtection
-      - type: WoundableUntreatable
-      - type: Insulated
-      - type: RMCLeapProtection
-        inherentStunDuration: 3
-      removeComponents:
-      - type: CMSurgeryTarget
-      - type: Infectable
-      - type: Hunger
-      - type: Thirst
-      - type: Perishable
-      - type: ThermalRegulator
-      - type: Stamina
-      - type: DamageForceSay
-      - type: Dna
-      - type: InjectableSolution
-      - type: IVDripTarget
-      - type: RMCSuicide
-        damage: { }
   hidden: true
-
-- type: startingGear
-  id: RMCGearSynthetic
-  equipment:
-    id: RMCIDCardSynth
 
 - type: startingGear
   id: RMCGearSyntheticEquipped
@@ -130,3 +93,37 @@
 - type: playTimeTracker
   id: RMCJobSynthetic
   isHumanoid: true
+
+- type: entity
+  id: RMCSynthAddComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NightVision
+    innate: true
+    state: half
+    onlyHalf: true
+    alert: SynthNightVision
+  - type: EyeProtection
+  - type: WoundableUntreatable
+  - type: Insulated
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+  - type: ZombieImmune
+
+- type: entity
+  id: RMCSynthRemoveComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CMSurgeryTarget
+  - type: Infectable
+  - type: Hunger
+  - type: Thirst
+  - type: Perishable
+  - type: ThermalRegulator
+  - type: Stamina
+  - type: DamageForceSay
+  - type: Dna
+  - type: InjectableSolution
+  - type: IVDripTarget
+  - type: RMCSuicide
+    damage: { }

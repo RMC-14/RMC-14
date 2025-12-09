@@ -76,4 +76,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     [NeverPushInheritance]
     public bool BasePlaytimeTracker;
+
+    [DataField]
+    public ProtoId<JobPrototype>? WhitelistParent;
 }

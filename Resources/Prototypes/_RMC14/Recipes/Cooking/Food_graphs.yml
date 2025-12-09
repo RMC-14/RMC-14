@@ -1,0 +1,16 @@
+﻿- type: constructionGraph
+  id: FoodMeatSausage
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: sausage cooked
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: sausage cooked
+    entity: FoodMeatSausageCooked

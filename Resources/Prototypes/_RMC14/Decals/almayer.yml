@@ -1,7 +1,12 @@
 - type: decal
-  id: CMDecalAlmayer0
+  abstract: true
   parent: CMDecalBase
-  tags: ["station"]
+  id: RMCDecalAlmayerBase
+  tags: ["station", "markings"]
+
+- type: decal
+  id: CMDecalAlmayer0
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -9,8 +14,7 @@
 
 - type: decal
   id: CMDecalAlmayer1
-  parent: CMDecalBase
-  tags: ["station"]
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -18,8 +22,7 @@
 
 - type: decal
   id: CMDecalAlmayer2
-  parent: CMDecalBase
-  tags: ["station"]
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -27,8 +30,7 @@
 
 - type: decal
   id: CMDecalAlmayer3
-  parent: CMDecalBase
-  tags: ["station"]
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -36,8 +38,7 @@
 
 - type: decal
   id: CMDecalAlmayer4
-  parent: CMDecalBase
-  tags: ["station"]
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -45,8 +46,7 @@
 
 - type: decal
   id: CMDecalAlmayer5
-  parent: CMDecalBase
-  tags: ["station"]
+  parent: RMCDecalAlmayerBase
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
@@ -54,9 +54,119 @@
 
 - type: decal
   id: CMDecalAlmayer6
+  parent: RMCDecalAlmayerBase
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: almayer6
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerEngineer0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: engi0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerEngineer1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: engi1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerMedical0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: med0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerMedical1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: med1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSGO0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: smart0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSGO1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: smart1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerFTL0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: ftl0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerFTL1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: ftl1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSL0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: sl0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSL1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: sl1
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSpec0
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: spec0
+
+- type: decal
+  parent: RMCDecalAlmayerBase
+  id: RMCDecalAlmayerSSpec1
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: spec1
+
+- type: decal
+  id: RMCDecalWeYaTile1
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/almayer.rsi
-    state: almayer6
+    state: weya_1
+
+- type: decal
+  id: RMCDecalWeYaTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: weya_2
+
+- type: decal
+  id: RMCDecalWeYaTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/almayer.rsi
+    state: weya_3
