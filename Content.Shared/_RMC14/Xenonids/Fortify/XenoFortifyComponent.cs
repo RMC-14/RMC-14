@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
 
@@ -53,4 +54,7 @@ public sealed partial class XenoFortifyComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier DamageAddedFortified = new();
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier FortifySound = new SoundPathSpecifier("/Audio/Effects/stonedoor_openclose.ogg", AudioParams.Default.WithVariation(0.2f));
 }

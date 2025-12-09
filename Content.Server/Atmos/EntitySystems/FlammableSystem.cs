@@ -526,8 +526,13 @@ namespace Content.Server.Atmos.EntitySystems
 
                     if (_steppingOnFireQuery.HasComp(uid))
                         damage *= 2;
+
                     // Check fire immunity for DOT damage
-                    if (TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity))
+                    var tileEv = new RMCGetFireImmunityEvent(null);
+                    RaiseLocalEvent(uid, ref tileEv);
+
+                    if (tileEv.Immune ||
+                        HasComp<RMCImmuneToFireTileDamageComponent>(uid))
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
                         if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)

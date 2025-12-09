@@ -167,6 +167,7 @@
         name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
+        replaceSlot: back
         points: 15
       - id: RMCWeldingGoggles
         points: 3
@@ -232,7 +233,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: RMCArmorVestMedic
+      - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -250,7 +251,9 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarineMedic
+        replaceSlot: back
       - id: CMSatchelMarineMedic
+        replaceSlot: back
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }

@@ -1,13 +1,13 @@
 ﻿<Document>
   # Equipment Regulations
 
-  ## Standard Issue Equipment
+  ## Command Related
 
-  - Standard issue equipment is defined as any military uniform, armor, weapon, or accessory personnel find in their crew vendors, as well as anything they emerge from cryosleep with or anything normally available from requisitions.
-  - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] may issue special equipment on a case by case basis, such as special headsets or special weaponry for certain marines or squads as long as it does not violate marine law.
-  - Heads of staff may also assign spare headsets (excluding headsets of Command-level and Heads) to members of their department.
-  - Alcohol must be stored in the officer's mess, [color=#00CBFE][bold]Commanding Officer[/bold][/color]'s mess, [color=#00CBFE][bold]Commanding Officer[/bold][/color]'s  quarters, and the Liaison's private quarters.
- - SOP regarding equipment found in armories can be found in the Non-modifiable department section.
+  - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] may issue special equipment on a case by case basis, such as special headsets or special weaponry for certain marines or squads as long as it does not violate Marine Law.
+  - Heads of staff may also assign spare non-command headsets to members of their department.
+  - Alcohol must be stored in the officer's mess, [color=#00CBFE][bold]Commanding Officer[/bold][/color]'s mess, [color=#00CBFE][bold]Commanding Officer[/bold][/color]'s quarters, and a civilian's private quarters, if applicable.
+  - SOP regarding equipment found in armories can be found in the [bold]Non-Modifiable; Department[/bold] section.
+  - The Command tablet may only be taken by the current [color=#008000][bold]Commander[/bold][/color], unless they are willingly offering it to someone else who would need it, such as a deploying [bold]Executive Officer[/bold], while a [color=#00CBFE][bold]Commanding Officer[/bold][/color] is the [color=#008000][bold]Commander[/bold][/color].
 
   ## Uniform Regulations
 
@@ -16,10 +16,10 @@
   - Deploying marine squads must be wearing their uniform, boots, and protective armor at minimum.
   - [color=#ff000d][bold]MP[/bold][/color] must be wearing their uniform, boots, and protective armor at minimum, at all times.
   - All positions required to wear armor at all times may temporarily remove it after an operation has ended for social events, such as memorials. Other forms of clothing like service jackets may be used during this time.
-  - Other personnel must wear their uniform and assigned footwear, or a standard issue replacement.
-  - Shipside personnel should not be in armor unless the ship's code restriction allows it, or they are deploying to the AO.
+  - Other personnel must wear their uniform and assigned footwear, or a [bold]Standard Issue[/bold] replacement.
+  - Shipside personnel should not be in armor unless the ship's code restriction allows it, or they are deploying to the [bold]AO[/bold].
   - [color=#ff000d][bold]MP[/bold][/color], Intelligence Officers, and flight crew are permitted to wear armor on the ship, as part of their job.
-  - Any headwear that is worn must be standard issue, or an acceptable replacement.
+  - Any headwear that is worn must be [bold]Standard Issue[/bold], or an acceptable replacement.
   - The [color=#008000][bold]Commander[/bold][/color] has the right to declare enforce helmet wearing by squad leaders, fireteam leaders, specialists, and smart gun operators. It is otherwise assumed to not be enforced. Anyone of higher rank may still order any personnel below them to wear a protective helmet.
   - Folding or otherwise shortening uniforms is permitted.
 
@@ -27,7 +27,7 @@
   - Department specific uniforms and headgear are limited to personnel within that department, unless provided by the department head or [color=#008000][bold]Commander[/bold][/color].
   - Department headwear should not be used unless approved by the head.
 
-  ## Equipment handling regulations
+  ## Equipment Handling Regulations
 
   - Weapons should be holstered when not in use. Personnel must be allowed to holster on their first offense.
   - Under normal circumstances, weapons may only be fired in the firing range.
@@ -43,13 +43,13 @@
   - All shipside UNMC personnel are permitted to wear a M3-XL pattern armor vest for personal protection during operations, if their personal equipment racks provide them with one.
   - [color=#ff000d][bold]MP[/bold][/color] may carry Non-lethals and sidearms, excluding riot equipment.
   - [color=#ff000d][bold]MP[/bold][/color] may carry flashbangs, but may only use them in self defense or defense of others.
-  - Deploying [color=#ff000d][bold]MP[/bold][/color] may carry all standard issue weapons, provided they are used in escorting and protecting non-combat personnel, or are escorts of the [color=#00CBFE][bold]Commanding Officer[/bold][/color].
-  - Deploying combat personnel and Officers excluding medical personnel may carry all standard issue weapons.
+  - Deploying [color=#ff000d][bold]MP[/bold][/color] may carry all [bold]Standard Issue[/bold] weapons, provided they are used in escorting and protecting non-combat personnel, or are escorts of the [color=#00CBFE][bold]Commanding Officer[/bold][/color].
+  - Deploying combat personnel and Officers excluding medical personnel may carry all [bold]Standard Issue[/bold] weapons.
   - Deploying non-combat personnel may carry a sidearm.
-  - Personnel issued weapons through their vendors at the start of an operation as well as weapons they emerge from cryosleep with may retain these weapons.
+  - Personnel issued weapons through their vendors at the start of an operation as well as weapons they emerge from hypersleep with may retain these weapons.
   - [bold]Officer[/bold]s may carry sidearms as long as it does not inhibit their duties.
   - Long or large bladed weapons are treated the same as firearms in carry restrictions.
-  - Civilians are excluded from the right to retain issued weapons unless they are deploying to the AO. These weapons should otherwise be kept secure in personal quarters or armories.
+  - Civilians are excluded from the right to retain issued weapons unless they are deploying to the [bold]AO[/bold]. These weapons should otherwise be kept secure in personal quarters or any shipside armory.
   - Personnel who abuse their right to a firearm can have this right revoked by the [color=#008000][bold]Commander[/bold][/color]. The [color=#8B0000][bold]Chief MP[/bold][/color] may also do this if the person is ranked lower or is a civilian.
   - The [color=#8B0000][bold]Chief MP[/bold][/color] or [bold]Warden[/bold] may authorise use of riot equipment within the brig for training or defensive purposes.
 
@@ -61,7 +61,7 @@
 
   Code [bold][color=red]Red[/color][/bold]:
 
-  - No weapon restrictions on standard issue weapons.
+  - No weapon restrictions on [bold]Standard Issue[/bold] weapons.
   - Civilians may be issued sidearms for the duration of this code for self defense purposes.
 
   Code [bold][color=black]Delta[/color][/bold]:

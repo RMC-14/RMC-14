@@ -160,12 +160,13 @@
 
 - type: reaction
   id: CMImidazoline
+  priority: 10
   reactants:
+    CMDylovene:
+      amount: 1
     RMCCarbon:
       amount: 1
     RMCHydrogen:
-      amount: 1
-    CMDylovene:
       amount: 1
   products:
     CMImidazoline: 2

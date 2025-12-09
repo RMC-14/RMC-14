@@ -12,12 +12,11 @@ using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using System.Linq;
 using Content.Server._RMC14.Decals;
 using Content.Server.Spawners.Components;
-using Content.Shared.Decals;
+using Content.Shared.Body.Events;
+using Content.Shared.Effects;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -33,7 +32,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
-    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -45,7 +44,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AcidBloodSplashComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<AcidBloodSplashComponent, MobStateChangedEvent>(OnDeath);
+        SubscribeLocalEvent<AcidBloodSplashComponent, BeingGibbedEvent>(OnGib);
 
         _bruteTypes.Clear();
 
@@ -78,10 +77,12 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(uid, target))
                 continue;
 
-            var hitProbability = comp.BaseHitProbability - i * 0.05;
+            var hitProbability = comp.BaseHitProbability - i * 5;
 
             if (closeRangeTargets.Contains(target))
-                hitProbability += 0.3;
+                hitProbability += 30;
+
+            hitProbability /= 100f; // Reduce the value to decimal
 
             if (_random.NextFloat() > hitProbability)
                 continue;
@@ -97,28 +98,18 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
             if (_random.NextFloat() < comp.TargetScreamProbability) // TODO: don't activate when target don't feel pain
                 _emote.TryEmoteWithChat(target, ScreamProto);
+
+            var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == uid);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
     }
 
-    // TODO: remove when xeno can be gibbed and rewrite depending on new event
-    private void OnDeath(EntityUid uid, AcidBloodSplashComponent comp, ref MobStateChangedEvent args)
+    private void OnGib(Entity<AcidBloodSplashComponent> ent, ref BeingGibbedEvent args)
     {
-        if (args.Component.CurrentState != MobState.Dead || !comp.IsActivateSplashOnGib)
+        if (!ent.Comp.IsActivateSplashOnGib)
             return;
 
-        var gibProbability = comp.BaseGibSplashProbability;
-
-        if (TryComp<MobThresholdsComponent>(uid, out var thresholds) && TryComp<DamageableComponent>(uid, out var damageable))
-        {
-            var damage = damageable.Damage.GetTotal();
-            var dead = _thresholds.GetThresholdForState(uid, MobState.Dead, thresholds);
-            gibProbability += (float)(damage - dead) * comp.DamageSplashGibMultiplier;
-        }
-
-        if (_random.NextFloat() > gibProbability)
-            return;
-
-        ActivateSplash(uid, comp, comp.GibSplashRadius);
+        ActivateSplash(ent.Owner, ent.Comp, ent.Comp.GibSplashRadius);
     }
 
     private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
@@ -127,7 +118,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         if (comp.NextSplashAvailable > time)
             return;
 
-        if (_mobState.IsDead(uid))
+        if (_mobState.IsDead(uid) && !comp.WorksWhileDead)
             return;
 
         if (!args.DamageIncreased || args.DamageDelta == null)
@@ -138,14 +129,19 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             return;
 
         var damageDict = args.DamageDelta.DamageDict;
-        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation
+        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation, in percents
         triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageTriggerProbabilityMultiplier;
 
         foreach (var (type, _) in damageDict)
         {
             if (_bruteTypes.Contains(type) && damageDict[type] > 0)
+            {
                 triggerProbability += comp.BruteDamageProbabilityModificator;
+                break;
+            }
         }
+
+        triggerProbability /= 100f; // Reduce the value to decimal
 
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 

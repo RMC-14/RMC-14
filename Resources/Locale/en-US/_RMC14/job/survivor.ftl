@@ -19,6 +19,9 @@ rmc-job-description-survivor-co = You are a Major of the UNMC.
 rmc-job-name-survivor-synth = Survivor Synthetic
 rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
 
+rmc-job-name-survivor-military = Military Survivor
+rmc-job-description-survivor-military = You are a survivor of the xenonid infestation on the colony, apart of some kind of military organization.
+
 # Playtime trackers
 rmc-playtime-tracker-job-name-survivor = Civilian Survivor
 rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
@@ -41,6 +44,13 @@ CMJobSurvivorISR = Interstellar Life Rights Observer
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+rmc-job-name-survivor-bureau-marshal = CMB Marshal
+cm-job-prefix-survivor-cmb-marshal = CMB MAR
+
+cm-job-name-survivor-flight-control-operator = Flight Control Operator
+
+cm-job-name-survivor-unmc = UNMC Remnant
 
 # misc survs
 
@@ -268,3 +278,26 @@ rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
 rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# Solaris Ridge Survs
+
+rmc-job-name-survivor-solaris-chaplain = Solaris Chaplain
+
+rmc-job-name-survivor-solaris-corporate-liaison = Solaris Corporate Liaison
+
+rmc-job-name-survivor-solaris-doctor = Solaris Doctor
+
+rmc-job-name-survivor-solaris-engineer = Solaris Engineer
+
+rmc-job-name-survivor-solaris-scientist = Solaris Scientist
+
+rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
+
+rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+# Shivas survs
+
+rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
+rmc-job-name-survivor-shivas-doctor = Shivas Doctor
+rmc-job-name-survivor-shivas-researcher = Shivas Researcher
+rmc-job-name-survivor-shivas-engineer = Shivas Engineer
