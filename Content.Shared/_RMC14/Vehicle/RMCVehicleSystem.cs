@@ -44,7 +44,6 @@ public sealed class RMCVehicleSystem : EntitySystem
     {
         SubscribeLocalEvent<VehicleEnterComponent, ActivateInWorldEvent>(OnVehicleEnterActivate);
         SubscribeLocalEvent<VehicleEnterComponent, ComponentShutdown>(OnVehicleEnterShutdown);
-
         SubscribeLocalEvent<VehicleExitComponent, ActivateInWorldEvent>(OnVehicleExitActivate);
 
         SubscribeLocalEvent<VehicleDriverSeatComponent, StrapAttemptEvent>(OnDriverSeatStrapAttempt);
@@ -193,8 +192,8 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_skills.HasSkills(args.Buckle.Owner, ent.Comp.Skills))
-            return;
+        // if (_skills.HasSkills(args.Buckle.Owner, ent.Comp.Skills))
+        //     return;
 
         if (args.Popup)
             _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent)), args.Buckle, args.User);
@@ -214,6 +213,8 @@ public sealed class RMCVehicleSystem : EntitySystem
         }
 
         _vehicles.TrySetOperator((vehicle.Value, vehicleComp), args.Buckle.Owner);
+
+        EnsureComp<VehicleOperatorComponent>(args.Buckle.Owner);
     }
 
     private void OnDriverSeatUnstrapped(Entity<VehicleDriverSeatComponent> ent, ref UnstrappedEvent args)
@@ -231,6 +232,11 @@ public sealed class RMCVehicleSystem : EntitySystem
             return;
 
         _vehicles.TryRemoveOperator((vehicle.Value, vehicleComp));
+
+        if (!IsOperatingOtherVehicle(args.Buckle.Owner))
+        {
+            RemCompDeferred<VehicleOperatorComponent>(args.Buckle.Owner);
+        }
     }
 
     private void OnVehicleOperatorEntered(Entity<VehicleOperatorComponent> ent, ref OnVehicleEnteredEvent args)
@@ -258,7 +264,18 @@ public sealed class RMCVehicleSystem : EntitySystem
         _eye.SetTarget(ent.Owner, null, eye);
     }
 
-    private bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
+    private bool IsOperatingOtherVehicle(EntityUid entity)
+    {
+        if (!TryComp<BuckleComponent>(entity, out var buckle))
+            return false;
+
+        if (buckle.BuckledTo == null)
+            return false;
+
+        return HasComp<VehicleDriverSeatComponent>(buckle.BuckledTo);
+    }
+
+    public bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
     {
         vehicle = null;
         var mapId = _transform.GetMapId(interiorEntity);

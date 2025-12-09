@@ -10,32 +10,30 @@ namespace Content.Shared.Vehicle.Components;
 [Access(typeof(Content.Shared.Vehicle.GridVehicleMoverSystem))]
 public sealed partial class GridVehicleMoverComponent : Component
 {
-    public bool IsSliding => SlideStart != null;
+    [AutoNetworkedField]
+    public Vector2i CurrentTile;
 
     [AutoNetworkedField]
-    public Vector2i Tile;
+    public Vector2i TargetTile;
 
     [AutoNetworkedField]
-    public EntityCoordinates Origin;
+    public Vector2 Position;
 
     [AutoNetworkedField]
-    public Vector2 Destination;
+    public Vector2i CurrentDirection;
 
     [AutoNetworkedField]
-    public TimeSpan? SlideStart;
-
-    [AutoNetworkedField]
-    public TimeSpan SlideDuration;
-
-    [AutoNetworkedField]
-    public TimeSpan? LastSlideEnd;
+    public float CurrentSpeed;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlideDelay = TimeSpan.FromSeconds(0.2f);
+    public float MaxSpeed = 15f;
 
     [DataField, AutoNetworkedField]
-    public float SlideSpeed = 4f;
+    public float Acceleration = 8f;
 
     [DataField, AutoNetworkedField]
-    public bool LinearInterp;
+    public float Deceleration = 12f;
+
+    [AutoNetworkedField]
+    public bool IsCommittedToMove;
 }

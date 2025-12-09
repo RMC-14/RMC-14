@@ -203,7 +203,7 @@
   - type: Clickable
   - type: GridVehicleMover
   - type: Physics
-    bodyType: Static
+    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       fix1:
