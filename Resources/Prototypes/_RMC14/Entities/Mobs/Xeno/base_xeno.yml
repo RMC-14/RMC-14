@@ -122,7 +122,7 @@
     lightEnergyPerStack: 0.2
     lightRadiusPerStack: 0.1
     maxLightRadius: 2
-    maxLightEnergy: 5
+    maxLightEnergy: 8
   - type: RMCFireColor
   - type: Sprite
     noRot: true
