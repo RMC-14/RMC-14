@@ -150,7 +150,7 @@
 
 - type: entity
   id: RMCPlanetFiorina
-  name: LV-161 Fiorina Science Annex
+  name: Fiorina Science Annex
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
