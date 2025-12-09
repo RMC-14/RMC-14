@@ -85,6 +85,8 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
 
 # gives powerloader skill / bypasses limit
 - type: entity
@@ -170,6 +172,8 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
 
 - type: entity
   parent: CMPamphlet
@@ -199,6 +203,8 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
+    - popup: rmc-pamphlets-rifleman-warning
+      jobProto: CMPVERifleman
 
 # OTHER
 
