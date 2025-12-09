@@ -1,0 +1,12 @@
+- type: reaction
+  id: RMCSulphuricAcid
+  priority: 5
+  reactants:
+    RMCHydrogen:
+      amount: 2
+    RMCSulfur:
+      amount: 1
+    RMCOxygen:
+      amount: 4
+  products:
+    RMCSulphuricAcid: 1

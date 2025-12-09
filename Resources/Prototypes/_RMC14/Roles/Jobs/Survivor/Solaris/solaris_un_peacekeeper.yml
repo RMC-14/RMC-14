@@ -32,12 +32,12 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorUNPeacekeeper
+  parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorSolarisUNPeacekeeper
   equipment:
-    head: ArmorHelmetPMCRiotShield
     jumpsuit: RMCJumpsuitUNSecurity
-    outerClothing: RMCArmorPMCRiot
+    outerClothing: RMCArmorVest
+    head: RMCHeadBeretOfficerHos
 
 - type: entity
   parent: CMSpawnPointJobBase

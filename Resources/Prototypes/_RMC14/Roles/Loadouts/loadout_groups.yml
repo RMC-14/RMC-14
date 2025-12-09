@@ -557,8 +557,6 @@
 - type: loadoutGroup
   id: CommandingOfficerWeaponRMC
   name: rmc-loadout-group-role-specific-weapon
-  minLimit: 0
-  maxLimit: 1
   loadouts:
   - MatebaRMC
   - HandcannonRMC
@@ -758,6 +756,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+  - NeckerchiefRedRMC
 
 # Civilian
 - type: loadoutGroup
@@ -797,3 +796,13 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+
+# Provost Inspector
+- type: loadoutGroup
+  id: ProvostRoleSpecificOuterwearRMC
+  name: rmc-loadout-group-provost-role-specific-outerwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ProvostJacketFilledRMC
+  - ProvostCoatFilledRMC

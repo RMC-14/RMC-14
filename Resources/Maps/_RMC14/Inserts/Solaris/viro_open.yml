@@ -1251,7 +1251,7 @@ entities:
     - type: Transform
       pos: 16.427841,1.8593969
       parent: 1
-- proto: RMCWeaponFlamerImprovised
+- proto: RMCTankFlamerColony
   entities:
   - uid: 159
     components:
