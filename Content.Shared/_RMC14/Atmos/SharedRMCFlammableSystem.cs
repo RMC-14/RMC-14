@@ -1054,7 +1054,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return ev.Ignite;
     }
 
-    public bool ChangeBurnColor(EntityUid target, Color color)
+    public void ChangeBurnColor(EntityUid target, Color color)
     {
         if (TryComp<RMCFireColorComponent>(target, out var fireColorComp))
         {
