@@ -166,6 +166,8 @@ public abstract partial class SharedBuckleSystem
     {
         if (args.OtherEntity == component.BuckledTo && component.DontCollide)
             args.Cancelled = true;
+        if (component.Buckled)
+            args.Cancelled = true;
     }
 
     private void OnBuckleDownAttempt(EntityUid uid, BuckleComponent component, DownAttemptEvent args)
@@ -423,7 +425,7 @@ public abstract partial class SharedBuckleSystem
             _physics.ResetDynamics(buckle, physics);
             // RMC14
             var fixture = fixtures.Fixtures.First();
-            _physics.SetHard(buckle, fixture.Value, false);
+            //_physics.SetHard(buckle, fixture.Value, false);
             // RMC14
         }
 
@@ -496,7 +498,7 @@ public abstract partial class SharedBuckleSystem
         if (TryComp<FixturesComponent>(buckle, out var fixtures))
         {
             var fixture = fixtures.Fixtures.First();
-            _physics.SetHard(buckle, fixture.Value, true);
+            //_physics.SetHard(buckle, fixture.Value, true);
         }
         // RMC14
 
