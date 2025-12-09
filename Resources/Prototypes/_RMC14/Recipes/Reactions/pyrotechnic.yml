@@ -45,7 +45,7 @@
     RMCFluorine:
       amount: 3
   products:
-    RMCCLF3: 1
+    RMCCLF3: 3
     RMCHydrogen: 2
     RMCOxygen: 1
 
@@ -74,7 +74,7 @@
     RMCCLF3:
       amount: 1
   products:
-    RMCNapalmHighCombustion: 1
+    RMCNapalmHighCombustion: 2
 
 - type: reaction
   id: RMCNapalmSticky
@@ -84,7 +84,7 @@
     WeldingFuel:
       amount: 1
   products:
-    RMCNapalmSticky: 1
+    RMCNapalmSticky: 2
 
 - type: reaction
   id: RMCMethane
