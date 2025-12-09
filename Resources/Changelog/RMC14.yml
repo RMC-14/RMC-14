@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Survivor rolling has been reworked, now every survivor job has an equal
-      chance of rolling. Civilian survivor no longer rolls last.
-    type: Tweak
-  id: 2143
-  time: '2025-08-06T04:21:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7313
-- author: Dygon
-  changes:
-  - message: Fixed the shotgun choke not increasing the range of any shot projectiles
-      by 1.
-    type: Fix
-  - message: The attachment effect examine now shows the stun duration multiplier
-      if the attachment applies one.
-    type: Tweak
-  - message: Weapons with a modified fire rate show the correct use delay visual.
-    type: Fix
-  id: 2144
-  time: '2025-08-06T04:19:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7306
-- author: DummeHytteOst
-  changes:
-  - message: Added the Multitool or Security access tuner(SAT), to the Aghost loadout.
-    type: Add
-  id: 2145
-  time: '2025-08-06T04:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7314
-- author: noctyrnal
-  changes:
-  - message: Chances Claim and Fiorina Science Annex now use "Urban" camo, similar
-      to Hybrisa.
-    type: Tweak
-  id: 2146
-  time: '2025-08-06T04:22:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7318
-- author: noctyrnal
-  changes:
-  - message: Gibbing a person as a queen will now pop up text, cause the target to
-      shake and make their dropped items splatter out.
-    type: Add
-  id: 2147
-  time: '2025-08-06T04:18:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7301
-- author: Whisper
-  changes:
-  - message: RMC tips will start appearing again.
-    type: Fix
-  id: 2148
-  time: '2025-08-06T04:20:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7308
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Resprited the MP, corpsman, and intel armor vests.
-    type: Tweak
-  id: 2149
-  time: '2025-08-06T04:20:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7312
 - author: Dygon
   changes:
   - message: We-Ya PMC's can use their tracker again.
@@ -4754,5 +4696,58 @@
   id: 2644
   time: '2025-12-08T21:07:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8600
+- author: Whisper
+  changes:
+  - message: All MP roles can now track the Provost Inspector
+    type: Add
+  - message: Provost Inspector can track Warden, Chief MP, CO, XO
+    type: Add
+  - message: Removed big text speech from Provost Inspector
+    type: Remove
+  id: 2645
+  time: '2025-12-09T01:43:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8618
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed fultons not working.
+    type: Fix
+  id: 2646
+  time: '2025-12-09T01:45:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8616
+- author: Thereisabear
+  changes:
+  - message: Actually added the Red Neckerchief to loadouts
+    type: Add
+  id: 2647
+  time: '2025-12-09T01:46:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8608
+- author: NotInButIn
+  changes:
+  - message: Fixed guns spawning in space from weapons spawners.
+    type: Fix
+  id: 2648
+  time: '2025-12-09T01:50:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed King shield lightning effect freezing the server.
+    type: Fix
+  id: 2649
+  time: '2025-12-09T02:03:19.508431+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fix the King being able to be set on fire.
+    type: Fix
+  id: 2650
+  time: '2025-12-09T02:06:50.558737+00:00'
+  url: null
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON never spawning with a secondary weapon.
+    type: Fix
+  id: 2651
+  time: '2025-12-09T02:05:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8625
 Name: RMC14
 Order: -1
