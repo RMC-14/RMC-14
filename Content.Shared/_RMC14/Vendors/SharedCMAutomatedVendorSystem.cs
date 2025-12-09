@@ -243,29 +243,45 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
+        var validJob = false;
         if (vendor.Comp.Jobs.Count == 0)
-            return;
-
-        _mind.TryGetMind(args.User, out var mindId, out _);
-        foreach (var job in vendor.Comp.Jobs)
         {
-            if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
-                return;
+            validJob = true;
+        }
+        else
+        {
+            _mind.TryGetMind(args.User, out var mindId, out _);
+            foreach (var job in vendor.Comp.Jobs)
+            {
+                if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
+                    validJob = true;
+                else if (vendorUser?.Id == job)
+                    validJob = true;
 
-            if (vendorUser?.Id == job)
-                return;
+                if (validJob)
+                    break;
+            }
         }
 
+        var validRank = false;
         if (vendor.Comp.Ranks.Count == 0)
-            return;
-
-        foreach (var rank in vendor.Comp.Ranks)
         {
-            var userRank = _rank.GetRank(args.User);
-
-            if (userRank != null && userRank == rank)
-                return;
+            validRank = true;
         }
+        else if (_rank.GetRank(args.User) is { } userRank)
+        {
+            foreach (var rank in vendor.Comp.Ranks)
+            {
+                if (userRank == rank)
+                {
+                    validRank = true;
+                    break;
+                }
+            }
+        }
+
+        if (validJob && validRank)
+            return;
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
         args.Cancel();
