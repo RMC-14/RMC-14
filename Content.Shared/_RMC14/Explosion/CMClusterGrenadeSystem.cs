@@ -75,7 +75,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
                 continue;
 
             // TODO RMC14 save me from this if statement
-            if (GetEntity(hit.Id) == projectile.Comp.OriginEntity &&
+            if (hit.Id.Id == projectile.Comp.OriginEntity.Id &&
                 (hit.ExtraId == null || hit.ExtraId == projectile.Comp.ExtraId) ||
                 hit.Id == GetNetEntity(projectile.Owner) &&
                 (hit.ExtraId == null || hit.ExtraId == projectile.Comp.ExtraId) &&

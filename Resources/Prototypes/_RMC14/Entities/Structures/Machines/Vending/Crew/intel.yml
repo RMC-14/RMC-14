@@ -148,12 +148,16 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineIntel
+        replaceSlot: back
         recommended: true
       - id: RMCSatchelMarineIntelChestrig
+        replaceSlot: back
         recommended: true
       - id: RMCSatchelMarineIntelSatchel
+        replaceSlot: back
         recommended: true
       - id: RMCBackpackRTO
+        replaceSlot: back
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:

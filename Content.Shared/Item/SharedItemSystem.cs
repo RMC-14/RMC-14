@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
@@ -131,6 +132,9 @@ public abstract class SharedItemSystem : EntitySystem
             !args.CanAccess ||
             !args.CanInteract ||
             !_handsSystem.CanPickupAnyHand(args.User, args.Target, handsComp: args.Hands, item: component))
+            return;
+
+        if (HasComp<ClothingComponent>(uid)) // RMC14-Armor-Pickup-Fix
             return;
 
         InteractionVerb verb = new();
