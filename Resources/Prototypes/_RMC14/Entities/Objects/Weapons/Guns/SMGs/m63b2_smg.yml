@@ -82,11 +82,11 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentM63Stock
+        startingAttachable: RMCAttachmentM63StockSolid
         whitelist:
           tags:
           - RMCAttachmentM63ArmBrace
-          - RMCAttachmentM63Stock
+          - RMCAttachmentM63StockSolid
           - RMCAttachmentM63StockCollapsible
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentAngledGrip

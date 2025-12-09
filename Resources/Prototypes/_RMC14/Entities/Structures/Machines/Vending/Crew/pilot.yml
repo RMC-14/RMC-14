@@ -129,7 +129,7 @@
         points: 10
       - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
-      - id: RMCAttachmentM63Stock
+      - id: RMCAttachmentM63StockSolid
         points: 10
       - id: RMCAttachmentM54CStockSolid
         points: 10

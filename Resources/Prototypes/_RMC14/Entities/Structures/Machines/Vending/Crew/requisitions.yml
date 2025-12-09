@@ -670,9 +670,9 @@
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
-      - id: RMCAttachmentM63StockCollapsible
+      - id: RMCAttachmentM63StockSolid
         amount: 5
-      - id: RMCAttachmentM63Stock
+      - id: RMCAttachmentM63StockCollapsible
         amount: 5
       - id: RMCAttachmentM54CStockSolid
         amount: 5

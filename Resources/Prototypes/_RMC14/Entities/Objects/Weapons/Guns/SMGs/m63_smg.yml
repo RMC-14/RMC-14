@@ -83,7 +83,7 @@
         whitelist:
           tags:
           - RMCAttachmentM63ArmBrace
-          - RMCAttachmentM63Stock
+          - RMCAttachmentM63StockSolid
           - RMCAttachmentM63StockCollapsible
       rmc-aslot-underbarrel:
         whitelist:
