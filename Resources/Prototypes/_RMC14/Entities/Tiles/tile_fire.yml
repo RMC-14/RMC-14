@@ -39,7 +39,7 @@
     tileDamage:
       types:
         Heat: 0.5
-    burnColor: "#bf6d02"
+    burnColor: "#EE6515"
   - type: DamageOnCollide
     damageDead: false
     fire: true
@@ -84,7 +84,7 @@
     armorWhitelist:
       components:
       - Xeno
-    burnColor: "#069420"
+    burnColor: "#00FF00"
   - type: TileFire
     id: RMCTileFireGreen
     extinguishInstantly: false
