@@ -12,7 +12,7 @@ namespace Content.Server.Administration.Commands
     /// <summary>
     ///     Command that allows you to edit an existing solution by adding (or removing) reagents.
     /// </summary>
-    [AdminCommand(AdminFlags.Admin)]
+    [AdminCommand(AdminFlags.Admin | AdminFlags.Debug)] //RMC14
     public sealed class AddReagent : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entManager = default!;

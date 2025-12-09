@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Content.Server.Administration.Commands
 {
-    [AdminCommand(AdminFlags.Fun)]
+    [AdminCommand(AdminFlags.Fun | AdminFlags.RMCMaintainer)] //RMC 14
     public sealed class SetSolutionCapacity : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entManager = default!;
