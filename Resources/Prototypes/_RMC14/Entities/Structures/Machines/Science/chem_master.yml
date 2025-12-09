@@ -95,3 +95,31 @@
     pillBottleWhitelist:
       tags:
       - PillCanister
+
+- type: entity
+  parent: CMChemMaster
+  id: RMCChemMasterIndustrial
+  name: industrial chemical mixer
+  description: An industrial grade chemical manipulator.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/industry_dispenser.rsi
+    layers:
+    - state: industry_mixer0_nopower
+    - state: industry_mixer0_screen
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/Science/industry_dispenser.rsi
+    state: industry_mixer0
+  - type: AccessReader
+    access: [ [ "CMAccessOT" ] ]
+  - type: Machine
+    board: RMCCircuitboardIndustrialChemMaster
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 3
+  - type: RMCChemMaster
+    pillBottleWhitelist: { } # No making pills allowed.
