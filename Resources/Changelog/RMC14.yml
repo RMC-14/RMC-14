@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: We-Ya PMC's can use their tracker again.
-    type: Fix
-  id: 2150
-  time: '2025-08-06T04:27:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7342
 - author: Vermidia
   changes:
   - message: Fixed acid sprays not extinguish fires
@@ -4749,5 +4742,12 @@
   id: 2652
   time: '2025-12-09T02:24:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8626
+- author: DrSmugleaf
+  changes:
+  - message: Fixed King and nuke.
+    type: Fix
+  id: 2653
+  time: '2025-12-09T05:10:56.215546+00:00'
+  url: null
 Name: RMC14
 Order: -1
