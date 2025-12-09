@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.Movement;
@@ -26,9 +25,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Tag;
 
 namespace Content.Shared.Buckle;
 
@@ -42,6 +41,8 @@ public abstract partial class SharedBuckleSystem
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private void InitializeBuckle()
     {
@@ -166,8 +167,10 @@ public abstract partial class SharedBuckleSystem
     {
         if (args.OtherEntity == component.BuckledTo && component.DontCollide)
             args.Cancelled = true;
-        if (component.Buckled)
+        //RMC14
+        if (component.Buckled && _tags.HasTag(args.OtherEntity, WallTag))
             args.Cancelled = true;
+        //RMC14
     }
 
     private void OnBuckleDownAttempt(EntityUid uid, BuckleComponent component, DownAttemptEvent args)
@@ -420,14 +423,8 @@ public abstract partial class SharedBuckleSystem
         var gotEv = new BuckledEvent(strap, buckle);
         RaiseLocalEvent(buckle, ref gotEv, true);
 
-        if (TryComp<PhysicsComponent>(buckle, out var physics) && TryComp<FixturesComponent>(buckle, out var fixtures))
-        {
+        if (TryComp<PhysicsComponent>(buckle, out var physics))
             _physics.ResetDynamics(buckle, physics);
-            // RMC14
-            var fixture = fixtures.Fixtures.First();
-            //_physics.SetHard(buckle, fixture.Value, false);
-            // RMC14
-        }
 
         DebugTools.AssertEqual(xform.ParentUid, strap.Owner);
     }
@@ -493,14 +490,6 @@ public abstract partial class SharedBuckleSystem
 
         var buckleXform = Transform(buckle);
         var oldBuckledXform = Transform(strap);
-
-        // RMC14
-        if (TryComp<FixturesComponent>(buckle, out var fixtures))
-        {
-            var fixture = fixtures.Fixtures.First();
-            //_physics.SetHard(buckle, fixture.Value, true);
-        }
-        // RMC14
 
         if (buckleXform.ParentUid == strap.Owner && !Terminating(oldBuckledXform.ParentUid))
         {
