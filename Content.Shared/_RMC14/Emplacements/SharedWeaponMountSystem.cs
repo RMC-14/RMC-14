@@ -92,6 +92,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         SubscribeLocalEvent<WeaponMountComponent, DamageModifyEvent>(OnDamageModified);
         SubscribeLocalEvent<WeaponMountComponent, RMCCheckTileFreeEvent>(OnCheckTileFree);
         SubscribeLocalEvent<WeaponMountComponent, GetIFFGunUserEvent>(OnGetGunUser);
+        SubscribeLocalEvent<WeaponMountComponent, InteractHandEvent>(OnInteractHand, before: new[] { typeof(SharedBuckleSystem) });
 
         // Relayed events
         SubscribeLocalEvent<WeaponMountComponent, MountableWeaponRelayedEvent<OverheatedEvent>>(OnWeaponOverheated);
@@ -350,10 +351,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             var ammoCountEvent = new GetAmmoCountEvent();
             RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
             if (ammoCountEvent.Count > 0)
-            {
-                _combatMode.SetInCombatMode(args.User, false);
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
-            }
         }
 
         UpdateAppearance(ent);
@@ -427,21 +425,20 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         return true;
     }
 
+    private void OnInteractHand(Entity<WeaponMountComponent> ent, ref InteractHandEvent args)
+    {
+        if (!_combatMode.IsInCombatMode(args.User))
+            return;
+
+        args.Handled = true;
+    }
+
     private void OnStrapAttempt(Entity<WeaponMountComponent> ent, ref StrapAttemptEvent args)
     {
-        if (args.User != args.Buckle)
-        {
-            args.Cancelled = true;
+        if (args.User == args.Buckle)
             return;
-        }
 
-        if (_combatMode.IsInCombatMode(args.Buckle))
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        _combatMode.SetInCombatMode(args.Buckle, true);
+        args.Cancelled = true;
     }
 
     private void OnStrapped(Entity<WeaponMountComponent> ent, ref StrappedEvent args)

@@ -1027,7 +1027,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 weaponPoint.Location);
         }
 
-        _sharedDropshipEquipmentDeployer.TryDeploy(container.ContainedEntities[0], args.Deploy, deployOffset, rotationOffset);
+        _sharedDropshipEquipmentDeployer.TryDeploy(container.ContainedEntities[0], args.Deploy, deployOffset, rotationOffset, user: args.Actor);
         RefreshWeaponsUI(ent);
     }
 

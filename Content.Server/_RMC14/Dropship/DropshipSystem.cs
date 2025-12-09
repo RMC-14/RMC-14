@@ -547,29 +547,24 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         var childEnumerator = Transform(ent).ChildEnumerator;
 
-        while (childEnumerator.MoveNext(out var entity))
+        while (childEnumerator.MoveNext(out var childEntity))
         {
-            if (!Transform(entity).Anchored)
+            if (!Transform(childEntity).Anchored)
                 continue;
 
-            BaseContainer? container;
-            TryComp(entity, out DropshipWeaponPointComponent? weaponPoint);
-            TryComp(entity, out DropshipUtilityPointComponent? utilityPoint);
-
-            if (weaponPoint == null && utilityPoint == null)
-                continue;
-
-            if (weaponPoint != null)
-                _container.TryGetContainer(entity, weaponPoint.WeaponContainerSlotId, out container);
-            else
-                _container.TryGetContainer(entity, utilityPoint!.UtilitySlotId, out container);
+            BaseContainer? container = null;
+            if (TryComp(childEntity, out DropshipWeaponPointComponent? weaponPoint))
+                _container.TryGetContainer(childEntity, weaponPoint.WeaponContainerSlotId, out container);
+            else if (TryComp(childEntity, out DropshipUtilityPointComponent? utilityPoint))
+                _container.TryGetContainer(childEntity, utilityPoint.UtilitySlotId, out container);
 
             if (container == null)
                 continue;
 
             foreach (var mountedEntity in container.ContainedEntities)
             {
-                RaiseLocalEvent(mountedEntity, args);
+                var relayedEvent = new FTLUpdatedRelayedEvent<TEvent>(args, childEntity);
+                RaiseLocalEvent(mountedEntity, ref relayedEvent);
             }
         }
     }

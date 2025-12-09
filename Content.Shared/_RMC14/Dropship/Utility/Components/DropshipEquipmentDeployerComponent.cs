@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -81,4 +82,10 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? WeaponDeployedSprite;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier DeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_1.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier UnDeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_2.ogg");
 }

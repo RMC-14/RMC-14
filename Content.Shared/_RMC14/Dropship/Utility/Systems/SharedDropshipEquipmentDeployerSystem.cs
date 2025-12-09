@@ -10,6 +10,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
@@ -17,9 +18,10 @@ namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SentrySystem _sentry = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
 
     public override void Initialize()
@@ -64,11 +66,11 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
             }
             else if (ent.Comp.DeployEntity != null && container.ContainedEntities.Count == 0)
             {
-                TryDeploy(ent, false);
+                TryDeploy(ent, false, user: args.User);
                 return;
             }
 
-            TryDeploy(ent, true, deployOffset, rotationOffset);
+            TryDeploy(ent, true, deployOffset, rotationOffset, user: args.User);
         }
     }
 
@@ -162,7 +164,7 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
     /// <param name="rotationOffset">The rotation offset of the deployed entity.</param>
     /// <param name="equipmentDeployerComponent">The <see cref="DropshipEquipmentDeployerComponent"/> of the deployer</param>
     /// <returns>True if deploying succeeds</returns>
-    public bool TryDeploy(EntityUid deployer, bool deploy, Vector2 deployOffset = new (), float rotationOffset = 0, DropshipEquipmentDeployerComponent? equipmentDeployerComponent = null)
+    public bool TryDeploy(EntityUid deployer, bool deploy, Vector2 deployOffset = new (), float rotationOffset = 0, DropshipEquipmentDeployerComponent? equipmentDeployerComponent = null, EntityUid? user = null)
     {
         if (TerminatingOrDeleted(deployer))
             return false;
@@ -199,6 +201,12 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         }
 
         UpdateAppearance((deployer, equipmentDeployerComponent), deploy);
+
+        var audio = deploy
+            ? equipmentDeployerComponent.DeployAudio
+            : equipmentDeployerComponent.UnDeployAudio;
+
+        _audio.PlayPredicted(audio, Transform(deployer).Coordinates, user);
         return true;
     }
 

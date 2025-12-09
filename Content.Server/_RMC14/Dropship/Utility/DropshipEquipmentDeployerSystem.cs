@@ -1,4 +1,6 @@
+using System.Numerics;
 using Content.Server.Shuttles.Events;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 
@@ -31,7 +33,12 @@ public sealed class DropshipEquipmentDeployerSystem : SharedDropshipEquipmentDep
         if (!ent.Comp.AutoDeploy)
             return;
 
-        TryGetOffset(ent, out var deployOffset, out var rotationOffset);
+        var deployOffset = Vector2.Zero;
+        var rotationOffset = 0f;
+
+        if (TryComp(args.Relayer, out DropshipWeaponPointComponent? weaponPoint))
+            TryGetOffset(ent, out deployOffset, out rotationOffset, weaponPoint.Location);
+
         TryDeploy(ent, true, deployOffset, rotationOffset);
     }
 }
