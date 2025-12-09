@@ -4735,13 +4735,6 @@
   id: 2649
   time: '2025-12-09T02:03:19.508431+00:00'
   url: null
-- author: DrSmugleaf
-  changes:
-  - message: Fix the King being able to be set on fire.
-    type: Fix
-  id: 2650
-  time: '2025-12-09T02:06:50.558737+00:00'
-  url: null
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed FORECON never spawning with a secondary weapon.
