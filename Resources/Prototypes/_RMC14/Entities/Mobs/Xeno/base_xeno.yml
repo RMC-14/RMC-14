@@ -118,7 +118,7 @@
       Extinguish: [ Touch ]
   - type: FireVisuals
     sprite: _RMC14/Mobs/Effects/on_fire_xeno.rsi
-    normalState: alien_fire
+    normalState: simple_onfire
     lightEnergyPerStack: 0.2
     lightRadiusPerStack: 0.1
     maxLightRadius: 2
