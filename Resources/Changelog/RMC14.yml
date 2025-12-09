@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Survivor rolling has been reworked, now every survivor job has an equal
-      chance of rolling. Civilian survivor no longer rolls last.
-    type: Tweak
-  id: 2143
-  time: '2025-08-06T04:21:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7313
 - author: Dygon
   changes:
   - message: Fixed the shotgun choke not increasing the range of any shot projectiles
@@ -4754,5 +4746,16 @@
   id: 2644
   time: '2025-12-08T21:07:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8600
+- author: Whisper
+  changes:
+  - message: All MP roles can now track the Provost Inspector
+    type: Add
+  - message: Provost Inspector can track Warden, Chief MP, CO, XO
+    type: Add
+  - message: Removed big text speech from Provost Inspector
+    type: Remove
+  id: 2645
+  time: '2025-12-09T01:43:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8618
 Name: RMC14
 Order: -1
