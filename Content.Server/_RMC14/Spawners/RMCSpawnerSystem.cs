@@ -2,25 +2,17 @@ using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Humanoid.Systems;
-using Content.Server.Atmos.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Physics;
-using Content.Shared.Maps;
-using Content.Shared._RMC14.Map;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Utility;
-using Robust.Shared.Physics;
-using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Map.Components;
 
 namespace Content.Server._RMC14.Spawners;
 
@@ -31,16 +23,10 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
-
-    private EntityQuery<PhysicsComponent> _physQuery;
 
     private int _maxCorpses;
     private int _corpsesSpawned;
@@ -54,78 +40,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         SubscribeLocalEvent<GunSpawnerComponent, MapInitEvent>(OnGunSpawnMapInit);
         SubscribeLocalEvent<RandomTimedDespawnComponent, MapInitEvent>(OnTimedDespawnMapInit);
 
-        _physQuery = GetEntityQuery<PhysicsComponent>();
-
         Subs.CVar(_config, RMCCVars.RMCSpawnerMaxCorpses, v => _maxCorpses = v, true);
-    }
-
-    private bool CanSpawnAt(EntityUid uid, MapCoordinates coordinates)
-    {
-        if (coordinates.MapId == MapId.Nullspace)
-            return false;
-
-        var grid = _transform.GetGrid(uid);
-        if (grid == null || !TryComp<MapGridComponent>(grid, out var mapGrid))
-            return false;
-
-        var tile = _mapSystem.GetTileRef(grid.Value, mapGrid, coordinates);
-
-        if (_rmcMap.IsTileBlocked(coordinates))
-            return false;
-
-        if (_turf.IsSpace(tile))
-            return false;
-
-        if (TryComp<GunSpawnerComponent>(uid, out var spawner))
-        {
-            var def = _turf.GetContentTileDefinition(tile);
-            if (spawner.BlockedTiles.Contains(def.ID))
-                return false;
-        }
-
-        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid.Value);
-        while (anchored.MoveNext(out var ent))
-        {
-            if (_physQuery.TryGetComponent(ent, out var body) &&
-                body.BodyType == BodyType.Static &&
-                body.Hard &&
-                (body.CollisionLayer & (int)CollisionGroup.Impassable) != 0)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private MapCoordinates? FindValidSpawnPosition(EntityUid uid, MapCoordinates origin, float radius)
-    {
-        var radiusInt = (int)Math.Ceiling(radius);
-        var validCoordinates = new List<MapCoordinates>();
-
-        for (int dx = -radiusInt; dx <= radiusInt; dx++)
-        {
-            for (int dy = -radiusInt; dy <= radiusInt; dy++)
-            {
-                if (dx * dx + dy * dy > radius * radius)
-                    continue;
-
-                var coordinates = new MapCoordinates(
-                    origin.X + dx,
-                    origin.Y + dy,
-                    origin.MapId
-                );
-
-                if (CanSpawnAt(uid, coordinates))
-                    validCoordinates.Add(coordinates);
-            }
-        }
-
-        if (validCoordinates.Count == 0)
-            return null;
-
-        _random.Shuffle(validCoordinates);
-        return _random.Pick(validCoordinates);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -172,23 +87,15 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
         if (_random.Prob(ent.Comp.ChanceToSpawn))
         {
-            var spawnerCoords = _transform.ToMapCoordinates(ent.Owner.ToCoordinates());
-            
             foreach (var (protoId, amount) in entitiesToSpawn)
             {
-                for (var i = 0; i < amount; i++)
+                for (var i = 0; i < amount; i++) // spawn in the amount of entities
                 {
-                    var spawnPosition = FindValidSpawnPosition(ent.Owner, spawnerCoords, ent.Comp.Offset);
-                    
-                    if (spawnPosition.HasValue)
-                    {
-                        Spawn(protoId, spawnPosition.Value);
-                    }
-                    else
-                    {
-                        Spawn(protoId, spawnerCoords);
-                        Logger.Warning($"Random spawner {ToPrettyString(ent)} was unable to find valid coordinates");
-                    }
+                    var offset = ent.Comp.Offset;
+                    var xOffset = _random.NextFloat(-offset, offset);
+                    var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
+                    var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
+                    Spawn(protoId, coordinates);
                 }
             }
         }

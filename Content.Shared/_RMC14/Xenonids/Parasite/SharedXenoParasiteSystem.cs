@@ -695,8 +695,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
-
-                SetBurstSpawn((infectedVictim, victimComp), para.BurstProto);
                 Dirty(infectedVictim, infectable);
             }
         }
