@@ -1,10 +1,3 @@
-#- type: entity
-#  parent: ClothingHeadHatWelding
- # id: RMCHelmetWelding
-#  suffix: RMC
-#  name: welding helmet
-#  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.
-# WeldingMaskBase
 - type: entity
   parent: ClothingHeadHatWelding
   id: RMCHelmetWelding
@@ -42,6 +35,9 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
       state: helmet-down
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bio: 10 # CLOTHING_ARMOR_LOW
 
 - type: Tag
   id: RMCHelmetWelding

@@ -19,6 +19,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -47,6 +59,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -69,6 +93,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -92,6 +128,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
@@ -125,6 +173,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
@@ -147,6 +207,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -175,6 +247,7 @@
 - type: entity
   parent: HandLabeler
   id: CMHandLabeler
+  suffix: RMC14
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
@@ -183,6 +256,13 @@
       size: Normal
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
       storedRotation: 0
+    - type: RMCHandLabeler
+    - type: UserInterface
+      interfaces:
+        enum.HandLabelerUiKey.Key:
+          type: HandLabelerBoundUserInterface
+        enum.RMCHandLabelerUiKey.PillBottleColor:
+          type: RMCHandLabelerPillBottleColorBui
 
 - type: entity
   parent: Shovel
@@ -234,6 +314,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -254,4 +346,3 @@
   components:
   - type: RMCDeviceBreaker
     doAfterTime: 7
-  

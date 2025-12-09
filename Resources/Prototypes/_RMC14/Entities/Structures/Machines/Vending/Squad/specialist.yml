@@ -10,7 +10,7 @@
     sections:
     - name: Weapons Specialist Sets
       takeOne: SquadSpecKit
-      sharedSpecLimit: 2 # 2 as requested until Pyro is added
+      sharedSpecLimit: 1
       entries:
       - id: RMCDemoSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-demo
@@ -34,10 +34,17 @@
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_grenadier
-      #  points: 0
-      #- id: PyroSet
-      #  points: 0
-      # Don't forget to give Pyro his own role name and icons
+      - id: RMCPyroSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-pyro
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-pyro
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_pyro
+        giveMapBlip:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: spec_pyro
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
         isAppendSquadRoleName: false
@@ -119,14 +126,14 @@
         spawn: 6
       # -id: RMCElectroshockGrenadex6
       # points: 40
-    #- name: Extra Flamethrower Tanks
-    #  entries: [ ]
-    #- id: LargeIncineratorTank
-    #  points: 40
-    #- id: LargeIncineratorTankB GreenFlame
-    #  points: 40
-    #- id: LargeIncineratorTankX BlueFlame
-    #  points: 40
+    - name: Extra Flamethrower Tanks
+      entries:
+      - id: RMCTankFlamerLarge
+        points: 40
+      - id: RMCTankFlamerLargeB
+        points: 40
+      - id: RMCTankFlamerLargeX
+        points: 40
 
 - type: entity
   parent: [ColMarTechBase, RMCVendorWeaponsSpecialistGearBase]

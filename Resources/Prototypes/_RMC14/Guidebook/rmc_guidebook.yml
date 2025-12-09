@@ -471,6 +471,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideFood.xml"
   children:
   - RMCGuideDrinks
+  filterEnabled: True
 
 - type: guideEntry
   parent: RMC
@@ -478,6 +479,7 @@
   name: "Drink Recipes"
   priority: 1
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideDrinks.xml"
+  filterEnabled: True
 
 # Chemistry stuff
 - type: guideEntry
@@ -496,6 +498,7 @@
   #  - RMCBotanical
   #  - RMCBiological
   #  - RMCOthers
+  - RMCOrdinanceChemicals
   filterEnabled: True
 
 - type: guideEntry
@@ -506,4 +509,10 @@
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/Medicine.xml"
   filterEnabled: True
 
-
+- type: guideEntry
+  parent: RMC
+  id: RMCOrdinanceChemicals
+  name: "OT Chemicals"
+  priority: 2
+  text: "/ServerInfo/Guidebook/_RMC14/Chemicals/OT.xml"
+  filterEnabled: True

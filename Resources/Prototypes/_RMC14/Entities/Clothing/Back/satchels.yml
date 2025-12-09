@@ -249,6 +249,17 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  id: RMCSatchelSecuritySurvivorFillCMBMarshal
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCArmorHelmetM10CMB
+    - id: RMCVisorSWAT
+
+- type: entity
+  parent: CMSatchelSecurity
   suffix: Provost
   id: CMSatchelSecurityFilledProvost
   components:
@@ -366,6 +377,23 @@
   id: RMCSatchelMarineIntelChestrig
   name: UNMC expedition chestrig
   description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineChestrigPVE # Reskin for PVE
+  name: UNMC IMP chestrig
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand.
+  suffix: PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
