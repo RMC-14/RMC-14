@@ -137,6 +137,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity))
             return;
 
+        ChangeBurnColor(args.Target, ent.Comp.BurnColor);
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
     }
 
@@ -795,11 +796,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
 
-        if (TryComp<RMCFireColorComponent>(ent, out var fireColorComp))
-        {
-            fireColorComp.Color = ent.Comp.BurnColor;
-            Dirty(ent.Owner, fireColorComp);
-        }
+        ChangeBurnColor(flammableEnt, ent.Comp.BurnColor);
 
         // If this fire can bypass immunity, mark the target as having bypass-active fire
         if (!CanFireBypassImmunity(ent, other))
@@ -1055,6 +1052,15 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             _inventory.RelayEvent((target, inv), ref ev);
 
         return ev.Ignite;
+    }
+
+    public bool ChangeBurnColor(EntityUid target, Color color)
+    {
+        if (TryComp<RMCFireColorComponent>(target, out var fireColorComp))
+        {
+            fireColorComp.Color = color;
+            Dirty(target, fireColorComp);
+        }
     }
 }
 
