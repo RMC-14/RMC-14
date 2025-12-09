@@ -1,7 +1,6 @@
 # Base
 - type: entity
   abstract: true
-  categories: [ HideSpawnMenu ]
   id: RMCBarricadeUpgradeBase
   components:
   - type: RMCConstructionUpgrade
