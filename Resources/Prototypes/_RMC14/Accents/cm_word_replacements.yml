@@ -17,7 +17,7 @@
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
     cm-chatsan-word-thru: cm-chatsan-replacement-thru
     cm-chatsan-word-tho: cm-chatsan-replacement-tho
-    cm-chatsan-word-pb: cm-chatsan-word-replacement-pb
+    cm-chatsan-word-pb: cm-chatsan-word-pb
     cm-chatsan-word-clanker: cm-chatsan-replacement-clanker
 
 - type: accent
