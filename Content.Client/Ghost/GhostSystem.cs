@@ -144,6 +144,7 @@ namespace Content.Client.Ghost
 
         private void OnGhostRemove(EntityUid uid, GhostComponent component, ComponentRemove args)
         {
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
             _actions.RemoveAction(uid, component.ToggleLightingActionEntity);
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);

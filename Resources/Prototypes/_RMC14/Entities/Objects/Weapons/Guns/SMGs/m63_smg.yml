@@ -217,8 +217,8 @@
     tags:
     - CMMagazineSmg
     - RMCMagazineSMGM63HEAP
-#  - type: RefillableByBulletBox no HEAP bulletbox
-#    bulletType: RMCBoxBulletsSMGAP
+  - type: RefillableByBulletBox
+    bulletType: null
 
 - type: entity
   parent: CMMagazineSMGM63

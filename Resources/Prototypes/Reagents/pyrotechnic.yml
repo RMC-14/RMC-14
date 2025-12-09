@@ -160,6 +160,7 @@
   friction: 0.4
   intensity: 10
   duration: 10
+  radius: 4
   tileReactions:
   - !type:FlammableTileReaction {}
   metabolisms:
