@@ -155,6 +155,8 @@
   components:
   - type: Sprite
     state: po_visor
+  - type: ToggleVisor
+    ignoreRedundancy: true
   - type: Visor
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
