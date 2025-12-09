@@ -161,6 +161,11 @@
   intensity: 10
   duration: 10
   radius: 4
+  intensityMod: 0.6 # RMC14: Have to calc again with all props.
+  # FUELING = 5
+  # OXIDIZING = 3
+  # VISCOUS = 4
+  # TOXIC = 1
   tileReactions:
   - !type:FlammableTileReaction {}
   metabolisms:

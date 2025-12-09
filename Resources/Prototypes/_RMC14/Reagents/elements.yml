@@ -26,6 +26,7 @@
   flavor: bitter
   color: "#1C1300"
   unknown: true
+  durationMod: 1
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM? 0.005 would be right but impossible because fixed point 2
@@ -124,6 +125,9 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  durationMod: -0.5
+  radiusMod: 0.2
+  intensityMod: -0.5
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -159,6 +163,8 @@
   flavor: metallic
   color: "#808080"
   unknown: true
+  intensityMod: 0.15
+  # OXIDIZING 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -224,6 +230,9 @@
   flavor: metallic
   color: "#832828"
   unknown: true
+  intensityMod: 1
+  durationMod: 0.1
+  radiusMod: -0.12
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -343,6 +352,8 @@
   flavor: bitter
   color: "#808080"
   unknown: true
+  intensityMod: 0.75
+  radiusMod: -0.08
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?

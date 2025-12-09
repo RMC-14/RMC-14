@@ -8,6 +8,9 @@
   flavor: bitter
   color: "#E71B00"
   toxin: true
+  intensityMod: 0.4
+  durationMod: -0.8
+  radiusMod: 0.05
   tileReactions:
   - !type:FlammableTileReaction {}
   reactiveEffects:
@@ -50,6 +53,9 @@
   intensity: 15
   duration: 50
   radius: 5
+  intensityMod: -1.5
+  durationMod: -5
+  radiusMod: -0.5
   fireEntity: RMCTileFireStickyNapalm
 
 - type: reagent
@@ -63,6 +69,9 @@
   intensity: 45
   duration: 10
   radius: 5
+  intensityMod: -4.5
+  durationMod: -1
+  radiusMod: -0.5
   fireEntity: RMCTileFireHCNapalm
 
 - type: reagent
@@ -183,6 +192,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#0064C8"
+  # FLOWING = 3
   # VISCOUS = 3
   # FUELING = 2
   metabolisms:
