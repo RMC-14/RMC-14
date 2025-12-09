@@ -1,30 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed acid sprays not extinguish fires
-    type: Fix
-  id: 2151
-  time: '2025-08-06T04:25:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7326
-- author: Dygon
-  changes:
-  - message: Tail Stab can hit folding barricades again.
-    type: Fix
-  - message: Tail Stab can't hit through walls anymore.
-    type: Fix
-  id: 2152
-  time: '2025-08-06T04:25:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7325
-- author: Vermidia
-  changes:
-  - message: Fixed healer drone sacrifice not extinguishing and removing debuffs from
-      a target.
-    type: Fix
-  id: 2153
-  time: '2025-08-06T04:26:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7334
-- author: Vermidia
-  changes:
   - message: Fixed not being able to tackle nested hosts. Trying to attack/tackle
       a nest will also now redirect the attack to the occupant, if it's from a xeno.
     type: Fix
@@ -4749,5 +4725,32 @@
   id: 2653
   time: '2025-12-09T05:10:56.215546+00:00'
   url: null
+- author: ExponentialWizard
+  changes:
+  - message: Fixed being kicked out of chairs by walls
+    type: Fix
+  id: 2654
+  time: '2025-12-09T05:12:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7453
+- author: Ian321
+  changes:
+  - message: Incinerator tank can now be emptied into reagent tanks.
+    type: Tweak
+  id: 2655
+  time: '2025-12-09T05:11:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8627
+- author: Ian321
+  changes:
+  - message: Fixed max flame stacks of Napalm X being 20 instead of 40.
+    type: Fix
+  - message: Fixed Napalm B range being 6 instead of 7 tiles.
+    type: Fix
+  - message: Fixed the pyro helmet being corrodible.
+    type: Fix
+  - message: You can no longer accidentally unholster tanks from the broiler backpack.
+    type: Fix
+  id: 2656
+  time: '2025-12-09T05:11:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8633
 Name: RMC14
 Order: -1
