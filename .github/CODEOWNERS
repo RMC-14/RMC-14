@@ -1,4 +1,8 @@
 # Last match in file takes precedence.
 
 # Ping for all PRs
-* @DrSmugleaf @QuietlyWhisper
+* @DrSmugleaf
+
+/Resources/Lobby/ @QuietlyWhisper
+/Resources/Audio/ @QuietlyWhisper
+/Resources/Textures/ @QuietlyWhisper
