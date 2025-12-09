@@ -110,9 +110,28 @@
 
 - type: entity
   parent: RMCSmartGunMounted
+  id: RMCSmartGunMountedLoaded
+  suffix: Loaded
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineML66D
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineML66D
+          - RMCMagazineML66DLarge
+
+- type: entity
+  parent: RMCSmartGunMounted
   id: RMCSmartGunMountedStatic
   name: ML66D heavy machine gun
-  suffix: Static version
+  suffix: Scoped
   components:
   - type: MagazineAmmoProvider
     autoEject: false
@@ -228,15 +247,15 @@
     amount: 50
   - type: RMCProjectileDamageFalloff
     thresholds:
-    - range: 7
-      falloff: 4
-    - range: 15
+    - range: 1
+      falloff: 1
+    - range: 22
       falloff: 9999
   - type: RMCProjectileAccuracy
     accuracy: 105
     thresholds:
-    - range: 10
-      falloff: 3
+    - range: 8
+      falloff: 10
 
 # Tags
 

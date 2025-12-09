@@ -146,6 +146,48 @@
     - ML66DMount
 
 - type: entity
+  parent: RMCML66DMount
+  id: RMCML66DMountAssembled
+  name: ML66D heavy machine gun
+  description: A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
+  suffix: Folded, Assembled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
+    state: folded_mount
+    layers:
+    - state: ml66d_mount
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: folded_mount
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: ml66d
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: true
+    - state: ml66d_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: true
+    - state: ml66d_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: ml66d_gun_mount_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMounted"
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: RMCML66DMountAssembled
+  id: RMCML66DMountWeaponAssembledLoaded
+  suffix: Folded, Assembled, Loaded
+  components:
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMountedLoaded"
+
+- type: entity
   parent: [RMCBaseWeaponMount, BaseItem]
   id: RMCM2CMount
   name: M2C heavy machine gun

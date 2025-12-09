@@ -55,7 +55,6 @@
         unwieldedScatterMultiplier: 0
         shotsToMaxScatter: 125
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 0.75
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -117,7 +116,7 @@
     whitelist:
       tags:
       - RMCCartridgeHMG10x28mmTungsten
-    proto: RMCCartridgeHMG10x28mm
+    proto: RMCCartridgeHMG10x28mmTungsten
     capacity: 125
     deleteWhenEmpty: true
   - type: Sprite
@@ -170,15 +169,15 @@
     amount: 30
   - type: RMCProjectileDamageFalloff
     thresholds:
-    - range: 7
+    - range: 1 # cm13 code says 7 but after testing it looks like it starts losing damage after the first tile
       falloff: 3
     - range: 15
       falloff: 9999
   - type: RMCProjectileAccuracy
-    accuracy: 105
+    accuracy: 75
     thresholds:
-    - range: 10
-      falloff: 3
+    - range: 6 # porting this 1>1, which is what the component mentions, from cm13(10), makes it too accurate at high ranges so I lowered it
+      falloff: 5
 
 # Tags
 - type: Tag

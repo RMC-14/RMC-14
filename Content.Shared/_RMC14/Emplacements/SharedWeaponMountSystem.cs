@@ -475,14 +475,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         // Weapon stats
         if (TryComp(ent.Comp.MountedEntity, out GunComponent? gunComponent))
         {
-            if (!TryGetWeaponAmmo(ent, out var ammoCount, out _))
-                return;
-
-            args.PushMarkup(Loc.GetString("gun-magazine-examine", ("color", AmmoExamineColor), ("count", ammoCount)));
-            args.PushMarkup(Loc.GetString("gun-selected-mode-examine", ("color", ModeExamineColor),
-                ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), gunComponent.SelectedMode)}"))), priority: 4);
-            args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor),
-                ("fireRate", $"{gunComponent.FireRateModified:0.0}")), priority: 3);
+            if (TryGetWeaponAmmo(ent, out var ammoCount, out _))
+            {
+                args.PushMarkup(Loc.GetString("gun-magazine-examine", ("color", AmmoExamineColor), ("count", ammoCount)));
+                args.PushMarkup(Loc.GetString("gun-selected-mode-examine", ("color", ModeExamineColor),
+                    ("mode",Loc.GetString($"gun-{Enum.GetName(typeof(SelectiveFire), gunComponent.SelectedMode)}"))), priority: 4);
+                args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor),
+                    ("fireRate", $"{gunComponent.FireRateModified:0.0}")), priority: 3);
+            }
         }
 
         // Broken information
