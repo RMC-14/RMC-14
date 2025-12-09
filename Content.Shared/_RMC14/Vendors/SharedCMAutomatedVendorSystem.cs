@@ -48,6 +48,7 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
@@ -61,9 +62,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Storage;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -88,8 +86,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
