@@ -39,6 +39,7 @@
     tileDamage:
       types:
         Heat: 0.5
+    burnColor: "#bf6d02"
   - type: DamageOnCollide
     damageDead: false
     fire: true
@@ -83,6 +84,7 @@
     armorWhitelist:
       components:
       - Xeno
+    burnColor: "#069420"
   - type: TileFire
     id: RMCTileFireGreen
     extinguishInstantly: false
@@ -114,6 +116,7 @@
     intensity: 40
     duration: 45
     maxStacks: 40
+    burnColor: "#00b8ff"
   - type: TileFire
     id: RMCTileFireBlue
     extinguishInstantly: false
@@ -142,6 +145,7 @@
     maxStacks: 70
     intensity: 80
     duration: 70
+    burnColor: "#8fcbeb"
   - type: TileFire
     id: RMCTileFireOB
     extinguishInstantly: false
@@ -168,6 +172,7 @@
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
+    burnColor: "#faeffa"
   - type: TileFire
     id: RMCTileFireOBAegis
     extinguishInstantly: false
@@ -202,6 +207,7 @@
     tileDamage:
       types:
         Heat: 0.13
+    burnColor: "#EE6515"
   - type: TileFire
     duration: 5
   - type: PointLight
@@ -240,6 +246,7 @@
     maxStacks: 15
     intensity: 50
     duration: 15
+    burnColor: "#00b8ff"
   - type: PointLight
     color: "#00b8ff"
   - type: GenericVisualizer
@@ -266,6 +273,7 @@
     maxStacks: 25
     intensity: 50
     duration: 25
+    burnColor: "#c96500"
   - type: PointLight
     color: "#c96500"
   - type: GenericVisualizer
@@ -472,6 +480,7 @@
   - type: RMCIgniteOnCollide
     intensity: 15
     duration: 50
+    burnColor: "#f8e3b2"
   - type: PointLight
     radius: 5
     color: "#f8e3b2"
@@ -499,6 +508,7 @@
   - type: RMCIgniteOnCollide
     intensity: 45
     duration: 10
+    burnColor: "#c51c1c"
   - type: PointLight
     radius: 5
     color: "#c51c1c"
@@ -526,6 +536,7 @@
   - type: RMCIgniteOnCollide
     intensity: 15
     duration: 50
+    burnColor: "#800080"
   - type: RMCFireImmunityBypass
   - type: PointLight
     radius: 6
@@ -554,6 +565,7 @@
   - type: RMCIgniteOnCollide
     intensity: 40
     duration: 40
+    burnColor: "#641dd6"
   - type: RMCFireImmunityBypass
   - type: PointLight
     radius: 6
@@ -582,6 +594,7 @@
   - type: RMCIgniteOnCollide
     intensity: 50
     duration: 30
+    burnColor: "#ffe49c"
   - type: RMCFireImmunityBypass
   - type: PointLight
     radius: 6

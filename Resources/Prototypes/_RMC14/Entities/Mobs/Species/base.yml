@@ -119,9 +119,14 @@
   - type: RMCRevivable
   - type: RMCMedicalExamine
   - type: FireVisuals
-    sprite: Mobs/Effects/onfire.rsi
-    normalState: Generic_mob_burning
-    alternateState: Standing
+    sprite: _RMC14/Mobs/Effects/on_fire.rsi
+    normalState: standing_weak
+    alternateState: standing_medium
+    fireStackAlternateState: 14 # 15 stacks or above uses alternate state
+    lightRadiusPerStack: 0.2 # Around 15 stacks to reach 3 radius
+    maxLightRadius: 3
+    maxLightEnergy: 7
+  - type: RMCFireColor
   - type: MeleeWeapon
     soundHit:
       collection: Punch

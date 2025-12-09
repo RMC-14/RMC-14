@@ -536,13 +536,13 @@ namespace Content.Server.Atmos.EntitySystems
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
                         if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
                     else
                     {
                         // No immunity, deal damage normally
                         if (damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);

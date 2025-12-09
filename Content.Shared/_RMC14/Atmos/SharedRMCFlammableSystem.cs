@@ -795,6 +795,12 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
 
+        if (TryComp<RMCFireColorComponent>(ent, out var fireColorComp))
+        {
+            fireColorComp.Color = ent.Comp.BurnColor;
+            Dirty(ent.Owner, fireColorComp);
+        }
+
         // If this fire can bypass immunity, mark the target as having bypass-active fire
         if (!CanFireBypassImmunity(ent, other))
         {
