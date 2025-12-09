@@ -316,4 +316,9 @@
     cm-chatsan-word-taxes: cm-chatsan-replacement-taxes
     cm-chatsan-word-taxing: cm-chatsan-replacement-taxing
     cm-chatsan-word-taxed: cm-chatsan-replacement-taxed
-
+    cm-chatsan-word-taxer: cm-chatsan-replacement-taxer
+    cm-chatsan-word-xax: cm-chatsan-replacement-tax
+    cm-chatsan-word-xaxes: cm-chatsan-replacement-taxes
+    cm-chatsan-word-xaxing: cm-chatsan-replacement-taxing
+    cm-chatsan-word-xaxed: cm-chatsan-replacement-taxed
+    cm-chatsan-word-xaxer: cm-chatsan-replacement-taxer
