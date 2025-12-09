@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Gibbing a person as a queen will now pop up text, cause the target to
-      shake and make their dropped items splatter out.
-    type: Add
-  id: 2147
-  time: '2025-08-06T04:18:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7301
 - author: Whisper
   changes:
   - message: RMC tips will start appearing again.
@@ -4750,5 +4742,12 @@
   id: 2648
   time: '2025-12-09T01:50:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8622
+- author: DrSmugleaf
+  changes:
+  - message: Fixed King shield lightning effect freezing the server.
+    type: Fix
+  id: 2649
+  time: '2025-12-09T02:03:19.508431+00:00'
+  url: null
 Name: RMC14
 Order: -1
