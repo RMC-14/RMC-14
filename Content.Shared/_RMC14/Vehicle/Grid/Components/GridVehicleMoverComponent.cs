@@ -26,14 +26,23 @@ public sealed partial class GridVehicleMoverComponent : Component
     public float CurrentSpeed;
 
     [DataField, AutoNetworkedField]
-    public float MaxSpeed = 15f;
+    public float MaxSpeed = 11f;
 
     [DataField, AutoNetworkedField]
-    public float Acceleration = 8f;
+    public float Acceleration = 7f;
 
     [DataField, AutoNetworkedField]
     public float Deceleration = 12f;
 
+    [DataField, AutoNetworkedField]
+    public float MaxReverseSpeed = 4f;
+
+    [DataField, AutoNetworkedField]
+    public float ReverseAcceleration = 4f;
+
     [AutoNetworkedField]
     public bool IsCommittedToMove;
+
+    [AutoNetworkedField]
+    public bool IsMoving;
 }

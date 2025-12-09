@@ -4,6 +4,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
@@ -49,6 +50,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         ent.Comp.Position = new Vector2(indices.X + 0.5f, indices.Y + 0.5f);
         ent.Comp.IsCommittedToMove = false;
         Dirty(uid, ent.Comp);
+        Logger.Info($"Vehicle DEBUG Startup tile={indices}");
     }
 
     public override void Update(float frameTime)
@@ -64,14 +66,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
                 continue;
 
-            // Get input direction
             Vector2i inputDir = Vector2i.Zero;
             if (vehicle.Operator is { } op && TryComp<InputMoverComponent>(op, out var input))
-            {
                 inputDir = GetInputDirection(input);
-            }
 
-            // Update movement
             UpdateMovement(uid, mover, grid, gridComp, inputDir, frameTime);
         }
     }
@@ -79,19 +77,19 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     private void UpdateMovement(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
         MapGridComponent gridComp, Vector2i inputDir, float frameTime)
     {
+        if (inputDir != Vector2i.Zero || mover.IsCommittedToMove)
+            Logger.Info($"Vehicle DEBUG Update uid={uid} tile={mover.CurrentTile} speed={mover.CurrentSpeed} input={inputDir} committed={mover.IsCommittedToMove}");
+
         var hasInput = inputDir != Vector2i.Zero;
 
-        // If we're committed to a move, we must complete it
         if (mover.IsCommittedToMove)
         {
             ContinueCommittedMove(uid, mover, grid, gridComp, inputDir, frameTime);
             return;
         }
 
-        // Not committed - check if we should start a new move
         if (!hasInput)
         {
-            // No input and not committed - ensure we're centered on current tile
             mover.CurrentSpeed = 0f;
             mover.Position = new Vector2(mover.CurrentTile.X + 0.5f, mover.CurrentTile.Y + 0.5f);
             SetGridPosition(uid, grid, mover.Position);
@@ -99,93 +97,212 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             return;
         }
 
-        // New input - start a committed move
-        var targetTile = mover.CurrentTile + inputDir;
+        var facing = mover.CurrentDirection;
+        var angleChanged = false;
 
-        // Check if we can move to the target tile
+        if (facing == Vector2i.Zero)
+        {
+            facing = inputDir;
+            angleChanged = true;
+        }
+
+        Vector2i moveDir;
+
+        if (inputDir == facing)
+            moveDir = facing;
+        else if (inputDir == -facing)
+            moveDir = -facing;
+        else
+        {
+            facing = inputDir;
+            moveDir = facing;
+            angleChanged = true;
+        }
+
+        mover.IsCommittedToMove = false;
+
+        var targetTile = mover.CurrentTile + moveDir;
+        Logger.Info($"Vehicle DEBUG requestMove moveDir={moveDir} facing={facing} targetTile={targetTile}");
+
         if (!CanBeOnTile(uid, grid, gridComp, targetTile))
         {
-            // Can't move there, stay stopped
             mover.CurrentSpeed = 0f;
+            Logger.Info($"Vehicle DEBUG blockedTile");
             return;
         }
 
-        // Commit to moving to the target tile
-        mover.IsCommittedToMove = true;
         mover.TargetTile = targetTile;
-        mover.CurrentDirection = inputDir;
+        mover.CurrentDirection = facing;
 
-        // Update rotation immediately
-        var angle = new Vector2(inputDir.X, inputDir.Y).ToWorldAngle();
-        transform.SetLocalRotation(uid, angle);
+        if (angleChanged)
+        {
+            var angle = new Vector2(facing.X, facing.Y).ToWorldAngle();
+            transform.SetLocalRotation(uid, angle);
+        }
 
+        mover.IsCommittedToMove = true;
         Dirty(uid, mover);
+        Logger.Info($"Vehicle DEBUG commitTile target={targetTile}");
     }
 
     private void ContinueCommittedMove(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
         MapGridComponent gridComp, Vector2i inputDir, float frameTime)
     {
-        // Accelerate towards max speed
-        if (mover.CurrentSpeed < mover.MaxSpeed)
+        var tileDelta = mover.TargetTile - mover.CurrentTile;
+        var moveDir = new Vector2(tileDelta.X, tileDelta.Y);
+
+        var hasInput = inputDir != Vector2i.Zero;
+        var opposite = hasInput && inputDir == -mover.CurrentDirection;
+
+        if (opposite)
+            mover.CurrentSpeed = 0f;
+
+        var tileDelta2 = mover.TargetTile - mover.CurrentTile;
+        var reversing = hasInput && inputDir == -mover.CurrentDirection;
+
+        float targetSpeed;
+        float accel;
+
+        if (inputDir == Vector2i.Zero)
         {
-            mover.CurrentSpeed = Math.Min(mover.CurrentSpeed + mover.Acceleration * frameTime, mover.MaxSpeed);
+            targetSpeed = 0f;
+            accel = mover.Deceleration;
         }
-
-        // Move in the committed direction
-        var moveDir = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y);
-        var moveAmount = mover.CurrentSpeed * frameTime;
-        var newPos = mover.Position + moveDir * moveAmount;
-
-        // Calculate center of target tile
-        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-
-        // Check if we've reached or passed the target
-        var toTarget = targetCenter - mover.Position;
-        var distanceToTarget = toTarget.Length();
-
-        if (moveAmount >= distanceToTarget)
+        else if (reversing)
         {
-            // We've reached the target tile
-            mover.Position = targetCenter;
-            mover.CurrentTile = mover.TargetTile;
-            mover.IsCommittedToMove = false;
-
-            // If player is still holding input in a direction, queue next move
-            var hasInput = inputDir != Vector2i.Zero;
-            if (hasInput)
+            if (mover.CurrentSpeed > 0f)
             {
-                // Check if direction changed
-                if (inputDir != mover.CurrentDirection)
-                {
-                    // Direction changed - update rotation
-                    mover.CurrentDirection = inputDir;
-                    var angle = new Vector2(inputDir.X, inputDir.Y).ToWorldAngle();
-                    transform.SetLocalRotation(uid, angle);
-                }
-
-                // Try to start next move immediately
-                var nextTile = mover.CurrentTile + inputDir;
-                if (CanBeOnTile(uid, grid, gridComp, nextTile))
-                {
-                    mover.IsCommittedToMove = true;
-                    mover.TargetTile = nextTile;
-                }
-                else
-                {
-                    // Hit a wall, stop
-                    mover.CurrentSpeed = 0f;
-                }
+                targetSpeed = 0f;
+                accel = mover.Deceleration;
             }
             else
             {
-                // No input, decelerate
-                mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, 0f);
+                targetSpeed = -mover.MaxReverseSpeed;
+                accel = mover.ReverseAcceleration;
             }
         }
         else
         {
-            // Still moving towards target
+            if (mover.CurrentSpeed < 0f)
+            {
+                targetSpeed = 0f;
+                accel = mover.Deceleration;
+            }
+            else
+            {
+                targetSpeed = mover.MaxSpeed;
+                accel = mover.Acceleration;
+            }
+        }
+
+        if (mover.CurrentSpeed < targetSpeed)
+            mover.CurrentSpeed = Math.Min(mover.CurrentSpeed + accel * frameTime, targetSpeed);
+        else if (mover.CurrentSpeed > targetSpeed)
+            mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
+
+        Logger.Info($"Vehicle DEBUG movePhase speed={mover.CurrentSpeed} reversing={reversing} targetSpeed={targetSpeed}");
+
+        if (moveDir == Vector2.Zero)
+        {
+            moveDir = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y);
+        }
+
+        if (moveDir != Vector2.Zero)
+        {
+            moveDir = Vector2.Normalize(moveDir);
+
+            if (mover.CurrentSpeed < 0f)
+                moveDir = -moveDir;
+        }
+
+        var moveAmount = mover.CurrentSpeed * frameTime;
+        var newPos = mover.Position + moveDir * moveAmount;
+
+        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
+        var toTarget = targetCenter - mover.Position;
+        var distanceToTarget = toTarget.Length();
+
+        if (Math.Abs(moveAmount) >= distanceToTarget)
+        {
+            mover.Position = targetCenter;
+            mover.CurrentTile = mover.TargetTile;
+            mover.IsCommittedToMove = false;
+            Logger.Info($"Vehicle DEBUG tileArrived tile={mover.CurrentTile} speed={mover.CurrentSpeed}");
+
+            if (reversing && mover.CurrentSpeed > 0.01f)
+            {
+                Logger.Info($"Vehicle DEBUG stopCommit slowingForward");
+                return;
+            }
+
+            if (!reversing && mover.CurrentSpeed < -0.01f)
+            {
+                Logger.Info($"Vehicle DEBUG stopCommit slowingReverse");
+                return;
+            }
+
+            var hasInput2 = inputDir != Vector2i.Zero;
+
+            if (!hasInput2)
+            {
+                mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, 0f);
+                Logger.Info($"Vehicle DEBUG noInputDecel");
+                return;
+            }
+
+            var facing = mover.CurrentDirection;
+            var angleChanged = false;
+
+            if (facing == Vector2i.Zero)
+            {
+                facing = inputDir;
+                angleChanged = true;
+            }
+
+            Vector2i nextMoveDir;
+
+            if (inputDir == facing)
+                nextMoveDir = facing;
+            else if (inputDir == -facing)
+                nextMoveDir = -facing;
+            else
+            {
+                facing = inputDir;
+                nextMoveDir = facing;
+                angleChanged = true;
+            }
+
+            var nextTile = mover.CurrentTile + nextMoveDir;
+
+            if (!CanBeOnTile(uid, grid, gridComp, nextTile))
+            {
+                mover.CurrentSpeed = 0f;
+                Logger.Info($"Vehicle DEBUG nextTileBlocked");
+                return;
+            }
+
+            if (Math.Abs(mover.CurrentSpeed) < 0.01f)
+            {
+                Logger.Info($"Vehicle DEBUG notMovingEnoughToCommit");
+                return;
+            }
+
+            mover.IsCommittedToMove = true;
+            mover.TargetTile = nextTile;
+            mover.CurrentDirection = facing;
+
+            if (angleChanged)
+            {
+                var angle = new Vector2(facing.X, facing.Y).ToWorldAngle();
+                transform.SetLocalRotation(uid, angle);
+            }
+
+            Logger.Info($"Vehicle DEBUG nextCommit target={nextTile}");
+        }
+        else
+        {
             mover.Position = newPos;
+            Logger.Info($"Vehicle DEBUG moveStep pos={mover.Position}");
         }
 
         SetGridPosition(uid, grid, mover.Position);
@@ -210,7 +327,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         if (dir == Vector2i.Zero)
             return dir;
 
-        // Prioritize single direction (no diagonals for grid movement)
         if (dir.X != 0 && dir.Y != 0)
         {
             if (Math.Abs(dir.X) >= Math.Abs(dir.Y))
@@ -219,10 +335,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 dir = new Vector2i(0, Math.Sign(dir.Y));
         }
         else
-        {
             dir = new Vector2i(Math.Sign(dir.X), Math.Sign(dir.Y));
-        }
 
+        Logger.Info($"Vehicle DEBUG input dir={dir}");
         return dir;
     }
 
@@ -243,8 +358,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             return true;
 
         var coords = new EntityCoordinates(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f));
-        DebugTools.Assert(grid == coords.EntityId);
-
         var indices = map.TileIndicesFor(grid, gridComp, coords);
         var enumerator = map.GetAnchoredEntitiesEnumerator(grid, gridComp, indices);
 

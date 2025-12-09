@@ -202,6 +202,9 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    maxSpeed: 9
+    acceleration: 6
+    deceleration: 12
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
@@ -236,7 +239,6 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: Appearance
-
 
 - type: entity
   parent: RMCVehicleTestThing

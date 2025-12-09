@@ -192,13 +192,13 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        // if (_skills.HasSkills(args.Buckle.Owner, ent.Comp.Skills))
-        //     return;
+        if (_skills.HasSkills(args.Buckle.Owner, ent.Comp.Skills))
+            return;
 
         if (args.Popup)
             _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent)), args.Buckle, args.User);
 
-        args.Cancelled = true;
+        //args.Cancelled = true;
     }
 
     private void OnDriverSeatStrapped(Entity<VehicleDriverSeatComponent> ent, ref StrappedEvent args)
