@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: RMC tips will start appearing again.
-    type: Fix
-  id: 2148
-  time: '2025-08-06T04:20:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7308
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Resprited the MP, corpsman, and intel armor vests.
-    type: Tweak
-  id: 2149
-  time: '2025-08-06T04:20:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7312
 - author: Dygon
   changes:
   - message: We-Ya PMC's can use their tracker again.
@@ -4749,5 +4735,19 @@
   id: 2649
   time: '2025-12-09T02:03:19.508431+00:00'
   url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fix the King being able to be set on fire.
+    type: Fix
+  id: 2650
+  time: '2025-12-09T02:06:50.558737+00:00'
+  url: null
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON never spawning with a secondary weapon.
+    type: Fix
+  id: 2651
+  time: '2025-12-09T02:05:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8625
 Name: RMC14
 Order: -1
