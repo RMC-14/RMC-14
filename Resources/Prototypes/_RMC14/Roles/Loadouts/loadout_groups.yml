@@ -148,7 +148,6 @@
   - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
   
-
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
