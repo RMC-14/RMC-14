@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-trucker
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
+  playTimeTracker: CMJobSurvivorEngineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,7 +25,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivor # for inheritance
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorTrucker
