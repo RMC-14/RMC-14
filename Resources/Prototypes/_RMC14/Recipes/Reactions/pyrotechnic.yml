@@ -46,8 +46,8 @@
       amount: 3
   products:
     RMCCLF3: 3
-    RMCHydrogen: 2
-    RMCOxygen: 1
+    RMCHydrogen: 6
+    RMCOxygen: 3
 
 - type: reaction
   id: RMCCLF3Bad
