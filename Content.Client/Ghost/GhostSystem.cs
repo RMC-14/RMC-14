@@ -152,6 +152,8 @@ namespace Content.Client.Ghost
             if (uid != _playerManager.LocalEntity)
                 return;
 
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
+
             GhostVisibility = false;
             PlayerRemoved?.Invoke(component);
         }
