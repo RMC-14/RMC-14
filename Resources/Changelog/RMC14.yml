@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the shotgun choke not increasing the range of any shot projectiles
-      by 1.
-    type: Fix
-  - message: The attachment effect examine now shows the stun duration multiplier
-      if the attachment applies one.
-    type: Tweak
-  - message: Weapons with a modified fire rate show the correct use delay visual.
-    type: Fix
-  id: 2144
-  time: '2025-08-06T04:19:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7306
-- author: DummeHytteOst
-  changes:
-  - message: Added the Multitool or Security access tuner(SAT), to the Aghost loadout.
-    type: Add
-  id: 2145
-  time: '2025-08-06T04:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7314
 - author: noctyrnal
   changes:
   - message: Chances Claim and Fiorina Science Annex now use "Urban" camo, similar
@@ -4757,5 +4737,19 @@
   id: 2645
   time: '2025-12-09T01:43:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8618
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed fultons not working.
+    type: Fix
+  id: 2646
+  time: '2025-12-09T01:45:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8616
+- author: Thereisabear
+  changes:
+  - message: Actually added the Red Neckerchief to loadouts
+    type: Add
+  id: 2647
+  time: '2025-12-09T01:46:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8608
 Name: RMC14
 Order: -1
