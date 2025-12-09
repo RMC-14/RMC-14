@@ -46,7 +46,7 @@
 
 - type: entity
   id: RMCPlanetSolaris
-  name: Solaris Ridge
+  name: LV-1413 Solaris Ridge
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/solaris.yml
@@ -129,7 +129,7 @@
 
 - type: entity
   id: RMCPlanetShiva
-  name: Shivas Snowball
+  name: LV-631 Shivas Snowball
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/shiva.yml
@@ -150,7 +150,7 @@
 
 - type: entity
   id: RMCPlanetFiorina
-  name: Fiorina Science Annex
+  name: LV-161 Fiorina Science Annex
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
@@ -177,7 +177,7 @@
 
 - type: entity
   id: RMCPlanetTrijent
-  name: Trijent Dam
+  name: LV-670 Trijent Dam
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/trijent.yml
@@ -288,7 +288,7 @@
 
 - type: entity
   id: RMCPlanetKutjevo
-  name: Kutjevo Refinery
+  name: LV-686 Kutjevo Refinery
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
