@@ -39,7 +39,7 @@
   priority: 10
   reactants:
     Water:
-      amount: 1
+      amount: 3
     RMCChlorine:
       amount: 1
     RMCFluorine:
