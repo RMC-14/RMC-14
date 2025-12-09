@@ -21,4 +21,7 @@ public sealed partial class HiveBoonsComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<HiveBoonDefinitionComponent>, EntityUid> Active = new();
+
+    [DataField, AutoNetworkedField]
+    public bool KingAnnounced;
 }

@@ -187,8 +187,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
     private bool HasQueenPopup(EntityUid xeno)
     {
-        var hive = _hive.GetHive(xeno);
-        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1, hive))
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
             return true;
 
         _popup.PopupEntity(Loc.GetString("rmc-no-queen-hivemind-chat"), xeno, xeno, PopupType.MediumCaution);

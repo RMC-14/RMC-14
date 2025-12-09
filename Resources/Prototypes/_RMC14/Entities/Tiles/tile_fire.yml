@@ -113,6 +113,7 @@
   - type: RMCIgniteOnCollide
     intensity: 40
     duration: 45
+    maxStacks: 40
   - type: TileFire
     id: RMCTileFireBlue
     extinguishInstantly: false

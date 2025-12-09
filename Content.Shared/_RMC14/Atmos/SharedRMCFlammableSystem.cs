@@ -126,6 +126,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<RMCImmuneToIgnitionComponent, InventoryRelayedEvent<GetIgnitionImmunityEvent>>(OnGetIgnitionEquipmentImmunity);
         SubscribeLocalEvent<RMCImmuneToIgnitionComponent, ExaminedEvent>(OnIgnitionImmunityExamined);
 
+        SubscribeLocalEvent<RMCImmuneToFireTileDamageComponent, RMCGetFireImmunityEvent>(OnImmuneToTileFireGet);
         SubscribeLocalEvent<RMCImmuneToFireTileDamageComponent, ExaminedEvent>(OnImmuneToTileFireExamined);
 
         SubscribeLocalEvent<RMCFireArmorDebuffModifierComponent, ExaminedEvent>(OnFireArmorDebuffModifierExamined);
@@ -716,6 +717,20 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
+    private void OnImmuneToTileFireGet(Entity<RMCImmuneToFireTileDamageComponent> ent, ref RMCGetFireImmunityEvent args)
+    {
+        if (args.Fire == null)
+        {
+            args.Immune = true;
+            return;
+        }
+
+        if (_entityWhitelist.IsWhitelistPass(ent.Comp.BypassWhitelist, args.Fire.Value))
+            return;
+
+        args.Immune = true;
+    }
+
     private void OnImmuneToTileFireExamined(Entity<RMCImmuneToFireTileDamageComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(RMCImmuneToFireTileDamageComponent)))
@@ -771,15 +786,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         // Check RMCImmuneToFireTileDamageComponent for ignition immunity
-        if (TryComp<RMCImmuneToFireTileDamageComponent>(other, out var fireImmunity) && fireImmunity.BypassWhitelist != null)
-        {
-            // Check if this fire is on the bypass whitelist
-            if (!_entityWhitelist.IsWhitelistPass(fireImmunity.BypassWhitelist, ent))
-            {
-                // Fire is not on bypass whitelist, cannot ignite
-                return;
-            }
-        }
+        var tileEv = new RMCGetFireImmunityEvent(ent);
+        RaiseLocalEvent(other, ref tileEv);
+
+        if (!tileEv.Ignite)
+            return;
 
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
@@ -1011,22 +1022,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// <returns>True if damage should be dealt, false if it should be blocked by immunity</returns>
     private bool CanFireBypassImmunity(EntityUid fireEntity, EntityUid targetEntity)
     {
-        // If the target doesn't have fire immunity, fire always works
-        if (!TryComp<RMCImmuneToFireTileDamageComponent>(targetEntity, out var immunity))
-            return true;
-
         // If the fire has a bypass component, it can always bypass immunity
         if (HasComp<RMCFireImmunityBypassComponent>(fireEntity))
             return true;
 
-        // If immunity has a bypass whitelist, check if this fire is on it
-        if (immunity.BypassWhitelist != null)
-        {
-            return _entityWhitelist.IsWhitelistPass(immunity.BypassWhitelist, fireEntity);
-        }
+        var tileEv = new RMCGetFireImmunityEvent(fireEntity);
+        RaiseLocalEvent(targetEntity, ref tileEv);
 
-        // No bypass mechanisms apply, immunity blocks the damage
-        return false;
+        return !tileEv.Immune;
     }
 
     /// <summary>
@@ -1040,6 +1043,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         var ev = new GetIgnitionImmunityEvent(intensity, directHit);
         RaiseLocalEvent(target, ref ev);
+        RaiseLocalEvent(ref ev);
 
         if (_inventoryQuery.TryComp(target, out var inv))
             _inventory.RelayEvent((target, inv), ref ev);
@@ -1064,3 +1068,6 @@ public sealed class GetIgnitionImmunityEvent : EntityEventArgs, IInventoryRelayE
         Intensity = intensity;
     }
 }
+
+[ByRefEvent]
+public record struct RMCGetFireImmunityEvent(EntityUid? Fire, bool Ignite = true, bool Immune = false);
