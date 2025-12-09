@@ -4742,5 +4742,12 @@
   id: 2651
   time: '2025-12-09T02:05:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8625
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed ghost halfbright randomly turning off
+    type: Fix
+  id: 2652
+  time: '2025-12-09T02:24:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8626
 Name: RMC14
 Order: -1
