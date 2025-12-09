@@ -4,7 +4,6 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
@@ -12,7 +11,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Vehicle;
 
@@ -22,6 +20,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem transform = default!;
     [Dependency] private readonly SharedMapSystem map = default!;
     [Dependency] private readonly SharedPhysicsSystem physics = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
@@ -50,7 +49,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         ent.Comp.Position = new Vector2(indices.X + 0.5f, indices.Y + 0.5f);
         ent.Comp.IsCommittedToMove = false;
         Dirty(uid, ent.Comp);
-        Logger.Info($"Vehicle DEBUG Startup tile={indices}");
     }
 
     public override void Update(float frameTime)
@@ -77,9 +75,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     private void UpdateMovement(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
         MapGridComponent gridComp, Vector2i inputDir, float frameTime)
     {
-        if (inputDir != Vector2i.Zero || mover.IsCommittedToMove)
-            Logger.Info($"Vehicle DEBUG Update uid={uid} tile={mover.CurrentTile} speed={mover.CurrentSpeed} input={inputDir} committed={mover.IsCommittedToMove}");
-
         var hasInput = inputDir != Vector2i.Zero;
 
         if (mover.IsCommittedToMove)
@@ -122,12 +117,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         mover.IsCommittedToMove = false;
 
         var targetTile = mover.CurrentTile + moveDir;
-        Logger.Info($"Vehicle DEBUG requestMove moveDir={moveDir} facing={facing} targetTile={targetTile}");
 
         if (!CanBeOnTile(uid, grid, gridComp, targetTile))
         {
             mover.CurrentSpeed = 0f;
-            Logger.Info($"Vehicle DEBUG blockedTile");
             return;
         }
 
@@ -142,7 +135,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         mover.IsCommittedToMove = true;
         Dirty(uid, mover);
-        Logger.Info($"Vehicle DEBUG commitTile target={targetTile}");
     }
 
     private void ContinueCommittedMove(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
@@ -152,13 +144,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         var moveDir = new Vector2(tileDelta.X, tileDelta.Y);
 
         var hasInput = inputDir != Vector2i.Zero;
-        var opposite = hasInput && inputDir == -mover.CurrentDirection;
-
-        if (opposite)
-            mover.CurrentSpeed = 0f;
-
-        var tileDelta2 = mover.TargetTile - mover.CurrentTile;
         var reversing = hasInput && inputDir == -mover.CurrentDirection;
+
+        if (reversing && mover.CurrentSpeed > 0f)
+            mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime * 2f, 0f);
 
         float targetSpeed;
         float accel;
@@ -200,12 +189,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         else if (mover.CurrentSpeed > targetSpeed)
             mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
 
-        Logger.Info($"Vehicle DEBUG movePhase speed={mover.CurrentSpeed} reversing={reversing} targetSpeed={targetSpeed}");
-
         if (moveDir == Vector2.Zero)
-        {
             moveDir = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y);
-        }
 
         if (moveDir != Vector2.Zero)
         {
@@ -227,26 +212,12 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             mover.Position = targetCenter;
             mover.CurrentTile = mover.TargetTile;
             mover.IsCommittedToMove = false;
-            Logger.Info($"Vehicle DEBUG tileArrived tile={mover.CurrentTile} speed={mover.CurrentSpeed}");
-
-            if (reversing && mover.CurrentSpeed > 0.01f)
-            {
-                Logger.Info($"Vehicle DEBUG stopCommit slowingForward");
-                return;
-            }
-
-            if (!reversing && mover.CurrentSpeed < -0.01f)
-            {
-                Logger.Info($"Vehicle DEBUG stopCommit slowingReverse");
-                return;
-            }
 
             var hasInput2 = inputDir != Vector2i.Zero;
 
             if (!hasInput2)
             {
                 mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, 0f);
-                Logger.Info($"Vehicle DEBUG noInputDecel");
                 return;
             }
 
@@ -277,15 +248,11 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (!CanBeOnTile(uid, grid, gridComp, nextTile))
             {
                 mover.CurrentSpeed = 0f;
-                Logger.Info($"Vehicle DEBUG nextTileBlocked");
                 return;
             }
 
             if (Math.Abs(mover.CurrentSpeed) < 0.01f)
-            {
-                Logger.Info($"Vehicle DEBUG notMovingEnoughToCommit");
                 return;
-            }
 
             mover.IsCommittedToMove = true;
             mover.TargetTile = nextTile;
@@ -296,13 +263,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 var angle = new Vector2(facing.X, facing.Y).ToWorldAngle();
                 transform.SetLocalRotation(uid, angle);
             }
-
-            Logger.Info($"Vehicle DEBUG nextCommit target={nextTile}");
         }
         else
         {
             mover.Position = newPos;
-            Logger.Info($"Vehicle DEBUG moveStep pos={mover.Position}");
         }
 
         SetGridPosition(uid, grid, mover.Position);
@@ -337,7 +301,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         else
             dir = new Vector2i(Math.Sign(dir.X), Math.Sign(dir.Y));
 
-        Logger.Info($"Vehicle DEBUG input dir={dir}");
         return dir;
     }
 
@@ -354,32 +317,85 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
     private bool CanBeOnTile(EntityUid uid, EntityUid grid, MapGridComponent gridComp, Vector2i tile)
     {
-        if (!physicsQ.TryComp(uid, out var phys) || !phys.CanCollide)
+        if (!physicsQ.TryComp(uid, out var body))
+            return true;
+
+        if (!body.CanCollide)
             return true;
 
         var coords = new EntityCoordinates(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f));
-        var indices = map.TileIndicesFor(grid, gridComp, coords);
-        var enumerator = map.GetAnchoredEntitiesEnumerator(grid, gridComp, indices);
+        var world = coords.ToMap(EntityManager, transform);
+        var rotation = transform.GetWorldRotation(uid);
 
-        var (moverLayer, moverMask) = physics.GetHardCollision(uid);
+        if (!fixtureQ.TryComp(uid, out var fixtures))
+            return true;
 
-        while (enumerator.MoveNext(out var anchored))
+        var aabb = new Box2(world.Position, world.Position);
+        var first = true;
+
+        foreach (var f in fixtures.Fixtures.Values)
         {
-            if (!physicsQ.TryComp(anchored, out var anchoredPhys) || !anchoredPhys.CanCollide)
+            for (var i = 0; i < f.Shape.ChildCount; i++)
+            {
+                var t = new Transform(world.Position, rotation);
+                var child = f.Shape.ComputeAABB(t, i);
+                if (first)
+                {
+                    aabb = child;
+                    first = false;
+                }
+                else
+                {
+                    aabb = aabb.Union(child);
+                }
+            }
+        }
+
+        if (first)
+            return true;
+
+        var mapId = transform.GetMapId(uid);
+
+        List<EntityUid> hits = new List<EntityUid>();
+
+        foreach (var ent in EntityManager.GetEntities())
+        {
+            if (ent == uid)
                 continue;
 
-            if (!fixtureQ.TryComp(anchored, out var fixture))
+            var xformOther = Transform(ent);
+
+            if (xformOther.MapID != mapId)
                 continue;
 
-            var (anchoredLayer, anchoredMask) = physics.GetHardCollision(anchored.Value, fixture);
+            if (!physicsQ.TryComp(ent, out var otherBody))
+                continue;
 
-            if ((anchoredLayer & moverMask) != 0)
-                return false;
+            if (!otherBody.CanCollide)
+                continue;
 
-            if ((anchoredMask & moverLayer) != 0)
+            var otherAabb = _lookup.GetWorldAABB(ent);
+
+            if (aabb.Intersects(otherAabb))
+                hits.Add(ent);
+        }
+
+        var myLayer = body.CollisionLayer;
+        var myMask = body.CollisionMask;
+
+        foreach (var other in hits)
+        {
+            if (!physicsQ.TryComp(other, out var otherBody))
+                continue;
+
+            var otherLayer = otherBody.CollisionLayer;
+            var otherMask = otherBody.CollisionMask;
+
+            if ((myMask & otherLayer) != 0 || (myLayer & otherMask) != 0)
                 return false;
         }
 
         return true;
     }
+
 }
