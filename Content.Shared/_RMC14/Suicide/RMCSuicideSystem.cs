@@ -158,6 +158,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         _damageable.TryChangeDamage(user, ent.Comp.Damage, true);
         _mobState.ChangeMobState(user, MobState.Dead);
         _audio.PlayPredicted(gun.SoundGunshot, held, ent);
+        _unrevivable.MakeUnrevivable(user, false);
         EnsureComp<RMCHasSuicidedComponent>(user);
     }
 

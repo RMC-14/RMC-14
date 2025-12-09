@@ -249,11 +249,6 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString(unrevivable.ReasonMessage),
                 InGameICChatType.Speak, true);
         }
-        else if (HasComp<RMCHasSuicidedComponent>(target)) // RMC-Suicide-Fix
-        {
-            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unrevivable"),
-                InGameICChatType.Speak, true);
-        }
         else
         {
             if (_mobState.IsDead(target, mob))
