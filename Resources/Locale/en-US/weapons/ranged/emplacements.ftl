@@ -12,6 +12,9 @@ mountable-weapon-no-free-hands = You need both hands free to operate the weapon.
 emplacement-mount-RMCSmartGunMounted-name = ML66D mount
 emplacement-mount-RMCSmartGunMounted-description = A foldable mount for the ML66D, provides stability to the ML66D.
 emplacement-mount-RMCSmartGunMounted-description-mounted = A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
+emplacement-mount-RMCSmartGunMountedLoaded-name = ML66D mount
+emplacement-mount-RMCSmartGunMountedLoaded-description = A foldable mount for the ML66D, provides stability to the ML66D.
+emplacement-mount-RMCSmartGunMountedLoaded-description-mounted = A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
 
 emplacement-mount-RMCMachineGunM2C-description = The disassembled M2C HMG, with its telescopic tripods folded up and unable to fire.
 emplacement-mount-RMCMachineGunM2C-description-mounted = A deployable, heavy machine gun. The M2C 'Chimp' HB is a modified M2 HB reconfigured to fire 10x28 Caseless Tungsten rounds for USCM use. It is capable of recoilless fire and fast-rotating. However it has a debilitating overheating issue due to the poor quality of metals used in the parts, forcing it to be used in decisive, crushing engagements as a squad support weapon.

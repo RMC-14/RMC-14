@@ -1,5 +1,6 @@
 using Content.Shared.Item;
 using Content.Shared.Tools;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -12,13 +13,10 @@ namespace Content.Shared._RMC14.Emplacements;
 public sealed partial class WeaponMountComponent : Component
 {
     /// <summary>
-    ///     A list of prototypes that are allowed to be mounted.
+    ///     The whitelist that determines what entities are allowed to be mounted.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> AttachablePrototypes = new()
-    {
-        "RMCSmartGunMounted",
-    };
+    public EntityWhitelist? MountableWhitelist;
 
     /// <summary>
     ///     The prototype that spawns attached to the mount.

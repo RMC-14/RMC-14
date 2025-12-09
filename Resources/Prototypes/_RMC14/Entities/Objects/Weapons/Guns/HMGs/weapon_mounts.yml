@@ -144,6 +144,10 @@
   - type: Tag
     tags:
     - ML66DMount
+  - type: WeaponMount
+    mountableWhitelist:
+      tags:
+        - RMCSmartGunMounted
 
 - type: entity
   parent: RMCML66DMount
@@ -243,6 +247,7 @@
     canRotateWithoutTool: true
     mountOnDeploy: true
     barricadeExclusionAreaSize: 2
+    assembleDelay: 0.5
   - type: Tag
     tags:
     - M2CMount

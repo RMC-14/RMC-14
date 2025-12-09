@@ -30,6 +30,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -66,6 +67,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private const string AmmoExamineColor = "yellow";
     private const string FireRateExamineColor = "yellow";
@@ -348,7 +350,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             var ammoCountEvent = new GetAmmoCountEvent();
             RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
             if (ammoCountEvent.Count > 0)
+            {
+                _combatMode.SetInCombatMode(args.User, false);
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
+            }
         }
 
         UpdateAppearance(ent);
@@ -435,6 +440,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             args.Cancelled = true;
             return;
         }
+
+        _combatMode.SetInCombatMode(args.Buckle, true);
     }
 
     private void OnStrapped(Entity<WeaponMountComponent> ent, ref StrappedEvent args)
@@ -785,23 +792,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (!Resolve(mount, ref weaponMountComponent, false))
             return false;
 
-        if (TryComp(weapon, out MetaDataComponent? metaData) && metaData.EntityPrototype != null)
-        {
-            var validMount = false;
-            foreach (var prototype in weaponMountComponent.AttachablePrototypes)
-            {
-                if (metaData.EntityPrototype.ID != prototype.Id)
-                    continue;
-
-                validMount = true;
-                break;
-            }
-
-            if (!validMount)
-                return false;
-        }
-
-        return true;
+        return _whitelist.IsWhitelistPassOrNull(weaponMountComponent.MountableWhitelist, weapon);
     }
 
     private void OnWeaponOverheated(Entity<WeaponMountComponent> ent, ref MountableWeaponRelayedEvent<OverheatedEvent> args)
