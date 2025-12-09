@@ -1,10 +1,7 @@
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Marines.Squads;
-using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Suicide;
 using Content.Shared.Access.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
@@ -12,12 +9,14 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Coordinates;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.Coordinates;
+using Content.Shared._RMC14.Medical.Unrevivable;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
@@ -134,7 +133,7 @@ public sealed class DogtagsSystem : EntitySystem
         if (_rotting.IsRotten(wearer) ||
             _unrevivableSystem.IsUnrevivable(wearer) ||
             HasComp<RMCDefibrillatorBlockedComponent>(wearer) ||
-            _skills.HasSkill(taker, Skill, SkillRequired) || HasComp<RMCHasSuicidedComponent>(wearer))
+            _skills.HasSkill(taker, Skill, SkillRequired))
         {
             return true;
         }
