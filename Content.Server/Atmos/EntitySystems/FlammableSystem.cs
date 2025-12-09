@@ -279,7 +279,6 @@ namespace Content.Server.Atmos.EntitySystems
 
             Resist(ent, ent);
             _xenoSpit.Resist(ent.Owner);
-            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner));
             args.Handled = true;
         }
 
@@ -434,6 +433,7 @@ namespace Content.Server.Atmos.EntitySystems
             flammable.Resisting = true;
             Dirty(uid, flammable);
 
+            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner)); // RMC14
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
