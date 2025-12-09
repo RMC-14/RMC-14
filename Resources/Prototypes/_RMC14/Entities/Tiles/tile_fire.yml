@@ -109,10 +109,11 @@
     - map: [ "base" ]
       state: blue_4
   - type: PointLight
-    color: "#069420"
+    color: "#00b8ff"
   - type: RMCIgniteOnCollide
     intensity: 40
     duration: 45
+    maxStacks: 40
   - type: TileFire
     id: RMCTileFireBlue
     extinguishInstantly: false
@@ -455,3 +456,141 @@
           Two: { state: dynamic_1 }
           Three: { state: dynamic_1 }
           Four: { state: dynamic_1 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireStickyNapalm
+  suffix: StickyNapalm
+  components:
+  - type: Sprite
+    color: "#f8e3b2"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 50
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 50
+  - type: PointLight
+    radius: 5
+    color: "#f8e3b2"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireHCNapalm
+  suffix: HC Napalm
+  components:
+  - type: Sprite
+    color: "#c51c1c"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 10
+  - type: RMCIgniteOnCollide
+    intensity: 45
+    duration: 10
+  - type: PointLight
+    radius: 5
+    color: "#c51c1c"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmE
+  suffix: Napalm E
+  components:
+  - type: Sprite
+    color: "#800080"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 50
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 50
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#800080"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmEX
+  suffix: Napalm EX
+  components:
+  - type: Sprite
+    color: "#641dd6"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 40
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 40
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#641dd6"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireR189
+  suffix: R189
+  components:
+  - type: Sprite
+    color: "#ffe49c"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 30
+  - type: RMCIgniteOnCollide
+    intensity: 50
+    duration: 30
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#ffe49c"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }

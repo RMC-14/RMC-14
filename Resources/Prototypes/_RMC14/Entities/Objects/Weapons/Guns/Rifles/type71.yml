@@ -233,8 +233,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#9C9A19"
-#  - type: RefillableByBulletBox no bullet box yet
-#    bulletType: RMCBoxBulletsRifle
+  - type: RefillableByBulletBox
+    bulletType: null
 
 - type: entity
   parent: CMBaseCartridgeRifle

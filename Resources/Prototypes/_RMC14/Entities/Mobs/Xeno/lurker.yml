@@ -119,6 +119,7 @@
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
+    resetMeleeCooldown: true
   - type: XenoTailStab
     tailDamage:
       groups:

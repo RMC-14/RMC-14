@@ -1,0 +1,6 @@
+- type: decal
+  id: RMCDecalGibSplatterDrone
+  parent: RMCDecalBloodBase
+  sprite:
+    sprite: _RMC14/Decals/gibs.rsi
+    state: drone
