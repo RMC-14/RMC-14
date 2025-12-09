@@ -6,11 +6,13 @@ rmc-xeno-mature = Mature {$baseName}
 rmc-xeno-elder = Elder {$baseName}
 rmc-xeno-ancient = Ancient {$baseName}
 rmc-xeno-prime = Prime {$baseName}
+rmc-xeno-ruby = Prime {$baseName}
 
 rmc-xeno-mature-parasite = Fledgling {$baseName}
 rmc-xeno-elder-parasite = Veteran {$baseName}
 rmc-xeno-ancient-parasite = Baneful {$baseName}
 rmc-xeno-prime-parasite = Merciless {$baseName}
+rmc-xeno-ruby-parasite = Merciless {$baseName}
 
 # Only 1 because getting king multiple times will be rare
 rmc-xeno-mature-king = Ruthless {$baseName}
