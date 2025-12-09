@@ -8,6 +8,7 @@ using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Suicide;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
@@ -836,8 +837,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_mobState.IsDead(ent))
         {
             var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent) ||
+                HasComp<RMCHasSuicidedComponent>(ent))
+            {
                 status = TacticalMapBlipStatus.Undefibabble;
+            }
             else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
             else if (stage == 2)
@@ -872,11 +876,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
+        var playerId = user.Owner.Id;
 
         if (user.Comp.Xenos)
         {
-            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
-            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
+            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips.ToDictionary();
+            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate)
+            {
+                if (map.XenoBlips.TryGetValue(playerId, out var playerXenoBlip))
+                    user.Comp.XenoBlips[playerId] = playerXenoBlip;
+                else if (map.XenoStructureBlips.TryGetValue(playerId, out var playerXenoStructureBlip)) // Shouldn't happen but just in case
+                    user.Comp.XenoStructureBlips[playerId] = playerXenoStructureBlip;
+            }
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))
@@ -905,7 +918,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (user.Comp.Marines)
         {
-            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate && map.MarineBlips.TryGetValue(playerId, out var playerMarineBlip))
+                user.Comp.MarineBlips[playerId] = playerMarineBlip;
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))

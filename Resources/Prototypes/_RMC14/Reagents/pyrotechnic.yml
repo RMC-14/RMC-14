@@ -7,6 +7,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#E71B00"
+  toxin: true
   tileReactions:
   - !type:FlammableTileReaction {}
   reactiveEffects:
@@ -28,11 +29,165 @@
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalm
+  name: reagent-name-rmcnapalm
+  desc: reagent-desc-rmcnapalm
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ffb300"
+  # OXIDIZING = 6
+  # FUELING = 7
+  # FLOWING = 1
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmSticky
+  name: reagent-name-rmcnapalm-sticky
+  desc: reagent-desc-rmcnapalm-sticky
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#f8e3b2"
+  intensity: 15
+  duration: 50
+  radius: 5
+  fireEntity: RMCTileFireStickyNapalm
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmHighCombustion
+  name: reagent-name-rmcnapalm-hc
+  desc: reagent-desc-rmcnapalm-hc
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#c51c1c"
+  intensity: 45
+  duration: 10
+  radius: 5
+  fireEntity: RMCTileFireHCNapalm
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
   id: RMCNapalmUT
-  name: reagent-name-rmcnapalmut
-  desc: reagent-desc-rmcnapalmut
+  name: reagent-name-rmcnapalm-ut
+  desc: reagent-desc-rmcnapalm-ut
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#DD9B00"
   intensity: 30
   duration: 20
+  radius: 5
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCBGel
+  name: reagent-name-rmcbgel
+  desc: reagent-desc-rmcbgel
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00dd00"
+  intensity: 15
+  duration: 50
+  radius: 7
+  fireEntity: RMCTileFireGreen
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmX
+  name: reagent-name-rmcrapalm-x
+  desc: reagent-desc-rmcrapalm-x
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00b8ff"
+  intensity: 40
+  duration: 40
+  radius: 6
+  fireEntity: RMCTileFireBlue
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmB
+  name: reagent-name-rmcnapalm-b
+  desc: reagent-desc-rmcnapalm-b
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00dd00"
+  intensity: 15
+  duration: 50
+  radius: 6
+  fireEntity: RMCTileFireGreen
+  fireSpread: true
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmE
+  name: reagent-name-rmcnapalm-e
+  desc: reagent-desc-rmcnapalm-e
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#800080"
+  intensity: 15
+  duration: 50
+  radius: 6
+  fireEntity: RMCTileFireNapalmE
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmEX
+  name: reagent-name-rmcnapalm-ex
+  desc: reagent-desc-rmcnapalm-ex
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#641dd6"
+  intensity: 40
+  duration: 40
+  radius: 6
+  fireEntity: RMCTileFireNapalmEX
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCR189
+  name: reagent-name-rmcr189
+  desc: reagent-desc-rmcr189
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ffe49c"
+  intensity: 50
+  duration: 30
+  radius: 6
+  fireEntity: RMCTileFireR189
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCCLF3
+  name: reagent-name-rmcclf3
+  desc: reagent-desc-rmcclf3
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ff9300"
+  # OXIDIZING = 9
+  # IGNITING = 1
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:Corrosive
+        potency: 6
+      - !type:Toxic
+        potency: 6
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCMethane
+  name: reagent-name-rmcmethane
+  desc: reagent-desc-rmcmethane
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#0064C8"
+  # VISCOUS = 3
+  # FUELING = 2
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:Toxic
+        potency: 2
