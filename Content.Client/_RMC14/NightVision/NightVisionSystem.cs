@@ -212,7 +212,10 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
         _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
 
-        // Use only the brightness overlay to lift darkness without visor tint.
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
+        // No tint, just the half-brightness lift.
         _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
 
         _light.DrawLighting = true;
@@ -224,6 +227,10 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         _overlay.RemoveOverlay<NightVisionOverlay>();
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
         _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
+
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
         _light.DrawLighting = false;
         SetMesons(ent.Comp.Mesons);
     }
