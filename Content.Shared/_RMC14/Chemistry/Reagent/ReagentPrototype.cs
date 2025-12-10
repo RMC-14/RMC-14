@@ -29,6 +29,15 @@ public partial class ReagentPrototype
     public EntProtoId FireEntity = "RMCTileFire";
 
     [DataField]
+    public FixedPoint2 IntensityMod;
+
+    [DataField]
+    public FixedPoint2 DurationMod;
+
+    [DataField]
+    public FixedPoint2 RadiusMod;
+
+    [DataField]
     public bool FireSpread;
 
     [DataField]
