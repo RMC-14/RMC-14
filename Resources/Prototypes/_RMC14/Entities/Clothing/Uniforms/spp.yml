@@ -44,6 +44,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/medic.rsi
 
 - type: entity
+  parent: CMJumpsuitSPPMedic
+  id: RMCJumpsuitSPPMedicSurgicalWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen 
+
+- type: entity
   parent: CMJumpsuitSPP
   id: CMJumpsuitSPPEngi
   name: SPP engineer fatigues
