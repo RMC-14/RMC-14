@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
@@ -780,6 +781,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             _actionsSystem.SetIconOn(actionEnt, ent.Comp.IconActive);
             _actionsSystem.SetEnabled(actionEnt, ent.Comp.Attached);
             _actionsSystem.SetUseDelay(actionEnt, ent.Comp.UseDelay);
+            _actionsSystem.SetItemIconStyle(actionEnt, ent.Comp.ActionIconStyle);
         }
 
         Dirty(ent);
