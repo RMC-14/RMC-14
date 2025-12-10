@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 01:57:03
-  entityCount: 5729
+  time: 11/19/2025 02:38:33
+  entityCount: 5734
 maps:
 - 1
 grids:
@@ -657,6 +657,11 @@ entities:
             204: -12,-11
             205: -9,-11
             206: -8,-11
+        - node:
+            color: '#0B0806FF'
+            id: splatter
+          decals:
+            323: 50.345585,-7.0037365
     - type: MapAtmosphere
       space: False
       mixture:
@@ -14075,6 +14080,26 @@ entities:
     - type: Transform
       pos: 40.5,68.5
       parent: 23
+  - uid: 5730
+    components:
+    - type: Transform
+      pos: 22.5,22.5
+      parent: 23
+  - uid: 5731
+    components:
+    - type: Transform
+      pos: 28.5,19.5
+      parent: 23
+  - uid: 5732
+    components:
+    - type: Transform
+      pos: 50.5,11.5
+      parent: 23
+  - uid: 5733
+    components:
+    - type: Transform
+      pos: 45.5,29.5
+      parent: 23
 - proto: CMRack
   entities:
   - uid: 143
@@ -21302,6 +21327,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 37.5,10.5
+      parent: 23
+  - uid: 5729
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,7.5
       parent: 23
 - proto: CMWallMetalAlmayerWhite
   entities:
@@ -29488,7 +29519,7 @@ entities:
       parent: 23
 - proto: RMCChemStorageOCP
   entities:
-  - uid: 5729
+  - uid: 5734
     components:
     - type: Transform
       pos: 19.5,49.5

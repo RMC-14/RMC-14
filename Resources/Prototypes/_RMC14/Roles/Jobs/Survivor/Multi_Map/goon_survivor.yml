@@ -11,15 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
-        RMCSkillVehicles: 1
+      preset: SurvivorGoon
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -43,7 +35,7 @@
     back: RMCSatchelLightpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponRifleM54CWhite
-    pocket1: RMCPouchSurvivalFill
+    pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:

@@ -171,9 +171,12 @@ public sealed class CMDoorSystem : EntitySystem
                 args.Cancelled = true;
         }
 
-        if (_rmcPower.IsPowered(ent) && !HasComp<XenoComponent>(args.User))
-            args.Cancelled = true;
+        // Xenos can pry powered airlocks
+        if (HasComp<XenoComponent>(args.User) && HasComp<AirlockComponent>(ent))
+            return;
 
+        if (_rmcPower.IsPowered(ent))
+            args.Cancelled = true;
     }
 
     private void OnDoorPry(Entity<DoorComponent> ent, ref RMCDoorPryEvent args)

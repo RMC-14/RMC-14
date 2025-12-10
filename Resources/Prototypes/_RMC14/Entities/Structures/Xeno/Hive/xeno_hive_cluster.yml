@@ -28,9 +28,7 @@
     level: 3
     blockOtherWeeds: true
     spreadsOnSemiWeedable: true
-  - type: ReplaceWeedSourceOnWeeding
-    replacementPairs:
-      RMCCommunicationsTower: HivePylonXeno
+  - type: HiveCluster
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresWeedableSurface

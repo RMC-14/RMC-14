@@ -40,6 +40,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Storage;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -55,6 +58,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -69,6 +73,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -188,7 +193,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnExamined(Entity<CMAutomatedVendorComponent> ent, ref ExaminedEvent args)
     {
-        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
+        if (!_skills.HasSkill(args.Examiner, ent.Comp.HackSkill, ent.Comp.HackSkillLevel) || !ent.Comp.Hackable)
             return;
 
         using (args.PushGroup(nameof(CMAutomatedVendorComponent)))
@@ -238,18 +243,45 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
+        var validJob = false;
         if (vendor.Comp.Jobs.Count == 0)
-            return;
-
-        _mind.TryGetMind(args.User, out var mindId, out _);
-        foreach (var job in vendor.Comp.Jobs)
         {
-            if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
-                return;
-
-            if (vendorUser?.Id == job)
-                return;
+            validJob = true;
         }
+        else
+        {
+            _mind.TryGetMind(args.User, out var mindId, out _);
+            foreach (var job in vendor.Comp.Jobs)
+            {
+                if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
+                    validJob = true;
+                else if (vendorUser?.Id == job)
+                    validJob = true;
+
+                if (validJob)
+                    break;
+            }
+        }
+
+        var validRank = false;
+        if (vendor.Comp.Ranks.Count == 0)
+        {
+            validRank = true;
+        }
+        else if (_rank.GetRank(args.User) is { } userRank)
+        {
+            foreach (var rank in vendor.Comp.Ranks)
+            {
+                if (userRank == rank)
+                {
+                    validRank = true;
+                    break;
+                }
+            }
+        }
+
+        if (validJob && validRank)
+            return;
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
         args.Cancel();
@@ -431,7 +463,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!validJob)
+        var validRank = true;
+        foreach (var rank in section.Ranks)
+        {
+            var userRank = _rank.GetRank(actor);
+            if (userRank == null || rank != userRank)
+                validRank = false;
+            else
+            {
+                validRank = true;
+                break;
+            }
+        }
+
+        if (!validJob || !validRank)
             return;
 
         var validHoliday = section.Holidays.Count == 0;
@@ -472,7 +517,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 user.TakeOne.Remove(takeOne);
         }
 
-        if (section.SharedSpecLimit is { } globalLimit)
+        if (section.SharedSpecLimit is { } globalLimit && !HasComp<IgnoreSpecLimitsComponent>(actor))
         {
             if (HasComp<RMCVendorSpecialistComponent>(vendor))
             {
@@ -634,12 +679,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 foreach (var bundled in bundle.Bundle)
                 {
-                    Vend(vendor, actor, bundled, offset);
+                    Vend(vendor, actor, bundled, offset, entry.ReplaceSlot);
                 }
             }
             else
             {
-                Vend(vendor, actor, entry.Id, offset);
+                Vend(vendor, actor, entry.Id, offset, entry.ReplaceSlot);
             }
         }
 
@@ -650,7 +695,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset)
+    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, SlotFlags? replaceSlot = null)
     {
         if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
@@ -679,16 +724,16 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var finalPlacementCoordinates = requisitionsChair.Owner.ToCoordinates().Offset(itemPlacementOffset);
             var spawn = SpawnAtPosition(toVend, finalPlacementCoordinates);
 
-            AfterVend(spawn, player, vendor, offset, true);
+            AfterVend(spawn, player, vendor, offset, true, replaceSlot);
         }
         else
         {
             var spawn = SpawnNextToOrDrop(toVend, vendor);
-            AfterVend(spawn, player, vendor, offset);
+            AfterVend(spawn, player, vendor, offset, replaceSlot: replaceSlot);
         }
     }
 
-    private void AfterVend(EntityUid spawn, EntityUid player, EntityUid vendor, Vector2 offset, bool vended = false)
+    private void AfterVend(EntityUid spawn, EntityUid player, EntityUid vendor, Vector2 offset, bool vended = false, SlotFlags? replaceSlot = null)
     {
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
@@ -705,7 +750,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!vended)
         {
-            var grabbed = Grab(player, spawn);
+            var grabbed = Grab(player, spawn, replaceSlot);
             if (!grabbed && TryComp(spawn, out TransformComponent? xform))
                 _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
         }
@@ -717,7 +762,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             $"{ToPrettyString(player)} vended {ToPrettyString(spawn)} from vendor {ToPrettyString(vendor)}");
     }
 
-    private bool Grab(EntityUid player, EntityUid item)
+    private bool Grab(EntityUid player, EntityUid item, SlotFlags? replaceSlot = null)
     {
         if (!HasComp<ItemComponent>(item))
             return false;
@@ -726,8 +771,28 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return true;
 
         if (!TryComp(item, out ClothingComponent? clothing))
-        {
             return _hands.TryPickupAnyHand(player, item);
+
+        if (replaceSlot != null)
+        {
+            EntityUid? itemToReplace = null;
+
+            var slots = _inventory.GetSlotEnumerator(player, replaceSlot.Value);
+            while (slots.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity != null)
+                {
+                    itemToReplace = slot.ContainedEntity;
+                    _inventory.TryUnequip(player, slot.ID, true);
+                    break;
+                }
+            }
+
+            if (itemToReplace != null)
+            {
+                if (HasComp<StorageComponent>(item) && HasComp<StorageComponent>(itemToReplace))
+                    _storage.TransferEntities(itemToReplace.Value, item);
+            }
         }
 
         if (_cmInventory.TryEquipClothing(player, (item, clothing), doRangeCheck: false))
