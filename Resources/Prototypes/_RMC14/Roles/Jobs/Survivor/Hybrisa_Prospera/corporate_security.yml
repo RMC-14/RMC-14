@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMSurvivorSecurity
+  parent: CMSurvivorGoon
   id: RMCSurvivorHybrisaCorporateSecurity
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
@@ -7,8 +7,7 @@
   accessGroups:
   - ColonistAllAccessNoArmory
   - ColonistCorporate
-  spawnMenuRoleName: We-Ya Corporate Security (Hybrisa Survivor)
-  icon: "RMCJobIconPMCGoonStandard"
+  spawnMenuRoleName: We-Ya Goon (Hybrisa Survivor)
   hasIcon: true
   special:
   - !type:AddComponentSpecial
@@ -25,7 +24,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
