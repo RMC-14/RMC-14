@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Fixed ABR40 mags not being refillable
-    type: Fix
-  id: 2159
-  time: '2025-08-06T04:29:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7357
 - author: Ian321
   changes:
   - message: dogtags can now be worn around the neck
@@ -4748,5 +4741,12 @@
   id: 2661
   time: '2025-12-10T01:26:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8643
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed a syntax error in mortar beep notifications
+    type: Fix
+  id: 2662
+  time: '2025-12-10T01:29:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8640
 Name: RMC14
 Order: -1
