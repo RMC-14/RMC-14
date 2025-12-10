@@ -372,6 +372,8 @@
   name: M35 pyrotechnician helmet
   description: A helmet designed for UNMC Pyrotechnicians.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m35/jungle.rsi
   - type: Clothing

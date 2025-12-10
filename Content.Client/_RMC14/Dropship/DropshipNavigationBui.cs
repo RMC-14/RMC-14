@@ -116,23 +116,28 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             button.Disabled = disabled;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
-            button.Button.ToggleMode = true;
+            button.Button.ToggleMode = false;
             button.Button.OnPressed += _ =>
             {
+                ResetDestinationButtons();
                 button.Text = $"> {name}";
                 SetLaunchDisabled(false);
                 SetCancelDisabled(false);
                 onPressed();
-                ResetDestinationButtons();
             };
 
             return button;
         }
 
-        if (destinations.FlyBy is { } flyBy)
-            _window.DestinationsContainer.AddChild(DestinationButton("Flyby", false, () => _selected = flyBy));
-
         _destinations.Clear();
+        if (destinations.FlyBy is { } flyBy)
+        {
+            var flyByName = "Flyby";
+            var flyByButton = DestinationButton(flyByName, false, () => _selected = flyBy);
+            _destinations[flyByButton] = flyByName;
+            _window.DestinationsContainer.AddChild(flyByButton);
+        }
+
         foreach (var destination in destinations.Destinations)
         {
             var name = destination.Name;

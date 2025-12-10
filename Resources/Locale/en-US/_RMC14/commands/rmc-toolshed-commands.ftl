@@ -93,3 +93,5 @@ command-description-stairwell = Sets the teleportation offset for the given Tele
 command-description-stairwellprojector = Sets the projection id for the given TeleporterView entities.
 
 command-description-getusername = Gets the username attached to an entity.
+
+command-description-mobstate = Filter entities by their MobState.
