@@ -17,6 +17,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly NightVisionPreferencesSystem _prefs = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<NightVisionComponent> _nvQuery;
@@ -30,6 +31,36 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
         _nvQuery = _entity.GetEntityQuery<NightVisionComponent>();
+    }
+
+    /// <summary>
+    /// Call this when the night vision color preference changes to refresh overlays (marines only).
+    /// </summary>
+    public void RefreshNightVisionColor()
+    {
+        if (_player.LocalEntity == null)
+            return;
+
+        if (IsLocalXeno())
+            return;
+
+        if (!_nvQuery.TryComp(_player.LocalEntity.Value, out var nightVision))
+            return;
+
+        if (nightVision.State == NightVisionState.Off)
+            return;
+
+        nightVision.Color = _prefs.GetPreferredColor();
+
+        switch (nightVision.State)
+        {
+            case NightVisionState.Half:
+                Half((_player.LocalEntity.Value, nightVision));
+                break;
+            case NightVisionState.Full:
+                Full((_player.LocalEntity.Value, nightVision));
+                break;
+        }
     }
 
     private void OnNightVisionAttached(Entity<NightVisionComponent> ent, ref LocalPlayerAttachedEvent args)
@@ -46,6 +77,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     {
         if (ent != _player.LocalEntity)
             return;
+
+        if (!IsLocalXeno())
+            ent.Comp.Color = _prefs.GetPreferredColor();
 
         switch (ent.Comp.State)
         {
@@ -92,11 +126,16 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void Half(Entity<NightVisionComponent> ent)
     {
+        if (IsLocalXeno())
+        {
+            XenoHalf(ent);
+            return;
+        }
+
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
 
-        if (ent.Comp.Green)
-            _overlay.AddOverlay(new NightVisionFilterOverlay());
+        _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
 
@@ -106,13 +145,20 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void Full(Entity<NightVisionComponent> ent)
     {
+        if (IsLocalXeno())
+        {
+            XenoFull(ent);
+            return;
+        }
+
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
 
-        if (ent.Comp.Green)
-            _overlay.AddOverlay(new NightVisionFilterOverlay());
+        _overlay.AddOverlay(new NightVisionFilterOverlay());
 
-        _light.DrawLighting = false;
+        // Keep lighting on so brightness reacts to lit/dark areas; lift darkness via brighter overlay for marines.
+        _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay(brightness: 0.50f));
+        _light.DrawLighting = true;
         SetMesons(ent.Comp.Mesons);
     }
 
@@ -145,6 +191,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (_player.LocalEntity == null)
             return;
 
+        if (IsLocalXeno())
+            return;
+
         if (!_nvQuery.TryComp(_player.LocalEntity.Value, out var nightVision))
             return;
 
@@ -152,5 +201,39 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
             return;
 
         SetMesonSprites(nightVision.Mesons);
+    }
+
+    private bool IsLocalXeno()
+    {
+        return _player.LocalEntity != null && _xenoQuery.HasComp(_player.LocalEntity.Value);
+    }
+
+    private void XenoHalf(Entity<NightVisionComponent> ent)
+    {
+        _overlay.RemoveOverlay<NightVisionOverlay>();
+        _overlay.RemoveOverlay<NightVisionFilterOverlay>();
+        _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
+
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
+        // No tint, just the half-brightness lift.
+        _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
+
+        _light.DrawLighting = true;
+        SetMesons(ent.Comp.Mesons);
+    }
+
+    private void XenoFull(Entity<NightVisionComponent> ent)
+    {
+        _overlay.RemoveOverlay<NightVisionOverlay>();
+        _overlay.RemoveOverlay<NightVisionFilterOverlay>();
+        _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>();
+
+        if (ent.Comp.Overlay)
+            _overlay.AddOverlay(new NightVisionOverlay());
+
+        _light.DrawLighting = false;
+        SetMesons(ent.Comp.Mesons);
     }
 }

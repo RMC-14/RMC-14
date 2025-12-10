@@ -93,9 +93,6 @@ public sealed class NightVisionOverlay : Overlay
 
         handle.SetTransform(Matrix3x2.Identity);
 
-        if (!nightVision.Green)
-            return;
-
         if (ScreenTexture == null || args.Viewport.Eye == null)
             return;
 

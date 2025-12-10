@@ -25,7 +25,7 @@ public sealed partial class NightVisionComponent : Component
     public bool SeeThroughContainers;
 
     [DataField, AutoNetworkedField]
-    public bool Green;
+    public NightVisionColor Color = NightVisionColor.Green;
 
     [DataField, AutoNetworkedField]
     public bool Mesons;
