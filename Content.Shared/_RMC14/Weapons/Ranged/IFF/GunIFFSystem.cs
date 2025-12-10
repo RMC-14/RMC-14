@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
@@ -17,6 +19,7 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
 
     public override void Initialize()
     {
@@ -26,45 +29,38 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
-        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
+        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: new[] { typeof(AttachableIFFSystem) });
         SubscribeLocalEvent<GunIFFComponent, ExaminedEvent>(OnGunIFFExamined);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
     private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
     {
-        args.Faction ??= ent.Comp.Faction;
+        args.Factions.UnionWith(ent.Comp.Factions);
     }
 
     private void OnInventoryIFFGetFaction(Entity<InventoryComponent> ent, ref GetIFFFactionEvent args)
     {
-        if (args.Faction != null)
-            return;
-
         _inventory.RelayEvent(ent, ref args);
     }
 
     private void OnHandsIFFGetFaction(Entity<HandsComponent> ent, ref GetIFFFactionEvent args)
     {
-        if (args.Faction != null)
-            return;
-
         foreach (var held in _hands.EnumerateHeld((ent, ent)))
         {
             RaiseLocalEvent(held, ref args);
-            if (args.Faction != null)
-                break;
         }
     }
 
     private void OnItemIFFGetFaction(Entity<ItemIFFComponent> ent, ref InventoryRelayedEvent<GetIFFFactionEvent> args)
     {
-        args.Args.Faction ??= ent.Comp.Faction;
+        if (ent.Comp.Factions.Count > 0)
+            args.Args.Factions.UnionWith(ent.Comp.Factions);
     }
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
+        GiveAmmoIFF(ent.Owner, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
     }
 
     private void OnGunIFFExamined(Entity<GunIFFComponent> ent, ref ExaminedEvent args)
@@ -80,17 +76,20 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
     {
-        if (args.Cancelled ||
-            ent.Comp.Faction is not { } faction)
-        {
+        if (args.Cancelled)
             return;
+
+        if (!ent.Comp.Enabled)
+            return;
+
+        foreach (var faction in ent.Comp.Factions)
+        {
+            if (IsInFaction(args.OtherEntity, faction))
+            {
+                args.Cancelled = true;
+                return;
+            }
         }
-
-        if (ent.Comp.Enabled && IsInFaction(args.OtherEntity, faction))
-            args.Cancelled = true;
-
-        if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
-            args.Cancelled = true;
     }
 
     /// <summary>
@@ -100,10 +99,10 @@ public sealed class GunIFFSystem : EntitySystem
     {
         faction = default;
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false) ||
-            user.Comp.Faction is not { } userFaction)
+            user.Comp.Factions.Count == 0)
             return false;
 
-        faction = userFaction;
+        faction = user.Comp.Factions.First();
         return true;
     }
 
@@ -113,54 +112,119 @@ public sealed class GunIFFSystem : EntitySystem
     public bool TryGetFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction, SlotFlags slots = SlotFlags.IDCARD)
     {
         faction = default;
+        var buffer = new HashSet<EntProtoId<IFFFactionComponent>>();
+        if (!TryGetFactions(user, buffer, slots))
+            return false;
+
+        faction = buffer.First();
+        return true;
+    }
+
+    public bool TryGetFactions(Entity<UserIFFComponent?> user, HashSet<EntProtoId<IFFFactionComponent>> factions, SlotFlags slots = SlotFlags.IDCARD)
+    {
+        factions.Clear();
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
-        var ev = new GetIFFFactionEvent(null, slots);
+        factions.UnionWith(user.Comp.Factions);
+
+        var ev = new GetIFFFactionEvent(slots, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(user, ref ev);
 
-        if (ev.Faction is not { } newFaction)
+        factions.UnionWith(ev.Factions);
+
+        if (factions.Count == 0)
             return false;
 
-        faction = newFaction;
+        if (_userIFFQuery.Resolve(user, ref user.Comp, false))
+            user.Comp.Factions.UnionWith(ev.Factions);
+
         return true;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
     {
-        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
-            return false;
+        var uid = user.Owner;
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(user, ref ev);
-        return ev.Faction == faction;
+        if (_userIFFQuery.Resolve(user, ref user.Comp, false))
+        {
+            if (user.Comp.Factions.Count > 0 && user.Comp.Factions.Contains(faction))
+                return true;
+        }
+
+        var ev = new GetIFFFactionEvent(SlotFlags.IDCARD, new HashSet<EntProtoId<IFFFactionComponent>>());
+        RaiseLocalEvent(uid, ref ev);
+
+        if (ev.Factions.Count > 0 && ev.Factions.Contains(faction))
+            return true;
+
+        return false;
+    }
+
+    public bool IsInFaction(EntityUid uid, EntProtoId<IFFFactionComponent> faction)
+    {
+        return IsInFaction((uid, null), faction);
     }
 
     public void SetIdFaction(Entity<ItemIFFComponent> card, EntProtoId<IFFFactionComponent> faction)
     {
-        card.Comp.Faction = faction;
+        card.Comp.Factions.Clear();
+        card.Comp.Factions.Add(faction);
         Dirty(card);
     }
 
     public void SetUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
     {
         user.Comp = EnsureComp<UserIFFComponent>(user);
-        user.Comp.Faction = faction;
+        user.Comp.Factions.Clear();
+        user.Comp.Factions.Add(faction);
+        Dirty(user);
+    }
+
+    public void AddUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
+    {
+        user.Comp = EnsureComp<UserIFFComponent>(user);
+        user.Comp.Factions.Add(faction);
+        Dirty(user);
+    }
+
+    public void RemoveUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
+    {
+        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
+            return;
+
+        user.Comp.Factions.Remove(faction);
+        Dirty(user);
+    }
+
+    public void ClearUserFactions(Entity<UserIFFComponent?> user)
+    {
+        user.Comp = EnsureComp<UserIFFComponent>(user);
+        user.Comp.Factions.Clear();
         Dirty(user);
     }
 
     public void SetIFFState(EntityUid ent, bool enabled)
     {
-        if (TryComp<GunIFFComponent>(ent, out var comp))
-        {
-            comp.Enabled = enabled;
-            Dirty(ent, comp);
-        }
+        if (!TryComp<GunIFFComponent>(ent, out var comp))
+            return;
+
+        comp.Enabled = enabled;
+        Dirty(ent, comp);
+    }
+
+    public void EnableIntrinsicIFF(EntityUid ent)
+    {
+        var comp = EnsureComp<GunIFFComponent>(ent);
+        comp.Intrinsic = true;
+        comp.Enabled = true;
+        Dirty(ent, comp);
     }
 
     public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)
     {
         EntityUid owner;
+
         if (intrinsic)
         {
             owner = gun;
@@ -174,22 +238,26 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (!_userIFFQuery.HasComp(owner))
-        {
+        if (!_userIFFQuery.TryComp(owner, out var ownerIFF))
             return;
-        }
 
-        var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(owner, ref ev);
-
-        if (ev.Faction is not { } id)
+        _factionBuffer.Clear();
+        if (!TryGetFactions((owner, ownerIFF), _factionBuffer, SlotFlags.IDCARD))
             return;
+
+        var hasAnyFaction = enabled && _factionBuffer.Count > 0;
 
         foreach (var projectile in args.FiredProjectiles)
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
-            iff.Faction = id;
-            iff.Enabled = enabled;
+
+            iff.Factions.Clear();
+            foreach (var faction in _factionBuffer)
+            {
+                iff.Factions.Add(faction);
+            }
+
+            iff.Enabled = hasAnyFaction;
             Dirty(projectile, iff);
         }
     }
@@ -197,7 +265,23 @@ public sealed class GunIFFSystem : EntitySystem
     public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
     {
         var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
-        projectileIFFComponent.Faction = faction;
-        projectileIFFComponent.Enabled = enabled;
+        projectileIFFComponent.Factions.Clear();
+        if (faction is { } add)
+            projectileIFFComponent.Factions.Add(add);
+
+        projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
+        Dirty(uid, projectileIFFComponent);
+    }
+
+    public void GiveAmmoMultiFactionIFF(EntityUid uid, HashSet<EntProtoId<IFFFactionComponent>> factions, bool enabled)
+    {
+        var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
+        projectileIFFComponent.Factions.Clear();
+
+        foreach (var faction in factions)
+            projectileIFFComponent.Factions.Add(faction);
+
+        projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
+        Dirty(uid, projectileIFFComponent);
     }
 }

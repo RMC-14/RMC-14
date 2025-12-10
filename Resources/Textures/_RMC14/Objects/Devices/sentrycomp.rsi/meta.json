@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "cmss13",
+  "source": "https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/sentrycomp.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sentrycomp_cl"
+    },
+    {
+      "name": "sentrycomp_op"
+    },
+    {
+      "name": "sentrycomp_on"
+    }
+  ]
+}
