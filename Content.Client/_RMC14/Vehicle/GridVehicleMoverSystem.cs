@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Numerics;
+using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -8,7 +10,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Client.Vehicle;
 
@@ -42,8 +43,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
 
     private readonly Color[] colors =
     {
-        Color.Red, Color.Green, Color.Blue,
-        Color.Yellow, Color.Magenta, Color.Cyan, Color.Orange
+        Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta, Color.Cyan, Color.Orange
     };
 
     public GridVehicleMoverOverlay(IEntityManager ents)
@@ -59,28 +59,36 @@ public sealed class GridVehicleMoverOverlay : Overlay
     protected override void Draw(in OverlayDrawArgs args)
     {
         var handle = args.WorldHandle;
-
         var q = ents.EntityQueryEnumerator<GridVehicleMoverComponent, TransformComponent>();
         while (q.MoveNext(out var uid, out var mover, out var xform))
         {
             if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out _))
                 continue;
-
             DrawMovement(handle, grid, mover);
             DrawFacing(handle, uid, mover);
             DrawFixtures(handle, uid);
             DrawPhysics(handle, uid);
         }
+        foreach (var entry in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles)
+        {
+            var grid = entry.grid;
+            var tile = entry.tile;
+            if (!gridQ.TryComp(grid, out _))
+                continue;
+            var center = transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f))).Position;
+            var min = center - new Vector2(0.5f, 0.5f);
+            var max = center + new Vector2(0.5f, 0.5f);
+            var box = new Box2(min, max);
+            handle.DrawRect(box, Color.Black.WithAlpha(0.4f), false);
+        }
+        Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles.Clear();
     }
 
     private void DrawMovement(DrawingHandleWorld h, EntityUid grid, GridVehicleMoverComponent mover)
     {
         var start = transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
-        var target = transform.ToMapCoordinates(new EntityCoordinates(grid,
-            new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f))).Position;
-
+        var target = transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f))).Position;
         h.DrawLine(start, target, Color.Lime);
-
         var color = mover.IsCommittedToMove ? Color.White : Color.Red;
         h.DrawCircle(start, 0.15f, color);
         h.DrawCircle(target, 0.15f, Color.Yellow);
@@ -90,11 +98,9 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         if (mover.CurrentDirection == Vector2i.Zero)
             return;
-
         var xform = ents.GetComponent<TransformComponent>(uid);
         if (xform.GridUid is not { } grid)
             return;
-
         var pos = transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
         var dir = Vector2.Normalize(new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y));
         h.DrawLine(pos, pos + dir * 0.7f, Color.Orange);
@@ -106,9 +112,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
             return;
         if (!fixturesQ.TryComp(uid, out var fixtures))
             return;
-
         var index = 0;
-
         foreach (var f in fixtures.Fixtures.Values)
         {
             for (var i = 0; i < f.ProxyCount; i++)
@@ -118,7 +122,6 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 var col = colors[index % colors.Length];
                 h.DrawRect(box, col, false);
             }
-
             index++;
         }
     }
@@ -127,7 +130,6 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         var aabb = lookup.GetWorldAABB(uid);
         h.DrawRect(aabb, Color.Magenta, false);
-
         var pos = transform.GetWorldPosition(uid);
         h.DrawCircle(pos, 0.12f, Color.Magenta);
     }

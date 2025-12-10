@@ -7,7 +7,7 @@ using Robust.Shared.Maths;
 namespace Content.Shared.Vehicle.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(Content.Shared.Vehicle.GridVehicleMoverSystem))]
+[Access(typeof(Content.Shared.Vehicle.GridVehicleMoverSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class GridVehicleMoverComponent : Component
 {
     [AutoNetworkedField]
