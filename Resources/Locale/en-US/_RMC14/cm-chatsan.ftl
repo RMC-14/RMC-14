@@ -855,16 +855,24 @@ cm-chatsan-word-evos = evos
 cm-chatsan-replacement-evos = evolutions
 
 cm-chatsan-word-tax = tax
+cm-chatsan-word-xax = xax
 cm-chatsan-replacement-tax = build
 
 cm-chatsan-word-taxes = taxes
+cm-chatsan-word-xaxes = xaxes
 cm-chatsan-replacement-taxes = building
 
 cm-chatsan-word-taxing = taxing
+cm-chatsan-word-xaxing = xaxing
 cm-chatsan-replacement-taxing = building
 
 cm-chatsan-word-taxed = taxed
+cm-chatsan-word-xaxed = xaxed
 cm-chatsan-replacement-taxed = built
+
+cm-chatsan-word-taxer = taxer
+cm-chatsan-word-xaxer = xaxer
+cm-chatsan-replacement-taxer = builder
 
 cm-chatsan-word-pb = pb
 cm-chatsan-replacement-pb = point blank

@@ -155,6 +155,9 @@
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer
+    sourceWhitelist:
+      tags:
+      - RMCTankReagent
   - type: RefillableSolution
     solution: rmc_flamer_tank
   - type: DetailedExaminableSolution
@@ -166,6 +169,12 @@
   - type: Appearance
   - type: SolutionStorageFillable
     solution: rmc_flamer_tank
+  - type: RMCPressurizedSolution
+    solution: rmc_flamer_tank
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    canSend: false
+    canReceive: false
   - type: Tag
     tags:
     - RMCTankFlamer
