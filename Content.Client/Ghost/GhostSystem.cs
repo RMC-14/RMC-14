@@ -163,7 +163,6 @@ namespace Content.Client.Ghost
         {
             GhostVisibility = false;
             PlayerDetached?.Invoke();
-            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
         }
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)
