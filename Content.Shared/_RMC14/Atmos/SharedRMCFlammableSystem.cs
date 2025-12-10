@@ -399,6 +399,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
     }
 
+    public virtual void DoStopDropRollAnimation(EntityUid uid)
+    {
+    }
+
     private void SpawnFireChain(EntProtoId spawn, EntityUid chain, EntityCoordinates coordinates, int? intensity, int? duration)
     {
         var spawned = Spawn(spawn, coordinates);
