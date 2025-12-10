@@ -1490,7 +1490,7 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHeadsetSeniorCommand
+      - id: RMCHeadsetMarineCommand
     - name: Gloves
       jobs:
       - CMAuxiliarySupportOfficer
