@@ -156,7 +156,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
         _overlay.AddOverlay(new NightVisionFilterOverlay());
 
-        _light.DrawLighting = false;
+        // Keep lighting on so brightness reacts to lit/dark areas; lift darkness via brighter overlay for marines.
+        _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay(brightness: 0.50f));
+        _light.DrawLighting = true;
         SetMesons(ent.Comp.Mesons);
     }
 
