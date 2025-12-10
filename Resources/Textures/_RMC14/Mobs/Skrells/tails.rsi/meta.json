@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/commit/f9815fac410eda828448e1e438021e7bba37f575 and https://github.com/ParadiseSS13/Paradise/blob/f9815fac410eda828448e1e438021e7bba37f575/icons/mob/body_accessory.dmi, converted to black and white and split into seperate sprites for fringes with slight edits by Monotheonist",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "skrell_shortfringetail",
+      "directions": 4
+    },
+    {
+      "name": "skrell_shortfringetail_fringe",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fringetail",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fringetail_fringe",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail",
+      "directions": 4
+    },
+    {
+      "name": "skrell_longfringetail_fringe",
+      "directions": 4
+    },
+    {
+      "name": "skrell_xlongfringetail",
+      "directions": 4
+    },
+    {
+      "name": "skrell_xlongfringetail_fringe",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_short",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tail_xlong",
+      "directions": 4
+    }
+  ]
+}
