@@ -1,0 +1,4 @@
+﻿author: yagwog
+changes:
+- type: Fix
+  message: Fixed ghost half bright staying after returning to your body.

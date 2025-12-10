@@ -1,0 +1,4 @@
+﻿author: Aurallianz
+changes:
+- type: Fix
+  message: Fixed nuke also killing everyone not on the planet.
