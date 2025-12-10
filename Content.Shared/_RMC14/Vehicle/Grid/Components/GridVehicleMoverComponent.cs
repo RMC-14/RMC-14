@@ -40,6 +40,10 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public float ReverseAcceleration = 4f;
 
+    // Distance from physics origin to the vehicle's front anchor (meters).
+    [DataField, AutoNetworkedField]
+    public float FrontOffset = 0f;
+
     [AutoNetworkedField]
     public bool IsCommittedToMove;
 
