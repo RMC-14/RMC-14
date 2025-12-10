@@ -80,14 +80,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Check if the blocker is facing towards the target.
-    /// </summary>
-    /// <param name="blocker">The entity whose direction is checked.</param>
-    /// <param name="target">The entity that is checked to see if it is in front of the blocker</param>
-    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
-    /// <returns>True if the blocker is facing the target</returns>
-    public bool IsFacingTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    private sbyte GetRelativeDiff(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
     {
         var targetCoordinates = _transform.GetMoverCoordinates(target);
         if (originCoordinates != null)
@@ -99,8 +92,38 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         var blockerDirection = blockerCoordinates.worldRot.GetDir();
         var relativeDiff = Math.Abs(dir - blockerDirection);
 
+        return relativeDiff;
+    }
+
+    /// <summary>
+    ///     Check if the blocker is facing towards the target.
+    /// </summary>
+    /// <param name="blocker">The entity whose direction is checked.</param>
+    /// <param name="target">The entity that is checked to see if it is in front of the blocker</param>
+    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
+    /// <returns>True if the blocker is facing the target</returns>
+    public bool IsFacingTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    {
+        var relativeDiff = GetRelativeDiff(blocker, target, originCoordinates);
+
         // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
-        return relativeDiff is 0 or 1 or 7;
+        return relativeDiff is 0 or 1 or 7; // Front
+    }
+
+    /// <summary>
+    ///     Check if the blocker is behind the target.
+    /// </summary>
+    /// <param name="blocker">The entity whose direction is checked.</param>
+    /// <param name="target">The entity that is checked to see if it is behind the blocker</param>
+    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
+    /// <returns>True if the blocker is behind the target</returns>
+    public bool IsBehindTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    {
+        var relativeDiff = GetRelativeDiff(blocker, target, originCoordinates);
+
+        // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
+        // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
+        return relativeDiff is 3 or 4 or 5; // Opposite directions
     }
 }

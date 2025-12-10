@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseStructureCorrodible
+  parent: CMBarricadeBase
   id: RMCBarricadeWood
   name: wooden barricade
   description: A wall made out of wooden planks nailed together. Not very sturdy, but can provide some concealment.
@@ -9,27 +9,11 @@
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: wooden
-      map: ["enum.DoorVisualLayers.Base"]
+    - map: [ "acided" ]
   - type: Appearance
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.38"
-        density: 500
-        mask:
-        - FullTileMask
-        layer:
-        - TableLayer
-        - LowImpassable
-  - type: RotationDrawDepth
-    southDrawDepth: OverMobs
-  - type: Barricade
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Wood
-  - type: InteractionOutline
   - type: NailgunRepairable
     # cm13 max_health%: 1
     repairWood: 100
@@ -52,11 +36,12 @@
   - type: Construction
     graph: BarricadeWoodGraph
     node: nodeWood
-  - type: Climbable
   - type: XenoToggleChargingDamage
     sound:
       collection: WoodDestroy
     damage:
       types:
         Blunt: 22
-  - type: RMCMesonsNonviewable
+    destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true
