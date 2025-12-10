@@ -100,3 +100,8 @@ rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
 
 rmc-dropship-paradrop-lock-no-target = No target selected.
 rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
+
+rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
+rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
+rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
+rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!

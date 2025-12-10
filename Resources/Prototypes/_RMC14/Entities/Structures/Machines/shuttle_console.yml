@@ -25,7 +25,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+    access: [["CMAccessSquadLeaderPrep"], ["CMAccessDropship"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
