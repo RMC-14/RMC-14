@@ -7,6 +7,9 @@
   spawnMenuRoleName: We-Ya Goon (Survivor)
   icon: "RMCJobIconPMCGoonStandard"
   hasIcon: true
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  - ColonistCorporate
   special:
   - !type:AddComponentSpecial
     components:
@@ -20,7 +23,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorGoon
