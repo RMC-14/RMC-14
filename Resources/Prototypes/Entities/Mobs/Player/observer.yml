@@ -97,6 +97,11 @@
       components:
       - Ladder
     range: 15
+  - type: NightVision
+    innate: true
+    state: half
+    onlyHalf: true
+    alert: SynthNightVision
 
 # proto for player ghosts specifically
 - type: entity
