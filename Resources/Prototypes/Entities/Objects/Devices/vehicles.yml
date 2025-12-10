@@ -256,7 +256,7 @@
     maxSpeed: 9
     acceleration: 6
     deceleration: 12
-    frontOffset: 1.1
+    frontOffset: 0
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
