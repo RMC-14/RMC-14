@@ -24,11 +24,11 @@
     role: CMJobIntelOfficer
     time: 18000 # 5 hours
   ranks:
-    RMCRankCaptain:
+    RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobAuxiliarySupportOfficer
       time: 252000 # 70 hours
-    RMCRankFirstLT: []
+    RMCRankSecondLT: [ ]
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
@@ -84,7 +84,7 @@
     outerClothing: CMCoatASO
     shoes: CMBootsBlack
     id: CMIDCardASO
-    ears: CMHeadsetSeniorCommand
+    ears: RMCHeadsetMarineCommand
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
   storage:

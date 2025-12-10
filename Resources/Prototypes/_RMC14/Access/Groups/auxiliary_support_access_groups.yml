@@ -5,8 +5,6 @@
   tags:
   - CMAccessASO
   - RMCAccessCommand
-  - CMAccessBrig
-  - CMAccessArmory
   - CMAccessMedical
   - CMAccessResearch
   - CMAccessCE
@@ -25,7 +23,6 @@
   - CMAccessPress
   - CMAccessCrewman
   - RMCAccessDatabase
-  - RMCAccessSeniorCommand
 
 - type: accessGroup
   id: Pilot
