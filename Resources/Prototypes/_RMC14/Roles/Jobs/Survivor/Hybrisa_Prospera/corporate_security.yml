@@ -36,7 +36,7 @@
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCSurvivorPresetHybrisaCorporateSecurity
-  name: constable colonist preset
+  name: hybrisa corporate security colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
