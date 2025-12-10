@@ -32,6 +32,7 @@ rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
 rmc-playtime-tracker-job-name-survivor-military = Military Survivor
 rmc-playtime-tracker-job-name-survivor-co = Survivor CO
 rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
+rmc-playtime-tracker-job-name-survivor-clf = CLF Survivor
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
@@ -294,6 +295,29 @@ rmc-job-name-survivor-solaris-scientist = Solaris Scientist
 rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
 rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+
+# CLF SURVIVORS
+
+rmc-job-name-clf-survivor-soldier = CLF Guerilla
+rmc-job-prefix-clf-survivor-soldier = GRL
+
+rmc-job-name-clf-survivor-medic = CLF Field Medic
+rmc-job-prefix-clf-survivor-medic = MED
+
+rmc-job-name-clf-survivor-engineer = CLF Field Technician
+rmc-job-prefix-clf-survivor-engineer = TECH
+
+rmc-job-name-clf-survivor-commander = CLF Cell Leader
+rmc-job-prefix-clf-survivor-commander = LDR
+
+rmc-job-greeting-clf-survivor = You're a CLF member arriving for a scheduled meeting with sympathetic colonists, but everything is eerily quiet.
+
+  You are NOT aware of the xenonid threat.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#ce1e1e][font size=16]HOSTILE to the UNMC![/font][/color][/bold]
 
 # Shivas survs
 
