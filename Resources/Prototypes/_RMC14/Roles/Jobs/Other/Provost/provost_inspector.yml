@@ -45,7 +45,6 @@
       prefix: rmc-job-prefix-provost-inspector
     - type: MarineOrders
     - type: CommandAccent
-    - type: InnateCommandSpeech
     - type: RMCPointing
     - type: RMCTrackable
     - type: SeeNewPlayers
@@ -56,31 +55,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
-
-- type: entity
-  id: RMCRandomHumanoidProvostInspector
-  name: provost ghost role inspector
-  suffix: Spawner, Player, Friendly, Medium Law Understanding
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: RandomHumanoidSpawner
-    settings: RMCProvostInspector
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCProvostInspector
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-corp-provost-inspector
-    description: rmc-ghost-role-information-provost-description
-    rules: rmc-ghost-role-information-provost-rules
-    reregister: false
-    job: CMProvostInspector
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
 
 - type: entity
   parent: CMSpawnPointJobBase

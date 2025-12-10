@@ -72,12 +72,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private readonly HashSet<EntityUid> _intersecting = new();
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<HiveMemberComponent> _memberQuery;
 
     public override void Initialize()
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _memberQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
@@ -137,8 +135,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
 
-        var xenoHive = _xenoHive.GetHive(xeno.Owner)?.Owner;
-        var state = new XenoEvolveBuiState(LackingOvipositor(xenoHive));
+        var state = new XenoEvolveBuiState(LackingOvipositor());
         _ui.SetUiState(xeno.Owner, XenoEvolutionUIKey.Key, state);
     }
 
@@ -303,10 +300,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent, HiveMemberComponent>();
-        while (xenos.MoveNext(out var uid, out _, out _, out var member))
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent>();
+        var state = new XenoEvolveBuiState(LackingOvipositor());
+        while (xenos.MoveNext(out var uid, out _, out _))
         {
-            var state = new XenoEvolveBuiState(LackingOvipositor(member.Hive));
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
         }
     }
@@ -347,10 +344,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!ContainedCheckPopup(xeno, doPopup))
             return false;
 
-        var xenoHive = _xenoHive.GetHive(xeno.Owner)?.Owner;
         // TODO RMC14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
-            HasLiving<XenoEvolutionCappedComponent>(capped.Max, xenoHive, e => e.Comp.Id == capped.Id))
+            HasLiving<XenoEvolutionCappedComponent>(capped.Max, e => e.Comp.Id == capped.Id))
         {
             if (doPopup)
                 _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-failed-already-have", ("prototype", prototype.Name)), xeno, xeno, PopupType.MediumCaution);
@@ -358,7 +354,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1, xenoHive))
+        // TODO RMC14 only allow evolving towards Queen if none is alive
+        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
         {
             if (doPopup)
             {
@@ -372,6 +369,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             return false;
         }
+
 
         if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
         {
@@ -489,7 +487,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
-    public int GetLiving<T>(EntityUid? hive = null, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    // TODO RMC14 make this a property of the hive component
+    // TODO RMC14 per-hive
+    public int GetLiving<T>(Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         var total = 0;
         var query = EntityQueryEnumerator<T>();
@@ -501,12 +501,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
-            if (hive != null)
-            {
-                if (!_memberQuery.TryComp(uid, out var member) || member.Hive != hive)
-                    continue;
-            }
-
             if (predicate != null && !predicate((uid, comp)))
                 continue;
 
@@ -516,7 +510,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return total;
     }
 
-    public bool HasLiving<T>(int count, EntityUid? hive = null, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    // TODO RMC14 make this a property of the hive component
+    // TODO RMC14 per-hive
+    public bool HasLiving<T>(int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
     {
         if (count <= 0)
             return true;
@@ -529,12 +525,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 _mobState.IsDead(uid, mobState))
             {
                 continue;
-            }
-
-            if (hive != null)
-            {
-                if (!_memberQuery.TryComp(uid, out var member) || member.Hive != hive)
-                    continue;
             }
 
             if (predicate != null && !predicate((uid, comp)))
@@ -572,14 +562,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return _gameTicker.RoundDuration() > _evolutionPointsRequireOvipositorAfter;
     }
 
-    public bool HasOvipositor(EntityUid? hive = null)
+    public bool HasOvipositor()
     {
-        return HasLiving<XenoEvolutionGranterComponent>(1, hive, e => HasComp<XenoAttachedOvipositorComponent>(e));
+        return HasLiving<XenoEvolutionGranterComponent>(1, e => HasComp<XenoAttachedOvipositorComponent>(e));
     }
 
-    public bool LackingOvipositor(EntityUid? hive = null)
+    public bool LackingOvipositor()
     {
-        return NeedsOvipositor() && !HasOvipositor(hive);
+        return NeedsOvipositor() && !HasOvipositor();
     }
 
     private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
@@ -702,7 +692,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var time = _timing.CurTime;
         var roundDuration = _gameTicker.RoundDuration();
         var needsOvipositor = NeedsOvipositor();
-
+        var hasGranter = needsOvipositor
+            ? HasOvipositor()
+            : HasLiving<XenoEvolutionGranterComponent>(1);
         if (needsOvipositor)
         {
             var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
@@ -763,14 +755,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var gain = evoOverride ?? points + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (needsOvipositor && comp.RequiresGranter)
-                {
-                    var xenoHive = _xenoHive.GetHive(uid)?.Owner;
-                    var hasHiveGranter = HasLiving<XenoEvolutionGranterComponent>(1, xenoHive, e => HasComp<XenoAttachedOvipositorComponent>(e));
-                    
-                    if (!hasHiveGranter)
-                        continue;
-                }
+                if (needsOvipositor && comp.RequiresGranter && !hasGranter)
+                    continue;
 
                 SetPoints((uid, comp), comp.Points + gain);
             }

@@ -1,4 +1,3 @@
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
@@ -18,7 +17,4 @@ public sealed partial class AffectableByWeedsComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool OnXenoFastResin;
-
-    [DataField, AutoNetworkedField]
-    public EntityWhitelist? Whitelist; // Exists to specify which resin will not affect the entity
 }

@@ -352,9 +352,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
         var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
-        if (reagent.FireSpread)
-            maxRange -= 1;
-
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
@@ -453,7 +450,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         foreach (var content in targetSolution.Contents)
         {
             if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
-                reagent.Intensity <= 0)
+                (reagent.Intensity <= 0 || reagent.Duration <= 0 || reagent.Radius <= 0))
             {
                 _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
                 return;

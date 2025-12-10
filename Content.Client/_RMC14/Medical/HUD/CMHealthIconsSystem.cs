@@ -2,7 +2,6 @@
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Suicide;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusIcon;
@@ -34,7 +33,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
         if (_mobState.IsDead(damageable))
         {
             var stage = _unrevivable.GetUnrevivableStage(damageable.Owner, 4);
-            if (_unrevivable.IsUnrevivable(damageable) || HasComp<RMCHasSuicidedComponent>(damageable))
+            if (_unrevivable.IsUnrevivable(damageable))
                 icon = RMCHealthIconTypes.Dead;
             else if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
                 icon = RMCHealthIconTypes.DeadDNR;

@@ -8,6 +8,9 @@
   flavor: bitter
   color: "#E71B00"
   toxin: true
+  intensityMod: 0.4
+  durationMod: -0.8
+  radiusMod: 0.05
   tileReactions:
   - !type:FlammableTileReaction {}
   reactiveEffects:
@@ -35,9 +38,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ffb300"
-  # OXIDIZING = 6
-  # FUELING = 7
-  # FLOWING = 1
+  intensity: 27
+  duration: 38
+  radius: 2
+  intensityMod: 0.45
+  durationMod: 0.75
+  radiusMod: 0.06
+  fireEntity: RMCTileFireNapalmBase
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]
@@ -50,6 +57,9 @@
   intensity: 15
   duration: 50
   radius: 5
+  intensityMod: -1.5
+  durationMod: -5
+  radiusMod: -0.5
   fireEntity: RMCTileFireStickyNapalm
 
 - type: reagent
@@ -63,6 +73,9 @@
   intensity: 45
   duration: 10
   radius: 5
+  intensityMod: -4.5
+  durationMod: -1
+  radiusMod: -0.5
   fireEntity: RMCTileFireHCNapalm
 
 - type: reagent
@@ -164,8 +177,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#ff9300"
-  # OXIDIZING = 9
-  # IGNITING = 1
+  intensity: 72
+  duration: -27
+  radius: 0
+  intensityMod: 1.8
+  durationMod: -0.9
+  radiusMod: -0.09
+  # TODO RMC14: IGNITING = 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -183,8 +201,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#0064C8"
-  # VISCOUS = 3
-  # FUELING = 2
+  toxin: true
+  intensity: -6
+  duration: 16
+  radius: 6
+  intensityMod: -0.35
+  durationMod: 0.25
+  radiusMod: 0.095
   metabolisms:
     Poison:
       metabolismRate: 0.1
