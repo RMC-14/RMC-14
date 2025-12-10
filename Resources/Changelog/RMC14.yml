@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: shibechef
-  changes:
-  - message: Turning off playtime benefits now works for all xeno ages
-    type: Fix
-  id: 2161
-  time: '2025-08-06T04:29:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7349
-- author: Ian321
-  changes:
-  - message: the headsets in surplus vendors now come with the public channel
-    type: Tweak
-  id: 2162
-  time: '2025-08-06T04:31:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7360
-- author: Timemaster99
-  changes:
-  - message: Added pre-made chat highlights for marine roles. Can be enabled by checking
-      "Auto-fill the highlights with the character's information" in Accessibility
-      Options.
-    type: Add
-  id: 2163
-  time: '2025-08-06T04:32:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7367
 - author: Vermidia
   changes:
   - message: Fixed gases being blocked from spreading on tiles containing different
@@ -4752,5 +4729,34 @@
   id: 2663
   time: '2025-12-10T01:30:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8648
+- author: blueDev2
+  changes:
+  - message: Ruby ranked xenos properly get their prefixes
+    type: Fix
+  id: 2664
+  time: '2025-12-10T01:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8636
+- author: wheelwrightt
+  changes:
+  - message: Tacmap zooms on cursor rather than the center of the map.
+    type: Fix
+  - message: Tacmap freehand lines no longer creates a line back to where it began.
+    type: Fix
+  id: 2665
+  time: '2025-12-10T01:31:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8645
+- author: SurfinNinja1
+  changes:
+  - message: added 3 more sandwiches
+    type: Add
+  - message: fixed tocilog recipe to actually use bacon
+    type: Fix
+  - message: changed all cooking and drink recipes to use RMCSugar
+    type: Tweak
+  - message: cotton burgers and buns are now edible
+    type: Tweak
+  id: 2666
+  time: '2025-12-10T01:32:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8572
 Name: RMC14
 Order: -1
