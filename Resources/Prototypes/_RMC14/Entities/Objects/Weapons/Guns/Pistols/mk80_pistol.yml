@@ -46,6 +46,10 @@
         whitelist:
           tags:
           - CMMagazinePistolMK80
+          - CMMagazinePistolMK80Incendiary
+          - CMMagazinePistolMK80WallPiercing
+          - CMMagazinePistolMK80Rubber
+          - CMMagazinePistolMK80Toxic
         startingItem: CMMagazinePistolMK80
   - type: AttachableHolder
     slots:
@@ -80,6 +84,8 @@
     - Sidearm
     - RMCMK80
 
+# Magazines
+
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolMK80
@@ -106,6 +112,112 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
+  parent: CMMagazinePistolMK80
+  id: CMMagazinePistolMK80Incendiary
+  name: MK80 magazine (9mm Squash-Head, Incendiary)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolMK80Incendiary
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+        tags:
+        - RMCCartridgePistol9mmSquashHeadIncendiary
+    proto: RMCCartridgePistol9mmSquashHeadIncendiary
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: overlay
+      color: "#791a13"
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: CMMagazinePistolMK80WallPiercing
+  name: MK80 magazine (9mm Squash-Head, Wall-Piercing)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolMK80WallPiercing
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmSquashHeadWallPiercing
+    proto: RMCCartridgePistol9mmSquashHeadWallPiercing
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: overlay
+      color: "#506479"
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: CMMagazinePistolMK80Rubber
+  name: MK80 magazine (9mm Squash-Head, Rubber)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolMK80Rubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmSquashHeadRubber
+    proto: RMCCartridgePistol9mmSquashHeadRubber
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: overlay
+      color: "#424f74"
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: CMMagazinePistolMK80Toxic
+  name: MK80 magazine (9mm Squash-Head, Toxic)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolMK80Toxic
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmSquashHeadToxic
+    proto: RMCCartridgePistol9mmSquashHeadToxic
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: overlay
+      color: "#750c3b"
+
+# Cartridges
+
+- type: entity
   id: RMCCartridgePistol9mmSquashHead
   name: cartridge (9mm Squash-Head)
   parent: CMCartridgePistolBase
@@ -115,11 +227,61 @@
     - Cartridge
     - RMCCartridgePistol9mmSquashHead
   - type: CartridgeAmmo
-    proto: RCMBulletPistol9mmSquashHead
+    proto: RMCBulletPistol9mmSquashHead
+
+- type: entity
+  id: RMCCartridgePistol9mmSquashHeadIncendiary
+  name: cartridge (9mm Squash-Head, Incendiary)
+  parent: RMCCartridgePistol9mmSquashHead
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmSquashHeadIncendiary
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmSquashHeadIncendiary
+
+- type: entity
+  id: RMCCartridgePistol9mmSquashHeadWallPiercing
+  name: cartridge (9mm Squash-Head, Wall-Piercing)
+  parent: RMCCartridgePistol9mmSquashHead
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmSquashHeadWallPiercing
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmSquashHeadWallPiercing
+
+- type: entity
+  id: RMCCartridgePistol9mmSquashHeadRubber
+  name: cartridge (9mm Squash-Head, Rubber)
+  parent: RMCCartridgePistol9mmSquashHead
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmSquashHeadRubber
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmSquashHeadRubber
+
+- type: entity
+  id: RMCCartridgePistol9mmSquashHeadToxic
+  name: cartridge (9mm Squash-Head, Toxic)
+  parent: RMCCartridgePistol9mmSquashHead
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmSquashHeadToxic
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmSquashHeadToxic
+
+# Bullets
 
 - type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
   parent: CMBulletBase
-  id: RCMBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHead
   name: bullet (9mm Squash-Head)
   categories: [ HideSpawnMenu ]
   components:
@@ -139,8 +301,84 @@
   - type: RMCProjectileAccuracy
     accuracy: 105
 
+- type: entity
+  parent: RMCBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHeadIncendiary
+  name: bullet (9mm Squash-Head, Incendiary)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 35
+  - type: IgniteOnProjectileHit
+
+- type: entity
+  parent: RMCBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHeadWallPiercing
+  name: bullet (9mm Squash-Head, Wall-Piercing)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 45
+  - type: RMCPenetratingProjectile
+
+- type: entity
+  parent: RMCBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHeadRubber
+  name: bullet (9mm Squash-Head, Rubber)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+  - type: RMCStaminaDamageOnCollide
+    damage: 40
+
+- type: entity
+  parent: RMCBulletPistol9mmSquashHead
+  id: RMCBulletPistol9mmSquashHeadToxic
+  name: bullet (9mm Squash-Head, Toxic)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 10
+  - type: AcidProjectile
+
+#Tags
+
 - type: Tag
   id: CMMagazinePistolMK80
 
 - type: Tag
+  id: CMMagazinePistolMK80Incendiary
+
+- type: Tag
+  id: CMMagazinePistolMK80Rubber
+
+- type: Tag
+  id: CMMagazinePistolMK80WallPiercing
+
+- type: Tag
+  id: CMMagazinePistolMK80Toxic
+
+- type: Tag
   id: RMCCartridgePistol9mmSquashHead
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHeadIncendiary
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHeadWallPiercing
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHeadToxic
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHeadRubber
