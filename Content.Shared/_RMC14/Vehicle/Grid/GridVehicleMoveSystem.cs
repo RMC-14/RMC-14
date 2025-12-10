@@ -211,11 +211,13 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
         var startPos = mover.Position;
+        var currentRotation = transform.GetWorldRotation(uid);
         var desiredRotation = mover.CurrentDirection == Vector2i.Zero
-            ? transform.GetWorldRotation(uid)
+            ? currentRotation
             : new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
 
-        var reachedDesired = TryMoveAlongSegment(uid, grid, gridComp, ref mover, newPos, desiredRotation);
+        // Translate using the current rotation; rotation is handled after movement.
+        var reachedDesired = TryMoveAlongSegment(uid, grid, gridComp, ref mover, newPos, currentRotation);
 
         // If we failed to move to the desired position (blocked), stop and wait for new input.
         if (!reachedDesired)
@@ -285,11 +287,11 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         }
 
         SetGridPosition(uid, grid, mover.Position);
+
         if (mover.CurrentDirection != Vector2i.Zero &&
             Vector2.DistanceSquared(mover.Position, startPos) > 0.0001f)
         {
-            var ang = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
-            transform.SetLocalRotation(uid, ang);
+            TryRotateWithBackoff(uid, grid, gridComp, ref mover, desiredRotation, startPos);
         }
         physics.WakeBody(uid);
         Dirty(uid, mover);
@@ -336,7 +338,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         transform.SetLocalPosition(uid, local, xform);
     }
 
-    private bool CanOccupyTransform(EntityUid uid, EntityUid grid, Vector2 gridPos, Angle? overrideRotation = null)
+    private bool CanOccupyTransform(EntityUid uid, EntityUid grid, Vector2 gridPos, Angle? overrideRotation = null, float clearance = 0f)
     {
         if (!physicsQ.TryComp(uid, out var body))
             return true;
@@ -401,8 +403,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             {
                 var skin = GetMaxShapeRadius(fixtures, body) + GetMaxShapeRadius(otherFixtures, otherBody);
 
-                // If the gap between shapes is less than or equal to their combined radii, they would overlap.
-                if (distance <= skin)
+                // If the gap between shapes is less than or equal to (skin - clearance), they would overlap.
+                if (distance <= skin - clearance)
                     return false;
             }
         }
@@ -452,9 +454,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         return max;
     }
 
-    private bool TryMoveAlongSegment(EntityUid uid, EntityUid grid, MapGridComponent gridComp, ref GridVehicleMoverComponent mover, Vector2 desiredPos, Angle overrideRotation)
+    private bool TryMoveAlongSegment(EntityUid uid, EntityUid grid, MapGridComponent gridComp, ref GridVehicleMoverComponent mover, Vector2 desiredPos, Angle moveRotation)
     {
-        var rotation = overrideRotation;
+        var rotation = moveRotation;
         var start = mover.Position;
         var delta = desiredPos - start;
 
@@ -498,6 +500,50 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         // Return true only if we reached (or essentially reached) the desired position.
         return (desiredPos - best).Length() <= 0.01f;
+    }
+
+    private void TryRotateWithBackoff(EntityUid uid, EntityUid grid, MapGridComponent gridComp, ref GridVehicleMoverComponent mover, Angle desiredRotation, Vector2 startPos)
+    {
+        const float rotationClearance = PhysicsConstants.PolygonRadius * 0.5f;
+        var currentPos = mover.Position;
+
+        // Try rotating in place with a small clearance.
+        if (CanOccupyTransform(uid, grid, currentPos, desiredRotation, rotationClearance))
+        {
+            transform.SetLocalRotation(uid, desiredRotation);
+            return;
+        }
+
+        // Binary search back along the last segment to find the closest point where we can rotate.
+        var dir = startPos - currentPos;
+        var low = 0f;
+        var high = 1f;
+        Vector2? best = null;
+
+        for (var i = 0; i < 8; i++)
+        {
+            var t = (low + high) * 0.5f;
+            var pos = currentPos + dir * t;
+
+            if (CanOccupyTransform(uid, grid, pos, desiredRotation, rotationClearance))
+            {
+                best = pos;
+                high = t; // closer to current
+            }
+            else
+            {
+                low = t;
+            }
+        }
+
+        if (best != null)
+        {
+            mover.Position = best.Value;
+            SetGridPosition(uid, grid, mover.Position);
+            mover.CurrentTile = GetTileForPosition(grid, gridComp, mover.Position);
+            mover.TargetTile = mover.CurrentTile;
+            transform.SetLocalRotation(uid, desiredRotation);
+        }
     }
 
     private Vector2i GetTileForPosition(EntityUid grid, MapGridComponent gridComp, Vector2 gridPos)
