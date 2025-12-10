@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCGunnerPVE
   name: rmc-job-name-pmc-gunner
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-gunner
   playTimeTracker: CMJobPMCGunnerPVE
   ranks:
     RMCRankWeYaSupportSpecialist: []
@@ -35,6 +35,10 @@
         RMCSkillPowerLoader: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
