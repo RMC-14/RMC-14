@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed being able to paradrop in certain areas
-    type: Fix
-  - message: Area Info alert now shows if you can paradrop in an area.
-    type: Tweak
-  id: 2155
-  time: '2025-08-06T04:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7323
-- author: DummeHytteOst
-  changes:
-  - message: Added a box of beakers, that holds 7 beakers.
-    type: Add
-  id: 2156
-  time: '2025-08-06T04:26:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7330
-- author: Dygon
-  changes:
-  - message: Vampire Lurker's Tail Jab can now be used on windows.
-    type: Fix
-  id: 2157
-  time: '2025-08-06T04:25:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7327
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the We-Ya security guard survivor on LV-624 not having We-YA IFF
-    type: Fix
-  id: 2158
-  time: '2025-08-06T04:28:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7344
 - author: OmerF-afk
   changes:
   - message: Fixed ABR40 mags not being refillable
@@ -4749,5 +4719,34 @@
   id: 2657
   time: '2025-12-10T01:15:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8647
+- author: Ian321
+  changes:
+  - message: You can now make molotov cocktails using alcohol again.
+    type: Fix
+  id: 2658
+  time: '2025-12-10T01:27:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8639
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the trucker survivor variant counting towards Civilian survivor
+      time instead of Engineer survivor time.
+    type: Fix
+  id: 2659
+  time: '2025-12-10T01:25:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8652
+- author: YO0teacher
+  changes:
+  - message: Fixed cross-map examining for watching xenos and viewing overwatch cameras
+    type: Fix
+  id: 2660
+  time: '2025-12-10T01:26:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8644
+- author: J C Denton
+  changes:
+  - message: Fixed Fiorina Flamer cabinet not having a Flamer.
+    type: Fix
+  id: 2661
+  time: '2025-12-10T01:26:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8643
 Name: RMC14
 Order: -1
