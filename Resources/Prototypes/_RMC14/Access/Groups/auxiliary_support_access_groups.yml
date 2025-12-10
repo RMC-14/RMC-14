@@ -23,6 +23,7 @@
   - CMAccessPress
   - CMAccessCrewman
   - RMCAccessDatabase
+  - RMCAccessSeniorCommand
 
 - type: accessGroup
   id: Pilot
