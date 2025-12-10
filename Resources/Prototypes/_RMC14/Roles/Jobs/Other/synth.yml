@@ -68,6 +68,7 @@
       damage:
         types:
           Blunt: 35
+    - type: RMCAllowSuitStorage
     - type: Synth
   hidden: true
 
