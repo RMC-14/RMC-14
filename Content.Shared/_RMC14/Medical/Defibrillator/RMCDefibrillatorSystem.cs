@@ -8,6 +8,7 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
@@ -89,4 +90,26 @@ public sealed class RMCDefibrillatorSystem : EntitySystem
         QueueDel(defib.Comp.ChargeSoundEntity);
         defib.Comp.ChargeSoundEntity = null;
     }
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorChargeVisuals
+{
+    Empty,
+    Low,
+    Half,
+    Full
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorVisuals
+{
+    DefibrillatorCharge
+}
+
+[Serializable, NetSerializable]
+public enum DefibrillatorVisualLayers
+{
+    Base,
+    Overlay
 }
