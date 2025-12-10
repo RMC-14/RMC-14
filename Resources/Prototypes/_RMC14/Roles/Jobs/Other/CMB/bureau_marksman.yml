@@ -1,0 +1,93 @@
+﻿# CMB Marksman
+- type: job
+  parent: CMJobBase
+  id: RMCBureauMarksman
+  name: rmc-job-name-bureau-marksman
+  description: rmc-ghost-role-information-bureau-marshal-description
+  playTimeTracker: RMCJobBureauMarksman
+  ranks:
+    RMCRankCMBSWATMarksman: []
+  startingGear: RMCGearBureauMarksman
+  icon: "RMCJobIconBureauMarksman"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-marksman
+    - type: SniperWhitelist
+    - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmb_mark
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidBureauMarksman
+  name: bureau ghost role marksman
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCBureauMarksman
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCBureauMarksman
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-bureau-marksman
+    description: rmc-ghost-role-information-bureau-marshal-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: RMCBureauMarksman
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  parent: RMCGearBureauDeputy
+  id: RMCGearBureauMarksman
+  equipment:
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: RMCArmorM4RLight
+    pocket2: RMCPouchMagazineLargeTR76S
+    suitstorage: RMCTR76SniperRifle
+
+- type: playTimeTracker
+  id: RMCJobBureauMarksman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauMarksman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_mark

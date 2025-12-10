@@ -11,6 +11,11 @@
   prefix: Sr. Cst.
 
 - type: rank
+  id: RMCRankTSEPAMarksman
+  name: Marksman
+  prefix: Mark.
+
+- type: rank
   id: RMCRankTSEPASergeant
   name: Sergeant
   prefix: Sgt.

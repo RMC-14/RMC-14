@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mag-0"
+    },
+    {
+      "name": "mag-1"
+    },
+    {
+      "name": "band"
+    },
+    {
+      "name": "band_e"
+    }
+  ]
+}
