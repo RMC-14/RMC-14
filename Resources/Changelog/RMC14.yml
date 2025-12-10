@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed not being able to tackle nested hosts. Trying to attack/tackle
-      a nest will also now redirect the attack to the occupant, if it's from a xeno.
-    type: Fix
-  - message: Fixed nest sprites always using the south sprite.
-    type: Fix
-  id: 2154
-  time: '2025-08-06T04:26:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7338
-- author: Vermidia
-  changes:
   - message: Fixed being able to paradrop in certain areas
     type: Fix
   - message: Area Info alert now shows if you can paradrop in an area.
@@ -4752,5 +4742,12 @@
   id: 2656
   time: '2025-12-09T05:11:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8633
+- author: noctyrnal
+  changes:
+  - message: Cleaned up the Pyro spec's icon.
+    type: Tweak
+  id: 2657
+  time: '2025-12-10T01:15:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8647
 Name: RMC14
 Order: -1
