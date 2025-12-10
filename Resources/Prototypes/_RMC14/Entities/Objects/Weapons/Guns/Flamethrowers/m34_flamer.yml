@@ -168,6 +168,10 @@
     solution: rmc_flamer_tank
   - type: RMCFlushableSolution
     solution: rmc_flamer_tank
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: Tag
     tags:
     - RMCTankFlamer
