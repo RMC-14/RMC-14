@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: Rubber mags are now marked by a pink stripe
-    type: Tweak
-  id: 2166
-  time: '2025-08-06T04:34:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7370
 - author: PursuitInAshes
   changes:
   - message: The SPP Sapper now spawns with the correct boots.
@@ -4756,6 +4749,14 @@
     type: Fix
   id: 2668
   time: '2025-12-10T01:44:17.894979+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to duplicate breaching shells by transferring between
+      xm51 magazines.
+    type: Fix
+  id: 2669
+  time: '2025-12-10T02:10:11.117279+00:00'
   url: null
 Name: RMC14
 Order: -1
