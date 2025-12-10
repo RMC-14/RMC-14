@@ -48,8 +48,12 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         args.Handled = true;
         var active = EnsureComp<XenoActiveCripplingStrikeComponent>(xeno);
-        var reset = EnsureComp<MeleeResetComponent>(xeno);
-        _rmcMelee.MeleeResetInit((xeno.Owner, reset));
+
+        if (xeno.Comp.ResetMeleeCooldown)
+        {
+            var reset = EnsureComp<MeleeResetComponent>(xeno);
+            _rmcMelee.MeleeResetInit((xeno.Owner, reset));
+        }
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.NextSlashBuffed = true;
