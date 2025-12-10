@@ -295,7 +295,7 @@
       - CMMessTech
       entries:
       - id: RMCCargoArmband
-    - name: Logistics Officer
+    - name: Requisitions Officer
       takeAll: RMCDresser
       jobs:
       - CMQuartermaster
