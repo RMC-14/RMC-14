@@ -59,6 +59,15 @@
                                          Text="Lock Starboard"
                                          HorizontalExpand="True"/>
             </BoxContainer>
+            <cc:HSeparator Color="#02E74E" />
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
+                <RichTextLabel Name="RemoteControlHeader" Access="Public" />
+                <Control HorizontalExpand="True" />
+                <controls:DropshipButton Name="RemoteControlButton" Access="Public"
+                                         Margin="1" BackgroundColor="#004E25"
+                                         BorderColor="#02E74E" BorderThickness="1"
+                                         Text="???" />
+            </BoxContainer>
         </BoxContainer>
     </PanelContainer>
 </controls:DropshipNavigationWindow>
