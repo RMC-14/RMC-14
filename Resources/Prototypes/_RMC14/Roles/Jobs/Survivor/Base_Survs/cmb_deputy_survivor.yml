@@ -9,6 +9,8 @@
   ranks:
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
+  accessGroups:
+  - ColonistCMBSurvivor
   spawnMenuRoleName: CMB Deputy (Survivor)
   icon: "RMCJobIconBureauDeputy"
   hasIcon: true
@@ -41,7 +43,7 @@
   id: RMCGearSurvivorCMBDeputy
   equipment:
     head: RMCHeadCapBureau
-    id: RMCIDCardDeputySurvivor
+    id: RMCIDCardCMBDeputySurvivor
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureauDamaged

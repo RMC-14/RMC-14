@@ -6,7 +6,7 @@
   startingGear: RMCGearSurvivorKutjevoCMBDeputy
   hasIcon: true
   icon: RMCJobIconBureauDeputy
-  spawnMenuRoleName: Kutjevo CMB Deputy (Kutjevo Survivor)
+  spawnMenuRoleName: CMB Deputy (Kutjevo Survivor)
   special:
   - !type:AddComponentSpecial
     components:
