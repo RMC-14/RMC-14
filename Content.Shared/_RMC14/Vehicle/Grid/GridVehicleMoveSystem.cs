@@ -13,6 +13,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using System.Collections.Generic;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Dynamics;
 
 namespace Content.Shared.Vehicle;
 
@@ -27,6 +28,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
     private EntityQuery<FixturesComponent> fixtureQ;
+    private bool _clearedCollisionsThisTick;
+
+    private const float TileCollisionClearance = PhysicsConstants.PolygonRadius * 0.75f;
 
     public override void Initialize()
     {
@@ -37,8 +41,18 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentStartup>(OnMoverStartup);
     }
 
-    // Debug-only data used by the client overlay to visualize tiles checked for collisions.
+    //DEBUG STUFF
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
+    public static readonly List<DebugCollision> DebugCollisions = new();
+
+    public readonly record struct DebugCollision(
+        EntityUid Tested,
+        EntityUid Blocker,
+        Box2 TestedAabb,
+        Box2 BlockerAabb,
+        float Distance,
+        float Skin,
+        float Clearance);
 
     private void OnMoverStartup(Entity<GridVehicleMoverComponent> ent, ref ComponentStartup args)
     {
@@ -59,6 +73,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        _clearedCollisionsThisTick = false;
 
         var query = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var mover, out var vehicle, out var xform))
@@ -84,7 +100,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         if (mover.IsCommittedToMove)
         {
-            ContinueCommittedMove(uid, mover, grid, gridComp, inputDir, frameTime);
+            ContinueCommittedMove(uid, mover, grid, gridComp, frameTime);
             return;
         }
 
@@ -125,174 +141,64 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         var targetTile = mover.CurrentTile + moveDir;
         var desiredRotation = new Vector2(facing.X, facing.Y).ToWorldAngle();
+
+        var targetCenter = new Vector2(targetTile.X + 0.5f, targetTile.Y + 0.5f);
+        if (!CanOccupyTransform(uid, grid, targetCenter, desiredRotation, TileCollisionClearance))
+        {
+            mover.TargetTile = mover.CurrentTile;
+            mover.CurrentSpeed = 0f;
+            mover.IsCommittedToMove = false;
+
+            if (angleChanged && CanOccupyTransform(uid, grid, mover.Position, desiredRotation, TileCollisionClearance))
+            {
+                mover.CurrentDirection = facing;
+                transform.SetLocalRotation(uid, desiredRotation);
+            }
+
+            Dirty(uid, mover);
+            return;
+        }
+
         mover.TargetTile = targetTile;
         mover.CurrentDirection = facing;
+        mover.CurrentSpeed = mover.MaxSpeed;
 
         mover.IsCommittedToMove = true;
         Dirty(uid, mover);
     }
 
     private void ContinueCommittedMove(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
-        MapGridComponent gridComp, Vector2i inputDir, float frameTime)
+        MapGridComponent gridComp, float frameTime)
     {
         var tileDelta = mover.TargetTile - mover.CurrentTile;
         var moveDir = new Vector2(tileDelta.X, tileDelta.Y);
-
-        var hasInput = inputDir != Vector2i.Zero;
-        var reversing = hasInput && inputDir == -mover.CurrentDirection;
-
-        // If the player steers to a new direction mid-segment (not just reversing),
-        // drop the current commitment so we can re-orient immediately.
-        if (hasInput && inputDir != mover.CurrentDirection && inputDir != -mover.CurrentDirection)
-        {
-            mover.IsCommittedToMove = false;
-            mover.CurrentTile = GetTileForPosition(grid, gridComp, mover.Position);
-            mover.TargetTile = mover.CurrentTile;
-            Dirty(uid, mover);
-            return;
-        }
-
-        if (reversing && mover.CurrentSpeed > 0f)
-            mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime * 2f, 0f);
-
-        float targetSpeed;
-        float accel;
-
-        if (inputDir == Vector2i.Zero)
-        {
-            targetSpeed = 0f;
-            accel = mover.Deceleration;
-        }
-        else if (reversing)
-        {
-            if (mover.CurrentSpeed > 0f)
-            {
-                targetSpeed = 0f;
-                accel = mover.Deceleration;
-            }
-            else
-            {
-                targetSpeed = -mover.MaxReverseSpeed;
-                accel = mover.ReverseAcceleration;
-            }
-        }
-        else
-        {
-            if (mover.CurrentSpeed < 0f)
-            {
-                targetSpeed = 0f;
-                accel = mover.Deceleration;
-            }
-            else
-            {
-                targetSpeed = mover.MaxSpeed;
-                accel = mover.Acceleration;
-            }
-        }
-
-        if (mover.CurrentSpeed < targetSpeed)
-            mover.CurrentSpeed = Math.Min(mover.CurrentSpeed + accel * frameTime, targetSpeed);
-        else if (mover.CurrentSpeed > targetSpeed)
-            mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
-
         if (moveDir == Vector2.Zero)
-            moveDir = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y);
-
-        if (moveDir != Vector2.Zero)
-        {
-            moveDir = Vector2.Normalize(moveDir);
-
-            if (mover.CurrentSpeed < 0f)
-                moveDir = -moveDir;
-        }
-
-        var moveAmount = mover.CurrentSpeed * frameTime;
-        var newPos = mover.Position + moveDir * moveAmount;
-
-        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-        var startPos = mover.Position;
-        var currentRotation = transform.GetWorldRotation(uid);
-        var desiredRotation = mover.CurrentDirection == Vector2i.Zero
-            ? currentRotation
-            : new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
-
-        // Translate using the current rotation; rotation is handled after movement.
-        var reachedDesired = TryMoveAlongSegment(uid, grid, gridComp, ref mover, newPos, currentRotation);
-
-        // If we failed to move to the desired position (blocked), stop and wait for new input.
-        if (!reachedDesired)
-        {
-            mover.TargetTile = mover.CurrentTile;
-            mover.CurrentSpeed = 0f;
-            mover.CurrentTile = GetTileForPosition(grid, gridComp, mover.Position);
-            mover.TargetTile = mover.CurrentTile;
-            mover.IsCommittedToMove = false;
-            Dirty(uid, mover);
             return;
-        }
 
-        var remainingToTarget = (targetCenter - mover.Position).Length();
+        moveDir = Vector2.Normalize(moveDir);
+        var moveAmount = mover.MaxSpeed * frameTime;
+        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
+        var toTarget = targetCenter - mover.Position;
+        var distanceToTarget = toTarget.Length();
+        var step = moveDir * moveAmount;
 
-        if (remainingToTarget <= 0.01f)
+        if (moveAmount >= distanceToTarget)
         {
             mover.Position = targetCenter;
             mover.CurrentTile = mover.TargetTile;
             mover.IsCommittedToMove = false;
+            mover.CurrentSpeed = 0f;
 
-            var hasInput2 = inputDir != Vector2i.Zero;
-
-            if (!hasInput2)
-            {
-                mover.CurrentSpeed = Math.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, 0f);
-                SetGridPosition(uid, grid, mover.Position);
-                Dirty(uid, mover);
-                return;
-            }
-
-            var facing = mover.CurrentDirection;
-            var angleChanged = false;
-
-            if (facing == Vector2i.Zero)
-            {
-                facing = inputDir;
-                angleChanged = true;
-            }
-
-            Vector2i nextMoveDir;
-
-            if (inputDir == facing)
-                nextMoveDir = facing;
-            else if (inputDir == -facing)
-                nextMoveDir = -facing;
-            else
-            {
-                facing = inputDir;
-                nextMoveDir = facing;
-                angleChanged = true;
-            }
-
-            var nextTile = mover.CurrentTile + nextMoveDir;
-            _ = new Vector2(facing.X, facing.Y).ToWorldAngle();
-            var nextCenter = new Vector2(nextTile.X + 0.5f, nextTile.Y + 0.5f);
-
-            mover.IsCommittedToMove = true;
-            mover.TargetTile = nextTile;
-            mover.CurrentDirection = facing;
-
-            if (angleChanged)
-            {
-                var angle = new Vector2(facing.X, facing.Y).ToWorldAngle();
-                transform.SetLocalRotation(uid, angle);
-            }
+            var angle = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
+            transform.SetLocalRotation(uid, angle);
+        }
+        else
+        {
+            mover.Position += step;
+            mover.CurrentSpeed = mover.MaxSpeed;
         }
 
         SetGridPosition(uid, grid, mover.Position);
-
-        if (mover.CurrentDirection != Vector2i.Zero &&
-            Vector2.DistanceSquared(mover.Position, startPos) > 0.0001f)
-        {
-            TryRotateWithBackoff(uid, grid, gridComp, ref mover, desiredRotation, startPos);
-        }
         physics.WakeBody(uid);
         Dirty(uid, mover);
     }
@@ -375,7 +281,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (other == uid)
                 continue;
 
-            // Ignore grids and maps; we only care about actual collidable entities.
             if (gridQ.HasComp(other) || HasComp<MapComponent>(other) || other == grid)
                 continue;
 
@@ -393,6 +298,15 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if ((myMask & otherLayer) == 0 && (myLayer & otherMask) == 0)
                 continue;
 
+            if (otherBody.BodyType == BodyType.Dynamic && !otherXform.Anchored)
+            {
+                var myMass = body.Mass;
+                var otherMass = otherBody.Mass;
+
+                if (myMass <= 0 || otherMass <= 0 || otherMass <= myMass * 0.25f)
+                    continue;
+            }
+
             if (!fixtureQ.TryComp(other, out var otherFixtures) || otherFixtures.FixtureCount == 0)
                 continue;
 
@@ -403,9 +317,20 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             {
                 var skin = GetMaxShapeRadius(fixtures, body) + GetMaxShapeRadius(otherFixtures, otherBody);
 
-                // If the gap between shapes is less than or equal to (skin - clearance), they would overlap.
                 if (distance <= skin - clearance)
+                {
+                    if (!_clearedCollisionsThisTick)
+                    {
+                        DebugCollisions.Clear();
+                        _clearedCollisionsThisTick = true;
+                    }
+
+                    if (!TryGetFixtureAabb(otherFixtures, otherTransform, out var otherAabb))
+                        otherAabb = _lookup.GetWorldAABB(other);
+
+                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, distance, skin, clearance));
                     return false;
+                }
             }
         }
 

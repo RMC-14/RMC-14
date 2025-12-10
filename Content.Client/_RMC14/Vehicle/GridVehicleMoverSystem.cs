@@ -69,6 +69,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
             DrawFixtures(handle, uid);
             DrawPhysics(handle, uid);
         }
+        DrawCollisions(handle);
         foreach (var entry in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles)
         {
             var grid = entry.grid;
@@ -132,5 +133,25 @@ public sealed class GridVehicleMoverOverlay : Overlay
         h.DrawRect(aabb, Color.Magenta, false);
         var pos = transform.GetWorldPosition(uid);
         h.DrawCircle(pos, 0.12f, Color.Magenta);
+    }
+
+    private void DrawCollisions(DrawingHandleWorld h)
+    {
+        foreach (var hit in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugCollisions)
+        {
+            h.DrawRect(hit.TestedAabb, Color.Red.WithAlpha(0.6f), false);
+            h.DrawRect(hit.BlockerAabb, Color.Yellow.WithAlpha(0.6f), false);
+
+            var testedCenter = hit.TestedAabb.Center;
+            var blockerCenter = hit.BlockerAabb.Center;
+            h.DrawCircle(testedCenter, 0.08f, Color.Red);
+            h.DrawCircle(blockerCenter, 0.08f, Color.Yellow);
+            h.DrawLine(testedCenter, blockerCenter, Color.Magenta);
+
+            var gap = hit.Distance - hit.Skin + hit.Clearance;
+            var mid = (testedCenter + blockerCenter) * 0.5f;
+            var gapColor = gap <= 0 ? Color.Red : Color.Lime;
+            h.DrawCircle(mid, 0.06f, gapColor.WithAlpha(0.8f));
+        }
     }
 }

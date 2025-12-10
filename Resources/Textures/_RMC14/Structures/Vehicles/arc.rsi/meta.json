@@ -13,10 +13,6 @@
     },
     {
       "name": "arc_wheels_0",
-      "directions": 4
-    },
-    {
-      "name": "arc_wheels_0",
       "directions": 4,
       "delays": [
         [

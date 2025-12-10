@@ -195,8 +195,9 @@
         RMCSkillVehicles: 1
 
 - type: entity
-  id: RMCVehicleTestThing
-  abstract: true
+  id: RMCVehicleVan
+  name: van
+  description: A rugged transport van.
   components:
   - type: Vehicle
     movementKind: Grid
@@ -212,17 +213,13 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.5,-1.5,0.5,1.5
-
+          bounds: -0.425,-1.2,0.425,1.2
         density: 1000
         mask: [ LargeMobMask ]
         layer: [ LargeMobLayer ]
-
-
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
-    #offset: "0.5,0.5"
     sprite: _RMC14/Structures/Vehicles/van.rsi
     layers:
     - state: van_base
@@ -243,13 +240,57 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml
+
 
 - type: entity
-  parent: RMCVehicleTestThing
-  id: RMCVehicleChildThing
-  name: wawa car
-  description: test
+  id: RMCVehicleArc
+  name: arc
+  description: Armored reconnaissance carrier.
   components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: Clickable
+  - type: GridVehicleMover
+    maxSpeed: 9
+    acceleration: 6
+    deceleration: 12
+    frontOffset: 1.1
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.8,-1.35,0.8,1.35
+        density: 1000
+        mask: [ LargeMobMask ]
+        layer: [ LargeMobLayer ]
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/arc.rsi
+    layers:
+    - state: arc_base
+    - map: [ rmc-wheels ]
+      state: arc_wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: arc_wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: arc_wheels_1
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: InputMover
+  - type: ItemSlots
+  - type: RMCVehicleWheelSlots
+    slotCount: 1
+  - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml
 
