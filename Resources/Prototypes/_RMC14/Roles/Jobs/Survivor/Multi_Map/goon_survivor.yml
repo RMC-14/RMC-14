@@ -27,7 +27,7 @@
 - type: startingGear
   id: RMCGearSurvivorGoon
   equipment:
-    id: RMCIDCardPMC
+    id: RMCIDCardWeYaCorporateSecurity
     ears: RMCHeadsetDistressWeYa
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
