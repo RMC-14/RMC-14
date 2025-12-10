@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: dogtags can now be worn around the neck
-    type: Tweak
-  id: 2160
-  time: '2025-08-06T04:29:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7355
 - author: shibechef
   changes:
   - message: Turning off playtime benefits now works for all xeno ages
@@ -4748,5 +4741,16 @@
   id: 2662
   time: '2025-12-10T01:29:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8640
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Being ignited will take the color of the fire for the fire visual color.
+    type: Add
+  - message: Fixed the stop, drop, and roll animation not playing.
+    type: Fix
+  - message: Fixed xenos triggering acid blood from fire tick damage.
+    type: Fix
+  id: 2663
+  time: '2025-12-10T01:30:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8648
 Name: RMC14
 Order: -1
