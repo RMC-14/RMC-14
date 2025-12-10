@@ -594,3 +594,55 @@
           Two: { state: dynamic_2 }
           Three: { state: dynamic_3 }
           Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmBase
+  suffix: Base Napalm
+  components:
+  - type: Sprite
+    color: "#D05006"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 38
+  - type: RMCIgniteOnCollide
+    intensity: 27
+    duration: 38
+  - type: PointLight
+    color: "#D05006"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireEthanol
+  suffix: Ethanol
+  components:
+  - type: Sprite
+    color: "#6897f7"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 15
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 15
+  - type: PointLight
+    color: "#6897f7"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
