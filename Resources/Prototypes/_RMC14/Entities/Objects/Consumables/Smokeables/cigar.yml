@@ -136,4 +136,37 @@
     contents:
     - id: RMCShioCigar
 
+#Montecomune
+- type: entity
+  parent: CMTarbackCigar
+  id: RMCMontecomuneCigar
+  name: montecomune cigar
+  description: Montecomune. A symbol of the SPP. Said to be the favorite cigar of a famous original revolutionary of the SPP. High-quality, but hard to find, due to the UN's embargo on SPP tobacco.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/montecomune_cig.rsi
+    state: unlit-icon
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/montecomune_cig.rsi
+    heldPrefix: unlit
+
+- type: entity
+  parent: RMCMontecomuneCigar
+  id: RMCMontecomuneCigarSpent
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+    - Cigar
+    - Trash
+    - Burnt
 
