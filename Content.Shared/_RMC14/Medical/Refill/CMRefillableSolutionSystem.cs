@@ -51,6 +51,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, GetVerbsEvent<AlternativeVerb>>(OnRefillSolutionFromContainerOnStoreGetVerbs);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, ContainerFlushDoAfterEvent>(OnRefillSolutionFromContainerOnStoreFlush);
 
+        SubscribeLocalEvent<RMCFlushableSolutionComponent, GetVerbsEvent<AlternativeVerb>>(OnFlushableSolutionGetVerbs);
+        SubscribeLocalEvent<RMCFlushableSolutionComponent, ContainerFlushDoAfterEvent>(OnFlushableSolutionFlush);
+
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
     }
 
@@ -354,6 +357,45 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         _solution.RemoveAllSolution(drainable.Value);
 
+        if (TryComp<AppearanceComponent>(ent, out var appearance))
+            _appearance.QueueUpdate(ent, appearance);
+    }
+
+    private void OnFlushableSolutionGetVerbs(Entity<RMCFlushableSolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-refillsolution-flush"),
+            Act = () =>
+            {
+                TryFlushSolution(ent, user);
+            },
+        });
+    }
+
+    private void TryFlushSolution(Entity<RMCFlushableSolutionComponent> ent, EntityUid user)
+    {
+        //TODO RMC immovable
+        _popup.PopupClient(Loc.GetString("rmc-refillsolution-flush-start", ("time", ent.Comp.FlushTime.TotalSeconds)), user, user, PopupType.SmallCaution);
+        _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.FlushTime, new ContainerFlushDoAfterEvent(), ent, target: ent)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameTarget,
+        });
+    }
+
+    private void OnFlushableSolutionFlush(Entity<RMCFlushableSolutionComponent> ent, ref ContainerFlushDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solution, out _))
+            return;
+
+        _solution.RemoveAllSolution(solution.Value);
         if (TryComp<AppearanceComponent>(ent, out var appearance))
             _appearance.QueueUpdate(ent, appearance);
     }
