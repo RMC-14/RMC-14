@@ -6,7 +6,7 @@
   startingGear: RMCGearSurvivorSolarisCMBDeputy
   hasIcon: true
   icon: RMCJobIconBureauDeputy
-  spawnMenuRoleName: Solaris CMB Deputy (Solaris Survivor)
+  spawnMenuRoleName: CMB Deputy (Solaris Survivor)
   special:
   - !type:AddComponentSpecial
     components:
