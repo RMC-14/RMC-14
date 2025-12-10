@@ -82,6 +82,19 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCAdjustableArmorValue
+  - type: UserInterface
+    interfaces:
+      enum.AdjustableArmorUiKey.Key:
+        type: ArmorAdjustBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AdjustableArmorUiKey.Key
+    verbOnly: true
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 1
 
 - type: entity
   name: xenonid target

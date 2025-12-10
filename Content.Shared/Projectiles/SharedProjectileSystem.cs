@@ -108,8 +108,14 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         var deleted = Deleted(target);
 
         // RMC14
-        var popupEv = new DamageDealtEvent(component.Shooter, modifiedDamage);
-        RaiseLocalEvent(target, ref popupEv);
+        if (_net.IsClient)
+        {
+            var modifyEvent = new DamageModifyEvent(ev.Damage, component.Shooter, uid);
+            RaiseLocalEvent(target, modifyEvent);
+            modifiedDamage = modifyEvent.Damage;
+            var popupEv = new DamageDealtEvent(component.Shooter, modifiedDamage);
+            RaiseLocalEvent(target, ref popupEv);
+        }
         //
 
         var filter = Filter.Pvs(coordinates, entityMan: EntityManager);

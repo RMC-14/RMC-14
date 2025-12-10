@@ -9,3 +9,11 @@ rmc-examine-armor-xeno-frontal = - [color=lightblue]{$armor}[/color] [color=yell
 rmc-examine-armor-xeno-side = - [color=lightblue]{$armor}[/color] [color=yellow]side armor[/color]
 rmc-examine-armor-xeno-explosion = - [color=lightblue]{$armor}[/color] [color=yellow]explosion armor[/color]
 rmc-examine-armor-piercing-immune = [color=cyan]This has immunity to armor piercing rounds![/color]
+
+rmc-adjustable-armor-set = Adjust armor values
+rmc-adjustable-armor-examine = It has:
+rmc-adjustable-armor-examine-bullet = - [color=lightblue]{$armor}[/color] [color=yellow]bullet armor[/color]
+rmc-adjustable-armor-examine-melee = - [color=lightblue]{$armor}[/color] [color=yellow]melee armor[/color]
+rmc-adjustable-armor-examine-explosion = - [color=lightblue]{$armor}[/color] [color=yellow]explosion armor[/color]
+rmc-adjustable-armor-examine-bio = - [color=lightblue]{$armor}[/color] [color=yellow]bio armor[/color]
+rmc-adjustable-armor-examine-xeno = - [color=lightblue]{$armor}[/color] [color=yellow]armor[/color]

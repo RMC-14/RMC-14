@@ -1,0 +1,14 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               Title="Armor Values">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="50" Margin="4">
+        <Label Text="Bullet Armor" />
+        <LineEdit Name="BulletLineEdit" Text="Enter bullet armor value" />
+        <Label Text="Melee Armor" />
+        <LineEdit Name="MeleeLineEdit" Text="Enter melee armor value" />
+        <Label Text="Explosion Armor" />
+        <LineEdit Name="ExplosionLineEdit" Text="Enter explosion armor value" />
+        <Label Text="Bio Armor" />
+        <LineEdit Name="BioLineEdit" Text="Enter bio armor value" />
+    </BoxContainer>
+</DefaultWindow>
