@@ -59,3 +59,13 @@
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
   - CMAccessColonyEngineering
+
+- type: accessGroup
+  id: VehicleCrewman
+  tags:
+  - CMAccessCrewman
+  - CMAccessAlpha
+  - CMAccessBravo
+  - CMAccessCharlie
+  - CMAccessDelta
+  - CMAccessMarinePrep
