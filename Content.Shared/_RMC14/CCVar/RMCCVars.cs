@@ -1,5 +1,6 @@
 using Robust.Shared;
 using Robust.Shared.Configuration;
+using Content.Shared._RMC14.NightVision;
 
 namespace Content.Shared._RMC14.CCVar;
 
@@ -330,6 +331,15 @@ public sealed partial class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCRoundEndNoEorgPopup =
         CVarDef.Create("game.round_end_eorg_popup_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    ///     Preferred client-side color for night vision overlays.
+    /// </summary>
+    public static readonly CVarDef<string> RMCNightVisionColor =
+        CVarDef.Create(
+            "rmc.night_vision_color",
+            NightVisionColor.Green.ToString(),
+            CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Skip the no EORG popup.

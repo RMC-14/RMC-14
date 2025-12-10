@@ -1,7 +1,7 @@
-using Content.Client._RMC14.Commendations;
+using Content.Client._RMC14.Commendations; // RMC14
 using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.PlayTimeTracking;
-using Content.Client._RMC14.TacticalMap;
+using Content.Client._RMC14.TacticalMap; // RMC14
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -20,6 +20,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Playtime;
 using Content.Client.Players.RateLimiting;
 using Content.Client.Replay;
+using Content.Client._RMC14.NightVision; // RMC14
 using Content.Client.Screenshot;
 using Content.Client.Stylesheets;
 using Content.Client.Viewport;

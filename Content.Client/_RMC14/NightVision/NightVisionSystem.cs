@@ -17,6 +17,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly NightVisionPreferencesSystem _prefs = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<NightVisionComponent> _nvQuery;
@@ -30,6 +31,35 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
         _nvQuery = _entity.GetEntityQuery<NightVisionComponent>();
+    }
+
+    /// <summary>
+    /// Call this when the night vision color preference changes to refresh the overlays
+    /// </summary>
+    public void RefreshNightVisionColor()
+    {
+        if (_player.LocalEntity == null)
+            return;
+
+        if (!_nvQuery.TryComp(_player.LocalEntity.Value, out var nightVision))
+            return;
+
+        if (nightVision.State == NightVisionState.Off)
+            return;
+
+        // Update the component color
+        nightVision.Color = _prefs.GetPreferredColor();
+
+        // Refresh the overlays based on current state
+        switch (nightVision.State)
+        {
+            case NightVisionState.Half:
+                Half((_player.LocalEntity.Value, nightVision));
+                break;
+            case NightVisionState.Full:
+                Full((_player.LocalEntity.Value, nightVision));
+                break;
+        }
     }
 
     private void OnNightVisionAttached(Entity<NightVisionComponent> ent, ref LocalPlayerAttachedEvent args)
@@ -46,6 +76,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     {
         if (ent != _player.LocalEntity)
             return;
+
+        // Sync the component color with player preferences
+        ent.Comp.Color = _prefs.GetPreferredColor();
 
         switch (ent.Comp.State)
         {
@@ -95,8 +128,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
 
-        if (ent.Comp.Green)
-            _overlay.AddOverlay(new NightVisionFilterOverlay());
+        _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _overlay.AddOverlay(new HalfNightVisionBrightnessOverlay());
 
@@ -109,8 +141,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
 
-        if (ent.Comp.Green)
-            _overlay.AddOverlay(new NightVisionFilterOverlay());
+        _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _light.DrawLighting = false;
         SetMesons(ent.Comp.Mesons);

@@ -3,13 +3,13 @@ uniform sampler2D SCREEN_TEXTURE;
 uniform highp vec3 nv_color;
 
 void fragment() {
-    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, UV);
+    highp vec4 color = texture(SCREEN_TEXTURE, UV);
 
     // Generate random noise for the film grain
-    // highp float noise = (fract(sin(dot(UV * TIME, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) * 2.0;
+    highp float noise = (fract(sin(dot(UV * TIME, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) * 2.0;
 
     // Add noise
-    // color.rgb += noise * 0.05; // Adjust intensity of the grain
+    color.rgb += noise * 0.02; // Reduced intensity for less intense grain
 
     // Apply the night vision tint
     color.rgb *= nv_color;
