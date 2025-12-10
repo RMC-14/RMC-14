@@ -1,4 +1,4 @@
-using Content.Shared.CCVar; // RMC14
+using Content.Shared.CCVar;
 using Content.Shared._RMC14.CCVar;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
@@ -38,7 +38,7 @@ public sealed partial class AccessibilityTab : Control
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 
-        // RMC14 - Add NightVisionColorOption
+        // RMC14
         var nightVisionOption = new NightVisionColorOption();
         NightVisionOptionContainer.AddChild(nightVisionOption);
         nightVisionOption.RegisterOption(Control);
