@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed gases being blocked from spreading on tiles containing different
-      gases.
-    type: Fix
-  id: 2164
-  time: '2025-08-06T04:32:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7366
-- author: PursuitInAshes
-  changes:
-  - message: Civilians can no longer access the CLF Patch through loadouts.
-    type: Tweak
-  id: 2165
-  time: '2025-08-06T04:34:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7372
 - author: BreakpointDebug1234
   changes:
   - message: Rubber mags are now marked by a pink stripe
@@ -4758,5 +4743,19 @@
   id: 2666
   time: '2025-12-10T01:32:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8572
+- author: yagwog
+  changes:
+  - message: Fixed ghost half bright staying after returning to your body.
+    type: Fix
+  id: 2667
+  time: '2025-12-10T01:44:17.894436+00:00'
+  url: null
+- author: Aurallianz
+  changes:
+  - message: Fixed nuke also killing everyone not on the planet.
+    type: Fix
+  id: 2668
+  time: '2025-12-10T01:44:17.894979+00:00'
+  url: null
 Name: RMC14
 Order: -1
