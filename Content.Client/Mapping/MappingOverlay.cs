@@ -22,6 +22,8 @@ public sealed class MappingOverlay : Overlay
     // 1 off in case something else uses these colors since we use them to compare
     private static readonly Color PickColor = new(1, 255, 0);
     private static readonly Color DeleteColor = new(255, 1, 0);
+    private static readonly Color MeasureColor = new(122, 67, 0);
+
 
     private readonly Dictionary<EntityUid, Color> _oldColors = new();
 
@@ -47,7 +49,7 @@ public sealed class MappingOverlay : Overlay
             if (!_entities.TryGetComponent(id, out SpriteComponent? sprite))
                 continue;
 
-            if (sprite.Color == DeleteColor || sprite.Color == PickColor)
+            if (sprite.Color == DeleteColor || sprite.Color == PickColor || sprite.Color == MeasureColor)
                 _sprite.SetColor((id, sprite), color);
         }
 
@@ -79,6 +81,17 @@ public sealed class MappingOverlay : Overlay
                 {
                     _oldColors[entity] = sprite.Color;
                     _sprite.SetColor((entity, sprite), DeleteColor);
+                }
+
+                break;
+            }
+            case CursorState.Measure:
+            {
+                if (_state.GetHoveredEntity() is { } entity &&
+                    _entities.TryGetComponent(entity, out SpriteComponent? sprite))
+                {
+                    _oldColors[entity] = sprite.Color;
+                    _sprite.SetColor((entity, sprite), MeasureColor);
                 }
 
                 break;
