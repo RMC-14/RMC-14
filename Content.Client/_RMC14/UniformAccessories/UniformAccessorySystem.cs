@@ -4,6 +4,7 @@ using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Foldable;
 using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
@@ -60,6 +61,13 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
 
+            // Check if the accessory is folded and use the appropriate sprite state
+            var spriteState = sprite.RsiState;
+            if (TryComp<FoldableComponent>(accessory, out var foldable) && foldable.IsFolded)
+            {
+                spriteState = $"flipped-{sprite.RsiState}";
+            }
+
             if (ent.Comp.HideAccessories && accessoryComp.HiddenByJacketRolling)
                 continue;
 
@@ -68,7 +76,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
                 clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);
                 clothingSprite.LayerSetRSI(clothingLayer, sprite.RsiPath);
-                clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
+                clothingSprite.LayerSetState(clothingLayer, spriteState);
             }
 
             if (args.Layers.Any(t => t.Item1 == layer))
@@ -77,7 +85,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             args.Layers.Add((layer, new PrototypeLayerData
             {
                 RsiPath = sprite.RsiPath.ToString(),
-                State = sprite.RsiState,
+                State = spriteState,
                 Visible = !accessoryComp.Hidden
             }));
 
