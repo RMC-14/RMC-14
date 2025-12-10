@@ -34,6 +34,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -983,14 +984,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             }
         }
 
-        var steppingQuery = EntityQueryEnumerator<SteppingOnFireComponent>();
-        while (steppingQuery.MoveNext(out var uid, out var stepping))
+        var steppingQuery = EntityQueryEnumerator<SteppingOnFireComponent, PhysicsComponent>();
+        while (steppingQuery.MoveNext(out var uid, out var stepping, out var body))
         {
             stepping.ArmorMultiplier = 1;
             Dirty(uid, stepping);
 
             var isStepping = false;
-            foreach (var contact in _physics.GetContactingEntities(uid, approximate: true))
+            foreach (var contact in _physics.GetContactingEntities(uid, body, approximate: true))
             {
                 if (!_igniteOnCollideQuery.TryComp(contact, out var ignite))
                     continue;
