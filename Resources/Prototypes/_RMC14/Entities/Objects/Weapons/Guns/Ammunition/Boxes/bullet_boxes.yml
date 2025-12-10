@@ -222,3 +222,71 @@
   - type: BulletBox
     bulletType: RMCBoxBulletsSmartGun
     amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleTSE
+  name: TSE rifle ammunition box (8.88x51mm)
+  description: An 8.88x51mm ammunition box. Used to refill L24 and L64A3 magazines. It comes with a leather strap allowing someone to wear it on their back. # TODO RMC14 rename and implement L64A3
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#323b3e"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleTSE
+
+- type: entity
+  parent: RMCBoxBulletsRifleTSE
+  id: RMCBoxBulletsRifleTSEEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleTSEEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleTSE
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleTSEAP
+  name: TSE rifle ammunition box (10x24mm AP)
+  description: An 8.88x51mm ammunition box. Used to refill L24 and L64A3 AP magazines. It comes with a leather strap allowing someone to wear it on their back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#323b3e"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#318b11"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleTSEAP
+
+- type: entity
+  parent: RMCBoxBulletsRifleTSEAP
+  id: RMCBoxBulletsRifleTSEAPEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleTSEAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleTSEAP
+    amount: 0
