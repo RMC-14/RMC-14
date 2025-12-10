@@ -4,9 +4,6 @@
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaCorporateSecurity
-  accessGroups:
-  - ColonistAllAccessNoArmory
-  - ColonistCorporate
   spawnMenuRoleName: We-Ya Goon (Hybrisa Survivor)
   hasIcon: true
   special:
