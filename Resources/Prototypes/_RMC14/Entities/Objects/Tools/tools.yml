@@ -23,12 +23,12 @@
         volume: -4
   - type: EmitSoundOnDrop
     sound:
-      path: /Audio/Items/wirecutter_drop.ogg
+      path: /Audio/Items/screwdriver_drop.ogg
       params:
         volume: -4
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/Items/wirecutter_drop.ogg
+      path: /Audio/Items/screwdriver_drop.ogg
       params:
         volume: -4
   - type: Clothing
