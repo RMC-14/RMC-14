@@ -9,4 +9,6 @@
     state: tires
   - type: Item
     size: Large
+  - type: RMCHardpointItem
+    hardpointType: Wheel
   - type: RMCVehicleWheelItem

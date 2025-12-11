@@ -1,3 +1,4 @@
+using System;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.GameObjects;
@@ -53,9 +54,7 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
 
         var isMoving = false;
         if (TryComp<GridVehicleMoverComponent>(uid, out var gridMover))
-        {
-            isMoving = gridMover.CurrentSpeed > 0.01f;
-        }
+            isMoving = MathF.Abs(gridMover.CurrentSpeed) > 0.01f;
 
         const string wheelsMoving = "wheels_0";
         const string wheelsStationary = "wheels_0";

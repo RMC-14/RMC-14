@@ -1,3 +1,4 @@
+using System;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
@@ -64,6 +65,15 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
     private void EnsureSlots(EntityUid uid, RMCVehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
     {
         itemSlots ??= EnsureComp<ItemSlotsComponent>(uid);
+
+        if (component.Slots.Count == 0 && TryComp<RMCHardpointSlotsComponent>(uid, out var hardpoints))
+        {
+            foreach (var slot in hardpoints.Slots)
+            {
+                if (string.Equals(slot.HardpointType, RMCVehicleWheelSlotsComponent.HardpointTypeId, StringComparison.OrdinalIgnoreCase))
+                    component.Slots.Add(slot.Id);
+            }
+        }
 
         if (component.Slots.Count == 0)
         {

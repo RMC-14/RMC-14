@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Vehicle;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -18,11 +21,13 @@ namespace Content.Shared.Vehicle;
 
 public sealed class GridVehicleMoverSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming timing = default!;
     [Dependency] private readonly SharedTransformSystem transform = default!;
     [Dependency] private readonly SharedMapSystem map = default!;
     [Dependency] private readonly SharedPhysicsSystem physics = default!;
     [Dependency] private readonly EntityLookupSystem lookup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
@@ -30,9 +35,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
     private const float Clearance = PhysicsConstants.PolygonRadius * 0.75f;
 
-    // -----------------------------
-    // ✔ Debug restore
-    // -----------------------------
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
 
@@ -68,6 +70,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         ent.Comp.CurrentTile = tile;
         ent.Comp.TargetTile = tile;
         ent.Comp.Position = new Vector2(tile.X + 0.5f, tile.Y + 0.5f);
+        ent.Comp.CurrentSpeed = 0f;
         ent.Comp.IsCommittedToMove = false;
 
         Dirty(uid, ent.Comp);
@@ -80,9 +83,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         DebugTestedTiles.Clear();
         DebugCollisions.Clear();
 
-        var query = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
+        var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
 
-        while (query.MoveNext(out var uid, out var mover, out var vehicle, out var xform))
+        while (q.MoveNext(out var uid, out var mover, out var vehicle, out var xform))
         {
             if (vehicle.MovementKind != VehicleMovementKind.Grid)
                 continue;
@@ -90,58 +93,188 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
                 continue;
 
-            Vector2i input = Vector2i.Zero;
+            Vector2i inputDir = Vector2i.Zero;
 
             if (vehicle.Operator is { } op && TryComp<InputMoverComponent>(op, out var inputComp))
-                input = GetInputDirection(inputComp);
+                inputDir = GetInputDirection(inputComp);
 
-            UpdateMovement(uid, mover, grid, gridComp, input, frameTime);
+            UpdateMovement(uid, mover, grid, gridComp, inputDir, frameTime);
         }
     }
 
-    private void UpdateMovement(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
-        MapGridComponent gridComp, Vector2i inputDir, float frameTime)
+    private void UpdateMovement(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i inputDir,
+        float frameTime)
     {
-        bool hasInput = inputDir != Vector2i.Zero;
-
         if (mover.IsCommittedToMove)
         {
-            ContinueCommittedMove(uid, mover, grid, gridComp, frameTime);
+            ContinueCommittedMove(uid, mover, grid, gridComp, inputDir, frameTime);
             return;
         }
 
+        var hasInput = inputDir != Vector2i.Zero;
+
         if (!hasInput)
         {
-            mover.CurrentSpeed = 0f;
+            if (mover.CurrentSpeed > 0f)
+                mover.CurrentSpeed = MathF.Max(0f, mover.CurrentSpeed - mover.Deceleration * frameTime);
+            else if (mover.CurrentSpeed < 0f)
+                mover.CurrentSpeed = MathF.Min(0f, mover.CurrentSpeed + mover.Deceleration * frameTime);
+
             var tile = GetTile(grid, gridComp, mover.Position);
             mover.CurrentTile = tile;
             mover.TargetTile = tile;
+            mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
+            if (mover.IsMoving)
+                PlayRunningSound(uid);
             SetGridPosition(uid, grid, mover.Position);
             Dirty(uid, mover);
             return;
         }
 
-        var facing = mover.CurrentDirection;
-        bool angleChanged = false;
+        CommitNextTile(uid, mover, grid, gridComp, inputDir);
+        SetGridPosition(uid, grid, mover.Position);
+        Dirty(uid, mover);
+    }
 
-        if (facing == Vector2i.Zero)
+    private void ContinueCommittedMove(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i inputDir,
+        float frameTime)
+    {
+        var tileDelta = mover.TargetTile - mover.CurrentTile;
+        if (tileDelta == Vector2i.Zero)
         {
-            facing = inputDir;
-            angleChanged = true;
+            mover.IsCommittedToMove = false;
+            return;
         }
+
+        var maxSpeed = mover.MaxSpeed;
+        var maxReverseSpeed = mover.MaxReverseSpeed;
+
+        if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
+        {
+            maxSpeed *= overcharge.SpeedMultiplier;
+            maxReverseSpeed *= overcharge.SpeedMultiplier;
+        }
+
+        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
+        var toTarget = targetCenter - mover.Position;
+        var distToTarget = toTarget.Length();
+
+        var hasInput = inputDir != Vector2i.Zero;
+        var facing = mover.CurrentDirection;
+        var reversing = hasInput && facing != Vector2i.Zero && inputDir == -facing;
+
+        float targetSpeed;
+        float accel;
+
+        if (!hasInput)
+        {
+            targetSpeed = 0f;
+            accel = mover.Deceleration;
+        }
+        else if (reversing)
+        {
+            if (mover.CurrentSpeed > 0f)
+            {
+                targetSpeed = 0f;
+                accel = mover.Deceleration;
+            }
+            else
+            {
+                targetSpeed = -maxReverseSpeed;
+                accel = mover.ReverseAcceleration;
+            }
+        }
+        else
+        {
+            if (mover.CurrentSpeed < 0f)
+            {
+                targetSpeed = 0f;
+                accel = mover.Deceleration;
+            }
+            else
+            {
+                targetSpeed = maxSpeed;
+                accel = mover.Acceleration;
+            }
+        }
+
+        if (mover.CurrentSpeed < targetSpeed)
+            mover.CurrentSpeed = MathF.Min(mover.CurrentSpeed + accel * frameTime, targetSpeed);
+        else if (mover.CurrentSpeed > targetSpeed)
+            mover.CurrentSpeed = MathF.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
+
+        var speedMag = MathF.Abs(mover.CurrentSpeed);
+        var moveAmount = speedMag * frameTime;
+
+        if (distToTarget <= 0.0001f || moveAmount >= distToTarget)
+        {
+            mover.Position = targetCenter;
+            mover.CurrentTile = mover.TargetTile;
+
+            if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
+            {
+                mover.IsCommittedToMove = false;
+                mover.CurrentSpeed = 0f;
+            }
+            else
+            {
+                CommitNextTile(uid, mover, grid, gridComp, inputDir);
+            }
+        }
+        else
+        {
+            var dir = toTarget / distToTarget;
+            mover.Position += dir * moveAmount;
+        }
+        mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
+        if (mover.IsMoving)
+            PlayRunningSound(uid);
+
+        SetGridPosition(uid, grid, mover.Position);
+        physics.WakeBody(uid);
+        Dirty(uid, mover);
+    }
+
+    private void CommitNextTile(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i inputDir)
+    {
+        if (inputDir == Vector2i.Zero)
+        {
+            mover.IsCommittedToMove = false;
+            return;
+        }
+
+        var facing = mover.CurrentDirection;
+        var hadFacing = facing != Vector2i.Zero;
+
+        if (!hadFacing)
+            facing = inputDir;
+
+        var reversing = hadFacing && inputDir == -facing;
+
+        if (!reversing)
+            facing = inputDir;
 
         Vector2i moveDir;
 
-        if (inputDir == facing)
-            moveDir = facing;
-        else if (inputDir == -facing)
+        if (reversing)
             moveDir = -facing;
         else
-        {
-            facing = inputDir;
             moveDir = facing;
-            angleChanged = true;
-        }
 
         var targetTile = mover.CurrentTile + moveDir;
         var targetCenter = new Vector2(targetTile.X + 0.5f, targetTile.Y + 0.5f);
@@ -149,60 +282,26 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         if (!CanOccupyTransform(uid, grid, targetCenter, desiredRot, Clearance))
         {
-            mover.TargetTile = mover.CurrentTile;
-            mover.CurrentSpeed = 0f;
-
-            if (angleChanged && CanOccupyTransform(uid, grid, mover.Position, desiredRot, Clearance))
+            if (!reversing && !hadFacing)
             {
                 mover.CurrentDirection = facing;
                 transform.SetLocalRotation(uid, desiredRot);
             }
 
+            mover.TargetTile = mover.CurrentTile;
             mover.IsCommittedToMove = false;
-            Dirty(uid, mover);
+            mover.CurrentSpeed = 0f;
             return;
+        }
+
+        if (!reversing)
+        {
+            mover.CurrentDirection = facing;
+            transform.SetLocalRotation(uid, desiredRot);
         }
 
         mover.TargetTile = targetTile;
-        mover.CurrentDirection = facing;
-        mover.CurrentSpeed = mover.MaxSpeed;
         mover.IsCommittedToMove = true;
-
-        Dirty(uid, mover);
-    }
-
-    private void ContinueCommittedMove(EntityUid uid, GridVehicleMoverComponent mover, EntityUid grid,
-        MapGridComponent gridComp, float frameTime)
-    {
-        var deltaTile = mover.TargetTile - mover.CurrentTile;
-        if (deltaTile == Vector2i.Zero)
-            return;
-
-        var moveDir = Vector2.Normalize(new Vector2(deltaTile.X, deltaTile.Y));
-        var step = moveDir * (mover.MaxSpeed * frameTime);
-
-        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-        var remaining = targetCenter - mover.Position;
-
-        if (step.Length() >= remaining.Length())
-        {
-            mover.Position = targetCenter;
-            mover.CurrentTile = mover.TargetTile;
-            mover.IsCommittedToMove = false;
-            mover.CurrentSpeed = 0f;
-
-            var angle = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
-            transform.SetLocalRotation(uid, angle);
-        }
-        else
-        {
-            mover.Position += step;
-            mover.CurrentSpeed = mover.MaxSpeed;
-        }
-
-        SetGridPosition(uid, grid, mover.Position);
-        physics.WakeBody(uid);
-        Dirty(uid, mover);
     }
 
     private Vector2i GetInputDirection(InputMoverComponent input)
@@ -219,11 +318,12 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             return dir;
 
         if (dir.X != 0 && dir.Y != 0)
-            dir = Math.Abs(dir.X) >= Math.Abs(dir.Y)
-                ? new Vector2i(Math.Sign(dir.X), 0)
-                : new Vector2i(0, Math.Sign(dir.Y));
-        else
-            dir = new Vector2i(Math.Sign(dir.X), Math.Sign(dir.Y));
+        {
+            if (Math.Abs(dir.X) >= Math.Abs(dir.Y))
+                dir = new Vector2i(Math.Sign(dir.X), 0);
+            else
+                dir = new Vector2i(0, Math.Sign(dir.Y));
+        }
 
         return dir;
     }
@@ -240,8 +340,12 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         transform.SetLocalPosition(uid, local, xform);
     }
 
-    private bool CanOccupyTransform(EntityUid uid, EntityUid grid, Vector2 gridPos,
-        Angle? overrideRotation = null, float clearance = 0f)
+    private bool CanOccupyTransform(
+        EntityUid uid,
+        EntityUid grid,
+        Vector2 gridPos,
+        Angle? overrideRotation,
+        float clearance)
     {
         if (!physicsQ.TryComp(uid, out var body) || !fixtureQ.TryComp(uid, out var fixtures))
             return true;
@@ -249,13 +353,13 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         if (!body.CanCollide)
             return true;
 
-        if (!gridQ.TryComp(grid, out var _))
+        if (!gridQ.TryComp(grid, out var gridComp))
             return true;
 
         var coords = new EntityCoordinates(grid, gridPos);
         var world = coords.ToMap(EntityManager, transform);
 
-        var tileIndices = map.TileIndicesFor(grid, gridQ.GetComponent(grid), coords);
+        var tileIndices = map.TileIndicesFor(grid, gridComp, coords);
         DebugTestedTiles.Add((grid, tileIndices));
 
         var rotation = overrideRotation ?? transform.GetWorldRotation(uid);
@@ -263,9 +367,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         if (!TryGetFixtureAabb(fixtures, tx, out var aabb))
             return true;
-
-        var myLayer = body.CollisionLayer;
-        var myMask = body.CollisionMask;
 
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
 
@@ -275,12 +376,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 continue;
 
             if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
-                continue;
-
-            var otherLayer = otherBody.CollisionLayer;
-            var otherMask = otherBody.CollisionMask;
-
-            if ((myMask & otherLayer) == 0 && (myLayer & otherMask) == 0)
                 continue;
 
             if (!fixtureQ.TryComp(other, out var otherFixtures))
@@ -302,16 +397,16 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         return true;
     }
 
-    private bool TryGetFixtureAabb(FixturesComponent fixtures, Transform transform, out Box2 aabb)
+    private bool TryGetFixtureAabb(FixturesComponent fixtures, Transform transformData, out Box2 aabb)
     {
-        bool first = true;
+        var first = true;
         aabb = default;
 
         foreach (var fixture in fixtures.Fixtures.Values)
         {
-            for (int i = 0; i < fixture.Shape.ChildCount; i++)
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
             {
-                var child = fixture.Shape.ComputeAABB(transform, i);
+                var child = fixture.Shape.ComputeAABB(transformData, i);
 
                 if (first)
                 {
@@ -332,5 +427,25 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     {
         var coords = new EntityCoordinates(grid, pos);
         return map.TileIndicesFor(grid, gridComp, coords);
+    }
+
+    private void PlayRunningSound(EntityUid uid)
+    {
+        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+            return;
+
+        if (sound.RunningSound == null)
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var now = _timing.CurTime;
+        if (sound.NextRunningSound > now)
+            return;
+
+        _audio.PlayPvs(sound.RunningSound, uid);
+        sound.NextRunningSound = now + TimeSpan.FromSeconds(sound.RunningSoundCooldown);
+        Dirty(uid, sound);
     }
 }

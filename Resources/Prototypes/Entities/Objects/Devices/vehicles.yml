@@ -206,6 +206,14 @@
     maxSpeed: 9
     acceleration: 6
     deceleration: 12
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 16
+    overchargeSound: /Audio/Effects/Vehicle/vehiclestartup.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 1
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
@@ -237,6 +245,14 @@
   - type: DoAfter
   - type: InputMover
   - type: ItemSlots
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: Appearance
@@ -257,6 +273,14 @@
     acceleration: 6
     deceleration: 12
     frontOffset: 0
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 16
+    overchargeSound: /Audio/Effects/Vehicle/vehiclestartup.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 1
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
@@ -289,6 +313,14 @@
   - type: DoAfter
   - type: InputMover
   - type: ItemSlots
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: Appearance
