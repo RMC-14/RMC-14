@@ -44,6 +44,9 @@
   greeting: rmc-job-greeting-survivor
   hasIcon: false
   useLoadoutOfJob: CMSurvivor # for inheritance
+  basePlaytimeTracker: true
+  camouflageStartingGear:
+    Snow: RMCGearSurvivorSnowGear
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack
@@ -72,6 +75,15 @@
     jumpsuit: CMJumpsuitColonist
     shoes: RMCShoesBlack
 
+- type: startingGear
+  id: RMCGearSurvivorSnowGear
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivor
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSurvivor
@@ -96,6 +108,7 @@
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  name: rmc-playtime-tracker-job-name-survivor
   isHumanoid: true
 
 - type: entity
@@ -143,14 +156,14 @@
         1: 4 # 2%
       RMCDefibrillatorCompact:
         5: 8 # 2%
-      RMCTankFlamerImprovised:
+      RMCTankFlamerColony:
         9: 16 # 4%
       CMPacketGrenadeHighExplosiveFilled:
         17: 26 # 5%
-      CMTraumaKit10:
-        27: 38 # 6% TODO upgraded trauma kit
-      CMBurnKit10:
-        39: 54 # 8% TODO upgraded ointment
+      CMUpgradedTraumaKit10:
+        27: 38 # 6%
+      CMUpgradedBurnKit10:
+        39: 54 # 8%
       RMCAttachmentSuppressor:
         55: 74 # 10% TODO Attachments box
       RMCPouchFirstAidERTFill:

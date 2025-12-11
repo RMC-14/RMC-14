@@ -365,6 +365,9 @@
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Item # Intentionally allows the armor to be stored in bags.
+    size: Normal
+    storedRotation: 0
 
 - type: entity
   parent: CMArmorM3Medium
@@ -656,6 +659,57 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
 
+# Forced Camo Variants for Vendor Parity
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthJungle
+  name: M3A1 synthetic utility vest (Jungle)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthDesert
+  name: M3A1 synthetic utility vest (Desert)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthSnow
+  name: M3A1 synthetic utility vest (Snow)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthClassic
+  name: M3A1 synthetic utility vest (Classic)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: CMArmorM3VLSynthUrban
+  name: M3A1 synthetic utility vest (Urban)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # m4
 - type: entity
   parent: CMArmorM3Medium
@@ -684,7 +738,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by UNMC Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -699,6 +753,21 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  - type: FirewalkArmor
+    whitelist:
+      components:
+      - PyroWhitelist
+    addComponentsOnFirewalk:
+    - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    auraColor: "#03FCC6"
 
 # m45
 - type: entity
@@ -769,6 +838,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage

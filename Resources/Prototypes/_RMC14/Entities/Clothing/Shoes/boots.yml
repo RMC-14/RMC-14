@@ -44,9 +44,16 @@
     - state: icon
     - state: filled
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     unequipSound:
       collection: RMCEquipArmor
@@ -116,6 +123,40 @@
   id: CMBootsBrownFilled
   suffix: Filled
 
+# Urban Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsUrban
+  name: urban boots
+  description: Don't go walkin' slow, the devil's on the loose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/urban.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsUrban]
+  id: CMBootsUrbanFilled
+  suffix: Filled
+
+# Grey Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsGrey
+  name: grey boots
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are grey.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/grey.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsGrey]
+  id: CMBootsGreyFilled
+  suffix: Filled
+
 # Jungle Boots
 - type: entity
   parent: CMBootsBlack
@@ -148,9 +189,26 @@
   name: military combat boots
 
 - type: entity
-  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP] # TODO RMC14 SPP Bayonet
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP]
   id: RMCBootsSPPFilled
   suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+          - ThrowingKnife
+        startingItem: RMCCombatUtilityKnifeA
+  - type: CMItemSlots
+    startingItem: RMCCombatUtilityKnifeA
 
 - type: entity
   parent: CMBootsBlack
@@ -158,9 +216,26 @@
   name: military combat boots
 
 - type: entity
-  parent: [RMCItemSlotM5Bayonet, RMCBootsSPPBlack] # TODO RMC14 SPP Bayonet
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPPBlack]
   id: RMCBootsSPPBlackFilled
   suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+          - ThrowingKnife
+        startingItem: RMCCombatUtilityKnifeA
+  - type: CMItemSlots
+    startingItem: RMCCombatUtilityKnifeA
 
 # PMC
 - type: entity
@@ -210,6 +285,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
 
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesTychoBoots
+  name: Tycho 4000 radiation protection boots
+  description: The burn-resistant boots for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and the boot is steel-toed, perfect for trouncing around detonated nuclear reactors and avoiding radiation poisoning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rad_boots_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rad_boots_weya.rsi
+
 
 # Royal Crown Marines
 - type: entity
@@ -227,4 +313,21 @@
 - type: entity
   parent: [RMCItemSlotM5Bayonet, RMCBootsRoyal]
   id: RMCBootsRoyalFilled
-  suffix: Filled # TODO RMC14 L5 bayonet
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+          - ThrowingKnife
+        startingItem: RMCTantoA
+  - type: CMItemSlots
+    startingItem: RMCTantoA

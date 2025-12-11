@@ -17,6 +17,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
@@ -34,7 +35,11 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    private int _characterLimit = 1000;
+    public static readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    public static readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
+    public static readonly SoundSpecifier AresAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/AI/announce.ogg");
+
+    public int CharacterLimit = 1000;
 
     public override void Initialize()
     {
@@ -51,7 +56,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
                 subs.Event<MarineControlComputerMedalMsg>(OnMarineCommunicationsMedalMsg);
             });
 
-        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
+        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => CharacterLimit = limit, true);
     }
 
     private void OnEchoSquadReason(Entity<MarineCommunicationsComputerComponent> ent, ref EchoSquadReasonEvent args)
@@ -92,6 +97,9 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
     {
+        if (string.IsNullOrWhiteSpace(args.Text))
+            return;
+
         if (!_skills.HasSkill(args.Actor, ent.Comp.AnnounceSkill, ent.Comp.AnnounceSkillLevel))
         {
             _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", ent)), args.Actor, PopupType.MediumCaution);
@@ -108,8 +116,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
         _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
         var text = args.Text;
-        if (text.Length > _characterLimit)
-            text = text[.._characterLimit].Trim();
+        if (text.Length > CharacterLimit)
+            text = text[..CharacterLimit].Trim();
 
         AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
 
@@ -156,18 +164,24 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceRadio(
         EntityUid sender,
         string message,
-        ProtoId<RadioChannelPrototype> channel
-        )
+        ProtoId<RadioChannelPrototype> channel)
     {
     }
 
-    public virtual void AnnounceARES(
+    public virtual void AnnounceARESStaging(
         EntityUid? source,
         string message,
         SoundSpecifier? sound = null,
-        LocId? announcement = null
-        )
+        LocId? announcement = null)
     {
+    }
+
+    public void AnnounceARES(
+        EntityUid? source,
+        string message,
+        SoundSpecifier? sound = null)
+    {
+        AnnounceARESStaging(source, message, sound, "rmc-announcement-ares-command");
     }
 
     public virtual void AnnounceSquad(
@@ -192,14 +206,17 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     }
 
     /// <summary>
-    /// Dispatches already wrapped announcement to Marines.
+    ///     Dispatches already wrapped announcement to Marines.
     /// </summary>
     /// <param name="message">The content of the announcement.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
+    /// <param name="filter">Who should be able to see and hear the announcement.</param>
+    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public virtual void AnnounceToMarines(
         string message,
-        SoundSpecifier? sound = null
-    )
+        SoundSpecifier? sound = null,
+        Filter? filter = null,
+        bool excludeSurvivors = true)
     {
     }
 
@@ -212,8 +229,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceHighCommand(
         string message,
         string? author = null,
-        SoundSpecifier? sound = null
-    )
+        SoundSpecifier? sound = null)
     {
     }
 
@@ -225,13 +241,16 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="author">The author of the message, Command by default.</param>
     /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
+    /// <param name="filter">Who should be able to see and hear the announcement.</param>
+    /// <param name="excludeSurvivors">Whether or not to exclude survivors from the list of recipients.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,
         string? author = null,
         string? name = null,
-        SoundSpecifier? sound = null
-    )
+        SoundSpecifier? sound = null,
+        Filter? filter = null,
+        bool excludeSurvivors = true)
     {
         if (_net.IsClient)
             return;
@@ -240,14 +259,24 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        // TODO RMC14 receivers
-        var filter = Filter.Empty()
-            .AddWhereAttachedEntity(e =>
-                HasComp<MarineComponent>(e) ||
-                HasComp<GhostComponent>(e)
-            );
-
-        AnnounceToMarines(wrappedMessage);
+        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
+    }
+
+    public string FormatHighCommand(string? author, string message)
+    {
+        author ??= Loc.GetString("rmc-announcement-author-highcommand");
+        return Loc.GetString("rmc-announcement-message", ("author", author), ("message", message));
+    }
+
+    public string FormatARESStaging(LocId? author, string message)
+    {
+        author ??= "rmc-announcement-ares-message";
+        return Loc.GetString(author, ("message", FormattedMessage.EscapeText(message)));
+    }
+
+    public string FormatARES(string message)
+    {
+        return FormatARESStaging("rmc-announcement-ares-command", message);
     }
 }

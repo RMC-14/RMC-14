@@ -1,7 +1,7 @@
 - type: entity
   id: HiveClusterXeno
   parent: BaseHiveStructure
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
   components:
   - type: Sprite
@@ -28,9 +28,7 @@
     level: 3
     blockOtherWeeds: true
     spreadsOnSemiWeedable: true
-  - type: ReplaceWeedSourceOnWeeding
-    replacementPairs:
-      RMCCommunicationsTower: HivePylonXeno
+  - type: HiveCluster
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresWeedableSurface
@@ -43,7 +41,7 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: cluster
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
@@ -53,7 +51,7 @@
 - type: entity
   id: HiveClusterXenoConstructionNode
   parent: BaseHiveStructureNode
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. Looks like a marker for something.
   components:
   - type: Sprite

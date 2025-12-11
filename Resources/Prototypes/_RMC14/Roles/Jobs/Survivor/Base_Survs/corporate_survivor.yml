@@ -23,6 +23,7 @@
   startingGear: RMCGearSurvivorCorporate
   accessGroups:
   - ColonistCorporate
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -70,6 +71,7 @@
 
 - type: playTimeTracker
   id: CMJobSurvivorCorporate
+  name: rmc-playtime-tracker-job-name-survivor-corporate
   isHumanoid: true
 
 - type: entity

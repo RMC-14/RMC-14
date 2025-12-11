@@ -41,6 +41,12 @@
   inhand:
     - RMCPatchCLF
 
+- type: loadout
+  id: PatchOliveBranch
+  cost: 1
+  inhand:
+  - RMCPatchOliveBranch
+
 # Shoes
 - type: loadout
   id: ShoesBlackRMC
@@ -83,3 +89,22 @@
   cost: 1
   equipment:
     shoes: RMCShoesPurple
+
+# Hats
+- type: loadout
+  id: HeadCowboyHatLightRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCowboyHatLight
+
+- type: loadout
+  id: HeadCowboyHatDarkRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCowboyHatDark
+
+- type: loadout
+  id: HeadBandRebelRMC
+  cost: 2
+  equipment:
+    head: CMHeadBandRebel

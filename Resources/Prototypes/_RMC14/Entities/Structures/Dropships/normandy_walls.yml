@@ -518,6 +518,17 @@
     state: "46"
 
 - type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall46a]
+  id: CMNormandyWall46a
+  suffix: 46a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "46a"
+  - type: Icon
+    state: "46a"
+
+- type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall47]
   id: CMNormandyWall47
   suffix: 47
@@ -549,6 +560,17 @@
     state: "49"
   - type: Icon
     state: "49"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall49a]
+  id: CMNormandyWall49a
+  suffix: 49a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "49a"
+  - type: Icon
+    state: "49a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall50]
@@ -686,6 +708,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "61"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall62]
@@ -735,6 +760,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "65"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall66]
@@ -949,6 +977,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "84"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMNormandyWall84, CMAlamoWall84Flipped]
@@ -963,31 +994,25 @@
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall85]
+  parent: CMAlamoWall85
   id: CMNormandyWall85
-  name: electronic system attach point
-  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
-    state: "85"
-  - type: Icon
-    state: "85"
 
 - type: entity
-  parent: [CMNormandyWall85, CMAlamoWall85Flipped]
+  parent: CMAlamoWall85Flipped
   id: CMNormandyWall85Flipped
   suffix: 85, Flipped
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
-    layers:
-    - state: "85_flipped"
-    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0.5
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall86]
@@ -999,6 +1024,28 @@
     state: "86"
   - type: Icon
     state: "86"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall86a]
+  id: CMNormandyWall86a
+  suffix: 86a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "86a"
+  - type: Icon
+    state: "86a"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall86b]
+  id: CMNormandyWall86b
+  suffix: 86b
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "86b"
+  - type: Icon
+    state: "86b"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall87]
@@ -1032,6 +1079,28 @@
     state: "89"
   - type: Icon
     state: "89"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall89a]
+  id: CMNormandyWall89a
+  suffix: 89a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "89a"
+  - type: Icon
+    state: "89a"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall89b]
+  id: CMNormandyWall89b
+  suffix: 89b
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "89b"
+  - type: Icon
+    state: "89b"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall90]
@@ -1100,6 +1169,17 @@
     state: "95"
 
 - type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall95a]
+  id: CMNormandyWall95a
+  suffix: 95a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "95a"
+  - type: Icon
+    state: "95a"
+
+- type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall96]
   id: CMNormandyWall96
   suffix: 96
@@ -1120,6 +1200,17 @@
     state: "97"
   - type: Icon
     state: "97"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall97a]
+  id: CMNormandyWall97a
+  suffix: 97a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "97a"
+  - type: Icon
+    state: "97a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall98]
@@ -1144,6 +1235,17 @@
     state: "99"
 
 - type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall99a]
+  id: CMNormandyWall99a
+  suffix: 99a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "99a"
+  - type: Icon
+    state: "99a"
+
+- type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall100]
   id: CMNormandyWall100
   suffix: 100
@@ -1166,6 +1268,17 @@
     state: "101"
 
 - type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall101a]
+  id: CMNormandyWall101a
+  suffix: 101a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "101a"
+  - type: Icon
+    state: "101a"
+
+- type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall102]
   id: CMNormandyWall102
   suffix: 102
@@ -1175,3 +1288,25 @@
     state: "102"
   - type: Icon
     state: "102"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall103]
+  id: CMNormandyWall103
+  suffix: 103
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "103"
+  - type: Icon
+    state: "103"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall104]
+  id: CMNormandyWall104
+  suffix: 104
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "104"
+  - type: Icon
+    state: "104"

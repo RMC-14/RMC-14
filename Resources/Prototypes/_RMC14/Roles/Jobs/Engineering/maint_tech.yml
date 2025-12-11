@@ -39,13 +39,17 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-maint-tech
+    - type: CMVendorUser
+      id: CMMaintTech
+      points: 45
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mt
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearMaintTech

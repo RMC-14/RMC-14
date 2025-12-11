@@ -2,9 +2,12 @@
   parent: RMCBaseWeaponSniperRifle
   id: CMM96SSniperRifle
   name: M96S scoped rifle
-  description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
+  description: "A heavy sniper rifle manufactured by AEGIS Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
     'Peace Through Superior Firepower'"
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpecSniper
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
     layers:
@@ -82,6 +85,8 @@
       Snow: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
+  - type: RMCGunChamber
+    enabled: false
 
 - type: entity
   parent: BaseItem

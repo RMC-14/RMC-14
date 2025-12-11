@@ -1,4 +1,5 @@
-﻿- type: job
+﻿
+- type: job
   abstract: true
   id: CMJobBase
   isCM: true
@@ -8,6 +9,10 @@
     Silver: RMCMedalSilverService
     Gold: RMCMedalGoldService
     Platinum: RMCMedalPlatinumService
+    Ruby: RMCMedalRubyService
+    Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
+    Prismatic: RMCMedalPrismaticService
 
 - type: job
   abstract: true
@@ -33,6 +38,7 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+  isXeno: true
 
 - type: entity
   parent: MarkerBase
@@ -62,11 +68,14 @@
   parent: CMJobBase
   id: RMCJobRibbonBase
   medals:
-    Bronze: RMCMedalRibbonWhiteService
-    Silver: RMCMedalRibbonYellowService
-    Gold: RMCMedalRibbonRedService
+    Bronze: RMCMedalRibbonBronzeService
+    Silver: RMCMedalRibbonWhiteService
+    Gold: RMCMedalRibbonYellowService
     Platinum: RMCMedalRibbonBlueService
-
+    Ruby: RMCMedalRibbonRedService
+    Emerald: RMCMedalRibbonEmeraldService
+    Amethyst: RMCMedalRibbonAmethystService
+    Prismatic: RMCMedalRibbonPrismaticService
 - type: job
   abstract: true
   parent: CMJobBase

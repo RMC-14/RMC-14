@@ -105,6 +105,10 @@
     chance: 0.25
     stunMin: 3
     stunMax: 4
+  - type: AcidBloodSplash
+    isActivateSplashOnGib: false
+  - type: RMCGibOnDeath
+    gibChance: 1.0
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -148,7 +152,7 @@
     prefix: boiler
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: boiler
   - type: Flammable
     damage: #per second, scales with number of fire 'stacks'
@@ -159,3 +163,5 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-boiler
+  - type: RMCActionOrder
+    id: CMXenoBoiler

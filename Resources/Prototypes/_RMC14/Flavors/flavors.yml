@@ -9,6 +9,6 @@
   description: rmc-flavor-complex-whiskey
 
 - type: flavor
-  id: mango
+  id: rmcmango
   flavorType: Complex
   description: rmc-flavor-complex-mango

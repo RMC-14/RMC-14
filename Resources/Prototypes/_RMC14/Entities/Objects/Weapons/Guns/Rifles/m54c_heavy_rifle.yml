@@ -1,7 +1,7 @@
 ﻿- type: entity
   name: M54CE2 heavy assault rifle
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleM54CE2
+  id: RMCWeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
@@ -15,7 +15,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
   - type: Tag
     tags:
-    - WeaponRifleM54CE2
+    - RMCWeaponRifleM54CE2
   - type: Gun
     shotsPerBurst: 5
     selectedMode: FullAuto
@@ -75,6 +75,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -82,7 +83,14 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CE2Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM54CE2Stock
       rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
@@ -95,7 +103,7 @@
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125
       rmc-aslot-rail: 0.125, 0.185
-      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-stock: -1, 0
       rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
     camouflageVariations:
@@ -211,8 +219,74 @@
     - state: ammo_band
       color: "#1F951F"
 
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2HEAP
+  name: "M54CE2 HEAP magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2WP
+  name: "M54CE2 WP magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmWP
+    proto: RMCCartridgeRifle10x24mmWP
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#6365E6"
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2Incendiary
+  name: "M54CE2 incendiary magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
+
 - type: Tag
-  id: WeaponRifleM54CE2
+  id: RMCWeaponRifleM54CE2
 
 - type: Tag
   id: CMMagazineRifleM54CE2

@@ -11,22 +11,22 @@
   table: !type:AllSelector
     children:
     - id: CMArmorHelmetM11
-    - id: RMCLaserDesignator
+    - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
+    - id: RMCArmorB12PVE
 
 - type: entityTable
   id: RMCClosetGoldenArrowSGOFill
   table: !type:AllSelector
     children:
-    - id: RMCSmartGun
+    - id: RMCSmartGunPVE
     - id: RMCPowerCellSmartgun
-    - id: CMArmorSmartGunCombatHarness
+    - id: RMCArmorM3PVESGO
     - id: RMCBeltSmartGunOperatorPistolFilled
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun
     - id: RMCGlassesSmartGunSight
-    - id: RMCWebbingClipOnPouch
-    - id: RMCWebbingGrenade
+    - id: RMCScabbardMacheteSGFilled
 
 - type: entityTable
   id: RMCClosetTSEPAFill

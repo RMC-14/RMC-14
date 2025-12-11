@@ -19,6 +19,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - Flashlight
       - DiscreteHealthAnalyzer
       - Pen
@@ -46,6 +47,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
 
 - type: entity
   parent: RMCOuterClothingExternalWebbing

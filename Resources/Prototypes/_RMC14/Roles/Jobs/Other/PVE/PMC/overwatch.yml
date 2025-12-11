@@ -10,7 +10,7 @@
   icon: RMCJobIconPMCDirector
   joinNotifyCrew: false
   accessGroups:
-  - Colony
+  - MarineMain
   - RMCWeYa
   spawnMenuRoleName: WEYA PMC Force Command (PVE)
   special:
@@ -33,12 +33,26 @@
         RMCSkillEndurance: 1
         RMCSkillJtac: 4
         RMCSkillExecution: 1
-    - type: SquadArmorWearer
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-pmc-standard
+      prefix: rmc-job-prefix-pmc-pve-force-command
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sd
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity
@@ -57,6 +71,12 @@
   id: RMCJobPMCForceCommandPVE
   equipment:
     id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbing
+    shoes: RMCBootsPMC
+    head: ArmorHelmetPMC
+    ears: RMCHeadsetDistressPMCPVE
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: playTimeTracker
   id: CMJobPMCForceCommandPVE

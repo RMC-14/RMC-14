@@ -60,6 +60,7 @@ public sealed class XenoScreechSystem : EntitySystem
 
         _closeMobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _closeMobs);
+        _closeMobs.RemoveWhere(uid => HasComp<XenoScreechComponent>(uid));
 
         foreach (var receiver in _closeMobs)
         {
@@ -72,6 +73,7 @@ public sealed class XenoScreechSystem : EntitySystem
 
         _mobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _mobs);
+        _mobs.RemoveWhere(uid => HasComp<XenoScreechComponent>(uid));
 
         foreach (var receiver in _mobs)
         {
@@ -90,19 +92,19 @@ public sealed class XenoScreechSystem : EntitySystem
 
         foreach (var receiver in _parasites)
         {
-            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true);
+            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true, false);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun)
+    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun, bool occlusionCheck = true)
     {
         if (_mobState.IsDead(receiver))
             return;
 
-        if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
+        if (occlusionCheck && !_examineSystem.InRangeUnOccluded(xeno, receiver))
             return;
 
         if (stun)

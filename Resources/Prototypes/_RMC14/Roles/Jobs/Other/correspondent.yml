@@ -13,7 +13,7 @@
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - CMCorrespondent
   roleWeight: 0.25
@@ -26,11 +26,14 @@
         RMCSkillEndurance: 0
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: CMVendorUser
+      points: 45
+      id: CMCorrespondent
     - type: JobPrefix
       prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
   hasIcon: false
 

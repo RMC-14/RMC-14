@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -100,6 +101,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
@@ -131,6 +133,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - Flashlight
       - DiscreteHealthAnalyzer
       - GasTank
@@ -169,6 +172,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - RMCMacheteScabbard
       - RMCScabbardKatana
       - RMCDetector
@@ -282,11 +286,11 @@
   - type: CMArmor
     melee: 10
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
-  name: quartermaster jacket
+  name: Logistics Officer jacket
   description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
   components:
   - type: Sprite
@@ -500,6 +504,50 @@
   - type: CMArmor
     melee: 10
 
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketStandard
+  name: Standard commanding officer standard issue jacket
+  description: A jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketstandard.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketPurple
+  name: Purple commanding officer standard issue jacket
+  description: A purple jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketpurple.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGreen
+  name: Green commanding officer standard issue jacket
+  description: A green jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgreen.rsi
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOServiceJacketGrey
+  name: Grey commanding officer standard issue jacket
+  description: A grey jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/standardissuejackets/cojacketgrey.rsi
+
 # Executive Officer
 
 - type: entity
@@ -565,6 +613,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
+
+- type: entity
+  parent: RMCProvostCoat
+  id: RMCProvostCoatFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
 
 
 - type: entity
@@ -695,6 +753,39 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
 
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerBrown
+  name: brown windbreaker
+  description: A brown windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerGrey
+  name: grey windbreaker
+  description: A grey windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerExpedition
+  name: expedition windbreaker
+  description: A brown windbreaker with various patches tying it to one of the first explorations into this sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+
 
 # priest robes
 - type: entity
@@ -718,6 +809,17 @@
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingHolidayRobes
+  name: holiday priest
+  description: This is a nice holiday, my son.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/holiday_robes.rsi
 
 # Hybrisa
 
@@ -817,7 +919,31 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
+
+# Chance's Claim
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCBrownWEYACoat
+  name: brown WEYA coat
+  description: A long, tough coat with the company logo on the back. Popular on colonies which require function over form.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWEYARainCoat
+  name: WEYA rain coat
+  description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/yellow_raincoat.rsi
 
 # Snow
 
@@ -828,6 +954,116 @@
   description: A standard snow suit. It can protect the wearer from extreme cold.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 20
+    explosionArmor: 0
+  # TODO give temperature protection
+  # TODO 10 internal damage armor
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowSurvivor
+  name: robust snow suit
+  description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
+  - type: CMHardArmor
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorSecurity
+  name: security parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/security.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/security.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorCMBDeputy
+  name: CMB deputy parka
+  description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/cmb.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/cmb.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorNavy
+  name: navy parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/navy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/navy.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorYellow
+  name: yellow parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/yellow.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorGreen
+  name: green parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/green.rsi
+
+- type: entity
+  parent: RMCCoatSnowSurvivor
+  id: RMCCoatSnowSurvivorPurple
+  name: purple parka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/purple.rsi
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowSoviet
+  name: soviet snowcoat
+  description: A winter coat made in some desolate snowplanet. This wintercoat was made from the fur of local wildlife which donated their fur for the greater good of SPP!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/soviet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/soviet.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
+
+- type: entity
+  parent: RMCCoatSnow
+  id: RMCCoatSnowLiaison
+  name: liaison's wintercoat
+  description: A Weston-Yamada winter coat. Only the best comfort for the liaison in a cold environment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/liaison.rsi

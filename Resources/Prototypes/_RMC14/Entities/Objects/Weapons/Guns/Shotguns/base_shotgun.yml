@@ -23,6 +23,11 @@
     medium: 0.865
     heavy: 0.865
   - type: AmmoCounter
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCRustleGun
+      params:
+        volume: -4
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -76,6 +81,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+  - type: RMCGunChamber
+    enabled: false
 
 - type: entity
   abstract: true

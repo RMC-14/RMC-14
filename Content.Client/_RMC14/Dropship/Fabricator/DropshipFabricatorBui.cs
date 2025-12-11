@@ -43,26 +43,32 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                 continue;
             }
 
-            var label = new RichTextLabel();
-            label.SetMessage(printableProto.Name);
+            var label = new RichTextLabel
+            {
+                Margin = new Thickness(4, 2),
+                HorizontalExpand = false
+            };
+            label.SetMarkupPermissive(printableProto.Name);
 
             var button = new Button
             {
                 Text = Loc.GetString("rmc-dropship-fabricator-fabricate", ("cost", printable.Cost)),
                 StyleClasses = { "OpenBoth" },
+                MinWidth = 120
             };
             button.OnPressed += _ => SendPredictedMessage(new DropshipFabricatorPrintMsg(id));
 
             var container = new BoxContainer
             {
                 Orientation = LayoutOrientation.Horizontal,
+                Margin = new Thickness(0, 4),
                 Children =
                 {
                     label,
                     new Control { HorizontalExpand = true },
-                    button,
+                    button
                 },
-                HorizontalExpand = true,
+                HorizontalExpand = true
             };
 
             if (printable.Category == CategoryType.Equipment)
@@ -78,6 +84,9 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
             return;
 
         if (EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
-            _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", ("points", fabricator.Points));
+        {
+            _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", 
+                ("points", fabricator.Points));
+        }
     }
 }

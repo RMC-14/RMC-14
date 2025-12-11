@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
@@ -133,6 +134,9 @@ public abstract class SharedItemSystem : EntitySystem
             !_handsSystem.CanPickupAnyHand(args.User, args.Target, handsComp: args.Hands, item: component))
             return;
 
+        if (HasComp<ClothingComponent>(uid)) // RMC14-Armor-Pickup-Fix
+            return;
+
         InteractionVerb verb = new();
         verb.Act = () => _handsSystem.TryPickupAnyHand(args.User, args.Target, checkActionBlocker: false,
             handsComp: args.Hands, item: component);
@@ -227,48 +231,9 @@ public abstract class SharedItemSystem : EntitySystem
     public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<StorageComponent?> storage, Entity<ItemComponent?> entity, Angle rotation, Vector2i position)
     {
         if (!Resolve(entity, ref entity.Comp))
-            return [];
-
-        var adjustedShapes = new List<Box2i>();
-        GetAdjustedItemShape(adjustedShapes, entity, rotation, position, storage);
-        return adjustedShapes;
-    }
-
-    public void GetAdjustedItemShape(List<Box2i> adjustedShapes, Entity<ItemComponent?> entity, Angle rotation, Vector2i position, Entity<StorageComponent?> storage)
-    {
-        var shapes = GetItemShape(storage, entity);
-        var boundingShape = shapes.GetBoundingBox();
-        var boundingCenter = ((Box2) boundingShape).Center;
-        var matty = Matrix3Helpers.CreateTransform(boundingCenter, rotation);
-        var drift = boundingShape.BottomLeft - matty.TransformBox(boundingShape).BottomLeft;
-
-        foreach (var shape in shapes)
-        {
-            var transformed = matty.TransformBox(shape).Translated(drift);
-            var floored = new Box2i(transformed.BottomLeft.Floored(), transformed.TopRight.Floored());
-            var translated = floored.Translated(position);
-
-            adjustedShapes.Add(translated);
-        }
-    }
-
-    /// <summary>
-    /// Gets the shape of an item, adjusting for rotation and offset.
-    /// </summary>
-    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<ItemComponent?> entity, ItemStorageLocation location)
-    {
-        return GetAdjustedItemShape(entity, location.Rotation, location.Position);
-    }
-
-    /// <summary>
-    /// Gets the shape of an item, adjusting for rotation and offset.
-    /// </summary>
-    public IReadOnlyList<Box2i> GetAdjustedItemShape(Entity<ItemComponent?> entity, Angle rotation, Vector2i position)
-    {
-        if (!Resolve(entity, ref entity.Comp))
             return new Box2i[] { };
 
-        var shapes = GetItemShape(entity.Comp);
+        var shapes = GetItemShape(storage, entity);
         var boundingShape = shapes.GetBoundingBox();
         var boundingCenter = ((Box2) boundingShape).Center;
         var matty = Matrix3Helpers.CreateTransform(boundingCenter, rotation);

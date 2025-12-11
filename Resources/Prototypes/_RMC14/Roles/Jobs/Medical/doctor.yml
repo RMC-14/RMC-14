@@ -32,11 +32,12 @@
       prefix: cm-job-prefix-doctor
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: doctor
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_medical
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearDoctor

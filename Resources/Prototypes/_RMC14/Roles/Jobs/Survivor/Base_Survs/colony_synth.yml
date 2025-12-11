@@ -8,14 +8,14 @@
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
   icon: "RMCJobIconSynth"
-  requireAdminNotify: true
   joinNotifyCrew: true
   whitelisted: true
   supervisors: cm-job-supervisors-colonists
   accessGroups:
-  - Colonist
-  - Synth
+  - Colony # Colony All Access
+  - ColonistSynthShipside # Med, Engi, Synth
   roleWeight: 0.25
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -45,7 +45,7 @@
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: NpcFactionMember
       factions:
@@ -67,40 +67,6 @@
           Blunt: 35
     - type: Synth
       generation: rmc-species-synth-generation-second
-      welderDamageToRepair:
-        types:
-          Blunt: -15
-          Piercing: -15
-          Slash: -15
-      cableCoilDamageToRepair:
-        types:
-          Caustic: -15
-          Heat: -15
-          Shock: -15
-          Cold: -15
-      addComponents:
-      # TODO darksight instead of night vision
-      - type: NightVision
-        innate: true
-      - type: EyeProtection
-      - type: WoundableUntreatable
-      - type: Insulated
-      - type: RMCLeapProtection
-        inherentStunDuration: 3
-      removeComponents:
-      - type: CMSurgeryTarget
-      - type: Infectable
-      - type: Hunger
-      - type: Thirst
-      - type: Perishable
-      - type: ThermalRegulator
-      - type: Stamina
-      - type: DamageForceSay
-      - type: Dna
-      - type: InjectableSolution
-      - type: IVDripTarget
-      - type: RMCSuicide
-        damage: { }
   hidden: true
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
@@ -133,4 +99,5 @@
 
 - type: playTimeTracker
   id: RMCJobSyntheticColony
+  name: rmc-playtime-tracker-job-name-survivor-synth
   isHumanoid: true

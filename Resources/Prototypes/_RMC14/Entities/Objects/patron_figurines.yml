@@ -37,20 +37,10 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronKillsTheMice
-  name: Kills-The-Mice figurine
-  description: It looks neat.
-  components:
-  - type: Sprite
-    state: Kills-The-Mice
-  - type: PatronFigurine
-    id: e04261e0-0248-49d5-9398-08f84d53e4c0
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFritzVohlkson
   name: Fritz Vohlkson figurine
   description: "A member of the Colony Liaison's security detail. A tacky reward given by We-Ya for 20 years of service."
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: Fritz_Vohlkson
@@ -302,6 +292,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronOrionBlackburn
   name: Orion Blackburn figurine
+  categories: [ HideSpawnMenu ]
   description: "Alright, recruits, we're doing 50 laps... around the nearest vending machine because I forgot my lunch."
   components:
   - type: Sprite
@@ -330,6 +321,37 @@
     state: kate_gel_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: drink
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Slime
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
+    transferAmounts:
+    - 5
+  - type: RMCFlask
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -631,6 +653,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
+  categories: [ HideSpawnMenu ]
   description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of platinum and tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves.
     She works hard to ensure that her grunts all embrace in victory, alive and happy. She's also open to feedback. She's been accused of a war crime and even eating human organs, but we don't talk about that.:3"
   components:
@@ -641,12 +664,12 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronGives-The-Fish
-  name: Gives-The-Fish figurine
+  id: RMCFigurinePatronFishyMcTuna
+  name: Fishy McTuna figurine
   description: "\"Fishy, where is my goddamn fish?\""
   components:
   - type: Sprite
-    state: gives-the-fish
+    state: fishy_mctuna
   - type: PatronFigurine
     id: 9c5deff6-212d-4578-855e-0afb86a0a910
 
@@ -858,7 +881,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronXalos-Of-Europa
   name: Xalos-Of-Europa figurine
-  description: "Wait, what's the QM doing out of Req!?"
+  description: "Wait, what's the LO doing out of Req!?"
   components:
   - type: Sprite
     state: xalos-of-europa
@@ -1094,7 +1117,11 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSips-On-Puddles
   name: Sips-On-Puddles figurine
-  description: "\"If only I could weld your wounds!\""
+  description: "Floopy ears. Small Snout. Quirky Humour.
+
+    Half Kobold, All Marine.
+
+    This is the \"Sipper\"."
   components:
   - type: Sprite
     state: sips-on-puddles
@@ -1417,7 +1444,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronLilianaShorkGodwin
   name: Liliana 'Shork' Godwin figurine
-  description: "SHORK GANG RISE UP!!"
+  description: "Shork Medical Officer on Deck!"
   components:
   - type: Sprite
     state: liliana_shork_godwin
@@ -1577,17 +1604,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethGrimm
-  name: Seth Grimm figurine
-  description: "You can be a Queen or a parasite, but everyone dances with the Grim Reaper."
-  components:
-  - type: Sprite
-    state: seth_grimm
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneTaylor
   name: Anne Taylor figurine
   description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
@@ -1677,11 +1693,317 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasuni
+  name: Kasuni figurine
+  description: "Kasuni is fix, will be ok soon."
+  components:
+  - type: Sprite
+    state: kasuni
+  - type: PatronFigurine
+    id: e77df185-91a7-417a-9f38-fd7b24071703
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAltairFlamecoat
+  name: Altair Flamecoat figurine
+  description: "The most chittery Close Air Support the Corps can offer."
+  components:
+  - type: Sprite
+    state: altair_flamecoat
+  - type: PatronFigurine
+    id: e3c176f8-b089-4897-98ae-e3365ea82426
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRikkiNakesone
+  name: Rikki Nakesone figurine
+  description: "When one loaf of banana bread isn't enough."
+  components:
+  - type: Sprite
+    state: rikki_nakesone
+  - type: PatronFigurine
+    id: ecb46485-1660-4b92-99b9-21ad29b46a17
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSudie-Mim
+  name: Sudie-Mim figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: sudie-mim
+  - type: PatronFigurine
+    id: cf98bff9-9272-4676-a866-441ed5c51c47
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJazminLudwig
+  name: Jazmin Ludwig figurine
+  description: "Wait, this isn't Hawaii."
+  components:
+  - type: Sprite
+    state: jazmin_ludwig
+  - type: PatronFigurine
+    id: e04261e0-0248-49d5-9398-08f84d53e4c0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJakeFoster
+  name: Jake Foster figurine
+  description: "Hey bro!"
+  components:
+  - type: Sprite
+    state: jake_foster
+  - type: PatronFigurine
+    id: 77488777-2c27-422c-a328-fb6e55142096
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronForgeGrimes
+  name: Forge Grimes figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: forge_grimes
+  - type: PatronFigurine
+    id: 5b4f2f1b-2422-4b59-b8de-d9853d683332
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCoreyShaffer
+  name: Corey Shaffer figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: corey_shaffer
+  - type: PatronFigurine
+    id: bd795da7-fcbd-4ede-8327-962d346c03b1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCorlaBlitzDreams
+  name: Corla 'Blitz' Dreams figurine
+  description: "An arachnid that reeks of gunpowder, thermite and oddly enough...a bunny? Whoever this arachnid is, you can sense how reckless they are with explosives...and how big their heart is, too."
+  components:
+  - type: Sprite
+    state: corla_blitz_dreams
+  - type: PatronFigurine
+    id: e99b48ce-4185-4893-a0c4-4a8a49853aa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRedMachinaSwiftcleave
+  name: Red 'Machina' Swiftcleave figurine
+  description: "Not much can be said apart from this figure having some style to it. The Beret, the smart pistol having ivory colored engravings, a miniature plasma turret sits atop the left shoulder next to the light. But one thing that may catch your eye is the words, \"To a place where...\"written on the bottom of the stand."
+  components:
+  - type: Sprite
+    state: red_machina_swiftcleave
+  - type: PatronFigurine
+    id: dc3a5b1a-5fde-4ffe-9f33-07bc7cac7406
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMinjiFailsafeKilgrim
+  name: Minji 'Failsafe' Kilgrim figurine
+  description: "Some stray cat usually found roaming in medbay. The figure itself smells strongly of various chemicals, small singe marks litter it as if it's been through an explosion or two.
+
+
+    If you didn't look closer, you'd mistake the bow and bell decorating her tail for a bee..."
+  components:
+  - type: Sprite
+    state: minji_failsafe_kilgrim
+  - type: PatronFigurine
+    id: fbecf0e4-fe0c-41fc-a136-12804f260378
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJohnrookWeller
+  name: John 'rook' Weller figurine
+  description: "Mother and Father forgive me, Sisters and Brothers bless me, Daughter and Sons treasure me, I ask for safety, I plead for salvation, I pray for clarity, please, rid my soul of this nightmare."
+  components:
+  - type: Sprite
+    state: john_rook_weller
+  - type: PatronFigurine
+    id: 2d7cddb1-242a-4ada-825e-e8e94ffa5517
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHazelSkyfallSingh
+  name: Hazel 'Skyfall' Singh figurine
+  description: "¡We'll be fine! ¡I've esurvived much worse!"
+  components:
+  - type: Sprite
+    state: hazel_skyfall_singh
+  - type: PatronFigurine
+    id: 20f158bf-cf14-4375-9059-3c75a3188e34
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSilasAlatus
   name: Silas Alatus figurine
-  #description: ""
+  description: "Silas is a dark green moth person, standing at 5' 11\" tall. His antennae are nearly always pointed behind him at all times, and his wings are a darker green with grey pattern. He has grey-blueish eyes, though he is missing his left eye, which has been covered by a dark colored eyepad. He is seen with some form of sidearm on his person at all times, usually a revolver of some sort."
   components:
   - type: Sprite
     state: silas_alatus
   - type: PatronFigurine
     id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronThrukiaLongbow
+  name: Thrukia Longbow figurine
+  description: "A message carved beneath it reads: \"Take this with you to your struggles and victory is assured! No matter how much you hate yourself, the stars will still forgive you.\""
+  components:
+  - type: Sprite
+    state: thrukia_longbow
+  - type: PatronFigurine
+    id: a27d57bb-e7f4-48df-8f70-764d3e482ca1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRoxanneFloppyEarsDreams
+  name: Roxanne 'Floppy Ears' Dreams figurine
+  description: "Tiny bun! Tiny bun with sharp teeth... and a big gun..."
+  components:
+  - type: Sprite
+    state: roxanne_floppy_ears_dreams
+  - type: PatronFigurine
+    id: e83e290d-6405-4988-924f-1746a58ca83a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGallaginGCAddictCaitman
+  name: Gallagin 'GC Addict' Caitman figurine
+  description: "Smells of medicine and gunpowder."
+  components:
+  - type: Sprite
+    state: gallagin_gc_addict_caitman
+  - type: PatronFigurine
+    id: c97364e1-a409-44e4-bd09-323ef8a38121
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZethXi
+  name: Zeth Xi figurine
+  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  components:
+  - type: Sprite
+    state: zeth_xi
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKurtDocHolidayLachner
+  name: Kurt 'Doc Holiday' Lachner figurine
+  description: "Looking at the bottom of the base of the figurine, you read: \"We choose to become corpsman not because it is easy, but because we really don't feel like being alone, ok?\""
+  components:
+  - type: Sprite
+    state: kurt_doc_holiday_lachner
+  - type: PatronFigurine
+    id: 3b62aa38-f239-4d0d-91d4-94323d48092d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmberFallsLamplight
+  name: Amber 'Falls' Lamplight figurine
+  description: "A photorealistic depiction of the most commonly awoken Dropship Crew Chief. Despite her downfalls, she’s always making an effort to do her job the best she can: whether it be medevacing the injured or… or… uhhh…"
+  components:
+  - type: Sprite
+    state: amber_falls_lamplight
+  - type: PatronFigurine
+    id: 3ecb2df2-ea5f-489f-94fc-60f73fa812ad
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArthurNash
+  name: Arthur Nash figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: arthur_nash
+  - type: PatronFigurine
+    id: 6dd7c705-ba54-4e45-bb47-8d1c32231709
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAguSeal
+  name: Agu Seal figurine
+  description: "Agu Seal stands firm in his tactical vest and tilted beret, carrying himself with calm authority. Agu’s movements are disciplined and precise, every step controlled and deliberate."
+  components:
+  - type: Sprite
+    state: agu_seal
+  - type: PatronFigurine
+    id: 0b0f5346-f2de-4e59-8f32-5d6f7b5882ee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEricLunaheart
+  name: Eric Lunaheart figurine
+  description: "Lunaheart is here to save the day! 3/4 Doctor 1/4 MP is the way!"
+  components:
+  - type: Sprite
+    state: eric_lunaheart
+  - type: PatronFigurine
+    id: 923f5334-8957-4818-9fec-a704eaab0959
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLeahLocaHarding
+  name: Leah 'Loca' Harding figurine
+  description: "Your local kitchen raider, some confuse her with a space-racoon. announce when you approach, she can be skittish and she is armed."
+  components:
+  - type: Sprite
+    state: leah_loca_harding
+  - type: PatronFigurine
+    id: 4f6b4b8d-4477-4690-b0c3-009758301934
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZaydenSoapKirkson
+  name: Zayden 'Soap' Kirkson figurine
+  description: "BATTLE, WE SHALL GIVE THEM WAR!"
+  components:
+  - type: Sprite
+    state: zayden_soap_kirkson
+  - type: PatronFigurine
+    id: e3cf902c-a055-42ed-a3fd-c1267eb795bd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPsyJuniJuniper
+  name: Psy 'Juni' Juniper figurine
+  description: "You look at the tiny rabbit, he has an Anti-Material Rifle on his back and blood all over his fur. He's offering a carrot! Just for you!"
+  components:
+  - type: Sprite
+    state: psy_juni_juniper
+  - type: PatronFigurine
+    id: f7b90833-5c77-43b5-b109-a262a3083742
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIceyIana
+  name: Icey Iana figurine
+  description: "Be Aggressive! Never stop pushing!"
+  components:
+  - type: Sprite
+    state: icey_iana
+  - type: PatronFigurine
+    id: 9f9087f0-270c-4177-866c-1b988b596ffb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaizerDeathwishValentine
+  name: Kaizer 'Deathwish' Valentine figurine
+  description: "This high-quality figurine depicts Kaizer 'Deathwish' Valentine, an elite UNMC medic known for his perfectionist attitude towards treatment and his reckless disregard for his own safety when recovering the fallen.  Sculpted with exceptional precision, the figure shows his pristine, meticulously arranged medical tools contrasted against his battle-worn armor, reflecting both his discipline and the danger he constantly throws himself into.  His focused expression peers through a cracked visor, one hand gripping a compact scanner while the other reaches toward a debris-strewn base featuring shattered concrete and a partially exposed UNMC emblem.  Premium paintwork, layered shading, and fine weathering give the entire piece a cinematic realism befitting a tribute to a medic who refuses to lose a patient—even at his own expense."
+  components:
+  - type: Sprite
+    state: kaizer_deathwish_valentine
+  - type: PatronFigurine
+    id: 2cd412a9-6316-4163-8a33-637c63b2cd38

@@ -7,10 +7,12 @@ rmc-loadout-group-accessories = Clothing accessories
 rmc-loadout-group-paperwork = Paperwork
 rmc-loadout-group-plushies = Plushies
 rmc-loadout-group-recreational = Recreational
+rmc-loadout-group-melee-weapons = Melee Weapons
 rmc-loadout-group-weapons = Weapons
 rmc-loadout-group-canned-drinks = Canned Drinks
 rmc-loadout-group-flasks = Flasks
 rmc-loadout-group-smokables = Smokables
+rmc-loadout-group-miscellaneous = Miscellaneous
 rmc-loadout-group-foods-sweets = Food (sweets)
 rmc-loadout-group-foods-packaged = Food (packaged)
 rmc-loadout-group-foods-healthy = Food (healthy)
@@ -20,6 +22,8 @@ rmc-loadout-group-civilian = Civilian only (Restricted)
 
 
 rmc-loadout-group-role-specific-ID = Commanding Officer (ID)
+rmc-loadout-group-role-specific-weapon = Commanding Officer (Sidearm)
+rmc-loadout-group-provost-role-specific-outerwear = Provost Inspector (Filled Outerwear)
 rmc-loadout-group-synthetic-uniform = Synthetic Uniforms
 rmc-loadout-group-synthetic-accessories = Synthetic Uniform Accessories
 rmc-loadout-group-synthetic-glasses = Synthetic Glasses

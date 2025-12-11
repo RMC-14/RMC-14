@@ -9,8 +9,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-    flags:
-    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
@@ -64,6 +62,18 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCSmallFloodlight
+  id: RMCSmallFloodlightUnanchored
+  name: small floodlight
+  description: A small bit of light in the darkness.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+      anchored: False
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
   parent: BaseStructure
   id: RMCTallFloodlight
   name: tall floodlight
@@ -95,7 +105,7 @@
   - type: Damageable
     damageContainer: Inorganic
   - type: PointLight
-    enabled: false
+    enabled: true
     radius: 7
     netsync: false
     offset: "0,0.5"
@@ -203,6 +213,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+  - type: Eye
 
 # Engineer Ship Light
 

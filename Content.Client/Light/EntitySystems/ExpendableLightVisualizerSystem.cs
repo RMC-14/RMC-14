@@ -25,8 +25,6 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
 
     protected override void OnAppearanceChange(EntityUid uid, ExpendableLightComponent comp, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite == null)
-            return;
 
         if (AppearanceSystem.TryGetData<string>(uid, ExpendableLightVisuals.Behavior, out var lightBehaviourID, args.Component)
             && TryComp<LightBehaviourComponent>(uid, out var lightBehaviour))
@@ -42,6 +40,10 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
                 _pointLightSystem.SetEnabled(uid, false, light);
             }
         }
+
+		// RMC14
+        if (args.Sprite == null || !SpriteSystem.LayerExists((uid, args.Sprite), ExpendableLightVisualLayers.Overlay))
+            return;
 
         if (!AppearanceSystem.TryGetData<ExpendableLightState>(uid, ExpendableLightVisuals.State, out var state, args.Component))
             return;

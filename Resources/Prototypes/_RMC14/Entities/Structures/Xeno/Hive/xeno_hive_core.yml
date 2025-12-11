@@ -1,6 +1,6 @@
 - type: entity
-  id: HiveCoreXeno
   parent: BaseHiveStructure
+  id: HiveCoreXeno
   name: hive core
   description: A giant pulsating mound of mass. It looks very much alive.
   components:
@@ -49,7 +49,7 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
-  - type: HivePylon
+  - type: HiveLesserSpawner
   - type: HiveCore
   - type: XenoWeedsSpreading
   - type: XenoWeeds
@@ -78,12 +78,14 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: core
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
   - type: RMCTrackable
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   id: HiveCoreXenoConstructionNode
@@ -119,11 +121,12 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
-
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
-  id: HivePylonXeno
   parent: BaseHiveStructure
+  id: HivePylonXeno
   name: hive pylon
   description: A towering spike of resin. Its base pulsates with large tendrils.
   components:
@@ -148,6 +151,7 @@
     xenoDamage:
       types:
         Slash: 25
+  - type: HiveLesserSpawner
   - type: HivePylon
   - type: XenoWeedsSpreading
   - type: RoofingEntity
@@ -174,3 +178,9 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+  - type: XenoStructureMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: pylon

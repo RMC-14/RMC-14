@@ -22,6 +22,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
 
+- type: entity
+  parent: RMCCoatBureauTrenchCoatBrown
+  id: RMCCoatBureauTrenchCoatBeige
+  name: beige trench-coat
+  description: A worn, tan, old style trench-coat. A classic of noir-style apparel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_beige.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_beige.rsi
+
 # Bureau Deputy
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
@@ -101,6 +112,20 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: RMCCoatJacketGeneral
+  id: RMCCoatJacketGeneralFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+      amount: 1
+    - id: RMCTelescopicBaton
+      amount: 1
+    - id: RMCHandcuffs
+      amount: 1
 
 # TSEPA
 - type: entity

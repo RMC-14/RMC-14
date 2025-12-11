@@ -45,6 +45,7 @@
   components:
   - type: Area
     minimapColor: '#EBE5E5E3'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaShivaExteriorLz1Console

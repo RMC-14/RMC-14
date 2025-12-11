@@ -6,8 +6,9 @@
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCOverview.xml"
   children:
   - RMCBanTypes
-  - RMCRulesGeneralInformation
   - RMCZeroTolerance
+  - RMCRulesGeneralInformation
+  - RMCRulesCommunity
   - RMCRulesCommand
   - RMCRulesRoleplayStandards
 
@@ -22,7 +23,7 @@
   parent: RMC
   id: RMCZeroTolerance
   name: rmc-guide-entry-rules-zero-tolerance
-  priority: 3
+  priority: 2
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCZeroTolerance.xml"
 
 # general information
@@ -30,7 +31,7 @@
   parent: RMC
   id: RMCRulesGeneralInformation
   name: rmc-guide-entry-rules-core
-  priority: 4
+  priority: 3
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCore.xml"
   children:
   - RMCLanguage
@@ -44,43 +45,51 @@
   parent: RMC
   id: RMCLanguage
   name: rmc-guide-entry-rules-language
-  priority: 5
+  priority: 1
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCLanguage.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCMultikey
   name: rmc-guide-entry-rules-multikey
-  priority: 6
+  priority: 2
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMultikey.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCRulesEscalation
   name: rmc-guide-entry-rules-escalation
-  priority: 7
+  priority: 3
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCRulesEscalation.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCMetaknowledge
   name: rmc-guide-entry-rules-metaknowledge
-  priority: 8
+  priority: 4
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMetaknowledge.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCKindness
   name: rmc-guide-entry-rules-kindness
-  priority: 9
+  priority: 5
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCKindness.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCMutinies
   name: rmc-guide-entry-rules-mutinies
-  priority: 11
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Mutiny/RMCMutinies.xml"
+  priority: 6
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCMutinies.xml"
+
+# Community Rules
+- type: guideEntry
+  parent: RMC
+  id: RMCRulesCommunity
+  name: rmc-guide-entry-rules-community
+  priority: 4
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCommunity.xml"
 
 # command
 - type: guideEntry
@@ -89,23 +98,6 @@
   name: rmc-guide-entry-rules-command
   priority: 5
   text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCRulesCommand.xml"
-  children:
-  - RMCCommandRoles
-  - RMCHigherStandards
-
-- type: guideEntry
-  parent: RMC
-  id: RMCCommandRoles
-  name: rmc-guide-entry-rules-command-roles
-  priority: 13
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCCommandRoles.xml"
-
-- type: guideEntry
-  parent: RMC
-  id: RMCHigherStandards
-  name: rmc-guide-entry-rules-higher-standards
-  priority: 14
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/RMCHigherStandards.xml"
 
 # roleplay standards
 - type: guideEntry

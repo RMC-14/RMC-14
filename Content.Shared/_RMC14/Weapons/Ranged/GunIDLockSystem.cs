@@ -141,6 +141,7 @@ public sealed class GunIDLockSystem : EntitySystem
     private void RegisterNewUser(Entity<GunIDLockComponent> ent, EntityUid user)
     {
         ent.Comp.User = user;
+        Dirty(ent);
         var popup = Loc.GetString("rmc-id-lock-authorization", ("gun", ent.Owner));
         _popup.PopupClient(popup, user, PopupType.Medium);
     }
@@ -148,6 +149,7 @@ public sealed class GunIDLockSystem : EntitySystem
     private void RegisterNewUserCombat(Entity<GunIDLockComponent> ent, EntityUid user)
     {
         ent.Comp.User = user;
+        Dirty(ent);
         var popup = Loc.GetString("rmc-id-lock-authorization-combat", ("gun", ent.Owner));
         _popup.PopupClient(popup, user, user, PopupType.Small);
     }
@@ -166,7 +168,7 @@ public sealed class GunIDLockSystem : EntitySystem
         {
             ClearUser(ent);
         }
-        if (HasComp<CMDefibrillatorBlockedComponent>(ent.Comp.User))
+        if (HasComp<RMCDefibrillatorBlockedComponent>(ent.Comp.User))
         {
             ClearUser(ent);
         }
