@@ -120,6 +120,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCVehicleDebugOverlay =
+        CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCVehicleCollisionOverlay =
+        CVarDef.Create("rmc.vehicle.collision_overlay", true, CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 

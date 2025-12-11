@@ -203,32 +203,50 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
-    maxSpeed: 9
-    acceleration: 6
+    maxSpeed: 8
+    acceleration: 5
     deceleration: 12
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
-    cooldown: 16
+    cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
   - type: RMCVehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 1
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
-    hornCooldown: 0.1
-    collisionSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    #collisionSound: /Audio/Effects/Vehicle/carhorn.ogg
     collisionSoundCooldown: 0.4
+  - type: RMCVehicleSpotlight
+    radius: 12
+    energy: 2.5
+    softness: 2
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
     fixtures:
-      fix1:
+      world:
         shape:
           !type:PhysShapeAabb
           bounds: -0.425,-1.2,0.425,1.2
         density: 1000
-        mask: [ LargeMobMask ]
-        layer: [ LargeMobLayer ]
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        layer:
+        - LargeMobLayer
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -244,6 +262,13 @@
     noMovementLayers:
       rmc-wheels:
         state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
   - type: Corrodible
     isCorrodible: false
   - type: DoAfter
@@ -261,7 +286,7 @@
     slotCount: 1
   - type: Appearance
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
 
 
 - type: entity
@@ -293,13 +318,27 @@
     bodyType: Dynamic
   - type: Fixtures
     fixtures:
-      fix1:
+      world:
         shape:
           !type:PhysShapeAabb
           bounds: -0.3,-0.85,1.3,1.85
         density: 1000
-        mask: [ LargeMobMask ]
-        layer: [ LargeMobLayer ]
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.3,-0.85,1.3,1.85
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        layer:
+        - LargeMobLayer
   - type: InteractionOutline
   - type: Sprite
     offset: "0.5,0.5"
@@ -333,7 +372,7 @@
     slotCount: 1
   - type: Appearance
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
 
 - type: entity
   id: RMCVehicleExitArea
