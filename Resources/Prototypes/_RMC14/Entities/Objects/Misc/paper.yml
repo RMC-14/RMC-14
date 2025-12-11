@@ -83,12 +83,12 @@
     sound:
       path: /Audio/_RMC14/Handling/paper_drop.ogg
       params:
-        volume: -4
+        volume: -5
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_RMC14/Handling/paper_drop.ogg
       params:
-        volume: -4
+        volume: -5
   - type: Clothing
     quickEquip: false
     slots:
