@@ -170,13 +170,14 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         var distToTarget = toTarget.Length();
 
         var hasInput = inputDir != Vector2i.Zero;
+        var hasInputForSpeed = hasInput || mover.IsCommittedToMove;
         var facing = mover.CurrentDirection;
         var reversing = hasInput && facing != Vector2i.Zero && inputDir == -facing;
 
         float targetSpeed;
         float accel;
 
-        if (!hasInput)
+        if (!hasInputForSpeed)
         {
             targetSpeed = 0f;
             accel = mover.Deceleration;
@@ -196,7 +197,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         }
         else
         {
-            if (mover.CurrentSpeed < 0f)
+            if (mover.CurrentSpeed < 0f && hasInputForSpeed)
             {
                 targetSpeed = 0f;
                 accel = mover.Deceleration;
@@ -369,6 +370,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             return true;
 
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
+        var playedCollisionSound = false;
 
         foreach (var other in hits)
         {
@@ -389,6 +391,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
             if (aabb.Intersects(otherAabb))
             {
+                if (TrySmash(other, uid, ref playedCollisionSound))
+                    continue;
+
+                PlayCollisionSound(uid, ref playedCollisionSound);
                 DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance));
                 return false;
             }
@@ -447,5 +453,43 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         _audio.PlayPvs(sound.RunningSound, uid);
         sound.NextRunningSound = now + TimeSpan.FromSeconds(sound.RunningSoundCooldown);
         Dirty(uid, sound);
+    }
+
+    private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
+    {
+        if (!HasComp<RMCVehicleSmashableComponent>(target))
+            return false;
+
+        PlayCollisionSound(vehicle, ref playedCollisionSound);
+
+        if (TerminatingOrDeleted(target))
+            return true;
+
+        Del(target);
+        return true;
+    }
+
+    private void PlayCollisionSound(EntityUid uid, ref bool played)
+    {
+        if (played)
+            return;
+
+        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+            return;
+
+        if (sound.CollisionSound == null)
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var now = _timing.CurTime;
+        if (sound.NextCollisionSound > now)
+            return;
+
+        _audio.PlayPvs(sound.CollisionSound, uid);
+        sound.NextCollisionSound = now + TimeSpan.FromSeconds(sound.CollisionSoundCooldown);
+        Dirty(uid, sound);
+        played = true;
     }
 }

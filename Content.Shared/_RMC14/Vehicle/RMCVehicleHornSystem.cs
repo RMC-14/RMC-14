@@ -1,7 +1,5 @@
 using System;
-using Content.Shared._RMC14.Input;
 using Content.Shared.Input;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
@@ -13,10 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-/// <summary>
-/// Handles activating vehicle overcharge via the walk (shift) key.
-/// </summary>
-public sealed class RMCVehicleOverchargeSystem : EntitySystem
+public sealed class RMCVehicleHornSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -28,9 +23,7 @@ public sealed class RMCVehicleOverchargeSystem : EntitySystem
         if (_net.IsClient)
         {
             CommandBinds.Builder
-                .Bind(CMKeyFunctions.CMUniqueAction, InputCmdHandler.FromDelegate(session =>
-
-                {
+                .Bind(ContentKeyFunctions.UseItemInHand, InputCmdHandler.FromDelegate(session => {
                     if (session?.AttachedEntity is not { } user)
                         return;
 
@@ -47,15 +40,15 @@ public sealed class RMCVehicleOverchargeSystem : EntitySystem
                     if (vehicleUid == null)
                         return;
 
-                    RaiseNetworkEvent(new RMCVehicleOverchargeRequestEvent(GetNetEntity(vehicleUid.Value)));
+                    RaiseNetworkEvent(new RMCVehicleHornRequestEvent(GetNetEntity(vehicleUid.Value)));
                 }, handle: false))
-                .Register<RMCVehicleOverchargeSystem>();
+                .Register<RMCVehicleHornSystem>();
         }
 
-        SubscribeNetworkEvent<RMCVehicleOverchargeRequestEvent>(OnOverchargeRequest);
+        SubscribeNetworkEvent<RMCVehicleHornRequestEvent>(OnHornRequest);
     }
 
-    private void OnOverchargeRequest(RMCVehicleOverchargeRequestEvent ev, EntitySessionEventArgs args)
+    private void OnHornRequest(RMCVehicleHornRequestEvent ev, EntitySessionEventArgs args)
     {
         if (!_net.IsServer)
             return;
@@ -68,34 +61,29 @@ public sealed class RMCVehicleOverchargeSystem : EntitySystem
         if (!TryComp(vehicle, out VehicleComponent? vehicleComp) || vehicleComp.Operator != user)
             return;
 
-        if (!TryComp(vehicle, out RMCVehicleOverchargeComponent? overcharge))
+        if (!TryComp(vehicle, out RMCVehicleSoundComponent? sound) || sound.HornSound == null)
             return;
 
         var now = _timing.CurTime;
-
-        if (overcharge.CooldownUntil > now || overcharge.ActiveUntil > now)
+        if (sound.NextHornSound > now)
             return;
 
-        overcharge.ActiveUntil = now + TimeSpan.FromSeconds(overcharge.Duration);
-        overcharge.CooldownUntil = now + TimeSpan.FromSeconds(overcharge.Cooldown);
-
-        if (overcharge.OverchargeSound != null)
-            _audio.PlayPvs(overcharge.OverchargeSound, vehicle);
-
-        Dirty(vehicle, overcharge);
+        sound.NextHornSound = now + TimeSpan.FromSeconds(sound.HornCooldown);
+        _audio.PlayPvs(sound.HornSound, vehicle);
+        Dirty(vehicle, sound);
     }
 }
 
 [Serializable, NetSerializable]
-public sealed partial class RMCVehicleOverchargeRequestEvent : EntityEventArgs
+public sealed partial class RMCVehicleHornRequestEvent : EntityEventArgs
 {
     public NetEntity Vehicle;
 
-    public RMCVehicleOverchargeRequestEvent()
+    public RMCVehicleHornRequestEvent()
     {
     }
 
-    public RMCVehicleOverchargeRequestEvent(NetEntity vehicle)
+    public RMCVehicleHornRequestEvent(NetEntity vehicle)
     {
         Vehicle = vehicle;
     }
