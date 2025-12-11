@@ -1364,9 +1364,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
         }
 
-        if (solution.Volume > 0 && solution.Volume < solution.MaxVolume)
+        if (solution.Volume < solution.MaxVolume)
         {
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-invalid-blood-pack", pack, user, ("item", pack));
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-blood-pack-not-full", pack, user, ("item", pack));
             return false;
         }
 
