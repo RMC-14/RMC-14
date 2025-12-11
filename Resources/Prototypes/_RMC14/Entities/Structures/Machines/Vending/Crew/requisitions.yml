@@ -84,8 +84,8 @@
       entries:
       - id: CMGrenadeFragOld
         amount: 2
-      #- id: M20 Claymore Anti-Personnel Mine
-      #  amount: 4
+      - id: RMCExplosiveClaymoreMine
+        amount: 4
       - id: CMGrenadeHighExplosive
         amount: 25
       - id: RMCGrenadeIncendiary

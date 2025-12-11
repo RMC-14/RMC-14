@@ -111,8 +111,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBox4
-    #   points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     # - id: RMCElectroshockGrenadex3
     #   points: 16
     - name: Primary Ammunition

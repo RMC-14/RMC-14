@@ -1,0 +1,35 @@
+- type: entity
+  abstract: true
+  parent: CMPacketBase
+  id: RMCBoxSmallBase
+  name: packet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/packets.rsi
+    layers:
+    - state: minebox
+      map: [ "closedLayer" ]
+    - state: minebox_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1
+    whitelist:
+      tags:
+      - RMCExplosiveClaymoreMine
+  - type: Tag
+    tags:
+    - RMCPacketGrenade
+
+- type: entity
+  parent: RMCBoxSmallBase
+  id: RMCBoxClaymoreMineFilledFilled
+  name: M20 mine box
+  suffix: Filled
+  description: A secure box holding five M20 anti-personnel proximity mines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveClaymoreMine
+      amount: 5

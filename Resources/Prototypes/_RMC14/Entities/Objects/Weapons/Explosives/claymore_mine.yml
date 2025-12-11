@@ -1,0 +1,116 @@
+- type: entity
+  parent: BaseItem
+  id: RMCExplosiveClaymoreMine
+  name: M20 Claymore anti-personnel mine
+  description: he M20 Claymore is a directional proximity-triggered anti-personnel mine designed by Armat Systems for use by the United States Colonial Marines. The mine is triggered by movement on the space immediately in front of it. Detonation sprays shrapnel forwards in a 120-degree cone. The words "FRONT TOWARD ENEMY" are embossed on the front.
+  components:
+  - type: Fixtures
+    fixtures:
+      trigger:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-1.5,0.25,0.5"
+        hard: false
+        layer:
+        - MidImpassable
+        mask:
+        - SmallMobLayer
+      hitbox:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.125,0.25,0.125,0.5"
+          hard: false
+        layer:
+        - XenoProjectileImpassable
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/Mines/m20_mine.rsi
+    drawdepth: Mobs
+    layers:
+    - state: icon
+      map: ["enum.ToggleableVisuals.Layer"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: active}
+          False: {state: icon}
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:TriggerBehavior
+  - type: RMCLandmine
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    totalIntensity: 1
+    intensitySlope: 5
+    maxIntensity: 1
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    fillPrototype: RMCShrapnel
+    capacity: 12
+    spreadAngle: 120
+  - type: RMCMesonsNonviewable
+  - type: ClusterLimitHits
+    limit: 8
+  - type: RequireProjectileTarget
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 1
+  - type: Tag
+    tags:
+    - RMCExplosiveClaymoreMine
+
+# Projectiles
+
+- type: entity
+  parent: RMCBaseAirburstRound
+  id: RMCShrapnel
+  name: shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: buckshot
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 25
+        Structural: 100
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: CMArmorPiercing
+    amount: 20
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 3
+      stunTime: 1.5
+      slowTime: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 5
+      falloff: 35
+
+# Tags
+
+- type: Tag
+  id: RMCExplosiveClaymoreMine

@@ -163,3 +163,13 @@
     contents:
     - id: RMCPacketGrenadeBatonSlugHIRRFilled
       amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateExplosiveClaymoreMine
+  name: M20 Claymore mine crate (x10)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxClaymoreMineFilledFilled
+      amount: 2

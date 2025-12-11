@@ -1,4 +1,5 @@
-﻿using Content.Server.Explosion.Components;
+﻿using Content.Server._RMC14.Explosion;
+using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared.Projectiles;
@@ -98,7 +99,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             }
 
             // RMC14
-            EntityUid? gunUid = uid;
+            EntityUid? gunUid = null;
             EntityUid? user = null;
 
             if (TryComp(uid, out ProjectileComponent? clusterProjectile))
