@@ -89,7 +89,6 @@
         density: 185
         layer:
         - BulletImpassable
-  - type: DropshipHijacker
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
