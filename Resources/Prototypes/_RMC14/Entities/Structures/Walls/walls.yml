@@ -494,6 +494,24 @@
     - doors
     base: aiwall
 
+- type: entity
+  parent: CMWallReinforcedHeavy
+  id: CMWallReinforcedHeavyAlmayerAINoLights
+  name: heavy reinforced hull
+  description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_aicore_nolights.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_aicore_nolights.rsi
+    state: hull
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: aiwall
+
 # TODO RMC14 temp hull, breakable only after hijack
 
 # Shuttle

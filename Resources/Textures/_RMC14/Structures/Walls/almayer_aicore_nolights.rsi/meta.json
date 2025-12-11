@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Modified by t0de, taken from Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/29bfb8501be93dde3c2eececfcf60ae82b0e32df/icons/turf/walls/almayer_aicore.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hull"
+    },
+    {
+      "name": "aiwall0",
+      "directions": 4
+    },
+    {
+      "name": "aiwall1",
+      "directions": 4
+    },
+    {
+      "name": "aiwall2",
+      "directions": 4
+    },
+    {
+      "name": "aiwall3",
+      "directions": 4
+    },
+    {
+      "name": "aiwall4",
+      "directions": 4
+    },
+    {
+      "name": "aiwall5",
+      "directions": 4
+    },
+    {
+      "name": "aiwall6",
+      "directions": 4
+    },
+    {
+      "name": "aiwall7",
+      "directions": 4
+    }
+  ]
+}
