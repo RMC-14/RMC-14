@@ -4,6 +4,12 @@
   name: M20 Claymore anti-personnel mine
   description: he M20 Claymore is a directional proximity-triggered anti-personnel mine designed by Armat Systems for use by the United States Colonial Marines. The mine is triggered by movement on the space immediately in front of it. Detonation sprays shrapnel forwards in a 120-degree cone. The words "FRONT TOWARD ENEMY" are embossed on the front.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/Mines/m20_mine.rsi
+    drawdepth: BelowMobs
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Fixtures
     fixtures:
       trigger:
@@ -22,12 +28,6 @@
           hard: false
         layer:
         - XenoProjectileImpassable
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Explosives/Mines/m20_mine.rsi
-    drawdepth: Mobs
-    layers:
-    - state: icon
-      map: ["enum.ToggleableVisuals.Layer"]
   - type: Appearance
   - type: GenericVisualizer
     visuals:
