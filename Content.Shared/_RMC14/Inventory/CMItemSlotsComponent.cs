@@ -26,4 +26,7 @@ public sealed partial class CMItemSlotsComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId? StartingItem;
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId>? StartingItems;
 }
