@@ -12,7 +12,7 @@ namespace Content.Shared.Administration
         // writing this class was genuinely fun.
 
         private static readonly Dictionary<string, AdminFlags> NameFlagsMap = new();
-        private static readonly string[] FlagsNameMap = new string[32];
+        private static readonly string[] FlagsNameMap = new string[64];
 
         /// <summary>
         ///     Every admin flag in the game, at once!
@@ -36,7 +36,7 @@ namespace Content.Shared.Administration
 
                 // If, in the future, somebody adds a combined admin flag or something for convenience,
                 // ignore it.
-                if (BitOperations.PopCount((uint) value) != 1)
+                if (BitOperations.PopCount((ulong) value) != 1)
                 {
                     continue;
                 }
@@ -44,7 +44,7 @@ namespace Content.Shared.Administration
                 allFlags.Add(value);
                 Everything |= value;
                 NameFlagsMap.Add(name, value);
-                FlagsNameMap[BitOperations.Log2((uint) value)] = name;
+                FlagsNameMap[BitOperations.Log2((ulong) value)] = name;
             }
 
             AllFlags = allFlags.ToArray();
@@ -94,11 +94,11 @@ namespace Content.Shared.Administration
         /// </summary>
         public static string[] FlagsToNames(AdminFlags flags)
         {
-            var array = new string[BitOperations.PopCount((uint) flags)];
-            var highest = BitOperations.LeadingZeroCount((uint) flags);
+            var array = new string[BitOperations.PopCount((ulong) flags)];
+            var highest = BitOperations.LeadingZeroCount((ulong) flags);
 
             var ai = 0;
-            for (var i = 0; i < 32 - highest; i++)
+            for (var i = 0; i < 64 - highest; i++)
             {
                 var flagValue = (AdminFlags) (1u << i);
                 if ((flags & flagValue) != 0)
