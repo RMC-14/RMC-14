@@ -277,8 +277,8 @@
         amount: 2
       - id: RMCPouchTools
         amount: 1
-#      - id: Sling Pouch
-#        amount: 1
+      - id: RMCPouchSling
+        amount: 1
     - name: Mask
       entries:
       - id: CMMaskGas
