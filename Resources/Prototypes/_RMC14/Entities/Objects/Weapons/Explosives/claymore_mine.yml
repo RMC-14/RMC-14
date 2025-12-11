@@ -16,7 +16,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.25,-1.5,0.25,0.5"
-        hard: false
+          hard: false
         layer:
         - MidImpassable
         mask:

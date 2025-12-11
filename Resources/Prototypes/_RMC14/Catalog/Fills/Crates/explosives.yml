@@ -171,5 +171,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxClaymoreMineFilledFilled
+    - id: RMCBoxClaymoreMineFilled
       amount: 2
