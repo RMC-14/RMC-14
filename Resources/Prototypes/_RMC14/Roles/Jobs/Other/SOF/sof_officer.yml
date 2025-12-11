@@ -7,11 +7,11 @@
   ranks:
     RMCRankCaptain: [ ]
   startingGear: RMCGearMarineRaiderOfficer
-  icon: RMCJobIconMarineRaider
+  icon: RMCJobIconMarineRaiderOfficer
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider Platoon Leader (Admin)
+  spawnMenuRoleName: MARSOC Raider Platoon Leader (Admin, DEATHSQUAD)
   special:
   - !type:AddComponentSpecial
     components:
@@ -41,6 +41,14 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: hudsquad_soccmd
     - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: sof_officer
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_sof
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

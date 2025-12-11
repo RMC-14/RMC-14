@@ -30,7 +30,7 @@
 - type: Tag
   id: RMCMagazineShotgunXM51
 
-# yes, there are lots of types of shotgun shells.
+# Magazines for the MOU482 shotgun (for MARSOC).
 
 - type: entity
   parent: CMMagazineRifleBase

@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider (DEATHSQUAD)
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,6 +33,13 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: sof_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_sof
   hidden: true
 
 - type: entity

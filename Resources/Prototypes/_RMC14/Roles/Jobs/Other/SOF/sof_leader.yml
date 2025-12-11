@@ -7,11 +7,11 @@
   ranks:
     RMCRankGunnerySergeant: [ ]
   startingGear: RMCGearMarineRaiderLeader
-  icon: RMCJobIconMarineRaider
+  icon: RMCJobIconMarineRaiderLeader
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider Team Leader
+  spawnMenuRoleName: MARSOC Raider Team Leader (DEATHSQUAD)
   special:
   - !type:AddComponentSpecial
     components:
@@ -37,10 +37,15 @@
     - type: PyroWhitelist
     - type: MarineOrders
     - type: SquadLeader
+    - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: hudsquad_soctl_a
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: sof_sl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_sof
     - type: RMCPointing
+    - type: RMCTrackable
   hidden: true
 
 - type: entity
