@@ -24,7 +24,7 @@
 
 - type: entity
   parent: RMCBoxSmallBase
-  id: RMCBoxClaymoreMineFilledFilled
+  id: RMCBoxClaymoreMineFilled
   name: M20 mine box
   suffix: Filled
   description: A secure box holding five M20 anti-personnel proximity mines.
