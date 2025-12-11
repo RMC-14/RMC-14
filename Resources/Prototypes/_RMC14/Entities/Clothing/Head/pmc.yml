@@ -55,8 +55,8 @@
 - type: entity
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCGunner
-  name: PMC gun operator helmet
-  description: A modification of the standard M3 armor.
+  name: PMC specialist operator helmet
+  description: A modification of the standard PMC tactical helmet, featuring a frontal shield to protect the user's from shrapnel and small arms fire while operating heavy weaponry.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
@@ -244,3 +244,14 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_lead.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_lead.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretWeYa
+  name: Weston-Yamada beret
+  description: Show off your megacorp pride with this stylish beret!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/weya_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/weya_beret.rsi

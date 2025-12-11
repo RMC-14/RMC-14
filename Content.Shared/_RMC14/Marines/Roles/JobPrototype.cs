@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
+﻿using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Audio;
@@ -82,4 +83,13 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     [NeverPushInheritance]
     public bool BasePlaytimeTracker;
+
+    [DataField]
+    public ProtoId<JobPrototype>? WhitelistParent;
+
+    /// <summary>
+    /// Starting gear that is given when the map has a certain camoflage enabled.
+    /// </summary>
+    [DataField]
+    public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
 }

@@ -1,21 +1,37 @@
 ﻿- type: reagent
   parent: CMReagent
+  id: RMCGenericToxin
+  name: reagent-name-rmcgenerictoxin
+  desc: reagent-desc-rmcgenerictoxin
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#CF3600"
+  unknown: true
+  toxin: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:Toxic
+        potency: 1
+
+- type: reagent
+  parent: CMReagent
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
   desc: reagent-desc-rmcmolecularacid
   physicalDesc: reagent-physical-desc-acidic
   color: "#669900"
   unknown: true
+  toxin: true
   metabolisms:
     Poison:
       #TODO hurts on inject equal to amount
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: 0.5 # Corrosive 2
-            Toxin: 0.25 # Toxic 1
+      - !type:Toxic
+        potency: 1
+      - !type:Corrosive
+        potency: 2
       - !type:PopupMessage
         type: Local
         visualType: SmallCaution
@@ -29,38 +45,17 @@
   desc: reagent-desc-rmclexorin
   physicalDesc: reagent-physical-desc-pungent
   color: "#C8A5DC"
+  toxin: true
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-          types:
-            Asphyxiation: 4
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 2.5
-            Toxin: 2
-          types:
-            Asphyxiation: 10
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 11.25
-            Toxin: 4
+      - !type:Hypoxemic
+        potency: 8
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: [ CMReagent, MindbreakerToxin ]
@@ -70,6 +65,8 @@
   color: "#B31008"
   unknown: true
   toxin: true
+  overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Poison:
       metabolismRate: 0.05
@@ -125,28 +122,13 @@
   unknown: true
   toxin: true
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:HealthChange # Toxic 1
-        damage:
-          groups:
-            Toxin: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Toxin: 2.5
+      - !type:Toxic
+        potency: 1
       - !type:Emote # Sedative 6
         emote: Yawn
         showInChat: true
@@ -168,7 +150,6 @@
           types:
             Asphyxiation: 15
 
-
 - type: reagent
   parent: CMReagent
   id: RMCCyanide
@@ -176,18 +157,13 @@
   desc: rmc-reagent-desc-cyanide
   physicalDesc: reagent-physical-desc-pungent
   color: "#CF3600"
-  overdose: 30
+  toxin: true
   metabolisms:
     Poison:
       metabolismRate: 0.2
       effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Airloss: 8
-      - !type:Emote
-        emote: Gasp
-        probability: 0.1
+      - !type:Hypoxemic
+        potency: 4
       - !type:GenericStatusEffect
         key: Drowsiness
         component: Drowsiness

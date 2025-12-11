@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Movement.Components;
 using Content.Server.Physics.Controllers;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Conveyor;
 using Content.Shared.Gravity;
@@ -135,6 +136,9 @@ public sealed class PullController : VirtualController
         if (_container.IsEntityInContainer(player))
             return false;
 
+        if (HasComp<BeingFiremanCarriedComponent>(pulled))
+            return false;
+
         pullerComp.NextThrow = _timing.CurTime + pullerComp.ThrowCooldown;
 
         // Cap the distance
@@ -236,6 +240,14 @@ public sealed class PullController : VirtualController
 
         while (movingQuery.MoveNext(out var pullableEnt, out var mover, out var pullable, out var pullableXform))
         {
+            // RMC14
+            if (HasComp<BeingFiremanCarriedComponent>(pullableEnt))
+            {
+                RemCompDeferred<PullMovingComponent>(pullableEnt);
+                continue;
+            }
+            // RMC14
+
             if (!mover.MovingTo.IsValid(EntityManager))
             {
                 RemCompDeferred<PullMovingComponent>(pullableEnt);

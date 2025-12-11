@@ -1,14 +1,14 @@
 # base
 - type: entity
-  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor, RMCBaseUniformAccessoryItemOuterClothing ]
-  id: RMCBaseArmor
+  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor]
+  id: RMCBaseArmorNoAccessory
   abstract: true
   components:
   - type: Sprite
     state: icon # default state used by most inheritors
   - type: Item
     size: Huge
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: cm-defib-take-off-armor
     showOnExamine: false
   - type: InteractedBlacklist
@@ -18,14 +18,28 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: MoveOrderArmor
   - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: [ RMCBaseArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
+  id: RMCBaseArmor
+  abstract: true
 
 - type: entity
   abstract: true
@@ -54,6 +68,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
@@ -124,6 +139,7 @@
       - CMMagazineSmg
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSniper
 
 - type: entity
@@ -154,6 +170,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector
@@ -184,8 +201,8 @@
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
 - type: entity
-  parent: RMCBaseArmor
-  id: RMCBaseMarineArmor
+  parent: RMCBaseArmorNoAccessory
+  id: RMCBaseMarineArmorNoAccessory
   abstract: true
   components:
   - type: Clothing
@@ -210,6 +227,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
@@ -218,6 +236,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
+      - RMCBoxZipties
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: RMCNameItemOnVend
@@ -237,8 +257,13 @@
   - type: RMCStorageEjectHand
 
 - type: entity
-  parent: RMCBaseMarineArmor
-  id: RMCBaseMarineArmorLight
+  parent: RMCBaseMarineArmorNoAccessory
+  id: RMCBaseMarineArmor
+  abstract: true
+
+- type: entity
+  parent: RMCBaseMarineArmorNoAccessory
+  id: RMCBaseMarineArmorLightNoAccessory
   abstract: true
   components:
   - type: Item
@@ -316,6 +341,11 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+
+- type: entity
+  parent: RMCBaseMarineArmorLightNoAccessory
+  id: RMCBaseMarineArmorLight
+  abstract: true
 
 - type: entity
   parent: RMCBaseMarineArmorLight

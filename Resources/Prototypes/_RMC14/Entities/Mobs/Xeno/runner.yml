@@ -158,6 +158,8 @@
     - RMCXenoRunnerAcider
   - type: VentCrawler
     ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: CMXenoRunner
 
 - type: entity
   parent: CMXenoRunnerBase
@@ -172,6 +174,9 @@
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -265,3 +270,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: RMCXenoRunnerAcider

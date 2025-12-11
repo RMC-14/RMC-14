@@ -1,34 +1,11 @@
 - type: job
-  parent: CMSurvivorSecurity
+  parent: CMSurvivorGoon
   id: CMSurvivorLV624CorporateDomeGoon
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   spawnMenuRoleName: We-Ya Goon (Survivor Special)
-  startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonStandard"
-  hasIcon: true
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
-        RMCSkillVehicles: 1
-    - type: RMCSurvivor
-    - type: MotionDetectorTracked
-    - type: NpcFactionMember
-      factions:
-      - WeYa
-      - Civilian
-    - type: IntelRescueSurvivorObjective
-    - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-corporate-dome-goon
 
 - type: entity

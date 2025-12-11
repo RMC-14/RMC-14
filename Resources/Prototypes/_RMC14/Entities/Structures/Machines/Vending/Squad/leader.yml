@@ -20,8 +20,10 @@
       entries:
       - id: RMCVendorBundleCrewLeader
     - name: Squad Kit (for yourself or your squad)
-      takeOne: RMCSquadKit
+      choices: { RMCKitBase: 1 }
       entries:
+      - id: RMCKitEngineering
+        recommended: true
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
       - id: RMCKitPyroMini
@@ -30,11 +32,9 @@
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
-      - id: RMCKitEngineering
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -111,17 +111,19 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
-    #- id: CMM20MineBoxx4mines
-    #  points: 20
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+        points: 13
+    # - id: CMM20MineBoxx4mines
+    #   points: 20
+    # - id: CMM40MFHSMetalFoamGrenade
+    #   points: 5
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Medical Supplies
       entries:
       - id: CMBurnKit10
@@ -141,7 +143,7 @@
       - id: CMKelotaneAutoInjector
         points: 1
 #      - id: CMInjectorOxycodone
-#        points: 2
+#        points: 1
 #      - id: CMInjectorTramadol
 #        points: 1
       - id: CMTricordrazineAutoInjector
@@ -156,6 +158,10 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -167,9 +173,7 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCMagazinePistolM13Ext
-        points: 10
-      - id: RMCMagazinePistolM13Drum
-        points: 15
+        points: 6
       # - id: RMCSpeedLoader44Heavy
       #  points: 6
       - id: RMCSpeedLoader44Marksman
@@ -186,8 +190,10 @@
       entries:
       - id: RMCTankFlamer
         points: 3
-    #- id: CMM240IncineratorTankB-Gel
-    #  points: 3
+        name: incinerator tank (UT-Napthal)
+      - id: RMCTankFlamerBGel
+        points: 3
+        name: incinerator tank (B-Gel)
     - name: Restricted Firearms
       entries:
       - id: RMCCaseFlamer
@@ -207,6 +213,8 @@
       - id: CMEncryptionKeyJTAC
         points: 3
       - id: CMEncryptionKeyRequisition
+        points: 3
+      - id: CMEncryptionKeyMedical
         points: 3
 
 - type: entity
@@ -228,6 +236,8 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
+      - id: RMCBackpackRTO
+        replaceSlot: back
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Armor
@@ -238,6 +248,8 @@
         recommended: true
       - id: RMCArmorM4Zipties
         name: leader M4 pattern marine armor (zipties)
+      - id: RMCArmorVestSquadLeader
+        name: leader M3-XL pattern armor vest (zipties)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -298,6 +310,7 @@
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -319,7 +332,7 @@
     - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
-    - CMFireExtinguisher
+    - CMFireExtinguisherPortable
 
 - type: entity
   parent: RMCKitBase
@@ -377,7 +390,7 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-#    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+    - id: RMCWeldingGoggles
 
 - type: entity
   parent: RMCKitBase
@@ -397,8 +410,9 @@
     contents:
     - id: RMCBackpackFlamer
     - id: RMCWeaponFlamer
-    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
-      amount: 3 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamer
+      amount: 2 # TODO RMC14 projectile nozzle
+    - id: RMCTankFlamerBGel
     - id: CMFireExtinguisherPortable
 
 - type: entity
