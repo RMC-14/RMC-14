@@ -396,3 +396,10 @@ rmc-shed-spikes-back = We can gain shards again!
 rmc-spike-shield-self = We ruffle our bone-shard quills, forming a defensive shell!
 rmc-spike-shield-others = {$user} ruffles its bone-shard quills, forming a defensive shell!
 rmc-spike-shield-hit = {$user} sprays bone quills everywhere!
+
+# Doomed
+rmc-doomed-fail = It's not working...
+
+# Destroy
+rmc-destroy-cant-reach = We don't have a clear path to that location!
+rmc-destroy-cant-area = We can't leap to that area!

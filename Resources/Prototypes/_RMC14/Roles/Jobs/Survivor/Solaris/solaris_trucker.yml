@@ -1,0 +1,49 @@
+- type: job
+  parent: CMSurvivorTrucker
+  id: CMSurvivorSolarisTrucker
+  name: rmc-job-name-survivor-solaris-trucker
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorSolarisTrucker
+  spawnMenuRoleName: Solaris Heavy Vehicle Operator (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetTrucker
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorTrucker
+  id: RMCGearSurvivorSolarisTrucker
+  equipment:
+    eyes: RMCSunglassesBig
+    head: RMCHeadCapTruckerRed
+    jumpsuit: CMJumpsuitLiaisonBlack
+    # outerClothing: /obj/item/clothing/suit/storage/apron/overalls/red TODO RMC14: port this
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisTrucker
+  name: solaris trucker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisTrucker
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

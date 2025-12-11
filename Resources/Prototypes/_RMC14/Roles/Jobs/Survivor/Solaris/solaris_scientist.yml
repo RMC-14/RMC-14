@@ -1,0 +1,51 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: CMSurvivorSolarisScientist
+  name: rmc-job-name-survivor-solaris-scientist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorSolarisScientist
+  accessGroups:
+  - ColonistMedical
+  spawnMenuRoleName: Solaris Scientist (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetScientist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorSolarisScientist
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisScientist
+  name: survivor solaris scientist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisScientist
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
