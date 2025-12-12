@@ -15,8 +15,8 @@
       trigger:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.25,-1.5,0.25,0.5"
-          hard: false
+          bounds: "-0.25,-1.5,0.25,0"
+        hard: false
         layer:
         - MidImpassable
         mask:
@@ -25,7 +25,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.125,0.25,0.125,0.5"
-          hard: false
+        hard: false
         layer:
         - XenoProjectileImpassable
   - type: Appearance
