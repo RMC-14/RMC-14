@@ -789,7 +789,7 @@ entities:
     - type: Transform
       pos: 0.67307353,6.7832355
       parent: 1
-- proto: RMCDropshipWeaponsConsoleProp
+- proto: RMCComputerDropshipWeaponsSmall
   entities:
   - uid: 104
     components:
