@@ -36,6 +36,14 @@
 
 - type: entity
   parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPPatchAirborne
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPPVDV
+
+- type: entity
+  parent: CMJumpsuitSPP
   id: CMJumpsuitSPPMedic
   name: SPP medic fatigues
   description: A set of SPP medic fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.

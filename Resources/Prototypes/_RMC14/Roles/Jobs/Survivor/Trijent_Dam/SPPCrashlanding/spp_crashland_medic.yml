@@ -1,0 +1,55 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandMedic
+  name: rmc-job-name-crashland-medic
+  startingGear: RMCGearSPPCrashlandMedic
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  icon: "RMCJobIconSPPMedic"
+  spawnMenuRoleName: SPP Airborne Medic (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-medic
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashlandNoBelt
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandMedic
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: RMCBeltMedicBagSPPCrashland
+    back: RMCSatchelSPPMedicSurvivor
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandMedic
+  name: spp crashland medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandMedic
+  - type: Sprite
+    state: spp_spawn

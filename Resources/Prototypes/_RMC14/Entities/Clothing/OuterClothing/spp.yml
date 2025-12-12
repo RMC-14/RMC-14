@@ -211,3 +211,42 @@
     bullet: 10
     bio: 10
     explosionArmor: 10
+
+# Survivor fills
+
+- type: entity
+  parent: RMCArmorSPPSupport
+  id: RMCArmorSPPSupportSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: RMCMRESPP
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCArmorSPPHeavy
+  id: RMCArmorSPPHeavySurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCCoatSPP
+  id: RMCCoatSPPSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar

@@ -154,6 +154,11 @@
   id: MARSOCLeader
   job: CMMarineRaiderLeader
 
+- type: trackerMode
+  id: SPPAirborneSL
+  job: RMCSurvivorSPPCrashlandSL
+  alert: SquadTrackerAirborne
+
 # Humanoid component trackers
 
 - type: trackerMode
