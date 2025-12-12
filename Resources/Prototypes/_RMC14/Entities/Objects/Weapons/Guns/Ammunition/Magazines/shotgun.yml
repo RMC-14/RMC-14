@@ -30,7 +30,7 @@
 - type: Tag
   id: RMCMagazineShotgunXM51
 
-# Magazines for the MOU482 shotgun (for MARSOC).
+# Magazines for the MOU482 shotgun (for MARSOC). Heavy shotgun shells arent distinct (in terms of felt performance) enough to warrant their own magazines.
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -58,30 +58,6 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#b24c4c"
-  - type: Appearance
-
-- type: entity
-  parent: RMCMagazineShotgunMOU482Buckshot
-  id: RMCMagazineShotgunMOU482HeavyBuckshot
-  name: MOU482 heavy buckshot magazine (12g)
-  description: A 12 gauge shotgun magazine fitting 16 heavy buckshot shells. The spring is specifically tuned for heavy buckshot, no other shell will cycle.
-  components:
-  - type: BallisticAmmoProvider
-    mayTransfer: True
-    whitelist:
-      tags:
-      - RMCShellShotgunHeavyBuckshot
-    proto: RMCShellShotgunHeavyBuckshot
-    capacity: 16
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: ammo_band
-      color: "#4f1717"
   - type: Appearance
 
 - type: entity
@@ -156,5 +132,30 @@
       color: "#995e41"
   - type: Appearance
 
+- type: entity
+  parent: RMCMagazineShotgunMOU482Buckshot
+  id: RMCMagazineShotgunMOU482Beanbag
+  name: MOU482 beanbag magazine (12g)
+  description: A 12 gauge shotgun magazine fitting 16 beanbag shells. The spring is specifically tuned for beanbag, no other shell will cycle.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunBeanbag
+    proto: CMShellShotgunBeanbag
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mou482.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#5075a2"
+  - type: Appearance
+
 - type: Tag
   id: RMCMagazineShotgunMOU482
+

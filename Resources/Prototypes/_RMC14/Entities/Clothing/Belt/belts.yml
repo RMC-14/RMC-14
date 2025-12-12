@@ -1477,9 +1477,9 @@
     contents:
     - id: RMCMagazineShotgunMOU482Buckshot
       amount: 2
-    - id: RMCMagazineShotgunMOU482HeavyBuckshot
-    - id: RMCMagazineShotgunMOU482IncendiaryBuckshot
     - id: RMCMagazineShotgunMOU482Slug
+    - id: RMCMagazineShotgunMOU482IncendiaryBuckshot
+      amount: 2
     - id: RMCMagazineShotgunMOU482IncendiarySlug
     - id: RMCWeaponShotgunMOU482
 
