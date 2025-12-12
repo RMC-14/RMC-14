@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/suit_0.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/suits.dmi",
+  "copyright": "Taken and modified, from OmerF-afk (github), from RMC14 https://github.com/RMC-14/RMC-14/tree/cb6007c5fd0bd17dc6b2b2041296a95fd3da11c5/Resources/Textures/_RMC14/Objects/Clothing/OuterClothing/CMB/cmb_heavy_armor.rsi by RavenCaat",
   "size": {
     "x": 32,
     "y": 32
