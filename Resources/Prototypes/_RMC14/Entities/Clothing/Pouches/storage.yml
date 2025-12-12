@@ -608,7 +608,6 @@
       tags:
       - Shovel
   - type: FixedItemSizeStorage
-  - type: PropagateDetectors
   - type: RMCSlingPouch
   - type: InteractedBlacklist
     blacklist:
