@@ -2,14 +2,12 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Damage;
 
 public sealed class RMCDamagePopupSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
