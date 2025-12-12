@@ -573,7 +573,7 @@
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
   id: RMCPouchSling
-  name: sling strap # TODO RMC14 implement this
+  name: sling strap
   description: Keeps a single item attached to a strap.
   components:
   - type: Sprite
@@ -609,6 +609,7 @@
       - Shovel
   - type: FixedItemSizeStorage
   - type: PropagateDetectors
+  - type: RMCSlingPouch
 
 # Cassetes Pouch
 - type: entity
