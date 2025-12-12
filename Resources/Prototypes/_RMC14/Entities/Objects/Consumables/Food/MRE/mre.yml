@@ -189,13 +189,13 @@
   - type: StorageFill
     contents:
     # entree
-    - id: CMMREComponentBonelessPorkRibs
+    - id: RMCMREComponentBonelessPorkRibsWeya
       orGroup: main
-    - id: CMMREComponentGrilledChicken
+    - id: RMCMREComponentGrilledChickenWeya
       orGroup: main
-    - id: CMMREComponentChickenTender
+    - id: RMCMREComponentChickenTenderWeya
       orGroup: main
-    - id: CMMREComponentSpaghettiChunks
+    - id: RMCMREComponentSpaghettiChunksWeya
       orGroup: main
 #    - id: RMCMREComponentWYGrilledChickenBreast
 #      orGroup: main
