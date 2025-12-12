@@ -178,7 +178,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             hiveEnt = (hive.Value, hiveComp);
         else if (hive != null)
         {
-            Log.Error($"Tried to set hive of {ToPrettyString(member)} to bad hive entity {ToPrettyString(hive)}");
+            Log.Warning($"Tried to set hive of {ToPrettyString(member)} to bad hive entity {ToPrettyString(hive)}");
             return; // invalid hive was passed, prevent it breaking anything else
         }
 
