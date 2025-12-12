@@ -307,6 +307,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
+  - type: RMCFlushableSolution
+    solution: rmc_flamer_tank
 
 - type: entity
   parent: RMCUnderAttachmentBase
