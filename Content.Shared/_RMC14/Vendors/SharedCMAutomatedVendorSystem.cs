@@ -48,6 +48,7 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
+using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
@@ -1151,8 +1152,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!ValidateItemForRestock(vendor, item, user, valid))
             return false;
-        // Handle stackable items first (gauze, sandbags, materials, etc.)
         if (TryRestockStackableItem(vendor, item, user, valid, matchingEntry))
+            return true;
+        if (TryRestockBoxItem(vendor, item, user, valid, matchingEntry))
             return true;
 
         if (!valid)
@@ -1165,6 +1167,40 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         AmountUpdated(vendor, matchingEntry);
         QueueDel(item);
         return true;
+    }
+
+    /// <summary>
+    /// Handles restocking items that have a Box reference (magazine boxes, ammo boxes).
+    /// When vending, these items deduct from the underlying box entry, so restocking should add back.
+    /// </summary>
+    private bool TryRestockBoxItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
+    {
+        if (matchingEntry.Box is not { } boxId)
+            return false;
+
+        foreach (var section in vendor.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                if (entry.Id != boxId)
+                    continue;
+
+                var amountToAdd = GetBoxRemoveAmount(matchingEntry);
+                entry.Amount += amountToAdd;
+                Dirty(vendor);
+                AmountUpdated(vendor, entry);
+
+                if (!suppressPopup)
+                {
+                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
+                }
+
+                QueueDel(item);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -1238,11 +1274,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             };
         }
 
-        var entriesToAdd = currentPartial switch
+        var entriesToAdd = (currentPartial > 0, remainingPartial > 0) switch
         {
-            0 when fullEntries == 0 => 1,
-            > 0 => Math.Max(0, fullEntries - 1),
-            _ => fullEntries
+            (true, true) => fullEntries,
+            (true, false) => Math.Max(0, fullEntries - 1),
+            (false, true) => fullEntries + 1,
+            (false, false) => fullEntries
         };
 
         return new StackRestockPlan
@@ -1282,10 +1319,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     /// All applicable validation checks must pass for the item to be restocked.
     /// Uses short-circuit evaluation: returns false on first failed check.
     /// </summary>
-    /// <param name="vendor">The vendor being restocked.</param>
-    /// <param name="item">The item to validate.</param>
-    /// <param name="user">The user attempting to restock.</param>
-    /// <param name="valid">If true, suppress error popups (for bulk operations).</param>
     /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
     private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
     {
@@ -1512,13 +1545,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!TryComp<StorageComponent>(item, out var storage))
             return true;
 
-        if (storage.Container.ContainedEntities.Count == 0)
+        var expectedTotal = 0;
+        if (_prototypes.TryIndex(itemProto, out var proto) &&
+            proto.TryGetComponent(out StorageFillComponent? storageFill, _compFactory))
         {
-            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
-            return false;
+            foreach (var entry in storageFill.Contents)
+            {
+                if (_prototypes.TryIndex(entry.PrototypeId, out var entryProto) &&
+                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                {
+                    expectedTotal += entry.Amount * entryStack.Count;
+                }
+            }
         }
 
-        return true;
+        var actualTotal = storage.Container.ContainedEntities.Sum(contained => TryComp<StackComponent>(contained, out var stack) ? stack.Count : 1);
+        if (actualTotal >= expectedTotal)
+            return true;
+        RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
+        return false;
     }
 
     /// <summary>
