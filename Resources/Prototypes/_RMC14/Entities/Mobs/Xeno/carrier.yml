@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -94,17 +94,24 @@
     prefix: carrier
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: carrier
   - type: XenoInhands
     prefix: carrier
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-carrier
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCarrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
     layers:
@@ -154,12 +161,17 @@
   - type: XenoEvolution
     strains:
     - RMCXenoCarrierEggsac
+  - type: RMCActionOrder
+    id: CMXenoCarrier
 
 - type: entity
   parent: RMCXenoCarrierBase
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleEggsac
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
     layers:
@@ -172,6 +184,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -197,7 +212,6 @@
     - ActionXenoGenerateEggs
     - ActionXenoRetrieveEgg
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
@@ -212,4 +226,7 @@
     distance: 2.5
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoCarrierEggsac
 

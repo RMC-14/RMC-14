@@ -26,21 +26,29 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
+        points: 13
     #- id: CMM20MineBoxx4
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
     #  points: 5
+    # -id: RMCElectroshockGrenadex3
+    #  points: 16
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -51,25 +59,27 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 6
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
         points: 10
-    #- id: CMM44HeavySpeedLoader
-    #  points: 10
-    #- id: CMM1984HPMagazine
-    #  points: 5
-    #- id: CMM1984APMagazine
-    #  points: 5
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
         points: 10
       - id: RMCGunCasePistolSmart
         points: 15
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 30
     - name: Armors
       entries:
@@ -78,7 +88,6 @@
     - name: Clothing Items
       entries:
       - id: RMCBackpackRTO
-        recommended: true
         points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
@@ -86,14 +95,16 @@
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 15
-      #- id: RMCWeldingGoggles
-      #  points: 3
+      - id: RMCWeldingGoggles
+        points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
         name: autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
+        points: 3
+      - id: CMHandsBlackInsulated
         points: 3
     - name: Engineering Supplies
       entries:
@@ -124,15 +135,19 @@
       entries:
       - id: RMCBinoculars
         points: 5
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries:
       - id: RMCVisorNightVision
         points: 30
         recommended: true
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -142,6 +157,8 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5
 
 - type: entity
@@ -163,10 +180,22 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
-      - id: CMArmorM4
+      - id: RMCBackpackRTO
+        replaceSlot: back
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorM4
+        recommended: true
+      - id: RMCArmorVestSquad
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -174,10 +203,11 @@
       - id: CMBeltMarine
         recommended: true
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -211,11 +241,16 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -227,7 +262,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator and two packs of signal flares.
+  description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi

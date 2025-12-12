@@ -164,8 +164,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -178,8 +177,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 25
-        - ReagentId: JuiceCarrot
-          Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
 
@@ -194,8 +191,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -206,11 +202,147 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: JuiceCarrot
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaHawaiianFull
+  name: hawaiian pizza
+  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - pineapple
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaHawaiianSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaHawaiianSlice
+  name: hawaiian slice
+  description: A slice of joy/sin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - pineapple
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: JuicePineapple
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 1
 
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaSupremeFull
+  name: supreme pizza
+  description: With this many toppings, it lives up to its name.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaSupremeSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaSupremeSlice
+  name: supreme slice
+  description: A slice of the top.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaCalabresaFull
+  name: calabresa pizza
+  description: Pizza so good it will make you see Cristo Redentor!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaCalabresaSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaCalabresaSlice
+  name: slice de calabresa
+  description: A slice of paraíso.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 1
 
 # Pizza Box Base
 - type: entity
@@ -235,7 +367,7 @@
     stateDoorClosed: pizzabox1
   - type: Appearance
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Small
     grid:
     - 0,0,1,1
     whitelist:
@@ -246,11 +378,30 @@
     tags:
     - BoxCardboard
 
+- type: entity
+  parent: RMCBoxPizza
+  id: RMCBoxPizzaGalaxy
+  name: Pizza Galaxy pizza box
+  description: A box suited for the finest pizzas.
+  suffix: Galaxy, Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/pizza_galaxy_box.rsi
+
 # Pizza Boxes
 - type: entity
   parent: RMCBoxPizza
   id: RMCBoxPizzaMargherita
   suffix: Margherita Deluxe
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMargherita
+  suffix: Galaxy, Margherita Deluxe
   components:
   - type: StorageFill
     contents:
@@ -266,9 +417,27 @@
       - id: RMCFoodPizzaMeatFull
 
 - type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMeat
+  suffix: Galaxy, Meatlover's Supreme
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMeatFull
+
+- type: entity
   parent: RMCBoxPizza
   id: RMCBoxPizzaMushroom
   suffix: Mushroom Special
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMushroomFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMushroom
+  suffix: Galaxy, Mushroom Special
   components:
   - type: StorageFill
     contents:
@@ -282,3 +451,44 @@
   - type: StorageFill
     contents:
       - id: RMCFoodPizzaVegetableFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyVegetable
+  suffix: Galaxy, Gourmet Vegatable
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaVegetableFull
+
+- type: entity
+  parent: RMCBoxPizza
+  id: RMCBoxPizzaRandom # TODO RMC14 : Random ingredients on the pizza, instead of being a random pizza.
+  suffix: Mystery
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+      - id: RMCFoodPizzaMushroomFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMystery
+  suffix: Galaxy, Mystery
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+      - id: RMCFoodPizzaMushroomFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25

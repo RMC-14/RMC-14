@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/mob/humans/onmob/clothing/head/soft_caps.dmi, https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/clothing/hats/soft_caps.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "flipped-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_flipped"
+    }
+  ]
+}

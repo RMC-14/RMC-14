@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist McRat
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobRodentia
   suffix: RMC14
   components:
@@ -33,8 +33,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
-      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "jumpsuit" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -45,16 +45,16 @@
         sprite: Objects/Misc/handcuffs.rsi
         state: body-overlay-2
         visible: false
-      - map: [ "id" ]
       - map: [ "gloves" ]
       - map: [ "shoes" ]
+      - map: [ "id" ] # RMC14 re-arrange id slot
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
-      - map: [ "neck" ]
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
@@ -91,6 +91,8 @@
       Unsexed: RMCMaleRodentia
   - type: Inventory
     speciesId: rodentia
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rodentia
 
 - type: entity
   save: false

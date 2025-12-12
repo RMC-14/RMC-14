@@ -7,6 +7,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Voicelines;
+using Content.Shared.Coordinates;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
@@ -66,6 +67,8 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
     private void OnVocalizeTriggered(Entity<CMVocalizeTriggerComponent> ent, ref ActiveTimerTriggerEvent args)
     {
+        SpawnAttachedTo(ent.Comp.Effect, ent.Owner.ToCoordinates());
+
         if (args.User is not { } user)
             return;
 
@@ -88,7 +91,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
     private void OnExplosiveDeleteWallsStuck(Entity<RMCExplosiveDeleteComponent> ent, ref EntityStuckEvent args)
     {
-        _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
+        _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, ent.Comp.BeepSound);
     }
 
     private void OnExplosionEffectTriggered(Entity<RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)

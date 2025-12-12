@@ -1,0 +1,27 @@
+<Document>
+  #Ravager Tier 3
+  <GuideEntityEmbed Entity="CMXenoRavager"/>
+  ##Playing as a Ravager
+  You don't need to hide anymore.
+
+  Turning from an ambush caste to a slow brawler, they are very offensive on the frontline and excel at dealing damage. By using their Empower on 3 or more targets, they become super empowered which upgrades their Scissor Cut and Assault.
+
+  Their passives include having their slash damage increased based on the amount of targets they currently empower from, and being fire-proof and explosion-resistant.
+
+  Your first activation of Empower will grant shield, on the second activation for every target nearby you, gain extra shield. It is suggested that you quickly Empower twice once nearby hosts before unleashing the rest of your attacks.
+
+  Make sure to play around the demolitions specialist as you will be their biggest target, walk up to hordes from behind doors and quickly double empower, then begin slashing and using Assault. Once your Empower runs out, retreat and heal.
+
+  Scissor Cut can also be used to slash hosts from afar, reducing risk.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Immune to fire damage, however will still catch on fire and lose armor from green fire.
+  - [bold]Empower[/bold]: On first activation, grants shield, on second activation, for every target in your line of sight and near you, gain extra shield and slash damage.
+  - Empowering from 3 or more targets will make you super empowered, upgrading your other abilities.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoEmpower"/>
+  - [bold]Assault[/bold]: Lunge forwards, if super empowered you will fling, knock down, and slash any target you hit. Slashing any targets will reduce this ability's cooldown.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoAssault"/>
+  - [bold]Scissor Cut[/bold]: Slash in a 2x4 line.
+  - If super empowered, whoever hit will be slowed.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoScissorCut"/>
+</Document>

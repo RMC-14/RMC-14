@@ -1,26 +1,45 @@
 # base
 - type: entity
-  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor ]
-  id: RMCBaseArmor
+  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor]
+  id: RMCBaseArmorNoAccessory
   abstract: true
   components:
   - type: Sprite
     state: icon # default state used by most inheritors
   - type: Item
     size: Huge
-  - type: CMDefibrillatorBlocked
+  - type: RMCDefibrillatorBlocked
     popup: cm-defib-take-off-armor
     showOnExamine: false
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
-  - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
   - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: [ RMCBaseArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
+  id: RMCBaseArmor
+  abstract: true
 
 - type: entity
   abstract: true
@@ -32,6 +51,7 @@
       - RMCLighter
       - Bible
       - Gun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -40,16 +60,18 @@
       - Knife
       - RMCG8Pouch
       - RMCMacheteScabbard
+      - RMCScabbardKatana
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
+      - RMCM82FHolster
       - RMCSmartPistolHolster
       - RMCSMGHolster
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -83,6 +105,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -93,9 +116,8 @@
       - RMCG8Pouch
       - Crowbar
       - RMCMacheteScabbard
-      #TODO katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -104,8 +126,8 @@
   - type: AllowSuitStorage
     whitelist:
       components:
-      - BallisticAmmoProvider #Note should get all maganizes
       - SmartGun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -113,7 +135,12 @@
       - RMCG8Pouch
       #TODO mines
       - RMCDetector
-      #TODO walkman
+      #Note should get all magazines and ignore guns
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSniper
 
 - type: entity
   abstract: true
@@ -127,6 +154,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -142,10 +170,10 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -159,6 +187,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -168,13 +197,12 @@
       - Flashlight
       - Machete
       - RMCDetector
-      #TODO walkman
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
 - type: entity
-  parent: RMCBaseArmor
-  id: RMCBaseMarineArmor
+  parent: RMCBaseArmorNoAccessory
+  id: RMCBaseMarineArmorNoAccessory
   abstract: true
   components:
   - type: Clothing
@@ -188,15 +216,18 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
+  - type: FixedItemSizeStorage
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: IgnoreContentsSize
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
@@ -205,6 +236,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
+      - RMCBoxZipties
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: RMCNameItemOnVend
@@ -224,8 +257,13 @@
   - type: RMCStorageEjectHand
 
 - type: entity
-  parent: RMCBaseMarineArmor
-  id: RMCBaseMarineArmorLight
+  parent: RMCBaseMarineArmorNoAccessory
+  id: RMCBaseMarineArmor
+  abstract: true
+
+- type: entity
+  parent: RMCBaseMarineArmorNoAccessory
+  id: RMCBaseMarineArmorLightNoAccessory
   abstract: true
   components:
   - type: Item
@@ -247,7 +285,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
@@ -271,7 +310,7 @@
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
     turnOffSound:
-      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
   - type: NoHandsInteractionBlocked
@@ -302,3 +341,38 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+
+- type: entity
+  parent: RMCBaseMarineArmorLightNoAccessory
+  id: RMCBaseMarineArmorLight
+  abstract: true
+
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCBasePMCArmorLight
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: pmc-lamp-off
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: pmc-lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    equippedPrefix: off
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: pmc-lamp-off
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: pmc-lamp-on
+  - type: PointLight
+    color: "#73e6f5"

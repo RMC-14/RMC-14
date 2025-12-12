@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Vermidia, with sprites from https://github.com/tgstation/tgstation/commit/53d1f1477d22a11a99c6c6924977cd431075761b, https://github.com/tgstation/tgstation/commit/53d1f1477d22a11a99c6c6924977cd431075761b, https://github.com/tgstation/tgstation/commit/53d1f1477d22a11a99c6c6924977cd431075761b and https://github.com/tgstation/tgstation/commit/53d1f1477d22a11a99c6c6924977cd431075761b",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "whine"
+    },
+    {
+      "name": "bark"
+    },
+    {
+      "name": "gnash"
+    },
+    {
+      "name": "meow"
+    },
+    {
+      "name": "mew"
+    },
+    {
+      "name": "peep"
+    },
+    {
+      "name": "purr"
+    },
+    {
+      "name": "skrellanger"
+    },
+    {
+      "name": "snarl"
+    },
+    {
+      "name": "trill"
+    },
+    {
+      "name": "warble"
+    }
+  ]
+}

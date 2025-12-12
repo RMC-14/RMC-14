@@ -16,10 +16,41 @@
   maxCount: 50
 
 - type: entity
-  parent: SheetGlassBase
+  parent: BaseItem
   id: CMSheetGlassBase
   abstract: true
   components:
+  - type: Material
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: SolutionContainerManager
+    solutions:
+      glass:
+        canReact: false
   - type: Stack
     count: 50
   - type: Sprite
@@ -40,6 +71,10 @@
   description: Glass is a non-crystalline solid, made out of silicate, the primary constituent of sand. It is valued for its transparency, albeit it is not too resistant to damage.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowDirectionalBuild
+      # Full window
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -60,6 +95,10 @@
     layers:
       - state: glass_4
         map: ["base"]
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetGlass
@@ -130,6 +169,11 @@
   description: A sheet of reinforced glass.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowReinforcedDirectionalBuild
+      # Full window
+      - RMCWindoorBuild
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -154,6 +198,11 @@
   - type: Construction
     graph: CMGlass
     node: SheetGlassReinforced
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
+
 
 - type: entity
   parent: CMSheetGlassReinforced

@@ -1,0 +1,13 @@
+- type: stack
+  id: PlatinumOre
+  name: platinum ore
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/ore.rsi, state: platinum }
+  spawn: RMCPlatinumOre1
+  maxCount: 30
+
+- type: stack
+  id: IronOre
+  name: iron ore
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/ore.rsi, state: iron }
+  spawn: RMCIronOre1
+  maxCount: 30

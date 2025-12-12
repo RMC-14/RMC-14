@@ -1,0 +1,86 @@
+<Document>
+  # Demolitionist Specialist: "Anti-Everything" (SADAR)
+
+  ## The Ultimate Problem Solver
+  Difficulty: [color=#FF0000]Hard[/color]
+
+
+  When colossal threats like enemy armor or massive bio-forms appear on the horizon, the Demolitionist Specialist is the UNMC's definitive answer.
+  Wielding the devastating M5-ATL, this operative delivers the heaviest hand-portable ordnance available, capable of neutralizing the most formidable targets with well-placed rockets.
+  Their presence alone is a psychological weapon, striking fear into the heart of the enemy.
+
+  ## Standard Issue Kit
+  The Demolitionist deploys equipped with the following important equipment:
+  <Box> <GuideEntityEmbed Entity="RMCWeaponLauncherM5ATL"/> </Box>
+
+  <Box> <GuideEntityEmbed Entity="RMCKitLoader"/> </Box>
+
+  ## Mastering the Arsenal
+
+  ### The M5-ATL: Handheld Devastation
+  The M5-ATL (often referred to as the SADAR) is the Demolitionist's primary tool and the source of their fearsome reputation. It is designed for one purpose: extreme destruction.
+
+  -   [bold]Overwhelming Firepower[/bold]: The M5-ATL launches rockets that are among the strongest single-shot explosives in the game. A direct hit from any rocket type will kill most human targets and lower-caste Xenonids. Higher-caste Xenos will be knocked down or put into critical condition.
+  -   [bold]Psychological Impact[/bold]: The mere sight and sound of an ATL can cause panic and disarray among enemy ranks. Xenonids, in particular, are often wary of a Demolitionist's presence.
+
+  [bold]Operational Considerations & Risks:[/bold]
+
+  -   [color=#FF0000][bold]NO IFF SYSTEM[/bold][/color]: Rockets are indiscriminate and will damage or kill anything in their blast radius, including friendly marines. Extreme caution is required.
+  -   [bold]Wield Delays[/bold]: The RPG has a noticeable wield delay when equipping it. Account for this delay in fast-paced combat.
+  -   [bold]Rockets Can Miss[/bold]: Despite their power, rockets are projectiles and can miss their intended target, especially at range or against agile foes.
+
+  ### Rocket Varieties & Effects
+  The M5-RPG utilizes two main types of rockets:
+  <Box>   <GuideEntityEmbed Entity="RMCRocket84mm"/> </Box>
+  -Detonates with a large explosion (approx. 3-tile radius), dealing significant splash damage and inflicting additional damage to anything directly hit by the rocket.
+  - This rocket excels against unarmored Xenonids, using it against lower tiered Xenonids should not be taken out of the equation. HE rockets are excellent for crowd control.
+  <Box>   <GuideEntityEmbed Entity="RMCRocket84mmAntiArmor"/> </Box>
+  -Features almost no splash damage but inflicts [italic]massive direct damage[/italic] with a long stun if the rocket physically strikes the target. Ideal for engaging heavily armored single targets like T3 Xenonids or enemy vehicles. Surprisingly viable at close ranges against specific targets due to its focused impact.
+
+  ### The Loader: Multiplying Your Might
+
+  A significant force multiplier for the Demolitionist is the effective utilization of a dedicated loader.
+  While [italic]any squadmate can perform an assisted reload[/italic] for the Demolitionist, the effective utilization of a dedicated and properly equipped loader significantly enhances both safety and the potential for sustained firepower.
+
+  <Box> <GuideEntityEmbed Entity="RMCKitLoader"/> </Box>
+  -   This specialized kit can be issued to a standard rifleman, transforming them into an ATL Loader. The Loader will have to have the rocket in hand while the operator wields the ATL and interacting with the operator, beginning the reload.
+
+  -   [bold]Drastic Reload Speed Increase[/bold]: When assisted by a Rifleman equipped with the Loader Kit, the M5-ATL's reload time is [italic]dramatically reduced[/italic]. This synergy converts the typically slow-firing ATL into a weapon capable of delivering a much more rapid succession of rockets.
+  -   [bold]Sustained Firepower[/bold]: The vastly decreased downtime between shots allows the Demolitionist to maintain pressure on targets, quickly follow up on initial hits, or engage multiple threats in shorter order.
+  <Box>[bold]The Loader as a Battle Buddy[/bold]:</Box>
+  To leverage this advantage, close coordination and clear communication between the Demolitionist and their Loader are absolutely essential.
+  The Loader must remain in close proximity-typically positioned safely behind the Demolitionist to facilitate an immediate reload after each shot.
+  Beyond just enabling faster reloads, a designated Loader should function as a true [bold]battle buddy[/bold]. Their role extends to:
+  - [color=#FFA500]Providing covering fire[/color] with their own primary weapon while the ATL operator is aiming or vulnerable.
+  - [color=#FFA500]Following up on the ATL operator's shots[/color], helping to finish off targets weakened or stunned by a rocket.
+  - [color=#FFA500]Actively watching the Demolitionist's back[/color] and flanks, crucial for preventing capture or ambush, as the ATL operator will often be focused downrange.
+  - The PPE from the RMC Kit Loader offers the designated assistant enhanced protection, making them more survivable as they fulfill these close-support duties. Their active engagement and protective oversight are crucial for maximizing the ATL's output and the Demolitionist's survival.
+
+  ## Tactical Application & Best Practices
+
+  As a Demolitionist, your primary function is to neutralize the most dangerous threats on the battlefield. You are a high-priority target for the enemy due to your destructive potential.
+
+                                                                                    <Box> [bold]Key Considerations for Effective Operations:[/bold]</Box>
+  -  [bold]Ammunition is Gold[/bold]: [color=#FFD700]Your rockets are incredibly potent but also extremely scarce and difficult to resupply.[/color] Make every single shot count. Conserve your ammunition strictly for high-value targets or situations where no other asset can achieve the desired effect. You are effectively an "alpha strike" specialist.
+                                                                                       <Box>  [bold]Target Prioritization is Paramount[/bold]:</Box>
+  <Box> [color=#DAA520]Save your AP (Anti-Armor) rockets primarily for higher-tier Xenonids[/color] like T3s (Crushers, Praetorians, Ravagers, Queens) or other heavily armored singular threats.</Box>
+  <Box> [color=#FFA500]Utilize your HE (High Explosive) rockets against dangerous clusters of smaller Xenonids with inadequate armor[/color] (T1s-T2s such as Warriors, Drones, Runners), The HE rocket's splash damage is excellent for crowd control and disrupting these enemy groups.</Box>
+
+  -  [bold]Anticipate Being Hunted[/bold]: [color=#FF0000]Hostiles will go to extreme lengths to eliminate you.[/color] Maintain high situational awareness, work closely with your squad for protection, and avoid isolated positions.
+  -  [bold]Mind Your Trajectory[/bold]: Ensure a clear line of fire. Rockets, like grenades, can be blocked by terrain. Do not fire if marines are between you and the target.
+  -  [bold]Inventory Management[/bold]: Rockets are bulky. Utilize your Rocket Bags or consider a Loader for alternative storage if needed. Keep track of your secondary weapon ammo as well.
+
+  ## Specific Tactics
+
+  Since the M5-ATL lacks an IFF system, you [italic]must[/italic] have direct, unobstructed vision of your target. Here are some approaches:
+
+  - [bold]Capitalize on Queen Screeches[/bold]: One of the best opportunities to fire a rocket is when the Queen screeches, stunning nearby marines and forcing them on the ground. If you can anticipate her screech (e.g. by hearing her distinct footsteps approaching for such an attack), try to position yourself to avoid the stun (e.g by briefly moving out of range or breaking line of sight).
+    Immediately after the screech immobilizes the marines, rush in (or reposition) to deliver a well-aimed shot into the vulnerable, clueless targets. This can be a highly effective way to secure critical kills or inflict massive damage.
+  - [bold]Mobility is Key[/bold]: Being fast and mobile as a SADAR operator is crucial. Your light armor aids this. Constantly reposition to find clear lines of sight, flank entrenched enemies or escape retaliation after firing. Don't be a static target. Your ability to quickly get into an optimal firing position and then relocate can secure many successful rocket attacks.
+  - [bold]Secondary Weapon for Follow-Ups[/bold]: After launching a rocket, especially if it doesn't outright kill a high-health target (like a T3 that's now stunned or injured) quickly switch to a reliable secondary weapon to secure the kill. The M63 is an excellent choice for this with its belt holster, allowing you to finish off weakened targets without expending another precious rocket.
+
+  ## The Weight of Expectation
+  The Demolitionist carries the heaviest firepower and, with it, immense responsibility. Your ability to eliminate game-changing threats can be the difference between victory and defeat.
+  However, the scarcity of your ammunition, the inherent dangers of your weapon and the enemy's determination to neutralize you make this a challenging role requiring precision, patience and nerves of steel.
+
+</Document>

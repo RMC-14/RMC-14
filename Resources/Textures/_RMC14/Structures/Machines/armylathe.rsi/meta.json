@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/machinery/autolathe.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "armylathe_n",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.2,
+          0.1,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "armylathe",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "armylathe_u",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "armylathe_t"
+    },
+    {
+      "name": "armylathe_r",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "armylathe_o",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

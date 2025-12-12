@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Client.Examine;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
@@ -17,6 +18,7 @@ public sealed class NightVisionOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ContainerSystem _container;
+    private readonly ExamineSystem _examine;
     private readonly TransformSystem _transform;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
 
@@ -30,6 +32,7 @@ public sealed class NightVisionOverlay : Overlay
         IoCManager.InjectDependencies(this);
 
         _container = _entity.System<ContainerSystem>();
+        _examine = _entity.System<ExamineSystem>();
         _transform = _entity.System<TransformSystem>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
 
@@ -69,6 +72,23 @@ public sealed class NightVisionOverlay : Overlay
                 eyeRot,
                 entry.NightVisionSeeThroughContainers,
                 entry.Transparency);
+        }
+
+        if (_players.LocalEntity is { } player)
+        {
+            var inViewQuery = _entity.EntityQueryEnumerator<RMCNightVisionVisibleInViewComponent, SpriteComponent, TransformComponent>();
+            while (inViewQuery.MoveNext(out var uid, out _, out var sprite, out var xform))
+            {
+                if (!_examine.InRangeUnOccluded(uid, player))
+                    continue;
+
+                Render((uid, sprite, xform),
+                    eye?.Position.MapId,
+                    handle,
+                    eyeRot,
+                    false,
+                    null);
+            }
         }
 
         handle.SetTransform(Matrix3x2.Identity);

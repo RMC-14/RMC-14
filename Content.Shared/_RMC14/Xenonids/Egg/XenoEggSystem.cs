@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dropship;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -69,6 +70,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -127,10 +129,9 @@ public sealed class XenoEggSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            foreach (var (actionId, action) in _actions.GetActions(uid))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoGrowOvipositorActionEvent>(uid))
             {
-                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
-                    _actions.ClearCooldown(actionId);
+                _actions.ClearCooldown(action.AsNullable());
             }
         }
     }
@@ -164,7 +165,8 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
-            MovementThreshold = 0.001f
+            MovementThreshold = 0.001f,
+            BreakOnRest = !hasOvipositor,
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))
@@ -272,7 +274,8 @@ public sealed class XenoEggSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            RootEntity = true
         };
 
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);

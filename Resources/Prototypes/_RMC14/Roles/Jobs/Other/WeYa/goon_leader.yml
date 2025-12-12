@@ -13,12 +13,14 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Goon Leader
   special:
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: MarineOrders
     - type: Skills
       skills:
         RMCSkillCqc: 2
@@ -30,6 +32,8 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillLeadership: 1
+        RMCSkillFirearms: 1
+    - type: RMCTrackable
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead
@@ -38,15 +42,15 @@
   id: RMCJobWeYaGoonLead
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMCLeader
-    jumpsuit: RMCJumpsuitVeteranPMCCorporate
-    outerClothing: CMArmorM4PMCCorporate # TODO RMC14: corporate/lead
+    ears: RMCHeadsetDistressGoonLeader
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
+    outerClothing: CMArmorM4PMCCorporateLead
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCCorporate
+    head: ArmorHelmetPMCCorporateLead
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
-    suitstorage: WeaponRifleSSG45
+    suitstorage: RMCWeaponRifleSSG45
     pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
   storage:
@@ -56,7 +60,7 @@
     - RMCZipties
     - RMCZipties
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     pocket1:
     - RMCMagazineRifleSSG45AP
     - RMCMagazineRifleSSG45AP
@@ -90,4 +94,8 @@
     job: RMCWeYaGoonLead
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial

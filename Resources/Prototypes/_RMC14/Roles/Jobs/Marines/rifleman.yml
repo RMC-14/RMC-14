@@ -8,6 +8,7 @@
   dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   ranks:
     RMCRankLanceCorporal:
@@ -22,10 +23,8 @@
   accessGroups:
   - Rifleman
   hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
   roleWeight: 1
+  displayWeight: 0
   special:
   - !type:AddComponentSpecial
     components:
@@ -34,14 +33,16 @@
         RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: CMVendorUser
+      id: CMRifleman
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearRifleman
@@ -142,3 +143,20 @@
     - !type:RoleTimeRequirement
       role: CMJobRifleman
       time: 1
+
+## Guidebook downed marine
+- type: entity
+  id: RMCGuidebookCorpseMarine
+  parent: MobHuman
+  name: Wounded marine
+  categories: [ DoNotMap, HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquipped ]
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43

@@ -6,28 +6,37 @@
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   abstract: true
   components:
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+      params:
+        volume: -4
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:
     - state: icon
-      map: ["enum.ToggleVisuals.Toggled"]
+      map: ["enum.ToggleableVisuals.Enabled"]
     - state: welder_on
-      map: ["enum.ToggleVisuals.Layer"]
+      map: ["enum.ToggleableVisuals.Layer"]
       visible: false
       shader: unshaded
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Toggled:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
           True: { visible: false }
           False: { visible: true }
-        enum.ToggleVisuals.Layer:
+        enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
   - type: Item
@@ -62,7 +71,7 @@
     components:
     - type: DisarmMalus
       malus: 0.6
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: on
     inhandVisuals:
       left:
@@ -155,3 +164,43 @@
         - ReagentId: WeldingFuel
           Quantity: 12.5
         maxVol: 12.5 # TODO RMC14 5 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderIndustrial
+  name: industrial blowtorch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
+    layers:
+    - state: icon
+      map: ["enum.ToggleableVisuals.Enabled"]
+    - state: welder_on
+      map: ["enum.ToggleableVisuals.Layer"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
+  - type: RequiresEyeProtection
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 150
+        maxVol: 150 # TODO RMC14 60 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderPVE
+  name: modified blowtorch
+  description: A more 'advanced' version of the standard UNMC Blowtorch, this blowtorch has a welding shield for eye protection affixed to it. Seems the eye shield was ripped off of a standard ME3 hand welder and then crudely affixed.
+  suffix: PVE, DO NOT MAP
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed

@@ -19,11 +19,12 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
+      - RMCBeltHolsterM13
       - Flashlight
       - DiscreteHealthAnalyzer
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 - type: entity
@@ -46,3 +47,20 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_brown.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_black.rsi

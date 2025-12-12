@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Support Gunner
   special:
   - !type:AddComponentSpecial
     components:
@@ -30,7 +31,7 @@
         RMCSkillSmartGun: 1
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
-    - type: SquadArmorWearer
+        RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
   hidden: true
@@ -46,6 +47,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCGunner
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCGunner
+  name: weya pmc gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCGunner
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: EventHumanoid
   id: RMCPMCGunner
@@ -58,6 +70,10 @@
     job: RMCPMCGunner
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -68,11 +84,11 @@
     ears: RMCHeadsetDistressPMC
     jumpsuit: RMCJumpsuitVeteranPMCGunner
     outerClothing: CMArmorM4PMCSmartGunHarness
-    gloves: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteran
     head: ArmorHelmetPMCGunner
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
-    suitstorage: RMCSmartGunWhiteOut
+    mask: RMCMaskCoifPMC
+    suitstorage: RMCSmartGunPMC
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchDrumPMCFill
     belt: RMCBeltSmartGunOperatorPistolPMCFilled

@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCWeaponFlamer
   name: M34 incinerator unit
-  description: M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
+  description: The M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
@@ -46,8 +46,8 @@
         ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
         priority: 2
         whitelist:
-          components:
-          - RMCFlamerTank
+          tags:
+          - RMCTankFlamer
   - type: Wieldable
   - type: WieldableSpeedModifiers
     base: 0.5
@@ -91,11 +91,44 @@
         enum.RMCIgniterVisuals.Ignited:
           True: { visible: true }
           False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerPVE
+  suffix: PVE
+  components:
+  - type: Gun
+    fireRate: 2
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerUnloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          components:
+          - RMCFlamerTank
 
 - type: entity
   parent: BaseItem
   id: RMCTankFlamer
-  name: incinerator tank
+  name: M34 incinerator tank
   description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
   components:
   - type: Sprite
@@ -103,7 +136,8 @@
     state: flametank_custom
     layers:
     - state: flametank_custom
-    - state: flametank_custom_strip0
+    - state: flametank_custom_strip2
+    - state: flametank_custom_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Item
     size: Normal
@@ -121,16 +155,80 @@
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer
+    sourceWhitelist:
+      tags:
+      - RMCTankReagent
   - type: RefillableSolution
     solution: rmc_flamer_tank
   - type: DetailedExaminableSolution
     solution: rmc_flamer_tank
   - type: NoMixingReagents
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    emptySpriteName: flametank_custom_strip0
+    maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: RMCPressurizedSolution
+    solution: rmc_flamer_tank
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    canSend: false
+    canReceive: false
+  - type: Tag
+    tags:
+    - RMCTankFlamer
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerCustom
+  name: M34 custom incinerator tank
+  description: A fuel tank for use in the M34 incinerator unit.
+  # description: A fuel tank for use in the M34 incinerator unit. This one has been modified with a pressure regulator and an internal propellant tank.
+  components:
+  - type: RMCFlamerTank
+    maxRange: 5
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents: [ ]
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerBGel
+  name: M34 incinerator tank (B-Gel)
+  description: A fuel tank full of specialized Ultra Thick Napthal Fuel type B-Gel, a gelled variant of napalm that is easily extinguished, but shoots further and lingers for longer. Handle with exceptional care.
+  components:
+  - type: RMCFlamerTank
+    maxRange: 7
+    maxDuration: 50
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 200
+        reagents:
+        - ReagentId: RMCBGel
+          Quantity: 200
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerUpgraded
+  name: M34 upgraded incinerator tank
+  description: A fuel tank for use in the M34 incinerator unit. This one has been modified with a larger and more sophisticated internal propellant tank, allowing for larger capacity and stronger fuels.
+  components:
+  - type: RMCFlamerTank
+    maxIntensity: 60
+    maxRange: 7
+    maxDuration: 50
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 200
+        reagents: [ ]
+
+- type: Tag
+  id: RMCTankFlamer
 
 - type: entity
   parent: RMCGunCaseBase

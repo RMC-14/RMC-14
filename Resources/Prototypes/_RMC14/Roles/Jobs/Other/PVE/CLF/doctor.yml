@@ -1,0 +1,69 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFDoctorPVE
+  name: rmc-job-name-clf-pve-doctor
+  description: rmc-ghost-role-information-clf-pve-description
+  playTimeTracker: CMJobCLFDoctorPVE
+  ranks:
+    RMCRankCivilianDoctor: []
+  startingGear: RMCJobCLFDoctorPVE
+  icon: RMCJobIconCLFMedic
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - HospitalCorpsman
+  spawnMenuRoleName: CLF Doctor (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillEndurance: 1
+        RMCSkillCqc: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-pve-doctor
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCLFDoctorPVE
+  name: clf doctor spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCCLFDoctorPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: clf_spawn
+
+- type: startingGear
+  id: RMCJobCLFDoctorPVE
+  equipment:
+    id: RMCIDCardCLFDoctorPVE
+    jumpsuit: RMCJumpsuitCLFSoldier
+    shoes: RMCShoesJackbootsFilled
+    outerClothing: RMCLabcoat
+    ears: RMCHeadsetDistressCLF
+
+- type: playTimeTracker
+  id: CMJobCLFDoctorPVE

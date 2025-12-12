@@ -12,6 +12,8 @@ namespace Content.Shared.Humanoid
     /// </summary>
     public sealed class NamingSystem : EntitySystem
     {
+        private static readonly ProtoId<SpeciesPrototype> FallbackSpecies = "Human";
+
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -21,8 +23,8 @@ namespace Content.Shared.Humanoid
             // Some downstream is probably gonna have this eventually but then they can deal with fallbacks.
             if (!_prototypeManager.TryIndex(species, out SpeciesPrototype? speciesProto))
             {
-                speciesProto = _prototypeManager.Index<SpeciesPrototype>("Human");
-                Log.Warning($"Unable to find species {species} for name, falling back to Human");
+                speciesProto = _prototypeManager.Index(FallbackSpecies);
+                Log.Warning($"Unable to find species {species} for name, falling back to {FallbackSpecies}");
             }
 
             switch (speciesProto.Naming)
@@ -39,6 +41,9 @@ namespace Content.Shared.Humanoid
                 case SpeciesNaming.LastFirst: // this is for Rodentia
                     return Loc.GetString("namepreset-lastfirst",
                         ("last", GetLastName(speciesProto)), ("first", GetFirstName(speciesProto, gender)));
+                case SpeciesNaming.FirstLastCombined: // this is for avali
+                    return Loc.GetString("rmc-namepreset-firstlastcombined",
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto)));
                 case SpeciesNaming.FirstLast:
                 default:
                     return Loc.GetString("namepreset-firstlast",

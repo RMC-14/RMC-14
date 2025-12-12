@@ -8,12 +8,14 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pointing;
 using Content.Shared._RMC14.Roles;
+using Content.Shared._RMC14.Tracker;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Dataset;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -27,6 +29,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
+using Content.Shared.GameTicking;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -99,7 +102,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
-        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
+        SubscribeLocalEvent<AssignSquadComponent, PlayerSpawnCompleteEvent>(OnAssignSquadPlayerSpawnComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -262,7 +265,7 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    private void OnAssignSquadPlayerSpawnComplete(Entity<AssignSquadComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -270,37 +273,38 @@ public sealed class SquadSystem : EntitySystem
             if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
                 continue;
 
-            AssignSquad(ent, (uid, comp), null);
+            AssignSquad(ent, (uid, comp), args.JobId);
         }
     }
 
-    private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
+    private void SearchForMappedItems(Entity<SquadMemberComponent> user, EntityUid squad)
     {
-        var user = ent.Owner;
+        if (!_inventory.TryGetContainerSlotEnumerator(user.Owner, out var slots, SlotFlags.All))
+            return;
 
-        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
+        while (slots.MoveNext(out var slot))
         {
-            while (slots.MoveNext(out var slot))
+            if (slot.ContainedEntity is not { } slotEntity)
+                continue;
+
+            if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
             {
-                if (slot.ContainedEntity != null)
+                MapToSquad((slotEntity, mapToSquad), user, squad);
+            }
+            else if (TryComp<StorageComponent>(slotEntity, out var storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities)
                 {
-                    var slotEntity = slot.ContainedEntity.Value;
+                    if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
+                        continue;
 
-                    if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
-                    {
-                        MapToSquad((slotEntity, mapToSquad), user, squad);
-                    }
-                    else if (TryComp<StorageComponent>(slotEntity, out var storage))
-                    {
-                        foreach (var contained in storage.Container.ContainedEntities)
-                        {
-                            if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
-                                continue;
-
-                            MapToSquad((contained, mapToSquadStorage), user, squad);
-                        }
-                    }
+                    MapToSquad((contained, mapToSquadStorage), user, squad);
                 }
+            }
+            else if (TryComp(slotEntity, out EncryptionKeyHolderComponent? holder))
+            {
+                _encryptionKey.UpdateChannels(slotEntity, holder);
+                break;
             }
         }
     }
@@ -460,6 +464,7 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        member.AccessibleBackgroundColor = team.Comp.AccessibleColor;
         member.BlacklistedSquadArmor = team.Comp.BlacklistedSquadArmor;
         Dirty(marine, member);
 
@@ -504,6 +509,36 @@ public sealed class SquadSystem : EntitySystem
 
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
+    }
+
+    public void RemoveSquad(EntityUid marine, ProtoId<JobPrototype>? job)
+    {
+        RemComp<SquadLeaderComponent>(marine);
+        if (!TryComp<SquadMemberComponent>(marine, out var member))
+            return;
+
+        var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
+        if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
+        {
+            oldSquad.Members.Remove(marine);
+
+            if (role != null)
+            {
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
+                }
+            }
+        }
+
+        RemComp<SquadMemberComponent>(marine);
+        if (oldSquadId != null && oldSquad != null)
+        {
+            var removeEv = new SquadMemberRemovedEvent((oldSquadId.Value, oldSquad), marine);
+            RaiseLocalEvent(marine, ref removeEv, true);
+        }
     }
 
     public void UpdateSquadTitle(EntityUid marine)
@@ -619,6 +654,7 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
+                RemComp<RMCTrackableComponent>(uid);
                 RemCompDeferred<RMCPointingComponent>(uid);
             }
         }
@@ -632,6 +668,7 @@ public sealed class SquadSystem : EntitySystem
             _marineOrders.StartActionUseDelay((toPromote, orders));
         }
 
+        EnsureComp<RMCTrackableComponent>(toPromote);
         EnsureComp<RMCPointingComponent>(toPromote);
 
         var slots = _inventory.GetSlotEnumerator(toPromote.Owner, SlotFlags.EARS);
@@ -707,6 +744,84 @@ public sealed class SquadSystem : EntitySystem
 
         squad.Comp.Roles.TryGetValue(job, out var currentRoles);
         return currentRoles < maxRoles;
+    }
+
+    /// <summary>
+    /// Returns the entities with the highest squad among the passed entities.
+    /// Uses the specified squad hierarchy.
+    /// </summary>
+    /// <param name="entities">List of entities to be compared.</param>
+    /// <param name="squadHierarchyId">ID of the dataset prototype with the order of squad precedence determined by the index. A non-empty <see cref="DatasetPrototype.Values"/> is expected.</param>
+    /// <returns>
+    /// List of entities with the highest squad. May be null if no entity has a valid squad. Will also return null and an error if the method is passed a dataset with empty values.
+    /// </returns>
+    public List<EntityUid>? GetEntitiesWithHighestSquad(List<EntityUid> entities, ProtoId<DatasetPrototype> squadHierarchyId)
+    {
+        var result = new List<EntityUid>();
+
+        if (!_prototypes.TryIndex<DatasetPrototype>(squadHierarchyId, out var squadHierarchy))
+            return null;
+
+        var squadOrder = squadHierarchy.Values.ToList();
+        if (squadOrder.Count == 0)
+        {
+            // The dataset cannot be empty, the person forgot to add values ​​to it
+            Logger.Error($"The squad hierarchy dataset '{squadHierarchyId}' has an invalid value: empty. The highest squad cannot be determined.");
+            return null;
+        }
+
+        var squadScores = new Dictionary<EntityUid, int>();
+        var highestSquadIndex = -1;
+
+        foreach (var candidate in entities)
+        {
+            if (!TryComp<SquadMemberComponent>(candidate, out var squadComp) || squadComp.Squad == null)
+                continue;
+
+            var squadIndex = squadComp.Squad != null && squadComp.Squad.ToString() != null
+                ? squadOrder.IndexOf(squadComp.Squad.ToString()!)
+                : -1;
+
+            if (squadIndex == -1)
+                continue;
+
+            squadScores[candidate] = squadIndex;
+
+            if (squadIndex > highestSquadIndex)
+                highestSquadIndex = squadIndex;
+        }
+
+        if (highestSquadIndex == -1) // No valid squads found
+            return null;
+
+        result = squadScores
+            .Where(pair => pair.Value == highestSquadIndex)
+            .Select(pair => pair.Key)
+            .ToList();
+
+        return result;
+    }
+
+    public bool TryGetSquadMemberColor(EntityUid entity, out Color color, bool accessible = false)
+    {
+        color = default;
+
+        if (!TryComp(entity, out SquadMemberComponent? comp))
+            return false;
+
+        color = accessible && comp.AccessibleBackgroundColor != null
+            ? comp.AccessibleBackgroundColor.Value
+            : comp.BackgroundColor;
+
+        return true;
+    }
+
+    public void SetSquadMaxRole(Entity<SquadTeamComponent?> squad, ProtoId<JobPrototype> job, int amount)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        squad.Comp.MaxRoles[job] = amount;
     }
 
     public override void Update(float frameTime)

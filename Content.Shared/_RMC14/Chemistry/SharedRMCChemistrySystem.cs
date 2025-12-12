@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -87,13 +88,26 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 foreach (var reagent in solution.Contents)
                 {
                     var name = reagent.Reagent.Prototype;
-                    if (_prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
+                    if (_prototypes.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
                         name = reagentProto.LocalizedName;
 
                     args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
                 }
 
                 args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
+            }
+
+            if (TryComp<RMCToggleableSolutionTransferComponent>(ent.Owner, out var transferComp))
+            {
+                var directionText = transferComp.Direction switch
+                {
+                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
+                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    _ => string.Empty,
+                };
+
+                if (!string.IsNullOrEmpty(directionText))
+                    args.PushText(directionText);
             }
         }
     }
@@ -105,6 +119,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnToggleableSolutionTransferMapInit(Entity<RMCToggleableSolutionTransferComponent> ent, ref MapInitEvent args)
     {
+        ent.Comp.Direction = SolutionTransferDirection.Input;
         RemCompDeferred<DrainableSolutionComponent>(ent);
         var refillable = EnsureComp<RefillableSolutionComponent>(ent);
         refillable.Solution = ent.Comp.Solution;
@@ -129,6 +144,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<DrainableSolutionComponent>(ent);
                     var refillable = EnsureComp<RefillableSolutionComponent>(ent);
                     refillable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Input;
                     Dirty(ent, refillable);
                     _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
                 }
@@ -137,6 +153,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<RefillableSolutionComponent>(ent);
                     var drainable = EnsureComp<DrainableSolutionComponent>(ent);
                     drainable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Output;
                     Dirty(ent, drainable);
                     _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
                 }
@@ -238,7 +255,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         if (!_itemSlots.TryGetSlot(ent, ent.Comp.ContainerSlotId, out var slot))
             return;
 
-        _itemSlots.TryEjectToHands(ent, slot, args.Actor);
+        _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
         Dirty(ent);
     }
 
@@ -261,7 +278,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         if (dispense == FixedPoint2.Zero)
             return;
 
-        var cost = ent.Comp.CostPerUnit * dispense;
+        var cost = ent.Comp.FreeReagents.Contains(args.Reagent)
+            ? FixedPoint2.Zero
+            : ent.Comp.CostPerUnit * dispense;
         if (cost > storage.Comp.Energy)
             return;
 
@@ -323,11 +342,15 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             storage.RechargeAt = time + storage.RechargeEvery;
             Dirty(storageId, storage);
 
+            var storageTransform = Transform(storageId);
+
             _dispensers.Clear();
             var dispensers = EntityQueryEnumerator<RMCChemicalDispenserComponent>();
             while (dispensers.MoveNext(out var dispenserId, out var dispenser))
             {
-                if (dispenser.Network == storage.Network)
+                var dispenserTransform = Transform(dispenserId);
+
+                if (dispenser.Network == storage.Network && storageTransform.GridUid == dispenserTransform.GridUid)
                     _dispensers.Add((dispenserId, dispenser));
             }
 

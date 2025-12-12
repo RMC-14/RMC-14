@@ -2,21 +2,22 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: resting
-    event: !type:XenoRestActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:XenoRestActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoRest
+  id: RMCGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -27,12 +28,22 @@
   parent: ActionXenoBase
   name: Watch Xenonid
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: watch_xeno
+  - type: InstantAction
     event: !type:XenoWatchActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoWatch
+  name: Watch Xenonid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: watch_xeno
 
 - type: entity
   id: ActionXenoPheromones
@@ -40,13 +51,24 @@
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
   description: Gives a buff to nearby xenonids. [color=cyan]Consumes 2.5 plasma per second.[/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: emit_pheromones
-    event: !type:XenoPheromonesActionEvent
     useDelay: 0.33
+  - type: InstantAction
+    event: !type:XenoPheromonesActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPheromones
+  name: Emit Pheromones
+  description: Gives a buff to nearby xenonids.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emit_pheromones
 
 - type: entity
   id: ActionXenoHide
@@ -54,13 +76,22 @@
   name: Hide
   description: Hide under tables and other objects.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xenohide
-    event: !type:XenoHideActionEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:XenoHideActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHide
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xenohide
 
 - type: entity
   id: ActionXenoToggleCrest
@@ -68,13 +99,22 @@
   name: Toggle Crest Defense
   description: Increases your resistance to direct damage but slows you down. You count as one size bigger while you're crest is lowered.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: crest_defense
-    event: !type:XenoToggleCrestActionEvent
     useDelay: 2
+  - type: InstantAction
+    event: !type:XenoToggleCrestActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleCrestDefence
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: crest_defense
 
 - type: entity
   id: ActionXenoFortify
@@ -82,13 +122,22 @@
   name: Fortify
   description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage and explosions. Damage is further reduced from the direction you are facing. You can't be stunned by minor explosions. You count as two sizes bigger while fortified and still can attack structures or use tail slam.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: fortify
-    event: !type:XenoFortifyActionEvent
     useDelay: 5
+  - type: InstantAction
+    event: !type:XenoFortifyActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFortify
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fortify
 
 - type: entity
   id: ActionXenoFortifySteelcrest
@@ -102,26 +151,44 @@
   name: Resin Walker (50) # TODO RMC14 proper plasma costs
   description: Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: toggle_speed
-    event: !type:XenoResinWalkerActionEvent
     useDelay: 0.25
+  - type: InstantAction
+    event: !type:XenoResinWalkerActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoResinWalker
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_speed
 
 - type: entity
   id: ActionXenoZoom
   parent: ActionXenoBase
   name: Toggle Long-Range Sight
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: toggle_long_range
-    event: !type:XenoZoomActionEvent
     useDelay: 0.2
+  - type: InstantAction
+    event: !type:XenoZoomActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleLongRangeSight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_long_range
 
 - type: entity
   id: ActionXenoWordQueen
@@ -129,13 +196,14 @@
   name: Word of the Queen (50) # TODO RMC14 proper plasma costs
   description: Sends a message to all members of your hive.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: queen_word
-    event: !type:XenoWordQueenActionEvent
     useDelay: 10
+  - type: InstantAction
+    event: !type:XenoWordQueenActionEvent
   - type: XenoWordQueenAction
   - type: RMCDazeableAction
 
@@ -143,15 +211,26 @@
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
-  description: Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
+  description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: grow_ovipositor
+  - type: InstantAction
     event: !type:XenoGrowOvipositorActionEvent
   - type: XenoGrowOvipositorAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoGrowOvipositor
+  name: Grow Ovipositor
+  description: Become immobile and start laying eggs which will produce parasites.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: grow_ovipositor
 
 - type: entity
   id: ActionXenoTurnInvisible
@@ -159,12 +238,21 @@
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs
   description: Become partially invisible for 30 seconds, or until you either damage or attempt to devour an enemy. Can be toggled off to become visible again, with a refund of 90% remaining cloak time. Increases your movement speed by 15% until the ability expires.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lurker_invisibility
+  - type: InstantAction
     event: !type:XenoTurnInvisibleActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTurnInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_invisibility
 
 - type: entity
   id: ActionXenoDefensiveShield
@@ -172,13 +260,22 @@
   name: Defensive Shield (50)
   description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: empower
-    event: !type:XenoDefensiveShieldActionEvent
     useDelay: 26
+  - type: InstantAction
+    event: !type:XenoDefensiveShieldActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDefensiveShield
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: empower
 
 - type: entity
   id: ActionXenoRetrieveEgg
@@ -186,61 +283,91 @@
   name: Retrieve Egg
   description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: retrieve_egg
-    event: !type:XenoRetrieveEggActionEvent
+  - type: TargetAction
     checkCanAccess: false
     deselectOnMiss: false
     repeat: true
     range: 16
+  - type: WorldTargetAction
+    event: !type:XenoRetrieveEggActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRetrieveEgg
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: retrieve_egg
 
 - type: entity
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
-  name: Throw Parasite
-  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
+  name: Carrier's Bond
+  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: throw_parasite
-    event: !type:XenoThrowParasiteActionEvent
+    useDelay: 0
+  - type: TargetAction
     checkCanAccess: false
     deselectOnMiss: false
     repeat: true
     range: 16
-    useDelay: 0
+  - type: WorldTargetAction
+    event: !type:XenoThrowParasiteActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoThrowParasite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: throw_parasite
 
 - type: entity
   id: ActionXenoParasiteReserve
   parent: ActionXenoBase
-  name: Set Parasite Reserve
-  description: Sets your parasite Reserves. Observers cannot join as a stored parasite if your parasites stored is less than or equal to your reserve.
+  name: Set Child Reserve
+  description: Sets your child Reserves. Observers cannot join as a stored child if your children stored is less than or equal to your reserve.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: reserve_parasite
-    event: !type:XenoReserveParasiteActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:XenoReserveParasiteActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSetParasiteReserve
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: reserve_parasite
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoManageHive
   name: Manage The Hive
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_readmit
-    event: !type:ManageHiveActionEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:ManageHiveActionEvent
 
 - type: entity
   id: ActionXenoDodge
@@ -248,13 +375,14 @@
   name: Dodge (200)
   description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dodge
-    event: !type:XenoDodgeActionEvent
     useDelay: 19
+  - type: InstantAction
+    event: !type:XenoDodgeActionEvent
 
 - type: entity
   parent: ActionXenoBase
@@ -262,18 +390,28 @@
   name: Burrow
   description: Burrow underground preventing you from getting hit from all sources. Once burrowed click a tile to move to it and resurface after a doafter that depends on distance.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: burrow
-    event: !type:XenoBurrowActionEvent
+    checkCanInteract: false
+  - type: TargetAction
     range: 8
     repeat: true
     deselectOnMiss: false
     checkCanAccess: false
-    checkCanInteract: false
+  - type: WorldTargetAction
+    event: !type:XenoBurrowActionEvent
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoBurrow
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: burrow
 
 - type: entity
   parent: ActionXenoBase
@@ -281,13 +419,14 @@
   name: Soak (20)
   description: Soak in damage for 6 seconds. If you take 140 damage or higher, you regen 75 health and your tail slam gets refreshed.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: soak
-    event: !type:XenoSoakActionEvent
     useDelay: 17
+  - type: InstantAction
+    event: !type:XenoSoakActionEvent
   - type: ActionBlockIfResting
 
 - type: entity
@@ -296,13 +435,22 @@
   name: Empower (50)
   description: On first activation it, gain a small amount of shield. After 6 seconds or using it again, get empowered based on surrounding enemies (max 6), gaining shield from each. If you empowered from at least 3 targets, you become Super-Empowered, gaing additional damage on melee attacks, and changing how some of your other abilities work.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: rav_empower
+  - type: InstantAction
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_empower
 
 - type: entity
   parent: ActionXenoBase
@@ -310,9 +458,18 @@
   name: Generate Eggs (50)
   description: Generate an egg every 30 seconds, which goes into your storage. [color=cyan]Consumes 15 plasma every 2 seconds.[/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lay_egg
+  - type: InstantAction
     event: !type:XenoGenerateEggsActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoGenerateEggs
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lay_egg

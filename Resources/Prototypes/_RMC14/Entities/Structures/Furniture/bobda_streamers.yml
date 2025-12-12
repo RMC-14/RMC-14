@@ -1,0 +1,152 @@
+- type: entity
+  id: RMCStreamerBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bobda_streamers.rsi
+    state: post
+    drawdepth: Overdoors
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: SpriteFade
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+# Bobda
+
+- type: entity
+  parent: RMCStreamerBase
+  id: RMCStreamerPole
+  name: pole
+  description: It connects streamer to streamer.
+
+- type: entity
+  parent: RMCStreamerPole
+  id: RMCStreamerPoleOffset1
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0, 0.5
+    state: post_off1
+
+- type: entity
+  parent: RMCStreamerPoleOffset1
+  id: RMCStreamerPoleOffset2
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    state: post_off2
+
+- type: entity
+  parent: RMCStreamerPoleOffset1
+  id: RMCStreamerPoleOffset3
+  components:
+  - type: Sprite
+    state: post_off3
+
+- type: entity
+  parent: RMCStreamerPoleOffset1
+  id: RMCStreamerPoleOffset4
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    state: post_off4
+
+- type: entity
+  parent: RMCStreamerBase
+  id: RMCStreamerOrange
+  name: orange streamer
+  description: They flutter softly. Poignant.
+  components:
+  - type: Sprite
+    state: streamer
+
+- type: entity
+  parent: RMCStreamerOrange
+  id: RMCStreamerOrangeOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0, 0.5
+
+# Horizon
+
+- type: entity
+  parent: RMCStreamerPole
+  id: RMCStreamerPoleHorizon
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset1
+  id: RMCStreamerPoleHorizonOffset1
+  suffix: Offset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset2
+  id: RMCStreamerPoleHorizonOffset2
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset3
+  id: RMCStreamerPoleHorizonOffset3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset4
+  id: RMCStreamerPoleHorizonOffset4
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerOrange
+  id: RMCStreamerHorizon
+  name: horizon streamer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerOrangeOffset
+  id: RMCStreamerHorizonOffset
+  name: horizon streamer
+  suffix: Offset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi

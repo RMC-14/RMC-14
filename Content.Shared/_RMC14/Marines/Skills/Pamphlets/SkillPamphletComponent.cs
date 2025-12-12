@@ -29,6 +29,12 @@ public sealed partial class SkillPamphletComponent : Component
     public LocId? GiveJobTitle;
 
     [DataField, AutoNetworkedField]
+    public LocId? GivePrefix;
+
+    [DataField, AutoNetworkedField]
+    public bool IsAppendPrefix = false;
+
+    [DataField, AutoNetworkedField]
     public bool BypassLimit;
 
     [DataField, AutoNetworkedField]
@@ -46,4 +52,7 @@ public sealed partial class SkillPamphletComponent : Component
     public readonly record struct JobWhitelist(LocId Popup, ProtoId<JobPrototype> JobProto);
 
     public bool GaveSkill;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassSkill = false;
 }

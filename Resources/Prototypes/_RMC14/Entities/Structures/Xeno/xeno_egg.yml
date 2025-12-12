@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: XenoEgg
   name: egg
@@ -46,6 +46,8 @@
   - type: XenoEgg
   - type: Damageable
     damageContainer: StructuralXeno
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
   - type: Destructible
     thresholds:
     - trigger:
@@ -79,6 +81,7 @@
   - type: StatusEffects # For jitter to work
     allowed:
     - Electrocution
+  - type: DeletedByWeedKiller
 
 
 - type: entity
@@ -145,6 +148,7 @@
   - type: RequireProjectileTarget
   - type: WhitelistPickupBy
   - type: DestroyedXenoEgg
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: XenoEggDestroyed

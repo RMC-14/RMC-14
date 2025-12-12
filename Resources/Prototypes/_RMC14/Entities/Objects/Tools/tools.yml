@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Screwdriver
   id: CMScrewdriver
   components:
@@ -15,9 +15,22 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Tools/screwdriver.rsi
+    storedRotation: 0
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -42,9 +55,22 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    storedRotation: 0
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -60,13 +86,25 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wrench.rsi
-    storedRotation: 90
+    storedRotation: 0
     storedSprite:
       sprite: _RMC14/Objects/Tools/wrench.rsi
       state: icon
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -86,9 +124,22 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/multitool.rsi
+    storedRotation: 0
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
@@ -111,6 +162,7 @@
     range: 1
   - type: Item
     sprite: _RMC14/Objects/Tools/t-ray.rsi
+    storedRotation: 0
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -121,6 +173,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
@@ -139,9 +203,22 @@
     sprite: null
     storedSprite: null
     shape: null
+    storedRotation: 0
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -170,6 +247,7 @@
 - type: entity
   parent: HandLabeler
   id: CMHandLabeler
+  suffix: RMC14
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
@@ -177,6 +255,14 @@
     - type: Item
       size: Normal
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
+      storedRotation: 0
+    - type: RMCHandLabeler
+    - type: UserInterface
+      interfaces:
+        enum.HandLabelerUiKey.Key:
+          type: HandLabelerBoundUserInterface
+        enum.RMCHandLabelerUiKey.PillBottleColor:
+          type: RMCHandLabelerPillBottleColorBui
 
 - type: entity
   parent: Shovel
@@ -189,6 +275,7 @@
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Tools/shovel.rsi
+    storedRotation: 0
   - type: Clothing
     quickEquip: false
     slots:
@@ -198,3 +285,64 @@
   - type: Appearance
   - type: XenoTunnelFiller
   - type: Shovel
+
+#PVE Tool
+- type: entity
+  parent: BaseItem
+  id: RMCWireSnappers
+  name: wire snappers
+  description: The jaws are perfect for snipping large wires and other small metal bits, but are a bit too heavy for delicate work.
+  suffix: INSTANT, Repeating
+  components:
+  - type: RMCDeviceBreaker
+    useSound: /Audio/Items/jaws_pry.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    layers:
+    - state: cutters
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    - state: cutters-cutty-thingy
+      color: "#808080"
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        cutters: Rainbow
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/wirecutters.rsi
+    storedRotation: 0
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
+
+- type: entity
+  parent: RMCWireSnappers
+  id: RMCWireSnappersNoRepeat
+  suffix: INSTANT
+  components:
+  - type: RMCDeviceBreaker
+    repeat: false
+
+- type: entity
+  parent: RMCWireSnappers
+  id: RMCWireSnappersNormal
+  suffix: Slow
+  components:
+  - type: RMCDeviceBreaker
+    doAfterTime: 7

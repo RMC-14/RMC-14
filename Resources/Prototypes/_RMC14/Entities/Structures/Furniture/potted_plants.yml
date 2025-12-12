@@ -47,11 +47,13 @@
   abstract: true
   name: potted plant
   description: ""
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/potted_plants.rsi
   - type: SecretStash
     maxItemSize: Tiny
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMPottedPlantBase

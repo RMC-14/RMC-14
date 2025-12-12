@@ -1,4 +1,4 @@
-# port from Frontier
+# port from Cosmatic Drift
 
 - type: species
   id: Avali
@@ -9,17 +9,18 @@
   markingLimits: MobAvaliMarkingLimits
   dollPrototype: MobAvaliDummy
   skinColoration: Hues
-  maleFirstNames: names_avali_unisex
-  femaleFirstNames: names_avali_unisex
-  naming: First
+  maleFirstNames: RMCNamesAvaliFirst
+  femaleFirstNames: RMCNamesAvaliFirst
+  lastNames: RMCNamesAvaliLast
+  naming: FirstLastCombined
 
 - type: speciesBaseSprites
   id: MobAvaliSprites
   sprites:
     Head: MobAvaliHead
     Chest: MobAvaliTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -66,11 +67,11 @@
     Chest:
       points: 1
       required: false
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]

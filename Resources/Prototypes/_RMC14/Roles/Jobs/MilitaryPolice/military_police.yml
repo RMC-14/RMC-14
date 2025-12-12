@@ -22,15 +22,10 @@
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
   joinNotifyCrew: false
+  marineAuthorityLevel: 3
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - MP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -47,8 +42,11 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -78,3 +76,14 @@
 - type: playTimeTracker
   id: CMJobMilitaryPolice
   isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMP
+  name: Military Police
+  description: Military Police
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: military_police

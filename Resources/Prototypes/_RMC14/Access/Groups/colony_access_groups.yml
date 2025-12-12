@@ -17,9 +17,15 @@
   - CMAccessColonyPublic
 
 - type: accessGroup
+  id: ColonistObserver
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyCommand
+
+- type: accessGroup
   id: ColonyCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessResearch
   - CMAccessMedical
   - CMAccessColonyPublic
@@ -34,7 +40,7 @@
 - type: accessGroup
   id: CMCorrespondent
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessPress
   - CMAccessMarinePrep
 
@@ -66,3 +72,56 @@
   - CMAccessColonyPublic
   - CMAccessColonyCommand
   - RMCAccessWeYa # TODO RMC14 weya colonial, weya exec
+
+- type: accessGroup
+  id: ColonistAllAccessNoArmory
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand
+
+- type: accessGroup
+  id: ColonistTSEPA
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+
+- type: accessGroup
+  id: ColonistTSEPABrig
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+  - RMCAccessTSEPABrig
+
+- type: accessGroup
+  id: ColonistTSEPAInspector
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+  - RMCAccessTSEPABrig
+  - RMCAccessTSEPAInspector
+
+# Survivor Synth Access
+- type: accessGroup
+  id: ColonistSynthShipside
+  tags:
+  - CMAccessCMO
+  - CMAccessMedical
+  - CMAccessResearch
+  - CMAccessChemistry
+  - CMAccessMaint
+  - CMAccessEngineering
+  - CMAccessCE
+  - CMAccessOT
+  - RMCAccessSynth
+  - RMCAccessDatabase

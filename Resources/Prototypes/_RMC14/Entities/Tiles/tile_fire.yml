@@ -35,11 +35,14 @@
     tags:
     - HideContextMenu
   - type: RMCIgniteOnCollide
+    maxStacks: 20
     tileDamage:
       types:
         Heat: 0.5
+    burnColor: "#EE6515"
   - type: DamageOnCollide
     damageDead: false
+    fire: true
     damage:
       types:
         Heat: 45
@@ -60,6 +63,7 @@
   - type: RMCScorchEffectOnSpawn
     decalTag: burnt
     tileLimit: 3
+  - type: BlockWeeds
 
 - type: entity
   parent: RMCTileFire
@@ -80,10 +84,12 @@
     armorWhitelist:
       components:
       - Xeno
+    burnColor: "#00FF00"
   - type: TileFire
     id: RMCTileFireGreen
     extinguishInstantly: false
     patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: 3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666
@@ -98,6 +104,34 @@
 
 - type: entity
   parent: RMCTileFire
+  id: RMCTileFireBlue
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: PointLight
+    color: "#00b8ff"
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 45
+    maxStacks: 40
+    burnColor: "#00b8ff"
+  - type: TileFire
+    id: RMCTileFireBlue
+    extinguishInstantly: false
+    patExtinguishMultiplier: 2
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
+
+- type: entity
+  parent: RMCTileFire
   id: RMCTileFireOB
   components:
   - type: Sprite
@@ -108,8 +142,10 @@
   - type: PointLight
     color: "#8fcbeb"
   - type: RMCIgniteOnCollide
+    maxStacks: 70
     intensity: 80
     duration: 70
+    burnColor: "#8fcbeb"
   - type: TileFire
     id: RMCTileFireOB
     extinguishInstantly: false
@@ -121,6 +157,35 @@
           Two: { state: white_2 }
           Three: { state: white_3 }
           Four: { state: white_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireOBAegis
+  components:
+  - type: Sprite
+    color: "#ffffff"
+    layers:
+    - map: [ "base" ]
+      state: purple_4
+  - type: PointLight
+    color: "#faeffa"
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 70
+    burnColor: "#faeffa"
+  - type: TileFire
+    id: RMCTileFireOBAegis
+    extinguishInstantly: false
+  - type: RMCFireImmunityBypass  # This component allows it to bypass fire immunity
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: purple_1 }
+          Two: { state: purple_2 }
+          Three: { state: purple_3 }
+          Four: { state: purple_4 }
+
 
 - type: entity
   parent: RMCTileFire
@@ -137,9 +202,12 @@
         Heat: 100
   - type: RMCIgniteOnCollide
     maxStacks: 5
+    intensity: 75
+    duration: 5
     tileDamage:
       types:
         Heat: 0.13
+    burnColor: "#EE6515"
   - type: TileFire
     duration: 5
   - type: PointLight
@@ -159,3 +227,435 @@
   components:
   - type: TileFire
     duration: 30
+  - type: RMCIgniteOnCollide
+    maxStacks: 60
+    intensity: 30
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireBanshee
+  components:
+  - type: Sprite
+    color: "#00b8ff"
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: TileFire
+    duration: 15
+  - type: RMCIgniteOnCollide
+    maxStacks: 15
+    intensity: 50
+    duration: 15
+    burnColor: "#00b8ff"
+  - type: PointLight
+    color: "#00b8ff"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireThermobaric
+  components:
+  - type: Sprite
+    color: White
+    layers:
+    - map: [ "base" ]
+      state: red_4
+  - type: TileFire
+    duration: 25
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 50
+    duration: 25
+    burnColor: "#c96500"
+  - type: PointLight
+    color: "#c96500"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_2 }
+          Three: { state: red_3 }
+          Four: { state: red_4 }
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireMiniMike
+  components:
+  - type: TileFire
+    duration: 20
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 25
+
+#Forever fires for pve
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireForever
+  name: fire
+  description: That isn't going out any time soon!!
+  suffix: Undying, Very Strong
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: TileFire
+    id: RMCTileFireForever
+    extinguishInstantly: false
+    patExtinguishMultiplier: 0
+    sprayExtinguishMultiplier: 0
+    duration: 86400 # 24 hours :)
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_4 }
+          Two: { state: red_4 }
+          Three: { state: red_4 }
+          Four: { state: red_4 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverStrong
+  suffix: Undying, Strong
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverStrong
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_3
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_3 }
+          Two: { state: red_3 }
+          Three: { state: red_3 }
+          Four: { state: red_3 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverNormal
+  suffix: Undying
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverNormal
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_2
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_2 }
+          Two: { state: red_2 }
+          Three: { state: red_2 }
+          Four: { state: red_2 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverWeak
+  suffix: Undying, Weak
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverWeak
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: red_1
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_1 }
+          Three: { state: red_1 }
+          Four: { state: red_1 }
+
+- type: entity
+  parent: RMCTileFireForever
+  id: RMCTileFireForeverOrange
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+      color: "#FF7700"
+  - type: TileFire
+    id: RMCTileFireForeverOrange
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_4 }
+          Two: { state: dynamic_4 }
+          Three: { state: dynamic_4 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFireForeverOrange
+  id: RMCTileFireForeverStrongOrange
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverStrongOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_3
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_3 }
+          Two: { state: dynamic_3 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_3 }
+
+- type: entity
+  parent: RMCTileFireForeverNormal
+  id: RMCTileFireForeverNormalOrange
+  suffix: Undying
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverNormalOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_2
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_2 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_2 }
+          Four: { state: dynamic_2 }
+
+- type: entity
+  parent: RMCTileFireForeverWeak
+  id: RMCTileFireForeverWeakOrange
+  suffix: Undying, Weak
+  components:
+  - type: TileFire
+    id: RMCTileFireForeverWeakOrange
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_1
+      color: "#FF7700"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_1 }
+          Three: { state: dynamic_1 }
+          Four: { state: dynamic_1 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireStickyNapalm
+  suffix: StickyNapalm
+  components:
+  - type: Sprite
+    color: "#f8e3b2"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 50
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 50
+    burnColor: "#f8e3b2"
+  - type: PointLight
+    radius: 5
+    color: "#f8e3b2"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireHCNapalm
+  suffix: HC Napalm
+  components:
+  - type: Sprite
+    color: "#c51c1c"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 10
+  - type: RMCIgniteOnCollide
+    intensity: 45
+    duration: 10
+    burnColor: "#c51c1c"
+  - type: PointLight
+    radius: 5
+    color: "#c51c1c"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmE
+  suffix: Napalm E
+  components:
+  - type: Sprite
+    color: "#800080"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 50
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 50
+    burnColor: "#800080"
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#800080"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmEX
+  suffix: Napalm EX
+  components:
+  - type: Sprite
+    color: "#641dd6"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 40
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 40
+    burnColor: "#641dd6"
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#641dd6"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireR189
+  suffix: R189
+  components:
+  - type: Sprite
+    color: "#ffe49c"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 30
+  - type: RMCIgniteOnCollide
+    intensity: 50
+    duration: 30
+    burnColor: "#ffe49c"
+  - type: RMCFireImmunityBypass
+  - type: PointLight
+    radius: 6
+    color: "#ffe49c"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmBase
+  suffix: Base Napalm
+  components:
+  - type: Sprite
+    color: "#D05006"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 38
+  - type: RMCIgniteOnCollide
+    intensity: 27
+    duration: 38
+  - type: PointLight
+    color: "#D05006"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireEthanol
+  suffix: Ethanol
+  components:
+  - type: Sprite
+    color: "#6897f7"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 15
+  - type: RMCIgniteOnCollide
+    intensity: 15
+    duration: 15
+  - type: PointLight
+    color: "#6897f7"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }

@@ -1,0 +1,50 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorLV624CorporateDomeGoonEngineer
+  name: rmc-job-name-pmc-corporate-goon-engi
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  spawnMenuRoleName: We-Ya Goon Engineer (Survivor Special)
+  startingGear: RMCGearSurvivorGoon
+  icon: "RMCJobIconPMCGoonEngi"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: SurvivorGoonTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  greeting: rmc-job-greeting-corporate-dome-goon-engi
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer
+  name: special survivor lv624 goon engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624CorporateDomeGoonEngineer
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer
+  name: lv624 colonist preset
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGoonEngi
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_engi

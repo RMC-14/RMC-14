@@ -18,7 +18,21 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
+    equipSound:
+      collection: storageRustle
+    unequipSound:
+      collection: RMCEquipArmor
     quickEquip: false
     slots:
     - back
@@ -266,6 +280,9 @@
     whitelist:
       tags:
       - RMCAmmoBox
+      components:
+      - EmptySandbag
+      - FullSandbag
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null

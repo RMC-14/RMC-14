@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Visor;
 using Content.Shared.Actions;
@@ -133,10 +133,10 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionActivate(Entity<NightVisionVisorComponent> ent, ref ActivateVisorEvent args)
     {
-        if (HasComp<ScopingComponent>(args.User))
+        if (args.User != null && HasComp<ScopingComponent>(args.User))
         {
             _popup.PopupClient("You cannot use the night vision optic while using optics.",
-                args.User,
+                args.User.Value,
                 args.User,
                 PopupType.SmallCaution);
             return;
@@ -156,9 +156,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
         AddComp(args.CycleableVisor, comp, true);
         Dirty(args.CycleableVisor, comp);
 
-        if (_inventory.InSlotWithFlags(args.CycleableVisor.Owner, comp.SlotFlags))
+        if (_inventory.InSlotWithFlags(args.CycleableVisor.Owner, comp.SlotFlags) && args.User != null)
         {
-            EnableNightVisionItem((args.CycleableVisor, comp), args.User);
+            EnableNightVisionItem((args.CycleableVisor, comp), args.User.Value);
             _audio.PlayLocal(ent.Comp.SoundOn, ent, args.User);
         }
     }
@@ -199,7 +199,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         ent.Comp.State = ent.Comp.State switch
         {
             NightVisionState.Off => NightVisionState.Half,
-            NightVisionState.Half => NightVisionState.Full,
+            NightVisionState.Half => ent.Comp.OnlyHalf ? NightVisionState.Off : NightVisionState.Full,
             NightVisionState.Full => NightVisionState.Off,
             _ => throw new ArgumentOutOfRangeException(),
         };
@@ -213,10 +213,11 @@ public abstract class SharedNightVisionSystem : EntitySystem
     {
         if (ent.Comp.Alert is { } alert)
         {
-            var level = MathF.Max((int) NightVisionState.Off, (int) ent.Comp.State);
+            var state = (short)ent.Comp.State;
             var max = _alerts.GetMaxSeverity(alert);
-            var severity = max - ContentHelpers.RoundToLevels(level, (int) NightVisionState.Full, max + 1);
-            _alerts.ShowAlert(ent, alert, (short) severity);
+            var min = _alerts.GetMinSeverity(alert);
+            var severity = state > max ? max : (state < min ? min : state);
+            _alerts.ShowAlert(ent, alert, severity);
         }
 
         NightVisionChanged(ent);
@@ -227,10 +228,12 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (item.Comp.User == user && item.Comp.Toggleable)
         {
             DisableNightVisionItem(item, item.Comp.User);
+            _audio.PlayLocal(item.Comp.SoundOff, item.Owner, user);
             return;
         }
 
         EnableNightVisionItem(item, user);
+        _audio.PlayLocal(item.Comp.SoundOn, item.Owner, user);
     }
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
@@ -255,6 +258,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 nightVision = EnsureComp<NightVisionComponent>(user);
                 nightVision.State = NightVisionState.Full;
                 nightVision.Green = item.Comp.Green;
+                nightVision.Mesons = item.Comp.Mesons;
                 nightVision.BlockScopes = item.Comp.BlockScopes;
                 Dirty(user, nightVision);
             }
@@ -264,6 +268,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 {
                     State = NightVisionState.Full,
                     Green = item.Comp.Green,
+                    Mesons = item.Comp.Mesons,
                     BlockScopes = item.Comp.BlockScopes,
                 };
 
@@ -271,7 +276,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 Dirty(user, nightVision);
             }
         }
-
 
         _actions.SetToggled(item.Comp.Action, true);
     }

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -8,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedDropshipWeaponSystem))]
 public sealed partial class AmmoInFlightComponent : Component
 {
@@ -68,10 +69,31 @@ public sealed partial class AmmoInFlightComponent : Component
     public SoundSpecifier? SoundImpact;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId? ImpactEffect;
+    public SoundSpecifier? SoundWarning;
+
+    [DataField, AutoNetworkedField]
+    public bool WarnedSound;
+
+    [DataField, AutoNetworkedField]
+    public bool MarkerWarning;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? WarningMarker;
+
+    [DataField, AutoNetworkedField, AutoPausedField]
+    public TimeSpan WarningMarkerAt;
+
+    [DataField, AutoNetworkedField]
+    public bool WarnedMarker;
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> ImpactEffects = new();
 
     [DataField, AutoNetworkedField]
     public RMCExplosion? Explosion;
+
+    [DataField, AutoNetworkedField]
+    public RMCImplosion? Implosion;
 
     [DataField, AutoNetworkedField]
     public RMCFire? Fire;

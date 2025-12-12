@@ -173,6 +173,28 @@
     - id: RMCTankFlamer
       amount: 4
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineBGel
+  name: M34 B-Gel fuel (4x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 4
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineFlamerMixed
+  name: M34 Mixed fuel (2x UT-Napthal, 2x B-Gel)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 2
+    - id: RMCTankFlamer
+      amount: 2
+
 # Smart Pistol
 - type: entity
   parent: RMCCrateAmmo
@@ -231,6 +253,36 @@
   - type: StorageFill
     contents:
     - id: RMCMagazineSentryShotgun
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFire
+  name: UN 42-FM sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFire
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireBlue
+  name: UN 55-FA sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireBlue
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireSmoke
+  name: UN 60-FP sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireSmoke
       amount: 2
 
 - type: entity

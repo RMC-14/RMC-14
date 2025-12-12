@@ -1,0 +1,59 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorGoon
+  name: rmc-job-name-pmc-corporate-goon
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorGoon
+  spawnMenuRoleName: We-Ya Goon (Survivor)
+  icon: "RMCJobIconPMCGoonStandard"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: SurvivorGoon
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorGoon
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteran
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack
+    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54CWhite
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMSheetMetal50
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorGoon
+  name: survivor goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor

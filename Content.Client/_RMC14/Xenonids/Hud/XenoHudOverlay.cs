@@ -28,6 +28,9 @@ using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -137,7 +140,10 @@ public sealed class XenoHudOverlay : Overlay
         }
 
         if (isXeno || isAdminGhost)
+        {
             DrawInfectedIcon(in args, scaleMatrix, rotationMatrix);
+            DrawSynthIcon(in args, scaleMatrix, rotationMatrix);
+        }
 
         handle.UseShader(null);
         handle.SetTransform(Matrix3x2.Identity);
@@ -267,7 +273,7 @@ public sealed class XenoHudOverlay : Overlay
         var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
         while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
-            if (comp.Rank < 2 || comp.Rank > 5 || _xenoMaturingQuery.HasComp(uid))
+            if (comp.Rank < 2 || comp.Rank > 6 || _xenoMaturingQuery.HasComp(uid))
                 continue;
 
             if (xform.MapID != args.MapId)
@@ -462,6 +468,43 @@ public sealed class XenoHudOverlay : Overlay
         }
     }
 
+    private void DrawSynthIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var synth = _entity.AllEntityQueryEnumerator<SynthComponent, SpriteComponent, TransformComponent>();
+        while (synth.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+            handle.SetTransform(matrix);
+
+            var icon = new Rsi(_rsiPath, $"fake_tall");
+            var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position = new Vector2(xOffset, yOffset);
+            handle.DrawTexture(texture, position);
+        }
+    }
+
     private void UpdateHealth(Entity<XenoComponent, SpriteComponent, MobStateComponent?> ent, DrawingHandleWorld handle)
     {
         var (uid, xeno, sprite, mobState) = ent;
@@ -469,13 +512,20 @@ public sealed class XenoHudOverlay : Overlay
             return;
 
         var damage = damageable.TotalDamage;
-        var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
-        _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
-        _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
+
+        FixedPoint2? critThresholdNullable = null;
+        FixedPoint2? deadThresholdNullable = null;
+        if (_mobThresholdsQuery.TryComp(uid, out var mobThresholds))
+        {
+            _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out critThresholdNullable, mobThresholds);
+            _mobThresholds.TryGetDeadThreshold(uid, out deadThresholdNullable, mobThresholds);
+        }
 
         string state;
         if (_mobState.IsCritical(uid, mobState) ||
-            (_mobState.IsAlive(uid) && critThresholdNullable != null && damageable.TotalDamage > critThresholdNullable))
+            _mobState.IsAlive(uid) &&
+            critThresholdNullable != null &&
+            damageable.TotalDamage > critThresholdNullable)
         {
             if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
                 return;
@@ -540,18 +590,26 @@ public sealed class XenoHudOverlay : Overlay
     private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
         var (uid, xeno, sprite) = ent;
-        if (!_xenoShieldQuery.TryComp(uid, out var comp))
+
+        FixedPoint2 shieldAmount = 0;
+
+        // Check for regular xeno shield
+        if (!_xenoShieldQuery.TryComp(uid, out var xenoShield))
             return;
 
-        var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
-        _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
-        _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
+        FixedPoint2? critThresholdNullable = null;
+        FixedPoint2? deadThresholdNullable = null;
+        if (_mobThresholdsQuery.TryComp(uid, out var mobThresholds))
+        {
+            _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out critThresholdNullable, mobThresholds);
+            _mobThresholds.TryGetDeadThreshold(uid, out deadThresholdNullable, mobThresholds);
+        }
 
         critThresholdNullable ??= deadThresholdNullable;
         if (critThresholdNullable == null)
             return;
 
-        var shield = comp.ShieldAmount;
+        var shield = xenoShield.ShieldAmount;
         var max = critThresholdNullable.Value.Double();
         var level = ContentHelpers.RoundToLevels(shield.Double(), max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
@@ -569,15 +627,18 @@ public sealed class XenoHudOverlay : Overlay
 
     private void UpdateEnergy(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
     {
-        var (uid, xeno, sprite) = ent;
-        if (!_xenoEnergyQuery.TryComp(uid, out var comp) ||
+        if (!_xenoEnergyQuery.TryComp(ent, out var comp) ||
             comp.Max == 0)
         {
             return;
         }
 
-        var energy = comp.Current;
-        var max = comp.Max;
+        UpdatePurpleBar(ent, handle, comp.Current, comp.Max, comp.GenerationCap);
+    }
+
+    private void UpdatePurpleBar(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle, double energy, double max, int? generationCap)
+    {
+        var (_, xeno, sprite) = ent;
         var level = ContentHelpers.RoundToLevels(energy, max, 11);
         var name = level > 0 ? $"{level * 10}" : "0";
         var state = $"xenoenergy{name}";
@@ -591,9 +652,9 @@ public sealed class XenoHudOverlay : Overlay
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
 
-        if (comp.GenerationCap != null && comp.Current >= comp.GenerationCap)
+        if (generationCap != null && energy >= generationCap)
         {
-            var level2 = ContentHelpers.RoundToLevels(comp.GenerationCap.Value, max, 11);
+            var level2 = ContentHelpers.RoundToLevels(generationCap.Value, max, 11);
             var name2 = level2 > 0 ? $"{level2 * 10}" : "0";
             var state2 = $"cap{name2}";
             var icon2 = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state2);

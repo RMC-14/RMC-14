@@ -1,10 +1,15 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite
+  - RMCXenoVentCrawler
+  id: CMXenoParasiteBase
   name: Parasite
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleParasite
   - type: GhostRole
     name: cm-job-name-xeno-parasite
     prob: 0
@@ -35,8 +40,9 @@
     emoteSounds: Larva
     muteOnSpawn: true
   - type: XenoPlasma
-    maxPlasma: 10
-    plasmaRegenOnWeeds: 0.1
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
   - type: XenoHide
   - type: Fixtures
     fixtures:
@@ -48,11 +54,22 @@
         mask:
         - SmallMobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - SmallMobLayer
   - type: XenoAnimateMovement
   - type: XenoLeap
     knockdownTime: 1
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 5
+  - type: RMCGibOnDeath
+    gibChance: 0.75
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    # - RMCDecalSpawnerGibsParasite # TODO
+    - RMCGibEffectXenoSmall
   - type: XenoParasite
   - type: InfectOnPullAttempt
   - type: Item
@@ -86,8 +103,6 @@
     allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
-  - type: ParasiteAI
-  - type: SleepNPC
   - type: CanEscapeInventory
     baseResistTime: 1
   - type: HTN
@@ -98,7 +113,7 @@
         3.0
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: parasite
   - type: AddAccentClothing
     accent: ReplacementAccent
@@ -113,8 +128,51 @@
   - type: XenoRankNames #TODO change ranks based on total hugs done
     rankNames:
       0: rmc-xeno-young
-      1: rmc-xeno-young
       2: rmc-xeno-mature-parasite
       3: rmc-xeno-elder-parasite
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
+  - type: FixedIdentity
+    name: cm-job-name-xeno-parasite-xeno
+    whitelist:
+      components:
+      - Xeno
+  - type: VentCrawler
+    ventCrawlIcon: parasite
+  - type: Unshieldable
+  - type: ExcludedFromKingVote
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: CMXenoParasite
+  components:
+  - type: SleepNPC
+  - type: ParasiteAI
+  - type: XenoEvolution
+    strains:
+    - RMCXenoParasiteWatcher
+  - type: RMCActionOrder
+    id: CMXenoParasite
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: RMCXenoParasiteWatcher
+  suffix: Watcher
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoLeap
+    - ActionXenoZoom
+  - type: XenoStrain
+    name: rmc-xeno-watcher-name
+    description: rmc-xeno-watcher-description
+    popup: rmc-xeno-watcher-popup
+  - type: XenoZoom
+    zoom: 1.3, 1.3
+    blockLeaps: true
+    speed: 0
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: RMCXenoParasiteWatcher

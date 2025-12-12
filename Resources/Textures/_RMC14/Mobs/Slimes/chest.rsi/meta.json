@@ -1,0 +1,23 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "bone, core, lungs by Sha-Seng (GitHub).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "bone",
+            "directions": 4
+        },
+        {
+            "name": "core",
+            "directions": 4
+        },
+        {
+            "name": "lungs",
+            "directions": 4
+        }
+    ]
+}

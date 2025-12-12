@@ -8,25 +8,21 @@ namespace Content.Server.Shuttles.Commands;
 /// <summary>
 /// Delays the round from ending via the shuttle call. Can still be ended via other means.
 /// </summary>
-[AdminCommand(AdminFlags.Fun)]
-public sealed class DelayRoundEndCommand : IConsoleCommand
+// RMC14
+// "Disabled" because it does nothing and IK for a fact someones gonna run this accidentally.
+[AdminCommand(AdminFlags.Host)]
+// RMC14
+public sealed class DelayRoundEndCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IEntitySystemManager _sysManager = default!;
+    [Dependency] private readonly EmergencyShuttleSystem _shuttleSystem = default!;
 
-    public string Command => "delayroundend";
-    public string Description => Loc.GetString("emergency-shuttle-command-round-desc");
-    public string Help => $"{Command}";
-    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    public override string Command => "delayroundend";
+
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var system = _sysManager.GetEntitySystem<EmergencyShuttleSystem>();
-
-        if (system.DelayEmergencyRoundEnd())
-        {
+        if (_shuttleSystem.DelayEmergencyRoundEnd())
             shell.WriteLine(Loc.GetString("emergency-shuttle-command-round-yes"));
-        }
         else
-        {
             shell.WriteLine(Loc.GetString("emergency-shuttle-command-round-no"));
-        }
     }
 }

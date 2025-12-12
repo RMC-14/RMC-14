@@ -1,7 +1,7 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK2
-  id: WeaponRifleM54C
+  id: RMCWeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
@@ -17,6 +17,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m54c-mk2
   - type: Gun
     selectedMode: FullAuto
     availableModes:
@@ -52,6 +54,7 @@
           - CMMagazineRifleM54CExt
           - RMCMagazineRifleM54CIncendiary
           - RMCMagazineRifleM54CHEAP
+          - RMCMagazineRifleM54CWP
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -61,6 +64,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -94,10 +98,10 @@
           - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-barrel: 0.8425, 0.001
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-underbarrel: 0.349, -0.375
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi
@@ -108,6 +112,139 @@
   - type: Tag
     tags:
     - RMCWeaponRifleM54CMK2
+
+- type: entity
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CStripped
+  suffix: Stripped, Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+
+- type: entity
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+
+- type: entity
+  parent: RMCWeaponRifleM54C
+  id: RMCWeaponRifleM54CFilled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+
+- type: entity
+  parent: RMCWeaponRifleM54CSemiStripped
+  id: RMCWeaponRifleM54CWhite
+  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+  suffix: White, No UGL
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsibleWhite
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -162,6 +299,8 @@
       color: "#1F951F"
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m54c-ap-magazine
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -214,6 +353,41 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#9C9A19"
+  - type: RefillableByBulletBox
+    bulletType: null
+
+- type: entity
+  parent: RMCMagazineRifleM54CHEAP
+  id: RMCMagazineRifleM54CHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CWP
+  name: "M54C WP magazine (10x24mm)"
+  suffix: WP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmWP
+    proto: RMCCartridgeRifle10x24mmWP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#6365E6"
 #  - type: RefillableByBulletBox
 #    bulletType: RMCBoxBulletsRifleAP
 
@@ -299,6 +473,19 @@
     proto: RMCBulletRifle10x24mmHEAP
 
 - type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: RMCCartridgeRifle10x24mmWP
+  name: WP cartridge (10x24mm)
+  description: An armor piercing wall-penetrating 10x24mm cartridge. Fits in 10x24mm WP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmWP
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle10x24mmWP
+
+- type: entity
   parent: RMCBaseBullet
   id: BulletRifle10x24mm
   categories: [ HideSpawnMenu ]
@@ -333,6 +520,22 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 40
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mmWP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+  - type: RMCPenetratingProjectile
+  - type: TimedDespawn #Otherwise your game goes all laggy from too many projectiles still flying after going beyond 0 damage
+    lifetime: 0.2
 
 - type: entity
   parent: BulletRifle10x24mm
@@ -382,6 +585,9 @@
   id: RMCMagazineRifleM54CHEAP
 
 - type: Tag
+  id: RMCMagazineRifleM54CWP
+
+- type: Tag
   id: CMMagazineRifleM54CExt
 
 - type: Tag
@@ -395,3 +601,6 @@
 
 - type: Tag
   id: RMCCartridgeRifle10x24mmHEAP
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmWP

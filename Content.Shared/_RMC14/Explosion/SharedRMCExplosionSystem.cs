@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Prototypes;
@@ -16,6 +18,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -35,6 +38,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
     private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
@@ -108,23 +113,26 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         _sizeStun.TryGetSize(ent, out var size);
 
+        // TODO RMC14 size-based throw ranges and speeds
         var pos = _transform.GetWorldPosition(ent);
         var dir = pos - args.Epicenter.Position;
-        if (dir.IsLengthZero())
-            dir = _random.NextVector2();
-
-        dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
 
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
         {
             var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(ent, ref ev); // TODO RMC14 limb damage
 
             var bombArmorMult = (100 - ev.ExplosionArmor) * 0.01;
             var severity = factor * 5;
 
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
+            _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
+
+            var knockBackDistance = (float) Math.Clamp(severity / 5 / dir.Length(), 0.5, Math.Max(severity / 10, 0.5));
+
+            if (!HasComp<XenoNestedComponent>(ent))
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance, knockBackDistance, knockBackSpeed: (float) severity);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;
@@ -135,12 +143,10 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
             var knockoutMinusArmor = Math.Max(knockoutValue * bombArmorMult * 0.5, 0.5);
             var knockoutTime = TimeSpan.FromSeconds(knockoutMinusArmor);
-            _stun.TryParalyze(ent, knockoutTime, false);
+            _sizeStun.TryKnockOut(ent, knockoutTime, false);
 
             _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
-
-            _throwing.TryThrow(ent, dir, (float)severity);
             return;
         }
 
@@ -158,7 +164,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            _throwing.TryThrow(ent, dir, 5);
+            _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: 5, ignoreSize: true);
         }
         else if (factor > 10)
         {
@@ -205,8 +211,11 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (total < ent.Comp.Threshold)
             return;
 
+        if (_net.IsClient)
+            return;
+
         if (!TerminatingOrDeleted(ent))
-            _body.GibBody(ent);
+            _body.GibBody(ent, true);
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)

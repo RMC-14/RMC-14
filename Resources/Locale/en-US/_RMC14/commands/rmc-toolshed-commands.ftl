@@ -43,6 +43,8 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
 
+command-description-rmcresetahelprelay = Restarts the AHelp and MHelp relays.
+
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
 command-description-intel-spawnintel = Spawns intel on all initialized maps.
@@ -66,3 +68,30 @@ command-description-weedkiller = Runs weed killer on the current location's area
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
 
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
+
+command-description-forceplanetmap = Forces the next round to start with the specified planet.
+
+command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.
+
+command-description-hijack-trigger = Triggers hijack on the map that you are currently on.
+
+command-description-setoperationname = Changes the name of the operation for the upcoming round.
+
+command-description-animationtest-setlayerstate = Sets a layer on an entity to a specific state for 3 seconds.
+command-description-animationtest-flick = Plays an animation from an RSI on an entity, once.
+
+command-description-nearbytile = Gets TileRefs for a specified range around entities.
+command-description-tiletype-FromProtoId = Returns a list of TileRefs that match a specified ProtoId. (Inveratble)
+command-description-tiletype-FromTileId = Returns a list of TileRefs that match a Tile Defenition Id. (Inveratble)
+command-description-replacetile-FromProtoId = Replaces tiles to a specified ProtoId.
+command-description-replacetile-FromTileId = Replaces tiles to a specified Tile Defenition Id.
+command-description-gridtile = Gets TileRefs for a grid that a specified entity is apart of.
+
+command-description-movespeed = Changes the max movement speed for given entities.
+
+command-description-stairwell = Sets the teleportation offset for the given Teleporter entities.
+command-description-stairwellprojector = Sets the projection id for the given TeleporterView entities.
+
+command-description-getusername = Gets the username attached to an entity.
+
+command-description-mobstate = Filter entities by their MobState.

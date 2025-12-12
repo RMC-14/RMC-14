@@ -1,0 +1,73 @@
+# Dynagrid Engineer
+- type: job
+  parent: CMJobBase
+  id: RMCPVEDynagridEngineer
+  name: rmc-job-name-dynagrid-engineer
+  description: rmc-job-description-dynagrid-engineer
+  playTimeTracker: RMCJobPVEDynagridEngineer
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearPVEDynagridEngineer
+  icon: "RMCJobIconPVEDynagridEngineer"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistEngi
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: JobPrefix
+      prefix: rmc-job-prefix-dynagrid-engineer
+  hidden: true
+
+- type: startingGear
+  id: RMCGearPVEDynagridEngineer
+  equipment:
+    head: RMCHardhatWhite
+    ears: RMCHeadsetColonyIcons
+    eyes: RMCWeldingGoggles
+    jumpsuit: CMJumpsuitLiaisonBrown
+    outerClothing: RMCHazardVestYellow
+    gloves: CMHandsInsulated
+    shoes: RMCShoesJackboots
+    back: CMSatchelEngineer
+    id: CMIDCardColonistEngineer
+    belt: CMBeltUtility
+    pocket1: CMWelder
+    pocket2: RMCFlashlight
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVEDynagridEngineer
+  name: dyangrid engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPVEDynagridEngineer
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/yellow.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobPVEDynagridEngineer
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPVEDynagridEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pve_dynaengi

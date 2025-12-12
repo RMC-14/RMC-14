@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -10,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Strain;
+using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -20,6 +22,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -42,14 +45,16 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -75,7 +80,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -186,7 +191,10 @@ public abstract class SharedXenoHealSystem : EntitySystem
                 [BluntGroup] = damageTaken,
             },
         };
-        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
+
+        if (TryComp<DamageableComponent>(ent, out var damage))
+            _damageable.AddDamage(ent.Owner, damage, damageTakenSpecifier);
+
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-self", ("target_xeno", target)), ent, PopupType.Medium);
 
         args.Handled = true;
@@ -268,6 +276,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
+
+        _flammable.Extinguish(target);
+
         FixedPoint2? targetCriticalThreshold = null;
         foreach (var threshold in targetThresholdsComp.Thresholds)
         {
@@ -310,6 +321,15 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         Heal(target, healAmount);
 
+
+        foreach (var status in args.AilmentsRemove)
+        {
+            _status.TryRemoveStatusEffect(target, status);
+        }
+
+
+        EntityManager.RemoveComponents(target, args.ComponentsRemove);
+
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
         if (TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) &&
@@ -330,24 +350,25 @@ public abstract class SharedXenoHealSystem : EntitySystem
         if (_net.IsServer)
         {
             SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-
-            // TODO: Gib the healing xeno here
-            QueueDel(ent);
+            _body.GibBody(ent);
         }
     }
 
     public void Heal(EntityUid target, FixedPoint2 amount)
     {
-        var damage = _rmcDamageable.DistributeHealing(target, BruteGroup, amount);
+        var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, damage);
+            damage = _rmcDamageable.DistributeDamageCached(target, BurnGroup, leftover, damage);
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
-    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt)
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false)
     {
+        if (!ignoreFire && _flammable.IsOnFire(target))
+            return;
+
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {

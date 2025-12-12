@@ -3,12 +3,16 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoMobCollision
   id: RMCXenoQueenBase
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
@@ -23,6 +27,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -103,6 +110,7 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: InnateCommandSpeech
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp
@@ -130,6 +138,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -162,7 +171,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -6
+        volume: 0
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -219,10 +228,10 @@
     liveUpdate: true
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenoqueen
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
@@ -243,21 +252,42 @@
   - type: XenoOmitNumber
   - type: RMCFireArmorDebuffModifier
     debuffModifier: 1.4
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can ignite the queen
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can bypass immunity
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
   - type: QueenEyeAction
   - type: StunFriendlyXenoOnStep
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-queen
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
+  - type: RMCTrackable
+  - type: ExcludedFromKingVote
+    canVote: true
 
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
-  #components:
+  components:
+  - type: RMCActionOrder
+    id: CMXenoQueen
   # - type: XenoEvolution #can be enabled for events like april fools.
   #   strains:
   #   - RMCXenoQueenMaid
 
 - type: entity
   id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones
 
@@ -282,7 +312,7 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
-    
+
 - type: entity
   parent: StationAiHolo
   id: RMCQueenEye
@@ -294,7 +324,7 @@
     color: "#a800a8"
     sprite: _RMC14/Effects/xeno_eye.rsi
     layers:
-    - state: hologram
+    - state: hudeye1
   - type: Eye
     drawFov: false
   - type: QueenEye

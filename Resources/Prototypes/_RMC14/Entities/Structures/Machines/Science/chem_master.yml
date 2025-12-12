@@ -16,8 +16,6 @@
   - type: Icon
     sprite: _RMC14/Structures/Machines/Science/chem_master.rsi
     state: mixer_loaded
-  - type: ChemMaster
-    pillDosageLimit: 20
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -31,6 +29,8 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: AccessReader
+    access: [ [ "CMAccessCMO" ], [ "CMAccessChemistry" ], [ "CMAccessMedPrep" ] ]
   - type: Destructible
     thresholds:
     - trigger:
@@ -45,7 +45,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ActivatableUI
-    key: enum.ChemMasterUiKey.Key
+    key: enum.RMCChemMasterUI.Key
   - type: ActivatableUIRequiresPower
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -72,12 +72,6 @@
         whitelist:
           components:
           - FitsInDispenser
-      outputSlot:
-        whitelistFailPopup: chem-master-component-cannot-put-entity-message
-        whitelist:
-          tags:
-          - Bottle
-          - PillCanister
   - type: GuideHelp
     guides:
     - Chemicals
@@ -91,11 +85,41 @@
       - Xeno
   - type: UserInterface
     interfaces:
-      enum.ChemMasterUiKey.Key:
-        type: ChemMasterBoundUserInterface
-      enum.ChangePillBottleUIKey.Key:
-        type: RMCChangePillBottleColorBui
+      enum.RMCChemMasterUI.Key:
+        type: RMCChemMasterBui
   - type: SolutionContainerManager
     solutions:
       buffer:
         maxVol: 500
+  - type: RMCChemMaster
+    pillBottleWhitelist:
+      tags:
+      - PillCanister
+
+- type: entity
+  parent: CMChemMaster
+  id: RMCChemMasterIndustrial
+  name: industrial chemical mixer
+  description: An industrial grade chemical manipulator.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/industry_dispenser.rsi
+    layers:
+    - state: industry_mixer0_nopower
+    - state: industry_mixer0_screen
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/Science/industry_dispenser.rsi
+    state: industry_mixer0
+  - type: AccessReader
+    access: [ [ "CMAccessOT" ] ]
+  - type: Machine
+    board: RMCCircuitboardIndustrialChemMaster
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 3
+  - type: RMCChemMaster
+    pillBottleWhitelist: { } # No making pills allowed.

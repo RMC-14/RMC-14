@@ -160,12 +160,13 @@
 
 - type: reaction
   id: CMImidazoline
+  priority: 10
   reactants:
+    CMDylovene:
+      amount: 1
     RMCCarbon:
       amount: 1
     RMCHydrogen:
-      amount: 1
-    CMDylovene:
       amount: 1
   products:
     CMImidazoline: 2
@@ -182,3 +183,53 @@
   products:
     CMClonexadone: 2
     RMCPhoron: 5
+
+- type: reaction
+  id: RMCMethylphenidate
+  reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCHydrogen:
+      amount: 1
+  products:
+    RMCMethylphenidate: 3
+
+- type: reaction
+  id: RMCCitalopram
+  reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+  products:
+    RMCCitalopram: 3
+
+- type: reaction
+  id: RMCParoxetine
+  reactants:
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    RMCMindbreakerToxin:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+    CMInaprovaline:
+      amount: 1
+  products:
+    RMCParoxetine: 3
+
+- type: reaction
+  id: RMCLipozine
+  reactants:
+    TableSalt:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+    RMCRadium:
+      amount: 1
+  products:
+    RMCLipozine: 3

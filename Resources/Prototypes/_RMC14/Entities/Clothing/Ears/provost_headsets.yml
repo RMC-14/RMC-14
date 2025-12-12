@@ -20,3 +20,15 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
+    defaultMode: ProvostTeamLeader
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
+    - ProvostTeamLeader
+    - ProvostAdvisor
+    - ChiefMilitaryPolice
+    - MilitaryWarden
+    - CommandingOfficer
+    - ExecutiveOfficer

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Client._RMC14.Attachable.Components;
 using Content.Client._RMC14.Attachable.Systems;
+using Content.Client.Clothing;
 using Content.Client.Items.Systems;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Item;
@@ -11,6 +12,9 @@ using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
+using Content.Shared.Clothing;
+using Content.Shared.Inventory;
+using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Item;
 
@@ -25,11 +29,12 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ItemCamouflageComponent, GetInhandVisualsEvent>(OnGetVisuals, after: [typeof(ItemSystem)]);
+        SubscribeLocalEvent<ItemCamouflageComponent, GetInhandVisualsEvent>(OnGetInhandVisuals, after: [typeof(ItemSystem)]);
+        SubscribeLocalEvent<ItemCamouflageComponent, GetEquipmentVisualsEvent>(OnGetClothingVisuals, after: [typeof(ClientClothingSystem)]);
     }
 
     // Add colour layer to in-hands of items that have a Camo Colour specified.
-    private void OnGetVisuals(EntityUid uid, ItemCamouflageComponent camoComp, GetInhandVisualsEvent args)
+    private void OnGetInhandVisuals(EntityUid uid, ItemCamouflageComponent camoComp, GetInhandVisualsEvent args)
     {
         if (TryComp(uid, out AppearanceComponent? appearanceComponent))
         {
@@ -51,6 +56,55 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
                         {
                             args.Layers.Add((newLayer.State, newLayer));
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    // Add colour layer to clothing of items that have a Camo Colour specified.
+    private void OnGetClothingVisuals(EntityUid uid, ItemCamouflageComponent camoComp, GetEquipmentVisualsEvent args)
+    {
+        if (!TryComp(args.Equipee, out InventoryComponent? inventory))
+            return;
+
+        if (!TryComp(uid, out ClothingComponent? clothing))
+            return;
+
+        var speciesId = inventory.SpeciesId;
+
+        if (TryComp(uid, out AppearanceComponent? appearanceComponent))
+        {
+            AppearanceSystem.TryGetData(uid, ItemCamouflageVisuals.Camo, out CamouflageType camo, appearanceComponent);
+            {
+                if (camoComp.Colors != null)
+                {
+                    camoComp.Colors.TryGetValue(camo, out var camoColor);
+                    {
+                        var newLayer = new PrototypeLayerData();
+                        foreach (var (state, layer) in args.Layers)
+                        {
+                            if (layer.RsiPath == null)
+                                continue;
+
+                            var rsi = _resource.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / layer.RsiPath).RSI;
+
+                            var baseEquippedState = $"equipped-{args.Slot.ToUpper()}";
+                            var newState = $"{baseEquippedState}-color";
+                            var speciesState = $"{baseEquippedState}-{speciesId}-color";
+
+                            // species specific
+                            if (speciesId != null && rsi.TryGetState(speciesState, out _))
+                                newState = speciesState;
+
+                            newLayer.RsiPath = layer.RsiPath;
+                            newLayer.State = newState;
+                            newLayer.MapKeys = new() { newState };
+                            newLayer.Color = camoColor;
+                        }
+
+                        if (newLayer.State is not null)
+                            args.Layers.Add((newLayer.State, newLayer));
                     }
                 }
             }
@@ -141,9 +195,12 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         {
             if (args.Sprite != null)
             {
-                if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                foreach (var camoLayer in Enum.GetValues(typeof(ItemCamouflageLayers)))
                 {
-                    args.Sprite.LayerSetColor(layer, color);
+                    if (args.Sprite.LayerMapTryGet(camoLayer, out var layer))
+                    {
+                        args.Sprite.LayerSetColor(layer, color);
+                    }
                 }
             }
         }

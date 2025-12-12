@@ -49,11 +49,11 @@ public sealed partial class RMCTeslaCoilComponent : Component
     /// Duration of the Daze effect. If TimeSpan.Zero, daze is not applied.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan DazeDuration = TimeSpan.FromSeconds(8);
+    public TimeSpan DazeDuration = TimeSpan.FromSeconds(10);
 
     /// <summary>
     /// Duration of the Slowdown (superslow) effect. If TimeSpan.Zero, slow is not applied.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowDuration = TimeSpan.FromSeconds(4);
+    public TimeSpan SlowDuration = TimeSpan.FromSeconds(6);
 }

@@ -1,26 +1,29 @@
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Vents;
+using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
+using Content.Shared.Damage;
+using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
-using Content.Shared.Damage;
-using Content.Shared._RMC14.Xenonids.Acid;
-using Robust.Shared.Map.Components;
-using Content.Shared.Interaction;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Robust.Shared.Map;
-using Content.Shared.Movement.Systems;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
@@ -41,6 +44,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] protected readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
@@ -59,6 +63,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         SubscribeLocalEvent<ActiveForTheHiveComponent, ComponentRemove>(OnForTheHiveGone);
 
         SubscribeLocalEvent<ActiveForTheHiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+        SubscribeLocalEvent<ActiveForTheHiveComponent, VentEnterAttemptEvent>(OnVentCrawlAttempt);
     }
 
 
@@ -173,8 +178,8 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     if (!TryComp<XenoEnergyComponent>(xeno, out var acid))
                         return;
 
-                    var acidRange = acid.Current / active.AcidRangeRatio;
-                    var burnRange = acid.Current / active.BurnRangeRatio;
+                    var acidRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.AcidRangeRatio) * 2 + 1, 2) / Math.PI);
+                    var burnRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.BurnRangeRatio) * 2 + 1, 2) / Math.PI);
 
                     var maxBurnDamage = acid.Current / active.BurnDamageRatio;
 
@@ -186,14 +191,20 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var cade in _lookup.GetEntitiesInRange<BarricadeComponent>(origin, acidRange))
                     {
-                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, cade.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (HasComp<DamageableCorrodingComponent>(cade))
-                            continue;
+                        // Check if barricade already has acid and if we can replace it
+                        if (_acid.IsMelted(cade))
+                        {
+                            // Only proceed if our acid is stronger, otherwise skip this barricade
+                            if (!_acid.CanReplaceAcid(cade, active.AcidStrength))
+                                continue;
 
-                        _acid.ApplyAcid(active.Acid, cade, active.AcidDps, 0, active.AcidTime);
+                            _acid.RemoveAcid(cade);
+                        }
 
+                        _acid.ApplyAcid(active.Acid, active.AcidStrength, cade, active.AcidDps, 0, active.AcidTime);
                     }
 
 
@@ -203,13 +214,13 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             continue;
 
                         //Do the acid check here
-                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (_interaction.InRangeUnobstructed(xeno, mob.Owner, acidRange, collisionMask: CollisionGroup.Impassable))
                         {
                             if (active.MobAcid is { } add)
                                 EntityManager.AddComponents(mob, add);
                         }
 
-                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(xeno, mob.Owner, burnRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
                         if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(mob), out var distance))
@@ -217,7 +228,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno, tool: xeno);
+                        _damage.TryChangeDamage(mob, _xeno.TryApplyXenoAcidDamageMultiplier(mob, active.BaseDamage * damage), true, origin: xeno, tool: xeno);
 
                     }
 
@@ -226,23 +237,22 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                     foreach (var turf in _map.GetTilesIntersecting(gridId, grid, Box2.CenteredAround(origin.Position, new(acidRange * 2, acidRange * 2)), false))
                     {
-                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: Physics.CollisionGroup.Impassable))
+                        if (!_interaction.InRangeUnobstructed(_transform.ToMapCoordinates(origin), _transform.ToMapCoordinates(_turf.GetTileCenter(turf)), acidRange, collisionMask: CollisionGroup.Impassable))
                             continue;
 
-                        if (_turf.IsTileBlocked(turf, Physics.CollisionGroup.Impassable))
+                        if (_turf.IsTileBlocked(turf, CollisionGroup.Impassable))
                             continue;
 
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));
                     }
 
-                    //TODO CM gibs the runner
                     if (GetHiveCore(xeno, out var core))
                         ForTheHiveRespawn(xeno, active.CoreSpawnTime);
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
                     _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
-                    QueueDel(xeno);
+                    _body.GibBody(xeno);
                     RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }
@@ -270,5 +280,11 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
     {
+    }
+
+    private void OnVentCrawlAttempt(Entity<ActiveForTheHiveComponent> xeno, ref VentEnterAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("rmc-vent-crawling-primed"), xeno, PopupType.SmallCaution);
+        args.Cancel();
     }
 }

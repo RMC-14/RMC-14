@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using Content.Client._RMC14.Sprite;
+using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
@@ -7,7 +9,7 @@ namespace Content.Client._RMC14.Xenonids.Hide;
 
 public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponent>
 {
-    [Dependency] private readonly XenoVisualizerSystem _xenoVisualizer = default!;
+    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
     public override void Initialize()
     {
@@ -28,6 +30,6 @@ public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponen
 
     protected override void OnAppearanceChange(EntityUid uid, XenoHideComponent component, ref AppearanceChangeEvent args)
     {
-        _xenoVisualizer.UpdateDrawDepth((uid, args.Sprite));
+        _rmcSprite.UpdateDrawDepth(uid);
     }
 }

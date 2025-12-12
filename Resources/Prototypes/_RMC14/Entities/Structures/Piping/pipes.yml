@@ -1,0 +1,69 @@
+- type: entity
+  id: RMCBasePipe
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+    shape: null
+  - type: VentExit
+  - type: RMCContainerEmptyOnDestruction
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      rmc_vent_container: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+
+- type: entity
+  parent: [RMCBasePipe, GasPipeHalf]
+  id: RMCGasPipeHalf
+  suffix: RMC Half
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VentCrawlable
+    travelDirection: South
+
+- type: entity
+  parent: [RMCBasePipe, GasPipeStraight]
+  id: RMCGasPipeStraight
+  suffix: RMC Straight
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VentCrawlable
+    travelDirection: Longitudinal
+
+- type: entity
+  parent: [RMCBasePipe, GasPipeBend]
+  id: RMCGasPipeBend
+  suffix: RMC Bend
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VentCrawlable
+    travelDirection: SWBend
+
+- type: entity
+  parent: [RMCBasePipe, GasPipeTJunction]
+  id: RMCGasPipeTJunction
+  suffix: RMC TJunction
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VentCrawlable
+    travelDirection: TSouth
+
+- type: entity
+  parent: [RMCBasePipe, GasPipeFourway]
+  id: RMCGasPipeFourway
+  suffix: RMC Fourway
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VentCrawlable
+    travelDirection: Fourway

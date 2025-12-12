@@ -4,28 +4,30 @@
   [italic]These definitions are used throughout the rest of Marine Law.[/italic]
 
   [color=#00CBFE][bold]Commanding Officer[/bold][/color]
-  - An official UNMC Commanding Officer.
-  - Anything with the words [color=#00CBFE][bold]Commanding Officer[/bold][/color] only applies to whitelisted Commanding Officers. These rights cannot be transferred.
+  - The official UNMC Commanding Officer of the ship.
+  - Anything with the words [color=#00CBFE][bold]Commanding Officer[/bold][/color] only applies to the current whitelisted Commanding Officer of the ship. These rights can be transferred to any UNMC Officers that are ranked [bold]Major[/bold] or above by the [color=#008000][bold]Commander[/bold][/color].
 
   \n
 
   [color=#008000][bold]Commander[/bold][/color]
   - The current [color=#008000][bold]Commander[/bold][/color] of an operation.
-  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Chain of Command" link="RMCCommandChain"].
+  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Commander Succession" link="RMCCommandChain"].
 
   If the [color=#008000][bold]Commander[/bold][/color] is rendered incapable of command [bold]temporarily[/bold], the [color=#90EE90][bold]Duty Officer[/bold][/color] inherits [color=#008000][bold]Commander[/bold][/color] rights, but should the [color=#008000][bold]Commander[/bold][/color] return, they are still the [color=#008000][bold]Commander[/bold][/color]. This includes but is not limited to:
 
   - Prolonged communications outage.
   - The [color=#008000][bold]Commander[/bold][/color] deploying in the field.
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Chain of Command" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
+  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Commander Succession" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
   - The [color=#008000][bold]Commander[/bold][/color] is relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
   - The [color=#008000][bold]Commander[/bold][/color] becoming [bold]unrevivable[/bold].
+
+  Ensure when assigning a new [color=#008000][bold]Commander[/bold][/color], that this is announced. Include the new [color=#008000][bold]Commander[/bold][/color]'s name and the reason for them being assigned as the new [color=#008000][bold]Commander[/bold][/color], to avoid confusion.
 
   \n
 
   [color=#90EE90][bold]Duty Officer[/bold][/color]
-  - The ranking officer in the [textlink="Chain of Command" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
+  - The ranking officer in the [textlink="Commander Succession" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
   - Unless explicitly stated otherwise, the [color=#90EE90][bold]Duty Officer[/bold][/color] is interchangeable with, and inherits the rights of [color=#008000][bold]Commander[/bold][/color] in this case.
 
   \n
@@ -39,22 +41,28 @@
   \n
 
   [color=#ff000d][bold]MP[/bold][/color]
-  - Military Police, including personnel validly deputized by the [color=#00CBFE][bold]Commanding Officer[/bold][/color], who deal with Marine Law.
+  - Military Police, including validly deputized personnel, who deal with Marine Law.
 
   \n
 
   [bold]Officer[/bold]
   - A person who is a Commissioned Officer. These rights cannot be transferred.
+  - A person who is a Warrant Officer. These rights cannot be transferred.
 
   \n
 
-  [bold]Department heads[/bold]
-  - A person who is responsible for an entire department, which includes the [bold]Chief Engineer[/bold], [bold]Chief Medical Officer[/bold], [bold]Auxiliary Support Officer[/bold], [bold]Quartermaster[/bold], [color=#8B0000][bold]Chief MP[/bold][/color].
+  [bold]Department Heads[/bold]
+  - A person who is responsible for an entire department, which includes the [bold]Chief Engineer[/bold], [bold]Chief Medical Officer[/bold], [bold]Auxiliary Support Officer[/bold], [bold]Logistics Officer[/bold], [color=#8B0000][bold]Chief MP[/bold][/color].
 
   \n
 
   [bold]CIC Personnel[/bold]
   - Standard personnel whose main duties are within CIC. This includes the [color=#00CBFE][bold]Commanding Officer[/bold][/color], [bold]Executive Officer[/bold], and [bold]Staff Officers[/bold].
+
+  \n
+
+  [bold]Flight Crew[/bold]
+  - Designated Pilots and Dropship Crew Chiefs.
 
   \n
 
@@ -64,9 +72,15 @@
   \n
 
   [bold]Lawful Orders[/bold]
-  - Personnel are required to follow all lawful orders from their superiors and are NOT-required to follow unlawful orders.
+  - Personnel are required to follow all lawful orders from their superiors and are not required to follow unlawful orders.
   - If personnel are refusing to follow an order, they must state why they believe it would break Marine Law, making it an unlawful order.
   - Valid NJPs are not unlawful orders in the case of neglected duties.
+
+  \n
+
+  [bold]Standard Issue Equipment[/bold]
+
+  - [bold]Standard Issue[/bold] equipment is defined as any military uniform, armor, weapon, or accessory personnel find in their crew vendors, as well as anything they emerge from hypersleep with or anything normally available from requisitions.
 
   \n
 
@@ -76,13 +90,13 @@
   - Riot shotguns with beanbag rounds.
   - Riot shields and armor.
   - Riot grenade launchers.
+  - Rubber bullets.
 
   \n
 
   [bold]FOB[/bold]
   - The Forward Operating Base.
   - Designated by the [color=#008000][bold]Commander[/bold][/color]. It is a reinforced area, usually being the primary landing zone.
-  - FOBs do not have to be placed adjacent to a landing zone. However, the primary landing zone itself must at least be properly defended and guarded.
 
   \n
 
@@ -92,7 +106,7 @@
   \n
 
   [bold]Secure Areas[/bold]
-  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or staff officers. It is a reinforced area, where there has been no recent combat or threats.
+  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Staff Officer[/bold]s. It is a reinforced area, where there has been no recent combat or threats.
   - The [bold]FOB[/bold] is usually a secure area until it is attacked, for example.
   - The [color=#008000][bold]Commander[/bold][/color] or any [bold]CIC Personnel[/bold] at any point may designate an area no longer secure.
   - Areas that have been recently attacked are presumed no longer secure, and should be reported for safety.
@@ -110,15 +124,21 @@
   - Code [bold][color=lightgreen]Green[/color][/bold]: All clear.
   - Code [bold][color=lightblue]Blue[/color][/bold]: Potentially hostile activity on board.
   - Code [bold][color=red]Red[/color][/bold]: There is an immediate threat to the ship or it's crew. Examples of usage include; AI Core Security issue, biohazard containment breach, general quarters. Distress beacon, evacuation, and usage of sentry systems authorized.
-  - Code [bold][color=black]Delta[/color][/bold]:  Immediately applies if the warship hull has a major breach by intruders. An order of evacuation, self destruction, or hold of the warship will be made at this time.
+  - Code [bold][color=black]Delta[/color][/bold]:  Immediately applies if the warship hull has a major breach by intruders. An order of evacuation, self-destruction, or hold of the warship will be made at this time.
+
+  \n
+
+  [bold]Higher Ranking Officers[/bold]
+  - UNMC Officers ranked [bold]Major[/bold] or above.
+  - They may have some additional provisions, which can be found [textlink="in command non-modifiable SOP." link="RMCMarineSOPNONModCommand"]
 
   \n
 
   [color=#ffa500][bold]Provost Marshal Office[/bold][/color]
   - Hold significant weight on how Marine Law is handled in their operational areas.
-  - In the event that Marine Law is being mishandled aboard a UNMC warship or within the AO of a UNMC warship, [color=#ffa500][bold]Provost Marshal Office[/bold][/color] may see fit to dispatch personnel.
-  - Members of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] obey only their direct superiors and are not beholden to the Marine Chain of Command.
+  - In the event that Marine Law is being mishandled aboard a UNMC warship or within the [bold]AO[/bold] of a UNMC warship, [color=#ffa500][bold]Provost Marshal Office[/bold][/color] may see fit to dispatch personnel.
+  - Members of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] obey only their direct superiors and are not beholden to Marine command or officers.
   - Provost [bold]Marshals[/bold] are not required to follow Marine Law.
-  - Provost [bold]Inspectors[/bold] and above are the final word on Marine Law in their AO.
+  - Provost [bold]Inspectors[/bold] and above are the final word on Marine Law in their [bold]AO[/bold].
   - Provost [bold]Advisors[/bold] do not hold any direct authority themselves, however they are expected to ensure Marine Law is correctly handled.
 </Document>

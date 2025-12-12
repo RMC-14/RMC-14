@@ -53,3 +53,10 @@
     graph: BarricadeWoodGraph
     node: nodeWood
   - type: Climbable
+  - type: XenoToggleChargingDamage
+    sound:
+      collection: WoodDestroy
+    damage:
+      types:
+        Blunt: 22
+  - type: RMCMesonsNonviewable

@@ -20,6 +20,7 @@
       - Bureau
     - type: Skills
       skills:
+        RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
@@ -30,7 +31,7 @@
 
 - type: entity
   id: RMCRandomHumanoidBureauObserver
-  name: bureau ghost role interstellar sapient-life rights observer
+  name: bureau ghost role interstellar life rights observer
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
@@ -51,6 +52,10 @@
     job: CMBureauObserver
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -70,7 +75,7 @@
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchGeneralLargeBureauObserverFill
     suitstorage: RMCFlashlight
-  inhand: # TOOD RMC14 camera
+  inhand: # TODO RMC14 camera
   - CMHealthAnalyzer
 
 - type: playTimeTracker

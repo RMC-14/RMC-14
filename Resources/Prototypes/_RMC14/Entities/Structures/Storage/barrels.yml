@@ -24,6 +24,7 @@
     offset: 1, 1
   - type: Clickable
   - type: DeleteOnExplosion
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBarrelPileBase
@@ -36,6 +37,7 @@
   parent: BaseStructureDynamic
   id: RMCBarrelBase
   name: barrel
+  categories: [ HideSpawnMenu ]
   description: A storage barrel.
   components:
   - type: Sprite
@@ -68,6 +70,9 @@
         sound:
           collection: MetalBreak
   - type: CrateOpenable
+  - type: RMCMesonsNonviewable
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomCrateLoot
 
 - type: entity
   parent: RMCBarrelBase

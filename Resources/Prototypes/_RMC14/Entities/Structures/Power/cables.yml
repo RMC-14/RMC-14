@@ -1,0 +1,37 @@
+﻿- type: entity
+  abstract: true
+  parent: CableHV
+  id: RMCCableBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cables.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Power/cables.rsi
+  - type: CableVisualizer
+    statePrefix: cable_
+
+- type: entity
+  parent: RMCCableBase
+  id: RMCCableHeavy
+  name: large power cable
+  description: This cable is tough. It cannot be cut with simple hand tools.
+  components:
+  - type: Cable
+    cuttingQuality: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cables.rsi
+    state: cable_0
+  - type: Icon
+    sprite: _RMC14/Structures/Power/cables.rsi
+    state: cable_4
+
+- type: entity
+  parent: CableTerminal
+  id: RMCCableTerminal
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cable_terminal.rsi
+    state: term

@@ -49,7 +49,8 @@
       path: /Audio/_RMC14/Dropship/gauimpact.ogg
       params:
         volume: -6
-    impactEffect: RMCEffectExplosionParticle
+    impactEffects:
+    - RMCEffectExplosionParticle
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoGAU
@@ -184,6 +185,132 @@
       max: 50
     fire:
       type: RMCTileFireNapalm
-      intensity: 60
-      duration: 30
       range: 3
+      cardinalRange: 5
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketHarpoon
+  name: AGM-184 'Harpoon II'
+  description: The AGM-184 Harpoon II is an Anti-Ship Missile, designed and used to effectively take down enemy ships with a huge blast wave with low explosive power. This one is modified to use ground signals and can be seen as a cheaper alternative to conventional ordnance. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: harpoon
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipAmmo
+    travelTime: 5
+    explosion:
+      total: 1850
+      slope: 3.2
+      max: 32
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketThermobaric
+  name: BLU-200 'Dragon's Breath'
+  description: The BLU-200 'Dragon's Breath' is a thermobaric fuel-air bomb. The aerosolized fuel mixture creates a vacuum when ignited causing serious damage to those in its way. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: fatty
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 5
+    implosion:
+      pullRange: 5.5
+      pullDistance: 3.5
+      pullSpeed: 15
+    fire:
+      type: RMCTileFireThermobaric
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
+    soundWarning: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    markerWarning: true
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketBanshee
+  name: AGM-227 'Banshee'
+  description: The AGM-227 missile is a mainstay of the overhauled dropship fleet against any mobile or armored ground targets. It's earned the nickname of 'Banshee' from the sudden wail that it emits right before hitting a target. Useful to clear out large areas. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: banshee
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 6
+    explosion:
+      total: 2000
+      slope: 5.5
+      max: 40
+    fire:
+      type: RMCTileFireBanshee
+      range: 1
+      cardinalRange: 3
+      ordinalRange: 3
+
+- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentAmmo
+  id: RMCDropshipAttachmentAmmoMiniRocket
+  components:
+  - type: Sprite
+    layers:
+    - state: minirocket_6
+      map: [ "enum.DropshipAmmoVisuals.Fill" ]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    rounds: 6
+    maxRounds: 6
+    roundsPerShot: 1
+    bulletSpread: 0
+    travelTime: 8
+    weapon: RMCDropshipAttachmentRocketPod
+    soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    deleteOnEmpty: true
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoMiniRocket
+  id: RMCDropshipAttachmentAmmoRocketMiniMike
+  name: AGR-59 'Mini-Mike'
+  description: The AGR-59 'Mini-Mike' minirocket is a cheap and efficient means of putting hate down range. Though rockets lack a guidance package, it makes up for it in ammunition count. Can be loaded into the LAU-229 Rocket Pod.
+  components:
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    ammoType: minirocket
+    explosion:
+      total: 850
+      slope: 8
+      max: 40
+    impactEffects:
+    - RMCEffectExplosionParticle
+    - RMCSmokeExplosionProofSmall
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocketMiniMike
+  id: RMCDropshipAttachmentAmmoRocketMiniMikeIncendiary
+  name: AGR-59-I 'Mini-Mike'
+  description: The AGR-59-I 'Mini-Mike' incendiary minirocket is a cheap and efficient means of putting hate down range AND setting them on fire! Though rockets lack a guidance package, it makes up for it in ammunition count. Can be loaded into the LAU-229 Rocket Pod.
+  components:
+  - type: Sprite
+    layers:
+    - state: minirocket_inc_6
+      map: [ "enum.DropshipAmmoVisuals.Fill" ]
+  - type: DropshipFabricatorPrintable
+    cost: 500
+  - type: DropshipAmmo
+    ammoType: minirocket_inc
+    fire:
+      type: RMCTileFireMiniMike
+      range: 1

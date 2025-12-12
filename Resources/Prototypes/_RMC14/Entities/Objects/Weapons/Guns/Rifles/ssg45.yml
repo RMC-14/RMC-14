@@ -1,8 +1,9 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleSSG45NoLock
   name: SSG-45 Assault Rifle
-  id: WeaponRifleSSG45
-  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  description: A hard-hitting, prototype assault rifle typically found in the hands of Weston-Yamada’s PMC teams. Exclusively produced in corporate white.
+  suffix: No ID Lock
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
@@ -56,7 +57,6 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.5
     accuracyMultiplierUnwielded: 0.75
-  - type: GunIDLock
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -73,7 +73,61 @@
           - RMCMagazineRifleSSG45Incend
         startingItem: RMCMagazineRifleSSG45
   - type: GunDamageModifier
-    multiplier: 1.1
+    multiplier: 1.25
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.875, 0.095
+      rmc-aslot-rail: 0.185, 0.25
+      rmc-aslot-underbarrel: 0.32, -0.27
+  - type: Tag
+    tags:
+    - RMCWeaponRifleSSG45
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ssg-45
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLock
+  id: RMCWeaponRifleSSG45
+  suffix: Has ID Lock
+  components:
+  - type: GunIDLock
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLock
+  id: RMCWeaponRifleSSG45NoLockStripped
+  suffix: No ID Lock, Stripped
+  components:
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -92,14 +146,8 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentSSG45Stock
-        whitelist:
-          tags:
-          - RMCAttachmentSSG45Stock
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentMiniFlamethrower
+        startingAttachable: null
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
@@ -110,15 +158,13 @@
           - RMCAttachmentVerticalGrip
           - RMCAttachmentExtinguisher
           - RMCAttachmentFlamer
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.875, 0.095
-      rmc-aslot-rail: 0.095, 0.25
-      rmc-aslot-stock: -0.41, 0.06
-      rmc-aslot-underbarrel: 0.345, -0.245
-  - type: Tag
-    tags:
-    - RMCWeaponRifleSSG45
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLockStripped
+  id: RMCWeaponRifleSSG45Stripped
+  suffix: Has ID Lock, Stripped
+  components:
+  - type: GunIDLock
 
 - type: entity
   parent: CMMagazineRifleBase

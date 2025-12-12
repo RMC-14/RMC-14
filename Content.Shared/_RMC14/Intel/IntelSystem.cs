@@ -155,6 +155,7 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, MapInitEvent>(OnRetrieveMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, ContainerGettingInsertedAttemptEvent>(OnHandPickUp);
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, PullAttemptEvent>(OnIntelPullAttempt);
+        SubscribeLocalEvent<ActiveIntelCorpseComponent, PullAttemptEvent>(OnIntelCorpsePullAttempt);
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
@@ -261,9 +262,7 @@ public sealed class IntelSystem : EntitySystem
         {
             args.Cancel();
             _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
-            return;
         }
-
     }
 
     private void OnIntelPullAttempt(Entity<IntelRetrieveItemObjectiveComponent> ent, ref PullAttemptEvent args)
@@ -273,6 +272,21 @@ public sealed class IntelSystem : EntitySystem
         {
             args.Cancelled = true;
             _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
+        }
+    }
+
+    private void OnIntelCorpsePullAttempt(Entity<ActiveIntelCorpseComponent> ent, ref PullAttemptEvent args)
+    {
+        var user = args.PullerUid;
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
+        {
+            args.Cancelled = true;
+
+            var msg = HasComp<XenoComponent>(ent)
+                ? Loc.GetString("rmc-intel-survivor-xeno-pull", ("thing", Name(ent)))
+                : Loc.GetString("rmc-intel-survivor-corpse-pull", ("thing", Name(ent)));
+
+            _popup.PopupClient(msg, ent, user);
         }
     }
 
@@ -318,6 +332,13 @@ public sealed class IntelSystem : EntitySystem
         var read = EnsureComp<IntelReadComponent>(ent);
         read.Readers.Add(user);
         Dirty(ent, read);
+
+        if (TryComp(ent, out IntelRetrieveItemObjectiveComponent? retrieve) &&
+            retrieve.State == IntelObjectiveState.Inactive)
+        {
+            retrieve.State = IntelObjectiveState.Active;
+            Dirty(ent, retrieve);
+        }
 
         UpdateTree(tree);
     }
@@ -720,23 +741,27 @@ public sealed class IntelSystem : EntitySystem
 
     private void AddRequires(Entity<IntelRequiresComponent?> requires, List<EntityUid> candidates)
     {
-        if (!Resolve(requires, ref requires.Comp, false))
-            return;
-
+        requires.Comp ??= EnsureComp<IntelRequiresComponent>(requires);
         if (requires.Comp.RequiresCount <= requires.Comp.Requires.Count)
             return;
 
-        while (requires.Comp.RequiresCount < requires.Comp.Requires.Count &&
-               requires.Comp.RequiresCount <= candidates.Count)
+        var left = requires.Comp.RequiresCount - requires.Comp.Requires.Count;
+        for (var i = 0; i < left; i++)
         {
-            var low = _random.Pick(candidates);
-            if (requires.Comp.Requires.Contains(low))
+            _random.Shuffle(candidates);
+            foreach (var candidate in candidates)
             {
-                if (candidates.Count < requires.Comp.RequiresCount)
+                if (requires.Comp.Requires.Contains(candidate))
+                    continue;
+
+                ConnectObjectives(candidate, requires);
+
+                if (requires.Comp.RequiresCount <= requires.Comp.Requires.Count)
                     break;
             }
 
-            ConnectObjectives(low, requires);
+            if (requires.Comp.RequiresCount <= requires.Comp.Requires.Count)
+                break;
         }
     }
 

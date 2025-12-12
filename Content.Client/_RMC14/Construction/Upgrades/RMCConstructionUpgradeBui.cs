@@ -66,6 +66,9 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
             }
         }
 
+        if (EntMan.Deleted(Owner))
+            return;
+
         var vpSize = _displayManager.ScreenSize;
         var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
 

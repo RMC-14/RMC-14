@@ -1,6 +1,8 @@
 using System.Linq;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -15,8 +17,9 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
@@ -29,13 +32,15 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -72,6 +77,8 @@ public sealed class XenoFortifySystem : EntitySystem
 
         args.Handled = true;
 
+        _audio.PlayPredicted(xeno.Comp.FortifySound, xeno, xeno);
+
         if (xeno.Comp.Fortified)
             Unfortify(xeno);
         else
@@ -80,16 +87,16 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
     {
-        if (xeno.Comp.Fortified)
-        {
-            args.XenoArmor += xeno.Comp.Armor;
-            args.FrontalArmor += xeno.Comp.FrontalArmor;
-        }
+        if (!xeno.Comp.Fortified)
+            return;
+
+        args.XenoArmor += xeno.Comp.Armor;
+        args.FrontalArmor += xeno.Comp.FrontalArmor;
     }
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Fortified && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
+        if (xeno.Comp.Fortified && xeno.Comp.ImmuneToStatuses.Contains(args.Effect.Id))
             args.Cancelled = true;
     }
 
@@ -238,14 +245,12 @@ public sealed class XenoFortifySystem : EntitySystem
         _actionBlocker.UpdateCanMove(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Fortify, xeno.Comp.Fortified);
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoFortifyActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoFortifyActionEvent)
-                _actions.SetToggled(actionId, xeno.Comp.Fortified);
+            _actions.SetToggled(action.AsNullable(), xeno.Comp.Fortified);
         }
 
         _armor.UpdateArmorValue((xeno, null));
-
 
         Dirty(xeno);
 

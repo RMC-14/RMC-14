@@ -58,6 +58,14 @@
     node: windowDirectional
 
 - type: entity
+  parent: CMWindowDirectional
+  id: RMCWindowDirectionalAltDrawDepth
+  suffix: Alt Drawdepth
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+
+- type: entity
   id: CMWindowReinforcedDirectional
   parent: CMWindowDirectional
   name: reinforced window
@@ -101,6 +109,38 @@
     node: windowReinforcedDirectional
 
 - type: entity
+  id: CMWindowStrongReinforcedDirectional
+  parent: CMWindowDirectional
+  name: strong reinforced window
+  description: A glass window reinforced with bracing rods. It looks very strong. You can't break it with your fists.
+  components:
+  - type: Sprite
+    state: rwindow
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/directional.rsi
+    state: rwindow
+  - type: ImmuneToUnarmed
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+          CMRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
   id: CMWindowTintedDirectional
   parent: CMWindowDirectional
   name: tinted window
@@ -111,6 +151,22 @@
   - type: Icon
     sprite: _RMC14/Structures/Windows/directional.rsi
     state: twindow
+
+- type: entity
+  id: RMCWindowTintedDirectionalBlue
+  parent: CMWindowTintedDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
+
+- type: entity
+  id: RMCWindowDirectionalBlue
+  parent: CMWindowDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
 
 - type: entity
   id: CMWindowUltraDirectional

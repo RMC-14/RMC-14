@@ -24,6 +24,7 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
@@ -47,6 +48,16 @@
     #  points: 20
     - name: Sidearm Ammunitions
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 6
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
+      - id: RMCSpeedLoader44Marksman
+        points: 10
+      - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -86,11 +97,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      entries:
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
@@ -106,6 +117,8 @@
       - id: CMEncryptionKeyJTAC
         points: 5
       - id: CMEncryptionKeyRequisition
+        points: 5
+      - id: CMEncryptionKeyMedical
         points: 5
 
 - type: entity
@@ -139,7 +152,7 @@
       entries:
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-#      - id: RMCPouchElectronics # TODO RMC14
+      - id: RMCPouchElectronics
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
@@ -164,9 +177,14 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:

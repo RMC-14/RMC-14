@@ -5,12 +5,15 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
@@ -62,6 +65,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<ActorComponent> _actor;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+    private EntityQuery<RankComponent> _rankQuery;
     private EntityQuery<OverwatchDataComponent> _overwatchDataQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
 
@@ -80,6 +84,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _actor = GetEntityQuery<ActorComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+        _rankQuery = GetEntityQuery<RankComponent>();
         _overwatchDataQuery = GetEntityQuery<OverwatchDataComponent>();
         _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
@@ -531,6 +536,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (message.Length > 200)
             message = message[..200];
 
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
             Prototype(squad.Value) is not { } squadProto)
         {
@@ -654,11 +662,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                         var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
                         var ssd = !_actor.HasComp(member);
                         var role = _originalRoleQuery.CompOrNull(member)?.Job;
+                        var rank = _rankQuery.CompOrNull(member)?.Rank;
                         var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
                         var areaName = _area.TryGetArea(coords, out _, out var areaProto)
                             ? areaProto.Name
                             : string.Empty;
                         var netMember = GetNetEntity(member);
+                        var roleOverride = CompOrNull<RMCVendorRoleOverrideComponent>(member)?.GiveSquadRoleName ?? CompOrNull<UsedSkillPamphletComponent>(member)?.JobTitle;
 
                         Vector2? leaderDistance = null;
                         if (member != leader.Owner &&
@@ -680,7 +690,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                             location == OverwatchLocation.Planet,
                             location,
                             areaName,
-                            leaderDistance
+                            leaderDistance,
+                            rank,
+                            roleOverride
                         );
                     }
 

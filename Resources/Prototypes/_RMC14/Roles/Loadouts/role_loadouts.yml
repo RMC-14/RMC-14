@@ -1,6 +1,3 @@
-# TODO Recreational
-# TODO Miscellaneous
-
 # Auxiliary Support
 - type: roleLoadout
   id: JobCMAuxiliarySupportOfficer
@@ -11,7 +8,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -20,6 +19,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -30,7 +32,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -39,6 +43,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -49,7 +56,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -58,6 +67,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -68,7 +80,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -77,6 +91,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -87,7 +104,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -96,20 +115,26 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
   points: 7
   groups:
-  - CommandingOfficerIDRMC
   - MarineLeatherBackpack
+  - CommandingOfficerIDRMC
+  - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -118,6 +143,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -128,7 +156,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -137,6 +167,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -147,7 +180,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -156,6 +191,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Engineering
 - type: roleLoadout
@@ -167,7 +205,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -176,6 +216,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -186,7 +229,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -195,6 +240,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -205,7 +253,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -214,6 +264,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Squad Roles
 - type: roleLoadout
@@ -225,7 +278,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -234,6 +289,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -244,7 +302,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -253,6 +313,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -263,7 +326,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -272,6 +337,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -282,7 +350,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -291,6 +361,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -301,7 +374,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -310,6 +385,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -320,7 +398,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -329,6 +409,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -339,7 +422,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -348,6 +433,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Medical
 - type: roleLoadout
@@ -359,7 +447,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -368,6 +458,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -378,7 +471,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -387,6 +482,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMNurse
@@ -397,7 +495,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -406,6 +506,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -416,7 +519,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -425,8 +530,35 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Military Police
+- type: roleLoadout
+  id: JobCMProvostInspector
+  points: 7
+  groups:
+  - ProvostRoleSpecificOuterwearRMC
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
 - type: roleLoadout
   id: JobCMChiefMP
   points: 7
@@ -435,8 +567,11 @@
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
+  - ChiefMPRoleSpecificRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -445,6 +580,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -455,7 +593,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -464,6 +604,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -474,7 +617,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -483,6 +628,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Other
 - type: roleLoadout
@@ -494,8 +642,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
-  - PlushiesRMC
+  - RecreationalRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -503,18 +652,23 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
 
 - type: roleLoadout
   id: JobCMLiaison
   points: 7
   groups:
   - MarineLeatherBackpack
+  - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
-  - PlushiesRMC
+  - RecreationalRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -522,6 +676,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
 
 - type: roleLoadout
   id: JobCMMessTech
@@ -532,7 +689,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -541,6 +700,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -551,7 +713,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -560,25 +724,30 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
-  id: JobRMCSynthetic
+  id: JobRMCJobSynthetic
   points: 7
   groups:
-  - MarineBackpack
-  - HeadwearRMC
-  - EyewearRMC
-  - MasksRMC
+  - SynthBackpackRMC
+  - SynthHeadwearRMC
+  - SynthGlassesRMC
+  - SynthMasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
+  - SynthUniformRMC
+  - SynthUniformAccessoriesRMC
+  - SynthSuitsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
-  - WeaponsRMC
-  - CannedDrinksRMC
-  - FlasksRMC
-  - FoodSweetsRMC
-  - FoodPackagedRMC
-  - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 # Requsitions
 - type: roleLoadout
@@ -590,7 +759,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -599,6 +770,9 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -609,7 +783,9 @@
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -617,4 +793,237 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
+# Survivors
+# They don't have access to some loadout categories
+- type: roleLoadout
+  id: JobCMSurvivor
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobRMCJobSyntheticColony
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorCorporate
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorDoctor
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorEngineer
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorScientist
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorSecurity
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
+  id: JobRMCSurvivorCommandingOfficer
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
+# PVE
+
+- type: roleLoadout
+  id: JobCMPVERifleman
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEHospitalCorpsman
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESmartGunOperator
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESquadLeader
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVESectionSergeant
+  points: 20
+  groups:
+  - MarineBackpack
+  - HeadwearRMCPVE
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
+  - RMCLoadoutGroupPins
+
+- type: roleLoadout
+  id: JobCMPVEPlatoonCommander
+  points: 20
+  groups:
+  - MarineBackpack
+  - EyewearRMCPVE
+  - MasksRMCPVE
+  - HelmetGarbsRMCPVE
+  - AccessoriesRMCPVE
+  - PlushiesRMC
+  - WeaponsRMC
   - RMCLoadoutGroupPins
