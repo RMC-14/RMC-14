@@ -1,0 +1,117 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: PK-10 quasar electrostatic shockgun
+  id: RMCWeaponShotgunPK10
+  description: An archaic electrostatic 20ga shotgun design based on old Earth designs, albeit modernized for its time period. Being a dual-mode system, it is capable of firing semi-auto and pump-action modes, although this particular model is strictly semi-auto only. It can only accept MX24 slugs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/pk10.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/pk10.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es4.ogg
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-pk10
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 5
+    scatterUnwielded: 10
+    baseFireRate: 0.85
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24
+    capacity: 7
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.825, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-underbarrel: 0.30, -0.31
+
+- type: entity
+  parent: RMCBoxShotgunBeanbag
+  id: RMCBoxShotgunMX24
+  name: box of MX24 electrostatic shells
+  description: A box filled with MX24 electrostatic shells used for non-lethal crowd control. 20 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunMX24
+      amount: 5
+
+- type: entity
+  parent: CMShellShotgunBeanbag
+  id: RMCShellShotgunMX24
+  name: handful of MX24 electostatic slugs
+  description: A handful of Weston-Yamada produced Electostatic Slugs, often used in the PK-10 Quasar Shockgun.
+  components:
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunMX24
+  - type: Stack
+    count: 5
+    stackType: RMCShellShotgunMX24
+    baseLayer: base
+    layerStates:
+    - beanbag_slug_1
+    - beanbag_slug_1
+    - beanbag_slug_2
+    - beanbag_slug_3
+    - beanbag_slug_4
+    - beanbag_slug_5
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunMX24
+
+- type: stack
+  id: RMCShellShotgunMX24
+  name: handful of beanbag slugs
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: beanbag_slug_1 }
+  spawn: RMCShellShotgunMX24
+  maxCount: 5
+
+- type: entity
+  parent: CMPelletShotgunBeanbag
+  id: RMCPelletShotgunMX24
+  name: MX24 slug
+  components:
+  - type: Ammo
+    muzzleFlash: RMCMuzzleFlashEffectEnergy
+  - type: RMCStaminaDamageOnCollide
+    damage: 65
