@@ -24,6 +24,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
@@ -405,7 +406,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         var direction = rotation.GetCardinalDir();
         coordinates = coordinates.Offset(direction.ToVec());
-        if (!_rmcMap.CanBuildOn(coordinates))
+        if (_rmcMap.IsTileBlocked(coordinates, CollisionGroup.MidImpassable))
         {
             var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", ent));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);

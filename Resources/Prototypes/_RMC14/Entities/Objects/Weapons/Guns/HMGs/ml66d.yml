@@ -160,6 +160,8 @@
   - type: GunRequiresSkills
     skills:
       RMCSkillEngineer: 0
+  - type: Gun
+    shootOriginOffset: 0, -0.5 #Shifts the spawn position of the projectile 0.5 tiles in front of the mount.
 
 # Magazines
 
@@ -205,7 +207,7 @@
     whitelist:
       tags:
       - RMCCartridgeHMG10x28mm
-    proto: RMCCartridgeHMG10x28mm
+    proto: RMCCartridgeHMG10x28mmOffset
     capacity: 1500
 
 # Cartridges
@@ -225,6 +227,15 @@
   - type: Tag
     tags:
     - RMCCartridgeHMG10x28mm
+
+- type: entity
+  parent: RMCCartridgeHMG10x28mm
+  id: RMCCartridgeHMG10x28mmOffset #DIfferent muzzle flash location
+  name: cartridge (10x28mm)
+  components:
+  - type: CartridgeAmmo
+    muzzleFlashOffset: 0.25, 0
+    proto: RMCBulletHMG10x28mm
 
 # Projectiles
 

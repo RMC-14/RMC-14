@@ -344,7 +344,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         var fromCoordinates = Transform(user).Coordinates;
 
         //RMC14
-        var shotOriginEv = new BeforeAttemptShootEvent();
+        var shotOriginEv = new BeforeAttemptShootEvent(fromCoordinates, gun.ShootOriginOffset);
         RaiseLocalEvent(user, ref shotOriginEv);
 
         if (shotOriginEv.Handled)
@@ -1048,8 +1048,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (sprite == null)
             return;
 
-        var ev = new MuzzleFlashEvent(GetNetEntity(gun), sprite, worldAngle);
-        CreateEffect(gun, ev, gun, user);
+        //RMC14
+        Vector2? muzzleFlashOffset = component.MuzzleFlashOffset;
+        Vector2? muzzleFlashOriginOffset = null;
+        if (TryComp(gun, out GunComponent? gunComp))
+        {
+            var beforeEv = new RMCBeforeMuzzleFlashEvent(gun, gunComp.ShootOriginOffset);
+            gun = beforeEv.Weapon;
+            muzzleFlashOriginOffset = beforeEv.Offset;
+        }
+
+        var ev = new MuzzleFlashEvent(GetNetEntity(gun), sprite, worldAngle, muzzleFlashOffset, muzzleFlashOriginOffset); //RMC14 added parameter
+        CreateEffect(gun, ev, gun , user, muzzleFlashOffset, muzzleFlashOriginOffset);
     }
 
     public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid user, PhysicsComponent userPhysics)
@@ -1139,7 +1149,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
     }
 
-    protected abstract void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null);
+    protected abstract void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null, Vector2? offset = null, Vector2? originOffset = null);
 
     /// <summary>
     /// Used for animated effects on the client.

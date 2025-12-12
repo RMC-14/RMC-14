@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Foldable;
@@ -23,6 +24,7 @@ public sealed class MountableWeaponSystem : EntitySystem
         SubscribeLocalEvent<MountableWeaponComponent, TakeAmmoEvent>(OnTakeAmmo);
         SubscribeLocalEvent<MountableWeaponComponent, OverheatedEvent>(OnOverheated);
         SubscribeLocalEvent<MountableWeaponComponent, HeatGainedEvent>(OnHeatGained);
+        SubscribeLocalEvent<MountableWeaponComponent, RMCBeforeMuzzleFlashEvent>(OnBeforeMuzzleFlash);
     }
 
     private void OnAttemptShoot(Entity<MountableWeaponComponent> ent, ref AttemptShootEvent args)
@@ -109,6 +111,14 @@ public sealed class MountableWeaponSystem : EntitySystem
 
         var ev = new MountableWeaponRelayedEvent<HeatGainedEvent>(args);
         RaiseLocalEvent(GetEntity(ent.Comp.MountedTo.Value), ref ev);
+    }
+
+    private void OnBeforeMuzzleFlash(Entity<MountableWeaponComponent> ent, ref RMCBeforeMuzzleFlashEvent args)
+    {
+        if (ent.Comp.MountedTo == null)
+            return;
+
+        args.Weapon = GetEntity(ent.Comp.MountedTo.Value);
     }
 }
 

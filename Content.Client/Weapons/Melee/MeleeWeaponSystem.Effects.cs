@@ -229,6 +229,12 @@ public sealed partial class MeleeWeaponSystem
                 var entRotation = TransformSystem.GetWorldRotation(xform);
                 targetPos += entRotation.RotateVec(arcComponent.Offset);
             }
+            // RMC14
+            if (arcComponent.OriginOffset != null && arcComponent.OriginOffset != Vector2.Zero)
+            {
+                var userRotation = TransformSystem.GetWorldRotation(arcComponent.User.Value);
+                targetPos += userRotation.RotateVec(arcComponent.OriginOffset.Value);
+            }
 
             TransformSystem.SetWorldPosition(uid, targetPos);
         }

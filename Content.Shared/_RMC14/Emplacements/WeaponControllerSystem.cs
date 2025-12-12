@@ -2,12 +2,15 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Buckle;
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Emplacements;
 
 public sealed class WeaponControllerSystem : EntitySystem
 {
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -20,7 +23,16 @@ public sealed class WeaponControllerSystem : EntitySystem
         if (ent.Comp.ControlledWeapon == null)
             return;
 
-        args.Origin = Transform(GetEntity(ent.Comp.ControlledWeapon.Value)).Coordinates;
+        _container.TryGetContainingContainer( GetEntity(ent.Comp.ControlledWeapon.Value), out var container);
+
+        if (container == null)
+            return;
+
+        var mount = container.Owner;
+        var rotation = _transform.GetWorldRotation(mount);
+        var rotatedOffset = rotation.RotateVec(args.Offset);
+
+        args.Origin = Transform(mount).Coordinates.Offset(rotatedOffset);
         args.Handled = true;
     }
 

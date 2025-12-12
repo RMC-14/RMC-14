@@ -436,8 +436,8 @@ public sealed class CMGunSystem : EntitySystem
         var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
 
-        if (shooterFactionEvent.Faction != null && 
-            targetFactionEvent.Faction != null && 
+        if (shooterFactionEvent.Faction != null &&
+            targetFactionEvent.Faction != null &&
             shooterFactionEvent.Faction == targetFactionEvent.Faction &&
             HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
         {
@@ -889,4 +889,10 @@ public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;
 /// An event raised before a shot attempt is made.
 /// </summary>
 [ByRefEvent]
-public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, bool Handled = false);
+public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, Vector2 Offset, bool Handled = false);
+
+/// <summary>
+/// An event raised right before a muzzle flash event is raised.
+/// </summary>
+[ByRefEvent]
+public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2? Offset = null);
