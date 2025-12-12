@@ -81,6 +81,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCPelletShotgunMX24
+    muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: Stack
     count: 5
     stackType: RMCShellShotgunMX24
@@ -111,7 +112,8 @@
   id: RMCPelletShotgunMX24
   name: MX24 slug
   components:
-  - type: Ammo
-    muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: RMCStaminaDamageOnCollide
     damage: 65
+
+- type: Tag
+  id: RMCShellShotgunMX24
