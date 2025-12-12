@@ -173,6 +173,52 @@
     mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
 
 - type: entity
+  parent: CMBaseStructure
+  id: RMCComputerDropshipWeaponsSmall
+  name: weapons controls
+  description: A computer to manage equipment, weapons and simulations installed on the dropship.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+    layers: [ ]
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+  - type: AccessReader
+    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#FFEFD2"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: ActivatableUI
+    key: enum.DropshipTerminalWeaponsUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalWeaponsUi.Key:
+        type: DropshipWeaponsBui
+  - type: DropshipTerminalWeapons
+  - type: TacticalMapComputer
+
+- type: entity
   parent: MarkerBase
   id: CMDropshipDestination
   name: dropship destination
