@@ -178,7 +178,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             hiveEnt = (hive.Value, hiveComp);
         else if (hive != null)
         {
-            Log.Warning($"Tried to set hive of {ToPrettyString(member)} to bad hive entity {ToPrettyString(hive)}");
+            Log.Error($"Tried to set hive of {ToPrettyString(member)} to bad hive entity {ToPrettyString(hive)}");
             return; // invalid hive was passed, prevent it breaking anything else
         }
 
@@ -403,7 +403,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         if (hive == null)
         {
-            Log.Error($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
+            Log.Warning($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
             return;
         }
 
