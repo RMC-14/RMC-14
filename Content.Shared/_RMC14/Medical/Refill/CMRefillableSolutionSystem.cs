@@ -288,6 +288,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
     private void OnRefillSolutionFromContainerOnStoreGetVerbs(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (!ent.Comp.CanFlush)
             return;
 
@@ -363,6 +366,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
     private void OnFlushableSolutionGetVerbs(Entity<RMCFlushableSolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
