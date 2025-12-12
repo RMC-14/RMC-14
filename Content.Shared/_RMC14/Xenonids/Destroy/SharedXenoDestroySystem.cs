@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -62,6 +63,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -303,8 +305,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             _actions.SetEnabled(action.AsNullable(), false);
         }
 
-        if (xeno.Comp.Target == null || !TryComp<XenoDestroyComponent>(xeno, out var destroy))
-            return;
+        _blocker.UpdateCanMove(xeno);
     }
 
     protected virtual void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)
@@ -314,5 +315,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         {
             _actions.SetEnabled(action.AsNullable(), true);
         }
+
+        _blocker.UpdateCanMove(xeno);
     }
 }
