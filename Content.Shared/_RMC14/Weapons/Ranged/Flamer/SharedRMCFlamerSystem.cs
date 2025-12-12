@@ -450,7 +450,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         foreach (var content in targetSolution.Contents)
         {
             if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
-                reagent.Intensity <= 0)
+                (reagent.Intensity <= 0 || reagent.Duration <= 0 || reagent.Radius <= 0))
             {
                 _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
                 return;
