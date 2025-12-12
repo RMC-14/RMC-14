@@ -9,7 +9,7 @@ public sealed partial class ProjectileLimitHitsComponent : Component
     public List<EntityUid> IgnoredEntities = new();
 
     [DataField, AutoNetworkedField]
-    public EntityUid OriginEntity;
+    public int OriginEntityId;
 
     [DataField, AutoNetworkedField]
     public int Limit = 1;

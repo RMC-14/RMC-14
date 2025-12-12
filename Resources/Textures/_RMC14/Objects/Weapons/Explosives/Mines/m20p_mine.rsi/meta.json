@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a6b82d423fb608b38de4cbf3662d2c56540f01f5/icons/obj/items/weapons/grenade.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "active",
+      "directions": 4,
+      "delays": [
+        [
+          4,
+          0.2,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.2,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.2,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.2,
+          0.1,
+          0.5
+        ]
+      ]
+    }
+  ]
+}

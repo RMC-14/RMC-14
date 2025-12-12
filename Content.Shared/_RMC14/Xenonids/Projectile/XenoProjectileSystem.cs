@@ -299,7 +299,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             {
                 var limitHits = EnsureComp<ProjectileLimitHitsComponent>(projectile);
                 limitHits.Limit = projectileHitLimit.Value;
-                limitHits.OriginEntity = xeno;
+                limitHits.OriginEntityId = xeno.Id;
                 limitHits.ExtraId = _limitHitsId;
                 Dirty(projectile, limitHits);
             }
