@@ -19,6 +19,7 @@
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
+      - id: RMCStampSEA
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:

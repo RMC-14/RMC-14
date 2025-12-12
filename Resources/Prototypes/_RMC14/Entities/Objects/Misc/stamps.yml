@@ -111,6 +111,18 @@
 
 - type: entity
   parent: CMStampBase
+  id: RMCStampSEA
+  name: senior enlisted advisor's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-sea
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-sea
+    stampedColor: "#d19f2a"
+    stampState: "paper_stamp-sea"
+
+- type: entity
+  parent: CMStampBase
   id: CMStampLiaison
   name: corporate liaison rubber stamp
   components:
