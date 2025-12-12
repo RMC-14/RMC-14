@@ -2,9 +2,11 @@
 using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.GameTicking;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
@@ -51,12 +53,14 @@ public sealed class HiveBoonSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
+    private static readonly EntProtoId<HiveBoonDefinitionComponent> KingBoonId = "RMCHiveBoonKing";
     private static readonly EntProtoId<HiveKingCocoonComponent> KingCocoonId = "RMCHiveCocoonKing";
 
     public ImmutableArray<(EntityPrototype Prototype, HiveBoonDefinitionComponent Component)> Boons
@@ -76,7 +80,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
     private EntityQuery<ExcludedFromKingVoteComponent> _excludedFromKingVoteQuery;
 
-    private readonly HashSet<ProtoId<JobPrototype>> _xenoJobs = new();
+    private readonly HashSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = new();
 
     public override void Initialize()
     {
@@ -174,13 +178,12 @@ public sealed class HiveBoonSystem : EntitySystem
         if (ev.Core is not { } core)
             return;
 
-        var cocoon = SpawnAtPosition(KingCocoonId, core.Owner.ToCoordinates());
-
+        var cocoon = SpawnAtPosition(KingCocoonId, core.ToCoordinates());
         _hive.SetHive(cocoon, ev.Hive);
 
         var areaName = _area.GetAreaName(core);
         _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-boon-king-announcement-marine", ("area", areaName)));
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(core.Owner, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(core, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
     }
 
     private void OnGetTileFireImmunity(Entity<XenoComponent> xeno, ref RMCGetFireImmunityEvent ev)
@@ -350,7 +353,7 @@ public sealed class HiveBoonSystem : EntitySystem
     private void StartKingVote(Entity<HiveKingCocoonComponent> cocoon)
     {
         _xenoJobs.Clear();
-        foreach (var prototype in _prototype.EnumeratePrototypes<JobPrototype>())
+        foreach (var prototype in _prototype.EnumeratePrototypes<PlayTimeTrackerPrototype>())
         {
             if (prototype.IsXeno)
                 _xenoJobs.Add(prototype.ID);
@@ -528,15 +531,8 @@ public sealed class HiveBoonSystem : EntitySystem
             return;
         }
 
-        if (!boons.Comp.UnlockAt.TryGetValue(boonProto.ID, out var unlockAt))
-        {
-            unlockAt = boonComp.UnlockAt;
-            if (boonComp.UnlockAtRandomAdd != TimeSpan.Zero)
-                unlockAt +=_random.Next(TimeSpan.Zero, boonComp.UnlockAtRandomAdd);
-
-            boons.Comp.UnlockAt[boonProto.ID] = unlockAt;
-            Dirty(boons);
-        }
+        if (!TryGetUnlockAt(boons, boonProto.ID, out var unlockAt))
+            return;
 
         if (_gameTicker.RoundDuration() < unlockAt)
         {
@@ -624,7 +620,29 @@ public sealed class HiveBoonSystem : EntitySystem
 
         ev.Boon = boonEnt;
         ev.Hive = hive;
+        ev.Core = _hive.GetHiveCore(hive);
         RaiseLocalEvent((object) ev);
+    }
+
+    private bool TryGetUnlockAt(Entity<HiveBoonsComponent> boons, EntProtoId<HiveBoonDefinitionComponent> boonId, out TimeSpan unlockAt)
+    {
+        if (!_prototype.TryIndex(boonId, out var boon) ||
+            !boon.TryGetComponent(out HiveBoonDefinitionComponent? boonComp, _compFactory))
+        {
+            unlockAt = TimeSpan.Zero;
+            return false;
+        }
+
+        if (boons.Comp.UnlockAt.TryGetValue(boonId, out unlockAt))
+            return true;
+
+        unlockAt = boonComp.UnlockAt;
+        if (boonComp.UnlockAtRandomAdd != TimeSpan.Zero)
+            unlockAt += _random.Next(TimeSpan.Zero, boonComp.UnlockAtRandomAdd);
+
+        boons.Comp.UnlockAt[boonId] = unlockAt;
+        Dirty(boons);
+        return true;
     }
 
     public Entity<HiveBoonsComponent> EnsureBoons(Entity<HiveComponent> hive)
@@ -680,6 +698,7 @@ public sealed class HiveBoonSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        AnnounceKingUnlock();
         GainResin();
 
         var cocoonQuery = EntityQueryEnumerator<HiveKingCocoonComponent>();
@@ -806,6 +825,42 @@ public sealed class HiveBoonSystem : EntitySystem
                     return;
                 }
             }
+        }
+    }
+
+    private void AnnounceKingUnlock()
+    {
+        try
+        {
+            if (_net.IsClient)
+                return;
+
+            if (!_rmcGameTicker.ServerOnlyIsInRound())
+                return;
+
+            var query = EntityQueryEnumerator<HiveComponent>();
+            while (query.MoveNext(out var uid, out var hive))
+            {
+                var boons = EnsureBoons((uid, hive));
+                if (boons.Comp.KingAnnounced)
+                    continue;
+
+                if (!TryGetUnlockAt(boons, KingBoonId, out var unlockAt) ||
+                    _gameTicker.RoundDuration() < unlockAt)
+                {
+                    continue;
+                }
+
+                boons.Comp.KingAnnounced = true;
+                Dirty(boons);
+
+                var sound = new BioscanComponent().XenoSound;
+                _xenoAnnounce.AnnounceToHive(default, uid, "The hive is now ready to begin hatching His Grace, the King, if we gain control of both tall hivemind towers.", sound);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error announcing king unlock:\n{e}");
         }
     }
 }
