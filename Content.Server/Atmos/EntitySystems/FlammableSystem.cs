@@ -279,7 +279,6 @@ namespace Content.Server.Atmos.EntitySystems
 
             Resist(ent, ent);
             _xenoSpit.Resist(ent.Owner);
-            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner));
             args.Handled = true;
         }
 
@@ -434,6 +433,7 @@ namespace Content.Server.Atmos.EntitySystems
             flammable.Resisting = true;
             Dirty(uid, flammable);
 
+            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
@@ -536,13 +536,13 @@ namespace Content.Server.Atmos.EntitySystems
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
                         if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
                     else
                     {
                         // No immunity, deal damage normally
                         if (damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
