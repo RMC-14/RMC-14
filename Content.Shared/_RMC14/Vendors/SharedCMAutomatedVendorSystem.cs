@@ -1171,36 +1171,34 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     /// <summary>
     /// Handles restocking items that have a Box reference (magazine boxes, ammo boxes).
-    /// When vending, these items deduct from the underlying box entry, so restocking should add back.
+    /// When vending, these items deduct from the underlying box entry, so restocking should add them back.
     /// </summary>
     private bool TryRestockBoxItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
     {
         if (matchingEntry.Box is not { } boxId)
             return false;
 
-        foreach (var section in vendor.Comp.Sections)
+        var boxEntry = vendor.Comp.Sections
+            .SelectMany(section => section.Entries)
+            .FirstOrDefault(entry => entry.Id == boxId);
+        if (boxEntry == null)
+            return false;
+
+        var amountToAdd = GetBoxRemoveAmount(matchingEntry);
+        boxEntry.Amount += amountToAdd;
+        Dirty(vendor);
+        AmountUpdated(vendor, boxEntry);
+
+        if (!suppressPopup)
         {
-            foreach (var entry in section.Entries)
-            {
-                if (entry.Id != boxId)
-                    continue;
-
-                var amountToAdd = GetBoxRemoveAmount(matchingEntry);
-                entry.Amount += amountToAdd;
-                Dirty(vendor);
-                AmountUpdated(vendor, entry);
-
-                if (!suppressPopup)
-                {
-                    _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
-                }
-
-                QueueDel(item);
-                return true;
-            }
+            _popup.PopupEntity(
+                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
+                vendor,
+                user);
         }
 
-        return false;
+        QueueDel(item);
+        return true;
     }
 
     /// <summary>
