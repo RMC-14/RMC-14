@@ -45,4 +45,3 @@ cl-briefing-kutjevo =
     - Failure to send the weekly "All-Clear" signal, resulting in an automated distress dispatch
     - Sabotage by the "Colony Liberation Front"
     - A solar flare from the Dykuma star causing electrical failures
-
