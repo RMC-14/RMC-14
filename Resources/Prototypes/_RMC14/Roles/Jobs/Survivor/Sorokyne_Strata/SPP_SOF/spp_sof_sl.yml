@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCSurvivorSPPSOFBase
+  id: RMCSurvivorSPPSOFSL
+  name: rmc-job-name-soro-sof-sl
+  startingGear: RMCGearSPPSOFSL
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  icon: "RMCJobIconSPPLeader"
+  spawnMenuRoleName: SPP SOF Squad Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 2
+        RMCSkillFireman: 1
+        RMCSkillJtac: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-sof-sl
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: upp_sl_a
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSOFBase
+  id: RMCGearSPPSOFSL
+  equipment:
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    outerClothing: RMCArmorSPPSOFPlated
+    head: CMHeadCapSPPBeret
+  storage:
+    back:
+    - ArmorHelmetSPPHeavy
+    outerClothing:
+    - CMCrowbar
+    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleAK4047
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFSL
+  name: spp sof squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFSL
+  - type: Sprite
+    state: spp_spawn

@@ -1,0 +1,40 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorSPPSOFBase
+  name: rmc-job-name-soro-sof-base
+  description: rmc-job-description-soro-sof
+  ranks:
+    RMCRankSPPRyadovoy: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSPPSOFBase
+  hasIcon: true
+  greeting: rmc-job-greeting-soro-sof
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: SPP SOF Survivor (Base)
+  useLoadoutOfJob: CMSurvivor
+  basePlaytimeTracker: true
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPSOFBase
+  equipment:
+    jumpsuit: CMJumpsuitSPP # TODO RMC14 SPP SOF uniform
+    outerClothing: RMCArmorSPPSOFFilled
+    back: RMCSatchelLightpackBlack
+    shoes: RMCBootsSPPFilled
+    head: ArmorHelmetSPPHeavy
+    gloves: RMCHandsVeteranSPP
+    suitstorage: RMCWeaponRifleAK4047
+    belt: RMCBeltHolsterPistolSPPT73
+    id: RMCIDSPP
+    ears: RMCHeadsetDistressSPP # TODO RMC14 replace this with a 121/RECON headset after 8602 is merged
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchFlareFilled
