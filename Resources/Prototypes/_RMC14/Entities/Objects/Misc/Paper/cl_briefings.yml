@@ -1,5 +1,6 @@
 - type: entity
   parent: RMCPaperWeYa
+  id: RMCPaperWeYaLiaisonBriefingKutjevo
   suffix: Kutjevo Briefing
   components:
   - type: Paper
