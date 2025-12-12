@@ -610,6 +610,10 @@
   - type: FixedItemSizeStorage
   - type: PropagateDetectors
   - type: RMCSlingPouch
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # Cassetes Pouch
 - type: entity

@@ -196,6 +196,9 @@ public sealed class RMCMagneticSystem : EntitySystem
 
     public void OnSlingGetVerbs(Entity<RMCSlingPouchComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (ent.Comp.Item is not { } item)
             return;
 
@@ -219,6 +222,9 @@ public sealed class RMCMagneticSystem : EntitySystem
 
     public void OnSlingItemGetVerbs(Entity<RMCSlingPouchItemComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         var pouch = ent.Comp.Pouch;
         args.Verbs.Add(new AlternativeVerb
