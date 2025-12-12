@@ -24,7 +24,6 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -42,7 +41,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
@@ -140,8 +138,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         _rotateToFace.TryFaceCoordinates(xeno, _transform.ToMapCoordinates(args.TargetCoords).Position);
         _rmcPull.TryStopAllPullsFromAndOn(xeno);
 
-        //Root
-        _stun.TrySlowdown(xeno, xeno.Comp.CrashTime, true, 0f, 0f);
         if (_net.IsServer)
         {
             var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
