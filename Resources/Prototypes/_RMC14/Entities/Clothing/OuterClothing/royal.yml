@@ -139,3 +139,16 @@
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24
+
+- type: entity
+  parent: RMCArmorRoyalHarness
+  id: RMCArmorRoyalHarnessNoBackpack
+  name: kestrel GPMG harness
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/padded.rsi
+  - type: SmartGunArmor
+  - type: ClothingBlockBackpack
+  - type: Corrodible
+    isCorrodible: false
+
