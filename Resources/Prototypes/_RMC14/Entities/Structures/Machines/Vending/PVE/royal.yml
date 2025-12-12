@@ -104,7 +104,7 @@
   parent: ColMarTechBase
   id: RMCRoyalBombSpecVendor
   name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity but idk wtf that means - changing for clarity
-  description: An automated rack hooked up to a colossal storage of medical assistant standard-issue equipment.
+  description: An automated rack hooked up to a colossal storage of bombardment specialist standard-issue equipment.
   components:
   - type: AccessReader
     access:
@@ -196,7 +196,7 @@
         name: Drop Pouch
         amount: 5
     - name: Armor
-      entries: # TODO RMC14 shoulder pads and leg guards for newmed in a week
+      entries: # TODO RMC14 shoulder pads and leg guards for modular armor
       - id: RMCArmorRoyal
         name: Kestrel Armored Cuirass
         amount: 15
@@ -344,6 +344,6 @@
         amount: 5
       - id: RMCAttachmentTwoPointSling
         amount: 5
-      - id: RMCM5Bayonet # TODO RMC14 RMCTantoA once #8476 is merged
+      - id: RMCTantoA
         amount: 25
 
