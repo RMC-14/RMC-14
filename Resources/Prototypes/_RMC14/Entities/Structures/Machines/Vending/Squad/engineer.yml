@@ -344,6 +344,7 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     hackable: true

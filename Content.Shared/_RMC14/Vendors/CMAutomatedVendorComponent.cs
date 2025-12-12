@@ -81,4 +81,33 @@ public sealed partial class CMAutomatedVendorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool EjectContentsOnDestruction = false;
+
+    /// <summary>
+    ///     Whether this vendor can be manually restocked.
+    ///     Think before setting this as true for some vendors. Example: Infinite Nutriment/Molotov.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool CanManualRestock;
+
+    /// <summary>
+    ///     Specific prototype IDs that should be restocked individually even if they have a storage component.
+    ///     Useful for shotgun ammo boxes and other special cases.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<EntProtoId> IgnoreBulkRestockById = [];
+
+    /// <summary>
+    ///     Tracks partial stacks for stackable items by their StackTypeId.
+    ///     Using StackTypeId as the key ensures split/merged stacks are tracked correctly.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, int> PartialProductStacks = new();
+}
+
+internal readonly struct StackRestockPlan
+{
+    public bool CanRestock { get; init; }
+    public int EntriesToAdd { get; init; }
+    public int ItemsToConsume { get; init; }
+    public int RemainingPartial { get; init; }
 }

@@ -57,7 +57,7 @@ public sealed class RMCAnimationSystem : SharedRMCAnimationSystem
             return;
 
         if (_animation.HasRunningAnimation(ent, FlickId))
-            return;
+            _animation.Stop(ent, FlickId);
 
         var layer = ev.Layer ?? FlickId;
         if (!_sprite.LayerExists(ent, layer))
