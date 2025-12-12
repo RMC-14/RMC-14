@@ -402,7 +402,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         var hive = GetHiveByName(ent.Comp.Hive);
 
         if (hive == null)
+        {
+            Log.Error($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
             return;
+        }
 
         SetHive(ent.Owner, hive);
     }
