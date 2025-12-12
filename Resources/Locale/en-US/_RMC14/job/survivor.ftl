@@ -224,6 +224,35 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
+# Sorokyne SOF insert survs 
+
+rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the CEC to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-soro-sof-base = SPP SOF Survivor
+
+rmc-job-description-soro-sof = You are a stranded SPP SOF marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
+
+rmc-job-name-soro-sof-sapper = SOF Sapper
+rmc-job-prefix-soro-sof-sapper = 121/RECON SAP
+
+rmc-job-name-soro-sof-medic = SOF Medic
+rmc-job-prefix-soro-sof-medic = 121/RECON MED
+
+rmc-job-name-soro-sof-sl = SOF Squad Leader
+rmc-job-prefix-soro-sof-sl = 121/RECON SL
+
+rmc-job-name-soro-sof-spec = SOF Specialist
+rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
+
+rmc-job-name-soro-sof-soldier = SOF Soldier
+rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
+
 # Trijent survs
 
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain

@@ -153,6 +153,86 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOF
+  name: SPP CCC5-L tactical vest
+  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi # TODO RMC14 unique sprite
+  - type: CMArmor # Covers arms
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 10
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCArmorSPPSOF
+  id: RMCArmorSPPSOFFilled
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOFHeavy
+  name: SPP CCC5-L heavy tactical vest
+  description: A heavily reinforced SPP-issued tactical vest designed for space operations forces operating in high-risk environments. The CCC5-L Heavy-Plated Tactical Vest features additional polymer-ceramic composite plating across the chest and torso, providing superior protection against ballistic and explosive threats. Despite its bulk, the vest maintains a balance between protection and mobility, with modular pouches for quick access to essential gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/heavy.rsi # TODO RMC14 unique sprite
+  - type: CMArmor # Covers arms and groin
+    melee: 20
+    bullet: 25
+    bio: 20
+    explosionArmor: 15
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOFPlated
+  name: SPP CCC5-L plated tactical vest
+  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/commando.rsi # TODO RMC14 unique sprite
+  - type: CMArmor # Covers arms
+    melee: 15
+    bullet: 25
+    bio: 20
+    explosionArmor: 15
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
 # SPP coats
 - type: entity
   parent: RMCCoatBureauDeputy

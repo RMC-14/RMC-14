@@ -1,0 +1,51 @@
+- type: job
+  parent: RMCSurvivorSPPSOFBase
+  id: RMCSurvivorSPPSOFSapper
+  name: rmc-job-name-soro-sof-sapper
+  startingGear: RMCGearSPPSOFSapper
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  icon: "RMCJobIconSPPEngineer"
+  spawnMenuRoleName: SPP SOF Sapper (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+    - type: IntelRescueSurvivorObjective # TODO RMC14 assign squad
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-sof-sapper
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSOFBase
+  id: RMCGearSPPSOFSapper
+  equipment:
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+    pocket2: RMCPouchToolsSocFilledSOF
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFSapper
+  name: spp sof sapper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFSapper
+  - type: Sprite
+    state: spp_spawn

@@ -569,6 +569,21 @@
     - id: CMMultitool
     # Something about /item/tool/weldingtool/hugetank - leaving empty
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledSOF
+  suffix: Filled, SOF
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: CMWrench
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: CMWelder
+
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
