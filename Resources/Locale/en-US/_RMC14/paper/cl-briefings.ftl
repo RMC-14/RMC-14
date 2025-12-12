@@ -1,6 +1,6 @@
 cl-briefing-kutjevo =
-                                       [bold]Weston-Yamada Corporation[/bold]
-                                       [bolditalic]"THE FUTURE IS NOW"[/bolditalic]
+                                                                      {"[bold]Weston-Yamada Corporation[/bold]"}
+                                                                                "The future is now."
     {"[color=#25b266][bold]Special Services Division[/bold][/color]"}
     {"[bold]Liaison Colony Briefing[/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -45,3 +45,4 @@ cl-briefing-kutjevo =
     - Failure to send the weekly "All-Clear" signal, resulting in an automated distress dispatch
     - Sabotage by the "Colony Liberation Front"
     - A solar flare from the Dykuma star causing electrical failures
+
