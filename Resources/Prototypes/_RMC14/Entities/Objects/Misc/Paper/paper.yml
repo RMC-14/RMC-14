@@ -249,7 +249,7 @@
   - type: RequisitionsInvoice
 
 - type: entity
-  parent: CMPaperWritten
+  parent: CMPaper
   id: RMCPaperWeYa
   name: weston-yamada official document
   components:
@@ -259,4 +259,9 @@
     contentImagePath: "/Textures/Interface/Paper/paper_content_lined.svg.96dpi.png"
     backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
     contentMargin: 16.0, 16.0, 16.0, 16.0
-    headerMargin: 75.0, 75.0, 75.0, 75.0
+    headerMargin: 0.0, 5.0, 0.0, 0.0
+
+- type: entity
+  parent: RMCPaperWeYa
+  id: RMCPaperWeYaLiaison
+  name: weston-yamada document
