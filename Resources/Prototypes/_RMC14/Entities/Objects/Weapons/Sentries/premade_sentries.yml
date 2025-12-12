@@ -1,15 +1,15 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseItem
   id: RMCSentryPremade
   name: turret
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
   - type: Corrodible
     timeToApply: 4
     structure: true
-  - type: Item
-    size: Normal
   - type: Clickable
   - type: InteractionOutline
   - type: Actions

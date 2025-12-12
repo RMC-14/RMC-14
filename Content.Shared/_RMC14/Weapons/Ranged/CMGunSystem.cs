@@ -39,6 +39,7 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -435,8 +436,8 @@ public sealed class CMGunSystem : EntitySystem
         var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
 
-        if (shooterFactionEvent.Faction != null && 
-            targetFactionEvent.Faction != null && 
+        if (shooterFactionEvent.Faction != null &&
+            targetFactionEvent.Faction != null &&
             shooterFactionEvent.Faction == targetFactionEvent.Faction &&
             HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
         {
@@ -883,3 +884,15 @@ public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent;
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// An event raised before a shot attempt is made.
+/// </summary>
+[ByRefEvent]
+public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, Vector2 Offset, bool Handled = false);
+
+/// <summary>
+/// An event raised right before a muzzle flash event is raised.
+/// </summary>
+[ByRefEvent]
+public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2? Offset = null);

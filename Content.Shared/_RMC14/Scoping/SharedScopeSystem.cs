@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Emplacements;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -141,6 +142,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGunShot(Entity<ScopeComponent> ent, ref GunShotEvent args)
     {
+        if (HasComp<WeaponControllerComponent>(args.User))
+            return;
+
         var dir = Transform(args.User).LocalRotation.GetCardinalDir();
         if (ent.Comp.ScopingDirection != dir)
             Unscope(ent);
@@ -201,7 +205,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
             return false;
         }
 
-        if (!_hands.TryGetActiveItem(user, out var heldItem) || !scope.Comp.Attachment && heldItem != scope.Owner)
+        if ((!_hands.TryGetActiveItem(user, out var heldItem) || !scope.Comp.Attachment && heldItem != scope.Owner) && !scope.Comp.CanUseInsideContainer)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
@@ -215,7 +219,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
             return false;
         }
 
-        if (_container.IsEntityInContainer(user))
+        if (_container.IsEntityInContainer(user) && !scope.Comp.CanUseInsideContainer)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-not-contained", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
@@ -234,7 +238,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         return true;
     }
 
-    protected virtual Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
+    public virtual Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
     {
         if (!CanScopePopup(scope, user))
             return null;
@@ -280,8 +284,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var targetOffset = GetScopeOffset(scope, direction);
         scoping.EyeOffset = targetOffset;
 
-        var msgUser = Loc.GetString("cm-action-popup-scoping-user", ("scope", scope.Owner));
-        _popup.PopupClient(msgUser, user, user);
+        if (scope.Comp.ScopePopup != null)
+        {
+            var msgUser = Loc.GetString(scope.Comp.ScopePopup, ("scope", scope.Owner));
+            _popup.PopupClient(msgUser, user, user);
+        }
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
         _contentEye.SetZoom(user, Vector2.One * zoomLevel.Zoom, true);
@@ -291,7 +298,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
     }
 
-    protected virtual bool Unscope(Entity<ScopeComponent> scope)
+    public virtual bool Unscope(Entity<ScopeComponent> scope)
     {
         if (scope.Comp.User is not { } user)
             return false;
@@ -311,8 +318,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scope.Comp.ScopingDirection = null;
         Dirty(scope);
 
-        var msgUser = Loc.GetString("cm-action-popup-scoping-stopping-user", ("scope", scope.Owner));
-        _popup.PopupClient(msgUser, user, user);
+        if (scope.Comp.UnScopePopup != null)
+        {
+            var msgUser = Loc.GetString(scope.Comp.UnScopePopup, ("scope", scope.Owner));
+            _popup.PopupClient(msgUser, user, user);
+        }
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
         _contentEye.ResetZoom(user);
