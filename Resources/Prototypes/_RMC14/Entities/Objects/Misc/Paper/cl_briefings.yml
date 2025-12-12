@@ -1,0 +1,6 @@
+- type: entity
+  parent: RMCPaperWeYa
+  suffix: Kutjevo Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-kutjevo

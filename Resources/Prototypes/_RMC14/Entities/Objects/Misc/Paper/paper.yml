@@ -253,8 +253,6 @@
   id: RMCPaperWeYa
   name: weston-yamada official document
   components:
-  - type: Paper
-    content: cl-briefing-kutjevo
   - type: PaperVisuals
     headerImagePath: "/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
