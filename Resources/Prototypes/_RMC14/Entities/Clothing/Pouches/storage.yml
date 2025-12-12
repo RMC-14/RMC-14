@@ -578,8 +578,35 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/sling.rsi
+  - type: RMCStorageEjectHand
+    state: Last
   - type: Storage
     maxItemSize: Normal
+    whitelist:
+      components:
+      - Blowtorch
+      - Defibrillator
+      - Flash
+      - RMCMegaphone
+      - Whistle
+      tags:
+      - Binoculars
+      - CMFireExtinguisherPortable
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - FireExtinguisher
+      - Flashlight
+      - Multitool
+      - RMCDetector
+      - RMCPinpointer
+      - Screwdriver
+      - Shovel
+      - Wirecutter
+      - Wrench
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - Shovel
   - type: FixedItemSizeStorage
   - type: PropagateDetectors
 
@@ -596,7 +623,7 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 #3 slots
-    whitelist: 
+    whitelist:
       components:
       - CassetteTape
 
