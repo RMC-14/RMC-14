@@ -9,6 +9,16 @@
     state: entree
 
 - type: entity
+  abstract: true
+  parent: CMMREMainComponentBase
+  id: RMCMREMainComponentWeya
+  description: An MRE entree component. Contains the main course for nutrients.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_colony.rsi
+    state: colonymre_pack
+
+- type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentBonelessPorkRibs
   name: MRE component (boneless pork ribs)
@@ -19,6 +29,12 @@
     - id: CMMREFoodBonelessPorkRibs
 
 - type: entity
+  parent: [RMCMREMainComponentWeya, CMMREComponentBonelessPorkRibs]
+  id: RMCMREComponentBonelessPorkRibsWeya
+  name: MRE component (boneless pork ribs)
+  description: An MRE entree component. Contains the main course for nutrients. This one is boneless pork ribs.
+
+- type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentGrilledChicken
   name: MRE component (grilled chicken)
@@ -27,6 +43,12 @@
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodGrilledChicken
+
+- type: entity
+  parent: [RMCMREMainComponentWeya, CMMREComponentGrilledChicken]
+  id: RMCMREComponentGrilledChickenWeya
+  name: MRE component (grilled chicken)
+  description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken.
 
 - type: entity
   parent: CMMREMainComponentBase
@@ -49,6 +71,12 @@
     - id: CMMREFoodSpaghettiChunks
 
 - type: entity
+  parent: [RMCMREMainComponentWeya, CMMREComponentSpaghettiChunks]
+  id: RMCMREComponentSpaghettiChunksWeya
+  name: MRE component (spaghetti chunks)
+  description: An MRE entree component. Contains the main course for nutrients. This one is spaghetti chunks.
+
+- type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentChickenTender
   name: MRE component (chicken tender)
@@ -57,6 +85,12 @@
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodChickenTender
+
+- type: entity
+  parent: [RMCMREMainComponentWeya, CMMREComponentChickenTender]
+  id: RMCMREComponentChickenTenderWeya
+  name: MRE component (chicken tender)
+  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
 
 # Foods
 - type: entity
