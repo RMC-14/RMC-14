@@ -13,6 +13,8 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using Content.Shared.Clothing;
+using Content.Shared.Inventory;
+using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Item;
 
@@ -28,7 +30,7 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         base.Initialize();
 
         SubscribeLocalEvent<ItemCamouflageComponent, GetInhandVisualsEvent>(OnGetInhandVisuals, after: [typeof(ItemSystem)]);
-        SubscribeLocalEvent<ItemCamouflageComponent, GetEquipmentVisualsEvent>(OnGetClothingVisuals, after:[typeof(ClientClothingSystem)]);
+        SubscribeLocalEvent<ItemCamouflageComponent, GetEquipmentVisualsEvent>(OnGetClothingVisuals, after: [typeof(ClientClothingSystem)]);
     }
 
     // Add colour layer to in-hands of items that have a Camo Colour specified.
@@ -63,6 +65,14 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
     // Add colour layer to clothing of items that have a Camo Colour specified.
     private void OnGetClothingVisuals(EntityUid uid, ItemCamouflageComponent camoComp, GetEquipmentVisualsEvent args)
     {
+        if (!TryComp(args.Equipee, out InventoryComponent? inventory))
+            return;
+
+        if (!TryComp(uid, out ClothingComponent? clothing))
+            return;
+
+        var speciesId = inventory.SpeciesId;
+
         if (TryComp(uid, out AppearanceComponent? appearanceComponent))
         {
             AppearanceSystem.TryGetData(uid, ItemCamouflageVisuals.Camo, out CamouflageType camo, appearanceComponent);
@@ -74,15 +84,27 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
                         var newLayer = new PrototypeLayerData();
                         foreach (var (state, layer) in args.Layers)
                         {
+                            if (layer.RsiPath == null)
+                                continue;
+
+                            var rsi = _resource.GetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / layer.RsiPath).RSI;
+
+                            var baseEquippedState = $"equipped-{args.Slot.ToUpper()}";
+                            var newState = $"{baseEquippedState}-color";
+                            var speciesState = $"{baseEquippedState}-{speciesId}-color";
+
+                            // species specific
+                            if (speciesId != null && rsi.TryGetState(speciesState, out _))
+                                newState = speciesState;
+
                             newLayer.RsiPath = layer.RsiPath;
-                            newLayer.State = $"equipped-{args.Slot.ToUpper()}-color";
-                            newLayer.MapKeys = new() { $"equipped-{args.Slot.ToUpper()}-color" };
+                            newLayer.State = newState;
+                            newLayer.MapKeys = new() { newState };
                             newLayer.Color = camoColor;
                         }
+
                         if (newLayer.State is not null)
-                        {
                             args.Layers.Add((newLayer.State, newLayer));
-                        }
                     }
                 }
             }

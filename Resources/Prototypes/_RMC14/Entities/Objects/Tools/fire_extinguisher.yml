@@ -82,3 +82,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Undisposable
+
+- type: entity
+  parent: RMCExtinguisherSpray
+  id: RMCExtinguisherSpraySpec
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCExtinguisherPower
+    power: 48
