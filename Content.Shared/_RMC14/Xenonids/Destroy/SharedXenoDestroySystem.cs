@@ -20,6 +20,7 @@ using Content.Shared.Jittering;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -84,6 +85,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         SubscribeLocalEvent<XenoDestroyLeapingComponent, ChangeDirectionAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, InteractionAttemptEvent>(OnLeapingCancelInteract);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, PullAttemptEvent>(OnLeapingCancelPull);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, UpdateCanMoveEvent>(OnLeapingCancel);
     }
 
     private void OnXenoDestroyAction(Entity<XenoDestroyComponent> xeno, ref XenoDestroyActionEvent args)
