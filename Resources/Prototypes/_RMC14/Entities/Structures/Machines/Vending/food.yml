@@ -62,6 +62,50 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/food.rsi
     offset: 0, 0.5
 
+# RCM food vendor
+
+- type: entity
+  parent: ColMarTechFood
+  id: RMCNutriCoVendorRCM
+  name: We-Ya Section AutoChef
+  description: A repurposed NutriCo machine refilled with recipes and components for Three Suns Empire cuisine by Weston-Yamada. Equally as inedible as its Nations counterpart, but at least it looks more appealing. Slightly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/food.rsi
+    offset: 0, 0.5
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Prepared Meals
+      entries:
+      - id: RMCMRETSE
+        amount: 15
+      - id: RMCMarinePreparedMealRCMFish
+        amount: 15
+      - id: RMCMarinePreparedMealRCMKatsu
+        amount: 15
+      - id: RMCMarinePreparedMealRCMSausage
+        amount: 15
+      - id: RMCMarinePreparedMealRCMMeat
+        amount: 15
+      - id: RMCMarinePreparedMealRCMTikka
+        amount: 15
+      - id: RMCTrayEmptyRCM
+        amount: 15
+      - id: RMCMarineRCMSnackBar
+        amount: 50
+    - name: Flasks
+      entries:
+      - id: CMCanteen
+        amount: 15
+      - id: CMMetalFlask
+        name: metal flask (empty)
+        amount: 15
+      - id: CMWEYAFlask
+        amount: 10
+      - id: RMCWeYaThermos
+        amount: 1
+
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
