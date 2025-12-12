@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: RMCSurvivorSPPCrashlandBase
   name: rmc-job-name-crashland-base
   description: rmc-job-description-crashland
@@ -12,15 +12,7 @@
   startingGear: RMCGearSPPCrashlandBase
   hasIcon: true
   greeting: rmc-job-greeting-crashland
-  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: SPP Airborne Survivor (Base)
-  useLoadoutOfJob: CMSurvivor
-  basePlaytimeTracker: true
-  medals:
-    Bronze: RMCMedalBronzeService
-    Silver: RMCMedalSilverService
-    Gold: RMCMedalGoldService
-    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
