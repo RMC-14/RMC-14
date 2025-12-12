@@ -403,7 +403,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         if (hive == null)
         {
-            Log.Warning($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
+            Log.Debug($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
             return;
         }
 
