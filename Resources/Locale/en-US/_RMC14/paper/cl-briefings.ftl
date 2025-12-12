@@ -1,4 +1,6 @@
 cl-briefing-kutjevo =
+                                       [bold]Weston-Yamada Corporation[/bold]
+                                       [bolditalic]"THE FUTURE IS NOW"[/bolditalic]
     {"[color=#25b266][bold]Special Services Division[/bold][/color]"}
     {"[bold]Liaison Colony Briefing[/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
