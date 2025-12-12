@@ -695,8 +695,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
-
-                SetBurstSpawn((infectedVictim, victimComp), para.BurstProto);
                 Dirty(infectedVictim, infectable);
             }
         }
@@ -714,7 +712,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             else
             {
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid) || _unrevivable.IsUnrevivable(uid)))
+                if (_mobState.IsDead(uid)
+                    && (HasComp<InfectStopOnDeathComponent>(uid)
+                    || _rotting.IsRotten(uid)
+                    || _unrevivable.IsUnrevivable(uid)
+                    && _unrevivable.DoesKillLarvaOnUnrevivable(uid)))
                 {
                     if (infected.SpawnedLarva != null)
                         TryBurst((uid, infected));

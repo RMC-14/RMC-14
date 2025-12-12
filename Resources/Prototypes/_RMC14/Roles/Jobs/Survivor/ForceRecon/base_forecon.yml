@@ -57,6 +57,7 @@
     - [ RMCM1984BeltFilled ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
 
 - type: entity
   parent: RMCSurvivorPresetForeconNoPrimary
