@@ -12,4 +12,7 @@ public sealed partial class IgniteOnProjectileHitComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Duration = 20;
+
+    [DataField, AutoNetworkedField]
+    public Color BurnColor = Color.FromHex("#EE6515");
 }
