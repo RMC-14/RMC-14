@@ -80,11 +80,9 @@ public sealed class JoinXenoSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            if (hive.BurrowedLarva <= 0)
-                continue;
-
-            options.Add(new DialogOption("Burrowed Larva", new JoinXenoBurrowedLarvaEvent(GetNetEntity(hiveId))));
+            options.Add(new DialogOption("(Join/Leave) Larva Queue", new JoinLarvaQueueEvent()));
         }
+
 
         _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Xenonids");
     }
