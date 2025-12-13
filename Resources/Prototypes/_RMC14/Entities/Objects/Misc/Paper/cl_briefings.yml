@@ -5,3 +5,11 @@
   components:
   - type: Paper
     content: cl-briefing-kutjevo
+
+- type: entity
+  parent: RMCPaperWeYa
+  id: RMCPaperWeYaLiaisonBriefingSolaris
+  suffix: Solaris Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-solaris

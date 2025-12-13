@@ -4,7 +4,7 @@ cl-briefing-kutjevo =
     {"[color=#25b266][bold]Special Services Division[/bold][/color]"}
     {"[bold]Liaison Colony Briefing[/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    {"[italic]    The Weston-Yamada Crisis Management and Prevention Office has indicated that the colony on LV-1413 has experienced a critical communications blackout, and that a mission is being prepared to investigate the disturbance. As such, the Special Services Division has prepared a briefing on the nature of the colony, and known potential threats to it's operation. Classified materials are excluded from this briefing and should be requested separately, and as such, the contents of this document may be shared or withheld at your discretion, unless otherwise specified.[/italic]"}
+    {"[italic]    The ship AI aboard your stationed ship has informed us that a distress has been picked up from the colony on LV-686, and that a mission is being prepared to investigate the disturbance. As such, the special services division has prepared a briefing on the nature of the colony, and known potential threats to its operation. Classified materials are excluded from this briefing and should be requested separately, and as such, the contents of this document may be shared or withheld at your discretion, unless otherwise specified.[/italic]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     {"[bold]Planet:[/bold]"} LV-686
     {"[bold]Facility:[/bold]"} Kutjevo Refinery
