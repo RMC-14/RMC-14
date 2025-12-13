@@ -16,6 +16,8 @@ public static class AnnouncementAnimationFactory
             AnnouncementAnimation.Bounce => new BounceAnimation(),
             AnnouncementAnimation.Fade => new FadeAnimation(),
             AnnouncementAnimation.Pulse => new PulseAnimation(),
+            AnnouncementAnimation.Heartbeat => new HeartbeatAnimation(),
+            AnnouncementAnimation.Warp => new WarpAnimation(),
             _ => new TypewriterAnimation()
         };
     }

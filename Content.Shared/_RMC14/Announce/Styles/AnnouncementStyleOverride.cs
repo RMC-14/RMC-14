@@ -1,10 +1,10 @@
 using System;
 using Robust.Shared.Maths;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Announce;
 
-// Minimal runtime overrides; anything beyond this should be handled via presets/prototype inheritance.
-[Serializable]
+[Serializable, NetSerializable]
 public sealed record AnnouncementStyleOverride
 {
     public AnnouncementAnimation? Animation { get; init; }

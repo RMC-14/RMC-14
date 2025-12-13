@@ -16,7 +16,7 @@ public static class AnnouncementEffectsRegistry
         if (style.Animation == AnnouncementAnimation.Fade)
             yield return new FadeEffect();
 
-        if (style.Animation == AnnouncementAnimation.Pulse)
+        if (style.Animation == AnnouncementAnimation.Pulse || style.Animation == AnnouncementAnimation.Heartbeat)
             yield return new PulseEffect();
     }
 }

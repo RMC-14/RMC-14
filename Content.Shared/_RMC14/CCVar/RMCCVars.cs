@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Announce;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
@@ -425,6 +426,12 @@ public sealed partial class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    /// <summary>
+    /// How announcements should be displayed for this client.
+    /// </summary>
+    public static readonly CVarDef<AnnouncementDisplayPreference> RMCAnnouncementStyle =
+        CVarDef.Create("rmc.announcement_style", AnnouncementDisplayPreference.Stylized, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     public static readonly CVarDef<int> RMCSunsetDuration =
         CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);

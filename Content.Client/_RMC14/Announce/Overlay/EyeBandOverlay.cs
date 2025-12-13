@@ -5,14 +5,11 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Announce;
 
-/// <summary>
-/// Simple overlay that draws a black bar across the eye region of a sprite.
-/// </summary>
 public sealed class EyeBandOverlay : Control
 {
-    public float BandHeightFraction { get; set; } = 0.18f;
-    public float BandOffsetFraction { get; set; } = 0.02f;
-    public float BandAlpha { get; set; } = 0.9f;
+    public float BandHeightFraction { get; set; } = 0.22f;
+    public float BandOffsetFraction { get; set; } = 0.05f;
+    public float BandAlpha { get; set; } = 1f;
     public Color BandColor { get; set; } = Color.Black;
 
     public EyeBandOverlay()

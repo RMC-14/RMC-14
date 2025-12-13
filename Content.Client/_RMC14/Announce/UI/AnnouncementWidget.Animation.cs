@@ -34,6 +34,13 @@ public sealed partial class AnnouncementWidget
         {
             var ctx = CreateAnimationContext();
             var finished = _animation.Update(ctx, deltaTime);
+            if (_animationCompletedAt == null && 
+                (ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Pulse ||
+                 ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Heartbeat ||
+                 ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Warp))
+            {
+                _animationCompletedAt = currentTime;
+            }
             if (finished)
             {
                 ActiveAnnouncement.State = AnnouncementState.Holding;
@@ -41,7 +48,7 @@ public sealed partial class AnnouncementWidget
                 SetAllLabelsText();
             }
         }
-        else if (ActiveAnnouncement.State == AnnouncementState.Holding && _animationCompletedAt.HasValue)
+        if (_animationCompletedAt.HasValue)
         {
             var holdDuration = ActiveAnnouncement.Data.Style.HoldDuration;
             var elapsedHold = (float) (currentTime - _animationCompletedAt.Value).TotalSeconds;

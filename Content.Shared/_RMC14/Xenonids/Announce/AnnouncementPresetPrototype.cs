@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Announce;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Announce;
 
@@ -43,6 +44,12 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public List<string> Aliases { get; private set; } = new();
 
     [DataField]
+    public string? StylizedVariant { get; private set; }
+
+    [DataField]
+    public string? SimplifiedVariant { get; private set; }
+
+    [DataField]
     public string? DecalRsi { get; private set; }
 
     [DataField]
@@ -53,4 +60,19 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
 
     [DataField]
     public bool IncognitoMask { get; private set; }
+
+    [DataField]
+    public bool ShowSprite { get; private set; } = true;
+
+    [DataField]
+    public float DecalScale { get; private set; } = 4f;
+
+    [DataField]
+    public float DecalAlpha { get; private set; } = 1f;
+
+    [DataField]
+    public Vector2 DecalOffset { get; private set; } = Vector2.Zero;
+
+    [DataField]
+    public Vector2 TextOffset { get; private set; } = Vector2.Zero;
 }

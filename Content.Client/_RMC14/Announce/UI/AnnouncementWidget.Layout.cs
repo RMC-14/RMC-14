@@ -148,19 +148,25 @@ public sealed partial class AnnouncementWidget
         var totalLabels = text.Length + _titleOffset;
         _richTextLabels = new RichTextLabel[totalLabels];
 
+        var scaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
         var outerContainer = new Control
         {
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Top,
-            HorizontalExpand = true,
+            HorizontalExpand = false,
             SetWidth = optimalWidth,
             MinWidth = optimalWidth
         };
+        if (ActiveAnnouncement != null)
+        {
+            var textOffset = ActiveAnnouncement.Data.TextOffset * scaleFactor;
+            outerContainer.Margin = new Thickness(textOffset.X, textOffset.Y, 0, 0);
+        }
         var container = new PanelContainer
         {
             HorizontalAlignment = HAlignment.Stretch,
             VerticalAlignment = VAlignment.Stretch,
-            HorizontalExpand = true
+            HorizontalExpand = false
         };
         container.SetWidth = optimalWidth;
         container.MinWidth = optimalWidth;
@@ -170,7 +176,7 @@ public sealed partial class AnnouncementWidget
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Top,
-            HorizontalExpand = true
+            HorizontalExpand = false
         };
         textContainer.MaxWidth = optimalWidth;
         textContainer.MinWidth = optimalWidth;
@@ -337,7 +343,7 @@ public sealed partial class AnnouncementWidget
 
         if (!string.IsNullOrEmpty(announcement.DecalRsi) && !string.IsNullOrEmpty(announcement.DecalState))
         {
-            TryCreateDecalContainer(announcement, out decalControl);
+            TryCreateDecalContainer(announcement, screenSize, out decalControl);
             if (announcement.DecalPlacement == AnnouncementDecalPlacement.ReplaceSprite && decalControl != null)
             {
                 _spriteContainer = decalControl;
@@ -353,7 +359,7 @@ public sealed partial class AnnouncementWidget
             Logger.Info($"[AnnouncementWidget] Sprite skipped: hasSpeaker={announcement.SpeakerEntity.HasValue}, showSprite={announcement.ShowSprite}, speakerLookup={(announcement.SpeakerEntity.HasValue && _entityManager.TryGetEntity(announcement.SpeakerEntity.Value, out _))}");
             if (!string.IsNullOrEmpty(announcement.DecalRsi) && !string.IsNullOrEmpty(announcement.DecalState))
             {
-                TryCreateDecalContainer(announcement, out _spriteContainer);
+                TryCreateDecalContainer(announcement, screenSize, out _spriteContainer);
                 ApplyIncognitoFinal(announcement, screenSize);
             }
             return;
@@ -610,7 +616,7 @@ public sealed partial class AnnouncementWidget
             _spriteContainer = finalContainer;
     }
 
-    private void TryCreateDecalContainer(AnnouncementNetData announcement, out Control? containerOut)
+    private void TryCreateDecalContainer(AnnouncementNetData announcement, Vector2 screenSize, out Control? containerOut)
     {
         containerOut = null;
         try
@@ -624,21 +630,28 @@ public sealed partial class AnnouncementWidget
             }
 
             var texture = state.GetFrame(RsiDirection.South, 0);
-            const float decalTestScale = 4f;
-            var texRect = new TextureRect
+            var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
+            var decalTestScale = Math.Max(0.1f, announcement.DecalScale * screenScaleFactor);
+
+            var animatedRect = new AnimatedTextureRect
             {
-                Texture = texture,
-                Stretch = TextureRect.StretchMode.Scale,
-                SetWidth = texture.Width * decalTestScale,
-                SetHeight = texture.Height * decalTestScale,
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top,
                 HorizontalExpand = true,
                 VerticalExpand = true
             };
+            animatedRect.SetFromSpriteSpecifier(new SpriteSpecifier.Rsi(resPath, announcement.DecalState!));
+            animatedRect.DisplayRect.Stretch = TextureRect.StretchMode.Scale;
+            animatedRect.DisplayRect.TextureScale = new Vector2(decalTestScale, decalTestScale);
 
             var width = texture.Width * decalTestScale;
             var height = texture.Height * decalTestScale;
+            animatedRect.SetWidth = width;
+            animatedRect.SetHeight = height;
+
+            var offset = announcement.DecalOffset * screenScaleFactor;
+            animatedRect.Margin = new Thickness(offset.X, offset.Y, 0, 0);
+            animatedRect.DisplayRect.Modulate = animatedRect.DisplayRect.Modulate.WithAlpha(MathHelper.Clamp(announcement.DecalAlpha, 0f, 1f));
 
             var clipContainer = new Control
             {
@@ -648,7 +661,7 @@ public sealed partial class AnnouncementWidget
                 SetWidth = width,
                 SetHeight = height
             };
-            clipContainer.AddChild(texRect);
+            clipContainer.AddChild(animatedRect);
 
             containerOut = clipContainer;
             Logger.Info($"[AnnouncementWidget] Decal container created for {announcement.DecalRsi}:{announcement.DecalState} size {width}x{height} (scaled x{decalTestScale})");
@@ -809,7 +822,7 @@ public sealed partial class AnnouncementWidget
         var maxAllowedWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
         var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, maxAllowedWidth, screenSize);
 
-        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor);
+        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor, style.Font);
     }
 
     private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)

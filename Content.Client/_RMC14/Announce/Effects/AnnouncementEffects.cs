@@ -154,7 +154,7 @@ public static class AnnouncementEffects
 
     public static void UpdatePulseAnimation(ActiveAnnouncement announcement, float deltaTime)
     {
-        var pulseSpeed = 2.0f;
+        var pulseSpeed = 4.0f;
         announcement.PulseTimer += deltaTime * pulseSpeed;
 
         var pulseValue = (MathF.Sin(announcement.PulseTimer) + 1f) * 0.5f;
