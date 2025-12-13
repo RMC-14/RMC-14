@@ -18,6 +18,7 @@ stamp-component-stamped-name-cm-qm = Logistics Officer
 stamp-component-stamped-name-cm-ce = Chief Engineer
 stamp-component-stamped-name-cm-cl = Corporate Liaison
 stamp-component-stamped-name-cm-mw = Military Warden
+stamp-component-stamped-name-cm-pvi = Provost Inspector
 
 stamp-component-stamped-name-cm-approve = APPROVED
 stamp-component-stamped-name-cm-deny = DENIED
