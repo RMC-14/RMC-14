@@ -129,7 +129,7 @@
 
 - type: entity
   id: RMCPlanetShiva
-  name: LV-631 Shivas Snowball
+  name: LV-343 Shivas Snowball
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/shiva.yml
