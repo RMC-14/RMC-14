@@ -15,9 +15,9 @@ public sealed class RMCMagneticSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {

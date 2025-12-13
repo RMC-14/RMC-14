@@ -65,7 +65,8 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
             {
                 ents.Add(item);
 
-                if (_entity.HasComponent<PropagateDetectorsComponent>(item) && _entity.TryGetComponent<StorageComponent>(item, out var itemStorage))
+                if (_entity.HasComponent<PropagateDetectorsComponent>(item) &&
+                    _entity.TryGetComponent<StorageComponent>(item, out var itemStorage))
                     foreach (var deepItem in itemStorage.StoredItems.Keys)
                         ents.Add(deepItem);
             }
