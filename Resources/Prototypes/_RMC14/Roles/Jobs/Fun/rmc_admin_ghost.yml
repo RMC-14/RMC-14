@@ -8,6 +8,8 @@
     prototypes: [ RMCMobAghostGear ]
   - type: IntrinsicUI
     uis: { }
+  - type: Inventory
+    templateId: human
 
 - type: startingGear
   parent: MobAghostGear
