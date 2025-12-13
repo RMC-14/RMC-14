@@ -1,0 +1,11 @@
+rmc-vehicle-wheel-repaired = Wheel repaired.
+rmc-hardpoint-remove-verb = Remove {$slot}
+rmc-hardpoint-repaired = Hardpoint repaired.
+rmc-hardpoint-intact = Hardpoint is already intact.
+rmc-hardpoint-integrity-examine = Integrity: {$current}/{$max} ({$percent}%)
+rmc-hardpoint-ui-title = Hardpoints
+rmc-hardpoint-ui-empty-slot = Empty
+rmc-hardpoint-ui-integrity = {$current}/{$max} ({$percent}%)
+rmc-hardpoint-ui-no-integrity = No integrity data
+rmc-hardpoint-ui-remove = Remove
+rmc-hardpoint-ui-removing = Removing...

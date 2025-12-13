@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.Graphics;
@@ -26,6 +27,8 @@ public sealed class GridVehicleMoverOverlay : Overlay
     private readonly EntityQuery<MapGridComponent> _gridQ;
     private readonly EntityQuery<FixturesComponent> _fixturesQ;
     private readonly EntityQuery<PhysicsComponent> _physicsQ;
+    private readonly EntityQuery<VehicleEnterComponent> _enterQ;
+    private readonly EntityQuery<VehicleExitComponent> _exitQ;
 
     private readonly Color[] _colors =
     {
@@ -40,6 +43,8 @@ public sealed class GridVehicleMoverOverlay : Overlay
         _gridQ = ents.GetEntityQuery<MapGridComponent>();
         _fixturesQ = ents.GetEntityQuery<FixturesComponent>();
         _physicsQ = ents.GetEntityQuery<PhysicsComponent>();
+        _enterQ = ents.GetEntityQuery<VehicleEnterComponent>();
+        _exitQ = ents.GetEntityQuery<VehicleExitComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -57,6 +62,8 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 DrawFixtures(handle, uid);
                 DrawPhysics(handle, uid);
             }
+
+            DrawEntryAndExitPoints(handle, args.MapId);
 
             foreach (var entry in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles)
             {
@@ -131,6 +138,62 @@ public sealed class GridVehicleMoverOverlay : Overlay
         h.DrawRect(aabb, Color.Magenta, false);
         var pos = _transform.GetWorldPosition(uid);
         h.DrawCircle(pos, 0.12f, Color.Magenta);
+    }
+
+    private void DrawEntryAndExitPoints(DrawingHandleWorld h, MapId mapId)
+    {
+        // Find a grid on this map so we can project interior coordinates locally.
+        EntityUid? interiorGrid = null;
+        var gridEnum = _ents.EntityQueryEnumerator<MapGridComponent, TransformComponent>();
+        while (gridEnum.MoveNext(out var gridUid, out _, out var gridXform))
+        {
+            if (gridXform.MapID != mapId)
+                continue;
+            interiorGrid = gridUid;
+            break;
+        }
+
+        var enterEnum = _ents.EntityQueryEnumerator<VehicleEnterComponent, TransformComponent>();
+        while (enterEnum.MoveNext(out var uid, out var enter, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            var basePos = _transform.GetWorldPosition(xform);
+            var rot = xform.LocalRotation;
+
+            for (var i = 0; i < enter.EntryPoints.Count; i++)
+            {
+                var point = enter.EntryPoints[i];
+                var color = _colors[i % _colors.Length];
+                var world = basePos + rot.RotateVec(point.Offset);
+                var radius = Math.Max(0.05f, point.Radius);
+
+                h.DrawCircle(world, radius, color.WithAlpha(0.22f), true);
+                h.DrawCircle(world, radius, color.WithAlpha(0.85f), false);
+
+                // Draw interior target on the interior map if we can.
+                if (interiorGrid is { } grid && point.InteriorCoords is { } interior)
+                {
+                    var target = _transform.ToMapCoordinates(new EntityCoordinates(grid, interior)).Position;
+                    h.DrawCircle(target, 0.15f, color.WithAlpha(0.22f), true);
+                    h.DrawCircle(target, 0.15f, color.WithAlpha(0.85f), false);
+                }
+
+            }
+        }
+
+        var exitEnum = _ents.EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
+        while (exitEnum.MoveNext(out _, out var exit, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            var pos = _transform.GetWorldPosition(xform);
+            var color = _colors[Math.Abs(exit.EntryIndex) % _colors.Length];
+            h.DrawCircle(pos, 0.12f, color.WithAlpha(0.2f), true);
+            h.DrawCircle(pos, 0.12f, color.WithAlpha(0.9f), false);
+        }
     }
 
     private void DrawCollisions(DrawingHandleWorld h, MapId mapId)

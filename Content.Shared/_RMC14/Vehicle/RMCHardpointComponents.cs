@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -25,11 +27,26 @@ public sealed partial class RMCHardpointSlotsComponent : Component
     [DataField(required: true)]
     public List<RMCHardpointSlot> Slots = new();
 
+    /// <summary>
+    /// Damage multiplier applied to damage forwarded to hardpoints.
+    /// </summary>
+    [DataField]
+    public float HardpointDamageMultiplier = 1f;
+
+    /// <summary>
+    /// Fraction of incoming damage that hits the frame while at least one hardpoint is still intact.
+    /// </summary>
+    [DataField]
+    public float FrameDamageFractionWhileIntact = 0.1f;
+
     [NonSerialized]
     public HashSet<string> PendingInserts = new();
 
     [NonSerialized]
     public HashSet<string> CompletingInserts = new();
+
+    [NonSerialized]
+    public HashSet<string> PendingRemovals = new();
 }
 
 [Serializable, NetSerializable, DataDefinition]
@@ -47,8 +64,55 @@ public sealed partial class RMCHardpointSlot
     [DataField]
     public float InsertDelay { get; set; } = 1f;
 
+    /// <summary>
+    /// Delay for removing a hardpoint from this slot. If not set or non-positive, the insert delay is used.
+    /// </summary>
+    [DataField]
+    public float RemoveDelay { get; set; } = -1f;
+
     [DataField]
     public EntityWhitelist? Whitelist { get; set; }
+}
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class RMCHardpointIntegrityComponent : Component
+{
+    [DataField]
+    public float MaxIntegrity = 100f;
+
+    [DataField, AutoNetworkedField]
+    public float Integrity;
+
+    [DataField]
+    public FixedPoint2 RepairFuelCost = FixedPoint2.New(5);
+
+    [DataField]
+    public SoundSpecifier? RepairSound;
+
+    /// <summary>
+    /// If true and this integrity reaches 0, vehicle entry ignores entry point checks.
+    /// Useful for a destroyed frame letting users climb in anywhere.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BypassEntryOnZero;
+
+    /// <summary>
+    /// Seconds of welding time per missing integrity point.
+    /// </summary>
+    [DataField]
+    public float RepairTimePerIntegrity = 0.01f;
+
+    /// <summary>
+    /// Minimum and maximum weld time when repairing.
+    /// </summary>
+    [DataField]
+    public float RepairTimeMin = 0.25f;
+
+    [DataField]
+    public float RepairTimeMax = 3f;
+
+    [NonSerialized]
+    public bool Repairing;
 }
 
 [Serializable, NetSerializable]
@@ -75,6 +139,36 @@ public sealed partial class RMCHardpointInsertDoAfterEvent : DoAfterEvent
     {
         return other is RMCHardpointInsertDoAfterEvent hardpoint
                && hardpoint.SlotId == SlotId
+               && other.User == User
+               && other.Target == Target
+               && other.Used == Used;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class RMCHardpointRemoveDoAfterEvent : DoAfterEvent
+{
+    [DataField(required: true)]
+    public string SlotId = string.Empty;
+
+    public RMCHardpointRemoveDoAfterEvent()
+    {
+    }
+
+    public RMCHardpointRemoveDoAfterEvent(string slotId)
+    {
+        SlotId = slotId;
+    }
+
+    public override DoAfterEvent Clone()
+    {
+        return new RMCHardpointRemoveDoAfterEvent(SlotId);
+    }
+
+    public override bool IsDuplicate(DoAfterEvent other)
+    {
+        return other is RMCHardpointRemoveDoAfterEvent remove
+               && remove.SlotId == SlotId
                && other.User == User
                && other.Target == Target
                && other.Used == Used;

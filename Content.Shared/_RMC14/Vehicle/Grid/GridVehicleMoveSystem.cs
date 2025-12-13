@@ -14,6 +14,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
@@ -44,6 +45,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
@@ -140,6 +143,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         Vector2i inputDir,
         float frameTime)
     {
+        // Ensure smash slowdowns expire even if the vehicle is idle.
+        GetSmashSlowdownMultiplier(mover);
+
         if (mover.IsCommittedToMove)
         {
             ContinueCommittedMove(uid, mover, grid, gridComp, inputDir, frameTime);
@@ -190,6 +196,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         var maxSpeed = mover.MaxSpeed;
         var maxReverseSpeed = mover.MaxReverseSpeed;
+
+        var smashMultiplier = GetSmashSlowdownMultiplier(mover);
+        maxSpeed *= smashMultiplier;
+        maxReverseSpeed *= smashMultiplier;
 
         if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
         {
@@ -314,13 +324,13 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         var targetCenter = new Vector2(targetTile.X + 0.5f, targetTile.Y + 0.5f);
         var desiredRot = new Vector2(facing.X, facing.Y).ToWorldAngle();
 
-        if (!CanOccupyTransform(uid, grid, targetCenter, desiredRot, Clearance))
+        if (!CanOccupyTransform(uid, mover, grid, targetCenter, desiredRot, Clearance))
         {
             // Try to at least rotate in place if there's room on the current tile.
             if (!reversing)
             {
                 var currentCenter = new Vector2(mover.CurrentTile.X + 0.5f, mover.CurrentTile.Y + 0.5f);
-                if (CanOccupyTransform(uid, grid, currentCenter, desiredRot, Clearance))
+                if (CanOccupyTransform(uid, mover, grid, currentCenter, desiredRot, Clearance))
                 {
                     mover.CurrentDirection = facing;
                     transform.SetLocalRotation(uid, desiredRot);
@@ -382,6 +392,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
     private bool CanOccupyTransform(
         EntityUid uid,
+        GridVehicleMoverComponent mover,
         EntityUid grid,
         Vector2 gridPos,
         Angle? overrideRotation,
@@ -389,6 +400,10 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     {
         if (!physicsQ.TryComp(uid, out var body) || !fixtureQ.TryComp(uid, out var fixtures))
             return true;
+
+        EntityUid? operatorUid = null;
+        if (TryComp<VehicleComponent>(uid, out var vehicleComp))
+            operatorUid = vehicleComp.Operator;
 
         if (!body.CanCollide)
             return true;
@@ -404,6 +419,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         var rotation = overrideRotation ?? transform.GetWorldRotation(uid);
         var tx = new Transform(world.Position, rotation);
+
+        var wheelDamage = _net.IsClient ? 0f : GetWheelCollisionDamage(uid, mover);
 
         if (!TryGetFixtureAabb(fixtures, tx, out var aabb))
             return true;
@@ -453,10 +470,30 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (isLooseDynamic)
                 continue;
 
-            if (isBarricade && hasDoor && !_net.IsClient)
+            if (isXeno)
             {
-                _door.TryOpen(other, door);
-                _door.OnPartialOpen(other, door);
+                var blocksXeno = ShouldBlockXeno(mover, other);
+
+                if (blocksXeno)
+                {
+                    PlayCollisionSound(uid, ref playedCollisionSound);
+                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    return false;
+                }
+
+                PlayCollisionSound(uid, ref playedCollisionSound);
+                if (!_net.IsClient)
+                    PushMobOutOfVehicle(other, aabb, otherAabb);
+
+                continue;
+            }
+
+            if (hasDoor && !_net.IsClient)
+            {
+                _door.TryOpen(other, door, operatorUid);
+                if (isBarricade)
+                    _door.OnPartialOpen(other, door);
             }
 
             if (!_net.IsClient && isMob && mob != null)
@@ -482,11 +519,48 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 continue;
 
             PlayCollisionSound(uid, ref playedCollisionSound);
+            ApplyWheelCollisionDamage(uid, mover, wheelDamage);
             DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
             return false;
         }
 
         return true;
+    }
+
+    private void ApplyWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover, float damage)
+    {
+        if (_net.IsClient || damage <= 0f)
+            return;
+
+        _wheels.DamageWheels(vehicle, damage);
+    }
+
+    private float GetWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover)
+    {
+        if (!TryComp(vehicle, out RMCVehicleWheelSlotsComponent? wheels))
+            return 0f;
+
+        var speedMag = MathF.Abs(mover.CurrentSpeed);
+        if (speedMag <= 0f)
+            return 0f;
+
+        var damage = speedMag * wheels.CollisionDamagePerSpeed;
+
+        if (wheels.MinCollisionDamage > 0f)
+            damage = MathF.Max(wheels.MinCollisionDamage, damage);
+
+        return damage;
+    }
+
+    private bool ShouldBlockXeno(GridVehicleMoverComponent mover, EntityUid xeno)
+    {
+        if (mover.XenoBlockMinimumSize is not { } minSize)
+            return true;
+
+        if (!_size.TryGetSize(xeno, out var size))
+            return true;
+
+        return size >= minSize;
     }
 
     private bool TryGetFixtureAabb(FixturesComponent fixtures, Transform transformData, out Box2 aabb)
@@ -546,16 +620,53 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
     private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
     {
-        if (!HasComp<RMCVehicleSmashableComponent>(target))
+        if (!TryComp(target, out RMCVehicleSmashableComponent? smashable))
             return false;
 
         PlayCollisionSound(vehicle, ref playedCollisionSound);
 
-        if (TerminatingOrDeleted(target))
-            return true;
+        if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
+            ApplySmashSlowdown(vehicle, mover, smashable);
 
-        Del(target);
+        if (!_net.IsClient)
+        {
+            if (smashable.SmashSound != null)
+                _audio.PlayPvs(smashable.SmashSound, vehicle);
+
+            if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
+                Del(target);
+        }
+
         return true;
+    }
+
+    private float GetSmashSlowdownMultiplier(GridVehicleMoverComponent mover)
+    {
+        if (mover.SmashSlowdownMultiplier >= 1f && mover.SmashSlowdownUntil == TimeSpan.Zero)
+            return 1f;
+
+        var now = _timing.CurTime;
+        if (mover.SmashSlowdownUntil != TimeSpan.Zero && now >= mover.SmashSlowdownUntil)
+        {
+            mover.SmashSlowdownMultiplier = 1f;
+            mover.SmashSlowdownUntil = TimeSpan.Zero;
+            return 1f;
+        }
+
+        return Math.Clamp(mover.SmashSlowdownMultiplier, 0f, 1f);
+    }
+
+    private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, RMCVehicleSmashableComponent smashable)
+    {
+        if (smashable.SlowdownDuration <= 0f || smashable.SlowdownMultiplier >= 1f)
+            return;
+
+        var now = _timing.CurTime;
+        mover.SmashSlowdownMultiplier = MathF.Min(mover.SmashSlowdownMultiplier, smashable.SlowdownMultiplier);
+        var until = now + TimeSpan.FromSeconds(smashable.SlowdownDuration);
+        if (until > mover.SmashSlowdownUntil)
+            mover.SmashSlowdownUntil = until;
+        mover.CurrentSpeed *= smashable.SlowdownMultiplier;
     }
 
     private void PlayCollisionSound(EntityUid uid, ref bool played)

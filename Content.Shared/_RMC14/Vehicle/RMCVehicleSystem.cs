@@ -1,13 +1,16 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
+using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Localization;
@@ -23,21 +26,26 @@ public sealed class RMCVehicleSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
 
     private readonly Dictionary<EntityUid, InteriorData> _vehicleInteriors = new();
     private readonly Dictionary<MapId, EntityUid> _mapToVehicle = new();
+    private readonly Dictionary<EntityUid, HashSet<int>> _entryLocks = new();
+    private readonly HashSet<EntityUid> _exitLocks = new();
 
     private sealed class InteriorData
     {
         public EntityUid Map = EntityUid.Invalid;
         public MapId MapId = MapId.Nullspace;
         public EntityCoordinates Entry;
-        public EntityUid? EntryEntity;
+        public EntityUid EntryParent = EntityUid.Invalid;
+        public EntityUid Grid = EntityUid.Invalid;
     }
 
     public override void Initialize()
@@ -45,6 +53,8 @@ public sealed class RMCVehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleEnterComponent, ActivateInWorldEvent>(OnVehicleEnterActivate);
         SubscribeLocalEvent<VehicleEnterComponent, ComponentShutdown>(OnVehicleEnterShutdown);
         SubscribeLocalEvent<VehicleExitComponent, ActivateInWorldEvent>(OnVehicleExitActivate);
+        SubscribeLocalEvent<VehicleEnterComponent, VehicleEnterDoAfterEvent>(OnVehicleEnterDoAfter);
+        SubscribeLocalEvent<VehicleExitComponent, VehicleExitDoAfterEvent>(OnVehicleExitDoAfter);
 
         SubscribeLocalEvent<VehicleDriverSeatComponent, StrapAttemptEvent>(OnDriverSeatStrapAttempt);
         SubscribeLocalEvent<VehicleDriverSeatComponent, StrappedEvent>(OnDriverSeatStrapped);
@@ -62,10 +72,43 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        args.Handled = TryEnter(ent, args.User);
+        if (!TryFindEntry(ent, args.User, out var entryIndex))
+        {
+            _popup.PopupClient("You need to use a doorway to enter.", args.User, args.User);
+            return;
+        }
+
+        if (!_entryLocks.TryGetValue(ent.Owner, out var locks))
+        {
+            locks = new HashSet<int>();
+            _entryLocks[ent.Owner] = locks;
+        }
+
+        if (locks.Contains(entryIndex))
+        {
+            _popup.PopupClient("Someone is already entering there.", args.User, args.User);
+            return;
+        }
+
+        locks.Add(entryIndex);
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.EnterDoAfter, new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = false,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            locks.Remove(entryIndex);
+            return;
+        }
+
+        args.Handled = true;
     }
 
-    private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user)
+    private bool TryEnter(Entity<VehicleEnterComponent> ent, EntityUid user, int entryIndex = -1)
     {
         if (!_vehicleInteriors.TryGetValue(ent.Owner, out var interior))
         {
@@ -73,7 +116,32 @@ public sealed class RMCVehicleSystem : EntitySystem
                 return false;
         }
 
-        _transform.SetCoordinates(user, interior.Entry);
+        Logger.Info($"[VehicleEnter] {ToPrettyString(user)} entering {ToPrettyString(ent.Owner)} index={entryIndex}");
+
+        var coords = interior.Entry;
+        MapCoordinates targetMapCoords;
+        if (entryIndex >= 0 && entryIndex < ent.Comp.EntryPoints.Count)
+        {
+            var entryPoint = ent.Comp.EntryPoints[entryIndex];
+            if (entryPoint.InteriorCoords is { } interiorCoord)
+            {
+                // interiorCoord is already a Vector2, no parsing needed
+                var parent = interior.Grid.IsValid() ? interior.Grid : interior.EntryParent;
+                var entityCoords = new EntityCoordinates(parent, interiorCoord);
+                targetMapCoords = _transform.ToMapCoordinates(entityCoords);
+                Logger.Info($"[VehicleEnter] Using interiorCoords={interiorCoord} parent={parent} map={interior.MapId} world={targetMapCoords.Position}");
+                _rmcTeleporter.HandlePulling(user, targetMapCoords);
+                return true;
+            }
+            else
+            {
+                Logger.Info($"[VehicleEnter] No interiorCoords set for index={entryIndex}, using default Entry {interior.Entry}");
+            }
+        }
+
+        targetMapCoords = _transform.ToMapCoordinates(coords);
+        _rmcTeleporter.HandlePulling(user, targetMapCoords);
+        Logger.Info($"[VehicleEnter] Teleported via fallback coords={coords} world={targetMapCoords.Position}");
         return true;
     }
 
@@ -86,9 +154,14 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        if (!_mapLoader.TryLoadMap(ent.Comp.InteriorPath, out var loadedMap, out _))
+        var deserializeOptions = new DeserializationOptions
         {
-            Log.Error($"Failed to load interior for {ToPrettyString(ent.Owner)} at {ent.Comp.InteriorPath}");
+            InitializeMaps = true,
+        };
+
+        if (!_mapLoader.TryLoadMap(ent.Comp.InteriorPath, out var loadedMap, out _, deserializeOptions))
+        {
+            Log.Error($"[VehicleEnter] Failed to load interior for {ToPrettyString(ent.Owner)} at {ent.Comp.InteriorPath}");
             return false;
         }
 
@@ -97,17 +170,36 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         var mapId = map.Comp.MapId;
 
-        EntityUid? entryEnt = null;
-        EntityCoordinates entryCoords = new(map.Owner, Vector2.Zero);
+        Logger.Info($"[VehicleEnter] Loaded interior map {mapId} for {ToPrettyString(ent.Owner)}");
 
+        // Default parent to the first interior grid, otherwise fall back to the map.
+        EntityUid entryParent = map.Owner;
+        EntityUid interiorGrid = EntityUid.Invalid;
+        var gridEnum = EntityQueryEnumerator<MapGridComponent, TransformComponent>();
+        while (gridEnum.MoveNext(out var gridUid, out _, out var gridXform))
+        {
+            if (gridXform.MapID != mapId)
+                continue;
+
+            entryParent = gridUid;
+            interiorGrid = gridUid;
+            break;
+        }
+
+        Logger.Info($"[VehicleEnter] interior grid parent={entryParent} grid={interiorGrid}");
+
+        var entryCoords = new EntityCoordinates(entryParent, Vector2.Zero);
+
+        // Fallback: if any VehicleExit exists, use its coordinates as the default entry.
         var exitQuery = EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
-        while (exitQuery.MoveNext(out var exitUid, out _, out var xform))
+        while (exitQuery.MoveNext(out _, out _, out var xform))
         {
             if (xform.MapID != mapId)
                 continue;
 
-            entryEnt = exitUid;
             entryCoords = xform.Coordinates;
+            entryParent = xform.ParentUid.IsValid() ? xform.ParentUid : entryParent;
+            Logger.Info($"[VehicleEnter] found fallback VehicleExit at {entryCoords} parent={entryParent}");
             break;
         }
 
@@ -116,8 +208,11 @@ public sealed class RMCVehicleSystem : EntitySystem
             Map = map.Owner,
             MapId = mapId,
             Entry = entryCoords,
-            EntryEntity = entryEnt,
+            EntryParent = entryParent,
+            Grid = interiorGrid,
         };
+
+        Logger.Info($"[VehicleEnter] interior setup complete entry={entryCoords} parent={entryParent} grid={interiorGrid}");
 
         _vehicleInteriors[ent.Owner] = interior;
         _mapToVehicle[mapId] = ent.Owner;
@@ -134,6 +229,8 @@ public sealed class RMCVehicleSystem : EntitySystem
     {
         if (!_vehicleInteriors.Remove(vehicle, out var interior))
             return;
+
+        _entryLocks.Remove(vehicle);
 
         _mapToVehicle.Remove(interior.MapId);
 
@@ -158,6 +255,12 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (_exitLocks.Contains(ent.Owner))
+        {
+            _popup.PopupClient("Someone is already using this exit.", args.User, args.User);
+            return;
+        }
+
         if (!TryComp(ent, out TransformComponent? exitXform) || exitXform.MapID == MapId.Nullspace)
             return;
 
@@ -170,21 +273,124 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (!TryComp(vehicle, out VehicleEnterComponent? enter))
             return;
 
+        _exitLocks.Add(ent.Owner);
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, enter.ExitDoAfter, new VehicleExitDoAfterEvent(), ent.Owner)
+        {
+            BreakOnMove = true,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            _exitLocks.Remove(ent.Owner);
+            return;
+        }
+
+        args.Handled = true;
+    }
+
+    private bool TryFindEntry(Entity<VehicleEnterComponent> ent, EntityUid user, out int entryIndex)
+    {
+        entryIndex = -1;
+
+        if (ent.Comp.EntryPoints.Count == 0)
+            return true;
+
+        if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity) && frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f)
+            return true;
+
+        var vehicleXform = Transform(ent.Owner);
+        var userXform = Transform(user);
+
+        if (vehicleXform.MapID != userXform.MapID || vehicleXform.MapID == MapId.Nullspace)
+            return false;
+
+        var vehiclePos = _transform.GetWorldPosition(vehicleXform);
+        var userPos = _transform.GetWorldPosition(userXform);
+        var delta = userPos - vehiclePos;
+        var localDelta = (-vehicleXform.LocalRotation).RotateVec(delta);
+
+        for (var i = 0; i < ent.Comp.EntryPoints.Count; i++)
+        {
+            var entry = ent.Comp.EntryPoints[i];
+            if ((localDelta - entry.Offset).Length() <= entry.Radius)
+            {
+                entryIndex = i;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void OnVehicleEnterDoAfter(Entity<VehicleEnterComponent> ent, ref VehicleEnterDoAfterEvent args)
+    {
+        if (_entryLocks.TryGetValue(ent.Owner, out var locks))
+            locks.Remove(args.EntryIndex);
+
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = TryEnter(ent, args.User, args.EntryIndex);
+    }
+
+    private bool TryExit(Entity<VehicleExitComponent> ent, EntityUid user)
+    {
+        if (!TryComp(ent, out TransformComponent? exitXform) || exitXform.MapID == MapId.Nullspace)
+            return false;
+
+        if (!_mapToVehicle.TryGetValue(exitXform.MapID, out var vehicle) || Deleted(vehicle))
+        {
+            _mapToVehicle.Remove(exitXform.MapID);
+            return false;
+        }
+
+        if (!TryComp(vehicle, out VehicleEnterComponent? enter))
+            return false;
+
         var vehicleXform = Transform(vehicle);
 
         EntityUid? parent = vehicleXform.ParentUid;
         if (parent == null || !parent.Value.IsValid())
             parent = vehicleXform.MapUid;
         if (parent == null || !parent.Value.IsValid())
-            return;
+            return false;
 
-        var offset = enter.ExitOffset;
+        Vector2 offset;
+
+        // Check if this exit is linked to a specific entry point
+        var entryIndex = ent.Comp.EntryIndex;
+        if (entryIndex >= 0 && entryIndex < enter.EntryPoints.Count)
+        {
+            // Use the offset from the corresponding entry point
+            offset = enter.EntryPoints[entryIndex].Offset;
+            Logger.Info($"[VehicleExit] Using entry point {entryIndex} offset={offset}");
+        }
+        else
+        {
+            // Fall back to the default exit offset
+            offset = enter.ExitOffset;
+            Logger.Info($"[VehicleExit] Using default ExitOffset={offset}");
+        }
+
         var rotated = vehicleXform.LocalRotation.RotateVec(offset);
         var position = vehicleXform.LocalPosition + rotated;
 
         var exitCoords = new EntityCoordinates(parent.Value, position);
-        _transform.SetCoordinates(args.User, exitCoords);
-        args.Handled = true;
+        var exitMapCoords = _transform.ToMapCoordinates(exitCoords);
+        _rmcTeleporter.HandlePulling(user, exitMapCoords);
+        Logger.Info($"[VehicleExit] Teleported to {exitCoords}");
+        return true;
+    }
+
+    private void OnVehicleExitDoAfter(Entity<VehicleExitComponent> ent, ref VehicleExitDoAfterEvent args)
+    {
+        _exitLocks.Remove(ent.Owner);
+
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = TryExit(ent, args.User);
     }
 
     private void OnDriverSeatStrapAttempt(Entity<VehicleDriverSeatComponent> ent, ref StrapAttemptEvent args)

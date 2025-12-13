@@ -34,6 +34,12 @@ public sealed partial class RMCVehicleWheelSlotsComponent : Component
     {
         Components = new[] { WheelComponentId },
     };
+
+    [DataField]
+    public float CollisionDamagePerSpeed = 5f;
+
+    [DataField]
+    public float MinCollisionDamage;
 }
 
 [Serializable, NetSerializable]

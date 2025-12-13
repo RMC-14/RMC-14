@@ -12,3 +12,4 @@
   - type: RMCHardpointItem
     hardpointType: Wheel
   - type: RMCVehicleWheelItem
+  - type: RMCHardpointIntegrity

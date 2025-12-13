@@ -1,10 +1,17 @@
 using System;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Popups;
+using Content.Shared.Tools.Components;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Repairable;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared.Interaction;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Localization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -13,6 +20,11 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCRepairableSystem _repairable = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly RMCHardpointSystem _hardpoints = default!;
 
     public override void Initialize()
     {
@@ -94,10 +106,6 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
             var slot = new ItemSlot
             {
                 Whitelist = component.WheelWhitelist,
-                InsertOnInteract = true,
-                EjectOnInteract = true,
-                EjectOnUse = false,
-                Swap = true,
             };
 
             _itemSlots.AddItemSlot(uid, slotId, slot, itemSlots);
@@ -121,6 +129,9 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
         {
             if (!_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) || !slot.HasItem)
                 return false;
+
+            if (slot.Item is not { } wheel || !IsWheelFunctional(wheel))
+                return false;
         }
 
         return true;
@@ -135,7 +146,10 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
 
         foreach (var slotId in component.Slots)
         {
-            if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) && slot.HasItem)
+            if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) &&
+                slot.HasItem &&
+                slot.Item is { } wheel &&
+                IsWheelFunctional(wheel))
                 count++;
         }
 
@@ -152,6 +166,50 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
 
         var count = GetWheelCount(uid, component);
         _appearance.SetData(uid, RMCVehicleWheelVisuals.WheelCount, count, appearance);
+    }
+
+    private bool IsWheelFunctional(EntityUid wheel, RMCHardpointIntegrityComponent? integrity = null)
+    {
+        if (!Resolve(wheel, ref integrity, logMissing: false))
+            return true;
+
+        return integrity.Integrity > 0f;
+    }
+
+    public void DamageWheels(EntityUid vehicle, float amount)
+    {
+        if (amount <= 0f || !TryComp(vehicle, out RMCVehicleWheelSlotsComponent? wheels))
+            return;
+
+        if (!TryComp(vehicle, out ItemSlotsComponent? itemSlots))
+            return;
+
+        var changed = false;
+
+        foreach (var slotId in wheels.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(vehicle, slotId, out var slot, itemSlots) ||
+                slot.Item is not { } wheel)
+                continue;
+
+            if (_hardpoints.DamageHardpoint(vehicle, wheel, amount))
+                changed = true;
+        }
+
+        if (!changed)
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
+    }
+
+    public void OnWheelDamaged(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out RMCVehicleWheelSlotsComponent? wheels))
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
     }
 
     private void RefreshCanRun(EntityUid uid)

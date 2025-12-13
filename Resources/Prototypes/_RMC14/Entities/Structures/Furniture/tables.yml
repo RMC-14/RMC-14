@@ -5,6 +5,7 @@
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
   components:
+  - type: RMCVehicleSmashable
   - type: Corrodible
     timeToApply: 4
     structure: true

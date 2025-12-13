@@ -1,0 +1,388 @@
+- type: entity
+  abstract: true
+  id: RMCVehicleVanRoofBase
+  name: van interior roof
+  description: A removable roof section for the van interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/van.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: roof_1
+      map: [ "roof" ]
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: RMCVehicleVanRoofBase
+  id: RMCVehicleVanRoof1
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_1
+      map: [ "roof" ]
+
+- type: entity
+  parent: RMCVehicleVanRoofBase
+  id: RMCVehicleVanRoof2
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_2
+      map: [ "roof" ]
+
+- type: entity
+  parent: RMCVehicleVanRoofBase
+  id: RMCVehicleVanRoof3
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_3
+      map: [ "roof" ]
+
+- type: entity
+  parent: RMCVehicleVanRoofBase
+  id: RMCVehicleVanFrontRoof1
+  components:
+  - type: Sprite
+    layers:
+    - state: front_roof_1
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: RMCVehicleVanRoofBase
+  id: RMCVehicleVanFrontRoof2
+  components:
+  - type: Sprite
+    layers:
+    - state: front_roof_2
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  id: RMCVehicleVanInteriorBase
+  name: van interior piece
+  description: A decorative interior piece for the van.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/van.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanWallBase
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBack1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBack2
+  components:
+  - type: Sprite
+    state: back_2
+  - type: Clickable
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBack3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanLeft1
+  components:
+  - type: Sprite
+    state: van_left_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanLeft2
+  components:
+  - type: Sprite
+    state: van_left_2
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanLeft3
+  components:
+  - type: Sprite
+    state: van_left_3
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanRight1
+  components:
+  - type: Sprite
+    state: van_right_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanRight2
+  components:
+  - type: Sprite
+    state: van_right_2
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanRight3
+  components:
+  - type: Sprite
+    state: van_right_3
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFrontLeft1
+  components:
+  - type: Sprite
+    state: van_front_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFrontLeft2
+  components:
+  - type: Sprite
+    state: van_front_2
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFrontRight1
+  components:
+  - type: Sprite
+    state: van_back_1
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanFrontRight2
+  components:
+  - type: Sprite
+    state: van_back_2
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior1
+  components:
+  - type: Sprite
+    state: exterior_1
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior2
+  components:
+  - type: Sprite
+    state: exterior_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior3
+  components:
+  - type: Sprite
+    state: exterior_3
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior1Old
+  components:
+  - type: Sprite
+    state: exterior_1_old
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior2Old
+  components:
+  - type: Sprite
+    state: exterior_2_old
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExterior3Old
+  components:
+  - type: Sprite
+    state: exterior_3_old
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBackground1
+  components:
+  - type: Sprite
+    state: background_1
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBackground2
+  components:
+  - type: Sprite
+    state: background_2
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanBackground3
+  components:
+  - type: Sprite
+    state: background_3
+
+- type: entity
+  parent: RMCVehicleVanWallBase
+  id: RMCVehicleVanInteriorDoor
+  components:
+  - type: Sprite
+    state: interior_door
+  - type: Clickable
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExteriorDoor
+  components:
+  - type: Sprite
+    state: exterior_door
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+  - type: Clickable
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanExteriorDoorUnique
+  components:
+  - type: Sprite
+    state: exterior_door_unique
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+  - type: Clickable
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanWindshieldTop
+  components:
+  - type: Sprite
+    state: windshield_viewport_top
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanWindshieldBottom
+  components:
+  - type: Sprite
+    state: windshield_viewport_bottom
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleVanNewStuff
+  components:
+  - type: Sprite
+    state: new stuff

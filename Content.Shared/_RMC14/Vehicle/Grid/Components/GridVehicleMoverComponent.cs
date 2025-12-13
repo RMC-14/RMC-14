@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
@@ -49,4 +50,16 @@ public sealed partial class GridVehicleMoverComponent : Component
 
     [AutoNetworkedField]
     public bool IsMoving;
+
+    /// <summary>
+    /// Minimum xeno size that can block this vehicle. Null means any xeno blocks it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public RMCSizes? XenoBlockMinimumSize;
+
+    [AutoNetworkedField]
+    public float SmashSlowdownMultiplier = 1f;
+
+    [AutoNetworkedField]
+    public TimeSpan SmashSlowdownUntil;
 }

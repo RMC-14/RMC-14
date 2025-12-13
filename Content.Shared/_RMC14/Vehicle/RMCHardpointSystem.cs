@@ -1,12 +1,27 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Whitelist;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Verbs;
+using Content.Shared.Tools.Systems;
+using Content.Shared.Damage;
+using Content.Shared._RMC14.Repairable;
+using Content.Shared.Tools.Components;
 using Robust.Shared.GameObjects;
+using Content.Shared.Hands.Components;
 using Robust.Shared.Containers;
+using Robust.Shared.Localization;
+using Robust.Shared.Network;
+using Robust.Shared.Audio.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Interaction;
+using Content.Shared.Examine;
+using Content.Shared.UserInterface;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -15,6 +30,15 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCRepairableSystem _repairable = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -27,6 +51,15 @@ public sealed class RMCHardpointSystem : EntitySystem
         SubscribeLocalEvent<RMCHardpointSlotsComponent, VehicleCanRunEvent>(OnVehicleCanRun);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointInsertDoAfterEvent>(OnInsertDoAfter);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, GetVerbsEvent<InteractionVerb>>(OnGetRemoveVerbs);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, DamageModifyEvent>(OnVehicleDamageModify);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, BoundUIOpenedEvent>(OnHardpointUiOpened);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveMessage>(OnHardpointRemoveMessage);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
+        SubscribeLocalEvent<RMCHardpointIntegrityComponent, ComponentInit>(OnHardpointIntegrityInit);
+        SubscribeLocalEvent<RMCHardpointIntegrityComponent, InteractUsingEvent>(OnHardpointRepair);
+        SubscribeLocalEvent<RMCHardpointIntegrityComponent, ExaminedEvent>(OnHardpointExamined);
     }
 
     private void OnSlotsInit(Entity<RMCHardpointSlotsComponent> ent, ref ComponentInit args)
@@ -44,6 +77,8 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!TryGetSlot(ent.Comp, args.Container.ID, out var slot))
             return;
 
+        ent.Comp.PendingRemovals.Remove(args.Container.ID);
+
         if (!IsValidHardpoint(args.Entity, slot))
         {
             if (TryComp<ItemSlotsComponent>(ent.Owner, out var itemSlots))
@@ -53,6 +88,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
 
         RefreshCanRun(ent.Owner);
+        UpdateHardpointUi(ent.Owner, ent.Comp);
     }
 
     private void OnRemoved(Entity<RMCHardpointSlotsComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -61,6 +97,8 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         RefreshCanRun(ent.Owner);
+        ent.Comp.PendingRemovals.Remove(args.Container.ID);
+        UpdateHardpointUi(ent.Owner, ent.Comp);
     }
 
     private void OnInsertAttempt(Entity<RMCHardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -212,6 +250,9 @@ public sealed class RMCHardpointSystem : EntitySystem
 
             if (!_itemSlots.TryGetSlot(uid, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
                 return false;
+
+            if (itemSlot.Item is { } item && TryComp(item, out RMCHardpointIntegrityComponent? integrity) && integrity.Integrity <= 0f)
+                return false;
         }
 
         return true;
@@ -223,5 +264,402 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         _vehicles.RefreshCanRun((uid, vehicle));
+    }
+
+    private void OnGetRemoveVerbs(Entity<RMCHardpointSlotsComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || args.Using == null)
+            return;
+
+        if (!_tool.HasQuality(args.Using.Value, "Prying"))
+            return;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+            return;
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+            var user = args.User;
+            var slotId = slot.Id;
+            var verb = new InteractionVerb
+            {
+                Act = () => TryStartHardpointRemoval(ent.Owner, ent.Comp, user, slotId),
+                Category = VerbCategory.Eject,
+                Text = Loc.GetString("rmc-hardpoint-remove-verb", ("slot", Name(itemSlot.Item!.Value))),
+                Priority = itemSlot.Priority,
+                IconEntity = GetNetEntity(itemSlot.Item),
+            };
+
+            args.Verbs.Add(verb);
+        }
+    }
+
+    private void OnSlotsInteractUsing(Entity<RMCHardpointSlotsComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || args.User == null)
+            return;
+
+        if (!_tool.HasQuality(args.Used, "Prying"))
+            return;
+
+        if (_ui.TryOpenUi(ent.Owner, RMCHardpointUiKey.Key, args.User))
+        {
+            UpdateHardpointUi(ent.Owner, ent.Comp);
+            args.Handled = true;
+        }
+    }
+
+    private void OnHardpointUiOpened(Entity<RMCHardpointSlotsComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        if (!Equals(args.UiKey, RMCHardpointUiKey.Key))
+            return;
+
+        UpdateHardpointUi(ent.Owner, ent.Comp);
+    }
+
+    private void OnHardpointRemoveMessage(Entity<RMCHardpointSlotsComponent> ent, ref RMCHardpointRemoveMessage args)
+    {
+        if (!Equals(args.UiKey, RMCHardpointUiKey.Key))
+            return;
+
+        if (args.Actor == default || !Exists(args.Actor))
+            return;
+
+        TryStartHardpointRemoval(ent.Owner, ent.Comp, args.Actor, args.SlotId);
+    }
+
+    private void OnHardpointRemoveDoAfter(Entity<RMCHardpointSlotsComponent> ent, ref RMCHardpointRemoveDoAfterEvent args)
+    {
+        ent.Comp.PendingRemovals.Remove(args.SlotId);
+
+        if (args.Cancelled || args.Handled)
+        {
+            UpdateHardpointUi(ent.Owner, ent.Comp);
+            return;
+        }
+
+        args.Handled = true;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+        {
+            UpdateHardpointUi(ent.Owner, ent.Comp);
+            return;
+        }
+
+        if (!TryGetSlot(ent.Comp, args.SlotId, out _))
+        {
+            UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            return;
+        }
+
+        if (!_itemSlots.TryGetSlot(ent.Owner, args.SlotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+        {
+            UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            return;
+        }
+
+        _itemSlots.TryEjectToHands(ent.Owner, itemSlot, args.User, true);
+        UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+        RefreshCanRun(ent.Owner);
+    }
+
+    private void OnVehicleDamageModify(Entity<RMCHardpointSlotsComponent> ent, ref DamageModifyEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var totalDamage = args.Damage.GetTotal().Float();
+        if (totalDamage <= 0f)
+            return;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+            return;
+
+        var intactHardpoints = new List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity)>();
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            if (itemSlot.Item is not { } item || !TryComp(item, out RMCHardpointIntegrityComponent? integrity))
+                continue;
+
+            if (integrity.Integrity <= 0f)
+                continue;
+
+            intactHardpoints.Add((item, integrity));
+        }
+
+        var anyIntact = intactHardpoints.Count > 0;
+
+        if (anyIntact)
+        {
+            var hardpointDamage = totalDamage * ent.Comp.HardpointDamageMultiplier;
+
+            foreach (var (item, integrity) in intactHardpoints)
+            {
+                ApplyDamageToHardpoint(ent.Owner, item, integrity, hardpointDamage);
+            }
+        }
+
+        var hullFraction = anyIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
+        if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity))
+            DamageHardpoint(ent.Owner, ent.Owner, totalDamage * hullFraction, frameIntegrity);
+        args.Damage = ScaleDamage(args.Damage, hullFraction);
+    }
+
+    private DamageSpecifier ScaleDamage(DamageSpecifier source, float fraction)
+    {
+        if (MathF.Abs(fraction - 1f) < 0.0001f)
+            return source;
+
+        var scaled = new DamageSpecifier();
+        foreach (var (type, value) in source.DamageDict)
+        {
+            scaled.DamageDict[type] = value * fraction;
+        }
+
+        return scaled;
+    }
+
+    private void ApplyDamageToHardpoint(EntityUid vehicle, EntityUid hardpoint, RMCHardpointIntegrityComponent integrity, float amount)
+    {
+        DamageHardpoint(vehicle, hardpoint, amount, integrity);
+    }
+
+    private void OnHardpointIntegrityInit(Entity<RMCHardpointIntegrityComponent> ent, ref ComponentInit args)
+    {
+        if (ent.Comp.Integrity <= 0f)
+            ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+    }
+
+    private void OnHardpointExamined(Entity<RMCHardpointIntegrityComponent> ent, ref ExaminedEvent args)
+    {
+        var current = ent.Comp.Integrity;
+        var max = ent.Comp.MaxIntegrity;
+        var percent = max > 0f ? MathF.Round(current / max * 100f) : 0f;
+
+        args.PushMarkup(Loc.GetString("rmc-hardpoint-integrity-examine", ("current", MathF.Round(current, 1)), ("max", MathF.Round(max, 1)), ("percent", percent)));
+    }
+
+    public bool DamageHardpoint(EntityUid vehicle, EntityUid hardpoint, float amount, RMCHardpointIntegrityComponent? integrity = null)
+    {
+        if (_net.IsClient || amount <= 0f)
+            return false;
+
+        if (!Resolve(hardpoint, ref integrity, logMissing: false))
+            return false;
+
+        if (integrity.Integrity <= 0f)
+            return false;
+
+        if (integrity.Integrity > integrity.MaxIntegrity && integrity.MaxIntegrity > 0f)
+            integrity.Integrity = integrity.MaxIntegrity;
+
+        var previous = integrity.Integrity;
+        integrity.Integrity = MathF.Max(0f, integrity.Integrity - amount);
+
+        if (Math.Abs(previous - integrity.Integrity) < 0.01f)
+            return false;
+
+        Dirty(hardpoint, integrity);
+
+        if (TryComp(hardpoint, out RMCVehicleWheelItemComponent? _))
+            _wheels.OnWheelDamaged(vehicle);
+
+        if (previous > 0f && integrity.Integrity <= 0f)
+            RefreshCanRun(vehicle);
+
+        UpdateHardpointUi(vehicle);
+        return true;
+    }
+
+    private void OnHardpointRepair(Entity<RMCHardpointIntegrityComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.User == null)
+            return;
+
+        var used = args.Used;
+        if (!_tool.HasQuality(used, "Welding") || !HasComp<WelderComponent>(used))
+            return;
+
+        if (ent.Comp.Integrity >= ent.Comp.MaxIntegrity)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-hardpoint-intact"), ent.Owner, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (!_repairable.UseFuel(used, args.User, ent.Comp.RepairFuelCost))
+            return;
+
+        ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+        Dirty(ent.Owner, ent.Comp);
+
+        if (ent.Comp.RepairSound != null)
+            _audio.PlayPredicted(ent.Comp.RepairSound, ent.Owner, args.User);
+
+        _popup.PopupClient(Loc.GetString("rmc-hardpoint-repaired"), ent.Owner, args.User);
+        args.Handled = true;
+
+        // Update wheel visuals / run state if applicable.
+        var vehicle = ent.Owner;
+        if (TryComp(ent.Owner, out RMCVehicleWheelItemComponent? _))
+        {
+            vehicle = GetVehicleFromPart(ent.Owner) ?? ent.Owner;
+            _wheels.OnWheelDamaged(vehicle);
+        }
+        else
+        {
+            RefreshCanRun(ent.Owner);
+        }
+
+        if (ent.Comp.BypassEntryOnZero)
+            RefreshCanRun(vehicle);
+
+        UpdateHardpointUi(vehicle);
+    }
+
+    private EntityUid? GetVehicleFromPart(EntityUid part)
+    {
+        if (!_containers.TryGetContainingContainer(part, out var container))
+            return null;
+
+        return container.Owner;
+    }
+
+    private void TryStartHardpointRemoval(EntityUid uid, RMCHardpointSlotsComponent component, EntityUid user, string? slotId)
+    {
+        if (string.IsNullOrWhiteSpace(slotId))
+            return;
+
+        if (!TryComp(uid, out ItemSlotsComponent? itemSlots))
+        {
+            UpdateHardpointUi(uid, component);
+            return;
+        }
+
+        if (!TryGetSlot(component, slotId, out var slot))
+        {
+            UpdateHardpointUi(uid, component, itemSlots);
+            return;
+        }
+
+        if (!_itemSlots.TryGetSlot(uid, slotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+        {
+            UpdateHardpointUi(uid, component, itemSlots);
+            return;
+        }
+
+        if (component.PendingInserts.Contains(slotId) || component.CompletingInserts.Contains(slotId))
+            return;
+
+        if (!TryGetPryingTool(user, out var tool))
+        {
+            UpdateHardpointUi(uid, component, itemSlots);
+            return;
+        }
+
+        if (!component.PendingRemovals.Add(slotId))
+            return;
+
+        var delay = slot.RemoveDelay > 0f ? slot.RemoveDelay : slot.InsertDelay;
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, new RMCHardpointRemoveDoAfterEvent(slotId), uid, uid, tool)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            BreakOnHandChange = true,
+            BreakOnDropItem = true,
+            BreakOnWeightlessMove = true,
+            NeedHand = true,
+            RequireCanInteract = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            component.PendingRemovals.Remove(slotId);
+
+        UpdateHardpointUi(uid, component, itemSlots);
+    }
+
+    private void UpdateHardpointUi(EntityUid uid, RMCHardpointSlotsComponent? component = null, ItemSlotsComponent? itemSlots = null)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!_ui.HasUi(uid, RMCHardpointUiKey.Key))
+            return;
+
+        if (!Resolve(uid, ref component, logMissing: false))
+            return;
+
+        if (!Resolve(uid, ref itemSlots, logMissing: false))
+            return;
+
+        var entries = new List<RMCHardpointUiEntry>(component.Slots.Count);
+
+        foreach (var slot in component.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            var hasItem = _itemSlots.TryGetSlot(uid, slot.Id, out var itemSlot, itemSlots) && itemSlot.HasItem;
+            string? installedName = null;
+            NetEntity? installedEntity = null;
+            float integrity = 0f;
+            float maxIntegrity = 0f;
+            var hasIntegrity = false;
+
+            if (hasItem && itemSlot!.Item is { } item)
+            {
+                installedEntity = GetNetEntity(item);
+                installedName = Name(item);
+
+                if (TryComp(item, out RMCHardpointIntegrityComponent? hardpointIntegrity))
+                {
+                    integrity = hardpointIntegrity.Integrity;
+                    maxIntegrity = hardpointIntegrity.MaxIntegrity;
+                    hasIntegrity = true;
+                }
+            }
+
+            entries.Add(new RMCHardpointUiEntry(
+                slot.Id,
+                slot.HardpointType,
+                installedName,
+                installedEntity,
+                integrity,
+                maxIntegrity,
+                hasIntegrity,
+                hasItem,
+                slot.Required,
+                component.PendingRemovals.Contains(slot.Id)));
+        }
+
+        _ui.SetUiState(uid, RMCHardpointUiKey.Key, new RMCHardpointBoundUserInterfaceState(entries));
+    }
+
+    private bool TryGetPryingTool(EntityUid user, out EntityUid tool)
+    {
+        tool = default;
+
+        if (!TryComp(user, out HandsComponent? hands))
+            return false;
+
+        var activeHand = _hands.GetActiveHand((user, hands));
+        if (activeHand == null)
+            return false;
+
+        if (!_hands.TryGetHeldItem((user, hands), activeHand, out var held))
+            return false;
+
+        if (!_tool.HasQuality(held.Value, "Prying"))
+            return false;
+
+        tool = held.Value;
+        return true;
     }
 }

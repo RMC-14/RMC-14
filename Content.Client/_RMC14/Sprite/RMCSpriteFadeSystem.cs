@@ -80,14 +80,15 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
         // ExcludeBoundingBox is set if we don't want to fade this sprite within the collision bounding boxes for the given POI
         _points.Clear();
 
+        TransformComponent? playerXform = null;
+        if (TryComp(player, out playerXform))
+        {
+            _points.Add((_transform.GetMapCoordinates(_playerManager.LocalEntity!.Value, xform: playerXform), false));
+        }
+
         if (_uiManager.CurrentlyHovered is IViewportControl vp && _inputManager.MouseScreenPosition.IsValid)
         {
             _points.Add((vp.PixelToMap(_inputManager.MouseScreenPosition.Position), true));
-        }
-
-        if (TryComp(player, out TransformComponent? playerXform))
-        {
-            _points.Add((_transform.GetMapCoordinates(_playerManager.LocalEntity!.Value, xform: playerXform), false));
         }
 
         if (_stateManager.CurrentState is GameplayState state && _spriteQuery.TryGetComponent(player, out var playerSprite))
@@ -125,51 +126,71 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                     if (excludeBB && fadeComponent.ReactToMouse == false)
                         continue;
 
-                    if (!_fadingQuery.TryComp(ent, out var fading))
+                    TryApplyFade(ent, sprite, fadeComponent, frameTime);
+                }
+            }
+
+            // If player is on a grid, fade all fade-enabled sprites on that same grid (e.g. van roofs) while inside.
+            if (playerXform != null && playerXform.GridUid is { } playerGrid)
+            {
+                var gridQuery = AllEntityQuery<RMCSpriteFadeComponent, TransformComponent>();
+                while (gridQuery.MoveNext(out var uid, out var fade, out var xform))
+                {
+                    if (xform.GridUid != playerGrid)
+                        continue;
+                    if (!_spriteQuery.TryGetComponent(uid, out var sprite))
+                        continue;
+
+                    TryApplyFade(uid, sprite, fade, frameTime);
+                }
+            }
+        }
+    }
+
+    private void TryApplyFade(EntityUid ent, SpriteComponent sprite, RMCSpriteFadeComponent fadeComponent, float frameTime)
+    {
+        if (!_fadingQuery.TryComp(ent, out var fading))
+        {
+            fading = AddComp<RMCFadingSpriteComponent>(ent);
+            fading.OriginalAlpha = sprite.Color.A;
+        }
+
+        _comps.Add(fading);
+
+        var targetAlpha = fadeComponent.TargetAlpha;
+        var changeRate = fadeComponent.ChangeRate;
+        var change = changeRate * frameTime;
+
+        if (fadeComponent.FadeLayers.Count > 0)
+        {
+            // Fade only specified layers
+            foreach (var layerKey in fadeComponent.FadeLayers)
+            {
+                if (_sprite.LayerMapTryGet((ent, sprite), layerKey, out var layerIndex, true))
+                {
+                    var layer = sprite[layerIndex];
+
+                    // Store original alpha if not already stored
+                    if (!fading.OriginalLayerAlphas.ContainsKey(layerKey))
                     {
-                        fading = AddComp<RMCFadingSpriteComponent>(ent);
-                        fading.OriginalAlpha = sprite.Color.A;
+                        fading.OriginalLayerAlphas[layerKey] = layer.Color.A;
                     }
 
-                    _comps.Add(fading);
-
-                    var targetAlpha = fadeComponent.TargetAlpha;
-                    var changeRate = fadeComponent.ChangeRate;
-                    var change = changeRate * frameTime;
-
-                    if (fadeComponent.FadeLayers.Count > 0)
+                    var newAlpha = Math.Max(layer.Color.A - change, targetAlpha);
+                    if (!layer.Color.A.Equals(newAlpha))
                     {
-                        // Fade only specified layers
-                        foreach (var layerKey in fadeComponent.FadeLayers)
-                        {
-                            if (_sprite.LayerMapTryGet((ent, sprite), layerKey, out var layerIndex, true))
-                            {
-                                var layer = sprite[layerIndex];
-
-                                // Store original alpha if not already stored
-                                if (!fading.OriginalLayerAlphas.ContainsKey(layerKey))
-                                {
-                                    fading.OriginalLayerAlphas[layerKey] = layer.Color.A;
-                                }
-
-                                var newAlpha = Math.Max(layer.Color.A - change, targetAlpha);
-                                if (!layer.Color.A.Equals(newAlpha))
-                                {
-                                    _sprite.LayerSetColor((ent, sprite), layerIndex, layer.Color.WithAlpha(newAlpha));
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // Fade entire sprite (original behavior)
-                        var newColor = Math.Max(sprite.Color.A - change, targetAlpha);
-                        if (!sprite.Color.A.Equals(newColor))
-                        {
-                            _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
-                        }
+                        _sprite.LayerSetColor((ent, sprite), layerIndex, layer.Color.WithAlpha(newAlpha));
                     }
                 }
+            }
+        }
+        else
+        {
+            // Fade entire sprite (original behavior)
+            var newColor = Math.Max(sprite.Color.A - change, targetAlpha);
+            if (!sprite.Color.A.Equals(newColor))
+            {
+                _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
             }
         }
     }

@@ -328,6 +328,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: RMCVehicleSmashable
     - type: Anchorable
     - type: Sprite
       drawdepth: WallTops

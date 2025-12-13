@@ -206,6 +206,7 @@
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
+    xenoBlockMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
@@ -213,13 +214,12 @@
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
   - type: RMCVehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
-    runningSoundCooldown: 1
+    runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
-    #collisionSound: /Audio/Effects/Vehicle/carhorn.ogg
     collisionSoundCooldown: 0.4
   - type: RMCVehicleSpotlight
-    radius: 12
+    radius: 6
     energy: 2.5
     softness: 2
   - type: Physics
@@ -235,6 +235,7 @@
         - Impassable
         - HighImpassable
         - LowImpassable
+        - LargeMobLayer
         layer:
         - LargeMobLayer
       mob:
@@ -245,8 +246,12 @@
         mask:
         - MidImpassable
         - BarricadeImpassable
+        - LargeMobLayer
         layer:
         - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -272,6 +277,10 @@
   - type: Corrodible
     isCorrodible: false
   - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
   - type: InputMover
   - type: ItemSlots
   - type: RMCHardpointSlots
@@ -284,9 +293,33 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
+    collisionDamagePerSpeed: 5
+    minCollisionDamage: 5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
+    repairFuelCost: 10
+    bypassEntryOnZero: true
+  - type: RMCRepairable
+    heal: 150
+    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    entryPoints:
+    # Entry point 0: Side door
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.25,0
+    # Entry point 1: Side-door
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    # Entry point 2: Back door
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
 
 
 - type: entity
@@ -327,6 +360,7 @@
         - Impassable
         - HighImpassable
         - LowImpassable
+        - LargeMobLayer
         layer:
         - LargeMobLayer
       mob:
@@ -337,8 +371,12 @@
         mask:
         - MidImpassable
         - BarricadeImpassable
+        - LargeMobLayer
         layer:
         - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
     offset: "0.5,0.5"
@@ -358,6 +396,10 @@
   - type: Corrodible
     isCorrodible: false
   - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
   - type: InputMover
   - type: ItemSlots
   - type: RMCHardpointSlots
@@ -370,6 +412,13 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
+    repairFuelCost: 10
+    bypassEntryOnZero: true
+  - type: RMCRepairable
+    heal: 150
+    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
