@@ -1,6 +1,7 @@
 cl-briefing-kutjevo =
-                                                                      {"[bold]Weston-Yamada Corporation[/bold]"}
-                                                                                "The future is now."
+    {"[bold]Weston-Yamada Corporation[/bold]"}
+    "The future is now."
+
     {"[color=#25b266][bold]Special Services Division[/bold][/color]"}
     {"[bold]Liaison Colony Briefing[/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -28,17 +29,18 @@ cl-briefing-kutjevo =
 
     {"[bold][head=3]Potential Threats[/head][/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-    The Kutjevo facility contains only a token Colony Marshals Bureau, staffing roughly 2–6 members, and is primarily secured by corporate personnel. While the security garrison is relatively undersized for a colony of this size, division analysts believe corporate espionage is unlikely due to a variety of factors. After reviewing the data, analysts believe these are the most likely causes for the automated distress beacon, from most to least likely:
+    The Kutjevo facility contains only a token Colony Marshal Bureau, staffing roughly 2–6 members, and is primarily secured by corporate personnel. While the security garrison is relatively undersized for a colony of this size, division analysts believe corporate espionage is unlikely due to a variety of factors. After reviewing the data, analysts believe these are the most likely causes for the automated distress beacon, from most to least likely:
 
     • Geological activity (e.g. earthquakes or land-shift due to the drained aquifers beneath the site)
     • Maintenance failure of the colony's communications equipment
     • Failure to send the weekly "All-Clear" signal, resulting in an automated distress dispatch
-    • Sabotage by the "Colony Liberation Front"
+    • Sabotage by the "Colonial Liberation Front"
     • A solar flare from the Dykuma star causing electrical failures
 
 cl-briefing-solaris =
-                                                                      {"[bold]Weston-Yamada Corporation[/bold]"}
-                                                                                "The future is now."
+    {"[bold]Weston-Yamada Corporation[/bold]"}
+    "The future is now."
+
     {"[color=#25b266][bold]Special Services Division[/bold][/color]"}
     {"[bold]Liaison Colony Briefing[/bold]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
