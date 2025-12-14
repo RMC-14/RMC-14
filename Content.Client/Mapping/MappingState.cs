@@ -7,12 +7,9 @@ using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.Verbs;
-using Content.Shared._RMC14.Input;
 using Content.Shared.Administration;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Decals;
 using Content.Shared.Input;
-using Content.Shared.Mapping;
 using Content.Shared.Maps;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -24,7 +21,6 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Enums;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Markdown.Sequence;
@@ -78,14 +74,6 @@ public sealed class MappingState : GameplayStateBase
 
     public CursorState State { get; set; }
 
-    // RMC14
-    [Dependency] private readonly INetManager _net = default!;
-
-    public MapCoordinates? FirstGrabCorner;
-    public MapCoordinates? LastGrabCorner;
-    public Vector2? DraggingGrab;
-    // RMC14
-
     public MappingState()
     {
         IoCManager.InjectDependencies(this);
@@ -136,10 +124,6 @@ public sealed class MappingState : GameplayStateBase
             .Bind(ContentKeyFunctions.MappingRemoveDecal, new PointerInputCmdHandler(HandleEditorCancelPlace, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingCancelEraseDecal, new PointerInputCmdHandler(HandleCancelEraseDecal, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingOpenContextMenu, new PointerInputCmdHandler(HandleOpenContextMenu, outsidePrediction: true))
-            // RMC14
-            .Bind(CMKeyFunctions.MappingEnableGrab, new PointerInputCmdHandler(HandleEnableGrab, outsidePrediction: true))
-            .Bind(CMKeyFunctions.MappingGrab, new PointerStateInputCmdHandler(HandleGrabStart, HandleGrabStop, outsidePrediction: true))
-            // RMC14
             .Register<MappingState>();
 
         _overlays.AddOverlay(new MappingOverlay(this));
@@ -147,12 +131,6 @@ public sealed class MappingState : GameplayStateBase
         _prototypeManager.PrototypesReloaded += OnPrototypesReloaded;
 
         Screen.Prototypes.UpdateVisible(_prototypes);
-
-        // RMC14
-        context.AddFunction(CMKeyFunctions.MappingEnableGrab);
-        context.AddFunction(CMKeyFunctions.MappingGrab);
-        Screen.Grab.OnPressed += OnGrabPressed;
-        // RMC14
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs obj)
@@ -196,10 +174,6 @@ public sealed class MappingState : GameplayStateBase
         Screen.EraseDecalButton.OnToggled -= OnEraseDecalPressed;
         _placement.PlacementChanged -= OnPlacementChanged;
         _prototypeManager.PrototypesReloaded -= OnPrototypesReloaded;
-
-        // RMC14
-        Screen.Grab.OnPressed -= OnGrabPressed;
-        // RMC14
 
         UserInterfaceManager.ClearWindows();
         _loadController.UnloadScreen();
@@ -324,15 +298,12 @@ public sealed class MappingState : GameplayStateBase
             }
             else
             {
-                node.TryGet("name", out ValueDataNode? nameNode);
-                var name = nameNode == null ? id : nameNode.Value;
-                name = Loc.GetString(name);
+                var name = node.TryGet("name", out ValueDataNode? nameNode)
+                    ? nameNode.Value
+                    : id;
 
                 if (node.TryGet("suffix", out ValueDataNode? suffix))
                     name = $"{name} [{suffix.Value}]";
-
-                if (nameNode != null)
-                    name += $" ({id})";
 
                 mapping = new MappingPrototype(prototype, name);
                 _allPrototypes.Add(mapping);
@@ -390,9 +361,6 @@ public sealed class MappingState : GameplayStateBase
 
                 if (!string.IsNullOrWhiteSpace(entity?.EditorSuffix))
                     name = $"{name} [{entity.EditorSuffix}]";
-
-                if (entity?.Name != null)
-                    name += $" ({id})";
 
                 mapping = new MappingPrototype(prototype, name);
                 _allPrototypes.Add(mapping);
@@ -962,135 +930,7 @@ public sealed class MappingState : GameplayStateBase
     public enum CursorState
     {
         None,
-        Grab, // RMC14
         Pick,
-        Delete,
+        Delete
     }
-
-    // RMC14
-    private void OnGrabPressed(ButtonEventArgs args)
-    {
-        if (args.Button.Pressed)
-            EnableGrab();
-        else
-            DisableGrab();
-    }
-
-    private void EnableGrab()
-    {
-        Screen.UnPressActionsExcept(Screen.Grab);
-        State = CursorState.Grab;
-        FirstGrabCorner = null;
-        LastGrabCorner = null;
-    }
-
-    private void DisableGrab()
-    {
-        Screen.Grab.Pressed = false;
-        State = CursorState.None;
-        DisableEraser();
-    }
-
-    private bool HandleEnableGrab(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
-    {
-        EnableGrab();
-        return true;
-    }
-
-    private bool HandleGrabStart(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
-    {
-        if (State != CursorState.Grab)
-            return false;
-
-        var cursorNullable = GetCursorPosition();
-        if (cursorNullable is { } cursor &&
-            FirstGrabCorner?.MapId == cursor.MapId &&
-            GetGrabBox() is { } box &&
-            box.Contains(cursor.Position))
-        {
-            DraggingGrab = VectorSnapToGrid(cursor.MapId, cursor.Position, Vector2.Zero);
-            return true;
-        }
-
-        FirstGrabCorner = cursorNullable;
-        LastGrabCorner = null;
-        return true;
-    }
-
-    private bool HandleGrabStop(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
-    {
-        if (State != CursorState.Grab)
-            return false;
-
-        var cursorNullable = GetCursorPosition();
-        if (DraggingGrab is { } dragging &&
-            cursorNullable is { } cursor &&
-            GetGrabBox() is { } box &&
-            FirstGrabCorner?.MapId == cursor.MapId)
-        {
-            var offset = VectorSnapToGrid(cursor.MapId, cursor.Position, Vector2.Zero) - dragging;
-            FirstGrabCorner = FirstGrabCorner?.Offset(offset);
-            LastGrabCorner = LastGrabCorner?.Offset(offset);
-
-            var msg = new MappingDragGrabMessage
-            {
-                Box = box,
-                Map = cursor.MapId,
-                Offset = offset,
-                SpaceSourceTiles = Screen.SpaceSourceTilesButton.Pressed,
-            };
-            _net.ClientSendMessage(msg);
-
-            DraggingGrab = null;
-            return true;
-        }
-
-        LastGrabCorner = cursorNullable;
-        return true;
-    }
-
-    public MapCoordinates? GetCursorPosition()
-    {
-        if (UserInterfaceManager.CurrentlyHovered is not IViewportControl viewport ||
-            _input.MouseScreenPosition is not { IsValid: true } position)
-        {
-            return null;
-        }
-
-        return viewport.PixelToMap(position.Position);
-    }
-
-    public Vector2 VectorSnapToGrid(MapId map, Vector2 coords, Vector2 offset)
-    {
-        return _transform.ToMapCoordinates(_transform
-                .ToCoordinates(new MapCoordinates(coords, map))
-                .SnapToGrid()
-                .Offset(offset))
-            .Position;
-    }
-
-    public Box2? GetGrabBox()
-    {
-        if (FirstGrabCorner is not { } first)
-            return null;
-
-        var lastNullable = LastGrabCorner;
-        lastNullable ??= GetCursorPosition();
-        if (lastNullable is not { } last)
-            return null;
-
-        if (first.MapId != last.MapId)
-            return null;
-
-        var box = Box2.FromTwoPoints(first.Position, last.Position);
-        var bottomLeft = VectorSnapToGrid(first.MapId, box.BottomLeft, -Vector2Helpers.Half);
-        var topRight = VectorSnapToGrid(first.MapId, box.TopRight, Vector2Helpers.Half);
-        return new Box2(bottomLeft, topRight);
-    }
-
-    public void SetGrabSizeLabel(string text)
-    {
-        Screen.GrabSizeLabel.Text = text;
-    }
-    // RMC14
 }
