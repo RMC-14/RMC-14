@@ -11,6 +11,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 {
     private RMCDialogWindow? _window;
 
+    [Dependency] private readonly DialogSystem _dialog = default!;
     protected override void Open()
     {
         base.Open();
@@ -78,8 +79,8 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             container = new RMCDialogInputContainer();
             container.MessageLineEdit.OnTextEntered += args => SendPredictedMessage(new DialogInputBuiMsg(args.Text));
-            container.MessageLineEdit.OnTextChanged += args => OnInputTextChanged(container, args.Text.Length, s.CharacterLimit);
-            container.MessageTextEdit.OnTextChanged += args => OnInputTextChanged(container, (int) Rope.CalcTotalLength(args.TextRope), s.CharacterLimit);
+            container.MessageLineEdit.OnTextChanged += args => OnInputTextChanged(container, args.Text, s.MinCharacterLimit, s.CharacterLimit);
+            container.MessageTextEdit.OnTextChanged += args => OnInputTextChanged(container, Rope.Collapse(args.TextRope), s.MinCharacterLimit, s.CharacterLimit);
             container.CancelButton.OnPressed += _ => Close();
             container.OkButton.OnPressed += _ =>
             {
@@ -91,7 +92,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             _window.Container = container;
             _window.AddChild(_window.Container);
-            OnInputTextChanged(container, 0, s.CharacterLimit);
+            OnInputTextChanged(container, string.Empty, s.MinCharacterLimit, s.CharacterLimit);
         }
 
         _window.Title = string.Empty;
@@ -158,9 +159,12 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         _window?.OpenCentered();
     }
 
-    private void OnInputTextChanged(RMCDialogInputContainer container, int textLength, int max)
+    private void OnInputTextChanged(RMCDialogInputContainer container, string text, int min, int max)
     {
-        container.CharacterCount.Text = $"{textLength} / {max}";
-        container.OkButton.Disabled = textLength > max;
+        var textLength = _dialog.CalculateEffectiveLength(text);
+        container.CharacterCount.Text = min > 0
+            ? $"{textLength} / {min}-{max}"
+            : $"{textLength} / {max}";
+        container.OkButton.Disabled = textLength > max || textLength < min;
     }
 }
