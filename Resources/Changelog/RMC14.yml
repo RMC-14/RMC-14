@@ -1,38 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: The SPP Sapper now spawns with the correct boots.
-    type: Tweak
-  id: 2167
-  time: '2025-08-06T04:35:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7376
-- author: DrSmugleaf
-  changes:
-  - message: Fixed cassettes being too quiet.
-    type: Fix
-  - message: Fixed Praetorian round end messages not showing.
-    type: Fix
-  - message: Fixed Haurchefant not loading properly.
-    type: Fix
-  - message: Fixed PMC roles not showing on the list on PvE.
-    type: Fix
-  id: 2168
-  time: '2025-08-06T04:46:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7386
-- author: BarteG44
-  changes:
-  - message: Clicking on people now pats them on the back instead of hugging
-    type: Tweak
-  id: 2169
-  time: '2025-08-06T06:04:48.597386+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
-  - message: Fixed survivors not spawning.
-    type: Fix
-  id: 2170
-  time: '2025-08-06T06:03:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7393
 - author: Binbagg
   changes:
   - message: Eviscerate now breaks after 0.5 tiles instead of 0.3
@@ -4758,5 +4724,45 @@
   id: 2669
   time: '2025-12-10T02:10:11.117279+00:00'
   url: null
+- author: Ian321
+  changes:
+  - message: You can now flush incinerator tanks to empty them.
+    type: Add
+  - message: Fixed being able to empty incinerator tanks into reagent tanks.
+    type: Fix
+  - message: Fixed being able to fill underbarrel flamethrower attachments with reagents
+      other than welding fuel and regular incinerator fuel.
+    type: Fix
+  - message: Incinerators can now be filled from welderpacks.
+    type: Tweak
+  id: 2670
+  time: '2025-12-14T22:11:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8666
+- author: vorkathbruh
+  changes:
+  - message: Commanding Officers no longer spawn with a Mateba Customization Kit
+    type: Fix
+  - message: Lieutenant Colonel and Colonel berets no longer take points from the
+      loadout menu.
+    type: Tweak
+  id: 2671
+  time: '2025-12-14T22:13:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8713
+- author: CatAndHats
+  changes:
+  - message: Fixed the behind-character in-hand sprites for the automated storage
+      and brown briefcases
+    type: Fix
+  id: 2672
+  time: '2025-12-14T22:12:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8452
+- author: J C Denton
+  changes:
+  - message: Fixed Paranoid Corporate Liaison survivor on LV-624 having incorrect
+      rank.
+    type: Fix
+  id: 2673
+  time: '2025-12-14T22:13:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8724
 Name: RMC14
 Order: -1
