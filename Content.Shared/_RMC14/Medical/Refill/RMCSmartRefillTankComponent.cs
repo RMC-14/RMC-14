@@ -8,7 +8,4 @@ public sealed partial class RMCSmartRefillTankComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public string Solution = string.Empty;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan FlushTime = TimeSpan.FromSeconds(3);
 }

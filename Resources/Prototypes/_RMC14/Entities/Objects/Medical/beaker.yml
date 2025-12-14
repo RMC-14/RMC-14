@@ -299,6 +299,9 @@
     - ChemDispensable
   - type: RMCSmartRefillTank
     solution: beaker
+  - type: RMCFlushableSolution
+    solution: beaker
+    flushTime: 3
 
 - type: Tag
   id: RMCMiniTank

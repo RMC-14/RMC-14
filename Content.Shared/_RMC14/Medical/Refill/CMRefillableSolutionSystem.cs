@@ -58,8 +58,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
 
-        SubscribeLocalEvent<RMCSmartRefillTankComponent, GetVerbsEvent<AlternativeVerb>>(OnSmartRefillGetVerbs);
-        SubscribeLocalEvent<RMCSmartRefillTankComponent, ContainerFlushDoAfterEvent>(OnSmartRefillFlush);
         SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse);
     }
 
@@ -389,28 +387,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         });
     }
 
-    private void OnSmartRefillStartup(Entity<RMCSmartRefillTankComponent> ent, ref ComponentStartup args)
-    {
-        RemComp<DrinkComponent>(ent);
-        RemComp<DrainableSolutionComponent>(ent);
-        RemComp<DrawableSolutionComponent>(ent);
-        RemComp<InjectableSolutionComponent>(ent);
-        RemComp<RefillableSolutionComponent>(ent);
-    }
-
-    private void OnSmartRefillGetVerbs(Entity<RMCSmartRefillTankComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        EntityUid user = args.User;
-        args.Verbs.Add(new AlternativeVerb
-        {
-            Text = Loc.GetString("rmc-refillsolution-flush"),
-            Act = () =>
-            {
-                TryFlushContainer(ent, user);
-            },
-        });
-    }
-
     private void TryFlushSolution(Entity<RMCFlushableSolutionComponent> ent, EntityUid user)
     {
         //TODO RMC immovable
@@ -422,33 +398,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         });
     }
 
-    private void TryFlushContainer(Entity<RMCSmartRefillTankComponent> ent, EntityUid user)
-    {
-        //TODO RMC immovable
-        _popup.PopupClient(Loc.GetString("rmc-refillsolution-flush-start", ("time", ent.Comp.FlushTime.TotalSeconds)), user, user, PopupType.SmallCaution);
-        _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.FlushTime, new ContainerFlushDoAfterEvent(), ent, target: ent)
-        {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget,
-        });
-    }
-
     private void OnFlushableSolutionFlush(Entity<RMCFlushableSolutionComponent> ent, ref ContainerFlushDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solution, out _))
-            return;
-
-        _solution.RemoveAllSolution(solution.Value);
-        if (TryComp<AppearanceComponent>(ent, out var appearance))
-            _appearance.QueueUpdate(ent, appearance);
-    }
-
-    private void OnSmartRefillFlush(Entity<RMCSmartRefillTankComponent> ent, ref ContainerFlushDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
