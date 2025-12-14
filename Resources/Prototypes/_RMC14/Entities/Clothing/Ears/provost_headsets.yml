@@ -28,6 +28,8 @@
     - ProvostInspector
     - ProvostTeamLeader
     - ProvostAdvisor
+    - ChiefMilitaryPolice
+    - MilitaryWarden
 
 - type: entity
   parent: RMCHeadsetProvost
@@ -45,3 +47,5 @@
     - ProvostAdvisor
     - CommandingOfficer
     - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - MilitaryWarden
