@@ -246,7 +246,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (!inherit)
             time += _timing.CurTime;
 
-        var ev = new CorrodingEvent(acid, dps, lightDps);
+        var ev = new CorrodingEvent(acid, dps, lightDps, strength);
         RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
             return;

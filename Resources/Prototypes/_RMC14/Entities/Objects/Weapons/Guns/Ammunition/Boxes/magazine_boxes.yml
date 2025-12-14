@@ -830,6 +830,10 @@
       whitelist:
         tags:
         - RMCCartridge458SOCOM
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
 
 - type: entity
   parent: RMCBoxBullets458Empty

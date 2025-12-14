@@ -1,8 +1,11 @@
 ﻿- type: entity
   parent: RMCBaseEffect
   id: RMCBaseGibEffect
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
   - type: TimedDespawn
     lifetime: 0.8
   - type: EffectVisuals
@@ -17,6 +20,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Effects/Gibs/xeno_gib_small.rsi
-    noRot: true
     state: small_gib
-    drawdepth: Effects
+
+- type: entity
+  parent: RMCBaseGibEffect
+  id: RMCGibEffectXenoLesserDrone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/Gibs/lesser_drone_gib.rsi
+    state: lesser_gib
+  - type: TimedDespawn
+    lifetime: 0.8

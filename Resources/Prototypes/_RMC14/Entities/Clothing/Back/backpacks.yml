@@ -239,6 +239,7 @@
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     sourceWhitelist:
       components:
+      - RMCFlamerTank
       - Welder
     targetWhitelist:
       tags:
