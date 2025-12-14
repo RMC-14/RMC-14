@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared.Body.Events;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
+using System.Linq;
 using Robust.Shared.Localization;
 
 namespace Content.Server._RMC14.Marines.ControlComputer;
@@ -21,6 +22,76 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
     {
         base.Initialize();
         SubscribeLocalEvent<MarineComponent, BeingGibbedEvent>(OnMarineGibbed);
+    }
+
+    protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
+    {
+        var groups = new Dictionary<string, MarineRecommendationGroup>();
+        var allRecommendations = ent.Comp.AwardRecommendations;
+
+        // Group recommendations by recommended marine
+        foreach (var recommendation in allRecommendations)
+        {
+            var recommendedId = recommendation.RecommendedLastPlayerId;
+            
+            if (!groups.TryGetValue(recommendedId, out var group))
+            {
+                // Get marine info
+                var marineInfo = GetMarineInfo(recommendedId);
+                
+                group = new MarineRecommendationGroup
+                {
+                    LastPlayerId = recommendedId,
+                    Name = marineInfo.Name,
+                    Rank = marineInfo.Rank,
+                    Squad = marineInfo.Squad,
+                    Job = marineInfo.Job,
+                    Recommendations = new List<MarineRecommendationInfo>()
+                };
+                groups[recommendedId] = group;
+            }
+
+            // Get recommender name
+            var recommenderInfo = GetMarineInfo(recommendation.RecommenderLastPlayerId);
+            
+            group.Recommendations.Add(new MarineRecommendationInfo
+            {
+                RecommenderLastPlayerId = recommendation.RecommenderLastPlayerId,
+                RecommenderName = recommenderInfo.Name,
+                Reason = recommendation.Reason
+            });
+        }
+
+        return new MarineMedalsPanelBuiState(groups.Values.ToList());
+    }
+
+    private (string Name, string? Rank, string? Squad, string Job) GetMarineInfo(string lastPlayerId)
+    {
+        // Try to find alive marine
+        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver, out _))
+        {
+            if (receiver.LastPlayerId == lastPlayerId)
+            {
+                var rank = _rank.GetRankString(uid);
+                var job = GetJobName(uid);
+                var squad = GetSquadName(uid);
+                return (Name(uid), rank, squad, job);
+            }
+        }
+
+        // Try to find gibbed marine
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            if (computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } gibbedInfo)
+            {
+                return (gibbedInfo.Name, gibbedInfo.Rank, gibbedInfo.Squad, gibbedInfo.Job);
+            }
+        }
+
+        // Fallback
+        return ("Unknown", null, null, "Unknown");
     }
 
     private void OnMarineGibbed(Entity<MarineComponent> ent, ref BeingGibbedEvent ev)

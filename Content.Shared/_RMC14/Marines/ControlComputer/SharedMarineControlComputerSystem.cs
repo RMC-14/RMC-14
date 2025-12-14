@@ -63,13 +63,15 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             {
                 subs.Event<MarineControlComputerAlertLevelMsg>(OnAlertLevel);
                 subs.Event<MarineControlComputerShipAnnouncementMsg>(OnShipAnnouncement);
-                subs.Event<MarineControlComputerMedalMsg>(OnMedal);
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnToggleEvacuationMsg);
+                subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnOpenMedalsPanel);
             });
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMsg>(OnMedal);
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnMarineCommunicationsToggleEvacuation);
+                subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnMarineCommunicationsOpenMedalsPanel);
             });
 
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
@@ -240,7 +242,34 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
+        // Handle messages from both Key and MedalsPanel UI keys
+        if (!args.UiKey.Equals(MarineControlComputerUi.Key) && 
+            !args.UiKey.Equals(MarineControlComputerUi.MedalsPanel))
+            return;
+
         GiveMedal(ent, args.Actor);
+    }
+
+    private void OnOpenMedalsPanel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var state = BuildMedalsPanelState(ent);
+        _ui.SetUiState(ent.Owner, MarineControlComputerUi.MedalsPanel, state);
+        _ui.TryOpenUi(ent.Owner, MarineControlComputerUi.MedalsPanel, args.Actor);
+    }
+
+    protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
+    {
+        // This should be overridden in the server system
+        return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>());
     }
 
     public void GiveMedal(EntityUid computer, EntityUid actor)
@@ -320,6 +349,14 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         {
             OnToggleEvacuationMsg(new Entity<MarineControlComputerComponent>(ent.Owner, controlComp), ref args);
         }
+    }
+
+    private void OnMarineCommunicationsOpenMedalsPanel(Entity<MarineCommunicationsComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)
+    {
+        if (!TryComp<MarineControlComputerComponent>(ent.Owner, out var controlComp))
+            return;
+
+        OnOpenMedalsPanel(new Entity<MarineControlComputerComponent>(ent.Owner, controlComp), ref args);
     }
 
     private void RefreshComputers()
