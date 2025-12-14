@@ -193,23 +193,6 @@
   - type: ItemIFF
     faction: FactionMarine
 
-# for survs
-- type: entity
-  parent: CMIDCardSilver
-  id: RMCIDCardDeputySurvivor
-  name: bureau deputy silver badge
-  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
-      state: icon
-    - type: Clothing
-      slots:
-      - idcard
-      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
-    - type: ItemIFF
-      faction: FactionMarine
-
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardPMC
