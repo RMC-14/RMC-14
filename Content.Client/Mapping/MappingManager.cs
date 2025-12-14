@@ -20,7 +20,6 @@ public sealed class MappingManager : IPostInjectInit
         _net.RegisterNetMessage<MappingSaveMapMessage>();
         _net.RegisterNetMessage<MappingSaveMapErrorMessage>(OnSaveError);
         _net.RegisterNetMessage<MappingMapDataMessage>(OnMapData);
-        _net.RegisterNetMessage<MappingDragGrabMessage>();
     }
 
     private void OnSaveError(MappingSaveMapErrorMessage message)
