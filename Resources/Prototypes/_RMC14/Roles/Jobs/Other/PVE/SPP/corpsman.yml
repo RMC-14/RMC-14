@@ -4,6 +4,10 @@
   name: rmc-job-name-spp-corpsman
   description: rmc-job-description-spp-corpsman-pve
   playTimeTracker: RMCJobSPPCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCJobSPPCorpsmanPVEGear

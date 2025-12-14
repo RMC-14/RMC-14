@@ -18,9 +18,16 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       collection: storageRustle
@@ -232,6 +239,7 @@
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     sourceWhitelist:
       components:
+      - RMCFlamerTank
       - Welder
     targetWhitelist:
       tags:

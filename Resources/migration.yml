@@ -1445,3 +1445,10 @@ ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
 # 2025-11-27
 RMCToolWebbingSmallERT: RMCToolWebbing
 RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
+
+# 2025-11-29
+CMWallSuperReinforced: CMWallReinforced
+
+# 2025-12-02
+RMCTankFlamerImprovised: RMCTankFlamerColony
+RMCWeaponFlamerImprovised: RMCWeaponFlamerColony
