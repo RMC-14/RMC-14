@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Dog-tags can now be taken from unrevivable marines.
-    type: Fix
-  - message: Unrevivable marines are now displayed correctly on the map.
-    type: Fix
-  - message: The tactical map now tracks the state of rotting with more detail.
-    type: Tweak
-  - message: The unrevivable medi-hud icon now only shows on dead people.
-    type: Fix
-  - message: Rotten bodies can no longer be hosts.
-    type: Fix
-  - message: Health scanner now correctly states if a body is unrevivable.
-    type: Fix
-  - message: Rotten bodies can now be fultoned again.
-    type: Fix
-  id: 2188
-  time: '2025-08-16T23:05:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7415
 - author: UnicornOnLSD
   changes:
   - message: RTOs inhands fixed.
@@ -4756,5 +4737,15 @@
   id: 2690
   time: '2025-12-14T22:50:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8661
+- author: Vermidia
+  changes:
+  - message: Fixed King destroy not gibbing the dead
+    type: Fix
+  - message: Abilities that stop mob collisions (Dancer dodge, King Destroy) prevent
+      the stun from walking into Queen/King
+    type: Tweak
+  id: 2691
+  time: '2025-12-14T22:52:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8656
 Name: RMC14
 Order: -1
