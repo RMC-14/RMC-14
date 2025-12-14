@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added the M3 MOPP Suit.
-    type: Add
-  id: 2192
-  time: '2025-08-17T23:02:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7523
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to CPR crit marines on PvE
-    type: Fix
-  id: 2193
-  time: '2025-08-17T23:31:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7530
 - author: TsjipTsjip
   changes:
   - message: Reworded the appeal processor delegation process to be more clear.
@@ -4748,5 +4734,24 @@
   id: 2694
   time: '2025-12-14T23:00:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8545
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to melt reinforced walls with normal and weak acid.
+      You will need strong acid to melt reinforced walls now. Most reinforced COLONY
+      walls are still acidifable, however.
+    type: Fix
+  id: 2695
+  time: '2025-12-14T23:04:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8474
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added damage examine text for cades.
+    type: Add
+  - message: Cades now have a chance to block projectiles! Make sure you stand flush
+      or at least 4 tiles away so you don't damage your cades.
+    type: Tweak
+  id: 2696
+  time: '2025-12-14T23:04:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8606
 Name: RMC14
 Order: -1
