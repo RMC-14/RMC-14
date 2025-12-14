@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed survivor rolling sometimes not respecting job priority.
-    type: Fix
-  id: 2177
-  time: '2025-08-08T22:33:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7421
 - author: snebl
   changes:
   - message: Normandy walls are no longer all named "alamo wall".
@@ -4764,5 +4757,12 @@
   id: 2679
   time: '2025-12-14T22:41:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8686
+- author: Vermidia
+  changes:
+  - message: Fixed king being able to sometimes move while still in the air.
+    type: Fix
+  id: 2680
+  time: '2025-12-14T22:43:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8691
 Name: RMC14
 Order: -1
