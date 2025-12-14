@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed a variant of ICB CL not having an icon.
-    type: Fix
-  id: 2176
-  time: '2025-08-08T22:31:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7394
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed survivor rolling sometimes not respecting job priority.
@@ -4764,5 +4757,12 @@
   id: 2678
   time: '2025-12-14T22:38:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8700
+- author: Vermidia
+  changes:
+  - message: Fixed King being able to hijack.
+    type: Fix
+  id: 2679
+  time: '2025-12-14T22:41:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8686
 Name: RMC14
 Order: -1
