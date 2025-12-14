@@ -1450,6 +1450,9 @@ WeaponRifleL83A3: RMCWeaponRifleL83A3
 RMCToolWebbingSmallERT: RMCToolWebbing
 RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
 
+# 2025-11-29
+CMWallSuperReinforced: CMWallReinforced
+
 # 2025-12-02
 RMCTankFlamerImprovised: RMCTankFlamerColony
 RMCWeaponFlamerImprovised: RMCWeaponFlamerColony

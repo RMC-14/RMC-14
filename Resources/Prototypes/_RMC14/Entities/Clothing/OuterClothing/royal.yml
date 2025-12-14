@@ -1,7 +1,7 @@
 # Royal Crown Marines
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight, RMCAllowSuitStorageClothingArmorRoyal]
+  parent: [RMCBaseTSEArmor, RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight, RMCAllowSuitStorageClothingArmorRoyal]
   id: RMCArmorRoyal
   name: kestrel armoured vest
   description: A suit of armor designed by the Royal Crown Marines to be modular, flexible, and lightweight.

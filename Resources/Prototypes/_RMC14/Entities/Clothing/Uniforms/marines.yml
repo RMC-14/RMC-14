@@ -28,68 +28,6 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
-# Royal
-- type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
-  id: RMCJumpsuitMarineRoyal
-  name: royal crown marine uniform
-  description: The field uniform of the Royal Crown Marines. It has shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-  - type: ItemCamouflage
-    camouflageVariations: {}
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: sleeves
-
-- type: entity
-  parent: RMCJumpsuitMarineRoyal
-  id: RMCJumpsuitMarineRoyalMK80
-  suffix: MK80
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCShoulderHolsterMK80
-
-- type: entity
-  parent: RMCJumpsuitMarineRoyal
-  id: RMCJumpsuitMarineRoyalMedic
-  suffix: Medic
-  components:
-  - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalBlue
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalTeamlead
-  name: royal crown marine uniform
-  suffix: Teamlead
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
-  parent: RMCJumpsuitMarineRoyal
-  id: RMCJumpsuitMarineRoyalDropPouch
-  suffix: Drop Pouch
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
-
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
@@ -254,18 +192,6 @@
   - type: CMArmor
     bio: 15
 
-# Ordnance Technician / OT
-- type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: CMJumpsuitOrdnanceTech
-  name: ordnance engineer uniform
-  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
-  - type: CMArmor
-    explosionArmor: 10
-
 # Maintenance Technician / MT
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -277,6 +203,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+
+# Ordnance Technician / OT
+- type: entity
+  parent: CMJumpsuitMaintTech
+  id: CMJumpsuitOrdnanceTech
+  name: ordnance engineer uniform
+  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
+  - type: CMArmor
+    explosionArmor: 10
 
 # Command
 
@@ -480,6 +418,7 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
   - type: Tag
     tags:
+    - RMCUniformMarine
     - RMCUniformIntel
 
 - type: Tag
