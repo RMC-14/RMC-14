@@ -300,13 +300,15 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnSurfaceTerminating(Entity<XenoNestSurfaceComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (!TerminatingOrDeleted(ent.Comp.Weedable) &&
-            _xenoWeedableQuery.TryComp(ent.Comp.Weedable, out var weedable) &&
-            weedable.Entity == ent)
+        if (TerminatingOrDeleted(ent.Comp.Weedable) ||
+            !_xenoWeedableQuery.TryComp(ent.Comp.Weedable, out var weedable) ||
+            weedable.Entity != ent)
         {
-            weedable.Entity = null;
-            Dirty(ent.Comp.Weedable.Value, weedable);
+            return;
         }
+
+        weedable.Entity = null;
+        Dirty(ent.Comp.Weedable.Value, weedable);
     }
 
     #endregion

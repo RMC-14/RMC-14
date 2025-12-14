@@ -20,6 +20,7 @@ public sealed class MutinyCommand : ToolshedCommand
 
         while (mutineers.MoveNext(out var mutineer, out var comp))
         {
+            RemComp<MutineerLeaderComponent>(mutineer);
             RemComp<MutineerComponent>(mutineer);
             numMutineers++;
             if (!HasComp<ActorComponent>(mutineer))

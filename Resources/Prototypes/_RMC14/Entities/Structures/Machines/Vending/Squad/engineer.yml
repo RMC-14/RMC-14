@@ -20,11 +20,11 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      takeOne: CMHandheldDefense
+      choices:  { CMHandheldDefense : 1 }
       entries:
     #    CMJIMAPlantedFlag
-    #    CMUA42FSentryFlamer
       - id: RMCSentry
+        recommended: true
       - id: RMCTesla
       - id: RMCSentryFire
     - name: Handheld Defense Upgrade
@@ -74,17 +74,19 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 18
+        points: 13
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 18
+        points: 13
       - id: RMCPacketGrenadeM74AGMSFilled
-        points: 10
+        points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
-    #- id: CMM20MineBox4
-    #  points: 18
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+        points: 13
+    # - id: CMM20MineBox4
+    #   points: 18
+    # - id: CMM40MFHSMetalFoamGrenade
+    #   points: 5
+    # - id: RMCElectroshockGrenadex3
+    #   points: 16
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -146,6 +148,7 @@
         name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
+        replaceSlot: back
         points: 15
       - id: RMCPouchFuelTank
         points: 4
@@ -195,6 +198,8 @@
         points: 3
       - id: CMEncryptionKeyRequisition
         points: 3
+      - id: CMEncryptionKeyMedical
+        points: 3
 
 - type: entity
   parent: ColMarTechBase
@@ -230,7 +235,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: RMCArmorVestCombatTechnician
+      - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -244,11 +249,16 @@
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
       - id: CMBackpackMarineTech
+        replaceSlot: back
       - id: CMSatchelMarineTech
+        replaceSlot: back
       - id: CMBackpackWelder
+        replaceSlot: back
         recommended: true
       - id: RMCSatchelWelder
+        replaceSlot: back
       - id: RMCSatchelWelderChestrig
+        replaceSlot: back
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }

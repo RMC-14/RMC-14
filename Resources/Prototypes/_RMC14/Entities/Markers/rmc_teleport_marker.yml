@@ -29,6 +29,26 @@
   - type: RMCTeleporter
 
 - type: entity
+  parent: RMCTriggerTeleporter
+  id: RMCTriggerTeleporterDamage50
+  suffix: RMC14, 50 Blunt on Teleport
+  components:
+  - type: RMCTeleporter
+    teleportDamage:
+      types:
+        Blunt: 50
+
+- type: entity
+  parent: RMCTriggerTeleporterDamage50
+  id: RMCTriggerTeleporterDamage400
+  suffix: RMC14, 400 Blunt on Teleport
+  components:
+  - type: RMCTeleporter
+    teleportDamage:
+      types:
+        Blunt: 400
+
+- type: entity
   parent: MarkerBase
   id: RMCTriggerTeleporterViewer
   name: teleporter viewer
