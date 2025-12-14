@@ -111,7 +111,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetEntity(args.Actor, out var actor))
+        if (!TryGetEntity(args.Actor, out var actor) || actor == null)
             return;
 
         if (actor != ent.Owner)
@@ -134,7 +134,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetEntity(args.Actor, out var actor) && actor == null)
+        if (!TryGetEntity(args.Actor, out var actor) || actor == null)
             return;
 
         if (actor != ent.Owner)
