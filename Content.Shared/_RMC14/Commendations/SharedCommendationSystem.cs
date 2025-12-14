@@ -13,6 +13,7 @@ public abstract class SharedCommendationSystem : EntitySystem
     protected readonly List<Commendation> RoundCommendations = new();
 
     public int CharacterLimit { get; private set; }
+    public int MinCharacterLimit { get; private set; }
 
     public override void Initialize()
     {
@@ -22,6 +23,7 @@ public abstract class SharedCommendationSystem : EntitySystem
         SubscribeLocalEvent<CommendationReceiverComponent, PlayerAttachedEvent>(OnCommendationReceiverPlayerAttached);
 
         Subs.CVar(_config, RMCCVars.RMCCommendationMaxLength, v => CharacterLimit = v, true);
+        Subs.CVar(_config, RMCCVars.RMCCommendationMinLength, v => MinCharacterLimit = v, true);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

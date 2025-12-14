@@ -322,6 +322,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCJelliesPerQueen =
         CVarDef.Create("rmc.jellies_per_queen", 5, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<int> RMCCommendationMinLength =
+        CVarDef.Create("rmc.commendation_min_length", 100, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 

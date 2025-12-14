@@ -24,6 +24,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
 
     public int CharacterLimit { get; private set; }
+    public int MinCharacterLimit { get; private set; }
 
     public override void Initialize()
     {
@@ -34,6 +35,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         SubscribeLocalEvent<RMCAwardRecommendationComponent, RMCAwardRecommendationReasonEvent>(OnSubmitRecommendation);
 
         Subs.CVar(_config, RMCCVars.RMCRecommendationMaxLength, v => CharacterLimit = v, true);
+        Subs.CVar(_config, RMCCVars.RMCCommendationMinLength, v => MinCharacterLimit = v, true);
     }
 
     private void OnGetHeadsetAlternativeVerb(Entity<RMCHeadsetComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -126,7 +128,8 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             Loc.GetString("rmc-award-recommendation-reason"),
             inputEvent,
             true,
-            CharacterLimit);
+            CharacterLimit,
+            MinCharacterLimit);
     }
 
     private void OnSubmitRecommendation(Entity<RMCAwardRecommendationComponent> ent, ref RMCAwardRecommendationReasonEvent args)
