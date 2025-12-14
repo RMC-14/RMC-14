@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Commendations;
+using System.Collections.Generic;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -33,7 +34,7 @@ public sealed partial class MarineControlComputerComponent : Component
     public Dictionary<string, GibbedMarineInfo> GibbedMarines = new();
 
     [DataField, AutoNetworkedField]
-    public List<MarineAwardRecommendationInfo> AwardRecommendations = new();
+    public HashSet<MarineAwardRecommendationInfo> AwardRecommendations = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? LastShipAnnouncement;
@@ -50,13 +51,13 @@ public sealed class GibbedMarineInfo
 }
 
 [Serializable, NetSerializable]
-public sealed class MarineAwardRecommendationInfo
+public sealed record MarineAwardRecommendationInfo
 {
-    public string RecommenderName = string.Empty;
-    public string RecommenderRank = string.Empty;
-    public string RecommenderJob = string.Empty;
-    public string RecommendedName = string.Empty;
-    public string RecommendedLastPlayerId = string.Empty;
-    public string RecommenderLastPlayerId = string.Empty;
-    public string Reason = string.Empty;
+    public required string RecommenderName { get; init; }
+    public required string RecommenderRank { get; init; }
+    public required string RecommenderJob { get; init; }
+    public required string RecommendedName { get; init; }
+    public required string RecommendedLastPlayerId { get; init; }
+    public required string RecommenderLastPlayerId { get; init; }
+    public required string Reason { get; init; }
 }

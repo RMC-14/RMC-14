@@ -358,6 +358,21 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         return true;
     }
 
+    public bool TryAddAwardRecommendation(MarineAwardRecommendationInfo recommendation)
+    {
+        var added = false;
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            added = true;
+
+            if (computer.AwardRecommendations.Add(recommendation))
+                Dirty(uid, computer);
+        }
+
+        return added;
+    }
+
     public Dictionary<string, GibbedMarineInfo> CollectGibbedMarines()
     {
         var result = new Dictionary<string, GibbedMarineInfo>();

@@ -195,25 +195,18 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return;
         }
 
-        var added = false;
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var computerId, out var computer))
+        var recommendation = new MarineAwardRecommendationInfo
         {
-            computer.AwardRecommendations.Add(new MarineAwardRecommendationInfo
-            {
-                RecommenderName = recommenderName,
-                RecommenderRank = recommenderRank,
-                RecommenderJob = recommenderJob,
-                RecommendedName = recommendedName,
-                RecommendedLastPlayerId = recommendedLastPlayerId,
-                RecommenderLastPlayerId = recommenderLastPlayerId,
-                Reason = message
-            });
-            Dirty(computerId, computer);
-            added = true;
-        }
+            RecommenderName = recommenderName,
+            RecommenderRank = recommenderRank,
+            RecommenderJob = recommenderJob,
+            RecommendedName = recommendedName,
+            RecommendedLastPlayerId = recommendedLastPlayerId,
+            RecommenderLastPlayerId = recommenderLastPlayerId,
+            Reason = message
+        };
 
-        if (!added)
+        if (!_control.TryAddAwardRecommendation(recommendation))
         {
             _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-computer"), ent.Owner, actor.Value, PopupType.SmallCaution);
             return;
