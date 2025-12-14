@@ -65,9 +65,16 @@
   id: Matchbox
   description: A small box of Almost But Not Quite Plasma Premium Matches.
   components:
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -4
   - type: Matchbox
   - type: Sprite
     sprite: Objects/Tools/matches.rsi

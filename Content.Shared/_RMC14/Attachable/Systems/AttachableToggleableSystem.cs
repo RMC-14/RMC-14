@@ -15,6 +15,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -599,6 +601,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         if (!TryComp(args.Used, out AttachableHolderComponent? holderComponent))
             return;
+
+        if (!attachable.Comp.Active &&
+            TryComp<InputMoverComponent>(args.User, out var input) &&
+            (input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None)
+        {
+            return;
+        }
 
         FinishToggle(attachable, (used, holderComponent), args.SlotId, args.User, args.PopupText);
         args.Handled = true;
