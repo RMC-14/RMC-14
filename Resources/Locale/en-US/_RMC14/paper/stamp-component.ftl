@@ -16,6 +16,7 @@ stamp-component-stamped-name-cm-cmp = Chief of Military Police
 stamp-component-stamped-name-cm-cmo = Chief Medical Officer
 stamp-component-stamped-name-cm-qm = Logistics Officer
 stamp-component-stamped-name-cm-ce = Chief Engineer
+stamp-component-stamped-name-cm-sea = Senior Enlisted Advisor
 stamp-component-stamped-name-cm-cl = Corporate Liaison
 stamp-component-stamped-name-cm-mw = Military Warden
 stamp-component-stamped-name-cm-pvi = Provost Inspector
