@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: BarteG44
-  changes:
-  - message: Added Helmet Garb variants for hats
-    type: Add
-  - message: Headbands can now be put on helmets
-    type: Tweak
-  id: 2175
-  time: '2025-08-06T06:04:48.602958+00:00'
-  url: null
 - author: J C Denton
   changes:
   - message: Fixed a variant of ICB CL not having an icon.
@@ -4766,5 +4757,12 @@
   id: 2677
   time: '2025-12-14T22:29:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8710
+- author: Majkl-J
+  changes:
+  - message: Bipods now check if you are moving before deploying
+    type: Fix
+  id: 2678
+  time: '2025-12-14T22:38:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8700
 Name: RMC14
 Order: -1
