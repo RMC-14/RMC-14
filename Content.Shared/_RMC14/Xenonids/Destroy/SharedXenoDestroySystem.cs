@@ -1,11 +1,19 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -19,6 +27,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Jittering;
 using Content.Shared.Maps;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
@@ -54,7 +63,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly RMCGibSystem _rmcGib = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
@@ -201,7 +210,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             //Gib mobs, knockback items, also kill structures
             foreach (var ent in _entityLookup.GetEntitiesInTile(tile, LookupFlags.All))
             {
-                if (HasComp<MobStateComponent>(ent) && _xeno.CanAbilityAttackTarget(xeno, ent))
+                if (CanGib(xeno, ent))
                 {
                     if (!xeno.Comp.Gibs || !TryComp<BodyComponent>(ent, out var body))
                     {
@@ -254,6 +263,24 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         }
 
         SetCooldown(xeno);
+    }
+
+    private bool CanGib(EntityUid king, EntityUid target)
+    {
+        if (king == target)
+            return false;
+
+        // hiveless xenos can attack eachother
+        if (_hive.FromSameHive(king, target))
+            return false;
+
+        if (HasComp<DevouredComponent>(target))
+            return false;
+
+        if (HasComp<XenoNestedComponent>(target))
+            return false;
+
+        return HasComp<MobStateComponent>(target);
     }
 
     public override void Update(float frameTime)
