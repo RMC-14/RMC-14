@@ -170,6 +170,7 @@
     solution: rmc_flamer_tank
   - type: RMCFlushableSolution
     solution: rmc_flamer_tank
+    flushTime: 1.5
   - type: InteractedBlacklist
     blacklist:
       components:
