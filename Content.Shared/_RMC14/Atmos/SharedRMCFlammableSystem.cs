@@ -714,7 +714,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         using (args.PushGroup(nameof(RMCImmuneToIgnitionComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-immune-to-ignition-examine", ("ent", ent)));
+            args.PushMarkup(Loc.GetString("rmc-immune-to-ignition-examine", ("ent", ent), ("direct", ent.Comp.ImmuneToDirectHits)));
         }
     }
 
