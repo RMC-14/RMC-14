@@ -10,6 +10,7 @@
     uis: { }
   - type: Inventory
     templateId: human
+  - type: RMCAdminGhost
 
 - type: startingGear
   parent: MobAghostGear
