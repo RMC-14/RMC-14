@@ -84,5 +84,5 @@
   id: RMCJobIconProvostSpecialAgent
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pid2
+    state: hudsquad_tissa
 
