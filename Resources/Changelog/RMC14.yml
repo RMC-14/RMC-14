@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed not being able to choose the healer drone strain.
-    type: Fix
-  id: 2172
-  time: '2025-08-06T06:02:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7388
-- author: Vermidia
-  changes:
   - message: Fixed hive core and pylons roofs not blocking medevac, fultoning, lasing,
       or supply drops.
     type: Fix
@@ -4764,5 +4757,12 @@
   id: 2674
   time: '2025-12-14T22:19:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8660
+- author: Vermidia
+  changes:
+  - message: Added linkladders command, which links 2 ladders together.
+    type: Add
+  id: 2675
+  time: '2025-12-14T22:23:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8718
 Name: RMC14
 Order: -1
