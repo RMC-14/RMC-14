@@ -50,5 +50,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
+
+- type: entity
+  parent: CMJumpsuitProvostAgent
+  id: CMJumpsuitProvostAgentWebbing
+  suffix: Webbing
+  components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPID

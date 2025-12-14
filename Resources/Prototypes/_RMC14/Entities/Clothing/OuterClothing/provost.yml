@@ -89,7 +89,7 @@
   name: M3 pattern special agent armor
   description: A modified luxury armor, originally meant for a Provost Marshall, modified to use the colors and insignia of the intelligence service.
   components:
-  - type: Sprite
+  - type: Sprite # TODO RMC14: Possible new sprite. (Less Bulky)
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/special.rsi
   - type: CMArmor
     melee: 25
@@ -113,6 +113,11 @@
         - RMCBoxZipties
       whitelist: null
       count: 3
+  - type: RMCArmorSpeedTier
+    speedTier: very light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
 
 
 - type: entity

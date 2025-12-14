@@ -65,7 +65,7 @@
     head: RMCHeadBeretAgent
     eyes: RMCGlassesPIDCommandoNightVision
     ears: CMHeadsetHighCommand
-    jumpsuit: CMJumpsuitProvostAgent
+    jumpsuit: CMJumpsuitProvostAgentWebbing
     outerClothing: RMCArmorProvostAgentFilled
     gloves: CMHandsBlackInsulated
     shoes: RMCScoutShoes

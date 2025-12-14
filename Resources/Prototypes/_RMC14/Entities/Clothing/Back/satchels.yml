@@ -142,7 +142,7 @@
   suffix: Provost
   description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible.
   components:
-  - type: Sprite
+  - type: Sprite # TODO RMC14: Possible new sprite. (Less Bulky)
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Other/provost_cloak.rsi
   - type: ThermalCloak
     opacity: 0
