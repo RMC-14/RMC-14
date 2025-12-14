@@ -326,6 +326,14 @@
     job: CMProvostSpecialAgent
 
 - type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostOperative
+  name: provost operative ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostOperative
+
+- type: entity
   parent: CMIDCardGold
   id: RMCIDCardSynth
   name: synth ID card

@@ -118,6 +118,8 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
+  - type: Item
+    size: Normal
 
 
 - type: entity

@@ -1,13 +1,13 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMProvostSpecialAgent
-  name: rmc-job-name-corp-provost-special-agent
+  id: CMProvostOperative
+  name: rmc-job-name-corp-provost-operative
   description: rmc-ghost-role-information-provost-description
-  playTimeTracker: CMJobProvostSpecialAgent
+  playTimeTracker: CMJobProvostOperative
   ranks:
-    RMCRankProvostAgent: []
-  startingGear: RMCGearProvostSpecialAgent
-  icon: RMCJobIconProvostSpecialAgent
+    RMCRankProvostOperative: []
+  startingGear: RMCGearProvostOperative
+  icon: RMCJobIconProvostOperative
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
@@ -48,41 +48,45 @@
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCProvostSpecialAgent
+  id: RMCProvostOperative
   components:
   - type: GhostRole
     name: rmc-ghost-name-corp-provost-special-agent
     description: rmc-ghost-role-information-provost-description
     rules: rmc-ghost-role-information-provost-rules
     reregister: false
-    job: CMProvostSpecialAgent
+    job: CMProvostOperative
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
 
 - type: startingGear
-  id: RMCGearProvostSpecialAgent
+  id: RMCGearProvostOperative
   equipment:
     head: RMCHeadBeretAgent
     eyes: RMCGlassesPIDCommandoNightVision
     ears: CMHeadsetHighCommand
-    jumpsuit: CMJumpsuitProvostAgent
-    outerClothing: RMCProvostJacketFilled
+    jumpsuit: CMJumpsuitProvostAgentWebbing
+    outerClothing: RMCArmorProvostAgentFilled
     gloves: CMHandsBlackInsulated
     shoes: RMCScoutShoes
-    id: RMCIDCardProvostSpecialAgent
-    belt: RMCMatebaBeltLuxuriousFilled
-    back: CMSatchelSecurityFilledPID
+    suitstorage: RMCWeaponRifleXM40
+    id: RMCIDCardProvostOperative
+    belt: RMCMatebaBeltFilled
+    back: RMCBackpackPIDFilled
+    mask: RMCMaskCoifPMC
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
+  inhand:
+    - RMCMatebaCustomizationCase
 
 - type: playTimeTracker
-  id: CMJobProvostSpecialAgent
+  id: CMJobProvostOperative
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconProvostSpecialAgent
+  id: RMCJobIconProvostOperative
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pid2
+    state: hudsquad_pid
 

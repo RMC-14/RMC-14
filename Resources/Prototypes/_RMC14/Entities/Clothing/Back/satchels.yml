@@ -158,6 +158,7 @@
     - id: RMCWeaponTaser
     - id: RMCPacketGrenadeFlashBang
     - id: RMCTabletCO
+    - id: RMCProvostJacket
 
 - type: entity
   parent: CMSatchel
@@ -281,6 +282,17 @@
     - id: CMSheetMetal20
     - id: RMCArmorHelmetM10CMB
     - id: RMCVisorSWAT
+
+- type: entity
+  parent: CMSatchelSecurity
+  suffix: Provost
+  id: CMSatchelSecurityFilledPID
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostAgent # TODO RMC14 provost office handheld beacon
+    - id: RMCWeaponTaser
+    - id: RMCTabletCO
 
 - type: entity
   parent: CMSatchelSecurity

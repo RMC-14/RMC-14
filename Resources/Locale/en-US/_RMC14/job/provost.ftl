@@ -39,3 +39,7 @@ rmc-job-prefix-provost-team-leader = PvTML
 rmc-ghost-name-corp-provost-special-agent = Provost Special Agent
 rmc-job-name-corp-provost-special-agent = Provost Special Agent
 rmc-job-prefix-provost-special-agent = PvSA
+
+rmc-ghost-name-corp-provost-operative = Provost Operative
+rmc-job-name-corp-provost-operative = Provost Operative
+rmc-job-prefix-provost-operative = PvO

@@ -333,6 +333,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: Tag # Prevents slowdown from pulling.
+    tags: []
 
 # Folded P3 thermal tarp
 - type: entity

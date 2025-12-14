@@ -50,6 +50,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon
+    - RMCScoutArmor
 
 - type: entity
   parent: CMJumpsuitProvostAgent

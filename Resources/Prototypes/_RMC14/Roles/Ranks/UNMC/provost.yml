@@ -19,19 +19,26 @@
   prefix: PvM.
   paygrade: O7
 
-# Any admin or whitelisted CO with medium-high law understanding and a given objective.
-- type: rank
-  id: RMCRankProvostAgent
-  name: Special Agent
-  prefix: PvSA.
-  paygrade: O7
-
 # Any whitelisted CO
 - type: rank
   id: RMCRankProvostDeputyMarshal
   name: Deputy Marshal
   prefix: PvDM.
   paygrade: O6
+
+# Any admin or whitelisted CO with medium-high law understanding. (PID)
+- type: rank
+  id: RMCRankProvostAgent
+  name: Special Agent
+  prefix: PvSA.
+  paygrade: O4
+
+# Any trusted player with medium-high law understanding and a given objective. (PID)
+- type: rank
+  id: RMCRankProvostOperative
+  name: Operative
+  prefix: PvO.
+  paygrade: E8
 
 # Any player with high law understanding
 - type: rank
