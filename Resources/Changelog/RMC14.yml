@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: BarteG44
   changes:
-  - message: Added an "on" sprite for the extinguisher
-    type: Add
-  id: 2174
-  time: '2025-08-06T06:04:48.602371+00:00'
-  url: null
-- author: BarteG44
-  changes:
   - message: Added Helmet Garb variants for hats
     type: Add
   - message: Headbands can now be put on helmets
@@ -4765,5 +4758,13 @@
   id: 2676
   time: '2025-12-14T22:27:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8723
+- author: CatAndHats
+  changes:
+  - message: Shotgun Shell Loadrigs have now got more detailed visuals to indicate
+      how full they are.
+    type: Tweak
+  id: 2677
+  time: '2025-12-14T22:29:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8710
 Name: RMC14
 Order: -1
