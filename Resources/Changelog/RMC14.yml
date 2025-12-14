@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: RTOs inhands fixed.
-    type: Fix
-  id: 2189
-  time: '2025-08-17T22:40:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7520
 - author: noctyrnal
   changes:
   - message: The PVE server now has 2 unique dropships.
@@ -4747,5 +4740,12 @@
   id: 2691
   time: '2025-12-14T22:52:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8656
+- author: PursuitInAshes
+  changes:
+  - message: Provost Inspectors now spawn with a stamp.
+    type: Add
+  id: 2692
+  time: '2025-12-14T22:56:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8714
 Name: RMC14
 Order: -1
