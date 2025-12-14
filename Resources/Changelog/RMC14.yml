@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed buggy movement speed while wielding some guns, causing rubberbanding
-      when moving across weeds for example.
-    type: Fix
-  id: 2191
-  time: '2025-08-17T23:03:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7528
 - author: Shromply
   changes:
   - message: Added the M3 MOPP Suit.
@@ -4749,5 +4741,12 @@
   id: 2693
   time: '2025-12-14T22:58:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8703
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Certain factional armor pieces now require their uniforms to equip.
+    type: Tweak
+  id: 2694
+  time: '2025-12-14T23:00:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8545
 Name: RMC14
 Order: -1
