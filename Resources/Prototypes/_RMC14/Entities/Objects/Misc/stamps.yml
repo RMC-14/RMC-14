@@ -133,6 +133,19 @@
     stampedColor: "#996600"
     stampState: "paper_stamp-we_ya"
 
+- type: entity
+  parent: CMStampBase
+  id: RMCStampProvostInspector
+  name: provost inspector rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-provost
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-pvi
+    stampedColor: "#cb0000"
+    stampState: "paper_stamp-provost-inspector"
+
+
 # Simple
 
 - type: entity
@@ -203,7 +216,7 @@
   suffix: Admin, Provost
   components:
   - type: Sprite
-    state: stamp-provost # update sprite
+    state: stamp-provost # RMC14 Todo: update sprite
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-provost
     stampedColor: "#cb0000"
