@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Reworded the appeal processor delegation process to be more clear.
-    type: Fix
-  id: 2194
-  time: '2025-08-17T23:43:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7445
 - author: DrSmugleaf
   changes:
   - message: Reverted survivor spawning to how it worked in previous updates, until
@@ -4753,5 +4746,20 @@
   id: 2696
   time: '2025-12-14T23:04:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8606
+- author: Aurallianz
+  changes:
+  - message: The nuke now has an explosion effect when exploding.
+    type: Add
+  - message: Added a ghost warp point to the nuke.
+    type: Add
+  - message: Fix nuke decryption not being stopped if a communications tower is destroyed.
+    type: Fix
+  - message: Fixed the nuke being able to be rotated upside down.
+    type: Fix
+  - message: Fixed the nuke not deleting hive structures on explosion.
+    type: Fix
+  id: 2697
+  time: '2025-12-14T23:16:49.051000+00:00'
+  url: null
 Name: RMC14
 Order: -1
