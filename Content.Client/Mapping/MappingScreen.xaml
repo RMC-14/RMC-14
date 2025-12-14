@@ -1,4 +1,4 @@
-﻿<mapping:MappingScreen
+<mapping:MappingScreen
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
@@ -71,7 +71,7 @@
                     <mapping:MappingActionsButton Name="Fill" Access="Public"
                                                   ToolTip="" Visible="False" />
                     <mapping:MappingActionsButton Name="Grab" Access="Public"
-                                                  ToolTip="Grab (Hold 3)" />
+                                                  ToolTip="" Visible="False" />
                     <mapping:MappingActionsButton Name="Move" Access="Public"
                                                   ToolTip="" Visible="False" />
                     <mapping:MappingActionsButton Name="Pick" Access="Public"
@@ -79,17 +79,7 @@
                     <mapping:MappingActionsButton Name="Delete" Access="Public"
                                                   ToolTip="Delete (Hold 6)" />
                     <mapping:MappingActionsButton Name="Flip" Access="Public" ToggleMode="False"/>
-                    <Control HorizontalExpand="True" />
-                    <Button Name="SpaceSourceTilesButton" Access="Public" Text="Space source tiles"
-                            ToggleMode="True" Pressed="True" StyleClasses="OpenBoth" />
                 </BoxContainer>
-            </PanelContainer>
-            <PanelContainer Name="Footer" VerticalExpand="True"
-                            MaxHeight="48" MinHeight="48" MaxWidth="100">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#222222AA" />
-                </PanelContainer.PanelOverride>
-                <Label Name="GrabSizeLabel" Access="Public" Margin="5" />
             </PanelContainer>
         </LayoutContainer>
     </SplitContainer>
