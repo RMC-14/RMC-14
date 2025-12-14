@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Client.Decals;
 using Content.Client.Decals.UI;
@@ -36,10 +36,6 @@ public sealed partial class MappingScreen : InGameScreen
     public override ChatBox ChatBox => GetWidget<ChatBox>()!;
 
     public event Func<MappingSpawnButton, bool>? IsDecalVisible;
-
-    // RMC14
-    private bool _grab;
-    // RMC14
 
     public MappingScreen()
     {
@@ -102,11 +98,6 @@ public sealed partial class MappingScreen : InGameScreen
         Delete.Texture.TexturePath = "/Textures/Interface/eraser.svg.png";
         Flip.Texture.TexturePath = "/Textures/Interface/VerbIcons/rotate_cw.svg.192dpi.png";
         Flip.OnPressed += args => FlipSides();
-
-        // RMC14
-        SetAnchorAndMarginPreset(Footer, LayoutPreset.BottomLeft, margin: 5);
-        Grab.Texture.TexturePath = "/Textures/_RMC14/Interface/square.png";
-        // RMC14
     }
 
     public void FlipSides()
@@ -217,10 +208,5 @@ public sealed partial class MappingScreen : InGameScreen
         Move.Pressed = Move == except;
         Pick.Pressed = Pick == except;
         Delete.Pressed = Delete == except;
-
-        // RMC14
-        Grab.Pressed = Grab == except;
-        GrabSizeLabel.Visible = Grab.Pressed;
-        // RMC14
     }
 }
