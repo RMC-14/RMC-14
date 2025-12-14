@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Mind.Components;
@@ -20,7 +19,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
@@ -188,9 +186,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return;
         }
 
-        var recommenderName = Name(actor.Value);
-        var recommenderRank = _rank.GetRankString(actor.Value) ?? Loc.GetString("rmc-award-recommendation-rank-unknown");
-        var recommenderJob = GetJobName(actor.Value);
         var recommenderLastPlayerId = GetLastPlayerId(actor.Value);
         if (recommenderLastPlayerId == null)
         {
@@ -200,10 +195,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         var recommendation = new MarineAwardRecommendationInfo
         {
-            RecommenderName = recommenderName,
-            RecommenderRank = recommenderRank,
-            RecommenderJob = recommenderJob,
-            RecommendedName = recommendedName,
             RecommendedLastPlayerId = recommendedLastPlayerId,
             RecommenderLastPlayerId = recommenderLastPlayerId,
             Reason = message
@@ -255,14 +246,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         }
 
         return true;
-    }
-
-    private string GetJobName(EntityUid actor)
-    {
-        if (TryComp<MindContainerComponent>(actor, out var mind) && mind.Mind is { } mindId)
-            return _jobs.MindTryGetJobName(mindId);
-
-        return Loc.GetString("generic-unknown-title");
     }
 
     private string? GetLastPlayerId(EntityUid actor)

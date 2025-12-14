@@ -47,23 +47,15 @@ public sealed partial class MarineControlComputerComponent : Component
 public sealed record GibbedMarineInfo
 {
     public required string Name { get; init; }
-
-    public string? LastPlayerId { get; init; }
-
-    public string? Rank { get; init; }
-
+    public required string LastPlayerId { get; init; }
     public required string Job { get; init; }
-
+    public string? Rank { get; init; }
     public string? Squad { get; init; }
 }
 
 [Serializable, NetSerializable]
 public sealed record MarineAwardRecommendationInfo
 {
-    public required string RecommenderName { get; init; }
-    public required string RecommenderRank { get; init; }
-    public required string RecommenderJob { get; init; }
-    public required string RecommendedName { get; init; }
     public required string RecommendedLastPlayerId { get; init; }
     public required string RecommenderLastPlayerId { get; init; }
     public required string Reason { get; init; }

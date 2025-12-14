@@ -155,10 +155,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         // For gibbed marines
         else if (args.LastPlayerId != null)
         {
+            var lastPlayerId = args.LastPlayerId;
             if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
-                computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == args.LastPlayerId) is { } info)
+                computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } info)
             {
-                _commendation.GiveCommendationByLastPlayerId(actor.Value, args.LastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
             }
         }
         else
@@ -282,7 +283,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var allGibbed = CollectGibbedMarines();
         foreach (var info in allGibbed)
         {
-            if (info.LastPlayerId == null)
+            if (info.LastPlayerId == string.Empty)
                 continue;
 
             options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, info.LastPlayerId)));

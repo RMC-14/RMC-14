@@ -31,7 +31,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         }
         // The entity being gibbed is the one that raised the event (ent)
         if (!TryComp(ent, out CommendationReceiverComponent? receiver) ||
-            receiver.LastPlayerId == null)
+            receiver.LastPlayerId == null || receiver.LastPlayerId == string.Empty)
         {
             return;
         }
