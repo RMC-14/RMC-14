@@ -79,7 +79,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             if (receiver.LastPlayerId == null)
                 continue;
 
-            options.Add(new DialogOption(Name(uid), new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), GetNetEntity(uid))));
+            options.Add(new DialogOption(Name(uid), new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), GetNetEntity(uid), receiver.LastPlayerId)));
         }
 
         var allGibbed = _control.CollectGibbedMarines();

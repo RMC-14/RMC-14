@@ -8,13 +8,13 @@ namespace Content.Shared._RMC14.Commendations;
 public sealed record RMCAwardRecommendationSelectMarineEvent(
     NetEntity Actor,
     NetEntity? Marine,
-    string? LastPlayerId = null);
+    string LastPlayerId);
 
 [ByRefEvent]
 [Serializable, NetSerializable]
 public sealed record RMCAwardRecommendationReasonEvent(
     NetEntity Actor,
     NetEntity? Marine,
-    string? LastPlayerId,
+    string LastPlayerId,
     string Message = ""
 ) : DialogInputEvent(Message);
