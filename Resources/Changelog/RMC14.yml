@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Eviscerate now breaks after 0.5 tiles instead of 0.3
-    type: Fix
-  id: 2171
-  time: '2025-08-06T06:03:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7389
 - author: Vermidia
   changes:
   - message: Fixed not being able to choose the healer drone strain.
@@ -4764,5 +4757,12 @@
   id: 2673
   time: '2025-12-14T22:13:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8724
+- author: Arykh
+  changes:
+  - message: Fixed Nutritious Property restoring less nutrition than intended.
+    type: Fix
+  id: 2674
+  time: '2025-12-14T22:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8660
 Name: RMC14
 Order: -1
