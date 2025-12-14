@@ -12,8 +12,8 @@
     role: CMJobCombatTech
     time: 18000 # 5 hours
   - !type:RoleTimeRequirement
-    role: CMJobHospitalCorpsman
-    time: 18000 # 5 hours
+    role: CMJobNurse
+    time: 3600 # 1 hour
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearSurvivor
