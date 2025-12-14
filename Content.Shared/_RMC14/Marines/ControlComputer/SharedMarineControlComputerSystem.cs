@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CCVar;
@@ -13,6 +12,7 @@ using Content.Shared.Dataset;
 using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using System.Linq;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -156,7 +156,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         else if (args.LastPlayerId != null)
         {
             if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
-                computer.GibbedMarines.TryGetValue(args.LastPlayerId, out var info))
+                computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == args.LastPlayerId) is { } info)
             {
                 _commendation.GiveCommendationByLastPlayerId(actor.Value, args.LastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
             }
@@ -279,20 +279,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         }
 
         // Add gibbed marines regardless of the entity itself, will always be added
-        var allGibbed = new Dictionary<string, GibbedMarineInfo>();
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var _, out var comp))  // all components must be synchronized with each other, but this is just in case
+        var allGibbed = CollectGibbedMarines();
+        foreach (var info in allGibbed)
         {
-            foreach (var (playerId, info) in comp.GibbedMarines)
-            {
-                if (info.LastPlayerId == null)
-                    continue;
-                allGibbed[playerId] = info;
-            }
-        }
-        foreach (var (playerId, info) in allGibbed)
-        {
-            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
+            if (info.LastPlayerId == null)
+                continue;
+
+            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, info.LastPlayerId)));
         }
 
         _dialog.OpenOptions(computer, actor, Loc.GetString("rmc-medal-recipient"), options, Loc.GetString("rmc-medal-recipient-prompt"));
@@ -373,19 +366,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         return added;
     }
 
-    public Dictionary<string, GibbedMarineInfo> CollectGibbedMarines()
+    public HashSet<GibbedMarineInfo> CollectGibbedMarines()
     {
-        var result = new Dictionary<string, GibbedMarineInfo>();
+        var result = new HashSet<GibbedMarineInfo>();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out _, out var computer))
         {
-            foreach (var (playerId, info) in computer.GibbedMarines)
-            {
-                if (info.LastPlayerId == null)
-                    continue;
-
-                result[playerId] = info;
-            }
+            result.UnionWith(computer.GibbedMarines);
         }
 
         return result;
@@ -396,8 +383,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out _, out var computer))
         {
-            if (computer.GibbedMarines.TryGetValue(playerId, out info!))
+            if (computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == playerId) is { } match)
+            {
+                info = match;
                 return true;
+            }
         }
 
         info = default!;

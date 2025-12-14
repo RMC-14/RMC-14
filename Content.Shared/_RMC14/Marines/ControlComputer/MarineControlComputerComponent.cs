@@ -31,7 +31,7 @@ public sealed partial class MarineControlComputerComponent : Component
     public TimeSpan LastToggle;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, GibbedMarineInfo> GibbedMarines = new();
+    public HashSet<GibbedMarineInfo> GibbedMarines = new();
 
     [DataField, AutoNetworkedField]
     public HashSet<MarineAwardRecommendationInfo> AwardRecommendations = new();
@@ -44,10 +44,17 @@ public sealed partial class MarineControlComputerComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed class GibbedMarineInfo
+public sealed record GibbedMarineInfo
 {
-    public string Name = string.Empty;
-    public string? LastPlayerId;
+    public required string Name { get; init; }
+
+    public string? LastPlayerId { get; init; }
+
+    public string? Rank { get; init; }
+
+    public required string Job { get; init; }
+
+    public string? Squad { get; init; }
 }
 
 [Serializable, NetSerializable]

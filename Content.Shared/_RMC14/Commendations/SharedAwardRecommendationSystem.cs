@@ -85,9 +85,12 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         }
 
         var allGibbed = _control.CollectGibbedMarines();
-        foreach (var (playerId, info) in allGibbed)
+        foreach (var info in allGibbed)
         {
-            options.Add(new DialogOption(info.Name, new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), null, playerId)));
+            if (info.LastPlayerId == null)
+                continue;
+
+            options.Add(new DialogOption(info.Name, new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), null, info.LastPlayerId)));
         }
 
         if (options.Count == 0)
