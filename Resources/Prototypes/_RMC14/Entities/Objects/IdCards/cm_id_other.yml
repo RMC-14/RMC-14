@@ -123,7 +123,7 @@
   name: we-ya corporate security ID card
   components:
   - type: PresetIdCard
-    job: RMCSurvivorHybrisaCorporateSecurity
+    job: CMSurvivorGoon
 
 - type: entity
   parent: CMIDCardLiaison
