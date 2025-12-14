@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.IoC;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Dialog;
@@ -11,7 +12,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 {
     private RMCDialogWindow? _window;
 
-    [Dependency] private readonly DialogSystem _dialog = default!;
+    private readonly DialogSystem _dialog = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<DialogSystem>();
     protected override void Open()
     {
         base.Open();
