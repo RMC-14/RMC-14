@@ -1,0 +1,12 @@
+﻿author: Aurallianz
+changes:
+- type: Add
+  message: The nuke now has an explosion effect when exploding.
+- type: Add
+  message: Added a ghost warp point to the nuke.
+- type: Fix
+  message: Fix nuke decryption not being stopped if a communications tower is destroyed.
+- type: Fix
+  message: Fixed the nuke being able to be rotated upside down.
+- type: Fix
+  message: Fixed the nuke not deleting hive structures on explosion.
