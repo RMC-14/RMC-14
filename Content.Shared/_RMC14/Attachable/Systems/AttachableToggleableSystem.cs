@@ -602,11 +602,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!TryComp(args.Used, out AttachableHolderComponent? holderComponent))
             return;
 
-        if (!attachable.Comp.Active && TryComp<InputMoverComponent>(args.User, out var input )) {
-            if((input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None)
-                return;
+        if (!attachable.Comp.Active &&
+            TryComp<InputMoverComponent>(args.User, out var input) &&
+            (input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None)
+        {
+            return;
         }
-
 
         FinishToggle(attachable, (used, holderComponent), args.SlotId, args.User, args.PopupText);
         args.Handled = true;
