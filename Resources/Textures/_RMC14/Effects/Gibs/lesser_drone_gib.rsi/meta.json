@@ -8,10 +8,9 @@
   },
   "states": [
     {
-      "name": "small_gib",
+      "name": "lesser_gib",
       "delays": [
         [
-          0.1,
           0.1,
           0.1,
           0.1,

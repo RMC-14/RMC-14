@@ -13,7 +13,6 @@
     tags:
     - HideContextMenu
 
-
 - type: entity
   parent: RMCBaseGibEffect
   id: RMCGibEffectXenoSmall
@@ -32,4 +31,4 @@
     sprite: _RMC14/Effects/Gibs/lesser_drone_gib.rsi
     state: lesser_gib
   - type: TimedDespawn
-    lifetime: 0.9
+    lifetime: 0.8

@@ -76,8 +76,8 @@
     gibChance: 1.0
   - type: RMCSpawnEntitiesOnGib
     entities:
-    - RMCDecalSpawnerGibsLesserDrone # TODO one for every caste
-    - RMCGibEffectXenoLesserDrone # TODO larger gib effect for larger xenos
+    - RMCDecalSpawnerGibsLesserDrone
+    - RMCGibEffectXenoLesserDrone
   - type: WhitelistPickup
     whitelist:
       components:
