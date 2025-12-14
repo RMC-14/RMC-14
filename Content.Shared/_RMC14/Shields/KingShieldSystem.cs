@@ -60,11 +60,11 @@ public sealed class KingShieldSystem : EntitySystem
             if (_shield.ApplyShield(ent, XenoShieldSystem.ShieldType.King, xeno.Comp.ShieldAmount, duration: xeno.Comp.DecayTime,
                 decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState))
             {
-                var lightning = EnsureComp<KingLightningComponent>(ent);
-                lightning.Source = xeno;
-                lightning.DisappearAt = time + xeno.Comp.LightningDuration;
-                xeno.Comp.Supporting.Add(ent);
-                UpdateTrail((ent, lightning));
+                // var lightning = EnsureComp<KingLightningComponent>(ent);
+                // lightning.Source = xeno;
+                // lightning.DisappearAt = time + xeno.Comp.LightningDuration;
+                // xeno.Comp.Supporting.Add(ent);
+                // UpdateTrail((ent, lightning));
             }
         }
     }

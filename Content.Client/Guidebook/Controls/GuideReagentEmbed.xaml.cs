@@ -206,7 +206,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
 
         // RMC14
         #region Flammability
-        if (reagent.Intensity > 0)
+        if (reagent.Intensity > 0 && reagent.Duration > 0 && reagent.Radius > 0)
         {
             FlammabilityDescriptionContainer.Children.Clear();
             var descriptionLabel = new RichTextLabel();

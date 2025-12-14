@@ -24,6 +24,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -357,9 +358,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
         var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
-        if (reagent.FireSpread)
-            maxRange -= 1;
-
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
@@ -448,7 +446,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void Transfer(EntityUid source,
         Entity<SolutionComponent> sourceSolutionEnt,
-        EntityUid target,
+        Entity<RMCFlamerTankComponent> target,
         Entity<SolutionComponent> targetSolutionEnt,
         EntityUid user)
     {
@@ -456,8 +454,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var targetSolution = sourceSolutionEnt.Comp.Solution;
         foreach (var content in targetSolution.Contents)
         {
+            if (target.Comp.ReagentWhitelist is { } whitelist && !whitelist.Contains(content.Reagent.Prototype))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-whitelisted", ("tank", target)), source, user);
+                return;
+            }
             if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
-                reagent.Intensity <= 0)
+                (reagent.Intensity <= 0 || reagent.Duration <= 0 || reagent.Radius <= 0))
             {
                 _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
                 return;
