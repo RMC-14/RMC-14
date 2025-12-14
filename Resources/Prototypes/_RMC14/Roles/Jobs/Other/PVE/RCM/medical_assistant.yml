@@ -4,6 +4,10 @@
   name: rmc-job-name-rcm-pve-medical-assistant
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalMedicPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearRoyalMedicPVE
