@@ -1,85 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Normandy walls are no longer all named "alamo wall".
-    type: Fix
-  id: 2178
-  time: '2025-08-08T22:34:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7417
-- author: Vermidia
-  changes:
-  - message: Fixed not being able to set holocards on someone in a stasis bag with
-      a health analyzer
-    type: Fix
-  - message: You can now see holocards of people in stasis bags.
-    type: Add
-  id: 2179
-  time: '2025-08-08T22:37:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7408
-- author: snebl
-  changes:
-  - message: Dropship double and triple doors no longer become entirely luminescent
-      when bolted.
-    type: Fix
-  id: 2180
-  time: '2025-08-08T22:39:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7418
-- author: PursuitInAshes
-  changes:
-  - message: The TSEPA Synthetic is now apart of the TSE faction.
-    type: Fix
-  id: 2181
-  time: '2025-08-08T22:36:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7405
-- author: noctyrnal
-  changes:
-  - message: Removed the M42A2 wooden stock.
-    type: Remove
-  - message: Added the M42A2 collapsible stock.
-    type: Add
-  - message: Fixed the M42A1 stock being in vendors and crates instead of the M42A2
-      stock.
-    type: Fix
-  id: 2182
-  time: '2025-08-08T22:38:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7416
-- author: DummeHytteOst
-  changes:
-  - message: Fixed the Rouny and Wehny spirte not being centered.
-    type: Fix
-  id: 2183
-  time: '2025-08-08T22:38:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7411
-- author: monomethylhydrazine
-  changes:
-  - message: Added orders for PVE PMC team leaders
-    type: Fix
-  id: 2184
-  time: '2025-08-08T22:37:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7407
-- author: DrSmugleaf
-  changes:
-  - message: Fixed dropships landing offset by half a tile.
-    type: Fix
-  - message: Fixed alamo and normandy cockpits locking in flight.
-    type: Fix
-  - message: Fixed armor vests not being patron-nameable.
-    type: Fix
-  - message: Disabled smoke creation until it works correctly.
-    type: Fix
-  - message: Fixed the popup that shows when trying to activate lifeboat sentries
-      outside of an emergency showing up for everyone instead of just the user.
-    type: Fix
-  id: 2185
-  time: '2025-08-08T22:52:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7427
-- author: DrSmugleaf
-  changes:
-  - message: Potential fix for the physics engine crapping out mid-round during PvE.
-    type: Fix
-  id: 2186
-  time: '2025-08-09T00:39:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7430
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed health analyzers not showing permadead marines as permadead
@@ -4764,5 +4683,76 @@
   id: 2680
   time: '2025-12-14T22:43:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8691
+- author: PursuitInAshes
+  changes:
+  - message: SEAs now have a stamp accessible through their vendor.
+    type: Add
+  id: 2681
+  time: '2025-12-14T22:45:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8704
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Kutjevo WeYa Corporate security survivor spawning with the incorrect
+      equipment and access.
+    type: Fix
+  id: 2682
+  time: '2025-12-14T22:47:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8677
+- author: Ian321
+  changes:
+  - message: The broiler backpack should no longer delete dropped guns.
+    type: Fix
+  id: 2683
+  time: '2025-12-14T22:48:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8668
+- author: Vermidia
+  changes:
+  - message: Fixed being unable to upgrade corrosive acid on cades
+    type: Fix
+  id: 2684
+  time: '2025-12-14T22:48:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8676
+- author: BarteG44
+  changes:
+  - message: Boxes of .458 can now be worn on the back
+    type: Tweak
+  id: 2685
+  time: '2025-12-14T22:45:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8667
+- author: Ian321
+  changes:
+  - message: Specialization kits can be chosen again after its specialist entered
+      cryogenic storage.
+    type: Add
+  id: 2686
+  time: '2025-12-14T22:47:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8679
+- author: noctyrnal
+  changes:
+  - message: The M5-ATL's rockets have been resprited.
+    type: Tweak
+  id: 2687
+  time: '2025-12-14T22:46:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8659
+- author: Max_Power
+  changes:
+  - message: Fixed papers, matchbooks, foldable rocket launcher, XL vests missing
+      their drop sounds and lowered volume
+    type: Fix
+  - message: Fixed pamphlets not sounding like paper when picking up or dropping them
+    type: Fix
+  - message: Fixed screwdrivers playing the incorrect sound when dropped
+    type: Fix
+  id: 2688
+  time: '2025-12-14T22:45:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8682
+- author: Ian321
+  changes:
+  - message: The fire-immunity examination text now differentiates between direct
+      and indirect ignition.
+    type: Tweak
+  id: 2689
+  time: '2025-12-14T22:46:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8680
 Name: RMC14
 Order: -1
