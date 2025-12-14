@@ -40,7 +40,7 @@
                 </BoxContainer>
             </PanelContainer>
             <ScrollContainer Name="RecommendationsContainer" Access="Public" VerticalExpand="True" HScrollEnabled="False" HorizontalExpand="True">
-                <BoxContainer Orientation="Vertical" Name="RecommendationsList" Access="Public" Margin="0 0 4 0" HorizontalExpand="True" SeparationOverride="6" />
+                <BoxContainer Orientation="Vertical" Name="RecommendationsList" Access="Public" HorizontalExpand="True" SeparationOverride="6" />
             </ScrollContainer>
         </BoxContainer>
     </PanelContainer>
