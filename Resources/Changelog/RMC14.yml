@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The PVE server now has 2 unique dropships.
-    type: Add
-  id: 2190
-  time: '2025-08-17T22:39:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7527
 - author: DrSmugleaf
   changes:
   - message: Fixed buggy movement speed while wielding some guns, causing rubberbanding
@@ -4747,5 +4740,14 @@
   id: 2692
   time: '2025-12-14T22:56:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8714
+- author: PursuitinAshes
+  changes:
+  - message: '[PvE] The Dropships now have a weapons console to use at GM discretion.'
+    type: Tweak
+  - message: '[PvE] Both dropships now have a warp point.'
+    type: Tweak
+  id: 2693
+  time: '2025-12-14T22:58:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8703
 Name: RMC14
 Order: -1
