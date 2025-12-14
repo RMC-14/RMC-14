@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Reverted survivor spawning to how it worked in previous updates, until
-      it sometimes crashing the server on round start is fixed.
-    type: Fix
-  id: 2195
-  time: '2025-08-18T07:20:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7534
 - author: DummeHytteOst
   changes:
   - message: Fixed the synth survival pouch having the wrong handheld radio.
@@ -4761,5 +4753,12 @@
   id: 2697
   time: '2025-12-14T23:16:49.051000+00:00'
   url: null
+- author: Aurallianz
+  changes:
+  - message: Added Nuke detonation music.
+    type: Add
+  id: 2698
+  time: '2025-12-14T23:19:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8721
 Name: RMC14
 Order: -1
