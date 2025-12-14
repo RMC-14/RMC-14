@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.ScissorCut;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -29,10 +30,10 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -50,7 +51,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
@@ -72,6 +72,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -93,6 +94,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         SubscribeLocalEvent<XenoDestroyLeapingComponent, ChangeDirectionAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, InteractionAttemptEvent>(OnLeapingCancelInteract);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, PullAttemptEvent>(OnLeapingCancelPull);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, UpdateCanMoveEvent>(OnLeapingCancel);
     }
 
     private void OnXenoDestroyAction(Entity<XenoDestroyComponent> xeno, ref XenoDestroyActionEvent args)
@@ -147,8 +149,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         _rotateToFace.TryFaceCoordinates(xeno, _transform.ToMapCoordinates(args.TargetCoords).Position);
         _rmcPull.TryStopAllPullsFromAndOn(xeno);
 
-        //Root
-        _stun.TrySlowdown(xeno, xeno.Comp.CrashTime, true, 0f, 0f);
         if (_net.IsServer)
         {
             var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
@@ -332,8 +332,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             _actions.SetEnabled(action.AsNullable(), false);
         }
 
-        if (xeno.Comp.Target == null || !TryComp<XenoDestroyComponent>(xeno, out var destroy))
-            return;
+        _blocker.UpdateCanMove(xeno);
     }
 
     protected virtual void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)
@@ -343,5 +342,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         {
             _actions.SetEnabled(action.AsNullable(), true);
         }
+
+        _blocker.UpdateCanMove(xeno);
     }
 }
