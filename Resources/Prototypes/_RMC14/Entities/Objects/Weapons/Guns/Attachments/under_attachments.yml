@@ -282,6 +282,9 @@
   - type: RMCFlamerTank
     maxIntensity: 10
     maxDuration: 10
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -307,6 +310,9 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
+  - type: RMCFlushableSolution
+    solution: rmc_flamer_tank
+    flushTime: 1.5
 
 - type: entity
   parent: RMCUnderAttachmentBase

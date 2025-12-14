@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -17,6 +18,7 @@ public sealed class RMCMagneticSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
 
     public override void Initialize()
@@ -74,18 +76,22 @@ public sealed class RMCMagneticSystem : EntitySystem
         while (everySlotEnumerator.MoveNext(out var slot))
         {
             if (slot.ContainedEntity is not { } slotItem ||
-                !HasComp<RMCMagneticItemReceiverComponent>(slotItem))
+                !HasComp<RMCMagneticItemReceiverComponent>(slotItem) ||
+                !TryComp<ItemSlotsComponent>(slotItem, out var itemSlotsComp))
                 continue;
 
             foreach (var slotContainer in _container.GetAllContainers(slotItem))
             {
-                if (_container.CanInsert(args.Args.Item, slotContainer))
-                {
-                    args.Args.Magnetizer = ent;
-                    args.Args.ReceivingItem = slotItem;
-                    args.Args.ReceivingContainer = slotContainer.ID;
-                    return;
-                }
+                if (!_slots.TryGetSlot(slotItem, slotContainer.ID, out var itemSlot, itemSlotsComp))
+                    continue;
+
+                if (!_slots.CanInsert(ent, args.Args.Item, args.Args.User, itemSlot, false))
+                    continue;
+
+                args.Args.Magnetizer = ent;
+                args.Args.ReceivingItem = slotItem;
+                args.Args.ReceivingContainer = slotContainer.ID;
+                return;
             }
         }
 
