@@ -90,19 +90,19 @@ public sealed class XenoScreechSystem : EntitySystem
 
         foreach (var receiver in _parasites)
         {
-            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true);
+            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true, false);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun)
+    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun, bool occlusionCheck = true)
     {
         if (_mobState.IsDead(receiver))
             return;
 
-        if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
+        if (occlusionCheck && !_examineSystem.InRangeUnOccluded(xeno, receiver))
             return;
 
         if (stun)

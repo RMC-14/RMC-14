@@ -41,7 +41,9 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMChiefEngineer
       points: 45
     - type: MarineOrders
     - type: RMCPointing
@@ -57,6 +59,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: MutinyEligible
     - type: RMCAwardRecommendation
 
 - type: startingGear

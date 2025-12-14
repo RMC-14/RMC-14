@@ -30,16 +30,61 @@
 
 # Royal
 - type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineRoyal
+  name: royal crown marine uniform
+  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
   suffix: Filled, Royal
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyal
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+
+- type: entity
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalMK80
+  suffix: Filled, Royal, MK80
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCShoulderHolsterMK80
+
+- type: entity
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalMedic
+  suffix: Filled, Royal, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalBlue
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarineRoyalTeamlead
+  name: royal crown marine uniform
+  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
+  suffix: Filled, Royal, Teamlead
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 # Formal
 - type: entity
@@ -158,22 +203,22 @@
 
 # Supply
 
-# Quartermaster / RO
+# Logistics Officer
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: quartermaster suit
-  description: A nicely-fitting military suit for a quartermaster. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: Logistics Officer suit
+  description: A nicely-fitting military suit for a Logistics Officer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
 
-# Cargotech
+# ReqTech / RT
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
-  name: cargo technician uniform
-  description: A standard-issue cargo tech uniform.
+  name: requisitions technician uniform
+  description: A standard-issue req tech uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
@@ -440,8 +485,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
-  name: pilot officer bodysuit
-  description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: pilot bodysuit
+  description: A bodysuit worn by pilots of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi

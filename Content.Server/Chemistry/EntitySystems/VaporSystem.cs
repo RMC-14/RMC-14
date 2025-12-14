@@ -49,7 +49,11 @@ namespace Content.Server.Chemistry.EntitySystems
                 _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch);
             }
 
-            var ev = new VaporHitEvent((entity.Owner, contents));
+            var power = 7;
+            if (TryComp<RMCExtinguisherPowerComponent>(entity, out var extinguisher))
+                power = extinguisher.Power;
+
+            var ev = new VaporHitEvent((entity.Owner, contents), power);
             RaiseLocalEvent(args.OtherEntity, ref ev);
 
             // Check for collision with a impassable object (e.g. wall) and stop

@@ -119,6 +119,7 @@
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
+    resetMeleeCooldown: true
   - type: XenoTailStab
     tailDamage:
       groups:
@@ -128,6 +129,8 @@
     - RMCXenoLurkerVampire
   - type: VentCrawler
     ventCrawlIcon: lurker
+  - type: RMCActionOrder
+    id: CMXenoLurker
 
 - type: entity
   parent: RMCXenoLurkerBase
@@ -202,3 +205,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: vampire
+  - type: RMCActionOrder
+    id: RMCXenoLurkerVampire
