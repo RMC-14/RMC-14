@@ -20,6 +20,10 @@
     RMCRankCivilianAssociateProfessor:
     - !type:RoleTimeRequirement
       role: CMJobResearcher
+      time: 90000 # 25 hours
+    RMCRankCivilianAssistantProfessor:
+    - !type:RoleTimeRequirement
+      role: CMJobResearcher
       time: 36000 # 10 hours
     RMCRankCivilianDoctor: []
   startingGear: CMGearResearcher
@@ -63,7 +67,7 @@
   equipment:
     jumpsuit: CMJumpsuitResearch
     shoes: RMCShoesLaceup
-    id: CMIDCardResearcher
+    id: CMIDCardResearcher # TODO ID has both Marine and WeYa IFF
     # TODO RMC14 random chemical synthesis note, syringe,
 
 - type: startingGear

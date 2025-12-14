@@ -16,6 +16,11 @@
   prefix: Dr.
 
 - type: rank
+  id: RMCRankCivilianAssistantProfessor
+  name: Assistant Professor
+  prefix: Asst. Prof.
+
+- type: rank
   id: RMCRankCivilianAssociateProfessor
   name: Associate Professor
   prefix: Assoc. Prof.
