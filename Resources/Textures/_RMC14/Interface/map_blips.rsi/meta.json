@@ -907,6 +907,9 @@
     },
     {
       "name": "gm_star"
+    },
+    {
+      "name": "gm_hash"
     }
   ]
 }
