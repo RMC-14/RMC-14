@@ -133,6 +133,10 @@
   components:
   - type: Sprite
     color: "#A26C6E"
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.2
+    hijackEvacuationType: Add
 
 - type: entity
   parent: RMCAreaWarship
@@ -717,6 +721,11 @@
   components:
   - type: Sprite
     color: "#58471A"
+  - type: Area
+    zLevel: 1
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
 
 - type: entity
   parent: RMCAreaWarship
@@ -725,6 +734,11 @@
   components:
   - type: Sprite
     color: "#5E0D81"
+  - type: Area
+    zLevel: 1
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
 
 - type: entity
   parent: RMCAreaWarship
@@ -733,6 +747,11 @@
   components:
   - type: Sprite
     color: "#7332CC"
+  - type: Area
+    zLevel: 1
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
 
 - type: entity
   parent: RMCAreaWarship
@@ -741,6 +760,11 @@
   components:
   - type: Sprite
     color: "#9B3D71"
+  - type: Area
+    zLevel: 1
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
 
 - type: entity
   parent: RMCAreaWarship
@@ -1429,6 +1453,12 @@
   components:
   - type: Sprite
     color: "#C5F07A"
+  - type: Area
+    zLevel: 3
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1.1
+    hijackEvacuationType: Multiply
+
 
 - type: entity
   parent: RMCAreaWarship
