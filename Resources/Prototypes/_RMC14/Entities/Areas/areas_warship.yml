@@ -45,6 +45,9 @@
   components:
   - type: Sprite
     color: "#9DCD4A"
+  - type: Area
+    zLevel: 0
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaWarship
@@ -169,6 +172,7 @@
   components:
   - type: Sprite
     color: "#7E4E5A"
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaWarship
@@ -283,6 +287,7 @@
   components:
   - type: Sprite
     color: "#3FDE4F"
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaWarship
@@ -291,6 +296,7 @@
   components:
   - type: Sprite
     color: "#6EBAEF"
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaWarship
@@ -299,6 +305,12 @@
   components:
   - type: Sprite
     color: "#5293B8"
+  - type: IntelRecoverCorpsesArea
+  - type: Area
+    zLevel: 0
+    avoidBioscan: true
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaWarship
@@ -1454,11 +1466,10 @@
   - type: Sprite
     color: "#C5F07A"
   - type: Area
-    zLevel: 3
+    zLevel: 2
     hijackEvacuationArea: true
     hijackEvacuationWeight: 1.1
     hijackEvacuationType: Multiply
-
 
 - type: entity
   parent: RMCAreaWarship
