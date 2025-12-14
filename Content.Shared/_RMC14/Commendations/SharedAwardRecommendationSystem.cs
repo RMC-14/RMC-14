@@ -23,6 +23,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
 
     public int CharacterLimit { get; private set; }
 
@@ -34,7 +35,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         SubscribeLocalEvent<RMCAwardRecommendationComponent, RMCAwardRecommendationSelectMarineEvent>(OnSelectMarine);
         SubscribeLocalEvent<RMCAwardRecommendationComponent, RMCAwardRecommendationReasonEvent>(OnSubmitRecommendation);
 
-        Subs.CVar(_config, RMCCVars.RMCCommendationMaxLength, v => CharacterLimit = v, true);
+        Subs.CVar(_config, RMCCVars.RMCRecommendationMaxLength, v => CharacterLimit = v, true);
     }
 
     private void OnGetHeadsetAlternativeVerb(Entity<RMCHeadsetComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -83,7 +84,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             options.Add(new DialogOption(Name(uid), new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), GetNetEntity(uid))));
         }
 
-        var allGibbed = CollectGibbedMarines();
+        var allGibbed = _control.CollectGibbedMarines();
         foreach (var (playerId, info) in allGibbed)
         {
             options.Add(new DialogOption(info.Name, new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), null, playerId)));
@@ -170,7 +171,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         }
         else if (recommendedLastPlayerId != null)
         {
-            if (!TryGetGibbedMarineInfo(recommendedLastPlayerId, out var info))
+            if (!_control.TryGetGibbedMarineInfo(recommendedLastPlayerId, out var info))
             {
                 _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-invalid"), ent.Owner, actor.Value, PopupType.SmallCaution);
                 return;
@@ -231,37 +232,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         );
     }
 
-    private Dictionary<string, GibbedMarineInfo> CollectGibbedMarines()
-    {
-        var result = new Dictionary<string, GibbedMarineInfo>();
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out _, out var computer))
-        {
-            foreach (var (playerId, info) in computer.GibbedMarines)
-            {
-                if (info.LastPlayerId == null)
-                    continue;
-
-                result[playerId] = info;
-            }
-        }
-
-        return result;
-    }
-
-    private bool TryGetGibbedMarineInfo(string playerId, out GibbedMarineInfo info)
-    {
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out _, out var computer))
-        {
-            if (computer.GibbedMarines.TryGetValue(playerId, out info!))
-                return true;
-        }
-
-        info = default!;
-        return false;
-    }
-
     private bool CanRecommendPopup(EntityUid entity)
     {
         if (!TryComp<ActorComponent>(entity, out var actor) || actor.PlayerSession == null)
@@ -282,7 +252,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return false;
         }
 
-        if (component.MaxRecommendations > 0 && component.RecommendationsGiven >= component.MaxRecommendations)
+        if (component.RecommendationsGiven >= component.MaxRecommendations)
         {
             _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-out"), entity, entity, PopupType.SmallCaution);
             return false;

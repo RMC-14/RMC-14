@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedMarineControlComputerSystem), typeof(SharedAwardRecommendationSystem))]
+[Access(typeof(SharedMarineControlComputerSystem))]
 public sealed partial class MarineControlComputerComponent : Component
 {
     [DataField, AutoNetworkedField]

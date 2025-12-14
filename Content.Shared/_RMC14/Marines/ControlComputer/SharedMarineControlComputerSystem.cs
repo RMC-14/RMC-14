@@ -357,4 +357,35 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         return true;
     }
+
+    public Dictionary<string, GibbedMarineInfo> CollectGibbedMarines()
+    {
+        var result = new Dictionary<string, GibbedMarineInfo>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            foreach (var (playerId, info) in computer.GibbedMarines)
+            {
+                if (info.LastPlayerId == null)
+                    continue;
+
+                result[playerId] = info;
+            }
+        }
+
+        return result;
+    }
+
+    public bool TryGetGibbedMarineInfo(string playerId, out GibbedMarineInfo info)
+    {
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            if (computer.GibbedMarines.TryGetValue(playerId, out info!))
+                return true;
+        }
+
+        info = default!;
+        return false;
+    }
 }
