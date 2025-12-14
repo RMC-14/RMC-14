@@ -1,0 +1,23 @@
+{
+  "copyright" : "kyres1 (Github)",
+  "license" : "CC-BY-SA-3.0",
+  "version": 1,
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 4
+    },
+    {
+      "name": "base-open",
+      "directions": 4
+    },
+    {
+      "name": "base-broken",
+      "directions": 4
+    }
+  ]
+}
