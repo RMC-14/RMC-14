@@ -1,17 +1,22 @@
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Marines.ControlComputer;
+using Content.Client.Resources;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
-using System.Collections.Generic;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client._RMC14.Marines.ControlComputer;
 
 [UsedImplicitly]
 public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
+    [Dependency] private readonly IClipboardManager _clipboard = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
+
     [ViewVariables]
     private MedalsPanelWindow? _window;
 
@@ -28,7 +33,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
-        
+
         if (_window == null || state is not MarineMedalsPanelBuiState medalsState)
             return;
 
@@ -49,7 +54,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             {
                 HorizontalExpand = true
             };
-            
+
             var panelStyle = new StyleBoxFlat
             {
                 BorderColor = new Color(58, 58, 58), // #3A3A3A
@@ -92,7 +97,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
                 Margin = new Robust.Shared.Maths.Thickness(4, 0),
-                SeparationOverride = 3,
+                SeparationOverride = 12,
                 HorizontalExpand = true
             };
 
@@ -104,7 +109,8 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
                     HorizontalExpand = true
                 };
 
-                var recommenderText = $"Recommender: {recommendation.RecommenderName} ()";
+                var recommenderLabelText = Loc.GetString("rmc-medal-panel-recommender-label");
+                var recommenderText = $"{recommenderLabelText} {recommendation.RecommenderName} ()";
                 var recommenderLabel = new RichTextLabel
                 {
                     HorizontalExpand = true
@@ -112,13 +118,130 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
                 recommenderLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(recommenderText));
                 recContainer.AddChild(recommenderLabel);
 
-                var reasonText = $"Reason: {recommendation.Reason}";
-                var reasonLabel = new RichTextLabel
+                // Reason with copy button
+                var reasonContainer = new BoxContainer
                 {
+                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
                     HorizontalExpand = true
                 };
+
+                var reasonLabelText = Loc.GetString("rmc-medal-panel-reason-label");
+                var reasonText = $"{reasonLabelText} {recommendation.Reason}";
+                var reasonLabel = new RichTextLabel
+                {
+                    HorizontalExpand = true,
+                    Margin = new Robust.Shared.Maths.Thickness(0, 0, 6, 0),
+                };
                 reasonLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(reasonText));
-                recContainer.AddChild(reasonLabel);
+                reasonContainer.AddChild(reasonLabel);
+
+                // Copy button with icon
+                var copyButton = new ContainerButton
+                {
+                    SetWidth = 28,
+                    SetHeight = 28,
+                    HorizontalAlignment = Control.HAlignment.Right
+                };
+
+                // Background colors relative to container background (#1F1F1F)
+                var normalColor = new Color(31, 31, 31); // Same as container background
+                var hoverColor = new Color(47, 47, 47); // Lighter than container background
+                var pressedColor = new Color(23, 55, 23); // Green like standard button pressed state
+
+                var normalStyle = new StyleBoxFlat
+                {
+                    BackgroundColor = normalColor,
+                    BorderThickness = new Robust.Shared.Maths.Thickness(0),
+                    Padding = new Robust.Shared.Maths.Thickness(2)
+                };
+
+                copyButton.StyleBoxOverride = normalStyle;
+
+                // Track hover state
+                var isHovered = false;
+
+                // Handle hover - change color when mouse enters
+                copyButton.OnMouseEntered += _ =>
+                {
+                    isHovered = true;
+                    if (!copyButton.Pressed)
+                    {
+                        copyButton.StyleBoxOverride = new StyleBoxFlat
+                        {
+                            BackgroundColor = hoverColor,
+                            BorderThickness = new Robust.Shared.Maths.Thickness(0),
+                            Padding = new Robust.Shared.Maths.Thickness(2)
+                        };
+                    }
+                };
+
+                // Handle hover exit - restore normal color
+                copyButton.OnMouseExited += _ =>
+                {
+                    isHovered = false;
+                    if (!copyButton.Pressed)
+                    {
+                        copyButton.StyleBoxOverride = normalStyle;
+                    }
+                };
+
+                // Handle button press - change to green color while button is held
+                copyButton.OnButtonDown += _ =>
+                {
+                    copyButton.StyleBoxOverride = new StyleBoxFlat
+                    {
+                        BackgroundColor = pressedColor,
+                        BorderThickness = new Robust.Shared.Maths.Thickness(0),
+                        Padding = new Robust.Shared.Maths.Thickness(2)
+                    };
+                };
+
+                // Handle button release - restore color based on hover state
+                copyButton.OnButtonUp += _ =>
+                {
+                    copyButton.StyleBoxOverride = isHovered
+                        ? new StyleBoxFlat
+                        {
+                            BackgroundColor = hoverColor,
+                            BorderThickness = new Robust.Shared.Maths.Thickness(0),
+                            Padding = new Robust.Shared.Maths.Thickness(2)
+                        }
+                        : normalStyle;
+                };
+
+                var copyIcon = new TextureRect
+                {
+                    SetWidth = 20,
+                    SetHeight = 20,
+                    Stretch = TextureRect.StretchMode.KeepAspectCentered,
+                    HorizontalAlignment = Control.HAlignment.Center,
+                    VerticalAlignment = Control.VAlignment.Center
+                };
+
+                // Load copy and check icon textures (PNG versions created from SVG)
+                var copyTexture = _resourceCache.GetTexture(new ResPath("/Textures/_RMC14/Interface/VerbIcons/copy.png"));
+                var checkTexture = _resourceCache.GetTexture(new ResPath("/Textures/_RMC14/Interface/VerbIcons/check.png"));
+
+                copyIcon.Texture = copyTexture;
+                copyButton.AddChild(copyIcon);
+
+                // Handle copy button press
+                copyButton.OnPressed += _ =>
+                {
+                    _clipboard.SetText(recommendation.Reason);
+
+                    // Replace icon with check mark
+                    copyIcon.Texture = checkTexture;
+
+                    // Schedule icon restoration after 1 second
+                    Timer.Spawn(System.TimeSpan.FromSeconds(1), () =>
+                    {
+                        copyIcon.Texture = copyTexture;
+                    });
+                };
+
+                reasonContainer.AddChild(copyButton);
+                recContainer.AddChild(reasonContainer);
 
                 recommendationsContainer.AddChild(recContainer);
             }

@@ -32,3 +32,9 @@ rmc-award-recommendation-success = { $name } has been successfully recommended f
 rmc-award-recommendation-out = You have reached the limit of recommendations for an award.
 rmc-award-recommendation-no-authority = You do not have the authority to recommend for an award.
 rmc-award-recommendation-rank-unknown = No rank
+
+# Medal Recommendation Display
+rmc-medal-panel = Medals Panel
+rmc-medal-panel-give-new-medal = Give new medal
+rmc-medal-panel-recommender-label = [color=#5B88B0]Recommender:[/color]
+rmc-medal-panel-reason-label = [color=#5B88B0]Reason:[/color]
