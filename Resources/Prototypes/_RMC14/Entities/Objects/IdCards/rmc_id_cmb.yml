@@ -72,5 +72,3 @@
     factions:
     - FactionMarine
     - FactionSurvivor
-  - type: PresetIdCard
-    job: CMSurvivorCMBMarshal
