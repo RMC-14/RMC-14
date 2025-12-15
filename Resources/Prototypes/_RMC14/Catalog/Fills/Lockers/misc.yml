@@ -8,7 +8,7 @@
       - id: CMMaskGas
 ##      - id: EmergencyOxygenTankFilled
       - id: CMFirstAidO2KitFilled
-      - id: CMFlare
+      - id: RMCToolboxEmergencyFilled
 
 - type: entity
   id: CMClosetFireFilled
@@ -17,10 +17,11 @@
   components:
     - type: StorageFill
       contents:
-        - id: CMMaskGas
- ##       - id: EmergencyOxygenTankFilled
+        - id: RMCHardhatRed
+##        - id: TODO: /obj/item/clothing/suit/fire/firefighter
+##        - id: OxygenTankFilled
         - id: CMFireExtinguisher
-        - id: CMBurnAidKitFilled
+        - id: CMPackFlare
 
 - type: entity
   parent: CMLockerCommanderSecure
