@@ -129,7 +129,8 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             inputEvent,
             true,
             CharacterLimit,
-            MinCharacterLimit);
+            MinCharacterLimit,
+            true);
     }
 
     private void OnSubmitRecommendation(Entity<RMCAwardRecommendationComponent> ent, ref RMCAwardRecommendationReasonEvent args)

@@ -38,4 +38,7 @@ public sealed partial class DialogComponent : Component
 
     [DataField]
     public bool AutoFocus = true;
+
+    [DataField, AutoNetworkedField]
+    public bool SmartCheck = false;
 }

@@ -80,8 +80,8 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             container = new RMCDialogInputContainer();
             container.MessageLineEdit.OnTextEntered += args => SendPredictedMessage(new DialogInputBuiMsg(args.Text));
-            container.MessageLineEdit.OnTextChanged += args => OnInputTextChanged(container, args.Text, s.MinCharacterLimit, s.CharacterLimit);
-            container.MessageTextEdit.OnTextChanged += args => OnInputTextChanged(container, Rope.Collapse(args.TextRope), s.MinCharacterLimit, s.CharacterLimit);
+            container.MessageLineEdit.OnTextChanged += args => OnInputTextChanged(container, args.Text, s.MinCharacterLimit, s.CharacterLimit, s.SmartCheck);
+            container.MessageTextEdit.OnTextChanged += args => OnInputTextChanged(container, Rope.Collapse(args.TextRope), s.MinCharacterLimit, s.CharacterLimit, s.SmartCheck);
             container.CancelButton.OnPressed += _ => Close();
             container.OkButton.OnPressed += _ =>
             {
@@ -93,7 +93,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
             _window.Container = container;
             _window.AddChild(_window.Container);
-            OnInputTextChanged(container, string.Empty, s.MinCharacterLimit, s.CharacterLimit);
+            OnInputTextChanged(container, string.Empty, s.MinCharacterLimit, s.CharacterLimit, s.SmartCheck);
         }
 
         _window.Title = string.Empty;
@@ -160,9 +160,9 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         _window?.OpenCentered();
     }
 
-    private void OnInputTextChanged(RMCDialogInputContainer container, string text, int min, int max)
+    private void OnInputTextChanged(RMCDialogInputContainer container, string text, int min, int max, bool smartCheck)
     {
-        var textLength = _dialog.CalculateEffectiveLength(text);
+        var textLength = _dialog.CalculateEffectiveLength(text, smartCheck);
         container.CharacterCount.Text = min > 0
             ? $"{textLength} / {min}-{max}"
             : $"{textLength} / {max}";
