@@ -12,6 +12,9 @@ public sealed partial class RMCConstructionUpgradeTargetComponent : Component
     public EntProtoId[]? Upgrades;
 
     [DataField, AutoNetworkedField]
+    public EntProtoId? Downgrade;
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillConstruction";
 
     [DataField, AutoNetworkedField]
