@@ -111,6 +111,7 @@ public sealed class BarricadeSystem : EntitySystem
         var projectileCoverage = barricade.Comp.ProjectileCoverage;
         var distanceLimit = barricade.Comp.DistanceLimit;
         var accuracyFactor = barricade.Comp.AccuracyFactor;
+
         var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
         var blockHit = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
 
