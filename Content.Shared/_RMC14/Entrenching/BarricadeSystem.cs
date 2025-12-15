@@ -518,4 +518,21 @@ public sealed class BarricadeSystem : EntitySystem
 
         return false;
     }
+
+    public bool IsBehindOrParrellelToTarget(EntityUid projectile, EntityUid barricade)
+    {
+        var barricadeFacingDirection = Transform(barricade).LocalRotation.GetCardinalDir();
+        var behindAngle = barricadeFacingDirection.GetOpposite().ToAngle();
+
+        var projectileMapPos = _transform.GetMapCoordinates(projectile);
+        var barricadeMapPos = _transform.GetMapCoordinates(barricade);
+        var currentAngle = (projectileMapPos.Position - barricadeMapPos.Position).ToWorldAngle();
+
+        var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
+
+        if (differenceFromBehindAngle > -180 && differenceFromBehindAngle < 180)
+            return true;
+
+        return false;
+    }
 }
