@@ -257,7 +257,12 @@
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/van.rsi
     layers:
-    - state: van_base
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: SpriteMovement

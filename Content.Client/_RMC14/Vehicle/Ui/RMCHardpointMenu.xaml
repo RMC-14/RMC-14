@@ -1,12 +1,27 @@
-<controls:FancyWindow
+<controls:RMCHardpointMenu
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    Title="{Loc 'rmc-hardpoint-ui-title'}"
-    MinSize="380 260">
-  <ScrollContainer VerticalExpand="True" Margin="8 8 8 8">
-    <BoxContainer Name="HardpointList"
-                  Orientation="Vertical"
-                  SeparationOverride="8"
-                  VerticalExpand="True" />
-  </ScrollContainer>
-</controls:FancyWindow>
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Hardpoints"
+    MinSize="600 400">
+
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#05090F"
+                BorderColor="#88C7FA"
+                BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
+            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer
+                    Name="HardpointList"
+                    Access="Public"
+                    Orientation="Vertical"
+                    SeparationOverride="6"
+                    HorizontalExpand="True"/>
+            </ScrollContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCHardpointMenu>

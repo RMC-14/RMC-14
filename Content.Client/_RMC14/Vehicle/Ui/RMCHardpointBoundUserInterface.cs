@@ -18,6 +18,7 @@ public sealed class RMCHardpointBoundUserInterface : BoundUserInterface
         base.Open();
 
         _menu = new RMCHardpointMenu();
+        _menu.OnClose += Close;
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
@@ -33,6 +34,9 @@ public sealed class RMCHardpointBoundUserInterface : BoundUserInterface
 
         if (!disposing)
             return;
+
+        if (_menu != null)
+            _menu.OnClose -= Close;
 
         _menu?.Dispose();
         _menu = null;

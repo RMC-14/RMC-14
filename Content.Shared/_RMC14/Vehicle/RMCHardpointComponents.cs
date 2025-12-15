@@ -174,3 +174,12 @@ public sealed partial class RMCHardpointRemoveDoAfterEvent : DoAfterEvent
                && other.Used == Used;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed partial class RMCHardpointRepairDoAfterEvent : DoAfterEvent
+{
+    public override DoAfterEvent Clone()
+    {
+        return new RMCHardpointRepairDoAfterEvent();
+    }
+}

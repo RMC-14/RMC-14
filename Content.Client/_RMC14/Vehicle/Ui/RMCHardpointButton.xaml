@@ -1,0 +1,5 @@
+<controls:RMCHardpointButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui">
+    <RichTextLabel Name="Label" Access="Public" MouseFilter="Ignore" />
+</controls:RMCHardpointButton>

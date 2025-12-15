@@ -5,9 +5,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-/// <summary>
-/// Enables a temporary speed boost for vehicles when activated by the operator.
-/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCVehicleOverchargeComponent : Component
 {

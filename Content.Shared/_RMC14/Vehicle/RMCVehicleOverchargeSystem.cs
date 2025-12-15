@@ -13,9 +13,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-/// <summary>
-/// Handles activating vehicle overcharge via the walk (shift) key.
-/// </summary>
 public sealed class RMCVehicleOverchargeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;

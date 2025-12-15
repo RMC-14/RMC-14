@@ -358,19 +358,14 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         Vector2 offset;
 
-        // Check if this exit is linked to a specific entry point
         var entryIndex = ent.Comp.EntryIndex;
         if (entryIndex >= 0 && entryIndex < enter.EntryPoints.Count)
         {
-            // Use the offset from the corresponding entry point
             offset = enter.EntryPoints[entryIndex].Offset;
-            Logger.Info($"[VehicleExit] Using entry point {entryIndex} offset={offset}");
         }
         else
         {
-            // Fall back to the default exit offset
             offset = enter.ExitOffset;
-            Logger.Info($"[VehicleExit] Using default ExitOffset={offset}");
         }
 
         var rotated = vehicleXform.LocalRotation.RotateVec(offset);
@@ -379,7 +374,6 @@ public sealed class RMCVehicleSystem : EntitySystem
         var exitCoords = new EntityCoordinates(parent.Value, position);
         var exitMapCoords = _transform.ToMapCoordinates(exitCoords);
         _rmcTeleporter.HandlePulling(user, exitMapCoords);
-        Logger.Info($"[VehicleExit] Teleported to {exitCoords}");
         return true;
     }
 

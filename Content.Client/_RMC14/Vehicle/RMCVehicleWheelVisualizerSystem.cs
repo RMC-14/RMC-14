@@ -7,6 +7,8 @@ namespace Content.Client._RMC14.Vehicle;
 
 public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicleWheelSlotsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,17 +32,14 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
 
     private void UpdateWheelVisuals(EntityUid uid, SpriteComponent? sprite = null)
     {
-        if (sprite == null && !TryComp<SpriteComponent>(uid, out sprite))
+        if (sprite == null && !TryComp(uid, out sprite))
             return;
 
-        // Check if the wheels layer exists
-        if (!SpriteSystem.LayerMapTryGet((uid, sprite!), RMCVehicleWheelLayers.Wheels, out var layer, true))
-        {
+        if (!_sprite.LayerMapTryGet((uid, sprite), RMCVehicleWheelLayers.Wheels, out var layer, true))
             return;
-        }
 
-        // Check if vehicle has wheels
         var hasWheels = true;
+
         if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.WheelCount, out int count))
             hasWheels = count > 0;
         else if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.HasAllWheels, out bool present))
@@ -48,29 +47,42 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
 
         if (!hasWheels)
         {
-            SpriteSystem.LayerSetVisible((uid, sprite!), layer, false);
+            _sprite.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
         var isMoving = false;
-        if (TryComp<GridVehicleMoverComponent>(uid, out var gridMover))
-            isMoving = MathF.Abs(gridMover.CurrentSpeed) > 0.01f;
+        if (TryComp<GridVehicleMoverComponent>(uid, out var mover))
+            isMoving = Math.Abs(mover.CurrentSpeed) > 0.01f;
 
-        const string wheelsMoving = "wheels_0";
-        const string wheelsStationary = "wheels_0";
+        var destroyed = false;
+        var opacity = 1f;
 
-        var targetState = isMoving ? wheelsMoving : wheelsStationary;
-        var currentState = sprite!.LayerGetState(layer);
+        if (TryComp<RMCHardpointIntegrityComponent>(uid, out var integrity))
+        {
+            var max = integrity.MaxIntegrity > 0f ? integrity.MaxIntegrity : 1f;
+            opacity = integrity.Integrity / max;
 
-        if (currentState != targetState)
+            if (opacity < 0.15f)
+                opacity = 0.15f;
+            else if (opacity > 1f)
+                opacity = 1f;
+
+            destroyed = integrity.Integrity <= 0f;
+        }
+
+        var targetState = destroyed ? "wheels_1" : "wheels_0";
+
+        if (sprite.LayerGetState(layer) != targetState)
         {
             sprite.LayerSetState(layer, targetState);
 
-            if (isMoving)
-                SpriteSystem.LayerSetAnimationTime((uid, sprite), layer, 0f);
+            if (isMoving && !destroyed)
+                _sprite.LayerSetAnimationTime((uid, sprite), layer, 0f);
         }
 
-        SpriteSystem.LayerSetAutoAnimated((uid, sprite), layer, isMoving);
-        SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
+        _sprite.LayerSetAutoAnimated((uid, sprite), layer, isMoving && !destroyed);
+        _sprite.LayerSetColor((uid, sprite), layer, sprite.Color.WithAlpha(opacity));
+        _sprite.LayerSetVisible((uid, sprite), layer, true);
     }
 }

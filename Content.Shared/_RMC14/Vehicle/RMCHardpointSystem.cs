@@ -55,11 +55,13 @@ public sealed class RMCHardpointSystem : EntitySystem
         SubscribeLocalEvent<RMCHardpointSlotsComponent, DamageModifyEvent>(OnVehicleDamageModify);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, BoundUIOpenedEvent>(OnHardpointUiOpened);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveMessage>(OnHardpointRemoveMessage);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, ComponentInit>(OnHardpointIntegrityInit);
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, InteractUsingEvent>(OnHardpointRepair);
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, ExaminedEvent>(OnHardpointExamined);
+        SubscribeLocalEvent<RMCHardpointIntegrityComponent, RMCHardpointRepairDoAfterEvent>(OnHardpointRepairDoAfter);
     }
 
     private void OnSlotsInit(Entity<RMCHardpointSlotsComponent> ent, ref ComponentInit args)
@@ -319,6 +321,15 @@ public sealed class RMCHardpointSystem : EntitySystem
         UpdateHardpointUi(ent.Owner, ent.Comp);
     }
 
+    private void OnHardpointUiClosed(Entity<RMCHardpointSlotsComponent> ent, ref BoundUIClosedEvent args)
+    {
+        if (!Equals(args.UiKey, RMCHardpointUiKey.Key))
+            return;
+
+        // Clear any pending operations when UI closes
+        ent.Comp.PendingRemovals.Clear();
+    }
+
     private void OnHardpointRemoveMessage(Entity<RMCHardpointSlotsComponent> ent, ref RMCHardpointRemoveMessage args)
     {
         if (!Equals(args.UiKey, RMCHardpointUiKey.Key))
@@ -479,7 +490,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
     private void OnHardpointRepair(Entity<RMCHardpointIntegrityComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.User == null)
+        if (args.Handled || args.User == null)
             return;
 
         var used = args.Used;
@@ -493,7 +504,46 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
         }
 
-        if (!_repairable.UseFuel(used, args.User, ent.Comp.RepairFuelCost))
+        if (ent.Comp.Repairing)
+        {
+            args.Handled = true;
+            return;
+        }
+
+        var missingIntegrity = ent.Comp.MaxIntegrity - ent.Comp.Integrity;
+        var weldTime = MathF.Max(
+            ent.Comp.RepairTimeMin,
+            MathF.Min(ent.Comp.RepairTimeMax, missingIntegrity * ent.Comp.RepairTimePerIntegrity)
+        );
+
+        ent.Comp.Repairing = true;
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, weldTime, new RMCHardpointRepairDoAfterEvent(), ent.Owner, ent.Owner, used)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            ent.Comp.Repairing = false;
+            return;
+        }
+
+        args.Handled = true;
+    }
+
+    private void OnHardpointRepairDoAfter(Entity<RMCHardpointIntegrityComponent> ent, ref RMCHardpointRepairDoAfterEvent args)
+    {
+        ent.Comp.Repairing = false;
+
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (args.Used == null || !_repairable.UseFuel(args.Used.Value, args.User, ent.Comp.RepairFuelCost))
             return;
 
         ent.Comp.Integrity = ent.Comp.MaxIntegrity;
@@ -503,9 +553,7 @@ public sealed class RMCHardpointSystem : EntitySystem
             _audio.PlayPredicted(ent.Comp.RepairSound, ent.Owner, args.User);
 
         _popup.PopupClient(Loc.GetString("rmc-hardpoint-repaired"), ent.Owner, args.User);
-        args.Handled = true;
 
-        // Update wheel visuals / run state if applicable.
         var vehicle = ent.Owner;
         if (TryComp(ent.Owner, out RMCVehicleWheelItemComponent? _))
         {
