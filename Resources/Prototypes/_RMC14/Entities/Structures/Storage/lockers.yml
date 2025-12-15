@@ -157,14 +157,6 @@
 
 - type: entity
   parent: RMCLockerGunBase
-  id: RMCLockerGunBlue
-  name: riot control equipment Cabinet
-  components:
-  - type: RMCUnlockOnAlertLevel
-    level: Blue
-
-- type: entity
-  parent: RMCLockerGunBase
   id: RMCLockerGun
   name: gun cabinet
   description: It's an immobile card-locked storage unit.
