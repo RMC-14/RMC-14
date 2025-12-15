@@ -27,7 +27,14 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
     protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
     {
         var groups = new Dictionary<string, MarineRecommendationGroup>();
-        var allRecommendations = ent.Comp.AwardRecommendations;
+        
+        // Collect recommendations from all computers to ensure they're visible from any device
+        var allRecommendations = new HashSet<MarineAwardRecommendationInfo>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            allRecommendations.UnionWith(computer.AwardRecommendations);
+        }
 
         // Group recommendations by recommended marine
         foreach (var recommendation in allRecommendations)
