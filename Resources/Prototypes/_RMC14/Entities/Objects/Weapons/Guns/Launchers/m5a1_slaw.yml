@@ -64,9 +64,18 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
+      params:
+        volume: -6
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCRustleGun
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCRustleGun
+      params:
+        volume: -4
   - type: MeleeWeapon
     attackRate: 1
     damage:

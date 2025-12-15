@@ -220,6 +220,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
+        var hasRequiredAcidStrength = newStrength.CompareTo(corrodible.MinimumAcidStrength) >= 0;
+        if (!hasRequiredAcidStrength)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-too-weak", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
         time = corrodible.TimeToApply;
         mult = corrodible.MeltTimeMult;
 
@@ -245,7 +252,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (!inherit)
             time += _timing.CurTime;
 
-        var ev = new CorrodingEvent(acid, dps, lightDps);
+        var ev = new CorrodingEvent(acid, dps, lightDps, strength);
         RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
             return;
