@@ -45,6 +45,7 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
+    activateOnMove: false
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
