@@ -12,8 +12,8 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
-  - type: Gun
+    sprite:
+  - type: Gun     
     shotsPerBurst: 4
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
