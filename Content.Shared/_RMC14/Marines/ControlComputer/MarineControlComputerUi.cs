@@ -55,5 +55,8 @@ public sealed record MarineRecommendationInfo
 {
     public required string RecommenderLastPlayerId { get; init; }
     public required string RecommenderName { get; init; }
+    public string? RecommenderRank { get; init; }
+    public string? RecommenderSquad { get; init; }
+    public required string RecommenderJob { get; init; }
     public required string Reason { get; init; }
 }

@@ -58,13 +58,16 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
                 groups[recommendedId] = group;
             }
 
-            // Get recommender name
+            // Get recommender info
             var recommenderInfo = GetMarineInfo(recommendation.RecommenderLastPlayerId);
             
             group.Recommendations.Add(new MarineRecommendationInfo
             {
                 RecommenderLastPlayerId = recommendation.RecommenderLastPlayerId,
                 RecommenderName = recommenderInfo.Name,
+                RecommenderRank = recommenderInfo.Rank,
+                RecommenderSquad = recommenderInfo.Squad,
+                RecommenderJob = recommenderInfo.Job,
                 Reason = recommendation.Reason
             });
         }
