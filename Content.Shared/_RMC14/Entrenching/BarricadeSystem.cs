@@ -1,59 +1,41 @@
-using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
-using Content.Shared._RMC14.Projectiles;
-using Content.Shared._RMC14.Random;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
 using Content.Shared.Stacks;
 using Content.Shared.Timing;
-using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
 
 public sealed class BarricadeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
-    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalAttackBlocker = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
-    private EntityQuery<ProjectileComponent> _projectileQuery;
-    private EntityQuery<TargetedProjectileComponent> _projectileTargetQuery;
-    private EntityQuery<RMCProjectileAccuracyComponent> _accuracyQuery;
 
     public override void Initialize()
     {
@@ -532,33 +514,6 @@ public sealed class BarricadeSystem : EntitySystem
                     return true;
                 }
             }
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    ///    Checks if the person who shot the projectile had their mouse hovered over the target.
-    /// </summary>
-    public bool IsProjectileTargeting(EntityUid target, EntityUid other)
-    {
-        if (_projectileTargetQuery.TryComp(other, out var projectileTarget) && projectileTarget.Target == target)
-            return true;
-
-        if (_projectileQuery.TryComp(other, out var projectile))
-        {
-            // Prevents shooting out of while inside of crates
-            var shooter = projectile.Shooter;
-            if (!shooter.HasValue)
-                return true;
-
-            // ProjectileGrenades delete the entity that's shooting the projectile,
-            // so it's impossible to check if the entity is in a container
-            if (TerminatingOrDeleted(shooter.Value))
-                return true;
-
-            if (!_container.IsEntityOrParentInContainer(shooter.Value))
-                return false;
         }
 
         return false;
