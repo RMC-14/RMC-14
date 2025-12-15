@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed the synth survival pouch having the wrong handheld radio.
-    type: Fix
-  id: 2196
-  time: '2025-08-18T21:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7544
 - author: x5tink
   changes:
   - message: Returned Inap pill bottle name
@@ -4760,5 +4753,12 @@
   id: 2698
   time: '2025-12-14T23:19:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8721
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the CO armor and other officer armor requiring MP jumpsuits.
+    type: Fix
+  id: 2699
+  time: '2025-12-15T02:11:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8736
 Name: RMC14
 Order: -1
