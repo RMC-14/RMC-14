@@ -128,7 +128,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
-      color: "#ffc000"
+      color: "#9C9A19"
   - type: MagazineVisuals
     magState: mag
     steps: 2
