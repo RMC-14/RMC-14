@@ -541,12 +541,12 @@ public sealed class BarricadeSystem : EntitySystem
             // Prevents shooting out of while inside of crates
             var shooter = projectile.Shooter;
             if (!shooter.HasValue)
-                return true;
+                return false;
 
             // ProjectileGrenades delete the entity that's shooting the projectile,
             // so it's impossible to check if the entity is in a container
             if (TerminatingOrDeleted(shooter.Value))
-                return true;
+                return false;
 
             if (!_container.IsEntityOrParentInContainer(shooter.Value))
                 return false;
@@ -557,18 +557,15 @@ public sealed class BarricadeSystem : EntitySystem
 
     public bool IsBehindOrParallelToTarget(EntityUid projectile, EntityUid barricade)
     {
-        var barricadeFacingDirection = Transform(barricade).LocalRotation.GetCardinalDir();
-        var behindAngle = barricadeFacingDirection.GetOpposite().ToAngle();
+        var facingDirection = Transform(barricade).LocalRotation.GetCardinalDir();
+        var behindAngle = facingDirection.GetOpposite().ToAngle();
 
         var projectileMapPos = _transform.GetMapCoordinates(projectile);
         var barricadeMapPos = _transform.GetMapCoordinates(barricade);
         var currentAngle = (projectileMapPos.Position - barricadeMapPos.Position).ToWorldAngle();
 
-        var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
+        var delta = Angle.ShortestDistance(behindAngle, currentAngle);
 
-        if (differenceFromBehindAngle > -180 && differenceFromBehindAngle < 180)
-            return true;
-
-        return false;
+        return Math.Abs(delta.Degrees) < 90f;
     }
 }
