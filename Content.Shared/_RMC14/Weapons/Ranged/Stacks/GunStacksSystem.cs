@@ -105,8 +105,19 @@ public sealed class GunStacksSystem : EntitySystem
             if (!TryComp<GunStacksActiveComponent>(ent.Comp.Gun, out var gun))
                 gun = EnsureComp<GunStacksActiveComponent>(ent.Comp.Gun.Value);
 
+            // Reset the counter if the new target is a xeno while the last hit target was a target dummy.
+            if (gun.LastHitEntity != null &&
+                HasComp<RMCAdjustableArmorValueComponent>(gun.LastHitEntity.Value) &&
+                HasComp<XenoComponent>(target))
+            {
+                Reset((ent.Comp.Gun.Value, gun));
+                gun.LastHitEntity = null;
+                return;
+            }
+
             gun.Hits++;
             gun.ExpireAt = _timing.CurTime + gun.StacksExpire;
+            gun.LastHitEntity = target;
             if (args.Shooter is { } shooter &&
                 _net.IsServer)
             {
