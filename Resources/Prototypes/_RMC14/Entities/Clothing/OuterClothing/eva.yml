@@ -16,7 +16,7 @@
     tags:
     - Hardsuit
   - type: CMArmor
-    bio: 30
+    bio: 30 # TODO 30 rads aswel;
     melee: 15
     bullet: 20
     explosionArmor: 10
