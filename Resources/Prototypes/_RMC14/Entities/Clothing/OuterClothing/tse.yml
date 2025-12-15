@@ -15,7 +15,18 @@
     explosionArmor: 10
 
 - type: entity
-  parent: RMCBaseMarineArmorLight
+  id: RMCBaseTSEArmor
+  abstract: true
+  components:
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-tse-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformTSE
+
+- type: entity
+  parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]
   id: RMCArmourM4TSEPA
   name: M4 pattern light TSEPA armour
   description: A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'TSEPA' badge is sewn into the chestplate.
@@ -32,7 +43,7 @@
     sprintModifier: 0.897
 
 - type: entity
-  parent: RMCBaseMarineArmorLight
+  parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]
   id: RMCArmourM4TSEPAChief
   name: M4 pattern inspector TSEPA armour
   description: A modified variant of the M4 TSEPA armour to have the additional riot plating returned, feauturing a golden insignia on the chestplate.

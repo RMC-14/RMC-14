@@ -114,6 +114,7 @@
   - type: EncryptionKey
     channels:
     - MarineHighCommand
+    - Provost
     defaultChannel: MarineHighCommand
   - type: Sprite
     state: cap_key
@@ -377,7 +378,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCargotech
-  name: cargo tech encryption key
+  name: req tech encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -388,7 +389,7 @@
   - type: Sprite
     state: req_key
 
-# Quartermaster
+# Logistics Officer
 - type: entity
   parent: CMEncryptionKeyRequisition
   id: RMCEncryptionKeyQuartermaster
@@ -426,7 +427,40 @@
     - MarineJTAC
     - MarineIntel
     - WEYA
+    readOnlyChannels:
+    - MarineCommand
+    - MarineJTAC
+    - MarineIntel
     defaultChannel: WEYA
+  - type: Sprite
+    state: cap_key
+
+# Combat Correspondent
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCorrespondent
+  name: correspondent radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    readOnlyChannels:
+    - MarineCommand
+    - MarineJTAC
+    - MarineIntel
+    defaultChannel: MarineCommon
   - type: Sprite
     state: cap_key
 
