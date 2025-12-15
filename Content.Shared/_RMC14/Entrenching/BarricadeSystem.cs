@@ -1,17 +1,24 @@
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Random;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Stacks;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -23,12 +30,14 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
+    [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -36,6 +45,9 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
+    private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<TargetedProjectileComponent> _projectileTargetQuery;
+    private EntityQuery<RMCProjectileAccuracyComponent> _accuracyQuery;
 
     public override void Initialize()
     {
@@ -70,11 +82,12 @@ public sealed class BarricadeSystem : EntitySystem
         if (accuracyComp.ShotFrom == null)
             return;
 
-        args.Cancelled = false; // set false incase it was changed by something else
-
         // Someone aiming at a barricade always hits it
         if (IsProjectileTargeting(barricade.Owner, projectile))
+        {
+            args.Cancelled = false;
             return;
+        }
 
         var barricadeCoords = _transform.GetMoverCoordinates(barricade.Owner);
         var distance = (barricadeCoords.Position - accuracyComp.ShotFrom.Value.Position).Length();
@@ -83,10 +96,7 @@ public sealed class BarricadeSystem : EntitySystem
 
         // If the distance is less than 1 tile
         // or the distance is greater than 3 but the shooter is behind the cade (the right side), then the bullet passes through
-        if (distance < 1
-            || distance > 3
-            && _directionalAttackBlocker.IsBehindTarget(projectile, barricade)
-            || _directionalAttackBlocker.IsParallelToTarget(projectile, barricade))
+        if (distance < 1 || distance > 3 && IsBehindOrParallelToTarget(projectile, barricade))
         {
             args.Cancelled = true;
             return;
@@ -98,10 +108,9 @@ public sealed class BarricadeSystem : EntitySystem
         var accuracyFactor = barricade.Comp.AccuracyFactor;
 
         var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
-        var blockHit = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
+        var prob = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
 
-        if (hitChance >= blockHit)
-            args.Cancelled = true;
+        args.Cancelled = hitChance >= prob;
     }
 
     private void OnAfterInteract(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
@@ -519,7 +528,34 @@ public sealed class BarricadeSystem : EntitySystem
         return false;
     }
 
-    public bool IsBehindOrParrellelToTarget(EntityUid projectile, EntityUid barricade)
+    /// <summary>
+    ///    Checks if the person who shot the projectile had their mouse hovered over the target.
+    /// </summary>
+    public bool IsProjectileTargeting(EntityUid target, EntityUid other)
+    {
+        if (_projectileTargetQuery.TryComp(other, out var projectileTarget) && projectileTarget.Target == target)
+            return true;
+
+        if (_projectileQuery.TryComp(other, out var projectile))
+        {
+            // Prevents shooting out of while inside of crates
+            var shooter = projectile.Shooter;
+            if (!shooter.HasValue)
+                return true;
+
+            // ProjectileGrenades delete the entity that's shooting the projectile,
+            // so it's impossible to check if the entity is in a container
+            if (TerminatingOrDeleted(shooter.Value))
+                return true;
+
+            if (!_container.IsEntityOrParentInContainer(shooter.Value))
+                return false;
+        }
+
+        return false;
+    }
+
+    public bool IsBehindOrParallelToTarget(EntityUid projectile, EntityUid barricade)
     {
         var barricadeFacingDirection = Transform(barricade).LocalRotation.GetCardinalDir();
         var behindAngle = barricadeFacingDirection.GetOpposite().ToAngle();
