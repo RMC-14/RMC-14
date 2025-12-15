@@ -126,4 +126,18 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
         return relativeDiff is 3 or 4 or 5; // Opposite directions
     }
+
+    /// <summary>
+    ///     Check if the blocker is parallel to the target.
+    /// </summary>
+    /// <param name="blocker">The entity whose direction is checked.</param>
+    /// <param name="target">The entity that is checked to see if it is parallel to the blocker</param>
+    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
+    /// <returns>True if the blocker is parallel to the target</returns>
+    public bool IsParallelToTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
+    {
+        var relativeDiff = GetRelativeDiff(blocker, target, originCoordinates);
+
+        return relativeDiff is 2 or 6; // East and west
+    }
 }

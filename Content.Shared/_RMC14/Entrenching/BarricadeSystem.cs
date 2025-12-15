@@ -98,7 +98,10 @@ public sealed class BarricadeSystem : EntitySystem
 
         // If the distance is less than 1 tile
         // or the distance is greater than 3 but the shooter is behind the cade (the right side), then the bullet passes through
-        if (distance < 1 || distance > 3 && _directionalAttackBlocker.IsBehindTarget(projectile, barricade))
+        if (distance < 1
+            || distance > 3
+            && _directionalAttackBlocker.IsBehindTarget(projectile, barricade)
+            || _directionalAttackBlocker.IsParallelToTarget(projectile, barricade))
         {
             args.Cancelled = true;
             return;
@@ -108,7 +111,6 @@ public sealed class BarricadeSystem : EntitySystem
         var projectileCoverage = barricade.Comp.ProjectileCoverage;
         var distanceLimit = barricade.Comp.DistanceLimit;
         var accuracyFactor = barricade.Comp.AccuracyFactor;
-
         var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
         var blockHit = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
 
