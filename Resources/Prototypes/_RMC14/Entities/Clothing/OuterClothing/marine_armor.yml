@@ -334,6 +334,11 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/urban.rsi
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
   parent: CMArmorM2MP
@@ -358,6 +363,11 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
   parent: CMArmorM2MP
@@ -380,6 +390,11 @@
   - type: Item # Intentionally allows the armor to be stored in bags.
     size: Normal
     storedRotation: 0
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
   parent: CMArmorM3Medium
