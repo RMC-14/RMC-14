@@ -645,17 +645,17 @@
       color: "#4a4a4a"
     - state: smg_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smg_ammo_full_mags_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
     - state: smg_box_7A3
       color: "#ffcb26"
-    - state: rifle_box_marking
+    - state: smg_box_marking
       color: "#7c4c1b"
     - state: smg_lid
       map: [ "lid" ]
       color: "#4a4a4a"
-    - state: smg_lid_marking_lid_marking
+    - state: smg_lid_marking
       map: [ "lid_marking" ]
       color: "#7c4c1b"
   - type: CMItemSlots
@@ -672,7 +672,7 @@
   components:
   - type: CMItemSlots
     startingItem: CMMagazineSMGL7A3SquashHead
-    count: 16
+    count: 12
     slot:
       whitelist:
         tags:

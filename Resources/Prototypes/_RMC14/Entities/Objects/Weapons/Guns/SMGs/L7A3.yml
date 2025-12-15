@@ -4,19 +4,19 @@
   id: WeaponSMGL7A3
   description: RMC adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearance, where the L24A1 proved a tad too unwieldy. Sometimes referred to as the "Little Armat" by Royal Marines.
   components:
-  -type: Sprite
-  sprite:
-  layers:
-  - state: bolt-open
-    map:
-  - state: mag-0
-    map:  
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite:
-  - type: Gun     
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
+  - type: Gun
     shotsPerBurst: 4
-    soundGunshot:  
-     path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -51,8 +51,8 @@
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
-          tags: CMMagazineSMGL7A3SquashHead
-         
+          tags:
+          - CMMagazineSMGL7A3SquashHead
   - type: GunDamageModifier
     multiplier: 1.35        
   - type: AttachableHolder
@@ -105,7 +105,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineSMGL7A3SquashHead
-  name: "L7A3 Magazine Squash-Head (9mm)"
+  name: L7A3 Magazine Squash-Head (9mm)
   components:
   - type: Tag
     tags:
@@ -138,7 +138,7 @@
     
 - type: entity
   id: RMCCartridgeSMG9mmSquashHead
-  name: cartridge (9mm Squash-Head)
+  name: "cartridge (9mm Squash-Head)"
   parent: CMCartridgeSMGBase
   components:
   - type: Tag
