@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Cassette;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
@@ -63,10 +64,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Storage;
-using Content.Shared._RMC14.Cryostorage;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -1218,10 +1215,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!suppressPopup)
         {
-            _popup.PopupEntity(
-                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
-                vendor,
-                user);
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
         }
 
         QueueDel(item);
@@ -1271,10 +1265,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!suppressPopup)
         {
-            _popup.PopupEntity(
-                Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)),
-                vendor,
-                user);
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
         }
 
         return true;
