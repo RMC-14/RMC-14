@@ -45,3 +45,4 @@
     destroy: true
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: Climbable
