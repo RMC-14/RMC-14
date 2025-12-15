@@ -22,7 +22,7 @@
     recoilUnwielded: 4
     scatterWielded: 5
     scatterUnwielded: 10
-    baseFireRate: 0.85
+    baseFireRate: 0.75
     burstScatterMult: 5
   - type: BallisticAmmoProvider
     cycleable: false
@@ -58,62 +58,159 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-underbarrel: 0.30, -0.31
 
+# Electrostatic Shells
 - type: entity
   parent: RMCBoxShotgunBeanbag
-  id: RMCBoxShotgunMX24
+  id: RMCBoxShotgunMX24Electrostatic
   name: box of MX24 electrostatic shells
   description: A box filled with MX24 electrostatic shells used for non-lethal crowd control. 20 Gauge.
   components:
   - type: Storage
     whitelist:
       tags:
-      - RMCShellShotgunMX24
+      - RMCShellShotgunMX24Electrostatic
   - type: StorageFill
     contents:
-    - id: RMCShellShotgunMX24
+    - id: RMCShellShotgunMX24Electrostatic
       amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#578e75"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#578e75"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#578e75"
 
 - type: entity
   parent: CMShellShotgunBeanbag
-  id: RMCShellShotgunMX24
+  id: RMCShellShotgunMX24Electrostatic
   name: handful of MX24 electostatic slugs
   description: A handful of Weston-Yamada produced Electostatic Slugs, often used in the PK-10 Quasar Shockgun.
   components:
   - type: CartridgeAmmo
-    proto: RMCPelletShotgunMX24
+    proto: RMCPelletShotgunMX24Electrostatic
     muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: Stack
     count: 5
-    stackType: RMCShellShotgunMX24
+    stackType: RMCShellShotgunMX24Electrostatic
     baseLayer: base
     layerStates:
-    - beanbag_slug_1
-    - beanbag_slug_1
-    - beanbag_slug_2
-    - beanbag_slug_3
-    - beanbag_slug_4
-    - beanbag_slug_5
+    - shock_slug_1
+    - shock_slug_1
+    - shock_slug_2
+    - shock_slug_3
+    - shock_slug_4
+    - shock_slug_5
   - type: Tag
     tags:
     - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunMX24
+    - RMCShellShotgunMX24Electrostatic
 
 - type: stack
-  id: RMCShellShotgunMX24
-  name: handful of beanbag slugs
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: beanbag_slug_1 }
-  spawn: RMCShellShotgunMX24
+  id: RMCShellShotgunMX24Electrostatic
+  name: handful of MX24 electrostatic slugs
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: shock_slug_1 }
+  spawn: RMCPelletShotgunMX24Electrostatic
   maxCount: 5
 
 - type: entity
   parent: CMPelletShotgunBeanbag
-  id: RMCPelletShotgunMX24
-  name: MX24 slug
+  id: RMCPelletShotgunMX24Electrostatic
+  name: MX24 Electrostatic slug
   components:
   - type: RMCStaminaDamageOnCollide
     damage: 65
 
 - type: Tag
+  id: RMCShellShotgunMX24Electrostatic
+
+- type: Tag
   id: RMCShellShotgunMX24
+
+# Lethal Shells
+- type: entity
+  parent: RMCBoxShotgunSlugs
+  id: RMCBoxShotgunMX24Lethal
+  name: box of MX24 lethal shells
+  description: A box filled with MX24 electrostatic shells used for handling hostiles. 20 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24Lethal
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunMX24Lethal
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#85361e"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#85361e"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#85361e"
+
+- type: entity
+  parent: CMShellShotgunSlugs
+  id: RMCShellShotgunMX24Lethal
+  name: handful of MX24 lethal slugs
+  description: A handful of Weston-Yamada produced Lethal Slugs, often used in the PK-10 Quasar Shockgun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: pk10_slug_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunMX24Lethal
+  - type: Stack
+    count: 5
+    stackType: RMCShellShotgunMX24Lethal
+    baseLayer: base
+    layerStates:
+    - pk10_slug_1
+    - pk10_slug_1
+    - pk10_slug_2
+    - pk10_slug_3
+    - pk10_slug_4
+    - pk10_slug_5
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunSlugs
+    - RMCShellShotgunMX24
+    - RMCShellShotgunMX24Lethal
+
+- type: stack
+  id: RMCShellShotgunMX24Lethal
+  name: handful of MX24 lethal slugs
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: pk10_slug_1 }
+  spawn: RMCShellShotgunMX24Lethal
+  maxCount: 5
+
+- type: entity
+  parent: CMPelletShotgunSlug
+  id: RMCPelletShotgunMX24Lethal
+  name: MX24 slug
+
+- type: Tag
+  id: RMCShellShotgunMX24Lethal
