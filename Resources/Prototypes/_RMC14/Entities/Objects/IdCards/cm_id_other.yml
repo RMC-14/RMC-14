@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMIDCardSilver
   id: CMIDCardSeniorEnlistedAdvisor
   name: senior enlisted advisor ID card
@@ -24,6 +24,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardColonistDoctor
@@ -34,6 +35,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: CMIDCardColonistEngineer
@@ -44,6 +46,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardColonistScientist
@@ -54,6 +57,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: CMIDCardColonistSecurity
@@ -69,6 +73,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
@@ -96,6 +101,7 @@
   - type: ItemIFF
     factions:
     - FactionWeYa
+
 - type: entity
   parent: CMIDCardLiaison
   id: CMIDCardPMCExecutive
@@ -129,7 +135,7 @@
   name: we-ya corporate security ID card
   components:
   - type: PresetIdCard
-    job: RMCSurvivorHybrisaCorporateSecurity
+    job: CMSurvivorGoon
 
 - type: entity
   parent: CMIDCardLiaison
@@ -181,42 +187,43 @@
   parent: CMIDCardGold
   id: RMCIDCardMarshal
   name: bureau marshal gold badge
-  description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim.
   components:
   - type: PresetIdCard
     job: CMBureauMarshal
   - type: ItemIFF
     factions:
     - FactionMarine
+
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardDeputy
   name: bureau deputy silver badge
-  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  description: The silver badge which represents that the wearer is a Bureau Deputy.
   components:
   - type: PresetIdCard
     job: CMBureauDeputy
   - type: ItemIFF
     factions:
     - FactionMarine
-# for survs
+
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardDeputySurvivor
   name: bureau deputy silver badge
-  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  description: The silver badge which represents that the wearer is a Bureau Deputy.
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
-      state: icon
-    - type: Clothing
-      slots:
-      - idcard
-      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
-    - type: ItemIFF
-      factions:
-      - FactionMarine
-      - FactionSurvivor
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+    state: icon
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+  - type: ItemIFF
+    factions:
+    - FactionMarine
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -231,161 +238,3 @@
     groups:
     - Colony
     - RMCWeYa
-
-- type: entity
-  id: FactionWeYa
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - Colony
-    - WEYA
-
-- type: entity
-  parent: CMIDCardLanyard
-  id: RMCIDCardBureauObserver
-  name: bureau observer ID card
-  components:
-  - type: PresetIdCard
-    job: CMBureauObserver
-
-- type: entity
-  parent: CMIDCardBase
-  id: RMCIDCardFreelancer
-  name: freelancer ID card
-
-- type: entity
-  parent: CMIDCardGold
-  id: RMCIDCardProvost
-  abstract: true
-  name: provost ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostAdvisor
-  name: provost advisor ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostAdvisor
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostEnforcer
-  name: provost enforcer ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostEnforcer
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostTeamLeader
-  name: provost team leader ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostTeamLeader
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostChiefInspector
-  name: provost chief inspector ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostChiefInspector
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostDeputyMarshal
-  name: provost deputy marshal ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostDeputyMarshal
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostInspector
-  name: provost inspector ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostInspector
-
-- type: entity
-  parent: RMCIDCardProvost
-  id: RMCIDCardProvostMarshal
-  name: provost marshal ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostMarshal
-
-- type: entity
-  parent: CMIDCardGold
-  id: RMCIDCardSynth
-  name: synth ID card
-  components:
-  - type: PresetIdCard
-    job: RMCJobSynthetic
-
-- type: entity
-  parent: CMIDCardLanyard
-  id: RMCIDCardSynthColony
-  name: synth ID card
-  suffix: Survivor
-  components:
-  - type: PresetIdCard
-    job: RMCJobSyntheticColony
-  - type: ItemIFF
-    factions:
-    - FactionSurvivor
-- type: entity
-  parent: CMIDCardStandardDogtag
-  id: RMCIDCardFORECONSpotter
-  name: FORECON Spotter's dogtags
-  components:
-  - type: IdCard
-    jobTitle: rmc-job-name-forecon-spotter
-
-- type: entity
-  id: RMCIDCardAegis
-  name: AEGIS Access Badge
-  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.
-  components:
-  - type: WarpPoint
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/aegis.rsi
-    state: keycard
-    drawdepth: SmallObjects
-  - type: Item
-    size: Tiny
-  - type: Clothing
-    slots:
-      - idcard
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Access
-    groups:
-      - CMAccessAegis
-  - type: AegisTrackable
-  - type: Corrodible
-    isCorrodible: false
-
-- type: entity
-  parent: RMCIDCardAegis
-  id: RMCIDCardAegisIntel
-  name: AEGIS Access Badge
-  suffix: Intel-giving
-  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates. It has some blood on it.
-  components:
-  - type: IntelRescueSurvivorObjective
-    value: 2
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/aegis.rsi
-    state: bloody
