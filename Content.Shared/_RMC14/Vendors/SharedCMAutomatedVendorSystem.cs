@@ -63,6 +63,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Storage;
+using Content.Shared._RMC14.Cryostorage;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -122,6 +126,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
+
+        SubscribeLocalEvent<RMCSpecCryoRefundComponent, EnteredCryostorageEvent>(OnSpecEnteredCryostorageEvent);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key,
             subs =>
@@ -664,6 +670,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
                 thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
                 Dirty(vendor, thisSpecVendor);
+
+                AddComp(actor, new RMCSpecCryoRefundComponent
+                {
+                    Vendor = vendor,
+                    Entry = args.Entry
+                }, true);
             }
         }
 
@@ -983,6 +995,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             amount = boxAmount;
 
         return Math.Max(1, amount);
+    }
+
+    private void OnSpecEnteredCryostorageEvent(Entity<RMCSpecCryoRefundComponent> ent, ref EnteredCryostorageEvent args)
+    {
+        if (!TryComp<RMCVendorSpecialistComponent>(ent.Comp.Vendor, out var vendor))
+            return;
+
+        if (!vendor.GlobalSharedVends.TryGetValue(ent.Comp.Entry, out var current))
+            return;
+
+        if (current < 1) // How?
+            return;
+
+        vendor.GlobalSharedVends[ent.Comp.Entry] = current - 1;
+        Dirty(ent.Comp.Vendor, vendor);
     }
 
     private void TryRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage)
