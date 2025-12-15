@@ -1,42 +1,42 @@
 # Melee Weapons
 - type: loadout
   id: TantoARMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCTantoA
 
 - type: loadout
   id: TantoBRMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCTantoB
 
 - type: loadout
   id: CombatUtilityARMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCCombatUtilityKnifeA
 
 - type: loadout
   id: CombatUtilityBRMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCCombatUtilityKnifeB
 
 - type: loadout
   id: SawtoothDaggerARMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCSawtoothDaggerA
 
 - type: loadout
   id: SawtoothDaggerBRMC
-  cost: 1
+  cost: 2
   storage:
     back:
     - RMCSawtoothDaggerB
