@@ -62,7 +62,8 @@ public sealed class BarricadeSystem : EntitySystem
         _projectileTargetQuery = GetEntityQuery<TargetedProjectileComponent>();
         _accuracyQuery = GetEntityQuery<RMCProjectileAccuracyComponent>();
 
-        SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnBarricadePreventCollide, after: [typeof(RequireProjectileTargetSystem)]);
+        SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnBarricadePreventCollide,
+            after: [typeof(RequireProjectileTargetSystem), typeof(RMCProjectileSystem)]);
 
         SubscribeLocalEvent<EntrenchingToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EntrenchingToolComponent, EntrenchingToolDoAfterEvent>(OnDoAfter);
@@ -86,6 +87,8 @@ public sealed class BarricadeSystem : EntitySystem
 
         if (accuracyComp.ShotFrom == null)
             return;
+
+        args.Cancelled = false; // set false incase it was changed by something else
 
         // Someone aiming at a barricade always hits it
         if (IsProjectileTargeting(barricade.Owner, projectile))
