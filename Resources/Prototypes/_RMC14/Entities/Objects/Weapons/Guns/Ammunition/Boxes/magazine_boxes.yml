@@ -630,6 +630,54 @@
         tags:
         - CMMagazineRifleM4SPRExt
 
+# L7A3
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGL7A3SquashHeadEmpty
+  name: magazine box (L7A3 x 12)
+  components:
+#  - type: Construction
+#    graph: RMCBoxMagazine
+#    node: RMCBoxMagazineRifleM54CEmpty #TODO: Construction node needed.
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#4a4a4a"
+    - state: smg_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smg_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: smg_box_7A3
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#4a4a4a"
+    - state: smg_lid_marking_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGL7A3SquashHead
+
+- type: entity
+  parent: RMCBoxMagazineSMGL7A3SquashHeadEmpty
+  id: RMCBoxMagazineSMGL7A3SquashHead
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineSMGL7A3SquashHead
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGL7A3SquashHead
+
 # L42A REG
 - type: entity
   parent: RMCBoxMagazineRifleBase
