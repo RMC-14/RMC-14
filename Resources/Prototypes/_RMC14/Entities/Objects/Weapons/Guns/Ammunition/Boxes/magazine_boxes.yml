@@ -643,7 +643,7 @@
     layers:
     - state: smg_box
       color: "#4a4a4a"
-    - state: smg_ammo_full_mags_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
@@ -663,7 +663,7 @@
     slot:
       whitelist:
         tags:
-        - CMMagazineSMGL7A3SquashHead
+        - RMCMagazineSMGL7A3SquashHead
 
 - type: entity
   parent: RMCBoxMagazineSMGL7A3SquashHeadEmpty
@@ -671,12 +671,12 @@
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: CMMagazineSMGL7A3SquashHead
+    startingItem: RMCMagazineSMGL7A3SquashHead
     count: 12
     slot:
       whitelist:
         tags:
-        - CMMagazineSMGL7A3SquashHead
+        - RMCMagazineSMGL7A3SquashHead
 
 # L42A REG
 - type: entity

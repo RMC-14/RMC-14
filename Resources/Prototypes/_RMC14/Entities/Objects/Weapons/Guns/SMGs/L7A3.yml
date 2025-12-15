@@ -1,8 +1,9 @@
 - type: entity
   parent: CMBaseWeaponSMG
-  name: L7A3   # CM name is L6A2
+  name: "L7A3"   #CM name is L6A2
   id: WeaponSMGL7A3
   description: RMC adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearance, where the L24A1 proved a tad too unwieldy. Sometimes referred to as the "Little Armat" by Royal Marines.
+  suffix: Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
@@ -50,9 +51,10 @@
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
+        startingItem: RMCMagazineSMGL7A3SquashHead
         whitelist:
           tags:
-          - CMMagazineSMGL7A3SquashHead
+          - RMCMagazineSMGL7A3SquashHead
   - type: GunDamageModifier
     multiplier: 1.35        
   - type: AttachableHolder
@@ -104,13 +106,13 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineSMGL7A3SquashHead
-  name: L7A3 Magazine Squash-Head (9mm)
+  id: RMCMagazineSMGL7A3SquashHead
+  name: "L7A3 Magazine Squash-Head (9mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGL7A3SquashHead
+    - RMCMagazineSMGL7A3SquashHead
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -137,9 +139,9 @@
     bulletType: RMCBoxBulletsSMG
     
 - type: entity
-  id: RMCCartridgeSMG9mmSquashHead
-  name: "cartridge (9mm Squash-Head)"
   parent: CMCartridgeSMGBase
+  id: RMCCartridgeSMG9mmSquashHead
+  name: 9mm Squash-Head Cartridge
   components:
   - type: Tag
     tags:
@@ -151,7 +153,7 @@
 - type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
   parent: CMBulletBase
   id: RMCBulletSMG9mmSquashHead
-  name: bullet (9mm Squash-Head)
+  name: 9mmSquash-HeadBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -167,5 +169,13 @@
       falloff: 8
   - type: CMArmorPiercing
     amount: 15
-  - type: RMCProjectileAccuracy
-    accuracy: 100  
+
+
+- type: Tag    
+  id: WeaponSMGL7A3
+
+- type: Tag    
+  id: RMCMagazineSMGL7A3SquashHead
+
+- type: Tag    
+  id: RMCCartridgeSMG9mmSquashHead
