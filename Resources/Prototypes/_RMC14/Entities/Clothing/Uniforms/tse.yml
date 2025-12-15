@@ -53,6 +53,14 @@
     startingWebbing: CMWebbingSurgicalBlue
 
 - type: entity
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalDropPouch
+  suffix: Filled, Royal, Drop Pouch
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyal
+
+- type: entity
   parent: RMCJumpsuitTSEPA
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine uniform
