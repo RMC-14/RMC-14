@@ -24,6 +24,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardColonistDoctor
@@ -34,6 +35,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: CMIDCardColonistEngineer
@@ -44,6 +46,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardColonistScientist
@@ -54,6 +57,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardLanyard
   id: CMIDCardColonistSecurity
@@ -69,6 +73,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
@@ -96,6 +101,7 @@
   - type: ItemIFF
     factions:
     - FactionWeYa
+
 - type: entity
   parent: CMIDCardLiaison
   id: CMIDCardPMCExecutive
@@ -129,7 +135,7 @@
   name: we-ya corporate security ID card
   components:
   - type: PresetIdCard
-    job: RMCSurvivorHybrisaCorporateSecurity
+    job: CMSurvivorGoon
 
 - type: entity
   parent: CMIDCardLiaison
@@ -188,6 +194,7 @@
   - type: ItemIFF
     factions:
     - FactionMarine
+
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardDeputy
@@ -199,6 +206,7 @@
   - type: ItemIFF
     factions:
     - FactionMarine
+
 # for survs
 - type: entity
   parent: CMIDCardSilver
@@ -345,6 +353,7 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+
 - type: entity
   parent: CMIDCardStandardDogtag
   id: RMCIDCardFORECONSpotter
