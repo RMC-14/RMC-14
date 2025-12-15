@@ -152,12 +152,11 @@
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
     targetWhitelist:
+      components:
+      - RMCFlamerBackpack
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer
-    sourceWhitelist:
-      tags:
-      - RMCTankReagent
   - type: RefillableSolution
     solution: rmc_flamer_tank
   - type: DetailedExaminableSolution
@@ -169,12 +168,13 @@
   - type: Appearance
   - type: SolutionStorageFillable
     solution: rmc_flamer_tank
-  - type: RMCPressurizedSolution
+  - type: RMCFlushableSolution
     solution: rmc_flamer_tank
-  - type: SolutionTransfer
-    canChangeTransferAmount: true
-    canSend: false
-    canReceive: false
+    flushTime: 1.5
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: Tag
     tags:
     - RMCTankFlamer

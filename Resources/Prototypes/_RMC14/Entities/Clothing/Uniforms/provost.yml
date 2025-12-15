@@ -13,6 +13,12 @@
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCMPArmband
+  - type: Tag
+    tags:
+    - RMCUniformMarine
+    - RMCUniformMP
+    - RMCUniformWarden
+    - RMCUniformCMP
 
 - type: entity
   parent: CMJumpsuitProvost
@@ -52,9 +58,11 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
   - type: Tag
     tags:
-    - ClothMade
-    - WhitelistChameleon
     - RMCScoutArmor
+    - RMCUniformMarine
+    - RMCUniformMP
+    - RMCUniformWarden
+    - RMCUniformCMP
 
 - type: entity
   parent: CMJumpsuitProvostAgent

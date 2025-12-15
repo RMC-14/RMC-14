@@ -1,0 +1,68 @@
+﻿- type: entity
+  parent: RMCBaseArmor
+  id: RMCSuitEVAUNMC # TODO make into a base
+  name: UNMC MK.35 pressure suit
+  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ToggleableClothing
+    clothingPrototype: RMCHelmetEVAUNMC
+  - type: Tag
+    tags:
+    - Hardsuit
+  - type: CMArmor
+    bio: 30 # TODO 30 rads aswel;
+    melee: 15
+    bullet: 20
+    explosionArmor: 10
+  - type: ClothingSpeedModifier
+    walkModifier: .5
+    sprintModifier: .5
+  - type: CMHardArmor
+  - type: RMCBulkyArmor
+  - type: RMCMagneticArmor
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHelmetEVAUNMC # TODO make into a base
+  categories: [ HideSpawnMenu ]
+  name: UNMC MK.35 pressure helmet
+  description: A heavy space helmet, designed to be coupled with the MK.35 pressure suit utilized by the United Nations Marine Corps and a few other UN organizations. Feels like you could hotbox in here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: CMArmor
+    bio: 30
+    melee: 15
+    bullet: 20
+    explosionArmor: 10
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: IngestionBlocker
+  - type: PointLight
+    enabled: false
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
+    softness: 5
+    autoRot: true
+    netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png

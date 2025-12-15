@@ -311,6 +311,7 @@
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi
+    - id: RMCStampProvostInspector
 
 - type: entity
   parent: CMSatchelSecurity
@@ -568,6 +569,7 @@
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     sourceWhitelist:
       components:
+      - RMCFlamerTank
       - Welder
     targetWhitelist:
       tags:
