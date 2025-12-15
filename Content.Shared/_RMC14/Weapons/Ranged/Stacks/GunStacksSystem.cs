@@ -111,7 +111,6 @@ public sealed class GunStacksSystem : EntitySystem
                 HasComp<XenoComponent>(target))
             {
                 Reset((ent.Comp.Gun.Value, gun));
-                gun.LastHitEntity = null;
                 return;
             }
 
