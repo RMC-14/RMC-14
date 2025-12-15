@@ -895,7 +895,7 @@ public sealed partial class TacticalMapControl : TextureRect
             }
             else if (_dragging && Drawing && !LabelEditMode)
             {
-                if (_dragStart != null)
+                if (_dragStart != null && StraightLineMode)
                 {
                     Vector2i currentPos = LogicalToPixel(args.RelativePosition).Floored();
                     Vector2i diff = currentPos - _dragStart.Value;
@@ -985,6 +985,9 @@ public sealed partial class TacticalMapControl : TextureRect
         if (Texture == null)
             return;
 
+        Vector2 mousePixelPos = LogicalToPixel(args.RelativePosition);
+        (Vector2 oldActualSize, Vector2 oldActualTopLeft, float oldOverlayScale) = GetDrawParameters();
+
         float oldZoom = _zoomFactor;
 
         if (args.Delta.Y > 0)
@@ -996,16 +999,12 @@ public sealed partial class TacticalMapControl : TextureRect
 
         if (Math.Abs(_zoomFactor - oldZoom) > 0.001f)
         {
-            Vector2 mousePixelPos = LogicalToPixel(args.RelativePosition);
-            Vector2 availableSize = new(PixelWidth, PixelHeight);
-            (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
-
-            Vector2 relativeToTexture = (mousePixelPos - actualTopLeft) / overlayScale;
+            Vector2 relativeToTexture = (mousePixelPos - oldActualTopLeft) / oldOverlayScale;
 
             ApplyViewSettings();
 
-            (actualSize, actualTopLeft, overlayScale) = GetDrawParameters();
-            Vector2 newMousePos = relativeToTexture * overlayScale + actualTopLeft;
+            (Vector2 newActualSize, Vector2 newActualTopLeft, float newOverlayScale) = GetDrawParameters();
+            Vector2 newMousePos = relativeToTexture * newOverlayScale + newActualTopLeft;
             Vector2 mouseDelta = mousePixelPos - newMousePos;
 
             _panOffset += mouseDelta;

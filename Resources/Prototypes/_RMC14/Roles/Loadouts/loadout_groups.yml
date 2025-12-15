@@ -141,12 +141,13 @@
   - SmockRMC
   - SmockCamoRMC
   - NeckerchiefSquadRMC
-  - NeckerchiefTanRMC
+  - NeckerchiefRedRMC
   - NeckerchiefBlackRMC
-  - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-
+  
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks

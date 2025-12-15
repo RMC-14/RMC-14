@@ -4,6 +4,10 @@
   name: rmc-job-name-pmc-medic
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: CMJobPMCCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankWeYaMedicalSpecialist: []
   startingGear: RMCJobPMCCorpsmanPVE
