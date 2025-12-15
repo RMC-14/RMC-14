@@ -12,7 +12,6 @@ rmc-intel-clue-progress-report = A {$intel} in {$area}.
 rmc-intel-clue-folder = A {$intel} in {$area}.
 rmc-intel-clue-technical-manual = {$intel} in {$area}.
 rmc-intel-clue-experimental-device = Retrieve {$intel} in {$area}.
-rmc-intel-not-intel-jumpsuit = You cannot wear this without wearing a marine intelligence officer uniform.
 rmc-intel-survivor-pickup = I have no use for the {$thing}.
     I should focus on getting help first.
 rmc-intel-survivor-read = I have no need to read the {$thing}.
@@ -52,6 +51,7 @@ rmc-ui-intel-colony-status =
 
 ## Tech Control Console
 rmc-ui-tech-tier-header = [font size=14][bold]Tier: { $tier }[/bold][/font]
+rmc-ui-tech-points = [font size=14][bold]Points: { $points }[/bold][/font]
 rmc-ui-tech-points-value = Tech points: { $value }
 rmc-ui-tech-repurchasable = Repurchasable
 rmc-ui-tech-incremental-price = Incremental price: +{ $increase } per purchase

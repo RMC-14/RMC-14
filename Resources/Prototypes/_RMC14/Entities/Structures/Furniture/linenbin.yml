@@ -87,3 +87,14 @@
   - type: CMItemSlots
     startingItem: CMBedsheetWhite
     count: 20
+
+- type: entity
+  parent: CMLinenBinFilled
+  id: CMLinenBinFilledUnanchored
+  suffix: Filled, Unanchored
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic

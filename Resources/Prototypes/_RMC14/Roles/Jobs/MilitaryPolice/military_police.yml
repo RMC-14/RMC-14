@@ -44,6 +44,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -73,3 +76,14 @@
 - type: playTimeTracker
   id: CMJobMilitaryPolice
   isHumanoid: true
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleMP
+  name: Military Police
+  description: Military Police
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: military_police

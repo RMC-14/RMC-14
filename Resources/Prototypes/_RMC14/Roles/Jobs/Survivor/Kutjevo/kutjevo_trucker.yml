@@ -1,0 +1,56 @@
+﻿- type: job
+  parent: CMSurvivorTrucker
+  id: RMCSurvivorKutjevoTrucker
+  name: rmc-job-name-survivor-kutjevo-trucker
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoTrucker
+  spawnMenuRoleName: Kutjevo Heavy Vehicle Operator (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoTrucker
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorTrucker
+  id: RMCGearSurvivorKutjevoTrucker
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: ArmorHelmetPMCKutjevo
+    mask: RMCMaskKutjevoRespirator
+    gloves: CMHandsLightBrown
+    jumpsuit: RMCJumpsuitKutjevoJumper
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoTrucker
+  name: kutjevo trucker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoTrucker
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetTrucker
+  id: RMCGearSurvivorPresetKutjevoTrucker
+  name: Kutjevo trucker colonist preset
+  categories: [ HideSpawnMenu ]

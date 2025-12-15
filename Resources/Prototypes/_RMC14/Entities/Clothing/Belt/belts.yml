@@ -34,6 +34,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
@@ -41,10 +42,14 @@
       #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+    blacklist:
+      tags:
+      - RMCAttachmentUnderbarrel
   - type: IgnoreContentsSize
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -65,7 +70,15 @@
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
     layers:
     - state: icon
+    - state: sixth
+      visible: false
+    - state: third
+      visible: false
     - state: half
+      visible: false
+    - state: twothirds
+      visible: false
+    - state: fivesixths
       visible: false
     - state: full
       visible: false
@@ -85,6 +98,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -96,8 +110,32 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: ItemMapper
     mapLayers:
-      half:
+      sixth:
         minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      third:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      half:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      twothirds:
+        minCount: 9
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      fivesixths:
+        minCount: 12
         whitelist:
           tags:
           - RMCShellShotgun
@@ -108,6 +146,19 @@
           tags:
           - RMCShellShotgun
           - RMCCartridge458SOCOM
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltPMC
+  name: M305 pattern ammo load rig
+  description: The M305 is the standard load-bearing equipment of Weston-Yamada PMCs. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/pmc.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: RMCM276ShotgunShellLoadingRig
@@ -445,6 +496,7 @@
       tags:
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
@@ -540,10 +592,24 @@
     - id: CMWeaponPistolM1984
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolCLF
+  name: M802 pattern 'Freedom' smart gun operator sidearm rig
+  description: A modification of the standard M802 load-bearing equipment, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
+  suffix: Filled, Mateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+    - id: RMCMagazineSmartGun
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
-  name: M276 pattern M40 grenade rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
+  name: M276 pattern 30mm grenade rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the 30mm type grenades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
@@ -563,7 +629,7 @@
 - type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeLarge
-  name: M276 pattern M40 grenade rig Mk. II
+  name: M276 pattern 30mm grenade rig Mk. II
   description: The M276 Mk. II is an upgraded version of the M276 grenade rig, with more storage capacity.
   components:
   - type: Storage
@@ -796,6 +862,30 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolWeYa
+  name: WY-TM892 pattern general pistol holster rig
+  description: The WY-TM892 is the standard load-bearing equipment of the W-Y security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaMK80Fill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolSPP
   name: Type 47-S pistol holster rig
   description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
@@ -819,6 +909,17 @@
     - id: RMCWeaponPistolT73
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNPZ92
+  suffix: Filled, NPZ92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolNPZ92
+    - id: RMCMagazinePistolNP92
+      amount: 5
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolTSE
   name: pistol belt
@@ -831,6 +932,12 @@
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_tsepa.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolPMC
+  name: M301 pistol holster rig
+  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
 
 - type: entity
   parent: CMBeltMarine
@@ -1171,9 +1278,36 @@
     - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledWEYA
+  suffix: Filled, WEYA Director
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 1
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHE
+      amount: 2
+    - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilledAmmo
+  suffix: Filled, Mateba Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+
+- type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
@@ -1206,6 +1340,17 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
@@ -1219,7 +1364,18 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: CMM77BeltFilled
-  suffix: Filled
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilled
+  suffix: Filled, M77
   components:
   - type: StorageFill
     contents:
@@ -1326,6 +1482,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - RMCShellShotgun
   - type: FixedItemSizeStorage
@@ -1345,8 +1502,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilledAmmo
+  suffix: Filled, Winter Wyvern Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled
+  suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
     contents:
@@ -1357,10 +1526,23 @@
     - id: RMCWeaponPistolHandcannonWinterWyvern
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: GoldHandcannonBeltFilled
+  suffix: Filled, Gold Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonGold
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1384,12 +1566,15 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,17,1 # should be 9 slots
+    - 0,0,15,1 # 7 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
+      - RMCMagazinePistolM13AP
+      - RMCMagazinePistolM13ExtAP
+      - RMCMagazinePistolM13DrumAP
       - RMCWeaponPistolM13
   - type: LimitedStorage
     limits:
@@ -1398,18 +1583,24 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 8
+      count: 7
       whitelist:
         tags:
         - RMCMagazinePistolM13
         - RMCMagazinePistolM13Ext
         - RMCMagazinePistolM13Drum
+        - RMCMagazinePistolM13AP
+        - RMCMagazinePistolM13ExtAP
+        - RMCMagazinePistolM13DrumAP
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCBeltHolsterM13
 
 - type: entity
   parent: CMBeltMarine
@@ -1450,6 +1641,50 @@
     contents:
     - id: RMCMagazineMar50LMG
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL24BeltFilled
+  suffix: Filled, L24
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCL83A3BeltFilled
+  suffix: Filled, L83A3
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3
+      amount: 5
+
+- type: entity
+  parent: RMCBeltUtilityGeneral
+  id: RMCBeltUtiliyGeneralFilledRoyal
+  suffix: Filled, Royal Breacher
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: CMShellShotgunBuckshot
+      amount: 3
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolFilledL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistol
@@ -1547,7 +1782,7 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - Sidearm
+        - RMCNailgunCompact
     - popup: rmc-storage-limit-max-mags
       count: 2
       whitelist:
@@ -1641,6 +1876,9 @@
     whitelist:
       tags:
       - RMCFlareGun
+  - type: Tag
+    tags:
+    - RMCM82FHolster
 
 - type: entity
   parent: RMCM82FHolster
@@ -1679,6 +1917,9 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltHolsterM13
 
 - type: Tag
   id: RMCBeltMedical

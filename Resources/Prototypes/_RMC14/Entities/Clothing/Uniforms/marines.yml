@@ -28,19 +28,6 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
-# Royal
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
-  suffix: Filled, Royal
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
@@ -158,22 +145,22 @@
 
 # Supply
 
-# Quartermaster / RO
+# Logistics Officer
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: quartermaster suit
-  description: A nicely-fitting military suit for a quartermaster. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: Logistics Officer suit
+  description: A nicely-fitting military suit for a Logistics Officer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
 
-# Cargotech
+# ReqTech / RT
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
-  name: cargo technician uniform
-  description: A standard-issue cargo tech uniform.
+  name: requisitions technician uniform
+  description: A standard-issue req tech uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
@@ -205,18 +192,6 @@
   - type: CMArmor
     bio: 15
 
-# Ordnance Technician / OT
-- type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: CMJumpsuitOrdnanceTech
-  name: ordnance engineer uniform
-  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
-  - type: CMArmor
-    explosionArmor: 10
-
 # Maintenance Technician / MT
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -228,6 +203,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+
+# Ordnance Technician / OT
+- type: entity
+  parent: CMJumpsuitMaintTech
+  id: CMJumpsuitOrdnanceTech
+  name: ordnance engineer uniform
+  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
+  - type: CMArmor
+    explosionArmor: 10
 
 # Command
 
@@ -431,6 +418,7 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
   - type: Tag
     tags:
+    - RMCUniformMarine
     - RMCUniformIntel
 
 - type: Tag
@@ -440,8 +428,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
-  name: pilot officer bodysuit
-  description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: pilot bodysuit
+  description: A bodysuit worn by pilots of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi

@@ -143,6 +143,8 @@
     - XenoFastResin
   - type: VentCrawler
     ventCrawlIcon: drone
+  - type: RMCActionOrder
+    id: CMXenoDrone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -161,6 +163,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -214,6 +219,8 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: gardener
+  - type: RMCActionOrder
+    id: CMXenoDroneGardener
 
 - type: entity
   parent: CMXenoDroneBase
@@ -232,6 +239,9 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -303,3 +313,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: healer
+  - type: RMCActionOrder
+    id: CMXenoDroneHealer

@@ -4,6 +4,10 @@
   name: rmc-job-name-pmc-medic
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: CMJobPMCCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankWeYaMedicalSpecialist: []
   startingGear: RMCJobPMCCorpsmanPVE
@@ -33,7 +37,11 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
-    - type: SquadArmorWearer
+    - type: CMVendorUser
+      id: CMPMCCorpsmanPVE
+      points: 0
+      extraPoints:
+        Chemicals: 120
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
     - type: DemoSpecWhitelist
@@ -41,6 +49,13 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

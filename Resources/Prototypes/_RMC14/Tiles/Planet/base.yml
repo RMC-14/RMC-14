@@ -135,7 +135,7 @@
   - 1.0
   - 1.0
   - 1.0
-  edgeSpritePriority: 0
+  edgeSpritePriority: 1
   edgeSprites:
     SouthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
     NorthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
@@ -206,3 +206,9 @@
   parent: RMCPlanetDirtBrown
   id: RMCPlanetDirtBrownDug
   sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert_dug.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCVoid
+  name: tiles-rmc-empty
+  sprite: /Textures/_RMC14/Tiles/floors/void.png
