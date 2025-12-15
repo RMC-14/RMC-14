@@ -55,7 +55,7 @@
     base: colony
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallKutjevoReinforced
   name: reinforced colony wall
   description: Dusty worn down walls that were once built to last. This one is reinforced
