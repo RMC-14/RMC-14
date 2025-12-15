@@ -12,9 +12,6 @@
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchSPP
-  - type: Tag
-    tags:
-    - RMCUniformSPP
 
 - type: entity
   parent: CMJumpsuitSPP
@@ -100,7 +97,7 @@
 
 # Civilians
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: CMJumpsuitSPPCiv1
   name: SPP civilian-style orange overalls
   description: A set of civilian-style orange overalls with a dark tan undershirt. The material is of a poor quality, however it's better than nothing. Clothing of this style is typically given out to those who work laborious jobs.

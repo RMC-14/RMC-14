@@ -77,17 +77,8 @@
 - type: entity
   abstract: true
   parent: [RMCUniformBase, RMCUniformSuitCoordsBase]
-  id: RMCArmoredUniformBase
+  id: RMCMarineUniformBase
   components:
   - type: CMArmor
     bullet: 10
     melee: 10
-
-- type: entity
-  abstract: true
-  parent: RMCArmoredUniformBase
-  id: RMCMarineUniformBase
-  components:
-  - type: Tag
-    tags:
-    - RMCUniformMarine

@@ -146,7 +146,7 @@
 
 # "Civilian"
 - type: entity
-  parent: [RMCUniformBase, RMCFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitCivilian
   name: gray utility uniform
   description: A stylish gray jumpsuit, popularly issued to UN contract workers on the frontier.
@@ -354,7 +354,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitWeyamart
   name: Weyamart uniform
   description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
@@ -365,7 +365,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitSanitation
   name: Weston-Yamada RFF - sanitation uniform
   description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
@@ -376,7 +376,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitPizzaGalaxy
   name: Pizza-Galaxy uniform
   description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
@@ -387,7 +387,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitDailyGrind
   name: The Daily Grind uniform
   description: A pair of black slacks and a white short-sleeved button-down shirt; a standard uniform for a 'The Daily Grind' employee. Are you ready for the daily grind?
@@ -398,7 +398,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitTMCC
   name: tartarus-mining uniform
   description: A set of Tartarus-Mining fatigues, a yellow pair of utility work slacks and a light-grey polo-shirt with red reflecting stripes.
@@ -420,7 +420,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitEMT
   name: EMT - Paramedic uniform
   description: A set of EMT - Paramedic fatigues, this one is red.
@@ -441,7 +441,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitLaborersOveralls
   name: laborer's overalls
   description: A set of durable overalls for getting the job done.
@@ -453,7 +453,7 @@
 
 # Kutjevo
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitKutjevoJumper
   name: kutjevo jumper
   description: A heavy-duty jumpsuit worn by the workers on Kutjevo.
@@ -464,7 +464,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitKutjevoDrysuit
   name: kutjevo drysuit
   description: A heavy-duty drysuit worn by the workers on Kutjevo.
@@ -476,7 +476,7 @@
 
 # Security
 - type: entity
-  parent: RMCArmoredUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitCivilianSecurity
   name: security officer's jumpsuit
   description: It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
@@ -487,9 +487,6 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/security.rsi
   - type: UniformAccessoryHolder
     startingAccessories: [ RMCSecurityArmband]
-  - type: Tag
-    tags:
-    - RMCUniformUNSecurity
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -501,13 +498,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
-  - type: Tag
-    tags:
-    - RMCUniformMarine
-    - RMCUniformUNSecurity
 
 - type: entity
-  parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitCivilianJanitor
   name: janitor's jumpsuit
   description: It's the official uniform of the colony's janitor.
@@ -518,7 +511,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
 
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitCivilianEngineerWorker
   name: Weston-Yamada engineering utility uniform
   description: A set of Weston-Yamada engineering utility workers uniform, a orange pair of work slacks and a grey polo-shirt with orange reflecting stripes.
@@ -541,7 +534,7 @@
 
 # CLF
 - type: entity
-  parent: RMCArmoredUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitCLFSoldier
   name: Colonial Liberation Front uniform
   description: A stylish grey-green jumpsuit - standard issue for colonists. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
@@ -590,7 +583,7 @@
 
 # Frontier
 - type: entity
-  parent: RMCUniformBase
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitCivilianFrontier
   name: frontier jumpsuit
   description: A cargo jumpsuit dressed down for full range of motion and state-of-the-art frontier temperature control. It's the best thing an engineer can wear in the Outer Veil.

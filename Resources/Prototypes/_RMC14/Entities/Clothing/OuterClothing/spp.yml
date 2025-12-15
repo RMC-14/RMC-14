@@ -21,12 +21,6 @@
     - 0,0,1,1 # 1 slot
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-spp-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformSPP
 
 - type: entity
   parent: RMCArmorSPP
@@ -158,12 +152,6 @@
     #internal: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ItemCamouflage
     camouflageVariations: { }
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-spp-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformSPP
 
 # SPP coats
 - type: entity

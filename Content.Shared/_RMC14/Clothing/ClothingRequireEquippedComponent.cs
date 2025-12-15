@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Clothing;
 [Access(typeof(RMCClothingSystem))]
 public sealed partial class ClothingRequireEquippedComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public EntityWhitelist? Whitelist;
+    [DataField(required: true), AutoNetworkedField]
+    public EntityWhitelist Whitelist = new();
 
     [DataField, AutoNetworkedField]
     public string DenyReason = "rmc-wear-smart-gun-required";

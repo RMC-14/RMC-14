@@ -1,15 +1,5 @@
 - type: entity
   parent: RMCMarineUniformBase
-  id: RMCCMBUniformBase
-  abstract: true
-  components:
-  - type: Tag
-    tags:
-    - RMCUniformMarine
-    - RMCUniformCMB
-
-- type: entity
-  parent: RMCCMBUniformBase
   id: RMCSwatCMBUniform
   name: CMB Riot Control uniform
   description: A dark set of tactical uniform utilized by the Colony Marshals, designed to be used by units of riot supression on the distant worlds, under colony jurisdiction.
@@ -18,7 +8,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swat_uniform.rsi
 
 - type: entity
-  parent: RMCCMBUniformBase
+  parent: RMCMarineUniformBase
   id: RMCSwatLeaderCMBUniform
   name: CMB Riot Control Marshal uniform
   description: A dark set of tactical uniform utilized by the Colony Marshals, designed to be used by units of riot supression on the distant worlds, under colony jurisdiction.
@@ -27,7 +17,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swatleader_uniform.rsi
 
 - type: entity
-  parent: [RMCCMBUniformBase, RMCAlternateFoldableUniformBase]
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCMarshalCMBUniform
   name: colony marshal uniform
   description: A pair of off-white slacks and a blue button-down shirt with a dark brown tie; the standard uniform of the Colony Marshals.

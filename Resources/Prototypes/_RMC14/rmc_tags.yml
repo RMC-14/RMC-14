@@ -127,32 +127,6 @@
 - type: Tag
   id: RMCSynthResetKey
 
-- type: Tag
-  id: RMCUniformMarine
-
-- type: Tag
-  id: RMCUniformUNSecurity
-
-- type: Tag
-  id: RMCUniformMP
-
-- type: Tag
-  id: RMCUniformWarden
-
-- type: Tag
-  id: RMCUniformCMP
-
-- type: Tag
-  id: RMCUniformPMC
-
-- type: Tag
-  id: RMCUniformSPP
-
-- type: Tag
-  id: RMCUniformCMB
-
-- type: Tag
-  id: RMCUniformTSE
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap

@@ -319,12 +319,6 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
-  - type: ClothingRequireEquipped
-    autoUnequip: true
-    denyReason: rmc-armor-not-un-security-jumpsuit
-    whitelist:
-      tags:
-      - RMCUniformUNSecurity
 
 - type: entity
   parent: RMCArmorPMCRiot

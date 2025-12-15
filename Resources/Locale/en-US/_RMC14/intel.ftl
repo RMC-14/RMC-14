@@ -12,6 +12,7 @@ rmc-intel-clue-progress-report = A {$intel} in {$area}.
 rmc-intel-clue-folder = A {$intel} in {$area}.
 rmc-intel-clue-technical-manual = {$intel} in {$area}.
 rmc-intel-clue-experimental-device = Retrieve {$intel} in {$area}.
+rmc-intel-not-intel-jumpsuit = You cannot wear this without wearing a marine intelligence officer uniform.
 rmc-intel-survivor-pickup = I have no use for the {$thing}.
     I should focus on getting help first.
 rmc-intel-survivor-read = I have no need to read the {$thing}.
