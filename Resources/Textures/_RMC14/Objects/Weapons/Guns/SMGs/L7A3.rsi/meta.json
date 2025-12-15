@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 1.1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken and Colour modified from Dutch-VanDerLinde (github) from RMC14 https://github.com/RMC-14/RMC-14/tree/561e4570e1563853980952f1ba02bca457d2cba6/Resources/Textures/_RMC14/Objects/Weapons/Guns/SMGs/m63.rsi",
+  "copyright": "Taken and modified from Dutch-VanDerLinde (github) from RMC14 https://github.com/RMC-14/RMC-14/tree/561e4570e1563853980952f1ba02bca457d2cba6/Resources/Textures/_RMC14/Objects/Weapons/Guns/SMGs/m63.rsi by RavenCaat (github)",
   "size": {
     "x": 32,
     "y": 32

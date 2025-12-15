@@ -12,8 +12,8 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite:
-  - type: Gun     
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
+  - type: Gun
     shotsPerBurst: 4
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
@@ -99,7 +99,7 @@
   - type: Tag
     tags:
     - RMCWeaponSMG
-    - RMCWeaponSMGL7A3
+    - WeaponSMGL7A3
   
 
 - type: entity
@@ -115,7 +115,7 @@
     mayTransfer: True
     whitelist:
       tags:
-       - RMCCartridgeSMG9mmSquashHead
+      - RMCCartridgeSMG9mmSquashHead
     proto: RMCCartridgeSMG9mmSquashHead
     capacity: 48
   - type: Sprite
@@ -146,11 +146,11 @@
     - Cartridge
     - RMCCartridgeSMG9mmSquashHead
   - type: CartridgeAmmo
-    proto: RCMBulletSMG9mmSquashHead
+    proto: RMCBulletSMG9mmSquashHead
 
 - type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
   parent: CMBulletBase
-  id: RCMBulletSMG9mmSquashHead
+  id: RMCBulletSMG9mmSquashHead
   name: bullet (9mm Squash-Head)
   categories: [ HideSpawnMenu ]
   components:
@@ -168,10 +168,4 @@
   - type: CMArmorPiercing
     amount: 15
   - type: RMCProjectileAccuracy
-    accuracy: 100
-
-- type: Tag
-  id: CMMagazineSMGL7A3SquashHead
-
-- type: Tag
-  id: RMCCartridgeSMG9mmSquashHead  
+    accuracy: 100  
