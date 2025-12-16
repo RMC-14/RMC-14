@@ -19,12 +19,6 @@ public sealed partial class RMCAwardRecommendationComponent : Component
     public int RecommendationsGiven;
 
     /// <summary>
-    /// Whether to not block the ability to recommend awards, preventing <c>CanRecommend</c> = false.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool CanAlwaysRecommend;
-
-    /// <summary>
     /// Whether this entity can recommend awards.
     /// </summary>
     [DataField, AutoNetworkedField]

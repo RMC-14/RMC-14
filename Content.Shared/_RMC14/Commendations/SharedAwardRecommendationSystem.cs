@@ -223,7 +223,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         ent.Comp.RecommendationsGiven++;
         Dirty(ent);
 
-        string count = (ent.Comp.MaxRecommendations > 0 && !ent.Comp.CanAlwaysRecommend) ? $"({ent.Comp.RecommendationsGiven}/{ent.Comp.MaxRecommendations})" : string.Empty;
+        string count = ent.Comp.MaxRecommendations > 0 ? $"({ent.Comp.RecommendationsGiven}/{ent.Comp.MaxRecommendations})" : string.Empty;
 
         _popup.PopupEntity(
             Loc.GetString("rmc-award-recommendation-success", ("name", recommendedName), ("count", count)),
@@ -243,9 +243,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-authority"), entity, entity, PopupType.SmallCaution);
             return false;
         }
-
-        if (component.CanAlwaysRecommend)
-            return true;
 
         if (!component.CanRecommend)
         {
