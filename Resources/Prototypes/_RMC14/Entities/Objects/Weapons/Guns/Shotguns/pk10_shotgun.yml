@@ -96,10 +96,9 @@
   components:
   - type: CartridgeAmmo
     proto: RMCPelletShotgunMX24Electrostatic
-    muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: Stack
     count: 5
-    stackType: RMCShellShotgunMX24Electrostatic
+    stackType: RMCShellShotgunMX24ElectrostaticStack
     baseLayer: base
     layerStates:
     - shock_slug_1
@@ -117,7 +116,7 @@
     - RMCShellShotgunMX24Electrostatic
 
 - type: stack
-  id: RMCShellShotgunMX24Electrostatic
+  id: RMCShellShotgunMX24ElectrostaticStack
   name: handful of MX24 electrostatic slugs
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: shock_slug_1 }
   spawn: RMCPelletShotgunMX24Electrostatic
@@ -126,7 +125,7 @@
 - type: entity
   parent: CMPelletShotgunBeanbag
   id: RMCPelletShotgunMX24Electrostatic
-  name: MX24 Electrostatic slug
+  name: MX24 electrostatic slug
   components:
   - type: RMCStaminaDamageOnCollide
     damage: 65
@@ -182,7 +181,7 @@
     proto: RMCPelletShotgunMX24Lethal
   - type: Stack
     count: 5
-    stackType: RMCShellShotgunMX24Lethal
+    stackType: RMCShellShotgunMX24LethalStack
     baseLayer: base
     layerStates:
     - pk10_slug_1
@@ -201,7 +200,7 @@
     - RMCShellShotgunMX24Lethal
 
 - type: stack
-  id: RMCShellShotgunMX24Lethal
+  id: RMCShellShotgunMX24LethalStack
   name: handful of MX24 lethal slugs
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: pk10_slug_1 }
   spawn: RMCShellShotgunMX24Lethal
