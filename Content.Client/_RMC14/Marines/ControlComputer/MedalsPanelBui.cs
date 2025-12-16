@@ -337,13 +337,15 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
                 groupContainer.AddChild(expandButton);
             }
 
-            // Approve recommendation button - right bottom corner
-            var approveButtonContainer = new BoxContainer
+            // Approve and Reject buttons - right bottom corner
+            var buttonsContainer = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
                 HorizontalAlignment = Control.HAlignment.Right,
-                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0),
+                SeparationOverride = 8
             };
+            
             var approveButton = new Button
             {
                 Text = Loc.GetString("rmc-medal-panel-approve-recommendation")
@@ -351,8 +353,17 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             approveButton.AddStyleClass("OpenBoth");
             approveButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
             approveButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerApproveRecommendationMsg { LastPlayerId = group.LastPlayerId });
-            approveButtonContainer.AddChild(approveButton);
-            groupContainer.AddChild(approveButtonContainer);
+            buttonsContainer.AddChild(approveButton);
+            
+            var rejectButton = new Button
+            {
+                Text = Loc.GetString("rmc-medal-panel-reject-recommendation")
+            };
+            rejectButton.AddStyleClass("OpenBoth");
+            rejectButton.AddStyleClass(StyleNano.StyleClassButtonColorRed);
+            rejectButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerRejectRecommendationMsg { LastPlayerId = group.LastPlayerId });
+            buttonsContainer.AddChild(rejectButton);
+            groupContainer.AddChild(buttonsContainer);
 
             groupPanel.AddChild(groupContainer);
             _window.RecommendationsList.AddChild(groupPanel);

@@ -66,4 +66,5 @@ public sealed record MarineAwardRecommendationInfo
     public required string RecommendedLastPlayerId { get; init; }
     public required string RecommenderLastPlayerId { get; init; }
     public required string Reason { get; init; }
+    public bool IsRejected { get; set; } = false;
 }

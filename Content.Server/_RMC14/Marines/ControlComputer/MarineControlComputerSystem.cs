@@ -39,13 +39,17 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         // Get all LastPlayerIds who have already been awarded medals
         var awardedLastPlayerIds = GetAllAwardedMedalLastPlayerIds();
 
-        // Group recommendations by recommended marine, excluding those who already received medals
+        // Group recommendations by recommended marine, excluding those who already received medals or were rejected
         foreach (var recommendation in allRecommendations)
         {
             var recommendedId = recommendation.RecommendedLastPlayerId;
             
             // Skip recommendations for marines who have already been awarded medals
             if (awardedLastPlayerIds.Contains(recommendedId))
+                continue;
+            
+            // Skip rejected recommendations
+            if (recommendation.IsRejected)
                 continue;
             
             if (!groups.TryGetValue(recommendedId, out var group))

@@ -70,6 +70,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             subs =>
             {
                 subs.Event<MarineControlComputerApproveRecommendationMsg>(OnApproveRecommendation);
+                subs.Event<MarineControlComputerRejectRecommendationMsg>(OnRejectRecommendation);
             });
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMsg>(OnMedal);
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
@@ -318,6 +319,52 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var netActor = GetNetEntity(args.Actor);
         var evt = new MarineControlComputerMedalMarineEvent(netActor, marineNetEntity, lastPlayerId);
         OnComputerMedalMarine(ent, ref evt);
+    }
+
+    private void OnRejectRecommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerRejectRecommendationMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        // Mark all recommendations for this marine as rejected
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            var updated = false;
+            var toUpdate = new List<MarineAwardRecommendationInfo>();
+            
+            foreach (var recommendation in computer.AwardRecommendations)
+            {
+                if (recommendation.RecommendedLastPlayerId == args.LastPlayerId && !recommendation.IsRejected)
+                {
+                    toUpdate.Add(recommendation);
+                }
+            }
+            
+            foreach (var recommendation in toUpdate)
+            {
+                computer.AwardRecommendations.Remove(recommendation);
+                computer.AwardRecommendations.Add(recommendation with { IsRejected = true });
+                updated = true;
+            }
+            
+            if (updated)
+                Dirty(uid, computer);
+        }
+        
+        // Send message to remove the recommendation group from UI if medals panel is open
+        var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = args.LastPlayerId };
+        computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out _))
+        {
+            _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+        }
     }
 
     private void OnOpenMedalsPanel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)

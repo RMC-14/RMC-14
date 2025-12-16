@@ -35,6 +35,12 @@ public sealed class MarineControlComputerApproveRecommendationMsg : BoundUserInt
 }
 
 [Serializable, NetSerializable]
+public sealed class MarineControlComputerRejectRecommendationMsg : BoundUserInterfaceMessage
+{
+    public required string LastPlayerId { get; init; }
+}
+
+[Serializable, NetSerializable]
 public sealed class MarineControlComputerRemoveRecommendationGroupMsg : BoundUserInterfaceMessage
 {
     public required string LastPlayerId { get; init; }
