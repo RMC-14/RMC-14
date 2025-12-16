@@ -111,31 +111,40 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
                 if (!TryComp<SentryComponent>(sentryUid, out var sentry))
                     continue;
 
-                var ammo = GetSentryAmmo(sentryUid, out var maxAmmo);
-                if (maxAmmo > 0 && (float)ammo / maxAmmo <= sentry.LowAmmoThreshold)
-                {
-                    if (time - sentry.LastLowAmmoAlert > sentry.AlertCooldown)
-                    {
-                        sentry.LastLowAmmoAlert = time;
-                        Dirty(sentryUid, sentry);
+                CheckLowAmmoAlert(laptopUid, (sentryUid, sentry), laptop, time);
+                CheckHealthAlert(laptopUid, (sentryUid, sentry), laptop, time);
+            }
+        }
+    }
 
-                        SendAlert(laptopUid, sentryUid, SentryAlertType.LowAmmo,
-                            $"{GetSentryDisplayName((laptopUid, laptop), sentryUid)}: LOW AMMO ({ammo}/{maxAmmo})");
-                    }
-                }
+    private void CheckLowAmmoAlert(EntityUid laptopUid, Entity<SentryComponent> sentry, SentryLaptopComponent laptop, TimeSpan time)
+    {
+        var ammo = GetSentryAmmo(sentry, out var maxAmmo);
+        if (maxAmmo > 0 && (float)ammo / maxAmmo <= sentry.Comp.LowAmmoThreshold)
+        {
+            if (time - sentry.Comp.LastLowAmmoAlert > sentry.Comp.AlertCooldown)
+            {
+                sentry.Comp.LastLowAmmoAlert = time;
+                Dirty(sentry);
 
-                var health = GetSentryHealth(sentryUid, out var maxHealth);
-                if (maxHealth > 0 && health / maxHealth <= sentry.CriticalHealthThreshold)
-                {
-                    if (time - sentry.LastHealthAlert > sentry.AlertCooldown)
-                    {
-                        sentry.LastHealthAlert = time;
-                        Dirty(sentryUid, sentry);
+                SendAlert(laptopUid, sentry, SentryAlertType.LowAmmo,
+                    $"{GetSentryDisplayName((laptopUid, laptop), sentry)}: LOW AMMO ({ammo}/{maxAmmo})");
+            }
+        }
+    }
 
-                        SendAlert(laptopUid, sentryUid, SentryAlertType.CriticalHealth,
-                            $"{GetSentryDisplayName((laptopUid, laptop), sentryUid)}: CRITICAL DAMAGE");
-                    }
-                }
+    private void CheckHealthAlert(EntityUid laptopUid, Entity<SentryComponent> sentry, SentryLaptopComponent laptop, TimeSpan time)
+    {
+        var health = GetSentryHealth(sentry, out var maxHealth);
+        if (maxHealth > 0 && health / maxHealth <= sentry.Comp.CriticalHealthThreshold)
+        {
+            if (time - sentry.Comp.LastHealthAlert > sentry.Comp.AlertCooldown)
+            {
+                sentry.Comp.LastHealthAlert = time;
+                Dirty(sentry);
+
+                SendAlert(laptopUid, sentry, SentryAlertType.CriticalHealth,
+                    $"{GetSentryDisplayName((laptopUid, laptop), sentry)}: CRITICAL DAMAGE");
             }
         }
     }
@@ -159,7 +168,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             return;
 
         var health = GetSentryHealth(sentry, out var maxHealth);
-        var healthPercent = maxHealth > 0 ? (int) ((health / maxHealth) * 100) : 0;
+        var healthPercent = maxHealth > 0 ? (int)((health / maxHealth) * 100) : 0;
 
         var laptopEntity = laptop!.Value;
         SendAlert(laptopEntity.Owner, sentry, SentryAlertType.Damaged,
@@ -195,18 +204,10 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var (color, size) = alertType switch
-        {
-            SentryAlertType.LowAmmo => ("#CED22B", 14),
-            SentryAlertType.CriticalHealth => ("#A42625", 16),
-            SentryAlertType.TargetAcquired => ("#A42625", 14),
-            SentryAlertType.Damaged => ("#A42625", 14),
-            _ => ("#88C7FA", 14)
-        };
-
-        var uiOpen = _ui.IsUiOpen(laptop, SentryLaptopUiKey.Key);
+        var (color, size) = GetAlertStyle(alertType);
         var alert = new SentryAlertEvent(GetNetEntity(sentry), alertType, message, color, size);
-        if (uiOpen)
+
+        if (_ui.IsUiOpen(laptop, SentryLaptopUiKey.Key))
         {
             _ui.ServerSendUiMessage(laptop, SentryLaptopUiKey.Key, alert);
             return;
@@ -216,7 +217,25 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!HasComp<PlaceableSurfaceComponent>(parent))
             return;
 
-        var popupType = alertType switch
+        var popupType = GetPopupType(alertType);
+        _popup.PopupEntity(message, laptop, popupType);
+    }
+
+    private static (string color, int size) GetAlertStyle(SentryAlertType alertType)
+    {
+        return alertType switch
+        {
+            SentryAlertType.LowAmmo => ("#CED22B", 14),
+            SentryAlertType.CriticalHealth => ("#A42625", 16),
+            SentryAlertType.TargetAcquired => ("#A42625", 14),
+            SentryAlertType.Damaged => ("#A42625", 14),
+            _ => ("#88C7FA", 14)
+        };
+    }
+
+    private static PopupType GetPopupType(SentryAlertType alertType)
+    {
+        return alertType switch
         {
             SentryAlertType.CriticalHealth => PopupType.LargeCaution,
             SentryAlertType.Damaged => PopupType.MediumCaution,
@@ -224,8 +243,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             SentryAlertType.LowAmmo => PopupType.Medium,
             _ => PopupType.Medium
         };
-
-        _popup.PopupEntity(message, laptop, popupType);
     }
 
     private void OnLaptopAfterInteract(Entity<SentryLaptopComponent> laptop, ref AfterInteractEvent args)
@@ -279,7 +296,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
         UnlinkSentry((sentry.Comp.LinkedLaptop.Value, laptop), sentry.Owner);
     }
-
 
     private void OnUnlinkMessage(Entity<SentryLaptopComponent> laptop, ref SentryLaptopUnlinkBuiMsg args)
     {
@@ -381,7 +397,6 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
 
     private void PlaceLaptopOnSurface(Entity<SentryLaptopComponent> laptop, EntityUid surface, EntityUid user)
     {
-        var laptopXform = Transform(laptop);
         var surfaceXform = Transform(surface);
 
         _transform.SetCoordinates(laptop.Owner, surfaceXform.Coordinates);
@@ -398,21 +413,12 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var parent = Transform(laptop).ParentUid;
         var onSurface = HasComp<PlaceableSurfaceComponent>(parent);
 
-        if (onSurface)
-        {
-            laptop.Comp.IsOpen = true;
-            SetPowered(laptop, true);
-            UpdateLaptopVisuals(laptop);
-            Dirty(laptop);
-            return;
-        }
-
-        laptop.Comp.IsOpen = false;
-        SetPowered(laptop, false);
+        laptop.Comp.IsOpen = onSurface;
+        SetPowered(laptop, onSurface);
         UpdateLaptopVisuals(laptop);
         Dirty(laptop);
 
-        if (_net.IsServer)
+        if (_net.IsServer && !onSurface)
             _ui.CloseUi(laptop.Owner, SentryLaptopUiKey.Key);
     }
 
@@ -470,9 +476,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!HasComp<GunIFFComponent>(sentry) && HasComp<GunComponent>(sentry))
             _iff.EnableIntrinsicIFF(sentry);
 
-        var defaultFactions = targeting.FriendlyFactions.Count == 0
-            ? new HashSet<string>()
-            : new HashSet<string>(targeting.FriendlyFactions);
+        var defaultFactions = targeting.FriendlyFactions.Count > 0
+            ? new HashSet<string>(targeting.FriendlyFactions)
+            : new HashSet<string>();
 
         if (defaultFactions.Count == 0)
         {
@@ -557,7 +563,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         var displayName = GetSentryDisplayName(laptop, sentryUid);
         var customName = laptop.Comp.SentryCustomNames.TryGetValue(sentryUid, out var cName) ? cName : null;
         var visionRadius = GetSentryVisionRadius(sentryUid);
-        var maxDeviation = (float) sentry.MaxDeviation.Degrees;
+        var maxDeviation = (float)sentry.MaxDeviation.Degrees;
 
         return new SentryInfo(
             GetNetEntity(sentryUid),
@@ -612,34 +618,13 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     private int GetSentryAmmo(EntityUid sentry, out int maxAmmo)
     {
         maxAmmo = 0;
-        var ammo = 0;
 
-        if (TryComp<GunComponent>(sentry, out var gun))
-        {
-            if (TryComp<ContainerManagerComponent>(sentry, out var container))
-            {
-                foreach (var cont in container.Containers.Values)
-                {
-                    foreach (var containedEntity in cont.ContainedEntities)
-                    {
-                        if (TryComp<BallisticAmmoProviderComponent>(containedEntity, out var ammoProvider))
-                        {
-                            ammo = ammoProvider.Count;
-                            maxAmmo = ammoProvider.Capacity;
-                            return ammo;
-                        }
-                    }
-                }
-            }
-        }
+        if (!EntityManager.System<SentrySystem>()
+            .TryGetSentryAmmo(sentry, out var ammoCount, out var ammoCapacity))
+            return 0;
 
-        if (TryComp<BallisticAmmoProviderComponent>(sentry, out var directAmmo))
-        {
-            ammo = directAmmo.Count;
-            maxAmmo = directAmmo.Capacity;
-        }
-
-        return ammo;
+        maxAmmo = ammoCapacity.Value;
+        return ammoCount.Value;
     }
 
     private string GetSentryLocation(EntityUid sentry)

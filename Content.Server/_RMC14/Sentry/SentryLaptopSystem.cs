@@ -114,8 +114,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         var all = _faction.GetFactions();
         var allowed = SharedSentryTargetingSystem.SentryAllowedFactions;
-        var filtered = all.Where(x => allowed.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Key);
-        return filtered;
+        return all.Where(x => allowed.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Key);
     }
 
     private void OnViewCameraMsg(Entity<SentryLaptopComponent> laptop, ref SentryLaptopViewCameraBuiMsg args)
@@ -129,10 +128,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         if (!TryComp<SentryComponent>(sentryUid.Value, out var sentry) || sentry.Mode == SentryMode.Item)
             return;
 
-        if (!laptop.Comp.IsOpen)
-            return;
-
-        if (_containers.IsEntityInContainer(laptop.Owner))
+        if (!laptop.Comp.IsOpen || _containers.IsEntityInContainer(laptop.Owner))
             return;
 
         var user = args.Actor;
@@ -177,10 +173,8 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         foreach (var sentryUid in GetLinkedSentries(laptop))
         {
-            if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
-                continue;
-
-            _sentryTargetingServer.ToggleFaction((sentryUid, targeting), args.Faction, args.Targeted);
+            if (TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
+                _sentryTargetingServer.ToggleFaction((sentryUid, targeting), args.Faction, args.Targeted);
         }
 
         UpdateUI(laptop);
@@ -192,10 +186,8 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
         foreach (var sentryUid in GetLinkedSentries(laptop))
         {
-            if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
-                continue;
-
-            _sentryTargetingServer.SetFriendlyFactions((sentryUid, targeting), factionSet);
+            if (TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
+                _sentryTargetingServer.SetFriendlyFactions((sentryUid, targeting), factionSet);
         }
 
         UpdateUI(laptop);
@@ -205,10 +197,8 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         foreach (var sentryUid in GetLinkedSentries(laptop))
         {
-            if (!TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
-                continue;
-
-            _sentryTargetingServer.ResetToDefault((sentryUid, targeting));
+            if (TryComp<SentryTargetingComponent>(sentryUid, out var targeting))
+                _sentryTargetingServer.ResetToDefault((sentryUid, targeting));
         }
 
         UpdateUI(laptop);
@@ -220,10 +210,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
         foreach (var sentryUid in GetLinkedSentries(laptop))
         {
-            if (!TryComp<SentryComponent>(sentryUid, out var sentry))
-                continue;
-
-            if (sentry.Mode == SentryMode.Item)
+            if (!TryComp<SentryComponent>(sentryUid, out var sentry) || sentry.Mode == SentryMode.Item)
                 continue;
 
             EntityManager.System<SentrySystem>().TrySetMode((sentryUid, sentry), newMode);
@@ -239,12 +226,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         if (!TryComp<SentryLaptopWatcherComponent>(user, out var watcher))
             return;
 
-        if (_actorQuery.TryComp(user, out var actor) &&
-            watcher.CurrentSentry is { } net &&
-            TryGetEntity(net, out var sentryUid))
-        {
-            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
-        }
+        RemoveViewSubscription(user, watcher);
 
         watcher.Laptop = null;
         watcher.CurrentSentry = null;
@@ -257,8 +239,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         if (!_actorQuery.TryComp(watcher.Owner, out var actor))
             return;
 
-        if (watcher.Comp.CurrentSentry is { } net && TryGetEntity(net, out var sentryUid))
-            _viewSubscriber.RemoveViewSubscriber((EntityUid)sentryUid, actor.PlayerSession);
+        RemoveViewSubscription(watcher.Owner, watcher.Comp, actor);
 
         watcher.Comp.Laptop = null;
         watcher.Comp.CurrentSentry = null;
@@ -267,7 +248,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     private void OnWatcherDetached(Entity<SentryLaptopWatcherComponent> watcher, ref PlayerDetachedEvent args)
     {
         if (watcher.Comp.CurrentSentry is { } net && TryGetEntity(net, out var sentryUid))
-            _viewSubscriber.RemoveViewSubscriber((EntityUid)sentryUid, args.Player);
+            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, args.Player);
 
         watcher.Comp.Laptop = null;
         watcher.Comp.CurrentSentry = null;
@@ -277,6 +258,7 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     {
         var sentryNet = GetNetEntity(sentry.Owner);
         var watchers = EntityQueryEnumerator<SentryLaptopWatcherComponent>();
+
         while (watchers.MoveNext(out var watcherUid, out var watcher))
         {
             if (watcher.CurrentSentry != sentryNet)
@@ -297,32 +279,40 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
         var watchers = EntityQueryEnumerator<SentryLaptopWatcherComponent>();
         while (watchers.MoveNext(out var watcherUid, out var watcher))
         {
-            if (watcher.CurrentSentry is not { } net || !TryGetEntity(net, out var sentryUid))
-            {
-                ClearWatcher(watcherUid, watcher);
-                continue;
-            }
+            var shouldClear = !TryGetValidSentry(watcher, out var sentryUid) ||
+                              !TryComp<SentryComponent>(sentryUid.Value, out var sentry) ||
+                              sentry.Mode == SentryMode.Item;
 
-            if (!TryComp<SentryComponent>(sentryUid.Value, out var sentry) || sentry.Mode == SentryMode.Item)
-            {
+            if (shouldClear)
                 ClearWatcher(watcherUid, watcher);
-            }
         }
+    }
+
+    private bool TryGetValidSentry(SentryLaptopWatcherComponent watcher, out EntityUid? sentryUid)
+    {
+        sentryUid = null;
+        return watcher.CurrentSentry is { } net && TryGetEntity(net, out sentryUid);
     }
 
     private void ClearWatcher(EntityUid watcherUid, SentryLaptopWatcherComponent watcher)
     {
-        if (_actorQuery.TryComp(watcherUid, out var actor) &&
-            watcher.CurrentSentry is { } net &&
-            TryGetEntity(net, out var sentryUid))
-        {
-            _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
-        }
+        RemoveViewSubscription(watcherUid, watcher);
 
         watcher.Laptop = null;
         watcher.CurrentSentry = null;
         Dirty(watcherUid, watcher);
         RemCompDeferred<SentryLaptopWatcherComponent>(watcherUid);
+    }
+
+    private void RemoveViewSubscription(EntityUid watcherUid, SentryLaptopWatcherComponent watcher, ActorComponent? actor = null)
+    {
+        if (watcher.CurrentSentry is not { } net || !TryGetEntity(net, out var sentryUid))
+            return;
+
+        if (actor == null && !_actorQuery.TryComp(watcherUid, out actor))
+            return;
+
+        _viewSubscriber.RemoveViewSubscriber(sentryUid.Value, actor.PlayerSession);
     }
 
     protected override float GetSentryVisionRadius(EntityUid sentry)
@@ -338,19 +328,16 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
 
     protected override float GetSentryMaxHealth(EntityUid sentry)
     {
-        if (TryComp<DestructibleComponent>(sentry, out var destruct))
-        {
-            var max = 0f;
-            foreach (var threshold in destruct.Thresholds)
-            {
-                if (threshold.Trigger is DamageTrigger damageTrigger)
-                    max = Math.Max(max, damageTrigger.Damage);
-            }
+        if (!TryComp<DestructibleComponent>(sentry, out var destruct))
+            return base.GetSentryMaxHealth(sentry);
 
-            if (max > 0f)
-                return max;
+        var max = 0f;
+        foreach (var threshold in destruct.Thresholds)
+        {
+            if (threshold.Trigger is DamageTrigger damageTrigger)
+                max = Math.Max(max, damageTrigger.Damage);
         }
 
-        return base.GetSentryMaxHealth(sentry);
+        return max > 0f ? max : base.GetSentryMaxHealth(sentry);
     }
 }
