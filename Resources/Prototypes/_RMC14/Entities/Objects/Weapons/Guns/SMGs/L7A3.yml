@@ -1,8 +1,8 @@
 - type: entity
   parent: CMBaseWeaponSMG
-  name: "L7A3 Submachinegun"   #CM name is L6A2
-  id: WeaponSMGL7A3
-  description: RMC adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearance, where the L24A1 proved a tad too unwieldy. Sometimes referred to as the "Little Armat" by Royal Marines.
+  name: "L7A3 Submachine Gun"   #CM name is L6A2
+  id: RMCWeaponSMGL7A3
+  description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearance, where the L24A1 proved a tad too unwieldy. Sometimes referred to as the "Little Armat" by Royal Marines.
   suffix: Filled
   components:
   - type: Sprite
@@ -101,7 +101,7 @@
   - type: Tag
     tags:
     - RMCWeaponSMG
-    - WeaponSMGL7A3
+    - RMCWeaponSMGL7A3
   
 
 - type: entity
@@ -172,7 +172,7 @@
 
 
 - type: Tag    
-  id: WeaponSMGL7A3
+  id: RMCWeaponSMGL7A3
 
 - type: Tag    
   id: RMCMagazineSMGL7A3SquashHead
