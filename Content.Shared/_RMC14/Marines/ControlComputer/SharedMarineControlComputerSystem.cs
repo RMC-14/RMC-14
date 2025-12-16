@@ -148,6 +148,8 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
         }
 
+        string? awardedLastPlayerId = null;
+
         // For not gibbed marines
         if (args.Marine != null)
         {
@@ -157,6 +159,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             {
                 return;
             }
+            awardedLastPlayerId = receiver.LastPlayerId;
             _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
         }
         // For gibbed marines
@@ -166,6 +169,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
                 computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } info)
             {
+                awardedLastPlayerId = lastPlayerId;
                 _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
             }
         }
@@ -176,6 +180,20 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        // Mark this marine as having received a medal on all computers
+        if (awardedLastPlayerId != null)
+        {
+            MarkMarineAsAwarded(awardedLastPlayerId);
+            
+            // Send message to remove the recommendation group from UI if medals panel is open
+            var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = awardedLastPlayerId };
+            var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+            while (computers.MoveNext(out var uid, out _))
+            {
+                _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+            }
+        }
 
         _popup.PopupCursor(Loc.GetString("rmc-medal-awarded"), actor.Value, PopupType.Large);
     }
@@ -312,6 +330,9 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        // Synchronize awarded medals list across all computers before building state
+        SynchronizeAwardedMedals();
 
         var state = BuildMedalsPanelState(ent);
         _ui.SetUiState(ent.Owner, MarineControlComputerUi.MedalsPanel, state);
@@ -482,5 +503,69 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         info = default!;
         return false;
+    }
+
+    /// <summary>
+    /// Marks a marine as having received a medal by adding their LastPlayerId to all computers.
+    /// This prevents their recommendations from being displayed.
+    /// </summary>
+    public void MarkMarineAsAwarded(string lastPlayerId)
+    {
+        if (_net.IsClient)
+            return;
+
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
+                Dirty(uid, computer);
+        }
+    }
+
+    /// <summary>
+    /// Synchronizes the list of awarded medal LastPlayerIds across all computers.
+    /// Should be called when opening the medals panel to ensure consistency.
+    /// </summary>
+    public void SynchronizeAwardedMedals()
+    {
+        if (_net.IsClient)
+            return;
+
+        // Collect all awarded LastPlayerIds from all computers
+        var allAwarded = new HashSet<string>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            allAwarded.UnionWith(computer.AwardedMedalLastPlayerIds);
+        }
+
+        // Update all computers to have the complete list
+        computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            var updated = false;
+            foreach (var lastPlayerId in allAwarded)
+            {
+                if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
+                    updated = true;
+            }
+
+            if (updated)
+                Dirty(uid, computer);
+        }
+    }
+
+    /// <summary>
+    /// Gets the combined set of all LastPlayerIds who have been awarded medals from all computers.
+    /// </summary>
+    public HashSet<string> GetAllAwardedMedalLastPlayerIds()
+    {
+        var result = new HashSet<string>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            result.UnionWith(computer.AwardedMedalLastPlayerIds);
+        }
+        return result;
     }
 }

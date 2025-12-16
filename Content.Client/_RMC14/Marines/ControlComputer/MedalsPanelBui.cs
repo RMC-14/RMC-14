@@ -21,6 +21,9 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
     [ViewVariables]
     private MedalsPanelWindow? _window;
 
+    // Dictionary to store LastPlayerId -> PanelContainer mapping for quick removal
+    private readonly Dictionary<string, PanelContainer> _recommendationGroups = new();
+
     protected override void Open()
     {
         base.Open();
@@ -29,6 +32,16 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         _window = this.CreateWindow<MedalsPanelWindow>();
         _window.GrantNewMedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
+    }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is MarineControlComputerRemoveRecommendationGroupMsg removeMsg)
+        {
+            RemoveRecommendationGroup(removeMsg.LastPlayerId);
+        }
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -211,6 +224,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             return;
 
         _window.RecommendationsList.DisposeAllChildren();
+        _recommendationGroups.Clear();
 
         foreach (var group in state.RecommendationGroups)
         {
@@ -342,6 +356,21 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
             groupPanel.AddChild(groupContainer);
             _window.RecommendationsList.AddChild(groupPanel);
+            
+            // Store reference for quick removal
+            _recommendationGroups[group.LastPlayerId] = groupPanel;
+        }
+    }
+
+    private void RemoveRecommendationGroup(string lastPlayerId)
+    {
+        if (_window == null)
+            return;
+
+        if (_recommendationGroups.TryGetValue(lastPlayerId, out var panel))
+        {
+            panel.Orphan();
+            _recommendationGroups.Remove(lastPlayerId);
         }
     }
 }

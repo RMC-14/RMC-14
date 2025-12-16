@@ -122,6 +122,16 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         if (!HasComp<ActorComponent>(actor))
             return;
 
+        if (args.LastPlayerId == null)
+            return;
+
+        // Check if the marine has already been awarded a medal
+        if (_control.GetAllAwardedMedalLastPlayerIds().Contains(args.LastPlayerId))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-already-awarded"), ent.Owner, actor.Value, PopupType.SmallCaution);
+            return;
+        }
+
         var inputEvent = new RMCAwardRecommendationReasonEvent(args.Actor, args.Marine, args.LastPlayerId);
         _dialog.OpenInput(
             actor.Value,

@@ -36,10 +36,17 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             allRecommendations.UnionWith(computer.AwardRecommendations);
         }
 
-        // Group recommendations by recommended marine
+        // Get all LastPlayerIds who have already been awarded medals
+        var awardedLastPlayerIds = GetAllAwardedMedalLastPlayerIds();
+
+        // Group recommendations by recommended marine, excluding those who already received medals
         foreach (var recommendation in allRecommendations)
         {
             var recommendedId = recommendation.RecommendedLastPlayerId;
+            
+            // Skip recommendations for marines who have already been awarded medals
+            if (awardedLastPlayerIds.Contains(recommendedId))
+                continue;
             
             if (!groups.TryGetValue(recommendedId, out var group))
             {

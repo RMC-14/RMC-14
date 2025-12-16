@@ -36,6 +36,13 @@ public sealed partial class MarineControlComputerComponent : Component
     [DataField, AutoNetworkedField]
     public HashSet<MarineAwardRecommendationInfo> AwardRecommendations = new();
 
+    /// <summary>
+    /// List of LastPlayerIds for marines who have already been awarded medals.
+    /// Recommendations for these marines should not be displayed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> AwardedMedalLastPlayerIds = new();
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? LastShipAnnouncement;
 
