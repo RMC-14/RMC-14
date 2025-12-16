@@ -51,13 +51,13 @@
   parent: CMClosetFire
   suffix: Filled
   components:
-    - type: StorageFill
-      contents:
-        - id: RMCHardhatRed
-#        - id: TODO: /obj/item/clothing/suit/fire/firefighter
-        - id: CMGasTankOxygen
-        - id: CMFireExtinguisher
-        - id: CMPackFlare
+  - type: StorageFill
+    contents:
+      - id: RMCHardhatRed
+#      - id: TODO: /obj/item/clothing/suit/fire/firefighter
+      - id: CMGasTankOxygen
+      - id: CMFireExtinguisher
+      - id: CMPackFlare
 
 - type: entity
   parent: CMLockerCommanderSecure
