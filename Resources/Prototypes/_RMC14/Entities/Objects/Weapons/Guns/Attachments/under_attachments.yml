@@ -45,6 +45,7 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
+    activateOnMove: false
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
@@ -279,9 +280,12 @@
         - ReagentId: RMCNapalmUT
           Quantity: 40
   - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
     maxIntensity: 10
     maxDuration: 10
-  - type: RMCFlamerTank
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -307,6 +311,10 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
+  - type: RMCFlushableSolution
+    solution: rmc_flamer_tank
+    flushTime: 1.5
+  - type: NoMixingReagents
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -459,6 +467,25 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
       state: all
+
+- type: entity
+  parent: RMCAttachmentUnderbarrelExtinguisher
+  id: RMCAttachmentUnderbarrelExtinguisherSpec
+  name: HME-88B underbarrel extinguisher
+  description: An experimental Taiho-Technologies HME-88B underbarrel extinguisher integrated with a select few gun models. It is capable of putting out the strongest of flames. Point at flame before applying pressure.
+  components:
+  - type: Spray
+    sprayedPrototype: RMCExtinguisherSpraySpec
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 500
+        reagents:
+        - ReagentId: Water
+          Quantity: 500
+  - type: SolutionTransfer
+    maxTransferAmount: 500
+    transferAmount: 500
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]

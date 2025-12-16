@@ -58,7 +58,7 @@
 - type: startingGear
   id: RMCGearCLFMedic
   equipment:
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
     head: CMHeadBandRed

@@ -23,3 +23,16 @@
     useDelay: 1 # Prevents Emote Spam
   - type: InstantAction
     event: !type:ToggleActionEvent
+
+# Avali Tail wag
+- type: entity
+  parent: ActionToggleWagging
+  id: ActionToggleAvaliWagging
+  components:
+  - type: Action
+    icon: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
+    iconOn: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
+    itemIconStyle: NoItem
+    useDelay: 1 # Prevents Emote Spam
+  - type: InstantAction
+    event: !type:ToggleActionEvent
