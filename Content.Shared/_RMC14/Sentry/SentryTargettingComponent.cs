@@ -10,6 +10,9 @@ public sealed partial class SentryTargetingComponent : Component
     public HashSet<string> FriendlyFactions = new();
 
     [DataField, AutoNetworkedField]
+    public HashSet<string> DeployedFriendlyFactions = new();
+
+    [DataField, AutoNetworkedField]
     public string OriginalFaction = "UNMC";
 
     [DataField, AutoNetworkedField]

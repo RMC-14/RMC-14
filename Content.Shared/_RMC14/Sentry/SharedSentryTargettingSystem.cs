@@ -23,7 +23,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
     public static readonly Dictionary<string, EntProtoId<IFFFactionComponent>> SentryFactionToIff = new()
     {
         { "UNMC", "FactionMarine" },
-        { "CLF", "FactionSurvivor" },
+        //{ "CLF", "FactionSurvivor" },
         { "SPP", "FactionSPP" },
         { "Halcyon", "FactionHalcyon" },
         { "WeYa", "FactionWeYa" },
@@ -95,6 +95,9 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
                 targeting.OriginalFaction = npcFaction.Factions.First();
         }
 
+        targeting.DeployedFriendlyFactions.Clear();
+        targeting.DeployedFriendlyFactions.UnionWith(targeting.FriendlyFactions);
+
         if (_net.IsServer)
             ApplyTargeting((sentry, targeting));
 
@@ -132,8 +135,8 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         ent.Comp.FriendlyFactions.Clear();
         ent.Comp.HumanoidAdded.Clear();
 
-        if (!string.IsNullOrEmpty(ent.Comp.OriginalFaction))
-            ent.Comp.FriendlyFactions.Add(ent.Comp.OriginalFaction);
+        if (ent.Comp.DeployedFriendlyFactions.Count > 0)
+            ent.Comp.FriendlyFactions.UnionWith(ent.Comp.DeployedFriendlyFactions);
 
         if (_net.IsServer)
             ApplyTargeting(ent);
