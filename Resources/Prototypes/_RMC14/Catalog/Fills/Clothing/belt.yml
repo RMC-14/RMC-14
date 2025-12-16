@@ -114,6 +114,34 @@
     # TODO RMC14 tramadol and perixadon pills, splint
 
 - type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBurnKit10
+      amount: 2
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMEpinephrineAutoInjector
+      amount: 1
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO RMC14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+
+- type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeFilled
   suffix: Filled
