@@ -15,20 +15,6 @@
             <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
-                        BackgroundColor="#252525"
-                        BorderColor="#3A3A3A" 
-                        BorderThickness="0 0 0 2" />
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" Margin="6 4">
-                    <RichTextLabel 
-                        Text="Medals Panel" 
-                        HorizontalAlignment="Center"
-                        StyleClasses="LabelTitle" />
-                </BoxContainer>
-            </PanelContainer>
-            <PanelContainer HorizontalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat 
                         BackgroundColor="#1F1F1F"
                         BorderColor="#3A3A3A" 
                         BorderThickness="1" />
