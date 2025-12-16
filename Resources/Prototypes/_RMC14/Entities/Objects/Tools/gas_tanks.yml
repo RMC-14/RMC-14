@@ -12,6 +12,69 @@
   - type: GasTank
     outputPressure: 30.4
 
+- type: entity
+  parent: CMGasTankBase
+  id: RMCEmergencyOxygenTank
+  name: emergency oxygen tank
+  description: An easily portable tank for emergencies. Contains very little oxygen, rated for survival use only. It can hold 0.66 L of gas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
+    slots:
+    - Pocket
+    - Belt
+    - suitStorage
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
+  - type: GasTank
+    air:
+      volume: 0.66
+      temperature: 293.15
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 100
+
+- type: entity
+  parent: RMCEmergencyOxygenTank
+  id: RMCExtendedEmergencyOxygenTank
+  name: extended-capacity emergency oxygen tank
+  description: An emergency tank with extended capacity. Technically rated for prolonged use. It can hold 1.5 L of gas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
+  - type: GasTank
+    air:
+      volume: 1.5
+      temperature: 293.15
+
+- type: entity
+  parent: RMCEmergencyOxygenTank
+  id: RMCDoubleEmergencyOxygenTank
+  name: double emergency oxygen tank
+  description: A high-grade dual-tank emergency life support container. It holds a decent amount of oxygen for its small size. It can hold 2.5 L of gas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: GasTank
+    air:
+      volume: 2.5
+      temperature: 293.15
+
 # Gas Tanks /obj/item/reagent_container/glass/canister
 
 # for future needs

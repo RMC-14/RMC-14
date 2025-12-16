@@ -1,14 +1,50 @@
+- type: entityTable
+  id: CMClosetEmergencyFillTable
+  table: !type:GroupSelector
+    children:
+    - weight: 55 # "small" = 2 emergency O2 tanks, 2 breath masks, 2 gas masks
+      !type:AllSelector
+      children:
+      - id: RMCEmergencyOxygenTankFilled
+        amount: 2
+      - id: RMCMaskBreath
+        amount: 2
+      - id: CMMaskGas
+        amount: 2
+    - weight: 25 # "aid" = 1 emergency O2 tank, 1 emergency toolbox, 1 O2 first aid kit, 1 gas mask
+      !type:AllSelector
+      children:
+      - id: RMCEmergencyOxygenTankFilled
+      - id: RMCToolboxEmergencyFilled
+      - id: CMFirstAidO2KitFilled
+      - id: CMMaskGas
+    - weight: 10 # "tank" = 2 extended-capacity emergency O2 tanks, 1 breath mask, 1 gas mask
+      !type:AllSelector
+      children:
+      - id: RMCExtendedEmergencyOxygenTankFilled
+        amount: 2
+      - id: RMCMaskBreath
+      - id: CMMaskGas
+    - weight: 10 # "both" = 1 toolbox, 1 extended-capacity emergency O2 tank, 2 gas masks, 1 O2 first aid kit
+      !type:AllSelector
+      children:
+      - id: RMCToolboxEmergencyFilled
+      - id: RMCExtendedEmergencyOxygenTankFilled
+      - id: CMMaskGas
+        amount: 2
+      - id: CMFirstAidO2KitFilled
+    - weight: 1 # "nothing" = empty closet
+      !type:NoneSelector {}
+
 - type: entity
   id: CMClosetEmergencyFilled
   parent: CMClosetEmergency
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: CMMaskGas
-##      - id: EmergencyOxygenTankFilled
-      - id: CMFirstAidO2KitFilled
-      - id: RMCToolboxEmergencyFilled
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: CMClosetEmergencyFillTable
 
 - type: entity
   id: CMClosetFireFilled
@@ -18,8 +54,8 @@
     - type: StorageFill
       contents:
         - id: RMCHardhatRed
-##        - id: TODO: /obj/item/clothing/suit/fire/firefighter
-##        - id: OxygenTankFilled
+#        - id: TODO: /obj/item/clothing/suit/fire/firefighter
+        - id: CMGasTankOxygen
         - id: CMFireExtinguisher
         - id: CMPackFlare
 
