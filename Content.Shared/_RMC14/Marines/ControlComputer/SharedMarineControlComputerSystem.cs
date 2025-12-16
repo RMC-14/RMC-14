@@ -66,6 +66,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnToggleEvacuationMsg);
                 subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnOpenMedalsPanel);
             });
+        Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.MedalsPanel,
+            subs =>
+            {
+                subs.Event<MarineControlComputerApproveRecommendationMsg>(OnApproveRecommendation);
+            });
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMsg>(OnMedal);
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
@@ -248,6 +253,53 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         GiveMedal(ent, args.Actor);
+    }
+
+    private void OnApproveRecommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerApproveRecommendationMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        // Copy LastPlayerId to local variable for use in lambda
+        var targetLastPlayerId = args.LastPlayerId;
+
+        // Try to find alive marine
+        NetEntity? marineNetEntity = null;
+        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver, out _))
+        {
+            if (receiver.LastPlayerId == targetLastPlayerId)
+            {
+                marineNetEntity = GetNetEntity(uid);
+                break;
+            }
+        }
+
+        // If not found alive, check if it's a gibbed marine
+        string? lastPlayerId = null;
+        if (marineNetEntity == null)
+        {
+            var allGibbed = CollectGibbedMarines();
+            if (allGibbed.Any(info => info.LastPlayerId == targetLastPlayerId))
+            {
+                lastPlayerId = targetLastPlayerId;
+            }
+            else
+            {
+                return; // Marine not found
+            }
+        }
+
+        // Open medal type selection dialog (skip marine selection)
+        var netActor = GetNetEntity(args.Actor);
+        var evt = new MarineControlComputerMedalMarineEvent(netActor, marineNetEntity, lastPlayerId);
+        OnComputerMedalMarine(ent, ref evt);
     }
 
     private void OnOpenMedalsPanel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)

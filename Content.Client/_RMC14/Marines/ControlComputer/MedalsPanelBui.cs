@@ -1,6 +1,7 @@
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Client.Resources;
+using Content.Client.Stylesheets;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -321,6 +322,23 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
                 groupContainer.AddChild(expandButton);
             }
+
+            // Approve recommendation button - right bottom corner
+            var approveButtonContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalAlignment = Control.HAlignment.Right,
+                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+            };
+            var approveButton = new Button
+            {
+                Text = Loc.GetString("rmc-medal-panel-approve-recommendation")
+            };
+            approveButton.AddStyleClass("OpenBoth");
+            approveButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
+            approveButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerApproveRecommendationMsg { LastPlayerId = group.LastPlayerId });
+            approveButtonContainer.AddChild(approveButton);
+            groupContainer.AddChild(approveButtonContainer);
 
             groupPanel.AddChild(groupContainer);
             _window.RecommendationsList.AddChild(groupPanel);

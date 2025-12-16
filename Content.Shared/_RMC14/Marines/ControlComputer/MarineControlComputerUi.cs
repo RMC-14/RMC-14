@@ -29,6 +29,12 @@ public sealed class MarineControlComputerToggleEvacuationMsg : BoundUserInterfac
 public sealed class MarineControlComputerOpenMedalsPanelMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class MarineControlComputerApproveRecommendationMsg : BoundUserInterfaceMessage
+{
+    public required string LastPlayerId { get; init; }
+}
+
+[Serializable, NetSerializable]
 public sealed class MarineMedalsPanelBuiState : BoundUserInterfaceState
 {
     public readonly List<MarineRecommendationGroup> RecommendationGroups;
