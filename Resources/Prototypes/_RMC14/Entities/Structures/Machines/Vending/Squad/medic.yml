@@ -343,6 +343,8 @@
     - CMPVEHospitalCorpsman
     - CMPMCCorpsmanPVE
     - RMCSPPCorpsmanPVE
+    - RMCFORECONPVECorpsman
+    - RMCCLFDoctorPVE
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
