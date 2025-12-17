@@ -51,7 +51,7 @@
 
 - type: entity
   parent: RMCSpawnerCorpseWeYaGoonLead
-  id: RMCSpawnerCorpseWeYaGoonLeadBurst
+  id: RMCSpawnerCorpseWeYaGoonLeadHybrisaBurst
   name: Corpse Spawner - We-Ya Goon Hybrisa Lead
   suffix: RMC14, Burst
   components:
