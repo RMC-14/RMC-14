@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: [ RMCJobNametagBase, CMSurvivor ]
   id: CMSurvivorCorporate
   name: cm-job-name-survivor-corporate
   description: cm-job-description-survivor
