@@ -90,17 +90,17 @@
       - id: RMCBackpackRTO
         points: 5
       - id: RMCScabbardMacheteFilled
-        name: Machete scabbard (Full)
+        name: machete scabbard (Full)
         points: 5
       - id: RMCPouchMacheteFilled
-        name: Machete pouch (Full)
+        name: machete pouch (Full)
         points: 15
       - id: RMCWeldingGoggles
         points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
-        name: Autoinjector pouch (Full)
+        name: autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
         points: 3
@@ -217,16 +217,16 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
@@ -236,7 +236,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         recommended: true
-        name: Tools pouch (Full)
+        name: tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

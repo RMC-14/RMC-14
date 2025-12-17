@@ -30,7 +30,7 @@
     #    CMMedicalSplints: 1P
 #        recommended: true
       - id: CMBloodPackFull # TODO RMC14 O-
-        name: Blood bag (O-)
+        name: blood bag (O-)
         points: 4
     - name: Firstaid Kits
       entries:
@@ -164,7 +164,7 @@
     - name: Clothing Items
       entries:
       - id: RMCPouchMacheteFilled
-        name: Machete pouch (Full)
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         replaceSlot: back
@@ -227,21 +227,21 @@
       entries:
       - id: CMVendorBundleSquadMedicalApparel
       - id: RMCHandsLatexMarine
-        name: Combat sterile gloves
+        name: combat sterile gloves
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: RMCArmorVestSquad
-        name: Armor vest
+        name: armor vest
       - id: RMCArmorM3LightVariants
-        name: Light armor
+        name: light armor
       - id: RMCArmorM3MediumVariants
-        name: Medium armor
+        name: medium armor
         recommended: true
       - id: RMCArmorM3HeavyVariants
-        name: Heavy armor
+        name: heavy armor
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -285,16 +285,16 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
-        name: Vial pouch (Full)
+        name: vial pouch (Full)
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchGeneralLarge
      #- id: CMSlingPouch
       - id: RMCPouchMagazinePistolLarge
@@ -349,7 +349,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCHandsLatexMarine
-        name: Combat sterile gloves
+        name: combat sterile gloves
       - id: CMMaskSterile
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -394,14 +394,14 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
-        name: Vial pouch (Full)
+        name: vial pouch (Full)
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
@@ -416,7 +416,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCHandsLatexMarine
-        name: Combat sterile gloves
+        name: combat sterile gloves
       - id: CMMaskSterile
       - id: RMCSatchelPMCMedic
         recommended: true
@@ -451,14 +451,14 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
-        name: Vial pouch (Full)
+        name: vial pouch (Full)
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE

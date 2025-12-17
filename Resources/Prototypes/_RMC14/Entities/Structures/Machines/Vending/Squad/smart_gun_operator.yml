@@ -155,16 +155,16 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchElectronics
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchMagazinePistolLarge
         recommended: true
@@ -173,7 +173,7 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchMacheteFilled
-        name: Machete pouch (Full)
+        name: machete pouch (Full)
     #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }

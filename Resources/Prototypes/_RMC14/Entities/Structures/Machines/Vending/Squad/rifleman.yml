@@ -24,23 +24,23 @@
       choices: { CMArmour: 1 }
       entries:
       - id: RMCArmorVestSquad
-        name: Armor vest
+        name: armor vest
       - id: RMCArmorM3LightVariants
-        name: Light armor
+        name: light armor
       - id: RMCArmorM3MediumVariants
-        name: Medium armor
+        name: medium armor
         recommended: true
       - id: RMCArmorM3HeavyVariants
-        name: Heavy armor
+        name: heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
         replaceSlot: back
-        name: Backpack
+        name: backpack
       - id: CMSatchelMarine
         replaceSlot: back
-        name: Satchel
+        name: satchel
         recommended: true
       - id: RMCScabbardShotgun
     - name: Belt
@@ -63,18 +63,18 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchBayonetFill
-        name: Bayonet sheath (Full)
+        name: bayonet sheath (Full)
       - id: RMCPouchFirstAidInjectors
-        name: First-aid pouch (refillable injectors)
+        name: first-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: First-aid pouch (pills)
+        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
         recommended: true
       - id: RMCPouchDocumentSmall
       - id: RMCPouchMagazine
@@ -93,7 +93,7 @@
       - id: CMEntrenchingTool
         points: 5
       - id: CMSandbagEmpty25
-        name: Sandbags x25
+        name: sandbags x25
         points: 20
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 5
@@ -190,10 +190,10 @@
       - id: RMCWebbingHolsterBlack
         points: 15
       - id: RMCScabbardMacheteFilled
-        name: Machete scabbard (Full)
+        name: machete scabbard (Full)
         points: 15
       - id: RMCPouchMacheteFilled
-        name: Machete pouch (Full)
+        name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         replaceSlot: back
