@@ -277,14 +277,31 @@ public sealed class SentryLaptopSystem : SharedSentryLaptopSystem
     private void CleanupInvalidCameraWatchers()
     {
         var watchers = EntityQueryEnumerator<SentryLaptopWatcherComponent>();
+
         while (watchers.MoveNext(out var watcherUid, out var watcher))
         {
-            var shouldClear = !TryGetValidSentry(watcher, out var sentryUid) ||
-                              !TryComp<SentryComponent>(sentryUid.Value, out var sentry) ||
-                              sentry.Mode == SentryMode.Item;
-
-            if (shouldClear)
+            if (!TryGetValidSentry(watcher, out var sentryUid))
+            {
                 ClearWatcher(watcherUid, watcher);
+                continue;
+            }
+
+            if (!sentryUid.HasValue)
+            {
+                ClearWatcher(watcherUid, watcher);
+                continue;
+            }
+
+            if (!TryComp<SentryComponent>(sentryUid.Value, out var sentry))
+            {
+                ClearWatcher(watcherUid, watcher);
+                continue;
+            }
+
+            if (sentry.Mode == SentryMode.Item)
+            {
+                ClearWatcher(watcherUid, watcher);
+            }
         }
     }
 
