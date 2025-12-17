@@ -58,7 +58,7 @@
     jobTitle: rmc-job-name-survivor-tmcc-miner
 
 - type: entity
-  parent: RMCIDCardCMBRiotOfficer
+  parent: CMIDCardSilver
   id: RMCIDCardRiotOfficerCorpse
   categories: [ HideSpawnMenu ]
   components:

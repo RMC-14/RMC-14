@@ -33,7 +33,7 @@
     back: CMSatchel
     shoes: RMCShoesBlack
     head: ClothingHeadHatChef
-    outerClothing: ClothingUniformJumpsuitChef
+    outerClothing: RMCChefApron
     id: RMCIDCardChefCorpse
     ears: CMHeadsetColony
   storage:
@@ -435,7 +435,7 @@
     gloves: CMHandsBlackMarine
     ears: CMHeadsetColony
     back: CMSatchelSecurity
-    id: RMCIDCardCMBRiotOfficerSurvivor
+    id: RMCIDCardRiotOfficerCorpse
     shoes: CMBootsBlack
   storage:
     back:
