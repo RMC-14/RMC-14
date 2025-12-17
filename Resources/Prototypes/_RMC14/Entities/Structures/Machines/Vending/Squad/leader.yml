@@ -37,10 +37,10 @@
       - id: RMCBackpackRTO
         points: 5
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         points: 4
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
         points: 4
       - id: CMBeltUtilityCombat
         points: 15
@@ -77,11 +77,11 @@
       - id: CMHandsBlackInsulated
         points: 3
       - id: CMSheetMetal10
-        name: metal x10
+        name: Metal x10
         points: 5
         recommended: true
       - id: CMSheetPlasteel10
-        name: plasteel x10
+        name: Plasteel x10
         points: 7
         recommended: true
       - id: RMCExplosivePlastic
@@ -91,7 +91,7 @@
         points: 7
         recommended: true
       - id: CMSandbagEmpty25
-        name: sandbags x25
+        name: Sandbags x25
         points: 10
         recommended: true
       - id: RMCPackFlareCAS
@@ -158,10 +158,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -174,6 +170,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 6
       - id: RMCSpeedLoader44Marksman
@@ -190,10 +190,10 @@
       entries:
       - id: RMCTankFlamer
         points: 3
-        name: incinerator tank (UT-Napthal)
+        name: Incinerator tank (UT-Napthal)
       - id: RMCTankFlamerBGel
         points: 3
-        name: incinerator tank (B-Gel)
+        name: Incinerator tank (B-Gel)
     - name: Restricted Firearms
       entries:
       - id: RMCCaseFlamer
@@ -244,12 +244,12 @@
       choices: { CMArmour: 1 }
       entries:
       - id: RMCArmorB12Zipties
-        name: leader B12 pattern marine armor (zipties)
+        name: Leader B12 pattern marine armor (zipties)
         recommended: true
       - id: RMCArmorM4Zipties
-        name: leader M4 pattern marine armor (zipties)
+        name: Leader M4 pattern marine armor (zipties)
       - id: RMCArmorVestSquadLeader
-        name: leader M3-XL pattern armor vest (zipties)
+        name: Leader M3-XL pattern armor vest (zipties)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -281,11 +281,11 @@
       - id: RMCPouchAutoinjectorFill
         recommended: true
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -321,7 +321,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
-  name: essential SL kit
+  name: Essential SL kit
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
@@ -375,7 +375,7 @@
 - type: entity
   parent: RMCKitBase
   id: RMCKitEngineering
-  name: engineering supply kit
+  name: Engineering supply kit
   description: Contains a construction pouch with 50 metal, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
   components:
   - type: Storage
@@ -418,7 +418,7 @@
 - type: entity
   parent: CMArmorB12
   id: RMCArmorB12Zipties
-  name: leader B12 pattern marine armor
+  name: Leader B12 pattern marine armor
   description: A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight. This one has a separate pouch for a ziptie box.
   suffix: Zipties
   components:
@@ -440,7 +440,7 @@
 - type: entity
   parent: CMArmorM4
   id: RMCArmorM4Zipties
-  name: leader M4 pattern marine armor
+  name: Leader M4 pattern marine armor
   description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches. This one has a separate pouch for a ziptie box.
   suffix: Zipties
   components:

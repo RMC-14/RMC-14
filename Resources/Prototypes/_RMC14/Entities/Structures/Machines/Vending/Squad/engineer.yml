@@ -43,11 +43,11 @@
       - id: RMCPowerCellHigh
         points: 3
       - id: CMSheetMetal10
-        name: metal x10
+        name: Metal x10
         points: 5
         recommended: true
       - id: CMSheetPlasteel10
-        name: plasteel x10
+        name: Plasteel x10
         points: 7
         recommended: true
       - id: RMCExplosivePlastic
@@ -56,7 +56,7 @@
         points: 5
         recommended: true
       - id: CMSandbagEmpty25
-        name: sandbags x25
+        name: Sandbags x25
         points: 10
         recommended: true
       - id: RMCPowerCellSuper
@@ -93,10 +93,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -109,6 +105,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #   points: 6
       - id: RMCSpeedLoader44Marksman
@@ -142,10 +142,10 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         replaceSlot: back
@@ -236,18 +236,19 @@
       choices: { CMArmor: 1 }
       entries:
       - id: RMCArmorVestSquad
+        name: Armor vest
       - id: RMCArmorM3LightVariants
-        name: light armor
+        name: Light armor
       - id: RMCArmorM3MediumVariants
-        name: medium armor
+        name: Medium armor
         recommended: true
       - id: RMCArmorM3HeavyVariants
-        name: heavy armor
+        name: Heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
       - id: CMBackpackMarineTech
         replaceSlot: back
       - id: CMSatchelMarineTech
@@ -283,16 +284,16 @@
       - id: RMCPouchConstruction
         recommended: true
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
         recommended: true
       - id: RMCPouchElectronicsFill
-        name: electronics pouch (Full)
+        name: Electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -319,7 +320,7 @@
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
       - id: RMCToolWebbingSmallFilled
-        name: small tool webbing (Full)
+        name: Small tool webbing (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -353,7 +354,7 @@
     - name: Equipment
       entries:
       - id: CMBeltUtility
-        name: utility tool belt
+        name: Utility tool belt
         amount: 4
       - id: RMCCableCoil
         amount: 4

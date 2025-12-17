@@ -45,10 +45,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -61,6 +57,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -90,17 +90,17 @@
       - id: RMCBackpackRTO
         points: 5
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         points: 5
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
         points: 15
       - id: RMCWeldingGoggles
         points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
-        name: autoinjector pouch (Full)
+        name: Autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
         points: 3
@@ -217,13 +217,13 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -261,7 +261,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
-  name: essential fireteam leader utilities
+  name: Essential fireteam leader utilities
   description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite

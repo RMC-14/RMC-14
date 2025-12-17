@@ -50,6 +50,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -154,13 +158,13 @@
         name: Flare pouch (Full)
       - id: RMCPouchElectronics
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
         recommended: true
       - id: RMCPouchMagazinePistolLarge
         recommended: true
@@ -169,7 +173,7 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
     #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }

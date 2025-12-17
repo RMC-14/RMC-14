@@ -151,7 +151,7 @@
 - type: entity
   parent: [BaseItem, RMCVendorWeaponsSpecialistGearBase]
   id: RMCKitWeaponsSpecialist
-  name: specialist kit
+  name: Specialist kit
   description: A paper box. Open it and get a specialist kit.
   components:
   - type: Sprite
@@ -216,13 +216,13 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -264,6 +264,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -279,10 +283,10 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         points: 15
@@ -295,7 +299,7 @@
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
-        name: autoinjector pouch (Full)
+        name: Autoinjector pouch (Full)
         points: 15
     - name: Utilities
       entries:

@@ -24,23 +24,23 @@
       choices: { CMArmour: 1 }
       entries:
       - id: RMCArmorVestSquad
-        name: armor vest
+        name: Armor vest
       - id: RMCArmorM3LightVariants
-        name: light armor
+        name: Light armor
       - id: RMCArmorM3MediumVariants
-        name: medium armor
+        name: Medium armor
         recommended: true
       - id: RMCArmorM3HeavyVariants
-        name: heavy armor
+        name: Heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
         replaceSlot: back
-        name: backpack
+        name: Backpack
       - id: CMSatchelMarine
         replaceSlot: back
-        name: satchel
+        name: Satchel
         recommended: true
       - id: RMCScabbardShotgun
     - name: Belt
@@ -63,15 +63,15 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchBayonetFill
-        name: bayonet sheath (Full)
+        name: Bayonet sheath (Full)
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -93,7 +93,7 @@
       - id: CMEntrenchingTool
         points: 5
       - id: CMSandbagEmpty25
-        name: sandbags x25
+        name: Sandbags x25
         points: 20
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 5
@@ -133,10 +133,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -149,6 +145,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       #- id: M44 Heavy Speedloader
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -190,10 +190,10 @@
       - id: RMCWebbingHolsterBlack
         points: 15
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         points: 15
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         replaceSlot: back

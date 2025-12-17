@@ -311,7 +311,7 @@
         name: M10 helmet rain cover
         amount: 10
       - id: RMCHelmetGarbGunOil
-        name: firearm lubricant
+        name: Firearm lubricant
         amount: 15
       - id: RMCHelmetGarbUNMCFlair
         amount: 15
@@ -339,7 +339,7 @@
     - name: Optics
       entries:
       - id: RMCVisorMedicalAdvanced
-        name: advanced medical optic (CORPSMAN ONLY)
+        name: Advanced medical optic (CORPSMAN ONLY)
         amount: 4
       - id: RMCVisorSquad
         amount: 15
@@ -480,7 +480,7 @@
       - id: CMRollerBedSpawnFolded
         amount: 1
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete scabbard (Full)
         amount: 5
       - id: RMCBinoculars
         amount: 1
