@@ -15,11 +15,11 @@
     jobs:
     - CMSquadLeader
     sections:
-    - name: squad Leader Kit
+    - name: Squad Leader Kit
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewLeader
-    - name: squad Kit (for yourself or your squad)
+    - name: Squad Kit (for yourself or your squad)
       choices: { RMCKitBase: 1 }
       entries:
       - id: RMCKitEngineering
@@ -321,7 +321,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
-  name: Essential SL kit
+  name: essential SL kit
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
@@ -375,7 +375,7 @@
 - type: entity
   parent: RMCKitBase
   id: RMCKitEngineering
-  name: Engineering supply kit
+  name: engineering supply kit
   description: Contains a construction pouch with 50 metal, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
   components:
   - type: Storage

@@ -261,7 +261,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
-  name: Essential fireteam leader utilities
+  name: essential fireteam leader utilities
   description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite
