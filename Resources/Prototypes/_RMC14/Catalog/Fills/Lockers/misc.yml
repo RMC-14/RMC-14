@@ -54,7 +54,7 @@
   - type: StorageFill
     contents:
       - id: RMCHardhatRed
-#      - id: TODO: /obj/item/clothing/suit/fire/firefighter
+      - id: RMCSuitFirefighter
       - id: CMGasTankOxygen
       - id: CMFireExtinguisher
       - id: CMPackFlare
