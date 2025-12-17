@@ -18,13 +18,13 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 public sealed class JoinXenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public int ClientBurrowedLarva { get; private set; }
@@ -72,19 +72,21 @@ public sealed class JoinXenoSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var user = args.Performer;
-        if (!CanJoinXeno(user))
+        var denyQueuing = _config.GetCVar(RMCCVars.RMCLarvaQueueRoundstartDelaySeconds);
+        if (_gameTicker.RoundDuration().TotalSeconds <= denyQueuing)
+        {
+            _popup.PopupEntity($"Joining a hive from observer is disabled for {denyQueuing} seconds from the start of the round.", args.Performer);
             return;
+        }
 
         var options = new List<DialogOption>();
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            options.Add(new DialogOption("(Join/Leave) Larva Queue", new JoinLarvaQueueEvent()));
+            options.Add(new DialogOption($"(Join/Leave) Larva Queue for ({Name(hiveId)})", new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
 
-
-        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Xenonids");
+        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Hives");
     }
 
     public bool CanJoinXeno(EntityUid user)
