@@ -1,0 +1,31 @@
+# CMB Deputy
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseDeputy
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDeputy ]
+  - type: VictimBurst
+  - type: Rank
+    rank: RMCRankCMBDeputy
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: cmb_dep
+  - type: NpcFactionMember
+    factions:
+    - Bureau
+    - Civilian
+
+- type: startingGear
+  id: RMCGearCorpseDeputy
+  equipment:
+    jumpsuit: RMCMarshalCMBUniform
+    back: CMSatchelSecurity
+    outerClothing: RMCCoatBureauDeputy
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardCMBDeputySurvivor
+    ears: RMCHeadsetDistressBureauDamaged
+    belt: RMCBeltHolsterPistolHandcannonFilled

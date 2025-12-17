@@ -45,7 +45,7 @@
     faction: FactionSurvivor
 
 - type: entity
-  parent: CMIDCardLanyard
+  parent: CMIDCardSilver
   id: RMCIDCardColonistScientist
   name: researcher colonist ID card
   components:
@@ -318,14 +318,6 @@
     job: RMCJobSyntheticColony
   - type: ItemIFF
     faction: FactionSurvivor
-
-- type: entity
-  parent: CMIDCardStandardDogtag
-  id: RMCIDCardFORECONSpotter
-  name: FORECON Spotter's dogtags
-  components:
-  - type: IdCard
-    jobTitle: rmc-job-name-forecon-spotter
 
 - type: entity
   id: RMCIDCardAegis
