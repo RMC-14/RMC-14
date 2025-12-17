@@ -36,7 +36,7 @@ public sealed partial class RMCVehicleWheelSlotsComponent : Component
     };
 
     [DataField]
-    public float CollisionDamagePerSpeed = 5f;
+    public float CollisionDamagePerSpeed = 0f;
 
     [DataField]
     public float MinCollisionDamage;
@@ -47,6 +47,8 @@ public enum RMCVehicleWheelVisuals : byte
 {
     HasAllWheels,
     WheelCount,
+    WheelFunctionalCount,
+    WheelIntegrityFraction,
 }
 
 public static class RMCVehicleWheelLayers

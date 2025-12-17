@@ -328,30 +328,33 @@
 
 
 - type: entity
-  id: RMCVehicleArc
-  name: arc
-  description: Armored reconnaissance carrier.
+  id: RMCVehicleCLFVan
+  name: CLF van
+  description: A rugged transport van painted in CLF colors.
   components:
   - type: Vehicle
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
-    maxSpeed: 9
-    acceleration: 6
+    maxSpeed: 8
+    acceleration: 5
     deceleration: 12
-    frontOffset: 0
+    xenoBlockMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
-    cooldown: 16
-    overchargeSound: /Audio/Effects/Vehicle/vehiclestartup.ogg
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
   - type: RMCVehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
-    runningSoundCooldown: 1
+    runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
-    collisionSound: /Audio/Effects/Vehicle/carhorn.ogg
     collisionSoundCooldown: 0.4
+  - type: RMCVehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
   - type: Physics
     bodyType: Dynamic
   - type: Fixtures
@@ -359,7 +362,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.3,-0.85,1.3,1.85
+          bounds: -0.425,-1.2,0.425,1.2
         density: 1000
         mask:
         - Impassable
@@ -371,7 +374,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.3,-0.85,1.3,1.85
+          bounds: -0.425,-1.2,0.425,1.2
         density: 1000
         mask:
         - MidImpassable
@@ -384,20 +387,30 @@
     damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
-    offset: "0.5,0.5"
     drawdepth: Mobs
-    sprite: _RMC14/Structures/Vehicles/arc.rsi
+    sprite: _RMC14/Structures/Vehicles/CLF_van.rsi
     layers:
-    - state: arc_base
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
     - map: [ rmc-wheels ]
-      state: arc_wheels_1
+      state: wheels_1
   - type: SpriteMovement
     movementLayers:
       rmc-wheels:
-        state: arc_wheels_0
+        state: wheels_0
     noMovementLayers:
       rmc-wheels:
-        state: arc_wheels_1
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
   - type: Corrodible
     isCorrodible: false
   - type: DoAfter
@@ -417,6 +430,8 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
+    collisionDamagePerSpeed: 5
+    minCollisionDamage: 5
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
     repairFuelCost: 10
@@ -426,7 +441,285 @@
     fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO ACTUAL CLF INTERIOR
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    entryPoints:
+    # Entry point 0: Side door
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.25,0
+    # Entry point 1: Side-door
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    # Entry point 2: Back door
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  id: RMCVehicleBoxVan
+  name: box van
+  description: A rugged transport van fitted with a box body.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: Clickable
+  - type: GridVehicleMover
+    maxSpeed: 8
+    acceleration: 5
+    deceleration: 12
+    xenoBlockMinimumSize: Immobile
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSoundCooldown: 0.4
+  - type: RMCVehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/box_van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
+  - type: InputMover
+  - type: ItemSlots
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - RMCVehicleWheelItem
+  - type: RMCVehicleWheelSlots
+    slotCount: 1
+    collisionDamagePerSpeed: 5
+    minCollisionDamage: 5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
+    repairFuelCost: 10
+    bypassEntryOnZero: true
+  - type: RMCRepairable
+    heal: 150
+    fuelUsed: 5
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    entryPoints:
+    # Entry point 0: Side door
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.25,0
+    # Entry point 1: Side-door
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    # Entry point 2: Back door
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  id: RMCVehiclePizzaVan
+  name: pizza van
+  description: A van repurposed for pizza delivery, still sturdy enough for transport.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: Clickable
+  - type: GridVehicleMover
+    maxSpeed: 8
+    acceleration: 5
+    deceleration: 12
+    xenoBlockMinimumSize: Immobile
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSoundCooldown: 0.4
+  - type: RMCVehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,0.7
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,0.7
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/pizza_van.rsi
+    offset: "0,-0.3"
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
+  - type: InputMover
+  - type: ItemSlots
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - RMCVehicleWheelItem
+  - type: RMCVehicleWheelSlots
+    slotCount: 1
+    collisionDamagePerSpeed: 5
+    minCollisionDamage: 5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
+    repairFuelCost: 10
+    bypassEntryOnZero: true
+  - type: RMCRepairable
+    heal: 150
+    fuelUsed: 5
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/pizza_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    entryPoints:
+    # Entry point 0: Side door
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 0.4,1.65
+    # Entry point 1: Side-door
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 0.55,0.43
+    # Entry point 2: Back door
+    - offset: 0,1
+      radius: 0.75
+      interiorCoords: -0.75,1.2
 
 - type: entity
   id: RMCVehicleExitArea

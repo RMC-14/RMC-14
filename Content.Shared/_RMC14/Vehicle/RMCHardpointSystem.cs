@@ -39,6 +39,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -445,6 +446,8 @@ public sealed class RMCHardpointSystem : EntitySystem
     {
         if (ent.Comp.Integrity <= 0f)
             ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+
+        UpdateFrameDamageAppearance(ent.Owner, ent.Comp);
     }
 
     private void OnHardpointExamined(Entity<RMCHardpointIntegrityComponent> ent, ref ExaminedEvent args)
@@ -477,6 +480,7 @@ public sealed class RMCHardpointSystem : EntitySystem
             return false;
 
         Dirty(hardpoint, integrity);
+        UpdateFrameDamageAppearance(hardpoint, integrity);
 
         if (TryComp(hardpoint, out RMCVehicleWheelItemComponent? _))
             _wheels.OnWheelDamaged(vehicle);
@@ -548,6 +552,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         ent.Comp.Integrity = ent.Comp.MaxIntegrity;
         Dirty(ent.Owner, ent.Comp);
+        UpdateFrameDamageAppearance(ent.Owner, ent.Comp);
 
         if (ent.Comp.RepairSound != null)
             _audio.PlayPredicted(ent.Comp.RepairSound, ent.Owner, args.User);
@@ -688,6 +693,20 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
 
         _ui.SetUiState(uid, RMCHardpointUiKey.Key, new RMCHardpointBoundUserInterfaceState(entries));
+    }
+
+    private void UpdateFrameDamageAppearance(EntityUid uid, RMCHardpointIntegrityComponent component)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(uid, out AppearanceComponent? appearance))
+            return;
+
+        var max = component.MaxIntegrity > 0f ? component.MaxIntegrity : 1f;
+        var fraction = Math.Clamp(max > 0f ? component.Integrity / max : 1f, 0f, 1f);
+
+        _appearance.SetData(uid, RMCVehicleFrameDamageVisuals.IntegrityFraction, fraction, appearance);
     }
 
     private bool TryGetPryingTool(EntityUid user, out EntityUid tool)

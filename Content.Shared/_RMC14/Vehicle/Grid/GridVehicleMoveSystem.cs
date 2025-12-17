@@ -459,12 +459,14 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             var isFoldable = HasComp<FoldableComponent>(other);
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
+            var isVehicle = HasComp<VehicleComponent>(other);
             var isLooseDynamic =
                 !otherXform.Anchored &&
                 otherBody.BodyType != BodyType.Static &&
                 !isMob &&
                 !isBarricade &&
                 !isFoldable &&
+                !isVehicle &&
                 !HasComp<RMCVehicleSmashableComponent>(other);
 
             if (isLooseDynamic)
@@ -496,13 +498,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                     _door.OnPartialOpen(other, door);
             }
 
-            if (!_net.IsClient && isMob && mob != null)
-            {
-                HandleMobCollision(uid, other, mob, ref playedCollisionSound);
-                if (!isXeno)
-                    PushMobOutOfVehicle(other, aabb, otherAabb);
-            }
-
             if (isMob && !isXeno)
                 skipBlocking = true;
 
@@ -515,13 +510,21 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (TrySmash(other, uid, ref playedCollisionSound))
                 continue;
 
-            if (skipBlocking || !hardCollidable)
-                continue;
+            var blocked = !skipBlocking && hardCollidable;
+            if (blocked)
+            {
+                PlayCollisionSound(uid, ref playedCollisionSound);
+                ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                return false;
+            }
 
-            PlayCollisionSound(uid, ref playedCollisionSound);
-            ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-            DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
-            return false;
+            if (!_net.IsClient && isMob && mob != null)
+            {
+                HandleMobCollision(uid, other, mob, ref playedCollisionSound);
+                if (!isXeno)
+                    PushMobOutOfVehicle(other, aabb, otherAabb);
+            }
         }
 
         return true;
@@ -751,6 +754,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         var push = overlapX < overlapY
             ? new Vector2(Math.Sign(diff.X == 0f ? 1f : diff.X) * overlapX, 0f)
             : new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY);
+
+        const float pushMultiplier = 1.5f;
+        push *= pushMultiplier;
 
         var newWorldPosition = transform.GetWorldPosition(mob) + push;
         transform.SetWorldPosition(mob, newWorldPosition);

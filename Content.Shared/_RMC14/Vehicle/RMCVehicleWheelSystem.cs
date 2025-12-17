@@ -147,13 +147,65 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
         foreach (var slotId in component.Slots)
         {
             if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) &&
-                slot.HasItem &&
-                slot.Item is { } wheel &&
-                IsWheelFunctional(wheel))
+                slot.HasItem)
+            {
                 count++;
+            }
         }
 
         return count;
+    }
+
+    private int GetFunctionalWheelCount(EntityUid uid, RMCVehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        var count = 0;
+
+        if (!Resolve(uid, ref itemSlots, false))
+            return count;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) &&
+                slot.HasItem &&
+                slot.Item is { } wheel &&
+                IsWheelFunctional(wheel))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private float GetAverageWheelIntegrityFraction(EntityUid uid, RMCVehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        if (!Resolve(uid, ref itemSlots, false))
+            return 1f;
+
+        var total = 0f;
+        var installed = 0;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) || !slot.HasItem)
+                continue;
+
+            installed++;
+
+            var fraction = 1f;
+            if (slot.Item is { } wheel && TryComp(wheel, out RMCHardpointIntegrityComponent? integrity))
+            {
+                var max = integrity.MaxIntegrity > 0f ? integrity.MaxIntegrity : 1f;
+                fraction = Math.Clamp(integrity.Integrity / max, 0f, 1f);
+            }
+
+            total += fraction;
+        }
+
+        if (installed == 0)
+            return 1f;
+
+        return Math.Clamp(total / installed, 0f, 1f);
     }
 
     private void UpdateAppearance(EntityUid uid, RMCVehicleWheelSlotsComponent component)
@@ -166,6 +218,12 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
 
         var count = GetWheelCount(uid, component);
         _appearance.SetData(uid, RMCVehicleWheelVisuals.WheelCount, count, appearance);
+
+        var functional = GetFunctionalWheelCount(uid, component);
+        _appearance.SetData(uid, RMCVehicleWheelVisuals.WheelFunctionalCount, functional, appearance);
+
+        var averageIntegrity = GetAverageWheelIntegrityFraction(uid, component);
+        _appearance.SetData(uid, RMCVehicleWheelVisuals.WheelIntegrityFraction, averageIntegrity, appearance);
     }
 
     private bool IsWheelFunctional(EntityUid wheel, RMCHardpointIntegrityComponent? integrity = null)

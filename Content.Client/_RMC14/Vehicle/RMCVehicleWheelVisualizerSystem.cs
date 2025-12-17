@@ -2,6 +2,7 @@ using System;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.GameObjects;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Vehicle;
 
@@ -40,10 +41,14 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
 
         var hasWheels = true;
 
+        var installed = 0;
         if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.WheelCount, out int count))
-            hasWheels = count > 0;
-        else if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.HasAllWheels, out bool present))
-            hasWheels = present;
+            installed = count;
+
+        if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.HasAllWheels, out bool present) && installed == 0)
+            installed = present ? 1 : 0;
+
+        hasWheels = installed > 0;
 
         if (!hasWheels)
         {
@@ -56,20 +61,30 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
             isMoving = Math.Abs(mover.CurrentSpeed) > 0.01f;
 
         var destroyed = false;
-        var opacity = 1f;
+        var brightness = 1f;
+        var functional = installed;
+        var averageIntegrity = 1f;
 
-        if (TryComp<RMCHardpointIntegrityComponent>(uid, out var integrity))
-        {
-            var max = integrity.MaxIntegrity > 0f ? integrity.MaxIntegrity : 1f;
-            opacity = integrity.Integrity / max;
+        if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.WheelFunctionalCount, out int functionalCount))
+            functional = functionalCount;
 
-            if (opacity < 0.15f)
-                opacity = 0.15f;
-            else if (opacity > 1f)
-                opacity = 1f;
+        if (AppearanceSystem.TryGetData(uid, RMCVehicleWheelVisuals.WheelIntegrityFraction, out float integrityFraction))
+            averageIntegrity = integrityFraction;
 
-            destroyed = integrity.Integrity <= 0f;
-        }
+        var fraction = installed > 0 ? (float) functional / installed : 1f;
+        if (fraction < 0f)
+            fraction = 0f;
+        else if (fraction > 1f)
+            fraction = 1f;
+
+        // Darken based on average integrity, even before wheels are fully broken.
+        var integrityBrightness = 0.3f + 0.7f * averageIntegrity;
+        var functionalBrightness = 0.3f + 0.7f * fraction;
+        brightness = MathF.Min(integrityBrightness, functionalBrightness);
+        destroyed = installed > 0 && functional <= 0;
+
+        if (destroyed)
+            brightness = 1f;
 
         var targetState = destroyed ? "wheels_1" : "wheels_0";
 
@@ -82,7 +97,7 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
         }
 
         _sprite.LayerSetAutoAnimated((uid, sprite), layer, isMoving && !destroyed);
-        _sprite.LayerSetColor((uid, sprite), layer, sprite.Color.WithAlpha(opacity));
+        _sprite.LayerSetColor((uid, sprite), layer, new Color(brightness, brightness, brightness, sprite.Color.A));
         _sprite.LayerSetVisible((uid, sprite), layer, true);
     }
 }
