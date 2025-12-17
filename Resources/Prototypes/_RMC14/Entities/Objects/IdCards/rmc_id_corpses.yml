@@ -43,6 +43,14 @@
 
 - type: entity
   parent: CMIDCardLanyard
+  id: RMCIDCardChefCorpse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IdCard
+    jobTitle: job-name-chef
+
+- type: entity
+  parent: CMIDCardLanyard
   id: RMCIDCardMinerCorpse
   categories: [ HideSpawnMenu ]
   components:
