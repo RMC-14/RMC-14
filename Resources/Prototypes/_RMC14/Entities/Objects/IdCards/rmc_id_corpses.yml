@@ -1,6 +1,6 @@
 ﻿# WEYA
 - type: entity
-  parent: CMIDCardPMC
+  parent: RMCIDCardPMC
   id: RMCIDCardPMCCorpse
   categories: [ HideSpawnMenu ]
   components:
@@ -8,7 +8,7 @@
     jobTitle: rmc-job-name-pmc-operator-corpse
 
 - type: entity
-  parent: CMIDCardPMC
+  parent: RMCIDCardPMC
   id: RMCIDCardPMCGoonCorpse
   categories: [ HideSpawnMenu ]
   components:
@@ -16,7 +16,7 @@
     jobTitle: rmc-job-name-pmc-corporate-goon
 
 - type: entity
-  parent: CMIDCardPMC
+  parent: RMCIDCardPMC
   id: RMCIDCardPMCGoonLeadCorpse
   categories: [ HideSpawnMenu ]
   components:
