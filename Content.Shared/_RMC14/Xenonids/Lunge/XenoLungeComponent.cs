@@ -13,13 +13,4 @@ public sealed partial class XenoLungeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunTime = TimeSpan.FromSeconds(4);
-
-    [DataField, AutoNetworkedField]
-    public Vector2? Charge;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Target;
-
-    [DataField, AutoNetworkedField]
-    public MapCoordinates? Origin;
 }
