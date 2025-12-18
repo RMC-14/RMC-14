@@ -269,4 +269,13 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         return null;
     }
+
+    public void SetCanRecommend(EntityUid uid, bool canRecommend)
+    {
+        if (!TryComp<RMCAwardRecommendationComponent>(uid, out var comp))
+            return;
+
+        comp.CanRecommend = canRecommend;
+        Dirty(uid, comp);
+    }
 }

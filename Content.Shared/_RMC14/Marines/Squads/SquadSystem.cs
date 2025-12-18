@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
@@ -57,6 +58,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
@@ -656,11 +658,17 @@ public sealed class SquadSystem : EntitySystem
                 RemComp<SquadLeaderComponent>(uid);
                 RemComp<RMCTrackableComponent>(uid);
                 RemCompDeferred<RMCPointingComponent>(uid);
+
+                _awardRecommendation.SetCanRecommend(uid, false);
             }
         }
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
         newLeader.Icon = icon;
+
+        EnsureComp<RMCAwardRecommendationComponent>(toPromote);
+        _awardRecommendation.SetCanRecommend(toPromote, true);
+
         if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
         {
             orders.Intrinsic = false;
