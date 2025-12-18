@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 12/12/2025 13:58:32
-  entityCount: 39
+  time: 12/18/2025 09:27:29
+  entityCount: 38
 maps:
 - 1
 grids:
@@ -26,9 +26,9 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: MapLight
-      ambientLightColor: "#ffffff"
     - type: GridTree
+    - type: MapLight
+      ambientLightColor: '#FFFFFFFF'
     - type: Broadphase
     - type: OccluderTree
   - uid: 2
@@ -36,7 +36,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      pos: -4.9257107,-0.33407086
       parent: 1
     - type: MapGrid
       chunks:
@@ -54,7 +53,7 @@ entities:
           version: 7
         0,0:
           ind: 0,0
-          tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAA==
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAA==
           version: 7
     - type: Broadphase
     - type: Physics
@@ -133,20 +132,14 @@ entities:
         all: {}
 - proto: RMCVehicleVanBack1
   entities:
-  - uid: 13
-    components:
-    - type: Transform
-      pos: -0.5,0.5
-      parent: 2
-- proto: RMCVehicleVanBack2
-  entities:
   - uid: 11
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 2
     - type: VehicleExit
-      entryIndex: 2
+- proto: RMCVehicleVanBack2
+  entities:
   - uid: 12
     components:
     - type: Transform
@@ -154,135 +147,102 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-  - uid: 29
+  - uid: 13
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 2
-  - uid: 30
+  - uid: 14
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 1.5,-2.5
       parent: 2
-  - uid: 31
+  - uid: 15
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,-2.5
       parent: 2
-  - uid: 32
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,1.5
-      parent: 2
-  - uid: 33
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,1.5
-      parent: 2
-  - uid: 34
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,1.5
-      parent: 2
-  - uid: 35
+  - uid: 16
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 3.5,-2.5
       parent: 2
+    - type: VehicleExit
+- proto: RMCVehicleVanBack3
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 2
 - proto: RMCVehicleVanBackground2
   entities:
-  - uid: 37
+  - uid: 18
     components:
     - type: Transform
-      anchored: False
-      pos: -2.4257107,0.16592914
-      parent: 1
-  - uid: 38
+      pos: 0.5,0.5
+      parent: 2
+  - uid: 22
     components:
     - type: Transform
-      anchored: False
-      pos: -3.4257107,0.16592914
-      parent: 1
-  - uid: 39
+      pos: 1.5,0.5
+      parent: 2
+  - uid: 23
     components:
     - type: Transform
-      anchored: False
-      pos: -4.4257107,0.16592914
-      parent: 1
+      pos: 2.5,0.5
+      parent: 2
 - proto: RMCVehicleVanExterior2
   entities:
-  - uid: 14
+  - uid: 19
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 2
-  - uid: 15
+  - uid: 20
     components:
     - type: Transform
       pos: 1.5,-1.5
       parent: 2
-  - uid: 36
+  - uid: 21
     components:
     - type: Transform
       pos: 2.5,-1.5
       parent: 2
 - proto: RMCVehicleVanExteriorDoor
   entities:
-  - uid: 16
+  - uid: 24
     components:
     - type: Transform
       pos: 3.5,-1.5
       parent: 2
-    - type: VehicleExit
-      entryIndex: 1
 - proto: RMCVehicleVanFront1
   entities:
-  - uid: 17
+  - uid: 25
     components:
     - type: Transform
-      anchored: False
       pos: 4.5,-1.5
       parent: 2
-    - type: Physics
-      bodyType: Dynamic
 - proto: RMCVehicleVanFront2
   entities:
-  - uid: 18
+  - uid: 26
     components:
     - type: Transform
-      anchored: False
       pos: 4.5,-0.5
       parent: 2
-    - type: Physics
-      bodyType: Dynamic
 - proto: RMCVehicleVanFront3
   entities:
-  - uid: 19
+  - uid: 27
     components:
     - type: Transform
-      anchored: False
       pos: 4.5,0.5
       parent: 2
-    - type: Physics
-      bodyType: Dynamic
 - proto: RMCVehicleVanFrontRoof1
   entities:
-  - uid: 20
-    components:
-    - type: Transform
-      anchored: False
-      noRot: True
-      pos: 3.5,0.5
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
   - uid: 28
     components:
     - type: Transform
@@ -292,43 +252,34 @@ entities:
       fixtures: {}
 - proto: RMCVehicleVanFrontRoof2
   entities:
-  - uid: 21
+  - uid: 29
     components:
     - type: Transform
-      noRot: True
       pos: 3.5,-0.5
       parent: 2
     - type: Fixtures
       fixtures: {}
 - proto: RMCVehicleVanInteriorDoor
   entities:
-  - uid: 22
+  - uid: 30
     components:
     - type: Transform
-      anchored: False
       pos: 3.5,0.5
       parent: 2
     - type: VehicleExit
-      entryIndex: 0
 - proto: RMCVehicleVanRoof2
   entities:
-  - uid: 23
+  - uid: 31
     components:
     - type: Transform
-      noRot: True
-      pos: 0.5,-0.5
-      parent: 2
-    - type: Fixtures
-      fixtures: {}
-  - uid: 24
-    components:
-    - type: Transform
-      noRot: True
       pos: 1.5,-0.5
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 25
+    - type: PointLight
+      energy: 2
+      radius: 20
+  - uid: 32
     components:
     - type: Transform
       noRot: True
@@ -336,46 +287,48 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 40
+  - uid: 33
     components:
     - type: Transform
-      anchored: False
-      noRot: True
-      pos: -2.4257107,0.16592914
-      parent: 1
+      pos: 0.5,-0.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 41
+  - uid: 34
     components:
     - type: Transform
       anchored: False
-      noRot: True
-      pos: -3.4257107,0.16592914
-      parent: 1
+      pos: 1.5,0.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
-  - uid: 42
+  - uid: 35
     components:
     - type: Transform
       anchored: False
-      noRot: True
-      pos: -4.4257107,0.16592914
-      parent: 1
+      pos: 2.5,0.5
+      parent: 2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 2
     - type: Fixtures
       fixtures: {}
 - proto: RMCVehicleVanWindshieldBottom
   entities:
-  - uid: 26
+  - uid: 37
     components:
     - type: Transform
       pos: 3.5,-0.5
       parent: 2
 - proto: RMCVehicleVanWindshieldTop
   entities:
-  - uid: 27
+  - uid: 38
     components:
     - type: Transform
-      anchored: False
       pos: 3.5,0.5
       parent: 2
 ...

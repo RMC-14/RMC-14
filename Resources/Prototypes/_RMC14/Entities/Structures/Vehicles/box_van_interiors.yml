@@ -123,6 +123,7 @@
   - type: Physics
     bodyType: Static
     canCollide: true
+  - type: Occluder
   - type: Fixtures
     fixtures:
       fix1:
